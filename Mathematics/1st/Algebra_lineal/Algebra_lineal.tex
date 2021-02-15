@@ -1,0 +1,474 @@
+\documentclass[class=article,10pt,crop=false]{standalone}
+\usepackage{standalone}
+\usepackage{preamble}
+
+\begin{document}
+\begin{multicols}{2}[\section{Àlgebra lineal}]
+\subsection{Matrius}
+\begin{definition}
+Direm que una matriu $A\in\mathcal{M}_n(\mathbb{R})$ és invertible si existeix una matriu $B\in\mathcal{M}_n(\mathbb{R})$ que compleix $AB=BA=I_n$.
+\end{definition}
+\begin{lemma}
+El producte de matrius invertibles és invertible.
+\end{lemma}
+\begin{theorem}[\bfseries Teorema de Gau\ss]
+Donada una matriu qualsevol $A\in\mathcal{M}_{m\times n}(\mathbb{R})$, existeix una matriu invertible $P\in\mathcal{M}_m(\mathbb{R})$ tal que $A'=PA$ és esglaonada i reduïda. A més, $A'$ està únicament determinada per $A$.
+\end{theorem}
+\begin{theorem}[\bfseries Teorema de la P-A-Q reducció]
+Donada una matriu $A\in\mathcal{M}_{m\times n}(\mathbb{R})$, existeixen matrius invertibles $P\in\mathcal{M}_m(\mathbb{R})$ i $Q\in\mathcal{M}_n(\mathbb{R})$ tals que $$PAQ=\left(\begin{array}{@{\,} c|c @{\,}}
+    I_r & 0\\
+    \hline
+    0 & 0
+    \end{array}\right).$$ El nombre $r$ és el rang de les matrius $PAQ$ i $A$.
+\end{theorem}
+\begin{prop}
+$\forall A\in\mathcal{M}_{m\times n}(\mathbb{R})$ tenim que $\text{rang }A=\text{rang }A^t$.
+\end{prop}
+\begin{theorem}[\bfseries Teorema de Rouché]
+Donat un sistema d'equacions lineals $Ax=b$ amb $n$ incògnites, el sistema és:
+\begin{itemize}
+    \item Compatible determinat $\iff\text{rang }A=\text{rang}(A\mid b)=n$.
+    \item Compatible indeterminat amb $s$ variables lliures $\iff\text{rang }A=\text{rang}(A\mid b)=n-s$.
+    \item Incompatible $\iff\text{rang }A\ne\text{rang}(A\mid b)$.
+\end{itemize}
+\end{theorem}
+\begin{definition}
+Un determinant és una aplicació $\mathcal{M}_n(\mathbb{R})\rightarrow\mathbb{R}$ que compleixi:
+\begin{enumerate}
+    \item L'aplicació ha de ser lineal en cada fila i columna. És a dir, si $a_1,\ldots,a_n$ són les columnes d'una matriu $A\in\mathcal{M}_n(\mathbb{R})$ i $a_j=\lambda u+\mu v$, aleshores:
+    \begin{multline*}
+        \det A=\det([a_1|\cdots|a_j|\cdots| a_n])=\\=\det([a_1|\cdots|\lambda u+\mu v|\cdots| a_n])=\\=\lambda\det([a_1|\cdots| u|\cdots| a_n])+\\+\mu\det([a_1|\cdots| v|\cdots| a_n])
+    \end{multline*}
+    \item El determinant canvia de signe si s'intercanvien dues columnes.
+    \item $\det I_n=1$.
+\end{enumerate}
+\end{definition}
+\begin{prop}
+Donada una matriu $A\in\mathcal{M}_n(\mathbb{R})$, $A$ no és invertible $\iff\text{rang }A<n\iff\det A=0$.
+\end{prop}
+\begin{theorem}
+$\forall A,B\in\mathcal{M}_n(\mathbb{R})$ tenim que $\det (AB)=\det A\det B$.
+\end{theorem}
+\begin{prop}
+Denotem $S_n$ el grup de permutacions de $\{1,\ldots,n\}$ i sigui $A\in\mathcal{M}_n(\mathbb{R})$. Llavors: $$\det A=\sum_{\sigma\in S_n}\varepsilon(\sigma)\prod_{i=1}^na_{i\sigma(i)}$$
+\end{prop}
+\begin{prop}
+$\forall A\in\mathcal{M}_n(\mathbb{R})$ tenim que $\det A=\det A^t$.
+\end{prop}
+\begin{theorem}
+$\forall A\in\mathcal{M}_n(\mathbb{R})$ es compleix $A(\text{adj }A)^t=(\det A)I_n$ i si $\det A\ne 0$ aleshores, $$A^{-1}=\frac{1}{\det A}(\text{adj }A)^t$$
+\end{theorem}
+\subsection{Espais vectorials}
+\begin{definition}
+Sigui $E$ un $K$-espai vectorial i $F$ un subconjunt de $E$, llavors $(F,+_E,\cdot_E)$ és un $K$-espai vectorial si es verifica $\lambda v_1+\mu v_2\in F$ $\forall v_1,v_2\in F$ i $\forall\lambda,\mu\in K$.
+\end{definition}
+\begin{lemma}
+La intersecció de subespais vectorials és un subespai vectorial.
+\end{lemma}
+\begin{definition}
+Donat un $K$-espai vectorial $E$, una base de $E$ és un conjunt ordenat $B$ de vectors de $E$ que és: 
+\begin{enumerate}
+    \item Sistema de generadors de $E$.
+    \item Linealment independent.
+\end{enumerate}
+\end{definition}
+\begin{theorem}[\bfseries Teorema de Steinitz]
+Donat un $K$-espai vectorial $E$, $B$ una base de $E$ i $(v_1,\ldots,v_k)$ vectors linealment independents de $E$, aleshores podem substituir $k$ vectors apropiats de $B$ per $(v_1,\ldots,v_k)$ i definir una nova base.
+\end{theorem}
+\begin{definition}
+La suma de dos subespais $F,G$ dins d'un $K$-espai vectorial $E$ és: $F+G=\langle F\cup G\rangle=\{u+v\mid u\in F,v\in G\}$.
+\end{definition}
+\begin{prop}[\bfseries Fórmula de Gra\ss mann]
+$\dim (F+G)+\dim(F\cap G)=\dim F+\dim G$.
+\end{prop}
+\begin{definition}
+Sigui $E$ un $K$-espai vectorial i siguin $F,G\subset E$ dos subespais vectorials. Llavors la suma $F+G$ és directe ($F\oplus G$) $\iff F\cap G=\{0\}$.
+\end{definition}
+\begin{definition}
+Donada una matriu $A\in\mathcal{M}_n(\mathbb{R})$, un menor d'ordre $r$ de $A$ és una submatriu $A'\in\mathcal{M}_r(\mathbb{R})$ obtinguda seleccionant $r$ files i $r$ columnes de $A$.
+\end{definition}
+\begin{definition}
+Sigui $E$ un $K$-espai vectorial i $F\subset E$ un subespai vectorial. Anomenarem subespai complementari de $F$ a tot subespai $G\subset E$ que compleixi $F\oplus G=E$.
+\end{definition}
+\begin{definition}
+Direm que dos vectors $u,v\in E$ són equivalents mòdul $F$ (on $F\subset E$ un subespai vectorial) si $u-v\in F$ i escriurem $u\sim_Fv$. $\sim_F$ és una relació d'equivalència.
+\end{definition}
+\begin{definition}
+L'espai quocient $E/F$ és el conjunt de les classes d'equivalència $u+F=[u]$ amb les operacions:
+$$[u]+[v]=[u+v]\qquad a[u]=[au]$$ $E/F$ és un $K$-espai vectorial.
+\end{definition}
+\begin{prop}
+Sigui $E$ un $K$-espai vectorial de dimensió $n<\infty$ i $F\subset E$ un subespai vectorial, llavors $\dim (E/F)=\dim E-\dim F$.
+\end{prop}
+\subsection{Aplicacions lineals}
+\begin{definition}
+Sigui $E,F$ dos $K$-espais vectorials. Una aplicació $f:E\rightarrow F$ és lineal si es compleix $f(\lambda v_1+\mu v_2)=\lambda f(v_1)+\mu f(v_2)$ $\forall v_1,v_2\in E$ i $\forall\lambda,\mu\in K$.
+\end{definition}
+\begin{prop}
+Si $f:E\rightarrow F$ i $g:F\rightarrow G$ són aplicacions lineals, llavors la composició $g\circ f:E\rightarrow G$ és lineal.
+\end{prop}
+\begin{prop}
+Si $f:E\rightarrow F$ és una aplicació lineal, llavors $f^{-1}:F\rightarrow E$ és lineal.
+\end{prop}
+\begin{prop}
+Sigui $f:E\rightarrow F$ una aplicació lineal entre $K$-espais vectorials i siguin $G\subset E$ i $H\subset F$ subespais vectorials. Aleshores:
+\begin{enumerate}
+    \item $f(G)=\{f(u)\mid u\in G\}\subset F$ és un subespai vectorial.
+    \item $f^{-1}(H)=\{u\in E\mid f(u)\in H\}\subset E$ és un subespai vectorial.
+\end{enumerate}
+Si $G=E$ i $H=\{0\}$, aleshores:
+\begin{enumerate}
+    \item $f(E)$ és la imatge de $f$ i es denota $\text{Im }f$.
+    \item $f^{-1}(0)$ és el nucli de $f$ i es denota $\text{Ker }f$.
+\end{enumerate}
+\end{prop}
+\begin{prop}
+Si $E,F$ són $K$-espais vectorials de dimensió finita i $f:E\rightarrow F$, aleshores $f$ és injectiva $\iff \dim(\text{Ker }f)=0$ i $f$ és exhaustiva $\iff \dim(\text{Im }f)=\dim F$.
+\end{prop}
+\begin{definition}
+\hfill
+\begin{enumerate}
+    \item Un monomorfisme és una aplicació lineal injectiva.
+    \item Un epimorfisme és una aplicació lineal exhaustiva.
+    \item Un isomorfisme és una aplicació lineal bijectiva.
+    \item Un endomorfisme és una aplicació lineal d'un espai vectorial en ell mateix.
+    \item Un automorfisme és un endomorfisme bijectiu.
+\end{enumerate}
+\end{definition}
+\begin{lemma}
+Donada $f:E\rightarrow F$ una aplicació lineal, on $E,F$ són $K$-espais vectorials, i $u_1,\ldots,u_k\in E$ es compleix $\langle f(u_1),\ldots,f(u_k)\rangle=f(\langle u_1,\ldots,u_k\rangle)$.
+\end{lemma}
+\begin{theorem}[\bfseries Isomorfisme de coordenació]
+Sigui $E$ un $K$-espai vectorial  de dimensió $n$ i $B=(u_1,\ldots,u_n)$ una base de $E$. Llavors l'aplicació $f:K^n\rightarrow E$, $f(a_1,\ldots,a_n)=a_1u_1+\cdots a_nu_n$ és un isomorfisme.
+\end{theorem}
+\begin{theorem}[\bfseries Teorema de l'isomorfisme]
+Sigui $f:E\rightarrow F$ una aplicació lineal. Existeix un isomorfisme $\Tilde{f}:E/\text{Ker }f\rightarrow \text{Im }f$ complint $f=i\circ\Tilde{f}\circ\pi$ on $\pi:E\rightarrow E/\text{Ker }f$ i $i:\text{Im }f\rightarrow F$.
+\end{theorem}
+\begin{corollary}
+Sigui $f:E\rightarrow F$ una aplicació lineal i suposem que $\dim E=n<\infty$. Llavors $n=\dim(\text{Ker }f)+\dim(\text{Im }f)$.
+\end{corollary}
+\begin{corollary}
+Siguin $E,F$ dos $K$-espais vectorials de dimensió $n<\infty$ i $f:E\rightarrow F$ una aplicació lineal. Llavors $f$ és injectiva $\iff f$ és exhaustiva $\iff f$ és bijectiva.
+\end{corollary}
+\begin{theorem}[\bfseries Teoremes d'Emmy Noether]
+Sigui $E$ un $K$-espai vectorial, $F,G\subset E$ dos subespais:
+\begin{enumerate}
+    \item Existeix un isomorfisme $F/(F\cap G)\cong(F+G)/G$.
+    \item Si $G\subset F\subset E$, existeix un isomorfisme $(E/G)/(F/G)\cong E/F$.
+\end{enumerate}
+\end{theorem}
+\begin{theorem}
+Siguin $E,F$ dos $K$-espais vectorials i siguin $B=(u_1,\ldots,u_n)$ una base de $E$ i $v_1,\ldots,v_n\in F$ vectors qualssevol. Llavors existeix una única aplicació lineal $f:E\rightarrow F$ tal que $f(u_i)=v_i$, $i=1,\ldots,n$. 
+\end{theorem}
+\begin{prop}
+Siguin $f:E\rightarrow F$ i $g:F\rightarrow G$ dues aplicacions lineals entre $K$-espais vectorials i siguin $B,B',B''$ bases de $E,F$ i $G$ respectivament. Llavors $g\circ f:E\rightarrow G$ té matriu $[g\circ f]_{B,B''}=[g]_{B',B''}[f]_{B,B'}$ en les bases $B, B''$.
+\end{prop}
+\begin{corollary}
+Les matrius de canvi de base són invertibles i $[id]_{B,B'}^{-1}=[id]_{B',B}$.
+\end{corollary}
+\begin{prop}
+Donada $f:E\rightarrow F$ una aplicació lineal i bases $B_1,B_2$ de $E$ i $B_1',B_2'$ de $F$ es compleix: $[f]_{B_2,B_2'}=[id]_{B_1',B_2'}[f]_{B_1,B_1'}[id]_{B_2,B_1}$.
+\end{prop}
+\begin{theorem}
+Donada qualsevol aplicació lineal $f:E\rightarrow F$ on $\dim E=n, \dim F=m$. Existeixen bases $B_0$ de $E$ i $B_0'$ de $F$ en les quals $[f]_{B_0,B_0'}=\left(\begin{array}{@{\,} c|c @{\,}}
+    I_r & 0\\
+    \hline
+    0 & 0
+    \end{array}\right)$ on $r=\dim\text{Im }f$ i $[f]_{B_0,B_0'}=[id]_{B',B_0'}[f]_{B,B'}[id]_{B_0,B}$ $\forall B,B'$ base de $E$ i $F$ respectivament.
+\end{theorem}
+\begin{lemma}
+Donats dos $K$ espais vectorials $E,F$ el conjunt $\mathcal{L}(E,F)=\{f\mid f\text{ és una aplicació}\\ \text{lineal de $E$ a $F$}\}$ és un $K$-espai vectorial i es compleix que $(\lambda f+\mu g)(v)=\lambda f(v)+\mu g(v)$ $\forall f,g\in\mathcal{L}(E,F)$ i $\lambda,\mu\in K$.
+\end{lemma}
+\begin{prop}
+Siguin $E,F$ dos $K$-espais vectorials amb $\dim E=n<\infty$, $\dim F=m<\infty$. Per a tota base $B$ de $E$ i $B'$ de $F$, l'aplicació $\varphi:\mathcal{L}(E,F)\rightarrow\mathcal{M}_{m\times n}(K)$ definida per $\varphi(f)=[f]_{B,B'}$ és un isomorfisme.
+\end{prop}
+\begin{corollary}
+Si $\dim E=n$ i $\dim F=m$ aleshores $\dim \mathcal{L}(E,F)=mn$.
+\end{corollary}
+\begin{definition}
+L'espai dual d'un $K$-espai vectorial és $\mathcal{L}(E,K)=E^*$. En el cas $\dim E=n<\infty$, escollir una base $B$ determina un isomorfisme $\varphi:E^*\rightarrow\mathcal{M}_{1\times n}(K)$, definit per $\varphi(\omega)=[\omega]_{B,B'}$. Deduïm, doncs, que $\dim E^*=\dim E$.
+\end{definition}
+\begin{definition}
+Donats $E$ un $K$-espai vectorial de dimensió finita i $B=(u_1,\ldots,u_n)$ una base de $E$. La base dual de $B$ és la base de $E^*$ formada per $(\eta_1,\ldots,\eta_n)$ on $\eta_i(u_j)=\delta_{ij}$.
+\end{definition}
+\begin{lemma}
+Sigui $E$ un $K$-espai vectorial de dimensió $n<\infty$ i sigui $B=(u_1,\ldots,u_n)$ una base de $E$. $\forall u\in E$, $(u_1^*(u),\ldots,u_n^*(u))=[u]_B\in K^n$ on $(u_1^*,\ldots,u_n^*)$ és la base dual de $B$.
+\end{lemma}
+\begin{lemma}
+Sigui $E$ un $K$-espai vectorial de dimensió $n<\infty$ i sigui $B=(u_1,\ldots,u_n)$ una base de $E$. $\forall \omega\in E^*$, $(\omega(u_1),\ldots,\omega(u))=[\omega]_{B^*}$.
+\end{lemma}
+\begin{definition}
+Si $f\in \mathcal{L}(E,F)$ l'aplicació $f^*:F^*\rightarrow E^*$ definida per $f^*(\omega)=\omega\circ f$ s'anomena aplicació dual de $f$. Aquesta aplicació és lineal.
+\end{definition}
+\begin{theorem}
+Siguin $E,F$ dos $K$-espais vectorials de dimensió finita i siguin $B,B'$ bases de $E,F$ respectivament. Llavors $[f^*]_{B'^*,B^*}=([f]_{B,B'})^t$.
+\end{theorem}
+\begin{definition}
+Donat un $K$-espai vectorial $E$, el bidual és el $K$-espai vectorial definit per $(E^*)^*=\mathcal{L}(E^*,K)$. A més, si $\dim E=n<\infty$, l'aplicació $f:E\rightarrow (E^*)^*$ definida per $f(v)=\phi_v$ $(\phi_v:E^*\rightarrow K$, $\phi_v(\omega)=\omega(v))$ és un isomorfisme natural. 
+\end{definition}
+\begin{definition}
+Sigui $E$ un $K$-espai vectorial i $F$ un subespai vectorial de $E^*$. El subespai de $E$ incident de $F$ és $F^{inc}=\{v\in E\mid \omega(v)=0\;\forall\omega\in F\}$.
+\end{definition}
+\begin{theorem}
+Sigui $E$ un $K$-espai vectorial de dimensió $n<\infty$ i $F\subset E^*$ un subespai amb $\dim F=m$. Llavors $\dim F^{inc}=n-m$.
+\end{theorem}
+\begin{definition}
+Donat un subespai vectorial i $F\subset E$, el seu subespai incident és $F^{inc}=\{\omega\in E^*\mid \omega(v)=0\;\forall v\in F\}$.
+\end{definition}
+\begin{prop}
+$(F^{inc})^{inc}=F$ tant si $F\subset E$ com si $F\subset E^*$.
+\end{prop}
+\subsection{Classificació d'endomorfismes}
+\begin{definition}
+Dues matrius $M,N\in\mathcal{M}_n(K)$ s'anomenen similars si existeix $P\in\mathcal{M}_n(K)$ invertible tal que $M=P^{-1}NP$.
+\end{definition}
+\begin{prop}
+Donats $f,g\in\mathcal{L}(E)$ on $E$ és un $K$ espai vectorial de dimensió $n<\infty$:
+\begin{enumerate}
+    \item $f$ i $g$ són similars $\iff\forall B$ base de $E$ les matrius $[f]_B$ i $[g]_B$ són similars.
+    \item $f$ i $g$ són similars $\iff\exists h$ automorfisme tal que $g=h^{-1}fh$.
+\end{enumerate}
+\end{prop}
+\begin{definition}
+Una matriu $A\in\mathcal{M}_n(K)$ és diagonalitzable si és similar a una matriu diagonal. Un endomorfisme és diagonalitzable si la seva matriu en alguna base és diagonalitzable.
+\end{definition}
+\begin{definition}
+Donat $f\in\mathcal{L}(E)$ diem que un vector $u\in E$, $u\ne 0$ és vector propi de $f$ de valor propi $\lambda$ si $f(u)=\lambda u$.
+\end{definition}
+\begin{lemma}
+Donats $f\in\mathcal{L}(E)$ i $\lambda\in K$, els vectors propis de $f$ de valor propi $\lambda$ són els vectors no nuls del subespai $Ker(f-\lambda id)$ (subespai propi de valor propi $\lambda$).
+\end{lemma}
+\begin{definition}
+Donada una matriu $A\in\mathcal{M}_n(K)$, el polinomi $p_A(\lambda)=\det(A-\lambda I_n)$ s'anomena polinomi característic de $A$.
+\end{definition}
+\begin{prop}
+Donat $f\in\mathcal{L}(E)$, vectors propis de $f$ de valors propis diferents són linealment independents.
+\end{prop}
+\begin{prop}
+Sigui $E$ un $K$-espai vectorial de dimensió $n<\infty$ i sigui $\lambda$ una arrel del polinomi característic $p_f(x)$ de multiplicitat $m$. Llavors $1\leq \dim(\text{Ker}(f-\lambda id))\leq m$.
+\end{prop}
+\begin{theorem}[\bfseries Teorema de diagonalització]
+Sigui $f\in\mathcal{L}(E)$, $f$ és diagonalitzable si i només si:
+\begin{enumerate}
+    \item $p_f(x)=(-1)^n(x-\lambda_1)^{m_1}\cdots(x-\lambda_k)^{m_k}$ amb $\lambda_1,\ldots,\lambda_k\in K$ diferents.
+    \item $\dim(\text{Ker}(f-\lambda_i id))=m_i$.
+\end{enumerate}
+\end{theorem}
+\begin{corollary}
+Si $n=\dim E$ i $f$ té $n$ valors propis diferents, $f$ és diagonalitzable.
+\end{corollary}
+\begin{definition}
+El polinomi mínim de $f$ és un polinomi $P\in K[x]$ tal que:
+\begin{itemize}
+    \item $P(f)=0$.
+    \item $P$ és mònic.
+    \item $P$ és de grau mínim.
+\end{itemize}
+\end{definition}
+\begin{theorem}[\bfseries Teorema de Cayley-Hamilton]
+Sigui $K$ un cos, $n\geq 1$ i $A\in\mathcal{M}_n(K)$. Llavors $m_A(x)\mid p_A(x)\mid m_A(x)^n$. Sigui $K$ un cos i $f\in\mathcal{L}(E)$, $\dim_K E=n$. Llavors $m_f(x)\mid p_f(x)\mid m_f(x)^n$. 
+\end{theorem}
+\begin{definition}
+Un cos satisfent que tot polinomi de grau $\geq 1$ factoritzi completament en factors lineals s'anomena algebraicament tancat.
+\end{definition}
+\begin{definition}
+Donat $f\in\mathcal{L}(E)$ diem que $W\subseteq E$ és un subespai invariant de $E$ per $f$ si $f(W)\subseteq W$.
+\end{definition}
+\begin{lemma}
+Donat $f\in\mathcal{L}(E)$ si $E=W_1\oplus W_2$ amb $W_1,W_2$ subespais invariants, aleshores $p_f(x)=p_{f|W_1}(x)p_{f|W_2}(x)$ i $m_f(x)=\text{mcm}(m_{f|W_1}(x),m_{f|W_2}(x))$.
+\end{lemma}
+\begin{theorem}
+Sigui $f\in\mathcal{L}(E)$ , $\dim E=n<\infty$. Si $p_f(x)=q_1(x)^{n_1}\cdots q_r(x)^{n_r}$ i $m_f(x)=q_1(x)^{m_1}\cdots q_r(x)^{m_r}$ amb $q_i(x)$ factors irreductibles diferents. Aleshores $E=\text{Ker}(q_1(f)^{m_1})\oplus\cdots\oplus\text{Ker}(q_r(f)^{m_r})$. A més $\text{Ker}(q_i(f)^{m_i})=n_i\text{deg}(q_i(x))$.
+\end{theorem}
+\begin{theorem}
+Si $p_f(x)=(x-\lambda_1)^{n_1}\cdots(x-\lambda_k)^{n_k}$ i $g$ compleix:
+\begin{enumerate}
+    \item $p_f(x)=p_g(x)$
+    \item $m_f(x)=m_g(x)$
+    \item $\dim(\text{Ker}((f-\lambda id)^r))=\dim(\text{Ker}((g-\lambda id)^r))$ $\forall\lambda\in K$ $\forall r\geq 1$,
+\end{enumerate}
+llavors $f\sim g$.
+\end{theorem}
+\begin{prop}
+Donats $E$ un $K$-espai vectorial de dimensió $n<\infty$, $A\in\mathcal{M}_n(K)$. Si $p_A(x)=\pm(x-\lambda_1)^{n_1}\cdots(x-\lambda_k)^{n_k}$, existeix una matriu invertible $P$ complint: $$P^{-1}AP=\begin{pmatrix}
+J_1 & & & \\
+& J_2 & & \\
+& & \ddots & \\
+& & & J_e \\
+\end{pmatrix}$$
+on $J_1,\ldots,J_e$ són blocs de Jordan de valors propis $\lambda_1,\ldots,\lambda_k$ complint:
+\begin{enumerate}
+    \item Per a cada $\lambda_i$ la suma de les mides dels blocs de Jordan de valor propi $\lambda_i$ és $n_i$.
+    \item Les mides dels blocs de Jordan estan determinades per $\dim(\text{Ker}((f-\lambda id)^r))$.
+\end{enumerate}
+\end{prop}
+\subsection{Formes bilineals simètriques}
+\begin{definition}
+Siguin $K$ un cos i $E,F,G$ tres $K$-espais vectorials. Diem que una aplicació $\varphi:E\times F\rightarrow G$ és bilineal si:
+\begin{enumerate}
+    \item $\varphi(\lambda u_1+\mu u_2,v)=\lambda \varphi(u_1,v)+\mu \varphi(u_2,v)$ $\forall u_1,u_2\in E$, $\forall v\in F$ i $\forall\lambda,\mu\in K$.
+    \item $\varphi(u,\lambda v_1+\mu v_2)=\lambda \varphi(u,v_1)+\mu \varphi(u,v_2)$ $\forall v_1,v_2\in F$, $\forall u\in E$ i $\forall\lambda,\mu\in K$.
+\end{enumerate}
+\end{definition}
+\begin{definition}
+Una forma bilineal sobre el $K$-espai vectorial $E$ és una aplicació lineal $\varphi:E\times E\rightarrow K$.
+\end{definition}
+\begin{definition}
+Una forma bilineal $\varphi:E\times E\rightarrow K$ és simètrica si $\varphi(u,v)=\varphi(v,u)$ $\forall u,v\in E$.
+\end{definition}
+\begin{definition}
+Sigui $\varphi:E\times E\rightarrow K$ una forma bilineal i sigui $B=(v_1,\ldots,v_n)$ una base de $E$. La matriu de la forma bilineal $\varphi$ respecte de la base $B$ és la matriu: $$[\varphi]_B=\begin{pmatrix}
+\varphi(v_1,v_1) & \varphi(v_1,v_2) & \cdots & \varphi(v_1,v_n) \\
+\varphi(v_2,v_1) & \varphi(v_2,v_2) & \cdots & \varphi(v_2,v_n) \\
+\vdots & \vdots & \ddots & \vdots \\
+\varphi(v_n,v_1) & \varphi(v_n,v_2) & \cdots & \varphi(v_n,v_n) \\
+\end{pmatrix}.$$ 
+\end{definition}
+\begin{prop}
+Sigui $B=(u_1,\ldots,u_n)$ una base de $E$. Una forma bilineal $\varphi$ sobre $E$ és simètrica si, i només si, $[\varphi]_B$ és una matriu simètrica.
+\end{prop}
+\begin{prop}
+Sigui $\varphi:E\times E\rightarrow K$ una forma bilineal. Siguin $B,B'$ bases de $E$. Aleshores es compleix $[\varphi]_{B'}=([id]_{B',B})^t[\varphi]_B[id]_{B',B}$.
+\end{prop}
+\begin{definition}
+Sigui $\varphi:E\times E\rightarrow \mathbb{R}$ una forma bilineal. Es diu que $u,v\in E$ són ortogonals si $\varphi(u,v)=0$. Un vector no nul $v\in E$ és isòtrop si és ortogonal a ell mateix, és a dir, si $\varphi(v,v)=0$. Sigui $B=(v_1,\ldots,v_n)$ una base de $E$. Es diu que $B$ és una base ortogonal respecte de $\varphi$ si $\varphi(v_i,v_j)=0$ $\forall i\ne j$.
+\end{definition}
+\begin{theorem}
+Sigui $\varphi:E\times E\rightarrow \mathbb{R}$ una forma bilineal simètrica. Llavors $E$ té una base ortogonal respecte de $\varphi$.
+\end{theorem}
+\begin{definition}
+Sigui $\varphi$ una forma bilineal simètrica sobre $E$. Sigui $W$ un subespai vectorial de $E$. Definim l'ortogonal de $W$ respecte de $\varphi$ per $$W^\bot=\{u\in E\mid\varphi(u,\omega)=0\;\forall\omega\in W\}$$ Definim el radical de $\varphi$ per $$\text{rad }\varphi=E^\bot$$ Direm que $\varphi$ és no singular si $\text{rad}(\varphi)=\{0\}$.
+\end{definition}
+\begin{definition}
+Sigui $\varphi$ una forma bilineal simètrica no singular sobre $E$. Donat un $u\in E$ definim $\varphi_u:E\rightarrow\mathbb{R}$, $\varphi_u(v)=\varphi(u,v)$. Llavors l'aplicació 
+\begin{align*}
+    \Phi: E&\rightarrow E^*&\\
+    u&\mapsto\varphi_u
+\end{align*} és un isomorfisme. 
+\end{definition}
+\begin{definition}
+Sigui $\varphi$ una forma bilineal simètrica no singular sobre $E$. Sigui $W$ un subespai vectorial de $E$. Llavors:
+\begin{enumerate}
+    \item $\dim E=\dim W+\dim W^\bot$.
+    \item $(W^\bot)^\bot=W$.
+    \item Si la restricció de $\varphi$ sobre $W$ és no singular, llavors $E=W\oplus W^\bot$.
+\end{enumerate}
+\end{definition}
+\begin{definition}
+Sigui $\varphi$ una forma bilineal simètrica sobre $E$. Direm que la suma $W_1+W_2$ de dos subespais vectorials $W_1$ i $W_2$ de $E$ és una suma ortogonal si és directa i $\varphi(u,v)=0$ $\forall u\in W_1$ i $v\in W_2$. Escriurem $W_1\bot W_2$ per denotar que la suma $W_1+W_2$ és ortogonal.
+\end{definition}
+\begin{definition}
+Sigui $\varphi$ una forma bilineal simètrica sobre $E$. Siguin $W_1$ i $W_2$ dos subespais vectorials de $E$ tals que $E=W_1\bot W_2$. Llavors per a cada vector $v\in E$ existeixen $v_1\in W_1$ i $v_2\in W_2$ únics tals que $v=v_1+v_2$. L'aplicació $\pi:E\rightarrow W_i$ definida per $\pi(v)=v_i$ amb $v_i\in W_i$ es diu que és la projecció ortogonal de $E$ sobre $W_i$ segons la descomposició $E=W_1\bot W_2$.
+\end{definition}
+\begin{definition}
+Una geometria ortogonal sobre $\mathbb{R}$ és un parell $(E,\varphi)$, on $E$ és un $\mathbb{R}$-espai vectorial i $\varphi$ és una forma bilineal simètrica sobre $E$.
+\end{definition}
+\begin{definition}
+Siguin $(E_1,\varphi_1)$ i $(E_2,\varphi_2)$ dues geometries ortogonals sobre $\mathbb{R}$. Una isometria de $(E_1,\varphi_1)$ a $(E_2,\varphi_2)$ és un isomorfisme $f:E_1\rightarrow E_2$ tal que $$\varphi_2(f(u),f(v))=\varphi_1(u,v)$$ per a tot $u,v\in E_1$. Direm que $(E_1,\varphi_1)$ i $(E_2,\varphi_2)$ són isomètriques si existeix una isometria de $(E_1,\varphi_1)$ a $(E_2,\varphi_2)$.
+\end{definition}
+\begin{definition}
+Sigui $E$ un $\mathbb{R}$-espai vectorial. Direm que dues formes bilineals simètriques $\varphi_1,\varphi_2$ sobre $E$ són equivalents si, i només si, $(E,\varphi_1)$ i $(E,\varphi_2)$ són isomètriques.
+\end{definition}
+\begin{definition}
+Siguin $A,B\in\mathcal{M}_n(\mathbb{R})$. Direm que $A$ i $B$ són congruents si existeix una matriu $P\in\mathcal{M}_n(\mathbb{R})$ invertible tal que $A=P^tBP$.
+\end{definition}
+\begin{prop}
+Sigui $E$ un $\mathbb{R}$-espai vectorial de dimensió $n<\infty$ i $\varphi_1,\varphi_2$ formes bilineals simètriques sobre $E$. Sigui $B_1$ una base de $V$. Llavors les condicions següents són equivalents:
+\begin{enumerate}
+    \item Les geometries ortogonals $(E,\varphi_1)$ i $(E,\varphi_2)$ $\varphi$ i $\psi$ són isomètriques.
+    \item Existeix una bases $B_2$ de $E$ tal que $[\varphi_1]_{B_1}=[\varphi_2]_{B_2}$.
+    \item Les matrius $[\varphi_1]_{B_1}$ i $[\varphi_2]_{B_2}$ són congruents.
+\end{enumerate}
+\end{prop}
+\begin{theorem}[\bfseries Teorema de Sylvester o Llei d'inèrcia]
+Sigui $E$ un $\mathbb{R}$-espai vectorial de dimensió $n<\infty$. Sigui $\varphi$ una forma bilineal simètrica sobre $E$. Llavors existeix una base $B$ de $E$ tal que $$[\varphi]_B=\begin{pmatrix}
+0 &&&&&&&&&\\
+& \ddots&&&&&&&\\
+&& 0&&&&\bigzero&&\\
+&&& 1 &&&&&\\
+&&&& \ddots &&&&\\
+&&&&& 1 &&&\\
+&&\bigzero&&&& -1 &&\\
+&&&&&&&\ddots &\\
+&&&&&&&& -1
+\end{pmatrix}$$
+on a la diagonal hi ha $r_0\;0's$, $r_+\;1's$ i $r_-\;-1's$ i $r,r_+,r_-$ no depenen de la base $B$.
+\end{theorem}
+\begin{definition}
+Sigui $\varphi$ una forma bilineal simètrica sobre un $\mathbb{R}$-espai vectorial $E$ de dimensió $n<\infty$. Sigui $B$ una base ortogonal de $E$ respecte de $\varphi$. Definim el rang de $\varphi$ com $\text{rang}(\varphi)=\text{rang}([\varphi]_B)$. Definim la signatura de $\varphi$ com $\text{sig}(\varphi)=(r_+,r_-)$, on $r_+$ és el nombre de reals positius que hi ha a la diagonal de $[\varphi]_B$ i $r_-$ és el nombre de reals negatius que hi ha a la diagonal de $[\varphi]_B$.
+\end{definition}
+\begin{theorem}
+Siguin $(E_1,\varphi_1)$, $(E_2,\varphi_2)$ dues geometries ortogonals sobre $\mathbb{R}$ de dimensió finita. Llavors $(E_1,\varphi_1)$ i $(E_2,\varphi_2)$ són isomètriques si, i només si, $\dim E_1=\dim E_2$ i $\text{sig}(\varphi_1)=\text{sig}(\varphi_2)$.
+\end{theorem}
+
+\begin{definition}
+Sigui $\varphi$ una forma bilineal simètrica sobre un $\mathbb{R}$-espai vectorial $E$. Es diu que $\varphi$ és definida positiva si $\forall v\in E$, $v\ne 0$, tenim $\varphi(v,v)>0$. Es diu que $\varphi$ és definida negativa si $\forall v\in E$, $v\ne 0$, tenim $\varphi(v,v)<0$. 
+\end{definition}
+\begin{definition}
+Un producte escalar sobre un $\mathbb{R}$-espai vectorial $E$ és una forma bilineal simètrica definida positiva sobre $E$. Un espai vectorial euclidià és un parell $(E,\varphi)$, on $E$ és un $\mathbb{R}$-espai vectorial i $\varphi$ és un producte escalar sobre $E$.
+\end{definition}
+\begin{theorem}[Desigualtat de Cauchy-Schwartz]
+Sigui $\varphi$ un producte escalar sobre un $\mathbb{R}$-espai vectorial $E$, llavors: $$\varphi(u,v)^2\leq \varphi(u,u)\varphi(v,v)\quad\forall u,v\in E$$
+\end{theorem}
+\begin{definition}
+Sigui $E$ un $\mathbb{R}$-espai vectorial. Una norma sobre $E$ és una aplicació \begin{align*}
+    \|\;\|:E&\rightarrow\mathbb{R}\\
+    u&\mapsto\|u\|
+\end{align*}
+tal que \begin{enumerate}
+    \item $\|u\|=0\iff u=0$.
+    \item $\|\lambda u\|=|\lambda|\|u\|$, $\forall u\in E$, $\lambda\in\mathbb{R}$.
+    \item $\|u+v\|\leq\|u\|+\|v\|$, $\forall u,v\in E$.
+\end{enumerate}
+\end{definition}
+\begin{prop}
+Sigui $(E,\varphi)$ un espai euclidià. Llavors l'aplicació
+\begin{align*}
+    \|\;\|_\varphi:E&\rightarrow\mathbb{R}\\
+    u&\mapsto\|u\|_\varphi=\sqrt{\varphi(u,u)}
+\end{align*}
+és una norma, que es diu norma associada al producte escalar $\varphi$.
+\end{prop}
+\begin{definition}
+Sigui $(E,\varphi)$ un espai vectorial euclidià de dimensió finita. Diem que una base $B=(v_1,\ldots,v_n)$ és ortonormal respecte de $\varphi$ si és ortogonal respecte de $\varphi$ i $\|v_i\|_\varphi=1$ per a $i=1,\ldots,n$.
+\end{definition}
+\begin{corollary}
+Sigui $(E,\varphi)$ un espai vectorial euclidià de dimensió finita. Llavors $E$ té una base ortonormal respecte $\varphi$.
+\end{corollary}
+\begin{definition}
+Sigui $(E,\varphi)$ un espai vectorial euclidià. Siguin $u,v\in E\setminus\{0\}$. Definim l'angle respecte $\varphi$ entre $u$ i $v$ com l'únic $\alpha\in[0,\pi]$ tal que: $$\cos{\alpha}=\frac{\varphi(u,v)}{\|u\|_\varphi\|v\|_\varphi}$$
+\end{definition}
+\begin{definition}
+Sigui $(E,\varphi)$ un espai vectorial euclidià. Sigui $f\in\mathcal{L}(E)$. Definim l'adjunt de $f$ respecte de $\varphi$ com l'únic endomorfisme $f'$ de $E$ tal que $\varphi(f(u),v)=\varphi(u,f'(v))$ $\forall u,v\in E$. Si $f=f'$ diem que $f$ és autoadjunt. 
+\end{definition}
+\begin{lemma}
+Sigui $(E,\varphi)$ un espai vectorial euclidià de dimensió $n<\infty$. Sigui $f$ un endomorfisme autoadut de $E$. Llavors existeixen $\lambda_1,\ldots,\lambda_n\in\mathbb{R}$ tals que $$p_f(x)=(x-\lambda_1 )\cdots(x-\lambda_n)$$
+\end{lemma}
+\begin{definition}
+Sigui $A\in\mathcal{M}_n(K)$. Aleshores $A$ és ortogonal si, i només si, $PP^t=P^tP=I_n$.
+\end{definition}
+\begin{theorem}[Teorema espectral]
+Sigui $(E,\varphi)$ un espai vectorial euclidià de dimensió $n<\infty$. Sigui $f\in\mathcal{L}(E)$ autoadjunt de $E$. Llavors $E$ té una base ortonormal de vectors propis de $f$. En particular, l’endomorfisme $f$ diagonalitza.
+\end{theorem}
+\begin{corollary}
+Tota matriu simètrica $A\in\mathcal{M}_n(\mathbb{R})$ és diagonalitzable.
+\end{corollary}
+\begin{definition}
+Donada una matriu $A\in\mathcal{M}_{m\times n}(\mathbb{C})$, $A=(a_{ij})$ denotem per $\overline{A}=(\overline{a_{ij}})$ la conjugada de $A$. $\forall A_1,A_2,A,B$ matrius de mides adequades i $\forall\lambda\in\mathbb{C}$ es satisfan les següents propietats:
+\begin{enumerate}
+    \item $\overline{A_1+A_2}=\overline{
+    A_1}+\overline{A_2}$
+    \item $\overline{AB}=\overline{
+    A}\overline{B}$
+    \item $\overline{\lambda A}=\overline{\lambda}\overline{A}$
+\end{enumerate}
+\end{definition}
+\begin{theorem}[Regla dels signes de Descartes]
+Donat un polinomi $P(x)=a_dx^d+\cdots+a_0$:
+\begin{enumerate}
+    \item El nombre d'arrels positives de $P(x)$ és com a molt igual al nombre de canvis de signe en $[a_{\!_d},a_{\!_{d-1}},\ldots,a_{\!_1},a_{\!_0}]$.
+    \item SI $P(x)=a_d(x-\alpha_1)^{n_1}\cdots(x-\alpha_r)^{n_r}$, aleshores el nombre d'arrels positives és igual al nombre de canvis de signe (comptant les arrels amb multiplicitat).
+\end{enumerate}
+\end{theorem}
+\end{multicols}
+\end{document}

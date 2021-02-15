@@ -1,0 +1,571 @@
+\documentclass[class=article,crop=false]{standalone}
+\usepackage{standalone}
+\usepackage{preamble}
+
+\begin{document}
+\begin{multicols}{2}[\section{Mathematical analysis}]
+\subsection{Numeric series}
+\subsubsection{Series convergence}
+\begin{definition}
+Let $(a_n)$ be a sequence of real numbers. A \textit{numeric series} is an expression of the form $$\sum_{n=1}^\infty a_n.$$ We call $a_n$ \textit{general term of the series} and $\displaystyle S_N=\sum_{n=1}^N a_n$, for all $N\in\mathbb{N}$, \textit{N-th partial sum of the series}.\footnote{From now on we will write $\sum a_n$ to refer $\displaystyle\sum_{n=1}^\infty a_n$.}
+\end{definition}
+\begin{definition}
+We say the series $\sum a_n$ is \textit{convergent} if la sequence of partial sum is convergent, that is, if $\displaystyle S=\lim_{N\to\infty}S_N$ exist and it is finite. In that case, $S$ is called the \textit{sum of the series}. If the previous limit doesn't exists or it is infinite we say the series is \textit{divergent}.\footnote{We will use the notation $\sum a_n<\infty$ or $\sum a_n=+\infty$ to express that the series converges or diverges, respectively.}
+\end{definition}
+\begin{prop}
+Let $(a_n)$ be a sequence such that $\sum a_n<\infty$. Then $\forall\varepsilon$, $\exists n_0\in\mathbb{N}$ such that $$\left|\sum_{n=1}^N a_n-\sum_{n=1}^\infty a_n\right|<\varepsilon$$ if $N\geq n_0$.
+\end{prop}
+\begin{theorem}[Cauchy's test]
+Let $(a_n)$ be a sequence. $\sum a_n<\infty$ if and only if $\forall\varepsilon>0$, $\exists n_0\in\mathbb{N}$ such that $$\left|\sum_{n=N}^Ma_n\right|<\varepsilon$$ if $M\geq N\geq n_0$.
+\end{theorem}
+\begin{corollary}
+Changing a finite number of terms in a series has no effect on the convergence or divergence of that series.
+\end{corollary}
+\begin{corollary}
+If $\sum a_n<\infty$, then $\displaystyle\lim_{n\to \infty} a_n=0$.
+\end{corollary}
+\begin{theorem}[Linearity]
+Let $\sum a_n,\sum b_n$ be two convergent series with sums $A$ and $B$ respectively and let $\lambda$ be a real number. The series $$\sum (a_n+\lambda b_n)$$ is convergent and has sum $A+\lambda B$.
+\end{theorem}
+\begin{theorem}[Associative property]
+Les $\sum a_n$ be a convergent series with sum $A$. Suppose $(n_k)$ is a strictly increasing sequence of natural numbers. The series $\sum b_n$ with $b_k=a_{n_{k-1}+1}+\cdots+a_{n_k}$ for all $i\in\mathbb{N}$ is convergent and its sum is $A$.
+\end{theorem}
+\subsubsection{Non-negative terms series}
+\begin{theorem}
+Let $\sum a_n$ be a series of non-negative terms $a_n\geq 0$.\footnote{Obviously the results below are also valid if the series is of non-positive terms or has a finite number of negative terms.} The series converges if and only if the sequence $(S_N)$ of partial sums is bounded.
+\end{theorem}
+\begin{theorem}[Comparison test]
+Let $(a_n),(b_n)\geq 0$ be two sequence of real numbers. Suppose that exists a constant $C>0$ and a number $n_0\in\mathbb{N}$ such that $a_n\leq Cb_n$ for all $n\geq n_0$. If $\sum b_n<\infty$, then $\sum a_n<\infty$ or equivalently if $\sum a_n=+\infty$, then $\sum b_n=+\infty$.
+\end{theorem}
+\begin{theorem}[Limit comparison test]
+Let $(a_n),(b_n)\geq 0$ be two sequence of real numbers. Suppose that the limit $\ell=\displaystyle\lim_{n\to\infty}\frac{a_n}{b_n}$ exists.
+\begin{enumerate}
+    \item If $0<\ell<\infty\implies\sum a_n<\infty\iff\sum b_n<\infty$.
+    \item If $\ell=0$ and $\sum b_n<\infty\implies\sum a_n<\infty$.
+    \item If $\ell=\infty$ and $\sum a_n<\infty\implies\sum b_n<\infty$.
+\end{enumerate}
+\end{theorem}
+\begin{theorem}[Root test]
+Let $(a_n)\geq 0$. Suppose that the limit $\displaystyle \ell=\lim_{n\to\infty}\sqrt[n]{a_n}$ exists.
+\begin{enumerate}
+    \item If $\ell<1\implies\sum a_n<\infty$.
+    \item If $\ell>1\implies\sum a_n=+\infty$.
+\end{enumerate}
+\end{theorem}
+\begin{theorem}[Ratio test]
+Let $(a_n)\geq 0$. Suppose that the limit $\displaystyle \ell=\lim_{n\to\infty}\frac{a_{n+1}}{a_n}$ exists.
+\begin{enumerate}
+    \item If $\ell<1\implies\sum a_n<\infty$.
+    \item If $\ell>1\implies\sum a_n=+\infty$.
+\end{enumerate}
+\end{theorem}
+\begin{theorem}[Raabe's test]
+Let $(a_n)\geq 0$. Suppose that the limit $\displaystyle \ell=\lim_{n\to\infty}n\left(1-\frac{a_{n+1}}{a_n}\right)$ exists.
+\begin{enumerate}
+    \item If $\ell>1\implies\sum a_n<\infty$.
+    \item If $\ell<1\implies\sum a_n=+\infty$.
+\end{enumerate}
+\end{theorem}
+\begin{theorem}[Condensation test]
+Let $(a_n)\geq 0$ be a decreasing sequence. Then $\sum a_n<\infty\iff\sum 2^na_{2^n}<\infty$.
+\end{theorem}
+\begin{theorem}[Logarithmic test]
+Let $(a_n)\geq 0$. Suppose that the limit $\displaystyle \ell=\lim_{n\to\infty}\frac{\log\frac{1}{a_n}}{\log n}$ exists.
+\begin{enumerate}
+    \item If $\ell>1\implies\sum a_n<\infty$.
+    \item If $\ell<1\implies\sum a_n=+\infty$.
+\end{enumerate}
+\end{theorem}
+\begin{theorem}[Integral test]
+Let $f:[1,\infty)\rightarrow(0,\infty)$ be a decreasing function. Then, $\sum f(n)<\infty\iff\exists C>0$ such that $\displaystyle\int_1^nf(x)dx\leq C\;\;\forall n$.\footnote{Later we will see that this is equivalent to say that if $f:[1,\infty)\rightarrow(0,\infty)$ is a locally integrable decreasing function, then $\displaystyle\sum f(n)<\infty\iff\int_1^\infty f(x)<\infty$.}
+\end{theorem}
+\subsubsection{Alternating series}
+\begin{definition}
+An \textit{alternating series} is a series of the form $\sum (-1)^na_n$, with $(a_n)\geq 0$.
+\end{definition}
+\begin{theorem}[Leibnitz's test]
+Let $(a_n)\geq 0$ be a decresing sequence such that $\displaystyle\lim_{n\to\infty}a_n=0$. Then, $\sum (-1)^na_n$ is convergent.
+\end{theorem}
+\begin{theorem}[Abel's summation formula]
+Let $(a_n),(b_n)$ be two sequence of real numbers. Then, 
+\begin{multline*}
+\sum_{n=N}^M a_n(b_{n+1}-b_n)=a_{M+1}b_{M+1}-a_Nb_N-\\
+-\sum_{n=N}^Mb_{n+1}(a_{n+1}-a_n).
+\end{multline*}
+\end{theorem}
+\begin{theorem}[Dirichlet's test]
+Let $(a_n),(b_n)$ be two sequence of real numbers such that:
+\begin{enumerate}
+    \item $\exists C>0$ such that $\displaystyle\left|\sum_{n=1}^Na_n\right|\leq C$ for all $N\in\mathbb{N}$.
+    \item $(b_n)$ is monotone and $\displaystyle\lim_{n\to\infty}b_n=0$.
+\end{enumerate}
+Then, $\sum a_nb_n$ is convergent.
+\end{theorem}
+\begin{theorem}[Abel's test]
+Let $(a_n),(b_n)$ be two sequence of real numbers such that:
+\begin{enumerate}
+    \item The series $\sum a_n$ is convergent.
+    \item $(b_n)$ is monotone and bounded.
+\end{enumerate}
+Then, $\sum a_nb_n$ is convergent.
+\end{theorem}
+\subsubsection{Absolute convergence and rearrangement of series}
+\begin{definition}
+We say a series $\sum a_n$ is \textit{absolutely convergent} if $\sum |a_n|$ is convergent.
+\end{definition}
+\begin{theorem}
+If a series converges absolutely, it converges.
+\end{theorem}
+\begin{definition}
+We say the sequence $(b_n)$ is a \textit{rearrangement of the sequence} $(a_n)$ if exists a bijective map $\sigma:\mathbb{N}\rightarrow\mathbb{N}$ such that $b_n=a_{\sigma(n)}$. A \textit{rearrangement of the series} $\sum a_n$ is the series $\sum a_{\sigma(n)}$ for some bijection $\sigma:\mathbb{N}\rightarrow\mathbb{N}$.
+\end{definition}
+\begin{definition}
+If $x\in\mathbb{R}$, we define the \textit{positive part of $x$} as $$x^+=
+\begin{cases} 
+  x & \text{si }x\geq 0 \\
+  0 & \text{si }x<0 
+\end{cases}$$ Analogously we define the \textit{negative part of $x$} as $$x^-=
+\begin{cases} 
+  0 & \text{si }x\geq 0 \\
+  -x & \text{si }x<0 
+\end{cases}$$ Note that given $x\in\mathbb{R}$ we can write $x=x^+-x^-$ and $|x|=x^++x^-$.
+\end{definition}
+\begin{theorem}
+A series $\sum a_n$ is absolutely convergent if and only if positive and negative terms series, $\sum a_n^+$ and $\sum a_n^-$, converge. In this case, $$\sum_{n=1}^\infty a_n=\sum_{n=1}^\infty a_n^+-\sum_{n=1}^\infty a_n^-.$$
+\end{theorem}
+\begin{theorem}
+Let $\sum a_n$ be an absolutely convergent series. Then, for all bijection $\sigma:\mathbb{N}\rightarrow\mathbb{N}$, the rearranged series $\sum a_{\sigma(n)}$ is absolutely convergent and $\sum a_n=\sum a_{\sigma(n)}$.
+\end{theorem}
+\begin{theorem}[Riemann's theorem]
+Let $\sum a_n$ be a series that converges but not converges absolutely. Then, $\forall\alpha\in\mathbb{R}\cup\{\infty\}$, there exists a bijective map $\sigma:\mathbb{N}\rightarrow\mathbb{N}$ such that $\sum a_{\sigma(n)}$ converges and $\sum a_{\sigma(n)}=\alpha$.
+\end{theorem}
+\begin{theorem}
+A series $\sum a_n$ is absolutely convergent if and only if any rearranged series converges to the same value of $\sum a_n$.
+\end{theorem}
+\subsection{Sequences and series of functions}
+\subsubsection{Sequences of functions}
+\begin{definition}
+Let $D\subseteq\mathbb{R}$. A set $$(f_n(x))=\{f_1(x),f_2(x),\ldots,f_n(x),\ldots\}$$ is a \textit{sequence of real functions} if $f_i:D\rightarrow\mathbb{R}$ is a real-valued function. In this case we say the sequence $(f_n(x))$, or simply $(f_n)$, is well defined on $D$.
+\end{definition}
+\begin{definition}
+Let $(f_n)$ be a sequence of functions defined on $D\subseteq\mathbb{R}$. Let $f:D\rightarrow\mathbb{R}$. We say $(f_n)$ \textit{converges pointwise} to $f$ on $D$ if $\forall x\in D$, $\displaystyle\lim_{n\to\infty}f_n(x)=f(x)$
+\end{definition}
+\begin{definition}
+We say a sequence of functions $(f_n)$ defined on $D\subseteq\mathbb{R}$ \textit{converges uniformly} to $f$ on $D$ if $\forall\varepsilon>0$, $\exists n_0:|f_n(x)-f(x)|<\varepsilon$ $\forall n\geq n_0$ and $\forall x\in D$.
+\end{definition}
+\begin{lemma}
+Let $(f_n)$ be an uniform convergent sequence of functions defined on $D\subseteq\mathbb{R}$ and let $f$ be such that $(f_n)$ converges pointwise to $f$. Then, $(f_n)$ converges uniformly $f$ on $D$.
+\end{lemma}
+\begin{lemma}
+Let $(f_n)$ be a sequence of functions defined on $D\subseteq\mathbb{R}$. $(f_n)$ converges uniformly a $f$ en $\displaystyle D$ if and only if $\lim_{n\to\infty}\sup\left\{|f_n(x)-f(x)|:x\in D\right\}=0$.
+\end{lemma}
+\begin{corollary}
+A sequence of functions $(f_n)$ converges uniformly to $f$ on $D\subseteq\mathbb{R}$ if and only if there is a sequence $(a_n)$, $a_n\geq 0$ and $\displaystyle \lim_{n\to\infty} a_n=0$, and a number $\displaystyle n_0\in\mathbb{N}$ such that $\sup\left\{|f_n(x)-f(x)|: x\in D\right\}\leq a_n$, $\forall n\geq n_0$.
+\end{corollary}
+\begin{theorem}[Cauchy's test]
+A sequence of functions $(f_n)$ converges uniformly to $f$ on $D\subseteq\mathbb{R}$ if and only if $\forall\varepsilon>0$, $\displaystyle\exists n_0:\sup\left\{|f_n(x)-f_m(x)|:\\ x\in D\right\}< \varepsilon$ if $n,m\geq n_0$.
+\end{theorem}
+\begin{theorem}
+Let $(f_n)$ be a sequence of continuous functions defined on $D\subseteq\mathbb{R}$. If $(f_n)$ converges uniformly to $f$ on $D$, then $f$ is continuous on $D$, that is, for any $x_0\in D$, it satisfies: $$\lim_{n\to\infty}\left(\lim_{x\to x_0} f_n(x)\right)=\lim_{x\to x_0} f(x).$$
+\end{theorem}
+\begin{theorem}
+Let $(f_n)$ be a sequence of functions defined on  $I=[a,b]\subseteq\mathbb{R}$. If $(f_n)$ are Riemann-integrable on $I$ and $(f_n)$ converges uniformly to $f$ on $I$, then $f$ is Riemann-integrable on $I$ and $$\int_a^b\lim_{n\to\infty} f_n(x) dx=\lim_{n\to\infty} \int_a^bf_n(x) dx.$$
+\end{theorem}
+\begin{theorem}
+Let $(f_n)$ be a sequence of functions defined on $I=(a,b)\subseteq\mathbb{R}$ with $a,b\in\mathbb{R}$. If $(f_n)$ are derivable on $I$, $(f_n'(x))$ converges uniformly on $I$ and $\displaystyle\exists x_0\in I: \lim_{n\to\infty}f_n(x_0)\in\mathbb{R}$, then there is a function $f$ such that $(f_n)$ converges uniformly to $f$ on $I$, $f$ is derivable on $I$ and $(f_n'(x))$ converges uniformly to $f'$ on $I$.
+\end{theorem}
+\subsubsection{Series of functions}
+\begin{definition}
+Let $(f_n)$ be a sequence of functions defined on $D\subseteq\mathbb{R}$. The expression $$\sum_{n=1}^\infty f_n(x)$$ is the \textit{series of functions} associated with $(f_n)$.
+\end{definition}
+\begin{definition}
+A series of functions $\sum f_n(x)$, where functions $f_n(x)$ are defined on the same domain $D$, \textit{converges pointwise} on $D$ if the sequence of partials sums $$F_N(x)=\sum_{n=1}^Nf_n(x)$$ converges pointwise. If the pointwise limit of $(F_N)$ is $F(x)$, we say $F$ is the \textit{sum of the series in a pointwise sense}.
+\end{definition}
+\begin{definition}
+A series of functions $\sum f_n(x)$, where functions $f_n(x)$ are defined on the same domain $D$, \textit{converges uniformly} on $D$ if the sequence of partials sums $$F_N(x)=\sum_{n=1}^Nf_n(x)$$ converges uniformly. If the uniform limit of $(F_N)$ is $F(x)$, we say $F$ is the \textit{sum of the series in an uniform sense}.
+\end{definition}
+\begin{theorem}[Cauchy's test]
+A series of functions $\sum f_n(x)$ defined on $D$ converges uniformly if and only if $\forall\varepsilon>0$, $\exists n_0$ such that $$\sup\left\{\left|\sum_{n=N}^Mf_n(x)\right|:x\in D\right\}< \varepsilon$$ if $N,M\geq n_0$.
+\end{theorem}
+\begin{corollary}
+If $\sum f_n(x)$ is a series of continuous functions on $D\subseteq\mathbb{R}$, then $(f_n)$ converges uniformly to zero on $D$.
+\end{corollary}
+\begin{theorem}
+If $\sum f_n(x)$ is uniformly convergent series of functions on $D\subseteq\mathbb{R}$, then its sum function is continuous on $D$ too.
+\end{theorem}
+\begin{theorem}
+Let $(f_n)$ be a sequence of functions defined on $I=[a,b]\subseteq\mathbb{R}$. If $(f_n)$ are Riemann-integrable on $I$, and $\sum f_n(x)$ converges uniformly on $I$, then $\sum f_n(x)$ is Riemann-integrable on $I$ and $$\int_a^b\sum f_n(x) dx=\sum \int_a^bf_n(x) dx.$$
+\end{theorem}
+\begin{theorem}
+Let $(f_n)$ be a sequence of functions defined on $I=(a,b)\subseteq\mathbb{R}$ with $a,b\in\mathbb{R}$. If $(f_n)$ are derivable on $I$, $\sum f_n'(x)$ converges uniformly on $I$ and $\displaystyle\exists c\in I: \sum f_n(c)<\infty$, then $\sum f_n(x)$ converges uniformly on $I$, $\sum f_n(x)$ is derivable on $I$ and $\displaystyle\left(\sum f_n(x)\right)'=\sum f_n'(x)$.
+\end{theorem}
+\begin{theorem}[Weierstra\ss\space M-test]
+Let $(f_n)$ be a sequence of functions defined on $D\subseteq\mathbb{R}$ such that $|f_n(x)|\leq M_n$ $\forall x\in D$ and suppose that $\sum M_n$ is a convergent numeric series. Then, $\sum f_n(x)$ is uniformly convergent on $D$.
+\end{theorem}
+\begin{theorem}[Dirichlet's test]
+Let $(f_n),(g_n)$ be two sequences of functions defined on $D\subseteq\mathbb{R}$. Suppose:
+\begin{enumerate}
+    \item $\displaystyle\exists C>0: \sup\left\{\left|\sum_{n=1}^Nf_n(x)\right|:x\in D\right\}\leq C$, $\forall N$.
+    \item $(g_n(x))$ is a monotone sequence for all $x\in D$ and $\displaystyle\lim_{n\to\infty}\sup\{|g_n(x)|:x\in D\}=0$.
+\end{enumerate}
+Then, $\sum f_n(x)g_n(x)$ converges uniformly on $D$.
+\end{theorem}
+\begin{theorem}[Abel's test]
+Let $(f_n),(g_n)$ be two sequences of functions defined on $D\subseteq\mathbb{R}$. Suppose:
+\begin{enumerate}
+    \item The series $\sum f_n(x)$ converges uniformly on $D$.
+    \item $(g_n(x))$ is a monotone and bounded sequence for all $x\in D$.
+\end{enumerate}
+Then, $\sum f_n(x)g_n(x)$ converges uniformly on $D$.
+\end{theorem}
+\subsubsection{Power series}
+\begin{definition}
+Given an $x_0\in\mathbb{R}$, a \textit{power series centred on $x_0$} is a series of functions of the form $$\sum_{n=0}^\infty a_n(x-x_0)^n$$ being $(a_n)$ a sequence of real numbers.
+\end{definition}
+\begin{prop}
+Let $\sum a_n(x-x_0)^n$ be a power series. Suppose there exists an $x_1\in\mathbb{R}$ such that $\sum a_n(x_1-x_0)^n<\infty$. Then, $\sum a_n(x-x_0)^n$ converges uniformly on any closed interval $I\subset A=\{x\in\mathbb{R}:|x-x_0|<|x_1-x_0|\}$.
+\end{prop}
+\begin{theorem}
+Let $\sum a_n(x-x_0)^n$ be a power series and consider $$R=\left(\limsup_{n\to\infty}\sqrt[n]{|a_n|}\right)^{-1}\in[0,\infty].$$
+Then:
+\begin{enumerate}
+    \item If $|x-x_0|<R\implies\sum a_n(x-x_0)^n$ converges absolutely.
+    \item If $0\leq r<R\implies\sum a_n(x-x_0)^n$ converges uniformly on $[x_0-r,x_0+r]$.
+    \item If $|x-x_0|>R\implies\sum a_n(x-x_0)^n$ diverges.
+\end{enumerate}
+The number $R$ is called \textit{radius of convergence} of the power series.
+\end{theorem}
+\begin{theorem}[Abel's theorem]
+Let $\sum a_nx^n$ be a power series\footnote{From now on we will suppose, for simplicity, $x_0=0$.} with radius of convergence $R$ satisfying $\sum a_nR^n<\infty$. Then the series $\sum a_nx^n$ converges uniformly on $[0,R]$. In particular, if $f(x)=\sum a_nx^n$, $$\lim_{x\to R^-}f(x)=\sum_{n=0}^\infty a_nR^n.$$
+\end{theorem}
+\begin{corollary}
+Let $f$ be the sum function of a power series $\sum a_nx^n$. Then $f$ is continuous on the domain of convergence of the series.
+\end{corollary}
+\begin{corollary}
+If the series $\sum a_nx^n$ has radius of convergence $R\ne 0$ and $f$ is its sum function, then $f$ is Riemann-integrable on any closed sub-interval on the domain of convergence of the series. In particular, for $|x|<R$, $$\int_0^xf(t)dt=\sum_{n=0}^\infty a_n\frac{x^{n+1}}{n+1}.\footnote{The formula is also valid for $|x|=R$ if the series $\sum a_nR^n$ (or $\sum a_n(-R)^n$) is convergent.}$$
+\end{corollary}
+\begin{corollary}
+Let $f$ be the sum function of the power series $\sum a_nx^n$. Then $f$ is derivable within the domain of convergence of the series and $$f'(x)=\sum_{n=0}^\infty na_nx^{n-1}.$$
+\end{corollary}
+\begin{corollary}
+Any function $f$ defined as a sum of a power series $\sum a_nx^n$ is indefinitely derivable within the domain of convergence of the series and $$f^{(k)}(x)=\sum_{n=k}^\infty n(n-1)\cdots(n-k+1)a_nx^{n-k}.$$
+In particular $f^{(k)}(0)=k!a_k$, $\in\mathbb{N}\cup\{0\}$.
+\end{corollary}
+\begin{definition}
+A function is \textit{analytic} if it can be expressed locally as a power series.
+\end{definition}
+\subsubsection{Weierstra\ss approximation theorem}
+\begin{definition}
+Let $f$ be a real-valued function. We say $f$ has \textit{compact support}\footnote{In general, the support of a function is the adherence of the set of points which are not mapped to zero.} if exists an $M>0$ such that $f(x)=0$ for all $x\in\mathbb{R}\setminus[-M,M]$.
+\end{definition}
+\begin{definition}
+Let $f,g$ be real-valued functions with compact support. We define the convolution of $f$ with $g$ as $$(f*g)(x)=\int_\mathbb{R}f(t)g(x-t)dt.\footnote{Alternatively if $f,g$ are Riemann-integrable functions on $[a,b]$ we can define the convolution of $f$ and $g$ as $$(f*g)(x)=\int_a^bf(t)g(x-t)dt.$$}$$
+\end{definition}
+\begin{definition}
+We sap a sequence of functions $(\phi_\varepsilon)$ with compact support is an \textit{approximation of unity} if
+\begin{enumerate}
+    \item $\phi_\varepsilon\geq 0$.
+    \item $\displaystyle\int_\mathbb{R}\phi_\varepsilon=1$.
+    \item $\forall\delta>0$ it is satisfied that $\phi_\varepsilon(t)$ converges uniformly to zero when $\varepsilon\rightarrow 0$, if $|t|>\delta$.
+\end{enumerate}
+\end{definition}
+\begin{lemma}
+Let $f:\mathbb{R}\rightarrow\mathbb{R}$ be a continuous function with compact support. Let $(\phi_\varepsilon)$ be a unity approximation. Then $(f*\phi_\varepsilon)$ converges uniformly to $f$ on $\mathbb{R}$ when $\varepsilon\rightarrow 0$.
+\end{lemma}
+\begin{theorem}[Stone-Weierstra\ss\space theorem]
+Let $f:[a,b]\rightarrow\mathbb{R}$ be a continuous function. Then, there exists polynomials $p_n\in\mathbb{R}[x]$ such that the sequence $(p_n)$ converge uniformly to $f$ on $[a,b]$.
+\end{theorem}
+\subsection{Improper integrals}
+\subsubsection{Locally integrable functions}
+\begin{definition}
+Let $f:[a,b)\rightarrow\mathbb{R}$, with $b\in\mathbb{R}\cup\{\infty\}$. We say $f$ is \textit{locally integrable on $[a,b)$} if $f$ is Riemann-integrable on $[a,x]$ for all $a<x<b$.
+\end{definition}
+\begin{definition}
+Let $f:[a,b)\rightarrow\mathbb{R}$ be a locally integrable function. If there exists $$\lim_{x\to b^-}\int_a^x f$$ and it is finite, we say that the \textit{improper integral} of $f$ on $[a,b)$, $\displaystyle\int_a^b f$, is \textit{convergent}.
+\end{definition}
+\begin{theorem}[Cauchy's test]
+Let $f:[a,b)\rightarrow\mathbb{R}$ be a locally integrable function. The improper integral $\displaystyle\int_a^b f$ is convergent if and only if $\forall\varepsilon>0$, $\exists b_0$, $a<b_0<b$, such that $$\left|\int_{x_1}^{x_2} f\right|<\varepsilon$$ if $b_0<x_1<x_2<b$.
+\end{theorem}
+\subsubsection{Improper integrals of non-negative functions}
+\begin{theorem}
+Let $f:[a,b)\rightarrow\mathbb{R}$ be a locally integrable non-negative function. A necessary and sufficient condition for $\displaystyle\int_a^b f$ to be convergent is that the function $$F(x)=\displaystyle\int_a^x f(t)dt$$ must be bounded for all $x<b$.
+\end{theorem}
+\begin{theorem}[Comparison test]
+Let $f,g:[a,b)\rightarrow[0,+\infty)$ be two locally integrable non-negative functions. Then: 
+\begin{enumerate}
+    \item If $\exists C>0$ such that $f(x)\leq Cg(x)$ $\forall x$ on a neighborhood of $b$ and $\displaystyle\int_a^b g<\infty\implies\int_a^b f<\infty$.
+    \item Let $\displaystyle\lim_{x\to b}\frac{f(x)}{g(x)}=\ell$. Then,
+    \begin{enumerate}
+        \item If $\ell\in(0,\infty)\implies\sum f<\infty\iff\sum g<\infty$.
+        \item If $\ell=0$ and $\sum g<\infty\implies\sum f<\infty$.
+        \item If $\ell=\infty$ and $\sum f<\infty\implies\sum g<\infty$.
+    \end{enumerate}
+\end{enumerate}
+\end{theorem}
+\subsubsection{Absolute convergence of improper integrals}
+\begin{definition}
+Let $f:[a,b)\rightarrow(0,\infty)$ be a locally integrable function. We say $\displaystyle\int_a^b f$ \textit{converges absolutely} if  $\displaystyle\int_a^b |f|$ is convergent.
+\end{definition}
+\begin{theorem}[Dirichlet's test]
+Let $f,g:[a,b)\rightarrow\mathbb{R}$ be two locally integrable functions Suppose:
+\begin{enumerate}
+    \item $\displaystyle\exists C>0: \left|\int_a^xf(t)dt\right|\leq C$ for all $x\in[a,b)$.
+    \item $g$ is monotone and $\displaystyle\lim_{x\to b}g(x)=0$.
+\end{enumerate}
+Then, $\displaystyle\int_a^b fg$ is convergent.
+\end{theorem}
+\begin{theorem}[Abel's test]
+Let $f,g:[a,b)\rightarrow\mathbb{R}$ be two locally integrable functions Suppose:
+\begin{enumerate}
+    \item $\displaystyle\int_a^b f$ is convergent.
+    \item $g$ is monotone and bounded.
+\end{enumerate}
+Then, $\displaystyle\int_a^b fg$ is convergent.
+\end{theorem}
+\subsubsection{Differentiation under the integral sign}
+\begin{theorem}
+Let $f:[a,b]\times[c,d]\rightarrow\mathbb{R}$ be a continuous function on $[a,b]\times[c,d]$. Consider $\displaystyle F(y)=\int_a^bf(x,y)dx$ defined on $[c,d]$. Then $F$ is continuous, that is, if $c<y_0<d$, \begin{multline*}
+    \lim_{y\to y_0}F(y)=\lim_{y\to y_0}\int_a^bf(x,y)dx=\int_a^b\lim_{y\to y_0}f(x,y)dx=\\=\int_a^bf(x,y_0)dx=F(y_0).
+\end{multline*}
+\end{theorem}
+\begin{theorem}
+Let $f:[a,b]\times[c,d]\rightarrow\mathbb{R}$ be a Riemann-integrable function for any $y\in[a,b]\times[c,d]$ and let $\displaystyle F(y)=\int_a^bf(x,y)dx$. If $f$ is differentiable with respect to $y$ and $\displaystyle\frac{\partial f}{\partial y}$ is continuous on $[a,b]\times[c,d]$, then $F(y)$ is derivable on $(c,d)$ and its derivative is $$F'(y)=\int_a^b\frac{\partial f}{\partial y}(x,y)dx,$$ for all $y\in(c,d)$.
+\end{theorem}
+\begin{theorem}
+Let $f:[a,b]\times[c,d]\rightarrow\mathbb{R}$ be a continuous function on $\in[a,b]\times[c,d]$. Let $a,b:[c,d]\rightarrow\mathbb{R}$ be to differentiable functions satisfying $a\leq a(y)\leq b(y)\leq b$ for $c\leq y\leq d$. We also suppose that $\displaystyle\frac{\partial f}{\partial y}$ is continuous on $\{(x,y)\in\mathbb{R}^2:a(y)\leq x\leq b(y),\; c\leq y\leq d\}$. Then $\displaystyle F(y)=\int_{a(y)}^{b(y)}f(x,y)dx$ is derivable on $(c,d)$ and its derivative is \begin{multline*}
+    F'(y)=b'(y)f(b(y),y)-a'(y)f(a(y),y)+\\+\int_{a(y)}^{b(y)}\frac{\partial f}{\partial y}(x,y)dx,
+\end{multline*} for all $y\in(c,d)$.
+\end{theorem}
+\begin{theorem}
+Let $f:[a,b)\times[c,d]\rightarrow\mathbb{R}$ be a continuous function on $[a,b)\times[c,d]$. We consider $\displaystyle F(y)=\int_a^bf(x,y)dx$. Suppose that: 
+\begin{enumerate}
+    \item $\displaystyle\frac{\partial f}{\partial y}$ is continuous on $[a,b)\times[c,d]$.
+    \item Given a $y_0\in[c,d]$, $\exists\delta>0$ such that the integral $$\int_a^b\sup\left\{\left|\frac{\partial f}{\partial y}(x,y)\right|:y\in(y_0-\delta,y_0+\delta)\right\}dx$$ exists and it is finite on $[a,b)$.
+\end{enumerate} 
+Then, $F(y)$ is derivable at $y_0$ and $$F'(y_0)=\int_a^b\frac{\partial f}{\partial y}(x,y_0)dx.$$
+\end{theorem}
+\begin{theorem}
+Let $f:[a,b)\times[c,d]\rightarrow\mathbb{R}$ be a continuous function on $[a,b)\times[c,d]$. Let $a,b:[c,d]\rightarrow\mathbb{R}$ be two differentiable functions satisfying $a\leq a(y)\leq b(y)\leq b$ for $c\leq y\leq d$. We consider $\displaystyle F(y)=\int_{a(y)}^{b(y)}f(x,y)dx$. Suppose that:
+\begin{enumerate}
+    \item $\displaystyle\frac{\partial f}{\partial y}$ is continuous on $\{(x,y)\in\mathbb{R}^2:a(y)\leq x\leq b(y),\; c\leq y\leq d\}$.
+    \item Given a $y_0\in[c,d]$, $\exists\delta>0$ such that the integral $$\int_{a(y)}^{b(y)}\sup\left\{\left|\frac{\partial f}{\partial y}(x,y)\right|:y\in(y_0-\delta,y_0+\delta)\right\}dx$$ exists and it is finite on $[a,b)$.
+\end{enumerate} 
+The, $F(y)$ is derivable at $y_0$ and \begin{multline*}
+    F'(y_0)=b'(y_0)f(b(y_0),y_0)-a'(y_0)f(a(y_0),y_0)+\\+\int_{a(y_0)}^{b(y_0)}\frac{\partial f}{\partial y}(x,y_0)dx.
+\end{multline*}
+\end{theorem}
+\subsubsection{Gamma function}
+\begin{definition}
+For $x>0$, \textit{Gamma function} is defined as $$\Gamma(x)=\int_0^\infty t^{x-1}e^{-t}dt.$$
+\end{definition}
+\begin{theorem}
+Gamma function is a generalization of the factorial. In fact, for $x>0$ we have $$\Gamma(x+1)=x\Gamma(x).$$ In particular, $\Gamma(n+1)=n!$ for $n\in\mathbb{N}$.
+\end{theorem}
+\begin{theorem}
+Gamma function satisfies: $$\lim_{x\to\infty}\frac{\Gamma(x+1)}{(x/e)^x\sqrt{2\pi x}}=1.$$
+\end{theorem}
+\begin{corollary}[Stirling's formula]
+$$\lim_{n\to\infty}\frac{n!}{n^ne^{-n}\sqrt{2\pi n}}=1.$$
+\end{corollary}
+\subsection{Fourier series}
+\subsubsection{Periodic functions}
+\begin{definition}
+Let $f:\mathbb{R}\rightarrow\mathbb{C}$. We say that $f$ is \textit{$T$-periodic}, or is \textit{periodic with period $T$}, being $T>0$, if $f(x+T)=f(x)$ for all $x\in\mathbb{R}$.
+\end{definition}
+\begin{lemma}
+Let $f:\mathbb{R}\rightarrow\mathbb{C}$ be a $T$-periodic function. Then $f(x+T')=f(x)$ for all $x\in\mathbb{R}$ if and only if $T'=kT$ for some $k\in\mathbb{Z}$.
+\end{lemma}
+\begin{prop}
+Let $f:\mathbb{R}\rightarrow\mathbb{C}$ be a $T$-periodic function. Then $$\int_a^{a+T}f(x)dx=\int_0^Tf(x)dx,$$ where $a\in\mathbb{R}$. In particular, $$\int_a^{a+kT}f(x)dx=k\int_0^Tf(x)dx.$$
+\end{prop}
+\begin{lemma}
+Let $f$ be a $T$-periodic continuous function on $\mathbb{R}$. Then, $|f|$ is bounded.
+\end{lemma}
+\begin{prop}
+Given a $T$-periodic function $f$, there are no power series $\sum a_nx^n$ uniformly convergent to $f$ on $\mathbb{R}$.
+\end{prop}
+\subsubsection{Orthogonal systems}
+\begin{definition}
+Let $f,g:[a,b]\rightarrow\mathbb{C}$ be Riemann-integrable functions. We define the \textit{inner product of $f$ and $g$} as $$\langle f,g\rangle=\int_a^bf(x)\overline{g(x)}dx,$$ where $\overline{g}$ is the complex conjugate of $g$.
+\end{definition}
+\begin{definition}
+Let $f:\mathbb{R}\rightarrow\mathbb{C}$ be a function. Then $f\in L^p(I)$, $p\geq1$, if $$\|f\|_p:=\left(\int_I|f(t)|^pdt\right)^{1/p}<\infty.$$ 
+\end{definition}
+\begin{definition}
+Let $f:[a,b]\rightarrow\mathbb{C}$ be a Riemann-integrable function. We define the \textit{norm of $f$} as $$\|f\|=\langle f,f\rangle^{1/2}=\left(\int_a^b|f(x)|^2dx\right)^{1/2}=\|f\|_2.$$
+\end{definition}
+\begin{definition}
+Let $f,g:[a,b]\rightarrow\mathbb{C}$ be Riemann-integrable functions. We define the \textit{distance between $f$ and $g$} as $$d(f,g)=\|f-g\|.$$
+\end{definition}
+\begin{prop}
+Let $f,g:[a,b]\rightarrow\mathbb{C}$ be Riemann-integrable functions and let $\alpha\in\mathbb{C}$. Then we have:
+\begin{enumerate}
+    \item $\langle f,f\rangle\geq 0$.
+    \item $\langle f+h,g\rangle=\langle f,g\rangle+\langle h,g\rangle$ and $\langle f,g+h\rangle=\langle f,g\rangle+\langle f,h\rangle$.
+    \item $\langle f,g\rangle=\overline{\langle g,f\rangle}$.
+    \item $\langle \alpha f,g\rangle=\alpha\langle f,g\rangle$ and $\langle f,\alpha g\rangle=\overline{\alpha}\langle f,g\rangle$.
+\end{enumerate}
+\end{prop}
+\begin{theorem}[Cauchy–Schwarz inequality]
+Let $f,g:[a,b]\rightarrow\mathbb{C}$ be Riemann-integrable functions. Then, $$|\langle f,g\rangle|\leq\|f\|\cdot\|g\|.$$
+\end{theorem}
+\begin{theorem}[Minkowski inequality]
+Let $f,g:[a,b]\rightarrow\mathbb{C}$ be Riemann-integrable functions. Then, $$\| f+g\|\leq\|f\|+\|g\|.$$
+\end{theorem}
+\begin{definition}
+Let $f,g:[a,b]\rightarrow\mathbb{C}$ be Riemann-integrable functions with $f\ne g$. We say $f$ and $g$ are \textit{orthogonal} if $\langle f,g\rangle=0$. We say $f$ and $g$ are \textit{orthonormal} if they are orthogonal and $\|f\|=\|g\|=1$.
+\end{definition}
+\begin{definition}
+Let $S=\{\phi_0,\phi_1,\ldots\}$ be a collection of Riemann-integrable functions on $[a,b]$. We say $S$ is an \textit{orthonormal system} if $\|\phi_n\|=1$ $\forall n$ and $\langle\phi_n,\phi_m\rangle=0$ $\forall n\ne m$.
+\end{definition}
+\begin{prop}
+Let \begin{gather*}
+    S_1=\left\{\frac{1}{T}e^{\frac{2\pi inx}{T}},n\in\mathbb{Z}\right\},\\ S_2=\left\{\frac{1}{\sqrt{T}},\frac{\cos\left(\frac{2\pi nx}{T}\right)}{\sqrt{T/2}},\frac{\sin\left(\frac{2\pi mx}{T}\right)}{\sqrt{T/2}},n,m\in\mathbb{N}\right\}.
+\end{gather*} Then $S_1$ and $S_2$ orthonormal systems on $[-T/2,T/2]$.
+\end{prop}
+\begin{definition}
+A collection of functions $S=\{\phi_0,\phi_1,\ldots,\phi_n\}$ is \textit{linearly dependent} on $[a,b]$ if there exist $c_0,c_1,\ldots,c_n$ not all null, such that $$c_0\phi_0+c_1\phi_1+\cdots+c_n\phi_n=0\;\forall x\in[a,b].$$ Otherwise we say $S$ is \textit{linearly independent}. If the collection $S$ has an infinity number of functions, we say $S$ is linearly independent on $[a,b]$ if any finite subset of $S$ is linearly independent on $[a,b]$.
+\end{definition}
+\begin{theorem}
+Let $S=\{\phi_0,\phi_1,\ldots\}$ be an orthonormal system on $[a,b]$. Suppose that $\sum c_n\phi_n(x)$ converges uniformly to $f$ on $[a,b]$. Then, $f$ is Riemann-integrable on $[a,b]$ and, moreover, $$c_n=\langle f,\phi_n\rangle=\int_a^bf(x)\overline{\phi_n(x)}dx\quad n\geq 0.$$
+\end{theorem}
+\subsubsection{Fourier coefficients and Fourier series}
+\begin{definition}
+Let $\displaystyle S=\left\{\frac{1}{T}e^{\frac{2\pi inx}{T}},n\in\mathbb{Z}\right\}$ be an orthonormal system on $[-T/2,T/2]$ and let $f\in L^1([-T/2,T/2])$ be a $T$-periodic function.\footnote{From now on, we will work only with functions defined on $[-T/2,T/2]$ and extended periodically on $\mathbb{R}$.} We define the \textit{$n$-th Fourier coefficient} as $$\widehat{f}(n)=\left\langle f,\frac{1}{T}e^{\frac{2\pi inx}{T}}\right\rangle=\frac{1}{T}\int_{-T/2}^{T/2}f(x)e^{-\frac{2\pi inx}{T}}dx,$$ for all $n\in\mathbb{Z}$.
+\end{definition}
+\begin{prop}
+Let $f,g\in L^1([-T/2,T/2])$. The following properties are satisfied:
+\begin{enumerate}
+    \item For all $\lambda,\mu\in\mathbb{C}$, $$\widehat{\lambda f+\mu g}(n)=\lambda\widehat{f}(n)+\mu\widehat{g}(n).$$
+    \item Let $\tau\in\mathbb{R}$. We define $f_\tau(x)=f(x-\tau)$. Then, $$\widehat{f_\tau}(n)=e^{-\frac{2\pi in\tau}{T}}\widehat{f}(n).$$
+    \item If $f$ is even, then $\widehat{f}(n)=\widehat{f}(-n)$, $\forall n\in\mathbb{Z}$.\newline If $f$ is odd, then $\widehat{f}(n)=-\widehat{f}(-n)$, $\forall n\in\mathbb{Z}$. 
+    \item If $f\in \mathcal{C}^k$, then $$\widehat{f^{(k)}}(n)=\left(\frac{2\pi in}{T}\right)^k\widehat{f}(n).$$
+    \item $\widehat{(f*g)}(n)=\widehat{f}(n)\widehat{g}(n)$.
+\end{enumerate}
+\end{prop}
+\begin{definition}
+Let $f\in L^1([-T/2,T/2])$. We define the \textit{Fourier series of $f$} as $$\displaystyle Sf(x)=\sum_{n\in\mathbb{Z}}\widehat{f}(n)e^{\frac{2\pi inx}{T}}.$$
+\end{definition}
+\begin{definition}
+Let $f\in L^1([-T/2,T/2])$ and $Sf$ be the Fourier series of $f$. The \textit{$N$-th partial sum of $Sf$} is $$S_Nf(x)=\sum_{n=-N}^N\widehat{f}(n)e^{\frac{2\pi inx}{T}}.$$
+\end{definition}
+\begin{prop}
+Let $f\in L^1([-T/2,T/2])$. Then $$Sf(x)=\frac{a_0}{2}+\sum_{n=1}^\infty a_n\cos\left(\frac{2\pi nx}{T}\right)+b_n\sin\left(\frac{2\pi nx}{T}\right),$$ where \begin{gather*}
+    a_n=\frac{2}{T}\int_{-T/2}^{T/2}f(x)\cos\left(\frac{2\pi nx}{T}\right)dx,\\ b_n=\frac{2}{T}\int_{-T/2}^{T/2}f(x)\sin\left(\frac{2\pi nx}{T}\right)dx,
+\end{gather*} for $n\geq 0.$\footnote{The relation between $a_n,b_n$ and $\widehat{f}(n)$ is given by: $$a_n=\widehat{f}(n)+\widehat{f}(-n)\quad \text{i}\quad b_n=i\left[\widehat{f}(n)-\widehat{f}(-n)\right]\quad\forall n\in\mathbb{N}\cup\{0\}.$$} In particular, if $f$ is even we have $$Sf(x)=\frac{a_0}{2}+\sum_{n=1}^\infty a_n\cos\left(\frac{2\pi nx}{T}\right),$$i if $f$ is odd we have $$Sf(x)=\sum_{n=1}^\infty b_n\sin\left(\frac{2\pi nx}{T}\right).$$ 
+\end{prop}
+\begin{definition}
+Given a function $f$ defined on $(0,L)$, we define the \textit{even extension of $f$} as $$\Tilde{f}(x)=\left\{
+    \begin{array}{rcl}
+    f(x) & \text{si} & x\in(0,L) \\
+    f(-x) & \text{si} & x\in(-L,0)
+    \end{array}\right.$$ Analogously, we define the \textit{odd extension of $f$} as $$\hat{f}(x)=\left\{
+    \begin{array}{rcl}
+    f(x) & \text{si} & x\in(0,L) \\
+    -f(-x) & \text{si} & x\in(-L,0)
+    \end{array}\right.$$
+\end{definition}
+\begin{prop}
+Let $f\in L^1([-T/2,T/2])$. If we make the even extension of $f$, then $$Sf(x)=\frac{a_0}{2}+\sum_{n=1}^\infty a_n\cos\left(\frac{2\pi nx}{T}\right),$$ where $\displaystyle a_n=\frac{4}{T}\int_0^{T/2}f(x)\cos\left(\frac{2\pi nx}{T}\right)dx$ fore $n\geq 0$. If we make the odd extension of $f$, then $$Sf(x)=\sum_{n=1}^\infty b_n\sin\left(\frac{2\pi nx}{T}\right),$$ where $\displaystyle b_n=\frac{4}{T}\int_0^{T/2}f(x)\sin\left(\frac{2\pi nx}{T}\right)dx$ for $n\geq 1$.
+\end{prop}
+\subsubsection{Pointwise convergence}
+\begin{definition}[Dirichlet kernel]
+We define the \textit{Dirichlet kernel of order $N$} as $$D_N(t)=\frac{1}{T}\sum_{n=-N}^Ne^{\frac{2\pi int}{T}}=\frac{1}{T}\frac{\sin\left(\frac{(2N+1)\pi t}{T}\right)}{\sin\left(\frac{\pi t}{T}\right)}.$$
+\end{definition}
+\begin{prop}
+The Dirichlet kernel has the following properties:
+\begin{enumerate}
+    \item $D_N$ is a $T$-periodic and even function.
+    \item $\displaystyle\int_0^TD_N(t)dt=1$ for all $N$.
+\end{enumerate}
+\end{prop}
+\begin{prop}
+Sigui $f\in L^1([-T/2,T/2])$. Then \begin{multline*}
+    S_Nf(x)=(f*D_N)(x)=\int_{-T/2}^{T/2}f(x-t)D_N(t)dt=\\=\int_0^{T/2}[f(x+t)+f(x-t)]D_N(t)dt.
+\end{multline*}
+\end{prop}
+\begin{lemma}[Riemann-Lebesgue lemma]
+Let $f\in L^1([-T/2,T/2])$ and $\lambda\in\mathbb{R}$. Then: $$\lim_{\lambda\to\infty}\int_{-T/2}^{T/2}f(t)\sin(\lambda t)dt=\lim_{\lambda\to\infty}\int_{-T/2}^{T/2}f(t)\cos(\lambda t)dt=0.$$ In particular, $\displaystyle\lim_{|n|\to\infty}\widehat{f}(n)=0$.
+\end{lemma}
+\begin{theorem}
+Let $f\in L^1([-T/2,T/2])$ be a function having left and right-hand side derivatives at $x_0$, that is, there exists the following limits
+\begin{gather*}f'(x_0^+)=\lim_{t\to0^+}\frac{f(x_0+t)-f(x_0^+)}{t},\\ f'(x_0^-)=\lim_{t\to0^-}\frac{f(x_0+t)-f(x_0^-)}{t},\end{gather*}(supposing left and right-hand side exists). Then, $$\lim_{N\to\infty}S_Nf(x_0)=\frac{f(x_0^+)+f(x_0^-)}{2}.$$
+\end{theorem}
+\begin{theorem}[Dini's theorem]
+Let $f\in L^1([-T/2,T/2])$, $x_0\in (-T/2,T/2)$ and $\ell\in\mathbb{R}$ such that $$\int_0^\delta\frac{|f(x_0+t)+f(x_0-t)-2\ell|}{t}dt<\infty$$ for some $\delta>0$. Then $\displaystyle\lim_{N\to\infty}S_Nf(x_0)=\ell$.
+\end{theorem}
+\begin{theorem}[Lipschitz's theorem]
+Let $f\in L^1([-T/2,T/2])$ such that at a point $x_0\in (-T/2,T/2)$ it satisfies $|f(x_0+t)-f(x_0)|\leq L|t|$ for some constant $L$ and for $|t|<\delta$. Then $\displaystyle\lim_{N\to\infty}S_Nf(x_0)=f(x_0)$.
+\end{theorem}
+\subsubsection{Uniform convergence}
+\begin{definition}
+Let $\sum a_n$ be a series with partial sums $S_k$. The series $\sum a_n$ is called \textit{Cesàro summable} with sum $S$ if $$\lim_{N\to\infty}\frac{S_1+\cdots+S_N}{N}=S.$$
+\end{definition}
+\begin{definition}[Fejer kernel]
+We define the \textit{Fejer kernel of order $N$} as $$K_N(t)=\frac{1}{N+1}\sum_{k=0}^ND_k(t)=\frac{1}{T(N+1)}\frac{\sin^2\left(\frac{(N+1)\pi t}{T}\right)}{\sin^2\left(\frac{\pi t}{T}\right)},$$ being $D_k(t)$ the Dirichlet kernel of order $k$, $0\leq k\leq N$.
+\end{definition}
+\begin{prop}
+The Fejer kernel has the following properties:
+\begin{enumerate}
+    \item $K_N$ is a $T$-periodic, even and non-negative function.
+    \item $\displaystyle\int_{-T/2}^{T/2}K_N(t)dt=1$ for all $N$.
+    \item For all $\delta>0$, $\displaystyle\lim_{N\to\infty}\sup\{|K_N(t)|:\delta\leq|t|\leq T/2\}=0$.
+\end{enumerate}
+\end{prop}
+\begin{definition}
+Let $f\in L^1([-T/2,T/2])$. We define the \textit{Fejér means $\sigma_Nf$}, for all $N\in\mathbb{N}$, as $$\sigma_Nf(x)=\frac{S_0f(x)+\cdots+S_Nf(x)}{N+1}.$$
+\end{definition}
+\begin{prop}
+Let $f\in L^1([-T/2,T/2])$. Then \begin{multline*}\sigma_Nf(x)=(f*K_N)(x)=\int_{-T/2}^{T/2}f(x-t)K_N(t)dt=\\=\int_0^{T/2}[f(x+t)+f(x-t)]K_N(t)dt.\end{multline*}
+\end{prop}
+\begin{theorem}[Fejér's theorem]
+Let $f\in L^1([-T/2,T/2])$ be a function having left and right-hand side limits at point $x_0$. Then, $$\lim_{N\to\infty}\sigma_Nf(x_0)=\frac{f(x_0^+)+f(x_0^-)}{2}.$$ In particular, if $f$ is continuous at $x_0$, $\displaystyle\lim_{N\to\infty}\sigma_Nf(x_0)=f(x_0).$
+\end{theorem}
+\begin{theorem}[Fejér's theorem]
+Let $f$ be continuous on $[-T/2,T/2]$. Then $\sigma_Nf$ converges uniformly to $f$ on $[-T/2,T/2]$.
+\end{theorem}
+\begin{corollary}
+Let $f$ be continuous on $[-T/2,T/2]$. Then there exists a sequence of trigonometric polynomials that converge uniformly to $f$ on $[-T/2,T/2]$. In fact, $$\sigma_Nf(x)=\sum_{k=-N}^N\left(1-\frac{|k|}{N+1}\right)\widehat{f}(k)e^{2\pi ikx}.$$
+\end{corollary}
+\begin{corollary}
+Let $f$ and $g$ be continuous functions on $[-T/2,T/2]$ such that $Sf(x)=Sg(x)$. Then $f=g$.
+\end{corollary}
+\subsubsection{Convergence in norm}
+\begin{definition}
+We say a sequence $(f_N)$ \textit{converge to $f$ in norm $L^2([-T/2,T/2])$} if $\displaystyle\lim_{N\to\infty}\|f_N-f\|=0$.
+\end{definition}
+\begin{theorem}
+Let $f\in L^2([-T/2,T/2])$. Then, $\displaystyle\lim_{N\to\infty}\|\sigma_Nf-f\|=0$.
+\end{theorem}
+\begin{corollary}
+Let $f\in L^1([-T/2,T/2])$. Then $\displaystyle\lim_{N\to\infty}\|\sigma_Nf-f\|_1=0$.
+\end{corollary}
+\begin{corollary}
+Let $f,g\in L^1([-T/2,T/2])$ be functions such that $Sf(x)=Sg(x)$. Then $\displaystyle\lim_{N\to\infty}\|g-f\|_1=0$.
+\end{corollary}
+\begin{theorem}[Bessel's inequality]
+Let $f\in L^2(I)$, where $I$ is any interval on the real line. Then: \begin{gather*}T\sum_{n=-N}^N|\widehat{f}(n)|^2\leq\|f\|^2,\\\frac{T}{2}\left(\frac{|a_0|^2}{2}+\sum_{n=1}^N|a_n|^2+|b_n|^2\right)\leq \|f\|^2,\end{gather*} for all $N\in\mathbb{N}$.
+\end{theorem}
+\begin{theorem}
+$S_Nf$ is the trigonometric polynomial of degree $N$ that best approximates $f$ in norm $L^2$.
+\end{theorem}
+\begin{corollary}
+Let $f\in L^2([-T/2,T/2])$. Then, $\displaystyle\lim_{N\to\infty}\|S_Nf-f\|=0$.
+\end{corollary}
+\begin{theorem}[Parseval's identity]
+Let $f,g\in L^2([-T/2,T/2])$ be bounded functions. Then $$\langle f,g\rangle=T\sum_{n\in\mathbb{Z}}\widehat{f}(n)\overline{\widehat{g}(n)}.$$
+In particular, if $f=g$, then:
+\begin{gather*}\|f\|^2=T\sum_{n\in\mathbb{Z}}|\widehat{f}(n)|^2,\\\|f\|^2=\frac{T}{2}\left(\frac{|a_0|^2}{2}+\sum_{n=1}^\infty|a_n|^2+|b_n|^2\right).\end{gather*}
+\end{theorem}
+\subsubsection{Applications of Fourier series}
+\begin{theorem}[Wirtinger's inequality]
+Let $f$ be a function such that $f(0)=f(T)$, $f'\in L^2([0,T])$ and $\displaystyle\int_a^bf(t)dt=0$. Then, $$\int_0^T|f(x)|^2dx\leq\frac{T^2}{4\pi^2}\int_0^T|f'(x)|^2dx,$$ with equality if and only if $\displaystyle f(x)=A\cos\left(\frac{2\pi x}{T}\right)+B\sin\left(\frac{2\pi x}{T}\right)$.
+\end{theorem}
+\begin{theorem}[Wirtinger's inequality]
+Let $f\in \mathcal{C}^1([a,b])$ with $f(a)=f(b)=0$. Then, $$\int_a^b|f(x)|^2dx\leq\frac{(b-a)^2}{\pi^2}\int_a^b|f'(x)|^2dx.$$
+\end{theorem}
+\begin{theorem}[Isoperimetric inequality]
+Let $c$ be a simple and closed curve of class $\mathcal{C}^1$ whose length is $L$. If $A_c$ is the area enclosed by $c$, then $$A_c\leq\frac{L^2}{4\pi},$$ with equality if and only if $c$ is a circle.
+\end{theorem}
+\end{multicols}
+\end{document}
