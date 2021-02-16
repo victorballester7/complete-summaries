@@ -14,7 +14,7 @@ El producte de matrius invertibles és invertible.
 \begin{theorem}[\bfseries Teorema de Gau\ss]
 Donada una matriu qualsevol $A\in\mathcal{M}_{m\times n}(\mathbb{R})$, existeix una matriu invertible $P\in\mathcal{M}_m(\mathbb{R})$ tal que $A'=PA$ és esglaonada i reduïda. A més, $A'$ està únicament determinada per $A$.
 \end{theorem}
-\begin{theorem}[\bfseries Teorema de la P-A-Q reducció]
+\begin{theorem}[\bfseries Teorema de la PAQ reducció]
 Donada una matriu $A\in\mathcal{M}_{m\times n}(\mathbb{R})$, existeixen matrius invertibles $P\in\mathcal{M}_m(\mathbb{R})$ i $Q\in\mathcal{M}_n(\mathbb{R})$ tals que $$PAQ=\left(\begin{array}{@{\,} c|c @{\,}}
     I_r & 0\\
     \hline
@@ -337,34 +337,36 @@ Sigui $\varphi:E\times E\rightarrow \mathbb{R}$ una forma bilineal. Es diu que $
 Sigui $\varphi:E\times E\rightarrow \mathbb{R}$ una forma bilineal simètrica. Llavors $E$ té una base ortogonal respecte de $\varphi$.
 \end{theorem}
 \begin{definition}
-Sigui $\varphi$ una forma bilineal simètrica sobre $E$. Sigui $W$ un subespai vectorial de $E$. Definim l'ortogonal de $W$ respecte de $\varphi$ per $$W^\bot=\{u\in E\mid\varphi(u,\omega)=0\;\forall\omega\in W\}$$ Definim el radical de $\varphi$ per $$\text{rad }\varphi=E^\bot$$ Direm que $\varphi$ és no singular si $\text{rad}(\varphi)=\{0\}$.
+Sigui $\varphi$ una forma bilineal simètrica sobre $E$. Sigui $W$ un subespai vectorial de $E$. Definim l'ortogonal de $W$ respecte de $\varphi$ per $$W^\perp=\{u\in E:\varphi(u,\omega)=0\;\forall\omega\in W\}$$ Definim el radical de $\varphi$ per $$\text{rad }\varphi=E^\perp$$ Direm que $\varphi$ és no singular si $\text{rad}(\varphi)=\{0\}$.
 \end{definition}
 \begin{definition}
 Sigui $\varphi$ una forma bilineal simètrica no singular sobre $E$. Donat un $u\in E$ definim $\varphi_u:E\rightarrow\mathbb{R}$, $\varphi_u(v)=\varphi(u,v)$. Llavors l'aplicació 
 \begin{align*}
-    \Phi: E&\rightarrow E^*&\\
+    \Phi: E&\rightarrow E^*\\
     u&\mapsto\varphi_u
 \end{align*} és un isomorfisme. 
 \end{definition}
 \begin{definition}
 Sigui $\varphi$ una forma bilineal simètrica no singular sobre $E$. Sigui $W$ un subespai vectorial de $E$. Llavors:
 \begin{enumerate}
-    \item $\dim E=\dim W+\dim W^\bot$.
-    \item $(W^\bot)^\bot=W$.
-    \item Si la restricció de $\varphi$ sobre $W$ és no singular, llavors $E=W\oplus W^\bot$.
+    \item $\dim E=\dim W+\dim W^\perp$.
+    \item $(W^\perp)^\perp=W$.
+    \item Si la restricció de $\varphi$ sobre $W$ és no singular, llavors $E=W\oplus W^\perp$.
 \end{enumerate}
 \end{definition}
 \begin{definition}
-Sigui $\varphi$ una forma bilineal simètrica sobre $E$. Direm que la suma $W_1+W_2$ de dos subespais vectorials $W_1$ i $W_2$ de $E$ és una suma ortogonal si és directa i $\varphi(u,v)=0$ $\forall u\in W_1$ i $v\in W_2$. Escriurem $W_1\bot W_2$ per denotar que la suma $W_1+W_2$ és ortogonal.
+Sigui $\varphi$ una forma bilineal simètrica sobre $E$. Direm que la suma $W_1+W_2$ de dos subespais vectorials $W_1$ i $W_2$ de $E$ és una suma ortogonal si és directa i $\varphi(u,v)=0$ $\forall u\in W_1$ i $v\in W_2$. Escriurem $W_1\perp W_2$ per denotar que la suma $W_1+W_2$ és ortogonal.
 \end{definition}
 \begin{definition}
-Sigui $\varphi$ una forma bilineal simètrica sobre $E$. Siguin $W_1$ i $W_2$ dos subespais vectorials de $E$ tals que $E=W_1\bot W_2$. Llavors per a cada vector $v\in E$ existeixen $v_1\in W_1$ i $v_2\in W_2$ únics tals que $v=v_1+v_2$. L'aplicació $\pi:E\rightarrow W_i$ definida per $\pi(v)=v_i$ amb $v_i\in W_i$ es diu que és la projecció ortogonal de $E$ sobre $W_i$ segons la descomposició $E=W_1\bot W_2$.
+Sigui $\varphi$ una forma bilineal simètrica sobre $E$. Siguin $W_1$ i $W_2$ dos subespais vectorials de $E$ tals que $E=W_1\perp W_2$. Llavors per a cada vector $v\in E$ existeixen $v_1\in W_1$ i $v_2\in W_2$ únics tals que $v=v_1+v_2$. L'aplicació $\pi:E\rightarrow W_i$ definida per $\pi(v)=v_i$ amb $v_i\in W_i$ es diu que és la projecció ortogonal de $E$ sobre $W_i$ segons la descomposició $E=W_1\perp W_2$.
+\label{perpendicular}
 \end{definition}
 \begin{definition}
 Una geometria ortogonal sobre $\mathbb{R}$ és un parell $(E,\varphi)$, on $E$ és un $\mathbb{R}$-espai vectorial i $\varphi$ és una forma bilineal simètrica sobre $E$.
 \end{definition}
 \begin{definition}
 Siguin $(E_1,\varphi_1)$ i $(E_2,\varphi_2)$ dues geometries ortogonals sobre $\mathbb{R}$. Una isometria de $(E_1,\varphi_1)$ a $(E_2,\varphi_2)$ és un isomorfisme $f:E_1\rightarrow E_2$ tal que $$\varphi_2(f(u),f(v))=\varphi_1(u,v)$$ per a tot $u,v\in E_1$. Direm que $(E_1,\varphi_1)$ i $(E_2,\varphi_2)$ són isomètriques si existeix una isometria de $(E_1,\varphi_1)$ a $(E_2,\varphi_2)$.
+\label{isometry}
 \end{definition}
 \begin{definition}
 Sigui $E$ un $\mathbb{R}$-espai vectorial. Direm que dues formes bilineals simètriques $\varphi_1,\varphi_2$ sobre $E$ són equivalents si, i només si, $(E,\varphi_1)$ i $(E,\varphi_2)$ són isomètriques.
@@ -400,12 +402,11 @@ Sigui $\varphi$ una forma bilineal simètrica sobre un $\mathbb{R}$-espai vector
 \begin{theorem}
 Siguin $(E_1,\varphi_1)$, $(E_2,\varphi_2)$ dues geometries ortogonals sobre $\mathbb{R}$ de dimensió finita. Llavors $(E_1,\varphi_1)$ i $(E_2,\varphi_2)$ són isomètriques si, i només si, $\dim E_1=\dim E_2$ i $\text{sig}(\varphi_1)=\text{sig}(\varphi_2)$.
 \end{theorem}
-
 \begin{definition}
 Sigui $\varphi$ una forma bilineal simètrica sobre un $\mathbb{R}$-espai vectorial $E$. Es diu que $\varphi$ és definida positiva si $\forall v\in E$, $v\ne 0$, tenim $\varphi(v,v)>0$. Es diu que $\varphi$ és definida negativa si $\forall v\in E$, $v\ne 0$, tenim $\varphi(v,v)<0$. 
 \end{definition}
 \begin{definition}
-Un producte escalar sobre un $\mathbb{R}$-espai vectorial $E$ és una forma bilineal simètrica definida positiva sobre $E$. Un espai vectorial euclidià és un parell $(E,\varphi)$, on $E$ és un $\mathbb{R}$-espai vectorial i $\varphi$ és un producte escalar sobre $E$.
+Un producte escalar sobre un $\mathbb{R}$-espai vectorial $E$ és una forma bilineal simètrica definida positiva sobre $E$. Un espai vectorial euclidià és un parell $(E,\varphi)$, on $E$ és un $\mathbb{R}$-espai vectorial i $\varphi$ és un producte escalar sobre $E$.\label{espai_euclidia}
 \end{definition}
 \begin{theorem}[Desigualtat de Cauchy-Schwartz]
 Sigui $\varphi$ un producte escalar sobre un $\mathbb{R}$-espai vectorial $E$, llavors: $$\varphi(u,v)^2\leq \varphi(u,u)\varphi(v,v)\quad\forall u,v\in E$$
