@@ -9,19 +9,28 @@
 Let $b\in\mathbb{N}$, $b\geq 2$. Any real number $x\in\mathbb{R}$ can be represented of the form 
 \begin{equation*}
     x=s\left(\sum_{i=1}^\infty\alpha_ib^{-i}\right)b^q,
-\end{equation*} where $s\in\{-1,1\}$, $q\in\mathbb{Z}$ and $\alpha_i\in\{0,1,\ldots,b-1\}$. Moreover, this representation is unique if $\alpha_1\ne0$ and $\forall i_0\in\mathbb{N}$, $\exists i\geq i_0:\alpha_i\ne b-1$.
+\end{equation*} where $s\in\{-1,1\}$, $q\in\mathbb{Z}$ and $\alpha_i\in\{0,1,\ldots,b-1\}$. Moreover, this representation is unique if $\alpha_1\ne0$ and $\forall i_0\in\mathbb{N}$, $\exists i\geq i_0:\alpha_i\ne b-1$. We will write $$x=s(0.\alpha_1\alpha_2\alpha_3\cdots)_bb^q,$$ where the subscript $b$ in the parenthesis indicates that the digits $\alpha_1\alpha_2\alpha_3\cdots$ are in base $b$.
 \end{theorem}
 \begin{definition}[Floating-point representation]
-Let $x$ be a real number. Then the floating-point representation of $x$ is $$x=s\left(\sum_{i=1}^\infty t\alpha_ib^{-i}\right)b^q.$$ Here $s$ is called the \textit{sign}; $\sum_{i=1}^\infty t\alpha_ib^{-i}$, the \textit{significant} or \textit{mantissa}, and $q$, the \textit{exponent}, limited to a prefixed range, that is, $q_\text{min}\leq q\leq q_\text{max}$. So, the floating-point representation of $x$ is $$x=smb^q,$$ where $m=(0,\delta_1\delta_2\cdots\delta_t)_b=\delta_1b^{-1}+\delta_2b^{-2}+\cdots+\delta_tb^{-t}$. Finally we say a floating-point number is \textit{normalized} if $\delta_1\ne0$.
+Let $x$ be a real number. Then the floating-point representation of $x$ is $$x=s\left(\sum_{i=1}^t\alpha_ib^{-i}\right)b^q.$$ Here $s$ is called the \textit{sign}; $\sum_{i=1}^t\alpha_ib^{-i}$, the \textit{significant} or \textit{mantissa}, and $q$, the \textit{exponent}, limited to a prefixed range, that is, $q_\text{min}\leq q\leq q_\text{max}$. So, the floating-point representation of $x$ is $$x=smb^q=s(0.\delta_1\delta_2\cdots\delta_t)_bb^q.$$ Finally we say a floating-point number is \textit{normalized} if $\delta_1\ne0$.
 \end{definition}
 \begin{definition}
-Given a value $x\in\mathbb{R}$ and its approximation $\Tilde{x}$, the \textit{absolute error} is $$\Delta x:=e_a(\Tilde{x},x)=|x-\Tilde{x}|.$$ If $x\ne 0$, the \textit{relative error} is $$\delta x:=e_r(\Tilde{x},x)=\frac{|x-\Tilde{x}|}{x}.$$ If $x$ is unknown, we will take $$e_r(\Tilde{x},x)\approx\frac{|x-\Tilde{x}|}{\Tilde{x}}.$$
+Given a value $x\in\mathbb{R}$ and its approximation $\Tilde{x}$, the \textit{absolute error} is $$\Delta x:=|x-\Tilde{x}|.$$ If $x\ne 0$, the \textit{relative error} is $$\delta x:=\frac{|x-\Tilde{x}|}{x}.$$ If $x$ is unknown, we will take $$\delta x\approx\frac{|x-\Tilde{x}|}{\Tilde{x}}.$$
+\end{definition}
+\begin{definition}
+Let $\Tilde{x}$ be an approximation of $x$. If $\Delta x\leq\frac{1}{2}10^t$, we say \textit{$\Tilde{x}$ has $t$ correct decimal digits}. If $x=sm10^q$ with $0.1\leq m<1$, $\Tilde{x}=s\Tilde{m}10^q$ and $$t_r:=\max\{i\in\mathbb{Z}:|m-\Tilde{m}|\leq\frac{1}{2}10^{-i}\},$$ then we say that $\Tilde{x}$ \textit{has $t_r$ significant digits}.
 \end{definition}
 \begin{prop}[Propagation of absolute errors]
-Let $f:\mathbb{R}^n\rightarrow\mathbb{R}$ be a function of class $\mathcal{C}^2$. If $\Delta x_j$ is the absolute error of the variable $x_j$ and $\Delta f(x)$ is the absolute error of the function $f$ evaluated at the point $x=(x_1,\ldots,x_n)$, we have $$|\Delta f(x)|\lesssim\sum_{j=1}^n\left|\frac{\partial f}{\partial x_j}(x)\right||\Delta x_j|.\footnote{The symbol $\lesssim$ means that we are omitting terms of order $\Delta x_j\Delta x_k$ and higher.}$$
+Let $f:\mathbb{R}^n\rightarrow\mathbb{R}$ be a function of class $\mathcal{C}^2$. If $\Delta x_j$ is the absolute error of the variable $x_j$ and $\Delta f(x)$ is the absolute error of the function $f$ evaluated at the point $x=(x_1,\ldots,x_n)$, we have $$|\Delta f(x)|\lesssim\sum_{j=1}^n\left|\frac{\partial f}{\partial x_j}(x)\right||\Delta x_j|.\footnote{The symbol $\lesssim$ means that we are omitting terms of order $\Delta x_j\Delta x_k$ and higher.}$$ The coefficients $\displaystyle\frac{\partial f}{\partial x_j}(x)$ are called \textit{absolute condition numbers of the problem}. 
 \end{prop}
 \begin{prop}[Propagation of relative errors]
-Let $f:\mathbb{R}^n\rightarrow\mathbb{R}$ be a function of class $\mathcal{C}^2$. If $\delta x_j$ is the relative error of the variable $x_j$ and $\delta f(x)$ is the relative error of the function $f$ evaluated at the point $x=(x_1,\ldots,x_n)$, we have $$|\delta f(x)|\lesssim\sum_{j=1}^n\frac{\left|\frac{\partial f}{\partial x_j}(x)\right|\left|x\right|}{\left|f(x)\right|}|\delta x_j|.$$
+Let $f:\mathbb{R}^n\rightarrow\mathbb{R}$ be a function of class $\mathcal{C}^2$. If $\delta x_j$ is the relative error of the variable $x_j$ and $\delta f(x)$ is the relative error of the function $f$ evaluated at the point $x=(x_1,\ldots,x_n)$, we have $$|\delta f(x)|\lesssim\sum_{j=1}^n\frac{\left|\frac{\partial f}{\partial x_j}(x)\right|\left|x\right|}{\left|f(x)\right|}|\delta x_j|.$$ The coefficients $\displaystyle \left|\frac{\partial f}{\partial x_j}(x)\right|\left|x\right|/\left|f(x)\right|$ are called \textit{relative condition numbers of the problem}. 
 \end{prop}
+\begin{definition}
+An algorithm is said to be \textit{numerically stable} if  errors in the input lessen in significance as the algorithm executes, having little effect on the final output. On the other hand, an algorithm is said to be \textit{numerically unstable} if errors in the input cause a considerably larger error in the final output.
+\end{definition}
+\begin{definition}
+A problem with a low condition number is said to be \textit{well-conditioned}. Conversely, a problem with a high condition number is said to be \textit{ill-conditioned}.
+\end{definition}
 \end{multicols}
 \end{document}
