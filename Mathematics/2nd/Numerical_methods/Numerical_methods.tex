@@ -5,14 +5,40 @@
 \begin{document}
 \begin{multicols}{2}[\section{Numerical methods}]
 \subsection{Errors}
+\subsubsection*{Floating-point representation}
 \begin{theorem}
 Let $b\in\mathbb{N}$, $b\geq 2$. Any real number $x\in\mathbb{R}$ can be represented of the form 
 \begin{equation*}
     x=s\left(\sum_{i=1}^\infty\alpha_ib^{-i}\right)b^q,
-\end{equation*} where $s\in\{-1,1\}$, $q\in\mathbb{Z}$ and $\alpha_i\in\{0,1,\ldots,b-1\}$. Moreover, this representation is unique if $\alpha_1\ne0$ and $\forall i_0\in\mathbb{N}$, $\exists i\geq i_0:\alpha_i\ne b-1$. We will write $$x=s(0.\alpha_1\alpha_2\alpha_3\cdots)_bb^q,$$ where the subscript $b$ in the parenthesis indicates that the digits $\alpha_1\alpha_2\alpha_3\cdots$ are in base $b$.
+\end{equation*} where $s\in\{-1,1\}$, $q\in\mathbb{Z}$ and $\alpha_i\in\{0,1,\ldots,b-1\}$. Moreover, this representation is unique if $\alpha_1\ne0$ and $\forall i_0\in\mathbb{N}$, $\exists i\geq i_0:\alpha_i\ne b-1$. We will write $$x=s(0.\alpha_1\alpha_2\cdots)_bb^q,$$ where the subscript $b$ in the parenthesis indicates that the digits $\alpha_1\alpha_2\alpha_3\cdots$ are in base $b$.
 \end{theorem}
 \begin{definition}[Floating-point representation]
-Let $x$ be a real number. Then the floating-point representation of $x$ is $$x=s\left(\sum_{i=1}^t\alpha_ib^{-i}\right)b^q.$$ Here $s$ is called the \textit{sign}; $\sum_{i=1}^t\alpha_ib^{-i}$, the \textit{significant} or \textit{mantissa}, and $q$, the \textit{exponent}, limited to a prefixed range, that is, $q_\text{min}\leq q\leq q_\text{max}$. So, the floating-point representation of $x$ is $$x=smb^q=s(0.\delta_1\delta_2\cdots\delta_t)_bb^q.$$ Finally we say a floating-point number is \textit{normalized} if $\delta_1\ne0$.
+Let $x$ be a real number. Then the floating-point representation of $x$ is $$x=s\left(\sum_{i=1}^t\alpha_ib^{-i}\right)b^q.$$ Here $s$ is called the \textit{sign}; $\sum_{i=1}^t\alpha_ib^{-i}$, the \textit{significant} or \textit{mantissa}, and $q$, the \textit{exponent}, limited to a prefixed range $q_\text{min}\leq q\leq q_\text{max}$. So, the floating-point representation of $x$ is $$x=smb^q=s(0.\alpha_1\alpha_2\cdots\alpha_t)_bb^q.$$ Finally we say a floating-point number is \textit{normalized} if $\alpha_1\ne0$.
+\end{definition}
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{c|ccccc}
+        Format & $b$ & $t$ & $q_\text{min}$ & $q_\text{max}$ & bits \\
+        \hline\hline
+        IEEE simple & 2 & 24 & -126 & 127 & 32\\
+        IEEE double & 2 & 53 & -1022 & 1023 & 64
+    \end{tabular}
+    \caption{Parameters of IEEE simple and IEEE double formats.}
+    \label{tab:my_label}
+\end{table}
+\begin{definition}
+We denote by $F(b,t,q_\text{min},q_\text{max})$ the following set:
+\begin{multline*}
+    F(b,t,q_\text{min},q_\text{max})=\{0\}\cup\{\pm(0.\alpha_1\alpha_2\cdots\alpha_t)_bb^q:\\\alpha_i\in\{0,1,\ldots,b-1\},\alpha_1\ne0, q_\text{min}\leq q\leq q_\text{max}\}.
+\end{multline*}
+\end{definition}
+\begin{definition}
+Let $x\in\mathbb{R}$ such that $x=s(0.\alpha_1\alpha_2\cdots)_bb^q$ with $q_\text{min}\leq q\leq q_\text{max}$. We say the \textit{floating-point representation by truncation of $x$} is $$fl_T(x)=s(0.\alpha_1\alpha_2\cdots\alpha_t)_bb^q.$$ We say the \textit{floating-point representation by rounding of $x$} is \begin{multline*}
+fl_R(x)=\\=\left\{\begin{array}{lcl}
+        s(0.\alpha_1\cdots\alpha_t)_bb^q & \text{if} & 0\leq\alpha_{t+1}<b/2,\\
+        s(0.\alpha_1\cdots\alpha_{t-1}(\alpha_t+1))_bb^q & \text{if} & b/2\leq\alpha_{t+1}\leq b-1.
+    \end{array}\right.
+\end{multline*}
 \end{definition}
 \begin{definition}
 Given a value $x\in\mathbb{R}$ and its approximation $\Tilde{x}$, the \textit{absolute error} is $$\Delta x:=|x-\Tilde{x}|.$$ If $x\ne 0$, the \textit{relative error} is $$\delta x:=\frac{|x-\Tilde{x}|}{x}.$$ If $x$ is unknown, we will take $$\delta x\approx\frac{|x-\Tilde{x}|}{\Tilde{x}}.$$
@@ -20,17 +46,42 @@ Given a value $x\in\mathbb{R}$ and its approximation $\Tilde{x}$, the \textit{ab
 \begin{definition}
 Let $\Tilde{x}$ be an approximation of $x$. If $\Delta x\leq\frac{1}{2}10^t$, we say \textit{$\Tilde{x}$ has $t$ correct decimal digits}. If $x=sm10^q$ with $0.1\leq m<1$, $\Tilde{x}=s\Tilde{m}10^q$ and $$t_r:=\max\{i\in\mathbb{Z}:|m-\Tilde{m}|\leq\frac{1}{2}10^{-i}\},$$ then we say that $\Tilde{x}$ \textit{has $t_r$ significant digits}.
 \end{definition}
+Let $x\in\mathbb{R}$ such that $x=s(0.\alpha_1\alpha_2\cdots)_bb^q$ with $\alpha_1\ne0$ and $q_\text{min}\leq q\leq q_\text{max}$. Then, we have:
+\begin{align*}
+    \left|fl_T(x)-x\right|\leq b^{q-t},\quad&\quad \left|fl_R(x)-x\right|\leq\frac{1}{2}b^{q-t}.\\
+    \left|\frac{fl_T(x)-x}{x}\right|\leq b^{1-t},\quad&\quad \left|\frac{fl_R(x)-x}{x}\right|\leq\frac{1}{2}b^{1-t}.\\
+\end{align*}
+\begin{definition}
+The \textit{machine epsilon $\epsilon$} is defined as $$\epsilon:=\min\{\varepsilon>0:fl(1+\varepsilon)\ne 1\}.$$
+\end{definition}
+\begin{prop}
+For a machine working by truncation, $\epsilon=b^{1-t}$. For a machine working by rounding, $\epsilon=\frac{1}{2}b^{1-t}$.
+\end{prop}
+\subsubsection*{Propagation of errors}
 \begin{prop}[Propagation of absolute errors]
 Let $f:\mathbb{R}^n\rightarrow\mathbb{R}$ be a function of class $\mathcal{C}^2$. If $\Delta x_j$ is the absolute error of the variable $x_j$ and $\Delta f(x)$ is the absolute error of the function $f$ evaluated at the point $x=(x_1,\ldots,x_n)$, we have $$|\Delta f(x)|\lesssim\sum_{j=1}^n\left|\frac{\partial f}{\partial x_j}(x)\right||\Delta x_j|.\footnote{The symbol $\lesssim$ means that we are omitting terms of order $\Delta x_j\Delta x_k$ and higher.}$$ The coefficients $\displaystyle\frac{\partial f}{\partial x_j}(x)$ are called \textit{absolute condition numbers of the problem}. 
 \end{prop}
 \begin{prop}[Propagation of relative errors]
 Let $f:\mathbb{R}^n\rightarrow\mathbb{R}$ be a function of class $\mathcal{C}^2$. If $\delta x_j$ is the relative error of the variable $x_j$ and $\delta f(x)$ is the relative error of the function $f$ evaluated at the point $x=(x_1,\ldots,x_n)$, we have $$|\delta f(x)|\lesssim\sum_{j=1}^n\frac{\left|\frac{\partial f}{\partial x_j}(x)\right|\left|x\right|}{\left|f(x)\right|}|\delta x_j|.$$ The coefficients $\displaystyle \left|\frac{\partial f}{\partial x_j}(x)\right|\left|x\right|/\left|f(x)\right|$ are called \textit{relative condition numbers of the problem}. 
 \end{prop}
+\subsubsection*{Algorithms}
 \begin{definition}
 An algorithm is said to be \textit{numerically stable} if  errors in the input lessen in significance as the algorithm executes, having little effect on the final output. On the other hand, an algorithm is said to be \textit{numerically unstable} if errors in the input cause a considerably larger error in the final output.
 \end{definition}
 \begin{definition}
 A problem with a low condition number is said to be \textit{well-conditioned}. Conversely, a problem with a high condition number is said to be \textit{ill-conditioned}.
 \end{definition}
+\subsection{Zeros of functions}
+\begin{definition}
+Let $f:\mathbb{R}\rightarrow\mathbb{R}$ be a function. We say $\alpha$ is a \textit{zero} or \textit{solution to the equation $f(x)=0$} if $f(\alpha)=0$.
+\end{definition}
+\subsubsection*{Bisection method}
+\begin{theorem}[Bisection method]
+Let $f:[a_0,b_0]\rightarrow\mathbb{R}$ be a continuous function and suppose $f(a_0)f(b_0)<0$. By Bolzano's theorem there is a $\alpha\in[a_0,b_0]$ such that $f(\alpha)=0$. Given a $\varepsilon>0$, we want to approximate the value of $\alpha$ with $\Tilde{\alpha}$, such that $|\alpha-\Tilde{\alpha}|<\varepsilon$. Consider the sequence of intervals $[a_n,b_n]$, $n\geq 0$, defined as follows. First let $c_n=\frac{a_n+b_n}{2}$. If $c_n=\alpha$ we are done. If not, then let
+$$[a_{n+1},b_{n+1}]=\left\{\begin{array}{ccc}
+    [a_n,c_n] & \text{if} & f(a_n)f(c_n)<0, \\
+    \left[c_n,b_n\right] & \text{if} & f(a_n)f(c_n)>0.
+\end{array}\right.$$ Observe the length of the interval $[a_n,b_n]$ is $\frac{b_0-a_0}{2^n}$. If we take $\Tilde{\alpha}:=c_n$, we have: $$\frac{b_0-a_0}{2^{n+1}}<\varepsilon\implies n>\frac{\log\left(\frac{b_0-a_0}{\varepsilon}\right)}{\log 2}-1.$$
+\end{theorem}
 \end{multicols}
 \end{document}

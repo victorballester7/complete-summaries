@@ -5,7 +5,7 @@
 \begin{document}
 \begin{multicols}{2}[\section{Algebraic structures}]
 \subsection{Groups}
-\subsubsection{Groups, subgroups and homomorphisms}
+\subsubsection*{Groups, subgroups and homomorphisms}
 \begin{definition}[Group]
 A group is a non-empty set $G$ together with a binary operation \begin{align*}
     \cdot:G\times G&\rightarrow G\\
@@ -116,7 +116,75 @@ Let $(G_1,*)$, $(G_2,\cdot)$ be two groups and $\phi:G_1\rightarrow G_2$ be a gr
 \end{enumerate}
 \end{prop}
 \begin{definition}
-We say a subgroup $(H,\cdot)$ of a group $(G,\cdot)$ is \textit{normal} ($H\lhd G$) if for all $h\in H$ and $g\in G$, we have $g\cdot h\cdot g^{-1}\in H$.
+We say a subgroup $(H,\cdot)$ of a group $(G,\cdot)$ is \textit{normal} ($H\lhd G$) if and only if for all $h\in H$ and $g\in G$, we have $g\cdot h\cdot g^{-1}\in H$.
 \end{definition}
+\begin{prop}
+Let $(G_1,\cdot_1)$, $(G_2,\cdot_2)$ and $(G_3,\cdot_3)$ be three groups and $\phi:(G_1,\cdot_1)\rightarrow(G_2,\cdot_2)$, $\psi:(G_2,\cdot_2)\rightarrow(G_3,\cdot_3)$ be two group morphism. Then the composition $\psi\circ\phi$ is also a group morphism.
+\end{prop}
+\begin{prop}
+Let $(G_1,*)$, $(G_2,\cdot)$ be groups and consider the isomorphism $\phi:(G_1,*)\rightarrow(G_2,\cdot)$. Then $\phi:(G_1,*)\rightarrow(G_2,\cdot)$ is a group morphism.
+\end{prop}
+\begin{theorem}[Classification of cyclic groups]
+Let $(G,\cdot)$ be a group and let $g\in G$ be an element such that $\langle g\rangle=G$. Then:
+\begin{itemize}
+    \item If $|G|=\infty$, then $G\cong\mathbb{Z}$. We can define the isomorphism as follows: 
+    \begin{align*}
+        \phi:\mathbb{Z}&\rightarrow G\\
+        k&\mapsto g^k
+    \end{align*}
+    \item If $|G|=n$, then $G\cong\mathbb{Z}/n\mathbb{Z}$. We can define the isomorphism as follows: 
+    \begin{align*}
+        \phi:\mathbb{Z}/n\mathbb{Z}&\rightarrow G\\
+        \Bar{k}&\mapsto g^k
+    \end{align*}
+\end{itemize}
+\end{theorem}
+\begin{corollary}
+Let $(G,\cdot)$ be a group and let $g\in G$ be an element such that $\langle g\rangle=G$. Then all subgroups of $G$ are cyclic and moreover:
+\begin{itemize}
+    \item If $|G|=\infty$, subgroups of $(G,\cdot)$ are of the form $\langle g^n\rangle$, $n\in\mathbb{N}\cup\{0\}$. 
+    \item If $|G|=n$, then there is a unique subgroup $(H,\cdot)$ of $(G,\cdot)$ for every divisor $d>0$ of $n$. In fact, if $n=dq$, then $H=\langle g^q\rangle$ and $|H|=d$.
+\end{itemize}
+\end{corollary}
+\begin{definition}
+Let $X$ be a set. We define the \textit{symmetric group $S(X)$} as $$S(X)=\{f:X\rightarrow X:f\text{ is bijective}\}\footnote{Observe that if $X=\{1,\ldots,n\}$, then $S(X)=S_n$.}.$$ 
+\end{definition}
+\begin{definition}
+Let $(G,\cdot)$ be a group. We define the functions
+\begin{align*}
+    \ell_g:G&\rightarrow G\qquad &r_g:G&\rightarrow G\\
+    x&\mapsto g\cdot x &x&\mapsto x\cdot g
+\end{align*}
+\end{definition}
+\begin{lemma}
+Let $(G,\cdot)$ be a group. The functions $\ell_g$, $r_g$ are bijective and its inverses are $\ell_{g^{-1}}$, $r_{g^{-1}}$, respectively.
+\end{lemma}
+\begin{prop}
+Let $(G,\cdot)$ be a group. We define the functions:
+\begin{align*}
+    \phi:G&\rightarrow S(G)\qquad &\psi:G&\rightarrow G\\
+    g&\mapsto \ell_g &g&\mapsto r_{g^{-1}}
+\end{align*}
+Then, $\phi$ and $\psi$ are injective group morphisms.
+\end{prop}
+\begin{theorem}[Cayley's theorem]
+Let $(G,\cdot)$ be a group. Then there exists an injective morphism $$\phi:(G,\cdot)\rightarrow S(G).$$
+\end{theorem}
+\begin{corollary}
+If $(G,\cdot)$ is a group with $|G|=n\in\mathbb{N}$, then we can think $(G,\cdot)$ as as subgroup of $S_n$.
+\end{corollary}
+\begin{definition}
+Let $(G,\cdot)$ be a finite group and $(H,\cdot)$ a subgroup of $(G,\cdot)$. Let $g_1,g_2\in G$. We say $g_1\sim g_2\iff g_1g_2^{-1}\in H$.
+\end{definition}
+\begin{lemma}
+Let $(G,\cdot)$ be a finite group and $(H,\cdot)$ a subgroup of $(G,\cdot)$. Then:
+\begin{enumerate}
+    \item $\sim$ is an equivalence relation.
+    \item If $g\in G$, $[g]=Hg=\{h\cdot g:h\in H\}$.
+\end{enumerate}
+\end{lemma}
+\begin{theorem}[Lagrange's theorem]
+Let $(G,\cdot)$ be a finite group and $(H,\cdot)$ a subgroup of $(G,\cdot)$. Then $|H|\mid|G|$.
+\end{theorem}
 \end{multicols}
 \end{document}
