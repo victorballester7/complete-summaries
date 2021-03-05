@@ -13,10 +13,11 @@ jobs:
       - name: Set up Git repository
         uses: actions/checkout@v2
       - name: Delete
-        uses: ame-yu/action-delete-latest-release@v2
+        uses: dev-drprasad/delete-older-releases@v0.1.0
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          
+          keep_latest: 2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Compile LaTeX document
         uses: xu-cheng/latex-action@v2
         with:
