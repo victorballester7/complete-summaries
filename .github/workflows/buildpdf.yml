@@ -25,10 +25,6 @@ jobs:
           root_file: |
             main.tex
             Mathematics/2nd/Mathematical_analysis/Mathematical_analysis.tex
-      - uses: actions/upload-artifact@v2
-        with:
-          name: Mathematical_analysis4
-          path: Mathematics/2nd/Mathematical_analysis/Mathematical_analysis.pdf
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -39,7 +35,6 @@ jobs:
           release_name: Release ${{ github.run_number }}
           draft: false
           prerelease: false
-
       - name: Upload Release Asset
         id: upload-release-asset 
         uses: actions/upload-release-asset@v1
@@ -48,7 +43,7 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} 
           asset_path: ./main.pdf
-          asset_name: main.pdf
+          asset_name: Compiled-files/main.pdf
           asset_content_type: pdf
       - name: Upload Release Asset2
         id: upload-release-asset2
@@ -58,5 +53,5 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} 
           asset_path: ./Mathematical_analysis.pdf
-          asset_name: Mathematical_analysis.pdf
+          asset_name: Compiled-files/Mathematical_analysis.pdf
           asset_content_type: pdf
