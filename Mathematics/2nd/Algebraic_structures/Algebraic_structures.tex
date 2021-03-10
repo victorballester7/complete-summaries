@@ -5,11 +5,11 @@
 \begin{document}
 \begin{multicols}{2}[\section{Algebraic structures}]
 \subsection{Groups}
-\subsubsection*{Groups, subgroups and homomorphisms}
+\subsubsection*{Groups and subgroups}
 \begin{definition}[Group]
 A group is a non-empty set $G$ together with a binary operation \begin{align*}
-    \cdot:G\times G&\rightarrow G\\
-    (g_1,g_2)&\mapsto g_1\cdot g_2
+    \cdot:G\times G&\longrightarrow G\\
+    (g_1,g_2)&\longmapsto g_1\cdot g_2
 \end{align*}
 satisfying the following properties:
 \begin{enumerate}
@@ -17,7 +17,7 @@ satisfying the following properties:
     \item Identity element: $$\exists e\in G:e\cdot g=g\cdot e=g,\quad\forall g\in G.\footnote{From now on, we will denote $e$ or $e_G$ the identity element of the group $(G,\cdot)$.}$$
     \item Inverse element: $$\forall g\in G, \exists h\in G:g\cdot h=h\cdot g=e.$$ We denote $h$ by $g^{-1}$.
 \end{enumerate}
-If, moreover, we have $g_1\cdot g_2=g_2\cdot g_1$ $\forall g_1,g_2\in G$, we say the group $(G,\cdot)$ is \textit{commutative} or \textit{abelian}.\footnote{Sometimes to simplify the notation and if the context is clear, we will refer to $G$ directly as the group as well as the set.}
+If, moreover, we have $g_1\cdot g_2=g_2\cdot g_1$ $\forall g_1,g_2\in G$, we say the group $(G,\cdot)$ is \textit{commutative} or \textit{abelian}\footnote{Sometimes to simplify the notation and if the context is clear, we will refer to $G$ directly as the group as well as the set.}.
 \end{definition}
 \begin{lemma}
 Let $(G,\cdot)$ be a group. Then,
@@ -42,10 +42,10 @@ Let $(G,\cdot)$ be a group and $H\ne\emptyset$ a subset of $G$. Then $$(H,\cdot)
 If $(H,+)$ is a subgroup of $(\mathbb{Z},+)$, then $\exists n\in\mathbb{Z}$ such that $H=n\mathbb{Z}=\{nk:k\in\mathbb{Z}\}$.
 \end{prop}
 \begin{prop}
-Let $(G_i,*_i)$ for $i=1,\ldots, n$ be groups. Then the product $$(G_1,*_1)\times\cdots\times(G_n,*_n)$$ is also a group with the operation $\cdot$ defined as $$(g_1,\ldots,g_n)\cdot(g_1',\ldots,g_n')=(g_1*_1g_1',\ldots,g_n*_ng_n'),$$ where $g_i,g_i'\in G_i$.
+Let $(G_i,*_i)$, for $i=1,\ldots, n$, be groups. Then the product $$(G_1,*_1)\times\cdots\times(G_n,*_n)$$ is also a group with the operation $\cdot$ defined as $$(g_1,\ldots,g_n)\cdot(g_1',\ldots,g_n')=(g_1*_1g_1',\ldots,g_n*_ng_n'),$$ where $g_i,g_i'\in G_i$.
 \end{prop}
 \begin{definition}
-The \textit{order of a group} is the number of elements in its set.
+The \textit{order of a group $(G,\cdot)$} is the number of elements in its set, that is, $|G|$.
 \end{definition}
 \begin{lemma}
 Let $(G,\cdot)$ be a group and $\{(H_i,\cdot):i\in I\}$ a set of subgroups of $(G,\cdot)$. Then if $$H=\displaystyle\bigcap_{i\in I}H_i,$$ we have that $(H,\cdot)$ is also a subgroup of $(G,\cdot)$.
@@ -82,17 +82,26 @@ Let $(G,\cdot)$ be a group and $g\in G$. Then, $$o(g)=\min\{i>0:g^i=e\}.$$ If no
 \begin{corollary}
 Let $n>1$ be an integer and $\Bar{a}\in\mathbb{Z}/n\mathbb{Z}$. Then $$o(\Bar{a})=\frac{n}{\gcd(a,n)}.$$
 \end{corollary}
+\begin{lemma}
+Let $(G,\cdot)$ be a group, $g\in G$ and $o(g)=n$. Then:
+\begin{enumerate}
+    \item $g^m=e\iff n\mid m$.
+    \item $g^m=g^{m'}\iff m=m'\mod{n}$.
+    \item If $0\leq i\leq n$, then $g^{-i}=(g^i)^{-1}=g^{n-i}$.
+\end{enumerate}
+\end{lemma}
 \begin{corollary}
 Let $(G_i,*_i)$ for $i=1,\ldots, n$ be groups. For $i=1,\ldots,n$, let $g_i\in G_i$ and consider the element $g=(g_1,\ldots,g_n)\in(G_1,*_1)\times\cdots\times(G_n,*_n)$. Then $$o(g)=\lcm(o(g_1),\ldots,o(g_n)).$$
 \end{corollary}
 \begin{prop}
 Let $(G,\cdot)$ be a group and $X\subseteq G$ a subset of $G$. Then $$\langle X\rangle=\{e\}\cup\{g_1^{\alpha_1}\cdot\cdots\cdot g_n^{\alpha_n}:n\in\mathbb{N},\alpha_i\in\mathbb{Z},g_i\in X\}.$$
 \end{prop}
+\subsubsection*{Group morphisms}
 \begin{definition}[Group morphism]
 Let $(G,*)$, $(H,\cdot)$ be two groups. A \textit{morphism from $(G,*)$ to $(H,\cdot)$} is a function $\phi:G\rightarrow H$ such that $$\phi(g_1*g_2)=\phi(g_1)\cdot\phi(g_2),\quad\forall g_1,g_2\in G.$$
 \end{definition}
 \begin{lemma}
-Let $\phi:G_1\rightarrow G_1$ be a morphism between $(G_1,*)$ and $(G_2,\cdot)$. Then,
+Let $\phi:G_1\rightarrow G_2$ be a morphism between $(G_1,*)$ and $(G_2,\cdot)$. Then,
 \begin{enumerate}
     \item $\phi(e_1)=e_2$.
     \item $\phi(g^{-1})=\phi(g)^{-1},\quad\forall g\in G_1$.
@@ -105,42 +114,43 @@ Let $(G_1,*)$, $(G_2,\cdot)$ be two groups and $\phi:G_1\rightarrow G_2$ be a gr
 \begin{prop}
 Let $(G_1,*)$, $(G_2,\cdot)$ be two groups and $\phi:G_1\rightarrow G_2$ be a group morphism. Then:
 \begin{enumerate}
-    \item $\ker(\phi)$ is a subgroup of $G_1$ and $\im(\phi)$ is a subgroup of $G_2$.
-    \item The following are equivalent:
+    \item $\ker(\phi)$ is a subgroup of $(G_1,*)$ and $\im(\phi)$ is a subgroup of $(G_2,\cdot)$.
+    \item Let $g,g'\in G_1$. the following statements are equivalent:
     \begin{enumerate}
-        \item $\phi(g_1)=\phi(g_2)$.
-        \item $g_1*g_2^{-1}\in\ker(\phi)$.
-        \item $g_2^{-1}*g_1\in\ker(\phi)$.
+        \item $\phi(g)=\phi(g')$.
+        \item $g*g'^{-1}\in\ker(\phi)$.
+        \item $g'^{-1}*g\in\ker(\phi)$.
     \end{enumerate}
     \item $\phi$ is injective if and only if $\ker(\phi)=\{e_1\}$.
+    \item $\phi$ is surjective if and only if $\im(\phi)=G_2$.
 \end{enumerate}
 \end{prop}
-\begin{definition}
-We say a subgroup $(H,\cdot)$ of a group $(G,\cdot)$ is \textit{normal} ($H\lhd G$) if and only if for all $h\in H$ and $g\in G$, we have $g\cdot h\cdot g^{-1}\in H$.
-\end{definition}
 \begin{prop}
 Let $(G_1,\cdot_1)$, $(G_2,\cdot_2)$ and $(G_3,\cdot_3)$ be three groups and $\phi:(G_1,\cdot_1)\rightarrow(G_2,\cdot_2)$, $\psi:(G_2,\cdot_2)\rightarrow(G_3,\cdot_3)$ be two group morphism. Then the composition $\psi\circ\phi$ is also a group morphism.
 \end{prop}
 \begin{prop}
 Let $(G_1,*)$, $(G_2,\cdot)$ be groups and consider the isomorphism $\phi:(G_1,*)\rightarrow(G_2,\cdot)$. Then $\phi^{-1}:(G_2,\cdot)\rightarrow(G_1,*)$ is a group morphism.
 \end{prop}
+\begin{definition}
+Two groups $(G_1,*)$, $(G_2,\cdot)$ are \textit{isomorphic}, $G_1\cong G_2$, if there exists an isomorphism $\phi:G_1\rightarrow G_2$.
+\end{definition}
 \begin{theorem}[Classification of cyclic groups]
-Let $(G,\cdot)$ be a group and let $g\in G$ be an element such that $\langle g\rangle=G$. Then:
+Let $(G,\cdot)$ be a group and let $g\in G$ be an element such that $\langle g\rangle=G$.
 \begin{itemize}
     \item If $|G|=\infty$, then $G\cong\mathbb{Z}$. We can define the isomorphism as follows: 
     \begin{align*}
-        \phi:\mathbb{Z}&\rightarrow G\\
-        k&\mapsto g^k
+        \phi:\mathbb{Z}&\longrightarrow G\\
+        k&\longmapsto g^k
     \end{align*}
     \item If $|G|=n$, then $G\cong\mathbb{Z}/n\mathbb{Z}$. We can define the isomorphism as follows: 
     \begin{align*}
-        \phi:\mathbb{Z}/n\mathbb{Z}&\rightarrow G\\
-        \Bar{k}&\mapsto g^k
+        \phi:\mathbb{Z}/n\mathbb{Z}&\longrightarrow G\\
+        \Bar{k}&\longmapsto g^k
     \end{align*}
 \end{itemize}
 \end{theorem}
 \begin{corollary}
-Let $(G,\cdot)$ be a group and let $g\in G$ be an element such that $\langle g\rangle=G$. Then all subgroups of $G$ are cyclic and moreover:
+Let $(G,\cdot)$ be a group and let $g\in G$ be an element such that $\langle g\rangle=G$. Then all subgroups of $G$ are cyclic. Moreover:
 \begin{itemize}
     \item If $|G|=\infty$, subgroups of $(G,\cdot)$ are of the form $\langle g^n\rangle$, $n\in\mathbb{N}\cup\{0\}$. 
     \item If $|G|=n$, then there is a unique subgroup $(H,\cdot)$ of $(G,\cdot)$ for every divisor $d>0$ of $n$. In fact, if $n=dq$, then $H=\langle g^q\rangle$ and $|H|=d$.
@@ -152,8 +162,8 @@ Let $X$ be a set. We define the \textit{symmetric group $(S(X),\circ)$} where $$
 \begin{definition}
 Let $(G,\cdot)$ be a group. We define the functions
 \begin{align*}
-    \ell_g:G&\rightarrow G&r_g:G&\rightarrow G\\
-    x&\mapsto g\cdot x &x&\mapsto x\cdot g
+    \ell_g:G&\longrightarrow G&r_g:G&\longrightarrow G\\
+    x&\longmapsto g\cdot x &x&\longmapsto x\cdot g
 \end{align*}
 \end{definition}
 \begin{lemma}
@@ -162,8 +172,8 @@ Let $(G,\cdot)$ be a group. The functions $\ell_g$, $r_g$ are bijective and its 
 \begin{prop}
 Let $(G,\cdot)$ be a group. We define the functions:
 \begin{align*}
-    \phi:G&\rightarrow S(G)&\psi:G&\rightarrow G\\
-    g&\mapsto \ell_g &g&\mapsto r_{g^{-1}}
+    \phi:G&\longrightarrow S(G)&\psi:G&\longrightarrow G\\
+    g&\longmapsto \ell_g &g&\longmapsto r_{g^{-1}}
 \end{align*}
 Then, $\phi$ and $\psi$ are injective group morphisms.
 \end{prop}
@@ -173,21 +183,33 @@ Let $(G,\cdot)$ be a group. Then there exists an injective morphism $$\phi:(G,\c
 \begin{corollary}
 If $(G,\cdot)$ is a group with $|G|=n\in\mathbb{N}$, then we can think $(G,\cdot)$ as as subgroup of $S_n$.
 \end{corollary}
+\subsubsection*{Cosets}
 \begin{definition}
-Let $(G,\cdot)$ be a finite group and $(H,\cdot)$ a subgroup of $(G,\cdot)$. Let $g_1,g_2\in G$. We say $g_1\sim g_2\iff g_1g_2^{-1}\in H$. We say $g_1\approx g_2\iff g_2^{-1}g_1\in H$
+Let $(G,\cdot)$ be a finite group, $(H,\cdot)$ a subgroup of $(G,\cdot)$ and $g_1,g_2\in G$. We say $g_1\sim g_2\iff g_1\cdot g_2^{-1}\in H$. We say $g_1\approx g_2\iff g_2^{-1}\cdot g_1\in H$.
 \end{definition}
 \begin{lemma}
 Let $(G,\cdot)$ be a finite group and $(H,\cdot)$ a subgroup of $(G,\cdot)$. Then:
 \begin{enumerate}
     \item $\sim$ and $\approx$ are equivalence relations.
-    \item If $g\in G$, then $$[g]_\sim=Hg=\{h\cdot g:h\in H\},\quad [g]_\approx=gH=\{g\cdot h':h'\in H\}.$$
+    \item If $g\in G$, then 
+    \begin{gather*}
+        [g]_\sim=H\cdot g=\{h\cdot g:h\in H\},\\ [g]_\approx=g\cdot H=\{g\cdot h':h'\in H\}.
+    \end{gather*}
+    Usually we say that $H\cdot g$ are the \textit{right cosets in $G$} and $g\cdot H$, the \textit{left cosets in $G$}, for every $g\in G$ and 
 \end{enumerate}
 \end{lemma}
+\begin{definition}
+Let $(G,\cdot)$ be a finite group and $(H,\cdot)$ a subgroup of $(G,\cdot)$. The we define the \textit{set of left cosets} and the \textit{set of right cosets} as follows:
+$$\quot{G}{\sim}=\{g\cdot H:g\in G\},\quad\quot{G}{\approx}=\{H\cdot g:g\in G\}.$$
+\end{definition}
+\begin{definition}
+We say a subgroup $(H,\cdot)$ of a group $(G,\cdot)$ is \textit{normal}, $H\lhd G$, if and only if for all $h\in H$ and $g\in G$, we have $g\cdot h\cdot g^{-1}\in H$.
+\end{definition}
 \begin{prop}
-Let $(G,\cdot)$ be a group and $(H,\cdot)$ a subgroup of $(G,\cdot)$. The following are equivalent:
+Let $(G,\cdot)$ be a group and $(H,\cdot)$ a subgroup of $(G,\cdot)$. the following statements are equivalent:
 \begin{enumerate}
     \item $H\lhd G$.
-    \item For all $g\in G$, $gH=Hg$.
+    \item For all $g\in G$, $g\cdot H=H\cdot g$.
 \end{enumerate}
 \end{prop}
 \begin{theorem}[Lagrange's theorem]
@@ -197,10 +219,31 @@ Let $(G,\cdot)$ be a finite group and $(H,\cdot)$ a subgroup of $(G,\cdot)$. The
 Let $(G,\cdot)$ be a finite group and $(H,\cdot)$ a subgroup of $(G,\cdot)$. We define the \textit{index of $(H,\cdot)$ in $(G,\cdot)$} as $$[G:H]:=\frac{|G|}{|H|}.$$
 \end{definition}
 \begin{corollary}
-Let $(G,\cdot)$ be a finite group and $g\in G$. Then:
+Let $(G,\cdot)$ be a finite group and $(H,\cdot)$ a subgroup of $(G,\cdot)$. Then: $$[G:H]=\left|\quot{G}{\sim}\right|=\left|\quot{G}{\approx}\right|.$$
+\end{corollary}
+\begin{corollary}
+Let $(G,\cdot)$ be a finite group. 
 \begin{enumerate}
-    \item i
+    \item If $g\in G$, then $o(g)\mid |G|$.
+    \item If $|G|$ is prime, then $(G,\cdot)$ is cyclic.
+    \item If $(H,\cdot)$ and $(K,\cdot)$ are subgroups of $(G,\cdot)$ and $\gcd(|H|,|K|)=1$, then $H\cap K=\{e\}$.
 \end{enumerate}
 \end{corollary}
+\begin{definition}[Quotient group]
+Let $(G,\cdot)$ be a finite group and $(H,\cdot)$ a normal subgroup of $(G,\cdot)$. We define the \textit{quotient group $\left(\quot{G}{H},*\right)$}, where $$\quot{G}{H}=\quot{G}{\sim}=\quot{G}{\approx}$$ and 
+\begin{align*}
+    *:\quot{G}{H}\times\quot{G}{H}&\longrightarrow\quot{G}{H}\\
+    (Hg_1,Hg_2)&\longmapsto H(g_1\cdot g_2)
+\end{align*}
+\end{definition}
+\begin{lemma}
+Let $(G,\cdot)$ be a finite group and $(H,\cdot)$ a normal subgroup of $(G,\cdot)$. The projection 
+\begin{align*}
+    \pi:G&\longrightarrow\quot{G}{H}\\
+    g&\longmapsto\Bar{g}=Hg
+\end{align*}
+is a group morphism.
+\end{lemma}
+\subsubsection*{Isomorphism theorems}
 \end{multicols}
 \end{document}
