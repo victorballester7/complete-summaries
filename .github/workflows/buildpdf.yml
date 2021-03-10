@@ -25,16 +25,10 @@ jobs:
           root_file: |
             main.tex
             Mathematics/2nd/Mathematical_analysis/Mathematical_analysis.tex
-      - name: Copy
-        uses: andstor/copycat-action@v3
+      - uses: actions/upload-artifact@v2
         with:
-          personal_token: ${{ secrets.PERSONAL_TOKEN }}
-          src_path: ./main.pdf
-          dst_path: Mathematics/2nd
-          dst_owner: victorballester7
-          dst_repo_name: victorballester7.github.io
-          src_branch: main
-          dst_branch: main
+          name: PDF
+          path: main.pdf
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
