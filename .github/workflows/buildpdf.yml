@@ -22,7 +22,9 @@ jobs:
       - name: Compile LaTeX document
         uses: xu-cheng/latex-action@v2
         with:
-          root_file: main.tex
+          root_file: |
+            main.tex
+            Mathematics/2nd/Mathematical_analysis/Mathematical_analysis.tex
 
       - name: Create Release
         id: create_release
@@ -44,4 +46,14 @@ jobs:
           upload_url: ${{ steps.create_release.outputs.upload_url }} 
           asset_path: ./main.pdf
           asset_name: main.pdf
+          asset_content_type: pdf
+      - name: Upload Release Asset2
+        id: upload-release-asset2
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} 
+          asset_path: ./Mathematics/2nd/Mathematical_analysis/Mathematical_analysis.pdf
+          asset_name: Mathematical_analysis.pdf
           asset_content_type: pdf
