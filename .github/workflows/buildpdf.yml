@@ -24,15 +24,189 @@ jobs:
         with:
           root_file: |
             main.tex
+            Mathematics/1st/Fundamentals_of_mathematics/Fundamentals_of_mathematics.tex
+            Mathematics/1st/Linear_algebra/Linear_algebra.tex
+            Mathematics/1st/Real-valued_functions/Real-valued_functions.tex
+            Mathematics/2nd/Algebraic_structures/Algebraic_structures.tex
+            Mathematics/2nd/Discrete_mathematics/Discrete_mathematics.tex
+            Mathematics/2nd/Functions_of_several_variables/Functions_of_several_variables.tex
+            Mathematics/2nd/Linear_geometry/Linear_geometry.tex
             Mathematics/2nd/Mathematical_analysis/Mathematical_analysis.tex
-      - uses: actions/checkout@v2
-      - run: |
-          set -x
-          assets=()
-          for asset in ./*; do
-            assets+=("-a" "$asset")
-          done
-          tag_name="${GITHUB_REF##*/}"
-          hub release create "${assets[@]}" -m "$tag_name" "$tag_name"
+            Mathematics/2nd/Numerical_methods/Numerical_methods.tex
+            Physics/1st/Chemistry/Chemistry.tex
+            Physics/1st/Electricity_and_magnetism/Electricity_and_magnetism.tex
+            Physics/1st/Mechanics_and_special_relativity/Mechanics_and_special_relativity.tex
+            Physics/1st/Waves_and_optics/Waves_and_optics.tex
+            Physics/2nd/Classical_mechanics/Classical_mechanics.tex
+            Physics/2nd/Electromagnetism/Electromagnetism.tex
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.run_number }}
+          release_name: Release ${{ github.run_number }}
+          draft: false
+          prerelease: false
+
+      - name: Upload Release Asset
+        id: upload-release-asset 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} 
+          asset_path: ./main.pdf
+          asset_name: main.pdf
+          asset_content_type: pdf
+      - name: Upload Release Asset1
+        id: upload-release-asset1
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} 
+          asset_path: ./Fundamentals_of_mathematics.pdf
+          asset_name: Fundamentals_of_mathematics.pdf
+          asset_content_type: pdf
+      - name: Upload Release Asset2
+        id: upload-release-asset2 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} 
+          asset_path: ./Linear_algebra.pdf
+          asset_name: Linear_algebra.pdf
+          asset_content_type: pdf
+      - name: Upload Release Asset3
+        id: upload-release-asset3 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} 
+          asset_path: ./Real-valued_functions.pdf
+          asset_name: Real-valued_functions.pdf
+          asset_content_type: pdf
+      - name: Upload Release Asset4
+        id: upload-release-asset4
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} 
+          asset_path: ./Algebraic_structures.pdf
+          asset_name: Algebraic_structures.pdf
+          asset_content_type: pdf
+      - name: Upload Release Asset5
+        id: upload-release-asset5 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} 
+          asset_path: ./Discrete_mathematics.pdf
+          asset_name: Discrete_mathematics.pdf
+          asset_content_type: pdf
+      - name: Upload Release Asset6
+        id: upload-release-asset6 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} 
+          asset_path: ./Functions_of_several_variables.pdf
+          asset_name: Functions_of_several_variables.pdf
+          asset_content_type: pdf
+      - name: Upload Release Asset7
+        id: upload-release-asset7 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} 
+          asset_path: ./Linear_geometry.pdf
+          asset_name: Linear_geometry.pdf
+          asset_content_type: pdf
+      - name: Upload Release Asset8
+        id: upload-release-asset8
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} 
+          asset_path: ./Mathematical_analysis.pdf
+          asset_name: Mathematical_analysis.pdf
+          asset_content_type: pdf
+      - name: Upload Release Asset9
+        id: upload-release-asset9
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} 
+          asset_path: ./Numerical_methods.pdf
+          asset_name: Numerical_methods.pdf
+          asset_content_type: pdf
+      - name: Upload Release Asset10
+        id: upload-release-asset10 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} 
+          asset_path: ./Chemistry.pdf
+          asset_name: Chemistry.pdf
+          asset_content_type: pdf
+      - name: Upload Release Asset11
+        id: upload-release-asset11 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} 
+          asset_path: ./Electricity_and_magnetism.pdf
+          asset_name: Electricity_and_magnetism.pdf
+          asset_content_type: pdf
+      - name: Upload Release Asset12
+        id: upload-release-asset12 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} 
+          asset_path: ./Mechanics_and_special_relativity.pdf
+          asset_name: Mechanics_and_special_relativity.pdf
+          asset_content_type: pdf
+      - name: Upload Release Asset13
+        id: upload-release-asset13 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} 
+          asset_path: ./Waves_and_optics.pdf
+          asset_name: Waves_and_optics.pdf
+          asset_content_type: pdf
+      - name: Upload Release Asset14
+        id: upload-release-asset14
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} 
+          asset_path: ./Classical_mechanics.pdf
+          asset_name: Classical_mechanics.pdf
+          asset_content_type: pdf
+      - name: Upload Release Asset15
+        id: upload-release-asset15
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} 
+          asset_path: ./Electromagnetism.pdf
+          asset_name: Electromagnetism.pdf
+          asset_content_type: pdf
