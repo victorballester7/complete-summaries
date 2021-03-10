@@ -1,54 +1,59 @@
 \usepackage[utf8]{inputenc}
-\usepackage{amsthm, amsmath, mathtools, amssymb}
-\usepackage[a4paper,headheight=13.1pt,left=1.5cm,right=1.5cm,top=2cm,bottom=2cm]{geometry}
-\usepackage{afterpage}
+\usepackage[a4paper,headheight=14pt,left=1.5cm,right=1.5cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{amsthm, amsmath, mathtools, amssymb} % for math commands
+\usepackage{afterpage} 
 \usepackage{etoolbox}
-\usepackage{fancyhdr}
+\usepackage{fancyhdr} % for customizing page-style (mainly headings)
 \usepackage{chngcntr}
 \usepackage{titlesec}
-\usepackage[colorlinks,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
-\usepackage{bookmark}
-\usepackage[hypcap=false]{caption}
-\usepackage{multicol}
-\usepackage[english]{babel}
-\usepackage[version=4]{mhchem} % Química
-\usepackage{multirow}
+\usepackage[colorlinks,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref} % link automatically references
+\usepackage[hypcap=false]{caption} % basically for using the command \captionof{}, which is useful in some environments, others than \beging{figure}.
+\usepackage{multicol} % organize the whole document in multiple columns.
+\usepackage[english]{babel} % for improving use of English and mainly the use of hyphenation.
+\usepackage[version=4]{mhchem} % used only for chemistry.
+\usepackage{multirow} % multirow in a table, for example 
 \usepackage{array,makecell}
-\usepackage{comment}
-%%%%% tikz %%%%%%
-\usepackage{tikz}
-\usepackage{tkz-euclide}
+%%%%% tikz images %%%%%%
+\usepackage{tikz,tkz-euclide}
 \usetikzlibrary{decorations.pathmorphing,patterns,calc}
-%%%%%%%%%%%%%%%%%
-\usepackage{import}
+%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{import} % for importing tikz pictures or .tex files to main.tex
 \usepackage{graphicx}
 \usepackage{float}
-\usepackage[es-ES]{datetime2}
+\usepackage[es-ES]{datetime2} % for writing the current date when compiling
 
-%%%% Page-style(heading) %%%%
+%%%% Page-style (heading) %%%%
 \pagestyle{fancy}
 \fancyhf{}
 \fancyhead[L]{\leftmark}
 \fancyhead[R]{\rightmark}
 \fancyfoot[C]{\thepage}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\titleformat{\subsection}[hang]{\normalfont\large\bfseries}{\thesubsection\hspace{6pt}{\textbf{$|$}}\hspace{-6pt}}{1em}{}
 
+%%%%%% Title format for subsection %%%%%%
+\titleformat{\subsection}[hang]{\normalfont\large\bfseries}{\thesubsection\hspace{6pt}{\textbf{$|$}}\hspace{-6pt}}{1em}{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%% Math-commands %%%%%%%
 \newcommand\bigzero{\makebox(0,0){\text{\Huge0}}} % 0 big zero in a matrix
 \DeclareMathOperator{\rot}{rot} % divergence
 \DeclareMathOperator{\dive}{div} % rotational
 \DeclareMathOperator{\grad}{grad} % gradient
 \DeclareMathOperator{\lcm}{lcm} % least common multiple
 \DeclareMathOperator{\im}{Im} % Image of a function
+\newcommand{\upint}[2]{\overline{\int_{#1}^{#2}}} % upper integral
+\newcommand{\lowint}[2]{\underline{\int_{#1}^{#2}}} % lower integral
+\newcommand*\quot[2]{{^{\textstyle #1}\big/_{\textstyle #2}}} % quotient grup (left-quotient grup). Use A/B--->\quot{A}{B}.
+\newcommand*\rquot[2]{{_{\textstyle #1}\big\backslash^{\textstyle #2}}} % quotient grup (right-quotient grup). Use A\B--->\quot{A}{B}.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%%%%%% Enumeration-commands %%%%%%%
 \renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}}
 \renewcommand{\labelenumi}{\arabic{enumi}.}
 \renewcommand{\labelenumii}{\roman{enumii})}
-\newcommand{\upint}[2]{\overline{\int_{#1}^{#2}}}
-\newcommand{\lowint}[2]{\underline{\int_{#1}^{#2}}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\setcounter{secnumdepth}{3} %Numeric subsubsection in report documentclass
-
+%%%%% Theorems, definitions,... environments %%%%%
 \newtheoremstyle{math}
   {\topsep}   % ABOVESPACE
   {\topsep}   % BELOWSPACE
@@ -88,3 +93,4 @@
 \renewcommand\thecorollary{\arabic{section}.\arabic{corollary}}
 \renewcommand\thelemma{\arabic{section}.\arabic{lemma}}
 \renewcommand\theprop{\arabic{section}.\arabic{prop}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
