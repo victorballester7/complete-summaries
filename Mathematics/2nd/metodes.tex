@@ -1,0 +1,228 @@
+\documentclass[a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsthm, amsmath, mathtools, amssymb}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage[colorlinks,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\usepackage[spanish,es-tabla,es-nodecimaldot]{babel}
+\usepackage{multirow}
+
+\renewcommand{\labelenumii}{\alph{enumii})}
+\title{\bfseries\Large PRÁCTICA 1: ERRORES}
+
+\author{Grupo 1\\Júlia Albero Pes, NIU:1566550\\ Víctor Ballester Ribó, NIU:1570866}
+\date{\parbox{\linewidth}{\centering
+  Métodos numéricos\endgraf
+  Grado en Matemáticas\endgraf
+  Universitat Autònoma de Barcelona\endgraf
+  15 de Marzo de 2021}}
+%\setlength{\parindent}{0pt}
+
+\begin{document}
+\maketitle
+\newpage
+\section*{Problema 1}
+Los resultados que hemos obtenido al calcular la función \begin{equation}
+    f(x)=\left\{\begin{array}{ccc}
+        \cfrac{1-\cos(x)}{x^2} & \text{si} & x\ne 0 \\
+        \cfrac{1}{2} & \text{si} & x=0 
+    \end{array}\right.
+    \label{f}
+\end{equation} en el punto $x_0=1,2\times10^{-5}$ en precisión simple y en precisión doble se muestran en la tabla siguiente:\par
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{|c|c|c|}
+        \hline
+         & Valor en precisión simple & Valor en precisión doble \\
+         \hline
+         $f(x_0)$ & 0 & 0.4999997329749008 \\
+         \hline
+    \end{tabular}
+    \caption{Resultados obtenidos al evaluar $f(x)$ en el punto $x_0=1,2\times10^{-5}$ con simple y doble precisión.}
+    \label{tab:1}
+\end{table}
+Claramente vemos que el programa en precisión simple esta fallando. El problema viene al evaluar la función $\cos(x)$ en un número relativamente cercano a 0. Sabemos que un número guardado en precisión simple tiene 7 u 8 cifras significativas. Ahora bien si calculamos el valor de $\cos(x_0)$ con al menos 12 cifras exactas, por ejemplo, tenemos que $\cos(x_0)\approx 0.999999999928\times 10^0$. Pero inmediatamente vemos que éste número aproximado a 8 cifras significativas es exactamente 1, por lo que el ordenador, en precisión simple, intuye que $\cos(x_0)=1$. Y por lo tanto: 
+\begin{equation*}
+    f(x_0)=\frac{1-\cos(x_0)}{x_0^2}\approx\frac{1-1}{x_0^2}=0
+\end{equation*}
+Y de aquí sale el 0 obtenido al evaluar la función. Con precisión doble éste fenómeno no pasa porque un número guardado en precisión doble tiene 15 o 16 cifras significativas con lo cual viendo la expresión anterior de $\cos(x_0)$ con 12 cifras se intuye que, en doble precisión, $\cos(x_0)\ne 1$.\par
+Para reducir el error utilizando la expresión \eqref{f}, emplearemos la relación trigonométrica siguiente: $$1-\cos(x)=2\sin(x/2)^2.$$ Substituyendo ésta expresión en \eqref{f} obtenemos la nueva función
+\begin{equation}
+g(x)=\left\{\begin{array}{ccc}
+    \cfrac{2\sin(x/2)^2}{x^2} & \text{si} & x\ne 0 \\
+    \cfrac{1}{2} & \text{si} & x=0 
+\end{array}\right.
+\label{g}
+\end{equation}
+que es matemáticamente equivalente a $f(x)$.\par Los resultados obtenidos al evaluar $g(x)$ en $x=x_0$ se muestran en la tabla siguiente:\par
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{|c|c|c|}
+        \hline
+         & Algoritmo en precisión simple & Algoritmo en precisión doble \\
+         \hline
+         $f(x_0)$ & $0.5$ & $0.499999999994$\\
+         \hline
+    \end{tabular}
+    \caption{Resultados obtenidos al evaluar $g(x)$ en el punto $x_0=1,2\times10^{-5}$ con simple y doble precisión.}
+    \label{tab:2}
+\end{table}
+Observando las tablas \ref{tab:1} i \ref{tab:2} vemos una clara diferencia entre los resultados, especialmente en precisión simple. La razón por la que $g(x_0)=0.5\ne0$ es la siguiente. Fijémonos que $\sin(x_0/2)\approx5.99999999996400\times 10^{-6}$. Por lo tanto, trabajando en precisión simple, tenemos que $\sin(x_0/2)=6\times 10^{-6}$. Haciendo los cálculos obtenemos:
+$$\frac{2\times\sin(x_0/2)\times\sin(x_0/2)}{x_0\times x_0}=\frac{2\times 6\times 10^{-6}\times 6\times 10^{-6}}{1.2\times 10^{-5}\times 1.2\times 10^{-5}}=\frac{7.2\times 10^{-11}}{1.44\times 10^{-10}}=0.5.$$
+En éste caso no tenemos error de cancelación como lo teníamos en el caso de $f(x_0)$.\par
+Notemos que también obtenemos una diferencia, más pequeña por eso, en los valores de $f(x_0)$ i $g(x_0)$ en precisión doble. Esto también se debe al mismo factor de cancelación que hemos comentado. En efecto, tenemos que $\cos(x_0)=0.9999999999280000$, en precisión doble. Es importante mencionar que a partir del último 0, los números que aparezcan no son relativos de la propia función, ya que en precisión doble trabajamos solo con 16 cifras significativas. Es por eso que al restar éste último número a 1 obtenemos solamente las primeras cifras correctas y las demás son inciertas. Y por lo tanto, una vez dividido por $x^2$, obtenemos los primeros dígitos correctos ($0.499999$) pero los dígitos a continuación incorrectos. Observamos que utilizando la función $g(x)$ este problema no ocurre.
+\newpage
+\section*{Problema 2}
+La solución de una ecuación cuadrática con coeficientes reales, $$ax^2+bx+c=0,\quad a\ne0$$ se obtiene a partir de la expresión 
+\begin{equation}
+    x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}
+    \label{2}
+\end{equation}
+Suponiendo que $a>0$ y $b^2>4ac$, como se menciona en el enunciado, podríamos tener errores de cancelación en una de las soluciones cuando $b^2\gg 4ac$. En efecto, si $b^2\gg4ac$ tenemos que $\frac{4ac}{b^2}\ll1$. Ahora bien si $\frac{4ac}{b^2}$ es del orden de $10^{-8}$, quiere decir que $b^2$ es del orden de $10^8$ veces mas grande que $4ac$. En precisión simple esto se traduce a la igualdad $b^2-4ac=b^2$, ya que la primera cifra de $b^2$ y la primera cifra de $4ac$ están separadas por más de 8 posiciones (que es el numero de cifras significativas con el que trabajamos en precisión simple) en el valor $b^2-4ac$. Es por eso que una de las soluciones seria 0.
+\begin{equation}
+x=\frac{-b\pm|b|}{2a}=\left\{\begin{array}{ccccc} \cfrac{-b+b}{2a}=0 & \text{y} & \cfrac{-b-b}{2a}=\cfrac{-b}{a} & \text{si} & b>0\\\\ \cfrac{-b+(-b)}{2a}=\cfrac{-b}{a} & \text{y} & \cfrac{-b-(-b)}{2a}=0 & \text{si} & b<0
+\end{array}\right.
+\end{equation}
+Sin embargo, podemos prescindir de este error multiplicando y dividiendo la solución que sufre éste error de cancelación por el conjugado. Para el caso $b>0$, tenemos que:
+\begin{equation}
+\frac{(-b+\sqrt{b^2-4ac})}{2a}\cdot\frac{(-b-\sqrt{b^2-4ac})}{(-b-\sqrt{b^2-4ac})}=\frac{b^2-b^2+4ac}{2a\cdot(-b-\sqrt{b^2-4ac})}=\frac{4ac}{2a\cdot(-b-\sqrt{b^2-4ac})}=\frac{-2c}{b+\sqrt{b^2-4ac}}.	
+\label{conju1}
+\end{equation} 
+Notemos que para valores $b^2\gg4ac$ tendremos $\displaystyle\frac{-2c}{b+\sqrt{b^2-4ac}}\approx \frac{-c}{b}$.\par Si $b<0$, procedemos de forma análoga a \eqref{conju1}.
+\begin{equation}
+\frac{(-b-\sqrt{b^2-4ac})}{2a}\cdot\frac{(-b+\sqrt{b^2-4ac})}{(-b+\sqrt{b^2-4ac})}=\frac{b^2-b^2+4ac}{2a\cdot(-b+\sqrt{b^2-4ac})}=\frac{4ac}{2a\cdot(-b+\sqrt{b^2-4ac})}=\frac{-2c}{b-\sqrt{b^2-4ac}}	.
+\label{conju2}
+\end{equation}
+Veamos ahora un ejemplo de cómo se comportan estos dos algoritmos para calcular las raíces del polinomio $x^2+100000x+3$ en precisión simple y doble. Los resultados se exponen en la siguiente tabla:\par
+\begin{table}[ht]
+	\centering
+	\begin{tabular}{|c|c|c||c|c|}
+	    \hline
+	    & \multicolumn{2}{c||}{Precisión simple} & \multicolumn{2}{c|}{Precisión doble}\\
+		\cline{2-5} 
+		& solución 1 & solución 2 & solución 1 & solución 2\\
+		\hline
+		Método ordinario & $0$ & $-100000$ & $-3.000000288011506\times10^{-5}$ & $-99999.99997$ \\
+		\hline
+		Método propuesto &  $-2.9999999\times10^{-5}$ & $-100000$ & $-3.0000000009\times10^{-5}$ & $-99999.99997$\\
+		\hline
+	\end{tabular}
+		\caption{Soluciones del polinomio $x^2+100000x+3$ mediante los dos métodos explicados.}
+		\label{tab:10}
+	\end{table}
+En este caso, en precisión simple, es decir trabajando con 8 cifras significativas, tenemos que: $$b^2-4ac=100000^2-4\cdot 3=10^{10}-12\approx10^{10}.$$
+Y por consiguiente $$\frac{-b+\sqrt{b^2-4ac}}{2a}\approx\frac{-100000+\sqrt{10^{10}}}{2}=\frac{-100000+100000}{2}=0.$$ Sin embargo mediante el método propuesto éste valor se convierte en $-2.9999999\times 10^{-5}$, que tiene un error mucho menor que el calculado con el método ordinario.\par Por otro lado, observamos que de forma similar al problema 1, en precisión doble también observamos cierta incertidumbre en los últimos dígitos de la solución 1 calculada con el método ordinario. Esto se debe al mismo error de cancelación con el cual obtenemos la solución 0 en precisión simple.
+\newpage
+\section*{Problema 3}
+En estadística la varianza muestral de $n$ números se define como \begin{equation}
+    s_{n}^2=\frac{1}{n-1}\sum_{i=1}^{n}(x_i-\bar{x}),\quad\text{donde}\quad\frac{1}{n}\sum_{i=1}^{n}x_{i}.
+\end{equation}
+O alternativamente como:  
+\begin{equation}
+    s_{n}^{2}=\frac{1}{n-1}\left[\sum_{i=1}^{n}x_{i}^2-\frac{1}{n}\left(\sum_{i=1}^{n}x_{i}\right)^2\right].
+    \label{v2}
+\end{equation} Denotaremos estos dos métodos para calcular la varianza muestral como $V_{1}$ y $V_{2}$, respectivamente. En lo que sigue mostramos como se comportan las fórmulas de $V_1$ i $V_2$ para varios ejemplos de muestras y en las distintas precisiones.\par Para $n=3$, consideramos el vector $x=\{10000,10001,10002\}$. Los resultados de los cálculos se muestran en la tabla siguiente:\par
+\begin{table}[ht]
+	\centering
+	\begin{tabular}{|c|c|c|c|}
+	    \hline
+		& Precisión simple & Precisión doble \\
+		\hline 
+		$V_{1}$ & 1 & 1\\
+		\hline
+		$V_{2}$ & 0 & 1\\
+		\hline
+	\end{tabular}
+		\caption{Comportamiento de la varianza muestral mediante las diferentes fórmulas.}
+		\label{tab:11}
+\end{table}
+Observamos que mientras la fórmula $V_{1}$ en precisión simple da 1, $V_{2}$ da 0. Esto se debe a que el cálculo en la segunda fórmula utiliza valores de orden de $10^{8}$ (procedentes de $10000^2$) en donde también aparecen dígitos no nulos en las últimas cifras de los números (la de las unidades). Concretamente, si hacemos el cálculo de $\frac{1}{n}\left(\sum_{i=1}^{n}x_{i}\right)^2$ de la fórmula \eqref{v2} con los datos propuestos vemos que da 
+\begin{equation}
+    \frac{1}{3}\left(\sum_{i=1}^3x_{i}\right)^2=\frac{1}{3}(10000+10001+10002)^2=300060003.
+    \label{v11}
+\end{equation}
+Calculemos ahora $\sum_{i=1}^{n}x_{i}^2$: 
+\begin{equation}
+\sum_{i=1}^{3}x_{i}^2=10000^2+10001^2+10002^2=300060005.
+\label{v12}
+\end{equation}
+Fijémonos que los valores de \eqref{v11} y \eqref{v12} son valores iguales en precisión simple ya que solo cambia la novena cifra significativa. Es decir, el programa los lee como $3.0006\times10^8$ en ambos casos, lo que hace que al restarlos de 0.\par
+Esto no ocurre en $V_{1}$ ya que cuando elevamos al cuadrado, que es la operación ``peligrosa", ya hemos restado previamente los números, reduciendo así su orden de magnitud. De ésta forma, el programa no tiene problemas de cancelación. Es decir como $\bar{x}=\frac{1}{3}\displaystile\sum_{i=1}^{n}x_{i}=10001$, entonces $$V_{1}=\frac{1}{2}\sum_{i=1}^{3}(x_i-\bar{x})=\frac{1}{2}\left[(10000-10001)^2+(10001-10001)^2+(10002-10001)^2\right]=\frac{1}{2}\left[1+0+1\right]=1.$$
+Veamos mejor estas discrepancias usando los siguientes vectores de 200 componentes: $$x_{1}=\{1000000,1000001,\dots,1000199\}\quad\text{y}\quad x_{2}=\{1, 1.000001, 1.000002, \dots, 1.000199\}.$$\par
+\begin{table}[ht]
+	\centering
+	\begin{tabular}{|c|c|c||c|c|}
+	    \hline
+	    & \multicolumn{2}{c||}{Precisión simple} & \multicolumn{2}{c|}{Precisión doble}\\
+		\cline{2-5} 
+		& Vector $x_{1}$ & Vector $x_{2}$ & Vector $x_{1}$ & Vector $x_{2}$\\
+		\hline
+		$V_{1}$ & $3350.1887$ & $3.3502197\times 10^{-9}$ & $3350$ & $3.350000000000287\times 10^{-9}$\\
+		\hline
+		$V_{2}$ & $843076.19$ & $-1.5335466\times 10^{-7}$ & $3350$ & $3.350000478024609\times 10^{-9}$\\
+		\hline
+	\end{tabular}
+		\caption{Discrepancias de la varianza muestral mediante $x_{1}$ y $x_{2}$}
+		\label{tab:12}
+	\end{table}
+Observamos que en el caso del vector $x_1$, utilizando $V_2$ obtenemos un valor mucho más grande del que deberíamos. De nuevo, esto se debe a la pérdida de números significativos al elevar al cuadrado los términos de la fórmula $V_2$. Un caso más interesante es el que ocurre con el vector $x_2$. Resulta que aplicando el método $V_2$ obtenemos una varianza negativa, que no puede ser de ninguna manera! En efecto, si calculamos la suma $\frac{1}{n}\left(\sum_{i=1}^{n}x_{i}\right)^2$ aplicada al vector $x_2$ obtendremos, en precisión simple, el valor de $200.03986$. Por otro lado, el valor de $\sum_{i=1}^{n}x_{i}^2$ da $200.03983$, de donde se desprende que la diferencia entre estos dos valores es negativa. Esto se debe, una vez más, a la pérdida de cifras significativas al evaluar los números al cuadrado.
+\newpage
+\section*{Problema 4}
+En la tabla siguiente se muestra el valor de las sumas parciales $S_N$ de la serie numérica 
+\begin{equation}
+    S=\sum_{k=1}^\infty\frac{1}{k^2},
+    \label{pi}
+\end{equation} calculadas en precisión simple y doble y en orden creciente y decreciente para varios valores de $N$.\par
+\begin{table}[ht]
+	\centering
+	\begin{tabular}{|c|c|c|c|}
+	    \hline
+	    & \multicolumn{3}{c|}{Valor de $S_N$ en precisión simple} \\
+		\cline{2-4} 
+		& $N=5000$ & $N=10000$ & $N=30000$\\
+		\hline
+		Orden creciente  & $1.6447253$ & $1.6447253$ & $1.6447253$ \\
+		\hline
+		Orden decreciente  & $1.6447341$ & $1.6448340$  & $1.6449008$ \\
+		\hline
+	\end{tabular}\vspace{5pt}
+	\begin{tabular}{|c|c|c|c|}
+	\hline
+	    & \multicolumn{3}{c|}{Valor de $S_N$ en precisión doble}\\
+		\cline{2-4} 
+		& $N=5000$ & $N=10000$ & $N=30000$ \\
+		\hline
+		Orden creciente & $1.644734086846901$ & $1.644834071848065$ & $1.644900734070444$ \\
+		\hline
+		Orden decreciente & $1.644734086846893$ & $1.644834071848060$ & $1.644900734070442$\\
+		\hline
+	\end{tabular}
+		\caption{Cálculo de la suma $S_N$ para varios valores de $N$ en simple y doble precisión}
+		\label{tab:4}
+	\end{table}
+El valor exacto de la suma de \eqref{pi} sabemos que es $S=\pi^2/6=1.644934066848226...$.  De nuevo, en precisión doble no hay nada que comentar; ambas sumas (en orden creciente y decreciente) coinciden, excepto en los últimos dígitos, dónde pueden variar varios dígitos debido a las aproximaciones de los números en punto flotante. El problema está al sumar la serie utilizando precisión simple. Fijémonos que, sumando la serie en orden ascendente, un vez llegado al término 5000 de la suma tenemos que realizar la operación $$S_{5000}=S_{4999}+\frac{1}{5000^2}=1.64...+4\times10^{-8}.$$ Ahora bien como trabajamos en precisión simple tenemos que ésta última suma da exactamente $S_{4999}$, ya que sólo se almacenan 8 dígitos significativos y justamente el dígito 4 de $4\times10^{-8}$ está en la posición de la novena cifra significativa en la suma $1.64...+4\times10^{-8}$. Claramente éste error también pasará al sumar los términos $5001,5002,\ldots,10000$. Es por eso que el valor de $S_N$ en precisión simple y orden creciente para $N=5000$, $N=10000$ i $N=30000$ da exactamente el mismo resultado.\par 
+Por otro lado si hacemos la suma en orden decreciente, éste error de aproximación no se percibe por el siguiente motivo. Al empezar la suma $S_N$ des de $N$, tenemos que, como los primeros dígitos son $1/N^2$, $1/(N-1)^{2},\ldots$ y éstos tienen la misma magnitud, no perdemos los primeros dígitos significativos de éstos valores que sí que perdíamos sumando la serie en orden ascendente. A medida que vayamos sumando términos más grandes, iremos perdiendo los últimos dígitos significativos del valor de la suma acumulada. Pero éstas pérdidas las haremos de forma ``progresiva" de manera que no se percibirá tanto el error final. Con el método anterior, ésta 
+``progresividad" no la teníamos ya que a partir de un cierto número las sumas parciales permanecían constantes.\par
+Para calcular una fórmula alternativa que se comporte mejor que \eqref{pi} utilizaremos la serie de potencias de la función $\arcsin{x}$: $$\arcsin{x}=\frac{1}{2}+\sum_{k=1}^\infty\frac{(2k-1)!!}{(2k)!!}\frac{x^{2k+1}}{2k+1}.$$ Notemos que $\arcsin{(1/2)}=\pi/6$ y por lo tanto tenemos que: 
+\begin{equation}
+\frac{\pi}{6}=\frac{1}{2}+\sum_{k=1}^\infty\frac{(2k-1)!!}{(2k)!!}\frac{1}{2k+1}\frac{1}{2^{2k+1}}\implies\frac{\pi^2}{6}=6\left(\frac{1}{2}+\sum_{k=1}^\infty\frac{(2k-1)!!}{(2k)!!}\frac{1}{2k+1}\frac{1}{2^{2k+1}}\right)^2.
+\label{r}
+\end{equation}
+Denotamos por $R_N:=\frac{1}{2}+\sum_{k=1}^N\frac{(2k-1)!!}{(2k)!!}\frac{1}{2k+1}\frac{1}{2^{2k+1}}$. En la tabla siguiente se muestran las aproximaciones parciales de $\pi^2/6$ obtenidas a partir de la fórmula \eqref{r} haciendo la suma de $R_N$ en orden decreciente.\par
+\begin{table}[ht]
+	\centering
+	\begin{tabular}{|c|c|c|c|}
+	    \hline
+		& $N=4$ & $N=9$ & $N=21$\\
+		\hline
+		Valor de $6\cdot (R_N)^2$ en precisión simple & $1.6448488$ & $1.6449342$ & $1.6449342$\\
+		\hline
+		Valor de $6\cdot (R_N)^2$ en precisión doble & $1.644848740989538$ & $1.644934034679181$ & $1.644934066848226$\\
+		\hline
+	\end{tabular}
+		\caption{Cálculo de la suma $6\cdot (R_N)^2$ para varios valores de $N$ en simple y doble precisión}
+	\end{table}
+Notemos la diferencia de velocidad de convergencia de éste método en comparación con el anterior. En particular, en precisión doble, con solamente 21 términos somos capaces de conseguir 16 cifras (el máximo posible) exactas de $\pi^2/6$ mientras que con el método anterior y utilizando 30000 términos sólo eramos capaces de calcular 5 cifras exactas de éste mismo valor. 
+\newpage
+\section*{Conclusiones} 
+La conclusión principal de ésta practica es que los números guardados en punto flotante no son exactos. El ordenador tiene una memoria finita y es por eso que tiene que decidir cuántos dígitos significativos guardar, según en qué precisión se esté trabajando. Este motivo es la causa principal de muchos errores observados a lo largo de la práctica.\par Entre ellos está el de no poder sumar (o restar) un número muy grande con un número muy pequeño ya que si la primera cifra significativa del primer número y la primera cifra significativa del segundo están separadas por más de 8 posiciones (trabajando en precisión simple), entonces el valor de la suma será el mismo que el número grande. Este es uno de los varios casos que nos hemos ido encontrando a lo largo de esta práctica.\par Otro caso peculiar y sorprendente es que el problema 4 nos ha dejado muy claro que las operaciones en punto flotante no son asociativas. En efecto, empezando a sumar los términos de una serie parcial desde el inicio hemos obtenido diferentes resultados que empezando a sumar los términos desde el final.\par Observando los resultados de cada problema, podemos concluir que con precisión doble éstos errores, no ocurren tan a menudo, al menos en la magnitud trabajada a lo largo de la práctica. Es por eso que concluimos que en general vale la pena, si es posible, trabajar siempre en precisión doble para evitar estos errores, que a veces pueden pasar desapercibidos.
+\end{document}
