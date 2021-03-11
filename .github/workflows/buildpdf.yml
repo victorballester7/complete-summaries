@@ -25,13 +25,14 @@ jobs:
           root_file: |
             main.tex
             Mathematics/1st/Fundamentals_of_mathematics/Fundamentals_of_mathematics.tex
-      - name: Copycat
-        uses: andstor/copycat-action@v3
+      - name: Pushes test file
+        uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
-          personal_token: ${{ secrets.PERSONAL_TOKEN }}
-          src_path: path/to/main.pdf
-          dst_path: /Mathematics/
-          dst_owner: victorballester7
-          dst_repo_name: victorballester7.github.io
-          dst_branch: main
-          src_branch: main
+          source_file: 'main.pdf'
+          destination_repo: 'victorballester7/victorballester7.github.io'
+          destination_folder: 'Mathematics'
+          user_email: 'victor.ballester.ribo@gmail.com'
+          user_name: 'victorballester7'
+          destination_branch: main
