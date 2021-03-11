@@ -22,7 +22,11 @@ jobs:
       - name: Compile LaTeX document
         uses: xu-cheng/latex-action@v2
         with:
-          root_file: main.tex
+          root_file: | 
+            main.tex
+            Mathematics/1st/Fundamentals_of_mathematics/Fundamentals_of_mathematics.tex
+            Mathematics/1st/Linear_algebra/Linear_algebra.tex
+            Mathematics/1st/Real-valued_functions/Real-valued_functions.tex
 
       - name: Create Release
         id: create_release
@@ -39,5 +43,9 @@ jobs:
         uses: csexton/release-asset-action@v2
         with:
           release-url: ${{ steps.create_release.outputs.upload_url }}
-          file: main.pdf
+          files: | 
+            main.pdf
+            Fundamentals_of_mathematics.pdf
+            Linear_algebra.pdf
+            Real-valued_functions.pdf
           github-token: ${{ secrets.GITHUB_TOKEN }}
