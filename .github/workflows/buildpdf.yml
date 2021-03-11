@@ -22,17 +22,26 @@ jobs:
       - name: Compile LaTeX document
         uses: xu-cheng/latex-action@v2
         with:
-          root_file: |
-            main.tex
-            Mathematics/1st/Fundamentals_of_mathematics/Fundamentals_of_mathematics.tex
-      - name: Pushes test file
-        uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
+          root_file: main.tex
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
         env:
-          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          source_file: 'main.pdf'
-          destination_repo: 'victorballester7/victorballester7.github.io'
-          destination_folder: 'Mathematics'
-          user_email: 'victor.ballester.ribo@gmail.com'
-          user_name: 'victorballester7'
-          destination_branch: 'main'
+          tag_name: ${{ github.run_number }}
+          release_name: Release ${{ github.run_number }}
+          draft: false
+          prerelease: false
+
+      - name: Upload Release Asset
+        id: upload-release-asset 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} 
+          asset_path: ./main.pdf
+          asset_name: main.pdf
+          asset_content_type: pdf
