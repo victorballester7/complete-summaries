@@ -1,0 +1,41 @@
+\documentclass[tikz]{standalone}
+% \usepackage[usenames,dvipsnames]{xcolor}
+% \usepackage{tikz,fullpage}
+% \usetikzlibrary{arrows}
+% \newcounter{j}
+% \begin{document}
+
+% \begin{tikzpicture}[domain=0:4] 
+%     % \draw[->] (-0.2,0) -- (4.2,0) node[right] {\footnotesize $x$}; 
+%     % \draw[->] (0,-0.2) -- (0,4.2) node[above] {\footnotesize $y$};
+%     % \draw[color=red] plot(\x,\x) node[right] {\footnotesize $y=x$}; 
+%     % \draw[color=blue] plot(\x,{\x*(4-\x)}) node[above,midway] {\footnotesize $y=g(x)$};
+% \end{tikzpicture}
+\begin{document}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{tikz,fullpage}
+\usetikzlibrary{arrows}
+\begin{figure}[htbp]
+\centering
+\newcounter{j}
+\begin{tikzpicture}[scale=10,>=latex']  
+    \draw[color=blue,samples at={0,0.01,...,1.07}] plot (\x,{cos(\x r)});  
+    \draw[color=green](0,0)--(1,1);
+    \draw[->](0,0)--(0,1) node[above]{$y$};
+    \draw[->](0,0)--(1,0) node[right]{$x$};
+    \newcommand{\x}{.2}
+    \foreach \i in {1,...,7}{%
+       \pgfmathcos{\x r}
+       \let\y\pgfmathresult
+       \draw[color=magenta](\x,\x)--(\x,\y)--(\y,\y);
+       \draw[color=orange,dotted,line width=0.8pt]%
+            (\x,\x)--(\x,0) node[below=8pt]{$u_\i$};
+       \pgfmathsetcounter{j}{\i+1}
+       \draw[color=blue,dotted,line width=0.8pt]%
+            (\x,\y)--(0,\y) node[left=8pt] {$u_\thej$};
+       \global\let\x\y}
+\end{tikzpicture}
+\caption{$f(x)=\cos (x)$}
+\end{figure}
+\end{document}
+ 

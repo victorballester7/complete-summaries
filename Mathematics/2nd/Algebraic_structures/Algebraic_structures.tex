@@ -109,12 +109,15 @@ Let $\phi:G_1\rightarrow G_2$ be a morphism between $(G_1,*)$ and $(G_2,\cdot)$.
 \end{enumerate}
 \end{lemma}
 \begin{definition}
+We say a subgroup $(H,\cdot)$ of a group $(G,\cdot)$ is \textit{normal}, $H\lhd G$, if and only if for all $h\in H$ and $g\in G$, we have $g\cdot h\cdot g^{-1}\in H$.
+\end{definition}
+\begin{definition}
 Let $(G_1,*)$, $(G_2,\cdot)$ be two groups and $\phi:G_1\rightarrow G_2$ be a group morphism. The \textit{kernel of $\phi$} is $$\ker(\phi)=\{g\in G_1:\phi(g)=e_2\}.$$ The \textit{image of $\phi$} is $$\im(\phi)=\{h\in G_2:\phi(g)=h\text{ for some }g\in G_1\}.$$
 \end{definition}
 \begin{prop}
 Let $(G_1,*)$, $(G_2,\cdot)$ be two groups and $\phi:G_1\rightarrow G_2$ be a group morphism. Then:
 \begin{enumerate}
-    \item $\ker(\phi)$ is a subgroup of $(G_1,*)$ and $\im(\phi)$ is a subgroup of $(G_2,\cdot)$.
+    \item $\ker(\phi)$ is a normal subgroup of $(G_1,*)$ and $\im(\phi)$ is a subgroup of $(G_2,\cdot)$.
     \item Let $g,g'\in G_1$. the following statements are equivalent:
     \begin{enumerate}
         \item $\phi(g)=\phi(g')$.
@@ -202,9 +205,6 @@ Let $(G,\cdot)$ be a finite group and $(H,\cdot)$ a subgroup of $(G,\cdot)$. The
 Let $(G,\cdot)$ be a finite group and $(H,\cdot)$ a subgroup of $(G,\cdot)$. The we define the \textit{set of left cosets} and the \textit{set of right cosets} as follows:
 $$\quot{G}{\sim}=\{g\cdot H:g\in G\},\quad\quot{G}{\approx}=\{H\cdot g:g\in G\}.$$
 \end{definition}
-\begin{definition}
-We say a subgroup $(H,\cdot)$ of a group $(G,\cdot)$ is \textit{normal}, $H\lhd G$, if and only if for all $h\in H$ and $g\in G$, we have $g\cdot h\cdot g^{-1}\in H$.
-\end{definition}
 \begin{prop}
 Let $(G,\cdot)$ be a group and $(H,\cdot)$ a subgroup of $(G,\cdot)$. the following statements are equivalent:
 \begin{enumerate}
@@ -230,20 +230,30 @@ Let $(G,\cdot)$ be a finite group.
 \end{enumerate}
 \end{corollary}
 \begin{definition}[Quotient group]
-Let $(G,\cdot)$ be a finite group and $(H,\cdot)$ a normal subgroup of $(G,\cdot)$. We define the \textit{quotient group $\left(\quot{G}{H},*\right)$}, where $$\quot{G}{H}=\quot{G}{\sim}=\quot{G}{\approx}$$ and 
+Let $(G,\cdot)$ be a finite group and $H\lhd G$. We define the \textit{quotient group $\left(G/H,*\right)$}, where $$\quot{G}{H}=\quot{G}{\sim}=\quot{G}{\approx}$$ and 
 \begin{align*}
     *:\quot{G}{H}\times\quot{G}{H}&\longrightarrow\quot{G}{H}\\
-    (Hg_1,Hg_2)&\longmapsto H(g_1\cdot g_2)
+    (H\cdot g_1,H\cdot g_2)&\longmapsto H\cdot (g_1\cdot g_2)
 \end{align*}
 \end{definition}
 \begin{lemma}
 Let $(G,\cdot)$ be a finite group and $(H,\cdot)$ a normal subgroup of $(G,\cdot)$. The projection 
 \begin{align*}
     \pi:G&\longrightarrow\quot{G}{H}\\
-    g&\longmapsto\Bar{g}=Hg
+    g&\longmapsto\Bar{g}=H\cdot g
 \end{align*}
 is a group morphism.
 \end{lemma}
 \subsubsection*{Isomorphism theorems}
+\begin{theorem}[First isomorphism theorem]
+Let $(G_1,*)$, $(G_2,\cdot)$ be groups, $\phi:(G_1,*)\rightarrow(G_2,\cdot)$ be a group morphism and $H\lhd G_1$. If $H\leq\ker\phi$, then there exists a unique group morphism $\varphi:G_1/H\rightarrow G_2$ such that the diagram of figure \ref{theorem1} is commutative, that is $\phi=\varphi\circ\pi$.\par
+\begin{minipage}{\linewidth}
+    \centering
+    \includegraphics[width=0.35\linewidth]{Mathematics/2nd/Algebraic_structures/Images/theorem1.tex} 
+    \captionof{figure}{}
+    \label{theorem1}
+\end{minipage}
+In particular, if $H=\ker\phi$, then $\varphi$ is injective and therefore there is an isomorphism $\varphi:G_1/\ker\phi\rightarrow\im\phi$.
+\end{theorem}
 \end{multicols}
 \end{document}
