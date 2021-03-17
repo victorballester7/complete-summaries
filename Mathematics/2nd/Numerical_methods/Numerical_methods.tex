@@ -75,6 +75,9 @@ A problem with a low condition number is said to be \textit{well-conditioned}. C
 \begin{definition}
 Let $f:\mathbb{R}\rightarrow\mathbb{R}$ be a function. We say $\alpha$ is a \textit{zero} or \textit{solution to the equation $f(x)=0$} if $f(\alpha)=0$.
 \end{definition}
+\begin{definition}
+Let $f:\mathbb{R}\rightarrow\mathbb{R}$ be a function. We say $\alpha$ is a \textit{zero of multiplicity $m$} if $$f(\alpha)=f'(\alpha)=\cdots=f^{(m-1)}(\alpha)=0\quad\text{and}\quad f^{(m)}\ne0.$$ If $m=1$, the zero is called \textit{simple}; if $m=2$, \textit{double}...
+\end{definition}
 \subsubsection*{Methods}
 \begin{theorem}[Bisection method]
 Let $f:[a_0,b_0]\rightarrow\mathbb{R}$ be a continuous function and suppose $f(a_0)f(b_0)<0$. By Bolzano's theorem there is a $\alpha\in[a_0,b_0]$ such that $f(\alpha)=0$. Suppose $\alpha$ is unknown. Given a $\varepsilon>0$, we want to approximate the value of $\alpha$ with $\Tilde{\alpha}$, such that $|\alpha-\Tilde{\alpha}|<\varepsilon$. Consider the sequence of intervals $[a_n,b_n]$, $n\geq 0$, defined as follows. First let $$c_n=\frac{a_n+b_n}{2}.$$ If $c_n=\alpha$ we are done. If not, then let
@@ -96,6 +99,9 @@ Let $f:[a_0,b_0]\rightarrow\mathbb{R}$ be a continuous function and suppose $f$ 
 \begin{theorem}[Newton–Raphson method]
 Let $f:\mathbb{R}\rightarrow\mathbb{R}$ be a function of class $\mathcal{C}^1$ and suppose $f$ has a zero at an unknown point $\alpha$. We want to approximate the value of $\alpha$. Suppose we have an initial approximation $x_0$. Then for each step $n$ we obtain a new approximation $x_{n+1}$, given by: $$x_{n+1}=x_n-\frac{f(x_n)}{f'(x_n)}.$$
 \end{theorem}
+\begin{theorem}[Chebyshev method]
+Let $f:\mathbb{R}\rightarrow\mathbb{R}$ be a function of class $\mathcal{C}^2$ and suppose $f$ has a zero at an unknown point $\alpha$. We want to approximate the value of $\alpha$. Suppose we have an initial approximation $x_0$. Then for each step $n$ we obtain a new approximation $x_{n+1}$, given by: $$x_{n+1}=x_n-\frac{f(x_n)}{f'(x_n)}-\frac{1}{2}\frac{\left[f(x_n)\right]^2f''(x_n)}{\left[f'(x_n)\right]^3}.$$
+\end{theorem}
 \subsubsection*{Fixed point methods}
 \begin{definition}
 Let $g:[a,b]\rightarrow[a,b]\subset\mathbb{R}$ be a function. A point $\alpha\in[a,b]$ is \textit{n-periodic} if $g^n(\alpha)=\alpha$ and $g^j(\alpha)\ne\alpha$ for $j=1,\ldots,n-1$\footnote{Note that 1-periodic points are the fixed points of $f$.}.
@@ -104,7 +110,7 @@ Let $g:[a,b]\rightarrow[a,b]\subset\mathbb{R}$ be a function. A point $\alpha\in
 Let $(M,d)$ be a metric space and $g:M\rightarrow M$ a contraction. Then $f$ has a unique fixed point $\alpha\in M$ and for every $x_0\in E$, $$\alpha=\lim_{n\to\infty}x_n,\quad\text{where}\quad x_n=g(x_{n-1})\quad\forall n\in\mathbb{N}.$$
 \end{theorem}
 \begin{prop}
-Let $(M,d)$ be a metric space and $g:M\rightarrow M$ a contraction of constant $k$. Then if we want to approximate a fixed point $\alpha$ by $x_n=g(x_{n-1})$ for all $n\in\mathbb{N}$, we have:
+Let $(M,d)$ be a metric space and $g:M\rightarrow M$ a contraction of constant $k$. Then if we want to approximate a fixed point $\alpha$ by the iteration $x_n=g(x_{n-1})$, we have:
 \begin{align*}
     d(x_n,\alpha)&\leq\frac{k^n}{1-k}d(x_1,x_0)\quad&\text{(a priori estimation)}\\
     d(x_n,\alpha)&\leq\frac{k}{1-k}d(x_n,x_{n-1})\quad&\text{(a posteriori estimation)}
@@ -114,7 +120,28 @@ Let $(M,d)$ be a metric space and $g:M\rightarrow M$ a contraction of constant $
 Let $g:\mathbb{R}\rightarrow\mathbb{R}$ be a function of class $\mathcal{C}^1$. Suppose $\alpha$ is a fixed point of $g$ and $|g'(\alpha)|<1$. Then, there exists $\varepsilon>0$ such that $g$ is a contraction on $[\alpha-\varepsilon,\alpha+\varepsilon]$. In particular, the iteration $x_{n+1}=g(x_n)$ converges to $\alpha$.
 \end{corollary}
 \begin{definition}
-Let $g:\mathbb{R}\rightarrow\mathbb{R}$ be a function of class $\mathcal{C}^1$ and $\alpha$ be a fixed point of $g$. We say $\alpha$ is an \textit{attractor fixed point} if $|g'(\alpha)<1|$. In this case, any iteration $x_{n+1}=g(x_n)$ converges to $\alpha$. Otherwise, we say $\alpha$ is an \textit{attractor fixed point} if $|g'(\alpha)<1|$. In this case, any iteration $x_{n+1}=g(x_n)$ doesn't converge to $\alpha$.
+Let $g:\mathbb{R}\rightarrow\mathbb{R}$ be a function of class $\mathcal{C}^1$ and $\alpha$ be a fixed point of $g$. We say $\alpha$ is an \textit{attractor fixed point} if $|g'(\alpha)|<1$. In this case, any iteration $x_{n+1}=g(x_n)$ converges to $\alpha$. Otherwise, we say $\alpha$ is a \textit{repulsor fixed point} if $|g'(\alpha)|>1$. In this case, any iteration $x_{n+1}=g(x_n)$ doesn't converge to $\alpha$.
+\end{definition}
+\textcolor{green}{POSAR DIAGRAMES TERANYINA I ESCALA}
+\begin{definition}[Order of convergence]
+Let $(x_n)$ be a sequence of real numbers that converges to $\alpha\in\mathbb{R}$. We say $(x_n)$ has \textit{order of convergence $p\in\mathbb{R}\setminus\{0\}$} if exists $C>0$ such that: $$\lim_{n\to\infty}\frac{|x_{n+1}-\alpha|}{|x_n-\alpha|^p}=C.$$ The constant $C$ is called \textit{asymptotic error constant}. For the case $p=1$, we need $C<1$. In this case the convergence is called \textit{linear convergence}; for $p=2$, is called \textit{quadratic convergence}, and for $p=3$, \textit{cubic convergence}. If it's satisfied that $$\lim_{n\to\infty}\frac{|x_{n+1}-\alpha|}{|x_n-\alpha|^p}=0$$ for some $p\in\mathbb{R}$, we say the sequence has \textit{order of convergence at least $p$}.
+\end{definition}
+\begin{theorem}
+Let $g:\mathbb{R}\rightarrow\mathbb{R}$ be a function of class $\mathcal{C}^p$ and let $\alpha$ be a fixed point of $g$. Suppose $$g'(\alpha)=g''(\alpha)=\cdots=g^{(p-1)}(\alpha)=0$$ with $g'(\alpha)$ if $p=1$. Then the iteration $x_{n+1}=g(x_n)$ has order of convergence at least $p$. If, moreover, $g^{(p)}(\alpha)\ne0$ then the previous iteration has order of convergence $p$ with asymptotic error constant $C=\frac{|g^{(p)}(\alpha)|}{p!}$.
+\end{theorem}
+\begin{theorem}
+Let $f:\mathbb{R}\rightarrow\mathbb{R}$ be a function of class $\mathcal{C}^2$ and let $\alpha$ be a simple zero of $f$. If $f''(\alpha)\ne0$, then Newton's method for finding $\alpha$ has a quadratic convergence with asymptotic error constant $C=\frac{1}{2}\left|\frac{f''(\alpha)}{f'(\alpha)}\right|$.\par If $f\in\mathcal{C}^{m+2}$, and $\alpha$ is a zero of multiplicity $m>1$, then Newton's method has a linear convergence.
+\end{theorem}
+\begin{theorem}
+Let $f:\mathbb{R}\rightarrow\mathbb{R}$ be a function of class $\mathcal{C}^3$ and let $\alpha$ be a simple zero of $f$. Then Chebyshev's method for finding $\alpha$ has at least a cubic convergence.
+\end{theorem}
+\begin{definition}
+We define the \textit{computational efficiency} as a function $E(p,t)$, where $t$ is the time taken for each iteration of the method and $p$ is the order of convergence of the method. $E(p,t)$ must satisfy the following properties:
+\begin{enumerate}
+    \item $E(p,t)$ is increasing with respect to the variable $p$ and decreasing with respect to $t$.
+    \item $E(p,t)=E(mt,p^m)$ for every $m\in\mathbb{R}$.
+\end{enumerate}
+Examples of such functions are the following: $$E(p,t)=\frac{\log p}{t},\quad E(p,t)=p^{1/t}.$$ 
 \end{definition}
 \end{multicols}
 \end{document}
