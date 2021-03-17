@@ -33,10 +33,11 @@ We denote by $F(b,t,q_\text{min},q_\text{max})$ the following set:
 \end{multline*}
 \end{definition}
 \begin{definition}
-Let $x\in\mathbb{R}$ such that $x=s(0.\alpha_1\alpha_2\cdots)_bb^q$ with $q_\text{min}\leq q\leq q_\text{max}$. We say the \textit{floating-point representation by truncation of $x$} is $$fl_T(x)=s(0.\alpha_1\alpha_2\cdots\alpha_t)_bb^q.$$ We say the \textit{floating-point representation by rounding of $x$} is \begin{multline*}
-fl_R(x)=\\=\left\{\begin{array}{lcl}
-        s(0.\alpha_1\cdots\alpha_t)_bb^q & \text{if} & 0\leq\alpha_{t+1}<b/2,\\
-        s(0.\alpha_1\cdots\alpha_{t-1}(\alpha_t+1))_bb^q & \text{if} & b/2\leq\alpha_{t+1}\leq b-1.
+Let $x\in\mathbb{R}$ such that $x=s(0.\alpha_1\alpha_2\cdots)_bb^q$ with $q_\text{min}\leq q\leq q_\text{max}$. We say the \textit{floating-point representation by truncation of $x$} is $$fl_T(x)=s(0.\alpha_1\alpha_2\cdots\alpha_t)_bb^q.$$ We say the \textit{floating-point representation by rounding of $x$} is
+\begin{multline*}
+fl_R(x)=\\=\left\{\begin{array}{ll}
+        s(0.\alpha_1\cdots\alpha_t)_bb^q & \text{if}\;\; 0\leq\alpha_{t+1}<\frac{b}{2},\\
+        s(0.\alpha_1\cdots\alpha_{t-1}(\alpha_t+1))_bb^q & \text{if}\;\; \frac{b}{2}\leq\alpha_{t+1}\leq b-1.
     \end{array}\right.
 \end{multline*}
 \end{definition}
@@ -64,7 +65,7 @@ Let $f:\mathbb{R}^n\rightarrow\mathbb{R}$ be a function of class $\mathcal{C}^2$
 \begin{prop}[Propagation of relative errors]
 Let $f:\mathbb{R}^n\rightarrow\mathbb{R}$ be a function of class $\mathcal{C}^2$. If $\delta x_j$ is the relative error of the variable $x_j$ and $\delta f(x)$ is the relative error of the function $f$ evaluated at the point $x=(x_1,\ldots,x_n)$, we have $$|\delta f(x)|\lesssim\sum_{j=1}^n\frac{\left|\frac{\partial f}{\partial x_j}(x)\right|\left|x\right|}{\left|f(x)\right|}|\delta x_j|.$$ The coefficients $\displaystyle \left|\frac{\partial f}{\partial x_j}(x)\right|\left|x\right|/\left|f(x)\right|$ are called \textit{relative condition numbers of the problem}. 
 \end{prop}
-\subsubsection*{Algorithms}
+\subsubsection*{Numerical stability of algorithms}
 \begin{definition}
 An algorithm is said to be \textit{numerically stable} if  errors in the input lessen in significance as the algorithm executes, having little effect on the final output. On the other hand, an algorithm is said to be \textit{numerically unstable} if errors in the input cause a considerably larger error in the final output.
 \end{definition}
@@ -78,7 +79,7 @@ Let $f:\mathbb{R}\rightarrow\mathbb{R}$ be a function. We say $\alpha$ is a \tex
 \begin{definition}
 Let $f:\mathbb{R}\rightarrow\mathbb{R}$ be a function. We say $\alpha$ is a \textit{zero of multiplicity $m$} if $$f(\alpha)=f'(\alpha)=\cdots=f^{(m-1)}(\alpha)=0\quad\text{and}\quad f^{(m)}\ne0.$$ If $m=1$, the zero is called \textit{simple}; if $m=2$, \textit{double}...
 \end{definition}
-\subsubsection*{Methods}
+\subsubsection*{Root-finding methods}
 \begin{theorem}[Bisection method]
 Let $f:[a_0,b_0]\rightarrow\mathbb{R}$ be a continuous function and suppose $f(a_0)f(b_0)<0$. By Bolzano's theorem there is a $\alpha\in[a_0,b_0]$ such that $f(\alpha)=0$. Suppose $\alpha$ is unknown. Given a $\varepsilon>0$, we want to approximate the value of $\alpha$ with $\Tilde{\alpha}$, such that $|\alpha-\Tilde{\alpha}|<\varepsilon$. Consider the sequence of intervals $[a_n,b_n]$, $n\geq 0$, defined as follows. First let $$c_n=\frac{a_n+b_n}{2}.$$ If $c_n=\alpha$ we are done. If not, then let
 $$[a_{n+1},b_{n+1}]=\left\{\begin{array}{ccc}
@@ -123,11 +124,12 @@ Let $g:\mathbb{R}\rightarrow\mathbb{R}$ be a function of class $\mathcal{C}^1$. 
 Let $g:\mathbb{R}\rightarrow\mathbb{R}$ be a function of class $\mathcal{C}^1$ and $\alpha$ be a fixed point of $g$. We say $\alpha$ is an \textit{attractor fixed point} if $|g'(\alpha)|<1$. In this case, any iteration $x_{n+1}=g(x_n)$ converges to $\alpha$. Otherwise, we say $\alpha$ is a \textit{repulsor fixed point} if $|g'(\alpha)|>1$. In this case, any iteration $x_{n+1}=g(x_n)$ doesn't converge to $\alpha$.
 \end{definition}
 \textcolor{green}{POSAR DIAGRAMES TERANYINA I ESCALA}
+\subsubsection*{Order of convergence}
 \begin{definition}[Order of convergence]
 Let $(x_n)$ be a sequence of real numbers that converges to $\alpha\in\mathbb{R}$. We say $(x_n)$ has \textit{order of convergence $p\in\mathbb{R}\setminus\{0\}$} if exists $C>0$ such that: $$\lim_{n\to\infty}\frac{|x_{n+1}-\alpha|}{|x_n-\alpha|^p}=C.$$ The constant $C$ is called \textit{asymptotic error constant}. For the case $p=1$, we need $C<1$. In this case the convergence is called \textit{linear convergence}; for $p=2$, is called \textit{quadratic convergence}, and for $p=3$, \textit{cubic convergence}. If it's satisfied that $$\lim_{n\to\infty}\frac{|x_{n+1}-\alpha|}{|x_n-\alpha|^p}=0$$ for some $p\in\mathbb{R}$, we say the sequence has \textit{order of convergence at least $p$}.
 \end{definition}
 \begin{theorem}
-Let $g:\mathbb{R}\rightarrow\mathbb{R}$ be a function of class $\mathcal{C}^p$ and let $\alpha$ be a fixed point of $g$. Suppose $$g'(\alpha)=g''(\alpha)=\cdots=g^{(p-1)}(\alpha)=0$$ with $g'(\alpha)$ if $p=1$. Then the iteration $x_{n+1}=g(x_n)$ has order of convergence at least $p$. If, moreover, $g^{(p)}(\alpha)\ne0$ then the previous iteration has order of convergence $p$ with asymptotic error constant $C=\frac{|g^{(p)}(\alpha)|}{p!}$.
+Let $g:\mathbb{R}\rightarrow\mathbb{R}$ be a function of class $\mathcal{C}^p$ and let $\alpha$ be a fixed point of $g$. Suppose $$g'(\alpha)=g''(\alpha)=\cdots=g^{(p-1)}(\alpha)=0$$ with $|g'(\alpha)|<1$ if $p=1$. Then the iteration $x_{n+1}=g(x_n)$ has order of convergence at least $p$. If, moreover, $g^{(p)}(\alpha)\ne0$ then the previous iteration has order of convergence $p$ with asymptotic error constant $C=\frac{|g^{(p)}(\alpha)|}{p!}$.
 \end{theorem}
 \begin{theorem}
 Let $f:\mathbb{R}\rightarrow\mathbb{R}$ be a function of class $\mathcal{C}^2$ and let $\alpha$ be a simple zero of $f$. If $f''(\alpha)\ne0$, then Newton's method for finding $\alpha$ has a quadratic convergence with asymptotic error constant $C=\frac{1}{2}\left|\frac{f''(\alpha)}{f'(\alpha)}\right|$.\par If $f\in\mathcal{C}^{m+2}$, and $\alpha$ is a zero of multiplicity $m>1$, then Newton's method has a linear convergence.
@@ -141,7 +143,27 @@ We define the \textit{computational efficiency} as a function $E(p,t)$, where $t
     \item $E(p,t)$ is increasing with respect to the variable $p$ and decreasing with respect to $t$.
     \item $E(p,t)=E(mt,p^m)$ for every $m\in\mathbb{R}$.
 \end{enumerate}
-Examples of such functions are the following: $$E(p,t)=\frac{\log p}{t},\quad E(p,t)=p^{1/t}.$$ 
+Examples of such functions are the following: $$E(p,t)=\frac{\log p}{t},\quad E(p,t)=p^{1/t}.$$
 \end{definition}
+\subsubsection*{Sequence acceleration}
+\begin{definition}[Aitken's $\Delta^2$ method]
+Let $(x_n)$ be a sequence of real numbers. We denote:
+\begin{gather*}
+    \Delta x_n:=x_{n+1}-x_n,\\\Delta^2 x_n:=\Delta x_{n+1}-\Delta x_n=x_{n+2}-2x_{n+1}+x_n.
+\end{gather*}
+\textit{Aitken's $\Delta^2$ method} is the transformation of the sequence $(x_n)$ into a sequence $y_n$, defined as: $$y_n:=x_n-\frac{(\Delta x_n)^2}{\Delta^2 x_n}=x_n-\frac{(x_{n+1}-x_n)^2}{x_{n+2}-2x_{n+1}+x_n}$$
+\end{definition}
+\begin{theorem}
+Let $(x_n)$ be a sequence of real numbers such that $\displaystyle\lim_{n\to\infty}x_n=\alpha$, $x_n\ne\alpha$ for all $n\in\mathbb{N}$ and $\exists C$, $|C|<1$, satisfying $$x_{n+1}-\alpha=(C+\delta_n)(x_n-\alpha)\quad\text{with}\quad\lim_{n\to\infty}\delta_n=0.$$ Then the sequence $(y_n)$ obtained from Aitken's $\Delta^2$ process is well-defined and $$\lim_{n\to\infty}\frac{y_n-\alpha}{x_n-\alpha}=0.$$
+\end{theorem}
+\begin{theorem}[Steffensen's method]
+Let $g:\mathbb{R}\rightarrow\mathbb{R}$ be a continuous function and suppose we have an iterative method $x_{n+1}=g(x_n)$. Then for each step $n$ we can consider a new iteration $y_{n+1}$, given by: \begin{multline*}
+    y_{n+1}=y_n-\frac{\left[g(y_n)-y_n\right]^2}{g(g(y_n))-2g(y_n)+y_n}=\\=\frac{y_ng(g(y_n))-\left[g(y_n)\right]^2}{g(g(y_n))-2g(y_n)+y_n}.
+\end{multline*}
+\end{theorem}
+\begin{prop}
+Let $f:\mathbb{R}\rightarrow\mathbb{R}$ be a function of class $\mathcal{C}^2$ and let $\alpha$ be a simple zero of $f$. Then Steffensen's method for finding $\alpha$ has at least a quadratic convergence\footnote{Note that the advantage of Steffensen's method over Newton's method is that in the former we don't need the differentiability of the function whereas in the latter we do.}.
+\end{prop}
+\subsubsection*{Zeros of polynomials}
 \end{multicols}
 \end{document}

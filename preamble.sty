@@ -45,8 +45,17 @@
 \DeclareMathOperator{\im}{Im} % Image of a function
 \newcommand{\upint}[2]{\overline{\int_{#1}^{#2}}} % upper integral
 \newcommand{\lowint}[2]{\underline{\int_{#1}^{#2}}} % lower integral
-\newcommand*\quot[2]{{^{\textstyle #1}\big/_{\textstyle #2}}} % quotient grup (left-quotient grup). Use A/B--->\quot{A}{B}.
-\newcommand*\rquot[2]{{_{\textstyle #1}\big\backslash^{\textstyle #2}}} % quotient grup (right-quotient grup). Use A\B--->\quot{A}{B}.
+\newcommand\quot[2]{
+    \mathchoice
+        {% \displaystyle 
+        \text{\raise1ex\hbox{$#1$}\Big/\lower1ex\hbox{$#2$}}}
+        {% \textstyle
+            #1\,/\,#2}
+        {% \scriptstyle
+            #1\,/\,#2}
+        {% \scriptscriptstyle  
+            #1\,/\,#2}
+}% quotient group. Use A/B--->\quot{A}{B}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%% Enumeration-commands %%%%%%%
