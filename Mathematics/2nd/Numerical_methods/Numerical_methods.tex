@@ -108,7 +108,7 @@ Let $f:\mathbb{R}\rightarrow\mathbb{R}$ be a function of class $\mathcal{C}^2$ a
 Let $g:[a,b]\rightarrow[a,b]\subset\mathbb{R}$ be a function. A point $\alpha\in[a,b]$ is \textit{n-periodic} if $g^n(\alpha)=\alpha$ and $g^j(\alpha)\ne\alpha$ for $j=1,\ldots,n-1$\footnote{Note that 1-periodic points are the fixed points of $f$.}.
 \end{definition}
 \begin{theorem}[Fixed point theorem]
-Let $(M,d)$ be a metric space and $g:M\rightarrow M$ a contraction. Then $f$ has a unique fixed point $\alpha\in M$ and for every $x_0\in E$, $$\alpha=\lim_{n\to\infty}x_n,\quad\text{where}\quad x_n=g(x_{n-1})\quad\forall n\in\mathbb{N}.$$
+Let $(M,d)$ be a metric space and $g:M\rightarrow M$ a contraction. Then $f$ has a unique fixed point $\alpha\in M$ and for every $x_0\in E$, $$\alpha=\lim_{n\to\infty}x_n,\quad\text{where }x_n=g(x_{n-1})\quad\forall n\in\mathbb{N}.$$
 \end{theorem}
 \begin{prop}
 Let $(M,d)$ be a metric space and $g:M\rightarrow M$ a contraction of constant $k$. Then if we want to approximate a fixed point $\alpha$ by the iteration $x_n=g(x_{n-1})$, we have:
@@ -151,10 +151,10 @@ Let $(x_n)$ be a sequence of real numbers. We denote:
 \begin{gather*}
     \Delta x_n:=x_{n+1}-x_n,\\\Delta^2 x_n:=\Delta x_{n+1}-\Delta x_n=x_{n+2}-2x_{n+1}+x_n.
 \end{gather*}
-\textit{Aitken's $\Delta^2$ method} is the transformation of the sequence $(x_n)$ into a sequence $y_n$, defined as: $$y_n:=x_n-\frac{(\Delta x_n)^2}{\Delta^2 x_n}=x_n-\frac{(x_{n+1}-x_n)^2}{x_{n+2}-2x_{n+1}+x_n}$$
+\textit{Aitken's $\Delta^2$ method} is the transformation of the sequence $(x_n)$ into a sequence $y_n$, defined as: $$y_n:=x_n-\frac{(\Delta x_n)^2}{\Delta^2 x_n}=x_n-\frac{(x_{n+1}-x_n)^2}{x_{n+2}-2x_{n+1}+x_n}.$$
 \end{definition}
 \begin{theorem}
-Let $(x_n)$ be a sequence of real numbers such that $\displaystyle\lim_{n\to\infty}x_n=\alpha$, $x_n\ne\alpha$ for all $n\in\mathbb{N}$ and $\exists C$, $|C|<1$, satisfying $$x_{n+1}-\alpha=(C+\delta_n)(x_n-\alpha)\quad\text{with}\quad\lim_{n\to\infty}\delta_n=0.$$ Then the sequence $(y_n)$ obtained from Aitken's $\Delta^2$ process is well-defined and $$\lim_{n\to\infty}\frac{y_n-\alpha}{x_n-\alpha}=0.$$
+Let $(x_n)$ be a sequence of real numbers such that $\displaystyle\lim_{n\to\infty}x_n=\alpha$, $x_n\ne\alpha$ for all $n\in\mathbb{N}$ and $\exists C$, $|C|<1$, satisfying $$x_{n+1}-\alpha=(C+\delta_n)(x_n-\alpha),\quad\text{with }\lim_{n\to\infty}\delta_n=0.$$ Then the sequence $(y_n)$ obtained from Aitken's $\Delta^2$ process is well-defined and $$\lim_{n\to\infty}\frac{y_n-\alpha}{x_n-\alpha}=0.$$
 \end{theorem}
 \begin{theorem}[Steffensen's method]
 Let $g:\mathbb{R}\rightarrow\mathbb{R}$ be a continuous function and suppose we have an iterative method $x_{n+1}=g(x_n)$. Then for each step $n$ we can consider a new iteration $y_{n+1}$, given by: \begin{multline*}
@@ -176,12 +176,32 @@ Let $(f_i)$, $i=0,\ldots,n$, be a sequence of continuous functions defined on $[
     \item For $i=1,\ldots,n-1$, if $\alpha\in[a,b]$ satisfies $f_i(\alpha)=0\implies f_{i-1}(\alpha)f_{i+1}(\alpha)<0$.
     \item $f_n(x)\ne0$ $\forall x\in[a,b]$.
 \end{enumerate}
+\end{definition}
 \begin{definition}
-Let $(f_i)$, $i=0,\ldots,n$, be a sequence of continuous functions defined on $[a,b]\subset\mathbb{R}$. We define $V(x)$ as the number of sign variations of the sequence $$\{f_0(x),f_1(x),\ldots,f_n(x)\},$$ without taking into account null values. 
+Let $(a_i)$, $i=0,\ldots,n$, be a sequence. We define $\nu(a_i)$ as the number of sign variations of the sequence $$\{a_0,a_1,\ldots,a_n\},$$ without taking into account null values. 
 \end{definition}
 \begin{theorem}[Sturm's theorem]
-Let $f:[a,b]\rightarrow\mathbb{R}$ be a function of class $\mathcal{C}^1$ such that $f(a)f(b)\ne 0$ and with a finite number of zeros. Let $(f_i)$, $i=0,\ldots,n$, be a Sturm's sequence defined on $[a,b]$. Then the number of zeros of $f$ on $[a,b]$ is $V(a)-V(b)$.
+Let $f:[a,b]\rightarrow\mathbb{R}$ be a function of class $\mathcal{C}^1$ such that $f(a)f(b)\ne 0$ and with a finite number of zeros. Let $(f_i)$, $i=0,\ldots,n$, be a Sturm sequence defined on $[a,b]$. Then the number of zeros of $f$ on $[a,b]$ is $$\nu\left(f_i(a)\right)-\nu\left(f_i(b)\right).$$
 \end{theorem}
-\end{definition}
+\begin{lemma}
+Let $p\in\mathbb{C}[x]$ be a polynomial. Then the polynomial $\displaystyle q=\frac{p}{\gcd(p,p')}$ has the same roots as $p$ but all of them are simple roots.
+\end{lemma}
+\begin{prop}
+Let $p\in\mathbb{C}[x]$ be a polynomial with $\deg p=m$. We define $\displaystyle f_0=\frac{p}{\gcd(p,p')}$ and $f_1=f_0'$. If $\deg f_0=n$, then for $i=0,1,\ldots,n-2$, we define $f_{i+2}$ as $$f_i=c_{i+1}f_{f+1}-f_{i+2},$$ (similarly to the euclidean division of $f_i$ and $f_{i-1}$). Then $f_n$ is constant and hence the sequence $(f_i)$, $i=0,\ldots,n$, is a Sturm sequence.
+\end{prop}
+\begin{theorem}[Budan-Fourier theorem]
+Let $p\in\mathbb{R}[x]$ be a polynomial with $\deg p=n$. Consider the sequence $(p^{(i)})$, $i=0,\ldots,n$. If $p(a)p(b)\ne 0$, then the number of zeros of $p$ on $[a,b]$ is $$\nu\left(p^{(i)}(a)\right)-\nu\left(p^{(i)}(b)\right)-2k,\quad\text{for some }k\in\mathbb{N}\cup\{0\}.$$
+\end{theorem}
+\begin{corollary}[Descartes' rule of signs]
+Let $\displaystyle p=\sum_{i=0}^na_ix^i\in\mathbb{R}[x]$ be a polynomial. If $p(0)\ne 0$, then then the number of zeros of $p$ on $[0,\infty)$ is $$\nu(a_i)-2k,\quad\text{for some }k\in\mathbb{N}\cup\{0\}.$$
+\end{corollary}
+\begin{theorem}[Greshgorin theorem]
+Let $A=(a_{ij})\in\mathcal{M}_n(\mathbb{C})$ be a complex matrix and let $\lambda$ be an eigenvalue of $A$. For all $i,j\in\{1,2,\ldots,n\}$ we define:
+\begin{gather*}
+    r_i=\sum_{\substack{k=1\\k\ne i}}^n|a_{ik}|,\quad R_i=\{z\in\mathbb{C}:|z-a_{ii}|\leq r_i\},\\
+    c_j=\sum_{\substack{k=1\\k\ne j}}^n|a_{kj}|,\quad C_j=\{z\in\mathbb{C}:|z-a_{jj}|\leq c_j\}.
+\end{gather*}
+Then $\lambda\in\bigcup_{i=1}^nR_i$ and $\lambda\in\bigcup_{j=1}^nC_j$. Moreover in each connected component of $\bigcup_{i=1}^nR_i$ (respectively $\bigcup_{j=1}^nC_j$) there are as many eigenvalues (counted with multiplicity) as disks $R_i$ (respectively $C_i$). 
+\end{theorem}
 \end{multicols}
 \end{document}
