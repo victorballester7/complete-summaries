@@ -1,7 +1,9 @@
 \documentclass[class=article,10pt,crop=false]{standalone}
 \usepackage{standalone}
 \usepackage{preamble}
- 
+
+%%% Note there is a page-break between the last theorem and the last corollary.
+
 \begin{document}
 \begin{multicols}{2}[\section{Functions of several variables}]
 \subsection{Topology of \texorpdfstring{$\mathbb{R}^n$}{Rn}}
@@ -14,6 +16,7 @@ Let $M$ be a set. A \textit{distance} in $M$ is an function $d:M\times M\rightar
     \item $d(x,y)\leq d(x,z)+d(z,y)\quad$\textit{(triangular inequality)}.
 \end{enumerate}
 We define a \textit{metric space} as a pair $(M,d)$ that satisfy the previous properties.
+\label{FOSV_metric}
 \end{definition}
 \begin{definition}
 Let $E$ be a real vector space. A \textit{norm} on $E$ is a function $\|\cdot\|:E\rightarrow\mathbb{R}$ such that $\forall u,v\in E$ and $\forall\lambda\in\mathbb{R}$ the following properties are satisfied:
@@ -66,72 +69,72 @@ Let $(E,\langle\cdot,\cdot\rangle)$ be an euclidean space with the norm defined 
 Let $L:\mathbb{R}^n\rightarrow\mathbb{R}^m$ be a linear map. We define the \textit{norm of $L$} as $$\|L\|=\sup\{\|L(x)\|:\|x\|=1\}.$$
 \end{definition}
 \begin{lemma}
-Let $\Phi:\mathcal{L}(\mathbb{R}^n,\mathbb{R}^m)$ be a map defined as $\Phi(L)=\|L\|$. Then $\Phi$ is a norm on the vector space $\mathcal{L}(\mathbb{R}^n,\mathbb{R}^m)$.
+Let $\Phi:\mathcal{L}(\mathbb{R}^n,\mathbb{R}^m)\rightarrow\mathbb{R}$ be a map defined as $\Phi(L)=\|L\|$. Then $\Phi$ is a norm on the vector space $\mathcal{L}(\mathbb{R}^n,\mathbb{R}^m)$.
 \end{lemma}
 \begin{prop}
-Let $L\in\mathcal{L}(\mathbb{R}^n,\mathbb{R}^m)$. Then we have that $$\|L\|=\inf\{C:\|L(x)\|\leq C\|x\|\}.$$
+Let $L\in\mathcal{L}(\mathbb{R}^n,\mathbb{R}^m)$. Then: $$\|L\|=\inf\{C:\|L(x)\|\leq C\|x\|\}.$$
 \end{prop}
 \begin{corollary}
-Let $L,M\in\mathcal{L}(\mathbb{R}^n,\mathbb{R}^m)$ be linear maps with associated matrices $L=(a_{ij}),M=(b_{ij})$ respectively. Then the following properties are satisfied:
+Let $L,M\in\mathcal{L}(\mathbb{R}^n,\mathbb{R}^m)$ be linear maps with associated matrices $L=(a_{ij})$, $M=(b_{ij})$ respectively. The following properties are satisfied:
 \begin{enumerate}
     \item $\|L(x)\|\leq\|L\|\|x\|$.
     \item $\displaystyle\|L\|\leq\left(\sum_{i=1}^m\sum_{j=1}^na_{ij}^2\right)^{1/2}$.
     \item $|a_{ij}-b_{ij}|<\varepsilon,\forall i,j\iff\|L-M\|<\varepsilon'$.
 \end{enumerate}
 \end{corollary}
-\noindent For the following definitions let $(M,d)$ be a metric space and $A$ a subset of $M$.
 \begin{definition}
-A \textit{sphere} with center $p$ and radius $r\in\mathbb{R}^+$ is the set $S(p,r)=\{x\in M:d(x,p)=r\}$.
+Let $(M,d)$ be a metric space. A \textit{sphere with center $p$ and radius $r\in\mathbb{R}^+$} is the set $S(p,r)=\{x\in M:d(x,p)=r\}$.
 \end{definition}
 \begin{definition}
-An \textit{open ball} with center $p$ and radius $r\in\mathbb{R}^+$ is el conjunt $B(p,r)=\{x\in M:d(x,p)<r\}$.
+Let $(M,d)$ be a metric space. An \textit{open ball with center $p$ and radius $r\in\mathbb{R}^+$} is the set $B(p,r)=\{x\in M:d(x,p)<r\}$.
 \end{definition}
 \begin{definition}
-A \textit{closed ball} with center $p$ and radius $r\in\mathbb{R}^+$ is the set $\overline{B}(p,r)=\{x\in M:d(x,p)\leq r\}$.
+Let $(M,d)$ be a metric space. A \textit{closed ball with center $p$ and radius $r\in\mathbb{R}^+$} is the set $\overline{B}(p,r)=\{x\in M:d(x,p)\leq r\}$.
 \end{definition}
 \begin{definition}
-$A$ is a \textit{bounded set} if exists a ball that contains it.
+Let $(M,d)$ be a metric space and $A\subseteq M$ be a subset of $M$. $A$ is a \textit{bounded set} if exists a ball containing it.
 \end{definition}
 \begin{definition}
-A \textit{neighborhood} of $p$ is a bounded set $E(p)\subset M$ such that $\exists r\in\mathbb{R}^+$ with $B(p,r)\subset E(p)$.
+Let $(M,d)$ be a metric space. A \textit{neighborhood of $p$} is a bounded set $E(p)\subset M$ such that $\exists r\in\mathbb{R}^+$ satisfying $B(p,r)\subset E(p)$.
 \end{definition}
 \begin{definition}
-$p$ is an \textit{interior point of $A$} if $\exists r\in\mathbb{R}^+$ such that $B(p,r)\subset A$. The \textit{interior of $A$} is the set $\mathring A$ containing all interior points of $A$.
+Let $(M,d)$ be a metric space and $A\subseteq M$ be a subset of $M$. $p$ is an \textit{interior point of $A$} if $\exists r\in\mathbb{R}^+$ such that $B(p,r)\subset A$. The \textit{interior of $A$} is the set $\mathring A$ containing all interior points of $A$.
 \end{definition}
 \begin{definition}
-$p$ is an \textit{exterior point of $A$} if $\exists r\in\mathbb{R}^+$ such that $B(p,r)\cap A=\emptyset$. The \textit{exterior of $A$} is the set $\mathring A$ containing all exterior points of $A$.
+Let $(M,d)$ be a metric space and $A\subseteq M$ be a subset of $M$. $p$ is an \textit{exterior point of $A$} if $\exists r\in\mathbb{R}^+$ such that $B(p,r)\cap A=\emptyset$. The \textit{exterior of $A$} is the set $\mathring A$ containing all exterior points of $A$.
 \end{definition}
 \begin{definition}
-$p$ is an \textit{adherent point} of $A$ if $\forall r\in\mathbb{R}^+$, $B(p,r)\cap A\ne\emptyset$. The \textit{adherence} of $A$ is the set $\overline{A}$ containing all adherent points of $A$.
+Let $(M,d)$ be a metric space and $A\subseteq M$ be a subset of $M$. $p$ is an \textit{adherent point} of $A$ if $\forall r\in\mathbb{R}^+$, $B(p,r)\cap A\ne\emptyset$. The \textit{adherence} of $A$ is the set $\overline{A}$ containing all adherent points of $A$.
 \end{definition}
 \begin{definition}
-$p$ is a \textit{limit point} of $A$ if $\forall r\in\mathbb{R}^+$, $B(p,r)\setminus\{p\}\cap A\ne\emptyset$. The \textit{limit set} of $A$ is the set $A'$ containing all limit points of $A$.
+Let $(M,d)$ be a metric space and $A\subseteq M$ be a subset of $M$. $p$ is a \textit{limit point} of $A$ if $\forall r\in\mathbb{R}^+$, $B(p,r)\setminus\{p\}\cap A\ne\emptyset$. The \textit{limit set} of $A$ is the set $A'$ containing all limit points of $A$.
 \end{definition}
 \begin{definition}
-$p$ is an \textit{isolated point} of $A$ if it is an adherent but not limit point, that is, if $p\in A$ and $\exists r\in\mathbb{R}^+$ such that $B(p,r)\setminus\{p\}\cap A=\emptyset$.
+Let $(M,d)$ be a metric space and $A\subseteq M$ be a subset of $M$. $p$ is an \textit{isolated point} of $A$ if it is an adherent but not limit point, that is, if $p\in A$ and $\exists r\in\mathbb{R}^+$ such that $B(p,r)\setminus\{p\}\cap A=\emptyset$.
 \end{definition}
 \begin{definition}
-$p$ is a \textit{boundary point} of $A$ if $\forall r\in\mathbb{R}^+$, $B(p,r)\cap A\ne\emptyset$ and $B(p,r)\cap A^c\ne\emptyset$. The \textit{boundary} of $A$ is the set $\partial A$ containing all boundary points of $A$.
+Let $(M,d)$ be a metric space and $A\subseteq M$ be a subset of $M$. $p$ is a \textit{boundary point} of $A$ if $\forall r\in\mathbb{R}^+$, $B(p,r)\cap A\ne\emptyset$ and $B(p,r)\cap A^c\ne\emptyset$. The \textit{boundary} of $A$ is the set $\partial A$ containing all boundary points of $A$.
 \end{definition}
 \begin{prop}
-If $p$ is a limit point of $A$, then $B(p,r)$ has infinity many point of $A$, $\forall r\in\mathbb{R}^+$.
+Let $(M,d)$ be a metric space and $A\subseteq M$ be a subset of $M$. If $p$ is a limit point of $A$, then $B(p,r)$ has infinity many point of $A$, $\forall r\in\mathbb{R}^+$.
 \end{prop}
-\begin{theorem}[Bolzano-Weierstra\ss theorem]
-Let $B\subset\mathbb{R}^n$ be a set. If $B$ has infinity many point and it is bounded, then it has at least a limit point.
+\begin{theorem}[Bolzano-Weierstra\ss\space theorem]
+Let $B\subset\mathbb{R}^n$ be a set. If $B$ has infinity many points and it is bounded, then it has at least a limit point.
 \end{theorem}
 \begin{definition}
-$A$ is \textit{open} if $\forall p\in A$, $\exists r\in\mathbb{R}^+$ such that $B(p,r)\subset A$.
+Let $(M,d)$ be a metric space and $A\subseteq M$ be a subset of $M$. $A$ is \textit{open} if $\forall p\in A$, $\exists r\in\mathbb{R}^+$ such that $B(p,r)\subset A$.
 \end{definition}
 \begin{definition}
-$A$ is \textit{closed} if its complementary $A^c$ is open.
+Let $(M,d)$ be a metric space and $A\subseteq M$ be a subset of $M$. $A$ is \textit{closed} if its complementary $A^c$ is open.
 \end{definition}
 \begin{prop} 
-$A$ is closed $\iff A=\overline{A}\iff\partial A\subset A\iff A'\subset A$.
-\end{prop}
-\begin{prop} $A$ is open $\iff A=\mathring A$.
+Let $(M,d)$ be a metric space and $A\subseteq M$ be a subset of $M$. $A$ is closed $\iff A=\overline{A}\iff\partial A\subset A\iff A'\subset A$.
 \end{prop}
 \begin{prop}
-\hfill
+Let $(M,d)$ be a metric space and $A\subseteq M$ be a subset of $M$. $A$ is open $\iff A=\mathring A$.
+\end{prop}
+\begin{prop}
+Let $(M,d)$ be a metric space and $A\subseteq M$ be a subset of $M$.
 \begin{itemize}
     \item $\mathring A$ is the biggest open set contained in $A$, that is, if $B\subset A$ is open, $B\subset\text{Int }A$.
     \item $\overline{A}$ is the smallest set contained in $A$, that is, if $B\supset A$ is closed, $\overline{A}\supset B$.
@@ -147,23 +150,23 @@ $A$ is closed $\iff A=\overline{A}\iff\partial A\subset A\iff A'\subset A$.
 \end{itemize}
 \end{prop}
 \begin{definition}
-We say $A$ is \textit{connected} if non exists open sets $U,V\ne\emptyset$ such that: 
+We say a set $A$ is \textit{connected} if there are no open sets $U,V\ne\emptyset$ such that: 
 \begin{gather*}
     A\subseteq U\cup V,\quad A\cap U\cap V=\emptyset,\quad A\cap U\ne\emptyset,\quad A\cap V\ne\emptyset.
 \end{gather*}
 \end{definition}
 \begin{definition}
-A \textit{sequence} in $M$ is a map
+Let $(M,d)$ be a metric space. A \textit{sequence $(x_n)$} in $M$ is a map
 \begin{align*}
-    \mathbb{N}&\rightarrow M\\
-    n&\mapsto x_n
+    \mathbb{N}&\longrightarrow M\\
+    n&\longmapsto x_n
 \end{align*}
 \end{definition}
 \begin{definition}
-We say $(x_n)\subset M$ is \textit{convergent} to $p\in M$ if $$\forall\varepsilon\in\mathbb{R}^+,\;\exists n_0\in\mathbb{N}:d(x_n,p)<\varepsilon\text{ if }n>n_0.$$
+Let $(M,d)$ be a metric space. We say $(x_n)\subset M$ is \textit{convergent} to $p\in M$ if $$\forall\varepsilon\in\mathbb{R}^+,\;\exists n_0\in\mathbb{N}:d(x_n,p)<\varepsilon\text{ if }n>n_0.$$
 \end{definition}
 \begin{definition}
-We say a sequence $(x_n)$ in a metric space $(M,d)$ is a \textit{Cauchy sequence} is $\forall\varepsilon>0$ $\exists n_0$ such that $d(x_n,x_m)<\varepsilon$, for all $m,n\geq n_0$.
+Let $(M,d)$ be a metric space. We say a sequence $(x_n)$ is a \textit{Cauchy sequence} if $\forall\varepsilon>0$ $\exists n_0$ such that $d(x_n,x_m)<\varepsilon$, for all $m,n\geq n_0$.
 \end{definition}
 \begin{definition}
 A metric space $(M,d)$ is complete if every Cauchy sequence in $M$ converges in $M$.
@@ -172,17 +175,17 @@ A metric space $(M,d)$ is complete if every Cauchy sequence in $M$ converges in 
 A subset $K\subset\mathbb{R}^n$ is \textit{compact} if it is closed and bounded.
 \end{definition}
 \begin{theorem}
-Let $K\subset\mathbb{R}^n$ be an arbitrary set and $(x_m)\in K$ a sequence. Then $K$ is compact if and only if exists a partial sequence $(x_{m_k})$ and $x\in K$ such that $\displaystyle\lim_{k\to\infty}x_{m_k}=x$.
+Let $K\subset\mathbb{R}^n$ be an arbitrary set and $(x_m)\in K$ be a sequence. Then $K$ is compact if and only if there exists a partial sequence $(x_{m_k})$ and $x\in K$ such that $\displaystyle\lim_{k\to\infty}x_{m_k}=x$.
 \end{theorem}
 \subsection{Continuity}
 \begin{definition}[Graph of a function]
-Let $\boldsymbol{f}:U\subseteq\mathbb{R}^n\rightarrow\mathbb{R}$. We define the \textit{graph of $\boldsymbol{f}$} as the following subset of $\mathbb{R}^{n+1}$: $$\text{graph}\;\boldsymbol{f}=\{(x,\boldsymbol{f}(x))\in\mathbb{R}^{n+1}:x\in U\}.$$
+Let $f:U\subseteq\mathbb{R}^n\rightarrow\mathbb{R}$. We define the \textit{graph of $f$} as the following subset of $\mathbb{R}^{n+1}$: $$\text{graph}(f)=\{(x,f(x))\in\mathbb{R}^{n+1}:x\in U\}.$$
 \end{definition}
 \begin{definition}
-Given a function $\boldsymbol{f}:U\subseteq\mathbb{R}^n\rightarrow\mathbb{R}$, we define the \textit{level set $C_k(\boldsymbol{f})$} as $C_k(\boldsymbol{f})=\{x\in\mathbb{R}^n:\boldsymbol{f}(x)=k\}$.
+Given a function $f:U\subseteq\mathbb{R}^n\rightarrow\mathbb{R}$, we define the \textit{level set $C_k(f)$} as $C_k(f)=\{x\in\mathbb{R}^n:f(x)=k\}$.
 \end{definition}
 \begin{definition}
-Let $\boldsymbol{\boldsymbol{f}}:U\subseteq\mathbb{R}^n\rightarrow\mathbb{R}^m$ and $p\in U'$. We say $\displaystyle\lim_{x\to p} modulus of continuity(x)=L$ if $\forall\varepsilon>0$, $\exists\delta>0$ such that $\|\mathbf{\boldsymbol{f}}(x)-L\|<\varepsilon$ if $\|x-p\|<\delta$.
+Let $\boldsymbol{f}:U\subseteq\mathbb{R}^n\rightarrow\mathbb{R}^m$ and $p\in U'$. We say $\displaystyle\lim_{x\to p}\boldsymbol{f}(x)=L$ if $\forall\varepsilon>0$, $\exists\delta>0$ such that $\|\mathbf{\boldsymbol{f}}(x)-L\|<\varepsilon$ if $\|x-p\|<\delta$.
 \end{definition}
 \begin{prop}
 Let $\mathbf{\boldsymbol{f}}:U\subseteq\mathbb{R}^n\rightarrow\mathbb{R}^m$, $\mathbf{\boldsymbol{f}}=(f_1,\ldots,f_m)$, and $p\in U'$.
@@ -192,13 +195,13 @@ Let $\mathbf{\boldsymbol{f}}:U\subseteq\mathbb{R}^n\rightarrow\mathbb{R}^m$, $\m
 \end{enumerate}
 \end{prop}
 \begin{lemma}
-Let $\mathbf{\boldsymbol{f}}:U\subseteq\mathbb{R}^n\rightarrow\mathbb{R}^m$ and $x_0\in U'$. $\displaystyle\exists\lim_{x\to x_0}\mathbf{\boldsymbol{f}}(x)=L\iff\forall(x_n):\lim_{n\to\infty}x_n=x_0$ and $x_n\ne x_0$ for all $n$ we have $\displaystyle\lim_{n\to \infty}\mathbf{\boldsymbol{f}}(x_n)=L$.
+Let $\mathbf{\boldsymbol{f}}:U\subseteq\mathbb{R}^n\rightarrow\mathbb{R}^m$ and $\ell\in U'$. $\displaystyle\exists\lim_{x\to \ell}\mathbf{\boldsymbol{f}}(x)=L\iff\forall(x_n)\in\mathbb{R}^n:\lim_{n\to\infty}x_n=\ell$ and $x_n\ne \ell$ for all $n$ we have $\displaystyle\lim_{n\to \infty}\mathbf{\boldsymbol{f}}(x_n)=L$.
 \end{lemma}
 \begin{definition}
-We say that $\mathbf{\boldsymbol{f}}:U\subseteq\mathbb{R}^n\rightarrow\mathbb{R}^m$ is \textit{continuous} at $p\in U'$ if exists $\displaystyle\exists\lim_{x\to p}\mathbf{\boldsymbol{f}}(x)=\mathbf{\boldsymbol{f}}(p)$. We say that $\mathbf{\boldsymbol{f}}$ is continuous on $U$, if it is at each point $p\in U$.
+We say that $\mathbf{\boldsymbol{f}}:U\subseteq\mathbb{R}^n\rightarrow\mathbb{R}^m$ is \textit{continuous} at $p\in U'$ if exists $\displaystyle\lim_{x\to p}\mathbf{\boldsymbol{f}}(x)=\mathbf{\boldsymbol{f}}(p)$. We say that $\mathbf{\boldsymbol{f}}$ is continuous on $U$, if it is at each point $p\in U$.
 \end{definition}
 \begin{definition}
-We say that $\mathbf{\boldsymbol{f}}:U\subseteq\mathbb{R}^n\rightarrow\mathbb{R}^m$ is \textit{uniformly continuous} on $U$ if $\forall\varepsilon>0$, $\exists\delta>0:\|\mathbf{\boldsymbol{f}}(x)-\mathbf{\boldsymbol{f}}(y)\|<\varepsilon$ $\forall x,y\in U:\|x-y\|<\delta$.
+We say that $\mathbf{\boldsymbol{f}}:U\subseteq\mathbb{R}^n\rightarrow\mathbb{R}^m$ is \textit{uniformly continuous} on $U$ if $\forall\varepsilon>0$, $\exists\delta>0:\|\mathbf{\boldsymbol{f}}(x)-\mathbf{\boldsymbol{f}}(y)\|<\varepsilon$, $\forall x,y\in U:\|x-y\|<\delta$.
 \end{definition}
 \begin{corollary}
 A uniformly continuous function is continuous.
@@ -207,32 +210,33 @@ A uniformly continuous function is continuous.
 Let $\mathbf{\boldsymbol{f}}:K\subset\mathbb{R}^n\rightarrow\mathbb{R}^m$ be continuous function and $K$ a compact set. Then $\mathbf{\boldsymbol{f}}$ is uniformly continuous on $K$.
 \end{theorem}
 \begin{theorem}
-Let $\mathbf{\boldsymbol{f}}:U\subseteq\mathbb{R}^n\rightarrow\mathbb{R}^m$ be an uniformly continuous function and $(x_n)\in U$ a Cauchy sequence. Then $(\mathbf{\boldsymbol{f}}(x_n))\in\mathbb{R}^m$ is a Cauchy sequence.
+Let $\mathbf{\boldsymbol{f}}:U\subseteq\mathbb{R}^n\rightarrow\mathbb{R}^m$ be an uniformly continuous function and $(x_n)\in U$ be a Cauchy sequence. Then $(\mathbf{\boldsymbol{f}}(x_n))\in\mathbb{R}^m$ is a Cauchy sequence.
 \end{theorem}
 \begin{theorem}
-Let $\mathbf{\boldsymbol{f}}:K\subset\mathbb{R}^n\rightarrow\mathbb{R}^m$ be a continuous function and $K$ a compact set. Then $\mathbf{\boldsymbol{f}}(K)$ is a compact set.
+Let $\mathbf{\boldsymbol{f}}:K\subset\mathbb{R}^n\rightarrow\mathbb{R}^m$ be a continuous function and $K$ be a compact set. Then $\mathbf{\boldsymbol{f}}(K)$ is a compact set.
 \end{theorem}
 \begin{theorem}[Weierstra\ss' theorem]
-Let $\boldsymbol{f}:K\subset\mathbb{R}^n\rightarrow\mathbb{R}$ be a continuous function and $K$ a compact set. Then $\boldsymbol{f}$ attains a maxima and a minima on $K$.
+Let $f:K\subset\mathbb{R}^n\rightarrow\mathbb{R}$ be a continuous function and $K$ a compact set. Then $f$ attains a maximum and a minimum on $K$.
 \end{theorem}
 \begin{theorem}[Intermediate value theorem]
-Let $\boldsymbol{f}:U\subseteq\mathbb{R}^n\rightarrow\mathbb{R}$ be a continuous function and $U$ a connected set. Then $\forall x,y\in U$ and $\forall c\in[\boldsymbol{f}(x),\boldsymbol{f}(y)]$, $\exists z\in U:\boldsymbol{f}(z)=c$.
+Let $f:U\subseteq\mathbb{R}^n\rightarrow\mathbb{R}$ be a continuous function and $U$ be a connected set. Then $\forall x,y\in U$ and $\forall c\in[f(x),f(y)]$, $\exists z\in U:f(z)=c$.
 \end{theorem}
 \begin{definition}
 A function $\mathbf{\boldsymbol{f}}:U\subseteq\mathbb{R}^n\rightarrow\mathbb{R}^m$ is called \textit{Lipschitz continuous} if $\exists k>0$ such that $$\|\mathbf{\boldsymbol{f}}(x)-\mathbf{\boldsymbol{f}}(y)\|\leq k\|x-y\|$$ $\forall x,y\in U$. If $0\leq k<1$ we say that $\mathbf{\boldsymbol{f}}$ is a \textit{contraction}.
+\label{FOSV_contr}
 \end{definition}
 \begin{prop}
 Let $\mathbf{\boldsymbol{f}}:U\subseteq\mathbb{R}^n\rightarrow\mathbb{R}^m$ be a locally Lipschitz continuous function at $p\in U$. Then $\mathbf{\boldsymbol{f}}$ is continuous at $p$.
 \end{prop}
 \begin{definition}
-Let $(M,d)$ be a metric space and $\boldsymbol{f}:M\rightarrow\mathbb{R}$ a function. We define the \textit{modulus of continuity of $\boldsymbol{f}$} as the function $\omega_f:(0,\infty)\rightarrow[0,\infty]$ defined by: $$\omega_f(\delta):=\sup\{|\boldsymbol{f}(x)-\boldsymbol{f}(y)|:d(x,y)<\delta, x,y\in M\}.$$
+Let $(M,d)$ be a metric space and $f:M\rightarrow\mathbb{R}$ a function. We define the \textit{modulus of continuity of $f$} as the function $\omega_f:(0,\infty)\rightarrow[0,\infty]$ defined as $$\omega_f(\delta):=\sup\{|f(x)-f(y)|:d(x,y)<\delta, x,y\in M\}.$$
 \end{definition}
 \subsection{Differential calculus}
 \subsubsection*{Differential of a function}
 \begin{definition}
-Let $\boldsymbol{f}:U\subseteq\mathbb{R}^n\rightarrow\mathbb{R}^m$ and $a\in U$. The function $\boldsymbol{f}$ is \textit{differentiable} at $a$ if there exists a linear map $D\boldsymbol{f}(a):\mathbb{R}^n\rightarrow\mathbb{R}^m$ such that \begin{multline*}
+Let $\boldsymbol{f}:U\subseteq\mathbb{R}^n\rightarrow\mathbb{R}^m$ and $a\in U$. The function $\boldsymbol{f}$ is \textit{differentiable at $a$} if there exists a linear map $D\boldsymbol{f}(a):\mathbb{R}^n\rightarrow\mathbb{R}^m$ such that \begin{multline*}
     \lim_{x\to a}\frac{\|\boldsymbol{f}(x)-\boldsymbol{f}(a)-D\boldsymbol{f}(a)(x-a)\|}{\|x-a\|}=\\=\lim_{h\to 0}\frac{\|\boldsymbol{f}(a+h)-\boldsymbol{f}(a)-D\boldsymbol{f}(a)h\|}{\|h\|}=0.
-\end{multline*} $D\boldsymbol{f}(a)$ is called the \textit{differential of $\boldsymbol{f}$ at point $a$}. Furthermore, we say $\boldsymbol{f}$ is differentiable on $B\subset U$ if is differentiable at each point of $B$.
+\end{multline*} $D\boldsymbol{f}(a)$ is called the \textit{differential of $\boldsymbol{f}$ at point $a$}. Furthermore, we say $\boldsymbol{f}$ is differentiable on $B\subseteq U$ if it is differentiable at each point of $B$.
 \end{definition}
 \begin{prop}
 Let $\boldsymbol{f}:U\subseteq\mathbb{R}^n\rightarrow\mathbb{R}^m$ and $a\in U$. $\boldsymbol{f}=(f_1,\ldots,f_m)$ is differentiable at $a$ if and only if every component function $f_j:U\subseteq\mathbb{R}^n\rightarrow\mathbb{R}$ is differentiable at $a$.
@@ -241,11 +245,11 @@ Let $\boldsymbol{f}:U\subseteq\mathbb{R}^n\rightarrow\mathbb{R}^m$ and $a\in U$.
 Let $\boldsymbol{f}:U\subseteq\mathbb{R}^n\rightarrow\mathbb{R}$, $a\in U$ and $\textbf{v}\in\mathbb{R}^n:\|\textbf{v}\|=1$. The \textit{directional derivative of $\boldsymbol{f}$ at $a$} in the direction of $\textbf{v}$ is $$D_\textbf{v}\boldsymbol{f}(a)=\lim_{t\to 0}\frac{\boldsymbol{f}(a+t\textbf{v})-\boldsymbol{f}(a)}{t}.$$
 \end{definition}
 \begin{definition}
-Let $U\subseteq\mathbb{R}^n$ be an open set, $\boldsymbol{f}:U\rightarrow\mathbb{R}$ and $a\in U$. If the following limit exists, we define the \textit{partial derivative with respect to $x_j$ of $\boldsymbol{f}$ at $a$} as $$\frac{\partial \boldsymbol{f}}{\partial x_j}(a)=\lim_{h\to 0}\frac{\boldsymbol{f}(a+h\textbf{e}_j)-\boldsymbol{f}(a)}{h}.\footnote{Aquí $\textbf{e}_j$ is el $j$-èssim vector de la base canònica de $\mathbb{R}^n$, is a dir, $\textbf{e}_j=(0,\ldots,0,\overset{(j)}{1},0,\ldots,0)$.}$$
+Let $U\subseteq\mathbb{R}^n$ be an open set, $\boldsymbol{f}:U\rightarrow\mathbb{R}$ and $a\in U$. If the following limit exists, we define the \textit{partial derivative with respect to $x_j$ of $\boldsymbol{f}$ at $a$} as $$\frac{\partial \boldsymbol{f}}{\partial x_j}(a)=\lim_{h\to 0}\frac{\boldsymbol{f}(a+h\textbf{e}_j)-\boldsymbol{f}(a)}{h}\footnote{Here $\textbf{e}_j$ is the $j$-th vector of the canonical basis of $\mathbb{R}^n$, that is, $\textbf{e}_j=(0,\ldots,0,\overset{(j)}{1},0,\ldots,0)$.}.$$
 \end{definition}
 \begin{definition}
-Let $\boldsymbol{f}:U\subseteq\mathbb{R}^n\rightarrow\mathbb{R}^m$ and $a\in U$. If all partial derivative of $\boldsymbol{f}$ at $a$ exists, we call \textit{Jacobian matrix of $\boldsymbol{f}$ at $a$} at the matrix associated with $D\boldsymbol{f}(a)$ (with respect to the canonical basis of $\mathbb{R}^n$ and $\mathbb{R}^m$):
-$$Df(a)=\begin{pmatrix}
+Let $\boldsymbol{f}:U\subseteq\mathbb{R}^n\rightarrow\mathbb{R}^m$ and $a\in U$. If all partial derivatives of $\boldsymbol{f}$ at $a$ exist, we call \textit{Jacobian matrix of $\boldsymbol{f}$ at $a$} the matrix associated with $D\boldsymbol{f}(a)$ (with respect to the canonical basis of $\mathbb{R}^n$ and $\mathbb{R}^m$):
+$$D\boldsymbol{f}(a)=\begin{pmatrix}
 \displaystyle \frac{\partial f_1}{\partial x_1}(a) & \cdots & \displaystyle \frac{\partial f_1}{\partial x_n}(a)\\
 \vdots & \ddots & \vdots \\
 \displaystyle \frac{\partial f_m}{\partial x_1}(a) & \cdots & \displaystyle \frac{\partial f_m}{\partial x_n}(a)
@@ -255,19 +259,19 @@ $$Df(a)=\begin{pmatrix}
 Let $U\subseteq\mathbb{R}^n$ be an open set, $f:U\rightarrow\mathbb{R}$ and $a\in U$ such that $f$ is differentiable at $a\in U$. The \textit{gradient of $f$ at $a$} is $$\nabla f(a):=Df(a)=\left(\frac{\partial f}{\partial x_1}(a),\ldots,\frac{\partial f}{\partial x_n}(a)\right).$$
 \end{definition}
 \begin{prop}
-Let $U\subseteq\mathbb{R}^n$ be an open set and $f:U\rightarrow\mathbb{R}$ a differentiable function at $a\in U$. Then there exists the tangent hyperplane to the graph of $f$ at $a$ and has the equation $$x_{n+1}=f(a)+\nabla f(a)\cdot (x-a).\footnote{In general (not only the case of the graph of a function) the tangent hyperplane to function $f$ at a point $a$ is given by the equation $$\nabla f(a)\cdot (x-a)=0.$$}$$
+Let $U\subseteq\mathbb{R}^n$ be an open set and $f:U\rightarrow\mathbb{R}$ be a differentiable function at $a\in U$. Then there exists the tangent hyperplane to the graph of $f$ at $a$ and has the equation $$x_{n+1}=f(a)+\nabla f(a)\cdot (x-a)\footnote{In general (not only the case of the graph of a function) the tangent hyperplane to function $f$ at a point $a$ is given by the equation $$\nabla f(a)\cdot (x-a)=0.$$}.$$
 \end{prop}
 \begin{theorem}
-Let $U\subseteq\mathbb{R}^n$ be an open set, $f:U\rightarrow\mathbb{R}$, $a\in U$ and $v\in\mathbb{R}^n:\|\textbf{v}\|=1$. If $f$ is differentiable at $a$, then $D_\textbf{v}f(a)$ exists and $$D_\textbf{v}f(a)=\nabla f(a)\cdot \textbf{v}.$$
+Let $U\subseteq\mathbb{R}^n$ be an open set, $f:U\rightarrow\mathbb{R}$, $a\in U$ and $\textbf{v}\in\mathbb{R}^n:\|\textbf{v}\|=1$. If $f$ is differentiable at $a$, then $D_\textbf{v}f(a)$ exists and $$D_\textbf{v}f(a)=\nabla f(a)\cdot \textbf{v}.$$
 \end{theorem}
 \begin{prop}
-Let $U\subseteq\mathbb{R}^n$ be an open set, $f:U\rightarrow\mathbb{R}$ a differentiable function on $U$ and $C_k$ be the level set of value $k\in\mathbb{R}$. Then $\nabla f(a)\perp C_k$ at $a\in C_k$.
+Let $U\subseteq\mathbb{R}^n$ be an open set, $f:U\rightarrow\mathbb{R}$ be a differentiable function on $U$ and $C_k$ be the level set of value $k\in\mathbb{R}$. Then $\nabla f(a)\perp C_k$ at $a\in C_k$.
 \end{prop}
 \begin{prop}
 Let $U\subseteq\mathbb{R}^n$ be an open set and $f:U\rightarrow\mathbb{R}$ a differentiable function at $a\in U$ and $\textbf{v}\in\mathbb{R}^n$. Then:
 \begin{itemize}
-    \item $\displaystyle\max\{D_\textbf{v}f(a):\|\textbf{v}\|=1\}=\|\nabla f(a)\|$ and it is reached when $\displaystyle \textbf{v}=\frac{\nabla f(a)}{\|\nabla f(a)\|}$.
-    \item $\displaystyle\min\{D_\textbf{v}f(a):\|\textbf{v}\|=1\}=-\|\nabla f(a)\|$ and it is reached when $\displaystyle \textbf{v}=-\frac{\nabla f(a)}{\|\nabla f(a)\|}$.
+    \item $\displaystyle\max\{D_\textbf{v}f(a):\|\textbf{v}\|=1\}=\|\nabla f(a)\|$ and it is attained when $\displaystyle \textbf{v}=\frac{\nabla f(a)}{\|\nabla f(a)\|}$.
+    \item $\displaystyle\min\{D_\textbf{v}f(a):\|\textbf{v}\|=1\}=-\|\nabla f(a)\|$ and it is attained when $\displaystyle \textbf{v}=-\frac{\nabla f(a)}{\|\nabla f(a)\|}$.
 \end{itemize}
 \end{prop}
 \begin{theorem}
@@ -277,17 +281,17 @@ Let $\boldsymbol{f}:U\subseteq\mathbb{R}^n\rightarrow\mathbb{R}^m$ be a differen
 Let $\boldsymbol{f},\boldsymbol{g}:U\subseteq\mathbb{R}^n\to\mathbb{R}^m$ be two differentiable functions at a point $a\in U$ and let $c\in\mathbb{R}$. Then:
 \begin{enumerate}
     \item $\boldsymbol{f}+\boldsymbol{g}$ is differentiable at $a$ and $$D(\boldsymbol{f}+\boldsymbol{g})(a)=D\boldsymbol{f}(a)+D\boldsymbol{g}(a).$$
-    \item $c\boldsymbol{f}$ is differentiable at $a$ i
+    \item $c\boldsymbol{f}$ is differentiable at $a$ and
     $$D(c\boldsymbol{f})(a)=cD\boldsymbol{f}(a).$$
     \item If $m=1$, then $(fg)(x)=f(x)g(x)$ is differentiable at $a$ and $$D(fg)(a)=g(a)Df(a)+f(a)Dg(a).$$
     \item If $m=1$ and $g(a)\ne0$, then $\displaystyle\left(\frac{f}{g}\right)(x)=\frac{f(x)}{g(x)}$ is differentiable at $a$ and $$D\left(\frac{f}{g}\right)(a)=\frac{g(a)Df(a)-f(a)Dg(a)}{[g(a)]^2}.$$
 \end{enumerate}
 \end{theorem}
 \begin{theorem}[Chain rule]
-Let $U\subseteq\mathbb{R}^n$ and $V\subseteq\mathbb{R}^m$ open sets. Let $\boldsymbol{f}:U\rightarrow\mathbb{R}^m$ and $\boldsymbol{g}:V\rightarrow\mathbb{R}^p$. Suppose that $\boldsymbol{f}(U)\subset V$, $\boldsymbol{f}$ is differentiable at $a\in U$ and $\boldsymbol{g}$ is differentiable at $\boldsymbol{f}(a)$. Then $g\circ \boldsymbol{f}$ is differentiable at $a$ and $$D(\boldsymbol{g}\circ \boldsymbol{f})(a)=D\boldsymbol{g}(\boldsymbol{f}(a))\circ Df(a).$$
+Let $U\subseteq\mathbb{R}^n$ and $V\subseteq\mathbb{R}^m$ be open sets. Let $\boldsymbol{f}:U\rightarrow\mathbb{R}^m$ and $\boldsymbol{g}:V\rightarrow\mathbb{R}^p$. Suppose that $\boldsymbol{f}(U)\subset V$, $\boldsymbol{f}$ is differentiable at $a\in U$ and $\boldsymbol{g}$ is differentiable at $\boldsymbol{f}(a)$. Then $\boldsymbol{g}\circ \boldsymbol{f}$ is differentiable at $a$ and $$D(\boldsymbol{g}\circ \boldsymbol{f})(a)=D\boldsymbol{g}(\boldsymbol{f}(a))\circ D\boldsymbol{f}(a).$$
 \end{theorem}
 \begin{definition}
-Let $U\subseteq\mathbb{R}^n$ be an open set and $\boldsymbol{f}:U\rightarrow\mathbb{R}^m$. We say that $\boldsymbol{f}$ is of class $\mathcal{C}^k(U)$, $k\in\mathbb{N}$, if all partial derivatives of order $k$ exists and are continuous $U$. We say that $\boldsymbol{f}$ is of class $\mathcal{C}^\infty(U)$ if it is of class $\mathcal{C}^k(U)$ $\forall k\in\mathbb{N}$.
+Let $U\subseteq\mathbb{R}^n$ be an open set and $\boldsymbol{f}:U\rightarrow\mathbb{R}^m$. We say that $\boldsymbol{f}$ is a \textit{function of class $\mathcal{C}^k(U)$}, $k\in\mathbb{N}$, if all partial derivatives of order $k$ exists and are continuous on $U$. We say that $\boldsymbol{f}$ is \textit{function of class $\mathcal{C}^\infty(U)$} if it is of class $\mathcal{C}^k(U)$, $\forall k\in\mathbb{N}$.
 \end{definition}
 \begin{theorem}[Differentiability criterion]
 Let $\boldsymbol{f}:U\subseteq\mathbb{R}^n\rightarrow\mathbb{R}^m$. If all partial derivatives $\displaystyle \frac{\partial f_i(x)}{\partial x_j}$ exists in a  neighborhood of $a\in U$ and are continuous at $a$, then $\boldsymbol{f}$ is differentiable at $a\in U$.
@@ -296,10 +300,10 @@ Let $\boldsymbol{f}:U\subseteq\mathbb{R}^n\rightarrow\mathbb{R}^m$. If all parti
 Let $\boldsymbol{f}:U\subseteq\mathbb{R}^n\rightarrow\mathbb{R}^m$ and $A\subseteq U$. If all partial derivatives of $\boldsymbol{f}$ exist on $A$ and are bounded functions on $A$, then $\boldsymbol{f}$ is uniformly continuous on $A$.
 \end{prop}
 \begin{theorem}[Mean value theorem]
-Let $f:B\rightarrow\mathbb{R}$ be a function of class $\mathcal{C}^1$ in an open connected set $B$. Let $x,y\in B$. Then, $$f(x)-f(y)=\nabla f(z)\cdot(x-y)$$ for some $z\in[x,y]$.
+Let $f:B\rightarrow\mathbb{R}$ be a function of class $\mathcal{C}^1$ in an open connected set $B$. Let $x,y\in B$. Then, $$f(x)-f(y)=\nabla f(z)\cdot(x-y),$$ for some $z\in[x,y]$.
 \end{theorem}
 \begin{theorem}[Mean value theorem for vector-valued functions]
-Let $\boldsymbol{f}:B\rightarrow\mathbb{R}^m$ be a function of class $\mathcal{C}^1$ in an open connected set $B$. Let $x,y\in B$. Then, $$\|\boldsymbol{f}(x)-\boldsymbol{f}(y)\|\leq\|Df(z)\|\|x-y\|$$ for some $z\in[x,y]$.
+Let $\boldsymbol{f}:B\rightarrow\mathbb{R}^m$ be a function of class $\mathcal{C}^1$ in an open connected set $B$. Let $x,y\in B$. Then, $$\|\boldsymbol{f}(x)-\boldsymbol{f}(y)\|\leq\|Df(z)\|\|x-y\|,$$ for some $z\in[x,y]$.
 \end{theorem}
 \subsubsection*{Higher order derivatives}
 \begin{definition}
@@ -310,31 +314,31 @@ Let $U\subseteq\mathbb{R}^n$ be an open set. If $f:U\rightarrow\mathbb{R}$ has s
 \displaystyle \frac{\partial^2 f}{\partial x_1^2}(a) &\cdots & \displaystyle \frac{\partial^2 f}{\partial x_nx_1}(a)\\
 \vdots & \ddots & \vdots \\
 \displaystyle \frac{\partial^2 f}{\partial x_1x_n}(a) & \cdots & \displaystyle \frac{\partial^2 f}{\partial x_n^2}(a)
-\end{pmatrix}$$
+\end{pmatrix}.$$
 \end{definition}
 \begin{theorem}[Schwarz's theorem]
-Let $U\subseteq\mathbb{R}^n$ be an open set and $f:U\rightarrow\mathbb{R}$. If $f$ has mixed partial derivatives of order $k$ and are continuous functions on $A\subset U$, then for any permutation $\sigma\in S_k$ we have $$\frac{\partial^kf}{\partial x_{i_k}\cdots\partial x_{i_1}}(a)=\frac{\partial^kf}{\partial x_{\sigma(i_k)}\cdots\partial x_{\sigma(i_1)}}(a)\quad\forall a\in A.$$
+Let $U\subseteq\mathbb{R}^n$ be an open set and $f:U\rightarrow\mathbb{R}$. If $f$ has mixed partial derivatives of order $k$ and are continuous functions on $A\subseteq U$, then for any permutation $\sigma\in S_k$ we have $$\frac{\partial^kf}{\partial x_{i_k}\cdots\partial x_{i_1}}(a)=\frac{\partial^kf}{\partial x_{\sigma(i_k)}\cdots\partial x_{\sigma(i_1)}}(a),\quad\forall a\in A.$$
 \end{theorem}
 \subsubsection*{Inverse and implicit function theorems}
 \begin{lemma}
-Let $U\subseteq\mathbb{R}^n$ be an open set and $\boldsymbol{f}:U\rightarrow\mathbb{R}^m$ with $\boldsymbol{f}\in \mathcal{C}^1(U)$. Given an $a\in U$ and $\varepsilon>0$, $\exists B(a,r)\subset U$ such that $$\|\boldsymbol{f}(x)-\boldsymbol{f}(y)\|\leq(\|D\boldsymbol{f}(a)\|+\varepsilon)\|x-y\|$$ $\forall x,y\in B(a,r)$.
+Let $U\subseteq\mathbb{R}^n$ be an open set and $\boldsymbol{f}:U\rightarrow\mathbb{R}^m$ with $\boldsymbol{f}\in \mathcal{C}^1(U)$. Given an $a\in U$ and $\varepsilon>0$, $\exists B(a,r)\subset U$ such that $$\|\boldsymbol{f}(x)-\boldsymbol{f}(y)\|\leq(\|D\boldsymbol{f}(a)\|+\varepsilon)\|x-y\|,\quad\forall x,y\in B(a,r).$$
 \end{lemma}
 \begin{lemma}
-Let $U\subseteq\mathbb{R}^n$ be an open set and $\boldsymbol{f}:U\rightarrow\mathbb{R}^n$ with $\boldsymbol{f}\in \mathcal{C}^1(U)$. Suppose that for some $a\in U$, $J\boldsymbol{f}(a)\ne 0$. Then $\exists B(a,r)\subset U$ and $c>0$ such that $$\|\boldsymbol{f}(y)-\boldsymbol{f}(x)\|\geq c\|y-x\|$$ $\forall x,y\in B(a,r)$. In particular, $\boldsymbol{f}$ is one-to-one on $B(a,r)$.
+Let $U\subseteq\mathbb{R}^n$ be an open set and $\boldsymbol{f}:U\rightarrow\mathbb{R}^n$ with $\boldsymbol{f}\in \mathcal{C}^1(U)$. Suppose that for some $a\in U$, $J\boldsymbol{f}(a)\ne 0$. Then $\exists B(a,r)\subset U$ and $c>0$ such that $$\|\boldsymbol{f}(y)-\boldsymbol{f}(x)\|\geq c\|y-x\|,\quad\forall x,y\in B(a,r).$$ In particular, $\boldsymbol{f}$ is injective on $B(a,r)$.
 \end{lemma}
 \begin{theorem}[Inverse function theorem]
 Let $U\subseteq\mathbb{R}^n$ be an open set, $\boldsymbol{f}:U\rightarrow\mathbb{R}^n$ with $\boldsymbol{f}\in \mathcal{C}^1(U)$ and $a\in U$ such that $J\boldsymbol{f}(a)\ne0$. Then $\exists B=B(a,r)\subset U$ such that:
 \begin{enumerate}
-    \item $\boldsymbol{f}$ is one-to-one a $B$.
+    \item $\boldsymbol{f}$ is injective on $B$.
     \item $\boldsymbol{f}(B)=V$ is an open set of $\mathbb{R}^n$.
     \item $\boldsymbol{f}^{-1}:V\rightarrow B$ is of class $\mathcal{C}^1$ on $V$.
-\end{enumerate} Moreover, is is satisfied that $D\boldsymbol{f}^{-1}(\boldsymbol{f}(a))=D\boldsymbol{f}(a)^{-1}$
+\end{enumerate} Moreover, it is satisfied that $D\boldsymbol{f}^{-1}(\boldsymbol{f}(a))=D\boldsymbol{f}(a)^{-1}$
 \end{theorem}
 \begin{definition}
 A function $\boldsymbol{f}:U\subseteq\mathbb{R}^n\rightarrow\mathbb{R}^n$ is a \textit{diffeomorphism of class $\mathcal{C}^k$} if it is bijective and both $\boldsymbol{f}$ and $\boldsymbol{f}^{-1}$ are of class $\mathcal{C}^k$.
 \end{definition}
 \begin{theorem}[Implicit function theorem]
-Let $U\subseteq\mathbb{R}^{n+m}$ be an open set, $\boldsymbol{f}:U\rightarrow\mathbb{R}^m$ with $\boldsymbol{f}\in \mathcal{C}^1(U)$ and $(a,b)=(a_1,\ldots,a_n,b_1,\ldots,b_m)\in U$ such that $\boldsymbol{f}(a,b)=0$. If $D\boldsymbol{f}(x)=(Df_1(x)\;|\;Df_2(x))$ with $Df_1(x)\in\mathcal{M}_{m\times n}(\mathbb{R})$, $Df_2(x)\in\mathcal{M}_m(\mathbb{R})$ and $\det Df_2(x)\ne 0$ (i.e. $\text{rang }D\boldsymbol{f}(a,b)=m$), then exists an open set $W\subset\mathbb{R}^n$ such that $a\in W$ and a function $\boldsymbol{g}:W\rightarrow\mathbb{R}^m$ with $\boldsymbol{g}\in\mathcal{C}^1(W)$, such that $$\boldsymbol{g}(a)=b\quad\text{i}\quad \boldsymbol{f}(x,\boldsymbol{g}(x))=0\quad\forall x\in W.$$ Moreover, is is satisfied that $$D\boldsymbol{g}(a)=-Df_2(a,\boldsymbol{g}(a))^{-1}\circ Df_1(a,\boldsymbol{g}(a)).$$
+Let $U\subseteq\mathbb{R}^{n+m}$ be an open set, $\boldsymbol{f}:U\rightarrow\mathbb{R}^m$ with $\boldsymbol{f}\in \mathcal{C}^1(U)$ and $(a,b)=(a_1,\ldots,a_n,b_1,\ldots,b_m)\in U$ such that $\boldsymbol{f}(a,b)=0$. If $D\boldsymbol{f}(x)=(Df_1(x)\;|\;Df_2(x))$ with $Df_1(x)\in\mathcal{M}_{m\times n}(\mathbb{R})$, $Df_2(x)\in\mathcal{M}_m(\mathbb{R})$ and $\det Df_2(x)\ne 0$ (i.e. $\text{rang }D\boldsymbol{f}(a,b)=m$), then exists an open set $W\subseteq\mathbb{R}^n$ such that $a\in W$ and a function $\boldsymbol{g}:W\rightarrow\mathbb{R}^m$ with $\boldsymbol{g}\in\mathcal{C}^1(W)$, such that $$\boldsymbol{g}(a)=b\quad\text{and}\quad \boldsymbol{f}(x,\boldsymbol{g}(x))=0\quad\forall x\in W.$$ Moreover, is is satisfied that $$D\boldsymbol{g}(a)=-Df_2(a,\boldsymbol{g}(a))^{-1}\circ Df_1(a,\boldsymbol{g}(a)).$$
 \end{theorem}
 \subsubsection*{Taylor's polynomial and maxima and minima}
 \begin{theorem}[Taylor's theorem]
@@ -358,14 +362,14 @@ Let $U\subseteq\mathbb{R}^n$ be an open set and $f:U\rightarrow\mathbb{R}$ be a 
 Let $U\subseteq\mathbb{R}^n$ be an open set and $f:U\rightarrow\mathbb{R}$. We say that $a\in U$ is a \textit{critical point of $f$} if $\nabla f(a)=0$. We say that $a\in U$ is a \textit{saddle point} if $a$ is a critical point but not a local extremum.
 \end{definition}
 \begin{theorem}
-Let $Q$ be a quadratic form. Then for all $x\ne 0$ we have:
+Let $\mathcal{Q}$ be a quadratic form. Then for all $x\ne 0$ we have:
 \begin{gather*}
-    Q\text{ is defined positive}\iff\exists\lambda\in\mathbb{R}^+:Q(x)\geq\lambda\|x\|^2.\\
-    Q\text{ is defined negative}\iff\exists\lambda\in\mathbb{R}^-:Q(x)\leq\lambda\|x\|^2.
+    \mathcal{Q}\text{ is defined positive}\iff\exists\lambda\in\mathbb{R}^+:\mathcal{Q}(x)\geq\lambda\|x\|^2.\\
+    \mathcal{Q}\text{ is defined negative}\iff\exists\lambda\in\mathbb{R}^-:\mathcal{Q}(x)\leq\lambda\|x\|^2.
 \end{gather*}
 \end{theorem}
 \begin{prop}[Sylvester's criterion]
-Let $A=(a_{ij})$ be a symmetric matrix. $A$ is defined positive if and only if all its principal minors are positive, that is: $$a_{11}>0,\begin{vmatrix}
+Let $A=(a_{ij})\in\mathcal{M}_n(\mathbb{R})$ be a symmetric matrix. $A$ is defined positive if and only if all its principal minors are positive, that is: $$a_{11}>0,\begin{vmatrix}
 a_{11} & a_{12}\\
 a_{21} & a_{22} \end{vmatrix}>0,\ldots,
 \begin{vmatrix}
@@ -384,7 +388,7 @@ a_{n1} & \cdots & a_{nn}
 \end{vmatrix}>0.$$
 \end{prop}
 \begin{theorem}
-Let $U\subseteq\mathbb{R}^2$ be an open set, $f:U\rightarrow\mathbb{R}$ a function of class $\mathcal{C}^2(U)$ and $a\in U:\nabla f(a)=0$. Let $Hf(a)$ be the hessian matrix of $f$ at $a$ and let $\mathcal{H}f(a)$ be its associated quadratic form. Then:
+Let $U\subseteq\mathbb{R}^2$ be an open set, $f:U\rightarrow\mathbb{R}$ a function of class $\mathcal{C}^2(U)$ and $a\in U:\nabla f(a)=0$. Let $Hf(a)$ be the hessian matrix of $f$ at $a$ and $\mathcal{H}f(a)$ be its associated quadratic form. Then:
 \begin{enumerate}
     \item If $\mathcal{H}f(a)$ is defined positive $\implies f$ has a local minimum at $a$.
     \item If $\mathcal{H}f(a)$ is defined negative $\implies f$ has a local maximum at $a$.
@@ -392,40 +396,40 @@ Let $U\subseteq\mathbb{R}^2$ be an open set, $f:U\rightarrow\mathbb{R}$ a functi
 \end{enumerate}
 \end{theorem}
 \begin{theorem}[Lagrange multipliers theorem]
-Let $f,g_i:U\subseteq\mathbb{R}^n\rightarrow\mathbb{R}$ be function of class $\mathcal{C}^1(U)$ for $i=1,\ldots,k$ and $1\leq k<n$. Let $S=\{x\in U:g_i(x)=0,\;\forall i\}$ and $a\in S$ such that $f_{|_S}(a)$ is a local extremum. If the vectors $\nabla g_1(a),\ldots,\nabla g_k(a)$ are linearly independents, then $\exists\lambda_1,\ldots,\lambda_k\in\mathbb{R}$ such that: $$\nabla f(a)=\sum_{i=1}^k\lambda_i\nabla g_i(a).$$
+Let $f,g_i:U\subseteq\mathbb{R}^n\rightarrow\mathbb{R}$ be functions of class $\mathcal{C}^1(U)$ for $i=1,\ldots,k$ and $1\leq k<n$. Let $S=\{x\in U:g_i(x)=0,\;\forall i\}$ and $a\in S$ such that $f_{|_S}(a)$ is a local extremum. If the vectors $\nabla g_1(a),\ldots,\nabla g_k(a)$ are linearly independents, then $\exists\lambda_1,\ldots,\lambda_k\in\mathbb{R}$ such that: $$\nabla f(a)=\sum_{i=1}^k\lambda_i\nabla g_i(a).$$
 \end{theorem}
 \subsection{Integral calculus}
 \subsubsection*{Integration over compact rectangles}
 \begin{definition}
-A \textit{rectangle} $R$ of $\mathbb{R}^n$ is a product $R=I_1\times\cdots\times I_n$ where $I_j\in\mathbb{R}$ are bounded and non degenerate\footnote{That is, non-empty intervals with more than one point.} intervals.
+A \textit{rectangle} $R$ of $\mathbb{R}^n$ is a product $R=I_1\times\cdots\times I_n$ where $I_j\in\mathbb{R}$ are bounded and non-degenerate\footnote{That is, non-empty intervals with more than one point.} intervals.
 \end{definition}
 \begin{definition}
-The \textit{$n$-dimensional volum} (\textit{surface} if $n=2$ or \textit{length} if $n=1$) of a bounded rectangle $R=I_1\times\cdots\times I_n$, $I_i=[a_i,b_i]$ is: $$\text{vol}(R)=\prod_{i=1}^n(b_i-a_i).$$
+The \textit{$n$-dimensional volume} (\textit{surface} if $n=2$ or \textit{length} if $n=1$) of a bounded rectangle $R=I_1\times\cdots\times I_n$, $I_i=[a_i,b_i]$ is: $$\text{vol}(R)=\prod_{i=1}^n(b_i-a_i).$$
 \end{definition}
 \begin{definition}
-Given a rectangle $R=I_1\times\cdots\times I_n$, a \textit{partition of $R$} is the product $\mathcal{P}=\mathcal{P}_1\times\cdots\times\mathcal{P}_n$ where $\mathcal{P}_j$ is a partition of the interval $I_j$. A partition $\mathcal{P}$ is \textit{regular} if for all $j$, $\mathcal{P}_j$ is regular, that is, all subintervals in $\mathcal{P}_j$ have the same size.
+Given a rectangle $R=I_1\times\cdots\times I_n$, a \textit{partition of $R$} is the product $\mathcal{P}=\mathcal{P}_1\times\cdots\times\mathcal{P}_n$ where $\mathcal{P}_j$ is a partition of the interval $I_j$. A partition $\mathcal{P}$ is \textit{regular} if for all $j$, $\mathcal{P}_j$ is regular, that is, all subintervals in $\mathcal{P}_j$ have the same size. We denote by $\textbf{P}(R)$ the set of all partitions of $R$.
 \end{definition}
 \begin{definition}
-Given two partitions $\mathcal{P}=I_1\times\cdots\times I_n$ and $\mathcal{P}'=I_1'\times\cdots\times I_n'$ of a rectangle $R$, we say that $\mathcal{P}'$ is \textit{finer than} $\mathcal{P}$ if cada $\mathcal{P}_j'$ is finer than $\mathcal{P}_j$.
+Given two partitions $\mathcal{P}=I_1\times\cdots\times I_n$ and $\mathcal{P}'=I_1'\times\cdots\times I_n'$ of a rectangle $R$, we say that $\mathcal{P}'$ is \textit{finer than} $\mathcal{P}$ if each $\mathcal{P}_j'$ is finer than $\mathcal{P}_j$.
 \end{definition}
 \begin{definition}
-Let $R\subset\mathbb{R}^n$ be a compact rectangle, $f:R\rightarrow\mathbb{R}$ a bounded function and $\mathcal{P}$ a partition of $R$. For each subrectangle $R_j$ ($j=1,\ldots,m$) determined by $\mathcal{P}$ let $$m_j=\inf\{f(x):x\in R_j\}\quad\text{i}\quad M_j=\sup\{f(x):x\in R_j\}.$$\newpage We define the \textit{lower sum} and the \textit{upper sum} of $f$ with respect to $\mathcal{P}$ as: $$L(f,\mathcal{P})=\sum_{j=1}^mm_j\text{vol}(R),\qquad U(f,\mathcal{P})=\sum_{j=1}^mM_j\text{vol}(R).\footnote{We will omit the results relating this definitions because. In fact they are a natural extension of results of single-variable functions course. Because of that here we only expose the most important ones.}$$
+Let $R\subset\mathbb{R}^n$ be a compact rectangle, $f:R\rightarrow\mathbb{R}$ be a bounded function and $\mathcal{P}\in\textbf{P}(R)$. For each subrectangle $R_j$, $j=1,\ldots,m$, determined by $\mathcal{P}$ let $$m_j=\inf\{f(x):x\in R_j\}\quad\text{i}\quad M_j=\sup\{f(x):x\in R_j\}.$$ We define the \textit{lower sum} and the \textit{upper sum of $f$ with respect to $\mathcal{P}$} as: $$L(f,\mathcal{P})=\sum_{j=1}^mm_j\text{vol}(R),\qquad U(f,\mathcal{P})=\sum_{j=1}^mM_j\text{vol}(R)\footnote{We will omit the results related to these definitions because of they are a natural extension of results of single-variable functions course and can be deduced easily. That's why we only expose the most important ones here.}.$$
 \end{definition}
 \begin{definition}
-Let $R\subset\mathbb{R}^n$ be a compact rectangle and $f:R\rightarrow\mathbb{R}$ a bounded function. We denote by $\textbf{P}$ the set of all partitions of $R$. We define the \textit{lower integral} and \textit{upper integral} of $f$ on $R$ as 
+Let $R\subset\mathbb{R}^n$ be a compact rectangle and $f:R\rightarrow\mathbb{R}$ be a bounded function. We define the \textit{lower integral} and \textit{upper integral of $f$ on $R$} as 
 \begin{gather*}
     \lowint{R}{}f=\sup\{L(f,\mathcal{P}):\mathcal{P}\in\textbf{P}\},\\
     \upint{R}{}f=\inf\{U(f,\mathcal{P}):\mathcal{P}\in\textbf{P}\}.
-\end{gather*} We say that $f$ is \textit{Riemann-integrable} on $R$ if $\displaystyle\lowint{R}{}f=\upint{R}{}f$.
+\end{gather*} We say that $f$ is \textit{Riemann-integrable on $R$} if $\displaystyle\lowint{R}{}f=\upint{R}{}f$.
 \end{definition}
 \begin{prop}
-Let $R\subset\mathbb{R}^n$ be a compact rectangle and $f:R\rightarrow\mathbb{R}$ a bounded function. $f$ is Riemann-integrable if and only if $\forall\varepsilon$, there exists a partition $\mathcal{P}$ of $R$ such that $U(f,\mathcal{P})-L(f,\mathcal{P})<\varepsilon$.
+Let $R\subset\mathbb{R}^n$ be a compact rectangle and $f:R\rightarrow\mathbb{R}$ be a bounded function. $f$ is Riemann-integrable if and only if $\forall\varepsilon$ $\exists\mathcal{P}\in\textbf{P}(R)$ such that $U(f,\mathcal{P})-L(f,\mathcal{P})<\varepsilon$.
 \end{prop}
 \begin{definition}
-Let $R\subset\mathbb{R}^n$ be a compact rectangle, $f:R\rightarrow\mathbb{R}$ a bounded function, $\mathcal{P}$ a partition of $R$ and $\xi_j$ an arbitrary point of the subrectangle $R_j$, $j=1,\ldots,m$. Then we define the \textit{Riemann sum of $f$ associated to $\mathcal{P}$} as: $$S(f,\mathcal{P})=\sum_{j=1}^mf(\xi_j)\text{vol}(R_j).$$
+Let $R\subset\mathbb{R}^n$ be a compact rectangle; $f:R\rightarrow\mathbb{R}$, a bounded function; $\mathcal{P}\in\textbf{P}(R)$, and $\xi_j$, an arbitrary point of the subrectangle $R_j$, $j=1,\ldots,m$. Then we define the \textit{Riemann sum of $f$ associated to $\mathcal{P}$} as: $$S(f,\mathcal{P})=\sum_{j=1}^mf(\xi_j)\text{vol}(R_j).$$
 \end{definition}
 \begin{theorem}
-Let $R\subset\mathbb{R}^n$ be a compact rectangle and $f:R\rightarrow\mathbb{R}$ a bounded function. $f$ is Riemann-integrable over $R$ if and only if $\forall\varepsilon>0$, there exists a partition $\exists\mathcal{P}_\varepsilon$ of $R$ such that $$\left|S(f,\mathcal{P})-\int_Rf\right|=\left|\sum_{j=1}^mf(\xi_j)\text{vol}(R_j)-\int_Rf\right|<\varepsilon,$$ for every $\mathcal{P}$ finer than $\mathcal{P}_\varepsilon$ and for any $\xi_j\in R_j$.
+Let $R\subset\mathbb{R}^n$ be a compact rectangle and $f:R\rightarrow\mathbb{R}$ be a bounded function. $f$ is Riemann-integrable over $R$ if and only if $\forall\varepsilon>0$ $\exists\mathcal{P}_\varepsilon\in\textbf{P}(R)$ such that $$\left|S(f,\mathcal{P})-\int_Rf\right|=\left|\sum_{j=1}^mf(\xi_j)\text{vol}(R_j)-\int_Rf\right|<\varepsilon,$$ for any $\mathcal{P}\in\textbf{P}(R)$ finer than $\mathcal{P}_\varepsilon$ and for any $\xi_j\in R_j$.
 \end{theorem}
 \subsubsection*{Fubini's theorem}
 \begin{theorem}[Fubini's theorem]
@@ -437,20 +441,20 @@ Let $R_1\subset\mathbb{R}^n$ and $R_2\subset\mathbb{R}^m$ be closed rectangles a
 Let $R=[a_1,b_1]\times\cdots\times[a_n,b_n]\subset\mathbb{R}^n$ be a rectangle. If $f:R\rightarrow\mathbb{R}$ is a continuous function, then $$\int_Rf=\int_{a_n}^{b_n}dx_n\int_{a_{n-1}}^{b_{n-1}}dx_{n-1}\cdots\int_{a_1}^{b_1}f(x_1,\ldots,x_n)dx_1.$$
 \end{corollary}
 \begin{definition}
-Let $D\subset\mathbb{R}^{n-1}$ be a compact set and $\varphi_1,\varphi_2:D\rightarrow\mathbb{R}$ be continuous functions such that $\varphi_1(x)\leq\varphi_2(x)$ $\forall x\in D$. The set $$S=\{(x,y)\subset\mathbb{R}^n:x\in D, \varphi_1(x)\leq y\leq\varphi_2(x)\}$$ is called an \textit{elementary region in $\mathbb{R}^n$}. In particular, if $n=2$, we say $S$ is \textit{$x$-simple}. An elementary region in $V\subset\mathbb{R}^3$ is called \textit{$xy$-simple} if is of the form $$V=\{(x,y,z)\in\mathbb{R}^3:(x,y)\in U, \phi_1(x,y)\leq z\leq\phi_2(x,y)\},$$ where $U$ is an elementary region in $\mathbb{R}^2$ and $\phi_1,\phi_2$ are continuous functions on $U$.\footnote{Analogously we define \textit{$y$-simple} region in $\mathbb{R}^2$ and \textit{$yz$-simple} or \textit{$xz$-simple} regions in $\mathbb{R}^3$.}
+Let $D\subset\mathbb{R}^{n-1}$ be a compact set and $\varphi_1,\varphi_2:D\rightarrow\mathbb{R}$ be continuous functions such that $\varphi_1(x)\leq\varphi_2(x)$ $\forall x\in D$. The set $$S=\{(x,y)\subset\mathbb{R}^n:x\in D, \varphi_1(x)\leq y\leq\varphi_2(x)\}$$ is called an \textit{elementary region in $\mathbb{R}^n$}. In particular, if $n=2$, we say $S$ is \textit{$x$-simple}. An elementary region in $V\subset\mathbb{R}^3$ is called \textit{$xy$-simple} if it is of the form $$V=\{(x,y,z)\in\mathbb{R}^3:(x,y)\in U, \phi_1(x,y)\leq z\leq\phi_2(x,y)\},$$ where $U$ is an elementary region in $\mathbb{R}^2$ and $\phi_1,\phi_2$ are continuous functions on $U$\footnote{Analogously we define \textit{$y$-simple} regions in $\mathbb{R}^2$ and \textit{$yz$-simple} or \textit{$xz$-simple} regions in $\mathbb{R}^3$.}.
 \end{definition}
 \begin{theorem}[Fubini's theorem for elementary regions]
 Let $S=\{(x,y)\subset\mathbb{R}^n:x\in D, \varphi_1(x)\leq y\leq\varphi_2(x)\}$ be an elementary region in $\mathbb{R}^n$ and $f:S\rightarrow\mathbb{R}$. If $f$ is integrable over $S$ and for all $x_0\in D$ the function $f(x_0,y)$ is integrable over $[-M,M]$, $M\in\mathbb{R}$, then $$\int_Sf=\int_Ddx\int_{\varphi_1(x)}^{\varphi_2(x)}f(x,y)dy.$$
 \end{theorem}
 \begin{definition}
-Let $D\subset\mathbb{R}^{n-1}$ be a compact set and $S=\{(x,y)\subset\mathbb{R}^n:x\in D, \varphi_1(x)\leq y\leq\varphi_2(x)\}$ an elementary region. We define the \textit{$n$-dimensional volume of $S$}\textit{de $S$} as $$\text{vol}(S):=\int_Sdx=\int_Ddx\int_{\varphi_1(x)}^{\varphi_2(x)}dy.\footnote{In particular, we define the area of a region $S\subset\mathbb{R}^2$ as $\displaystyle\text{àrea}(S)=\iint_Sdxdy$ and the volume of a region $\Omega\subset\mathbb{R}^3$ as $\displaystyle\text{vol}(\Omega)=\iiint_\Omega dxdydz$.}$$
+Let $D\subset\mathbb{R}^{n-1}$ be a compact set and $S=\{(x,y)\subset\mathbb{R}^n:x\in D, \varphi_1(x)\leq y\leq\varphi_2(x)\}$ an elementary region. We define the \textit{$n$-dimensional volume of $S$} as $$\text{vol}(S):=\int_Sdx=\int_Ddx\int_{\varphi_1(x)}^{\varphi_2(x)}dy\footnote{In particular, we define the area of a region $S\subset\mathbb{R}^2$ as $\displaystyle\text{area}(S)=\iint_Sdxdy$ and the volume of a region $\Omega\subset\mathbb{R}^3$ as $\displaystyle\text{vol}(\Omega)=\iiint_\Omega dxdydz$.}.$$
 \end{definition}
 \begin{corollary}[Cavalieri's principle]
 Let $\Omega\subset R\times[a,b]$ be a set in $\mathbb{R}^n$ where $R\subset\mathbb{R}^{n-1}$ is a rectangle. For every $t\in[a,b]$ let $$\Omega_t=\{(x,y)\in\Omega:y=t\}\subset\mathbb{R}^n$$ be the section of $\Omega$ corresponding to the hyperplane $y=t$. If $\nu(\Omega_t)$ is the $(n-1)$-dimensional volume (area if $n=3$ or length if $n=2$) of $\Omega_t$, then $$\text{vol}(\Omega)=\int_a^b\nu(\Omega_t)dt.$$
 \end{corollary}
 \end{theorem}
 \begin{definition}[Center of mass]
-The \textit{center of mass} of an object with mass density $\rho(x,y,z)$, that occupies the region $\Omega\subset\mathbb{R}^3$, is the point $(\overline{x},\overline{y},\overline{z})\in\mathbb{R}^3$ whose coordinates are:
+The \textit{center of mass of an object with mass density $\rho(x,y,z)$} occupying a region $\Omega\subset\mathbb{R}^3$ is the point $(\overline{x},\overline{y},\overline{z})\in\mathbb{R}^3$ whose coordinates are:
 \begin{gather*}
     \overline{x}=\frac{1}{m}\iiint_\Omega x\rho(x,y,z)dxdydz,\\
     \overline{y}=\frac{1}{m}\iiint_\Omega y\rho(x,y,z)dxdydz,\\
@@ -459,72 +463,72 @@ The \textit{center of mass} of an object with mass density $\rho(x,y,z)$, that o
 where $\displaystyle m=\iiint_\Omega\rho(x,y,z)dxdydz$ is the total mass of the object.
 \end{definition}
 \begin{definition}[Moment of inertia]
-Given a body with mass density $\rho(x,y,z)$ occupying the region $\Omega\subset\mathbb{R}^3$ and a line $L\subset\mathbb{R}^3$, the \textit{moment of inertia} of the body about the line $L$ is $$I_L=\iiint_\Omega d(x,y,z)^2\rho(x,y,z)dxdydz,$$ where $d(x,y,z)$ denotes the distance from $(x,y,z)$ to the line $L$. In particular, when $L$ is the $z$-axis, then $$I_z=\iiint_\Omega (x^2+y^2)\rho(x,y,z)dxdydz,$$ and similarly for $I_x$ and $I_y$. The moment of inertia of the body about the $xy$-plane is definedy by $$I_{xy}=\iiint_\Omega z^2\rho(x,y,z)dxdydz,$$ and similarly for $I_{yz}$ and $I_{zx}.$
+Given a body with mass density $\rho(x,y,z)$ occupying a region $\Omega\subset\mathbb{R}^3$ and a line $L\subset\mathbb{R}^3$, the \textit{moment of inertia of the body about the line $L$} is $$I_L=\iiint_\Omega d(x,y,z)^2\rho(x,y,z)dxdydz,$$ where $d(x,y,z)$ denotes the distance from $(x,y,z)$ to the line $L$. In particular, when $L$ is the $z$-axis, then $$I_z=\iiint_\Omega (x^2+y^2)\rho(x,y,z)dxdydz,$$ and similarly for $I_x$ and $I_y$. The moment of inertia of the body about the $xy$-plane is definedy by $$I_{xy}=\iiint_\Omega z^2\rho(x,y,z)dxdydz,$$ and similarly for $I_{yz}$ and $I_{zx}.$
 \end{definition}
 \subsubsection*{Change of variable}
 \begin{theorem}[Change of variable theorem]
-Let $U\subseteq\mathbb{R}^n$ be an open set and let $\varphi:U\rightarrow\mathbb{R}^n$ a diffeomorphism. If $f:\varphi(U)\rightarrow\mathbb{R}$ is integrable on $\varphi(U)$, then $$\int_{\varphi(U)} f=\int_U(f\circ\varphi)|J\varphi|.$$
+Let $U\subseteq\mathbb{R}^n$ be an open set and let $\varphi:U\rightarrow\mathbb{R}^n$ be a diffeomorphism. If $f:\varphi(U)\rightarrow\mathbb{R}$ is integrable on $\varphi(U)$, then $$\int_{\varphi(U)} f=\int_U(f\circ\varphi)|J\varphi|.$$
 \end{theorem}
 \begin{corollary}[Integral in polar coordinates]
-Let $\varphi:[0,\infty)\times[0,2\pi)\rightarrow\mathbb{R}$ such that
-$$\varphi(r,\theta)\mapsto(r\cos\theta,r\sin\theta).$$
-Then we have $|J\varphi|=r$ and, therefore, $$\int_{\varphi(U)}f(x,y)dxdy=\int_Uf(r\cos\theta,r\sin\theta)rdrd\theta.$$
+Let $\varphi:[0,\infty)\times[0,2\pi)\rightarrow\mathbb{R}$ be such that
+$$\varphi(r,\theta)\longmapsto(r\cos\theta,r\sin\theta).$$
+Then we have $|J\varphi|=r$ and therefore: $$\int_{\varphi(U)}f(x,y)dxdy=\int_Uf(r\cos\theta,r\sin\theta)rdrd\theta.$$
 \end{corollary}
 \begin{corollary}[Integral in cylindrical coordinates]
-Let $\varphi:[0,\infty)\times[0,2\pi)\times\mathbb{R}\rightarrow\mathbb{R}$ such that $$\varphi(r,\theta,z)\mapsto(r\cos\theta,r\sin\theta,z).$$
-Then we have $|J\varphi|=r$ and, therefore, $$\int_{\varphi(U)}f(x,y,z)dxdydz=\int_Uf(r\cos\theta,r\sin\theta,z)rdrd\theta dz.$$
+Let $\varphi:[0,\infty)\times[0,2\pi)\times\mathbb{R}\rightarrow\mathbb{R}$ be such that $$\varphi(r,\theta,z)\longmapsto(r\cos\theta,r\sin\theta,z).$$
+Then we have $|J\varphi|=r$ and therefore: $$\int_{\varphi(U)}f(x,y,z)dxdydz=\int_Uf(r\cos\theta,r\sin\theta,z)rdrd\theta dz.$$
 \end{corollary}
 \begin{corollary}[Integral in spherical coordinates]
-Let $\varphi:[0,\infty)\times[0,2\pi)\times[0,\pi]\rightarrow\mathbb{R}$ such that $$\varphi(\rho,\theta,\phi)\mapsto(\rho\sin\phi\cos\theta,\rho\sin\phi\sin\theta,\rho\cos\phi).$$
-Then we have $|J\varphi|=\rho^2\sin\phi$ and, therefore, 
+Let $\varphi:[0,\infty)\times[0,2\pi)\times[0,\pi]\rightarrow\mathbb{R}$ be such that $$\varphi(\rho,\theta,\phi)\longmapsto(\rho\sin\phi\cos\theta,\rho\sin\phi\sin\theta,\rho\cos\phi).$$
+Then we have $|J\varphi|=\rho^2\sin\phi$ and therefore:
 \begin{multline*}
     \int_{\varphi(U)}f(x,y,z)dxdydz=\\=\int_Uf(\rho\sin\phi\cos\theta,\rho\sin\phi\sin\theta,\rho\cos\phi)\rho^2\sin\phi d\rho d\theta d\phi.
 \end{multline*}
 \end{corollary}
 \subsection{Vector calculus}
-\subsubsection*{Arc-length and Line integrals}
+\subsubsection*{Arc-length and line integrals}
 \begin{definition}
-Let $\boldsymbol{\gamma}:[a,b]\rightarrow\mathbb{R}^n$ be a parametrization of a curve and $\mathcal{P}=\{t_0,\ldots,t_n\}$ be a partition of $[a,b]$. Then, the \textit{length of the polygonal} created from the vertices $\boldsymbol{\gamma}(t_i)$, is $$L(\boldsymbol{\gamma},\mathcal{P})=\sum_{i=1}^n\|\boldsymbol{\gamma}(t_i)-\boldsymbol{\gamma}(t_{i-1})\|.$$
+Let $\boldsymbol{\gamma}:[a,b]\rightarrow\mathbb{R}^n$ be a parametrization of a curve and $\mathcal{P}=\{t_0,\ldots,t_n\}$ be a partition of $[a,b]$. Then, the \textit{length of the polygonal} created from the vertices $\boldsymbol{\gamma}(t_i)$ is $$L(\boldsymbol{\gamma},\mathcal{P})=\sum_{i=1}^n\|\boldsymbol{\gamma}(t_i)-\boldsymbol{\gamma}(t_{i-1})\|.$$
 \end{definition}
 \begin{definition}
-Let $\boldsymbol{\gamma}:[a,b]\rightarrow\mathbb{R}^n$ be a parametrization of a curve $c$. The \textit{arc length of $c$} is $$L(c)=\sup\{L(\boldsymbol{\gamma},\mathcal{P}):\mathcal{P}\subset[a,b]\}\in[0,\infty].$$
+Let $\boldsymbol{\gamma}:[a,b]\rightarrow\mathbb{R}^n$ be a parametrization of a curve $c$. The \textit{arc length of $c$} is $$L(c)=\sup\{L(\boldsymbol{\gamma},\mathcal{P}):\mathcal{P}\in\textbf{P}([a,b])\}\in[0,\infty].$$
 \end{definition}
 \begin{definition}
 We say that a curve $c$ is \textit{rectifiable} if it has a finite arc length, that is, if $L(c)<\infty$.
 \end{definition}
 \begin{prop}
-Let $\boldsymbol{\gamma}:[a,b]\rightarrow\mathbb{R}^n$ be a parametrization of class $\mathcal{C}^1$ of a curve $c$. Then $c$ is rectifiable and $$L(c)=\int_a^b\|\boldsymbol{\gamma}'(t)\|dt.\footnote{Observe that the arc length of a curve does not depend of its parametrization.}$$
+Let $\boldsymbol{\gamma}:[a,b]\rightarrow\mathbb{R}^n$ be a parametrization of class $\mathcal{C}^1$ of a curve $c$. Then $c$ is rectifiable and $$L(c)=\int_a^b\|\boldsymbol{\gamma}'(t)\|dt\footnote{It can be seen that the arc length of a curve does not depend on its parametrization.}.$$
 \end{prop}
 \begin{definition}
-Let $\boldsymbol{F}:U\subset\mathbb{R}^m\rightarrow\mathbb{R}^n$ be a vector field. If all its component functions $F_i$ are integrable, we define $$\int_U\boldsymbol{F}=\left(\int_UF_1,\ldots,\int_UF_n\right)\in\mathbb{R}^n.$$
+Let $\boldsymbol{F}:U\subset\mathbb{R}^m\rightarrow\mathbb{R}^n$ be a vector field\footnote{A \textit{vector field} is nothing more than a vector-valued function.}. If all its component functions $F_i$ are integrable, we define $$\int_U\boldsymbol{F}=\left(\int_UF_1,\ldots,\int_UF_n\right)\in\mathbb{R}^n.$$
 \end{definition}
 \begin{definition}
-Let $c$ be a curve in $\mathbb{R}^2$ parametritzed by $\boldsymbol{\gamma}=(x(t),y(t))$. The unit tangent vector to the curve at time $t$ is $$\textbf{T}=\frac{\boldsymbol{\gamma}'(t)}{\|\boldsymbol{\gamma}'(t)\|}.$$ The normal vector to the curve is $\boldsymbol{N}(t)=(y'(t),-x'(t))$ and the unit normal vector to the curve is $$\textbf{n}=\frac{\boldsymbol{N}(t)}{\|\boldsymbol{N}(t)\|}.\footnote{Observe that $-N(t)$ is also a normal vector to the curve but, by agreement, we take the one pointing to the right of the curve or, if the curve is closed, the one pointing outwards of the curve.}$$
+Let $c$ be a curve in $\mathbb{R}^2$ parametritzed by $\boldsymbol{\gamma}=(x(t),y(t))$. The unit tangent vector to the curve at time $t$ is $$\textbf{T}=\frac{\boldsymbol{\gamma}'(t)}{\|\boldsymbol{\gamma}'(t)\|}.$$ The normal vector to the curve is $N(t)=(y'(t),-x'(t))$ and the unit normal vector to the curve is $$\textbf{n}=\frac{N(t)}{\|N(t)\|}\footnote{Observe that $-N(t)$ is also a normal vector to the curve but, by agreement, we take the one pointing to the right of the curve or, if the curve is closed, the one pointing outwards from the curve.}.$$
 \end{definition}
 \begin{definition}
-Let $c$ be a curve parametritzed by $\boldsymbol{\gamma}:[a,b]\rightarrow\mathbb{R}^n$ and $\varphi:[c,d]\rightarrow[a,b]$ be a diffeomorphism. The composition $\boldsymbol{\gamma}\circ\varphi:[c,d]\rightarrow\mathbb{R}^n$ is called a \textit{reparametrization} of $c$.
+Let $c$ be a curve parametritzed by $\boldsymbol{\gamma}:[a,b]\rightarrow\mathbb{R}^n$ and $\varphi:[c,d]\rightarrow[a,b]$ be a diffeomorphism. The composition $\boldsymbol{\gamma}\circ\varphi:[c,d]\rightarrow\mathbb{R}^n$ is called a \textit{reparametrization of $c$}.
 \end{definition}
 \begin{definition}
-Let $c$ be a curve of class $\mathcal{C}^1$ parametritzed by $\boldsymbol{\gamma}:[a,b]\rightarrow\mathbb{R}^n$ an $L$ be its arc length. We define \textit{arc length parameter} as $$s(t)=\int_a^t\|\boldsymbol{\gamma}'(t)\|dt.$$ We reparametrize $c$ by $\rho (s)=\boldsymbol{\gamma}(t(s))$, $0\leq s\leq L$. Then $\rho'(s)$ is a unit tangent vector to $c$ and $\rho''(s)$ is perpendicular to $c$ at the point $\rho(s)$.
+Let $c$ be a curve of class $\mathcal{C}^1$ parametritzed by $\boldsymbol{\gamma}:[a,b]\rightarrow\mathbb{R}^n$ an $L$ be its arc length. We define the \textit{arc length parameter} as $$s(t)=\int_a^t\|\boldsymbol{\gamma}'(t)\|dt.$$ We reparametrize $c$ by $\rho (s)=\boldsymbol{\gamma}(t(s))$, $0\leq s\leq L$. Then $\rho'(s)$ is a unit tangent vector to $c$ and $\rho''(s)$ is perpendicular to $c$ at the point $\rho(s)$.
 \end{definition}
 \begin{definition}
-Let $c$ be a curve of class $\mathcal{C}^2$ and $s$ its arc length parameter. We define the \textit{curvature} of $c$ at the point $\rho(s)$ as $$\kappa(\rho(s))=\|\rho''(s)\|.$$
+Let $c$ be a curve of class $\mathcal{C}^2$ and $s$ be its arc length parameter. We define the \textit{curvature} of $c$ at the point $\rho(s)$ as $$\kappa(\rho(s))=\|\rho''(s)\|.$$
 \end{definition}
 \begin{definition}
-Let $c=\{\boldsymbol{\gamma}(t):t\in[a,b]\}\subset\mathbb{R}^n$ be a curve of class $\mathcal{C}^1$ and $f:\mathbb{R}^n\rightarrow\mathbb{R}$ be continuous function. We define the \textit{line integral of $f$ along $c$} as $$\int_cfds=\int_a^bf(\boldsymbol{\gamma}(t))\|\boldsymbol{\gamma}'(t)\|dt.\footnote{Observe that this integral is independent of the parametrization of $c$.}$$
+Let $c=\{\boldsymbol{\gamma}(t):t\in[a,b]\}\subset\mathbb{R}^n$ be a curve of class $\mathcal{C}^1$ and $f:\mathbb{R}^n\rightarrow\mathbb{R}$ be continuous function. We define the \textit{line integral of $f$ along $c$} as $$\int_cfds=\int_a^bf(\boldsymbol{\gamma}(t))\|\boldsymbol{\gamma}'(t)\|dt\footnote{It can be seen that this integral is independent of the parametrization of $c$.}.$$
 \end{definition}
 \begin{definition}
-Let $c=\{\boldsymbol{\gamma}(t):t\in[a,b]\}\subset\mathbb{R}^n$ be a curve of class $\mathcal{C}^1$ and $\boldsymbol{f}:\mathbb{R}^n\rightarrow\mathbb{R}^n$ a continuous vector field. We define the \textit{line integral of $\boldsymbol{f}$ along $c$} as $$\int_c\boldsymbol{f}\cdot d\textbf{s}=\int_c\boldsymbol{f}\cdot \textbf{T} ds=\int_a^b\boldsymbol{f}(\boldsymbol{\gamma}(t))\cdot\boldsymbol{\gamma}'(t) dt,$$ where $\textbf{T}$ is the unit tangent vector $c$.\footnote{Observe that the latter integral is independent of the parametrization of $c$ except for a factor of $-1$ that depends on the orientation of the parametrization.} If $c$ is closed then this integral is called the \textit{circulation of $\boldsymbol{f}$ around $c$}.
+Let $c=\{\boldsymbol{\gamma}(t):t\in[a,b]\}\subset\mathbb{R}^n$ be a curve of class $\mathcal{C}^1$ and $\boldsymbol{f}:\mathbb{R}^n\rightarrow\mathbb{R}^n$ be a continuous vector field. We define the \textit{line integral of $\boldsymbol{f}$ along $c$} as $$\int_c\boldsymbol{f}\cdot d\textbf{s}=\int_c\boldsymbol{f}\cdot \textbf{T} ds=\int_a^b\boldsymbol{f}(\boldsymbol{\gamma}(t))\cdot\boldsymbol{\gamma}'(t) dt,$$ where $\textbf{T}$ is the unit tangent vector $c$\footnote{It can be seen that the latter integral is independent of the parametrization of $c$ except for a factor of $-1$ that depends on the orientation of the parametrization.}. If $c$ is closed, then this integral is called the \textit{circulation of $\boldsymbol{f}$ around $c$}.
 \end{definition}
 \begin{definition}
-A \textit{Jordan arc} is the image of an one-to-one continuous map $\boldsymbol{\gamma}:[a,b]\rightarrow\mathbb{R}^n$. A \textit{Jordan closed curve} is the image of an one-to-one continuous map $\boldsymbol{\gamma}:[a,b]\rightarrow\mathbb{R}^n$ such that $\boldsymbol{\gamma}(a)=\boldsymbol{\gamma}(b)$.
+A \textit{Jordan arc} is the image of an injective continuous map $\boldsymbol{\gamma}:[a,b]\rightarrow\mathbb{R}^n$. A \textit{Jordan closed curve} is the image of an injective continuous map $\boldsymbol{\gamma}:[a,b]\rightarrow\mathbb{R}^n$ such that $\boldsymbol{\gamma}(a)=\boldsymbol{\gamma}(b)$.
 \end{definition}
 \subsubsection*{Conservative vector fields}
 \begin{definition}
-Let $U\subseteq\mathbb{R}^n$ be a domain and $f:U\rightarrow\mathbb{R}$ a function of class $\mathcal{C}^1$. We say that $\boldsymbol{f}:U\rightarrow\mathbb{R}^n$ is a \textit{conservative} or a \textit{gradient vector field} if $$\boldsymbol{f}(x)=\nabla f(x)\quad \forall x\in U.$$ The function $f$ is called the \textit{potential} of $\boldsymbol{f}$.
+Let $U\subseteq\mathbb{R}^n$ be a domain and $f:U\rightarrow\mathbb{R}$ be a function of class $\mathcal{C}^1$. We say that $\boldsymbol{f}:U\rightarrow\mathbb{R}^n$ is a \textit{conservative} or a \textit{gradient vector field} if $$\boldsymbol{f}(x)=\nabla f(x),\quad \forall x\in U.$$ The function $f$ is called the \textit{potential} of $\boldsymbol{f}$.
 \end{definition}
 \begin{theorem}
-Let $\boldsymbol{f}=\nabla f$ be a conservative vector field on $U\subseteq\mathbb{R}^n$ and $c$ be a closed curve that admits a parametrization $\{\boldsymbol{\gamma}(t):a\leq t\leq b\}$ of class $\mathcal{C}^1(U)$. Then $$\int_c\boldsymbol{f}\cdot d\textbf{s}=f(\boldsymbol{\gamma}(b))-f(\boldsymbol{\gamma}(a)).$$
+Let $\boldsymbol{f}=\nabla f$ be a conservative vector field on $U\subseteq\mathbb{R}^n$ and $c$ be a closed curve that admits a parametrization $\boldsymbol{\gamma}(t):[a,b]\rightarrow\mathbb{R}^n$ of class $\mathcal{C}^1(U)$. Then $$\int_c\boldsymbol{f}\cdot d\textbf{s}=f(\boldsymbol{\gamma}(b))-f(\boldsymbol{\gamma}(a)).$$
 \end{theorem}
 \begin{corollary}
 Let $\boldsymbol{f}$ be a conservative vector field on $U$ and $c$ be a closed curve that admits a parametrization of class $\mathcal{C}^1(U)$. Then $\displaystyle\int_c\boldsymbol{f}\cdot d\textbf{s}=0$.
@@ -550,52 +554,52 @@ Let $U$ be an open set of $\mathbb{R}^3$ and $f:U\rightarrow\mathbb{R}$, $\bolds
 \end{prop}
 \subsubsection*{Surface area and surface integrals}
 \begin{prop}
-Let $S$ be the graph of a function $z=\Phi(x,y)$ of class $\mathcal{C}^1(U)$, $U\subset\mathbb{R}^2$. Then $$\text{area}\,(S)=\iint_U\sqrt{1+\left(\frac{\partial \Phi}{\partial x}\right)^2+\left(\frac{\partial \Phi}{\partial y}\right)^2}dxdy.$$
+Let $S$ be the graph of a function $z=\Phi(x,y)$ of class $\mathcal{C}^1(U)$, $U\subseteq\mathbb{R}^2$. Then $$\text{area}\,(S)=\iint_U\sqrt{1+\left(\frac{\partial \Phi}{\partial x}\right)^2+\left(\frac{\partial \Phi}{\partial y}\right)^2}dxdy.$$
 \end{prop} 
 \begin{definition}
-A \textit{parametritzed surface $S\subset\mathbb{R}^3$} is the image of a map $\Phi:U\subset\mathbb{R}^2\rightarrow\mathbb{R}^3$ of class $\mathcal{C}^1(U)$ defined by $\Phi(u,v)=(x(u,v),y(u,v),z(u,v))$.
+A \textit{parametritzed surface $S\subset\mathbb{R}^3$} is the image of a map $\Phi:U\subseteq\mathbb{R}^2\rightarrow\mathbb{R}^3$ of class $\mathcal{C}^1(U)$ defined by $\Phi(u,v)=(x(u,v),y(u,v),z(u,v))$.
 \end{definition}
 \begin{prop}
-Let $S=\Phi(U)$ be a surface in $\mathbb{R}^3$ of class $\mathcal{C}^1$ parametritzed by $\Phi$. Then unit normal vector to $S$ at the point $\Phi(u,v)$ is $$\textbf{n}(u,v)=\frac{\frac{\partial\Phi}{\partial u}\wedge\frac{\partial\Phi}{\partial v}}{\left\|\frac{\partial\Phi}{\partial u}\wedge\frac{\partial\Phi}{\partial v}\right\|}.$$
+Let $S=\Phi(U)$ be a surface in $\mathbb{R}^3$ parametritzed by $\Phi\in\mathcal{C}^1(U)$. Then the unit normal vector to $S$ at the point $\Phi(u,v)$ is $$\textbf{n}(u,v)=\frac{\frac{\partial\Phi}{\partial u}\wedge\frac{\partial\Phi}{\partial v}}{\left\|\frac{\partial\Phi}{\partial u}\wedge\frac{\partial\Phi}{\partial v}\right\|}.$$
 \end{prop}
 \begin{prop}
-Let $S=\Phi(U)$ be a surface in $\mathbb{R}^3$ of class $\mathcal{C}^1$ parametritzed by $\Phi$. Then, $$\text{area}\,(S)=\iint_U\left\|\frac{\partial \Phi}{\partial u}\wedge\frac{\partial \Phi}{\partial v}\right\|dudv.$$
+Let $S=\Phi(U)$ be a surface in $\mathbb{R}^3$ parametritzed by $\Phi\in\mathcal{C}^1(U)$. Then, $$\text{area}\,(S)=\iint_U\left\|\frac{\partial \Phi}{\partial u}\wedge\frac{\partial \Phi}{\partial v}\right\|dudv.$$
 \end{prop}
 \begin{definition}
-Let $S=\Phi(U)$ be a surface of class $\mathcal{C}^1$ parametritzed by $\Phi$ and $f:\mathbb{R}^3\rightarrow\mathbb{R}$ be a continuous function whose domain contain $S$. We define the \textit{surface integral $f$ over $S$} as $$\iint_SfdS=\iint_U f(\Phi(u,v))\left\|\frac{\partial \Phi}{\partial u}\wedge\frac{\partial \Phi}{\partial v}\right\|dudv.\footnote{Observe that this integral is independent of the parametrization of $S$.}$$
+Let $S=\Phi(U)$ be a surface in $\mathbb{R}^3$ parametritzed by $\Phi\in\mathcal{C}^1(U)$ and $f:\mathbb{R}^3\rightarrow\mathbb{R}$ be a continuous function whose domain contain $S$. We define the \textit{surface integral $f$ over $S$} as $$\iint_SfdS=\iint_U f(\Phi(u,v))\left\|\frac{\partial \Phi}{\partial u}\wedge\frac{\partial \Phi}{\partial v}\right\|dudv\footnote{It can be seen that this integral is independent of the parametrization of $S$.}.$$
 \end{definition}
 \begin{definition}
-Let $S=\Phi(U)$ be a surface of class $\mathcal{C}^1$ parametritzed by $\Phi$ and $\boldsymbol{f}:\mathbb{R}^3\rightarrow\mathbb{R}^3$ be a continuous vector field  whose domain contain $S$. We define the \textit{surface integral $f$ over $S$} or the \textit{flux of $\boldsymbol{f}$ across $S$} as \begin{multline*}
+Let $S=\Phi(U)$ be a surface in $\mathbb{R}^3$ parametritzed by $\Phi\in\mathcal{C}^1(U)$ and $\boldsymbol{f}:\mathbb{R}^3\rightarrow\mathbb{R}^3$ be a continuous vector field  whose domain contain $S$. We define the \textit{surface integral $\boldsymbol{f}$ over $S$} or the \textit{flux of $\boldsymbol{f}$ across $S$} as \begin{multline*}
     \iint_S\boldsymbol{f}\cdot d\textbf{S}=\iint_S\boldsymbol{f}\cdot\textbf{n} dS=\\=\iint_U \boldsymbol{f}(\Phi(u,v))\cdot\left(\frac{\partial \Phi}{\partial u}\wedge\frac{\partial \Phi}{\partial v}\right) dudv,
-\end{multline*} where \textbf{n} is the unit normal vector to $S$.\footnote{Observe that the latter integral is independent of the parametrization of $S$ except for a factor of $-1$ that depends on the orientation of the normal vector $\textbf{n}$.}
+\end{multline*} where \textbf{n} is the unit normal vector to $S$\footnote{It can be seen that the latter integral is independent of the parametrization of $S$ except for a factor of $-1$ that depends on the orientation of the normal vector $\textbf{n}$.}.
 \end{definition}
 \subsubsection*{Theorems of vector calculus on \texorpdfstring{$\mathbb{R}^2$}{R2}}
 \begin{definition}
-Let $U\subset\mathbb{R}^3$ be an open set. A \textit{differential 1-form on $U$} is an expression of the form $$\omega=F_1dx+F_2dy+F_3dz,$$ where $F_1,F_2,F_3$ are scalar functions defined on $U$.\footnote{Extending this notion, we can define 2-forms and 3-forms as:
+Let $U\subseteq\mathbb{R}^3$ be an open set. A \textit{differential 1-form on $U$} is an expression of the form $$\omega=F_1dx+F_2dy+F_3dz,$$ where $F_1,F_2,F_3$ are scalar functions defined on $U$\footnote{Extending this notion, we can define 2-forms and 3-forms as:
 $$\begin{array}{cl}
     \omega=F_1dxdy+F_2dydz+F_3dzdy & \text{2-form,} \\
     \omega=Fdxdydz & \text{3-form.}
-\end{array}$$}
+\end{array}$$}.
 \end{definition}
 \begin{theorem}[Green's theorem]
-Let $\boldsymbol{f}=(f_1,f_2)$ be a vector field of class $\mathcal{C}^1(U)$, $U\subseteq\mathbb{R}^2$ and $c=\partial U$ be the curve formed from the boundary of $U$.\footnote{It goes without saying that the orientation is chosen positive, that is counterclockwise.} Then $$\int_{\partial U}\boldsymbol{f}\cdot d\textbf{s}=\iint_U\rot\boldsymbol{f}dxdy.\footnote{Alternatively, using differential forms, we get $$\int_{\partial U}(F_1dx+F_2dy)=\iint_U\left(\frac{\partial F_2}{\partial x}-\frac{\partial F_1}{\partial y}\right)dxdy.$$}$$
+Let $\boldsymbol{f}=(f_1,f_2)$ be a vector field of class $\mathcal{C}^1(U)$, $U\subseteq\mathbb{R}^2$, and $c=\partial U$ be the curve formed from the boundary of $U$\footnote{It goes without saying that the orientation is chosen positive, that is counterclockwise.}. Then $$\int_{\partial U}\boldsymbol{f}\cdot d\textbf{s}=\iint_U\rot\boldsymbol{f}dxdy\footnote{Alternatively, using differential forms, we get $$\int_{\partial U}(F_1dx+F_2dy)=\iint_U\left(\frac{\partial F_2}{\partial x}-\frac{\partial F_1}{\partial y}\right)dxdy.$$}.$$
 \end{theorem}
 \begin{corollary}
-Let $U$ be a region in $\mathbb{R}^2$ and $\partial U$ its boundary. Then, $$\text{àrea}(U)=\int_{\partial U}xdy=-\int_{\partial U}ydx=\frac{1}{2}\int_{\partial U}(xdy-ydx).$$
+Let $U$ be a region in $\mathbb{R}^2$ and $\partial U$ be its boundary. Then, $$\text{area}(U)=\int_{\partial U}xdy=-\int_{\partial U}ydx=\frac{1}{2}\int_{\partial U}(xdy-ydx).$$
 \end{corollary}
 \begin{theorem}[Divergence theorem on $\mathbb{R}^2$]
-Let $\boldsymbol{f}=(f_1,f_2)$ be a vector field of class $\mathcal{C}^1(U)$, $U\subseteq\mathbb{R}^2$ with boundary $\partial U$. Then, $$\int_{\partial U}\boldsymbol{f}\cdot\textbf{n} ds=\iint_U\dive\boldsymbol{f}dxdy.\footnote{The first integral represents the flux of $\boldsymbol{f}$ across the curve $\partial U$.}$$
+Let $\boldsymbol{f}=(f_1,f_2)$ be a vector field of class $\mathcal{C}^1(U)$, $U\subseteq\mathbb{R}^2$ with boundary $\partial U$. Then, $$\int_{\partial U}\boldsymbol{f}\cdot\textbf{n} ds=\iint_U\dive\boldsymbol{f}dxdy\footnote{The first integral represents the flux of $\boldsymbol{f}$ across the curve $\partial U$.}.$$
 \end{theorem}
 \subsubsection*{Theorems of vector calculus on \texorpdfstring{$\mathbb{R}^3$}{R3}}
 \begin{theorem}[Stokes' theorem]
 Let $S$ be a parametritzed surface of class $\mathcal{C}^1$ and $\partial S$ be its boundary. Let $\boldsymbol{f}=(f_1,f_2,f_3)$ be a vector field of class $\mathcal{C}^1$ in a domain containing $S\cup\partial S$. Then $$\int_{\partial S}\boldsymbol{f}\cdot d\textbf{s}=\iint_S\rot\boldsymbol{f}\cdot\textbf{n} dS.$$
 \end{theorem}
 \begin{corollary}
-Let $a\in\mathbb{R}^3$ and $\textbf{n}$ be a unit vector. Suppose $D_r=D(a,r)$ is a disk of radius $r$ centered at $a$ and perpendicular to $\textbf{n}$. Let $\boldsymbol{f}$ be a vector field of class $\mathcal{C}^1(D_r)$. Then $$\rot\boldsymbol{f}(a)\cdot\textbf{n}=\lim_{r\to 0}\frac{1}{\text{àrea}(D_r)}\int_{\partial D_r}\boldsymbol{f}\cdot d\textbf{s}.$$ Therefore, the \textbf{n}-th component of $\rot\boldsymbol{f}(a)$ is is the circulation of $\boldsymbol{f}$ in a small circular surface perpendicular to $\textbf{n}$, per unit of area.
+Let $a\in\mathbb{R}^3$ and $\textbf{n}$ be a unit vector. Suppose $D_r=D(a,r)$ is a disk of radius $r$ centered at $a$ and perpendicular to $\textbf{n}$. Let $\boldsymbol{f}$ be a vector field of class $\mathcal{C}^1(D_r)$. Then $$\rot\boldsymbol{f}(a)\cdot\textbf{n}=\lim_{r\to 0}\frac{1}{\text{area}(D_r)}\int_{\partial D_r}\boldsymbol{f}\cdot d\textbf{s}.$$ Therefore, the \textbf{n}-th component of $\rot\boldsymbol{f}(a)$ is the circulation of $\boldsymbol{f}$ in a small circular surface perpendicular to $\textbf{n}$, per unit of area.
 \end{corollary}
 \begin{theorem}[Gau\ss' or divergence theorem on $\mathbb{R}^3$]
 Let $\boldsymbol{f}=(f_1,f_2,f_3)$ be a vector field of class $\mathcal{C}^1$ on a symmetric region\footnote{A region on $\mathbb{R}^3$ is \textit{symmetric} if is $xy$-simple, $yz$-simple and $xz$-simple.} $V\subset\mathbb{R}^3$ with boundary $\partial V$. Then, $$\iint_{\partial V}\boldsymbol{f}\cdot\textbf{n} dS=\iiint_V\dive\boldsymbol{f}dxdydz$$
-\end{theorem}
+\end{theorem}\pagebreak
 \begin{corollary}
 Let $B_r=B(a,r)$ be a ball of radius $r$ centered at $a\in\mathbb{R}^3$ and $\boldsymbol{f}$ be a vector field of class $\mathcal{C}^1(B_r)$. Then $$\dive\boldsymbol{f}(a)=\lim_{r\to 0}\frac{1}{\text{vol}(B_r)}\iint_{\partial B_r}\boldsymbol{f}\cdot\textbf{n} dS.$$ Therefore, $\dive\boldsymbol{f}(a)$ is the flux of $\boldsymbol{f}$ outward form $a$, in the normal direction across the surface of a small ball centered on $a$, per unit of volume.
 \end{corollary}

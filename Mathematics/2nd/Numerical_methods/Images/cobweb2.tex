@@ -3,7 +3,7 @@
 \pgfplotsset{compat = newest}
 
 \begin{document}
-\pgfkeys{/pgf/declare function={f(\x)=cos(deg(\x));}} % Here you can declare multivariable functions to like this:
+\pgfkeys{/pgf/declare function={f(\x)=1.65*\x*(1-\x));}} % Here you can declare multivariable functions to like this:
 % declare function={
 % excitation(\t,\w) = sin(\t*\w);
 % noise = rnd - 0.5;
@@ -12,13 +12,14 @@
 % speech(\t) = 1 + source(\t)*filter(\t);
 % }
 \begin{tikzpicture}
-    \begin{axis}[xmin = 0, xmax = 1.2,ymin = 0, ymax = 1.2, axis equal image]
+    \begin{axis}[xmin=0,xmax=0.5,ymin=0,ymax=0.5,
+    axis equal image]
     \addplot [thin,samples=200,smooth,blue] {f(x)};
     \addplot [thin,samples=200,smooth,black] {x};
     \pgfplotsextra{
     \def\x{0.125}
     \def\y{0}
-    \draw [very thin,red] (axis cs:\x,\y) \foreach \i in {0,...,16}{
+    \draw [very thin,red] (axis cs:\x,\y) \foreach \i in {0,...,10}{
     \pgfextra{
         \pgfkeys{/pgf/fpu=true, /pgf/fpu/output format=fixed}
         \pgfmathparse{f(\x)}\xdef\y{\pgfmathresult}
