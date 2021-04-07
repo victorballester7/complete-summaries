@@ -345,10 +345,14 @@ Let $(G,\cdot)$ be a group, $X$ be a $G$-set and $x\in X$. The surjective map
     \phi:G&\longrightarrow \mathcal{O}_x\\
     g&\longmapsto g*x
 \end{align*}
-induces a bijective map $\Tilde{\phi}:G/\!\!\!\approx\;\rightarrow\mathcal{O}_x$, where $\approx$ is the equivalence relation $g_1\approx g_2\iff g_2^{-1}\cdot g_1\in G_x$ $\forall g_1,g_2\in G$\footnote{Note that the notation $\approx$ for the equivalence relation correspond with the one defined in definition \ref{AS_equiv}.}. In particular if $G$ is finite, $$|\mathcal{O}_x|=|[G:G_x]|$$
+induces a bijective map $\Tilde{\phi}:\quot{G}{\!\!\approx}\;\rightarrow\mathcal{O}_x$, where $\approx$ is the equivalence relation $g_1\approx g_2\iff g_2^{-1}\cdot g_1\in G_x$ $\forall g_1,g_2\in G$\footnote{Note that the notation $\approx$ for the equivalence relation correspond with the one defined in definition \ref{AS_equiv}.}. In particular if $G$ is finite, $$|\mathcal{O}_x|=|[G:G_x]|$$
 \end{theorem}
 \begin{corollary}[Orbits formula]
-Let $(G,\cdot)$ be a finite group and $X$ be a finite $G$-set. If $x_1,\ldots,x_m$ are the elements of $X$ and $|\mathcal{O}_{x_i}|=1$ for $i=1,\ldots,r$, then: $$|X|=r+\sum_{i=r+1}^m|\mathcal{O}_{x_i}|=r+\sum_{i=r+1}^m|[G:G_{x_i}]|.$$
+Let $(G,\cdot)$ be a finite group and $X$ be a finite $G$-set. If $x_1,\ldots,x_m$ are the elements of $X$ and $|\mathcal{O}_{x_i}|=1$ for $i=1,\ldots,r$, then: 
+\begin{equation}
+    |X|=r+\sum_{i=r+1}^m|\mathcal{O}_{x_i}|=r+\sum_{i=r+1}^m|[G:G_{x_i}]|.
+    \label{EA-obritsformula}
+\end{equation}
 \end{corollary}
 \subsubsection*{Applications of orbits formula}
 \begin{theorem}[Cauchy's theorem]
@@ -365,11 +369,52 @@ Let $(G,\cdot)$ be a group. The map
 \end{align*} is an action of $(G,\cdot)$ over itself. It is call the \textit{conjugation action}.
 \end{prop}
 \begin{definition}[Center of a group]
-Let $(G,\cdot)$ be a group. We define the \textit{center of $(G,\cdot)$} as $$Z(G)=\{z\in G:z\cdot g=g\cdot z\;\forall g\in G\}.$$
+Let $(G,\cdot)$ be a group. We define the \textit{center of $(G,\cdot)$} as $$Z(G)=\{z\in G:z\cdot g=g\cdot z\;\forall g\in G\}\footnote{Note that, by orbits formula \eqref{EA-obritsformula}, if we consider the conjugation action we have $$|G|=|Z(G)|+\sum_{|\mathcal{O}_x|>1}|\mathcal{O}_x|$$}.$$
 \end{definition}
 \begin{prop}
 Let $p$ be a prime number and $(G,\cdot)$ be a finite group of order $p^n$ for some $n\geq 1$. Then $|Z(G)|>1$.
 \end{prop}
+\begin{lemma}
+Let $(G,\cdot)$ be a group and $(H,\cdot)$ be a subgroup of $(G,\cdot)$. Consider the application \begin{align*}
+    H\times\quot{G}{\approx}&\longrightarrow \quot{G}{\approx}\\
+    (h,g\cdot H)&\longmapsto(h\cdot g)\cdot H
+\end{align*}
+This application defines an action of the subgroup $(H,\cdot)$ over the set $\quot{G}{\!\!\approx}$.
+\label{AS_action1}
+\end{lemma}
+\begin{definition}
+Let $(G,\cdot)$ be a group and $(H,\cdot)$ be a subgroup of $(G,\cdot)$. The \textit{normalizer of $(H,\cdot)$ in $(G,\cdot)$} is $$N_G(H)=\{g\in G:g\cdot H=H\cdot g\}.$$
+\end{definition}
+\begin{lemma}
+Let $(G,\cdot)$ be a group and $(H,\cdot)$ be a subgroup of $(G,\cdot)$. $(N_G(H),\cdot)$ is a subgroup of $(G,\cdot)$ containing $H$ and, moreover, $H\lhd N_G(H)$.
+\end{lemma}
+\begin{corollary}
+Let $(G,\cdot)$ be a finite group and $(H,\cdot)$ be a subgroup of $(G,\cdot)$. Then by orbits formula applied to action defined on \ref{AS_action1}, we have: $$[G:H]=[N_G(H):H]+\sum_{|\mathcal{O}_x|>1}|\mathcal{O}_x|.$$
+\end{corollary}
+\begin{prop}
+Let $(G,\cdot)$ be a group of order $n\in\mathbb{N}$, $p$ be a prime number such that $p\mid n$ and $(H,\cdot)$ be a subgroup of $(G,\cdot)$ of order $p^i$, $i\geq 1$. Suppose $p\mid[G:H]$. Then $p\mid[N_G(H):H]$.
+\end{prop}
 \subsubsection*{Sylow's theorems}
+\begin{corollary}
+Let $(G,\cdot)$ be a group of order $n\in\mathbb{N}$, $p$ be a prime number and $(H,\cdot)$ be a subgroup of $(G,\cdot)$ such that $|H|=p^i$, $i\geq 0$. Suppose $p\mid[G:H]$. Then, there is a subgroup $(H',\cdot)$ of $(G,\cdot)$ such that $(H,\cdot)$ is a subgroup of $(H',\cdot)$ and $|H'|=p^{i+1}$. Moreover, $H\lhd H'$ and $H'/H\cong\mathbb{Z}/p\mathbb{Z}$.
+\end{corollary}
+\begin{theorem}[First Sylow theorem]
+Let $(G,\cdot)$ be a finite group and $p$ be a prime number. Suppose $|G|=p^r m$, where $r\geq 0$ and $\gcd(p,m)=1$. Then, there is a subgroup $(K,\cdot)$ of $(G,\cdot)$ of order $p^r$. Moreover there is a chain of subgroups $(H_i,\cdot)$ satisfying: $$\{e\}=H_0\lhd H_1\lhd\cdots\lhd H_r=K,$$ such that $H_{i+1}/H_i\cong\mathbb{Z}/p\mathbb{Z}$, $0\leq i<r$.
+\end{theorem}
+\begin{definition}
+Let $p$ be a prime number. A group $(G,\cdot)$ is a \textit{$p$-group} if $|G|=p^r$, for some $r\in\mathbb{N}$.
+\end{definition}
+\begin{definition}
+Let $p$ be a prime number and $(G,\cdot)$ be a group. A \textit{Sylow $p$-subgroup} is a $p$-subgroup of $(G,\cdot)$ of maximum order.
+\end{definition}
+\begin{definition}
+Let $(G,\cdot)$ be a finite group. We say $(G,\cdot)$ is \textit{soluble} if there is a chain of subgroups $(H_i,\cdot)$ of $(G,\cdot)$ satisfying: $$\{e\}=H_0\lhd H_1\lhd\cdots\lhd H_r=K,$$ and such that the subgroups $(H_{i+1}/H_i,*)$ are cyclic, $0\leq i<r$. 
+\end{definition}
+\begin{theorem}[Second Sylow theorem]
+Let $(G,\cdot)$ be a finite group and $p$ be a prime number. Suppose $|G|=p^r m$, where $r\geq 0$ and $\gcd(p,m)=1$. Let $(K,\cdot)$ be a Sylow $p$-subgroup of $(G,\cdot)$. Then, if $(H,\cdot)$ is a subgroup of $(G,\cdot)$ of order $p^i$, $\exists g\in G$ such that $g\cdot H\cdot g^{-1}\subseteq K$. In particular two different Sylow $p$-subgroups are conjugate, that is, if $(K_1,\cdot)$ and $(K_2,\cdot)$ are Sylow $p$-subgroups of $(G,\cdot)$, then there exists an element $g\in G$ with $g\cdot K_1\cdot g^{-1}=K_2$.
+\end{theorem}
+\begin{theorem}[Third Sylow theorem]
+Let $(G,\cdot)$ be a finite group and $p$ be a prime number. Suppose $|G|=p^r m$, where $r\geq 0$ and $\gcd(p,m)=1$. Let $(K,\cdot)$ be a Sylow $p$-subgroup of $(G,\cdot)$ and $n_p$ be the number of different Sylow $p$-subgroups of $(G,\cdot)$. Then, $n_p=[G:N_G(K)]$. Therefore, $n_p\mid m$ and moreover $n_p\equiv1\mod p$. 
+\end{theorem}
 \end{multicols}
 \end{document}

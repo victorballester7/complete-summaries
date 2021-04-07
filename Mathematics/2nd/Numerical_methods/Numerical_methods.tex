@@ -218,5 +218,25 @@ Let $A=(a_{ij})\in\mathcal{M}_n(\mathbb{C})$ be a complex matrix and let $\lambd
 Then $\lambda\in\bigcup_{i=1}^nR_i$ and $\lambda\in\bigcup_{j=1}^nC_j$. Moreover in each connected component of $\bigcup_{i=1}^nR_i$ (respectively $\bigcup_{j=1}^nC_j$) there are as many eigenvalues (taking into account the multiplicity) as disks $R_i$ (respectively $C_i$). 
 \end{theorem}
 \subsection{Interpolation}
+\begin{definition}
+Let us suppose we have a family of real valued functions $\mathfrak{C}$ and a set of points $\{(x_i,y_i)\}_{i=0}^n:=\{(x_i,y_i):x_j\ne x_k\iff j\ne k,i=0,\ldots,n\}$. The \textit{interpolation problem} consists in finding a function $f\in\mathfrak{C}$ such that $f(x_i)=y_i$ for $i=0,1,\ldots,n$. The points $\{(x_i,y_i)\}_{i=0}^n$ are called \textit{support points}\footnote{Types of interpolation are for example polynomial interpolation, trigonometric interpolation, Padé interpolation, Hermite interpolation and spline interpolation}.
+\end{definition}
+\subsubsection*{Polynomial interpolation}
+\begin{definition}
+Given a set of $n+1$ points $\{(x_i,y_i)\}_{i=0}^n$, \textit{Lagrange's interpolation problem} consists in finding a polynomial $p\in\mathbb{R}[x]$ such that $\deg p\leq n$ and $p(x_i)=y_i$.
+\end{definition}
+\begin{prop}
+Lagrange's interpolation problem has a unique solution and this is: $$p(x)=\sum_{k=0}^ny_k\frac{w_n(x)}{w_n'(x)},\quad\text{where }w_n(x)=\prod_{j=0}^n(x-x_j).$$
+\end{prop}
+\begin{prop}[Neville's algorithm]
+Let $P_{i_1,\ldots,i_k}(x)\in\mathbb{R}[x]$ be such that $\deg P_{i_0,\ldots,i_k}\leq k$ and $P_{i_1,\ldots,i_k}(x_{i_j})=y_{i_j}$ for $j=0,\ldots,k$. Then, it is satisfied that:
+\begin{enumerate}
+    \item $P_i(x)=y_i$.
+    \item $P_{i_0,\ldots,i_k}(x)=\frac{\begin{vmatrix}
+    P_{i_1,\ldots,i_k}(x) & x-x_{i_k}\\
+    P_{i_0,\ldots,i_{k-1}}(x) & x-x_{i_0}
+    \end{vmatrix}}{x_{i_k}-x_{i_0}}$
+\end{enumerate}
+\end{prop}
 \end{multicols}
 \end{document}
