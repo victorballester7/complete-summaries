@@ -2,6 +2,7 @@
 \usepackage{standalone}
 \usepackage{preamble}
 
+%Break line: In Neville's algorithm (interpolation section-polynomial interpolation)
 \begin{document}
 \begin{multicols}{2}[\section{Numerical methods}]
 \subsection{Errors}
@@ -226,10 +227,10 @@ Let us suppose we have a family of real valued functions $\mathfrak{C}$ and a se
 Given a set of $n+1$ points $\{(x_i,y_i)\}_{i=0}^n$, \textit{Lagrange's interpolation problem} consists in finding a polynomial $p\in\mathbb{R}[x]$ such that $\deg p\leq n$ and $p(x_i)=y_i$.
 \end{definition}
 \begin{prop}
-Lagrange's interpolation problem has a unique solution and this is: $$p(x)=\sum_{k=0}^ny_k\frac{w_n(x)}{w_n'(x)},\quad\text{where }w_n(x)=\prod_{j=0}^n(x-x_j).$$
+Lagrange's interpolation problem has a unique solution and this is: $$p(x)=\sum_{k=0}^ny_k\frac{\omega_n(x)}{\omega_n'(x)},\quad\text{where }\omega_n(x):=\prod_{j=0}^n(x-x_j).$$
 \end{prop}
 \begin{prop}[Neville's algorithm]
-Let $P_{i_1,\ldots,i_k}(x)\in\mathbb{R}[x]$ be such that $\deg P_{i_0,\ldots,i_k}\leq k$ and $P_{i_1,\ldots,i_k}(x_{i_j})=y_{i_j}$ for $j=0,\ldots,k$. Then, it is satisfied that:
+Let \\$P_{i_1,\ldots,i_k}(x)\in\mathbb{R}[x]$ be such that $\deg P_{i_0,\ldots,i_k}\leq k$ and $P_{i_1,\ldots,i_k}(x_{i_j})=y_{i_j}$ for $j=0,\ldots,k$. Then, it is satisfied that:
 \begin{enumerate}
     \item $P_i(x)=y_i$.
     \item $P_{i_0,\ldots,i_k}(x)=\frac{\begin{vmatrix}
@@ -238,5 +239,17 @@ Let $P_{i_1,\ldots,i_k}(x)\in\mathbb{R}[x]$ be such that $\deg P_{i_0,\ldots,i_k
     \end{vmatrix}}{x_{i_k}-x_{i_0}}$
 \end{enumerate}
 \end{prop}
+\begin{definition}
+Let $f:\mathbb{R}\rightarrow\mathbb{R}$ be a function and $\{x_i\}_{i=0}^k\subset\mathbb{R}$ be different points. We define the \textit{divided difference of order $k$ of $f$ applied to $\{x_i\}_{i=0}^k$}, denoted by $f[x_0,\ldots,x_k]$, as the coefficient of $x^k$ of the interpolating polynomial with support points $\{(x_i,f(x_i))\}_{i=0}^k$ 
+\end{definition}
+\begin{prop}
+Let $f:\mathbb{R}\rightarrow\mathbb{R}$ be a function and $\{x_i\}_{i=0}^k\subset\mathbb{R}$ be different points. Lagrange interpolating polynomial with support points $\{(x_i,f(x_i))\}_{i=0}^k$ is $$p_n(x)=\sum_{j=0}^nf[x_j]\omega_{j-1}(x),$$ assuming $\omega_{-1}:=1$.
+\end{prop}
+\begin{prop}[Newton's divided differences method]
+Let $f:\mathbb{R}\rightarrow\mathbb{R}$ be a function. For $x\in\mathbb{R}$, we have $f[x]=f(x)$. And if $\{x_i\}_{i=0}^n\subset\mathbb{R}$ are different points, then $$f[x_0,\ldots,x_n]=\frac{f[x_1,\ldots,x_n]-f[x_0,\ldots,x_{n--1}]}{x_n-x_0}.$$ 
+\end{prop}
+\begin{theorem}
+Let $f:[a,b]\rightarrow\mathbb{R}$ be a function of class $\mathcal{C}^{n+1}$, $\{x_i\}_{i=0}^n\subset\mathbb{R}$ be different points and $p_n\in\mathbb{R}[x]$ be the Lagrange interpolating polynomial with support points $\{(x_i,f(x_i))\}_{i=0}^n$. Then $\forall x\in[a,b]$: $$f(x)-p_n(x)=\frac{f^{(n+1)}(\xi(x))}{(n+1)!}\omega_n(x),$$ where $\xi(x)\in\langle x_0,\ldots,x_n,x\rangle$\footnote{The interval $\langle a_1,\ldots,a_k\rangle$ is defined as $\langle a_1,\ldots,a_k\rangle:=(\min(a_1,\ldots,a_k),\max(a_1,\ldots,a_k))$.}.
+\end{theorem}
 \end{multicols}
 \end{document}
