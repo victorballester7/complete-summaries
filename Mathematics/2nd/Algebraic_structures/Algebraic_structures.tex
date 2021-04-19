@@ -74,16 +74,16 @@ Let $(G,\cdot)$ be a group and $g\in G$. A subgroup $(\langle g\rangle,\cdot)$ o
 Let $(G,\cdot)$ be a group and $g\in G$. Then, $$\langle g\rangle=\bigcup_{i\in\mathbb{Z}}\{g^i\}.$$
 \end{prop}
 \begin{definition}
-Let $(G,\cdot)$ be a group and $g\in G$. The \textit{order of $g$} is $o(g):=|\langle g\rangle|$.
+Let $(G,\cdot)$ be a group and $g\in G$. The \textit{order of $g$} is $\text{ord}(g):=|\langle g\rangle|$.
 \end{definition}
 \begin{prop}
-Let $(G,\cdot)$ be a group and $g\in G$. Then, $$o(g)=\min\{i\in\mathbb{N}:g^i=e\}.$$ If no such $i$ exists, we say $o(g)=\infty$.
+Let $(G,\cdot)$ be a group and $g\in G$. Then, $$\text{ord}(g)=\min\{i\in\mathbb{N}:g^i=e\}.$$ If no such $i$ exists, we say $\text{ord}(g)=\infty$.
 \end{prop}
 \begin{corollary}
-Let $n\in\mathbb{N}$, $n>1$, and $\Bar{a}\in\mathbb{Z}/n\mathbb{Z}$. Then: $$o(\Bar{a})=\frac{n}{\gcd(a,n)}.$$
+Let $n\in\mathbb{N}$, $n>1$, and $\Bar{a}\in\mathbb{Z}/n\mathbb{Z}$. Then: $$\text{ord}(\Bar{a})=\frac{n}{\gcd(a,n)}.$$
 \end{corollary}
 \begin{lemma}
-Let $(G,\cdot)$ be a group, $g\in G$ and $o(g)=n$. Then:
+Let $(G,\cdot)$ be a group, $g\in G$ and $\text{ord}(g)=n$. Then:
 \begin{enumerate}
     \item $g^m=e\iff n\mid m$.
     \item $g^m=g^{m'}\iff m=m'\mod{n}$.
@@ -91,7 +91,7 @@ Let $(G,\cdot)$ be a group, $g\in G$ and $o(g)=n$. Then:
 \end{enumerate}
 \end{lemma}
 \begin{corollary}
-Let $(G_i,*_i)$, for $i=1,\ldots, n$, be groups. For $i=1,\ldots,n$, let $g_i\in G_i$ and consider the element $g=(g_1,\ldots,g_n)\in(G_1,*_1)\times\cdots\times(G_n,*_n)$. Then: $$o(g)=\lcm(o(g_1),\ldots,o(g_n)).$$
+Let $(G_i,*_i)$, for $i=1,\ldots, n$, be groups. For $i=1,\ldots,n$, let $g_i\in G_i$ and consider the element $g=(g_1,\ldots,g_n)\in(G_1,*_1)\times\cdots\times(G_n,*_n)$. Then: $$\text{ord}(g)=\lcm(\text{ord}(g_1),\ldots,\text{ord}(g_n)).$$
 \end{corollary}
 \begin{prop}
 Let $(G,*)$ be a group and $X\subseteq G$ be a subset of $G$. Then: $$\langle X\rangle=\{e\}\cup\{g_1^{\alpha_1}*\cdots* g_n^{\alpha_n}:n\in\mathbb{N},\alpha_i\in\mathbb{Z},g_i\in X\}.$$
@@ -231,7 +231,7 @@ Let $(G,\cdot)$ be a finite group and $(H,\cdot)$ be a subgroup of $(G,\cdot)$. 
 \begin{corollary}
 Let $(G,\cdot)$ be a finite group. 
 \begin{enumerate}
-    \item If $g\in G$, then $o(g)\mid |G|$.
+    \item If $g\in G$, then $\text{ord}(g)\mid |G|$.
     \item If $|G|$ is prime, then $(G,\cdot)$ is cyclic.
     \item If $(H,\cdot)$ and $(K,\cdot)$ are subgroups of $(G,\cdot)$ and $\gcd(|H|,|K|)=1$, then $H\cap K=\{e\}$.
 \end{enumerate}
@@ -418,5 +418,18 @@ Let $(G,\cdot)$ be a finite group and $p$ be a prime number. Suppose $|G|=p^r m$
 \begin{theorem}[Third Sylow theorem]
 Let $(G,\cdot)$ be a finite group and $p$ be a prime number. Suppose $|G|=p^r m$, where $r\geq 0$ and $\gcd(p,m)=1$. Let $(K,\cdot)$ be a Sylow $p$-subgroup of $(G,\cdot)$ and $n_p$ be the number of different Sylow $p$-subgroups of $(G,\cdot)$. Then, $n_p=[G:N_G(K)]$. Therefore, $n_p\mid m$ and $n_p\equiv1\mod p$. 
 \end{theorem}
+\subsubsection*{Examples of groups}
+Let $n,p\in\NN$ such that $p$ is a prime number.
+\begin{itemize}
+    \item $(\ZZ,+)$, $(\ZZ/n\ZZ,+)$, $(\QQ,+)$, $(\RR,+)$, $(\CC,+)$
+    \item $((\ZZ/p\ZZ)^*,\cdot)$, $(\QQ^*,\cdot)$, $(\RR^*,\cdot)$, $(\CC^*,\cdot)$
+    \item $(S_n,\circ)$
+    \item $(A_n,\circ)$, where $A_n=\{\sigma\in S_n:\varepsilon(\sigma)=1\}$. Note that $|A_n|=\frac{S_n}{2}=\frac{n!}{2}$.
+    \item $(\text{GL}_n(\mathbb{A}),\cdot)$, where $\text{GL}_n(\mathbb{A})=\{M\in\mathcal{M}_n(\mathbb{A}):M\ \text{is invertible}\}$ and $\mathbb{A}=\ZZ,\;\QQ,\;\RR\text{ or }\CC$.
+    \item $(\text{SL}_n(\mathbb{A}),\cdot)$, where $\text{SL}_n(\mathbb{A})=\{M\in\text{GL}_n(\mathbb{A}):\det M=1\}$ and $\mathbb{A}=\ZZ,\;\QQ,\;\RR\text{ or }\CC$.
+    \item $(D_{2n},\circ)$, where $D_{2n}$ is the set of rotations and reflections that leave invariant the regular polygon of $n$ vertices centered at origin. It can be seen that $D_{2n}=\langle r,s:\text{ord}(r)=4,\text{ord}(2)=2,rs=sr^{-1}\rangle$ This group is called the \textit{dihedral group}.
+    \item $(Q_8,\cdot)$, where $Q_8=\langle a,b:\text{ord}(a)=\text{ord}(b)=4,ba=a^{-1}b\rangle$ This group is called the \textit{quaternion group}.
+\end{itemize}
+\subsection{Rings}
 \end{multicols}
 \end{document}
