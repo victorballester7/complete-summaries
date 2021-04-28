@@ -98,7 +98,7 @@ Let $(G_i,*_i)$, for $i=1,\ldots, n$, be groups. For $i=1,\ldots,n$, let $g_i\in
 \end{corollary}
 \subsubsection*{Group morphisms}
 \begin{definition}[Group morphism]
-Let $(G,*)$, $(H,\cdot)$ be two groups. A \textit{morphism from $(G,*)$ to $(H,\cdot)$} is a function $\phi:G\rightarrow H$ such that $$\phi(g_1*g_2)=\phi(g_1)\cdot\phi(g_2)\quad\forall g_1,g_2\in G.$$
+Let $(G,*)$, $(H,\cdot)$ be two groups. A \textit{group morphism from $(G,*)$ to $(H,\cdot)$} is a function $\phi:G\rightarrow H$ such that $$\phi(g_1*g_2)=\phi(g_1)\cdot\phi(g_2)\quad\forall g_1,g_2\in G.$$
 \end{definition}
 \begin{lemma}
 Let $\phi:G_1\rightarrow G_2$ be a morphism between $(G_1,*)$ and $(G_2,\cdot)$. Then,
@@ -438,5 +438,61 @@ Let $n,p\in\NN$ such that $p$ is a prime number.
     \item $(\text{Q}_8,\cdot)$, where $\text{Q}_8=\langle a,b:\text{ord}(a)=\text{ord}(b)=4,b\cdot a=a^{-1}\cdot b\rangle$. This group is called the \textit{quaternion group}.
 \end{itemize}
 \subsection{Rings}
+\begin{definition}[Ring]
+A \textit{ring} is a set $R$ equipped with two binary operations \begin{align*}
+    +:R\times R&\longrightarrow R&\cdot:R\times R&\longrightarrow R\\
+    (r_1,r_2)&\longmapsto r_1+ r_2&(r_1,r_2)&\longmapsto r_1\cdot r_2
+\end{align*}
+satisfying the following properties:
+\begin{enumerate}
+    \item $(R,+)$ is an abelian group.
+    \item $(R,\cdot)$ satisfies\footnote{Some definitions state that the commutative property is not necessary to define a ring. However, in these notes we will take the definition given.}:
+    \begin{enumerate}
+        \item Associativity: $$(r_1\cdot r_2)\cdot r_3=r_1\cdot(r_2\cdot r_3)\quad\forall r_1,r_2,r_3\in R.$$
+        \item Identity element\footnote{It is common to denote the additive identity element as 0 and the multiplicative identity element as 1.}: $$\exists 1\in R:1\cdot r=r\cdot 1=r\quad\forall r\in R.$$
+        \item Commutativity: $$r_1\cdot r_2=r_2\cdot r_1\quad\forall r_1,r_2\in R.$$
+    \end{enumerate}
+    \item Multiplication is distributive with respect to addition: $$(r_1+r_2)\cdot r_3=r_1\cdot r_3+r_2\cdot r_3\quad\forall r_1,r_2,r_3\in R.$$
+\end{enumerate}
+In this context we say $(R,+,\cdot)$ is a ring.
+\end{definition}
+\begin{definition}[Field]
+Let $(R,+,\cdot)$ be a ring. If every nonzero element of $R$ has a multiplicative inverse (that is, $(R,\cdot)$ is an abelian group), we say $R$ is a \textit{field}.
+\end{definition}
+\begin{lemma}
+Let $(R,+,\cdot)$ be a ring. Then,
+\begin{enumerate}
+    \item The multiplicative identity element is unique.
+    \item $\forall r\in R$, $0\cdot r=0$.
+    \item $\forall r\in R$, $(-1)\cdot r=-r$, where $-1$ is the additive inverse of 1.
+    \item $\forall r,s\in R$, $(-r)\cdot s=-(r\cdot s)$ and $(-r)\cdot (-s)=r\cdot s$.
+\end{enumerate}
+\end{lemma}
+\begin{definition}[Subring]
+Let $(R,+,\cdot)$ be a ring and $S\subseteq R$ be a subset of $R$. $(S,+,\cdot)$ is called a \textit{subring} of $(R,+,\cdot)$ if satisfies:
+\begin{enumerate}
+    \item $(S,+)$ is a subgroup of $(R,+)$.
+    \item $\forall s_1,s_2\in S$, $s_1\cdot s_2\in S$.
+    \item $1\in S$.
+\end{enumerate}
+\end{definition}
+\begin{definition}[Ring morphism]
+Let $(R,+,\cdot)$, $(S,\oplus,\odot)$ be two rings. A \textit{ring morphism from $(R,+,\cdot)$ to $(S,\oplus,\odot)$} is a function $\phi:R\rightarrow S$ such that
+\begin{enumerate}
+    \item $\phi$ is a group morphism between groups $(R,+)$ and $(S,\oplus)$.
+    \item $\phi(r_1*r_2)=\phi(r_1)\odot\phi(r_2)\quad\forall r_1,r_2\in R$.
+    \item $\phi(1_R)=1_S$.
+\end{enumerate}
+\end{definition}
+\begin{lemma}
+Let $(R,+,\cdot)$, $(S,\oplus,\odot)$ be two rings and $\phi:R\rightarrow S$ be a ring morphism. Then knowing that $\ker\phi=\{r\in R:f(r)=0\}$, then:
+\begin{enumerate}
+    \item $(\ker\phi,+)$ is a subgroup of $(R,+)$.
+    \item $\forall k\in\ker\phi$ and $\forall r\in R$, $k\cdot r\in\ker\phi$.
+\end{enumerate}
+\end{lemma}
+\begin{definition}
+Let $(R,+,\cdot)$ be a ring. A subgroup $I\subseteq R$ is an \textit{ideal} if $\forall x\in I$ and $\forall r\in R$, $x\cdot r\in I$.
+\end{definition}
 \end{multicols}
 \end{document}
