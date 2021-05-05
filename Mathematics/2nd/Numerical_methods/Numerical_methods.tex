@@ -294,5 +294,36 @@ Hermite interpolation problem has a unique solution.
 \begin{theorem}
 Let $f:[a,b]\rightarrow\mathbb{R}$ be a function of class $\mathcal{C}^{n+1}$, $\{x_i\}_{i=0}^m\subset\mathbb{R}$ be different points, $\{(n_i)\}_{i=0}^m\subset\NN$ be such that $\sum_{i=0}^mn_i=n+1$. Let $h_n$ be the Hermite interpolating polynomial of $f$ with nodes $\{x_i\}_{i=0}^m\subset\mathbb{R}$, that is, $$h_n^{(k)}(x_i)=f^{(k)}(x_i)\text{ for }i=0,\ldots,m\text{ and }k=0,\ldots,n_i-1.$$ Then $\forall x\in[a,b]$ $\exists\xi_x\in\langle x_0,\ldots,x_n,x\rangle$ such that: $$f(x)-h_n(x)=\frac{f^{(n+1)}(\xi_x)}{(n+1)!}(x-x_0)^{n_0}\cdots(x-x_m)^{n_m}.$$
 \end{theorem}
+\subsubsection*{Spline interpolation}
+\begin{minipage}{\linewidth} 
+    \centering
+    \includegraphics[width=\linewidth]{Mathematics/2nd/Numerical_methods/Images/runge.tex}
+    \captionof{figure}{Runge's phenomenon. In this case $f(x)=\frac{1}{1+25x^2}$. $p_5(x)$ is the 5th-order Lagrange interpolating polynomial with equally-spaced interpolating points; $p_9(x)$, the 9th-order Lagrange interpolating polynomial with equally-spaced interpolating points, and $p_{13}(x)$, the 13th-order Lagrange interpolating polynomial with equally-spaced interpolating points.}
+\end{minipage}
+\begin{definition}[Spline]
+Let $\{(x_i,y_i)\}_{i=0}^n$ be support points of an interval $[a,b]$. A \textit{spline of degree $p$} is a function $s:[a,b]\rightarrow\RR$ of class $\mathcal{C}^{p-1}$ satisfying: $$s_{{|_{[x_i,x_{i+1}]}}}\in\RR[x],\quad\deg s_{|_{[x_i,x_{i+1}]}}=p,\quad s(x_i)=y_i,$$ for $i=0,\ldots,n-1$. The most common case are splines of degree  $p=3$ or \textit{cubic spline}. In this case we can impose two more conditions on their definition in one of the following ways:
+\begin{enumerate}
+    \item \textit{Natural cubic spline}: $$s''(x_0)=s''(x_n)=0.$$
+    \item \textit{Cubic Hermite spline}: Given $y_0',y_n'\in\RR$, $$s'(x_0)=y_0',\quad s'(x_n)=y_n'.$$
+    \item \textit{Cubic periodic spline}: $$s'(x_0)=s'(x_n),\quad s''(x_0)=s''(x_n)$$
+\end{enumerate}
+\end{definition}
+\begin{definition}
+Let $f:[a,b]\rightarrow\mathbb{R}$ a function of class $\mathcal{C}^2$. We define the \textit{seminorm}\footnote{The term \textit{seminorm} has been used instead of \textit{norm} to emphasize that not all properties of a norm are satisfied with this definition.} \textit{of $f$} as $$\|f\|^2=\int_a^b(f''(x))^2dx.$$
+\end{definition}
+\begin{prop}
+Let $f:[a,b]\rightarrow\mathbb{R}$ a function of class $\mathcal{C}^2$ interpolating the support points $\{(x_i,y_i)\}_{i=0}^n\subset\RR^2$, $a\leq x_0<\cdots<x_n\leq b$. If $s$ is the natural cubic spline associated with $\{(x_i,y_i)\}_{i=0}^n$, then: $$\|f-s\|^2=\|f\|^2-\|s\|^2-2(f'-s)s''\Big|_{x_0}^{x_n}+2\sum_{i=1}^n(f-s)s'''\Big|_{x_{i-1}^+}^{x_i^-}.$$
+\end{prop}
+\begin{theorem}
+Let $f:[a,b]\rightarrow\mathbb{R}$ a function of class $\mathcal{C}^2$ interpolating the support points $\{(x_i,y_i)\}_{i=0}^n\subset\RR^2$, $a\leq x_0<\cdots<x_n\leq b$. If $s$ is the natural cubic spline associated with $\{(x_i,y_i)\}_{i=0}^n$, then $$\|s\|\leq\|f\|.$$
+\end{theorem}
+\subsection{Numerical differentiation and integration}
+\subsubsection*{Richardson extrapolation}
+\begin{theorem}[Intermediate value theorem]
+Let $f:[a,b]\rightarrow\RR$ be a continuous function, $\xi_0,\ldots,\xi_n\in[a,b]$ and $\alpha_0,\ldots,\alpha_n\geq 0$. Then, $\exists\eta\in[a,b]$ such that: $$\sum_{i=0}^n\alpha_if(\xi_i)=\left(\sum_{i=0}^n\alpha_i\right)f(\eta).$$
+\end{theorem}
+\begin{theorem}[Richardson extrapolation]
+Suppose a function $f$ has a an expansion: $$f(h)=\alpha+a_1h^{p_1}+a_1h^{p_2}+\cdots\quad\text{with }p_1<p_2<\cdots.$$ Given $q>0$, we define $$F_1(h):=F(h),\quad F_{n+1}(h):=\frac{q^{p_n}F_n\left(\frac{h}{q}\right)-F_n(h)}{q^{p_n}-1}.$$ And we can observe that $\alpha=F_n+O(h^{p_n})$.
+\end{theorem}
 \end{multicols}
 \end{document}
