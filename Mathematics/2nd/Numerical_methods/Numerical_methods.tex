@@ -124,26 +124,14 @@ Let $g:\mathbb{R}\rightarrow\mathbb{R}$ be a function of class $\mathcal{C}^1$. 
 \begin{definition}
 Let $g:\mathbb{R}\rightarrow\mathbb{R}$ be a function of class $\mathcal{C}^1$ and $\alpha$ be a fixed point of $g$. We say $\alpha$ is an \textit{attractor fixed point} if $|g'(\alpha)|<1$. In this case, any iteration $x_{n+1}=g(x_n)$ in $I_\varepsilon$ converges to $\alpha$. If $|g'(\alpha)|>1$, we say $\alpha$ is a \textit{repulsor fixed point}. In this case, $\forall x_0\in I_\varepsilon$ the iteration $x_{n+1}=g(x_n)$ doesn't converge to $\alpha$.
 \end{definition}
-\begin{minipage}{\linewidth}
-    \centering
-    \begin{minipage}{0.49\linewidth} 
-        \centering
-        \includegraphics[width=\linewidth]{Mathematics/2nd/Numerical_methods/Images/cobweb1.tex}
-    \end{minipage}\hfill
-    \begin{minipage}{0.49\linewidth} 
-        \centering
-        \includegraphics[width=\linewidth]{Mathematics/2nd/Numerical_methods/Images/cobweb2.tex}
-    \end{minipage}\\
-    \begin{minipage}{0.49\linewidth} 
-        \centering
-        \includegraphics[width=\linewidth]{Mathematics/2nd/Numerical_methods/Images/cobweb3.tex}
-    \end{minipage}\hfill
-    \begin{minipage}{0.49\linewidth} 
-        \centering
-        \includegraphics[width=\linewidth]{Mathematics/2nd/Numerical_methods/Images/cobweb4.tex}
-    \end{minipage}
+
+\begin{center}
+    \includegraphics[width=0.49\linewidth]{Images/cobweb1.tex}
+    \includegraphics[width=0.49\linewidth]{Images/cobweb2.tex}
+    \includegraphics[width=0.49\linewidth]{Images/cobweb3.tex}
+    \includegraphics[width=0.49\linewidth]{Images/cobweb4.tex}
     \captionof{figure}{Cobweb diagrams. In the figures at the top, $\alpha$ is a attractor point, that is, $|g'(\alpha)|<1$. More precisely, the figure at the top left occurs when $-1<g'(\alpha)\leq0$ and the figure at the top right when $0\leq g'(\alpha)<1$. In the figure at bottom left, $\alpha$ is a repulsor point. Finally, in the figure at bottom right the iteration $x_{n+1}=g(x_n)$ has no limit. It is said that to have a \textit{chaotic behavior}.}
-\end{minipage}
+\end{center}
 \subsubsection*{Order of convergence}
 \begin{definition}[Order of convergence]
 Let $(x_n)$ be a sequence of real numbers that converges to $\alpha\in\mathbb{R}$. We say $(x_n)$ has \textit{order of convergence $p\in\mathbb{R}^+$} if exists $C>0$ such that: $$\lim_{n\to\infty}\frac{|x_{n+1}-\alpha|}{|x_n-\alpha|^p}=C.$$ The constant $C$ is called \textit{asymptotic error constant}. For the case $p=1$, we need $C<1$. In this case the convergence is called \textit{linear convergence}; for $p=2$, is called \textit{quadratic convergence}; for $p=3$, \textit{cubic convergence}... If it's satisfied that $$\lim_{n\to\infty}\frac{|x_{n+1}-\alpha|}{|x_n-\alpha|^p}=0$$ for some $p\in\mathbb{R}^+$, we say the sequence has \textit{order of convergence at least $p$}.
@@ -293,11 +281,7 @@ Hermite interpolation problem has a unique solution.
 Let $f:[a,b]\rightarrow\mathbb{R}$ be a function of class $\mathcal{C}^{n+1}$, $\{x_i\}_{i=0}^m\subset\mathbb{R}$ be different points, $\{(n_i)\}_{i=0}^m\subset\NN$ be such that $\sum_{i=0}^mn_i=n+1$. Let $h_n$ be the Hermite interpolating polynomial of $f$ with nodes $\{x_i\}_{i=0}^m\subset\mathbb{R}$, that is, $$h_n^{(k)}(x_i)=f^{(k)}(x_i)\text{ for }i=0,\ldots,m\text{ and }k=0,\ldots,n_i-1.$$ Then $\forall x\in[a,b]$ $\exists\xi_x\in\langle x_0,\ldots,x_n,x\rangle$ such that: $$f(x)-h_n(x)=\frac{f^{(n+1)}(\xi_x)}{(n+1)!}(x-x_0)^{n_0}\cdots(x-x_m)^{n_m}.$$
 \end{theorem}
 \subsubsection*{Spline interpolation}
-\begin{minipage}{\linewidth} 
-    \centering
-    \includegraphics[width=\linewidth]{Mathematics/2nd/Numerical_methods/Images/runge.tex}
-    \captionof{figure}{Runge's phenomenon. In this case $f(x)=\frac{1}{1+25x^2}$. $p_5(x)$ is the 5th-order Lagrange interpolating polynomial with equally-spaced interpolating points; $p_9(x)$, the 9th-order Lagrange interpolating polynomial with equally-spaced interpolating points, and $p_{13}(x)$, the 13th-order Lagrange interpolating polynomial with equally-spaced interpolating points.}
-\end{minipage}
+\illustration{0.95}{Images/runge}{Runge's phenomenon. In this case $f(x)=\frac{1}{1+25x^2}$. $p_5(x)$ is the 5th-order Lagrange interpolating polynomial with equally-spaced interpolating points; $p_9(x)$, the 9th-order Lagrange interpolating polynomial with equally-spaced interpolating points, and $p_{13}(x)$, the 13th-order Lagrange interpolating polynomial with equally-spaced interpolating points.}{}
 \begin{definition}[Spline]
 Let $\{(x_i,y_i)\}_{i=0}^n$ be support points of an interval $[a,b]$. A \textit{spline of degree $p$} is a function $s:[a,b]\rightarrow\RR$ of class $\mathcal{C}^{p-1}$ satisfying: $$s_{{|_{[x_i,x_{i+1}]}}}\in\RR[x],\quad\deg s_{|_{[x_i,x_{i+1}]}}=p,\quad s(x_i)=y_i,$$ for $i=0,\ldots,n-1$. The most common case are splines of degree  $p=3$ or \textit{cubic spline}. In this case we can impose two more conditions on their definition in one of the following ways:
 \begin{enumerate}
@@ -348,7 +332,7 @@ Suppose we have a function $f$ that approximate a value $\alpha$ with an error t
     Let $p\in\RR[x]$ be a polynomial defined on an interval $[a,b]$ such that $\deg p\leq n$ and let $\{x_i\}_{i=0}^n\subseteq[a,b]$ be a set of nodes. Then, $I(p)=\int_a^bp(x)dx$.
 \end{lemma}
 \begin{lemma}
-    Let $p\in\RR[x]$ be a polynomial defined on an interval $[a,b]$ such that $\deg p\leq n$ and let $\{x_i\}_{i=0}^n\subseteq[a,b]$ be a set of nodes. Then, $$I(p)=\int_a^bp(x)dx\iff I(x^k)=\int_a^bx^kdx,\text{ for }k=0,1,\ldots,n.$$
+    Let $p\in\RR[x]$ be a polynomial defined on an interval $[a,b]$ such that $\deg p\leq n$ and let $\{x_i\}_{i=0}^n\subseteq[a,b]$ be a set of nodes. Then, $$I(p)=\int_a^bp(x)dx\iff I(x^k)=\int_a^bx^kdx,\text{ for }0\leq k\leq n.$$
 \end{lemma}
 \subsubsection*{Newton-Cotes formulas}
 \end{multicols}
