@@ -1,6 +1,4 @@
-\documentclass[class=article,10pt,crop=false]{standalone}
-\usepackage{standalone}
-\usepackage{preamble}
+\documentclass[../../../main.tex]{subfiles}
 
 %Break lines: 
 % - In Neville's algorithm (section: interpolation -polynomial interpolation)
@@ -318,12 +316,40 @@ Let $f:[a,b]\rightarrow\mathbb{R}$ a function of class $\mathcal{C}^2$ interpola
 Let $f:[a,b]\rightarrow\mathbb{R}$ a function of class $\mathcal{C}^2$ interpolating the support points $\{(x_i,y_i)\}_{i=0}^n\subset\RR^2$, $a\leq x_0<\cdots<x_n\leq b$. If $s$ is the natural cubic spline associated with $\{(x_i,y_i)\}_{i=0}^n$, then $$\|s\|\leq\|f\|.$$
 \end{theorem}
 \subsection{Numerical differentiation and integration}
-\subsubsection*{Richardson extrapolation}
+\subsubsection*{Differentiation}
 \begin{theorem}[Intermediate value theorem]
 Let $f:[a,b]\rightarrow\RR$ be a continuous function, $\xi_0,\ldots,\xi_n\in[a,b]$ and $\alpha_0,\ldots,\alpha_n\geq 0$. Then, $\exists\eta\in[a,b]$ such that: $$\sum_{i=0}^n\alpha_if(\xi_i)=\left(\sum_{i=0}^n\alpha_i\right)f(\eta).$$
 \end{theorem}
-\begin{theorem}[Richardson extrapolation]
-Suppose a function $f$ has a an expansion: $$f(h)=\alpha+a_1h^{p_1}+a_1h^{p_2}+\cdots\quad\text{with }p_1<p_2<\cdots.$$ Given $q>0$, we define $$F_1(h):=F(h),\quad F_{n+1}(h):=\frac{q^{p_n}F_n\left(\frac{h}{q}\right)-F_n(h)}{q^{p_n}-1}.$$ And we can observe that $\alpha=F_n+O(h^{p_n})$.
+\begin{theorem}[Forward and backward difference formula of order 1]
+Let $f:\RR\rightarrow\RR$ be a function of class $\mathcal{C}^2$. Then, forward difference formula of order 1 is: $$f'(a)=\frac{f(a+h)-f(a)}{h}-\frac{f''(\xi)}{2}h,$$ where $\xi\in\langle a,a+h\rangle$. Analogously, backward difference formula of order 1 is: $$f'(a)=\frac{f(a)-f(a-h)}{h}+\frac{f''(\eta)}{2}h,$$ where $\eta\in\langle a-h,a\rangle$.
 \end{theorem}
+\begin{theorem}[Symmetric difference formula of order 1]
+    Let $f:\RR\rightarrow\RR$ be a function of class $\mathcal{C}^3$. Then, symmetric difference formula of order 1: $$f'(a)=\frac{f(a+h)-f(a-h)}{2h}-\frac{f^{(3)}(\xi)}{6}h^2,$$ where $\xi\in\langle a-h,a+h\rangle$.
+\end{theorem}
+\begin{theorem}[Symmetric difference formula of order 2]
+    Let $f:\RR\rightarrow\RR$ be a function of class $\mathcal{C}^4$. Then, symmetric difference formula of order 2: $$f''(a)=\frac{f(a+h)-2f(a)+f(a-h)}{h^2}-\frac{f^{(4)}(\xi)}{12}h^2,$$ where $\xi\in\langle a-h,a,a+h\rangle$.
+\end{theorem}
+\subsubsection*{Richardson extrapolation}
+\begin{theorem}[Richardson extrapolation]
+Suppose we have a function $f$ that approximate a value $\alpha$ with an error that depends on a small quantity $h$. That is: $$f(h)=\alpha+a_1h^{k_1}+a_2h^{k_2}+\cdots,$$with $k_1<k_2<\cdots$ and $a_i$ are unknown constants. Given $q>0$, we define $$D_1(h)=f(h),\quad D_{n+1}(h)=\frac{q^{k_n}D_n\left(h/q\right)-D_n(h)}{q^{k_n}-1}.$$ And we can observe that $\alpha=D_{n+1}(h)+O(h^{k_{n+1}})$.
+\end{theorem}
+\subsubsection*{Integration}
+\begin{definition}
+    Let $f:[a,b]\rightarrow\RR$ be a continuous function, $\{x_i\}_{i=0}^n\subseteq[a,b]$ be a set of nodes and $P_n$ be the Lagrange interpolating polynomial with support points $\{(x_i,f(x_i))\}_{i=0}^n$. We define the \textit{integration formula base on interpolation} as 
+    \begin{equation}
+        I(f)=\int_a^bP_n(x)dx
+        \label{NM-integration}
+    \end{equation}
+\end{definition}
+\begin{lemma}
+    Let $f:[a,b]\rightarrow\RR$ be a continuous function $\{x_i\}_{i=0}^n\subseteq[a,b]$ be a set of nodes. Then, $$I(f)=\sum_{i=1}^nA_if(x_i),\quad\text{where }A_i=\int_a^b\prod_{\substack{j=0\\j\ne i}}^n\frac{x-x_j}{x_i-x_j}dx.$$
+\end{lemma}
+\begin{lemma}
+    Let $p\in\RR[x]$ be a polynomial defined on an interval $[a,b]$ such that $\deg p\leq n$ and let $\{x_i\}_{i=0}^n\subseteq[a,b]$ be a set of nodes. Then, $I(p)=\int_a^bp(x)dx$.
+\end{lemma}
+\begin{lemma}
+    Let $p\in\RR[x]$ be a polynomial defined on an interval $[a,b]$ such that $\deg p\leq n$ and let $\{x_i\}_{i=0}^n\subseteq[a,b]$ be a set of nodes. Then, $$I(p)=\int_a^bp(x)dx\iff I(x^k)=\int_a^bx^kdx,\text{ for }k=0,1,\ldots,n.$$
+\end{lemma}
+\subsubsection*{Newton-Cotes formulas}
 \end{multicols}
 \end{document}
