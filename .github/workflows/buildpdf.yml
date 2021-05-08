@@ -23,6 +23,14 @@ jobs:
         uses: xu-cheng/latex-action@v2
         with:
           root_file: | 
+            main.tex
+            Mathematics/1st/Fundamentals_of_mathematics/Fundamentals_of_mathematics.tex
+            Mathematics/1st/Linear_algebra/Linear_algebra.tex
+            Mathematics/1st/Real-valued_functions/Real-valued_functions.tex
+            Mathematics/2nd/Algebraic_structures/Algebraic_structures.tex
+            Mathematics/2nd/Discrete_mathematics/Discrete_mathematics.tex
+            Mathematics/2nd/Functions_of_several_variables/Functions_of_several_variables.tex
+            Mathematics/2nd/Linear_geometry/Linear_geometry.tex
             Mathematics/2nd/Mathematical_analysis/Mathematical_analysis.tex
             Mathematics/2nd/Numerical_methods/Numerical_methods.tex
           #  Physics/1st/Chemistry/Chemistry.tex
@@ -31,6 +39,7 @@ jobs:
           #  Physics/1st/Waves_and_optics/Waves_and_optics.tex
           #  Physics/2nd/Classical_mechanics/Classical_mechanics.tex
           #  Physics/2nd/Electromagnetism/Electromagnetism.tex
+          args: -f -pdf
 
       - name: Create Release
         id: create_release
@@ -47,7 +56,15 @@ jobs:
         uses: csexton/release-asset-action@v2
         with:
           release-url: ${{ steps.create_release.outputs.upload_url }}
-          files: |
+          files: | 
+            main.pdf
+            Fundamentals_of_mathematics.pdf
+            Linear_algebra.pdf
+            Real-valued_functions.pdf
+            Algebraic_structures.pdf
+            Discrete_mathematics.pdf
+            Functions_of_several_variables.pdf
+            Linear_geometry.pdf
             Mathematical_analysis.pdf
             Numerical_methods.pdf
           #  Chemistry.pdf
