@@ -218,94 +218,101 @@ Then if $p(\alpha)=0$ for some $\alpha\in\mathbb{C}$, $$\alpha\in(B(0,1)\cup B(-
 \end{corollary}
 \subsection{Interpolation}
 \begin{definition}
-Suppose we have a family of real valued functions $\mathfrak{C}$ and a set of points $\{(x_i,y_i)\}_{i=0}^n:=\{(x_i,y_i):x_j\ne x_k\iff j\ne k,i=0,\ldots,n\}$. These points $\{(x_i,y_i)\}_{i=0}^n$ are called \textit{support points}. The \textit{interpolation problem} consists in finding a function $f\in\mathfrak{C}$ such that $f(x_i)=y_i$ for $i=0,\ldots,n$\footnote{Types of interpolation are for example polynomial interpolation, trigonometric interpolation, Padé interpolation, Hermite interpolation and spline interpolation.}.
+    Suppose we have a family of real valued functions $\mathfrak{C}$ and a set of points $\{(x_i,y_i)\}_{i=0}^n:=\{(x_i,y_i)\in\RR^2:i=0,\ldots,n\text{ and }x_j\ne x_k\iff j\ne k\}$. These points $\{(x_i,y_i)\}_{i=0}^n$ are called \textit{support points}. The \textit{interpolation problem} consists in finding a function $f\in\mathfrak{C}$ such that $f(x_i)=y_i$ for $i=0,\ldots,n$\footnote{Types of interpolation are for example polynomial interpolation, trigonometric interpolation, Padé interpolation, Hermite interpolation and spline interpolation.}.
 \end{definition}
 \subsubsection*{Polynomial interpolation}
 \begin{definition}
-Given a set of support points $\{(x_i,y_i)\}_{i=0}^n$, \textit{Lagrange's interpolation problem} consists in finding a polynomial $p_n\in\mathbb{R}[x]$ such that $\deg p_n\leq n$ and $p_n(x_i)=y_i$.
+    Given a set of support points $\{(x_i,y_i)\}_{i=0}^n$, \textit{Lagrange's interpolation problem} consists in finding a polynomial $p_n\in\mathbb{R}[x]$ such that $\deg p_n\leq n$ and $p_n(x_i)=y_i$.
+\end{definition}
+\begin{definition}
+    Let $\{(x_i,y_i)\}_{i=0}^n$ be a set of support points. We define $\omega_n(x)\in\RR[x]$ as $$\omega_n(x)=\prod_{k=0}^n(x-x_k).$$ We define \textit{Lagrange basis polynomials} $L_j(x)\in\RR[x]$ as $$L_j(x)=\frac{\omega_n(x)}{(x-x_j)\omega_n(x_j)}=\prod_{\substack{k=0\\k\ne j}}^n\frac{x-x_k}{x_j-x_k}.$$
 \end{definition}
 \begin{prop}
-Lagrange's interpolation problem has a unique solution and this is: $$p_n(x)=\sum_{k=0}^ny_k\frac{\omega_n(x)}{\omega_n'(x)},\quad\text{where }\omega_n(x):=\prod_{j=0}^n(x-x_j).$$
+    Lagrange's interpolation problem has a unique solution and this is: $$p_n(x)=\sum_{k=0}^ny_kL_k(x).$$
 \end{prop}
 \begin{prop}[Neville's algorithm]
-Let \\$P_{i_1,\ldots,i_k}(x)\in\mathbb{R}[x]$ be such that $\deg P_{i_0,\ldots,i_k}\leq k$ and $P_{i_1,\ldots,i_k}(x_{i_j})=y_{i_j}$ for $j=0,\ldots,k$. Then, it is satisfied that:
-\begin{enumerate}
-    \item $P_i(x)=y_i$.
-    \item $P_{i_0,\ldots,i_k}(x)=\frac{\begin{vmatrix}
-    P_{i_1,\ldots,i_k}(x) & x-x_{i_k}\\
-    P_{i_0,\ldots,i_{k-1}}(x) & x-x_{i_0}
-    \end{vmatrix}}{x_{i_k}-x_{i_0}}$
-\end{enumerate}
+    Let \\$\{(x_i,y_i)\}_{i=0}^n$ be a set of support points, $\{i_0,\ldots,i_k\}\subset\{0,\ldots,n\}$ and $P_{i_1,\ldots,i_k}(x)\in\mathbb{R}[x]$ be such that $\deg P_{i_0,\ldots,i_k}\leq k$ and $P_{i_1,\ldots,i_k}(x_{i_j})=y_{i_j}$ for $j=0,\ldots,k$. Then, it is satisfied that:
+    \begin{enumerate}
+        \item $P_i(x)=y_i$.
+        \item $P_{i_0,\ldots,i_k}(x)=\frac{\begin{vmatrix}
+        P_{i_1,\ldots,i_k}(x) & x-x_{i_k}\\
+        P_{i_0,\ldots,i_{k-1}}(x) & x-x_{i_0}
+        \end{vmatrix}}{x_{i_k}-x_{i_0}}$
+    \end{enumerate}
 \end{prop}
 \begin{definition}
-Let $f:\mathbb{R}\rightarrow\mathbb{R}$ be a function and $\{x_i\}_{i=0}^k\subset\mathbb{R}$ be pairwise distinct points. We define the \textit{divided difference of order $k$ of $f$ applied to $\{x_i\}_{i=0}^k$}, denoted by $f[x_0,\ldots,x_k]$, as the coefficient of $x^k$ of the interpolating polynomial with support points $\{(x_i,f(x_i))\}_{i=0}^k$ 
+    Let $f:\mathbb{R}\rightarrow\mathbb{R}$ be a function and $\{x_i\}_{i=0}^k\subset\mathbb{R}$ be pairwise distinct points. We define the \textit{divided difference of order $k$ of $f$ applied to $\{x_i\}_{i=0}^k$}, denoted by $f[x_0,\ldots,x_k]$, as the coefficient of $x^k$ of the interpolating polynomial with support points $\{(x_i,f(x_i))\}_{i=0}^k$ 
 \end{definition}
 \begin{prop}
-Let $f:\mathbb{R}\rightarrow\mathbb{R}$ be a function and $\{x_i\}_{i=0}^k\subset\mathbb{R}$ be different points. Lagrange interpolating polynomial with support points $\{(x_i,f(x_i))\}_{i=0}^k$ is $$p_n(x)=\sum_{j=0}^nf[x_j]\omega_{j-1}(x),$$ assuming $\omega_{-1}:=1$.
+    Let $f:\mathbb{R}\rightarrow\mathbb{R}$ be a function and $\{x_i\}_{i=0}^k\subset\mathbb{R}$ be different points. Lagrange interpolating polynomial with support points $\{(x_i,f(x_i))\}_{i=0}^n$ is $$p_n(x)=\sum_{j=0}^nf[x_0,\ldots,x_j]\omega_{j-1}(x),$$ assuming $\omega_{-1}:=1$.
 \end{prop}
 \begin{prop}[Newton's divided differences method]
-Let $f:\mathbb{R}\rightarrow\mathbb{R}$ be a function. For $x\in\mathbb{R}$, we have $f[x]=f(x)$. And if $\{x_i\}_{i=0}^n\subset\mathbb{R}$ are different points, then $$f[x_0,\ldots,x_n]=\frac{f[x_1,\ldots,x_n]-f[x_0,\ldots,x_{n-1}]}{x_n-x_0}.$$ 
+    Let $f:\mathbb{R}\rightarrow\mathbb{R}$ be a function. For $x\in\mathbb{R}$, we have $f[x]=f(x)$. And if $\{x_i\}_{i=0}^n\subset\mathbb{R}$ are different points, then $$f[x_0,\ldots,x_n]=\frac{f[x_1,\ldots,x_n]-f[x_0,\ldots,x_{n-1}]}{x_n-x_0}.$$ 
 \end{prop}
 \begin{theorem}
-Let $f:[a,b]\rightarrow\mathbb{R}$ be a function of class $\mathcal{C}^{n+1}$, $\{x_i\}_{i=0}^n\subset\mathbb{R}$ be different points and $p_n\in\mathbb{R}[x]$ be the interpolating polynomial with support points $\{(x_i,f(x_i))\}_{i=0}^n$. Then $\forall x\in[a,b]$: $$f(x)-p_n(x)=\frac{f^{(n+1)}(\xi_x)}{(n+1)!}\omega_n(x),$$ where $\xi_x\in\langle x_0,\ldots,x_n,x\rangle$\footnote{The interval $\langle a_1,\ldots,a_k\rangle$ is defined as $\langle a_1,\ldots,a_k\rangle:=(\min(a_1,\ldots,a_k),\max(a_1,\ldots,a_k))$.}.
+    Let $f:[a,b]\rightarrow\mathbb{R}$ be a function of class $\mathcal{C}^{n+1}$, $\{x_i\}_{i=0}^n\subset\mathbb{R}$ be different  points and $p_n\in\mathbb{R}[x]$ be the interpolating polynomial with support points $\{(x_i,f(x_i))\}_{i=0}^n$. Then $\forall x\in[a,b]$, $$f(x)-p_n(x)=\frac{f^{(n+1)}(\xi_x)}{(n+1)!}\omega_n(x),$$ where $\xi_x\in\langle x_0,\ldots,x_n,x\rangle$\footnote{The interval $\langle a_1,\ldots,a_k\rangle$ is defined as $\langle a_1,\ldots,a_k\rangle:=(\min(a_1,\ldots,a_k),\max(a_1,\ldots,a_k))$.}.
 \end{theorem}
 \begin{lemma}
-Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^{n+1}$ and $\{x_i\}_{i=0}^n\subset\mathbb{R}$ be pairwise distinct points. Then $\exists\xi\in\langle x_0,\ldots,x_n\rangle$ such that: $$f[x_0,\ldots,x_n]=\frac{f^{(n)}(\xi)}{n!}.$$ 
+    Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^{n+1}$ and $\{x_i\}_{i=0}^n\subset\mathbb{R}$ be pairwise distinct points. Then $\exists\xi\in\langle x_0,\ldots,x_n\rangle$ such that: $$f[x_0,\ldots,x_n]=\frac{f^{(n)}(\xi)}{n!}.$$ 
 \end{lemma}
 \begin{prop}
-Let $f:\RR\rightarrow\RR$ be a function of class $\mathcal{C}^{n+1}$, $\{x_i\}_{i=0}^n\subset\mathbb{R}$ be pairwise distinct points and $\sigma\in S_n$. Then $$f[x_0,\ldots,x_n]=f[x_{\sigma(0)},\ldots,x_{\sigma(n)}]$$
+    Let $f:\RR\rightarrow\RR$ be a function of class $\mathcal{C}^{n+1}$, $\{x_i\}_{i=0}^n\subset\mathbb{R}$ be pairwise distinct points and $\sigma\in S_n$. Then, $$f[x_0,\ldots,x_n]=f[x_{\sigma(0)},\ldots,x_{\sigma(n)}]$$
 \end{prop}
 \begin{definition}
-Let $\{(x_i,y_i)\}_{i=0}^n$ be support points. The $x$-axis points $\{(x_i)\}_{i=0}^n$ are \textit{equally-spaced} if $$x_i=x_0+ih,\quad\text{for }i=0,\ldots,n\quad\text{with}\quad h:=\frac{x_n-x_0}{n}.$$
+    Let $\{(x_i,y_i)\}_{i=0}^n$ be support points. The $x$-axis points $\{(x_i)\}_{i=0}^n$ are \textit{equally-spaced} if $$x_i=x_0+ih,\quad\text{for }i=0,\ldots,n\quad\text{with}\quad h:=\frac{x_n-x_0}{n}.$$
 \end{definition}
 \begin{definition}
-Let $f:[a,b]\rightarrow\RR$ be a function and $\{x_i\}_{i=0}^n\subset\mathbb{R}$ be equally-spaced points. We define:\begin{gather*}
-    \Delta f(x):=f(x+h)-f(x),\\
-    \Delta^{n+1}f(x):=\Delta(\Delta^nf(x)).
-\end{gather*}
+    Let $f:[a,b]\rightarrow\RR$ be a function and $\{x_i\}_{i=0}^n\subset\mathbb{R}$ be equally-spaced points. We define:
+    \begin{gather*}
+        \Delta f(x):=f(x+h)-f(x),\\
+        \Delta^{n+1}f(x):=\Delta(\Delta^nf(x)).
+    \end{gather*}
 \end{definition}
 \begin{lemma}
-Let $f:[a,b]\rightarrow\RR$ be a function and $\{x_i\}_{i=0}^n\subset\mathbb{R}$ be equally-spaced points. Then, $$\Delta^nf(x_0)=n!h^nf[x_0,\ldots,x_n].$$
+    Let $f:[a,b]\rightarrow\RR$ be a function and $\{x_i\}_{i=0}^n\subset\mathbb{R}$ be equally-spaced points. Then, $$\Delta^nf(x_0)=n!h^nf[x_0,\ldots,x_n].$$
 \end{lemma}
 \begin{corollary}
-Let $f\in\RR[x]$ with $\deg f=n$. Suppose we interpolate $f$ with equally-spaced nodes. Then, $\Delta^nf(x)\equiv\text{constant}$.
+    Let $f\in\RR[x]$ with $\deg f=n$. Suppose we interpolate $f$ with equally-spaced nodes. Then, $\Delta^nf(x)\equiv\text{constant}$.
 \end{corollary}
 \subsubsection{Hermite interpolation}
 \begin{definition}
-Given a sets of points $\{(x_i)\}_{i=0}^m\subset\RR$, $\{(n_i)\}_{i=0}^m\subset\NN$ and $\{(y_i^{(k)}:k=0,\ldots,n_i-1\}_{i=0}^m\subset\RR$ \textit{Hermite interpolation problem} consists in finding a polynomial $h_n\in\mathbb{R}[x]$ such that $\deg h_n\leq n$, $\sum_{i=0}^mn_i=n+1$ and $$h_n^{(k)}(x_i)=y_i^{(k)}\text{ for }i=0,\ldots,m\text{ and }k=0,\ldots,n_i-1.$$
+    Given a sets of points $\{x_i\}_{i=0}^m\subset\RR$, $\{n_i\}_{i=0}^m\subset\NN^*$ and $\{y_i^{(k)}:k=0,\ldots,n_i-1\}_{i=0}^m\subset\RR$, \textit{Hermite interpolation problem} consists in finding a polynomial $h_n\in\mathbb{R}[x]$ such that $\deg h_n\leq n$, $\sum_{i=0}^mn_i=n+1$ and $$h_n^{(k)}(x_i)=y_i^{(k)}\text{ for }i=0,\ldots,m\text{ and }k=0,\ldots,n_i-1.$$
 \end{definition}
 \begin{prop}
-Hermite interpolation problem has a unique solution.
+    Hermite interpolation problem has a unique solution.
+\end{prop}
+\begin{prop}
+    Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^n$ and $\{x_i\}_{i=0}^n\subset\mathbb{R}$ be points. We define $f[x_i,\overset{n+1}{\cdots},x_i]$ as $$f[x_i,\overset{n+1}{\cdots},x_i]=\frac{f^{(n)}(x_i)}{n!}.$$
 \end{prop}
 \begin{theorem}
-Let $f:[a,b]\rightarrow\mathbb{R}$ be a function of class $\mathcal{C}^{n+1}$, $\{x_i\}_{i=0}^m\subset\mathbb{R}$ be different points, $\{(n_i)\}_{i=0}^m\subset\NN$ be such that $\sum_{i=0}^mn_i=n+1$. Let $h_n$ be the Hermite interpolating polynomial of $f$ with nodes $\{x_i\}_{i=0}^m\subset\mathbb{R}$, that is, $$h_n^{(k)}(x_i)=f^{(k)}(x_i)\text{ for }i=0,\ldots,m\text{ and }k=0,\ldots,n_i-1.$$ Then $\forall x\in[a,b]$ $\exists\xi_x\in\langle x_0,\ldots,x_n,x\rangle$ such that: $$f(x)-h_n(x)=\frac{f^{(n+1)}(\xi_x)}{(n+1)!}(x-x_0)^{n_0}\cdots(x-x_m)^{n_m}.$$
+    Let $f:[a,b]\rightarrow\mathbb{R}$ be a function of class $\mathcal{C}^{n+1}$, $\{x_i\}_{i=0}^m\subset\mathbb{R}$ be different points, $\{n_i\}_{i=0}^m\subset\NN$ be such that $\sum_{i=0}^mn_i=n+1$. Let $h_n$ be the Hermite interpolating polynomial of $f$ with nodes $\{x_i\}_{i=0}^m\subset\mathbb{R}$, that is, $$h_n^{(k)}(x_i)=f^{(k)}(x_i)\text{ for }i=0,\ldots,m\text{ and }k=0,\ldots,n_i-1.$$ Then $\forall x\in[a,b]$ $\exists\xi_x\in\langle x_0,\ldots,x_n,x\rangle$ such that: $$f(x)-h_n(x)=\frac{f^{(n+1)}(\xi_x)}{(n+1)!}(x-x_0)^{n_0}\cdots(x-x_m)^{n_m}.$$
 \end{theorem}
 \subsubsection*{Spline interpolation}
 \illustration{0.95}{Images/runge.tex}{Runge's phenomenon. In this case $f(x)=\frac{1}{1+25x^2}$. $p_5(x)$ is the 5th-order Lagrange interpolating polynomial with equally-spaced interpolating points; $p_9(x)$, the 9th-order Lagrange interpolating polynomial with equally-spaced interpolating points, and $p_{13}(x)$, the 13th-order Lagrange interpolating polynomial with equally-spaced interpolating points.}{}
 \begin{definition}[Spline]
-Let $\{(x_i,y_i)\}_{i=0}^n$ be support points of an interval $[a,b]$. A \textit{spline of degree $p$} is a function $s:[a,b]\rightarrow\RR$ of class $\mathcal{C}^{p-1}$ satisfying: $$s_{{|_{[x_i,x_{i+1}]}}}\in\RR[x],\quad\deg s_{|_{[x_i,x_{i+1}]}}=p,\quad s(x_i)=y_i,$$ for $i=0,\ldots,n-1$. The most common case are splines of degree  $p=3$ or \textit{cubic spline}. In this case we can impose two more conditions on their definition in one of the following ways:
-\begin{enumerate}
-    \item \textit{Natural cubic spline}: $$s''(x_0)=s''(x_n)=0.$$
-    \item \textit{Cubic Hermite spline}: Given $y_0',y_n'\in\RR$, $$s'(x_0)=y_0',\quad s'(x_n)=y_n'.$$
-    \item \textit{Cubic periodic spline}: $$s'(x_0)=s'(x_n),\quad s''(x_0)=s''(x_n)$$
-\end{enumerate}
+    Let $\{(x_i,y_i)\}_{i=0}^n$ be support points of an interval $[a,b]$. A \textit{spline of degree $p$} is a function $s:[a,b]\rightarrow\RR$ of class $\mathcal{C}^{p-1}$ satisfying: $$s_{{|_{[x_i,x_{i+1}]}}}\in\RR[x],\quad\deg s_{|_{[x_i,x_{i+1}]}}=p,\quad s(x_i)=y_i,$$ for $i=0,\ldots,n-1$. The most common case are splines of degree  $p=3$ or \textit{cubic spline}. In this case we can impose two more conditions on their definition in one of the following ways:
+    \begin{enumerate}
+        \item \textit{Natural cubic spline}: $$s''(x_0)=s''(x_n)=0.$$
+        \item \textit{Cubic Hermite spline}: Given $y_0',y_n'\in\RR$, $$s'(x_0)=y_0',\quad s'(x_n)=y_n'.$$
+        \item \textit{Cubic periodic spline}: $$s'(x_0)=s'(x_n),\quad s''(x_0)=s''(x_n)$$
+    \end{enumerate}
 \end{definition}
 \begin{definition}
-Let $f:[a,b]\rightarrow\mathbb{R}$ a function of class $\mathcal{C}^2$. We define the \textit{seminorm}\footnote{The term \textit{seminorm} has been used instead of \textit{norm} to emphasize that not all properties of a norm are satisfied with this definition.} \textit{of $f$} as $$\|f\|^2=\int_a^b(f''(x))^2dx.$$
+    Let $f:[a,b]\rightarrow\mathbb{R}$ a function of class $\mathcal{C}^2$. We define the \textit{seminorm}\footnote{The term \textit{seminorm} has been used instead of \textit{norm} to emphasize that not all properties of a norm are satisfied with this definition.} \textit{of $f$} as $$\|f\|^2=\int_a^b(f''(x))^2dx.$$
 \end{definition}
 \begin{prop}
-Let $f:[a,b]\rightarrow\mathbb{R}$ a function of class $\mathcal{C}^2$ interpolating the support points $\{(x_i,y_i)\}_{i=0}^n\subset\RR^2$, $a\leq x_0<\cdots<x_n\leq b$. If $s$ is the natural cubic spline associated with $\{(x_i,y_i)\}_{i=0}^n$, then: $$\|f-s\|^2=\|f\|^2-\|s\|^2-2(f'-s)s''\Big|_{x_0}^{x_n}+2\sum_{i=1}^n(f-s)s'''\Big|_{x_{i-1}^+}^{x_i^-}.$$
+    Let $f:[a,b]\rightarrow\mathbb{R}$ a function of class $\mathcal{C}^2$ interpolating the support points $\{(x_i,y_i)\}_{i=0}^n\subset\RR^2$, $a\leq x_0<\cdots<x_n\leq b$. If $s$ is the natural cubic spline associated with $\{(x_i,y_i)\}_{i=0}^n$, then: $$\|f-s\|^2=\|f\|^2-\|s\|^2-2(f'-s)s''\Big|_{x_0}^{x_n}+2\sum_{i=1}^n(f-s)s'''\Big|_{x_{i-1}^+}^{x_i^-}.$$
 \end{prop}
 \begin{theorem}
-Let $f:[a,b]\rightarrow\mathbb{R}$ a function of class $\mathcal{C}^2$ interpolating the support points $\{(x_i,y_i)\}_{i=0}^n\subset\RR^2$, $a\leq x_0<\cdots<x_n\leq b$. If $s$ is the natural cubic spline associated with $\{(x_i,y_i)\}_{i=0}^n$, then $$\|s\|\leq\|f\|.$$
+    Let $f:[a,b]\rightarrow\mathbb{R}$ a function of class $\mathcal{C}^2$ interpolating the support points $\{(x_i,y_i)\}_{i=0}^n\subset\RR^2$, $a\leq x_0<\cdots<x_n\leq b$. If $s$ is the natural cubic spline associated with $\{(x_i,y_i)\}_{i=0}^n$, then $$\|s\|\leq\|f\|.$$
 \end{theorem}
 \subsection{Numerical differentiation and integration}
 \subsubsection*{Differentiation}
 \begin{theorem}[Intermediate value theorem]
-Let $f:[a,b]\rightarrow\RR$ be a continuous function, $\xi_0,\ldots,\xi_n\in[a,b]$ and $\alpha_0,\ldots,\alpha_n\geq 0$. Then, $\exists\eta\in[a,b]$ such that: $$\sum_{i=0}^n\alpha_if(\xi_i)=\left(\sum_{i=0}^n\alpha_i\right)f(\eta).$$
+    Let $f:[a,b]\rightarrow\RR$ be a continuous function, $\xi_0,\ldots,\xi_n\in[a,b]$ and $\alpha_0,\ldots,\alpha_n\geq 0$. Then, $\exists\eta\in[a,b]$ such that: $$\sum_{i=0}^n\alpha_if(\xi_i)=\left(\sum_{i=0}^n\alpha_i\right)f(\eta).$$
 \end{theorem}
 \begin{theorem}[Forward and backward difference formula of order 1]
-Let $f:\RR\rightarrow\RR$ be a function of class $\mathcal{C}^2$. Then, forward difference formula of order 1 is: $$f'(a)=\frac{f(a+h)-f(a)}{h}-\frac{f''(\xi)}{2}h,$$ where $\xi\in\langle a,a+h\rangle$. Analogously, backward difference formula of order 1 is: $$f'(a)=\frac{f(a)-f(a-h)}{h}+\frac{f''(\eta)}{2}h,$$ where $\eta\in\langle a-h,a\rangle$.
+    Let $f:\RR\rightarrow\RR$ be a function of class $\mathcal{C}^2$. Then, forward difference formula of order 1 is: $$f'(a)=\frac{f(a+h)-f(a)}{h}-\frac{f''(\xi)}{2}h,$$ where $\xi\in\langle a,a+h\rangle$. Analogously, backward difference formula of order 1 is: $$f'(a)=\frac{f(a)-f(a-h)}{h}+\frac{f''(\eta)}{2}h,$$ where $\eta\in\langle a-h,a\rangle$.
 \end{theorem}
 \begin{theorem}[Symmetric difference formula of order 1]
     Let $f:\RR\rightarrow\RR$ be a function of class $\mathcal{C}^3$. Then, symmetric difference formula of order 1: $$f'(a)=\frac{f(a+h)-f(a-h)}{2h}-\frac{f^{(3)}(\xi)}{6}h^2,$$ where $\xi\in\langle a-h,a+h\rangle$.
@@ -315,7 +322,7 @@ Let $f:\RR\rightarrow\RR$ be a function of class $\mathcal{C}^2$. Then, forward 
 \end{theorem}
 \subsubsection*{Richardson extrapolation}
 \begin{theorem}[Richardson extrapolation]
-Suppose we have a function $f$ that approximate a value $\alpha$ with an error that depends on a small quantity $h$. That is: $$f(h)=\alpha+a_1h^{k_1}+a_2h^{k_2}+\cdots,$$with $k_1<k_2<\cdots$ and $a_i$ are unknown constants. Given $q>0$, we define $$D_1(h)=f(h),\quad D_{n+1}(h)=\frac{q^{k_n}D_n\left(h/q\right)-D_n(h)}{q^{k_n}-1}.$$ And we can observe that $\alpha=D_{n+1}(h)+O(h^{k_{n+1}})$.
+    Suppose we have a function $f$ that approximate a value $\alpha$ with an error that depends on a small quantity $h$. That is: $$f(h)=\alpha+a_1h^{k_1}+a_2h^{k_2}+\cdots,$$with $k_1<k_2<\cdots$ and $a_i$ are unknown constants. Given $q>0$, we define $$D_1(h)=f(h),\quad D_{n+1}(h)=\frac{q^{k_n}D_n\left(h/q\right)-D_n(h)}{q^{k_n}-1}.$$ And we can observe that $\alpha=D_{n+1}(h)+O(h^{k_{n+1}})$.
 \end{theorem}
 \subsubsection*{Integration}
 \begin{definition}
