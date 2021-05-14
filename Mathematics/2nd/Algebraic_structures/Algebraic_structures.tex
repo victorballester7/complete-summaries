@@ -436,7 +436,8 @@ Let $n,p\in\NN$ such that $p$ is a prime number.
 \subsection{Rings}
 \subsubsection*{Rings, subrings and ring morphisms}
 \begin{definition}[Ring]
-    A \textit{ring} is a set $R$ equipped with two binary operations \begin{align*}
+    A \textit{ring} is a set $R$ equipped with two binary operations (called addition and multiplication):
+    \begin{align*}
         +:R\times R&\longrightarrow R&\cdot:R\times R&\longrightarrow R\\
         (r_1,r_2)&\longmapsto r_1+ r_2&(r_1,r_2)&\longmapsto r_1\cdot r_2
     \end{align*}
@@ -452,6 +453,9 @@ Let $n,p\in\NN$ such that $p$ is a prime number.
         \item Multiplication is distributive with respect to addition: $$(r_1+r_2)\cdot r_3=r_1\cdot r_3+r_2\cdot r_3\quad\forall r_1,r_2,r_3\in R.$$
     \end{enumerate}
     In this context we say $(R,+,\cdot)$ is a ring.
+\end{definition}
+\begin{definition}
+    A \textit{noncommutative ring} is a ring whose multiplication is not commutative.
 \end{definition}
 \begin{definition}[Field]
     Let $(R,+,\cdot)$ be a ring. If every nonzero element of $R$ has a multiplicative inverse (that is, $(R,\cdot)$ is an abelian group), we say $R$ is a \textit{field}.
@@ -599,12 +603,12 @@ Let $n,p\in\NN$ such that $p$ is a prime number.
     Let $(R,+,\cdot)$ be a ring and $P\ne R$ be an ideal of $(R,+,\cdot)$. We say $P$ is \textit{prime} if $\forall a,b\in R$, we have $a\cdot b\in P\iff a\in P\text{ or }b\in P$.
 \end{definition}
 \begin{definition}
-    Let $(R,+,\cdot)$ be a ring and $M\ne R$ be an ideal of $(R,+,\cdot)$. We say $M$ is \textit{maximal} if for any ideal $I\subseteq R$, either $I=R$ or $I=M$.
+    Let $(R,+,\cdot)$ be a ring and $M\ne R$ be an ideal of $(R,+,\cdot)$. We say $M$ is \textit{maximal} if for any ideal $I$ with $M\subseteq I$, either $I=R$ or $I=M$.
 \end{definition}
 \begin{prop}
     Let $(R,+,\cdot)$ be a ring. Then,
     \begin{enumerate}
-        \item An ideal $P$ of $(R,+,\cdot)$ is primer if and only if $\quot{R}{P}$ is and integral domain.
+        \item An ideal $P$ of $(R,+,\cdot)$ is prime if and only if $\quot{R}{P}$ is and integral domain.
         \item An ideal $M$ of $(R,+,\cdot)$ is maximal if and only if $\quot{R}{M}$ is a field.
     \end{enumerate}
     In particular, all maximal ideals are prime.
@@ -627,5 +631,30 @@ Let $n,p\in\NN$ such that $p$ is a prime number.
         \end{enumerate}
     \end{enumerate}
 \end{prop}
+\begin{theorem}
+    Let $(R,+,\cdot)$ be a ring. All ideals $I\ne R$ are contained in a maximal ideal.
+\end{theorem}
+\subsubsection*{Polynomial rings}
+\begin{definition}
+    Let $(R,+,\cdot)$ be a ring and $p(x)\in R[x]$. If $p(x)=a_0+a_1x+\cdots+a_nx^n$ with $p_n\ne 0$, we define the \textit{degree of $p(x)$} as $\deg p(x)=n$. By agreement, we define $\deg 0=-\infty$.
+\end{definition}
+\begin{prop}
+    Let $(R,+,\cdot)$ be a ring and $p(x),q(x)\in R[x]$. Then:
+    \begin{enumerate}
+        \item $\deg(p(x)+q(x))\leq\max\{\deg p(x),\deg q(x)\}$
+        \item $\deg(p(x)\cdot q(x))\leq\deg p(x)+\deg q(x)$
+    \end{enumerate}
+\end{prop}
+\begin{prop}
+    Let $(R,+,\cdot)$ be a ring and $p(x),a(x)\in R[x]$ such that the highest degree term of $p(x)$ is a unit. Then, $\exists!q(x),r(x)\in R[x]$ such that $a(x)=p(x)\cdot q(x)+r(x)$ with $\deg r(x)<\deg p(x)$.
+\end{prop}
+\subsubsection*{Examples of rings}\label{AS-examples2}
+Let $n\in\NN$ and $d\in\ZZ$.
+\begin{itemize}
+    \item $(\ZZ,+,\cdot)$, $(\ZZ/n\ZZ,+,\cdot)$, $(\QQ,+,\cdot)$, $(\RR,+,\cdot)$, $(\CC,+,\cdot)$
+    \item $(R[x],+,\cdot)$, where $(R,+,\cdot)$ is a ring\footnote{Note that if $R=R[y]$, then $R[x]=(R[y])[x]=R[x,y]$. So the set of polynomials with several variables over a ring $(R,+,\cdot)$ is also a ring with the same operations as $R$.}.
+    \item $(\mathcal{M}_n(R),+,\cdot)$, where $(R,+,\cdot)$ is a ring. Note that this is a noncommutative ring.
+    \item $(\ZZ[\sqrt{d}],+,\cdot)$, where $Z[\sqrt{d}]=\{a+b\sqrt{d}:a,b\in\ZZ\}$. In particular, the set $\ZZ[\sqrt{-1}]=\ZZ[\ii]$ is called the set of \textit{Gau\ss ian integers}.
+\end{itemize}
 \end{multicols}
 \end{document}

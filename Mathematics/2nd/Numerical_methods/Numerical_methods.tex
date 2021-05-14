@@ -301,7 +301,7 @@
     \end{enumerate}
 \end{definition}
 \begin{definition}
-    Let $f:[a,b]\rightarrow\mathbb{R}$ a function of class $\mathcal{C}^2$. We define the \textit{seminorm}\footnote{The term \textit{seminorm} has been used instead of \textit{norm} to emphasize that not all properties of a norm are satisfied with this definition.} \textit{of $f$} as $$\|f\|^2=\int_a^b(f''(x))^2\dd x.$$
+    Let $f:[a,b]\rightarrow\mathbb{R}$ be a function of class $\mathcal{C}^2$. We define the \textit{seminorm}\footnote{The term \textit{seminorm} has been used instead of \textit{norm} to emphasize that not all properties of a norm are satisfied with this definition.} \textit{of $f$} as $$\|f\|^2=\int_a^b(f''(x))^2\dd x.$$
 \end{definition}
 \begin{prop}
     Let $f:[a,b]\rightarrow\mathbb{R}$ a function of class $\mathcal{C}^2$ interpolating the support points $\{(x_i,y_i)\}_{i=0}^n\subset\RR^2$, $a\leq x_0<\cdots<x_n\leq b$. If $s$ is the natural cubic spline associated with $\{(x_i,y_i)\}_{i=0}^n$, then: $$\|f-s\|^2=\|f\|^2-\|s\|^2-2(f'-s)s''\Big|_{x_0}^{x_n}+2\sum_{i=1}^n(f-s)s'''\Big|_{x_{i-1}^+}^{x_i^-}.$$ 
@@ -361,14 +361,38 @@
 \begin{theorem}[Composite Trapezoidal rule]
     Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^4$, $h=\frac{b-a}{n}$ and $x_j=a+jh$ for each $j=0,1,\ldots,n$. Then, $\exists\xi\in[a,b]$ such that:
     \begin{multline*}
-        \int_a^bf(x)\dd x=\frac{h}{2}\left[f(a)+2\sum_{j=1}^{n-1}f(x_j)+f(b)\right]-\\-\frac{f''(\xi)(b-a)}{12}h^2.
+        I=\int_a^bf(x)\dd x=\frac{h}{2}\left[f(a)+2\sum_{j=1}^{n-1}f(x_j)+f(b)\right]-\\-\frac{f''(\xi)(b-a)}{12}h^2.
     \end{multline*}
+    We denote by $T_n(f,a,b)$ the approximation of $I$ by trapezoidal rule.
 \end{theorem}
 \begin{theorem}[Composite Simpson's rule]
     Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^4$, $n$ be an even number, $h=\frac{b-a}{n}$ and $x_j=a+jh$ for each $j=0,1,\ldots,n$. Then, $\exists\xi\in[a,b]$ such that:
     \begin{multline*}
-        \int_a^bf(x)\dd x=\frac{h}{3}\left[f(a)+2\sum_{j=1}^{n/2-1}f(x_{2j})\right.+\\+\left.4\sum_{j=1}^{n/2}f(x_{2j-1})+f(b)\right]-\frac{f^{(4)}(\xi)(b-a)}{180}h^4.
+        I=\int_a^bf(x)\dd x=\frac{h}{3}\left[f(a)+2\sum_{j=1}^{n/2-1}f(x_{2j})\right.+\\+\left.4\sum_{j=1}^{n/2}f(x_{2j-1})+f(b)\right]-\frac{f^{(4)}(\xi)(b-a)}{180}h^4.
     \end{multline*}
+    We denote by $S_n(f,a,b)$ the approximation of $I$ by Simpson's rule.
 \end{theorem}
+\subsubsection*{Romberg method}
+\begin{definition}
+    We define \textit{Bernoulli polynomials} $B_n(x)$ as $B_0(x)=1$, $B_1(x)=x-\frac{1}{2}$ and $$B_{k+1}'=(k+1)B_k\quad\text{for }k\geq 1.$$ \textit{Bernoulli numbers} are $B_n=B_n(0)$, $\forall n\geq 0$\footnote{Exponential generating function of the sequence $(B_n)$ of Bernoulli numbers is $\displaystyle\frac{x}{\exp{x}-1}=\sum_{n=1}^\infty\frac{B_n}{n!}x^n$.}.
+\end{definition}
+\begin{theorem}[Euler–Maclaurin formula]
+    Let $f\in\mathcal{C}^{2m+2}([a,b])$ be a function. Then:
+    \begin{multline*}
+        T_n(f,a,b)=\int_a^bf(t)\dd t+\sum_{k=1}^m\frac{B_{2k}h^{2k}}{(2k)!}\left(f^{(2k-1)}(b)\right.-\\-\left.f^{(2k-1)}(a)\right)+\frac{(b-a)B_{2m+2}h^{2m+1}}{(2m+2)!}f^{(2m+2)}(\xi),
+    \end{multline*}
+    where $h=\frac{b-a}{n}$, $B_n$ are the Bernoulli numbers and $\xi\in[a,b]$.
+\end{theorem}
+\begin{theorem}[Romberg method]
+    Let $f\in\mathcal{C}^{2m+2}([a,b])$ be a function. Then by Euler–Maclaurin formula, we obtain: $$T_n(f,a,b)=\int_a^bf(t)\dd t+\beta_1 h^2+\beta_2 h^4+\cdots,$$ where $h=\frac{b-a}{n}$. For $n=1,2,4,8,16,\ldots$ we define: $$T_{n,1}=T_{2^n}(f,a,b),\quad T_{n,m+1}=\frac{4^jT_{n+1,m}-T_{n,m}}{4^j-1}.$$ We can observe that $T_{n,m}=\int_a^bf(t)\dd t+O(\left(\frac{h}{2^n}\right)^{2m})$.
+\end{theorem}
+\subsubsection*{Gau\ss ian quadrature}
+\begin{definition}
+    Let $f,g:[a,b]\rightarrow\mathbb{R}$ be continuous function and $\omega(x):[a,b]\rightarrow\RR^+$ be a weight function. The expression $$\langle f,g\rangle=\int_a^b\omega(x)f(x)g(x)\dd x$$ defines a postive-semidefinite dot product in the vector space of bounded functions on $[a,b]$.
+\end{definition}
+\begin{definition}[Orthogonal polynomials]
+    Let $\mathfrak{P}=\{\phi_i(x)\in\RR[x]:\deg \phi_i(x)=i, i\in\NN\cup\{0\}\}$ be a family of polynomials and $\omega(x):[a,b]\rightarrow\RR^+$ be a weight function. We say $\mathfrak{P}$ is \textit{orthogonal with respect to the weight $\omega(x)$ on an interval $[a,b]$} if $$\langle \phi_i,\phi_j\rangle=\int_a^b\omega(x)\phi_i(x)\phi_j(x)\dd x=0\iff i\ne j.$$
+    Note that $\langle \phi_i,\phi_i\rangle>0$ for each $i\in\NN\cup\{0\}$.
+\end{definition}
 \end{multicols}
 \end{document}
