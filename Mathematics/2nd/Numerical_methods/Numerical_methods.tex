@@ -129,9 +129,10 @@
     Let $g:\mathbb{R}\rightarrow\mathbb{R}$ be a function of class $\mathcal{C}^1$ and $\alpha$ be a fixed point of $g$. We say $\alpha$ is an \textit{attractor fixed point} if $|g'(\alpha)|<1$. In this case, any iteration $x_{n+1}=g(x_n)$ in $I_\varepsilon$ converges to $\alpha$. If $|g'(\alpha)|>1$, we say $\alpha$ is a \textit{repulsor fixed point}. In this case, $\forall x_0\in I_\varepsilon$ the iteration $x_{n+1}=g(x_n)$ doesn't converge to $\alpha$.
 \end{definition}
 \begin{center}
-    \includegraphics[width=0.49\linewidth]{Images/cobweb1.tex}
+    \includegraphics[width=0.49\linewidth]{Images/cobweb1.tex}\hfill
     \includegraphics[width=0.49\linewidth]{Images/cobweb2.tex}\\
-    \includegraphics[width=0.49\linewidth]{Images/cobweb3.tex}
+    \vspace{0.02\linewidth}
+    \includegraphics[width=0.49\linewidth]{Images/cobweb3.tex}\hfill
     \includegraphics[width=0.49\linewidth]{Images/cobweb4.tex}
     \captionof{figure}{Cobweb diagrams. In the figures at the top, $\alpha$ is a attractor point, that is, $|g'(\alpha)|<1$. More precisely, the figure at the top left occurs when $-1<g'(\alpha)\leq0$ and the figure at the top right when $0\leq g'(\alpha)<1$. In the figure at bottom left, $\alpha$ is a repulsor point. Finally, in the figure at bottom right the iteration $x_{n+1}=g(x_n)$ has no limit. It is said that to have a \textit{chaotic behavior}.}
 \end{center}
@@ -363,14 +364,14 @@
     \begin{multline*}
         I=\int_a^bf(x)\dd x=\frac{h}{2}\left[f(a)+2\sum_{j=1}^{n-1}f(x_j)+f(b)\right]-\\-\frac{f''(\xi)(b-a)}{12}h^2.
     \end{multline*}
-    We denote by $T_n(f,a,b)$ the approximation of $I$ by trapezoidal rule.
+    We denote by $T(f,a,b,h)$ the approximation of $I$ by trapezoidal rule.
 \end{theorem}
 \begin{theorem}[Composite Simpson's rule]
     Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^4$, $n$ be an even number, $h=\frac{b-a}{n}$ and $x_j=a+jh$ for each $j=0,1,\ldots,n$. Then, $\exists\xi\in[a,b]$ such that:
     \begin{multline*}
         I=\int_a^bf(x)\dd x=\frac{h}{3}\left[f(a)+2\sum_{j=1}^{n/2-1}f(x_{2j})\right.+\\+\left.4\sum_{j=1}^{n/2}f(x_{2j-1})+f(b)\right]-\frac{f^{(4)}(\xi)(b-a)}{180}h^4.
     \end{multline*}
-    We denote by $S_n(f,a,b)$ the approximation of $I$ by Simpson's rule.
+    We denote by $S(f,a,b,h)$ the approximation of $I$ by Simpson's rule.
 \end{theorem}
 \subsubsection*{Romberg method}
 \begin{definition}
@@ -379,12 +380,12 @@
 \begin{theorem}[Euler–Maclaurin formula]
     Let $f\in\mathcal{C}^{2m+2}([a,b])$ be a function. Then:
     \begin{multline*}
-        T_n(f,a,b)=\int_a^bf(t)\dd t+\sum_{k=1}^m\frac{B_{2k}h^{2k}}{(2k)!}\left(f^{(2k-1)}(b)\right.-\\-\left.f^{(2k-1)}(a)\right)+\frac{(b-a)B_{2m+2}h^{2m+1}}{(2m+2)!}f^{(2m+2)}(\xi),
+        T(f,a,b,h)=\int_a^bf(t)\dd t+\sum_{k=1}^m\frac{B_{2k}h^{2k}}{(2k)!}\left(f^{(2k-1)}(b)\right.-\\-\left.f^{(2k-1)}(a)\right)+\frac{(b-a)B_{2m+2}h^{2m+1}}{(2m+2)!}f^{(2m+2)}(\xi),
     \end{multline*}
     where $h=\frac{b-a}{n}$, $B_n$ are the Bernoulli numbers and $\xi\in[a,b]$.
 \end{theorem}
 \begin{theorem}[Romberg method]
-    Let $f\in\mathcal{C}^{2m+2}([a,b])$ be a function. Then by Euler–Maclaurin formula, we obtain: $$T_n(f,a,b)=\int_a^bf(t)\dd t+\beta_1 h^2+\beta_2 h^4+\cdots,$$ where $h=\frac{b-a}{n}$. For $n=1,2,4,8,16,\ldots$ we define: $$T_{n,1}=T_{2^n}(f,a,b),\quad T_{n,m+1}=\frac{4^jT_{n+1,m}-T_{n,m}}{4^j-1}.$$ We can observe that $T_{n,m}=\int_a^bf(t)\dd t+O(\left(\frac{h}{2^n}\right)^{2m})$.
+    Let $f\in\mathcal{C}^{2m+2}([a,b])$ be a function. Then by Euler–Maclaurin formula, we obtain: $$T(f,a,b,h)=\int_a^bf(t)\dd t+\beta_1 h^2+\beta_2 h^4+\cdots,$$ where $h=\frac{b-a}{n}$. For $n=1,2,\ldots$ we define: $$T_{n,1}=T\left(f,a,b,\frac{b-a}{2^n}\right),\quad T_{n,m+1}=\frac{4^jT_{n+1,m}-T_{n,m}}{4^j-1},$$ for $m\leq n$. Then, we can observe that $$T_{n,m}=\int_a^bf(t)\dd t+O\left(\left(\frac{b-a}{2^n}\right)^{2m}\right).$$
 \end{theorem}
 \subsubsection*{Gau\ss ian quadrature}
 \begin{definition}

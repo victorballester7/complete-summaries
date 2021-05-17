@@ -1,423 +1,530 @@
 \documentclass[../../../main.tex]{subfiles}
 
 \begin{document}
-\begin{multicols}{2}[\section{Fonaments de les matemàtiques}]
-\subsection{Conjunts i aplicacions}
-\begin{definition}
-Un conjunt és una col·lecció d'objectes units per una propietat comuna.
-\end{definition}
-\begin{definition}
-Sigui $E$ un conjunt. Diem que un conjunt $F$ és un subconjunt de $E$ ($F\subseteq E$) si, i només si, tot element de $F$ és element de $E$.
-\end{definition}
-\begin{definition}[Axioma d'extensionalitat]
-Siguin $E,F$ dos conjunts. Diem que $E$ i $F$ són iguals si, i només si, $E\subseteq F$ i $F\subseteq E$.
-\end{definition}
-\begin{definition}
-Sigui $E$ un conjunt. El subconjunt $\mathcal{P}(E)$ és el conjunt dels subconjunts de $E$ (parts de $E$).
-\end{definition}
-\begin{definition}
-Siguin $A, B$ dos conjunts. La intersecció de $A$ i $B$ $(A\cap B)$ és el conjunt format pels elements comuns a $A$ i $B$.
-\end{definition}
-\begin{definition}
-Siguin $A, B$ dos conjunts. La unió de $A$ i $B$ $(A\cup B)$ és el conjunt format pels elements de $A$ i de $B$.
-\end{definition}
-\begin{definition}
-Sigui $E$ un conjunt i $A\subseteq B$. El complementari de $A$ en $E$ és el conjunt $A^c=\{x\in E\mid x\notin A\}$.
-\end{definition}
-\begin{prop}[Lleis de Morgan]
-Sigui $E$ un conjunt i siguin $A,B$ dos subconjunts:
-\begin{enumerate}
-    \item $(A\cup B)^c=A^c\cap B^c$
-    \item $(A\cap B)^c=A^c\cup B^c$
-\end{enumerate}
-\end{prop}
-\begin{definition}
-Siguin $A, B$ dos conjunts. El producte cartesià $A\times B$ és el conjunt $A\times B=\{(a,b)\mid a\in A\text{ i }b\in B\}$.
-\end{definition}
-\begin{definition}
-Siguin $E,F$ dos conjunts. Una aplicació de $E$ en $F$ és una regla que a cada element de $E$ se li associa un únic element de $F$.
-\end{definition}
-\begin{definition}
-Sigui $f:E\rightarrow F$ una aplicació i $A\subseteq E$ un subconjunt. La imatge de $A$ és el subconjunt de $F$ definit per $f(A)=\{f(a)\mid a\in A\}$. Si $A=E$, $f(E)=\text{Im}(f)$ és la imatge de $f$.
-\end{definition}
-\begin{definition}
-Sigui $f:E\rightarrow F$ una aplicació i $b\in F$. Un antecedent de $b$ és un element $a\in E$ tal que $f(a)=b$.
-\end{definition}
-\begin{definition}
-Sigui $f:E\rightarrow F$ una aplicació i $B\subseteq F$ un subconjunt. La preimatge de $B$ és el subconjunt de $E$ definit per $f^{-1}(B)=\{a\in E\mid f(a)=b,b\in B\}$.
-\end{definition}
-\begin{definition}
-Sigui $f:E\rightarrow F$ una aplicació. Les següents tres assercions són equivalents:
-\begin{enumerate}
-    \item $\forall b\in F$, $f^{-1}(b)$ té com a màxim un element.
-    \item $\forall\alpha,\beta\in E$, si $\alpha\ne\beta$, llavors $f(\alpha)\ne f(\beta)$.
-    \item $\forall\alpha,\beta\in E$, si $f(\alpha)= f(\beta)$, llavors $\alpha=\beta$.
-\end{enumerate}
-Si $f$ compleix una d'aquestes tres assercions, les compleix totes i diem que $f$ és injectiva.
-\end{definition}
-\begin{prop}
-Siguin $f:E\rightarrow F,g:F\rightarrow G$:
-\begin{enumerate}
-    \item Si $f$ i $g$ són injectives, llavors $g\circ f$ també ho és.
-    \item Si $g\circ f$ és injectiva, llavors $f$ també ho és.
-\end{enumerate}
-\end{prop}
-\begin{definition}
-Sigui $f:E\rightarrow F$ una aplicació. Les següents tres assercions són equivalents:
-\begin{enumerate}
-    \item Tot element de $F$ té almenys un antecedent de $E$ per $f$.
-    \item $\forall y\in F$, $\exists\alpha\in E$ tal que $f(\alpha)=y$.
-    \item $\text{Im}(f)=F$.
-\end{enumerate}
-Si $f$ compleix una d'aquestes tres assercions, les compleix totes i diem que $f$ és exhaustiva.
-\end{definition}
-\begin{prop}
-Siguin $f:E\rightarrow F,g:F\rightarrow G$:
-\begin{enumerate}
-    \item Si $f$ i $g$ són exhaustives, llavors $g\circ f$ també ho és.
-    \item Si $g\circ f$ és exhaustiva, llavors $g$ també ho és.
-\end{enumerate}
-\end{prop}
-\begin{definition}
-Sigui $f:E\rightarrow F$ una aplicació. Diem que $f$ és bijectiva si és injectiva i exhaustiva. Les aplicacions bijectives tenen una aplicació inversa associada $f^{-1}:F\rightarrow E$.
-\end{definition}
-\subsection{Grup simètric}
-\begin{definition}
-Sigui $n\in\mathbb{N}$. Denotem per $S_n$ el conjunt de les bijeccions de $\{1,2,\ldots,n\}$ en ell mateix. Un element de $S_n$ és una permutació de $\{1,\ldots,n\}$.
-\end{definition}
-\begin{theorem}
-El cardinal de $S_n$ és $n!$.
-\end{theorem}
-\begin{definition}
-Sigui $f\in S_n$. El conjunt $E_f=\{m\in\mathbb{N}^*\mid f^m=\text{id}\}$ té un element minimal $o(f)$. L'enter $o(f)$ és l'ordre de $f$.
-\end{definition}
-\begin{definition}
-Sigui $f\in S_n$. El suport de $f$ és $\text{sup}(f)=\{k\in\{1,\ldots,n\}\mid f(k)\ne k\}$.
-\end{definition}
-\begin{lemma}
-Sigui $f\in S_n$, llavors:
-\begin{enumerate}
-    \item $p\in\text{sup}(f)\implies f(p)\in\text{sup}(f)$.
-    \item $\text{sup}(f)=\text{sup}(f^{-1})$.
-\end{enumerate}
-\end{lemma}
-\begin{lemma}
-Siguin $f,g\in S_n$. Si $\text{sup}(f)\cap\text{sup}(g)=\emptyset$, llavors $f\circ g=g\circ f$.
-\end{lemma}
-\begin{definition}
-Sigui $f\in S_n$ i $k\in\{1,\ldots,n\}$. L'òrbita de $k$ és el conjunt finit $\{k,f(k),f^2(k),\ldots\}$.
-\end{definition}
-\begin{theorem}[Estructura de l'òrbita]
-Siguin $f\in S_n$ i $\Omega=\{\omega_1,\ldots,\omega_k\}$ el conjunt de les òrbites de $f$. Llavors:
-\begin{enumerate}
-    \item $\bigcup_{j=1}^k \omega_j=\{1,\ldots,n\}$.
-    \item Si $\omega_i,\omega_j\in\Omega$ i $\omega_i\cap\omega_j\ne\emptyset$, llavors $\omega_i=\omega_j$.
-    \item Cap òrbita és buida.
-\end{enumerate}
-\end{theorem}
-\begin{theorem}[Estructura lineal de les òrbites]
-Sigui $f\in S_n$ i $\omega$ una de les seves òrbites. Sigui $a\in\{1,\ldots,n\}$ un element de $\omega$ i sigui $k$ el cardinal de $\omega$. Llavors $\omega=\{a,f(a),\ldots,f^{k-1}(a)\}$ i $f^k(a)=a$.
-\end{theorem}
-\begin{definition}
-Si $f\in S_n$ té una única òrbita no reduïda a un element, llavors diem que $f$ és un cicle de longitud el cardinal del cicle. 
-\end{definition}
-\begin{theorem}
-Sigui $f\in S_n$, llavors $f$ s'escriu de manera única, llevat de l'ordre, com a producte de cicles amb suports dos a dos disjunts.
-\end{theorem}
-\begin{corollary}
-Sigui $f\in S_n$ i $f=\sigma_1\cdots\sigma_l$ la seva descomposició en producte de cicles disjunts. Aleshores $o(f)=\text{mcm}(\sigma_1,\ldots,\sigma_l)$.
-\end{corollary}
-\begin{corollary}
-Sigui $f\in S_n$, llavors $f$ és producte de transposicions.
-\end{corollary}
-\begin{definition}
-Sigui $\sigma\in S_n$. El signe de $\sigma$ és $\varepsilon(\sigma)=(-1)^{n-r}$ on $r$ és el nombre d'òrbites de $\sigma$ (incloent les trivials).
-\end{definition}
-\begin{theorem}
-Sigui $f\in S_n$ arbitrària i $\tau\in S_n$ una transposició. Llavors $\varepsilon(f\tau)=\varepsilon(f)\varepsilon(\tau)=-\varepsilon(f)$.
-\end{theorem}
-\begin{corollary}
-Sigui $f\in S_n$ i $f=\tau_1\cdots\tau_l$ una escriptura de $f$ com a producte de transposicions. Llavors $\varepsilon(f)=(-1)^l$.
-\end{corollary}
-\begin{corollary}
-A les escriptures de $f$ com a producte de transposicions, la paritat del nombre de transposicions no varia.
-\end{corollary}
-\subsection{Relacions d'equivalència i d'ordre}
-\begin{definition}
-Sigui $E$ un conjunt i $\sim_{\!_R}$ una relació sobre $E$. Direm que $\sim_{\!_R}$ és una relació d'equivalència si, i només si, es compleixen els següents axiomes:
-\begin{enumerate}
-    \item La relació és reflexiva:
-    $$\forall a\in E,\;a\sim_{\!_R} a.$$
-    \item La relació és simètrica:
-    $$\forall a,b\in E\text{ si }a\sim_{\!_R} b,\text{ llavors }b\sim_{\!_R} a.$$
-    \item La relació és transitiva:
-    $$\forall a,b,c\in E\text{ si }a\sim_{\!_R} b\text{ i }b\sim_{\!_R} c,\text{ llavors }a\sim_{\!_R} c.$$
-\end{enumerate}
-\end{definition}
-\begin{definition}
-Sigui $(E,\sim_{\!_R})$ una relació d'equivalència i sigui $a\in E$. La classe d'equivalència de $a$ és el subconjunt de $E$: $[a]=\{b\in E\mid a\sim_{\!_R} b\}$.
-\end{definition}
-\begin{theorem}
-Sigui $(E,\sim_{\!_R})$ una relació d'equivalència. Les classes d'equivalència de $E$ formen una partició de $E$. És a dir, siguin $\{\omega_i\}$ les classes d'equivalència, llavors:
-\begin{enumerate}
-    \item $\bigcup_{i\in I} \omega_i=E$.
-    \item Si $i,j\in I$ i $\omega_i\cap\omega_j\ne\emptyset$, llavors $\omega_i=\omega_j$.
-    \item Si $i\in I\implies\omega_i\ne\emptyset$.
-\end{enumerate}
-\end{theorem}
-\begin{definition}
-El conjunt de les classes d'equivalència de $(E,\sim_{\!_R})$ es denota $E/\sim_{\!_R}$ i es diu conjunt quocient.
-\end{definition}
-\begin{definition}
-Sigui $E$ un conjunt i $\leq$ una relació sobre $E$. Direm que $\leq$ és una relació d'ordre si, i només si, es compleixen els següents axiomes:
-\begin{enumerate}
-    \item La relació és reflexiva:
-    $$\forall a\in E,\;a\leq a.$$
-    \item La relació és antisimètrica:
-    $$\forall a,b\in E\text{ si }a\leq b\text{ i }b\leq a,\text{ llavors }a=b.$$
-    \item La relació és transitiva:
-    $$\forall a,b,c\in E\text{ si }a\leq b\text{ i }b\leq c,\text{ llavors }a\leq c.$$
-\end{enumerate}
-\end{definition}
-\begin{definition}
-Sigui $(E,\leq)$ un conjunt ordenat. Direm que $a\in E$ és minimal (respectivament maximal) si, i només si, $\forall b\in E$ si $b\leq a$ (respectivament $b\geq a$), llavors $b=a$. Direm que $a\in E$ és un mínim (respectivament màxim) si, i només si, $\forall b\in E$, $a\leq b$ (respectivament $a\geq b$).
-\end{definition}
-\begin{lemma}
-Sigui $(E,\leq)$ un conjunt ordenat. Si $(E,\leq)$ admet un mínim, llavors aquest és únic.
-\end{lemma}
-\begin{definition}
-Un conjunt està totalment ordenat si tot parell d'elements és comparable. Un conjunt ordenat està ben ordenat si tot subconjunt admet un element minimal.
-\end{definition}
-\begin{theorem}
-Tot conjunt pot ser ben ordenat.
-\end{theorem}
-\subsection{Cardinalitat i combinatòria}
-\begin{definition}
-Siguin $E,F$ dos conjunts. Direm que $E$ i $F$ tenen el mateix cardinal si, i només si, existeix una bijecció de $E\rightarrow F$.
-\end{definition}
-\begin{definition}
-Siguin $E,F$ dos conjunts. Direm que $|E|\leq|F|$ si, i només si, existeix una aplicació injectiva $E\rightarrow F$.
-\end{definition}
-\begin{theorem}[Teorema de Cantor-Bernstein]
-Siguin $E,F$ dos conjunts. Si existeix una injecció $E\rightarrow F$ i una injecció $F\rightarrow E$, llavors existeix una bijecció $E\rightarrow F$. La comparació de cardinals és una relació d'ordre.
-\end{theorem}
-\begin{prop}
-Càlcul de cardinals:\newline Siguin $A,B\subseteq E$ dos subconjunts finits.
-\begin{enumerate}
-    \item Principi d'inclusió$-$exclusió: $|A\cup B|=|A|+|B|-|A\cap B|$
-    \item Producte cartesià: $|A\times B|=|A||B|$
-    \item $|A^c|+|A|=|E|$
-    \item $|\mathcal{P}(E)|=2^{|E|}$
-\end{enumerate}
-\end{prop}
-\begin{theorem}[Teorema de Cantor]
-Sigui $E$ un conjunt, llavors $|\mathcal{P}(E)|>|E|$.
-\end{theorem}
-\begin{prop}
-Siguin $E,F$ dos conjunts finits. El conjunt de les aplicacions $E\rightarrow F$ té cardinal $|F|^{|E|}$.
-\end{prop}
-\begin{definition}
-Sigui $E$ un conjunt i $A\in \mathcal{P}(E)$. Definim la funció característica de $A$ com: 
-\begin{align*}
-    \chi_{\!_A}:E&\rightarrow\{0,1\}\\
-    r&\mapsto \left\{
-    \begin{array}{rcl}
-    1 & \text{si} & r\in A \\
-    0 & \text{si} & r\notin A
-    \end{array}\right.
-\end{align*}
-\end{definition}
-\begin{prop}
-Propietats del coeficient binomial:
-\begin{enumerate}
-    \item $\binom{n}{k}=\frac{n!}{(n-k)!k!}$
-    \item $\binom{n}{k}=\binom{n-1}{k}+\binom{n-1}{k-1}$
-    \item $\sum_{k=0}^n\binom{n}{k}=2^n$
-    \item $k\binom{n}{k}=n\binom{n-1}{k-1}$
-\end{enumerate}
-\end{prop}
-\begin{prop}
-Sigui $f:E\rightarrow F$ una aplicació entre conjunts del mateix cardinal finit. Les següents assercions són equivalents:
-\begin{enumerate}
-    \item $f$ és injectiva.
-    \item $f$ és exhaustiva.
-    \item $f$ és bijectiva.
-\end{enumerate}
-\end{prop}
-\begin{corollary}
-Sigui $f:E\rightarrow F$ una aplicació entre conjunts finits. Aleshores:
-\begin{enumerate}
-    \item $f$ és injectiva $\implies|E|\leq|F|$.
-    \item $f$ és exhaustiva $\implies|E|\geq|F|$.
-\end{enumerate}
-\end{corollary}
-\begin{theorem}[Principi del colomar]
-Siguin $E,F$ dos conjunts amb $n$ i $k$ elements, res\-pec\-ti\-va\-ment, i $f:E\rightarrow F$ una aplicació. Si $n>k$, llavors existeixen elements de $E$ amb $f(a)=f(b)$ i $a\ne b$.
-\end{theorem}
-\begin{prop}[Variacions sense repetició]
-El nombre de variacions sense repetició de conjunts amb $m$ elements agafats amb tuples de $n$ elements sense repetir-los és $\frac{n!}{(n-k)!}$.
-\end{prop}
-\begin{prop}[Variacions amb repetició]
-El nombre de variacions amb repetició de conjunts amb $n$ elements agafats amb tuples de $k$, els quals poden ser repetits, és $n^k$.
-\end{prop}
-\begin{prop}[Combinacions sense repetició]
-El coeficient binomial $\binom{n}{k}$ és el nombre de subconjunts de $k$ elements entre un conjunt amb $n$ elements.
-\end{prop}
-\begin{prop}[Combinacions amb repetició]
-El coeficient binomial $\binom{n+k-1}{k}$ és el nombre de combinacions amb repetició de $k$ elements escollits entre un conjunt amb $n$ elements.
-\end{prop}
-\subsection{Nombres enters i congruències}
-\begin{definition}
-Siguin $m,n\in\mathbb{Z}$. Diem que $m$ és múltiple de $n$ si existeix $k\in\mathbb{Z}$ tal que $m=kn$.
-\end{definition}
-\begin{theorem}
-Siguin $D,d\in\mathbb{Z}$, $d\ne 0$. Llavors existeixen $q,r\in\mathbb{Z}$ únics tals que $D=qd+r$ i $0\leq r\leq|d|$.
-\end{theorem}
-\begin{definition}
-En un anell $(A,+,\cdot)$, un subconjunt $I\subseteq A$ és un ideal si, i només si:
-\begin{enumerate}
-    \item $\forall a,b\in I$, $a+b\in I$.
-    \item $\forall a\in I$ i $\forall n\in A$, $na\in I$.
-\end{enumerate}
-\end{definition}
-\begin{lemma}
-$\forall n\in\mathbb{Z}$, $I=n\mathbb{Z}=\{na\mid a\in\mathbb{Z}\}$ és un ideal de $\mathbb{Z}$. Diem que $n$ és un generador de $I$.
-\end{lemma}
-\begin{lemma}
-Siguin $I,J$ dos ideals de $A$. Llavors el conjunt $I\cap J$ és un ideal.
-\end{lemma}
-\begin{lemma}
-Siguin $I,J$ dos ideals. L'ideal generat per $I$ i $J$ és l'ideal $I+J=\{a+b\mid a\in I,b\in J\}$. A més, aquest ideal és el més petit que conté $I$ i $J$.
-\end{lemma}
-\begin{prop}
-Siguin $a,b\in \mathbb{Z}$. $a\mathbb{Z}\subseteq b\mathbb{Z}\iff b\mid a$.
-\end{prop}
-\begin{corollary}
-Siguin $a,b\in \mathbb{Z}$. $a\mathbb{Z}=b\mathbb{Z}\iff a=\pm b$.
-\end{corollary}
-\begin{prop}
-Sigui $A$ un anell i siguin $I=a\mathbb{Z},J=b\mathbb{Z}$ dos ideals. Aleshores $\exists!\,m\in\mathbb{N}^*$ tal que $a\mathbb{Z}\cap b\mathbb{Z}=m\mathbb{Z}$. Aquest enter $m$ és el mínim comú múltiple de $a$ i $b$.
-\end{prop}
-\begin{prop}
-Sigui $A$ un anell i siguin $I=a\mathbb{Z}$ $J=b\mathbb{Z}$ dos ideals. Aleshores $\exists!\,d\in\mathbb{N}^*$ tal que $a\mathbb{Z}+b\mathbb{Z}=d\mathbb{Z}$. Aquest enter $d$ és el màxim comú divisor de $a$ i $b$.
-\end{prop}
-\begin{definition}
-Siguin $a,b\in\mathbb{Z}$. Diem que $a$ i $b$ són coprimers si, i només si, $\text{mcd}(a,b)=1$.
-\end{definition}
-\begin{definition}
-Diem que $a$ és primer ($a\in\mathbb{P}$) si, i només si, $a\mathbb{Z}$ és maximal per a la inclusió d'ideals propis.
-\end{definition}
-\begin{theorem}[Teorema de Bézout]
-Sigui $a,b\in\mathbb{Z}$, llavors existeixen $u,v\in\mathbb{Z}$ tals que $au+bv=\text{mcd}(a,b)$. A més, $\text{mcd}(a,b)=1\iff\exists u,v\in\mathbb{Z}$ tals que $au+bv=1$.
-\end{theorem}
-\begin{theorem}[Teorema de Gau\ss]
-Sigui $a,b\in\mathbb{Z}$. Si $a\mid bc$ i $\text{mcd}(a,b)=1$ llavors $a\mid c$.
-\end{theorem}
-\begin{corollary}
-Sigui $a_1,a_2\in\mathbb{Z}$ coprimers. Si $a_1\mid b$ i $a_2\mid b$, llavors $a_1a_2\mid b$.
-\end{corollary}
-\begin{theorem}[Teorema de La Vallée Pousin-Hadamard]
-Sigui $x\in\mathbb{R}$, aleshores $\pi(x)\approx\frac{x}{\log(x)}$ on $\pi(x)$ és el nombre de nombres primers $\leq x$.
-\end{theorem}
-\begin{theorem}
-Siguin $a,b\in\mathbb{Z}$. Llavors $$\text{mcd}(a,b)\text{mcm}(a,b)=|ab|.$$
-\end{theorem}
-\begin{lemma}
-Sigui $p\in\mathbb{P}$ i $a\in\mathbb{Z}$. Llavors $p\mid a$ o $\text{mcd}(a,p)=1$.
-\end{lemma}
-\begin{theorem}[Teorema fonamental de l'a\-rit\-mè\-ti\-ca]
-Sigui $n\in\mathbb{N}^*$, llavors $n$ s'escriu com a producte de nombres primers únics, llevat de l'ordre.
-\end{theorem}
-\begin{theorem}[Teorema d'Euclides]
-Sigui $\mathbb{P}$ el conjunt dels nombres primers positius. $\mathbb{P}$ és infinit. 
-\end{theorem}
-\begin{theorem}
-L'equació $ax+by=c$ admet almenys una solució si, i només si, $\text{mcd}(a,b)\mid c$.
-\end{theorem}
-\begin{definition}
-$x\equiv y\mod n\iff x-y\in n\mathbb{Z}$.
-\end{definition}
-\begin{lemma}
-$\mathbb{Z}/n\mathbb{Z}$ té $n$ elements.
-\end{lemma}
-\begin{theorem}
-Com que $(\mathbb{Z},+,\cdot)$ és un anell commutatiu, $(\mathbb{Z}/n\mathbb{Z},+,\cdot)$ és un anell commutatiu i, per construcció, la projecció canònica 
-\begin{align*}
-    f:\mathbb{Z}&\rightarrow\mathbb{Z}/n\mathbb{Z}\\
-    a&\mapsto[a]
-\end{align*}és un morfisme d'anells.
-\end{theorem}
-\begin{lemma}
-Sigui $n\in\mathbb{Z}$. Llavors $[a]\in\mathbb{Z}/n\mathbb{Z}$ és invertible per a la multiplicació si, i només si, $\text{mcd}(a,n)=1$.
-\end{lemma}
-\begin{corollary}
-Un anell $(A,+,\cdot)$ en el qual tot element no nul és invertible és un cos. $(\mathbb{Z}/n\mathbb{Z},+,\cdot)$ és un cos si, i només si, $n\in\mathbb{P}$.
-\end{corollary}
-\begin{theorem}[Teorema xinès del residu]
-Siguin $m,n$ coprimers, aleshores l'aplicació:
-\begin{align*}
-    \psi:\mathbb{Z}/mn\mathbb{Z}&\rightarrow\mathbb{Z}/m\mathbb{Z}\times\mathbb{Z}/n\mathbb{Z}\\
-    \overline{a}^{\scriptscriptstyle mn}&\mapsto(\overline{a}^{\scriptscriptstyle m},\overline{a}^{\scriptscriptstyle n})
-\end{align*}
-és un isomorfisme d'anells.
-\end{theorem}
-\begin{definition}[Funció indicatriu d'Euler]
-Sigui $n\in\mathbb{N}^*$. $\varphi(n)=|\{\alpha\in\mathbb{Z}/n\mathbb{Z}\mid\alpha \text{ és invertible}\}|=|\{0\leq r\leq n\mid \text{mcd}(r,n)=1\}|$.
-\end{definition}
-\begin{theorem}[Teorema d'Euler]
-Sigui $a\in\mathbb{Z}$ i $n\in\mathbb{N}$ tal que $\text{mcd}(a,n)=1$, llavors $a^{\varphi(n)}\equiv 1\mod n$. En particular, $a^{-1}\equiv a^{\varphi(n)-1}\mod n$.
-\end{theorem}
-\begin{theorem}[Petit teorema de Fermat]
-Si $p$ és primer, $\varphi(p)=p-1$. Aleshores $a^p\equiv a\mod p$ i, en particular, si $\text{mcd}(a,p)=1$, $a^{p-1}\equiv 1\mod p$.
-\end{theorem}
-\subsection{Polinomis}
-\begin{prop}
-Sigui $A$ un cos. Si $P,Q\in A[x]$ i $P,Q\ne0$, llavors $PQ\ne 0$.
-\end{prop}
-\begin{theorem}[Teorema de divisió euclidiana]
-Sigui $A$ un cos. Siguin $P,S\in A[x]$ amb $S\ne 0$. Llavors $\exists!\, Q,R\in A[x]$ tals que $P=QS+R$ i $0\leq\text{deg}(R)<\text{deg}(S)$.
-\end{theorem}
-\begin{theorem}
-Sigui $A$ un cos. Llavors $A[x]$ és un anell principal, és a dir, si $I\subset A[x]$ és un ideal, llavors $\exists P\in A[x]$ tal que $I=PA[x]$.
-\end{theorem}
-\begin{definition}
-Sigui $P,Q\in A[x]$. Aleshores $\text{mcd}(P,Q)$ és un generador de $PA[x]+QA[x]$ i $\text{mcm}(P,Q)$ és un generador de $PA[x]\cap QA[x]$.
-\end{definition}
-\begin{definition}
-Diem que un polinomi $P=a_0+a_1x+\cdots+a_nx^n$ és mònic si $a_n=1$.
-\end{definition}
-\begin{theorem}[Teorema de Bézout]
-Siguin $P,Q\in K[x]$, llavors $\exists U,V\in K[x]$ tals que $PU+QV=\text{mcd}(P,Q)$.
-\end{theorem}
-\begin{definition}
-Dos polinomis $P,Q$ són coprimers si, i només si, $\text{mcd}(P,Q)=1$.
-\end{definition}
-\begin{theorem}[Teorema de Gau\ss]
-Siguin $P,A,B\in K[x]$. Si $P\mid AB$ i $\text{mcd}(A,P)=1$, llavors $P\mid B$.
-\end{theorem}
-\begin{definition}
-Un polinomi $P\in K[x]$ és primer si, i només si, el seu ideal $PK[x]$ és maximal per a la inclusió d'ideals de $K[x]$, és a dir, $\forall I$ ideal si $PK[x] \varsubsetneq I$, llavors $K[x]=I$.
-\end{definition}
-\begin{theorem}[Teorema de Ruffini]
-Sigui $K$ un cos i sigui $P\in K[x]$ i $\lambda\in K$. Llavors $x-\lambda\mid P\iff P(\lambda)=0$.
-\end{theorem}
-\begin{definition}
-Sigui $P\in K[x]$, llavors $P$ és irreductible si, i només si, $PK[x]$ és maximal.
-\end{definition}
-\begin{theorem}
-Sigui $P\in K[x]$, llavors $P$ té com a màxim $\text{deg}(P)$ arrels.
-\end{theorem}
-\begin{theorem}[Teorema d'Alembert]
-Tot polinomi no constant $P\in\mathbb{C}[x]$ té exactament $\text{deg}(P)$ arrels.
-\end{theorem}
-\begin{corollary}
-Sigui $P\in\mathbb{C}[x]$ i $\text{deg}(P)>1$. Llavors existeixen $\alpha,r_1,\ldots,r_n\in\mathbb{C}$ únics, llevat de l'ordre, tal que $P=\alpha(x-r_1)\cdots(x-r_n)$ on $r_i$ són les arrels de $P$ i $\alpha$ el coeficient dominant.
-\end{corollary}
-\begin{corollary}
-Les arrels a $\mathbb{C}\setminus\mathbb{R}$ es presenten en parells $(r_s,\overline{r_s})$.
-\end{corollary}
-\begin{theorem}
-A $\mathbb{R}[x]$ els polinomis irreductibles són de grau 1 (arrels reals) o de grau 2 (arrels complexes no reals).
-\end{theorem}
+\begin{multicols}{2}[\section{Fundamentals of mathematics}]
+    \subsection{Introduction}
+    \textcolor{green}{FALTA COSA}
+    \subsection{Set theory}
+    \begin{definition}
+        A \textit{set} is a collection of distinct elements.
+    \end{definition}
+    \begin{definition}
+        Let $A$ be a finite set. The \textit{cardinal of $A$}, $|A|$, is the number of elements in $A$.
+    \end{definition}
+    \begin{definition}
+        Let $A$ be a set. We say a set $B$ is a \textit{subset} of $A$, denoted by $B\subseteq A$, if and only if all elements of $B$ are also elements of $A$
+    \end{definition}
+    \begin{definition}[Axiom of extensionality]
+        Let $A$, $B$ be two sets. We say that $A$ and $B$ are \textit{equal}, $A=B$, if and only if $A\subseteq B$ and $B\subseteq A$.
+    \end{definition}
+    \begin{definition}
+        Let $A$ be set. The subset $\mathcal{P}(A)$, called \textit{power set}, is the set of all subsets of $A$.
+    \end{definition}
+    \begin{definition}
+        We define the \textit{empty set} $\emptyset$ as the unique set having no elements.
+    \end{definition}
+    \begin{definition}
+        Let $A$, $B$ be two sets. The \textit{intersection of $A$ and $B$}, $A\cap B$, is the set of all elements of both $A$ and $B$. That is, $$A\cap B=\{x:x\in A\text{ and }x\in B\}.$$
+    \end{definition}
+    \begin{prop}
+        Let $A$, $B$, $C$ be three sets. Then:
+        \begin{enumerate}
+            \item $A\cap B=B\cap A$.
+            \item $A\cap(B\cap C)=(A\cap B)\cap C$.
+            \item $A\cap B\subseteq A$.
+            \item $A\cap\emptyset=\emptyset$.
+            \item $A\subseteq B\iff A\cap B=B$.
+            \item If $C\subseteq A$ and $C\subseteq B$, then $C\subseteq A\cap B$.
+        \end{enumerate}
+    \end{prop}
+    \begin{definition}
+        Let $A$, $B$ be two sets. The \textit{union of $A$ and $B$}, $A\cup B$, is the set of all elements of either $A$ or $B$. That is, $$A\cup B=\{x:x\in A\text{ or }x\in B\}.$$
+    \end{definition}
+    \begin{prop}
+        Let $A$, $B$, $C$ be three sets. Then:
+        \begin{enumerate}
+            \item $A\cup B=B\cup A$.
+            \item $A\cup(B\cup C)=(A\cup B)\cup C$.
+            \item $A\subseteq A\cup B$.
+            \item $A\cup\emptyset=A$.
+            \item $A\subseteq B\iff A\cup B=B$.
+            \item If $A\subseteq C$ and $B\subseteq C$, then $A\cup B\subseteq C$.
+        \end{enumerate}
+    \end{prop}
+    \begin{prop}
+        Let $A$, $B$, $C$ be three sets. Then:
+        \begin{enumerate}
+            \item $A\cap (B\cup C)=(A\cap B)\cup (A\cap C)$.
+            \item $A\cup (B\cap C)=(A\cup B)\cap (A\cup C)$.
+        \end{enumerate}
+    \end{prop}
+    \begin{definition}
+        Let $U$ be a set and $A\subseteq U$ be a subset of $U$. The \textit{complement of $A$ in $U$} is the set of elements not in $A$. That is, $$A^c=\{x\in U:x\notin A\}.$$
+    \end{definition}
+    \begin{prop}[De Morgan's laws]
+        Let $U$ be a set and $A$, $B$ be two subsets of $U$. Then:
+        \begin{enumerate}
+            \item $(A\cup B)^c=A^c\cap B^c$.
+            \item $(A\cap B)^c=A^c\cup B^c$.
+        \end{enumerate}
+    \end{prop}
+    \begin{definition}
+        Let $U$ be a set and $A$, $B$ be two subsets of $U$. The \textit{set difference of $A$ and $B$}, $A\setminus B$, is the set of elements in $A$ but not in $B$. That is, $$A\setminus B=\{x\in A:x\notin B\}.$$
+    \end{definition}
+    \begin{prop}
+        Let $A$, $B$, $C$ be three sets. Then:
+        \begin{enumerate}
+            \item $A\setminus B=A\cap B^c$.
+            \item $C\setminus(A\cap B)=(C\setminus A)\cup (C\setminus B)$.
+            \item $C\setminus(A\cup B)=(C\setminus A)\cap (C\setminus B)$.
+        \end{enumerate}
+    \end{prop}
+    \begin{center}
+        \includegraphics[width=0.49\linewidth]{Images/intersection.tex}\hfill
+        \includegraphics[width=0.49\linewidth]{Images/union.tex}\\
+        \vspace{0.02\linewidth}
+        \includegraphics[width=0.49\linewidth]{Images/complement.tex}\hfill
+        \includegraphics[width=0.49\linewidth]{Images/difference.tex}
+        \captionof{figure}{Venn diagrams}
+    \end{center}
+    \begin{definition}
+        Let $A$, $B$ be two sets. The \textit{Cartesian product}, $A\times B$, is the set $$A\times B=\{(a,b): a\in A\text{ and }b\in B\}.$$
+    \end{definition}
+    \begin{prop}
+        Let $A$, $B$, $C$ be three sets. Then:
+        \begin{enumerate}
+            \item $A\times \emptyset=\emptyset\times A=\emptyset$.
+            \item $A\times(B\cap C)=(A\times B)\cap(A\times C)$.
+            \item $A\times(B\cup C)=(A\times B)\cup(A\times C)$.
+        \end{enumerate}
+    \end{prop}
+    \begin{definition}
+        Let $A$, $B$ be two sets. A \textit{function from $A$ to $B$} is a binary relation between $A$ and $B$ that associates to each element of $A$ exactly one element of $B$.
+    \end{definition}
+    \begin{definition}
+        Let $A$, $B$, $C$ be three sets and $f:A\rightarrow B$, $g:B\rightarrow C$ be two functions. The \textit{composition $g\circ f$} is:
+        $$\begin{array}{r@{\hspace{0.5\tabcolsep}}c@{\hspace{0.5\tabcolsep}}c@{\hspace{0.5\tabcolsep}}c@{\hspace{0.5\tabcolsep}}c}
+            g\circ f:A&\longrightarrow & B & \longrightarrow &C\\
+            a&\longmapsto & f(a) & \longmapsto & g[f(a)]
+        \end{array}$$
+    \end{definition}
+    \begin{definition}
+        Let $f:A\rightarrow B$ be a function and $U\subseteq A$ be a subset. The \textit{image of $U$} is the subset of $B$ defined by $f(U)=\{f(u): u\in U\}$. If $U=A$, $f(U)=f(A)=:\im f$ is the \textit{image of $f$}.
+    \end{definition}
+    \begin{definition}
+        Let $f:A\rightarrow B$ be a function and $b\in B$. The \textit{preimage of $b$} is the set of elements $a\in A$ such that $f(a)=b$. More generally, if $V\subseteq B$, the \textit{preimage of $V$} is the subset of $A$ defined by: $$f^{-1}(V)=\{a\in A: f(a)=v\in V\}.$$
+    \end{definition}
+    \begin{prop}
+        Let $f:A\rightarrow B$ be a function and $U\subseteq A$ be a subset of $A$. Then,
+        \begin{enumerate}
+            \item $f\left(\bigcup_{i\in I}U_i\right)\subseteq\bigcup_{i\in I}f(U_i)$.
+            \item $f\left(\bigcap_{i\in I}U_i\right)\subseteq\bigcap_{i\in I}f(U_i)$.
+            \item $f(U^c)\subseteq f(U)^c$.
+        \end{enumerate}
+    \end{prop}
+    \begin{definition}
+        Let $f:A\rightarrow B$ be a function. The following statements are equivalent:
+        \begin{enumerate}
+            \item $\forall b\in B$, $f^{-1}(b)$ has no more than one element.
+            \item $\forall a_1,a_2\in A$, if $a_1\ne a_2$, then $f(a_1)\ne f(a_2)$.
+            \item $\forall a_1,a_2\in A$, if $f(a_1)= f(a_2)$, then $a_1=a_2$.
+        \end{enumerate}
+        If $f$ satisfies one of these conditions, then it satisfies the other two and we say that $f$ is \textit{injective}.
+    \end{definition}
+    \begin{prop}
+        Let $f:A\rightarrow B$, $g:B\rightarrow C$ be two functions.
+        \begin{enumerate}
+            \item If $f$ and $g$ are injective, then $g\circ f$ is injective.
+            \item If $g\circ f$ is injectiva, then $f$ is injective.
+        \end{enumerate}
+    \end{prop}
+    \begin{definition}
+        Let $f:A\rightarrow B$ be a function. The following statements are equivalent:
+        \begin{enumerate}
+            \item The preimage of each element of $B$ has at least one element.
+            \item $\forall b\in B$, $\exists a\in A$ such that $f(a)=b$.
+            \item $\im f=B$.
+        \end{enumerate}
+        If $f$ satisfies one of these conditions, then it satisfies the other two and we say that $f$ is \textit{surjective}.
+    \end{definition}
+    \begin{prop}
+        Let $f:A\rightarrow B$, $g:B\rightarrow C$ be two functions.
+        \begin{enumerate}
+            \item If $f$ and $g$ are surjective, then $g\circ f$ is surjective.
+            \item If $g\circ f$ is surjective, then $g$ is surjective.
+        \end{enumerate}
+    \end{prop}
+    \begin{definition}
+        Let $f:A\rightarrow B$ be a function. We say that $f$ is \textit{bijective} if it is both injective and surjective. Bijective functions $f^{-1}:B\rightarrow A$.
+    \end{definition}
+    \begin{prop}
+        Let $f:A\rightarrow B$ be a bijective function. The $f$ has an associated inverse function $f^{-1}:B\rightarrow A$ defined as:
+        \begin{align*}
+            f^{-1}:B&\longrightarrow A\\
+            b&\longmapsto f^{-1}(b)
+        \end{align*}
+    \end{prop}
+    \begin{theorem}
+        Let $f:A\rightarrow B$ be a function. $f$ is invertible (that is admits and inverse function) if and only if $f$ is bijective.
+    \end{theorem}
+    \subsection{Logic and propositional calculus}
+    \begin{definition}
+        Let $P$ be a proposition. Then $\lnot P$ expresses the \textit{negation of $P$}. 
+    \end{definition}
+    \begin{definition}
+        Let $P$, $Q$ be propositions. Then $P\land Q$ expresses that \textit{$P$ and $Q$ are both true.}
+    \end{definition}
+    \begin{definition}
+        Let $P$, $Q$ be propositions. Then $P\lor Q$ expresses that \textit{either $P$ or $Q$ are true}.
+    \end{definition}
+    \begin{definition}
+        Let $P$, $Q$ be propositions. Then $P\Rightarrow Q$ expresses that \textit{$Q$ is true whenever $P$ is true}. Note that $P\Rightarrow Q=Q\lor\lnot P$.
+    \end{definition}
+    \begin{definition}
+        Let $P$, $Q$ be propositions. Then $P\Leftrightarrow Q$ expresses that \textit{$P$ and $Q$ have the same truth-value}. Note that $P\Leftrightarrow Q=(P\Rightarrow Q)\land(Q\Rightarrow P)$.
+    \end{definition}
+    \subsection{Symmetric group}
+    \begin{definition}
+        Let $n\in\mathbb{N}$. We denote by $S_n$ the set of all the bijections $\{1,2,\ldots,n\}$ to itself. An element of $S_n$ is a permutation of $\{1,\ldots,n\}$.
+    \end{definition}
+    \begin{theorem}
+        The cardinal of $S_n$ is $n!$.
+    \end{theorem}
+    \begin{definition}
+        Let $\sigma\in S_n$. The set $\{m\in\mathbb{N}:\sigma^m=\text{id}\}$ is non-empty. Hence, it contains a minimal element $\text{ord}(\sigma)$. The integer $\text{ord}(\sigma)$ is called the \textit{order of $\sigma$}.
+    \end{definition}
+    \begin{definition}
+        Let $\sigma\in S_n$. The \textit{support of $\sigma$} is: $$\text{supp}(\sigma)=\{k\in\{1,\ldots,n\}: \sigma(k)\ne k\}.$$
+    \end{definition}
+    \begin{lemma}
+        Let $\sigma\in S_n$. Then:
+        \begin{enumerate}
+            \item $p\in\text{supp}(\sigma)\implies \sigma(p)\in\text{supp}(\sigma)$.
+            \item $\text{supp}(\sigma)=\text{supp}(\sigma^{-1})$.
+        \end{enumerate}
+    \end{lemma}
+    \begin{lemma}
+        Let $\sigma,\tau\in S_n$. If $\text{supp}(\sigma)\cap\text{supp}(\tau)=\emptyset$, then $\sigma\circ \tau=\tau\circ \sigma$.
+    \end{lemma}
+    \begin{definition}
+        Let $\sigma\in S_n$ and $k\in\{1,\ldots,n\}$. The \textit{orbit of $k$} is the finite set $\{k,\sigma(k),\sigma^2(k),\ldots\}$.
+    \end{definition}
+    \begin{theorem}[Orbit structure]
+        Let $\sigma\in S_n$ and $\Omega=\{\omega_1,\ldots,\omega_k\}$ be the set of all the orbits of $\sigma$. Then:
+        \begin{enumerate}
+            \item $\bigcup_{j=1}^k \omega_j=\{1,\ldots,n\}$.
+            \item If $\omega_i,\omega_j\in\Omega$ and $\omega_i\cap\omega_j\ne\emptyset$, then $\omega_i=\omega_j$.
+            \item All orbits are non-empty.
+        \end{enumerate}
+    \end{theorem}
+    \begin{theorem}[Orbit linear structure]
+        Let $\sigma\in S_n$, $\omega$ be one of its orbits and $a\in\omega$. If $k=|\omega|$, then $\omega=\{a,\sigma(a),\ldots,\sigma^{k-1}(a)\}$ and $\sigma^k(a)=a$.
+    \end{theorem}
+    \begin{definition}
+        If $\sigma\in S_n$ has a unique orbit with $k>1$ elements, then we say that $\sigma$ is a \textit{cycle of length $k$}. 
+    \end{definition}
+    \begin{theorem}
+        Let $\sigma\in S_n$, then $\sigma$ can be written uniquely (except for the order) as a product of cycles with pairwise disjoint supports.
+    \end{theorem}
+    \begin{corollary}
+        Let $\sigma\in S_n$ and $\sigma=\sigma_1\cdots\sigma_\ell$ be its descomposition as product of disjoint cycles. Then, $\text{ord}(\sigma)=\lcm(\sigma_1,\ldots,\sigma_\ell)$.
+    \end{corollary}
+    \begin{definition}
+        A \textit{transposition} $\tau\in S_n$ is a cycle of length 2.
+    \end{definition}
+    \begin{corollary}
+        Let $\sigma\in S_n$. Then, $\sigma$ is a product of transpositions.
+    \end{corollary}
+    \begin{definition}
+        Let $\sigma\in S_n$. The \textit{sign of $\sigma$} is $\varepsilon(\sigma)=(-1)^{n-r}$, where $r$ is the number of orbits of $\sigma$.
+    \end{definition}
+    \begin{theorem}
+        Let $\sigma\in S_n$ be a permutation and $\tau\in S_n$ be a transposition. Then $\varepsilon(\sigma\tau)=\varepsilon(\sigma)\varepsilon(\tau)=-\varepsilon(\sigma)$.
+    \end{theorem}
+    \begin{corollary}
+        Let $\sigma\in S_n$ be such that $\sigma=\tau_1\cdots\tau_\ell$, where $\tau_i\in S_n$ are transpositions for $i=1,\ldots,\ell$. Then $\varepsilon(\sigma)=(-1)^\ell$.
+    \end{corollary}
+    \begin{corollary}
+        The parity of the number of transpositions in which $\sigma\in S_n$ can be written is invariant.
+    \end{corollary}
+    \subsection{Equivalence relations and order relations}
+    \begin{definition}
+        Let $A$ be a set and $\sim$ be a binary relation on $A$. We say that $\sim$ is an \textit{equivalence relation} if and only if the following properties are satisfied:
+        \begin{enumerate}
+            \item Reflexivity: $$a\sim a,\quad\forall a\in A.$$
+            \item Symmetry: $$\text{If }a\sim b, \text{ then }b\sim a,\quad\forall a,b\in A.$$
+            \item Transitivity:
+            $$\text{If }a\sim b\text{ and }b\sim c,\text{ then }a\sim c,\quad\forall a,b,c\in A.$$
+        \end{enumerate}
+    \end{definition}
+    \begin{definition}
+        Let $\sim$ be an equivalence relation on a set $A$ and $a\in A$. The \textit{equivalence class of $a$} under $\sim$ is the subset of $A$: $[a]=\bar{a}=\{b\in A: a\sim b\}$.
+    \end{definition}
+    \begin{theorem}
+        Let $\sim$ be an equivalence relation on a set $A$. The equivalence classes $\sim$ form a partition of $A$. That is, if $\{\omega_i\}$ are the equivalence classes, then:
+        \begin{enumerate}
+            \item $\bigcup_{i\in I} \omega_i=A$.
+            \item If $i,j\in I$ and $\omega_i\cap\omega_j\ne\emptyset$, then $\omega_i=\omega_j$.
+            \item If $i\in I\implies\omega_i\ne\emptyset$.
+        \end{enumerate}
+    \end{theorem}
+    \begin{definition}
+        Let $\sim$ be an equivalence relation on a set $A$. We define the quotient set, $\quot{A}{\!\sim}$, as the set of all equivalence classes of $\sim$.
+    \end{definition}
+    \begin{definition}
+        Let $A$ be a set and $\leq$ be a binary relation on $A$. We say $\leq$ is a \textit{partial order relation} if and only if the following properties are satisfied:
+        \begin{enumerate}
+            \item Reflexivity:
+            $$a\leq a,\quad\forall a\in A.$$
+            \item Antisymmetry:
+            $$\text{If }a\leq b\text{ and }b\leq a,\text{ then }a=b,\quad\forall a,b\in A.$$
+            \item Transitivity:
+            $$\text{If }a\leq b\text{ and }b\leq c,\text{ then }a\leq c,\quad\forall a,b,c\in A.$$
+        \end{enumerate}
+        The pair $(A,\leq)$ is called a \textit{partially ordered set}.
+    \end{definition}
+    \begin{definition}
+        Let $(A,\leq)$ be a partially ordered set. We say that $a\in A$ is a \textit{minimal element} if and only if $b\leq a\implies b=a$, $\forall b\in A$. Futhermore, $a$ is a \textit{least element} if and only if $a\leq b$, $\forall b\in A$. Analogously, we say that $a\in A$ is a \textit{maximal element} if and only if $b\geq a\implies b=a$, $\forall b\in A$. We say that $a\in A$ is a greatest element if and only if $a\geq b$, $\forall b\in A$.
+    \end{definition}
+    \begin{lemma}
+        Let $(A,\leq)$ be a partially ordered set. If $(A,\leq)$ admits a minimum, this is unique. 
+    \end{lemma}
+    \begin{definition}
+        Let $A$ be a set. A \textit{total order relation} on $A$ is a partial order relation in which any two elements of $A$ are comparable. That is, a total order is a binary relation $\leq$ satisfying the properties of a partial order relation and such that $\forall a,b\in A$, we have $a\leq b$ or $b\leq a$.
+    \end{definition}
+    \begin{definition}
+        Let $A$ be a set. A \textit{well-order relation} on $A$ is a total order on $A$ with the property that every non-empty subset of $A$ has a least element. A set $A$ together with a well-order relation is a \textit{well-ordered set}.
+    \end{definition}
+    \begin{theorem}
+        All sets can be well-ordered.
+    \end{theorem}
+    \subsection{Cardinalitat and combinatòria}
+    \begin{definition}
+    Let $A$, $B$ be two sets.. We say that $A$ and $B$ tenen the mateix cardinal if and only if existeix una bijecció of $A\rightarrow B$.
+    \end{definition}
+    \begin{definition}
+    Let $A$, $B$ be two sets.. We say that $|A|\leq|B|$ if and only if existeix be a function injectiva $A\rightarrow B$.
+    \end{definition}
+    \begin{theorem}[Teorema of Cantor-Bernstein]
+    Let $A$, $B$ be two sets.. If existeix una injecció $A\rightarrow B$ and una injecció $B\rightarrow A$, then existeix una bijecció $A\rightarrow B$. La comparació of cardinals is una relació d'ordre.
+    \end{theorem}
+    \begin{prop}
+    Càlcul of cardinals:\newline Let $A,B\subseteq A$ two subsets finits.
+    \begin{enumerate}
+        \item Principi d'inclusió$-$exclusió: $|A\cup B|=|A|+|B|-|A\cap B|$
+        \item Producte cartesià: $|A\times B|=|A||B|$
+        \item $|A^c|+|A|=|A|$
+        \item $|\mathcal{P}(A)|=2^{|A|}$
+    \end{enumerate}
+    \end{prop}
+    \begin{theorem}[Teorema of Cantor]
+    Let $A$ un set, then $|\mathcal{P}(A)|>|A|$.
+    \end{theorem}
+    \begin{prop}
+    Let $A$, $B$ be two sets. finits. Al set of les aplicacions $A\rightarrow B$ té cardinal $|B|^{|A|}$.
+    \end{prop}
+    \begin{definition}
+    Let $A$ un set and $A\in \mathcal{P}(A)$. Definim la funció característica of $A$ com: 
+    \begin{align*}
+        \chi_{\!_A}:A&\rightarrow\{0,1\}\\
+        r&\mapsto \left\{
+        \begin{array}{rcl}
+        1 & \text{si} & r\in A \\
+        0 & \text{si} & r\notin A
+        \end{array}\right.
+    \end{align*}
+    \end{definition}
+    \begin{prop}
+    Propietats del coeficient binomial:
+    \begin{enumerate}
+        \item $\binom{n}{k}=\frac{n!}{(n-k)!k!}$
+        \item $\binom{n}{k}=\binom{n-1}{k}+\binom{n-1}{k-1}$
+        \item $\sum_{k=0}^n\binom{n}{k}=2^n$
+        \item $k\binom{n}{k}=n\binom{n-1}{k-1}$
+    \end{enumerate}
+    \end{prop}
+    \begin{prop}
+    Let $f:A\rightarrow B$ be a function entre sets del mateix cardinal finit. Les següents assercions are equivalents:
+    \begin{enumerate}
+        \item $f$ is injectiva.
+        \item $f$ is surjective.
+        \item $f$ is bijectiva.
+    \end{enumerate}
+    \end{prop}
+    \begin{corollary}
+    Let $f:A\rightarrow B$ be a function entre sets finits. Aleshores:
+    \begin{enumerate}
+        \item $f$ is injectiva $\implies|A|\leq|B|$.
+        \item $f$ is surjective $\implies|A|\geq|B|$.
+    \end{enumerate}
+    \end{corollary}
+    \begin{theorem}[Principi del colomar]
+    Let $A$, $B$ be two sets. amb $n$ and $k$ elements, res\-pec\-ti\-va\-ment, and $f:A\rightarrow B$ be a function. If $n>k$, then existeixen elements of $A$ amb $f(a)=f(b)$ and $a\ne b$.
+    \end{theorem}
+    \begin{prop}[Variacions sense repetició]
+    Al nombre of variacions sense repetició of sets amb $m$ elements agafats amb tuples of $n$ elements sense repetir-los is $\frac{n!}{(n-k)!}$.
+    \end{prop}
+    \begin{prop}[Variacions amb repetició]
+    Al nombre of variacions amb repetició of sets amb $n$ elements agafats amb tuples of $k$, els quals poden ser repetits, is $n^k$.
+    \end{prop}
+    \begin{prop}[Combinacions sense repetició]
+    Al coeficient binomial $\binom{n}{k}$ is the nombre of subsets of $k$ elements entre un set amb $n$ elements.
+    \end{prop}
+    \begin{prop}[Combinacions amb repetició]
+    Al coeficient binomial $\binom{n+k-1}{k}$ is the nombre of combinacions amb repetició of $k$ elements escollits entre un set amb $n$ elements.
+    \end{prop}
+    \subsection{Nombres enters and congruències}
+    \begin{definition}
+    Let $m,n\in\mathbb{Z}$. We say that $m$ is múltiple of $n$ if existeix $k\in\mathbb{Z}$ such that $m=kn$.
+    \end{definition}
+    \begin{theorem}
+    Let $D,d\in\mathbb{Z}$, $d\ne 0$. Then existeixen $q,r\in\mathbb{Z}$ únics tals that $D=qd+r$ and $0\leq r\leq|d|$.
+    \end{theorem}
+    \begin{definition}
+    An un anell $(A,+,\cdot)$, un subset $I\subseteq A$ is un ideal si, and nomis si:
+    \begin{enumerate}
+        \item $\forall a,b\in I$, $a+b\in I$.
+        \item $\forall a\in I$ and $\forall n\in A$, $na\in I$.
+    \end{enumerate}
+    \end{definition}
+    \begin{lemma}
+    $\forall n\in\mathbb{Z}$, $I=n\mathbb{Z}=\{na: a\in\mathbb{Z}\}$ is un ideal of $\mathbb{Z}$. We say that $n$ is un generador of $I$.
+    \end{lemma}
+    \begin{lemma}
+    Let $I,J$ two ideals of $A$. Then the set $I\cap J$ is un ideal.
+    \end{lemma}
+    \begin{lemma}
+    Let $I,J$ two ideals. L'ideal generat per $I$ and $J$ is l'ideal $I+J=\{a+b: a\in I,b\in J\}$. A mis, aquest ideal is the mis petit that conté $I$ and $J$.
+    \end{lemma}
+    \begin{prop}
+    Let $a,b\in \mathbb{Z}$. $a\mathbb{Z}\subseteq b\mathbb{Z}\iff b: a$.
+    \end{prop}
+    \begin{corollary}
+    Let $a,b\in \mathbb{Z}$. $a\mathbb{Z}=b\mathbb{Z}\iff a=\pm b$.
+    \end{corollary}
+    \begin{prop}
+    Let $A$ un anell and Let $I=a\mathbb{Z},J=b\mathbb{Z}$ two ideals. Aleshores $\exists!\,m\in\mathbb{N}^*$ such that $a\mathbb{Z}\cap b\mathbb{Z}=m\mathbb{Z}$. Aquest enter $m$ is the mínim comú múltiple of $a$ and $b$.
+    \end{prop}
+    \begin{prop}
+    Let $A$ un anell and Let $I=a\mathbb{Z}$ $J=b\mathbb{Z}$ two ideals. Aleshores $\exists!\,d\in\mathbb{N}^*$ such that $a\mathbb{Z}+b\mathbb{Z}=d\mathbb{Z}$. Aquest enter $d$ is the màxim comú divisor of $a$ and $b$.
+    \end{prop}
+    \begin{definition}
+    Let $a,b\in\mathbb{Z}$. We say that $a$ and $b$ are coprimers if and only if $\text{mcd}(a,b)=1$.
+    \end{definition}
+    \begin{definition}
+    We say that $a$ is primer ($a\in\mathbb{P}$) if and only if $a\mathbb{Z}$ is maximal per a la inclusió d'ideals propis.
+    \end{definition}
+    \begin{theorem}[Teorema of Bézout]
+    Let $a,b\in\mathbb{Z}$, then existeixen $u,v\in\mathbb{Z}$ tals that $au+bv=\text{mcd}(a,b)$. A mis, $\text{mcd}(a,b)=1\iff\exists u,v\in\mathbb{Z}$ tals that $au+bv=1$.
+    \end{theorem}
+    \begin{theorem}[Teorema of Gau\ss]
+    Let $a,b\in\mathbb{Z}$. If $a: bc$ and $\text{mcd}(a,b)=1$ then $a: c$.
+    \end{theorem}
+    \begin{corollary}
+    Let $a_1,a_2\in\mathbb{Z}$ coprimers. If $a_1: b$ and $a_2: b$, then $a_1a_2: b$.
+    \end{corollary}
+    \begin{theorem}[Teorema of La Vallée Pousin-Hadamard]
+    Let $x\in\mathbb{R}$, aleshores $\pi(x)\approx\frac{x}{\log(x)}$ on $\pi(x)$ is the nombre of nombres primers $\leq x$.
+    \end{theorem}
+    \begin{theorem}
+    Let $a,b\in\mathbb{Z}$. Then $$\text{mcd}(a,b)\text{mcm}(a,b)=|ab|.$$
+    \end{theorem}
+    \begin{lemma}
+    Let $p\in\mathbb{P}$ and $a\in\mathbb{Z}$. Then $p: a$ o $\text{mcd}(a,p)=1$.
+    \end{lemma}
+    \begin{theorem}[Teorema fonamental of l'a\-rit\-mè\-ti\-ca]
+    Let $n\in\mathbb{N}^*$, then $n$ s'escriu com a producte of nombres primers únics, llevat of l'ordre.
+    \end{theorem}
+    \begin{theorem}[Teorema d'Auclides]
+    Let $\mathbb{P}$ the set dels nombres primers positius. $\mathbb{P}$ is infinit. 
+    \end{theorem}
+    \begin{theorem}
+    L'equació $ax+by=c$ admet almenys una solució if and only if $\text{mcd}(a,b): c$.
+    \end{theorem}
+    \begin{definition}
+    $x\equiv y\mod n\iff x-y\in n\mathbb{Z}$.
+    \end{definition}
+    \begin{lemma}
+    $\mathbb{Z}/n\mathbb{Z}$ té $n$ elements.
+    \end{lemma}
+    \begin{theorem}
+    Com that $(\mathbb{Z},+,\cdot)$ is un anell commutatiu, $(\mathbb{Z}/n\mathbb{Z},+,\cdot)$ is un anell commutatiu i, per construcció, la projecció canònica 
+    \begin{align*}
+        f:\mathbb{Z}&\rightarrow\mathbb{Z}/n\mathbb{Z}\\
+        a&\mapsto[a]
+    \end{align*}is un morfisme d'anells.
+    \end{theorem}
+    \begin{lemma}
+    Let $n\in\mathbb{Z}$. Then $[a]\in\mathbb{Z}/n\mathbb{Z}$ is invertible per a la multiplicació if and only if $\text{mcd}(a,n)=1$.
+    \end{lemma}
+    \begin{corollary}
+    Un anell $(A,+,\cdot)$ en the qual tot element no nul is invertible is un cos. $(\mathbb{Z}/n\mathbb{Z},+,\cdot)$ is un cos if and only if $n\in\mathbb{P}$.
+    \end{corollary}
+    \begin{theorem}[Teorema xinès del residu]
+    Let $m,n$ coprimers, aleshores l'aplicació:
+    \begin{align*}
+        \psi:\mathbb{Z}/mn\mathbb{Z}&\rightarrow\mathbb{Z}/m\mathbb{Z}\times\mathbb{Z}/n\mathbb{Z}\\
+        \overline{a}^{\scriptscriptstyle mn}&\mapsto(\overline{a}^{\scriptscriptstyle m},\overline{a}^{\scriptscriptstyle n})
+    \end{align*}
+    is un isomorfisme d'anells.
+    \end{theorem}
+    \begin{definition}[Bunció indicatriu d'Auler]
+    Let $n\in\mathbb{N}^*$. $\varphi(n)=|\{\alpha\in\mathbb{Z}/n\mathbb{Z}:\alpha \text{ is invertible}\}|=|\{0\leq r\leq n: \text{mcd}(r,n)=1\}|$.
+    \end{definition}
+    \begin{theorem}[Teorema d'Auler]
+    Let $a\in\mathbb{Z}$ and $n\in\mathbb{N}$ such that $\text{mcd}(a,n)=1$, then $a^{\varphi(n)}\equiv 1\mod n$. An particular, $a^{-1}\equiv a^{\varphi(n)-1}\mod n$.
+    \end{theorem}
+    \begin{theorem}[Petit teorema of Bermat]
+    If $p$ is primer, $\varphi(p)=p-1$. Aleshores $a^p\equiv a\mod p$ i, en particular, if $\text{mcd}(a,p)=1$, $a^{p-1}\equiv 1\mod p$.
+    \end{theorem}
+    \subsection{Polinomis}
+    \begin{prop}
+    Let $A$ un cos. If $P,Q\in A[x]$ and $P,Q\ne0$, then $PQ\ne 0$.
+    \end{prop}
+    \begin{theorem}[Teorema of divisió euclidiana]
+    Let $A$ un cos. Let $P,S\in A[x]$ amb $S\ne 0$. Then $\exists!\, Q,R\in A[x]$ tals that $P=QS+R$ and $0\leq\text{deg}(R)<\text{deg}(S)$.
+    \end{theorem}
+    \begin{theorem}
+    Let $A$ un cos. Then $A[x]$ is un anell principal, is a dir, if $I\subset A[x]$ is un ideal, then $\exists P\in A[x]$ such that $I=PA[x]$.
+    \end{theorem}
+    \begin{definition}
+    Let $P,Q\in A[x]$. Aleshores $\text{mcd}(P,Q)$ is un generador of $PA[x]+QA[x]$ and $\text{mcm}(P,Q)$ is un generador of $PA[x]\cap QA[x]$.
+    \end{definition}
+    \begin{definition}
+    We say that un polinomi $P=a_0+a_1x+\cdots+a_nx^n$ is mònic if $a_n=1$.
+    \end{definition}
+    \begin{theorem}[Teorema of Bézout]
+    Let $P,Q\in K[x]$, then $\exists U,V\in K[x]$ tals that $PU+QV=\text{mcd}(P,Q)$.
+    \end{theorem}
+    \begin{definition}
+    two polinomis $P,Q$ are coprimers if and only if $\text{mcd}(P,Q)=1$.
+    \end{definition}
+    \begin{theorem}[Teorema of Gau\ss]
+    Let $P,A,B\in K[x]$. If $P: AB$ and $\text{mcd}(A,P)=1$, then $P: B$.
+    \end{theorem}
+    \begin{definition}
+    Un polinomi $P\in K[x]$ is primer if and only if the seu ideal $PK[x]$ is maximal per a la inclusió d'ideals of $K[x]$, is a dir, $\forall I$ ideal if $PK[x] \varsubsetneq I$, then $K[x]=I$.
+    \end{definition}
+    \begin{theorem}[Teorema of Ruffini]
+    Let $K$ un cos and Let $P\in K[x]$ and $\lambda\in K$. Then $x-\lambda: P\iff P(\lambda)=0$.
+    \end{theorem}
+    \begin{definition}
+    Let $P\in K[x]$, then $P$ is irreductible if and only if $PK[x]$ is maximal.
+    \end{definition}
+    \begin{theorem}
+    Let $P\in K[x]$, then $P$ té com a màxim $\text{deg}(P)$ arrels.
+    \end{theorem}
+    \begin{theorem}[Teorema d'Alembert]
+    Tot polinomi no constant $P\in\mathbb{C}[x]$ té exactament $\text{deg}(P)$ arrels.
+    \end{theorem}
+    \begin{corollary}
+    Let $P\in\mathbb{C}[x]$ and $\text{deg}(P)>1$. Then existeixen $\alpha,r_1,\ldots,r_n\in\mathbb{C}$ únics, llevat of l'ordre, such that $P=\alpha(x-r_1)\cdots(x-r_n)$ on $r_i$ are les arrels of $P$ and $\alpha$ the coeficient dominant.
+    \end{corollary}
+    \begin{corollary}
+    Les arrels a $\mathbb{C}\setminus\mathbb{R}$ es presenten en parells $(r_s,\overline{r_s})$.
+    \end{corollary}
+    \begin{theorem}
+    A $\mathbb{R}[x]$ els polinomis irreductibles are of grau 1 (arrels reals) o of grau 2 (arrels complexes no reals).
+    \end{theorem}
 \end{multicols}
 \end{document}
