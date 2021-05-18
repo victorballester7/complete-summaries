@@ -4,7 +4,7 @@
 \definecolor{lessgreen}{RGB}{0,150,0}
 
 \begin{document}
-\pgfkeys{/pgf/declare function={f(\x)=1.65*\x-1;}} % Here you can declare multivariable functions to like this:
+\pgfkeys{/pgf/declare function={f(\x)=1.65*\x-0.3;}} % Here you can declare multivariable functions to like this:
 % declare function={
 % excitation(\t,\w) = sin(\t*\w);
 % noise = rnd - 0.5;
@@ -13,38 +13,37 @@
 % speech(\t) = 1 + source(\t)*filter(\t);
 % }
 \begin{tikzpicture}
-    \begin{axis}[xmin=0,xmax=5,ymin=0,ymax=5,
-    axis equal image]
-    \addplot [thin,samples=200,smooth,blue] {f(x)};
-    \addplot [thin,samples=200,smooth,black] {x};
-    %%%%% Red lines 1
-    \pgfplotsextra{
-    \def\x{1.65}
-    \def\y{0}
-    \draw [very thin,red] (axis cs:\x,\y) \foreach \i in {0,...,6}{
-    \pgfextra{
-        \pgfkeys{/pgf/fpu=true, /pgf/fpu/output format=fixed}
-        \pgfmathparse{f(\x)}\xdef\y{\pgfmathresult}
-    }
-    -- (axis cs:\x,\y) 
-    \pgfextra{\xdef\x{\y}}
-    -- (axis cs:{\x},{\y})
-    };}
-    %%%%% Red lines 2
-    \pgfplotsextra{
-    \def\x{1.45}
-    \def\y{0}
-    \draw [very thin,red] (axis cs:\x,\y) \foreach \i in {0,...,5}{
-    \pgfextra{
-        \pgfkeys{/pgf/fpu=true, /pgf/fpu/output format=fixed}
-        \pgfmathparse{f(\x)}\xdef\y{\pgfmathresult}
-    }
-    -- (axis cs:\x,\y) 
-    \pgfextra{\xdef\x{\y}}
-    -- (axis cs:{\x},{\y})
-    };}
-    \draw [thin,lessgreen,dashed] (axis cs:1.538,0) -- node[left,pos=0.1]{$\alpha$} (axis cs:1.538,1.538);
-    \legend{$g(x)$}
-    \end{axis}
+    \begin{axis}[xmin=0,xmax=1.2,ymin=0,ymax=1.2,axis equal image]
+        \addplot [thin,samples=200,smooth,blue] {f(x)};
+        \addplot [thin,samples=200,smooth,black] {x};
+        %%%%% Red lines 1
+        \pgfplotsextra{
+        \def\x{0.44}
+        \def\y{0}
+        \draw [very thin,red] (axis cs:\x,\y) \foreach \i in {0,...,6}{
+        \pgfextra{
+            \pgfkeys{/pgf/fpu=true, /pgf/fpu/output format=fixed}
+            \pgfmathparse{f(\x)}\xdef\y{\pgfmathresult}
+        }
+        -- (axis cs:\x,\y) 
+        \pgfextra{\xdef\x{\y}}
+        -- (axis cs:{\x},{\y})
+        };}
+        %%%%% Red lines 2
+        \pgfplotsextra{
+        \def\x{0.48}
+        \def\y{0}
+        \draw [very thin,red] (axis cs:\x,\y) \foreach \i in {0,...,7}{
+        \pgfextra{
+            \pgfkeys{/pgf/fpu=true, /pgf/fpu/output format=fixed}
+            \pgfmathparse{f(\x)}\xdef\y{\pgfmathresult}
+        }
+        -- (axis cs:\x,\y) 
+        \pgfextra{\xdef\x{\y}}
+        -- (axis cs:{\x},{\y})
+        };}
+        \draw [thin,lessgreen,dashed] (axis cs:0.4615,0) -- node[left,pos=0.1]{$\alpha$} (axis cs:0.4615,0.4615);
+        \legend{$g(x)$}
+        \end{axis}
 \end{tikzpicture}
 \end{document}

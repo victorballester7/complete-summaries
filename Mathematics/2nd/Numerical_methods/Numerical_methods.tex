@@ -222,20 +222,23 @@
 \end{corollary}
 \subsection{Interpolation}
 \begin{definition}
+    We denote by $\Pi_n$ the \textit{vector space of polynomials with real coefficients and degree less than or equal to $n$}.
+\end{definition}
+\begin{definition}
     Suppose we have a family of real valued functions $\mathfrak{C}$ and a set of points $\{(x_i,y_i)\}_{i=0}^n:=\{(x_i,y_i)\in\RR^2:i=0,\ldots,n\text{ and }x_j\ne x_k\iff j\ne k\}$. These points $\{(x_i,y_i)\}_{i=0}^n$ are called \textit{support points}. The \textit{interpolation problem} consists in finding a function $f\in\mathfrak{C}$ such that $f(x_i)=y_i$ for $i=0,\ldots,n$\footnote{Types of interpolation are for example polynomial interpolation, trigonometric interpolation, Padé interpolation, Hermite interpolation and spline interpolation.}.
 \end{definition}
 \subsubsection*{Polynomial interpolation}
 \begin{definition}
-    Given a set of support points $\{(x_i,y_i)\}_{i=0}^n$, \textit{Lagrange's interpolation problem} consists in finding a polynomial $p_n\in\mathbb{R}[x]$ such that $\deg p_n\leq n$ and $p_n(x_i)=y_i$.
+    Given a set of support points $\{(x_i,y_i)\}_{i=0}^n$, \textit{Lagrange's interpolation problem} consists in finding a polynomial $p_n\in\Pi_n$ such that $p_n(x_i)=y_i$ for $i=0,1,\ldots,n$.
 \end{definition}
 \begin{definition}
-    Let $\{(x_i,y_i)\}_{i=0}^n$ be a set of support points. We define $\omega_n(x)\in\RR[x]$ as $$\omega_n(x)=\prod_{k=0}^n(x-x_k).$$ We define \textit{Lagrange basis polynomials} $L_j(x)\in\RR[x]$ as $$L_j(x)=\frac{\omega_n(x)}{(x-x_j)\omega_n(x_j)}=\prod_{\substack{k=0\\k\ne j}}^n\frac{x-x_k}{x_j-x_k}.$$
+    Let $\{(x_i,y_i)\}_{i=0}^n$ be a set of support points. We define $\omega_n(x)\in\RR[x]$ as $$\omega_n(x)=\prod_{k=0}^n(x-x_k).$$ We define \textit{Lagrange basis polynomials} $\ell_j(x)\in\RR[x]$ as $$\ell_j(x)=\frac{\omega_n(x)}{(x-x_j)\omega_n(x_j)}=\prod_{\substack{k=0\\k\ne j}}^n\frac{x-x_k}{x_j-x_k}.$$
 \end{definition}
 \begin{prop}
-    Let $\{(x_i,y_i)\}_{i=0}^n$ be a set of support points. Then, Lagrange's interpolation problem has a unique solution and this is: $$p_n(x)=\sum_{i=0}^ny_iL_i(x).$$
+    Let $\{(x_i,y_i)\}_{i=0}^n$ be a set of support points. Then, Lagrange's interpolation problem has a unique solution and this is: $$p_n(x)=\sum_{i=0}^ny_i\ell_i(x).$$
 \end{prop}
 \begin{prop}[Neville's algorithm]
-    Let \\$\{(x_i,y_i)\}_{i=0}^n$ be a set of support points, $\{i_0,\ldots,i_k\}\subset\{0,\ldots,n\}$ and $P_{i_1,\ldots,i_k}(x)\in\mathbb{R}[x]$ be such that $\deg P_{i_0,\ldots,i_k}\leq k$ and $P_{i_1,\ldots,i_k}(x_{i_j})=y_{i_j}$ for $j=0,\ldots,k$. Then, it is satisfied that:
+    Let \\$\{(x_i,y_i)\}_{i=0}^n$ be a set of support points, $\{i_0,\ldots,i_k\}\subset\{0,\ldots,n\}$ and $P_{i_1,\ldots,i_k}(x)\in\Pi_k$ be such that\\ $P_{i_1,\ldots,i_k}(x_{i_j}) = y_{i_j}$ for $j=0,\ldots,k$. Then, it is satisfied that:
     \begin{enumerate}
         \item $P_i(x)=y_i$.
         \item $P_{i_0,\ldots,i_k}(x)=\frac{\begin{vmatrix}
@@ -280,7 +283,7 @@
 \end{corollary}
 \subsubsection{Hermite interpolation}
 \begin{definition}
-    Given a sets of points $\{x_i\}_{i=0}^m\subset\RR$, $\{n_i\}_{i=0}^m\subset\NN^*$ and $\{y_i^{(k)}:k=0,\ldots,n_i-1\}_{i=0}^m\subset\RR$, \textit{Hermite interpolation problem} consists in finding a polynomial $h_n\in\mathbb{R}[x]$ such that $\deg h_n\leq n$, $\sum_{i=0}^mn_i=n+1$ and $$h_n^{(k)}(x_i)=y_i^{(k)}\text{ for }i=0,\ldots,m\text{ and }k=0,\ldots,n_i-1.$$
+    Given a sets of points $\{x_i\}_{i=0}^m\subset\RR$, $\{n_i\}_{i=0}^m\subset\NN^*$ and $\{y_i^{(k)}:k=0,\ldots,n_i-1\}_{i=0}^m\subset\RR$, \textit{Hermite interpolation problem} consists in finding a polynomial $h_n\in\Pi_n$ such that $\sum_{i=0}^mn_i=n+1$ and $$h_n^{(k)}(x_i)=y_i^{(k)}\text{ for }i=0,\ldots,m\text{ and }k=0,\ldots,n_i-1.$$
 \end{definition}
 \begin{prop}
     Hermite interpolation problem has a unique solution.
@@ -333,13 +336,13 @@
     Let $f:[a,b]\rightarrow\RR$ be a continuous function, $\{x_i\}_{i=0}^n\subset[a,b]$ be a set of nodes and $p_n$ be the Lagrange interpolating polynomial with support points $\{(x_i,f(x_i))\}_{i=0}^n$. We define the \textit{quadrature formula} as $$\int_a^bf(x)\dd x\approx\int_a^bp_n(x)\dd x.$$
 \end{definition}
 \begin{lemma}
-    Let $f:[a,b]\rightarrow\RR$ be a continuous function $\{x_i\}_{i=0}^n\subset[a,b]$ be a set of nodes. Then, $$\int_a^bf(x)\dd x\approx\sum_{i=1}^na_if(x_i),\quad\text{where }a_i:=\int_a^bL_i(x)\dd x.$$
+    Let $f:[a,b]\rightarrow\RR$ be a continuous function $\{x_i\}_{i=0}^n\subset[a,b]$ be a set of nodes. Then, $$\int_a^bf(x)\dd x\approx\sum_{i=1}^na_if(x_i),\quad\text{where }a_i:=\int_a^b\ell_i(x)\dd x.$$
 \end{lemma}
 \begin{definition}
     The \textit{degree of precision} of a quadrature formula is the largest $m\in\NN^*$ such that the formula is exact for $x^k$ $\forall k=0,1,\ldots,n$.
 \end{definition}
 \begin{lemma}
-    Let $p\in\RR[x]$ be a polynomial defined on an interval $[a,b]$ such that $\deg p\leq n$ and let $\{x_i\}_{i=0}^n\subset[a,b]$ be a set of nodes. Then, $$\int_a^bp(x)\dd x=\sum_{i=0}^na_ip(x_i).$$
+    Let $p\in\Pi_n$ be a polynomial and $\{x_i\}_{i=0}^n\subset[a,b]$ be a set of nodes. Then, $$\int_a^bp(x)\dd x=\sum_{i=0}^na_ip(x_i),$$ for some $a_i\in\RR$.
 \end{lemma}
 \subsubsection*{Newton-Cotes formulas}
 \begin{theorem}[Mean value theorem for integrals]
@@ -387,7 +390,7 @@
 \begin{theorem}[Romberg method]
     Let $f\in\mathcal{C}^{2m+2}([a,b])$ be a function. Then by Euler–Maclaurin formula, we obtain: $$T(f,a,b,h)=\int_a^bf(t)\dd t+\beta_1 h^2+\beta_2 h^4+\cdots,$$ where $h=\frac{b-a}{n}$. For $n=1,2,\ldots$ we define: $$T_{n,1}=T\left(f,a,b,\frac{b-a}{2^n}\right),\quad T_{n,m+1}=\frac{4^jT_{n+1,m}-T_{n,m}}{4^j-1},$$ for $m\leq n$. Then, we can observe that $$T_{n,m}=\int_a^bf(t)\dd t+O\left(\left(\frac{b-a}{2^n}\right)^{2m}\right).$$
 \end{theorem}
-\subsubsection*{Gau\ss ian quadrature}
+\subsubsection*{Orthogonal polynomials}
 \begin{definition}
     Let $f,g:[a,b]\rightarrow\mathbb{R}$ be continuous function and $\omega(x):[a,b]\rightarrow\RR^+$ be a weight function. The expression $$\langle f,g\rangle=\int_a^b\omega(x)f(x)g(x)\dd x$$ defines a postive-semidefinite dot product in the vector space of bounded functions on $[a,b]$.
 \end{definition}
@@ -395,5 +398,56 @@
     Let $\mathfrak{P}=\{\phi_i(x)\in\RR[x]:\deg \phi_i(x)=i, i\in\NN\cup\{0\}\}$ be a family of polynomials and $\omega(x):[a,b]\rightarrow\RR^+$ be a weight function. We say $\mathfrak{P}$ is \textit{orthogonal with respect to the weight $\omega(x)$ on an interval $[a,b]$} if $$\langle \phi_i,\phi_j\rangle=\int_a^b\omega(x)\phi_i(x)\phi_j(x)\dd x=0\iff i\ne j.$$
     Note that $\langle \phi_i,\phi_i\rangle>0$ for each $i\in\NN\cup\{0\}$.
 \end{definition}
+\begin{lemma}
+    We define $\mathfrak{P}_n$ as $\mathfrak{P}_n=\{\phi_i(x)\in\RR[x]:\deg\phi_i(x)=i\text{ and }\langle \phi_i,\phi_j\rangle=0\iff i\ne j,  i=0,\ldots,n\}$. Then, $\mathfrak{P}_n$ is an \textit{orthogonal basis of $\Pi_n$}. 
+\end{lemma}
+\begin{lemma}
+    Let $\phi_k\in\mathfrak{P}_n$ and $q\in\Pi_n$. Then, $\langle q,\phi_k\rangle=0$ for each $k>n$.
+\end{lemma}
+\begin{lemma}
+    Let $\phi_n\in\{\phi_i(x)\in\RR[x]:\deg\phi_i(x)=i\text{ and }\langle \phi_i,\phi_j\rangle=0\iff i\ne j,  i\in\NN\cup\{0\}\}$. Then $\forall n\in\NN\cup\{0\}$, all roots of $\phi_n$ are real, simple and contained in the interval $(a,b)$.
+\end{lemma}
+\begin{theorem}[Existence of orthogonal polynomials]
+    For each $n\in\NN\cup\{0\}$ there exists a unique monic orthogonal polynomial $\phi_n$ with $\deg\phi_n=n$ defined by:
+    \begin{gather*}
+        \phi_0=1,\quad\phi_1(x)=x-\alpha_0\quad \text{and}\\
+        \phi_{n+1}(x)=(x-\alpha_n)\phi_n(x)-\beta_n\phi_{n-1}(x)
+    \end{gather*}
+    with $\alpha_n=\frac{\langle\phi_n,x\phi_n\rangle}{\langle\phi_n,\phi_n\rangle}$ and $\beta_n=\frac{\langle\phi_n,\phi_n\rangle}{\langle\phi_{n-1},\phi_{n-1}\rangle}$ for $n=1,2,\ldots$
+\end{theorem}
+\begin{definition}[Chebyshev polynomials]
+    \textit{Chebyshev polynomials} $T_n$ are the orthogonal polynomials defined on $[-1,1]$ with the weight $\omega(x)=\frac{1}{\sqrt{1-x^2}}$. These can be defined recursively as:
+    \begin{gather*}
+        T_0(x)=1,\quad T_1(x)=x,\\T_{n+1}(x)=2xT_n(x)-T_{n-1}(x),
+    \end{gather*}
+    for $n=1,2,\ldots$ Moreover $T_n(x)=\cos(n\arccos(x))$ which implies that the roots of $T_n(x)$ are $$x_k=\cos\left(\frac{2k-1}{2n}\pi\right)\quad\text{for }k=1,\ldots,n.$$
+\end{definition}
+\begin{definition}[Laguerre polynomials]
+    \textit{Laguerre polynomials} $L_n$ are the orthogonal polynomials defined on $[0,\infty)$ with the weight $\omega(x)=\exp{-x}$. These can be defined recursively as:
+    \begin{gather*}
+        L_0(x)=1,\quad L_1(x)=1-x,\\ L_{n+1}(x)=\frac{(2m+1-x)L_n(x)-nL_{n-1}(x)}{n+1},
+    \end{gather*}
+     for $n=1,2,\ldots$ The closed form of these polynomials is: $$L_n(x)=\sum_{k=0}^n\binom{n}{k}\frac{(-1)^k}{k!}x^k.$$ 
+\end{definition}
+\begin{definition}[Legendre polynomials]
+    \textit{Legendre polynomials} $P_n$ are the orthogonal polynomials defined on $[-1,1]$ with the weight $\omega(x)=1$. These can be defined recursively as:
+    \begin{gather*}
+        P_0(x)=1,\quad P_1(x)=x\\P_{n+1}(x)=\frac{(2n+1)xP_n(x)-nP_{n-1}(x)}{n+1},
+    \end{gather*}
+        for $n=1,2,\ldots$ The closed form of these polynomials is: $$P_n(x)=\frac{1}{2^n}\sum_{k=0}^n\binom{n}{k}^2(x-1)^{n-k}(x+1)^k.$$ 
+\end{definition}
+\subsubsection*{Gau\ss ian quadrature}
+\begin{definition}
+    Let $f:[a,b]\rightarrow\mathbb{R}$ be a function and $\omega(x):[a,b]\rightarrow\RR^+$ be a weight function. Given a set of nodes $\{x_i\}_{i=1}^n\subset[a,b]$, the \textit{quadrature formula with weight $\omega(x)$ of a function $f$} is $$\int_a^b\omega(x)f(x)\dd x\approx\sum_{i=1}^n\omega_if(x_i),$$ with $\omega_i=\int_a^b\omega(x)\ell_i(x)\dd x$.
+\end{definition}
+\begin{lemma}
+    Let $f:[a,b]\rightarrow\mathbb{R}$ be a function and $\{x_i\}_{i=1}^n$ be the zeros of the orthogonal polynomial $\phi_n\in\mathfrak{P}_n$ with weight $\omega(x)$ on the interval $[a,b]$. Then, the formula $$\int_a^b\omega(x)f(x)\dd x\approx\sum_{i=1}^n\omega_if(x_i),$$ with $\omega_i=\int_a^b\omega(x)\ell_i(x)\dd x$ is exact for polynomials in $\Pi_{2n-1}$.
+\end{lemma}
+\begin{prop}
+    Let $f:[a,b]\rightarrow\mathbb{R}$ be a function and $\{x_i\}_{i=1}^n$ be the zeros of the orthogonal polynomial $\phi_n\in\mathfrak{P}_n$ with weight $\omega(x)$ on the interval $[a,b]$. Then, in the formula $$\int_a^b\omega(x)f(x)\dd x\approx\sum_{i=1}^n\omega_if(x_i),$$ $\omega_i$ are positive and real for $i=1,\ldots,n$.
+\end{prop}
+\begin{theorem}
+    Let $f:[a,b]\rightarrow\mathbb{R}$ be a function of class $\mathcal{C}^{2n}$ and $\{x_i\}_{i=1}^n$ be the zeros of the orthogonal polynomial $\phi_n\in\mathfrak{P}_n$ with weight $\omega(x)$ on the interval $[a,b]$. Then, $$\int_a^b\omega(x)f(x)\dd x-\sum_{i=1}^n\omega_if(x_i)=\frac{f^{2n}(\xi)}{(2n)!}\langle\phi_n,\phi_n\rangle,$$ where $\xi\in[a,b]$. 
+\end{theorem}
 \end{multicols}
 \end{document}
