@@ -3,8 +3,36 @@
 \begin{document}
 \begin{multicols}{2}[\section{Fundamentals of mathematics}]
     \subsection{Introduction}
-    \textcolor{green}{FALTA COSA}
+    \begin{axiom}[Peano axioms]\hfill
+        \begin{enumerate}
+            \item $1\in\NN$.
+            \item $\forall n\in\NN$, exists a ``successor" $S(n)\in\NN$ of $n$.
+            \item $\forall n\in\NN$, $S(n)\ne 1$.
+            \item $\forall n,m\in\NN$, $n=m\iff S(n)=S(m)$.
+            \item \textit{(Induction axiom)} If $K\subseteq\NN$ is a set such that:
+            \begin{enumerate}
+                \item $1\in K$.
+                \item $\forall k\in K$, $S(k)\in K$.
+            \end{enumerate}
+            Then, $K=\NN$.
+        \end{enumerate}
+    \end{axiom}
+    \begin{axiom}[Induction axiom]
+        Peano's 5th axiom can be stated in the following way: Let $\phi$ be a predicate\footnote{A \textit{predicate} is a formula that can be evaluated to true or false in function of the values of the variables that occur in it.} such that:
+        \begin{enumerate}
+            \item $\phi(1)$ is true.
+            \item $\forall n\in\NN$, $\phi(n)$ being true implies that $\phi(S(n))$ is true.
+        \end{enumerate}
+        Then, $\phi(n)$ is true for all $n\in\NN$.
+    \end{axiom}  
+    \begin{prop}
+        All non-empty subsets of $\NN$ have a first element.
+    \end{prop}
+    \begin{prop}
+        If a set $A$ satisfies the first four Peano's axioms and has the property that all non-empty subsets it have a first element, then $A$ also satisfies the induction axiom.
+    \end{prop}
     \subsection{Set theory}
+    \subsubsection*{Definitions and basic operations}
     \begin{definition}
         A \textit{set} is a collection of distinct elements.
     \end{definition}
@@ -98,6 +126,7 @@
             \item $A\times(B\cup C)=(A\times B)\cup(A\times C)$.
         \end{enumerate}
     \end{prop}
+    \subsubsection*{Functions between sets}
     \begin{definition}
         Let $A$, $B$ be two sets. A \textit{function from $A$ to $B$} is a binary relation between $A$ and $B$ that associates to each element of $A$ exactly one element of $B$.
     \end{definition}
@@ -169,24 +198,32 @@
     \end{theorem}
     \subsection{Logic and propositional calculus}
     \begin{definition}
-        Let $P$ be a proposition. Then $\lnot P$ expresses the \textit{negation of $P$}. 
+        Let $P$ be a proposition. Then, $\lnot P$ expresses the \textit{negation of $P$}. 
     \end{definition}
     \begin{definition}
-        Let $P$, $Q$ be propositions. Then $P\land Q$ expresses that \textit{$P$ and $Q$ are both true.}
+        Let $P$, $Q$ be propositions. Then, $P\land Q$ expresses that \textit{$P$ and $Q$ are both true.}
     \end{definition}
     \begin{definition}
-        Let $P$, $Q$ be propositions. Then $P\lor Q$ expresses that \textit{either $P$ or $Q$ are true}.
+        Let $P$, $Q$ be propositions. Then, $P\lor Q$ expresses that \textit{either $P$ or $Q$ are true}.
     \end{definition}
     \begin{definition}
-        Let $P$, $Q$ be propositions. Then $P\Rightarrow Q$ expresses that \textit{$Q$ is true whenever $P$ is true}. Note that $P\Rightarrow Q=Q\lor\lnot P$.
+        Let $P$, $Q$ be propositions. Then, $P\Rightarrow Q$ expresses that \textit{$Q$ is true whenever $P$ is true}. Note that $P\Rightarrow Q=Q\lor\lnot P$.
     \end{definition}
     \begin{definition}
-        Let $P$, $Q$ be propositions. Then $P\Leftrightarrow Q$ expresses that \textit{$P$ and $Q$ have the same truth-value}. Note that $P\Leftrightarrow Q=(P\Rightarrow Q)\land(Q\Rightarrow P)$.
+        Let $P$, $Q$ be propositions. Then, $P\Leftrightarrow Q$ expresses that \textit{$P$ and $Q$ have the same truth-value}. Note that $P\Leftrightarrow Q=(P\Rightarrow Q)\land(Q\Rightarrow P)$.
     \end{definition}
     \subsection{Symmetric group}
     \begin{definition}
         Let $n\in\mathbb{N}$. We denote by $S_n$ the set of all the bijections $\{1,2,\ldots,n\}$ to itself. An element of $S_n$ is a permutation of $\{1,\ldots,n\}$.
     \end{definition}
+    \begin{prop}
+        The pair $(S_n,\circ)$, where 
+        \begin{align*}
+            \circ:S_n\times S_n&\longrightarrow S_n\\
+            (\sigma,\tau)&\longmapsto\sigma\circ\tau
+        \end{align*}
+        is a group\footnote{See definition \ref{AS-group}.} called \textit{symmetric group}.
+    \end{prop}
     \begin{theorem}
         The cardinal of $S_n$ is $n!$.
     \end{theorem}
@@ -223,15 +260,15 @@
     \begin{definition}
         If $\sigma\in S_n$ has a unique orbit with $k>1$ elements, then we say that $\sigma$ is a \textit{cycle of length $k$}. 
     \end{definition}
+    \begin{definition}
+        A \textit{transposition} $\tau\in S_n$ is a cycle of length 2.
+    \end{definition}
     \begin{theorem}
         Let $\sigma\in S_n$, then $\sigma$ can be written uniquely (except for the order) as a product of cycles with pairwise disjoint supports.
     \end{theorem}
     \begin{corollary}
         Let $\sigma\in S_n$ and $\sigma=\sigma_1\cdots\sigma_\ell$ be its descomposition as product of disjoint cycles. Then, $\text{ord}(\sigma)=\lcm(\sigma_1,\ldots,\sigma_\ell)$.
     \end{corollary}
-    \begin{definition}
-        A \textit{transposition} $\tau\in S_n$ is a cycle of length 2.
-    \end{definition}
     \begin{corollary}
         Let $\sigma\in S_n$. Then, $\sigma$ is a product of transpositions.
     \end{corollary}
@@ -239,15 +276,24 @@
         Let $\sigma\in S_n$. The \textit{sign of $\sigma$} is $\varepsilon(\sigma)=(-1)^{n-r}$, where $r$ is the number of orbits of $\sigma$.
     \end{definition}
     \begin{theorem}
-        Let $\sigma\in S_n$ be a permutation and $\tau\in S_n$ be a transposition. Then $\varepsilon(\sigma\tau)=\varepsilon(\sigma)\varepsilon(\tau)=-\varepsilon(\sigma)$.
+        Let $\sigma\in S_n$ be a permutation and $\tau\in S_n$ be a transposition. Then, $\varepsilon(\sigma\tau)=\varepsilon(\sigma)\varepsilon(\tau)=-\varepsilon(\sigma)$.
     \end{theorem}
     \begin{corollary}
-        Let $\sigma\in S_n$ be such that $\sigma=\tau_1\cdots\tau_\ell$, where $\tau_i\in S_n$ are transpositions for $i=1,\ldots,\ell$. Then $\varepsilon(\sigma)=(-1)^\ell$.
+        Let $\sigma\in S_n$ be such that $\sigma=\tau_1\cdots\tau_\ell$, where $\tau_i\in S_n$ are transpositions for $i=1,\ldots,\ell$. Then, $\varepsilon(\sigma)=(-1)^\ell$.
     \end{corollary}
     \begin{corollary}
         The parity of the number of transpositions in which $\sigma\in S_n$ can be written is invariant.
     \end{corollary}
+    \begin{corollary}
+        The function
+        \begin{align*}
+            \varepsilon:S_n&\longrightarrow\{+1,-1\}\\
+            \sigma&\longmapsto\varepsilon(\sigma)
+        \end{align*}
+        is a group morphism\footnote{See definition \ref{AS-groupmorphism}.}.
+    \end{corollary}
     \subsection{Equivalence relations and order relations}
+    \subsubsection*{Equivalence relations}
     \begin{definition}
         Let $A$ be a set and $\sim$ be a binary relation on $A$. We say that $\sim$ is an \textit{equivalence relation} if and only if the following properties are satisfied:
         \begin{enumerate}
@@ -258,7 +304,7 @@
         \end{enumerate}
     \end{definition}
     \begin{definition}
-        Let $\sim$ be an equivalence relation on a set $A$ and $a\in A$. The \textit{equivalence class of $a$} under $\sim$ is the subset of $A$: $[a]=\bar{a}=\{b\in A: a\sim b\}$.
+        Let $\sim$ be an equivalence relation on a set $A$ and $a\in A$. The \textit{equivalence class of $a$} under $\sim$ is the subset of $A$: $$[a]=\bar{a}=\{b\in A: a\sim b\}.$$
     \end{definition}
     \begin{theorem}
         Let $\sim$ be an equivalence relation on a set $A$. The equivalence classes $\sim$ form a partition of $A$. That is, if $\{\omega_i\}$ are the equivalence classes, then:
@@ -271,6 +317,7 @@
     \begin{definition}
         Let $\sim$ be an equivalence relation on a set $A$. We define the quotient set, $\quot{A}{\!\sim}$, as the set of all equivalence classes of $\sim$.
     \end{definition}
+    \subsubsection*{Order relations}
     \begin{definition}
         Let $A$ be a set and $\leq$ be a binary relation on $A$. We say $\leq$ is a \textit{partial order relation} if and only if the following properties are satisfied:
         \begin{enumerate}
@@ -298,233 +345,288 @@
     \begin{theorem}
         All sets can be well-ordered.
     \end{theorem}
-    \subsection{Cardinalitat and combinatòria}
+    \subsection{Cardinality and combinatorics}
     \begin{definition}
-    Let $A$, $B$ be two sets.. We say that $A$ and $B$ tenen the mateix cardinal if and only if existeix una bijecció of $A\rightarrow B$.
+        Let $A$, $B$ be two sets. We say that $A$ and $B$ have the same cardinal if and only if there exists a bijection $A\rightarrow B$.
     \end{definition}
     \begin{definition}
-    Let $A$, $B$ be two sets.. We say that $|A|\leq|B|$ if and only if existeix be a function injectiva $A\rightarrow B$.
+        Let $A$, $B$ be two sets. We say that $|A|\leq|B|$ if and only if there exists an injection function $A\hookrightarrow B$.
     \end{definition}
-    \begin{theorem}[Teorema of Cantor-Bernstein]
-    Let $A$, $B$ be two sets.. If existeix una injecció $A\rightarrow B$ and una injecció $B\rightarrow A$, then existeix una bijecció $A\rightarrow B$. La comparació of cardinals is una relació d'ordre.
+    \begin{theorem}[Cantor-Bernstein theorem]
+        Let $A$, $B$ be two sets. If there is an injection $A\hookrightarrow B$ and an injection $B\hookrightarrow A$, then there is a bijection $A\rightarrow B$. Comparative of cardinals is an order relation.
     \end{theorem}
     \begin{prop}
-    Càlcul of cardinals:\newline Let $A,B\subseteq A$ two subsets finits.
-    \begin{enumerate}
-        \item Principi d'inclusió$-$exclusió: $|A\cup B|=|A|+|B|-|A\cap B|$
-        \item Producte cartesià: $|A\times B|=|A||B|$
-        \item $|A^c|+|A|=|A|$
-        \item $|\mathcal{P}(A)|=2^{|A|}$
-    \end{enumerate}
+        Let $A$, $B$ be two subsets of a set $U$. Then,
+        \begin{enumerate}
+            \item Inclusion–exclusion principle: $$|A\cup B|=|A|+|B|-|A\cap B|$$
+            \item $|A\times B|=|A||B|$
+            \item $|A^c|+|A|=|U|$
+            \item $|\mathcal{P}(A)|=2^{|A|}$
+        \end{enumerate}
     \end{prop}
-    \begin{theorem}[Teorema of Cantor]
-    Let $A$ un set, then $|\mathcal{P}(A)|>|A|$.
-    \end{theorem}
-    \begin{prop}
-    Let $A$, $B$ be two sets. finits. Al set of les aplicacions $A\rightarrow B$ té cardinal $|B|^{|A|}$.
-    \end{prop}
-    \begin{definition}
-    Let $A$ un set and $A\in \mathcal{P}(A)$. Definim la funció característica of $A$ com: 
-    \begin{align*}
-        \chi_{\!_A}:A&\rightarrow\{0,1\}\\
-        r&\mapsto \left\{
-        \begin{array}{rcl}
-        1 & \text{si} & r\in A \\
-        0 & \text{si} & r\notin A
-        \end{array}\right.
-    \end{align*}
-    \end{definition}
-    \begin{prop}
-    Propietats del coeficient binomial:
-    \begin{enumerate}
-        \item $\binom{n}{k}=\frac{n!}{(n-k)!k!}$
-        \item $\binom{n}{k}=\binom{n-1}{k}+\binom{n-1}{k-1}$
-        \item $\sum_{k=0}^n\binom{n}{k}=2^n$
-        \item $k\binom{n}{k}=n\binom{n-1}{k-1}$
-    \end{enumerate}
-    \end{prop}
-    \begin{prop}
-    Let $f:A\rightarrow B$ be a function entre sets del mateix cardinal finit. Les següents assercions are equivalents:
-    \begin{enumerate}
-        \item $f$ is injectiva.
-        \item $f$ is surjective.
-        \item $f$ is bijectiva.
-    \end{enumerate}
-    \end{prop}
-    \begin{corollary}
-    Let $f:A\rightarrow B$ be a function entre sets finits. Aleshores:
-    \begin{enumerate}
-        \item $f$ is injectiva $\implies|A|\leq|B|$.
-        \item $f$ is surjective $\implies|A|\geq|B|$.
-    \end{enumerate}
-    \end{corollary}
-    \begin{theorem}[Principi del colomar]
-    Let $A$, $B$ be two sets. amb $n$ and $k$ elements, res\-pec\-ti\-va\-ment, and $f:A\rightarrow B$ be a function. If $n>k$, then existeixen elements of $A$ amb $f(a)=f(b)$ and $a\ne b$.
-    \end{theorem}
-    \begin{prop}[Variacions sense repetició]
-    Al nombre of variacions sense repetició of sets amb $m$ elements agafats amb tuples of $n$ elements sense repetir-los is $\frac{n!}{(n-k)!}$.
-    \end{prop}
-    \begin{prop}[Variacions amb repetició]
-    Al nombre of variacions amb repetició of sets amb $n$ elements agafats amb tuples of $k$, els quals poden ser repetits, is $n^k$.
-    \end{prop}
-    \begin{prop}[Combinacions sense repetició]
-    Al coeficient binomial $\binom{n}{k}$ is the nombre of subsets of $k$ elements entre un set amb $n$ elements.
-    \end{prop}
-    \begin{prop}[Combinacions amb repetició]
-    Al coeficient binomial $\binom{n+k-1}{k}$ is the nombre of combinacions amb repetició of $k$ elements escollits entre un set amb $n$ elements.
-    \end{prop}
-    \subsection{Nombres enters and congruències}
-    \begin{definition}
-    Let $m,n\in\mathbb{Z}$. We say that $m$ is múltiple of $n$ if existeix $k\in\mathbb{Z}$ such that $m=kn$.
-    \end{definition}
-    \begin{theorem}
-    Let $D,d\in\mathbb{Z}$, $d\ne 0$. Then existeixen $q,r\in\mathbb{Z}$ únics tals that $D=qd+r$ and $0\leq r\leq|d|$.
-    \end{theorem}
-    \begin{definition}
-    An un anell $(A,+,\cdot)$, un subset $I\subseteq A$ is un ideal si, and nomis si:
-    \begin{enumerate}
-        \item $\forall a,b\in I$, $a+b\in I$.
-        \item $\forall a\in I$ and $\forall n\in A$, $na\in I$.
-    \end{enumerate}
-    \end{definition}
-    \begin{lemma}
-    $\forall n\in\mathbb{Z}$, $I=n\mathbb{Z}=\{na: a\in\mathbb{Z}\}$ is un ideal of $\mathbb{Z}$. We say that $n$ is un generador of $I$.
-    \end{lemma}
-    \begin{lemma}
-    Let $I,J$ two ideals of $A$. Then the set $I\cap J$ is un ideal.
-    \end{lemma}
-    \begin{lemma}
-    Let $I,J$ two ideals. L'ideal generat per $I$ and $J$ is l'ideal $I+J=\{a+b: a\in I,b\in J\}$. A mis, aquest ideal is the mis petit that conté $I$ and $J$.
-    \end{lemma}
-    \begin{prop}
-    Let $a,b\in \mathbb{Z}$. $a\mathbb{Z}\subseteq b\mathbb{Z}\iff b: a$.
-    \end{prop}
-    \begin{corollary}
-    Let $a,b\in \mathbb{Z}$. $a\mathbb{Z}=b\mathbb{Z}\iff a=\pm b$.
-    \end{corollary}
-    \begin{prop}
-    Let $A$ un anell and Let $I=a\mathbb{Z},J=b\mathbb{Z}$ two ideals. Aleshores $\exists!\,m\in\mathbb{N}^*$ such that $a\mathbb{Z}\cap b\mathbb{Z}=m\mathbb{Z}$. Aquest enter $m$ is the mínim comú múltiple of $a$ and $b$.
-    \end{prop}
-    \begin{prop}
-    Let $A$ un anell and Let $I=a\mathbb{Z}$ $J=b\mathbb{Z}$ two ideals. Aleshores $\exists!\,d\in\mathbb{N}^*$ such that $a\mathbb{Z}+b\mathbb{Z}=d\mathbb{Z}$. Aquest enter $d$ is the màxim comú divisor of $a$ and $b$.
-    \end{prop}
-    \begin{definition}
-    Let $a,b\in\mathbb{Z}$. We say that $a$ and $b$ are coprimers if and only if $\text{mcd}(a,b)=1$.
-    \end{definition}
-    \begin{definition}
-    We say that $a$ is primer ($a\in\mathbb{P}$) if and only if $a\mathbb{Z}$ is maximal per a la inclusió d'ideals propis.
-    \end{definition}
-    \begin{theorem}[Teorema of Bézout]
-    Let $a,b\in\mathbb{Z}$, then existeixen $u,v\in\mathbb{Z}$ tals that $au+bv=\text{mcd}(a,b)$. A mis, $\text{mcd}(a,b)=1\iff\exists u,v\in\mathbb{Z}$ tals that $au+bv=1$.
-    \end{theorem}
-    \begin{theorem}[Teorema of Gau\ss]
-    Let $a,b\in\mathbb{Z}$. If $a: bc$ and $\text{mcd}(a,b)=1$ then $a: c$.
+    \begin{theorem}[Cantor's theorem]
+        Let $A$ un set, then $|\mathcal{P}(A)|>|A|$.
     \end{theorem}
     \begin{corollary}
-    Let $a_1,a_2\in\mathbb{Z}$ coprimers. If $a_1: b$ and $a_2: b$, then $a_1a_2: b$.
+        There is no set containing all sets.
     \end{corollary}
-    \begin{theorem}[Teorema of La Vallée Pousin-Hadamard]
-    Let $x\in\mathbb{R}$, aleshores $\pi(x)\approx\frac{x}{\log(x)}$ on $\pi(x)$ is the nombre of nombres primers $\leq x$.
-    \end{theorem}
-    \begin{theorem}
-    Let $a,b\in\mathbb{Z}$. Then $$\text{mcd}(a,b)\text{mcm}(a,b)=|ab|.$$
-    \end{theorem}
-    \begin{lemma}
-    Let $p\in\mathbb{P}$ and $a\in\mathbb{Z}$. Then $p: a$ o $\text{mcd}(a,p)=1$.
-    \end{lemma}
-    \begin{theorem}[Teorema fonamental of l'a\-rit\-mè\-ti\-ca]
-    Let $n\in\mathbb{N}^*$, then $n$ s'escriu com a producte of nombres primers únics, llevat of l'ordre.
-    \end{theorem}
-    \begin{theorem}[Teorema d'Auclides]
-    Let $\mathbb{P}$ the set dels nombres primers positius. $\mathbb{P}$ is infinit. 
-    \end{theorem}
-    \begin{theorem}
-    L'equació $ax+by=c$ admet almenys una solució if and only if $\text{mcd}(a,b): c$.
-    \end{theorem}
-    \begin{definition}
-    $x\equiv y\mod n\iff x-y\in n\mathbb{Z}$.
-    \end{definition}
-    \begin{lemma}
-    $\mathbb{Z}/n\mathbb{Z}$ té $n$ elements.
-    \end{lemma}
-    \begin{theorem}
-    Com that $(\mathbb{Z},+,\cdot)$ is un anell commutatiu, $(\mathbb{Z}/n\mathbb{Z},+,\cdot)$ is un anell commutatiu i, per construcció, la projecció canònica 
-    \begin{align*}
-        f:\mathbb{Z}&\rightarrow\mathbb{Z}/n\mathbb{Z}\\
-        a&\mapsto[a]
-    \end{align*}is un morfisme d'anells.
-    \end{theorem}
-    \begin{lemma}
-    Let $n\in\mathbb{Z}$. Then $[a]\in\mathbb{Z}/n\mathbb{Z}$ is invertible per a la multiplicació if and only if $\text{mcd}(a,n)=1$.
-    \end{lemma}
     \begin{corollary}
-    Un anell $(A,+,\cdot)$ en the qual tot element no nul is invertible is un cos. $(\mathbb{Z}/n\mathbb{Z},+,\cdot)$ is un cos if and only if $n\in\mathbb{P}$.
+        There are infinitely many sets with infinite cardinal: $$|\NN|<|\mathcal{P}(\NN)|<|\mathcal{P}(\mathcal{P}(\NN))|<\cdots$$ We denote this cardinals by: $$\aleph_0=|\NN|\quad \aleph_1=|\mathcal{P}(\NN)|\quad \aleph_2=|\mathcal{P}(\mathcal{P}(\NN))|\quad\cdots$$
     \end{corollary}
-    \begin{theorem}[Teorema xinès del residu]
-    Let $m,n$ coprimers, aleshores l'aplicació:
-    \begin{align*}
-        \psi:\mathbb{Z}/mn\mathbb{Z}&\rightarrow\mathbb{Z}/m\mathbb{Z}\times\mathbb{Z}/n\mathbb{Z}\\
-        \overline{a}^{\scriptscriptstyle mn}&\mapsto(\overline{a}^{\scriptscriptstyle m},\overline{a}^{\scriptscriptstyle n})
-    \end{align*}
-    is un isomorfisme d'anells.
-    \end{theorem}
-    \begin{definition}[Bunció indicatriu d'Auler]
-    Let $n\in\mathbb{N}^*$. $\varphi(n)=|\{\alpha\in\mathbb{Z}/n\mathbb{Z}:\alpha \text{ is invertible}\}|=|\{0\leq r\leq n: \text{mcd}(r,n)=1\}|$.
-    \end{definition}
-    \begin{theorem}[Teorema d'Auler]
-    Let $a\in\mathbb{Z}$ and $n\in\mathbb{N}$ such that $\text{mcd}(a,n)=1$, then $a^{\varphi(n)}\equiv 1\mod n$. An particular, $a^{-1}\equiv a^{\varphi(n)-1}\mod n$.
-    \end{theorem}
-    \begin{theorem}[Petit teorema of Bermat]
-    If $p$ is primer, $\varphi(p)=p-1$. Aleshores $a^p\equiv a\mod p$ i, en particular, if $\text{mcd}(a,p)=1$, $a^{p-1}\equiv 1\mod p$.
-    \end{theorem}
-    \subsection{Polinomis}
     \begin{prop}
-    Let $A$ un cos. If $P,Q\in A[x]$ and $P,Q\ne0$, then $PQ\ne 0$.
+        Let $A$, $B$ be two finite sets. The set of functions $f:A\rightarrow B$ has cardinal $|B|^{|A|}$.
     \end{prop}
-    \begin{theorem}[Teorema of divisió euclidiana]
-    Let $A$ un cos. Let $P,S\in A[x]$ amb $S\ne 0$. Then $\exists!\, Q,R\in A[x]$ tals that $P=QS+R$ and $0\leq\text{deg}(R)<\text{deg}(S)$.
+    \begin{definition}
+        Let $U$ be a set and $A\in\mathcal{P}(U)$. We define the \textit{characteristic function of $A$} as: 
+        \begin{align*}
+            \chi_A:U&\longrightarrow\{0,1\}\\
+            r&\longmapsto \left\{
+            \begin{array}{rcl}
+            1 & \text{if} & r\in A \\
+            0 & \text{if} & r\notin A
+            \end{array}\right.
+        \end{align*}
+    \end{definition}
+    \begin{prop}
+        Let $U$ be a set and $A,B\in\mathcal{P}(U)$. Then:
+        \begin{enumerate}
+            \item $\chi_U=1$
+            \item $\chi_{A^c}=1-\chi_A$
+            \item $\chi_{A\cap B}=\chi_A\chi_B$
+            \item $\chi_{A\cup B}=\chi_A+\chi_B-\chi_A\chi_B$
+        \end{enumerate}
+    \end{prop}
+    \begin{prop}[Binomial coefficient formulas]\hfill
+        \begin{enumerate}
+            \item $\binom{n}{k}=\frac{n!}{(n-k)!k!}$
+            \item $\binom{n}{k}=\binom{n-1}{k}+\binom{n-1}{k-1}$
+            \item $\sum_{k=0}^n\binom{n}{k}=2^n$
+            \item $k\binom{n}{k}=n\binom{n-1}{k-1}$
+            \item $(a+b)^n=\sum_{k=0}^n\binom{n}{k}a^kb^{n-k}$
+        \end{enumerate}
+    \end{prop}
+    \begin{prop}
+        Let $f:A\rightarrow B$ be a function between two sets of the same finite cardinal. The following statements are equivalent:
+        \begin{enumerate}
+            \item $f$ is injective.
+            \item $f$ is surjective.
+            \item $f$ is bijective.
+        \end{enumerate}
+    \end{prop}
+    \begin{corollary}
+        Let $f:A\rightarrow B$ be a function between finite sets. Then:
+        \begin{enumerate}
+            \item If $f$ is injective, then $|A|\leq|B|$.
+            \item If $f$ is surjective, then $|A|\geq|B|$.
+        \end{enumerate}
+    \end{corollary}
+    \begin{theorem}[Pigeonhole principle]
+        Let $A$, $B$ be two sets such that $|A|=n$ and $|B|=m$ and $f:A\rightarrow B$ be a function. If $n>m$, then $\exists a,b\in A$ such that $a\ne b$ $f(a)=f(b)$.
     \end{theorem}
+    \begin{prop}[Combinations without repetition]
+        A combination without repetition is a subset with $m$ elements of a set with $n$ elements. The number of such combinations is $\binom{n}{m}$.
+    \end{prop}
+    \begin{prop}[Combinations with repetition]
+        A combination with repetition is an unordered list with $m$ elements (allowing repetitions) of a set with $n$ elements. The number of such combinations is  $\binom{n+m-1}{m}$.
+    \end{prop}
+    \begin{prop}[Variations without repetition]
+        A variation without repetition is an ordered list of length $m$ elements (without repeating them) taken from a set with $n$ elements. The number of such variations is $\frac{n!}{(n-m)!}$.
+    \end{prop}
+    \begin{prop}[Variacions with repetition]
+        A variation with repetition is an ordered list of length $m$ elements (allowing repetitions) taken from a set with $n$ elements. The number of such variations is $n^m$.
+    \end{prop}
+    \subsection{Arithmetic}
+    \subsubsection*{Integer numbers}
+    For some basic definitions in group and ring theory you might need to refer to sections \ref{AS-G} and \ref{AS-R}.
+    \begin{definition}
+        Let $a,b\in\mathbb{Z}$. We say that \textit{$a$ is a multiple of $b$} if there exists $c\in\mathbb{Z}$ such that $a=cb$.
+    \end{definition}
     \begin{theorem}
-    Let $A$ un cos. Then $A[x]$ is un anell principal, is a dir, if $I\subset A[x]$ is un ideal, then $\exists P\in A[x]$ such that $I=PA[x]$.
+        Let $D,d\in\mathbb{Z}$, $d\ne 0$. Then, there are unique $q,r\in\mathbb{Z}$ such that $D=qd+r$ and $0\leq r\leq|d|$.
     \end{theorem}
+    \begin{prop}
+        Let $a,b\in \mathbb{Z}$. $a\mathbb{Z}\subseteq b\mathbb{Z}\iff b\mid a$.
+    \end{prop}
+    \begin{corollary}
+        Let $a,b\in \mathbb{Z}$. $a\mathbb{Z}=b\mathbb{Z}\iff a=\pm b$.
+    \end{corollary}
+    \begin{prop}
+        Let $a\mathbb{Z}$, $b\mathbb{Z}$ be two ideals of $\ZZ$. Then, $\exists!m\in\mathbb{N}$ such that $a\mathbb{Z}\cap b\mathbb{Z}=m\mathbb{Z}$. This integer $m$ is called the \textit{least common multiple of $a$ and $b$}.
+    \end{prop}
+    \begin{prop}
+        Let $a\mathbb{Z}$, $b\mathbb{Z}$ be two ideals of $\ZZ$. Then, $\exists!d\in\mathbb{N}^*$ such that $a\mathbb{Z}+b\mathbb{Z}=d\mathbb{Z}$. This integer $d$ is called the \textit{greatest common divisor of $a$ and $b$}.
+    \end{prop}
+    \begin{prop}
+        Let $a,b,m,d\in\ZZ$.
+        \begin{enumerate}
+            \item If $a\mid m$ and $b\mid m$, then $\lcm(a,b)\mid m$.
+            \item If $d\mid a$ and $d\mid b$, then $d\mid\gcd(a,b)$.
+        \end{enumerate}
+    \end{prop}
     \begin{definition}
-    Let $P,Q\in A[x]$. Aleshores $\text{mcd}(P,Q)$ is un generador of $PA[x]+QA[x]$ and $\text{mcm}(P,Q)$ is un generador of $PA[x]\cap QA[x]$.
+        Let $a,b\in\mathbb{Z}$. We say that $a$ and $b$ are \textit{coprime} or \textit{relatively prime} if and only if $\gcd(a,b)=1$.
     \end{definition}
     \begin{definition}
-    We say that un polinomi $P=a_0+a_1x+\cdots+a_nx^n$ is mònic if $a_n=1$.
+        We say that $p\in\ZZ$ is \textit{prime} if and only if $p\mathbb{Z}$ is a maximal ideal. The set of prime numbers is denoted by $\mathbb{P}$.
     \end{definition}
-    \begin{theorem}[Teorema of Bézout]
-    Let $P,Q\in K[x]$, then $\exists U,V\in K[x]$ tals that $PU+QV=\text{mcd}(P,Q)$.
+    \begin{prop}
+        Let $a\in\ZZ$. Then, $a\in\mathbb{P}$ if and only if $a$ has exactly 4 divisors: $a$, $-a$, 1 and $-1$.
+    \end{prop}
+    \begin{lemma}
+        Let $a,b,k\in\mathbb{Z}$ such that $a\geq b>0$. Then, common divisors of $a$ and $b$ are the same as common divisors of $a+kb$ and $b$.
+    \end{lemma}
+    \begin{theorem}[Bézout's theorem]
+        Let $a,b\in\mathbb{Z}$, then there exists $u,v\in\mathbb{Z}$ such that $au+bv=\gcd(a,b)$. Moreover, $\gcd(a,b)=1\iff\exists u,v\in\mathbb{Z}$ such that $au+bv=1$.
     \end{theorem}
-    \begin{definition}
-    two polinomis $P,Q$ are coprimers if and only if $\text{mcd}(P,Q)=1$.
-    \end{definition}
-    \begin{theorem}[Teorema of Gau\ss]
-    Let $P,A,B\in K[x]$. If $P: AB$ and $\text{mcd}(A,P)=1$, then $P: B$.
-    \end{theorem}
-    \begin{definition}
-    Un polinomi $P\in K[x]$ is primer if and only if the seu ideal $PK[x]$ is maximal per a la inclusió d'ideals of $K[x]$, is a dir, $\forall I$ ideal if $PK[x] \varsubsetneq I$, then $K[x]=I$.
-    \end{definition}
-    \begin{theorem}[Teorema of Ruffini]
-    Let $K$ un cos and Let $P\in K[x]$ and $\lambda\in K$. Then $x-\lambda: P\iff P(\lambda)=0$.
-    \end{theorem}
-    \begin{definition}
-    Let $P\in K[x]$, then $P$ is irreductible if and only if $PK[x]$ is maximal.
-    \end{definition}
-    \begin{theorem}
-    Let $P\in K[x]$, then $P$ té com a màxim $\text{deg}(P)$ arrels.
-    \end{theorem}
-    \begin{theorem}[Teorema d'Alembert]
-    Tot polinomi no constant $P\in\mathbb{C}[x]$ té exactament $\text{deg}(P)$ arrels.
+    \begin{theorem}[Gau\ss' theorem]
+        Let $a,b\in\mathbb{Z}$. If $a\mid bc$ and $\gcd(a,b)=1$ then $a\mid c$.
     \end{theorem}
     \begin{corollary}
-    Let $P\in\mathbb{C}[x]$ and $\text{deg}(P)>1$. Then existeixen $\alpha,r_1,\ldots,r_n\in\mathbb{C}$ únics, llevat of l'ordre, such that $P=\alpha(x-r_1)\cdots(x-r_n)$ on $r_i$ are les arrels of $P$ and $\alpha$ the coeficient dominant.
+        Let $a,b,c\in\mathbb{Z}$ be integers such that $a$ and $b$ are relatively prime. If $a\mid c$ and $b\mid c$, then $ab\mid c$.
+    \end{corollary}
+    \begin{theorem}[Prime number theorem]
+        Let $x\in\mathbb{R}$. If $\pi(x)$ is the number of prime number less than or equal to $x$, then $\pi(x)\sim\frac{x}{\log(x)}$.
+    \end{theorem}
+    \begin{theorem}
+        Let $a,b\in\mathbb{Z}$. Then, $$\gcd(a,b)\lcm(a,b)=|ab|.$$
+    \end{theorem}
+    \begin{lemma}
+        Let $p\in\mathbb{P}$ and $a\in\mathbb{Z}$. Then, $p\mid a$ or $\gcd(a,p)=1$.
+    \end{lemma}
+    \begin{corollary}
+        Let $a,b\in\ZZ$ and $p\in\mathbb{P}$. If $p\mid ab$, then $p\mid a$ or $p\mid b$.
     \end{corollary}
     \begin{corollary}
-    Les arrels a $\mathbb{C}\setminus\mathbb{R}$ es presenten en parells $(r_s,\overline{r_s})$.
+        Let $p,q\in\mathbb{P}$. If $p\mid q$, then $p=\pm q$.
+    \end{corollary}
+    \begin{theorem}[Fundamental theorem of arithmetic]
+        Let $n\in\mathbb{N}$ such that $n>1$. Then, $n$ can be represented uniquely (except for the order) as the product of prime numbers.
+    \end{theorem}
+    \begin{theorem}[Euclid's theorem]
+        The set $\mathbb{P}$ is infinite. 
+    \end{theorem}
+    \begin{theorem}
+        Let $a,b,c,x,y\in\ZZ$. The equation $ax+by=c$ has at least a solution if and only if $\gcd(a,b)\mid c$. In this case, if $d=\gcd(a,b)$, $a=a'd$ and $b=b'd$, the set $\mathcal{S}$ of solutions of the equation $ax+by=c$ is $$S=\{(x_0,y_0)+\lambda(-b',a'):\lambda\in\ZZ\},$$ where $(x_0,y_0)$ is a particular solution of the equation. 
+    \end{theorem}
+    \subsubsection*{Modular arithmetic}
+    \begin{definition}
+        Let $n,x,y\in\ZZ$. We say $x\sim y\iff x-y\in n\mathbb{Z}$. A commonly used notation for this is $x\equiv y\mod n$. The set of equivalence classes under $\sim$ is denoted by $\quot{\mathbb{Z}}{n\mathbb{Z}}$ and its elements are denoted by $\bar{x}$.
+    \end{definition}
+    \begin{lemma}
+        $\quot{\ZZ}{n\ZZ}$ té $n$ elements.
+    \end{lemma}
+    \begin{prop}
+        Addition and multiplication are well-defined in $\quot{\ZZ}{n\ZZ}$ if we do it in the following way:
+        \begin{align*}
+            +:\quot{\ZZ}{n\ZZ}\times\quot{\ZZ}{n\ZZ}&\longrightarrow\quot{\ZZ}{n\ZZ}&\cdot:\quot{\ZZ}{n\ZZ}\times\quot{\ZZ}{n\ZZ}&\longrightarrow\quot{\ZZ}{n\ZZ}\\
+            (\bar{a},\bar{b})&\longmapsto\overline{a+b}&(\bar{a},\bar{b})&\longmapsto\overline{a\cdot b}
+        \end{align*}
+    \end{prop}
+    \begin{theorem}
+        Since $(\mathbb{Z},+,\cdot)$ is a ring, $(\quot{\ZZ}{n\ZZ},+,\cdot)$ is a ring and the projection 
+        \begin{align*}
+            f:\mathbb{Z}&\longrightarrow\quot{\ZZ}{n\ZZ}\\
+            a&\longmapsto\bar{a}
+        \end{align*}
+        is a ring morphism.
+    \end{theorem}
+    \begin{lemma}
+        Let $n\in\mathbb{Z}$. Then, $\bar{a}\in\quot{\ZZ}{n\ZZ}$ is invertible per a la multiplicació if and only if $\gcd(a,n)=1$.
+    \end{lemma}
+    \begin{corollary}
+        $(\quot{\ZZ}{n\ZZ},+,\cdot)$ is a field if and only if $n\in\mathbb{P}$.
+    \end{corollary}
+    \begin{theorem}[Chinese remainder theorem]
+        Let $m,n\in\ZZ$ be relatively prime. Then, the function
+        \begin{align*}
+            \psi:\quot{\ZZ}{nm\ZZ}&\longrightarrow\quot{\ZZ}{m\ZZ}\times\quot{\ZZ}{n\ZZ}\\
+            \overline{a}^{\scriptscriptstyle mn}&\longmapsto(\overline{a}^{\scriptscriptstyle m},\overline{a}^{\scriptscriptstyle n})
+        \end{align*}
+        is ring isomorphism.
+    \end{theorem}
+    \begin{definition}[Euler's totient function]
+        Let $n\in\mathbb{N}$. We define the function $\varphi:\NN\rightarrow\NN$ as: 
+        \begin{multline*}
+            \varphi(n)=|\{\textstyle\alpha\in\quot{\ZZ}{n\ZZ}:\alpha \text{ is invertible}\}|=\\=|\{0<r\leq n: \gcd(r,n)=1\}|.
+        \end{multline*}
+    \end{definition}
+    \begin{lemma}
+        Let $m,n\in\ZZ$ be relatively prime. Then, $\varphi(m\cdot n)=\varphi(m)\cdot\varphi(n).$
+    \end{lemma}
+    \begin{theorem}[Euler's theorem]
+        Let $a\in\mathbb{Z}$ and $n\in\mathbb{N}$ such that $\gcd(a,n)=1$, then $$a^{\varphi(n)}\equiv 1\mod n.$$ In particular, $a^{-1}\equiv a^{\varphi(n)-1}\mod n$.
+    \end{theorem}
+    \begin{theorem}[Fermat's little theorem]
+        Let $p\in\mathbb{P}$. Then, $\varphi(p)=p-1$ and $$a^p\equiv a\mod p.$$ In particular, if $\gcd(a,p)=1$, $a^{p-1}\equiv 1\mod p$.
+    \end{theorem}
+    \subsection{Polynomials}
+    \begin{definition}
+        Let $R$ be a ring. A \textit{polynomial $p$ with coefficients in $R$} is an expression of the form $$p=p(x)=a_0+a_1x+\cdots+a_nx^n,$$ where $x$ is a \textit{variable} or an \textit{indeterminate} and $a_i\in R$ are the \textit{coefficients}. The term $a_0$ is called \textit{constant term}, and the term $a_n$, \textit{leading coefficient}. Fianlly, the set of all polynomials in the variable $x$ and coefficients in $R$ is denoted by $R[x]$.
+    \end{definition}
+    \begin{definition}
+        Let $p(x)=\sum_{i=0}^na_ix^i\in R[x]$ be a polynomial such that $a_n\ne 0$. Then, we define the \textit{degree of $p(x)$} as $\deg p(x)=n$\footnote{To see properties relating degrees of polynomials see proposition \ref{AG-deg}.}.
+    \end{definition}
+    \begin{definition}
+        Let $p(x),q(x)\in R[x]$ such that $p(x)=\sum_{i=0}^na_ix^i\in R[x]$ and $q(x)=\sum_{i=0}^nn_ix^i\in R[x]$. We define the \textit{sum of $p(x)$ and $q(x)$} as: $$p(x)+q(x)=\sum_{i=0}^n(a_i+b_i)x^i.$$
+        We define the \textit{product of $p(x)$ and $q(x)$} as: $$p(x)\cdot q(x)=\sum_{i=0}^nc_ix^i,\quad c_i=\sum_{j=0}^ia_ib_{j-i}.$$
+    \end{definition}
+    \begin{prop}
+        Let $K$ be a field. If $p(x),q(x)\in K[x]$ and $p(x),q(x)\ne 0$, then $p(x)\cdot q(x)\ne 0$.
+    \end{prop}
+    \begin{theorem}[Euclidian division]
+        Let $K$ be a field. Let $p(x),s(x)\in K[x]$ with $s(x)\ne 0$. Then, $\exists! q(x),r(x)\in K[x]$ such that $p(x)=q(x)\cdot s(x)+r(x)$ and $0\leq\deg(r(x))<\deg(s(x))$.
+    \end{theorem}
+    \begin{theorem}
+        Let $K$ be a field. Then, $K[x]$ is a principal ideal, that is, if $I\subset K[x]$ is an ideal, then $\exists p(x)\in K[x]$ such that $I=p(x)\cdot K[x]$.
+    \end{theorem}
+    \begin{definition}
+        Let $K$ be a field. Let $p(x),q(x)\in K[x]$. Then, $\gcd(p(x),q(x))$ is a generator of the ideal $p(x)\cdot K[x]+q(x)\cdot K[x]$ and $\lcm(p(x),q(x))$ is a generator of the ideal $p(x)\cdot K[x]\cap q(x)\cdot K[x]$.
+    \end{definition}
+    \begin{definition}
+        We say that a polynomial $p(x)=\sum_{i=0}^na_ix^i$ is \textit{monic} if $a_n=1$.
+    \end{definition}
+    \begin{theorem}[Bézout's theorem]
+        Let $K$ be a field and $p(x),q(x)\in K[x]$. Then, $\exists u(x), v(x)\in K[x]$ such that $p(x)\cdot u(x)+q(x)\cdot v(x)=\gcd(p(x),q(x))$.
+    \end{theorem}
+    \begin{definition}
+        Two polynomials $p(x)$, $q(x)$ are \textit{coprime} or \textit{relatively prime} if and only if $\gcd(p(x),q(x))=1$.
+    \end{definition}
+    \begin{theorem}[Gau\ss' theorem]
+        Let $K$ be a field and $p(x),a(x),b(x)\in K[x]$. If $p(x)\mid a(x)\cdot b(x)$ and $\gcd(a(x),p(x))=1$, then $p(x)\mid b(x)$.
+    \end{theorem}
+    \begin{definition}
+        Let $K$ be a field. A polynomial $p(x)\in K[x]$ is \textit{prime} if and only if its ideal $p(x)\cdot K[x]$ is maximal, that is, for all ideals $I\subseteq K[x]$ if $p(x)\cdot K[x] \subset I$, then $I=K[x]$.
+    \end{definition}
+    \begin{definition}
+        Let $K$ be a field and $a\in K$. The \textit{evaluation in $a$} is a function $\phi_a$ defined as:
+        \begin{align*}
+            \phi_a:K[x]&\longrightarrow K\\
+            p(x)&\longmapsto p(a)
+        \end{align*}
+    \end{definition}
+    \begin{definition}
+        Let $K$ be a field and $a\in K$. $a$ is a \textit{root of $p(x)$} if and only if $\phi_a(p(x))=p(a)=0$.
+    \end{definition}
+    \begin{theorem}[Ruffini's rule]
+        Let $K$ be a field, $p(x)\in K[x]$ and $a\in K$. Then, $x-a\mid p(x)\iff p(a)=0$.
+    \end{theorem}
+    \begin{definition}
+        Let $K$ be a field and $p(x)\in K[x]$. Then, $p(x)$ is \textit{irreducible} if and only if $p(x)\cdot K[x]$ is maximal.
+    \end{definition}
+    \begin{theorem}
+        Let $K$ be a field and $p(x)\in K[x]$. Then, $p(x)$ has at most $\deg(p(x))$ arrels.
+    \end{theorem}
+    \begin{theorem}[D'Alembert theorem]
+        All non-constant polynomials $p(x)\in\mathbb{C}[x]$ has exactly $\deg(p(x))$ roots.
+    \end{theorem}
+    \begin{corollary}
+        Let $p(x)\in\mathbb{C}[x]$ be such that $\deg(p(x))>1$. Then, $\exists!\alpha,r_1,\ldots,r_n\in\mathbb{C}$ such that $$p(x)=\alpha(x-r_1)\cdots(x-r_n),$$ where $r_i$ are the roots of $p(x)$ and $\alpha$ is the leading coefficient of $p(x)$.
+    \end{corollary}
+    \begin{corollary}
+        Let $p(x)\in\mathbb{C}[x]$. The roots of $p(x)$ in $\mathbb{C}\setminus\mathbb{R}$ come in pairs $(r,\overline{r})$, where $\overline{r}$ is the romplex conjugate of $r$.
     \end{corollary}
     \begin{theorem}
-    A $\mathbb{R}[x]$ els polinomis irreductibles are of grau 1 (arrels reals) o of grau 2 (arrels complexes no reals).
+        In $\mathbb{R}[x]$ irreducible polynomials are of degree 1 or degree 2.
     \end{theorem}
 \end{multicols}
 \end{document}
