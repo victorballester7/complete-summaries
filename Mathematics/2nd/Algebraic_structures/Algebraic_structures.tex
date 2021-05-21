@@ -536,7 +536,7 @@ Let $n,p\in\NN$ such that $p$ is a prime number.
         I+J:=\{x+y:x\in I,\;y\in J\},\\
         I\cdot J:=\{\sum_{i=1}^nx_iy_i:n\geq 0,\;x_i\in I,\;y_i\in J\},
     \end{gather*}
-    are all ideals. In particular $I\cap J$ is the largest ideal contained in $I$ and $J$ and $I+J$ is the smallest ideal containing $I$ and $J$.
+    are all ideals. In particular $I\cap J$ is the largest ideal contained in $I$ and $J$ and $I+J$ is the smallest ideal containing $I$ and $J$. If $I=(a)$ and $J=(b)$ for some $a,b\in R$, then we define $(a,b)$ as: $$(a,b)=(a)+(b).$$
 \end{prop}
 \begin{definition}
     A ring is \textit{noetherian} if all its ideals are finitely generated.
@@ -656,16 +656,39 @@ Let $n,p\in\NN$ such that $p$ is a prime number.
     Let $R$, $S$ be two rings, $\phi:R\rightarrow S$ be a ring morphism and $s_1,\ldots,s_n\in S$ be not necessarily distinct elements of $S$. Then $\exists!\psi:R[x_1,\ldots,x_n]\rightarrow S$ such that $\psi$ is a ring morphism, $\psi(r)=\phi(r)$ $\forall r\in R$ and $\psi(x_i)=s_i$ for $i=1,\ldots,n$.
 \end{prop}
 \begin{corollary}
-    Let $R$ and $r\in R$. Then, the function 
+    Let $R$ be a ring and $r\in R$. Then, the function 
     \begin{align*}
         \phi_r:R[x]&\longrightarrow R\\
         p(x)&\longmapsto p(r)        
     \end{align*}
-    is a ring morphism. Moreover $\ker\phi_r=(x-r)\cdot R[x]$ and for all $p(x)\in R[x]$, $p(x)=(x-r)\cdot q(x)+p(r)$.
+    is a ring morphism. Moreover $\ker\phi_r=(x-r)\cdot R[x]$ and for all $p(x)\in R[x]$ $\exists q(x)\in R[x]$ such that $p(x)=(x-r)\cdot q(x)+p(r)$.
 \end{corollary}
-
-
-
+\begin{corollary}
+    Let $R$ be a ring and $r_1,\ldots,r_n\in R$. Then, the function 
+    \begin{align*}
+        \phi:R[x_1,\ldots,x_n]&\longrightarrow R\\
+        p(x_1,\ldots,x_n)&\longmapsto p(r_1,\ldots,r_n)        
+    \end{align*}
+    is a ring morphism. Moreover for all $p(x)\in R[x]$ $\exists q_i(x_1,\ldots,x_n)\in R[x]$ for $i=1,\ldots,n$ such that $$p(x)=p(r_1,\ldots,r_n)+\sum_{i=1}^n(x_i-r_i)\cdot q_i(x_1,\ldots,x_n).$$ Therefore, $\ker\phi=(x_1-r_1,\ldots,x_n-r_n)$ and $\quot{R[x_1,\ldots,x_n]}{\ker\phi}\cong R$.
+\end{corollary}
+\begin{corollary}
+    Let $K$ be a field and $r_1,\ldots,r_n\in K$. Then, the ideal $(x_1-r_1,\ldots,x_n-r_n)$ is maximal in $K[x_1,\ldots,x_n]$ and $$\quot{K[x_1,\ldots,x_n]}{(x_1-r_1,\ldots,x_n-r_n)}\cong K.$$
+\end{corollary}
+\begin{theorem}[Fundamental theorem of algebra]
+    Ideals of $\CC[x]$ are of the form $(x-z)$, where $z\in\CC$. That is, irreducible polynomials in $\CC[x]$ have degree 1.
+\end{theorem}
+\begin{theorem}[Hilbert's Nullstellensatz]
+    Maximal ideals of $\CC[x_1,\ldots,x_n]$ are of the form $(x_1-z_1,\ldots,x_n-z_n)$, where $z_1,\ldots,z_n\in\CC$.
+\end{theorem}
+\begin{theorem}[Eisenstein's criterion]
+    Let $a(x)\in\ZZ[x]\setminus\{0\}$ be such that $p(x)=\sum_{i=0}^na_ix^i$ with $\gcd(a_0,\ldots,a_n)=1$. If $\exists p\in\mathbb{P}$ such that:
+    \begin{itemize}
+        \item $p\mid a_i$, $i=0,1,\ldots,n-1$,
+        \item $p\nmid a_n$,
+        \item $p^2\nmid a_0$,
+    \end{itemize}
+    then $a(x)$ is irreducible in $\ZZ[x]$ and $\QQ[x]$.
+\end{theorem}
 
 
 
