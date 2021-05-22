@@ -59,8 +59,34 @@
 \definecolor{color_green3}{RGB}{0,100,0}
 %%%%%%%%%%%%%%%%%%%%%%%%
 
+%%%%%%% Enumeration-commands %%%%%%%
+\renewcommand{\labelenumi}{\arabic{enumi}.}
+\renewcommand{\labelenumii}{\roman{enumii})}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 %%%%%% Title format for subsection %%%%%%
 \titleformat{\subsection}[hang]{\normalfont\large\bfseries}{\thesubsection\hspace{6pt}{\textbf{$|$}}\hspace{-6pt}}{1em}{}
+
+\renewcommand{\thesubsection}{\arabic{chapter}.\arabic{section}.\arabic{subsection}}
+
+\newcommand\ifSubfilesClassLoaded{% coditional statement
+  \expandafter\ifx\csname ver@subfiles.cls\endcsname\relax
+    \expandafter\@secondoftwo
+  \else
+    \expandafter\@firstoftwo
+  \fi
+}
+\ifSubfilesClassLoaded{% show only when the single subfile is compiled
+    \titleformat{\section}
+    {\bfseries\Large} % format
+    {}          % label
+    {0.0cm}     % separation between label and body
+    {}          % code preceding title body
+    [] 
+    \renewcommand{\thesection}{}
+    \renewcommand{\thesubsection}{\arabic{subsection}}%
+}{% show only when the main file is compiled
+}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%% Math-commands %%%%%%%
@@ -102,12 +128,6 @@
   \cleaders\hbox{$\mkern-2mu\smash-\mkern-2mu$}\hfill
   \mkern-7mu\raisebox{-3.66pt}[\p@][\p@]{$\mathord\mathchar"017E$}$}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%% Enumeration-commands %%%%%%%
-\renewcommand{\thesubsection}{\arabic{chapter}.\arabic{section}.\arabic{subsection}}
-\renewcommand{\labelenumi}{\arabic{enumi}.}
-\renewcommand{\labelenumii}{\roman{enumii})}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%% Theorems, definitions,... environments %%%%%
 \newtheoremstyle{math}

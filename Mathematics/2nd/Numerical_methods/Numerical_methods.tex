@@ -449,5 +449,34 @@
 \begin{theorem}
     Let $f:[a,b]\rightarrow\mathbb{R}$ be a function of class $\mathcal{C}^{2n}$ and $\{x_i\}_{i=1}^n$ be the zeros of the orthogonal polynomial $\phi_n\in\mathfrak{P}_n$ with weight $\omega(x)$ on the interval $[a,b]$. Then, $$\int_a^b\omega(x)f(x)\dd x-\sum_{i=1}^n\omega_if(x_i)=\frac{f^{2n}(\xi)}{(2n)!}\langle\phi_n,\phi_n\rangle,$$ where $\xi\in[a,b]$. 
 \end{theorem}
+\subsection{Numerical linear algebra}
+\subsubsection*{Norms}
+\begin{definition}
+    A \textit{matrix norm} on the vector space $\mathcal{M}_n(\RR)$ is a function $\|\cdot\|:\mathcal{M}_n(\RR)\rightarrow\mathbb{R}$ satisfying all properties of a norm\footnote{See definition \ref{FOSV_norm}.} and that: $$\|\boldsymbol{A}\boldsymbol{B}\|\leq\|\boldsymbol{A}\|\|\boldsymbol{B}\|,\quad\forall \boldsymbol{A},\boldsymbol{B}\in\mathcal{M}_n(\RR).$$
+\end{definition}
+\begin{definition}
+    Let $\|\cdot\|_\alpha$ be a vector norm. We say a matrix norm $\|\cdot\|_\beta$ is \textit{compatible with $\|\cdot\|_\alpha$} if $$\|\boldsymbol{A}\textbf{v}\|_\alpha\leq\|\boldsymbol{A}\|_\beta\|\textbf{v}\|_\alpha,\quad\forall\boldsymbol{A}\in\mathcal{M}_n(\RR)\text{ and }\forall\textbf{v}\in\RR^n.$$
+\end{definition}
+\begin{definition}
+    Let $\boldsymbol{A}\in\mathcal{M}_n(\RR)$. We define a \textit{subordinated matrix norm} $\|\cdot\|$ as: $$\|\boldsymbol{A}\|:=\max\{\|\boldsymbol{A}\textbf{v}\|_\alpha:\|\textbf{v}\|_\alpha=1\}=\sup\left\{\frac{\|\boldsymbol{A}\textbf{v}\|_\alpha}{\|\textbf{v}\|_\alpha}:\textbf{v}\ne 0\right\}.$$ 
+\end{definition}
+\begin{lemma}
+    All subordinated matrix norms are compatible.
+\end{lemma}
+\begin{prop}
+    Let $\textbf{v}=(v_1,\ldots,v_n)\in\RR^n$. Given the vector norms: 
+    \begin{gather*}
+        \|\textbf{v}\|_1=\sum_{i=1}^n|v_i|,\\
+        \|\textbf{v}\|_2=\sqrt{\sum_{i=1}^nv_i^2},\\
+        \|\textbf{v}\|_\infty=\max\{|v_i|:i=1,\ldots,n\},
+    \end{gather*}
+    their subordinated matrix norms are respectively:
+    \begin{gather*}
+        \|\boldsymbol{A}\|_1=\max\left\{\sum_{i=1}^n|a_{ij}|:j=1,\ldots,n\right\},\\
+        \|\boldsymbol{A}\|_2=\sqrt{\rho(\boldsymbol{A}^T\boldsymbol{A})},\\
+        \|\boldsymbol{A}\|_\infty=\max\left\{\sum_{j=1}^n|a_{ij}|:i=1,\ldots,n\right\},
+    \end{gather*}
+    where $\rho(\boldsymbol{M})$ denotes the spectral radius of $\boldsymbol{M}\in\mathcal{M}_n(\RR)$.
+\end{prop}
 \end{multicols}
 \end{document}
