@@ -26,13 +26,6 @@
 \usepackage[es-ES]{datetime2} % for writing the current date when compiling
 \usepackage{xcolor} % to customize RGB colors
 \usepackage{physics} % commands of math and physics
-%%%% Page-style (heading) %%%%
-\pagestyle{fancy}
-\fancyhf{}
-\fancyhead[L]{\nouppercase{\leftmark}}
-\fancyhead[R]{\nouppercase{\rightmark}}
-\fancyfoot[C]{\thepage}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \setlength{\parindent}{0pt} % Indentation disabled
 
@@ -64,7 +57,7 @@
 \renewcommand{\labelenumii}{\roman{enumii})}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%% Title format for subsection %%%%%%
+%%%%%% Title format and page style %%%%%%
 \titleformat{\subsection}[hang]{\normalfont\large\bfseries}{\thesubsection\hspace{6pt}{\textbf{$|$}}\hspace{-6pt}}{1em}{}
 
 \renewcommand{\thesubsection}{\arabic{chapter}.\arabic{section}.\arabic{subsection}}
@@ -86,6 +79,13 @@
     \renewcommand{\thesection}{}
     \renewcommand{\thesubsection}{\arabic{subsection}}%
 }{% show only when the main file is compiled
+%%% Page-style (heading) %%%
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\nouppercase{\leftmark}}
+\fancyhead[R]{\nouppercase{\rightmark}}
+\fancyfoot[C]{\thepage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -110,6 +110,11 @@
         {% \scriptscriptstyle  
             #1/#2}
 }% quotient group. Use A/B--->\quot{A}{B}.
+
+\newcommand{\mathblack}[1]{\mathbf{#1}} % math style for vectors and matrices
+\newcommand{\transpose}[1]{\mathbf{#1}^{\mathrm{T}}} % math style for vectors and matrices
+\DeclareMathOperator{\adjugate}{adj} % adjugate matrix
+\DeclareMathOperator{\cofactor}{cof} % cofactor matrix
 
 \newcommand{\NN}{\ensuremath{\mathbb{N}}} % set of natural numbers
 \newcommand{\ZZ}{\ensuremath{\mathbb{Z}}} % set of integers
