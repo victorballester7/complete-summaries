@@ -311,7 +311,7 @@
     Let $f:[a,b]\rightarrow\RR$ a function of class $\mathcal{C}^2$ interpolating the support points $\{(x_i,y_i)\}_{i=0}^n\subset\RR^2$, $a\leq x_0<\cdots<x_n\leq b$. If $s$ is the natural cubic spline associated with $\{(x_i,y_i)\}_{i=0}^n$, then: $$\|f-s\|^2=\|f\|^2-\|s\|^2-2(f'-s)s''\Big|_{x_0}^{x_n}+2\sum_{i=1}^n(f-s)s'''\Big|_{x_{i-1}^+}^{x_i^-}.$$ 
 \end{prop}
 \begin{theorem}
-    Let $f:[a,b]\rightarrow\RR$ a function of class $\mathcal{C}^2$ interpolating the support points $\{(x_i,y_i)\}_{i=0}^n\subset\RR^2$, $a\leq x_0<\cdots<x_n\leq b$. If $s$ is the natural cubic spline associated with $\{(x_i,y_i)\}_{i=0}^n$, then $$\|s\|\leq\|f\|\footnote{We can interpret this result as the natural cubic spline being the configuration that requiere the least ``energy" to be ``constructed".}.$$
+    Let $f:[a,b]\rightarrow\RR$ a function of class $\mathcal{C}^2$ interpolating the support points $\{(x_i,y_i)\}_{i=0}^n\subset\RR^2$, $a\leq x_0<\cdots<x_n\leq b$. If $s$ is the natural cubic spline associated with $\{(x_i,y_i)\}_{i=0}^n$, then $$\|s\|\leq\|f\|\footnote{We can interpret this result as the natural cubic spline being the configuration that require the least ``energy" to be ``constructed".}.$$
 \end{theorem}
 \subsection{Numerical differentiation and integration}
 \subsubsection*{Differentiation}
@@ -392,7 +392,7 @@
 \end{theorem}
 \subsubsection*{Orthogonal polynomials}
 \begin{definition}
-    Let $f,g:[a,b]\rightarrow\RR$ be continuous function and $\omega(x):[a,b]\rightarrow\RR^+$ be a weight function. The expression $$\langle f,g\rangle=\int_a^b\omega(x)f(x)g(x)\dd x$$ defines a positive-semidefinite dot product in the vector space of bounded functions on $[a,b]$.
+    Let $f,g:[a,b]\rightarrow\RR$ be continuous function and $\omega(x):[a,b]\rightarrow\RR^+$ be a weight function. The expression $$\langle f,g\rangle=\int_a^b\omega(x)f(x)g(x)\dd x$$ defines a positive semidefinite dot product in the vector space of bounded functions on $[a,b]$.
 \end{definition}
 \begin{definition}[Orthogonal polynomials]
     Let $\mathfrak{P}=\{\phi_i(x)\in\RR[x]:\deg \phi_i(x)=i, i\in\NN\cup\{0\}\}$ be a family of polynomials and $\omega(x):[a,b]\rightarrow\RR^+$ be a weight function. We say $\mathfrak{P}$ is \textit{orthogonal with respect to the weight $\omega(x)$ on an interval $[a,b]$} if $$\langle \phi_i,\phi_j\rangle=\int_a^b\omega(x)\phi_i(x)\phi_j(x)\dd x=0\iff i\ne j.$$
@@ -427,14 +427,14 @@
     \begin{gather*}
         L_0(x)=1,\quad L_1(x)=1-x,\\ L_{n+1}(x)=\frac{(2m+1-x)L_n(x)-nL_{n-1}(x)}{n+1},
     \end{gather*}
-     for $n=1,2,\ldots$ The closed form of these polynomials is: $$L_n(x)=\sum_{k=0}^n\binom{n}{k}\frac{(-1)^k}{k!}x^k.$$ 
+    for $n=1,2,\ldots$ The closed form of these polynomials is: $$L_n(x)=\sum_{k=0}^n\binom{n}{k}\frac{(-1)^k}{k!}x^k.$$ 
 \end{definition}
 \begin{definition}[Legendre polynomials]
     \textit{Legendre polynomials} $P_n$ are the orthogonal polynomials defined on $[-1,1]$ with the weight $\omega(x)=1$. These can be defined recursively as:
     \begin{gather*}
         P_0(x)=1,\quad P_1(x)=x\\P_{n+1}(x)=\frac{(2n+1)xP_n(x)-nP_{n-1}(x)}{n+1},
     \end{gather*}
-        for $n=1,2,\ldots$ The closed form of these polynomials is: $$P_n(x)=\frac{1}{2^n}\sum_{k=0}^n\binom{n}{k}^2(x-1)^{n-k}(x+1)^k.$$ 
+    for $n=1,2,\ldots$ The closed form of these polynomials is: $$P_n(x)=\frac{1}{2^n}\sum_{k=0}^n\binom{n}{k}^2(x-1)^{n-k}(x+1)^k.$$ 
 \end{definition}
 \subsubsection*{Gau\ss ian quadrature}
 \begin{definition}
@@ -450,7 +450,7 @@
     Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^{2n}$ and $\{x_i\}_{i=1}^n$ be the zeros of the orthogonal polynomial $\phi_n\in\mathfrak{P}_n$ with weight $\omega(x)$ on the interval $[a,b]$. Then, $$\int_a^b\omega(x)f(x)\dd x-\sum_{i=1}^n\omega_if(x_i)=\frac{f^{2n}(\xi)}{(2n)!}\langle\phi_n,\phi_n\rangle,$$ where $\xi\in[a,b]$. 
 \end{theorem}
 \subsection{Numerical linear algebra}
-\subsubsection*{Norms}
+\subsubsection*{Matrix norms}
 \begin{definition}
     A \textit{matrix norm} on the vector space $\mathcal{M}_n(\RR)$ is a function $\|\cdot\|:\mathcal{M}_n(\RR)\rightarrow\RR$ satisfying all properties of a norm\footnote{See definition \ref{FOSV_norm}.} and that: $$\|\mathblack{A}\mathblack{B}\|\leq\|\mathblack{A}\|\|\mathblack{B}\|,\quad\forall \mathblack{A},\mathblack{B}\in\mathcal{M}_n(\RR).$$
 \end{definition}
@@ -458,13 +458,22 @@
     Let $\|\cdot\|_\alpha$ be a vector norm. We say a matrix norm $\|\cdot\|_\beta$ is \textit{compatible with $\|\cdot\|_\alpha$} if $$\|\mathblack{A}\mathblack{v}\|_\alpha\leq\|\mathblack{A}\|_\beta\|\mathblack{v}\|_\alpha,\quad\forall\mathblack{A}\in\mathcal{M}_n(\RR)\text{ and }\forall\mathblack{v}\in\RR^n.$$
 \end{definition}
 \begin{definition}
-    Let $\mathblack{A}\in\mathcal{M}_n(\RR)$. We define a \textit{subordinated matrix norm} $\|\cdot\|$ as: $$\|\mathblack{A}\|:=\max\{\|\mathblack{A}\mathblack{v}\|_\alpha:\|\mathblack{v}\|_\alpha=1\}=\sup\left\{\frac{\|\mathblack{A}\mathblack{v}\|_\alpha}{\|\mathblack{v}\|_\alpha}:\mathblack{v}\ne 0\right\}.$$ 
+    Let $\|\cdot\|_\alpha$ be a vector norm and $\mathblack{A}\in\mathcal{M}_n(\RR)$. We define a \textit{subordinated matrix norm} $\|\cdot\|_\alpha$ as:
+    \begin{multline*}
+        \|\mathblack{A}\|_\alpha=\max\{\|\mathblack{A}\mathblack{v}\|_\alpha:\mathblack{v}\in\RR^n\text{ such that }\|\mathblack{v}\|_\alpha=1\}=\\=\max\left\{\frac{\|\mathblack{A}\mathblack{v}\|_\alpha}{\|\mathblack{v}\|_\alpha}:\mathblack{v}\in\RR^n\text{ such that }\mathblack{v}\ne 0\right\}.
+    \end{multline*}
 \end{definition}
 \begin{lemma}
     All subordinated matrix norms are compatible.
 \end{lemma}
+\begin{lemma}
+    For all subordinated matrix norm $\|\cdot\|$, we have $\|\mathblack{I}\|=1$.
+\end{lemma}
+\begin{definition}
+    Let $\mathblack{A}\in\mathcal{M}_n(\CC)$ be a matrix with eigenvalues $\lambda_1,\ldots,\lambda_n$. We define the \textit{spectral radius $\rho(\mathblack{A})$} as: $$\rho(\mathblack{A})=\max\{|\lambda_1|,\ldots,|\lambda_n|\}.$$
+\end{definition}
 \begin{prop}
-    Let $\mathblack{v}=(v_1,\ldots,v_n)\in\RR^n$. Given the vector norms: 
+    Let $\mathblack{v}=(v_1,\ldots,v_n)\in\RR^n$ and $\mathblack{A}\in\mathcal{M}_n(\RR)$. Given the vector norms: 
     \begin{gather*}
         \|\mathblack{v}\|_1=\sum_{i=1}^n|v_i|,\\
         \|\mathblack{v}\|_2=\sqrt{\sum_{i=1}^nv_i^2},\\
@@ -474,9 +483,56 @@
     \begin{gather*}
         \|\mathblack{A}\|_1=\max\left\{\sum_{i=1}^n|a_{ij}|:j=1,\ldots,n\right\},\\
         \|\mathblack{A}\|_2=\sqrt{\rho(\transpose{A}\mathblack{A})},\\
-        \|\mathblack{A}\|_\infty=\max\left\{\sum_{j=1}^n|a_{ij}|:i=1,\ldots,n\right\},
+        \|\mathblack{A}\|_\infty=\max\left\{\sum_{j=1}^n|a_{ij}|:i=1,\ldots,n\right\}.
     \end{gather*}
-    where $\rho(\mathblack{M})$ denotes the spectral radius of $\mathblack{M}\in\mathcal{M}_n(\RR)$.
 \end{prop}
+\begin{prop}[Properties of matrix norms]
+    \hfill
+    \begin{enumerate}
+        \item Matrix norms are continuous functions.
+        \item Given two matrix norms $\|\cdot\|_\alpha$ and $\|\cdot\|_\beta$, there exist $\ell, L\in\RR^+$ such that: $$\ell \|\mathblack{A}\|_\beta\leq\|\mathblack{A}\|_\alpha\leq L\|\mathblack{A}\|_\beta,\quad\forall\mathblack{A}\in\mathcal{M}_n(\RR).$$
+        \item For all subordinated matrix norm $\|\cdot\|$ and for all $\mathblack{A}\in\mathcal{M}_n(\RR)$, $$\rho(\mathblack{A})\leq\|\mathblack{A}\|.$$
+        \item Given a matrix $\mathblack{A}\in\mathcal{M}_n(\RR)$ and $\varepsilon>0$, there exist a matrix norm $\|\cdot\|_{\mathblack{A},\varepsilon}$ such that: $$\rho(\mathblack{A})\leq\|\mathblack{A}\|_{\mathblack{A},\varepsilon}\leq\rho(\mathblack{A})+\varepsilon.$$
+    \end{enumerate}
+\end{prop}
+\begin{definition}
+    A matrix $\mathblack{A}\in\mathcal{M}_n(\RR)$ is \textit{convergent} if $\displaystyle\lim_{k\to\infty}\mathblack{A}^k=\mathblack{0}$.  
+\end{definition}
+\begin{theorem}
+    Let $\mathblack{A}\in\mathcal{M}_n(\RR)$. The following statements are equivalent:
+    \begin{enumerate}
+        \item $\mathblack{A}$ converges.
+        \item $\displaystyle\lim_{k\to\infty}\|\mathblack{A}^k\|=\mathblack{0}$ for some matrix norm $\|\cdot\|$.
+        \item $\rho(\mathblack{A})<1$.
+    \end{enumerate}
+\end{theorem}
+\begin{corollary}
+    Let $\mathblack{A}\in\mathcal{M}_n(\RR)$. If there is a matrix norm $\|\cdot\|$ satisfying $\|\mathblack{A}\|<1$, then $\mathblack{A}$ converges.
+\end{corollary}
+\begin{theorem}
+    Let $\mathblack{A}\in\mathcal{M}_n(\RR)$.
+    \begin{enumerate}
+        \item The series $\sum_{k=0}^\infty \mathblack{A}^k$ converges if and only if $\mathblack{A}$ converge.
+        \item If $\mathblack{A}$ is convergent, then $\mathblack{I}_n-\mathblack{A}$ is non-singular and moreover $$(\mathblack{I}_n-\mathblack{A})^{-1}=\sum_{k=0}^\infty\mathblack{A}^k.$$
+    \end{enumerate}
+\end{theorem}
+\begin{corollary}
+    Let $\mathblack{A}\in\mathcal{M}_n(\RR)$. If there is a matrix norm $\|\cdot\|$ satisfying $\|\mathblack{A}\|<1$, then $\mathblack{I}_n-\mathblack{A}$ is non-singular and moreover $$\frac{1}{1+\|\mathblack{A}\|}\leq\|(\mathblack{I}_n-\mathblack{A})^{-1}\|\leq\frac{1}{1-\|\mathblack{A}\|}$$
+\end{corollary}
+\subsubsection*{Matrix condition number}
+\begin{definition}
+    Let $\mathblack{A}\in\mathcal{M}_n(\RR)$ be a non-singular matrix. We define the \textit{condition number $\kappa(\mathblack{A})$ of $\mathblack{A}$} as $\kappa(\mathblack{A})=\|\mathblack{A}\|\|\mathblack{A}^{-1}\|$.
+\end{definition}
+\begin{theorem}
+    Let $\mathblack{A}\in\mathcal{M}_n(\RR)$ be a non-singular matrix, $\mathblack{b}\in\RR^n$, $\mathblack{A}x=\mathblack{b}$ be a system of linear equations and $\|\cdot\|$ be a subordinated matrix norm. Suppose we know $\mathblack{A}$ and $\mathblack{b}$ with absolute errors $\Delta\mathblack{A}$ and $\Delta\mathblack{b}$, respectively. Therefore we actually solve the system: $$(\mathblack{A}+\Delta\mathblack{A})(x+\Delta x)=(\mathblack{b}+\Delta\mathblack{b}).$$ If, $\|\Delta\mathblack{A}\|\leq\frac{1}{\|\mathblack{A}^{-1}\|}$, then: $$\frac{\|\Delta x\|}{\|x\|}\leq\frac{\kappa(\mathblack{A})}{1-\norm{\mathblack{A}^{-1}}\norm{\Delta\mathblack{A}}}\left(\frac{\norm{\Delta\mathblack{b}}}{\norm{\mathblack{b}}}+\frac{\norm{\Delta\mathblack{A}}}{\norm{\mathblack{A}}}\right).$$
+\end{theorem}
+\begin{theorem}
+    Let $\mathblack{A}\in\mathcal{M}_n(\RR)$ be a non-singular matrix and $\|\cdot\|$ be a subordinated matrix norm. Then:
+    \begin{enumerate}
+        \item $\kappa(\mathblack{A})\geq\rho(\mathblack{A})\rho(\mathblack{A}^{-1})$.
+        \item If $\mathblack{c},\mathblack{z}\in\RR^n$ are such that $\mathblack{A}\mathblack{z}=\mathblack{c}$, then: $$\norm{\mathblack{A}^{-1}}\geq\frac{\norm{\mathblack{z}}}{\norm{\mathblack{c}}}.$$
+        \item If $\mathblack{B}\in\mathcal{M}_n(\RR)$ is a non-singular matrix, then: $$\kappa(\mathblack{A})\geq\frac{\norm{\mathblack{A}}}{\norm{\mathblack{A}-\mathblack{B}}}.$$
+    \end{enumerate}
+\end{theorem}
 \end{multicols}
 \end{document}
