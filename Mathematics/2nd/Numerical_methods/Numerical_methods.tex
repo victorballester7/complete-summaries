@@ -524,7 +524,7 @@
     Let $\mathblack{A}\in\mathcal{M}_n(\RR)$ be a non-singular matrix. We define the \textit{condition number $\kappa(\mathblack{A})$ of $\mathblack{A}$} as $\kappa(\mathblack{A})=\|\mathblack{A}\|\|\mathblack{A}^{-1}\|$.
 \end{definition}
 \begin{theorem}
-    Let $\mathblack{A}\in\mathcal{M}_n(\RR)$ be a non-singular matrix, $\mathblack{b}\in\RR^n$, $\mathblack{A}x=\mathblack{b}$ be a system of linear equations and $\|\cdot\|$ be a subordinated matrix norm. Suppose we know $\mathblack{A}$ and $\mathblack{b}$ with absolute errors $\Delta\mathblack{A}$ and $\Delta\mathblack{b}$, respectively. Therefore we actually solve the system: $$(\mathblack{A}+\Delta\mathblack{A})(x+\Delta x)=(\mathblack{b}+\Delta\mathblack{b}).$$ If, $\|\Delta\mathblack{A}\|\leq\frac{1}{\|\mathblack{A}^{-1}\|}$, then: $$\frac{\|\Delta x\|}{\|x\|}\leq\frac{\kappa(\mathblack{A})}{1-\norm{\mathblack{A}^{-1}}\norm{\Delta\mathblack{A}}}\left(\frac{\norm{\Delta\mathblack{b}}}{\norm{\mathblack{b}}}+\frac{\norm{\Delta\mathblack{A}}}{\norm{\mathblack{A}}}\right).$$
+    Let $\mathblack{A}\in\mathcal{M}_n(\RR)$ be a non-singular matrix, $\mathblack{b}\in\RR^n$, $\mathblack{A}\mathblack{x}=\mathblack{b}$ be a system of linear equations and $\|\cdot\|$ be a subordinated matrix norm. Suppose we know $\mathblack{A}$ and $\mathblack{b}$ with absolute errors $\Delta\mathblack{A}$ and $\Delta\mathblack{b}$, respectively. Therefore we actually solve the system: $$(\mathblack{A}+\Delta\mathblack{A})(\mathblack{x}+\Delta \mathblack{x})=(\mathblack{b}+\Delta\mathblack{b}).$$ If, $\|\Delta\mathblack{A}\|\leq\frac{1}{\|\mathblack{A}^{-1}\|}$, then: $$\frac{\|\Delta \mathblack{x}\|}{\|\mathblack{x}\|}\leq\frac{\kappa(\mathblack{A})}{1-\norm{\mathblack{A}^{-1}}\norm{\Delta\mathblack{A}}}\left(\frac{\norm{\Delta\mathblack{b}}}{\norm{\mathblack{b}}}+\frac{\norm{\Delta\mathblack{A}}}{\norm{\mathblack{A}}}\right).$$
 \end{theorem}
 \begin{theorem}
     Let $\mathblack{A}\in\mathcal{M}_n(\RR)$ be a non-singular matrix and $\|\cdot\|$ be a subordinated matrix norm. Then:
@@ -533,6 +533,89 @@
         \item If $\mathblack{c},\mathblack{z}\in\RR^n$ are such that $\mathblack{A}\mathblack{z}=\mathblack{c}$, then: $$\norm{\mathblack{A}^{-1}}\geq\frac{\norm{\mathblack{z}}}{\norm{\mathblack{c}}}.$$
         \item If $\mathblack{B}\in\mathcal{M}_n(\RR)$ is a non-singular matrix, then: $$\kappa(\mathblack{A})\geq\frac{\norm{\mathblack{A}}}{\norm{\mathblack{A}-\mathblack{B}}}.$$
     \end{enumerate}
+\end{theorem}
+\subsubsection*{Iterative methods}
+Suppose we want to solve the system $\mathblack{A}\mathblack{x}=\mathblack{b}$, where $\mathblack{A}\in\mathcal{M}_n(\RR)$ and $\mathblack{b}\in\RR^n$. We choose a matrix $\mathblack{N}\in\GL{n}(\RR)$ and define $\mathblack{P}:=\mathblack{N}-\mathblack{A}$. Then: $$\mathblack{A}\mathblack{x}=\mathblack{b}\iff \mathblack{x}=\mathblack{N}^{-1}\mathblack{P}\mathblack{x}+\mathblack{N}^{-1}\mathblack{b}=:\mathblack{M}\mathblack{x}+\mathblack{N}^{-1}\mathblack{b}.$$ The matrix $\mathblack{M}$ is called the \textit{iterative matrix}. This defines a fixed-point iteration in the following way:
+\begin{equation*}
+    \left\{
+    \begin{array}{l}
+        \mathblack{x}^{(k+1)}=\mathblack{M}\mathblack{x}^{(k)}+\mathblack{N}^{-1}\mathblack{b}\\
+        \mathblack{x}^{(0)}
+    \end{array}\right.
+\end{equation*}
+\begin{theorem}
+    The iterative method $\mathblack{x}^{(k+1)}=\mathblack{M}\mathblack{x}^{(k)}+\mathblack{N}^{-1}\mathblack{b}$ is convergent if and only if $\mathblack{M}$ is convergent and if and only if $\rho(M)$.
+\end{theorem}
+\begin{corollary}
+    If $\|\mathblack{M}\|<1$ for some matrix norm, then the iterative method $\mathblack{x}^{(k+1)}=\mathblack{M}\mathblack{x}^{(k)}+\mathblack{N}^{-1}\mathblack{b}$ is convergent.
+\end{corollary}
+\begin{definition}
+    We define the \textit{rate of convergence $R$} of an iterative method $\mathblack{x}^{(k+1)}=\mathblack{M}\mathblack{x}^{(k)}+\mathblack{N}^{-1}\mathblack{b}$ as: $$R=-\log(\rho(M)).$$
+\end{definition}
+\begin{prop}
+    Let $\mathblack{x}^{(k+1)}=\mathblack{M}\mathblack{x}^{(k)}+\mathblack{N}^{-1}\mathblack{b}$ be an iterative method to approximate the solution $\mathblack{x}$ of a system of equations $\mathblack{A}\mathblack{x}=\mathblack{b}$. Then, we have the following estimations:
+    \begin{align*}
+        \|\mathblack{x}^{(k)}-\mathblack{x}\|&\leq\frac{\|M\|^k}{1-\|M\|}\|\mathblack{x}^{(1)}-\mathblack{x}^{(0)}\|\quad&\text{(a priori)}\\
+        \|\mathblack{x}^{(k)}-x\|&\leq\frac{\|M\|}{1-\|M\|}\|\mathblack{x}^{(k)}-\mathblack{x}^{(k-1)}\|\quad&\text{(a posteriori)}
+    \end{align*}
+\end{prop}
+\begin{definition}[Jacobi method]
+    Let $\mathblack{A}=(a_{ij})\in\mathcal{M}_n(\RR)$ such that $\prod_{i=1}^na_{ii}\ne 0$, $\mathblack{b}\in\RR^n$ and $\mathblack{A}\mathblack{x}=\mathblack{b}$ be a system of equations. \textit{Jacobi method} consists in defining a matrix $\mathblack{N}$ (and consequently matrices $\mathblack{P}$ and $\mathblack{M}$ as defined above) in the following way:
+    \begin{gather*}
+        \mathblack{N}=
+        \begin{pmatrix}
+            a_{11} & 0 & \cdots & 0\\
+            0 & a_{22} & \ddots & \vdots\\
+            \vdots & \ddots & \ddots & 0\\
+            0 & \cdots & 0 & a_{nn}
+        \end{pmatrix}\\
+        \mathblack{P}=\mathblack{N}-\mathblack{A}=
+        \begin{pmatrix}
+            0 & -a_{12} & \cdots & -a_{1n}\\
+            -a_{21} & 0 & \ddots & \vdots\\
+            \vdots & \ddots & \ddots & -a_{(n-1)n}\\
+            -a_{n1} & \cdots & -a_{n(n-1)} & 0
+        \end{pmatrix}\\
+        \mathblack{M}=\mathblack{N}^{-1}\mathblack{P}=
+        \begin{pmatrix}
+            0 & \frac{-a_{12}}{a_{11}} & \cdots & \frac{-a_{1n}}{a_{11}}\\
+            \frac{-a_{21}}{a_{22}} & 0 & \ddots & \vdots\\
+            \vdots & \ddots & \ddots & \frac{-a_{(n-1)n}}{a_{(n-1)(n-1)}}\\
+            \frac{-a_{n1}}{a_{nn}} & \cdots & \frac{-a_{n(n-1)}}{a_{nn}} & 0
+        \end{pmatrix}\\
+    \end{gather*}
+    Then, the iterative method $\mathblack{x}^{(k+1)}=\mathblack{M}\mathblack{x}^{(k)}+\mathblack{N}^{-1}\mathblack{b}$ can also be written as: $$x_i^{(k+1)}=\frac{1}{a_{ii}}\left(b_i-\sum_{\substack{j=1\\j\ne i}}^na_{ij}x_j^{(k)}\right),\quad\text{for }i=1,\ldots,n.$$
+\end{definition}
+\begin{definition}
+    Let $\mathblack{A}=(a_{ij})\in\mathcal{M}_n(\RR)$. We say $A$ is \textit{strictly diagonally dominant by rows} if $$|a_{ii}|>\sum_{\substack{j=1\\j\ne i}}^n|a_{ij}|.$$
+    We say $A$ is \textit{strictly diagonally dominant by columns} if $$|a_{jj}|>\sum_{\substack{i=1\\i\ne j}}^n|a_{ij}|.$$
+\end{definition}
+\begin{theorem}
+    Let $\mathblack{A}=(a_{ij})\in\mathcal{M}_n(\RR)$ and $\mathblack{b}\in\RR^n$. If $\mathblack{A}$ is strictly diagonally dominant by rows or columns, then Jacobi method applied to solve the system $\mathblack{A}\mathblack{x}=\mathblack{b}$ is convergent.
+\end{theorem}
+\begin{definition}[Gau\ss-Seidel method]
+    Let $\mathblack{A}=(a_{ij})\in\mathcal{M}_n(\RR)$ such that $\prod_{i=1}^na_{ii}\ne 0$, $\mathblack{b}\in\RR^n$ and $\mathblack{A}\mathblack{x}=\mathblack{b}$ be a system of equations. \textit{Gau\ss-Seidel method} consists in defining a matrix $\mathblack{N}$ (and consequently matrices $\mathblack{P}$ and $\mathblack{M}$ as defined above) in the following way:
+    \begin{gather*}
+        \mathblack{N}=
+        \begin{pmatrix}
+            a_{11} & 0 & \cdots & 0\\
+            a_{21} & a_{22} & \ddots & \vdots\\
+            \vdots & \ddots & \ddots & 0\\
+            a_{n1} & \cdots & a_{n(n-1)} & a_{nn}
+        \end{pmatrix}\\
+        \mathblack{P}=\mathblack{N}-\mathblack{A}=
+        \begin{pmatrix}
+            0 & -a_{12} & \cdots & -a_{1n}\\
+            0 & 0 & \ddots & \vdots\\
+            \vdots & \ddots & \ddots & -a_{(n-1)n}\\
+            0 & \cdots & 0 & 0
+        \end{pmatrix}\\
+        \mathblack{M}=\mathblack{N}^{-1}\mathblack{P}
+    \end{gather*}
+    Then, the iterative method $\mathblack{x}^{(k+1)}=\mathblack{M}\mathblack{x}^{(k)}+\mathblack{N}^{-1}\mathblack{b}$ can also be written as: $$x_i^{(k+1)}=\frac{1}{a_{ii}}\left(b_i-\sum_{j=i+1}^na_{ij}x_j^{(k)}-\sum_{j=1}^{i-1}a_{ij}x_j^{(k+1)}\right),$$ for $i=1,\ldots,n$.
+\end{definition}
+\begin{theorem}
+    Let $\mathblack{A}=(a_{ij})\in\mathcal{M}_n(\RR)$ and $\mathblack{b}\in\RR^n$. If $\mathblack{A}$ is strictly diagonally dominant by rows, then Gau\ss-Seidel method applied to solve the system $\mathblack{A}\mathblack{x}=\mathblack{b}$ is convergent.
 \end{theorem}
 \end{multicols}
 \end{document}
