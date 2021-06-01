@@ -470,7 +470,10 @@
     For all subordinated matrix norm $\|\cdot\|$, we have $\|\mathblack{I}\|=1$.
 \end{lemma}
 \begin{definition}
-    Let $\mathblack{A}\in\mathcal{M}_n(\CC)$ be a matrix with eigenvalues $\lambda_1,\ldots,\lambda_n$. We define the \textit{spectral radius $\rho(\mathblack{A})$} as: $$\rho(\mathblack{A})=\max\{|\lambda_1|,\ldots,|\lambda_n|\}.$$
+    Let $\mathblack{A}\in\mathcal{M}_n(\CC)$ be a matrix. We define the \textit{spectrum $\sigma(\mathblack{A})$ of $\mathblack{A}$} as: $$\sigma(\mathblack{A})=\{\lambda\in\CC:\lambda\text{ is and eigenvalue of }\mathblack{A}\}.$$
+\end{definition}
+\begin{definition}
+    Let $\mathblack{A}\in\mathcal{M}_n(\CC)$ be a matrix. We define the \textit{spectral radius $\rho(\mathblack{A})$ of $\mathblack{A}$} as: $$\rho(\mathblack{A})=\max\{|\lambda|\in\CC:\lambda\in\sigma(\mathblack{A})\}.$$
 \end{definition}
 \begin{prop}
     Let $\mathblack{v}=(v_1,\ldots,v_n)\in\RR^n$ and $\mathblack{A}\in\mathcal{M}_n(\RR)$. Given the vector norms: 
@@ -544,13 +547,13 @@ Suppose we want to solve the system $\mathblack{A}\mathblack{x}=\mathblack{b}$, 
     \end{array}\right.
 \end{equation*}
 \begin{theorem}
-    The iterative method $\mathblack{x}^{(k+1)}=\mathblack{M}\mathblack{x}^{(k)}+\mathblack{N}^{-1}\mathblack{b}$ is convergent if and only if $\mathblack{M}$ is convergent and if and only if $\rho(M)$.
+    The iterative method $\mathblack{x}^{(k+1)}=\mathblack{M}\mathblack{x}^{(k)}+\mathblack{N}^{-1}\mathblack{b}$ is convergent if and only if $\mathblack{M}$ is convergent and if and only if $\rho(\mathblack{M})<1$.
 \end{theorem}
 \begin{corollary}
     If $\|\mathblack{M}\|<1$ for some matrix norm, then the iterative method $\mathblack{x}^{(k+1)}=\mathblack{M}\mathblack{x}^{(k)}+\mathblack{N}^{-1}\mathblack{b}$ is convergent.
 \end{corollary}
 \begin{definition}
-    We define the \textit{rate of convergence $R$} of an iterative method $\mathblack{x}^{(k+1)}=\mathblack{M}\mathblack{x}^{(k)}+\mathblack{N}^{-1}\mathblack{b}$ as: $$R=-\log(\rho(M)).$$
+    We define the \textit{rate of convergence $R$} of an iterative method $\mathblack{x}^{(k+1)}=\mathblack{M}\mathblack{x}^{(k)}+\mathblack{N}^{-1}\mathblack{b}$ as: $$R=-\log(\rho(\mathblack{M})).$$
 \end{definition}
 \begin{prop}
     Let $\mathblack{x}^{(k+1)}=\mathblack{M}\mathblack{x}^{(k)}+\mathblack{N}^{-1}\mathblack{b}$ be an iterative method to approximate the solution $\mathblack{x}$ of a system of equations $\mathblack{A}\mathblack{x}=\mathblack{b}$. Then, we have the following estimations:
@@ -591,7 +594,7 @@ Suppose we want to solve the system $\mathblack{A}\mathblack{x}=\mathblack{b}$, 
     We say $A$ is \textit{strictly diagonally dominant by columns} if $$|a_{jj}|>\sum_{\substack{i=1\\i\ne j}}^n|a_{ij}|.$$
 \end{definition}
 \begin{theorem}
-    Let $\mathblack{A}=(a_{ij})\in\mathcal{M}_n(\RR)$ and $\mathblack{b}\in\RR^n$. If $\mathblack{A}$ is strictly diagonally dominant by rows or columns, then Jacobi method applied to solve the system $\mathblack{A}\mathblack{x}=\mathblack{b}$ is convergent.
+    Let $\mathblack{A}\in\mathcal{M}_n(\RR)$ and $\mathblack{b}\in\RR^n$. If $\mathblack{A}$ is strictly diagonally dominant by rows or columns, then Jacobi method applied to solve the system $\mathblack{A}\mathblack{x}=\mathblack{b}$ is convergent.
 \end{theorem}
 \begin{definition}[Gau\ss-Seidel method]
     Let $\mathblack{A}=(a_{ij})\in\mathcal{M}_n(\RR)$ such that $\prod_{i=1}^na_{ii}\ne 0$, $\mathblack{b}\in\RR^n$ and $\mathblack{A}\mathblack{x}=\mathblack{b}$ be a system of equations. \textit{Gau\ss-Seidel method} consists in defining a matrix $\mathblack{N}$ (and consequently matrices $\mathblack{P}$ and $\mathblack{M}$ as defined above) in the following way:
@@ -615,7 +618,39 @@ Suppose we want to solve the system $\mathblack{A}\mathblack{x}=\mathblack{b}$, 
     Then, the iterative method $\mathblack{x}^{(k+1)}=\mathblack{M}\mathblack{x}^{(k)}+\mathblack{N}^{-1}\mathblack{b}$ can also be written as: $$x_i^{(k+1)}=\frac{1}{a_{ii}}\left(b_i-\sum_{j=i+1}^na_{ij}x_j^{(k)}-\sum_{j=1}^{i-1}a_{ij}x_j^{(k+1)}\right),$$ for $i=1,\ldots,n$.
 \end{definition}
 \begin{theorem}
-    Let $\mathblack{A}=(a_{ij})\in\mathcal{M}_n(\RR)$ and $\mathblack{b}\in\RR^n$. If $\mathblack{A}$ is strictly diagonally dominant by rows, then Gau\ss-Seidel method applied to solve the system $\mathblack{A}\mathblack{x}=\mathblack{b}$ is convergent.
+    Let $\mathblack{A}\in\mathcal{M}_n(\RR)$ and $\mathblack{b}\in\RR^n$. If $\mathblack{A}$ is strictly diagonally dominant by rows, then Gau\ss-Seidel method applied to solve the system $\mathblack{A}\mathblack{x}=\mathblack{b}$ is convergent.
 \end{theorem}
+\begin{definition}[Over-relaxation methods]
+    Let $\mathblack{A}\in\mathcal{M}_n(\RR)$, $\mathblack{b}\in\RR^n$, $\mathblack{A}\mathblack{x}=\mathblack{b}$ be a system of equations and $\alpha\in\RR$ be a parameter (called \textit{relaxation factor}). \textit{Over-relaxation methods} consist in defining a matrices $\mathblack{N}(\alpha)$, $\mathblack{P}(\alpha)$ and $\mathblack{M}(\alpha)$ as follows:
+    $$\mathblack{P}(\alpha)=\mathblack{N}(\alpha)-\mathblack{A},\qquad\mathblack{M}(\alpha)=\left[\mathblack{N}(\alpha)\right]^{-1}\mathblack{P}(\alpha).$$
+    Then, the iterative method can also be written as: $$\mathblack{x}^{(k+1)}=\mathblack{M}(\alpha)\mathblack{x}^{(k)}+\left[\mathblack{N}(\alpha)\right]^{-1}\mathblack{b}.$$
+\end{definition}
+\begin{definition}[Successive over-relaxation me\-thod]
+    Let $\mathblack{A}\in\mathcal{M}_n(\RR)$, $\mathblack{b}\in\RR^n$, $\alpha\in\RR$ be such that $\alpha\ne-1$ and $\mathblack{x}^{(k+1)}=\mathblack{N}^{-1}\mathblack{P}\mathblack{x}^{(k)}+\mathblack{N}^{-1}\mathblack{b}$ be an iterative method. \textit{Successive over-relaxation method} or \textit{SOR} consists in defining $\mathblack{N}(\alpha)=(1+\alpha)\mathblack{N}$ and, therefore, $\mathblack{P}(\alpha)=\mathblack{P}+\alpha\mathblack{N}$ because it must be true that $\mathblack{A}=\mathblack{N}(\alpha)-\mathblack{P}(\alpha)$. Then, the previous iteration is transformed into $\mathblack{x}^{(k+1)}=\left[\mathblack{N}(\alpha)\right]^{-1}\mathblack{P}(\alpha)\mathblack{x}^{(k)}+\left[\mathblack{N}(\alpha)\right]^{-1}\mathblack{b}$.
+\end{definition}
+\begin{definition}
+    Let $\mathblack{A}\in\mathcal{M}_n(\RR)$, $\mathblack{b}\in\RR^n$, $\alpha\in\RR$ be such that $\alpha\ne-1$ and $\mathblack{x}^{(k+1)}=\left[\mathblack{N}(\alpha)\right]^{-1}\mathblack{P}(\alpha)\mathblack{x}^{(k)}+\left[\mathblack{N}(\alpha)\right]^{-1}\mathblack{b}$ be a SOR method. Since $\mathblack{M}(\alpha)=\left[\mathblack{N}(\alpha)\right]^{-1}\mathblack{P}(\alpha)$, we have that $$\mathblack{M}(\alpha)=\frac{1}{1+\alpha}(\mathblack{M}+\alpha\mathblack{I}_n)$$ and, therefore: $$\sigma(\mathblack{M}(\alpha))=\left\{\frac{\lambda+\alpha}{1+\alpha}:\lambda\in\sigma(\mathblack{M})\right\}.$$  
+\end{definition}
+\begin{theorem}
+    Let $\mathblack{A}\in\mathcal{M}_n(\RR)$, $\mathblack{b}\in\RR^n$ and $\mathblack{x}^{(k+1)}=\mathblack{M}\mathblack{x}^{(k)}+\mathblack{N}^{-1}\mathblack{b}$ be an iterative method. Suppose that eigenvalues $\lambda_i$, $i=1,\ldots,n$, of $\mathblack{M}$ are all real and satisfy: $$0<\lambda_1\leq\lambda_2\leq\cdots\leq\lambda_n<1.$$
+    Then, the associated SOR method given by $\mathblack{N}(\alpha)=(1+\alpha)\mathblack{N}$ and $\mathblack{P}(\alpha)=\mathblack{P}+\alpha\mathblack{N}$ converges for $\alpha>-\frac{1+\lambda_1}{2}$. Moreover, $\rho(\mathblack{M}(\alpha))$ is minimum whenever $\alpha=-\frac{\lambda_1+\lambda_n}{2}$.
+\end{theorem}
+\subsubsection*{Eigenvalues and eigenvectors}
+\begin{definition}
+    Let $\mathblack{A}\in\mathcal{M}_n(\RR)$ be a matrix whose eigenvalues are $\lambda_1,\ldots,\lambda_n$. $\lambda_1$ is called \textit{dominant eigenvalue of $\mathblack{A}$} if $|\lambda_1|>|\lambda_i|$ for $i=2,\ldots,n$. The associated eigenvector to $\lambda_1$ is called \textit{dominant eigenvector of $\mathblack{A}$}.
+\end{definition}
+\begin{definition}
+    We say a matrix $\mathblack{A}\in\mathcal{M}_n(\RR)$ is \textit{reducible} if $\exists\mathblack{P}\in\mathcal{M}_n(\RR)$ a permutation matrix, such that $$\mathblack{P}\mathblack{A}\mathblack{P}^{-1}=
+    \begin{pmatrix}
+        \mathblack{E} & \mathblack{0}\\
+        \mathblack{F} & \mathblack{G}
+    \end{pmatrix},$$ for some matrices $\mathblack{E}$, $\mathblack{F}$ and $\mathblack{G}$. A matrix is \textit{irreducible} if it is not reducible.
+\end{definition}
+\begin{theorem}[Perron-Frobenius theorem]
+    Let $\mathblack{A}\in\mathcal{M}_n(\RR)$ be a non-negative irreducible matrix. Then, $\rho(\mathblack{A})$ is a real number and it is the dominant eigenvalue.
+\end{theorem}
+\begin{definition}[Power method]
+    Let $\mathblack{A}\in\mathcal{M}_n(\RR)$ and $\|\cdot\|$ be a vector norm\footnote{For power method it is recommended to use $\|\cdot\|_\infty$.}. For simplicity suppose $\mathblack{A}$ is a diagonalizable with eigenvalues $\lambda_1,\ldots,\lambda_n$ and eigenvectors $\mathblack{v}_1,\ldots,\mathblack{v}_n$. Suppose $|\lambda_1|>|\lambda_2|\geq\cdots\geq|\lambda_n|$. The \textit{power method} consists in finding an approximation of the dominant eigenvalue $\lambda_1$ starting from an initial approximation $\mathblack{x}^{(0)}$ of $\mathblack{v}_1$. We define $$\mathblack{y}^{(k)}=\frac{\mathblack{x}^{(k)}}{\|\mathblack{x}^{(k)}\|},\quad\mathblack{x}^{(k+1)}=\mathblack{A}\mathblack{y}^{(k)},\qquad\text{for }k\geq 0.$$ Then: $$\mathblack{y}^{(k)}=\frac{\mathblack{A}^k\mathblack{x}^{(0)}}{\|\mathblack{A}^k\mathblack{x}^{(0)}\|},\quad\mathblack{x}^{(k)}=\frac{\mathblack{A}^k\mathblack{x}^{(0)}}{\|\mathblack{A}^{k-1}\mathblack{x}^{(0)}\|}.$$ If we denote by $\mathblack{v}_{i,m}$ the $m$-th component of the vector $\mathblack{v}_i$ and choose $\ell$ such that $\mathblack{v}_{1,\ell}\ne0$. Then: $$\lim_{k\to\infty}\mathblack{x}^{(k)}=\mathblack{v}_1,\qquad\lim_{k\to\infty}\frac{\mathblack{x}_\ell^{(k+1)}}{\mathblack{y}_\ell^{(k)}}=\lambda_1.$$ More precisely we have: $$\frac{\mathblack{x}_\ell^{(k+1)}}{\mathblack{y}_\ell^{(k)}}=\lambda_1\left[1+O\left(\left|\frac{\lambda_2}{\lambda_1}\right|^k\right)\right].$$
+\end{definition}
 \end{multicols}
 \end{document}
