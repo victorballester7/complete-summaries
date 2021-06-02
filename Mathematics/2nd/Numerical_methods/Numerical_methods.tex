@@ -14,7 +14,7 @@
     \end{equation*} where $s\in\{-1,1\}$, $q\in\ZZ$ and $\alpha_i\in\{0,1,\ldots,b-1\}$. Moreover, this representation is unique if $\alpha_1\ne0$ and $\forall i_0\in\NN$, $\exists i\geq i_0:\alpha_i\ne b-1$. We will write $$x=s(0.\alpha_1\alpha_2\cdots)_bb^q,$$ where the subscript $b$ in the parenthesis indicates that the number $0.\alpha_1\alpha_2\alpha_3\cdots$ is in base $b$.
 \end{theorem}
 \begin{definition}[Floating-point representation]
-    Let $x$ be a real number. Then the floating-point representation of $x$ is $$x=s\left(\sum_{i=1}^t\alpha_ib^{-i}\right)b^q.$$ Here $s$ is called the \textit{sign}; $\sum_{i=1}^t\alpha_ib^{-i}$, the \textit{significant} or \textit{mantissa}, and $q$, the \textit{exponent}, limited to a prefixed range $q_\text{min}\leq q\leq q_\text{max}$. So, the floating-point representation of $x$ is $$x=smb^q=s(0.\alpha_1\alpha_2\cdots\alpha_t)_bb^q.$$ Finally we say a floating-point number is \textit{normalized} if $\alpha_1\ne0$.
+    Let $x$ be a real number. Then, the floating-point representation of $x$ is $$x=s\left(\sum_{i=1}^t\alpha_ib^{-i}\right)b^q.$$ Here $s$ is called the \textit{sign}; $\sum_{i=1}^t\alpha_ib^{-i}$, the \textit{significant} or \textit{mantissa}, and $q$, the \textit{exponent}, limited to a prefixed range $q_\text{min}\leq q\leq q_\text{max}$. So, the floating-point representation of $x$ is $$x=smb^q=s(0.\alpha_1\alpha_2\cdots\alpha_t)_bb^q.$$ Finally we say a floating-point number is \textit{normalized} if $\alpha_1\ne0$.
 \end{definition}
 \begin{table}[ht]
     \centering
@@ -97,26 +97,26 @@
     and iterate the process again.
 \end{theorem}
 \begin{theorem}[Secant method]
-    Suppose $I=\RR$ and that we have two different initial approximations $x_0$, $x_1$. Then for each step $n\geq 0$ of the algorithm we obtain a new approximation $x_{n+2}$, given by: $$x_{n+2}=x_{n+1}-f(x_{n+1})\frac{x_{n+1}-x_n}{f(x_{n+1})-f(x_n)}.$$
+    Suppose $I=\RR$ and that we have two different initial approximations $x_0$, $x_1$. Then, for each step $n\geq 0$ of the algorithm we obtain a new approximation $x_{n+2}$, given by: $$x_{n+2}=x_{n+1}-f(x_{n+1})\frac{x_{n+1}-x_n}{f(x_{n+1})-f(x_n)}.$$
 \end{theorem}
 \begin{theorem}[Newton-Raphson method]
-    Suppose $I=\RR$, $f\in\mathcal{C}^1$ and that we have an initial approximation $x_0$. Then for each step $n\geq 0$ we obtain a new approximation $x_{n+1}$, given by: $$x_{n+1}=x_n-\frac{f(x_n)}{f'(x_n)}.$$
+    Suppose $I=\RR$, $f\in\mathcal{C}^1$ and that we have an initial approximation $x_0$. Then, for each step $n\geq 0$ we obtain a new approximation $x_{n+1}$, given by: $$x_{n+1}=x_n-\frac{f(x_n)}{f'(x_n)}.$$
 \end{theorem}
 \begin{theorem}[Newton-Raphson modified\\method]
-    Suppose $I=\RR$, $f\in\mathcal{C}^1$ and that we have an initial approximation $x_0$ of a zero $\alpha$ of multiplicity $m$. Then for each step $n\geq 0$ we obtain a new approximation $x_{n+1}$, given by: $$x_{n+1}=x_n-m\frac{f(x_n)}{f'(x_n)}.$$
+    Suppose $I=\RR$, $f\in\mathcal{C}^1$ and that we have an initial approximation $x_0$ of a zero $\alpha$ of multiplicity $m$. Then, for each step $n\geq 0$ we obtain a new approximation $x_{n+1}$, given by: $$x_{n+1}=x_n-m\frac{f(x_n)}{f'(x_n)}.$$
 \end{theorem}
 \begin{theorem}[Chebyshev method]
-    Suppose $I=\RR$, $f\in\mathcal{C}^2$ and that we have an initial approximation $x_0$. Then for each step $n\geq 0$ we obtain a new approximation $x_{n+1}$, given by: $$x_{n+1}=x_n-\frac{f(x_n)}{f'(x_n)}-\frac{1}{2}\frac{\left[f(x_n)\right]^2f''(x_n)}{\left[f'(x_n)\right]^3}.$$
+    Suppose $I=\RR$, $f\in\mathcal{C}^2$ and that we have an initial approximation $x_0$. Then, for each step $n\geq 0$ we obtain a new approximation $x_{n+1}$, given by: $$x_{n+1}=x_n-\frac{f(x_n)}{f'(x_n)}-\frac{1}{2}\frac{\left[f(x_n)\right]^2f''(x_n)}{\left[f'(x_n)\right]^3}.$$
 \end{theorem}
 \subsubsection*{Fixed-point iterations}
 \begin{definition}
     Let $g:[a,b]\rightarrow[a,b]\subset\RR$ be a function. A point $\alpha\in[a,b]$ is \textit{n-periodic} if $g^n(\alpha)=\alpha$ and $g^j(\alpha)\ne\alpha$ for $j=1,\ldots,n-1$\footnote{Note that 1-periodic points are the fixed points of $f$.}.
 \end{definition}
 \begin{theorem}[Fixed-point theorem]
-    Let $(M,d)$ be a complete metric space and $g:M\rightarrow M$ be a contraction\footnote{Remember definitions \ref{FOSV_metric}, \ref{FOSV_complete} and \ref{FOSV_contr}.}. Then $g$ has a unique fixed point $\alpha\in M$ and for every $x_0\in M$, $$\lim_{n\to\infty}x_n=\alpha,\quad\text{where }x_n=g(x_{n-1})\quad\forall n\in\NN.$$
+    Let $(M,d)$ be a complete metric space and $g:M\rightarrow M$ be a contraction\footnote{Remember definitions \ref{FOSV_metric}, \ref{FOSV_complete} and \ref{FOSV_contr}.}. Then, $g$ has a unique fixed point $\alpha\in M$ and for every $x_0\in M$, $$\lim_{n\to\infty}x_n=\alpha,\quad\text{where }x_n=g(x_{n-1})\quad\forall n\in\NN.$$
 \end{theorem}
 \begin{prop}
-    Let $(M,d)$ be a metric space and $g:M\rightarrow M$ be a contraction of constant $k$. Then if we want to approximate a fixed point $\alpha$ by the iteration $x_n=g(x_{n-1})$, we have:
+    Let $(M,d)$ be a metric space and $g:M\rightarrow M$ be a contraction of constant $k$. Then, if we want to approximate a fixed point $\alpha$ by the iteration $x_n=g(x_{n-1})$, we have:
     \begin{align*}
         d(x_n,\alpha)&\leq\frac{k^n}{1-k}d(x_1,x_0)\quad&\text{(a priori estimation)}\\
         d(x_n,\alpha)&\leq\frac{k}{1-k}d(x_n,x_{n-1})\quad&\text{(a posteriori estimation)}
@@ -141,13 +141,13 @@
     Let $(x_n)$ be a sequence of real numbers that converges to $\alpha\in\RR$. We say $(x_n)$ has \textit{order of convergence $p\in\RR^+$} if exists $C>0$ such that: $$\lim_{n\to\infty}\frac{|x_{n+1}-\alpha|}{|x_n-\alpha|^p}=C.$$ The constant $C$ is called \textit{asymptotic error constant}. For the case $p=1$, we need $C<1$. In this case the convergence is called \textit{linear convergence}; for $p=2$, is called \textit{quadratic convergence}; for $p=3$, \textit{cubic convergence}... If it's satisfied that $$\lim_{n\to\infty}\frac{|x_{n+1}-\alpha|}{|x_n-\alpha|^p}=0$$ for some $p\in\RR^+$, we say the sequence has \textit{order of convergence at least $p$}.
 \end{definition}
 \begin{theorem}
-    Let $g:\RR\rightarrow\RR$ be a function of class $\mathcal{C}^p$ and let $\alpha$ be a fixed point of $g$. Suppose $$g'(\alpha)=g''(\alpha)=\cdots=g^{(p-1)}(\alpha)=0$$ with $|g'(\alpha)|<1$ if $p=1$. Then the iteration $x_{n+1}=g(x_n)$, with $x_0$ sufficiently close to $\alpha$, has order of convergence at least $p$. If, moreover, $g^{(p)}(\alpha)\ne0$, then the previous iteration has order of convergence $p$ with asymptotic error constant $C=\frac{|g^{(p)}(\alpha)|}{p!}$.
+    Let $g:\RR\rightarrow\RR$ be a function of class $\mathcal{C}^p$ and let $\alpha$ be a fixed point of $g$. Suppose $$g'(\alpha)=g''(\alpha)=\cdots=g^{(p-1)}(\alpha)=0$$ with $|g'(\alpha)|<1$ if $p=1$. Then, the iteration $x_{n+1}=g(x_n)$, with $x_0$ sufficiently close to $\alpha$, has order of convergence at least $p$. If, moreover, $g^{(p)}(\alpha)\ne0$, then the previous iteration has order of convergence $p$ with asymptotic error constant $C=\frac{|g^{(p)}(\alpha)|}{p!}$.
 \end{theorem}
 \begin{theorem}
     Let $f:\RR\rightarrow\RR$ be a function of class $\mathcal{C}^3$ and $\alpha$ be a simple zero of $f$. If $f''(\alpha)\ne0$, then Newton-Raphson method for finding $\alpha$ has quadratic convergence with asymptotic error constant $C=\frac{1}{2}\left|\frac{f''(\alpha)}{f'(\alpha)}\right|$.\par If $f\in\mathcal{C}^{m+2}$, and $\alpha$ is a zero of multiplicity $m>1$, then Newton-Raphson method has linear convergence but Newton-Raphson modified method has at least quadratic convergence.
 \end{theorem}
 \begin{theorem}
-    Let $f:\RR\rightarrow\RR$ be a function of class $\mathcal{C}^3$ and let $\alpha$ be a simple zero of $f$. Then Chebyshev's method for finding $\alpha$ has at least cubic convergence.
+    Let $f:\RR\rightarrow\RR$ be a function of class $\mathcal{C}^3$ and let $\alpha$ be a simple zero of $f$. Then, Chebyshev's method for finding $\alpha$ has at least cubic convergence.
 \end{theorem}
 \begin{definition}
     We define the \textit{computational efficiency of an algorithm} as a function $E(p,t)$, where $t$ is the time taken for each iteration of the method and $p$ is the order of convergence of the method. $E(p,t)$ must satisfy the following properties:
@@ -166,17 +166,17 @@
     \textit{Aitken's $\Delta^2$ method} is the transformation of the sequence $(x_n)$ into a sequence $y_n$, defined as: $$y_n:=x_n-\frac{(\Delta x_n)^2}{\Delta^2 x_n}=x_n-\frac{(x_{n+1}-x_n)^2}{x_{n+2}-2x_{n+1}+x_n},$$ with $y_0=x_0$.
 \end{definition}
 \begin{theorem}
-    Let $(x_n)$ be a sequence of real numbers such that $\displaystyle\lim_{n\to\infty}x_n=\alpha$, $x_n\ne\alpha$ $\forall n\in\NN$ and $\exists C$, $|C|<1$, satisfying $$x_{n+1}-\alpha=(C+\delta_n)(x_n-\alpha),\quad\text{with }\lim_{n\to\infty}\delta_n=0.$$ Then the sequence $(y_n)$ obtained from Aitken's $\Delta^2$ process is well-defined and $$\lim_{n\to\infty}\frac{y_n-\alpha}{x_n-\alpha}=0\footnote{This means that Aitken's $\Delta^2$ method produces an acceleration of the convergence of the sequence $(x_n)$.}.$$
+    Let $(x_n)$ be a sequence of real numbers such that $\displaystyle\lim_{n\to\infty}x_n=\alpha$, $x_n\ne\alpha$ $\forall n\in\NN$ and $\exists C$, $|C|<1$, satisfying $$x_{n+1}-\alpha=(C+\delta_n)(x_n-\alpha),\quad\text{with }\lim_{n\to\infty}\delta_n=0.$$ Then, the sequence $(y_n)$ obtained from Aitken's $\Delta^2$ process is well-defined and $$\lim_{n\to\infty}\frac{y_n-\alpha}{x_n-\alpha}=0\footnote{This means that Aitken's $\Delta^2$ method produces an acceleration of the convergence of the sequence $(x_n)$.}.$$
 \end{theorem}
 \begin{theorem}[Steffensen's method]
-    Let $g:\RR\rightarrow\RR$ be a continuous function and suppose we have an iterative method $x_{n+1}=g(x_n)$. Then for each step $n$ we can consider a new iteration $y_{n+1}$, with $y_0=x_0$, given by: $$y_{n+1}=y_n-\frac{\left(g(y_n)-y_n\right)^2}{g(g(y_n))-2g(y_n)+y_n}.$$
+    Let $g:\RR\rightarrow\RR$ be a continuous function and suppose we have an iterative method $x_{n+1}=g(x_n)$. Then, for each step $n$ we can consider a new iteration $y_{n+1}$, with $y_0=x_0$, given by: $$y_{n+1}=y_n-\frac{\left(g(y_n)-y_n\right)^2}{g(g(y_n))-2g(y_n)+y_n}.$$
 \end{theorem}
 \begin{prop}
-    Let $f:\RR\rightarrow\RR$ be a function of class $\mathcal{C}^2$ and $\alpha$ be a simple zero of $f$. Then Steffensen's method for finding $\alpha$ has at least quadratic convergence\footnote{Note that the advantage of Steffensen's method over Newton-Raphson method is that in the former we don't need the differentiability of the function whereas in the latter we do.}.
+    Let $f:\RR\rightarrow\RR$ be a function of class $\mathcal{C}^2$ and $\alpha$ be a simple zero of $f$. Then, Steffensen's method for finding $\alpha$ has at least quadratic convergence\footnote{Note that the advantage of Steffensen's method over Newton-Raphson method is that in the former we don't need the differentiability of the function whereas in the latter we do.}.
 \end{prop}
 \subsubsection*{Zeros of polynomials}
 \begin{lemma}
-    Let $p(z)=a_0+a_1z+\cdots+a_nz^n\in\CC [x]$ with $a_n\ne 0$. We define $$\lambda:=\max\left\{\left\|\frac{a_i}{a_n}\right\|:i=0,1,\ldots,n-1\right\}.$$ Then if $p(\alpha)=0$ for some $\alpha\in\CC $, $\|\alpha\|\leq\lambda+1$.
+    Let $p(z)=a_0+a_1z+\cdots+a_nz^n\in\CC [x]$ with $a_n\ne 0$. We define $$\lambda:=\max\left\{\left\|\frac{a_i}{a_n}\right\|:i=0,1,\ldots,n-1\right\}.$$ Then, if $p(\alpha)=0$ for some $\alpha\in\CC $, $\|\alpha\|\leq\lambda+1$.
 \end{lemma}
 \begin{definition}[Strum's sequence]
     Let $(f_i)$, $i=0,\ldots,n$, be a sequence of continuous functions defined on $[a,b]\subset\RR$ and $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^1$ such that $f(a)f(b)\ne 0$. We say $(f_n)$ is a \textit{Sturm's sequence} if:
@@ -191,13 +191,13 @@
     Let $(a_i)$, $i=0,\ldots,n$, be a sequence. We define $\nu(a_i)$ as the number of sign variations of the sequence $$\{a_0,a_1,\ldots,a_n\},$$ without taking into account null values. 
 \end{definition}
 \begin{theorem}[Sturm's theorem]
-    Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^1$ such that $f(a)f(b)\ne 0$ and with a finite number of zeros. Let $(f_i)$, $i=0,\ldots,n$, be a Sturm sequence defined on $[a,b]$. Then the number of zeros of $f$ on $[a,b]$ is $$\nu\left(f_i(a)\right)-\nu\left(f_i(b)\right).$$
+    Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^1$ such that $f(a)f(b)\ne 0$ and with a finite number of zeros. Let $(f_i)$, $i=0,\ldots,n$, be a Sturm sequence defined on $[a,b]$. Then, the number of zeros of $f$ on $[a,b]$ is $$\nu\left(f_i(a)\right)-\nu\left(f_i(b)\right).$$
 \end{theorem}
 \begin{lemma}
-    Let $p\in\CC [x]$ be a polynomial. Then the polynomial $\displaystyle q=\frac{p}{\gcd(p,p')}$ has the same roots as $p$ but all of them are simple.
+    Let $p\in\CC [x]$ be a polynomial. Then, the polynomial $\displaystyle q=\frac{p}{\gcd(p,p')}$ has the same roots as $p$ but all of them are simple.
 \end{lemma}
 \begin{prop}
-    Let $p\in\RR[x]$ be a polynomial with $\deg p=m$. We define $\displaystyle f_0=\frac{p}{\gcd(p,p')}$ and $f_1=f_0'$. If $\deg f_0=n$, then for $i=0,1,\ldots,n-2$, we define $f_{i+2}$ as $$f_i(x)=q_{i+1}(x)f_{i+1}(x)-f_{i+2}(x),$$ (similarly to the euclidean division between $f_i$ and $f_{i+1}$). Then $f_n$ is constant and hence the sequence $(f_i)$, $i=0,\ldots,n$, is a Sturm sequence.
+    Let $p\in\RR[x]$ be a polynomial with $\deg p=m$. We define $\displaystyle f_0=\frac{p}{\gcd(p,p')}$ and $f_1=f_0'$. If $\deg f_0=n$, then for $i=0,1,\ldots,n-2$, we define $f_{i+2}$ as $$f_i(x)=q_{i+1}(x)f_{i+1}(x)-f_{i+2}(x),$$ (similarly to the euclidean division between $f_i$ and $f_{i+1}$). Then, $f_n$ is constant and hence the sequence $(f_i)$, $i=0,\ldots,n$, is a Sturm sequence.
 \end{prop}
 \begin{theorem}[Budan-Fourier theorem]
     Let $p\in\RR[x]$ be a polynomial with $\deg p=n$. Consider the sequence $(p^{(i)})$, $i=0,\ldots,n$. If $p(a)p(b)\ne 0$, the number of zeros of $p$ on $[a,b]$ is $$\nu\left(p^{(i)}(a)\right)-\nu\left(p^{(i)}(b)\right)-2k,\quad\text{for some }k\in\NN\cup\{0\}.$$
@@ -211,14 +211,14 @@
         r_i=\sum_{\substack{k=1\\k\ne i}}^n|a_{ik}|,\quad R_i=\{z\in\CC :|z-a_{ii}|\leq r_i\},\\
         c_j=\sum_{\substack{k=1\\k\ne j}}^n|a_{kj}|,\quad C_j=\{z\in\CC :|z-a_{jj}|\leq c_j\}.
     \end{gather*}
-    Then $\lambda\in\bigcup_{i=1}^nR_i$ and $\lambda\in\bigcup_{j=1}^nC_j$. Moreover in each connected component of $\bigcup_{i=1}^nR_i$ (respectively $\bigcup_{j=1}^nC_j$) there are as many eigenvalues (taking into account the multiplicity) as disks $R_i$ (respectively $C_i$).
+    Then, $\lambda\in\bigcup_{i=1}^nR_i$ and $\lambda\in\bigcup_{j=1}^nC_j$. Moreover in each connected component of $\bigcup_{i=1}^nR_i$ (respectively $\bigcup_{j=1}^nC_j$) there are as many eigenvalues (taking into account the multiplicity) as disks $R_i$ (respectively $C_i$).
 \end{theorem}
 \begin{corollary}
     Let $p(z)=a_0+a_1z+\cdots+a_nz^n+z^{n+1}\in\CC [x]$. We define
     \begin{gather*}
         r=\sum_{i=1}^{n-1}|a_i|,\quad c=\max\{|a_0|,|a_1|+1,\ldots,|a_{n-1}|+1\}.
     \end{gather*}
-    Then if $p(\alpha)=0$ for some $\alpha\in\CC $, $$\alpha\in(B(0,1)\cup B(-a_n,r))\cap(B(-a_n,1)\cup B(0,c)).$$
+    Then, if $p(\alpha)=0$ for some $\alpha\in\CC $, $$\alpha\in(B(0,1)\cup B(-a_n,r))\cap(B(-a_n,1)\cup B(0,c)).$$
 \end{corollary}
 \subsection{Interpolation}
 \begin{definition}
@@ -257,10 +257,10 @@
     Let $f:\RR\rightarrow\RR$ be a function. For $x\in\RR$, we have $f[x]=f(x)$. And if $\{x_i\}_{i=0}^n\subset\RR$ are different points, then $$f[x_0,\ldots,x_n]=\frac{f[x_1,\ldots,x_n]-f[x_0,\ldots,x_{n-1}]}{x_n-x_0}.$$ 
 \end{prop}
 \begin{theorem}
-    Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^{n+1}$, $\{x_i\}_{i=0}^n\subset\RR$ be different  points and $p_n\in\RR[x]$ be the interpolating polynomial with support points $\{(x_i,f(x_i))\}_{i=0}^n$. Then $\forall x\in[a,b]$, $$f(x)-p_n(x)=\frac{f^{(n+1)}(\xi_x)}{(n+1)!}\omega_n(x),$$ where $\xi_x\in\langle x_0,\ldots,x_n,x\rangle$\footnote{The interval $\langle a_1,\ldots,a_k\rangle$ is defined as $\langle a_1,\ldots,a_k\rangle:=(\min(a_1,\ldots,a_k),\max(a_1,\ldots,a_k))$.}.
+    Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^{n+1}$, $\{x_i\}_{i=0}^n\subset\RR$ be different  points and $p_n\in\RR[x]$ be the interpolating polynomial with support points $\{(x_i,f(x_i))\}_{i=0}^n$. Then, $\forall x\in[a,b]$, $$f(x)-p_n(x)=\frac{f^{(n+1)}(\xi_x)}{(n+1)!}\omega_n(x),$$ where $\xi_x\in\langle x_0,\ldots,x_n,x\rangle$\footnote{The interval $\langle a_1,\ldots,a_k\rangle$ is defined as $\langle a_1,\ldots,a_k\rangle:=(\min(a_1,\ldots,a_k),\max(a_1,\ldots,a_k))$.}.
 \end{theorem}
 \begin{lemma}
-    Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^{n+1}$ and $\{x_i\}_{i=0}^n\subset\RR$ be pairwise distinct points. Then $\exists\xi\in\langle x_0,\ldots,x_n\rangle$ such that: $$f[x_0,\ldots,x_n]=\frac{f^{(n)}(\xi)}{n!}.$$ 
+    Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^{n+1}$ and $\{x_i\}_{i=0}^n\subset\RR$ be pairwise distinct points. Then, $\exists\xi\in\langle x_0,\ldots,x_n\rangle$ such that: $$f[x_0,\ldots,x_n]=\frac{f^{(n)}(\xi)}{n!}.$$ 
 \end{lemma}
 \begin{prop}
     Let $f:\RR\rightarrow\RR$ be a function of class $\mathcal{C}^{n+1}$, $\{x_i\}_{i=0}^n\subset\RR$ be pairwise distinct points and $\sigma\in S_n$. Then, $$f[x_0,\ldots,x_n]=f[x_{\sigma(0)},\ldots,x_{\sigma(n)}]$$
@@ -292,7 +292,7 @@
     Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^n$ and $\{x_i\}_{i=0}^n\subset\RR$ be points. We define $f[x_i,\overset{(n+1)}{\ldots},x_i]$ as $$f[x_i,\overset{(n+1)}{\ldots},x_i]=\frac{f^{(n)}(x_i)}{n!}.$$
 \end{prop}
 \begin{theorem}
-    Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^{n+1}$, $\{x_i\}_{i=0}^m\subset\RR$ be different points, $\{n_i\}_{i=0}^m\subset\NN$ be such that $\sum_{i=0}^mn_i=n+1$. Let $h_n$ be the Hermite interpolating polynomial of $f$ with nodes $\{x_i\}_{i=0}^m\subset\RR$, that is, $$h_n^{(k)}(x_i)=f^{(k)}(x_i)\text{ for }i=0,\ldots,m\text{ and }k=0,\ldots,n_i-1.$$ Then $\forall x\in[a,b]$ $\exists\xi_x\in\langle x_0,\ldots,x_n,x\rangle$ such that: $$f(x)-h_n(x)=\frac{f^{(n+1)}(\xi_x)}{(n+1)!}(x-x_0)^{n_0}\cdots(x-x_m)^{n_m}.$$
+    Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^{n+1}$, $\{x_i\}_{i=0}^m\subset\RR$ be different points, $\{n_i\}_{i=0}^m\subset\NN$ be such that $\sum_{i=0}^mn_i=n+1$. Let $h_n$ be the Hermite interpolating polynomial of $f$ with nodes $\{x_i\}_{i=0}^m\subset\RR$, that is, $$h_n^{(k)}(x_i)=f^{(k)}(x_i)\text{ for }i=0,\ldots,m\text{ and }k=0,\ldots,n_i-1.$$ Then, $\forall x\in[a,b]$ $\exists\xi_x\in\langle x_0,\ldots,x_n,x\rangle$ such that: $$f(x)-h_n(x)=\frac{f^{(n+1)}(\xi_x)}{(n+1)!}(x-x_0)^{n_0}\cdots(x-x_m)^{n_m}.$$
 \end{theorem}
 \subsubsection*{Spline interpolation}
 \illustration{0.95}{Images/runge.tex}{Runge's phenomenon. In this case $f(x)=\frac{1}{1+25x^2}$. $p_5(x)$ is the 5th-order Lagrange interpolating polynomial with equally-spaced interpolating points; $p_9(x)$, the 9th-order Lagrange interpolating polynomial with equally-spaced interpolating points, and $p_{13}(x)$, the 13th-order Lagrange interpolating polynomial with equally-spaced interpolating points.}{}
@@ -357,10 +357,10 @@
     \end{itemize}
 \end{theorem}
 \begin{corollary}[Trapezoidal rule]
-    Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^2$. Then $\exists\xi\in[a,b]$ such that: $$\int_a^bf(x)\dd x=\frac{h}{2}(f(a)+f(b))-\frac{f''(\xi)}{12}h^3,$$ where $h=b-a$. This is the case $n=1$ of closed Newton–Cotes formulas.
+    Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^2$. Then, $\exists\xi\in[a,b]$ such that: $$\int_a^bf(x)\dd x=\frac{h}{2}(f(a)+f(b))-\frac{f''(\xi)}{12}h^3,$$ where $h=b-a$. This is the case $n=1$ of closed Newton–Cotes formulas.
 \end{corollary}
 \begin{corollary}[Simpson's rule]
-    Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^4$. Then $\exists\xi\in[a,b]$ such that: $$\int_a^bf(x)\dd x=\frac{h}{3}\left(f(a)+4f\left(\frac{a+b}{2}\right)+f(b)\right)-\frac{f^{(4)}(\xi)}{90}h^5,$$ where $h=\frac{b-a}{2}$. This is the case $n=2$ of closed Newton–Cotes formulas.
+    Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^4$. Then, $\exists\xi\in[a,b]$ such that: $$\int_a^bf(x)\dd x=\frac{h}{3}\left(f(a)+4f\left(\frac{a+b}{2}\right)+f(b)\right)-\frac{f^{(4)}(\xi)}{90}h^5,$$ where $h=\frac{b-a}{2}$. This is the case $n=2$ of closed Newton–Cotes formulas.
 \end{corollary}
 \begin{theorem}[Composite Trapezoidal rule]
     Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^4$, $h=\frac{b-a}{n}$ and $x_j=a+jh$ for each $j=0,1,\ldots,n$. Then, $\exists\xi\in[a,b]$ such that:
@@ -388,7 +388,7 @@
     where $h=\frac{b-a}{n}$, $B_n$ are the Bernoulli numbers and $\xi\in[a,b]$.
 \end{theorem}
 \begin{theorem}[Romberg method]
-    Let $f\in\mathcal{C}^{2m+2}([a,b])$ be a function. Then by Euler–Maclaurin formula, we obtain: $$T(f,a,b,h)=\int_a^bf(t)\dd t+\beta_1 h^2+\beta_2 h^4+\cdots,$$ where $h=\frac{b-a}{n}$. For $n=1,2,\ldots$ we define: $$T_{n,1}=T\left(f,a,b,\frac{b-a}{2^n}\right),\quad T_{n,m+1}=\frac{4^mT_{n+1,m}-T_{n,m}}{4^m-1},$$ for $m\leq n$. Then, we can observe that $$T_{n,m}=\int_a^bf(t)\dd t+O\left(\left(\frac{b-a}{2^n}\right)^{2m}\right).$$
+    Let $f\in\mathcal{C}^{2m+2}([a,b])$ be a function. Then, by Euler–Maclaurin formula, we obtain: $$T(f,a,b,h)=\int_a^bf(t)\dd t+\beta_1 h^2+\beta_2 h^4+\cdots,$$ where $h=\frac{b-a}{n}$. For $n=1,2,\ldots$ we define: $$T_{n,1}=T\left(f,a,b,\frac{b-a}{2^n}\right),\quad T_{n,m+1}=\frac{4^mT_{n+1,m}-T_{n,m}}{4^m-1},$$ for $m\leq n$. Then, we can observe that $$T_{n,m}=\int_a^bf(t)\dd t+O\left(\left(\frac{b-a}{2^n}\right)^{2m}\right).$$
 \end{theorem}
 \subsubsection*{Orthogonal polynomials}
 \begin{definition}
@@ -405,7 +405,7 @@
     Let $\phi_k\in\mathfrak{P}_n$ and $q\in\Pi_n$. Then, $\langle q,\phi_k\rangle=0$ for each $k>n$.
 \end{lemma}
 \begin{lemma}
-    Let $\phi_n\in\{\phi_i(x)\in\RR[x]:\deg\phi_i(x)=i\text{ and }\langle \phi_i,\phi_j\rangle=0\iff i\ne j,  i\in\NN\cup\{0\}\}$. Then $\forall n\in\NN\cup\{0\}$, all roots of $\phi_n$ are real, simple and contained in the interval $(a,b)$.
+    Let $\phi_n\in\{\phi_i(x)\in\RR[x]:\deg\phi_i(x)=i\text{ and }\langle \phi_i,\phi_j\rangle=0\iff i\ne j,  i\in\NN\cup\{0\}\}$. Then, $\forall n\in\NN\cup\{0\}$, all roots of $\phi_n$ are real, simple and contained in the interval $(a,b)$.
 \end{lemma}
 \begin{theorem}[Existence of orthogonal polynomials]
     For each $n\in\NN\cup\{0\}$ there exists a unique monic orthogonal polynomial $\phi_n$ with $\deg\phi_n=n$ defined by:
@@ -626,7 +626,7 @@ Suppose we want to solve the system $\mathblack{A}\mathblack{x}=\mathblack{b}$, 
     Then, the iterative method can also be written as: $$\mathblack{x}^{(k+1)}=\mathblack{M}(\alpha)\mathblack{x}^{(k)}+\left[\mathblack{N}(\alpha)\right]^{-1}\mathblack{b}.$$
 \end{definition}
 \begin{definition}[Successive over-relaxation me\-thod]
-    Let $\mathblack{A}\in\mathcal{M}_n(\RR)$, $\mathblack{b}\in\RR^n$, $\alpha\in\RR$ be such that $\alpha\ne-1$ and $\mathblack{x}^{(k+1)}=\mathblack{N}^{-1}\mathblack{P}\mathblack{x}^{(k)}+\mathblack{N}^{-1}\mathblack{b}$ be an iterative method. \textit{Successive over-relaxation method} or \textit{SOR} consists in defining $\mathblack{N}(\alpha)=(1+\alpha)\mathblack{N}$ and, therefore, $\mathblack{P}(\alpha)=\mathblack{P}+\alpha\mathblack{N}$ because it must be true that $\mathblack{A}=\mathblack{N}(\alpha)-\mathblack{P}(\alpha)$. Then, the previous iteration is transformed into $\mathblack{x}^{(k+1)}=\left[\mathblack{N}(\alpha)\right]^{-1}\mathblack{P}(\alpha)\mathblack{x}^{(k)}+\left[\mathblack{N}(\alpha)\right]^{-1}\mathblack{b}$.
+    Let $\mathblack{A}\in\mathcal{M}_n(\RR)$, $\mathblack{b}\in\RR^n$, $\alpha\in\RR$ be such that $\alpha\ne-1$ and $\mathblack{x}^{(k+1)}=\mathblack{N}^{-1}\mathblack{P}\mathblack{x}^{(k)}+\mathblack{N}^{-1}\mathblack{b}$ be an iterative method. \textit{Successive over-relaxation method} or \textit{SOR} consists in defining $$\mathblack{N}(\alpha)=(1+\alpha)\mathblack{N}\quad\text{and}\quad\mathblack{P}(\alpha)=\mathblack{P}+\alpha\mathblack{N}$$ because it must be true that $\mathblack{A}=\mathblack{N}(\alpha)-\mathblack{P}(\alpha)$. Then, the previous iteration is transformed into: $$\mathblack{x}^{(k+1)}=\left[\mathblack{N}(\alpha)\right]^{-1}\mathblack{P}(\alpha)\mathblack{x}^{(k)}+\left[\mathblack{N}(\alpha)\right]^{-1}\mathblack{b}.$$
 \end{definition}
 \begin{definition}
     Let $\mathblack{A}\in\mathcal{M}_n(\RR)$, $\mathblack{b}\in\RR^n$, $\alpha\in\RR$ be such that $\alpha\ne-1$ and $\mathblack{x}^{(k+1)}=\left[\mathblack{N}(\alpha)\right]^{-1}\mathblack{P}(\alpha)\mathblack{x}^{(k)}+\left[\mathblack{N}(\alpha)\right]^{-1}\mathblack{b}$ be a SOR method. Since $\mathblack{M}(\alpha)=\left[\mathblack{N}(\alpha)\right]^{-1}\mathblack{P}(\alpha)$, we have that $$\mathblack{M}(\alpha)=\frac{1}{1+\alpha}(\mathblack{M}+\alpha\mathblack{I}_n)$$ and, therefore: $$\sigma(\mathblack{M}(\alpha))=\left\{\frac{\lambda+\alpha}{1+\alpha}:\lambda\in\sigma(\mathblack{M})\right\}.$$  
@@ -644,13 +644,20 @@ Suppose we want to solve the system $\mathblack{A}\mathblack{x}=\mathblack{b}$, 
     \begin{pmatrix}
         \mathblack{E} & \mathblack{0}\\
         \mathblack{F} & \mathblack{G}
-    \end{pmatrix},$$ for some matrices $\mathblack{E}$, $\mathblack{F}$ and $\mathblack{G}$. A matrix is \textit{irreducible} if it is not reducible.
+    \end{pmatrix},$$ for some square matrices $\mathblack{E}$ and $\mathblack{G}$ and for some other matrix $\mathblack{F}$. A matrix is \textit{irreducible} if it is not reducible.
 \end{definition}
 \begin{theorem}[Perron-Frobenius theorem]
     Let $\mathblack{A}\in\mathcal{M}_n(\RR)$ be a non-negative irreducible matrix. Then, $\rho(\mathblack{A})$ is a real number and it is the dominant eigenvalue.
 \end{theorem}
 \begin{definition}[Power method]
-    Let $\mathblack{A}\in\mathcal{M}_n(\RR)$ and $\|\cdot\|$ be a vector norm\footnote{For power method it is recommended to use $\|\cdot\|_\infty$.}. For simplicity suppose $\mathblack{A}$ is a diagonalizable with eigenvalues $\lambda_1,\ldots,\lambda_n$ and eigenvectors $\mathblack{v}_1,\ldots,\mathblack{v}_n$. Suppose $|\lambda_1|>|\lambda_2|\geq\cdots\geq|\lambda_n|$. The \textit{power method} consists in finding an approximation of the dominant eigenvalue $\lambda_1$ starting from an initial approximation $\mathblack{x}^{(0)}$ of $\mathblack{v}_1$. We define $$\mathblack{y}^{(k)}=\frac{\mathblack{x}^{(k)}}{\|\mathblack{x}^{(k)}\|},\quad\mathblack{x}^{(k+1)}=\mathblack{A}\mathblack{y}^{(k)},\qquad\text{for }k\geq 0.$$ Then: $$\mathblack{y}^{(k)}=\frac{\mathblack{A}^k\mathblack{x}^{(0)}}{\|\mathblack{A}^k\mathblack{x}^{(0)}\|},\quad\mathblack{x}^{(k)}=\frac{\mathblack{A}^k\mathblack{x}^{(0)}}{\|\mathblack{A}^{k-1}\mathblack{x}^{(0)}\|}.$$ If we denote by $\mathblack{v}_{i,m}$ the $m$-th component of the vector $\mathblack{v}_i$ and choose $\ell$ such that $\mathblack{v}_{1,\ell}\ne0$. Then: $$\lim_{k\to\infty}\mathblack{x}^{(k)}=\mathblack{v}_1,\qquad\lim_{k\to\infty}\frac{\mathblack{x}_\ell^{(k+1)}}{\mathblack{y}_\ell^{(k)}}=\lambda_1.$$ More precisely we have: $$\frac{\mathblack{x}_\ell^{(k+1)}}{\mathblack{y}_\ell^{(k)}}=\lambda_1\left[1+O\left(\left|\frac{\lambda_2}{\lambda_1}\right|^k\right)\right].$$
+    Let $\mathblack{A}\in\mathcal{M}_n(\RR)$. For simplicity, suppose $\mathblack{A}$ is a diagonalizable with eigenvalues $\lambda_1,\ldots,\lambda_n$ and eigenvectors $\mathblack{v}_1,\ldots,\mathblack{v}_n$. Suppose $|\lambda_1|>|\lambda_2|\geq\cdots\geq|\lambda_n|$. The \textit{power method} consists in finding an approximation of the dominant eigenvalue $\lambda_1$ starting from an initial approximation $\mathblack{x}^{(0)}$ of $\mathblack{v}_1$. We define $$\mathblack{x}^{(k+1)}=\mathblack{A}\mathblack{x}^{(k)},\qquad k\geq 0.$$ Suppose $\mathblack{x}^{(0)}=\sum_{i=1}^n\alpha_i\mathblack{v}_i$ such that $\alpha_1\ne0$. If we denote by $\mathblack{v}_{i,m}$ the $m$-th component of the vector $\mathblack{v}_i$ and choose $\ell$ such that $\mathblack{v}_{1,\ell}\ne0$. Then: $$\lim_{k\to\infty}\frac{\mathblack{x}_\ell^{(k+1)}}{\mathblack{x}_\ell^{(k)}}=\lambda_1,\qquad\lim_{k\to\infty}\frac{\mathblack{x}^{(k)}}{\lambda_1^k}=\alpha_1\mathblack{v}_1,$$ provided that $\alpha_1\ne0$. More precisely we have: $$\frac{\mathblack{x}_\ell^{(k+1)}}{\mathblack{x}_\ell^{(k)}}=\lambda_1+O\left(\left|\frac{\lambda_2}{\lambda_1}\right|^k\right).$$
+\end{definition}
+\begin{definition}[Normalized power method]
+    Let $\mathblack{A}\in\mathcal{M}_n(\RR)$ and $\|\cdot\|$ be a vector norm\footnote{For power method it is recommended to use $\|\cdot\|_\infty$.}. For simplicity suppose $\mathblack{A}$ is a diagonalizable with eigenvalues $\lambda_1,\ldots,\lambda_n$ and eigenvectors $\mathblack{v}_1,\ldots,\mathblack{v}_n$. Suppose $|\lambda_1|>|\lambda_2|\geq\cdots\geq|\lambda_n|$. In the \textit{normalized power method} consists in defining $$\mathblack{y}^{(k)}=\frac{\mathblack{x}^{(k)}}{\|\mathblack{x}^{(k)}\|},\quad\mathblack{x}^{(k+1)}=\mathblack{A}\mathblack{y}^{(k)},\qquad\text{for }k\geq 0.$$ Suppose $\mathblack{x}^{(0)}=\sum_{i=1}^n\alpha_i\mathblack{v}_i$ such that $\alpha_1\ne0$. If we choose $\ell$ such that $\mathblack{v}_{1,\ell}\ne0$. Then: $$\lim_{k\to\infty}\mathblack{x}^{(k)}=\beta\mathblack{v}_1,\qquad\lim_{k\to\infty}\frac{\mathblack{x}_\ell^{(k+1)}}{\mathblack{y}_\ell^{(k)}}=\lambda_1,$$ for some $\beta\in\RR$. More precisely we have: $$\frac{\mathblack{x}_\ell^{(k+1)}}{\mathblack{y}_\ell^{(k)}}=\lambda_1+O\left(\left|\frac{\lambda_2}{\lambda_1}\right|^k\right).$$
+\end{definition}
+\begin{definition}[Rayleigh quotient]
+    Let $\mathblack{A}\in\mathcal{M}_n(\RR)$. Suppose we have a power method $\mathblack{x}^{(k+1)}=\mathblack{A}\mathblack{x}^{(k)}$ to approximate the dominant eigenvalue $\lambda_1$ of $\mathblack{A}$. Then: $$\lim_{k\to\infty}\frac{\left(\mathblack{x}^{(k+1)}\right)^\mathrm{T}\cdot \mathblack{x}^{(k)}}{\left(\mathblack{x}^{(k)}\right)^\mathrm{T}\cdot\mathblack{x}^{(k)}}=\lambda_1.$$
+    More precisely: $$\frac{\left(\mathblack{x}^{(k+1)}\right)^\mathrm{T}\cdot \mathblack{x}^{(k)}}{\left(\mathblack{x}^{(k)}\right)^\mathrm{T}\cdot\mathblack{x}^{(k)}}=\lambda_1+O\left(\left|\frac{\lambda_2}{\lambda_1}\right|^{2k}\right).$$
 \end{definition}
 \end{multicols}
 \end{document}
