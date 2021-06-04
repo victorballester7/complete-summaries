@@ -32,14 +32,14 @@
 
 %%%%%%%% Illustrations %%%%%%%%
 \newcommand*\illustration[4]{%Example of usage: \illustartion{0.5}{Imatges/sin.tex}{This is the caption.}{label}
-  \par
-  \begin{minipage}{\linewidth} 
+\begin{center}  
+  \begin{minipage}{\linewidth}
       \centering
-      \includegraphics[width=#1\linewidth]{#2} 
+      \includestandalone[mode=image|tex,width=#1\linewidth]{#2} 
       \captionof{figure}{#3}
       \label{#4}
   \end{minipage}
-  \par
+\end{center}
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -65,9 +65,9 @@
 
 \newcommand\ifSubfilesClassLoaded{% coditional statement (needed to include: \usepackage{titlesec})
   \expandafter\ifx\csname ver@subfiles.cls\endcsname\relax
-    \expandafter\@secondoftwo
+      \expandafter\@secondoftwo
   \else
-    \expandafter\@firstoftwo
+      \expandafter\@firstoftwo
   \fi
 }
 \ifSubfilesClassLoaded{% show only when the single subfile is compiled
@@ -117,7 +117,7 @@
 \newcommand{\transpose}[1]{\vb{#1}^{\mathrm{T}}} % math style for vectors and matrices
 \DeclareMathOperator{\adjugate}{adj} % adjugate matrix
 \DeclareMathOperator{\cofactor}{cof} % cofactor matrix
-\newcommand{\GL}[1]{\mathrm{GL}_{#1}} % set of invertible matrices
+\newcommand{\GL}{\mathrm{GL}} % set of invertible matrices
 
 \newcommand{\id}{\mathrm{id}} % identity function
 
@@ -142,26 +142,26 @@
 
 %%%%% Theorems, definitions,... environments %%%%%
 \newtheoremstyle{math}
-  {\topsep}   % ABOVESPACE
-  {\topsep}   % BELOWSPACE
-  {}  % BODYFONT
-  {0pt}       % INDENT (empty value is the same as 0pt)
-  {\bfseries} % HEADFONT
-  {.}         % HEADPUNCT
-  {5pt plus 1pt minus 1pt} % HEADSPACE
-  {\thmname{#1}\thmnumber{\@ifnotempty{#1}{ }\@upn{#2}}%
-    \thmnote{{ \bfseries(#3)}}}          % CUSTOM-HEAD-SPEC
+    {\topsep}   % ABOVESPACE
+    {\topsep}   % BELOWSPACE
+    {}  % BODYFONT
+    {0pt}       % INDENT (empty value is the same as 0pt)
+    {\bfseries} % HEADFONT
+    {.}         % HEADPUNCT
+    {5pt plus 1pt minus 1pt} % HEADSPACE
+    {\thmname{#1}\thmnumber{\@ifnotempty{#1}{ }\@upn{#2}}%
+      \thmnote{{ \bfseries(#3)}}}          % CUSTOM-HEAD-SPEC
     
 \newtheoremstyle{physics}
-  {\topsep}   % ABOVESPACE
-  {\topsep}   % BELOWSPACE
-  {}  % BODYFONT
-  {0pt}       % INDENT (empty value is the same as 0pt)
-  {\bfseries} % HEADFONT
-  {.}         % HEADPUNCT
-  {5pt plus 1pt minus 1pt} % HEADSPACE
-  {\thmname{#1}\thmnumber{}%
-  \thmnote{{ series#3}}}          % CUSTOM-HEAD-SPEC
+    {\topsep}   % ABOVESPACE
+    {\topsep}   % BELOWSPACE
+    {}  % BODYFONT
+    {0pt}       % INDENT (empty value is the same as 0pt)
+    {\bfseries} % HEADFONT
+    {.}         % HEADPUNCT
+    {5pt plus 1pt minus 1pt} % HEADSPACE
+    {\thmname{#1}\thmnumber{}%
+    \thmnote{{ series#3}}}          % CUSTOM-HEAD-SPEC
 
 \theoremstyle{math}
 \newtheorem{theorem}{Theorem}[section]
@@ -170,6 +170,7 @@
 \newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{axiom}[theorem]{Axiom}
 \newtheorem{definition}[theorem]{Definition}
+\newtheorem{method}[theorem]{Method}
 
 \theoremstyle{physics}
 \newtheorem{concept}{}[section]

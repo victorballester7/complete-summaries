@@ -78,7 +78,7 @@
 \end{definition}
 \subsubsection*{Root-finding methods}
     For the following methods consider a continuous function $f:I\subseteq\RR\rightarrow\RR$ with an unknown zero $\alpha\in I$. Given $\varepsilon>0$, we want to approximate $\alpha$ with $\Tilde{\alpha}$ such that $|\alpha-\Tilde{\alpha}|<\varepsilon$.
-\begin{theorem}[Bisection method]
+\begin{method}[Bisection method]
     Suppose $I=[a_0,b_0]$. For each step $n\geq 0$ of the algorithm we will approximate $\alpha$ by $$c_n=\frac{a_n+b_n}{2}.$$ If $f(c_n)=0$ we are done. If not, let 
     $$[a_{n+1},b_{n+1}]=\left\{
     \begin{array}{ccc}
@@ -86,8 +86,8 @@
         \left[c_n,b_n\right] & \text{if} & f(a_n)f(c_n)>0.
     \end{array}\right.$$ 
     and iterate the process again\footnote{Note that bisection method only works for zeros of odd multiplicity.}. Observe the length of the interval $[a_n,b_n]$ is $\frac{b_0-a_0}{2^n}$ and therefore: $$|\alpha-c_n|<\frac{b_0-a_0}{2^{n+1}}<\varepsilon\iff n>\frac{\log\left(\frac{b_0-a_0}{\varepsilon}\right)}{\log 2}-1.$$
-\end{theorem}
-\begin{theorem}[\textit{Regula falsi} method]
+\end{method}
+\begin{method}[\textit{Regula falsi} method]
     Suppose $I=[a_0,b_0]$. For each step $n\geq 0$ of the algorithm we will approximate $\alpha$ by $$c_n=b_n-f(b_n)\frac{b_n-a_n}{f(b_n)-f(a_n)}=\frac{a_nf(b_n)-b_nf(a_n)}{f(b_n)-f(a_n)}.$$ If $f(c_n)=0$ we are done. If not, let
     $$[a_{n+1},b_{n+1}]=\left\{
     \begin{array}{ccc}
@@ -95,19 +95,19 @@
         \left[c_n,b_n\right] & \text{if} & f(a_n)f(c_n)>0,
     \end{array}\right.$$ 
     and iterate the process again.
-\end{theorem}
-\begin{theorem}[Secant method]
+\end{method}
+\begin{method}[Secant method]
     Suppose $I=\RR$ and that we have two different initial approximations $x_0$, $x_1$. Then, for each step $n\geq 0$ of the algorithm we obtain a new approximation $x_{n+2}$, given by: $$x_{n+2}=x_{n+1}-f(x_{n+1})\frac{x_{n+1}-x_n}{f(x_{n+1})-f(x_n)}.$$
-\end{theorem}
-\begin{theorem}[Newton-Raphson method]
+\end{method}
+\begin{method}[Newton-Raphson method]
     Suppose $I=\RR$, $f\in\mathcal{C}^1$ and that we have an initial approximation $x_0$. Then, for each step $n\geq 0$ we obtain a new approximation $x_{n+1}$, given by: $$x_{n+1}=x_n-\frac{f(x_n)}{f'(x_n)}.$$
-\end{theorem}
-\begin{theorem}[Newton-Raphson modified\\method]
+\end{method}
+\begin{method}[Newton-Raphson modified\\method]
     Suppose $I=\RR$, $f\in\mathcal{C}^1$ and that we have an initial approximation $x_0$ of a zero $\alpha$ of multiplicity $m$. Then, for each step $n\geq 0$ we obtain a new approximation $x_{n+1}$, given by: $$x_{n+1}=x_n-m\frac{f(x_n)}{f'(x_n)}.$$
-\end{theorem}
-\begin{theorem}[Chebyshev method]
+\end{method}
+\begin{method}[Chebyshev method]
     Suppose $I=\RR$, $f\in\mathcal{C}^2$ and that we have an initial approximation $x_0$. Then, for each step $n\geq 0$ we obtain a new approximation $x_{n+1}$, given by: $$x_{n+1}=x_n-\frac{f(x_n)}{f'(x_n)}-\frac{1}{2}\frac{\left[f(x_n)\right]^2f''(x_n)}{\left[f'(x_n)\right]^3}.$$
-\end{theorem}
+\end{method}
 \subsubsection*{Fixed-point iterations}
 \begin{definition}
     Let $g:[a,b]\rightarrow[a,b]\subset\RR$ be a function. A point $\alpha\in[a,b]$ is \textit{n-periodic} if $g^n(\alpha)=\alpha$ and $g^j(\alpha)\ne\alpha$ for $j=1,\ldots,n-1$\footnote{Note that 1-periodic points are the fixed points of $f$.}.
@@ -129,11 +129,11 @@
     Let $g:\RR\rightarrow\RR$ be a function of class $\mathcal{C}^1$ and $\alpha$ be a fixed point of $g$. We say $\alpha$ is an \textit{attractor fixed point} if $|g'(\alpha)|<1$. In this case, any iteration $x_{n+1}=g(x_n)$ in $I_\varepsilon$ converges to $\alpha$. If $|g'(\alpha)|>1$, we say $\alpha$ is a \textit{repulsor fixed point}. In this case, $\forall x_0\in I_\varepsilon$ the iteration $x_{n+1}=g(x_n)$ doesn't converge to $\alpha$.
 \end{definition}
 \begin{center}
-    \includegraphics[width=0.49\linewidth]{Images/cobweb1.tex}\hfill
-    \includegraphics[width=0.49\linewidth]{Images/cobweb2.tex}\\
+    \includestandalone[mode=image|tex,width=0.49\linewidth]{Images/cobweb1}\hfill
+    \includestandalone[mode=image|tex,width=0.49\linewidth]{Images/cobweb2}\\
     \vspace{0.02\linewidth}
-    \includegraphics[width=0.49\linewidth]{Images/cobweb3.tex}\hfill
-    \includegraphics[width=0.49\linewidth]{Images/cobweb4.tex}
+    \includestandalone[mode=image|tex,width=0.49\linewidth]{Images/cobweb3}\hfill
+    \includestandalone[mode=image|tex,width=0.49\linewidth]{Images/cobweb4}
     \captionof{figure}{Cobweb diagrams. In the figures at the top, $\alpha$ is a attractor point, that is, $|g'(\alpha)|<1$. More precisely, the figure at the top left occurs when $-1<g'(\alpha)\leq0$ and the figure at the top right when $0\leq g'(\alpha)<1$. In the figure at bottom left, $\alpha$ is a repulsor point. Finally, in the figure at bottom right the iteration $x_{n+1}=g(x_n)$ has no limit. It is said that to have a \textit{chaotic behavior}.}
 \end{center}
 \subsubsection*{Order of convergence}
@@ -158,19 +158,19 @@
     Examples of such functions are the following: $$E(p,t)=\frac{\log p}{t},\quad E(p,t)=p^{1/t}.$$
 \end{definition}
 \subsubsection*{Sequence acceleration}
-\begin{definition}[Aitken's $\Delta^2$ method]
+\begin{method}[Aitken's $\Delta^2$ method]
     Let $(x_n)$ be a sequence of real numbers. We denote:
     \begin{gather*}
         \Delta x_n:=x_{n+1}-x_n,\\\Delta^2 x_n:=\Delta x_{n+1}-\Delta x_n=x_{n+2}-2x_{n+1}+x_n.
     \end{gather*}
     \textit{Aitken's $\Delta^2$ method} is the transformation of the sequence $(x_n)$ into a sequence $y_n$, defined as: $$y_n:=x_n-\frac{(\Delta x_n)^2}{\Delta^2 x_n}=x_n-\frac{(x_{n+1}-x_n)^2}{x_{n+2}-2x_{n+1}+x_n},$$ with $y_0=x_0$.
-\end{definition}
+\end{method}
 \begin{theorem}
     Let $(x_n)$ be a sequence of real numbers such that $\displaystyle\lim_{n\to\infty}x_n=\alpha$, $x_n\ne\alpha$ $\forall n\in\NN$ and $\exists C$, $|C|<1$, satisfying $$x_{n+1}-\alpha=(C+\delta_n)(x_n-\alpha),\quad\text{with }\lim_{n\to\infty}\delta_n=0.$$ Then, the sequence $(y_n)$ obtained from Aitken's $\Delta^2$ process is well-defined and $$\lim_{n\to\infty}\frac{y_n-\alpha}{x_n-\alpha}=0\footnote{This means that Aitken's $\Delta^2$ method produces an acceleration of the convergence of the sequence $(x_n)$.}.$$
 \end{theorem}
-\begin{theorem}[Steffensen's method]
+\begin{method}[Steffensen's method]
     Let $g:\RR\rightarrow\RR$ be a continuous function and suppose we have an iterative method $x_{n+1}=g(x_n)$. Then, for each step $n$ we can consider a new iteration $y_{n+1}$, with $y_0=x_0$, given by: $$y_{n+1}=y_n-\frac{\left(g(y_n)-y_n\right)^2}{g(g(y_n))-2g(y_n)+y_n}.$$
-\end{theorem}
+\end{method}
 \begin{prop}
     Let $f:\RR\rightarrow\RR$ be a function of class $\mathcal{C}^2$ and $\alpha$ be a simple zero of $f$. Then, Steffensen's method for finding $\alpha$ has at least quadratic convergence\footnote{Note that the advantage of Steffensen's method over Newton-Raphson method is that in the former we don't need the differentiability of the function whereas in the latter we do.}.
 \end{prop}
@@ -205,7 +205,7 @@
 \begin{corollary}[Descartes' rule of signs]
     Let $p=a_0+a_1x+\cdots+a_nx^n\in\RR[x]$ be a polynomial. If $p(0)\ne 0$, the number of zeros of $p$ on $[0,\infty)$ is $$\nu(a_i)-2k,\quad\text{for some }k\in\NN\cup\{0\}\footnote{Note that making the change of variable $t=-x$ one can obtain the number of zeros on $(-\infty,0]$ of $p$ by considering the polynomial $p(t)$.}.$$
 \end{corollary}
-\begin{theorem}[Greshgorin theorem]
+\begin{theorem}[Gershgorin circle theorem]
     Let $A=(a_{ij})\in\mathcal{M}_n(\CC )$ be a complex matrix and $\lambda$ be an eigenvalue of $A$. For all $i,j\in\{1,2,\ldots,n\}$ we define:
     \begin{gather*}
         r_i=\sum_{\substack{k=1\\k\ne i}}^n|a_{ik}|,\quad R_i=\{z\in\CC :|z-a_{ii}|\leq r_i\},\\
@@ -295,7 +295,7 @@
     Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^{n+1}$, $\{x_i\}_{i=0}^m\subset\RR$ be different points, $\{n_i\}_{i=0}^m\subset\NN$ be such that $\sum_{i=0}^mn_i=n+1$. Let $h_n$ be the Hermite interpolating polynomial of $f$ with nodes $\{x_i\}_{i=0}^m\subset\RR$, that is, $$h_n^{(k)}(x_i)=f^{(k)}(x_i)\text{ for }i=0,\ldots,m\text{ and }k=0,\ldots,n_i-1.$$ Then, $\forall x\in[a,b]$ $\exists\xi_x\in\langle x_0,\ldots,x_n,x\rangle$ such that: $$f(x)-h_n(x)=\frac{f^{(n+1)}(\xi_x)}{(n+1)!}(x-x_0)^{n_0}\cdots(x-x_m)^{n_m}.$$
 \end{theorem}
 \subsubsection*{Spline interpolation}
-\illustration{0.95}{Images/runge.tex}{Runge's phenomenon. In this case $f(x)=\frac{1}{1+25x^2}$. $p_5(x)$ is the 5th-order Lagrange interpolating polynomial with equally-spaced interpolating points; $p_9(x)$, the 9th-order Lagrange interpolating polynomial with equally-spaced interpolating points, and $p_{13}(x)$, the 13th-order Lagrange interpolating polynomial with equally-spaced interpolating points.}{}
+\illustration{0.95}{Images/runge}{Runge's phenomenon. In this case $f(x)=\frac{1}{1+25x^2}$. $p_5(x)$ is the 5th-order Lagrange interpolating polynomial with equally-spaced interpolating points; $p_9(x)$, the 9th-order Lagrange interpolating polynomial with equally-spaced interpolating points, and $p_{13}(x)$, the 13th-order Lagrange interpolating polynomial with equally-spaced interpolating points.}{}
 \begin{definition}[Spline]
     Let $\{(x_i,y_i)\}_{i=0}^n$ be support points of an interval $[a,b]$. A \textit{spline of degree $p$} is a function $s:[a,b]\rightarrow\RR$ of class $\mathcal{C}^{p-1}$ satisfying: $$s_{{|_{[x_i,x_{i+1}]}}}\in\RR[x],\quad\deg s_{|_{[x_i,x_{i+1}]}}=p,$$ for $i=0,\ldots,n-1$ and $s(x_i)=y_i$ for $i=0,\ldots,n$. The most common case are splines of degree  $p=3$ or \textit{cubic spline}. In this case we can impose two more conditions on their definition in one of the following ways:
     \begin{enumerate}
@@ -450,6 +450,144 @@
     Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^{2n}$ and $\{x_i\}_{i=1}^n$ be the zeros of the orthogonal polynomial $\phi_n\in\mathfrak{P}_n$ with weight $\omega(x)$ on the interval $[a,b]$. Then, $$\int_a^b\omega(x)f(x)\dd x-\sum_{i=1}^n\omega_if(x_i)=\frac{f^{2n}(\xi)}{(2n)!}\langle\phi_n,\phi_n\rangle,$$ where $\xi\in[a,b]$. 
 \end{theorem}
 \subsection{Numerical linear algebra}
+\subsubsection*{Introduction}
+\begin{definition}
+    A matrix $\mathblack{A}=(a_{ij})\in\mathcal{M}_n(\CC)$ is \textit{upper triangular} if $a_{ij}=0$ whenever $i>j$. That is, $\mathblack{A}$ is of the form: 
+    $$\mathblack{A}=
+    \begin{pmatrix}
+        a_{11} & a_{12} & \cdots & a_{1n}\\
+        0 & a_{22} & \ddots & \vdots \\
+        \vdots & \ddots & \ddots & a_{(n-1)n}\\
+        0 & \cdots & 0 & a_{nn}
+    \end{pmatrix}
+    $$
+\end{definition}
+\begin{definition}
+    A matrix $\mathblack{A}=(a_{ij})\in\mathcal{M}_n(\CC)$ is \textit{lower triangular} if $a_{ij}=0$ whenever $j>i$. That is, $\mathblack{A}$ is of the form: 
+    $$\mathblack{A}=
+    \begin{pmatrix}
+        a_{11} & 0 & \cdots & 0\\
+        a_{21} & a_{22} & \ddots & \vdots \\
+        \vdots & \ddots & \ddots & 0\\
+        a_{n1} & \cdots & a_{n(n-1)} & a_{nn}
+    \end{pmatrix}
+    $$
+\end{definition}
+\begin{definition}
+    A matrix $\mathblack{A}=(a_{ij})\in\mathcal{M}_n(\CC)$ is \textit{diagonal} if $a_{ij}=0$ whenever $i\ne j$. That is, $\mathblack{A}$ is of the form: 
+    $$\mathblack{A}=
+    \begin{pmatrix}
+        a_{11} & 0 & \cdots & 0\\
+        0 & a_{22} & \ddots & \vdots \\
+        \vdots & \ddots & \ddots & 0\\
+        0 & \cdots & 0 & a_{nn}
+    \end{pmatrix}
+    $$
+\end{definition}
+\begin{definition}
+    A linear system with a triangular matrix associated is called a \textit{triangular system}.
+\end{definition}
+\subsubsection*{Exact methods}
+\begin{method}[Gaussian elimination]
+    Let $\mathblack{A}=(a_{ij})\in\mathcal{M}_n(\CC)$. We define $a_{ij}^{(1)}:=a_{ij}$ for $i,j=1,\ldots,n$ and 
+    $$\mathblack{A}^{(1)}:=
+    \begin{pmatrix}
+        a_{11}^{(1)} & a_{12}^{(1)} & \cdots & a_{1n}^{(1)}\\
+        a_{21}^{(1)} & a_{22}^{(1)} & \ddots & \vdots \\
+        \vdots & \ddots & \ddots & a_{(n-1)n}^{(1)}\\
+        a_{n1}^{(1)} & \cdots & a_{n(n-1)}^{(1)} & a_{nn}^{(1)}
+    \end{pmatrix}
+    $$
+    For $i=2,\ldots,n$ we define $m_{i1}=\frac{a_{i1}^{(1)}}{a_{11}^{(1)}}$ to transform the matrix $\mathblack{A}^{(1)}$ into a matrix $\mathblack{A}^{(2)}$ defined by $a_{ij}^{(2)}=a_{ij}^{(1)}-m_{i1}a_{1j}^{(1)}$ for $j=2,\ldots,n$. That is, we obtain a matrix of the form:
+    $$\mathblack{A}^{(1)}\sim
+    \begin{pmatrix}
+        a_{11}^{(1)} & a_{12}^{(1)} & a_{13}^{(1)} & \cdots & a_{1n}^{(1)}\\
+        0 & a_{22}^{(2)} & a_{23}^{(2)} & \cdots & a_{2n}^{(2)}\\
+        0 & a_{32}^{(2)} & a_{33}^{(2)} & \ddots & \vdots   \\
+        \vdots & \vdots & \ddots & \ddots & a_{(n-1)n}^{(2)}\\
+        0& a_{n2}^{(2)} & \cdots & a_{n(n-1)}^{(2)} & a_{nn}^{(2)}
+    \end{pmatrix} =:\mathblack{A}^{(2)}
+    $$
+    Proceeding analogously creating multipliers $m_{ij}$, $i>j$, to echelon the matrix $\mathblack{A}$, at the end we will obtain an upper triangular matrix $\mathblack{A}^{(n)}$ of the form:
+    $$\mathblack{A}^{(n)}=
+    \begin{pmatrix}
+        a_{11}^{(1)} & a_{12}^{(1)} & a_{13}^{(1)} & a_{14}^{(1)} & \cdots & a_{1n}^{(1)}\\
+        0 & a_{22}^{(2)} & a_{23}^{(2)} & a_{24}^{(2)} & \cdots & a_{2n}^{(2)}\\
+        0 & 0 & a_{33}^{(3)} & a_{34}^{(3)} & \cdots & a_{3n}^{(3)}   \\
+        0 & 0 & 0 & \ddots & \ddots & \vdots\\
+        \vdots & \vdots & \vdots & \ddots & a_{(n-1)(n-1)}^{(n-1)} & a_{(n-1)n}^{(n-1)}\\
+        0& 0 & 0 & \cdots &  0 & a_{nn}^{(n)}
+    \end{pmatrix}
+    $$
+\end{method}
+\begin{method}
+    \textit{Partial pivoting} method in gaussian elimination consists in selecting as the pivot element the entry with largest absolute value from the column of the matrix that is being considered. 
+\end{method}
+\begin{method}
+    \textit{Complete pivoting} method in gaussian elimination interchanges both rows and columns in order to use the largest element (by absolute value) in the matrix as the pivot.
+\end{method}
+\begin{definition}[LU descompostion]
+    Let $\mathblack{A}\in\GL_n(\RR)$ be a matrix. A \textit{LU decomposition of $\mathblack{A}$} is an expression $\mathblack{A}=\mathblack{L}\mathblack{U}$, where $\mathblack{L}=(\ell_{ij}),\mathblack{U}=(u_{ij})\in\mathcal{M}_n(\RR)$ are matrices of the form:
+    \begin{gather}\label{NM_L}
+        \mathblack{L}=
+        \begin{pmatrix}
+            1 & 0 & \cdots & 0\\
+            \ell_{21} & 1 & \ddots & \vdots \\
+            \vdots & \ddots & \ddots & 0\\
+            \ell_{n1} & \cdots & \ell_{n(n-1)} & 1
+        \end{pmatrix}\\\label{NM_U}
+        \mathblack{U}=
+        \begin{pmatrix}
+            u_{11} & u_{12} & \cdots & u_{1n}\\
+            0 & u_{22} & \ddots & \vdots \\
+            \vdots & \ddots & \ddots & u_{(n-1)n}\\
+            0 & \cdots & 0 & u_{nn}
+        \end{pmatrix}
+    \end{gather}
+\end{definition}
+\begin{lemma}
+    Let $\mathblack{A}\in\GL_n(\RR)$, $\mathblack{b}\in\RR^n$ and $\mathblack{A}\mathblack{x}=\mathblack{b}$ be a system of linear equations. Suppose $\mathblack{A}=\mathblack{L}\mathblack{U}$ for some matrices $\mathblack{L},\mathblack{U}\in\mathcal{M}_n(\RR)$ of the form of \eqref{NM_L} and \eqref{NM_U}, respectively. Then, we can proceed to solve the system $\mathblack{A}\mathblack{x}=\mathblack{b}$ in the following way:
+    \begin{enumerate}
+        \item Solve the triangular system $\mathblack{L}\mathblack{y}=\mathblack{b}$.
+        \item Solve the triangular system $\mathblack{U}\mathblack{x}=\mathblack{y}$.
+    \end{enumerate}
+\end{lemma}
+\begin{prop}
+    Let $\mathblack{A}\in\GL_n(\RR)$. Then:
+    \begin{enumerate}
+        \item If LU decomposition exists, it is unique.
+        \item If we can make the gaussian elimination without pivoting rows, then\footnote{In practice, LU decomposition is implemented making gaussian elimination and storing the values $m_{ij}$ in the position $ij$ of the matrix $\mathblack{A}^{(k)}$.}:
+        $$
+        \mathblack{L}=
+        \begin{pmatrix}
+            1 & 0 & \cdots & 0\\
+            m_{21} & 1 & \ddots & \vdots \\
+            \vdots & \ddots & \ddots & 0\\
+            m_{n1} & \cdots & m_{n(n-1)} & 1
+        \end{pmatrix},\quad
+        \mathblack{U}=\mathblack{A}^{(n)}.
+        $$
+    \end{enumerate}
+\end{prop}
+\begin{definition}
+    A \textit{permutation matrix} is a square binary matrix that has exactly one entry of 1 in each row and each column and 0 elsewhere. 
+\end{definition}
+\begin{prop}
+    Let $\mathblack{A}\in\GL_n(\RR)$. Then, there exist a permutation matrix $\mathblack{P}\in\mathcal{M}_n(\RR)$ and matrices $\mathblack{L},\mathblack{U}\in\mathcal{M}(\RR)$ of the form of \eqref{NM_L} and \eqref{NM_U}, respectively, such that: $$\mathblack{P}\mathblack{A}=\mathblack{L}\mathblack{U}.$$
+\end{prop}
+\begin{definition}[QR descompostion]
+    Let $\mathblack{A}\in\GL_n(\RR)$ be a matrix. A \textit{QR decomposition of $\mathblack{A}$} is an expression $\mathblack{A}=\mathblack{Q}\mathblack{R}$, where $\mathblack{Q},\mathblack{R}\in\mathcal{M}(\RR)$ are such that $\mathblack{Q}$ is orthogonal and $\mathblack{R}$ is upper triangular.
+\end{definition}
+\begin{lemma}
+    Let $\mathblack{A}\in\GL_n(\RR)$, $\mathblack{b}\in\RR^n$ and $\mathblack{A}\mathblack{x}=\mathblack{b}$ be a system of linear equations. Suppose $\mathblack{A}=\mathblack{Q}\mathblack{R}$ for some orthogonal matrix $\mathblack{Q}$ and some lower triangular matrix $\mathblack{R}$, both of size $n$. Then, solve the system $\mathblack{A}\mathblack{x}=\mathblack{b}$ is equivalent to solve the triangular system $\mathblack{R}\mathblack{x}=\transpose{Q}\mathblack{b}$.
+\end{lemma}
+\begin{lemma}
+    Let $\mathblack{Q}$ be an orthogonal matrix. Then:
+    \begin{enumerate}
+        \item $\det\mathblack{Q}=\pm 1$.
+        \item $\|\mathblack{Q}\|_2=1$.
+    \end{enumerate}
+\end{lemma}
 \subsubsection*{Matrix norms}
 \begin{definition}
     A \textit{matrix norm} on the vector space $\mathcal{M}_n(\RR)$ is a function $\|\cdot\|:\mathcal{M}_n(\RR)\rightarrow\RR$ satisfying all properties of a norm\footnote{See definition \ref{FOSV_norm}.} and that: $$\|\mathblack{A}\mathblack{B}\|\leq\|\mathblack{A}\|\|\mathblack{B}\|,\quad\forall \mathblack{A},\mathblack{B}\in\mathcal{M}_n(\RR).$$
@@ -620,14 +758,14 @@ Suppose we want to solve the system $\mathblack{A}\mathblack{x}=\mathblack{b}$, 
 \begin{theorem}
     Let $\mathblack{A}\in\mathcal{M}_n(\RR)$ and $\mathblack{b}\in\RR^n$. If $\mathblack{A}$ is strictly diagonally dominant by rows, then Gau\ss-Seidel method applied to solve the system $\mathblack{A}\mathblack{x}=\mathblack{b}$ is convergent.
 \end{theorem}
-\begin{definition}[Over-relaxation methods]
+\begin{method}[Over-relaxation methods]
     Let $\mathblack{A}\in\mathcal{M}_n(\RR)$, $\mathblack{b}\in\RR^n$, $\mathblack{A}\mathblack{x}=\mathblack{b}$ be a system of equations and $\alpha\in\RR$ be a parameter (called \textit{relaxation factor}). \textit{Over-relaxation methods} consist in defining a matrices $\mathblack{N}(\alpha)$, $\mathblack{P}(\alpha)$ and $\mathblack{M}(\alpha)$ as follows:
     $$\mathblack{P}(\alpha)=\mathblack{N}(\alpha)-\mathblack{A},\qquad\mathblack{M}(\alpha)=\left[\mathblack{N}(\alpha)\right]^{-1}\mathblack{P}(\alpha).$$
     Then, the iterative method can also be written as: $$\mathblack{x}^{(k+1)}=\mathblack{M}(\alpha)\mathblack{x}^{(k)}+\left[\mathblack{N}(\alpha)\right]^{-1}\mathblack{b}.$$
-\end{definition}
-\begin{definition}[Successive over-relaxation me\-thod]
+\end{method}
+\begin{method}[Successive over-relaxation me\-thod]
     Let $\mathblack{A}\in\mathcal{M}_n(\RR)$, $\mathblack{b}\in\RR^n$, $\alpha\in\RR$ be such that $\alpha\ne-1$ and $\mathblack{x}^{(k+1)}=\mathblack{N}^{-1}\mathblack{P}\mathblack{x}^{(k)}+\mathblack{N}^{-1}\mathblack{b}$ be an iterative method. \textit{Successive over-relaxation method} or \textit{SOR} consists in defining $$\mathblack{N}(\alpha)=(1+\alpha)\mathblack{N}\quad\text{and}\quad\mathblack{P}(\alpha)=\mathblack{P}+\alpha\mathblack{N}$$ because it must be true that $\mathblack{A}=\mathblack{N}(\alpha)-\mathblack{P}(\alpha)$. Then, the previous iteration is transformed into: $$\mathblack{x}^{(k+1)}=\left[\mathblack{N}(\alpha)\right]^{-1}\mathblack{P}(\alpha)\mathblack{x}^{(k)}+\left[\mathblack{N}(\alpha)\right]^{-1}\mathblack{b}.$$
-\end{definition}
+\end{method}
 \begin{definition}
     Let $\mathblack{A}\in\mathcal{M}_n(\RR)$, $\mathblack{b}\in\RR^n$, $\alpha\in\RR$ be such that $\alpha\ne-1$ and $\mathblack{x}^{(k+1)}=\left[\mathblack{N}(\alpha)\right]^{-1}\mathblack{P}(\alpha)\mathblack{x}^{(k)}+\left[\mathblack{N}(\alpha)\right]^{-1}\mathblack{b}$ be a SOR method. Since $\mathblack{M}(\alpha)=\left[\mathblack{N}(\alpha)\right]^{-1}\mathblack{P}(\alpha)$, we have that $$\mathblack{M}(\alpha)=\frac{1}{1+\alpha}(\mathblack{M}+\alpha\mathblack{I}_n)$$ and, therefore: $$\sigma(\mathblack{M}(\alpha))=\left\{\frac{\lambda+\alpha}{1+\alpha}:\lambda\in\sigma(\mathblack{M})\right\}.$$  
 \end{definition}
@@ -649,15 +787,18 @@ Suppose we want to solve the system $\mathblack{A}\mathblack{x}=\mathblack{b}$, 
 \begin{theorem}[Perron-Frobenius theorem]
     Let $\mathblack{A}\in\mathcal{M}_n(\RR)$ be a non-negative irreducible matrix. Then, $\rho(\mathblack{A})$ is a real number and it is the dominant eigenvalue.
 \end{theorem}
-\begin{definition}[Power method]
+\begin{method}[Power method]
     Let $\mathblack{A}\in\mathcal{M}_n(\RR)$. For simplicity, suppose $\mathblack{A}$ is a diagonalizable with eigenvalues $\lambda_1,\ldots,\lambda_n$ and eigenvectors $\mathblack{v}_1,\ldots,\mathblack{v}_n$. Suppose $|\lambda_1|>|\lambda_2|\geq\cdots\geq|\lambda_n|$. The \textit{power method} consists in finding an approximation of the dominant eigenvalue $\lambda_1$ starting from an initial approximation $\mathblack{x}^{(0)}$ of $\mathblack{v}_1$. We define $$\mathblack{x}^{(k+1)}=\mathblack{A}\mathblack{x}^{(k)},\qquad k\geq 0.$$ Suppose $\mathblack{x}^{(0)}=\sum_{i=1}^n\alpha_i\mathblack{v}_i$ such that $\alpha_1\ne0$. If we denote by $\mathblack{v}_{i,m}$ the $m$-th component of the vector $\mathblack{v}_i$ and choose $\ell$ such that $\mathblack{v}_{1,\ell}\ne0$. Then: $$\lim_{k\to\infty}\frac{\mathblack{x}_\ell^{(k+1)}}{\mathblack{x}_\ell^{(k)}}=\lambda_1,\qquad\lim_{k\to\infty}\frac{\mathblack{x}^{(k)}}{\lambda_1^k}=\alpha_1\mathblack{v}_1,$$ provided that $\alpha_1\ne0$. More precisely we have: $$\frac{\mathblack{x}_\ell^{(k+1)}}{\mathblack{x}_\ell^{(k)}}=\lambda_1+O\left(\left|\frac{\lambda_2}{\lambda_1}\right|^k\right).$$
-\end{definition}
-\begin{definition}[Normalized power method]
-    Let $\mathblack{A}\in\mathcal{M}_n(\RR)$ and $\|\cdot\|$ be a vector norm\footnote{For power method it is recommended to use $\|\cdot\|_\infty$.}. For simplicity suppose $\mathblack{A}$ is a diagonalizable with eigenvalues $\lambda_1,\ldots,\lambda_n$ and eigenvectors $\mathblack{v}_1,\ldots,\mathblack{v}_n$. Suppose $|\lambda_1|>|\lambda_2|\geq\cdots\geq|\lambda_n|$. In the \textit{normalized power method} consists in defining $$\mathblack{y}^{(k)}=\frac{\mathblack{x}^{(k)}}{\|\mathblack{x}^{(k)}\|},\quad\mathblack{x}^{(k+1)}=\mathblack{A}\mathblack{y}^{(k)},\qquad\text{for }k\geq 0.$$ Suppose $\mathblack{x}^{(0)}=\sum_{i=1}^n\alpha_i\mathblack{v}_i$ such that $\alpha_1\ne0$. If we choose $\ell$ such that $\mathblack{v}_{1,\ell}\ne0$. Then: $$\lim_{k\to\infty}\mathblack{x}^{(k)}=\beta\mathblack{v}_1,\qquad\lim_{k\to\infty}\frac{\mathblack{x}_\ell^{(k+1)}}{\mathblack{y}_\ell^{(k)}}=\lambda_1,$$ for some $\beta\in\RR$. More precisely we have: $$\frac{\mathblack{x}_\ell^{(k+1)}}{\mathblack{y}_\ell^{(k)}}=\lambda_1+O\left(\left|\frac{\lambda_2}{\lambda_1}\right|^k\right).$$
-\end{definition}
-\begin{definition}[Rayleigh quotient]
-    Let $\mathblack{A}\in\mathcal{M}_n(\RR)$. Suppose we have a power method $\mathblack{x}^{(k+1)}=\mathblack{A}\mathblack{x}^{(k)}$ to approximate the dominant eigenvalue $\lambda_1$ of $\mathblack{A}$. Then: $$\lim_{k\to\infty}\frac{\left(\mathblack{x}^{(k+1)}\right)^\mathrm{T}\cdot \mathblack{x}^{(k)}}{\left(\mathblack{x}^{(k)}\right)^\mathrm{T}\cdot\mathblack{x}^{(k)}}=\lambda_1.$$
-    More precisely: $$\frac{\left(\mathblack{x}^{(k+1)}\right)^\mathrm{T}\cdot \mathblack{x}^{(k)}}{\left(\mathblack{x}^{(k)}\right)^\mathrm{T}\cdot\mathblack{x}^{(k)}}=\lambda_1+O\left(\left|\frac{\lambda_2}{\lambda_1}\right|^{2k}\right).$$
-\end{definition}
+\end{method}
+\begin{method}[Normalized power method]
+    Let $\mathblack{A}\in\mathcal{M}_n(\RR)$ and $\|\cdot\|$ be a vector norm\footnote{For power method it is recommended to use $\|\cdot\|_\infty$.}. For simplicity suppose $\mathblack{A}$ is a diagonalizable with eigenvalues $\lambda_1,\ldots,\lambda_n$ and eigenvectors $\mathblack{v}_1,\ldots,\mathblack{v}_n$. Suppose $|\lambda_1|>|\lambda_2|\geq\cdots\geq|\lambda_n|$. In the \textit{normalized power method} consists in defining $$\mathblack{y}^{(k)}=\frac{\mathblack{x}^{(k)}}{\|\mathblack{x}^{(k)}\|},\quad\mathblack{x}^{(k+1)}=\mathblack{A}\mathblack{y}^{(k)},\quad\text{for }k\geq 0.$$ Suppose $\mathblack{x}^{(0)}=\sum_{i=1}^n\alpha_i\mathblack{v}_i$ such that $\alpha_1\ne0$. If we choose $\ell$ such that $\mathblack{v}_{1,\ell}\ne0$. Then: $$\lim_{k\to\infty}\mathblack{x}^{(k)}=\mathblack{v}_1,\qquad\lim_{k\to\infty}\frac{\mathblack{x}_\ell^{(k+1)}}{\mathblack{y}_\ell^{(k)}}=\lambda_1.$$ More precisely we have: $$\frac{\mathblack{x}_\ell^{(k+1)}}{\mathblack{y}_\ell^{(k)}}=\lambda_1+O\left(\left|\frac{\lambda_2}{\lambda_1}\right|^k\right).$$
+\end{method}
+\begin{method}[Rayleigh quotient]
+    Let $\mathblack{A}\in\mathcal{M}_n(\RR)$. Suppose we have a power method $\mathblack{x}^{(k+1)}=\mathblack{A}\mathblack{x}^{(k)}$ to approximate the dominant eigenvalue $\lambda_1$ of $\mathblack{A}$. Then \textit{Rayleigh quotient} approximates $\lambda_1$ as follows: $$\lim_{k\to\infty}\frac{\left(\mathblack{x}^{(k+1)}\right)^\mathrm{T}\cdot \mathblack{x}^{(k)}}{\left(\mathblack{x}^{(k)}\right)^\mathrm{T}\cdot\mathblack{x}^{(k)}}=\lambda_1.$$
+    More precisely: $$\frac{\left(\mathblack{x}^{(k+1)}\right)^\mathrm{T}\cdot \mathblack{x}^{(k)}}{\left(\mathblack{x}^{(k)}\right)^\mathrm{T}\cdot\mathblack{x}^{(k)}}=\lambda_1+O\left(\left|\frac{\lambda_2}{\lambda_1}\right|^{2k}\right).$$ If instead of a power method, we have a normalized power method $\mathblack{y}^{(k)}=\frac{\mathblack{x}^{(k)}}{\|\mathblack{x}^{(k)}\|}$, $\mathblack{x}^{(k+1)}=\mathblack{A}\mathblack{y}^{(k)}$, then: $$\lim_{k\to\infty}\frac{\left(\mathblack{x}^{(k+1)}\right)^\mathrm{T}\cdot \mathblack{y}^{(k)}}{\left(\mathblack{y}^{(k)}\right)^\mathrm{T}\cdot\mathblack{y}^{(k)}}=\lambda_1.$$
+\end{method}
+\begin{method}[Inverse power method]
+    Let $\mathblack{A}\in\mathcal{M}_n(\RR)$ and $\mu\in\CC$. The \textit{inverse power method} consists in finding an approximation of the eigenvalue $\lambda$ closest to $\mu$ starting from an initial approximation $\mathblack{x}^{(0)}$ of its associated eigenvector $\mathblack{v}$. So we applied the power method to the matrix $(\mathblack{A}-\mu\mathblack{I}_n)^{-1}$. That is, we have the recurrence: $$\mathblack{y}^{(k)}=\frac{\mathblack{x}^{(k)}}{\|\mathblack{x}^{(k)}\|},\quad\mathblack{x}^{(k+1)}=(\mathblack{A}-\mu\mathblack{I}_n)^{-1}\mathblack{y}^{(k)},\quad\text{for }k\geq 0.$$ Or, equivalently, $$\mathblack{y}^{(k)}=\frac{\mathblack{x}^{(k)}}{\|\mathblack{x}^{(k)}\|},\quad(\mathblack{A}-\mu\mathblack{I}_n)\mathblack{x}^{(k+1)}=\mathblack{y}^{(k)},\quad\text{for }k\geq 0.$$ Therefore, in each step we have to solve a system of equations to obtain $\mathblack{x}^{(k+1)}$. Finally\footnote{Alternatively, here we could have applied the Rayleigh quotient.}, if we choose $\ell$ such that $\mathblack{v}_\ell\ne0$, then: $$\lim_{k\to\infty}\mathblack{x}^{(k)}=\mathblack{v},\qquad\lim_{k\to\infty}\frac{\mathblack{x}_\ell^{(k+1)}}{\mathblack{y}_\ell^{(k)}}=\frac{1}{\lambda-\mu}.$$
+\end{method}
 \end{multicols}
 \end{document}
