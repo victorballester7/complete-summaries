@@ -1,8 +1,8 @@
 \documentclass[../../../main.tex]{subfiles}
 
 %Break lines: 
-% - In Neville's algorithm (section: interpolation -polynomial interpolation)
-% - In Newton-Raphson modified method (section: zeros of functions-root_finding methods)
+% - In Newton's divided differences method.
+% - In Successive over-relaxation method.
 \begin{document}
 \begin{multicols}{2}[\section{Numerical methods}]
 \subsection{Errors}
@@ -102,7 +102,7 @@
 \begin{method}[Newton-Raphson method]
     Suppose $I=\RR$, $f\in\mathcal{C}^1$ and that we have an initial approximation $x_0$. Then, for each step $n\geq 0$ we obtain a new approximation $x_{n+1}$, given by: $$x_{n+1}=x_n-\frac{f(x_n)}{f'(x_n)}.$$
 \end{method}
-\begin{method}[Newton-Raphson modified\\method]
+\begin{method}[Newton-Raphson modified method]
     Suppose $I=\RR$, $f\in\mathcal{C}^1$ and that we have an initial approximation $x_0$ of a zero $\alpha$ of multiplicity $m$. Then, for each step $n\geq 0$ we obtain a new approximation $x_{n+1}$, given by: $$x_{n+1}=x_n-m\frac{f(x_n)}{f'(x_n)}.$$
 \end{method}
 \begin{method}[Chebyshev method]
@@ -232,42 +232,46 @@
     Given a set of support points $\{(x_i,y_i)\}_{i=0}^n$, \textit{Lagrange's interpolation problem} consists in finding a polynomial $p_n\in\Pi_n$ such that $p_n(x_i)=y_i$ for $i=0,1,\ldots,n$.
 \end{definition}
 \begin{definition}
-    Let $\{(x_i,y_i)\}_{i=0}^n$ be a set of support points. We define $\omega_n(x)\in\RR[x]$ as $$\omega_n(x)=\prod_{k=0}^n(x-x_k).$$ We define \textit{Lagrange basis polynomials} $\ell_j(x)\in\RR[x]$ as $$\ell_j(x)=\frac{\omega_n(x)}{(x-x_j)\omega_n(x_j)}=\prod_{\substack{k=0\\k\ne j}}^n\frac{x-x_k}{x_j-x_k}.$$
+    Let $\{(x_i,y_i)\}_{i=0}^n$ be a set of support points. We define $\omega_n(x)\in\RR[x]$ as $$\omega_n(x)=\prod_{i=0}^n(x-x_i).$$ We define \textit{Lagrange basis polynomials} $\ell_j(x)\in\RR[x]$ as $$\ell_j(x)=\frac{\omega_n(x)}{(x-x_j)\omega_n(x_j)}=\prod_{\substack{i=0\\i\ne j}}^n\frac{x-x_i}{x_j-x_i}.$$
 \end{definition}
 \begin{prop}
     Let $\{(x_i,y_i)\}_{i=0}^n$ be a set of support points. Then, Lagrange's interpolation problem has a unique solution and this is: $$p_n(x)=\sum_{i=0}^ny_i\ell_i(x).$$
 \end{prop}
-\begin{prop}[Neville's algorithm]
-    Let \\$\{(x_i,y_i)\}_{i=0}^n$ be a set of support points, $\{i_0,\ldots,i_k\}\subset\{0,\ldots,n\}$ and $P_{i_1,\ldots,i_k}(x)\in\Pi_k$ be such that\\ $P_{i_1,\ldots,i_k}(x_{i_j}) = y_{i_j}$ for $j=0,\ldots,k$. Then, it is satisfied that:
+\begin{method}[Neville's algorithm]
+    Let $\{(x_i,y_i)\}_{i=0}^n$ be a set of support points, $\{i_0,\ldots,i_k\}\subset\{0,\ldots,n\}$ and $P_{i_0,\ldots,i_k}(x)\in\Pi_k$ be such that $P_{i_0,\ldots,i_k}(x_{i_j}) = y_{i_j}$ for $j=0,\ldots,k$. Then, it is satisfied that:
     \begin{enumerate}
         \item $P_i(x)=y_i$.
         \item $P_{i_0,\ldots,i_k}(x)=\frac{\begin{vmatrix}
         P_{i_1,\ldots,i_k}(x) & x-x_{i_k}\\
         P_{i_0,\ldots,i_{k-1}}(x) & x-x_{i_0}
-        \end{vmatrix}}{x_{i_k}-x_{i_0}}$
+        \end{vmatrix}}{x_{i_k}-x_{i_0}}$.
     \end{enumerate}
-\end{prop}
+\end{method}
 \begin{definition}
-    Let $f:\RR\rightarrow\RR$ be a function and $\{x_i\}_{i=0}^k\subset\RR$ be pairwise distinct points. We define the \textit{divided difference of order $k$ of $f$ applied to $\{x_i\}_{i=0}^k$}, denoted by $f[x_0,\ldots,x_k]$, as the coefficient of $x^k$ of the interpolating polynomial with support points $\{(x_i,f(x_i))\}_{i=0}^k$ 
+    Let $f:\RR\rightarrow\RR$ be a function and $\{x_i\}_{i=0}^n\subset\RR$ be pairwise distinct points. We define the \textit{divided difference of order $k$ of $f$ applied to $\{x_i\}_{i=0}^k$}, denoted by $f[x_0,\ldots,x_k]$, as the coefficient of $x^k$ of the interpolating polynomial with support points $\{(x_i,f(x_i))\}_{i=0}^k$.
 \end{definition}
 \begin{prop}
-    Let $f:\RR\rightarrow\RR$ be a function and $\{x_i\}_{i=0}^k\subset\RR$ be different points. Lagrange interpolating polynomial with support points $\{(x_i,f(x_i))\}_{i=0}^n$ is $$p_n(x)=\sum_{j=0}^nf[x_0,\ldots,x_j]\omega_{j-1}(x),$$ assuming $\omega_{-1}:=1$.
+    Let $f:\RR\rightarrow\RR$ be a function and $\{x_i\}_{i=0}^n\subset\RR$ be pairwise distinct points. Lagrange interpolating polynomial with support points $\{(x_i,f(x_i))\}_{i=0}^n$ is: $$p_n(x)=\sum_{j=0}^nf[x_0,\ldots,x_j]\omega_{j-1}(x),$$ assuming $\omega_{-1}:=1$.
 \end{prop}
-\begin{prop}[Newton's divided differences method]
+\begin{method}[Newton's divided differences\\method]
     Let $f:\RR\rightarrow\RR$ be a function. For $x\in\RR$, we have $f[x]=f(x)$. And if $\{x_i\}_{i=0}^n\subset\RR$ are different points, then $$f[x_0,\ldots,x_n]=\frac{f[x_1,\ldots,x_n]-f[x_0,\ldots,x_{n-1}]}{x_n-x_0}.$$ 
-\end{prop}
+\end{method}
 \begin{theorem}
-    Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^{n+1}$, $\{x_i\}_{i=0}^n\subset\RR$ be different  points and $p_n\in\RR[x]$ be the interpolating polynomial with support points $\{(x_i,f(x_i))\}_{i=0}^n$. Then, $\forall x\in[a,b]$, $$f(x)-p_n(x)=\frac{f^{(n+1)}(\xi_x)}{(n+1)!}\omega_n(x),$$ where $\xi_x\in\langle x_0,\ldots,x_n,x\rangle$\footnote{The interval $\langle a_1,\ldots,a_k\rangle$ is defined as $\langle a_1,\ldots,a_k\rangle:=(\min(a_1,\ldots,a_k),\max(a_1,\ldots,a_k))$.}.
+    Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^{n+1}$, $\{x_i\}_{i=0}^n\subset\RR$ be pairwise distinct points and $p_n\in\RR[x]$ be the interpolating polynomial with support points $\{(x_i,f(x_i))\}_{i=0}^n$. Then, $\forall x\in[a,b]$, $$f(x)-p_n(x)=\frac{f^{(n+1)}(\xi_x)}{(n+1)!}\omega_n(x),$$ where $\xi_x\in\langle x_0,\ldots,x_n,x\rangle$\footnote{The interval $\langle a_1,\ldots,a_k\rangle$ is defined as $\langle a_1,\ldots,a_k\rangle:=(\min(a_1,\ldots,a_k),\max(a_1,\ldots,a_k))$.}.
 \end{theorem}
 \begin{lemma}
-    Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^{n+1}$ and $\{x_i\}_{i=0}^n\subset\RR$ be pairwise distinct points. Then, $\exists\xi\in\langle x_0,\ldots,x_n\rangle$ such that: $$f[x_0,\ldots,x_n]=\frac{f^{(n)}(\xi)}{n!}.$$ 
+    Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^{n+1}$ and $\{x_i\}_{i=0}^n\subset\RR$ be pairwise distinct points. Then: $\exists\xi\in\langle x_0,\ldots,x_n\rangle$ such that: $$f[x_0,\ldots,x_n]=\frac{f^{(n)}(\xi)}{n!}.$$ 
 \end{lemma}
 \begin{prop}
     Let $f:\RR\rightarrow\RR$ be a function of class $\mathcal{C}^{n+1}$, $\{x_i\}_{i=0}^n\subset\RR$ be pairwise distinct points and $\sigma\in S_n$. Then, $$f[x_0,\ldots,x_n]=f[x_{\sigma(0)},\ldots,x_{\sigma(n)}]$$
 \end{prop}
 \begin{definition}
-    Let $\{(x_i,y_i)\}_{i=0}^n$ be support points. The $x$-axis points $\{(x_i)\}_{i=0}^n$ are \textit{equally-spaced} if $$x_i=x_0+ih,\quad\text{for }i=0,\ldots,n\text{ and with }h:=\frac{x_n-x_0}{n}.$$
+    Let $\{(x_i,y_i)\}_{i=0}^n$ be support points. The points $\{x_i\}_{i=0}^n$ are \textit{equally-spaced} if $$x_i=x_0+ih,\quad\text{for }i=0,\ldots,n\text{ and with }h:=\frac{x_n-x_0}{n}.$$
 \end{definition}
+\begin{prop}
+    Let $\{x_i\}_{i=0}^n\subset\RR$ be equally-spaced points such that $x_i=x_0+ih$, where $h=\frac{x_n-x_0}{n}$. Then:
+    $$\max\{|\omega(x)|:x\in[a,b]\}\leq\frac{h^{n+1}n!}{4}.$$
+\end{prop}
 \begin{definition}
     Let $f:[a,b]\rightarrow\RR$ be a function and $\{x_i\}_{i=0}^n\subset\RR$ be equally-spaced points. We define:
     \begin{gather*}
@@ -276,28 +280,28 @@
     \end{gather*}
 \end{definition}
 \begin{lemma}
-    Let $f:[a,b]\rightarrow\RR$ be a function and $\{x_i\}_{i=0}^n\subset\RR$ be equally-spaced points. Then, $$\Delta^nf(x_0)=n!h^nf[x_0,\ldots,x_n].$$
+    Let $f:[a,b]\rightarrow\RR$ be a function and $\{x_i\}_{i=0}^n\subset\RR$ be equally-spaced points. Then: $$\Delta^nf(x_0)=n!h^nf[x_0,\ldots,x_n].$$
 \end{lemma}
 \begin{corollary}
     Let $f\in\RR[x]$ with $\deg f=n$. Suppose we interpolate $f$ with equally-spaced nodes. Then, $\Delta^nf(x)\equiv\text{constant}$.
 \end{corollary}
-\subsubsection{Hermite interpolation}
+\subsubsection*{Hermite interpolation}
 \begin{definition}
-    Given a sets of points $\{x_i\}_{i=0}^m\subset\RR$, $\{n_i\}_{i=0}^m\subset\NN^*$ and $\{y_i^{(k)}:k=0,\ldots,n_i-1\}_{i=0}^m\subset\RR$, \textit{Hermite interpolation problem} consists in finding a polynomial $h_n\in\Pi_n$ such that $\sum_{i=0}^mn_i=n+1$ and $$h_n^{(k)}(x_i)=y_i^{(k)}\text{ for }i=0,\ldots,m\text{ and }k=0,\ldots,n_i-1.$$
+    Given sets of points $\{x_i\}_{i=0}^m\subset\RR$, $\{n_i\}_{i=0}^m\subset\NN^*$ and $\{y_i^{(k)}:k=0,\ldots,n_i-1\}_{i=0}^m\subset\RR$, \textit{Hermite interpolation problem} consists in finding a polynomial $h_n\in\Pi_n$ such that $\sum_{i=0}^mn_i=n+1$ and $$h_n^{(k)}(x_i)=y_i^{(k)}\text{ for }i=0,\ldots,m\text{ and }k=0,\ldots,n_i-1.$$
 \end{definition}
 \begin{prop}
     Hermite interpolation problem has a unique solution.
 \end{prop}
-\begin{prop}
+\begin{definition}
     Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^n$ and $\{x_i\}_{i=0}^n\subset\RR$ be points. We define $f[x_i,\overset{(n+1)}{\ldots},x_i]$ as $$f[x_i,\overset{(n+1)}{\ldots},x_i]=\frac{f^{(n)}(x_i)}{n!}.$$
-\end{prop}
+\end{definition}
 \begin{theorem}
-    Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^{n+1}$, $\{x_i\}_{i=0}^m\subset\RR$ be different points, $\{n_i\}_{i=0}^m\subset\NN$ be such that $\sum_{i=0}^mn_i=n+1$. Let $h_n$ be the Hermite interpolating polynomial of $f$ with nodes $\{x_i\}_{i=0}^m\subset\RR$, that is, $$h_n^{(k)}(x_i)=f^{(k)}(x_i)\text{ for }i=0,\ldots,m\text{ and }k=0,\ldots,n_i-1.$$ Then, $\forall x\in[a,b]$ $\exists\xi_x\in\langle x_0,\ldots,x_n,x\rangle$ such that: $$f(x)-h_n(x)=\frac{f^{(n+1)}(\xi_x)}{(n+1)!}(x-x_0)^{n_0}\cdots(x-x_m)^{n_m}.$$
+    Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^{n+1}$, $\{x_i\}_{i=0}^m\subset\RR$ be pairwise distinct points and $\{n_i\}_{i=0}^m\subset\NN$ be such that $\sum_{i=0}^mn_i=n+1$. Let $h_n$ be the Hermite interpolating polynomial of $f$ with nodes $\{x_i\}_{i=0}^m\subset\RR$, that is, $$h_n^{(k)}(x_i)=f^{(k)}(x_i)\text{ for }i=0,\ldots,m\text{ and }k=0,\ldots,n_i-1.$$ Then, $\forall x\in[a,b]$ $\exists\xi_x\in\langle x_0,\ldots,x_n,x\rangle$ such that: $$f(x)-h_n(x)=\frac{f^{(n+1)}(\xi_x)}{(n+1)!}(x-x_0)^{n_0}\cdots(x-x_m)^{n_m}.$$
 \end{theorem}
 \subsubsection*{Spline interpolation}
 \illustration{0.95}{Images/runge}{Runge's phenomenon. In this case $f(x)=\frac{1}{1+25x^2}$. $p_5(x)$ is the 5th-order Lagrange interpolating polynomial with equally-spaced interpolating points; $p_9(x)$, the 9th-order Lagrange interpolating polynomial with equally-spaced interpolating points, and $p_{13}(x)$, the 13th-order Lagrange interpolating polynomial with equally-spaced interpolating points.}{}
 \begin{definition}[Spline]
-    Let $\{(x_i,y_i)\}_{i=0}^n$ be support points of an interval $[a,b]$. A \textit{spline of degree $p$} is a function $s:[a,b]\rightarrow\RR$ of class $\mathcal{C}^{p-1}$ satisfying: $$s_{{|_{[x_i,x_{i+1}]}}}\in\RR[x],\quad\deg s_{|_{[x_i,x_{i+1}]}}=p,$$ for $i=0,\ldots,n-1$ and $s(x_i)=y_i$ for $i=0,\ldots,n$. The most common case are splines of degree  $p=3$ or \textit{cubic spline}. In this case we can impose two more conditions on their definition in one of the following ways:
+    Let $\{(x_i,y_i)\}_{i=0}^n$ be support points of an interval $[a,b]$. A \textit{spline of degree $p$} is a function $s:[a,b]\rightarrow\RR$ of class $\mathcal{C}^{p-1}$ satisfying: $$s_{{|_{[x_i,x_{i+1}]}}}\in\RR[x],\quad\deg s_{|_{[x_i,x_{i+1}]}}=p,$$ for $i=0,\ldots,n-1$ and $s(x_i)=y_i$ for $i=0,\ldots,n$. The most common case are splines of degree  $p=3$ or \textit{cubic splines}. In this case we can impose two more conditions on their definition in one of the following ways:
     \begin{enumerate}
         \item \textit{Natural cubic spline}: $$s''(x_0)=s''(x_n)=0.$$
         \item \textit{Cubic Hermite spline}: Given $y_0',y_n'\in\RR$, $$s'(x_0)=y_0',\quad s'(x_n)=y_n'.$$
@@ -316,7 +320,7 @@
 \subsection{Numerical differentiation and integration}
 \subsubsection*{Differentiation}
 \begin{theorem}[Intermediate value theorem]
-    Let $f:[a,b]\rightarrow\RR$ be a continuous function, $\xi_0,\ldots,\xi_n\in[a,b]$ and $\alpha_0,\ldots,\alpha_n\geq 0$. Then, $\exists\eta\in[a,b]$ such that: $$\sum_{i=0}^n\alpha_if(\xi_i)=\left(\sum_{i=0}^n\alpha_i\right)f(\eta).$$
+    Let $f:[a,b]\rightarrow\RR$ be a continuous function, $x_0,\ldots,x_n\in[a,b]$ and $\alpha_0,\ldots,\alpha_n\geq 0$. Then, $\exists\xi\in[a,b]$ such that: $$\sum_{i=0}^n\alpha_if(x_i)=\left(\sum_{i=0}^n\alpha_i\right)f(\xi).$$
 \end{theorem}
 \begin{theorem}[Forward and backward difference formula of order 1]
     Let $f:\RR\rightarrow\RR$ be a function of class $\mathcal{C}^2$. Then, forward difference formula of order 1 is: $$f'(a)=\frac{f(a+h)-f(a)}{h}-\frac{f''(\xi)}{2}h,$$ where $\xi\in\langle a,a+h\rangle$. Analogously, backward difference formula of order 1 is: $$f'(a)=\frac{f(a)-f(a-h)}{h}+\frac{f''(\eta)}{2}h,$$ where $\eta\in\langle a-h,a\rangle$.
@@ -339,7 +343,7 @@
     Let $f:[a,b]\rightarrow\RR$ be a continuous function $\{x_i\}_{i=0}^n\subset[a,b]$ be a set of nodes. Then, $$\int_a^bf(x)\dd x\approx\sum_{i=1}^na_if(x_i),\quad\text{where }a_i:=\int_a^b\ell_i(x)\dd x.$$
 \end{lemma}
 \begin{definition}
-    The \textit{degree of precision} of a quadrature formula is the largest $m\in\NN^*$ such that the formula is exact for $x^k$ $\forall k=0,1,\ldots,n$.
+    The \textit{degree of precision} of a quadrature formula is the largest $m\in\NN$ such that the formula is exact for $x^k$ $\forall k=0,1,\ldots,m$.
 \end{definition}
 \begin{lemma}
     Let $p\in\Pi_n$ be a polynomial and $\{x_i\}_{i=0}^n\subset[a,b]$ be a set of nodes. Then, $$\int_a^bp(x)\dd x=\sum_{i=0}^na_ip(x_i),$$ for some $a_i\in\RR$.
@@ -348,7 +352,7 @@
 \begin{theorem}[Mean value theorem for integrals]
     Let $f,g:[a,b]\rightarrow\RR$ be continuous functions. Suppose that $g$ has not a zero on $[a,b]$. Then, $\exists\xi\in[a,b]$ such that $$\int_a^bf(x)g(x)\dd x=f(\xi)\int_a^bg(x).$$
 \end{theorem}
-\begin{theorem}[Closed Newton–Cotes Formulas]
+\begin{theorem}[Closed Newton-Cotes Formulas]
     Let $f:[a,b]\rightarrow\RR$ be a function and $\{x_i\}_{i=0}^n\subset[a,b]$ be a set of equally-spaced points. If $I=\int_a^bf(x)\dd x$ and $h=\frac{b-a}{n}$, then $\exists\xi\in[a,b]$ such that:
     \begin{itemize}
         \item If $n$ is even and $f\in\mathcal{C}^{n+2}$, $$I=\sum_{i=0}^na_if(x_i)+\frac{h^{n+3}f^{n+2}(\xi)}{(n+2)!}\int_0^nt\prod_{i=0}^n(t-i)\dd t.$$
@@ -357,10 +361,10 @@
     \end{itemize}
 \end{theorem}
 \begin{corollary}[Trapezoidal rule]
-    Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^2$. Then, $\exists\xi\in[a,b]$ such that: $$\int_a^bf(x)\dd x=\frac{h}{2}(f(a)+f(b))-\frac{f''(\xi)}{12}h^3,$$ where $h=b-a$. This is the case $n=1$ of closed Newton–Cotes formulas.
+    Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^2$. Then, $\exists\xi\in[a,b]$ such that: $$\int_a^bf(x)\dd x=\frac{h}{2}(f(a)+f(b))-\frac{f''(\xi)}{12}h^3,$$ where $h=b-a$. This is the case $n=1$ of closed Newton-Cotes formulas.
 \end{corollary}
 \begin{corollary}[Simpson's rule]
-    Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^4$. Then, $\exists\xi\in[a,b]$ such that: $$\int_a^bf(x)\dd x=\frac{h}{3}\left(f(a)+4f\left(\frac{a+b}{2}\right)+f(b)\right)-\frac{f^{(4)}(\xi)}{90}h^5,$$ where $h=\frac{b-a}{2}$. This is the case $n=2$ of closed Newton–Cotes formulas.
+    Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^4$. Then, $\exists\xi\in[a,b]$ such that: $$\int_a^bf(x)\dd x=\frac{h}{3}\left(f(a)+4f\left(\frac{a+b}{2}\right)+f(b)\right)-\frac{f^{(4)}(\xi)}{90}h^5,$$ where $h=\frac{b-a}{2}$. This is the case $n=2$ of closed Newton-Cotes formulas.
 \end{corollary}
 \begin{theorem}[Composite Trapezoidal rule]
     Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^4$, $h=\frac{b-a}{n}$ and $x_j=a+jh$ for each $j=0,1,\ldots,n$. Then, $\exists\xi\in[a,b]$ such that:
@@ -380,7 +384,7 @@
 \begin{definition}
     We define \textit{Bernoulli polynomials} $B_n(x)$ as $B_0(x)=1$, $B_1(x)=x-\frac{1}{2}$ and $$B_{k+1}'=(k+1)B_k\quad\text{for }k\geq 1.$$ \textit{Bernoulli numbers} are $B_n=B_n(0)$, $\forall n\geq 0$\footnote{Exponential generating function of the sequence $(B_n)$ of Bernoulli numbers is $\displaystyle\frac{x}{\exp{x}-1}=\sum_{n=1}^\infty\frac{B_n}{n!}x^n$.}.
 \end{definition}
-\begin{theorem}[Euler–Maclaurin formula]
+\begin{theorem}[Euler-Maclaurin formula]
     Let $f\in\mathcal{C}^{2m+2}([a,b])$ be a function. Then:
     \begin{multline*}
         T(f,a,b,h)=\int_a^bf(t)\dd t+\sum_{k=1}^m\frac{B_{2k}h^{2k}}{(2k)!}\left(f^{(2k-1)}(b)\right.-\\-\left.f^{(2k-1)}(a)\right)+\frac{(b-a)B_{2m+2}h^{2m+1}}{(2m+2)!}f^{(2m+2)}(\xi),
@@ -388,7 +392,7 @@
     where $h=\frac{b-a}{n}$, $B_n$ are the Bernoulli numbers and $\xi\in[a,b]$.
 \end{theorem}
 \begin{theorem}[Romberg method]
-    Let $f\in\mathcal{C}^{2m+2}([a,b])$ be a function. Then, by Euler–Maclaurin formula, we obtain: $$T(f,a,b,h)=\int_a^bf(t)\dd t+\beta_1 h^2+\beta_2 h^4+\cdots,$$ where $h=\frac{b-a}{n}$. For $n=1,2,\ldots$ we define: $$T_{n,1}=T\left(f,a,b,\frac{b-a}{2^n}\right),\quad T_{n,m+1}=\frac{4^mT_{n+1,m}-T_{n,m}}{4^m-1},$$ for $m\leq n$. Then, we can observe that $$T_{n,m}=\int_a^bf(t)\dd t+O\left(\left(\frac{b-a}{2^n}\right)^{2m}\right).$$
+    Let $f\in\mathcal{C}^{2m+2}([a,b])$ be a function. Then, by Euler-Maclaurin formula, we obtain: $$T(f,a,b,h)=\int_a^bf(t)\dd t+\beta_1 h^2+\beta_2 h^4+\cdots,$$ where $h=\frac{b-a}{n}$. For $n=1,2,\ldots$ we define: $$T_{n,1}=T\left(f,a,b,\frac{b-a}{2^n}\right),\quad T_{n,m+1}=\frac{4^mT_{n+1,m}-T_{n,m}}{4^m-1},$$ for $m\leq n$. Then, we can observe that $$T_{n,m}=\int_a^bf(t)\dd t+O\left(\left(\frac{b-a}{2^n}\right)^{2m}\right).$$
 \end{theorem}
 \subsubsection*{Orthogonal polynomials}
 \begin{definition}
@@ -399,13 +403,13 @@
     Note that $\langle \phi_i,\phi_i\rangle>0$ for each $i\in\NN\cup\{0\}$.
 \end{definition}
 \begin{lemma}
-    We define $\mathfrak{P}_n$ as $\mathfrak{P}_n=\{\phi_i(x)\in\RR[x]:\deg\phi_i(x)=i\text{ and }\langle \phi_i,\phi_j\rangle=0\iff i\ne j,  i=0,\ldots,n\}$. Then, $\mathfrak{P}_n$ is an \textit{orthogonal basis of $\Pi_n$}. 
+    We define $\mathfrak{P}_n$ as $\mathfrak{P}_n=\{\phi_i(x)\in\Pi_n:\deg\phi_i(x)=i\text{ and }\langle \phi_i,\phi_j\rangle=0\iff i\ne j,  i=0,\ldots,n\}$. Then, $\mathfrak{P}_n$ is an \textit{orthogonal basis of $\Pi_n$}. 
 \end{lemma}
 \begin{lemma}
-    Let $\phi_k\in\mathfrak{P}_n$ and $q\in\Pi_n$. Then, $\langle q,\phi_k\rangle=0$ for each $k>n$.
+    Let $\phi_k\in\mathfrak{P}_k$ and $q\in\Pi_n$. Then, $\langle q,\phi_k\rangle=0$ for each $k>n$.
 \end{lemma}
 \begin{lemma}
-    Let $\phi_n\in\{\phi_i(x)\in\RR[x]:\deg\phi_i(x)=i\text{ and }\langle \phi_i,\phi_j\rangle=0\iff i\ne j,  i\in\NN\cup\{0\}\}$. Then, $\forall n\in\NN\cup\{0\}$, all roots of $\phi_n$ are real, simple and contained in the interval $(a,b)$.
+    Let $\phi_n\in\mathfrak{P}_n$. Then, $\forall n\in\NN\cup\{0\}$, all roots of $\phi_n$ are real, simple and contained in the interval $(a,b)$, where the associated weight function $\omega(x)$ is defined.
 \end{lemma}
 \begin{theorem}[Existence of orthogonal polynomials]
     For each $n\in\NN\cup\{0\}$ there exists a unique monic orthogonal polynomial $\phi_n$ with $\deg\phi_n=n$ defined by:
@@ -413,7 +417,7 @@
         \phi_0=1,\quad\phi_1(x)=x-\alpha_0\quad \text{and}\\
         \phi_{n+1}(x)=(x-\alpha_n)\phi_n(x)-\beta_n\phi_{n-1}(x)
     \end{gather*}
-    with $\alpha_n=\frac{\langle\phi_n,x\phi_n\rangle}{\langle\phi_n,\phi_n\rangle}$ and $\beta_n=\frac{\langle\phi_n,\phi_n\rangle}{\langle\phi_{n-1},\phi_{n-1}\rangle}$ for $n=1,2,\ldots$
+    with $\alpha_n=\frac{\langle\phi_n,x\phi_n\rangle}{\langle\phi_n,\phi_n\rangle}$ $\forall n\in\NN\cup\{0\}$ and $\beta_n=\frac{\langle\phi_n,\phi_n\rangle}{\langle\phi_{n-1},\phi_{n-1}\rangle}$ $\forall n\in\NN$.
 \end{theorem}
 \begin{definition}[Chebyshev polynomials]
     \textit{Chebyshev polynomials} $T_n$ are the orthogonal polynomials defined on $[-1,1]$ with the weight $\omega(x)=\frac{1}{\sqrt{1-x^2}}$. These can be defined recursively as:
@@ -441,7 +445,7 @@
     Let $f:[a,b]\rightarrow\RR$ be a function and $\omega(x):[a,b]\rightarrow\RR^+$ be a weight function. Given a set of nodes $\{x_i\}_{i=1}^n\subset[a,b]$, the \textit{quadrature formula with weight $\omega(x)$ of a function $f$} is $$\int_a^b\omega(x)f(x)\dd x\approx\sum_{i=1}^n\omega_if(x_i),$$ with $\omega_i=\int_a^b\omega(x)\ell_i(x)\dd x$.
 \end{definition}
 \begin{lemma}
-    Let $f:[a,b]\rightarrow\RR$ be a function and $\{x_i\}_{i=1}^n$ be the zeros of the orthogonal polynomial $\phi_n\in\mathfrak{P}_n$ with weight $\omega(x)$ on the interval $[a,b]$. Then, the formula $$\int_a^b\omega(x)f(x)\dd x\approx\sum_{i=1}^n\omega_if(x_i),$$ with $\omega_i=\int_a^b\omega(x)\ell_i(x)\dd x$ is exact for polynomials in $\Pi_{2n-1}$.
+    Let $f:[a,b]\rightarrow\RR$ be a function and $\{x_i\}_{i=1}^n$ be the zeros of the orthogonal polynomial $\phi_n\in\mathfrak{P}_n$ with weight $\omega(x)$ on the interval $[a,b]$. Then, the formula $$\int_a^b\omega(x)f(x)\dd x\approx\sum_{i=1}^n\omega_if(x_i),$$ with $\omega_i=\int_a^b\omega(x)\ell_i(x)\dd x$ is exact for all polynomials in $\Pi_{2n-1}$.
 \end{lemma}
 \begin{prop}
     Let $f:[a,b]\rightarrow\RR$ be a function and $\{x_i\}_{i=1}^n$ be the zeros of the orthogonal polynomial $\phi_n\in\mathfrak{P}_n$ with weight $\omega(x)$ on the interval $[a,b]$. Then, in the formula $$\int_a^b\omega(x)f(x)\dd x\approx\sum_{i=1}^n\omega_if(x_i),$$ $\omega_i$ are positive and real for $i=1,\ldots,n$.
@@ -487,107 +491,6 @@
 \begin{definition}
     A linear system with a triangular matrix associated is called a \textit{triangular system}.
 \end{definition}
-\subsubsection*{Exact methods}
-\begin{method}[Gaussian elimination]
-    Let $\mathblack{A}=(a_{ij})\in\mathcal{M}_n(\CC)$. We define $a_{ij}^{(1)}:=a_{ij}$ for $i,j=1,\ldots,n$ and 
-    $$\mathblack{A}^{(1)}:=
-    \begin{pmatrix}
-        a_{11}^{(1)} & a_{12}^{(1)} & \cdots & a_{1n}^{(1)}\\
-        a_{21}^{(1)} & a_{22}^{(1)} & \ddots & \vdots \\
-        \vdots & \ddots & \ddots & a_{(n-1)n}^{(1)}\\
-        a_{n1}^{(1)} & \cdots & a_{n(n-1)}^{(1)} & a_{nn}^{(1)}
-    \end{pmatrix}
-    $$
-    For $i=2,\ldots,n$ we define $m_{i1}=\frac{a_{i1}^{(1)}}{a_{11}^{(1)}}$ to transform the matrix $\mathblack{A}^{(1)}$ into a matrix $\mathblack{A}^{(2)}$ defined by $a_{ij}^{(2)}=a_{ij}^{(1)}-m_{i1}a_{1j}^{(1)}$ for $j=2,\ldots,n$. That is, we obtain a matrix of the form:
-    $$\mathblack{A}^{(1)}\sim
-    \begin{pmatrix}
-        a_{11}^{(1)} & a_{12}^{(1)} & a_{13}^{(1)} & \cdots & a_{1n}^{(1)}\\
-        0 & a_{22}^{(2)} & a_{23}^{(2)} & \cdots & a_{2n}^{(2)}\\
-        0 & a_{32}^{(2)} & a_{33}^{(2)} & \ddots & \vdots   \\
-        \vdots & \vdots & \ddots & \ddots & a_{(n-1)n}^{(2)}\\
-        0& a_{n2}^{(2)} & \cdots & a_{n(n-1)}^{(2)} & a_{nn}^{(2)}
-    \end{pmatrix} =:\mathblack{A}^{(2)}
-    $$
-    Proceeding analogously creating multipliers $m_{ij}$, $i>j$, to echelon the matrix $\mathblack{A}$, at the end we will obtain an upper triangular matrix $\mathblack{A}^{(n)}$ of the form:
-    $$\mathblack{A}^{(n)}=
-    \begin{pmatrix}
-        a_{11}^{(1)} & a_{12}^{(1)} & a_{13}^{(1)} & a_{14}^{(1)} & \cdots & a_{1n}^{(1)}\\
-        0 & a_{22}^{(2)} & a_{23}^{(2)} & a_{24}^{(2)} & \cdots & a_{2n}^{(2)}\\
-        0 & 0 & a_{33}^{(3)} & a_{34}^{(3)} & \cdots & a_{3n}^{(3)}   \\
-        0 & 0 & 0 & \ddots & \ddots & \vdots\\
-        \vdots & \vdots & \vdots & \ddots & a_{(n-1)(n-1)}^{(n-1)} & a_{(n-1)n}^{(n-1)}\\
-        0& 0 & 0 & \cdots &  0 & a_{nn}^{(n)}
-    \end{pmatrix}
-    $$
-\end{method}
-\begin{method}
-    \textit{Partial pivoting} method in gaussian elimination consists in selecting as the pivot element the entry with largest absolute value from the column of the matrix that is being considered. 
-\end{method}
-\begin{method}
-    \textit{Complete pivoting} method in gaussian elimination interchanges both rows and columns in order to use the largest element (by absolute value) in the matrix as the pivot.
-\end{method}
-\begin{definition}[LU descompostion]
-    Let $\mathblack{A}\in\GL_n(\RR)$ be a matrix. A \textit{LU decomposition of $\mathblack{A}$} is an expression $\mathblack{A}=\mathblack{L}\mathblack{U}$, where $\mathblack{L}=(\ell_{ij}),\mathblack{U}=(u_{ij})\in\mathcal{M}_n(\RR)$ are matrices of the form:
-    \begin{gather}\label{NM_L}
-        \mathblack{L}=
-        \begin{pmatrix}
-            1 & 0 & \cdots & 0\\
-            \ell_{21} & 1 & \ddots & \vdots \\
-            \vdots & \ddots & \ddots & 0\\
-            \ell_{n1} & \cdots & \ell_{n(n-1)} & 1
-        \end{pmatrix}\\\label{NM_U}
-        \mathblack{U}=
-        \begin{pmatrix}
-            u_{11} & u_{12} & \cdots & u_{1n}\\
-            0 & u_{22} & \ddots & \vdots \\
-            \vdots & \ddots & \ddots & u_{(n-1)n}\\
-            0 & \cdots & 0 & u_{nn}
-        \end{pmatrix}
-    \end{gather}
-\end{definition}
-\begin{lemma}
-    Let $\mathblack{A}\in\GL_n(\RR)$, $\mathblack{b}\in\RR^n$ and $\mathblack{A}\mathblack{x}=\mathblack{b}$ be a system of linear equations. Suppose $\mathblack{A}=\mathblack{L}\mathblack{U}$ for some matrices $\mathblack{L},\mathblack{U}\in\mathcal{M}_n(\RR)$ of the form of \eqref{NM_L} and \eqref{NM_U}, respectively. Then, we can proceed to solve the system $\mathblack{A}\mathblack{x}=\mathblack{b}$ in the following way:
-    \begin{enumerate}
-        \item Solve the triangular system $\mathblack{L}\mathblack{y}=\mathblack{b}$.
-        \item Solve the triangular system $\mathblack{U}\mathblack{x}=\mathblack{y}$.
-    \end{enumerate}
-\end{lemma}
-\begin{prop}
-    Let $\mathblack{A}\in\GL_n(\RR)$. Then:
-    \begin{enumerate}
-        \item If LU decomposition exists, it is unique.
-        \item If we can make the gaussian elimination without pivoting rows, then\footnote{In practice, LU decomposition is implemented making gaussian elimination and storing the values $m_{ij}$ in the position $ij$ of the matrix $\mathblack{A}^{(k)}$.}:
-        $$
-        \mathblack{L}=
-        \begin{pmatrix}
-            1 & 0 & \cdots & 0\\
-            m_{21} & 1 & \ddots & \vdots \\
-            \vdots & \ddots & \ddots & 0\\
-            m_{n1} & \cdots & m_{n(n-1)} & 1
-        \end{pmatrix},\quad
-        \mathblack{U}=\mathblack{A}^{(n)}.
-        $$
-    \end{enumerate}
-\end{prop}
-\begin{definition}
-    A \textit{permutation matrix} is a square binary matrix that has exactly one entry of 1 in each row and each column and 0 elsewhere. 
-\end{definition}
-\begin{prop}
-    Let $\mathblack{A}\in\GL_n(\RR)$. Then, there exist a permutation matrix $\mathblack{P}\in\mathcal{M}_n(\RR)$ and matrices $\mathblack{L},\mathblack{U}\in\mathcal{M}(\RR)$ of the form of \eqref{NM_L} and \eqref{NM_U}, respectively, such that: $$\mathblack{P}\mathblack{A}=\mathblack{L}\mathblack{U}.$$
-\end{prop}
-\begin{definition}[QR descompostion]
-    Let $\mathblack{A}\in\GL_n(\RR)$ be a matrix. A \textit{QR decomposition of $\mathblack{A}$} is an expression $\mathblack{A}=\mathblack{Q}\mathblack{R}$, where $\mathblack{Q},\mathblack{R}\in\mathcal{M}(\RR)$ are such that $\mathblack{Q}$ is orthogonal and $\mathblack{R}$ is upper triangular.
-\end{definition}
-\begin{lemma}
-    Let $\mathblack{A}\in\GL_n(\RR)$, $\mathblack{b}\in\RR^n$ and $\mathblack{A}\mathblack{x}=\mathblack{b}$ be a system of linear equations. Suppose $\mathblack{A}=\mathblack{Q}\mathblack{R}$ for some orthogonal matrix $\mathblack{Q}$ and some lower triangular matrix $\mathblack{R}$, both of size $n$. Then, solve the system $\mathblack{A}\mathblack{x}=\mathblack{b}$ is equivalent to solve the triangular system $\mathblack{R}\mathblack{x}=\transpose{Q}\mathblack{b}$.
-\end{lemma}
-\begin{lemma}
-    Let $\mathblack{Q}$ be an orthogonal matrix. Then:
-    \begin{enumerate}
-        \item $\det\mathblack{Q}=\pm 1$.
-        \item $\|\mathblack{Q}\|_2=1$.
-    \end{enumerate}
-\end{lemma}
 \subsubsection*{Matrix norms}
 \begin{definition}
     A \textit{matrix norm} on the vector space $\mathcal{M}_n(\RR)$ is a function $\|\cdot\|:\mathcal{M}_n(\RR)\rightarrow\RR$ satisfying all properties of a norm\footnote{See definition \ref{FOSV_norm}.} and that: $$\|\mathblack{A}\mathblack{B}\|\leq\|\mathblack{A}\|\|\mathblack{B}\|,\quad\forall \mathblack{A},\mathblack{B}\in\mathcal{M}_n(\RR).$$
@@ -658,32 +561,34 @@
     \end{enumerate}
 \end{theorem}
 \begin{corollary}
-    Let $\mathblack{A}\in\mathcal{M}_n(\RR)$. If there is a matrix norm $\|\cdot\|$ satisfying $\|\mathblack{A}\|<1$, then $\mathblack{I}_n-\mathblack{A}$ is non-singular and moreover $$\frac{1}{1+\|\mathblack{A}\|}\leq\|(\mathblack{I}_n-\mathblack{A})^{-1}\|\leq\frac{1}{1-\|\mathblack{A}\|}$$
+    Let $\mathblack{A}\in\mathcal{M}_n(\RR)$. If there is a subordinated matrix norm $\|\cdot\|$ satisfying $\|\mathblack{A}\|<1$, then $\mathblack{I}_n-\mathblack{A}$ is non-singular and moreover $$\frac{1}{1+\|\mathblack{A}\|}\leq\|(\mathblack{I}_n-\mathblack{A})^{-1}\|\leq\frac{1}{1-\|\mathblack{A}\|}$$
 \end{corollary}
 \subsubsection*{Matrix condition number}
 \begin{definition}
-    Let $\mathblack{A}\in\mathcal{M}_n(\RR)$ be a non-singular matrix. We define the \textit{condition number $\kappa(\mathblack{A})$ of $\mathblack{A}$} as $\kappa(\mathblack{A})=\|\mathblack{A}\|\|\mathblack{A}^{-1}\|$.
+    Let $\mathblack{A}\in\GL_n(\RR)$. We define the \textit{condition number $\kappa(\mathblack{A})$ of $\mathblack{A}$} as: $$\kappa(\mathblack{A})=\|\mathblack{A}\|\|\mathblack{A}^{-1}\|.$$
 \end{definition}
 \begin{theorem}
-    Let $\mathblack{A}\in\mathcal{M}_n(\RR)$ be a non-singular matrix, $\mathblack{b}\in\RR^n$, $\mathblack{A}\mathblack{x}=\mathblack{b}$ be a system of linear equations and $\|\cdot\|$ be a subordinated matrix norm. Suppose we know $\mathblack{A}$ and $\mathblack{b}$ with absolute errors $\Delta\mathblack{A}$ and $\Delta\mathblack{b}$, respectively. Therefore we actually solve the system: $$(\mathblack{A}+\Delta\mathblack{A})(\mathblack{x}+\Delta \mathblack{x})=(\mathblack{b}+\Delta\mathblack{b}).$$ If, $\|\Delta\mathblack{A}\|\leq\frac{1}{\|\mathblack{A}^{-1}\|}$, then: $$\frac{\|\Delta \mathblack{x}\|}{\|\mathblack{x}\|}\leq\frac{\kappa(\mathblack{A})}{1-\norm{\mathblack{A}^{-1}}\norm{\Delta\mathblack{A}}}\left(\frac{\norm{\Delta\mathblack{b}}}{\norm{\mathblack{b}}}+\frac{\norm{\Delta\mathblack{A}}}{\norm{\mathblack{A}}}\right).$$
+    Let $\mathblack{A}\in\GL_n(\RR)$, $\mathblack{b}\in\RR^n$, $\mathblack{A}\mathblack{x}=\mathblack{b}$ be a system of linear equations and $\|\cdot\|$ be a subordinated matrix norm. Suppose we know $\mathblack{A}$ and $\mathblack{b}$ with absolute errors $\Delta\mathblack{A}$ and $\Delta\mathblack{b}$, respectively. Therefore, we actually have to solve the system: $$(\mathblack{A}+\Delta\mathblack{A})(\mathblack{x}+\Delta \mathblack{x})=(\mathblack{b}+\Delta\mathblack{b}).$$ If $\|\Delta\mathblack{A}\|\leq\frac{1}{\|\mathblack{A}^{-1}\|}$, then: $$\frac{\|\Delta \mathblack{x}\|}{\|\mathblack{x}\|}\leq\frac{\kappa(\mathblack{A})}{1-\norm{\mathblack{A}^{-1}}\norm{\Delta\mathblack{A}}}\left(\frac{\norm{\Delta\mathblack{b}}}{\norm{\mathblack{b}}}+\frac{\norm{\Delta\mathblack{A}}}{\norm{\mathblack{A}}}\right).$$
 \end{theorem}
 \begin{theorem}
-    Let $\mathblack{A}\in\mathcal{M}_n(\RR)$ be a non-singular matrix and $\|\cdot\|$ be a subordinated matrix norm. Then:
+    Let $\mathblack{A}\in\GL_n(\RR)$ and $\|\cdot\|$ be a subordinated matrix norm. Then:
     \begin{enumerate}
         \item $\kappa(\mathblack{A})\geq\rho(\mathblack{A})\rho(\mathblack{A}^{-1})$.
-        \item If $\mathblack{c},\mathblack{z}\in\RR^n$ are such that $\mathblack{A}\mathblack{z}=\mathblack{c}$, then: $$\norm{\mathblack{A}^{-1}}\geq\frac{\norm{\mathblack{z}}}{\norm{\mathblack{c}}}.$$
-        \item If $\mathblack{B}\in\mathcal{M}_n(\RR)$ is a non-singular matrix, then: $$\kappa(\mathblack{A})\geq\frac{\norm{\mathblack{A}}}{\norm{\mathblack{A}-\mathblack{B}}}.$$
+        \item If $\mathblack{b},\mathblack{z}\in\RR^n$ are such that $\mathblack{A}\mathblack{z}=\mathblack{b}$, then: $$\norm{\mathblack{A}^{-1}}\geq\frac{\norm{\mathblack{z}}}{\norm{\mathblack{b}}}.$$
+        \item If $\mathblack{B}\in\GL_n(\RR)$, then: $$\kappa(\mathblack{A})\geq\frac{\norm{\mathblack{A}}}{\norm{\mathblack{A}-\mathblack{B}}}.$$
     \end{enumerate}
 \end{theorem}
 \subsubsection*{Iterative methods}
-Suppose we want to solve the system $\mathblack{A}\mathblack{x}=\mathblack{b}$, where $\mathblack{A}\in\mathcal{M}_n(\RR)$ and $\mathblack{b}\in\RR^n$. We choose a matrix $\mathblack{N}\in\GL{n}(\RR)$ and define $\mathblack{P}:=\mathblack{N}-\mathblack{A}$. Then: $$\mathblack{A}\mathblack{x}=\mathblack{b}\iff \mathblack{x}=\mathblack{N}^{-1}\mathblack{P}\mathblack{x}+\mathblack{N}^{-1}\mathblack{b}=:\mathblack{M}\mathblack{x}+\mathblack{N}^{-1}\mathblack{b}.$$ The matrix $\mathblack{M}$ is called the \textit{iterative matrix}. This defines a fixed-point iteration in the following way:
-\begin{equation*}
-    \left\{
-    \begin{array}{l}
-        \mathblack{x}^{(k+1)}=\mathblack{M}\mathblack{x}^{(k)}+\mathblack{N}^{-1}\mathblack{b}\\
-        \mathblack{x}^{(0)}
-    \end{array}\right.
-\end{equation*}
+\begin{definition}
+    Suppose we want to solve the system $\mathblack{A}\mathblack{x}=\mathblack{b}$, where $\mathblack{A}\in\mathcal{M}_n(\RR)$ and $\mathblack{b}\in\RR^n$. We choose a matrix $\mathblack{N}\in\GL_n(\RR)$ and define $\mathblack{P}:=\mathblack{N}-\mathblack{A}$. Then: $$\mathblack{A}\mathblack{x}=\mathblack{b}\iff \mathblack{x}=\mathblack{N}^{-1}\mathblack{P}\mathblack{x}+\mathblack{N}^{-1}\mathblack{b}=:\mathblack{M}\mathblack{x}+\mathblack{N}^{-1}\mathblack{b}.$$ The matrix $\mathblack{M}$ is called the \textit{iteration matrix}. This defines a fixed-point iteration in the following way:
+    \begin{equation*}
+        \left\{
+        \begin{array}{l}
+            \mathblack{x}^{(k+1)}=\mathblack{M}\mathblack{x}^{(k)}+\mathblack{N}^{-1}\mathblack{b}\\
+            \mathblack{x}^{(0)}\quad\text{(initial approximation)}
+        \end{array}\right.
+    \end{equation*}
+\end{definition}
 \begin{theorem}
     The iterative method $\mathblack{x}^{(k+1)}=\mathblack{M}\mathblack{x}^{(k)}+\mathblack{N}^{-1}\mathblack{b}$ is convergent if and only if $\mathblack{M}$ is convergent and if and only if $\rho(\mathblack{M})<1$.
 \end{theorem}
@@ -700,23 +605,31 @@ Suppose we want to solve the system $\mathblack{A}\mathblack{x}=\mathblack{b}$, 
         \|\mathblack{x}^{(k)}-x\|&\leq\frac{\|M\|}{1-\|M\|}\|\mathblack{x}^{(k)}-\mathblack{x}^{(k-1)}\|\quad&\text{(a posteriori)}
     \end{align*}
 \end{prop}
+\begin{definition}
+    Let $\mathblack{A}=(a_{ij})\in\mathcal{M}_n(\RR)$. We say $A$ is \textit{strictly diagonally dominant by rows} if $$|a_{ii}|>\sum_{\substack{j=1\\j\ne i}}^n|a_{ij}|.$$
+    We say $A$ is \textit{strictly diagonally dominant by columns} if $$|a_{jj}|>\sum_{\substack{i=1\\i\ne j}}^n|a_{ij}|.$$
+\end{definition}
 \begin{definition}[Jacobi method]
     Let $\mathblack{A}=(a_{ij})\in\mathcal{M}_n(\RR)$ such that $\prod_{i=1}^na_{ii}\ne 0$, $\mathblack{b}\in\RR^n$ and $\mathblack{A}\mathblack{x}=\mathblack{b}$ be a system of equations. \textit{Jacobi method} consists in defining a matrix $\mathblack{N}$ (and consequently matrices $\mathblack{P}$ and $\mathblack{M}$ as defined above) in the following way:
-    \begin{gather*}
+    \begin{equation*}
         \mathblack{N}=
         \begin{pmatrix}
             a_{11} & 0 & \cdots & 0\\
             0 & a_{22} & \ddots & \vdots\\
             \vdots & \ddots & \ddots & 0\\
             0 & \cdots & 0 & a_{nn}
-        \end{pmatrix}\\
+        \end{pmatrix}
+    \end{equation*}
+    \begin{equation*}
         \mathblack{P}=\mathblack{N}-\mathblack{A}=
         \begin{pmatrix}
             0 & -a_{12} & \cdots & -a_{1n}\\
             -a_{21} & 0 & \ddots & \vdots\\
             \vdots & \ddots & \ddots & -a_{(n-1)n}\\
             -a_{n1} & \cdots & -a_{n(n-1)} & 0
-        \end{pmatrix}\\
+        \end{pmatrix}
+    \end{equation*}
+    \begin{equation*}
         \mathblack{M}=\mathblack{N}^{-1}\mathblack{P}=
         \begin{pmatrix}
             0 & \frac{-a_{12}}{a_{11}} & \cdots & \frac{-a_{1n}}{a_{11}}\\
@@ -724,53 +637,53 @@ Suppose we want to solve the system $\mathblack{A}\mathblack{x}=\mathblack{b}$, 
             \vdots & \ddots & \ddots & \frac{-a_{(n-1)n}}{a_{(n-1)(n-1)}}\\
             \frac{-a_{n1}}{a_{nn}} & \cdots & \frac{-a_{n(n-1)}}{a_{nn}} & 0
         \end{pmatrix}\\
-    \end{gather*}
-    Then, the iterative method $\mathblack{x}^{(k+1)}=\mathblack{M}\mathblack{x}^{(k)}+\mathblack{N}^{-1}\mathblack{b}$ can also be written as: $$x_i^{(k+1)}=\frac{1}{a_{ii}}\left(b_i-\sum_{\substack{j=1\\j\ne i}}^na_{ij}x_j^{(k)}\right),\quad\text{for }i=1,\ldots,n.$$
-\end{definition}
-\begin{definition}
-    Let $\mathblack{A}=(a_{ij})\in\mathcal{M}_n(\RR)$. We say $A$ is \textit{strictly diagonally dominant by rows} if $$|a_{ii}|>\sum_{\substack{j=1\\j\ne i}}^n|a_{ij}|.$$
-    We say $A$ is \textit{strictly diagonally dominant by columns} if $$|a_{jj}|>\sum_{\substack{i=1\\i\ne j}}^n|a_{ij}|.$$
+    \end{equation*}
+    Note that the iterative method $\mathblack{x}^{(k+1)}=\mathblack{M}\mathblack{x}^{(k)}+\mathblack{N}^{-1}\mathblack{b}$ can also be written as: $$x_i^{(k+1)}=\frac{1}{a_{ii}}\left(b_i-\sum_{\substack{j=1\\j\ne i}}^na_{ij}x_j^{(k)}\right),\quad\text{for }i=1,\ldots,n.$$
 \end{definition}
 \begin{theorem}
     Let $\mathblack{A}\in\mathcal{M}_n(\RR)$ and $\mathblack{b}\in\RR^n$. If $\mathblack{A}$ is strictly diagonally dominant by rows or columns, then Jacobi method applied to solve the system $\mathblack{A}\mathblack{x}=\mathblack{b}$ is convergent.
 \end{theorem}
 \begin{definition}[Gau\ss-Seidel method]
     Let $\mathblack{A}=(a_{ij})\in\mathcal{M}_n(\RR)$ such that $\prod_{i=1}^na_{ii}\ne 0$, $\mathblack{b}\in\RR^n$ and $\mathblack{A}\mathblack{x}=\mathblack{b}$ be a system of equations. \textit{Gau\ss-Seidel method} consists in defining a matrix $\mathblack{N}$ (and consequently matrices $\mathblack{P}$ and $\mathblack{M}$ as defined above) in the following way:
-    \begin{gather*}
+    \begin{equation*}
         \mathblack{N}=
         \begin{pmatrix}
             a_{11} & 0 & \cdots & 0\\
             a_{21} & a_{22} & \ddots & \vdots\\
             \vdots & \ddots & \ddots & 0\\
             a_{n1} & \cdots & a_{n(n-1)} & a_{nn}
-        \end{pmatrix}\\
+        \end{pmatrix}
+    \end{equation*}
+    \begin{equation*}
         \mathblack{P}=\mathblack{N}-\mathblack{A}=
         \begin{pmatrix}
             0 & -a_{12} & \cdots & -a_{1n}\\
             0 & 0 & \ddots & \vdots\\
             \vdots & \ddots & \ddots & -a_{(n-1)n}\\
             0 & \cdots & 0 & 0
-        \end{pmatrix}\\
+        \end{pmatrix}
+    \end{equation*}
+    \begin{equation*}
         \mathblack{M}=\mathblack{N}^{-1}\mathblack{P}
-    \end{gather*}
-    Then, the iterative method $\mathblack{x}^{(k+1)}=\mathblack{M}\mathblack{x}^{(k)}+\mathblack{N}^{-1}\mathblack{b}$ can also be written as: $$x_i^{(k+1)}=\frac{1}{a_{ii}}\left(b_i-\sum_{j=i+1}^na_{ij}x_j^{(k)}-\sum_{j=1}^{i-1}a_{ij}x_j^{(k+1)}\right),$$ for $i=1,\ldots,n$.
+    \end{equation*}
+    Note that the iterative method $\mathblack{x}^{(k+1)}=\mathblack{M}\mathblack{x}^{(k)}+\mathblack{N}^{-1}\mathblack{b}$ can also be written as: $$x_i^{(k+1)}=\frac{1}{a_{ii}}\left(b_i-\sum_{j=i+1}^na_{ij}x_j^{(k)}-\sum_{j=1}^{i-1}a_{ij}x_j^{(k+1)}\right),$$ for $i=1,\ldots,n$.
 \end{definition}
 \begin{theorem}
     Let $\mathblack{A}\in\mathcal{M}_n(\RR)$ and $\mathblack{b}\in\RR^n$. If $\mathblack{A}$ is strictly diagonally dominant by rows, then Gau\ss-Seidel method applied to solve the system $\mathblack{A}\mathblack{x}=\mathblack{b}$ is convergent.
 \end{theorem}
 \begin{method}[Over-relaxation methods]
-    Let $\mathblack{A}\in\mathcal{M}_n(\RR)$, $\mathblack{b}\in\RR^n$, $\mathblack{A}\mathblack{x}=\mathblack{b}$ be a system of equations and $\alpha\in\RR$ be a parameter (called \textit{relaxation factor}). \textit{Over-relaxation methods} consist in defining a matrices $\mathblack{N}(\alpha)$, $\mathblack{P}(\alpha)$ and $\mathblack{M}(\alpha)$ as follows:
+    Let $\mathblack{A}\in\mathcal{M}_n(\RR)$, $\mathblack{b}\in\RR^n$, $\mathblack{A}\mathblack{x}=\mathblack{b}$ be a system of equations and $\alpha\in\RR$ be a parameter (called \textit{relaxation factor}). \textit{Over-relaxation methods} consist in defining matrices $\mathblack{N}(\alpha)$, $\mathblack{P}(\alpha)$ and $\mathblack{M}(\alpha)$ as follows:
     $$\mathblack{P}(\alpha)=\mathblack{N}(\alpha)-\mathblack{A},\qquad\mathblack{M}(\alpha)=\left[\mathblack{N}(\alpha)\right]^{-1}\mathblack{P}(\alpha).$$
-    Then, the iterative method can also be written as: $$\mathblack{x}^{(k+1)}=\mathblack{M}(\alpha)\mathblack{x}^{(k)}+\left[\mathblack{N}(\alpha)\right]^{-1}\mathblack{b}.$$
+    Then, the iterative method can be written as: $$\mathblack{x}^{(k+1)}=\mathblack{M}(\alpha)\mathblack{x}^{(k)}+\left[\mathblack{N}(\alpha)\right]^{-1}\mathblack{b}.$$
 \end{method}
-\begin{method}[Successive over-relaxation me\-thod]
-    Let $\mathblack{A}\in\mathcal{M}_n(\RR)$, $\mathblack{b}\in\RR^n$, $\alpha\in\RR$ be such that $\alpha\ne-1$ and $\mathblack{x}^{(k+1)}=\mathblack{N}^{-1}\mathblack{P}\mathblack{x}^{(k)}+\mathblack{N}^{-1}\mathblack{b}$ be an iterative method. \textit{Successive over-relaxation method} or \textit{SOR} consists in defining $$\mathblack{N}(\alpha)=(1+\alpha)\mathblack{N}\quad\text{and}\quad\mathblack{P}(\alpha)=\mathblack{P}+\alpha\mathblack{N}$$ because it must be true that $\mathblack{A}=\mathblack{N}(\alpha)-\mathblack{P}(\alpha)$. Then, the previous iteration is transformed into: $$\mathblack{x}^{(k+1)}=\left[\mathblack{N}(\alpha)\right]^{-1}\mathblack{P}(\alpha)\mathblack{x}^{(k)}+\left[\mathblack{N}(\alpha)\right]^{-1}\mathblack{b}.$$
+\begin{method}[Successive over-relaxation \\method]
+    Let $\mathblack{A}\in\mathcal{M}_n(\RR)$, $\mathblack{b}\in\RR^n$, $\alpha\in\RR$ be such that $\alpha\ne-1$ and $\mathblack{x}^{(k+1)}=\mathblack{N}^{-1}\mathblack{P}\mathblack{x}^{(k)}+\mathblack{N}^{-1}\mathblack{b}$ be an iterative method. \textit{Successive over-relaxation method} or \textit{SOR} consists in defining $$\mathblack{N}(\alpha)=(1+\alpha)\mathblack{N}\quad\text{and}\quad\mathblack{P}(\alpha)=\mathblack{P}+\alpha\mathblack{N}$$ because it must be true that $\mathblack{A}=\mathblack{N}(\alpha)-\mathblack{P}(\alpha)$. Then, the previous iteration becomes: $$\mathblack{x}^{(k+1)}=\left[\mathblack{N}(\alpha)\right]^{-1}\mathblack{P}(\alpha)\mathblack{x}^{(k)}+\left[\mathblack{N}(\alpha)\right]^{-1}\mathblack{b}.$$
 \end{method}
 \begin{definition}
-    Let $\mathblack{A}\in\mathcal{M}_n(\RR)$, $\mathblack{b}\in\RR^n$, $\alpha\in\RR$ be such that $\alpha\ne-1$ and $\mathblack{x}^{(k+1)}=\left[\mathblack{N}(\alpha)\right]^{-1}\mathblack{P}(\alpha)\mathblack{x}^{(k)}+\left[\mathblack{N}(\alpha)\right]^{-1}\mathblack{b}$ be a SOR method. Since $\mathblack{M}(\alpha)=\left[\mathblack{N}(\alpha)\right]^{-1}\mathblack{P}(\alpha)$, we have that $$\mathblack{M}(\alpha)=\frac{1}{1+\alpha}(\mathblack{M}+\alpha\mathblack{I}_n)$$ and, therefore: $$\sigma(\mathblack{M}(\alpha))=\left\{\frac{\lambda+\alpha}{1+\alpha}:\lambda\in\sigma(\mathblack{M})\right\}.$$  
+    Let $\mathblack{A}\in\mathcal{M}_n(\RR)$, $\mathblack{b}\in\RR^n$, $\alpha\in\RR$ be such that $\alpha\ne-1$ and $\mathblack{x}^{(k+1)}=\left[\mathblack{N}(\alpha)\right]^{-1}\mathblack{P}(\alpha)\mathblack{x}^{(k)}+\left[\mathblack{N}(\alpha)\right]^{-1}\mathblack{b}$ be a SOR method. Since $\mathblack{M}(\alpha)=\left[\mathblack{N}(\alpha)\right]^{-1}\mathblack{P}(\alpha)$, we have that $$\mathblack{M}(\alpha)=\frac{1}{1+\alpha}(\mathblack{M}+\alpha\mathblack{I}_n),$$ and therefore: $$\sigma(\mathblack{M}(\alpha))=\left\{\frac{\lambda+\alpha}{1+\alpha}:\lambda\in\sigma(\mathblack{M})\right\}.$$  
 \end{definition}
 \begin{theorem}
-    Let $\mathblack{A}\in\mathcal{M}_n(\RR)$, $\mathblack{b}\in\RR^n$ and $\mathblack{x}^{(k+1)}=\mathblack{M}\mathblack{x}^{(k)}+\mathblack{N}^{-1}\mathblack{b}$ be an iterative method. Suppose that eigenvalues $\lambda_i$, $i=1,\ldots,n$, of $\mathblack{M}$ are all real and satisfy: $$0<\lambda_1\leq\lambda_2\leq\cdots\leq\lambda_n<1.$$
+    Let $\mathblack{A}\in\mathcal{M}_n(\RR)$, $\mathblack{b}\in\RR^n$ and $\mathblack{x}^{(k+1)}=\mathblack{M}\mathblack{x}^{(k)}+\mathblack{N}^{-1}\mathblack{b}$ be an iterative method. Suppose that the eigenvalues $\lambda_i$, $i=1,\ldots,n$, of $\mathblack{M}$ are all real and satisfy: $$0<\lambda_1\leq\lambda_2\leq\cdots\leq\lambda_n<1.$$
     Then, the associated SOR method given by $\mathblack{N}(\alpha)=(1+\alpha)\mathblack{N}$ and $\mathblack{P}(\alpha)=\mathblack{P}+\alpha\mathblack{N}$ converges for $\alpha>-\frac{1+\lambda_1}{2}$. Moreover, $\rho(\mathblack{M}(\alpha))$ is minimum whenever $\alpha=-\frac{\lambda_1+\lambda_n}{2}$.
 \end{theorem}
 \subsubsection*{Eigenvalues and eigenvectors}
@@ -788,10 +701,10 @@ Suppose we want to solve the system $\mathblack{A}\mathblack{x}=\mathblack{b}$, 
     Let $\mathblack{A}\in\mathcal{M}_n(\RR)$ be a non-negative irreducible matrix. Then, $\rho(\mathblack{A})$ is a real number and it is the dominant eigenvalue.
 \end{theorem}
 \begin{method}[Power method]
-    Let $\mathblack{A}\in\mathcal{M}_n(\RR)$. For simplicity, suppose $\mathblack{A}$ is a diagonalizable with eigenvalues $\lambda_1,\ldots,\lambda_n$ and eigenvectors $\mathblack{v}_1,\ldots,\mathblack{v}_n$. Suppose $|\lambda_1|>|\lambda_2|\geq\cdots\geq|\lambda_n|$. The \textit{power method} consists in finding an approximation of the dominant eigenvalue $\lambda_1$ starting from an initial approximation $\mathblack{x}^{(0)}$ of $\mathblack{v}_1$. We define $$\mathblack{x}^{(k+1)}=\mathblack{A}\mathblack{x}^{(k)},\qquad k\geq 0.$$ Suppose $\mathblack{x}^{(0)}=\sum_{i=1}^n\alpha_i\mathblack{v}_i$ such that $\alpha_1\ne0$. If we denote by $\mathblack{v}_{i,m}$ the $m$-th component of the vector $\mathblack{v}_i$ and choose $\ell$ such that $\mathblack{v}_{1,\ell}\ne0$. Then: $$\lim_{k\to\infty}\frac{\mathblack{x}_\ell^{(k+1)}}{\mathblack{x}_\ell^{(k)}}=\lambda_1,\qquad\lim_{k\to\infty}\frac{\mathblack{x}^{(k)}}{\lambda_1^k}=\alpha_1\mathblack{v}_1,$$ provided that $\alpha_1\ne0$. More precisely we have: $$\frac{\mathblack{x}_\ell^{(k+1)}}{\mathblack{x}_\ell^{(k)}}=\lambda_1+O\left(\left|\frac{\lambda_2}{\lambda_1}\right|^k\right).$$
+    Let $\mathblack{A}\in\mathcal{M}_n(\RR)$. For simplicity, suppose $\mathblack{A}$ is diagonalizable with eigenvalues $\lambda_1,\ldots,\lambda_n$ and eigenvectors $\mathblack{v}_1,\ldots,\mathblack{v}_n$. Suppose $|\lambda_1|>|\lambda_2|\geq\cdots\geq|\lambda_n|$. The \textit{power method} consists in finding an approximation of the dominant eigenvalue $\lambda_1$ starting from an initial approximation $\mathblack{x}^{(0)}$ of $\mathblack{v}_1$. We define: $$\mathblack{x}^{(k+1)}=\mathblack{A}\mathblack{x}^{(k)},\qquad k\geq 0.$$ Suppose $\mathblack{x}^{(0)}=\sum_{i=1}^n\alpha_i\mathblack{v}_i$. If we denote by $\mathblack{v}_{i,m}$ the $m$-th component of the vector $\mathblack{v}_i$ and choose $\ell$ such that $\mathblack{v}_{1,\ell}\ne0$. Then: $$\lim_{k\to\infty}\frac{\mathblack{x}^{(k)}}{\lambda_1^k}=\mathblack{v}_1,\qquad\lim_{k\to\infty}\frac{\mathblack{x}_\ell^{(k+1)}}{\mathblack{x}_\ell^{(k)}}=\lambda_1,$$ provided that $\alpha_1\ne0$. More precisely we have: $$\frac{\mathblack{x}_\ell^{(k+1)}}{\mathblack{x}_\ell^{(k)}}=\lambda_1+O\left(\left|\frac{\lambda_2}{\lambda_1}\right|^k\right).$$
 \end{method}
 \begin{method}[Normalized power method]
-    Let $\mathblack{A}\in\mathcal{M}_n(\RR)$ and $\|\cdot\|$ be a vector norm\footnote{For power method it is recommended to use $\|\cdot\|_\infty$.}. For simplicity suppose $\mathblack{A}$ is a diagonalizable with eigenvalues $\lambda_1,\ldots,\lambda_n$ and eigenvectors $\mathblack{v}_1,\ldots,\mathblack{v}_n$. Suppose $|\lambda_1|>|\lambda_2|\geq\cdots\geq|\lambda_n|$. In the \textit{normalized power method} consists in defining $$\mathblack{y}^{(k)}=\frac{\mathblack{x}^{(k)}}{\|\mathblack{x}^{(k)}\|},\quad\mathblack{x}^{(k+1)}=\mathblack{A}\mathblack{y}^{(k)},\quad\text{for }k\geq 0.$$ Suppose $\mathblack{x}^{(0)}=\sum_{i=1}^n\alpha_i\mathblack{v}_i$ such that $\alpha_1\ne0$. If we choose $\ell$ such that $\mathblack{v}_{1,\ell}\ne0$. Then: $$\lim_{k\to\infty}\mathblack{x}^{(k)}=\mathblack{v}_1,\qquad\lim_{k\to\infty}\frac{\mathblack{x}_\ell^{(k+1)}}{\mathblack{y}_\ell^{(k)}}=\lambda_1.$$ More precisely we have: $$\frac{\mathblack{x}_\ell^{(k+1)}}{\mathblack{y}_\ell^{(k)}}=\lambda_1+O\left(\left|\frac{\lambda_2}{\lambda_1}\right|^k\right).$$
+    Let $\mathblack{A}\in\mathcal{M}_n(\RR)$ and $\|\cdot\|$ be a vector norm\footnote{For power method it is recommended to use $\|\cdot\|_\infty$.}. For simplicity suppose $\mathblack{A}$ is diagonalizable with eigenvalues $\lambda_1,\ldots,\lambda_n$ and eigenvectors $\mathblack{v}_1,\ldots,\mathblack{v}_n$. Suppose $|\lambda_1|>|\lambda_2|\geq\cdots\geq|\lambda_n|$. The \textit{normalized power method} consists in defining $$\mathblack{y}^{(k)}=\frac{\mathblack{x}^{(k)}}{\|\mathblack{x}^{(k)}\|},\quad\mathblack{x}^{(k+1)}=\mathblack{A}\mathblack{y}^{(k)},\quad\text{for }k\geq 0.$$ Suppose $\mathblack{x}^{(0)}=\sum_{i=1}^n\alpha_i\mathblack{v}_i$ such that $\alpha_1\ne0$. If we choose $\ell$ such that $\mathblack{v}_{1,\ell}\ne0$. Then: $$\lim_{k\to\infty}\mathblack{x}^{(k)}=\mathblack{v}_1,\qquad\lim_{k\to\infty}\frac{\mathblack{x}_\ell^{(k+1)}}{\mathblack{y}_\ell^{(k)}}=\lambda_1.$$ More precisely we have: $$\frac{\mathblack{x}_\ell^{(k+1)}}{\mathblack{y}_\ell^{(k)}}=\lambda_1+O\left(\left|\frac{\lambda_2}{\lambda_1}\right|^k\right).$$
 \end{method}
 \begin{method}[Rayleigh quotient]
     Let $\mathblack{A}\in\mathcal{M}_n(\RR)$. Suppose we have a power method $\mathblack{x}^{(k+1)}=\mathblack{A}\mathblack{x}^{(k)}$ to approximate the dominant eigenvalue $\lambda_1$ of $\mathblack{A}$. Then \textit{Rayleigh quotient} approximates $\lambda_1$ as follows: $$\lim_{k\to\infty}\frac{\left(\mathblack{x}^{(k+1)}\right)^\mathrm{T}\cdot \mathblack{x}^{(k)}}{\left(\mathblack{x}^{(k)}\right)^\mathrm{T}\cdot\mathblack{x}^{(k)}}=\lambda_1.$$
@@ -800,5 +713,106 @@ Suppose we want to solve the system $\mathblack{A}\mathblack{x}=\mathblack{b}$, 
 \begin{method}[Inverse power method]
     Let $\mathblack{A}\in\mathcal{M}_n(\RR)$ and $\mu\in\CC$. The \textit{inverse power method} consists in finding an approximation of the eigenvalue $\lambda$ closest to $\mu$ starting from an initial approximation $\mathblack{x}^{(0)}$ of its associated eigenvector $\mathblack{v}$. So we applied the power method to the matrix $(\mathblack{A}-\mu\mathblack{I}_n)^{-1}$. That is, we have the recurrence: $$\mathblack{y}^{(k)}=\frac{\mathblack{x}^{(k)}}{\|\mathblack{x}^{(k)}\|},\quad\mathblack{x}^{(k+1)}=(\mathblack{A}-\mu\mathblack{I}_n)^{-1}\mathblack{y}^{(k)},\quad\text{for }k\geq 0.$$ Or, equivalently, $$\mathblack{y}^{(k)}=\frac{\mathblack{x}^{(k)}}{\|\mathblack{x}^{(k)}\|},\quad(\mathblack{A}-\mu\mathblack{I}_n)\mathblack{x}^{(k+1)}=\mathblack{y}^{(k)},\quad\text{for }k\geq 0.$$ Therefore, in each step we have to solve a system of equations to obtain $\mathblack{x}^{(k+1)}$. Finally\footnote{Alternatively, here we could have applied the Rayleigh quotient.}, if we choose $\ell$ such that $\mathblack{v}_\ell\ne0$, then: $$\lim_{k\to\infty}\mathblack{x}^{(k)}=\mathblack{v},\qquad\lim_{k\to\infty}\frac{\mathblack{x}_\ell^{(k+1)}}{\mathblack{y}_\ell^{(k)}}=\frac{1}{\lambda-\mu}.$$
 \end{method}
+\subsubsection*{Exact methods}
+\begin{method}[Gaussian elimination]
+    Let $\mathblack{A}=(a_{ij})\in\mathcal{M}_n(\CC)$. We define $a_{ij}^{(1)}:=a_{ij}$ for $i,j=1,\ldots,n$ and 
+    $$\mathblack{A}^{(1)}:=
+    \begin{pmatrix}
+        a_{11}^{(1)} & a_{12}^{(1)} & \cdots & a_{1n}^{(1)}\\
+        a_{21}^{(1)} & a_{22}^{(1)} & \ddots & \vdots \\
+        \vdots & \ddots & \ddots & a_{(n-1)n}^{(1)}\\
+        a_{n1}^{(1)} & \cdots & a_{n(n-1)}^{(1)} & a_{nn}^{(1)}
+    \end{pmatrix}
+    $$
+    For $i=2,\ldots,n$ we define $m_{i1}=\frac{a_{i1}^{(1)}}{a_{11}^{(1)}}$ to transform the matrix $\mathblack{A}^{(1)}$ into a matrix $\mathblack{A}^{(2)}$ defined by $a_{ij}^{(2)}=a_{ij}^{(1)}-m_{i1}a_{1j}^{(1)}$ for $i=2,\ldots,n$ and by $a_{ij}^{(1)}$ for $i=1$. That is, we obtain a matrix of the form:
+    $$\mathblack{A}^{(1)}\sim
+    \begin{pmatrix}
+        a_{11}^{(1)} & a_{12}^{(1)} & a_{13}^{(1)} & \cdots & a_{1n}^{(1)}\\
+        0 & a_{22}^{(2)} & a_{23}^{(2)} & \cdots & a_{2n}^{(2)}\\
+        0 & a_{32}^{(2)} & a_{33}^{(2)} & \ddots & \vdots   \\
+        \vdots & \vdots & \ddots & \ddots & a_{(n-1)n}^{(2)}\\
+        0& a_{n2}^{(2)} & \cdots & a_{n(n-1)}^{(2)} & a_{nn}^{(2)}
+    \end{pmatrix} =:\mathblack{A}^{(2)}
+    $$
+    Proceeding analogously creating multipliers $m_{ij}$, $i>j$, to echelon the matrix $\mathblack{A}$, at the end we will obtain an upper triangular matrix $\mathblack{A}^{(n)}$ of the form:
+    $$\mathblack{A}^{(n)}=
+    \begin{pmatrix}
+        a_{11}^{(1)} & a_{12}^{(1)} & a_{13}^{(1)} & a_{14}^{(1)} & \cdots & a_{1n}^{(1)}\\
+        0 & a_{22}^{(2)} & a_{23}^{(2)} & a_{24}^{(2)} & \cdots & a_{2n}^{(2)}\\
+        0 & 0 & a_{33}^{(3)} & a_{34}^{(3)} & \cdots & a_{3n}^{(3)}   \\
+        0 & 0 & 0 & \ddots & \ddots & \vdots\\
+        \vdots & \vdots & \vdots & \ddots & a_{(n-1)(n-1)}^{(n-1)} & a_{(n-1)n}^{(n-1)}\\
+        0& 0 & 0 & \cdots &  0 & a_{nn}^{(n)}
+    \end{pmatrix}
+    $$
+\end{method}
+\begin{method}
+    \textit{Partial pivoting} method in gaussian elimination consists in selecting as the pivot element the entry with largest absolute value from the column of the matrix that is being considered. 
+\end{method}
+\begin{method}
+    \textit{Complete pivoting} method in gaussian elimination interchanges both rows and columns in order to use the largest element (by absolute value) in the matrix as the pivot.
+\end{method}
+\begin{definition}[LU descompostion]
+    Let $\mathblack{A}\in\GL_n(\RR)$ be a matrix. A \textit{LU decomposition of $\mathblack{A}$} is an expression $\mathblack{A}=\mathblack{L}\mathblack{U}$, where $\mathblack{L}=(\ell_{ij}),\mathblack{U}=(u_{ij})\in\mathcal{M}_n(\RR)$ are matrices of the form:
+    \begin{gather}\label{NM_L}
+        \mathblack{L}=
+        \begin{pmatrix}
+            1 & 0 & \cdots & 0\\
+            \ell_{21} & 1 & \ddots & \vdots \\
+            \vdots & \ddots & \ddots & 0\\
+            \ell_{n1} & \cdots & \ell_{n(n-1)} & 1
+        \end{pmatrix}\\\label{NM_U}
+        \mathblack{U}=
+        \begin{pmatrix}
+            u_{11} & u_{12} & \cdots & u_{1n}\\
+            0 & u_{22} & \ddots & \vdots \\
+            \vdots & \ddots & \ddots & u_{(n-1)n}\\
+            0 & \cdots & 0 & u_{nn}
+        \end{pmatrix}
+    \end{gather}
+\end{definition}
+\begin{lemma}
+    Let $\mathblack{A}\in\GL_n(\RR)$, $\mathblack{b}\in\RR^n$ and $\mathblack{A}\mathblack{x}=\mathblack{b}$ be a system of linear equations. Suppose $\mathblack{A}=\mathblack{L}\mathblack{U}$ for some matrices $\mathblack{L},\mathblack{U}\in\mathcal{M}_n(\RR)$ of the form of \eqref{NM_L} and \eqref{NM_U}, respectively. Then, to solve the system $\mathblack{A}\mathblack{x}=\mathblack{b}$ we can proceed in the following way:
+    \begin{enumerate}
+        \item Solve the triangular system $\mathblack{L}\mathblack{y}=\mathblack{b}$.
+        \item Solve the triangular system $\mathblack{U}\mathblack{x}=\mathblack{y}$.
+    \end{enumerate}
+\end{lemma}
+\begin{prop}
+    Let $\mathblack{A}\in\GL_n(\RR)$. Then:
+    \begin{enumerate}
+        \item If LU decomposition exists, it is unique.
+        \item If we can make the gaussian elimination without pivoting rows, then\footnote{In practice, LU decomposition is implemented making gaussian elimination and storing the values $m_{ij}$ in the position $ij$ of the matrix $\mathblack{A}^{(k)}$, where there should be a 0.}:
+        $$
+        \mathblack{L}=
+        \begin{pmatrix}
+            1 & 0 & \cdots & 0\\
+            m_{21} & 1 & \ddots & \vdots \\
+            \vdots & \ddots & \ddots & 0\\
+            m_{n1} & \cdots & m_{n(n-1)} & 1
+        \end{pmatrix},\quad
+        \mathblack{U}=\mathblack{A}^{(n)}.
+        $$
+    \end{enumerate}
+\end{prop}
+\begin{definition}
+    A \textit{permutation matrix} is a square binary matrix that has exactly one entry of 1 in each row and each column and 0 elsewhere. 
+\end{definition}
+\begin{prop}
+    Let $\mathblack{A}\in\GL_n(\RR)$. Then, there exist a permutation matrix $\mathblack{P}\in\mathcal{M}_n(\RR)$ and matrices $\mathblack{L},\mathblack{U}\in\mathcal{M}_n(\RR)$ of the form of \eqref{NM_L} and \eqref{NM_U}, respectively, such that: $$\mathblack{P}\mathblack{A}=\mathblack{L}\mathblack{U}.$$
+\end{prop}
+\begin{definition}[QR descompostion]
+    Let $\mathblack{A}\in\GL_n(\RR)$ be a matrix. A \textit{QR decomposition of $\mathblack{A}$} is an expression $\mathblack{A}=\mathblack{Q}\mathblack{R}$, where $\mathblack{Q},\mathblack{R}\in\mathcal{M}(\RR)$ are such that $\mathblack{Q}$ is orthogonal and $\mathblack{R}$ is upper triangular.
+\end{definition}
+\begin{lemma}
+    Let $\mathblack{A}\in\GL_n(\RR)$, $\mathblack{b}\in\RR^n$ and $\mathblack{A}\mathblack{x}=\mathblack{b}$ be a system of linear equations. Suppose $\mathblack{A}=\mathblack{Q}\mathblack{R}$ for some orthogonal matrix $\mathblack{Q}$ and some upper triangular matrix $\mathblack{R}$, both of size $n$. Then, solve the system $\mathblack{A}\mathblack{x}=\mathblack{b}$ is equivalent to solve the triangular system $\mathblack{R}\mathblack{x}=\transpose{Q}\mathblack{b}$.
+\end{lemma}
+\begin{lemma}
+    Let $\mathblack{Q}$ be an orthogonal matrix. Then:
+    \begin{enumerate}
+        \item $\det\mathblack{Q}=\pm 1$.
+        \item $\|\mathblack{Q}\|_2=1$.
+    \end{enumerate}
+\end{lemma}
 \end{multicols}
 \end{document}
