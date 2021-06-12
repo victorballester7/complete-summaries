@@ -251,7 +251,7 @@
     Let $f:\RR\rightarrow\RR$ be a function and $\{x_i\}_{i=0}^n\subset\RR$ be pairwise distinct points. We define the \textit{divided difference of order $k$ of $f$ applied to $\{x_i\}_{i=0}^k$}, denoted by $f[x_0,\ldots,x_k]$, as the coefficient of $x^k$ of the interpolating polynomial with support points $\{(x_i,f(x_i))\}_{i=0}^k$.
 \end{definition}
 \begin{prop}
-    Let $f:\RR\rightarrow\RR$ be a function and $\{x_i\}_{i=0}^n\subset\RR$ be pairwise distinct points. Lagrange interpolating polynomial with support points $\{(x_i,f(x_i))\}_{i=0}^n$ is: $$p_n(x)=\sum_{j=0}^nf[x_0,\ldots,x_j]\omega_{j-1}(x),$$ assuming $\omega_{-1}:=1$.
+    Let $f:\RR\rightarrow\RR$ be a function and $\{x_i\}_{i=0}^n\subset\RR$ be pairwise distinct points. Lagrange interpolating polynomial with support points $\{(x_i,f(x_i))\}_{i=0}^n$ is: $$p_n(x)=f[x_0]+\sum_{j=1}^nf[x_0,\ldots,x_j]\omega_{j-1}(x).$$
 \end{prop}
 \begin{method}[Newton's divided differences\\method]
     Let $f:\RR\rightarrow\RR$ be a function. For $x\in\RR$, we have $f[x]=f(x)$. And if $\{x_i\}_{i=0}^n\subset\RR$ are different points, then $$f[x_0,\ldots,x_n]=\frac{f[x_1,\ldots,x_n]-f[x_0,\ldots,x_{n-1}]}{x_n-x_0}.$$ 
@@ -270,7 +270,7 @@
 \end{definition}
 \begin{prop}
     Let $\{x_i\}_{i=0}^n\subset\RR$ be equally-spaced points such that $x_i=x_0+ih$, where $h=\frac{x_n-x_0}{n}$. Then:
-    $$\max\{|\omega(x)|:x\in[a,b]\}\leq\frac{h^{n+1}n!}{4}.$$
+    $$\max\{|\omega(x)|:x\in[x_0,x_n]\}\leq\frac{h^{n+1}n!}{4}.$$
 \end{prop}
 \begin{definition}
     Let $f:[a,b]\rightarrow\RR$ be a function and $\{x_i\}_{i=0}^n\subset\RR$ be equally-spaced points. We define:
@@ -312,7 +312,7 @@
     Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^2$. We define the \textit{seminorm}\footnote{The term \textit{seminorm} has been used instead of \textit{norm} to emphasize that not all properties of a norm are satisfied with this definition.} \textit{of $f$} as $$\|f\|^2=\int_a^b(f''(x))^2\dd x.$$
 \end{definition}
 \begin{prop}
-    Let $f:[a,b]\rightarrow\RR$ a function of class $\mathcal{C}^2$ interpolating the support points $\{(x_i,y_i)\}_{i=0}^n\subset\RR^2$, $a\leq x_0<\cdots<x_n\leq b$. If $s$ is the natural cubic spline associated with $\{(x_i,y_i)\}_{i=0}^n$, then: $$\|f-s\|^2=\|f\|^2-\|s\|^2-2(f'-s)s''\Big|_{x_0}^{x_n}+2\sum_{i=1}^n(f-s)s'''\Big|_{x_{i-1}^+}^{x_i^-}.$$ 
+    Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^2$ interpolating the support points $\{(x_i,y_i)\}_{i=0}^n\subset\RR^2$, $a\leq x_0<\cdots<x_n\leq b$. If $s$ a spline associated with $\{(x_i,y_i)\}_{i=0}^n$, then: $$\|f-s\|^2=\|f\|^2-\|s\|^2-2(f'-s)s''\Big|_{x_0}^{x_n}+2\sum_{i=1}^n(f-s)s'''\Big|_{x_{i-1}^+}^{x_i^-}.$$ 
 \end{prop}
 \begin{theorem}
     Let $f:[a,b]\rightarrow\RR$ a function of class $\mathcal{C}^2$ interpolating the support points $\{(x_i,y_i)\}_{i=0}^n\subset\RR^2$, $a\leq x_0<\cdots<x_n\leq b$. If $s$ is the natural cubic spline associated with $\{(x_i,y_i)\}_{i=0}^n$, then $$\|s\|\leq\|f\|\footnote{We can interpret this result as the natural cubic spline being the configuration that require the least ``energy" to be ``constructed".}.$$
@@ -350,7 +350,7 @@
 \end{lemma}
 \subsubsection*{Newton-Cotes formulas}
 \begin{theorem}[Mean value theorem for integrals]
-    Let $f,g:[a,b]\rightarrow\RR$ be continuous functions. Suppose that $g$ has not a zero on $[a,b]$. Then, $\exists\xi\in[a,b]$ such that $$\int_a^bf(x)g(x)\dd x=f(\xi)\int_a^bg(x).$$
+    Let $f,g:[a,b]\rightarrow\RR$ be continuous functions. Suppose that $g$ has not a zero on $[a,b]$. Then, $\exists\xi\in[a,b]$ such that $$\int_a^bf(x)g(x)\dd x=f(\xi)\int_a^bg(x)\dd x.$$
 \end{theorem}
 \begin{theorem}[Closed Newton-Cotes Formulas]
     Let $f:[a,b]\rightarrow\RR$ be a function and $\{x_i\}_{i=0}^n\subset[a,b]$ be a set of equally-spaced points. If $I=\int_a^bf(x)\dd x$ and $h=\frac{b-a}{n}$, then $\exists\xi\in[a,b]$ such that:
@@ -575,7 +575,7 @@
     \begin{enumerate}
         \item $\kappa(\mathblack{A})\geq\rho(\mathblack{A})\rho(\mathblack{A}^{-1})$.
         \item If $\mathblack{b},\mathblack{z}\in\RR^n$ are such that $\mathblack{A}\mathblack{z}=\mathblack{b}$, then: $$\norm{\mathblack{A}^{-1}}\geq\frac{\norm{\mathblack{z}}}{\norm{\mathblack{b}}}.$$
-        \item If $\mathblack{B}\in\GL_n(\RR)$, then: $$\kappa(\mathblack{A})\geq\frac{\norm{\mathblack{A}}}{\norm{\mathblack{A}-\mathblack{B}}}.$$
+        \item If $\mathblack{B}\in\mathcal{M}_n(\RR)$ is a singular matrix, then: $$\kappa(\mathblack{A})\geq\frac{\norm{\mathblack{A}}}{\norm{\mathblack{A}-\mathblack{B}}}.$$
     \end{enumerate}
 \end{theorem}
 \subsubsection*{Iterative methods}
@@ -601,8 +601,8 @@
 \begin{prop}
     Let $\mathblack{x}^{(k+1)}=\mathblack{M}\mathblack{x}^{(k)}+\mathblack{N}^{-1}\mathblack{b}$ be an iterative method to approximate the solution $\mathblack{x}$ of a system of equations $\mathblack{A}\mathblack{x}=\mathblack{b}$. Then, we have the following estimations:
     \begin{align*}
-        \|\mathblack{x}^{(k)}-\mathblack{x}\|&\leq\frac{\|M\|^k}{1-\|M\|}\|\mathblack{x}^{(1)}-\mathblack{x}^{(0)}\|\quad&\text{(a priori)}\\
-        \|\mathblack{x}^{(k)}-x\|&\leq\frac{\|M\|}{1-\|M\|}\|\mathblack{x}^{(k)}-\mathblack{x}^{(k-1)}\|\quad&\text{(a posteriori)}
+        \|\mathblack{x}^{(k)}-\mathblack{x}\|&\leq\frac{\|\mathblack{M}\|^k}{1-\|\mathblack{M}\|}\|\mathblack{x}^{(1)}-\mathblack{x}^{(0)}\|\quad&\text{(a priori)}\\
+        \|\mathblack{x}^{(k)}-\mathblack{x}\|&\leq\frac{\|\mathblack{M}\|}{1-\|\mathblack{M}\|}\|\mathblack{x}^{(k)}-\mathblack{x}^{(k-1)}\|\quad&\text{(a posteriori)}
     \end{align*}
 \end{prop}
 \begin{definition}
