@@ -501,7 +501,7 @@
 \begin{definition}
     Let $\|\cdot\|_\alpha$ be a vector norm and $\mathblack{A}\in\mathcal{M}_n(\RR)$. We define a \textit{subordinated matrix norm} $\|\cdot\|_\alpha$ as:
     \begin{multline*}
-        \|\mathblack{A}\|_\alpha=\max\{\|\mathblack{A}\mathblack{v}\|_\alpha:\mathblack{v}\in\RR^n\text{ such that }\|\mathblack{v}\|_\alpha=1\}=\\=\max\left\{\frac{\|\mathblack{A}\mathblack{v}\|_\alpha}{\|\mathblack{v}\|_\alpha}:\mathblack{v}\in\RR^n\text{ such that }\mathblack{v}\ne 0\right\}.
+        \|\mathblack{A}\|_\alpha=\max\{\|\mathblack{A}\mathblack{v}\|_\alpha:\mathblack{v}\in\RR^n\text{ such that }\|\mathblack{v}\|_\alpha=1\}=\\=\sup\left\{\frac{\|\mathblack{A}\mathblack{v}\|_\alpha}{\|\mathblack{v}\|_\alpha}:\mathblack{v}\in\RR^n\text{ such that }\mathblack{v}\ne 0\right\}.
     \end{multline*}
 \end{definition}
 \begin{lemma}
@@ -517,7 +517,7 @@
     Let $\mathblack{A}\in\mathcal{M}_n(\CC)$ be a matrix. We define the \textit{spectral radius $\rho(\mathblack{A})$ of $\mathblack{A}$} as: $$\rho(\mathblack{A})=\max\{|\lambda|\in\CC:\lambda\in\sigma(\mathblack{A})\}.$$
 \end{definition}
 \begin{prop}
-    Let $\mathblack{v}=(v_1,\ldots,v_n)\in\RR^n$ and $\mathblack{A}\in\mathcal{M}_n(\RR)$. Given the vector norms: 
+    Let $\mathblack{v}=(v_1,\ldots,v_n)\in\RR^n$ and $\mathblack{A}=(a_{ij})\in\mathcal{M}_n(\RR)$. Given the vector norms: 
     \begin{gather*}
         \|\mathblack{v}\|_1=\sum_{i=1}^n|v_i|,\\
         \|\mathblack{v}\|_2=\sqrt{\sum_{i=1}^nv_i^2},\\
@@ -641,7 +641,7 @@
     Note that the iterative method $\mathblack{x}^{(k+1)}=\mathblack{M}\mathblack{x}^{(k)}+\mathblack{N}^{-1}\mathblack{b}$ can also be written as: $$x_i^{(k+1)}=\frac{1}{a_{ii}}\left(b_i-\sum_{\substack{j=1\\j\ne i}}^na_{ij}x_j^{(k)}\right),\quad\text{for }i=1,\ldots,n.$$
 \end{definition}
 \begin{theorem}
-    Let $\mathblack{A}\in\mathcal{M}_n(\RR)$ and $\mathblack{b}\in\RR^n$. If $\mathblack{A}$ is strictly diagonally dominant by rows or columns, then Jacobi method applied to solve the system $\mathblack{A}\mathblack{x}=\mathblack{b}$ is convergent.
+    Let $\mathblack{A}\in\mathcal{M}_n(\RR)$ such that $\prod_{i=1}^na_{ii}\ne 0$ and $\mathblack{b}\in\RR^n$. If $\mathblack{A}$ is strictly diagonally dominant by rows or columns, then Jacobi method applied to solve the system $\mathblack{A}\mathblack{x}=\mathblack{b}$ is convergent.
 \end{theorem}
 \begin{definition}[Gau\ss-Seidel method]
     Let $\mathblack{A}=(a_{ij})\in\mathcal{M}_n(\RR)$ such that $\prod_{i=1}^na_{ii}\ne 0$, $\mathblack{b}\in\RR^n$ and $\mathblack{A}\mathblack{x}=\mathblack{b}$ be a system of equations. \textit{Gau\ss-Seidel method} consists in defining a matrix $\mathblack{N}$ (and consequently matrices $\mathblack{P}$ and $\mathblack{M}$ as defined above) in the following way:
@@ -669,7 +669,7 @@
     Note that the iterative method $\mathblack{x}^{(k+1)}=\mathblack{M}\mathblack{x}^{(k)}+\mathblack{N}^{-1}\mathblack{b}$ can also be written as: $$x_i^{(k+1)}=\frac{1}{a_{ii}}\left(b_i-\sum_{j=i+1}^na_{ij}x_j^{(k)}-\sum_{j=1}^{i-1}a_{ij}x_j^{(k+1)}\right),$$ for $i=1,\ldots,n$.
 \end{definition}
 \begin{theorem}
-    Let $\mathblack{A}\in\mathcal{M}_n(\RR)$ and $\mathblack{b}\in\RR^n$. If $\mathblack{A}$ is strictly diagonally dominant by rows, then Gau\ss-Seidel method applied to solve the system $\mathblack{A}\mathblack{x}=\mathblack{b}$ is convergent.
+    Let $\mathblack{A}\in\mathcal{M}_n(\RR)$ such that $\prod_{i=1}^na_{ii}\ne 0$ and $\mathblack{b}\in\RR^n$. If $\mathblack{A}$ is strictly diagonally dominant by rows, then Gau\ss-Seidel method applied to solve the system $\mathblack{A}\mathblack{x}=\mathblack{b}$ is convergent.
 \end{theorem}
 \begin{method}[Over-relaxation methods]
     Let $\mathblack{A}\in\mathcal{M}_n(\RR)$, $\mathblack{b}\in\RR^n$, $\mathblack{A}\mathblack{x}=\mathblack{b}$ be a system of equations and $\alpha\in\RR$ be a parameter (called \textit{relaxation factor}). \textit{Over-relaxation methods} consist in defining matrices $\mathblack{N}(\alpha)$, $\mathblack{P}(\alpha)$ and $\mathblack{M}(\alpha)$ as follows:
