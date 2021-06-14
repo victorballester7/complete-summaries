@@ -333,7 +333,7 @@
 \end{theorem}
 \subsubsection*{Richardson extrapolation}
 \begin{theorem}[Richardson extrapolation]
-    Suppose we have a function $f$ that approximate a value $\alpha$ with an error that depends on a small quantity $h$. That is: $$f(h)=\alpha+a_1h^{k_1}+a_2h^{k_2}+\cdots,$$with $k_1<k_2<\cdots$ and $a_i$ are unknown constants. Given $q>0$, we define $$D_1(h)=f(h),\quad D_{n+1}(h)=\frac{q^{k_n}D_n\left(h/q\right)-D_n(h)}{q^{k_n}-1}.$$ And we can observe that $\alpha=D_{n+1}(h)+O(h^{k_{n+1}})$.
+    Suppose we have a function $f$ that approximate a value $\alpha$ with an error that depends on a small quantity $h$. That is: $$\alpha=f(h)+a_1h^{k_1}+a_2h^{k_2}+\cdots,$$with $k_1<k_2<\cdots$ and $a_i$ are unknown constants. Given $q>0$, we define $$D_1(h)=f(h),\quad D_{n+1}(h)=\frac{q^{k_n}D_n\left(h/q\right)-D_n(h)}{q^{k_n}-1}.$$ And we can observe that $\alpha=D_{n+1}(h)+O(h^{k_{n+1}})$.
 \end{theorem}
 \subsubsection*{Integration}
 \begin{definition}
@@ -412,7 +412,7 @@
     Let $\phi_n\in\mathfrak{P}_n$. Then, $\forall n\in\NN\cup\{0\}$, all roots of $\phi_n$ are real, simple and contained in the interval $(a,b)$, where the associated weight function $\omega(x)$ is defined.
 \end{lemma}
 \begin{theorem}[Existence of orthogonal polynomials]
-    For each $n\in\NN\cup\{0\}$ there exists a unique monic orthogonal polynomial $\phi_n$ with $\deg\phi_n=n$ defined by:
+    For each $n\in\NN\cup\{0\}$ there exists a unique monic orthogonal polynomial $\phi_n$ with $\deg\phi_n=n$, associated with the weight function $\omega(x)$, defined by:
     \begin{gather*}
         \phi_0=1,\quad\phi_1(x)=x-\alpha_0\quad \text{and}\\
         \phi_{n+1}(x)=(x-\alpha_n)\phi_n(x)-\beta_n\phi_{n-1}(x)
@@ -499,9 +499,9 @@
     Let $\|\cdot\|_\alpha$ be a vector norm. We say a matrix norm $\|\cdot\|_\beta$ is \textit{compatible with $\|\cdot\|_\alpha$} if $$\|\mathblack{A}\mathblack{v}\|_\alpha\leq\|\mathblack{A}\|_\beta\|\mathblack{v}\|_\alpha,\quad\forall\mathblack{A}\in\mathcal{M}_n(\RR)\text{ and }\forall\mathblack{v}\in\RR^n.$$
 \end{definition}
 \begin{definition}
-    Let $\|\cdot\|_\alpha$ be a vector norm and $\mathblack{A}\in\mathcal{M}_n(\RR)$. We define a \textit{subordinated matrix norm} $\|\cdot\|_\alpha$ as:
+    Let $\|\cdot\|$ be a vector norm and $\mathblack{A}\in\mathcal{M}_n(\RR)$. We define a \textit{subordinated matrix norm} $\|\cdot\|$ as:
     \begin{multline*}
-        \|\mathblack{A}\|_\alpha=\max\{\|\mathblack{A}\mathblack{v}\|_\alpha:\mathblack{v}\in\RR^n\text{ such that }\|\mathblack{v}\|_\alpha=1\}=\\=\sup\left\{\frac{\|\mathblack{A}\mathblack{v}\|_\alpha}{\|\mathblack{v}\|_\alpha}:\mathblack{v}\in\RR^n\text{ such that }\mathblack{v}\ne 0\right\}.
+        \|\mathblack{A}\|=\max\{\|\mathblack{A}\mathblack{v}\|:\mathblack{v}\in\RR^n\text{ such that }\|\mathblack{v}\|=1\}=\\=\sup\left\{\frac{\|\mathblack{A}\mathblack{v}\|}{\|\mathblack{v}\|}:\mathblack{v}\in\RR^n\text{ such that }\mathblack{v}\ne 0\right\}.
     \end{multline*}
 \end{definition}
 \begin{lemma}
@@ -545,7 +545,7 @@
 \begin{theorem}
     Let $\mathblack{A}\in\mathcal{M}_n(\RR)$. The following statements are equivalent:
     \begin{enumerate}
-        \item $\mathblack{A}$ converges.
+        \item $\mathblack{A}$ is convergent.
         \item $\displaystyle\lim_{k\to\infty}\|\mathblack{A}^k\|=\mathblack{0}$ for some matrix norm $\|\cdot\|$.
         \item $\rho(\mathblack{A})<1$.
     \end{enumerate}
@@ -669,7 +669,7 @@
     Note that the iterative method $\mathblack{x}^{(k+1)}=\mathblack{M}\mathblack{x}^{(k)}+\mathblack{N}^{-1}\mathblack{b}$ can also be written as: $$x_i^{(k+1)}=\frac{1}{a_{ii}}\left(b_i-\sum_{j=i+1}^na_{ij}x_j^{(k)}-\sum_{j=1}^{i-1}a_{ij}x_j^{(k+1)}\right),$$ for $i=1,\ldots,n$.
 \end{definition}
 \begin{theorem}
-    Let $\mathblack{A}\in\mathcal{M}_n(\RR)$ such that $\prod_{i=1}^na_{ii}\ne 0$ and $\mathblack{b}\in\RR^n$. If $\mathblack{A}$ is strictly diagonally dominant by rows, then Gau\ss-Seidel method applied to solve the system $\mathblack{A}\mathblack{x}=\mathblack{b}$ is convergent.
+    Let $\mathblack{A}\in\mathcal{M}_n(\RR)$ be such that $\prod_{i=1}^na_{ii}\ne 0$ and $\mathblack{b}\in\RR^n$. If $\mathblack{A}$ is strictly diagonally dominant by rows, then Gau\ss-Seidel method applied to solve the system $\mathblack{A}\mathblack{x}=\mathblack{b}$ is convergent.
 \end{theorem}
 \begin{method}[Over-relaxation methods]
     Let $\mathblack{A}\in\mathcal{M}_n(\RR)$, $\mathblack{b}\in\RR^n$, $\mathblack{A}\mathblack{x}=\mathblack{b}$ be a system of equations and $\alpha\in\RR$ be a parameter (called \textit{relaxation factor}). \textit{Over-relaxation methods} consist in defining matrices $\mathblack{N}(\alpha)$, $\mathblack{P}(\alpha)$ and $\mathblack{M}(\alpha)$ as follows:
