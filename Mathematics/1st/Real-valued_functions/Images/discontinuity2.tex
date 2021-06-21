@@ -1,0 +1,15 @@
+\documentclass{standalone}
+\usepackage{pgfplots}
+\pgfplotsset{compat = newest}
+
+\begin{document}
+\begin{tikzpicture}
+    \begin{axis}[xmin=0,xmax=1,ymin=0,ymax=1,
+    axis equal image]
+    \addplot [thin,samples=200,smooth,blue,domain=0:0.5] {x*x};
+    \addplot [thin,samples=200,smooth,blue,domain=0.5:1] {0.75-(x-1)^2};
+    \draw [blue,fill=white] (axis cs:0.5,0.25) circle [radius=1.5pt];
+    \draw [blue,fill=blue] (axis cs:0.5,0.5) circle [radius=1.5pt];
+    \end{axis}
+\end{tikzpicture}
+\end{document}
