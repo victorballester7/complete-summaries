@@ -12,7 +12,6 @@ jobs:
     steps:
       - name: Set up Git repository
         uses: actions/checkout@v2
-
       - name: Delete
         uses: dev-drprasad/delete-older-releases@v0.2.0
         with:
@@ -20,75 +19,26 @@ jobs:
           delete_tags: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Compilation
-        uses: vinay0410/tectonic-action@master
-        env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Compile LaTeX document
+        uses: xu-cheng/latex-action@v2
         with:
-          tex_path: 'main.tex'
-
-      - name: Compilation
-        uses: vinay0410/tectonic-action@master
-        env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tex_path: 'Mathematics/1st/Fundamentals_of_mathematics/Fundamentals_of_mathematics.tex'
-
-      - name: Compilation
-        uses: vinay0410/tectonic-action@master
-        env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tex_path: 'Mathematics/1st/Linear_algebra/Linear_algebra.tex'
-
-      - name: Compilation
-        uses: vinay0410/tectonic-action@master
-        env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tex_path: 'Mathematics/1st/Real-valued_functions/Real-valued_functions.tex'
-
-      - name: Compilation
-        uses: vinay0410/tectonic-action@master
-        env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tex_path: 'Mathematics/2nd/Algebraic_structures/Algebraic_structures.tex'
-
-      - name: Compilation
-        uses: vinay0410/tectonic-action@master
-        env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tex_path: 'Mathematics/2nd/Discrete_mathematics/Discrete_mathematics.tex'
-
-      - name: Compilation
-        uses: vinay0410/tectonic-action@master
-        env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tex_path: 'Mathematics/2nd/Functions_of_several_variables/Functions_of_several_variables.tex'
-
-      - name: Compilation
-        uses: vinay0410/tectonic-action@master
-        env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tex_path: 'Mathematics/2nd/Linear_geometry/Linear_geometry.tex'
-
-      - name: Compilation
-        uses: vinay0410/tectonic-action@master
-        env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tex_path: 'Mathematics/2nd/Mathematical_analysis/Mathematical_analysis.tex'
-      - name: Compilation
-        uses: vinay0410/tectonic-action@master
-        env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tex_path: 'Mathematics/2nd/Numerical_methods/Numerical_methods.tex'
-
+          root_file: | 
+            main.tex
+            Mathematics/1st/Fundamentals_of_mathematics/Fundamentals_of_mathematics.tex
+            Mathematics/1st/Linear_algebra/Linear_algebra.tex
+            Mathematics/1st/Real-valued_functions/Real-valued_functions.tex
+            Mathematics/2nd/Algebraic_structures/Algebraic_structures.tex
+            Mathematics/2nd/Discrete_mathematics/Discrete_mathematics.tex
+            Mathematics/2nd/Functions_of_several_variables/Functions_of_several_variables.tex
+            Mathematics/2nd/Linear_geometry/Linear_geometry.tex
+            Mathematics/2nd/Mathematical_analysis/Mathematical_analysis.tex
+            Mathematics/2nd/Numerical_methods/Numerical_methods.tex
+          #Physics/1st/Chemistry/Chemistry.tex
+          #Physics/1st/Electricity_and_magnetism/Electricity_and_magnetism.tex
+          #Physics/1st/Mechanics_and_special_relativity/Mechanics_and_special_relativity.tex
+          #Physics/1st/Waves_and_optics/Waves_and_optics.tex
+          #Physics/2nd/Classical_mechanics/Classical_mechanics.tex
+          #Physics/2nd/Electromagnetism/Electromagnetism.tex
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -106,13 +56,19 @@ jobs:
           release-url: ${{ steps.create_release.outputs.upload_url }}
           files: | 
             main.pdf
-            Mathematics/1st/Fundamentals_of_mathematics/Fundamentals_of_mathematics.pdf
-            Mathematics/1st/Linear_algebra/Linear_algebra.pdf
-            Mathematics/1st/Real-valued_functions/Real-valued_functions.pdf
-            Mathematics/2nd/Algebraic_structures/Algebraic_structures.pdf
-            Mathematics/2nd/Discrete_mathematics/Discrete_mathematics.pdf
-            Mathematics/2nd/Functions_of_several_variables/Functions_of_several_variables.pdf
-            Mathematics/2nd/Linear_geometry/Linear_geometry.pdf
-            Mathematics/2nd/Mathematical_analysis/Mathematical_analysis.pdf
-            Mathematics/2nd/Numerical_methods/Numerical_methods.pdf
+            Fundamentals_of_mathematics.pdf
+            Linear_algebra.pdf
+            Real-valued_functions.pdf
+            Algebraic_structures.pdf
+            Discrete_mathematics.pdf
+            Functions_of_several_variables.pdf
+            Linear_geometry.pdf
+            Mathematical_analysis.pdf
+            Numerical_methods.pdf
+          #Chemistry.pdf
+          #Electricity_and_magnetism.pdf
+          #Mechanics_and_special_relativity.pdf
+          #Waves_and_optics.pdf
+          #Classical_mechanics.pdf
+          #Electromagnetism.pdf
           github-token: ${{ secrets.GITHUB_TOKEN }}
