@@ -19,28 +19,50 @@ jobs:
           delete_tags: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Compile LaTeX document
+      - name: Compile - main
         uses: xu-cheng/latex-action@v2
         with:
-          root_file: |
-            Algebraic_structures.tex
-          #  main.tex
-          #  Mathematics/1st/Fundamentals_of_mathematics/Fundamentals_of_mathematics.tex
-          #  Mathematics/1st/Linear_algebra/Linear_algebra.tex
-          #  Mathematics/1st/Real-valued_functions/Real-valued_functions.tex
-          #  Mathematics/2nd/Algebraic_structures/Algebraic_structures.tex
-          #  Mathematics/2nd/Discrete_mathematics/Discrete_mathematics.tex
-          #  Mathematics/2nd/Functions_of_several_variables/Functions_of_several_variables.tex
-          #  Mathematics/2nd/Linear_geometry/Linear_geometry.tex
-          #  Mathematics/2nd/Mathematical_analysis/Mathematical_analysis.tex
-          #  Mathematics/2nd/Numerical_methods/Numerical_methods.tex
-          #  Physics/1st/Chemistry/Chemistry.tex
-          #  Physics/1st/Electricity_and_magnetism/Electricity_and_magnetism.tex
-          #  Physics/1st/Mechanics_and_special_relativity/Mechanics_and_special_relativity.tex
-          #  Physics/1st/Waves_and_optics/Waves_and_optics.tex
-          #  Physics/2nd/Classical_mechanics/Classical_mechanics.tex
-          #  Physics/2nd/Electromagnetism/Electromagnetism.tex
-          working_directory: Mathematics/2nd/Algebraic_structures/
+          root_file: main.tex  
+      - name: Compile - FM
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: Fundamentals_of_mathematics.tex
+          working_directory: Mathematics/1st/Fundamentals_of_mathematics/ 
+      - name: Compile - LA
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: Linear_algebra.tex
+          working_directory: Mathematics/1st/Linear_algebra/   
+      - name: Compile - RVF
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: Real-valued_functions.tex
+          working_directory: Mathematics/1st/Real-valued_functions/ 
+      - name: Compile - AS
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: Algebraic_structures.tex
+          working_directory: Mathematics/2nd/Algebraic_structures/   
+      - name: Compile - FOSV
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: Functions_of_several_variables.tex
+          working_directory: Mathematics/2nd/Functions_of_several_variables/ 
+      - name: Compile - LG
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: Linear_geometry.tex
+          working_directory: Mathematics/2nd/Linear_geometry/   
+      - name: Compile - MA
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: Mathematical_analysis.tex
+          working_directory: Mathematics/2nd/Mathematical_analysis/   
+      - name: Compile - NM
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: Numerical_methods.tex
+          working_directory: Mathematics/2nd/Numerical_methods/
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -57,21 +79,14 @@ jobs:
         with:
           release-url: ${{ steps.create_release.outputs.upload_url }}
           files: |
+            main.pdf
+            Mathematics/1st/Fundamentals_of_mathematics/Fundamentals_of_mathematics.pdf
+            Mathematics/1st/Linear_algebra/Linear_algebra.pdf
+            Mathematics/1st/Real-valued_functions/Real-valued_functions.pdf
             Mathematics/2nd/Algebraic_structures/Algebraic_structures.pdf
-          #  main.pdf
-          #  Fundamentals_of_mathematics.pdf
-          #  Linear_algebra.pdf
-          #  Real-valued_functions.pdf
-          #  Algebraic_structures.pdf
-          #  Discrete_mathematics.pdf
-          #  Functions_of_several_variables.pdf
-          #  Linear_geometry.pdf
-          #  Mathematical_analysis.pdf
-          #  Numerical_methods.pdf
-          #  Chemistry.pdf
-          #  Electricity_and_magnetism.pdf
-          #  Mechanics_and_special_relativity.pdf
-          #  Waves_and_optics.pdf
-          #  Classical_mechanics.pdf
-          #  Electromagnetism.pdf
+            Mathematics/2nd/Discrete_mathematics/Discrete_mathematics.pdf
+            Mathematics/2nd/Functions_of_several_variables/Functions_of_several_variables.pdf
+            Mathematics/2nd/Linear_geometry/Linear_geometry.pdf
+            Mathematics/2nd/Mathematical_analysis/Mathematical_analysis.pdf
+            Mathematics/2nd/Numerical_methods/Numerical_methods.pdf
           github-token: ${{ secrets.GITHUB_TOKEN }}
