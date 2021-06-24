@@ -27,6 +27,7 @@
 \usepackage[es-ES]{datetime2} % for writing the current date when compiling.
 \usepackage{xcolor} % to customize RGB colors.
 \usepackage{physics} % commands of math and physics.
+\usepackage{subfiles} % for creating subfiles .tex and comiling them seperately to main.tex.
 
 \setlength{\parindent}{0pt} % Indentation disabled
 
@@ -63,13 +64,6 @@
 
 \renewcommand{\thesubsection}{\arabic{chapter}.\arabic{section}.\arabic{subsection}}
 
-\newcommand\ifSubfilesClassLoaded{% coditional statement (needed to include: \usepackage{titlesec})
-  \expandafter\ifx\csname ver@subfiles.cls\endcsname\relax
-      \expandafter\@secondoftwo
-  \else
-      \expandafter\@firstoftwo
-  \fi
-}
 \ifSubfilesClassLoaded{% show only when the single subfile is compiled
     \titleformat{\section}
     {\bfseries\Large} % format
