@@ -14,7 +14,7 @@
     \end{equation*} where $s\in\{-1,1\}$, $q\in\ZZ$ and $\alpha_i\in\{0,1,\ldots,b-1\}$. Moreover, this representation is unique if $\alpha_1\ne0$ and $\forall i_0\in\NN$, $\exists i\geq i_0:\alpha_i\ne b-1$. We will write $$x=s(0.\alpha_1\alpha_2\cdots)_bb^q$$ where the subscript $b$ in the parenthesis indicates that the number $0.\alpha_1\alpha_2\alpha_3\cdots$ is in base $b$.
 \end{theorem}
 \begin{definition}[Floating-point representation]
-    Let $x$ be a real number. Then, the floating-point representation of $x$ is: $$x=s\left(\sum_{i=1}^t\alpha_ib^{-i}\right)b^q$$ Here $s$ is called the \textit{sign}; $\sum_{i=1}^t\alpha_ib^{-i}$, the \textit{significant} or \textit{mantissa}, and $q$, the \textit{exponent}, limited to a prefixed range $q_\text{min}\leq q\leq q_\text{max}$. So, the floating-point representation of $x$ is: $$x=smb^q=s(0.\alpha_1\alpha_2\cdots\alpha_t)_bb^q$$ Finally we say a floating-point number is \textit{normalized} if $\alpha_1\ne0$.
+    Let $x$ be a real number. Then, the \textit{floating-point representation of $x$} is: $$x=s\left(\sum_{i=1}^t\alpha_ib^{-i}\right)b^q$$ Here $s$ is called the \textit{sign}; $\sum_{i=1}^t\alpha_ib^{-i}$, the \textit{significant} or \textit{mantissa}, and $q$, the \textit{exponent}, limited to a prefixed range $q_\text{min}\leq q\leq q_\text{max}$. Therefore, the floating-point representation of $x$ can be expressed as: $$x=smb^q=s(0.\alpha_1\alpha_2\cdots\alpha_t)_bb^q$$ Finally, we say a floating-point number is \textit{normalized} if $\alpha_1\ne0$.
 \end{definition}
 \begin{table}[ht]
     \centering
@@ -135,7 +135,7 @@
     \vspace{0.02\linewidth}
     \includestandalone[mode=image|tex,width=0.49\linewidth]{Images/cobweb3}\hfill
     \includestandalone[mode=image|tex,width=0.49\linewidth]{Images/cobweb4}
-    \captionof{figure}{Cobweb diagrams. In the figures at the top, $\alpha$ is a attractor point, that is, $|g'(\alpha)|<1$. More precisely, the figure at the top left occurs when $-1<g'(\alpha)\leq0$ and the figure at the top right when $0\leq g'(\alpha)<1$. In the figure at bottom left, $\alpha$ is a repulsor point. Finally, in the figure at bottom right the iteration $x_{n+1}=g(x_n)$ has no limit. It is said that to have a \textit{chaotic behavior}.}
+    \captionof{figure}{Cobweb diagrams. In the figures at the top, $\alpha$ is a attractor point, that is, $|g'(\alpha)|<1$. More precisely, the figure at the top left occurs when $-1<g'(\alpha)\leq0$ and the figure at the top right when $0\leq g'(\alpha)<1$. In the figure at bottom left, $\alpha$ is a repulsor point. Finally, in the figure at bottom right the iteration $x_{n+1}=g(x_n)$ has no limit. It is said to have a \textit{chaotic behavior}.}
 \end{center}
 \subsubsection*{Order of convergence}
 \begin{definition}[Order of convergence]
@@ -272,7 +272,7 @@
 \end{definition}
 \begin{prop}
     Let $\{x_i\}_{i=0}^n\subset\RR$ be equally-spaced points such that $x_i=x_0+ih$, where $h=\frac{x_n-x_0}{n}$. Then:
-    $$\max\{|\omega(x)|:x\in[x_0,x_n]\}\leq\frac{h^{n+1}n!}{4}$$
+    $$\max\{|\omega_n(x)|:x\in[x_0,x_n]\}\leq\frac{h^{n+1}n!}{4}$$
 \end{prop}
 \begin{definition}
     Let $f:[a,b]\rightarrow\RR$ be a function and $\{x_i\}_{i=0}^n\subset\RR$ be equally-spaced points. We define:
@@ -601,7 +601,7 @@
     We say $A$ is \textit{strictly diagonally dominant by columns} if $$|a_{jj}|>\sum_{\substack{i=1\\i\ne j}}^n|a_{ij}|$$
 \end{definition}
 \begin{definition}[Jacobi method]
-    Let $\mathblack{A}=(a_{ij})\in\mathcal{M}_n(\RR)$ such that $\prod_{i=1}^na_{ii}\ne 0$, $\mathblack{b}\in\RR^n$ and $\mathblack{A}\mathblack{x}=\mathblack{b}$ be a system of equations. \textit{Jacobi method} consists in defining a matrix $\mathblack{N}$ (and consequently matrices $\mathblack{P}$ and $\mathblack{M}$ as defined above) in the following way:
+    Let $\mathblack{A}=(a_{ij})\in\mathcal{M}_n(\RR)$ be such that $\prod_{i=1}^na_{ii}\ne 0$, $\mathblack{b}\in\RR^n$ and $\mathblack{A}\mathblack{x}=\mathblack{b}$ be a system of equations. \textit{Jacobi method} consists in defining a matrix $\mathblack{N}$ (and consequently matrices $\mathblack{P}$ and $\mathblack{M}$ as defined above) in the following way:
     \begin{equation*}
         \mathblack{N}=
         \begin{pmatrix}
@@ -632,10 +632,10 @@
     Note that the iterative method $\mathblack{x}^{(k+1)}=\mathblack{M}\mathblack{x}^{(k)}+\mathblack{N}^{-1}\mathblack{b}$ can also be written as: $$x_i^{(k+1)}=\frac{1}{a_{ii}}\left(b_i-\sum_{\substack{j=1\\j\ne i}}^na_{ij}x_j^{(k)}\right)\quad\text{for }i=1,\ldots,n.$$
 \end{definition}
 \begin{theorem}
-    Let $\mathblack{A}\in\mathcal{M}_n(\RR)$ such that $\prod_{i=1}^na_{ii}\ne 0$ and $\mathblack{b}\in\RR^n$. If $\mathblack{A}$ is strictly diagonally dominant by rows or columns, then Jacobi method applied to solve the system $\mathblack{A}\mathblack{x}=\mathblack{b}$ is convergent.
+    Let $\mathblack{A}\in\mathcal{M}_n(\RR)$ be such that $\prod_{i=1}^na_{ii}\ne 0$ and $\mathblack{b}\in\RR^n$. If $\mathblack{A}$ is strictly diagonally dominant by rows or columns, then Jacobi method applied to solve the system $\mathblack{A}\mathblack{x}=\mathblack{b}$ is convergent.
 \end{theorem}
 \begin{definition}[Gau\ss-Seidel method]
-    Let $\mathblack{A}=(a_{ij})\in\mathcal{M}_n(\RR)$ such that $\prod_{i=1}^na_{ii}\ne 0$, $\mathblack{b}\in\RR^n$ and $\mathblack{A}\mathblack{x}=\mathblack{b}$ be a system of equations. \textit{Gau\ss-Seidel method} consists in defining a matrix $\mathblack{N}$ (and consequently matrices $\mathblack{P}$ and $\mathblack{M}$ as defined above) in the following way:
+    Let $\mathblack{A}=(a_{ij})\in\mathcal{M}_n(\RR)$ be such that $\prod_{i=1}^na_{ii}\ne 0$, $\mathblack{b}\in\RR^n$ and $\mathblack{A}\mathblack{x}=\mathblack{b}$ be a system of equations. \textit{Gau\ss-Seidel method} consists in defining a matrix $\mathblack{N}$ (and consequently matrices $\mathblack{P}$ and $\mathblack{M}$ as defined above) in the following way:
     \begin{equation*}
         \mathblack{N}=
         \begin{pmatrix}
