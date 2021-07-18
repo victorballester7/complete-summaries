@@ -1,0 +1,33 @@
+\documentclass[tikz]{standalone}
+\usepackage{pgfplots}
+\usepackage{mathtools}
+\pgfplotsset{compat = newest}
+
+\begin{document}
+\begin{tikzpicture}
+  \begin{axis}[
+      xmin=0,xmax=2,ymin=0,ymax=1.5,
+      axis lines=middle,
+      axis line style={->},
+      x label style={at={(axis description cs:0.9,-0.025)},anchor=north},
+      y label style={at={(axis description cs:-0.075,0.9)},anchor=south},
+      ytick = {0.5,1},
+      xtick = {0},
+      extra y ticks = {0},
+      extra y tick labels={0},
+      extra x ticks = {0,1},
+      extra x tick labels={0,$E_F$},
+      ylabel={$f(E)$},
+      xlabel={$E$},
+      axis equal image]
+    \addplot [thick,samples=200,smooth,cyan,domain=0:1] {1};
+    \draw [thick,cyan,dashed] (axis cs:1,1) -- (axis cs:1,0);
+    \addplot [thick,samples=200,smooth,cyan,domain=1:1.95] {0};
+    \addplot [thick,samples=200,smooth,blue,domain=0:1.95] {1/(1+x^15)};
+    \draw [thin,black,dashed] (axis cs:0,0.5) -- (axis cs:1,0.5);
+
+    \legend{$T=0\text{ K}$,,$T\ne0\text{ K}$}
+  \end{axis}
+\end{tikzpicture}
+
+\end{document}

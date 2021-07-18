@@ -12,20 +12,26 @@
 \usepackage{subcaption} % for subfigures, when many captions come into play.
 \usepackage{multicol} % organize the whole document in multiple columns.
 \usepackage[english]{babel} % for improving use of English and mainly the use of hyphenation.
-%\usepackage[version=4]{mhchem} % used only for chemistry.
+\usepackage[version=4]{mhchem} % used for chemistry and nuclear physics.
 \usepackage{multirow} % multirow in a table, for example.
 \usepackage{array, makecell}
 %%%%% tikz images %%%%%%
 \usepackage{tikz, pgfplots}
 \usepackage{tkz-euclide} 
-\usetikzlibrary{arrows}
+\usetikzlibrary{arrows,arrows.meta}
 \usetikzlibrary{decorations.pathmorphing,decorations.pathreplacing,decorations.shapes,patterns,calc}
 \pgfplotsset{compat=newest}
+
+\pgfdeclareverticalshading{rainbow}{100bp}
+{color(0bp)=(red); color(25bp)=(red); color(35bp)=(yellow);
+color(45bp)=(green); color(55bp)=(cyan); color(65bp)=(blue);
+color(75bp)=(violet); color(100bp)=(violet)} % for creating a rainbow
 %%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage[es-ES]{datetime2} % for writing the current date when compiling.
 \usepackage{xcolor} % to customize RGB colors.
+\usepackage{colortbl} % for coloors in tables.
 \usepackage{physics} % commands of math and physics.
 \usepackage{subfiles} % for creating subfiles .tex and comiling them seperately to main.tex.
 
@@ -149,16 +155,15 @@
     {\thmname{#1}\thmnumber{\@ifnotempty{#1}{ }\@upn{#2}}%
       \thmnote{{ \bfseries(#3)}}}          % CUSTOM-HEAD-SPEC
     
-\newtheoremstyle{physics}
-    {\topsep}   % ABOVESPACE
-    {\topsep}   % BELOWSPACE
-    {}  % BODYFONT
-    {0pt}       % INDENT (empty value is the same as 0pt)
-    {\bfseries} % HEADFONT
-    {.}         % HEADPUNCT
-    {5pt plus 1pt minus 1pt} % HEADSPACE
-    {\thmname{#1}\thmnumber{}%
-    \thmnote{{ series#3}}}          % CUSTOM-HEAD-SPEC
+% \newtheoremstyle{physics}
+    % {\topsep}   % ABOVESPACE
+    % {\topsep}   % BELOWSPACE
+    % {}  % BODYFONT
+    % {0pt}       % INDENT (empty value is the same as 0pt)
+    % {\bfseries} % HEADFONT
+    % {.}         % HEADPUNCT
+    % {5pt plus 1pt minus 1pt} % HEADSPACE
+    % {\thmnote{{\bfseries#3}}}          % CUSTOM-HEAD-SPEC
 
 \theoremstyle{math}
 \newtheorem{theorem}{Theorem}[section]
@@ -168,9 +173,10 @@
 \newtheorem{axiom}[theorem]{Axiom}
 \newtheorem{definition}[theorem]{Definition}
 \newtheorem{method}[theorem]{Method}
+\newtheorem{concept}[theorem]{Concept}
 
-\theoremstyle{physics}
-\newtheorem{concept}{}[section]
+% \theoremstyle{physics}
+% \newtheorem{concept}[theorem]{}
 
 \renewcommand\theaxiom{\arabic{section}.\arabic{axiom}}
 \renewcommand\thedefinition{\arabic{section}.\arabic{definition}}
@@ -178,4 +184,5 @@
 \renewcommand\thecorollary{\arabic{section}.\arabic{corollary}}
 \renewcommand\thelemma{\arabic{section}.\arabic{lemma}}
 \renewcommand\theprop{\arabic{section}.\arabic{prop}}
+\renewcommand\theconcept{\arabic{section}.\arabic{concept}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
