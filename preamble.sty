@@ -15,11 +15,12 @@
 \usepackage[version=4]{mhchem} % used for chemistry and nuclear physics.
 \usepackage{multirow} % multirow in a table, for example.
 \usepackage{array, makecell}
+
 %%%%% tikz images %%%%%%
 \usepackage{tikz, pgfplots}
 \usepackage{tkz-euclide} 
-\usetikzlibrary{arrows,arrows.meta}
-\usetikzlibrary{decorations.pathmorphing,decorations.pathreplacing,decorations.shapes,patterns,calc}
+\usetikzlibrary{arrows,arrows.meta,decorations.pathmorphing,decorations.pathreplacing,decorations.shapes,patterns,calc}
+\usepgfplotslibrary{fillbetween}
 \pgfplotsset{compat=newest}
 
 \pgfdeclareverticalshading{rainbow}{100bp}
@@ -27,11 +28,12 @@
 color(45bp)=(green); color(55bp)=(cyan); color(65bp)=(blue);
 color(75bp)=(violet); color(100bp)=(violet)} % for creating a rainbow
 %%%%%%%%%%%%%%%%%%%%%%%%
+
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage[es-ES]{datetime2} % for writing the current date when compiling.
 \usepackage{xcolor} % to customize RGB colors.
-\usepackage{colortbl} % for coloors in tables.
+\usepackage{colortbl} % for colors in tables.
 \usepackage{physics} % commands of math and physics.
 \usepackage{subfiles} % for creating subfiles .tex and comiling them seperately to main.tex.
 
@@ -51,138 +53,130 @@ color(75bp)=(violet); color(100bp)=(violet)} % for creating a rainbow
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%% Colors %%%%%%%%
-\definecolor{lessgreen}{RGB}{0,150,0}
-\definecolor{color_blue1}{RGB}{175,175,255}
-\definecolor{color_blue2}{RGB}{90,90,255}
-\definecolor{color_blue3}{RGB}{0,0,255}
-\definecolor{color_green1}{RGB}{150,240,150}
-\definecolor{color_green2}{RGB}{50,200,50}
-\definecolor{color_green3}{RGB}{0,100,0}
+    \definecolor{lessgreen}{RGB}{0,150,0}
+    \definecolor{color_blue1}{RGB}{175,175,255}
+    \definecolor{color_blue2}{RGB}{90,90,255}
+    \definecolor{color_blue3}{RGB}{0,0,255}
+    \definecolor{color_green1}{RGB}{150,240,150}
+    \definecolor{color_green2}{RGB}{50,200,50}
+    \definecolor{color_green3}{RGB}{0,100,0}
 %%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%% Enumeration-commands %%%%%%%
-\renewcommand{\labelenumi}{\arabic{enumi}.}
-\renewcommand{\labelenumii}{\roman{enumii})}
+    \renewcommand{\labelenumi}{\arabic{enumi}.}
+    \renewcommand{\labelenumii}{\roman{enumii})}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%% Title format and page style %%%%%%
-\titleformat{\subsection}[hang]{\normalfont\large\bfseries}{\thesubsection\hspace{6pt}{\textbf{$|$}}\hspace{-6pt}}{1em}{}
+    \titleformat{\subsection}[hang]{\normalfont\large\bfseries}{\thesubsection\hspace{6pt}{\textbf{$|$}}\hspace{-6pt}}{1em}{}
 
-\renewcommand{\thesubsection}{\arabic{chapter}.\arabic{section}.\arabic{subsection}}
+    \renewcommand{\thesubsection}{\arabic{chapter}.\arabic{section}.\arabic{subsection}}
 
-\ifSubfilesClassLoaded{% show only when the single subfile is compiled
-    \titleformat{\section}
-    {\bfseries\Large} % format
-    {}          % label
-    {0.0cm}     % separation between label and body
-    {}          % code preceding title body
-    []
+    \ifSubfilesClassLoaded{% show only when the single subfile is compiled
+        \titleformat{\section}
+        {\bfseries\Large} % format
+        {}          % label
+        {0.0cm}     % separation between label and body
+        {}          % code preceding title body
+        []
 
-    \renewcommand{\thesubsection}{\arabic{subsection}}%
-}{% show only when the main file is compiled
-    %%% Page-style (heading) %%%
-    \pagestyle{fancy}
-    \fancyhf{}
-    \fancyhead[L]{\nouppercase{\leftmark}}
-    \fancyhead[R]{\nouppercase{\rightmark}}
-    \fancyfoot[C]{\thepage}
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-}
+        \renewcommand{\thesubsection}{\arabic{subsection}}%
+    }{% show only when the main file is compiled
+        %%% Page-style (heading) %%%
+        \pagestyle{fancy}
+        \fancyhf{}
+        \fancyhead[L]{\nouppercase{\leftmark}}
+        \fancyhead[R]{\nouppercase{\rightmark}}
+        \fancyfoot[C]{\thepage}
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%% Math-commands %%%%%%%
-\newcommand\bigzero{\makebox(0,0){\text{\Huge0}}} % 0 big zero in a matrix
-\DeclareMathOperator{\rot}{rot} % divergence
-\DeclareMathOperator{\dive}{div} % rotational
-\newcommand{\ii}{\mathrm{i}} % imaginary unit
-\renewcommand{\exp}[1]{\mathrm{e}^{#1}} % exponential function
-\DeclareMathOperator{\lcm}{lcm} % least common multiple
-\DeclareMathOperator{\im}{im} % Image of a function
-\DeclareMathOperator{\ch}{char} % characteristic of a field
-\DeclareMathOperator{\sig}{sig} % signature of a bilinear map
-\DeclareMathOperator{\rad}{rad} % radical of a bilinear map
-\newcommand{\upint}[2]{\overline{\int_{#1}^{#2}}} % upper integral
-\newcommand{\lowint}[2]{\underline{\int_{#1}^{#2}}} % lower integral
-\newcommand\quot[2]{
-    \mathchoice
-        {% \displaystyle 
-        \text{\raise1ex\hbox{$#1$}\!\Big/\!\lower1ex\hbox{$#2$}}}
-        {% \textstyle
-            #1/#2}
-        {% \scriptstyle
-            #1/#2}
-        {% \scriptscriptstyle  
-            #1/#2}
-}% quotient group. Usage A/B--->\quot{A}{B}.
+    %%% CALCULUS
+        % command \grad is by default \nabla in bold face
+        % \renewcommand{\grad}{\operatorname{\mathblack{grad}}} % gradient
+        \newcommand{\rot}{\operatorname{\mathblack{rot}}} % curl
+        \renewcommand{\div}{\operatorname{\mathblack{div}}} % divergence
+        \newcommand{\lap}{\nabla^2} % laplacian
+        \newcommand{\ii}{\mathrm{i}} % imaginary unit
+        \renewcommand{\exp}[1]{\mathrm{e}^{#1}} % exponential function
+        \newcommand{\upint}[2]{\overline{\int_{#1}^{#2}}} % upper integral
+        \newcommand{\lowint}[2]{\underline{\int_{#1}^{#2}}} % lower integral
 
-%%% vectors and matrices
-\newcommand{\mathblack}[1]{\vb{#1}} % math style for vectors and matrices
-\newcommand{\transpose}[1]{\vb{#1}^{\mathrm{T}}} % math style for vectors and matrices
-\DeclareMathOperator{\adjugate}{adj} % adjugate matrix
-\DeclareMathOperator{\cofactor}{cof} % cofactor matrix
-\newcommand{\GL}{\mathrm{GL}} % set of invertible matrices
+    %%% ALGEBRA
+        \newcommand{\bigzero}{\makebox(0,0){\text{\Huge0}}} % 0 big zero in a matrix
+        \DeclareMathOperator{\lcm}{lcm} % least common multiple
+        \DeclareMathOperator{\im}{im} % Image of a function
+        \newcommand{\id}{\mathrm{id}} % identity function
+        \DeclareMathOperator{\ch}{char} % characteristic of a field
+        \DeclareMathOperator{\sig}{sig} % signature of a bilinear map
+        \DeclareMathOperator{\rad}{rad} % radical of a bilinear map
+        \newcommand{\quot}[2]{
+            \mathchoice
+                {% \displaystyle 
+                \text{\raise1ex\hbox{$#1$}\!\Big/\!\lower1ex\hbox{$#2$}}}
+                {% \textstyle
+                    #1/#2}
+                {% \scriptstyle
+                    #1/#2}
+                {% \scriptscriptstyle  
+                    #1/#2}
+        }% quotient group. Usage A/B--->\quot{A}{B}.
+        \newcommand{\PP}{\ensuremath{\mathbb{P}}} % set of prime numbers
+        \newcommand{\NN}{\ensuremath{\mathbb{N}}} % set of natural numbers
+        \newcommand{\ZZ}{\ensuremath{\mathbb{Z}}} % set of integers
+        \newcommand{\QQ}{\ensuremath{\mathbb{Q}}} % set of rationals
+        \newcommand{\RR}{\ensuremath{\mathbb{R}}} % set of real numbers
+        \newcommand{\CC}{\ensuremath{\mathbb{C}}} % set of complex numbers
 
-\newcommand{\id}{\mathrm{id}} % identity function
+    %%% vectors and matrices
+        \newcommand{\mathblack}[1]{\vb{#1}} % math style for vectors and matrices
+        \newcommand{\transpose}[1]{\vb{#1}^{\mathrm{T}}} % math style for vectors and matrices
+        \DeclareMathOperator{\adjugate}{adj} % adjugate matrix
+        \DeclareMathOperator{\cofactor}{cof} % cofactor matrix
+        \newcommand{\GL}{\mathrm{GL}} % set of invertible matrices
 
-\newcommand{\PP}{\ensuremath{\mathbb{P}}} % set of prime numbers
-\newcommand{\NN}{\ensuremath{\mathbb{N}}} % set of natural numbers
-\newcommand{\ZZ}{\ensuremath{\mathbb{Z}}} % set of integers
-\newcommand{\QQ}{\ensuremath{\mathbb{Q}}} % set of rationals
-\newcommand{\RR}{\ensuremath{\mathbb{R}}} % set of real numbers
-\newcommand{\CC}{\ensuremath{\mathbb{C}}} % set of complex numbers
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%% for long-vector arrows %%%%%
-\newcommand{\vect}[1]{%
-  \vbox{\m@th \ialign {##\crcr
-  \vectfill\crcr\noalign{\kern-\p@ \nointerlineskip}
-  $\hfil\displaystyle{#1}\hfil$\crcr}}}
-  \def\vectfill{%
-  $\m@th\smash-\mkern-7mu%
-  \cleaders\hbox{$\mkern-2mu\smash-\mkern-2mu$}\hfill
-  \mkern-7mu\raisebox{-3.66pt}[\p@][\p@]{$\mathord\mathchar"017E$}$}
+    \newcommand{\vect}[1]{%
+    \vbox{\m@th \ialign {##\crcr
+    \vectfill\crcr\noalign{\kern-\p@ \nointerlineskip}
+    $\hfil\displaystyle{#1}\hfil$\crcr}}}
+    \def\vectfill{%
+    $\m@th\smash-\mkern-7mu%
+    \cleaders\hbox{$\mkern-2mu\smash-\mkern-2mu$}\hfill
+    \mkern-7mu\raisebox{-3.66pt}[\p@][\p@]{$\mathord\mathchar"017E$}$}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%% Theorems, definitions,... environments %%%%%
-\newtheoremstyle{math}
-    {\topsep}   % ABOVESPACE
-    {\topsep}   % BELOWSPACE
-    {}  % BODYFONT
-    {0pt}       % INDENT (empty value is the same as 0pt)
-    {\bfseries} % HEADFONT
-    {.}         % HEADPUNCT
-    {5pt plus 1pt minus 1pt} % HEADSPACE
-    {\thmname{#1}\thmnumber{\@ifnotempty{#1}{ }\@upn{#2}}%
-      \thmnote{{ \bfseries(#3)}}}          % CUSTOM-HEAD-SPEC
-    
-% \newtheoremstyle{physics}
-    % {\topsep}   % ABOVESPACE
-    % {\topsep}   % BELOWSPACE
-    % {}  % BODYFONT
-    % {0pt}       % INDENT (empty value is the same as 0pt)
-    % {\bfseries} % HEADFONT
-    % {.}         % HEADPUNCT
-    % {5pt plus 1pt minus 1pt} % HEADSPACE
-    % {\thmnote{{\bfseries#3}}}          % CUSTOM-HEAD-SPEC
+    \newtheoremstyle{math}
+        {\topsep}   % ABOVESPACE
+        {\topsep}   % BELOWSPACE
+        {}  % BODYFONT
+        {0pt}       % INDENT (empty value is the same as 0pt)
+        {\bfseries} % HEADFONT
+        {.}         % HEADPUNCT
+        {5pt plus 1pt minus 1pt} % HEADSPACE
+        {\thmname{#1}\thmnumber{\@ifnotempty{#1}{ }\@upn{#2}}%
+        \thmnote{{ \bfseries(#3)}}}          % CUSTOM-HEAD-SPEC
 
-\theoremstyle{math}
-\newtheorem{theorem}{Theorem}[section]
-\newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{prop}[theorem]{Proposition}
-\newtheorem{corollary}[theorem]{Corollary}
-\newtheorem{axiom}[theorem]{Axiom}
-\newtheorem{definition}[theorem]{Definition}
-\newtheorem{method}[theorem]{Method}
-\newtheorem{concept}[theorem]{Concept}
+    \theoremstyle{math}
+    \newtheorem{theorem}{Theorem}[section]
+    \newtheorem{lemma}[theorem]{Lemma}
+    \newtheorem{prop}[theorem]{Proposition}
+    \newtheorem{corollary}[theorem]{Corollary}
+    \newtheorem{axiom}[theorem]{Axiom}
+    \newtheorem{definition}[theorem]{Definition}
+    \newtheorem{method}[theorem]{Method}
+    \newtheorem{law}[theorem]{Law}
 
-% \theoremstyle{physics}
-% \newtheorem{concept}[theorem]{}
-
-\renewcommand\theaxiom{\arabic{section}.\arabic{axiom}}
-\renewcommand\thedefinition{\arabic{section}.\arabic{definition}}
-\renewcommand\thetheorem{\arabic{section}.\arabic{theorem}}
-\renewcommand\thecorollary{\arabic{section}.\arabic{corollary}}
-\renewcommand\thelemma{\arabic{section}.\arabic{lemma}}
-\renewcommand\theprop{\arabic{section}.\arabic{prop}}
-\renewcommand\theconcept{\arabic{section}.\arabic{concept}}
+    \renewcommand\theaxiom{\arabic{section}.\arabic{axiom}}
+    \renewcommand\thedefinition{\arabic{section}.\arabic{definition}}
+    \renewcommand\thetheorem{\arabic{section}.\arabic{theorem}}
+    \renewcommand\thecorollary{\arabic{section}.\arabic{corollary}}
+    \renewcommand\thelemma{\arabic{section}.\arabic{lemma}}
+    \renewcommand\theprop{\arabic{section}.\arabic{prop}}
+    \renewcommand\thelaw{\arabic{section}.\arabic{law}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
