@@ -1,6 +1,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[a4paper, headheight=14pt, left=1.5cm, right=1.5cm, top=2cm, bottom=2cm]{geometry}
 \usepackage{amsthm, amsmath, mathtools, amssymb} % for math commands and math symbols.
+\usepackage{esint} % for more option on integrals.
 \usepackage{standalone} % for compiling individually .tex images.
 \usepackage{etoolbox}
 \usepackage{fancyhdr} % for customizing page-style (mainly headings)
@@ -16,9 +17,9 @@
 \usepackage{array, makecell}
 
 %%%%% tikz images %%%%%%
-\usepackage{tikz, pgfplots}
-\usepackage{tkz-euclide} 
-\usetikzlibrary{arrows,arrows.meta,decorations.pathmorphing,decorations.pathreplacing,decorations.shapes,patterns,calc}
+\usepackage{tikz, pgfplots, tkz-euclide, tikz-3dplot}
+\usepackage[RPvoltages]{circuitikz}
+\usetikzlibrary{arrows,arrows.meta,decorations.pathmorphing,decorations.pathreplacing,decorations.shapes,patterns,calc,fillbetween}
 \usepgfplotslibrary{fillbetween}
 \pgfplotsset{compat=newest}
 
@@ -56,7 +57,9 @@ color(75bp)=(violet); color(100bp)=(violet)} % for creating a rainbow
 %%%%%% Title format and page style %%%%%%
     \titleformat{\subsection}[hang]{\normalfont\large\bfseries}{\thesubsection\hspace{6pt}{\textbf{$|$}}\hspace{-6pt}}{1em}{}
 
-    \renewcommand{\thesubsection}{\arabic{chapter}.\arabic{section}.\arabic{subsection}}
+    \renewcommand{\thechapter}{\arabic{part}.\arabic{chapter}}
+    \renewcommand{\thesection}{\arabic{part}.\arabic{chapter}.\arabic{section}}
+    \renewcommand{\thesubsection}{\arabic{part}.\arabic{chapter}.\arabic{section}.\arabic{subsection}}
 
     \ifSubfilesClassLoaded{% show only when the single subfile is compiled
         \titleformat{\section}
@@ -65,7 +68,7 @@ color(75bp)=(violet); color(100bp)=(violet)} % for creating a rainbow
         {0.0cm}     % separation between label and body
         {}          % code preceding title body
         []
-
+        \renewcommand{\thesection}{\arabic{section}}
         \renewcommand{\thesubsection}{\arabic{subsection}}%
     }{% show only when the main file is compiled
         %%% Page-style (heading) %%%
@@ -84,11 +87,13 @@ color(75bp)=(violet); color(100bp)=(violet)} % for creating a rainbow
         % \renewcommand{\grad}{\operatorname{\mathblack{grad}}} % gradient
         \newcommand{\rot}{\operatorname{\mathblack{rot}}} % curl
         \renewcommand{\div}{\operatorname{\mathblack{div}}} % divergence
-        \newcommand{\lap}{\nabla^2} % laplacian
+        % command \laplacianlacian is by default \nabla^2
+        %\newcommand{\laplacian}{\nabla^2} % laplacian
         \newcommand{\ii}{\mathrm{i}} % imaginary unit
         \renewcommand{\exp}[1]{\mathrm{e}^{#1}} % exponential function
         \newcommand{\upint}[2]{\overline{\int_{#1}^{#2}}} % upper integral
         \newcommand{\lowint}[2]{\underline{\int_{#1}^{#2}}} % lower integral
+        \newcommand{\vectorfunction}[1]{\boldsymbol{#1}} % curl
 
     %%% ALGEBRA
         \newcommand{\bigzero}{\makebox(0,0){\text{\Huge0}}} % 0 big zero in a matrix
@@ -157,6 +162,7 @@ color(75bp)=(violet); color(100bp)=(violet)} % for creating a rainbow
     \newtheorem{definition}[theorem]{Definition}
     \newtheorem{method}[theorem]{Method}
     \newtheorem{law}[theorem]{Law}
+    \newtheorem{principle}[theorem]{Principle}
 
     \renewcommand{\theaxiom}{\arabic{section}.\arabic{axiom}}
     \renewcommand{\thedefinition}{\arabic{section}.\arabic{definition}}
@@ -165,4 +171,5 @@ color(75bp)=(violet); color(100bp)=(violet)} % for creating a rainbow
     \renewcommand{\thelemma}{\arabic{section}.\arabic{lemma}}
     \renewcommand{\theprop}{\arabic{section}.\arabic{prop}}
     \renewcommand{\thelaw}{\arabic{section}.\arabic{law}}
+    \renewcommand{\theprinciple}{\arabic{section}.\arabic{principle}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

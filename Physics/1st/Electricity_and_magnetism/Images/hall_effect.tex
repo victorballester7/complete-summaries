@@ -1,0 +1,52 @@
+\documentclass{standalone}
+\usepackage{pgfplots}
+\usepackage{physics}
+\usepackage[RPvoltages]{circuitikz}
+\pgfplotsset{compat = newest}
+
+\begin{document}
+\begin{circuitikz}
+  % Magnetic field
+  % a,b: x-dimensions
+  % c,d: y-dimensions
+  \def\a{-3}
+  \def\b{3}
+  \def\c{-1}
+  \def\d{-5}
+  \def\x{7}
+  \def\y{6}
+  \foreach \i in{1,...,\x}{
+      \foreach \j in{1,...,\y}{
+          \node[cyan] at ({(\b-\a)/(\x-1)*(\i-1)+\a},{(\d-\c)/(\y-1)*(\j-1)+\c}){$\vb*{\times}$};
+        }
+    }
+  \node[cyan] at (-2.5,-1.4){$\vb{B}$};
+
+  % Circuit
+  \draw (4,0) -- (2.25,0) to[R,l_=$R$] (0.75,0) -- (-1,0) to [battery1, l_=$\xi$] (-2,0) -- (-4,0) to[short,i_=$I$] (-4,-3) -- (-2.5,-3);
+  \draw (2.5,-3) -- (4,-3) to[short,i_=$I$] (4,0);
+  \node at (-1.5,0.25){$\scriptscriptstyle +\quad -$};
+
+  % Conductor
+  \draw[very thin, fill=purple!60!black, draw, fill opacity=0.5] (-2.5,-4) rectangle (2.5,-2);
+
+  % Charges signs
+  \draw[thick] plot[samples=15,domain=-2.3:2.3,only marks,mark=text, text mark=$-$](\x,-2.15);
+  \draw[thick] plot[samples=15,domain=-2.3:2.3,only marks,mark=text, text mark=$+$](\x,-3.85);
+
+  % Point charges
+  \node[circle,draw, very thin,fill=yellow!80!orange,inner sep=0] (neg) at (1.25,-3){$-$};
+  \node[anchor=west] at (neg.east){$-q$};
+
+  % Vectors 
+  \draw[very thick,-latex] (neg.north) -- node[anchor=west]{$\vb{F}$} (1.25,-2);
+  \draw[very thick,-latex,green!50!black] (neg.west) -- node[anchor=south]{$\vb{v}_\text{d}$} (0,-3);
+
+  % Distance 
+  \draw[very thin,gray] (2.5+0.1,-2) -- (3.2,-2);
+  \draw[very thin,gray] (2.5+0.1,-4) -- (3.2,-4);
+  \draw[<->,thin] (3,-2) --node[anchor=west,pos=0.7]{$d$} (3,-4);
+  \draw[<->,thick] (3.5,-2) --node[anchor=west,pos=0.7]{$\Delta V=V_\text{H}$} (3.5,-4);
+
+\end{circuitikz}
+\end{document}

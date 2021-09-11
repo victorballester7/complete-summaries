@@ -5,89 +5,79 @@
     \subsection{Motion in one dimension}
     \subsubsection*{Integration of Newton's 2nd law}
     \begin{prop}[Newton's 2nd law]
-        If we consider the case of one particle with constant mass $m$ that moves in one dimension, then satisfies $$\ddot{x}(t)=\frac{1}{m}F(x(t),\dot{x}(t),t),$$
-        where we have supposed the force function $F$ is known. We also suppose initial position and velocity, denoted by $x(t_0)=x_0$ and $\dot{x}(t_0)=\dot{x}_0$ respectively, are known.
+        Consider a particle with constant mass $m$ that moves in one dimension. Then, it satisfies: $$\ddot{x}(t)=\frac{1}{m}F(x(t),\dot{x}(t),t)$$
+        where we have supposed the force function $F$ is known and $x(t)$ is the position of the particle as a function of time. We also suppose initial position and velocity, denoted by $x(t_0)=x_0$ and $\dot{x}(t_0)=\dot{x}_0$ respectively, are known.
     \end{prop}
     \begin{prop}[Integration of Newton's 2nd law]
         We consider a force that only depend on time, position and velocity.
         \begin{itemize}
             \item Time dependence:
                   \begin{gather*}
-                      \ddot{x}(t)=\frac{F(t)}{m}\implies\dot{x}(t)=\dot{t_0}+\int_{t_0}^t\frac{F(t')}{m}dt',\\
-                      \frac{dx}{dt}=\dot{x}\implies x(t)=x(t_0)+\int_{t_0}^t\dot{x}(t')dt'.
+                      \dot{x}(t)=\dot{x}(t)+\int_{t_0}^t\frac{F(t')}{m}\dd t'\\
+                      x(t)=x(t_0)+\int_{t_0}^t\dot{x}(t')\dd t'
                   \end{gather*}
             \item Position dependence:
                   \begin{gather*}
-                      \frac{d\dot{x}}{dt}=\frac{F(x)}{m}\implies\dot{x}(x)^2=\dot{x}(x_0)^2+2\int_{x_0}^x\frac{F(x')}{m}dx',\\
-                      \frac{dx}{dt}=\dot{x}\implies x(t)=g^{-1}(t),
+                      {\dot{x}(x)}^2={\dot{x}(x_0)}^2+2\int_{x_0}^x\frac{F(x')}{m}\dd x'\\
+                      x(t)=g^{-1}(t)
                   \end{gather*}
-                  where $\displaystyle g(x)=\int_{x_0}^x\frac{1}{\dot{x}(x')}dx'=t$.
+                  where $\displaystyle g(x)=\int_{x_0}^x\frac{1}{\dot{x}(x')}\dd x'=t$.
             \item Velocity dependence:
                   \begin{gather*}
-                      \ddot{x}(t)=\frac{F(\dot{x})}{m}\implies\dot{x}(t)=h^{-1}(t),\\
-                      x(t)=x(t_0)+\int_{t_0}^th^{-1}(t')dt',
+                      \dot{x}(t)=h^{-1}(t)\\
+                      x(t)=x(t_0)+\int_{t_0}^th^{-1}(t')\dd t'
                   \end{gather*}
-                  where $\displaystyle h(\dot{x})=\int_{\dot{x}_0}^{\dot{x}}\frac{m}{F(\dot{x}')}d\dot{x}'=t$.
+                  where $\displaystyle h(\dot{x})=\int_{\dot{x}_0}^{\dot{x}}\frac{m}{F(\dot{x}')}\dd\dot{x}'=t$.
         \end{itemize}
     \end{prop}
     \subsubsection*{Variable mass}
-    \begin{prop}[Mass accretion]
-        Consider two objects of masses $m(t)$ and $dm$ and velocities $\boldsymbol{v}(t)$ and $\boldsymbol{u}(t)$ respectively, which in an interval of time $dt$ the second one collide with the first one and become a unique object. If $\boldsymbol{F}^\text{ext}$ is the external force acting to the system, we have
+    \begin{prop}[Mass accretion formula]
+        Consider two objects of masses $m(t)$ and $dm$ and velocities $\mathblack{v}(t)$ and $\mathblack{u}(t)$ respectively, which in an interval of time $\dd t$ the second one collide with the first one and become a unique object. If $\mathblack{F}^\text{ext}$ is the external force acting to the system, we have:
         \begin{equation}
-            \boldsymbol{F}^\text{ext}=m\dot{\boldsymbol{v}}+(\boldsymbol{v}-\boldsymbol{u})\dot{m}=\dot{\boldsymbol{p}}-\dot{m}\boldsymbol{u},
+            \mathblack{F}^\text{ext}=m\dot{\mathblack{v}}+(\mathblack{v}-\mathblack{u})\dot{m}=\dot{\mathblack{p}}-\dot{m}\mathblack{u}
             \label{mass}
-        \end{equation} where $\dot{\boldsymbol{p}}$ is the momentum of the object that gains mass.\footnote{The formula is also valid for the case when the object is losing mass, i.e. $\dot{m}<0$.}
+        \end{equation}
+        where $\dot{\mathblack{p}}$ is the momentum of the object that gains mass\footnote{The formula is also valid for the case when the object is losing mass, i.e. $\dot{m}<0$.}.
     \end{prop}
     \subsubsection*{Rocket motion}
-    Consider a rocket that expels gas at a velocity of $\boldsymbol{c}$ with respect to the rocket to propel itself. Suppose the mass of the rocket is $m(t)$ and $m_0:=m(t_0)$. Our proposal is to find an expression of $\boldsymbol{v}$ to describe the motion of the rocket. For doing that, first we need to express the magnitudes in an external frame of reference. In particular, the velocity of the fuel will be $\boldsymbol{u}=\boldsymbol{v}+\boldsymbol{c}$. By equation \eqref{mass} we have $$m\dot{\boldsymbol{v}}=\boldsymbol{F}^\text{ext}+\dot{m}\boldsymbol{c}.$$
+    Consider a rocket moving at a velocity $\mathblack{v}$ that expels gas at a velocity $\mathblack{c}$ with respect to the rocket to propel itself. Suppose the mass of the rocket is $m(t)$ and $m_0:=m(t_0)$. If $\mathblack{u}=\mathblack{v}+\mathblack{c}$ is the velocity of the gas with respect to an external frame of reference and $\mathblack{F}^\text{ext}$ is the net external force acting on the rocket, by equation \eqref{mass} we have:
+    $$m\dot{\mathblack{v}}=\mathblack{F}^\text{ext}+\dot{m}\mathblack{c}.$$
     \begin{prop}[Rocket without gravity]
-        In this situation we have $\boldsymbol{F}^\text{ext}=0$ and we will suppose $\boldsymbol{v}=v\boldsymbol{j}$, $\boldsymbol{c}=-c\boldsymbol{j}$. Finally we get
+        In this case we have $\mathblack{F}^\text{ext}=0$ and if we suppose $\mathblack{v}=v\mathblack{j}$ and $\mathblack{c}=-c\mathblack{j}$, we have:
         \begin{equation}
-            m\frac{dv}{dt}=-c\frac{dm}{dt}\implies v=c\log\frac{m_0}{m}.
+            m\frac{\dd v}{\dd t}=-c\frac{dm}{\dd t}\implies v=c\log\frac{m_0}{m}
             \label{rocket}
         \end{equation}
-        Consider now the discrete case, i.e. when the function $\dot{m}$ is not differentiable. For that we can consider instantaneous ejections of $\Delta m=(m_0-m_f)/n$ amount of mass where $m_f$ is the mass of the rocket after $n$ ejections of mass. For this case, we have $$v=c\sum_{k=1}^n\frac{(m_0-m_f)/n}{m_f+k(m_0-m_f)/n}=c\sum_{k=1}^n\frac{\Delta m}{m_f+k\Delta m}.\footnote{Obviously if we tend $n$ to infinity we get the equation \eqref{rocket}.}$$
+        Consider now the discrete case, i.e. when the function $\dot{m}$ is not differentiable. For that we can consider instantaneous ejections of $\Delta m=(m_0-m_f)/n$ amount of mass where $m_f$ is the mass of the rocket after $n$ ejections of mass. For this case, we have $$v=c\sum_{k=1}^n\frac{(m_0-m_f)/n}{m_f+k(m_0-m_f)/n}=c\sum_{k=1}^n\frac{\Delta m}{m_f+k\Delta m}\footnote{Obviously if we tend $n$ to infinity we get the equation \eqref{rocket}.}$$
     \end{prop}
     \begin{prop}[Rocket with gravity]
-        Now $\boldsymbol{F}^\text{ext}=-mg\boldsymbol{j}$, and for simplicity we will consider only the case where $\dot{m}=-\beta$, $\beta>0$. Therefore, we obtain
+        In this case we have $\mathblack{F}^\text{ext}=-mg\mathblack{j}$. Suppose $\mathblack{v}=v\mathblack{j}$, $\mathblack{c}=-c\mathblack{j}$ and, for simplicity, consider only the case when $\dot{m}=-\beta$, $\beta>0$. Therefore, we obtain:
         \begin{equation}
-            m\frac{dv}{dt}=-mg+c\beta\implies v=c\log\frac{m_0}{m}-\frac{g}{\beta}(m_0-m).
+            m\frac{\dd v}{\dd t}=-mg+c\beta\implies v=c\ln\frac{m_0}{m}-\frac{g}{\beta}(m_0-m)
             \label{rockg1}
         \end{equation}
-        We observe that if $m_0g>\beta c$ then $dv/dt$ will be negative, which is not possible. Therefore in this case the formula is not correct if we are considering the rocket launch. In this case the formula becomes
+        Observe that if $m_0g>\beta c$ then $\dd v/\dd t$ will be negative, which is not possible. Therefore in this case the formula is not correct if we are considering the rocket launch. In this case the formula becomes
         \begin{equation}
-            v=c\log\frac{\beta c}{mg}-\frac{g}{\beta}\left(\frac{\beta c}{g}-m\right).
+            v=c\ln\frac{\beta c}{mg}-\frac{g}{\beta}\left(\frac{\beta c}{g}-m\right)
             \label{rockg2}
         \end{equation}
-        Because of $$\dot{m}=-\beta\implies m(t)=m_0-\beta t,$$ we can express formulas \eqref{rockg1}, \eqref{rockg2} as
+        Because of $\dot{m}=-\beta\implies m(t)=m_0-\beta t$, we can express formulas \eqref{rockg1}, \eqref{rockg2} respectively as:
         \begin{gather*}
-            v(t)=c\log\frac{m_0}{m_0-\beta t}-gt,\\
-            v(t)=c\log\frac{\beta c}{m_0g-g\beta t}-gt-\frac{g}{\beta}\left(\frac{\beta c}{g}-m_0\right),
+            v(t)=c\ln\frac{m_0}{m_0-\beta t}-gt\\
+            v(t)=c\ln\frac{\beta c}{m_0g-g\beta t}-gt-\frac{g}{\beta}\left(\frac{\beta c}{g}-m_0\right)
         \end{gather*}
-        respectively.
     \end{prop}
     \subsection{Oscillations}
     \subsubsection*{Simple harmonic oscillator}
-    \begin{prop}[Movement equation]
-        Consider the following differential equation: $$\ddot{x}+\omega_0^2 x=0,$$ with initials values of $x(0)=x_0$ and $\dot{x}(0)=\dot{x}_0$. Then the general solution is
+    \begin{prop}
+        Consider the differential equation $$\ddot{x}+\omega_0^2 x=0$$ with initial values $x(0)=x_0$ and $\dot{x}(0)=\dot{x}_0$. The general solution is:
         \begin{equation}
-            x(t)=x_0\cos\omega_0t+\frac{\dot{x}_0}{\omega_0}\sin\omega_0t=A\cos(\omega_0t+\phi),
+            x(t)=x_0\cos\omega_0t+\frac{\dot{x}_0}{\omega_0}\sin\omega_0t=A\cos(\omega_0t+\phi)
             \label{mhs}
-        \end{equation} where $\displaystyle A=\sqrt{x_0^2+\left(\frac{\dot{x}_0}{\omega_0}\right)^2}$ and $\displaystyle \phi=-\arctan\frac{\dot{x}_0}{\omega_0x_0}$. Such constants $\omega_0$ $[\omega_0]=\text{rad}\cdot \text{s}^{-1}$, $A$ $[A]=\text{m}$ and $\phi$ $[\phi]=\text{rad}$ are called \textit{angular frequency}, \textit{amplitude} and \textit{initial phase}, respectively. Observe that the function in equation \eqref{mhs} is periodic with period $T=\frac{2\pi}{\omega_0}$ and frequency $\nu=T^{-1}=\frac{\omega_0}{2\pi}$.\footnote{From this last two equations we immediately deduce that $[T]=\text{s}$ and $[\nu]=\text{s}^{-1}=\text{Hz}$.}
-    \end{prop}
-    \begin{prop}[Phase space]
-        The phase space of the simple harmonic oscillator is $$\boldsymbol{u}=
-            \begin{pmatrix}
-                x(t) \\
-                \dot{x}(t)
-            \end{pmatrix}=
-            \begin{pmatrix}
-                A\cos(\omega_0t+\phi) \\
-                -A\omega_0\sin(\omega_0t+\phi)
-            \end{pmatrix}.$$
+        \end{equation} where $\displaystyle A=\sqrt{{x_0}^2+{\left(\frac{\dot{x}_0}{\omega_0}\right)}^2}$ and $\displaystyle \phi=-\arctan\frac{\dot{x}_0}{\omega_0x_0}$. Such constants $\omega_0$ ($[\omega_0]=\text{rad}\cdot \text{s}^{-1}$), $A$ ($[A]=\text{m}$) and $\phi$ ($[\phi]=\text{rad}$) are called \textit{angular frequency}, \textit{amplitude} and \textit{initial phase}, respectively. Observe that the function in equation \eqref{mhs} is periodic with period $T=\frac{2\pi}{\omega_0}$ and frequency $\nu=T^{-1}=\frac{\omega_0}{2\pi}$\footnote{Note that $[T]=\text{s}$ and $[\nu]=\text{s}^{-1}=\text{Hz}$.}.
     \end{prop}
     \begin{definition}
-        Let $U(x)$ be a potential function of class $\mathcal{C}^2(\mathbb{R})$. We say $x_0$ is a \textit{point of stable equilibrium} if $U$ attains a maximum in $x_0$. Analogously, we say $x_0$ is a \textit{point of unstable equilibrium} if $U$ attains a minimum in $x_0$.
+        Let $U(x)$ be a potential function of class $\mathcal{C}^2(\mathbb{R})$. We say $x_0$ is a \textit{point of stable equilibrium} if $U$ attains a minimum in $x_0$. Analogously, we say $x_0$ is a \textit{point of unstable equilibrium} if $U$ attains a maximum in $x_0$.
     \end{definition}
     \begin{prop}[Behaviour near a minimum]
         Suppose $x_0$ is a point of stable equilibrium an let $U(x)$ be the potential function associated with a particle of mass $m$. Then if we disturb slightly the particle, it will start to oscillate at a frequency $$\omega_0=\sqrt{\frac{U''(x_0)}{m}}.$$
@@ -151,7 +141,7 @@
     \noindent From that, we can rewrite the expression of $\Tilde{\omega}$ to get: $$\Tilde{\omega}=\omega_0\sqrt{1-\frac{1}{4Q^2}}.$$
     \begin{prop}[Energy of underdamped harmonic oscillator]
         For
-        $$E(t)=\frac{\mu\omega_0^2A^2}{2}e^{-2\beta t}=E_0e^{-2\beta t}.$$ The rate at which the energy is dissipated is $$\left|\frac{dE}{dt}(t)\right|=2\beta E(t)\implies\frac{E}{\left|dE/dt\right|}=\frac{1}{2\beta}.$$
+        $$E(t)=\frac{\mu\omega_0^2A^2}{2}e^{-2\beta t}=E_0e^{-2\beta t}.$$ The rate at which the energy is dissipated is $$\left|\frac{dE}{\dd t}(t)\right|=2\beta E(t)\implies\frac{E}{\left|dE/\dd t\right|}=\frac{1}{2\beta}.$$
         If $\beta\ll\omega_0$, then $$Q=2\pi\frac{E}{\Delta E},$$ where $\Delta E$ is the energy dissipated in a pseudo-period $\Tilde{T}=2\pi/\Tilde{\omega}\approx2\pi/\omega_0$.
     \end{prop}
     \begin{prop}[Critically damped harmonic oscillator: $\beta=\omega_0$]
@@ -236,7 +226,7 @@
     \subsection{Central forces}
     \subsubsection*{Definition and properties}
     \begin{definition}[Central force]
-        A \textit{central force} is a force of the form $$\boldsymbol{F}(\boldsymbol{r})=f(r)\boldsymbol{e}_r,$$ where $r=\|\boldsymbol{r}\|$ and $\boldsymbol{e}_r=\boldsymbol{r}/r$ is the unit radial vector.
+        A \textit{central force} is a force of the form $$\mathblack{F}(\boldsymbol{r})=f(r)\boldsymbol{e}_r,$$ where $r=\|\boldsymbol{r}\|$ and $\boldsymbol{e}_r=\boldsymbol{r}/r$ is the unit radial vector.
     \end{definition}
     \begin{definition}
         The origin $\boldsymbol{r}=0$ is called \textit{center of forces}.
@@ -249,10 +239,10 @@
         The angular momentum with respect to the center of forces is conserved, that is, $\dot{\boldsymbol{L}}=0$.
     \end{prop}
     \begin{prop}[Kepler's 2nd law]
-        The areal velocity $dA/dt$ is constant. In fact, $$\frac{dA}{dt}=\frac{L}{2m}.$$
+        The areal velocity $dA/\dd t$ is constant. In fact, $$\frac{dA}{\dd t}=\frac{L}{2m}.$$
     \end{prop}
     \begin{prop}[Unit vectors]
-        Remember we have $$\boldsymbol{e}_r=\boldsymbol{i}\cos\theta+\boldsymbol{j}\sin\theta,\quad\boldsymbol{e}_\theta=-\boldsymbol{i}\sin\theta+\boldsymbol{j}\cos\theta.$$ Therefore we obtain,
+        Remember we have $$\boldsymbol{e}_r=\boldsymbol{i}\cos\theta+\mathblack{j}\sin\theta,\quad\boldsymbol{e}_\theta=-\boldsymbol{i}\sin\theta+\mathblack{j}\cos\theta.$$ Therefore we obtain,
         \begin{equation}
             \boldsymbol{r}=r\boldsymbol{e}_r,\quad\boldsymbol{\dot{r}}=\dot{r}\boldsymbol{e}_r+r\dot{\theta}\boldsymbol{e}_\theta,\quad\boldsymbol{\ddot{r}}=(\ddot{r}-r\dot{\theta}^2)\boldsymbol{e}_r+(2\dot{r}\dot{\theta}+r\ddot{\theta})\boldsymbol{e}_\theta.
             \label{unit}

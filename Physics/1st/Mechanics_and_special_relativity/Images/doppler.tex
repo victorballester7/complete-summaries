@@ -1,0 +1,33 @@
+\documentclass{standalone}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.pathmorphing}
+\pgfplotsset{compat=newest}
+
+\begin{document}
+\begin{tikzpicture}
+  \begin{axis}[
+      axis lines=center,
+      axis on top,
+      xlabel={$x$}, ylabel={$y$},
+      xtick=\empty, ytick=\empty,
+      xmin=1, xmax=3.5,
+      ymin=0, ymax=4.5,
+      enlargelimits=0.1,
+      axis equal,
+    ]
+    \addplot[dashed, domain=0:4,gray!50]{x};
+    \node[circle,fill=black,inner sep=0pt,minimum height=4pt] (c) at (0,0){};
+    \node[anchor=south east] at (0,0){$R$};
+    \node[circle,fill=black,inner sep=0pt,minimum height=4pt] (c) at (3,3){};
+    \node[anchor=north west] at (3,3){$S$};
+    \draw[->,blue!70!black,draw, thick] (3,3) -- node[anchor=east,pos=0.7]{$\beta$} (3.25,4.42);
+
+    % angles
+    \addplot[domain=45:80,samples=50, brown,dashed] ({3+0.5*cos(\x)}, {3+0.5*sin(\x)}) node[brown, anchor= south,pos=0.2]{$\theta$};
+    \addplot[domain=80:225,samples=50, brown,dashed] ({3+0.7*cos(\x)}, {3+0.7*sin(\x)}) node[brown, anchor= east, pos=0.5]{$\phi$};;
+
+    \draw [->,yellow!90!black,thick,decorate,decoration={snake,amplitude=.4mm,segment length=2mm,post length=1mm}]
+    (3,3) -- (1.8,1.8);
+  \end{axis}
+\end{tikzpicture}
+\end{document}

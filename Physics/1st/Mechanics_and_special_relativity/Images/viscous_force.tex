@@ -1,0 +1,53 @@
+\documentclass{standalone}
+\usepackage{pgfplots}% loads also tikz
+\usepackage{physics}
+\usetikzlibrary{fillbetween}
+
+\pgfplotsset{compat=newest} 
+
+\begin{document}
+\pgfdeclarelayer{pre main} % to avoid a warning
+
+\begin{tikzpicture}[
+    declare function={
+        X1(\x)=1.5*pow(\x - 1,2)*\x - 5.25*(\x - 1)*\x*\x + 2*\x*\x*\x;
+        X2(\x)=-5*pow(\x - 1,3) + 16.5*pow(\x - 1,2)*\x - 20.25*(\x - 1)*\x*\x + 7*\x*\x*\x;
+        Y(\x)=4.5*pow(\x - 1,2)*\x - 5.25*(\x - 1)*\x*\x + 3*\x*\x*\x;
+      }
+  ]
+  \pgfsetlayers{pre main,main} % to avoid a warning
+  % ground and rectangle
+  \draw[draw=darkgray, fill=lightgray] (0,0) rectangle (5,-0.1);
+  \draw[draw=darkgray, fill=lightgray] (2,3+0.1) rectangle (7,3);
+
+  % water
+  \draw[name path=A, blue!80!black] (0,0) .. controls (0.5,1.5) and (1.75,1.75) .. (2,3);
+  \draw[name path=B, blue!80!black] (5,0) .. controls (5.5,1.5) and (6.75,1.75) .. (7,3);
+  \tikzfillbetween[of=A and B]{blue, opacity=0.1};
+
+  % layers
+  \def\n{10}
+  \foreach \i in{1,...,\n}{
+      \draw[thin,blue!80!black,opacity=0.5] ({X1(\i/(\n+1))+0.25},{Y(\i/(\n+1))}) -- ({X2(\i/(\n+1))-0.25},{Y(\i/(\n+1))});
+    }
+
+  % blue arrows
+  \foreach \i in{1,...,\n}{
+      \draw[->,semithick,blue] ({(X1(\i/(\n+1))+X2(\i/(\n+1)))/2},{Y(\i/(\n+1))}) -- ({(X1(\i/(\n+1))+X2(\i/(\n+1)))/2+((2-0.2)*\i+0.2*(\n-2)-2)/(\n-1)},{Y(\i/(\n+1))});
+    }
+  \draw[->,thick,blue] (4.5,3.05) -- node[blue,anchor= south]{$\vb{v}$} ({4.5+((2-0.2)*(\n+1)+0.2*(\n-2)-2)/(\n-1)},3.05);
+
+  % magenta arrow
+  \draw[->,thick,magenta!70!red] (7-0.1,3.05) -- node[magenta!70!red,anchor= south]{$\vb{F}$} (8,3.05);
+
+  % node S
+  \node[black] (S) at (5.5,4) {$S$};
+  \draw[->] (S.west) .. controls +(left:5mm) and +(up:7mm)  .. (4.5,3+0.2);
+
+  % black arrow
+  \draw[<->] (-0.5,0) -- node[black,anchor=east]{$z$} (-0.5,3);
+  \draw[very thin,lightgray,dashed] (-0.6,0) -- (-0.1,0);
+  \draw[very thin,lightgray,dashed] (-0.6,3) -- (1.9,3);
+\end{tikzpicture}
+
+\end{document}

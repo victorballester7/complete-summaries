@@ -1,0 +1,37 @@
+\documentclass[tikz]{standalone}
+\usepackage{tikz-3dplot} 
+\usepackage{physics}
+
+\begin{document}
+
+\tdplotsetmaincoords{60}{110}
+\begin{tikzpicture}[scale=1.5,tdplot_main_coords]
+  % labels
+  \node[black] at (0,-0.6,1.5){$\mathcal{R}$};
+  \node[blue] at (3,3.4,5.5){$\mathcal{R'}$};
+
+  % frame of reference R
+  \draw[thick,->] (0,0,0) -- (2,0,0) node[anchor=north east]{$x$};
+  \draw[thick,->] (0,0,0) -- (0,2,0) node[anchor=west]{$y$};
+  \draw[thick,->] (0,0,0) -- (0,0,2) node[anchor=south]{$z$};
+
+  % frame of reference R'
+  \coordinate (Shift) at (3,4,4);
+  \coordinate (point) at (5,5.5,7);
+
+  \tdplotsetrotatedcoordsorigin{(Shift)}
+  \draw[thick,color=blue,tdplot_rotated_coords,->] (0,0,0)-- (2,0,0) node[anchor=north east]{$x'$};
+  \draw[thick,color=blue,tdplot_rotated_coords,->] (0,0,0)-- (0,2,0) node[anchor=west]{$y'$};
+  \draw[thick,color=blue,tdplot_rotated_coords,->] (0,0,0)-- (0,0,2) node[anchor=south]{$z'$};
+
+  % point
+  \filldraw[red] (point) circle (2pt);
+
+  % arrows
+  \draw[thick,->,orange!90!black] (0,0,0) -- node[orange!90!black, anchor=north west]{$\vb{R}(t)$} (Shift);
+  \draw[thick,->,black] (0,0,0) -- node[black, anchor=south east]{$\vb{r}(t)$} (point);
+  \draw[thick,->,blue] (Shift) -- node[blue, anchor=north west]{$\vb{r}'(t)$} (point);
+
+\end{tikzpicture}
+
+\end{document}
