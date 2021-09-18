@@ -2,6 +2,64 @@
 
 \begin{document}
 \begin{multicols}{2}[\section{Topology}]
-
+  \section{Continuous functions}
+  \begin{definition}
+    Let $X$ be a set. A \textit{distance in $X$} is a function $d:X\times X\rightarrow\RR $ such that $\forall x,y,x\in X$ the following properties are satisfied:
+    \begin{enumerate}
+      \item $d(x,y)\geq 0$.
+      \item $d(x,y)=0\iff x=y$.
+      \item $d(x,y)=d(y,x)$.
+      \item $d(x,y)\leq d(x,z)+d(z,y)\quad$\textit{(triangular inequality)}.
+    \end{enumerate}
+    We define a \textit{metric space} as a pair $(X,d)$ that satisfy the previous properties.
+  \end{definition}
+  \begin{definition}
+    Let $(X,d_X)$ and $(Y,d_Y)$ be two metric spaces and $f:(X,d_X)\rightarrow(Y,d_Y)$ be a function. We say that $f$ is continuous at a point $a$ if $\forall\varepsilon>0$, $\exists\delta>0$ such that $d_Y(f(x)-f(a))<\varepsilon$ whenever $d_X(x-a)<\delta$. Equivalently, we say that $f$ is continuous at $a$ if $\forall\varepsilon>0$, $\exists\delta>0$ such that $f(B(a,\delta))\subset B(f(a),\varepsilon)$ (or $B(a,\delta)\subset f^{-1}\left(B(f(a),\varepsilon)\right)$).
+  \end{definition}
+  \begin{theorem}
+    Let $(X,d_X)$ and $(Y,d_Y)$ be two metric spaces and $f:(X,d_X)\rightarrow(Y,d_Y)$ be a function. The following statements are equivalent:
+    \begin{enumerate}
+      \item $f$ is continuous.
+      \item If $A\subset Y$ is open, then $f^{-1}(A)\subset X$ is also open.
+    \end{enumerate}
+  \end{theorem}
+  \begin{prop}
+    Let $(X,d)$ be a metric space. Then:
+    \begin{itemize}
+      \item $\varnothing$ and $X$ are open sets.
+      \item If $I$ is an arbitrary index set and $\{U_i:U_i\subseteq X\;\forall i\in I\}$ is a collection of open sets, then $\bigcup_{i\in I}U_i$ is an open set.
+      \item If $\{U_i:U_i\subseteq X\;\forall i\in \{1,\ldots,n\}\}$ is a collection of open sets, then $\bigcap_{i=1}^nU_i$ is an open set.
+    \end{itemize}
+  \end{prop}
+  \begin{prop}
+    Let $(X,d)$ be a metric space with $|X|\geq 2$ and $x,y\in X$. Then, $\exists\delta>0$ such that $x\in B(x,\delta)$, $y\in B(y,\delta)$ and $B(x,\delta)\cap B(y,\delta)=\varnothing$.
+  \end{prop}
+  \begin{prop}
+    Let $(X,d)$ be a metric space and $A\subset X$ be a subset of $X$. Then, $A$ is open if and only if $A=\bigcup_{i\in I}B(a_i,\varepsilon_i)$, where $I$ is an index set, $a_i\in A$ and $\varepsilon_i>0$ for all $i\in I$.
+  \end{prop}
+  \subsubsection*{Topologies}
+  \begin{definition}
+    Let $X$ be a set. A \textit{topology $\mathcal{T}$} on a set $X$ is a collection of subsets of $X$ satisfying the following properties:
+    \begin{enumerate}
+      \item $\varnothing, X\in\mathcal{T}$.
+      \item The union of any subcollection of $\mathcal{T}$ is in $\mathcal{T}$.
+      \item The intersection of any finite subcollection of $\mathcal{T}$ is in $\mathcal{T}$.
+    \end{enumerate}
+    The ordered pair $(X,\mathcal{T})$ is called a \textit{topological space}. The elements of $X$ are called \textit{points} and the elements of $\mathcal{T}$, \textit{open sets}.
+  \end{definition}
+  \begin{definition}
+    Let $(X,\mathcal{T})$ be a topological space and $x,y\in X$ such that $x\ne y$. We say that $\mathcal{T}$ satisfies the \textit{Hausdorff property} if there exist $U,V\in\mathcal{T}$ such that $x\in U$, $y\in V$ and $U\cap V=\varnothing$.
+  \end{definition}
+  \begin{definition}
+    Let $(X,\mathcal{T})$ and $(X,\mathcal{T}')$ be topological spaces. We say that $\mathcal{T}$ is \textit{finer than} $\mathcal{T}'$ if $\mathcal{T}'\subset\mathcal{T}$.
+  \end{definition}
+  \begin{prop}
+    Let $X$ be a set. Then, we can construct some topologies on $X$:
+    \begin{itemize}
+      \item \textit{Trivial topology}: $\mathcal{T}_\text{t}:=\{\varnothing,X\}$
+      \item \textit{Discrete topology}: $\mathcal{T}_\text{d}:=\mathcal{P}(X)$
+      \item \textit{Finite complement topology}: $$\mathcal{T}_\text{f}:=\{U\subseteq X:U=\varnothing\text{ or }X\setminus U\text{ is finite}\}$$
+    \end{itemize}
+  \end{prop}
 \end{multicols}
 \end{document}
