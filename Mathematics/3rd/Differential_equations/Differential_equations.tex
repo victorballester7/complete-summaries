@@ -28,7 +28,68 @@
   \end{definition}
   \subsubsection*{Initial value problem}
   \begin{definition}
-    Let $U\subset\RR\times\RR^n$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a vector field. Given $(x_0,y_0)\in U$, the \textit{initial value problem} (or \textit{Cauchy problem}) consists in finding a solution of the ODE $$\vectorfunction{y}'=\vectorfunction{f}(x,\vectorfunction{y})$$ with initial conditions $\vectorfunction{y}(x_0)=y_0$.
+    Let $U\subset\RR\times\RR^n$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a function. Given $(x_0,y_0)\in U$, the \textit{initial value problem (ivp)} (or \textit{Cauchy problem}) consists in finding a solution of the ODE $$\vectorfunction{y}'=\vectorfunction{f}(x,\vectorfunction{y})$$ with initial conditions $\vectorfunction{y}(x_0)=y_0$.
   \end{definition}
+  \subsection{Existence and uniqueness theorems}
+  \begin{prop}
+    Let $U\subseteq\RR\times\RR^n$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function. Let $I\subseteq\RR$ be an open set, $t_0\in I$ and $x_0$ be such that $(t_0,x_0)\in U$. Then, a continuous function $\vectorfunction{\varphi}:I\rightarrow\RR^n$ is a solution of the ivp
+    \begin{equation}
+      \left\{
+      \begin{array}{l}
+        \vectorfunction{x}'=\vectorfunction{f}(t,\vectorfunction{x}) \\
+        \vectorfunction{x}(t_0)=x_0
+      \end{array}
+      \right.
+      \label{DE1_ivp}
+    \end{equation}
+    if and only if $$\vectorfunction{\varphi}(t)=x_0+\int_{t_0}^tf(s,\vectorfunction{\varphi}(s))\dd s\quad\forall s\in I$$
+  \end{prop}
+  \begin{definition}
+    An \textit{operator} is a function whose domain is a set of functions.
+  \end{definition}
+  \begin{definition}
+    Let $U\subseteq\RR\times\RR^n$ be an open set, $(t_0,x_0)\in U$, $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function and $I$ be a closed interval. We define the operator
+    \begin{align*}
+      T:\mathcal{C}(I,\RR^n)   & \longrightarrow\mathcal{C}(I,\RR^n)                                                                                                                                                                          \\
+      \vectorfunction{\varphi} & \longmapsto T(\vectorfunction{\varphi})(t)=x_0+\int_{t_0}^tf(s,\vectorfunction{\varphi}(s))\dd s\footnote{Note that the fixed points of this operator are precisely the solutions of the ivp \ref{DE1_ivp}.}
+    \end{align*}
+  \end{definition}
+  \begin{prop}
+    Let $X=\mathcal{C}([a,b],\RR^n)$ and define a distance $d$ in $X$ in the following way. For all $\vectorfunction{\varphi},\vectorfunction{\psi}\in X$: $$\|\vectorfunction{\varphi}\|:=\sup\{\|\vectorfunction{\varphi}(t)\|:t\in[a,b]\}\qquad d(\vectorfunction{\varphi},\vectorfunction{\psi}):=\|\vectorfunction{\varphi}-\vectorfunction{\psi}\|$$ Then, $(X,d)$ is a complete metric space. Moreover, if $D\subset\RR^n$ be a closed set and $X=\mathcal{C}([a,b],D)$, then $(X,d)$ is also a complete metric space.
+  \end{prop}
+  \begin{theorem}[Fixed-point theorem]
+    Let $(X,d)$ be a complete metric space and $f:X\rightarrow X$ be a contraction. Then, $f$ has a unique fixed point $p\in X$.
+  \end{theorem}
+  \begin{corollary}
+    Let $(X,d)$ be a complete metric space and $f:X\rightarrow X$ be a function. If there exists $m\in\NN$ such that $f^m$ is a contraction, then $f$ has a unique fixed point $p\in X$.
+  \end{corollary}
+  \subsubsection*{Picard theorem}
+  \begin{definition}
+    Let
+    \begin{align*}
+      \vectorfunction{f}:U\subseteq\RR\times\RR^n & \longrightarrow\RR^m               \\
+      (t,x)                                       & \longmapsto\vectorfunction{f}(t,x)
+    \end{align*}
+    be a function. We say that $\vectorfunction{f}$ is \textit{Lipschitz continuous with respect to the second variable} if $\exists L\in\RR_{>0}$ such that: $$\|\vectorfunction{f}(t,x)-\vectorfunction{f}(t,y)\|\leq L\|x-y\|\qquad\forall (t,x),(t,y)\in U$$
+  \end{definition}
+  \begin{theorem}[Picard theorem]
+    Let $t_0\in\RR$, $x_0\in\RR^n$, $a,b\in\RR_{>0}$ and consider the compact set $\Omega_{a,b}:=I_a(t_0)\times\overline{B}_{b}(x_0)\subset\RR\times\RR^n$, where: $$I_a(t_0):=[t_0-a,t_0+a]\quad\text{and}\quad\overline{B}_{b}(x_0):=\overline{B}(x_0,b)$$
+    Let $\vectorfunction{f}:\Omega\rightarrow\RR^n$ be a continuous function and Lipschitz continuous with respect to the second variable, and define $M:=\max\{\|\vectorfunction{f}(t,x):(t,x)\in\Omega\}$. Then, the ivp \ref{DE1_ivp} has a unique solution $\vectorfunction{\varphi}:I_\alpha(t_0)\rightarrow\RR^n$, where $I_\alpha(t_0)=[t_0-\alpha,t_0+\alpha]$ and $\alpha:=\min\{a,\frac{b}{M}\}$.
+  \end{theorem}
+  \begin{prop}[Simplified Picard theorem]
+    Let $I\subset \RR$ be a closed interval, $t_0\in I$, $x_0\in\RR^n$, $a,b\in\RR_{>0}$ and $\vectorfunction{f}:I\times\RR^n\rightarrow\RR^n$ be a continuous function and Lipschitz continuous with respect to the second variable. Then, the ivp \ref{DE1_ivp} has a unique solution $\vectorfunction{\varphi}:I\rightarrow\RR^n$.
+  \end{prop}
+  \begin{corollary}
+    Let $I\subseteq\RR$ be an interval, $\vectorfunction{A}\in\mathcal{C}(I,\mathcal{M}_n(\RR))$ and $\vectorfunction{b}\in\mathcal{C}(I,\RR^n)$. Then, for all $(t_0,x_0)\in I\times\RR^n$ the ivp
+    $$
+      \left\{
+      \begin{array}{l}
+        \vectorfunction{x}'=\vectorfunction{A}(t)\vectorfunction{x}+\vectorfunction{b}(t) \\
+        \vectorfunction{x}(t_0)=x_0
+      \end{array}
+      \right.
+    $$
+    has a unique solution $\vectorfunction{\varphi}:I\rightarrow\RR^n$.
+  \end{corollary}
 \end{multicols}
 \end{document}
