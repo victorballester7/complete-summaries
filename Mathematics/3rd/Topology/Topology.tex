@@ -2,7 +2,8 @@
 
 \begin{document}
 \begin{multicols}{2}[\section{Topology}]
-  \subsection{Continuous functions}
+  \subsection{Topological spaces and continuous functions}
+  \subsubsection*{Metric spaces}
   \begin{definition}
     Let $X$ be a set. A \textit{distance in $X$} is a function $d:X\times X\rightarrow\RR $ such that $\forall x,y,x\in X$ the following properties are satisfied:
     \begin{enumerate}
@@ -37,13 +38,13 @@
   \begin{prop}
     Let $(X,d)$ be a metric space and $A\subset X$ be a subset of $X$. Then, $A$ is open if and only if $A=\bigcup_{i\in I}B(a_i,\varepsilon_i)$, where $I$ is an index set, $a_i\in A$ and $\varepsilon_i>0$ for all $i\in I$.
   \end{prop}
-  \subsubsection*{Topologies}
+  \subsubsection*{Topological spaces}
   \begin{definition}
     Let $X$ be a set. A \textit{topology $\mathcal{T}$} on a set $X$ is a collection of subsets of $X$ satisfying the following properties:
     \begin{enumerate}
       \item $\varnothing, X\in\mathcal{T}$.
-      \item The union of any subcollection of $\mathcal{T}$ is in $\mathcal{T}$.
       \item The intersection of any finite subcollection of $\mathcal{T}$ is in $\mathcal{T}$.
+      \item The union of any subcollection of $\mathcal{T}$ is in $\mathcal{T}$.
     \end{enumerate}
     The ordered pair $(X,\mathcal{T})$ is called a \textit{topological space}. The elements of $X$ are called \textit{points} and the elements of $\mathcal{T}$, \textit{open sets}.
   \end{definition}
@@ -60,6 +61,33 @@
       \item \textit{Discrete topology}: $\mathcal{T}_\text{d}:=\mathcal{P}(X)$
       \item \textit{Finite complement topology}: $$\mathcal{T}_\text{f}:=\{U\subseteq X:U=\varnothing\text{ or }X\setminus U\text{ is finite}\}$$
     \end{itemize}
+  \end{prop}
+  \begin{definition}
+    Let $(X,\mathcal{T}_X)$ and $(Y,\mathcal{T}_Y)$ be topological spaces and $f:(X,\mathcal{T}_X)\rightarrow(Y,\mathcal{T}_Y)$ be a function. We say that $f$ is continuous if for all $U\in\mathcal{T}_Y$, we have $f^{-1}(U)\in\mathcal{T}_X$.
+  \end{definition}
+  \begin{definition}
+    A \textit{homeomorphism} between topological spaces is a bijective function that is continuous and whose inverse is also continuous.
+  \end{definition}
+  \begin{definition}
+    Let $(X,\mathcal{T})$ be a topological space and $A\subset X$. We say that $A$ is \textit{closed} if $X\setminus A\in\mathcal{T}$ is open.
+  \end{definition}
+  \begin{prop}[Closed sets properties]
+    Let $(X,\mathcal{T})$ be a topological space. Then:
+    \begin{enumerate}
+      \item $\varnothing$ and $X$ are closed.
+      \item The union of any finite subcollection of closed sets in $X$ is a closed set in $X$.
+      \item The union of any subcollection of closed sets in $X$ is closed in $X$.
+    \end{enumerate}
+  \end{prop}
+  \begin{definition}
+    Let $(X,\mathcal{T}_X)$ and $(Y,\mathcal{T}_Y)$ be topological spaces and $f:(X,\mathcal{T}_X)\rightarrow(Y,\mathcal{T}_Y)$ be a function. We say that $f$ is continuous if for all closed sets $A\subset Y$, we have $f^{-1}(A)\in X$.
+  \end{definition}
+  \subsubsection*{Basis for a topology}
+  \begin{definition}
+    Let $(X,\mathcal{T})$ be a topological space and $\mathcal{B}\subset\mathcal{T}$ be a subset of open sets. We say that $\mathcal{B}$ is a \textit{basis of $\mathcal{T}$} if for all $U\in\mathcal{T}$ and $x\in U$, there exists $B\in\mathcal{B}$ such that $x\in\mathcal{B}\subseteq U$.
+  \end{definition}
+  \begin{prop}
+    Let $(X,\mathcal{T})$ be a topological space and $\mathcal{B}$ be a basis of $\mathcal{T}$. Then, $\forall U\in\mathcal{T}$: $$U=\bigcup_{x\in U}B_x$$ where $x\in B_x\subseteq U$ and $B_x$ is an element of $\mathcal{B}$.
   \end{prop}
 \end{multicols}
 \end{document}
