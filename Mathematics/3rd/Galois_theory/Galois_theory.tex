@@ -2,6 +2,105 @@
 
 \begin{document}
 \begin{multicols}{2}[\section{Galois theory}]
-
+  \subsection{Introduction and summary of algebraic structures}
+  \subsubsection*{Rings, integral domains and fields}
+  \begin{definition}[Ring]
+    A \textit{ring} is a set $R$ equipped with two binary operations (called addition and multiplication):
+    \begin{align*}
+      +:R\times R & \longrightarrow R    & \cdot:R\times R & \longrightarrow R        \\
+      (r_1,r_2)   & \longmapsto r_1+ r_2 & (r_1,r_2)       & \longmapsto r_1\cdot r_2
+    \end{align*}
+    satisfying the following properties:
+    \begin{enumerate}
+      \item $(R,+)$ is an abelian group.
+      \item $(R,\cdot)$ satisfies\footnote{Some definitions state that the commutative property is not necessary to define a ring. However, in these notes we will take the definition given.}:
+            \begin{enumerate}
+              \item Associativity: $$(r_1\cdot r_2)\cdot r_3=r_1\cdot(r_2\cdot r_3)\quad\forall r_1,r_2,r_3\in R.$$
+              \item Identity element\footnote{It is common to denote the additive identity element as 0 and the multiplicative identity element as 1.}: $$\exists 1\in R:1\cdot r=r\cdot 1=r\quad\forall r\in R.$$
+              \item Commutativity: $$r_1\cdot r_2=r_2\cdot r_1\quad\forall r_1,r_2\in R.$$
+            \end{enumerate}
+      \item Multiplication is distributive with respect to addition: $$(r_1+r_2)\cdot r_3=r_1\cdot r_3+r_2\cdot r_3\quad\forall r_1,r_2,r_3\in R.$$
+    \end{enumerate}
+    In this context we say $(R,+,\cdot)$ is a ring.
+  \end{definition}
+  \begin{definition}[Ring morphism]
+    Let $(R,+,\cdot)$, $(S,\oplus,\odot)$ be two rings. A \textit{ring morphism from $(R,+,\cdot)$ to $(S,\oplus,\odot)$} is a function $f:(R,+,\cdot)\rightarrow (S,\oplus,\odot)$ such that:
+    \begin{enumerate}
+      \item $f(r_1+ r_2)=f(r_1)\oplus f(r_2)\quad\forall r_1,r_2\in R$.
+      \item $f(r_1\cdot r_2)=f(r_1)\odot f(r_2)\quad\forall r_1,r_2\in R$.
+      \item $f(1_R)=1_S$.
+    \end{enumerate}
+  \end{definition}
+  \begin{definition}
+    Let $R$\footnote{From now on, for simplicity, we will denote the ring $(R,+,\cdot)$ as $R$.} be a ring. We say $r\in R$ is a \textit{zero divisor} if $\exists s\in R\setminus\{0\}$ such that $r\cdot s=0$. We say $r\in R$ is \textit{not} a \textit{zero divisor} if $r\cdot s=0\implies s=0$.
+  \end{definition}
+  \begin{definition}[Integral domain]
+    A ring $R\ne\{0\}$ is an \textit{integral domain} if the product of any two nonzero elements is nonzero, or equivalently, if the only zero divisor is the zero.
+  \end{definition}
+  \begin{definition}[Field]
+    A ring $(R,+,\cdot)$, $R\ne\{0\}$, is a \textit{field} if $\forall r\in R$, $r\ne 0$, $\exists s\in R$ such that $r\cdot s=1$.
+  \end{definition}
+  \begin{prop}
+    \hfill
+    \begin{enumerate}
+      \item A subring of an integral domain is an integral domain.
+      \item A field is an integral domain.
+      \item A subring of a field is an integral domain.
+    \end{enumerate}
+  \end{prop}
+  \begin{lemma}
+    Let $K$ be a field and $R\ne\{0\}$ be a ring. Then, all ring morphisms $f:K\rightarrow R$ are injective.
+  \end{lemma}
+  \begin{lemma}
+    Let $R$ be a ring. Then, there exists a unique ring morphism $f:\ZZ\rightarrow R$ satisfying:
+    \begin{itemize}
+      \item $f(1+\overset{(n)}{\cdots}+1)=1_R+\overset{(n)}{\cdots}+1_R$ if $n\geq 1$.
+      \item $f(n)=-f(-n)$ if $n\leq -1$.
+    \end{itemize}
+  \end{lemma}
+  \begin{definition}
+    Let $R$ be a ring and $f:\ZZ\rightarrow R$ be the ring morphism from $\ZZ$ to $R$. The \textit{characteristic of $R$}, $\ch (R)$, is defined to be the value of $n$ such that $\ker f=\quot{\ZZ}{n\ZZ}$.
+  \end{definition}
+  \begin{prop}
+    Let $K$ be a field. Then, either $\ch(K)\in\PP$ or $\ch(K)=0$.
+  \end{prop}
+  \begin{definition}
+    Let $R$ be a ring. We define the  \textit{polynomial ring $R[x]$} as: $$R[x]:=\{r_0+r_1\cdot x+\cdots+r_n\cdot x^n:r_i\in R\ \forall i\text{ and }n\geq 0\}$$ Moreover, we can iterate this definition to define the polynomial ring in $m$-unknowns: $$R[x_1,\ldots,x_m]=\left(R[x_1,\ldots,x_{m-1}]\right)[x_m]$$
+  \end{definition}
+  \begin{prop}[Universal property of polynomials in several variables]
+    Let $R$, $S$ be two rings, $f:R\rightarrow S$ be a ring morphism and $s_1,\ldots,s_n\in S$ be not necessarily distinct elements of $S$. Then, the function $\text{eva}:R[x_1,\ldots,x_n]\rightarrow S$ defined by: $$\text{eva}(p):=\sum_{i_1,\ldots,i_n\geq 0}f(r_{i_1,\ldots,i_m}){s_1}^{i_1}\cdots {s_n}^{i_n}$$ is the unique ring morphism such that $\text{eva}(r)=f(r)$ $\forall r\in R$ and $\text{eva}(x_i)=s_i$ for $i=1,\ldots,n$. This function is called \textit{evaluation of $s_1,\ldots,s_n$ through $f$}.
+  \end{prop}
+  \subsubsection*{Field of fractions}
+  \begin{theorem}
+    All integral domains are a subring of a field. More explicitly, if $R$ is an integral domain and $K$ is a field, there exists another field $Q(R)$ and an injective ring morphism $\iota:R\hookrightarrow Q(R)$ so that for all injective ring morphism $f:R\hookrightarrow K$, there exists a unique field morphism $Q(f):Q(R)\rightarrow K$ such that $f=Q(f)\circ\iota$.
+  \end{theorem}
+  \begin{corollary}
+    Let $R$ be an integral domain. The field $Q(R)$ with the injection $\iota$ is unique up to isomorphism, that is if there is a field $Q'(R)$ and an injective ring morphism $\iota':R\hookrightarrow Q(R)$ satisfying the property of above, then there is a unique isomorphism $Q(f):Q(R)\cong Q'(R)$ such that $\iota'=Q(\iota')\circ\iota$. This field $Q(R)$ is called \textit{field of fractions of $R$}.
+  \end{corollary}
+  \begin{definition}
+    Let $K$ be a field. The field of fractions of $K[x]$ is defined as $K(x):=Q(K[x])$ and it is called \textit{field of rational functions}. More generally, the field of fractions of $K[x_1,\ldots,x_n]$ is defined as: $$K(x_1,\ldots,x_n):=Q(K[x_1,\ldots,x_n])$$
+  \end{definition}
+  \begin{lemma}
+    Let $R$ be an integral domain. Then, $R[x]$ is also an integral domain and: $$Q(R[x])\cong Q(R)(x)$$
+  \end{lemma}
+  \begin{corollary}
+    Let $K$ be a field. For all $n\geq 2$ we have: $$K(x_1,\ldots,x_n)\cong K(x_1,\ldots,x_{n-1})(x_n)$$
+  \end{corollary}
+  \subsubsection*{Subring generated by a set}
+  \begin{definition}
+    Let $(R,+,\cdot)$ be a ring and $X\subseteq R$ be a subset of $R$. Let $$P:=\{S\subseteq R: X\subseteq S,(S,+,\cdot)\text{ is a subring of }(R,+,\cdot)\}$$ Then, the smallest subring of $(R,+,\cdot)$ containing $X$ is: $$\langle X\rangle_\text{ring}=\bigcap_{S\in P}S$$
+  \end{definition}
+  \begin{definition}
+    Let $R$ be a ring, $S\subseteq R$ be a subring of $R$ and $X\subseteq R$ be a subset of $R$. Then, the smallest subring of $R$ containing $S$ and $X$ is denoted by $S(X)$.
+  \end{definition}
+  \begin{lemma}
+    Let $A$ be a finite set with $|A|=n$, $R$ and $S$ be rings and $\text{eva}:R[x_1,\ldots,x_n]\rightarrow S$ be the evaluation morphism such that $\text{eva}(r)=r$ $\forall r\in R$ and $\text{eva}(x_a)=a$ $\forall a\in A$. Then, $S[A]=\im(\text{eva})$.
+  \end{lemma}
+  \begin{definition}
+    Let $(K,+,\cdot)$ be a field and $X\subseteq K$ be a subset of $K$. Let $$P:=\{F\subseteq K: X\subseteq F,(F,+,\cdot)\text{ is a subfield of }(R,+,\cdot)\}$$ Then, the smallest subfield of $(K,+,\cdot)$ containing $X$ is: $$\langle X\rangle_\text{field}=\bigcap_{F\in P}F$$
+  \end{definition}
+  \begin{definition}
+    Let $K$ be a field, $F$ be a subfield of $K$ and $X\subseteq K$ be a subset of $K$. Then, the smallest subfield of $K$ containing $F$ and $X$ is denoted by $F(X)$.
+  \end{definition}
 \end{multicols}
 \end{document}

@@ -10,7 +10,10 @@
     where $\vectorfunction{g}:\Omega\subseteq\RR\times\RR^{mn}\rightarrow\RR^m$.
   \end{definition}
   \begin{definition}
-    Consider the following ODE of $m$ unknowns and of order $n$: $$\vectorfunction{y}^{(n)}(x)=\vectorfunction{f}\left(x,\vectorfunction{y}(x),\vectorfunction{y}'(x),\ldots,\vectorfunction{y}^{(n-1)}(x)\right)$$
+    Consider the following ODE of $m$ unknowns and of order $n$:
+    \begin{equation}\label{DE_ode1}
+      \vectorfunction{y}^{(n)}(x)=\vectorfunction{f}\left(x,\vectorfunction{y}(x),\vectorfunction{y}'(x),\ldots,\vectorfunction{y}^{(n-1)}(x)\right)
+    \end{equation}
     We say that $\vectorfunction{\varphi}:I\subseteq\RR\rightarrow\RR^m$ is a \textit{solution of the ODE} if:
     \begin{itemize}
       \item $\vectorfunction{\varphi}$ is $n$-times differentiable on $I$.
@@ -21,10 +24,21 @@
     The set of all solutions of the ODE is called \textit{general solution of the ODE}.
   \end{definition}
   \begin{prop}
-    We can always transform a ODE of $m$ unknowns and order $n$ to an ODE of $m\cdot n$ unknowns and order 1\footnote{Therefore, we will mainly study the ODEs of order 1.}.
+    Consider the following ODE of $m$ unknowns and of order $n$ of the form of \eqref{DE_ode1}. Then, we can transform this ODE to an ODE of $m\cdot n$ unknowns and order 1 in the following way. Define $\vectorfunction{z}_i=\vectorfunction{y}^(i-1)$ for $i=1,\ldots,n$\footnote{Therefore, we will mainly study the ODEs of order 1.}. Therefore the functions $\vectorfunction{z}_i$ must satisfy:
+    \begin{equation*}
+      \left\{
+      \begin{aligned}
+        {\vectorfunction{z}_1}'     & =\vectorfunction{z}_2                                                                                            \\
+        {\vectorfunction{z}_2}'     & =\vectorfunction{z}_3                                                                                            \\
+                                    & \;\;\vdots                                                                                                       \\
+        {\vectorfunction{z}_{n-1}}' & =\vectorfunction{z}_{n-2}                                                                                        \\
+        {\vectorfunction{z}_n}'     & =\vectorfunction{f}\left(x,\vectorfunction{z}_1(x),\vectorfunction{z}_2(x),\ldots,\vectorfunction{z}_2(x)\right) \\
+      \end{aligned}
+      \right.
+    \end{equation*}
   \end{prop}
   \begin{definition}
-    We say that an ODE is \textit{autonomous} if it doesn't depend on the independent variable, that is, if it is of the form: $$y'=f(y)$$ Analogously, we say that an ODE is \textit{non-autonomous} if it does depend on the independent variable, that is, if it is of the form: $$y'=f(x,y)$$
+    We say that an ODE is \textit{autonomous} if it doesn't depend on the independent variable, that is, if it is of the form: $$\vectorfunction{y}'=\vectorfunction{f}(\vectorfunction{y})$$ Analogously, we say that an ODE is \textit{non-autonomous} if it does depend on the independent variable, that is, if it is of the form: $$\vectorfunction{y}'=\vectorfunction{f}(x,\vectorfunction{y})$$
   \end{definition}
   \subsubsection*{Initial value problem}
   \begin{definition}
@@ -32,37 +46,38 @@
   \end{definition}
   \subsection{Existence and uniqueness theorems}
   \begin{prop}
-    Let $U\subseteq\RR\times\RR^n$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function. Let $I\subseteq\RR$ be an open set, $t_0\in I$ and $x_0$ be such that $(t_0,x_0)\in U$. Then, a continuous function $\vectorfunction{\varphi}:I\rightarrow\RR^n$ is a solution of the ivp
-    \begin{equation}
+    Let $f:(a,b)\rightarrow\RR$ be a continuous function such that $f(x)\ne 0$ $\forall x\in(a,b)$. Then, the ivp
+    $$
       \left\{
-      \begin{array}{l}
-        \vectorfunction{x}'=\vectorfunction{f}(t,\vectorfunction{x}) \\
-        \vectorfunction{x}(t_0)=x_0
-      \end{array}
+      \begin{aligned}
+         & x'      =f(x) \\
+         & x(t_0)  =x_0
+      \end{aligned}
       \right.
-      \label{DE1_ivp}
-    \end{equation}
-    if and only if $$\vectorfunction{\varphi}(t)=x_0+\int_{t_0}^tf(s,\vectorfunction{\varphi}(s))\dd s\quad\forall s\in I$$
+    $$
+    has a unique solution $\forall t_0\in\RR$ and $\forall x_0\in(a,b)$.
   \end{prop}
-  \begin{definition}
-    An \textit{operator} is a function whose domain is a set of functions.
-  \end{definition}
-  \begin{definition}
-    Let $U\subseteq\RR\times\RR^n$ be an open set, $(t_0,x_0)\in U$, $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function and $I$ be a closed interval. We define the operator
-    \begin{align*}
-      T:\mathcal{C}(I,\RR^n)   & \longrightarrow\mathcal{C}(I,\RR^n)                                                                                                                                                                          \\
-      \vectorfunction{\varphi} & \longmapsto T(\vectorfunction{\varphi})(t)=x_0+\int_{t_0}^tf(s,\vectorfunction{\varphi}(s))\dd s\footnote{Note that the fixed points of this operator are precisely the solutions of the ivp \ref{DE1_ivp}.}
-    \end{align*}
-  \end{definition}
   \begin{prop}
-    Let $X=\mathcal{C}([a,b],\RR^n)$ and define a distance $d$ in $X$ in the following way. For all $\vectorfunction{\varphi},\vectorfunction{\psi}\in X$: $$\|\vectorfunction{\varphi}\|:=\sup\{\|\vectorfunction{\varphi}(t)\|:t\in[a,b]\}\qquad d(\vectorfunction{\varphi},\vectorfunction{\psi}):=\|\vectorfunction{\varphi}-\vectorfunction{\psi}\|$$ Then, $(X,d)$ is a complete metric space. Moreover, if $D\subset\RR^n$ be a closed set and $X=\mathcal{C}([a,b],D)$, then $(X,d)$ is also a complete metric space.
+    Let $f:(a,b)\rightarrow\RR$, $g:(c,d)\rightarrow\RR$ be continuous functions such that $f(x)\ne 0$ $\forall x\in(a,b)$. Then, the ivp
+    $$\left\{
+      \begin{aligned}
+         & x'      =f(x)g(t) \\
+         & x(t_0)  =x_0
+      \end{aligned}
+      \right.$$
+    has a unique solution $\forall t_0\in(c,d)$ and $\forall x_0\in(a,b)$.
   \end{prop}
-  \begin{theorem}[Fixed-point theorem]
-    Let $(X,d)$ be a complete metric space and $f:X\rightarrow X$ be a contraction. Then, $f$ has a unique fixed point $p\in X$.
-  \end{theorem}
-  \begin{corollary}
-    Let $(X,d)$ be a complete metric space and $f:X\rightarrow X$ be a function. If there exists $m\in\NN$ such that $f^m$ is a contraction, then $f$ has a unique fixed point $p\in X$.
-  \end{corollary}
+  \begin{prop}
+    Let $I\subseteq\RR$ be an interval and $a:I\rightarrow\RR$ and $b:I\rightarrow\RR$ be continuous functions. Then, the ivp
+    $$\left\{
+      \begin{aligned}
+         & x'      =a(t)x+b(t) \\
+         & x(t_0)  =x_0
+      \end{aligned}
+      \right.$$
+    has a unique solution $\varphi(t)$ $\forall t_0\in I$ and $\forall x_0\in\RR$. Furthermore, this solution is given by:
+    $$\varphi(t)=\exp{\int_{t_0}^ta(s)\dd s}\left(x_0+\int_{t_0}^tb(u)\exp{-\int_{t_0}^ua(s)\dd s}\dd u\right)$$
+  \end{prop}
   \subsubsection*{Picard theorem}
   \begin{definition}
     Let
@@ -72,24 +87,67 @@
     \end{align*}
     be a function. We say that $\vectorfunction{f}$ is \textit{Lipschitz continuous with respect to the second variable} if $\exists L\in\RR_{>0}$ such that: $$\|\vectorfunction{f}(t,x)-\vectorfunction{f}(t,y)\|\leq L\|x-y\|\qquad\forall (t,x),(t,y)\in U$$
   \end{definition}
-  \begin{theorem}[Picard theorem]
+  \begin{prop}
+    Let $U\subseteq\RR\times\RR^n$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function. Let $I\subseteq\RR$ be an open interval, $t_0\in I$ and $x_0\in\RR^n$ be such that $(t_0,x_0)\in U$. Then, a continuous function $\vectorfunction{\varphi}:I\rightarrow\RR^n$ is a solution of the ivp
+    \begin{equation}
+      \left\{
+      \begin{aligned}
+         & \vectorfunction{x}'=\vectorfunction{f}(t,\vectorfunction{x}) \\
+         & \vectorfunction{x}(t_0)=x_0
+      \end{aligned}
+      \right.
+      \label{DE_ivp}
+    \end{equation}
+    if and only if $$\vectorfunction{\varphi}(t)=x_0+\int_{t_0}^tf(s,\vectorfunction{\varphi}(s))\dd s\quad\forall s\in I$$
+  \end{prop}
+  \begin{definition}
+    An \textit{operator} is a function whose domain is a set of functions or other structured objects.
+  \end{definition}
+  \begin{definition}
+    Let $U\subseteq\RR\times\RR^n$ be an open set, $(t_0,x_0)\in U$, $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function and $I$ be a closed interval. We define the operator
+    \begin{align*}
+      T:\mathcal{C}(I,\RR^n)   & \longrightarrow\mathcal{C}(I,\RR^n)                                                                           \\
+      \vectorfunction{\varphi} & \longmapsto T(\vectorfunction{\varphi})(t)=x_0+\int_{t_0}^tf(s,\vectorfunction{\varphi}(s))\dd s\footnotemark
+    \end{align*}
+  \end{definition}
+  \begin{prop}\footnotetext{Note that the fixed points of this operator are precisely the solutions of the ivp \eqref{DE_ivp}.}
+    Let $X=\mathcal{C}([a,b],\RR^n)$ and define a distance $d$ in $X$ in the following way. For all $\vectorfunction{\varphi},\vectorfunction{\psi}\in X$: $$\|\vectorfunction{\varphi}\|:=\sup\{\|\vectorfunction{\varphi}(t)\|:t\in[a,b]\}\qquad d(\vectorfunction{\varphi},\vectorfunction{\psi}):=\|\vectorfunction{\varphi}-\vectorfunction{\psi}\|$$ Then, $(X,d)$ is a complete metric space. Moreover, if $D\subset\RR^n$ is a closed set and $X=\mathcal{C}([a,b],D)$, then $(X,d)$ is also a complete metric space.
+  \end{prop}
+  \begin{theorem}[Banach fixed-point theorem]
+    Let $(X,d)$ be a complete metric space and $f:X\rightarrow X$ be a contraction. Then, $f$ has a unique fixed point $p\in X$\footnote{Furthermore, $p$ can be found as follows: start with an arbitrary element$x_0\in X$ and define a sequence $(x_n)$ by $x_n=f(x_{n-1})$ for $n\geq 1$. Then, $\lim_{n\to\infty} x_n=p$.}.
+  \end{theorem}
+  \begin{corollary}
+    Let $(X,d)$ be a complete metric space and $f:X\rightarrow X$ be a function. If there exists $m\in\NN$ such that $f^m$ is a contraction, then $f$ has a unique fixed point $p\in X$.
+  \end{corollary}
+  \begin{theorem}[Picard theorem]\label{DE_picard}
     Let $t_0\in\RR$, $x_0\in\RR^n$, $a,b\in\RR_{>0}$ and consider the compact set $\Omega_{a,b}:=I_a(t_0)\times\overline{B}_{b}(x_0)\subset\RR\times\RR^n$, where: $$I_a(t_0):=[t_0-a,t_0+a]\quad\text{and}\quad\overline{B}_{b}(x_0):=\overline{B}(x_0,b)$$
-    Let $\vectorfunction{f}:\Omega\rightarrow\RR^n$ be a continuous function and Lipschitz continuous with respect to the second variable, and define $M:=\max\{\|\vectorfunction{f}(t,x):(t,x)\in\Omega\}$. Then, the ivp \ref{DE1_ivp} has a unique solution $\vectorfunction{\varphi}:I_\alpha(t_0)\rightarrow\RR^n$, where $I_\alpha(t_0)=[t_0-\alpha,t_0+\alpha]$ and $\alpha:=\min\{a,\frac{b}{M}\}$.
+    Let $\vectorfunction{f}:\Omega_{a,b}\rightarrow\RR^n$ be a continuous function and Lipschitz continuous with respect to the second variable, and define $M:=\max\{\|\vectorfunction{f}(t,x)\|:(t,x)\in\Omega_{a,b}\}$. Then, the ivp \eqref{DE_ivp} has a unique solution $\vectorfunction{\varphi}:I_\alpha(t_0)\rightarrow\RR^n$, where $I_\alpha(t_0)=[t_0-\alpha,t_0+\alpha]$ and $\alpha:=\min\left\{a,\frac{b}{M}\right\}$.
   \end{theorem}
   \begin{prop}[Simplified Picard theorem]
-    Let $I\subset \RR$ be a closed interval, $t_0\in I$, $x_0\in\RR^n$, $a,b\in\RR_{>0}$ and $\vectorfunction{f}:I\times\RR^n\rightarrow\RR^n$ be a continuous function and Lipschitz continuous with respect to the second variable. Then, the ivp \ref{DE1_ivp} has a unique solution $\vectorfunction{\varphi}:I\rightarrow\RR^n$.
+    Let $I\subset \RR$ be a closed interval, $t_0\in I$, $x_0\in\RR^n$, $a,b\in\RR_{>0}$ and $\vectorfunction{f}:I\times\RR^n\rightarrow\RR^n$ be a continuous function and Lipschitz continuous with respect to the second variable. Then, the ivp \eqref{DE_ivp} has a unique solution $\vectorfunction{\varphi}:I\rightarrow\RR^n$.
+  \end{prop}
+  \begin{corollary}[Picard iteration process]
+    Suppose we want to solve the ivp \eqref{DE_ivp}. That is, we look for a solution $\vectorfunction{\varphi}(t)$. Let $\vectorfunction{\varphi}_0$ be a fixed function and define
+    $$\vectorfunction{\varphi}_{n+1}(t)=T(\vectorfunction{\varphi}_n)(t)=x_0+\int_{t_0}^tf(s,\vectorfunction{\varphi}_n(s))\dd s$$
+    for all $n\geq 1$. Then, $\displaystyle\vectorfunction{\varphi}=\lim_{n\to\infty}\vectorfunction{\varphi}_n$.
+  \end{corollary}
+  \begin{corollary}
+    Let $U\subseteq\RR\times\RR^n$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function and Lipschitz continuous with respect to the second variable. Then, $\forall(t_0,x_0)\in U$, there exists a neighbourhood $V_{(t_0,x_0)}=I_{a(t_0,x_0)}(t_0)\times\overline{B}_{b(t_0,x_0)}(x_0)$ (following the notation of theorem \ref{DE_picard}) of $(t_0,x_0)$ in $U$ such that the ivp \eqref{DE_ivp} has a unique solution $\vectorfunction{\varphi}_{(t_0,x_0)}$ defined on $I_{a(t_0,x_0)}$ with $\graph(\vectorfunction{\varphi}_{(t_0,x_0)})\subset V_{(t_0,x_0)}$.
+  \end{corollary}
+  \begin{prop}
+    Let $I\subseteq\RR$ be an interval and $\vectorfunction{f}:I\times\RR^n\rightarrow\RR^n$ be a continuous function and Lipschitz continuous with respect to the second variable. Then, $\forall(t_0,x_0)\in I\times\RR^n$ there is a unique solution of the ivp \eqref{DE_ivp} defined on $I$.
   \end{prop}
   \begin{corollary}
-    Let $I\subseteq\RR$ be an interval, $\vectorfunction{A}\in\mathcal{C}(I,\mathcal{M}_n(\RR))$ and $\vectorfunction{b}\in\mathcal{C}(I,\RR^n)$. Then, for all $(t_0,x_0)\in I\times\RR^n$ the ivp
+    Let $I\subseteq\RR$ be an interval and $\vectorfunction{A}:I\rightarrow\mathcal{L}(\RR^n,\RR^n)$ and $\vectorfunction{b}:I\rightarrow\RR^n$ be continuous functions. Then, for all $(t_0,x_0)\in I\times\RR^n$ the ivp
     $$
       \left\{
-      \begin{array}{l}
-        \vectorfunction{x}'=\vectorfunction{A}(t)\vectorfunction{x}+\vectorfunction{b}(t) \\
-        \vectorfunction{x}(t_0)=x_0
-      \end{array}
+      \begin{aligned}
+         & \vectorfunction{x}'=\vectorfunction{A}(t)\vectorfunction{x}+\vectorfunction{b}(t) \\
+         & \vectorfunction{x}(t_0)=x_0
+      \end{aligned}
       \right.
     $$
-    has a unique solution $\vectorfunction{\varphi}:I\rightarrow\RR^n$.
+    has a unique solution defined on $I$.
   \end{corollary}
 \end{multicols}
 \end{document}
