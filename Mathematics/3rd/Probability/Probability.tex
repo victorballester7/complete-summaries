@@ -1,5 +1,7 @@
 \documentclass[../../../main.tex]{subfiles}
 
+% 3 line brake in Bernoulli, Binomial and Geometric distributions.
+
 \begin{document}
 \begin{multicols}{2}[\section{Probability}]
   \subsection{Probabilistic models}
@@ -159,5 +161,135 @@
     Let $(\Omega,\mathcal{A},P)$ be a probability space and $I$ be an arbitrary index set. We say that $\{A_i:i\in I\}\subset\mathcal{A}$ are \textit{independent events} if for any finite subset $A_{i_1},\ldots A_{i_r}$ of different events, we have: $$P\left(\bigcap_{r=1}^kA_{i_r}\right)=\prod_{r=1}^kP(A_{i_r})$$
   \end{definition}
   \subsection{Random variables and random vectors}
+  \subsubsection*{Random variables}
+  \begin{definition}
+    Let $(\Omega,\mathcal{A},P)$ be a probability space. A \textit{random variable $X$} is a function $X:\Omega\rightarrow\RR$ satisfying for all $B\in\mathcal{B}(\RR)$: $$X^{-1}(B)=\{\omega\in\Omega:X(\omega)\in B\}\subset\mathcal{A}$$
+  \end{definition}
+  \begin{prop}
+    Let $(\Omega,\mathcal{A},P)$ be a probability space, $\mathcal{C}$ be a collection of subsets of $\RR$ such that $\mathcal{B}(\RR)=\sigma(\mathcal{C})$ and let $X:\Omega\rightarrow\RR$ be a function. Then, $X$ is a random variable if and only if $X^{-1}(B)\in\mathcal{A}$, $\forall B\in C$.
+  \end{prop}
+  \begin{definition}
+    Let $(\Omega,\mathcal{A},P)$ be a probability space, $a,b\in\RR$ and $B\in\mathcal{B}(\RR)$. We define the following sets:
+    \begin{enumerate}
+      \item $\displaystyle\{X\in B\}:=\{\omega\in\Omega:X(\omega)\in B\}=X^{-1}(B)$
+      \item $\displaystyle\{X\leq a\}:=\{\omega\in\Omega:X(\omega)\leq a\}=X^{-1}((-\infty,a])$
+      \item $\displaystyle\{X> b\}:=\{\omega\in\Omega:X(\omega)>b\}=X^{-1}((b,\infty))$
+      \item $\displaystyle\{X=a\}:=\{\omega\in\Omega:X(\omega)=a\}=X^{-1}(\{a\})$
+    \end{enumerate}
+  \end{definition}
+  \begin{prop}
+    Let $S=(\Omega,\mathcal{A},P)$ be a probability space, $X,Y$ be random variables defined on $S$ and $a\in\RR$. Then:
+    \begin{enumerate}
+      \item $X+Y$ is also a random variable.
+      \item $aX$ is also a random variable.
+      \item $XY$ is also a random variable.
+      \item $\frac{1}{X}$ is also a random variable if $X(\omega)\ne 0$ $\forall \omega\in\Omega$.
+    \end{enumerate}
+  \end{prop}
+  \begin{prop}
+    Let $(\Omega,\mathcal{A},P)$ be a probability space and $(X_n)_{n\geq 1}$ be a sequence of random variables. Then:
+    \begin{enumerate}
+      \item $\sup\{X_n:n\geq 1\}$ is also a random variable.
+      \item $\inf\{X_n:n\geq 1\}$ is also a random variable.
+      \item $\limsup\{X_n:n\geq 1\}$ is also a random variable.
+      \item $\liminf\{X_n:n\geq 1\}$ is also a random variable.
+    \end{enumerate}
+    provided that these quantities are finite for all $\omega\in\Omega$.
+  \end{prop}
+  \begin{corollary}
+    Let $(\Omega,\mathcal{A},P)$ be a probability space and $(X_n)_{n\geq 1}$ be a sequence of random variables such that $\forall\omega\in\Omega$ the following limit exists and it is finite: $$X(\omega):=\lim_{n\to\infty}X_n(\omega)$$
+    Then, $X$ is a random variable.
+  \end{corollary}
+  \subsubsection*{Distribution of a random variable}
+  \begin{definition}
+    Let $(\Omega,\mathcal{A},P)$ be a probability space. The \textit{distribution of a random variable $X$} is the function:
+    \begin{align*}
+      P_X:\mathcal{B}(\RR) & \longrightarrow [0,1]            \\
+      B                    & \longmapsto P_X(B):=P(X^{-1}(B))
+    \end{align*}
+  \end{definition}
+  \begin{prop}
+    Let $(\Omega,\mathcal{A},P)$ be a probability space. For any random variable $X$, the function $P_X$ defines a probability over $\RR$, with the Borel $\sigma$-algebra $\mathcal{B}(\RR)$.
+  \end{prop}
+  \begin{definition}
+    Let $(\Omega,\mathcal{A},P)$ be a probability space, $X$ be a random variable and $B\in\mathcal{B}(\RR)$. We define: $$P(X\in B):=P(\{X\in B\})$$
+  \end{definition}
+  \begin{definition}
+    Let $(\Omega,\mathcal{A},P)$ be a probability space. We say that two random variables $X,Y$ are \textit{equal in distribution} (denoted by $X\overset{\text{d}}{=}Y$) if they satisfy: $$P_X(B)=P_Y(B)\qquad\forall B\in\mathcal{B}(\RR)$$ That is, $X\overset{\text{d}}{=}Y$ if they have the same distribution functions.
+  \end{definition}
+  \begin{definition}
+    Let $(\Omega,\mathcal{A},P)$ be a probability space. We say that two random variables $X,Y$ are \textit{equal almost surely} (denoted by $X\overset{\text{a.s.}}{=}Y$) if $P(X=Y)=1$, or equivalently, if $P(X\ne Y)=0$.
+  \end{definition}
+  \begin{prop}
+    Let $(\Omega,\mathcal{A},P)$ be a probability space and $X,Y$ be two random variables such that $X\overset{\text{a.s.}}{=}Y$. Then, we have $X\overset{\text{d}}{=}Y$
+  \end{prop}
+  \begin{definition}
+    Let $(\Omega,\mathcal{A},P)$ be a probability space and $X$ be a random variable. We define the \textit{cumulative distribution function (cdf)} as: \begin{align*}
+      F_X:\RR & \longrightarrow [0,1]          \\
+      x       & \longmapsto F_X(x):=P(X\leq x)
+    \end{align*}
+  \end{definition}
+  \begin{prop}
+    Let $(\Omega,\mathcal{A},P)$ be a probability space, $X$ be a random variable and $F_X$ be its cdf. Then:
+    \begin{enumerate}
+      \item\label{P_1} If $x<y$, then $F_X(x)\leq F_X(y)$.
+      \item\label{P_2} $F_X$ is \textit{càdàg}\footnote{From French ``continue à droite, limite à gauche'' (right continuous with left limits).}.
+      \item\label{P_3} $\displaystyle\lim_{x\to -\infty}F_X(x)=0$ and $\displaystyle\lim_{x\to \infty}F_X(x)=1$.
+      \item $F_X$ has at most a countable number of discontinuities.
+      \item $\forall s,t\in\RR$ such that $s<t$, $P(s<X\leq t)=F(t)-F(s)$.
+      \item $\displaystyle\forall x\in\RR$, $P(X<x)=\lim_{t\to x^-}F_X(t)$.
+      \item $\forall x\in\RR$, $P(X=x)=F_X(x)-\lim_{t\to x^-}F_X(t)$. That is, $F_X$ is discontinues at $x$ if and only if $P(X=x)>0$.
+    \end{enumerate}
+  \end{prop}
+  \begin{theorem}
+    Let $F$ be a function satisfying properties \ref{P_1}, \ref{P_2} and \ref{P_3}. Then, there exists a random variable $X$ on a a probability space $(\Omega,\mathcal{A},P)$ such that $F$ is its distribution property.
+  \end{theorem}
+  \begin{theorem}
+    Let $(\Omega,\mathcal{A},P)$ be a probability space. Then, the cdf completely determine a distribution of a random variable $X$. That is, if $X$ and $Y$ are random variables such that $F_X(t)=F_Y(t)$ $\forall t\in\RR$, then $P_X(B)=P_Y(B)$ $\forall B\in\mathcal{B}(\RR)$.
+  \end{theorem}
+  \subsubsection*{Discrete random  variables}
+  \begin{definition}
+    Let $(\Omega,\mathcal{A},P)$ be a probability space. We say that a random variable $X$ is \textit{discrete} if there exists a finite or countable set $S\subset\RR$ such that $P(X\in S)=1$. This set is called \textit{support of $X$}\footnote{By agreement, we will suppose that $S$ only contains points $x$ such that $P(X=x)>0$.}.
+  \end{definition}
+  \begin{definition}
+    Let $(\Omega,\mathcal{A},P)$ be a probability space and $X$ be a discrete random variable with support points $S=\{x_i:i\in I\}$, where $I\subseteq\NN$. The \textit{probability mass function (pmf)} of the random variable $X$ is:
+    \begin{align*}
+      p_X:S & \longrightarrow [0,1]          \\
+      x_i   & \longmapsto p_X(x_i):=P(X=x_i)
+    \end{align*}
+  \end{definition}
+  \begin{prop}
+    Let $(\Omega,\mathcal{A},P)$ be a probability space, $X$ be a discrete random variable with support points $S=\{x_i:i\in I\}$ and $p_X$ be its pmf. Then:
+    \begin{enumerate}
+      \item $p_X(x_i)>0$ $\forall i\in I$.
+      \item $\displaystyle\sum_{i\in I}p_X(x_i)=1$.
+      \item $\forall B\in\mathcal{B}(\RR)$, we have: $$P(X\in B)=\sum_{i\in I:x_i\in B}p_X(x_i)$$
+    \end{enumerate}
+  \end{prop}
+  \begin{corollary}
+    Let $(\Omega,\mathcal{A},P)$ be a probability space, $X$ be a discrete random variable with support points $S=\{x_i:i\in I\}$, $F_X$ be its cdf and $p_X$ be its pmf. Then $\forall x\in\RR$ we have: $$F_X(x)P(X\leq x)=\sum_{i\in I:x_i\leq x}p_X(x_i)$$
+  \end{corollary}
+  \begin{definition}[Degenerated distribution]
+    Let $(\Omega,\mathcal{A},P)$ be a probability space. The \textit{degenerated distribution} consists in taking a constant random variable $X$ so that $$P(X=a)=1$$ for some $a\in\RR$. Here we have $S=\{a\}$.
+  \end{definition}
+  \begin{definition}[Bernoulli distribution]
+    Let\\ $(\Omega,\mathcal{A},P)$ be a probability space. The \textit{Bernoulli distribution} is the one that can only take two values (1 and 0)\footnote{Also called \textit{success}/\textit{true} and \textit{failure}/\textit{false} respectively.} with probabilities $p$ and $q:=1-p$: $$P(X=0)=p\qquad P(X=1)=q$$ for some $a\in\RR$. Here we have $S=\{0,1\}$. If $X$ follows a Bernoulli distribution, we will write $X\sim \text{B}(p)$.
+  \end{definition}
+  \begin{definition}[Discrete uniform distribution]
+    Let $(\Omega,\mathcal{A},P)$ be a probability space. The \textit{discrete uniform distribution} is the one whose random variable $X$ takes values on $S=\{x_1,\ldots,x_n\}$ each of these with probability $1/n$: $$P(X=x_i)=\frac{1}{n}\qquad \forall i=1,\ldots,n$$ If $X$ follows a discrete uniform distribution, we will write $X\sim \mathcal{U}\{x_1,\ldots,x_n\}$.
+  \end{definition}
+  \begin{definition}[Binomial distribution]
+    Let\\ $(\Omega,\mathcal{A},P)$ be a probability space and $A\in\mathcal{A}$. Suppose $P(A)=p$. The \textit{binomial distribution} is the one whose random variable $X$ is the number of successes of $A$ in a sequence of $n$ repetitions. Thus, $S=\{0,1,\ldots,n\}$ and: $$P(X=k)=\binom{n}{k}p^k{(1-p)}^{n-k}\qquad \forall k=0,1,\ldots,n$$ If $X$ follows a binomial distribution of parameters $n$ and $p$, we will write $X\sim B(n,p)$.
+  \end{definition}
+  \begin{definition}[Poisson distribution]
+    Let $(\Omega,\mathcal{A},P)$ be a probability space and $\lambda>0$. The \textit{Poisson distribution with parameter $\lambda$} is the one whose random variable has support $S\NN\cup\{0\}$ and: $$P(X=k)=\exp{-\lambda}\frac{\lambda^k}{k!}\qquad \forall k\in\NN\cup\{0\}$$ If $X$ follows a Poisson distribution of parameter $\lambda$, we will write $X\sim \text{Pois}(\lambda)$.
+  \end{definition}
+  \begin{theorem}
+    Let $(p_n)\subset(0,1)$ be a sequence such that: $$\lim_{n\to\infty}np_n=\lambda>0$$
+    For each $n\geq 1$, consider $X_n\sim B(n,p_n)$. Then, $\forall k\in\NN\cup\{0\}$ we have: $$\lim_{n\to\infty}P(X_n=k)=\lim_{n\to\infty}\binom{n}{k}{p_n}^k{(1-p_n)}^{n-k}=\exp{-\lambda}\frac{\lambda^k}{k!}$$
+  \end{theorem}
+  \begin{definition}[Geometric distribution]
+    Let\\ $(\Omega,\mathcal{A},P)$ be a probability space and $A\in\mathcal{A}$. Suppose $P(A)=p$. The \textit{geometric distribution} is the one whose random variable $X$ is the number of trials needed to get one success. Thus, $S=\NN$ and: $$P(X=k)={(1-p)}^{k-1}p\qquad \forall k\in\NN$$ If $X$ follows a geometric distribution of parameters $p$, we will write $X\sim \text{Geo}(n,p)$.
+  \end{definition}
 \end{multicols}
 \end{document}

@@ -80,12 +80,10 @@
   \end{prop}
   \subsubsection*{Picard theorem}
   \begin{definition}
-    Let
-    \begin{align*}
-      \vectorfunction{f}:U\subseteq\RR\times\RR^n & \longrightarrow\RR^m               \\
-      (t,x)                                       & \longmapsto\vectorfunction{f}(t,x)
-    \end{align*}
-    be a function. We say that $\vectorfunction{f}$ is \textit{Lipschitz continuous with respect to the second variable} if $\exists L\in\RR_{>0}$ such that: $$\|\vectorfunction{f}(t,x)-\vectorfunction{f}(t,y)\|\leq L\|x-y\|\qquad\forall (t,x),(t,y)\in U$$
+    Let $\vectorfunction{f}:U\subseteq\RR\times\RR^n\rightarrow\RR^m$ be a function. We say that $\vectorfunction{f}$ is \textit{Lipschitz continuous with respect to the second variable} if $\exists L\in\RR_{>0}$ such that: $$\|\vectorfunction{f}(t,x)-\vectorfunction{f}(t,y)\|\leq L\|x-y\|\qquad\forall (t,x),(t,y)\in U$$
+  \end{definition}
+  \begin{definition}
+    Let $\vectorfunction{f}:U\subseteq\RR\times\RR^n\rightarrow\RR^m$ be a function. We say that $\vectorfunction{f}$ is \textit{locally Lipschitz continuous with respect to the second variable} if $\forall (t_0,x_0)\in U$ there exists a neighbourhood $V$ of $(t_0,x_0)$ such that $f_{|V}$ is Lipschitz continuous with respect to the second variable.
   \end{definition}
   \begin{prop}
     Let $U\subseteq\RR\times\RR^n$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function. Let $I\subseteq\RR$ be an open interval, $t_0\in I$ and $x_0\in\RR^n$ be such that $(t_0,x_0)\in U$. Then, a continuous function $\vectorfunction{\varphi}:I\rightarrow\RR^n$ is a solution of the ivp
@@ -119,9 +117,11 @@
   \begin{corollary}
     Let $(X,d)$ be a complete metric space and $f:X\rightarrow X$ be a function. If there exists $m\in\NN$ such that $f^m$ is a contraction, then $f$ has a unique fixed point $p\in X$.
   \end{corollary}
+  \begin{definition}
+    Let $t_0\in\RR$, $b\in\RR^n$ and $a,b\in\RR_{>0}$. We define the following sets: $$I_a(t_0):=[t_0-a,t_0+a]\subset\RR\;\;\text{and}\;\;\overline{B}_{b}(x_0):=\overline{B}(x_0,b)\subset\RR^n$$
+  \end{definition}
   \begin{theorem}[Picard theorem]\label{DE_picard}
-    Let $t_0\in\RR$, $x_0\in\RR^n$, $a,b\in\RR_{>0}$ and consider the compact set $\Omega_{a,b}:=I_a(t_0)\times\overline{B}_{b}(x_0)\subset\RR\times\RR^n$, where: $$I_a(t_0):=[t_0-a,t_0+a]\quad\text{and}\quad\overline{B}_{b}(x_0):=\overline{B}(x_0,b)$$
-    Let $\vectorfunction{f}:\Omega_{a,b}\rightarrow\RR^n$ be a continuous function and Lipschitz continuous with respect to the second variable, and define $M:=\max\{\|\vectorfunction{f}(t,x)\|:(t,x)\in\Omega_{a,b}\}$. Then, the ivp \eqref{DE_ivp} has a unique solution $\vectorfunction{\varphi}:I_\alpha(t_0)\rightarrow\RR^n$, where $I_\alpha(t_0)=[t_0-\alpha,t_0+\alpha]$ and $\alpha:=\min\left\{a,\frac{b}{M}\right\}$.
+    Let $t_0\in\RR$, $x_0\in\RR^n$, $a,b\in\RR_{>0}$, $\vectorfunction{f}:I_a(t_0)\times\overline{B}_{b}(x_0)\subset\RR\times\RR^n\rightarrow\RR^n$ be a continuous function and Lipschitz continuous with respect to the second variable, and define: $$M:=\max\{\|\vectorfunction{f}(t,x)\|:(t,x)\in I_a(t_0)\times\overline{B}_{b}(x_0)\}$$ Then, the ivp \eqref{DE_ivp} has a unique solution $\vectorfunction{\varphi}:I_\alpha(t_0)\rightarrow\RR^n$, where $\alpha:=\min\left\{a,\frac{b}{M}\right\}$.
   \end{theorem}
   \begin{prop}[Simplified Picard theorem]
     Let $I\subset \RR$ be a closed interval, $t_0\in I$, $x_0\in\RR^n$, $a,b\in\RR_{>0}$ and $\vectorfunction{f}:I\times\RR^n\rightarrow\RR^n$ be a continuous function and Lipschitz continuous with respect to the second variable. Then, the ivp \eqref{DE_ivp} has a unique solution $\vectorfunction{\varphi}:I\rightarrow\RR^n$.
@@ -132,7 +132,7 @@
     for all $n\geq 1$. Then, $\displaystyle\vectorfunction{\varphi}=\lim_{n\to\infty}\vectorfunction{\varphi}_n$.
   \end{corollary}
   \begin{corollary}
-    Let $U\subseteq\RR\times\RR^n$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function and Lipschitz continuous with respect to the second variable. Then, $\forall(t_0,x_0)\in U$, there exists a neighbourhood $V_{(t_0,x_0)}=I_{a(t_0,x_0)}(t_0)\times\overline{B}_{b(t_0,x_0)}(x_0)$ (following the notation of theorem \ref{DE_picard}) of $(t_0,x_0)$ in $U$ such that the ivp \eqref{DE_ivp} has a unique solution $\vectorfunction{\varphi}_{(t_0,x_0)}$ defined on $I_{a(t_0,x_0)}$ with $\graph(\vectorfunction{\varphi}_{(t_0,x_0)})\subset V_{(t_0,x_0)}$.
+    Let $U\subseteq\RR\times\RR^n$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function and locally Lipschitz continuous with respect to the second variable. Then, $\forall(t_0,x_0)\in U$, there exists a neighbourhood $V_{(t_0,x_0)}=I_{a(t_0,x_0)}(t_0)\times\overline{B}_{b(t_0,x_0)}(x_0)$ (following the notation of theorem \ref{DE_picard}) of $(t_0,x_0)$ in $U$ such that the ivp \eqref{DE_ivp} has a unique solution $\vectorfunction{\varphi}_{(t_0,x_0)}$ defined on $I_{a(t_0,x_0)}$ with $\graph(\vectorfunction{\varphi}_{(t_0,x_0)})\subset V_{(t_0,x_0)}$.
   \end{corollary}
   \begin{prop}
     Let $I\subseteq\RR$ be an interval and $\vectorfunction{f}:I\times\RR^n\rightarrow\RR^n$ be a continuous function and Lipschitz continuous with respect to the second variable. Then, $\forall(t_0,x_0)\in I\times\RR^n$ there is a unique solution of the ivp \eqref{DE_ivp} defined on $I$.
@@ -149,5 +149,66 @@
     $$
     has a unique solution defined on $I$.
   \end{corollary}
+  \subsubsection*{Peano theorem}
+  \begin{definition}
+    Let $(X,d)$ be a metric space and $F\subset\mathcal{C}(X,\RR^n)$ be a subset. We say that $F$ is \textit{pointwise bounded} if: $$\forall x\in X\;\exists M_x>0\text{ such that }\|\vectorfunction{f}(x)\|\leq M_x\quad\forall\vectorfunction{f}\in F$$
+    We say that $F$ is \textit{uniformly bounded} if: $$\exists M>0\text{ such that }\|\vectorfunction{f}(x)\|\leq M \quad\forall\vectorfunction{f}\in F\text{ and }\forall x\in X$$
+  \end{definition}
+  \begin{definition}
+    Let $(X,d)$ be a metric space and $F\subset\mathcal{C}(X,\RR^n)$ be a subset. We say that $F$ is \textit{equicontinuous at a point $x_0\in X$} if $\forall \varepsilon>0$ $\exists \delta>0$ such that $\forall x\in X$ with $d(x,x_0)<\delta$ we have $$\|\vectorfunction{f}(x)-\vectorfunction{f}(x_0)\|<\varepsilon\quad\forall\vectorfunction{f}\in F$$
+    We say that $F$ is \textit{pointwise equicontinuous} if it is equicontinuous at each point of $X$. Finally, we say that $F$ is \textit{uniformly equicontinuous} if $\forall \varepsilon>0$ $\exists \delta>0$ such that $\forall x,y\in X$ with $d(x,y)<\delta$ we have $$\|\vectorfunction{f}(x)-\vectorfunction{f}(y)\|<\varepsilon\quad\forall\vectorfunction{f}\in F$$
+  \end{definition}
+  \begin{theorem}[Arzelà-Ascoli theorem]
+    Let $(X,d)$ be a compact metric space and $(\vectorfunction{f}_m)$ be a sequence of functions such that $\vectorfunction{f}_m\in\mathcal{C}(X,\RR^n)$ $\forall m\geq 1$. If the sequence is pointwise bounded and equicontinuous, then there exists a subsequence $(\vectorfunction{f}_{m_k})$ that converges onn $\mathcal{C}(X,\RR^n)$.
+  \end{theorem}
+  \begin{corollary}
+    Let $(X,d)$ be a compact metric space, $D\subset\RR^n$ be a closed set and $(\vectorfunction{f}_m)$ be a sequence of functions such that $\vectorfunction{f}_m\in\mathcal{C}(X,D)$ $\forall m\geq 1$. If the sequence is pointwise bounded and equicontinuous, then there exists a subsequence $(\vectorfunction{f}_{m_k})$ that converges onn $\mathcal{C}(X,D)$.
+  \end{corollary}
+  \begin{theorem}[Peano theorem]
+    Let $t_0\in\RR$, $x_0\in\RR^n$, $a,b\in\RR_{>0}$, $\vectorfunction{f}:I_a(t_0)\times\overline{B}_{b}(x_0)\subset\RR\times\RR^n\rightarrow\RR^n$ be a continuous function, and define: $$M:=\max\{\|\vectorfunction{f}(t,x)\|:(t,x)\in I_a(t_0)\times\overline{B}_{b}(x_0)\}$$ Then, the ivp \eqref{DE_ivp} has at least one solution $\vectorfunction{\varphi}:I_\alpha(t_0)\rightarrow\RR^n$, where $\alpha:=\min\left\{a,\frac{b}{M}\right\}$.
+  \end{theorem}
+  \begin{corollary}
+    Let $U\subseteq\RR\times\RR^n$ be an open set, $K\subset U$ be a compact set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function. Then, $\exists\alpha\in\RR_{>0}$ such that $\forall (t_0,x_0)\in K$, the ivp \eqref{DE_ivp} has a solution defined in $I_\alpha(t_0)$.
+  \end{corollary}
+  \subsubsection*{Maximal solutions}
+  \begin{definition}
+    Let $U\subseteq\RR\times\RR^n$ be an open set, $(t_0,x_0)\in U$ and $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function. We define the set $A(U,f,t_0,x_0)$ as:
+    \begin{multline*}
+      A(U,\vectorfunction{f},t_0,x_0):=\{(I,\varphi):I\subseteq\RR\text{ is an interval},t_0\in I\\\text{and }\varphi:I\rightarrow\RR^n\text{ is a solution of the ivp \eqref{DE_ivp}}\}
+    \end{multline*}
+  \end{definition}
+  \begin{definition}
+    Let $\leq$ be a relation\footnote{It can be seen that, in fact, $\leq$ is a partial (but not total) order relation.} defined on $A(U,\vectorfunction{f},t_0,x_0)$. For $(I,\vectorfunction{\varphi}),(J,\vectorfunction{\psi})\in A(U,\vectorfunction{f},t_0,x_0)$ we define: $$(J,\vectorfunction{\psi})\leq (I,\vectorfunction{\varphi})\iff J\subset I\text{ and }\vectorfunction{\varphi}|_J=\vectorfunction{\psi}$$ In this case, we say that $(I,\vectorfunction{\varphi})$ is an \textit{extension} of $(J,\vectorfunction{\psi})$.
+  \end{definition}
+  \begin{definition}
+    Let $(A,\mathcal{R})$ be a poset. Then, $m\in A$ is a \textit{maximal element} if and only if $\forall a\in A$ with $m \mathcal{R} a$ we have $m=a$.
+  \end{definition}
+  \begin{definition}
+    Consider the poset $(A(U,\vectorfunction{f},t_0,x_0),\leq)$. We say that a solution $(I,\vectorfunction{\varphi})$ is \textit{maximal} if for all extensions $(J,\vectorfunction{\psi})$ of $(I,\vectorfunction{\varphi})$ we have $I=J$ and $\vectorfunction{\varphi}=\vectorfunction{\psi}$.
+  \end{definition}
+  \begin{definition}
+    Let $(A,\mathcal{R})$ be a poset and $C\subset A$ be a subset of $A$. We say that $C$ is a \textit{chain} if it is totally ordered in the inherited order, that is, if it is partially ordered and $\forall x,y\in C$ we have either $x\mathcal{R}y$ or $y\mathcal{R}x$.
+  \end{definition}
+  \begin{definition}
+    Let $(A,\mathcal{R})$ be a poset and $x\in A$. $x$ is an \textit{upper bound of $A$} if and only if $a\mathcal{R}x$ $\forall a\in A$.
+  \end{definition}
+  \begin{definition}
+    Let $(A,\mathcal{R})$ be a poset. Then, $m\in A$ is a \textit{greatest element} if and only if $\forall a\in A$ we have $a \mathcal{R} m$.
+  \end{definition}
+  \begin{lemma}[Zorn's lemma]
+    Let $(A,\mathcal{R})$ be a poset. If every chain $C\subset X$ has an upper bound in $A$, then $A$ contains at least one maximal element.
+  \end{lemma}
+  \begin{theorem}
+    Let $U\subseteq\RR\times\RR^n$ be an open set, $(t_0,x_0)\in U$ and $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function. Consider the poset $(A(U,\vectorfunction{f},t_0,x_0),\leq)$. Then, $A(U,\vectorfunction{f},t_0,x_0)$ has maximal elements. Furthermore, if $(I,\vectorfunction{\varphi})$ is a maximal solution, then $I$ is open.
+  \end{theorem}
+  \begin{prop}
+    Let $U\subseteq\RR\times\RR^n$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function such that $\forall(t_0,x_0)\in U$ the ivp \eqref{DE_ivp} has a unique solution defined in a neighbourhood of $t_0$. Then, $\forall(t_0,x_0)\in U$ the ivp \eqref{DE_ivp} has a unique maximal solution.
+  \end{prop}
+  \begin{lemma}[Wintner lemma]
+    Let $U\subseteq\RR\times\RR^n$ be an open set, $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function, $\vectorfunction{\varphi}:I\rightarrow\RR^n$ be a solution of $\vectorfunction{x}'=\vectorfunction{f}(t,\vectorfunction{x})$ and $(b,y)\in U$ be an accumulation point of $\vectorfunction{\varphi}$. Then, $\displaystyle\lim_{t\to b}\vectorfunction{\varphi}(t)=y$ an the solution can be extended up to $b$.
+  \end{lemma}
+  \begin{prop}
+    Let $U\subseteq\RR\times\RR^n$ be an open set, $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function and $\vectorfunction{\varphi}:(a,b)\rightarrow\RR^n$ be a maximal solution of $\vectorfunction{x}'=\vectorfunction{f}(t,\vectorfunction{x})$. If $b<\infty$, then for all compact set $\forall K\subset U$, $\exists t_k<\infty$ such that $\forall t\in[t_k,b]$, $(t,\vectorfunction{\varphi}(t))\notin K$.
+  \end{prop}
 \end{multicols}
 \end{document}

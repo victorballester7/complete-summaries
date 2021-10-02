@@ -2,44 +2,8 @@
 
 \begin{document}
 \begin{multicols}{2}[\section{Galois theory}]
-  \subsection{Introduction and summary of algebraic structures}
+  \subsection{Introduction}
   \subsubsection*{Rings, integral domains and fields}
-  \begin{definition}[Ring]
-    A \textit{ring} is a set $R$ equipped with two binary operations (called addition and multiplication):
-    \begin{align*}
-      +:R\times R & \longrightarrow R    & \cdot:R\times R & \longrightarrow R        \\
-      (r_1,r_2)   & \longmapsto r_1+ r_2 & (r_1,r_2)       & \longmapsto r_1\cdot r_2
-    \end{align*}
-    satisfying the following properties:
-    \begin{enumerate}
-      \item $(R,+)$ is an abelian group.
-      \item $(R,\cdot)$ satisfies\footnote{Some definitions state that the commutative property is not necessary to define a ring. However, in these notes we will take the definition given.}:
-            \begin{enumerate}
-              \item Associativity: $$(r_1\cdot r_2)\cdot r_3=r_1\cdot(r_2\cdot r_3)\quad\forall r_1,r_2,r_3\in R.$$
-              \item Identity element\footnote{It is common to denote the additive identity element as 0 and the multiplicative identity element as 1.}: $$\exists 1\in R:1\cdot r=r\cdot 1=r\quad\forall r\in R.$$
-              \item Commutativity: $$r_1\cdot r_2=r_2\cdot r_1\quad\forall r_1,r_2\in R.$$
-            \end{enumerate}
-      \item Multiplication is distributive with respect to addition: $$(r_1+r_2)\cdot r_3=r_1\cdot r_3+r_2\cdot r_3\quad\forall r_1,r_2,r_3\in R.$$
-    \end{enumerate}
-    In this context we say $(R,+,\cdot)$ is a ring.
-  \end{definition}
-  \begin{definition}[Ring morphism]
-    Let $(R,+,\cdot)$, $(S,\oplus,\odot)$ be two rings. A \textit{ring morphism from $(R,+,\cdot)$ to $(S,\oplus,\odot)$} is a function $f:(R,+,\cdot)\rightarrow (S,\oplus,\odot)$ such that:
-    \begin{enumerate}
-      \item $f(r_1+ r_2)=f(r_1)\oplus f(r_2)\quad\forall r_1,r_2\in R$.
-      \item $f(r_1\cdot r_2)=f(r_1)\odot f(r_2)\quad\forall r_1,r_2\in R$.
-      \item $f(1_R)=1_S$.
-    \end{enumerate}
-  \end{definition}
-  \begin{definition}
-    Let $R$\footnote{From now on, for simplicity, we will denote the ring $(R,+,\cdot)$ as $R$.} be a ring. We say $r\in R$ is a \textit{zero divisor} if $\exists s\in R\setminus\{0\}$ such that $r\cdot s=0$. We say $r\in R$ is \textit{not} a \textit{zero divisor} if $r\cdot s=0\implies s=0$.
-  \end{definition}
-  \begin{definition}[Integral domain]
-    A ring $R\ne\{0\}$ is an \textit{integral domain} if the product of any two nonzero elements is nonzero, or equivalently, if the only zero divisor is the zero.
-  \end{definition}
-  \begin{definition}[Field]
-    A ring $(R,+,\cdot)$, $R\ne\{0\}$, is a \textit{field} if $\forall r\in R$, $r\ne 0$, $\exists s\in R$ such that $r\cdot s=1$.
-  \end{definition}
   \begin{prop}
     \hfill
     \begin{enumerate}
@@ -51,6 +15,9 @@
   \begin{lemma}
     Let $K$ be a field and $R\ne\{0\}$ be a ring. Then, all ring morphisms $f:K\rightarrow R$ are injective.
   \end{lemma}
+  \begin{definition}
+    Let $K$, $L$ be fields. A \textit{field morphism between $K$ and $L$} is a ring morphism $K\rightarrow L$.
+  \end{definition}
   \begin{lemma}
     Let $R$ be a ring. Then, there exists a unique ring morphism $f:\ZZ\rightarrow R$ satisfying:
     \begin{itemize}
@@ -68,7 +35,7 @@
     Let $R$ be a ring. We define the  \textit{polynomial ring $R[x]$} as: $$R[x]:=\{r_0+r_1\cdot x+\cdots+r_n\cdot x^n:r_i\in R\ \forall i\text{ and }n\geq 0\}$$ Moreover, we can iterate this definition to define the polynomial ring in $m$-unknowns: $$R[x_1,\ldots,x_m]=\left(R[x_1,\ldots,x_{m-1}]\right)[x_m]$$
   \end{definition}
   \begin{prop}[Universal property of polynomials in several variables]
-    Let $R$, $S$ be two rings, $f:R\rightarrow S$ be a ring morphism and $s_1,\ldots,s_n\in S$ be not necessarily distinct elements of $S$. Then, the function $\text{eva}:R[x_1,\ldots,x_n]\rightarrow S$ defined by: $$\text{eva}(p):=\sum_{i_1,\ldots,i_n\geq 0}f(r_{i_1,\ldots,i_m}){s_1}^{i_1}\cdots {s_n}^{i_n}$$ is the unique ring morphism such that $\text{eva}(r)=f(r)$ $\forall r\in R$ and $\text{eva}(x_i)=s_i$ for $i=1,\ldots,n$. This function is called \textit{evaluation of $s_1,\ldots,s_n$ through $f$}.
+    Let $R$, $S$ be two rings, $f:R\rightarrow S$ be a ring morphism and $s_1,\ldots,s_n\in S$ be not necessarily distinct elements of $S$. Then, the function $\text{eva}:R[x_1,\ldots,x_n]\rightarrow S$ defined by: $$\text{eva}(p):=\sum_{i_1,\ldots,i_n\geq 0}f(r_{i_1,\ldots,i_n}){s_1}^{i_1}\cdots {s_n}^{i_n}$$ is the unique ring morphism such that $\text{eva}(r)=f(r)$ $\forall r\in R$ and $\text{eva}(x_i)=s_i$ for $i=1,\ldots,n$. This function is called \textit{evaluation of $s_1,\ldots,s_n$ through $f$}\footnote{For the case $n=1$, we will denote by $\text{eva}_s$ the unique ring morphism $\text{eva}_s:R[x]\rightarrow S$ such that $\text{eva}_s(r)=f(r)$ $\forall r\in R$ and $\text{eva}_s(x)=s$.}.
   \end{prop}
   \subsubsection*{Field of fractions}
   \begin{theorem}
@@ -86,21 +53,52 @@
   \begin{corollary}
     Let $K$ be a field. For all $n\geq 2$ we have: $$K(x_1,\ldots,x_n)\cong K(x_1,\ldots,x_{n-1})(x_n)$$
   \end{corollary}
-  \subsubsection*{Subring generated by a set}
+  \subsubsection*{Subring and subfield generated by a set}
   \begin{definition}
     Let $(R,+,\cdot)$ be a ring and $X\subseteq R$ be a subset of $R$. Let $$P:=\{S\subseteq R: X\subseteq S,(S,+,\cdot)\text{ is a subring of }(R,+,\cdot)\}$$ Then, the smallest subring of $(R,+,\cdot)$ containing $X$ is: $$\langle X\rangle_\text{ring}=\bigcap_{S\in P}S$$
   \end{definition}
   \begin{definition}
-    Let $R$ be a ring, $S\subseteq R$ be a subring of $R$ and $X\subseteq R$ be a subset of $R$. Then, the smallest subring of $R$ containing $S$ and $X$ is denoted by $S(X)$.
+    Let $R$ be a ring, $S\subseteq R$ be a subring of $R$ and $A\subseteq R$ be a subset of $R$. Then, the smallest subring of $R$ containing $S$ and $A$ is denoted by $S[A]$.
   \end{definition}
   \begin{lemma}
-    Let $A$ be a finite set with $|A|=n$, $R$ and $S$ be rings and $\text{eva}:R[x_1,\ldots,x_n]\rightarrow S$ be the evaluation morphism such that $\text{eva}(r)=r$ $\forall r\in R$ and $\text{eva}(x_a)=a$ $\forall a\in A$. Then, $S[A]=\im(\text{eva})$.
+    Let $A$ be a finite set, $R$ and $S$ be rings and $\text{eva}:R[x_a:a\in A]\rightarrow S$ be the evaluation morphism such that $\text{eva}(r)=r$ $\forall r\in R$ and $\text{eva}(x_a)=a$ $\forall a\in A$. Then, $S[A]=\im(\text{eva})$.
   \end{lemma}
   \begin{definition}
-    Let $(K,+,\cdot)$ be a field and $X\subseteq K$ be a subset of $K$. Let $$P:=\{F\subseteq K: X\subseteq F,(F,+,\cdot)\text{ is a subfield of }(R,+,\cdot)\}$$ Then, the smallest subfield of $(K,+,\cdot)$ containing $X$ is: $$\langle X\rangle_\text{field}=\bigcap_{F\in P}F$$
+    Let $(K,+,\cdot)$ be a field and $X\subseteq K$ be a subset of $K$. Let $$P:=\{L\subseteq K: X\subseteq L,(L,+,\cdot)\text{ is a subfield of }(R,+,\cdot)\}$$ Then, the smallest subfield of $(K,+,\cdot)$ containing $X$ is: $$\langle X\rangle_\text{field}=\bigcap_{L\in P}L$$
   \end{definition}
   \begin{definition}
-    Let $K$ be a field, $F$ be a subfield of $K$ and $X\subseteq K$ be a subset of $K$. Then, the smallest subfield of $K$ containing $F$ and $X$ is denoted by $F(X)$.
+    Let $L$ be a field, $K\subseteq L$ be a subfield of $L$ and $A\subseteq L$ be a subset of $L$. Then, the smallest subfield of $L$ containing $K$ and $A$ is denoted by $K(A)$.
   \end{definition}
+  \subsubsection*{Algebraic and transcendental numbers}
+  \begin{prop}
+    Let $\alpha\in\CC$. Then, the subring generated by $\alpha$ is equal to the image of the ring morphism $\text{eva}_\alpha:\ZZ[x]\rightarrow\CC$, that is, $\langle\alpha\rangle_\text{ring}=\im(\text{eva}_\alpha)$ where: $$\im(\text{eva}_\alpha)=\left\{\sum_{i=0}^na_i\alpha^i:a_i\in\ZZ,i=0,\ldots, n,n\geq 0\right\}$$
+  \end{prop}
+  \begin{prop}
+    Let $\alpha\in\CC$. Then, the subfield generated by $\alpha$ is equal to the image of the ring morphism $\text{eva}_\alpha:\QQ[x]\rightarrow\CC$, that is, $\langle\alpha\rangle_\text{field}=\im(\text{eva}_\alpha)$ where: $$\im(\text{eva}_\alpha)=\left\{\sum_{i=0}^na_i\alpha^i:a_i\in\QQ,i=0,\ldots, n,n\geq 0\right\}$$
+  \end{prop}
+  \begin{definition}
+    Let $\alpha\in\CC$ and consider $\text{eva}_\alpha:\QQ[x]\rightarrow\CC$. We say that $\alpha$ is \textit{algebraic} if $\ker(\text{eva}_\alpha)=(p(x))$, where $p(x)\in\QQ[x]$ is an irreducible polynomial of degree $d\geq 1$. This polynomial is called \textit{irreducible polynomial of $\alpha$} and is denoted by $\text{Irr}(\alpha)(x)$. The set of all algebraic complex numbers is denoted by $\overline{\QQ}\subset\CC$.
+  \end{definition}
+  \begin{definition}
+    Let $\alpha\in\CC$ and consider $\text{eva}_\alpha:\QQ[x]\rightarrow\CC$. We say that $\alpha$ is \textit{transcendental} if $\ker(\text{eva}_\alpha)=(0)$, or equivalently, if it is not algebraic.
+  \end{definition}
+  \begin{theorem}
+    The set $\overline{\QQ}\subset\CC$ is countable.
+  \end{theorem}
+  \begin{prop}
+    Let $K$, $L$ be fields. Then, all field morphism $K\rightarrow L$ is injective.
+  \end{prop}
+  \begin{definition}
+    Let $K$, $L$ be two fields. A \textit{field extension $\quot{L}{K}$} is a field morphism $K\hookrightarrow L$.
+  \end{definition}
+  \begin{prop}
+    Let $K$, $L$ be fields and $\quot{L}{K}$ be a field extension. Then, $L$ is a vector space over $K$. Reciprocally, if $L$ is a vector space over $K$ satisfying: $$(\lambda\cdot 1)\cdot(\mu\cdot 1)=(\lambda\cdot\mu)\cdot 1\qquad\forall\lambda,\mu\in K$$ then the morphism $f:K\rightarrow L$ defined as $f(\lambda)=\lambda\cdot 1$ is a field morphism and $\quot{L}{K}$ is a field extension.
+  \end{prop}
+  \begin{definition}
+    Let $K$, $L$ be fields. We say that an extension of field $\quot{L}{K}$ is finite if the dimension of $L$ as a vector space over $K$ is finite. In this case, we define the \textit{degree of the extension} as: $$[L:K]:=\dim_K(L)$$
+  \end{definition}
+  \begin{prop}
+    Let $K$ be a field, $p(x)\in K[x]$ a monic and irreducible polynomial of degree $d\geq 1$. Let $L=\quot{K[x]}{(p(x))}$. Then, $\quot{L}{K}$ is a field extension of degree $d$, and the set $\{1,\bar{x},\ldots,\bar{x}^{d-1}\}$ is a basis of the vector space $L$ over $K$. Furthermore, $\bar{x}\in L$ is a root of $p(x)$ in $L$.
+  \end{prop}
 \end{multicols}
 \end{document}

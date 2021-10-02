@@ -5,7 +5,7 @@
   \subsection{Topological spaces and continuous functions}
   \subsubsection*{Metric spaces}
   \begin{definition}
-    Let $X$ be a set. A \textit{distance in $X$} is a function $d:X\times X\rightarrow\RR $ such that $\forall x,y,x\in X$ the following properties are satisfied:
+    Let $X$ be a set. A \textit{distance in $X$} is a function $d:X\times X\rightarrow\RR $ such that $\forall x,y,z\in X$ the following properties are satisfied:
     \begin{enumerate}
       \item $d(x,y)\geq 0$.
       \item $d(x,y)=0\iff x=y$.
@@ -15,15 +15,14 @@
     We define a \textit{metric space} as a pair $(X,d)$ that satisfy the previous properties.
   \end{definition}
   \begin{definition}
-    Let $(X,d_X)$ and $(Y,d_Y)$ be two metric spaces and $f:(X,d_X)\rightarrow(Y,d_Y)$ be a function. We say that $f$ is continuous at a point $a$ if $\forall\varepsilon>0$, $\exists\delta>0$ such that $d_Y(f(x)-f(a))<\varepsilon$ whenever $d_X(x-a)<\delta$. Equivalently, we say that $f$ is continuous at $a$ if $\forall\varepsilon>0$, $\exists\delta>0$ such that $f(B(a,\delta))\subset B(f(a),\varepsilon)$ (or $B(a,\delta)\subset f^{-1}\left(B(f(a),\varepsilon)\right)$).
+    Let $(X,d)$ be a metric space $a\in X$ and $r\in\RR$. We define the \textit{ball $B_d(a,r)$ with the metric $(X,d)$ of center $a$ and radius $r$} as: $$B_d(a,r)=\{x\in X:d(x,a)<r\}$$
   \end{definition}
-  \begin{theorem}
-    Let $(X,d_X)$ and $(Y,d_Y)$ be two metric spaces and $f:(X,d_X)\rightarrow(Y,d_Y)$ be a function. The following statements are equivalent:
-    \begin{enumerate}
-      \item $f$ is continuous.
-      \item If $A\subset Y$ is open, then $f^{-1}(A)\subset X$ is also open.
-    \end{enumerate}
-  \end{theorem}
+  \begin{definition}
+    Let $(X,d_X)$ and $(Y,d_Y)$ be two metric spaces and $f:(X,d_X)\rightarrow(Y,d_Y)$ be a function. We say that $f$ is continuous if $\forall a\in X$ and $\forall\varepsilon>0$, $\exists\delta>0$ such that $d_Y(f(x),f(a))<\varepsilon$ whenever $d_X(x,a)<\delta$. Equivalently, we say that $f$ is continuous if $\forall a\in X$ and $\forall\varepsilon>0$, $\exists\delta>0$ such that: $$f(B_{d_X}(a,\delta))\subset B_{d_Y}(f(a),\varepsilon)$$ or, equivalently, $B_{d_X}(a,\delta)\subset f^{-1}\left(B_{d_Y}(f(a),\varepsilon)\right)$.
+  \end{definition}
+  \begin{definition}
+    Let $(X,d)$ be a metric space. We say that a subset $A\subseteq X$ is \textit{open} if $\forall a\in A$, $\exists\varepsilon>0$ such that $B_d(a,\varepsilon)\subset A$.
+  \end{definition}
   \begin{prop}
     Let $(X,d)$ be a metric space. Then:
     \begin{itemize}
@@ -33,14 +32,24 @@
     \end{itemize}
   \end{prop}
   \begin{prop}
-    Let $(X,d)$ be a metric space with $|X|\geq 2$ and $x,y\in X$. Then, $\exists\delta>0$ such that $x\in B(x,\delta)$, $y\in B(y,\delta)$ and $B(x,\delta)\cap B(y,\delta)=\varnothing$.
+    Let $(X,d)$ be a metric space and $x\in X$. Then, the ball $B_d(x,r)$ is open $\forall r\in\RR$.
   \end{prop}
   \begin{prop}
-    Let $(X,d)$ be a metric space and $A\subset X$ be a subset of $X$. Then, $A$ is open if and only if $A=\bigcup_{i\in I}B(a_i,\varepsilon_i)$, where $I$ is an index set, $a_i\in A$ and $\varepsilon_i>0$ for all $i\in I$.
+    Let $(X,d)$ be a metric space and $A\subset X$ be a subset of $X$. Then, $A$ is open if and only if $A=\bigcup_{i\in I}B_d(a_i,\varepsilon_i)$, where $I$ is an index set, $a_i\in A$ and $\varepsilon_i>0$ for all $i\in I$.
+  \end{prop}
+  \begin{theorem}
+    Let $(X,d_X)$ and $(Y,d_Y)$ be two metric spaces and $f:(X,d_X)\rightarrow(Y,d_Y)$ be a function. The following statements are equivalent:
+    \begin{enumerate}
+      \item $f$ is continuous.
+      \item If $A\subset Y$ is open, then $f^{-1}(A)\subset X$ is also open.
+    \end{enumerate}
+  \end{theorem}
+  \begin{prop}
+    Let $(X,d)$ be a metric space with $|X|\geq 2$ and $x,y\in X$. Then, $\exists\delta>0$ such that $x\in B_d(x,\delta)$, $y\in B_d(y,\delta)$ and $B_d(x,\delta)\cap B_d(y,\delta)=\varnothing$.
   \end{prop}
   \subsubsection*{Topological spaces}
   \begin{definition}
-    Let $X$ be a set. A \textit{topology $\mathcal{T}$} on a set $X$ is a collection of subsets of $X$ satisfying the following properties:
+    Let $X$ be a set. A \textit{topology $\mathcal{T}$} on a set $X$ is a collection of subsets of $X$ (that is, $\mathcal{T}\subset\mathcal{P}(X)$) satisfying the following properties:
     \begin{enumerate}
       \item $\varnothing, X\in\mathcal{T}$.
       \item The intersection of any finite subcollection of $\mathcal{T}$ is in $\mathcal{T}$.
@@ -55,39 +64,94 @@
     Let $(X,\mathcal{T})$ and $(X,\mathcal{T}')$ be topological spaces. We say that $\mathcal{T}$ is \textit{finer than} $\mathcal{T}'$ if $\mathcal{T}'\subset\mathcal{T}$.
   \end{definition}
   \begin{prop}
-    Let $X$ be a set. Then, we can construct some topologies on $X$:
+    Let $X$ be a set and $p\in X$ be a point of $X$ and $(X,d)$ be a metric space. Then, we can construct some topologies on $X$:
     \begin{itemize}
+      \item \textit{Topology induced from the metric}: $$\mathcal{T}:=\{U\subseteq X:U\text{ is open with the metric }d\}$$
       \item \textit{Trivial topology}: $\mathcal{T}_\text{t}:=\{\varnothing,X\}$
       \item \textit{Discrete topology}: $\mathcal{T}_\text{d}:=\mathcal{P}(X)$
-      \item \textit{Finite complement topology}: $$\mathcal{T}_\text{f}:=\{U\subseteq X:U=\varnothing\text{ or }X\setminus U\text{ is finite}\}$$
+      \item \textit{Cofinite topology}: $$\mathcal{T}_\text{f}:=\{U\subseteq X:U=\varnothing\text{ or }X\setminus U\text{ is finite}\}$$
+      \item \textit{Cocountable topology}: $$\mathcal{T}:=\{U\subseteq X:U=\varnothing\text{ or }X\setminus U\text{ is countable}\}$$
+      \item \textit{Particular point topology}: $$\mathcal{T}:=\{U\subseteq X:U=\varnothing\text{ or }p\in U\}$$
+      \item \textit{Excluded point topology}: $$\mathcal{T}:=\{U\subseteq X:U=X\text{ or }p\notin U\}$$
     \end{itemize}
   \end{prop}
-  \begin{definition}
+  \begin{prop}
     Let $(X,\mathcal{T}_X)$ and $(Y,\mathcal{T}_Y)$ be topological spaces and $f:(X,\mathcal{T}_X)\rightarrow(Y,\mathcal{T}_Y)$ be a function. We say that $f$ is continuous if for all $U\in\mathcal{T}_Y$, we have $f^{-1}(U)\in\mathcal{T}_X$.
-  \end{definition}
+  \end{prop}
   \begin{definition}
     A \textit{homeomorphism} between topological spaces is a bijective function that is continuous and whose inverse is also continuous.
   \end{definition}
   \begin{definition}
     Let $(X,\mathcal{T})$ be a topological space and $A\subset X$. We say that $A$ is \textit{closed} if $X\setminus A\in\mathcal{T}$ is open.
   \end{definition}
-  \begin{prop}[Closed sets properties]
+  \begin{prop}
     Let $(X,\mathcal{T})$ be a topological space. Then:
     \begin{enumerate}
       \item $\varnothing$ and $X$ are closed.
       \item The union of any finite subcollection of closed sets in $X$ is a closed set in $X$.
-      \item The union of any subcollection of closed sets in $X$ is closed in $X$.
+      \item The intersection of any subcollection of closed sets in $X$ is closed in $X$.
     \end{enumerate}
   \end{prop}
-  \begin{definition}
-    Let $(X,\mathcal{T}_X)$ and $(Y,\mathcal{T}_Y)$ be topological spaces and $f:(X,\mathcal{T}_X)\rightarrow(Y,\mathcal{T}_Y)$ be a function. We say that $f$ is continuous if for all closed sets $A\subset Y$, we have $f^{-1}(A)\in X$.
-  \end{definition}
+  \begin{prop}
+    Let $(X,\mathcal{T}_X)$ and $(Y,\mathcal{T}_Y)$ be topological spaces and $f:(X,\mathcal{T}_X)\rightarrow(Y,\mathcal{T}_Y)$ be a function. We say that $f$ is continuous if and only if for all closed sets $A\subset Y$, we have $f^{-1}(A)\subset X$ is closed.
+  \end{prop}
   \subsubsection*{Basis for a topology}
   \begin{definition}
     Let $(X,\mathcal{T})$ be a topological space and $\mathcal{B}\subset\mathcal{T}$ be a subset of open sets. We say that $\mathcal{B}$ is a \textit{basis of $\mathcal{T}$} if for all $U\in\mathcal{T}$ and $x\in U$, there exists $B\in\mathcal{B}$ such that $x\in\mathcal{B}\subseteq U$.
   \end{definition}
   \begin{prop}
-    Let $(X,\mathcal{T})$ be a topological space and $\mathcal{B}$ be a basis of $\mathcal{T}$. Then, $\forall U\in\mathcal{T}$: $$U=\bigcup_{x\in U}B_x$$ where $x\in B_x\subseteq U$ and $B_x$ is an element of $\mathcal{B}$.
+    Let $(X,\mathcal{T})$ be a topological space and $\mathcal{B}$ be a basis of $\mathcal{T}$. Then, $\forall U\in\mathcal{T}$: $$U=\bigcup_{x\in U}B_x$$ where $x\in B_x\subseteq U$ and $B_x\in\mathcal{B}$ $\forall x\in U$.
+  \end{prop}
+  \begin{lemma}
+    Let $(X,\mathcal{T})$ be a topological space, $\mathcal{B}\subset\mathcal{T}$ be a basis of $\mathcal{T}$ and $\{B_i:B_i\in\mathcal{B}\;\forall i\in \{1,\ldots,n\}\}$ be a collection of elements of $\mathcal{B}$. Then, $\forall x\in\bigcap_{i=1}^nB_i$, $\exists B'\in\mathcal{B}$ such that $x\in B'\subset\bigcap_{i=1}^nB_i$.
+  \end{lemma}
+  \begin{prop}
+    Let $X$ be a set and $\mathcal{B}\subset\mathcal{P}(X)$ be a collection of subsets of $X$ such that:
+    \begin{enumerate}
+      \renewcommand{\labelenumi}{\alph{enumi})}
+      \item $\displaystyle X=\bigcup_{B\in\mathcal{B}} B$
+      \item $\forall U,V\in\mathcal{B}$ and  $\forall x\in U\cap V$, $\exists B\in\mathcal{B}$ such that $x\in B\subset U\cap V$.
+    \end{enumerate}
+    Then, there exists a unique topology $\mathcal{T}$ of $X$ such that:
+    \begin{enumerate}
+      \item $\mathcal{B}$ is a basis of the topology $\mathcal{T}$.
+      \item $\mathcal{T}$ is the least finer topology that contains $\mathcal{B}$.
+    \end{enumerate}
+  \end{prop}
+  \begin{definition}
+    Let $X$ be a set and $\mathcal{B}\subset\mathcal{P}(X)$ be a collection of subsets of $X$. The \textit{topology $\mathcal{T}$ generated by $\mathcal{B}$} is: $$\mathcal{T}=\left\{U\subset X:U=\bigcup_{i\in I}B_i, B_i\in \mathcal{B}\right\}$$ Or equivalently: $$\mathcal{T}=\left\{U\subset X:\forall x\in U\;\exists B\in\mathcal{B}\text{ such that }x\in B\subseteq U\right\}$$
+  \end{definition}
+  \begin{definition}
+    Let $$\mathcal{B}=\{[a,b)\subset\RR:a,b\in\RR\text{ and }a<b\}$$
+    We define the \textit{lower limit topology} as the topology generated by $\mathcal{B}$.
+  \end{definition}
+  \begin{theorem}
+    Let $(X,\mathcal{T}_X)$ and $(Y,\mathcal{T}_Y)$ be topological spaces, $f:(X,\mathcal{T}_X)\rightarrow (Y,\mathcal{T}_Y)$ be a function and $\mathcal{B}_Y$ be a basis of $\mathcal{T}_Y$. Then, $f$ is continuous if and only if $f^{-1}(B)$ is open $\forall B\in \mathcal{B}_Y$.
+  \end{theorem}
+  \begin{definition}
+    Let $(X,\mathcal{T})$ be a topological space and $\mathcal{S}\subset\mathcal{T}$ be a subset. Then, $\mathcal{S}$ is a \textit{subbasis of $\mathcal{T}$} if all open sets can be written as a union of finite intersections of elements of $\mathcal{S}$.
+  \end{definition}
+  \subsubsection*{Interior and closure of a set}
+  \begin{definition}[Interior]
+    Let $(X,\mathcal{T})$ be a topological space and $A\subseteq X$ be a subset. The \textit{interior of $A$}, $\Int A$, is the largest open subset of $X$ contained in $A$.
+  \end{definition}
+  \begin{definition}[Closure]
+    Let $(X,\mathcal{T})$ be a topological space and $A\subseteq X$ be a subset. The \textit{closure of $A$}, $\Cl A$, is the the smallest closed subset of $X$ containing $A$.
+  \end{definition}
+  \begin{prop}
+    Let $(X,\mathcal{T})$ be a topological space and $A\subseteq X$ be a subset. Then: $$\Int A=\bigcup_{\substack{U\subseteq A\\U\text{ is open}}}U\qquad\Cl A=\bigcap_{\substack{C\supseteq A\\C\text{ is closed}}}C$$
+    Hence, we have the inclusions: $$\Int A\subseteq A\subseteq \Cl A$$
+    And, furthermore:
+    \begin{itemize}
+      \item $\Int A=A$ if and only if $A$ is open.
+      \item $\Cl A=A$ if and only if $A$ is closed.
+    \end{itemize}
+  \end{prop}
+  \begin{definition}
+    Let $(X,\mathcal{T})$ be a topological space and $A\subset X$ be a subset. $A$ is called \textit{dense in $X$} if $\forall U\in\mathcal{T}$ with $U\ne\varnothing$ we have $U\cap A\ne\varnothing$.
+  \end{definition}
+  \begin{prop}
+    Let $(X,\mathcal{T})$ be a topological space and $A\subset X$ be a subset. Then, $A$ is dense in $X$ if and only if $\Cl A=X$.
   \end{prop}
 \end{multicols}
 \end{document}
