@@ -136,7 +136,7 @@
     Let $(X,\mathcal{T})$ be a topological space and $A\subseteq X$ be a subset. The \textit{interior of $A$}, $\Int A$, is the largest open subset of $X$ contained in $A$.
   \end{definition}
   \begin{definition}[Closure]
-    Let $(X,\mathcal{T})$ be a topological space and $A\subseteq X$ be a subset. The \textit{closure of $A$}, $\Cl A$, is the the smallest closed subset of $X$ containing $A$.
+    Let $(X,\mathcal{T})$ be a topological space and $A\subseteq X$ be a subset. The \textit{closure of $A$}, $\Cl A$, is the smallest closed subset of $X$ containing $A$.
   \end{definition}
   \begin{prop}
     Let $(X,\mathcal{T})$ be a topological space and $A\subseteq X$ be a subset. Then: $$\Int A=\bigcup_{\substack{U\subseteq A\\U\text{ is open}}}U\qquad\Cl A=\bigcap_{\substack{C\supseteq A\\C\text{ is closed}}}C$$
@@ -153,5 +153,44 @@
   \begin{prop}
     Let $(X,\mathcal{T})$ be a topological space and $A\subset X$ be a subset. Then, $A$ is dense in $X$ if and only if $\Cl A=X$.
   \end{prop}
+  \begin{prop}
+    Let $(X,\mathcal{T})$ be a topological space and $A\subset X$ be a subset. Then:
+    \begin{itemize}
+      \item If $U\subset A$ is open, then $U\subset\Int A$.
+      \item If $A\subset C$ is closed, then $\Cl A\subset C$.
+    \end{itemize}
+  \end{prop}
+  \begin{definition}
+    Let $(X,\mathcal{T})$ be a topological space and $A\subset X$ be a subset. The \textit{boundary of $A$} is: $$\Fr A=\Cl(A)\cap\Cl(X\setminus A)$$
+  \end{definition}
+  \begin{definition}
+    Let $(X,\mathcal{T})$ be a topological space and $x\in X$. We say that $N\subset X$ is a \textit{neighbourhood of $x$} if $\exists U\in\mathcal{T}$ such that $x\in U\subset N$.
+  \end{definition}
+  \begin{definition}
+    Let $(X,\mathcal{T})$ be a topological space and $A\subset X$ be a subset. We say that $x\in X$ is an \textit{interior point of $A$} if $A$ is a neighbourhood of $x$.
+  \end{definition}
+  \begin{definition}
+    Let $(X,\mathcal{T})$ be a topological space and $A\subset X$ be a subset. We say that $x\in X$ is an \textit{adherent point of $A$} if for all neighbourhood $N$ of $x$ we have that $N\cap A\ne\varnothing$.
+  \end{definition}
+  \begin{prop}
+    Let $(X,\mathcal{T})$ be a topological space and $A\subset X$ be a subset. Then:
+    \begin{enumerate}
+      \item $\Int A$ is the set containing all the interior points of $A$.
+      \item $\Cl A$ is the set containing all the adherent points of $A$.
+    \end{enumerate}
+  \end{prop}
+  \begin{prop}
+    Let $(X,\mathcal{T})$ be a topological space and $A,B\subset X$ be subsets. Then:
+    \begin{align*}
+      \Int(\Int (A))=      & \Int A              & \Cl(\Cl (A))=       & \Cl A             \\
+      A\subset B\implies   & \Int A\subset\Int B & A\subset B\implies  & \Cl A\subset\Cl B \\
+      \Int(X\setminus A)=  & X\setminus \Cl A    & \Cl(X\setminus A)=  & X\setminus \Int A \\
+      \Int(A\cap B)=       & \Int A\cap\Int B    & \Cl(A\cap B)\subset & \Cl A\cap\Cl B    \\
+      \Int(A\cup B)\supset & \Int A\cup\Int B    & \Cl(A\cup B)=       & \Cl A\cup\Cl B
+    \end{align*}
+  \end{prop}
+  \begin{theorem}
+    Let $(X,\mathcal{T}_X)$ and $(Y,\mathcal{T}_Y)$ be topological spaces, $A\subset X$ be a subset and $f:(X,\mathcal{T}_X)\rightarrow (Y,\mathcal{T}_Y)$ be a continuous function. Then: $$f(\Cl(A))\subset \Cl(f(A))$$
+  \end{theorem}
 \end{multicols}
 \end{document}

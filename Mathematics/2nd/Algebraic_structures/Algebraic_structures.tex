@@ -858,25 +858,25 @@
     Let $R$ be an integral domain. Consider the set: $$R\times(R\setminus\{0\})=\{(a,b):a,b\in R,b\ne 0\}$$ We define the relation $\sim$ in the following way: $$(a_1,b_1)\sim(a_2,b_2)\iff a_1b_2=a_2b_1,$$ for all $(a_1,b_1),(a_2,b_2)\in R\times(R\setminus\{0\})$.
   \end{definition}
   \begin{lemma}
-    The relation $\sim$ is an equivalence relation. We denote by $\mathrm{Frac}(R)$ the set of equivalence classes $\quot{R\times(R\setminus\{0\})}{\sim}$ and by $\frac{a}{b}$ the equivalence class $\overline{(a,b)}\in\mathrm{Frac}(R)$. $\mathrm{Frac}(R)$ is called \textit{field of fractions of $R$}.
+    The relation $\sim$ is an equivalence relation. We denote by $Q(R)$ the set of equivalence classes $\quot{R\times(R\setminus\{0\})}{\sim}$ and by $\frac{a}{b}$ the equivalence class $\overline{(a,b)}\in Q(R)$. $Q(R)$ is called \textit{field of fractions of $R$}.
   \end{lemma}
   \begin{definition}
-    Let $R$ be an integral domain. We define the sum and multiplication in $\mathrm{Frac}(R)$ as follows:
+    Let $R$ be an integral domain. We define the sum and multiplication in $Q(R)$ as follows:
     \begin{enumerate}
-      \item $\frac{a_1}{b_1}+\frac{a_2}{b_2}=\frac{a_1b_2+a_2b_1}{b_1b_2}$, $\forall\frac{a_1}{b_1},\frac{a_2}{b_2}\in\mathrm{Frac}(R)$
-      \item $\frac{a_1}{b_1}\cdot\frac{a_2}{b_2}=\frac{a_1a_2}{b_1b_2}$, $\forall\frac{a_1}{b_1},\frac{a_2}{b_2}\in\mathrm{Frac}(R)$
+      \item $\frac{a_1}{b_1}+\frac{a_2}{b_2}=\frac{a_1b_2+a_2b_1}{b_1b_2}$, $\forall\frac{a_1}{b_1},\frac{a_2}{b_2}\in Q(R)$
+      \item $\frac{a_1}{b_1}\cdot\frac{a_2}{b_2}=\frac{a_1a_2}{b_1b_2}$, $\forall\frac{a_1}{b_1},\frac{a_2}{b_2}\in Q(R)$
     \end{enumerate}
   \end{definition}
   \begin{theorem}
-    Let $R$ be an integral domain and consider $(\mathrm{Frac}(R),+,\cdot)$ with the operations $+$ and $\cdot$ defined above. Then:
+    Let $R$ be an integral domain and consider $(Q(R),+,\cdot)$ with the operations $+$ and $\cdot$ defined above. Then:
     \begin{enumerate}
-      \item $(\mathrm{Frac}(R),+,\cdot)$ is a field.
+      \item $(Q(R),+,\cdot)$ is a field.
       \item The function
             \begin{align*}
-              i:R & \longrightarrow \mathrm{Frac}(R) \\
+              i:R & \longrightarrow Q(R)    \\
               r   & \longmapsto \frac{r}{1}
             \end{align*}
-            is an injective ring morphism and satisfies the following property: If $K$ is a field and $\phi:R\rightarrow K$ is an injective ring morphism, then $\exists!\psi:\mathrm{Frac}(R)\rightarrow K$ such that $\psi$ is a ring morphism, and the diagram of figure \ref{theorem4} is commutative.
+            is an injective ring morphism and satisfies the following property: If $K$ is a field and $\phi:R\rightarrow K$ is an injective ring morphism, then $\exists!\psi:Q(R)\rightarrow K$ such that $\psi$ is a ring morphism, and the diagram of figure \ref{theorem4} is commutative.
     \end{enumerate}
     \begin{center}
       \begin{minipage}{\linewidth}
@@ -914,11 +914,20 @@
     Let $R$ be a UFD and $p(x)\in R[x]$ be a primitive polynomial. The following statements are equivalent:
     \begin{enumerate}
       \item $p(x)$ is irreducible in $R[x]$.
-      \item $p(x)$ is irreducible in $\mathrm{Frac}(R[x])$.
+      \item $p(x)$ is irreducible in $Q(R[x])$.
       \item $p(x)$ is prime in $R[x]$.
-      \item $p(x)$ is prime in $\mathrm{Frac}(R[x])$.
+      \item $p(x)$ is prime in $Q(R[x])$.
     \end{enumerate}
   \end{prop}
+  \begin{corollary}[Eisenstein's criterion]
+    Let $R$ be a UFD, $a(x)=\sum_{i=0}^na_ix^i\in R[x]\setminus\{0\}$ and $p$ be a prime element in $R$ such that:
+    \begin{itemize}
+      \item $p\mid a_i$, $i=0,1,\ldots,n-1$,
+      \item $p\nmid a_n$,
+      \item $p^2\nmid a_0$.
+    \end{itemize}
+    Then, $a(x)$ is irreducible in $Q(R)[x]$.
+  \end{corollary}
   \begin{theorem}
     Let $R$ be a UFD. Then, $R[x]$ is a UFD.
   \end{theorem}

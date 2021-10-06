@@ -223,7 +223,7 @@
   \begin{prop}
     Let $(\Omega,\mathcal{A},P)$ be a probability space and $X,Y$ be two random variables such that $X\overset{\text{a.s.}}{=}Y$. Then, we have $X\overset{\text{d}}{=}Y$
   \end{prop}
-  \begin{definition}
+  \begin{definition}[Cumulative distribution function]
     Let $(\Omega,\mathcal{A},P)$ be a probability space and $X$ be a random variable. We define the \textit{cumulative distribution function (cdf)} as: \begin{align*}
       F_X:\RR & \longrightarrow [0,1]          \\
       x       & \longmapsto F_X(x):=P(X\leq x)
@@ -236,9 +236,9 @@
       \item\label{P_2} $F_X$ is \textit{càdàg}\footnote{From French ``continue à droite, limite à gauche'' (right continuous with left limits).}.
       \item\label{P_3} $\displaystyle\lim_{x\to -\infty}F_X(x)=0$ and $\displaystyle\lim_{x\to \infty}F_X(x)=1$.
       \item $F_X$ has at most a countable number of discontinuities.
-      \item $\forall s,t\in\RR$ such that $s<t$, $P(s<X\leq t)=F(t)-F(s)$.
-      \item $\displaystyle\forall x\in\RR$, $P(X<x)=\lim_{t\to x^-}F_X(t)$.
-      \item $\forall x\in\RR$, $P(X=x)=F_X(x)-\lim_{t\to x^-}F_X(t)$. That is, $F_X$ is discontinues at $x$ if and only if $P(X=x)>0$.
+      \item $\forall s,t\in\RR$ such that $s<t$, we have: $$P(s<X\leq t)=F(t)-F(s)$$
+      \item $\displaystyle\forall x\in\RR$, $\displaystyle P(X<x)=\lim_{t\to x^-}F_X(t)$.
+      \item For all $x\in\RR$: $$P(X=x)=F_X(x)-\lim_{t\to x^-}F_X(t)$$ That is, $F_X$ is discontinues at $x$ if and only if $P(X=x)>0$.
     \end{enumerate}
   \end{prop}
   \begin{theorem}
@@ -251,7 +251,7 @@
   \begin{definition}
     Let $(\Omega,\mathcal{A},P)$ be a probability space. We say that a random variable $X$ is \textit{discrete} if there exists a finite or countable set $S\subset\RR$ such that $P(X\in S)=1$. This set is called \textit{support of $X$}\footnote{By agreement, we will suppose that $S$ only contains points $x$ such that $P(X=x)>0$.}.
   \end{definition}
-  \begin{definition}
+  \begin{definition}[Probability mass function]
     Let $(\Omega,\mathcal{A},P)$ be a probability space and $X$ be a discrete random variable with support points $S=\{x_i:i\in I\}$, where $I\subseteq\NN$. The \textit{probability mass function (pmf)} of the random variable $X$ is:
     \begin{align*}
       p_X:S & \longrightarrow [0,1]          \\
@@ -267,7 +267,7 @@
     \end{enumerate}
   \end{prop}
   \begin{corollary}
-    Let $(\Omega,\mathcal{A},P)$ be a probability space, $X$ be a discrete random variable with support points $S=\{x_i:i\in I\}$, $F_X$ be its cdf and $p_X$ be its pmf. Then $\forall x\in\RR$ we have: $$F_X(x)P(X\leq x)=\sum_{i\in I:x_i\leq x}p_X(x_i)$$
+    Let $(\Omega,\mathcal{A},P)$ be a probability space, $X$ be a discrete random variable with support points $S=\{x_i:i\in I\}$, $F_X$ be its cdf and $p_X$ be its pmf. Then $\forall x\in\RR$ we have: $$F_X(x)=P(X\leq x)=\sum_{i\in I:x_i\leq x}p_X(x_i)$$
   \end{corollary}
   \begin{definition}[Degenerated distribution]
     Let $(\Omega,\mathcal{A},P)$ be a probability space. The \textit{degenerated distribution} consists in taking a constant random variable $X$ so that $$P(X=a)=1$$ for some $a\in\RR$. Here we have $S=\{a\}$.
@@ -282,14 +282,74 @@
     Let\\ $(\Omega,\mathcal{A},P)$ be a probability space and $A\in\mathcal{A}$. Suppose $P(A)=p$. The \textit{binomial distribution} is the one whose random variable $X$ is the number of successes of $A$ in a sequence of $n$ repetitions. Thus, $S=\{0,1,\ldots,n\}$ and: $$P(X=k)=\binom{n}{k}p^k{(1-p)}^{n-k}\qquad \forall k=0,1,\ldots,n$$ If $X$ follows a binomial distribution of parameters $n$ and $p$, we will write $X\sim B(n,p)$.
   \end{definition}
   \begin{definition}[Poisson distribution]
-    Let $(\Omega,\mathcal{A},P)$ be a probability space and $\lambda>0$. The \textit{Poisson distribution with parameter $\lambda$} is the one whose random variable has support $S\NN\cup\{0\}$ and: $$P(X=k)=\exp{-\lambda}\frac{\lambda^k}{k!}\qquad \forall k\in\NN\cup\{0\}$$ If $X$ follows a Poisson distribution of parameter $\lambda$, we will write $X\sim \text{Pois}(\lambda)$.
+    Let $(\Omega,\mathcal{A},P)$ be a probability space and $\lambda>0$. The \textit{Poisson distribution with parameter $\lambda$} is the one whose random variable has support $S=\NN\cup\{0\}$ and: $$P(X=k)=\exp{-\lambda}\frac{\lambda^k}{k!}\qquad \forall k\in\NN\cup\{0\}$$ If $X$ follows a Poisson distribution of parameter $\lambda$, we will write $X\sim \text{Pois}(\lambda)$.
   \end{definition}
   \begin{theorem}
-    Let $(p_n)\subset(0,1)$ be a sequence such that: $$\lim_{n\to\infty}np_n=\lambda>0$$
+    Let $(\Omega,\mathcal{A},P)$ be a probability space. Let $(p_n)\subset(0,1)$ be a sequence such that: $$\lim_{n\to\infty}np_n=\lambda>0$$
     For each $n\geq 1$, consider $X_n\sim B(n,p_n)$. Then, $\forall k\in\NN\cup\{0\}$ we have: $$\lim_{n\to\infty}P(X_n=k)=\lim_{n\to\infty}\binom{n}{k}{p_n}^k{(1-p_n)}^{n-k}=\exp{-\lambda}\frac{\lambda^k}{k!}$$
   \end{theorem}
   \begin{definition}[Geometric distribution]
     Let\\ $(\Omega,\mathcal{A},P)$ be a probability space and $A\in\mathcal{A}$. Suppose $P(A)=p$. The \textit{geometric distribution} is the one whose random variable $X$ is the number of trials needed to get one success. Thus, $S=\NN$ and: $$P(X=k)={(1-p)}^{k-1}p\qquad \forall k\in\NN$$ If $X$ follows a geometric distribution of parameters $p$, we will write $X\sim \text{Geo}(n,p)$.
   \end{definition}
+  \begin{definition}[Discrete memorylessness property]
+    Let $(\Omega,\mathcal{A},P)$ be a probability space and $X$ be a discrete random variable whose support is $\NN\cup\{0\}$ and such that $P(X >m)>0$ $\forall m\in\NN\cup\{0\}$. The \textit{distribution of $X$ is memoryless} if $\forall m,n\in\NN\cup\{0\}$, we have: $$P(X>m+n\mid X >m)=P(X>n)$$
+  \end{definition}
+  \begin{prop}
+    Let $(\Omega,\mathcal{A},P)$ be a probability space, $X$ be a discrete random variable and $p\in(0,1)$. Then, $X\sim\text{Geo}(p)$ if and only if the distribution of $X$ is memoryless.
+  \end{prop}
+  \begin{definition}[Hypergeometric distribution]
+    Let $(\Omega,\mathcal{A},P)$ be a probability space. Suppose we have a population of size $N$ of whom $K$ have a special feature (success). Let $X$ be the random variable that counts the number of successes that we have obtained in $n$ draws (without replacement). Thus, the support if $X$ is: $$S=\{\max\{n+K-N,0\},\ldots,\min\{n,K\}\}$$ And the probability is given by: $$P(X=j)=\frac{\binom{K}{j}\binom{N-K}{n-j}}{\binom{N}{n}}$$ This type of distribution is called \textit{hypergeometric distribution} and it is denoted by $X\sim \text{HG}(N,p,n)$ where $p=\frac{K}{N}$ is the proportion of successes in the population.
+  \end{definition}
+  \begin{theorem}
+    Let $(\Omega,\mathcal{A},P)$ be a probability space and $X\sim \text{HG}(N,p,n)$ such that when $N\to\infty$, $p\frac{K}{N}$ remains constant. Then:
+    $$\lim_{N\to\infty}P(X=j)=\lim_{N\to\infty}\frac{\binom{K}{j}\binom{N-K}{n-j}}{\binom{N}{n}}=\binom{n}{j}p^j{(1-p)}^{n-j}$$ which is the probability function of a binomial distribution $B(n,p)$.
+  \end{theorem}
+  \begin{definition}[Negative binomial distribution]
+    Let $(\Omega,\mathcal{A},P)$ be a probability space and $A\in\mathcal{A}$. Suppose $P(A)=p$. The \textit{negative binomial distribution} is the one whose random variable $X$ is the number of trials needed to get one $r\geq 1$ successes. Thus, $S=\{r,r+1,\ldots\}$ and: $$P(X=k)=\binom{k-1}{r-1}p^r{(1-p)}^{k-r}\qquad \forall k\geq r$$ If $X$ follows a negative binomial distribution of parameters $r$ and $p$, we will write $X\sim NB(r,p)$.
+  \end{definition}
+  \subsubsection*{Absolutely continuous random variables}
+  \begin{definition}
+    Let $(\Omega,\mathcal{A},P)$ be a probability space. We say that a random variable $X$ is \textit{absolutely continuous} if there exists a function $f:\RR\rightarrow\RR$ satisfying:
+    \begin{enumerate}
+      \item $f(x)\geq 0$, $\forall x\in\RR$.
+      \item $f$ is integrable over $\RR$ and: $$\int_{-\infty}^{+\infty}f(x)\dd x=1$$
+      \item For all $a,b\in\RR\cup\{\pm\infty\}$ with $a\leq b$, we have: $$P(a\leq X\leq b)=\int_a^bf(x)\dd x$$
+    \end{enumerate}
+    The function $f$ is called \textit{probability density function (pdf)} of $X$.
+  \end{definition}
+  \begin{prop}
+    Let $(\Omega,\mathcal{A},P)$ be a probability space, $X$ be an absolutely continuous random variable and $F_X$ be its cdf. Then:
+    \begin{enumerate}
+      \item $P(X=a)=0\quad\forall a\in \RR$
+      \item $\displaystyle F_X(b)=P(X\leq b)=\int_{-\infty}^bf(x)\dd x\quad\forall b\in\RR$
+      \item $F_X$ is continuous on $\RR$.
+      \item If $a,b\in\RR$ are such that $a<b$, then:
+            \begin{multline*}
+              P(a<X<b)=P(a\leq X<b)=\\=P(a<X\leq b)=P(a\leq X\leq b)
+            \end{multline*}
+    \end{enumerate}
+  \end{prop}
+  \begin{definition}[Continuous uniform distribution]
+    Let $(\Omega,\mathcal{A},P)$ be a probability space. We say that an absolutely continuous random variable $X$ follows a \textit{continuous uniform distribution on $(a,b)$} (also $[a,b]$), and we denoted it by $X\sim U(a,b)$, if $X$ has the pdf $$f(x)=\frac{1}{b-a}\vectorfunction{1}_{(a,b)}(x)$$ where $\vectorfunction{1}_{(a,b)}$ is the indicator function. Its cdf is:
+    \begin{multline*}
+      F_X(x)=\left\{
+      \begin{array}{ccl}
+        0                            & \text{if} & x\leq a \\
+        \displaystyle\frac{x-a}{b-a} & \text{if} & a<x<b   \\
+        1                            & \text{if} & x\geq b \\
+      \end{array}
+      \right.=\\=\frac{x-a}{b-a}\vectorfunction{1}_{(a,b)}(x)+\vectorfunction{1}_{[b,\infty)}(x)
+    \end{multline*}
+  \end{definition}
+  \begin{definition}[Exponential distribution]
+    Let $(\Omega,\mathcal{A},P)$ be a probability space. We say that an absolutely continuous random variable $X$ follows an \textit{exponential distribution of parameter $\lambda>0$}, and we denoted it by $X\sim \text{Exp}(\lambda)$, if $X$ has the pdf $$f(x)=\lambda\exp{-\lambda x}\vectorfunction{1}_{(0,\infty)}$$ Furthermore, its cdf is:
+    $$F_X(x)=(1-\exp{-\lambda x})\vectorfunction{1}_{(0,\infty)}(x)$$
+  \end{definition}
+  \begin{definition}[Continuous memorylessness property]
+    Let $(\Omega,\mathcal{A},P)$ be a probability space and $X$ be an absolutely continuous random variable such that $P(X >s)>0$ $\forall s\in\RR_{\geq 0}$. The \textit{distribution of $X$ is memoryless} if $\forall s,t\in\RR_{\geq 0}$, we have: $$P(X>s+t\mid X >s)=P(X>t)$$
+  \end{definition}
+  \begin{prop}
+    Let $(\Omega,\mathcal{A},P)$ be a probability space, $X$ be an absolutely continuous random variable and $\lambda\in\RR_{>0}$. Then, $X\sim\text{Exp}(\lambda)$ if and only if the distribution of $X$ is memoryless.
+  \end{prop}
 \end{multicols}
 \end{document}
