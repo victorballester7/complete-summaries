@@ -2,999 +2,999 @@
 
 \begin{document}
 \begin{multicols}{2}[\section{Linear algebra}]
-  \subsection{Matrices}
-  \subsubsection*{Linear systems}
-  \begin{definition}
-    A \textit{linear equation} is an equation of the form $$a_1x_1+\cdots+a_nx_n=b$$ where $x_1,\ldots,x_n$ are the \textit{variables} or \textit{unknowns} and $a_i,b\in\RR$, $i=1,\ldots,n$, are the coefficients of the equation. The term $b$ is usually called \textit{constant term}.
-  \end{definition}
-  \begin{definition}
-    A \textit{system of linear equations} is a collection of one or more linear equations involving the same set of variables.
-  \end{definition}
-  \begin{definition}
-    Let
-    \begin{equation*}
-      \arraycolsep=1pt
-      \left\{
-      \begin{array}{ccccc}
-        a_{11}x_1 & + \cdots + & a_{1n}x_n & = & b_1    \\
-        \vdots    & \vdots     & \vdots    &   & \vdots \\
-        a_{m1}x_1 & + \cdots + & a_{mn}x_n & = & b_m
-      \end{array}
-      \right.
-    \end{equation*}
-    be a system of linear equations. A \textit{solution of a system of equations} is a set of numbers $c_1,\ldots,c_n$ such that $$a_{i1}c_1+\cdots+a_{in}c_n=b_i$$ for $i=1,\ldots,m$. A linear system may behave in three possible ways:
-    \begin{enumerate}
-      \item The system has a unique solution.
-      \item The system has infinitely many solutions.
-      \item The system has no solution.
-    \end{enumerate}
-  \end{definition}
-  \begin{definition}
-    Two systems of equations are \textit{equivalent} if they have the same solutions.
-  \end{definition}
-  \subsubsection*{Matrices}
-  \begin{definition}[Matrix]
-    A \textit{matrix $\mathblack{A}$ with coefficients in $\RR$} is a table of real numbers arranged in rows and columns. That is, $\mathblack{A}$ is of the form:
-    \begin{equation*}
-      \mathblack{A}=(a_{ij})=
-      \begin{pmatrix}
-        a_{11} & \cdots & a_{1n} \\
-        \vdots & \ddots & \vdots \\
-        a_{m1} & \cdots & a_{mn}
-      \end{pmatrix}
-    \end{equation*}
-    for some values $a_{ij}\in\RR$, $i=1,\ldots,m$ and $j=1,\ldots,n$. The set of $m\times n$ matrices with real coefficients is denoted by $\mathcal{M}_{m\times n}(\RR)$\footnote{In the case when $m=n$ we will denote $\mathcal{M}_{n\times n}(\RR)$ by $\mathcal{M}_n(\RR)$.}.
-  \end{definition}
-  \begin{definition}
-    Let $\mathblack{A},\mathblack{B}\in\mathcal{M}_{m\times n}(\RR)$ and $\alpha\in\RR$. If $\mathblack{A}=(a_{ij})$ and $\mathblack{B}=(b_{ij})$, we define the \textit{sum $\mathblack{A}+\mathblack{B}$} as: $$\mathblack{A}+\mathblack{B}=(a_{ij}+b_{ij})$$
-    We define the \textit{product $\alpha\mathblack{A}$} as: $$\alpha\mathblack{A}=(\alpha a_{ij})$$
-  \end{definition}
-  \begin{prop}[Properties of addition and scalar multiplication of matrices]
-    The following properties are satisfied:
-    \begin{enumerate}
-      \item Commutativity: $$\mathblack{A}+\mathblack{B}=\mathblack{B}+\mathblack{A}$$ for all $\mathblack{A},\mathblack{B}\in\mathcal{M}_{m\times n}(\RR)$.
-      \item Associativity: $$(\mathblack{A}+\mathblack{B})+\mathblack{C}=\mathblack{A}+(\mathblack{B}+\mathblack{C})$$ for all $\mathblack{A},\mathblack{B},\mathblack{C}\in\mathcal{M}_{m\times n}(\RR)$.
-      \item Additive identity element: $\exists\mathblack{0}\in\mathcal{M}_{m\times n}(\RR)$ such that $$\mathblack{A}+\mathblack{0}=\mathblack{A}$$ for all $\mathblack{A}\in\mathcal{M}_{m\times n}(\RR)$.
-      \item Additive inverse element: $\forall\mathblack{A}\in\mathcal{M}_{m\times n}(\RR)$ $\exists(-\mathblack{A})\in\mathcal{M}_{m\times n}(\RR)$ such that $$\mathblack{A}+(-\mathblack{A})=\mathblack{0}$$
-      \item Distributivity: $$(\alpha+\beta)\mathblack{A}=\alpha\mathblack{A}+\beta\mathblack{A}$$ for all $\mathblack{A}\in\mathcal{M}_{m\times n}(\RR)$ and all $\alpha,\beta\in\RR$.
-    \end{enumerate}
-  \end{prop}
-  \begin{definition}
-    Let $\mathblack{A}\in\mathcal{M}_{m\times n}(\RR)$ and $\mathblack{B}\in\mathcal{M}_{n\times p}(\RR)$. We define the \textit{product $\mathblack{A}\mathblack{B}$} as $$\mathblack{A}\mathblack{B}=(c_{ij})\quad\text{where }c_{ij}=\sum_{k=1}^na_{ik}b_{kj}$$
-  \end{definition}
-  \begin{prop}[Properties of matrix product]
-    The following properties are satisfied:
-    \begin{enumerate}
-      \item Associativity: $$(\mathblack{A}\mathblack{B})\mathblack{C}=\mathblack{A}(\mathblack{B}\mathblack{C})$$ for all $\mathblack{A}\in\mathcal{M}_{m\times n}(\RR)$, $\mathblack{B}\in\mathcal{M}_{n\times p}(\RR)$ and $\mathblack{C}\in\mathcal{M}_{p\times q}(\RR)$.
-      \item Multiplicative identity element: $\exists\mathblack{I}_n\in\mathcal{M}_n(\RR)$ such that
-            \begin{align*}
-               & \mathblack{A}\mathblack{I}_n=\mathblack{A}\quad\forall\mathblack{A}\in\mathcal{M}_{m\times n}(\RR)\text{ and } \\
-               & \mathblack{I}_n\mathblack{A}=\mathblack{A}\quad\forall\mathblack{A}\in\mathcal{M}_{n\times p}(\RR)
-            \end{align*}
-      \item Distributivity: $$(\mathblack{A}+\mathblack{B})\mathblack{C}=\mathblack{A}\mathblack{C}+\mathblack{B}\mathblack{C},$$ for all $\mathblack{A},\mathblack{B}\in\mathcal{M}_{m\times n}(\RR)$ and $\mathblack{C}\in\mathcal{M}_{n\times p}(\RR)$.
-    \end{enumerate}
-  \end{prop}
-  \begin{definition}
-    We say that a matrix $\mathblack{A}\in\mathcal{M}_n(\RR)$ is \textit{invertible} if there is a matrix $\mathblack{B}\in\mathcal{M}_n(\RR)$ satisfying $$\mathblack{A}\mathblack{B}=\mathblack{B}\mathblack{A}=\mathblack{I}_n$$
-    The set of invertible matrices of size $n$ over $\RR$ is denoted by $\GL_n(\RR)$\footnote{Or more generally, the set of invertible matrices of size $n$ over a field (see definition \ref{AS-field}) $K$ is denoted by $\GL_n(K)$.}.
-  \end{definition}
-  \begin{lemma}
-    The product of invertible matrices is invertible.
-  \end{lemma}
-  \subsubsection*{Echelon form of a matrix}
-  \begin{definition}
-    Let $\mathblack{A}\in\mathcal{M}_{m\times n}(\RR)$ be a matrix. The \textit{$i$-th pivot of $\mathblack{A}$} is the first nonzero element in the $i$-th row of $\mathblack{A}$.
-  \end{definition}
-  \begin{definition}[Row echelon form]
-    A matrix $\mathblack{A}\in\mathcal{M}_{m\times n}(\RR)$ is in \textit{row echelon form} if:
-    \begin{itemize}
-      \item All rows consisting of only zeros are at the bottom.
-      \item The pivot of a nonzero row is always strictly to the right of the pivot of the row above it.
-    \end{itemize}
-  \end{definition}
-  \begin{definition}[Reduced row echelon form]
-    A matrix $\mathblack{A}\in\mathcal{M}_{m\times n}(\RR)$ is in \textit{reduced row echelon form} if:
-    \begin{itemize}
-      \item It is in row echelon form.
-      \item Pivots are equal to 1.
-      \item Each column containing a pivot has zeros in all its other entries.
-    \end{itemize}
-  \end{definition}
-  \begin{theorem}[Gau\ss' theorem]
-    Let $\mathblack{A}\in\mathcal{M}_{m\times n}(\RR)$ be a matrix. Then, there is a matrix $\mathblack{P}\in\GL_m(\RR)$ such that $\mathblack{P}\mathblack{A}=\mathblack{A'}$ is in reduced row echelon form. Moreover, $\mathblack{A'}$ is uniquely determined by $\mathblack{A}$.
-  \end{theorem}
-  \begin{theorem}[PAQ reduction theorem]
-    Let $\mathblack{A}\in\mathcal{M}_{m\times n}(\RR)$ be a matrix. Then, there exist matrices $\mathblack{P}\in\GL_m(\RR)$ and $\mathblack{Q}\in\GL_n(\RR)$ such that
-    $$\mathblack{P}\mathblack{A}\mathblack{Q}=\left(
-      \begin{array}{@{\,} c|c @{\,}}
-          \mathblack{I}_r & \mathblack{0} \\
-          \hline
-          \mathblack{0}   & \mathblack{0}
-        \end{array}
-      \right).$$
-    The number $r$ is uniquely determined by $\mathblack{A}$.
-  \end{theorem}
-  \subsubsection*{Rank of a matrix}
-  \begin{definition}[Rank]
-    Let $\mathblack{A}\in\mathcal{M}_{m\times n}(\RR)$ be a matrix and suppose
-    $$\mathblack{P}\mathblack{A}\mathblack{Q}=\left(
-      \begin{array}{@{\,} c|c @{\,}}
-          \mathblack{I}_r & \mathblack{0} \\
-          \hline
-          \mathblack{0}   & \mathblack{0}
-        \end{array}
-      \right)$$ for some matrices $\mathblack{P}\in\mathcal{M}_m(\RR)$ and $\mathblack{Q}\in\mathcal{M}_n(\RR)$. We define the \textit{rank of $\mathblack{A}$}, denoted by $\rank \mathblack{A}$, as the number ones in the matrix $\mathblack{P}\mathblack{A}\mathblack{Q}$, that is, $\rank\mathblack{A}:=r$.
-  \end{definition}
-  \begin{prop}
-    Let $\mathblack{A},\mathblack{A}'\in\mathcal{M}_{m\times n}(\RR)$, $\mathblack{B},\mathblack{B}'\in\mathcal{M}_{1\times n}(\RR)$ and $\mathblack{P}\in\GL_m(\RR)$ be matrices. Suppose we have a system of linear equations $\mathblack{A}\mathblack{x}=\mathblack{B}$. If $\mathblack{P}(\mathblack{A}\mid\mathblack{B})=(\mathblack{A}'\mid\mathblack{B}')$\footnote{Here $(\mathblack{A}\mid\mathblack{B})$ denotes the augmented matrix obtained by appending the columns of $\mathblack{B}$ to the columns of $\mathblack{A}$.}, then the systems $\mathblack{A}\mathblack{x}=\mathblack{B}$ and $\mathblack{A}'\mathblack{x}=\mathblack{B}'$ are equivalent.
-  \end{prop}
-  \begin{corollary}
-    The reduced row echelon form of an invertible matrix is the identity matrix.
-  \end{corollary}
-  \begin{definition}[Transposition]
-    Let $\mathblack{A}\in\mathcal{M}_{m\times n}(\RR)$ be a matrix. If $\mathblack{A}=(a_{ij})$, we define the \textit{transpose $\transpose{A}$ of $\mathblack{A}$} as the matrix $\transpose{A}=(b_{ij})$, where $b_{ij}=a_{ji}$ for $i=1,\ldots,m$ and $j=1,\ldots,n$.
-  \end{definition}
-  \begin{prop}
-    Let $\mathblack{A}\in\mathcal{M}_{m\times n}(\RR)$ be a matrix. Then, $\rank \mathblack{A}=\rank\transpose{A}$.
-  \end{prop}
-  \begin{theorem}[Rouché-Frobenius theorem]
-    Let $\mathblack{A}\mathblack{x}=\mathblack{B}$ be a system of equations with $n$ variables. The system is:
-    \begin{itemize}
-      \item \textit{determined and consistent} if and only if $$\rank \mathblack{A}=\rank (\mathblack{A}\mid \mathblack{B})=n$$
-      \item \textit{indeterminate with $s$ free variables} if and only if $$\rank \mathblack{A}=\rank (\mathblack{A}\mid \mathblack{B})=n-s$$
-      \item \textit{inconsistent} if and only if $$\rank \mathblack{A}\ne\rank (\mathblack{A}\mid \mathblack{B})$$
-    \end{itemize}
-  \end{theorem}
-  \subsubsection*{Determinant of a matrix}
-  \begin{definition}[Determinant]
-    A determinant is a function $\det:\mathcal{M}_n(\RR)\rightarrow\RR$ satisfying the following properties:
-    \begin{enumerate}
-      \item If $\mathblack{A}=(\mathblack{a}_1\mid\cdots\mid \mathblack{a}_n)$, where $\mathblack{a}_i$ are column vectors in $\RR^n$ for $i=1,\ldots,n$ and $\mathblack{a}_j=\lambda\mathblack{u}+\mu\mathblack{v}$ for some other column vectors $\mathblack{u}$ and $\mathblack{v}$, then:
-            \begin{multline*}
-              \det \mathblack{A}=\det(\mathblack{a}_1\mid\cdots\mid\mathblack{a}_j\mid\cdots\mid \mathblack{a}_n)=\\=\det(\mathblack{a}_1\mid\cdots\mid \mathblack{a}_{j-1}\mid\lambda \mathblack{u}+\mu \mathblack{v}\mid \mathblack{a}_{j+1}\mid\cdots\mid \mathblack{a}_n)=\\=\lambda\det(\mathblack{a}_1\mid\cdots\mid \mathblack{a}_{j-1}\mid \mathblack{u}\mid \mathblack{a}_{j+1}\mid\cdots\mid \mathblack{a}_n)+\\+\mu\det(\mathblack{a}_1\mid\cdots\mid \mathblack{a}_{j-1}\mid \mathblack{v}\mid \mathblack{a}_{j+1}\mid\cdots\mid \mathblack{a}_n)
-            \end{multline*}
-      \item The determinant changes its sign whenever two columns are swapped.
-      \item $\det \mathblack{I}_n=1$ for all $n\in\NN$.
-    \end{enumerate}
-  \end{definition}
-  \begin{lemma}
-    Whenever two columns of a matrix are identical, the determinant is 0.
-  \end{lemma}
-  \begin{prop}
-    Let $\mathblack{A}\in\mathcal{M}_n(\RR)$ be a matrix in its row echelon form. If $\mathblack{A}=(a_{ij})$, then: $$\det\mathblack{A}=\prod_{i=1}^na_{ii}$$
-  \end{prop}
-  \begin{prop}
-    Let $\mathblack{A}\in\mathcal{M}_n(\RR)$ be a matrix. The following are equivalent:
-    \begin{enumerate}
-      \item $\mathblack{A}$ is not invertible.
-      \item $\rank\mathblack{A}<n$.
-      \item $\det\mathblack{A}=0$.
-    \end{enumerate}
-  \end{prop}
-  \begin{theorem}
-    Let $\det:\mathcal{M}_n(\RR)\rightarrow\RR$ be a determinant. Then, for all matrices $\mathblack{A},\mathblack{B}\in\mathcal{M}_n(\RR)$: $$\det (\mathblack{A}\mathblack{B})=\det\mathblack{A}\det\mathblack{B}.$$
-  \end{theorem}
-  \begin{corollary}
-    Let $\det,\det':\mathcal{M}_n(\RR)\rightarrow\RR$ be two determinants. Then, for all matrix $\mathblack{A}\in\mathcal{M}_n(\RR)$: $$\det\mathblack{A}={\det}'\mathblack{A}$$
-  \end{corollary}
-  \begin{prop}
-    Let $\mathblack{A}\in\mathcal{M}_n(\RR)$. Then: $$\det \mathblack{A}=\sum_{\sigma\in S_n}\varepsilon(\sigma)\prod_{i=1}^na_{i\sigma(i)}$$
-  \end{prop}
-  \begin{prop}
-    For all matrix $\mathblack{A}\in\mathcal{M}_n(\RR)$: $$\det\mathblack{A}=\det\transpose{A}$$
-  \end{prop}
-  \begin{prop}
-    Let $\mathblack{A}=(a_{ij})\in\mathcal{M}_n(\RR)$. We denote by $\mathblack{A}_{ij}$ the square matrix obtained from $\mathblack{A}$ by removing the $i$-th row and $j$-th column. Then, for every $i\in\{1,\ldots,n\}$, $$\det\mathblack{A}=\sum_{j=1}^n(-1)^{i+j}a_{ij}\det\mathblack{A}_{ij}.$$
-  \end{prop}
-  \begin{definition}
-    Let $\mathblack{A}=(a_{ij})\in\mathcal{M}_n(\RR)$. We define the \textit{cofactor matrix $\mathblack{C}$ of $\mathblack{A}$} as: $$\mathblack{C}=(b_{ij}),\quad\text{where }b_{ij}=(-1)^{i+j}\det\mathblack{A}_{ij}\footnote{$\mathblack{C}$ is usually denoted as $\cofactor\mathblack{A}$.}.$$ We define the \textit{adjugate matrix $\adjugate\mathblack{A}$ of $\mathblack{A}$} as: $$\adjugate\mathblack{A}=\transpose{\mathblack{C}}.$$
-  \end{definition}
-  \begin{theorem}
-    Let $\mathblack{A}\in\mathcal{M}_n(\RR)$. Then: $$\mathblack{A}\adjugate\mathblack{A}=(\det \mathblack{A})\mathblack{I}_n$$ Moreover if $\det \mathblack{A}\ne 0$, then: $$\mathblack{A}^{-1}=\frac{1}{\det \mathblack{A}}\adjugate\mathblack{A}$$
-  \end{theorem}
-  \subsection{Vector spaces}
-  \subsubsection*{Introduction and basic definitions}
-  \begin{definition}
-    A \textit{vector space over a field\footnote{See definition \ref{AS-field}.} $K$} is a set $V$ together with two operations
-    \begin{align*}
-      +:V\times V                       & \longrightarrow V                            & \cdot:K\times V         & \longrightarrow V                      \\
-      (\mathblack{v}_1,\mathblack{v}_2) & \longmapsto \mathblack{v}_1+ \mathblack{v}_2 & (\lambda,\mathblack{v}) & \longmapsto \lambda\cdot \mathblack{v}
-    \end{align*}
-    that satisfy the following properties:
-    \begin{enumerate}
-      \item $\mathblack{v}_1+(\mathblack{v}_2+\mathblack{v}_3)=(\mathblack{v}_1+\mathblack{v}_2)+\mathblack{v}_3\quad\forall\mathblack{v}_1,\mathblack{v}_2,\mathblack{v}_3\in V$.
-      \item $\mathblack{v}_1+\mathblack{v}_2=\mathblack{v}_2+\mathblack{v}_1\quad\forall\mathblack{v}_1,\mathblack{v}_2\in V$.
-      \item $\exists\mathblack{0}\in V$ such that $\mathblack{v}+\mathblack{0}=\mathblack{v}\quad\forall\mathblack{v}\in V$.
-      \item $\forall\mathblack{v}\in V$ there exists $-\mathblack{v}\in V$ such that $\mathblack{v}+(-\mathblack{v})=\mathblack{0}$.
-      \item $\lambda\cdot(\mu\cdot\mathblack{v})=(\lambda\mu)\cdot\mathblack{v}\quad\forall\mathblack{v}\in V$ and $\forall\lambda,\mu\in K$.
-      \item $1\cdot\mathblack{v}=\mathblack{v}\quad\forall\mathblack{v}\in V$, where 1 denotes the multiplicative identity element in $K$.
-      \item $\lambda\cdot(\mathblack{v}_1+\mathblack{v}_2)=\lambda\cdot\mathblack{v}_1+\lambda\cdot\mathblack{v}_2\quad\forall\mathblack{v}_1,\mathblack{v}_2\in V$ and $\forall\lambda\in K$.
-      \item $(\lambda+\mu)\cdot\mathblack{v}=\lambda\cdot\mathblack{v}+\mu\cdot\mathblack{v}\quad\forall\mathblack{v}\in V$ and $\forall\lambda,\mu\in K$.
-    \end{enumerate}
-    In these conditions, we say that $(V,+,\cdot)$ is a vector space\footnote{For simplicity we will denote the vector space only by $V$ and if the context is clear we won't refer to its associated field. Moreover sometimes we will also omit the product $\cdot$ between a scalar and a vector.}.
-  \end{definition}
-  \begin{definition}
-    Let $V$ be a vector space over a field $K$ and $U\subseteq V$ be a subset of $V$. Then, $U$ is a vector space over $K$ if the following property is satisfied:
-    $$\lambda \mathblack{u}_1+\mu \mathblack{u}_2\in U\quad\forall \mathblack{u}_1,\mathblack{u}_2\in U\text{ and }\forall\lambda,\mu\in K$$
-  \end{definition}
-  \begin{definition}
-    Let $V$ be a vector space and $U\subseteq V$. $U$ is a \textit{vector subspace of $V$} if it's itself a vector space with the operations defined in $V$.
-  \end{definition}
-  \begin{definition}
-    Let $V$ be a vector space over a field $K$. A \textit{linear combination of the vectors $\mathblack{v}_1,\ldots,\mathblack{v}_n\in V$} is a vector of the form $$a_1\mathblack{v}_1+\cdots+a_n\mathblack{v}_n$$ where $a_i\in K$, $i=1,\ldots,n$.
-  \end{definition}
-  \begin{definition}
-    Let $V$ be a vector space over a field $K$ and $U\subseteq V$. The set $$\langle U\rangle=\{a_1\mathblack{u}_1+\cdots+a_n\mathblack{u}_n:a_i\in K,\mathblack{u}_i\in U,i=1,\ldots,n\}$$ is called \textit{subspace generated by $U$}.
-  \end{definition}
-  \begin{lemma}
-    Let $V$ be a vector space and $U\subseteq V$. Then, $\langle U\rangle$ is a vector subspace of $V$. Moreover, $\langle U\rangle$ is the smallest subspace containing $U$.
-  \end{lemma}
-  \begin{definition}
-    Let $V$ be a vector space and $U\subseteq V$. We say that $U$ is a \textit{generating set of $V$} if $\langle U\rangle=V$.
-  \end{definition}
-  \subsubsection*{Linear independence}
-  \begin{definition}
-    Let $V$ be a vector space over a field $K$. The vectors $\mathblack{v}_1,\ldots,\mathblack{v}_n\in V$ are \textit{linearly independent} if the unique solution of the equation $$a_1\mathblack{v}_1+\cdots+a_n\mathblack{v}_n=0$$ for $a_i\in K$, $i=1,\ldots,n$, is $a_1=\cdots=a_n=0$. Otherwise we say that the vectors $\mathblack{v}_1,\ldots,\mathblack{v}_n$ are \textit{linearly dependent}.
-  \end{definition}
-  \begin{lemma}
-    Let $V$ be a vector space. The vectors $\mathblack{v}_1,\ldots,\mathblack{v}_n$ are linearly dependent if and only if one of them is a linear combination of the others.
-  \end{lemma}
-  \begin{definition}
-    Let $V$ be a vector space. A \textit{basis of $V$} is an ordered set $\mathfrak{B}=(\mathblack{v}_1,\ldots,\mathblack{v}_n)$ of vectors of $V$ such that:
-    \begin{enumerate}
-      \item $\langle \mathblack{v}_1,\ldots,\mathblack{v}_n\rangle = V$.
-      \item $\mathblack{v}_1,\ldots,\mathblack{v}_n$ are linearly independent.
-    \end{enumerate}
-  \end{definition}
-  \begin{lemma}[Steinitz exchange lemma]
-    Let $V$ be a vector space, $\mathfrak{B}$ be bases of $V$ be and $\mathblack{v}_1,\ldots,\mathblack{v}_k\in V$ be linearly independent vectors of $V$. Then, we can exchange $k$ appropriate vectors of $\mathfrak{B}$ by $\mathblack{v}_1,\ldots,\mathblack{v}_k$ to define a new basis.
-  \end{lemma}
-  \begin{corollary}
-    Let $V$ be a vector space that has a finite basis $\mathfrak{B}=(\mathblack{v}_1,\ldots,\mathblack{v}_n)$. Then, all basis of $V$ be are finite and they have the same number ($n$) of vectors.
-  \end{corollary}
-  \begin{lemma}
-    Let $V$ be a vector space. Suppose we have a generating set $S=\{\mathblack{v}_1,\ldots,\mathblack{v}_n\}$ of $V$. Then, $V$ be admits a basis formed with a subset of $S$.
-  \end{lemma}
-  \begin{definition}
-    Let $V$ be a finite vector space. The \textit{dimension of $V$}, denoted by $\dim V$, is the number of vectors in any basis of $V$.
-  \end{definition}
-  \begin{definition}
-    Let $V$ be a finite vector space over a field $K$, $\mathfrak{B}=(\mathblack{v}_1,\ldots,\mathblack{v}_n)$ be a basis of $V$ be and $\mathblack{v}\in V$. Suppose $$\mathblack{v}=a_1\mathblack{v}_1+\cdots+a_n\mathblack{v}_n$$ for some $a_i\in K$, $i=1,\ldots,n$. We call $(a_1,\ldots,a_n)\in K^n$ \textit{coordinates of $\mathblack{v}$ on the basis $\mathfrak{B}$} and we denote it by $[\mathblack{v}]_{\mathfrak{B}}$.
-  \end{definition}
-  \begin{prop}
-    Let $V$ be a vector space. If $\dim V<\infty$, the maximum number of linearly independent vectors is equal to $\dim V$. If $\dim V=\infty$, there is no such maximum.
-  \end{prop}
-  \begin{prop}
-    Let $V$ be a vector space of dimension $n$. Then, $n$ is de minimum size of a generating set of $V$.
-  \end{prop}
-  \begin{prop}
-    Let $V$ be a finite vector space and $U$ be a vector subspace of $V$. Then, $\dim U\leq\dim V$ and $$\dim U=\dim V\iff U=V$$
-  \end{prop}
-  \subsubsection*{Sum of subspaces}
-  \begin{lemma}
-    Let $V$ be a vector space and $U,W\subseteq V$ be two vector subspaces of $V$. Then, the intersection $U\cap W$ is a vector subspace of $V$.
-  \end{lemma}
-  \begin{definition}
-    Let $V$ be a vector space and $U,W\subseteq V$ be two vector subspaces of $V$. The \textit{sum of $U$ and $W$} is: $$U+W=\langle U\cup W\rangle=\{\mathblack{u}+\mathblack{w}: \mathblack{u}\in U,\mathblack{w}\in W\}$$
-  \end{definition}
-  \begin{prop}[Gra\ss mann formula]
-    Let $V$ be a finite vector space and $U,W\subseteq V$ be two vector subspace of $V$. Then: $$\dim (U+W)+\dim(U\cap W)=\dim U+\dim W$$
-  \end{prop}
-  \begin{lemma}
-    Let $V$ be a vector space and $U,W\subseteq V$ be two vector subspaces of $V$. Then, $U\cap W=\{0\}$ if and only if all vectors $\mathblack{v}\in U+W$ can be written uniquely as $\mathblack{v}=\mathblack{u}+\mathblack{w}$, with $\mathblack{u}\in U$ and $\mathblack{w}\in W$.
-  \end{lemma}
-  \begin{definition}[Direct sum]
-    Let $V$ be a vector space and $U,W\subseteq V$ be two vector subspaces of $V$. Then, the sum $U+W$ is \textit{direct} if $U\cap W=\{0\}$. In this case we denote the sum as $U\oplus W$. More generally, if $U_1,\ldots,U_n\subseteq V$ are vector subspaces of $V$, the sum $U=U_1+\cdots+U_n$ is direct if all vector $\mathblack{u}\in U$ can be written uniquely as $\mathblack{u}=\mathblack{u}_1+\cdots+\mathblack{u}_n$, where $\mathblack{u}_i\in U_i$ for $i=1,\ldots,n$. In this case we denote the sum by $U_1\oplus\cdots\oplus U_n$.
-  \end{definition}
-  \subsubsection*{Rank of a matrix}
-  \begin{definition}
-    Let $\mathblack{A}\in\mathcal{M}_{n\times m}(\RR)$. The \textit{row rank of $\mathblack{A}$} is the dimension of the subspace generated by the rows of $\mathblack{A}$ in $\RR^m$. Analogously, the \textit{column rank of $\mathblack{A}$} is the dimension of the subspace generated by the columns of $\mathblack{A}$ in $\RR^n$.
-  \end{definition}
-  \begin{prop}
-    Let $\mathblack{A}\in\mathcal{M}_{n\times m}(\RR)$. Then, the row rank of $\mathblack{A}$ is equal to the column rank of $\mathblack{A}$. Therefore, we refer to it simply as \textit{rank of $\mathblack{A}$} or $\rank\mathblack{A}$.
-  \end{prop}
-  \begin{definition}
-    Let $\mathblack{A}\in\mathcal{M}_n(\RR)$. A \textit{minor of order $k$ of $\mathblack{A}$} is a submatrix $\mathblack{A}'\in\mathcal{M}_k(\RR)$ obtained from $\mathblack{A}$ selecting $k$ rows and $k$ columns of $\mathblack{A}$.
-  \end{definition}
-  \begin{prop}
-    Let $\mathblack{A}\in\mathcal{M}_{n\times m}(\RR)$. Then:
-    $$\rank\mathblack{A}=\max\{k:\text{$\mathblack{A}$\ has an invertible minor of order $k$}\}$$
-  \end{prop}
-  \subsubsection*{Quotient vector space}
-  \begin{definition}
-    Let $V$ be a vector space and $U\subseteq V$ be a vector subspace. We say that $W\subseteq V$ is a \textit{complementary subspace of $U$} if $U\oplus W=V$.
-  \end{definition}
-  \begin{definition}
-    Let $V$ be a finite vector space of dimension $n$ and $U\subseteq V$ be a vector subspace of dimension $m$. Then, there exists a complementary subspace of $U$ and its dimension is $n-m$.
-  \end{definition}
-  \begin{definition}
-    Let $V$ be a vector space and $U\subseteq V$ be a vector subspace. We say the vectors $\mathblack{v}_1,\mathblack{v}_2\in V$ are \textit{equivalent modulo $U$}, $\mathblack{v}_1\sim_U\mathblack{v}_2$, if $\mathblack{v}_1-\mathblack{v}_2\in U$.
-  \end{definition}
-  \begin{lemma}
-    Let $V$ be a vector space and $U\subseteq V$ be a vector subspace. Then, $\sim_U$ is an equivalence relation and, moreover, if $\mathblack{v}\in V$ the \textit{equivalence class $[\mathblack{v}]$ of $\mathblack{v}$} is: $$[\mathblack{v}]=\mathblack{v}+U:=\{\mathblack{v}+\mathblack{u}:\mathblack{u}\in U\}$$
-  \end{lemma}
-  \begin{definition}
-    Let $V$ be a vector space over a field $K$ and $U\subseteq V$ be a vector subspace. We define the \textit{quotient space $\quot{V}{U}$ under $\sim_U$} as the set of equivalence classes with the operations defined as:
-    $$[\mathblack{v}_1]+[\mathblack{v}_2]=[\mathblack{v}_1+\mathblack{v}_2]\qquad \lambda[\mathblack{v}_1]=[\lambda\mathblack{v}_1]$$
-    for all $\mathblack{v}_1,\mathblack{v}_2\in V$ and all $\lambda\in K$.
-  \end{definition}
-  \begin{prop}
-    Let $V$ be a vector space over a field $K$ and $U\subseteq V$ be a vector subspace. The set $\quot{V}{U}$ together with the two operations defined above is a vector space over $K$.
-  \end{prop}
-  \begin{prop}
-    Let $V$ be a finite vector space of dimension $n$ and $U\subseteq V$ be a vector subspace. Then: $$\dim\left(\quot{V}{U}\right)=\dim V-\dim U$$
-  \end{prop}
-  \subsection{Linear maps}
-  \begin{definition}
-    Let $U$, $V$ be two vector spaces over a field $K$. A function $f:U\rightarrow V$ is a \textit{linear map} if $\forall\mathblack{u}_1,\mathblack{u}_2\in U$ and $\forall\lambda\in K$ the following two conditions are satisfied:
-    \begin{enumerate}
-      \item $f(\mathblack{u}_1+\mathblack{u}_2)=f(\mathblack{u}_1)+f(\mathblack{u}_2)$.
-      \item $f(\lambda \mathblack{u}_1)=\lambda f(\mathblack{u}_1)$.
-    \end{enumerate}
-  \end{definition}
-  \begin{prop}
-    Let $U$, $V$ be two vector spaces over a field $K$. Then, if $f:U\rightarrow V$ is a linear map, $\forall\mathblack{u}_1,\mathblack{u}_2\in U$ and $\forall\lambda,\mu\in K$ we have:
-    \begin{enumerate}
-      \item $f(\mathblack{0})=\mathblack{0}$.
-      \item $f(-\mathblack{u}_1)=-f(\mathblack{u}_1)$.
-      \item $f(\lambda\mathblack{u}_1+\mu\mathblack{u}_2)=\lambda f(\mathblack{u}_1)+\mu f(\mathblack{u}_2)$.
-    \end{enumerate}
-  \end{prop}
-  \begin{prop}
-    Let $U$, $V$, $W$ be three vector spaces. If $f:U\rightarrow V$ and $g:V\rightarrow W$ are linear maps, then $g\circ f:U\rightarrow W$ is a linear map.
-  \end{prop}
-  \begin{prop}
-    Let $U$, $V$ be two vector spaces. If $f:U\rightarrow V$ is a bijective linear map, then $f^{-1}:U\rightarrow V$ is a linear map.
-  \end{prop}
-  \begin{prop}
-    Let $U$, $V$ be two vector spaces, $f:U\rightarrow V$ be a linear map and $W\subseteq U$ and $Z\subseteq V$ be vector subspaces. Then:
-    \begin{enumerate}
-      \item $f(W)=\{f(\mathblack{w}): \mathblack{w}\in W\}\subseteq V$ is a vector subspace.
-      \item $f^{-1}(Z)=\{\mathblack{u}\in U: f(\mathblack{u})\in Z\}\subseteq U$ is a vector subspace.
-    \end{enumerate}
-    In particular, $f(V)$ is denoted by $\im f$ and $f^{-1}(\{0\})$ is denoted by $\ker f$ and these subspaces are called \textit{image of $f$} and \textit{kernel of $f$}, respectively. More precisely, their definitions are:
-    $$\im f=\{f(\mathblack{u}): \mathblack{u}\in U\}\qquad\ker f=\{\mathblack{u}\in U: f(\mathblack{u})=0\}$$
-  \end{prop}
-  \begin{prop}
-    Let $U$, $V$ be two vector spaces and $f:U\rightarrow V$ be a linear map. Then:
-    \begin{enumerate}
-      \item $f$ is injective if and only if $\ker f=\{0\}$
-      \item $f$ is surjective if and only if $\im f=V$.
-    \end{enumerate}
-  \end{prop}
-  \begin{corollary}
-    Let $U$, $V$ be two finite vector spaces and $f:U\rightarrow V$ be a linear map. Then:
-    \begin{enumerate}
-      \item $f$ is injective if and only if $\dim(\ker f)=0$
-      \item $f$ is surjective if and only if $\dim(\im f)=\dim V$.
-    \end{enumerate}
-  \end{corollary}
-  \begin{definition}
-    \hfill
-    \begin{itemize}
-      \item A monomorphism is an injective linear map.
-      \item An epimorphism is a surjective linear map.
-      \item An isomorphism is a bijective linear map.
-      \item An endomorphism is a linear map from a vector space to itself.
-      \item An automorphism is a bijective endomorphism.
-    \end{itemize}
-  \end{definition}
-  \begin{definition}
-    We say that two vector spaces $U$ and $V$ are \textit{isomorphic}, $V\cong U$, if there exists an isomorphism between them.
-  \end{definition}
-  \begin{prop}
-    Let $U$, $V$ be two vector spaces and $f:U\rightarrow V$ be a monomorphism. If $\mathblack{u}_1,\ldots,\mathblack{u}_n\in U$ are linearly independent vectors, then $f(\mathblack{u}_1),\ldots,f(\mathblack{u}_n)$  are linearly independent.
-  \end{prop}
-  \begin{lemma}
-    Let $U$, $V$ be two vector spaces and $f:U\rightarrow V$ be a linear map. If $\mathblack{u}_1,\ldots,\mathblack{u}_n\in U$, then: $$\langle f(\mathblack{u}_1),\ldots,f(\mathblack{u}_n)\rangle=f(\langle\mathblack{u}_1,\ldots,\mathblack{u}_n\rangle)$$
-  \end{lemma}
-  \begin{corollary}
-    Let $U$, $V$ be two vector spaces and $f:U\rightarrow V$ be an epimorphism. If $\langle\mathblack{u}_1,\ldots,\mathblack{u}_n\rangle= U$, then $\langle f(\mathblack{u}_1),\ldots,f(\mathblack{u}_n)\rangle=V$.
-  \end{corollary}
-  \begin{corollary}
-    Let $U$, $V$ be two vector spaces and $f:U\rightarrow V$ be an isomorphism. If $(\mathblack{u}_1,\ldots,\mathblack{u}_n)$ is a basis of $U$, then $(f(\mathblack{u}_1),\ldots,f(\mathblack{u}_n))$ is a basis of $V$.
-  \end{corollary}
-  \begin{theorem}[Coordination theorem]
-    Let $V$ be a finite vector space over a field $K$ of dimension $n$ and $\mathfrak{B}=(\mathblack{v}_1,\ldots,\mathblack{v}_n)$ be a basis of $V$. Then, the function $f:K^n\rightarrow V$ defined by $$f(a_1,\ldots,a_n)=a_1\mathblack{v}_1+\cdots a_n\mathblack{v}_n$$ is a isomorphism.
-  \end{theorem}
-  \begin{corollary}
-    Two finite vector spaces are isomorphic if and only if they have the same dimension.
-  \end{corollary}
-  \subsubsection*{Isomorphism theorems}
-  \begin{theorem}[First isomorphism theorem]
-    Let $U$, $V$ be two vector spaces and $f:U\rightarrow V$ be a linear map. Then, there exists an isomorphism $\Tilde{f}:\quot{U}{\ker f}\rightarrow \im f$ satisfying $f=\Tilde{f}\circ\pi$, where $\pi:U\rightarrow \quot{U}{\ker f}$, $\pi(\mathblack{u})=[\mathblack{u}]$.
-    \begin{center}
-      \begin{minipage}{\linewidth}
-        \centering
-        \includestandalone[mode=image|tex,width=0.35\linewidth]{Images/first_isomorphism}
-        \captionof{figure}{}
-      \end{minipage}
-    \end{center}
-  \end{theorem}
-  \begin{corollary}
-    Let $U$, $V$ be two vector spaces such that $\dim U=n$ and let $f:U\rightarrow V$ be a linear map. Then: $$\dim(\ker f)+\dim(\im f)=n$$
-  \end{corollary}
-  \begin{corollary}
-    Let $U$, $V$ be two finite vector spaces of dimensions $n$ and $f:U\rightarrow V$ be a linear map. Then: $$f\text{ is injective}\iff f\text{ is surjective}\iff f\text{ is bijective}$$
-  \end{corollary}
-  \begin{theorem}[Second isomorphism theorem]
-    Let $V$ be a vector space and $U,W\subseteq V$ be two vector subspaces. Then, there exists an isomorphism $$\quot{U}{U\cap W}\cong\quot{U+W}{W}$$
-  \end{theorem}
-  \begin{theorem}[Third isomorphism theorem]
-    Let $U$, $V$, $W$ be three vector spaces such that $W\subseteq U\subseteq V$. Then, there exists an isomorphism $$\quot{{(\textstyle\quot{V}{W})}}{{(\textstyle\quot{U}{W})}}\cong\quot{V}{U}$$
-  \end{theorem}
-  \begin{theorem}
-    Let $U$, $V$ be two vector spaces over a field $K$, $\mathfrak{B}=(\mathblack{u}_1,\ldots,\mathblack{u}_n)$ be a basis of $U$ and $\mathblack{v}_1,\ldots,\mathblack{v}_n\in V$ be any vectors of $V$. Then, there exists a unique linear map $f:U\rightarrow V$ such that $f(\mathblack{u}_i)=\mathblack{v}_i$, $i=1,\ldots,n$.
-  \end{theorem}
-  \subsubsection*{Matrix of a linear map}
-  \begin{prop}
-    Let $U$, $V$ be two finite vector spaces over a field $K$ with $\dim U=n$ and $\dim V=m$, $\mathfrak{B}$ and $\mathfrak{B}'$ be bases of $U$ be and $V$ respectively and $f:U\rightarrow V$ be a linear map. Then, there exists a matrix $\mathblack{A}\in\mathcal{M}_{m\times n}(K)$ such that $\forall\mathblack{u}\in U$: $$[f(\mathblack{u})]_{\mathfrak{B}'}=\mathblack{A}[\mathblack{u}]_\mathfrak{B}$$
-    The matrix $\mathblack{A}$ is called \textit{matrix of $f$ in the basis $\mathfrak{B}$ and $\mathfrak{B}'$} and it is denoted by $[f]_{\mathfrak{B},\mathfrak{B}'}$\footnote{If $U=V$ and $\mathfrak{B}=\mathfrak{B}'$, we denote $[f]_{\mathfrak{B},\mathfrak{B}}$ simply by $[f]_{\mathfrak{B}}$.}.
-  \end{prop}
-  \begin{corollary}
-    Let $V$ be a finite vector space, $\mathfrak{B}$ and $\mathfrak{B}'$ be two basis of $V$ respectively and $\id:V\rightarrow V$ be the identity linear map. Then, $\forall\mathblack{u}\in V$ we have: $$[\mathblack{u}]_{\mathfrak{B}'}=[\id]_{\mathfrak{B},\mathfrak{B}'}[\mathblack{u}]_\mathfrak{B}$$ The matrix $[\id]_{\mathfrak{B},\mathfrak{B}'}$ is called \textit{change-of-basis matrix}.
-  \end{corollary}
-  \begin{prop}
-    Let $U$, $V$, $W$ be three vector spaces, $\mathfrak{B}$, $\mathfrak{B}'$, $\mathfrak{B}''$ be bases of $U$, $V$ and $W$ respectively and $f:U\rightarrow V$ and $g:V\rightarrow W$ be linear maps. Then, $g\circ f:U\rightarrow W$ has the following matrix in the basis $\mathfrak{B}$ and $\mathfrak{B}''$: $$[g\circ f]_{\mathfrak{B},\mathfrak{B}''}=[g]_{\mathfrak{B}',\mathfrak{B}''}[f]_{\mathfrak{B},\mathfrak{B}'}$$
-  \end{prop}
-  \begin{corollary}
-    Let $V$ be a finite vector space, $\mathfrak{B}$ and $\mathfrak{B}'$ be two basis of $V$. Then, the matrix $[id]_{\mathfrak{B},\mathfrak{B}'}$ is invertible and $${\left([\id]_{\mathfrak{B},\mathfrak{B}'}\right)}^{-1}=[\id]_{\mathfrak{B}',\mathfrak{B}}$$
-  \end{corollary}
-  \begin{corollary}
-    Let $U$, $V$ be two finite vector spaces, $\mathfrak{B}$ and $\mathfrak{B}'$ be bases of $U$ and $V$ respectively and $f:U\rightarrow V$ be a linear map. Then:
-    \begin{enumerate}
-      \item $f$ is injective $\iff\rank[f]_{\mathfrak{B},\mathfrak{B}'}=\dim U$.
-      \item $f$ is surjective $\iff\rank[f]_{\mathfrak{B},\mathfrak{B}'}=\dim V$.
-    \end{enumerate}
-  \end{corollary}
-  \begin{corollary}
-    Let $U$, $V$ be two finite vector spaces. A linear map $f:U\rightarrow V$ is an isomorphism if and only if there exist basis $\mathfrak{B}$ and $\mathfrak{B}'$ of $U$ and $V$ respectively such that $[f]_{\mathfrak{B},\mathfrak{B}'}$ is invertible.
-  \end{corollary}
-  \begin{prop}[Change of basis formula]
-    Let $U$, $V$ be two finite vector spaces, $\mathfrak{B}_1$ and $\mathfrak{B}_2$ be bases of $U$, $\mathfrak{B}_1'$ and $\mathfrak{B}_2'$ be bases of $V$ and $f:U\rightarrow V$ be a linear map. Then: $$[f]_{\mathfrak{B}_2,\mathfrak{B}_2'}=[\id]_{\mathfrak{B}_1',\mathfrak{B}_2'}[f]_{\mathfrak{B}_1,\mathfrak{B}_1'}[\id]_{\mathfrak{B}_2,\mathfrak{B}_1}$$
-  \end{prop}
-  \begin{lemma}
-    Let $U$, $V$ be two finite vector spaces over a field $K$ with $\dim U=n$ and $\dim V=m$ and $\mathfrak{B}$ and $\mathfrak{B}'$ be bases of $U$ be and $V$ respectively. Then, any matrix $\mathblack{A}\in\mathcal{M}_{m\times n}(K)$ determines a linear map $f:U\rightarrow V$ with $[f]_{\mathfrak{B},\mathfrak{B}'}=\mathblack{A}$.
-  \end{lemma}
-  \begin{theorem}
-    Let $U$, $V$ be two finite vector spaces and $f:U\rightarrow V$ be a linear map. Then, there exist basis $\mathfrak{B}$ of $U$ and $\mathfrak{B}'$ of $V$ such that:
-    $$[f]_{\mathfrak{B},\mathfrak{B}'}=\left(
-      \begin{array}{c|c}
-          \mathblack{I}_r & \mathblack{0} \\
-          \hline
-          \mathblack{0}   & \mathblack{0}
-        \end{array}\right)$$
-    where $r=\dim\left(\im f\right)$.
-  \end{theorem}
-  \subsubsection*{Dual space}
-  \begin{lemma}
-    Let $U$, $V$ be two finite vector spaces over a field $K$. Then, the set $$\mathcal{L}(U,V):=\{f: f\text{ is a linear map from $U$ to $V$}\}\footnote{If $U=V$, we denote $\mathcal{L}(V,V)$ simply as $\mathcal{L}(V)$.}$$ is a vector space over $K$ with the operations defined as:
-    \begin{enumerate}
-      \item $(f+g)(\mathblack{u})=f(\mathblack{u})+f(\mathblack{u})\quad\forall f,g\in\mathcal{L}(U,V)$ and $\forall \mathblack{u}\in U$.
-      \item $(f\lambda)(\mathblack{u})=\lambda f(\mathblack{u})\quad\forall f,g\in\mathcal{L}(U,V)$, $\forall \mathblack{u}\in U$ and $\forall \lambda\in K$.
-    \end{enumerate}
-  \end{lemma}
-  \begin{prop}
-    Let $U$, $V$ be two finite vector spaces over a field $K$ with $\dim U=n$ and $\dim V=m$. Then, for all basis $\mathfrak{\mathfrak{B}}$ of $U$ be and $\mathfrak{B}'$ of $V$, the function
-    \begin{align*}
-      \mathcal{L}(U,V) & \longrightarrow\mathcal{M}_{m\times n}(K)   \\
-      f                & \longmapsto[f]_{\mathfrak{B},\mathfrak{B}'}
-    \end{align*}
-    is a isomorphism.
-  \end{prop}
-  \begin{corollary}
-    Let $U$, $V$ be two finite vector spaces with $\dim U=n$, $\dim V=m$. Then, $\dim \mathcal{L}(U,V)=nm$.
-  \end{corollary}
-  \begin{definition}
-    Let $V$ be a vector space over a field $K$. We define the \textit{dual space $V^*$ of $V$} as: $$V^*:=\mathcal{L}(V,K)$$
-  \end{definition}
-  \begin{prop}
-    Let $V$ be a finite vector space over a field $K$ with $\dim V=n$ and $\mathfrak{B}$ be a basis of $V$. Then, the function
-    \begin{align*}
-      V^*    & \longrightarrow\mathcal{M}_{1\times n}(K) \\
-      \omega & \longmapsto[\omega]_{\mathfrak{B},1}
-    \end{align*}
-    is a isomorphism. Therefore, $\dim V^*=\dim V$.
-  \end{prop}
-  \begin{definition}
-    We define the \textit{Kronecker delta $\delta_{ij}$} as the function: $$\delta_{ij}=\left\{
-      \begin{array}{ccc}
-        0 & \text{if} & i\ne j \\
-        1 & \text{if} & i=j
-      \end{array}
-      \right.$$
-  \end{definition}
-  \begin{definition}
-    Let $V$ be a finite vector space and $\mathfrak{B}=(\mathblack{v}_1,\ldots,\mathblack{v}_n)$ be a basis of $V$. We define the \textit{dual basis $\mathfrak{B}^*$ of $\mathfrak{B}$} as the basis of $V^*$ formed by $(\eta_1,\ldots,\eta_n)$ where $$\eta_i(\mathblack{v}_j)=\delta_{ij}$$
-  \end{definition}
-  \begin{lemma}
-    Let $V$ be a vector space over a field $K$, $\mathfrak{B}$ be a basis of $V$ and $(\mathblack{v}_1^*,\ldots,\mathblack{v}_n^*)$ be the dual basis of $\mathfrak{B}$. Then, $\forall \mathblack{v}\in V$: $$[\mathblack{v}]_\mathfrak{B}=(\mathblack{v}_1^*(\mathblack{v}),\ldots,\mathblack{v}_n^*(\mathblack{v}))\in K^n$$
-  \end{lemma}
-  \begin{lemma}
-    Let $V$ be a vector space over a field $K$, $\mathfrak{B}=(\mathblack{v}_1,\ldots,\mathblack{v}_n)$ be a basis of $V$ and $\mathfrak{B}^*$ be the dual basis of $\mathfrak{B}$. Then, $\forall \omega\in V^*$: $$[\omega]_{\mathfrak{B}^*}=(\omega(\mathblack{v}_1),\ldots,\omega(\mathblack{v}_n))\in K^n$$
-  \end{lemma}
-  \begin{definition}[Dual map]
-    Let $U$, $V$ be two vector spaces over a field $K$ and $f\in \mathcal{L}(U,V)$. The function $f^*$ defined by
-    \begin{align*}
-      f^*:U^* & \longrightarrow V^*      \\
-      \omega  & \longmapsto\omega\circ f
-    \end{align*}
-    is a linear map and it's called \textit{dual map of $f$}.
-  \end{definition}
-  \begin{theorem}
-    Let $U$, $V$ be two finite vector spaces, $\mathfrak{B}$ and $\mathfrak{B}'$ be bases of $U$ and $V$ respectively and $f\in\mathcal{L}(U,V)$. Then: $$[f^*]_{\mathfrak{B}'^*,\mathfrak{B}^*}={([f]_{\mathfrak{B},\mathfrak{B}'})}^\mathrm{T}$$
-  \end{theorem}
-  \subsubsection*{Double dual space}
-  \begin{definition}[Double dual space]
-    Let $V$ be a vector space over a field $K$. The \textit{double dual space $V^{**}$ of $V$} is defined as: $$V^{**}:={(V^*)}^*=\mathcal{L}(V^*,K)$$
-  \end{definition}
-  \begin{prop}
-    Let $V$ be a vector space over a field $K$ and $\mathblack{v}\in V$. We define the function:
-    \begin{align*}
-      \phi_{\mathblack{v}}:V^* & \longrightarrow K                \\
-      \omega                   & \longmapsto\omega(\mathblack{v})
-    \end{align*}
-    which is linear. This map induces an injective linear map $\Phi$ defined by:
-    \begin{align*}
-      \Phi:V        & \longrightarrow V^{**}          \\
-      \mathblack{v} & \longmapsto\phi_{\mathblack{v}}
-    \end{align*}
-    Moreover, if $\dim V<\infty$, $\Phi$ is a natural isomorphism\footnote{This means that the definition of $\Phi$ does not depend on a choice of basis.}.
-  \end{prop}
-  \subsubsection*{Annihilator space}
-  \begin{definition}
-    Let $V$ be a vector space and $U\subseteq V^*$ be a vector subspace of $V^*$. We define the \textit{annihilator of $U$} as:
-    $$U^0=\{\mathblack{v}\in V:\omega(\mathblack{v})=0\;\forall\omega\in U\}$$
-  \end{definition}
-  \begin{lemma}
-    Let $V$ be a vector space and $U\subseteq V^*$ be a vector subspace of $V^*$. If $U=\langle\omega_1,\ldots,\omega_n\rangle$, then $U^0$ is the set of solutions of the system:
-    $$\left\{
-      \begin{array}{c}
-        \omega_1(\mathblack{v})=0 \\
-        \vdots                    \\
-        \omega_n(\mathblack{v})=0
-      \end{array}
-      \right.$$
-  \end{lemma}
-  \begin{lemma}
-    Let $V$ be a vector space and $U\subseteq V^*$ be a vector subspace of $V^*$. Then, $U^0$ is a vector subspace of $V^*$.
-  \end{lemma}
-  \begin{theorem}
-    Let $V$ be a finite vector space and $U\subseteq V^*$ be a vector subspace of $V^*$. Then: $$\dim U^0+\dim U=\dim V$$
-  \end{theorem}
-  \begin{definition}
-    Let $V$ be a vector space and $U\subseteq V$ be a vector subspace of $V$. We define the \textit{annihilator of $U$} as:
-    $$U^0=\{\omega\in V^*:\omega(\mathblack{v})=0\;\forall\mathblack{v}\in U\}$$
-  \end{definition}
-  \begin{lemma}
-    Let $V$ be a vector space and $U\subseteq V$  be a vector subspace of $V$. If $U=\langle\mathblack{v}_1,\ldots,\mathblack{v}_n\rangle$, then: $$U^0=\{\omega\in V^*:\omega(\mathblack{v}_1)=\cdots=\omega(\mathblack{v}_n)=0\}$$
-  \end{lemma}
-  \begin{prop}
-    Let $V$ be a vector space. Then, whether $U\subseteq V$ or $U\subseteq V^*$, we have: $${(U^0)}^0=U$$
-  \end{prop}
-  \subsection{Classification of endomorphisms}
-  \begin{definition}
-    Let $V$ be a vector space over a field $K$ and $\lambda\in K$. A \textit{homothety of ratio $\lambda$} is a linear map $f:V\rightarrow V$ such that $f(\mathblack{v})=\lambda\mathblack{v}$ $\forall\mathblack{v}\in V$.
-  \end{definition}
-  \subsubsection*{Similarity}
-  \begin{definition}
-    Let $V$ be a vector space and $f,g\in\mathcal{L}(V)$. We say that $f$ and $g$ are \textit{similar} if there are basis $\mathfrak{B}$ and $\mathfrak{B}'$ of $V$ such that $[f]_\mathfrak{B}=[g]_{\mathfrak{B}'}$.
-  \end{definition}
-  \begin{lemma}
-    Let $V$ be a vector space, $\mathfrak{B}$ and $\mathfrak{B}'$ basis of $V$ and $f\in\mathcal{L}(V)$. If $\mathblack{M}=[f]_\mathfrak{B}$, $\mathblack{N}=[f]_{\mathfrak{B}'}$ and $\mathblack{P}=[\id]_{\mathfrak{B},\mathfrak{B}'}$, then: $$\mathblack{M}=\mathblack{P}^{-1}\mathblack{N}\mathblack{P}$$
-  \end{lemma}
-  \begin{definition}
-    Let $K$ be a field. Two matrices $\mathblack{M}, \mathblack{N}\in\mathcal{M}_n(K)$ are \textit{similar} if there exists a matrix $\mathblack{P}\in\GL_n(K)$ such that $\mathblack{M}=\mathblack{P}^{-1}\mathblack{N}\mathblack{P}$.
-  \end{definition}
-  \begin{prop}
-    Let $V$ be a finite vector space and $f,g\in\mathcal{L}(V)$.
-    \begin{enumerate}
-      \item $f$ and $g$ are similar if and only if for all basis $\mathfrak{B}$ of $V$ the matrices $[f]_\mathfrak{B}$ and $[g]_\mathfrak{B}$ are similar.
-      \item $f$ and $g$ are similar if and only if there is an automorphism $h\in\mathcal{L}(V)$ such that $g=h^{-1}fh$.
-    \end{enumerate}
-  \end{prop}
-  \subsubsection*{Diagonalization}
-  \begin{definition}
-    Let $K$ be a field. A matrix $\mathblack{A}=(a_{ij})\in\mathcal{M}_n(K)$ is \textit{diagonal} if $a_{ij}=0$ whenever $i\ne j$. That is, $\mathblack{A}$ is of the form:
-    $$\mathblack{A}=
-      \begin{pmatrix}
-        a_{11} & 0      & \cdots & 0      \\
-        0      & a_{22} & \ddots & \vdots \\
-        \vdots & \ddots & \ddots & 0      \\
-        0      & \cdots & 0      & a_{nn}
-      \end{pmatrix}
-    $$
-  \end{definition}
-  \begin{definition}
-    Let $K$ be a field. A matrix $\mathblack{A}\in\mathcal{M}_n(K)$ is \textit{diagonalizable} if it is similar to diagonal matrix.
-  \end{definition}
-  \begin{definition}
-    An endomorphism is \textit{diagonalizable} if its associated matrix in some basis is diagonalizable.
-  \end{definition}
-  \begin{definition}
-    Let $V$ be a vector space over a field $K$ and $f\in\mathcal{L}(V)$. We say that a nonzero vector $\mathblack{v}\in V$ is an \textit{eigenvector of $f$ with eigenvalue $\lambda\in K$} if $f(\mathblack{v})=\lambda \mathblack{v}$.
-  \end{definition}
-  \begin{lemma}
-    Let $V$ be a vector space over a field $K$, $f\in\mathcal{L}(V)$ and $\lambda\in K$. The eigenvectors of $f$ of eigenvalue $\lambda$ are the nonzero vectors of the subspace $\ker(f-\lambda\id)$, called \textit{eigenspace corresponding to $\lambda$}.
-  \end{lemma}
-  \begin{lemma}
-    Let $V$ be a vector space over a field $K$ with $\dim V=n$, $\mathfrak{B}$ be a basis of $V$ and $f\in\mathcal{L}(V)$. Then, $\det([f-x\id]_\mathfrak{B})$ is a polynomial on the variable $x$ of degree $n$ and with coefficients in $K$. Moreover, the dominant coefficient is $(-1)^n$ and the constant term is $\det([f]_\mathfrak{B})$.
-  \end{lemma}
-  \begin{corollary}
-    Let $V$ be a vector space of dimension $n$ and $f\in\mathcal{L}(V)$. Then, $f$ has at most $n$ distinct eigenvalues.
-  \end{corollary}
-  \begin{corollary}
-    Let $V$ be a vector space over $\CC$ and $f\in\mathcal{L}(V)$. Then, $f$ has at least one eigenvalue.
-  \end{corollary}
-  \begin{definition}
-    Let $K$ be a field and $\mathblack{A}\in\mathcal{M}_n(K)$. The polynomial $p_{\mathblack{A}}(\lambda)=\det(\mathblack{A}-\lambda \mathblack{I}_n)$ is called \textit{characteristic polynomial of $\mathblack{A}$}.
-  \end{definition}
-  \begin{prop}
-    Let $V$ be a vector space and $f\in\mathcal{L}(V)$. For all basis $\mathfrak{B}$ of $V$, the characteristic polynomial of $[f]_\mathfrak{B}$ is the same. Therefore, we denote it $p_f(\lambda)$ and we refer to it as \textit{characteristic polynomial of $f$}.
-  \end{prop}
-  \begin{prop}
-    Let $V$ be a vector space and $f\in\mathcal{L}(V)$. Then, eigenvectors of $f$ of distinct eigenvalues are linearly independent.
-  \end{prop}
-  \begin{corollary}
-    Let $V$ be a vector space and $f\in\mathcal{L}(V)$. Suppose $\lambda_1,\ldots,\lambda_n$ are the distinct eigenvalues of $f$ and $V_{\lambda_1},\ldots,V_{\lambda_n}$ are their corresponded eigenspaces. Then, $$V_{\lambda_1}+\cdots+V_{\lambda_n}$$ is a direct sum.
-  \end{corollary}
-  \begin{prop}
-    Let $V$ be a finite vector space of dimension $n$, $f\in\mathcal{L}(V)$ and $\lambda$ be a root of multiplicity $m$ of the characteristic polynomial $p_f(x)$. Then: $$1\leq \dim(\ker(f-\lambda\id))\leq m$$
-  \end{prop}
-  \begin{theorem}[Diagonalization theorem]
-    Let $V$ be a finite vector space and $f\in\mathcal{L}(V)$. $f$ is diagonalizable if and only if:
-    \begin{enumerate}
-      \item $p_f(x)=(-1)^n(x-\lambda_1)^{m_1}\cdots(x-\lambda_k)^{m_k}$ with distinct $\lambda_1,\ldots,\lambda_k\in K$.
-      \item $\dim(\ker(f-\lambda_i \id))=m_i$, $i=1,\ldots,k$.
-    \end{enumerate}
-  \end{theorem}
-  \begin{corollary}
-    Let $V$ be a finite vector space with $\dim V=n$ and $f\in\mathcal{L}(V)$. If $f$ has $n$ distinct eigenvalues, $f$ is diagonalizable.
-  \end{corollary}
-  \begin{prop}
-    Let $V$ be a finite vector space and $f,g\in\mathcal{L}(V)$ such that $f$ and $g$ are similar. Then: $$f\text{ is diagonalizable}\iff g\text{ is diagonalizable}$$
-  \end{prop}
-  \begin{lemma}
-    Let $K$ be a field and $\mathblack{A},\mathblack{B}\in\mathcal{M}_n(K)$ be similar matrices. Then, $\forall k\in\NN$, $\mathblack{A}^k$ and $\mathblack{B}^k$ are similar.
-  \end{lemma}
-  \begin{lemma}
-    Let $V$ be a finite vector space over a field $K$ with $\dim V=n$ and $f\in\mathcal{L}(V)$. Then, the function $\phi_f:K[x]\rightarrow\mathcal{L}(V)$ defined by $$\phi_f(a_0+a_1x+\cdots+a_nx^n)=a_0+a_1f+\cdots+a_nf^n$$
-    is linear and satisfies: $$\phi_f((pq)(x))=\phi_f(p(x))\phi_f(q(x))\quad\forall p(x),q(x)\in K[x]$$
-  \end{lemma}
-  \begin{definition}
-    Let $V$ be a finite vector space with $\dim V=n$ and $f\in\mathcal{L}(V)$. The \textit{minimal polynomial $m_f(x)\in K[x]$ of $f$} is the unique a polynomial satisfying:
-    \begin{itemize}
-      \item $m_f(f)=0$.
-      \item $m_f$ is monic.
-      \item $m_f$ is of minimum degree.
-    \end{itemize}
-  \end{definition}
-  \begin{prop}
-    Let $V$ be a vector space over a field $K$ and $f\in\mathcal{L}(V)$. If $p(x)\in K[x]$ is such that $p(f)=0$, then $m_f(x)\mid p(x)$.
-  \end{prop}
-  \subsubsection*{Cayley-Hamilton theorem}
-  \begin{theorem}[Cayley-Hamilton theorem]
-    Let $K$ be a field, $n\geq 1$ and $\mathblack{A}\in\mathcal{M}_n(K)$. Then: $$m_{\mathblack{A}}(x)\mid p_{\mathblack{A}}(x)\mid m_{\mathblack{A}}(x)^n$$ Therefore $p_{\mathblack{A}}(\mathblack{A})=0$ and $m_{\mathblack{A}}(x)$ and $p_{\mathblack{A}}(x)$ have the same irreducible factors.
-  \end{theorem}
-  \begin{corollary}
-    Let $K$ be a field and $\mathblack{A}\in\GL_n(K)$ be a matrix with $p_{\mathblack{A}}(x)=a_0+a_1x+\cdots+(-1)^nx^n$. Then: $$\mathblack{A}^{-1}=-\frac{1}{a_0}\left(\mathblack{A}^{n-1}+a_{n-1}\mathblack{A}^{n-2}+\cdots+a_2\mathblack{A}+a_1\mathblack{I}_n\right)$$
-  \end{corollary}
-  \begin{lemma}
-    Let $V$ be a finite vector space over a field $K$, $\mathfrak{B}$ be a basis of $V$ and $f\in\mathcal{L}(V)$. Then $\forall\lambda,\mu\in K$ and $\forall r,s\in\NN$:
-    \begin{enumerate}
-      \item $[f^r]_\mathfrak{B}={\left([f]_\mathfrak{B}\right)}^r$.
-      \item $[\lambda f]_\mathfrak{B}=\lambda[f]_\mathfrak{B}$.
-      \item $[\lambda f^r+\mu f^s]_\mathfrak{B}=[\lambda f^r]_\mathfrak{B}+[\mu f^s]_\mathfrak{B}$.
-    \end{enumerate}
-  \end{lemma}
-  \begin{lemma}
-    Let $V$ be a finite vector space over a field $K$, $f\in\mathcal{L}(V)$ and $\mathblack{v}$ be an eigenvector of $f$ of eigenvalue $\lambda$. Then, $\forall p(x)\in K[x]$ we have: $$p(f)(\mathblack{v})=p(\lambda)\mathblack{v}$$
-  \end{lemma}
-  \begin{theorem}[Cayley-Hamilton theorem]
-    Let $V$ be a finite vector space over a field $K$ such that $\dim V=n$ and $f\in\mathcal{L}(V)$. Then: $$m_f(x)\mid p_f(x)\mid m_f(x)^n$$
-  \end{theorem}
-  \begin{definition}
-    A field $K$ satisfying that all polynomial with coefficient in $K$ of degree greater o equal to 1 factorizes as a product of linear factors is called an \textit{algebraically closed field}.
-  \end{definition}
-  \begin{definition}
-    Let $V$ be a vector space and $f\in\mathcal{L}(V)$. We say that $U\subseteq V$ is an \textit{invariant subspace of $V$ under $f$} if $f(U)\subseteq U$.
-  \end{definition}
-  \begin{lemma}
-    Let $V$ be a vector space and $f\in\mathcal{L}(V)$.
-    \begin{enumerate}
-      \item If $U\subseteq V$ is an invariant subspace of $V$ under $f$, then: $$p_{f_{|U}}(x)\mid p_f(x)\footnote{Here $f_{|U}$ is the function $f$ restricted to the subspace $U$.}$$
-      \item If $U_1$ and $U_2$ are invariant subspaces of $V$ under $f$ such that $V=U_1\oplus U_2$, then:
-            \begin{itemize}
-              \item $p_f(x)=p_{f_{|U_1}}(x)\cdot p_{f_{|U_2}}(x)$.
-              \item $m_f(x)=\lcm(m_{f_{|U_1}}(x),m_{f_{|U_2}}(x))$.
-            \end{itemize}
-    \end{enumerate}
-  \end{lemma}
-  \begin{lemma}
-    Let $V$ be a vector space, $f\in\mathcal{L}(V)$ and $a(x),b(x)\in K[x]$. Suppose $m(x)=\lcm(a(x),b(x))$ and $d(x)=\gcd(a(x),b(x))$. Then:
-    \begin{enumerate}
-      \item $\ker(a(f))+\ker(b(f))=\ker(m(f))$.
-      \item $\ker(a(f))\cap\ker(b(f))=\ker(d(f))$.
-    \end{enumerate}
-    In particular, if $a(x)$ and $b(x)$ are coprime and $a(f)b(f)=0$, then: $$V=\ker(a(x))\oplus\ker(b(x))$$
-  \end{lemma}
-  \begin{theorem}
-    Let $V$ be a finite vector space such that $\dim V=n$ and $f\in\mathcal{L}(V)$. If $p_f(x)={q_1(x)}^{n_1}\cdots q_r(x)^{n_r}$ and $m_f(x)={q_1(x)}^{m_1}\cdots {q_r(x)}^{m_r}$ with $q_i(x)$ distinct irreducible factors, then: $$V=\ker({q_1(f)}^{m_1})\oplus\cdots\oplus\ker({q_r(f)}^{m_r})$$ Moreover, $\dim\left(\ker({q_i(f)}^{m_i})\right)=n_i\deg(q_i(x))$.
-  \end{theorem}
-  \subsubsection*{Jordan form}
-  \begin{definition}
-    Let $K$ be a field and $\mathblack{A}\in\mathcal{M}_n(K)$. A \textit{jordan bloc of $\mathblack{A}$} is a square submatrix composed by a value $\lambda\in K$ on the principal diagonal, ones on the diagonal just below the principal diagonal and zeros elsewhere. That is, a Jordan bloc is a matrix of the form:
-    $$
-      \begin{pmatrix}
-        \lambda & 0       & 0       & \cdots & 0       \\
-        1       & \lambda & 0       & \ddots & \vdots  \\
-        0       & 1       & \lambda & \ddots & 0       \\
-        \vdots  & \ddots  & \ddots  & \ddots & 0       \\
-        0       & \cdots  & 0       & 1      & \lambda
-      \end{pmatrix}
-    $$
-  \end{definition}
-  \begin{prop}
-    Let $V$ be a finite vector space over a field $K$ with $\dim V=n$ and $f\in\mathcal{L}(V)$. If $p_f(x)=\pm(x-\lambda_1)^{n_1}\cdots(x-\lambda_k)^{n_k}$, there exists a basis $\mathfrak{B}$ of $V$ such that
-    $$[f]_{\mathfrak{B}}=
-      \begin{pmatrix}
-        \mathblack{J}_1 & \mathblack{0}   & \cdots        & \mathblack{0}   \\
-        \mathblack{0}   & \mathblack{J}_2 & \ddots        & \vdots          \\
-        \vdots          & \ddots          & \ddots        & \mathblack{0}   \\
-        \mathblack{0}   & \cdots          & \mathblack{0} & \mathblack{J}_r \\
-      \end{pmatrix}
-    $$
-    where $\mathblack{J}_1,\ldots,\mathblack{J}_r$ are Jordan blocs associated with eigenvalues $\lambda_1,\ldots,\lambda_k$ satisfying:
-    \begin{enumerate}
-      \item\label{LA_diag1} For $i=1,\ldots,k$, the sum of the sizes of Jordan blocs associated with the eigenvalue $\lambda_i$ is $n_i$.
-      \item\label{LA_diag2} The sizes of Jordan blocs are determined by $\dim(\ker((f-\lambda_i\id)^r))$, $r=1,\ldots,n_i-1$.
-    \end{enumerate}
-  \end{prop}
-  \begin{prop}
-    Let $V$ be a finite vector space over a field $K$ with $\dim V=n$ and $\mathblack{A}\in\mathcal{M}_n(K)$. If $p_{\mathblack{A}}(x)=\pm(x-\lambda_1)^{n_1}\cdots(x-\lambda_k)^{n_k}$, there exist a matrix $\mathblack{P}\in\GL_n(K)$ such that:
-    $$\mathblack{P}^{-1}\mathblack{A}\mathblack{P}=
-      \begin{pmatrix}
-        \mathblack{J}_1 & \mathblack{0}   & \cdots        & \mathblack{0}   \\
-        \mathblack{0}   & \mathblack{J}_2 & \ddots        & \vdots          \\
-        \vdots          & \ddots          & \ddots        & \mathblack{0}   \\
-        \mathblack{0}   & \cdots          & \mathblack{0} & \mathblack{J}_r \\
-      \end{pmatrix}
-    $$
-    where $\mathblack{J}_1,\ldots,\mathblack{J}_r$ are Jordan blocs associated with eigenvalues $\lambda_1,\ldots,\lambda_k$ satisfying properties \ref{LA_diag1} and \ref{LA_diag2}.
-  \end{prop}
-  \begin{theorem}
-    Let $V$ be a vector space and $f,g\in\mathcal{L}(V)$ be such that $p_f(x)=(x-\lambda_1)^{n_1}\cdots(x-\lambda_k)^{n_k}$. If $g$ satisfies:
-    \begin{enumerate}
-      \item $p_f(x)=p_g(x)$
-      \item $m_f(x)=m_g(x)$
-      \item $\dim(\ker((f-\lambda \id)^r))=\dim(\ker((g-\lambda \id)^r))$ $\forall\lambda\in K$ $\forall r\geq 1$
-    \end{enumerate}
-    then $f$ is similar to $g$.
-  \end{theorem}
-  \subsection{Symmetric bilinear forms}
-  \subsubsection*{First definitions}
-  \begin{definition}
-    Let $U$, $V$, $W$ be three vector spaces over a field $K$. We say that a function $\varphi:U\times V\rightarrow W$ is \textit{bilinear} if $\forall\mathblack{u}_1,\mathblack{u}_2,\mathblack{u}\in U$, $\forall \mathblack{v}_1,\mathblack{v}_2,\mathblack{v}\in V$ and $\forall\lambda\in K$ we have:
-    \begin{enumerate}
-      \item $\varphi(\mathblack{u}_1+\mathblack{u}_2,\mathblack{v})=\varphi(\mathblack{u}_1,\mathblack{v})+\varphi(\mathblack{u}_2,\mathblack{v})$.
-      \item $\varphi(\lambda \mathblack{u},\mathblack{v})=\lambda \varphi(\mathblack{u},\mathblack{v})$.
-      \item $\varphi(\mathblack{u},\mathblack{v}_1+\mathblack{v}_2)=\varphi(\mathblack{u},\mathblack{v}_1)+\varphi(\mathblack{u},\mathblack{v}_2)$.
-      \item $\varphi(\mathblack{u},\lambda \mathblack{v})=\lambda \varphi(\mathblack{u},\mathblack{v})$.
-    \end{enumerate}
-  \end{definition}
-  \begin{definition}
-    Let $V$ be a vector space over a field $K$. A \textit{bilinear form from $V$ onto $K$} is a bilinear map $\varphi:V\times V\rightarrow K$.
-  \end{definition}
-  \begin{definition}
-    Let $V$ be a vector space over a field $K$. A bilinear form $\varphi:V\times V\rightarrow K$ is \textit{symmetric} if $$\varphi(\mathblack{v}_1,\mathblack{v}_2)=\varphi(\mathblack{v}_2,\mathblack{v}_1)\quad\forall \mathblack{v}_1,\mathblack{v}_2\in V$$
-  \end{definition}
-  \subsubsection*{Matrix associated with a bilinear form}
-  \begin{definition}
-    Let $V$ be a finite vector space over a field $K$, $\mathfrak{B}=(\mathblack{v}_1,\ldots,\mathblack{v}_n)$ be a basis of $V$ and $\varphi:V\times V\rightarrow K$ be a symmetric bilinear form. We define the \textit{matrix of the bilinear form $\varphi$ with respect to the basis $\mathfrak{B}$} as the matrix $[\varphi]_\mathfrak{B}\in\mathcal{M}_n(K)$ defined as: $$[\varphi]_\mathfrak{B}=
-      \begin{pmatrix}
-        \varphi(\mathblack{v}_1,\mathblack{v}_1) & \varphi(\mathblack{v}_1,\mathblack{v}_2) & \cdots & \varphi(\mathblack{v}_1,\mathblack{v}_n) \\
-        \varphi(\mathblack{v}_2,\mathblack{v}_1) & \varphi(\mathblack{v}_2,\mathblack{v}_2) & \cdots & \varphi(\mathblack{v}_2,\mathblack{v}_n) \\
-        \vdots                                   & \vdots                                   & \ddots & \vdots                                   \\
-        \varphi(\mathblack{v}_n,\mathblack{v}_1) & \varphi(\mathblack{v}_n,\mathblack{v}_2) & \cdots & \varphi(\mathblack{v}_n,\mathblack{v}_n) \\
-      \end{pmatrix}$$
-  \end{definition}
-  \begin{lemma}
-    Let $V$ be a finite vector space over a field $K$, $\mathfrak{B}$ be a basis of $V$ and $\varphi:V\times V\rightarrow K$ be a symmetric bilinear form. Then:
-    $$\varphi(\mathblack{v}_1,\mathblack{v})={\left([\mathblack{v}_1]_\mathfrak{B}\right)}^\mathrm{T}[\varphi]_\mathfrak{B}[\mathblack{v}]_\mathfrak{B}\quad\forall\mathblack{v}_1,\mathblack{v}\in V$$
-  \end{lemma}
-  \begin{prop}
-    Let $V$ be a finite vector space over a field $K$, $\mathfrak{B}$ be a basis of $V$ and $\varphi:V\times V\rightarrow K$ be a symmetric bilinear form. Then: $$\varphi\text{ is symmetric}\iff[\varphi]_\mathfrak{B}\text{ is symmetric}$$
-  \end{prop}
-  \begin{prop}
-    Let $V$ be a finite vector space over a field $K$, $\mathfrak{B}$ and $\mathfrak{B}'$ be bases of $V$ and $\varphi:V\times V\rightarrow K$ be a symmetric bilinear form. Then: $$[\varphi]_{\mathfrak{B}'}={([\id]_{\mathfrak{B}',\mathfrak{B}})}^\mathrm{T}[\varphi]_\mathfrak{B}[\id]_{\mathfrak{B}',\mathfrak{B}}$$
-  \end{prop}
-  \subsubsection*{Orthogonal basis}
-  \begin{definition}\label{ALG-isotrop}
-    Let $V$ be a finite vector space over a field $K$, $\varphi:V\times V\rightarrow K$ be a symmetric bilinear form and $\mathblack{v}_1,\mathblack{v}_2\in V$.
-    \begin{itemize}
-      \item We say that $\mathblack{v}_1$ and $\mathblack{v}_2$ are \textit{orthogonal} if $\varphi(\mathblack{v}_1,\mathblack{v}_2)=0$.
-      \item If $\mathblack{v}_1\ne 0$, we say that $\mathblack{v}_1$ is \textit{isotropic} if $\varphi(\mathblack{v}_1,\mathblack{v}_1)=0$.
-    \end{itemize}
-  \end{definition}
-  \begin{definition}
-    Let $V$ be a finite vector space over a field $K$, $\mathfrak{B}=(\mathblack{v}_1,\ldots,\mathblack{v}_n)$ be a basis of $V$ and $\varphi:V\times V\rightarrow K$ be a symmetric bilinear form.
-    \begin{itemize}
-      \item We say that $\mathfrak{B}$ is \textit{orthogonal with respect to $\varphi$} if $\varphi(\mathblack{v}_i,\mathblack{v}_j)=0$ $\forall i\ne j$.
-      \item We say that $\mathfrak{B}$ is \textit{orthonormal with respect to $\varphi$} if $\varphi(\mathblack{v}_i,\mathblack{v}_j)=\delta_{ij}$.
-    \end{itemize}
-  \end{definition}
-  \begin{theorem}
-    Let $V$ be a finite vector space over a field $K$, $\mathfrak{B}$ be a basis of $V$ and $\varphi:V\times V\rightarrow K$ be a symmetric bilinear form. Then, $V$ has an orthogonal basis with respect to $\varphi$ and an orthonormal basis with respect to $\varphi$.
-  \end{theorem}
-  \begin{corollary}
-    Let $K$ be a field with $\ch K\ne 2$ and $\mathblack{A}\in\mathcal{M}_n(K)$ be a symmetric matrix. Then, there exists a matrix $\mathblack{P}\in\GL_n(K)$ such that $\transpose{P}\mathblack{A}\mathblack{P}$ is diagonal.
-  \end{corollary}
-  \subsubsection*{Orthogonal decompositions}
-  \begin{definition}\label{ALG-singular}
-    Let $V$ be a finite vector space over a field $K$, $U\subseteq V$ be a vector subspace of $V$ and $\varphi:V\times V\rightarrow K$ be a symmetric bilinear form. We define the \textit{orthogonal complement of $U$} as: $$U^\perp=\{\mathblack{v}\in V:\varphi(\mathblack{v},\mathblack{u})=0\;\forall\mathblack{u}\in U\}$$
-  \end{definition}
-  \begin{definition}
-    Let $V$ be a finite vector space over a field $K$ and $\varphi:V\times V\rightarrow K$ be a symmetric bilinear form. We define the \textit{radical of $\varphi$} as: $$\rad\varphi=V^\perp$$ We say that $\varphi$ is \textit{nonsingular} if $\rad\varphi=\{0\}$.
-  \end{definition}
-  \begin{definition}
-    Let $V$ be a finite vector space over a field $K$, $\varphi:V\times V\rightarrow K$ be a nonsingular symmetric bilinear form and $\mathblack{v}_0\in V$. We define $\varphi_{\mathblack{v}_0}:V\rightarrow K$, $\varphi_{\mathblack{v}_0}(\mathblack{v})=\varphi(\mathblack{v}_0,\mathblack{v})$. Then, the function
-    \begin{align*}
-      V               & \longrightarrow V^*                  \\
-      \mathblack{v}_0 & \longmapsto\varphi_{\mathblack{v}_0}
-    \end{align*} is a isomorphism.
-  \end{definition}
-  \begin{definition}
-    Let $V$ be a finite vector space over a field $K$, $U\subseteq V$ be a vector subspace of $V$ and $\varphi:V\times V\rightarrow K$ be a nonsingular symmetric bilinear form. Then:
-    \begin{enumerate}
-      \item $\dim V=\dim U+\dim U^\perp$.
-      \item ${(U^\perp)}^\perp=U$.
-      \item If $\varphi_{|U}$ is nonsingular, then $V=U\oplus U^\perp$.
-    \end{enumerate}
-  \end{definition}
-  \begin{definition}
-    Let $V$ be a finite vector space over a field $K$, $U_1,U_2\subseteq V$ be vector subspaces of $V$ and $\varphi:V\times V\rightarrow K$ be a symmetric bilinear form. We say that the sum $U_1+U_2$ is \textit{orthogonal} if it is direct and $\varphi(\mathblack{u}_1,\mathblack{u}_2)=0$ $\forall \mathblack{u}_1\in U_1$ and $\mathblack{u}_2\in U_2$. In this case, we denote $U_1+U_2$ by $U_1\perp U_2$.
-  \end{definition}
-  \begin{prop}
-    Let $V$ be a finite vector space over a field $K$, $U_1,U_2\subseteq V$ be vector subspaces of $V$ such that $V=U_1\perp U_2$ and $\varphi:V\times V\rightarrow K$ be a symmetric bilinear form. Then, $\forall \mathblack{v}\in V$ there exist unique $\mathblack{u}_1\in U_1$ and $\mathblack{u}_2\in U_2$ such that $\mathblack{v}=\mathblack{u}_1+\mathblack{u}_2$.
-  \end{prop}
-  \begin{definition}\label{perpendicular}
-    Let $V$ be a finite vector space over a field $K$, $U_1,U_2\subseteq V$ be vector subspaces of $V$ such that $V=U_1\perp U_2$ and $\varphi:V\times V\rightarrow K$ be a symmetric bilinear form. The function
-    \begin{align*}
-      \pi:V=U_1\perp U_2                            & \longrightarrow U_i         \\
-      \mathblack{v}=\mathblack{u}_1+\mathblack{u}_2 & \longmapsto \mathblack{u}_i
-    \end{align*}
-    for $i=1,2$ is called \textit{orthogonal projection of $V$ onto $U_i$ according to the decomposition $V=U_1\perp U_2$}.
-  \end{definition}
-  \begin{method}[Gram-Schmidt process]
-    Let $V$ be a finite vector space over a field $K$, $\mathfrak{B}=(\mathblack{v}_1,\ldots,\mathblack{v}_n)$ be a basis of $V$ and $\varphi:V\times V\rightarrow K$ be a symmetric bilinear form. $\forall\mathblack{u},\mathblack{v}\in V$, we define $$\text{proj}_{\mathblack{u}}(\mathblack{v})=\frac{\varphi(\mathblack{u},\mathblack{v})}{\varphi(\mathblack{u},\mathblack{u})}\mathblack{u}$$ We will create an orthogonal basis $(\mathblack{u}_1,\ldots,\mathblack{u}_n)$ of $V$ from $\mathfrak{B}$. We define $\mathblack{u}_i$, $i=1,\ldots,n$ to be:
-    \begin{align*}
-      \mathblack{u}_1 & =\mathblack{v}_1                                                                                               \\
-      \mathblack{u}_2 & =\mathblack{v}_2-\text{proj}_{\mathblack{u}_1}(\mathblack{v}_2)                                                \\
-      \mathblack{u}_3 & =\mathblack{v}_3-\text{proj}_{\mathblack{u}_1}(\mathblack{v}_3)-\text{proj}_{\mathblack{u}_2}(\mathblack{v}_3) \\
-                      & \;\;\vdots                                                                                                     \\
-      \mathblack{u}_n & =\mathblack{v}_n-\sum_{i=1}^{n-1}\text{proj}_{\mathblack{u}_i}(\mathblack{v}_n)
-    \end{align*}
-    To obtain an orthogonal basis $(\mathblack{e}_1,\ldots,\mathblack{e}_n)$ of $V$ from $\mathfrak{B}$, define $\mathblack{e}_i$, $i=1,\ldots,n$ to be: $$\mathblack{e}_i=\frac{\mathblack{u}_i}{\sqrt{\varphi(\mathblack{u}_i,\mathblack{u}_i)}}$$
-  \end{method}
-  \subsubsection*{Sylvester's law of inertia}
-  \begin{definition}
-    An \textit{orthogonal geometry over a field $K$} is a pair $(V,\varphi)$, where $V$ is a vector space over $K$ and $\varphi$ is a symmetric bilinear form over $V$.
-  \end{definition}
-  \begin{definition}\label{isometry}
-    Let $(V_1,\varphi_1)$, $(V_2,\varphi_2)$ be two orthogonal geometries over a field $K$. An \textit{isometry from $(V_1,\varphi_1)$ to $(V_2,\varphi_2)$} is an isomorphism $f:V_1\rightarrow V_2$ such that $$\varphi_2(f(\mathblack{u}),f(\mathblack{v}))=\varphi_1(\mathblack{u},\mathblack{v})\quad\forall\mathblack{u},\mathblack{v}\in V_1$$ We say that $(V_1,\varphi_1)$ and $(V_2,\varphi_2)$ are \textit{isometric} if there exists an isometry between them.
-  \end{definition}
-  \begin{definition}
-    Let $V$ be a vector space over a field $K$ and $\varphi_1$, $\varphi_2$ be symmetric bilinear forms. We say that $\varphi_1$ and $\varphi_2$ are \textit{equivalent} if and only if $(V,\varphi_1)$ and $(V,\varphi_2)$ are isometric.
-  \end{definition}
-  \begin{definition}
-    Let $\mathblack{A},\mathblack{B}\in\mathcal{M}_n(\RR)$. We say that $\mathblack{A}$ and $\mathfrak{B}$ are congruent if there exists a matrix $\mathblack{P}\in\GL_n(\RR)$ such that $$\mathblack{A}=\transpose{P}\mathblack{B}\mathblack{P}$$
-  \end{definition}
-  \begin{prop}
-    Let $V$ be a finite vector space over a field $K$, $\mathfrak{B}_1$ be a basis of $V$ and $\varphi_1$, $\varphi_2$ be symmetric bilinear forms. Then the following statements are equivalent:
-    \begin{enumerate}
-      \item The orthogonal geometries $(V,\varphi_1)$ and $(V,\varphi_2)$ are isometric.
-      \item There exists a basis $\mathfrak{B}_2$ of $V$ such that $[\varphi_1]_{\mathfrak{B}_1}=[\varphi_2]_{\mathfrak{B}_2}$.
-      \item The matrices $[\varphi_1]_{\mathfrak{B}_1}$ and $[\varphi_2]_{\mathfrak{B}_2}$ are congruent.
-    \end{enumerate}
-  \end{prop}
-  \begin{theorem}[Sylvester's law of inertia]
-    Let $V$ be a finite vector space over $\RR$ and $\varphi$ be a symmetric bilinear form over $V$. Then, there exists a basis $\mathfrak{B}$ of $V$ such that:
-    $$[\varphi]_\mathfrak{B}=
-      \begin{pmatrix}
-        0 &        &          &   &        &   &          &        &    & \\
-          & \ddots &          &   &        &   &          &        &      \\
-          &        & 0        &   &        &   & \bigzero &        &      \\
-          &        &          & 1 &        &   &          &        &      \\
-          &        &          &   & \ddots &   &          &        &      \\
-          &        &          &   &        & 1 &          &        &      \\
-          &        & \bigzero &   &        &   & -1       &        &      \\
-          &        &          &   &        &   &          & \ddots &      \\
-          &        &          &   &        &   &          &        & -1
-      \end{pmatrix}$$
-    where in the diagonal there are $r_0$ zeros, $r_+$ ones and $r_-$ minus ones and the triplet $(r_0,r_+,r_-)$ doesn't depend on the basis $\mathfrak{B}$.
-  \end{theorem}
-  \begin{definition}
-    Let $V$ be a finite vector space over $\RR$ and $\varphi$ be a symmetric bilinear form over $V$. Let $\mathfrak{B}$ be an orthogonal basis of $V$ with respect to $\varphi$. We define the \textit{rank of $\varphi$} as: $$\rank \varphi=\rank ([\varphi]_\mathfrak{B})$$ We define the \textit{signature of $\varphi$} as: $$\sig\varphi=(r_+,r_-)$$ where $r_+$ is el number of positive real numbers on the diagonal of $[\varphi]_\mathfrak{B}$ and $r_-$ is el number of negative real numbers on the diagonal of $[\varphi]_\mathfrak{B}$.
-  \end{definition}
-  \begin{theorem}
-    Let $(V_1,\varphi_1)$, $(V_2,\varphi_2)$ be two orthogonal geometries over $\RR$ of finite dimension. Then, $(V_1,\varphi_1)$ and $(V_2,\varphi_2)$ are isometric if and only if $\dim V_1=\dim V_2$ and $\sig \varphi_1=\sig \varphi_2$.
-  \end{theorem}
-  \subsubsection*{Inner products}
-  \begin{definition}
-    Let $V$ be a finite vector space over $\RR$ and $\varphi$ be a symmetric bilinear form over $V$. We say that $\varphi$ is \textit{positive-definite} if $$\varphi(\mathblack{v},\mathblack{v})>0\quad\forall\mathblack{v}\in V\setminus\{0\}$$ We say that $\varphi$ is \textit{negative-definite} if $$\varphi(\mathblack{v},\mathblack{v})<0\quad\forall\mathblack{v}\in V\setminus\{0\}\footnote{The terms \textit{positive-semidefinite} and \textit{negative-semidefinite} are used when $\forall\mathblack{v}\in V\setminus\{0\}$, $\varphi(\mathblack{v},\mathblack{v})\geq 0$ or $\varphi(\mathblack{v},\mathblack{v})\leq 0$, respectively.}$$
-  \end{definition}
-  \begin{definition}
-    Let $V$ be a vector space over $\RR$. An \textit{inner product over $V$} is a positive-definite symmetric bilinear form over $V$.
-  \end{definition}
-  \begin{definition}\label{espai_euclidia}
-    An \textit{Euclidean vector space} is a pair $(V,\varphi)$, where $V$ is a vector space over $\RR$ and $\varphi$ is an inner product over $V$.
-  \end{definition}
-  \begin{theorem}[Cauchy-Schwartz inequality]
-    Let $(V,\varphi)$ be an Euclidean vector space. Then: $$\varphi(\mathblack{v}_1,\mathblack{v}_2)^2\leq \varphi(\mathblack{v}_1,\mathblack{v}_1)\varphi(\mathblack{v}_2,\mathblack{v}_2)\quad\forall \mathblack{v}_1,\mathblack{v}_2\in V$$
-  \end{theorem}
-  \begin{definition}
-    Let $V$ be a vector space over $\RR$. A \textit{norm on $V$} is a function
-    \begin{align*}
-      \|\cdot\|:V   & \longrightarrow\RR           \\
-      \mathblack{v} & \longmapsto\|\mathblack{v}\|
-    \end{align*}
-    such that:
-    \begin{enumerate}
-      \item $\|\mathblack{v}\|=0\iff \mathblack{v}=\mathblack{0}$ $\forall \mathblack{v}\in V$.
-      \item $\|\lambda \mathblack{v}\|=|\lambda|\|\mathblack{v}\|$, $\forall \mathblack{v}\in V$, $\lambda\in\RR$.
-      \item $\|\mathblack{v}_1+\mathblack{v}_2\|\leq\|\mathblack{v}_1\|+\|\mathblack{v}_2\|$, $\forall \mathblack{v}_1,\mathblack{v}_2\in V$\footnote{Note that $\forall\mathblack{v}\in V$ we have: $0=\|\mathblack{v}+(-\mathblack{v})\|\leq\|\mathblack{v}\|+\|-\mathblack{v}\|=2\|\mathblack{v}\|\implies\|\mathblack{v}\|\geq 0$.}.
-    \end{enumerate}
-  \end{definition}
-  \begin{prop}
-    Let $(V,\varphi)$ be an Euclidean vector space. Then, the function
-    \begin{align*}
-      \|\cdot\|_\varphi:V & \longrightarrow\RR                                                               \\
-      \mathblack{v}       & \longmapsto\|\mathblack{v}\|_\varphi=\sqrt{\varphi(\mathblack{v},\mathblack{v})}
-    \end{align*}
-    is a norm called \textit{norm associated with the inner product $\varphi$}.
-  \end{prop}
-  \begin{definition}
-    Let $(V,\varphi)$ be an Euclidean vector space and $\mathblack{v}_1,\mathblack{v}_2\in V\setminus\{0\}$. We define the \textit{angle with respect to $\varphi$ between $\mathblack{v}_1$ and $\mathblack{v}_2$} as the unique $\theta\in[0,\pi]$ such that: $$\cos{\theta}=\frac{\varphi(\mathblack{v}_1,\mathblack{v}_2)}{\|\mathblack{v}_1\|_\varphi\|\mathblack{v}_2\|_\varphi}$$
-  \end{definition}
-  \subsubsection*{Spectral theorem}
-  \begin{definition}
-    Let $(V,\varphi)$ be a finite Euclidean vector space and $f\in\mathcal{L}(V)$. Then, there exists a unique $f'\in\mathcal{L}(V)$ such that $$\varphi(f(\mathblack{v}_1),\mathblack{v}_2)=\varphi(\mathblack{v}_1,f'(\mathblack{v}_2))\quad\forall \mathblack{v}_1,\mathblack{v}_2\in V$$ This $f'$ is called \textit{adjoint of $f$}.
-  \end{definition}
-  \begin{definition}
-    Let $(V,\varphi)$ be a finite Euclidean vector space and $f\in\mathcal{L}(V)$. $f$ is called \textit{auto-adjoint} if $f=f'$.
-  \end{definition}
-  \begin{lemma}
-    Let $(V,\varphi)$ be a finite Euclidean vector space of dimension $n$ and $f\in\mathcal{L}(V)$ be auto-adjoint. Then, there exist $\lambda_1,\ldots,\lambda_n\in\RR$ such that $$p_f(x)=(x-\lambda_1 )\cdots(x-\lambda_n)$$
-  \end{lemma}
-  \begin{definition}
-    Let $K$ be a field and $A\in\GL_n(K)$ be a matrix. We say that $A$ is \textit{orthogonal} if and only if $$\mathblack{P}\transpose{P}=\transpose{P}\mathblack{P}=\mathblack{I}_n$$ The set of orthogonal matrices of size $n$ over $K$ is denoted by $\mathcal{O}_n(K)$.
-  \end{definition}
-  \begin{theorem}[Spectral theorem]
-    Let $(V,\varphi)$ be a a finite Euclidean vector space and $f\in\mathcal{L}(V)$ be auto-adjoint. Then, $V$ has an orthonormal basis of eigenvectors of $f$. In particular, $f$ diagonalizes.
-  \end{theorem}
-  \begin{corollary}
-    Let $K$ be a field. All symmetric matrices $A\in\mathcal{M}_n(K)$ are diagonalizable. More precisely, there exists $\mathblack{P}\in\mathcal{O}_n(K)$ such that $\transpose{P}\mathblack{A}\mathblack{P}$ is diagonal.
-  \end{corollary}
-  \begin{definition}
-    Let $A=(a_{ij})\in\mathcal{M}_{m\times n}(\CC)$. We define the \textit{complex conjugate $\overline{\mathblack{A}}$ of $\mathblack{A}$} as $\overline{\mathblack{A}}=(\overline{a_{ij}})$.
-  \end{definition}
-  \begin{prop}
-    Let $\mathblack{A},\mathblack{B}\in\mathcal{M}_{m\times n}(\CC)$, $\mathblack{C}\in\mathcal{M}_{n\times p}(\CC)$ and $\lambda\in\CC$. Then:
-    \begin{enumerate}
-      \item $\overline{\mathblack{A}+\mathblack{B}}=\overline{\mathblack{A}}+\overline{\mathblack{B}}$.
-      \item $\overline{\mathblack{A}\mathblack{C}}=\overline{\mathblack{A}}\cdot\overline{\mathblack{C}}$.
-      \item $\overline{\lambda\cdot\mathblack{A}}=\overline{\lambda}\cdot\overline{\mathblack{A}}$.
-    \end{enumerate}
-  \end{prop}
-  \begin{corollary}
-    Let $\mathblack{A}\in\mathcal{M}_n(\RR)$ be a symmetric matrix. Then, there exist $\lambda_1,\ldots,\lambda_n\in\RR$ such that $$p_{\mathblack{A}}(x)=(x-\lambda_1 )\cdots(x-\lambda_n)$$
-  \end{corollary}
-  \begin{theorem}[Descartes' rule of signs]
-    Let $P(x)=a_0+\cdots+a_nx^n\in\RR[x]$:
-    \begin{enumerate}
-      \item The number of positive roots of $P(x)$ is at most equal to the number of sign variations in the sequence $[a_d,a_{d-1},\ldots,a_1,a_0]$.
-      \item If $P(x)=a_n(x-\alpha_1)^{n_1}\cdots(x-\alpha_r)^{n_r}$, then the number of positive roots of $P(x)$ is equal to the number of sign variations in the sequence (having in account multiplicity).
-    \end{enumerate}
-  \end{theorem}
+    \subsection{Matrices}
+    \subsubsection*{Linear systems}
+    \begin{definition}
+        A \textit{linear equation} is an equation of the form $$a_1x_1+\cdots+a_nx_n=b$$ where $x_1,\ldots,x_n$ are the \textit{variables} or \textit{unknowns} and $a_i,b\in\RR$, $i=1,\ldots,n$, are the coefficients of the equation. The term $b$ is usually called \textit{constant term}.
+    \end{definition}
+    \begin{definition}
+        A \textit{system of linear equations} is a collection of one or more linear equations involving the same set of variables.
+    \end{definition}
+    \begin{definition}
+        Let
+        \begin{equation*}
+            \arraycolsep=1pt
+            \left\{
+            \begin{array}{ccccc}
+                a_{11}x_1 & + \cdots + & a_{1n}x_n & = & b_1    \\
+                \vdots    & \vdots     & \vdots    &   & \vdots \\
+                a_{m1}x_1 & + \cdots + & a_{mn}x_n & = & b_m
+            \end{array}
+            \right.
+        \end{equation*}
+        be a system of linear equations. A \textit{solution of a system of equations} is a set of numbers $c_1,\ldots,c_n$ such that $$a_{i1}c_1+\cdots+a_{in}c_n=b_i$$ for $i=1,\ldots,m$. A linear system may behave in three possible ways:
+        \begin{enumerate}
+            \item The system has a unique solution.
+            \item The system has infinitely many solutions.
+            \item The system has no solution.
+        \end{enumerate}
+    \end{definition}
+    \begin{definition}
+        Two systems of equations are \textit{equivalent} if they have the same solutions.
+    \end{definition}
+    \subsubsection*{Matrices}
+    \begin{definition}[Matrix]
+        A \textit{matrix $\vectorfunction{A}$ with coefficients in $\RR$} is a table of real numbers arranged in rows and columns. That is, $\vectorfunction{A}$ is of the form:
+        \begin{equation*}
+            \vectorfunction{A}=(a_{ij})=
+            \begin{pmatrix}
+                a_{11} & \cdots & a_{1n} \\
+                \vdots & \ddots & \vdots \\
+                a_{m1} & \cdots & a_{mn}
+            \end{pmatrix}
+        \end{equation*}
+        for some values $a_{ij}\in\RR$, $i=1,\ldots,m$ and $j=1,\ldots,n$. The set of $m\times n$ matrices with real coefficients is denoted by $\mathcal{M}_{m\times n}(\RR)$\footnote{In the case when $m=n$ we will denote $\mathcal{M}_{n\times n}(\RR)$ by $\mathcal{M}_n(\RR)$.}.
+    \end{definition}
+    \begin{definition}
+        Let $\vectorfunction{A},\vectorfunction{B}\in\mathcal{M}_{m\times n}(\RR)$ and $\alpha\in\RR$. If $\vectorfunction{A}=(a_{ij})$ and $\vectorfunction{B}=(b_{ij})$, we define the \textit{sum $\vectorfunction{A}+\vectorfunction{B}$} as: $$\vectorfunction{A}+\vectorfunction{B}=(a_{ij}+b_{ij})$$
+        We define the \textit{product $\alpha\vectorfunction{A}$} as: $$\alpha\vectorfunction{A}=(\alpha a_{ij})$$
+    \end{definition}
+    \begin{prop}[Properties of addition and scalar multiplication of matrices]
+        The following properties are satisfied:
+        \begin{enumerate}
+            \item Commutativity: $$\vectorfunction{A}+\vectorfunction{B}=\vectorfunction{B}+\vectorfunction{A}$$ for all $\vectorfunction{A},\vectorfunction{B}\in\mathcal{M}_{m\times n}(\RR)$.
+            \item Associativity: $$(\vectorfunction{A}+\vectorfunction{B})+\vectorfunction{C}=\vectorfunction{A}+(\vectorfunction{B}+\vectorfunction{C})$$ for all $\vectorfunction{A},\vectorfunction{B},\vectorfunction{C}\in\mathcal{M}_{m\times n}(\RR)$.
+            \item Additive identity element: $\exists\vectorfunction{0}\in\mathcal{M}_{m\times n}(\RR)$ such that $$\vectorfunction{A}+\vectorfunction{0}=\vectorfunction{A}$$ for all $\vectorfunction{A}\in\mathcal{M}_{m\times n}(\RR)$.
+            \item Additive inverse element: $\forall\vectorfunction{A}\in\mathcal{M}_{m\times n}(\RR)$ $\exists(-\vectorfunction{A})\in\mathcal{M}_{m\times n}(\RR)$ such that $$\vectorfunction{A}+(-\vectorfunction{A})=\vectorfunction{0}$$
+            \item Distributivity: $$(\alpha+\beta)\vectorfunction{A}=\alpha\vectorfunction{A}+\beta\vectorfunction{A}$$ for all $\vectorfunction{A}\in\mathcal{M}_{m\times n}(\RR)$ and all $\alpha,\beta\in\RR$.
+        \end{enumerate}
+    \end{prop}
+    \begin{definition}
+        Let $\vectorfunction{A}\in\mathcal{M}_{m\times n}(\RR)$ and $\vectorfunction{B}\in\mathcal{M}_{n\times p}(\RR)$. We define the \textit{product $\vectorfunction{A}\vectorfunction{B}$} as $$\vectorfunction{A}\vectorfunction{B}=(c_{ij})\quad\text{where }c_{ij}=\sum_{k=1}^na_{ik}b_{kj}$$
+    \end{definition}
+    \begin{prop}[Properties of matrix product]
+        The following properties are satisfied:
+        \begin{enumerate}
+            \item Associativity: $$(\vectorfunction{A}\vectorfunction{B})\vectorfunction{C}=\vectorfunction{A}(\vectorfunction{B}\vectorfunction{C})$$ for all $\vectorfunction{A}\in\mathcal{M}_{m\times n}(\RR)$, $\vectorfunction{B}\in\mathcal{M}_{n\times p}(\RR)$ and $\vectorfunction{C}\in\mathcal{M}_{p\times q}(\RR)$.
+            \item Multiplicative identity element: $\exists\vectorfunction{I}_n\in\mathcal{M}_n(\RR)$ such that
+                  \begin{align*}
+                       & \vectorfunction{A}\vectorfunction{I}_n=\vectorfunction{A}\quad\forall\vectorfunction{A}\in\mathcal{M}_{m\times n}(\RR)\text{ and } \\
+                       & \vectorfunction{I}_n\vectorfunction{A}=\vectorfunction{A}\quad\forall\vectorfunction{A}\in\mathcal{M}_{n\times p}(\RR)
+                  \end{align*}
+            \item Distributivity: $$(\vectorfunction{A}+\vectorfunction{B})\vectorfunction{C}=\vectorfunction{A}\vectorfunction{C}+\vectorfunction{B}\vectorfunction{C},$$ for all $\vectorfunction{A},\vectorfunction{B}\in\mathcal{M}_{m\times n}(\RR)$ and $\vectorfunction{C}\in\mathcal{M}_{n\times p}(\RR)$.
+        \end{enumerate}
+    \end{prop}
+    \begin{definition}
+        We say that a matrix $\vectorfunction{A}\in\mathcal{M}_n(\RR)$ is \textit{invertible} if there is a matrix $\vectorfunction{B}\in\mathcal{M}_n(\RR)$ satisfying $$\vectorfunction{A}\vectorfunction{B}=\vectorfunction{B}\vectorfunction{A}=\vectorfunction{I}_n$$
+        The set of invertible matrices of size $n$ over $\RR$ is denoted by $\GL_n(\RR)$\footnote{Or more generally, the set of invertible matrices of size $n$ over a field (see definition \ref{AS-field}) $K$ is denoted by $\GL_n(K)$.}.
+    \end{definition}
+    \begin{lemma}
+        The product of invertible matrices is invertible.
+    \end{lemma}
+    \subsubsection*{Echelon form of a matrix}
+    \begin{definition}
+        Let $\vectorfunction{A}\in\mathcal{M}_{m\times n}(\RR)$ be a matrix. The \textit{$i$-th pivot of $\vectorfunction{A}$} is the first nonzero element in the $i$-th row of $\vectorfunction{A}$.
+    \end{definition}
+    \begin{definition}[Row echelon form]
+        A matrix $\vectorfunction{A}\in\mathcal{M}_{m\times n}(\RR)$ is in \textit{row echelon form} if:
+        \begin{itemize}
+            \item All rows consisting of only zeros are at the bottom.
+            \item The pivot of a nonzero row is always strictly to the right of the pivot of the row above it.
+        \end{itemize}
+    \end{definition}
+    \begin{definition}[Reduced row echelon form]
+        A matrix $\vectorfunction{A}\in\mathcal{M}_{m\times n}(\RR)$ is in \textit{reduced row echelon form} if:
+        \begin{itemize}
+            \item It is in row echelon form.
+            \item Pivots are equal to 1.
+            \item Each column containing a pivot has zeros in all its other entries.
+        \end{itemize}
+    \end{definition}
+    \begin{theorem}[Gau\ss' theorem]
+        Let $\vectorfunction{A}\in\mathcal{M}_{m\times n}(\RR)$ be a matrix. Then, there is a matrix $\vectorfunction{P}\in\GL_m(\RR)$ such that $\vectorfunction{P}\vectorfunction{A}=\vectorfunction{A'}$ is in reduced row echelon form. Moreover, $\vectorfunction{A'}$ is uniquely determined by $\vectorfunction{A}$.
+    \end{theorem}
+    \begin{theorem}[PAQ reduction theorem]
+        Let $\vectorfunction{A}\in\mathcal{M}_{m\times n}(\RR)$ be a matrix. Then, there exist matrices $\vectorfunction{P}\in\GL_m(\RR)$ and $\vectorfunction{Q}\in\GL_n(\RR)$ such that
+        $$\vectorfunction{P}\vectorfunction{A}\vectorfunction{Q}=\left(
+            \begin{array}{@{\,} c|c @{\,}}
+                    \vectorfunction{I}_r & \vectorfunction{0} \\
+                    \hline
+                    \vectorfunction{0}   & \vectorfunction{0}
+                \end{array}
+            \right).$$
+        The number $r$ is uniquely determined by $\vectorfunction{A}$.
+    \end{theorem}
+    \subsubsection*{Rank of a matrix}
+    \begin{definition}[Rank]
+        Let $\vectorfunction{A}\in\mathcal{M}_{m\times n}(\RR)$ be a matrix and suppose
+        $$\vectorfunction{P}\vectorfunction{A}\vectorfunction{Q}=\left(
+            \begin{array}{@{\,} c|c @{\,}}
+                    \vectorfunction{I}_r & \vectorfunction{0} \\
+                    \hline
+                    \vectorfunction{0}   & \vectorfunction{0}
+                \end{array}
+            \right)$$ for some matrices $\vectorfunction{P}\in\mathcal{M}_m(\RR)$ and $\vectorfunction{Q}\in\mathcal{M}_n(\RR)$. We define the \textit{rank of $\vectorfunction{A}$}, denoted by $\rank \vectorfunction{A}$, as the number ones in the matrix $\vectorfunction{P}\vectorfunction{A}\vectorfunction{Q}$, that is, $\rank\vectorfunction{A}:=r$.
+    \end{definition}
+    \begin{prop}
+        Let $\vectorfunction{A},\vectorfunction{A}'\in\mathcal{M}_{m\times n}(\RR)$, $\vectorfunction{B},\vectorfunction{B}'\in\mathcal{M}_{1\times n}(\RR)$ and $\vectorfunction{P}\in\GL_m(\RR)$ be matrices. Suppose we have a system of linear equations $\vectorfunction{A}\vectorfunction{x}=\vectorfunction{B}$. If $\vectorfunction{P}(\vectorfunction{A}\mid\vectorfunction{B})=(\vectorfunction{A}'\mid\vectorfunction{B}')$\footnote{Here $(\vectorfunction{A}\mid\vectorfunction{B})$ denotes the augmented matrix obtained by appending the columns of $\vectorfunction{B}$ to the columns of $\vectorfunction{A}$.}, then the systems $\vectorfunction{A}\vectorfunction{x}=\vectorfunction{B}$ and $\vectorfunction{A}'\vectorfunction{x}=\vectorfunction{B}'$ are equivalent.
+    \end{prop}
+    \begin{corollary}
+        The reduced row echelon form of an invertible matrix is the identity matrix.
+    \end{corollary}
+    \begin{definition}[Transposition]
+        Let $\vectorfunction{A}\in\mathcal{M}_{m\times n}(\RR)$ be a matrix. If $\vectorfunction{A}=(a_{ij})$, we define the \textit{transpose $\transpose{A}$ of $\vectorfunction{A}$} as the matrix $\transpose{A}=(b_{ij})$, where $b_{ij}=a_{ji}$ for $i=1,\ldots,m$ and $j=1,\ldots,n$.
+    \end{definition}
+    \begin{prop}
+        Let $\vectorfunction{A}\in\mathcal{M}_{m\times n}(\RR)$ be a matrix. Then, $\rank \vectorfunction{A}=\rank\transpose{A}$.
+    \end{prop}
+    \begin{theorem}[Rouché-Frobenius theorem]
+        Let $\vectorfunction{A}\vectorfunction{x}=\vectorfunction{B}$ be a system of equations with $n$ variables. The system is:
+        \begin{itemize}
+            \item \textit{determined and consistent} if and only if $$\rank \vectorfunction{A}=\rank (\vectorfunction{A}\mid \vectorfunction{B})=n$$
+            \item \textit{indeterminate with $s$ free variables} if and only if $$\rank \vectorfunction{A}=\rank (\vectorfunction{A}\mid \vectorfunction{B})=n-s$$
+            \item \textit{inconsistent} if and only if $$\rank \vectorfunction{A}\ne\rank (\vectorfunction{A}\mid \vectorfunction{B})$$
+        \end{itemize}
+    \end{theorem}
+    \subsubsection*{Determinant of a matrix}
+    \begin{definition}[Determinant]
+        A determinant is a function $\det:\mathcal{M}_n(\RR)\rightarrow\RR$ satisfying the following properties:
+        \begin{enumerate}
+            \item If $\vectorfunction{A}=(\vectorfunction{a}_1\mid\cdots\mid \vectorfunction{a}_n)$, where $\vectorfunction{a}_i$ are column vectors in $\RR^n$ for $i=1,\ldots,n$ and $\vectorfunction{a}_j=\lambda\vectorfunction{u}+\mu\vectorfunction{v}$ for some other column vectors $\vectorfunction{u}$ and $\vectorfunction{v}$, then:
+                  \begin{multline*}
+                      \det \vectorfunction{A}=\det(\vectorfunction{a}_1\mid\cdots\mid\vectorfunction{a}_j\mid\cdots\mid \vectorfunction{a}_n)=\\=\det(\vectorfunction{a}_1\mid\cdots\mid \vectorfunction{a}_{j-1}\mid\lambda \vectorfunction{u}+\mu \vectorfunction{v}\mid \vectorfunction{a}_{j+1}\mid\cdots\mid \vectorfunction{a}_n)=\\=\lambda\det(\vectorfunction{a}_1\mid\cdots\mid \vectorfunction{a}_{j-1}\mid \vectorfunction{u}\mid \vectorfunction{a}_{j+1}\mid\cdots\mid \vectorfunction{a}_n)+\\+\mu\det(\vectorfunction{a}_1\mid\cdots\mid \vectorfunction{a}_{j-1}\mid \vectorfunction{v}\mid \vectorfunction{a}_{j+1}\mid\cdots\mid \vectorfunction{a}_n)
+                  \end{multline*}
+            \item The determinant changes its sign whenever two columns are swapped.
+            \item $\det \vectorfunction{I}_n=1$ for all $n\in\NN$.
+        \end{enumerate}
+    \end{definition}
+    \begin{lemma}
+        Whenever two columns of a matrix are identical, the determinant is 0.
+    \end{lemma}
+    \begin{prop}
+        Let $\vectorfunction{A}\in\mathcal{M}_n(\RR)$ be a matrix in its row echelon form. If $\vectorfunction{A}=(a_{ij})$, then: $$\det\vectorfunction{A}=\prod_{i=1}^na_{ii}$$
+    \end{prop}
+    \begin{prop}
+        Let $\vectorfunction{A}\in\mathcal{M}_n(\RR)$ be a matrix. The following are equivalent:
+        \begin{enumerate}
+            \item $\vectorfunction{A}$ is not invertible.
+            \item $\rank\vectorfunction{A}<n$.
+            \item $\det\vectorfunction{A}=0$.
+        \end{enumerate}
+    \end{prop}
+    \begin{theorem}
+        Let $\det:\mathcal{M}_n(\RR)\rightarrow\RR$ be a determinant. Then, for all matrices $\vectorfunction{A},\vectorfunction{B}\in\mathcal{M}_n(\RR)$: $$\det (\vectorfunction{A}\vectorfunction{B})=\det\vectorfunction{A}\det\vectorfunction{B}.$$
+    \end{theorem}
+    \begin{corollary}
+        Let $\det,\det':\mathcal{M}_n(\RR)\rightarrow\RR$ be two determinants. Then, for all matrix $\vectorfunction{A}\in\mathcal{M}_n(\RR)$: $$\det\vectorfunction{A}={\det}'\vectorfunction{A}$$
+    \end{corollary}
+    \begin{prop}
+        Let $\vectorfunction{A}\in\mathcal{M}_n(\RR)$. Then: $$\det \vectorfunction{A}=\sum_{\sigma\in S_n}\varepsilon(\sigma)\prod_{i=1}^na_{i\sigma(i)}$$
+    \end{prop}
+    \begin{prop}
+        For all matrix $\vectorfunction{A}\in\mathcal{M}_n(\RR)$: $$\det\vectorfunction{A}=\det\transpose{A}$$
+    \end{prop}
+    \begin{prop}
+        Let $\vectorfunction{A}=(a_{ij})\in\mathcal{M}_n(\RR)$. We denote by $\vectorfunction{A}_{ij}$ the square matrix obtained from $\vectorfunction{A}$ by removing the $i$-th row and $j$-th column. Then, for every $i\in\{1,\ldots,n\}$, $$\det\vectorfunction{A}=\sum_{j=1}^n(-1)^{i+j}a_{ij}\det\vectorfunction{A}_{ij}.$$
+    \end{prop}
+    \begin{definition}
+        Let $\vectorfunction{A}=(a_{ij})\in\mathcal{M}_n(\RR)$. We define the \textit{cofactor matrix $\vectorfunction{C}$ of $\vectorfunction{A}$} as: $$\vectorfunction{C}=(b_{ij}),\quad\text{where }b_{ij}=(-1)^{i+j}\det\vectorfunction{A}_{ij}\footnote{$\vectorfunction{C}$ is usually denoted as $\cofactor\vectorfunction{A}$.}.$$ We define the \textit{adjugate matrix $\adjugate\vectorfunction{A}$ of $\vectorfunction{A}$} as: $$\adjugate\vectorfunction{A}=\transpose{\vectorfunction{C}}.$$
+    \end{definition}
+    \begin{theorem}
+        Let $\vectorfunction{A}\in\mathcal{M}_n(\RR)$. Then: $$\vectorfunction{A}\adjugate\vectorfunction{A}=(\det \vectorfunction{A})\vectorfunction{I}_n$$ Moreover if $\det \vectorfunction{A}\ne 0$, then: $$\vectorfunction{A}^{-1}=\frac{1}{\det \vectorfunction{A}}\adjugate\vectorfunction{A}$$
+    \end{theorem}
+    \subsection{Vector spaces}
+    \subsubsection*{Introduction and basic definitions}
+    \begin{definition}
+        A \textit{vector space over a field\footnote{See definition \ref{AS-field}.} $K$} is a set $V$ together with two operations
+        \begin{align*}
+            +:V\times V                                 & \longrightarrow V                                      & \cdot:K\times V              & \longrightarrow V                           \\
+            (\vectorfunction{v}_1,\vectorfunction{v}_2) & \longmapsto \vectorfunction{v}_1+ \vectorfunction{v}_2 & (\lambda,\vectorfunction{v}) & \longmapsto \lambda\cdot \vectorfunction{v}
+        \end{align*}
+        that satisfy the following properties:
+        \begin{enumerate}
+            \item $\vectorfunction{v}_1+(\vectorfunction{v}_2+\vectorfunction{v}_3)=(\vectorfunction{v}_1+\vectorfunction{v}_2)+\vectorfunction{v}_3\quad\forall\vectorfunction{v}_1,\vectorfunction{v}_2,\vectorfunction{v}_3\in V$.
+            \item $\vectorfunction{v}_1+\vectorfunction{v}_2=\vectorfunction{v}_2+\vectorfunction{v}_1\quad\forall\vectorfunction{v}_1,\vectorfunction{v}_2\in V$.
+            \item $\exists\vectorfunction{0}\in V$ such that $\vectorfunction{v}+\vectorfunction{0}=\vectorfunction{v}\quad\forall\vectorfunction{v}\in V$.
+            \item $\forall\vectorfunction{v}\in V$ there exists $-\vectorfunction{v}\in V$ such that $\vectorfunction{v}+(-\vectorfunction{v})=\vectorfunction{0}$.
+            \item $\lambda\cdot(\mu\cdot\vectorfunction{v})=(\lambda\mu)\cdot\vectorfunction{v}\quad\forall\vectorfunction{v}\in V$ and $\forall\lambda,\mu\in K$.
+            \item $1\cdot\vectorfunction{v}=\vectorfunction{v}\quad\forall\vectorfunction{v}\in V$, where 1 denotes the multiplicative identity element in $K$.
+            \item $\lambda\cdot(\vectorfunction{v}_1+\vectorfunction{v}_2)=\lambda\cdot\vectorfunction{v}_1+\lambda\cdot\vectorfunction{v}_2\quad\forall\vectorfunction{v}_1,\vectorfunction{v}_2\in V$ and $\forall\lambda\in K$.
+            \item $(\lambda+\mu)\cdot\vectorfunction{v}=\lambda\cdot\vectorfunction{v}+\mu\cdot\vectorfunction{v}\quad\forall\vectorfunction{v}\in V$ and $\forall\lambda,\mu\in K$.
+        \end{enumerate}
+        In these conditions, we say that $(V,+,\cdot)$ is a vector space\footnote{For simplicity we will denote the vector space only by $V$ and if the context is clear we won't refer to its associated field. Moreover sometimes we will also omit the product $\cdot$ between a scalar and a vector.}.
+    \end{definition}
+    \begin{definition}
+        Let $V$ be a vector space over a field $K$ and $U\subseteq V$ be a subset of $V$. Then, $U$ is a vector space over $K$ if the following property is satisfied:
+        $$\lambda \vectorfunction{u}_1+\mu \vectorfunction{u}_2\in U\quad\forall \vectorfunction{u}_1,\vectorfunction{u}_2\in U\text{ and }\forall\lambda,\mu\in K$$
+    \end{definition}
+    \begin{definition}
+        Let $V$ be a vector space and $U\subseteq V$. $U$ is a \textit{vector subspace of $V$} if it's itself a vector space with the operations defined in $V$.
+    \end{definition}
+    \begin{definition}
+        Let $V$ be a vector space over a field $K$. A \textit{linear combination of the vectors $\vectorfunction{v}_1,\ldots,\vectorfunction{v}_n\in V$} is a vector of the form $$a_1\vectorfunction{v}_1+\cdots+a_n\vectorfunction{v}_n$$ where $a_i\in K$, $i=1,\ldots,n$.
+    \end{definition}
+    \begin{definition}
+        Let $V$ be a vector space over a field $K$ and $U\subseteq V$. The set $$\langle U\rangle=\{a_1\vectorfunction{u}_1+\cdots+a_n\vectorfunction{u}_n:a_i\in K,\vectorfunction{u}_i\in U,i=1,\ldots,n\}$$ is called \textit{subspace generated by $U$}.
+    \end{definition}
+    \begin{lemma}
+        Let $V$ be a vector space and $U\subseteq V$. Then, $\langle U\rangle$ is a vector subspace of $V$. Moreover, $\langle U\rangle$ is the smallest subspace containing $U$.
+    \end{lemma}
+    \begin{definition}
+        Let $V$ be a vector space and $U\subseteq V$. We say that $U$ is a \textit{generating set of $V$} if $\langle U\rangle=V$.
+    \end{definition}
+    \subsubsection*{Linear independence}
+    \begin{definition}
+        Let $V$ be a vector space over a field $K$. The vectors $\vectorfunction{v}_1,\ldots,\vectorfunction{v}_n\in V$ are \textit{linearly independent} if the unique solution of the equation $$a_1\vectorfunction{v}_1+\cdots+a_n\vectorfunction{v}_n=0$$ for $a_i\in K$, $i=1,\ldots,n$, is $a_1=\cdots=a_n=0$. Otherwise we say that the vectors $\vectorfunction{v}_1,\ldots,\vectorfunction{v}_n$ are \textit{linearly dependent}.
+    \end{definition}
+    \begin{lemma}
+        Let $V$ be a vector space. The vectors $\vectorfunction{v}_1,\ldots,\vectorfunction{v}_n$ are linearly dependent if and only if one of them is a linear combination of the others.
+    \end{lemma}
+    \begin{definition}
+        Let $V$ be a vector space. A \textit{basis of $V$} is an ordered set $\mathfrak{B}=(\vectorfunction{v}_1,\ldots,\vectorfunction{v}_n)$ of vectors of $V$ such that:
+        \begin{enumerate}
+            \item $\langle \vectorfunction{v}_1,\ldots,\vectorfunction{v}_n\rangle = V$.
+            \item $\vectorfunction{v}_1,\ldots,\vectorfunction{v}_n$ are linearly independent.
+        \end{enumerate}
+    \end{definition}
+    \begin{lemma}[Steinitz exchange lemma]
+        Let $V$ be a vector space, $\mathfrak{B}$ be bases of $V$ be and $\vectorfunction{v}_1,\ldots,\vectorfunction{v}_k\in V$ be linearly independent vectors of $V$. Then, we can exchange $k$ appropriate vectors of $\mathfrak{B}$ by $\vectorfunction{v}_1,\ldots,\vectorfunction{v}_k$ to define a new basis.
+    \end{lemma}
+    \begin{corollary}
+        Let $V$ be a vector space that has a finite basis $\mathfrak{B}=(\vectorfunction{v}_1,\ldots,\vectorfunction{v}_n)$. Then, all basis of $V$ be are finite and they have the same number ($n$) of vectors.
+    \end{corollary}
+    \begin{lemma}
+        Let $V$ be a vector space. Suppose we have a generating set $S=\{\vectorfunction{v}_1,\ldots,\vectorfunction{v}_n\}$ of $V$. Then, $V$ be admits a basis formed with a subset of $S$.
+    \end{lemma}
+    \begin{definition}
+        Let $V$ be a finite vector space. The \textit{dimension of $V$}, denoted by $\dim V$, is the number of vectors in any basis of $V$.
+    \end{definition}
+    \begin{definition}
+        Let $V$ be a finite vector space over a field $K$, $\mathfrak{B}=(\vectorfunction{v}_1,\ldots,\vectorfunction{v}_n)$ be a basis of $V$ be and $\vectorfunction{v}\in V$. Suppose $$\vectorfunction{v}=a_1\vectorfunction{v}_1+\cdots+a_n\vectorfunction{v}_n$$ for some $a_i\in K$, $i=1,\ldots,n$. We call $(a_1,\ldots,a_n)\in K^n$ \textit{coordinates of $\vectorfunction{v}$ on the basis $\mathfrak{B}$} and we denote it by $[\vectorfunction{v}]_{\mathfrak{B}}$.
+    \end{definition}
+    \begin{prop}
+        Let $V$ be a vector space. If $\dim V<\infty$, the maximum number of linearly independent vectors is equal to $\dim V$. If $\dim V=\infty$, there is no such maximum.
+    \end{prop}
+    \begin{prop}
+        Let $V$ be a vector space of dimension $n$. Then, $n$ is de minimum size of a generating set of $V$.
+    \end{prop}
+    \begin{prop}
+        Let $V$ be a finite vector space and $U$ be a vector subspace of $V$. Then, $\dim U\leq\dim V$ and $$\dim U=\dim V\iff U=V$$
+    \end{prop}
+    \subsubsection*{Sum of subspaces}
+    \begin{lemma}
+        Let $V$ be a vector space and $U,W\subseteq V$ be two vector subspaces of $V$. Then, the intersection $U\cap W$ is a vector subspace of $V$.
+    \end{lemma}
+    \begin{definition}
+        Let $V$ be a vector space and $U,W\subseteq V$ be two vector subspaces of $V$. The \textit{sum of $U$ and $W$} is: $$U+W=\langle U\cup W\rangle=\{\vectorfunction{u}+\vectorfunction{w}: \vectorfunction{u}\in U,\vectorfunction{w}\in W\}$$
+    \end{definition}
+    \begin{prop}[Gra\ss mann formula]
+        Let $V$ be a finite vector space and $U,W\subseteq V$ be two vector subspace of $V$. Then: $$\dim (U+W)+\dim(U\cap W)=\dim U+\dim W$$
+    \end{prop}
+    \begin{lemma}
+        Let $V$ be a vector space and $U,W\subseteq V$ be two vector subspaces of $V$. Then, $U\cap W=\{0\}$ if and only if all vectors $\vectorfunction{v}\in U+W$ can be written uniquely as $\vectorfunction{v}=\vectorfunction{u}+\vectorfunction{w}$, with $\vectorfunction{u}\in U$ and $\vectorfunction{w}\in W$.
+    \end{lemma}
+    \begin{definition}[Direct sum]
+        Let $V$ be a vector space and $U,W\subseteq V$ be two vector subspaces of $V$. Then, the sum $U+W$ is \textit{direct} if $U\cap W=\{0\}$. In this case we denote the sum as $U\oplus W$. More generally, if $U_1,\ldots,U_n\subseteq V$ are vector subspaces of $V$, the sum $U=U_1+\cdots+U_n$ is direct if all vector $\vectorfunction{u}\in U$ can be written uniquely as $\vectorfunction{u}=\vectorfunction{u}_1+\cdots+\vectorfunction{u}_n$, where $\vectorfunction{u}_i\in U_i$ for $i=1,\ldots,n$. In this case we denote the sum by $U_1\oplus\cdots\oplus U_n$.
+    \end{definition}
+    \subsubsection*{Rank of a matrix}
+    \begin{definition}
+        Let $\vectorfunction{A}\in\mathcal{M}_{n\times m}(\RR)$. The \textit{row rank of $\vectorfunction{A}$} is the dimension of the subspace generated by the rows of $\vectorfunction{A}$ in $\RR^m$. Analogously, the \textit{column rank of $\vectorfunction{A}$} is the dimension of the subspace generated by the columns of $\vectorfunction{A}$ in $\RR^n$.
+    \end{definition}
+    \begin{prop}
+        Let $\vectorfunction{A}\in\mathcal{M}_{n\times m}(\RR)$. Then, the row rank of $\vectorfunction{A}$ is equal to the column rank of $\vectorfunction{A}$. Therefore, we refer to it simply as \textit{rank of $\vectorfunction{A}$} or $\rank\vectorfunction{A}$.
+    \end{prop}
+    \begin{definition}
+        Let $\vectorfunction{A}\in\mathcal{M}_n(\RR)$. A \textit{minor of order $k$ of $\vectorfunction{A}$} is a submatrix $\vectorfunction{A}'\in\mathcal{M}_k(\RR)$ obtained from $\vectorfunction{A}$ selecting $k$ rows and $k$ columns of $\vectorfunction{A}$.
+    \end{definition}
+    \begin{prop}
+        Let $\vectorfunction{A}\in\mathcal{M}_{n\times m}(\RR)$. Then:
+        $$\rank\vectorfunction{A}=\max\{k:\text{$\vectorfunction{A}$\ has an invertible minor of order $k$}\}$$
+    \end{prop}
+    \subsubsection*{Quotient vector space}
+    \begin{definition}
+        Let $V$ be a vector space and $U\subseteq V$ be a vector subspace. We say that $W\subseteq V$ is a \textit{complementary subspace of $U$} if $U\oplus W=V$.
+    \end{definition}
+    \begin{definition}
+        Let $V$ be a finite vector space of dimension $n$ and $U\subseteq V$ be a vector subspace of dimension $m$. Then, there exists a complementary subspace of $U$ and its dimension is $n-m$.
+    \end{definition}
+    \begin{definition}
+        Let $V$ be a vector space and $U\subseteq V$ be a vector subspace. We say the vectors $\vectorfunction{v}_1,\vectorfunction{v}_2\in V$ are \textit{equivalent modulo $U$}, $\vectorfunction{v}_1\sim_U\vectorfunction{v}_2$, if $\vectorfunction{v}_1-\vectorfunction{v}_2\in U$.
+    \end{definition}
+    \begin{lemma}
+        Let $V$ be a vector space and $U\subseteq V$ be a vector subspace. Then, $\sim_U$ is an equivalence relation and, moreover, if $\vectorfunction{v}\in V$ the \textit{equivalence class $[\vectorfunction{v}]$ of $\vectorfunction{v}$} is: $$[\vectorfunction{v}]=\vectorfunction{v}+U:=\{\vectorfunction{v}+\vectorfunction{u}:\vectorfunction{u}\in U\}$$
+    \end{lemma}
+    \begin{definition}
+        Let $V$ be a vector space over a field $K$ and $U\subseteq V$ be a vector subspace. We define the \textit{quotient space $\quot{V}{U}$ under $\sim_U$} as the set of equivalence classes with the operations defined as:
+        $$[\vectorfunction{v}_1]+[\vectorfunction{v}_2]=[\vectorfunction{v}_1+\vectorfunction{v}_2]\qquad \lambda[\vectorfunction{v}_1]=[\lambda\vectorfunction{v}_1]$$
+        for all $\vectorfunction{v}_1,\vectorfunction{v}_2\in V$ and all $\lambda\in K$.
+    \end{definition}
+    \begin{prop}
+        Let $V$ be a vector space over a field $K$ and $U\subseteq V$ be a vector subspace. The set $\quot{V}{U}$ together with the two operations defined above is a vector space over $K$.
+    \end{prop}
+    \begin{prop}
+        Let $V$ be a finite vector space of dimension $n$ and $U\subseteq V$ be a vector subspace. Then: $$\dim\left(\quot{V}{U}\right)=\dim V-\dim U$$
+    \end{prop}
+    \subsection{Linear maps}
+    \begin{definition}
+        Let $U$, $V$ be two vector spaces over a field $K$. A function $f:U\rightarrow V$ is a \textit{linear map} if $\forall\vectorfunction{u}_1,\vectorfunction{u}_2\in U$ and $\forall\lambda\in K$ the following two conditions are satisfied:
+        \begin{enumerate}
+            \item $f(\vectorfunction{u}_1+\vectorfunction{u}_2)=f(\vectorfunction{u}_1)+f(\vectorfunction{u}_2)$.
+            \item $f(\lambda \vectorfunction{u}_1)=\lambda f(\vectorfunction{u}_1)$.
+        \end{enumerate}
+    \end{definition}
+    \begin{prop}
+        Let $U$, $V$ be two vector spaces over a field $K$. Then, if $f:U\rightarrow V$ is a linear map, $\forall\vectorfunction{u}_1,\vectorfunction{u}_2\in U$ and $\forall\lambda,\mu\in K$ we have:
+        \begin{enumerate}
+            \item $f(\vectorfunction{0})=\vectorfunction{0}$.
+            \item $f(-\vectorfunction{u}_1)=-f(\vectorfunction{u}_1)$.
+            \item $f(\lambda\vectorfunction{u}_1+\mu\vectorfunction{u}_2)=\lambda f(\vectorfunction{u}_1)+\mu f(\vectorfunction{u}_2)$.
+        \end{enumerate}
+    \end{prop}
+    \begin{prop}
+        Let $U$, $V$, $W$ be three vector spaces. If $f:U\rightarrow V$ and $g:V\rightarrow W$ are linear maps, then $g\circ f:U\rightarrow W$ is a linear map.
+    \end{prop}
+    \begin{prop}
+        Let $U$, $V$ be two vector spaces. If $f:U\rightarrow V$ is a bijective linear map, then $f^{-1}:U\rightarrow V$ is a linear map.
+    \end{prop}
+    \begin{prop}
+        Let $U$, $V$ be two vector spaces, $f:U\rightarrow V$ be a linear map and $W\subseteq U$ and $Z\subseteq V$ be vector subspaces. Then:
+        \begin{enumerate}
+            \item $f(W)=\{f(\vectorfunction{w}): \vectorfunction{w}\in W\}\subseteq V$ is a vector subspace.
+            \item $f^{-1}(Z)=\{\vectorfunction{u}\in U: f(\vectorfunction{u})\in Z\}\subseteq U$ is a vector subspace.
+        \end{enumerate}
+        In particular, $f(V)$ is denoted by $\im f$ and $f^{-1}(\{0\})$ is denoted by $\ker f$ and these subspaces are called \textit{image of $f$} and \textit{kernel of $f$}, respectively. More precisely, their definitions are:
+        $$\im f=\{f(\vectorfunction{u}): \vectorfunction{u}\in U\}\qquad\ker f=\{\vectorfunction{u}\in U: f(\vectorfunction{u})=0\}$$
+    \end{prop}
+    \begin{prop}
+        Let $U$, $V$ be two vector spaces and $f:U\rightarrow V$ be a linear map. Then:
+        \begin{enumerate}
+            \item $f$ is injective if and only if $\ker f=\{0\}$
+            \item $f$ is surjective if and only if $\im f=V$.
+        \end{enumerate}
+    \end{prop}
+    \begin{corollary}
+        Let $U$, $V$ be two finite vector spaces and $f:U\rightarrow V$ be a linear map. Then:
+        \begin{enumerate}
+            \item $f$ is injective if and only if $\dim(\ker f)=0$
+            \item $f$ is surjective if and only if $\dim(\im f)=\dim V$.
+        \end{enumerate}
+    \end{corollary}
+    \begin{definition}
+        \hfill
+        \begin{itemize}
+            \item A monomorphism is an injective linear map.
+            \item An epimorphism is a surjective linear map.
+            \item An isomorphism is a bijective linear map.
+            \item An endomorphism is a linear map from a vector space to itself.
+            \item An automorphism is a bijective endomorphism.
+        \end{itemize}
+    \end{definition}
+    \begin{definition}
+        We say that two vector spaces $U$ and $V$ are \textit{isomorphic}, $V\cong U$, if there exists an isomorphism between them.
+    \end{definition}
+    \begin{prop}
+        Let $U$, $V$ be two vector spaces and $f:U\rightarrow V$ be a monomorphism. If $\vectorfunction{u}_1,\ldots,\vectorfunction{u}_n\in U$ are linearly independent vectors, then $f(\vectorfunction{u}_1),\ldots,f(\vectorfunction{u}_n)$  are linearly independent.
+    \end{prop}
+    \begin{lemma}
+        Let $U$, $V$ be two vector spaces and $f:U\rightarrow V$ be a linear map. If $\vectorfunction{u}_1,\ldots,\vectorfunction{u}_n\in U$, then: $$\langle f(\vectorfunction{u}_1),\ldots,f(\vectorfunction{u}_n)\rangle=f(\langle\vectorfunction{u}_1,\ldots,\vectorfunction{u}_n\rangle)$$
+    \end{lemma}
+    \begin{corollary}
+        Let $U$, $V$ be two vector spaces and $f:U\rightarrow V$ be an epimorphism. If $\langle\vectorfunction{u}_1,\ldots,\vectorfunction{u}_n\rangle= U$, then $\langle f(\vectorfunction{u}_1),\ldots,f(\vectorfunction{u}_n)\rangle=V$.
+    \end{corollary}
+    \begin{corollary}
+        Let $U$, $V$ be two vector spaces and $f:U\rightarrow V$ be an isomorphism. If $(\vectorfunction{u}_1,\ldots,\vectorfunction{u}_n)$ is a basis of $U$, then $(f(\vectorfunction{u}_1),\ldots,f(\vectorfunction{u}_n))$ is a basis of $V$.
+    \end{corollary}
+    \begin{theorem}[Coordination theorem]
+        Let $V$ be a finite vector space over a field $K$ of dimension $n$ and $\mathfrak{B}=(\vectorfunction{v}_1,\ldots,\vectorfunction{v}_n)$ be a basis of $V$. Then, the function $f:K^n\rightarrow V$ defined by $$f(a_1,\ldots,a_n)=a_1\vectorfunction{v}_1+\cdots a_n\vectorfunction{v}_n$$ is a isomorphism.
+    \end{theorem}
+    \begin{corollary}
+        Two finite vector spaces are isomorphic if and only if they have the same dimension.
+    \end{corollary}
+    \subsubsection*{Isomorphism theorems}
+    \begin{theorem}[First isomorphism theorem]
+        Let $U$, $V$ be two vector spaces and $f:U\rightarrow V$ be a linear map. Then, there exists an isomorphism $\Tilde{f}:\quot{U}{\ker f}\rightarrow \im f$ satisfying $f=\Tilde{f}\circ\pi$, where $\pi:U\rightarrow \quot{U}{\ker f}$, $\pi(\vectorfunction{u})=[\vectorfunction{u}]$.
+        \begin{center}
+            \begin{minipage}{\linewidth}
+                \centering
+                \includestandalone[mode=image|tex,width=0.35\linewidth]{Images/first_isomorphism}
+                \captionof{figure}{}
+            \end{minipage}
+        \end{center}
+    \end{theorem}
+    \begin{corollary}
+        Let $U$, $V$ be two vector spaces such that $\dim U=n$ and let $f:U\rightarrow V$ be a linear map. Then: $$\dim(\ker f)+\dim(\im f)=n$$
+    \end{corollary}
+    \begin{corollary}
+        Let $U$, $V$ be two finite vector spaces of dimensions $n$ and $f:U\rightarrow V$ be a linear map. Then: $$f\text{ is injective}\iff f\text{ is surjective}\iff f\text{ is bijective}$$
+    \end{corollary}
+    \begin{theorem}[Second isomorphism theorem]
+        Let $V$ be a vector space and $U,W\subseteq V$ be two vector subspaces. Then, there exists an isomorphism $$\quot{U}{U\cap W}\cong\quot{U+W}{W}$$
+    \end{theorem}
+    \begin{theorem}[Third isomorphism theorem]
+        Let $U$, $V$, $W$ be three vector spaces such that $W\subseteq U\subseteq V$. Then, there exists an isomorphism $$\quot{{(\textstyle\quot{V}{W})}}{{(\textstyle\quot{U}{W})}}\cong\quot{V}{U}$$
+    \end{theorem}
+    \begin{theorem}
+        Let $U$, $V$ be two vector spaces over a field $K$, $\mathfrak{B}=(\vectorfunction{u}_1,\ldots,\vectorfunction{u}_n)$ be a basis of $U$ and $\vectorfunction{v}_1,\ldots,\vectorfunction{v}_n\in V$ be any vectors of $V$. Then, there exists a unique linear map $f:U\rightarrow V$ such that $f(\vectorfunction{u}_i)=\vectorfunction{v}_i$, $i=1,\ldots,n$.
+    \end{theorem}
+    \subsubsection*{Matrix of a linear map}
+    \begin{prop}
+        Let $U$, $V$ be two finite vector spaces over a field $K$ with $\dim U=n$ and $\dim V=m$, $\mathfrak{B}$ and $\mathfrak{B}'$ be bases of $U$ be and $V$ respectively and $f:U\rightarrow V$ be a linear map. Then, there exists a matrix $\vectorfunction{A}\in\mathcal{M}_{m\times n}(K)$ such that $\forall\vectorfunction{u}\in U$: $$[f(\vectorfunction{u})]_{\mathfrak{B}'}=\vectorfunction{A}[\vectorfunction{u}]_\mathfrak{B}$$
+        The matrix $\vectorfunction{A}$ is called \textit{matrix of $f$ in the basis $\mathfrak{B}$ and $\mathfrak{B}'$} and it is denoted by $[f]_{\mathfrak{B},\mathfrak{B}'}$\footnote{If $U=V$ and $\mathfrak{B}=\mathfrak{B}'$, we denote $[f]_{\mathfrak{B},\mathfrak{B}}$ simply by $[f]_{\mathfrak{B}}$.}.
+    \end{prop}
+    \begin{corollary}
+        Let $V$ be a finite vector space, $\mathfrak{B}$ and $\mathfrak{B}'$ be two basis of $V$ respectively and $\id:V\rightarrow V$ be the identity linear map. Then, $\forall\vectorfunction{u}\in V$ we have: $$[\vectorfunction{u}]_{\mathfrak{B}'}=[\id]_{\mathfrak{B},\mathfrak{B}'}[\vectorfunction{u}]_\mathfrak{B}$$ The matrix $[\id]_{\mathfrak{B},\mathfrak{B}'}$ is called \textit{change-of-basis matrix}.
+    \end{corollary}
+    \begin{prop}
+        Let $U$, $V$, $W$ be three vector spaces, $\mathfrak{B}$, $\mathfrak{B}'$, $\mathfrak{B}''$ be bases of $U$, $V$ and $W$ respectively and $f:U\rightarrow V$ and $g:V\rightarrow W$ be linear maps. Then, $g\circ f:U\rightarrow W$ has the following matrix in the basis $\mathfrak{B}$ and $\mathfrak{B}''$: $$[g\circ f]_{\mathfrak{B},\mathfrak{B}''}=[g]_{\mathfrak{B}',\mathfrak{B}''}[f]_{\mathfrak{B},\mathfrak{B}'}$$
+    \end{prop}
+    \begin{corollary}
+        Let $V$ be a finite vector space, $\mathfrak{B}$ and $\mathfrak{B}'$ be two basis of $V$. Then, the matrix $[id]_{\mathfrak{B},\mathfrak{B}'}$ is invertible and $${\left([\id]_{\mathfrak{B},\mathfrak{B}'}\right)}^{-1}=[\id]_{\mathfrak{B}',\mathfrak{B}}$$
+    \end{corollary}
+    \begin{corollary}
+        Let $U$, $V$ be two finite vector spaces, $\mathfrak{B}$ and $\mathfrak{B}'$ be bases of $U$ and $V$ respectively and $f:U\rightarrow V$ be a linear map. Then:
+        \begin{enumerate}
+            \item $f$ is injective $\iff\rank[f]_{\mathfrak{B},\mathfrak{B}'}=\dim U$.
+            \item $f$ is surjective $\iff\rank[f]_{\mathfrak{B},\mathfrak{B}'}=\dim V$.
+        \end{enumerate}
+    \end{corollary}
+    \begin{corollary}
+        Let $U$, $V$ be two finite vector spaces. A linear map $f:U\rightarrow V$ is an isomorphism if and only if there exist basis $\mathfrak{B}$ and $\mathfrak{B}'$ of $U$ and $V$ respectively such that $[f]_{\mathfrak{B},\mathfrak{B}'}$ is invertible.
+    \end{corollary}
+    \begin{prop}[Change of basis formula]
+        Let $U$, $V$ be two finite vector spaces, $\mathfrak{B}_1$ and $\mathfrak{B}_2$ be bases of $U$, $\mathfrak{B}_1'$ and $\mathfrak{B}_2'$ be bases of $V$ and $f:U\rightarrow V$ be a linear map. Then: $$[f]_{\mathfrak{B}_2,\mathfrak{B}_2'}=[\id]_{\mathfrak{B}_1',\mathfrak{B}_2'}[f]_{\mathfrak{B}_1,\mathfrak{B}_1'}[\id]_{\mathfrak{B}_2,\mathfrak{B}_1}$$
+    \end{prop}
+    \begin{lemma}
+        Let $U$, $V$ be two finite vector spaces over a field $K$ with $\dim U=n$ and $\dim V=m$ and $\mathfrak{B}$ and $\mathfrak{B}'$ be bases of $U$ be and $V$ respectively. Then, any matrix $\vectorfunction{A}\in\mathcal{M}_{m\times n}(K)$ determines a linear map $f:U\rightarrow V$ with $[f]_{\mathfrak{B},\mathfrak{B}'}=\vectorfunction{A}$.
+    \end{lemma}
+    \begin{theorem}
+        Let $U$, $V$ be two finite vector spaces and $f:U\rightarrow V$ be a linear map. Then, there exist basis $\mathfrak{B}$ of $U$ and $\mathfrak{B}'$ of $V$ such that:
+        $$[f]_{\mathfrak{B},\mathfrak{B}'}=\left(
+            \begin{array}{c|c}
+                    \vectorfunction{I}_r & \vectorfunction{0} \\
+                    \hline
+                    \vectorfunction{0}   & \vectorfunction{0}
+                \end{array}\right)$$
+        where $r=\dim\left(\im f\right)$.
+    \end{theorem}
+    \subsubsection*{Dual space}
+    \begin{lemma}
+        Let $U$, $V$ be two finite vector spaces over a field $K$. Then, the set $$\mathcal{L}(U,V):=\{f: f\text{ is a linear map from $U$ to $V$}\}\footnote{If $U=V$, we denote $\mathcal{L}(V,V)$ simply as $\mathcal{L}(V)$.}$$ is a vector space over $K$ with the operations defined as:
+        \begin{enumerate}
+            \item $(f+g)(\vectorfunction{u})=f(\vectorfunction{u})+f(\vectorfunction{u})\quad\forall f,g\in\mathcal{L}(U,V)$ and $\forall \vectorfunction{u}\in U$.
+            \item $(f\lambda)(\vectorfunction{u})=\lambda f(\vectorfunction{u})\quad\forall f,g\in\mathcal{L}(U,V)$, $\forall \vectorfunction{u}\in U$ and $\forall \lambda\in K$.
+        \end{enumerate}
+    \end{lemma}
+    \begin{prop}
+        Let $U$, $V$ be two finite vector spaces over a field $K$ with $\dim U=n$ and $\dim V=m$. Then, for all basis $\mathfrak{\mathfrak{B}}$ of $U$ be and $\mathfrak{B}'$ of $V$, the function
+        \begin{align*}
+            \mathcal{L}(U,V) & \longrightarrow\mathcal{M}_{m\times n}(K)   \\
+            f                & \longmapsto[f]_{\mathfrak{B},\mathfrak{B}'}
+        \end{align*}
+        is a isomorphism.
+    \end{prop}
+    \begin{corollary}
+        Let $U$, $V$ be two finite vector spaces with $\dim U=n$, $\dim V=m$. Then, $\dim \mathcal{L}(U,V)=nm$.
+    \end{corollary}
+    \begin{definition}
+        Let $V$ be a vector space over a field $K$. We define the \textit{dual space $V^*$ of $V$} as: $$V^*:=\mathcal{L}(V,K)$$
+    \end{definition}
+    \begin{prop}
+        Let $V$ be a finite vector space over a field $K$ with $\dim V=n$ and $\mathfrak{B}$ be a basis of $V$. Then, the function
+        \begin{align*}
+            V^*    & \longrightarrow\mathcal{M}_{1\times n}(K) \\
+            \omega & \longmapsto[\omega]_{\mathfrak{B},1}
+        \end{align*}
+        is a isomorphism. Therefore, $\dim V^*=\dim V$.
+    \end{prop}
+    \begin{definition}
+        We define the \textit{Kronecker delta $\delta_{ij}$} as the function: $$\delta_{ij}=\left\{
+            \begin{array}{ccc}
+                0 & \text{if} & i\ne j \\
+                1 & \text{if} & i=j
+            \end{array}
+            \right.$$
+    \end{definition}
+    \begin{definition}
+        Let $V$ be a finite vector space and $\mathfrak{B}=(\vectorfunction{v}_1,\ldots,\vectorfunction{v}_n)$ be a basis of $V$. We define the \textit{dual basis $\mathfrak{B}^*$ of $\mathfrak{B}$} as the basis of $V^*$ formed by $(\eta_1,\ldots,\eta_n)$ where $$\eta_i(\vectorfunction{v}_j)=\delta_{ij}$$
+    \end{definition}
+    \begin{lemma}
+        Let $V$ be a vector space over a field $K$, $\mathfrak{B}$ be a basis of $V$ and $(\vectorfunction{v}_1^*,\ldots,\vectorfunction{v}_n^*)$ be the dual basis of $\mathfrak{B}$. Then, $\forall \vectorfunction{v}\in V$: $$[\vectorfunction{v}]_\mathfrak{B}=(\vectorfunction{v}_1^*(\vectorfunction{v}),\ldots,\vectorfunction{v}_n^*(\vectorfunction{v}))\in K^n$$
+    \end{lemma}
+    \begin{lemma}
+        Let $V$ be a vector space over a field $K$, $\mathfrak{B}=(\vectorfunction{v}_1,\ldots,\vectorfunction{v}_n)$ be a basis of $V$ and $\mathfrak{B}^*$ be the dual basis of $\mathfrak{B}$. Then, $\forall \omega\in V^*$: $$[\omega]_{\mathfrak{B}^*}=(\omega(\vectorfunction{v}_1),\ldots,\omega(\vectorfunction{v}_n))\in K^n$$
+    \end{lemma}
+    \begin{definition}[Dual map]
+        Let $U$, $V$ be two vector spaces over a field $K$ and $f\in \mathcal{L}(U,V)$. The function $f^*$ defined by
+        \begin{align*}
+            f^*:U^* & \longrightarrow V^*      \\
+            \omega  & \longmapsto\omega\circ f
+        \end{align*}
+        is a linear map and it's called \textit{dual map of $f$}.
+    \end{definition}
+    \begin{theorem}
+        Let $U$, $V$ be two finite vector spaces, $\mathfrak{B}$ and $\mathfrak{B}'$ be bases of $U$ and $V$ respectively and $f\in\mathcal{L}(U,V)$. Then: $$[f^*]_{\mathfrak{B}'^*,\mathfrak{B}^*}={([f]_{\mathfrak{B},\mathfrak{B}'})}^\mathrm{T}$$
+    \end{theorem}
+    \subsubsection*{Double dual space}
+    \begin{definition}[Double dual space]
+        Let $V$ be a vector space over a field $K$. The \textit{double dual space $V^{**}$ of $V$} is defined as: $$V^{**}:={(V^*)}^*=\mathcal{L}(V^*,K)$$
+    \end{definition}
+    \begin{prop}
+        Let $V$ be a vector space over a field $K$ and $\vectorfunction{v}\in V$. We define the function:
+        \begin{align*}
+            \phi_{\vectorfunction{v}}:V^* & \longrightarrow K                     \\
+            \omega                        & \longmapsto\omega(\vectorfunction{v})
+        \end{align*}
+        which is linear. This map induces an injective linear map $\Phi$ defined by:
+        \begin{align*}
+            \Phi:V             & \longrightarrow V^{**}               \\
+            \vectorfunction{v} & \longmapsto\phi_{\vectorfunction{v}}
+        \end{align*}
+        Moreover, if $\dim V<\infty$, $\Phi$ is a natural isomorphism\footnote{This means that the definition of $\Phi$ does not depend on a choice of basis.}.
+    \end{prop}
+    \subsubsection*{Annihilator space}
+    \begin{definition}
+        Let $V$ be a vector space and $U\subseteq V^*$ be a vector subspace of $V^*$. We define the \textit{annihilator of $U$} as:
+        $$U^0=\{\vectorfunction{v}\in V:\omega(\vectorfunction{v})=0\;\forall\omega\in U\}$$
+    \end{definition}
+    \begin{lemma}
+        Let $V$ be a vector space and $U\subseteq V^*$ be a vector subspace of $V^*$. If $U=\langle\omega_1,\ldots,\omega_n\rangle$, then $U^0$ is the set of solutions of the system:
+        $$\left\{
+            \begin{array}{c}
+                \omega_1(\vectorfunction{v})=0 \\
+                \vdots                         \\
+                \omega_n(\vectorfunction{v})=0
+            \end{array}
+            \right.$$
+    \end{lemma}
+    \begin{lemma}
+        Let $V$ be a vector space and $U\subseteq V^*$ be a vector subspace of $V^*$. Then, $U^0$ is a vector subspace of $V^*$.
+    \end{lemma}
+    \begin{theorem}
+        Let $V$ be a finite vector space and $U\subseteq V^*$ be a vector subspace of $V^*$. Then: $$\dim U^0+\dim U=\dim V$$
+    \end{theorem}
+    \begin{definition}
+        Let $V$ be a vector space and $U\subseteq V$ be a vector subspace of $V$. We define the \textit{annihilator of $U$} as:
+        $$U^0=\{\omega\in V^*:\omega(\vectorfunction{v})=0\;\forall\vectorfunction{v}\in U\}$$
+    \end{definition}
+    \begin{lemma}
+        Let $V$ be a vector space and $U\subseteq V$  be a vector subspace of $V$. If $U=\langle\vectorfunction{v}_1,\ldots,\vectorfunction{v}_n\rangle$, then: $$U^0=\{\omega\in V^*:\omega(\vectorfunction{v}_1)=\cdots=\omega(\vectorfunction{v}_n)=0\}$$
+    \end{lemma}
+    \begin{prop}
+        Let $V$ be a vector space. Then, whether $U\subseteq V$ or $U\subseteq V^*$, we have: $${(U^0)}^0=U$$
+    \end{prop}
+    \subsection{Classification of endomorphisms}
+    \begin{definition}
+        Let $V$ be a vector space over a field $K$ and $\lambda\in K$. A \textit{homothety of ratio $\lambda$} is a linear map $f:V\rightarrow V$ such that $f(\vectorfunction{v})=\lambda\vectorfunction{v}$ $\forall\vectorfunction{v}\in V$.
+    \end{definition}
+    \subsubsection*{Similarity}
+    \begin{definition}
+        Let $V$ be a vector space and $f,g\in\mathcal{L}(V)$. We say that $f$ and $g$ are \textit{similar} if there are basis $\mathfrak{B}$ and $\mathfrak{B}'$ of $V$ such that $[f]_\mathfrak{B}=[g]_{\mathfrak{B}'}$.
+    \end{definition}
+    \begin{lemma}
+        Let $V$ be a vector space, $\mathfrak{B}$ and $\mathfrak{B}'$ basis of $V$ and $f\in\mathcal{L}(V)$. If $\vectorfunction{M}=[f]_\mathfrak{B}$, $\vectorfunction{N}=[f]_{\mathfrak{B}'}$ and $\vectorfunction{P}=[\id]_{\mathfrak{B},\mathfrak{B}'}$, then: $$\vectorfunction{M}=\vectorfunction{P}^{-1}\vectorfunction{N}\vectorfunction{P}$$
+    \end{lemma}
+    \begin{definition}
+        Let $K$ be a field. Two matrices $\vectorfunction{M}, \vectorfunction{N}\in\mathcal{M}_n(K)$ are \textit{similar} if there exists a matrix $\vectorfunction{P}\in\GL_n(K)$ such that $\vectorfunction{M}=\vectorfunction{P}^{-1}\vectorfunction{N}\vectorfunction{P}$.
+    \end{definition}
+    \begin{prop}
+        Let $V$ be a finite vector space and $f,g\in\mathcal{L}(V)$.
+        \begin{enumerate}
+            \item $f$ and $g$ are similar if and only if for all basis $\mathfrak{B}$ of $V$ the matrices $[f]_\mathfrak{B}$ and $[g]_\mathfrak{B}$ are similar.
+            \item $f$ and $g$ are similar if and only if there is an automorphism $h\in\mathcal{L}(V)$ such that $g=h^{-1}fh$.
+        \end{enumerate}
+    \end{prop}
+    \subsubsection*{Diagonalization}
+    \begin{definition}
+        Let $K$ be a field. A matrix $\vectorfunction{A}=(a_{ij})\in\mathcal{M}_n(K)$ is \textit{diagonal} if $a_{ij}=0$ whenever $i\ne j$. That is, $\vectorfunction{A}$ is of the form:
+        $$\vectorfunction{A}=
+            \begin{pmatrix}
+                a_{11} & 0      & \cdots & 0      \\
+                0      & a_{22} & \ddots & \vdots \\
+                \vdots & \ddots & \ddots & 0      \\
+                0      & \cdots & 0      & a_{nn}
+            \end{pmatrix}
+        $$
+    \end{definition}
+    \begin{definition}
+        Let $K$ be a field. A matrix $\vectorfunction{A}\in\mathcal{M}_n(K)$ is \textit{diagonalizable} if it is similar to diagonal matrix.
+    \end{definition}
+    \begin{definition}
+        An endomorphism is \textit{diagonalizable} if its associated matrix in some basis is diagonalizable.
+    \end{definition}
+    \begin{definition}
+        Let $V$ be a vector space over a field $K$ and $f\in\mathcal{L}(V)$. We say that a nonzero vector $\vectorfunction{v}\in V$ is an \textit{eigenvector of $f$ with eigenvalue $\lambda\in K$} if $f(\vectorfunction{v})=\lambda \vectorfunction{v}$.
+    \end{definition}
+    \begin{lemma}
+        Let $V$ be a vector space over a field $K$, $f\in\mathcal{L}(V)$ and $\lambda\in K$. The eigenvectors of $f$ of eigenvalue $\lambda$ are the nonzero vectors of the subspace $\ker(f-\lambda\id)$, called \textit{eigenspace corresponding to $\lambda$}.
+    \end{lemma}
+    \begin{lemma}
+        Let $V$ be a vector space over a field $K$ with $\dim V=n$, $\mathfrak{B}$ be a basis of $V$ and $f\in\mathcal{L}(V)$. Then, $\det([f-x\id]_\mathfrak{B})$ is a polynomial on the variable $x$ of degree $n$ and with coefficients in $K$. Moreover, the dominant coefficient is $(-1)^n$ and the constant term is $\det([f]_\mathfrak{B})$.
+    \end{lemma}
+    \begin{corollary}
+        Let $V$ be a vector space of dimension $n$ and $f\in\mathcal{L}(V)$. Then, $f$ has at most $n$ distinct eigenvalues.
+    \end{corollary}
+    \begin{corollary}
+        Let $V$ be a vector space over $\CC$ and $f\in\mathcal{L}(V)$. Then, $f$ has at least one eigenvalue.
+    \end{corollary}
+    \begin{definition}
+        Let $K$ be a field and $\vectorfunction{A}\in\mathcal{M}_n(K)$. The polynomial $p_{\vectorfunction{A}}(\lambda)=\det(\vectorfunction{A}-\lambda \vectorfunction{I}_n)$ is called \textit{characteristic polynomial of $\vectorfunction{A}$}.
+    \end{definition}
+    \begin{prop}
+        Let $V$ be a vector space and $f\in\mathcal{L}(V)$. For all basis $\mathfrak{B}$ of $V$, the characteristic polynomial of $[f]_\mathfrak{B}$ is the same. Therefore, we denote it $p_f(\lambda)$ and we refer to it as \textit{characteristic polynomial of $f$}.
+    \end{prop}
+    \begin{prop}
+        Let $V$ be a vector space and $f\in\mathcal{L}(V)$. Then, eigenvectors of $f$ of distinct eigenvalues are linearly independent.
+    \end{prop}
+    \begin{corollary}
+        Let $V$ be a vector space and $f\in\mathcal{L}(V)$. Suppose $\lambda_1,\ldots,\lambda_n$ are the distinct eigenvalues of $f$ and $V_{\lambda_1},\ldots,V_{\lambda_n}$ are their corresponded eigenspaces. Then, $$V_{\lambda_1}+\cdots+V_{\lambda_n}$$ is a direct sum.
+    \end{corollary}
+    \begin{prop}
+        Let $V$ be a finite vector space of dimension $n$, $f\in\mathcal{L}(V)$ and $\lambda$ be a root of multiplicity $m$ of the characteristic polynomial $p_f(x)$. Then: $$1\leq \dim(\ker(f-\lambda\id))\leq m$$
+    \end{prop}
+    \begin{theorem}[Diagonalization theorem]
+        Let $V$ be a finite vector space and $f\in\mathcal{L}(V)$. $f$ is diagonalizable if and only if:
+        \begin{enumerate}
+            \item $p_f(x)=(-1)^n(x-\lambda_1)^{m_1}\cdots(x-\lambda_k)^{m_k}$ with distinct $\lambda_1,\ldots,\lambda_k\in K$.
+            \item $\dim(\ker(f-\lambda_i \id))=m_i$, $i=1,\ldots,k$.
+        \end{enumerate}
+    \end{theorem}
+    \begin{corollary}
+        Let $V$ be a finite vector space with $\dim V=n$ and $f\in\mathcal{L}(V)$. If $f$ has $n$ distinct eigenvalues, $f$ is diagonalizable.
+    \end{corollary}
+    \begin{prop}
+        Let $V$ be a finite vector space and $f,g\in\mathcal{L}(V)$ such that $f$ and $g$ are similar. Then: $$f\text{ is diagonalizable}\iff g\text{ is diagonalizable}$$
+    \end{prop}
+    \begin{lemma}
+        Let $K$ be a field and $\vectorfunction{A},\vectorfunction{B}\in\mathcal{M}_n(K)$ be similar matrices. Then, $\forall k\in\NN$, $\vectorfunction{A}^k$ and $\vectorfunction{B}^k$ are similar.
+    \end{lemma}
+    \begin{lemma}
+        Let $V$ be a finite vector space over a field $K$ with $\dim V=n$ and $f\in\mathcal{L}(V)$. Then, the function $\phi_f:K[x]\rightarrow\mathcal{L}(V)$ defined by $$\phi_f(a_0+a_1x+\cdots+a_nx^n)=a_0+a_1f+\cdots+a_nf^n$$
+        is linear and satisfies: $$\phi_f((pq)(x))=\phi_f(p(x))\phi_f(q(x))\quad\forall p(x),q(x)\in K[x]$$
+    \end{lemma}
+    \begin{definition}
+        Let $V$ be a finite vector space with $\dim V=n$ and $f\in\mathcal{L}(V)$. The \textit{minimal polynomial $m_f(x)\in K[x]$ of $f$} is the unique a polynomial satisfying:
+        \begin{itemize}
+            \item $m_f(f)=0$.
+            \item $m_f$ is monic.
+            \item $m_f$ is of minimum degree.
+        \end{itemize}
+    \end{definition}
+    \begin{prop}
+        Let $V$ be a vector space over a field $K$ and $f\in\mathcal{L}(V)$. If $p(x)\in K[x]$ is such that $p(f)=0$, then $m_f(x)\mid p(x)$.
+    \end{prop}
+    \subsubsection*{Cayley-Hamilton theorem}
+    \begin{theorem}[Cayley-Hamilton theorem]
+        Let $K$ be a field, $n\geq 1$ and $\vectorfunction{A}\in\mathcal{M}_n(K)$. Then: $$m_{\vectorfunction{A}}(x)\mid p_{\vectorfunction{A}}(x)\mid m_{\vectorfunction{A}}(x)^n$$ Therefore $p_{\vectorfunction{A}}(\vectorfunction{A})=0$ and $m_{\vectorfunction{A}}(x)$ and $p_{\vectorfunction{A}}(x)$ have the same irreducible factors.
+    \end{theorem}
+    \begin{corollary}
+        Let $K$ be a field and $\vectorfunction{A}\in\GL_n(K)$ be a matrix with $p_{\vectorfunction{A}}(x)=a_0+a_1x+\cdots+(-1)^nx^n$. Then: $$\vectorfunction{A}^{-1}=-\frac{1}{a_0}\left(\vectorfunction{A}^{n-1}+a_{n-1}\vectorfunction{A}^{n-2}+\cdots+a_2\vectorfunction{A}+a_1\vectorfunction{I}_n\right)$$
+    \end{corollary}
+    \begin{lemma}
+        Let $V$ be a finite vector space over a field $K$, $\mathfrak{B}$ be a basis of $V$ and $f\in\mathcal{L}(V)$. Then $\forall\lambda,\mu\in K$ and $\forall r,s\in\NN$:
+        \begin{enumerate}
+            \item $[f^r]_\mathfrak{B}={\left([f]_\mathfrak{B}\right)}^r$.
+            \item $[\lambda f]_\mathfrak{B}=\lambda[f]_\mathfrak{B}$.
+            \item $[\lambda f^r+\mu f^s]_\mathfrak{B}=[\lambda f^r]_\mathfrak{B}+[\mu f^s]_\mathfrak{B}$.
+        \end{enumerate}
+    \end{lemma}
+    \begin{lemma}
+        Let $V$ be a finite vector space over a field $K$, $f\in\mathcal{L}(V)$ and $\vectorfunction{v}$ be an eigenvector of $f$ of eigenvalue $\lambda$. Then, $\forall p(x)\in K[x]$ we have: $$p(f)(\vectorfunction{v})=p(\lambda)\vectorfunction{v}$$
+    \end{lemma}
+    \begin{theorem}[Cayley-Hamilton theorem]
+        Let $V$ be a finite vector space over a field $K$ such that $\dim V=n$ and $f\in\mathcal{L}(V)$. Then: $$m_f(x)\mid p_f(x)\mid m_f(x)^n$$
+    \end{theorem}
+    \begin{definition}
+        A field $K$ satisfying that all polynomial with coefficient in $K$ of degree greater o equal to 1 factorizes as a product of linear factors is called an \textit{algebraically closed field}.
+    \end{definition}
+    \begin{definition}
+        Let $V$ be a vector space and $f\in\mathcal{L}(V)$. We say that $U\subseteq V$ is an \textit{invariant subspace of $V$ under $f$} if $f(U)\subseteq U$.
+    \end{definition}
+    \begin{lemma}
+        Let $V$ be a vector space and $f\in\mathcal{L}(V)$.
+        \begin{enumerate}
+            \item If $U\subseteq V$ is an invariant subspace of $V$ under $f$, then: $$p_{f_{|U}}(x)\mid p_f(x)\footnote{Here $f_{|U}$ is the function $f$ restricted to the subspace $U$.}$$
+            \item If $U_1$ and $U_2$ are invariant subspaces of $V$ under $f$ such that $V=U_1\oplus U_2$, then:
+                  \begin{itemize}
+                      \item $p_f(x)=p_{f_{|U_1}}(x)\cdot p_{f_{|U_2}}(x)$.
+                      \item $m_f(x)=\lcm(m_{f_{|U_1}}(x),m_{f_{|U_2}}(x))$.
+                  \end{itemize}
+        \end{enumerate}
+    \end{lemma}
+    \begin{lemma}
+        Let $V$ be a vector space, $f\in\mathcal{L}(V)$ and $a(x),b(x)\in K[x]$. Suppose $m(x)=\lcm(a(x),b(x))$ and $d(x)=\gcd(a(x),b(x))$. Then:
+        \begin{enumerate}
+            \item $\ker(a(f))+\ker(b(f))=\ker(m(f))$.
+            \item $\ker(a(f))\cap\ker(b(f))=\ker(d(f))$.
+        \end{enumerate}
+        In particular, if $a(x)$ and $b(x)$ are coprime and $a(f)b(f)=0$, then: $$V=\ker(a(x))\oplus\ker(b(x))$$
+    \end{lemma}
+    \begin{theorem}
+        Let $V$ be a finite vector space such that $\dim V=n$ and $f\in\mathcal{L}(V)$. If $p_f(x)={q_1(x)}^{n_1}\cdots q_r(x)^{n_r}$ and $m_f(x)={q_1(x)}^{m_1}\cdots {q_r(x)}^{m_r}$ with $q_i(x)$ distinct irreducible factors, then: $$V=\ker({q_1(f)}^{m_1})\oplus\cdots\oplus\ker({q_r(f)}^{m_r})$$ Moreover, $\dim\left(\ker({q_i(f)}^{m_i})\right)=n_i\deg(q_i(x))$.
+    \end{theorem}
+    \subsubsection*{Jordan form}
+    \begin{definition}
+        Let $K$ be a field and $\vectorfunction{A}\in\mathcal{M}_n(K)$. A \textit{jordan bloc of $\vectorfunction{A}$} is a square submatrix composed by a value $\lambda\in K$ on the principal diagonal, ones on the diagonal just below the principal diagonal and zeros elsewhere. That is, a Jordan bloc is a matrix of the form:
+        $$
+            \begin{pmatrix}
+                \lambda & 0       & 0       & \cdots & 0       \\
+                1       & \lambda & 0       & \ddots & \vdots  \\
+                0       & 1       & \lambda & \ddots & 0       \\
+                \vdots  & \ddots  & \ddots  & \ddots & 0       \\
+                0       & \cdots  & 0       & 1      & \lambda
+            \end{pmatrix}
+        $$
+    \end{definition}
+    \begin{prop}
+        Let $V$ be a finite vector space over a field $K$ with $\dim V=n$ and $f\in\mathcal{L}(V)$. If $p_f(x)=\pm(x-\lambda_1)^{n_1}\cdots(x-\lambda_k)^{n_k}$, there exists a basis $\mathfrak{B}$ of $V$ such that
+        $$[f]_{\mathfrak{B}}=
+            \begin{pmatrix}
+                \vectorfunction{J}_1 & \vectorfunction{0}   & \cdots             & \vectorfunction{0}   \\
+                \vectorfunction{0}   & \vectorfunction{J}_2 & \ddots             & \vdots               \\
+                \vdots               & \ddots               & \ddots             & \vectorfunction{0}   \\
+                \vectorfunction{0}   & \cdots               & \vectorfunction{0} & \vectorfunction{J}_r \\
+            \end{pmatrix}
+        $$
+        where $\vectorfunction{J}_1,\ldots,\vectorfunction{J}_r$ are Jordan blocs associated with eigenvalues $\lambda_1,\ldots,\lambda_k$ satisfying:
+        \begin{enumerate}
+            \item\label{LA_diag1} For $i=1,\ldots,k$, the sum of the sizes of Jordan blocs associated with the eigenvalue $\lambda_i$ is $n_i$.
+            \item\label{LA_diag2} The sizes of Jordan blocs are determined by $\dim(\ker((f-\lambda_i\id)^r))$, $r=1,\ldots,n_i-1$.
+        \end{enumerate}
+    \end{prop}
+    \begin{prop}
+        Let $V$ be a finite vector space over a field $K$ with $\dim V=n$ and $\vectorfunction{A}\in\mathcal{M}_n(K)$. If $p_{\vectorfunction{A}}(x)=\pm(x-\lambda_1)^{n_1}\cdots(x-\lambda_k)^{n_k}$, there exist a matrix $\vectorfunction{P}\in\GL_n(K)$ such that:
+        $$\vectorfunction{P}^{-1}\vectorfunction{A}\vectorfunction{P}=
+            \begin{pmatrix}
+                \vectorfunction{J}_1 & \vectorfunction{0}   & \cdots             & \vectorfunction{0}   \\
+                \vectorfunction{0}   & \vectorfunction{J}_2 & \ddots             & \vdots               \\
+                \vdots               & \ddots               & \ddots             & \vectorfunction{0}   \\
+                \vectorfunction{0}   & \cdots               & \vectorfunction{0} & \vectorfunction{J}_r \\
+            \end{pmatrix}
+        $$
+        where $\vectorfunction{J}_1,\ldots,\vectorfunction{J}_r$ are Jordan blocs associated with eigenvalues $\lambda_1,\ldots,\lambda_k$ satisfying properties \ref{LA_diag1} and \ref{LA_diag2}.
+    \end{prop}
+    \begin{theorem}
+        Let $V$ be a vector space and $f,g\in\mathcal{L}(V)$ be such that $p_f(x)=(x-\lambda_1)^{n_1}\cdots(x-\lambda_k)^{n_k}$. If $g$ satisfies:
+        \begin{enumerate}
+            \item $p_f(x)=p_g(x)$
+            \item $m_f(x)=m_g(x)$
+            \item $\dim(\ker((f-\lambda \id)^r))=\dim(\ker((g-\lambda \id)^r))$ $\forall\lambda\in K$ $\forall r\geq 1$
+        \end{enumerate}
+        then $f$ is similar to $g$.
+    \end{theorem}
+    \subsection{Symmetric bilinear forms}
+    \subsubsection*{First definitions}
+    \begin{definition}
+        Let $U$, $V$, $W$ be three vector spaces over a field $K$. We say that a function $\varphi:U\times V\rightarrow W$ is \textit{bilinear} if $\forall\vectorfunction{u}_1,\vectorfunction{u}_2,\vectorfunction{u}\in U$, $\forall \vectorfunction{v}_1,\vectorfunction{v}_2,\vectorfunction{v}\in V$ and $\forall\lambda\in K$ we have:
+        \begin{enumerate}
+            \item $\varphi(\vectorfunction{u}_1+\vectorfunction{u}_2,\vectorfunction{v})=\varphi(\vectorfunction{u}_1,\vectorfunction{v})+\varphi(\vectorfunction{u}_2,\vectorfunction{v})$.
+            \item $\varphi(\lambda \vectorfunction{u},\vectorfunction{v})=\lambda \varphi(\vectorfunction{u},\vectorfunction{v})$.
+            \item $\varphi(\vectorfunction{u},\vectorfunction{v}_1+\vectorfunction{v}_2)=\varphi(\vectorfunction{u},\vectorfunction{v}_1)+\varphi(\vectorfunction{u},\vectorfunction{v}_2)$.
+            \item $\varphi(\vectorfunction{u},\lambda \vectorfunction{v})=\lambda \varphi(\vectorfunction{u},\vectorfunction{v})$.
+        \end{enumerate}
+    \end{definition}
+    \begin{definition}
+        Let $V$ be a vector space over a field $K$. A \textit{bilinear form from $V$ onto $K$} is a bilinear map $\varphi:V\times V\rightarrow K$.
+    \end{definition}
+    \begin{definition}
+        Let $V$ be a vector space over a field $K$. A bilinear form $\varphi:V\times V\rightarrow K$ is \textit{symmetric} if $$\varphi(\vectorfunction{v}_1,\vectorfunction{v}_2)=\varphi(\vectorfunction{v}_2,\vectorfunction{v}_1)\quad\forall \vectorfunction{v}_1,\vectorfunction{v}_2\in V$$
+    \end{definition}
+    \subsubsection*{Matrix associated with a bilinear form}
+    \begin{definition}
+        Let $V$ be a finite vector space over a field $K$, $\mathfrak{B}=(\vectorfunction{v}_1,\ldots,\vectorfunction{v}_n)$ be a basis of $V$ and $\varphi:V\times V\rightarrow K$ be a symmetric bilinear form. We define the \textit{matrix of the bilinear form $\varphi$ with respect to the basis $\mathfrak{B}$} as the matrix $[\varphi]_\mathfrak{B}\in\mathcal{M}_n(K)$ defined as: $$[\varphi]_\mathfrak{B}=
+            \begin{pmatrix}
+                \varphi(\vectorfunction{v}_1,\vectorfunction{v}_1) & \varphi(\vectorfunction{v}_1,\vectorfunction{v}_2) & \cdots & \varphi(\vectorfunction{v}_1,\vectorfunction{v}_n) \\
+                \varphi(\vectorfunction{v}_2,\vectorfunction{v}_1) & \varphi(\vectorfunction{v}_2,\vectorfunction{v}_2) & \cdots & \varphi(\vectorfunction{v}_2,\vectorfunction{v}_n) \\
+                \vdots                                             & \vdots                                             & \ddots & \vdots                                             \\
+                \varphi(\vectorfunction{v}_n,\vectorfunction{v}_1) & \varphi(\vectorfunction{v}_n,\vectorfunction{v}_2) & \cdots & \varphi(\vectorfunction{v}_n,\vectorfunction{v}_n) \\
+            \end{pmatrix}$$
+    \end{definition}
+    \begin{lemma}
+        Let $V$ be a finite vector space over a field $K$, $\mathfrak{B}$ be a basis of $V$ and $\varphi:V\times V\rightarrow K$ be a symmetric bilinear form. Then:
+        $$\varphi(\vectorfunction{v}_1,\vectorfunction{v})={\left([\vectorfunction{v}_1]_\mathfrak{B}\right)}^\mathrm{T}[\varphi]_\mathfrak{B}[\vectorfunction{v}]_\mathfrak{B}\quad\forall\vectorfunction{v}_1,\vectorfunction{v}\in V$$
+    \end{lemma}
+    \begin{prop}
+        Let $V$ be a finite vector space over a field $K$, $\mathfrak{B}$ be a basis of $V$ and $\varphi:V\times V\rightarrow K$ be a symmetric bilinear form. Then: $$\varphi\text{ is symmetric}\iff[\varphi]_\mathfrak{B}\text{ is symmetric}$$
+    \end{prop}
+    \begin{prop}
+        Let $V$ be a finite vector space over a field $K$, $\mathfrak{B}$ and $\mathfrak{B}'$ be bases of $V$ and $\varphi:V\times V\rightarrow K$ be a symmetric bilinear form. Then: $$[\varphi]_{\mathfrak{B}'}={([\id]_{\mathfrak{B}',\mathfrak{B}})}^\mathrm{T}[\varphi]_\mathfrak{B}[\id]_{\mathfrak{B}',\mathfrak{B}}$$
+    \end{prop}
+    \subsubsection*{Orthogonal basis}
+    \begin{definition}\label{ALG-isotrop}
+        Let $V$ be a finite vector space over a field $K$, $\varphi:V\times V\rightarrow K$ be a symmetric bilinear form and $\vectorfunction{v}_1,\vectorfunction{v}_2\in V$.
+        \begin{itemize}
+            \item We say that $\vectorfunction{v}_1$ and $\vectorfunction{v}_2$ are \textit{orthogonal} if $\varphi(\vectorfunction{v}_1,\vectorfunction{v}_2)=0$.
+            \item If $\vectorfunction{v}_1\ne 0$, we say that $\vectorfunction{v}_1$ is \textit{isotropic} if $\varphi(\vectorfunction{v}_1,\vectorfunction{v}_1)=0$.
+        \end{itemize}
+    \end{definition}
+    \begin{definition}
+        Let $V$ be a finite vector space over a field $K$, $\mathfrak{B}=(\vectorfunction{v}_1,\ldots,\vectorfunction{v}_n)$ be a basis of $V$ and $\varphi:V\times V\rightarrow K$ be a symmetric bilinear form.
+        \begin{itemize}
+            \item We say that $\mathfrak{B}$ is \textit{orthogonal with respect to $\varphi$} if $\varphi(\vectorfunction{v}_i,\vectorfunction{v}_j)=0$ $\forall i\ne j$.
+            \item We say that $\mathfrak{B}$ is \textit{orthonormal with respect to $\varphi$} if $\varphi(\vectorfunction{v}_i,\vectorfunction{v}_j)=\delta_{ij}$.
+        \end{itemize}
+    \end{definition}
+    \begin{theorem}
+        Let $V$ be a finite vector space over a field $K$, $\mathfrak{B}$ be a basis of $V$ and $\varphi:V\times V\rightarrow K$ be a symmetric bilinear form. Then, $V$ has an orthogonal basis with respect to $\varphi$ and an orthonormal basis with respect to $\varphi$.
+    \end{theorem}
+    \begin{corollary}
+        Let $K$ be a field with $\ch K\ne 2$ and $\vectorfunction{A}\in\mathcal{M}_n(K)$ be a symmetric matrix. Then, there exists a matrix $\vectorfunction{P}\in\GL_n(K)$ such that $\transpose{P}\vectorfunction{A}\vectorfunction{P}$ is diagonal.
+    \end{corollary}
+    \subsubsection*{Orthogonal decompositions}
+    \begin{definition}\label{ALG-singular}
+        Let $V$ be a finite vector space over a field $K$, $U\subseteq V$ be a vector subspace of $V$ and $\varphi:V\times V\rightarrow K$ be a symmetric bilinear form. We define the \textit{orthogonal complement of $U$} as: $$U^\perp=\{\vectorfunction{v}\in V:\varphi(\vectorfunction{v},\vectorfunction{u})=0\;\forall\vectorfunction{u}\in U\}$$
+    \end{definition}
+    \begin{definition}
+        Let $V$ be a finite vector space over a field $K$ and $\varphi:V\times V\rightarrow K$ be a symmetric bilinear form. We define the \textit{radical of $\varphi$} as: $$\rad\varphi=V^\perp$$ We say that $\varphi$ is \textit{nonsingular} if $\rad\varphi=\{0\}$.
+    \end{definition}
+    \begin{definition}
+        Let $V$ be a finite vector space over a field $K$, $\varphi:V\times V\rightarrow K$ be a nonsingular symmetric bilinear form and $\vectorfunction{v}_0\in V$. We define $\varphi_{\vectorfunction{v}_0}:V\rightarrow K$, $\varphi_{\vectorfunction{v}_0}(\vectorfunction{v})=\varphi(\vectorfunction{v}_0,\vectorfunction{v})$. Then, the function
+        \begin{align*}
+            V                    & \longrightarrow V^*                       \\
+            \vectorfunction{v}_0 & \longmapsto\varphi_{\vectorfunction{v}_0}
+        \end{align*} is a isomorphism.
+    \end{definition}
+    \begin{definition}
+        Let $V$ be a finite vector space over a field $K$, $U\subseteq V$ be a vector subspace of $V$ and $\varphi:V\times V\rightarrow K$ be a nonsingular symmetric bilinear form. Then:
+        \begin{enumerate}
+            \item $\dim V=\dim U+\dim U^\perp$.
+            \item ${(U^\perp)}^\perp=U$.
+            \item If $\varphi_{|U}$ is nonsingular, then $V=U\oplus U^\perp$.
+        \end{enumerate}
+    \end{definition}
+    \begin{definition}
+        Let $V$ be a finite vector space over a field $K$, $U_1,U_2\subseteq V$ be vector subspaces of $V$ and $\varphi:V\times V\rightarrow K$ be a symmetric bilinear form. We say that the sum $U_1+U_2$ is \textit{orthogonal} if it is direct and $\varphi(\vectorfunction{u}_1,\vectorfunction{u}_2)=0$ $\forall \vectorfunction{u}_1\in U_1$ and $\vectorfunction{u}_2\in U_2$. In this case, we denote $U_1+U_2$ by $U_1\perp U_2$.
+    \end{definition}
+    \begin{prop}
+        Let $V$ be a finite vector space over a field $K$, $U_1,U_2\subseteq V$ be vector subspaces of $V$ such that $V=U_1\perp U_2$ and $\varphi:V\times V\rightarrow K$ be a symmetric bilinear form. Then, $\forall \vectorfunction{v}\in V$ there exist unique $\vectorfunction{u}_1\in U_1$ and $\vectorfunction{u}_2\in U_2$ such that $\vectorfunction{v}=\vectorfunction{u}_1+\vectorfunction{u}_2$.
+    \end{prop}
+    \begin{definition}\label{perpendicular}
+        Let $V$ be a finite vector space over a field $K$, $U_1,U_2\subseteq V$ be vector subspaces of $V$ such that $V=U_1\perp U_2$ and $\varphi:V\times V\rightarrow K$ be a symmetric bilinear form. The function
+        \begin{align*}
+            \pi:V=U_1\perp U_2                                           & \longrightarrow U_i              \\
+            \vectorfunction{v}=\vectorfunction{u}_1+\vectorfunction{u}_2 & \longmapsto \vectorfunction{u}_i
+        \end{align*}
+        for $i=1,2$ is called \textit{orthogonal projection of $V$ onto $U_i$ according to the decomposition $V=U_1\perp U_2$}.
+    \end{definition}
+    \begin{method}[Gram-Schmidt process]
+        Let $V$ be a finite vector space over a field $K$, $\mathfrak{B}=(\vectorfunction{v}_1,\ldots,\vectorfunction{v}_n)$ be a basis of $V$ and $\varphi:V\times V\rightarrow K$ be a symmetric bilinear form. $\forall\vectorfunction{u},\vectorfunction{v}\in V$, we define $$\text{proj}_{\vectorfunction{u}}(\vectorfunction{v})=\frac{\varphi(\vectorfunction{u},\vectorfunction{v})}{\varphi(\vectorfunction{u},\vectorfunction{u})}\vectorfunction{u}$$ We will create an orthogonal basis $(\vectorfunction{u}_1,\ldots,\vectorfunction{u}_n)$ of $V$ from $\mathfrak{B}$. We define $\vectorfunction{u}_i$, $i=1,\ldots,n$ to be:
+        \begin{align*}
+            \vectorfunction{u}_1 & =\vectorfunction{v}_1                                                                                                                   \\
+            \vectorfunction{u}_2 & =\vectorfunction{v}_2-\text{proj}_{\vectorfunction{u}_1}(\vectorfunction{v}_2)                                                          \\
+            \vectorfunction{u}_3 & =\vectorfunction{v}_3-\text{proj}_{\vectorfunction{u}_1}(\vectorfunction{v}_3)-\text{proj}_{\vectorfunction{u}_2}(\vectorfunction{v}_3) \\
+                                 & \;\;\vdots                                                                                                                              \\
+            \vectorfunction{u}_n & =\vectorfunction{v}_n-\sum_{i=1}^{n-1}\text{proj}_{\vectorfunction{u}_i}(\vectorfunction{v}_n)
+        \end{align*}
+        To obtain an orthogonal basis $(\vectorfunction{e}_1,\ldots,\vectorfunction{e}_n)$ of $V$ from $\mathfrak{B}$, define $\vectorfunction{e}_i$, $i=1,\ldots,n$ to be: $$\vectorfunction{e}_i=\frac{\vectorfunction{u}_i}{\sqrt{\varphi(\vectorfunction{u}_i,\vectorfunction{u}_i)}}$$
+    \end{method}
+    \subsubsection*{Sylvester's law of inertia}
+    \begin{definition}
+        An \textit{orthogonal geometry over a field $K$} is a pair $(V,\varphi)$, where $V$ is a vector space over $K$ and $\varphi$ is a symmetric bilinear form over $V$.
+    \end{definition}
+    \begin{definition}\label{isometry}
+        Let $(V_1,\varphi_1)$, $(V_2,\varphi_2)$ be two orthogonal geometries over a field $K$. An \textit{isometry from $(V_1,\varphi_1)$ to $(V_2,\varphi_2)$} is an isomorphism $f:V_1\rightarrow V_2$ such that $$\varphi_2(f(\vectorfunction{u}),f(\vectorfunction{v}))=\varphi_1(\vectorfunction{u},\vectorfunction{v})\quad\forall\vectorfunction{u},\vectorfunction{v}\in V_1$$ We say that $(V_1,\varphi_1)$ and $(V_2,\varphi_2)$ are \textit{isometric} if there exists an isometry between them.
+    \end{definition}
+    \begin{definition}
+        Let $V$ be a vector space over a field $K$ and $\varphi_1$, $\varphi_2$ be symmetric bilinear forms. We say that $\varphi_1$ and $\varphi_2$ are \textit{equivalent} if and only if $(V,\varphi_1)$ and $(V,\varphi_2)$ are isometric.
+    \end{definition}
+    \begin{definition}
+        Let $\vectorfunction{A},\vectorfunction{B}\in\mathcal{M}_n(\RR)$. We say that $\vectorfunction{A}$ and $\mathfrak{B}$ are congruent if there exists a matrix $\vectorfunction{P}\in\GL_n(\RR)$ such that $$\vectorfunction{A}=\transpose{P}\vectorfunction{B}\vectorfunction{P}$$
+    \end{definition}
+    \begin{prop}
+        Let $V$ be a finite vector space over a field $K$, $\mathfrak{B}_1$ be a basis of $V$ and $\varphi_1$, $\varphi_2$ be symmetric bilinear forms. Then the following statements are equivalent:
+        \begin{enumerate}
+            \item The orthogonal geometries $(V,\varphi_1)$ and $(V,\varphi_2)$ are isometric.
+            \item There exists a basis $\mathfrak{B}_2$ of $V$ such that $[\varphi_1]_{\mathfrak{B}_1}=[\varphi_2]_{\mathfrak{B}_2}$.
+            \item The matrices $[\varphi_1]_{\mathfrak{B}_1}$ and $[\varphi_2]_{\mathfrak{B}_2}$ are congruent.
+        \end{enumerate}
+    \end{prop}
+    \begin{theorem}[Sylvester's law of inertia]
+        Let $V$ be a finite vector space over $\RR$ and $\varphi$ be a symmetric bilinear form over $V$. Then, there exists a basis $\mathfrak{B}$ of $V$ such that:
+        $$[\varphi]_\mathfrak{B}=
+            \begin{pmatrix}
+                0 &        &          &   &        &   &          &        &    & \\
+                  & \ddots &          &   &        &   &          &        &      \\
+                  &        & 0        &   &        &   & \bigzero &        &      \\
+                  &        &          & 1 &        &   &          &        &      \\
+                  &        &          &   & \ddots &   &          &        &      \\
+                  &        &          &   &        & 1 &          &        &      \\
+                  &        & \bigzero &   &        &   & -1       &        &      \\
+                  &        &          &   &        &   &          & \ddots &      \\
+                  &        &          &   &        &   &          &        & -1
+            \end{pmatrix}$$
+        where in the diagonal there are $r_0$ zeros, $r_+$ ones and $r_-$ minus ones and the triplet $(r_0,r_+,r_-)$ doesn't depend on the basis $\mathfrak{B}$.
+    \end{theorem}
+    \begin{definition}
+        Let $V$ be a finite vector space over $\RR$ and $\varphi$ be a symmetric bilinear form over $V$. Let $\mathfrak{B}$ be an orthogonal basis of $V$ with respect to $\varphi$. We define the \textit{rank of $\varphi$} as: $$\rank \varphi=\rank ([\varphi]_\mathfrak{B})$$ We define the \textit{signature of $\varphi$} as: $$\sig\varphi=(r_+,r_-)$$ where $r_+$ is el number of positive real numbers on the diagonal of $[\varphi]_\mathfrak{B}$ and $r_-$ is el number of negative real numbers on the diagonal of $[\varphi]_\mathfrak{B}$.
+    \end{definition}
+    \begin{theorem}
+        Let $(V_1,\varphi_1)$, $(V_2,\varphi_2)$ be two orthogonal geometries over $\RR$ of finite dimension. Then, $(V_1,\varphi_1)$ and $(V_2,\varphi_2)$ are isometric if and only if $\dim V_1=\dim V_2$ and $\sig \varphi_1=\sig \varphi_2$.
+    \end{theorem}
+    \subsubsection*{Inner products}
+    \begin{definition}
+        Let $V$ be a finite vector space over $\RR$ and $\varphi$ be a symmetric bilinear form over $V$. We say that $\varphi$ is \textit{positive-definite} if $$\varphi(\vectorfunction{v},\vectorfunction{v})>0\quad\forall\vectorfunction{v}\in V\setminus\{0\}$$ We say that $\varphi$ is \textit{negative-definite} if $$\varphi(\vectorfunction{v},\vectorfunction{v})<0\quad\forall\vectorfunction{v}\in V\setminus\{0\}\footnote{The terms \textit{positive-semidefinite} and \textit{negative-semidefinite} are used when $\forall\vectorfunction{v}\in V\setminus\{0\}$, $\varphi(\vectorfunction{v},\vectorfunction{v})\geq 0$ or $\varphi(\vectorfunction{v},\vectorfunction{v})\leq 0$, respectively.}$$
+    \end{definition}
+    \begin{definition}
+        Let $V$ be a vector space over $\RR$. An \textit{inner product over $V$} is a positive-definite symmetric bilinear form over $V$.
+    \end{definition}
+    \begin{definition}\label{espai_euclidia}
+        An \textit{Euclidean vector space} is a pair $(V,\varphi)$, where $V$ is a vector space over $\RR$ and $\varphi$ is an inner product over $V$.
+    \end{definition}
+    \begin{theorem}[Cauchy-Schwartz inequality]
+        Let $(V,\varphi)$ be an Euclidean vector space. Then: $$\varphi(\vectorfunction{v}_1,\vectorfunction{v}_2)^2\leq \varphi(\vectorfunction{v}_1,\vectorfunction{v}_1)\varphi(\vectorfunction{v}_2,\vectorfunction{v}_2)\quad\forall \vectorfunction{v}_1,\vectorfunction{v}_2\in V$$
+    \end{theorem}
+    \begin{definition}
+        Let $V$ be a vector space over $\RR$. A \textit{norm on $V$} is a function
+        \begin{align*}
+            \|\cdot\|:V        & \longrightarrow\RR                \\
+            \vectorfunction{v} & \longmapsto\|\vectorfunction{v}\|
+        \end{align*}
+        such that:
+        \begin{enumerate}
+            \item $\|\vectorfunction{v}\|=0\iff \vectorfunction{v}=\vectorfunction{0}$ $\forall \vectorfunction{v}\in V$.
+            \item $\|\lambda \vectorfunction{v}\|=|\lambda|\|\vectorfunction{v}\|$, $\forall \vectorfunction{v}\in V$, $\lambda\in\RR$.
+            \item $\|\vectorfunction{v}_1+\vectorfunction{v}_2\|\leq\|\vectorfunction{v}_1\|+\|\vectorfunction{v}_2\|$, $\forall \vectorfunction{v}_1,\vectorfunction{v}_2\in V$\footnote{Note that $\forall\vectorfunction{v}\in V$ we have: $0=\|\vectorfunction{v}+(-\vectorfunction{v})\|\leq\|\vectorfunction{v}\|+\|-\vectorfunction{v}\|=2\|\vectorfunction{v}\|\implies\|\vectorfunction{v}\|\geq 0$.}.
+        \end{enumerate}
+    \end{definition}
+    \begin{prop}
+        Let $(V,\varphi)$ be an Euclidean vector space. Then, the function
+        \begin{align*}
+            \|\cdot\|_\varphi:V & \longrightarrow\RR                                                                              \\
+            \vectorfunction{v}  & \longmapsto\|\vectorfunction{v}\|_\varphi=\sqrt{\varphi(\vectorfunction{v},\vectorfunction{v})}
+        \end{align*}
+        is a norm called \textit{norm associated with the inner product $\varphi$}.
+    \end{prop}
+    \begin{definition}
+        Let $(V,\varphi)$ be an Euclidean vector space and $\vectorfunction{v}_1,\vectorfunction{v}_2\in V\setminus\{0\}$. We define the \textit{angle with respect to $\varphi$ between $\vectorfunction{v}_1$ and $\vectorfunction{v}_2$} as the unique $\theta\in[0,\pi]$ such that: $$\cos{\theta}=\frac{\varphi(\vectorfunction{v}_1,\vectorfunction{v}_2)}{\|\vectorfunction{v}_1\|_\varphi\|\vectorfunction{v}_2\|_\varphi}$$
+    \end{definition}
+    \subsubsection*{Spectral theorem}
+    \begin{definition}
+        Let $(V,\varphi)$ be a finite Euclidean vector space and $f\in\mathcal{L}(V)$. Then, there exists a unique $f'\in\mathcal{L}(V)$ such that $$\varphi(f(\vectorfunction{v}_1),\vectorfunction{v}_2)=\varphi(\vectorfunction{v}_1,f'(\vectorfunction{v}_2))\quad\forall \vectorfunction{v}_1,\vectorfunction{v}_2\in V$$ This $f'$ is called \textit{adjoint of $f$}.
+    \end{definition}
+    \begin{definition}
+        Let $(V,\varphi)$ be a finite Euclidean vector space and $f\in\mathcal{L}(V)$. $f$ is called \textit{auto-adjoint} if $f=f'$.
+    \end{definition}
+    \begin{lemma}
+        Let $(V,\varphi)$ be a finite Euclidean vector space of dimension $n$ and $f\in\mathcal{L}(V)$ be auto-adjoint. Then, there exist $\lambda_1,\ldots,\lambda_n\in\RR$ such that $$p_f(x)=(x-\lambda_1 )\cdots(x-\lambda_n)$$
+    \end{lemma}
+    \begin{definition}
+        Let $K$ be a field and $A\in\GL_n(K)$ be a matrix. We say that $A$ is \textit{orthogonal} if and only if $$\vectorfunction{P}\transpose{P}=\transpose{P}\vectorfunction{P}=\vectorfunction{I}_n$$ The set of orthogonal matrices of size $n$ over $K$ is denoted by $\mathcal{O}_n(K)$.
+    \end{definition}
+    \begin{theorem}[Spectral theorem]
+        Let $(V,\varphi)$ be a a finite Euclidean vector space and $f\in\mathcal{L}(V)$ be auto-adjoint. Then, $V$ has an orthonormal basis of eigenvectors of $f$. In particular, $f$ diagonalizes.
+    \end{theorem}
+    \begin{corollary}
+        Let $K$ be a field. All symmetric matrices $A\in\mathcal{M}_n(K)$ are diagonalizable. More precisely, there exists $\vectorfunction{P}\in\mathcal{O}_n(K)$ such that $\transpose{P}\vectorfunction{A}\vectorfunction{P}$ is diagonal.
+    \end{corollary}
+    \begin{definition}
+        Let $A=(a_{ij})\in\mathcal{M}_{m\times n}(\CC)$. We define the \textit{complex conjugate $\overline{\vectorfunction{A}}$ of $\vectorfunction{A}$} as $\overline{\vectorfunction{A}}=(\overline{a_{ij}})$.
+    \end{definition}
+    \begin{prop}
+        Let $\vectorfunction{A},\vectorfunction{B}\in\mathcal{M}_{m\times n}(\CC)$, $\vectorfunction{C}\in\mathcal{M}_{n\times p}(\CC)$ and $\lambda\in\CC$. Then:
+        \begin{enumerate}
+            \item $\overline{\vectorfunction{A}+\vectorfunction{B}}=\overline{\vectorfunction{A}}+\overline{\vectorfunction{B}}$.
+            \item $\overline{\vectorfunction{A}\vectorfunction{C}}=\overline{\vectorfunction{A}}\cdot\overline{\vectorfunction{C}}$.
+            \item $\overline{\lambda\cdot\vectorfunction{A}}=\overline{\lambda}\cdot\overline{\vectorfunction{A}}$.
+        \end{enumerate}
+    \end{prop}
+    \begin{corollary}
+        Let $\vectorfunction{A}\in\mathcal{M}_n(\RR)$ be a symmetric matrix. Then, there exist $\lambda_1,\ldots,\lambda_n\in\RR$ such that $$p_{\vectorfunction{A}}(x)=(x-\lambda_1 )\cdots(x-\lambda_n)$$
+    \end{corollary}
+    \begin{theorem}[Descartes' rule of signs]
+        Let $P(x)=a_0+\cdots+a_nx^n\in\RR[x]$:
+        \begin{enumerate}
+            \item The number of positive roots of $P(x)$ is at most equal to the number of sign variations in the sequence $[a_d,a_{d-1},\ldots,a_1,a_0]$.
+            \item If $P(x)=a_n(x-\alpha_1)^{n_1}\cdots(x-\alpha_r)^{n_r}$, then the number of positive roots of $P(x)$ is equal to the number of sign variations in the sequence (having in account multiplicity).
+        \end{enumerate}
+    \end{theorem}
 \end{multicols}
 \end{document}

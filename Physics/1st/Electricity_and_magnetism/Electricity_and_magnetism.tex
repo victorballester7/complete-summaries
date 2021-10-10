@@ -4,408 +4,408 @@
 \section{Electricity and magnetism}
 \subsection{Vector calculus}
 \begin{center}
-  \begin{tabular}{|c|c|}
+    \begin{tabular}{|c|c|}
 
-    \hline
-               & Formula (in Cartesian coordinates)                                                                                                                                                                                                                                                                                                                                        \\
-    \hline
-    Gradient   & $\displaystyle\grad f:=\frac{\partial f}{\partial x}\mathblack{e}_x+\frac{\partial f}{\partial y}\mathblack{e}_y+\frac{\partial f}{\partial z}\mathblack{e}_z$                                                                                                                                                                                                            \\
-    \hline
-    Divergence & $\displaystyle\div \mathblack{A}:=\grad\cdot\mathblack{A}=\frac{\partial A_x}{\partial x}+\frac{\partial A_z}{\partial z}+\frac{\partial A_z}{\partial z}$                                                                                                                                                                                                                \\
-    \hline
-    Curl       & $\displaystyle\rot \mathblack{A}:=\grad\times\mathblack{A}=\begin{vmatrix}
-        \mathblack{e}_x             & \mathblack{e}_y             & \mathblack{e}_z             \\
-        \frac{\partial}{\partial x} & \frac{\partial}{\partial y} & \frac{\partial}{\partial z} \\
-        A_x                         & A_y                         & A_z                         \\
-      \end{vmatrix}=\left(\frac{\partial A_z}{\partial z}-\frac{\partial A_y}{\partial y}\right)\mathblack{e}_x+\left(\frac{\partial A_x}{\partial x}-\frac{\partial A_z}{\partial z}\right)\mathblack{e}_y+\left(\frac{\partial A_y}{\partial y}-\frac{\partial A_x}{\partial x}\right)\mathblack{e}_z$ \\
-    \hline
-    Laplacian  & $\displaystyle\laplacian f:=\grad\cdot\grad f=\frac{\partial^2f}{\partial x^2}+\frac{\partial^2f}{\partial y^2}+\frac{\partial^2f}{\partial z^2}$                                                                                                                                                                                                                         \\
-    \hline
-  \end{tabular}
+        \hline
+                   & Formula (in Cartesian coordinates)                                                                                                                                                                                                                                                                                                                                                                 \\
+        \hline
+        Gradient   & $\displaystyle\grad f:=\frac{\partial f}{\partial x}\vectorfunction{e}_x+\frac{\partial f}{\partial y}\vectorfunction{e}_y+\frac{\partial f}{\partial z}\vectorfunction{e}_z$                                                                                                                                                                                                                      \\
+        \hline
+        Divergence & $\displaystyle\div \vectorfunction{A}:=\grad\cdot\vectorfunction{A}=\frac{\partial A_x}{\partial x}+\frac{\partial A_z}{\partial z}+\frac{\partial A_z}{\partial z}$                                                                                                                                                                                                                               \\
+        \hline
+        Curl       & $\displaystyle\rot \vectorfunction{A}:=\grad\times\vectorfunction{A}=\begin{vmatrix}
+                \vectorfunction{e}_x        & \vectorfunction{e}_y        & \vectorfunction{e}_z        \\
+                \frac{\partial}{\partial x} & \frac{\partial}{\partial y} & \frac{\partial}{\partial z} \\
+                A_x                         & A_y                         & A_z                         \\
+            \end{vmatrix}=\left(\frac{\partial A_z}{\partial z}-\frac{\partial A_y}{\partial y}\right)\vectorfunction{e}_x+\left(\frac{\partial A_x}{\partial x}-\frac{\partial A_z}{\partial z}\right)\vectorfunction{e}_y+\left(\frac{\partial A_y}{\partial y}-\frac{\partial A_x}{\partial x}\right)\vectorfunction{e}_z$ \\
+        \hline
+        Laplacian  & $\displaystyle\laplacian f:=\grad\cdot\grad f=\frac{\partial^2f}{\partial x^2}+\frac{\partial^2f}{\partial y^2}+\frac{\partial^2f}{\partial z^2}$                                                                                                                                                                                                                                                  \\
+        \hline
+    \end{tabular}
 \end{center}
 \begin{multicols}{2}
-  \subsection{Electrostatics}
-  \subsubsection*{Electric force}
-  \begin{prop}
-    The charge of any object is a multiple of the elementary charge $e$.
-  \end{prop}
-  \begin{law}[Charge conservation]
-    The total electric charge in an isolated system never changes.
-  \end{law}
-  \begin{law}[Coulomb's law]
-    The force applied by a point charge $q_1$ over another point charge $q_2$ along a straight line is:
-    $$\mathblack{F}_1=K\frac{q_1q_2}{\|\mathblack{r}_{12}\|^2}\hat{\mathblack{r}}_{12}$$
-    where $\mathblack{r}_{12}$ is the vectorial distance between the charges, $\hat{\mathblack{r}}_{12}=\frac{\mathblack{r}_{12}}{\|\mathblack{r}_{12}\|}$ is the unit vector pointing from $q_2$ to $q_1$ and $K$ is the Coulomb constant.
-  \end{law}
-  \begin{principle}[Superposition principle]
-    Consider a set of $N$ point charges $q_i$ which are at a distance $\mathblack{r}_i$ from another point charge $Q$. Then, the net force exerted by the $N$ point charges to the charge $Q$ is:
-    $$\mathblack{F}_Q=\sum_{i=1}^NK\frac{q_iQ}{\|\mathblack{r}_{i}\|^2}\hat{\mathblack{r}}_{i}$$ where $\hat{\mathblack{r}}_{i}$ is the unit vector pointing from $q_i$ to $Q$.
-  \end{principle}
-  \subsubsection*{Electric field}
-  \begin{definition}
-    Given a point charge $Q$, the \textit{electric field} created by this charge at a distance $\mathblack{r}$ from it is given by:
-    $$\mathblack{E}=K\frac{Q}{\|\mathblack{r}\|^2}\hat{\mathblack{r}}$$
-  \end{definition}
-  \begin{principle}[Superposition principle]
-    Consider a set of $N$ point charges $q_i$ which are at a distance $\mathblack{r}_i$ from a point $A$. Then, the net electric field created by the $N$ point charges at point $A$ is:
-    $$\mathblack{E}_A=\sum_{i=1}^NK\frac{q_i}{\|\mathblack{r}_{i}\|^2}\hat{\mathblack{r}}_{i}$$ where $\hat{\mathblack{r}}_{i}$ is the unit vector pointing from $q_i$ to $A$. In the case of a continuous distribution of charge we will have:
-    $$\mathblack{E}=\int\dd\mathblack{E}=\int K\frac{\dd q}{r^2}\hat{\mathblack{r}}$$
-    Note that $\dd q=\lambda\dd \ell$, $\dd q=\sigma\dd S$ or $\dd q=\rho\dd V$ depending on whether the distribution of charge is linear, superficial or volumetric. In each respective case, $\lambda$, $\sigma$ and $\rho$ represent the charge densities.
-  \end{principle}
-  \subsubsection*{Electric flux and Gau\ss' law}
-  \begin{definition}
-    Let $\mathblack{A}$ be a vectorial field and $\dd\mathblack{S}$ be a small surface area. The \textit{flux $\dd \Phi$} of $\mathblack{A}$ through $\dd \mathblack{S}$ is:
-    $$\dd \Phi=\mathblack{A}\cdot\dd\mathblack{S}$$ And the flux through a surface $S$ will be:
-    $$\Phi=\iint_S \dd\Phi=\iint_S\mathblack{A}\cdot \dd\mathblack{S}$$
-  \end{definition}
-  \begin{corollary}
-    The electric flux of a field $\mathblack{E}$ through a surface $S$ is:
-    $$\Phi_E=\iint_S\mathblack{E}\cdot \dd\mathblack{S}$$
-  \end{corollary}
-  \begin{law}[Gau\ss' law]
-    The net electric flux through a closed surface $S$ is equal to $\frac{1}{\varepsilon_0}$ times the net electric charge $Q_\text{int}$ within that closed surface.
-    $$\Phi_E=\oiint_S\mathblack{E}\cdot\dd\mathblack{S}=\frac{Q_\text{int}}{\varepsilon_0}$$
-  \end{law}
-  \subsubsection*{Electric potential}
-  \begin{prop}
-    The variation of the electrostatic potential energy that undergoes a point charge $q$ when moving a distance $\dd\vb*{\ell}$ is:
-    $$\dd U=-\mathblack{F}\cdot \dd\vb*{\ell}=-q\mathblack{E}\cdot \dd\vb*{\ell}$$
-    Therefore:
-    $$\Delta U=U(b)-U(a)=\int_a^b\dd U=-\int_a^bq\mathblack{E}\cdot \dd \vb*{\ell}$$
-  \end{prop}
-  \begin{prop}
-    The work done by the electric field on a particle between two points $a$ and $b$ is $-\Delta U=U_a-U_b$, while the work done by the external forces on that particle in that interval is $\Delta U=U_b-U_a$.
-  \end{prop}
-  \begin{definition}
-    The \textit{potential difference} between two points $a$ and $b$ over a point charge $q$ when an electric field $\mathblack{E}$ is applied to it is:
-    $$\dd V:=\frac{\dd U}{q}=-\mathblack{E}\cdot\dd \vb*{\ell}\implies\Delta V=\frac{\Delta U}{q}=-\int_a^b\mathblack{E}\cdot\dd \vb*{\ell}$$
-  \end{definition}
-  \begin{definition}
-    If we choose the infinite as an origin of potential (that is, $V=0$ when $r=\infty$), we can define the \textit{electric potential} at a distance $r$ from a point charge $q$ as: $$V=K\frac{q}{r}$$
-  \end{definition}
-  \begin{principle}[Superposition principle]
-    Consider a set of $N$ point charges $q_i$ which are at a distance $\mathblack{r}_i$ from a point $A$. Then, the total electric potential exerted by the $N$ point charges on the point $A$ is:
-    $$V_A=\sum_{i=1}^NK\frac{q_i}{\|\mathblack{r}_{i}\|}$$
-    In the case of a continuous distribution of charge we have:
-    $$\Delta V=V(b)-V(a)=-\int_a^b\mathblack{E}\cdot\dd\ell$$
-  \end{principle}
-  \subsubsection*{Electrostatic energy}
-  \begin{definition}
-    The \textit{electrostatic energy} between two charges $q_1$ and $q_2$ separated a distance $r$ is: $$U=K\frac{q_1q_2}{r}=q_2V_1=q_1V_2$$
-    where $V_i$ is the electric potential created by the charge $q_i$ at a distance $r$.
-  \end{definition}
-  \begin{prop}
-    Consider a set of $N$ point charges $q_i$. Let $r_{ij}$ be the distance between the charge $q_i$ and $q_j$. Then, the total electrostatic energy of the set will be: $$U=\sum_{i=1}^N\sum_{j=i+1}^NK\frac{q_iq_j}{r_{ij}}=\frac{1}{2}\sum_{\substack{i,j=1\\i\ne j}}^NK\frac{q_iq_j}{r_{ij}}$$
-  \end{prop}
-  \subsubsection*{Conductors}
-  \begin{prop}
-    In a conductor, charges can move freely. In particular, if an external electric field is acting on a conductor, the charges move until they reach an electrostatic equilibrium.
-  \end{prop}
-  \begin{prop}
-    When a conductor is in electrostatic equilibrium:
-    \begin{itemize}
-      \item All the charges are in the surface and the total electric field inside the conductor is zero.
-      \item The electric field just outside is perpendicular to the surface of the conductor and equal to $\sigma/\varepsilon_0$, where $\sigma$ is the surface charge density.
-      \item The volume enclosed in the conductor is an equipotential volume and its surface is an equipotential surface.
-    \end{itemize}
-  \end{prop}
-  \subsubsection*{Capacitance and capacitors}
-  \begin{definition}[Capacitance]
-    Consider a conductor with an electric charge $Q$. Then, if its potential is $V$, the \textit{capacitance} of the conductor is defined as: $$C:=\frac{Q}{V}$$
-    The SI unit of the capacitance is the Farad ($1\;\text{F}=\text{C}\cdot\text{V}^{-1}$).
-  \end{definition}
-  \begin{definition}[Capacitor]
-    A \textit{capacitor} is a device that stores electric charge and electrical energy. It consists in two conductors close to each other and with equal and opposite charge.
-  \end{definition}
-  \begin{prop}
-    Consider a capacitor whose conductors are parallel plates of surface area $S$ and are separated a distance $d$. If $Q$ is the charge stored in one plate and the  potential difference between the plates is $\Delta V$, we have that the capacitance of the capacitor is: $$C=\frac{Q}{\Delta V}=\varepsilon_0\frac{S}{d}$$
-  \end{prop}
-  \begin{definition}
-    Consider two opposite point charges of charge $q$ separated a distance $\mathblack{d}$ (electric dipole). We define the \textit{electric dipole moment} as: $$\mathblack{p}=q\mathblack{d}$$
-  \end{definition}
-  \begin{prop}
-    Consider an electric dipole of moment $\mathblack{p}$ that is immersed in an electric field $\mathblack{E}$. Then, the electric force creates a torque $\vb*{\tau}$ on the dipole given by: $$\vb*{\tau}=\mathblack{p}\times\mathblack{E}$$ This torque tends to line up the dipole with the magnetic field $\mathblack{B}$, so that it takes its lowest energy configuration. The potential energy associated with the electric dipole moment is: $$U=-\vb*{\mu}\cdot\mathblack{E}$$
-  \end{prop}
-  \begin{center}
-    \begin{minipage}{\linewidth}
-      \centering
-      \includestandalone[mode=image|tex,width=0.6\linewidth]{Images/dipole}
-      \captionof{figure}{Electric dipole}
-    \end{minipage}
-  \end{center}
-  \begin{prop}
-    Consider a dielectric material with permittivity $\varepsilon=\kappa\varepsilon_0$ with $\kappa>1$. Then, the capacitance of the capacitor with this material between their plates is: $$C=\kappa C_0$$
-    where $C_0$ is the capacitance of the capacitor with no dielectric material (that is, in the vacuum).
-  \end{prop}
-  \begin{prop}
-    Consider a capacitor of capacitance $C$, charge $Q$ and potential difference $\Delta V$. Then, the potential energy stored in the capacitor is: $$U=\frac{1}{2}\frac{Q^2}{C}=\frac{1}{2}CV^2=\frac{1}{2}QV$$
-  \end{prop}
-  \begin{prop}
-    Consider a capacitor with a dielectric material inside it of permittivity $\varepsilon$. If $E$ is the magnitude of the electric field between the plates of the capacitor, the energy density $\eta$ of the electric field will be: $$\eta=\frac{1}{2}\varepsilon E^2$$
-  \end{prop}
-  \begin{prop}
-    Consider $N$ capacitors of capacitance $C_i$. We can associate the capacitors in two ways:
-    \begin{itemize}
-      \item in series: $$\frac{1}{C_\text{total}}=\sum_{i=1}^N\frac{1}{C_i}$$
-      \item in parallel: $$C_\text{total}=\sum_{i=1}^NC_i$$
-    \end{itemize}
-  \end{prop}
-  \subsubsection*{Electric current}
-  \begin{definition}
-    An \textit{electric current} is a stream of charged particles moving through an electrical conductor or space. Mathematically, the electric current is: $$I=\dv{Q}{t}$$
-    By agreement, the direction of the electric current is the one of the positive charges.
-  \end{definition}
-  \begin{definition}
-    The current density $\mathblack{J}$ is the amount of charge per unit of time that flows through a unit area of a chosen cross section. Mathematically, we have the following relation: $$I=\iint_S\mathblack{J}\cdot\dd \mathblack{S}$$
-  \end{definition}
-  \begin{prop}
-    Let $n$ be the number of charge carriers per unit of volume (charge carrier density) of a conductor, $q$ be the charge of these carriers, $S$ be the section of the conductor and $\mathblack{v}_d$ be the drift velocity (average velocity attained by charged particles in a material due to an electric field). Then, we have:
-    $$I=\frac{\Delta Q}{\Delta t}=q n \|\mathblack{v}_d\|S$$
-    Moreover: $$\mathblack{J}=q n\mathblack{v}_d$$
-  \end{prop}
-  \begin{law}[Microscopic Ohm's law]
-    Let $n$ be the charge carrier density of a conductor, $\tau$ be the average time between collisions of electrons and $\mathblack{E}$ be the electric field at which electrons are accelerated. Then: $$\mathblack{J}=\frac{ne^2\tau}{m_e}\mathblack{E}=:\sigma\mathblack{E}$$
-    Here, $\sigma$ is called \textit{conductivity}.
-  \end{law}
-  \begin{law}[Macroscopic Ohm's law]
-    Suppose a conductor has a resistance $R$ and carries an electric current $I$. If the conductor is subjected to a potential difference $\Delta V$, then: $$I=\frac{\Delta V}{R}$$
-  \end{law}
-  \begin{definition}[Resistivity]
-    Consider a conductor with conductivity $\sigma$ that has length $\ell$, section $S$ and electric resistance $R$. Then, the \textit{resistivity} of the conductor is: $$\rho=R\frac{S}{\ell}=\frac{1}{\sigma}$$
-    Moreover, this resistivity varies with the temperature in the following way: $$\rho(T)=\rho_0\left[1+\alpha(T-T_0)\right]$$
-    where $\rho_0$ is the resistivity of the material at temperature $T_0$ and $\alpha$ is the \textit{temperature coefficient of resistivity}.
-  \end{definition}
-  \begin{prop}[Joule effect]
-    Suppose that a conductor of resistance $R$ carries an electric current $I$. If it is subjected to a potential difference $\Delta V$, then the power dissipated by heat is: $$P=IV=RI^2=\frac{V^2}{R}$$
-  \end{prop}
-  \begin{prop}
-    Consider $N$ resistors of resistance $R_i$. We can associate the resistors in two ways:
-    \begin{itemize}
-      \item in series: $$R_\text{total}=\sum_{i=1}^NR_i$$
-      \item in parallel: $$\frac{1}{R_\text{total}}=\sum_{i=1}^N\frac{1}{R_i}$$
-    \end{itemize}
-  \end{prop}
-  \subsubsection*{Kirchhoff's laws and RC circuits}
-  \begin{definition}
-    A battery is a device that maintains a constant potential difference while charges move along the circuit. The \textit{electromotive force (emf)} $\xi$ of a battery describes the work done per unit of charge. Generally, batteries have an internal resistance $r$ and therefore the potential difference between their terminals is: $$\Delta V=\xi-Ir$$ where $I$ is the electric current passing through it. Finally, the total energy stored in the battery is: $$W=Q\xi$$ where $Q$ is the charge of the battery.
-  \end{definition}
-  \begin{law}[Kirchhoff's laws]
-    \hfill
-    \begin{enumerate}
-      \item Kirchhoff's junction rule: In a node (junction), the sum of currents flowing into that node is equal to the sum of currents flowing out of that node.
-      \item Kirchhoff's loop rule: The directed sum of the potential differences around any closed loop is zero.
-    \end{enumerate}
-  \end{law}
-  \begin{prop}[Capacitor discharging]
-    Suppose we have a circuit consisting of a resistor of resistance $R$ and a charged capacitor of capacitance $C$ and charge $Q$. Then, the charge of the capacitor as a function of time will be: $$q(t)=Q\exp{-\frac{t}{RC}}$$ And, therefore, the electric current will be: $$i(t)=I_0\exp{-\frac{t}{RC}}$$ where $I_0$ is the electric current at $t=0$\footnote{Sometimes $RC$ is denoted by $\tau$ and it is called the \textit{RC time constant}.}.
-  \end{prop}
-  \begin{prop}[Capacitor charging]
-    Suppose we have a circuit consisting of a battery of emf $\xi$, a resistor of resistance $R$ and a discharged capacitor of capacitance $C$. Then, the charge of the capacitor as a function of time will be: $$q(t)=Q_f(1-\exp{-\frac{t}{RC})}$$ where $Q_f$ is the final charge of the capacitor. Therefore the electric current will be: $$i(t)=\frac{\xi}{R}\exp{-\frac{t}{RC}}$$
-  \end{prop}
-  \subsection{Magnetostatics}
-  \subsubsection*{Magnetic force}
-  \begin{prop}
-    Consider a point charge $q$ moving at a velocity $\mathblack{v}$. If we apply a magnetic field $\mathblack{B}$ to it, a magnetic force acting on the particle is created: $$\mathblack{F}=q(\mathblack{v}\times\mathblack{B})$$ The SI unit of the magnetic field is the Tesla ($1\;\text{T}=1\;\text{N}\cdot\text{A}^{-1}\cdot\text{m}^{-1}$).
-  \end{prop}
-  \begin{prop}
-    Consider a wire of length $\vb*{\ell}$ transporting an electric current $I$. If we apply a magnetic field $\mathblack{B}$ to the wire and $\vb*{\ell}$ is the vector pointing at the direction of the current and whose magnitude is $\ell$, then the magnetic force created by the wire is: $$\mathblack{F}=I(\vb*{\ell}\times\mathblack{B})$$ If the we take a differential element of length $\dd\vb*{\ell}$, then: $$\dd \mathblack{F}=I(\dd\vb*{\ell}\times\mathblack{B})$$
-  \end{prop}
-  \begin{lemma}
-    The work done by the magnetic field on a particle is zero.
-  \end{lemma}
-  \begin{prop}
-    Consider a particle of mass $m$, charge $q$ and velocity $\mathblack{v}$. If there is a magnetic field $\mathblack{B}$ applied to it, we have two possibilities for its trajectory:
-    \begin{itemize}
-      \item If $\mathblack{v}\perp\mathblack{B}$, the trajectory will be circular with radius: $$r=\frac{mv}{qB}$$
-      \item If $\mathblack{v}\not\perp\mathblack{B}$, then $\mathblack{v}=\mathblack{v}_\perp+\mathblack{v}_\parallel$ (where $\mathblack{v}_\perp\perp\mathblack{B}$ and $\mathblack{v}_\parallel\parallel\mathblack{B}$) and the trajectory will be an helicoidal with radius: $$r=\frac{mv_\perp}{qB}$$
-    \end{itemize}
-  \end{prop}
-  \begin{prop}
-    If there is a charge particle $q$ moving at a velocity $\mathblack{v}$ in a region where there is an electric field $\mathblack{E}$ and a magnetic field $\mathblack{B}$, the particle experiences a force called \textit{Lorentz force}: $$\mathblack{F}=q(\mathblack{E}+\mathblack{v}\times\mathblack{B})$$
-  \end{prop}
-  \subsubsection*{Magnetic moment}
-  \begin{definition}
-    We define the \textit{magnetic moment} of a coil as: $$\vb*{\mu}=I\mathblack{S}$$ where $I$ is the electric current passing through it and $\mathblack{S}$ is the surface vector. The magnetic moment of a solenoid of $N$ turns (each of are $S$) is: $$\vb*{\mu}=NI\mathblack{S}$$
-  \end{definition}
-  \begin{prop}
-    The torque done when a magnetic field $\mathblack{B}$ is applied to an object of magnetic moment $\vb*{\mu}$ is: $$\vb*{\tau}=\vb*{\mu}\times\mathblack{B}$$ This torque tends to line up the magnetic moment with the magnetic field $\mathblack{B}$, so that it takes its lowest energy configuration. The potential energy associated with the magnetic moment is: $$U=-\vb*{\mu}\cdot\mathblack{B}$$
-  \end{prop}
-  \begin{prop}
-    Consider a magnetic dipole of magnetic moment $\vb*{\mu}$ that cannot rotate over itself within a magnetic field $\mathblack{B}$. The external force necessary to move the dipole a distance $\dd y$ is: $$F_\text{ext}=\dv{(\vb*{\mu}\cdot\mathblack{B})}{y}$$
-  \end{prop}
-  \begin{prop}[Hall effect]
-    The \textit{Hall effect} is the production of a voltage difference $V_\text{H}$ across an electrical conductor of width $d$ that is transverse to an electric current $I$ in the conductor and to an applied magnetic field $B$ perpendicular to the current.
-    It is used for:
-    \begin{itemize}
-      \item determine the density $n$ of charge carriers: $$n=\frac{IB}{qdV_\text{H}}$$ where $q$ is the charge of the charge carriers.
-      \item measure the magnitude of the magnetic field: $$B=\frac{nqd}{I}V_\text{H}$$
-    \end{itemize}
-  \end{prop}
-  \begin{center}
-    \begin{minipage}{\linewidth}
-      \centering
-      \includestandalone[mode=image|tex,width=0.85\linewidth]{Images/hall_effect}
-      \captionof{figure}{Hall effect when negative charge carriers are flowing through the circuit}
-    \end{minipage}
-  \end{center}
-  \subsubsection*{Biot-Savart law}
-  \begin{prop}
-    The magnetic field created by a point charge $q$ moving at velocity $\mathblack{v}$ at a distance $\mathblack{r}$ from it is:
-    $$\mathblack{B}=\frac{\mu_0}{4\pi}\frac{q\mathblack{v}\times\Hat{\mathblack{r}}}{\|\mathblack{r}\|^2}$$ where $\mu_0$ is the \textit{vacuum permeability} and $\Hat{\mathblack{r}}$ is the unit vector pointing from the charge to the point where we calculate the magnetic field.
-  \end{prop}
-  \begin{law}[Biot-Savart law]
-    The magnetic field created by a wire of length $\dd\vb*{\ell}$ carrying an electric current $I$ at a distance $\mathblack{r}$ from the wire is: $$\dd\mathblack{B}=\frac{\mu_0}{4\pi}\frac{I\dd\vb*{\ell}\times\hat{\mathblack{r}}}{\|\mathblack{r}\|^2}$$
-  \end{law}
-  \begin{prop}
-    Magnetic field created by:
-    \begin{itemize}
-      \item a coil of radius $R$ when it carries a current $I$:
-            \begin{itemize}
-              \item on its center: $$\mathblack{B}=\frac{\mu_0I}{2R}\mathblack{e}_x$$
-              \item at a distance $x$ from its center in the same axis: $$\mathblack{B}=\frac{\mu_0}{2}\frac{R^2I}{(x^2+R^2)^{3/2}}\mathblack{e}_x$$
-            \end{itemize}
-      \item a solenoid of $N$ turns, length $\ell$ and radius $R$ when it carries a current $I$:
-            \begin{itemize}
-              \item at a distance $x$ from its center and over its axis:
-                    \begin{multline*} \mathblack{B}=\frac{\mu_0}{2}nI\left(\frac{x-a}{\sqrt{(x-a)^2+R^2}}-\right.\\\left.-\frac{x-b}{\sqrt{(x-b)^2+R^2}}\right)\mathblack{e}_x
-                    \end{multline*} where $n=\frac{N}{\ell}$.
-                    \begin{center}
-                      \begin{minipage}{\linewidth}
-                        \centering
-                        \includestandalone[mode=image|tex,width=\linewidth]{Images/solenoid}
-                        \captionof{figure}{}
-                      \end{minipage}
-                    \end{center}
-              \item inside the solenoid ($|a|,|b|\gg R$) and far from its ends: $$\mathblack{B}=\mu_0 nI\mathblack{e}_x$$
-            \end{itemize}
-      \item a finite wire at a point $P$ situated at distance $R$ from the axis of the wire and angles $\theta_1$ and $\theta_2$ from the point to the ends of the wire: $$B=\frac{\mu_0I}{4\pi R}(\sin\theta_1+\sin\theta_2)$$
-            \begin{center}
-              \begin{minipage}{\linewidth}
-                \centering
-                \includestandalone[mode=image|tex,width=0.8\linewidth]{Images/finite_wire}
-                \captionof{figure}{}
-              \end{minipage}
-            \end{center}
-      \item an infinite wire at a distance $R$ from it: $$B=\frac{\mu_0I}{2\pi R}$$
-    \end{itemize}
-  \end{prop}
-  \subsubsection*{Gau\ss' law and Ampère's law}
-  \begin{prop}
-    The magnetic force per unit of length $\ell$ between two straight parallel conductors carrying electric currents $I_1$ and $I_2$ and separated a distance $r$ from each other is: $$\frac{F}{\ell}=\frac{\mu_0}{2\pi}\frac{I_1I_2}{r}$$
-  \end{prop}
-  \begin{law}[Gau\ss' law for magnetism]
-    The magnetic flux through any closed surface $S$ is zero.
-    $$\oiint_S\mathblack{B}\cdot\dd\mathblack{S}=0$$
-  \end{law}
-  \begin{law}[Ampère's law]
-    The line integral of a magnetic field $\mathblack{B}$ around a closed curve $C$ is proportional to the total current $I_\text{enc}$ passing through a surface $S$ enclosed by $C$.
-    $$\oint_C\mathblack{B}\cdot\dd\vb*{\ell}=\mu_0I_\text{enc}$$
-  \end{law}
-  \subsubsection*{Magnetism of the matter}
-  \begin{prop}
-    Consider a particle of mass $m$, charge $q$, angular momentum $\mathblack{L}$ and magnetic moment $\vb*{\mu}$. The relation between $\mathblack{L}$ and $\vb*{\mu}$ is: $$\vb*{\mu}=\frac{q}{2m}\mathblack{L}$$
-  \end{prop}
-  \begin{prop}
-    The angular momentum is quantized. For an electron the quantum unit of the magnetic moment is called \textit{Bohr magneton} and has a value of: $$\mu_\text{B}=\frac{e\hbar}{2m_e}$$ Therefore: $$\vb*{\mu}_L=-\mu_\text{B}\frac{\mathblack{L}}{\hbar}\quad\text{and}\quad\vb*{\mu}_S=-2\mu_\text{B}\frac{\mathblack{S}}{\hbar}$$ where $\vb*{\mu}_L$ is the magnetic moment due to the orbital angular momentum and $\vb*{\mu}_S$ is the magnetic moment due to the spin. The total angular momentum is: $\mathblack{j}=\mathblack{L}+\mathblack{S}$
-  \end{prop}
-  \begin{definition}
-    The \textit{magnetization $\mathblack{M}$} is defined as: $$\mathblack{M}=\dv{\vb*{\mu}}{V}$$ where $\dd V$ is the volume element. Moreover if a section of a cylinder of length $\dd\ell$ carries a current $\dd i$, then: $$M=\dv{i}{\ell}$$
-  \end{definition}
-  \begin{prop}
-    Suppose we place a cylinder of magnetic material inside a long solenoid that has $n$ turns per unit of length and carries a current $I$. Then, the applied field of the solenoid $\mathblack{B}_\text{app}$ ($B_\text{app}=\mu_0nI$) magnetizes the material so that it acquires a magnetization $\mathblack{M}$. The resultant magnetic field at a point inside the solenoid is: $$\mathblack{B}=\mathblack{B}_\text{app}+\mu_0\mathblack{M}$$
-  \end{prop}
-  \begin{prop}
-    The magnetization $\mathblack{M}$ of a material is found to be proportional to the applied magnetic field that produces the alignment of the magnetic dipoles in the material. So, using the previous notation, we can write: $$\mathblack{M}=\chi_\text{m}\frac{\mathblack{B}_\text{app}}{\mu_0}$$ where the constant $\chi_\text{m}$ is called \textit{magnetic susceptibility}. Based on the value of $\chi_\text{m}$, materials can be classified in three groups: \textit{ferromagnetic}, \textit{paramagnetic} and \textit{diamagnetic}.
+    \subsection{Electrostatics}
+    \subsubsection*{Electric force}
+    \begin{prop}
+        The charge of any object is a multiple of the elementary charge $e$.
+    \end{prop}
+    \begin{law}[Charge conservation]
+        The total electric charge in an isolated system never changes.
+    \end{law}
+    \begin{law}[Coulomb's law]
+        The force applied by a point charge $q_1$ over another point charge $q_2$ along a straight line is:
+        $$\vectorfunction{F}_1=K\frac{q_1q_2}{\|\vectorfunction{r}_{12}\|^2}\hat{\vectorfunction{r}}_{12}$$
+        where $\vectorfunction{r}_{12}$ is the vectorial distance between the charges, $\hat{\vectorfunction{r}}_{12}=\frac{\vectorfunction{r}_{12}}{\|\vectorfunction{r}_{12}\|}$ is the unit vector pointing from $q_2$ to $q_1$ and $K$ is the Coulomb constant.
+    \end{law}
+    \begin{principle}[Superposition principle]
+        Consider a set of $N$ point charges $q_i$ which are at a distance $\vectorfunction{r}_i$ from another point charge $Q$. Then, the net force exerted by the $N$ point charges to the charge $Q$ is:
+        $$\vectorfunction{F}_Q=\sum_{i=1}^NK\frac{q_iQ}{\|\vectorfunction{r}_{i}\|^2}\hat{\vectorfunction{r}}_{i}$$ where $\hat{\vectorfunction{r}}_{i}$ is the unit vector pointing from $q_i$ to $Q$.
+    \end{principle}
+    \subsubsection*{Electric field}
+    \begin{definition}
+        Given a point charge $Q$, the \textit{electric field} created by this charge at a distance $\vectorfunction{r}$ from it is given by:
+        $$\vectorfunction{E}=K\frac{Q}{\|\vectorfunction{r}\|^2}\hat{\vectorfunction{r}}$$
+    \end{definition}
+    \begin{principle}[Superposition principle]
+        Consider a set of $N$ point charges $q_i$ which are at a distance $\vectorfunction{r}_i$ from a point $A$. Then, the net electric field created by the $N$ point charges at point $A$ is:
+        $$\vectorfunction{E}_A=\sum_{i=1}^NK\frac{q_i}{\|\vectorfunction{r}_{i}\|^2}\hat{\vectorfunction{r}}_{i}$$ where $\hat{\vectorfunction{r}}_{i}$ is the unit vector pointing from $q_i$ to $A$. In the case of a continuous distribution of charge we will have:
+        $$\vectorfunction{E}=\int\dd\vectorfunction{E}=\int K\frac{\dd q}{r^2}\hat{\vectorfunction{r}}$$
+        Note that $\dd q=\lambda\dd \ell$, $\dd q=\sigma\dd S$ or $\dd q=\rho\dd V$ depending on whether the distribution of charge is linear, superficial or volumetric. In each respective case, $\lambda$, $\sigma$ and $\rho$ represent the charge densities.
+    \end{principle}
+    \subsubsection*{Electric flux and Gau\ss' law}
+    \begin{definition}
+        Let $\vectorfunction{A}$ be a vectorial field and $\dd\vectorfunction{S}$ be a small surface area. The \textit{flux $\dd \Phi$} of $\vectorfunction{A}$ through $\dd \vectorfunction{S}$ is:
+        $$\dd \Phi=\vectorfunction{A}\cdot\dd\vectorfunction{S}$$ And the flux through a surface $S$ will be:
+        $$\Phi=\iint_S \dd\Phi=\iint_S\vectorfunction{A}\cdot \dd\vectorfunction{S}$$
+    \end{definition}
+    \begin{corollary}
+        The electric flux of a field $\vectorfunction{E}$ through a surface $S$ is:
+        $$\Phi_E=\iint_S\vectorfunction{E}\cdot \dd\vectorfunction{S}$$
+    \end{corollary}
+    \begin{law}[Gau\ss' law]
+        The net electric flux through a closed surface $S$ is equal to $\frac{1}{\varepsilon_0}$ times the net electric charge $Q_\text{int}$ within that closed surface.
+        $$\Phi_E=\oiint_S\vectorfunction{E}\cdot\dd\vectorfunction{S}=\frac{Q_\text{int}}{\varepsilon_0}$$
+    \end{law}
+    \subsubsection*{Electric potential}
+    \begin{prop}
+        The variation of the electrostatic potential energy that undergoes a point charge $q$ when moving a distance $\dd\vb*{\ell}$ is:
+        $$\dd U=-\vectorfunction{F}\cdot \dd\vb*{\ell}=-q\vectorfunction{E}\cdot \dd\vb*{\ell}$$
+        Therefore:
+        $$\Delta U=U(b)-U(a)=\int_a^b\dd U=-\int_a^bq\vectorfunction{E}\cdot \dd \vb*{\ell}$$
+    \end{prop}
+    \begin{prop}
+        The work done by the electric field on a particle between two points $a$ and $b$ is $-\Delta U=U_a-U_b$, while the work done by the external forces on that particle in that interval is $\Delta U=U_b-U_a$.
+    \end{prop}
+    \begin{definition}
+        The \textit{potential difference} between two points $a$ and $b$ over a point charge $q$ when an electric field $\vectorfunction{E}$ is applied to it is:
+        $$\dd V:=\frac{\dd U}{q}=-\vectorfunction{E}\cdot\dd \vb*{\ell}\implies\Delta V=\frac{\Delta U}{q}=-\int_a^b\vectorfunction{E}\cdot\dd \vb*{\ell}$$
+    \end{definition}
+    \begin{definition}
+        If we choose the infinite as an origin of potential (that is, $V=0$ when $r=\infty$), we can define the \textit{electric potential} at a distance $r$ from a point charge $q$ as: $$V=K\frac{q}{r}$$
+    \end{definition}
+    \begin{principle}[Superposition principle]
+        Consider a set of $N$ point charges $q_i$ which are at a distance $\vectorfunction{r}_i$ from a point $A$. Then, the total electric potential exerted by the $N$ point charges on the point $A$ is:
+        $$V_A=\sum_{i=1}^NK\frac{q_i}{\|\vectorfunction{r}_{i}\|}$$
+        In the case of a continuous distribution of charge we have:
+        $$\Delta V=V(b)-V(a)=-\int_a^b\vectorfunction{E}\cdot\dd\ell$$
+    \end{principle}
+    \subsubsection*{Electrostatic energy}
+    \begin{definition}
+        The \textit{electrostatic energy} between two charges $q_1$ and $q_2$ separated a distance $r$ is: $$U=K\frac{q_1q_2}{r}=q_2V_1=q_1V_2$$
+        where $V_i$ is the electric potential created by the charge $q_i$ at a distance $r$.
+    \end{definition}
+    \begin{prop}
+        Consider a set of $N$ point charges $q_i$. Let $r_{ij}$ be the distance between the charge $q_i$ and $q_j$. Then, the total electrostatic energy of the set will be: $$U=\sum_{i=1}^N\sum_{j=i+1}^NK\frac{q_iq_j}{r_{ij}}=\frac{1}{2}\sum_{\substack{i,j=1\\i\ne j}}^NK\frac{q_iq_j}{r_{ij}}$$
+    \end{prop}
+    \subsubsection*{Conductors}
+    \begin{prop}
+        In a conductor, charges can move freely. In particular, if an external electric field is acting on a conductor, the charges move until they reach an electrostatic equilibrium.
+    \end{prop}
+    \begin{prop}
+        When a conductor is in electrostatic equilibrium:
+        \begin{itemize}
+            \item All the charges are in the surface and the total electric field inside the conductor is zero.
+            \item The electric field just outside is perpendicular to the surface of the conductor and equal to $\sigma/\varepsilon_0$, where $\sigma$ is the surface charge density.
+            \item The volume enclosed in the conductor is an equipotential volume and its surface is an equipotential surface.
+        \end{itemize}
+    \end{prop}
+    \subsubsection*{Capacitance and capacitors}
+    \begin{definition}[Capacitance]
+        Consider a conductor with an electric charge $Q$. Then, if its potential is $V$, the \textit{capacitance} of the conductor is defined as: $$C:=\frac{Q}{V}$$
+        The SI unit of the capacitance is the Farad ($1\;\text{F}=\text{C}\cdot\text{V}^{-1}$).
+    \end{definition}
+    \begin{definition}[Capacitor]
+        A \textit{capacitor} is a device that stores electric charge and electrical energy. It consists in two conductors close to each other and with equal and opposite charge.
+    \end{definition}
+    \begin{prop}
+        Consider a capacitor whose conductors are parallel plates of surface area $S$ and are separated a distance $d$. If $Q$ is the charge stored in one plate and the  potential difference between the plates is $\Delta V$, we have that the capacitance of the capacitor is: $$C=\frac{Q}{\Delta V}=\varepsilon_0\frac{S}{d}$$
+    \end{prop}
+    \begin{definition}
+        Consider two opposite point charges of charge $q$ separated a distance $\vectorfunction{d}$ (electric dipole). We define the \textit{electric dipole moment} as: $$\vectorfunction{p}=q\vectorfunction{d}$$
+    \end{definition}
+    \begin{prop}
+        Consider an electric dipole of moment $\vectorfunction{p}$ that is immersed in an electric field $\vectorfunction{E}$. Then, the electric force creates a torque $\vb*{\tau}$ on the dipole given by: $$\vb*{\tau}=\vectorfunction{p}\times\vectorfunction{E}$$ This torque tends to line up the dipole with the magnetic field $\vectorfunction{B}$, so that it takes its lowest energy configuration. The potential energy associated with the electric dipole moment is: $$U=-\vb*{\mu}\cdot\vectorfunction{E}$$
+    \end{prop}
     \begin{center}
-      \begin{minipage}{\linewidth}
-        \centering
-        \begin{tabular}{|c|c|c|}
-          \hline
-          Material      & $\chi_\text{m}$       & Attraction        \\
-          \hline
-          \hline
-          Ferromagnetic & $(10^2,10^5)$         & Strong attraction \\
-          \hline
-          Paramagnetic  & $(10^{-5},10^{-2})$   & Weak attraction   \\
-          \hline
-          Diamagnetic   & $(-10^{-6},-10^{-4})$ & Weak repulsion    \\
-          \hline
-        \end{tabular}
-      \end{minipage}
+        \begin{minipage}{\linewidth}
+            \centering
+            \includestandalone[mode=image|tex,width=0.6\linewidth]{Images/dipole}
+            \captionof{figure}{Electric dipole}
+        \end{minipage}
     \end{center}
-  \end{prop}
-  \begin{definition}
-    The permeability $\mu$ of a material is defined as:  $$\mu=(1+\chi_\text{m})\mu_0$$
-  \end{definition}
-  \subsubsection*{Electromagnetic induction}
-  \begin{definition}
-    We define the \textit{magnetic flux} as: $$\Phi_B=\iint_S\mathblack{B}\cdot \dd\mathblack{S}$$
-  \end{definition}
-  \begin{law}[Faraday's law]
-    The emf $\xi$ induced on a circuit is equal to the time rate of change of the magnetic flux $\Phi_B$ through the circuit. $$\xi=\oint\mathblack{E}\cdot\dd\vb*{\ell}=-\dv{\Phi_B}{t}$$
-  \end{law}
-  \begin{law}[Lenz's law]
-    The emf and induced electric current tend to oppose the change in flux and to exert a mechanical force which opposes the motion.
-  \end{law}
-  \begin{prop}
-    Consider a coil of radius $r$ and a magnetic field $B$ applied to it. Then, this induces an electric field of magnitude: $$E=-\frac{r}{2}\dv{B}{t}$$
-  \end{prop}
-  \begin{prop}
-    The emf induced on a circuit by the relative motion between a magnetic field $B$ and a segment of length $\ell$ of electric current is: $$\xi=-B\ell v$$ where $v$ is the velocity of the segment relative to the magnetic field.
-  \end{prop}
-  \begin{prop}
-    Due to the rotation at angular velocity $\omega$ of a solenoid of $N$ turns and section $S$ in a magnetic field $B$, the potential difference induced between the ends of the solenoid is: $$V=NBS\omega\sin(\omega t)=:V_0\sin(\omega t)\footnote{With this method, the energy isn't used at all. To solve this, three-phase electric power are used instead. This method consist in three coils separated by $120^\circ$ between them.}$$
-    Moreover if we connect the solenoid to a circuit of resistance $R$, we will produce an intensity $I$ given by: $$I=\frac{V_0}{R}\sin(\omega t)$$
-  \end{prop}
-  \begin{definition}[Eddy current]
-    \textit{Eddy currents} are loops of electrical current induced within conductors by a changing magnetic field. These currents induce a magnetic force that opposes the movement.
-  \end{definition}
-  \subsubsection*{Inductance}
-  \begin{definition}
-    Consider a solenoid of $N$ turns, length $\ell$ and section $S$ carrying an electric current $I$. Then, the magnetic flux $\Phi_B$ that passes through it is $$\Phi_B=LI$$ where $L=\mu_0n^2S\ell$ and $n=\frac{N}{\ell}$. The coefficient $L$ is called inductance. The SI unit of the inductance is the Henry ($1\;\text{H}=\text{Wb}\cdot\text{A}^{-1})$.
-  \end{definition}
-  \begin{definition}
-    An \textit{inductor} is a solenoid with many turns.
-  \end{definition}
-  \begin{prop}
-    Consider a solenoid of inductance $L$ and internal resistance $r$ carrying an electric current $I$. Then, Faraday-Lenz law can be written as: $$\xi=-L\dv{I}{t}$$ Therefore, the potential difference between the two ends of the solenoid is: $$\Delta V=-L\dv{I}{t}-Ir$$
-  \end{prop}
-  \begin{definition}
-    Consider two circuits close to each other so that the magnetic flux across a circuit depends also on the electric current that carries the other circuit. This dependance is given by: $$\Phi_{B,1}=L_1I_1+M_{12}I_2\qquad\Phi_{B,2}=L_2I_2+M_{21}I_1$$ where $\Phi_{B,i}$ is the flux that passes across the circuit $i$, $I_i$ is the electric current flowing in the circuit $i$, $L_i$ is the inductance coefficient of the circuit $i$ and $M_{ij}$ is the \textit{mutual inductance} between the circuit $i$ and $j$. Relating to the latter point, in general we have $M_{12}=M_{21}$.
-  \end{definition}
-  \begin{prop}
-    Consider an inductor of inductance $L$ carrying an electric current $I$. Then, the potential energy stored in the inductor is: $$U=\frac{1}{2}LI^2$$
-  \end{prop}
-  \begin{prop}
-    Consider an inductor that produces a magnetic field $B$ inside it. Then, the energy density $\eta$ of the magnetic field will be: $$\eta=\frac{1}{2}\frac{B^2}{\mu_0}$$
-  \end{prop}
-  \subsubsection*{Generalized Ampère's law}
-  \begin{definition}
-    The \textit{displacement current} is defined as: $$I_\text{d}=\varepsilon_0\dv{\Phi_E}{t}$$ where $\Phi_E$ is the flux of the electric field through the surface where the current is flowing.
-  \end{definition}
-  \begin{law}
-    The generalized Ampère's law (Ampère-Maxwell law) which takes into account displacement currents is: $$\oint_C\mathblack{B}\cdot \dd\vb*{\ell}=\mu_0 I+\mu_0\varepsilon_0\dv{}{t}\iint_S\mathblack{E}\cdot \dd\mathblack{S}$$
-  \end{law}
-  \begin{definition}
-    The speed of the electromagnetic waves in the vacuum is: $$v=\frac{1}{\sqrt{\varepsilon_0\mu_0}}=:c$$
-  \end{definition}
+    \begin{prop}
+        Consider a dielectric material with permittivity $\varepsilon=\kappa\varepsilon_0$ with $\kappa>1$. Then, the capacitance of the capacitor with this material between their plates is: $$C=\kappa C_0$$
+        where $C_0$ is the capacitance of the capacitor with no dielectric material (that is, in the vacuum).
+    \end{prop}
+    \begin{prop}
+        Consider a capacitor of capacitance $C$, charge $Q$ and potential difference $\Delta V$. Then, the potential energy stored in the capacitor is: $$U=\frac{1}{2}\frac{Q^2}{C}=\frac{1}{2}CV^2=\frac{1}{2}QV$$
+    \end{prop}
+    \begin{prop}
+        Consider a capacitor with a dielectric material inside it of permittivity $\varepsilon$. If $E$ is the magnitude of the electric field between the plates of the capacitor, the energy density $\eta$ of the electric field will be: $$\eta=\frac{1}{2}\varepsilon E^2$$
+    \end{prop}
+    \begin{prop}
+        Consider $N$ capacitors of capacitance $C_i$. We can associate the capacitors in two ways:
+        \begin{itemize}
+            \item in series: $$\frac{1}{C_\text{total}}=\sum_{i=1}^N\frac{1}{C_i}$$
+            \item in parallel: $$C_\text{total}=\sum_{i=1}^NC_i$$
+        \end{itemize}
+    \end{prop}
+    \subsubsection*{Electric current}
+    \begin{definition}
+        An \textit{electric current} is a stream of charged particles moving through an electrical conductor or space. Mathematically, the electric current is: $$I=\dv{Q}{t}$$
+        By agreement, the direction of the electric current is the one of the positive charges.
+    \end{definition}
+    \begin{definition}
+        The current density $\vectorfunction{J}$ is the amount of charge per unit of time that flows through a unit area of a chosen cross section. Mathematically, we have the following relation: $$I=\iint_S\vectorfunction{J}\cdot\dd \vectorfunction{S}$$
+    \end{definition}
+    \begin{prop}
+        Let $n$ be the number of charge carriers per unit of volume (charge carrier density) of a conductor, $q$ be the charge of these carriers, $S$ be the section of the conductor and $\vectorfunction{v}_d$ be the drift velocity (average velocity attained by charged particles in a material due to an electric field). Then, we have:
+        $$I=\frac{\Delta Q}{\Delta t}=q n \|\vectorfunction{v}_d\|S$$
+        Moreover: $$\vectorfunction{J}=q n\vectorfunction{v}_d$$
+    \end{prop}
+    \begin{law}[Microscopic Ohm's law]
+        Let $n$ be the charge carrier density of a conductor, $\tau$ be the average time between collisions of electrons and $\vectorfunction{E}$ be the electric field at which electrons are accelerated. Then: $$\vectorfunction{J}=\frac{ne^2\tau}{m_e}\vectorfunction{E}=:\sigma\vectorfunction{E}$$
+        Here, $\sigma$ is called \textit{conductivity}.
+    \end{law}
+    \begin{law}[Macroscopic Ohm's law]
+        Suppose a conductor has a resistance $R$ and carries an electric current $I$. If the conductor is subjected to a potential difference $\Delta V$, then: $$I=\frac{\Delta V}{R}$$
+    \end{law}
+    \begin{definition}[Resistivity]
+        Consider a conductor with conductivity $\sigma$ that has length $\ell$, section $S$ and electric resistance $R$. Then, the \textit{resistivity} of the conductor is: $$\rho=R\frac{S}{\ell}=\frac{1}{\sigma}$$
+        Moreover, this resistivity varies with the temperature in the following way: $$\rho(T)=\rho_0\left[1+\alpha(T-T_0)\right]$$
+        where $\rho_0$ is the resistivity of the material at temperature $T_0$ and $\alpha$ is the \textit{temperature coefficient of resistivity}.
+    \end{definition}
+    \begin{prop}[Joule effect]
+        Suppose that a conductor of resistance $R$ carries an electric current $I$. If it is subjected to a potential difference $\Delta V$, then the power dissipated by heat is: $$P=IV=RI^2=\frac{V^2}{R}$$
+    \end{prop}
+    \begin{prop}
+        Consider $N$ resistors of resistance $R_i$. We can associate the resistors in two ways:
+        \begin{itemize}
+            \item in series: $$R_\text{total}=\sum_{i=1}^NR_i$$
+            \item in parallel: $$\frac{1}{R_\text{total}}=\sum_{i=1}^N\frac{1}{R_i}$$
+        \end{itemize}
+    \end{prop}
+    \subsubsection*{Kirchhoff's laws and RC circuits}
+    \begin{definition}
+        A battery is a device that maintains a constant potential difference while charges move along the circuit. The \textit{electromotive force (emf)} $\xi$ of a battery describes the work done per unit of charge. Generally, batteries have an internal resistance $r$ and therefore the potential difference between their terminals is: $$\Delta V=\xi-Ir$$ where $I$ is the electric current passing through it. Finally, the total energy stored in the battery is: $$W=Q\xi$$ where $Q$ is the charge of the battery.
+    \end{definition}
+    \begin{law}[Kirchhoff's laws]
+        \hfill
+        \begin{enumerate}
+            \item Kirchhoff's junction rule: In a node (junction), the sum of currents flowing into that node is equal to the sum of currents flowing out of that node.
+            \item Kirchhoff's loop rule: The directed sum of the potential differences around any closed loop is zero.
+        \end{enumerate}
+    \end{law}
+    \begin{prop}[Capacitor discharging]
+        Suppose we have a circuit consisting of a resistor of resistance $R$ and a charged capacitor of capacitance $C$ and charge $Q$. Then, the charge of the capacitor as a function of time will be: $$q(t)=Q\exp{-\frac{t}{RC}}$$ And, therefore, the electric current will be: $$i(t)=I_0\exp{-\frac{t}{RC}}$$ where $I_0$ is the electric current at $t=0$\footnote{Sometimes $RC$ is denoted by $\tau$ and it is called the \textit{RC time constant}.}.
+    \end{prop}
+    \begin{prop}[Capacitor charging]
+        Suppose we have a circuit consisting of a battery of emf $\xi$, a resistor of resistance $R$ and a discharged capacitor of capacitance $C$. Then, the charge of the capacitor as a function of time will be: $$q(t)=Q_f(1-\exp{-\frac{t}{RC})}$$ where $Q_f$ is the final charge of the capacitor. Therefore the electric current will be: $$i(t)=\frac{\xi}{R}\exp{-\frac{t}{RC}}$$
+    \end{prop}
+    \subsection{Magnetostatics}
+    \subsubsection*{Magnetic force}
+    \begin{prop}
+        Consider a point charge $q$ moving at a velocity $\vectorfunction{v}$. If we apply a magnetic field $\vectorfunction{B}$ to it, a magnetic force acting on the particle is created: $$\vectorfunction{F}=q(\vectorfunction{v}\times\vectorfunction{B})$$ The SI unit of the magnetic field is the Tesla ($1\;\text{T}=1\;\text{N}\cdot\text{A}^{-1}\cdot\text{m}^{-1}$).
+    \end{prop}
+    \begin{prop}
+        Consider a wire of length $\vb*{\ell}$ transporting an electric current $I$. If we apply a magnetic field $\vectorfunction{B}$ to the wire and $\vb*{\ell}$ is the vector pointing at the direction of the current and whose magnitude is $\ell$, then the magnetic force created by the wire is: $$\vectorfunction{F}=I(\vb*{\ell}\times\vectorfunction{B})$$ If the we take a differential element of length $\dd\vb*{\ell}$, then: $$\dd \vectorfunction{F}=I(\dd\vb*{\ell}\times\vectorfunction{B})$$
+    \end{prop}
+    \begin{lemma}
+        The work done by the magnetic field on a particle is zero.
+    \end{lemma}
+    \begin{prop}
+        Consider a particle of mass $m$, charge $q$ and velocity $\vectorfunction{v}$. If there is a magnetic field $\vectorfunction{B}$ applied to it, we have two possibilities for its trajectory:
+        \begin{itemize}
+            \item If $\vectorfunction{v}\perp\vectorfunction{B}$, the trajectory will be circular with radius: $$r=\frac{mv}{qB}$$
+            \item If $\vectorfunction{v}\not\perp\vectorfunction{B}$, then $\vectorfunction{v}=\vectorfunction{v}_\perp+\vectorfunction{v}_\parallel$ (where $\vectorfunction{v}_\perp\perp\vectorfunction{B}$ and $\vectorfunction{v}_\parallel\parallel\vectorfunction{B}$) and the trajectory will be an helicoidal with radius: $$r=\frac{mv_\perp}{qB}$$
+        \end{itemize}
+    \end{prop}
+    \begin{prop}
+        If there is a charge particle $q$ moving at a velocity $\vectorfunction{v}$ in a region where there is an electric field $\vectorfunction{E}$ and a magnetic field $\vectorfunction{B}$, the particle experiences a force called \textit{Lorentz force}: $$\vectorfunction{F}=q(\vectorfunction{E}+\vectorfunction{v}\times\vectorfunction{B})$$
+    \end{prop}
+    \subsubsection*{Magnetic moment}
+    \begin{definition}
+        We define the \textit{magnetic moment} of a coil as: $$\vb*{\mu}=I\vectorfunction{S}$$ where $I$ is the electric current passing through it and $\vectorfunction{S}$ is the surface vector. The magnetic moment of a solenoid of $N$ turns (each of are $S$) is: $$\vb*{\mu}=NI\vectorfunction{S}$$
+    \end{definition}
+    \begin{prop}
+        The torque done when a magnetic field $\vectorfunction{B}$ is applied to an object of magnetic moment $\vb*{\mu}$ is: $$\vb*{\tau}=\vb*{\mu}\times\vectorfunction{B}$$ This torque tends to line up the magnetic moment with the magnetic field $\vectorfunction{B}$, so that it takes its lowest energy configuration. The potential energy associated with the magnetic moment is: $$U=-\vb*{\mu}\cdot\vectorfunction{B}$$
+    \end{prop}
+    \begin{prop}
+        Consider a magnetic dipole of magnetic moment $\vb*{\mu}$ that cannot rotate over itself within a magnetic field $\vectorfunction{B}$. The external force necessary to move the dipole a distance $\dd y$ is: $$F_\text{ext}=\dv{(\vb*{\mu}\cdot\vectorfunction{B})}{y}$$
+    \end{prop}
+    \begin{prop}[Hall effect]
+        The \textit{Hall effect} is the production of a voltage difference $V_\text{H}$ across an electrical conductor of width $d$ that is transverse to an electric current $I$ in the conductor and to an applied magnetic field $B$ perpendicular to the current.
+        It is used for:
+        \begin{itemize}
+            \item determine the density $n$ of charge carriers: $$n=\frac{IB}{qdV_\text{H}}$$ where $q$ is the charge of the charge carriers.
+            \item measure the magnitude of the magnetic field: $$B=\frac{nqd}{I}V_\text{H}$$
+        \end{itemize}
+    \end{prop}
+    \begin{center}
+        \begin{minipage}{\linewidth}
+            \centering
+            \includestandalone[mode=image|tex,width=0.85\linewidth]{Images/hall_effect}
+            \captionof{figure}{Hall effect when negative charge carriers are flowing through the circuit}
+        \end{minipage}
+    \end{center}
+    \subsubsection*{Biot-Savart law}
+    \begin{prop}
+        The magnetic field created by a point charge $q$ moving at velocity $\vectorfunction{v}$ at a distance $\vectorfunction{r}$ from it is:
+        $$\vectorfunction{B}=\frac{\mu_0}{4\pi}\frac{q\vectorfunction{v}\times\Hat{\vectorfunction{r}}}{\|\vectorfunction{r}\|^2}$$ where $\mu_0$ is the \textit{vacuum permeability} and $\Hat{\vectorfunction{r}}$ is the unit vector pointing from the charge to the point where we calculate the magnetic field.
+    \end{prop}
+    \begin{law}[Biot-Savart law]
+        The magnetic field created by a wire of length $\dd\vb*{\ell}$ carrying an electric current $I$ at a distance $\vectorfunction{r}$ from the wire is: $$\dd\vectorfunction{B}=\frac{\mu_0}{4\pi}\frac{I\dd\vb*{\ell}\times\hat{\vectorfunction{r}}}{\|\vectorfunction{r}\|^2}$$
+    \end{law}
+    \begin{prop}
+        Magnetic field created by:
+        \begin{itemize}
+            \item a coil of radius $R$ when it carries a current $I$:
+                  \begin{itemize}
+                      \item on its center: $$\vectorfunction{B}=\frac{\mu_0I}{2R}\vectorfunction{e}_x$$
+                      \item at a distance $x$ from its center in the same axis: $$\vectorfunction{B}=\frac{\mu_0}{2}\frac{R^2I}{(x^2+R^2)^{3/2}}\vectorfunction{e}_x$$
+                  \end{itemize}
+            \item a solenoid of $N$ turns, length $\ell$ and radius $R$ when it carries a current $I$:
+                  \begin{itemize}
+                      \item at a distance $x$ from its center and over its axis:
+                            \begin{multline*} \vectorfunction{B}=\frac{\mu_0}{2}nI\left(\frac{x-a}{\sqrt{(x-a)^2+R^2}}-\right.\\\left.-\frac{x-b}{\sqrt{(x-b)^2+R^2}}\right)\vectorfunction{e}_x
+                            \end{multline*} where $n=\frac{N}{\ell}$.
+                            \begin{center}
+                                \begin{minipage}{\linewidth}
+                                    \centering
+                                    \includestandalone[mode=image|tex,width=\linewidth]{Images/solenoid}
+                                    \captionof{figure}{}
+                                \end{minipage}
+                            \end{center}
+                      \item inside the solenoid ($|a|,|b|\gg R$) and far from its ends: $$\vectorfunction{B}=\mu_0 nI\vectorfunction{e}_x$$
+                  \end{itemize}
+            \item a finite wire at a point $P$ situated at distance $R$ from the axis of the wire and angles $\theta_1$ and $\theta_2$ from the point to the ends of the wire: $$B=\frac{\mu_0I}{4\pi R}(\sin\theta_1+\sin\theta_2)$$
+                  \begin{center}
+                      \begin{minipage}{\linewidth}
+                          \centering
+                          \includestandalone[mode=image|tex,width=0.8\linewidth]{Images/finite_wire}
+                          \captionof{figure}{}
+                      \end{minipage}
+                  \end{center}
+            \item an infinite wire at a distance $R$ from it: $$B=\frac{\mu_0I}{2\pi R}$$
+        \end{itemize}
+    \end{prop}
+    \subsubsection*{Gau\ss' law and Ampère's law}
+    \begin{prop}
+        The magnetic force per unit of length $\ell$ between two straight parallel conductors carrying electric currents $I_1$ and $I_2$ and separated a distance $r$ from each other is: $$\frac{F}{\ell}=\frac{\mu_0}{2\pi}\frac{I_1I_2}{r}$$
+    \end{prop}
+    \begin{law}[Gau\ss' law for magnetism]
+        The magnetic flux through any closed surface $S$ is zero.
+        $$\oiint_S\vectorfunction{B}\cdot\dd\vectorfunction{S}=0$$
+    \end{law}
+    \begin{law}[Ampère's law]
+        The line integral of a magnetic field $\vectorfunction{B}$ around a closed curve $C$ is proportional to the total current $I_\text{enc}$ passing through a surface $S$ enclosed by $C$.
+        $$\oint_C\vectorfunction{B}\cdot\dd\vb*{\ell}=\mu_0I_\text{enc}$$
+    \end{law}
+    \subsubsection*{Magnetism of the matter}
+    \begin{prop}
+        Consider a particle of mass $m$, charge $q$, angular momentum $\vectorfunction{L}$ and magnetic moment $\vb*{\mu}$. The relation between $\vectorfunction{L}$ and $\vb*{\mu}$ is: $$\vb*{\mu}=\frac{q}{2m}\vectorfunction{L}$$
+    \end{prop}
+    \begin{prop}
+        The angular momentum is quantized. For an electron the quantum unit of the magnetic moment is called \textit{Bohr magneton} and has a value of: $$\mu_\text{B}=\frac{e\hbar}{2m_e}$$ Therefore: $$\vb*{\mu}_L=-\mu_\text{B}\frac{\vectorfunction{L}}{\hbar}\quad\text{and}\quad\vb*{\mu}_S=-2\mu_\text{B}\frac{\vectorfunction{S}}{\hbar}$$ where $\vb*{\mu}_L$ is the magnetic moment due to the orbital angular momentum and $\vb*{\mu}_S$ is the magnetic moment due to the spin. The total angular momentum is: $\vectorfunction{j}=\vectorfunction{L}+\vectorfunction{S}$
+    \end{prop}
+    \begin{definition}
+        The \textit{magnetization $\vectorfunction{M}$} is defined as: $$\vectorfunction{M}=\dv{\vb*{\mu}}{V}$$ where $\dd V$ is the volume element. Moreover if a section of a cylinder of length $\dd\ell$ carries a current $\dd i$, then: $$M=\dv{i}{\ell}$$
+    \end{definition}
+    \begin{prop}
+        Suppose we place a cylinder of magnetic material inside a long solenoid that has $n$ turns per unit of length and carries a current $I$. Then, the applied field of the solenoid $\vectorfunction{B}_\text{app}$ ($B_\text{app}=\mu_0nI$) magnetizes the material so that it acquires a magnetization $\vectorfunction{M}$. The resultant magnetic field at a point inside the solenoid is: $$\vectorfunction{B}=\vectorfunction{B}_\text{app}+\mu_0\vectorfunction{M}$$
+    \end{prop}
+    \begin{prop}
+        The magnetization $\vectorfunction{M}$ of a material is found to be proportional to the applied magnetic field that produces the alignment of the magnetic dipoles in the material. So, using the previous notation, we can write: $$\vectorfunction{M}=\chi_\text{m}\frac{\vectorfunction{B}_\text{app}}{\mu_0}$$ where the constant $\chi_\text{m}$ is called \textit{magnetic susceptibility}. Based on the value of $\chi_\text{m}$, materials can be classified in three groups: \textit{ferromagnetic}, \textit{paramagnetic} and \textit{diamagnetic}.
+        \begin{center}
+            \begin{minipage}{\linewidth}
+                \centering
+                \begin{tabular}{|c|c|c|}
+                    \hline
+                    Material      & $\chi_\text{m}$       & Attraction        \\
+                    \hline
+                    \hline
+                    Ferromagnetic & $(10^2,10^5)$         & Strong attraction \\
+                    \hline
+                    Paramagnetic  & $(10^{-5},10^{-2})$   & Weak attraction   \\
+                    \hline
+                    Diamagnetic   & $(-10^{-6},-10^{-4})$ & Weak repulsion    \\
+                    \hline
+                \end{tabular}
+            \end{minipage}
+        \end{center}
+    \end{prop}
+    \begin{definition}
+        The permeability $\mu$ of a material is defined as:  $$\mu=(1+\chi_\text{m})\mu_0$$
+    \end{definition}
+    \subsubsection*{Electromagnetic induction}
+    \begin{definition}
+        We define the \textit{magnetic flux} as: $$\Phi_B=\iint_S\vectorfunction{B}\cdot \dd\vectorfunction{S}$$
+    \end{definition}
+    \begin{law}[Faraday's law]
+        The emf $\xi$ induced on a circuit is equal to the time rate of change of the magnetic flux $\Phi_B$ through the circuit. $$\xi=\oint\vectorfunction{E}\cdot\dd\vb*{\ell}=-\dv{\Phi_B}{t}$$
+    \end{law}
+    \begin{law}[Lenz's law]
+        The emf and induced electric current tend to oppose the change in flux and to exert a mechanical force which opposes the motion.
+    \end{law}
+    \begin{prop}
+        Consider a coil of radius $r$ and a magnetic field $B$ applied to it. Then, this induces an electric field of magnitude: $$E=-\frac{r}{2}\dv{B}{t}$$
+    \end{prop}
+    \begin{prop}
+        The emf induced on a circuit by the relative motion between a magnetic field $B$ and a segment of length $\ell$ of electric current is: $$\xi=-B\ell v$$ where $v$ is the velocity of the segment relative to the magnetic field.
+    \end{prop}
+    \begin{prop}
+        Due to the rotation at angular velocity $\omega$ of a solenoid of $N$ turns and section $S$ in a magnetic field $B$, the potential difference induced between the ends of the solenoid is: $$V=NBS\omega\sin(\omega t)=:V_0\sin(\omega t)\footnote{With this method, the energy isn't used at all. To solve this, three-phase electric power are used instead. This method consist in three coils separated by $120^\circ$ between them.}$$
+        Moreover if we connect the solenoid to a circuit of resistance $R$, we will produce an intensity $I$ given by: $$I=\frac{V_0}{R}\sin(\omega t)$$
+    \end{prop}
+    \begin{definition}[Eddy current]
+        \textit{Eddy currents} are loops of electrical current induced within conductors by a changing magnetic field. These currents induce a magnetic force that opposes the movement.
+    \end{definition}
+    \subsubsection*{Inductance}
+    \begin{definition}
+        Consider a solenoid of $N$ turns, length $\ell$ and section $S$ carrying an electric current $I$. Then, the magnetic flux $\Phi_B$ that passes through it is $$\Phi_B=LI$$ where $L=\mu_0n^2S\ell$ and $n=\frac{N}{\ell}$. The coefficient $L$ is called inductance. The SI unit of the inductance is the Henry ($1\;\text{H}=\text{Wb}\cdot\text{A}^{-1})$.
+    \end{definition}
+    \begin{definition}
+        An \textit{inductor} is a solenoid with many turns.
+    \end{definition}
+    \begin{prop}
+        Consider a solenoid of inductance $L$ and internal resistance $r$ carrying an electric current $I$. Then, Faraday-Lenz law can be written as: $$\xi=-L\dv{I}{t}$$ Therefore, the potential difference between the two ends of the solenoid is: $$\Delta V=-L\dv{I}{t}-Ir$$
+    \end{prop}
+    \begin{definition}
+        Consider two circuits close to each other so that the magnetic flux across a circuit depends also on the electric current that carries the other circuit. This dependance is given by: $$\Phi_{B,1}=L_1I_1+M_{12}I_2\qquad\Phi_{B,2}=L_2I_2+M_{21}I_1$$ where $\Phi_{B,i}$ is the flux that passes across the circuit $i$, $I_i$ is the electric current flowing in the circuit $i$, $L_i$ is the inductance coefficient of the circuit $i$ and $M_{ij}$ is the \textit{mutual inductance} between the circuit $i$ and $j$. Relating to the latter point, in general we have $M_{12}=M_{21}$.
+    \end{definition}
+    \begin{prop}
+        Consider an inductor of inductance $L$ carrying an electric current $I$. Then, the potential energy stored in the inductor is: $$U=\frac{1}{2}LI^2$$
+    \end{prop}
+    \begin{prop}
+        Consider an inductor that produces a magnetic field $B$ inside it. Then, the energy density $\eta$ of the magnetic field will be: $$\eta=\frac{1}{2}\frac{B^2}{\mu_0}$$
+    \end{prop}
+    \subsubsection*{Generalized Ampère's law}
+    \begin{definition}
+        The \textit{displacement current} is defined as: $$I_\text{d}=\varepsilon_0\dv{\Phi_E}{t}$$ where $\Phi_E$ is the flux of the electric field through the surface where the current is flowing.
+    \end{definition}
+    \begin{law}
+        The generalized Ampère's law (Ampère-Maxwell law) which takes into account displacement currents is: $$\oint_C\vectorfunction{B}\cdot \dd\vb*{\ell}=\mu_0 I+\mu_0\varepsilon_0\dv{}{t}\iint_S\vectorfunction{E}\cdot \dd\vectorfunction{S}$$
+    \end{law}
+    \begin{definition}
+        The speed of the electromagnetic waves in the vacuum is: $$v=\frac{1}{\sqrt{\varepsilon_0\mu_0}}=:c$$
+    \end{definition}
 \end{multicols}
 \begin{table}[ht]
-  \centering
-  \renewcommand{\arraystretch}{2.5}
-  \begin{tabular}{|c|c|c|}
-    \hline
-    \bfseries Law             & \bfseries Differential form                                                                                                        & \bfseries Integral form                                                                                                            \\
-    \hline
-    Gau\ss' law               & $\displaystyle \mathblack{\grad}\cdot\mathblack{E}=\frac{\rho}{\varepsilon_0}$                                                     & $\displaystyle \oiint_S\mathblack{E}\cdot d\mathblack{S}=\frac{Q_{\text{int}}}{\varepsilon_0}$                                     \\
-    \hline
-    Gau\ss' law for magnetism & $\displaystyle \mathblack{\grad}\cdot\mathblack{B}=0$                                                                              & $\displaystyle \oiint_S\mathblack{B}\cdot d\mathblack{S}=0$                                                                        \\
-    \hline
-    Faraday-Lenz law          & $\displaystyle \mathblack{\grad}\times\mathblack{E}=-\frac{\partial\mathblack{B}}{\partial t}$                                     & $\displaystyle \oint_C\mathblack{E}\cdot \dd\vb*{\ell}=-\dv{}{t}\iint_S\mathblack{B}\cdot d\mathblack{S}$                          \\
-    \hline
-    Ampère-Maxwell law        & $\displaystyle \mathblack{\grad}\times\mathblack{B}=\mu_0\mathblack{J}+\mu_0\varepsilon_0\frac{\partial\mathblack{E}}{\partial t}$ & $\displaystyle \oint_C\mathblack{B}\cdot \dd\vb*{\ell}=\mu_0 I+\mu_0\varepsilon_0\dv{}{t}\iint_S\mathblack{E}\cdot d\mathblack{S}$ \\
-    \hline
-  \end{tabular}
-  \captionof{figure}{Maxwell equations}
+    \centering
+    \renewcommand{\arraystretch}{2.5}
+    \begin{tabular}{|c|c|c|}
+        \hline
+        \bfseries Law             & \bfseries Differential form                                                                                                                            & \bfseries Integral form                                                                                                                           \\
+        \hline
+        Gau\ss' law               & $\displaystyle \vectorfunction{\grad}\cdot\vectorfunction{E}=\frac{\rho}{\varepsilon_0}$                                                               & $\displaystyle \oiint_S\vectorfunction{E}\cdot d\vectorfunction{S}=\frac{Q_{\text{int}}}{\varepsilon_0}$                                          \\
+        \hline
+        Gau\ss' law for magnetism & $\displaystyle \vectorfunction{\grad}\cdot\vectorfunction{B}=0$                                                                                        & $\displaystyle \oiint_S\vectorfunction{B}\cdot d\vectorfunction{S}=0$                                                                             \\
+        \hline
+        Faraday-Lenz law          & $\displaystyle \vectorfunction{\grad}\times\vectorfunction{E}=-\frac{\partial\vectorfunction{B}}{\partial t}$                                          & $\displaystyle \oint_C\vectorfunction{E}\cdot \dd\vb*{\ell}=-\dv{}{t}\iint_S\vectorfunction{B}\cdot d\vectorfunction{S}$                          \\
+        \hline
+        Ampère-Maxwell law        & $\displaystyle \vectorfunction{\grad}\times\vectorfunction{B}=\mu_0\vectorfunction{J}+\mu_0\varepsilon_0\frac{\partial\vectorfunction{E}}{\partial t}$ & $\displaystyle \oint_C\vectorfunction{B}\cdot \dd\vb*{\ell}=\mu_0 I+\mu_0\varepsilon_0\dv{}{t}\iint_S\vectorfunction{E}\cdot d\vectorfunction{S}$ \\
+        \hline
+    \end{tabular}
+    \captionof{figure}{Maxwell equations}
 \end{table}
 \end{document}

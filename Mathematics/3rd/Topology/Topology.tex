@@ -82,6 +82,9 @@
     A \textit{homeomorphism} between topological spaces is a bijective function that is continuous and whose inverse is also continuous.
   \end{definition}
   \begin{definition}
+    Let $(X,\mathcal{T}_X)$ and $(Y,\mathcal{T}_Y)$ be topological spaces. We say that $(X,\mathcal{T}_X)$ and $(Y,\mathcal{T}_Y)$ are \textit{homeomorphic}, denoted by $(X,\mathcal{T}_X)\cong(Y,\mathcal{T}_Y)$, if there exists a homeomorphism between them.
+  \end{definition}
+  \begin{definition}
     Let $(X,\mathcal{T})$ be a topological space and $A\subset X$. We say that $A$ is \textit{closed} if $X\setminus A\in\mathcal{T}$ is open.
   \end{definition}
   \begin{prop}
@@ -180,17 +183,53 @@
     \end{enumerate}
   \end{prop}
   \begin{prop}
-    Let $(X,\mathcal{T})$ be a topological space and $A,B\subset X$ be subsets. Then:
-    \begin{align*}
-      \Int(\Int (A))=      & \Int A              & \Cl(\Cl (A))=       & \Cl A             \\
-      A\subset B\implies   & \Int A\subset\Int B & A\subset B\implies  & \Cl A\subset\Cl B \\
-      \Int(X\setminus A)=  & X\setminus \Cl A    & \Cl(X\setminus A)=  & X\setminus \Int A \\
-      \Int(A\cap B)=       & \Int A\cap\Int B    & \Cl(A\cap B)\subset & \Cl A\cap\Cl B    \\
-      \Int(A\cup B)\supset & \Int A\cup\Int B    & \Cl(A\cup B)=       & \Cl A\cup\Cl B
-    \end{align*}
+    Let $(X,\mathcal{T})$ be a topological space and $A,B\subset X$ be subsets.
+
+    Properties regarding the interior:
+    \begin{enumerate}[leftmargin=1.15cm]\renewcommand{\labelenumi}{1.\arabic{enumi}.}
+      \item $\Int(\Int (A))=         \Int A$
+      \item $A\subseteq B\implies    \Int A\subseteq\Int B$
+      \item $\Int(X\setminus A)=     X\setminus \Cl A$
+      \item $\Int(A\cap B)=          \Int A\cap\Int B$
+      \item $\Int(A\cup B)\supseteq  \Int A\cup\Int B$
+    \end{enumerate}
+    Properties regarding the closure:
+    \begin{enumerate}[leftmargin=1.15cm]\renewcommand{\labelenumi}{2.\arabic{enumi}.}
+      \item $\Cl(\Cl (A))=          \Cl A$
+      \item $A\subseteq B\implies   \Cl A\subseteq\Cl B$
+      \item $\Cl(X\setminus A)=     X\setminus \Int A$
+      \item $\Cl(A\cap B)\subseteq  \Cl A\cap\Cl B$
+      \item $\Cl(A\cup B)=          \Cl A\cup\Cl B$
+    \end{enumerate}
+    Properties regarding the boundary:
+    \begin{enumerate}[leftmargin=1.15cm]\renewcommand{\labelenumi}{3.\arabic{enumi}.}
+      \item $\Fr A\cap\Int A=         \varnothing$
+      \item $\Fr A\cup\Int A=             \Cl A$
+      \item $\Fr A\subseteq A\iff  A  \text{ is closed}$
+      \item $\Fr A\cap A=\varnothing\iff  A\text{ is open}$
+      \item $\Fr A=\varnothing \text{ if $A$ is open and closed at the same time}$
+    \end{enumerate}
   \end{prop}
   \begin{theorem}
-    Let $(X,\mathcal{T}_X)$ and $(Y,\mathcal{T}_Y)$ be topological spaces, $A\subset X$ be a subset and $f:(X,\mathcal{T}_X)\rightarrow (Y,\mathcal{T}_Y)$ be a continuous function. Then: $$f(\Cl(A))\subset \Cl(f(A))$$
+    Let $(X,\mathcal{T}_X)$ and $(Y,\mathcal{T}_Y)$ be topological spaces, $A\subset X$ be a subset and $f:(X,\mathcal{T}_X)\rightarrow (Y,\mathcal{T}_Y)$ be a continuous function. Then: $$f(\Cl(A))\subseteq \Cl(f(A))$$
   \end{theorem}
+  \begin{theorem}
+    Let $(X,\mathcal{T}_X)$ and $(Y,\mathcal{T}_Y)$ be topological spaces and $f:(X,\mathcal{T}_X)\rightarrow (Y,\mathcal{T}_Y)$ be a function. Then,$f$ is continuous if and only if $\forall x\in X$ and $U\in\mathcal{T}$ such that $f(x)\in U$, there exists a neighbourhood $N$ of $x$ with $f(N)\subset U$.
+  \end{theorem}
+  \begin{prop}
+    Let $(X,\mathcal{T}_X)$, $(Y,\mathcal{T}_Y)$ and $(Z,\mathcal{T}_Z)$ be topological spaces and $f:(X,\mathcal{T}_X)\rightarrow (Y,\mathcal{T}_Y)$, $f:(Y,\mathcal{T}_Y)\rightarrow (Z,\mathcal{T}_Z)$ be continuous functions. Then, $g\circ f::(X,\mathcal{T}_X)\rightarrow (Z,\mathcal{T}_Z)$ is continuous.
+  \end{prop}
+  \begin{definition}
+    Let $(X,\mathcal{T}_X)$ and $(Y,\mathcal{T}_Y)$ be topological spaces and $f:(X,\mathcal{T}_X)\rightarrow (Y,\mathcal{T}_Y)$ be a function. We say that $f$ is \textit{open} if $\forall U\in\mathcal{T}_X$, we have $f(A)\in \mathcal{T}_Y$. Analogously, we say that $f$ is \textit{closed} if $\forall C\subset X$ closed, we have $f(C)$ is closed.
+  \end{definition}
+  \begin{prop}
+    Let $(X,\mathcal{T}_X)$ and $(Y,\mathcal{T}_Y)$ be topological spaces and $f:(X,\mathcal{T}_X)\rightarrow (Y,\mathcal{T}_Y)$ be a continuous bijective function. Then, the following statements are equivalent:
+    \begin{enumerate}
+      \item $f$ is a homeomorphism.
+      \item $f$ is open.
+      \item $f$ is closed.
+    \end{enumerate}
+  \end{prop}
+  % m'he quedat a la pagina 12 del document 7.
 \end{multicols}
 \end{document}
