@@ -213,7 +213,7 @@
   \begin{definition}
     Let $I\subseteq\RR$ be an interval. A \textit{linear differential equation} is an ode of the form:
     \begin{equation}\label{DE_linear}
-      \vectorfunction{x}'=\vectorfunction{A}(t)\vectorfunction{x}+\vectorfunction{x}
+      \vectorfunction{x}'=\vectorfunction{A}(t)\vectorfunction{x}+\vectorfunction{b}
     \end{equation}
     where $\vectorfunction{A}:I\rightarrow\mathcal{L}(\RR^n,\RR^n)$ and $\vectorfunction{b}:I\rightarrow\RR^n$ are continuous functions.
     We say that linear equation \eqref{DE_linear} is \textit{homogeneous} if $\vectorfunction{b}(t)=0$ $\forall t\in I$. We say that linear equation \eqref{DE_linear} is of \textit{constant coefficients} if $\vectorfunction{A}(t)=\vectorfunction{A}$ $\forall t\in I$, where $\vectorfunction{A}\in\mathcal{M}_n(\RR)$.
@@ -224,11 +224,14 @@
       \vectorfunction{\varphi}:I\times I\times \RR^n & \longrightarrow\RR^n                           \\
       (t,t_0,x_0)                                    & \longmapsto\vectorfunction{\varphi}(t,t_0,x_0)
     \end{align*}
-    where $\vectorfunction{\varphi}(t,t_0,x_0)$ is a solution to \eqref{DE_linear}.
+    where $\vectorfunction{\varphi}(t,t_0,x_0)$ is a solution to \eqref{DE_linear} with initial conditions $\vectorfunction{\varphi}(t_0,t_0,x_0)$.
   \end{definition}
   \subsubsection*{Homogeneous systems}
   \begin{theorem}
-    Let $I\subseteq\RR$ be an interval and $\vectorfunction{A}\in\mathcal{C}(I,\mathcal{L}(\RR^n))$. We define $\mathcal{A}$ as the set of all solutions to the linear ode $\vectorfunction{x}'=\vectorfunction{A}(t)\vectorfunction{x}$. Then, $\mathcal{A}$ is a vector space of dimension $n$ and for each $t_0\in I$, the function
+    Let $I\subseteq\RR$ be an interval and $\vectorfunction{A}\in\mathcal{C}(I,\mathcal{L}(\RR^n))$. We define $\mathcal{A}$ as the set of all solutions to the linear ode:
+    \begin{equation}\label{DE_homo}
+      \vectorfunction{x}'=\vectorfunction{A}(t)\vectorfunction{x}
+    \end{equation} Then, $\mathcal{A}$ is a vector space of dimension $n$ and for each $t_0\in I$, the function
     \begin{align*}
       \xi_{t_0}:\RR^n & \longrightarrow\mathcal{A}                         \\
       x_0             & \longmapsto\vectorfunction{\varphi}(\cdot,t_0,x_0)
@@ -258,5 +261,21 @@
       \item ${\left[\vectorfunction{\phi}_s^t\right]}^{-1}=\vectorfunction{\phi}_t^s$
     \end{enumerate}
   \end{corollary}
+  \begin{definition}
+    Let $I\subset \RR$ be an interval, $\vectorfunction{A}\in\mathcal{C}(I,\mathcal{L}(\RR^n))$ and $\vectorfunction{M}(t)=(m_{ij})\in\mathcal{M}_n(\RR)$. We say that $\vectorfunction{M}(t)$ is a \textit{matrix solution} to the ode \eqref{DE_homo} if $\vectorfunction{\varphi}_j={(m_{1j},\ldots,m_{1n})}^\mathrm{T}\in\mathcal{A}$ for $j=1,\ldots,n$. We say that $\vectorfunction{M}(t)$ is a \textit{fundamental matrix solution} to the ode \eqref{DE_homo} if $\vectorfunction{M}(t)$ is a matrix solution and $\vectorfunction{\varphi}_1,\ldots,\vectorfunction{\varphi}_n$ are linearly independent.
+  \end{definition}
+  \begin{prop}
+    Let $I\subset \RR$ be an interval, $\vectorfunction{A}\in\mathcal{C}(I,\mathcal{L}(\RR^n))$ and $\vectorfunction{M}(t)\in\mathcal{M}_n(\RR)$. Then:
+    \begin{enumerate}
+      \item $\vectorfunction{M}(t)$ is a matrix solution to the ode \eqref{DE_homo} $\iff\vectorfunction{M}'(t)=\vectorfunction{A}(t)\vectorfunction{M}(t)$\footnote{By definition, if $\vectorfunction{M}(t)=(m_{ij}(t))$, then $\vectorfunction{M}'(t):=({m_{ij}}'(t))$.}.
+      \item $\vectorfunction{M}(t)$ is a matrix solution to the ode \eqref{DE_homo} $\iff\forall c\in\RR^n$, $\vectorfunction{M}(t)c\in\mathcal{A}$.
+      \item If $\vectorfunction{M}(t)$ is a matrix solution to the ode \eqref{DE_homo}, then $\forall C\in\mathcal{M}_n(\RR)$, $\vectorfunction{M}(t)C$ is a matrix solution to the ode \eqref{DE_homo}.
+      \item $\vectorfunction{M}(t)$ is a fundamental matrix solution to the ode \eqref{DE_homo} $\iff\vectorfunction{M}(t)$ is a matrix solution to the ode \eqref{DE_homo} and $\det\vectorfunction{M}(t)\ne 0$.
+      \item $\vectorfunction{M}(t)$ is a fundamental matrix solution to the ode \eqref{DE_homo} $\iff\vectorfunction{M}(t)$ is a matrix solution to the ode \eqref{DE_homo} and $\exists t_0\in\RR$ such that $\det\vectorfunction{M}(t_0)\ne 0$.
+    \end{enumerate}
+  \end{prop}
+  \begin{prop}
+    Let $I\subset \RR$ be an interval, $\vectorfunction{A}\in\mathcal{C}(I,\mathcal{L}(\RR^n))$ and $\vectorfunction{\Phi}(t),\vectorfunction{\psi}(t)\in\mathcal{M}_n(\RR)$ be matrix solutions to the ode \eqref{DE_homo}. Then, $\exists! C\in\mathcal{M}_n(\RR)$ such that $\vectorfunction{\psi}(t)=\vectorfunction{\Phi}(t)C$. Moreover, $\vectorfunction{\psi}$ is fundamental if and only if $\det C\ne 0$.
+  \end{prop}
 \end{multicols}
 \end{document}

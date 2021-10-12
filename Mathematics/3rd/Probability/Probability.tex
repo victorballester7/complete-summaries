@@ -163,7 +163,7 @@
   \subsection{Random variables and random vectors}
   \subsubsection*{Random variables}
   \begin{definition}
-    Let $(\Omega,\mathcal{A},P)$ be a probability space. A \textit{random variable $X$} is a function $X:\Omega\rightarrow\RR$ satisfying for all $B\in\mathcal{B}(\RR)$: $$X^{-1}(B)=\{\omega\in\Omega:X(\omega)\in B\}\subset\mathcal{A}$$
+    Let $(\Omega,\mathcal{A},P)$ be a probability space. A \textit{random variable $X$} is a function $X:\Omega\rightarrow\RR$ satisfying for all $B\in\mathcal{B}(\RR)$: $$X^{-1}(B)=\{\omega\in\Omega:X(\omega)\in B\}\in\mathcal{A}$$
   \end{definition}
   \begin{prop}
     Let $(\Omega,\mathcal{A},P)$ be a probability space, $\mathcal{C}$ be a collection of subsets of $\RR$ such that $\mathcal{B}(\RR)=\sigma(\mathcal{C})$ and let $X:\Omega\rightarrow\RR$ be a function. Then, $X$ is a random variable if and only if $X^{-1}(B)\in\mathcal{A}$, $\forall B\in C$.
@@ -315,13 +315,13 @@
       \item $f$ is integrable over $\RR$ and: $$\int_{-\infty}^{+\infty}f(x)\dd x=1$$
       \item For all $a,b\in\RR\cup\{\pm\infty\}$ with $a\leq b$, we have: $$P(a\leq X\leq b)=\int_a^bf(x)\dd x$$
     \end{enumerate}
-    The function $f$ is called \textit{probability density function (pdf)} of $X$.
+    The function $f$, denoted by $f_X$, is called \textit{probability density function (pdf)} of $X$.
   \end{definition}
   \begin{prop}
     Let $(\Omega,\mathcal{A},P)$ be a probability space, $X$ be an absolutely continuous random variable and $F_X$ be its cdf. Then:
     \begin{enumerate}
       \item $P(X=a)=0\quad\forall a\in \RR$
-      \item $\displaystyle F_X(b)=P(X\leq b)=\int_{-\infty}^bf(x)\dd x\quad\forall b\in\RR$
+      \item $\displaystyle F_X(b)=P(X\leq b)=\int_{-\infty}^bf_X(x)\dd x\quad\forall b\in\RR$
       \item $F_X$ is continuous on $\RR$.
       \item If $a,b\in\RR$ are such that $a<b$, then:
             \begin{multline*}
@@ -330,7 +330,7 @@
     \end{enumerate}
   \end{prop}
   \begin{definition}[Continuous uniform distribution]
-    Let $(\Omega,\mathcal{A},P)$ be a probability space. We say that an absolutely continuous random variable $X$ follows a \textit{continuous uniform distribution on $(a,b)$} (also $[a,b]$), and we denoted it by $X\sim U(a,b)$, if $X$ has the pdf $$f(x)=\frac{1}{b-a}\vectorfunction{1}_{(a,b)}(x)$$ where $\vectorfunction{1}_{(a,b)}$ is the indicator function. Its cdf is:
+    Let $(\Omega,\mathcal{A},P)$ be a probability space. We say that an absolutely continuous random variable $X$ follows a \textit{continuous uniform distribution on $(a,b)$} (also $[a,b]$), and we denoted it by $X\sim U(a,b)$, if $X$ has the pdf $$f_X(x)=\frac{1}{b-a}\vectorfunction{1}_{(a,b)}(x)$$ where $\vectorfunction{1}_{(a,b)}$ is the indicator function. Its cdf is:
     \begin{multline*}
       F_X(x)=\left\{
       \begin{array}{ccl}
@@ -342,7 +342,7 @@
     \end{multline*}
   \end{definition}
   \begin{definition}[Exponential distribution]
-    Let $(\Omega,\mathcal{A},P)$ be a probability space. We say that an absolutely continuous random variable $X$ follows an \textit{exponential distribution of parameter $\lambda>0$}, and we denoted it by $X\sim \text{Exp}(\lambda)$, if $X$ has the pdf $$f(x)=\lambda\exp{-\lambda x}\vectorfunction{1}_{(0,\infty)}$$ Furthermore, its cdf is:
+    Let $(\Omega,\mathcal{A},P)$ be a probability space. We say that an absolutely continuous random variable $X$ follows an \textit{exponential distribution of parameter $\lambda>0$}, and we denoted it by $X\sim \text{Exp}(\lambda)$, if $X$ has the pdf $$f_X(x)=\lambda\exp{-\lambda x}\vectorfunction{1}_{(0,\infty)}$$ Furthermore, its cdf is:
     $$F_X(x)=(1-\exp{-\lambda x})\vectorfunction{1}_{(0,\infty)}(x)$$
   \end{definition}
   \begin{definition}[Continuous memorylessness property]
@@ -351,5 +351,54 @@
   \begin{prop}
     Let $(\Omega,\mathcal{A},P)$ be a probability space, $X$ be an absolutely continuous random variable and $\lambda\in\RR_{>0}$. Then, $X\sim\text{Exp}(\lambda)$ if and only if the distribution of $X$ is memoryless.
   \end{prop}
+  \begin{definition}[Standard normal distribution]
+    Let $(\Omega,\mathcal{A},P)$ be a probability space. We say that an absolutely continuous random variable $Z$ follows a \textit{standard normal distribution}, and we denoted it by $Z\sim N(0,1)$, if $Z$ has the pdf $$f_X(x)=\frac{1}{\sqrt{2\pi}}\exp{\frac{-x^2}{2}}$$
+  \end{definition}
+  \begin{definition}[Normal distribution]
+    Let $(\Omega,\mathcal{A},P)$ be a probability space, $\mu\in\RR$ and $\sigma\in\RR_{>0}$. We say that an absolutely continuous random variable $X$ follows a \textit{normal distribution}, and we denoted it by $X\sim N(\mu,\sigma^2)$, if $X$ has the pdf $$f_X(x)=\frac{1}{\sqrt{2\pi\sigma^2}}\exp{\frac{-{(x-\mu)}^2}{2\sigma^2}}$$
+  \end{definition}
+  \begin{prop}
+    Let $(\Omega,\mathcal{A},P)$ be a probability space and $X\sim N(\mu,\sigma^2)$ and $Z\sim N(0,1)$ be absolutely continuous random variables. Then: $$\mu+\sigma Z\overset{\text{d}}{=} X$$ Therefore, $\forall x\in\RR$ we have: $$P(X\leq x)=P\left(Z\leq\frac{x-\mu}{\sigma}\right)$$
+  \end{prop}
+  \begin{definition}[Gamma distribution]
+    Let $(\Omega,\mathcal{A},P)$ be a probability space. We say that an absolutely continuous random variable $X$ follows a \textit{gamma distribution of parameters $r,\alpha\in\RR_{>0}$}, and we denoted it by $X\sim \text{Gamma}(r,\alpha)$, if $X$ has the pdf $$f_X(x)=\frac{\alpha^r}{\Gamma(r)}x^{r-1}\exp{-\alpha x}\vectorfunction{1}_{(0,\infty)}(x)$$
+  \end{definition}
+  \begin{definition}
+    Let $a,b\in\RR_{>0}$. The \textit{beta function} is defined as: $$\text{B}(a,b):=\int_0^1x^{a-1}{(1-x)}^{b-1}\dd x$$
+  \end{definition}
+  \begin{prop}
+    For all $a,b\in\RR_{>0}$, we have: $$\text{B}(a,b)=\frac{\Gamma(a)\Gamma(b)}{\Gamma(a+b)}$$
+  \end{prop}
+  \begin{definition}[Beta distribution]
+    Let $(\Omega,\mathcal{A},P)$ be a probability space. We say that an absolutely continuous random variable $X$ follows a \textit{beta distribution of parameters $a,b\in\RR_{>0}$}, and we denoted it by $X\sim \text{B}(a,b)$, if $X$ has the pdf $$f_X(x)=\frac{1}{\text{B}(a,b)}x^{a-1}{(1-x)}^{b-1}\vectorfunction{1}_{(0,1)}(x)$$
+  \end{definition}
+  \begin{definition}
+    A\textit{ mixed random variable} is a random variable whose cdf is neither piecewise-constant (a discrete random variable) nor absolutely  continuous.
+  \end{definition}
+  \begin{theorem}
+    Let $(\Omega,\mathcal{A},P)$ be a probability space and $X$ be a random variable with cdf $F_X$. Suppose that:
+    \begin{enumerate}
+      \item $F_X$ is continuous.
+      \item $F_X$ is differentiable at any point except for, maybe, a finite number of points.
+      \item $F_X$ is continuously differentiable at any point except for, maybe, a finite number of points.
+    \end{enumerate}
+    Then: $$F_X(x)=\int_{-\infty}^xF'(t)\dd t\qquad\forall x\in\RR$$
+    That is, ${F_X}'$ is the pdf of $X$.
+  \end{theorem}
+  \subsubsection*{Transformations of random variables}
+  \begin{prop}
+    Let $(\Omega,\mathcal{A},P)$ be a probability space, $X$ be an absolutely continuous random variable with pdf $f_X$, $U$ be an open interval such that $P(X\in U)=1$ and $V$ be an open set. Let $h:U\rightarrow V$ be a diffeomorphism of class $\mathcal{C}^1$. Then, $Y:=h(X)$ is also an absolutely continuous random variable and $$f_Y(y)=f_X(h^{-1}(y))|(h^{-1})'(y)|\vectorfunction{1}_V(y)$$
+  \end{prop}
+  \begin{prop}
+    Let $(\Omega,\mathcal{A},P)$ be a probability space, $X$ be an absolutely continuous random variable with pdf $f_X$, $U_1,\ldots U_k$ be pair disjoint open intervals such that $P(X\in U_1\cup \cdots\cup U_k)=1$. Let $h:U_1\cup \cdots\cup U_k\rightarrow \RR$ and denote $h_i=h|_{U_i}$. Then, if $h_i:U_i\rightarrow V_i$ are  diffeomorphisms of class $\mathcal{C}^1$ for $i=1,\ldots,k$, then $Y:=h(X)$ is also an absolutely continuous random variable and $$f_Y(y)=\sum_{i=1}^kf_X({h_i}^{-1}(y))|({h_i}^{-1})'(y)|\vectorfunction{1}_{V_i}(y)$$
+  \end{prop}
+  \subsubsection*{Random vectors}
+  \begin{definition}
+    Let $(\Omega,\mathcal{A},P)$ be a probability space. A \textit{random vector $\vectorfunction{X}$} is a function $\vectorfunction{X}=(X_1,\ldots,X_n):\Omega\rightarrow\RR^n$ satisfying for all $B\in\mathcal{B}(\RR^n)$: $$\{\vectorfunction{X}\in B\}=\{\omega\in\Omega:\vectorfunction{X}(\omega)\in B\}\in\mathcal{A}$$
+  \end{definition}
+  \begin{prop}
+    Let $(\Omega,\mathcal{A},P)$ be a probability space. $\vectorfunction{X}=(X_1,\ldots,X_n):\Omega\rightarrow\RR^n$ is a random vector if and only if $X_i:\Omega\rightarrow\RR$ is a random variable for $i=1,\ldots,n$.
+  \end{prop}
+  %ATENCIÓ: absolutely continuous =? everywhere continuous
 \end{multicols}
 \end{document}
