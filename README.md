@@ -1,3 +1,3 @@
 # Mathematics-and-physics-summaries
-Summary of each subject in Mathematics and Physics degree at UAB
+Summary of each subject in Mathematics and Physics degree at UAB (Universitat Autònoma de Barcelona).
 

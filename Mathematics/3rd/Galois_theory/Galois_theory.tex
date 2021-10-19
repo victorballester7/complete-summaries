@@ -85,6 +85,7 @@
   \begin{theorem}
     The set $\overline{\QQ}\subset\CC$ is countable.
   \end{theorem}
+  \subsection{Field extensions}
   \begin{prop}
     Let $K$, $L$ be fields. Then, all field morphism $K\rightarrow L$ is injective.
   \end{prop}
@@ -114,8 +115,8 @@
   \begin{corollary}
     Let $\quot{L}{K}$ be a field extension and $\alpha\in L$. Then, $\quot{K(\alpha)}{K}$ is finite if and only if $\alpha$ is algebraic over $K$. Furthermore in that case: $$[K(\alpha):K]=\deg(\irr(\alpha,K)(x))$$
   \end{corollary}
-  \begin{theorem}
-    Let $\quot{M}{L}$ and $\quot{L}{K}$ be field extensions. Then: $$[M:K]=[M:L][L:K]$$
+  \begin{theorem}[Tower formula]
+    Let $\quot{F}{L}$ and $\quot{L}{K}$ be field extensions. Then: $$[F:K]=[F:L][L:K]$$
   \end{theorem}
   \begin{prop}
     Let $\quot{L}{K}$ be a field extension and $\alpha\in L$ be algebraic. If $\quot{K'}{K}$ is another field extension, then:
@@ -157,5 +158,32 @@
       \item The set $$E:=\{\alpha\in L:\alpha\text{ is algebraic over }K\}$$ is a subfield of $L$, the field extension $\quot{E}{K}$ is algebraic and if $L\ne E$, then $\quot{L}{E}$ is purely transcendental.
     \end{enumerate}
   \end{prop}
+  \subsubsection*{Morphisms of extensions}
+  \begin{definition}
+    Let $K$, $L$, $F$ be fields and consider the field extensions $\quot{L}{K}$ and $\quot{F}{K}$ with the morphisms $f:K\hookrightarrow L$ and $g:K\hookrightarrow F$, respectively. We say that a \textit{morphism of extensions between $\quot{L}{K}$ and $\quot{F}{K}$} is a field morphism $h:L\rightarrow F$ such that if $h|_K:=h\circ f$, then $h|_K=g$\footnote{If the morphisms $f$ and $g$ are the natural inclusions, we will denote $h|_K:=\id_K$.}. The set of all such morphisms is:
+    $$\Mor_K(f,g):=\{h:L\longrightarrow F:h\circ f=g\}$$
+    If $f$ and $g$ are the natural inclusions, we will denote: $$\Mor_K(L,F):=\Mor_K(f,g)=\{h:L\longrightarrow F:h|_K=\id_K\}$$
+  \end{definition}
+  \begin{definition}
+    Let $K$, $L$, $F$ be fields and consider the field extensions $\quot{L}{K}$ and $\quot{F}{K}$ with the morphisms $f:K\hookrightarrow L$ and $g:K\hookrightarrow F$, respectively. We define the following sets:
+    \begin{align*}
+      \Iso_K(f,g):=\{h\in\Mor_K(f,g):h\text{ is bijective}\} \\
+      \Aut_K(f):=\Iso_K(f,f)\qquad\Gal(f):=\Aut_K(f)
+    \end{align*}
+    If $f$ and $g$ are the natural inclusions, we will denote:
+    \begin{align*}
+      \Iso_K(L,F):=\{h\in\Mor_K(L,F):h\text{ is bijective}\} \\
+      \Aut_K(L):=\Iso_K(L,L)\qquad\textstyle\Gal(\quot{L}{K}):=\Aut_K(L)
+    \end{align*}
+  \end{definition}
+  \begin{lemma}
+    Let $K$, $L$, $F$ be fields and $f:K\rightarrow L$, $g:K \rightarrow F$ be field morphisms. Let $h\in\Mor_K(f,g)$, $\alpha\in L$, and $p(x)\in K[x]$. Then: $$h(f(p)(\alpha))=g(p)(h(\alpha))$$
+  \end{lemma}
+  \begin{lemma}
+    Let $\quot{L}{K}$, $\quot{F}{K}$ be field extensions and $\alpha\in L$ be algebraic over $K$. Then, we have the following bijection: $$\Mor_K(K(\alpha),F)\cong\{\beta\in F:g(\irr(\alpha,K))(\beta)=0\}$$
+  \end{lemma}
+  \begin{corollary}
+    Let $L=\quot{K(\alpha)}{K}$ be a finite field extension. Then, $\Gal(\quot{L}{K})$ is finite and: $$\textstyle|\Gal(\quot{L}{K})|=|\{\beta\in L:\irr(\alpha,K)(\beta)=0\}|\leq[K(\alpha):K]$$
+  \end{corollary}
 \end{multicols}
 \end{document}

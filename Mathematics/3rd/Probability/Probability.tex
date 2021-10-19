@@ -41,7 +41,7 @@
     \begin{enumerate}
       \item $\varnothing\in\mathcal{A}$.
       \item If $A_1,A_2,\ldots\in\mathcal{A}$, then: $$\bigcap_{n=1}^\infty A_n\in\mathcal{A}$$
-      \item For all $n\in\NN$, if $A_1,\ldots,A_n\in\mathcal{A}$, then: $$\bigcup_{i=1}^nA_i\in\mathcal{A}\quad\text{and}\quad\bigcap_{i=1}^nA_i\in\mathcal{A}$$
+      \item (\textit{$\sigma$-additivity}) For all $n\in\NN$, if $A_1,\ldots,A_n\in\mathcal{A}$, then: $$\bigcup_{i=1}^nA_i\in\mathcal{A}\quad\text{and}\quad\bigcap_{i=1}^nA_i\in\mathcal{A}$$
     \end{enumerate}
   \end{prop}
   \begin{definition}[Kolmogorov axioms]
@@ -160,6 +160,64 @@
   \begin{definition}
     Let $(\Omega,\mathcal{A},P)$ be a probability space and $I$ be an arbitrary index set. We say that $\{A_i:i\in I\}\subset\mathcal{A}$ are \textit{independent events} if for any finite subset $A_{i_1},\ldots A_{i_r}$ of different events, we have: $$P\left(\bigcap_{r=1}^kA_{i_r}\right)=\prod_{r=1}^kP(A_{i_r})$$
   \end{definition}
+  \subsection{Lebesgue integration}
+  \begin{definition}
+    Let $A\subset\RR^n$ be a subset. Then, $A$ is a \textit{null set} (or a \textit{set of zero-content}) if $\forall \varepsilon>0$ there exists a collection $\{R_k\subset\RR^n:k\in\NN\text{ and $R_k$ is a rectangle}\}$ of rectangles such that:
+    $$A\subset\bigcup_{k=1}^\infty R_k\qquad\text{and}\qquad\sum_{k=1}^\infty\text{vol}(R_k)<\varepsilon$$
+  \end{definition}
+  \begin{definition}
+    Let $E$ be a set and $\mathcal{E}$ be a $\sigma$-algebra over $E$. We say that the function:
+    \begin{align*}
+      \mu:\mathcal{E} & \longrightarrow[0,\infty] \\
+      A               & \longmapsto\mu(A)
+    \end{align*}
+    is a \textit{measure} if:
+    \begin{enumerate}
+      \item There exists $A\in\mathcal{E}$ such that $\mu(A)<\infty$.
+      \item If $\{A_n\in\mathcal{E}:n\in\NN\}$ is a collection of pairwise disjoint sets, then: $$\mu\left(\bigcup_{n=1}^\infty A_n\right)=\sum_{n=1}^\infty \mu(A_n)$$
+    \end{enumerate}
+    The triplet $(E,\mathcal{E},\mu)$ is called a \textit{measurable space}.
+  \end{definition}
+  \begin{definition}
+    The \textit{$\sigma$-algebra of all Lebesgue measurable sets, $\mathcal{L}_n\subset\mathcal{P}(\RR^n)$,} is defined as:
+    \begin{multline*}
+      \mathcal{L}_n:=\{A\subseteq\RR^n:A=B\cup N\text{ with }B\in\mathcal{B}(\RR^n)\\\text{ and $N$ is a null set}\}
+    \end{multline*}
+  \end{definition}
+  \begin{theorem}
+    We can extend the concept of volume on rectangles in $\RR^n$ to all $\sigma$-algebras $\mathcal{L}_n$. This extension is called \textit{Lebesgue measure in $\RR^n$}.
+  \end{theorem}
+  \begin{definition}
+    Let $(E,\mathcal{E},\mu)$ be a measurable space and $f:E\rightarrow\RR$ be a function. $f$ is called \textit{measurable} if $\forall B\in\mathcal{B}(\RR)$ we have $f^{-1}(B)\in\mathcal{E}$. The \textit{Lebesgue integral of $f$ over $E$ with respect to $\mu$} is denoted by: $$\int_Ef\dd\mu$$
+  \end{definition}
+  \begin{prop}
+    Let $(E,\mathcal{E},\mu)$ be a measurable space and $f:E\rightarrow\RR$ be a measurable function such that $f(x)\geq 0$ $\forall x\in E$. Then, we can always define the integral $$\int_Ef\dd\mu$$ taking into account that may be $+\infty$.
+  \end{prop}
+  \begin{definition}
+    Let $(E,\mathcal{E},\mu)$ be a measurable space and $f:E\rightarrow\RR$ be a measurable function. We say that $f$ is \textit{Lebesgue integrable with respect to $\mu$} if: $$\int_E|f|\dd\mu<\infty$$
+    Moreover if $G\in\mathcal{E}$, we define: $$\int_Gf\dd\mu:=\int_Ef\vectorfunction{1}_G\dd\mu$$
+  \end{definition}
+  \begin{prop}
+    Consider the measurable space $(\RR^n,\mathcal{L}_n,m_n)$ and let $f:\RR^n\rightarrow\RR$ be a Riemann integrable function satisfying: $$\int_{\RR^n}|f(x_1,\ldots,x_n)|\dd x_1\cdots\dd x_n<\infty$$
+    Then, $f$ is Lebesgue integrable and: $$\int_{\RR^n}|f(x_1,\ldots,x_n)|\dd x_1\cdots\dd x_n=\int_{\RR^n}f\dd m_n$$
+  \end{prop}
+  \begin{theorem}[Tonelli's theorem]
+    Let $f:\RR^2\rightarrow\RR$ be a non-negative and Lebesgue measurable function. Then:
+    \begin{multline*}
+      \int_{\RR^2}f(x,y)\dd x\dd y=\int_{-\infty}^{+\infty}\left(\int_{-\infty}^{+\infty}f(x,y)\dd x\right)\dd y=\\=\int_{-\infty}^{+\infty}\left(\int_{-\infty}^{+\infty}f(x,y)\dd y\right)\dd x
+    \end{multline*}
+  \end{theorem}
+  \begin{theorem}[Fubini's theorem]
+    Let $f:\RR^2\rightarrow\RR$ be a Lebesgue measurable function such that at least one of the following integrals is finite.
+    \begin{gather*}
+      \int_{-\infty}^{+\infty}\left(\int_{-\infty}^{+\infty}|f(x,y)|\dd x\right)\dd y\\
+      \int_{-\infty}^{+\infty}\left(\int_{-\infty}^{+\infty}|f(x,y)|\dd y\right)\dd x
+    \end{gather*}
+    Then, $f$ is Lebesgue integrable and:
+    \begin{multline*}
+      \int_{\RR^2}f(x,y)\dd x\dd y=\int_{-\infty}^{+\infty}\left(\int_{-\infty}^{+\infty}f(x,y)\dd x\right)\dd y=\\=\int_{-\infty}^{+\infty}\left(\int_{-\infty}^{+\infty}f(x,y)\dd y\right)\dd x
+    \end{multline*}
+  \end{theorem}
   \subsection{Random variables and random vectors}
   \subsubsection*{Random variables}
   \begin{definition}
@@ -315,7 +373,7 @@
       \item $f$ is integrable over $\RR$ and: $$\int_{-\infty}^{+\infty}f(x)\dd x=1$$
       \item For all $a,b\in\RR\cup\{\pm\infty\}$ with $a\leq b$, we have: $$P(a\leq X\leq b)=\int_a^bf(x)\dd x$$
     \end{enumerate}
-    The function $f$, denoted by $f_X$, is called \textit{probability density function (pdf)} of $X$.
+    The function $f$, denoted by $f_X$, is called \textit{probability density function (pdf)} of $X$. In general, a function satisfying the first two properties is called a \textit{density function}.
   \end{definition}
   \begin{prop}
     Let $(\Omega,\mathcal{A},P)$ be a probability space, $X$ be an absolutely continuous random variable and $F_X$ be its cdf. Then:
@@ -398,6 +456,148 @@
   \end{definition}
   \begin{prop}
     Let $(\Omega,\mathcal{A},P)$ be a probability space. $\vectorfunction{X}=(X_1,\ldots,X_n):\Omega\rightarrow\RR^n$ is a random vector if and only if $X_i:\Omega\rightarrow\RR$ is a random variable for $i=1,\ldots,n$.
+  \end{prop}
+  \begin{definition}
+    Let $(\Omega,\mathcal{A},P)$ be a probability space and $\vectorfunction{X}=(X_1,\ldots,X_n)$ be a random vector. If $B=B_1\times\cdots\times B_n\in\mathcal{B}(\RR^n)$, we have that: $$\{\vectorfunction{X}\in B_1\times\cdots\times B_n\}=\{X_1\in B_1\}\times\cdots\times\{X_n\in B_n\}$$ We will denote: $$\{X_1\in B_1,\ldots,X_n\in B_n\}:=\{X_1\in B_1\}\times\cdots\times\{X_n\in B_n\}$$
+  \end{definition}
+  \begin{definition}
+    Let $(\Omega,\mathcal{A},P)$ be a probability space and $\vectorfunction{X}=(X_1,\ldots,X_n)$ be a random vector. Then, the \textit{distribution of $\vectorfunction{X}$} is the function:
+    \begin{align*}
+      P_{\vectorfunction{X}}:\mathcal{B}(\RR^n) & \longrightarrow[0,1]                                              \\
+      B                                         & \longmapsto P_{\vectorfunction{X}}(B):=P(\vectorfunction{X}\in B)
+    \end{align*}
+  \end{definition}
+  \begin{definition}
+    Let $(\Omega,\mathcal{A},P)$ be a probability space and $\vectorfunction{X}=(X_1,\ldots,X_n)$ be a random vector. We say that $\vectorfunction{X}$ is \textit{discrete} if there exists a finite or countable subset $S\subset\RR^n$ such that $P(\vectorfunction{X}\in S)=1$\footnote{By agreement, we will suppose that $S$ only contains points $x$ such that $P (\vectorfunction{X} = x) > 0$}. In that case, $S$ is called the \textit{support of $\vectorfunction{X}$}\footnote{In general we will denote $S$ by $S_{\vectorfunction{X}}$. Moreover, note that $S_{\vectorfunction{X}}=S_{X_1}\times\cdots\times S_{X_n}$, where $S_{X_i}$ is the support of the random variable $X_i$.}.
+  \end{definition}
+  \begin{prop}
+    Let $(\Omega,\mathcal{A},P)$ be a probability space and $\vectorfunction{X}=(X_1,\ldots,X_n)$ be a random vector. Then, $\vectorfunction{X}$ is discrete if and only if $X_i$ is a discrete random variable for $i=1,\ldots,n$.
+  \end{prop}
+  \begin{definition}[Joint probability mass function]
+    Let $(\Omega,\mathcal{A},P)$ be a probability space and $\vectorfunction{X}=(X_1,\ldots,X_n)$ be a discrete random vector. Then, the \textit{joint probability mass function (joint pmf)} of $\vectorfunction{X}$ is:
+    $$
+      \begin{array}{r@{\hspace{0.5\tabcolsep}}c@{\hspace{0.5\tabcolsep}}c@{\hspace{0.5\tabcolsep}}c@{\hspace{0.5\tabcolsep}}c@{\hspace{0.5\tabcolsep}}c}
+        p_{\vectorfunction{X}}: & S_{X_1}\times\cdots\times S_{X_n} & \longrightarrow & [0,1]                     \\
+                                & (x_1,\ldots,x_n)                  & \longmapsto     & P(X_1=x_1,\ldots,X_n=x_n)
+      \end{array}
+    $$
+  \end{definition}
+  \begin{prop}
+    Let $(\Omega,\mathcal{A},P)$ be a probability space and $\vectorfunction{X}$ be a discrete random vector. Then, the joint pmf of $\vectorfunction{X}$ determines the distribution of $\vectorfunction{X}$.
+  \end{prop}
+  \begin{definition}[Marginal probability functions]
+    Let $(\Omega,\mathcal{A},P)$ be a probability space and $\vectorfunction{X}=(X_1,\ldots,X_n)$ be a discrete random vector with support $S_{\vectorfunction{X}}=S_{X_1}\times\cdots\times S_{X_n}$. Then, the \textit{marginal probability mass functions (marginal pmf)} of $\vectorfunction{X}$ are:
+    \begin{multline*}
+      p_{X_i}(x_i)=P(X_i=x_i)=\\=\sum_{\substack{y_j\in S_{X_j}\\j\ne i}}p_{\vectorfunction{X}}(y_1,\ldots,y_{i-1},x_i,y_{i+1},\ldots,y_n)
+    \end{multline*}
+    for $i=1,\ldots,n$.
+  \end{definition}
+  \begin{definition}[Multinomial distrbution]
+    Let $(\Omega,\mathcal{A},P)$ be a probability space and $A_1,\ldots,A_r\in\mathcal{A}$. Suppose $P(A_i)=p_i$ for $i=1,\ldots,r$ such that $p_1+\cdots+p_r=1$. The \textit{multinomial distribution} is the one whose $i$-th random variable $X_i$ is the number of successes of $A_i$ in a sequence of $n$ repetitions, for $i=1,\ldots,r$. Thus, for all $n_1,\ldots,n_r\in\{0,1,\ldots,n\}$ such that $N-1+\cdots+n_r=n$ we have: $$P(X_1=n_1,\ldots,X_r=n_r)=\frac{n!}{n_1!\cdots n_r!} {p_1}^{n_1}\cdots{p_r}^{n_r}$$ If $\vectorfunction{X}=(X_1,\ldots,X_r)$ follows a multinomial distribution of parameters $n$ and $p_1,\ldots,p_r$, we will write $\vectorfunction{X}\sim \text{Mult}(n;p_1,\ldots,p_r)$.
+  \end{definition}
+  \begin{definition}
+    Let $(\Omega,\mathcal{A},P)$ be a probability space and $\vectorfunction{X}=(X_1,\ldots,X_n)$ be a random vector. We say that $\vectorfunction{X}$ is \textit{absolutely continuous} if exists $f:\RR^n\rightarrow\RR$ such that:
+    \begin{enumerate}
+      \item $f(x)\geq 0$, $\forall x\in\RR^n$.
+      \item \hfill $$\int_{-\infty}^{+\infty}\overset{(n)}{\cdots}\int_{-\infty}^{+\infty} f(x_1,\ldots,x_n)\dd x_1\cdots\dd x_n=1$$
+      \item For all $B\in\mathcal{B}(\RR^n)$ we have: $$P(\vectorfunction{X}\in B)=\int_Bf(x)\dd x$$
+    \end{enumerate}
+    The function $f$, denoted by $f_{\vectorfunction{X}}$, is called \textit{joint probability density function (joint pdf)} of $\vectorfunction{X}$.
+  \end{definition}
+  \begin{prop}
+    Let $(\Omega,\mathcal{A},P)$ be a probability space and $\vectorfunction{X}=(X_1,\ldots,X_n)$ be an absolutely continuous random vector with density $f_{\vectorfunction{X}}$. Then, $X_i$ is an absolutely random variable with pdf:
+    \begin{multline*}
+      f_{X_i}(x)=\int_{-\infty}^{+\infty}\overset{(n-1)}{\cdots}\int_{-\infty}^{+\infty} f(x_1,\ldots,x_n)\dd x_1\cdots\dd x_{i-1}\cdot\\\cdot\dd x_{i+1}\cdots\dd x_n
+    \end{multline*}
+    for $i=1,\ldots, n$. These functions $f_{X_i}$ are called \textit{marginal probability density functions (marginal pdf)} of $\vectorfunction{X}$.
+  \end{prop}
+  \begin{definition}[Multivariate normal distribution]
+    Let $(\Omega,\mathcal{A},P)$ be a probability space and $\vectorfunction{X}=(X_1,\ldots,X_n)$ be an absolutely continuous random vector. We say that $\vectorfunction{X}$ follows a \textit{multivariate normal distribution}, denoted by $\vectorfunction{X}\sim N(0,1)$, if $\vectorfunction{X}$ has a joint pdf $$f_{\vectorfunction{X}}(x)=\frac{1}{{(2\pi)}^{\frac{n}{2}}}\exp{-\frac{{x_1}^2\cdots{x_n}^2}{2}}$$ Moreover, $X_i\sim N(0,1)$ for $i=1,\ldots,n$.
+  \end{definition}
+  \begin{definition}[Multivariate uniform distribution]
+    Let $(\Omega,\mathcal{A},P)$ be a probability space and $\vectorfunction{X}=(X_1,\ldots,X_n)$ be an absolutely continuous random vector. We say that $\vectorfunction{X}$ has a \textit{multivariate uniform distribution} over $B\in\mathcal{B}(\RR^n)$, with $\vol(B)<\infty$, if it has joint pdf $$f_{\vectorfunction{X}}=\frac{1}{\vol(B)}\vectorfunction{1}_B(x)$$ If $\vectorfunction{X}=(X_1,\ldots,X_r)$ follows a multivariate uniform, we will write $\vectorfunction{X}\sim U(B)$.
+  \end{definition}
+  \begin{definition}
+    Let $(\Omega,\mathcal{A},P)$ be a probability space and $\vectorfunction{X}=(X_1,\ldots,X_n)$ be a random vector. The \textit{multivariate cumulative distribution function (multivariate cdf)} of $\vectorfunction{X}$ is defined as: $$F_{\vectorfunction{X}}(x_1,\ldots,x_n):=P(X_1\leq x_1,\ldots,X_n\leq x_n)$$ for $(x_1,\ldots,x_n)\in\RR^n$.
+  \end{definition}
+  \begin{theorem}
+    Let $(\Omega,\mathcal{A},P)$ be a probability space and $\vectorfunction{X}$ be a random vector. Then, $F_{\vectorfunction{X}}$ determines the distribution of $\vectorfunction{X}$.
+  \end{theorem}
+  \begin{prop}
+    Let $(\Omega,\mathcal{A},P)$ be a probability space and $\vectorfunction{X}=(X_1,\ldots,X_n)$ be a random vector. Then, the multivariate cdf has the following properties:
+    \begin{enumerate}
+      \item It is monotonically increasing for each of its variables\footnote{For the 2-dimensional case, we have that for all $x<x'$ and $y<y'$: $$F_{\vectorfunction{X}}(x',y')-F_{\vectorfunction{X}}(x,y')-F_{\vectorfunction{X}}(x',y)+F_{\vectorfunction{X}}(x,y)\geq 0$$ This positive quantity is called \textit{increment of $F_{\vectorfunction{X}}$ in the rectangle $(x,x']\times(y,y']$}. In general a function $f:\RR^2\rightarrow\RR$ satisfying $$f(x',y')-f(x,y')-f(x',y)+f(x,y)\geq 0\qquad\forall x<x'\text{ and }\forall y<y'$$ is said to be \textit{increasing}.}.
+      \item It is right-continuous in each of its variables.
+      \item For all $i=1,\ldots,n$ we have:
+            \begin{gather*}
+              \lim_{x_i\to-\infty}F_{\vectorfunction{X}}(x_1,\ldots,x_n)=0\\
+              \lim_{x_1,\ldots,x_n\to+\infty}F_{\vectorfunction{X}}(x_1,\ldots,x_n)=1
+            \end{gather*}
+      \item For all $i=1,\ldots,n$ we have: $$\lim_{x_1,\ldots,x_{i-1},x_{i+1},\ldots,x_n\to+\infty}F_{\vectorfunction{X}}(x_1,\ldots,x_n)=F_{X_i}(x_i)$$
+      \item If $\vectorfunction{X}$ is absolutely continuous, then:
+            \begin{multline*}
+              F_{\vectorfunction{X}}(x_1,\ldots,x_n)=\\=\int_{-\infty}^{x_1}\cdots\int_{-\infty}^{x_n} f(s_1,\ldots,s_n)\dd s_1\cdots\dd s_n
+            \end{multline*}
+      \item If $\vectorfunction{X}$ is absolutely continuous, then:
+            \begin{multline*}
+              P(a_1<X_1<b_1,\ldots,a_n<X_n<b_n)=\\=\int_{a_1}^{b_1}\cdots\int_{a_n}^{b_n} f(s_1,\ldots,s_n)\dd s_1\cdots\dd s_n
+            \end{multline*}
+    \end{enumerate}
+  \end{prop}
+  \begin{prop}
+    Let $(\Omega,\mathcal{A},P)$ be a probability space and $\vectorfunction{X}=(X_1,\ldots,X_n)$ be an absolutely continuous random vector. If $\vectorfunction{X}$ has a continuous joint pdf, then: $$f_{\vectorfunction{X}}=\frac{\partial^nF_{\vectorfunction{X}}}{\partial x_1\cdots\partial x_n}(x_1,\ldots,x_n)$$
+  \end{prop}
+  \subsubsection*{Transformations of random vectors}
+  \begin{definition}
+    We say that a function $\vectorfunction{h}:\RR^n\rightarrow\RR^m$ is \textit{Borel measurable} if $\forall B\in\mathcal{B}(\RR^m)$ we have: $$\vectorfunction{h}^{-1}(B)\in\mathcal{B}(\RR^n)$$
+  \end{definition}
+  \begin{prop}
+    Let $(\Omega,\mathcal{A},P)$ be a probability space, $\vectorfunction{X}=(X_1,\ldots,X_n)$ be a random vector and $\vectorfunction{h}:\RR^n\rightarrow\RR^m$ be a Borel measurable function. Then, $\vectorfunction{Y}:=\vectorfunction{h}(\vectorfunction{X})$ is also a random vector.
+  \end{prop}
+  \begin{prop}
+    Let $(\Omega,\mathcal{A},P)$ be a probability space, $U\subseteq\RR^n$ be an open set, $V\subseteq\RR^m$ be an open set and $\vectorfunction{X}=(X_1,\ldots,X_n)$ be an absolutely continuous random vector with joint pdf $f_{\vectorfunction{X}}$ such that $P(\vectorfunction{X}\in U)=1$. Let $\vectorfunction{h}:U\rightarrow V$ be a diffeomorphism of class $\mathcal{C}^1$. Then, $\vectorfunction{Y}:=\vectorfunction{h}(\vectorfunction{X})$ is absolutely continuous and $$f_{\vectorfunction{Y}}(y)=f_{\vectorfunction{X}}(\vectorfunction{h}^{-1}(y))|J\vectorfunction{h}^{-1}(y)|\vectorfunction{1}_V(y)$$
+    where $J\vectorfunction{h}^{-1}(y)=\det\vectorfunction{D}\vectorfunction{h}^{-1}(y)$ is the Jacobian of $\vectorfunction{h}^{-1}$ evaluated at $y$.
+  \end{prop}
+  \begin{definition}
+    Let $(\Omega,\mathcal{A},P)$ be a probability space, $\vectorfunction{X}\sim N(0,1)$ be an absolutely continuous random vector and $\vectorfunction{h}:\RR^n\rightarrow\RR^n$ be a function defined as $$\vectorfunction{h}(\vectorfunction{x})=\vectorfunction{A}\vectorfunction{x}+\vectorfunction{b}\qquad\vectorfunction{x}\in\RR^n\footnote{Here, we have thought $(x_1,\ldots,x_n)$ as the vector $\vectorfunction{x}$ in $\RR^n$.}$$, where $\vectorfunction{A}\in\GL_n(\RR)$ and $\vectorfunction{b}\in\RR^n$. Then, $\vectorfunction{Y}=\vectorfunction{h}(\vectorfunction{X})$ is an absolutely continuous random vector and it has joint pdf: $$f_{\vectorfunction{Y}}(\vectorfunction{y})=\frac{1}{{(2\pi)}^{\frac{n}{2}}}\frac{1}{\det \vectorfunction{A}}\exp{-\frac{{\|\vectorfunction{A}^{-1}(\vectorfunction{y}-\vectorfunction{b})\|}^2}{2}}$$
+    In this case, we write $\vectorfunction{Y}\sim N(\vectorfunction{b},\vectorfunction{A}\transpose{A})$. The vector $\vectorfunction{b}$ is called \textit{mean vector} and the matrix $\vectorfunction{A}\transpose{A}$, \textit{covariance matrix}.
+  \end{definition}
+  \subsubsection*{Independent random variables}
+  \begin{definition}
+    Let $(\Omega,\mathcal{A},P)$ be a probability space and $X_1,\ldots,X_n$ be random variables. We say that they are \textit{independent} if $\forall B_1,\ldots,B_n\in\mathcal{B}(\RR)$, we have: $$P(X_1\in B_1,\ldots,X_n\in B_n)=\prod_{i=1}^nP(X_i\in B_i)$$ That is, the events $\{X_1\in B_1\},\ldots,\{X_n\in B_n\}$ are independent.
+  \end{definition}
+  \begin{prop}
+    Let $(\Omega,\mathcal{A},P)$ be a probability space, $X_1,\ldots,X_n$ be independent random variables and $g_1,\ldots,g_n:\RR\rightarrow\RR$ be Borel measurable functions. Then, $Y_1=g_1(X_1),\ldots,Y_n=g_n(X_n)$ are also independent random variables.
+  \end{prop}
+  \begin{prop}
+    Let $(\Omega,\mathcal{A},P)$ be a probability space and $X_1,\ldots,X_n$ be random variables. Then, $X_1,\ldots,X_n$ are independent if and only if $$F_{(X_1,\ldots,X_n)}(x_1,\ldots,x_n)=F_{X_1}(x_1)\cdots F_{X_n}(x_n)$$ for all $(x_1,\ldots,x_n)\in\RR^n$.
+  \end{prop}
+  \begin{prop}
+    Let $(\Omega,\mathcal{A},P)$ be a probability space and $\vectorfunction{X}=(X_1,\ldots,X_n)$ be a discrete random vector with support $S_{\vectorfunction{X}}$. Then, $X_1,\ldots,X_n$ are independent if and only if $$p_{\vectorfunction{X}}(x_1,\ldots,x_n)=p_{X_1}(x_1)\cdots p_{X_n}(x_n)$$ for all $(x_1,\ldots,x_n)\in S_{\vectorfunction{X}}$.
+  \end{prop}
+  \begin{prop}
+    Let $(\Omega,\mathcal{A},P)$ be a probability space and $\vectorfunction{X}=(X_1,\ldots,X_n)$ be an absolutely continuous random vector. Then, $X_1,\ldots,X_n$ are independent if and only if $$f_{\vectorfunction{X}}(x_1,\ldots,x_n)=f_{X_1}(x_1)\cdots f_{X_n}(x_n)$$ for all $(x_1,\ldots,x_n)\in \RR^n$, except for, maybe, a finite number of points.
+  \end{prop}
+  \begin{prop}
+    Let $(\Omega,\mathcal{A},P)$ be a probability space and $X_1,\ldots,X_n$ be absolutely continuous and independent random variables. Then, $\vectorfunction{X}:=(X_1,\ldots,X_n)$ is an absolutely continuous random vector independent and $$f_{\vectorfunction{X}}(x_1,\ldots,x_n)=f_{X_1}(x_1)\cdots f_{X_n}(x_n)$$ for all $(x_1,\ldots,x_n)\in \RR^n$, except for, maybe, a finite number of points.
+  \end{prop}
+  \subsubsection*{Conditional distributions}
+  \begin{definition}
+    Let $(\Omega,\mathcal{A},P)$ be a probability space, $(X,Y)$ be a discrete random vector with support $S_X\times S_Y$ and $y\in S_Y$. The \textit{conditional probability mass function of $X$ given $Y=y$} is defined as: $$p_{X\mid Y}(x,y):=P(X=x\mid Y=y)=\frac{p_{(X,Y)}(x,y)}{p_Y(y)}\quad x\in S_X$$
+  \end{definition}
+  \begin{prop}
+    Let $(\Omega,\mathcal{A},P)$ be a probability space and $(X,Y)$ be a discrete random vector with support $S_X\times S_Y$. Then, the pmf of $Y$ together with the pmf of $X$ conditioned to $Y$ determine the pmf of $X$ in the following way: $$P(X=x)=\sum_{y\in S_Y}p_{X\mid Y}(x\mid y)p_Y(y)$$
+  \end{prop}
+  \begin{definition}
+    Let $(\Omega,\mathcal{A},P)$ be a probability space, $(X,Y)$ be an absolutely continuous random vector and $y\in S_Y$. The \textit{conditional probability density function of $X$ given $Y=y$} is defined as: $$f_{X\mid Y}(x\mid y):=
+      \begin{array}{ccc}
+        \frac{f_{(X,Y)}(x,y)}{f_Y(y)} & \text{if} & f_Y(y)>0 \\
+        a                             & \text{if} & f_Y(y)=0
+      \end{array}
+    $$ where $x\in\RR$ and $a\in\RR$\footnote{Usually chosen equal to 0.} is an arbitrary value.
+  \end{definition}
+  \begin{prop}
+    Let $(\Omega,\mathcal{A},P)$ be a probability space and $(X,Y)$ be an absolutely continuous random vector. Then, the pdf of $Y$ together with the pdf of $X$ conditioned to $Y$ determine the pdf of $X$ in the following way: $$f_X(x)=\int_{-\infty}^{+\infty}f_{(X,Y)}(x,y)\dd y=\int_{-\infty}^{+\infty}f_{X\mid Y}(x\mid y)f_Y(y)\dd y$$
   \end{prop}
   %ATENCIÓ: absolutely continuous =? everywhere continuous
 \end{multicols}

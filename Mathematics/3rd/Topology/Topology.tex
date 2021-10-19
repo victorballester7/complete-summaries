@@ -61,7 +61,7 @@
     Let $(X,\mathcal{T})$ be a topological space and $x,y\in X$ such that $x\ne y$. We say that $\mathcal{T}$ satisfies the \textit{Hausdorff property} if there exist $U,V\in\mathcal{T}$ such that $x\in U$, $y\in V$ and $U\cap V=\varnothing$.
   \end{definition}
   \begin{definition}
-    Let $(X,\mathcal{T})$ and $(X,\mathcal{T}')$ be topological spaces. We say that $\mathcal{T}$ is \textit{finer than} $\mathcal{T}'$ if $\mathcal{T}'\subset\mathcal{T}$.
+    Let $(X,\mathcal{T})$ and $(X,\mathcal{T}')$ be topological spaces. We say that $\mathcal{T}$ is \textit{finer than} $\mathcal{T}'$ if $\mathcal{T}'\subseteq\mathcal{T}$.
   \end{definition}
   \begin{prop}
     Let $X$ be a set and $p\in X$ be a point of $X$ and $(X,d)$ be a metric space. Then, we can construct some topologies on $X$:
@@ -70,7 +70,10 @@
       \item \textit{Trivial topology}: $\mathcal{T}_\text{t}:=\{\varnothing,X\}$
       \item \textit{Discrete topology}: $\mathcal{T}_\text{d}:=\mathcal{P}(X)$
       \item \textit{Cofinite topology}: $$\mathcal{T}_\text{f}:=\{U\subseteq X:U=\varnothing\text{ or }X\setminus U\text{ is finite}\}$$
-      \item \textit{Cocountable topology}: $$\mathcal{T}:=\{U\subseteq X:U=\varnothing\text{ or }X\setminus U\text{ is countable}\}$$
+      \item \textit{Cocountable topology}:
+            \begin{multline*}
+              \mathcal{T}:=\{U\subseteq X:U=\varnothing\text{ or }X\setminus U\text{ is finite or}\\\text{ countable}\}
+            \end{multline*}
       \item \textit{Particular point topology}: $$\mathcal{T}:=\{U\subseteq X:U=\varnothing\text{ or }p\in U\}$$
       \item \textit{Excluded point topology}: $$\mathcal{T}:=\{U\subseteq X:U=X\text{ or }p\notin U\}$$
     \end{itemize}
@@ -85,7 +88,10 @@
     Let $(X,\mathcal{T}_X)$ and $(Y,\mathcal{T}_Y)$ be topological spaces. We say that $(X,\mathcal{T}_X)$ and $(Y,\mathcal{T}_Y)$ are \textit{homeomorphic}, denoted by $(X,\mathcal{T}_X)\cong(Y,\mathcal{T}_Y)$, if there exists a homeomorphism between them.
   \end{definition}
   \begin{definition}
-    Let $(X,\mathcal{T})$ be a topological space and $A\subset X$. We say that $A$ is \textit{closed} if $X\setminus A\in\mathcal{T}$ is open.
+    Let $(X,\mathcal{T})$ be a topological space and $C\subseteq X$. We say that $C$ is \textit{closed} if $X\setminus C\in\mathcal{T}$ is open.
+  \end{definition}
+  \begin{definition}
+    Let $(X,\mathcal{T})$ be a topological space and $A\subseteq X$. We say that $A$ is \textit{clopen} if is both open and closed.
   \end{definition}
   \begin{prop}
     Let $(X,\mathcal{T})$ be a topological space. Then:
@@ -96,7 +102,7 @@
     \end{enumerate}
   \end{prop}
   \begin{prop}
-    Let $(X,\mathcal{T}_X)$ and $(Y,\mathcal{T}_Y)$ be topological spaces and $f:(X,\mathcal{T}_X)\rightarrow(Y,\mathcal{T}_Y)$ be a function. We say that $f$ is continuous if and only if for all closed sets $A\subset Y$, we have $f^{-1}(A)\subset X$ is closed.
+    Let $(X,\mathcal{T}_X)$ and $(Y,\mathcal{T}_Y)$ be topological spaces and $f:(X,\mathcal{T}_X)\rightarrow(Y,\mathcal{T}_Y)$ be a function. We say that $f$ is continuous if and only if for all closed sets $C\subseteq Y$, we have $f^{-1}(C)\subseteq X$ is closed.
   \end{prop}
   \subsubsection*{Basis for a topology}
   \begin{definition}
@@ -167,23 +173,23 @@
     Let $(X,\mathcal{T})$ be a topological space and $A\subset X$ be a subset. The \textit{boundary of $A$} is: $$\Fr A=\Cl(A)\cap\Cl(X\setminus A)$$
   \end{definition}
   \begin{definition}
-    Let $(X,\mathcal{T})$ be a topological space and $x\in X$. We say that $N\subset X$ is a \textit{neighbourhood of $x$} if $\exists U\in\mathcal{T}$ such that $x\in U\subset N$.
+    Let $(X,\mathcal{T})$ be a topological space and $x\in X$. We say that $N\subseteq X$ is a \textit{neighbourhood of $x$} if $\exists U\in\mathcal{T}$ such that $x\in U\subseteq N$.
   \end{definition}
   \begin{definition}
-    Let $(X,\mathcal{T})$ be a topological space and $A\subset X$ be a subset. We say that $x\in X$ is an \textit{interior point of $A$} if $A$ is a neighbourhood of $x$.
+    Let $(X,\mathcal{T})$ be a topological space and $A\subseteq X$ be a subset. We say that $x\in X$ is an \textit{interior point of $A$} if $A$ is a neighbourhood of $x$.
   \end{definition}
   \begin{definition}
-    Let $(X,\mathcal{T})$ be a topological space and $A\subset X$ be a subset. We say that $x\in X$ is an \textit{adherent point of $A$} if for all neighbourhood $N$ of $x$ we have that $N\cap A\ne\varnothing$.
+    Let $(X,\mathcal{T})$ be a topological space and $A\subseteq X$ be a subset. We say that $x\in X$ is an \textit{adherent point of $A$} if for all neighbourhood $N$ of $x$ we have that $N\cap A\ne\varnothing$.
   \end{definition}
   \begin{prop}
-    Let $(X,\mathcal{T})$ be a topological space and $A\subset X$ be a subset. Then:
+    Let $(X,\mathcal{T})$ be a topological space and $A\subseteq X$ be a subset. Then:
     \begin{enumerate}
       \item $\Int A$ is the set containing all the interior points of $A$.
       \item $\Cl A$ is the set containing all the adherent points of $A$.
     \end{enumerate}
   \end{prop}
   \begin{prop}
-    Let $(X,\mathcal{T})$ be a topological space and $A,B\subset X$ be subsets.
+    Let $(X,\mathcal{T})$ be a topological space and $A,B\subseteq X$ be subsets.
 
     Properties regarding the interior:
     \begin{enumerate}[leftmargin=1.15cm]\renewcommand{\labelenumi}{1.\arabic{enumi}.}
@@ -207,20 +213,28 @@
       \item $\Fr A\cup\Int A=             \Cl A$
       \item $\Fr A\subseteq A\iff  A  \text{ is closed}$
       \item $\Fr A\cap A=\varnothing\iff  A\text{ is open}$
-      \item $\Fr A=\varnothing \text{ if $A$ is open and closed at the same time}$
+      \item $\Fr A=\varnothing\iff\text{$A$ is clopen}$
     \end{enumerate}
   \end{prop}
   \begin{theorem}
-    Let $(X,\mathcal{T}_X)$ and $(Y,\mathcal{T}_Y)$ be topological spaces, $A\subset X$ be a subset and $f:(X,\mathcal{T}_X)\rightarrow (Y,\mathcal{T}_Y)$ be a continuous function. Then: $$f(\Cl(A))\subseteq \Cl(f(A))$$
+    Let $(X,\mathcal{T}_X)$ and $(Y,\mathcal{T}_Y)$ be topological spaces and $f:(X,\mathcal{T}_X)\rightarrow (Y,\mathcal{T}_Y)$ be a function. Then, the following assumptions are equivalent:
+    \begin{enumerate}
+      \item $f$ is continuous.
+      \item $f^{-1}(\Int(B))\subseteq \Int(f^{-1}(B))$ for all subsets $B\subseteq Y$.
+      \item $f(\Cl(A))\subseteq \Cl(f(A))$ for all subsets $A\subseteq X$.
+    \end{enumerate}
   \end{theorem}
   \begin{theorem}
-    Let $(X,\mathcal{T}_X)$ and $(Y,\mathcal{T}_Y)$ be topological spaces and $f:(X,\mathcal{T}_X)\rightarrow (Y,\mathcal{T}_Y)$ be a function. Then,$f$ is continuous if and only if $\forall x\in X$ and $U\in\mathcal{T}$ such that $f(x)\in U$, there exists a neighbourhood $N$ of $x$ with $f(N)\subset U$.
+    Let $(X,\mathcal{T}_X)$ and $(Y,\mathcal{T}_Y)$ be topological spaces and $f:(X,\mathcal{T}_X)\rightarrow (Y,\mathcal{T}_Y)$ be a function. Then, $f$ is continuous if and only if $\forall x\in X$ and $U\in\mathcal{T}$ such that $f(x)\in U$, there exists a neighbourhood $N$ of $x$ with $f(N)\subset U$.
   \end{theorem}
   \begin{prop}
-    Let $(X,\mathcal{T}_X)$, $(Y,\mathcal{T}_Y)$ and $(Z,\mathcal{T}_Z)$ be topological spaces and $f:(X,\mathcal{T}_X)\rightarrow (Y,\mathcal{T}_Y)$, $f:(Y,\mathcal{T}_Y)\rightarrow (Z,\mathcal{T}_Z)$ be continuous functions. Then, $g\circ f::(X,\mathcal{T}_X)\rightarrow (Z,\mathcal{T}_Z)$ is continuous.
+    Let $(X,\mathcal{T}_X)$, $(Y,\mathcal{T}_Y)$ and $(Z,\mathcal{T}_Z)$ be topological spaces and $f:(X,\mathcal{T}_X)\rightarrow (Y,\mathcal{T}_Y)$, $f:(Y,\mathcal{T}_Y)\rightarrow (Z,\mathcal{T}_Z)$ be continuous functions. Then, $g\circ f:(X,\mathcal{T}_X)\rightarrow (Z,\mathcal{T}_Z)$ is continuous.
   \end{prop}
   \begin{definition}
-    Let $(X,\mathcal{T}_X)$ and $(Y,\mathcal{T}_Y)$ be topological spaces and $f:(X,\mathcal{T}_X)\rightarrow (Y,\mathcal{T}_Y)$ be a function. We say that $f$ is \textit{open} if $\forall U\in\mathcal{T}_X$, we have $f(A)\in \mathcal{T}_Y$. Analogously, we say that $f$ is \textit{closed} if $\forall C\subset X$ closed, we have $f(C)$ is closed.
+    Let $(X,\mathcal{T}_X)$ and $(Y,\mathcal{T}_Y)$ be topological spaces and $f:(X,\mathcal{T}_X)\rightarrow (Y,\mathcal{T}_Y)$ be a function. We say that $f$ is \textit{open} if $\forall U\in\mathcal{T}_X$, we have $f(A)\in \mathcal{T}_Y$.
+  \end{definition}
+  \begin{definition}
+    Let $(X,\mathcal{T}_X)$ and $(Y,\mathcal{T}_Y)$ be topological spaces and $f:(X,\mathcal{T}_X)\rightarrow (Y,\mathcal{T}_Y)$ be a function. We say that $f$ is \textit{closed} if for all closed subsets $C\subseteq X$, we have $f(C)$ is closed.
   \end{definition}
   \begin{prop}
     Let $(X,\mathcal{T}_X)$ and $(Y,\mathcal{T}_Y)$ be topological spaces and $f:(X,\mathcal{T}_X)\rightarrow (Y,\mathcal{T}_Y)$ be a continuous bijective function. Then, the following statements are equivalent:
@@ -230,6 +244,32 @@
       \item $f$ is closed.
     \end{enumerate}
   \end{prop}
-  % m'he quedat a la pagina 12 del document 7.
+  \begin{prop}
+    Being homeomorphic as topological spaces is an equivalence relation.
+  \end{prop}
+  \subsubsection*{Product topology}
+  \begin{definition}
+    Let $(X,\mathcal{T}_X)$, $(Y,\mathcal{T}_Y)$ be topological spaces. We define the \textit{product topology in $X\times Y$}, denoted by $\mathcal{T}_{X\times Y}$, as the topology generated by $$\mathcal{B}=\{U\times V:U\in\mathcal{T}_X,V\in\mathcal{T}_Y\}$$
+  \end{definition}
+  \begin{prop}
+    Let $(X,\mathcal{T}_X)$, $(Y,\mathcal{T}_Y)$ be topological spaces. Then, the projections:
+    \begin{align*}
+      \pi_X:(X\times Y,\mathcal{T}_{X\times Y})\longrightarrow X \\
+      \pi_X:(X\times Y,\mathcal{T}_{X\times Y})\longrightarrow Y
+    \end{align*}
+    are continuous and open.
+  \end{prop}
+  \begin{prop}
+    Let $(X,\mathcal{T}_X)$, $(Y,\mathcal{T}_Y)$ be topological spaces. If $\mathcal{B}_X$ is a basis for $\mathcal{T}_X$ and $\mathcal{B}_Y$ is a basis for $\mathcal{T}_Y$, then: $$\mathcal{B}=\{U\times V:U\in\mathcal{B}_X,V\in\mathcal{B}_Y\}$$
+    is a basis for $\mathcal{T}_{X\times Y}$.
+  \end{prop}
+  \begin{prop}
+    Let $(X,\mathcal{T}_X)$, $(Y,\mathcal{T}_Y)$, $(Z,\mathcal{T}_Z)$ be topological spaces and $f:(Z,\mathcal{T}_Z)\rightarrow(X\times Y,\mathcal{T}_{X\times Y})$ be a function. Then, $f$ is continuous if and only if $\pi_X\circ f$ and $\pi_Y\circ f$ are continuous.
+  \end{prop}
+  \begin{prop}
+    Let $(X_i,\mathcal{T}_{X_i})$, $(Y_i,\mathcal{T}_{Y_i})$ be topological spaces and $f_i:(X_i,\mathcal{T}_{X_i})\rightarrow(Y_i,\mathcal{T}_{Y_i})$ be a continuous function for $i=1,2$. Then, $$f_1\times f_2:(X_1\times X_2,\mathcal{T}_{X_1\times X_2})\longrightarrow(Y_1\times Y_2,\mathcal{T}_{Y_1\times Y_2})$$ is also continuous.
+  \end{prop}
+  % ens hem saltat els documents 8 i 8.1.
+  % M'he quedat a la pagina 8 del document 9.
 \end{multicols}
 \end{document}

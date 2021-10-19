@@ -4,44 +4,44 @@
 \begin{multicols}{2}[\section{Differential equations}]
   \subsection{Introduction}
   \begin{definition}
-    An \textit{ordinary differential equation (ODE) of $m$ unknowns and of order $n$} in \textit{implicit form} is an expression of the form: $$f\left(x,\vectorfunction{y}(x),\vectorfunction{y}'(x),\vectorfunction{y}''(x),\ldots,\vectorfunction{y}^{(n)}(x)\right)=0$$
-    where $\vectorfunction{y}:U\subseteq\RR\rightarrow\RR^m$ is a vector-valued function of one variable $x\in\RR$ (which is called \textit{independent variable}) and $f:\Omega\subseteq\RR\times\RR^{m(n+1)}\rightarrow\RR$. The same ordinary differential equation in \textit{explicit form} is an expression of the form: $$\vectorfunction{y}^{(n)}(x)=\vectorfunction{g}\left(x,\vectorfunction{y}(x),\vectorfunction{y}'(x),\vectorfunction{y}''(x),\ldots,\vectorfunction{y}^{(n-1)}(x)\right)$$
-    where $\vectorfunction{g}:\Omega\subseteq\RR\times\RR^{mn}\rightarrow\RR^m$.
+    An \textit{ordinary differential equation (ode) of $m$ unknowns and of order $n$} in \textit{implicit form} is an expression of the form: $$f\left(t,\vectorfunction{x}(t),\vectorfunction{x}'(t),\vectorfunction{x}''(t),\ldots,\vectorfunction{x}^{(n)}(t)\right)=0$$
+    where $\vectorfunction{x}:U\subseteq\RR\rightarrow\RR^m$ is a vector-valued function of one variable $t\in\RR$ (which is called \textit{independent variable}) and $f:\Omega\subseteq\RR\times\RR^{m\cdot(n+1)}\rightarrow\RR$. The same ordinary differential equation in \textit{explicit form} is an expression of the form: $$\vectorfunction{x}^{(n)}(t)=\vectorfunction{g}\left(t,\vectorfunction{x}(t),\vectorfunction{x}'(t),\vectorfunction{x}''(t),\ldots,\vectorfunction{x}^{(n-1)}(t)\right)$$
+    where $\vectorfunction{g}:\Omega\subseteq\RR\times\RR^{m\cdot n}\rightarrow\RR^m$.
   \end{definition}
   \begin{definition}
-    Consider the following ODE of $m$ unknowns and of order $n$:
+    Consider the following ode of $m$ unknowns and of order $n$:
     \begin{equation}\label{DE_ode1}
-      \vectorfunction{y}^{(n)}(x)=\vectorfunction{f}\left(x,\vectorfunction{y}(x),\vectorfunction{y}'(x),\ldots,\vectorfunction{y}^{(n-1)}(x)\right)
+      \vectorfunction{x}^{(n)}(t)=\vectorfunction{f}\left(t,\vectorfunction{x}(t),\vectorfunction{x}'(t),\ldots,\vectorfunction{x}^{(n-1)}(t)\right)
     \end{equation}
-    We say that $\vectorfunction{\varphi}:I\subseteq\RR\rightarrow\RR^m$ is a \textit{solution of the ODE} if:
+    We say that $\vectorfunction{\varphi}:I\subseteq\RR\rightarrow\RR^m$ is a \textit{solution of the ode} if:
     \begin{itemize}
       \item $\vectorfunction{\varphi}$ is $n$-times differentiable on $I$.
-      \item $\displaystyle\left\{\left(x,\vectorfunction{\varphi}(x),\vectorfunction{\varphi}'(x),\ldots,\vectorfunction{\varphi}^{(n-1)}(x)\right):x\in I\right\}\subseteq\domain \vectorfunction{f}$
-      \item For all $x\in I$ we have:
-            $$\vectorfunction{\varphi}^{(n)}(x)=\vectorfunction{f}\left(x,\vectorfunction{\varphi}(x),\vectorfunction{\varphi}'(x),\ldots,\vectorfunction{\varphi}^{(n-1)}(x)\right)$$
+      \item $\displaystyle\left\{\left(t,\vectorfunction{\varphi}(t),\vectorfunction{\varphi}'(t),\ldots,\vectorfunction{\varphi}^{(n-1)}(t)\right):t\in I\right\}\subseteq\domain \vectorfunction{f}$
+      \item For all $t\in I$ we have:
+            $$\vectorfunction{\varphi}^{(n)}(t)=\vectorfunction{f}\left(t,\vectorfunction{\varphi}(t),\vectorfunction{\varphi}'(t),\ldots,\vectorfunction{\varphi}^{(n-1)}(t)\right)$$
     \end{itemize}
-    The set of all solutions of the ODE is called \textit{general solution of the ODE}.
+    The set of all solutions of the ode is called \textit{general solution of the ode}.
   \end{definition}
   \begin{prop}
-    Consider the following ODE of $m$ unknowns and of order $n$ of the form of \eqref{DE_ode1}. Then, we can transform this ODE to an ODE of $m\cdot n$ unknowns and order 1 in the following way. Define $\vectorfunction{z}_i=\vectorfunction{y}^{(i-1)}$ for $i=1,\ldots,n$\footnote{Therefore, we will mainly study the ODEs of order 1.}. Therefore the functions $\vectorfunction{z}_i$ must satisfy:
+    Consider the following ode of $m$ unknowns and of order $n$ of the form of \eqref{DE_ode1}. Then, we can transform this ode to an ode of $m\cdot n$ unknowns and order 1 in the following way. Define $\vectorfunction{y}_i=\vectorfunction{x}^{(i-1)}$ for $i=1,\ldots,n$\footnote{Therefore, we will mainly study the odes of order 1.}. Therefore the functions $\vectorfunction{y}_i$ must satisfy:
     \begin{equation*}
       \left\{
       \begin{aligned}
-        {\vectorfunction{z}_1}'     & =\vectorfunction{z}_2                                                                                            \\
-        {\vectorfunction{z}_2}'     & =\vectorfunction{z}_3                                                                                            \\
+        {\vectorfunction{y}_1}'     & =\vectorfunction{y}_2                                                                                            \\
+        {\vectorfunction{y}_2}'     & =\vectorfunction{y}_3                                                                                            \\
                                     & \;\;\vdots                                                                                                       \\
-        {\vectorfunction{z}_{n-1}}' & =\vectorfunction{z}_{n-2}                                                                                        \\
-        {\vectorfunction{z}_n}'     & =\vectorfunction{f}\left(x,\vectorfunction{z}_1(x),\vectorfunction{z}_2(x),\ldots,\vectorfunction{z}_2(x)\right) \\
+        {\vectorfunction{y}_{n-1}}' & =\vectorfunction{y}_{n-2}                                                                                        \\
+        {\vectorfunction{y}_n}'     & =\vectorfunction{f}\left(t,\vectorfunction{y}_1(t),\vectorfunction{y}_2(t),\ldots,\vectorfunction{y}_2(t)\right) \\
       \end{aligned}
       \right.
     \end{equation*}
   \end{prop}
   \begin{definition}
-    We say that an ODE is \textit{autonomous} if it doesn't depend on the independent variable, that is, if it is of the form: $$\vectorfunction{y}'=\vectorfunction{f}(\vectorfunction{y})$$ Analogously, we say that an ODE is \textit{non-autonomous} if it does depend on the independent variable, that is, if it is of the form: $$\vectorfunction{y}'=\vectorfunction{f}(x,\vectorfunction{y})$$
+    We say that an ode is \textit{autonomous} if it doesn't depend on the independent variable, that is, if it is of the form: $$\vectorfunction{x}'=\vectorfunction{f}(\vectorfunction{x})$$ Analogously, we say that an ode is \textit{non-autonomous} if it does depend on the independent variable, that is, if it is of the form: $$\vectorfunction{x}'=\vectorfunction{f}(t,\vectorfunction{x})$$
   \end{definition}
   \subsubsection*{Initial value problem}
   \begin{definition}
-    Let $U\subset\RR\times\RR^n$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a function. Given $(x_0,y_0)\in U$, the \textit{initial value problem (ivp)} (or \textit{Cauchy problem}) consists in finding a solution of the ODE $$\vectorfunction{y}'=\vectorfunction{f}(x,\vectorfunction{y})$$ with initial conditions $\vectorfunction{y}(x_0)=y_0$.
+    Let $U\subset\RR\times\RR^n$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a function. Given $(t_0,x_0)\in U$, the \textit{initial value problem (ivp)} (or \textit{Cauchy problem}) consists in finding a solution of the ode $$\vectorfunction{x}'=\vectorfunction{f}(t,\vectorfunction{x})$$ with initial conditions $\vectorfunction{x}(t_0)=x_0$.
   \end{definition}
   \subsection{Existence and uniqueness theorems}
   \begin{prop}
@@ -98,7 +98,7 @@
     if and only if $$\vectorfunction{\varphi}(t)=x_0+\int_{t_0}^tf(s,\vectorfunction{\varphi}(s))\dd s\quad\forall s\in I$$
   \end{prop}
   \begin{definition}
-    An \textit{operator} is a function whose domain is a set of functions or other structured objects.
+    An \textit{operator} is a function whose domain is a set of functions.
   \end{definition}
   \begin{definition}
     Let $U\subseteq\RR\times\RR^n$ be an open set, $(t_0,x_0)\in U$, $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function and $I$ be a closed interval. We define the operator
