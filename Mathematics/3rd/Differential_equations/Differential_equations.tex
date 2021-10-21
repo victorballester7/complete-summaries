@@ -224,11 +224,11 @@
       \vectorfunction{\varphi}:I\times I\times \RR^n & \longrightarrow\RR^n                           \\
       (t,t_0,x_0)                                    & \longmapsto\vectorfunction{\varphi}(t,t_0,x_0)
     \end{align*}
-    where $\vectorfunction{\varphi}(t,t_0,x_0)$ is a solution to \eqref{DE_linear} with initial conditions $\vectorfunction{\varphi}(t_0,t_0,x_0)$.
+    where $\vectorfunction{\varphi}(t,t_0,x_0)$ is a solution of \eqref{DE_linear} with initial conditions $\vectorfunction{\varphi}(t_0,t_0,x_0)$.
   \end{definition}
   \subsubsection*{Homogeneous systems}
   \begin{theorem}
-    Let $I\subseteq\RR$ be an interval and $\vectorfunction{A}\in\mathcal{C}(I,\mathcal{L}(\RR^n))$. We define $\mathcal{A}$ as the set of all solutions to the linear ode:
+    Let $I\subseteq\RR$ be an interval and $\vectorfunction{A}\in\mathcal{C}(I,\mathcal{L}(\RR^n))$. We define $\mathcal{A}$ as the set of all solutions of the linear ode:
     \begin{equation}\label{DE_homo}
       \vectorfunction{x}'=\vectorfunction{A}(t)\vectorfunction{x}
     \end{equation} Then, $\mathcal{A}$ is a vector space of dimension $n$ and for each $t_0\in I$, the function
@@ -262,20 +262,60 @@
     \end{enumerate}
   \end{corollary}
   \begin{definition}
-    Let $I\subset \RR$ be an interval, $\vectorfunction{A}\in\mathcal{C}(I,\mathcal{L}(\RR^n))$ and $\vectorfunction{M}(t)=(m_{ij})\in\mathcal{M}_n(\RR)$. We say that $\vectorfunction{M}(t)$ is a \textit{matrix solution} to the ode \eqref{DE_homo} if $\vectorfunction{\varphi}_j={(m_{1j},\ldots,m_{1n})}^\mathrm{T}\in\mathcal{A}$ for $j=1,\ldots,n$. We say that $\vectorfunction{M}(t)$ is a \textit{fundamental matrix solution} to the ode \eqref{DE_homo} if $\vectorfunction{M}(t)$ is a matrix solution and $\vectorfunction{\varphi}_1,\ldots,\vectorfunction{\varphi}_n$ are linearly independent.
+    Let $I\subset \RR$ be an interval, $\vectorfunction{A}\in\mathcal{C}(I,\mathcal{L}(\RR^n))$ and $\vectorfunction{M}(t)=(m_{ij})\in\mathcal{M}_n(\RR)$. We say that $\vectorfunction{M}(t)$ is a \textit{matrix solution} of the ode \eqref{DE_homo} if $\vectorfunction{\varphi}_j={(m_{1j},\ldots,m_{1n})}^\mathrm{T}\in\mathcal{A}$ for $j=1,\ldots,n$. We say that $\vectorfunction{M}(t)$ is a \textit{fundamental matrix solution} of the ode \eqref{DE_homo} if $\vectorfunction{M}(t)$ is a matrix solution and $\vectorfunction{\varphi}_1,\ldots,\vectorfunction{\varphi}_n$ are linearly independent.
   \end{definition}
   \begin{prop}
     Let $I\subset \RR$ be an interval, $\vectorfunction{A}\in\mathcal{C}(I,\mathcal{L}(\RR^n))$ and $\vectorfunction{M}(t)\in\mathcal{M}_n(\RR)$. Then:
     \begin{enumerate}
-      \item $\vectorfunction{M}(t)$ is a matrix solution to the ode \eqref{DE_homo} $\iff\vectorfunction{M}'(t)=\vectorfunction{A}(t)\vectorfunction{M}(t)$\footnote{By definition, if $\vectorfunction{M}(t)=(m_{ij}(t))$, then $\vectorfunction{M}'(t):=({m_{ij}}'(t))$.}.
-      \item $\vectorfunction{M}(t)$ is a matrix solution to the ode \eqref{DE_homo} $\iff\forall c\in\RR^n$, $\vectorfunction{M}(t)c\in\mathcal{A}$.
-      \item If $\vectorfunction{M}(t)$ is a matrix solution to the ode \eqref{DE_homo}, then $\forall C\in\mathcal{M}_n(\RR)$, $\vectorfunction{M}(t)C$ is a matrix solution to the ode \eqref{DE_homo}.
-      \item $\vectorfunction{M}(t)$ is a fundamental matrix solution to the ode \eqref{DE_homo} $\iff\vectorfunction{M}(t)$ is a matrix solution to the ode \eqref{DE_homo} and $\det\vectorfunction{M}(t)\ne 0$.
-      \item $\vectorfunction{M}(t)$ is a fundamental matrix solution to the ode \eqref{DE_homo} $\iff\vectorfunction{M}(t)$ is a matrix solution to the ode \eqref{DE_homo} and $\exists t_0\in\RR$ such that $\det\vectorfunction{M}(t_0)\ne 0$.
+      \item $\vectorfunction{M}(t)$ is a matrix solution of the ode \eqref{DE_homo} $\iff\vectorfunction{M}'(t)=\vectorfunction{A}(t)\vectorfunction{M}(t)$\footnote{By definition, if $\vectorfunction{M}(t)=(m_{ij}(t))$, then $\vectorfunction{M}'(t):=({m_{ij}}'(t))$.}.
+      \item $\vectorfunction{M}(t)$ is a matrix solution of the ode \eqref{DE_homo} $\iff\forall c\in\RR^n$, $\vectorfunction{M}(t)c\in\mathcal{A}$.
+      \item If $\vectorfunction{M}(t)$ is a matrix solution of the ode \eqref{DE_homo}, then $\forall C\in\mathcal{M}_n(\RR)$, $\vectorfunction{M}(t)C$ is a matrix solution of the ode \eqref{DE_homo}.
+      \item $\vectorfunction{M}(t)$ is a fundamental matrix solution of the ode \eqref{DE_homo} $\iff\vectorfunction{M}(t)$ is a matrix solution of the ode \eqref{DE_homo} and $\det\vectorfunction{M}(t)\ne 0$.
+      \item $\vectorfunction{M}(t)$ is a fundamental matrix solution of the ode \eqref{DE_homo} $\iff\vectorfunction{M}(t)$ is a matrix solution of the ode \eqref{DE_homo} and $\exists t_0\in\RR$ such that $\det\vectorfunction{M}(t_0)\ne 0$.
     \end{enumerate}
   \end{prop}
   \begin{prop}
-    Let $I\subset \RR$ be an interval, $\vectorfunction{A}\in\mathcal{C}(I,\mathcal{L}(\RR^n))$ and $\vectorfunction{\Phi}(t),\vectorfunction{\psi}(t)\in\mathcal{M}_n(\RR)$ be matrix solutions to the ode \eqref{DE_homo}. Then, $\exists! C\in\mathcal{M}_n(\RR)$ such that $\vectorfunction{\psi}(t)=\vectorfunction{\Phi}(t)C$. Moreover, $\vectorfunction{\psi}$ is fundamental if and only if $\det C\ne 0$.
+    Let $I\subset \RR$ be an interval, $\vectorfunction{A}\in\mathcal{C}(I,\mathcal{L}(\RR^n))$ and $\vectorfunction{\Phi}(t),\vectorfunction{\psi}(t)\in\mathcal{M}_n(\RR)$ be matrix solutions of the ode \eqref{DE_homo}. Then, $\exists! C\in\mathcal{M}_n(\RR)$ such that $\vectorfunction{\psi}(t)=\vectorfunction{\Phi}(t)C$. Moreover, $\vectorfunction{\psi}(t)$ is fundamental if and only if $\det C\ne 0$.
   \end{prop}
+  \subsubsection*{Non-homogeneous linear systems}
+  \begin{prop}
+    Let $I\subset \RR$ be an interval, $\vectorfunction{A}\in\mathcal{C}(I,\mathcal{L}(\RR^n))$ and $\vectorfunction{b}\in\mathcal{C}(I,\RR^n)$. Suppose $\varphi(t,t_0,x_0)$ is the flux of the ode \eqref{DE_linear}. Then, $$\varphi(t,t_0,x_0)=\Phi(t)\left[{\Phi(t_0)}^{-1}x_0+\int_{t_0}^t{\Phi(s)}^{-1}b(s)\dd s\right]$$ where $\Phi(t)$ is a fundamental matrix of the associated homogeneous system.
+  \end{prop}
+  \begin{prop}[Liouville's formula]
+    Let $I\subset \RR$ be an interval, $\vectorfunction{A}\in\mathcal{C}(I,\mathcal{L}(\RR^n))$, $\vectorfunction{\Phi}(t)\in\mathcal{M}_n(\RR)$ be a matrix solution of the ode \eqref{DE_homo} and $t_0\in I$. Then:, for all $t\in I$ we have: $$\det(\Phi(t))=\det (\Phi(t_0))\exp{\int_{t_0}^t\trace(\vectorfunction{A}(s))\dd s}$$
+  \end{prop}
+  \begin{theorem}
+    Let $\vectorfunction{A}\in\mathcal{M}_n(\RR)$ and $\vectorfunction{\Phi}(t)\in\mathcal{M}_n(\RR)$ be a matrix solution of the ode
+    \begin{equation}\label{DE_coef-constants}
+      \vectorfunction{x}'=\vectorfunction{A}\vectorfunction{x}
+    \end{equation}
+    such that $\Phi(0)=\vectorfunction{I}_n$. Then:
+    \begin{enumerate}
+      \item For all $t,s\in\RR$, then $\Phi(t+s)=\Phi(t)\Phi(s)$.
+      \item ${\Phi(t)}^{-1}=\Phi(-t)$.
+      \item The series $\displaystyle\sum_{k=0}^\infty \frac{\vectorfunction{A}^kt^k}{k!}$ converges uniformly on compact sets.
+    \end{enumerate}
+  \end{theorem}
+  \begin{definition}
+    Let $\vectorfunction{A}\in\mathcal{M}_n(\RR)$ and $t\in\RR$. We define the \textit{exponential matrix} $\exp{\vectorfunction{A}t}$ as: $$\exp{\vectorfunction{A}t}=\sum_{k=0}^\infty\frac{\vectorfunction{A}^kt^k}{k!}$$
+  \end{definition}
+  \begin{lemma}
+    Let $I\subset\RR$ be a compact interval and $\vectorfunction{f}:I\times\RR^n\rightarrow\RR^n$ be a continuous function and Lipschitz continuous with respect to the second variable. Let $\vectorfunction{\varphi}:I\rightarrow\RR^n$ be the solution of the ivp \eqref{DE_ivp}. Then, $\forall\vectorfunction{\psi}\in\mathcal{C}(I,\RR^n)$ the sequence $(T^m(\vectorfunction{\psi}))$ converges uniformly to $\varphi$ over $I$.
+  \end{lemma}
+  \begin{prop}
+    Let $\vectorfunction{A}\in\mathcal{M}_n(\RR)$ and $t,s\in \RR$. Then:
+    \begin{enumerate}
+      \item $\exp{\vectorfunction{A}(t+s)}=\exp{\vectorfunction{A}t}\exp{\vectorfunction{A}s}$
+      \item ${\left(\exp{\vectorfunction{A}t}\right)}^{-1}=\exp{-\vectorfunction{A}t}$
+      \item $\left(\exp{\vectorfunction{A}t}\right)'=\vectorfunction{A}\exp{\vectorfunction{A}t}=\exp{\vectorfunction{A}t}\vectorfunction{A}$
+    \end{enumerate}
+  \end{prop}
+  \begin{lemma}
+    Let $\vectorfunction{A},\vectorfunction{B},\vectorfunction{C}\in\mathcal{M}_N(\RR)$. Then:
+    \begin{enumerate}
+      \item If $\vectorfunction{B}\vectorfunction{C}=\vectorfunction{C}\vectorfunction{A}$, then: $$\exp{\vectorfunction{B}t}\vectorfunction{C}=\vectorfunction{C}\exp{\vectorfunction{A}t}$$
+      \item If $\vectorfunction{A}\vectorfunction{B}=\vectorfunction{B}\vectorfunction{A}$, then: $$\exp{\vectorfunction{A}t}\vectorfunction{B}=\vectorfunction{B}\exp{\vectorfunction{A}t}\qquad\text{and}\qquad\exp{(\vectorfunction{A}+\vectorfunction{B})t}=\exp{\vectorfunction{A}t}\exp{\vectorfunction{B}t}$$
+    \end{enumerate}
+  \end{lemma}
 \end{multicols}
 \end{document}
