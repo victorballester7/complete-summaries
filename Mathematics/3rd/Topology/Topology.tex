@@ -3,7 +3,7 @@
 \begin{document}
 \begin{multicols}{2}[\section{Topology}]
   \subsection{Topological spaces and continuous functions}
-  \subsubsection*{Metric spaces}
+  \subsubsection{Metric spaces}
   \begin{definition}
     Let $X$ be a set. A \textit{distance in $X$} is a function $d:X\times X\rightarrow\RR $ such that $\forall x,y,z\in X$ the following properties are satisfied:
     \begin{enumerate}
@@ -47,7 +47,7 @@
   \begin{prop}
     Let $(X,d)$ be a metric space with $|X|\geq 2$ and $x,y\in X$. Then, $\exists\delta>0$ such that $x\in B_d(x,\delta)$, $y\in B_d(y,\delta)$ and $B_d(x,\delta)\cap B_d(y,\delta)=\varnothing$.
   \end{prop}
-  \subsubsection*{Topological spaces}
+  \subsubsection{Topological spaces}
   \begin{definition}
     Let $X$ be a set. A \textit{topology $\mathcal{T}$} on a set $X$ is a collection of subsets of $X$ (that is, $\mathcal{T}\subset\mathcal{P}(X)$) satisfying the following properties:
     \begin{enumerate}
@@ -104,7 +104,7 @@
   \begin{prop}
     Let $(X,\mathcal{T}_X)$ and $(Y,\mathcal{T}_Y)$ be topological spaces and $f:(X,\mathcal{T}_X)\rightarrow(Y,\mathcal{T}_Y)$ be a function. We say that $f$ is continuous if and only if for all closed sets $C\subseteq Y$, we have $f^{-1}(C)\subseteq X$ is closed.
   \end{prop}
-  \subsubsection*{Basis for a topology}
+  \subsubsection{Basis for a topology}
   \begin{definition}
     Let $(X,\mathcal{T})$ be a topological space and $\mathcal{B}\subset\mathcal{T}$ be a subset of open sets. We say that $\mathcal{B}$ is a \textit{basis of $\mathcal{T}$} if for all $U\in\mathcal{T}$ and $x\in U$, there exists $B\in\mathcal{B}$ such that $x\in\mathcal{B}\subseteq U$.
   \end{definition}
@@ -140,7 +140,7 @@
   \begin{definition}
     Let $(X,\mathcal{T})$ be a topological space and $\mathcal{S}\subset\mathcal{T}$ be a subset. Then, $\mathcal{S}$ is a \textit{subbasis of $\mathcal{T}$} if all open sets can be written as a union of finite intersections of elements of $\mathcal{S}$.
   \end{definition}
-  \subsubsection*{Interior and closure of a set}
+  \subsubsection{Interior, closure and boundary of a set}
   \begin{definition}[Interior]
     Let $(X,\mathcal{T})$ be a topological space and $A\subseteq X$ be a subset. The \textit{interior of $A$}, $\Int A$, is the largest open subset of $X$ contained in $A$.
   \end{definition}
@@ -216,6 +216,7 @@
       \item $\Fr A=\varnothing\iff\text{$A$ is clopen}$
     \end{enumerate}
   \end{prop}
+  \subsubsection{Functions between topological spaces}
   \begin{theorem}
     Let $(X,\mathcal{T}_X)$ and $(Y,\mathcal{T}_Y)$ be topological spaces and $f:(X,\mathcal{T}_X)\rightarrow (Y,\mathcal{T}_Y)$ be a function. Then, the following assumptions are equivalent:
     \begin{enumerate}
@@ -247,7 +248,45 @@
   \begin{prop}
     Being homeomorphic as topological spaces is an equivalence relation.
   \end{prop}
-  \subsubsection*{Product topology}
+  \subsection{Subspaces}
+  \begin{definition}
+    Let $(X,\mathcal{T})$ be a topological space and $A\subseteq X$ be a subset. We define the following set: $$\mathcal{T}_A=\{U\subseteq A:\exists V\in\mathcal{T}\text{ such that }V\cap A=U\}$$ Then $(A,\mathcal{T}_A)$ is a topological space and $\mathcal{T}_A$ is called the \textit{subspace topology on $A$}.
+  \end{definition}
+  \begin{prop}
+    Let $(X,\mathcal{T})$ be a topological space, $A\subseteq X$ be a subset and consider the topological space $(A,\mathcal{T}_A)$. Then, $C\subseteq A$ is closed if and only if $C=K\cap A$, where $K\subseteq X$ is a closed subset on $(X,\mathcal{T})$.
+  \end{prop}
+  \begin{prop}
+    Let $(X,\mathcal{T})$ be a topological space, $A\subseteq X$ be a subset and consider the topological space $(A,\mathcal{T}_A)$. Then:
+    \begin{enumerate}
+      \item If $A$ is open, then $U\in\mathcal{T}_A$ if and only if $U\in\mathcal{T}$.
+      \item If $A$ is closed, then $C\subset A$ is closed on $(A,\mathcal{T}_A)$ if and only if $C$ is closed on $(X,\mathcal{T})$.
+    \end{enumerate}
+    $C\subseteq A$ is closed if and only if $C=K\cap A$, where $K\subseteq X$ is a closed subset on $(X,\mathcal{T})$.
+  \end{prop}
+  \begin{prop}
+    Let $(X,\mathcal{T})$ be a topological space, $A\subseteq X$ be a subset and consider the topological space $(A,\mathcal{T}_A)$. Then, the inclusion $\iota:A\hookrightarrow X$ is continuous and $\mathcal{T}_A$ is the least finer topology where $\iota$ is continuous.
+  \end{prop}
+  \begin{prop}
+    Let $(X,\mathcal{T})$ and $(Y,\mathcal{T}_Y)$ be topological spaces, $f:(X,\mathcal{T}_X)\rightarrow (Y,\mathcal{T}_Y)$ be a continuous function, $A\subseteq X$ be a subset and consider the topological space $(A,\mathcal{T}_A)$. Then, $f|_A$ is also continuous.
+  \end{prop}
+  \begin{prop}
+    Let $(X,\mathcal{T})$ be a topological space, $\mathcal{B}$ be a basis of $\mathcal{T}$, $A\subseteq X$ be a subset and consider the topological space $(A,\mathcal{T}_A)$. Then, $$\mathcal{B}_A=\{B\cap A:B\in\mathcal{B}\}$$ is basis of $\mathcal{T}_A$
+  \end{prop}
+  \begin{prop}
+    Let $(X,\mathcal{T})$ and $(Y,\mathcal{T}_Y)$ be topological spaces, $A\subseteq X$ be a subset and consider the topological space $(A,\mathcal{T}_A)$. Let $f:(Y,\mathcal{T}_Y)\rightarrow (A,\mathcal{T}_A)$ be a function. Then, $f$ is continuous if and only if $\iota\circ f:Y\rightarrow A\hookrightarrow X$ is continuous.
+  \end{prop}
+  \begin{corollary}
+    Let $(X,\mathcal{T})$ and $(Y,\mathcal{T}_Y)$ be topological spaces, $f:(X,\mathcal{T}_X)\rightarrow (Y,\mathcal{T}_Y)$ be a continuous function. Then, $g:X\rightarrow f(X)$ is also continuous.
+  \end{corollary}
+  \begin{prop}
+    Let $(X,\mathcal{T})$ and $(Y,\mathcal{T}_Y)$ be topological spaces such that $X=A\cup B$, for some sets $A$, $B$. Consider the function $f:(X,\mathcal{T}_X)\rightarrow (Y,\mathcal{T}_Y)$ such that $f|_A$ and $f|_B$ are continuous. Then:
+    \begin{enumerate}
+      \item If $A$, $B$ are open, then $f$ is continuous.
+      \item If $A$, $B$ are closed, then $f$ is continuous.
+    \end{enumerate}
+  \end{prop}
+  \subsection{Product topology}
+  \subsubsection{Finite product}
   \begin{definition}
     Let $(X_i,\mathcal{T}_{X_i})$ be topological spaces for $i=1,\ldots,n$. We define the \textit{finite product topology on $X:=\prod_{i=1}^nX_i=X_1\times \cdots\times X_n$}, denoted by $\mathcal{T}_X$, as the topology generated by $$\mathcal{B}=\{U_1\times\cdots\times U_n :U_i\in\mathcal{T}_{X_i},i=1,\ldots,n\}$$
   \end{definition}
@@ -256,8 +295,8 @@
     is continuous and open for $i=1,\ldots,n$.
   \end{prop}
   \begin{prop}
-    Let $(X_i,\mathcal{T}_{X_i})$ be topological spaces for $i=1,\ldots,n$ and $X:=\prod_{i=1}^nX_i$. If $\mathcal{B}_{X_i}$ is a basis for $\mathcal{T}_{X_i}$ for $i=1,\ldots,n$, then: $$\mathcal{B}=\{U_1\times\cdots\times U_n :U_i\in\mathcal{B}_{X_i}\text{ for }i=1,\ldots,n\}$$
-    is a basis for $\mathcal{T}_X$.
+    Let $(X_i,\mathcal{T}_{X_i})$ be topological spaces for $i=1,\ldots,n$ and $X:=\prod_{i=1}^nX_i$. If $\mathcal{B}_{X_i}$ is a basis of $\mathcal{T}_{X_i}$ for $i=1,\ldots,n$, then: $$\mathcal{B}=\{U_1\times\cdots\times U_n :U_i\in\mathcal{B}_{X_i}\text{ for }i=1,\ldots,n\}$$
+    is a basis of $\mathcal{T}_X$.
   \end{prop}
   \begin{prop}
     Let $(X_i,\mathcal{T}_{X_i})$ and $(Y,\mathcal{T}_Y)$ be topological spaces for $i=1,\ldots,n$, $X:=\prod_{i=1}^nX_i$ and $f:(Y,\mathcal{T}_Y)\rightarrow(X,\mathcal{T}_X)$ be a function. Then, $f$ is continuous if and only if $\pi_{X_i}\circ f$ is continuous for all $i=1,\ldots,n$.
@@ -265,6 +304,7 @@
   \begin{prop}
     Let $(X_i,\mathcal{T}_{X_i})$ and $(Y_i,\mathcal{T}_{Y_i})$ be topological spaces, $X:=\prod_{i=1}^nX_i$, $Y:=\prod_{i=1}^nY_i$ and $f_i:(X_i,\mathcal{T}_{X_i})\rightarrow(Y_i,\mathcal{T}_{Y_i})$ be a continuous function for $i=1,\ldots,n$. Then, $$f_1\times\cdots\times f_n:\left(X,\mathcal{T}_X\right)\longrightarrow\left(Y,\mathcal{T}_Y\right)$$ is also continuous.
   \end{prop}
+  \subsubsection{Arbitrary product}
   \begin{definition}
     Let $I$ be a set of indexes, $\{(X_i,\mathcal{T}_{X_i}):i\in I\}$ be a collection of topological spaces and $X:=\prod_{i\in I}X_i$. We define the \textit{box topology on $X$} as the topology generated by $$\mathcal{B}=\left\{\prod_{i\in I}U_i:U_i\in\mathcal{T}_{X_i}\right\}$$
   \end{definition}
@@ -279,8 +319,8 @@
     is continuous and open for all $i\in I$.
   \end{prop}
   \begin{prop}
-    Let $I$ be a set of indexes, $\{(X_i,\mathcal{T}_{X_i}):i\in I\}$ be a collection of topological spaces and $X:=\prod_{i\in I}X_i$. If $\mathcal{B}_{X_i}$ is a basis for $\mathcal{T}_{X_i}$ $\forall i\in I$, then: $$\mathcal{B}=\left\{\prod_{i\in I}U_i:U_i\in\mathcal{B}_{X_i}\text{ for }i\in I\right\}$$
-    is a basis for $\mathcal{T}_X$.
+    Let $I$ be a set of indexes, $\{(X_i,\mathcal{T}_{X_i}):i\in I\}$ be a collection of topological spaces and $X:=\prod_{i\in I}X_i$. If $\mathcal{B}_{X_i}$ is a basis of $\mathcal{T}_{X_i}$ $\forall i\in I$, then: $$\mathcal{B}=\left\{\prod_{i\in I}U_i:U_i\in\mathcal{B}_{X_i}\text{ for }i\in I\right\}$$
+    is a basis of $\mathcal{T}_X$.
   \end{prop}
   \begin{prop}
     Let $I$ be a set of indexes, $\{(X_i,\mathcal{T}_{X_i}):i\in I\}$ and $(Y,\mathcal{T}_Y)$ be a collection of topological spaces, $X:=\prod_{i\in I}X_i$ and $f:(Y,\mathcal{T}_Y)\rightarrow(X,\mathcal{T}_X)$ be a function. Then, $f$ is continuous if and only if $\pi_{X_i}\circ f$ is continuous for all $i\in I$.

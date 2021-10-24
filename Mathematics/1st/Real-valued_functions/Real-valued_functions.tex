@@ -2,785 +2,785 @@
 
 \begin{document}
 \begin{multicols}{2}[\section{Real-valued functions}]
-    \subsection{The real line}
-    \begin{definition}
-        Let $(K,+,\cdot)$ be a field. We say that $K$, together with a total order relation $\leq$\footnote{See definition \ref{FM-order_relations}}, is an \textit{ordered field} if the following properties are satisfied:
-        \begin{enumerate}
-            \item If $x,y,z\in K$ are such that $x\leq y$, then $x+z\leq y+z$.
-            \item If $x,y\in K$ are such that $x\geq0$ and $y\geq0$, then $x\cdot y\geq 0$.
-        \end{enumerate}
-    \end{definition}
-    \begin{definition}
-        Let $K$ be an ordered field and $A\subset K$. We say that $A$ is \textit{bounded from above} if $\exists M\in K$ (called \textit{upper bound of $A$}) such that $x\leq M$ $\forall x\in A$. Analogously, we say that $A$ is \textit{bounded from below} if $\exists m\in K$ (called \textit{lower bound of $A$}) such that $x\geq m$ $\forall x\in A$.
-    \end{definition}
-    \begin{definition}
-        Let $K$ be an ordered field and $A\subset K$ be a set bounded from above. We say that an upper bound $\alpha$ of $A$ is the \textit{supremum of $A$}, denoted by $\sup A$, if any other upper bound $\alpha'$ satisfies $\alpha'\geq\alpha$.
-        Analogously if $B\subset K$ is a set bounded from below, we say that a lower bound $\beta$ of $B$ is the \textit{infimum of $B$}, denoted by $\inf B$, if any other lower bound $\beta'$ satisfies $\beta'\leq\beta$.
-    \end{definition}
-    \begin{prop}
-        Let $K$ be an ordered field and $A\subset K$. If $M$ is an upper bound of $A$, then $-M$ is a lower bound of $-A$. Similarly, if $m$ is an lower bound of $A$, then $-m$ is a upper bound of $-A$
-    \end{prop}
-    \begin{prop}
-        Let $K$ be an ordered field and $A,B\subset K$. If $\alpha=\sup A$ and $\beta=\inf B$, then: $$-\alpha=\inf(-A)\qquad-\beta=\sup(-B)$$
-    \end{prop}
-    \begin{prop}
-        The supremum of a set, if exists, is unique.
-    \end{prop}
-    \begin{theorem}[Supremum axiom]
-        There exists a unique field with the property that any bounded set from above has a supremum: the field of real numbers $\RR$.
-    \end{theorem}
-    \begin{prop}
-        Natural numbers are not bounded from above in $\RR$.
-    \end{prop}
-    \begin{corollary}[Archimedean property]
-        Let $\alpha\in\RR$. Then, $\exists n\in\NN$ such that $\alpha<n$.
-    \end{corollary}
-    \begin{corollary}
-        Let $\alpha\in\RR_{>0}$. Then, $\exists n\in\NN$ such that $0<\frac{1}{n}<\alpha$.
-    \end{corollary}
-    \begin{prop}
-        Let $x,y\in\RR$ such that $x<y$. Then, there exist numbers $z\in\RR\setminus\QQ$ and $q\in\QQ$ such that $x<z<y$ and $x<q<y$.
-    \end{prop}
-    \begin{definition}
-        Given $x,y\in\RR$ such that $x<y$ we define:
-        \begin{itemize}
-            \item $(x,y)=\{z\in\RR:x<z<y\}$.
-            \item $[x,y)=\{z\in\RR:x\leq z<y\}$.
-            \item $(x,y]=\{z\in\RR:x<z\leq y\}$.
-            \item $[x,y]=\{z\in\RR:x\leq z\leq y\}$.
-        \end{itemize}
-    \end{definition}
-    \begin{lemma}
-        Let $K$ be an ordered field and $A\subset K$ be a set. If $\alpha=\sup A$, then $\forall \varepsilon>0$ the interval $(\alpha-\varepsilon,\alpha]$ contains points of $A$.
-    \end{lemma}
-    \begin{definition}
-        Let $x\in\RR$. We define the \textit{absolute values $|x|$ of $x$} as:
-        \begin{equation*}
-            |x|=\left\{
-            \begin{array}{ccc}
-                x  & \text{if} & x\geq 0 \\
-                -x & \text{if} & x<0
-            \end{array}
-            \right.
-        \end{equation*}
-    \end{definition}
-    \begin{lemma}
-        Let $x,y\in\RR$. Then:
-        \begin{enumerate}
-            \item $|x|\geq 0$.
-            \item $|x|=0\iff x=0$.
-            \item $|xy|=|x||y|$.
-            \item $|x+y|\leq|x|+|y|$. \textit{(Triangular inequality)}
-        \end{enumerate}
-    \end{lemma}
-    \begin{definition}
-        Let $x\in\RR$. A \textit{neighbourhood of $x$} is any open interval containing $x$.
-    \end{definition}
-    \subsubsection*{Infinite and countable sets}
-    \begin{definition}
-        A $X\ne\varnothing$ is \textit{infinite} if there exist $\varnothing\ne A\subset X$ and $\phi:X\rightarrow A$ such that $\phi$ is a bijection. If no such $A$ and $\phi$ exist, $X$ is \textit{finite}.
-    \end{definition}
-    \begin{prop}
-        Let $X$, $Y$ be sets such that $X\subseteq Y$. If $X$ is infinite, $Y$ is infinite.
-    \end{prop}
-    \begin{prop}
-        Let $X\subset\NN$. $X$ is finite if and only if $X$ is bounded.
-    \end{prop}
-    \begin{definition}
-        Let $A$ be a set. We say that $A$ is \textit{countable} if there exists a bijective function from $A$ to $\NN$. We say that $A$ is \textit{uncountable} if there is no such bijection.
-    \end{definition}
-    \begin{prop}
-        Any infinite subset of $\NN$ is countable.
-    \end{prop}
-    \begin{corollary}
-        Any subset of a countable set is either finite or countable.
-    \end{corollary}
-    \begin{corollary}
-        Let $A$ be an infinite set. $A$ is countable if and only if there exists an injective function from $A$ to $\NN$.
-    \end{corollary}
-    \begin{prop}
-        If $A$ and $B$ are countable sets, then $A\times B$ is also countable.
-    \end{prop}
-    \begin{theorem}
-        $\QQ$ is countable.
-    \end{theorem}
-    \begin{theorem}
-        $\RR$ is uncountable.
-    \end{theorem}
-    \subsection{Sequences}
-    \subsubsection*{Limit notion}
-    \begin{definition}
-        A \textit{sequence of real numbers} is an enumerated collection of real numbers. More formally, a sequence is a function $a:\NN\rightarrow\RR$. The number $a(n)$ is usually denoted by $a_n$ and the whole sequence by $(a_n)$.
-    \end{definition}
-    \begin{definition}
-        A sequence $(a_n)$ is \textit{bounded from above} if there is a real number $M$ such that $a_n\leq M$ $\forall n\in\NN$.
-        Analogously, $(a_n)$ is \textit{bounded from below} if there is a real number $m$ such that $a_n\geq m$ $\forall n\in\NN$.
-        Finally, we say that $(a_n)$ is \textit{bounded} if there exist $m,M\in\RR$ such that $m\leq a_n\leq M$ $\forall n\in\NN$.
-    \end{definition}
-    \begin{definition}[Limit]
-        Let $(a_n)$ be a sequence of real numbers and $\ell\in\RR$. We say that $$\lim_{n\to\infty} a_n=\ell\text{ if }\forall\varepsilon>0\;\exists n_0:|a_n-\ell|<\varepsilon\quad\forall n>n_0.$$
-        We say that $$\lim_{n\to\infty} a_n=\pm\infty\text{ if }\forall M>0\;\exists n_0:\pm a_n>M\;\forall n>n_0.$$
-    \end{definition}
-    \begin{definition}
-        We say a sequence is \textit{convergent} if it has a limit, and \textit{divergent} otherwise.
-    \end{definition}
-    \begin{lemma}
-        The limit of a convergent sequence is unique.
-    \end{lemma}
-    \begin{lemma}
-        Let $(a_n)$ be a convergent sequence. Then $(a_n)$ is bounded. Moreover, if $m\leq a_n\leq M$ $\forall n\in\NN$, then $\displaystyle m\leq \lim_{n\to\infty} a_n\leq M$.
-    \end{lemma}
-    \begin{lemma}
-        Let $(a_n)$ and $(b_n)$ be convergent sequences with respective limits $\alpha$ and $\beta$. Then:
-        \begin{enumerate}
-            \item The sequences $(a_n+b_n)$ and $(a_nb_n)$ are convergents and $$\lim_{n\to\infty} a_n+b_n=\alpha+\beta\qquad\lim_{n\to\infty} a_n\cdot b_n=\alpha\cdot \beta$$
-            \item If $\alpha\ne 0$, then $a_n\ne 0$ for $n$ sufficiently large, the sequence $\displaystyle\left(\frac{b_n}{a_n}\right)$ is convergent and $$\lim_{n\to\infty}\frac{b_n}{a_n}=\frac{\beta}{\alpha}$$
-        \end{enumerate}
-    \end{lemma}
-    \begin{definition}
-        Let $(a_n)$ be a sequence. We say $(a_n)$ is \textit{monotonically increasing} if $a_n\leq a_{n+1}$ $\forall n\in\NN$. Analogously, we say $(a_n)$ is \textit{monotonically decreasing} if $a_n\geq a_{n+1}$ $\forall n\in\NN$\footnote{If the inequalities are strict, we say that $(a_n)$ is \textit{strictly increasing} or \textit{strictly decreasing}, respectively.}. Finally, we say $(a_n)$ is \textit{monotonic} if it is either monotonically increasing or monotonically decreasing.
-    \end{definition}
-    \begin{theorem}
-        All monotonic and bounded sequences are convergent.
-    \end{theorem}
-    \begin{lemma}
-        Let $(a_n)$ and $(b_n)$ be two sequences verifying $a_n\leq b_n$ $\forall n\in\NN$. Then, $\displaystyle\lim_{n\to\infty} a_n\leq\lim_{n\to\infty} b_n$.
-    \end{lemma}
-    \begin{prop}[Squeeze theorem]
-        Let $(a_n)$, $(b_n)$ and $(c_n)$ be three sequences verifying $a_n\leq b_n\leq c_n$ $\forall n\in\NN$ and such that $(a_n)$ and $(c_n)$ are convergent. Suppose that $\displaystyle\lim_{n\to\infty} a_n=\lim_{n\to\infty} c_n=\ell$. Then, $(b_n)$ is convergent and $\displaystyle\lim_{n\to\infty} b_n=\ell$.
-    \end{prop}
-    \begin{lemma}
-        Let $p\in\RR_{>0}$ and $\alpha,x\in\RR$. Then:
-        \begin{enumerate}
-            \item $\displaystyle\lim_{n\to\infty}\frac{1}{n^p}=0$.
-            \item $\displaystyle\lim_{n\to\infty}\sqrt[n]{p}=1$.
-            \item $\displaystyle\lim_{n\to\infty}\sqrt[n]{n}=1$.
-            \item If $x>1$, $\displaystyle\lim_{n\to\infty}\frac{n^\alpha}{x^n}=0$.
-            \item If $x<1$, $\displaystyle\lim_{n\to\infty} x^n=0$.
-        \end{enumerate}
-    \end{lemma}
-    \begin{theorem}[Root test]
-        Let $(a_n)\geq 0$ be a sequence. Suppose that the limit $\displaystyle \ell=\lim_{n\to\infty}\sqrt[n]{a_n}$ exists.
-        \begin{enumerate}
-            \item If $\displaystyle \ell<1\implies\lim_{n\to\infty}a_n=0$.
-            \item If $\displaystyle \ell>1\implies\lim_{n\to\infty}a_n=+\infty$.
-        \end{enumerate}
-    \end{theorem}
-    \begin{theorem}[Ratio test]
-        Let $(a_n)\geq 0$ be a sequence. Suppose that the limit $\displaystyle \ell=\lim_{n\to\infty}\frac{a_{n+1}}{a_n}$ exists.
-        \begin{enumerate}
-            \item If $\displaystyle \ell<1\implies\lim_{n\to\infty}a_n=0$.
-            \item If $\displaystyle \ell>1\implies\lim_{n\to\infty}a_n=+\infty$.
-        \end{enumerate}
-    \end{theorem}
-    \begin{theorem}
-        Let $(a_n)\geq 0$ be a sequence. If $\displaystyle \lim_{n\to\infty}\frac{a_{n+1}}{a_n}=\ell$, then $\displaystyle \lim_{n\to\infty}\sqrt[n]{a_n}=\ell$.
-    \end{theorem}
-    \subsubsection*{The number $\exp{}$}
-    \begin{definition}
-        We define the sequences $(S_n)$ and $(T_n)$ as:
-        $$S_n=1+1+\frac{1}{2!}+\frac{1}{3!}+\cdots+\frac{1}{n!}\qquad T_n={\left(1+\frac{1}{n}\right)}^n$$
-    \end{definition}
-    \begin{prop}
-        The sequences $(S_n)$ and $(T_n)$ are convergent and have the same limit. This limit is denoted by $\exp{}$ and it's equal to $\exp{}=2.71828...$
-    \end{prop}
-    \begin{theorem}
-        The number $\exp{}$ is irrational.
-    \end{theorem}
-    \subsubsection*{Subsequences}
-    \begin{definition}[Subsequence]
-        Let $(a_n)$ be a sequence of real numbers and $(k_n)$ be an increasing sequence of natural numbers. The sequence $(a_{k_n})$ is called a \textit{subsequence of $(a_n)$}.
-    \end{definition}
-    \begin{lemma}
-        Let $(a_n)$ be a sequence. If $\displaystyle\lim_{n\to\infty} a_n=\ell$, then any subsequence of $(a_n)$ has limit $\ell$.
-    \end{lemma}
-    \begin{definition}
-        Let $(a_n)$ be a sequence. We say $p$ is an \textit{accumulation point of $(a_n)$} if $\forall\varepsilon>0$ and $\forall n_0\in\NN$ $\exists n>n_0$ such that $|a_n-p|<\varepsilon$.
-    \end{definition}
-    \begin{prop}
-        Let $(a_n)$ be a sequence. $p$ is an accumulation point of $(a_n)$ if and only if there is a subsequence $(a_{k_n})$ of $(a_n)$ with $\displaystyle\lim_{n\to\infty}a_{k_n}=p$.
-    \end{prop}
-    \begin{corollary}
-        A convergent sequence has its limit as the unique accumulation point.
-    \end{corollary}
-    \begin{prop}
-        All sequences have a monotonic subsequence.
-    \end{prop}
-    \begin{theorem}[Bolzano-Weierstra\ss\space theorem]
-        All bounded sequences have a convergent subsequence.
-    \end{theorem}
-    \begin{prop}
-        Let $(a_n)$ be a bounded sequence. Then, $(a_n)$ is convergent if and only if it has a unique accumulation point.
-    \end{prop}
-    \begin{definition}
-        Let $(a_n)$ be a sequence. We define the \textit{limit superior of $(a_n)$} as:
-        $$\limsup_{n\to\infty}a_n:=\inf\{\sup\{x_m:m\geq n\}:n\geq 0\}$$
-        We define the \textit{limit inferior of $(a_n)$} as:
-        $$\liminf_{n\to\infty}a_n:=\sup\{\inf\{x_m:m\geq n\}:n\geq 0\}$$
-    \end{definition}
-    \begin{prop}
-        Let $(a_n)$ be a sequence. Then $\displaystyle\limsup_{n\to\infty}a_n$ and $\displaystyle\liminf_{n\to\infty}a_n$ always exist and $$\liminf_{n\to\infty}a_n\leq\limsup_{n\to\infty}a_n$$
-        If, moreover, $(a_n)$ is bounded, then for all accumulation point $p\in\RR$ of $(a_n)$ we have:
-        $$\liminf_{n\to\infty}a_n\leq p\leq\limsup_{n\to\infty}a_n$$
-    \end{prop}
-    \begin{prop}
-        Let $(a_n)$ be a bounded sequence. Then: $$(a_n)\text{ is convergent}\iff \liminf_{n\to\infty} a_n=\limsup_{n\to\infty} a_n$$ In this case we have: $$\lim_{n\to\infty} a_n=\limsup_{n\to\infty} a_n=\liminf_{n\to\infty} a_n$$
-    \end{prop}
-    \subsubsection*{Cauchy condition}
-    \begin{definition}[Cauchy sequence]
-        We say that a sequence $(a_n)$ is a \textit{Cauchy sequence} if $\forall \varepsilon>0$ $\exists n_0$ such that $|a_n-a_m|<\varepsilon$ $\forall n,m>n_0$.
-    \end{definition}
-    \begin{theorem}
-        A sequence is convergent if and only if it's a Cauchy sequence.
-    \end{theorem}
-    \begin{theorem}[Stolz-Cesàro theorem]
-        Let $(a_n)$ be a strictly increasing sequence and $(b_n)$ be any other sequence. Suppose that $$\lim_{n\to\infty}\frac{b_n-b_{n-1}}{a_n-a_{n-1}}=\ell\in\RR\cup\{\pm\infty\}$$ Then:
-        \begin{enumerate}
-            \item If $\displaystyle\lim_{n\to\infty} a_n=\pm\infty$, $\displaystyle\lim_{n\to\infty}\frac{b_n}{a_n}=\ell$.
-            \item If $\displaystyle\lim_{n\to\infty} b_n=\displaystyle\lim_{n\to\infty} a_n=0$, $\displaystyle\lim_{n\to\infty}\frac{b_n}{a_n}=\ell$.
-        \end{enumerate}
-    \end{theorem}
-    \subsection{Continuity}
-    \subsubsection*{Limit of a function}
-    \begin{definition}
-        Let $f:[a,b]\rightarrow\RR$ be a function and $x_0\in(a,b)$. We say that $\ell$ is \textit{the limit of the function $f$ at the point $x_0$}, denoted by $\displaystyle\lim_{x\to x_0}f(x)=\ell$, if $\forall\varepsilon>0$ $\exists\delta>0$ such that $|f(x)-\ell|<\varepsilon$ whenever $|x-x_0|<\delta$.
-    \end{definition}
-    \begin{lemma}
-        Let $f:(a,b)\rightarrow\RR$ be a function and $x_0\in(a,b)$. Then, $\displaystyle\lim_{x\to x_0}f(x)=\ell$ if and only if for any sequence $(a_n)\subset(a,b)\setminus\{x_0\}$ with $\displaystyle\lim_{n\to\infty} a_n=x_0$ we have $\displaystyle\lim_{n\to\infty}  f(a_n)=\ell$.
-    \end{lemma}
-    \begin{lemma}
-        The limit of a function at a point, if exists, is unique.
-    \end{lemma}
-    \begin{prop}
-        Let $f,g:(a,b)\rightarrow\RR$, $x_0\in(a,b)$ and suppose that $\displaystyle\lim_{x\to x_0}f(x)=\ell_1$ and $\displaystyle\lim_{x\to x_0}g(x)=\ell_2$. Then, the following properties are satisfied:
-        \begin{enumerate}
-            \item $\displaystyle\lim_{x\to x_0}(f+g)(x)=\ell_1+\ell_2$.
-            \item $\displaystyle\lim_{x\to x_0}(f\cdot g)(x)=\ell_1\cdot\ell_2$.
-            \item If $\ell_1>0$, then $f(x)>0$ on a neighbourhood of $x_0$. And if $\ell_1<0$, then $f(x)<0$ on a neighbourhood of $x_0$. Moreover in both cases $\displaystyle\lim_{x\to x_0}\left(\frac{1}{f}\right)(x)=\frac{1}{\ell_1}$.
-        \end{enumerate}
-    \end{prop}
-    \begin{definition}
-        Let $I\subset\RR$ be an interval and $f:I\rightarrow\RR$. We say that $f$ is \textit{bounded on $I$} if there are $m,M\in\RR$ such that $$m\leq f(x)\leq M\quad\forall x\in I$$
-    \end{definition}
-    \begin{lemma}
-        Let $I\subset\RR$ be an interval, $f:I\rightarrow\RR$ and $x_0\in I$. If the limit of $f$ at $x_0$ exists, then $f$ is bounded on a neighbourhood of $x_0$.
-    \end{lemma}
-    \begin{definition}
-        Let $I\subset\RR$ be an interval, $f:I\rightarrow\RR$ and $x_0\in I$. We say that the limit of $f$ at $x_0$ is infinite, denoted by $\displaystyle\lim_{x\to x_0}f(x)=\pm \infty$, if $\forall\varepsilon>0$ $\exists\delta>0$ such that $\pm f(x)>\varepsilon$ whenever $|x-x_0|<\delta$.
-    \end{definition}
-    \begin{lemma}
-        Let $f:(a,b)\rightarrow\RR$ be a function and $x_0\in(a,b)$. Then, $\displaystyle\lim_{x\to x_0}f(x)=\pm\infty$ if and only if for all sequence $(a_n)\subset(a,b)\setminus\{x_0\}$ with $\displaystyle\lim_{n\to\infty}a_n=x_0$, we have $\displaystyle\lim_{n\to\infty}f(a_n)=\pm\infty$.
-    \end{lemma}
-    \begin{definition}
-        Let $I\subset\RR$ be an interval, $f:I\rightarrow\RR$ and $x_0\in I$. We say that $\ell$ is the \textit{right-sided limit of $f$ at $x_0$}, denoted by $\displaystyle\lim_{x\to x_0^+}f(x)=\ell$, if $\forall\varepsilon>0$ $\exists\delta>0$ such that $|f(x)-\ell|<\varepsilon$ whenever $x-x_0<\delta$. Analogously, we say that $\ell$ is the \textit{left-sided limit of $f$ at $x_0$}, denoted by $\displaystyle\lim_{x\to x_0^-}f(x)=\ell$, if $\forall\varepsilon>0$ $\exists\delta>0$ such that $|f(x)-\ell|<\varepsilon$ whenever $x_0-x<\delta$.
-    \end{definition}
-    \begin{lemma}
-        Let $f:(a,b)\rightarrow\RR$ and $x_0\in(a,b)$. Then: $$\lim_{x\to x_0}f(x)=\ell\iff\lim_{x\to x_0^+}f(x)=\lim_{x\to x_0^-}f(x)=\ell$$
-    \end{lemma}
-    \begin{definition}
-        Let $f:(a,\infty)\rightarrow\RR$. We say that $\ell$ is the \textit{limit of $f$ at infinity}, denoted by $\displaystyle\lim_{x\to\infty}f(x)=\ell$, if $\forall\varepsilon>0$ $\exists K>a$ such that $|f(x)-\ell|<\varepsilon$ for all $x>K$.
-    \end{definition}
-    \begin{definition}
-        Let $f:(a,\infty)\rightarrow\RR$. We say that the limit of $f$ at infinity is infinity, denoted by $\displaystyle\lim_{x\to\infty}f(x)=\pm\infty$, if $\forall K>0$ $\exists M>a$ such that $\pm f(x)>K$ for all $x>M$.
-    \end{definition}
-    \subsubsection*{Continuity}
-    \begin{definition}
-        Let $I\subset\RR$ be an interval, $f:I\rightarrow\RR$ and $x_0\in I$. We say that $f$ is \textit{continuous at $x_0$} if the limit of $f$ at $x_0$ exists and it's equal to $f(x_0)$\footnote{If $I$ contains one of its endpoints, the continuity in these points must be defined with the notion of one-sided limit.}. We say that $f$ is \textit{continuous on $I$} if it's continuous at all points of $I$.
-    \end{definition}
-    \begin{lemma}
-        Let $I\subset\RR$ be an interval and $f:I\rightarrow\RR$. $f$ is continuous at $x_0\in I$ if and only if for all sequence $(a_n)\subset I$ with $\displaystyle\lim_{n\to\infty} a_n=x_0$ we have that $\displaystyle\lim_{n\to\infty} f(a_n)=f(x_0)$.
-    \end{lemma}
-    \begin{prop}
-        Let $I\subset\RR$ be an interval and $f,g:I\rightarrow \RR$ be continuous functions at $x_0\in I$. Then:
-        \begin{enumerate}
-            \item $f+g$ and $f\cdot g$ are continuous at $x_0$.
-            \item If $f(x_0)>0$, then $f(x)>0$ on a neighbourhood of $x_0$. And if $f(x_0)<0$, then $f(x)<0$ on a neighbourhood of $x_0$. Moreover, in both cases, $\frac{1}{f}$ is continuous at $x_0$.
-        \end{enumerate}
-    \end{prop}
-    \begin{prop}
-        Let $I,J\subset\RR$ be intervals, $f:I\rightarrow\RR$ and $g:J\rightarrow\RR$. Let $x_0\in I$ with $f(x_0)\in J$ and suppose that $f$ is continuous at $x_0$ and $g$ is continuous at $f(x_0)$. Then, $g\circ f$ is continuous at $x_0$.
-    \end{prop}
-    \begin{theorem}[Weierstra\ss\space theorem]
-        Let $f:[a,b]\rightarrow\RR$ be a continuous function. Then, $f$ is bounded on $[a,b]$. Moreover, $\exists m,M\in[a,b]$ such that: $$f(m)\leq f(x)\leq f(M)\quad\forall x\in [a,b]$$
-    \end{theorem}
-    \begin{theorem}[Bolzano's theorem]
-        Let $f:[a,b]\rightarrow\RR$ be a continuous function. If $f(a)\cdot f(b)<0$, then $\exists c\in(a,b)$ such that $f(c)=0$.
-    \end{theorem}
-    \begin{corollary}[Intermediate value theorem]
-        Let $f:[a,b]\rightarrow\RR$ be a continuous function and $c\in\langle f(a), f(b)\rangle$\footnote{The interval $\langle a,b\rangle$ is defined as $\langle a,b\rangle:=(\min(a,b),\max(a,b))$.}. Then, $\exists z\in (a,b)$ such that $f(z)=c$.
-    \end{corollary}
-    \begin{corollary}
-        All real numbers have a unique positive $n$-th root.
-    \end{corollary}
-    \subsubsection*{Continuity of inverse function}
-    \begin{definition}
-        Let $I\subset\RR$ be an interval and $f:I\rightarrow\RR$. We say that $f$ is \textit{increasing on $I$} if $f(x)\leq f(y)$ whenever $x\leq y$. We say that $f$ is \textit{decreasing on $I$} if $f(x)\geq f(y)$ whenever $x\leq y$\footnote{If the inequalities are strict, we say that $f$ is \textit{strictly increasing} or \textit{strictly decreasing}, respectively.}. We say that $f$ is \textit{monotonic} if it is either increasing or decreasing.
-    \end{definition}
-    \begin{theorem}
-        Let $f:(a,b)\rightarrow\RR$ be a continuous function. If $f$ is injective and continuous, then $f$ is monotonic. Moreover, $f^{-1}$ is also continuous on $f((a,b))$.
-    \end{theorem}
-    \subsubsection*{Classification of discontinuities}
-    \begin{definition}
-        Let $I\subset\RR$ be an interval and $f:I\rightarrow\RR$. Suppose $f$ is not continuous at $x_0\in I$. There are mainly four types of discontinuities:
-        \begin{enumerate}
-            \item \textit{Removable discontinuity}: The limit $\displaystyle\lim_{x\to x_0}f(x)$ exists but $$\lim_{x\to x_0}f(x)\ne f(x_0)$$
-            \item \textit{Jump discontinuity}: The one-sided limits $\displaystyle\lim_{x\to x_0^+}f(x)$ and $\displaystyle\lim_{x\to x_0^-}f(x)$ exist but $$\lim_{x\to x_0^+}f(x)\ne \lim_{x\to x_0^-}f(x)$$
-            \item \textit{Discontinuity of the first kind}: $$\text{Either }\lim_{x\to x_0^+}f(x)=\pm\infty\text{ or }\lim_{x\to x_0^-}f(x)=\pm\infty$$
-            \item \textit{Discontinuity of the second kind}: One one-sided limit does not exist.
-        \end{enumerate}
-    \end{definition}
-    \begin{center}
-        \begin{minipage}{0.49\linewidth}
-            \centering
-            \includestandalone[mode=image|tex,width=\linewidth]{Images/discontinuity1}
-            \captionof*{figure}{Removable discontinuity}
-        \end{minipage}\hfill
-        \begin{minipage}{0.49\linewidth}
-            \centering
-            \includestandalone[mode=image|tex,width=\linewidth]{Images/discontinuity2}
-            \captionof*{figure}{Jump discontinuity}
-        \end{minipage}\vspace{0.02\linewidth}
-        \begin{minipage}{0.49\linewidth}
-            \centering
-            \includestandalone[mode=image|tex,width=\linewidth]{Images/discontinuity3}
-            \captionof*{figure}{Discontinuity of the first kind}
-        \end{minipage}\hfill
-        \begin{minipage}{0.49\linewidth}
-            \centering
-            \includestandalone[mode=image|tex,width=\linewidth]{Images/discontinuity4}
-            \captionof*{figure}{Discontinuity of the second kind}
-        \end{minipage}
-        \captionof{figure}{Types of discontinuities}
-    \end{center}
-    \subsection{Exponential and logarithmic functions}
-    \begin{lemma}
-        Let $a\in\RR_{>0}$ and $f:\QQ\rightarrow\RR_{\geq 0}$ defined by $f(x)=a^x$. The function $f$ has the following properties:
-        \begin{enumerate}
-            \item $f(x+y)=f(x)f(y)$.
-            \item If $a>1$, $f$ is increasing. If $a<1$, $f$ is decreasing.
-            \item If $(a_n)\subset\QQ$ is a sequence with $\displaystyle\lim_{n\to\infty} a_n=0$, then $\displaystyle\lim_{n\to\infty} f(a_n)=1$.
-        \end{enumerate}
-    \end{lemma}
-    \begin{lemma}
-        Let $a,x\in\RR$ be such that $a>0$ and $(x_n)\subset\QQ$ be a sequence with $\displaystyle\lim_{n\to\infty} x_n=x$. Then, $\displaystyle\lim_{n\to\infty} a^{x_n}$ exists and does not depend on the sequence $(x_n)$. That is, if $(y_n)\subset\QQ$ is another sequence with $\displaystyle\lim_{n\to\infty} x_n=\lim_{n\to\infty} y_n=x$, then $\displaystyle\lim_{n\to\infty} a^{x_n}=\lim_{n\to\infty} a^{y_n}$.
-    \end{lemma}
-    \begin{definition}
-        Let $a\in\RR_{>0}$. We define the \textit{exponential function with base $a$} as the function $\tilde{f}:\RR\rightarrow\RR$ defined by $\displaystyle\tilde{f}(x)=\lim_{n\to\infty} a^{x_n}$, where $(x_n)$ is any sequence of rational numbers $\displaystyle\lim_{n\to\infty} x_n=x$.
-    \end{definition}
-    \begin{prop}
-        The function $g$ has the following properties:
-        \begin{enumerate}
-            \item If $x\in\QQ$, $\tilde{f}(x)=a^x$.
-            \item $\tilde{f}(x+y)=\tilde{f}(x)\tilde{f}(y)$.
-            \item If $a>1$, $\tilde{f}$ is increasing. If $a<1$, $\tilde{f}$ is decreasing.
-            \item $\tilde{f}(x)>0$ $\forall x\in\RR$.
-            \item $\tilde{f}$ is continuous.
-            \item If $a>1$, $\displaystyle\lim_{x\to\infty}\tilde{f}(x)=\infty$ and $\displaystyle\lim_{x\to-\infty}\tilde{f}(x)=0$.\par If $a<1$, $\displaystyle\lim_{x\to\infty}\tilde{f}(x)=0$ and $\displaystyle\lim_{x\to-\infty}\tilde{f}(x)=\infty$\footnote{From now on, we will denote $\tilde{f}(x)$ simply as $a^x$ $\forall x\in\RR$.}.
-        \end{enumerate}
-    \end{prop}
-    \begin{prop}
-        Let $a,x,y\in\RR$ be such that $a>0$. Then, ${(a^x)}^y=a^{xy}$.
-    \end{prop}
-    \begin{definition}
-        Let $a\in\RR_{>0}$. Since $a^x$ is continuous and monotonic and its image is $(0,\infty)$, it has an associated inverse defined in $(0,\infty)$. This function is denoted by $\log_a(x)$ and it is called \textit{logarithm with base $a$}\footnote{If the base of the logarithm is the number $\exp{}$, it is common to denote $\log_\exp{}(x)$ by $\ln(x)$.}.
-    \end{definition}
-    \begin{prop}
-        The logarithm with base $a\in\RR_{>0}$ has the following properties:
-        \begin{enumerate}
-            \item $\log_a$ is continuous.
-            \item If $a>1$, $\log_a$ is increasing. If $a<1$, $\log_a$ is decreasing.
-            \item If $a>1$, $\displaystyle\lim_{x\to 0}\log_a(x)=-\infty$ and $\displaystyle\lim_{x\to\infty}\log_a(x)=\infty$.\par If $a<1$, $\displaystyle\lim_{x\to0}\log_a(x)=\infty$ and $\displaystyle\lim_{x\to\infty}\log_a(x)=-\infty$.
-            \item $\log_a(xy)=\log_a(x)+\log_a(y)$.
-            \item $\log_a(x^y)=y\log_a(x)$.
-        \end{enumerate}
-    \end{prop}
-    \begin{prop}
-        Let $(a_n)$ be a sequence such that $\displaystyle\lim_{n\to\infty}a_n=\infty$. Then: $$\exp{}=\lim_{n\to\infty}{\left(1+\frac{1}{a_n}\right)}^{a_n}$$
-    \end{prop}
-    \begin{corollary}
-        Let $(a_n)$ be a sequence such that $\displaystyle\lim_{n\to\infty}a_n=\infty$ and $x\in\RR$. Then: $$\exp{x}=\lim_{n\to\infty}{\left(1+\frac{x}{a_n}\right)}^{a_n}$$
-    \end{corollary}
-    \begin{prop}
-        For all $x\in\RR_{\geq 0}$ we have: $$1+x\leq\exp{x}\leq 1+x\exp{x}$$
-    \end{prop}
-    \subsection{Differentiation}
-    \subsubsection*{Definition of derivative and elementary properties}
-    \begin{definition}
-        Let $f:(a,b)\rightarrow\RR$. We say that $f$ is \textit{differentiable at $x_0\in(a,b)$} if the following limit exists: $$\lim_{x\to x_0}\frac{f(x)-f(x_0)}{x-x_0}=\lim_{h\to 0}\frac{f(x_0+h)-f(x_0)}{h}$$
-        In this case, we denote this limit by $f'(x_0)$ and we refer to it as the \textit{derivative of $f$ at $x_0$}. We say $f$ is \textit{differentiable on $(a,b)$} if it is differentiable at each point of $(a,b)$.
-    \end{definition}
-    \begin{prop}
-        Let $I\subset\RR$ be an interval and $f:I\rightarrow\RR$ be a differentiable function at $x_0\in I$. The \textit{tangent line to the graph at the point $(x_0,f(x_0))$} is: $$y(x)=f(x_0)+f'(x_0)(x-x_0)$$ That is, the derivative of $f$ at $x_0$ is precisely the slope of the tangent line at the point $x_0$.
-    \end{prop}
-    \begin{lemma}
-        Let $I\subset\RR$ be an interval and $f:I\rightarrow\RR$ be a differentiable function at $x_0\in I$. Then, $f$ is continuous at $x_0$.
-    \end{lemma}
-    \subsubsection*{Differentiation rules}
-    \begin{prop}
-        Let $f,g$ be two functions defined on a neighbourhood of $a$ and differentiable at $a$. Then, $f+g$ and $fg$ are differentiable at $a$ and
-        \begin{enumerate}
-            \item $(f+a)'(a)=f'(a)+g'(a)$.
-            \item $(f\cdot g)'(a)=f'(a)g(a)+f(a)g'(a)$.
-        \end{enumerate}
-        If, moreover, $f(a)\ne 0$, then $\frac{1}{f}$ is defined on a neighbourhood of $a$, it is differentiable at $a$ and
-        \begin{enumerate}\setcounter{enumi}{2}
-            \item $\displaystyle\left(\frac{1}{f}\right)'(a)=-\frac{f'(a)}{{f(a)}^2}$.
-        \end{enumerate}
-    \end{prop}
-    \begin{prop}[Chain rule]
-        Let $g:(a,b)\rightarrow(c,d)$ and $f:(c,d)\rightarrow\RR$. Suppose that $g$ is differentiable at $x\in(a,b)$ and $f$ is differentiable at $g(x)\in(c,d)$. Then, $f\circ g$ is differentiable at $x$ and $$(f\circ g)'(x)=f'(g(x))g'(x)$$
-    \end{prop}
-    \begin{prop}[Inverse function rule]
-        Let $f:(a,b)\rightarrow\RR$ be an injective and continuous function on $(a,b)$ and differentiable at $c\in(a,b)$ with $f'(c)\ne 0$. Then, $f^{-1}$ is differentiable at $f(c)$ and $$(f^{-1})'(f(c))=\frac{1}{f'(c)}$$
-    \end{prop}
-    \begin{center}
-        \renewcommand{\arraystretch}{1.5}
-        \begin{tabular}{|c|c|}
-            \hline
-            $f(x)$       & $f'(x)$                                           \\
-            \hline
-            $x^\alpha$   & $\alpha x^{\alpha-1}$                             \\
-            $a^x$        & $a^x\ln a$                                        \\
-            $\log_a x$   & $\displaystyle \frac{1}{x\ln a}$                  \\
-            $\sin(x)$    & $\cos(x)$                                         \\
-            $\cos(x)$    & $-\sin(x)$                                        \\
-            $\tan(x)$    & $\displaystyle 1+\tan^2(x)=\frac{1}{\cos^2(x)}$   \\
-            $\cot(x)$    & $\displaystyle -1-\cot^2(x)=-\frac{1}{\sin^2(x)}$ \\
-            $\arcsin(x)$ & $\displaystyle \frac{1}{\sqrt{1-x^2}}$            \\
-            $\arccos(x)$ & $\displaystyle -\frac{1}{\sqrt{1-x^2}}$           \\
-            $\arctan(x)$ & $\displaystyle \frac{1}{1+x^2}$                   \\
-            $\arccot(x)$ & $\displaystyle -\frac{1}{1+x^2}$                  \\
-            \hline
-        \end{tabular}
-        \captionof{table}{Table of derivatives of elementary functions}
-    \end{center}
-    \subsubsection*{Basic differentiation theorems}
-    \begin{definition}
-        Let $I\subset\RR$ be an interval, $f:I\rightarrow\RR$ and $c\in I$. We say that $c$ is a \textit{local maximum of $f$} if exists an open interval $J\subset I$ with $c\in J$ such that $f(x)\leq f(c)$ $\forall x\in J$. We say that $c$ is a \textit{local minimum of $f$} if exists an open interval $J\subset I$ with $c\in J$ such that $f(x)\geq f(c)$ $\forall x\in J$. Finally, a \textit{local extremum} is either a local maximum or a local minimum.
-    \end{definition}
-    \begin{prop}
-        Let $I\subset\RR$ be an interval, $f:I\rightarrow\RR$ and $c\in I$ be a local extremum of $f$. If $f$ is differentiable at $c$, then $f'(c)=0$.
-    \end{prop}
-    \begin{theorem}[Rolle's theorem]
-        Let $f:[a,b]\rightarrow\RR$ be a continuous and differentiable function on $(a,b)$. Suppose $f(a)=f(b)$. Then, there exists a point $c\in (a,b)$ such that $f'(c)=0$.
-    \end{theorem}
-    \begin{theorem}[Mean value theorem]
-        Let $f:[a,b]\rightarrow\RR$ be a continuous function on $[a,b]$ and differentiable on $(a,b)$. Then, there exists a point $c\in (a,b)$ such that $$f(b)-f(a)=f'(c)(b-a)$$
-    \end{theorem}
-    \begin{corollary}
-        Let $f$ be a differentiable function on $(a,b)$ verifying that $f'(x)=0$ $\forall x\in(a,b)$. Then, $f$ is constant in $(a,b)$.
-    \end{corollary}
-    \begin{corollary}
-        Let $f$ be a differentiable function on $(a,b)$. If $f'(x)>0$ $\forall x\in(a,b)$, then $f$ is strictly increasing on $(a,b)$. Similarly, if $f'(x)<0$ $\forall x\in(a,b)$, then $f$ is strictly decreasing on $(a,b)$.
-    \end{corollary}
-    \begin{corollary}
-        Let $f$ be a differentiable function on a neighbourhood of $a$ and such that $f'$ is continuous on this neighbourhood. Suppose that $f'(a)\ne0$. Then, exists another neighbourhood of $a$ on which $f$ is invertible.
-    \end{corollary}
-    \begin{theorem}[Cauchy's mean value theorem]
-        Let $f,g:[a,b]\rightarrow\RR$ be continuous functions on $[a,b]$ and differentiable on $(a,b)$. Then, there exists a point $c\in (a,b)$ such that $$g'(c)(f(b)-f(a))=f'(c)(g(b)-g(a))$$
-    \end{theorem}
-    \begin{theorem}[L'H\^opital's rule]
-        Let $f$, $g$ be two functions defined on a neighbourhood of $a\in\RR\cup\{\pm\infty\}$ and such that either $\displaystyle\lim_{x\to a} f(x)=\lim_{x\to a} g(x)=0$ or $\displaystyle\lim_{x\to a} g(x)=\infty$. Suppose, moreover, that the limit $\displaystyle\lim_{x\to a} \frac{f'(x)}{g'(x)}$ exists. Then, the limit $\displaystyle\lim_{x\to a} \frac{f(x)}{g(x)}$ exists too and $$\lim_{x\to a} \frac{f(x)}{g(x)}=\lim_{x\to a} \frac{f'(x)}{g'(x)}$$
-    \end{theorem}
-    \begin{theorem}[Darboux's theorem]
-        Let $f:(a,b)\rightarrow\RR$ be a differentiable function and suppose that there exist $x,y\in (a,b)$, $x<y$, with $f'(x)f'(y)<0$. Then, there exists $z\in(x,y)$ such that $f'(z)=0$.
-    \end{theorem}
-    \subsection{Convexity and concavity}
-    \begin{definition}
-        We say that $f:I\rightarrow\RR$ is \textit{convex} if given any two points $a,b\in I$, $a<b$, the segment between $(a,f(a))$ and $(b,f(b))$ lies above the graph on $(a,b)$. That is: $$f(bt+(1-t)a)\leq tf(b)+(1-t)f(a)\quad \forall t\in[0,1]$$ We say that $f$ is \textit{concave} if given any two points $a,b\in I$, $a<b$, the segment between $(a,f(a))$ and $(b,f(b))$ lies below the graph on $(a,b)$. That is: $$f(bt+(1-t)a)\geq tf(b)+(1-t)f(a)\quad \forall t\in[0,1]\footnote{If the inequalities are strict, we say that $f$ is \textit{strictly convex} or \textit{strictly concave}, respectively.}$$
-    \end{definition}
-    \begin{center}
-        \begin{minipage}{0.49\linewidth}
-            \centering
-            \includestandalone[mode=image|tex,width=\linewidth]{Images/convexity}
-            \captionof*{figure}{Convex function}
-        \end{minipage}\hfill
-        \begin{minipage}{0.49\linewidth}
-            \centering
-            \includestandalone[mode=image|tex,width=\linewidth]{Images/concavity}
-            \captionof*{figure}{Concave function}
-        \end{minipage}
-        \captionof{figure}{}
-    \end{center}
-    \begin{lemma}
-        A function $f$ is convex on an interval $I$ is and only if $-f$ if concave on $I$.
-    \end{lemma}
-    \begin{lemma}
-        Let $f:I\rightarrow\RR$. $f$ is convex on $I$ if and only if $\forall a,x,b\in I$ with $a<x<b$ we have: $$\frac{f(x)-f(a)}{x-a}\leq\frac{f(b)-f(a)}{b-a}$$ Or, equivalently: $$\frac{f(b)-f(a)}{b-a}\leq\frac{f(b)-f(x)}{b-x}.$$
-        Similarly, $f$ is concave on $I$ if and only if $\forall a,x,b\in I$ with $a<x<b$ we have: $$\frac{f(x)-f(a)}{x-a}\geq\frac{f(b)-f(a)}{b-a}$$ Or, equivalently: $$\frac{f(b)-f(a)}{b-a}\geq\frac{f(b)-f(x)}{b-x}.$$
-    \end{lemma}
-    \begin{prop}
-        Let $f$ be a convex or concave function on an interval $I$. Then, $f$ is continuous on $I$.
-    \end{prop}
-    \begin{lemma}
-        Let $f$ be a differentiable function and $a<b$ be such that $f(a)=f(b)$. Then:
-        \begin{itemize}
-            \item If $f'$ is increasing, $f(x)\leq f(a)$ $\forall x\in(a,b)$.
-            \item If $f'$ is decreasing, $f(x)\geq f(a)$ $\forall x\in(a,b)$.
-        \end{itemize}
-    \end{lemma}
-    \begin{theorem}
-        Let $f$ be a differentiable function on an interval $I$. Then:
-        \begin{itemize}
-            \item $f$ is (strictly) convex if and only if $f'$ is (strictly) increasing.
-            \item $f$ is (strictly) concave if and only if $f'$ is (strictly) decreasing.
-        \end{itemize}
-    \end{theorem}
-    \begin{theorem}
-        Let $f$ be a differentiable function on an interval $I$. Then, $f$ is convex if and only if the graph lies above all its tangent lines. And similarly, $f$ is concave if and only if the graph lies below all its tangent lines.
-    \end{theorem}
-    \begin{definition}\label{RVF-second_derivative}
-        Let $f$ be a differentiable function on an interval $I$. If the function $f':I\rightarrow\RR$ is differentiable at $a\in I$, we say that $f$ is \textit{two times differentiable at $a$}. If this happens in all points of $I$, we say that $f$ is \textit{two times differentiable on $I$}. In this case we denote the derivative of $f'$ at the point $a$, $(f')'(a)$, by $f''(a)$ and we refer to it as \textit{second derivative of $f$ at $a$}.
-    \end{definition}
-    \begin{theorem}
-        Let $f$ be a function two times differentiable on $I$. Then:
-        \begin{enumerate}
-            \item $f$ is convex on $I$ if and only if $f''(x)\geq 0$ $\forall x\in I$.
-            \item $f$ is concave on $I$ if and only if $f''(x)\leq 0$ $\forall x\in I$.
-        \end{enumerate}
-    \end{theorem}
-    \begin{definition}
-        Let $f:I\rightarrow\RR$. We say that $f$ is convex at $x\in I$ if exists a neighbourhood $J\subset I$ of $x$ on which $f$ is convex. Analogously, we say that $f$ is concave at $x\in I$ if exists a neighbourhood $J\subset I$ of $x$ on which $f$ is concave.
-    \end{definition}
-    \begin{definition}
-        Let $f$ be a continuous function on $I$. We say $x\in I$ is an \textit{inflection point} if exists $\delta>0$ such that $f$ is convex (or concave) on $(x-\delta,x]$ and concave (or convex) on $[x,x+\delta)$.
-    \end{definition}
-    \begin{prop}
-        Let $f$ be a function two times differentiable on $I$. Then:
-        \begin{enumerate}
-            \item If $a$ is an inflection point, $f''(a)=0$.
-            \item Suppose that $f''$ is continuous at $a\in I$. Then:
-                  \begin{itemize}
-                      \item If $f''(a)\geq 0$, $f$ is convex at $a$.
-                      \item If $f''(a)\leq 0$, $f$ is concave at $a$.
-                  \end{itemize}
-        \end{enumerate}
-    \end{prop}
-    \subsection{Polynomial approximation}
-    \begin{definition}
-        Let $f$, $g$ be two functions defined on a neighbourhood of $a\in\RR$.  We say that $f$ and $g$ have \textit{contact of order $\geq n$ at $a$} if $$\lim_{x\to a}\frac{f(x)-g(x)}{{(x-a)}^n}=0$$
-    \end{definition}
-    \begin{definition}
-        Let $f$ be a function. Iterating the process in definition \ref{RVF-second_derivative}, one can define the notion of the \textit{$n$-th derivative of $f$ at the point $a\in\RR$}, denoted by $f^{(n)}(a)$.
-    \end{definition}
-    \begin{definition}
-        We say that a function $f$ is of \textit{class $\mathcal{C}^n$ at a point $a\in\RR$}, $n\in\NN$, if $f$ is $n$ times differentiable at a neighbourhood of $a$ and $f^{(n)}$ is continuous in this neighbourhood. We say that $f$ is of \textit{class $\mathcal{C}^\infty$ at $a$} if $f$ is of class $\mathcal{C}^n$ at $a$ $\forall n\in\NN$. Finally, if $p\in\NN\cup\{\infty\}$, we say that $f$ is of \textit{class $\mathcal{C}^p$, or $\mathcal{C}^p(I)$, on an interval $I$} it it is of class $\mathcal{C}^p$ at all points of $I$.
-    \end{definition}
-    \begin{lemma}
-        Let $f$, $g$ be functions $n$ times differentiable at $a\in\RR$. Then:
-        \begin{enumerate}
-            \item If $f^{(i)}(a)=g^{(i)}(a)$, $i=0,1,\ldots,n$, and $f^{(n)}$ and $g^{(n)}$ are continuous at $a$, then $f$ and $g$ have contact of order $\geq n$.
-            \item If $f$ and $g$ have contact of order $\geq n$, then $f^{(i)}(a)=g^{(i)}(a)$, $i=0,1,\ldots,n$.
-        \end{enumerate}
-    \end{lemma}
-    \begin{theorem}
-        Let $f$ be a function $n$ times differentiable at $a\in\RR$. Then, the polynomial
-        \begin{multline*}
-            P_{n,f,a}(x)=f(a)+f'(a)(x-a)+\frac{f''(a)}{2!}{(x-a)}^2+\\+\frac{f^{(3)}(a)}{3!}{(x-a)}^3+\cdots+\frac{f^{(n)}(a)}{n!}{(x-a)}^n
-        \end{multline*}
-        has contact with $f$ of order $\geq n$ at $a$. This polynomial is called \textit{Taylor polynomial of order $n$ of $f$ centered at $a$}.
-    \end{theorem}
-    \begin{prop}
-        Let $P$ and $Q$ be polynomials of degree $\leq n$ with order of contact $\geq n$ at a point $a\in\RR$. Then $P=Q$\footnote{This means that the Taylor polynomial $P_{n,f,a}(x)$ is the unique polynomial which has contact with a function $f$ of order $\geq n$ at a point $a$.}.
-    \end{prop}
-    \begin{theorem}
-        Let $f$ be a function $n$ times differentiable at $a\in\RR$. If $f'(a)=f''(a)=\cdots=f^{(n-1)}(a)=0$ and $f^{(n)}(a)\ne 0$ then:
-        \begin{enumerate}
-            \item If $n$ is odd, $a$ isn't a local extremum of $f$.
-            \item If $n$ is even and $f^{(n)}(a)>0$, $a$ is a local minimum of $f$.
-            \item If $n$ is even and $f^{(n)}(a)<0$, $a$ is a local maximum of $f$.
-        \end{enumerate}
-    \end{theorem}
-    \begin{theorem}
-        Let $f$ be a function $n+1$ times differentiable on a neighbourhood $I$ of $a\in\RR$. Let $P=P_{n,f,a}$, $R_n:=f-P$ and $x\in I$. Then:
-        \begin{enumerate}
-            \item Cauchy's formula: $$R_n(x)=\frac{f^{(n+1)}(\xi)}{n!}{(x-\xi)}^n(x-a)$$ for some $\xi\in\langle a,x\rangle$.
-            \item Lagrange's formula: $$R_n(x)=\frac{f^{(n+1)}(\eta)}{(n+1)!}{(x-a)}^{n+1}$$ for some $\eta\in\langle a,x\rangle$.
-            \item Integral formula: If $f^{(n+1)}$ is integrable\footnote{See definition \ref{RVF-integrable}.} on $[a,x]$: $$R_n(x)=\int_a^x\frac{f^{(n+1)}(t)}{n!}{(x-t)}^n\dd t$$
-        \end{enumerate}
-    \end{theorem}
-    \begin{definition}
-        We say that $f$ is \textit{analytic at $a$} if it's of class $\mathcal{C}^\infty$ on a neighbourhood $I$ of $a$ and $\displaystyle\lim_{n\to\infty}R_n(x)=0$  $\forall x\in I$.
-    \end{definition}
-    \begin{center}
-        \renewcommand*{\arraystretch}{2}
-        \begin{tabular}{|c|>{\centering\arraybackslash}m{6.5cm}|}
-            \hline
-            $f(x)$                       & Taylor polynomials                                                                                     \\
-            \hline
-            $\exp{x}$                    & $\displaystyle 1+x+\frac{x^2}{2!}+\frac{x^3}{3!}+\cdots+\frac{x^n}{n!}$                                \\
-            $\ln (1+x)$                  & $\displaystyle x-\frac{x^2}{2}+\frac{x^3}{3}-\frac{x^4}{4}+\cdots+{(-1)}^{n+1}\frac{x^n}{n}$           \\
-            $\sin(x)$                    & $\displaystyle x-\frac{x^3}{3!}+\frac{x^5}{5!}-\frac{x^7}{7!}+\cdots+{(-1)}^n\frac{x^{2n+1}}{(2n+1)!}$ \\
-            $\cos(x)$                    & $\displaystyle 1-\frac{x^2}{2!}+\frac{x^4}{4!}-\frac{x^6}{6!}+\cdots+{(-1)}^n\frac{x^{2n}}{(2n)!}$     \\
-            $\displaystyle\frac{1}{1-x}$ & $\displaystyle 1+x+x^2+x^3+\cdots+x^n$                                                                 \\
-            ${(1+x)}^\alpha$             & $\displaystyle 1+\alpha x+\cdots+\frac{\alpha(\alpha-1)\cdots(\alpha-(n-1))}{n!}x^n$                   \\
-            $\arctan(x)$                 & $\displaystyle x-\frac{x^3}{3}+\frac{x^5}{5}-\frac{x^7}{7}+\cdots+{(-1)}^n\frac{x^{2n+1}}{2n+1}$       \\
-            \hline
-        \end{tabular}
-        \captionof{table}{Taylor polynomials centered at 0 of some elementary functions}
-    \end{center}
-    \subsection{Riemann integral}
-    \subsubsection*{Construction of Riemann integral}
-    \begin{definition}
-        Let $I=[a,b]$ be an interval. A \textit{partition $\mathcal{P}$ of $I$} is a finite collection of points $a=t_0<t_1<\cdots<t_n=b$ of $I$. We denote by $\mathrm{P}(I)$ the set of all partitions of the interval $I$.
-    \end{definition}
-    \begin{definition}
-        Let $f:I\rightarrow\RR$ be a bounded function and $\mathcal{P}=\{t_i\}_{i=0}^n\in\mathrm{P}(I)$. We define the respective \textit{lower sum and upper sum of $f$ associated with $\mathcal{P}$} as:
-        $$L(f,\mathcal{P})=\sum_{i=1}^nm_i(t_i-t_{i-1})\quad U(f,\mathcal{P})=\sum_{i=1}^nM_i(t_i-t_{i-1})$$
-        where $m_i=\inf\{f(x_i):x_i\in[t_{i-1},t_i]\}$ and $M_i=\sup\{f(x_i):x_i\in[t_{i-1},t_i]\}$.
-    \end{definition}
-    \begin{definition}
-        Let $\mathcal{P},\mathcal{Q}\in\mathrm{P}(I)$ be two partitions. We say that \textit{$\mathcal{P}$ is finer than $\mathcal{Q}$}, $\mathcal{Q}\prec\mathcal{P}$, if $\mathcal{Q}\subset\mathcal{P}$.
-    \end{definition}
-    \begin{center}
-        \begin{minipage}{\linewidth}
-            \centering
-            \includestandalone[mode=image|tex,width=\linewidth]{Images/lower_sum}\\
-            \includestandalone[mode=image|tex,width=\linewidth]{Images/upper_sum}
-            \captionof{figure}{Lower (blue) and upper (red) sums of a function with three different partitions, each one finer than the previous one.}
-        \end{minipage}
-    \end{center}
-    \begin{prop}
-        Let $f:I\rightarrow\RR$ be a bounded function and $\mathcal{P},\mathcal{Q}\in\mathrm{P}(I)$ with $\mathcal{Q}\prec\mathcal{P}$. Then: $$L(f,\mathcal{Q})\leq L(f,\mathcal{P})\leq U(f,\mathcal{P})\leq U(f,\mathcal{Q})$$
-    \end{prop}
-    \begin{definition}
-        Let $I=[a,b]$ and $f:I\rightarrow\RR$ be a bounded function. We define the \textit{lower integral of $f$ on $I$} as: $$\lowint{a}{b}f(x)\dd x=\sup\{L(f,\mathcal{P}):\mathcal{P}\in\mathrm{P}(I)\}$$ Analogously, we define the \textit{upper integral of $f$ on $I$} as: $$\upint{a}{b}f(x)\dd x=\inf\{U(f,\mathcal{P}):\mathcal{P}\in\mathrm{P}(I)\}$$
-    \end{definition}
-    \begin{definition}\label{RVF-integrable}
-        Let $I=[a,b]$ and $f:I\rightarrow\RR$ be a bounded function. We say that \textit{$f$ is integrable on $I$} if $$\lowint{a}{b}f(x)\dd x=\upint{a}{b}f(x)\dd x$$ In this case, we denote the integral of $f$ on $I$ by $\displaystyle\int_a^b f(x)\dd x$.
-    \end{definition}
-    \begin{lemma}
-        Let $I=[a,b]$ and $f:I\rightarrow\RR$ be a bounded function. Then, $f$ is integrable on $I$ if and only if $\forall\varepsilon>0$ $\exists\mathcal{P}\in\mathrm{P}(I)$ such that: $$U(f,\mathcal{P})-L(f,\mathcal{P})<\varepsilon$$
-    \end{lemma}
-    \begin{theorem}
-        Let $I=[a,b]$ and $f:I\rightarrow\RR$ be a monotonic and bounded function. Then, $f$ is integrable on $I$.
-    \end{theorem}
-    \begin{definition}
-        Let $f:I\rightarrow\RR$ be a function. We say that \textit{$f$ is uniformly continuous on $I$} if $\forall\varepsilon>0$ $\exists\delta>0$ such that $|f(x)-f(y)|<\varepsilon$ whenever $|x-y|<\delta$.
-    \end{definition}
-    \begin{theorem}
-        Let $I=[a,b]$ and $f:I\rightarrow\RR$ be a continuous function. Then, $f$ is uniformly continuous at $I$.
-    \end{theorem}
-    \begin{theorem}
-        Let $I=[a,b]$ and $f:I\rightarrow\RR$ be a continuous function. Then, $f$ is integrable on $I$.
-    \end{theorem}
-    \subsubsection*{Properties of the integral}
-    \begin{prop}
-        Let $f$, $g$ be integrable functions on $[a,b]$ and $c\in\RR$. Then, $f+g$ and $cf$ are integrable on $I$ and
-        \begin{gather*}
-            \int_a^b[f(x)+g(x)]\dd x=\int_a^bf(x)\dd x+\int_a^bg(x)\dd x\\ \int_a^bcf(x)\dd x=c\int_a^bf(x)\dd x
-        \end{gather*}
-    \end{prop}
-    \begin{theorem}
-        Let $f$ be an integrable function on $[a,b]$ with $f([a,b])\subseteq[c,d]$ and $g$ be a continuous function on $[c,d]$. Then, $g\circ f$ is integrable on $[a,b]$.
-    \end{theorem}
-    \begin{corollary}
-        Let $f$ be an integrable function on $[a,b]$. Then, $f^2$ is integrable on $[a,b]$. And if there exists $\delta>0$ with $f(x)>\delta$ $\forall x\in [a,b]$, then $\frac{1}{f}$ is integrable on $[a,b]$.
-    \end{corollary}
-    \begin{corollary}
-        Let $f$, $g$ be integrable functions on $[a,b]$. Then, $fg$ is integrable on $[a,b]$.
-    \end{corollary}
-    \subsubsection*{Inequalities involving integrals}
-    \begin{prop}
-        Let $f$, $g$ be integrable functions on $[a,b]$ with $f(x)\leq g(x)$ $\forall x\in [a,b]$. Then: $$\int_a^bf(x)\dd x\leq\int_a^bg(x)\dd x$$
-    \end{prop}
-    \begin{corollary}
-        Let $f$ be an integrable function on $[a,b]$ with $m\leq f(x)\leq M$ $\forall x\in [a,b]$. Then: $$m(b-a)\leq\int_a^bf(x)\dd x\leq M(b-a)$$ If, moreover, $f$ is continuous, there exists $c\in[a,b]$ such that: $$\int_a^bf(x)\dd x=f(c)(b-a)$$
-    \end{corollary}
-    \begin{prop}
-        Let $f$ be an integrable function on $[a,b]$. Then, $|f|$ is integrable on $[a,b]$ and $$\left|\int_a^bf(x)\dd x\right|\leq\int_a^b|f(x)|\dd x$$
-    \end{prop}
-    \begin{prop}
-        Let $f$ be an integrable function on $[a,b]$ and $g$ be a function defined on $[a,b]$ distinct to $f$ on a finite number points. Then, $g$ is integrable on $[a,b]$ and $$\int_a^bg(x)\dd x=\int_a^bf(x)\dd x$$
-    \end{prop}
-    \subsubsection*{Fundamental theorem of calculus}
-    \begin{prop}
-        Let $f:[a,b]\rightarrow\RR$ and $b\in(a,c)$. $f$ is integrable on $[a,c]$ if and only if $f$ is integrable on $[a,b]$ and on $[b,c]$. Moreover: $$\int_a^cf(x)\dd x=\int_a^bf(x)\dd x+\int_b^cf(x)\dd x$$
-    \end{prop}
-    \begin{theorem}[Fundamental theorem of calculus]
-        Let $f$ be an integrable function on $[a,b]$. Then, $$F(t)=\int_a^tf(x)\dd x$$ is a continuous function on $[a,b]$. If, moreover, $f$ is continuous at $c\in[a,b]$, then $F$ is differentiable at $c$ and $F'(c)=f(c)$. Finally, if $f$ is continuous on $[a,b]$, then $F$ is differentiable on $[a,b]$ and $F'=f$. In this last case, the function $F$ is called \textit{primitive function of $f$}.
-    \end{theorem}
-    \begin{theorem}
-        Let $f$ be an integrable function on $[a,b]$ which has primitives. Then, these primitives are of the form: $$F(t)=k+\int_a^tf(x)\dd x$$ where $k\in\RR$. Moreover they satisfy $F'=f$ and $$\int_a^bf(x)\dd x=F(b)-F(a)$$
-    \end{theorem}
-    \begin{corollary}[Integration by parts]
-        Let $f$, $g$ be integrable functions on $[a,b]$ with primitives $F$ and $G$, respectively. Then: $$\int_a^bF(x)g(x)\dd x=F(b)G(b)-F(a)G(a)-\int_a^bf(x)G(x)\dd x$$
-    \end{corollary}
-    \begin{corollary}[Integration by substitution]
-        Let $\varphi:[c,d]\rightarrow[a,b]$ be a function of class $\mathcal{C}^1$ such that $\varphi(c)=a$ and $\varphi(d)=b$ and $f$ be a continuous function on $[a,b]$. Then: $$\int_a^bf(x)\dd x=\int_c^d(f\circ\varphi)(x)\varphi'(x)\dd x$$
-    \end{corollary}
-    \subsubsection*{Riemann sums}
-    \begin{definition}
-        Let $\mathcal{P}=\{t_i\}_{i=0}^n\in\mathrm{P}([a,b])$. A \textit{Riemann sum of $f$ associated with $\mathcal{P}$}, $S(f,\mathcal{P})$, is: $$S(f,\mathcal{P})=\sum_{i=1}^nf(x_i)(t_i-t_{i-1})$$ where $x_i\in[t_{i-1},t_i]$.
-    \end{definition}
-    \begin{theorem}
-        Let $f$ be a continuous function on $[a,b]$. Then, $\forall\varepsilon>0$ $\exists\delta>0$ such that if $\mathcal{P}=\{t_i\}_{i=0}^n\in\mathrm{P}([a,b])$ with $t_i-t_{i-1}<\delta$, then: $$\left|\int_a^bf(x)\dd x-S(f,\mathcal{P})\right|<\varepsilon$$ for all Riemann sums associated with $\mathcal{P}$.
-    \end{theorem}
-    \begin{corollary}
-        Let $f$ be a continuous function on $[a,b]$ and let $\mathcal{P}_n=\{t_i\}_{i=0}^n\in\mathrm{P}([a,b])$ be a sequence de partitions of $[a,b]$ such that $t_i-t_{i-1}<1/n$. Then, for all Riemann sums $S(f,\mathcal{P}_n)$ we have: $$\int_a^bf(x)\dd x=\lim_{n\to\infty}S(f,\mathcal{P}_n)$$
-    \end{corollary}
-    \subsubsection*{Geometric applications}
-    \begin{definition}
-        Let $f:[a,b]\rightarrow\RR$ and $\mathcal{P}=\{t_i\}_{i=0}^n\in\mathrm{P}([a,b])$. We define the \textit{length of the polygonal approximating the arc length of $f$ on $[a,b]$} as: $$\ell(f,\mathcal{P})=\sum_{i=1}^n\sqrt{{(t_i-t_{i-1})}^2+{(f(t_i)-f(t_{i-1}))}^2}$$
-    \end{definition}
-    \begin{lemma}
-        Let $f:I\rightarrow\RR$ and $\mathcal{P},\mathcal{Q}\in\mathrm{P}(I)$ with $\mathcal{Q}\prec\mathcal{P}$. Then, $\ell(f,\mathcal{P})\geq \ell(f,\mathcal{Q})$.
-    \end{lemma}
-    \begin{definition}
-        Let $f:I\rightarrow\RR$. If the set $\mathcal{L}:=\{\ell(f,\mathcal{P}):\mathcal{P}\in\mathrm{P}([a,b])\}$ is bounded from above, we say that the graph is \textit{rectifiable} and we define its length $\ell(f,[a,b])$ as: $$\ell(f,[a,b])=\sup \mathcal{L}$$
-    \end{definition}
-    \begin{prop}
-        Let $f$ be a function of class $\mathcal{C}^1([a,b])$. Then, $f$ is rectifiable on $[a,b]$ and $$\ell(f,[a,b])=\int_a^b\sqrt{1+{f'(x)}^2}\dd x$$
-    \end{prop}
-    \begin{definition}
-        Let $\varphi:[a,b]\rightarrow\RR^2$ with $\varphi(t)=(x(t),y(t))$ and $\mathcal{P}=\{t_i\}_{i=0}^n\in\mathrm{P}([a,b])$. We define the \textit{length of the polygonal approximating the arc length of $\varphi$ on $[a,b]$} as: $$\ell(\varphi,\mathcal{P})=\sum_{i=1}^n\sqrt{{[x(t_i)-x(t_{i-1})]}^2+{[y(t_i)-y(t_{i-1})]}^2}$$
-    \end{definition}
-    \begin{prop}
-        Let $\varphi:[a,b]\rightarrow\RR^2$ with $\varphi(t)=(x(t),y(t))$. Suppose that the functions $x(t)$, $y(t)$ are of class $\mathcal{C}^1([a,b])$. Then, the curve $\varphi$ is rectifiable on $[a,b]$ and $$\ell(\varphi,[a,b])=\int_a^b\sqrt{{[x'(t)]}^2+{[y'(t)]}^2}\dd x$$
-    \end{prop}
-    \begin{lemma}
-        Let $f$, $g$ be continuous functions on $[a,b]$. Then, $\forall\varepsilon>0$, $\exists\delta>0$ such that if $\mathcal{P}=\{t_i\}_{i=0}^n$ with $t_i-t_{i-1}<\delta$, then:
-        \begin{multline*}
-            \left|\int_a^b\sqrt{{f(x)}^2+{g(x)}^2}\dd x\right.-\\-\left.\sum_{i=1}^n(t_i-t_{i-1})\sqrt{{f(c_i)}^2+{g(d_i)}^2}\right|<\varepsilon
-        \end{multline*}
-        for any $c_i,d_i\in[t_{i-1},t_i]$, $i=1,\ldots,n$.
-    \end{lemma}
-    \begin{lemma}
-        Let $f$, $g$ be continuous functions on $[a,b]$. Then, $\forall\varepsilon>0$, $\exists\delta>0$ such that if $\mathcal{P}=\{t_i\}_{i=0}^n$ with $t_i-t_{i-1}<\delta$, then:
-        $$\left|\int_a^bf(x)g(x)\dd x-\sum_{i=1}^n(t_i-t_{i-1})f(c_i)g(d_i)\right|<\varepsilon$$
-        for any $c_i,d_i\in[t_{i-1},t_i]$, $i=1,\ldots,n$.
-    \end{lemma}
-    \begin{prop}[Surface of revolution]
-        Let $f:[a,b]\rightarrow\mathbb{R}_{>0}$ be a function of class $\mathcal{C}^1$. Then, the surface of the solid formed by rotating the area below the function $f(x)$ and between the lines $x = a$ and $x = b$ about the $x$-axis is given by: $$S_x=2\pi\int_a^bf(x)\sqrt{1+{f'(x)}^2}\dd x$$
-    \end{prop}
-    \begin{prop}[Surface of revolution]
-        Let $a>0$ and $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^1$. Then, the surface of the solid formed by rotating the area below the function $f(x)$ and between the lines $x = a$ and $x = b$ about the $y$-axis is given by: $$S_y=2\pi\int_a^bx\sqrt{1+{f'(x)}^2}\dd x$$
-    \end{prop}
-    \begin{prop}[Volume of revolution]
-        Let $f,g:[a,b]\rightarrow\RR_{>0}$ be bounded and integrable functions. Then, the volume of the solid formed by rotating the area between the curves of $f(x)$ and $g(x)$ and the lines $x = a$ and $x = b$ about the $x$-axis is given by: $$V_x=\pi\int_a^b\left|{f(x)}^2-{g(x)}^2\right|\dd x$$
-    \end{prop}
-    \begin{prop}[Volume of revolution]
-        Let $a>0$ and $f,g:[a,b]\rightarrow\RR$ be bounded and integrable functions. Then, the volume of the solid formed by rotating the area between the curves of $f(x)$ and $g(x)$ and the lines $x = a$ and $x = b$ about the $y$-axis is given by: $$V_y=\pi\int_a^bx\left|f(x)-g(x)\right|\dd x$$
-    \end{prop}
-    \begin{prop}[Center of masses]
-        The \textit{center of masses $(x_0,y_0)$ of a thin plate with uniformly density $\rho$} is: $$x_0=\frac{\displaystyle\int_a^bx\sqrt{1+{f'(x)}^2}dx}{\displaystyle\int_a^b\sqrt{1+{f'(x)}^2}dx}\quad y_0=\frac{\displaystyle\int_a^b f(x)\sqrt{1+{f'(x)}^2}dx}{\displaystyle\int_a^b\sqrt{1+{f'(x)}^2}dx}$$
-    \end{prop}
-    \subsubsection*{Calculation of primitives}
-    \begin{lemma}
-        Let $P(x),Q(x)\in\RR[x]$ be polynomials with $\deg P(x)<\deg Q(x)$. Suppose $Q(x)$ factorises as: $$Q(x)=\prod_{i=1}^n{(x-a_i)}^{r_i}\prod_{i=1}^m{(x^2+b_ix+c_i)}^{s_i}$$ with $b_i^2-4c_i<0$ for $i=1,\ldots,m$. Then, the function $\frac{P(x)}{Q(x)}$ can be expressed as:
-        $$\frac{P(x)}{Q(x)}=\sum_{i=1}^n\sum_{j=1}^{r_i}\frac{A_i^j}{{(x-a_i)^j}}+\sum_{i=1}^m\sum_{j=1}^{s_i}\frac{M_i^jx+N_i^j}{{(x^2+b_ix+c_i)^j}}$$ where $A_i^j,M_i^j,N_i^j\in\RR$ $\forall i,j$.
-    \end{lemma}
-    \begin{prop}
-        Let $P(x),Q(x)\in\RR[x]$ be polynomials. If $P(x)=C(x)Q(x)+R(x)$, then:
-        $$\int\frac{P(x)}{Q(x)}\dd x=\int C(x)\dd x+\int\frac{R(x)}{Q(x)}\dd x$$ where $\deg R(x)<\deg Q(x)$.
-    \end{prop}
-    \begin{lemma}
-        Let $P(x),Q(x)\in\RR[x]$ be polynomials with $\deg P(x)<\deg Q(x)$. Suppose $Q(x)$ factorises as: $$Q(x)=\prod_{i=1}^n{(x-a_i)}^{r_i}\prod_{i=1}^m{(x^2+b_ix+c_i)}^{s_i}$$ with $b_i^2-4c_i<0$ for $i=1,\ldots,m$. Then, the function $\frac{P(x)}{Q(x)}$ can be expressed as:
-        $$\frac{P(x)}{Q(x)}=\left(\frac{A_1(x)}{Q_1(x)}\right)'+\frac{A_2(x)}{Q_2(x)}$$ where $Q_2(x)=\prod_{i=1}^n(x-a_i)\prod_{i=1}^m(x^2+b_ix+c_i)$, $Q_1(x)=\frac{Q(x)}{Q_2(x)}$ and $A_i\in\RR[x]$ with $\deg A_i(x)<\deg Q_i(x)$, $i=1,2$.
-    \end{lemma}
-    \begin{theorem}[Hermite reduction method]
-        Let $P(x),Q(x)\in\RR[x]$ be polynomials. Suppose $$\frac{P(x)}{Q(x)}=\left(\frac{A_1(x)}{Q_1(x)}\right)'+\frac{A_2(x)}{Q_2(x)}$$ for some polynomials $Q_i(x),A_i(x)\in\RR[x]$. Then:
-        $$\int\frac{P(x)}{Q(x)}\dd x=\frac{A_1(x)}{Q_1(x)}+\int\frac{A_2(x)}{Q_2(x)}\dd x$$
-    \end{theorem}
+  \subsection{The real line}
+  \begin{definition}
+    Let $(K,+,\cdot)$ be a field. We say that $K$, together with a total order relation $\leq$\footnote{See definition \ref{FM-order_relations}}, is an \textit{ordered field} if the following properties are satisfied:
+    \begin{enumerate}
+      \item If $x,y,z\in K$ are such that $x\leq y$, then $x+z\leq y+z$.
+      \item If $x,y\in K$ are such that $x\geq0$ and $y\geq0$, then $x\cdot y\geq 0$.
+    \end{enumerate}
+  \end{definition}
+  \begin{definition}
+    Let $K$ be an ordered field and $A\subset K$. We say that $A$ is \textit{bounded from above} if $\exists M\in K$ (called \textit{upper bound of $A$}) such that $x\leq M$ $\forall x\in A$. Analogously, we say that $A$ is \textit{bounded from below} if $\exists m\in K$ (called \textit{lower bound of $A$}) such that $x\geq m$ $\forall x\in A$.
+  \end{definition}
+  \begin{definition}
+    Let $K$ be an ordered field and $A\subset K$ be a set bounded from above. We say that an upper bound $\alpha$ of $A$ is the \textit{supremum of $A$}, denoted by $\sup A$, if any other upper bound $\alpha'$ satisfies $\alpha'\geq\alpha$.
+    Analogously if $B\subset K$ is a set bounded from below, we say that a lower bound $\beta$ of $B$ is the \textit{infimum of $B$}, denoted by $\inf B$, if any other lower bound $\beta'$ satisfies $\beta'\leq\beta$.
+  \end{definition}
+  \begin{prop}
+    Let $K$ be an ordered field and $A\subset K$. If $M$ is an upper bound of $A$, then $-M$ is a lower bound of $-A$. Similarly, if $m$ is an lower bound of $A$, then $-m$ is a upper bound of $-A$
+  \end{prop}
+  \begin{prop}
+    Let $K$ be an ordered field and $A,B\subset K$. If $\alpha=\sup A$ and $\beta=\inf B$, then: $$-\alpha=\inf(-A)\qquad-\beta=\sup(-B)$$
+  \end{prop}
+  \begin{prop}
+    The supremum of a set, if exists, is unique.
+  \end{prop}
+  \begin{theorem}[Supremum axiom]
+    There exists a unique field with the property that any bounded set from above has a supremum: the field of real numbers $\RR$.
+  \end{theorem}
+  \begin{prop}
+    Natural numbers are not bounded from above in $\RR$.
+  \end{prop}
+  \begin{corollary}[Archimedean property]
+    Let $\alpha\in\RR$. Then, $\exists n\in\NN$ such that $\alpha<n$.
+  \end{corollary}
+  \begin{corollary}
+    Let $\alpha\in\RR_{>0}$. Then, $\exists n\in\NN$ such that $0<\frac{1}{n}<\alpha$.
+  \end{corollary}
+  \begin{prop}
+    Let $x,y\in\RR$ such that $x<y$. Then, there exist numbers $z\in\RR\setminus\QQ$ and $q\in\QQ$ such that $x<z<y$ and $x<q<y$.
+  \end{prop}
+  \begin{definition}
+    Given $x,y\in\RR$ such that $x<y$ we define:
+    \begin{itemize}
+      \item $(x,y)=\{z\in\RR:x<z<y\}$.
+      \item $[x,y)=\{z\in\RR:x\leq z<y\}$.
+      \item $(x,y]=\{z\in\RR:x<z\leq y\}$.
+      \item $[x,y]=\{z\in\RR:x\leq z\leq y\}$.
+    \end{itemize}
+  \end{definition}
+  \begin{lemma}
+    Let $K$ be an ordered field and $A\subset K$ be a set. If $\alpha=\sup A$, then $\forall \varepsilon>0$ the interval $(\alpha-\varepsilon,\alpha]$ contains points of $A$.
+  \end{lemma}
+  \begin{definition}
+    Let $x\in\RR$. We define the \textit{absolute values $|x|$ of $x$} as:
+    \begin{equation*}
+      |x|=\left\{
+      \begin{array}{ccc}
+        x  & \text{if} & x\geq 0 \\
+        -x & \text{if} & x<0
+      \end{array}
+      \right.
+    \end{equation*}
+  \end{definition}
+  \begin{lemma}
+    Let $x,y\in\RR$. Then:
+    \begin{enumerate}
+      \item $|x|\geq 0$.
+      \item $|x|=0\iff x=0$.
+      \item $|xy|=|x||y|$.
+      \item $|x+y|\leq|x|+|y|$. \textit{(Triangular inequality)}
+    \end{enumerate}
+  \end{lemma}
+  \begin{definition}
+    Let $x\in\RR$. A \textit{neighbourhood of $x$} is any open interval containing $x$.
+  \end{definition}
+  \subsubsection{Infinite and countable sets}
+  \begin{definition}
+    A $X\ne\varnothing$ is \textit{infinite} if there exist $\varnothing\ne A\subset X$ and $\phi:X\rightarrow A$ such that $\phi$ is a bijection. If no such $A$ and $\phi$ exist, $X$ is \textit{finite}.
+  \end{definition}
+  \begin{prop}
+    Let $X$, $Y$ be sets such that $X\subseteq Y$. If $X$ is infinite, $Y$ is infinite.
+  \end{prop}
+  \begin{prop}
+    Let $X\subset\NN$. $X$ is finite if and only if $X$ is bounded.
+  \end{prop}
+  \begin{definition}
+    Let $A$ be a set. We say that $A$ is \textit{countable} if there exists a bijective function from $A$ to $\NN$. We say that $A$ is \textit{uncountable} if there is no such bijection.
+  \end{definition}
+  \begin{prop}
+    Any infinite subset of $\NN$ is countable.
+  \end{prop}
+  \begin{corollary}
+    Any subset of a countable set is either finite or countable.
+  \end{corollary}
+  \begin{corollary}
+    Let $A$ be an infinite set. $A$ is countable if and only if there exists an injective function from $A$ to $\NN$.
+  \end{corollary}
+  \begin{prop}
+    If $A$ and $B$ are countable sets, then $A\times B$ is also countable.
+  \end{prop}
+  \begin{theorem}
+    $\QQ$ is countable.
+  \end{theorem}
+  \begin{theorem}
+    $\RR$ is uncountable.
+  \end{theorem}
+  \subsection{Sequences}
+  \subsubsection{Limit notion}
+  \begin{definition}
+    A \textit{sequence of real numbers} is an enumerated collection of real numbers. More formally, a sequence is a function $a:\NN\rightarrow\RR$. The number $a(n)$ is usually denoted by $a_n$ and the whole sequence by $(a_n)$.
+  \end{definition}
+  \begin{definition}
+    A sequence $(a_n)$ is \textit{bounded from above} if there is a real number $M$ such that $a_n\leq M$ $\forall n\in\NN$.
+    Analogously, $(a_n)$ is \textit{bounded from below} if there is a real number $m$ such that $a_n\geq m$ $\forall n\in\NN$.
+    Finally, we say that $(a_n)$ is \textit{bounded} if there exist $m,M\in\RR$ such that $m\leq a_n\leq M$ $\forall n\in\NN$.
+  \end{definition}
+  \begin{definition}[Limit]
+    Let $(a_n)$ be a sequence of real numbers and $\ell\in\RR$. We say that $$\lim_{n\to\infty} a_n=\ell\text{ if }\forall\varepsilon>0\;\exists n_0:|a_n-\ell|<\varepsilon\quad\forall n>n_0.$$
+    We say that $$\lim_{n\to\infty} a_n=\pm\infty\text{ if }\forall M>0\;\exists n_0:\pm a_n>M\;\forall n>n_0.$$
+  \end{definition}
+  \begin{definition}
+    We say a sequence is \textit{convergent} if it has a limit, and \textit{divergent} otherwise.
+  \end{definition}
+  \begin{lemma}
+    The limit of a convergent sequence is unique.
+  \end{lemma}
+  \begin{lemma}
+    Let $(a_n)$ be a convergent sequence. Then $(a_n)$ is bounded. Moreover, if $m\leq a_n\leq M$ $\forall n\in\NN$, then $\displaystyle m\leq \lim_{n\to\infty} a_n\leq M$.
+  \end{lemma}
+  \begin{lemma}
+    Let $(a_n)$ and $(b_n)$ be convergent sequences with respective limits $\alpha$ and $\beta$. Then:
+    \begin{enumerate}
+      \item The sequences $(a_n+b_n)$ and $(a_nb_n)$ are convergents and $$\lim_{n\to\infty} a_n+b_n=\alpha+\beta\qquad\lim_{n\to\infty} a_n\cdot b_n=\alpha\cdot \beta$$
+      \item If $\alpha\ne 0$, then $a_n\ne 0$ for $n$ sufficiently large, the sequence $\displaystyle\left(\frac{b_n}{a_n}\right)$ is convergent and $$\lim_{n\to\infty}\frac{b_n}{a_n}=\frac{\beta}{\alpha}$$
+    \end{enumerate}
+  \end{lemma}
+  \begin{definition}
+    Let $(a_n)$ be a sequence. We say $(a_n)$ is \textit{monotonically increasing} if $a_n\leq a_{n+1}$ $\forall n\in\NN$. Analogously, we say $(a_n)$ is \textit{monotonically decreasing} if $a_n\geq a_{n+1}$ $\forall n\in\NN$\footnote{If the inequalities are strict, we say that $(a_n)$ is \textit{strictly increasing} or \textit{strictly decreasing}, respectively.}. Finally, we say $(a_n)$ is \textit{monotonic} if it is either monotonically increasing or monotonically decreasing.
+  \end{definition}
+  \begin{theorem}
+    All monotonic and bounded sequences are convergent.
+  \end{theorem}
+  \begin{lemma}
+    Let $(a_n)$ and $(b_n)$ be two sequences verifying $a_n\leq b_n$ $\forall n\in\NN$. Then, $\displaystyle\lim_{n\to\infty} a_n\leq\lim_{n\to\infty} b_n$.
+  \end{lemma}
+  \begin{prop}[Squeeze theorem]
+    Let $(a_n)$, $(b_n)$ and $(c_n)$ be three sequences verifying $a_n\leq b_n\leq c_n$ $\forall n\in\NN$ and such that $(a_n)$ and $(c_n)$ are convergent. Suppose that $\displaystyle\lim_{n\to\infty} a_n=\lim_{n\to\infty} c_n=\ell$. Then, $(b_n)$ is convergent and $\displaystyle\lim_{n\to\infty} b_n=\ell$.
+  \end{prop}
+  \begin{lemma}
+    Let $p\in\RR_{>0}$ and $\alpha,x\in\RR$. Then:
+    \begin{enumerate}
+      \item $\displaystyle\lim_{n\to\infty}\frac{1}{n^p}=0$.
+      \item $\displaystyle\lim_{n\to\infty}\sqrt[n]{p}=1$.
+      \item $\displaystyle\lim_{n\to\infty}\sqrt[n]{n}=1$.
+      \item If $x>1$, $\displaystyle\lim_{n\to\infty}\frac{n^\alpha}{x^n}=0$.
+      \item If $x<1$, $\displaystyle\lim_{n\to\infty} x^n=0$.
+    \end{enumerate}
+  \end{lemma}
+  \begin{theorem}[Root test]
+    Let $(a_n)\geq 0$ be a sequence. Suppose that the limit $\displaystyle \ell=\lim_{n\to\infty}\sqrt[n]{a_n}$ exists.
+    \begin{enumerate}
+      \item If $\displaystyle \ell<1\implies\lim_{n\to\infty}a_n=0$.
+      \item If $\displaystyle \ell>1\implies\lim_{n\to\infty}a_n=+\infty$.
+    \end{enumerate}
+  \end{theorem}
+  \begin{theorem}[Ratio test]
+    Let $(a_n)\geq 0$ be a sequence. Suppose that the limit $\displaystyle \ell=\lim_{n\to\infty}\frac{a_{n+1}}{a_n}$ exists.
+    \begin{enumerate}
+      \item If $\displaystyle \ell<1\implies\lim_{n\to\infty}a_n=0$.
+      \item If $\displaystyle \ell>1\implies\lim_{n\to\infty}a_n=+\infty$.
+    \end{enumerate}
+  \end{theorem}
+  \begin{theorem}
+    Let $(a_n)\geq 0$ be a sequence. If $\displaystyle \lim_{n\to\infty}\frac{a_{n+1}}{a_n}=\ell$, then $\displaystyle \lim_{n\to\infty}\sqrt[n]{a_n}=\ell$.
+  \end{theorem}
+  \subsubsection{The number $\exp{}$}
+  \begin{definition}
+    We define the sequences $(S_n)$ and $(T_n)$ as:
+    $$S_n=1+1+\frac{1}{2!}+\frac{1}{3!}+\cdots+\frac{1}{n!}\qquad T_n={\left(1+\frac{1}{n}\right)}^n$$
+  \end{definition}
+  \begin{prop}
+    The sequences $(S_n)$ and $(T_n)$ are convergent and have the same limit. This limit is denoted by $\exp{}$ and it's equal to $\exp{}=2.71828...$
+  \end{prop}
+  \begin{theorem}
+    The number $\exp{}$ is irrational.
+  \end{theorem}
+  \subsubsection{Subsequences}
+  \begin{definition}[Subsequence]
+    Let $(a_n)$ be a sequence of real numbers and $(k_n)$ be an increasing sequence of natural numbers. The sequence $(a_{k_n})$ is called a \textit{subsequence of $(a_n)$}.
+  \end{definition}
+  \begin{lemma}
+    Let $(a_n)$ be a sequence. If $\displaystyle\lim_{n\to\infty} a_n=\ell$, then any subsequence of $(a_n)$ has limit $\ell$.
+  \end{lemma}
+  \begin{definition}
+    Let $(a_n)$ be a sequence. We say $p$ is an \textit{accumulation point of $(a_n)$} if $\forall\varepsilon>0$ and $\forall n_0\in\NN$ $\exists n>n_0$ such that $|a_n-p|<\varepsilon$.
+  \end{definition}
+  \begin{prop}
+    Let $(a_n)$ be a sequence. $p$ is an accumulation point of $(a_n)$ if and only if there is a subsequence $(a_{k_n})$ of $(a_n)$ with $\displaystyle\lim_{n\to\infty}a_{k_n}=p$.
+  \end{prop}
+  \begin{corollary}
+    A convergent sequence has its limit as the unique accumulation point.
+  \end{corollary}
+  \begin{prop}
+    All sequences have a monotonic subsequence.
+  \end{prop}
+  \begin{theorem}[Bolzano-Weierstra\ss\space theorem]
+    All bounded sequences have a convergent subsequence.
+  \end{theorem}
+  \begin{prop}
+    Let $(a_n)$ be a bounded sequence. Then, $(a_n)$ is convergent if and only if it has a unique accumulation point.
+  \end{prop}
+  \begin{definition}
+    Let $(a_n)$ be a sequence. We define the \textit{limit superior of $(a_n)$} as:
+    $$\limsup_{n\to\infty}a_n:=\inf\{\sup\{x_m:m\geq n\}:n\geq 0\}$$
+    We define the \textit{limit inferior of $(a_n)$} as:
+    $$\liminf_{n\to\infty}a_n:=\sup\{\inf\{x_m:m\geq n\}:n\geq 0\}$$
+  \end{definition}
+  \begin{prop}
+    Let $(a_n)$ be a sequence. Then $\displaystyle\limsup_{n\to\infty}a_n$ and $\displaystyle\liminf_{n\to\infty}a_n$ always exist and $$\liminf_{n\to\infty}a_n\leq\limsup_{n\to\infty}a_n$$
+    If, moreover, $(a_n)$ is bounded, then for all accumulation point $p\in\RR$ of $(a_n)$ we have:
+    $$\liminf_{n\to\infty}a_n\leq p\leq\limsup_{n\to\infty}a_n$$
+  \end{prop}
+  \begin{prop}
+    Let $(a_n)$ be a bounded sequence. Then: $$(a_n)\text{ is convergent}\iff \liminf_{n\to\infty} a_n=\limsup_{n\to\infty} a_n$$ In this case we have: $$\lim_{n\to\infty} a_n=\limsup_{n\to\infty} a_n=\liminf_{n\to\infty} a_n$$
+  \end{prop}
+  \subsubsection{Cauchy condition}
+  \begin{definition}[Cauchy sequence]
+    We say that a sequence $(a_n)$ is a \textit{Cauchy sequence} if $\forall \varepsilon>0$ $\exists n_0$ such that $|a_n-a_m|<\varepsilon$ $\forall n,m>n_0$.
+  \end{definition}
+  \begin{theorem}
+    A sequence is convergent if and only if it's a Cauchy sequence.
+  \end{theorem}
+  \begin{theorem}[Stolz-Cesàro theorem]
+    Let $(a_n)$ be a strictly increasing sequence and $(b_n)$ be any other sequence. Suppose that $$\lim_{n\to\infty}\frac{b_n-b_{n-1}}{a_n-a_{n-1}}=\ell\in\RR\cup\{\pm\infty\}$$ Then:
+    \begin{enumerate}
+      \item If $\displaystyle\lim_{n\to\infty} a_n=\pm\infty$, $\displaystyle\lim_{n\to\infty}\frac{b_n}{a_n}=\ell$.
+      \item If $\displaystyle\lim_{n\to\infty} b_n=\displaystyle\lim_{n\to\infty} a_n=0$, $\displaystyle\lim_{n\to\infty}\frac{b_n}{a_n}=\ell$.
+    \end{enumerate}
+  \end{theorem}
+  \subsection{Continuity}
+  \subsubsection{Limit of a function}
+  \begin{definition}
+    Let $f:[a,b]\rightarrow\RR$ be a function and $x_0\in(a,b)$. We say that $\ell$ is \textit{the limit of the function $f$ at the point $x_0$}, denoted by $\displaystyle\lim_{x\to x_0}f(x)=\ell$, if $\forall\varepsilon>0$ $\exists\delta>0$ such that $|f(x)-\ell|<\varepsilon$ whenever $|x-x_0|<\delta$.
+  \end{definition}
+  \begin{lemma}
+    Let $f:(a,b)\rightarrow\RR$ be a function and $x_0\in(a,b)$. Then, $\displaystyle\lim_{x\to x_0}f(x)=\ell$ if and only if for any sequence $(a_n)\subset(a,b)\setminus\{x_0\}$ with $\displaystyle\lim_{n\to\infty} a_n=x_0$ we have $\displaystyle\lim_{n\to\infty}  f(a_n)=\ell$.
+  \end{lemma}
+  \begin{lemma}
+    The limit of a function at a point, if exists, is unique.
+  \end{lemma}
+  \begin{prop}
+    Let $f,g:(a,b)\rightarrow\RR$, $x_0\in(a,b)$ and suppose that $\displaystyle\lim_{x\to x_0}f(x)=\ell_1$ and $\displaystyle\lim_{x\to x_0}g(x)=\ell_2$. Then, the following properties are satisfied:
+    \begin{enumerate}
+      \item $\displaystyle\lim_{x\to x_0}(f+g)(x)=\ell_1+\ell_2$.
+      \item $\displaystyle\lim_{x\to x_0}(f\cdot g)(x)=\ell_1\cdot\ell_2$.
+      \item If $\ell_1>0$, then $f(x)>0$ on a neighbourhood of $x_0$. And if $\ell_1<0$, then $f(x)<0$ on a neighbourhood of $x_0$. Moreover in both cases $\displaystyle\lim_{x\to x_0}\left(\frac{1}{f}\right)(x)=\frac{1}{\ell_1}$.
+    \end{enumerate}
+  \end{prop}
+  \begin{definition}
+    Let $I\subset\RR$ be an interval and $f:I\rightarrow\RR$. We say that $f$ is \textit{bounded on $I$} if there are $m,M\in\RR$ such that $$m\leq f(x)\leq M\quad\forall x\in I$$
+  \end{definition}
+  \begin{lemma}
+    Let $I\subset\RR$ be an interval, $f:I\rightarrow\RR$ and $x_0\in I$. If the limit of $f$ at $x_0$ exists, then $f$ is bounded on a neighbourhood of $x_0$.
+  \end{lemma}
+  \begin{definition}
+    Let $I\subset\RR$ be an interval, $f:I\rightarrow\RR$ and $x_0\in I$. We say that the limit of $f$ at $x_0$ is infinite, denoted by $\displaystyle\lim_{x\to x_0}f(x)=\pm \infty$, if $\forall\varepsilon>0$ $\exists\delta>0$ such that $\pm f(x)>\varepsilon$ whenever $|x-x_0|<\delta$.
+  \end{definition}
+  \begin{lemma}
+    Let $f:(a,b)\rightarrow\RR$ be a function and $x_0\in(a,b)$. Then, $\displaystyle\lim_{x\to x_0}f(x)=\pm\infty$ if and only if for all sequence $(a_n)\subset(a,b)\setminus\{x_0\}$ with $\displaystyle\lim_{n\to\infty}a_n=x_0$, we have $\displaystyle\lim_{n\to\infty}f(a_n)=\pm\infty$.
+  \end{lemma}
+  \begin{definition}
+    Let $I\subset\RR$ be an interval, $f:I\rightarrow\RR$ and $x_0\in I$. We say that $\ell$ is the \textit{right-sided limit of $f$ at $x_0$}, denoted by $\displaystyle\lim_{x\to x_0^+}f(x)=\ell$, if $\forall\varepsilon>0$ $\exists\delta>0$ such that $|f(x)-\ell|<\varepsilon$ whenever $x-x_0<\delta$. Analogously, we say that $\ell$ is the \textit{left-sided limit of $f$ at $x_0$}, denoted by $\displaystyle\lim_{x\to x_0^-}f(x)=\ell$, if $\forall\varepsilon>0$ $\exists\delta>0$ such that $|f(x)-\ell|<\varepsilon$ whenever $x_0-x<\delta$.
+  \end{definition}
+  \begin{lemma}
+    Let $f:(a,b)\rightarrow\RR$ and $x_0\in(a,b)$. Then: $$\lim_{x\to x_0}f(x)=\ell\iff\lim_{x\to x_0^+}f(x)=\lim_{x\to x_0^-}f(x)=\ell$$
+  \end{lemma}
+  \begin{definition}
+    Let $f:(a,\infty)\rightarrow\RR$. We say that $\ell$ is the \textit{limit of $f$ at infinity}, denoted by $\displaystyle\lim_{x\to\infty}f(x)=\ell$, if $\forall\varepsilon>0$ $\exists K>a$ such that $|f(x)-\ell|<\varepsilon$ for all $x>K$.
+  \end{definition}
+  \begin{definition}
+    Let $f:(a,\infty)\rightarrow\RR$. We say that the limit of $f$ at infinity is infinity, denoted by $\displaystyle\lim_{x\to\infty}f(x)=\pm\infty$, if $\forall K>0$ $\exists M>a$ such that $\pm f(x)>K$ for all $x>M$.
+  \end{definition}
+  \subsubsection{Continuity}
+  \begin{definition}
+    Let $I\subset\RR$ be an interval, $f:I\rightarrow\RR$ and $x_0\in I$. We say that $f$ is \textit{continuous at $x_0$} if the limit of $f$ at $x_0$ exists and it's equal to $f(x_0)$\footnote{If $I$ contains one of its endpoints, the continuity in these points must be defined with the notion of one-sided limit.}. We say that $f$ is \textit{continuous on $I$} if it's continuous at all points of $I$.
+  \end{definition}
+  \begin{lemma}
+    Let $I\subset\RR$ be an interval and $f:I\rightarrow\RR$. $f$ is continuous at $x_0\in I$ if and only if for all sequence $(a_n)\subset I$ with $\displaystyle\lim_{n\to\infty} a_n=x_0$ we have that $\displaystyle\lim_{n\to\infty} f(a_n)=f(x_0)$.
+  \end{lemma}
+  \begin{prop}
+    Let $I\subset\RR$ be an interval and $f,g:I\rightarrow \RR$ be continuous functions at $x_0\in I$. Then:
+    \begin{enumerate}
+      \item $f+g$ and $f\cdot g$ are continuous at $x_0$.
+      \item If $f(x_0)>0$, then $f(x)>0$ on a neighbourhood of $x_0$. And if $f(x_0)<0$, then $f(x)<0$ on a neighbourhood of $x_0$. Moreover, in both cases, $\frac{1}{f}$ is continuous at $x_0$.
+    \end{enumerate}
+  \end{prop}
+  \begin{prop}
+    Let $I,J\subset\RR$ be intervals, $f:I\rightarrow\RR$ and $g:J\rightarrow\RR$. Let $x_0\in I$ with $f(x_0)\in J$ and suppose that $f$ is continuous at $x_0$ and $g$ is continuous at $f(x_0)$. Then, $g\circ f$ is continuous at $x_0$.
+  \end{prop}
+  \begin{theorem}[Weierstra\ss\space theorem]
+    Let $f:[a,b]\rightarrow\RR$ be a continuous function. Then, $f$ is bounded on $[a,b]$. Moreover, $\exists m,M\in[a,b]$ such that: $$f(m)\leq f(x)\leq f(M)\quad\forall x\in [a,b]$$
+  \end{theorem}
+  \begin{theorem}[Bolzano's theorem]
+    Let $f:[a,b]\rightarrow\RR$ be a continuous function. If $f(a)\cdot f(b)<0$, then $\exists c\in(a,b)$ such that $f(c)=0$.
+  \end{theorem}
+  \begin{corollary}[Intermediate value theorem]
+    Let $f:[a,b]\rightarrow\RR$ be a continuous function and $c\in\langle f(a), f(b)\rangle$\footnote{The interval $\langle a,b\rangle$ is defined as $\langle a,b\rangle:=(\min(a,b),\max(a,b))$.}. Then, $\exists z\in (a,b)$ such that $f(z)=c$.
+  \end{corollary}
+  \begin{corollary}
+    All real numbers have a unique positive $n$-th root.
+  \end{corollary}
+  \subsubsection{Continuity of inverse function}
+  \begin{definition}
+    Let $I\subset\RR$ be an interval and $f:I\rightarrow\RR$. We say that $f$ is \textit{increasing on $I$} if $f(x)\leq f(y)$ whenever $x\leq y$. We say that $f$ is \textit{decreasing on $I$} if $f(x)\geq f(y)$ whenever $x\leq y$\footnote{If the inequalities are strict, we say that $f$ is \textit{strictly increasing} or \textit{strictly decreasing}, respectively.}. We say that $f$ is \textit{monotonic} if it is either increasing or decreasing.
+  \end{definition}
+  \begin{theorem}
+    Let $f:(a,b)\rightarrow\RR$ be a continuous function. If $f$ is injective and continuous, then $f$ is monotonic. Moreover, $f^{-1}$ is also continuous on $f((a,b))$.
+  \end{theorem}
+  \subsubsection{Classification of discontinuities}
+  \begin{definition}
+    Let $I\subset\RR$ be an interval and $f:I\rightarrow\RR$. Suppose $f$ is not continuous at $x_0\in I$. There are mainly four types of discontinuities:
+    \begin{enumerate}
+      \item \textit{Removable discontinuity}: The limit $\displaystyle\lim_{x\to x_0}f(x)$ exists but $$\lim_{x\to x_0}f(x)\ne f(x_0)$$
+      \item \textit{Jump discontinuity}: The one-sided limits $\displaystyle\lim_{x\to x_0^+}f(x)$ and $\displaystyle\lim_{x\to x_0^-}f(x)$ exist but $$\lim_{x\to x_0^+}f(x)\ne \lim_{x\to x_0^-}f(x)$$
+      \item \textit{Discontinuity of the first kind}: $$\text{Either }\lim_{x\to x_0^+}f(x)=\pm\infty\text{ or }\lim_{x\to x_0^-}f(x)=\pm\infty$$
+      \item \textit{Discontinuity of the second kind}: One one-sided limit does not exist.
+    \end{enumerate}
+  \end{definition}
+  \begin{center}
+    \begin{minipage}{0.49\linewidth}
+      \centering
+      \includestandalone[mode=image|tex,width=\linewidth]{Images/discontinuity1}
+      \captionof*{figure}{Removable discontinuity}
+    \end{minipage}\hfill
+    \begin{minipage}{0.49\linewidth}
+      \centering
+      \includestandalone[mode=image|tex,width=\linewidth]{Images/discontinuity2}
+      \captionof*{figure}{Jump discontinuity}
+    \end{minipage}\vspace{0.02\linewidth}
+    \begin{minipage}{0.49\linewidth}
+      \centering
+      \includestandalone[mode=image|tex,width=\linewidth]{Images/discontinuity3}
+      \captionof*{figure}{Discontinuity of the first kind}
+    \end{minipage}\hfill
+    \begin{minipage}{0.49\linewidth}
+      \centering
+      \includestandalone[mode=image|tex,width=\linewidth]{Images/discontinuity4}
+      \captionof*{figure}{Discontinuity of the second kind}
+    \end{minipage}
+    \captionof{figure}{Types of discontinuities}
+  \end{center}
+  \subsection{Exponential and logarithmic functions}
+  \begin{lemma}
+    Let $a\in\RR_{>0}$ and $f:\QQ\rightarrow\RR_{\geq 0}$ defined by $f(x)=a^x$. The function $f$ has the following properties:
+    \begin{enumerate}
+      \item $f(x+y)=f(x)f(y)$.
+      \item If $a>1$, $f$ is increasing. If $a<1$, $f$ is decreasing.
+      \item If $(a_n)\subset\QQ$ is a sequence with $\displaystyle\lim_{n\to\infty} a_n=0$, then $\displaystyle\lim_{n\to\infty} f(a_n)=1$.
+    \end{enumerate}
+  \end{lemma}
+  \begin{lemma}
+    Let $a,x\in\RR$ be such that $a>0$ and $(x_n)\subset\QQ$ be a sequence with $\displaystyle\lim_{n\to\infty} x_n=x$. Then, $\displaystyle\lim_{n\to\infty} a^{x_n}$ exists and does not depend on the sequence $(x_n)$. That is, if $(y_n)\subset\QQ$ is another sequence with $\displaystyle\lim_{n\to\infty} x_n=\lim_{n\to\infty} y_n=x$, then $\displaystyle\lim_{n\to\infty} a^{x_n}=\lim_{n\to\infty} a^{y_n}$.
+  \end{lemma}
+  \begin{definition}
+    Let $a\in\RR_{>0}$. We define the \textit{exponential function with base $a$} as the function $\tilde{f}:\RR\rightarrow\RR$ defined by $\displaystyle\tilde{f}(x)=\lim_{n\to\infty} a^{x_n}$, where $(x_n)$ is any sequence of rational numbers $\displaystyle\lim_{n\to\infty} x_n=x$.
+  \end{definition}
+  \begin{prop}
+    The function $g$ has the following properties:
+    \begin{enumerate}
+      \item If $x\in\QQ$, $\tilde{f}(x)=a^x$.
+      \item $\tilde{f}(x+y)=\tilde{f}(x)\tilde{f}(y)$.
+      \item If $a>1$, $\tilde{f}$ is increasing. If $a<1$, $\tilde{f}$ is decreasing.
+      \item $\tilde{f}(x)>0$ $\forall x\in\RR$.
+      \item $\tilde{f}$ is continuous.
+      \item If $a>1$, $\displaystyle\lim_{x\to\infty}\tilde{f}(x)=\infty$ and $\displaystyle\lim_{x\to-\infty}\tilde{f}(x)=0$.\par If $a<1$, $\displaystyle\lim_{x\to\infty}\tilde{f}(x)=0$ and $\displaystyle\lim_{x\to-\infty}\tilde{f}(x)=\infty$\footnote{From now on, we will denote $\tilde{f}(x)$ simply as $a^x$ $\forall x\in\RR$.}.
+    \end{enumerate}
+  \end{prop}
+  \begin{prop}
+    Let $a,x,y\in\RR$ be such that $a>0$. Then, ${(a^x)}^y=a^{xy}$.
+  \end{prop}
+  \begin{definition}
+    Let $a\in\RR_{>0}$. Since $a^x$ is continuous and monotonic and its image is $(0,\infty)$, it has an associated inverse defined in $(0,\infty)$. This function is denoted by $\log_a(x)$ and it is called \textit{logarithm with base $a$}\footnote{If the base of the logarithm is the number $\exp{}$, it is common to denote $\log_\exp{}(x)$ by $\ln(x)$.}.
+  \end{definition}
+  \begin{prop}
+    The logarithm with base $a\in\RR_{>0}$ has the following properties:
+    \begin{enumerate}
+      \item $\log_a$ is continuous.
+      \item If $a>1$, $\log_a$ is increasing. If $a<1$, $\log_a$ is decreasing.
+      \item If $a>1$, $\displaystyle\lim_{x\to 0}\log_a(x)=-\infty$ and $\displaystyle\lim_{x\to\infty}\log_a(x)=\infty$.\par If $a<1$, $\displaystyle\lim_{x\to0}\log_a(x)=\infty$ and $\displaystyle\lim_{x\to\infty}\log_a(x)=-\infty$.
+      \item $\log_a(xy)=\log_a(x)+\log_a(y)$.
+      \item $\log_a(x^y)=y\log_a(x)$.
+    \end{enumerate}
+  \end{prop}
+  \begin{prop}
+    Let $(a_n)$ be a sequence such that $\displaystyle\lim_{n\to\infty}a_n=\infty$. Then: $$\exp{}=\lim_{n\to\infty}{\left(1+\frac{1}{a_n}\right)}^{a_n}$$
+  \end{prop}
+  \begin{corollary}
+    Let $(a_n)$ be a sequence such that $\displaystyle\lim_{n\to\infty}a_n=\infty$ and $x\in\RR$. Then: $$\exp{x}=\lim_{n\to\infty}{\left(1+\frac{x}{a_n}\right)}^{a_n}$$
+  \end{corollary}
+  \begin{prop}
+    For all $x\in\RR_{\geq 0}$ we have: $$1+x\leq\exp{x}\leq 1+x\exp{x}$$
+  \end{prop}
+  \subsection{Differentiation}
+  \subsubsection{Definition of derivative and elementary properties}
+  \begin{definition}
+    Let $f:(a,b)\rightarrow\RR$. We say that $f$ is \textit{differentiable at $x_0\in(a,b)$} if the following limit exists: $$\lim_{x\to x_0}\frac{f(x)-f(x_0)}{x-x_0}=\lim_{h\to 0}\frac{f(x_0+h)-f(x_0)}{h}$$
+    In this case, we denote this limit by $f'(x_0)$ and we refer to it as the \textit{derivative of $f$ at $x_0$}. We say $f$ is \textit{differentiable on $(a,b)$} if it is differentiable at each point of $(a,b)$.
+  \end{definition}
+  \begin{prop}
+    Let $I\subset\RR$ be an interval and $f:I\rightarrow\RR$ be a differentiable function at $x_0\in I$. The \textit{tangent line to the graph at the point $(x_0,f(x_0))$} is: $$y(x)=f(x_0)+f'(x_0)(x-x_0)$$ That is, the derivative of $f$ at $x_0$ is precisely the slope of the tangent line at the point $x_0$.
+  \end{prop}
+  \begin{lemma}
+    Let $I\subset\RR$ be an interval and $f:I\rightarrow\RR$ be a differentiable function at $x_0\in I$. Then, $f$ is continuous at $x_0$.
+  \end{lemma}
+  \subsubsection{Differentiation rules}
+  \begin{prop}
+    Let $f,g$ be two functions defined on a neighbourhood of $a$ and differentiable at $a$. Then, $f+g$ and $fg$ are differentiable at $a$ and
+    \begin{enumerate}
+      \item $(f+a)'(a)=f'(a)+g'(a)$.
+      \item $(f\cdot g)'(a)=f'(a)g(a)+f(a)g'(a)$.
+    \end{enumerate}
+    If, moreover, $f(a)\ne 0$, then $\frac{1}{f}$ is defined on a neighbourhood of $a$, it is differentiable at $a$ and
+    \begin{enumerate}\setcounter{enumi}{2}
+      \item $\displaystyle\left(\frac{1}{f}\right)'(a)=-\frac{f'(a)}{{f(a)}^2}$.
+    \end{enumerate}
+  \end{prop}
+  \begin{prop}[Chain rule]
+    Let $g:(a,b)\rightarrow(c,d)$ and $f:(c,d)\rightarrow\RR$. Suppose that $g$ is differentiable at $x\in(a,b)$ and $f$ is differentiable at $g(x)\in(c,d)$. Then, $f\circ g$ is differentiable at $x$ and $$(f\circ g)'(x)=f'(g(x))g'(x)$$
+  \end{prop}
+  \begin{prop}[Inverse function rule]
+    Let $f:(a,b)\rightarrow\RR$ be an injective and continuous function on $(a,b)$ and differentiable at $c\in(a,b)$ with $f'(c)\ne 0$. Then, $f^{-1}$ is differentiable at $f(c)$ and $$(f^{-1})'(f(c))=\frac{1}{f'(c)}$$
+  \end{prop}
+  \begin{center}
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{|c|c|}
+      \hline
+      $f(x)$       & $f'(x)$                                           \\
+      \hline
+      $x^\alpha$   & $\alpha x^{\alpha-1}$                             \\
+      $a^x$        & $a^x\ln a$                                        \\
+      $\log_a x$   & $\displaystyle \frac{1}{x\ln a}$                  \\
+      $\sin(x)$    & $\cos(x)$                                         \\
+      $\cos(x)$    & $-\sin(x)$                                        \\
+      $\tan(x)$    & $\displaystyle 1+\tan^2(x)=\frac{1}{\cos^2(x)}$   \\
+      $\cot(x)$    & $\displaystyle -1-\cot^2(x)=-\frac{1}{\sin^2(x)}$ \\
+      $\arcsin(x)$ & $\displaystyle \frac{1}{\sqrt{1-x^2}}$            \\
+      $\arccos(x)$ & $\displaystyle -\frac{1}{\sqrt{1-x^2}}$           \\
+      $\arctan(x)$ & $\displaystyle \frac{1}{1+x^2}$                   \\
+      $\arccot(x)$ & $\displaystyle -\frac{1}{1+x^2}$                  \\
+      \hline
+    \end{tabular}
+    \captionof{table}{Table of derivatives of elementary functions}
+  \end{center}
+  \subsubsection{Basic differentiation theorems}
+  \begin{definition}
+    Let $I\subset\RR$ be an interval, $f:I\rightarrow\RR$ and $c\in I$. We say that $c$ is a \textit{local maximum of $f$} if exists an open interval $J\subset I$ with $c\in J$ such that $f(x)\leq f(c)$ $\forall x\in J$. We say that $c$ is a \textit{local minimum of $f$} if exists an open interval $J\subset I$ with $c\in J$ such that $f(x)\geq f(c)$ $\forall x\in J$. Finally, a \textit{local extremum} is either a local maximum or a local minimum.
+  \end{definition}
+  \begin{prop}
+    Let $I\subset\RR$ be an interval, $f:I\rightarrow\RR$ and $c\in I$ be a local extremum of $f$. If $f$ is differentiable at $c$, then $f'(c)=0$.
+  \end{prop}
+  \begin{theorem}[Rolle's theorem]
+    Let $f:[a,b]\rightarrow\RR$ be a continuous and differentiable function on $(a,b)$. Suppose $f(a)=f(b)$. Then, there exists a point $c\in (a,b)$ such that $f'(c)=0$.
+  \end{theorem}
+  \begin{theorem}[Mean value theorem]
+    Let $f:[a,b]\rightarrow\RR$ be a continuous function on $[a,b]$ and differentiable on $(a,b)$. Then, there exists a point $c\in (a,b)$ such that $$f(b)-f(a)=f'(c)(b-a)$$
+  \end{theorem}
+  \begin{corollary}
+    Let $f$ be a differentiable function on $(a,b)$ verifying that $f'(x)=0$ $\forall x\in(a,b)$. Then, $f$ is constant in $(a,b)$.
+  \end{corollary}
+  \begin{corollary}
+    Let $f$ be a differentiable function on $(a,b)$. If $f'(x)>0$ $\forall x\in(a,b)$, then $f$ is strictly increasing on $(a,b)$. Similarly, if $f'(x)<0$ $\forall x\in(a,b)$, then $f$ is strictly decreasing on $(a,b)$.
+  \end{corollary}
+  \begin{corollary}
+    Let $f$ be a differentiable function on a neighbourhood of $a$ and such that $f'$ is continuous on this neighbourhood. Suppose that $f'(a)\ne0$. Then, exists another neighbourhood of $a$ on which $f$ is invertible.
+  \end{corollary}
+  \begin{theorem}[Cauchy's mean value theorem]
+    Let $f,g:[a,b]\rightarrow\RR$ be continuous functions on $[a,b]$ and differentiable on $(a,b)$. Then, there exists a point $c\in (a,b)$ such that $$g'(c)(f(b)-f(a))=f'(c)(g(b)-g(a))$$
+  \end{theorem}
+  \begin{theorem}[L'H\^opital's rule]
+    Let $f$, $g$ be two functions defined on a neighbourhood of $a\in\RR\cup\{\pm\infty\}$ and such that either $\displaystyle\lim_{x\to a} f(x)=\lim_{x\to a} g(x)=0$ or $\displaystyle\lim_{x\to a} g(x)=\infty$. Suppose, moreover, that the limit $\displaystyle\lim_{x\to a} \frac{f'(x)}{g'(x)}$ exists. Then, the limit $\displaystyle\lim_{x\to a} \frac{f(x)}{g(x)}$ exists too and $$\lim_{x\to a} \frac{f(x)}{g(x)}=\lim_{x\to a} \frac{f'(x)}{g'(x)}$$
+  \end{theorem}
+  \begin{theorem}[Darboux's theorem]
+    Let $f:(a,b)\rightarrow\RR$ be a differentiable function and suppose that there exist $x,y\in (a,b)$, $x<y$, with $f'(x)f'(y)<0$. Then, there exists $z\in(x,y)$ such that $f'(z)=0$.
+  \end{theorem}
+  \subsection{Convexity and concavity}
+  \begin{definition}
+    We say that $f:I\rightarrow\RR$ is \textit{convex} if given any two points $a,b\in I$, $a<b$, the segment between $(a,f(a))$ and $(b,f(b))$ lies above the graph on $(a,b)$. That is: $$f(bt+(1-t)a)\leq tf(b)+(1-t)f(a)\quad \forall t\in[0,1]$$ We say that $f$ is \textit{concave} if given any two points $a,b\in I$, $a<b$, the segment between $(a,f(a))$ and $(b,f(b))$ lies below the graph on $(a,b)$. That is: $$f(bt+(1-t)a)\geq tf(b)+(1-t)f(a)\quad \forall t\in[0,1]\footnote{If the inequalities are strict, we say that $f$ is \textit{strictly convex} or \textit{strictly concave}, respectively.}$$
+  \end{definition}
+  \begin{center}
+    \begin{minipage}{0.49\linewidth}
+      \centering
+      \includestandalone[mode=image|tex,width=\linewidth]{Images/convexity}
+      \captionof*{figure}{Convex function}
+    \end{minipage}\hfill
+    \begin{minipage}{0.49\linewidth}
+      \centering
+      \includestandalone[mode=image|tex,width=\linewidth]{Images/concavity}
+      \captionof*{figure}{Concave function}
+    \end{minipage}
+    \captionof{figure}{}
+  \end{center}
+  \begin{lemma}
+    A function $f$ is convex on an interval $I$ is and only if $-f$ if concave on $I$.
+  \end{lemma}
+  \begin{lemma}
+    Let $f:I\rightarrow\RR$. $f$ is convex on $I$ if and only if $\forall a,x,b\in I$ with $a<x<b$ we have: $$\frac{f(x)-f(a)}{x-a}\leq\frac{f(b)-f(a)}{b-a}$$ Or, equivalently: $$\frac{f(b)-f(a)}{b-a}\leq\frac{f(b)-f(x)}{b-x}.$$
+    Similarly, $f$ is concave on $I$ if and only if $\forall a,x,b\in I$ with $a<x<b$ we have: $$\frac{f(x)-f(a)}{x-a}\geq\frac{f(b)-f(a)}{b-a}$$ Or, equivalently: $$\frac{f(b)-f(a)}{b-a}\geq\frac{f(b)-f(x)}{b-x}.$$
+  \end{lemma}
+  \begin{prop}
+    Let $f$ be a convex or concave function on an interval $I$. Then, $f$ is continuous on $I$.
+  \end{prop}
+  \begin{lemma}
+    Let $f$ be a differentiable function and $a<b$ be such that $f(a)=f(b)$. Then:
+    \begin{itemize}
+      \item If $f'$ is increasing, $f(x)\leq f(a)$ $\forall x\in(a,b)$.
+      \item If $f'$ is decreasing, $f(x)\geq f(a)$ $\forall x\in(a,b)$.
+    \end{itemize}
+  \end{lemma}
+  \begin{theorem}
+    Let $f$ be a differentiable function on an interval $I$. Then:
+    \begin{itemize}
+      \item $f$ is (strictly) convex if and only if $f'$ is (strictly) increasing.
+      \item $f$ is (strictly) concave if and only if $f'$ is (strictly) decreasing.
+    \end{itemize}
+  \end{theorem}
+  \begin{theorem}
+    Let $f$ be a differentiable function on an interval $I$. Then, $f$ is convex if and only if the graph lies above all its tangent lines. And similarly, $f$ is concave if and only if the graph lies below all its tangent lines.
+  \end{theorem}
+  \begin{definition}\label{RVF-second_derivative}
+    Let $f$ be a differentiable function on an interval $I$. If the function $f':I\rightarrow\RR$ is differentiable at $a\in I$, we say that $f$ is \textit{two times differentiable at $a$}. If this happens in all points of $I$, we say that $f$ is \textit{two times differentiable on $I$}. In this case we denote the derivative of $f'$ at the point $a$, $(f')'(a)$, by $f''(a)$ and we refer to it as \textit{second derivative of $f$ at $a$}.
+  \end{definition}
+  \begin{theorem}
+    Let $f$ be a function two times differentiable on $I$. Then:
+    \begin{enumerate}
+      \item $f$ is convex on $I$ if and only if $f''(x)\geq 0$ $\forall x\in I$.
+      \item $f$ is concave on $I$ if and only if $f''(x)\leq 0$ $\forall x\in I$.
+    \end{enumerate}
+  \end{theorem}
+  \begin{definition}
+    Let $f:I\rightarrow\RR$. We say that $f$ is convex at $x\in I$ if exists a neighbourhood $J\subset I$ of $x$ on which $f$ is convex. Analogously, we say that $f$ is concave at $x\in I$ if exists a neighbourhood $J\subset I$ of $x$ on which $f$ is concave.
+  \end{definition}
+  \begin{definition}
+    Let $f$ be a continuous function on $I$. We say $x\in I$ is an \textit{inflection point} if exists $\delta>0$ such that $f$ is convex (or concave) on $(x-\delta,x]$ and concave (or convex) on $[x,x+\delta)$.
+  \end{definition}
+  \begin{prop}
+    Let $f$ be a function two times differentiable on $I$. Then:
+    \begin{enumerate}
+      \item If $a$ is an inflection point, $f''(a)=0$.
+      \item Suppose that $f''$ is continuous at $a\in I$. Then:
+            \begin{itemize}
+              \item If $f''(a)\geq 0$, $f$ is convex at $a$.
+              \item If $f''(a)\leq 0$, $f$ is concave at $a$.
+            \end{itemize}
+    \end{enumerate}
+  \end{prop}
+  \subsection{Polynomial approximation}
+  \begin{definition}
+    Let $f$, $g$ be two functions defined on a neighbourhood of $a\in\RR$.  We say that $f$ and $g$ have \textit{contact of order $\geq n$ at $a$} if $$\lim_{x\to a}\frac{f(x)-g(x)}{{(x-a)}^n}=0$$
+  \end{definition}
+  \begin{definition}
+    Let $f$ be a function. Iterating the process in definition \ref{RVF-second_derivative}, one can define the notion of the \textit{$n$-th derivative of $f$ at the point $a\in\RR$}, denoted by $f^{(n)}(a)$.
+  \end{definition}
+  \begin{definition}
+    We say that a function $f$ is of \textit{class $\mathcal{C}^n$ at a point $a\in\RR$}, $n\in\NN$, if $f$ is $n$ times differentiable at a neighbourhood of $a$ and $f^{(n)}$ is continuous in this neighbourhood. We say that $f$ is of \textit{class $\mathcal{C}^\infty$ at $a$} if $f$ is of class $\mathcal{C}^n$ at $a$ $\forall n\in\NN$. Finally, if $p\in\NN\cup\{\infty\}$, we say that $f$ is of \textit{class $\mathcal{C}^p$, or $\mathcal{C}^p(I)$, on an interval $I$} it it is of class $\mathcal{C}^p$ at all points of $I$.
+  \end{definition}
+  \begin{lemma}
+    Let $f$, $g$ be functions $n$ times differentiable at $a\in\RR$. Then:
+    \begin{enumerate}
+      \item If $f^{(i)}(a)=g^{(i)}(a)$, $i=0,1,\ldots,n$, and $f^{(n)}$ and $g^{(n)}$ are continuous at $a$, then $f$ and $g$ have contact of order $\geq n$.
+      \item If $f$ and $g$ have contact of order $\geq n$, then $f^{(i)}(a)=g^{(i)}(a)$, $i=0,1,\ldots,n$.
+    \end{enumerate}
+  \end{lemma}
+  \begin{theorem}
+    Let $f$ be a function $n$ times differentiable at $a\in\RR$. Then, the polynomial
+    \begin{multline*}
+      P_{n,f,a}(x)=f(a)+f'(a)(x-a)+\frac{f''(a)}{2!}{(x-a)}^2+\\+\frac{f^{(3)}(a)}{3!}{(x-a)}^3+\cdots+\frac{f^{(n)}(a)}{n!}{(x-a)}^n
+    \end{multline*}
+    has contact with $f$ of order $\geq n$ at $a$. This polynomial is called \textit{Taylor polynomial of order $n$ of $f$ centered at $a$}.
+  \end{theorem}
+  \begin{prop}
+    Let $P$ and $Q$ be polynomials of degree $\leq n$ with order of contact $\geq n$ at a point $a\in\RR$. Then $P=Q$\footnote{This means that the Taylor polynomial $P_{n,f,a}(x)$ is the unique polynomial which has contact with a function $f$ of order $\geq n$ at a point $a$.}.
+  \end{prop}
+  \begin{theorem}
+    Let $f$ be a function $n$ times differentiable at $a\in\RR$. If $f'(a)=f''(a)=\cdots=f^{(n-1)}(a)=0$ and $f^{(n)}(a)\ne 0$ then:
+    \begin{enumerate}
+      \item If $n$ is odd, $a$ isn't a local extremum of $f$.
+      \item If $n$ is even and $f^{(n)}(a)>0$, $a$ is a local minimum of $f$.
+      \item If $n$ is even and $f^{(n)}(a)<0$, $a$ is a local maximum of $f$.
+    \end{enumerate}
+  \end{theorem}
+  \begin{theorem}
+    Let $f$ be a function $n+1$ times differentiable on a neighbourhood $I$ of $a\in\RR$. Let $P=P_{n,f,a}$, $R_n:=f-P$ and $x\in I$. Then:
+    \begin{enumerate}
+      \item Cauchy's formula: $$R_n(x)=\frac{f^{(n+1)}(\xi)}{n!}{(x-\xi)}^n(x-a)$$ for some $\xi\in\langle a,x\rangle$.
+      \item Lagrange's formula: $$R_n(x)=\frac{f^{(n+1)}(\eta)}{(n+1)!}{(x-a)}^{n+1}$$ for some $\eta\in\langle a,x\rangle$.
+      \item Integral formula: If $f^{(n+1)}$ is integrable\footnote{See definition \ref{RVF-integrable}.} on $[a,x]$: $$R_n(x)=\int_a^x\frac{f^{(n+1)}(t)}{n!}{(x-t)}^n\dd t$$
+    \end{enumerate}
+  \end{theorem}
+  \begin{definition}
+    We say that $f$ is \textit{analytic at $a$} if it's of class $\mathcal{C}^\infty$ on a neighbourhood $I$ of $a$ and $\displaystyle\lim_{n\to\infty}R_n(x)=0$  $\forall x\in I$.
+  \end{definition}
+  \begin{center}
+    \renewcommand*{\arraystretch}{2}
+    \begin{tabular}{|c|>{\centering\arraybackslash}m{6.5cm}|}
+      \hline
+      $f(x)$                       & Taylor polynomials                                                                                     \\
+      \hline
+      $\exp{x}$                    & $\displaystyle 1+x+\frac{x^2}{2!}+\frac{x^3}{3!}+\cdots+\frac{x^n}{n!}$                                \\
+      $\ln (1+x)$                  & $\displaystyle x-\frac{x^2}{2}+\frac{x^3}{3}-\frac{x^4}{4}+\cdots+{(-1)}^{n+1}\frac{x^n}{n}$           \\
+      $\sin(x)$                    & $\displaystyle x-\frac{x^3}{3!}+\frac{x^5}{5!}-\frac{x^7}{7!}+\cdots+{(-1)}^n\frac{x^{2n+1}}{(2n+1)!}$ \\
+      $\cos(x)$                    & $\displaystyle 1-\frac{x^2}{2!}+\frac{x^4}{4!}-\frac{x^6}{6!}+\cdots+{(-1)}^n\frac{x^{2n}}{(2n)!}$     \\
+      $\displaystyle\frac{1}{1-x}$ & $\displaystyle 1+x+x^2+x^3+\cdots+x^n$                                                                 \\
+      ${(1+x)}^\alpha$             & $\displaystyle 1+\alpha x+\cdots+\frac{\alpha(\alpha-1)\cdots(\alpha-(n-1))}{n!}x^n$                   \\
+      $\arctan(x)$                 & $\displaystyle x-\frac{x^3}{3}+\frac{x^5}{5}-\frac{x^7}{7}+\cdots+{(-1)}^n\frac{x^{2n+1}}{2n+1}$       \\
+      \hline
+    \end{tabular}
+    \captionof{table}{Taylor polynomials centered at 0 of some elementary functions}
+  \end{center}
+  \subsection{Riemann integral}
+  \subsubsection{Construction of Riemann integral}
+  \begin{definition}
+    Let $I=[a,b]$ be an interval. A \textit{partition $\mathcal{P}$ of $I$} is a finite collection of points $a=t_0<t_1<\cdots<t_n=b$ of $I$. We denote by $\mathrm{P}(I)$ the set of all partitions of the interval $I$.
+  \end{definition}
+  \begin{definition}
+    Let $f:I\rightarrow\RR$ be a bounded function and $\mathcal{P}=\{t_i\}_{i=0}^n\in\mathrm{P}(I)$. We define the respective \textit{lower sum and upper sum of $f$ associated with $\mathcal{P}$} as:
+    $$L(f,\mathcal{P})=\sum_{i=1}^nm_i(t_i-t_{i-1})\quad U(f,\mathcal{P})=\sum_{i=1}^nM_i(t_i-t_{i-1})$$
+    where $m_i=\inf\{f(x_i):x_i\in[t_{i-1},t_i]\}$ and $M_i=\sup\{f(x_i):x_i\in[t_{i-1},t_i]\}$.
+  \end{definition}
+  \begin{definition}
+    Let $\mathcal{P},\mathcal{Q}\in\mathrm{P}(I)$ be two partitions. We say that \textit{$\mathcal{P}$ is finer than $\mathcal{Q}$}, $\mathcal{Q}\prec\mathcal{P}$, if $\mathcal{Q}\subset\mathcal{P}$.
+  \end{definition}
+  \begin{center}
+    \begin{minipage}{\linewidth}
+      \centering
+      \includestandalone[mode=image|tex,width=\linewidth]{Images/lower_sum}\\
+      \includestandalone[mode=image|tex,width=\linewidth]{Images/upper_sum}
+      \captionof{figure}{Lower (blue) and upper (red) sums of a function with three different partitions, each one finer than the previous one.}
+    \end{minipage}
+  \end{center}
+  \begin{prop}
+    Let $f:I\rightarrow\RR$ be a bounded function and $\mathcal{P},\mathcal{Q}\in\mathrm{P}(I)$ with $\mathcal{Q}\prec\mathcal{P}$. Then: $$L(f,\mathcal{Q})\leq L(f,\mathcal{P})\leq U(f,\mathcal{P})\leq U(f,\mathcal{Q})$$
+  \end{prop}
+  \begin{definition}
+    Let $I=[a,b]$ and $f:I\rightarrow\RR$ be a bounded function. We define the \textit{lower integral of $f$ on $I$} as: $$\lowint{a}{b}f(x)\dd x=\sup\{L(f,\mathcal{P}):\mathcal{P}\in\mathrm{P}(I)\}$$ Analogously, we define the \textit{upper integral of $f$ on $I$} as: $$\upint{a}{b}f(x)\dd x=\inf\{U(f,\mathcal{P}):\mathcal{P}\in\mathrm{P}(I)\}$$
+  \end{definition}
+  \begin{definition}\label{RVF-integrable}
+    Let $I=[a,b]$ and $f:I\rightarrow\RR$ be a bounded function. We say that \textit{$f$ is integrable on $I$} if $$\lowint{a}{b}f(x)\dd x=\upint{a}{b}f(x)\dd x$$ In this case, we denote the integral of $f$ on $I$ by $\displaystyle\int_a^b f(x)\dd x$.
+  \end{definition}
+  \begin{lemma}
+    Let $I=[a,b]$ and $f:I\rightarrow\RR$ be a bounded function. Then, $f$ is integrable on $I$ if and only if $\forall\varepsilon>0$ $\exists\mathcal{P}\in\mathrm{P}(I)$ such that: $$U(f,\mathcal{P})-L(f,\mathcal{P})<\varepsilon$$
+  \end{lemma}
+  \begin{theorem}
+    Let $I=[a,b]$ and $f:I\rightarrow\RR$ be a monotonic and bounded function. Then, $f$ is integrable on $I$.
+  \end{theorem}
+  \begin{definition}
+    Let $f:I\rightarrow\RR$ be a function. We say that \textit{$f$ is uniformly continuous on $I$} if $\forall\varepsilon>0$ $\exists\delta>0$ such that $|f(x)-f(y)|<\varepsilon$ whenever $|x-y|<\delta$.
+  \end{definition}
+  \begin{theorem}
+    Let $I=[a,b]$ and $f:I\rightarrow\RR$ be a continuous function. Then, $f$ is uniformly continuous at $I$.
+  \end{theorem}
+  \begin{theorem}
+    Let $I=[a,b]$ and $f:I\rightarrow\RR$ be a continuous function. Then, $f$ is integrable on $I$.
+  \end{theorem}
+  \subsubsection{Properties of the integral}
+  \begin{prop}
+    Let $f$, $g$ be integrable functions on $[a,b]$ and $c\in\RR$. Then, $f+g$ and $cf$ are integrable on $I$ and
+    \begin{gather*}
+      \int_a^b[f(x)+g(x)]\dd x=\int_a^bf(x)\dd x+\int_a^bg(x)\dd x\\ \int_a^bcf(x)\dd x=c\int_a^bf(x)\dd x
+    \end{gather*}
+  \end{prop}
+  \begin{theorem}
+    Let $f$ be an integrable function on $[a,b]$ with $f([a,b])\subseteq[c,d]$ and $g$ be a continuous function on $[c,d]$. Then, $g\circ f$ is integrable on $[a,b]$.
+  \end{theorem}
+  \begin{corollary}
+    Let $f$ be an integrable function on $[a,b]$. Then, $f^2$ is integrable on $[a,b]$. And if there exists $\delta>0$ with $f(x)>\delta$ $\forall x\in [a,b]$, then $\frac{1}{f}$ is integrable on $[a,b]$.
+  \end{corollary}
+  \begin{corollary}
+    Let $f$, $g$ be integrable functions on $[a,b]$. Then, $fg$ is integrable on $[a,b]$.
+  \end{corollary}
+  \subsubsection{Inequalities involving integrals}
+  \begin{prop}
+    Let $f$, $g$ be integrable functions on $[a,b]$ with $f(x)\leq g(x)$ $\forall x\in [a,b]$. Then: $$\int_a^bf(x)\dd x\leq\int_a^bg(x)\dd x$$
+  \end{prop}
+  \begin{corollary}
+    Let $f$ be an integrable function on $[a,b]$ with $m\leq f(x)\leq M$ $\forall x\in [a,b]$. Then: $$m(b-a)\leq\int_a^bf(x)\dd x\leq M(b-a)$$ If, moreover, $f$ is continuous, there exists $c\in[a,b]$ such that: $$\int_a^bf(x)\dd x=f(c)(b-a)$$
+  \end{corollary}
+  \begin{prop}
+    Let $f$ be an integrable function on $[a,b]$. Then, $|f|$ is integrable on $[a,b]$ and $$\left|\int_a^bf(x)\dd x\right|\leq\int_a^b|f(x)|\dd x$$
+  \end{prop}
+  \begin{prop}
+    Let $f$ be an integrable function on $[a,b]$ and $g$ be a function defined on $[a,b]$ distinct to $f$ on a finite number points. Then, $g$ is integrable on $[a,b]$ and $$\int_a^bg(x)\dd x=\int_a^bf(x)\dd x$$
+  \end{prop}
+  \subsubsection{Fundamental theorem of calculus}
+  \begin{prop}
+    Let $f:[a,b]\rightarrow\RR$ and $b\in(a,c)$. $f$ is integrable on $[a,c]$ if and only if $f$ is integrable on $[a,b]$ and on $[b,c]$. Moreover: $$\int_a^cf(x)\dd x=\int_a^bf(x)\dd x+\int_b^cf(x)\dd x$$
+  \end{prop}
+  \begin{theorem}[Fundamental theorem of calculus]
+    Let $f$ be an integrable function on $[a,b]$. Then, $$F(t)=\int_a^tf(x)\dd x$$ is a continuous function on $[a,b]$. If, moreover, $f$ is continuous at $c\in[a,b]$, then $F$ is differentiable at $c$ and $F'(c)=f(c)$. Finally, if $f$ is continuous on $[a,b]$, then $F$ is differentiable on $[a,b]$ and $F'=f$. In this last case, the function $F$ is called \textit{primitive function of $f$}.
+  \end{theorem}
+  \begin{theorem}
+    Let $f$ be an integrable function on $[a,b]$ which has primitives. Then, these primitives are of the form: $$F(t)=k+\int_a^tf(x)\dd x$$ where $k\in\RR$. Moreover they satisfy $F'=f$ and $$\int_a^bf(x)\dd x=F(b)-F(a)$$
+  \end{theorem}
+  \begin{corollary}[Integration by parts]
+    Let $f$, $g$ be integrable functions on $[a,b]$ with primitives $F$ and $G$, respectively. Then: $$\int_a^bF(x)g(x)\dd x=F(b)G(b)-F(a)G(a)-\int_a^bf(x)G(x)\dd x$$
+  \end{corollary}
+  \begin{corollary}[Integration by substitution]
+    Let $\varphi:[c,d]\rightarrow[a,b]$ be a function of class $\mathcal{C}^1$ such that $\varphi(c)=a$ and $\varphi(d)=b$ and $f$ be a continuous function on $[a,b]$. Then: $$\int_a^bf(x)\dd x=\int_c^d(f\circ\varphi)(x)\varphi'(x)\dd x$$
+  \end{corollary}
+  \subsubsection{Riemann sums}
+  \begin{definition}
+    Let $\mathcal{P}=\{t_i\}_{i=0}^n\in\mathrm{P}([a,b])$. A \textit{Riemann sum of $f$ associated with $\mathcal{P}$}, $S(f,\mathcal{P})$, is: $$S(f,\mathcal{P})=\sum_{i=1}^nf(x_i)(t_i-t_{i-1})$$ where $x_i\in[t_{i-1},t_i]$.
+  \end{definition}
+  \begin{theorem}
+    Let $f$ be a continuous function on $[a,b]$. Then, $\forall\varepsilon>0$ $\exists\delta>0$ such that if $\mathcal{P}=\{t_i\}_{i=0}^n\in\mathrm{P}([a,b])$ with $t_i-t_{i-1}<\delta$, then: $$\left|\int_a^bf(x)\dd x-S(f,\mathcal{P})\right|<\varepsilon$$ for all Riemann sums associated with $\mathcal{P}$.
+  \end{theorem}
+  \begin{corollary}
+    Let $f$ be a continuous function on $[a,b]$ and let $\mathcal{P}_n=\{t_i\}_{i=0}^n\in\mathrm{P}([a,b])$ be a sequence de partitions of $[a,b]$ such that $t_i-t_{i-1}<1/n$. Then, for all Riemann sums $S(f,\mathcal{P}_n)$ we have: $$\int_a^bf(x)\dd x=\lim_{n\to\infty}S(f,\mathcal{P}_n)$$
+  \end{corollary}
+  \subsubsection{Geometric applications}
+  \begin{definition}
+    Let $f:[a,b]\rightarrow\RR$ and $\mathcal{P}=\{t_i\}_{i=0}^n\in\mathrm{P}([a,b])$. We define the \textit{length of the polygonal approximating the arc length of $f$ on $[a,b]$} as: $$\ell(f,\mathcal{P})=\sum_{i=1}^n\sqrt{{(t_i-t_{i-1})}^2+{(f(t_i)-f(t_{i-1}))}^2}$$
+  \end{definition}
+  \begin{lemma}
+    Let $f:I\rightarrow\RR$ and $\mathcal{P},\mathcal{Q}\in\mathrm{P}(I)$ with $\mathcal{Q}\prec\mathcal{P}$. Then, $\ell(f,\mathcal{P})\geq \ell(f,\mathcal{Q})$.
+  \end{lemma}
+  \begin{definition}
+    Let $f:I\rightarrow\RR$. If the set $\mathcal{L}:=\{\ell(f,\mathcal{P}):\mathcal{P}\in\mathrm{P}([a,b])\}$ is bounded from above, we say that the graph is \textit{rectifiable} and we define its length $\ell(f,[a,b])$ as: $$\ell(f,[a,b])=\sup \mathcal{L}$$
+  \end{definition}
+  \begin{prop}
+    Let $f$ be a function of class $\mathcal{C}^1([a,b])$. Then, $f$ is rectifiable on $[a,b]$ and $$\ell(f,[a,b])=\int_a^b\sqrt{1+{f'(x)}^2}\dd x$$
+  \end{prop}
+  \begin{definition}
+    Let $\varphi:[a,b]\rightarrow\RR^2$ with $\varphi(t)=(x(t),y(t))$ and $\mathcal{P}=\{t_i\}_{i=0}^n\in\mathrm{P}([a,b])$. We define the \textit{length of the polygonal approximating the arc length of $\varphi$ on $[a,b]$} as: $$\ell(\varphi,\mathcal{P})=\sum_{i=1}^n\sqrt{{[x(t_i)-x(t_{i-1})]}^2+{[y(t_i)-y(t_{i-1})]}^2}$$
+  \end{definition}
+  \begin{prop}
+    Let $\varphi:[a,b]\rightarrow\RR^2$ with $\varphi(t)=(x(t),y(t))$. Suppose that the functions $x(t)$, $y(t)$ are of class $\mathcal{C}^1([a,b])$. Then, the curve $\varphi$ is rectifiable on $[a,b]$ and $$\ell(\varphi,[a,b])=\int_a^b\sqrt{{[x'(t)]}^2+{[y'(t)]}^2}\dd x$$
+  \end{prop}
+  \begin{lemma}
+    Let $f$, $g$ be continuous functions on $[a,b]$. Then, $\forall\varepsilon>0$, $\exists\delta>0$ such that if $\mathcal{P}=\{t_i\}_{i=0}^n$ with $t_i-t_{i-1}<\delta$, then:
+    \begin{multline*}
+      \left|\int_a^b\sqrt{{f(x)}^2+{g(x)}^2}\dd x\right.-\\-\left.\sum_{i=1}^n(t_i-t_{i-1})\sqrt{{f(c_i)}^2+{g(d_i)}^2}\right|<\varepsilon
+    \end{multline*}
+    for any $c_i,d_i\in[t_{i-1},t_i]$, $i=1,\ldots,n$.
+  \end{lemma}
+  \begin{lemma}
+    Let $f$, $g$ be continuous functions on $[a,b]$. Then, $\forall\varepsilon>0$, $\exists\delta>0$ such that if $\mathcal{P}=\{t_i\}_{i=0}^n$ with $t_i-t_{i-1}<\delta$, then:
+    $$\left|\int_a^bf(x)g(x)\dd x-\sum_{i=1}^n(t_i-t_{i-1})f(c_i)g(d_i)\right|<\varepsilon$$
+    for any $c_i,d_i\in[t_{i-1},t_i]$, $i=1,\ldots,n$.
+  \end{lemma}
+  \begin{prop}[Surface of revolution]
+    Let $f:[a,b]\rightarrow\mathbb{R}_{>0}$ be a function of class $\mathcal{C}^1$. Then, the surface of the solid formed by rotating the area below the function $f(x)$ and between the lines $x = a$ and $x = b$ about the $x$-axis is given by: $$S_x=2\pi\int_a^bf(x)\sqrt{1+{f'(x)}^2}\dd x$$
+  \end{prop}
+  \begin{prop}[Surface of revolution]
+    Let $a>0$ and $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^1$. Then, the surface of the solid formed by rotating the area below the function $f(x)$ and between the lines $x = a$ and $x = b$ about the $y$-axis is given by: $$S_y=2\pi\int_a^bx\sqrt{1+{f'(x)}^2}\dd x$$
+  \end{prop}
+  \begin{prop}[Volume of revolution]
+    Let $f,g:[a,b]\rightarrow\RR_{>0}$ be bounded and integrable functions. Then, the volume of the solid formed by rotating the area between the curves of $f(x)$ and $g(x)$ and the lines $x = a$ and $x = b$ about the $x$-axis is given by: $$V_x=\pi\int_a^b\left|{f(x)}^2-{g(x)}^2\right|\dd x$$
+  \end{prop}
+  \begin{prop}[Volume of revolution]
+    Let $a>0$ and $f,g:[a,b]\rightarrow\RR$ be bounded and integrable functions. Then, the volume of the solid formed by rotating the area between the curves of $f(x)$ and $g(x)$ and the lines $x = a$ and $x = b$ about the $y$-axis is given by: $$V_y=\pi\int_a^bx\left|f(x)-g(x)\right|\dd x$$
+  \end{prop}
+  \begin{prop}[Center of masses]
+    The \textit{center of masses $(x_0,y_0)$ of a thin plate with uniformly density $\rho$} is: $$x_0=\frac{\displaystyle\int_a^bx\sqrt{1+{f'(x)}^2}dx}{\displaystyle\int_a^b\sqrt{1+{f'(x)}^2}dx}\quad y_0=\frac{\displaystyle\int_a^b f(x)\sqrt{1+{f'(x)}^2}dx}{\displaystyle\int_a^b\sqrt{1+{f'(x)}^2}dx}$$
+  \end{prop}
+  \subsubsection{Calculation of primitives}
+  \begin{lemma}
+    Let $P(x),Q(x)\in\RR[x]$ be polynomials with $\deg P(x)<\deg Q(x)$. Suppose $Q(x)$ factorises as: $$Q(x)=\prod_{i=1}^n{(x-a_i)}^{r_i}\prod_{i=1}^m{(x^2+b_ix+c_i)}^{s_i}$$ with $b_i^2-4c_i<0$ for $i=1,\ldots,m$. Then, the function $\frac{P(x)}{Q(x)}$ can be expressed as:
+    $$\frac{P(x)}{Q(x)}=\sum_{i=1}^n\sum_{j=1}^{r_i}\frac{A_i^j}{{(x-a_i)^j}}+\sum_{i=1}^m\sum_{j=1}^{s_i}\frac{M_i^jx+N_i^j}{{(x^2+b_ix+c_i)^j}}$$ where $A_i^j,M_i^j,N_i^j\in\RR$ $\forall i,j$.
+  \end{lemma}
+  \begin{prop}
+    Let $P(x),Q(x)\in\RR[x]$ be polynomials. If $P(x)=C(x)Q(x)+R(x)$, then:
+    $$\int\frac{P(x)}{Q(x)}\dd x=\int C(x)\dd x+\int\frac{R(x)}{Q(x)}\dd x$$ where $\deg R(x)<\deg Q(x)$.
+  \end{prop}
+  \begin{lemma}
+    Let $P(x),Q(x)\in\RR[x]$ be polynomials with $\deg P(x)<\deg Q(x)$. Suppose $Q(x)$ factorises as: $$Q(x)=\prod_{i=1}^n{(x-a_i)}^{r_i}\prod_{i=1}^m{(x^2+b_ix+c_i)}^{s_i}$$ with $b_i^2-4c_i<0$ for $i=1,\ldots,m$. Then, the function $\frac{P(x)}{Q(x)}$ can be expressed as:
+    $$\frac{P(x)}{Q(x)}=\left(\frac{A_1(x)}{Q_1(x)}\right)'+\frac{A_2(x)}{Q_2(x)}$$ where $Q_2(x)=\prod_{i=1}^n(x-a_i)\prod_{i=1}^m(x^2+b_ix+c_i)$, $Q_1(x)=\frac{Q(x)}{Q_2(x)}$ and $A_i\in\RR[x]$ with $\deg A_i(x)<\deg Q_i(x)$, $i=1,2$.
+  \end{lemma}
+  \begin{theorem}[Hermite reduction method]
+    Let $P(x),Q(x)\in\RR[x]$ be polynomials. Suppose $$\frac{P(x)}{Q(x)}=\left(\frac{A_1(x)}{Q_1(x)}\right)'+\frac{A_2(x)}{Q_2(x)}$$ for some polynomials $Q_i(x),A_i(x)\in\RR[x]$. Then:
+    $$\int\frac{P(x)}{Q(x)}\dd x=\frac{A_1(x)}{Q_1(x)}+\int\frac{A_2(x)}{Q_2(x)}\dd x$$
+  \end{theorem}
 \end{multicols}
 \end{document}
