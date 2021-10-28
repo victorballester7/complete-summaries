@@ -180,22 +180,22 @@
     We define the relation $\leq$ defined on $A(U,\vectorfunction{f},t_0,x_0)$ in the following way. For $(I,\vectorfunction{\varphi}),(J,\vectorfunction{\psi})\in A(U,\vectorfunction{f},t_0,x_0)$: $$(J,\vectorfunction{\psi})\leq (I,\vectorfunction{\varphi})\iff J\subset I\text{ and }\vectorfunction{\varphi}|_J=\vectorfunction{\psi}\footnote{It can be seen that $\leq$ is a partial (but not total) order relation.}$$ In this case, we say that $(I,\vectorfunction{\varphi})$ is an \textit{extension} of $(J,\vectorfunction{\psi})$.
   \end{definition}
   \begin{definition}
-    Let $(A,\mathcal{R})$ be a poset. Then, $m\in A$ is a \textit{maximal element} if and only if $\forall a\in A$ with $m \mathcal{R} a$ we have $m=a$.
+    Let $(A,\leq )$ be a poset. Then, $m\in A$ is a \textit{maximal element} if and only if $\forall a\in A$ with $m \leq  a$ we have $m=a$.
   \end{definition}
   \begin{definition}
     Consider the poset $(A(U,\vectorfunction{f},t_0,x_0),\leq)$. We say that a solution $(I,\vectorfunction{\varphi})$ is \textit{maximal} if for all extensions $(J,\vectorfunction{\psi})$ of $(I,\vectorfunction{\varphi})$ we have $I=J$ and $\vectorfunction{\varphi}=\vectorfunction{\psi}$.
   \end{definition}
   \begin{definition}
-    Let $(A,\mathcal{R})$ be a poset and $C\subset A$ be a subset of $A$. We say that $C$ is a \textit{chain} if it is totally ordered in the inherited order, that is, if it is partially ordered and $\forall x,y\in C$ we have either $x\mathcal{R}y$ or $y\mathcal{R}x$.
+    Let $(A,\leq )$ be a poset and $C\subseteq A$ be a subset of $A$. We say that $C$ is a \textit{chain} if it is totally ordered in the inherited order, that is, if it is partially ordered and $\forall x,y\in C$ we have either $x\leq y$ or $y\leq x$.
   \end{definition}
   \begin{definition}
-    Let $(A,\mathcal{R})$ be a poset, $x\in A$ and $B\subset A$ be a subset. $x$ is an \textit{upper bound of $B$} if and only if $b\mathcal{R}x$ $\forall b\in B$.
+    Let $(A,\leq )$ be a poset, $x\in A$ and $B\subseteq A$ be a subset. $x$ is an \textit{upper bound of $B$} if and only if $b\leq x$ $\forall b\in B$.
   \end{definition}
   \begin{definition}
-    Let $(A,\mathcal{R})$ be a poset. Then, $m\in A$ is a \textit{greatest element} if and only if $\forall a\in A$ we have $a \mathcal{R} m$.
+    Let $(A,\leq )$ be a poset and $B\subseteq A$ be a subset. Then, $g\in A$ is a \textit{greatest element of $B$} if $g\in B$ and $\forall b\in B$ we have $b \leq  g$.
   \end{definition}
   \begin{lemma}[Zorn's lemma]
-    Let $(A,\mathcal{R})$ be a poset. If every chain $C\subset X$ has an upper bound in $A$, then $A$ contains at least one maximal element.
+    Let $(A,\leq )$ be a poset. If every chain $C\subset X$ has an upper bound in $A$, then $A$ contains at least one maximal element.
   \end{lemma}
   \begin{theorem}
     Let $U\subseteq\RR\times\RR^n$ be an open set, $(t_0,x_0)\in U$ and $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function. Consider the poset $(A(U,\vectorfunction{f},t_0,x_0),\leq)$. Then, $A(U,\vectorfunction{f},t_0,x_0)$ has maximal elements. Furthermore, if $(I,\vectorfunction{\varphi})$ is a maximal solution, then $I$ is open.
@@ -268,21 +268,21 @@
     Let $I\subset \RR$ be an interval, $\vectorfunction{A}\in\mathcal{C}(I,\mathcal{L}(\RR^n))$ and $\vectorfunction{M}(t)\in\mathcal{M}_n(\RR)$. Then:
     \begin{enumerate}
       \item $\vectorfunction{M}(t)$ is a matrix solution of the ode \eqref{DE_homo} $\iff\vectorfunction{M}'(t)=\vectorfunction{A}(t)\vectorfunction{M}(t)$\footnote{By definition, if $\vectorfunction{M}(t)=(m_{ij}(t))$, then $\vectorfunction{M}'(t):=({m_{ij}}'(t))$.}.
-      \item $\vectorfunction{M}(t)$ is a matrix solution of the ode \eqref{DE_homo} $\iff\forall c\in\RR^n$, $\vectorfunction{M}(t)c\in\mathcal{A}$.
-      \item If $\vectorfunction{M}(t)$ is a matrix solution of the ode \eqref{DE_homo}, then $\forall C\in\mathcal{M}_n(\RR)$, $\vectorfunction{M}(t)C$ is a matrix solution of the ode \eqref{DE_homo}.
+      \item $\vectorfunction{M}(t)$ is a matrix solution of the ode \eqref{DE_homo} $\iff\forall \vectorfunction{c}\in\RR^n$, $\vectorfunction{M}(t)\vectorfunction{c}\in\mathcal{A}$.
+      \item If $\vectorfunction{M}(t)$ is a matrix solution of the ode \eqref{DE_homo}, then $\forall \vectorfunction{C}\in\mathcal{M}_n(\RR)$, $\vectorfunction{M}(t)\vectorfunction{C}$ is a matrix solution of the ode \eqref{DE_homo}.
       \item If $\vectorfunction{M}(t)$ is a fundamental matrix solution of the ode \eqref{DE_homo}, then $\det\vectorfunction{M}(t)\ne 0$ $\forall t\in I$.
       \item $\vectorfunction{M}(t)$ is a fundamental matrix solution of the ode \eqref{DE_homo} $\iff\vectorfunction{M}(t)$ is a matrix solution of the ode \eqref{DE_homo} and $\exists t_0\in\RR$ such that $\det\vectorfunction{M}(t_0)\ne 0$.
     \end{enumerate}
   \end{prop}
   \begin{prop}
-    Let $I\subset \RR$ be an interval, $\vectorfunction{A}\in\mathcal{C}(I,\mathcal{L}(\RR^n))$ and $\vectorfunction{\Phi}(t),\vectorfunction{\psi}(t)\in\mathcal{M}_n(\RR)$ be matrix solutions of the ode \eqref{DE_homo}. Then, $\exists! C\in\mathcal{M}_n(\RR)$ such that $\vectorfunction{\psi}(t)=\vectorfunction{\Phi}(t)C$. Moreover, $\vectorfunction{\psi}(t)$ is fundamental if and only if $\det C\ne 0$.
+    Let $I\subset \RR$ be an interval, $\vectorfunction{A}\in\mathcal{C}(I,\mathcal{L}(\RR^n))$ and $\vectorfunction{\Phi}(t),\vectorfunction{\psi}(t)\in\mathcal{M}_n(\RR)$ be matrix solutions of the ode \eqref{DE_homo} such that $\vectorfunction{\Phi}$ is fundamental. Then, $\exists! \vectorfunction{C}\in\mathcal{M}_n(\RR)$ such that $\vectorfunction{\psi}(t)=\vectorfunction{\Phi}(t)\vectorfunction{C}$. Moreover, $\vectorfunction{\psi}(t)$ is fundamental if and only if $\det \vectorfunction{C}\ne 0$.
   \end{prop}
   \subsubsection{Non-homogeneous linear systems}
   \begin{prop}
     Let $I\subset \RR$ be an interval, $\vectorfunction{A}\in\mathcal{C}(I,\mathcal{L}(\RR^n))$ and $\vectorfunction{b}\in\mathcal{C}(I,\RR^n)$. Suppose $\vectorfunction{\varphi}(t,t_0,x_0)$ is the flux of the ode \eqref{DE_linear}. Then, $$\vectorfunction{\varphi}(t,t_0,x_0)=\Phi(t)\left[{\Phi(t_0)}^{-1}x_0+\int_{t_0}^t{\Phi(s)}^{-1}b(s)\dd s\right]$$ where $\Phi(t)$ is a fundamental matrix of the associated homogeneous system.
   \end{prop}
   \begin{prop}[Liouville's formula]
-    Let $I\subset \RR$ be an interval, $\vectorfunction{A}\in\mathcal{C}(I,\mathcal{L}(\RR^n))$, $\vectorfunction{\Phi}(t)\in\mathcal{M}_n(\RR)$ be a matrix solution of the ode \eqref{DE_homo} and $t_0\in I$. Then:, for all $t\in I$ we have: $$\det(\Phi(t))=\det (\Phi(t_0))\exp{\int_{t_0}^t\trace(\vectorfunction{A}(s))\dd s}$$
+    Let $I\subset \RR$ be an interval, $\vectorfunction{A}\in\mathcal{C}(I,\mathcal{L}(\RR^n))$, $\vectorfunction{\Phi}(t)\in\mathcal{M}_n(\RR)$ be a matrix solution of the ode \eqref{DE_homo} and $t_0\in I$. Then, for all $t\in I$ we have: $$\det(\Phi(t))=\det (\Phi(t_0))\exp{\int_{t_0}^t\trace(\vectorfunction{A}(s))\dd s}$$
   \end{prop}
   \begin{theorem}
     Let $\vectorfunction{A}\in\mathcal{M}_n(\RR)$ and $\vectorfunction{\Phi}(t)\in\mathcal{M}_n(\RR)$ be a matrix solution of the ode
@@ -305,17 +305,54 @@
   \begin{prop}
     Let $\vectorfunction{A}\in\mathcal{M}_n(\RR)$ and $t,s\in \RR$. Then, the exponential matrix $\exp{\vectorfunction{A}t}$ is a fundamental matrix of the ode \eqref{DE_coef-constants} and has the following properties:
     \begin{enumerate}
+      \item $\exp{\vectorfunction{A}\cdot 0}=\vectorfunction{I}_n$
       \item $\exp{\vectorfunction{A}(t+s)}=\exp{\vectorfunction{A}t}\exp{\vectorfunction{A}s}$
       \item ${\left(\exp{\vectorfunction{A}t}\right)}^{-1}=\exp{-\vectorfunction{A}t}$
       \item $\left(\exp{\vectorfunction{A}t}\right)'=\vectorfunction{A}\exp{\vectorfunction{A}t}=\exp{\vectorfunction{A}t}\vectorfunction{A}$
+      \item If $\vectorfunction{\Phi}(t)$ is an arbitrary fundamental matrix of \eqref{DE_coef-constants}, then: $$\exp{\vectorfunction{A}t}=\vectorfunction{\Phi}(t){\vectorfunction{\Phi}(0)}^{-1}$$
     \end{enumerate}
   \end{prop}
   \begin{lemma}
-    Let $\vectorfunction{A},\vectorfunction{B},\vectorfunction{C}\in\mathcal{M}_N(\RR)$. Then:
+    Let $\vectorfunction{A},\vectorfunction{B},\vectorfunction{C}\in\mathcal{M}_n(\RR)$. Then:
     \begin{enumerate}
       \item If $\vectorfunction{B}\vectorfunction{C}=\vectorfunction{C}\vectorfunction{A}$, then: $$\exp{\vectorfunction{B}t}\vectorfunction{C}=\vectorfunction{C}\exp{\vectorfunction{A}t}$$
       \item If $\vectorfunction{A}\vectorfunction{B}=\vectorfunction{B}\vectorfunction{A}$, then: $$\exp{\vectorfunction{A}t}\vectorfunction{B}=\vectorfunction{B}\exp{\vectorfunction{A}t}\qquad\text{and}\qquad\exp{(\vectorfunction{A}+\vectorfunction{B})t}=\exp{\vectorfunction{A}t}\exp{\vectorfunction{B}t}$$
     \end{enumerate}
   \end{lemma}
+  \begin{lemma}
+    Let $\vectorfunction{A}\in\mathcal{M}_n(\RR)$ and $t\in\RR$. If $\lambda$ is an eigenvalue of $\vectorfunction{A}$ with associated eigenvector $\vectorfunction{v}$, then $\exp{\lambda t}$ is an eigenvalue of $\exp{\vectorfunction{A}t}$ with associated eigenvector $\vectorfunction{v}$. That is, $\exp{\lambda t}\vectorfunction{v}=\exp{\vectorfunction{A}t}\vectorfunction{v}$.
+  \end{lemma}
+  \begin{corollary}
+    Let $\vectorfunction{A}\in\mathcal{M}_n(\RR)$ and $t\in\RR$ and consider the linear ode $\vectorfunction{x}'=\vectorfunction{A}\vectorfunction{x}$. If $(\vectorfunction{v_1},\ldots,\vectorfunction{v}_n)$ is a basis of eigenvectors with associated eigenvalues $\lambda_1,\ldots,\lambda_n$, respectively, then $(\vectorfunction{\varphi}_1,\ldots,\vectorfunction{\varphi}_n)$, where $\vectorfunction{\varphi}_i=\exp{\lambda_it}\vectorfunction{v}_i$ for $i=1,\ldots,n$, is a basis of $\mathcal{A}$.
+  \end{corollary}
+  \begin{lemma}
+    Let $\vectorfunction{A}\in\mathcal{M}_n(\RR)$ and $\lambda\in\CC\setminus\RR$ be an eigenvalue of $\vectorfunction{A}$ with associated eigenvector $\vectorfunction{v}$. Then:
+    \begin{enumerate}
+      \item $\vectorfunction{v}\in\CC^n$
+      \item $\overline{\lambda}$ is also an eigenvalue of $\vectorfunction{A}$ with associated eigenvector $\overline{\vectorfunction{v}}$.
+    \end{enumerate}
+  \end{lemma}
+  \begin{definition}
+    Let $\vectorfunction{A}\in\mathcal{M}_n(\RR)$. A vector $\vectorfunction{w}\in\RR^n$ is a \textit{generalized eigenvector of rank $m$ of $\vectorfunction{A}$ corresponding to the eigenvalue $\lambda\in\RR$} if: $${(\vectorfunction{A}-\lambda\vectorfunction{I}_n})^m\vectorfunction{w}=0$$ but ${(\vectorfunction{A}-\lambda\vectorfunction{I}_n})^{m-1}\vectorfunction{w}\ne 0$.
+  \end{definition}
+  \begin{lemma}
+    Let $\vectorfunction{A}\in\mathcal{M}_n(\RR)$ and $\vectorfunction{v}_1\in\RR^n$ be an eigenvector of $\vectorfunction{A}$ with associated eigenvalue $\lambda$. We define $\vectorfunction{v}_2,\ldots,\vectorfunction{v}_k\in\RR^n$ in the following way: $$(\vectorfunction{A}-\lambda\vectorfunction{I}_n)\vectorfunction{v}_i=\vectorfunction{v}_{i-1}\qquad i=2,\ldots, k$$
+    That is, $\vectorfunction{v}_i$ is a generalized eigenvector of rank $i$ of $\vectorfunction{A}$ with associated eigenvalue $\lambda$. Then, $\vectorfunction{\varphi}_1,\ldots,\vectorfunction{\varphi}_k$, defined as $$\vectorfunction{\varphi}_i(t)=\exp{\lambda t}\sum_{m=0}^{i-1}\frac{t^m}{m!}\vectorfunction{v}_{i-m}\qquad i=1,\ldots,k$$
+    are solutions of the ode \eqref{DE_coef-constants}. Furthermore, if $\vectorfunction{v}_1,\ldots,\vectorfunction{v}_k$ are linearly independent, then so are $\vectorfunction{\varphi}_1,\ldots,\vectorfunction{\varphi}_k$.
+  \end{lemma}
+  \begin{corollary}
+    Let $\vectorfunction{A}\in\mathcal{M}_n(\RR)$ and $\sigma(\vectorfunction{A})=\{\lambda_1,\ldots,\lambda_n\}$ be the spectrum of $\vectorfunction{A}$ such that:
+    \begin{itemize}
+      \item $\lambda_1,\ldots,\lambda_{2k}\in\CC\setminus\RR$.
+      \item $\lambda_i=\alpha_i+\beta_i\ii$, $\alpha_i,\beta_i\in\RR$ for $i=1,\ldots,k$.
+      \item $\lambda_{k+i}=\overline{\lambda_i}$ for $i=1,\ldots,k$.
+      \item $\lambda_{2k+1},\ldots,\lambda_n\in\RR$
+    \end{itemize}
+    Then, the general solution of the ode \eqref{DE_coef-constants} is of the form:
+    \begin{multline*}
+      \vectorfunction{\varphi}(t)=\sum_{i=1}^k\exp{\alpha_i t}\left(\vectorfunction{P}_i(t)\cos(\beta_i t)+\vectorfunction{Q}_i(t)\sin(\beta_i t)\right)+\\+\sum_{i=2k+1}^n\exp{\lambda_i t}\vectorfunction{R}_i(t)
+    \end{multline*}
+    where $\vectorfunction{P}_i,\vectorfunction{Q}_i,\vectorfunction{R}_i\in\RR^n[t]$ $\forall i$.
+  \end{corollary}
 \end{multicols}
 \end{document}
