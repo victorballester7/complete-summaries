@@ -35,11 +35,19 @@
     Let $R$ be a ring. We define the  \textit{polynomial ring $R[x]$} as: $$R[x]:=\{r_0+r_1\cdot x+\cdots+r_n\cdot x^n:r_i\in R\ \forall i\text{ and }n\geq 0\}$$ Moreover, we can iterate this definition to define the polynomial ring in $m$-unknowns: $$R[x_1,\ldots,x_m]=\left(R[x_1,\ldots,x_{m-1}]\right)[x_m]$$
   \end{definition}
   \begin{prop}[Universal property of polynomials in several variables]
-    Let $R$, $S$ be two rings, $f:R\rightarrow S$ be a ring morphism and $s_1,\ldots,s_n\in S$ be not necessarily distinct elements of $S$. Then, the function $\text{eva}:R[x_1,\ldots,x_n]\rightarrow S$ defined by: $$\text{eva}(p):=\sum_{i_1,\ldots,i_n\geq 0}f(r_{i_1,\ldots,i_n}){s_1}^{i_1}\cdots {s_n}^{i_n}$$ is the unique ring morphism such that $\text{eva}(r)=f(r)$ $\forall r\in R$ and $\text{eva}(x_i)=s_i$ for $i=1,\ldots,n$. This function is called \textit{evaluation of $s_1,\ldots,s_n$ through $f$}\footnote{For the case $n=1$, we will denote by $\text{eva}_s$ the unique ring morphism $\text{eva}_s:R[x]\rightarrow S$ such that $\text{eva}_s(r)=f(r)$ $\forall r\in R$ and $\text{eva}_s(x)=s$.}.
+    Let $R$, $S$ be two rings, $f:R\rightarrow S$ be a ring morphism and $s_1,\ldots,s_n\in S$ be not necessarily distinct elements of $S$. Then, the function $\varphi:R[x_1,\ldots,x_n]\rightarrow S$ defined by
+    \begin{multline*}
+      \varphi\left(\sum_{i_1,\ldots,i_n\geq 0}r_{i_1,\ldots,i_n}{x_1}^{i_1}\cdots {x_n}^{i_n}\right)=\\=\sum_{i_1,\ldots,i_n\geq 0}f(r_{i_1,\ldots,i_n}){s_1}^{i_1}\cdots {s_n}^{i_n}
+    \end{multline*}
+    is the unique ring morphism such that $\varphi(r)=f(r)$ $\forall r\in R$ and $\varphi(x_i)=s_i$ for $i=1,\ldots,n$. This function is called \textit{evaluation of $s_1,\ldots,s_n$ through $f$}\footnote{For the case $n=1$, we will denote by $\varphi_s$ the unique ring morphism $\varphi_s:R[x]\rightarrow S$ such that $\varphi_s(r)=f(r)$ $\forall r\in R$ and $\varphi_s(x)=s$.}.
   \end{prop}
   \subsubsection{Field of fractions}
-  \begin{theorem}
-    All integral domains are a subring of a field. More explicitly, if $R$ is an integral domain and $K$ is a field, there exists another field $Q(R)$ and an injective ring morphism $\iota:R\hookrightarrow Q(R)$ so that for all injective ring morphism $f:R\hookrightarrow K$, there exists a unique field morphism $Q(f):Q(R)\rightarrow K$ such that $f=Q(f)\circ\iota$.
+  \begin{theorem}[Universal property of the field of fractions]
+    All integral domains are a subring of a field. More explicitly, if $R$ is an integral domain and $K$ is a field, there exists another field $Q(R)$ and an injective ring morphism $\iota:R\hookrightarrow Q(R)$ so that for all injective ring morphism $f:R\hookrightarrow K$, there exists a unique field morphism $Q(f):Q(R)\rightarrow K$ defined by
+    $$
+      \function{Q(f)}{Q(R)}{K}{\displaystyle\frac{a}{b}}{f(a){f(b)}^{-1}}
+    $$
+    such that $f=Q(f)\circ\iota$.
   \end{theorem}
   \begin{corollary}
     Let $R$ be an integral domain. The field $Q(R)$ with the injection $\iota$ is unique up to isomorphism, that is if there is a field $Q'(R)$ and an injective ring morphism $\iota':R\hookrightarrow Q(R)$ satisfying the property of above, then there is a unique isomorphism $Q(f):Q(R)\cong Q'(R)$ such that $\iota'=Q(\iota')\circ\iota$. This field $Q(R)$ is called \textit{field of fractions of $R$}.
@@ -61,7 +69,7 @@
     Let $R$ be a ring, $S\subseteq R$ be a subring of $R$ and $A\subseteq R$ be a subset of $R$. Then, the smallest subring of $R$ containing $S$ and $A$ is denoted by $S[A]$.
   \end{definition}
   \begin{lemma}
-    Let $A$ be a finite set, $R$ and $S$ be rings and $\text{eva}:R[x_a:a\in A]\rightarrow S$ be the evaluation morphism such that $\text{eva}(r)=r$ $\forall r\in R$ and $\text{eva}(x_a)=a$ $\forall a\in A$. Then, $S[A]=\im(\text{eva})$.
+    Let $A$ be a finite set, $R$ and $S$ be rings and $\varphi:R[x_a:a\in A]\rightarrow S$ be the evaluation morphism such that $\varphi(r)=r$ $\forall r\in R$ and $\varphi(x_a)=a$ $\forall a\in A$. Then, $S[A]=\im\varphi$.
   \end{lemma}
   \begin{definition}
     Let $(K,+,\cdot)$ be a field and $X\subseteq K$ be a subset of $K$. Let $$P:=\{L\subseteq K: X\subseteq L,(L,+,\cdot)\text{ is a subfield of }(R,+,\cdot)\}$$ Then, the smallest subfield of $(K,+,\cdot)$ containing $X$ is: $$\langle X\rangle_\text{field}=\bigcap_{L\in P}L$$
@@ -71,7 +79,7 @@
   \end{definition}
   \subsection{Field extensions}
   \begin{prop}
-    Let $K$, $L$ be fields. Then, all field morphism $K\rightarrow L$ is injective.
+    Let $K$, $L$ be fields. Then, any field morphism $K\rightarrow L$ is injective.
   \end{prop}
   \begin{definition}
     Let $K$, $L$ be two fields. A \textit{field extension $\quot{L}{K}$} is a field morphism $K\hookrightarrow L$.
@@ -82,15 +90,15 @@
   \begin{definition}
     Let $\quot{L}{K}$ be a field extension. We define the \textit{degree of the extension $\quot{L}{K}$} as: $$[L:K]:=\dim_K(L)$$ We say that the extension $\quot{L}{K}$ is \textit{finite} if $[L:K]$ is finite. Otherwise, we say that $\quot{L}{K}$ is \textit{infinite}.
   \end{definition}
-  \begin{prop}[Kronecker theorem]
-    Let $K$ be a field, $p(x)\in K[x]$ a monic and irreducible polynomial of degree $d\geq 1$ and $L=\quot{K[x]}{(p(x))}$. Then, $\quot{L}{K}$ is a field extension of degree $d$, and the set $\{1,\bar{x},\ldots,\bar{x}^{d-1}\}$ is a basis of the vector space $L$ over $K$. Furthermore, $\bar{x}\in L$ is a root of $p(x)$ in $L$.
-  \end{prop}
+  \begin{lemma}[Kronecker lemma]
+    Let $K$ be a field, $p(x)\in K[x]$ a monic and irreducible polynomial of degree $d\geq 1$ and $L=\quot{K[x]}{(p(x))}$. Then, $\quot{L}{K}$ is a field extension of degree $d$, and the set $\{1,\bar{x},\ldots,{\bar{x}}^{d-1}\}$ is a basis of the vector space $L$ over $K$. Furthermore, $\bar{x}\in L$ is a root of $p(x)$ in $L$.
+  \end{lemma}
   \subsubsection{Algebraic and transcendental numbers}
   \begin{definition}
     Let $\quot{L}{K}$ be a field extension and $\alpha\in L$. Consider the ring morphism: $$\function{\varphi_\alpha}{K[x]}{L}{p(x)}{p(\alpha)}$$
     \begin{enumerate}
-      \item We say that $\alpha$ is \textit{algebraic over $K$} if $\ker\varphi_\alpha\ne(p(x))$, where $p(x)\in K[x]$ is irreducible polynomial of degree $d\geq 1$. This polynomial is called \textit{irreducible polynomial of $\alpha$ over $K$} and it is denoted by $\irr(\alpha,K)(x)$.
-      \item We say that $\alpha$ is \textit{transcendental over $K$} if $\ker\varphi_\alpha\ne(0)$, or equivalently, if it is not algebraic.
+      \item We say that $\alpha$ is \textit{algebraic over $K$} if $\ker\varphi_\alpha=(p(x))$, where $p(x)\in K[x]$ is irreducible polynomial of degree $d\geq 1$. This polynomial is called \textit{irreducible polynomial of $\alpha$ over $K$} and it is denoted by $\irr(\alpha,K)(x)$.
+      \item We say that $\alpha$ is \textit{transcendental over $K$} if $\ker\varphi_\alpha=(0)$, or equivalently, if it is not algebraic.
     \end{enumerate}
   \end{definition}
   \begin{theorem}
@@ -114,7 +122,7 @@
     Let $\quot{F}{L}$ and $\quot{L}{K}$ be field extensions. Then: $$[F:K]=[F:L][L:K]$$
   \end{theorem}
   \begin{prop}
-    Let $\quot{L}{K}$ be a field extension and $\alpha\in L$ be algebraic. If $\quot{K'}{K}$ is another field extension, then:
+    Let $\quot{L}{K}$ be a field extension and $\alpha\in L$ be algebraic. Then:
     \begin{enumerate}
       \item The following statements are equivalent:
             \begin{enumerate}
@@ -122,7 +130,7 @@
               \item $\irr(\alpha,K)(x)=x-\alpha$
               \item $\deg(\irr(\alpha,K)(x))=1$
             \end{enumerate}
-      \item $\irr(\alpha,K')(x)\mid\irr(\alpha,K)(x)$, and they are equal if and only if they have the same degree.
+      \item If $\quot{K'}{K}$ is another field extension, then: $$\irr(\alpha,K')(x)\mid\irr(\alpha,K)(x)$$ and, moreover, $\irr(\alpha,K')(x)=\irr(\alpha,K)(x)\iff\deg(\irr(\alpha,K')(x))=\deg(\irr(\alpha,K)(x))$.
       \item $\deg(\irr(\alpha,K)(x))\mid [L:K]$
     \end{enumerate}
   \end{prop}
@@ -135,9 +143,6 @@
   \begin{definition}
     A field extension $\quot{L}{K}$ is called \textit{finitely generated} if there exists $\alpha_1,\ldots,\alpha_n\in L$ such that $L=K(\alpha_1,\ldots,\alpha_n)$.
   \end{definition}
-  \begin{prop}
-    Let $\quot{L}{K}$ be a finite field extension. Then, $\quot{L}{K}$ is finitely generated and furthermore if $(\alpha_1,\ldots,\alpha_n)$ is a basis of the vector space $L$ over the field $K$, then: $$L=K(\alpha_1,\ldots,\alpha_n)$$.
-  \end{prop}
   \subsubsection{Algebraic extensions}
   \begin{definition}
     Let $\quot{L}{K}$ be a field extension. We say that $\quot{L}{K}$ is \textit{algebraic} if $\forall\alpha\in L$, $\alpha$ is algebraic over $K$.
@@ -157,7 +162,7 @@
     \end{enumerate}
   \end{prop}
   \begin{prop}
-    Let $F/L/K$ be a tower of fields such that $\quot{L}{K}$ is algebraic, and $\alpha\in F$. Then, if $\alpha$ is algebraic over $L$, then $\alpha$ is algebraic over $K$.
+    Let $F/L/K$ be a tower of fields such that $\quot{L}{K}$ is algebraic, and $\alpha\in F$. Then, if $\alpha$ is algebraic over $L$, $\alpha$ is algebraic over $K$.
   \end{prop}
   \begin{prop}
     Let $F/L/K$ be a tower of fields. Then:
@@ -170,25 +175,26 @@
   \end{prop}
   \subsubsection{Morphisms of extensions}
   \begin{definition}
-    Let $K$, $L$, $F$ be fields and $f:K\hookrightarrow L$ and $g:K\hookrightarrow F$ be field extensions. A \textit{morphism of extensions between $f$ and $g$} (sometimes called $K$-morphism) is a field morphism $h:L\rightarrow F$ such that $h|_K=g$, where $h|_K:=h\circ f$\footnote{If the morphisms $f$ and $g$ are the natural inclusions, we will denote $h|_K:=\id_K$.}. The set of all such morphisms is:
+    Let $K$, $L$, $F$ be fields and $f:K\hookrightarrow L$ and $g:K\hookrightarrow F$ be field extensions. A \textit{morphism of field extensions between $f$ and $g$} (sometimes called $K$-field morphism) is a field morphism $h:L\rightarrow F$ such that $h|_K=g$, where $h|_K:=h\circ f$\footnote{If the morphisms $f$ and $g$ are the natural inclusions, we will denote $h|_K:=\id_K$.}. The set of all such morphisms is:
     $$\Mor_K(f,g):=\{h:L\longrightarrow F:h\circ f=g\}$$
     If $f$ and $g$ are the natural inclusions, we will denote: $$\Mor_K(L,F):=\Mor_K(f,g)=\{h:L\longrightarrow F:h|_K=\id_K\}$$
-    Finally, if $f$ is the natural inclusion but $g$ isn't, we will denote: $$\Mor_K(L,g):=\Mor_K(f,g)=\{h:L\longrightarrow F:h|_K=g\}$$
+    If $f$ is the natural inclusion but $g$ isn't, we will denote: $$\Mor_K(L,g):=\Mor_K(f,g)=\{h:L\longrightarrow F:h|_K=g\}$$
+    Finally, if $g$ is the natural inclusion but $f$ isn't, we will denote: $$\Mor_K(f,F):=\Mor_K(f,g)=\{h:L\longrightarrow F:h\circ f=\id_K\}$$
   \end{definition}
   \begin{definition}
     Let $K$, $L$, $F$ be fields and $f:K\hookrightarrow L$ and $g:K\hookrightarrow F$ be field extensions. We define the following sets:
     \begin{gather*}
       \Iso_K(f,g):=\{h\in\Mor_K(f,g):h\text{ is bijective}\} \\
-      \Aut_K(f):=\Iso_K(f,f)\qquad\Gal(f):=\Aut_K(f)
+      \Aut_K(f):=\Iso_K(f,f)
     \end{gather*}
-    If $f$ and $g$ are the natural inclusions, we will denote:
+    If $f$ and $g$ are the natural inclusions, we will denote\footnote{And we define $\Iso_K(L,g)$ and $\Iso_K(f,F)$ analogously as we did before.}:
     \begin{gather*}
       \Iso_K(L,F):=\{h\in\Mor_K(L,F):h\text{ is bijective}\} \\
       \Aut_K(L):=\Iso_K(L,L)
     \end{gather*}
   \end{definition}
   \begin{lemma}
-    Let $\quot{L}{K}$ be a field extension. Then, $(\Aut_K(L),\circ)$ is a group and it is called \textit{Galois group of $\quot{L}{K}$}. Hence, $\Aut_K(L)$ is also denoted as $\Gal(\quot{L}{K})$.
+    Let $\quot{L}{K}$ be a field extension. Then, $(\Aut_K(L),\circ)$ is a group and it is called \textit{Galois group of $\quot{L}{K}$}. Hence, $\Aut_K(L)$ is also denoted as $\Gal(\quot{L}{K})$\footnote{For the general case when $f:K\hookrightarrow L$ is a field extension, we define $\Gal(f):=\Aut_K(f)$.}.
   \end{lemma}
   \begin{lemma}
     Let $K$, $L$, $F$ be fields and $f:K\rightarrow L$, $g:K \rightarrow F$ be field morphisms. Let $h\in\Mor_K(f,g)$, $\alpha\in L$, and $p(x)\in K[x]$. Then: $$h(f(p)(\alpha))=g(p)(h(\alpha))$$
@@ -245,7 +251,7 @@
     Let $K$ be a field and $p(x)\in K[x]\setminus K$. Then, any two splitting fields of $p(x)$ over $K$ are isomorphic.
   \end{corollary}
   \begin{corollary}
-    Let $K$ be a field, $p(x)\in K[x]\setminus K$ and $L$ be the splitting field of $p(x)$ over $K$. Then, $|\Gal(\quot{L}{K})|\leq[L:K]$ and the inequality holds if $p(x)$ has no repeated roots on $L$.
+    Let $K$ be a field, $p(x)\in K[x]\setminus K$ and $L$ be the splitting field of $p(x)$ over $K$. Then: $$|\Gal(\quot{L}{K})|\leq[L:K]$$ and $$|\Gal(\quot{L}{K})|=[L:K]$$ if $p(x)$ has no repeated roots on $L$.
   \end{corollary}
   \begin{corollary}
     Let $\quot{F}{K}$ be a field extension and $p(x)\in K[x]$. Then, the splitting field $L_F$ of $p(x)$ over $F$ contains the splitting field $L$ of $p(x)$ over $K$
