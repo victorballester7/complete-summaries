@@ -2,23 +2,39 @@
 
 \begin{document}
 \begin{multicols}{2}[\section{Topology}]
-  \subsection{Topological spaces and continuous functions}
+  \subsection{Topological spaces}
   \subsubsection{Metric spaces}
   \begin{definition}
-    Let $X$ be a set. A \textit{distance in $X$} is a function $d:X\times X\rightarrow\RR $ such that $\forall x,y,z\in X$ the following properties are satisfied:
+    Let $X$ be a set. A \textit{distance} (or \textit{metric}) \textit{in $X$} is a function $d:X\times X\rightarrow\RR $ such that $\forall x,y,z\in X$ the following properties are satisfied:
     \begin{enumerate}
-      \item $d(x,y)\geq 0$.
       \item $d(x,y)=0\iff x=y$.
       \item $d(x,y)=d(y,x)$.
       \item $d(x,y)\leq d(x,z)+d(z,y)\quad$\textit{(triangular inequality)}.
     \end{enumerate}
     We define a \textit{metric space} as a pair $(X,d)$ that satisfy the previous properties.
   \end{definition}
+  \begin{prop}
+    Let $x,y\in\RR^n$ such that $x=(x_1,\ldots,x_n)$ and $y=(y_1,\ldots,y_n)$. The following functions are metrics in $\RR^n$.
+    \begin{enumerate}
+      \item \textit{Euclidean metric}: $$d(x,y)=\sqrt{\sum_{i=1}^n{(x_i-y_i)}^2}$$
+      \item \textit{Taxicab metric}: $$d(x,y)=\sum_{i=1}^n|x_i-y_i|$$
+      \item \textit{Maximum metric}: $$d(x,y)=\max\{|x_i-y_i|:i\in\{1,\ldots,n\}\}$$
+    \end{enumerate}
+  \end{prop}
+  \begin{prop}
+    Let $X$ be a set. Then, $(X,d)$ is a metric space, where: $$d(x,y)=
+      \left\{\begin{array}{lcc}
+        1 & \text{if} & x\ne y \\
+        0 & \text{if} & x= y
+      \end{array}\right.
+    $$
+    This metric $d$ is called \textit{discrete metric}.
+  \end{prop}
   \begin{definition}
     Let $(X,d)$ be a metric space $a\in X$ and $r\in\RR$. We define the \textit{ball $B_d(a,r)$ with the metric $(X,d)$ of center $a$ and radius $r$} as: $$B_d(a,r)=\{x\in X:d(x,a)<r\}$$
   \end{definition}
   \begin{definition}
-    Let $(X,d_X)$ and $(Y,d_Y)$ be two metric spaces and $f:(X,d_X)\rightarrow(Y,d_Y)$ be a function. We say that $f$ is continuous if $\forall a\in X$ and $\forall\varepsilon>0$, $\exists\delta>0$ such that $d_Y(f(x),f(a))<\varepsilon$ whenever $d_X(x,a)<\delta$. Equivalently, we say that $f$ is continuous if $\forall a\in X$ and $\forall\varepsilon>0$, $\exists\delta>0$ such that: $$f(B_{d_X}(a,\delta))\subset B_{d_Y}(f(a),\varepsilon)$$ or, equivalently, $B_{d_X}(a,\delta)\subset f^{-1}\left(B_{d_Y}(f(a),\varepsilon)\right)$.
+    Let $(X,d_X)$ and $(Y,d_Y)$ be two metric spaces and $f:(X,d_X)\rightarrow(Y,d_Y)$ be a function. We say that $f$ is continuous if $\forall a\in X$ and $\forall\varepsilon>0$, $\exists\delta>0$ such that $d_Y(f(x),f(a))<\varepsilon$ whenever $d_X(x,a)<\delta$ or, equivalently: $$f(B_{d_X}(a,\delta))\subset B_{d_Y}(f(a),\varepsilon)$$ which is equivalent to $B_{d_X}(a,\delta)\subset f^{-1}\left(B_{d_Y}(f(a),\varepsilon)\right)$.
   \end{definition}
   \begin{definition}
     Let $(X,d)$ be a metric space. We say that a subset $A\subseteq X$ is \textit{open} if $\forall a\in A$, $\exists\varepsilon>0$ such that $B_d(a,\varepsilon)\subset A$.
@@ -49,7 +65,7 @@
   \end{prop}
   \subsubsection{Topological spaces}
   \begin{definition}
-    Let $X$ be a set. A \textit{topology $\mathcal{T}$} on a set $X$ is a collection of subsets of $X$ (that is, $\mathcal{T}\subset\mathcal{P}(X)$) satisfying the following properties:
+    Let $X$ be a set. A \textit{topology $\mathcal{T}$} on a set $X$ is a collection of subsets of $X$ (that is, $\mathcal{T}\subseteq\mathcal{P}(X)$) satisfying the following properties:
     \begin{enumerate}
       \item $\varnothing, X\in\mathcal{T}$.
       \item The intersection of any finite subcollection of $\mathcal{T}$ is in $\mathcal{T}$.
@@ -76,43 +92,32 @@
             \end{multline*}
       \item \textit{Particular point topology}: $$\mathcal{T}:=\{U\subseteq X:U=\varnothing\text{ or }p\in U\}$$
       \item \textit{Excluded point topology}: $$\mathcal{T}:=\{U\subseteq X:U=X\text{ or }p\notin U\}$$
+      \item \textit{Sierpiński space}: If $X=\{0,1\}$, $$\mathcal{T}:=\{\varnothing,\{1\},\{0,1\}\}$$
     \end{itemize}
   \end{prop}
-  \begin{prop}
-    Let $(X,\mathcal{T}_X)$ and $(Y,\mathcal{T}_Y)$ be topological spaces and $f:(X,\mathcal{T}_X)\rightarrow(Y,\mathcal{T}_Y)$ be a function. We say that $f$ is continuous if for all $U\in\mathcal{T}_Y$, we have $f^{-1}(U)\in\mathcal{T}_X$.
-  \end{prop}
-  \begin{definition}
-    A \textit{homeomorphism} between topological spaces is a bijective function that is continuous and whose inverse is also continuous.
-  \end{definition}
-  \begin{definition}
-    Let $(X,\mathcal{T}_X)$ and $(Y,\mathcal{T}_Y)$ be topological spaces. We say that $(X,\mathcal{T}_X)$ and $(Y,\mathcal{T}_Y)$ are \textit{homeomorphic}, denoted by $(X,\mathcal{T}_X)\cong(Y,\mathcal{T}_Y)$, if there exists a homeomorphism between them.
-  \end{definition}
   \begin{definition}
     Let $(X,\mathcal{T})$ be a topological space and $C\subseteq X$. We say that $C$ is \textit{closed} if $X\setminus C\in\mathcal{T}$ is open.
   \end{definition}
   \begin{definition}
-    Let $(X,\mathcal{T})$ be a topological space and $A\subseteq X$. We say that $A$ is \textit{clopen} if is both open and closed.
+    Let $(X,\mathcal{T})$ be a topological space and $A\subseteq X$. We say that $A$ is \textit{clopen} if it is both open and closed.
   \end{definition}
   \begin{prop}
     Let $(X,\mathcal{T})$ be a topological space. Then:
     \begin{enumerate}
       \item $\varnothing$ and $X$ are closed.
-      \item The union of any finite subcollection of closed sets in $X$ is a closed set in $X$.
-      \item The intersection of any subcollection of closed sets in $X$ is closed in $X$.
+      \item The union of any finite subcollection of closed sets in $(X,\mathcal{T})$ is a closed set in $(X,\mathcal{T})$.
+      \item The intersection of any subcollection of closed sets in $(X,\mathcal{T})$ is closed in $(X,\mathcal{T})$.
     \end{enumerate}
-  \end{prop}
-  \begin{prop}
-    Let $(X,\mathcal{T}_X)$ and $(Y,\mathcal{T}_Y)$ be topological spaces and $f:(X,\mathcal{T}_X)\rightarrow(Y,\mathcal{T}_Y)$ be a function. We say that $f$ is continuous if and only if for all closed sets $C\subseteq Y$, we have $f^{-1}(C)\subseteq X$ is closed.
   \end{prop}
   \subsubsection{Basis for a topology}
   \begin{definition}
-    Let $(X,\mathcal{T})$ be a topological space and $\mathcal{B}\subset\mathcal{T}$ be a subset of open sets. We say that $\mathcal{B}$ is a \textit{basis of $\mathcal{T}$} if for all $U\in\mathcal{T}$ and $x\in U$, there exists $B\in\mathcal{B}$ such that $x\in\mathcal{B}\subseteq U$.
+    Let $(X,\mathcal{T})$ be a topological space and $\mathcal{B}\subseteq\mathcal{T}$ be a subset of open sets. We say that $\mathcal{B}$ is a \textit{basis of $\mathcal{T}$} if $\forall U\in\mathcal{T}$ and $\forall x\in U$, $\exists B\in\mathcal{B}$ such that $x\in B\subseteq U$.
   \end{definition}
   \begin{prop}
-    Let $(X,\mathcal{T})$ be a topological space and $\mathcal{B}$ be a basis of $\mathcal{T}$. Then, $\forall U\in\mathcal{T}$: $$U=\bigcup_{x\in U}B_x$$ where $x\in B_x\subseteq U$ and $B_x\in\mathcal{B}$ $\forall x\in U$.
+    Let $(X,\mathcal{T})$ be a topological space and $\mathcal{B}$ be a basis of $\mathcal{T}$. Then, for all $U\in\mathcal{T}$ we have: $$U=\bigcup_{x\in U}B_x$$ where $x\in B_x\subseteq U$ and $B_x\in\mathcal{B}$ $\forall x\in U$.
   \end{prop}
   \begin{lemma}
-    Let $(X,\mathcal{T})$ be a topological space, $\mathcal{B}\subset\mathcal{T}$ be a basis of $\mathcal{T}$ and $\{B_i:B_i\in\mathcal{B}\;\forall i\in \{1,\ldots,n\}\}$ be a collection of elements of $\mathcal{B}$. Then, $\forall x\in\bigcap_{i=1}^nB_i$, $\exists B'\in\mathcal{B}$ such that $x\in B'\subset\bigcap_{i=1}^nB_i$.
+    Let $(X,\mathcal{T})$ be a topological space, $\mathcal{B}\subseteq\mathcal{T}$ be a basis of $\mathcal{T}$ and $\{B_i\in\mathcal{B}:i=1,\ldots,n\}$ be a collection of elements of $\mathcal{B}$. Then, $\forall x\in\bigcap_{i=1}^nB_i$, $\exists B'\in\mathcal{B}$ such that $x\in B'\subset\bigcap_{i=1}^nB_i$.
   \end{lemma}
   \begin{prop}
     Let $X$ be a set and $\mathcal{B}\subset\mathcal{P}(X)$ be a collection of subsets of $X$ such that:
@@ -138,8 +143,15 @@
     Let $(X,\mathcal{T}_X)$ and $(Y,\mathcal{T}_Y)$ be topological spaces, $f:(X,\mathcal{T}_X)\rightarrow (Y,\mathcal{T}_Y)$ be a function and $\mathcal{B}_Y$ be a basis of $\mathcal{T}_Y$. Then, $f$ is continuous if and only if $f^{-1}(B)$ is open $\forall B\in \mathcal{B}_Y$.
   \end{theorem}
   \begin{definition}
-    Let $(X,\mathcal{T})$ be a topological space and $\mathcal{S}\subset\mathcal{T}$ be a subset. Then, $\mathcal{S}$ is a \textit{subbasis of $\mathcal{T}$} if all open sets can be written as a union of finite intersections of elements of $\mathcal{S}$.
+    Let $(X,\mathcal{T})$ be a topological space and $\mathcal{S}\subseteq\mathcal{T}$ be a subset. Then, $\mathcal{S}$ is a \textit{subbasis of $\mathcal{T}$} if $\forall U\in\mathcal{T}$, $U$ can be written as a union of finite intersections of elements of $\mathcal{S}$.
   \end{definition}
+  \begin{prop}
+    Let $X$ be a set and $\mathcal{S}\subset\mathcal{P}(X)$ such that $X=\bigcup_{S\in\mathcal{S}} S$. Then, there exists a unique topology $\mathcal{T}$ of $X$ such that:
+    \begin{enumerate}
+      \item $\mathcal{S}$ is a subbasis of the topology $\mathcal{T}$.
+      \item $\mathcal{T}$ is the least finer topology that contains $\mathcal{S}$.
+    \end{enumerate}
+  \end{prop}
   \subsubsection{Interior, closure and boundary of a set}
   \begin{definition}[Interior]
     Let $(X,\mathcal{T})$ be a topological space and $A\subseteq X$ be a subset. The \textit{interior of $A$}, $\Int A$, is the largest open subset of $X$ contained in $A$.
@@ -157,10 +169,10 @@
     \end{itemize}
   \end{prop}
   \begin{definition}
-    Let $(X,\mathcal{T})$ be a topological space and $A\subset X$ be a subset. $A$ is called \textit{dense in $X$} if $\forall U\in\mathcal{T}$ with $U\ne\varnothing$ we have $U\cap A\ne\varnothing$.
+    Let $(X,\mathcal{T})$ be a topological space and $A\subseteq X$ be a subset. $A$ is called \textit{dense in $X$} if $\forall U\in\mathcal{T}$ with $U\ne\varnothing$ we have $U\cap A\ne\varnothing$.
   \end{definition}
   \begin{prop}
-    Let $(X,\mathcal{T})$ be a topological space and $A\subset X$ be a subset. Then, $A$ is dense in $X$ if and only if $\Cl A=X$.
+    Let $(X,\mathcal{T})$ be a topological space and $A\subseteq X$ be a subset. Then, $A$ is dense in $X$ if and only if $\Cl A=X$.
   \end{prop}
   \begin{prop}
     Let $(X,\mathcal{T})$ be a topological space and $A\subset X$ be a subset. Then:
@@ -217,6 +229,12 @@
     \end{enumerate}
   \end{prop}
   \subsubsection{Functions between topological spaces}
+  \begin{definition}[Continuous function]
+    Let $(X,\mathcal{T}_X)$ and $(Y,\mathcal{T}_Y)$ be topological spaces and $f:(X,\mathcal{T}_X)\rightarrow(Y,\mathcal{T}_Y)$ be a function. We say that $f$ is continuous if for all $U\in\mathcal{T}_Y$, we have $f^{-1}(U)\in\mathcal{T}_X$.
+  \end{definition}
+  \begin{prop}
+    Let $(X,\mathcal{T}_X)$ and $(Y,\mathcal{T}_Y)$ be topological spaces and $f:(X,\mathcal{T}_X)\rightarrow(Y,\mathcal{T}_Y)$ be a function. We say that $f$ is continuous if and only if for all closed sets $C\subseteq Y$, we have $f^{-1}(C)\subseteq X$ is closed.
+  \end{prop}
   \begin{theorem}
     Let $(X,\mathcal{T}_X)$ and $(Y,\mathcal{T}_Y)$ be topological spaces and $f:(X,\mathcal{T}_X)\rightarrow (Y,\mathcal{T}_Y)$ be a function. Then, the following assumptions are equivalent:
     \begin{enumerate}
@@ -226,15 +244,18 @@
     \end{enumerate}
   \end{theorem}
   \begin{theorem}
-    Let $(X,\mathcal{T}_X)$ and $(Y,\mathcal{T}_Y)$ be topological spaces and $f:(X,\mathcal{T}_X)\rightarrow (Y,\mathcal{T}_Y)$ be a function. Then, $f$ is continuous if and only if $\forall x\in X$ and $U\in\mathcal{T}$ such that $f(x)\in U$, there exists a neighbourhood $N$ of $x$ with $f(N)\subset U$.
+    Let $(X,\mathcal{T}_X)$ and $(Y,\mathcal{T}_Y)$ be topological spaces and $f:(X,\mathcal{T}_X)\rightarrow (Y,\mathcal{T}_Y)$ be a function. Then, $f$ is continuous if and only if $\forall x\in X$ and $\forall U\in\mathcal{T}$ such that $f(x)\in U$, there exists a neighbourhood $N$ of $x$ with $f(N)\subset U$.
   \end{theorem}
   \begin{prop}
     Let $(X,\mathcal{T}_X)$, $(Y,\mathcal{T}_Y)$ and $(Z,\mathcal{T}_Z)$ be topological spaces and $f:(X,\mathcal{T}_X)\rightarrow (Y,\mathcal{T}_Y)$, $f:(Y,\mathcal{T}_Y)\rightarrow (Z,\mathcal{T}_Z)$ be continuous functions. Then, $g\circ f:(X,\mathcal{T}_X)\rightarrow (Z,\mathcal{T}_Z)$ is continuous.
   \end{prop}
   \begin{definition}
+    Let $(X,\mathcal{T}_X)$ and $(Y,\mathcal{T}_Y)$ be topological spaces. A \textit{homeomorphism} between $(X,\mathcal{T}_X)$ and $(Y,\mathcal{T}_Y)$ is a bijective function that is continuous and whose inverse is also continuous. We say that $(X,\mathcal{T}_X)$ and $(Y,\mathcal{T}_Y)$ are \textit{homeomorphic}, denoted by $(X,\mathcal{T}_X)\cong(Y,\mathcal{T}_Y)$, if there exists a homeomorphism between them.
+  \end{definition}
+  \begin{definition}[Open function]
     Let $(X,\mathcal{T}_X)$ and $(Y,\mathcal{T}_Y)$ be topological spaces and $f:(X,\mathcal{T}_X)\rightarrow (Y,\mathcal{T}_Y)$ be a function. We say that $f$ is \textit{open} if $\forall U\in\mathcal{T}_X$, we have $f(A)\in \mathcal{T}_Y$.
   \end{definition}
-  \begin{definition}
+  \begin{definition}[Closed function]
     Let $(X,\mathcal{T}_X)$ and $(Y,\mathcal{T}_Y)$ be topological spaces and $f:(X,\mathcal{T}_X)\rightarrow (Y,\mathcal{T}_Y)$ be a function. We say that $f$ is \textit{closed} if for all closed subsets $C\subseteq X$, we have $f(C)$ is closed.
   \end{definition}
   \begin{prop}
@@ -250,7 +271,7 @@
   \end{prop}
   \subsection{Subspaces}
   \begin{definition}
-    Let $(X,\mathcal{T})$ be a topological space and $A\subseteq X$ be a subset. We define the following set: $$\mathcal{T}_A=\{U\subseteq A:\exists V\in\mathcal{T}\text{ such that }V\cap A=U\}$$ Then, $(A,\mathcal{T}_A)$ is a topological space and $\mathcal{T}_A$ is called the \textit{subspace topology on $A$}. We will denote $(A,\mathcal{T}_A)\subseteq (X,\mathcal{T})$ to emphasize that $(A,\mathcal{T}_A)$ is a topological subspace.
+    Let $(X,\mathcal{T})$ be a topological space and $A\subseteq X$ be a subset. We define the following set: $$\mathcal{T}_A=\{U\subseteq A:\exists V\in\mathcal{T}\text{ such that }V\cap A=U\}$$ Then, $(A,\mathcal{T}_A)$ is a topological space and $\mathcal{T}_A$ is called the \textit{subspace topology on $A$}. We will write $(A,\mathcal{T}_A)\subseteq (X,\mathcal{T})$ to denote that $(A,\mathcal{T}_A)$ is a topological subspace.
   \end{definition}
   \begin{prop}
     Let $(X,\mathcal{T})$ be a topological space and $(A,\mathcal{T}_A)\subseteq (X,\mathcal{T})$ and be a topological subspace. Then, $C\subseteq A$ is closed if and only if $C=K\cap A$, where $K\subseteq X$ is a closed subset on $(X,\mathcal{T})$.
@@ -258,25 +279,24 @@
   \begin{prop}
     Let $(X,\mathcal{T})$ be a topological space and $(A,\mathcal{T}_A)\subseteq (X,\mathcal{T})$ and be a topological subspace. Then:
     \begin{enumerate}
-      \item If $A$ is open, then $U\in\mathcal{T}_A$ if and only if $U\in\mathcal{T}$.
-      \item If $A$ is closed, then $C\subset A$ is closed on $(A,\mathcal{T}_A)$ if and only if $C$ is closed on $(X,\mathcal{T})$.
+      \item If $A$ is open and $U\subseteq A$, then $U\in\mathcal{T}_A$ if and only if $U\in\mathcal{T}$.
+      \item If $A$ is closed and $C\subseteq A$, then $C$ is closed on $(A,\mathcal{T}_A)$ if and only if $C$ is closed on $(X,\mathcal{T})$.
     \end{enumerate}
-    $C\subseteq A$ is closed if and only if $C=K\cap A$, where $K\subseteq X$ is a closed subset on $(X,\mathcal{T})$.
   \end{prop}
   \begin{prop}
-    Let $(X,\mathcal{T})$ be a topological space and $(A,\mathcal{T}_A)\subseteq (X,\mathcal{T})$ and be a topological subspace. Then, the inclusion $\iota:A\hookrightarrow X$ is continuous and $\mathcal{T}_A$ is the least finer topology where $\iota$ is continuous.
-  \end{prop}
-  \begin{prop}
-    Let $(X,\mathcal{T})$ and $(Y,\mathcal{T}_Y)$ be topological spaces, $f:(X,\mathcal{T}_X)\rightarrow (Y,\mathcal{T}_Y)$ be a continuous function and $(A,\mathcal{T}_A)\subseteq (X,\mathcal{T})$ and be a topological subspace. Then, $f|_A$ is also continuous.
-  \end{prop}
-  \begin{prop}
-    Let $(X,\mathcal{T})$ be a topological space, $\mathcal{B}$ be a basis of $\mathcal{T}$ and $(A,\mathcal{T}_A)\subseteq (X,\mathcal{T})$ and be a topological subspace. Then, $$\mathcal{B}_A=\{B\cap A:B\in\mathcal{B}\}$$ is basis of $\mathcal{T}_A$
-  \end{prop}
-  \begin{prop}
-    Let $(X,\mathcal{T})$ and $(Y,\mathcal{T}_Y)$ be topological spaces and $(A,\mathcal{T}_A)\subseteq (X,\mathcal{T})$ and be a topological subspace. Let $f:(Y,\mathcal{T}_Y)\rightarrow (A,\mathcal{T}_A)$ be a function. Then, $f$ is continuous if and only if $\iota\circ f:Y\rightarrow A\hookrightarrow X$ is continuous.
+    Let $(X,\mathcal{T})$ be a topological space and $(A,\mathcal{T}_A)\subseteq (X,\mathcal{T})$ and be a topological subspace. Then, the inclusion $\iota:(A,\mathcal{T}_A)\hookrightarrow (X,\mathcal{T}_X)$ is continuous and $\mathcal{T}_A$ is the least finer topology where $\iota$ is continuous.
   \end{prop}
   \begin{corollary}
-    Let $(X,\mathcal{T})$ and $(Y,\mathcal{T}_Y)$ be topological spaces, $f:(X,\mathcal{T}_X)\rightarrow (Y,\mathcal{T}_Y)$ be a continuous function. Then, $g:X\rightarrow f(X)$ is also continuous.
+    Let $(X,\mathcal{T}_X)$ and $(Y,\mathcal{T}_Y)$ be topological spaces, $f:(X,\mathcal{T}_X)\rightarrow (Y,\mathcal{T}_Y)$ be a continuous function and $(A,\mathcal{T}_A)\subseteq (X,\mathcal{T}_X)$ and be a topological subspace. Then, $f|_A$ is also continuous.
+  \end{corollary}
+  \begin{prop}
+    Let $(X,\mathcal{T})$ be a topological space, $\mathcal{B}$ be a basis of $\mathcal{T}$ and $(A,\mathcal{T}_A)\subseteq (X,\mathcal{T})$ and be a topological subspace. Then, $$\mathcal{B}_A=\{B\cap A:B\in\mathcal{B}\}$$ is basis of $\mathcal{T}_A$.
+  \end{prop}
+  \begin{prop}
+    Let $(X,\mathcal{T}_X)$ and $(Y,\mathcal{T}_Y)$ be topological spaces and $(A,\mathcal{T}_A)\subseteq (Y,\mathcal{T}_Y)$ and be a topological subspace. Let $f:(X,\mathcal{T}_X)\rightarrow (A,\mathcal{T}_A)$ be a function. Then, $f$ is continuous if and only if $\iota\circ f:(X,\mathcal{T}_X)\rightarrow (A,\mathcal{T}_A)\hookrightarrow (Y,\mathcal{T}_Y)$ is continuous.
+  \end{prop}
+  \begin{corollary}
+    Let $(X,\mathcal{T}_X)$ and $(Y,\mathcal{T}_Y)$ be topological spaces, $f:(X,\mathcal{T}_X)\rightarrow (Y,\mathcal{T}_Y)$ be a continuous function. Then, $g:(X,\mathcal{T}_X)\rightarrow (f(X),\mathcal{T}_{f(X)})$ is also continuous.
   \end{corollary}
   \begin{prop}
     Let $(X,\mathcal{T})$ and $(Y,\mathcal{T}_Y)$ be topological spaces such that $X=A\cup B$, for some sets $A$, $B$. Consider the function $f:(X,\mathcal{T}_X)\rightarrow (Y,\mathcal{T}_Y)$ such that $f|_A$ and $f|_B$ are continuous. Then:
@@ -311,10 +331,13 @@
   \subsection{Product topology}
   \subsubsection{Finite product}
   \begin{definition}
-    Let $(X_i,\mathcal{T}_{X_i})$ be topological spaces for $i=1,\ldots,n$. We define the \textit{finite product topology on $X:=\prod_{i=1}^nX_i=X_1\times \cdots\times X_n$}, denoted by $\mathcal{T}_X$, as the topology generated by $$\mathcal{B}=\{U_1\times\cdots\times U_n :U_i\in\mathcal{T}_{X_i},i=1,\ldots,n\}$$
+    Let $(X_i,\mathcal{T}_{X_i})$ be topological spaces for $i=1,\ldots,n$. We define the \textit{finite product topology on $X:=\prod_{i=1}^nX_i:=X_1\times \cdots\times X_n$}, denoted by $\mathcal{T}_X$, as the topology generated by $$\mathcal{B}=\{U_1\times\cdots\times U_n :U_i\in\mathcal{T}_{X_i},i=1,\ldots,n\}$$
   \end{definition}
   \begin{prop}
-    Let $(X_i,\mathcal{T}_{X_i})$ be topological spaces for $i=1,\ldots,n$ and $X:=\prod_{i=1}^nX_i$. Then, the projection $$\pi_{X_i}:\left(X,\mathcal{T}_X\right)\longrightarrow X_i$$
+    Let $(X_i,\mathcal{T}_{X_i})$ be topological spaces for $i=1,\ldots,n$ and $X:=\prod_{i=1}^nX_i$. Then, $A\subseteq X$ is open on $(X,\mathcal{T}_X)$ if and only if $\forall a\in A$ $\exists U_i\in\mathcal{T}_{X_i}$ for $i=1,\ldots,n$ such that $a\in U_1\times\cdots\times U_n\subseteq A$.
+  \end{prop}
+  \begin{prop}
+    Let $(X_i,\mathcal{T}_{X_i})$ be topological spaces for $i=1,\ldots,n$ and $X:=\prod_{i=1}^nX_i$. Then, the projection $$\pi_{X_i}:\left(X,\mathcal{T}_X\right)\longrightarrow (X_i,\mathcal{T}_{X_i})$$
     is continuous and open for $i=1,\ldots,n$.
   \end{prop}
   \begin{prop}
@@ -337,27 +360,27 @@
   \end{prop}
   \subsubsection{Arbitrary product}
   \begin{definition}
-    Let $I$ be a set of indexes, $\{(X_i,\mathcal{T}_{X_i}):i\in I\}$ be a collection of topological spaces and $X:=\prod_{i\in I}X_i$. We define the \textit{box topology on $X$} as the topology generated by $$\mathcal{B}=\left\{\prod_{i\in I}U_i:U_i\in\mathcal{T}_{X_i}\right\}$$
+    Let $I$ be an index set, $\{(X_i,\mathcal{T}_{X_i}):i\in I\}$ be a collection of topological spaces and $X:=\prod_{i\in I}X_i$. We define the \textit{box topology on $X$} as the topology generated by $$\mathcal{B}=\left\{\prod_{i\in I}U_i:U_i\in\mathcal{T}_{X_i}\right\}$$
   \end{definition}
   \begin{definition}
-    Let $I$ be a set of indexes, $\{(X_i,\mathcal{T}_{X_i}):i\in I\}$ be a collection of topological spaces and $X:=\prod_{i\in I}X_i$. We define the \textit{infinite product topology on $X$}, denoted by $\mathcal{T}_X$, as the topology generated by
+    Let $I$ be an index set, $\{(X_i,\mathcal{T}_{X_i}):i\in I\}$ be a collection of topological spaces and $X:=\prod_{i\in I}X_i$. We define the \textit{infinite product topology on $X$}, denoted by $\mathcal{T}_X$, as the topology generated by
     \begin{multline*}
       \mathcal{B}=\Bigg\{\prod_{i\in I}U_i:U_i\in\mathcal{T}_{X_i}\text{ and $U_i=X_i$ except for}\\\text{a finite number of indexes}\Bigg\}
     \end{multline*}
   \end{definition}
   \begin{prop}
-    Let $I$ be a set of indexes, $\{(X_i,\mathcal{T}_{X_i}):i\in I\}$ be a collection of topological spaces and $X:=\prod_{i\in I}X_i$. Then, the projection $$\pi_{X_i}:\left(X,\mathcal{T}_X\right)\longrightarrow X_i$$
+    Let $I$ be an index set, $\{(X_i,\mathcal{T}_{X_i}):i\in I\}$ be a collection of topological spaces and $X:=\prod_{i\in I}X_i$. Then, the projection $$\pi_{X_i}:\left(X,\mathcal{T}_X\right)\longrightarrow (X_i,\mathcal{T}_{X_i})$$
     is continuous and open for all $i\in I$.
   \end{prop}
   \begin{prop}
-    Let $I$ be a set of indexes, $\{(X_i,\mathcal{T}_{X_i}):i\in I\}$ be a collection of topological spaces and $X:=\prod_{i\in I}X_i$. If $\mathcal{B}_{X_i}$ is a basis of $\mathcal{T}_{X_i}$ $\forall i\in I$, then: $$\mathcal{B}=\left\{\prod_{i\in I}U_i:U_i\in\mathcal{B}_{X_i}\text{ for }i\in I\right\}$$
+    Let $I$ be an index set, $\{(X_i,\mathcal{T}_{X_i}):i\in I\}$ be a collection of topological spaces and $X:=\prod_{i\in I}X_i$. If $\mathcal{B}_{X_i}$ is a basis of $\mathcal{T}_{X_i}$ $\forall i\in I$, then: $$\mathcal{B}=\left\{\prod_{i\in I}U_i:U_i\in\mathcal{B}_{X_i}\text{ for }i\in I\right\}$$
     is a basis of $\mathcal{T}_X$.
   \end{prop}
   \begin{prop}
-    Let $I$ be a set of indexes, $\{(X_i,\mathcal{T}_{X_i}):i\in I\}$ and $(Y,\mathcal{T}_Y)$ be a collection of topological spaces, $X:=\prod_{i\in I}X_i$ and $f:(Y,\mathcal{T}_Y)\rightarrow(X,\mathcal{T}_X)$ be a function. Then, $f$ is continuous if and only if $\pi_{X_i}\circ f$ is continuous for all $i\in I$.
+    Let $I$ be an index set, $\{(X_i,\mathcal{T}_{X_i}):i\in I\}$ and $(Y,\mathcal{T}_Y)$ be a collection of topological spaces, $X:=\prod_{i\in I}X_i$ and $f:(Y,\mathcal{T}_Y)\rightarrow(X,\mathcal{T}_X)$ be a function. Then, $f$ is continuous if and only if $\pi_{X_i}\circ f$ is continuous for all $i\in I$.
   \end{prop}
   \begin{prop}
-    Let $I$ be a set of indexes, $\{(X_i,\mathcal{T}_{X_i}):i\in I\}$ and $\{(Y_i,\mathcal{T}_{Y_i}):i\in I\}$ be two collections of topological spaces, $X:=\prod_{i\in I}X_i$, $Y:=\prod_{i\in I}Y_i$ and $f_i:(X_i,\mathcal{T}_{X_i})\rightarrow(Y_i,\mathcal{T}_{Y_i})$ be a continuous function for all $i\in I$. Then, $$\prod_{i\in I}f_i:\left(X,\mathcal{T}_X\right)\longrightarrow\left(Y,\mathcal{T}_Y\right)$$ is also continuous.
+    Let $I$ be an index set, $\{(X_i,\mathcal{T}_{X_i}):i\in I\}$ and $\{(Y_i,\mathcal{T}_{Y_i}):i\in I\}$ be two collections of topological spaces, $X:=\prod_{i\in I}X_i$, $Y:=\prod_{i\in I}Y_i$ and $f_i:(X_i,\mathcal{T}_{X_i})\rightarrow(Y_i,\mathcal{T}_{Y_i})$ be a continuous function for all $i\in I$. Then, $$\prod_{i\in I}f_i:\left(X,\mathcal{T}_X\right)\longrightarrow\left(Y,\mathcal{T}_Y\right)$$ is also continuous.
   \end{prop}
   \begin{theorem}
     The function
