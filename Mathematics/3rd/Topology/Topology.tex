@@ -74,7 +74,7 @@
     The ordered pair $(X,\mathcal{T})$ is called a \textit{topological space}. The elements of $X$ are called \textit{points} and the elements of $\mathcal{T}$, \textit{open sets}.
   \end{definition}
   \begin{definition}
-    Let $(X,\mathcal{T})$ be a topological space and $x,y\in X$ such that $x\ne y$. We say that $\mathcal{T}$ satisfies the \textit{Hausdorff property} if there exist $U,V\in\mathcal{T}$ such that $x\in U$, $y\in V$ and $U\cap V=\varnothing$.
+    Let $(X,\mathcal{T})$ be a topological space such that $|X|\geq 2$. We say that $(X,\mathcal{T})$ is a \textit{Hausdorff space} if satisfies the \textit{Hausdorff property}: $\forall x,y\in X$ with $x\ne y$, there exist $U,V\in\mathcal{T}$ such that $x\in U$, $y\in V$ and $U\cap V=\varnothing$.
   \end{definition}
   \begin{definition}
     Let $(X,\mathcal{T})$ and $(X,\mathcal{T}')$ be topological spaces. We say that $\mathcal{T}$ is \textit{finer than} $\mathcal{T}'$ if $\mathcal{T}'\subseteq\mathcal{T}$.
@@ -222,6 +222,7 @@
     Properties regarding the boundary:
     \begin{enumerate}[leftmargin=1.15cm]\renewcommand{\labelenumi}{3.\arabic{enumi}.}
       \item $\Fr A\cap\Int A=         \varnothing$
+      \item $\Fr A=\Cl A\setminus\Int A$
       \item $\Fr A\cup\Int A=             \Cl A$
       \item $\Fr A\subseteq A\iff  A  \text{ is closed}$
       \item $\Fr A\cap A=\varnothing\iff  A\text{ is open}$
@@ -274,26 +275,26 @@
     Let $(X,\mathcal{T})$ be a topological space and $A\subseteq X$ be a subset. We define the following set: $$\mathcal{T}_A=\{U\subseteq A:\exists V\in\mathcal{T}\text{ such that }V\cap A=U\}$$ Then, $(A,\mathcal{T}_A)$ is a topological space and $\mathcal{T}_A$ is called the \textit{subspace topology on $A$}. We will write $(A,\mathcal{T}_A)\subseteq (X,\mathcal{T})$ to denote that $(A,\mathcal{T}_A)$ is a topological subspace.
   \end{definition}
   \begin{prop}
-    Let $(X,\mathcal{T})$ be a topological space and $(A,\mathcal{T}_A)\subseteq (X,\mathcal{T})$ and be a topological subspace. Then, $C\subseteq A$ is closed if and only if $C=K\cap A$, where $K\subseteq X$ is a closed subset on $(X,\mathcal{T})$.
+    Let $(X,\mathcal{T})$ be a topological space and $(A,\mathcal{T}_A)\subseteq (X,\mathcal{T})$ be a topological subspace. Then, $C\subseteq A$ is closed if and only if $C=K\cap A$, where $K\subseteq X$ is a closed subset on $(X,\mathcal{T})$.
   \end{prop}
   \begin{prop}
-    Let $(X,\mathcal{T})$ be a topological space and $(A,\mathcal{T}_A)\subseteq (X,\mathcal{T})$ and be a topological subspace. Then:
+    Let $(X,\mathcal{T})$ be a topological space and $(A,\mathcal{T}_A)\subseteq (X,\mathcal{T})$ be a topological subspace. Then:
     \begin{enumerate}
       \item If $A$ is open and $U\subseteq A$, then $U\in\mathcal{T}_A$ if and only if $U\in\mathcal{T}$.
       \item If $A$ is closed and $C\subseteq A$, then $C$ is closed on $(A,\mathcal{T}_A)$ if and only if $C$ is closed on $(X,\mathcal{T})$.
     \end{enumerate}
   \end{prop}
   \begin{prop}
-    Let $(X,\mathcal{T})$ be a topological space and $(A,\mathcal{T}_A)\subseteq (X,\mathcal{T})$ and be a topological subspace. Then, the inclusion $\iota:(A,\mathcal{T}_A)\hookrightarrow (X,\mathcal{T}_X)$ is continuous and $\mathcal{T}_A$ is the least finer topology where $\iota$ is continuous.
+    Let $(X,\mathcal{T})$ be a topological space and $(A,\mathcal{T}_A)\subseteq (X,\mathcal{T})$ be a topological subspace. Then, the inclusion $\iota:(A,\mathcal{T}_A)\hookrightarrow (X,\mathcal{T}_X)$ is continuous and $\mathcal{T}_A$ is the least finer topology where $\iota$ is continuous.
   \end{prop}
   \begin{corollary}
-    Let $(X,\mathcal{T}_X)$ and $(Y,\mathcal{T}_Y)$ be topological spaces, $f:(X,\mathcal{T}_X)\rightarrow (Y,\mathcal{T}_Y)$ be a continuous function and $(A,\mathcal{T}_A)\subseteq (X,\mathcal{T}_X)$ and be a topological subspace. Then, $f|_A$ is also continuous.
+    Let $(X,\mathcal{T}_X)$ and $(Y,\mathcal{T}_Y)$ be topological spaces, $f:(X,\mathcal{T}_X)\rightarrow (Y,\mathcal{T}_Y)$ be a continuous function and $(A,\mathcal{T}_A)\subseteq (X,\mathcal{T}_X)$ be a topological subspace. Then, $f|_A$ is also continuous.
   \end{corollary}
   \begin{prop}
-    Let $(X,\mathcal{T})$ be a topological space, $\mathcal{B}$ be a basis of $\mathcal{T}$ and $(A,\mathcal{T}_A)\subseteq (X,\mathcal{T})$ and be a topological subspace. Then, $$\mathcal{B}_A=\{B\cap A:B\in\mathcal{B}\}$$ is basis of $\mathcal{T}_A$.
+    Let $(X,\mathcal{T})$ be a topological space, $\mathcal{B}$ be a basis of $\mathcal{T}$ and $(A,\mathcal{T}_A)\subseteq (X,\mathcal{T})$ be a topological subspace. Then, $$\mathcal{B}_A=\{B\cap A:B\in\mathcal{B}\}$$ is basis of $\mathcal{T}_A$.
   \end{prop}
   \begin{prop}
-    Let $(X,\mathcal{T}_X)$ and $(Y,\mathcal{T}_Y)$ be topological spaces and $(A,\mathcal{T}_A)\subseteq (Y,\mathcal{T}_Y)$ and be a topological subspace. Let $f:(X,\mathcal{T}_X)\rightarrow (A,\mathcal{T}_A)$ be a function. Then, $f$ is continuous if and only if $\iota\circ f:(X,\mathcal{T}_X)\rightarrow (A,\mathcal{T}_A)\hookrightarrow (Y,\mathcal{T}_Y)$ is continuous.
+    Let $(X,\mathcal{T}_X)$ and $(Y,\mathcal{T}_Y)$ be topological spaces and $(A,\mathcal{T}_A)\subseteq (Y,\mathcal{T}_Y)$ be a topological subspace. Let $f:(X,\mathcal{T}_X)\rightarrow (A,\mathcal{T}_A)$ be a function. Then, $f$ is continuous if and only if $\iota\circ f:(X,\mathcal{T}_X)\rightarrow (A,\mathcal{T}_A)\hookrightarrow (Y,\mathcal{T}_Y)$ is continuous.
   \end{prop}
   \begin{corollary}
     Let $(X,\mathcal{T}_X)$ and $(Y,\mathcal{T}_Y)$ be topological spaces, $f:(X,\mathcal{T}_X)\rightarrow (Y,\mathcal{T}_Y)$ be a continuous function. Then, $g:(X,\mathcal{T}_X)\rightarrow (f(X),\mathcal{T}_{f(X)})$ is also continuous.
