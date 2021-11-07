@@ -308,7 +308,7 @@
     Let $U\subseteq\RR\times\RR^n$ be an open set, $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function, $\vectorfunction{\varphi}:I\rightarrow\RR^n$ be a solution of $\vectorfunction{x}'=\vectorfunction{f}(t,\vectorfunction{x})$ and $(b,y)\in U$ be an accumulation point of $\vectorfunction{\varphi}$. Then, $\displaystyle\lim_{t\to b}\vectorfunction{\varphi}(t)=y$ and the solution can be extended up to $b$.
   \end{lemma}
   \begin{corollary}
-    Let $U\subseteq\RR\times\RR^n$ be an open set, $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function and $\vectorfunction{\varphi}:(a,b)\rightarrow\RR^n$ be a maximal solution of $\vectorfunction{x}'=\vectorfunction{f}(t,\vectorfunction{x})$. If $b<\infty$, then for all compact set $K\subset U$, $\exists t_k<\infty$ such that $\forall t\in[t_k,b)$, $(t,\vectorfunction{\varphi}(t))\notin K$. In that case, we say that $\vectorfunction{\varphi}$ \textit{tends to the boundary of $U$}.
+    Let $U\subseteq\RR\times\RR^n$ be an open set, $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function and $\vectorfunction{\varphi}:(a,b)\rightarrow\RR^n$ be a maximal solution of $\vectorfunction{x}'=\vectorfunction{f}(t,\vectorfunction{x})$. If $b<\infty$, then for all compact set $K\subset U$, $\exists t_0<\infty$ such that $(t,\vectorfunction{\varphi}(t))\notin K$ $\forall t\in[t_0,b)$. In that case, we say that $\vectorfunction{\varphi}$ \textit{tends to the boundary of $U$}.
   \end{corollary}
   \subsection{Linear differential equations}
   \begin{definition}
@@ -321,10 +321,9 @@
   \end{definition}
   \begin{definition}
     Let $I\subseteq\RR$ be an interval, $t_0\in I$, $x_0\in\RR^n$ and consider the ode \eqref{DE_linear}. We define the \textit{flux of the linear ode} as the function:
-    \begin{align*}
-      \vectorfunction{\varphi}:I\times I\times \RR^n & \longrightarrow\RR^n                           \\
-      (t,t_0,x_0)                                    & \longmapsto\vectorfunction{\varphi}(t,t_0,x_0)
-    \end{align*}
+    $$
+      \function{\vectorfunction{\varphi}}{I\times I\times \RR^n}{\RR^n}{(t,t_0,x_0)}{\vectorfunction{\varphi}(t,t_0,x_0)}
+    $$
     where $\vectorfunction{\varphi}(t,t_0,x_0)$ is a solution of \eqref{DE_linear} with initial conditions $\vectorfunction{\varphi}(t_0,t_0,x_0)$.
   \end{definition}
   \begin{prop}
@@ -347,10 +346,9 @@
     \begin{equation}\label{DE_homo}
       \vectorfunction{x}'=\vectorfunction{A}(t)\vectorfunction{x}
     \end{equation} Then, $\mathcal{A}_n$ is a vector space of dimension $n$ and for each $t_0\in I$, the function
-    \begin{align*}
-      \vectorfunction{\xi}_{t_0}:\RR^n & \longrightarrow\mathcal{A}_n                       \\
-      x_0                              & \longmapsto\vectorfunction{\varphi}(\cdot,t_0,x_0)
-    \end{align*}
+    $$
+      \function{\vectorfunction{\xi}_{t_0}}{\RR^n}{\mathcal{A}_n}{x_0}{\vectorfunction{\varphi}(\cdot,t_0,x_0)}
+    $$
     is an isomorphism.
   \end{theorem}
   \begin{corollary}
@@ -365,10 +363,9 @@
   \end{corollary}
   \begin{corollary}
     Let $s,t,w\in\RR$. Consider the function
-    \begin{align*}
-      \vectorfunction{\phi}_s^t:\RR^n & \longrightarrow\RR^n                      \\
-      x                               & \longmapsto(\vectorfunction{\xi}_s(x))(t)
-    \end{align*}
+    $$
+      \function{\vectorfunction{\phi}_s^t}{\RR^n}{\RR^n}{x}{(\vectorfunction{\xi}_s(x))(t)}
+    $$
     Then, $\vectorfunction{\phi}_s^t$ is an isomorphism and satisfies:
     \begin{enumerate}
       \item $\vectorfunction{\phi}_s^s=\vectorfunction{\id}$
@@ -394,7 +391,7 @@
   \end{prop}
   \subsubsection{Non-homogeneous linear systems}
   \begin{prop}
-    Let $I\subseteq \RR$ be an interval, $\vectorfunction{A}\in\mathcal{C}(I,\mathcal{L}(\RR^n))$ and $\vectorfunction{b}\in\mathcal{C}(I,\RR^n)$. Suppose $\vectorfunction{\varphi}(t,t_0,x_0)$ is the flux of the ode \eqref{DE_linear}. Then, $$\vectorfunction{\varphi}(t,t_0,x_0)=\Phi(t)\left[{\Phi(t_0)}^{-1}x_0+\int_{t_0}^t{\Phi(s)}^{-1}b(s)\dd s\right]$$ where $\Phi(t)$ is a fundamental matrix of the associated homogeneous system.
+    Let $I\subseteq \RR$ be an interval, $\vectorfunction{A}\in\mathcal{C}(I,\mathcal{L}(\RR^n))$ and $\vectorfunction{b}\in\mathcal{C}(I,\RR^n)$. Suppose $\vectorfunction{\varphi}(t,t_0,x_0)$ is the flux of the ode \eqref{DE_linear}. Then, $$\vectorfunction{\varphi}(t,t_0,x_0)=\Phi(t)\left[{\Phi(t_0)}^{-1}x_0+\int_{t_0}^t{\Phi(s)}^{-1}\vectorfunction{b}(s)\dd s\right]$$ where $\Phi(t)$ is a fundamental matrix of the associated homogeneous system.
   \end{prop}
   \begin{corollary}
     Let $I\subseteq \RR$ be an interval, $\vectorfunction{A}\in\mathcal{C}(I,\mathcal{L}(\RR^n))$ and $\vectorfunction{b}\in\mathcal{C}(I,\RR^n)$. Then, the general solution $\varphi(t)$ of the ode \eqref{DE_homo} can be written as: $$\varphi(t)=\varphi_\mathrm{h}(t)+\varphi_\mathrm{p}(t)$$ where $\varphi_\mathrm{h}(t)$ is the general solution to the associated homogeneous system and $\varphi_\mathrm{p}(t)$ is a particular solution of \eqref{DE_homo}.
@@ -438,7 +435,10 @@
       \item If $\vectorfunction{A}\vectorfunction{B}=\vectorfunction{B}\vectorfunction{A}$, then: $$\exp{\vectorfunction{A}t}\vectorfunction{B}=\vectorfunction{B}\exp{\vectorfunction{A}t}\quad\text{and}\quad\exp{(\vectorfunction{A}+\vectorfunction{B})t}=\exp{\vectorfunction{A}t}\exp{\vectorfunction{B}t}$$
     \end{enumerate}
   \end{lemma}
-  \begin{lemma}
+  \begin{corollary}
+    Let $t\in\RR$, $\vectorfunction{A}\in\mathcal{M}_n(\RR)$ and $\vectorfunction{J}\in\mathcal{M}_n(\RR)$ be the Jordan form of $\vectorfunction{A}$ such that $\vectorfunction{A}=\vectorfunction{C}\vectorfunction{J}\vectorfunction{C}^{-1}$ for some matrix $\vectorfunction{C}\in\GL_n(\RR)$. Then: $$\exp{\vectorfunction{A}t}=\vectorfunction{C}\exp{\vectorfunction{J}t}\vectorfunction{C}^{-1}$$
+  \end{corollary}
+  \begin{prop}
     Let $\vectorfunction{A}\in\mathcal{M}_n(\RR)$ and $t\in\RR$. If $\lambda$ is an eigenvalue of $\vectorfunction{A}$ with associated eigenvector $\vectorfunction{v}$, then $\exp{\lambda t}$ is an eigenvalue of $\exp{\vectorfunction{A}t}$ with associated eigenvector $\vectorfunction{v}$. That is, $\exp{\vectorfunction{A}t}\vectorfunction{v}=\exp{\lambda t}\vectorfunction{v}$. Hence, $\vectorfunction{\varphi}(t)=\exp{\lambda t}\vectorfunction{v}$ is a solution of the ivp:
     $$
       \left\{
@@ -448,7 +448,7 @@
       \end{aligned}
       \right.
     $$
-  \end{lemma}
+  \end{prop}
   \begin{corollary}
     Let $\vectorfunction{A}\in\mathcal{M}_n(\RR)$ and $t\in\RR$ and consider the linear ode \eqref{DE_coef-constants}. If $(\vectorfunction{v}_1,\ldots,\vectorfunction{v}_n)$ is a basis of eigenvectors with associated eigenvalues $\lambda_1,\ldots,\lambda_n$, respectively, then $(\vectorfunction{\varphi}_1,\ldots,\vectorfunction{\varphi}_n)$, where $\vectorfunction{\varphi}_i=\exp{\lambda_it}\vectorfunction{v}_i$ for $i=1,\ldots,n$, is a basis of $\mathcal{A}_n$.
   \end{corollary}
@@ -456,13 +456,13 @@
     Let $\vectorfunction{A}=\diag(\lambda_1,\ldots,\lambda_n)\in\mathcal{M}_n(\RR)$ and $t\in\RR$. Then:
     $$\exp{\vectorfunction{A}t}=\diag(\exp{\lambda_1 t},\ldots,\exp{\lambda_n t})$$
   \end{lemma}
-  \begin{lemma}
+  \begin{prop}
     Let $\vectorfunction{A}\in\mathcal{M}_n(\RR)$ and $\lambda=\alpha+\ii\beta\in\CC\setminus\RR$ be an eigenvalue of $\vectorfunction{A}$ with associated eigenvector $\vectorfunction{v}=\vectorfunction{u}+\ii\vectorfunction{w}\in\CC^n$. Then:
     \begin{multline*}
       \exp{\vectorfunction{A}t}\vectorfunction{v}=\exp{\vectorfunction{A}t}\vectorfunction{u}+\ii\exp{\vectorfunction{A}t}\vectorfunction{w}=\exp{\alpha t}\left[\cos(\beta t)\vectorfunction{u}-\sin(\beta t)\vectorfunction{w}\right]+\\+\ii\exp{\alpha t}\left[\sin(\beta t)\vectorfunction{u}+\cos(\beta t)\vectorfunction{w}\right]
     \end{multline*}
     and $\exp{\vectorfunction{A}t}\vectorfunction{u}$, $\exp{\vectorfunction{A}t}\vectorfunction{w}$ are linearly independent solutions of the ode \eqref{DE_coef-constants} with initial conditions $\vectorfunction{x}(0)=\vectorfunction{u}$ and $\vectorfunction{x}(0)=\vectorfunction{w}$, respectively.
-  \end{lemma}
+  \end{prop}
   \begin{definition}
     Let $\vectorfunction{A}\in\mathcal{M}_n(\RR)$. A vector $\vectorfunction{w}\in\RR^n$ is a \textit{generalized eigenvector of rank $m$ of $\vectorfunction{A}$ corresponding to the eigenvalue $\lambda\in\RR$} if: $${(\vectorfunction{A}-\lambda\vectorfunction{I}_n)}^m\vectorfunction{w}=0\quad\text{but}\quad{(\vectorfunction{A}-\lambda\vectorfunction{I}_n)}^{m-1}\vectorfunction{w}\ne 0$$
   \end{definition}

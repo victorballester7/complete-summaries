@@ -192,6 +192,33 @@
   \begin{theorem}
     Let $\vectorfunction{A}\in\mathcal{M}_n(\RR)$. Then: $$\vectorfunction{A}\adjugate\vectorfunction{A}=(\det \vectorfunction{A})\vectorfunction{I}_n$$ Moreover if $\det \vectorfunction{A}\ne 0$, then: $$\vectorfunction{A}^{-1}=\frac{1}{\det \vectorfunction{A}}\adjugate\vectorfunction{A}$$
   \end{theorem}
+  \subsubsection{Block matrices}
+  \begin{definition}
+    Let $\vectorfunction{A}\in\mathcal{M}_{m\times n}(\RR)$ and $r,s\in\NN$ such that $r\leq m$ and $s\leq n$. We define a \textit{block matrix} as a matrix of the form
+    $$
+      \begin{pmatrix}
+        \vectorfunction{A}_{11} & \cdots & \vectorfunction{A}_{1s} \\
+        \vdots                  & \ddots & \vdots                  \\
+        \vectorfunction{A}_{r1} & \cdots & \vectorfunction{A}_{rs}
+      \end{pmatrix}
+    $$
+    where $\vectorfunction{A}_{ij}$, $i=1,\ldots,r$ and $j=1,\ldots,s$ are submatrices of $\vectorfunction{A}$ created from partitioning the $\vectorfunction{A}$ with $s-1$ vertical lines and $r-1$ horizontal lines.
+  \end{definition}
+  \begin{prop}
+    Let $\vectorfunction{A},\vectorfunction{B}\in\mathcal{M}_{m\cdot n}(\RR)$ be a block matrix of the form:
+    $$\vectorfunction{A}=
+      \begin{pmatrix}
+        \vectorfunction{X} & \vectorfunction{0} \\
+        \vectorfunction{Z} & \vectorfunction{Y}
+      \end{pmatrix}\quad
+      \vectorfunction{B}=
+      \begin{pmatrix}
+        \vectorfunction{X} & \vectorfunction{W} \\
+        \vectorfunction{0} & \vectorfunction{Y}
+      \end{pmatrix}
+    $$
+    where $\vectorfunction{X}\in\mathcal{M}_m(\RR)$, $\vectorfunction{Y}\in\mathcal{M}_n(\RR)$, $\vectorfunction{Z}\in\mathcal{M}_{n\times m}(\RR)$ and $\vectorfunction{W}\in\mathcal{M}_{m\times n}(\RR)$. Then, $$\det\vectorfunction{A}=\det(\vectorfunction{X})\det(\vectorfunction{Y})=\det\vectorfunction{B}$$
+  \end{prop}
   \subsection{Vector spaces}
   \subsubsection{Introduction and basic definitions}
   \begin{definition}
@@ -724,7 +751,7 @@
   \end{theorem}
   \subsubsection{Jordan form}
   \begin{definition}
-    Let $K$ be a field and $\vectorfunction{A}\in\mathcal{M}_n(K)$. A \textit{jordan bloc of $\vectorfunction{A}$} is a square submatrix composed by a value $\lambda\in K$ on the principal diagonal, ones on the diagonal just below the principal diagonal and zeros elsewhere. That is, a Jordan bloc is a matrix of the form:
+    Let $K$ be a field and $\vectorfunction{A}\in\mathcal{M}_n(K)$. A \textit{Jordan block of $\vectorfunction{A}$} is a square submatrix composed by a value $\lambda\in K$ on the principal diagonal, ones on the diagonal just below the principal diagonal and zeros elsewhere. That is, a Jordan block is a matrix of the form:
     $$
       \begin{pmatrix}
         \lambda & 0       & 0       & \cdots & 0       \\
@@ -734,6 +761,7 @@
         0       & \cdots  & 0       & 1      & \lambda
       \end{pmatrix}
     $$
+    A \textit{Jordan matrix} is a block diagonal matrix whose blocks are Jordan blocks.
   \end{definition}
   \begin{prop}
     Let $V$ be a finite vector space over a field $K$ with $\dim V=n$ and $f\in\mathcal{L}(V)$. If $p_f(x)=\pm(x-\lambda_1)^{n_1}\cdots(x-\lambda_k)^{n_k}$, there exists a basis $\mathfrak{B}$ of $V$ such that
@@ -745,15 +773,15 @@
         \vectorfunction{0}   & \cdots               & \vectorfunction{0} & \vectorfunction{J}_r \\
       \end{pmatrix}
     $$
-    where $\vectorfunction{J}_1,\ldots,\vectorfunction{J}_r$ are Jordan blocs associated with eigenvalues $\lambda_1,\ldots,\lambda_k$ satisfying:
+    where $\vectorfunction{J}_1,\ldots,\vectorfunction{J}_r$ are Jordan blocks associated with eigenvalues $\lambda_1,\ldots,\lambda_k$ satisfying:
     \begin{enumerate}
-      \item\label{LA_diag1} For $i=1,\ldots,k$, the sum of the sizes of Jordan blocs associated with the eigenvalue $\lambda_i$ is $n_i$.
-      \item\label{LA_diag2} The sizes of Jordan blocs are determined by $\dim(\ker((f-\lambda_i\id)^r))$, $r=1,\ldots,n_i-1$.
+      \item\label{LA_diag1} For $i=1,\ldots,k$, the sum of the sizes of Jordan blocks associated with the eigenvalue $\lambda_i$ is $n_i$.
+      \item\label{LA_diag2} The sizes of Jordan blocks are determined by $\dim(\ker((f-\lambda_i\id)^r))$, $r=1,\ldots,n_i-1$.
     \end{enumerate}
   \end{prop}
   \begin{prop}
     Let $V$ be a finite vector space over a field $K$ with $\dim V=n$ and $\vectorfunction{A}\in\mathcal{M}_n(K)$. If $p_{\vectorfunction{A}}(x)=\pm(x-\lambda_1)^{n_1}\cdots(x-\lambda_k)^{n_k}$, there exist a matrix $\vectorfunction{P}\in\GL_n(K)$ such that:
-    $$\vectorfunction{P}^{-1}\vectorfunction{A}\vectorfunction{P}=
+    $$\vectorfunction{J}:=\vectorfunction{P}^{-1}\vectorfunction{A}\vectorfunction{P}=
       \begin{pmatrix}
         \vectorfunction{J}_1 & \vectorfunction{0}   & \cdots             & \vectorfunction{0}   \\
         \vectorfunction{0}   & \vectorfunction{J}_2 & \ddots             & \vdots               \\
@@ -761,7 +789,7 @@
         \vectorfunction{0}   & \cdots               & \vectorfunction{0} & \vectorfunction{J}_r \\
       \end{pmatrix}
     $$
-    where $\vectorfunction{J}_1,\ldots,\vectorfunction{J}_r$ are Jordan blocs associated with eigenvalues $\lambda_1,\ldots,\lambda_k$ satisfying properties \ref{LA_diag1} and \ref{LA_diag2}.
+    where $\vectorfunction{J}_1,\ldots,\vectorfunction{J}_r$ are Jordan blocks associated with eigenvalues $\lambda_1,\ldots,\lambda_k$ satisfying properties \ref{LA_diag1} and \ref{LA_diag2}. In that case, we say that $\vectorfunction{J}$ is the \textit{Jordan form of $\vectorfunction{A}$}. 
   \end{prop}
   \begin{theorem}
     Let $V$ be a vector space and $f,g\in\mathcal{L}(V)$ be such that $p_f(x)=(x-\lambda_1)^{n_1}\cdots(x-\lambda_k)^{n_k}$. If $g$ satisfies:
