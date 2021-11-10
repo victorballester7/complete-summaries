@@ -301,7 +301,7 @@
     $$
   \end{definition}
   \begin{prop}\footnotetext{From now on, in order to simplify the notation, we will write $\Prob(X\in B):=\Prob(\{X\in B\})$.}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space. Then, for any random variable $X$, the function $\Prob_X$ is a probability over $\mathcal{B}(\RR)$.
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space. Then, for any random variable $X$, the function $\Prob_X$ is a probability over $\mathcal{B}(\RR)$. Hence, $(\RR,\mathcal{B}(\RR),\Prob_X)$ is a probability space.
   \end{prop}
   \begin{definition}
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space. We say that two random variables $X$, $Y$ are \textit{equal in distribution} (denoted by $X\overset{\text{d}}{=}Y$) if they satisfy: $$\Prob_X(B)=\Prob_Y(B)\qquad\forall B\in\mathcal{B}(\RR)$$ That is, $X\overset{\text{d}}{=}Y$ if they have the same distribution functions.
@@ -321,18 +321,21 @@
   \begin{theorem}
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $X$ be a random variable and $F_X$ be its cdf. Then:
     \begin{enumerate}
-      \item\label{P_1} If $x<y$, then $F_X(x)\leq F_X(y)$.
-      \item\label{P_2} $F_X$ is \textit{càdlàg}\footnote{From French ``continue à droite, limite à gauche'' (right continuous with left limits).}.
-      \item\label{P_3} $\displaystyle\lim_{x\to -\infty}F_X(x)=0$ and $\displaystyle\lim_{x\to \infty}F_X(x)=1$.
+      \item If $x<y$, then $F_X(x)\leq F_X(y)$.
+      \item $F_X$ is \textit{càdlàg}\footnote{From French ``continue à droite, limite à gauche'' (right continuous with left limits).}.
+      \item $\displaystyle\lim_{x\to -\infty}F_X(x)=0$ and $\displaystyle\lim_{x\to \infty}F_X(x)=1$.
+    \end{enumerate}
+    Reciprocally, if there is a function $F$ satisfying these properties\footnote{Such kind of functions are called \textit{distribution functions}.}, then there exists a random variable $X$ on $(\Omega,\mathcal{A},\Prob)$ such that $F$ is its cdf.
+  \end{theorem}
+  \begin{prop}
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $X$ be a random variable and $F_X$ be its cdf. Then:
+    \begin{enumerate}
       \item $F_X$ has at most a countable number of discontinuities.
       \item $\forall s,t\in\RR$ such that $s<t$, we have: $$\Prob(s<X\leq t)=F(t)-F(s)$$
       \item $\displaystyle\forall x\in\RR$, $\displaystyle \Prob(X<x)=\lim_{t\to x^-}F_X(t)$.
       \item For all $x\in\RR$: $$\Prob(X=x)=F_X(x)-\lim_{t\to x^-}F_X(t)$$ Hence, $F_X$ is discontinuous at $x\iff\Prob(X=x)>0$.
     \end{enumerate}
-  \end{theorem}
-  \begin{theorem}
-    Let $F$ be a function satisfying properties \ref{P_1}, \ref{P_2} and \ref{P_3}. Then, there exists a random variable $X$ on a probability space $(\Omega,\mathcal{A},\Prob)$ such that $F$ is its distribution property. In general, a function satisfying these three properties is called a \textit{distribution function}.
-  \end{theorem}
+  \end{prop}
   \begin{theorem}
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space. Then, the cdf completely determine a distribution of a random variable $X$. That is, if $X$ and $Y$ are random variables such that $F_X(t)=F_Y(t)$ $\forall t\in\RR$, then $X\overset{\text{d}}{=}Y$.
   \end{theorem}
@@ -380,7 +383,7 @@
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and suppose $n\in\NN$ and $p\in (0,1)$ are such that $n\gg 1$ and $p\ll 1$. Then, $\text{B}(n,p)\simeq\text{Pois}(np)$.
   \end{corollary}
   \begin{definition}[Geometric distribution]
-    Let\\ $(\Omega,\mathcal{A},\Prob)$ be a probability space and $A\in\mathcal{A}$. Suppose $\Prob(A)=p$. The \textit{geometric distribution} is the one whose random variable $X$ is the number of trials needed to get one success. Thus, $S=\NN$ and: $$\Prob(X=k)={(1-p)}^{k-1}p\qquad \forall k\in\NN$$ If $X$ follows a geometric distribution of parameter $p$, we will write $X\sim \text{Geo}(n,p)$.
+    Let\\ $(\Omega,\mathcal{A},\Prob)$ be a probability space and $A\in\mathcal{A}$. Suppose $\Prob(A)=p$. The \textit{geometric distribution} is the one whose random variable $X$ is the number of trials needed to get one success. Thus, $S=\NN$ and: $$\Prob(X=k)={(1-p)}^{k-1}p\qquad \forall k\in\NN$$ If $X$ follows a geometric distribution of parameter $p$, we will write $X\sim \text{Geo}(p)$.
   \end{definition}
   \begin{definition}[Discrete memorylessness property]
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$ be a discrete random variable whose support is $\NN$ and such that $\Prob(X >m)>0$ $\forall m\in\NN$. The distribution of $X$ is \textit{memoryless} if $\forall m,n\in\NN$, we have: $$\Prob(X>m+n\mid X >m)=\Prob(X>n)$$
@@ -392,7 +395,7 @@
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space. Suppose we have a population of size $N$ of whom $K$ have a special feature (success). Let $X$ be the random variable that counts the number of successes that we have obtained in $n$ draws (without replacement). Thus, the support of $X$ is: $$S=\{\max\{n+K-N,0\},\ldots,\min\{n,K\}\}$$ And the pmf is given by: $$\Prob(X=k)=\frac{\binom{K}{k}\binom{N-K}{n-k}}{\binom{N}{n}}$$ This type of distribution is called \textit{hypergeometric distribution} and it is denoted by $X\sim \text{HG}(N,p,n)$, where $p=\frac{K}{N}$ is the proportion of successes in the population.
   \end{definition}
   \begin{theorem}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X\sim \text{HG}(N,p,n)$ such that when $N\to\infty$, $p=\frac{K}{N}$ remains constant. Then:
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X\sim \text{HG}(N,p,n)$ such that when $N\to\infty$, $p$ remains constant. Then:
     $$\lim_{N\to\infty}\Prob(X=k)=\lim_{N\to\infty}\frac{\binom{K}{k}\binom{N-K}{n-k}}{\binom{N}{n}}=\binom{n}{k}p^k{(1-p)}^{n-k}$$ which is the pmf of a binomial distribution $\text{B}(n,p)$.
   \end{theorem}
   \begin{definition}[Negative binomial distribution]
@@ -542,7 +545,7 @@
     for $i=1,\ldots, n$. These functions $f_{X_i}$ are called \textit{marginal probability density functions (marginal pdf)} of $\vectorfunction{X}$.
   \end{prop}
   \begin{definition}[Multivariate standard normal distribution]
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $\vectorfunction{X}=(X_1,\ldots,X_n)$ be an absolutely continuous random vector. We say that $\vectorfunction{X}$ follows a \textit{multivariate normal distribution}, denoted by $\vectorfunction{X}\sim N(0,1)$, if $\vectorfunction{X}$ has a joint pdf: $$f_{\vectorfunction{X}}(x)=\frac{1}{{(2\pi)}^{\frac{n}{2}}}\exp{-\frac{{x_1}^2\cdots{x_n}^2}{2}}$$ Moreover, $X_i\sim N(0,1)$ for $i=1,\ldots,n$.
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $\vectorfunction{X}=(X_1,\ldots,X_n)$ be an absolutely continuous random vector. We say that $\vectorfunction{X}$ follows a \textit{multivariate normal distribution}, denoted by $\vectorfunction{X}\sim N(0,1)$, if $\vectorfunction{X}$ has a joint pdf: $$f_{\vectorfunction{X}}(x)=\frac{1}{{(2\pi)}^{\frac{n}{2}}}\exp{-\frac{{x_1}^2+\cdots+{x_n}^2}{2}}$$ Moreover, $X_i\sim N(0,1)$ for $i=1,\ldots,n$.
   \end{definition}
   \begin{definition}[Multivariate uniform distribution]
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $\vectorfunction{X}=(X_1,\ldots,X_n)$ be an absolutely continuous random vector. We say that $\vectorfunction{X}$ has a \textit{multivariate uniform distribution over $B\in\mathcal{B}(\RR^n)$}, with $\vol(B)<\infty$, if it has joint pdf: $$f_{\vectorfunction{X}}(x)=\frac{1}{\vol(B)}\vectorfunction{1}_B(x)$$ If $\vectorfunction{X}=(X_1,\ldots,X_r)$ follows a multivariate uniform, we will write $\vectorfunction{X}\sim U(B)$.
@@ -566,11 +569,11 @@
       \item For all $i=1,\ldots,n$ we have: $$\lim_{x_1,\ldots,x_{i-1},x_{i+1},\ldots,x_n\to+\infty}F_{\vectorfunction{X}}(x_1,\ldots,x_n)=F_{X_i}(x_i)$$
       \item If $\vectorfunction{X}$ is absolutely continuous, then:
             \begin{multline*}
-              F_{\vectorfunction{X}}(x_1,\ldots,x_n)=\\=\int_{-\infty}^{x_1}\cdots\int_{-\infty}^{x_n} f(s_1,\ldots,s_n)\dd s_1\cdots\dd s_n
+              F_{\vectorfunction{X}}(x_1,\ldots,x_n)=\\=\int_{-\infty}^{x_1}\cdots\int_{-\infty}^{x_n} f_{\vectorfunction{X}}(s_1,\ldots,s_n)\dd s_1\cdots\dd s_n
             \end{multline*}
       \item If $\vectorfunction{X}$ is absolutely continuous, then:
             \begin{multline*}
-              \Prob(a_1<X_1<b_1,\ldots,a_n<X_n<b_n)=\\=\int_{a_1}^{b_1}\cdots\int_{a_n}^{b_n} f(s_1,\ldots,s_n)\dd s_1\cdots\dd s_n
+              \Prob(a_1<X_1<b_1,\ldots,a_n<X_n<b_n)=\\=\int_{a_1}^{b_1}\cdots\int_{a_n}^{b_n} f_{\vectorfunction{X}}(s_1,\ldots,s_n)\dd s_1\cdots\dd s_n
             \end{multline*}
     \end{enumerate}
   \end{prop}
