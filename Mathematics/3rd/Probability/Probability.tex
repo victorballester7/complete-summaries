@@ -1,6 +1,7 @@
 \documentclass[../../../main.tex]{subfiles}
 
-% 3 line brake in Bernoulli, Binomial and Geometric distributions.
+% 3 line break in Bernoulli, Binomial and Geometric distributions.
+% break in Continuity from below theorem
 
 \begin{document}
 \begin{multicols}{2}[\section{Probability}]
@@ -90,7 +91,7 @@
     Let $\Omega$ be a set and $\mathcal{A}$ be a $\sigma$-algebra over $\Omega$. A \textit{probability} is any function $$\Prob:\mathcal{A}\longrightarrow[0,\infty)$$ satisfying the following properties:
     \begin{itemize}
       \item $\Prob(\Omega)=1$.
-      \item (\textit{$\sigma$-additivity}) If $\{A_n,n\geq1\}\subset\mathcal{A}$ are pairwise disjoint, then: $$\Prob\left(\bigsqcup_{n=1}^\infty A_n\right)=\sum_{n=1}^\infty \Prob(A_n)$$
+      \item \textit{$\sigma$-additivity}: If $\{A_n,n\geq1\}\subset\mathcal{A}$ are pairwise disjoint, then: $$\Prob\left(\bigsqcup_{n=1}^\infty A_n\right)=\sum_{n=1}^\infty \Prob(A_n)$$
     \end{itemize}
   \end{definition}
   \begin{definition}
@@ -118,19 +119,19 @@
             \begin{multline*}
               \Prob\left(\bigcap_{i=1}^n A_i\right)=\sum_{i=1}^n \Prob(A_i)-\\-\sum_{\substack{i,j=1\\i<j}}^n\Prob(A_i\cup A_j)+\sum_{\substack{i,j,k=1\\i<j<k}}^n\Prob(A_i\cup A_j\cap A_k)-\cdots+\\+{(-1)}^{n+1}\Prob(A_1\cup\cdots\cup A_n)
             \end{multline*}
-      \item If $A_i,\ldots,A_n\in\mathcal{A}$, then: $$\Prob\left(\bigcup_{i=1}^n A_i\right)\leq\sum_{i=1}^n \Prob(A_i)$$
+      \item \textit{Finite subadditivity}: If $A_1,\ldots,A_n\in\mathcal{A}$, then: $$\Prob\left(\bigcup_{i=1}^n A_i\right)\leq\sum_{i=1}^n \Prob(A_i)$$
     \end{enumerate}
   \end{prop}
   \begin{prop}
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space such that $\Omega$ is finite and all its elements are equiprobable. Let $A\in\mathcal{A}$ be an event. Then: $$\Prob(A)=\frac{|A|}{|\Omega|}$$
   \end{prop}
-  \begin{theorem}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $\{A_n:n\geq 1\}\subset\mathcal{A}$ be an increasing sequence of events, that is: $$A_1\subseteq A_2\subseteq\cdots\subseteq A_n\subseteq\cdots$$ Let $A:=\bigcup_{n=1}^\infty A_n$. Then: $$\Prob(A):=\lim_{n\to\infty}\Prob(A_n)$$
+  \begin{theorem}[Continuity from below]
+    Let\\ $(\Omega,\mathcal{A},\Prob)$ be a probability space and $\{A_n:n\geq 1\}\subset\mathcal{A}$ be an increasing sequence of events, that is: $$A_1\subseteq A_2\subseteq\cdots\subseteq A_n\subseteq\cdots$$ Let $A:=\bigcup_{n=1}^\infty A_n$. Then: $$\Prob(A):=\lim_{n\to\infty}\Prob(A_n)$$
   \end{theorem}
-  \begin{corollary}
+  \begin{corollary}[Continuity from above]
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $\{A_n:n\geq 1\}\subset\mathcal{A}$ be an decreasing sequence of events, that is: $$A_1\supseteq A_2\supseteq\cdots\supseteq A_n\supseteq\cdots$$ Let $A:=\bigcap_{n=1}^\infty A_n$. Then: $$\Prob(A):=\lim_{n\to\infty}\Prob(A_n)$$
   \end{corollary}
-  \begin{prop}
+  \begin{prop}[Countable subadditivity]
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $\{A_n:n\geq 1\}\subset\mathcal{A}$ be a sequence of events. Then: $$\Prob\left(\bigcup_{n=1}^\infty A_n\right)\leq\sum_{n=1}^\infty \Prob(A_n)$$
   \end{prop}
   \begin{corollary}
@@ -331,7 +332,13 @@
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $X$ be a random variable and $F_X$ be its cdf. Then:
     \begin{enumerate}
       \item $F_X$ has at most a countable number of discontinuities.
-      \item $\forall s,t\in\RR$ such that $s<t$, we have: $$\Prob(s<X\leq t)=F(t)-F(s)$$
+      \item $\forall x,y\in\RR$ such that $s<t$, we have:
+            \begin{align*}
+              \Prob(x<X\leq y)     & =F(y)-F(x)                                 \\
+              \Prob(x<X<t)         & =\lim_{t\to y^-}F_X(y)-F(x)                \\
+              \Prob(x\leq X\leq y) & =F(y)-\lim_{t\to x^-}F_X(x)                \\
+              \Prob(x\leq X< y)    & =\lim_{t\to y^-}F_X(y)-\lim_{t\to x^-}F(x)
+            \end{align*}
       \item $\displaystyle\forall x\in\RR$, $\displaystyle \Prob(X<x)=\lim_{t\to x^-}F_X(t)$.
       \item For all $x\in\RR$: $$\Prob(X=x)=F_X(x)-\lim_{t\to x^-}F_X(t)$$ Hence, $F_X$ is discontinuous at $x\iff\Prob(X=x)>0$.
     \end{enumerate}
@@ -545,7 +552,7 @@
     for $i=1,\ldots, n$. These functions $f_{X_i}$ are called \textit{marginal probability density functions (marginal pdf)} of $\vectorfunction{X}$.
   \end{prop}
   \begin{definition}[Multivariate standard normal distribution]
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $\vectorfunction{X}=(X_1,\ldots,X_n)$ be an absolutely continuous random vector. We say that $\vectorfunction{X}$ follows a \textit{multivariate normal distribution}, denoted by $\vectorfunction{X}\sim N(0,1)$, if $\vectorfunction{X}$ has a joint pdf: $$f_{\vectorfunction{X}}(x)=\frac{1}{{(2\pi)}^{\frac{n}{2}}}\exp{-\frac{{x_1}^2+\cdots+{x_n}^2}{2}}$$ Moreover, $X_i\sim N(0,1)$ for $i=1,\ldots,n$.
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $\vectorfunction{X}=(X_1,\ldots,X_n)$ be an absolutely continuous random vector. We say that $\vectorfunction{X}$ follows a \textit{multivariate normal distribution}, denoted by $\vectorfunction{X}\sim N(0,1)$, if $\vectorfunction{X}$ has a joint pdf: $$f_{\vectorfunction{X}}(x_1,\ldots,x_n)=\frac{1}{{(2\pi)}^{\frac{n}{2}}}\exp{-\frac{{x_1}^2+\cdots+{x_n}^2}{2}}$$ Moreover, $X_i\sim N(0,1)$ for $i=1,\ldots,n$.
   \end{definition}
   \begin{definition}[Multivariate uniform distribution]
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $\vectorfunction{X}=(X_1,\ldots,X_n)$ be an absolutely continuous random vector. We say that $\vectorfunction{X}$ has a \textit{multivariate uniform distribution over $B\in\mathcal{B}(\RR^n)$}, with $\vol(B)<\infty$, if it has joint pdf: $$f_{\vectorfunction{X}}(x)=\frac{1}{\vol(B)}\vectorfunction{1}_B(x)$$ If $\vectorfunction{X}=(X_1,\ldots,X_r)$ follows a multivariate uniform, we will write $\vectorfunction{X}\sim U(B)$.
