@@ -238,7 +238,7 @@
       \item $\lambda\cdot(\vectorfunction{v}_1+\vectorfunction{v}_2)=\lambda\cdot\vectorfunction{v}_1+\lambda\cdot\vectorfunction{v}_2\quad\forall\vectorfunction{v}_1,\vectorfunction{v}_2\in V$ and $\forall\lambda\in K$.
       \item $(\lambda+\mu)\cdot\vectorfunction{v}=\lambda\cdot\vectorfunction{v}+\mu\cdot\vectorfunction{v}\quad\forall\vectorfunction{v}\in V$ and $\forall\lambda,\mu\in K$.
     \end{enumerate}
-    In these conditions, we say that $(V,+,\cdot)$ is a vector space\footnote{For simplicity we will denote the vector space only by $V$ and if the context is clear we won't refer to its associated field. Moreover sometimes we will also omit the product $\cdot$ between a scalar and a vector.}.
+    In these conditions, we say that $(V,+,\cdot)$ is a vector space\footnote{For simplicity we will denote the vector space only by $V$ and if the context is clear we won't refer to its associated field. Moreover sometimes we will also omit the product $\cdot$ between a scalar and a vector.}. The elements of $V$ are called \textit{vectors} and the elements of $K$, \textit{scalars}.
   \end{definition}
   \begin{definition}
     Let $V$ be a vector space over a field $K$ and $U\subseteq V$ be a subset of $V$. Then, $U$ is a vector space over $K$ if the following property is satisfied:
@@ -789,7 +789,7 @@
         \vectorfunction{0}   & \cdots               & \vectorfunction{0} & \vectorfunction{J}_r \\
       \end{pmatrix}
     $$
-    where $\vectorfunction{J}_1,\ldots,\vectorfunction{J}_r$ are Jordan blocks associated with eigenvalues $\lambda_1,\ldots,\lambda_k$ satisfying properties \ref{LA_diag1} and \ref{LA_diag2}. In that case, we say that $\vectorfunction{J}$ is the \textit{Jordan form of $\vectorfunction{A}$}. 
+    where $\vectorfunction{J}_1,\ldots,\vectorfunction{J}_r$ are Jordan blocks associated with eigenvalues $\lambda_1,\ldots,\lambda_k$ satisfying properties \ref{LA_diag1} and \ref{LA_diag2}. In that case, we say that $\vectorfunction{J}$ is the \textit{Jordan form of $\vectorfunction{A}$}.
   \end{prop}
   \begin{theorem}
     Let $V$ be a vector space and $f,g\in\mathcal{L}(V)$ be such that $p_f(x)=(x-\lambda_1)^{n_1}\cdots(x-\lambda_k)^{n_k}$. If $g$ satisfies:
@@ -801,7 +801,7 @@
     then $f$ is similar to $g$.
   \end{theorem}
   \subsection{Symmetric bilinear forms}
-  \subsubsection{First definitions}
+  \subsubsection{Basic definitions}
   \begin{definition}
     Let $U$, $V$, $W$ be three vector spaces over a field $K$. We say that a function $\varphi:U\times V\rightarrow W$ is \textit{bilinear} if $\forall\vectorfunction{u}_1,\vectorfunction{u}_2,\vectorfunction{u}\in U$, $\forall \vectorfunction{v}_1,\vectorfunction{v}_2,\vectorfunction{v}\in V$ and $\forall\lambda\in K$ we have:
     \begin{enumerate}
@@ -829,7 +829,7 @@
   \end{definition}
   \begin{lemma}
     Let $V$ be a finite vector space over a field $K$, $\mathfrak{B}$ be a basis of $V$ and $\varphi:V\times V\rightarrow K$ be a symmetric bilinear form. Then:
-    $$\varphi(\vectorfunction{v}_1,\vectorfunction{v})={\left([\vectorfunction{v}_1]_\mathfrak{B}\right)}^\mathrm{T}[\varphi]_\mathfrak{B}[\vectorfunction{v}]_\mathfrak{B}\quad\forall\vectorfunction{v}_1,\vectorfunction{v}\in V$$
+    $$\varphi(\vectorfunction{v}_1,\vectorfunction{v}_2)={\left([\vectorfunction{v}_1]_\mathfrak{B}\right)}^\mathrm{T}[\varphi]_\mathfrak{B}[\vectorfunction{v}_2]_\mathfrak{B}\quad\forall\vectorfunction{v}_1,\vectorfunction{v}_2\in V$$
   \end{lemma}
   \begin{prop}
     Let $V$ be a finite vector space over a field $K$, $\mathfrak{B}$ be a basis of $V$ and $\varphi:V\times V\rightarrow K$ be a symmetric bilinear form. Then: $$\varphi\text{ is symmetric}\iff[\varphi]_\mathfrak{B}\text{ is symmetric}$$
@@ -928,18 +928,7 @@
   \end{prop}
   \begin{theorem}[Sylvester's law of inertia]
     Let $V$ be a finite vector space over $\RR$ and $\varphi$ be a symmetric bilinear form over $V$. Then, there exists a basis $\mathfrak{B}$ of $V$ such that:
-    $$[\varphi]_\mathfrak{B}=
-      \begin{pmatrix}
-        0 &        &          &   &        &   &          &        &    & \\
-          & \ddots &          &   &        &   &          &        &      \\
-          &        & 0        &   &        &   & \bigzero &        &      \\
-          &        &          & 1 &        &   &          &        &      \\
-          &        &          &   & \ddots &   &          &        &      \\
-          &        &          &   &        & 1 &          &        &      \\
-          &        & \bigzero &   &        &   & -1       &        &      \\
-          &        &          &   &        &   &          & \ddots &      \\
-          &        &          &   &        &   &          &        & -1
-      \end{pmatrix}$$
+    $$[\varphi]_\mathfrak{B}=\diag\left(0,\overset{(r_0)}{\ldots},0,1,\overset{(r_+)}{\ldots},1,-1,\overset{(r_-)}{\ldots},-1\right)$$
     where in the diagonal there are $r_0$ zeros, $r_+$ ones and $r_-$ minus ones and the triplet $(r_0,r_+,r_-)$ doesn't depend on the basis $\mathfrak{B}$.
   \end{theorem}
   \begin{definition}
@@ -952,7 +941,7 @@
   \begin{definition}
     Let $V$ be a finite vector space over $\RR$ and $\varphi$ be a symmetric bilinear form over $V$. We say that $\varphi$ is \textit{positive-definite} if $$\varphi(\vectorfunction{v},\vectorfunction{v})>0\quad\forall\vectorfunction{v}\in V\setminus\{0\}$$ We say that $\varphi$ is \textit{negative-definite} if $$\varphi(\vectorfunction{v},\vectorfunction{v})<0\quad\forall\vectorfunction{v}\in V\setminus\{0\}\footnote{The terms \textit{positive-semidefinite} and \textit{negative-semidefinite} are used when $\forall\vectorfunction{v}\in V\setminus\{0\}$, $\varphi(\vectorfunction{v},\vectorfunction{v})\geq 0$ or $\varphi(\vectorfunction{v},\vectorfunction{v})\leq 0$, respectively.}$$
   \end{definition}
-  \begin{definition}
+  \begin{definition}\label{LA_inner}
     Let $V$ be a vector space over $\RR$. An \textit{inner product over $V$} is a positive-definite symmetric bilinear form over $V$.
   \end{definition}
   \begin{definition}\label{espai_euclidia}

@@ -646,6 +646,56 @@
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $(X,Y)$ be an absolutely continuous random vector. Then, the pdf of $Y$ together with the pdf of $X$ conditioned to $Y=y$ determine the pdf of $X$ in the following way: $$f_X(x)=\int_{-\infty}^{+\infty}f_{(X,Y)}(x,y)\dd y=\int_{-\infty}^{+\infty}f_{X\mid Y}(x\mid y)f_Y(y)\dd y$$ for all $x\in\RR$.
   \end{prop}
   \subsection{Expectation}
-  %ATENCIÓ: absolutely continuous =? everywhere continuous
+  \subsubsection{Expectation of simple random variables}
+  \begin{definition}
+    A \textit{simple random variable} is a random variable that takes a finite or countable number of values\footnote{Note that a simple random variable is a particular case of a discrete random variable.}.
+  \end{definition}
+  \begin{definition}
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$ be a simple random variable whose outcomes are $\{x_i:i\in I\}$\footnote{Note that we can write $X$ as $X=\sum_{i\in I}x_i\vectorfunction{1}_{\{X=x_i\}}$, where the events $\{X=x_i\}$, $i\in I$, form a partition of $\Omega$.}, where $I$ is a finite or countable index set. We say that $X$ has \textit{finite expectation} or that it is \textit{integrable} if: $$\sum_{i\in I}|x_i|\Prob(X=x_i)<\infty$$
+    If so, we define the \textit{expectation} of $X$ as: $$\Exp(X):=\sum_{i\in I}x_i\Prob(X=x_i)$$ If the series of above is not absolutely convergent, we will say that $X$ is \textit{not integrable}.
+  \end{definition}
+  \begin{lemma}
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and suppose that $X$ be a random variable that can be expressed as $$X=\sum_{n=1}^Na_n\vectorfunction{1}_{A_n}$$ where $N\in\NN\cup\{\infty\}$, $\{A_n:n=1,\ldots,N\}\subseteq\mathcal{A}$ be a partition of $\Omega$ and $\{a_n:n=1,\ldots,N\}$ be not necessarily distinct values. Then, $X$ has finite expectation if and only if $$\sum_{n=1}^N|a_n|\Prob(A_n)<\infty$$ and in that case, $\Exp(X)=\sum_{n=1}^Na_n\Prob(X=a_n)$.
+  \end{lemma}
+  \begin{prop}
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$, $Y$ be simple and integrable random variables. Then, $X+Y$ is also a simple and integrable random variable and: $$\Exp(X+Y)=\Exp(X)+\Exp(Y)$$
+  \end{prop}
+  \begin{prop}
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $X$ be a simple and integrable random variable and $c\in\RR$. Then, $cX$ is also a simple and integrable random variable and: $$\Exp(cX)=c\Exp(X)$$
+  \end{prop}
+  \begin{prop}
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $X$ be a simple random variable such that $|X|\leq C$ for some $C\in\RR$. Then, $X$ is integrable and: $$|\Exp(X)|\leq C$$
+  \end{prop}
+  \subsubsection{Extension of the expectation}
+  \begin{prop}
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$ be a random variable. Then, there exists a sequence $(X_n)$ of simple random variables that converges uniformly to $X$, that is: $$\lim_{n\to\infty}\sup\{|X_n(\omega)-X(\omega)|:\omega\in\Omega\}$$
+  \end{prop}
+  \begin{theorem}
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$ be a random variable such that there exists a sequence $(X_n)$ of simple and integrable random variables that converges uniformly to $X$. Then, the following statements are satisfied:
+    \begin{enumerate}
+      \item The limit $\displaystyle\lim_{n\to\infty}\Exp(X_n)$ exists.
+      \item The limit $\displaystyle\lim_{n\to\infty}\Exp(X_n)$ does not depend on the sequence $(X_n)$.
+      \item If $X$ is simple, then $\displaystyle\Exp(X)=\lim_{n\to\infty}X_n$.
+    \end{enumerate}
+  \end{theorem}
+  \begin{definition}[Expectation]
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$ be a random variable. We say that $X$ has \textit{finite expectation} or that it is \textit{integrable} if there exists a sequence $(X_n)$ of simple and integrable random variables that converges uniformly to $X$. In that case, we define the \textit{expectation} of $X$ as: $$\Exp(X):=\lim_{n\to\infty}\Exp(X_n)$$
+  \end{definition}
+  \begin{prop}
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$, $Y$ be random variables and $c\in\RR$. Then:
+    \begin{enumerate}
+      \item If $X$ and $Y$ are integrable, then $X+Y$ is also integrable and: $$\Exp(X+Y)=\Exp(X)+\Exp(Y)$$
+      \item If $X$ is integrable, then $cX$ is also integrable and: $$\Exp(cX)=c\Exp(X)$$
+      \item If $|X|\leq C$ for some $C\in \RR$, then $X$ is integrable.
+      \item If $X$ is integrable and $X\geq 0$, then $\Exp(X)\geq 0$.
+      \item If $X$ and $Y$ are integrable and $Y\geq X$, then $\Exp(Y)\geq \Exp(X)$.
+      \item If $m\leq X\leq M$ for some $m, M\in\RR$, then $X$ is integrable and $$m\leq \Exp(X)\leq M$$
+      \item \textit{Comparison test}: If $X$ is integrable and $|Y|\leq X$, then $Y$ is integrable.
+      \item $X$ is integrable $\iff |X|$ is integrable.
+      \item If $\Prob(A)=0$ for some $A\in\mathcal{A}$, then for any random variable $Z$, we have that $Z\vectorfunction{1}_A$ is integrable and $\Exp(Z\vectorfunction{1}_A)=0$.
+      \item If $X\overset{a.s.}{=}Y$ and one of them are integrable, then so will be the other one and furthermore $\Exp(X)=\Exp(Y)$.
+    \end{enumerate}
+  \end{prop}
+  \subsubsection{Expectation of absolutely continuous random variables}
 \end{multicols}
 \end{document}
