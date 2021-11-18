@@ -220,6 +220,47 @@
             Analogously, if $\Iso_K(L,F)\ne\varnothing$, then $\Iso_K(L,F)\cong\Gal(\quot{L}{K})$.
     \end{enumerate}
   \end{prop}
+  \subsection{Finite fields}
+  \begin{definition}
+    A \textit{finite field} $F$ is a finite set which is a field.
+  \end{definition}
+  \begin{prop}
+    Let $F$ be a finite field. Then, $F=p^n$ where $p$ is a prime number and $n\in\NN$.
+  \end{prop}
+  \begin{theorem}
+    Let $p$ be a prime number and $n\in\NN$. Then, there exists a unique field with $p^n$ elements up to isomorphism which will be denoted as $\FF_{p^n}$\footnote{Another commonly used notation to denote the field with $p^n$ elements is $\text{GF}(p^n)$.}.
+  \end{theorem}
+  \begin{prop}
+    Let $p$ be a prime number and $d,n\in\NN$. Then: $$\FF_{p^d}\subseteq\FF_{p^n}\iff d\mid n$$
+  \end{prop}
+  \begin{theorem}
+    Let $p$ be a prime number and $d\in\NN$. We define the set $P_d$ as:
+    \begin{multline*}
+      P_{p,d}:=\{f(x)\in\FF_p[x]:\deg(f(x))=d\text{ and}\\\text{$f(x)$ is monic and irreducible}\}
+    \end{multline*}
+    Then, for all $n\in\NN$ we have: $$\prod_{d\mid n}\prod_{f(x)\in P_{p,d}}f(x)=x^{p^n}-x$$
+  \end{theorem}
+  \begin{corollary}
+    Let $p$ be a prime number and $d,n\in\NN$. Then: $$p^n=\sum_{d\mid n}d|P_{p,d}|$$
+  \end{corollary}
+  \begin{corollary}
+    For all prime number $p$ and for all $n\in\NN$, there exists a monic and irreducible polynomial of degree $n$ in $\FF_p[x]$.
+  \end{corollary}
+  \begin{corollary}
+    Let $p$ be a prime number and $n\in\NN$. Then, $\FF_{p^n}=\FF_p(\alpha)$ for some $\alpha\in\FF_{p^n}$. Thus, the extension $\quot{\FF_{p^n}}{\FF_p}$ is simple.
+  \end{corollary}
+  \begin{definition}
+    Let $p$ be a prime number $R$ be a ring such that $\ch R=p$. We define the \textit{Frobenius endomorphism} as: $$\function{\text{Frob}_R}{R}{R}{r}{r^p}$$
+  \end{definition}
+  \begin{theorem}
+    Let $p$ be a prime number and $n\in\NN$. Then, $\text{Frob}_{\FF_{p^n}}\in\Gal(\quot{\FF_{p^n}}{\FF_p})$ and, furthermore: $$\Gal(\FF_{p^n}/\FF_p)=\langle\text{Frob}_{\FF_{p^n}}\rangle\cong\quot{\ZZ}{n\ZZ}$$
+  \end{theorem}
+  \begin{corollary}
+    Let $p$ be a prime number, $n\in\NN$, $q=p^n$ and denote $\text{Frob}_q:={\left(\text{Frob}_{\FF_{p^n}}\right)}^n$. Then, for all $r\in\NN$: $$\Gal(\FF_{q^r}/\FF_q)=\langle\text{Frob}_q\rangle\cong\quot{\ZZ}{r\ZZ}$$
+  \end{corollary}
+  \begin{definition}[Perfect fields]
+    A field $K$ is called \textit{perfect} if either $\ch K=0$ or $\ch K=p>0$ and $\text{Frob}_K\in\Aut(K)$.
+  \end{definition}
   \subsection{Algebraic field extensions}
   \subsubsection{Splitting field}
   \begin{definition}
@@ -318,6 +359,15 @@
   \begin{corollary}
     Let $K$ be a field such that $\ch K=p>0$, $p(x)\in K[x]$ and $q(x):=f(x^p)+bx$, where $b\in K^*$. Then, all roots of $q(x)$ are simple.
   \end{corollary}
+  \begin{theorem}
+    Let $K$ be a perfect field. Then, every irreducible polynomial over $K$ is separable.
+  \end{theorem}
   \subsubsection{Separable extensions}
+  \begin{definition}[Separable extension]
+    Let $\quot{L}{K}$ be an algebraic field extension and $\alpha\in L$. We say that $\alpha$ is \textit{separable} over $K$ is $\irr(\alpha,K)(x)$ is separable. We say that $\quot{L}{K}$ is \textit{separable} if and only if $\forall \alpha\in L$ $\alpha$ is separable over $K$.
+  \end{definition}
+  \begin{corollary}
+    Let $K$ be a perfect field. Then, every algebraic extension $\quot{L}{K}$ is separable.
+  \end{corollary}
 \end{multicols}
 \end{document}
