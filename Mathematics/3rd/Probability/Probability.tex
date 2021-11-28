@@ -374,7 +374,7 @@
     Let\\ $(\Omega,\mathcal{A},\Prob)$ be a probability space. The \textit{Bernoulli distribution} is the one that can only take two values (1 and 0)\footnote{Also called \textit{success}/\textit{true} and \textit{failure}/\textit{false} respectively.} with probabilities $p$ and $q:=1-p$: $$\Prob(X=0)=p\qquad \Prob(X=1)=q$$ Here we have $S=\{0,1\}$. If $X$ follows a Bernoulli distribution of parameter $p$, we will write $X\sim \text{Ber}(p)$.
   \end{definition}
   \begin{definition}[Discrete uniform distribution]
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space. The \textit{discrete uniform distribution} is the one whose random variable $X$ takes values on $S=\{x_1,\ldots,x_n\}$ each of these with probability $1/n$: $$\Prob(X=x_i)=\frac{1}{n}\qquad \forall i=1,\ldots,n$$ If $X$ follows a discrete uniform distribution, we will write $X\sim U\{x_1,\ldots,x_n\}$. The probability space $(S,\mathcal{P}(S),\Prob_X)$ is an \textit{equiprobable space}.
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space. The \textit{discrete uniform distribution} is the one whose random variable $X$ takes values on $S=\{x_1,\ldots,x_n\}$ each of these with probability $1/n$: $$\Prob(X=x_i)=\frac{1}{n}\qquad \forall i=1,\ldots,n$$ If $X$ follows a discrete uniform distribution, we will write $X\sim U(\{x_1,\ldots,x_n\})$. The probability space $(S,\mathcal{P}(S),\Prob_X)$ is an \textit{equiprobable space}.
   \end{definition}
   \begin{definition}[Binomial distribution]
     Let\\ $(\Omega,\mathcal{A},\Prob)$ be a probability space and $A\in\mathcal{A}$. Suppose $\Prob(A)=p$. The \textit{binomial distribution} is the one whose random variable $X$ is the number of successes of $A$ in a sequence of $n$ repetitions. Thus, $S=\{0,1,\ldots,n\}$ and: $$\Prob(X=k)=\binom{n}{k}p^k{(1-p)}^{n-k}\qquad \forall k=0,1,\ldots,n$$ If $X$ follows a binomial distribution of parameters $n$ and $p$, we will write $X\sim \text{B}(n,p)$\footnote{Note that, a Bernoulli distribution of parameter $p$ may be considered as a Binomial distribution of parameters $n=1$ and $p$. Hence, $\text{Ber}(p)=\text{B}(1,p)$.}.
@@ -480,6 +480,9 @@
   \end{prop}
   \begin{definition}[Beta distribution]
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space. We say that an absolutely continuous random variable $X$ follows a \textit{beta distribution} of parameters $a,b\in\RR_{>0}$, and we denoted it by $X\sim \text{Beta}(a,b)$, if $X$ has the pdf: $$f_X(x)=\frac{1}{\text{B}(a,b)}x^{a-1}{(1-x)}^{b-1}\vectorfunction{1}_{(0,1)}(x)$$
+  \end{definition}
+  \begin{definition}[Cauchy distribution]
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $\mu\in\RR$ and $\sigma\in\RR_{>0}$. We say that an absolutely continuous random variable $X$ follows a \textit{Cauchy distribution} of parameters $x_0\in\RR$ and $\gamma\in\RR_{>0}$, and we denoted it by $X\sim \text{C}(x_0,\gamma)$, if $X$ has the pdf: $$f_X(x)=\frac{1}{\pi\gamma\left[1+{\left(\frac{x-x_0}{\gamma}\right)}^2\right]}$$
   \end{definition}
   \begin{definition}
     A \textit{mixed random variable} is a random variable whose cdf is neither piecewise-constant (a discrete random variable) nor absolutely  continuous.
@@ -662,8 +665,11 @@
     If so, we define the \textit{expectation} of $X$ as: $$\Exp(X):=\sum_{i\in I}x_i\Prob(X=x_i)$$ If the series of above is not absolutely convergent, we will say that $X$ is \textit{not integrable}.
   \end{definition}
   \begin{lemma}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and suppose that $X$ be a random variable that can be expressed as $$X=\sum_{n=1}^Na_n\vectorfunction{1}_{A_n}$$ where $N\in\NN\cup\{\infty\}$, $\{A_n:n=1,\ldots,N\}\subseteq\mathcal{A}$ be a partition of $\Omega$ and $\{a_n:n=1,\ldots,N\}$ be not necessarily distinct values. Then, $X$ has finite expectation if and only if $$\sum_{n=1}^N|a_n|\Prob(A_n)<\infty$$ and in that case, $\Exp(X)=\sum_{n=1}^Na_n\Prob(X=a_n)$.
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and suppose that $X$ be a random variable that can be expressed as $$X=\sum_{n=1}^Na_n\vectorfunction{1}_{A_n}$$ where $N\in\NN\cup\{\infty\}$, $\{A_n:n=1,\ldots,N\}\subseteq\mathcal{A}$ be a partition of $\Omega$ and $\{a_n:n=1,\ldots,N\}$ be not necessarily distinct values. Then, $X$ has finite expectation if and only if $$\sum_{n=1}^N|a_n|\Prob(A_n)<\infty$$ and in that case, $\Exp(X)=\sum_{n=1}^Na_n\Prob(A_n)$.
   \end{lemma}
+  \begin{prop}
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$ be a random variable whose outcomes are in $\NN\cup\{0\}$. Then: $$\Exp(X)=\sum_{k=0}^\infty\Prob(X>k)$$
+  \end{prop}
   \begin{prop}
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$, $Y$ be simple and integrable random variables. Then, $X+Y$ is also a simple and integrable random variable and: $$\Exp(X+Y)=\Exp(X)+\Exp(Y)$$
   \end{prop}
@@ -675,7 +681,7 @@
   \end{prop}
   \subsubsection{Extension of the expectation}
   \begin{prop}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$ be a random variable. Then, there exists a sequence $(X_n)$ of simple random variables that converges uniformly to $X$, that is: $$\lim_{n\to\infty}\sup\{|X_n(\omega)-X(\omega)|:\omega\in\Omega\}$$
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$ be a random variable. Then, there exists a sequence $(X_n)$ of simple random variables that converges uniformly to $X$, that is: $$\lim_{n\to\infty}\sup\{|X_n(\omega)-X(\omega)|:\omega\in\Omega\}$$ Furthermore, $\forall\omega\in\Omega$ and $\forall n\in\NN$ we have that $X_n(\omega)\leq X_{n+1}(\omega)$.
   \end{prop}
   \begin{theorem}
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$ be a random variable such that there exists a sequence $(X_n)$ of simple and integrable random variables that converges uniformly to $X$. Then, the following statements are satisfied:
@@ -723,11 +729,140 @@
     \end{multline*}
   \end{prop}
   \begin{prop}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $\vectorfunction{X}=(X_1,\ldots,X_n)$ be an absolutely continuous random vector with density $f_{\vectorfunction{X}}$ and $h:\RR^n\rightarrow\RR$ be a Borel measurable function. Then, $Y:=h(\vectorfunction{X})$ is an integrable random variable if and only if $$\int_{\RR^n}|g(x_1,\ldots,x_n)|f(x_1,\ldots,x_n)\dd x_1\cdots\dd x_n<\infty$$
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $\vectorfunction{X}=(X_1,\ldots,X_n)$ be an absolutely continuous random vector with density $f_{\vectorfunction{X}}$ and $h:\RR^n\rightarrow\RR$ be a Borel measurable function. Then, $Y:=h(\vectorfunction{X})$ is an integrable random variable if and only if $$\int_{\RR^n}|g(x_1,\ldots,x_n)|f_{\vectorfunction{X}}(x_1,\ldots,x_n)\dd x_1\cdots\dd x_n<\infty$$
     In that case, we have:
     $$
-      \Exp(Y)=\int_{\RR^n}g(x_1,\ldots,x_n)f(x_1,\ldots,x_n)\dd x_1\cdots\dd x_n$$
+      \Exp(Y)=\int_{\RR^n}g(x_1,\ldots,x_n)f_{\vectorfunction{X}}(x_1,\ldots,x_n)\dd x_1\cdots\dd x_n$$
   \end{prop}
-  \subsubsection{Expectation of non-negative mixed random vectors}
+  \subsubsection{Expectation of non-negative and mixed random variables}
+  \begin{prop}
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $X\geq 0$ be a non-negative random variable and $(X_n)\geq 0$ be a sequence of simple random variables that converges uniformly to $X$. Then:
+    \begin{itemize}
+      \item If $X_n$ is integrable $\forall n\in\NN$, then: $$\Exp(X)=\lim_{n\to\infty}\Exp(X_n)$$
+      \item If $\exists m\in\NN$ such that $X_m$ isn't integrable, then: $$\Exp(X)=\infty$$
+    \end{itemize}
+  \end{prop}
+  \begin{definition}
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$ be a mixed random variable. Suppose that the discrete part of $X$ has support $S$ and ``pmf'' $p(x)$\footnote{We write pmf in quotation marks because $p_X(x)$ is not exactly a probability mass function since $\sum_{x\in S}p_X(x)<1$.}. Moreover, suppose that the absolutely continuous part of $X$ has ``pdf'' $f(x)$\footnote{Again, we write pdf in quotation marks because $f_X(x)$ is not exactly a probability density function since $\int_{-\infty}^{+\infty}f_X(x)\dd x<1$.} We say that $X$ has \textit{finite expectation} if: $$\sum_{x\in S}|x|p(x)+\int_{-\infty}^{+\infty}|x|f_X(x)\dd x<1<\infty$$
+    If so, we define the \textit{expectation} of $X$ as: $$\Exp(X):=\sum_{x\in S}xp(x)+\int_{-\infty}^{+\infty}xf_X(x)\dd x<1$$
+  \end{definition}
+  \subsubsection{Moments}
+  \begin{definition}[Moments]
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $X$ be a random variable and $k\in\NN$. We say that $X$ has \textit{moment of order $k$} (or \textit{$k$-th moment}) if $X^k$ has finite expectation. We denote by $\mu_k$ the $k$-th moment of $X$: $$\mu_k=\Exp(X^k)$$
+  \end{definition}
+  \begin{prop}
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $X$, $Y$ be random variables such that they have finite $k$-th moment. Then:
+    \begin{enumerate}
+      \item $X$ (and $Y$) has finite $r$-th moment for all $r\in\{1,\ldots,k\}$.
+      \item $X+Y$ has finite $k$-th moment.
+    \end{enumerate}
+  \end{prop}
+  \begin{prop}
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $X$, $Y$ be random variables such that they have finite $2k$-th moment. Then, $XY$ has finit $k$-th moment.
+  \end{prop}
+  \begin{theorem}[Cauchy-Schwarz inequality]
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$, $Y$ be two random variables such that $\Exp(X^2)<\infty$. Then: $$\Exp(|XY|)\leq {\left(\Exp(X^2)\Exp(Y^2)\right)}^{1/2}$$
+  \end{theorem}
+  \begin{definition}[Variance]
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$ be a random variable such that $\Exp(X^2)<\infty$. We define the \textit{variance} of $X$ as: $$\Var(X):=\Exp\left({(X-\Exp(X))}^2\right)\geq 0$$
+  \end{definition}
+  \begin{prop}
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$ be a random variable such that $\Exp(X^2)<\infty$. Then: $$\Var(X)=\Exp(X^2)-{\Exp(X)}^2$$
+  \end{prop}
+  \begin{definition}[Standard deviation]
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$ be a random variable such that $\Exp(X^2)<\infty$. We define the \textit{standard deviation} of $X$ as: $$\sigma(X):=\sqrt{\Var(X)}\footnote{Therefore, we will sometimes refer to $\Var(X)$ as $\sigma^2(X)$.}$$
+  \end{definition}
+  \begin{prop}
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$ be a random variable such that $\Exp(X^2)<\infty$. If $\Var(X)=0$, then $X\overset{a.s.}{=}\Exp(X)$.
+  \end{prop}
+  \begin{prop}
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$, $Y$ be independent random variables with finite expectation. Then, $XY$ has finite expectation and: $$\Exp(XY)=\Exp(X)\Exp(Y)$$
+  \end{prop}
+  \begin{definition}[Covariance]
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$, $Y$ be two random variables with finite 2nd moments. We define the \textit{covariance} between $X$ and $Y$ as: $$\cov(X,Y):=\Exp\left([X-\Exp(X)][Y-\Exp(Y)]\right)$$
+  \end{definition}
+  \begin{prop}
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$, $Y$ be two random variables with finite 2nd moments. Then: $$\cov(X,Y)=\Exp(XY)-\Exp(X)\Exp(Y)$$
+  \end{prop}
+  \begin{prop}
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$, $Y$ be independent random variables with finite expectation. Then, $\cov(X,Y)$ is well-defined and $\cov(X,Y)=0$.
+  \end{prop}
+  \begin{definition}
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space. We say that two random variables $X$, $Y$ are \textit{uncorrelated} if $\cov(X,Y)=0$.
+  \end{definition}
+  \begin{prop}
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $X$ be a random variable such that $\Exp(X^2)<\infty$ and $a,b\in\RR$. Then: $$\Var(aX+b)=a^2\Var(X)$$
+  \end{prop}
+  \begin{prop}
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X_1,\ldots,X_n$ be random variables with finite 2nd moments. Then:
+    $$\Var(X_1+\cdots+X_n)=\sum_{i=1}^n\Var(X_i)+2\sum_{1\leq i<j\leq n}\cov(X_i,X_j)$$
+  \end{prop}
+  \begin{corollary}
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X_1,\ldots,X_n$ be random variables with finite 2nd moments such that tey are pairwise uncorrelated. Then:
+    $$\Var(X_1+\cdots+X_n)=\sum_{i=1}^n\Var(X_i)$$
+  \end{corollary}
+  \begin{definition}[Pearson correlation coefficient]
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$, $Y$ be non-constant random variables with finite 2nd moments. We define the \textit{Pearson correlation coefficient} (or simply \textit{correlation coefficient}) as: $$\rho(X,Y):=\frac{\cov(X,Y)}{\sigma(X)\sigma(Y)}=\frac{\cov(X,Y)}{\sqrt{\Var(X)}\sqrt{\Var(Y)}}$$
+  \end{definition}
+  \begin{prop}
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $X$, $Y$ be non-constant random variables with finite 2nd moments and $\rho:=\rho(X,Y)$. Then:
+    \begin{enumerate}
+      \item $|\rho|\leq 1$
+      \item If $\rho=1$, then $\exists a,b\in\RR$ with $a>0$ such that $Y=aX+b$.
+      \item If $\rho=-1$, then $\exists a,b\in\RR$ with $a<0$ such that $Y=aX+b$.
+    \end{enumerate}
+  \end{prop}
+  \begin{theorem}[Markov's inequality]
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $X\geq 0$ be a non-negative random variable with finite expectation and $\lambda\in\RR_{>0}$. Then:
+    $$\Prob(X>\lambda)\leq \Prob(X\geq \lambda)\leq \frac{\Exp(X)}{\lambda}$$
+  \end{theorem}
+  \begin{corollary}
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X\geq 0$ be a non-negative random variable such that $\Exp(X)=0$. Then, $X\overset{a.s.}{=}0$.
+  \end{corollary}
+  \begin{corollary}
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $p\in\RR_{>0}$ and $X$ be a random variable such that $\Exp({|X|}^p)<\infty$. Then, for all $a\in\RR_{>0}$: $$\Prob(X\geq a)\leq \frac{\Exp({|X|}^p)}{a^p}$$
+  \end{corollary}
+  \begin{corollary}[Chebyshev's inequality]
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $X$ be a random variable such that $\Exp(X^2)<\infty$ and $\delta\in\RR_{>0}$. Then: $$\Prob(|X-\Exp(X)|\geq\delta)\leq\frac{\Var(X)}{\delta^2}$$ Furthermore, if $\sigma:=\sigma(X)$ and we take $\delta=k\sigma$, $k\in\RR_{>0}$, then: $$\Prob(|X-\Exp(X)|<k\sigma)\geq1-\frac{1}{k^2}$$
+  \end{corollary}
+  \begin{definition}[Moment-generating function]
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$ be a random variable. The \textit{moment-generating function} of $X$ is the function $\psi_X$ defined as:
+    $$\function{\psi_X}{\RR}{\RR_{>0}\cup\{+\infty\}}{t}{\Exp(\exp{tX})}$$
+  \end{definition}
+  \begin{center}
+    \def\arraystretch{1.25}
+    \begin{tabular}{|c|c|c|}
+      \hline
+      $X$                      & $\displaystyle \Exp(X)$        & $\displaystyle \Var(X)$                     \\
+      \hline
+      $c\in\RR$                & $\displaystyle c$              & 0                                           \\
+      %\hline
+      $U(\{x_1,\ldots,x_n\})$  & $\frac{1}{n}\sum_{i=1}^n x_i$  & $\frac{1}{n}\sum_{i=1}^n ({x_i}^2-x_i)$     \\
+      %\hline
+      $\text{B}(n,p)$          & $\displaystyle np$             & $\displaystyle np(1-p)$                     \\
+      %\hline
+      $\text{Pois}(\lambda)$   & $\displaystyle \lambda$        & $\displaystyle \lambda$                     \\
+      %\hline
+      $\text{Geo}(p)$          & $\displaystyle 1/p$            & $\displaystyle \frac{1-p}{p^2}$             \\
+      %\hline
+      $\text{HG}(N,p,n)$       & $\displaystyle np$             & $\displaystyle np(1-p)\frac{N-n}{N-1}$      \\
+      %\hline
+      $\text{NB}(r,p)$         & $\displaystyle \frac{rp}{1-p}$ & $\displaystyle \frac{rp}{{(1-p)}^2}$        \\
+      %\hline
+      $U(a,b)$                 & $\displaystyle (a+b)/2$        & $\displaystyle {(b-a)}^2/12$                \\
+      %\hline
+      $\text{Exp}(\lambda)$    & $\displaystyle 1/\lambda$      & $\displaystyle 1/\lambda^2$                 \\
+      %\hline
+      $N(\mu,\sigma^2)$        & $\displaystyle \mu$            & $\displaystyle \sigma^2$                    \\
+      %\hline
+      $\text{Gamma}(r,\alpha)$ & $\displaystyle r/\alpha$       & $\displaystyle r/\alpha^2$                  \\
+      %\hline
+      $\text{Beta}(a,b)$       & $\displaystyle \frac{a}{a+b}$  & $\displaystyle \frac{ab}{{(a+b)}^2(a+b+1)}$ \\
+      %\hline
+      $\text{C}(x_0,\gamma)$   & $\displaystyle +\infty$        & $\displaystyle +\infty$                     \\
+      \hline
+    \end{tabular}
+    \captionof{table}{Expectations and variances of common distributions.}
+  \end{center}
 \end{multicols}
 \end{document}

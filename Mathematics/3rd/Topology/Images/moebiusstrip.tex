@@ -1,0 +1,35 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usepackage{pgfplots}
+
+\pgfplotsset{compat = newest}
+
+\begin{document}
+\begin{tikzpicture}
+  \begin{axis}[
+      hide axis,
+      view = {40}{60}
+    ]
+    \addplot3 [
+      surf,
+      z buffer=sort,
+      colormap={periodic}{
+          color=(blue)
+          color=(yellow)
+          color=(orange)
+          color=(red)
+          color=(orange)
+          color=(yellow)
+          color=(blue)},
+      domain=0:360, domain y=-1:1,
+      samples=41, samples y=25,
+      variable=\u, variable y=\v,
+      point meta=u,
+    ] (
+    {(1 + v/2 * cos(u/2)) * cos(u)},
+    {(1 + v/2 * cos(u/2)) * sin(u)},
+    {v/2 * sin(u/2)}
+    );
+  \end{axis}
+\end{tikzpicture}
+\end{document}

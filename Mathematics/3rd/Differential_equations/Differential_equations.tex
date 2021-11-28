@@ -58,7 +58,14 @@
     \end{equation*}
   \end{prop}
   \begin{definition}
-    We say that an ode is \textit{autonomous} if it doesn't depend on the independent variable, that is, if it is of the form: $$\vectorfunction{x}'=\vectorfunction{f}(\vectorfunction{x})$$ Analogously, we say that an ode is \textit{non-autonomous} if it does depend on the independent variable, that is, if it is of the form: $$\vectorfunction{x}'=\vectorfunction{f}(t,\vectorfunction{x})$$
+    We say that an ode is \textit{autonomous} if it doesn't depend on the independent variable, that is, if it is of the form: $$\vectorfunction{x}'=\vectorfunction{f}(\vectorfunction{x})$$ Otherwise, we say that an ode is \textit{non-autonomous}.
+  \end{definition}
+  \begin{definition}
+    We say that an ode of order $n$ is \textit{linear} if it is of the form:
+    \begin{equation}\label{DE_linear0}
+      a_0(t)\vectorfunction{x}+a_1(t)\vectorfunction{x}'+\cdots+a_n(t)\vectorfunction{x}^{(n)}=\vectorfunction{b}(t)
+    \end{equation}
+    where $a_i\in\mathcal{C}(I,\RR)$ for $i=0,\ldots,n$ and $\vectorfunction{b}\in\mathcal{C}(I,\RR^m)$ are arbitrary functions which do not need to be linear. We say that the linear ode \eqref{DE_linear0} is \textit{homogeneous} if $\vectorfunction{b}(t)=\vectorfunction{0}$ $\forall t\in I$. We say that linear ode \eqref{DE_linear0} is of \textit{constant coefficients} if $a_i(t):=a_{i0}\in\RR$ $\forall t\in I$ and $\forall i=0,\ldots,n$.
   \end{definition}
   \begin{definition}[Initial value problem]
     Let $U\subseteq\RR\times\RR^n$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a function. Given $(t_0,x_0)\in U$, the \textit{initial value problem (ivp)} (or \textit{Cauchy problem}) consists in finding a solution of the ode $$\vectorfunction{x}'=\vectorfunction{f}(t,\vectorfunction{x})$$ with \textit{initial conditions} $\vectorfunction{x}(t_0)=x_0$.
@@ -315,7 +322,7 @@
   \end{corollary}
   \subsection{Linear differential equations}
   \begin{definition}
-    Let $I\subseteq\RR$ be an interval. A \textit{linear differential equation} is an ode of the form:
+    Let $I\subseteq\RR$ be an interval. A \textit{system of linear differential equations} is an expression of the form:
     \begin{equation}\label{DE_linear}
       \vectorfunction{x}'=\vectorfunction{A}(t)\vectorfunction{x}+\vectorfunction{b}
     \end{equation}
@@ -397,7 +404,7 @@
     Let $I\subseteq \RR$ be an interval, $\vectorfunction{A}\in\mathcal{C}(I,\mathcal{L}(\RR^n))$ and $\vectorfunction{b}\in\mathcal{C}(I,\RR^n)$. Suppose $\vectorfunction{\varphi}(t,t_0,x_0)$ is the flux of the ode \eqref{DE_linear}. Then, $$\vectorfunction{\varphi}(t,t_0,x_0)=\Phi(t)\left[{\Phi(t_0)}^{-1}x_0+\int_{t_0}^t{\Phi(s)}^{-1}\vectorfunction{b}(s)\dd s\right]$$ where $\Phi(t)$ is a fundamental matrix of the associated homogeneous system.
   \end{prop}
   \begin{corollary}
-    Let $I\subseteq \RR$ be an interval, $\vectorfunction{A}\in\mathcal{C}(I,\mathcal{L}(\RR^n))$ and $\vectorfunction{b}\in\mathcal{C}(I,\RR^n)$. Then, the general solution $\varphi(t)$ of the ode \eqref{DE_homo} can be written as: $$\varphi(t)=\varphi_\mathrm{h}(t)+\varphi_\mathrm{p}(t)$$ where $\varphi_\mathrm{h}(t)$ is the general solution to the associated homogeneous system and $\varphi_\mathrm{p}(t)$ is a particular solution of \eqref{DE_homo}.
+    Let $I\subseteq \RR$ be an interval, $\vectorfunction{A}\in\mathcal{C}(I,\mathcal{L}(\RR^n))$ and $\vectorfunction{b}\in\mathcal{C}(I,\RR^n)$. Then, the general solution $\vectorfunction{\varphi}(t)$ of the ode \eqref{DE_homo} can be written as: $$\vectorfunction{\varphi}(t)=\vectorfunction{\varphi}_\mathrm{h}(t)+\vectorfunction{\varphi}_\mathrm{p}(t)$$ where $\vectorfunction{\varphi}_\mathrm{h}(t)$ is the general solution to the associated homogeneous system and $\vectorfunction{\varphi}_\mathrm{p}(t)$ is a particular solution of \eqref{DE_homo}.
   \end{corollary}
   \begin{prop}[Liouville's formula]
     Let $I\subseteq \RR$ be an interval, $\vectorfunction{A}\in\mathcal{C}(I,\mathcal{L}(\RR^n))$, $\vectorfunction{\Phi}(t)\in\mathcal{M}_n(\RR)$ be a matrix solution of the ode \eqref{DE_homo} and $t_0\in I$. Then, for all $t\in I$ we have: $$\det(\Phi(t))=\det (\Phi(t_0))\exp{\int_{t_0}^t\trace(\vectorfunction{A}(s))\dd s}$$
@@ -497,24 +504,95 @@
     \end{multline*}
     where $\vectorfunction{P}_i,\vectorfunction{Q}_i,\vectorfunction{R}_i\in\RR^n[t]$ and $\deg \vectorfunction{P}_i,\deg\vectorfunction{Q}_i,\deg\vectorfunction{R}_i<n$ $\forall i$.
   \end{corollary}
-  \subsection{Dependence on initial conditions}
+  \subsection{Dependence on initial conditions and parameters}
+  \begin{definition}
+    Let $U\subseteq\RR\times\RR^n\times\RR^p$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function. Suppose that the ivp:
+    \begin{equation}\label{DE_ivp_lambda}
+      \left\{
+      \begin{aligned}
+         & \vectorfunction{x}'      =\vectorfunction{f}(t,\vectorfunction{x},\lambda) \\
+         & \vectorfunction{x}(t_0)  =x_0
+      \end{aligned}
+      \right.
+    \end{equation}
+    has a unique maximal solution $\vectorfunction{\varphi}_{(t_0,x_0,\lambda)}(t)$ defined on an interval $I_{(t_0,x_0,\lambda)}$. We define the \textit{flux} of the ode $\vectorfunction{x}'=\vectorfunction{f}(t,\vectorfunction{x},\lambda)$ as: $$\function{\vectorfunction{\varphi}}{I_{(t_0,x_0,\lambda)}\times\RR\times\RR^n\times\RR^p}{\RR}{(t,t_0,x_0,\lambda)}{\vectorfunction{\varphi}_{(t_0,x_0,\lambda)}(t)}$$
+  \end{definition}
+  \subsubsection{Continuous and Lipschitz continuous dependence}
   \begin{lemma}
-    Let $X$ be a compact metric space and $(\vectorfunction{\varphi}_m)$ be a sequence of functions $\varphi_m:X\rightarrow\RR^n$  such that it is equicontinuous and pointwise bounded. Suppose that all convergent partial subsequences of $(\vectorfunction{\varphi}_m)$ have the same limit $\vectorfunction{\varphi}$. Then, $(\vectorfunction{\varphi}_m)$ converges uniformly to $\vectorfunction{\varphi}$.
+    Let $X$ be a compact metric space and $(\vectorfunction{\varphi}_m)$ be a sequence of functions $\varphi_m:X\rightarrow\RR^n$ such that it is equicontinuous and pointwise bounded. Suppose that all convergent partial subsequences of $(\vectorfunction{\varphi}_m)$ have the same limit $\vectorfunction{\varphi}$. Then, $(\vectorfunction{\varphi}_m)$ converges uniformly to $\vectorfunction{\varphi}$.
   \end{lemma}
   \begin{prop}
     Let $U\subseteq\RR\times\RR^n$ be an open set and $\vectorfunction{f}_m:U\rightarrow\RR^n$ be continuous function for $m\in\NN$ and such that for all compact $K\subset U$, the sequence $(\vectorfunction{f}_m|_K)$ converge uniformly to a function $\vectorfunction{f}$. Let $((t_m,x_m))\subset U$ be a sequence such that $\displaystyle\lim_{m\to\infty}(t_m,x_m)=(t_0,x_0)$. Suppose that for all $m\geq 0$ the ivp
-    $$
+    \begin{equation*}
       \left\{
       \begin{aligned}
          & \vectorfunction{x}'      =\vectorfunction{f}_m(t,\vectorfunction{x}) \\
          & \vectorfunction{x}(t_m)  =x_m
       \end{aligned}
       \right.
-    $$
+    \end{equation*}
     has a unique maximal solution $\vectorfunction{\varphi}_m$ defined on $I_m$. Then, for all $[a,b]\subset I_0$ with $t_0\in(a,b)$, $\exists m_0\in\NN$ such that $[a,b]\subset I_m$ $\forall m>m_0$. Furthermore, the sequence $\left(\vectorfunction{\varphi}_m|_{[a,b]}\right)_{m>m_0}$ converges uniformly to $\vectorfunction{\varphi}|_{[a,b]}$.
   \end{prop}
   \begin{theorem}
     Let $U\subseteq\RR\times\RR^n$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function. Suppose that each ivp of the form of \eqref{DE_ivp} has a unique maximal solution. Then, the flux $\vectorfunction{\varphi}(t,t_0,x_0)$ is a continuous function defined in an open set.
+  \end{theorem}
+  \begin{theorem}
+    Let $U\subseteq\RR\times\RR^n\times\RR^p$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function. Suppose that each ivp of the form of \eqref{DE_ivp_lambda} has a unique maximal solution. Then, the flux $\vectorfunction{\varphi}(t,t_0,x_0,\lambda)$ is a continuous function defined in an open set $V\subseteq I_{(t_0,x_0,\lambda)}\times\RR\times\RR^n\times\RR^p$.
+  \end{theorem}
+  \begin{lemma}[Grönwall's lemma]
+    Let $u,v,w:[a,b)\rightarrow\RR$ be continuous functions such that $v(t)\geq 0$ $\forall t\in[a,b)$ and satisfying: $$u(t)\leq w(t)+\int_a^tv(s)u(s)\dd s\quad\forall t\in[a,b)$$
+    Then: $$u(t)\leq w(t)+\int_a^tw(s)v(s)\exp{\int_s^tv(r)\dd r}\dd s\quad\forall t\in[a,b)$$
+    If, moreover, $w\in\mathcal{C}^1((a,b))$, then: $$u(t)\leq w(a)\exp{\int_a^tv(r)\dd r}+\int_a^tw'(s)\exp{\int_s^tv(r)\dd r}\dd s\quad\forall t\in[a,b)$$
+  \end{lemma}
+  \begin{prop}
+    Let $U\subseteq\RR\times\RR^n$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function and Lipschitz continuous with respect to the second variable. Let $L$ be the Lipschitz constant. Then, $\forall (t_0,x_1),(t_0,x_2)\in U$ and $\forall t\in I_{(t_0,x_0)}$, we have:
+    $$\|\vectorfunction{\varphi}(t,t_0,x_2)-\vectorfunction{\varphi}(t,t_0,x_1)\|\leq\exp{L|t-t_0|}\|x_2-x_1\|$$
+  \end{prop}
+  \subsubsection{Differenciable dependence}
+  \begin{theorem}
+    Let $U\subseteq\RR\times\RR^n\times\RR^p$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function and of class $\mathcal{C}^1$ with respect to the second variable. Suppose that the flux $\vectorfunction{\varphi}(t,t_0,x_0,\lambda)$ of $\vectorfunction{x}'=\vectorfunction{f}(t,\vectorfunction{x},\lambda)$ is defined on an open set $V\subseteq\RR\times\RR\times\RR^n\times\RR^p$. Then, $\forall (t,t_0,x,\lambda)\in V$, $\vectorfunction{\varphi}$ is differentiable with respect to $x_0$ and $\vectorfunction{D}_3\vectorfunction{\varphi}(t,t_0,x_0,\lambda)$\footnote{Here, $\vectorfunction{D}_3\vectorfunction{\varphi}(t,t_0,x_0,\lambda)=\frac{\partial\vectorfunction{\varphi}}{\partial x_0}(t,t_0,x_0,\lambda)$ denotes de matrix $\left(\frac{\partial\vectorfunction{\varphi}_i}{\partial{(x_0)}_j}(t,t_0,x_0,\lambda)\right)\in\mathcal{M}_n(\RR)$, where ${(x_0)}_j$ denotes the $j$-th component of $x_0$ and $\vectorfunction{\varphi}_i(t,t_0,x_0,\lambda)$ denotes the $i$-th component of $\vectorfunction{\varphi}(t,t_0,x_0,\lambda)$.} is continuous on $V$. Furthermore, $\vectorfunction{D}_3\vectorfunction{\varphi}(t,t_0,x_0,\lambda)$ satisfies the following ivp:
+    \begin{equation*}
+      \left\{
+      \begin{aligned}
+         & \vectorfunction{M}'      =\vectorfunction{D}_2\vectorfunction{f}(t,\vectorfunction{\varphi}(t,t_0,x_0,\lambda),\lambda)\vectorfunction{M} \\
+         & \vectorfunction{M}(t_0)  =\vectorfunction{I}_n
+      \end{aligned}
+      \right.
+    \end{equation*}
+    or, equivalently, $\frac{\partial\vectorfunction{\varphi}}{\partial \lambda_i}(t,t_0,x_0,\lambda)=\vectorfunction{D}_3\vectorfunction{\varphi}(t,t_0,x_0,\lambda)\vectorfunction{e}_i$ satisfies the following ivp:
+    $$
+      \left\{
+      \begin{aligned}
+         & \vectorfunction{y}'      =\vectorfunction{D}_2\vectorfunction{f}(t,\vectorfunction{\varphi}(t,t_0,x_0,\lambda),\lambda)\vectorfunction{y} \\
+         & \vectorfunction{y}(t_0)  =\vectorfunction{e}_i
+      \end{aligned}
+      \right.\quad\text{for }i=1,\ldots,n
+    $$
+    These equations are called \textit{variational equations}.
+  \end{theorem}
+  \begin{theorem}
+    Let $U\subseteq\RR\times\RR^n\times\RR^p$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function and of class $\mathcal{C}^1$ with respect to the second and third variable. Suppose that the flux $\vectorfunction{\varphi}(t,t_0,x_0,\lambda)$ of $\vectorfunction{X}'=\vectorfunction{f}(t,\vectorfunction{x},\lambda)$ is defined on an open set $V\subseteq\RR\times\RR\times\RR^n\times\RR^p$. Then, $\forall (t,t_0,x,\lambda)\in V$, $\vectorfunction{\varphi}$ is differentiable with respect to $\lambda$ and $\vectorfunction{D}_4\vectorfunction{\varphi}(t,t_0,x_0,\lambda)$ is continuous on $V$. Furthermore, $\vectorfunction{D}_4\vectorfunction{\varphi}(t,t_0,x_0,\lambda)$ satisfies the following ivp:
+    \begin{equation*}
+      \left\{
+      \begin{aligned}
+         & \vectorfunction{M}'      =\vectorfunction{D}_2\vectorfunction{f}(t,\vectorfunction{\varphi}(t,t_0,x_0,\lambda),\lambda)\vectorfunction{M}+ \vectorfunction{B} \\
+         & \vectorfunction{M}(t_0)  =\vectorfunction{0}
+      \end{aligned}
+      \right.
+    \end{equation*}
+    where $\vectorfunction{B}=\vectorfunction{D}_3\vectorfunction{f}(t,\vectorfunction{\varphi}(t,t_0,x_0,\lambda),\lambda)$. Equivalently, $\frac{\partial\vectorfunction{\varphi}}{\partial \lambda_i}(t,t_0,x_0,\lambda)$ satisfies the ivp:
+    $$
+      \left\{
+      \begin{aligned}
+         & \vectorfunction{y}'      =\vectorfunction{D}_2\vectorfunction{f}(t,\vectorfunction{\varphi}(t,t_0,x_0,\lambda),\lambda)\vectorfunction{y}+\vectorfunction{B}\vectorfunction{e}_i \\
+         & \vectorfunction{y}(t_0)  =\vectorfunction{0}
+      \end{aligned}
+      \right.\quad\text{for }i=1,\ldots,n
+    $$
+  \end{theorem}
+  \subsubsection{Higher order dependence}
+  \begin{theorem}
+    Let $U\subseteq\RR\times\RR^n$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function and of class $\mathcal{C}^k$, $k\in\NN$, with respect to the second variable. Suppose that the flux $\vectorfunction{\varphi}(t,t_0,x_0)$ of $\vectorfunction{x}'=\vectorfunction{f}(t,\vectorfunction{x})$ is defined on an open set $V\subseteq\RR\times\RR\times\RR^n$. Then, $\vectorfunction{\varphi}(t,t_0,x_0)$ is of class $\mathcal{C}^k$ on $V$.
   \end{theorem}
 \end{multicols}
 \end{document}

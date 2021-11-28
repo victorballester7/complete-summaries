@@ -280,6 +280,7 @@
     Being homeomorphic as topological spaces is an equivalence relation.
   \end{prop}
   \subsection{Subspaces}
+  \subsubsection{Subspace topology}
   \begin{definition}
     Let $(X,\mathcal{T})$ be a topological space and $A\subseteq X$ be a subset. We define the following set: $$\mathcal{T}_A=\{U\subseteq A:\exists V\in\mathcal{T}\text{ such that }V\cap A=U\}$$ Then, $(A,\mathcal{T}_A)$ is a topological space and $\mathcal{T}_A$ is called the \textit{subspace topology} on $A$. We will write $(A,\mathcal{T}_A)\subseteq (X,\mathcal{T})$ to denote that $(A,\mathcal{T}_A)$ is a topological subspace.
   \end{definition}
@@ -410,6 +411,7 @@
     is a homeomorphism.
   \end{theorem}
   \subsection{Quotient topology}
+  \subsubsection{Quotient topology}
   \begin{definition}
     Let $(X,\mathcal{T}_X)$ be a topological space, $Y$ be a set and $f:X\rightarrow Y$ be a function. We define the \textit{quotient topology} on $Y$ defined by $f$ as: $$\mathcal{T}_f:=\{U\subseteq Y:f^{-1}(U)\in\mathcal{T}_X\}$$
   \end{definition}
@@ -447,7 +449,85 @@
       \end{array}\right.
     $$
   \end{prop}
-  % fins el Tema 11, pàgina 13 (inclosa)
+  \subsubsection{Group actions on topological spaces}
+  \begin{definition}
+    Let $(X,\mathcal{T})$ be a topological space and $(G,\cdot)$ be a group. An \textit{action} of $G$ on $(X,\mathcal{T})$ is a function:
+    $$\function{f}{(G,\cdot)\times(X,\mathcal{T})}{(X,\mathcal{T})}{(g,x)}{f_g(x)}$$ where $f_g:(X,\mathcal{T})\rightarrow(X,\mathcal{T})$ is a homeomorphism for all $g\in G$ such that:
+    \begin{enumerate}
+      \item $f_e=\id$.
+      \item $f_{g\cdot h}=f_g\circ f_h,\ \forall g,h\in G$.
+    \end{enumerate}
+    The pair $((X,\mathcal{T}),f)$ is called a \textit{$(G,\cdot)$-space}.
+  \end{definition}
+  \begin{prop}
+    Let $((X,\mathcal{T}),f)$ be a $(G,\cdot)$-space. Consider the equivalence relation: $x\sim y\iff\exists g\in G$ such that $y=f_g(x)$\footnote{Note that this relation creates a partition of $X$ in terms of the orbits under $f$.}. Then, the set of orbits ender $f$, $\quot{X}{G}:=\quot{X}{\sim}$, is a topological space together with the quotient topology. Furthermore, the projection $p:X\rightarrow\quot{X}{G}$ is open.
+  \end{prop}
+  \subsection{Compactness}
+  \begin{definition}
+    We say that a property $P$ of a topological space is \textit{topological} if it is preserved under homeomorphisms. That is, if $(X,\mathcal{T}_X)$, $(Y,\mathcal{T}_Y)$ are homeomorphic topological spaces such that $(X,\mathcal{T}_X)$ has the property $P$, then $(Y,\mathcal{T}_Y)$ has the property $P$ too.
+  \end{definition}
+  \subsubsection{Covers}
+  \begin{definition}[Cover]
+    Let $(X,\mathcal{T})$ be a topological space. A \textit{cover} of $X$ is a collection $\{U_i:i\in I\}$ with $U_i\subseteq X$ $\forall i\in I$ such that $X=\bigcup_{i\in I}U_i$.
+  \end{definition}
+  \begin{definition}
+    Let $(X,\mathcal{T})$ be a topological space and $U=\{U_i:i\in I\}$ be a cover of $X$.
+    \begin{itemize}
+      \item We say that $U$ is \textit{finite} if $I$ is finite.
+      \item We say that $U$ is \textit{countable} if $I$ is countable.
+      \item We say that $U$ is an \textit{open cover} if $U_i\in\mathcal{T}$ $\forall i\in I$.
+    \end{itemize}
+  \end{definition}
+  \begin{definition}
+    Let $(X,\mathcal{T})$ be a topological space, $A\subseteq X$ be a subset and $U=\{U_i:i\in I\}$ with $U_i\subseteq X$ $\forall i\in I$. We say that $U$ is a \textit{cover} of $A$ if $A\subseteq\bigcup_{i\in I}U_i$.
+  \end{definition}
+  \begin{definition}
+    Let $(X,\mathcal{T})$ be a topological space and $U=\{U_i:i\in I\}$ be a cover of $X$. A \textit{subcover} of $U$ is a collection $\{U_j:j\in J\}$ with $J\subseteq I$.
+  \end{definition}
+  \subsubsection{Compactness}
+  \begin{definition}[Compact space]
+    Let $(X,\mathcal{T})$ be a topological space. We say that $(X,\mathcal{T})$ is \textit{compact} if each of its open covers has a finite subcover.
+  \end{definition}
+  \begin{prop}
+    Let $(X,\mathcal{T})$ be a topological space. Then, $(X,\mathcal{T})$ is compact if and only if for any collection $C=\{C_i:i\in I\}$ of closed sets such that $\bigcap_{i\in I} C_i=\varnothing$, there exists a finite subcollection $\{C_{i_1},\ldots,C_{i_n}\}$ of $C$ such that $\bigcap_{j=1}^n C_{i_j}=\varnothing$
+  \end{prop}
+  \begin{prop}
+    The \textit{compactness} is a topological property.
+  \end{prop}
+  \begin{prop}
+    Let $(X,\mathcal{T}_X)$, $(Y,\mathcal{T}_Y)$ be topological spaces and $f:(X,\mathcal{T}_X)\rightarrow(Y,\mathcal{T}_Y)$ be a surjective continuous function. If $(X,\mathcal{T}_X)$ is compact, then $(Y,\mathcal{T}_Y)$ is also compact.
+  \end{prop}
+  \begin{corollary}
+    The quotient space of a compact set is compact.
+  \end{corollary}
+  \begin{definition}
+    Let $(X,\mathcal{T})$ be a topological space and $A\subseteq X$ be a subset. We say that $A$ is a \textit{compact subset} of $X$ if $A$, together with the subspace topology, is a compact space.
+  \end{definition}
+  \begin{lemma}
+    Let $(X,\mathcal{T})$ be a topological space and $(A,\mathcal{T}_A)\subseteq (X,\mathcal{T})$ be a topological subspace. Then, $(A,\mathcal{T}_A)$ is compact if and only if any open cover of $A$ in $(X,\mathcal{T})$ admits a finite subcover.
+  \end{lemma}
+  \begin{prop}
+    Let $(X,\mathcal{T})$ be a topological space and $\{K_i:i=1,\ldots,n\}$ be a collection of compact sets $K_i\subseteq X$, $i=1,\ldots,n$. Then, $\bigcup_{i=1}^nK_i$ is also compact.
+  \end{prop}
+  \begin{prop}
+    Let $(X,\mathcal{T}_X)$, $(Y,\mathcal{T}_Y)$ be topological spaces, $f:(X,\mathcal{T}_X)\rightarrow(Y,\mathcal{T}_Y)$ be a continuous function and $A\subseteq X$ be a subset. If $A$ is compact, then $f(A)$ is also compact.
+  \end{prop}
+  \begin{prop}
+    Let $(X,\mathcal{T})$ be a compact topological space and $C\subseteq $ be a closed subset. Then, $C$ is compact.
+  \end{prop}
+  \begin{prop}
+    Let $(X,\mathcal{T})$ be a Hausdorff topological space and $K\subseteq $ be a compact subset. Then, $K$ is closed.
+  \end{prop}
+  \begin{corollary}
+    Let $(X,\mathcal{T})$ be a Hausdorff topological space and $\{K_i:i=1,\ldots,n\}$ be a collection of compact sets $K_i\subseteq X$, $i=1,\ldots,n$. Then, $\bigcap_{i\in I}K_i$ is compact.
+  \end{corollary}
+  \begin{corollary}
+    Let $(X,\mathcal{T}_X)$ be a compact topological space, $(Y,\mathcal{T}_Y)$ be Hausdorff topological space and $f:(X,\mathcal{T}_X)\rightarrow(Y,\mathcal{T}_Y)$ be a continuous function. Then, $f$ is closed. Furthermore, if $f$ is bijective, then $f$ is a homeomorphism.
+  \end{corollary}
+  \begin{prop}
+    Let $(X,\mathcal{T}_X)$ be a compact Hausdorff topological space and $C\subseteq X$ be a closed subset. Then, $\quot{X}{A}$, together with the quotient topology, is compact and Hausdorff.
+  \end{prop}
+  % fins el document 11 (ja acabat)
 
 
 
@@ -458,7 +538,7 @@
 
 
 
-
+  \subsection{Appendix}
   \subsubsection{Separation axioms}
   \begin{definition}[$T_0$ space]
     Let $(X,\mathcal{T})$ be a topological space. We say that $(X,\mathcal{T})$ is $T_0$\footnote{The letter $T$ comes from the German word ``Trennungsaxiom'' which means ``separation axioms''.} (or \textit{Kolmogorov}) if for any two distinct points of $X$, there exists an open set that contain one of them but not the other.
@@ -485,8 +565,11 @@
       \item The diagonal $\Delta(X):=\{(x,x)\in X\times X\}\subset X\times X$ is closed.
     \end{enumerate}
   \end{theorem}
+  \begin{definition}
+    Let $(X,\mathcal{T})$ be a topological space. We say that $(X,\mathcal{T})$ is \textit{regular} if for all $x\in X$ and for all a closed sets $C\subseteq X$ such that $x\in U$, there exist $U,V\in\mathcal{T}$ such that $x\in U$, $C\subseteq V$ and $U\cap V=\varnothing$.
+  \end{definition}
   \begin{definition}[$T_3$ space]
-    Let $(X,\mathcal{T})$ be a topological space. We say that $(X,\mathcal{T})$ is $T_3$ (or \textit{regular}) if it is $T_1$ and given a point $x\in X$ and a closed set $C\subseteq X$, there exist $U,V\in\mathcal{T}$ such that $x\in U$, $C\subseteq V$ and $U\cap V=\varnothing$.
+    Let $(X,\mathcal{T})$ be a topological space. We say that $(X,\mathcal{T})$ is $T_3$ if it is $T_1$ and regular.
   \end{definition}
   \begin{theorem}
     Let $(X,\mathcal{T})$ be a topological space. The statements following are equivalent:
@@ -495,8 +578,11 @@
       \item For all $x\in X$ and for all $U\in\mathcal{T}$ such that $x\in U$, $\exists V\in\mathcal{T}$ such that $x\in V\subseteq\Cl(V)\subseteq U$.
     \end{enumerate}
   \end{theorem}
+  \begin{definition}
+    Let $(X,\mathcal{T})$ be a topological space. We say that $(X,\mathcal{T})$ is \textit{normal} if for all closed sets $C,K\subseteq X$ such that $C\cap K=\varnothing$, there exist $U,V\in\mathcal{T}$ such that $C\subseteq U$, $K\subseteq V$ and $U\cap V=\varnothing$.
+  \end{definition}
   \begin{definition}[$T_4$ space]
-    Let $(X,\mathcal{T})$ be a topological space. We say that $(X,\mathcal{T})$ is $T_4$ (or \textit{normal}) if it is $T_1$ and given closed sets $C,K\subseteq X$ such that $C\cap K=\varnothing$, there exist $U,V\in\mathcal{T}$ such that $C\subseteq U$, $K\subseteq V$ and $U\cap V=\varnothing$.
+    Let $(X,\mathcal{T})$ be a topological space. We say that $(X,\mathcal{T})$ is $T_4$ if it is $T_1$ and normal.
   \end{definition}
   \begin{theorem}
     Let $(X,\mathcal{T})$ be a topological space. The statements following are equivalent:
@@ -505,5 +591,8 @@
       \item For all closed set $C\subseteq X$ and for all $U\in\mathcal{T}$ such that $C\subseteq U$, $\exists V\in\mathcal{T}$ such that $C\subseteq V\subseteq\Cl(V)\subseteq U$.
     \end{enumerate}
   \end{theorem}
+  \begin{lemma}[Urysohn's lemma]
+    Let $(X,\mathcal{T})$ be a topological space $T_4$ and $A,B\subseteq X$ be closed sets. Then, there exists a continuous function $f:(X,\mathcal{T})\rightarrow[0,1]$ such that $A\subseteq f^{-1}(0)$ and $B\subseteq f^{-1}(1)$.
+  \end{lemma}
 \end{multicols}
 \end{document}
