@@ -747,7 +747,7 @@
     If so, we define the \textit{expectation} of $X$ as: $$\Exp(X):=\sum_{x\in S}xp(x)+\int_{-\infty}^{+\infty}xf_X(x)\dd x<1$$
   \end{definition}
   \subsubsection{Moments}
-  \begin{definition}[Moments]
+  \begin{definition}[Moment]
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $X$ be a random variable and $k\in\NN$. We say that $X$ has \textit{moment of order $k$} (or \textit{$k$-th moment}) if $X^k$ has finite expectation. We denote by $\mu_k$ the $k$-th moment of $X$: $$\mu_k=\Exp(X^k)$$
   \end{definition}
   \begin{prop}
@@ -798,7 +798,7 @@
     $$\Var(X_1+\cdots+X_n)=\sum_{i=1}^n\Var(X_i)+2\sum_{1\leq i<j\leq n}\cov(X_i,X_j)$$
   \end{prop}
   \begin{corollary}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X_1,\ldots,X_n$ be random variables with finite 2nd moments such that tey are pairwise uncorrelated. Then:
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X_1,\ldots,X_n$ be random variables with finite 2nd moments such that they are pairwise uncorrelated. Then:
     $$\Var(X_1+\cdots+X_n)=\sum_{i=1}^n\Var(X_i)$$
   \end{corollary}
   \begin{definition}[Pearson correlation coefficient]
@@ -829,6 +829,28 @@
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$ be a random variable. The \textit{moment-generating function} of $X$ is the function $\psi_X$ defined as:
     $$\function{\psi_X}{\RR}{\RR_{>0}\cup\{+\infty\}}{t}{\Exp(\exp{tX})}$$
   \end{definition}
+  \begin{theorem}
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $X$, $Y$ be random variables such that $\psi_X,\psi_Y<+\infty$ in a neighbourhood of 0 and such that $\psi_X$, $\psi_Y$ are equal in neighbourhood of 0. Then, $X\overset{d}{=}Y$.
+  \end{theorem}
+  \begin{theorem}
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$ be a random variable such that $\psi_X<+\infty$ in a neighbourhood of 0. Then, $X$ has moment of order $k$ $\forall k\in\NN$ and: $$\Exp(X^k)={\psi_X}^{(k)}(0)$$
+  \end{theorem}
+  \begin{theorem}
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $X$, $Y$ be independent random variables. Then, for all $t$ such that $\psi_X(t),\psi_Y(t)<+\infty$, the function $\psi_{X+Y}(t)$ is finite and: $$\psi_{X+Y}(t)=\psi_X(t)\psi_Y(t)$$
+  \end{theorem}
+  \subsubsection{Conditional expectation}
+  \begin{definition}
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X,Y)$ be a discrete random vector with support $S_X\times S_Y$ and $y\in S_Y$. The \textit{conditional expectation} of $X$ given $Y=y$ is defined as: $$\Exp(X\mid Y=y):=\sum_{x\in S_X}x\Prob(X=x\mid Y=y$$ provided that the series is absolutely convergent. More generally, if $h:S_X\rightarrow\RR$ is a function, then conditional expectation of $h(X)$ given $Y=y$ is defined as: $$\Exp(h(X)\mid Y=y):=\sum_{x\in S_X}h(x)\Prob(X=x\mid Y=y$$ provided that the series is absolutely convergent.
+  \end{definition}
+  \begin{prop}
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X,Y)$ be a discrete random vector with support $S_X\times S_Y$ and $h:S_X\rightarrow\RR$ be a function. If $h(X)$ has finite expectation, then: $$\Exp(h(x))=\sum_{y\in S_Y}\Exp(h(X)\mid Y=y)\Prob(Y=y)$$
+  \end{prop}
+  \begin{definition}
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X,Y)$ be an absolutely continuous and $y\in S_Y$. The \textit{conditional expectation} of $X$ given $Y=y$ is defined as: $$\Exp(X\mid Y=y):=\int_{-\infty}^{+\infty}xf_{X\mid Y}(x\mid y)\dd x$$ provided that the integral is absolutely convergent. More generally, if $h:\RR\rightarrow\RR$ is a Borel measurable function, then conditional expectation of $h(X)$ given $Y=y$ is defined as: $$\Exp(h(X)\mid Y=y):=\int_{-\infty}^{+\infty}h(x)f_{X\mid Y}(x\mid y)\dd x$$ provided that the integral is absolutely convergent.
+  \end{definition}
+  \begin{prop}
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X,Y)$ be an absolutely continuous and $h:\RR\rightarrow\RR$ be a Borel measurable function. If $h(X)$ has finite expectation, then: $$\Exp(h(x))=\int_{-\infty}^{+\infty}\Exp(h(X)\mid Y=y)f_Y(y)\dd y$$
+  \end{prop}
   \begin{center}
     \def\arraystretch{1.25}
     \begin{tabular}{|c|c|c|}

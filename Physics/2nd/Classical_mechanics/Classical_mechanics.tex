@@ -6,28 +6,28 @@
   \subsubsection{Integration of Newton's 2nd law}
   \begin{prop}[Newton's 2nd law]
     Consider a particle with constant mass $m$ that moves in one dimension. Then, it satisfies: $$\ddot{x}(t)=\frac{1}{m}F(x(t),\dot{x}(t),t)$$
-    where we have supposed the force function $F$ is known and $x(t)$ is the position of the particle as a function of time. We also suppose initial position and velocity, denoted by $x(t_0)=x_0$ and $\dot{x}(t_0)=\dot{x}_0$ respectively, are known.
+    where we have supposed the force function $F$ is known and $x(t)$ is the position of the particle as a function of time\footnote{Sometimes, in order to simplify the notation, we will write $x$ instead of $x(t)$ (and similarly with the velocity and other magnitudes).}. We also suppose that the initial position and initial velocity, denoted by $x(t_0)=x_0$ and $\dot{x}(t_0)=\dot{x}_0$ respectively, are known.
   \end{prop}
   \begin{prop}[Integration of Newton's 2nd law]
-    We consider a force that only depend on time, position and velocity.
+    Consider a force $F$ that only depends on time, position or velocity. Then, the position and velocity of the particle subjected to $F$ are:
     \begin{itemize}
       \item Time dependence:
             \begin{gather*}
-              \dot{x}(t)=\dot{x}(t)+\int_{t_0}^t\frac{F(t')}{m}\dd t'\\
-              x(t)=x(t_0)+\int_{t_0}^t\dot{x}(t')\dd t'
+              \dot{x}(t)=\dot{x}_0+\int_{t_0}^t\frac{F(s)}{m}\dd s\\
+              x(t)=x_0+\int_{t_0}^t\dot{x}(s)\dd s
             \end{gather*}
       \item Position dependence:
             \begin{gather*}
-              {\dot{x}(x)}^2={\dot{x}(x_0)}^2+2\int_{x_0}^x\frac{F(x')}{m}\dd x'\\
+              {\dot{x}(x)}^2={\dot{x}(x_0)}^2+2\int_{x_0}^x\frac{F(s)}{m}\dd s\\
               x(t)=g^{-1}(t)
             \end{gather*}
-            where $\displaystyle g(x)=\int_{x_0}^x\frac{1}{\dot{x}(x')}\dd x'=t$.
+            where $\displaystyle g(x):=\int_{x_0}^x\frac{1}{\dot{x}(s)}\dd s$.
       \item Velocity dependence:
             \begin{gather*}
               \dot{x}(t)=h^{-1}(t)\\
-              x(t)=x(t_0)+\int_{t_0}^th^{-1}(t')\dd t'
+              x(t)=x_0+\int_{t_0}^th^{-1}(s)\dd s
             \end{gather*}
-            where $\displaystyle h(\dot{x})=\int_{\dot{x}_0}^{\dot{x}}\frac{m}{F(\dot{x}')}\dd\dot{x}'=t$.
+            where $\displaystyle h(\dot{x}):=\int_{\dot{x}_0}^{\dot{x}}\frac{m}{F(s)}\dd s$.
     \end{itemize}
   \end{prop}
   \subsubsection{Variable mass}
@@ -37,75 +37,106 @@
       \vectorfunction{F}^\text{ext}=m\dot{\vectorfunction{v}}+(\vectorfunction{v}-\vectorfunction{u})\dot{m}=\dot{\vectorfunction{p}}-\dot{m}\vectorfunction{u}
       \label{mass}
     \end{equation}
-    where $\dot{\vectorfunction{p}}$ is the momentum of the object that gains mass\footnote{The formula is also valid for the case when the object is losing mass, i.e. $\dot{m}<0$.}.
+    where $\vectorfunction{p}$ is the momentum of the object that gains mass\footnote{The formula is also valid for the case when the object is losing mass, i.e. $\dot{m}<0$.}.
   \end{prop}
-  \subsubsection{Rocket motion}
-  Consider a rocket moving at a velocity $\vectorfunction{v}$ that expels gas at a velocity $\vectorfunction{c}$ with respect to the rocket to propel itself. Suppose the mass of the rocket is $m(t)$ and $m_0:=m(t_0)$. If $\vectorfunction{u}=\vectorfunction{v}+\vectorfunction{c}$ is the velocity of the gas with respect to an external frame of reference and $\vectorfunction{F}^\text{ext}$ is the net external force acting on the rocket, by equation \eqref{mass} we have:
-  $$m\dot{\vectorfunction{v}}=\vectorfunction{F}^\text{ext}+\dot{m}\vectorfunction{c}.$$
+  \begin{definition}[Rocket motion]\label{CM_rocket}
+    Consider a rocket moving at a velocity $\vectorfunction{v}$ that expels gas (to propel itself) at a velocity $\vectorfunction{c}$ with respect to the rocket. Suppose the mass of the rocket is $m(t)$ and let $m_0:=m(t_0)$. If $\vectorfunction{u}=\vectorfunction{v}+\vectorfunction{c}$ is the velocity of the gas with respect to an external frame of reference and $\vectorfunction{F}^\text{ext}$ is the net external force acting on the rocket, by equation \eqref{mass} we have:
+    $$m\dot{\vectorfunction{v}}=\vectorfunction{F}^\text{ext}+\dot{m}\vectorfunction{c}.$$
+  \end{definition}
   \begin{prop}[Rocket without gravity]
-    In this case we have $\vectorfunction{F}^\text{ext}=0$ and if we suppose $\vectorfunction{v}=v\vectorfunction{j}$ and $\vectorfunction{c}=-c\vectorfunction{j}$, we have:
+    In this case, and using the hypothesis of definition \ref{CM_rocket}, we have $\vectorfunction{F}^\text{ext}=0$ and if we suppose $\vectorfunction{v}=v\vectorfunction{j}$ and $\vectorfunction{c}=-c\vectorfunction{j}$, we have:
     \begin{equation}
-      m\frac{\dd v}{\dd t}=-c\frac{dm}{\dd t}\implies v=c\log\frac{m_0}{m}
+      m\dv{v}{t}=-c\dv{m}{t}\implies v=c\log\frac{m_0}{m}
       \label{rocket}
     \end{equation}
-    Consider now the discrete case, i.e. when the function $\dot{m}$ is not differentiable. For that we can consider instantaneous ejections of $\Delta m=(m_0-m_f)/n$ amount of mass where $m_f$ is the mass of the rocket after $n$ ejections of mass. For this case, we have $$v=c\sum_{k=1}^n\frac{(m_0-m_f)/n}{m_f+k(m_0-m_f)/n}=c\sum_{k=1}^n\frac{\Delta m}{m_f+k\Delta m}\footnote{Obviously if we tend $n$ to infinity we get the equation \eqref{rocket}.}$$
+    Consider now the discrete case, i.e. when the function $\dot{m}$ is not differentiable. For that we can consider instantaneous ejections of $\Delta m=(m_0-m_f)/n$ amount of mass where $m_f$ is the mass of the rocket after $n$ ejections of mass. For this case, we have: $$v=c\sum_{k=1}^n\frac{(m_0-m_f)/n}{m_f+k(m_0-m_f)/n}=c\sum_{k=1}^n\frac{\Delta m}{m_f+k\Delta m}\footnote{Obviously if we tend $n$ to infinity we get the equation \eqref{rocket}.}$$
   \end{prop}
   \begin{prop}[Rocket with gravity]
-    In this case we have $\vectorfunction{F}^\text{ext}=-mg\vectorfunction{j}$. Suppose $\vectorfunction{v}=v\vectorfunction{j}$, $\vectorfunction{c}=-c\vectorfunction{j}$ and, for simplicity, consider only the case when $\dot{m}=-\beta$, $\beta>0$. Therefore, we obtain:
+    In this case, and using the hypothesis of definition \ref{CM_rocket}, we have $\vectorfunction{F}^\text{ext}=-mg\vectorfunction{j}$. Suppose $\vectorfunction{v}=v\vectorfunction{j}$, $\vectorfunction{c}=-c\vectorfunction{j}$ and, for simplicity, consider only the case when $\dot{m}=-\beta$, $\beta>0$. Therefore, we obtain:
     \begin{equation}
       m\frac{\dd v}{\dd t}=-mg+c\beta\implies v=c\ln\frac{m_0}{m}-\frac{g}{\beta}(m_0-m)
       \label{rockg1}
     \end{equation}
-    Observe that if $m_0g>\beta c$ then $\dd v/\dd t$ will be negative, which is not possible. Therefore in this case the formula is not correct if we are considering the rocket launch. In this case the formula becomes
+    Observe that if $m_0g>\beta c$, then $\dv{v}{t}$ would be negative, which is not possible. Therefore, in this case the formula is not correct if we are considering the rocket launch. In this case the formula becomes:
     \begin{equation}
-      v=c\ln\frac{\beta c}{mg}-\frac{g}{\beta}\left(\frac{\beta c}{g}-m\right)
+      v=c\ln\frac{\beta c}{mg}-c+\frac{g}{\beta}m
       \label{rockg2}
     \end{equation}
     Because of $\dot{m}=-\beta\implies m(t)=m_0-\beta t$, we can express formulas \eqref{rockg1}, \eqref{rockg2} respectively as:
     \begin{gather*}
       v(t)=c\ln\frac{m_0}{m_0-\beta t}-gt\\
-      v(t)=c\ln\frac{\beta c}{m_0g-g\beta t}-gt-\frac{g}{\beta}\left(\frac{\beta c}{g}-m_0\right)
+      v(t)=c\ln\frac{\beta c}{m_0g-g\beta t}-c+\frac{g}{\beta}m_0-gt
     \end{gather*}
   \end{prop}
   \subsection{Oscillations}
   \subsubsection{Simple harmonic oscillator}
   \begin{prop}
-    Consider the differential equation $$\ddot{x}+\omega_0^2 x=0$$ with initial values $x(0)=x_0$ and $\dot{x}(0)=\dot{x}_0$. The general solution is:
+    Consider the differential equation $$\ddot{x}+\omega_0^2 x=0$$ with initial values $x(0)=x_0$ and $\dot{x}(0)=\dot{x}_0$. Then, the general solution is:
     \begin{equation}
-      x(t)=x_0\cos\omega_0t+\frac{\dot{x}_0}{\omega_0}\sin\omega_0t=A\cos(\omega_0t+\phi)
+      x(t)=x_0\cos(\omega_0t)+\frac{\dot{x}_0}{\omega_0}\sin(\omega_0t)=A\cos(\omega_0t+\phi)
       \label{mhs}
-    \end{equation} where $\displaystyle A=\sqrt{{x_0}^2+{\left(\frac{\dot{x}_0}{\omega_0}\right)}^2}$ and $\displaystyle \phi=-\arctan\frac{\dot{x}_0}{\omega_0x_0}$. Such constants $\omega_0$ ($[\omega_0]=\text{rad}\cdot \text{s}^{-1}$), $A$ ($[A]=\text{m}$) and $\phi$ ($[\phi]=\text{rad}$) are called \textit{angular frequency}, \textit{amplitude} and \textit{initial phase}, respectively. Observe that the function in equation \eqref{mhs} is periodic with period $T=\frac{2\pi}{\omega_0}$ and frequency $\nu=T^{-1}=\frac{\omega_0}{2\pi}$\footnote{Note that $[T]=\text{s}$ and $[\nu]=\text{s}^{-1}=\text{Hz}$.}.
+    \end{equation} where $\displaystyle A=\sqrt{{x_0}^2+{\left(\frac{\dot{x}_0}{\omega_0}\right)}^2}$ and $\displaystyle \phi=-\arctan\frac{\dot{x}_0}{\omega_0x_0}$. Such constants $\omega_0$ ($[\omega_0]=\text{rad}\cdot \text{s}^{-1}$), $A$ ($[A]=\text{m}$) and $\phi$ ($[\phi]=\text{rad}$) are called \textit{angular frequency}, \textit{amplitude} and \textit{initial phase}, respectively. Observe that the function in equation \eqref{mhs} is periodic with period $T=\frac{2\pi}{\omega_0}$ ($[T]=\text{s}$) and frequency $\nu=T^{-1}=\frac{\omega_0}{2\pi}$ ($[\nu]=\text{s}^{-1}=:\text{Hz}$).
+  \end{prop}
+  \begin{prop}
+    Consider a mass $m$ subjected to a spring of elastic constant $k$ (see figure \ref{CM_fig1}). If we displace the mass a distance $A$ from its equilibrium state, the mass will start to oscillate and its position $x(t)$ as a function of time will be:
+    $$-kx=m\ddot{x}\implies x(t)=A\cos(\omega_0t+\phi)$$ where $\omega_0=\sqrt{k/m}$. The energies of this systems are:
+    \begin{gather*}
+      K=\frac{1}{2}kA^2\sin(\omega_0 t+\phi)^2\quad U=\frac{1}{2}kA^2\cos(\omega_0 t+\phi)^2\\
+      E=\frac{1}{2}kA^2
+    \end{gather*}
+    of this system is $E=\frac{1}{2}kA^2$.
+    \begin{center}
+      \begin{minipage}{\linewidth}
+        \centering
+        \includestandalone[mode=image|tex,width=0.4\linewidth]{Images/spring}
+        \captionof{figure}{Mass subjected to a spring}
+        \label{CM_fig1}
+      \end{minipage}
+    \end{center}
   \end{prop}
   \begin{definition}
     Let $U(x)$ be a potential function of class $\mathcal{C}^2(\mathbb{R})$. We say $x_0$ is a \textit{point of stable equilibrium} if $U$ attains a minimum in $x_0$. Analogously, we say $x_0$ is a \textit{point of unstable equilibrium} if $U$ attains a maximum in $x_0$.
   \end{definition}
-  \begin{prop}[Behaviour near a minimum]
-    Suppose $x_0$ is a point of stable equilibrium an let $U(x)$ be the potential function associated with a particle of mass $m$. Then if we disturb slightly the particle, it will start to oscillate at a frequency $$\omega_0=\sqrt{\frac{U''(x_0)}{m}}.$$
+  \begin{prop}
+    Let $U(x)$ be a potential function of class $\mathcal{C}^2(\mathbb{R})$ associated with a particle of mass $m$ and $x_0$ be a point of stable equilibrium. Then, if we disturb slightly the particle, it will start to oscillate at a frequency $\omega_0=\sqrt{\frac{U''(x_0)}{m}}$.
   \end{prop}
-  \begin{prop}[Examples]
-    \hfill
-    \begin{itemize}
-      \item Mass hanging from a spring: Let $y(t)$ be the position of the mass measured from initial string's length (without the mass) to the position of the mass at time $t$. If we disturb the system with an external force so that the mass starts to oscillate, we have $$y(t)=\frac{mg}{k}+A\cos(\omega_0t+\phi),\quad\omega_0=\sqrt{\frac{k}{m}}.$$
-            \begin{minipage}{\linewidth}
-              \centering
-              \includegraphics[width=\linewidth]{Physics/2nd/Classical_mechanics/Images/springs.tex}
-              \captionof{figure}{Mass hanging from a spring.}
-            \end{minipage}
-      \item Simple pendulum: $$\theta(t)=A\cos(\omega_0t+\phi),\quad\omega_0=\sqrt{\frac{g}{l}}.$$
-            \begin{minipage}{\linewidth}
-              \centering
-              \includegraphics[width=0.5\linewidth]{Physics/2nd/Classical_mechanics/Images/simple_pendulum.tex}
-              \captionof{figure}{Simple pendulum.}
-            \end{minipage}
-      \item Physical pendulum:
-            $$\theta(t)=A\cos(\omega_0t+\phi),\quad\omega_0=\sqrt{\frac{mgD}{I_e}}.$$
-            \begin{minipage}{\linewidth}
-              \centering
-              \includegraphics[width=0.5\linewidth]{Physics/2nd/Classical_mechanics/Images/physical_pendulum.tex}
-              \captionof{figure}{Physical pendulum.}
-            \end{minipage}
-      \item LC circuit: $$q(t)=A\cos(\omega_0t+\phi),\quad\omega_0=\frac{1}{\sqrt{LC}}.$$
-    \end{itemize}
+  \begin{prop}
+    Consider a mass hanging from a spring and let $y(t)$ be the position of the mass measured from initial string's length (without the mass) to the position of the mass at time $t$ (see figure \ref{CM_fig2}). If we disturb the system with an external force so that the mass starts to oscillate, we have: $$mg-ky=m\ddot{y}\implies y(t)=\frac{mg}{k}+A\cos(\omega_0t+\phi)$$ where $\omega_0=\sqrt{\frac{k}{m}}$.
+    \begin{center}
+      \begin{minipage}{\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{Physics/2nd/Classical_mechanics/Images/springs.tex}
+        \captionof{figure}{Mass hanging from a spring}
+        \label{CM_fig2}
+      \end{minipage}
+    \end{center}
+  \end{prop}
+  \begin{prop}
+    Consider a simple pendulum with a mass $m$ attached to one of the endpoints of the string (massless and of length $\ell$). If we disturb the system a small angle with an external force so that the mass starts to oscillate, then assuming that $\theta(t)$ denotes the angle of the string with respect to the stable equilibrium we have:
+    $$\ddot{\theta}+\frac{g}{\ell}\theta=0\implies\theta(t)=A\cos(\omega_0t+\phi)$$ where $\omega_0=\sqrt{\frac{g}{\ell}}$.
+    \begin{center}
+      \begin{minipage}{\linewidth}
+        \centering
+        \includegraphics[width=0.5\linewidth]{Physics/2nd/Classical_mechanics/Images/simple_pendulum.tex}
+        \captionof{figure}{Simple pendulum}
+      \end{minipage}
+    \end{center}
+  \end{prop}
+  \begin{prop}
+    Consider a physical pendulum of mass $m$ and let $I_e$ be the moment of inertia of the body with respect to the axis $e$ (see figure \ref{CM_fig3}). If we disturb the system a small angle with an external force so that the mass starts to oscillate, then assuming that $\theta(t)$ denotes the angle between the axis $e$ and the line passing through the fixed point and the CM, we have:
+    $$\ddot{\theta}+\frac{mgD}{I_e}\theta=0\implies\theta(t)=A\cos(\omega_0t+\phi)$$ where $\omega_0=\sqrt{\frac{mgD}{I_e}}$.
+    \begin{center}
+      \begin{minipage}{\linewidth}
+        \centering
+        \includegraphics[width=0.4\linewidth]{Physics/2nd/Classical_mechanics/Images/physical_pendulum.tex}
+        \captionof{figure}{Physical pendulum}
+        \label{CM_fig3}
+      \end{minipage}
+    \end{center}
+  \end{prop}
+  \begin{prop}
+    Consider the LC circuit as shown in figure ...
+    $$L\ddot{q}+\frac{1}{C}q=0\implies q(t)=A\cos(\omega_0t+\phi)$$ where $\omega_0=\frac{1}{\sqrt{LC}}$.
   \end{prop}
   \subsubsection{Damped harmonic oscillator}
   \begin{prop}[Movement equation]
