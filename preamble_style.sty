@@ -1,0 +1,68 @@
+\usepackage[utf8]{inputenc}
+\usepackage[a4paper, headheight=14pt, left=1.5cm, right=1.5cm, top=2cm, bottom=2cm]{geometry}
+\usepackage{amsthm, amsmath, mathtools, amssymb} % for math commands and math symbols.
+\usepackage{esint} % for more option on integrals.
+\usepackage{standalone} % for compiling individually .tex images.
+\usepackage{etoolbox}
+\usepackage{fancyhdr} % for customizing page-style (mainly headings).
+\usepackage{chngcntr}
+\usepackage{titlesec} % for changing style of chapters, section... (with title format).
+\usepackage[colorlinks, linkcolor=blue, citecolor=blue, urlcolor=blue]{hyperref} % link automatically references.
+\usepackage{bookmark} % solve some warnings such as writing a section just below a part (i.e. without a chapter between them).
+\usepackage[hypcap=false]{caption} % basically for using the command \captionof{}, which is useful in some environments, others than \beging{figure}.
+\usepackage{subcaption} % for subfigures, when many captions come into play.
+\usepackage{multicol} % organize the whole document in multiple columns.
+\usepackage[USenglish]{babel} % for improving use of English and mainly the use of hyphenation.
+\usepackage[version=4]{mhchem} % used for chemistry and nuclear physics.
+\usepackage{multirow} % multirow in a table, for example.
+\usepackage{array, makecell}
+
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage[es-ES]{datetime2} % for writing the current date when compiling.
+\usepackage{xcolor} % to customize RGB colors.
+\usepackage{colortbl} % for colors in tables.
+\usepackage{physics} % commands of math and physics.
+\usepackage{subfiles} % for creating subfiles .tex and comiling them seperately to main.tex.
+
+\setlength{\parindent}{0pt} % Indentation disabled
+
+%%%%%% Title format and page style %%%%%%
+    \titleformat{\chapter}[hang]{\normalfont\Huge\bfseries}{\thechapter.}{20pt}{}
+    \titleformat{\subsection}[hang]{\normalfont\large\bfseries}{\thesubsection\hspace{6pt}{\textbf{$|$}}\hspace{-6pt}}{1em}{}
+    
+    % For well cross reference in the table of contents
+    \renewcommand*{\theHchapter}{\the\value{part}.\the\value{chapter}}
+    \renewcommand*{\theHsection}{\the\value{part}.\the\value{chapter}.\the\value{section}}
+    \renewcommand*{\theHsubsection}{\the\value{part}.\the\value{chapter}.\the\value{section}.\the\value{subsection}}
+
+    \ifSubfilesClassLoaded{% show only when the single subfile is compiled
+        \titleformat{\section}
+        {\bfseries\Large} % format
+        {}          % label
+        {0.0cm}     % separation between label and body
+        {}          % code preceding title body
+        []
+        \renewcommand{\thesection}{\arabic{section}}
+        \renewcommand{\thesubsection}{\arabic{subsection}}
+    
+        % For numering by default level-3 headings (i.e. subsubsections). It is not by default beacuse we are in a report class document.
+        \setcounter{secnumdepth}{3}
+        % For creating references in the .pdf file.
+        \setcounter{tocdepth}{3}
+
+
+        \titlelabel{\thesubsubsection} % removing space between number and text (i.e. "1.  Probability" -----> "1.Probabiity").
+        \renewcommand{\thesubsubsection}{} % removing the label of the subsubsection.
+
+    }{% show only when the main file is compiled
+        %%% Page-style (heading) %%%
+        \renewcommand{\chaptermark}[1]{\markboth{\thechapter.\ #1}{}}
+        \pagestyle{fancy}
+        \fancyhf{}
+        \fancyhead[L]{\nouppercase{\leftmark}}
+        \fancyhead[R]{\nouppercase{\rightmark}}
+        \fancyfoot[C]{\thepage}
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    }
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

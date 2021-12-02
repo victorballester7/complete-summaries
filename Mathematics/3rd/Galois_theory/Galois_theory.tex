@@ -79,6 +79,42 @@
   \begin{definition}
     Let $L$ be a field, $K\subseteq L$ be a subfield of $L$ and $A\subseteq L$ be a subset of $L$. Then, the smallest subfield of $L$ containing $K$ and $A$ is denoted by $K(A)$.
   \end{definition}
+  \subsubsection{Symmetric polynomials}
+  \begin{definition}[Symmetric polynomials]
+    Let $R$ be a ring, $n\in\NN$ and $p(x_1,\ldots,x_n)\in R[x_1,\ldots,x_n]$. We say that $p(x)$ is a \textit{symmetric polynomial} if $\forall \sigma\in S_n$, we have that $p(x_1,\ldots,x_n)=p(x_{\sigma(1)},\ldots,x_{\sigma(n)})$. We denote by ${R[x_1,\ldots,x_n]}^{S_n}$ the set of all symmetric polynomials over $R[x_1,\ldots,x_n]$.
+  \end{definition}
+  \begin{definition}
+    Let $R$ be a ring and $n\in\NN$. We define the \textit{elementary symmetric polynomials} $s_1,\ldots,s_n$ as: $$s_k=\sum_{1\leq i_1<\cdots<i_k\leq n}x_{i_1}\cdots x_{i_k}\quad k=1,\ldots,n\footnote{For example, for $n=3$ we have: $s_1=x_1+x_2+x_3$, $s_2=x_1x_2+x_1x_3+x_2x_3$ and $s_3=x_1x_2x_3$.}$$
+  \end{definition}
+  \begin{definition}
+    Let $n\in\NN$. We define the \textit{lexicographic order} $<_\text{lex}$ in $\NN^n$ as:
+    \begin{multline*}
+      (a_1,\ldots,a_n)<_\text{lex}(b_1,\ldots,b_n)\iff\\\iff\exists j\in\NN:a_1=b_1,\ldots,a_j=b_j,a_{j+1}<b_{j+1}
+    \end{multline*}
+  \end{definition}
+  \begin{prop}
+    The pair $(\NN^n,<_\text{lex})$ is a totally ordered set. Moreover, if $x,y,z,t\in\NN^n$ are such that $x<_\text{lex}y$ and $z<_\text{lex}t$, then $x+z<_\text{lex}y+t$.
+  \end{prop}
+  \begin{definition}
+    Let $R$ be a ring, $n\in\NN$ and $p\in R[x_1,\ldots,x_n]$. Suppose $p(x)$ is of the form: $$p(x_1,\ldots,x_n)=\sum_{\substack{i_1,\ldots,i_n=1\\i_1+\cdots+i_n=n}}^na_{i_1,\ldots,i_n}{x_1}^{i_1}\cdots{x_n}^{i_n}$$ We define the \textit{lexicographic degree} of $p$ as:
+    $$
+      \deg_{<_\text{lex}}(p):=\max_{<_\text{lex}}\{(i_1,\ldots,i_n):a_{i_1,\ldots,i_n}\ne 0\}\footnote{Here, the notation $\displaystyle \max_{<_\text{lex}}$ means that the maximum is taken with respect to the order $<_\text{lex}$.}
+    $$
+    if $p(x_1,\ldots,x_n)\ne 0$. If $p(x_1,\ldots,x_n)=0$, we define $\deg_{<_\text{lex}}(p):=-\infty$.
+  \end{definition}
+  \begin{prop}
+    Let $R$ be a ring, $n\in\NN$ and $p,q\in R[x_1,\ldots,x_n]$. Then:
+    \begin{enumerate}
+      \item $\deg_{<_\text{lex}}(p+q)\leq\max\{\deg_{<_\text{lex}}(p),\deg_{<_\text{lex}}(q)\}$.
+      \item $\deg_{<_\text{lex}}(pq)=\deg_{<_\text{lex}}(p)+\deg_{<_\text{lex}}(q)$.
+    \end{enumerate}
+  \end{prop}
+  \begin{lemma}[Waring's method]
+    Let $R$ be an integral domain and $p(x)\in {R[x_1,\ldots,x_n]}^{S_n}$. Suppose that $\deg_{<_\text{lex}}=(a_1,\ldots,a_n)$ and let $\lambda\in R\setminus\{0\}$ be the coefficient of ${x_1}^{a_1}\cdots{x_n}^{a_n}$ in $p$. Then, $a_1\geq \cdots\geq a_n$ and if $$q:=p-\lambda {s_n}^{a_n}{s_{n-1}}^{a_{n-1}-a_n}{s_{n-2}}^{a_{n-2}-a_{n-1}}\cdots {s_1}^{r_1-r_2}$$ we have $\deg_{<_\text{lex}}(q)<_\text{lex}\deg_{<_\text{lex}}(p)$.
+  \end{lemma}
+  \begin{theorem}[Fundamental theorem of symmetric polynomials]
+    Let $R$ be a ring and $n\in\NN$. Then: $${R[x_1,\ldots,x_n]}^{S_n}=R[s_1,\ldots,s_n]$$ That is, every polynomial in $R[x_1,\ldots,x_n]$ can be expressed uniquely in terms of elementary symmetric polynomials.
+  \end{theorem}
   \subsection{Field extensions}
   \begin{prop}
     Let $K$, $L$ be fields. Then, any field morphism $K\rightarrow L$ is injective.
@@ -400,7 +436,7 @@
     Let $F/L/K$ be a tower of fields such that $\quot{L}{K}$ is Galois. Then, $\quot{F}{L}$ is Galois.
   \end{lemma}
   \begin{definition}
-    Let $\quot{L}{K}$ be a field extension and $(G,\cdot)$ be a group. We define the following sets:
+    Let $\quot{L}{K}$ be a finite field extension and $(G,\cdot)$ be a group. We define the following sets:
     \begin{gather*}
       \mathcal{K}(L/K):=\{F\subseteq L:L/F/K\text{ is a tower of fields}\}\\
       \mathcal{S}(G):=\{H\subseteq G:(H,\cdot)\text{ is a subgroup of }(G,\cdot)\}
@@ -411,17 +447,17 @@
     Then, $L^H$ is a field (called \textit{fixed field} of $H$) and $L^H\in\mathcal{K}(\quot{L}{K})$.
   \end{lemma}
   \begin{lemma}
-    Let $\quot{L}{K}$ be a field extension and $F\in \mathcal{K}(\quot{L}{K})$. Then, $\Gal(\quot{L}{F})$ is a subgroup of $\Gal(\quot{L}{K})$.
+    Let $\quot{L}{K}$ be a finite field extension and $F\in \mathcal{K}(\quot{L}{K})$. Then, $\Gal(\quot{L}{F})$ is a subgroup of $\Gal(\quot{L}{K})$.
   \end{lemma}
   \begin{definition}
-    Let $\quot{L}{K}$ be a field extension. We define the following functions:
+    Let $\quot{L}{K}$ be a finite field extension. We define the following functions:
     \begin{gather*}
       \function{\mathcal{F}}{\mathcal{S}(\Gal(\quot{L}{K}))}{\mathcal{K}(\quot{L}{K})}{H}{L^H}\\
       \function{\mathcal{G}}{\mathcal{K}(\quot{L}{K})}{\mathcal{S}(\Gal(\quot{L}{K}))}{F}{\Gal(\quot{L}{F})}
     \end{gather*}
   \end{definition}
   \begin{prop}
-    Let $\quot{L}{K}$ be a field extension. Then:
+    Let $\quot{L}{K}$ be a finite field extension. Then:
     \begin{enumerate}
       \item $\mathcal{F}(\{\id\})=L$ and $\mathcal{F}(\Gal(\quot{L}{K}))=K$.
       \item $\mathcal{G}(L)=\{\id\}$ and $\mathcal{G}(K)=\Gal(\quot{L}{K})$.
@@ -433,5 +469,50 @@
       \item $\mathcal{G}\circ\mathcal{F}\circ\mathcal{G}=\mathcal{G}$.
     \end{enumerate}
   \end{prop}
+  \begin{lemma}[Artin's lemma]
+    Let $\quot{L}{K}$ be a finite field extension and $H$ be a subgroup of $\Gal(\quot{L}{K})$. Then, $H=\Gal(\quot{L}{L^H})$ and $|H|=[L:L^H]$. That is, $\mathcal{G}\circ\mathcal{F}=\id$.
+  \end{lemma}
+  \begin{corollary}
+    Let $\quot{L}{K}$ be a finite field extension. Then, $\mathcal{F}$ is injective and $\mathcal{G}$ is surjective.
+  \end{corollary}
+  \begin{theorem}[Fundamental theorem of Galois theory]
+    Let $\quot{L}{K}$ be a finite and Galois field extension. Then, $\mathcal{F}\circ\mathcal{G}=\id$. Thus, $\mathcal{F}$ and $\mathcal{G}$ are bijective and they are inverses of each other. Furthermore, if $F\in\mathcal{K}(\quot{L}{K})$, then: $$\textstyle\quot{F}{K}\text{ is normal}\iff\Gal(\quot{L}{F})\unlhd\Gal(\quot{L}{K})$$ and in that case: $$\quot{\Gal(L/K)}{\Gal(L/F)}\cong\Gal(F/K)$$
+  \end{theorem}
+  \begin{corollary}
+    Let $\quot{L}{K}$ be a finite and Galois field extension and $H$ be a subgroup of $\Gal(\quot{L}{K})$. Then, $[L^H:K]=\frac{|\Gal(\quot{L}{K})|}{|H|}$.
+  \end{corollary}
+  \begin{definition}
+    Let $K$ be a field and $p(x)\in K[X]$. Suppose $L$ is the splitting field of $p(x)$ over $K$. We denote $\Gal(\quot{p(x)}{K}):=\Gal(\quot{L}{K})$.
+  \end{definition}
+  \begin{definition}
+    Let $G$ be a group. The \textit{lattice of subgroups} of $G$ is the following graph:
+    \begin{itemize}
+      \item The vertices of the graph are the subgroups of $G$.
+      \item Two vertices (corresponding to two subgroups $H_i$, $H_j$ of $G$) are connected by an edge if $H_i\leq H_j$, with $i\ne j$, and such that there is no $k\ne i,j$ such that $H_i\leq H_k\leq H_j$.
+    \end{itemize}
+  \end{definition}
+  \begin{center}
+    \begin{minipage}{\linewidth}
+      \centering
+      \includestandalone[mode=image|tex,width=0.65\linewidth]{Images/lattice}
+      \captionof{figure}{Lattice of subgroups of the group $\quot{\ZZ}{4\ZZ}\times\quot{\ZZ}{2\ZZ}$}
+    \end{minipage}
+  \end{center}
+  \begin{definition}
+    A subgroup $H$ of $S_n$ is called \textit{transitive} if $\forall i,j\in\{1,\ldots,n\}$, $\exists h\in H$ such that $h(i)=j$.
+  \end{definition}
+  \begin{lemma}
+    Let $K$ be a field and $p(x)\in K[X]$ be an irreducible and separable polynomial of degree $n$. Then, there exists a monomorphism $\iota: \Gal(\quot{p(x)}{K})\rightarrow S_n$. Furthermore, $\im(\iota)$ is a transitive subgroup of $S_n$.
+  \end{lemma}
+  \begin{definition}
+    Let $K$ be a field, $p(x)\in K[X]$ and $\alpha_1,\cdots,\alpha_n$ be the roots of $p(x)$ in its splitting field. We define $\delta(p(x))$ as: $$\delta(p(x))=\prod_{1\leq i<j\leq n}(\alpha_j-\alpha_i)$$
+  \end{definition}
+  \begin{definition}
+    Let $K$ be a field, $p(x)\in K[X]$ and $\alpha_1,\cdots,\alpha_n$ be the roots of $p(x)$ in its splitting field. We define the \textit{discriminant} of $p(x)$ $\Delta(p(x))$ as: $$\Delta(p(x))=\prod_{1\leq i<j\leq n}(\alpha_j-\alpha_i)^2$$
+  \end{definition}
+  \begin{prop}
+    Let $K$ be a field, $p(x)\in K[X]$ and $\alpha_1,\cdots,\alpha_n$ be the roots of $p(x)$ in its splitting field. Then, $\Delta (p(x))$ is a symmetric polynomial in the variables $\alpha_1,\ldots,\alpha_n$.
+  \end{prop}
+  % falta arreglar el tema del discriminant, que no acaba de quedar gaire clar què és. En particular, falta acabar l'última proposició (falta posar la fórmula on surt el signe).
 \end{multicols}
 \end{document}
