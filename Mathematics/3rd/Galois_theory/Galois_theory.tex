@@ -81,10 +81,10 @@
   \end{definition}
   \subsubsection{Symmetric polynomials}
   \begin{definition}[Symmetric polynomials]
-    Let $R$ be a ring, $n\in\NN$ and $p(x_1,\ldots,x_n)\in R[x_1,\ldots,x_n]$. We say that $p(x)$ is a \textit{symmetric polynomial} if $\forall \sigma\in S_n$, we have that $p(x_1,\ldots,x_n)=p(x_{\sigma(1)},\ldots,x_{\sigma(n)})$. We denote by ${R[x_1,\ldots,x_n]}^{S_n}$ the set of all symmetric polynomials over $R[x_1,\ldots,x_n]$.
+    Let $R$ be a ring, $n\in\NN$ and $p\in R[x_1,\ldots,x_n]$. We say that $p$ is a \textit{symmetric polynomial} if $\forall \sigma\in S_n$, we have that $p(x_1,\ldots,x_n)=p(x_{\sigma(1)},\ldots,x_{\sigma(n)})$. We denote by ${R[x_1,\ldots,x_n]}^{S_n}$ the set of all symmetric polynomials over $R[x_1,\ldots,x_n]$.
   \end{definition}
   \begin{definition}
-    Let $R$ be a ring and $n\in\NN$. We define the \textit{elementary symmetric polynomials} $s_1,\ldots,s_n$ as: $$s_k=\sum_{1\leq i_1<\cdots<i_k\leq n}x_{i_1}\cdots x_{i_k}\quad k=1,\ldots,n\footnote{For example, for $n=3$ we have: $s_1=x_1+x_2+x_3$, $s_2=x_1x_2+x_1x_3+x_2x_3$ and $s_3=x_1x_2x_3$.}$$
+    Let $R$ be a ring and $n\in\NN$. We define the \textit{elementary symmetric polynomials} $s_1,\ldots,s_n$ as: $$s_k=\sum_{1\leq i_1<\cdots<i_k\leq n}x_{i_1}\cdots x_{i_k}\quad\text{for } k=1,\ldots,n\footnote{For example, for $n=3$ we have: $s_1=x_1+x_2+x_3$, $s_2=x_1x_2+x_1x_3+x_2x_3$ and $s_3=x_1x_2x_3$.}$$
   \end{definition}
   \begin{definition}
     Let $n\in\NN$. We define the \textit{lexicographic order} $<_\text{lex}$ in $\NN^n$ as:
@@ -96,11 +96,11 @@
     The pair $(\NN^n,<_\text{lex})$ is a totally ordered set. Moreover, if $x,y,z,t\in\NN^n$ are such that $x<_\text{lex}y$ and $z<_\text{lex}t$, then $x+z<_\text{lex}y+t$.
   \end{prop}
   \begin{definition}
-    Let $R$ be a ring, $n\in\NN$ and $p\in R[x_1,\ldots,x_n]$. Suppose $p(x)$ is of the form: $$p(x_1,\ldots,x_n)=\sum_{\substack{i_1,\ldots,i_n=1\\i_1+\cdots+i_n=n}}^na_{i_1,\ldots,i_n}{x_1}^{i_1}\cdots{x_n}^{i_n}$$ We define the \textit{lexicographic degree} of $p$ as:
+    Let $R$ be a ring, $n\in\NN$ and $p\in R[x_1,\ldots,x_n]$. Suppose $p$ is of the form: $$p(x_1,\ldots,x_n)=\sum_{\substack{i_1,\ldots,i_n=1\\i_1+\cdots+i_n=n}}^na_{i_1,\ldots,i_n}{x_1}^{i_1}\cdots{x_n}^{i_n}$$ If $p(x_1,\ldots,x_n)\ne 0$, we define the \textit{lexicographic degree} of $p$ as:
     $$
       \deg_{<_\text{lex}}(p):=\max_{<_\text{lex}}\{(i_1,\ldots,i_n):a_{i_1,\ldots,i_n}\ne 0\}\footnote{Here, the notation $\displaystyle \max_{<_\text{lex}}$ means that the maximum is taken with respect to the order $<_\text{lex}$.}
     $$
-    if $p(x_1,\ldots,x_n)\ne 0$. If $p(x_1,\ldots,x_n)=0$, we define $\deg_{<_\text{lex}}(p):=-\infty$.
+    If $p(x_1,\ldots,x_n)=0$, we define $\deg_{<_\text{lex}}(p):=-\infty$.
   \end{definition}
   \begin{prop}
     Let $R$ be a ring, $n\in\NN$ and $p,q\in R[x_1,\ldots,x_n]$. Then:
@@ -110,7 +110,7 @@
     \end{enumerate}
   \end{prop}
   \begin{lemma}[Waring's method]
-    Let $R$ be an integral domain and $p(x)\in {R[x_1,\ldots,x_n]}^{S_n}$. Suppose that $\deg_{<_\text{lex}}=(a_1,\ldots,a_n)$ and let $\lambda\in R\setminus\{0\}$ be the coefficient of ${x_1}^{a_1}\cdots{x_n}^{a_n}$ in $p$. Then, $a_1\geq \cdots\geq a_n$ and if $$q:=p-\lambda {s_n}^{a_n}{s_{n-1}}^{a_{n-1}-a_n}{s_{n-2}}^{a_{n-2}-a_{n-1}}\cdots {s_1}^{r_1-r_2}$$ we have $\deg_{<_\text{lex}}(q)<_\text{lex}\deg_{<_\text{lex}}(p)$.
+    Let $R$ be an integral domain and $p\in {R[x_1,\ldots,x_n]}^{S_n}$. Suppose that $\deg_{<_\text{lex}}(p)=(a_1,\ldots,a_n)$ and let $\lambda\in R\setminus\{0\}$ be the coefficient of ${x_1}^{a_1}\cdots{x_n}^{a_n}$ in $p(x_1,\ldots,x_n)$. Then, $a_1\geq \cdots\geq a_n$ and if $$q:=p-\lambda {s_n}^{a_n}{s_{n-1}}^{a_{n-1}-a_n}{s_{n-2}}^{a_{n-2}-a_{n-1}}\cdots {s_1}^{r_1-r_2}$$ then we have $\deg_{<_\text{lex}}(q)<_\text{lex}\deg_{<_\text{lex}}(p)$.
   \end{lemma}
   \begin{theorem}[Fundamental theorem of symmetric polynomials]
     Let $R$ be a ring and $n\in\NN$. Then: $${R[x_1,\ldots,x_n]}^{S_n}=R[s_1,\ldots,s_n]$$ That is, every polynomial in $R[x_1,\ldots,x_n]$ can be expressed uniquely in terms of elementary symmetric polynomials.
@@ -259,20 +259,20 @@
     \end{enumerate}
   \end{prop}
   \subsection{Finite fields}
-  \begin{definition}
+  \begin{definition}[Finite field]
     A \textit{finite field} $F$ is a finite set which is a field.
   \end{definition}
   \begin{prop}
     Let $F$ be a finite field. Then, $F=p^n$ where $p$ is a prime number and $n\in\NN$.
   \end{prop}
   \begin{theorem}
-    Let $p$ be a prime number and $n\in\NN$. Then, there exists a unique field with $p^n$ elements up to isomorphism which will be denoted as $\FF_{p^n}$\footnote{Another commonly used notation to denote the field with $p^n$ elements is $\text{GF}(p^n)$.}.
+    Let $p$ be a prime number and $n\in\NN$. Then, there exists a unique field with $p^n$ elements up to isomorphism which we will denote as $\FF_{p^n}$\footnote{Another commonly used notation to denote the field with $p^n$ elements is $\text{GF}(p^n)$.}.
   \end{theorem}
   \begin{prop}
     Let $p$ be a prime number and $d,n\in\NN$. Then: $$\FF_{p^d}\subseteq\FF_{p^n}\iff d\mid n$$
   \end{prop}
   \begin{theorem}
-    Let $p$ be a prime number and $d\in\NN$. We define the set $P_d$ as:
+    Let $p$ be a prime number and $d\in\NN$. We define the set $P_{p,d}$ as:
     \begin{multline*}
       P_{p,d}:=\{f(x)\in\FF_p[x]:\deg(f(x))=d\text{ and}\\\text{$f(x)$ is monic and irreducible}\}
     \end{multline*}
@@ -282,13 +282,13 @@
     Let $p$ be a prime number and $d,n\in\NN$. Then: $$p^n=\sum_{d\mid n}d|P_{p,d}|$$
   \end{corollary}
   \begin{corollary}
-    For all prime number $p$ and for all $n\in\NN$, there exists a monic and irreducible polynomial of degree $n$ in $\FF_p[x]$.
+    For all prime numbers $p$ and for all $n\in\NN$, there exists a monic and irreducible polynomial of degree $n$ in $\FF_p[x]$.
   \end{corollary}
   \begin{corollary}
     Let $p$ be a prime number and $n\in\NN$. Then, $\FF_{p^n}=\FF_p(\alpha)$ for some $\alpha\in\FF_{p^n}$. Thus, the extension $\quot{\FF_{p^n}}{\FF_p}$ is simple.
   \end{corollary}
   \begin{definition}
-    Let $p$ be a prime number $R$ be a ring such that $\ch R=p$. We define the \textit{Frobenius endomorphism} as: $$\function{\text{Frob}_R}{R}{R}{r}{r^p}$$
+    Let $p$ be a prime number and $R$ be a ring such that $\ch R=p$. We define the \textit{Frobenius endomorphism} as: $$\function{\text{Frob}_R}{R}{R}{r}{r^p}$$
   \end{definition}
   \begin{theorem}
     Let $p$ be a prime number and $n\in\NN$. Then, $\text{Frob}_{\FF_{p^n}}\in\Gal(\quot{\FF_{p^n}}{\FF_p})$ and, furthermore: $$\Gal(\FF_{p^n}/\FF_p)=\langle\text{Frob}_{\FF_{p^n}}\rangle\cong\quot{\ZZ}{n\ZZ}$$
@@ -337,10 +337,10 @@
   \end{corollary}
   \subsubsection{Normal extensions}
   \begin{definition}
-    An algebraic field extension $\quot{L}{K}$ is \textit{normal} if $\forall p(x)\in K[x]$, irreducible over $K$, then: if $p(x)$ has a root in $L$, then $p(x)$ splits into linear factors in $L$.
+    An algebraic field extension $\quot{L}{K}$ is \textit{normal} if for all irreducible polynomial $p(x)\in K[x]$ we have that if $p(x)$ has a root in $L$, then $p(x)$ splits into linear factors in $L$.
   \end{definition}
   \begin{theorem}
-    Let $\quot{L}{K}$ be finite field extension. $\quot{L}{K}$ is normal if and only if it is the splitting field of some polynomial $p(x)\in K[x]\setminus K$.
+    Let $\quot{L}{K}$ be finite field extension. $\quot{L}{K}$ is normal if and only if $\quot{L}{K}$ is the splitting field of some polynomial $p(x)\in K[x]\setminus K$.
   \end{theorem}
   \begin{corollary}
     Let $\quot{L}{K}$ be finite field extension. Then, there exists a field extension $\quot{F}{L}$ such that:
@@ -383,7 +383,7 @@
     Let $K$ be a field and $p(x)\in K[x]$. We say that $p(x)$ is \textit{separable} if it doesn't have multiple roots in its splitting field.
   \end{definition}
   \begin{corollary}
-    Let $K$ be a field, $p(x)\in K[x]\setminus K$. Then: $$p(x)\text{ is separable}\iff\gcd(p(x),p'(x))=1$$
+    Let $K$ be a field and $p(x)\in K[x]\setminus K$. Then: $$p(x)\text{ is separable}\iff\gcd(p(x),p'(x))=1$$
   \end{corollary}
   \begin{corollary}
     Let $K$ be a field such that $\ch K=0$ and $p(x)\in K[x]$ is irreducible. Then, $p(x)$ is separable.
@@ -392,17 +392,17 @@
     Let $K$ be a field such that $\ch K=p>0$ and $p(x)\in K[x]$. Then: $$p'(x)=0\iff\exists q(x)\in K[x]:p(x)=q(x^p)$$
   \end{lemma}
   \begin{corollary}
-    Let $K$ be a field such that $\ch K=p>0$ and $p(x)\in K[x]$. Then, all roots of $p(x^d)$ are multiple.
+    Let $K$ be a field such that $\ch K=p>0$, $p(x)\in K[x]$ and $q(x):=p(x^p)$. Then, all roots of $q(x)$ are multiple.
   \end{corollary}
   \begin{corollary}
-    Let $K$ be a field such that $\ch K=p>0$, $p(x)\in K[x]$ and $q(x):=f(x^p)+bx$, where $b\in K^*$. Then, all roots of $q(x)$ are simple.
+    Let $K$ be a field such that $\ch K=p>0$, $p(x)\in K[x]$ and $q(x):=p(x^p)+bx$, where $b\in K^*$. Then, all roots of $q(x)$ are simple.
   \end{corollary}
   \begin{theorem}
     Let $K$ be a perfect field. Then, any irreducible polynomial over $K$ is separable.
   \end{theorem}
   \subsubsection{Separable extensions}
   \begin{definition}[Separable extension]
-    Let $\quot{L}{K}$ be an algebraic field extension and $\alpha\in L$. We say that $\alpha$ is \textit{separable} over $K$ is $\irr(\alpha,K)(x)$ is separable. We say that $\quot{L}{K}$ is \textit{separable} if and only if $\forall \alpha\in L$, $\alpha$ is separable over $K$.
+    Let $\quot{L}{K}$ be an algebraic field extension and $\alpha\in L$. We say that $\alpha$ is \textit{separable} over $K$ if $\irr(\alpha,K)(x)$ is separable. We say that $\quot{L}{K}$ is \textit{separable} if and only if $\forall \alpha\in L$, $\alpha$ is separable over $K$.
   \end{definition}
   \begin{corollary}
     Let $K$ be a perfect field. Then, any algebraic extension $\quot{L}{K}$ is separable.
@@ -415,17 +415,20 @@
       \item $|\Mor_K(K(\alpha_1,\ldots,\alpha_n),f)|=[K(\alpha_1,\ldots,\alpha_n):K]$.
     \end{enumerate}
   \end{theorem}
+  \begin{corollary}
+    Let $K$ be a field and $L$ be the splitting field of a separable polynomial $p(x)\in K[x]$. Then, $\quot{L}{K}$ is separable.
+  \end{corollary}
   \begin{prop}
     Let $F/L/K$ be a tower of fields. Then:
     \begin{enumerate}
-      \item $\quot{L}{K}$ and $\quot{F}{L}$ are separable $\iff\quot{F}{K}$ is separable.
-      \item If $\alpha,\beta\in L$ are algebraic over $K$, then so are $\alpha+\beta$, $\alpha\beta$ and $\alpha\beta^{-1}$ (if $\beta\ne 0$).
+      \item $\quot{F}{L}$ and $\quot{L}{K}$ are separable $\iff\quot{F}{K}$ is separable.
       \item The set $$E:=\{\alpha\in L:\alpha\text{ is separable over }K\}$$ is a subfield of $L$, the field extension $\quot{E}{K}$ is separable and if $L\ne E$, then $\forall\beta\in L\setminus E$, $\beta$ is not separable over $E$. In that case, and if the extension $\quot{L}{E}$ is algebraic, we say that $\quot{L}{E}$ is \textit{purely inseparable}.
     \end{enumerate}
   \end{prop}
   \begin{theorem}[Primitive element theorem]
     Let $\quot{L}{K}$ be a finite and separable field extension. Then, $\quot{L}{K}$ is simple.
   \end{theorem}
+  \subsubsection{Galois extensions}
   \begin{definition}
     We say that a field extension $\quot{L}{K}$ is a \textit{Galois extension} (or is \textit{Galois}) if it is normal and separable.
   \end{definition}
@@ -443,7 +446,7 @@
     \end{gather*}
   \end{definition}
   \begin{lemma}
-    Let $H\in\mathcal{S}(\Gal(\quot{L}{K}))$ and $$L^H:=\{a\in L:\sigma(a)=a\ \forall\sigma\in H)\}$$
+    Let $H\in\mathcal{S}(\Gal(\quot{L}{K}))$ and $$L^H:=\{a\in L:\sigma(a)=a\ \forall\sigma\in H\}$$
     Then, $L^H$ is a field (called \textit{fixed field} of $H$) and $L^H\in\mathcal{K}(\quot{L}{K})$.
   \end{lemma}
   \begin{lemma}
@@ -461,8 +464,8 @@
     \begin{enumerate}
       \item $\mathcal{F}(\{\id\})=L$ and $\mathcal{F}(\Gal(\quot{L}{K}))=K$.
       \item $\mathcal{G}(L)=\{\id\}$ and $\mathcal{G}(K)=\Gal(\quot{L}{K})$.
-      \item Si $H_1,H_2\in\mathcal{S}(\Gal(\quot{L}{K}))$ are such that $H_1\subseteq H_2$, then $\mathcal{F}(H_1)\supseteq \mathcal{F}(H_2)$.
-      \item Si $F_1,F_2\in\mathcal{K}(\quot{L}{K})$ are such that $F_1\subseteq F_2$, then $\mathcal{G}(F_1)\supseteq \mathcal{G}(F_2)$.
+      \item If $H_1,H_2\in\mathcal{S}(\Gal(\quot{L}{K}))$ are such that $H_1\subseteq H_2$, then $\mathcal{F}(H_1)\supseteq \mathcal{F}(H_2)$.
+      \item If $F_1,F_2\in\mathcal{K}(\quot{L}{K})$ are such that $F_1\subseteq F_2$, then $\mathcal{G}(F_1)\supseteq \mathcal{G}(F_2)$.
       \item $H\subseteq \mathcal{G}(\mathcal{F}(H))$ $\forall H\in \mathcal{S}(\Gal(\quot{L}{K}))$.
       \item $F\subseteq \mathcal{F}(\mathcal{G}(F))$ $\forall F\in \mathcal{K}(\quot{L}{K})$.
       \item $\mathcal{F}\circ\mathcal{G}\circ\mathcal{F}=\mathcal{F}$.
@@ -479,25 +482,11 @@
     Let $\quot{L}{K}$ be a finite and Galois field extension. Then, $\mathcal{F}\circ\mathcal{G}=\id$. Thus, $\mathcal{F}$ and $\mathcal{G}$ are bijective and they are inverses of each other. Furthermore, if $F\in\mathcal{K}(\quot{L}{K})$, then: $$\textstyle\quot{F}{K}\text{ is normal}\iff\Gal(\quot{L}{F})\unlhd\Gal(\quot{L}{K})$$ and in that case: $$\quot{\Gal(L/K)}{\Gal(L/F)}\cong\Gal(F/K)$$
   \end{theorem}
   \begin{corollary}
-    Let $\quot{L}{K}$ be a finite and Galois field extension and $H$ be a subgroup of $\Gal(\quot{L}{K})$. Then, $[L^H:K]=\frac{|\Gal(\quot{L}{K})|}{|H|}$.
+    Let $\quot{L}{K}$ be a finite and Galois field extension and $H$ be a subgroup of $\Gal(\quot{L}{K})$. Then: $$[L^H:K]=\frac{|\Gal(\quot{L}{K})|}{|H|}$$
   \end{corollary}
   \begin{definition}
-    Let $K$ be a field and $p(x)\in K[X]$. Suppose $L$ is the splitting field of $p(x)$ over $K$. We denote $\Gal(\quot{p(x)}{K}):=\Gal(\quot{L}{K})$.
+    Let $K$ be a field, $p(x)\in K[X]$ and $L$ be the splitting field of $p(x)$ over $K$. We denote $\Gal(\quot{p(x)}{K}):=\Gal(\quot{L}{K})$.
   \end{definition}
-  \begin{definition}
-    Let $G$ be a group. The \textit{lattice of subgroups} of $G$ is the following graph:
-    \begin{itemize}
-      \item The vertices of the graph are the subgroups of $G$.
-      \item Two vertices (corresponding to two subgroups $H_i$, $H_j$ of $G$) are connected by an edge if $H_i\leq H_j$, with $i\ne j$, and such that there is no $k\ne i,j$ such that $H_i\leq H_k\leq H_j$.
-    \end{itemize}
-  \end{definition}
-  \begin{center}
-    \begin{minipage}{\linewidth}
-      \centering
-      \includestandalone[mode=image|tex,width=0.65\linewidth]{Images/lattice}
-      \captionof{figure}{Lattice of subgroups of the group $\quot{\ZZ}{4\ZZ}\times\quot{\ZZ}{2\ZZ}$}
-    \end{minipage}
-  \end{center}
   \begin{definition}
     A subgroup $H$ of $S_n$ is called \textit{transitive} if $\forall i,j\in\{1,\ldots,n\}$, $\exists h\in H$ such that $h(i)=j$.
   \end{definition}
@@ -505,14 +494,32 @@
     Let $K$ be a field and $p(x)\in K[X]$ be an irreducible and separable polynomial of degree $n$. Then, there exists a monomorphism $\iota: \Gal(\quot{p(x)}{K})\rightarrow S_n$. Furthermore, $\im(\iota)$ is a transitive subgroup of $S_n$.
   \end{lemma}
   \begin{definition}
-    Let $K$ be a field, $p(x)\in K[X]$ and $\alpha_1,\cdots,\alpha_n$ be the roots of $p(x)$ in its splitting field. We define $\delta(p(x))$ as: $$\delta(p(x))=\prod_{1\leq i<j\leq n}(\alpha_j-\alpha_i)$$
+    Let $K$ be a field, $p(x)\in K[X]$ and $\alpha_1,\ldots,\alpha_n$ be the roots of $p(x)$ in its splitting field. We define $\delta(p(x))$ as: $$\delta(p(x))=\prod_{1\leq i<j\leq n}(\alpha_j-\alpha_i)$$
   \end{definition}
   \begin{definition}
-    Let $K$ be a field, $p(x)\in K[X]$ and $\alpha_1,\cdots,\alpha_n$ be the roots of $p(x)$ in its splitting field. We define the \textit{discriminant} of $p(x)$ $\Delta(p(x))$ as: $$\Delta(p(x))=\prod_{1\leq i<j\leq n}(\alpha_j-\alpha_i)^2$$
+    Let $K$ be a field, $p(x)\in K[X]$ and $\alpha_1,\ldots,\alpha_n$ be the roots of $p(x)$ in its splitting field. We define the \textit{discriminant} of $p(x)$, $\Delta(p(x))$, as: $$\Delta(p(x))=\prod_{1\leq i<j\leq n}(\alpha_j-\alpha_i)^2$$
   \end{definition}
   \begin{prop}
-    Let $K$ be a field, $p(x)\in K[X]$ and $\alpha_1,\cdots,\alpha_n$ be the roots of $p(x)$ in its splitting field. Then, $\Delta (p(x))$ is a symmetric polynomial in the variables $\alpha_1,\ldots,\alpha_n$.
+    Let $K$ be a field, $p(x)\in K[X]$ and $\alpha_1,\ldots,\alpha_n$ be the roots of $p(x)$ in its splitting field. Then, $\Delta (p(x))$ is a symmetric polynomial in the variables $\alpha_1,\ldots,\alpha_n$.
   \end{prop}
   % falta arreglar el tema del discriminant, que no acaba de quedar gaire clar què és. En particular, falta acabar l'última proposició (falta posar la fórmula on surt el signe).
+
+
+  % Lattice of subgroups
+
+  % \begin{definition}
+  %   Let $G$ be a group. The \textit{lattice of subgroups} of $G$ is the following graph:
+  %   \begin{itemize}
+  %     \item The vertices of the graph are the subgroups of $G$.
+  %     \item Two vertices (corresponding to two subgroups $H_i$, $H_j$ of $G$) are connected by an edge if $H_i\leq H_j$, with $i\ne j$, and such that there is no $k\ne i,j$ such that $H_i\leq H_k\leq H_j$.
+  %   \end{itemize}
+  % \end{definition}
+  % \begin{center}
+  %   \begin{minipage}{\linewidth}
+  %     \centering
+  %     \includestandalone[mode=image|tex,width=0.65\linewidth]{Images/lattice}
+  %     \captionof{figure}{Lattice of subgroups of the group $\quot{\ZZ}{4\ZZ}\times\quot{\ZZ}{2\ZZ}$}
+  %   \end{minipage}
+  % \end{center}
 \end{multicols}
 \end{document}

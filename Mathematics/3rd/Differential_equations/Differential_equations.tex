@@ -68,7 +68,7 @@
     where $a_i\in\mathcal{C}(I,\RR)$ for $i=0,\ldots,n$ and $\vectorfunction{b}\in\mathcal{C}(I,\RR^m)$ are arbitrary functions which do not need to be linear. We say that the linear ode \eqref{DE_linear0} is \textit{homogeneous} if $\vectorfunction{b}(t)=\vectorfunction{0}$ $\forall t\in I$. We say that linear ode \eqref{DE_linear0} is of \textit{constant coefficients} if $a_i(t):=a_{i0}\in\RR$ $\forall t\in I$ and $\forall i=0,\ldots,n$.
   \end{definition}
   \begin{definition}[Initial value problem]
-    Let $U\subseteq\RR\times\RR^n$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a function. Given $(t_0,x_0)\in U$, the \textit{initial value problem (ivp)} (or \textit{Cauchy problem}) consists in finding a solution of the ode $$\vectorfunction{x}'=\vectorfunction{f}(t,\vectorfunction{x})$$ with \textit{initial conditions} $\vectorfunction{x}(t_0)=x_0$.
+    Let $U\subseteq\RR\times\RR^n$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a function. Given $(t_0,\vectorfunction{x}_0)\in U$, the \textit{initial value problem (ivp)} (or \textit{Cauchy problem}) consists in finding a solution of the ode $$\vectorfunction{x}'=\vectorfunction{f}(t,\vectorfunction{x})$$ with \textit{initial conditions} $\vectorfunction{x}(t_0)=\vectorfunction{x}_0$.
   \end{definition}
   \subsubsection{Methods for solving odes}
   \begin{method}[Separation of variables]
@@ -162,7 +162,7 @@
     Let $\vectorfunction{f}:U\subseteq\RR\times\RR^n\rightarrow\RR^m$ be a function. We say that $\vectorfunction{f}$ is \textit{Lipschitz continuous with respect to the second variable} if $\exists L\in\RR_{>0}$ such that: $$\|\vectorfunction{f}(t,x)-\vectorfunction{f}(t,y)\|\leq L\|x-y\|\qquad\forall (t,x),(t,y)\in U$$
   \end{definition}
   \begin{definition}
-    Let $\vectorfunction{f}:U\subseteq\RR\times\RR^n\rightarrow\RR^m$ be a function. We say that $\vectorfunction{f}$ is \textit{locally Lipschitz continuous with respect to the second variable} if $\forall (t_0,x_0)\in U$ there exists a neighbourhood $V$ of $(t_0,x_0)$ such that $f|_V$ is Lipschitz continuous with respect to the second variable.
+    Let $\vectorfunction{f}:U\subseteq\RR\times\RR^n\rightarrow\RR^m$ be a function. We say that $\vectorfunction{f}$ is \textit{locally Lipschitz continuous with respect to the second variable} if $\forall (t_0,\vectorfunction{x}_0)\in U$ there exists a neighbourhood $V$ of $(t_0,\vectorfunction{x}_0)$ such that $f|_V$ is Lipschitz continuous with respect to the second variable.
   \end{definition}
   \begin{prop}
     Let $U\subseteq\RR\times\RR^n$ be an open set and $\vectorfunction{f}:U\subseteq\RR\times\RR^n\rightarrow\RR^n$ be a function. Then:
@@ -181,29 +181,29 @@
   \end{prop}
   \subsubsection{Picard theorem}
   \begin{prop}
-    Let $U\subseteq\RR\times\RR^n$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function. Let $I\subseteq\RR$ be an open interval, $t_0\in I$ and $x_0\in\RR^n$ be such that $(t_0,x_0)\in U$. Then, a continuous function $\vectorfunction{\varphi}:I\rightarrow\RR^n$ is a solution of the ivp
+    Let $U\subseteq\RR\times\RR^n$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function. Let $I\subseteq\RR$ be an open interval, $t_0\in I$ and $\vectorfunction{x}_0\in\RR^n$ be such that $(t_0,\vectorfunction{x}_0)\in U$. Then, a continuous function $\vectorfunction{\varphi}:I\rightarrow\RR^n$ is a solution of the ivp
     \begin{equation}
       \left\{
       \begin{aligned}
          & \vectorfunction{x}'=\vectorfunction{f}(t,\vectorfunction{x}) \\
-         & \vectorfunction{x}(t_0)=x_0
+         & \vectorfunction{x}(t_0)=\vectorfunction{x}_0
       \end{aligned}
       \right.
       \label{DE_ivp}
     \end{equation}
-    if and only if $$\vectorfunction{\varphi}(t)=x_0+\int_{t_0}^tf(s,\vectorfunction{\varphi}(s))\dd s\quad\forall t\in I$$
+    if and only if $$\vectorfunction{\varphi}(t)=\vectorfunction{x}_0+\int_{t_0}^tf(s,\vectorfunction{\varphi}(s))\dd s\quad\forall t\in I$$
   \end{prop}
   \begin{definition}
     An \textit{operator} is a function whose domain is a set of functions.
   \end{definition}
   \begin{definition}
-    Let $U\subseteq\RR\times\RR^n$ be an open set, $(t_0,x_0)\in U$, $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function and $I$ be a closed interval. We define the operator
+    Let $U\subseteq\RR\times\RR^n$ be an open set, $(t_0,\vectorfunction{x}_0)\in U$, $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function and $I$ be a closed interval. We define the operator
     $$
       \function{\vectorfunction{T}}
       {\mathcal{C}(I,\RR^n)}
       {\mathcal{C}(I,\RR^n)}
       {\vectorfunction{\varphi}}
-      {\displaystyle\vectorfunction{T}\vectorfunction{\varphi}(t)=x_0+\int_{t_0}^tf(s,\vectorfunction{\varphi}(s))\dd s\footnotemark}
+      {\displaystyle\vectorfunction{T}\vectorfunction{\varphi}(t)=\vectorfunction{x}_0+\int_{t_0}^tf(s,\vectorfunction{\varphi}(s))\dd s\footnotemark}
     $$
   \end{definition}
   \begin{theorem}[Banach fixed-point theorem]\footnotetext{Note that the fixed points of this operator are precisely the solutions of the ivp \eqref{DE_ivp}.}
@@ -213,32 +213,32 @@
     Let $(X,d)$ be a complete metric space and $f:(X,d)\rightarrow (X,d)$ be a function. If there exists $m\in\NN$ such that $f^m$ is a contraction, then $f$ has a unique fixed point $p\in X$.
   \end{corollary}
   \begin{definition}
-    Let $t_0\in\RR$, $b\in\RR^n$ and $a,b\in\RR_{>0}$. We define the following sets: $$I_a(t_0):=[t_0-a,t_0+a]\subset\RR\;\;\text{and}\;\;\overline{B}_{b}(x_0):=\overline{B}(x_0,b)\subset\RR^n$$
+    Let $t_0\in\RR$, $\vectorfunction{x}_0\in\RR^n$ and $a,b\in\RR_{>0}$. We define the following sets: $$I_a(t_0):=[t_0-a,t_0+a]\subset\RR\;\;\text{and}\;\;\overline{B}_{b}(\vectorfunction{x}_0):=\overline{B}(\vectorfunction{x}_0,b)\subset\RR^n$$
   \end{definition}
   \begin{theorem}[Picard theorem]\label{DE_picard}
-    Let $t_0\in\RR$, $x_0\in\RR^n$, $a,b\in\RR_{>0}$, $\vectorfunction{f}:I_a(t_0)\times\overline{B}_{b}(x_0)\subset\RR\times\RR^n\rightarrow\RR^n$ be a continuous function and Lipschitz continuous with respect to the second variable, and define: $$M:=\max\{\|\vectorfunction{f}(t,x)\|:(t,x)\in I_a(t_0)\times\overline{B}_{b}(x_0)\}$$ Then, the ivp \eqref{DE_ivp} has a unique solution $\vectorfunction{\varphi}:I_\alpha(t_0)\rightarrow\overline{B}_{b}(x_0)$, where $\alpha:=\min\left\{a,\frac{b}{M}\right\}$.
+    Let $t_0\in\RR$, $\vectorfunction{x}_0\in\RR^n$, $a,b\in\RR_{>0}$, $\vectorfunction{f}:I_a(t_0)\times\overline{B}_{b}(\vectorfunction{x}_0)\subset\RR\times\RR^n\rightarrow\RR^n$ be a continuous function and Lipschitz continuous with respect to the second variable, and define: $$M:=\max\{\|\vectorfunction{f}(t,x)\|:(t,x)\in I_a(t_0)\times\overline{B}_{b}(\vectorfunction{x}_0)\}$$ Then, the ivp \eqref{DE_ivp} has a unique solution $\vectorfunction{\varphi}:I_\alpha(t_0)\rightarrow\overline{B}_{b}(\vectorfunction{x}_0)$, where $\alpha:=\min\left\{a,\frac{b}{M}\right\}$.
   \end{theorem}
   \begin{corollary}
-    Let $I\subset \RR$ be a closed interval, $t_0\in I$, $x_0\in\RR^n$ and $\vectorfunction{f}:I\times\RR^n\rightarrow\RR^n$ be a continuous function and Lipschitz continuous with respect to the second variable. Then, the ivp \eqref{DE_ivp} has a unique solution $\vectorfunction{\varphi}:I\rightarrow\RR^n$.
+    Let $I\subset \RR$ be a closed interval, $t_0\in I$, $\vectorfunction{x}_0\in\RR^n$ and $\vectorfunction{f}:I\times\RR^n\rightarrow\RR^n$ be a continuous function and Lipschitz continuous with respect to the second variable. Then, the ivp \eqref{DE_ivp} has a unique solution $\vectorfunction{\varphi}:I\rightarrow\RR^n$.
   \end{corollary}
   \begin{corollary}[Picard iteration process]
-    Suppose we want to solve the ivp \eqref{DE_ivp}. That is, we look for a solution $\vectorfunction{\varphi}(t)$. Let $\vectorfunction{\varphi}_0$ be a fixed function (usually chosen to be $\vectorfunction{\varphi}_0=x_0$) and define
-    $$\vectorfunction{\varphi}_{n+1}(t)=\vectorfunction{T}\vectorfunction{\varphi}_n(t)=x_0+\int_{t_0}^tf(s,\vectorfunction{\varphi}_n(s))\dd s$$
+    Suppose we want to solve the ivp \eqref{DE_ivp}. That is, we look for a solution $\vectorfunction{\varphi}(t)$. Let $\vectorfunction{\varphi}_0$ be a fixed function (usually chosen to be $\vectorfunction{\varphi}_0=\vectorfunction{x}_0$) and define
+    $$\vectorfunction{\varphi}_{n+1}(t)=\vectorfunction{T}\vectorfunction{\varphi}_n(t)=\vectorfunction{x}_0+\int_{t_0}^tf(s,\vectorfunction{\varphi}_n(s))\dd s$$
     for all $n\geq 0$. Then, $\displaystyle\vectorfunction{\varphi}(t)=\lim_{n\to\infty}\vectorfunction{\varphi}_n(t)$.
   \end{corollary}
   \begin{corollary}
-    Let $U\subseteq\RR\times\RR^n$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function and locally Lipschitz continuous with respect to the second variable. Then, $\forall(t_0,x_0)\in U$, there exists $\alpha(t_0,x_0)\in\RR_{>0}$ and a neighbourhood $V_{t_0,x_0}=I_{a(t_0,x_0)}(t_0)\times\overline{B}_{b(t_0,x_0)}(x_0)$ of $(t_0,x_0)$ in $U$ such that the ivp \eqref{DE_ivp} has a unique solution $\vectorfunction{\varphi}_{t_0,x_0}$ defined on $I_{\alpha(t_0,x_0)}\subseteq I_{a(t_0,x_0)}$ with $\graph(\vectorfunction{\varphi}_{t_0,x_0})\subset V_{t_0,x_0}$.
+    Let $U\subseteq\RR\times\RR^n$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function and locally Lipschitz continuous with respect to the second variable. Then, $\forall(t_0,\vectorfunction{x}_0)\in U$, there exists $\alpha(t_0,\vectorfunction{x}_0)\in\RR_{>0}$ and a neighbourhood $V_{t_0,\vectorfunction{x}_0}=I_{a(t_0,\vectorfunction{x}_0)}(t_0)\times\overline{B}_{b(t_0,\vectorfunction{x}_0)}(\vectorfunction{x}_0)$ of $(t_0,\vectorfunction{x}_0)$ in $U$ such that the ivp \eqref{DE_ivp} has a unique solution $\vectorfunction{\varphi}_{t_0,\vectorfunction{x}_0}$ defined on $I_{\alpha(t_0,\vectorfunction{x}_0)}\subseteq I_{a(t_0,\vectorfunction{x}_0)}$ with $\graph(\vectorfunction{\varphi}_{t_0,\vectorfunction{x}_0})\subset V_{t_0,\vectorfunction{x}_0}$.
   \end{corollary}
   \begin{prop}
-    Let $I\subseteq\RR$ be an interval and $\vectorfunction{f}:I\times\RR^n\rightarrow\RR^n$ be a continuous function and Lipschitz continuous with respect to the second variable. Then, $\forall(t_0,x_0)\in I\times\RR^n$ there is a unique solution of the ivp \eqref{DE_ivp} defined on $I$.
+    Let $I\subseteq\RR$ be an interval and $\vectorfunction{f}:I\times\RR^n\rightarrow\RR^n$ be a continuous function and Lipschitz continuous with respect to the second variable. Then, $\forall(t_0,\vectorfunction{x}_0)\in I\times\RR^n$ there is a unique solution of the ivp \eqref{DE_ivp} defined on $I$.
   \end{prop}
   \begin{corollary}
-    Let $I\subseteq\RR$ be an interval and $\vectorfunction{A}:I\rightarrow\mathcal{L}(\RR^n,\RR^n)$ and $\vectorfunction{b}:I\rightarrow\RR^n$ be continuous functions. Then, for all $(t_0,x_0)\in I\times\RR^n$ the ivp
+    Let $I\subseteq\RR$ be an interval and $\vectorfunction{A}:I\rightarrow\mathcal{L}(\RR^n,\RR^n)$ and $\vectorfunction{b}:I\rightarrow\RR^n$ be continuous functions. Then, for all $(t_0,\vectorfunction{x}_0)\in I\times\RR^n$ the ivp
     $$
       \left\{
       \begin{aligned}
          & \vectorfunction{x}'=\vectorfunction{A}(t)\vectorfunction{x}+\vectorfunction{b}(t) \\
-         & \vectorfunction{x}(t_0)=x_0
+         & \vectorfunction{x}(t_0)=\vectorfunction{x}_0
       \end{aligned}
       \right.
     $$
@@ -275,26 +275,26 @@
     Let $(X,d)$ be a compact metric space, $D\subset\RR^n$ be a closed set and $(\vectorfunction{f}_m)$ be a sequence of functions such that $\vectorfunction{f}_m\in\mathcal{C}(X,D)$ $\forall m\geq 1$. If the sequence is equicontinuous and pointwise bounded, then there exists a subsequence $(\vectorfunction{f}_{m_k})$ that converges on $\mathcal{C}(X,D)$.
   \end{corollary}
   \begin{theorem}[Peano theorem]
-    Let $t_0\in\RR$, $x_0\in\RR^n$, $a,b\in\RR_{>0}$, $\vectorfunction{f}:I_a(t_0)\times\overline{B}_{b}(x_0)\subset\RR\times\RR^n\rightarrow\RR^n$ be a continuous function, and define: $$M:=\max\{\|\vectorfunction{f}(t,x)\|:(t,x)\in I_a(t_0)\times\overline{B}_{b}(x_0)\}$$ Then, the ivp \eqref{DE_ivp} has at least one solution $\vectorfunction{\varphi}:I_\alpha(t_0)\rightarrow\RR^n$, where $\alpha:=\min\left\{a,\frac{b}{M}\right\}$.
+    Let $t_0\in\RR$, $\vectorfunction{x}_0\in\RR^n$, $a,b\in\RR_{>0}$, $\vectorfunction{f}:I_a(t_0)\times\overline{B}_{b}(\vectorfunction{x}_0)\subset\RR\times\RR^n\rightarrow\RR^n$ be a continuous function, and define: $$M:=\max\{\|\vectorfunction{f}(t,x)\|:(t,x)\in I_a(t_0)\times\overline{B}_{b}(\vectorfunction{x}_0)\}$$ Then, the ivp \eqref{DE_ivp} has at least one solution $\vectorfunction{\varphi}:I_\alpha(t_0)\rightarrow\RR^n$, where $\alpha:=\min\left\{a,\frac{b}{M}\right\}$.
   \end{theorem}
   \begin{corollary}
-    Let $U\subseteq\RR\times\RR^n$ be an open set, $K\subset U$ be a compact set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function. Then, $\exists\alpha\in\RR_{>0}$ such that $\forall (t_0,x_0)\in K$, the ivp \eqref{DE_ivp} has a solution defined in $I_\alpha(t_0)$.
+    Let $U\subseteq\RR\times\RR^n$ be an open set, $K\subset U$ be a compact set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function. Then, $\exists\alpha\in\RR_{>0}$ such that $\forall (t_0,\vectorfunction{x}_0)\in K$, the ivp \eqref{DE_ivp} has a solution defined in $I_\alpha(t_0)$.
   \end{corollary}
   \subsubsection{Maximal solutions}
   \begin{definition}
-    Let $U\subseteq\RR\times\RR^n$ be an open set, $(t_0,x_0)\in U$ and $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function. We define the set $\mathcal{S}(U,\vectorfunction{f},t_0,x_0)$ as:
+    Let $U\subseteq\RR\times\RR^n$ be an open set, $(t_0,\vectorfunction{x}_0)\in U$ and $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function. We define the set $\mathcal{S}(U,\vectorfunction{f},t_0,\vectorfunction{x}_0)$ as:
     \begin{multline*}
-      \mathcal{S}(U,\vectorfunction{f},t_0,x_0):=\{(I,\vectorfunction{\varphi}):I\subseteq\RR\text{ is an interval},t_0\in I\\\text{and }\vectorfunction{\varphi}:I\rightarrow\RR^n\text{ is a solution of the ivp \eqref{DE_ivp}}\}
+      \mathcal{S}(U,\vectorfunction{f},t_0,\vectorfunction{x}_0):=\{(I,\vectorfunction{\varphi}):I\subseteq\RR\text{ is an interval},t_0\in I\\\text{and }\vectorfunction{\varphi}:I\rightarrow\RR^n\text{ is a solution of the ivp \eqref{DE_ivp}}\}
     \end{multline*}
   \end{definition}
   \begin{definition}
-    We define the relation $\leq$ defined on $\mathcal{S}(U,\vectorfunction{f},t_0,x_0)$ in the following way. For $(I,\vectorfunction{\varphi}),(J,\vectorfunction{\psi})\in \mathcal{S}(U,\vectorfunction{f},t_0,x_0)$: $$(J,\vectorfunction{\psi})\leq (I,\vectorfunction{\varphi})\iff J\subset I\text{ and }\vectorfunction{\varphi}|_J=\vectorfunction{\psi}\footnote{It can be seen that $\leq$ is a partial (but not total) order relation.}$$ In this case, we say that $(I,\vectorfunction{\varphi})$ is an \textit{extension} of $(J,\vectorfunction{\psi})$.
+    We define the relation $\leq$ defined on $\mathcal{S}(U,\vectorfunction{f},t_0,\vectorfunction{x}_0)$ in the following way. For $(I,\vectorfunction{\varphi}),(J,\vectorfunction{\psi})\in \mathcal{S}(U,\vectorfunction{f},t_0,\vectorfunction{x}_0)$: $$(J,\vectorfunction{\psi})\leq (I,\vectorfunction{\varphi})\iff J\subset I\text{ and }\vectorfunction{\varphi}|_J=\vectorfunction{\psi}\footnote{It can be seen that $\leq$ is a partial (but not total) order relation.}$$ In this case, we say that $(I,\vectorfunction{\varphi})$ is an \textit{extension} of $(J,\vectorfunction{\psi})$.
   \end{definition}
   \begin{definition}
     Let $(A,\leq )$ be a poset. Then, $m\in A$ is a \textit{maximal element} if and only if $\forall a\in A$ with $m \leq  a$ we have $m=a$.
   \end{definition}
   \begin{definition}
-    Consider the poset $(\mathcal{S}(U,\vectorfunction{f},t_0,x_0),\leq)$. We say that a solution $(I,\vectorfunction{\varphi})$ is \textit{maximal} if for all extensions $(J,\vectorfunction{\psi})$ of $(I,\vectorfunction{\varphi})$ we have $I=J$ and $\vectorfunction{\varphi}=\vectorfunction{\psi}$.
+    Consider the poset $(\mathcal{S}(U,\vectorfunction{f},t_0,\vectorfunction{x}_0),\leq)$. We say that a solution $(I,\vectorfunction{\varphi})$ is \textit{maximal} if for all extensions $(J,\vectorfunction{\psi})$ of $(I,\vectorfunction{\varphi})$ we have $I=J$ and $\vectorfunction{\varphi}=\vectorfunction{\psi}$.
   \end{definition}
   \begin{definition}
     Let $(A,\leq )$ be a poset and $C\subseteq A$ be a subset of $A$. We say that $C$ is a \textit{chain} if it is totally ordered in the inherited order, that is, if it is partially ordered and $\forall x,y\in C$ we have either $x\leq y$ or $y\leq x$.
@@ -309,16 +309,16 @@
     Let $(A,\leq )$ be a poset. If every chain $C\subseteq A$ has an upper bound in $A$, then $A$ contains at least one maximal element.
   \end{lemma}
   \begin{theorem}
-    Let $U\subseteq\RR\times\RR^n$ be an open set, $(t_0,x_0)\in U$ and $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function. Consider the poset $(\mathcal{S}(U,\vectorfunction{f},t_0,x_0),\leq)$. Then, $\mathcal{S}(U,\vectorfunction{f},t_0,x_0)$ has maximal elements. Furthermore, if $(I,\vectorfunction{\varphi})$ is a maximal solution, then $I$ is open.
+    Let $U\subseteq\RR\times\RR^n$ be an open set, $(t_0,\vectorfunction{x}_0)\in U$ and $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function. Consider the poset $(\mathcal{S}(U,\vectorfunction{f},t_0,\vectorfunction{x}_0),\leq)$. Then, $\mathcal{S}(U,\vectorfunction{f},t_0,\vectorfunction{x}_0)$ has maximal elements. Furthermore, if $(I,\vectorfunction{\varphi})$ is a maximal solution, then $I$ is open.
   \end{theorem}
   \begin{prop}
-    Let $U\subseteq\RR\times\RR^n$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be such that $\forall(t_0,x_0)\in U$ the ivp \eqref{DE_ivp} has a unique solution defined in a neighbourhood of $t_0$. Then, $\forall(t_0,x_0)\in U$ the ivp \eqref{DE_ivp} has a unique maximal solution.
+    Let $U\subseteq\RR\times\RR^n$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be such that $\forall(t_0,\vectorfunction{x}_0)\in U$ the ivp \eqref{DE_ivp} has a unique solution defined in a neighbourhood of $t_0$. Then, $\forall(t_0,\vectorfunction{x}_0)\in U$ the ivp \eqref{DE_ivp} has a unique maximal solution.
   \end{prop}
   \begin{lemma}[Wintner lemma]
     Let $U\subseteq\RR\times\RR^n$ be an open set, $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function, $\vectorfunction{\varphi}:I\rightarrow\RR^n$ be a solution of $\vectorfunction{x}'=\vectorfunction{f}(t,\vectorfunction{x})$ and $(b,y)\in U$ be an accumulation point of $\vectorfunction{\varphi}$. Then, $\displaystyle\lim_{t\to b}\vectorfunction{\varphi}(t)=y$ and the solution can be extended up to $b$.
   \end{lemma}
   \begin{corollary}
-    Let $U\subseteq\RR\times\RR^n$ be an open set, $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function and $\vectorfunction{\varphi}:(a,b)\rightarrow\RR^n$ be a maximal solution of $\vectorfunction{x}'=\vectorfunction{f}(t,\vectorfunction{x})$. If $b<\infty$, then for all compact set $K\subset U$, $\exists t_0<\infty$ such that $(t,\vectorfunction{\varphi}(t))\notin K$ $\forall t\in[t_0,b)$. In that case, we say that $\vectorfunction{\varphi}$ \textit{tends to the boundary of $U$}.
+    Let $U\subseteq\RR\times\RR^n$ be an open set, $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function and $\vectorfunction{\varphi}:(a,b)\rightarrow\RR^n$ be a maximal solution of $\vectorfunction{x}'=\vectorfunction{f}(t,\vectorfunction{x})$. If $b<\infty$, then for all compact set $K\subset U$, $\exists t_0<\infty$ such that $(t,\vectorfunction{\varphi}(t))\notin K$ $\forall t\in[t_0,b)$. In that case, we say that $\vectorfunction{\varphi}$ \textit{tends to the boundary} of $U$.
   \end{corollary}
   \subsection{Linear differential equations}
   \begin{definition}
@@ -330,11 +330,11 @@
     We say that linear equation \eqref{DE_linear} is \textit{homogeneous} if $\vectorfunction{b}(t)=\vectorfunction{0}$ $\forall t\in I$. We say that linear equation \eqref{DE_linear} is of \textit{constant coefficients} if $\vectorfunction{A}(t)=\vectorfunction{A}$ $\forall t\in I$, where $\vectorfunction{A}\in\mathcal{M}_n(\RR)$.
   \end{definition}
   \begin{definition}
-    Let $I\subseteq\RR$ be an interval, $t_0\in I$, $x_0\in\RR^n$ and consider the ode \eqref{DE_linear}. We define the \textit{flux of the linear ode} as the function:
+    Let $I\subseteq\RR$ be an interval, $t_0\in I$, $\vectorfunction{x}_0\in\RR^n$ and consider the ode \eqref{DE_linear}. We define the \textit{flux of the linear ode} as the function:
     $$
-      \function{\vectorfunction{\varphi}}{I\times I\times \RR^n}{\RR^n}{(t,t_0,x_0)}{\vectorfunction{\varphi}(t,t_0,x_0)}
+      \function{\vectorfunction{\varphi}}{I\times I\times \RR^n}{\RR^n}{(t,t_0,\vectorfunction{x}_0)}{\vectorfunction{\varphi}(t,t_0,\vectorfunction{x}_0)}
     $$
-    where $\vectorfunction{\varphi}(t,t_0,x_0)$ is a solution of \eqref{DE_linear} with initial conditions $\vectorfunction{\varphi}(t_0,t_0,x_0)$.
+    where $\vectorfunction{\varphi}(t,t_0,\vectorfunction{x}_0)$ is a solution of \eqref{DE_linear} with initial conditions $\vectorfunction{\varphi}(t_0,t_0,\vectorfunction{x}_0)$.
   \end{definition}
   \begin{prop}
     Let $I\subseteq\RR$ be an interval and $a,b\in\mathcal{C}(I,\RR)$. Then, the general solution of the ivp
@@ -357,7 +357,7 @@
       \vectorfunction{x}'=\vectorfunction{A}(t)\vectorfunction{x}
     \end{equation} Then, $\mathcal{A}_n$ is a vector space of dimension $n$ and for each $t_0\in I$, the function
     $$
-      \function{\vectorfunction{\xi}_{t_0}}{\RR^n}{\mathcal{A}_n}{x_0}{\vectorfunction{\varphi}(\cdot,t_0,x_0)}
+      \function{\vectorfunction{\xi}_{t_0}}{\RR^n}{\mathcal{A}_n}{\vectorfunction{x}_0}{\vectorfunction{\varphi}(\cdot,t_0,\vectorfunction{x}_0)}
     $$
     is an isomorphism.
   \end{theorem}
@@ -374,7 +374,7 @@
   \begin{corollary}
     Let $s,t,w\in\RR$. Consider the function
     $$
-      \function{\vectorfunction{\phi}_s^t}{\RR^n}{\RR^n}{x}{(\vectorfunction{\xi}_s(x))(t)}
+      \function{\vectorfunction{\phi}_s^t}{\RR^n}{\RR^n}{\vectorfunction{x}}{(\vectorfunction{\xi}_s(\vectorfunction{x}))(t)}
     $$
     Then, $\vectorfunction{\phi}_s^t$ is an isomorphism and satisfies:
     \begin{enumerate}
@@ -401,7 +401,7 @@
   \end{prop}
   \subsubsection{Non-homogeneous linear systems}
   \begin{prop}
-    Let $I\subseteq \RR$ be an interval, $\vectorfunction{A}\in\mathcal{C}(I,\mathcal{L}(\RR^n))$ and $\vectorfunction{b}\in\mathcal{C}(I,\RR^n)$. Suppose $\vectorfunction{\varphi}(t,t_0,x_0)$ is the flux of the ode \eqref{DE_linear}. Then, $$\vectorfunction{\varphi}(t,t_0,x_0)=\Phi(t)\left[{\Phi(t_0)}^{-1}x_0+\int_{t_0}^t{\Phi(s)}^{-1}\vectorfunction{b}(s)\dd s\right]$$ where $\Phi(t)$ is a fundamental matrix of the associated homogeneous system.
+    Let $I\subseteq \RR$ be an interval, $\vectorfunction{A}\in\mathcal{C}(I,\mathcal{L}(\RR^n))$ and $\vectorfunction{b}\in\mathcal{C}(I,\RR^n)$. Suppose $\vectorfunction{\varphi}(t,t_0,\vectorfunction{x}_0)$ is the flux of the ode \eqref{DE_linear}. Then, $$\vectorfunction{\varphi}(t,t_0,\vectorfunction{x}_0)=\Phi(t)\left[{\Phi(t_0)}^{-1}\vectorfunction{x}_0+\int_{t_0}^t{\Phi(s)}^{-1}\vectorfunction{b}(s)\dd s\right]$$ where $\Phi(t)$ is a fundamental matrix of the associated homogeneous system.
   \end{prop}
   \begin{corollary}
     Let $I\subseteq \RR$ be an interval, $\vectorfunction{A}\in\mathcal{C}(I,\mathcal{L}(\RR^n))$ and $\vectorfunction{b}\in\mathcal{C}(I,\RR^n)$. Then, the general solution $\vectorfunction{\varphi}(t)$ of the ode \eqref{DE_homo} can be written as: $$\vectorfunction{\varphi}(t)=\vectorfunction{\varphi}_\mathrm{h}(t)+\vectorfunction{\varphi}_\mathrm{p}(t)$$ where $\vectorfunction{\varphi}_\mathrm{h}(t)$ is the general solution to the associated homogeneous system and $\vectorfunction{\varphi}_\mathrm{p}(t)$ is a particular solution of \eqref{DE_homo}.
@@ -510,34 +510,34 @@
     \begin{equation}\label{DE_ivp_lambda}
       \left\{
       \begin{aligned}
-         & \vectorfunction{x}'      =\vectorfunction{f}(t,\vectorfunction{x},\lambda) \\
-         & \vectorfunction{x}(t_0)  =x_0
+         & \vectorfunction{x}'      =\vectorfunction{f}(t,\vectorfunction{x},\vectorfunction{\lambda}) \\
+         & \vectorfunction{x}(t_0)  =\vectorfunction{x}_0
       \end{aligned}
       \right.
     \end{equation}
-    has a unique maximal solution $\vectorfunction{\varphi}_{(t_0,x_0,\lambda)}(t)$ defined on an interval $I_{(t_0,x_0,\lambda)}$. We define the \textit{flux} of the ode $\vectorfunction{x}'=\vectorfunction{f}(t,\vectorfunction{x},\lambda)$ as: $$\function{\vectorfunction{\varphi}}{I_{(t_0,x_0,\lambda)}\times\RR\times\RR^n\times\RR^p}{\RR}{(t,t_0,x_0,\lambda)}{\vectorfunction{\varphi}_{(t_0,x_0,\lambda)}(t)}$$
+    has a unique maximal solution $\vectorfunction{\varphi}_{(t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})}(t)$ defined on an interval $I_{(t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})}$. We define the \textit{flux} of the ode $\vectorfunction{x}'=\vectorfunction{f}(t,\vectorfunction{x},\vectorfunction{\lambda})$ as: $$\function{\vectorfunction{\varphi}}{I_{(t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})}\times\RR\times\RR^n\times\RR^p}{\RR}{(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})}{\vectorfunction{\varphi}_{(t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})}(t)}$$
   \end{definition}
   \subsubsection{Continuous and Lipschitz continuous dependence}
   \begin{lemma}
-    Let $X$ be a compact metric space and $(\vectorfunction{\varphi}_m)$ be a sequence of functions $\varphi_m:X\rightarrow\RR^n$ such that it is equicontinuous and pointwise bounded. Suppose that all convergent partial subsequences of $(\vectorfunction{\varphi}_m)$ have the same limit $\vectorfunction{\varphi}$. Then, $(\vectorfunction{\varphi}_m)$ converges uniformly to $\vectorfunction{\varphi}$.
+    Let $X$ be a compact metric space and $(\vectorfunction{\varphi}_m)$ be a sequence of functions $\vectorfunction{\varphi}_m:X\rightarrow\RR^n$ such that it is equicontinuous and pointwise bounded. Suppose that all convergent partial subsequences of $(\vectorfunction{\varphi}_m)$ have the same limit $\vectorfunction{\varphi}$. Then, $(\vectorfunction{\varphi}_m)$ converges uniformly to $\vectorfunction{\varphi}$.
   \end{lemma}
   \begin{prop}
-    Let $U\subseteq\RR\times\RR^n$ be an open set and $\vectorfunction{f}_m:U\rightarrow\RR^n$ be continuous function for $m\in\NN$ and such that for all compact $K\subset U$, the sequence $(\vectorfunction{f}_m|_K)$ converge uniformly to a function $\vectorfunction{f}$. Let $((t_m,x_m))\subset U$ be a sequence such that $\displaystyle\lim_{m\to\infty}(t_m,x_m)=(t_0,x_0)$. Suppose that for all $m\geq 0$ the ivp
+    Let $U\subseteq\RR\times\RR^n$ be an open set and $\vectorfunction{f}_m:U\rightarrow\RR^n$ be continuous function for $m\in\NN$ and such that for all compact $K\subset U$, the sequence $(\vectorfunction{f}_m|_K)$ converge uniformly to a function $\vectorfunction{f}$. Let $((t_m,\vectorfunction{x}_m))\subset U$ be a sequence such that $\displaystyle\lim_{m\to\infty}(t_m,\vectorfunction{x}_m)=(t_0,\vectorfunction{x}_0)$. Suppose that for all $m\geq 0$ the ivp
     \begin{equation*}
       \left\{
       \begin{aligned}
          & \vectorfunction{x}'      =\vectorfunction{f}_m(t,\vectorfunction{x}) \\
-         & \vectorfunction{x}(t_m)  =x_m
+         & \vectorfunction{x}(t_m)  =\vectorfunction{x}_m
       \end{aligned}
       \right.
     \end{equation*}
     has a unique maximal solution $\vectorfunction{\varphi}_m$ defined on $I_m$. Then, for all $[a,b]\subset I_0$ with $t_0\in(a,b)$, $\exists m_0\in\NN$ such that $[a,b]\subset I_m$ $\forall m>m_0$. Furthermore, the sequence $\left(\vectorfunction{\varphi}_m|_{[a,b]}\right)_{m>m_0}$ converges uniformly to $\vectorfunction{\varphi}|_{[a,b]}$.
   \end{prop}
   \begin{theorem}
-    Let $U\subseteq\RR\times\RR^n$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function. Suppose that each ivp of the form of \eqref{DE_ivp} has a unique maximal solution. Then, the flux $\vectorfunction{\varphi}(t,t_0,x_0)$ is a continuous function defined in an open set.
+    Let $U\subseteq\RR\times\RR^n$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function. Suppose that each ivp of the form of \eqref{DE_ivp} has a unique maximal solution. Then, the flux $\vectorfunction{\varphi}(t,t_0,\vectorfunction{x}_0)$ is a continuous function defined in an open set.
   \end{theorem}
   \begin{theorem}
-    Let $U\subseteq\RR\times\RR^n\times\RR^p$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function. Suppose that each ivp of the form of \eqref{DE_ivp_lambda} has a unique maximal solution. Then, the flux $\vectorfunction{\varphi}(t,t_0,x_0,\lambda)$ is a continuous function defined in an open set $V\subseteq I_{(t_0,x_0,\lambda)}\times\RR\times\RR^n\times\RR^p$.
+    Let $U\subseteq\RR\times\RR^n\times\RR^p$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function. Suppose that each ivp of the form of \eqref{DE_ivp_lambda} has a unique maximal solution. Then, the flux $\vectorfunction{\varphi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})$ is a continuous function defined in an open set $V\subseteq I_{(t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})}\times\RR\times\RR^n\times\RR^p$.
   \end{theorem}
   \begin{lemma}[Grönwall's lemma]
     Let $u,v,w:[a,b)\rightarrow\RR$ be continuous functions such that $v(t)\geq 0$ $\forall t\in[a,b)$ and satisfying: $$u(t)\leq w(t)+\int_a^tv(s)u(s)\dd s\quad\forall t\in[a,b)$$
@@ -545,46 +545,58 @@
     If, moreover, $w\in\mathcal{C}^1((a,b))$, then: $$u(t)\leq w(a)\exp{\int_a^tv(r)\dd r}+\int_a^tw'(s)\exp{\int_s^tv(r)\dd r}\dd s\quad\forall t\in[a,b)$$
   \end{lemma}
   \begin{prop}
-    Let $U\subseteq\RR\times\RR^n$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function and Lipschitz continuous with respect to the second variable. Let $L$ be the Lipschitz constant. Then, $\forall (t_0,x_1),(t_0,x_2)\in U$ and $\forall t\in I_{(t_0,x_0)}$, we have:
-    $$\|\vectorfunction{\varphi}(t,t_0,x_2)-\vectorfunction{\varphi}(t,t_0,x_1)\|\leq\exp{L|t-t_0|}\|x_2-x_1\|$$
+    Let $U\subseteq\RR\times\RR^n$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function and Lipschitz continuous with respect to the second variable with Lipschitz constant $L$. Let $\vectorfunction{\varphi}$ be the flux of the ode $\vectorfunction{x}'=\vectorfunction{f}(t,\vectorfunction{x})$. Then, $\forall (t_0,\vectorfunction{x}_1),(t_0,\vectorfunction{x}_2)\in U$ and $\forall t\in I_{(t_0,\vectorfunction{x}_1)}\cap I_{(t_0,\vectorfunction{x}_2)}$, we have:
+    $$\|\vectorfunction{\varphi}(t,t_0,\vectorfunction{x}_2)-\vectorfunction{\varphi}(t,t_0,\vectorfunction{x}_1)\|\leq\exp{L|t-t_0|}\|\vectorfunction{x}_2-\vectorfunction{x}_1\|$$
+    Thus, $\vectorfunction{\varphi}$ is locally Lipschitz continuous with respect to the third variable.
   \end{prop}
   \subsubsection{Differenciable dependence}
-  \begin{theorem}
-    Let $U\subseteq\RR\times\RR^n\times\RR^p$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function and of class $\mathcal{C}^1$ with respect to the second variable. Suppose that the flux $\vectorfunction{\varphi}(t,t_0,x_0,\lambda)$ of $\vectorfunction{x}'=\vectorfunction{f}(t,\vectorfunction{x},\lambda)$ is defined on an open set $V\subseteq\RR\times\RR\times\RR^n\times\RR^p$. Then, $\forall (t,t_0,x,\lambda)\in V$, $\vectorfunction{\varphi}$ is differentiable with respect to $x_0$ and $\vectorfunction{D}_3\vectorfunction{\varphi}(t,t_0,x_0,\lambda)$\footnote{Here, $\vectorfunction{D}_3\vectorfunction{\varphi}(t,t_0,x_0,\lambda)=\frac{\partial\vectorfunction{\varphi}}{\partial x_0}(t,t_0,x_0,\lambda)$ denotes de matrix $\left(\frac{\partial\vectorfunction{\varphi}_i}{\partial{(x_0)}_j}(t,t_0,x_0,\lambda)\right)\in\mathcal{M}_n(\RR)$, where ${(x_0)}_j$ denotes the $j$-th component of $x_0$ and $\vectorfunction{\varphi}_i(t,t_0,x_0,\lambda)$ denotes the $i$-th component of $\vectorfunction{\varphi}(t,t_0,x_0,\lambda)$.} is continuous on $V$. Furthermore, $\vectorfunction{D}_3\vectorfunction{\varphi}(t,t_0,x_0,\lambda)$ satisfies the following ivp:
+  \begin{theorem}[Dependence on $\vectorfunction{x}_0$]
+    Let $U\subseteq\RR\times\RR^n\times\RR^p$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function and of class $\mathcal{C}^1$ with respect to the second variable. Suppose that the flux $\vectorfunction{\varphi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})$ of $\vectorfunction{x}'=\vectorfunction{f}(t,\vectorfunction{x},\vectorfunction{\lambda})$ is defined on an open set $V\subseteq\RR\times\RR\times\RR^n\times\RR^p$. Then, $\forall (t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})\in V$, $\vectorfunction{\varphi}$ is differentiable with respect to $\vectorfunction{x}_0$ and $\vectorfunction{D}_3\vectorfunction{\varphi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})$\footnote{Here, $\vectorfunction{D}_3\vectorfunction{\varphi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})=\frac{\partial\vectorfunction{\varphi}}{\partial \vectorfunction{x}_0}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})$ denotes the matrix $\left(\frac{\partial\vectorfunction{\varphi}_i}{\partial{\vectorfunction{x}_0}_j}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})\right)\in\mathcal{M}_n(\RR)$, where ${\vectorfunction{x}_0}_j$ denotes the $j$-th component of $\vectorfunction{x}_0$ and $\vectorfunction{\varphi}_i(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})$ denotes the $i$-th component of $\vectorfunction{\varphi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})$.} is continuous on $V$. Furthermore, $\vectorfunction{D}_3\vectorfunction{\varphi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})$ satisfies the following ivp:
     \begin{equation*}
       \left\{
       \begin{aligned}
-         & \vectorfunction{M}'      =\vectorfunction{D}_2\vectorfunction{f}(t,\vectorfunction{\varphi}(t,t_0,x_0,\lambda),\lambda)\vectorfunction{M} \\
+         & \vectorfunction{M}'      =\vectorfunction{D}_2\vectorfunction{f}(t,\vectorfunction{\varphi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda}),\vectorfunction{\lambda})\vectorfunction{M} \\
          & \vectorfunction{M}(t_0)  =\vectorfunction{I}_n
       \end{aligned}
       \right.
     \end{equation*}
-    or, equivalently, $\frac{\partial\vectorfunction{\varphi}}{\partial \lambda_i}(t,t_0,x_0,\lambda)=\vectorfunction{D}_3\vectorfunction{\varphi}(t,t_0,x_0,\lambda)\vectorfunction{e}_i$ satisfies the following ivp:
+    or, equivalently, $\frac{\partial\vectorfunction{\varphi}}{\partial {\vectorfunction{x}_0}_i}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})=\vectorfunction{D}_3\vectorfunction{\varphi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})\vectorfunction{e}_i$ satisfies the following ivp:
     $$
       \left\{
       \begin{aligned}
-         & \vectorfunction{y}'      =\vectorfunction{D}_2\vectorfunction{f}(t,\vectorfunction{\varphi}(t,t_0,x_0,\lambda),\lambda)\vectorfunction{y} \\
+         & \vectorfunction{y}'      =\vectorfunction{D}_2\vectorfunction{f}(t,\vectorfunction{\varphi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda}),\vectorfunction{\lambda})\vectorfunction{y} \\
          & \vectorfunction{y}(t_0)  =\vectorfunction{e}_i
       \end{aligned}
       \right.\quad\text{for }i=1,\ldots,n
     $$
-    These equations are called \textit{variational equations}.
+    These kind of equations are called \textit{variational equations}.
   \end{theorem}
-  \begin{theorem}
-    Let $U\subseteq\RR\times\RR^n\times\RR^p$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function and of class $\mathcal{C}^1$ with respect to the second and third variable. Suppose that the flux $\vectorfunction{\varphi}(t,t_0,x_0,\lambda)$ of $\vectorfunction{X}'=\vectorfunction{f}(t,\vectorfunction{x},\lambda)$ is defined on an open set $V\subseteq\RR\times\RR\times\RR^n\times\RR^p$. Then, $\forall (t,t_0,x,\lambda)\in V$, $\vectorfunction{\varphi}$ is differentiable with respect to $\lambda$ and $\vectorfunction{D}_4\vectorfunction{\varphi}(t,t_0,x_0,\lambda)$ is continuous on $V$. Furthermore, $\vectorfunction{D}_4\vectorfunction{\varphi}(t,t_0,x_0,\lambda)$ satisfies the following ivp:
+  \begin{theorem}[Dependence on $t_0$]
+    Let $U\subseteq\RR\times\RR^n\times\RR^p$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function and of class $\mathcal{C}^1$ with respect to the second variable. Suppose that the flux $\vectorfunction{\varphi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})$ of $\vectorfunction{x}'=\vectorfunction{f}(t,\vectorfunction{x},\vectorfunction{\lambda})$ is defined on an open set $V\subseteq\RR\times\RR\times\RR^n\times\RR^p$. Then, $\forall (t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})\in V$, $\vectorfunction{\varphi}$ is differentiable with respect to $t_0$ and $\vectorfunction{D}_2\vectorfunction{\varphi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})$ is continuous on $V$. Furthermore, $\vectorfunction{D}_2\vectorfunction{\varphi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})$ satisfies the following ivp:
     \begin{equation*}
       \left\{
       \begin{aligned}
-         & \vectorfunction{M}'      =\vectorfunction{D}_2\vectorfunction{f}(t,\vectorfunction{\varphi}(t,t_0,x_0,\lambda),\lambda)\vectorfunction{M}+ \vectorfunction{B} \\
+         & \vectorfunction{y}'      =\vectorfunction{D}_2\vectorfunction{f}(t,\vectorfunction{\varphi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda}),\vectorfunction{\lambda})\vectorfunction{y} \\
+         & \vectorfunction{y}(t_0)  = -\vectorfunction{f}(t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})
+      \end{aligned}
+      \right.
+    \end{equation*}
+  \end{theorem}
+  \begin{theorem}[Dependence on $\vectorfunction{\lambda}$]
+    Let $U\subseteq\RR\times\RR^n\times\RR^p$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function and of class $\mathcal{C}^1$ with respect to the second and third variable. Suppose that the flux $\vectorfunction{\varphi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})$ of $\vectorfunction{x}'=\vectorfunction{f}(t,\vectorfunction{x},\vectorfunction{\lambda})$ is defined on an open set $V\subseteq\RR\times\RR\times\RR^n\times\RR^p$. Then, $\forall (t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})\in V$, $\vectorfunction{\varphi}$ is differentiable with respect to $\vectorfunction{\lambda}$ and $\vectorfunction{D}_4\vectorfunction{\varphi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})$ is continuous on $V$. Furthermore, $\vectorfunction{D}_4\vectorfunction{\varphi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})$ satisfies the following ivp:
+    \begin{equation*}
+      \left\{
+      \begin{aligned}
+         & \vectorfunction{M}'      =\vectorfunction{D}_2\vectorfunction{f}(t,\vectorfunction{\varphi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda}),\vectorfunction{\lambda})\vectorfunction{M}+ \vectorfunction{B} \\
          & \vectorfunction{M}(t_0)  =\vectorfunction{0}
       \end{aligned}
       \right.
     \end{equation*}
-    where $\vectorfunction{B}=\vectorfunction{D}_3\vectorfunction{f}(t,\vectorfunction{\varphi}(t,t_0,x_0,\lambda),\lambda)$. Equivalently, $\frac{\partial\vectorfunction{\varphi}}{\partial \lambda_i}(t,t_0,x_0,\lambda)$ satisfies the ivp:
+    where $\vectorfunction{B}=\vectorfunction{D}_3\vectorfunction{f}(t,\vectorfunction{\varphi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda}),\vectorfunction{\lambda})$. Equivalently, $\frac{\partial\vectorfunction{\varphi}}{\partial \vectorfunction{\lambda}_i}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})$ satisfies the ivp:
     $$
       \left\{
       \begin{aligned}
-         & \vectorfunction{y}'      =\vectorfunction{D}_2\vectorfunction{f}(t,\vectorfunction{\varphi}(t,t_0,x_0,\lambda),\lambda)\vectorfunction{y}+\vectorfunction{B}\vectorfunction{e}_i \\
+         & \vectorfunction{y}'      =\vectorfunction{D}_2\vectorfunction{f}(t,\vectorfunction{\varphi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda}),\vectorfunction{\lambda})\vectorfunction{y}+\vectorfunction{B}\vectorfunction{e}_i \\
          & \vectorfunction{y}(t_0)  =\vectorfunction{0}
       \end{aligned}
       \right.\quad\text{for }i=1,\ldots,n
@@ -592,7 +604,7 @@
   \end{theorem}
   \subsubsection{Higher order dependence}
   \begin{theorem}
-    Let $U\subseteq\RR\times\RR^n$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function and of class $\mathcal{C}^k$, $k\in\NN$, with respect to the second variable. Suppose that the flux $\vectorfunction{\varphi}(t,t_0,x_0)$ of $\vectorfunction{x}'=\vectorfunction{f}(t,\vectorfunction{x})$ is defined on an open set $V\subseteq\RR\times\RR\times\RR^n$. Then, $\vectorfunction{\varphi}(t,t_0,x_0)$ is of class $\mathcal{C}^k$ on $V$.
+    Let $U\subseteq\RR\times\RR^n$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function and of class $\mathcal{C}^k$, $k\in\NN$, with respect to the second variable. Suppose that the flux $\vectorfunction{\varphi}(t,t_0,\vectorfunction{x}_0)$ of $\vectorfunction{x}'=\vectorfunction{f}(t,\vectorfunction{x})$ is defined on an open set $V\subseteq\RR\times\RR\times\RR^n$. Then, $\vectorfunction{\varphi}(t,t_0,\vectorfunction{x}_0)$ is of class $\mathcal{C}^k$ on $V$.
   \end{theorem}
 \end{multicols}
 \end{document}
