@@ -31,7 +31,7 @@
     Let $R$ be a ring and $f:\ZZ\rightarrow R$ be the ring morphism from $\ZZ$ to $R$. The \textit{characteristic of $R$}, $\ch (R)$, is defined to be the value of $n$ such that $\ker f=\quot{\ZZ}{n\ZZ}$.
   \end{definition}
   \begin{prop}
-    Let $K$ be a field. Then, either $\ch(K)$ is prime or $\ch(K)=0$.
+    Let $K$ be a field. Then, either $\ch K$ is prime or $\ch K=0$.
   \end{prop}
   \begin{definition}
     Let $R$ be a ring. We define the  \textit{polynomial ring $R[x]$} as: $$R[x]:=\{r_0+r_1\cdot x+\cdots+r_n\cdot x^n:r_i\in R\ \forall i\text{ and }n\geq 0\}$$ Moreover, we can iterate this definition to define the polynomial ring in $m$-unknowns: $$R[x_1,\ldots,x_m]=\left(R[x_1,\ldots,x_{m-1}]\right)[x_m]$$
@@ -441,6 +441,10 @@
   \begin{lemma}
     Let $F/L/K$ be a tower of fields such that $\quot{L}{K}$ is Galois. Then, $\quot{F}{L}$ is Galois.
   \end{lemma}
+  \begin{prop}
+    Let $\quot{L}{K}$ be a Galois extension. Then, $\alpha\in L$ is primitive if and only if $\forall \sigma\in\Gal(\quot{L}{K})\setminus\{\id\}$, $\sigma(\alpha)\ne\alpha$.
+  \end{prop}
+  \subsection{Fundamental theorem of Galois theory}
   \begin{definition}
     Let $\quot{L}{K}$ be a finite field extension and $(G,\cdot)$ be a group. We define the following sets:
     \begin{gather*}
@@ -476,10 +480,10 @@
     \end{enumerate}
   \end{prop}
   \begin{lemma}[Artin's lemma]
-    Let $\quot{L}{K}$ be a finite field extension and $H$ be a subgroup of $\Gal(\quot{L}{K})$. Then, $H=\Gal(\quot{L}{L^H})$ and $|H|=[L:L^H]$. That is, $\mathcal{G}\circ\mathcal{F}=\id$.
+    Let $\quot{L}{K}$ be a finite field extension and $H$ be a subgroup of $\Gal(\quot{L}{K})$. Then, $H=\Gal(\quot{L}{L^H})$ and $|H|=[L:L^H]$.
   \end{lemma}
   \begin{corollary}
-    Let $\quot{L}{K}$ be a finite field extension. Then, $\mathcal{F}$ is injective and $\mathcal{G}$ is surjective.
+    Let $\quot{L}{K}$ be a finite field extension. Then, $\mathcal{G}\circ\mathcal{F}=\id$. Thus, $\mathcal{F}$ is injective and $\mathcal{G}$ is surjective.
   \end{corollary}
   \begin{theorem}[Fundamental theorem of Galois theory]
     Let $\quot{L}{K}$ be a finite and Galois field extension. Then, $\mathcal{F}\circ\mathcal{G}=\id$. Thus, $\mathcal{F}$ and $\mathcal{G}$ are bijective and they are inverses of each other. Furthermore, if $F\in\mathcal{K}(\quot{L}{K})$, then: $$\textstyle\quot{F}{K}\text{ is normal}\iff\Gal(\quot{L}{F})\unlhd\Gal(\quot{L}{K})$$ and in that case: $$\quot{\Gal(L/K)}{\Gal(L/F)}\cong\Gal(F/K)$$
@@ -488,42 +492,101 @@
     Let $\quot{L}{K}$ be a finite and Galois field extension and $H$ be a subgroup of $\Gal(\quot{L}{K})$. Then: $$[L^H:K]=\frac{|\Gal(\quot{L}{K})|}{|H|}$$
   \end{corollary}
   \begin{definition}
-    Let $K$ be a field, $p(x)\in K[X]$ and $L$ be the splitting field of $p(x)$ over $K$. We denote $\Gal(\quot{p(x)}{K}):=\Gal(\quot{L}{K})$.
+    Let $G$ be a group. The \textit{lattice of subgroups} of $G$ is the following graph:
+    \begin{itemize}
+      \item The vertices of the graph are the subgroups of $G$.
+      \item Two vertices (corresponding to two subgroups $H_i$, $H_j$ of $G$) are connected by an edge if $H_i\leq H_j$, with $i\ne j$, and such that there is no $k\ne i,j$ such that $H_i\leq H_k\leq H_j$.
+    \end{itemize}
+  \end{definition}
+  \begin{center}
+    \begin{minipage}{\linewidth}
+      \centering
+      \includestandalone[mode=image|tex,width=0.65\linewidth]{Images/lattice}
+      \captionof{figure}{Lattice of subgroups of the group $\quot{\ZZ}{4\ZZ}\times\quot{\ZZ}{2\ZZ}$}
+    \end{minipage}
+  \end{center}
+  \begin{definition}
+    Let $K$ be a field, $p(x)\in K[x]$ and $L$ be the splitting field of $p(x)$ over $K$. We denote $\Gal(\quot{p(x)}{K}):=\Gal(\quot{L}{K})$.
   \end{definition}
   \begin{definition}
-    A subgroup $H$ of $S_n$ is called \textit{transitive} if $\forall i,j\in\{1,\ldots,n\}$, $\exists h\in H$ such that $h(i)=j$.
+    A subgroup $H$ of $S_n$ is called \textit{transitive} if $\forall i,j\in\{1,\ldots,n\}$, $\exists \sigma\in H$ such that $\sigma(i)=j$.
   \end{definition}
   \begin{lemma}
-    Let $K$ be a field and $p(x)\in K[X]$ be an irreducible and separable polynomial of degree $n$. Then, there exists a monomorphism $\iota: \Gal(\quot{p(x)}{K})\rightarrow S_n$. Furthermore, $\im(\iota)$ is a transitive subgroup of $S_n$.
+    Let $K$ be a field, $p(x)\in K[x]$ be an irreducible and separable polynomial of degree $n$ and $L$ be its splitting field. Let $\alpha_1,\ldots,\alpha_n\in L$ be the roots of $p(x)$. Then, there exists a unique monomorphism $\iota: \Gal(\quot{p(x)}{K})\hookrightarrow S_n$ such that $\sigma(\alpha_i)=\alpha_{\iota(\sigma)(i)}$.
+  \end{lemma}
+  \begin{lemma}
+    Let $K$ be a field, $p(x)\in K[x]$ be an irreducible and separable polynomial of degree $n$ and $\iota: \Gal(\quot{p(x)}{K})\hookrightarrow S_n$ be the monomorphism obtained by fixing an order of the roots of $p(x)$ (in its splitting field). Then, $\im(\iota)$ is a transitive subgroup of $S_n$.
   \end{lemma}
   \begin{definition}
-    Let $K$ be a field, $p(x)\in K[X]$ and $\alpha_1,\ldots,\alpha_n$ be the roots of $p(x)$ in its splitting field. We define $\delta(p(x))$ as: $$\delta(p(x))=\prod_{1\leq i<j\leq n}(\alpha_j-\alpha_i)$$
-  \end{definition}
-  \begin{definition}
-    Let $K$ be a field, $p(x)\in K[X]$ and $\alpha_1,\ldots,\alpha_n$ be the roots of $p(x)$ in its splitting field. We define the \textit{discriminant} of $p(x)$, $\Delta(p(x))$, as: $$\Delta(p(x))=\prod_{1\leq i<j\leq n}(\alpha_j-\alpha_i)^2$$
+    Let $K$ be a field, $p(x)\in K[x]$ and $\alpha_1,\ldots,\alpha_n$ be the roots of $p(x)$ in its splitting field. We define $\delta(p)$ as: $$\delta(p):=\prod_{1\leq i<j\leq n}(\alpha_j-\alpha_i)$$
+    We define the \textit{discriminant} of $p(x)$, $\Disc(p)$, as: $$\Disc(p):=\prod_{1\leq i<j\leq n}{(\alpha_j-\alpha_i)}^2={\delta(p)}^2$$
   \end{definition}
   \begin{prop}
-    Let $K$ be a field, $p(x)\in K[X]$ and $\alpha_1,\ldots,\alpha_n$ be the roots of $p(x)$ in its splitting field. Then, $\Delta (p(x))$ is a symmetric polynomial in the variables $\alpha_1,\ldots,\alpha_n$.
+    Let $K$ be a field, $p(x)\in K[x]$ and $\alpha_1,\ldots,\alpha_n$ be the roots of $p(x)$ in its splitting field. Then, $\Disc (p)\in {K[\alpha_1,\ldots,\alpha_n]}^{S_n}$.
   \end{prop}
-  % falta arreglar el tema del discriminant, que no acaba de quedar gaire clar què és. En particular, falta acabar l'última proposició (falta posar la fórmula on surt el signe).
+  \begin{lemma}
+    Let $K$ be a field, $p(x)\in K[x]$ be an irreducible and separable polynomial of degree $n$, $L$ be its splitting field and $\alpha_1,\ldots,\alpha_n\in L$ be the roots of $p(x)$. Then, if we think $\Gal(\quot{L}{K})$ as a subgroup of $S_n$ via the inclusion $\iota$ of above, we have that $\forall \sigma\in S_n$, $\sigma(\delta(p))=\sign(\sigma)\delta(p)$.
+  \end{lemma}
+  \begin{corollary}
+    Let $K$ be a field, $p(x)\in K[x]$ be an irreducible and separable polynomial of degree $n$, $L$ be its splitting field and $\alpha_1,\ldots,\alpha_n\in L$ be the roots of $p(x)$. Then, $\Disc(p)\in K$.
+  \end{corollary}
+  \begin{corollary}
+    Let $K$ be a field, $p(x)\in K[x]$ be an irreducible and separable polynomial of degree $n$, $L$ be its splitting field and $\alpha_1,\ldots,\alpha_n\in L$ be the roots of $p(x)$. Then: $$\delta(p)\in K\iff \Gal(L/K)\subseteq A_n$$
+  \end{corollary}
+  \subsection{Galois theory of solvable equations}
+  \begin{definition}
+    We say that a finite field extension $\quot{L}{K}$ is \textit{radical} if there exist $n\in\NN$ and $\alpha\in L$ such that $L=K(\alpha)$ and $\alpha^n\in K$. Moreover, if $\alpha^n=1$ we say the the extension $\quot{L}{K}$ is \textit{cyclotomic}.
+  \end{definition}
+  \begin{definition}
+    We say that a tower of fields $K_n/K_{n-1}/\cdots/K_0$ is a \textit{radical tower} if $\quot{K_i}{K_{i-1}}$ is a radical extension $\forall i=1,\ldots,n$.
+  \end{definition}
+  \begin{definition}
+    We say that a field extension $\quot{L}{K}$ is \textit{solvable by radicals} if there exists a radical tower of fields $K_n/K_{n-1}/\cdots/K_0$ such that $L\subseteq K_n$.
+  \end{definition}
+  \begin{definition}
+    Let $K$ be a field and $p(x)\in K[x]$. We say that $p(x)$ is \textit{solvable by radicals} if the splitting field of $p(x)$ over $K$ is solvable by radicals.
+  \end{definition}
+  \begin{definition}
+    Let $(G,\cdot)$ be a finite group. We say $(G,\cdot)$ is \textit{solvable} if there is a chain of subgroups $(H_i,\cdot)$ of $(G,\cdot)$ satisfying: $$\{e\}=H_0\unlhd H_1\unlhd\cdots\unlhd H_n=G,$$ and such that $(H_i/H_{i-1},*)$ are abelian for $i=1,\ldots,n$.
+  \end{definition}
+  \begin{definition}
+    Let $(G,\cdot)$ be a group. We say that $(G,\cdot)$ is \textit{simple} if its only normal subgroups are the trivial group and the group itself.
+  \end{definition}
+  \begin{prop}
+    Let $(G,\cdot)$ be a solvable group and $(H,\cdot)$ be a subgroup of $(G,\cdot)$. Then, $(H,\cdot)$ is solvable.
+  \end{prop}
+  \begin{prop}
+    Let $(G,\cdot)$ be a finite group and $(H,\cdot)$ be a subgroup of $(G,\cdot)$ such that $H\unlhd G$. Then, $(G,\cdot)$ is solvable if and only if $(H,\cdot)$ and $(\quot{G}{H},*)$ are solvable.
+  \end{prop}
+  \begin{prop}
+    Let $(G,\cdot)$ be a solvable group. Then, there exists a chain of subgroups $$\{e\}=H_0\unlhd H_1\unlhd\cdots\unlhd H_n=G,$$ such that $(H_i/H_{i-1},*)$ are cyclic for $i=1,\ldots,n$.
+  \end{prop}
+  \begin{theorem}
+    $S_n$ and $A_n$ are solvable for all $n\geq 5$.
+  \end{theorem}
+  \begin{theorem}
+    $A_n$ is simple for all $n\in\NN$.
+  \end{theorem}
+  \begin{prop}
+    Let $K$ be a field such that $\ch K=0$, $n\geq 2$ and $L$ be the splitting field of $x^n-1$ over $K$. Then, $L=K(\xi_n)$ where ${\xi_n}^n=1$ and ${\xi_n}^m\ne 1$ for all $m=1,\ldots,n-1$. Moreover, $\Gal(\quot{L}{K})\cong{(\quot{\ZZ}{n\ZZ})}^*$.
+  \end{prop}
+  \begin{prop}
+    Let $K$ be a field such that $\ch K=0$ and $x^n-1$ splits into linear factors in $K$. Let $\quot{K(\alpha)}{K}$ be a radical extension. Then, $\quot{L}{K}$ is Galois and $\Gal(\quot{L}{K})\cong\quot{\ZZ}{d\ZZ}$, where $d\mid n$. Furthermore, $\alpha^d\in K$ and $x^d-\alpha^d$ is irreducible over $K$.
+  \end{prop}
+  \begin{definition}
+    We say that a Galois extension $\quot{L}{K}$ is \textit{abelian} if $\Gal(\quot{L}{K})$ is abelian. In particular, we say that $\quot{L}{K}$ is \textit{cyclic} if $\Gal(\quot{L}{K})$ is cyclic.
+  \end{definition}
+  \begin{theorem}
+    Let $K$ be a field such that $\ch K=0$ and $x^n-1$ splits into linear factors in $K$. Then, $\quot{L}{K}$ is cyclic of degree $n$ if and only if $\quot{L}{K}$ is radical of degree $n$.
+  \end{theorem}
+  \begin{lemma}
+    Let $L$ and $F$ be fields and $f_1,\ldots,f_n:L\rightarrow F$ be distinct field morphisms. Then, if $\lambda_1,\ldots,\lambda_n\in F$ are such that $\lambda_1f_1+\cdots+\lambda_nf_n=0$, then $\lambda_1=\cdots=\lambda_n$. In that case, we say that $f_1,\ldots,f_n$ are \textit{$F$-linearly independent}.
+  \end{lemma}
 
 
-  % Lattice of subgroups
-
-  % \begin{definition}
-  %   Let $G$ be a group. The \textit{lattice of subgroups} of $G$ is the following graph:
-  %   \begin{itemize}
-  %     \item The vertices of the graph are the subgroups of $G$.
-  %     \item Two vertices (corresponding to two subgroups $H_i$, $H_j$ of $G$) are connected by an edge if $H_i\leq H_j$, with $i\ne j$, and such that there is no $k\ne i,j$ such that $H_i\leq H_k\leq H_j$.
-  %   \end{itemize}
-  % \end{definition}
-  % \begin{center}
-  %   \begin{minipage}{\linewidth}
-  %     \centering
-  %     \includestandalone[mode=image|tex,width=0.65\linewidth]{Images/lattice}
-  %     \captionof{figure}{Lattice of subgroups of the group $\quot{\ZZ}{4\ZZ}\times\quot{\ZZ}{2\ZZ}$}
-  %   \end{minipage}
-  % \end{center}
+  \begin{theorem}
+    Let $K$ be a field such that $\ch K=0$, and $p(x)\in K[x]$. Then, $p(x)$ is solvable by radicals if and only if $\Gal(\quot{p(x)}{K})$ is solvable.
+  \end{theorem}
 \end{multicols}
 
 \end{document}

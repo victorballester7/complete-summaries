@@ -332,9 +332,9 @@
   \begin{definition}
     Let $I\subseteq\RR$ be an interval, $t_0\in I$, $\vectorfunction{x}_0\in\RR^n$ and consider the ode \eqref{DE_linear}. We define the \textit{flux of the linear ode} as the function:
     $$
-      \function{\vectorfunction{\varphi}}{I\times I\times \RR^n}{\RR^n}{(t,t_0,\vectorfunction{x}_0)}{\vectorfunction{\varphi}(t,t_0,\vectorfunction{x}_0)}
+      \function{\vectorfunction{\phi}}{I\times I\times \RR^n}{\RR^n}{(t,t_0,\vectorfunction{x}_0)}{\vectorfunction{\varphi}_{(t_0,\vectorfunction{x}_0)}(t)}
     $$
-    where $\vectorfunction{\varphi}(t,t_0,\vectorfunction{x}_0)$ is a solution of \eqref{DE_linear} with initial conditions $\vectorfunction{\varphi}(t_0,t_0,\vectorfunction{x}_0)$.
+    where $\vectorfunction{\varphi}_{(t_0,\vectorfunction{x}_0)}$ is the solution of \eqref{DE_linear} with initial conditions $(t_0,\vectorfunction{x}_0)$.
   \end{definition}
   \begin{prop}
     Let $I\subseteq\RR$ be an interval and $a,b\in\mathcal{C}(I,\RR)$. Then, the general solution of the ivp
@@ -401,7 +401,7 @@
   \end{prop}
   \subsubsection{Non-homogeneous linear systems}
   \begin{prop}
-    Let $I\subseteq \RR$ be an interval, $\vectorfunction{A}\in\mathcal{C}(I,\mathcal{L}(\RR^n))$ and $\vectorfunction{b}\in\mathcal{C}(I,\RR^n)$. Suppose $\vectorfunction{\varphi}(t,t_0,\vectorfunction{x}_0)$ is the flux of the ode \eqref{DE_linear}. Then, $$\vectorfunction{\varphi}(t,t_0,\vectorfunction{x}_0)=\Phi(t)\left[{\Phi(t_0)}^{-1}\vectorfunction{x}_0+\int_{t_0}^t{\Phi(s)}^{-1}\vectorfunction{b}(s)\dd s\right]$$ where $\Phi(t)$ is a fundamental matrix of the associated homogeneous system.
+    Let $I\subseteq \RR$ be an interval, $\vectorfunction{A}\in\mathcal{C}(I,\mathcal{L}(\RR^n))$ and $\vectorfunction{b}\in\mathcal{C}(I,\RR^n)$. Suppose $\vectorfunction{\phi}(t,t_0,\vectorfunction{x}_0)$ is the flux of the ode \eqref{DE_linear}. Then, $$\vectorfunction{\phi}(t,t_0,\vectorfunction{x}_0)=\Phi(t)\left[{\Phi(t_0)}^{-1}\vectorfunction{x}_0+\int_{t_0}^t{\Phi(s)}^{-1}\vectorfunction{b}(s)\dd s\right]$$ where $\Phi(t)$ is a fundamental matrix of the associated homogeneous system.
   \end{prop}
   \begin{corollary}
     Let $I\subseteq \RR$ be an interval, $\vectorfunction{A}\in\mathcal{C}(I,\mathcal{L}(\RR^n))$ and $\vectorfunction{b}\in\mathcal{C}(I,\RR^n)$. Then, the general solution $\vectorfunction{\varphi}(t)$ of the ode \eqref{DE_homo} can be written as: $$\vectorfunction{\varphi}(t)=\vectorfunction{\varphi}_\mathrm{h}(t)+\vectorfunction{\varphi}_\mathrm{p}(t)$$ where $\vectorfunction{\varphi}_\mathrm{h}(t)$ is the general solution to the associated homogeneous system and $\vectorfunction{\varphi}_\mathrm{p}(t)$ is a particular solution of \eqref{DE_homo}.
@@ -475,7 +475,11 @@
   \end{prop}
   \begin{definition}
     Let $\vectorfunction{A}\in\mathcal{M}_n(\RR)$. A vector $\vectorfunction{w}\in\RR^n$ is a \textit{generalized eigenvector of rank $m$ of $\vectorfunction{A}$ corresponding to the eigenvalue $\lambda\in\RR$} if: $${(\vectorfunction{A}-\lambda\vectorfunction{I}_n)}^m\vectorfunction{w}=0\quad\text{but}\quad{(\vectorfunction{A}-\lambda\vectorfunction{I}_n)}^{m-1}\vectorfunction{w}\ne 0$$
+    The set spanned by all generalized eigenvectors of $\lambda$ is called \textit{generalized eigenspace} of $\lambda$.
   \end{definition}
+  \begin{prop}
+    Let $\vectorfunction{A}\in\mathcal{M}_n(\RR)$ and $\lambda\in\sigma(A)$. Then, the dimension of the generalized eigenspace is the algebraic multiplicity of $\lambda$.
+  \end{prop}
   \begin{lemma}
     Let $\vectorfunction{A}\in\mathcal{M}_n(\RR)$ and $\vectorfunction{v}_1\in\RR^n$ be an eigenvector of $\vectorfunction{A}$ with associated eigenvalue $\lambda$. We define $\vectorfunction{v}_2,\ldots,\vectorfunction{v}_m\in\RR^n$ in the following way: $$(\vectorfunction{A}-\lambda\vectorfunction{I}_n)\vectorfunction{v}_k=\vectorfunction{v}_{k-1}\qquad k=2,\ldots, m$$
     That is, $\vectorfunction{v}_k$ is a generalized eigenvector of rank $k$ of $\vectorfunction{A}$ with associated eigenvalue $\lambda$. Then,
@@ -515,7 +519,7 @@
       \end{aligned}
       \right.
     \end{equation}
-    has a unique maximal solution $\vectorfunction{\varphi}_{(t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})}(t)$ defined on an interval $I_{(t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})}$. We define the \textit{flux} of the ode $\vectorfunction{x}'=\vectorfunction{f}(t,\vectorfunction{x},\vectorfunction{\lambda})$ as: $$\function{\vectorfunction{\varphi}}{I_{(t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})}\times\RR\times\RR^n\times\RR^p}{\RR}{(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})}{\vectorfunction{\varphi}_{(t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})}(t)}$$
+    has a unique maximal solution $\vectorfunction{\varphi}_{(t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})}(t)$ defined on an interval $I_{(t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})}$. We define the \textit{flux} of the ode $\vectorfunction{x}'=\vectorfunction{f}(t,\vectorfunction{x},\vectorfunction{\lambda})$ as: $$\function{\vectorfunction{\phi}}{I_{(t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})}\times\RR\times\RR^n\times\RR^p}{\RR^n}{(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})}{\vectorfunction{\varphi}_{(t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})}(t)}$$
   \end{definition}
   \subsubsection{Continuous and Lipschitz continuous dependence}
   \begin{lemma}
@@ -534,10 +538,10 @@
     has a unique maximal solution $\vectorfunction{\varphi}_m$ defined on $I_m$. Then, for all $[a,b]\subset I_0$ with $t_0\in(a,b)$, $\exists m_0\in\NN$ such that $[a,b]\subset I_m$ $\forall m>m_0$. Furthermore, the sequence $\left(\vectorfunction{\varphi}_m|_{[a,b]}\right)_{m>m_0}$ converges uniformly to $\vectorfunction{\varphi}|_{[a,b]}$.
   \end{prop}
   \begin{theorem}
-    Let $U\subseteq\RR\times\RR^n$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function. Suppose that each ivp of the form of \eqref{DE_ivp} has a unique maximal solution. Then, the flux $\vectorfunction{\varphi}(t,t_0,\vectorfunction{x}_0)$ is a continuous function defined in an open set.
+    Let $U\subseteq\RR\times\RR^n$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function. Suppose that each ivp of the form of \eqref{DE_ivp} has a unique maximal solution. Then, the flux $\vectorfunction{\phi}(t,t_0,\vectorfunction{x}_0)$ is a continuous function defined in an open set.
   \end{theorem}
   \begin{theorem}
-    Let $U\subseteq\RR\times\RR^n\times\RR^p$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function. Suppose that each ivp of the form of \eqref{DE_ivp_lambda} has a unique maximal solution. Then, the flux $\vectorfunction{\varphi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})$ is a continuous function defined in an open set $V\subseteq I_{(t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})}\times\RR\times\RR^n\times\RR^p$.
+    Let $U\subseteq\RR\times\RR^n\times\RR^p$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function. Suppose that each ivp of the form of \eqref{DE_ivp_lambda} has a unique maximal solution. Then, the flux $\vectorfunction{\phi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})$ is a continuous function defined in an open set $V\subseteq I_{(t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})}\times\RR\times\RR^n\times\RR^p$.
   \end{theorem}
   \begin{lemma}[Grönwall's lemma]
     Let $u,v,w:[a,b)\rightarrow\RR$ be continuous functions such that $v(t)\geq 0$ $\forall t\in[a,b)$ and satisfying: $$u(t)\leq w(t)+\int_a^tv(s)u(s)\dd s\quad\forall t\in[a,b)$$
@@ -545,26 +549,26 @@
     If, moreover, $w\in\mathcal{C}^1((a,b))$, then: $$u(t)\leq w(a)\exp{\int_a^tv(r)\dd r}+\int_a^tw'(s)\exp{\int_s^tv(r)\dd r}\dd s\quad\forall t\in[a,b)$$
   \end{lemma}
   \begin{prop}
-    Let $U\subseteq\RR\times\RR^n$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function and Lipschitz continuous with respect to the second variable with Lipschitz constant $L$. Let $\vectorfunction{\varphi}$ be the flux of the ode $\vectorfunction{x}'=\vectorfunction{f}(t,\vectorfunction{x})$. Then, $\forall (t_0,\vectorfunction{x}_1),(t_0,\vectorfunction{x}_2)\in U$ and $\forall t\in I_{(t_0,\vectorfunction{x}_1)}\cap I_{(t_0,\vectorfunction{x}_2)}$, we have:
-    $$\|\vectorfunction{\varphi}(t,t_0,\vectorfunction{x}_2)-\vectorfunction{\varphi}(t,t_0,\vectorfunction{x}_1)\|\leq\exp{L|t-t_0|}\|\vectorfunction{x}_2-\vectorfunction{x}_1\|$$
-    Thus, $\vectorfunction{\varphi}$ is locally Lipschitz continuous with respect to the third variable.
+    Let $U\subseteq\RR\times\RR^n$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function and Lipschitz continuous with respect to the second variable with Lipschitz constant $L$. Let $\vectorfunction{\phi}$ be the flux of the ode $\vectorfunction{x}'=\vectorfunction{f}(t,\vectorfunction{x})$. Then, $\forall (t_0,\vectorfunction{x}_1),(t_0,\vectorfunction{x}_2)\in U$ and $\forall t\in I_{(t_0,\vectorfunction{x}_1)}\cap I_{(t_0,\vectorfunction{x}_2)}$, we have:
+    $$\|\vectorfunction{\phi}(t,t_0,\vectorfunction{x}_2)-\vectorfunction{\phi}(t,t_0,\vectorfunction{x}_1)\|\leq\exp{L|t-t_0|}\|\vectorfunction{x}_2-\vectorfunction{x}_1\|$$
+    Thus, $\vectorfunction{\phi}$ is locally Lipschitz continuous with respect to the third variable.
   \end{prop}
   \subsubsection{Differenciable dependence}
   \begin{theorem}[Dependence on $\vectorfunction{x}_0$]
-    Let $U\subseteq\RR\times\RR^n\times\RR^p$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function and of class $\mathcal{C}^1$ with respect to the second variable. Suppose that the flux $\vectorfunction{\varphi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})$ of $\vectorfunction{x}'=\vectorfunction{f}(t,\vectorfunction{x},\vectorfunction{\lambda})$ is defined on an open set $V\subseteq\RR\times\RR\times\RR^n\times\RR^p$. Then, $\forall (t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})\in V$, $\vectorfunction{\varphi}$ is differentiable with respect to $\vectorfunction{x}_0$ and $\vectorfunction{D}_3\vectorfunction{\varphi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})$\footnote{Here, $\vectorfunction{D}_3\vectorfunction{\varphi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})=\frac{\partial\vectorfunction{\varphi}}{\partial \vectorfunction{x}_0}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})$ denotes the matrix $\left(\frac{\partial\vectorfunction{\varphi}_i}{\partial{\vectorfunction{x}_0}_j}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})\right)\in\mathcal{M}_n(\RR)$, where ${\vectorfunction{x}_0}_j$ denotes the $j$-th component of $\vectorfunction{x}_0$ and $\vectorfunction{\varphi}_i(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})$ denotes the $i$-th component of $\vectorfunction{\varphi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})$.} is continuous on $V$. Furthermore, $\vectorfunction{D}_3\vectorfunction{\varphi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})$ satisfies the following ivp:
+    Let $U\subseteq\RR\times\RR^n\times\RR^p$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function and of class $\mathcal{C}^1$ with respect to the second variable. Suppose that the flux $\vectorfunction{\phi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})$ of $\vectorfunction{x}'=\vectorfunction{f}(t,\vectorfunction{x},\vectorfunction{\lambda})$ is defined on an open set $V\subseteq\RR\times\RR\times\RR^n\times\RR^p$. Then, $\forall (t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})\in V$, $\vectorfunction{\phi}$ is differentiable with respect to $\vectorfunction{x}_0$ and $\vectorfunction{D}_3\vectorfunction{\phi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})$\footnote{Here, $\vectorfunction{D}_3\vectorfunction{\phi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})=\frac{\partial\vectorfunction{\phi}}{\partial \vectorfunction{x}_0}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})$ denotes the matrix $\left(\frac{\partial\vectorfunction{\phi}_i}{\partial{\vectorfunction{x}_0}_j}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})\right)\in\mathcal{M}_n(\RR)$, where ${\vectorfunction{x}_0}_j$ denotes the $j$-th component of $\vectorfunction{x}_0$ and $\vectorfunction{\phi}_i(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})$ denotes the $i$-th component of $\vectorfunction{\phi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})$.} is continuous on $V$. Furthermore, $\vectorfunction{D}_3\vectorfunction{\phi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})$ satisfies the following ivp:
     \begin{equation*}
       \left\{
       \begin{aligned}
-         & \vectorfunction{M}'      =\vectorfunction{D}_2\vectorfunction{f}(t,\vectorfunction{\varphi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda}),\vectorfunction{\lambda})\vectorfunction{M} \\
+         & \vectorfunction{M}'      =\vectorfunction{D}_2\vectorfunction{f}(t,\vectorfunction{\phi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda}),\vectorfunction{\lambda})\vectorfunction{M} \\
          & \vectorfunction{M}(t_0)  =\vectorfunction{I}_n
       \end{aligned}
       \right.
     \end{equation*}
-    or, equivalently, $\frac{\partial\vectorfunction{\varphi}}{\partial {\vectorfunction{x}_0}_i}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})=\vectorfunction{D}_3\vectorfunction{\varphi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})\vectorfunction{e}_i$ satisfies the following ivp:
+    or, equivalently, $\frac{\partial\vectorfunction{\phi}}{\partial {\vectorfunction{x}_0}_i}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})=\vectorfunction{D}_3\vectorfunction{\phi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})\vectorfunction{e}_i$ satisfies the following ivp:
     $$
       \left\{
       \begin{aligned}
-         & \vectorfunction{y}'      =\vectorfunction{D}_2\vectorfunction{f}(t,\vectorfunction{\varphi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda}),\vectorfunction{\lambda})\vectorfunction{y} \\
+         & \vectorfunction{y}'      =\vectorfunction{D}_2\vectorfunction{f}(t,\vectorfunction{\phi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda}),\vectorfunction{\lambda})\vectorfunction{y} \\
          & \vectorfunction{y}(t_0)  =\vectorfunction{e}_i
       \end{aligned}
       \right.\quad\text{for }i=1,\ldots,n
@@ -572,31 +576,31 @@
     These kind of equations are called \textit{variational equations}.
   \end{theorem}
   \begin{theorem}[Dependence on $t_0$]
-    Let $U\subseteq\RR\times\RR^n\times\RR^p$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function and of class $\mathcal{C}^1$ with respect to the second variable. Suppose that the flux $\vectorfunction{\varphi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})$ of $\vectorfunction{x}'=\vectorfunction{f}(t,\vectorfunction{x},\vectorfunction{\lambda})$ is defined on an open set $V\subseteq\RR\times\RR\times\RR^n\times\RR^p$. Then, $\forall (t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})\in V$, $\vectorfunction{\varphi}$ is differentiable with respect to $t_0$ and $\vectorfunction{D}_2\vectorfunction{\varphi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})$ is continuous on $V$. Furthermore, $\vectorfunction{D}_2\vectorfunction{\varphi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})$ satisfies the following ivp:
+    Let $U\subseteq\RR\times\RR^n\times\RR^p$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function and of class $\mathcal{C}^1$ with respect to the second variable. Suppose that the flux $\vectorfunction{\phi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})$ of $\vectorfunction{x}'=\vectorfunction{f}(t,\vectorfunction{x},\vectorfunction{\lambda})$ is defined on an open set $V\subseteq\RR\times\RR\times\RR^n\times\RR^p$. Then, $\forall (t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})\in V$, $\vectorfunction{\phi}$ is differentiable with respect to $t_0$ and $\vectorfunction{D}_2\vectorfunction{\phi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})$ is continuous on $V$. Furthermore, $\vectorfunction{D}_2\vectorfunction{\phi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})$ satisfies the following ivp:
     \begin{equation*}
       \left\{
       \begin{aligned}
-         & \vectorfunction{y}'      =\vectorfunction{D}_2\vectorfunction{f}(t,\vectorfunction{\varphi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda}),\vectorfunction{\lambda})\vectorfunction{y} \\
+         & \vectorfunction{y}'      =\vectorfunction{D}_2\vectorfunction{f}(t,\vectorfunction{\phi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda}),\vectorfunction{\lambda})\vectorfunction{y} \\
          & \vectorfunction{y}(t_0)  = -\vectorfunction{f}(t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})
       \end{aligned}
       \right.
     \end{equation*}
   \end{theorem}
   \begin{theorem}[Dependence on $\vectorfunction{\lambda}$]
-    Let $U\subseteq\RR\times\RR^n\times\RR^p$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function and of class $\mathcal{C}^1$ with respect to the second and third variable. Suppose that the flux $\vectorfunction{\varphi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})$ of $\vectorfunction{x}'=\vectorfunction{f}(t,\vectorfunction{x},\vectorfunction{\lambda})$ is defined on an open set $V\subseteq\RR\times\RR\times\RR^n\times\RR^p$. Then, $\forall (t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})\in V$, $\vectorfunction{\varphi}$ is differentiable with respect to $\vectorfunction{\lambda}$ and $\vectorfunction{D}_4\vectorfunction{\varphi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})$ is continuous on $V$. Furthermore, $\vectorfunction{D}_4\vectorfunction{\varphi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})$ satisfies the following ivp:
+    Let $U\subseteq\RR\times\RR^n\times\RR^p$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function and of class $\mathcal{C}^1$ with respect to the second and third variable. Suppose that the flux $\vectorfunction{\phi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})$ of $\vectorfunction{x}'=\vectorfunction{f}(t,\vectorfunction{x},\vectorfunction{\lambda})$ is defined on an open set $V\subseteq\RR\times\RR\times\RR^n\times\RR^p$. Then, $\forall (t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})\in V$, $\vectorfunction{\phi}$ is differentiable with respect to $\vectorfunction{\lambda}$ and $\vectorfunction{D}_4\vectorfunction{\phi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})$ is continuous on $V$. Furthermore, $\vectorfunction{D}_4\vectorfunction{\phi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})$ satisfies the following ivp:
     \begin{equation*}
       \left\{
       \begin{aligned}
-         & \vectorfunction{M}'      =\vectorfunction{D}_2\vectorfunction{f}(t,\vectorfunction{\varphi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda}),\vectorfunction{\lambda})\vectorfunction{M}+ \vectorfunction{B} \\
+         & \vectorfunction{M}'      =\vectorfunction{D}_2\vectorfunction{f}(t,\vectorfunction{\phi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda}),\vectorfunction{\lambda})\vectorfunction{M}+ \vectorfunction{B} \\
          & \vectorfunction{M}(t_0)  =\vectorfunction{0}
       \end{aligned}
       \right.
     \end{equation*}
-    where $\vectorfunction{B}=\vectorfunction{D}_3\vectorfunction{f}(t,\vectorfunction{\varphi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda}),\vectorfunction{\lambda})$. Equivalently, $\frac{\partial\vectorfunction{\varphi}}{\partial \vectorfunction{\lambda}_i}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})$ satisfies the ivp:
+    where $\vectorfunction{B}=\vectorfunction{D}_3\vectorfunction{f}(t,\vectorfunction{\phi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda}),\vectorfunction{\lambda})$. Equivalently, $\frac{\partial\vectorfunction{\phi}}{\partial \vectorfunction{\lambda}_i}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})$ satisfies the ivp:
     $$
       \left\{
       \begin{aligned}
-         & \vectorfunction{y}'      =\vectorfunction{D}_2\vectorfunction{f}(t,\vectorfunction{\varphi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda}),\vectorfunction{\lambda})\vectorfunction{y}+\vectorfunction{B}\vectorfunction{e}_i \\
+         & \vectorfunction{y}'      =\vectorfunction{D}_2\vectorfunction{f}(t,\vectorfunction{\phi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda}),\vectorfunction{\lambda})\vectorfunction{y}+\vectorfunction{B}\vectorfunction{e}_i \\
          & \vectorfunction{y}(t_0)  =\vectorfunction{0}
       \end{aligned}
       \right.\quad\text{for }i=1,\ldots,n
@@ -604,7 +608,83 @@
   \end{theorem}
   \subsubsection{Higher order dependence}
   \begin{theorem}
-    Let $U\subseteq\RR\times\RR^n$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function and of class $\mathcal{C}^k$, $k\in\NN$, with respect to the second variable. Suppose that the flux $\vectorfunction{\varphi}(t,t_0,\vectorfunction{x}_0)$ of $\vectorfunction{x}'=\vectorfunction{f}(t,\vectorfunction{x})$ is defined on an open set $V\subseteq\RR\times\RR\times\RR^n$. Then, $\vectorfunction{\varphi}(t,t_0,\vectorfunction{x}_0)$ is of class $\mathcal{C}^k$ on $V$.
+    Let $U\subseteq\RR\times\RR^n$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function and of class $\mathcal{C}^k$, $k\in\NN$, with respect to the second variable. Suppose that the flux $\vectorfunction{\phi}(t,t_0,\vectorfunction{x}_0)$ of $\vectorfunction{x}'=\vectorfunction{f}(t,\vectorfunction{x})$ is defined on an open set $V\subseteq\RR\times\RR\times\RR^n$. Then, $\vectorfunction{\phi}(t,t_0,\vectorfunction{x}_0)$ is of class $\mathcal{C}^k$ on $V$.
   \end{theorem}
+  \subsection{Qualitative theory}
+  \subsubsection{Introduction to dynamical systems}
+  \begin{definition}
+    A \textit{dynamical system} is a triplet $(G,X,\pi)$, where $G$ is an topological abelian group\footnote{That is, $G$ is an abelian group with an inherit topological structure.}, $X$ is a topological space and $\pi:G\times X\rightarrow X$ is a function such that:
+    \begin{itemize}
+      \item $\pi$ is continuous.
+      \item $\pi(0,x)=x$ $\forall x\in X$.
+      \item $\pi(t,\pi(s,x))=\pi(t+s,x)$ $\forall s,t\in G$ and $\forall x\in X$.
+    \end{itemize}
+    In particular we say that a dynamical system is \textit{discrete} if $G=\ZZ$ and we say that it is \textit{continuous} if $G=\RR$.
+  \end{definition}
+  \begin{definition}
+    Let $(G,X,\pi)$ be a dynamical system with $x\in X$. The \textit{orbit} through $x$ is defined as: $$\gamma(x):=\{\pi(t,x):t\in G\}$$ Moreover if $G=\ZZ$ or $G=\RR$ we define the \textit{positive semi-orbit} through $x$ and the \textit{negative semi-orbit} through $x$ as the following respective sets:
+    \begin{gather*}
+      \gamma^+(x):=\{\pi(t,x):t\in G_{\geq 0}\}\\
+      \gamma^-(x):=\{\pi(t,x):t\in G_{\leq 0}\}
+    \end{gather*}
+  \end{definition}
+  \begin{definition}
+    Let $(G,X,\pi)$ be a dynamical system. Then, we have an equivalence relation $\sim$ on $X$ given by $$x\sim y\iff\gamma(x)=\gamma(y)$$
+    which gives a partition of $X$, which is called \textit{phase space}.
+  \end{definition}
+  \begin{definition}
+    Let $(G,X,\pi)$ be a dynamical system with $x\in X$. We define the following function: $$\function{\pi_x}{\RR}{\gamma(x)}{t}{\pi(x,t)}$$
+  \end{definition}
+  \begin{lemma}
+    Let $\vectorfunction{f}:\RR^n\rightarrow\RR^n$ be a continuous function such that the flux $\vectorfunction{\phi}(t,t_0,\vectorfunction{x}_0)$ of the ode $\vectorfunction{x}' =\vectorfunction{f}(\vectorfunction{x})$ is defined for all $t\in\RR$. Then, $(\RR,\RR^n,\vectorfunction{\pi})$ is a dynamical system, where $\vectorfunction{\pi}(t,\vectorfunction{x})=\vectorfunction{\phi}(t,0,\vectorfunction{x})$. Furthermore, note that $\vectorfunction{\gamma}(\vectorfunction{x})=\im(\vectorfunction{\phi}(\cdot,0,\vectorfunction{x}))$.
+  \end{lemma}
+  \begin{lemma}
+    Let $\vectorfunction{f}:\RR^n\rightarrow\RR^n$ be a continuous function such that $\exists M,N\in\RR_{\geq 0}$ with $\|\vectorfunction{f}(x)\|\leq M\|x\|+N$. Then, the solutions of the ode $\vectorfunction{x}' =\vectorfunction{f}(\vectorfunction{x})$ are defined for all $t\in\RR$.
+  \end{lemma}
+  \begin{definition}
+    Let $\vectorfunction{f},\vectorfunction{g}:\RR^n\rightarrow\RR^n$ be continuous functions and $\vectorfunction{x}' =\vectorfunction{f}(\vectorfunction{x})$, $\vectorfunction{x}' =\vectorfunction{g}(\vectorfunction{x})$ be two odes for which we have existence and uniqueness of solutions. We say that these two odes are \textit{equivalent} if $\exists \alpha\in\RR_{>0}$ such that $\vectorfunction{f}(\vectorfunction{x})=\alpha \vectorfunction{g}(\vectorfunction{x})$. In that case, the two odes have the same orbits oriented in the same way.
+  \end{definition}
+  \begin{corollary}
+    Let $\vectorfunction{f}:\RR^n\rightarrow\RR^n$ be a continuous function such that the ode $\vectorfunction{x}' =\vectorfunction{f}(\vectorfunction{x})$ has existence and uniqueness of solutions for all initial conditions. Then, there exists a continuous function $\vectorfunction{g}:\RR^n\rightarrow\RR^n$ such that the autonomous odes induced by $\vectorfunction{f}$ and $\vectorfunction{g}$ are equivalent and the flux of the ode $\vectorfunction{x}' =\vectorfunction{g}(\vectorfunction{x})$ is defined $\forall t\in\RR$.
+  \end{corollary}
+  \begin{lemma}
+    Let $H$ be a proper subgroup of $\RR$ which is closed. Then, $\exists T\in\RR_{\geq 0}$ such that $H=T\ZZ$.
+  \end{lemma}
+  \begin{prop}
+    Let $(\RR,\RR^n,\vectorfunction{\pi})$ be a dynamical system and $\vectorfunction{\gamma}(\vectorfunction{x})$ be an orbit. Then, there are 3 possible cases for $\vectorfunction{\gamma}(\vectorfunction{x})$:
+    \begin{enumerate}
+      \item $\vectorfunction{\gamma}(\vectorfunction{x})=\{\vectorfunction{x}\}$.
+      \item $\vectorfunction{\gamma}(\vectorfunction{x})\cong S^1$.
+      \item $\vectorfunction{\gamma}(\vectorfunction{x})$ is injective and continuous.
+    \end{enumerate}
+  \end{prop}
+  \begin{definition}
+    Let $(\RR,\RR^n,\vectorfunction{\pi})$ be a dynamical system and $\vectorfunction{p}\in\RR^n$. We say that $\vectorfunction{p}\in\RR^n$ is a \textit{critical point} or \textit{singular point} if $\vectorfunction{\gamma}(\vectorfunction{p})=\{\vectorfunction{p}\}$. Otherwise we say that $\vectorfunction{p}$ is \textit{non-singular} or \textit{regular}.
+  \end{definition}
+  \begin{definition}
+    Let $(\RR,\RR^n,\vectorfunction{\pi})$ be a dynamical system and $\vectorfunction{\gamma}(\vectorfunction{x})$ be an orbit of $(\RR,\RR^n,\vectorfunction{\pi})$. We say that $\vectorfunction{\gamma}(\vectorfunction{x})$ is \textit{periodic} of period $T>0$ if $\vectorfunction{\gamma}(\vectorfunction{x})\cong S^1$ and $\ker\vectorfunction{\pi_{\vectorfunction{x}}}=T\ZZ$.
+  \end{definition}
+  \begin{prop}
+    Let $(\RR,\RR^n,\vectorfunction{\pi})$ be a dynamical system such that $\vectorfunction{\pi}(t,\vectorfunction{x})=\vectorfunction{\phi}(t,0,\vectorfunction{x})$, where $\vectorfunction{\phi}(t,t_0,\vectorfunction{x}_0)$ is the flux of the ode $\vectorfunction{x}' =\vectorfunction{f}(\vectorfunction{x})$. Let $\vectorfunction{p}\in\RR^n$. Then, the following statements are equivalent:
+    \begin{enumerate}
+      \item $\{\vectorfunction{p}\}$ is a critical point.
+      \item $\vectorfunction{\phi}(t,0,\vectorfunction{p})=\vectorfunction{p}$.
+      \item $\vectorfunction{f}(\vectorfunction{p})=0$.
+    \end{enumerate}
+  \end{prop}
+  \begin{definition}
+    Let $(\RR,\RR^n,\vectorfunction{\pi})$ be a dynamical system and $\vectorfunction{x}\in\RR^n$. We say that $\vectorfunction{y}\in\RR^n$ is a \textit{$\omega$-limit point} of $\vectorfunction{x}$ if there exists a sequence $(t_n)\subset\RR$ such that $\displaystyle\lim_{n\to\infty}t_n=+\infty$ and $\displaystyle\lim_{n\to\infty}\vectorfunction{\pi}(t_n,\vectorfunction{x})=\vectorfunction{y}$.
+    The set of all $\omega$-limit points of $\vectorfunction{x}$ is called \textit{$\omega$-limit set} and it is denoted by $\omega(\vectorfunction{x})$.
+  \end{definition}
+  \begin{definition}
+    Let $(\RR,\RR^n,\vectorfunction{\pi})$ be a dynamical system and $\vectorfunction{x}\in\RR^n$. We say that $\vectorfunction{y}\in\RR^n$ is a \textit{$\alpha$-limit point} of $\vectorfunction{x}$ if there exists a sequence $(t_n)\subset\RR$ such that $\displaystyle\lim_{n\to\infty}t_n=-\infty$ and $\displaystyle\lim_{n\to\infty}\vectorfunction{\pi}(t_n,\vectorfunction{x})=\vectorfunction{y}$.
+    The set of all $\alpha$-limit points of $\vectorfunction{x}$ is called \textit{$\alpha$-limit set} and it is denoted by $\alpha(\vectorfunction{x})$.
+  \end{definition}
+  \begin{prop}
+    Let $(\RR,\RR^n,\vectorfunction{\pi})$ be a dynamical system and $\vectorfunction{x}\in\RR^n$. Then: $$\Cl(\vectorfunction{\gamma}(\vectorfunction{x}))=\alpha(\vectorfunction{x})\cup\vectorfunction{\gamma}(\vectorfunction{x})\cup\omega(\vectorfunction{x})$$
+  \end{prop}
+  \begin{definition}
+    Let $(\RR,\RR^n,\vectorfunction{\pi})$ be a dynamical system and $A\subseteq \RR^n$. We say that $A$ is \textit{invariant} if $\vectorfunction{\gamma}(\vectorfunction{x})\subseteq A$ $\forall\vectorfunction{x}\in A$. We say that $A$ is \textit{positively invariant} if $\vectorfunction{\gamma}^+(\vectorfunction{x})\subseteq A$ $\forall\vectorfunction{x}\in A$. Analogously, we say that $A$ is \textit{negatively invariant} if $\vectorfunction{\gamma}^-(\vectorfunction{x})\subseteq A$ $\forall\vectorfunction{x}\in A$
+  \end{definition}
 \end{multicols}
 \end{document}

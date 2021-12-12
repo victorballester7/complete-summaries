@@ -1,0 +1,34 @@
+\documentclass{standalone}
+\usepackage{../../../../preamble_formulas}
+
+\def\R{3} % major radius
+\def\r{1.5} % minor radius
+
+\begin{document}
+\begin{tikzpicture}
+  \begin{axis}[
+      hide axis,
+      view = {40}{60}
+    ]
+    \addplot3 [
+      surf,
+      z buffer=sort,
+      colormap={periodic}{
+          color=(color_blue1)
+          color=(color_blue2)
+          color=(color_blue3)
+          color=(color_blue2)
+          color=(color_blue1)
+        },
+      domain=0:360, domain y=0:360,
+      samples=50, samples y=50,
+      variable=\u, variable y=\v,
+      point meta=u,
+    ] (
+    {(\R + \r * cos(u)) * cos(v)},
+    {(\R + \r * cos(u)) * sin(v)},
+    {\r * sin(u)}
+    );
+  \end{axis}
+\end{tikzpicture}
+\end{document}

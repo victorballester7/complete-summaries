@@ -76,7 +76,7 @@
   \end{prop}
   \begin{definition}
     We say that a matrix $\vectorfunction{A}\in\mathcal{M}_n(\RR)$ is \textit{invertible} if there is a matrix $\vectorfunction{B}\in\mathcal{M}_n(\RR)$ satisfying $$\vectorfunction{A}\vectorfunction{B}=\vectorfunction{B}\vectorfunction{A}=\vectorfunction{I}_n$$
-    The set of invertible matrices of size $n$ over $\RR$ is denoted by $\GL_n(\RR)$\footnote{Or more generally, the set of invertible matrices of size $n$ over a field (see definition \ref{AS-field}) $K$ is denoted by $\GL_n(K)$.}.
+    The set of invertible matrices of size $n$ over $\RR$ is denoted by $\GL_n(\RR)$\footnote{Or more generally, the set of invertible matrices of size $n$ over a field (see \cref{AS_field}) $K$ is denoted by $\GL_n(K)$.}.
   \end{definition}
   \begin{lemma}
     The product of invertible matrices is invertible.
@@ -222,7 +222,7 @@
   \subsection{Vector spaces}
   \subsubsection{Introduction and basic definitions}
   \begin{definition}
-    A \textit{vector space over a field\footnote{See definition \ref{AS-field}.} $K$} is a set $V$ together with two operations
+    A \textit{vector space over a field\footnote{See \cref{AS_field}.} $K$} is a set $V$ together with two operations
     \begin{align*}
       +:V\times V                                 & \longrightarrow V                                      & \cdot:K\times V              & \longrightarrow V                           \\
       (\vectorfunction{v}_1,\vectorfunction{v}_2) & \longmapsto \vectorfunction{v}_1+ \vectorfunction{v}_2 & (\lambda,\vectorfunction{v}) & \longmapsto \lambda\cdot \vectorfunction{v}
@@ -668,6 +668,7 @@
   \end{corollary}
   \begin{prop}
     Let $V$ be a finite vector space of dimension $n$, $f\in\mathcal{L}(V)$ and $\lambda$ be a root of multiplicity $m$ of the characteristic polynomial $p_f(x)$. Then: $$1\leq \dim(\ker(f-\lambda\id))\leq m$$
+    The number $m$ is called \textit{algebraic multiplicity} of $\lambda$, whereas the value $\dim(\ker(f-\lambda\id))$ is called \textit{geometric multiplicity} of $\lambda$.
   \end{prop}
   \begin{theorem}[Diagonalization theorem]
     Let $V$ be a finite vector space and $f\in\mathcal{L}(V)$. $f$ is diagonalizable if and only if:
@@ -763,7 +764,7 @@
     $$
     A \textit{Jordan matrix} is a block diagonal matrix whose blocks are Jordan blocks.
   \end{definition}
-  \begin{prop}
+  \begin{prop}\label{LA_jordan}
     Let $V$ be a finite vector space over a field $K$ with $\dim V=n$ and $f\in\mathcal{L}(V)$. If $p_f(x)=\pm(x-\lambda_1)^{n_1}\cdots(x-\lambda_k)^{n_k}$, there exists a basis $\mathcal{B}$ of $V$ such that
     $$[f]_{\mathcal{B}}=
       \begin{pmatrix}
@@ -789,7 +790,7 @@
         \vectorfunction{0}   & \cdots               & \vectorfunction{0} & \vectorfunction{J}_r \\
       \end{pmatrix}
     $$
-    where $\vectorfunction{J}_1,\ldots,\vectorfunction{J}_r$ are Jordan blocks associated with eigenvalues $\lambda_1,\ldots,\lambda_k$ satisfying properties \ref{LA_diag1} and \ref{LA_diag2}. In that case, we say that $\vectorfunction{J}$ is the \textit{Jordan form of $\vectorfunction{A}$}.
+    where $\vectorfunction{J}_1,\ldots,\vectorfunction{J}_r$ are Jordan blocks associated with eigenvalues $\lambda_1,\ldots,\lambda_k$ satisfying \cref{LA_diag1,LA_diag2} of \cref{LA_jordan}. In that case, we say that $\vectorfunction{J}$ is the \textit{Jordan form of $\vectorfunction{A}$}.
   \end{prop}
   \begin{theorem}
     Let $V$ be a vector space and $f,g\in\mathcal{L}(V)$ be such that $p_f(x)=(x-\lambda_1)^{n_1}\cdots(x-\lambda_k)^{n_k}$. If $g$ satisfies:
@@ -838,7 +839,7 @@
     Let $V$ be a finite vector space over a field $K$, $\mathcal{B}$ and $\mathcal{B}'$ be bases of $V$ and $\varphi:V\times V\rightarrow K$ be a symmetric bilinear form. Then: $$[\varphi]_{\mathcal{B}'}={([\id]_{\mathcal{B}',\mathcal{B}})}^\mathrm{T}[\varphi]_\mathcal{B}[\id]_{\mathcal{B}',\mathcal{B}}$$
   \end{prop}
   \subsubsection{Orthogonal basis}
-  \begin{definition}\label{ALG-isotrop}
+  \begin{definition}\label{LA_isotrop}
     Let $V$ be a finite vector space over a field $K$, $\varphi:V\times V\rightarrow K$ be a symmetric bilinear form and $\vectorfunction{v}_1,\vectorfunction{v}_2\in V$.
     \begin{itemize}
       \item We say that $\vectorfunction{v}_1$ and $\vectorfunction{v}_2$ are \textit{orthogonal} if $\varphi(\vectorfunction{v}_1,\vectorfunction{v}_2)=0$.
@@ -859,7 +860,7 @@
     Let $K$ be a field with $\ch K\ne 2$ and $\vectorfunction{A}\in\mathcal{M}_n(K)$ be a symmetric matrix. Then, there exists a matrix $\vectorfunction{P}\in\GL_n(K)$ such that $\transpose{P}\vectorfunction{A}\vectorfunction{P}$ is diagonal.
   \end{corollary}
   \subsubsection{Orthogonal decompositions}
-  \begin{definition}\label{ALG-singular}
+  \begin{definition}\label{LA_singular}
     Let $V$ be a finite vector space over a field $K$, $U\subseteq V$ be a vector subspace of $V$ and $\varphi:V\times V\rightarrow K$ be a symmetric bilinear form. We define the \textit{orthogonal complement of $U$} as: $$U^\perp=\{\vectorfunction{v}\in V:\varphi(\vectorfunction{v},\vectorfunction{u})=0\;\forall\vectorfunction{u}\in U\}$$
   \end{definition}
   \begin{definition}

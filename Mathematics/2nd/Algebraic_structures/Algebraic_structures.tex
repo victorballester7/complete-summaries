@@ -1,10 +1,10 @@
 \documentclass[../../../main.tex]{subfiles}
 
 \begin{document}
-\begin{multicols}{2}[\section{Algebraic structures}]
-  \subsection{Groups}\label{AS-G}
+\begin{multicols}{2}[\section{Algebraic structures}]\label{AS}
+  \subsection{Groups}\label{AS_G}
   \subsubsection{Groups and subgroups}
-  \begin{definition}[Group]\label{AS-group}
+  \begin{definition}[Group]\label{AS_group}
     A \textit{group} is a non-empty set $G$ together with a binary operation
     \begin{align*}
       \cdot:G\times G & \longrightarrow G        \\
@@ -33,6 +33,9 @@
       \item $e\in H$.
       \item If $h\in H$, then $h^{-1}\in H$.
     \end{enumerate}
+  \end{definition}
+  \begin{definition}
+    Let $(G,\cdot)$ be a group and $(H,\cdot)$ be a subgroup of $(G,\cdot)$. We say that $(H,\cdot)$ is \textit{proper} if $H\ne\{e\},G$. Otherwise we say that $(H,\cdot)$ is \textit{improper}.
   \end{definition}
   \begin{prop}
     Let $(G,\cdot)$ be a group and $H\ne\varnothing$ be a subset of $G$. Then: $$(H,\cdot)\text{ is a subgroup}\iff h_1\cdot h_2^{-1}\in H\quad\forall h_1,h_2\in H$$
@@ -99,7 +102,7 @@
     Let $(G_i,*_i)$, $i=1,\ldots, n$, be groups. For $i=1,\ldots,n$, let $g_i\in G_i$ and consider the element $g=(g_1,\ldots,g_n)\in(G_1,*_1)\times\cdots\times(G_n,*_n)$. Then: $$\text{ord}(g)=\lcm(\text{ord}(g_1),\ldots,\text{ord}(g_n))$$
   \end{corollary}
   \subsubsection{Group morphisms}
-  \begin{definition}[Group morphism]\label{AS-groupmorphism}
+  \begin{definition}[Group morphism]\label{AS_groupmorphism}
     Let $(G,*)$, $(H,\cdot)$ be two groups. A \textit{group morphism from $(G,*)$ to $(H,\cdot)$} is a function $\phi:G\rightarrow H$ such that: $$\phi(g_1*g_2)=\phi(g_1)\cdot\phi(g_2)\quad\forall g_1,g_2\in G$$
   \end{definition}
   \begin{lemma}
@@ -253,7 +256,7 @@
   \end{lemma}
   \subsubsection{Isomorphism theorems}
   \begin{theorem}[First isomorphism theorem]
-    Let $(G_1,*)$, $(G_2,\cdot)$ be groups, $\phi:G_1\rightarrow G_2$ be a group morphism and $(H,*)$ be a subgroup of $(G_1,*)$ such that $H\unlhd G_1$. If $(H,*)$ is a subgroup of $(\ker\phi,*)$, then there exists a unique group morphism $\psi:G_1/H\rightarrow G_2$ such that the diagram of figure \ref{theorem1} is commutative, that is, $\phi=\psi\circ\pi$.
+    Let $(G_1,*)$, $(G_2,\cdot)$ be groups, $\phi:G_1\rightarrow G_2$ be a group morphism and $(H,*)$ be a subgroup of $(G_1,*)$ such that $H\unlhd G_1$. If $(H,*)$ is a subgroup of $(\ker\phi,*)$, then there exists a unique group morphism $\psi:G_1/H\rightarrow G_2$ such that the diagram of \cref{theorem1} is commutative, that is, $\phi=\psi\circ\pi$.
     \begin{center}
       \begin{minipage}{\linewidth}
         \centering
@@ -360,13 +363,13 @@
       \phi:G & \longrightarrow \mathcal{O}_x \\
       g      & \longmapsto g*x
     \end{align*}
-    induces a bijective function $\psi:\quot{G}{\!\!\approx}\;\rightarrow\mathcal{O}_x$, where $\approx$ is the equivalence relation $g_1\approx g_2\iff g_2^{-1}\cdot g_1\in G_x$ $\forall g_1,g_2\in G$\footnote{Note that the notation $\approx$ for the equivalence relation correspond with the one defined in definition \ref{AS_equiv}.}. In particular, if $G$ is finite: $$|\mathcal{O}_x|=|[G:G_x]|$$
+    induces a bijective function $\psi:\quot{G}{\!\approx}\;\rightarrow\mathcal{O}_x$, where $\approx$ is the equivalence relation $g_1\approx g_2\iff g_2^{-1}\cdot g_1\in G_x$ $\forall g_1,g_2\in G$\footnote{Note that the notation $\approx$ for the equivalence relation correspond with the one defined in \cref{AS_equiv}.}. In particular, if $G$ is finite: $$|\mathcal{O}_x|=|[G:G_x]|$$
   \end{theorem}
   \begin{corollary}[Orbits formula]
     Let $(G,\cdot)$ be a finite group and $X$ be a finite $G$-set. If $x_1,\ldots,x_m$ are the elements of $X$ and $|\mathcal{O}_{x_i}|=1$ for $i=1,\ldots,r$, then:
     \begin{equation}
       |X|=r+\sum_{i=r+1}^m|\mathcal{O}_{x_i}|=r+\sum_{i=r+1}^m|[G:G_{x_i}]|
-      \label{AS-obritsformula}
+      \label{AS_obritsformula}
     \end{equation}
   \end{corollary}
   \subsubsection{Applications of orbits formula}
@@ -374,7 +377,7 @@
     Let $(G,\cdot)$ be a finite group of order $n$ and $p$ be a prime number. If $p\mid n$, then $(G,\cdot)$ has an element of order $p$.
   \end{theorem}
   \begin{corollary}
-    Let $p$ be an odd prime number. Then groups of order $2p$ are isomorphic to $(\ZZ /2p\ZZ ,+)$ or $(\text{D}_{2p},\circ)$\footnote{See section \ref{AS-examples}.}.
+    Let $p$ be an odd prime number. Then groups of order $2p$ are isomorphic to $(\ZZ /2p\ZZ ,+)$ or $(\text{D}_{2p},\circ)$\footnote{See the examples at the end of this section.}.
   \end{corollary}
   \begin{prop}
     Let $(G,\cdot)$ be a group. The function
@@ -384,7 +387,7 @@
     \end{align*} is an action of $(G,\cdot)$ over itself. It is called the \textit{conjugation action}.
   \end{prop}
   \begin{definition}[Center of a group]
-    Let $(G,\cdot)$ be a group. We define the \textit{center of $(G,\cdot)$} as: $$Z(G)=\{z\in G:z\cdot g=g\cdot z\;\forall g\in G\}\footnote{Note that, by orbits formula \eqref{AS-obritsformula}, if we consider the conjugation action we have: $$|G|=|Z(G)|+\sum_{|\mathcal{O}_x|>1}|\mathcal{O}_x|$$}$$
+    Let $(G,\cdot)$ be a group. We define the \textit{center of $(G,\cdot)$} as: $$Z(G)=\{z\in G:z\cdot g=g\cdot z\;\forall g\in G\}\footnote{Note that, by orbits formula \eqref{AS_obritsformula}, if we consider the conjugation action we have: $$|G|=|Z(G)|+\sum_{|\mathcal{O}_x|>1}|\mathcal{O}_x|$$}$$
   \end{definition}
   \begin{prop}
     Let $p$ be a prime number and $(G,\cdot)$ be a finite group of order $p^n$ for some $n\geq 1$. Then, $|Z(G)|>1$.
@@ -395,7 +398,7 @@
       H\times\quot{G}{\approx} & \longrightarrow \quot{G}{\approx} \\
       (h,g\cdot H)             & \longmapsto(h\cdot g)\cdot H
     \end{align*}
-    This application defines an action of the subgroup $(H,\cdot)$ over the set $\quot{G}{\!\!\approx}$.
+    This application defines an action of the subgroup $(H,\cdot)$ over the set $\quot{G}{\!\approx}$.
     \label{AS_action1}
   \end{lemma}
   \begin{definition}
@@ -405,7 +408,7 @@
     Let $(G,\cdot)$ be a group and $(H,\cdot)$ be a subgroup of $(G,\cdot)$. Then, $(N_G(H),\cdot)$ is a subgroup of $(G,\cdot)$ containing $H$ and, moreover, $H\unlhd N_G(H)$.
   \end{lemma}
   \begin{corollary}
-    Let $(G,\cdot)$ be a finite group and $(H,\cdot)$ be a subgroup of $(G,\cdot)$. Then, by orbits formula applied to action defined on lemma \ref{AS_action1}, we have: $$[G:H]=[N_G(H):H]+\sum_{|\mathcal{O}_x|>1}|\mathcal{O}_x|$$
+    Let $(G,\cdot)$ be a finite group and $(H,\cdot)$ be a subgroup of $(G,\cdot)$. Then, by orbits formula applied to action defined on \cref{AS_action1}, we have: $$[G:H]=[N_G(H):H]+\sum_{|\mathcal{O}_x|>1}|\mathcal{O}_x|$$
   \end{corollary}
   \begin{prop}
     Let $(G,\cdot)$ be a group of order $n\in\NN $, $p$ be a prime number such that $p\mid n$ and $(H,\cdot)$ be a subgroup of $(G,\cdot)$ of order $p^i$, $i\geq 1$. Suppose $p\mid[G:H]$. Then, $p\mid[N_G(H):H]$.
@@ -424,7 +427,7 @@
     Let $p$ be a prime number and $(G,\cdot)$ be a group. A \textit{Sylow $p$-subgroup} is a $p$-subgroup of $(G,\cdot)$ of maximum order.
   \end{definition}
   \begin{definition}
-    Let $(G,\cdot)$ be a finite group. We say $(G,\cdot)$ is \textit{soluble} if there is a chain of subgroups $(H_i,\cdot)$ of $(G,\cdot)$ satisfying: $$\{e\}=H_0\unlhd H_1\unlhd\cdots\unlhd H_r=K,$$ and such that the subgroups $(H_{i+1}/H_i,*)$, $0\leq i<r$, are cyclic.
+    Let $(G,\cdot)$ be a finite group. We say $(G,\cdot)$ is \textit{solvable} if there is a chain of subgroups $(H_i,\cdot)$ of $(G,\cdot)$ satisfying: $$\{e\}=H_0\unlhd H_1\unlhd\cdots\unlhd H_r=G,$$ and such that the subgroups $(H_{i+1}/H_i,*)$, $0\leq i<r$, are cyclic.
   \end{definition}
   \begin{theorem}[Second Sylow theorem]
     Let $(G,\cdot)$ be a finite group and $p$ be a prime number. Suppose $|G|=p^r m$, where $r\geq 0$ and $\gcd(p,m)=1$. Let $(K,\cdot)$ be a Sylow $p$-subgroup of $(G,\cdot)$. Then, if $(H,\cdot)$ is a subgroup of $(G,\cdot)$ of order $p^i$, $\exists g\in G$ such that $g\cdot H\cdot g^{-1}\subseteq K$. In particular two different Sylow $p$-subgroups $(K_1,\cdot)$ and $(K_2,\cdot)$ are conjugate, that is, there exists an element $g\in G$ such that $g\cdot K_1\cdot g^{-1}=K_2$.
@@ -435,7 +438,7 @@
   \begin{corollary}
     Let $p$, $q$ be prime numbers be such that $p<q$ and $q\not\equiv 1\mod p$. If $(G,\cdot)$ is a group of order $pq$, then $G\cong\quot{\ZZ}{pq\ZZ}$.
   \end{corollary}
-  \subsubsection{Examples of groups}\label{AS-examples}
+  \subsubsection{Examples of groups}\label{AS_examples}
   Let $n\in\NN$ and $p$ be a prime number.
   \begin{itemize}
     \item $(\ZZ,+)$, $(\ZZ/n\ZZ,+)$, $(\QQ,+)$, $(\RR,+)$, $(\CC,+)$
@@ -486,7 +489,7 @@
       \hline
     \end{tabular}
   \end{center}
-  \subsection{Rings and fields}\label{AS-R}
+  \subsection{Rings and fields}\label{AS_R}
   \subsubsection{Rings, subrings and ring morphisms}
   \begin{definition}[Ring]
     A \textit{ring} is a set $R$ equipped with two binary operations (called addition and multiplication):
@@ -510,7 +513,7 @@
   \begin{definition}
     A \textit{noncommutative ring} is a ring whose multiplication is not commutative.
   \end{definition}
-  \begin{definition}[Field]\label{AS-field}
+  \begin{definition}[Field]\label{AS_field}
     Let $(R,+,\cdot)$ be a ring. If every nonzero element of $R$ has a multiplicative inverse (that is, $(R,\cdot)$ is an abelian group), we say that $R$ is a \textit{field}.
   \end{definition}
   \begin{prop}
@@ -646,7 +649,7 @@
   \end{corollary}
   \subsubsection{Isomorphism theorems}
   \begin{theorem}[First isomorphism theorem]
-    Let $(R,+,\cdot)$, $(S,\oplus,\odot)$ be two rings, $\phi:R\rightarrow S$ be a ring morphism and $I$ be an ideal such that $I$ is a subgroup of $(\ker\phi,+)$. Then there exists a unique ring morphism $\psi:R/I\rightarrow S$ such that the diagram of figure \ref{theorem2} is commutative, that is, $\phi=\psi\circ\pi$.
+    Let $(R,+,\cdot)$, $(S,\oplus,\odot)$ be two rings, $\phi:R\rightarrow S$ be a ring morphism and $I$ be an ideal such that $I$ is a subgroup of $(\ker\phi,+)$. Then there exists a unique ring morphism $\psi:R/I\rightarrow S$ such that the diagram of \cref{theorem2} is commutative, that is, $\phi=\psi\circ\pi$.
     \begin{center}
       \begin{minipage}{\linewidth}
         \centering
@@ -729,7 +732,7 @@
       \end{array}\right.
     \end{equation*}
   \end{definition}
-  \begin{prop}\label{AG-deg}
+  \begin{prop}\label{AS_deg}
     Let $R$ be a ring and $p(x),q(x)\in R[x]$ be polynomials with leading coefficients $p_n$ and $q_n$ respectively. Then:
     \begin{enumerate}
       \item $\deg(p(x)+q(x))\leq\max\{\deg p(x),\deg q(x)\}$ and the equality holds when $\deg p(x)\ne\deg q(x)$.
@@ -740,7 +743,7 @@
     Let $R$ be a ring and $b(x),a(x)\in R[x]$ such that the leading coefficient of $b(x)$ is a unit. Then, $\exists! q(x),r(x)\in R[x]$ such that $a(x)=b(x)q(x)+r(x)$ with $\deg r(x)<\deg b(x)$.
   \end{prop}
   \begin{prop}[Universal property of polynomials]
-    Let $R$, $S$ be two rings, $\phi:R\rightarrow S$ be a ring morphism and $s\in S$. Then $\exists!\psi:R[x]\rightarrow S$ such that $\psi$ is a ring morphism, $\psi(r)=\phi(r)$ $\forall r\in R$ and $\psi(x)=s$. That is, the diagram of figure \ref{theorem3} is commutative and $\psi(x)=s$.
+    Let $R$, $S$ be two rings, $\phi:R\rightarrow S$ be a ring morphism and $s\in S$. Then $\exists!\psi:R[x]\rightarrow S$ such that $\psi$ is a ring morphism, $\psi(r)=\phi(r)$ $\forall r\in R$ and $\psi(x)=s$. That is, the diagram of \cref{theorem3} is commutative and $\psi(x)=s$.
     \begin{center}
       \begin{minipage}{\linewidth}
         \centering
@@ -876,7 +879,7 @@
               i:R & \longrightarrow Q(R)    \\
               r   & \longmapsto \frac{r}{1}
             \end{align*}
-            is an injective ring morphism and satisfies the following property: If $K$ is a field and $\phi:R\rightarrow K$ is an injective ring morphism, then $\exists!\psi:Q(R)\rightarrow K$ such that $\psi$ is a ring morphism, and the diagram of figure \ref{theorem4} is commutative.
+            is an injective ring morphism and satisfies the following property: If $K$ is a field and $\phi:R\rightarrow K$ is an injective ring morphism, then $\exists!\psi:Q(R)\rightarrow K$ such that $\psi$ is a ring morphism, and the diagram of \cref{theorem4} is commutative.
     \end{enumerate}
     \begin{center}
       \begin{minipage}{\linewidth}
@@ -935,7 +938,7 @@
     $\ZZ[x_1,\ldots,x_n]$ and $K[x_1,\ldots,x_n]$, where $K$ is a field, are both UFD.
   \end{corollary}
   %\subsection{Finite fields}
-  \subsubsection{Examples of rings}\label{AS-examples2}
+  \subsubsection{Examples of rings}\label{AS_examples2}
   Let $n\in\NN$ and $d\in\ZZ$ such that $d$ is square-free.
   \begin{itemize}
     \item $\ZZ$, $\ZZ/n\ZZ$, $\QQ$, $\RR$, $\CC$

@@ -9,6 +9,7 @@
 \usepackage[version=4]{mhchem} % used for chemistry and nuclear physics.
 \usepackage{multirow} % multirow in a table, for example.
 \usepackage{array, makecell} % for additional options in tables and tabulars.
+\usepackage[capitalise,nameinlink]{cleveref} % for clever references. That is, for example, for automatically write "Definition 2.13" instead of only "2.13".
 
 %%%%% tikz images %%%%%%
 \usepackage{tikz, pgfplots} % for tikz images.
@@ -25,7 +26,7 @@
 \usepackage{colortbl} % for colors in tables.
 \usepackage{physics} % commands of math and physics.
 
-\setlength{\parindent}{0pt} % Indentation disabled
+\setlength{\parindent}{0pt} % Indentation disabled.
 
 %%%%%%%% Colors %%%%%%%%
     \definecolor{color_green2}{RGB}{0,150,0}
@@ -86,6 +87,7 @@
         \DeclareMathOperator{\ch}{char} % characteristic of a field
         \DeclareMathOperator{\sig}{sig} % signature of a bilinear map
         \DeclareMathOperator{\rad}{rad} % radical of a bilinear map
+        \DeclareMathOperator{\sign}{sgn} % sign of a permutation
         \newcommand{\quot}[2]{
             \mathchoice
                 {% \displaystyle 
@@ -103,19 +105,22 @@
         \newcommand{\RR}{\ensuremath{\mathbb{R}}} % set of real numbers
         \newcommand{\CC}{\ensuremath{\mathbb{C}}} % set of complex numbers
 
+
     %%% TOPOLOGY
         \DeclareMathOperator{\Int}{Int} % interior set
         \DeclareMathOperator{\Cl}{Cl} % clousure set
         \DeclareMathOperator{\Fr}{\partial} % clousure set
-        \newcommand{\topo}{\tau} % simbol for the topology. Feasible options are: \tau, \mathcal{T}...
+        \newcommand{\topo}{\tau} % symbol for the topology. Feasible options are: \tau, \mathcal{T}...
 
-        %%% GALOIS THEORY
+    %%% GALOIS THEORY
         \newcommand{\FF}{\ensuremath{\mathbb{F}}} % finite fields
         \DeclareMathOperator{\irr}{Irr} % irreducible polynomial 
         \DeclareMathOperator{\Mor}{Mor} % set of morphisms
         \DeclareMathOperator{\Iso}{Iso} % set of isomorphisms
         \DeclareMathOperator{\Aut}{Aut} % set of automorphisms
         \DeclareMathOperator{\Gal}{Gal} % Galois group
+        \DeclareMathOperator{\Disc}{Disc} % discriminant of a polynomial
+
     
     %%% PROBABILITY
         \newcommand{\Prob}{\ensuremath{\mathbb{P}}} % probability
@@ -178,3 +183,13 @@
     \renewcommand{\thelaw}{\arabic{section}.\arabic{law}}
     \renewcommand{\theprinciple}{\arabic{section}.\arabic{principle}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%% Extra references %%%%%%%
+\makeatletter
+\if@cref@capitalise % if we pass the option 'capitalise' on cleveref package
+\crefname{axiom}{Axiom}{Axioms}
+\else
+\crefname{axiom}{axiom}{axioms}
+\fi
+\makeatother
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
