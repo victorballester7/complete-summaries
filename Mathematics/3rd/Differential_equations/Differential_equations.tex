@@ -486,11 +486,11 @@
     $$
       \left\{
       \begin{aligned}
-        \vectorfunction{\varphi}_1 & =\exp{\vectorfunction{A}t}\vectorfunction{v}_1                                                                                          \\
-        \vectorfunction{\varphi}_2 & =\exp{\vectorfunction{A}t}\left(\vectorfunction{v}_2+t\vectorfunction{v}_1\right)                                                       \\
-        \vectorfunction{\varphi}_3 & =\exp{\vectorfunction{A}t}\left(\vectorfunction{v}_3+t\vectorfunction{v}_2+\frac{t^2}{2}\vectorfunction{v}_1\right)                     \\
-                                   & \;\;\vdots                                                                                                                              \\
-        \vectorfunction{\varphi}_m & =\exp{\vectorfunction{A}t}\left(\vectorfunction{v}_m+t\vectorfunction{v}_{m-1}+\cdots+\frac{t^{m-1}}{(m-1)!}\vectorfunction{v}_1\right) \\
+        \vectorfunction{\varphi}_1 & =\exp{\lambda t}\vectorfunction{v}_1                                                                                          \\
+        \vectorfunction{\varphi}_2 & =\exp{\lambda t}\left(\vectorfunction{v}_2+t\vectorfunction{v}_1\right)                                                       \\
+        \vectorfunction{\varphi}_3 & =\exp{\lambda t}\left(\vectorfunction{v}_3+t\vectorfunction{v}_2+\frac{t^2}{2}\vectorfunction{v}_1\right)                     \\
+                                   & \;\;\vdots                                                                                                                    \\
+        \vectorfunction{\varphi}_m & =\exp{\lambda t}\left(\vectorfunction{v}_m+t\vectorfunction{v}_{m-1}+\cdots+\frac{t^{m-1}}{(m-1)!}\vectorfunction{v}_1\right) \\
       \end{aligned}
       \right.
     $$
@@ -613,30 +613,30 @@
   \subsection{Qualitative theory}
   \subsubsection{Introduction to dynamical systems}
   \begin{definition}
-    A \textit{dynamical system} is a triplet $(G,X,\pi)$, where $G$ is an topological abelian group\footnote{That is, $G$ is an abelian group with an inherit topological structure.}, $X$ is a topological space and $\pi:G\times X\rightarrow X$ is a function such that:
+    A \textit{dynamical system} is a triplet $(G,X,\Psi)$, where $G$ is an topological abelian group\footnote{That is, $G$ is an abelian group with an inherit topological structure.}, $X$ is a topological space and $\Psi:G\times X\rightarrow X$ is a function such that:
     \begin{itemize}
-      \item $\pi$ is continuous.
-      \item $\pi(0,x)=x$ $\forall x\in X$.
-      \item $\pi(t,\pi(s,x))=\pi(t+s,x)$ $\forall s,t\in G$ and $\forall x\in X$.
+      \item $\Psi$ is continuous.
+      \item $\Psi(0,x)=x$ $\forall x\in X$.
+      \item $\Psi(t,\Psi(s,x))=\Psi(t+s,x)$ $\forall s,t\in G$ and $\forall x\in X$.
     \end{itemize}
-    In particular we say that a dynamical system is \textit{discrete} if $G=\ZZ$ and we say that it is \textit{continuous} if $G=\RR$.
+    We say that a dynamical system $(G,X,\Psi)$ is \textit{discrete} if $G=\ZZ$ and we say that it is \textit{continuous} if $G=\RR$.
   \end{definition}
   \begin{definition}
-    Let $(G,X,\pi)$ be a dynamical system with $x\in X$. The \textit{orbit} through $x$ is defined as: $$\gamma(x):=\{\pi(t,x):t\in G\}$$ Moreover if $G=\ZZ$ or $G=\RR$ we define the \textit{positive semi-orbit} through $x$ and the \textit{negative semi-orbit} through $x$ as the following respective sets:
+    Let $(G,X,\Psi)$ be a dynamical system with $x\in X$. The \textit{orbit} through $x$ is defined as: $$\gamma(x):=\{\Psi(t,x):t\in G\}$$ Moreover if $G=\ZZ$ or $G=\RR$ we define the \textit{positive semi-orbit} through $x$ and the \textit{negative semi-orbit} through $x$ as the following respective sets:
     \begin{gather*}
-      \gamma^+(x):=\{\pi(t,x):t\in G_{\geq 0}\}\\
-      \gamma^-(x):=\{\pi(t,x):t\in G_{\leq 0}\}
+      \gamma^+(x):=\{\Psi(t,x):t\in G_{\geq 0}\}\\
+      \gamma^-(x):=\{\Psi(t,x):t\in G_{\leq 0}\}
     \end{gather*}
   \end{definition}
   \begin{definition}
-    Let $(G,X,\pi)$ be a dynamical system. Then, we have an equivalence relation $\sim$ on $X$ given by $$x\sim y\iff\gamma(x)=\gamma(y)$$
-    which gives a partition of $X$, which is called \textit{phase space}.
+    Let $(G,X,\Psi)$ be a dynamical system. Then, we have an equivalence relation $\sim$ on $X$ given by $$x\sim y\iff\gamma(x)=\gamma(y)\quad\forall x,y\in X$$
+    which creates a partition of $X$, called \textit{phase portrait}.
   \end{definition}
   \begin{definition}
-    Let $(G,X,\pi)$ be a dynamical system with $x\in X$. We define the following function: $$\function{\pi_x}{\RR}{\gamma(x)}{t}{\pi(x,t)}$$
+    Let $(G,X,\Psi)$ be a dynamical system with $x\in X$. We define the following function: $$\function{\Psi_x}{G}{\gamma(x)}{t}{\Psi(t,x)}$$
   \end{definition}
   \begin{lemma}
-    Let $\vectorfunction{f}:\RR^n\rightarrow\RR^n$ be a continuous function such that the flux $\vectorfunction{\phi}(t,t_0,\vectorfunction{x}_0)$ of the ode $\vectorfunction{x}' =\vectorfunction{f}(\vectorfunction{x})$ is defined for all $t\in\RR$. Then, $(\RR,\RR^n,\vectorfunction{\pi})$ is a dynamical system, where $\vectorfunction{\pi}(t,\vectorfunction{x})=\vectorfunction{\phi}(t,0,\vectorfunction{x})$. Furthermore, note that $\vectorfunction{\gamma}(\vectorfunction{x})=\im(\vectorfunction{\phi}(\cdot,0,\vectorfunction{x}))$.
+    Let $\vectorfunction{f}:\RR^n\rightarrow\RR^n$ be a continuous function such that the flux $\vectorfunction{\phi}(t,t_0,\vectorfunction{x}_0)$ of the ode $\vectorfunction{x}' =\vectorfunction{f}(\vectorfunction{x})$ is defined for all $t\in\RR$. Then, $(\RR,\RR^n,\vectorfunction{\Psi})$ is a dynamical system, where $\vectorfunction{\Psi}(t,\vectorfunction{x})=\vectorfunction{\phi}(t,0,\vectorfunction{x})$. Furthermore, note that $\vectorfunction{\gamma}(\vectorfunction{x})=\im(\vectorfunction{\phi}(\cdot,0,\vectorfunction{x}))$.
   \end{lemma}
   \begin{lemma}
     Let $\vectorfunction{f}:\RR^n\rightarrow\RR^n$ be a continuous function such that $\exists M,N\in\RR_{\geq 0}$ with $\|\vectorfunction{f}(x)\|\leq M\|x\|+N$. Then, the solutions of the ode $\vectorfunction{x}' =\vectorfunction{f}(\vectorfunction{x})$ are defined for all $t\in\RR$.
@@ -651,21 +651,21 @@
     Let $H$ be a proper subgroup of $\RR$ which is closed. Then, $\exists T\in\RR_{\geq 0}$ such that $H=T\ZZ$.
   \end{lemma}
   \begin{prop}
-    Let $(\RR,\RR^n,\vectorfunction{\pi})$ be a dynamical system and $\vectorfunction{\gamma}(\vectorfunction{x})$ be an orbit. Then, there are 3 possible cases for $\vectorfunction{\gamma}(\vectorfunction{x})$:
+    Let $(\RR,\RR^n,\vectorfunction{\Psi})$ be a dynamical system and $\vectorfunction{\gamma}(\vectorfunction{x})$ be an orbit. Then, there are 3 possible cases for $\vectorfunction{\gamma}(\vectorfunction{x})$:
     \begin{enumerate}
       \item $\vectorfunction{\gamma}(\vectorfunction{x})=\{\vectorfunction{x}\}$.
       \item $\vectorfunction{\gamma}(\vectorfunction{x})\cong S^1$.
-      \item $\vectorfunction{\gamma}(\vectorfunction{x})$ is injective and continuous.
+      \item $\vectorfunction{\gamma}(\vectorfunction{x})$ is homeomorphic to an injective and continuous image of $\RR$.
     \end{enumerate}
   \end{prop}
   \begin{definition}
-    Let $(\RR,\RR^n,\vectorfunction{\pi})$ be a dynamical system and $\vectorfunction{p}\in\RR^n$. We say that $\vectorfunction{p}\in\RR^n$ is a \textit{critical point} or \textit{singular point} if $\vectorfunction{\gamma}(\vectorfunction{p})=\{\vectorfunction{p}\}$. Otherwise we say that $\vectorfunction{p}$ is \textit{non-singular} or \textit{regular}.
+    Let $(\RR,\RR^n,\vectorfunction{\Psi})$ be a dynamical system and $\vectorfunction{p}\in\RR^n$. We say that $\vectorfunction{p}\in\RR^n$ is a \textit{critical point} or \textit{singular point} if $\vectorfunction{\gamma}(\vectorfunction{p})=\{\vectorfunction{p}\}$. Otherwise we say that $\vectorfunction{p}$ is \textit{non-singular} or \textit{regular}.
   \end{definition}
   \begin{definition}
-    Let $(\RR,\RR^n,\vectorfunction{\pi})$ be a dynamical system and $\vectorfunction{\gamma}(\vectorfunction{x})$ be an orbit of $(\RR,\RR^n,\vectorfunction{\pi})$. We say that $\vectorfunction{\gamma}(\vectorfunction{x})$ is \textit{periodic} of period $T>0$ if $\vectorfunction{\gamma}(\vectorfunction{x})\cong S^1$ and $\ker\vectorfunction{\pi_{\vectorfunction{x}}}=T\ZZ$.
+    Let $(\RR,\RR^n,\vectorfunction{\Psi})$ be a dynamical system and $\vectorfunction{\gamma}(\vectorfunction{x})$ be an orbit of $(\RR,\RR^n,\vectorfunction{\Psi})$. We say that $\vectorfunction{\gamma}(\vectorfunction{x})$ is \textit{periodic} of period $T>0$ if $\vectorfunction{\gamma}(\vectorfunction{x})\cong S^1$ and $\ker\vectorfunction{\Psi_{\vectorfunction{x}}}=T\ZZ$.
   \end{definition}
   \begin{prop}
-    Let $(\RR,\RR^n,\vectorfunction{\pi})$ be a dynamical system such that $\vectorfunction{\pi}(t,\vectorfunction{x})=\vectorfunction{\phi}(t,0,\vectorfunction{x})$, where $\vectorfunction{\phi}(t,t_0,\vectorfunction{x}_0)$ is the flux of the ode $\vectorfunction{x}' =\vectorfunction{f}(\vectorfunction{x})$. Let $\vectorfunction{p}\in\RR^n$. Then, the following statements are equivalent:
+    Let $(\RR,\RR^n,\vectorfunction{\Psi})$ be a dynamical system such that $\vectorfunction{\Psi}(t,\vectorfunction{x})=\vectorfunction{\phi}(t,0,\vectorfunction{x})$, where $\vectorfunction{\phi}(t,t_0,\vectorfunction{x}_0)$ is the flux of the ode $\vectorfunction{x}' =\vectorfunction{f}(\vectorfunction{x})$. Let $\vectorfunction{p}\in\RR^n$. Then, the following statements are equivalent:
     \begin{enumerate}
       \item $\{\vectorfunction{p}\}$ is a critical point.
       \item $\vectorfunction{\phi}(t,0,\vectorfunction{p})=\vectorfunction{p}$.
@@ -673,18 +673,37 @@
     \end{enumerate}
   \end{prop}
   \begin{definition}
-    Let $(\RR,\RR^n,\vectorfunction{\pi})$ be a dynamical system and $\vectorfunction{x}\in\RR^n$. We say that $\vectorfunction{y}\in\RR^n$ is a \textit{$\omega$-limit point} of $\vectorfunction{x}$ if there exists a sequence $(t_n)\subset\RR$ such that $\displaystyle\lim_{n\to\infty}t_n=+\infty$ and $\displaystyle\lim_{n\to\infty}\vectorfunction{\pi}(t_n,\vectorfunction{x})=\vectorfunction{y}$.
-    The set of all $\omega$-limit points of $\vectorfunction{x}$ is called \textit{$\omega$-limit set} and it is denoted by $\omega(\vectorfunction{x})$.
-  \end{definition}
-  \begin{definition}
-    Let $(\RR,\RR^n,\vectorfunction{\pi})$ be a dynamical system and $\vectorfunction{x}\in\RR^n$. We say that $\vectorfunction{y}\in\RR^n$ is a \textit{$\alpha$-limit point} of $\vectorfunction{x}$ if there exists a sequence $(t_n)\subset\RR$ such that $\displaystyle\lim_{n\to\infty}t_n=-\infty$ and $\displaystyle\lim_{n\to\infty}\vectorfunction{\pi}(t_n,\vectorfunction{x})=\vectorfunction{y}$.
+    Let $(\RR,\RR^n,\vectorfunction{\Psi})$ be a dynamical system and $\vectorfunction{x}\in\RR^n$. We say that $\vectorfunction{y}\in\RR^n$ is a \textit{$\alpha$-limit point} of $\vectorfunction{x}$ if there exists a sequence $(t_n)\subset\RR$ such that $\displaystyle\lim_{n\to\infty}t_n=-\infty$ and $\displaystyle\lim_{n\to\infty}\vectorfunction{\Psi}(t_n,\vectorfunction{x})=\vectorfunction{y}$.
     The set of all $\alpha$-limit points of $\vectorfunction{x}$ is called \textit{$\alpha$-limit set} and it is denoted by $\alpha(\vectorfunction{x})$.
   \end{definition}
+  \begin{definition}
+    Let $(\RR,\RR^n,\vectorfunction{\Psi})$ be a dynamical system and $\vectorfunction{x}\in\RR^n$. We say that $\vectorfunction{y}\in\RR^n$ is a \textit{$\omega$-limit point} of $\vectorfunction{x}$ if there exists a sequence $(t_n)\subset\RR$ such that $\displaystyle\lim_{n\to\infty}t_n=+\infty$ and $\displaystyle\lim_{n\to\infty}\vectorfunction{\Psi}(t_n,\vectorfunction{x})=\vectorfunction{y}$.
+    The set of all $\omega$-limit points of $\vectorfunction{x}$ is called \textit{$\omega$-limit set} and it is denoted by $\omega(\vectorfunction{x})$.
+  \end{definition}
   \begin{prop}
-    Let $(\RR,\RR^n,\vectorfunction{\pi})$ be a dynamical system and $\vectorfunction{x}\in\RR^n$. Then: $$\Cl(\vectorfunction{\gamma}(\vectorfunction{x}))=\alpha(\vectorfunction{x})\cup\vectorfunction{\gamma}(\vectorfunction{x})\cup\omega(\vectorfunction{x})$$
+    Let $(\RR,\RR^n,\vectorfunction{\Psi})$ be a dynamical system and $\vectorfunction{x}\in\RR^n$. Then: $$\Cl(\vectorfunction{\gamma}(\vectorfunction{x}))=\alpha(\vectorfunction{x})\cup\vectorfunction{\gamma}(\vectorfunction{x})\cup\omega(\vectorfunction{x})$$
   \end{prop}
   \begin{definition}
-    Let $(\RR,\RR^n,\vectorfunction{\pi})$ be a dynamical system and $A\subseteq \RR^n$. We say that $A$ is \textit{invariant} if $\vectorfunction{\gamma}(\vectorfunction{x})\subseteq A$ $\forall\vectorfunction{x}\in A$. We say that $A$ is \textit{positively invariant} if $\vectorfunction{\gamma}^+(\vectorfunction{x})\subseteq A$ $\forall\vectorfunction{x}\in A$. Analogously, we say that $A$ is \textit{negatively invariant} if $\vectorfunction{\gamma}^-(\vectorfunction{x})\subseteq A$ $\forall\vectorfunction{x}\in A$
+    Let $(\RR,\RR^n,\vectorfunction{\Psi})$ be a dynamical system and $A\subseteq \RR^n$ be a subset. We say that $A$ is \textit{invariant} if $\vectorfunction{\gamma}(\vectorfunction{x})\subseteq A$ $\forall\vectorfunction{x}\in A$. We say that $A$ is \textit{positively invariant} if $\vectorfunction{\gamma}^+(\vectorfunction{x})\subseteq A$ $\forall\vectorfunction{x}\in A$. Analogously, we say that $A$ is \textit{negatively invariant} if $\vectorfunction{\gamma}^-(\vectorfunction{x})\subseteq A$ $\forall\vectorfunction{x}\in A$
   \end{definition}
+  \begin{definition}
+    Let $(\RR,\RR^n,\vectorfunction{\Psi})$ be a dynamical system and $K\subset \RR^n$ be a compact set. We say that $K$ is \textit{positively stable} if for all neighbourhood $U$ of $K$, there exists a neighbourhood $V$ of $K$ with $V\subseteq U$ and such that $\forall \vectorfunction{x}\in V$, $\vectorfunction{\gamma}^+(\vectorfunction{x})\subset U$. Analogously, we say that $K$ is \textit{negatively stable} if for all neighbourhood $U$ of $K$, there exists a neighbourhood $V$ of $K$ with $V\subseteq U$ and such that $\forall \vectorfunction{x}\in V$, $\vectorfunction{\gamma}^-(\vectorfunction{x})\subset U$.
+  \end{definition}
+  \begin{definition}
+    Let $(\RR,\RR^n,\vectorfunction{\Psi})$ be a dynamical system and $K\subset \RR^n$ be a compact set. We say that $K$ is \textit{attractor} if there exists a neighbourhood $U$ of $K$ such that $\forall \vectorfunction{x}\in U$, $\omega(\vectorfunction{x})\subset K$.  We say that $K$ is \textit{repeller} if there exists a neighbourhood $U$ of $K$ such that $\forall \vectorfunction{x}\in U$, $\alpha(\vectorfunction{x})\subset K$. We say that $K$ is \textit{asymptotically stable} if it is both attractor and positively stable.
+  \end{definition}
+  \begin{prop}
+    Let $(\RR,\RR^n,\vectorfunction{\Psi})$ be a dynamical system and $K\subset \RR^n$ be a compact set. Suppose that $K$ is positively stable. Then, $K$ is positively invariant.
+  \end{prop}
+  \begin{definition}
+    Let $(\RR,\RR^n,\vectorfunction{\Psi})$ be a dynamical system and $\vectorfunction{p}\in\RR^n$. We say that $\vectorfunction{p}$ is a \textit{center} if there exists a neighbourhood $U$ of $\vectorfunction{p}$ such that if $\vectorfunction{\gamma}(\vectorfunction{(x)})\subset U$, then $\vectorfunction{\gamma}(\vectorfunction{(x)})$ is periodic. The largest neighbourhood with this property is called \textit{basin} of the center.
+  \end{definition}
+  \begin{prop}
+    Let $(\RR,\RR^n,\vectorfunction{\Psi})$ be a dynamical system and $\vectorfunction{p}\in\RR^n$ be a center. Then: 
+    \begin{enumerate}
+      \item $\vectorfunction{p}$ is positively and negatively stable.
+      \item $\vectorfunction{p}$ is not an attractor.
+    \end{enumerate}
+  \end{prop}
 \end{multicols}
 \end{document}
