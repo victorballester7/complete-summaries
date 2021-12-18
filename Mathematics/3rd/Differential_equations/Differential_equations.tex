@@ -622,7 +622,7 @@
     We say that a dynamical system $(G,X,\Psi)$ is \textit{discrete} if $G=\ZZ$ and we say that it is \textit{continuous} if $G=\RR$.
   \end{definition}
   \begin{definition}
-    Let $(G,X,\Psi)$ be a dynamical system with $x\in X$. The \textit{orbit} through $x$ is defined as: $$\gamma(x):=\{\Psi(t,x):t\in G\}$$ Moreover if $G=\ZZ$ or $G=\RR$ we define the \textit{positive semi-orbit} through $x$ and the \textit{negative semi-orbit} through $x$ as the following respective sets:
+    Let $(G,X,\Psi)$ be a dynamical system with $x\in X$. The \textit{orbit} through $x$ is defined as: $$\gamma_{\Psi}(x):=\{\Psi(t,x):t\in G\}\footnote{In general, if the context is clear we will use the notation $\gamma(x)$ instead of $\gamma_{\Psi}(x)$.}$$ Moreover if $G=\ZZ$ or $G=\RR$ we define the \textit{positive semi-orbit} through $x$ and the \textit{negative semi-orbit} through $x$ as the following respective sets:
     \begin{gather*}
       \gamma^+(x):=\{\Psi(t,x):t\in G_{\geq 0}\}\\
       \gamma^-(x):=\{\Psi(t,x):t\in G_{\leq 0}\}
@@ -696,14 +696,68 @@
     Let $(\RR,\RR^n,\vectorfunction{\Psi})$ be a dynamical system and $K\subset \RR^n$ be a compact set. Suppose that $K$ is positively stable. Then, $K$ is positively invariant.
   \end{prop}
   \begin{definition}
-    Let $(\RR,\RR^n,\vectorfunction{\Psi})$ be a dynamical system and $\vectorfunction{p}\in\RR^n$. We say that $\vectorfunction{p}$ is a \textit{center} if there exists a neighbourhood $U$ of $\vectorfunction{p}$ such that if $\vectorfunction{\gamma}(\vectorfunction{(x)})\subset U$, then $\vectorfunction{\gamma}(\vectorfunction{(x)})$ is periodic. The largest neighbourhood with this property is called \textit{basin} of the center.
+    Let $(\RR,\RR^n,\vectorfunction{\Psi})$ be a dynamical system and $\vectorfunction{p}\in\RR^n$. We say that $\vectorfunction{p}$ is a \textit{center} if there exists a neighbourhood $U$ of $\vectorfunction{p}$ such that if $\vectorfunction{\gamma}(\vectorfunction{x})\subset U$, then $\vectorfunction{\gamma}(\vectorfunction{x})$ is periodic. The largest neighbourhood with this property is called \textit{basin} of the center.
   \end{definition}
   \begin{prop}
-    Let $(\RR,\RR^n,\vectorfunction{\Psi})$ be a dynamical system and $\vectorfunction{p}\in\RR^n$ be a center. Then: 
+    Let $(\RR,\RR^n,\vectorfunction{\Psi})$ be a dynamical system and $\vectorfunction{p}\in\RR^n$ be a center. Then:
     \begin{enumerate}
       \item $\vectorfunction{p}$ is positively and negatively stable.
       \item $\vectorfunction{p}$ is not an attractor.
     \end{enumerate}
   \end{prop}
+  \subsubsection{Equivalence and conjugacy of dynamical systems}
+  \begin{definition}
+    Let $(G,X,\Psi_1)$ and $(G,X,\Psi_2)$ be dynamical systems and $r\in\NN\cup\{0,\infty\}$. We say that $(G,X,\Psi_1)$ and $(G,X,\Psi_2)$ are \textit{equivalents of class $\mathcal{C}^r$} if there exists a diffeomorphism $h:X\rightarrow Y$ of class $\mathcal{C}^r$ such that $\forall x\in X$, $h(\gamma_{\Psi_1}(x))=\gamma_{\Psi_2}(h(x))$. In particular, if $r=0$ we say that $(G,X,\Psi_1)$ and $(G,X,\Psi_2)$ are \textit{topologically equivalent}.
+  \end{definition}
+  \begin{definition}
+    Let $(G,X,\Psi_1)$ and $(G,X,\Psi_2)$ be dynamical systems and $r\in\NN\cup\{0,\infty\}$. We say that $(G,X,\Psi_1)$ and $(G,X,\Psi_2)$ are \textit{conjugates of class $\mathcal{C}^r$} if there exists a diffeomorphism $h:X\rightarrow Y$ of class $\mathcal{C}^r$ such that $\forall (t,x)\in G\times X$, $h(\Psi_1(t,x))=\Psi_2(t,h(x))$. In particular, if $r=0$ we say that $(G,X,\Psi_1)$ and $(G,X,\Psi_2)$ are \textit{topologically conjugate}.
+  \end{definition}
+  \begin{prop}
+    Let $(G,X,\Psi_1)$ and $(G,X,\Psi_2)$ be dynamical systems and $h$ be a conjugation of class $\mathcal{C}^r$ between them. Then, $h$ is an equivalence of class $\mathcal{C}^r$ between $(G,X,\Psi_1)$ and $(G,X,\Psi_2)$.
+  \end{prop}
+  \begin{prop}
+    Let $(G,X,\Psi_1)$ and $(G,X,\Psi_2)$ be dynamical systems and $h:X\rightarrow Y$ be an equivalence of class $\mathcal{C}^r$ between them.
+    \begin{enumerate}
+      \item $h$ preserves the type of orbit. More precisely if $p\in X$, we have:
+            \begin{enumerate}
+              \item If $p$ is a critical point, then so it is $h(p)$.
+              \item If $\gamma(p)$ is a periodic orbit, then so it is $h(\gamma(p))$\footnote{Note that the period of $\gamma(p)$ and $h(\gamma(p))$ may be different.}.
+              \item If $\gamma(p)$ is the injective and continuous image of $\RR$, then so it is $h(\gamma(p))$.
+            \end{enumerate}
+      \item If $p\in X$ is a critical point of $\Psi_1$, we have:
+            \begin{enumerate}
+              \item If $p$ is attractor for $(G,X,\Psi_1)$, then so it is $h(p)$ for $(G,X,\Psi_2)$.
+              \item If $p$ is repeller for $(G,X,\Psi_1)$, then so it is $h(p)$ for $(G,X,\Psi_2)$.
+              \item If $p$ is positively stable for $(G,X,\Psi_1)$, then so it is $h(p)$ for $(G,X,\Psi_2)$.
+              \item If $p$ is asymptotically stable for $(G,X,\Psi_1)$, then so it is $h(p)$ for $(G,X,\Psi_2)$.
+            \end{enumerate}
+    \end{enumerate}
+  \end{prop}
+  \begin{prop}
+    A conjugation between two dynamical systems preserves the period of periodic orbits.
+  \end{prop}
+  \begin{definition}
+    Let $U\subseteq \RR^n$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a vector field of class $\mathcal{C}^1$. For all $\vectorfunction{x}_0\in U$, let $\vectorfunction{\varphi}_{\vectorfunction{x}_0}(t)$ be the maximal solution to the ivp
+    $$\left\{
+      \begin{aligned}
+         & \vectorfunction{x}'      =\vectorfunction{f}(t,\vectorfunction{x}) \\
+         & \vectorfunction{x}(0)  =\vectorfunction{x}_0
+      \end{aligned}
+      \right.$$
+    We define the \textit{flux} of the vector field $\vectorfunction{f}$ as $\vectorfunction{\phi}(t,\vectorfunction{x}):=\vectorfunction{\varphi}_{\vectorfunction{x}}(t)$.
+  \end{definition}
+  \begin{prop}
+    Let $U\subseteq \RR^n$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a vector field of class $\mathcal{C}^1$. Then, the flux $\vectorfunction{\phi}(t,\vectorfunction{x})$ of $\vectorfunction{f}$ defines locally a dynamical system.
+  \end{prop}
+  \begin{definition}
+    Let $U,V\subseteq \RR^n$ be open sets and $\vectorfunction{f}:U\rightarrow\RR^n$, $\vectorfunction{f}:V\rightarrow\RR^n$ be vector fields of class $\mathcal{C}^1$ with fluxes $\vectorfunction{\phi}$ and $\vectorfunction{\psi}$. We say that $\vectorfunction{f}$ and $\vectorfunction{g}$ are \textit{equivalent} if there exists a diffeomorphism $h:U\rightarrow V$ of class $\mathcal{C}^r$ such that $\forall \vectorfunction{x}\in U$, $\vectorfunction{h}(\vectorfunction{\gamma}_{\vectorfunction{f}}(\vectorfunction{x}))=\vectorfunction{\gamma}_{\vectorfunction{g}}(\vectorfunction{h}(\vectorfunction{x}))$.
+  \end{definition}
+  \begin{definition}
+    Let $U,V\subseteq \RR^n$ be open sets and $\vectorfunction{f}:U\rightarrow\RR^n$, $\vectorfunction{f}:V\rightarrow\RR^n$ be vector fields of class $\mathcal{C}^1$ with fluxes $\vectorfunction{\phi}$ and $\vectorfunction{\psi}$. We say that $\vectorfunction{f}$ and $\vectorfunction{g}$ are \textit{conjugate} if there exists a diffeomorphism $h:U\rightarrow V$ of class $\mathcal{C}^r$ such that $\forall (t,\vectorfunction{x})\in \domain(\vectorfunction{f})$, $\vectorfunction{h}(\vectorfunction{\phi}(t,\vectorfunction{x}))=\vectorfunction{\psi}(t,\vectorfunction{h}(\vectorfunction{x}))$.
+  \end{definition}
+  \begin{lemma}
+    Let $U,V\subseteq \RR^n$ be open sets and $\vectorfunction{f}:U\rightarrow\RR^n$, $\vectorfunction{g}:V\rightarrow\RR^n$ be vector fields of class $\mathcal{C}^1$ and $\vectorfunction{h}:U\rightarrow V$ be a diffeomorphism of class $\mathcal{C}^1$. Then, $h$ is a conjugation of class $\mathcal{C}^1$ if and only if $\vectorfunction{Dh}(\vectorfunction{x})(\vectorfunction{f}(\vectorfunction{x}))=\vectorfunction{g}(\vectorfunction{h}(\vectorfunction{x}))$ $\forall \vectorfunction{x}\in U$.
+  \end{lemma}
+
 \end{multicols}
 \end{document}

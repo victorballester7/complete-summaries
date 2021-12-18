@@ -512,6 +512,13 @@
     A subgroup $H$ of $S_n$ is called \textit{transitive} if $\forall i,j\in\{1,\ldots,n\}$, $\exists \sigma\in H$ such that $\sigma(i)=j$.
   \end{definition}
   \begin{lemma}
+    The transitive subgroups of $S_4$, up to isomorphism, are $S_4$, $A_4$, $D_4$, $V_4$ and $C_4$, where:
+    $$V_4=\langle (1,2)(3,4),(1,3)(2,4)\rangle\quad\text{and}\quad C_4=\langle(1,2,3,4)\rangle$$
+  \end{lemma}
+  \begin{corollary}
+    The transitive subgroups of $A_4$, up to isomorphism, are $A_4$ and $V_4$.
+  \end{corollary}
+  \begin{lemma}
     Let $K$ be a field, $p(x)\in K[x]$ be an irreducible and separable polynomial of degree $n$ and $L$ be its splitting field. Let $\alpha_1,\ldots,\alpha_n\in L$ be the roots of $p(x)$. Then, there exists a unique monomorphism $\iota: \Gal(\quot{p(x)}{K})\hookrightarrow S_n$ such that $\sigma(\alpha_i)=\alpha_{\iota(\sigma)(i)}$.
   \end{lemma}
   \begin{lemma}
@@ -546,6 +553,7 @@
   \begin{definition}
     Let $K$ be a field and $p(x)\in K[x]$. We say that $p(x)$ is \textit{solvable by radicals} if the splitting field of $p(x)$ over $K$ is solvable by radicals.
   \end{definition}
+  \subsubsection{Solvable groups}
   \begin{definition}
     Let $(G,\cdot)$ be a finite group. We say $(G,\cdot)$ is \textit{solvable} if there is a chain of subgroups $(H_i,\cdot)$ of $(G,\cdot)$ satisfying: $$\{e\}=H_0\unlhd H_1\unlhd\cdots\unlhd H_n=G$$ and such that $(H_i/H_{i-1},*)$ are abelian for $i=1,\ldots,n$.
   \end{definition}
@@ -562,13 +570,14 @@
     Let $(G,\cdot)$ be a solvable group. Then, there exists a chain of subgroups $$\{e\}=H_0\unlhd H_1\unlhd\cdots\unlhd H_n=G$$ such that $(H_i/H_{i-1},*)$ are cyclic for $i=1,\ldots,n$.
   \end{prop}
   \begin{theorem}
-    $S_n$ and $A_n$ are solvable for all $n\geq 5$.
+    $S_n$ and $A_n$ aren't solvable for all $n\geq 5$.
   \end{theorem}
   \begin{theorem}
     $A_n$ is simple for all $n\in\NN$.
   \end{theorem}
+  \subsubsection{Cyclotomic and cyclic extensions}
   \begin{prop}
-    Let $K$ be a field such that $\ch K=0$, $n\geq 2$ and $L$ be the splitting field of $x^n-1$ over $K$. Then, $L=K(\xi_n)$ where ${\xi_n}^n=1$ and ${\xi_n}^m\ne 1$ for all $m=1,\ldots,n-1$. Moreover, $\Gal(\quot{L}{K})\cong{(\quot{\ZZ}{n\ZZ})}^*$.
+    Let $K$ be a field such that $\ch K=0$, $n\geq 2$ and $L$ be the splitting field of $x^n-1$ over $K$. Let $\xi_n$ be such that ${\xi_n}^n=1$ and ${\xi_n}^m\ne 1$ for all $m=1,\ldots,n-1$ (that is, $\xi_n$ is the \textit{$n$-th primitive root of unity}). Then, $L=K(\xi_n)$ and $\Gal(\quot{L}{K})\cong H$ for some $H\in\mathcal{S}\left({(\quot{\ZZ}{n\ZZ})}^*\right)$. Furthermore if $K=\QQ$, we have that $\Gal(\quot{L}{K})\cong {(\quot{\ZZ}{n\ZZ})}^*$.
   \end{prop}
   \begin{prop}
     Let $K$ be a field such that $\ch K=0$ and $x^n-1$ splits into linear factors in $K$. Let $\quot{K(\alpha)}{K}$ be a radical extension. Then, $\quot{L}{K}$ is Galois and $\Gal(\quot{L}{K})\cong\quot{\ZZ}{d\ZZ}$, where $d\mid n$. Furthermore, $\alpha^d\in K$ and $x^d-\alpha^d$ is irreducible over $K$.
@@ -579,14 +588,33 @@
   \begin{theorem}
     Let $K$ be a field such that $\ch K=0$ and $x^n-1$ splits into linear factors in $K$. Then, $\quot{L}{K}$ is cyclic of degree $n$ if and only if $\quot{L}{K}$ is radical of degree $n$.
   \end{theorem}
-  \begin{lemma}
-    Let $L$ and $F$ be fields and $f_1,\ldots,f_n:L\rightarrow F$ be distinct field morphisms. Then, if $\lambda_1,\ldots,\lambda_n\in F$ are such that $\lambda_1f_1+\cdots+\lambda_nf_n=0$, then $\lambda_1=\cdots=\lambda_n$. In that case, we say that $f_1,\ldots,f_n$ are \textit{$F$-linearly independent}.
+  \begin{lemma}[Dedekind's lemma]
+    Let $L$ and $F$ be fields and $f_1,\ldots,f_n:L\rightarrow F$ be distinct field morphisms. Then, if $\lambda_1,\ldots,\lambda_n\in F$ are such that $\lambda_1f_1+\cdots+\lambda_nf_n=0$, then $\lambda_1=\cdots=\lambda_n=0$. In that case, we say that $f_1,\ldots,f_n$ are \textit{$F$-linearly independent}.
   \end{lemma}
-
-
+  \begin{lemma}
+    Let $\quot{F}{K}$ be an field extension, $p(x)\in K[x]$ be a separable polynomial, $\quot{L}{K}$ be a splitting field of $p(x)$ over $K$ and $\quot{E}{F}$ be a splitting field of $p(x)$ over $F$. Then, $\Gal(\quot{E}{F})\cong H$ for some $H\in\mathcal{S}(\Gal(\quot{L}{K}))$
+  \end{lemma}
   \begin{theorem}
-    Let $K$ be a field such that $\ch K=0$, and $p(x)\in K[x]$. Then, $p(x)$ is solvable by radicals if and only if $\Gal(\quot{p(x)}{K})$ is solvable.
+    Let $K$ be a field such that $\ch K=0$, and $p(x)\in K[x]$. Then: $$\textstyle p(x)\text{ is solvable by radicals}\iff\Gal(\quot{p(x)}{K})\text{ is solvable}$$
   \end{theorem}
+  \begin{lemma}
+    Let $K$ be a field and $a_1,\ldots,a_n$ be unknowns. Then, $$K(a_1,\ldots,a_n)/K(s_1,\ldots,s_n)\cong S_n$$
+  \end{lemma}
+  \begin{corollary}
+    Let $K$ be a field and $a_1,\ldots,a_n$ be unknowns. Then, $${K(a_1,\ldots,a_n)}^{A_n}=K(s_1,\ldots,s_n)(\delta)$$
+  \end{corollary}
+  \begin{theorem}[Abel-Ruffini theorem]
+    There is no solution in radicals to general polynomial equations of degree five or higher with arbitrary coefficients.
+  \end{theorem}
+  \begin{prop}
+    Let $K$ be a field such that $\ch K=0$, and $p(x)\in K[x]$ be an irreducible polynomial of degree 5. $p(x)$ is solvable by radicals if and only if $\Gal\quot{p(x)}{K}$ it is not isomorphic to $S_5$ or $A_5$
+  \end{prop}
+  \begin{theorem}
+    For all $n\geq 2$, $\Gal(x^n-x-1/\QQ)\cong S_n$.
+  \end{theorem}
+  \begin{corollary}
+    Let $G$ be a finite group. Then, there exists a finite field extension $\quot{K_G}{\QQ}$ and $\quot{L_G}{K_G}$ such that $\Gal(\quot{L_G}{K_G})\cong G$.
+  \end{corollary}
 \end{multicols}
 
 \end{document}
