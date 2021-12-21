@@ -9,7 +9,7 @@
     \begin{enumerate}
       \item $d(x,y)=0\iff x=y$.
       \item $d(x,y)=d(y,x)$.
-      \item $d(x,y)\leq d(x,z)+d(z,y)\quad$\textit{(triangular inequality)}.
+      \item $d(x,y)\leq d(x,z)+d(z,y)\quad$(\textit{triangular inequality}).
     \end{enumerate}
     We define a \textit{metric space} as a pair $(X,d)$ that satisfy the previous properties.
   \end{definition}
@@ -289,6 +289,70 @@
   \begin{prop}
     Being homeomorphic as topological spaces is an equivalence relation.
   \end{prop}
+  \subsection{Separation axioms}
+  \begin{definition}[$T_0$ space]
+    Let $(X,\topo)$ be a topological space. We say that $(X,\topo)$ is $T_0$\footnote{The letter $T$ comes from the German word ``Trennungsaxiom'' which means ``separation axioms''.} (or \textit{Kolmogorov}) if for any two distinct points of $X$, there exists an open set that contain one of them but not the other.
+  \end{definition}
+  \begin{definition}[$T_1$ space]
+    Let $(X,\topo)$ be a topological space. We say that $(X,\topo)$ is $T_1$ (or \textit{Fréchet}) if for any two distinct points of $x,y\in X$, there exists an open set $U\in\topo$ such that $x\in U$ and $y\notin U$.
+  \end{definition}
+  \begin{theorem}
+    Let $(X,\topo)$ be a topological space. The statements following are equivalent:
+    \begin{enumerate}
+      \item $(X,\topo)$ is $T_1$.
+      \item For all $x\in X$, $\{x\}=\bigcap_{N\in \mathcal{N}_x}N$.
+      \item For all $x\in X$, $\{x\}$ is closed.
+    \end{enumerate}
+  \end{theorem}
+  \begin{definition}[$T_2$ space]
+    Let $(X,\topo)$ be a topological space. We say that $(X,\topo)$ is $T_2$ (or \textit{Hausdorff}) if for any two distinct points of $x,y\in X$, there exist $U,V\in\topo$ such that $x\in U$, $y\in V$ and $U\cap V=\varnothing$.
+  \end{definition}
+  \begin{theorem}
+    Let $(X,\topo)$ be a topological space. The statements following are equivalent:
+    \begin{enumerate}
+      \item $(X,\topo)$ is $T_2$.
+      \item For all $x\in X$, $\{x\}=\bigcap_{N\in \mathcal{N}_x}\Cl(N)$.
+      \item The diagonal $\Delta(X):=\{(x,x)\in X\times X\}\subset X\times X$ is closed.
+    \end{enumerate}
+  \end{theorem}
+  \begin{definition}
+    Let $(X,\topo)$ be a topological space. We say that $(X,\topo)$ is \textit{regular} if for all $x\in X$ and for all a closed sets $C\subseteq X$ such that $x\notin C$, there exist $U,V\in\topo$ such that $x\in U$, $C\subseteq V$ and $U\cap V=\varnothing$.
+  \end{definition}
+  \begin{definition}[$T_3$ space]
+    Let $(X,\topo)$ be a topological space. We say that $(X,\topo)$ is $T_3$ if it is $T_1$ and regular.
+  \end{definition}
+  \begin{theorem}
+    Let $(X,\topo)$ be a topological space. The statements following are equivalent:
+    \begin{enumerate}
+      \item $(X,\topo)$ is $T_3$.
+      \item For all $x\in X$ and for all $U\in\topo$ such that $x\in U$, $\exists V\in\topo$ such that $x\in V\subseteq\Cl(V)\subseteq U$.
+    \end{enumerate}
+  \end{theorem}
+  \begin{definition}
+    Let $(X,\topo)$ be a topological space. We say that $(X,\topo)$ is \textit{normal} if for all closed sets $C,K\subseteq X$ such that $C\cap K=\varnothing$, there exist $U,V\in\topo$ such that $C\subseteq U$, $K\subseteq V$ and $U\cap V=\varnothing$.
+  \end{definition}
+  \begin{definition}[$T_4$ space]
+    Let $(X,\topo)$ be a topological space. We say that $(X,\topo)$ is $T_4$ if it is $T_1$ and normal.
+  \end{definition}
+  \begin{theorem}
+    Let $(X,\topo)$ be a topological space. The statements following are equivalent:
+    \begin{enumerate}
+      \item $(X,\topo)$ is $T_4$.
+      \item For all closed set $C\subseteq X$ and for all $U\in\topo$ such that $C\subseteq U$, $\exists V\in\topo$ such that $C\subseteq V\subseteq\Cl(V)\subseteq U$.
+    \end{enumerate}
+  \end{theorem}
+  \begin{lemma}[Urysohn's lemma]
+    Let $(X,\topo)$ be a topological space $T_4$ and $A,B\subseteq X$ be closed sets. Then, there exists a continuous function $f:(X,\topo)\rightarrow[0,1]$ such that $A\subseteq f^{-1}(0)$ and $B\subseteq f^{-1}(1)$.
+  \end{lemma}
+  \begin{theorem}[Tietze extension theorem]
+    Let $(X,\topo)$ be a topological space $T_4$, $C\subseteq X$ be a closed set and $f:C\rightarrow[0,1]$ be a continuous function. Then, there exists a continuous function $F:(X,\topo)\rightarrow[0,1]$ such that $F(x)=f(x)$ $\forall x\in C$.
+  \end{theorem}
+  \begin{definition}
+    A topological space $(X,\topo)$ is said to be \textit{metrizable} if there is a metric $d$ such that the topology induced by $d$ is $\topo$.
+  \end{definition}
+  \begin{theorem}[Urysohn's metrization theorem]
+    Let $(X,\topo)$ be a topological space $T_3$ such that admits a countable basis of open sets. Then, $(X,\topo)$ is metrizable.
+  \end{theorem}
   \subsection{Subspaces}
   \subsubsection{Subspace topology}
   \begin{definition}
@@ -326,6 +390,12 @@
       \item If $A$, $B$ are closed, then $f$ is continuous.
     \end{enumerate}
   \end{prop}
+  \begin{theorem}
+    A subspace of a topological space $T_3$ is $T_3$.
+  \end{theorem}
+  \begin{theorem}
+    A closed subspace of a topological space $T_4$ is $T_4$.
+  \end{theorem}
   \subsubsection{Cantor set}
   \begin{definition}
     Let $C_0=[0,1]$. Define $I_1:=\left(\frac{1}{3},\frac{2}{3}\right)$ and $C_1:=C_0\setminus I_1$. Then, define $I_2:=I_1\cup\left(\frac{1}{9},\frac{2}{9}\right)\cup\left(\frac{7}{9},\frac{8}{9}\right)$ and $C_2:=C_0\setminus I_2$. In general, define:
@@ -392,6 +462,9 @@
   \begin{prop}
     Let $(X,\topo_X)$, $(Y,\topo_Y)$ be Hausdorff topological spaces. Then, $(X\times Y,\topo_{X\times Y})$ is Hausdorff.
   \end{prop}
+  \begin{theorem}
+    The product of topological spaces $T_3$ is $T_3$.
+  \end{theorem}
   \subsubsection{Arbitrary product}
   \begin{definition}
     Let $I$ be an index set, $\{(X_i,\topo_{X_i}):i\in I\}$ be a collection of topological spaces and $X:=\prod_{i\in I}X_i$. We define the \textit{box topology} on $X$ as the topology generated by $$\mathcal{B}=\left\{\prod_{i\in I}U_i:U_i\in\topo_{X_i}\right\}$$
@@ -629,6 +702,9 @@
   \begin{prop}
     Let $(X,\topo_X)$ be a compact Hausdorff topological space and $C\subseteq X$ be a closed subset. Then, $\quot{X}{A}$, together with the quotient topology, is compact and Hausdorff.
   \end{prop}
+  \begin{prop}
+    Let $(X,\topo_X)$ be a compact Hausdorff topological space. Then, $(X,\topo_X)$ is $T_4$.
+  \end{prop}
   \subsubsection{Compactness of the product}
   \begin{prop}
     Let $(X,\topo_X)$, $(Y,\topo_Y)$ be topological spaces such that $(Y,\topo_Y)$ is compact. Then, the projection $\pi_1:(X\times Y,\topo_{X\times Y})\rightarrow (X,\topo_X)$ is closed.
@@ -645,81 +721,34 @@
   \begin{theorem}[Kelley's theorem]
     Tychonoff's theorem implies the axiom of choice.
   \end{theorem}
-  \subsubsection{Separation axioms}
-  \begin{definition}[$T_0$ space]
-    Let $(X,\topo)$ be a topological space. We say that $(X,\topo)$ is $T_0$\footnote{The letter $T$ comes from the German word ``Trennungsaxiom'' which means ``separation axioms''.} (or \textit{Kolmogorov}) if for any two distinct points of $X$, there exists an open set that contain one of them but not the other.
-  \end{definition}
-  \begin{definition}[$T_1$ space]
-    Let $(X,\topo)$ be a topological space. We say that $(X,\topo)$ is $T_1$ (or \textit{Fréchet}) if for any two distinct points of $x,y\in X$, there exists an open set $U\in\topo$ such that $x\in U$ and $y\notin U$.
-  \end{definition}
-  \begin{theorem}
-    Let $(X,\topo)$ be a topological space. The statements following are equivalent:
-    \begin{enumerate}
-      \item $(X,\topo)$ is $T_1$.
-      \item For all $x\in X$, $\{x\}=\bigcap_{N\in \mathcal{N}_x}N$.
-      \item For all $x\in X$, $\{x\}$ is closed.
-    \end{enumerate}
-  \end{theorem}
-  \begin{definition}[$T_2$ space]
-    Let $(X,\topo)$ be a topological space. We say that $(X,\topo)$ is $T_2$ (or \textit{Hausdorff}) if for any two distinct points of $x,y\in X$, there exist $U,V\in\topo$ such that $x\in U$, $y\in V$ and $U\cap V=\varnothing$.
-  \end{definition}
-  \begin{theorem}
-    Let $(X,\topo)$ be a topological space. The statements following are equivalent:
-    \begin{enumerate}
-      \item $(X,\topo)$ is $T_2$.
-      \item For all $x\in X$, $\{x\}=\bigcap_{N\in \mathcal{N}_x}\Cl(N)$.
-      \item The diagonal $\Delta(X):=\{(x,x)\in X\times X\}\subset X\times X$ is closed.
-    \end{enumerate}
-  \end{theorem}
+  \subsubsection{Alexandroff extension}
   \begin{definition}
-    Let $(X,\topo)$ be a topological space. We say that $(X,\topo)$ is \textit{regular} if for all $x\in X$ and for all a closed sets $C\subseteq X$ such that $x\notin C$, there exist $U,V\in\topo$ such that $x\in U$, $C\subseteq V$ and $U\cap V=\varnothing$.
+    Let $(X,\topo_X)$, $(Y,\topo_Y)$ be topological spaces and $f:(X,\topo_X)\rightarrow(Y,\topo_Y)$ be a continuous function. We say that $f$ is a \emph{topological embedding} if $f$ yields a homeomorphism between $(X,\topo_X)$ and $f(X)$ together with the subspace topology inherited from $(Y,\topo_Y)$.
   \end{definition}
-  \begin{definition}[$T_3$ space]
-    Let $(X,\topo)$ be a topological space. We say that $(X,\topo)$ is $T_3$ if it is $T_1$ and regular.
-  \end{definition}
-  \begin{theorem}
-    Let $(X,\topo)$ be a topological space. The statements following are equivalent:
-    \begin{enumerate}
-      \item $(X,\topo)$ is $T_3$.
-      \item For all $x\in X$ and for all $U\in\topo$ such that $x\in U$, $\exists V\in\topo$ such that $x\in V\subseteq\Cl(V)\subseteq U$.
-    \end{enumerate}
-  \end{theorem}
-  \begin{theorem}
-    A subspace of a topological space $T_3$ is $T_3$.
-  \end{theorem}
-  \begin{theorem}
-    The product of topological spaces $T_3$ is $T_3$.
-  \end{theorem}
   \begin{definition}
-    Let $(X,\topo)$ be a topological space. We say that $(X,\topo)$ is \textit{normal} if for all closed sets $C,K\subseteq X$ such that $C\cap K=\varnothing$, there exist $U,V\in\topo$ such that $C\subseteq U$, $K\subseteq V$ and $U\cap V=\varnothing$.
+    Let $(X,\topo)$ be topological space and $X^*:=X\cup\{\infty\}$. We define the following set:
+    $$\topo^*:=\{U\subseteq X^*:U\in\topo\lor(\infty\in U\land X^*\setminus U\text{ is compact})\}$$
   \end{definition}
-  \begin{definition}[$T_4$ space]
-    Let $(X,\topo)$ be a topological space. We say that $(X,\topo)$ is $T_4$ if it is $T_1$ and normal.
-  \end{definition}
-  \begin{theorem}
-    Let $(X,\topo)$ be a topological space. The statements following are equivalent:
-    \begin{enumerate}
-      \item $(X,\topo)$ is $T_4$.
-      \item For all closed set $C\subseteq X$ and for all $U\in\topo$ such that $C\subseteq U$, $\exists V\in\topo$ such that $C\subseteq V\subseteq\Cl(V)\subseteq U$.
-    \end{enumerate}
+  \begin{theorem}[One-point compactification]
+    Let $(X,\topo)$ be Hausdorff topological space. Then, $(X^*,\topo^*)$ is a compact topological space, called \emph{one-point compactification} of $(X,\topo)$.
   \end{theorem}
   \begin{prop}
-    Let $(X,\topo_X)$ be a compact Hausdorff topological space. Then, $(X,\topo_X)$ is $T_4$.
+    Let $(X,\topo)$ be Hausdorff topological space. Then, the inclusion $\iota: (X,\topo)\rightarrow(X^*,\topo^*)$ is a topological embedding.
+  \end{prop}
+  \begin{definition}
+    Let $(X,\topo)$ be topological space and $P$ be a property of $(X,\topo)$. We say that $(X,\topo)$ satisfies \emph{locally} $P$ if $\forall x\in X$ and $\forall U\in\topo$ such that $x\in U$, there exists a neighbourhood $N\in\mathcal{N}_x$, with $N\subseteq U$, that satisfies $P$.
+  \end{definition}
+  \begin{prop}
+    The local compactness is a topological property.
+  \end{prop}
+  \begin{definition}
+    Let $(X,\topo)$ be topological space. $(X,\topo)$ is locally compact Hausdorff if and only if $(X^*,\topo^*)$ is compact Hausdorff.
+  \end{definition}
+  \begin{prop}
+    We the usual topology, $\QQ\subset \RR$ is not locally compact.
   \end{prop}
   \begin{theorem}
-    A closed subspace of a topological space $T_4$ is $T_4$.
-  \end{theorem}
-  \begin{lemma}[Urysohn's lemma]
-    Let $(X,\topo)$ be a topological space $T_4$ and $A,B\subseteq X$ be closed sets. Then, there exists a continuous function $f:(X,\topo)\rightarrow[0,1]$ such that $A\subseteq f^{-1}(0)$ and $B\subseteq f^{-1}(1)$.
-  \end{lemma}
-  \begin{theorem}[Tietze extension theorem]
-    Let $(X,\topo)$ be a topological space $T_4$, $C\subseteq X$ be a closed set and $f:C\rightarrow[0,1]$ be a continuous function. Then, there exists a continuous function $F:(X,\topo)\rightarrow[0,1]$ such that $F(x)=f(x)$ $\forall x\in C$.
-  \end{theorem}
-  \begin{theorem}
-    A topological space $(X,\topo)$ is said to be \textit{metrizable} if there is a metric $d$ such that the topology induced by $d$ is $\topo$.
-  \end{theorem}
-  \begin{theorem}[Urysohn's metrization theorem]
-    Let $(X,\topo)$ be a topological space $T_3$ such that admits a countable basis of open sets. Then, $(X,\topo)$ is metrizable.
+    Let $(X,\topo)$ be a locally compact Hausdorff topological space. Then, $(X,\topo)$ is $T_3$.
   \end{theorem}
   \subsubsection{Compactness of \texorpdfstring{$\RR^n$}{Rn}}
   \begin{theorem}[Heine-Borel theorem]
@@ -736,13 +765,13 @@
   \end{theorem}
   \subsection{Connectedness}
   \begin{definition}[Connected space]
-    Let $(X,\topo)$ be a topological space. We say that $(X,\topo)$ is \textit{connected} if do not exist non-empty open sets $U,V\in\topo$ such that $X=U\sqcup V$. Otherwise, that is, if on-empty open sets $U,V\in\topo$ such that $X=U\sqcup V$, we say that $(X,\topo)$ is \textit{disconnected}.
+    Let $(X,\topo)$ be a topological space. We say that $(X,\topo)$ is \textit{connected} if do not exist non-empty open sets $U,V\in\topo$ such that $X=U\sqcup V$. Otherwise, that is, if there are non-empty open sets $U,V\in\topo$ such that $X=U\sqcup V$, we say that $(X,\topo)$ is \textit{disconnected}.
   \end{definition}
   \begin{prop}
     Let $(X,\topo)$ be a topological space. The following statements are equivalent:
     \begin{enumerate}
       \item $(X,\topo)$ is connected.
-      \item There are no non-empty closed sets $C,D\subseteq X$ such that $X=C\sqcup D$.
+      \item There are no non-empty closed sets $C,D\subset X$ such that $X=C\sqcup D$.
       \item There exists a non-empty clopen set $U\subset X$.
     \end{enumerate}
   \end{prop}
@@ -798,10 +827,6 @@
   \begin{theorem}[Borsuk-Ulam theorem]
     Let $\vectorfunction{f}:S^n\rightarrow\RR^n$ be a continuous function. Then, $\exists x\in S^n$ such that $\vectorfunction{f}(x)=\vectorfunction{f}(-x)$.
   \end{theorem}
-  % no sé si posar el teorema sobre l'axioma de l'elecció del document 12.
-  % fins el document 12 (ja acabat)
-  % document 14 també fet.
-  % document 16 també fet.
-  % document 17 també fet.
+  % fet fins el document 18 (inclòs) menys el document 15.
 \end{multicols}
 \end{document}
