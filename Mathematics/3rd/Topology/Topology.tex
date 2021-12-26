@@ -2,831 +2,954 @@
 
 \begin{document}
 \begin{multicols}{2}[\section{Topology}]
-  \subsection{Topological spaces}
-  \subsubsection{Metric spaces}
-  \begin{definition}
-    Let $X$ be a set. A \textit{distance} (or \textit{metric}) in $X$ is a function $d:X\times X\rightarrow\RR $ such that $\forall x,y,z\in X$ the following properties are satisfied:
-    \begin{enumerate}
-      \item $d(x,y)=0\iff x=y$.
-      \item $d(x,y)=d(y,x)$.
-      \item $d(x,y)\leq d(x,z)+d(z,y)\quad$(\textit{triangular inequality}).
-    \end{enumerate}
-    We define a \textit{metric space} as a pair $(X,d)$ that satisfy the previous properties.
-  \end{definition}
-  \begin{prop}
-    Let $x,y\in\RR^n$ such that $x=(x_1,\ldots,x_n)$ and $y=(y_1,\ldots,y_n)$. The following functions are metrics in $\RR^n$.
-    \begin{enumerate}
-      \item \textit{Euclidean metric}: $$d(x,y)=\sqrt{\sum_{i=1}^n{(x_i-y_i)}^2}$$
-      \item \textit{Taxicab metric}: $$d(x,y)=\sum_{i=1}^n|x_i-y_i|$$
-      \item \textit{Maximum metric}: $$d(x,y)=\max\{|x_i-y_i|:i\in\{1,\ldots,n\}\}$$
-    \end{enumerate}
-  \end{prop}
-  \begin{prop}
-    Let $X$ be a set. Then, $(X,d)$ is a metric space, where: $$d(x,y)=
-      \left\{\begin{array}{lcc}
-        1 & \text{if} & x\ne y \\
-        0 & \text{if} & x= y
-      \end{array}\right.
-    $$
-    This metric $d$ is called \textit{discrete metric}.
-  \end{prop}
-  \begin{definition}
-    Let $(X,d)$ be a metric space $a\in X$ and $r\in\RR$. We define the \textit{ball $B_d(a,r)$ of center $a$ and radius $r$} with the metric $(X,d)$ as: $$B_d(a,r)=\{x\in X:d(x,a)<r\}$$
-  \end{definition}
-  \begin{definition}
-    Let $(X,d_X)$ and $(Y,d_Y)$ be two metric spaces and $f:(X,d_X)\rightarrow(Y,d_Y)$ be a function. We say that $f$ is continuous if $\forall a\in X$ and $\forall\varepsilon>0$, $\exists\delta>0$ such that $d_Y(f(x),f(a))<\varepsilon$ whenever $d_X(x,a)<\delta$ or, equivalently: $$f(B_{d_X}(a,\delta))\subseteq B_{d_Y}(f(a),\varepsilon)$$ which is equivalent to $B_{d_X}(a,\delta)\subseteq f^{-1}\left(B_{d_Y}(f(a),\varepsilon)\right)$.
-  \end{definition}
-  \begin{definition}
-    Let $(X,d)$ be a metric space. We say that a subset $A\subseteq X$ is \textit{open} if $\forall a\in A$, $\exists\varepsilon>0$ such that $B_d(a,\varepsilon)\subseteq A$.
-  \end{definition}
-  \begin{prop}
-    Let $(X,d)$ be a metric space. Then:
-    \begin{itemize}
-      \item $\varnothing$ and $X$ are open sets.
-      \item If $I$ is an arbitrary index set and $\{U_i:U_i\subseteq X\;\forall i\in I\}$ is a collection of open sets, then $\bigcup_{i\in I}U_i$ is an open set.
-      \item If $\{U_i:U_i\subseteq X\;\forall i\in \{1,\ldots,n\}\}$ is a collection of open sets, then $\bigcap_{i=1}^nU_i$ is an open set.
-    \end{itemize}
-  \end{prop}
-  \begin{prop}
-    Let $(X,d)$ be a metric space and $x\in X$. Then, the ball $B_d(x,r)$ is open $\forall r\in\RR$.
-  \end{prop}
-  \begin{prop}
-    Let $(X,d)$ be a metric space and $A\subseteq X$ be a subset of $X$. Then, $A$ is open if and only if $A=\bigcup_{i\in I}B_d(a_i,\varepsilon_i)$, where $I$ is an index set, $a_i\in A$ and $\varepsilon_i>0$ for all $i\in I$.
-  \end{prop}
-  \begin{theorem}
-    Let $(X,d_X)$ and $(Y,d_Y)$ be two metric spaces and $f:(X,d_X)\rightarrow(Y,d_Y)$ be a function. The following statements are equivalent:
-    \begin{enumerate}
-      \item $f$ is continuous.
-      \item If $A\subseteq Y$ is open, then $f^{-1}(A)\subseteq X$ is also open.
-    \end{enumerate}
-  \end{theorem}
-  \begin{prop}
-    Let $(X,d)$ be a metric space with $|X|\geq 2$ and $x,y\in X$. Then, $\exists\delta>0$ such that $x\in B_d(x,\delta)$, $y\in B_d(y,\delta)$ and $B_d(x,\delta)\cap B_d(y,\delta)=\varnothing$.
-  \end{prop}
-  \subsubsection{Topological spaces}
-  \begin{definition}
-    Let $X$ be a set. A \textit{topology} $\topo$ on a set $X$ is a collection of subsets of $X$ (that is, $\topo\subseteq\mathcal{P}(X)$) satisfying the following properties:
-    \begin{enumerate}
-      \item $\varnothing, X\in\topo$.
-      \item The intersection of any finite subcollection of $\topo$ is in $\topo$.
-      \item The union of any subcollection of $\topo$ is in $\topo$.
-    \end{enumerate}
-    The ordered pair $(X,\topo)$ is called a \textit{topological space}\footnote{Sometimes, in order to simplify the notation, we will write $X$ instead of $(X,\topo)$ to denote the topological space $(X,\topo)$ as well as the set $X$.}. The elements of $X$ are called \textit{points} and the elements of $\topo$, \textit{open sets}.
-  \end{definition}
-  \begin{definition}
-    Let $(X,\topo)$ be a topological space such that $|X|\geq 2$. We say that $(X,\topo)$ is a \textit{Hausdorff space} if satisfies the \textit{Hausdorff property}: $\forall x,y\in X$ with $x\ne y$, there exist $U,V\in\topo$ such that $x\in U$, $y\in V$ and $U\cap V=\varnothing$.
-  \end{definition}
-  \begin{definition}
-    Let $(X,\topo)$ and $(X,\topo')$ be topological spaces. We say that $\topo$ is \textit{finer} than $\topo'$ if $\topo'\subseteq\topo$.
-  \end{definition}
-  \begin{prop}
-    Let $X$ be a set and $p\in X$ be a point of $X$ and $(X,d)$ be a metric space. Then, we can construct some topologies on $X$ as follows:
-    \begin{itemize}
-      \item \textit{Topology induced from the metric}: $$\topo:=\{U\subseteq X:U\text{ is open with the metric }d\}$$
-      \item \textit{Trivial topology}: $\topo_\text{t}:=\{\varnothing,X\}$
-      \item \textit{Discrete topology}: $\topo_\text{d}:=\mathcal{P}(X)$
-      \item \textit{Cofinite topology}: $$\topo_\text{f}:=\{U\subseteq X:U=\varnothing\text{ or }X\setminus U\text{ is finite}\}$$
-      \item \textit{Cocountable topology}:
-            \begin{multline*}
-              \topo:=\{U\subseteq X:U=\varnothing\text{ or }X\setminus U\text{ is finite or}\\\text{ countable}\}
-            \end{multline*}
-      \item \textit{Particular point topology}: $$\topo:=\{U\subseteq X:U=\varnothing\text{ or }p\in U\}$$
-      \item \textit{Excluded point topology}: $$\topo:=\{U\subseteq X:U=X\text{ or }p\notin U\}$$
-      \item \textit{Sierpiński space}: If $X=\{0,1\}$, $$\topo:=\{\varnothing,\{1\},\{0,1\}\}$$
-    \end{itemize}
-  \end{prop}
-  \begin{definition}
-    Let $(X,\topo)$ be a topological space and $C\subseteq X$. We say that $C$ is \textit{closed} if $X\setminus C\in\topo$ is open.
-  \end{definition}
-  \begin{definition}
-    Let $(X,\topo)$ be a topological space and $A\subseteq X$. We say that $A$ is \textit{clopen} if it is both open and closed.
-  \end{definition}
-  \begin{prop}
-    Let $(X,\topo)$ be a topological space. Then:
-    \begin{enumerate}
-      \item $\varnothing$ and $X$ are closed.
-      \item The union of any finite subcollection of closed sets in $(X,\topo)$ is a closed set in $(X,\topo)$.
-      \item The intersection of any subcollection of closed sets in $(X,\topo)$ is closed in $(X,\topo)$.
-    \end{enumerate}
-  \end{prop}
-  \subsubsection{Basis for a topology}
-  \begin{definition}
-    Let $(X,\topo)$ be a topological space and $\mathcal{B}\subseteq\topo$ be a subset of open sets. We say that $\mathcal{B}$ is a \textit{basis} of $\topo$ if $\forall U\in\topo$ and $\forall x\in U$, $\exists B\in\mathcal{B}$ such that $x\in B\subseteq U$.
-  \end{definition}
-  \begin{prop}
-    Let $(X,\topo)$ be a topological space and $\mathcal{B}$ be a basis of $\topo$. Then, for all $U\in\topo$ we have: $$U=\bigcup_{x\in U}B_x$$ where $x\in B_x\subseteq U$ and $B_x\in\mathcal{B}$ $\forall x\in U$.
-  \end{prop}
-  \begin{lemma}
-    Let $(X,\topo)$ be a topological space, $\mathcal{B}\subseteq\topo$ be a basis of $\topo$ and $\{B_i\in\mathcal{B}:i=1,\ldots,n\}$ be a collection of elements of $\mathcal{B}$. Then, $\forall x\in\bigcap_{i=1}^nB_i$, $\exists B'\in\mathcal{B}$ such that $x\in B'\subseteq\bigcap_{i=1}^nB_i$.
-  \end{lemma}
-  \begin{prop}
-    Let $X$ be a set and $\mathcal{B}\subseteq\mathcal{P}(X)$ be a collection of subsets of $X$ such that:
-    \begin{enumerate}
-      \renewcommand{\labelenumi}{\alph{enumi})}
-      \item $\displaystyle X=\bigcup_{B\in\mathcal{B}} B$
-      \item $\forall U,V\in\mathcal{B}$ and  $\forall x\in U\cap V$, $\exists B\in\mathcal{B}$ such that $x\in B\subseteq U\cap V$.
-    \end{enumerate}
-    Then, there exists a unique topology $\topo$ of $X$ such that:
-    \begin{enumerate}
-      \item $\mathcal{B}$ is a basis of $\topo$.
-      \item $\topo$ is the least finer topology that contains $\mathcal{B}$.
-    \end{enumerate}
-  \end{prop}
-  \begin{definition}
-    Let $X$ be a set and $\mathcal{B}\subseteq\mathcal{P}(X)$ be a collection of subsets of $X$. The \textit{topology $\topo$ generated by $\mathcal{B}$} is: $$\topo=\left\{U\subseteq X:U=\bigcup_{i\in I}B_i, B_i\in \mathcal{B}\ \forall i\in I\right\}$$ Or equivalently: $$\topo=\left\{U\subseteq X:\forall x\in U\;\exists B\in\mathcal{B}\text{ such that }x\in B\subseteq U\right\}$$
-  \end{definition}
-  \begin{definition}
-    Let $$\mathcal{B}=\{[a,b)\subset\RR:a,b\in\RR\text{ and }a<b\}$$
-    We define the \textit{lower limit topology} as the topology generated by $\mathcal{B}$.
-  \end{definition}
-  \begin{definition}
-    Let
-    $$U_n=\left\{
-      \begin{array}{cl}
-        \{n\}         & \text{if $n$ is odd}  \\
-        \{n-1,n,n+1\} & \text{if $n$ is even}
-      \end{array}\right.$$
-    and $\mathcal{B}=\{U_n\subset \ZZ:n\in\ZZ\}$. We define the \textit{digital topology} as the topology generated by $\mathcal{B}$.
-  \end{definition}
-  \begin{definition}
-    Let $(X,\topo)$ be a topological space and $\mathcal{S}\subseteq\topo$ be a subset. We say that $\mathcal{S}$ is a \textit{subbasis} of $\topo$ if $\forall U\in\topo$, $U$ can be written as a union of finite intersections of elements of $\mathcal{S}$.
-  \end{definition}
-  \begin{prop}
-    Let $X$ be a set and $\mathcal{S}\subseteq\mathcal{P}(X)$ such that $X=\bigcup_{S\in\mathcal{S}} S$. Then, there exists a unique topology $\topo$ of $X$ such that:
-    \begin{enumerate}
-      \item $\mathcal{S}$ is a subbasis of the topology $\topo$.
-      \item $\topo$ is the least finer topology that contains $\mathcal{S}$.
-    \end{enumerate}
-  \end{prop}
-  \subsubsection{Interior, closure and boundary of a set}
-  \begin{definition}[Interior]
-    Let $(X,\topo)$ be a topological space and $A\subseteq X$ be a subset. The \textit{interior} of $A$, $\Int_{(X,\topo)} A$ or simply $\Int A$, is the largest open subset of $X$ contained in $A$.
-  \end{definition}
-  \begin{definition}[Closure]
-    Let $(X,\topo)$ be a topological space and $A\subseteq X$ be a subset. The \textit{closure} of $A$, $\Cl_{(X,\topo)} A$ or simply $\Cl A$, is the smallest closed subset of $X$ containing $A$.
-  \end{definition}
-  \begin{prop}
-    Let $(X,\topo)$ be a topological space and $A\subseteq X$ be a subset. Then: $$\Int A=\bigcup_{\substack{U\subseteq A\\U\text{ is open}}}U\qquad\Cl A=\bigcap_{\substack{C\supseteq A\\C\text{ is closed}}}C$$
-    Hence, we have the inclusions: $$\Int A\subseteq A\subseteq \Cl A$$
-    And, furthermore:
-    \begin{itemize}
-      \item $\Int A=A\iff A$ is open
-      \item $\Cl A=A\iff A$ is closed
-    \end{itemize}
-  \end{prop}
-  \begin{definition}
-    Let $(X,\topo)$ be a topological space and $A\subseteq X$ be a subset. $A$ is called \textit{dense} in $X$ if $\forall U\in\topo$ with $U\ne\varnothing$ we have $U\cap A\ne\varnothing$.
-  \end{definition}
-  \begin{prop}
-    Let $(X,\topo)$ be a topological space and $A\subseteq X$ be a subset. Then, $A$ is dense in $(X,\topo)$ if and only if $\Cl A=X$.
-  \end{prop}
-  \begin{prop}
-    Let $(X,\topo)$ be a topological space and $A\subseteq X$ be a subset. Then:
-    \begin{itemize}
-      \item If $U\subseteq A$ is open, then $U\subseteq\Int A$.
-      \item If $C\supseteq A$ is closed, then $\Cl A\subseteq C$.
-    \end{itemize}
-  \end{prop}
-  \begin{definition}
-    Let $(X,\topo)$ be a topological space and $A\subseteq X$ be a subset. The \textit{boundary} of $A$, $\Fr_{(X,\tau)}A$ or simply $\Fr A$, is: $$\Fr A:=\Cl(A)\cap\Cl(X\setminus A)$$
-  \end{definition}
-  \begin{definition}
-    Let $(X,\topo)$ be a topological space and $x\in X$. We say that $N\subseteq X$ is a \textit{neighbourhood} of $x$ if $\exists U\in\topo$ such that $x\in U\subseteq N$. We denote by $\mathcal{N}_x$, the set of all neighbourhoods of $x$.
-  \end{definition}
-  \begin{definition}
-    Let $(X,\topo)$ be a topological space and $A\subseteq X$ be a subset. We say that $x\in X$ is an \textit{interior point} of $A$ if $A$ is a neighbourhood of $x$.
-  \end{definition}
-  \begin{definition}
-    Let $(X,\topo)$ be a topological space and $A\subseteq X$ be a subset. We say that $x\in X$ is an \textit{adherent point} of $A$ if $\forall N\in\mathcal{N}_x$ we have that $N\cap A\ne\varnothing$.
-  \end{definition}
-  \begin{prop}
-    Let $(X,\topo)$ be a topological space and $A\subseteq X$ be a subset. Then:
-    \begin{enumerate}
-      \item $\Int A$ is the set containing all the interior points of $A$.
-      \item $\Cl A$ is the set containing all the adherent points of $A$.
-    \end{enumerate}
-  \end{prop}
-  \begin{prop}
-    Let $(X,\topo)$ be a topological space and $A,B\subseteq X$ be subsets.
+    \subsection{Topological spaces}
+    \subsubsection{Metric spaces}
+    \begin{definition}
+        Let $X$ be a set. A \emph{distance} (or \emph{metric}) in $X$ is a function $d:X\times X\rightarrow\RR $ such that $\forall x,y,z\in X$ the following properties are satisfied:
+        \begin{enumerate}
+            \item $d(x,y)=0\iff x=y$.
+            \item $d(x,y)=d(y,x)$.
+            \item $d(x,y)\leq d(x,z)+d(z,y)\quad$(\emph{triangular inequality}).
+        \end{enumerate}
+    \end{definition}
+    \begin{definition}
+        A \emph{metric space} is a pair $(X,d)$, where $X$ is a set and $d$ is a distance in $X$.
+    \end{definition}
+    \begin{prop}
+        Let $x,y\in\RR^n$ such that $x=(x_1,\ldots,x_n)$ and $y=(y_1,\ldots,y_n)$. The following functions are metrics in $\RR^n$.
+        \begin{enumerate}
+            \item \emph{Euclidean metric}: $$d(x,y)=\sqrt{\sum_{i=1}^n{(x_i-y_i)}^2}$$
+            \item \emph{Taxicab metric}: $$d(x,y)=\sum_{i=1}^n|x_i-y_i|$$
+            \item \emph{Maximum metric}: $$d(x,y)=\max\{|x_i-y_i|:i\in\{1,\ldots,n\}\}$$
+        \end{enumerate}
+    \end{prop}
+    \begin{prop}
+        Let $X$ be a set. Then, $(X,d)$ is a metric space, where: $$d(x,y)=
+            \left\{\begin{array}{lcc}
+                1 & \text{if} & x\ne y \\
+                0 & \text{if} & x= y
+            \end{array}\right.
+        $$
+        This metric $d$ is called \emph{discrete metric}.
+    \end{prop}
+    \begin{definition}
+        Let $(X,d)$ be a metric space $a\in X$ and $r\in\RR$. We define the \emph{ball} $B_d(a,r)$ of center $a$ and radius $r$ with the metric $(X,d)$ as: $$B_d(a,r)=\{x\in X:d(x,a)<r\}$$
+    \end{definition}
+    \begin{definition}
+        Let $(X,d_X)$ and $(Y,d_Y)$ be two metric spaces and $f:(X,d_X)\rightarrow(Y,d_Y)$ be a function. We say that $f$ is continuous if $\forall a\in X$ and $\forall\varepsilon>0$, $\exists\delta>0$ such that $d_Y(f(x),f(a))<\varepsilon$ whenever $d_X(x,a)<\delta$ or, equivalently: $$f(B_{d_X}(a,\delta))\subseteq B_{d_Y}(f(a),\varepsilon)$$ which is equivalent to $B_{d_X}(a,\delta)\subseteq f^{-1}\left(B_{d_Y}(f(a),\varepsilon)\right)$.
+    \end{definition}
+    \begin{definition}
+        Let $(X,d)$ be a metric space. We say that a subset $A\subseteq X$ is \emph{open} if $\forall a\in A$, $\exists\varepsilon>0$ such that $B_d(a,\varepsilon)\subseteq A$.
+    \end{definition}
+    \begin{prop}
+        Let $(X,d)$ be a metric space. Then:
+        \begin{itemize}
+            \item $\varnothing$ and $X$ are open sets.
+            \item If $I$ is an arbitrary index set and $\{U_i:U_i\subseteq X\;\forall i\in I\}$ is a collection of open sets, then $\bigcup_{i\in I}U_i$ is an open set.
+            \item If $\{U_i:U_i\subseteq X\;\forall i\in \{1,\ldots,n\}\}$ is a collection of open sets, then $\bigcap_{i=1}^nU_i$ is an open set.
+        \end{itemize}
+    \end{prop}
+    \begin{prop}
+        Let $(X,d)$ be a metric space and $x\in X$. Then, the ball $B_d(x,r)$ is open $\forall r\in\RR$.
+    \end{prop}
+    \begin{prop}
+        Let $(X,d)$ be a metric space and $A\subseteq X$ be a subset of $X$. Then, $A$ is open if and only if $A=\bigcup_{i\in I}B_d(a_i,\varepsilon_i)$, where $I$ is an index set, $a_i\in A$ and $\varepsilon_i>0$ for all $i\in I$.
+    \end{prop}
+    \begin{theorem}
+        Let $(X,d_X)$ and $(Y,d_Y)$ be two metric spaces and $f:(X,d_X)\rightarrow(Y,d_Y)$ be a function. The following statements are equivalent:
+        \begin{enumerate}
+            \item $f$ is continuous.
+            \item If $A\subseteq Y$ is open, then $f^{-1}(A)\subseteq X$ is also open.
+        \end{enumerate}
+    \end{theorem}
+    \begin{prop}
+        Let $(X,d)$ be a metric space with $|X|\geq 2$ and $x,y\in X$. Then, $\exists\delta>0$ such that $x\in B_d(x,\delta)$, $y\in B_d(y,\delta)$ and $B_d(x,\delta)\cap B_d(y,\delta)=\varnothing$.
+    \end{prop}
+    \subsubsection{Topological spaces}
+    \begin{definition}
+        Let $X$ be a set. A \emph{topology} $\topo$ on a set $X$ is a collection of subsets of $X$ (that is, $\topo\subseteq\mathcal{P}(X)$) satisfying the following properties:
+        \begin{enumerate}
+            \item $\varnothing, X\in\topo$.
+            \item The intersection of any finite subcollection of $\topo$ is in $\topo$.
+            \item The union of any subcollection of $\topo$ is in $\topo$.
+        \end{enumerate}
+        The ordered pair $(X,\topo)$ is called a \emph{topological space}\footnote{Sometimes, in order to simplify the notation, we will write $X$ instead of $(X,\topo)$ to denote the topological space $(X,\topo)$ as well as the set $X$.}. The elements of $X$ are called \emph{points} and the elements of $\topo$, \emph{open sets}.
+    \end{definition}
+    \begin{definition}
+        Let $(X,\topo)$ be a topological space such that $|X|\geq 2$. We say that $(X,\topo)$ is a \emph{Hausdorff space} if satisfies the \emph{Hausdorff property}: $\forall x,y\in X$ with $x\ne y$, there exist $U,V\in\topo$ such that $x\in U$, $y\in V$ and $U\cap V=\varnothing$.
+    \end{definition}
+    \begin{definition}
+        Let $(X,\topo)$ and $(X,\topo')$ be topological spaces. We say that $\topo$ is \emph{finer} than $\topo'$ if $\topo'\subseteq\topo$.
+    \end{definition}
+    \begin{prop}
+        Let $X$ be a set and $p\in X$ be a point of $X$ and $(X,d)$ be a metric space. Then, we can construct some topologies on $X$ as follows:
+        \begin{itemize}
+            \item \emph{Topology induced from the metric}: $$\topo:=\{U\subseteq X:U\text{ is open with the metric }d\}$$
+            \item \emph{Trivial topology}: $\topo_\text{t}:=\{\varnothing,X\}$
+            \item \emph{Discrete topology}: $\topo_\text{d}:=\mathcal{P}(X)$
+            \item \emph{Cofinite topology}: $$\topo_\text{f}:=\{U\subseteq X:U=\varnothing\lor X\setminus U\text{ is finite}\}$$
+            \item \emph{Cocountable topology}:
+                  \begin{equation*}
+                      \topo:=\{U\subseteq X:U=\varnothing\lor X\setminus U\text{ is finite or countable}\}
+                  \end{equation*}
+            \item \emph{Particular point topology}: $$\topo:=\{U\subseteq X:U=\varnothing\lor p\in U\}$$
+            \item \emph{Excluded point topology}: $$\topo:=\{U\subseteq X:U=X\lor p\notin U\}$$
+            \item \emph{Sierpiński topology}: If $X=\{0,1\}$, $$\topo:=\{\varnothing,\{1\},\{0,1\}\}$$
+        \end{itemize}
+    \end{prop}
+    \begin{definition}
+        Let $(X,\topo)$ be a topological space and $C\subseteq X$. We say that $C$ is \emph{closed} if $X\setminus C\in\topo$ is open.
+    \end{definition}
+    \begin{definition}
+        Let $(X,\topo)$ be a topological space and $A\subseteq X$. We say that $A$ is \emph{clopen} if it is both open and closed.
+    \end{definition}
+    \begin{prop}
+        Let $(X,\topo)$ be a topological space. Then:
+        \begin{enumerate}
+            \item $\varnothing$ and $X$ are closed.
+            \item The union of any finite subcollection of closed sets in $(X,\topo)$ is a closed set in $(X,\topo)$.
+            \item The intersection of any subcollection of closed sets in $(X,\topo)$ is closed in $(X,\topo)$.
+        \end{enumerate}
+    \end{prop}
+    \subsubsection{Basis for a topology}
+    \begin{definition}
+        Let $(X,\topo)$ be a topological space and $\mathcal{B}\subseteq\topo$ be a subset of open sets. We say that $\mathcal{B}$ is a \emph{basis} of $\topo$ if $\forall U\in\topo$ and $\forall x\in U$, $\exists B\in\mathcal{B}$ such that $x\in B\subseteq U$.
+    \end{definition}
+    \begin{prop}
+        Let $(X,\topo)$ be a topological space and $\mathcal{B}$ be a basis of $\topo$. Then, for all $U\in\topo$ we have: $$U=\bigcup_{x\in U}B_x$$ where $x\in B_x\subseteq U$ and $B_x\in\mathcal{B}$ $\forall x\in U$.
+    \end{prop}
+    \begin{lemma}
+        Let $(X,\topo)$ be a topological space, $\mathcal{B}\subseteq\topo$ be a basis of $\topo$ and $\{B_i\in\mathcal{B}:i=1,\ldots,n\}$ be a collection of elements of $\mathcal{B}$. Then, $\forall x\in\bigcap_{i=1}^nB_i$, $\exists B'\in\mathcal{B}$ such that $x\in B'\subseteq\bigcap_{i=1}^nB_i$.
+    \end{lemma}
+    \begin{prop}
+        Let $X$ be a set and $\mathcal{B}\subseteq\mathcal{P}(X)$ be a collection of subsets of $X$ such that:
+        \begin{enumerate}
+            \renewcommand{\labelenumi}{\alph{enumi})}
+            \item $\displaystyle X=\bigcup_{B\in\mathcal{B}} B$
+            \item $\forall U,V\in\mathcal{B}$ and  $\forall x\in U\cap V$, $\exists B\in\mathcal{B}$ such that $x\in B\subseteq U\cap V$.
+        \end{enumerate}
+        Then, there exists a unique topology $\topo$ of $X$ such that:
+        \begin{enumerate}
+            \item $\mathcal{B}$ is a basis of $\topo$.
+            \item $\topo$ is the least finer topology that contains $\mathcal{B}$.
+        \end{enumerate}
+    \end{prop}
+    \begin{definition}
+        Let $X$ be a set and $\mathcal{B}\subseteq\mathcal{P}(X)$ be a collection of subsets of $X$. The \emph{topology generated by $\mathcal{B}$} is: $$\topo=\left\{U\subseteq X:U=\bigcup_{i\in I}B_i, B_i\in \mathcal{B}\ \forall i\in I\right\}$$ Or equivalently: $$\topo=\left\{U\subseteq X:\forall x\in U\;\exists B\in\mathcal{B}\text{ such that }x\in B\subseteq U\right\}$$
+    \end{definition}
+    \begin{definition}
+        Let $$\mathcal{B}=\{[a,b)\subset\RR:a,b\in\RR, a<b\}$$
+        We define the \emph{lower limit topology} as the topology generated by $\mathcal{B}$.
+    \end{definition}
+    \begin{prop}
+        The lower limit topology is finer that the usual topology of $\RR$.
+    \end{prop}
+    \begin{definition}
+        Let
+        $$U_n=\left\{
+            \begin{array}{cl}
+                \{n\}         & \text{if $n$ is odd}  \\
+                \{n-1,n,n+1\} & \text{if $n$ is even}
+            \end{array}\right.$$
+        and $\mathcal{B}=\{U_n\subset \ZZ:n\in\ZZ\}$. We define the \emph{digital topology} as the topology generated by $\mathcal{B}$.
+    \end{definition}
+    \begin{definition}
+        Let $(X,\topo)$ be a topological space and $\mathcal{S}\subseteq\topo$ be a subset. We say that $\mathcal{S}$ is a \emph{subbasis} of $\topo$ if $\forall U\in\topo$, $U$ can be written as a union of finite intersections of elements of $\mathcal{S}$.
+    \end{definition}
+    \begin{prop}
+        Let $X$ be a set and $\mathcal{S}\subseteq\mathcal{P}(X)$ such that $X=\bigcup_{S\in\mathcal{S}} S$. Then, there exists a unique topology $\topo$ of $X$ such that:
+        \begin{enumerate}
+            \item $\mathcal{S}$ is a subbasis of the topology $\topo$.
+            \item $\topo$ is the least finer topology that contains $\mathcal{S}$.
+        \end{enumerate}
+    \end{prop}
+    \subsubsection{Interior, closure and boundary of a set}
+    \begin{definition}[Interior]
+        Let $(X,\topo)$ be a topological space and $A\subseteq X$ be a subset. The \emph{interior} of $A$, $\Int_{(X,\topo)} A$ or simply $\Int A$, is the largest open subset of $X$ contained in $A$.
+    \end{definition}
+    \begin{definition}[Closure]
+        Let $(X,\topo)$ be a topological space and $A\subseteq X$ be a subset. The \emph{closure} of $A$, $\Cl_{(X,\topo)} A$ or simply $\Cl A$, is the smallest closed subset of $X$ containing $A$.
+    \end{definition}
+    \begin{prop}
+        Let $(X,\topo)$ be a topological space and $A\subseteq X$ be a subset. Then: $$\Int A=\bigcup_{\substack{U\subseteq A\\U\text{ is open}}}U\qquad\Cl A=\bigcap_{\substack{C\supseteq A\\C\text{ is closed}}}C$$
+        Hence, we have the inclusions: $$\Int A\subseteq A\subseteq \Cl A$$
+        And, furthermore:
+        \begin{itemize}
+            \item $\Int A=A\iff A$ is open
+            \item $\Cl A=A\iff A$ is closed
+        \end{itemize}
+    \end{prop}
+    \begin{definition}
+        Let $(X,\topo)$ be a topological space and $A\subseteq X$ be a subset. $A$ is called \emph{dense} in $X$ if $\forall U\in\topo$ with $U\ne\varnothing$ we have $U\cap A\ne\varnothing$.
+    \end{definition}
+    \begin{prop}
+        Let $(X,\topo)$ be a topological space and $A\subseteq X$ be a subset. Then, $A$ is dense in $(X,\topo)$ if and only if $\Cl A=X$.
+    \end{prop}
+    \begin{prop}
+        Let $(X,\topo)$ be a topological space and $A\subseteq X$ be a subset. Then:
+        \begin{itemize}
+            \item If $U\subseteq A$ is open, then $U\subseteq\Int A$.
+            \item If $C\supseteq A$ is closed, then $\Cl A\subseteq C$.
+        \end{itemize}
+    \end{prop}
+    \begin{definition}
+        Let $(X,\topo)$ be a topological space and $A\subseteq X$ be a subset. The \emph{boundary} of $A$, $\Fr_{(X,\tau)}A$ or simply $\Fr A$, is: $$\Fr A:=\Cl(A)\cap\Cl(X\setminus A)$$
+    \end{definition}
+    \begin{definition}
+        Let $(X,\topo)$ be a topological space and $x\in X$. We say that $N\subseteq X$ is a \emph{neighbourhood} of $x$ if $\exists U\in\topo$ such that $x\in U\subseteq N$. We denote by $\mathcal{N}_x$, the set of all neighbourhoods in $(X,\topo)$ of $x$.
+    \end{definition}
+    \begin{definition}
+        Let $(X,\topo)$ be a topological space and $A\subseteq X$ be a subset. We say that $x\in X$ is an \emph{interior point} of $A$ if $A$ is a neighbourhood of $x$.
+    \end{definition}
+    \begin{definition}
+        Let $(X,\topo)$ be a topological space and $A\subseteq X$ be a subset. We say that $x\in X$ is an \emph{adherent point} of $A$ if $\forall N\in\mathcal{N}_x$ we have that $N\cap A\ne\varnothing$.
+    \end{definition}
+    \begin{prop}
+        Let $(X,\topo)$ be a topological space and $A\subseteq X$ be a subset. Then:
+        \begin{enumerate}
+            \item $\Int A$ is the set containing all the interior points of $A$.
+            \item $\Cl A$ is the set containing all the adherent points of $A$.
+        \end{enumerate}
+    \end{prop}
+    \begin{prop}
+        Let $(X,\topo)$ be a topological space and $A,B\subseteq X$ be subsets.
 
-    Properties regarding the interior:
-    \begin{enumerate}[leftmargin=1.15cm]\renewcommand{\labelenumi}{1.\arabic{enumi}.}
-      \item $\Int(\Int (A))=         \Int A$
-      \item $A\subseteq B\implies    \Int A\subseteq\Int B$
-      \item $\Int(X\setminus A)=     X\setminus \Cl A$
-      \item $\Int(B\setminus A)=     \Int B\setminus \Cl A$
-      \item $\Int(A\cap B)=          \Int A\cap\Int B$
-      \item $\Int(A\cup B)\supseteq  \Int A\cup\Int B$
-    \end{enumerate}
-    Properties regarding the closure:
-    \begin{enumerate}[leftmargin=1.15cm]\renewcommand{\labelenumi}{2.\arabic{enumi}.}
-      \item $\Cl(\Cl (A))=          \Cl A$
-      \item $A\subseteq B\implies   \Cl A\subseteq\Cl B$
-      \item $\Cl(X\setminus A)=     X\setminus \Int A$
-      \item $\Cl(A\cap B)\subseteq  \Cl A\cap\Cl B$
-      \item $\Cl(A\cup B)=          \Cl A\cup\Cl B$
-    \end{enumerate}
-    Properties regarding the boundary:
-    \begin{enumerate}[leftmargin=1.15cm]\renewcommand{\labelenumi}{3.\arabic{enumi}.}
-      \item $\Fr A\cap\Int A=         \varnothing$
-      \item $\Fr A=\Cl A\setminus\Int A$
-      \item $\Fr A\cup\Int A=             \Cl A$
-      \item $\Fr (A\cup B)\subseteq \Fr A\cup \Fr B$
-      \item $\Fr (\Fr A)\subseteq \Fr A$
-      \item $\Fr A\subseteq A\iff  A  \text{ is closed}$
-      \item $\Fr A\cap A=\varnothing\iff  A\text{ is open}$
-      \item $\Fr A=\varnothing\iff\text{$A$ is clopen}$
-    \end{enumerate}
-  \end{prop}
-  \begin{prop}[Kuratowski's problem]
-    Let $(X,\topo)$ be a topological space and $A\subseteq X$ be a subset. Then:
-    \begin{gather*}
-      \Cl(\Int(\Cl(\Int A)))=\Cl(\Int A)\\
-      \Int(\Cl(\Int (\Cl A)))=\Int(\Cl A)
-    \end{gather*}
-  \end{prop}
-  \subsection{Functions between topological spaces}
-  \begin{definition}[Continuous function]
-    Let $(X,\topo_X)$ and $(Y,\topo_Y)$ be topological spaces and $f:(X,\topo_X)\rightarrow(Y,\topo_Y)$ be a function. We say that $f$ is continuous if for all $U\in\topo_Y$, we have $f^{-1}(U)\in\topo_X$.
-  \end{definition}
-  \begin{prop}
-    Let $(X,\topo_X)$ and $(Y,\topo_Y)$ be topological spaces and $f:(X,\topo_X)\rightarrow(Y,\topo_Y)$ be a function. We say that $f$ is continuous if and only if for all closed sets $C\subseteq Y$, we have $f^{-1}(C)\subseteq X$ is closed.
-  \end{prop}
-  \begin{theorem}
-    Let $(X,\topo_X)$ and $(Y,\topo_Y)$ be topological spaces, $f:(X,\topo_X)\rightarrow (Y,\topo_Y)$ be a function and $\mathcal{B}_Y$ be a basis of $\topo_Y$. Then: $$f\text{ is continuous}\iff f^{-1}(B)\in\topo_X\ \forall B\in \mathcal{B}_Y$$
-  \end{theorem}
-  \begin{theorem}
-    Let $(X,\topo_X)$ and $(Y,\topo_Y)$ be topological spaces and $f:(X,\topo_X)\rightarrow (Y,\topo_Y)$ be a function. Then, the following assumptions are equivalent:
-    \begin{enumerate}
-      \item $f$ is continuous.
-      \item $f^{-1}(\Int(B))\subseteq \Int(f^{-1}(B))$ for all subsets $B\subseteq Y$.
-      \item $f(\Cl(A))\subseteq \Cl(f(A))$ for all subsets $A\subseteq X$.
-    \end{enumerate}
-  \end{theorem}
-  \begin{theorem}
-    Let $(X,\topo_X)$ and $(Y,\topo_Y)$ be topological spaces and $f:(X,\topo_X)\rightarrow (Y,\topo_Y)$ be a function. Then, $f$ is continuous if and only if $\forall x\in X$ and $\forall U\in\topo$ such that $f(x)\in U$, there exists a neighbourhood $N$ of $x$ with $f(N)\subseteq U$.
-  \end{theorem}
-  \begin{prop}
-    Let $(X,\topo_X)$, $(Y,\topo_Y)$ and $(Z,\topo_Z)$ be topological spaces and $f:(X,\topo_X)\rightarrow (Y,\topo_Y)$, $g:(Y,\topo_Y)\rightarrow (Z,\topo_Z)$ be continuous functions. Then, $g\circ f:(X,\topo_X)\rightarrow (Z,\topo_Z)$ is continuous.
-  \end{prop}
-  \begin{definition}
-    Let $(X,\topo_X)$ and $(Y,\topo_Y)$ be topological spaces. A \textit{homeomorphism} between $(X,\topo_X)$ and $(Y,\topo_Y)$ is a bijective function that is continuous and whose inverse is also continuous. We say that $(X,\topo_X)$ and $(Y,\topo_Y)$ are \textit{homeomorphic}, and we denote it by $(X,\topo_X)\cong(Y,\topo_Y)$, if there exists a homeomorphism between them.
-  \end{definition}
-  \begin{definition}[Open function]
-    Let $(X,\topo_X)$ and $(Y,\topo_Y)$ be topological spaces and $f:(X,\topo_X)\rightarrow (Y,\topo_Y)$ be a function. We say that $f$ is \textit{open} if $\forall U\in\topo_X$, we have $f(U)\in \topo_Y$.
-  \end{definition}
-  \begin{definition}[Closed function]
-    Let $(X,\topo_X)$ and $(Y,\topo_Y)$ be topological spaces and $f:(X,\topo_X)\rightarrow (Y,\topo_Y)$ be a function. We say that $f$ is \textit{closed} if for all closed subsets $C\subseteq X$, we have $f(C)$ is closed.
-  \end{definition}
-  \begin{prop}
-    Let $(X,\topo_X)$ and $(Y,\topo_Y)$ be topological spaces and $f:(X,\topo_X)\rightarrow (Y,\topo_Y)$ be a continuous bijective function. Then, the following statements are equivalent:
-    \begin{enumerate}
-      \item $f$ is a homeomorphism.
-      \item $f$ is open.
-      \item $f$ is closed.
-    \end{enumerate}
-  \end{prop}
-  \begin{prop}
-    Being homeomorphic as topological spaces is an equivalence relation.
-  \end{prop}
-  \subsection{Separation axioms}
-  \begin{definition}[$T_0$ space]
-    Let $(X,\topo)$ be a topological space. We say that $(X,\topo)$ is $T_0$\footnote{The letter $T$ comes from the German word ``Trennungsaxiom'' which means ``separation axioms''.} (or \textit{Kolmogorov}) if for any two distinct points of $X$, there exists an open set that contain one of them but not the other.
-  \end{definition}
-  \begin{definition}[$T_1$ space]
-    Let $(X,\topo)$ be a topological space. We say that $(X,\topo)$ is $T_1$ (or \textit{Fréchet}) if for any two distinct points of $x,y\in X$, there exists an open set $U\in\topo$ such that $x\in U$ and $y\notin U$.
-  \end{definition}
-  \begin{theorem}
-    Let $(X,\topo)$ be a topological space. The statements following are equivalent:
-    \begin{enumerate}
-      \item $(X,\topo)$ is $T_1$.
-      \item For all $x\in X$, $\{x\}=\bigcap_{N\in \mathcal{N}_x}N$.
-      \item For all $x\in X$, $\{x\}$ is closed.
-    \end{enumerate}
-  \end{theorem}
-  \begin{definition}[$T_2$ space]
-    Let $(X,\topo)$ be a topological space. We say that $(X,\topo)$ is $T_2$ (or \textit{Hausdorff}) if for any two distinct points of $x,y\in X$, there exist $U,V\in\topo$ such that $x\in U$, $y\in V$ and $U\cap V=\varnothing$.
-  \end{definition}
-  \begin{theorem}
-    Let $(X,\topo)$ be a topological space. The statements following are equivalent:
-    \begin{enumerate}
-      \item $(X,\topo)$ is $T_2$.
-      \item For all $x\in X$, $\{x\}=\bigcap_{N\in \mathcal{N}_x}\Cl(N)$.
-      \item The diagonal $\Delta(X):=\{(x,x)\in X\times X\}\subset X\times X$ is closed.
-    \end{enumerate}
-  \end{theorem}
-  \begin{definition}
-    Let $(X,\topo)$ be a topological space. We say that $(X,\topo)$ is \textit{regular} if for all $x\in X$ and for all a closed sets $C\subseteq X$ such that $x\notin C$, there exist $U,V\in\topo$ such that $x\in U$, $C\subseteq V$ and $U\cap V=\varnothing$.
-  \end{definition}
-  \begin{definition}[$T_3$ space]
-    Let $(X,\topo)$ be a topological space. We say that $(X,\topo)$ is $T_3$ if it is $T_1$ and regular.
-  \end{definition}
-  \begin{theorem}
-    Let $(X,\topo)$ be a topological space. The statements following are equivalent:
-    \begin{enumerate}
-      \item $(X,\topo)$ is $T_3$.
-      \item For all $x\in X$ and for all $U\in\topo$ such that $x\in U$, $\exists V\in\topo$ such that $x\in V\subseteq\Cl(V)\subseteq U$.
-    \end{enumerate}
-  \end{theorem}
-  \begin{definition}
-    Let $(X,\topo)$ be a topological space. We say that $(X,\topo)$ is \textit{normal} if for all closed sets $C,K\subseteq X$ such that $C\cap K=\varnothing$, there exist $U,V\in\topo$ such that $C\subseteq U$, $K\subseteq V$ and $U\cap V=\varnothing$.
-  \end{definition}
-  \begin{definition}[$T_4$ space]
-    Let $(X,\topo)$ be a topological space. We say that $(X,\topo)$ is $T_4$ if it is $T_1$ and normal.
-  \end{definition}
-  \begin{theorem}
-    Let $(X,\topo)$ be a topological space. The statements following are equivalent:
-    \begin{enumerate}
-      \item $(X,\topo)$ is $T_4$.
-      \item For all closed set $C\subseteq X$ and for all $U\in\topo$ such that $C\subseteq U$, $\exists V\in\topo$ such that $C\subseteq V\subseteq\Cl(V)\subseteq U$.
-    \end{enumerate}
-  \end{theorem}
-  \begin{lemma}[Urysohn's lemma]
-    Let $(X,\topo)$ be a topological space $T_4$ and $A,B\subseteq X$ be closed sets. Then, there exists a continuous function $f:(X,\topo)\rightarrow[0,1]$ such that $A\subseteq f^{-1}(0)$ and $B\subseteq f^{-1}(1)$.
-  \end{lemma}
-  \begin{theorem}[Tietze extension theorem]
-    Let $(X,\topo)$ be a topological space $T_4$, $C\subseteq X$ be a closed set and $f:C\rightarrow[0,1]$ be a continuous function. Then, there exists a continuous function $F:(X,\topo)\rightarrow[0,1]$ such that $F(x)=f(x)$ $\forall x\in C$.
-  \end{theorem}
-  \begin{definition}
-    A topological space $(X,\topo)$ is said to be \textit{metrizable} if there is a metric $d$ such that the topology induced by $d$ is $\topo$.
-  \end{definition}
-  \begin{theorem}[Urysohn's metrization theorem]
-    Let $(X,\topo)$ be a topological space $T_3$ such that admits a countable basis of open sets. Then, $(X,\topo)$ is metrizable.
-  \end{theorem}
-  \subsection{Subspaces}
-  \subsubsection{Subspace topology}
-  \begin{definition}
-    Let $(X,\topo)$ be a topological space and $A\subseteq X$ be a subset. We define the following set: $$\topo_A=\{U\subseteq A:\exists V\in\topo\text{ such that }V\cap A=U\}$$ Then, $(A,\topo_A)$ is a topological space (called \textit{topological subspace} of $(X,\topo)$) and $\topo_A$ is called the \textit{subspace topology} on $A$. We will write $(A,\topo_A)\subseteq (X,\topo)$ to denote that $(A,\topo_A)$ is a topological subspace.
-  \end{definition}
-  \begin{prop}
-    Let $(X,\topo)$ be a topological space and $(A,\topo_A)\subseteq (X,\topo)$ be a topological subspace. Then, $C\subseteq A$ is closed if and only if $C=K\cap A$, where $K\subseteq X$ is a closed subset on $(X,\topo)$.
-  \end{prop}
-  \begin{prop}
-    Let $(X,\topo)$ be a topological space and $(A,\topo_A)\subseteq (X,\topo)$ be a topological subspace. Then:
-    \begin{enumerate}
-      \item If $A$ is open and $U\subseteq A$, then: $$U\in\topo_A\iff U\in\topo$$
-      \item If $A$ is closed and $C\subseteq A$, then: $$C\text{ is closed on }(A,\topo_A)\iff C\text{ is closed on }(X,\topo)$$
-    \end{enumerate}
-  \end{prop}
-  \begin{prop}
-    Let $(X,\topo)$ be a topological space and $(A,\topo_A)\subseteq (X,\topo)$ be a topological subspace. Then, the inclusion $\iota:(A,\topo_A)\hookrightarrow (X,\topo_X)$ is continuous and $\topo_A$ is the least finer topology where $\iota$ is continuous.
-  \end{prop}
-  \begin{corollary}
-    Let $(X,\topo_X)$ and $(Y,\topo_Y)$ be topological spaces, $f:(X,\topo_X)\rightarrow (Y,\topo_Y)$ be a continuous function and $(A,\topo_A)\subseteq (X,\topo_X)$ be a topological subspace. Then, $f|_A$ is also continuous.
-  \end{corollary}
-  \begin{prop}
-    Let $(X,\topo)$ be a topological space, $\mathcal{B}$ be a basis of $\topo$ and $(A,\topo_A)\subseteq (X,\topo)$ be a topological subspace. Then, $$\mathcal{B}_A=\{B\cap A:B\in\mathcal{B}\}$$ is basis of $\topo_A$.
-  \end{prop}
-  \begin{prop}
-    Let $(X,\topo_X)$ and $(Y,\topo_Y)$ be topological spaces and $(B,\topo_B)\subseteq (Y,\topo_Y)$ be a topological subspace. Let $f:(X,\topo_X)\rightarrow (B,\topo_B)$ be a function. Then, $f$ is continuous if and only if $\iota\circ f:(X,\topo_X)\rightarrow (B,\topo_B)\hookrightarrow (Y,\topo_Y)$ is continuous.
-  \end{prop}
-  \begin{corollary}
-    Let $(X,\topo_X)$ and $(Y,\topo_Y)$ be topological spaces and $f:(X,\topo_X)\rightarrow (Y,\topo_Y)$ be a continuous function. Then, $g:(X,\topo_X)\rightarrow (f(X),\topo_{f(X)})$ is also continuous.
-  \end{corollary}
-  \begin{prop}
-    Let $(X,\topo)$ and $(Y,\topo_Y)$ be topological spaces such that $X=A\cup B$, for some sets $A$, $B$. Consider a function $f:(X,\topo_X)\rightarrow (Y,\topo_Y)$ satisfying that that $f|_A$ and $f|_B$ are continuous. Then:
-    \begin{enumerate}
-      \item If $A$, $B$ are open, then $f$ is continuous.
-      \item If $A$, $B$ are closed, then $f$ is continuous.
-    \end{enumerate}
-  \end{prop}
-  \begin{theorem}
-    A subspace of a topological space $T_3$ is $T_3$.
-  \end{theorem}
-  \begin{theorem}
-    A closed subspace of a topological space $T_4$ is $T_4$.
-  \end{theorem}
-  \subsubsection{Cantor set}
-  \begin{definition}
-    Let $C_0=[0,1]$. Define $I_1:=\left(\frac{1}{3},\frac{2}{3}\right)$ and $C_1:=C_0\setminus I_1$. Then, define $I_2:=I_1\cup\left(\frac{1}{9},\frac{2}{9}\right)\cup\left(\frac{7}{9},\frac{8}{9}\right)$ and $C_2:=C_0\setminus I_2$. In general, define:
-    \begin{gather*}
-      I_{n+1}=I_n\cup\left[\bigcup_{k=0}^{3^n-1}\left(\frac{3k+1}{3^{n+1}},\frac{3k+2}{3^{n+1}}\right)\right]\\
-      C_{n+1}=C_0\setminus I_{n+1}
-    \end{gather*}
-    We define the \textit{Cantor set} $\mathcal{C}$ as: $$\mathcal{C}:=\bigcap_{n=0}^\infty C_n$$
-  \end{definition}
-  \begin{prop}
-    The Cantor set $\mathcal{C}$ can be expressed as: $$\mathcal{C}=\{x\in[0,1]:x_3\footnote{Here, $x_3$ mean the expression of $x$ in base 3.}\text{ does not contain the digit 1}\}$$
-  \end{prop}
-  \begin{prop}
-    The Cantor set $\mathcal{C}$ satisfies the following properties:
-    \begin{enumerate}
-      \item $\mathcal{C}\ne\varnothing$.
-      \item $\mathcal{C}$ is closed in $\RR$.
-      \item $\mathcal{C}$ does not contain any interval of $\RR$.
-      \item $\Int\mathcal{C}=\varnothing$.
-      \item $\mathcal{C}$ does not have the discrete topology.
-      \item $\mathcal{C}$ is not countable.
-    \end{enumerate}
-  \end{prop}
-  \subsection{Product topology}
-  \subsubsection{Finite product}
-  \begin{definition}
-    Let $(X,\topo_X)$, $(Y,\topo_Y)$ be topological spaces. We define the \textit{product topology} on $X\times Y$, denoted by $\topo_{X\times Y}$, as the topology generated by: $$\mathcal{B}=\{U\times V:U\in\topo_X,V\in\topo_Y\}$$
-  \end{definition}
-  \begin{prop}
-    Let $(X,\topo_X)$, $(Y,\topo_Y)$ be topological spaces. Then, the projections
-    \begin{align*}
-      \pi_X:(X\times Y,\topo_{X\times Y})\longrightarrow X \\
-      \pi_Y:(X\times Y,\topo_{X\times Y})\longrightarrow Y
-    \end{align*}
-    are continuous and open.
-  \end{prop}
-  \begin{prop}
-    Let $(X,\topo_X)$, $(Y,\topo_Y)$ be topological spaces. Then, $A\subseteq X\times Y$ is open on $(X\times Y,\topo_{X\times Y})$ if and only if $\forall a\in A$ there exist $U\in\topo_X$ and $V\in\topo_Y$ such that $a\in U\times V\subseteq A$.
-  \end{prop}
-  \begin{prop}
-    Let $(X,\topo_X)$, $(Y,\topo_Y)$ be topological spaces. If $\mathcal{B}_X$ is a basis for $\topo_X$ and $\mathcal{B}_Y$ is a basis for $\topo_Y$, then $$\mathcal{B}=\{U\times V:U\in\mathcal{B}_X,V\in\mathcal{B}_Y\}$$
-    is a basis for $\topo_{X\times Y}$.
-  \end{prop}
-  \begin{prop}
-    Let $(X,\topo_X)$, $(Y,\topo_Y)$, $(Z,\topo_Z)$ be topological spaces and $f:(Z,\topo_Z)\rightarrow(X\times Y,\topo_{X\times Y})$ be a function. Then, $f$ is continuous if and only if $\pi_X\circ f$ and $\pi_Y\circ f$ are continuous.
-  \end{prop}
-  \begin{prop}
-    Let $(X_i,\topo_{X_i})$, $(Y_i,\topo_{Y_i})$ be topological spaces and $f_i:(X_i,\topo_{X_i})\rightarrow(Y_i,\topo_{Y_i})$ be a continuous function for $i=1,2$. Then,
-    $$
-      \function{f_1\times f_2}{(X_1\times X_2,\topo_{X_1\times X_2})}{(Y_1\times Y_2,\topo_{Y_1\times Y_2})}{(x_1,x_2)}{(f_1(x_1),f_2(x_2))}
-    $$ is also continuous.
-  \end{prop}
-  \begin{prop}
-    Let $(X,\topo_X)$, $(Y,\topo_Y)$ be topological spaces and $A\subseteq X$, $B\subseteq Y$ be closed subsets. Then, $A\times B$ is closed.
-  \end{prop}
-  \begin{prop}
-    Let $(X,\topo_X)$, $(Y,\topo_Y)$ be topological spaces and $(A,\topo_A)\subseteq (X,\topo_X)$, $(B,\topo_B)\subseteq (Y,\topo_Y)$ be topological subspaces. Then:
-    \begin{enumerate}
-      \item $\Int(A\times B)=\Int A\times \Int B$
-      \item $\Cl(A\times B)=\Cl A\times \Cl B$
-      \item $\Fr(A\times B)=(\Fr A\times\Cl B)\cup(\Cl A\times \Fr B)$
-    \end{enumerate}
-  \end{prop}
-  \begin{prop}
-    Let $(X,\topo_X)$, $(Y,\topo_Y)$ be Hausdorff topological spaces. Then, $(X\times Y,\topo_{X\times Y})$ is Hausdorff.
-  \end{prop}
-  \begin{theorem}
-    The product of topological spaces $T_3$ is $T_3$.
-  \end{theorem}
-  \subsubsection{Arbitrary product}
-  \begin{definition}
-    Let $I$ be an index set, $\{(X_i,\topo_{X_i}):i\in I\}$ be a collection of topological spaces and $X:=\prod_{i\in I}X_i$. We define the \textit{box topology} on $X$ as the topology generated by $$\mathcal{B}=\left\{\prod_{i\in I}U_i:U_i\in\topo_{X_i}\right\}$$
-  \end{definition}
-  \begin{definition}
-    Let $I$ be an index set, $\{(X_i,\topo_{X_i}):i\in I\}$ be a collection of topological spaces and $X:=\prod_{i\in I}X_i$. We define the \textit{infinite product topology} on $X$, denoted by $\topo_X$, as the topology generated by
-    \begin{multline*}
-      \mathcal{B}=\Bigg\{\prod_{i\in I}U_i:U_i\in\topo_{X_i}\text{ and $U_i=X_i$ except for}\\\text{a finite number of indices}\Bigg\}
-    \end{multline*}
-  \end{definition}
-  \begin{prop}
-    Let $I$ be an index set, $\{(X_i,\topo_{X_i}):i\in I\}$ be a collection of topological spaces and $X:=\prod_{i\in I}X_i$. Then, the projection $$\pi_{X_i}:\left(X,\topo_X\right)\longrightarrow (X_i,\topo_{X_i})$$
-    is continuous and open for all $i\in I$.
-  \end{prop}
-  \begin{prop}
-    Let $I$ be an index set, $\{(X_i,\topo_{X_i}):i\in I\}$ be a collection of topological spaces and $X:=\prod_{i\in I}X_i$. If $\mathcal{B}_{X_i}$ is a basis of $\topo_{X_i}$ $\forall i\in I$, then $$\mathcal{B}=\left\{\prod_{i\in I}U_i:U_i\in\mathcal{B}_{X_i}\ \forall i\in I\right\}$$
-    is a basis of $\topo_X$.
-  \end{prop}
-  \begin{prop}
-    Let $I$ be an index set, $\{(Y_i,\topo_{Y_i}):i\in I\}$ and $(X,\topo_X)$ be topological spaces, $Y:=\prod_{i\in I}Y_i$ and $f:(X,\topo_X)\rightarrow(Y,\topo_Y)$ be a function. Then, $f$ is continuous if and only if $\pi_{Y_i}\circ f$ is continuous for all $i\in I$.
-  \end{prop}
-  \begin{prop}
-    Let $I$ be an index set, $\{(X_i,\topo_{X_i}):i\in I\}$ and $\{(Y_i,\topo_{Y_i}):i\in I\}$ be two collections of topological spaces, $X:=\prod_{i\in I}X_i$, $Y:=\prod_{i\in I}Y_i$ and $f_i:(X_i,\topo_{X_i})\rightarrow(Y_i,\topo_{Y_i})$ be a continuous function for all $i\in I$. Then,
-    $$
-      \function{\displaystyle\prod_{i\in I}f_i}{\left(X,\topo_X\right)}{\left(Y,\topo_Y\right)}{(x_i)_{i\in I}}{(f_i(x_i))_{i\in I}}
-    $$ is also continuous.
-  \end{prop}
-  \begin{prop}
-    Let $(X_i,\topo_{X_i})$ be topological spaces and $(A_i,\topo_{A_i})\subseteq (X_i,\topo_{X_i})$ be topological subspaces for $i=1,\ldots, n$. Consider the following topological spaces:
-    \begin{enumerate}
-      \item The topological space created from the product of subspaces $A_i$.
-      \item The topological space created from the subspace $\prod_{i=1}^nA_i$ of the product $\prod_{i=1}^nX_i$.
-    \end{enumerate}
-    Then, these topological spaces are the same.
-  \end{prop}
-  \begin{theorem}
-    The function
-    $$
-      \function{\varphi}{\displaystyle\prod_{i=1}^\infty\{0,2\}}{\mathcal{C}}{(a_i)}{\displaystyle\sum_{i=1}^\infty\frac{a_i}{3^i}}
-    $$
-    is a homeomorphism.
-  \end{theorem}
-  \begin{definition}
-    We define the \textit{$n-1$-th sphere} $S^{n-1}\subset \RR^n$ as: $$S^{n-1}:=\{x\in\RR^n:\|x\|=1\}$$
-    We define the \textit{$n$-th ball} $B^n\subset \RR^n$ as: $$B^n:=\{x\in\RR^n:\|x\|^2<1\}$$
-  \end{definition}
-  \begin{definition}[Torus]
-    We define the \textit{torus} $T^2\subset \RR^3$ of major radius $R$ and minor radius $r$ (see \cref{TOP_torus}) as: $$T:=\left\{(x,y,z)\in\RR^3:{\left(\sqrt{x^2+y^2}-R\right)}^2+z^2=r^2\right\}$$
-  \end{definition}
-  \begin{center}
-    \begin{minipage}{\linewidth}
-      \centering
-      \includestandalone[mode=image|tex,width=0.65\linewidth]{Images/torus}
-      \captionof{figure}{Torus $T^2$}
-      \label{TOP_torus}
-    \end{minipage}
-  \end{center}
-  \begin{prop}
-    With the ordinary topology of $\RR^n$ we have:
-    \begin{itemize}
-      \item $S^n\setminus(0,\overset{(n)}{\ldots},0,1)\cong\RR^n$
-      \item $S^1\times S^1\cong T^2$
-    \end{itemize}
-  \end{prop}
-  \subsection{Quotient topology}
-  \subsubsection{Quotient topology}
-  \begin{definition}
-    Let $(X,\topo_X)$ be a topological space, $Y$ be a set and $f:X\rightarrow Y$ be a function. We define the \textit{quotient topology} on $Y$ defined by $f$ as: $$\topo_f:=\{U\subseteq Y:f^{-1}(U)\in\topo_X\}$$
-  \end{definition}
-  \begin{prop}
-    Let $(X,\topo_X)$, $(Y,\topo_f)$ be topological spaces, where $f:X\rightarrow Y$ is a function. Then, $f$ (thought as a function between topological spaces) is continuous and $\topo_f$ is the finest topology for which $f$ is continuous.
-  \end{prop}
-  \begin{prop}
-    Let $(X,\topo_X)$, $(Y,\topo_f)$ be topological spaces, where $f:X\rightarrow Y$ is a function. Then, $C\subseteq Y$ is closed on $(Y,\topo_f)$ if and only if $f^{-1}(C)\subseteq X$ is closed on $(X,\topo_X)$.
-  \end{prop}
-  \begin{prop}
-    Let $(X,\topo_X)$, $(Y,\topo_f)$ and $(Z,\topo_Z)$ be topological spaces, where $f:X\rightarrow Y$ is a function, and $h:(Y,\topo_f)\rightarrow(Z,\topo_Z)$ be a function. Then, $h$ is continuous if and only if $h\circ f$ is continuous.
-  \end{prop}
-  \begin{definition}
-    Let $(X,\topo_X)$ be a topological space and $f:X\rightarrow Y$ be a function. We say that $f$ is a \textit{quotient map} if it is surjective and $Y$ is equipped with the topology $\topo_f$.
-  \end{definition}
-  \begin{definition}
-    Let $(X,\topo_X)$ be a topological space and $\sim$ be an equivalence relation on $X$. Consider the canonical function $f:X\rightarrow\quot{X}{\!\sim}$. We define the \textit{quotient space} as $(\quot{X}{\!\sim},\topo_f)$.
-  \end{definition}
-  \begin{definition}
-    Let $(X,\topo_X)$ be a topological space and $A\subseteq X$ be a subset. Consider the partition of $X$: $$X=A\sqcup\bigsqcup_{x\in X\setminus A}\{x\}$$
-    and define the equivalence relation $\sim_A$ as follows: $$x\sim_A y\iff x,y\in A\text{ or }x=y\in X\setminus A$$
-    We define the \textit{quotient space of collapsing a set to a point} as $\quot{X}{A}:=\quot{X}{\!\sim_A}$ together with the quotient topology. We will write $[A]:=[a]$ $\forall a\in A$, which is well-defined.
-  \end{definition}
-  \begin{prop}
-    Let $(X,\topo_X)$ be a topological space, $A\subseteq X$ be a subset and $\pi:X\rightarrow\quot{X}{A}$ be the projection. Then, for all $U\subseteq\quot{X}{A}$ we have:
-    $$
-      \pi^{-1}(U)=\left\{\begin{array}{ccc}
-        \displaystyle\bigcup_{[x]\in U}\{x\} & \text{if} & [A]\notin U \\
-        \displaystyle A\cup \bigcup_{
-          \begin{subarray}{c}
-            [x]\in U \\
-            [x]\ne [A]
-          \end{subarray}
-        }\{x\}                               & \text{if} & [A]\in U
-      \end{array}\right.
-    $$
-  \end{prop}
-  \subsubsection{Group actions on topological spaces}
-  \begin{definition}
-    Let $(X,\topo)$ be a topological space and $(G,\cdot)$ be a group. An \textit{action} of $G$ on $(X,\topo)$ is a function:
-    $$\function{f}{(G,\cdot)\times(X,\topo)}{(X,\topo)}{(g,x)}{f_g(x)}$$ where $f_g:(X,\topo)\rightarrow(X,\topo)$ is a homeomorphism for all $g\in G$ such that:
-    \begin{enumerate}
-      \item $f_e=\id$.
-      \item $f_{g\cdot h}=f_g\circ f_h,\ \forall g,h\in G$.
-    \end{enumerate}
-    The pair $((X,\topo),f)$ is called a \textit{$(G,\cdot)$-space}.
-  \end{definition}
-  \begin{prop}
-    Let $((X,\topo),f)$ be a $(G,\cdot)$-space. Consider the equivalence relation: $x\sim y\iff\exists g\in G$ such that $y=f_g(x)$\footnote{Note that this relation creates a partition of $X$ in terms of the orbits under $f$.}. Then, the set of orbits under $f$, $\quot{X}{G}:=\quot{X}{\!\sim}$, is a topological space together with the quotient topology. Furthermore, the projection $\pi:X\rightarrow\quot{X}{G}$ is open.
-  \end{prop}
-  \subsubsection{Homomorphisms of quotient spaces}
-  \begin{prop}
-    With the ordinary topology of $\RR^n$ we have: $$\quot{[0,1]}{\{0,1\}}\cong S^1$$
-  \end{prop}
-  \begin{prop}\label{TOP_square-sim}
-    Consider $X=[0,1]^2$. Define an equivalence relation $\sim$ in $X$ in the following ways:
-    \begin{enumerate}
-      \item $(0,t)\sim(1,t)\ \forall t\in[0,1]$. Then, $X\cong S^1\times [0,1]$.
-      \item $(0,t)\sim(1,t)$ and $(s,0)\sim(s,1)$ $\forall s,t\in[0,1]$. Then, $X\cong T^2$.
-      \item $(0,t)\sim(1,1-t)\ \forall t\in[0,1]$. In that case, $X\cong \mathcal{M}$, where $\mathcal{M}$ is the \textit{Möbius band} (see \cref{TOP_moebius}).
-      \item $(0,t)\sim(1,t)$ and $(s,0)\sim(1-s,1)$ $\forall s,t\in[0,1]$. In that case, $X\cong \mathcal{K}$, where $\mathcal{K}$ is the \textit{Klein bottle} (see \cref{TOP_klein}).
-    \end{enumerate}
+        Properties regarding the interior:
+        \begin{enumerate}[leftmargin=1.15cm]\renewcommand{\labelenumi}{1.\arabic{enumi}.}
+            \item $\Int(\Int (A))=         \Int A$
+            \item $A\subseteq B\implies    \Int A\subseteq\Int B$
+            \item $\Int(X\setminus A)=     X\setminus \Cl A$
+            \item $\Int(B\setminus A)=     \Int B\setminus \Cl A$
+            \item $\Int(A\cap B)=          \Int A\cap\Int B$
+            \item $\Int(A\cup B)\supseteq  \Int A\cup\Int B$
+        \end{enumerate}
+        Properties regarding the closure:
+        \begin{enumerate}[leftmargin=1.15cm]\renewcommand{\labelenumi}{2.\arabic{enumi}.}
+            \item $\Cl(\Cl (A))=          \Cl A$
+            \item $A\subseteq B\implies   \Cl A\subseteq\Cl B$
+            \item $\Cl(X\setminus A)=     X\setminus \Int A$
+            \item $\Cl(A\cap B)\subseteq  \Cl A\cap\Cl B$
+            \item $\Cl(A\cup B)=          \Cl A\cup\Cl B$
+        \end{enumerate}
+        Properties regarding the boundary:
+        \begin{enumerate}[leftmargin=1.15cm]\renewcommand{\labelenumi}{3.\arabic{enumi}.}
+            \item $\Fr A\cap\Int A=         \varnothing$
+            \item $\Fr A=\Cl A\setminus\Int A$
+            \item $\Fr A\cup\Int A=             \Cl A$
+            \item $\Fr (A\cup B)\subseteq \Fr A\cup \Fr B$
+            \item $\Fr (\Fr A)\subseteq \Fr A$
+            \item $\Fr A\subseteq A\iff  A  \text{ is closed}$
+            \item $\Fr A\cap A=\varnothing\iff  A\text{ is open}$
+            \item $\Fr A=\varnothing\iff\text{$A$ is clopen}$
+        \end{enumerate}
+    \end{prop}
+    \begin{prop}[Kuratowski's problem]
+        Let $(X,\topo)$ be a topological space and $A\subseteq X$ be a subset. Then:
+        \begin{gather*}
+            \Cl(\Int(\Cl(\Int A)))=\Cl(\Int A)\\
+            \Int(\Cl(\Int (\Cl A)))=\Int(\Cl A)
+        \end{gather*}
+    \end{prop}
+    \subsection{Functions between topological spaces}
+    \begin{definition}[Continuous function]
+        Let $(X,\topo_X)$ and $(Y,\topo_Y)$ be topological spaces and $f:(X,\topo_X)\rightarrow(Y,\topo_Y)$ be a function. We say that $f$ is continuous if for all $U\in\topo_Y$, we have $f^{-1}(U)\in\topo_X$.
+    \end{definition}
+    \begin{prop}
+        Let $(X,\topo_X)$ and $(Y,\topo_Y)$ be topological spaces and $f:(X,\topo_X)\rightarrow(Y,\topo_Y)$ be a function. We say that $f$ is continuous if and only if for all closed sets $C\subseteq Y$, we have $f^{-1}(C)\subseteq X$ is closed.
+    \end{prop}
+    \begin{theorem}
+        Let $(X,\topo_X)$ and $(Y,\topo_Y)$ be topological spaces, $f:(X,\topo_X)\rightarrow (Y,\topo_Y)$ be a function and $\mathcal{B}_Y$ be a basis of $\topo_Y$. Then: $$f\text{ is continuous}\iff f^{-1}(B)\in\topo_X\ \forall B\in \mathcal{B}_Y$$
+    \end{theorem}
+    \begin{theorem}
+        Let $(X,\topo_X)$ and $(Y,\topo_Y)$ be topological spaces and $f:(X,\topo_X)\rightarrow (Y,\topo_Y)$ be a function. Then, the following statements are equivalent:
+        \begin{enumerate}
+            \item $f$ is continuous.
+            \item $f^{-1}(\Int(B))\subseteq \Int(f^{-1}(B))$ for all subsets $B\subseteq Y$.
+            \item $f(\Cl(A))\subseteq \Cl(f(A))$ for all subsets $A\subseteq X$.
+        \end{enumerate}
+    \end{theorem}
+    \begin{theorem}
+        Let $(X,\topo_X)$ and $(Y,\topo_Y)$ be topological spaces and $f:(X,\topo_X)\rightarrow (Y,\topo_Y)$ be a function. Then, $f$ is continuous if and only if $\forall x\in X$ and $\forall U\in\topo_Y$ such that $f(x)\in U$, there exists a neighbourhood $N$ of $x$ with $f(N)\subseteq U$.
+    \end{theorem}
+    \begin{prop}
+        Let $(X,\topo_X)$, $(Y,\topo_Y)$ and $(Z,\topo_Z)$ be topological spaces and $f:(X,\topo_X)\rightarrow (Y,\topo_Y)$, $g:(Y,\topo_Y)\rightarrow (Z,\topo_Z)$ be continuous functions. Then, $g\circ f:(X,\topo_X)\rightarrow (Z,\topo_Z)$ is continuous.
+    \end{prop}
+    \begin{definition}
+        Let $(X,\topo_X)$ and $(Y,\topo_Y)$ be topological spaces. A \emph{homeomorphism} between $(X,\topo_X)$ and $(Y,\topo_Y)$ is a bijective function that is continuous and whose inverse is also continuous. We say that $(X,\topo_X)$ and $(Y,\topo_Y)$ are \emph{homeomorphic}, and we denote it by $(X,\topo_X)\cong(Y,\topo_Y)$, if there exists a homeomorphism between them.
+    \end{definition}
+    \begin{definition}[Open function]
+        Let $(X,\topo_X)$ and $(Y,\topo_Y)$ be topological spaces and $f:(X,\topo_X)\rightarrow (Y,\topo_Y)$ be a function. We say that $f$ is \emph{open} if $\forall U\in\topo_X$, we have $f(U)\in \topo_Y$.
+    \end{definition}
+    \begin{definition}[Closed function]
+        Let $(X,\topo_X)$ and $(Y,\topo_Y)$ be topological spaces and $f:(X,\topo_X)\rightarrow (Y,\topo_Y)$ be a function. We say that $f$ is \emph{closed} if for all closed subsets $C\subseteq X$, we have $f(C)$ is closed.
+    \end{definition}
+    \begin{theorem}
+        Let $(X,\topo_X)$ and $(Y,\topo_Y)$ be topological spaces, $f:(X,\topo_X)\rightarrow (Y,\topo_Y)$ be a function and $\mathcal{B}_X$ be a basis of $\topo_X$. Then: $$f\text{ is open}\iff f(B)\in\topo_Y\ \forall B\in \mathcal{B}_X$$
+    \end{theorem}
+    \begin{theorem}
+        Let $(X,\topo_X)$ and $(Y,\topo_Y)$ be topological spaces, $f:(X,\topo_X)\rightarrow (Y,\topo_Y)$ be a bijective function. Then: $$f\text{ is open}\iff f\text{ is closed}$$
+    \end{theorem}
+    \begin{prop}
+        Let $(X,\topo_X)$ and $(Y,\topo_Y)$ be topological spaces and $f:(X,\topo_X)\rightarrow (Y,\topo_Y)$ be a function. Then, the following statements are equivalent:
+        \begin{enumerate}
+            \item $f$ is open.
+            \item $f(\Int(A))\subseteq \Int(f(A))$ for all subsets $A\subseteq X$.
+        \end{enumerate}
+    \end{prop}
+    \begin{prop}
+        Let $(X,\topo_X)$ and $(Y,\topo_Y)$ be topological spaces and $f:(X,\topo_X)\rightarrow (Y,\topo_Y)$ be a continuous bijective function. Then, the following statements are equivalent:
+        \begin{enumerate}
+            \item $f$ is a homeomorphism.
+            \item $f$ is open.
+            \item $f$ is closed.
+        \end{enumerate}
+    \end{prop}
+    \begin{prop}
+        Being homeomorphic as topological spaces is an equivalence relation.
+    \end{prop}
+    \subsection{Separation axioms}
+    \begin{definition}[$T_0$ space]
+        Let $(X,\topo)$ be a topological space. We say that $(X,\topo)$ is $T_0$\footnote{The letter $T$ comes from the German word ``Trennungsaxiom'' which means ``separation axioms''.} (or \emph{Kolmogorov}) if for any two distinct points of $X$, there exists an open set that contain one of them but not the other.
+    \end{definition}
+    \begin{definition}[$T_1$ space]
+        Let $(X,\topo)$ be a topological space. We say that $(X,\topo)$ is $T_1$ (or \emph{Fréchet}) if for any two distinct points of $x,y\in X$, there exists an open set $U\in\topo$ such that $x\in U$ and $y\notin U$.
+    \end{definition}
+    \begin{theorem}
+        Let $(X,\topo)$ be a topological space. The statements following are equivalent:
+        \begin{enumerate}
+            \item $(X,\topo)$ is $T_1$.
+            \item For all $x\in X$, $\{x\}=\bigcap_{N\in \mathcal{N}_x}N$.
+            \item For all $x\in X$, $\{x\}$ is closed.
+        \end{enumerate}
+    \end{theorem}
+    \begin{definition}[$T_2$ space]
+        Let $(X,\topo)$ be a topological space. We say that $(X,\topo)$ is $T_2$ (or \emph{Hausdorff}) if for any two distinct points of $x,y\in X$, there exist $U,V\in\topo$ such that $x\in U$, $y\in V$ and $U\cap V=\varnothing$.
+    \end{definition}
+    \begin{theorem}
+        Let $(X,\topo)$ be a topological space. The statements following are equivalent:
+        \begin{enumerate}
+            \item $(X,\topo)$ is $T_2$.
+            \item For all $x\in X$, $\{x\}=\bigcap_{N\in \mathcal{N}_x}\Cl(N)$.
+            \item The diagonal $\Delta(X):=\{(x,x)\in X\times X\}\subset X\times X$ is closed.
+        \end{enumerate}
+    \end{theorem}
+    \begin{definition}
+        Let $(X,\topo)$ be a topological space. We say that $(X,\topo)$ is \emph{regular} if for all $x\in X$ and for all a closed sets $C\subseteq X$ such that $x\notin C$, there exist $U,V\in\topo$ such that $x\in U$, $C\subseteq V$ and $U\cap V=\varnothing$.
+    \end{definition}
+    \begin{definition}[$T_3$ space]
+        Let $(X,\topo)$ be a topological space. We say that $(X,\topo)$ is $T_3$ if it is $T_1$ and regular.
+    \end{definition}
+    \begin{theorem}
+        Let $(X,\topo)$ be a topological space. The statements following are equivalent:
+        \begin{enumerate}
+            \item $(X,\topo)$ is $T_3$.
+            \item For all $x\in X$ and for all $U\in\topo$ such that $x\in U$, $\exists V\in\topo$ such that $x\in V\subseteq\Cl(V)\subseteq U$.
+        \end{enumerate}
+    \end{theorem}
+    \begin{definition}
+        Let $(X,\topo)$ be a topological space. We say that $(X,\topo)$ is \emph{normal} if for all closed sets $C,K\subseteq X$ such that $C\cap K=\varnothing$, there exist $U,V\in\topo$ such that $C\subseteq U$, $K\subseteq V$ and $U\cap V=\varnothing$.
+    \end{definition}
+    \begin{definition}[$T_4$ space]
+        Let $(X,\topo)$ be a topological space. We say that $(X,\topo)$ is $T_4$ if it is $T_1$ and normal.
+    \end{definition}
+    \begin{theorem}
+        Let $(X,\topo)$ be a topological space. The statements following are equivalent:
+        \begin{enumerate}
+            \item $(X,\topo)$ is $T_4$.
+            \item For all closed set $C\subseteq X$ and for all $U\in\topo$ such that $C\subseteq U$, $\exists V\in\topo$ such that $C\subseteq V\subseteq\Cl(V)\subseteq U$.
+        \end{enumerate}
+    \end{theorem}
+    \begin{lemma}[Urysohn's lemma]
+        Let $(X,\topo)$ be a topological space $T_4$ and $A,B\subseteq X$ be closed sets. Then, there exists a continuous function $f:(X,\topo)\rightarrow[0,1]$ such that $A\subseteq f^{-1}(0)$ and $B\subseteq f^{-1}(1)$.
+    \end{lemma}
+    \begin{theorem}[Tietze extension theorem]
+        Let $(X,\topo)$ be a topological space $T_4$, $C\subseteq X$ be a closed set and $f:C\rightarrow[0,1]$ be a continuous function. Then, there exists a continuous function $F:(X,\topo)\rightarrow[0,1]$ such that $F(x)=f(x)$ $\forall x\in C$.
+    \end{theorem}
+    \begin{definition}
+        A topological space $(X,\topo)$ is said to be \emph{metrizable} if there is a metric $d$ such that the topology induced by $d$ is $\topo$.
+    \end{definition}
+    \begin{theorem}[Urysohn's metrization theorem]
+        Let $(X,\topo)$ be a topological space $T_3$ such that admits a countable basis of open sets. Then, $(X,\topo)$ is metrizable.
+    \end{theorem}
+    \subsection{Subspaces}
+    \subsubsection{Subspace topology}
+    \begin{definition}
+        Let $(X,\topo)$ be a topological space and $A\subseteq X$ be a subset. We define the following set: $$\topo_A=\{U\subseteq A:\exists V\in\topo\text{ such that }V\cap A=U\}$$ Then, $(A,\topo_A)$ is a topological space (called \emph{topological subspace} of $(X,\topo)$) and $\topo_A$ is called the \emph{subspace topology} on $A$. We will write $(A,\topo_A)\subseteq (X,\topo)$ to denote that $(A,\topo_A)$ is a topological subspace.
+    \end{definition}
+    \begin{prop}
+        Let $(X,\topo)$ be a topological space and $(A,\topo_A)\subseteq (X,\topo)$ be a topological subspace. Then, $C\subseteq A$ is closed if and only if $C=K\cap A$, where $K\subseteq X$ is a closed subset on $(X,\topo)$.
+    \end{prop}
+    \begin{prop}
+        Let $(X,\topo)$ be a topological space and $(A,\topo_A)\subseteq (X,\topo)$ be a topological subspace. Then:
+        \begin{enumerate}
+            \item If $A$ is open and $U\subseteq A$, then: $$U\in\topo_A\iff U\in\topo$$
+            \item If $A$ is closed and $C\subseteq A$, then: $$C\text{ is closed on }(A,\topo_A)\iff C\text{ is closed on }(X,\topo)$$
+        \end{enumerate}
+    \end{prop}
+    \begin{prop}
+        Let $(X,\topo)$ be a topological space and $(A,\topo_A)\subseteq (X,\topo)$ be a topological subspace. Then, the inclusion $\iota:(A,\topo_A)\hookrightarrow (X,\topo_X)$ is continuous and $\topo_A$ is the least finer topology where $\iota$ is continuous.
+    \end{prop}
+    \begin{corollary}
+        Let $(X,\topo_X)$ and $(Y,\topo_Y)$ be topological spaces, $f:(X,\topo_X)\rightarrow (Y,\topo_Y)$ be a continuous function and $(A,\topo_A)\subseteq (X,\topo_X)$ be a topological subspace. Then, $f|_A$ is also continuous.
+    \end{corollary}
+    \begin{prop}
+        Let $(X,\topo)$ be a topological space, $\mathcal{B}$ be a basis of $\topo$ and $(A,\topo_A)\subseteq (X,\topo)$ be a topological subspace. Then, $$\mathcal{B}_A=\{B\cap A:B\in\mathcal{B}\}$$ is basis of $\topo_A$.
+    \end{prop}
+    \begin{prop}
+        Let $(X,\topo_X)$ and $(Y,\topo_Y)$ be topological spaces and $(B,\topo_B)\subseteq (Y,\topo_Y)$ be a topological subspace. Let $f:(X,\topo_X)\rightarrow (B,\topo_B)$ be a function. Then, $f$ is continuous if and only if $\iota\circ f:(X,\topo_X)\rightarrow (B,\topo_B)\hookrightarrow (Y,\topo_Y)$ is continuous.
+    \end{prop}
+    \begin{corollary}
+        Let $(X,\topo_X)$ and $(Y,\topo_Y)$ be topological spaces and $f:(X,\topo_X)\rightarrow (Y,\topo_Y)$ be a continuous function. Then, $g:(X,\topo_X)\rightarrow (f(X),\topo_{f(X)})$ is also continuous.
+    \end{corollary}
+    \begin{prop}
+        Let $(X,\topo)$ and $(Y,\topo_Y)$ be topological spaces such that $X=A\cup B$, for some sets $A$, $B$. Consider a function $f:(X,\topo_X)\rightarrow (Y,\topo_Y)$ satisfying that that $f|_A$ and $f|_B$ are continuous. Then:
+        \begin{enumerate}
+            \item If $A$, $B$ are open, then $f$ is continuous.
+            \item If $A$, $B$ are closed, then $f$ is continuous.
+        \end{enumerate}
+    \end{prop}
+    \begin{theorem}
+        A subspace of a topological space $T_3$ is $T_3$.
+    \end{theorem}
+    \begin{theorem}
+        A closed subspace of a topological space $T_4$ is $T_4$.
+    \end{theorem}
+    \subsubsection{Cantor set}
+    \begin{definition}
+        Let $C_0=[0,1]$. Define $I_1:=\left(\frac{1}{3},\frac{2}{3}\right)$ and $C_1:=C_0\setminus I_1$. Then, define $I_2:=I_1\cup\left(\frac{1}{9},\frac{2}{9}\right)\cup\left(\frac{7}{9},\frac{8}{9}\right)$ and $C_2:=C_0\setminus I_2$. In general, define:
+        \begin{gather*}
+            I_{n+1}=I_n\cup\left[\bigcup_{k=0}^{3^n-1}\left(\frac{3k+1}{3^{n+1}},\frac{3k+2}{3^{n+1}}\right)\right]\\
+            C_{n+1}=C_0\setminus I_{n+1}
+        \end{gather*}
+        We define the \emph{Cantor set} $\mathcal{C}$ as: $$\mathcal{C}:=\bigcap_{n=0}^\infty C_n$$
+    \end{definition}
+    \begin{prop}
+        The Cantor set $\mathcal{C}$ can be expressed as: $$\mathcal{C}=\{x\in[0,1]:x_3\footnote{Here, $x_3$ mean the expression of $x$ in base 3.}\text{ does not contain the digit 1}\}$$
+    \end{prop}
+    \begin{prop}
+        The Cantor set $\mathcal{C}$ satisfies the following properties:
+        \begin{enumerate}
+            \item $\mathcal{C}\ne\varnothing$.
+            \item $\mathcal{C}$ is closed in $\RR$.
+            \item $\mathcal{C}$ does not contain any interval of $\RR$.
+            \item $\Int\mathcal{C}=\varnothing$.
+            \item $\mathcal{C}$ does not have the discrete topology.
+            \item $\mathcal{C}$ is not countable.
+        \end{enumerate}
+    \end{prop}
+    \subsection{Product topology}
+    \subsubsection{Finite product}
+    \begin{definition}
+        Let $(X,\topo_X)$, $(Y,\topo_Y)$ be topological spaces. We define the \emph{product topology} on $X\times Y$, denoted by $\topo_{X\times Y}$, as the topology generated by: $$\mathcal{B}=\{U\times V:U\in\topo_X,V\in\topo_Y\}$$
+    \end{definition}
+    \begin{prop}
+        Let $(X,\topo_X)$, $(Y,\topo_Y)$ be topological spaces. Then, the projections
+        \begin{align*}
+            \pi_X:(X\times Y,\topo_{X\times Y})\longrightarrow X \\
+            \pi_Y:(X\times Y,\topo_{X\times Y})\longrightarrow Y
+        \end{align*}
+        are continuous and open.
+    \end{prop}
+    \begin{prop}
+        Let $(X,\topo_X)$, $(Y,\topo_Y)$ be topological spaces. Then, $A\subseteq X\times Y$ is open on $(X\times Y,\topo_{X\times Y})$ if and only if $\forall a\in A$ there exist $U\in\topo_X$ and $V\in\topo_Y$ such that $a\in U\times V\subseteq A$.
+    \end{prop}
+    \begin{prop}
+        Let $(X,\topo_X)$, $(Y,\topo_Y)$ be topological spaces. If $\mathcal{B}_X$ is a basis for $\topo_X$ and $\mathcal{B}_Y$ is a basis for $\topo_Y$, then $$\mathcal{B}=\{U\times V:U\in\mathcal{B}_X,V\in\mathcal{B}_Y\}$$
+        is a basis for $\topo_{X\times Y}$.
+    \end{prop}
+    \begin{prop}
+        Let $(X,\topo_X)$, $(Y,\topo_Y)$, $(Z,\topo_Z)$ be topological spaces and $f:(Z,\topo_Z)\rightarrow(X\times Y,\topo_{X\times Y})$ be a function. Then, $f$ is continuous if and only if $\pi_X\circ f$ and $\pi_Y\circ f$ are continuous.
+    \end{prop}
+    \begin{prop}
+        Let $(X_i,\topo_{X_i})$, $(Y_i,\topo_{Y_i})$ be topological spaces and $f_i:(X_i,\topo_{X_i})\rightarrow(Y_i,\topo_{Y_i})$ be a continuous function for $i=1,2$. Then,
+        $$
+            \function{f_1\times f_2}{(X_1\times X_2,\topo_{X_1\times X_2})}{(Y_1\times Y_2,\topo_{Y_1\times Y_2})}{(x_1,x_2)}{(f_1(x_1),f_2(x_2))}
+        $$ is also continuous.
+    \end{prop}
+    \begin{prop}
+        Let $(X,\topo_X)$, $(Y,\topo_Y)$ be topological spaces and $A\subseteq X$, $B\subseteq Y$ be closed subsets. Then, $A\times B$ is closed.
+    \end{prop}
+    \begin{prop}
+        Let $(X,\topo_X)$, $(Y,\topo_Y)$ be topological spaces and $(A,\topo_A)\subseteq (X,\topo_X)$, $(B,\topo_B)\subseteq (Y,\topo_Y)$ be topological subspaces. Then:
+        \begin{enumerate}
+            \item $\Int(A\times B)=\Int A\times \Int B$
+            \item $\Cl(A\times B)=\Cl A\times \Cl B$
+            \item $\Fr(A\times B)=(\Fr A\times\Cl B)\cup(\Cl A\times \Fr B)$
+        \end{enumerate}
+    \end{prop}
+    \begin{prop}
+        Let $(X,\topo_X)$, $(Y,\topo_Y)$ be Hausdorff topological spaces. Then, $(X\times Y,\topo_{X\times Y})$ is Hausdorff.
+    \end{prop}
+    \begin{theorem}
+        The product of topological spaces $T_3$ is $T_3$.
+    \end{theorem}
+    \subsubsection{Arbitrary product}
+    \begin{definition}
+        Let $I$ be an index set, $\{(X_i,\topo_{X_i}):i\in I\}$ be a collection of topological spaces and $X:=\prod_{i\in I}X_i$. We define the \emph{box topology} on $X$ as the topology generated by $$\mathcal{B}=\left\{\prod_{i\in I}U_i:U_i\in\topo_{X_i}\right\}$$
+    \end{definition}
+    \begin{definition}
+        Let $I$ be an index set, $\{(X_i,\topo_{X_i}):i\in I\}$ be a collection of topological spaces and $X:=\prod_{i\in I}X_i$. We define the \emph{infinite product topology} on $X$, denoted by $\topo_X$, as the topology generated by
+        \begin{multline*}
+            \mathcal{B}=\Bigg\{\prod_{i\in I}U_i:U_i\in\topo_{X_i}\land U_i=X_i\text{ except for}\\\text{a finite number of indices}\Bigg\}
+        \end{multline*}
+    \end{definition}
+    \begin{prop}
+        Let $I$ be an index set, $\{(X_i,\topo_{X_i}):i\in I\}$ be a collection of topological spaces and $X:=\prod_{i\in I}X_i$. Then, the projection $$\pi_{X_i}:\left(X,\topo_X\right)\longrightarrow (X_i,\topo_{X_i})$$
+        is continuous and open for all $i\in I$.
+    \end{prop}
+    \begin{prop}
+        Let $I$ be an index set, $\{(X_i,\topo_{X_i}):i\in I\}$ be a collection of topological spaces and $X:=\prod_{i\in I}X_i$. If $\mathcal{B}_{X_i}$ is a basis of $\topo_{X_i}$ $\forall i\in I$, then $$\mathcal{B}=\left\{\prod_{i\in I}U_i:U_i\in\mathcal{B}_{X_i}\ \forall i\in I\right\}$$
+        is a basis of $\topo_X$.
+    \end{prop}
+    \begin{prop}
+        Let $I$ be an index set, $\{(Y_i,\topo_{Y_i}):i\in I\}$ and $(X,\topo_X)$ be topological spaces, $Y:=\prod_{i\in I}Y_i$ and $f:(X,\topo_X)\rightarrow(Y,\topo_Y)$ be a function. Then, $f$ is continuous if and only if $\pi_{Y_i}\circ f$ is continuous for all $i\in I$.
+    \end{prop}
+    \begin{prop}
+        Let $I$ be an index set, $\{(X_i,\topo_{X_i}):i\in I\}$ and $\{(Y_i,\topo_{Y_i}):i\in I\}$ be two collections of topological spaces, $X:=\prod_{i\in I}X_i$, $Y:=\prod_{i\in I}Y_i$ and $f_i:(X_i,\topo_{X_i})\rightarrow(Y_i,\topo_{Y_i})$ be a continuous function for all $i\in I$. Then,
+        $$
+            \function{\displaystyle\prod_{i\in I}f_i}{\left(X,\topo_X\right)}{\left(Y,\topo_Y\right)}{(x_i)_{i\in I}}{(f_i(x_i))_{i\in I}}
+        $$ is also continuous.
+    \end{prop}
+    \begin{prop}
+        Let $(X_i,\topo_{X_i})$ be topological spaces and $(A_i,\topo_{A_i})\subseteq (X_i,\topo_{X_i})$ be topological subspaces for $i=1,\ldots, n$. Consider the following topological spaces:
+        \begin{enumerate}
+            \item The topological space created from the product of subspaces $A_i$.
+            \item The topological space created from the subspace $\prod_{i=1}^nA_i$ of the product $\prod_{i=1}^nX_i$.
+        \end{enumerate}
+        Then, these topological spaces are the same.
+    \end{prop}
+    \begin{prop}
+        Let $I$ be and index set, $(X_i,\topo_{X_i})$ be topological spaces $\forall i\in I$ and $A_i\subseteq X_i$ be subsets $\forall i\in I$. Let $X:=\prod_{i\in I}X_i$. Then, $\prod_{i\in I}A_i$ is dense in $(X,\topo_X)$ if and only if $A_i$ is dense in $(X_i,\topo_{X_i})$ $\forall i\in I$.
+    \end{prop}
+    \begin{theorem}
+        The function
+        $$
+            \function{\varphi}{\displaystyle\prod_{i=1}^\infty\{0,2\}}{\mathcal{C}}{(a_i)}{\displaystyle\sum_{i=1}^\infty\frac{a_i}{3^i}}
+        $$
+        is a homeomorphism.
+    \end{theorem}
+    \begin{definition}
+        We define the \emph{$n-1$-th sphere} $S^{n-1}\subset \RR^n$ as: $$S^{n-1}:=\{x\in\RR^n:\|x\|=1\}$$
+        We define the \emph{$n$-th ball} $B^n\subset \RR^n$ as: $$B^n:=\{x\in\RR^n:\|x\|^2<1\}$$
+    \end{definition}
+    \begin{definition}[Torus]
+        We define the \emph{torus} $T^2\subset \RR^3$ of major radius $R$ and minor radius $r$ (see \cref{TOP_torus}) as: $$T:=\left\{(x,y,z)\in\RR^3:{\left(\sqrt{x^2+y^2}-R\right)}^2+z^2=r^2\right\}$$
+    \end{definition}
     \begin{center}
-      \begin{minipage}{\linewidth}
-        \centering
-        \includestandalone[mode=image|tex,width=\linewidth]{Images/square}
-        \captionof{figure}{Representation of the quotient spaces $\quot{{[0,1]}^2}{\sim}$, where $\sim$ is the equivalence relation defined on \cref{TOP_square-sim}}
-      \end{minipage}
+        \begin{minipage}{\linewidth}
+            \centering
+            \includestandalone[mode=image|tex,width=0.65\linewidth]{Images/torus}
+            \captionof{figure}{Torus $T^2$}
+            \label{TOP_torus}
+        \end{minipage}
     \end{center}
-  \end{prop}
-  \begin{center}
-    \begin{minipage}{\linewidth}
-      \centering
-      \includestandalone[mode=image|tex,width=0.65\linewidth]{Images/moebiusband}
-      \captionof{figure}{Möbius band}
-      \label{TOP_moebius}
-    \end{minipage}
-  \end{center}
-  \begin{center}
-    \begin{minipage}{\linewidth}
-      \centering
-      \includestandalone[mode=image|tex,width=0.65\linewidth]{Images/kleinbottle}
-      \captionof{figure}{Klein bottle}
-      \label{TOP_klein}
-    \end{minipage}
-  \end{center}
-  \begin{prop}
-    Let $\mathcal{P}_n(\RR)$ be the projective space of $\RR^{n+1}$. Consider the relation $\sim$ on $\RR^{n+1}$ such that $\vectorfunction{v}\sim -\vectorfunction{v}$ $\forall \vectorfunction{v}\in\RR^{n+1}$. Then: $$\mathcal{P}_n(\RR)\cong\quot{S^n}{\sim}$$
-  \end{prop}
-  \begin{prop}\label{TOP_circle-sim}
-    Consider the ball $B^2$ and the equivalence relation $\sim$ in $\Fr B^2=S^1$ such that for all $(x,y)\in \Fr B^2$, $(x,y)\sim(x,-y)$. Then: $$\quot{B^2}{\sim}\cong S^2$$
+    \begin{prop}
+        With the ordinary topology of $\RR^n$ we have:
+        \begin{itemize}
+            \item $S^n\setminus(0,\overset{(n)}{\ldots},0,1)\cong\RR^n$
+            \item $S^1\times S^1\cong T^2$
+        \end{itemize}
+    \end{prop}
+    \subsection{Quotient topology}
+    \subsubsection{Quotient topology}
+    \begin{definition}
+        Let $(X,\topo_X)$ be a topological space, $Y$ be a set and $f:X\rightarrow Y$ be a function. We define the \emph{quotient topology} on $Y$ defined by $f$ as: $$\topo_f:=\{U\subseteq Y:f^{-1}(U)\in\topo_X\}$$
+    \end{definition}
+    \begin{prop}
+        Let $(X,\topo_X)$, $(Y,\topo_f)$ be topological spaces, where $f:X\rightarrow Y$ is a function. Then, $f$ (thought as a function between topological spaces) is continuous and $\topo_f$ is the finest topology for which $f$ is continuous.
+    \end{prop}
+    \begin{prop}
+        Let $(X,\topo_X)$, $(Y,\topo_f)$ be topological spaces, where $f:X\rightarrow Y$ is a function. Then, $C\subseteq Y$ is closed on $(Y,\topo_f)$ if and only if $f^{-1}(C)\subseteq X$ is closed on $(X,\topo_X)$.
+    \end{prop}
+    \begin{prop}
+        Let $(X,\topo_X)$, $(Y,\topo_f)$ and $(Z,\topo_Z)$ be topological spaces, where $f:X\rightarrow Y$ is a function, and $h:(Y,\topo_f)\rightarrow(Z,\topo_Z)$ be a function. Then, $h$ is continuous if and only if $h\circ f$ is continuous.
+    \end{prop}
+    \begin{definition}
+        Let $(X,\topo_X)$ be a topological space and $f:X\rightarrow Y$ be a function. We say that $f$ is a \emph{quotient map} if it is surjective and $Y$ is equipped with the topology $\topo_f$.
+    \end{definition}
+    \begin{definition}
+        Let $(X,\topo_X)$ be a topological space and $\sim$ be an equivalence relation on $X$. Consider the canonical function $f:X\rightarrow\quot{X}{\!\sim}$. We define the \emph{quotient space} as $(\quot{X}{\!\sim},\topo_f)$.
+    \end{definition}
+    \begin{definition}
+        Let $(X,\topo_X)$ be a topological space and $A\subseteq X$ be a subset. Consider the partition of $X$: $$X=A\sqcup\bigsqcup_{x\in X\setminus A}\{x\}$$
+        and define the equivalence relation $\sim_A$ as follows: $$x\sim_A y\iff x,y\in A\lor x=y\in X\setminus A$$
+        We define the \emph{quotient space of collapsing a set to a point} as $\quot{X}{A}:=\quot{X}{\!\sim_A}$ together with the quotient topology. We will write $[A]:=[a]$ $\forall a\in A$, which is well-defined.
+    \end{definition}
+    \begin{prop}
+        Let $(X,\topo_X)$ be a topological space, $A\subseteq X$ be a subset and $\pi:X\rightarrow\quot{X}{A}$ be the projection. Then, for all $U\subseteq\quot{X}{A}$ we have:
+        $$
+            \pi^{-1}(U)=\left\{\begin{array}{ccc}
+                \displaystyle\bigcup_{[x]\in U}\{x\} & \text{if} & [A]\notin U \\
+                \displaystyle A\cup \bigcup_{
+                    \begin{subarray}{c}
+                        [x]\in U \\
+                        [x]\ne [A]
+                    \end{subarray}
+                }\{x\}                               & \text{if} & [A]\in U
+            \end{array}\right.
+        $$
+    \end{prop}
+    \subsubsection{Group actions on topological spaces}
+    \begin{definition}
+        Let $(X,\topo)$ be a topological space and $(G,\cdot)$ be a group. An \emph{action} of $G$ on $(X,\topo)$ is a function:
+        $$\function{f}{(G,\cdot)\times(X,\topo)}{(X,\topo)}{(g,x)}{f_g(x)}$$ where $f_g:(X,\topo)\rightarrow(X,\topo)$ is a homeomorphism for all $g\in G$ such that:
+        \begin{enumerate}
+            \item $f_e=\id$.
+            \item $f_{g\cdot h}=f_g\circ f_h,\ \forall g,h\in G$.
+        \end{enumerate}
+        The pair $((X,\topo),f)$ is called a \emph{$(G,\cdot)$-space}.
+    \end{definition}
+    \begin{prop}
+        Let $((X,\topo),f)$ be a $(G,\cdot)$-space. Consider the equivalence relation: $x\sim y\iff\exists g\in G$ such that $y=f_g(x)$\footnote{Note that this relation creates a partition of $X$ in terms of the orbits under $f$.}. Then, the set of orbits under $f$, $\quot{X}{G}:=\quot{X}{\!\sim}$, is a topological space together with the quotient topology. Furthermore, the projection $\pi:X\rightarrow\quot{X}{G}$ is open.
+    \end{prop}
+    \subsubsection{Homeomorphisms of quotient spaces}
+    \begin{prop}
+        With the ordinary topology of $\RR^n$ we have: $$\quot{[0,1]}{\{0,1\}}\cong S^1$$
+    \end{prop}
+    \begin{prop}\label{TOP_square-sim}
+        Consider $X=[0,1]^2$. Define an equivalence relation $\sim$ in $X$ in the following ways:
+        \begin{enumerate}
+            \item $(0,t)\sim(1,t)\ \forall t\in[0,1]$. Then, $X\cong S^1\times [0,1]$.
+            \item $(0,t)\sim(1,t)$ and $(s,0)\sim(s,1)$ $\forall s,t\in[0,1]$. Then, $X\cong T^2$.
+            \item $(0,t)\sim(1,1-t)\ \forall t\in[0,1]$. In that case, $X\cong \mathcal{M}$, where $\mathcal{M}$ is the \emph{Möbius band} (see \cref{TOP_moebius}).
+            \item $(0,t)\sim(1,t)$ and $(s,0)\sim(1-s,1)$ $\forall s,t\in[0,1]$. In that case, $X\cong \mathcal{K}$, where $\mathcal{K}$ is the \emph{Klein bottle} (see \cref{TOP_klein}).
+        \end{enumerate}
+        \begin{center}
+            \begin{minipage}{\linewidth}
+                \centering
+                \includestandalone[mode=image|tex,width=\linewidth]{Images/square}
+                \captionof{figure}{Representation of the quotient spaces $\quot{{[0,1]}^2}{\sim}$, where $\sim$ is the equivalence relation defined on \cref{TOP_square-sim}}
+            \end{minipage}
+        \end{center}
+    \end{prop}
     \begin{center}
-      \begin{minipage}{\linewidth}
-        \centering
-        \includestandalone[mode=image|tex,width=0.25\linewidth]{Images/circle}
-        \captionof{figure}{Representation of the quotient spaces $\quot{B^2}{\sim}$, where $\sim$ is the equivalence relation defined on \cref{TOP_circle-sim}}
-      \end{minipage}
+        \begin{minipage}{\linewidth}
+            \centering
+            \includestandalone[mode=image|tex,width=0.65\linewidth]{Images/moebiusband}
+            \captionof{figure}{Möbius band}
+            \label{TOP_moebius}
+        \end{minipage}
     \end{center}
-  \end{prop}
-  \subsection{Compactness}
-  \begin{definition}
-    We say that a property $P$ of a topological space is \textit{topological} if it is preserved under homeomorphisms. That is, if $(X,\topo_X)$, $(Y,\topo_Y)$ are homeomorphic topological spaces such that $(X,\topo_X)$ has the property $P$, then $(Y,\topo_Y)$ has the property $P$ too.
-  \end{definition}
-  \subsubsection{Covers}
-  \begin{definition}[Cover]
-    Let $(X,\topo)$ be a topological space. A \textit{cover} of $X$ is a collection $\{U_i:i\in I\}$ with $U_i\subseteq X$ $\forall i\in I$ such that $X=\bigcup_{i\in I}U_i$.
-  \end{definition}
-  \begin{definition}
-    Let $(X,\topo)$ be a topological space and $U=\{U_i:i\in I\}$ be a cover of $X$.
-    \begin{itemize}
-      \item We say that $U$ is \textit{finite} if $I$ is finite.
-      \item We say that $U$ is \textit{countable} if $I$ is countable.
-      \item We say that $U$ is an \textit{open cover} if $U_i\in\topo$ $\forall i\in I$.
-    \end{itemize}
-  \end{definition}
-  \begin{definition}
-    Let $(X,\topo)$ be a topological space, $A\subseteq X$ be a subset and $U=\{U_i:i\in I\}$ with $U_i\subseteq X$ $\forall i\in I$. We say that $U$ is a \textit{cover} of $A$ if $A\subseteq\bigcup_{i\in I}U_i$.
-  \end{definition}
-  \begin{definition}
-    Let $(X,\topo)$ be a topological space and $U=\{U_i:i\in I\}$ be a cover of $X$. A \textit{subcover} of $U$ is a collection $\{U_j:j\in J\}$ with $J\subseteq I$.
-  \end{definition}
-  \subsubsection{Compactness}
-  \begin{definition}[Compact space]
-    Let $(X,\topo)$ be a topological space. We say that $(X,\topo)$ is \textit{compact} if each of its open covers has a finite subcover.
-  \end{definition}
-  \begin{prop}
-    Let $(X,\topo)$ be a topological space. Then, $(X,\topo)$ is compact if and only if for any collection $C=\{C_i:i\in I\}$ of closed sets such that $\bigcap_{i\in I} C_i=\varnothing$, there exists a finite subcollection $\{C_{i_1},\ldots,C_{i_n}\}$ of $C$ such that $\bigcap_{j=1}^n C_{i_j}=\varnothing$
-  \end{prop}
-  \begin{prop}
-    The \textit{compactness} is a topological property.
-  \end{prop}
-  \begin{prop}
-    Let $(X,\topo_X)$, $(Y,\topo_Y)$ be topological spaces and $f:(X,\topo_X)\rightarrow(Y,\topo_Y)$ be a surjective continuous function. If $(X,\topo_X)$ is compact, then $(Y,\topo_Y)$ is also compact.
-  \end{prop}
-  \begin{corollary}
-    The quotient space of a compact set is compact.
-  \end{corollary}
-  \begin{definition}
-    Let $(X,\topo)$ be a topological space and $A\subseteq X$ be a subset. We say that $A$ is a \textit{compact subset} of $X$ if $A$, together with the subspace topology, is a compact space.
-  \end{definition}
-  \begin{lemma}
-    Let $(X,\topo)$ be a topological space and $(A,\topo_A)\subseteq (X,\topo)$ be a topological subspace. Then, $(A,\topo_A)$ is compact if and only if any open cover of $A$ in $(X,\topo)$ admits a finite subcover.
-  \end{lemma}
-  \begin{prop}
-    Let $(X,\topo)$ be a topological space and $\{K_i:i=1,\ldots,n\}$ be a collection of compact sets $K_i\subseteq X$, $i=1,\ldots,n$. Then, $\bigcup_{i=1}^nK_i$ is also compact.
-  \end{prop}
-  \begin{theorem}
-    Let $(X,\topo_X)$, $(Y,\topo_Y)$ be topological spaces, $f:(X,\topo_X)\rightarrow(Y,\topo_Y)$ be a continuous function and $A\subseteq X$ be a subset. If $A$ is compact, then $f(A)$ is also compact.
-  \end{theorem}
-  \begin{theorem}
-    Let $(X,\topo)$ be a compact topological space and $C\subseteq X$ be a closed subset. Then, $C$ is compact.
-  \end{theorem}
-  \begin{theorem}
-    Let $(X,\topo)$ be a Hausdorff topological space and $K\subseteq X$ be a compact subset. Then, $K$ is closed.
-  \end{theorem}
-  \begin{corollary}
-    Let $(X,\topo)$ be a Hausdorff topological space and $\{K_i:i=1,\ldots,n\}$ be a collection of compact sets $K_i\subseteq X$, $i=1,\ldots,n$. Then, $\bigcap_{i\in I}K_i$ is compact.
-  \end{corollary}
-  \begin{corollary}
-    Let $(X,\topo_X)$ be a compact topological space, $(Y,\topo_Y)$ be Hausdorff topological space and $f:(X,\topo_X)\rightarrow(Y,\topo_Y)$ be a continuous function. Then, $f$ is closed. Furthermore, if $f$ is bijective, then $f$ is a homeomorphism.
-  \end{corollary}
-  \begin{corollary}
-    Let $(X,\topo)$ be a compact topological space and $\topo_1\subseteq\topo\subseteq\topo_2$. Then:
-    \begin{itemize}
-      \item If $(X,\topo_1)$ is Hausdorff, then $\id:(X,\topo)\rightarrow(X,\topo_1)$ is a homeomorphism and $\topo_1=\topo$.
-      \item If $(X,\topo_2)$ is compact, then $\id:(X,\topo_2)\rightarrow(X,\topo)$ is a homeomorphism and $\topo_2=\topo$.
-    \end{itemize}
-  \end{corollary}
-  \begin{prop}
-    Let $(X,\topo_X)$ be a compact Hausdorff topological space and $C\subseteq X$ be a closed subset. Then, $\quot{X}{A}$, together with the quotient topology, is compact and Hausdorff.
-  \end{prop}
-  \begin{prop}
-    Let $(X,\topo_X)$ be a compact Hausdorff topological space. Then, $(X,\topo_X)$ is $T_4$.
-  \end{prop}
-  \subsubsection{Compactness of the product}
-  \begin{prop}
-    Let $(X,\topo_X)$, $(Y,\topo_Y)$ be topological spaces such that $(Y,\topo_Y)$ is compact. Then, the projection $\pi_1:(X\times Y,\topo_{X\times Y})\rightarrow (X,\topo_X)$ is closed.
-  \end{prop}
-  \begin{lemma}
-    Let $(X,\topo_X)$, $(Y,\topo_Y)$ be topological spaces such that $(Y,\topo_Y)$ is compact and $U\in\topo_{X\times Y}$ be an open set such that $\{x\}\times Y\subseteq U\subseteq X\times Y$. Then, $\exists V\in\topo_X$ such that $x\in V$ and $\{x\}\times Y\subseteq V\times Y\subseteq U$.
-  \end{lemma}
-  \begin{theorem}[Tychonoff's theorem]
-    Let $I$ be an index set, $\{(X_i,\topo_{X_i}):i\in I\}$ be a collection of topological spaces and $X:=\prod_{i\in I}X_i$. Then, $(X,\topo_X)$ is compact if and only if $(X_i,\topo_{X_i})$ is compact $\forall i\in I$.
-  \end{theorem}
-  \begin{axiom}[Axiom of choice]
-    The Cartesian product of a collection of non-empty sets is non-empty.
-  \end{axiom}
-  \begin{theorem}[Kelley's theorem]
-    Tychonoff's theorem implies the axiom of choice.
-  \end{theorem}
-  \subsubsection{Alexandroff extension}
-  \begin{definition}
-    Let $(X,\topo_X)$, $(Y,\topo_Y)$ be topological spaces and $f:(X,\topo_X)\rightarrow(Y,\topo_Y)$ be a continuous function. We say that $f$ is a \emph{topological embedding} if $f$ yields a homeomorphism between $(X,\topo_X)$ and $f(X)$ together with the subspace topology inherited from $(Y,\topo_Y)$.
-  \end{definition}
-  \begin{definition}
-    Let $(X,\topo)$ be topological space and $X^*:=X\cup\{\infty\}$. We define the following set:
-    $$\topo^*:=\{U\subseteq X^*:U\in\topo\lor(\infty\in U\land X^*\setminus U\text{ is compact})\}$$
-  \end{definition}
-  \begin{theorem}[One-point compactification]
-    Let $(X,\topo)$ be Hausdorff topological space. Then, $(X^*,\topo^*)$ is a compact topological space, called \emph{one-point compactification} of $(X,\topo)$.
-  \end{theorem}
-  \begin{prop}
-    Let $(X,\topo)$ be Hausdorff topological space. Then, the inclusion $\iota: (X,\topo)\rightarrow(X^*,\topo^*)$ is a topological embedding.
-  \end{prop}
-  \begin{definition}
-    Let $(X,\topo)$ be topological space and $P$ be a property of $(X,\topo)$. We say that $(X,\topo)$ satisfies \emph{locally} $P$ if $\forall x\in X$ and $\forall U\in\topo$ such that $x\in U$, there exists a neighbourhood $N\in\mathcal{N}_x$, with $N\subseteq U$, that satisfies $P$.
-  \end{definition}
-  \begin{prop}
-    The local compactness is a topological property.
-  \end{prop}
-  \begin{definition}
-    Let $(X,\topo)$ be topological space. $(X,\topo)$ is locally compact Hausdorff if and only if $(X^*,\topo^*)$ is compact Hausdorff.
-  \end{definition}
-  \begin{prop}
-    We the usual topology, $\QQ\subset \RR$ is not locally compact.
-  \end{prop}
-  \begin{theorem}
-    Let $(X,\topo)$ be a locally compact Hausdorff topological space. Then, $(X,\topo)$ is $T_3$.
-  \end{theorem}
-  \subsubsection{Compactness of \texorpdfstring{$\RR^n$}{Rn}}
-  \begin{theorem}[Heine-Borel theorem]
-    Let $a,b\in\RR$ with $a<b$. Then, $[a,b]\subset\RR$ is compact.
-  \end{theorem}
-  \begin{theorem}[Heine-Borel theorem]
-    Consider $\RR^n$ with the usual topology and $A\subseteq \RR^n$. Then, $A$ is compact if and only if $A$ is closed and bounded.
-  \end{theorem}
-  \begin{lemma}
-    Let $K\subset\RR$ be a compact subset. Then, $\exists m,M\in K$ such that $m\leq k\leq M$ $\forall k\in K$.
-  \end{lemma}
-  \begin{theorem}[Weierstra\ss' theorem]
-    Let $(X,\topo)$ be a compact topological space and $f:X\rightarrow\RR$ be a continuous function. Then, $f$ attains a maximum and a minimum.
-  \end{theorem}
-  \subsection{Connectedness}
-  \begin{definition}[Connected space]
-    Let $(X,\topo)$ be a topological space. We say that $(X,\topo)$ is \textit{connected} if do not exist non-empty open sets $U,V\in\topo$ such that $X=U\sqcup V$. Otherwise, that is, if there are non-empty open sets $U,V\in\topo$ such that $X=U\sqcup V$, we say that $(X,\topo)$ is \textit{disconnected}.
-  \end{definition}
-  \begin{prop}
-    Let $(X,\topo)$ be a topological space. The following statements are equivalent:
-    \begin{enumerate}
-      \item $(X,\topo)$ is connected.
-      \item There are no non-empty closed sets $C,D\subset X$ such that $X=C\sqcup D$.
-      \item There exists a non-empty clopen set $U\subset X$.
-    \end{enumerate}
-  \end{prop}
-  \begin{definition}
-    Let $(X,\topo)$ be a topological space and $A\subseteq X$ be a subset. We say that $A$ is a \textit{connected subset} of $X$ if $A$, together with the subspace topology, is a connected space.
-  \end{definition}
-  \begin{prop}
-    Let $(X,\topo)$ be a topological space and $A\subseteq X$ be a subset. $A$ is connected if and only if there are no open sets $U,V\in \tau$ such that $A\subseteq U\cup V$, $A\cap U\ne\varnothing$, $A\cap V\ne\varnothing$ and $A\cap U\cap V=\varnothing$.
-  \end{prop}
-  \begin{prop}
-    The connectedness is a topological property.
-  \end{prop}
-  \begin{theorem}
-    Let $(X,\topo_X)$, $(Y,\topo_Y)$ be a topological spaces such that $(X,\topo_X)$ is connected and $f:(X,\topo_X)\rightarrow(Y,\topo_Y)$ be a continuous function. Then, $f(X)\subset Y$ is connected.
-  \end{theorem}
-  \begin{lemma}
-    Let $(X,\topo)$ be a topological space and $C,D\subseteq X$ be subsets such that $C\subseteq D$ and $C$ is connected. Suppose that $D$ is disconnected and so that there exists non-empty open sets $U,V\in\topo$ such that $D\subseteq U\sqcup V$, $D\cap U\ne\varnothing$, $D\cap V\ne\varnothing$ and $D\cap U\cap V=\varnothing$. Then, either $X\subseteq U$ or $C\subseteq V$.
-  \end{lemma}
-  \begin{prop}
-    Let $(X,\topo)$ be a topological space and $\{C_i:i\in I\}$ be a collection of connected subsets of $X$ such that $\bigcap_{i\in I} C_i\ne\varnothing$. Then, $\bigcup_{i\in I} C_i$ is connected.
-  \end{prop}
-  \begin{theorem}
-    Let $(X_i,\topo_{X_i})$ be topological spaces for $i=1,\ldots,n$. Then, $\prod_{i=1}^n(X_i,\topo_{X_i})$ is connected.
-  \end{theorem}
-  \begin{theorem}
-    Let $(X,\topo)$ be a topological space and $C\subseteq X$ be a connected subset. If $A\subseteq X$ is such that $C\subseteq A\subseteq \Cl C$, then $A$ is connected.
-  \end{theorem}
-  \begin{prop}
-    Let $(X,\topo)$ be a connected topological space and $A\subset X$ be a non-empty subset. Then, $\Fr A\ne\varnothing$.
-  \end{prop}
-  \begin{prop}
-    Let $(X,\topo)$ be a topological space and $C\subset X$ be a connected non-empty subset. If $A\subseteq X$ is such that $C\cap A\ne\varnothing$ and $C\cap(X\setminus A)\ne\varnothing$, then $C\cap\Fr A\ne\varnothing$.
-  \end{prop}
-  \begin{definition}
-    Let $(X,\topo)$ be a topological space with $|X|>1$. We say that $(X,\topo)$ is \textit{totally disconnected} if all subset with cardinal greater than 1 is disconnected.
-  \end{definition}
-  \subsubsection{Connectedness of \texorpdfstring{$\RR^n$}{Rn}}
-  \begin{theorem}
-    Consider $\RR$ together with the usual topology and let $a,b\in\RR$. Then, $[a,b]$ is connected.
-  \end{theorem}
-  \begin{theorem}
-    Consider $\RR$ together with the usual topology. Then, $\RR$ is connected.
-  \end{theorem}
-  \begin{theorem}
-    Consider $\RR$ together with the usual topology and let $A\subseteq \RR$ be a subset. Then: $$A\text{ is connected}\iff A\text{ is an interval}$$
-  \end{theorem}
-  \begin{theorem}[Intermediate value theorem]
-    Let $(X,\topo)$ be a connected topological space, $f:(X,\topo)\rightarrow\RR$ be a continuous function. Let $p,q\in f(X)$ and $r\in R$ be such that $p\leq r\leq q$. Then, $r\in f(X)$
-  \end{theorem}
-  \begin{theorem}[Brouwer's fixed-point theorem]
-    Let $\overline{B}^n\subset\RR$ be a closed $n$-th ball and $\vectorfunction{f}:\overline{B}^n\rightarrow\overline{B}^n$ be a continuous function. Then, $\vectorfunction{f}$ has a fixed point.
-  \end{theorem}
-  \begin{theorem}[Borsuk-Ulam theorem]
-    Let $\vectorfunction{f}:S^n\rightarrow\RR^n$ be a continuous function. Then, $\exists x\in S^n$ such that $\vectorfunction{f}(x)=\vectorfunction{f}(-x)$.
-  \end{theorem}
-  % fet fins el document 18 (inclòs) menys el document 15.
+    \begin{center}
+        \begin{minipage}{\linewidth}
+            \centering
+            \includestandalone[mode=image|tex,width=0.65\linewidth]{Images/kleinbottle}
+            \captionof{figure}{Klein bottle}
+            \label{TOP_klein}
+        \end{minipage}
+    \end{center}
+    \begin{prop}
+        Let $\mathcal{P}_n(\RR)$ be the projective space of $\RR^{n+1}$. Consider the relation $\sim$ on $\RR^{n+1}$ such that $\vf{v}\sim -\vf{v}$ $\forall \vf{v}\in\RR^{n+1}$. Then: $$\mathcal{P}_n(\RR)\cong\quot{S^n}{\sim}$$
+    \end{prop}
+    \begin{prop}\label{TOP_circle-sim}
+        Consider the ball $B^2$ and the equivalence relation $\sim$ in $\Fr B^2=S^1$ such that for all $(x,y)\in \Fr B^2$, $(x,y)\sim(x,-y)$. Then: $$\quot{B^2}{\sim}\cong S^2$$
+        \begin{center}
+            \begin{minipage}{\linewidth}
+                \centering
+                \includestandalone[mode=image|tex,width=0.25\linewidth]{Images/circle}
+                \captionof{figure}{Representation of the quotient spaces $\quot{B^2}{\sim}$, where $\sim$ is the equivalence relation defined on \cref{TOP_circle-sim}}
+            \end{minipage}
+        \end{center}
+    \end{prop}
+    \subsection{Compactness}
+    \begin{definition}
+        We say that a property $P$ of a topological space is a \emph{topological property} if it is preserved under homeomorphisms. That is, if $(X,\topo_X)$, $(Y,\topo_Y)$ are homeomorphic topological spaces such that $(X,\topo_X)$ has the property $P$, then $(Y,\topo_Y)$ has the property $P$ too.
+    \end{definition}
+    \subsubsection{Covers}
+    \begin{definition}[Cover]
+        Let $(X,\topo)$ be a topological space. A \emph{cover} of $X$ is a collection $\{U_i:i\in I\}$ with $U_i\subseteq X$ $\forall i\in I$ such that $X=\bigcup_{i\in I}U_i$.
+    \end{definition}
+    \begin{definition}
+        Let $(X,\topo)$ be a topological space and $U=\{U_i:i\in I\}$ be a cover of $X$.
+        \begin{itemize}
+            \item We say that $U$ is \emph{finite} if $I$ is finite.
+            \item We say that $U$ is \emph{countable} if $I$ is countable.
+            \item We say that $U$ is an \emph{open cover} if $U_i\in\topo$ $\forall i\in I$.
+        \end{itemize}
+    \end{definition}
+    \begin{definition}
+        Let $(X,\topo)$ be a topological space, $A\subseteq X$ be a subset and $U=\{U_i:i\in I\}$ with $U_i\subseteq X$ $\forall i\in I$. We say that $U$ is a \emph{cover} of $A$ if $A\subseteq\bigcup_{i\in I}U_i$.
+    \end{definition}
+    \begin{definition}
+        Let $(X,\topo)$ be a topological space and $U=\{U_i:i\in I\}$ be a cover of $X$. A \emph{subcover} of $U$ is a collection $\{U_j:j\in J\}$ with $J\subseteq I$.
+    \end{definition}
+    \subsubsection{Compactness}
+    \begin{definition}[Compact space]
+        Let $(X,\topo)$ be a topological space. We say that $(X,\topo)$ is \emph{compact} if each of its open covers has a finite subcover.
+    \end{definition}
+    \begin{prop}
+        Let $(X,\topo)$ be a topological space. Then, $(X,\topo)$ is compact if and only if for any collection $C=\{C_i:i\in I\}$ of closed sets such that $\bigcap_{i\in I} C_i=\varnothing$, there exists a finite subcollection $\{C_{i_1},\ldots,C_{i_n}\}$ of $C$ such that $\bigcap_{j=1}^n C_{i_j}=\varnothing$
+    \end{prop}
+    \begin{prop}
+        The \emph{compactness} is a topological property.
+    \end{prop}
+    \begin{prop}
+        Let $(X,\topo_X)$, $(Y,\topo_Y)$ be topological spaces and $f:(X,\topo_X)\rightarrow(Y,\topo_Y)$ be a surjective continuous function. If $(X,\topo_X)$ is compact, then $(Y,\topo_Y)$ is also compact.
+    \end{prop}
+    \begin{corollary}
+        The quotient space of a compact set is compact.
+    \end{corollary}
+    \begin{definition}
+        Let $(X,\topo)$ be a topological space and $A\subseteq X$ be a subset. We say that $A$ is a \emph{compact subset} of $X$ if $A$, together with the subspace topology, is a compact space.
+    \end{definition}
+    \begin{lemma}
+        Let $(X,\topo)$ be a topological space and $(A,\topo_A)\subseteq (X,\topo)$ be a topological subspace. Then, $(A,\topo_A)$ is compact if and only if any open cover of $A$ in $(X,\topo)$ admits a finite subcover.
+    \end{lemma}
+    \begin{prop}
+        Let $(X,\topo)$ be a topological space and $\{K_i:i=1,\ldots,n\}$ be a collection of compact sets $K_i\subseteq X$, $i=1,\ldots,n$. Then, $\bigcup_{i=1}^nK_i$ is also compact.
+    \end{prop}
+    \begin{theorem}
+        Let $(X,\topo_X)$, $(Y,\topo_Y)$ be topological spaces, $f:(X,\topo_X)\rightarrow(Y,\topo_Y)$ be a continuous function and $A\subseteq X$ be a subset. If $A$ is compact, then $f(A)$ is also compact.
+    \end{theorem}
+    \begin{theorem}
+        Let $(X,\topo)$ be a compact topological space and $C\subseteq X$ be a closed subset. Then, $C$ is compact.
+    \end{theorem}
+    \begin{theorem}
+        Let $(X,\topo)$ be a Hausdorff topological space and $K\subseteq X$ be a compact subset. Then, $K$ is closed.
+    \end{theorem}
+    \begin{corollary}
+        Let $(X,\topo)$ be a Hausdorff topological space and $\{K_i:i=1,\ldots,n\}$ be a collection of compact sets $K_i\subseteq X$, $i=1,\ldots,n$. Then, $\bigcap_{i\in I}K_i$ is compact.
+    \end{corollary}
+    \begin{corollary}
+        Let $(X,\topo_X)$ be a compact topological space, $(Y,\topo_Y)$ be Hausdorff topological space and $f:(X,\topo_X)\rightarrow(Y,\topo_Y)$ be a continuous function. Then, $f$ is closed. Furthermore, if $f$ is bijective, then $f$ is a homeomorphism.
+    \end{corollary}
+    \begin{corollary}
+        Let $(X,\topo)$ be a compact topological space and $\topo_1\subseteq\topo\subseteq\topo_2$. Then:
+        \begin{itemize}
+            \item If $(X,\topo_1)$ is Hausdorff, then $\id:(X,\topo)\rightarrow(X,\topo_1)$ is a homeomorphism and $\topo_1=\topo$.
+            \item If $(X,\topo_2)$ is compact, then $\id:(X,\topo_2)\rightarrow(X,\topo)$ is a homeomorphism and $\topo_2=\topo$.
+        \end{itemize}
+    \end{corollary}
+    \begin{prop}
+        Let $(X,\topo_X)$ be a compact Hausdorff topological space and $C\subseteq X$ be a closed subset. Then, $\quot{X}{A}$, together with the quotient topology, is compact and Hausdorff.
+    \end{prop}
+    \begin{prop}
+        Let $(X,\topo_X)$ be a compact Hausdorff topological space. Then, $(X,\topo_X)$ is $T_4$.
+    \end{prop}
+    \subsubsection{Compactness of the product}
+    \begin{prop}
+        Let $(X,\topo_X)$, $(Y,\topo_Y)$ be topological spaces such that $(Y,\topo_Y)$ is compact. Then, the projection $\pi_1:(X\times Y,\topo_{X\times Y})\rightarrow (X,\topo_X)$ is closed.
+    \end{prop}
+    \begin{lemma}
+        Let $(X,\topo_X)$, $(Y,\topo_Y)$ be topological spaces such that $(Y,\topo_Y)$ is compact and $U\in\topo_{X\times Y}$ be an open set such that $\{x\}\times Y\subseteq U\subseteq X\times Y$. Then, $\exists V\in\topo_X$ such that $x\in V$ and $\{x\}\times Y\subseteq V\times Y\subseteq U$.
+    \end{lemma}
+    \begin{theorem}[Tychonoff's theorem]
+        Let $I$ be an index set, $\{(X_i,\topo_{X_i}):i\in I\}$ be a collection of topological spaces and $X:=\prod_{i\in I}X_i$. Then, $(X,\topo_X)$ is compact if and only if $(X_i,\topo_{X_i})$ is compact $\forall i\in I$.
+    \end{theorem}
+    \begin{axiom}[Axiom of choice]
+        The Cartesian product of a collection of non-empty sets is non-empty.
+    \end{axiom}
+    \begin{theorem}[Kelley's theorem]
+        Tychonoff's theorem implies the axiom of choice.
+    \end{theorem}
+    \subsubsection{Alexandroff extension}
+    \begin{definition}
+        Let $(X,\topo_X)$, $(Y,\topo_Y)$ be topological spaces and $f:(X,\topo_X)\rightarrow(Y,\topo_Y)$ be a continuous function. We say that $f$ is a \emph{topological embedding} if $f$ yields a homeomorphism between $(X,\topo_X)$ and $f(X)$ together with the subspace topology inherited from $(Y,\topo_Y)$.
+    \end{definition}
+    \begin{definition}
+        Let $(X,\topo)$ be topological space and $X^*:=X\cup\{\infty\}$. We define the following set:
+        $$\topo^*:=\{U\subseteq X^*:U\in\topo\lor(\infty\in U\land X^*\setminus U\text{ is compact})\}$$
+    \end{definition}
+    \begin{theorem}[One-point compactification]
+        Let $(X,\topo)$ be Hausdorff topological space. Then, $(X^*,\topo^*)$ is a compact topological space, called \emph{one-point compactification} of $(X,\topo)$.
+    \end{theorem}
+    \begin{prop}
+        Let $(X,\topo)$ be Hausdorff topological space. Then, the inclusion $\iota: (X,\topo)\rightarrow(X^*,\topo^*)$ is a topological embedding.
+    \end{prop}
+    \begin{definition}
+        Let $(X,\topo)$ be topological space and $P$ be a property. We say that $(X,\topo)$ satisfies \emph{locally} $P$ if $\forall x\in X$ and $\forall U\in\topo$ such that $x\in U$, there exists a neighbourhood $N\in\mathcal{N}_x$, with $N\subseteq U$, that satisfies $P$.
+    \end{definition}
+    \begin{definition}
+        Let $(X,\topo)$ be topological space. We say that $(X,\topo)$ is \emph{locally compact} if $\forall x\in X$ and $\forall U\in\topo$ such that $x\in U$, there exists a compact neighbourhood $N\in\mathcal{N}_x$ such that $N\subseteq U$.
+    \end{definition}
+    \begin{prop}
+        The local compactness is a topological property.
+    \end{prop}
+    \begin{definition}
+        Let $(X,\topo)$ be topological space. $(X,\topo)$ is locally compact Hausdorff if and only if $(X^*,\topo^*)$ is compact Hausdorff.
+    \end{definition}
+    \begin{prop}
+        We the usual topology, $\QQ\subset \RR$ is not locally compact.
+    \end{prop}
+    \begin{theorem}
+        Let $(X,\topo)$ be a locally compact Hausdorff topological space. Then, $(X,\topo)$ is $T_3$.
+    \end{theorem}
+    \subsubsection{Compactness of \texorpdfstring{$\RR^n$}{Rn}}
+    \begin{theorem}[Heine-Borel theorem]
+        Let $a,b\in\RR$ with $a<b$. Then, $[a,b]\subset\RR$ is compact.
+    \end{theorem}
+    \begin{theorem}[Heine-Borel theorem]
+        Consider $\RR^n$ with the usual topology and $A\subseteq \RR^n$. Then, $A$ is compact if and only if $A$ is closed and bounded.
+    \end{theorem}
+    \begin{lemma}
+        Let $K\subset\RR$ be a compact subset. Then, $\exists m,M\in K$ such that $m\leq k\leq M$ $\forall k\in K$.
+    \end{lemma}
+    \begin{theorem}[Weierstra\ss' theorem]
+        Let $(X,\topo)$ be a compact topological space and $f:X\rightarrow\RR$ be a continuous function. Then, $f$ attains a maximum and a minimum.
+    \end{theorem}
+    \subsection{Connectedness}
+    \subsubsection{Connectedness}
+    \begin{definition}[Connected space]
+        Let $(X,\topo)$ be a topological space. We say that $(X,\topo)$ is \emph{connected} if do not exist non-empty open sets $U,V\in\topo$ such that $X=U\sqcup V$. Otherwise, that is, if there are non-empty open sets $U,V\in\topo$ such that $X=U\sqcup V$, we say that $(X,\topo)$ is \emph{disconnected}.
+    \end{definition}
+    \begin{prop}
+        Let $(X,\topo)$ be a topological space. The following statements are equivalent:
+        \begin{enumerate}
+            \item $(X,\topo)$ is connected.
+            \item There are no non-empty closed sets $C,D\subset X$ such that $X=C\sqcup D$.
+            \item There exists a non-empty clopen set $U\subset X$.
+        \end{enumerate}
+    \end{prop}
+    \begin{definition}
+        Let $(X,\topo)$ be a topological space and $A\subseteq X$ be a subset. We say that $A$ is a \emph{connected subset} of $X$ if $A$, together with the subspace topology, is a connected space.
+    \end{definition}
+    \begin{prop}
+        Let $(X,\topo)$ be a topological space and $A\subseteq X$ be a subset. $A$ is connected if and only if there are no open sets $U,V\in \tau$ such that $A\subseteq U\cup V$, $A\cap U\ne\varnothing$, $A\cap V\ne\varnothing$ and $A\cap U\cap V=\varnothing$.
+    \end{prop}
+    \begin{prop}
+        The connectedness is a topological property.
+    \end{prop}
+    \begin{theorem}
+        Let $(X,\topo_X)$, $(Y,\topo_Y)$ be a topological spaces such that $(X,\topo_X)$ is connected and $f:(X,\topo_X)\rightarrow(Y,\topo_Y)$ be a continuous function. Then, $f(X)\subset Y$ is connected.
+    \end{theorem}
+    \begin{lemma}
+        Let $(X,\topo)$ be a topological space and $C,D\subseteq X$ be subsets such that $C\subseteq D$ and $C$ is connected. Suppose that $D$ is disconnected and so that there exists non-empty open sets $U,V\in\topo$ such that $D\subseteq U\sqcup V$, $D\cap U\ne\varnothing$, $D\cap V\ne\varnothing$ and $D\cap U\cap V=\varnothing$. Then, either $X\subseteq U$ or $C\subseteq V$.
+    \end{lemma}
+    \begin{prop}
+        Let $(X,\topo)$ be a topological space and $\{C_i:i\in I\}$ be a collection of connected subsets of $X$ such that $\bigcap_{i\in I} C_i\ne\varnothing$. Then, $\bigcup_{i\in I} C_i$ is connected.
+    \end{prop}
+    \begin{theorem}
+        Let $(X_i,\topo_{X_i})$ be connected topological spaces for $i=1,\ldots,n$. Then, $\prod_{i=1}^n(X_i,\topo_{X_i})$ is connected.
+    \end{theorem}
+    \begin{theorem}
+        Let $(X,\topo)$ be a topological space and $C\subseteq X$ be a connected subset. If $A\subseteq X$ is such that $C\subseteq A\subseteq \Cl C$, then $A$ is connected.
+    \end{theorem}
+    \begin{prop}
+        Let $(X,\topo)$ be a connected topological space and $A\subset X$ be a non-empty subset. Then, $\Fr A\ne\varnothing$.
+    \end{prop}
+    \begin{prop}
+        Let $(X,\topo)$ be a topological space and $C\subset X$ be a connected non-empty subset. If $A\subseteq X$ is such that $C\cap A\ne\varnothing$ and $C\cap(X\setminus A)\ne\varnothing$, then $C\cap\Fr A\ne\varnothing$.
+    \end{prop}
+    \begin{definition}
+        Let $(X,\topo)$ be a topological space with $|X|>1$. We say that $(X,\topo)$ is \emph{totally disconnected} if all subset with cardinal greater than 1 is disconnected.
+    \end{definition}
+    \subsubsection{Connectedness of \texorpdfstring{$\RR^n$}{Rn}}
+    \begin{theorem}
+        Consider $\RR$ together with the usual topology and let $a,b\in\RR$. Then, $[a,b]$ is connected.
+    \end{theorem}
+    \begin{theorem}
+        Consider $\RR$ together with the usual topology. Then, $\RR$ is connected.
+    \end{theorem}
+    \begin{theorem}
+        Consider $\RR$ together with the usual topology and let $A\subseteq \RR$ be a subset. Then: $$A\text{ is connected}\iff A\text{ is an interval}$$
+    \end{theorem}
+    \begin{theorem}[Intermediate value theorem]
+        Let $(X,\topo)$ be a connected topological space, $f:(X,\topo)\rightarrow\RR$ be a continuous function. Let $p,q\in f(X)$ and $r\in R$ be such that $p\leq r\leq q$. Then, $r\in f(X)$
+    \end{theorem}
+    \begin{theorem}[Brouwer's fixed-point theorem]
+        Let $\overline{B}^n\subset\RR$ be a closed $n$-th ball and $\vf{f}:\overline{B}^n\rightarrow\overline{B}^n$ be a continuous function. Then, $\vf{f}$ has a fixed point.
+    \end{theorem}
+    \begin{theorem}[Borsuk-Ulam theorem]
+        Let $\vf{f}:S^n\rightarrow\RR^n$ be a continuous function. Then, $\exists x\in S^n$ such that $\vf{f}(x)=\vf{f}(-x)$.
+    \end{theorem}
+    \subsubsection{Connected components}
+    \begin{definition}
+        Let $(X,\topo)$ be a topological space. We define the relation $\sim$ in $(X,\topo)$ as $\forall x,y\in X$, $x\sim y$ if and only if there exists a connected subset $C\subseteq X$ such that $x,y\in C$.
+    \end{definition}
+    \begin{prop}
+        Let $(X,\topo)$ be a topological space. The relation $\sim$ is an equivalence relation.
+    \end{prop}
+    \begin{definition}
+        Let $(X,\topo)$ be a topological space with the relation $\sim$. We define the \emph{connected components} of $(X,\topo)$ as the equivalence classes under $\sim$.
+    \end{definition}
+    \begin{prop}
+        Let $(X,\topo)$ be a topological space with the relation $\sim$. Then:
+        \begin{enumerate}
+            \item Each connected component $C\subseteq X$ is connected. Moreover, if $p\in C$, $C$ is the maximal connected subset that contains $p$.
+            \item The connected components are pairwise disjoint.
+            \item If $A\subseteq X$ is a connected subspace, then $A\subseteq C$ for some connected component $C$ of $(X,\topo)$.
+            \item The connected components are closed.
+            \item If there is a finite number of connected components, then they are open.
+        \end{enumerate}
+    \end{prop}
+    \begin{theorem}
+        Let $(X,\topo_X)$, $(Y,\topo_Y)$ be topological spaces, $f:(X,\topo_X)\rightarrow(Y,\topo_Y)$ be a continuous function and $C\subseteq X$ be a connected component. Then, $f(C)\subseteq D$, where $D$ is a connected component of $(Y,\topo_Y)$. Furthermore, if $f$ is a homeomorphism, $f(C)$ is a connected component of $(Y,\topo_Y)$.
+    \end{theorem}
+    \begin{corollary}
+        Let $(X,\topo_X)$, $(Y,\topo_Y)$ be homeomorphic topological spaces. Then, they have the same number of connected components.
+    \end{corollary}
+    \begin{definition}
+        Let $(X,\topo)$ be a topological space. We say that $(X,\topo)$ is \emph{locally connected} if $\forall x\in X$ and $\forall U\in\topo$ such that $x\in U$, there exists a connected neighbourhood $N\in\mathcal{N}_x$ such that $N\subseteq U$.
+    \end{definition}
+    \begin{prop}
+        Let $(X,\topo)$ be a locally connected topological space. Then, the connected components are open.
+    \end{prop}
+    \subsubsection{Path connectedness}
+    \begin{definition}
+        Let $(X,\topo)$ be a topological space. A \emph{path} in $(X,\topo)$ is a continuous function $\gamma:[0,1]\rightarrow (X,\topo)$. $\gamma(0)$ is called \emph{initial point} of the path and $\gamma(1)$, \emph{terminal point}.
+    \end{definition}
+    \begin{definition}
+        Let $(X,\topo)$ be a topological space and $x,y\in X$. A \emph{path from $x$ to $y$} is a path whose initial point is $x$ and whose terminal point is is $y$. If $x=y$, we say that the path is a \emph{loop}.
+    \end{definition}
+    \begin{prop}
+        Let $(X,\topo)$ be a topological space and $\gamma$ be a path in $(X,\topo)$ and $x,y\in X$. Then:
+        \begin{enumerate}
+            \item $\im(\gamma)$ is a connected subspace of $(X,\topo)$. Therefore, the initial and terminal points of $\gamma$ are in the same connected component.
+            \item If $A\subseteq X$ is a subset satisfying $\gamma(0)\in A$ and $\gamma(1)\notin A$, then $\exists r\in[0,1]$ such that $\gamma(r)\in\Fr(A)$.
+            \item If $\gamma(t)$ is a path from $x$ to $y$, then  $\gamma(1-t)$ is a path from $y$ to $x$
+        \end{enumerate}
+    \end{prop}
+    \begin{prop}
+        Let $(X,\topo)$ be a topological space $x,y,z\in X$, $\gamma_1$ be a path from $x$ to $y$ and $\gamma_2$ be a path from $y$ to $z$. Then, $$(\gamma_1\gamma_2)(t):=\left\{
+            \begin{array}{lcc}
+                \gamma_1(2t)   & \text{if} & 0\leq t\leq 1/2 \\
+                \gamma_2(2t-1) & \text{if} & 1/2 <t\leq 1
+            \end{array}
+            \right.$$
+        is a path from $x$ to $z$.
+    \end{prop}
+    \begin{definition}
+        Let $(X,\topo)$ be a topological space. We say that $(X,\topo)$ is \emph{path-connected} if for all $x,y\in X$, there exists a path in $(X,\topo)$ from $x$ to $y$. each of its open covers has a finite subcover.
+    \end{definition}
+    \begin{prop}
+        Let $(X,\topo_X)$, $(Y,\topo_Y)$ be topological space such that $(X,\topo_X)$ is path-connected, and $f:(X,\topo_X)\rightarrow(Y,\topo_Y)$ be a continuous function. Then $f(X)$ is path-connected.
+    \end{prop}
+    \begin{definition}
+        Let $(X,\topo)$ be a topological space and $A\subseteq X$. We say that $A$ is \emph{path-connected} if $A$, together with the subspace topology, is path-connected.
+    \end{definition}
+    \begin{prop}
+        Let $(X,\topo)$ be a topological space and $\{C_i:i\in I\}$ be a collection of path-connected subsets of $X$ such that $\bigcap_{i\in I} C_i\ne\varnothing$. Then, $\bigcup_{i\in I} C_i$ is path-connected.
+    \end{prop}
+    \begin{theorem}
+        Let $(X_i,\topo_{X_i})$ be path-connected topological spaces for $i=1,\ldots,n$. Then, $\prod_{i=1}^n(X_i,\topo_{X_i})$ is path-connected.
+    \end{theorem}
+    \begin{theorem}
+        Let $(X,\topo)$ be a path-connected topological space. Then, $(X,\topo)$ is connected.
+    \end{theorem}
+    \begin{definition}
+        Let $(X,\topo)$ be a topological space. We define the relation $\sim_\text{p}$ in $(X,\topo)$ as $\forall x,y\in X$, $x\sim_\text{p} y$ if and only if there exists a path from $x$ to $y$.
+    \end{definition}
+    \begin{prop}
+        Let $(X,\topo)$ be a topological space. The relation $\sim_\text{p}$ is an equivalence relation.
+    \end{prop}
+    \begin{definition}
+        Let $(X,\topo)$ be a topological space with the relation $\sim_\text{p}$. We define the \emph{path-connected components} of $(X,\topo)$ as the equivalence classes under $\sim_\text{p}$.
+    \end{definition}
+    \begin{prop}
+        Let $(X,\topo)$ be a topological space with the relation $\sim_\text{p}$. Then:
+        \begin{enumerate}
+            \item Each path-connected component $C\subseteq X$ is path-connected. Moreover, if $p\in C$, $C$ is the maximal path-connected subset that contains $p$.
+            \item The path-connected components are pairwise disjoint.
+        \end{enumerate}
+    \end{prop}
+    \begin{definition}
+        Let $(X,\topo)$ be a topological space. We say that $(X,\topo)$ is \emph{locally path-connected} if $\forall x\in X$ and $\forall U\in\topo$ such that $x\in U$, there exists a path-connected neighbourhood $N\in\mathcal{N}_x$ such that $N\subseteq U$.
+    \end{definition}
+    \begin{theorem}
+        Let $(X,\topo)$ be a locally path-connected topological space. Then, the connected components and the path-connected components of $(X,\topo)$ are the same.
+    \end{theorem}
+    \subsection{Topological manifolds}
+    \subsection{Compact surfaces}
+    % fet fins el document 20 (inclòs) menys el document 15.
 \end{multicols}
 \end{document}

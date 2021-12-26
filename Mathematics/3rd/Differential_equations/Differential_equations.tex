@@ -2,772 +2,814 @@
 
 \begin{document}
 \begin{multicols}{2}[\section{Differential equations}]
-  Along this document we will write the points in $\RR^n$, $n\geq 2$, in bold face (as well as the vectors) in order to be consistent while manipulating points and vectors together.
-  \subsection{Space of continuous and bounded functions}
-  \begin{definition}
-    Let $X$, $Y$ be topological spaces. We define the following sets:
-    \begin{gather*}
-      \mathcal{C}(X,Y)=\{f:X\longrightarrow Y:f\text{ is continuous}\}\\
-      \mathcal{C}_b(X,\RR^n)=\{f\in\mathcal{C}(X,\RR^n):f\text{ is bounded}\}
-    \end{gather*}
-  \end{definition}
-  \begin{theorem}
-    Let $X$ be a topological space and $f\in\mathcal{C}_b(X,\RR^n)$. We define the norm of $f$ as: $$\|f\|:=\sup\{|f(x)|:x\in X\}$$ and a distance $d$ in $\mathcal{C}_b(X,\RR^n)$ as: $$d(f,g):=\|f-g\|\quad\forall f,g\in\mathcal{C}_b(X,\RR^n)$$
-    Then, $(\mathcal{C}_b(X,\RR^n),d)$ is a complete metric space.
-  \end{theorem}
-  \begin{theorem}
-    Let $X$ be a topological space and $C\subseteq\RR^n$ be a closed subset. Then, $(\mathcal{C}(X,C),d)$ is a complete metric space.
-  \end{theorem}
-  \begin{corollary}
-    Let $K\subset \RR^n$ be a compact subset and $C\subseteq\RR^n$ be a closed subset. Then, $(\mathcal{C}(K,C),d)$ is a complete metric space.
-  \end{corollary}
-  \begin{corollary}
-    Moreover, if $D\subset\RR^n$ is a closed set and $X=\mathcal{C}([a,b],D)$, then $(X,d)$ is also a complete metric space.
-  \end{corollary}
-  \subsection{Ordinary differential equations}
-  \begin{definition}
-    An \textit{ordinary differential equation (ode) of $m$ unknowns and of order $n$} in \textit{implicit form} is an expression of the form: $$\vectorfunction{f}\left(t,\vectorfunction{x}(t),\vectorfunction{x}'(t),\vectorfunction{x}''(t),\ldots,\vectorfunction{x}^{(n)}(t)\right)=\vectorfunction{0}$$
-    where $\vectorfunction{x}:U\subseteq\RR\rightarrow\RR^m$ is a vector-valued function of one variable $t\in\RR$ (which is called \textit{independent variable}) and $\vectorfunction{f}:\Omega\subseteq\RR\times\RR^{m\cdot(n+1)}\rightarrow\RR^m$, where both $U$ and $\Omega$ are open sets. The same ordinary differential equation in \textit{explicit form} is an expression of the form: $$\vectorfunction{x}^{(n)}(t)=\vectorfunction{g}\left(t,\vectorfunction{x}(t),\vectorfunction{x}'(t),\vectorfunction{x}''(t),\ldots,\vectorfunction{x}^{(n-1)}(t)\right)$$
-    where $\vectorfunction{g}:\Omega\subseteq\RR\times\RR^{m\cdot n}\rightarrow\RR^m$\footnote{Sometimes we will write $\vectorfunction{x}^{(n)}=\vectorfunction{g}\left(t,\vectorfunction{x},\vectorfunction{x}',\ldots,\vectorfunction{x}^{(n-1)}\right)$ instead of $\vectorfunction{x}^{(n)}(t)=\vectorfunction{g}\left(t,\vectorfunction{x}(t),\vectorfunction{x}'(t),\ldots,\vectorfunction{x}^{(n-1)}(t)\right)$ in order to simplify the notation.}.
-  \end{definition}
-  \begin{definition}
-    Consider the following ode of $m$ unknowns and of order $n$:
-    \begin{equation}\label{DE_ode1}
-      \vectorfunction{x}^{(n)}(t)=\vectorfunction{f}\left(t,\vectorfunction{x}(t),\vectorfunction{x}'(t),\ldots,\vectorfunction{x}^{(n-1)}(t)\right)
-    \end{equation}
-    We say that $\vectorfunction{\varphi}:I\subseteq\RR\rightarrow\RR^m$ is a \textit{solution of the ode} if:
-    \begin{itemize}
-      \item $\vectorfunction{\varphi}$ is $n$-times differentiable on $I$.
-      \item $\displaystyle\left\{\left(t,\vectorfunction{\varphi}(t),\vectorfunction{\varphi}'(t),\ldots,\vectorfunction{\varphi}^{(n-1)}(t)\right):t\in I\right\}\subseteq\domain \vectorfunction{f}$
-      \item For all $t\in I$ we have:
-            $$\vectorfunction{\varphi}^{(n)}(t)=\vectorfunction{f}\left(t,\vectorfunction{\varphi}(t),\vectorfunction{\varphi}'(t),\ldots,\vectorfunction{\varphi}^{(n-1)}(t)\right)$$
-    \end{itemize}
-    The set of all solutions of an ode is called \textit{general solution of the ode}.
-  \end{definition}
-  \begin{prop}
-    Consider an ode of $m$ unknowns and order $n$ of the form of \cref{DE_ode1}. Then, we can transform this ode to an ode of $m\cdot n$ unknowns and order 1 in the following way\footnote{Therefore, we will mainly study the odes of order 1.}. Define $\vectorfunction{y}_i=\vectorfunction{x}^{(i-1)}$ for $i=1,\ldots,n$. Therefore the functions $\vectorfunction{y}_i$ must satisfy:
-    \begin{equation*}
-      \left\{
-      \begin{aligned}
-        {\vectorfunction{y}_1}'     & =\vectorfunction{y}_2                                                                                            \\
-        {\vectorfunction{y}_2}'     & =\vectorfunction{y}_3                                                                                            \\
-                                    & \;\;\vdots                                                                                                       \\
-        {\vectorfunction{y}_{n-1}}' & =\vectorfunction{y}_{n-2}                                                                                        \\
-        {\vectorfunction{y}_n}'     & =\vectorfunction{f}\left(t,\vectorfunction{y}_1(t),\vectorfunction{y}_2(t),\ldots,\vectorfunction{y}_n(t)\right) \\
-      \end{aligned}
-      \right.
-    \end{equation*}
-  \end{prop}
-  \begin{definition}
-    We say that an ode is \textit{autonomous} if it doesn't depend on the independent variable, that is, if it is of the form: $$\vectorfunction{x}'=\vectorfunction{f}(\vectorfunction{x})$$ Otherwise, we say that an ode is \textit{non-autonomous}.
-  \end{definition}
-  \begin{definition}
-    We say that an ode of order $n$ is \textit{linear} if it is of the form:
-    \begin{equation}\label{DE_linear0}
-      a_0(t)\vectorfunction{x}+a_1(t)\vectorfunction{x}'+\cdots+a_n(t)\vectorfunction{x}^{(n)}=\vectorfunction{b}(t)
-    \end{equation}
-    where $a_i\in\mathcal{C}(I,\RR)$ for $i=0,\ldots,n$ and $\vectorfunction{b}\in\mathcal{C}(I,\RR^m)$ are arbitrary functions which do not need to be linear. We say that the linear ode of \cref{DE_linear0} is \textit{homogeneous} if $\vectorfunction{b}(t)=\vectorfunction{0}$ $\forall t\in I$. We say that linear ode of \cref{DE_linear0} is of \textit{constant coefficients} if $a_i(t):=a_{i0}\in\RR$ $\forall t\in I$ and $\forall i=0,\ldots,n$.
-  \end{definition}
-  \begin{definition}[Initial value problem]
-    Let $U\subseteq\RR\times\RR^n$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a function. Given $(t_0,\vectorfunction{x}_0)\in U$, the \textit{initial value problem (ivp)} (or \textit{Cauchy problem}) consists in finding a solution of the ode $$\vectorfunction{x}'=\vectorfunction{f}(t,\vectorfunction{x})$$ with \textit{initial conditions} $\vectorfunction{x}(t_0)=\vectorfunction{x}_0$.
-  \end{definition}
-  \subsubsection{Methods for solving odes}
-  \begin{method}[Separation of variables]
-    Let $f:(a,b)\rightarrow\RR$, $g:(c,d)\rightarrow\RR$ be continuous functions such that $f(x)\ne 0$ $\forall x\in (a,b)$. Consider the ode $x'=f(x)g(t)$. To find the solution of this ode, proceed as follows:
-    $$x'=f(x)g(t)\iff \int\frac{\dd x}{f(x)}=C+\int g(t)\dd t$$ where the constant $C$ is determined with the initial conditions of the ode.
-  \end{method}
-  \begin{method}[Variation of constants]
-    Let $I\subset \RR$ be an interval, $a,b\in\mathcal{C}(I,\RR)$. Consider the ode $x'=a(t)x+b(t)$. To find the solution of this ode, proceed as follows:
-    \begin{enumerate}
-      \item Find the solution of the associated homogeneous system with the separation of variables method. Let's say that is $\varphi(t)c$, where $c\in\RR$.
-      \item Try to find a general solution of the form $\varphi(t)c(t)$:
-            \begin{multline*}
-              \left(\varphi(t)c(t)\right)'=a(t)\varphi(t)c(t)+b(t)\iff\\\varphi(t)'c(t)+\varphi(t)c(t)'=a(t)\varphi(t)c(t)+b(t)\iff\\\varphi(t)c(t)'=b(t)\iff c(t)=d+\int\varphi(t)^{-1}b(t)\dd t
-            \end{multline*}
-            where $d\in\RR$. Hence, the general solution will be: $$\varphi(t)\left(d+\int\varphi(t)^{-1}b(t)\dd t\right)$$
-    \end{enumerate}
-  \end{method}
-  \begin{method}[Reducible linear ode of second order]
-    Let $I\subset \RR$ be an interval, $a,b,c,d\in\mathcal{C}(I,\RR)$. Consider the system of odes:
-    \begin{equation}\label{DE_ode-complex}
-      \left\{
-      \begin{aligned}
-        x'=a(t)x-b(t)y+c(t) \\
-        y'=b(t)x+a(t)y+d(t)
-      \end{aligned}
-      \right.
-    \end{equation}
-    In order to find the solution of this ode, consider the change of variable $z=x+\ii y$. Then, \cref{DE_ode-complex} becomes:
-    $$z'=(1+\ii)z+c(t)+\ii d(t)$$ which is a linear ode of order 1 and can be easily solved.
-  \end{method}
-  \begin{method}[Bernoulli differential equation]
-    Let $p,q\in\mathcal{C}((a,b),\RR)$ and $\alpha\in\RR$. Consider the \textit{Bernoulli differential equation}:
-    \begin{equation}\label{DE_bernoulli}
-      x'+p(t)x=q(t)x^\alpha
-    \end{equation}
-    If $\alpha=0,1$ the ode is linear. So suppose $\alpha\ne 0,1$. In order to solve it, consider the change of variable $y=x^{1-\alpha}$. Then, \cref{DE_bernoulli} becomes:
-    $$y'+(1-\alpha)p(t)y=(1-\alpha)q(t)$$  which is a linear ode of order 1 and can be easily solved.
-  \end{method}
-  \begin{method}[Riccati differential equation]
-    Let $q_0,q_1,q_2\in\mathcal{C}((a,b),\RR)$. Consider the \textit{Riccati differential equation}:
-    \begin{equation}\label{DE_riccati}
-      x'=q_0(t)+q_1(t)x+q_2(t)x^2
-    \end{equation}
-    Suppose we have found a particular solution $x_1(t)$ of the ode of \cref{DE_riccati}. In order to find the general solution, consider the change of variable $x=x_1(t)+\frac{1}{y}$. Then, \cref{DE_riccati} becomes:
-    $$y'+[q_1(t)+2q_2(t)x_1(t)]y=-q_2(t)$$ which is a linear ode of order 1 and can be easily solved.
-  \end{method}
-  \begin{method}[Integrating factor]
-    Consider the ode: $$p(t,x)+q(t,x)x'=0\iff p(t,x)\dd t+q(t,x)\dd x=0$$ where $p,q\in\mathcal{C}^1(U,\RR)$ and $U\subseteq\RR^2$ is an open set.
-    An \textit{integrating factor} $\mu(t,x)\in\mathcal{C}^1(U)$, $\mu(t,x)\ne 0$, is a function so that $$\mu(t,x)p(t,x)\dd t+\mu(t,x)q(t,x)\dd x$$ is an exact differential ($\dd \Phi(t,x)$) of a function $\Phi(t,x)$, that is:
-    \begin{gather}
-      \label{DE_ifactor1}\frac{\partial\Phi}{\partial t}(t,x)=\mu(t,x)p(t,x)\\
-      \label{DE_ifactor2}\frac{\partial\Phi}{\partial x}(t,x)=\mu(t,x)q(t,x)
-    \end{gather}
-    So we need that: $$\frac{\partial}{\partial x}\left(\mu(t,x)p(t,x)\right)=\frac{\partial}{\partial t}\left(\mu(t,x)q(t,x)\right)$$
-    From here, in certain cases, we will be able to find $\mu(x,y)$ and, therefore, $\Phi(t,x)$ by integrating \cref{DE_ifactor1,DE_ifactor2}.
-  \end{method}
-  \subsection{Existence and uniqueness of solutions}
-  \begin{prop}
-    Let $f:(a,b)\rightarrow\RR$ be a continuous function such that $f(x)\ne 0$ $\forall x\in(a,b)$. Then, the ivp
-    $$
-      \left\{
-      \begin{aligned}
-         & x'      =f(x) \\
-         & x(t_0)  =x_0
-      \end{aligned}
-      \right.
-    $$
-    has a unique solution $\forall t_0\in\RR$ and $\forall x_0\in(a,b)$.
-  \end{prop}
-  \begin{prop}
-    Let $f:(a,b)\rightarrow\RR$, $g:(c,d)\rightarrow\RR$ be continuous functions such that $f(x)\ne 0$ $\forall x\in(a,b)$. Then, the ivp
-    $$\left\{
-      \begin{aligned}
-         & x'      =f(x)g(t) \\
-         & x(t_0)  =x_0
-      \end{aligned}
-      \right.$$
-    has a unique solution $\forall t_0\in(c,d)$ and $\forall x_0\in(a,b)$.
-  \end{prop}
-  \begin{prop}
-    Let $I\subseteq\RR$ be an interval and $a:I\rightarrow\RR$ and $b:I\rightarrow\RR$ be continuous functions. Then, the ivp
-    $$\left\{
-      \begin{aligned}
-         & x'      =a(t)x+b(t) \\
-         & x(t_0)  =x_0
-      \end{aligned}
-      \right.$$
-    has a unique solution $\forall t_0\in I$ and $\forall x_0\in\RR$\footnote{See \cref{DE_sol-lin} for the solution.}.
-  \end{prop}
-  \subsubsection{Lipschitz continuity}
-  \begin{definition}
-    Let $\vectorfunction{f}:U\subseteq\RR\times\RR^n\rightarrow\RR^m$ be a function. We say that $\vectorfunction{f}$ is \textit{Lipschitz continuous with respect to the second variable} if $\exists L\in\RR_{>0}$ such that: $$\|\vectorfunction{f}(t,x)-\vectorfunction{f}(t,y)\|\leq L\|x-y\|\qquad\forall (t,x),(t,y)\in U$$
-  \end{definition}
-  \begin{definition}
-    Let $\vectorfunction{f}:U\subseteq\RR\times\RR^n\rightarrow\RR^m$ be a function. We say that $\vectorfunction{f}$ is \textit{locally Lipschitz continuous with respect to the second variable} if $\forall (t_0,\vectorfunction{x}_0)\in U$ there exists a neighbourhood $V$ of $(t_0,\vectorfunction{x}_0)$ such that $f|_V$ is Lipschitz continuous with respect to the second variable.
-  \end{definition}
-  \begin{prop}
-    Let $U\subseteq\RR\times\RR^n$ be an open set and $\vectorfunction{f}:U\subseteq\RR\times\RR^n\rightarrow\RR^n$ be a function. Then:
-    \begin{enumerate}
-      \item If $\vectorfunction{f}$ is locally Lipschitz continuous with respect to the second variable, then it is continuous with respect to the second variable.
-      \item If $\vectorfunction{f}$ is Lipschitz continuous with respect to the second variable, then it is uniformly continuous with respect to the second variable.
-      \item If $\vectorfunction{f}$ is continuous, $U$ is compact and $\vectorfunction{f}$ is locally Lipschitz continuous with respect to the second variable, then $\vectorfunction{f}$ is Lipschitz continuous with respect to the second variable.
-    \end{enumerate}
-  \end{prop}
-  \begin{prop}
-    Let $U\subseteq\RR\times\RR^n$ be an open and convex set and $\vectorfunction{f}:U\subseteq\RR\times\RR^n\rightarrow\RR^n$ be a function of class $\mathcal{C}^1$. Then:
-    \begin{enumerate}
-      \item $\vectorfunction{f}$ is locally Lipschitz continuous with respect to the second variable.
-      \item $\vectorfunction{f}$ is Lipschitz continuous with respect to the second variable if and only if $\vectorfunction{Df}$ is bounded.
-    \end{enumerate}
-  \end{prop}
-  \subsubsection{Picard theorem}
-  \begin{prop}
-    Let $U\subseteq\RR\times\RR^n$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function. Let $I\subseteq\RR$ be an open interval, $t_0\in I$ and $\vectorfunction{x}_0\in\RR^n$ be such that $(t_0,\vectorfunction{x}_0)\in U$. Then, a continuous function $\vectorfunction{\varphi}:I\rightarrow\RR^n$ is a solution of the ivp
-    \begin{equation}
-      \left\{
-      \begin{aligned}
-         & \vectorfunction{x}'=\vectorfunction{f}(t,\vectorfunction{x}) \\
-         & \vectorfunction{x}(t_0)=\vectorfunction{x}_0
-      \end{aligned}
-      \right.
-      \label{DE_ivp}
-    \end{equation}
-    if and only if $$\vectorfunction{\varphi}(t)=\vectorfunction{x}_0+\int_{t_0}^tf(s,\vectorfunction{\varphi}(s))\dd s\quad\forall t\in I$$
-  \end{prop}
-  \begin{definition}
-    An \textit{operator} is a function whose domain is a set of functions.
-  \end{definition}
-  \begin{definition}
-    Let $U\subseteq\RR\times\RR^n$ be an open set, $(t_0,\vectorfunction{x}_0)\in U$, $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function and $I$ be a closed interval. We define the operator
-    $$
-      \function{\vectorfunction{T}}
-      {\mathcal{C}(I,\RR^n)}
-      {\mathcal{C}(I,\RR^n)}
-      {\vectorfunction{\varphi}}
-      {\displaystyle\vectorfunction{T}\vectorfunction{\varphi}(t)=\vectorfunction{x}_0+\int_{t_0}^tf(s,\vectorfunction{\varphi}(s))\dd s\footnotemark}
-    $$
-  \end{definition}
-  \begin{theorem}[Banach fixed-point theorem]\footnotetext{Note that the fixed points of this operator are precisely the solutions of the ivp of \cref{DE_ivp}.}
-    Let $(X,d)$ be a complete metric space and $f:(X,d)\rightarrow (X,d)$ be a contraction. Then, $f$ has a unique fixed point $p\in X$\footnote{Furthermore, $p$ can be found as follows: start with an arbitrary element $x_0\in X$ and define a sequence $(x_n)$ by $x_n=f(x_{n-1})$ for $n\geq 1$. Then, $\displaystyle\lim_{n\to\infty} x_n=p$.}.
-  \end{theorem}
-  \begin{corollary}
-    Let $(X,d)$ be a complete metric space and $f:(X,d)\rightarrow (X,d)$ be a function. If there exists $m\in\NN$ such that $f^m$ is a contraction, then $f$ has a unique fixed point $p\in X$.
-  \end{corollary}
-  \begin{definition}
-    Let $t_0\in\RR$, $\vectorfunction{x}_0\in\RR^n$ and $a,b\in\RR_{>0}$. We define the following sets: $$I_a(t_0):=[t_0-a,t_0+a]\subset\RR\;\;\text{and}\;\;\overline{B}_{b}(\vectorfunction{x}_0):=\overline{B}(\vectorfunction{x}_0,b)\subset\RR^n$$
-  \end{definition}
-  \begin{theorem}[Picard theorem]\label{DE_picard}
-    Let $t_0\in\RR$, $\vectorfunction{x}_0\in\RR^n$, $a,b\in\RR_{>0}$, $\vectorfunction{f}:I_a(t_0)\times\overline{B}_{b}(\vectorfunction{x}_0)\subset\RR\times\RR^n\rightarrow\RR^n$ be a continuous function and Lipschitz continuous with respect to the second variable, and define: $$M:=\max\{\|\vectorfunction{f}(t,x)\|:(t,x)\in I_a(t_0)\times\overline{B}_{b}(\vectorfunction{x}_0)\}$$ Then, the ivp of \cref{DE_ivp} has a unique solution $\vectorfunction{\varphi}:I_\alpha(t_0)\rightarrow\overline{B}_{b}(\vectorfunction{x}_0)$, where $\alpha:=\min\left\{a,\frac{b}{M}\right\}$.
-  \end{theorem}
-  \begin{corollary}
-    Let $I\subset \RR$ be a closed interval, $t_0\in I$, $\vectorfunction{x}_0\in\RR^n$ and $\vectorfunction{f}:I\times\RR^n\rightarrow\RR^n$ be a continuous function and Lipschitz continuous with respect to the second variable. Then, the ivp of \cref{DE_ivp} has a unique solution $\vectorfunction{\varphi}:I\rightarrow\RR^n$.
-  \end{corollary}
-  \begin{corollary}[Picard iteration process]
-    Suppose we want to solve the ivp of \cref{DE_ivp}. That is, we look for a solution $\vectorfunction{\varphi}(t)$. Let $\vectorfunction{\varphi}_0$ be a fixed function (usually chosen to be $\vectorfunction{\varphi}_0=\vectorfunction{x}_0$) and define
-    $$\vectorfunction{\varphi}_{n+1}(t)=\vectorfunction{T}\vectorfunction{\varphi}_n(t)=\vectorfunction{x}_0+\int_{t_0}^tf(s,\vectorfunction{\varphi}_n(s))\dd s$$
-    for all $n\geq 0$. Then, $\displaystyle\vectorfunction{\varphi}(t)=\lim_{n\to\infty}\vectorfunction{\varphi}_n(t)$.
-  \end{corollary}
-  \begin{corollary}
-    Let $U\subseteq\RR\times\RR^n$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function and locally Lipschitz continuous with respect to the second variable. Then, $\forall(t_0,\vectorfunction{x}_0)\in U$, there exists $\alpha(t_0,\vectorfunction{x}_0)\in\RR_{>0}$ and a neighbourhood $V_{t_0,\vectorfunction{x}_0}=I_{a(t_0,\vectorfunction{x}_0)}(t_0)\times\overline{B}_{b(t_0,\vectorfunction{x}_0)}(\vectorfunction{x}_0)$ of $(t_0,\vectorfunction{x}_0)$ in $U$ such that the ivp of \cref{DE_ivp} has a unique solution $\vectorfunction{\varphi}_{t_0,\vectorfunction{x}_0}$ defined on $I_{\alpha(t_0,\vectorfunction{x}_0)}\subseteq I_{a(t_0,\vectorfunction{x}_0)}$ with $\graph(\vectorfunction{\varphi}_{t_0,\vectorfunction{x}_0})\subset V_{t_0,\vectorfunction{x}_0}$.
-  \end{corollary}
-  \begin{prop}
-    Let $I\subseteq\RR$ be an interval and $\vectorfunction{f}:I\times\RR^n\rightarrow\RR^n$ be a continuous function and Lipschitz continuous with respect to the second variable. Then, $\forall(t_0,\vectorfunction{x}_0)\in I\times\RR^n$ there is a unique solution of the ivp of \cref{DE_ivp} defined on $I$.
-  \end{prop}
-  \begin{corollary}
-    Let $I\subseteq\RR$ be an interval and $\vectorfunction{A}:I\rightarrow\mathcal{L}(\RR^n,\RR^n)$ and $\vectorfunction{b}:I\rightarrow\RR^n$ be continuous functions. Then, for all $(t_0,\vectorfunction{x}_0)\in I\times\RR^n$ the ivp
-    $$
-      \left\{
-      \begin{aligned}
-         & \vectorfunction{x}'=\vectorfunction{A}(t)\vectorfunction{x}+\vectorfunction{b}(t) \\
-         & \vectorfunction{x}(t_0)=\vectorfunction{x}_0
-      \end{aligned}
-      \right.
-    $$
-    has a unique solution defined on $I$.
-  \end{corollary}
-  \begin{theorem}
-    Let $f:[t_0,t_1]\times\RR\rightarrow\RR$ be a continuous function and $x_0\in \RR$. Suppose that $f$ is decreasing with respect to the second variable. Then, the ivp
-    \begin{equation*}
-      \left\{
-      \begin{aligned}
-         & x'=f(t,x)  \\
-         & x(t_0)=x_0
-      \end{aligned}
-      \right.
-    \end{equation*}
-    has a unique solution.
-  \end{theorem}
-  \subsubsection{Peano theorem}
-  \begin{definition}
-    Let $(X,d)$ be a metric space and $F\subset\mathcal{C}(X,\RR^n)$ be a subset. We say that $F$ is \textit{pointwise bounded} if: $$\forall x\in X\;\exists M_x>0\text{ such that }\|\vectorfunction{f}(x)\|\leq M_x\quad\forall\vectorfunction{f}\in F$$
-    We say that $F$ is \textit{uniformly bounded} if: $$\exists M>0\text{ such that }\|\vectorfunction{f}(x)\|\leq M \quad\forall\vectorfunction{f}\in F\text{ and }\forall x\in X$$
-  \end{definition}
-  \begin{definition}
-    Let $(X,d)$ be a metric space and $F\subset\mathcal{C}(X,\RR^n)$ be a subset. We say that $F$ is \textit{equicontinuous at a point $x_0\in X$} if $\forall \varepsilon>0$ $\exists \delta>0$ such that $\forall x\in X$ with $d(x,x_0)<\delta$ we have: $$\|\vectorfunction{f}(x)-\vectorfunction{f}(x_0)\|<\varepsilon\quad\forall\vectorfunction{f}\in F$$
-    We say that $F$ is \textit{pointwise equicontinuous} if it is equicontinuous at each point of $X$. Finally, we say that $F$ is \textit{uniformly equicontinuous} if $\forall \varepsilon>0$ $\exists \delta>0$ such that $\forall x,y\in X$ with $d(x,y)<\delta$ we have: $$\|\vectorfunction{f}(x)-\vectorfunction{f}(y)\|<\varepsilon\quad\forall\vectorfunction{f}\in F$$
-  \end{definition}
-  \begin{prop}
-    Let $(X,d)$ be a metric space and $F\subset\mathcal{C}_b(X,\RR^n)$ be a subset. Suppose that $\vectorfunction{f}$ is Lipschitz continuous for all $\vectorfunction{f}\in F$. Then, $F$ is uniformly equicontinuous.
-  \end{prop}
-  \begin{theorem}[Arzelà-Ascoli theorem]
-    Let $(X,d)$ be a compact metric space and $(\vectorfunction{f}_m)$ be a sequence of functions such that $\vectorfunction{f}_m\in\mathcal{C}(X,\RR^n)$ $\forall m\geq 1$. If the sequence is equicontinuous and pointwise bounded, then there exists a subsequence $(\vectorfunction{f}_{m_k})$ that converges on $\mathcal{C}(X,\RR^n)$.
-  \end{theorem}
-  \begin{corollary}
-    Let $(X,d)$ be a compact metric space, $D\subset\RR^n$ be a closed set and $(\vectorfunction{f}_m)$ be a sequence of functions such that $\vectorfunction{f}_m\in\mathcal{C}(X,D)$ $\forall m\geq 1$. If the sequence is equicontinuous and pointwise bounded, then there exists a subsequence $(\vectorfunction{f}_{m_k})$ that converges on $\mathcal{C}(X,D)$.
-  \end{corollary}
-  \begin{theorem}[Peano theorem]
-    Let $t_0\in\RR$, $\vectorfunction{x}_0\in\RR^n$, $a,b\in\RR_{>0}$, $\vectorfunction{f}:I_a(t_0)\times\overline{B}_{b}(\vectorfunction{x}_0)\subset\RR\times\RR^n\rightarrow\RR^n$ be a continuous function, and define: $$M:=\max\{\|\vectorfunction{f}(t,x)\|:(t,x)\in I_a(t_0)\times\overline{B}_{b}(\vectorfunction{x}_0)\}$$ Then, the ivp of \cref{DE_ivp} has at least one solution $\vectorfunction{\varphi}:I_\alpha(t_0)\rightarrow\RR^n$, where $\alpha:=\min\left\{a,\frac{b}{M}\right\}$.
-  \end{theorem}
-  \begin{corollary}
-    Let $U\subseteq\RR\times\RR^n$ be an open set, $K\subset U$ be a compact set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function. Then, $\exists\alpha\in\RR_{>0}$ such that $\forall (t_0,\vectorfunction{x}_0)\in K$, the ivp of \cref{DE_ivp} has a solution defined in $I_\alpha(t_0)$.
-  \end{corollary}
-  \subsubsection{Maximal solutions}
-  \begin{definition}
-    Let $U\subseteq\RR\times\RR^n$ be an open set, $(t_0,\vectorfunction{x}_0)\in U$ and $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function. We define the set $\mathcal{S}(U,\vectorfunction{f},t_0,\vectorfunction{x}_0)$ as:
-    \begin{multline*}
-      \mathcal{S}(U,\vectorfunction{f},t_0,\vectorfunction{x}_0):=\{(I,\vectorfunction{\varphi}):I\subseteq\RR\text{ is an interval},t_0\in I\\\text{and }\vectorfunction{\varphi}:I\rightarrow\RR^n\text{ is a solution of the ivp of \cref{DE_ivp}}\}
-    \end{multline*}
-  \end{definition}
-  \begin{definition}
-    We define the relation $\leq$ defined on $\mathcal{S}(U,\vectorfunction{f},t_0,\vectorfunction{x}_0)$ in the following way. For $(I,\vectorfunction{\varphi}),(J,\vectorfunction{\psi})\in \mathcal{S}(U,\vectorfunction{f},t_0,\vectorfunction{x}_0)$: $$(J,\vectorfunction{\psi})\leq (I,\vectorfunction{\varphi})\iff J\subset I\text{ and }\vectorfunction{\varphi}|_J=\vectorfunction{\psi}\footnote{It can be seen that $\leq$ is a partial (but not total) order relation.}$$ In this case, we say that $(I,\vectorfunction{\varphi})$ is an \textit{extension} of $(J,\vectorfunction{\psi})$.
-  \end{definition}
-  \begin{definition}
-    Let $(A,\leq )$ be a poset. Then, $m\in A$ is a \textit{maximal element} if and only if $\forall a\in A$ with $m \leq  a$ we have $m=a$.
-  \end{definition}
-  \begin{definition}
-    Consider the poset $(\mathcal{S}(U,\vectorfunction{f},t_0,\vectorfunction{x}_0),\leq)$. We say that a solution $(I,\vectorfunction{\varphi})$ is \textit{maximal} if for all extensions $(J,\vectorfunction{\psi})$ of $(I,\vectorfunction{\varphi})$ we have $I=J$ and $\vectorfunction{\varphi}=\vectorfunction{\psi}$.
-  \end{definition}
-  \begin{definition}
-    Let $(A,\leq )$ be a poset and $C\subseteq A$ be a subset of $A$. We say that $C$ is a \textit{chain} if it is totally ordered in the inherited order, that is, if it is partially ordered and $\forall x,y\in C$ we have either $x\leq y$ or $y\leq x$.
-  \end{definition}
-  \begin{definition}
-    Let $(A,\leq )$ be a poset, $x\in A$ and $B\subseteq A$ be a subset. $x$ is an \textit{upper bound of $B$} if and only if $b\leq x$ $\forall b\in B$.
-  \end{definition}
-  \begin{definition}
-    Let $(A,\leq )$ be a poset and $B\subseteq A$ be a subset. Then, $g\in A$ is a \textit{greatest element of $B$} if $g\in B$ and $\forall b\in B$ we have $b \leq  g$.
-  \end{definition}
-  \begin{lemma}[Zorn's lemma]
-    Let $(A,\leq )$ be a poset. If every chain $C\subseteq A$ has an upper bound in $A$, then $A$ contains at least one maximal element.
-  \end{lemma}
-  \begin{theorem}
-    Let $U\subseteq\RR\times\RR^n$ be an open set, $(t_0,\vectorfunction{x}_0)\in U$ and $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function. Consider the poset $(\mathcal{S}(U,\vectorfunction{f},t_0,\vectorfunction{x}_0),\leq)$. Then, $\mathcal{S}(U,\vectorfunction{f},t_0,\vectorfunction{x}_0)$ has maximal elements. Furthermore, if $(I,\vectorfunction{\varphi})$ is a maximal solution, then $I$ is open.
-  \end{theorem}
-  \begin{prop}
-    Let $U\subseteq\RR\times\RR^n$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be such that $\forall(t_0,\vectorfunction{x}_0)\in U$ the ivp of \cref{DE_ivp} has a unique solution defined in a neighbourhood of $t_0$. Then, $\forall(t_0,\vectorfunction{x}_0)\in U$ the ivp of \cref{DE_ivp} has a unique maximal solution.
-  \end{prop}
-  \begin{lemma}[Wintner lemma]
-    Let $U\subseteq\RR\times\RR^n$ be an open set, $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function, $\vectorfunction{\varphi}:I\rightarrow\RR^n$ be a solution of $\vectorfunction{x}'=\vectorfunction{f}(t,\vectorfunction{x})$ and $(b,y)\in U$ be an accumulation point of $\vectorfunction{\varphi}$. Then, $\displaystyle\lim_{t\to b}\vectorfunction{\varphi}(t)=y$ and the solution can be extended up to $b$.
-  \end{lemma}
-  \begin{corollary}
-    Let $U\subseteq\RR\times\RR^n$ be an open set, $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function and $\vectorfunction{\varphi}:(a,b)\rightarrow\RR^n$ be a maximal solution of $\vectorfunction{x}'=\vectorfunction{f}(t,\vectorfunction{x})$. If $b<\infty$, then for all compact set $K\subset U$, $\exists t_0<\infty$ such that $(t,\vectorfunction{\varphi}(t))\notin K$ $\forall t\in[t_0,b)$. In that case, we say that $\vectorfunction{\varphi}$ \textit{tends to the boundary} of $U$.
-  \end{corollary}
-  \subsection{Linear differential equations}
-  \begin{definition}
-    Let $I\subseteq\RR$ be an interval. A \textit{system of linear differential equations} is an expression of the form:
-    \begin{equation}\label{DE_linear}
-      \vectorfunction{x}'=\vectorfunction{A}(t)\vectorfunction{x}+\vectorfunction{b}
-    \end{equation}
-    where $\vectorfunction{A}:I\rightarrow\mathcal{L}(\RR^n,\RR^n)$ and $\vectorfunction{b}:I\rightarrow\RR^n$ are continuous functions.
-    We say that linear equation of \cref{DE_linear} is \textit{homogeneous} if $\vectorfunction{b}(t)=\vectorfunction{0}$ $\forall t\in I$. We say that linear equation of \cref{DE_linear} is of \textit{constant coefficients} if $\vectorfunction{A}(t)=\vectorfunction{A}$ $\forall t\in I$, where $\vectorfunction{A}\in\mathcal{M}_n(\RR)$.
-  \end{definition}
-  \begin{definition}
-    Let $I\subseteq\RR$ be an interval, $t_0\in I$, $\vectorfunction{x}_0\in\RR^n$ and consider the ode of \cref{DE_linear}. We define the \textit{flux of the linear ode} as the function:
-    $$
-      \function{\vectorfunction{\phi}}{I\times I\times \RR^n}{\RR^n}{(t,t_0,\vectorfunction{x}_0)}{\vectorfunction{\varphi}_{(t_0,\vectorfunction{x}_0)}(t)}
-    $$
-    where $\vectorfunction{\varphi}_{(t_0,\vectorfunction{x}_0)}$ is the solution of \cref{DE_linear} with initial conditions $(t_0,\vectorfunction{x}_0)$.
-  \end{definition}
-  \begin{prop}
-    Let $I\subseteq\RR$ be an interval and $a,b\in\mathcal{C}(I,\RR)$. Then, the general solution of the ivp
-    $$\left\{
-      \begin{aligned}
-         & x'      =a(t)x+b(t) \\
-         & x(t_0)  =x_0
-      \end{aligned}
-      \right.$$
-    is given by:
-    \begin{equation}\label{DE_sol-lin}
-      \varphi(t,t_0,x_0)=\exp{\int_{t_0}^ta(s)\dd s}\left(x_0+\int_{t_0}^tb(u)\exp{-\int_{t_0}^ua(s)\dd s}\dd u\right)
-    \end{equation}
-    for all $t\in I$.
-  \end{prop}
-  \subsubsection{Homogeneous systems}
-  \begin{theorem}
-    Let $I\subseteq\RR$ be an interval and $\vectorfunction{A}\in\mathcal{C}(I,\mathcal{L}(\RR^n))$. We define $\mathcal{A}_n$ as the set of all solutions of the linear ode:
-    \begin{equation}\label{DE_homo}
-      \vectorfunction{x}'=\vectorfunction{A}(t)\vectorfunction{x}
-    \end{equation} Then, $\mathcal{A}_n$ is a vector space of dimension $n$ and for each $t_0\in I$, the function
-    $$
-      \function{\vectorfunction{\xi}_{t_0}}{\RR^n}{\mathcal{A}_n}{\vectorfunction{x}_0}{\vectorfunction{\varphi}(\cdot,t_0,\vectorfunction{x}_0)}
-    $$
-    is an isomorphism.
-  \end{theorem}
-  \begin{corollary}
-    Let $I\subseteq\RR$ be an interval, $t_0\in I$, $(\vectorfunction{v}_1,\ldots,\vectorfunction{v}_n)$ be a basis of $\RR^n$ and $\vectorfunction{\varphi}_1,\ldots,\vectorfunction{\varphi}_n\in\mathcal{A}_n$ be such that: $$\vectorfunction{\varphi}_i=\vectorfunction{\xi}_{t_0}(\vectorfunction{v}_i)\quad\text{for } i=1,\ldots,n$$
-    Then, $(\vectorfunction{\varphi}_1,\ldots,\vectorfunction{\varphi}_n)$ is a basis of $\mathcal{A}_n$.
-  \end{corollary}
-  \begin{corollary}
-    Let $I\subseteq\RR$ be an interval and $\vectorfunction{\psi}\in\mathcal{A}_n$. Suppose $\exists t_0\in I$ such that $\vectorfunction{\psi} (t_0)=0$. Then, $\vectorfunction{\psi}=\vectorfunction{0}$.
-  \end{corollary}
-  \begin{corollary}
-    Let $I\subseteq\RR$ be an interval, $m,n\in\NN$ with $m\leq n$, $\vectorfunction{\varphi}_1,\ldots,\vectorfunction{\varphi}_m\in\mathcal{A}_n$ and $t_0\in I$ such that the vectors $\vectorfunction{\varphi}_1(t_0),\ldots,\vectorfunction{\varphi}_m(t_0)$ are linearly independent. Then, $\vectorfunction{\varphi}_1,\ldots,\vectorfunction{\varphi}_m$ are linearly independent.
-  \end{corollary}
-  \begin{corollary}
-    Let $s,t,w\in\RR$. Consider the function
-    $$
-      \function{\vectorfunction{\phi}_s^t}{\RR^n}{\RR^n}{\vectorfunction{x}}{(\vectorfunction{\xi}_s(\vectorfunction{x}))(t)}
-    $$
-    Then, $\vectorfunction{\phi}_s^t$ is an isomorphism and satisfies:
-    \begin{enumerate}
-      \item $\vectorfunction{\phi}_s^s=\vectorfunction{\id}$
-      \item $\vectorfunction{\phi}_s^t\circ\vectorfunction{\phi}_w^s=\vectorfunction{\phi}_w^t$
-      \item ${\left[\vectorfunction{\phi}_s^t\right]}^{-1}=\vectorfunction{\phi}_t^s$
-    \end{enumerate}
-  \end{corollary}
-  \begin{definition}
-    Let $I\subseteq \RR$ be an interval, $\vectorfunction{A}\in\mathcal{C}(I,\mathcal{L}(\RR^n))$ and $\vectorfunction{M}(t)=(m_{ij}(t))\in\mathcal{M}_n(\RR)$. We say that $\vectorfunction{M}(t)$ is a \textit{matrix solution} of the ode of \cref{DE_homo} if $\vectorfunction{\varphi}_j={(m_{1j}(t),\ldots,m_{nj}(t))}^\mathrm{T}\in\mathcal{A}_n$ for $j=1,\ldots,n$. We say that $\vectorfunction{M}(t)$ is a \textit{fundamental matrix solution} of the ode of \cref{DE_homo} if $\vectorfunction{M}(t)$ is a matrix solution and $\vectorfunction{\varphi}_1,\ldots,\vectorfunction{\varphi}_n$ are linearly independent.
-  \end{definition}
-  \begin{prop}
-    Let $I\subseteq \RR$ be an interval, $\vectorfunction{A}\in\mathcal{C}(I,\mathcal{L}(\RR^n))$ and $\vectorfunction{M}(t)\in\mathcal{M}_n(\RR)$. Then:
-    \begin{enumerate}
-      \item $\vectorfunction{M}(t)$ is a matrix solution of the ode of \cref{DE_homo} $\iff\vectorfunction{M}'(t)=\vectorfunction{A}(t)\vectorfunction{M}(t)$\footnote{By definition, if $\vectorfunction{M}(t)=(m_{ij}(t))$, then $\vectorfunction{M}'(t):=({m_{ij}}'(t))$.}.
-      \item $\vectorfunction{M}(t)$ is a matrix solution of the ode of \cref{DE_homo} $\iff\forall \vectorfunction{c}\in\RR^n$, $\vectorfunction{M}(t)\vectorfunction{c}\in\mathcal{A}_n$.
-      \item If $\vectorfunction{M}(t)$ is a matrix solution of the ode of \cref{DE_homo}, then $\forall \vectorfunction{C}\in\mathcal{M}_n(\RR)$, $\vectorfunction{M}(t)\vectorfunction{C}$ is a matrix solution of the ode of \cref{DE_homo}.
-      \item If $\vectorfunction{M}(t)$ is a fundamental matrix solution of the ode of \cref{DE_homo}, then $\det\vectorfunction{M}(t)\ne 0$ $\forall t\in I$.
-      \item $\vectorfunction{M}(t)$ is a fundamental matrix solution of the ode of \cref{DE_homo} $\iff\vectorfunction{M}(t)$ is a matrix solution of the ode of \cref{DE_homo} and $\exists t_0\in I$ such that $\det\vectorfunction{M}(t_0)\ne 0$.
-    \end{enumerate}
-  \end{prop}
-  \begin{prop}
-    Let $I\subseteq \RR$ be an interval, $\vectorfunction{A}\in\mathcal{C}(I,\mathcal{L}(\RR^n))$ and $\vectorfunction{\Phi}(t),\vectorfunction{\psi}(t)\in\mathcal{M}_n(\RR)$ be matrix solutions of the ode of \cref{DE_homo} such that $\vectorfunction{\Phi}(t)$ is fundamental. Then, $\exists! \vectorfunction{C}\in\mathcal{M}_n(\RR)$ such that $\vectorfunction{\psi}(t)=\vectorfunction{\Phi}(t)\vectorfunction{C}$. Moreover, $\vectorfunction{\psi}(t)$ is fundamental if and only if $\det \vectorfunction{C}\ne 0$.
-  \end{prop}
-  \subsubsection{Non-homogeneous linear systems}
-  \begin{prop}
-    Let $I\subseteq \RR$ be an interval, $\vectorfunction{A}\in\mathcal{C}(I,\mathcal{L}(\RR^n))$ and $\vectorfunction{b}\in\mathcal{C}(I,\RR^n)$. Suppose $\vectorfunction{\phi}(t,t_0,\vectorfunction{x}_0)$ is the flux of the ode of \cref{DE_linear}. Then, $$\vectorfunction{\phi}(t,t_0,\vectorfunction{x}_0)=\Phi(t)\left[{\Phi(t_0)}^{-1}\vectorfunction{x}_0+\int_{t_0}^t{\Phi(s)}^{-1}\vectorfunction{b}(s)\dd s\right]$$ where $\Phi(t)$ is a fundamental matrix of the associated homogeneous system.
-  \end{prop}
-  \begin{corollary}
-    Let $I\subseteq \RR$ be an interval, $\vectorfunction{A}\in\mathcal{C}(I,\mathcal{L}(\RR^n))$ and $\vectorfunction{b}\in\mathcal{C}(I,\RR^n)$. Then, the general solution $\vectorfunction{\varphi}(t)$ of the ode of \cref{DE_homo} can be written as: $$\vectorfunction{\varphi}(t)=\vectorfunction{\varphi}_\mathrm{h}(t)+\vectorfunction{\varphi}_\mathrm{p}(t)$$ where $\vectorfunction{\varphi}_\mathrm{h}(t)$ is the general solution to the associated homogeneous system and $\vectorfunction{\varphi}_\mathrm{p}(t)$ is a particular solution of \cref{DE_homo}.
-  \end{corollary}
-  \begin{prop}[Liouville's formula]
-    Let $I\subseteq \RR$ be an interval, $\vectorfunction{A}\in\mathcal{C}(I,\mathcal{L}(\RR^n))$, $\vectorfunction{\Phi}(t)\in\mathcal{M}_n(\RR)$ be a matrix solution of the ode of \cref{DE_homo} and $t_0\in I$. Then, for all $t\in I$ we have: $$\det(\Phi(t))=\det (\Phi(t_0))\exp{\int_{t_0}^t\trace(\vectorfunction{A}(s))\dd s}$$
-  \end{prop}
-  \subsubsection{Constant coefficients linear systems}
-  \begin{lemma}
-    Let $I\subseteq\RR$ be a compact interval and $\vectorfunction{f}:I\times\RR^n\rightarrow\RR^n$ be a continuous function and Lipschitz continuous with respect to the second variable. Let $\vectorfunction{\varphi}:I\rightarrow\RR^n$ be the solution of the ivp of \cref{DE_ivp}. Then, $\forall\vectorfunction{\psi}\in\mathcal{C}(I,\RR^n)$ the sequence $(\vectorfunction{T}^m\vectorfunction{\psi})$ converges uniformly to $\vectorfunction{\varphi}$ on $I$.
-  \end{lemma}
-  \begin{theorem}
-    Let $\vectorfunction{A}\in\mathcal{M}_n(\RR)$ and $\vectorfunction{\Phi}(t)\in\mathcal{M}_n(\RR)$ be a matrix solution of the ode
-    \begin{equation}\label{DE_coef-constants}
-      \vectorfunction{x}'=\vectorfunction{A}\vectorfunction{x}
-    \end{equation}
-    such that $\Phi(0)=\vectorfunction{I}_n$. Then:
-    \begin{enumerate}
-      \item For all $t,s\in\RR$, then $\Phi(t+s)=\Phi(t)\Phi(s)$.
-      \item ${\Phi(t)}^{-1}=\Phi(-t)$.
-      \item The series $\displaystyle\sum_{k=0}^\infty \frac{\vectorfunction{A}^kt^k}{k!}$ converges uniformly on compact sets.
-    \end{enumerate}
-  \end{theorem}
-  \begin{definition}
-    Let $\vectorfunction{A}\in\mathcal{M}_n(\RR)$ and $t\in\RR$. We define the \textit{matrix exponential} $\exp{\vectorfunction{A}t}$ as: $$\exp{\vectorfunction{A}t}=\sum_{k=0}^\infty\frac{\vectorfunction{A}^kt^k}{k!}$$
-  \end{definition}
-  \begin{prop}
-    Let $\vectorfunction{A}\in\mathcal{M}_n(\RR)$ and $t,s\in \RR$. Then, the matrix exponential $\exp{\vectorfunction{A}t}$ is a fundamental matrix of the ode of \cref{DE_coef-constants} and has the following properties:
-    \begin{enumerate}
-      \item $\exp{\vectorfunction{A}\cdot 0}=\vectorfunction{I}_n$
-      \item $\exp{\vectorfunction{A}(t+s)}=\exp{\vectorfunction{A}t}\exp{\vectorfunction{A}s}$
-      \item ${\left(\exp{\vectorfunction{A}t}\right)}^{-1}=\exp{-\vectorfunction{A}t}$
-      \item $\left(\exp{\vectorfunction{A}t}\right)'=\vectorfunction{A}\exp{\vectorfunction{A}t}=\exp{\vectorfunction{A}t}\vectorfunction{A}$
-      \item If $\vectorfunction{\Phi}(t)$ is an arbitrary fundamental matrix of the ode of \cref{DE_coef-constants}, then: $$\exp{\vectorfunction{A}t}=\vectorfunction{\Phi}(t){\vectorfunction{\Phi}(0)}^{-1}$$
-    \end{enumerate}
-  \end{prop}
-  \begin{lemma}
-    Let $\vectorfunction{A},\vectorfunction{B},\vectorfunction{C}\in\mathcal{M}_n(\RR)$. Then:
-    \begin{enumerate}
-      \item If $\vectorfunction{B}\vectorfunction{C}=\vectorfunction{C}\vectorfunction{A}$, then: $$\exp{\vectorfunction{B}t}\vectorfunction{C}=\vectorfunction{C}\exp{\vectorfunction{A}t}$$
-      \item If $\vectorfunction{A}\vectorfunction{B}=\vectorfunction{B}\vectorfunction{A}$, then: $$\exp{\vectorfunction{A}t}\vectorfunction{B}=\vectorfunction{B}\exp{\vectorfunction{A}t}\quad\text{and}\quad\exp{(\vectorfunction{A}+\vectorfunction{B})t}=\exp{\vectorfunction{A}t}\exp{\vectorfunction{B}t}$$
-    \end{enumerate}
-  \end{lemma}
-  \begin{corollary}
-    Let $t\in\RR$, $\vectorfunction{A}\in\mathcal{M}_n(\RR)$ and $\vectorfunction{J}\in\mathcal{M}_n(\RR)$ be the Jordan form of $\vectorfunction{A}$ such that $\vectorfunction{A}=\vectorfunction{C}\vectorfunction{J}\vectorfunction{C}^{-1}$ for some matrix $\vectorfunction{C}\in\GL_n(\RR)$. Then: $$\exp{\vectorfunction{A}t}=\vectorfunction{C}\exp{\vectorfunction{J}t}\vectorfunction{C}^{-1}$$
-  \end{corollary}
-  \begin{prop}
-    Let $\vectorfunction{A}\in\mathcal{M}_n(\RR)$ and $t\in\RR$. If $\lambda$ is an eigenvalue of $\vectorfunction{A}$ with associated eigenvector $\vectorfunction{v}$, then $\exp{\lambda t}$ is an eigenvalue of $\exp{\vectorfunction{A}t}$ with associated eigenvector $\vectorfunction{v}$. That is, $\exp{\vectorfunction{A}t}\vectorfunction{v}=\exp{\lambda t}\vectorfunction{v}$. Hence, $\vectorfunction{\varphi}(t)=\exp{\lambda t}\vectorfunction{v}$ is a solution of the ivp:
-    $$
-      \left\{
-      \begin{aligned}
-         & \vectorfunction{x}'      =\vectorfunction{A}\vectorfunction{x} \\
-         & \vectorfunction{x}(0)  =\vectorfunction{v}
-      \end{aligned}
-      \right.
-    $$
-  \end{prop}
-  \begin{corollary}
-    Let $\vectorfunction{A}\in\mathcal{M}_n(\RR)$ and $t\in\RR$ and consider the linear ode of \cref{DE_coef-constants}. If $(\vectorfunction{v}_1,\ldots,\vectorfunction{v}_n)$ is a basis of eigenvectors with associated eigenvalues $\lambda_1,\ldots,\lambda_n$, respectively, then $(\vectorfunction{\varphi}_1,\ldots,\vectorfunction{\varphi}_n)$, where $\vectorfunction{\varphi}_i=\exp{\lambda_it}\vectorfunction{v}_i$ for $i=1,\ldots,n$, is a basis of $\mathcal{A}_n$.
-  \end{corollary}
-  \begin{lemma}
-    Let $\vectorfunction{A}=\diag(\lambda_1,\ldots,\lambda_n)\in\mathcal{M}_n(\RR)$ and $t\in\RR$. Then:
-    $$\exp{\vectorfunction{A}t}=\diag(\exp{\lambda_1 t},\ldots,\exp{\lambda_n t})$$
-  \end{lemma}
-  \begin{prop}
-    Let $\vectorfunction{A}\in\mathcal{M}_n(\RR)$ and $\lambda=\alpha+\ii\beta\in\CC\setminus\RR$ be an eigenvalue of $\vectorfunction{A}$ with associated eigenvector $\vectorfunction{v}=\vectorfunction{u}+\ii\vectorfunction{w}\in\CC^n$. Then:
-    \begin{multline*}
-      \exp{\vectorfunction{A}t}\vectorfunction{v}=\exp{\vectorfunction{A}t}\vectorfunction{u}+\ii\exp{\vectorfunction{A}t}\vectorfunction{w}=\exp{\alpha t}\left[\cos(\beta t)\vectorfunction{u}-\sin(\beta t)\vectorfunction{w}\right]+\\+\ii\exp{\alpha t}\left[\sin(\beta t)\vectorfunction{u}+\cos(\beta t)\vectorfunction{w}\right]
-    \end{multline*}
-    and $\exp{\vectorfunction{A}t}\vectorfunction{u}$, $\exp{\vectorfunction{A}t}\vectorfunction{w}$ are linearly independent solutions of the ode of \cref{DE_coef-constants} with initial conditions $\vectorfunction{x}(0)=\vectorfunction{u}$ and $\vectorfunction{x}(0)=\vectorfunction{w}$, respectively.
-  \end{prop}
-  \begin{definition}
-    Let $\vectorfunction{A}\in\mathcal{M}_n(\RR)$. A vector $\vectorfunction{w}\in\RR^n$ is a \textit{generalized eigenvector of rank $m$ of $\vectorfunction{A}$ corresponding to the eigenvalue $\lambda\in\RR$} if: $${(\vectorfunction{A}-\lambda\vectorfunction{I}_n)}^m\vectorfunction{w}=0\quad\text{but}\quad{(\vectorfunction{A}-\lambda\vectorfunction{I}_n)}^{m-1}\vectorfunction{w}\ne 0$$
-    The set spanned by all generalized eigenvectors of $\lambda$ is called \textit{generalized eigenspace} of $\lambda$.
-  \end{definition}
-  \begin{prop}
-    Let $\vectorfunction{A}\in\mathcal{M}_n(\RR)$ and $\lambda\in\sigma(A)$. Then, the dimension of the generalized eigenspace is the algebraic multiplicity of $\lambda$.
-  \end{prop}
-  \begin{lemma}
-    Let $\vectorfunction{A}\in\mathcal{M}_n(\RR)$ and $\vectorfunction{v}_1\in\RR^n$ be an eigenvector of $\vectorfunction{A}$ with associated eigenvalue $\lambda$. We define $\vectorfunction{v}_2,\ldots,\vectorfunction{v}_m\in\RR^n$ in the following way: $$(\vectorfunction{A}-\lambda\vectorfunction{I}_n)\vectorfunction{v}_k=\vectorfunction{v}_{k-1}\qquad k=2,\ldots, m$$
-    That is, $\vectorfunction{v}_k$ is a generalized eigenvector of rank $k$ of $\vectorfunction{A}$ with associated eigenvalue $\lambda$. Then,
-    $$
-      \left\{
-      \begin{aligned}
-        \vectorfunction{\varphi}_1 & =\exp{\lambda t}\vectorfunction{v}_1                                                                                          \\
-        \vectorfunction{\varphi}_2 & =\exp{\lambda t}\left(\vectorfunction{v}_2+t\vectorfunction{v}_1\right)                                                       \\
-        \vectorfunction{\varphi}_3 & =\exp{\lambda t}\left(\vectorfunction{v}_3+t\vectorfunction{v}_2+\frac{t^2}{2}\vectorfunction{v}_1\right)                     \\
-                                   & \;\;\vdots                                                                                                                    \\
-        \vectorfunction{\varphi}_m & =\exp{\lambda t}\left(\vectorfunction{v}_m+t\vectorfunction{v}_{m-1}+\cdots+\frac{t^{m-1}}{(m-1)!}\vectorfunction{v}_1\right) \\
-      \end{aligned}
-      \right.
-    $$
-    are solutions of the ode of \cref{DE_coef-constants}. Furthermore, if $\vectorfunction{v}_1,\ldots,\vectorfunction{v}_k$ are linearly independent, then so are $\vectorfunction{\varphi}_1,\ldots,\vectorfunction{\varphi}_k$.
-  \end{lemma}
-  \begin{corollary}
-    Let $\vectorfunction{A}\in\mathcal{M}_n(\RR)$ and $\sigma(\vectorfunction{A})=\{\lambda_1,\ldots,\lambda_n\}$ be the spectrum of $\vectorfunction{A}$ such that:
-    \begin{itemize}
-      \item $\lambda_1,\ldots,\lambda_{2k}\in\CC\setminus\RR$, $\lambda_{k+i}=\overline{\lambda_i}$ and $\lambda_i=\alpha_i+\ii\beta_i$, $\alpha_i,\beta_i\in\RR$ for $i=1,\ldots,k$.
-      \item $\lambda_{2k+1},\ldots,\lambda_n\in\RR$
-    \end{itemize}
-    Then, the general solution of the ode of \cref{DE_coef-constants} is of the form:
-    \begin{multline*}
-      \vectorfunction{\varphi}(t)=\sum_{i=1}^k\exp{\alpha_i t}\left(\vectorfunction{P}_i(t)\cos(\beta_i t)+\vectorfunction{Q}_i(t)\sin(\beta_i t)\right)+\\+\sum_{i=2k+1}^n\exp{\lambda_i t}\vectorfunction{R}_i(t)
-    \end{multline*}
-    where $\vectorfunction{P}_i,\vectorfunction{Q}_i,\vectorfunction{R}_i\in\RR^n[t]$ and $\deg \vectorfunction{P}_i,\deg\vectorfunction{Q}_i,\deg\vectorfunction{R}_i<n$ $\forall i$.
-  \end{corollary}
-  \subsection{Dependence on initial conditions and parameters}
-  \begin{definition}
-    Let $U\subseteq\RR\times\RR^n\times\RR^p$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function. Suppose that the ivp:
-    \begin{equation}\label{DE_ivp_lambda}
-      \left\{
-      \begin{aligned}
-         & \vectorfunction{x}'      =\vectorfunction{f}(t,\vectorfunction{x},\vectorfunction{\lambda}) \\
-         & \vectorfunction{x}(t_0)  =\vectorfunction{x}_0
-      \end{aligned}
-      \right.
-    \end{equation}
-    has a unique maximal solution $\vectorfunction{\varphi}_{(t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})}(t)$ defined on an interval $I_{(t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})}$. We define the \textit{flux} of the ode $\vectorfunction{x}'=\vectorfunction{f}(t,\vectorfunction{x},\vectorfunction{\lambda})$ as: $$\function{\vectorfunction{\phi}}{I_{(t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})}\times\RR\times\RR^n\times\RR^p}{\RR^n}{(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})}{\vectorfunction{\varphi}_{(t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})}(t)}$$
-  \end{definition}
-  \subsubsection{Continuous and Lipschitz continuous dependence}
-  \begin{lemma}
-    Let $X$ be a compact metric space and $(\vectorfunction{\varphi}_m)$ be a sequence of functions $\vectorfunction{\varphi}_m:X\rightarrow\RR^n$ such that it is equicontinuous and pointwise bounded. Suppose that all convergent partial subsequences of $(\vectorfunction{\varphi}_m)$ have the same limit $\vectorfunction{\varphi}$. Then, $(\vectorfunction{\varphi}_m)$ converges uniformly to $\vectorfunction{\varphi}$.
-  \end{lemma}
-  \begin{prop}
-    Let $U\subseteq\RR\times\RR^n$ be an open set and $\vectorfunction{f}_m:U\rightarrow\RR^n$ be continuous function for $m\in\NN$ and such that for all compact $K\subset U$, the sequence $(\vectorfunction{f}_m|_K)$ converge uniformly to a function $\vectorfunction{f}$. Let $((t_m,\vectorfunction{x}_m))\subset U$ be a sequence such that $\displaystyle\lim_{m\to\infty}(t_m,\vectorfunction{x}_m)=(t_0,\vectorfunction{x}_0)$. Suppose that for all $m\geq 0$ the ivp
-    \begin{equation*}
-      \left\{
-      \begin{aligned}
-         & \vectorfunction{x}'      =\vectorfunction{f}_m(t,\vectorfunction{x}) \\
-         & \vectorfunction{x}(t_m)  =\vectorfunction{x}_m
-      \end{aligned}
-      \right.
-    \end{equation*}
-    has a unique maximal solution $\vectorfunction{\varphi}_m$ defined on $I_m$. Then, for all $[a,b]\subset I_0$ with $t_0\in(a,b)$, $\exists m_0\in\NN$ such that $[a,b]\subset I_m$ $\forall m>m_0$. Furthermore, the sequence $\left(\vectorfunction{\varphi}_m|_{[a,b]}\right)_{m>m_0}$ converges uniformly to $\vectorfunction{\varphi}|_{[a,b]}$.
-  \end{prop}
-  \begin{theorem}
-    Let $U\subseteq\RR\times\RR^n$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function. Suppose that each ivp of the form of \cref{DE_ivp} has a unique maximal solution. Then, the flux $\vectorfunction{\phi}(t,t_0,\vectorfunction{x}_0)$ is a continuous function defined in an open set.
-  \end{theorem}
-  \begin{theorem}
-    Let $U\subseteq\RR\times\RR^n\times\RR^p$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function. Suppose that each ivp of the form of \cref{DE_ivp_lambda} has a unique maximal solution. Then, the flux $\vectorfunction{\phi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})$ is a continuous function defined in an open set $V\subseteq I_{(t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})}\times\RR\times\RR^n\times\RR^p$.
-  \end{theorem}
-  \begin{lemma}[Grönwall's lemma]
-    Let $u,v,w:[a,b)\rightarrow\RR$ be continuous functions such that $v(t)\geq 0$ $\forall t\in[a,b)$ and satisfying: $$u(t)\leq w(t)+\int_a^tv(s)u(s)\dd s\quad\forall t\in[a,b)$$
-    Then: $$u(t)\leq w(t)+\int_a^tw(s)v(s)\exp{\int_s^tv(r)\dd r}\dd s\quad\forall t\in[a,b)$$
-    If, moreover, $w\in\mathcal{C}^1((a,b))$, then: $$u(t)\leq w(a)\exp{\int_a^tv(r)\dd r}+\int_a^tw'(s)\exp{\int_s^tv(r)\dd r}\dd s\quad\forall t\in[a,b)$$
-  \end{lemma}
-  \begin{prop}
-    Let $U\subseteq\RR\times\RR^n$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function and Lipschitz continuous with respect to the second variable with Lipschitz constant $L$. Let $\vectorfunction{\phi}$ be the flux of the ode $\vectorfunction{x}'=\vectorfunction{f}(t,\vectorfunction{x})$. Then, $\forall (t_0,\vectorfunction{x}_1),(t_0,\vectorfunction{x}_2)\in U$ and $\forall t\in I_{(t_0,\vectorfunction{x}_1)}\cap I_{(t_0,\vectorfunction{x}_2)}$, we have:
-    $$\|\vectorfunction{\phi}(t,t_0,\vectorfunction{x}_2)-\vectorfunction{\phi}(t,t_0,\vectorfunction{x}_1)\|\leq\exp{L|t-t_0|}\|\vectorfunction{x}_2-\vectorfunction{x}_1\|$$
-    Thus, $\vectorfunction{\phi}$ is locally Lipschitz continuous with respect to the third variable.
-  \end{prop}
-  \subsubsection{Differenciable dependence}
-  \begin{theorem}[Dependence on $\vectorfunction{x}_0$]
-    Let $U\subseteq\RR\times\RR^n\times\RR^p$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function and of class $\mathcal{C}^1$ with respect to the second variable. Suppose that the flux $\vectorfunction{\phi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})$ of $\vectorfunction{x}'=\vectorfunction{f}(t,\vectorfunction{x},\vectorfunction{\lambda})$ is defined on an open set $V\subseteq\RR\times\RR\times\RR^n\times\RR^p$. Then, $\forall (t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})\in V$, $\vectorfunction{\phi}$ is differentiable with respect to $\vectorfunction{x}_0$ and $\vectorfunction{D}_3\vectorfunction{\phi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})$\footnote{Here, $\vectorfunction{D}_3\vectorfunction{\phi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})=\frac{\partial\vectorfunction{\phi}}{\partial \vectorfunction{x}_0}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})$ denotes the matrix $\left(\frac{\partial\vectorfunction{\phi}_i}{\partial{\vectorfunction{x}_0}_j}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})\right)\in\mathcal{M}_n(\RR)$, where ${\vectorfunction{x}_0}_j$ denotes the $j$-th component of $\vectorfunction{x}_0$ and $\vectorfunction{\phi}_i(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})$ denotes the $i$-th component of $\vectorfunction{\phi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})$.} is continuous on $V$. Furthermore, $\vectorfunction{D}_3\vectorfunction{\phi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})$ satisfies the following ivp:
-    \begin{equation*}
-      \left\{
-      \begin{aligned}
-         & \vectorfunction{M}'      =\vectorfunction{D}_2\vectorfunction{f}(t,\vectorfunction{\phi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda}),\vectorfunction{\lambda})\vectorfunction{M} \\
-         & \vectorfunction{M}(t_0)  =\vectorfunction{I}_n
-      \end{aligned}
-      \right.
-    \end{equation*}
-    or, equivalently, $\frac{\partial\vectorfunction{\phi}}{\partial {\vectorfunction{x}_0}_i}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})=\vectorfunction{D}_3\vectorfunction{\phi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})\vectorfunction{e}_i$ satisfies the following ivp:
-    $$
-      \left\{
-      \begin{aligned}
-         & \vectorfunction{y}'      =\vectorfunction{D}_2\vectorfunction{f}(t,\vectorfunction{\phi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda}),\vectorfunction{\lambda})\vectorfunction{y} \\
-         & \vectorfunction{y}(t_0)  =\vectorfunction{e}_i
-      \end{aligned}
-      \right.\quad\text{for }i=1,\ldots,n
-    $$
-    These kind of equations are called \textit{variational equations}.
-  \end{theorem}
-  \begin{theorem}[Dependence on $t_0$]
-    Let $U\subseteq\RR\times\RR^n\times\RR^p$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function and of class $\mathcal{C}^1$ with respect to the second variable. Suppose that the flux $\vectorfunction{\phi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})$ of $\vectorfunction{x}'=\vectorfunction{f}(t,\vectorfunction{x},\vectorfunction{\lambda})$ is defined on an open set $V\subseteq\RR\times\RR\times\RR^n\times\RR^p$. Then, $\forall (t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})\in V$, $\vectorfunction{\phi}$ is differentiable with respect to $t_0$ and $\vectorfunction{D}_2\vectorfunction{\phi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})$ is continuous on $V$. Furthermore, $\vectorfunction{D}_2\vectorfunction{\phi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})$ satisfies the following ivp:
-    \begin{equation*}
-      \left\{
-      \begin{aligned}
-         & \vectorfunction{y}'      =\vectorfunction{D}_2\vectorfunction{f}(t,\vectorfunction{\phi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda}),\vectorfunction{\lambda})\vectorfunction{y} \\
-         & \vectorfunction{y}(t_0)  = -\vectorfunction{f}(t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})
-      \end{aligned}
-      \right.
-    \end{equation*}
-  \end{theorem}
-  \begin{theorem}[Dependence on $\vectorfunction{\lambda}$]
-    Let $U\subseteq\RR\times\RR^n\times\RR^p$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function and of class $\mathcal{C}^1$ with respect to the second and third variable. Suppose that the flux $\vectorfunction{\phi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})$ of $\vectorfunction{x}'=\vectorfunction{f}(t,\vectorfunction{x},\vectorfunction{\lambda})$ is defined on an open set $V\subseteq\RR\times\RR\times\RR^n\times\RR^p$. Then, $\forall (t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})\in V$, $\vectorfunction{\phi}$ is differentiable with respect to $\vectorfunction{\lambda}$ and $\vectorfunction{D}_4\vectorfunction{\phi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})$ is continuous on $V$. Furthermore, $\vectorfunction{D}_4\vectorfunction{\phi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})$ satisfies the following ivp:
-    \begin{equation*}
-      \left\{
-      \begin{aligned}
-         & \vectorfunction{M}'      =\vectorfunction{D}_2\vectorfunction{f}(t,\vectorfunction{\phi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda}),\vectorfunction{\lambda})\vectorfunction{M}+ \vectorfunction{B} \\
-         & \vectorfunction{M}(t_0)  =\vectorfunction{0}
-      \end{aligned}
-      \right.
-    \end{equation*}
-    where $\vectorfunction{B}=\vectorfunction{D}_3\vectorfunction{f}(t,\vectorfunction{\phi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda}),\vectorfunction{\lambda})$. Equivalently, $\frac{\partial\vectorfunction{\phi}}{\partial \vectorfunction{\lambda}_i}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda})$ satisfies the ivp:
-    $$
-      \left\{
-      \begin{aligned}
-         & \vectorfunction{y}'      =\vectorfunction{D}_2\vectorfunction{f}(t,\vectorfunction{\phi}(t,t_0,\vectorfunction{x}_0,\vectorfunction{\lambda}),\vectorfunction{\lambda})\vectorfunction{y}+\vectorfunction{B}\vectorfunction{e}_i \\
-         & \vectorfunction{y}(t_0)  =\vectorfunction{0}
-      \end{aligned}
-      \right.\quad\text{for }i=1,\ldots,n
-    $$
-  \end{theorem}
-  \subsubsection{Higher order dependence}
-  \begin{theorem}
-    Let $U\subseteq\RR\times\RR^n$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a continuous function and of class $\mathcal{C}^k$, $k\in\NN$, with respect to the second variable. Suppose that the flux $\vectorfunction{\phi}(t,t_0,\vectorfunction{x}_0)$ of $\vectorfunction{x}'=\vectorfunction{f}(t,\vectorfunction{x})$ is defined on an open set $V\subseteq\RR\times\RR\times\RR^n$. Then, $\vectorfunction{\phi}(t,t_0,\vectorfunction{x}_0)$ is of class $\mathcal{C}^k$ on $V$.
-  \end{theorem}
-  \subsection{Qualitative theory}
-  \subsubsection{Introduction to dynamical systems}
-  \begin{definition}
-    A \textit{dynamical system} is a triplet $(G,X,\Psi)$, where $G$ is an topological abelian group\footnote{That is, $G$ is an abelian group with an inherit topological structure.}, $X$ is a topological space and $\Psi:G\times X\rightarrow X$ is a function such that:
-    \begin{itemize}
-      \item $\Psi$ is continuous.
-      \item $\Psi(0,x)=x$ $\forall x\in X$.
-      \item $\Psi(t,\Psi(s,x))=\Psi(t+s,x)$ $\forall s,t\in G$ and $\forall x\in X$.
-    \end{itemize}
-    We say that a dynamical system $(G,X,\Psi)$ is \textit{discrete} if $G=\ZZ$ and we say that it is \textit{continuous} if $G=\RR$.
-  \end{definition}
-  \begin{definition}
-    Let $(G,X,\Psi)$ be a dynamical system with $x\in X$. The \textit{orbit} through $x$ is defined as: $$\gamma_{\Psi}(x):=\{\Psi(t,x):t\in G\}\footnote{In general, if the context is clear we will use the notation $\gamma(x)$ instead of $\gamma_{\Psi}(x)$.}$$ Moreover if $G=\ZZ$ or $G=\RR$ we define the \textit{positive semi-orbit} through $x$ and the \textit{negative semi-orbit} through $x$ as the following respective sets:
-    \begin{gather*}
-      \gamma^+(x):=\{\Psi(t,x):t\in G_{\geq 0}\}\\
-      \gamma^-(x):=\{\Psi(t,x):t\in G_{\leq 0}\}
-    \end{gather*}
-  \end{definition}
-  \begin{definition}
-    Let $(G,X,\Psi)$ be a dynamical system. Then, we have an equivalence relation $\sim$ on $X$ given by $$x\sim y\iff\gamma(x)=\gamma(y)\quad\forall x,y\in X$$
-    which creates a partition of $X$, called \textit{phase portrait}.
-  \end{definition}
-  \begin{definition}
-    Let $(G,X,\Psi)$ be a dynamical system with $x\in X$. We define the following function: $$\function{\Psi_x}{G}{\gamma(x)}{t}{\Psi(t,x)}$$
-  \end{definition}
-  \begin{lemma}
-    Let $\vectorfunction{f}:\RR^n\rightarrow\RR^n$ be a continuous function such that the flux $\vectorfunction{\phi}(t,t_0,\vectorfunction{x}_0)$ of the ode $\vectorfunction{x}' =\vectorfunction{f}(\vectorfunction{x})$ is defined for all $t\in\RR$. Then, $(\RR,\RR^n,\vectorfunction{\Psi})$ is a dynamical system, where $\vectorfunction{\Psi}(t,\vectorfunction{x})=\vectorfunction{\phi}(t,0,\vectorfunction{x})$. Furthermore, note that $\vectorfunction{\gamma}(\vectorfunction{x})=\im(\vectorfunction{\phi}(\cdot,0,\vectorfunction{x}))$.
-  \end{lemma}
-  \begin{lemma}
-    Let $\vectorfunction{f}:\RR^n\rightarrow\RR^n$ be a continuous function such that $\exists M,N\in\RR_{\geq 0}$ with $\|\vectorfunction{f}(x)\|\leq M\|x\|+N$. Then, the solutions of the ode $\vectorfunction{x}' =\vectorfunction{f}(\vectorfunction{x})$ are defined for all $t\in\RR$.
-  \end{lemma}
-  \begin{definition}
-    Let $\vectorfunction{f},\vectorfunction{g}:\RR^n\rightarrow\RR^n$ be continuous functions and $\vectorfunction{x}' =\vectorfunction{f}(\vectorfunction{x})$, $\vectorfunction{x}' =\vectorfunction{g}(\vectorfunction{x})$ be two odes for which we have existence and uniqueness of solutions. We say that these two odes are \textit{equivalent} if $\exists \alpha\in\RR_{>0}$ such that $\vectorfunction{f}(\vectorfunction{x})=\alpha \vectorfunction{g}(\vectorfunction{x})$. In that case, the two odes have the same orbits oriented in the same way.
-  \end{definition}
-  \begin{corollary}
-    Let $\vectorfunction{f}:\RR^n\rightarrow\RR^n$ be a continuous function such that the ode $\vectorfunction{x}' =\vectorfunction{f}(\vectorfunction{x})$ has existence and uniqueness of solutions for all initial conditions. Then, there exists a continuous function $\vectorfunction{g}:\RR^n\rightarrow\RR^n$ such that the autonomous odes induced by $\vectorfunction{f}$ and $\vectorfunction{g}$ are equivalent and the flux of the ode $\vectorfunction{x}' =\vectorfunction{g}(\vectorfunction{x})$ is defined $\forall t\in\RR$.
-  \end{corollary}
-  \begin{lemma}
-    Let $H$ be a proper subgroup of $\RR$ which is closed. Then, $\exists T\in\RR_{\geq 0}$ such that $H=T\ZZ$.
-  \end{lemma}
-  \begin{prop}
-    Let $(\RR,\RR^n,\vectorfunction{\Psi})$ be a dynamical system and $\vectorfunction{\gamma}(\vectorfunction{x})$ be an orbit. Then, there are 3 possible cases for $\vectorfunction{\gamma}(\vectorfunction{x})$:
-    \begin{enumerate}
-      \item $\vectorfunction{\gamma}(\vectorfunction{x})=\{\vectorfunction{x}\}$.
-      \item $\vectorfunction{\gamma}(\vectorfunction{x})\cong S^1$.
-      \item $\vectorfunction{\gamma}(\vectorfunction{x})$ is homeomorphic to an injective and continuous image of $\RR$.
-    \end{enumerate}
-  \end{prop}
-  \begin{definition}
-    Let $(\RR,\RR^n,\vectorfunction{\Psi})$ be a dynamical system and $\vectorfunction{p}\in\RR^n$. We say that $\vectorfunction{p}\in\RR^n$ is a \textit{critical point} or \textit{singular point} if $\vectorfunction{\gamma}(\vectorfunction{p})=\{\vectorfunction{p}\}$. Otherwise we say that $\vectorfunction{p}$ is \textit{non-singular} or \textit{regular}.
-  \end{definition}
-  \begin{definition}
-    Let $(\RR,\RR^n,\vectorfunction{\Psi})$ be a dynamical system and $\vectorfunction{\gamma}(\vectorfunction{x})$ be an orbit of $(\RR,\RR^n,\vectorfunction{\Psi})$. We say that $\vectorfunction{\gamma}(\vectorfunction{x})$ is \textit{periodic} of period $T>0$ if $\vectorfunction{\gamma}(\vectorfunction{x})\cong S^1$ and $\ker\vectorfunction{\Psi_{\vectorfunction{x}}}=T\ZZ$.
-  \end{definition}
-  \begin{prop}
-    Let $(\RR,\RR^n,\vectorfunction{\Psi})$ be a dynamical system such that $\vectorfunction{\Psi}(t,\vectorfunction{x})=\vectorfunction{\phi}(t,0,\vectorfunction{x})$, where $\vectorfunction{\phi}(t,t_0,\vectorfunction{x}_0)$ is the flux of the ode $\vectorfunction{x}' =\vectorfunction{f}(\vectorfunction{x})$. Let $\vectorfunction{p}\in\RR^n$. Then, the following statements are equivalent:
-    \begin{enumerate}
-      \item $\{\vectorfunction{p}\}$ is a critical point.
-      \item $\vectorfunction{\phi}(t,0,\vectorfunction{p})=\vectorfunction{p}$.
-      \item $\vectorfunction{f}(\vectorfunction{p})=0$.
-    \end{enumerate}
-  \end{prop}
-  \begin{definition}
-    Let $(\RR,\RR^n,\vectorfunction{\Psi})$ be a dynamical system and $\vectorfunction{x}\in\RR^n$. We say that $\vectorfunction{y}\in\RR^n$ is a \textit{$\alpha$-limit point} of $\vectorfunction{x}$ if there exists a sequence $(t_n)\subset\RR$ such that $\displaystyle\lim_{n\to\infty}t_n=-\infty$ and $\displaystyle\lim_{n\to\infty}\vectorfunction{\Psi}(t_n,\vectorfunction{x})=\vectorfunction{y}$.
-    The set of all $\alpha$-limit points of $\vectorfunction{x}$ is called \textit{$\alpha$-limit set} and it is denoted by $\alpha(\vectorfunction{x})$.
-  \end{definition}
-  \begin{definition}
-    Let $(\RR,\RR^n,\vectorfunction{\Psi})$ be a dynamical system and $\vectorfunction{x}\in\RR^n$. We say that $\vectorfunction{y}\in\RR^n$ is a \textit{$\omega$-limit point} of $\vectorfunction{x}$ if there exists a sequence $(t_n)\subset\RR$ such that $\displaystyle\lim_{n\to\infty}t_n=+\infty$ and $\displaystyle\lim_{n\to\infty}\vectorfunction{\Psi}(t_n,\vectorfunction{x})=\vectorfunction{y}$.
-    The set of all $\omega$-limit points of $\vectorfunction{x}$ is called \textit{$\omega$-limit set} and it is denoted by $\omega(\vectorfunction{x})$.
-  \end{definition}
-  \begin{prop}
-    Let $(\RR,\RR^n,\vectorfunction{\Psi})$ be a dynamical system and $\vectorfunction{x}\in\RR^n$. Then: $$\Cl(\vectorfunction{\gamma}(\vectorfunction{x}))=\alpha(\vectorfunction{x})\cup\vectorfunction{\gamma}(\vectorfunction{x})\cup\omega(\vectorfunction{x})$$
-  \end{prop}
-  \begin{definition}
-    Let $(\RR,\RR^n,\vectorfunction{\Psi})$ be a dynamical system and $A\subseteq \RR^n$ be a subset. We say that $A$ is \textit{invariant} if $\vectorfunction{\gamma}(\vectorfunction{x})\subseteq A$ $\forall\vectorfunction{x}\in A$. We say that $A$ is \textit{positively invariant} if $\vectorfunction{\gamma}^+(\vectorfunction{x})\subseteq A$ $\forall\vectorfunction{x}\in A$. Analogously, we say that $A$ is \textit{negatively invariant} if $\vectorfunction{\gamma}^-(\vectorfunction{x})\subseteq A$ $\forall\vectorfunction{x}\in A$
-  \end{definition}
-  \begin{definition}
-    Let $(\RR,\RR^n,\vectorfunction{\Psi})$ be a dynamical system and $K\subset \RR^n$ be a compact set. We say that $K$ is \textit{positively stable} if for all neighbourhood $U$ of $K$, there exists a neighbourhood $V$ of $K$ with $V\subseteq U$ and such that $\forall \vectorfunction{x}\in V$, $\vectorfunction{\gamma}^+(\vectorfunction{x})\subset U$. Analogously, we say that $K$ is \textit{negatively stable} if for all neighbourhood $U$ of $K$, there exists a neighbourhood $V$ of $K$ with $V\subseteq U$ and such that $\forall \vectorfunction{x}\in V$, $\vectorfunction{\gamma}^-(\vectorfunction{x})\subset U$.
-  \end{definition}
-  \begin{definition}
-    Let $(\RR,\RR^n,\vectorfunction{\Psi})$ be a dynamical system and $K\subset \RR^n$ be a compact set. We say that $K$ is \textit{attractor} if there exists a neighbourhood $U$ of $K$ such that $\forall \vectorfunction{x}\in U$, $\omega(\vectorfunction{x})\subset K$.  We say that $K$ is \textit{repeller} if there exists a neighbourhood $U$ of $K$ such that $\forall \vectorfunction{x}\in U$, $\alpha(\vectorfunction{x})\subset K$. We say that $K$ is \textit{asymptotically stable} if it is both attractor and positively stable.
-  \end{definition}
-  \begin{prop}
-    Let $(\RR,\RR^n,\vectorfunction{\Psi})$ be a dynamical system and $K\subset \RR^n$ be a compact set. Suppose that $K$ is positively stable. Then, $K$ is positively invariant.
-  \end{prop}
-  \begin{definition}
-    Let $(\RR,\RR^n,\vectorfunction{\Psi})$ be a dynamical system and $\vectorfunction{p}\in\RR^n$. We say that $\vectorfunction{p}$ is a \textit{center} if there exists a neighbourhood $U$ of $\vectorfunction{p}$ such that if $\vectorfunction{\gamma}(\vectorfunction{x})\subset U$, then $\vectorfunction{\gamma}(\vectorfunction{x})$ is periodic. The largest neighbourhood with this property is called \textit{basin} of the center.
-  \end{definition}
-  \begin{prop}
-    Let $(\RR,\RR^n,\vectorfunction{\Psi})$ be a dynamical system and $\vectorfunction{p}\in\RR^n$ be a center. Then:
-    \begin{enumerate}
-      \item $\vectorfunction{p}$ is positively and negatively stable.
-      \item $\vectorfunction{p}$ is not an attractor.
-    \end{enumerate}
-  \end{prop}
-  \subsubsection{Equivalence and conjugacy of dynamical systems}
-  \begin{definition}
-    Let $(G,X,\Psi_1)$ and $(G,X,\Psi_2)$ be dynamical systems and $r\in\NN\cup\{0,\infty\}$. We say that $(G,X,\Psi_1)$ and $(G,X,\Psi_2)$ are \textit{equivalents of class $\mathcal{C}^r$} if there exists a diffeomorphism $h:X\rightarrow Y$ of class $\mathcal{C}^r$ such that $\forall x\in X$, $h(\gamma_{\Psi_1}(x))=\gamma_{\Psi_2}(h(x))$. In particular, if $r=0$ we say that $(G,X,\Psi_1)$ and $(G,X,\Psi_2)$ are \textit{topologically equivalent}.
-  \end{definition}
-  \begin{definition}
-    Let $(G,X,\Psi_1)$ and $(G,X,\Psi_2)$ be dynamical systems and $r\in\NN\cup\{0,\infty\}$. We say that $(G,X,\Psi_1)$ and $(G,X,\Psi_2)$ are \textit{conjugates of class $\mathcal{C}^r$} if there exists a diffeomorphism $h:X\rightarrow Y$ of class $\mathcal{C}^r$ such that $\forall (t,x)\in G\times X$, $h(\Psi_1(t,x))=\Psi_2(t,h(x))$. In particular, if $r=0$ we say that $(G,X,\Psi_1)$ and $(G,X,\Psi_2)$ are \textit{topologically conjugate}.
-  \end{definition}
-  \begin{prop}
-    Let $(G,X,\Psi_1)$ and $(G,X,\Psi_2)$ be dynamical systems and $h$ be a conjugation of class $\mathcal{C}^r$ between them. Then, $h$ is an equivalence of class $\mathcal{C}^r$ between $(G,X,\Psi_1)$ and $(G,X,\Psi_2)$.
-  \end{prop}
-  \begin{prop}
-    Let $(G,X,\Psi_1)$ and $(G,X,\Psi_2)$ be dynamical systems and $h:X\rightarrow Y$ be an equivalence of class $\mathcal{C}^r$ between them.
-    \begin{enumerate}
-      \item $h$ preserves the type of orbit. More precisely if $p\in X$, we have:
-            \begin{enumerate}
-              \item If $p$ is a critical point, then so it is $h(p)$.
-              \item If $\gamma(p)$ is a periodic orbit, then so it is $h(\gamma(p))$\footnote{Note that the period of $\gamma(p)$ and $h(\gamma(p))$ may be different.}.
-              \item If $\gamma(p)$ is the injective and continuous image of $\RR$, then so it is $h(\gamma(p))$.
-            \end{enumerate}
-      \item If $p\in X$ is a critical point of $\Psi_1$, we have:
-            \begin{enumerate}
-              \item If $p$ is attractor for $(G,X,\Psi_1)$, then so it is $h(p)$ for $(G,X,\Psi_2)$.
-              \item If $p$ is repeller for $(G,X,\Psi_1)$, then so it is $h(p)$ for $(G,X,\Psi_2)$.
-              \item If $p$ is positively stable for $(G,X,\Psi_1)$, then so it is $h(p)$ for $(G,X,\Psi_2)$.
-              \item If $p$ is asymptotically stable for $(G,X,\Psi_1)$, then so it is $h(p)$ for $(G,X,\Psi_2)$.
-            \end{enumerate}
-    \end{enumerate}
-  \end{prop}
-  \begin{prop}
-    A conjugation between two dynamical systems preserves the period of periodic orbits.
-  \end{prop}
-  \begin{definition}
-    Let $U\subseteq \RR^n$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a vector field of class $\mathcal{C}^1$. For all $\vectorfunction{x}_0\in U$, let $\vectorfunction{\varphi}_{\vectorfunction{x}_0}(t)$ be the maximal solution to the ivp
-    $$\left\{
-      \begin{aligned}
-         & \vectorfunction{x}'      =\vectorfunction{f}(t,\vectorfunction{x}) \\
-         & \vectorfunction{x}(0)  =\vectorfunction{x}_0
-      \end{aligned}
-      \right.$$
-    We define the \textit{flux} of the vector field $\vectorfunction{f}$ as $\vectorfunction{\phi}(t,\vectorfunction{x}):=\vectorfunction{\varphi}_{\vectorfunction{x}}(t)$.
-  \end{definition}
-  \begin{prop}
-    Let $U\subseteq \RR^n$ be an open set and $\vectorfunction{f}:U\rightarrow\RR^n$ be a vector field of class $\mathcal{C}^1$. Then, the flux $\vectorfunction{\phi}(t,\vectorfunction{x})$ of $\vectorfunction{f}$ defines locally a dynamical system.
-  \end{prop}
-  \begin{definition}
-    Let $U,V\subseteq \RR^n$ be open sets and $\vectorfunction{f}:U\rightarrow\RR^n$, $\vectorfunction{g}:V\rightarrow\RR^n$ be vector fields of class $\mathcal{C}^1$ with fluxes $\vectorfunction{\phi}$ and $\vectorfunction{\psi}$. We say that $\vectorfunction{f}$ and $\vectorfunction{g}$ are \textit{equivalent} if there exists a diffeomorphism $h:U\rightarrow V$ of class $\mathcal{C}^r$ such that $\forall \vectorfunction{x}\in U$, $\vectorfunction{h}(\vectorfunction{\gamma}_{\vectorfunction{f}}(\vectorfunction{x}))=\vectorfunction{\gamma}_{\vectorfunction{g}}(\vectorfunction{h}(\vectorfunction{x}))$.
-  \end{definition}
-  \begin{definition}
-    Let $U,V\subseteq \RR^n$ be open sets and $\vectorfunction{f}:U\rightarrow\RR^n$, $\vectorfunction{g}:V\rightarrow\RR^n$ be vector fields of class $\mathcal{C}^1$ with fluxes $\vectorfunction{\phi}$ and $\vectorfunction{\psi}$. We say that $\vectorfunction{f}$ and $\vectorfunction{g}$ are \textit{conjugate} if there exists a diffeomorphism $\vectorfunction{h}:U\rightarrow V$ of class $\mathcal{C}^r$ such that $\forall (t,\vectorfunction{x})\in \domain(\vectorfunction{f})$, $\vectorfunction{h}(\vectorfunction{\phi}(t,\vectorfunction{x}))=\vectorfunction{\psi}(t,\vectorfunction{h}(\vectorfunction{x}))$.
-  \end{definition}
-  \begin{lemma}
-    Let $U,V\subseteq \RR^n$ be open sets and $\vectorfunction{f}:U\rightarrow\RR^n$, $\vectorfunction{g}:V\rightarrow\RR^n$ be vector fields of class $\mathcal{C}^1$ and $\vectorfunction{h}:U\rightarrow V$ be a diffeomorphism of class $\mathcal{C}^1$. Then, $\vectorfunction{h}$ is a conjugation of class $\mathcal{C}^1$ if and only if $\vectorfunction{Dh}(\vectorfunction{x})(\vectorfunction{f}(\vectorfunction{x}))=\vectorfunction{g}(\vectorfunction{h}(\vectorfunction{x}))$ $\forall \vectorfunction{x}\in U$.
-  \end{lemma}
-  \begin{theorem}[Tubular flow theorem]
-    Let $U\subseteq \RR^n$ be an open set, $\vectorfunction{f}:U\rightarrow\RR^n$ be a vector field of class $\mathcal{C}^r$ with $r\geq 1$ and $\vectorfunction{p}\in\RR^n$ be a non-singular point of $\vectorfunction{f}$. Let $\vectorfunction{g}:\RR^n\rightarrow\RR^n$ be the vector field defined as $\vectorfunction{g}(\vectorfunction{x})=(1,0\ldots,0)$ $\forall \vectorfunction{x}\in\RR^n$. Then, there exist neighbourhoods $V\subseteq U$ of $\vectorfunction{p}$ and $W\subseteq \RR^n$ of $\vectorfunction{0}$ such that $\vectorfunction{f}|_V$ and $\vectorfunction{g}|_W$ conjugates of class $\mathcal{C}^r$.
-  \end{theorem}
-  \begin{definition}
-    Let $U\subseteq \RR^n$ be an open set, $\vectorfunction{f}:U\rightarrow\RR^n$ be a vector field of class $\mathcal{C}^r$ with $r\geq 1$ and $\vectorfunction{p}\in\RR^n$ be a critical point of $\vectorfunction{f}$. We say that $\vectorfunction{p}$ is \emph{hyperbolic critical point} if $\Re(\lambda)\ne 0$ $\forall \lambda\in\sigma(\vectorfunction{Df}(\vectorfunction{p}))$, where $\sigma(\vectorfunction{Df}(\vectorfunction{p}))$ denotes the spectrum of $\vectorfunction{Df}(\vectorfunction{p})$.
-  \end{definition}
-  \begin{theorem}[Hartman-Grobman theorem]
-    Let $U\subseteq \RR^n$ be an open set, $\vectorfunction{f}:U\rightarrow\RR^n$ be a vector field of class $\mathcal{C}^1$ and $\vectorfunction{p}\in\RR^n$ be an hyperbolic critical point of $\vectorfunction{f}$. Let $\vectorfunction{g}:\RR^n\rightarrow\RR^n$ be the vector field defined as $\vectorfunction{g}(\vectorfunction{x})=\vectorfunction{Df}(\vectorfunction{p})(\vectorfunction{x})$. Then, there exist neighbourhoods $V\subseteq U$ of $\vectorfunction{p}$ and $W\subseteq \RR^n$ of $\vectorfunction{f}(\vectorfunction{p})=\vectorfunction{0}$ such that $\vectorfunction{f}|_V$ and $\vectorfunction{g}|_W$ topological conjugates.
-  \end{theorem}
+    Along this document we will write the points in $\RR^n$, $n\geq 2$, in bold face (as well as the vectors) in order to be consistent while manipulating points and vectors together.
+    \subsection{Space of continuous and bounded functions}
+    \begin{definition}
+        Let $X$, $Y$ be topological spaces. We define the following sets:
+        \begin{gather*}
+            \mathcal{C}(X,Y)=\{f:X\longrightarrow Y:f\text{ is continuous}\}\\
+            \mathcal{C}_b(X,\RR^n)=\{f\in\mathcal{C}(X,\RR^n):f\text{ is bounded}\}
+        \end{gather*}
+    \end{definition}
+    \begin{theorem}
+        Let $X$ be a topological space and $f\in\mathcal{C}_b(X,\RR^n)$. We define the norm of $f$ as: $$\|f\|:=\sup\{|f(x)|:x\in X\}$$ and a distance $d$ in $\mathcal{C}_b(X,\RR^n)$ as: $$d(f,g):=\|f-g\|\quad\forall f,g\in\mathcal{C}_b(X,\RR^n)$$
+        Then, $(\mathcal{C}_b(X,\RR^n),d)$ is a complete metric space.
+    \end{theorem}
+    \begin{theorem}
+        Let $X$ be a topological space and $C\subseteq\RR^n$ be a closed subset. Then, $(\mathcal{C}(X,C),d)$ is a complete metric space.
+    \end{theorem}
+    \begin{corollary}
+        Let $K\subset \RR^n$ be a compact subset and $C\subseteq\RR^n$ be a closed subset. Then, $(\mathcal{C}(K,C),d)$ is a complete metric space.
+    \end{corollary}
+    \begin{corollary}
+        Moreover, if $D\subset\RR^n$ is a closed set and $X=\mathcal{C}([a,b],D)$, then $(X,d)$ is also a complete metric space.
+    \end{corollary}
+    \subsection{Ordinary differential equations}
+    \begin{definition}
+        An \textit{ordinary differential equation (ode) of $m$ unknowns and of order $n$} in \textit{implicit form} is an expression of the form: $$\vf{f}\left(t,\vf{x}(t),\vf{x}'(t),\vf{x}''(t),\ldots,\vf{x}^{(n)}(t)\right)=\vf{0}$$
+        where $\vf{x}:U\subseteq\RR\rightarrow\RR^m$ is a vector-valued function of one variable $t\in\RR$ (which is called \textit{independent variable}) and $\vf{f}:\Omega\subseteq\RR\times\RR^{m\cdot(n+1)}\rightarrow\RR^m$, where both $U$ and $\Omega$ are open sets. The same ordinary differential equation in \textit{explicit form} is an expression of the form: $$\vf{x}^{(n)}(t)=\vf{g}\left(t,\vf{x}(t),\vf{x}'(t),\vf{x}''(t),\ldots,\vf{x}^{(n-1)}(t)\right)$$
+        where $\vf{g}:\Omega\subseteq\RR\times\RR^{m\cdot n}\rightarrow\RR^m$\footnote{Sometimes we will write $\vf{x}^{(n)}=\vf{g}\left(t,\vf{x},\vf{x}',\ldots,\vf{x}^{(n-1)}\right)$ instead of $\vf{x}^{(n)}(t)=\vf{g}\left(t,\vf{x}(t),\vf{x}'(t),\ldots,\vf{x}^{(n-1)}(t)\right)$ in order to simplify the notation.}.
+    \end{definition}
+    \begin{definition}
+        Consider the following ode of $m$ unknowns and of order $n$:
+        \begin{equation}\label{DE_ode1}
+            \vf{x}^{(n)}(t)=\vf{f}\left(t,\vf{x}(t),\vf{x}'(t),\ldots,\vf{x}^{(n-1)}(t)\right)
+        \end{equation}
+        We say that $\vf{\varphi}:I\subseteq\RR\rightarrow\RR^m$ is a \textit{solution of the ode} if:
+        \begin{itemize}
+            \item $\vf{\varphi}$ is $n$-times differentiable on $I$.
+            \item $\displaystyle\left\{\left(t,\vf{\varphi}(t),\vf{\varphi}'(t),\ldots,\vf{\varphi}^{(n-1)}(t)\right):t\in I\right\}\subseteq\domain \vf{f}$
+            \item For all $t\in I$ we have:
+                  $$\vf{\varphi}^{(n)}(t)=\vf{f}\left(t,\vf{\varphi}(t),\vf{\varphi}'(t),\ldots,\vf{\varphi}^{(n-1)}(t)\right)$$
+        \end{itemize}
+        The set of all solutions of an ode is called \textit{general solution of the ode}.
+    \end{definition}
+    \begin{prop}
+        Consider an ode of $m$ unknowns and order $n$ of the form of \cref{DE_ode1}. Then, we can transform this ode to an ode of $m\cdot n$ unknowns and order 1 in the following way\footnote{Therefore, we will mainly study the odes of order 1.}. Define $\vf{y}_i=\vf{x}^{(i-1)}$ for $i=1,\ldots,n$. Therefore the functions $\vf{y}_i$ must satisfy:
+        \begin{equation*}
+            \left\{
+            \begin{aligned}
+                {\vf{y}_1}'     & =\vf{y}_2                                                        \\
+                {\vf{y}_2}'     & =\vf{y}_3                                                        \\
+                                & \;\;\vdots                                                       \\
+                {\vf{y}_{n-1}}' & =\vf{y}_{n-2}                                                    \\
+                {\vf{y}_n}'     & =\vf{f}\left(t,\vf{y}_1(t),\vf{y}_2(t),\ldots,\vf{y}_n(t)\right) \\
+            \end{aligned}
+            \right.
+        \end{equation*}
+    \end{prop}
+    \begin{definition}
+        We say that an ode is \textit{autonomous} if it doesn't depend on the independent variable, that is, if it is of the form: $$\vf{x}'=\vf{f}(\vf{x})$$ Otherwise, we say that an ode is \textit{non-autonomous}.
+    \end{definition}
+    \begin{definition}
+        We say that an ode of order $n$ is \textit{linear} if it is of the form:
+        \begin{equation}\label{DE_linear0}
+            a_0(t)\vf{x}+a_1(t)\vf{x}'+\cdots+a_n(t)\vf{x}^{(n)}=\vf{b}(t)
+        \end{equation}
+        where $a_i\in\mathcal{C}(I,\RR)$ for $i=0,\ldots,n$ and $\vf{b}\in\mathcal{C}(I,\RR^m)$ are arbitrary functions which do not need to be linear. We say that the linear ode of \cref{DE_linear0} is \textit{homogeneous} if $\vf{b}(t)=\vf{0}$ $\forall t\in I$. We say that linear ode of \cref{DE_linear0} is of \textit{constant coefficients} if $a_i(t):=a_{i0}\in\RR$ $\forall t\in I$ and $\forall i=0,\ldots,n$.
+    \end{definition}
+    \begin{definition}[Initial value problem]
+        Let $U\subseteq\RR\times\RR^n$ be an open set and $\vf{f}:U\rightarrow\RR^n$ be a function. Given $(t_0,\vf{x}_0)\in U$, the \textit{initial value problem (ivp)} (or \textit{Cauchy problem}) consists in finding a solution of the ode $$\vf{x}'=\vf{f}(t,\vf{x})$$ with \textit{initial conditions} $\vf{x}(t_0)=\vf{x}_0$.
+    \end{definition}
+    \subsubsection{Methods for solving odes}
+    \begin{method}[Separation of variables]
+        Let $f:(a,b)\rightarrow\RR$, $g:(c,d)\rightarrow\RR$ be continuous functions such that $f(x)\ne 0$ $\forall x\in (a,b)$. Consider the ode $x'=f(x)g(t)$. To find the solution of this ode, proceed as follows:
+        $$x'=f(x)g(t)\iff \int\frac{\dd x}{f(x)}=C+\int g(t)\dd t$$ where the constant $C$ is determined with the initial conditions of the ode.
+    \end{method}
+    \begin{method}[Variation of constants]
+        Let $I\subset \RR$ be an interval, $a,b\in\mathcal{C}(I,\RR)$. Consider the ode $x'=a(t)x+b(t)$. To find the solution of this ode, proceed as follows:
+        \begin{enumerate}
+            \item Find the solution of the associated homogeneous system with the separation of variables method. Let's say that is $\varphi(t)c$, where $c\in\RR$.
+            \item Try to find a general solution of the form $\varphi(t)c(t)$:
+                  \begin{multline*}
+                      \left(\varphi(t)c(t)\right)'=a(t)\varphi(t)c(t)+b(t)\iff\\\varphi(t)'c(t)+\varphi(t)c(t)'=a(t)\varphi(t)c(t)+b(t)\iff\\\varphi(t)c(t)'=b(t)\iff c(t)=d+\int\varphi(t)^{-1}b(t)\dd t
+                  \end{multline*}
+                  where $d\in\RR$. Hence, the general solution will be: $$\varphi(t)\left(d+\int\varphi(t)^{-1}b(t)\dd t\right)$$
+        \end{enumerate}
+    \end{method}
+    \begin{method}[Reducible linear ode of second order]
+        Let $I\subset \RR$ be an interval, $a,b,c,d\in\mathcal{C}(I,\RR)$. Consider the system of odes:
+        \begin{equation}\label{DE_ode-complex}
+            \left\{
+            \begin{aligned}
+                x'=a(t)x-b(t)y+c(t) \\
+                y'=b(t)x+a(t)y+d(t)
+            \end{aligned}
+            \right.
+        \end{equation}
+        In order to find the solution of this ode, consider the change of variable $z=x+\ii y$. Then, \cref{DE_ode-complex} becomes:
+        $$z'=(1+\ii)z+c(t)+\ii d(t)$$ which is a linear ode of order 1 and can be easily solved.
+    \end{method}
+    \begin{method}[Bernoulli differential equation]
+        Let $p,q\in\mathcal{C}((a,b),\RR)$ and $\alpha\in\RR$. Consider the \textit{Bernoulli differential equation}:
+        \begin{equation}\label{DE_bernoulli}
+            x'+p(t)x=q(t)x^\alpha
+        \end{equation}
+        If $\alpha=0,1$ the ode is linear. So suppose $\alpha\ne 0,1$. In order to solve it, consider the change of variable $y=x^{1-\alpha}$. Then, \cref{DE_bernoulli} becomes:
+        $$y'+(1-\alpha)p(t)y=(1-\alpha)q(t)$$  which is a linear ode of order 1 and can be easily solved.
+    \end{method}
+    \begin{method}[Riccati differential equation]
+        Let $q_0,q_1,q_2\in\mathcal{C}((a,b),\RR)$. Consider the \textit{Riccati differential equation}:
+        \begin{equation}\label{DE_riccati}
+            x'=q_0(t)+q_1(t)x+q_2(t)x^2
+        \end{equation}
+        Suppose we have found a particular solution $x_1(t)$ of the ode of \cref{DE_riccati}. In order to find the general solution, consider the change of variable $x=x_1(t)+\frac{1}{y}$. Then, \cref{DE_riccati} becomes:
+        $$y'+[q_1(t)+2q_2(t)x_1(t)]y=-q_2(t)$$ which is a linear ode of order 1 and can be easily solved.
+    \end{method}
+    \begin{method}[Integrating factor]
+        Consider the ode: $$p(t,x)+q(t,x)x'=0\iff p(t,x)\dd t+q(t,x)\dd x=0$$ where $p,q\in\mathcal{C}^1(U,\RR)$ and $U\subseteq\RR^2$ is an open set.
+        An \textit{integrating factor} $\mu(t,x)\in\mathcal{C}^1(U)$, $\mu(t,x)\ne 0$, is a function so that $$\mu(t,x)p(t,x)\dd t+\mu(t,x)q(t,x)\dd x$$ is an exact differential ($\dd \Phi(t,x)$) of a function $\Phi(t,x)$, that is:
+        \begin{gather}
+            \label{DE_ifactor1}\frac{\partial\Phi}{\partial t}(t,x)=\mu(t,x)p(t,x)\\
+            \label{DE_ifactor2}\frac{\partial\Phi}{\partial x}(t,x)=\mu(t,x)q(t,x)
+        \end{gather}
+        So we need that: $$\frac{\partial}{\partial x}\left(\mu(t,x)p(t,x)\right)=\frac{\partial}{\partial t}\left(\mu(t,x)q(t,x)\right)$$
+        From here, in certain cases, we will be able to find $\mu(x,y)$ and, therefore, $\Phi(t,x)$ by integrating \cref{DE_ifactor1,DE_ifactor2}.
+    \end{method}
+    \subsection{Existence and uniqueness of solutions}
+    \begin{prop}
+        Let $f:(a,b)\rightarrow\RR$ be a continuous function such that $f(x)\ne 0$ $\forall x\in(a,b)$. Then, the ivp
+        $$
+            \left\{
+            \begin{aligned}
+                 & x'      =f(x) \\
+                 & x(t_0)  =x_0
+            \end{aligned}
+            \right.
+        $$
+        has a unique solution $\forall t_0\in\RR$ and $\forall x_0\in(a,b)$.
+    \end{prop}
+    \begin{prop}
+        Let $f:(a,b)\rightarrow\RR$, $g:(c,d)\rightarrow\RR$ be continuous functions such that $f(x)\ne 0$ $\forall x\in(a,b)$. Then, the ivp
+        $$\left\{
+            \begin{aligned}
+                 & x'      =f(x)g(t) \\
+                 & x(t_0)  =x_0
+            \end{aligned}
+            \right.$$
+        has a unique solution $\forall t_0\in(c,d)$ and $\forall x_0\in(a,b)$.
+    \end{prop}
+    \begin{prop}
+        Let $I\subseteq\RR$ be an interval and $a:I\rightarrow\RR$ and $b:I\rightarrow\RR$ be continuous functions. Then, the ivp
+        $$\left\{
+            \begin{aligned}
+                 & x'      =a(t)x+b(t) \\
+                 & x(t_0)  =x_0
+            \end{aligned}
+            \right.$$
+        has a unique solution $\forall t_0\in I$ and $\forall x_0\in\RR$\footnote{See \cref{DE_sol-lin} for the solution.}.
+    \end{prop}
+    \subsubsection{Lipschitz continuity}
+    \begin{definition}
+        Let $\vf{f}:U\subseteq\RR\times\RR^n\rightarrow\RR^m$ be a function. We say that $\vf{f}$ is \textit{Lipschitz continuous with respect to the second variable} if $\exists L\in\RR_{>0}$ such that: $$\|\vf{f}(t,x)-\vf{f}(t,y)\|\leq L\|x-y\|\qquad\forall (t,x),(t,y)\in U$$
+    \end{definition}
+    \begin{definition}
+        Let $\vf{f}:U\subseteq\RR\times\RR^n\rightarrow\RR^m$ be a function. We say that $\vf{f}$ is \textit{locally Lipschitz continuous with respect to the second variable} if $\forall (t_0,\vf{x}_0)\in U$ there exists a neighbourhood $V$ of $(t_0,\vf{x}_0)$ such that $f|_V$ is Lipschitz continuous with respect to the second variable.
+    \end{definition}
+    \begin{prop}
+        Let $U\subseteq\RR\times\RR^n$ be an open set and $\vf{f}:U\subseteq\RR\times\RR^n\rightarrow\RR^n$ be a function. Then:
+        \begin{enumerate}
+            \item If $\vf{f}$ is locally Lipschitz continuous with respect to the second variable, then it is continuous with respect to the second variable.
+            \item If $\vf{f}$ is Lipschitz continuous with respect to the second variable, then it is uniformly continuous with respect to the second variable.
+            \item If $\vf{f}$ is continuous, $U$ is compact and $\vf{f}$ is locally Lipschitz continuous with respect to the second variable, then $\vf{f}$ is Lipschitz continuous with respect to the second variable.
+        \end{enumerate}
+    \end{prop}
+    \begin{prop}
+        Let $U\subseteq\RR\times\RR^n$ be an open and convex set and $\vf{f}:U\subseteq\RR\times\RR^n\rightarrow\RR^n$ be a function of class $\mathcal{C}^1$. Then:
+        \begin{enumerate}
+            \item $\vf{f}$ is locally Lipschitz continuous with respect to the second variable.
+            \item $\vf{f}$ is Lipschitz continuous with respect to the second variable if and only if $\vf{Df}$ is bounded.
+        \end{enumerate}
+    \end{prop}
+    \subsubsection{Picard theorem}
+    \begin{prop}
+        Let $U\subseteq\RR\times\RR^n$ be an open set and $\vf{f}:U\rightarrow\RR^n$ be a continuous function. Let $I\subseteq\RR$ be an open interval, $t_0\in I$ and $\vf{x}_0\in\RR^n$ be such that $(t_0,\vf{x}_0)\in U$. Then, a continuous function $\vf{\varphi}:I\rightarrow\RR^n$ is a solution of the ivp
+        \begin{equation}
+            \left\{
+            \begin{aligned}
+                 & \vf{x}'=\vf{f}(t,\vf{x}) \\
+                 & \vf{x}(t_0)=\vf{x}_0
+            \end{aligned}
+            \right.
+            \label{DE_ivp}
+        \end{equation}
+        if and only if $$\vf{\varphi}(t)=\vf{x}_0+\int_{t_0}^tf(s,\vf{\varphi}(s))\dd s\quad\forall t\in I$$
+    \end{prop}
+    \begin{definition}
+        An \textit{operator} is a function whose domain is a set of functions.
+    \end{definition}
+    \begin{definition}
+        Let $U\subseteq\RR\times\RR^n$ be an open set, $(t_0,\vf{x}_0)\in U$, $\vf{f}:U\rightarrow\RR^n$ be a continuous function and $I$ be a closed interval. We define the operator
+        $$
+            \function{\vf{T}}
+            {\mathcal{C}(I,\RR^n)}
+            {\mathcal{C}(I,\RR^n)}
+            {\vf{\varphi}}
+            {\displaystyle\vf{T}\vf{\varphi}(t)=\vf{x}_0+\int_{t_0}^tf(s,\vf{\varphi}(s))\dd s\footnotemark}
+        $$
+    \end{definition}
+    \begin{theorem}[Banach fixed-point theorem]\footnotetext{Note that the fixed points of this operator are precisely the solutions of the ivp of \cref{DE_ivp}.}
+        Let $(X,d)$ be a complete metric space and $f:(X,d)\rightarrow (X,d)$ be a contraction. Then, $f$ has a unique fixed point $p\in X$\footnote{Furthermore, $p$ can be found as follows: start with an arbitrary element $x_0\in X$ and define a sequence $(x_n)$ by $x_n=f(x_{n-1})$ for $n\geq 1$. Then, $\displaystyle\lim_{n\to\infty} x_n=p$.}.
+    \end{theorem}
+    \begin{corollary}
+        Let $(X,d)$ be a complete metric space and $f:(X,d)\rightarrow (X,d)$ be a function. If there exists $m\in\NN$ such that $f^m$ is a contraction, then $f$ has a unique fixed point $p\in X$.
+    \end{corollary}
+    \begin{definition}
+        Let $t_0\in\RR$, $\vf{x}_0\in\RR^n$ and $a,b\in\RR_{>0}$. We define the following sets: $$I_a(t_0):=[t_0-a,t_0+a]\subset\RR\;\;\text{and}\;\;\overline{B}_{b}(\vf{x}_0):=\overline{B}(\vf{x}_0,b)\subset\RR^n$$
+    \end{definition}
+    \begin{theorem}[Picard theorem]\label{DE_picard}
+        Let $t_0\in\RR$, $\vf{x}_0\in\RR^n$, $a,b\in\RR_{>0}$, $\vf{f}:I_a(t_0)\times\overline{B}_{b}(\vf{x}_0)\subset\RR\times\RR^n\rightarrow\RR^n$ be a continuous function and Lipschitz continuous with respect to the second variable, and define: $$M:=\max\{\|\vf{f}(t,x)\|:(t,x)\in I_a(t_0)\times\overline{B}_{b}(\vf{x}_0)\}$$ Then, the ivp of \cref{DE_ivp} has a unique solution $\vf{\varphi}:I_\alpha(t_0)\rightarrow\overline{B}_{b}(\vf{x}_0)$, where $\alpha:=\min\left\{a,\frac{b}{M}\right\}$.
+    \end{theorem}
+    \begin{corollary}
+        Let $I\subset \RR$ be a closed interval, $t_0\in I$, $\vf{x}_0\in\RR^n$ and $\vf{f}:I\times\RR^n\rightarrow\RR^n$ be a continuous function and Lipschitz continuous with respect to the second variable. Then, the ivp of \cref{DE_ivp} has a unique solution $\vf{\varphi}:I\rightarrow\RR^n$.
+    \end{corollary}
+    \begin{corollary}[Picard iteration process]
+        Suppose we want to solve the ivp of \cref{DE_ivp}. That is, we look for a solution $\vf{\varphi}(t)$. Let $\vf{\varphi}_0$ be a fixed function (usually chosen to be $\vf{\varphi}_0=\vf{x}_0$) and define
+        $$\vf{\varphi}_{n+1}(t)=\vf{T}\vf{\varphi}_n(t)=\vf{x}_0+\int_{t_0}^tf(s,\vf{\varphi}_n(s))\dd s$$
+        for all $n\geq 0$. Then, $\displaystyle\vf{\varphi}(t)=\lim_{n\to\infty}\vf{\varphi}_n(t)$.
+    \end{corollary}
+    \begin{corollary}
+        Let $U\subseteq\RR\times\RR^n$ be an open set and $\vf{f}:U\rightarrow\RR^n$ be a continuous function and locally Lipschitz continuous with respect to the second variable. Then, $\forall(t_0,\vf{x}_0)\in U$, there exists $\alpha(t_0,\vf{x}_0)\in\RR_{>0}$ and a neighbourhood $V_{t_0,\vf{x}_0}=I_{a(t_0,\vf{x}_0)}(t_0)\times\overline{B}_{b(t_0,\vf{x}_0)}(\vf{x}_0)$ of $(t_0,\vf{x}_0)$ in $U$ such that the ivp of \cref{DE_ivp} has a unique solution $\vf{\varphi}_{t_0,\vf{x}_0}$ defined on $I_{\alpha(t_0,\vf{x}_0)}\subseteq I_{a(t_0,\vf{x}_0)}$ with $\graph(\vf{\varphi}_{t_0,\vf{x}_0})\subset V_{t_0,\vf{x}_0}$.
+    \end{corollary}
+    \begin{prop}
+        Let $I\subseteq\RR$ be an interval and $\vf{f}:I\times\RR^n\rightarrow\RR^n$ be a continuous function and Lipschitz continuous with respect to the second variable. Then, $\forall(t_0,\vf{x}_0)\in I\times\RR^n$ there is a unique solution of the ivp of \cref{DE_ivp} defined on $I$.
+    \end{prop}
+    \begin{corollary}
+        Let $I\subseteq\RR$ be an interval and $\vf{A}:I\rightarrow\mathcal{L}(\RR^n,\RR^n)$ and $\vf{b}:I\rightarrow\RR^n$ be continuous functions. Then, for all $(t_0,\vf{x}_0)\in I\times\RR^n$ the ivp
+        $$
+            \left\{
+            \begin{aligned}
+                 & \vf{x}'=\vf{A}(t)\vf{x}+\vf{b}(t) \\
+                 & \vf{x}(t_0)=\vf{x}_0
+            \end{aligned}
+            \right.
+        $$
+        has a unique solution defined on $I$.
+    \end{corollary}
+    \begin{theorem}
+        Let $f:[t_0,t_1]\times\RR\rightarrow\RR$ be a continuous function and $x_0\in \RR$. Suppose that $f$ is decreasing with respect to the second variable. Then, the ivp
+        \begin{equation*}
+            \left\{
+            \begin{aligned}
+                 & x'=f(t,x)  \\
+                 & x(t_0)=x_0
+            \end{aligned}
+            \right.
+        \end{equation*}
+        has a unique solution.
+    \end{theorem}
+    \subsubsection{Peano theorem}
+    \begin{definition}
+        Let $(X,d)$ be a metric space and $F\subset\mathcal{C}(X,\RR^n)$ be a subset. We say that $F$ is \textit{pointwise bounded} if: $$\forall x\in X\;\exists M_x>0\text{ such that }\|\vf{f}(x)\|\leq M_x\quad\forall\vf{f}\in F$$
+        We say that $F$ is \textit{uniformly bounded} if: $$\exists M>0\text{ such that }\|\vf{f}(x)\|\leq M \quad\forall\vf{f}\in F\text{ and }\forall x\in X$$
+    \end{definition}
+    \begin{definition}
+        Let $(X,d)$ be a metric space and $F\subset\mathcal{C}(X,\RR^n)$ be a subset. We say that $F$ is \textit{equicontinuous at a point $x_0\in X$} if $\forall \varepsilon>0$ $\exists \delta>0$ such that $\forall x\in X$ with $d(x,x_0)<\delta$ we have: $$\|\vf{f}(x)-\vf{f}(x_0)\|<\varepsilon\quad\forall\vf{f}\in F$$
+        We say that $F$ is \textit{pointwise equicontinuous} if it is equicontinuous at each point of $X$. Finally, we say that $F$ is \textit{uniformly equicontinuous} if $\forall \varepsilon>0$ $\exists \delta>0$ such that $\forall x,y\in X$ with $d(x,y)<\delta$ we have: $$\|\vf{f}(x)-\vf{f}(y)\|<\varepsilon\quad\forall\vf{f}\in F$$
+    \end{definition}
+    \begin{prop}
+        Let $(X,d)$ be a metric space and $F\subset\mathcal{C}_b(X,\RR^n)$ be a subset. Suppose that $\vf{f}$ is Lipschitz continuous for all $\vf{f}\in F$. Then, $F$ is uniformly equicontinuous.
+    \end{prop}
+    \begin{theorem}[Arzelà-Ascoli theorem]
+        Let $(X,d)$ be a compact metric space and $(\vf{f}_m)$ be a sequence of functions such that $\vf{f}_m\in\mathcal{C}(X,\RR^n)$ $\forall m\geq 1$. If the sequence is equicontinuous and pointwise bounded, then there exists a subsequence $(\vf{f}_{m_k})$ that converges on $\mathcal{C}(X,\RR^n)$.
+    \end{theorem}
+    \begin{corollary}
+        Let $(X,d)$ be a compact metric space, $D\subset\RR^n$ be a closed set and $(\vf{f}_m)$ be a sequence of functions such that $\vf{f}_m\in\mathcal{C}(X,D)$ $\forall m\geq 1$. If the sequence is equicontinuous and pointwise bounded, then there exists a subsequence $(\vf{f}_{m_k})$ that converges on $\mathcal{C}(X,D)$.
+    \end{corollary}
+    \begin{theorem}[Peano theorem]
+        Let $t_0\in\RR$, $\vf{x}_0\in\RR^n$, $a,b\in\RR_{>0}$, $\vf{f}:I_a(t_0)\times\overline{B}_{b}(\vf{x}_0)\subset\RR\times\RR^n\rightarrow\RR^n$ be a continuous function, and define: $$M:=\max\{\|\vf{f}(t,x)\|:(t,x)\in I_a(t_0)\times\overline{B}_{b}(\vf{x}_0)\}$$ Then, the ivp of \cref{DE_ivp} has at least one solution $\vf{\varphi}:I_\alpha(t_0)\rightarrow\RR^n$, where $\alpha:=\min\left\{a,\frac{b}{M}\right\}$.
+    \end{theorem}
+    \begin{corollary}
+        Let $U\subseteq\RR\times\RR^n$ be an open set, $K\subset U$ be a compact set and $\vf{f}:U\rightarrow\RR^n$ be a continuous function. Then, $\exists\alpha\in\RR_{>0}$ such that $\forall (t_0,\vf{x}_0)\in K$, the ivp of \cref{DE_ivp} has a solution defined in $I_\alpha(t_0)$.
+    \end{corollary}
+    \subsubsection{Maximal solutions}
+    \begin{definition}
+        Let $U\subseteq\RR\times\RR^n$ be an open set, $(t_0,\vf{x}_0)\in U$ and $\vf{f}:U\rightarrow\RR^n$ be a continuous function. We define the set $\mathcal{S}(U,\vf{f},t_0,\vf{x}_0)$ as:
+        \begin{multline*}
+            \mathcal{S}(U,\vf{f},t_0,\vf{x}_0):=\{(I,\vf{\varphi}):I\subseteq\RR\text{ is an interval},t_0\in I\\\text{and }\vf{\varphi}:I\rightarrow\RR^n\text{ is a solution of the ivp of \cref{DE_ivp}}\}
+        \end{multline*}
+    \end{definition}
+    \begin{definition}
+        We define the relation $\leq$ defined on $\mathcal{S}(U,\vf{f},t_0,\vf{x}_0)$ in the following way. For $(I,\vf{\varphi}),(J,\vf{\psi})\in \mathcal{S}(U,\vf{f},t_0,\vf{x}_0)$: $$(J,\vf{\psi})\leq (I,\vf{\varphi})\iff J\subset I\text{ and }\vf{\varphi}|_J=\vf{\psi}\footnote{It can be seen that $\leq$ is a partial (but not total) order relation.}$$ In this case, we say that $(I,\vf{\varphi})$ is an \textit{extension} of $(J,\vf{\psi})$.
+    \end{definition}
+    \begin{definition}
+        Let $(A,\leq )$ be a poset. Then, $m\in A$ is a \textit{maximal element} if and only if $\forall a\in A$ with $m \leq  a$ we have $m=a$.
+    \end{definition}
+    \begin{definition}
+        Consider the poset $(\mathcal{S}(U,\vf{f},t_0,\vf{x}_0),\leq)$. We say that a solution $(I,\vf{\varphi})$ is \textit{maximal} if for all extensions $(J,\vf{\psi})$ of $(I,\vf{\varphi})$ we have $I=J$ and $\vf{\varphi}=\vf{\psi}$.
+    \end{definition}
+    \begin{definition}
+        Let $(A,\leq )$ be a poset and $C\subseteq A$ be a subset of $A$. We say that $C$ is a \textit{chain} if it is totally ordered in the inherited order, that is, if it is partially ordered and $\forall x,y\in C$ we have either $x\leq y$ or $y\leq x$.
+    \end{definition}
+    \begin{definition}
+        Let $(A,\leq )$ be a poset, $x\in A$ and $B\subseteq A$ be a subset. $x$ is an \textit{upper bound of $B$} if and only if $b\leq x$ $\forall b\in B$.
+    \end{definition}
+    \begin{definition}
+        Let $(A,\leq )$ be a poset and $B\subseteq A$ be a subset. Then, $g\in A$ is a \textit{greatest element of $B$} if $g\in B$ and $\forall b\in B$ we have $b \leq  g$.
+    \end{definition}
+    \begin{lemma}[Zorn's lemma]
+        Let $(A,\leq )$ be a poset. If every chain $C\subseteq A$ has an upper bound in $A$, then $A$ contains at least one maximal element.
+    \end{lemma}
+    \begin{theorem}
+        Let $U\subseteq\RR\times\RR^n$ be an open set, $(t_0,\vf{x}_0)\in U$ and $\vf{f}:U\rightarrow\RR^n$ be a continuous function. Consider the poset $(\mathcal{S}(U,\vf{f},t_0,\vf{x}_0),\leq)$. Then, $\mathcal{S}(U,\vf{f},t_0,\vf{x}_0)$ has maximal elements. Furthermore, if $(I,\vf{\varphi})$ is a maximal solution, then $I$ is open.
+    \end{theorem}
+    \begin{prop}
+        Let $U\subseteq\RR\times\RR^n$ be an open set and $\vf{f}:U\rightarrow\RR^n$ be such that $\forall(t_0,\vf{x}_0)\in U$ the ivp of \cref{DE_ivp} has a unique solution defined in a neighbourhood of $t_0$. Then, $\forall(t_0,\vf{x}_0)\in U$ the ivp of \cref{DE_ivp} has a unique maximal solution.
+    \end{prop}
+    \begin{lemma}[Wintner lemma]
+        Let $U\subseteq\RR\times\RR^n$ be an open set, $\vf{f}:U\rightarrow\RR^n$ be a continuous function, $\vf{\varphi}:I\rightarrow\RR^n$ be a solution of $\vf{x}'=\vf{f}(t,\vf{x})$ and $(b,y)\in U$ be an accumulation point of $\vf{\varphi}$. Then, $\displaystyle\lim_{t\to b}\vf{\varphi}(t)=y$ and the solution can be extended up to $b$.
+    \end{lemma}
+    \begin{corollary}
+        Let $U\subseteq\RR\times\RR^n$ be an open set, $\vf{f}:U\rightarrow\RR^n$ be a continuous function and $\vf{\varphi}:(a,b)\rightarrow\RR^n$ be a maximal solution of $\vf{x}'=\vf{f}(t,\vf{x})$. If $b<\infty$, then for all compact set $K\subset U$, $\exists t_0<\infty$ such that $(t,\vf{\varphi}(t))\notin K$ $\forall t\in[t_0,b)$. In that case, we say that $\vf{\varphi}$ \textit{tends to the boundary} of $U$.
+    \end{corollary}
+    \subsection{Linear differential equations}
+    \begin{definition}
+        Let $I\subseteq\RR$ be an interval. A \textit{system of linear differential equations} is an expression of the form:
+        \begin{equation}\label{DE_linear}
+            \vf{x}'=\vf{A}(t)\vf{x}+\vf{b}
+        \end{equation}
+        where $\vf{A}:I\rightarrow\mathcal{L}(\RR^n,\RR^n)$ and $\vf{b}:I\rightarrow\RR^n$ are continuous functions.
+        We say that linear equation of \cref{DE_linear} is \textit{homogeneous} if $\vf{b}(t)=\vf{0}$ $\forall t\in I$. We say that linear equation of \cref{DE_linear} is of \textit{constant coefficients} if $\vf{A}(t)=\vf{A}$ $\forall t\in I$, where $\vf{A}\in\mathcal{M}_n(\RR)$.
+    \end{definition}
+    \begin{definition}
+        Let $I\subseteq\RR$ be an interval, $t_0\in I$, $\vf{x}_0\in\RR^n$ and consider the ode of \cref{DE_linear}. We define the \textit{flux of the linear ode} as the function:
+        $$
+            \function{\vf{\phi}}{I\times I\times \RR^n}{\RR^n}{(t,t_0,\vf{x}_0)}{\vf{\varphi}_{(t_0,\vf{x}_0)}(t)}
+        $$
+        where $\vf{\varphi}_{(t_0,\vf{x}_0)}$ is the solution of \cref{DE_linear} with initial conditions $(t_0,\vf{x}_0)$.
+    \end{definition}
+    \begin{prop}
+        Let $I\subseteq\RR$ be an interval and $a,b\in\mathcal{C}(I,\RR)$. Then, the general solution of the ivp
+        $$\left\{
+            \begin{aligned}
+                 & x'      =a(t)x+b(t) \\
+                 & x(t_0)  =x_0
+            \end{aligned}
+            \right.$$
+        is given by:
+        \begin{equation}\label{DE_sol-lin}
+            \varphi(t,t_0,x_0)=\exp{\int_{t_0}^ta(s)\dd s}\left(x_0+\int_{t_0}^tb(u)\exp{-\int_{t_0}^ua(s)\dd s}\dd u\right)
+        \end{equation}
+        for all $t\in I$.
+    \end{prop}
+    \subsubsection{Homogeneous systems}
+    \begin{theorem}
+        Let $I\subseteq\RR$ be an interval and $\vf{A}\in\mathcal{C}(I,\mathcal{L}(\RR^n))$. We define $\mathcal{A}_n$ as the set of all solutions of the linear ode:
+        \begin{equation}\label{DE_homo}
+            \vf{x}'=\vf{A}(t)\vf{x}
+        \end{equation} Then, $\mathcal{A}_n$ is a vector space of dimension $n$ and for each $t_0\in I$, the function
+        $$
+            \function{\vf{\xi}_{t_0}}{\RR^n}{\mathcal{A}_n}{\vf{x}_0}{\vf{\varphi}(\cdot,t_0,\vf{x}_0)}
+        $$
+        is an isomorphism.
+    \end{theorem}
+    \begin{corollary}
+        Let $I\subseteq\RR$ be an interval, $t_0\in I$, $(\vf{v}_1,\ldots,\vf{v}_n)$ be a basis of $\RR^n$ and $\vf{\varphi}_1,\ldots,\vf{\varphi}_n\in\mathcal{A}_n$ be such that: $$\vf{\varphi}_i=\vf{\xi}_{t_0}(\vf{v}_i)\quad\text{for } i=1,\ldots,n$$
+        Then, $(\vf{\varphi}_1,\ldots,\vf{\varphi}_n)$ is a basis of $\mathcal{A}_n$.
+    \end{corollary}
+    \begin{corollary}
+        Let $I\subseteq\RR$ be an interval and $\vf{\psi}\in\mathcal{A}_n$. Suppose $\exists t_0\in I$ such that $\vf{\psi} (t_0)=0$. Then, $\vf{\psi}=\vf{0}$.
+    \end{corollary}
+    \begin{corollary}
+        Let $I\subseteq\RR$ be an interval, $m,n\in\NN$ with $m\leq n$, $\vf{\varphi}_1,\ldots,\vf{\varphi}_m\in\mathcal{A}_n$ and $t_0\in I$ such that the vectors $\vf{\varphi}_1(t_0),\ldots,\vf{\varphi}_m(t_0)$ are linearly independent. Then, $\vf{\varphi}_1,\ldots,\vf{\varphi}_m$ are linearly independent.
+    \end{corollary}
+    \begin{corollary}
+        Let $s,t,w\in\RR$. Consider the function
+        $$
+            \function{\vf{\phi}_s^t}{\RR^n}{\RR^n}{\vf{x}}{(\vf{\xi}_s(\vf{x}))(t)}
+        $$
+        Then, $\vf{\phi}_s^t$ is an isomorphism and satisfies:
+        \begin{enumerate}
+            \item $\vf{\phi}_s^s=\vf{\id}$
+            \item $\vf{\phi}_s^t\circ\vf{\phi}_w^s=\vf{\phi}_w^t$
+            \item ${\left[\vf{\phi}_s^t\right]}^{-1}=\vf{\phi}_t^s$
+        \end{enumerate}
+    \end{corollary}
+    \begin{definition}
+        Let $I\subseteq \RR$ be an interval, $\vf{A}\in\mathcal{C}(I,\mathcal{L}(\RR^n))$ and $\vf{M}(t)=(m_{ij}(t))\in\mathcal{M}_n(\RR)$. We say that $\vf{M}(t)$ is a \textit{matrix solution} of the ode of \cref{DE_homo} if $\vf{\varphi}_j={(m_{1j}(t),\ldots,m_{nj}(t))}^\mathrm{T}\in\mathcal{A}_n$ for $j=1,\ldots,n$. We say that $\vf{M}(t)$ is a \textit{fundamental matrix solution} of the ode of \cref{DE_homo} if $\vf{M}(t)$ is a matrix solution and $\vf{\varphi}_1,\ldots,\vf{\varphi}_n$ are linearly independent.
+    \end{definition}
+    \begin{prop}
+        Let $I\subseteq \RR$ be an interval, $\vf{A}\in\mathcal{C}(I,\mathcal{L}(\RR^n))$ and $\vf{M}(t)\in\mathcal{M}_n(\RR)$. Then:
+        \begin{enumerate}
+            \item $\vf{M}(t)$ is a matrix solution of the ode of \cref{DE_homo} $\iff\vf{M}'(t)=\vf{A}(t)\vf{M}(t)$\footnote{By definition, if $\vf{M}(t)=(m_{ij}(t))$, then $\vf{M}'(t):=({m_{ij}}'(t))$.}.
+            \item $\vf{M}(t)$ is a matrix solution of the ode of \cref{DE_homo} $\iff\forall \vf{c}\in\RR^n$, $\vf{M}(t)\vf{c}\in\mathcal{A}_n$.
+            \item If $\vf{M}(t)$ is a matrix solution of the ode of \cref{DE_homo}, then $\forall \vf{C}\in\mathcal{M}_n(\RR)$, $\vf{M}(t)\vf{C}$ is a matrix solution of the ode of \cref{DE_homo}.
+            \item If $\vf{M}(t)$ is a fundamental matrix solution of the ode of \cref{DE_homo}, then $\det\vf{M}(t)\ne 0$ $\forall t\in I$.
+            \item $\vf{M}(t)$ is a fundamental matrix solution of the ode of \cref{DE_homo} $\iff\vf{M}(t)$ is a matrix solution of the ode of \cref{DE_homo} and $\exists t_0\in I$ such that $\det\vf{M}(t_0)\ne 0$.
+        \end{enumerate}
+    \end{prop}
+    \begin{prop}
+        Let $I\subseteq \RR$ be an interval, $\vf{A}\in\mathcal{C}(I,\mathcal{L}(\RR^n))$ and $\vf{\Phi}(t),\vf{\psi}(t)\in\mathcal{M}_n(\RR)$ be matrix solutions of the ode of \cref{DE_homo} such that $\vf{\Phi}(t)$ is fundamental. Then, $\exists! \vf{C}\in\mathcal{M}_n(\RR)$ such that $\vf{\psi}(t)=\vf{\Phi}(t)\vf{C}$. Moreover, $\vf{\psi}(t)$ is fundamental if and only if $\det \vf{C}\ne 0$.
+    \end{prop}
+    \subsubsection{Non-homogeneous linear systems}
+    \begin{prop}
+        Let $I\subseteq \RR$ be an interval, $\vf{A}\in\mathcal{C}(I,\mathcal{L}(\RR^n))$ and $\vf{b}\in\mathcal{C}(I,\RR^n)$. Suppose $\vf{\phi}(t,t_0,\vf{x}_0)$ is the flux of the ode of \cref{DE_linear}. Then, $$\vf{\phi}(t,t_0,\vf{x}_0)=\Phi(t)\left[{\Phi(t_0)}^{-1}\vf{x}_0+\int_{t_0}^t{\Phi(s)}^{-1}\vf{b}(s)\dd s\right]$$ where $\Phi(t)$ is a fundamental matrix of the associated homogeneous system.
+    \end{prop}
+    \begin{corollary}
+        Let $I\subseteq \RR$ be an interval, $\vf{A}\in\mathcal{C}(I,\mathcal{L}(\RR^n))$ and $\vf{b}\in\mathcal{C}(I,\RR^n)$. Then, the general solution $\vf{\varphi}(t)$ of the ode of \cref{DE_homo} can be written as: $$\vf{\varphi}(t)=\vf{\varphi}_\mathrm{h}(t)+\vf{\varphi}_\mathrm{p}(t)$$ where $\vf{\varphi}_\mathrm{h}(t)$ is the general solution to the associated homogeneous system and $\vf{\varphi}_\mathrm{p}(t)$ is a particular solution of \cref{DE_homo}.
+    \end{corollary}
+    \begin{prop}[Liouville's formula]
+        Let $I\subseteq \RR$ be an interval, $\vf{A}\in\mathcal{C}(I,\mathcal{L}(\RR^n))$, $\vf{\Phi}(t)\in\mathcal{M}_n(\RR)$ be a matrix solution of the ode of \cref{DE_homo} and $t_0\in I$. Then, for all $t\in I$ we have: $$\det(\Phi(t))=\det (\Phi(t_0))\exp{\int_{t_0}^t\trace(\vf{A}(s))\dd s}$$
+    \end{prop}
+    \subsubsection{Constant coefficients linear systems}
+    \begin{lemma}
+        Let $I\subseteq\RR$ be a compact interval and $\vf{f}:I\times\RR^n\rightarrow\RR^n$ be a continuous function and Lipschitz continuous with respect to the second variable. Let $\vf{\varphi}:I\rightarrow\RR^n$ be the solution of the ivp of \cref{DE_ivp}. Then, $\forall\vf{\psi}\in\mathcal{C}(I,\RR^n)$ the sequence $(\vf{T}^m\vf{\psi})$ converges uniformly to $\vf{\varphi}$ on $I$.
+    \end{lemma}
+    \begin{theorem}
+        Let $\vf{A}\in\mathcal{M}_n(\RR)$ and $\vf{\Phi}(t)\in\mathcal{M}_n(\RR)$ be a matrix solution of the ode
+        \begin{equation}\label{DE_coef-constants}
+            \vf{x}'=\vf{A}\vf{x}
+        \end{equation}
+        such that $\Phi(0)=\vf{I}_n$. Then:
+        \begin{enumerate}
+            \item For all $t,s\in\RR$, then $\Phi(t+s)=\Phi(t)\Phi(s)$.
+            \item ${\Phi(t)}^{-1}=\Phi(-t)$.
+            \item The series $\displaystyle\sum_{k=0}^\infty \frac{\vf{A}^kt^k}{k!}$ converges uniformly on compact sets.
+        \end{enumerate}
+    \end{theorem}
+    \begin{definition}
+        Let $\vf{A}\in\mathcal{M}_n(\RR)$ and $t\in\RR$. We define the \textit{matrix exponential} $\exp{\vf{A}t}$ as: $$\exp{\vf{A}t}=\sum_{k=0}^\infty\frac{\vf{A}^kt^k}{k!}$$
+    \end{definition}
+    \begin{prop}
+        Let $\vf{A}\in\mathcal{M}_n(\RR)$ and $t,s\in \RR$. Then, the matrix exponential $\exp{\vf{A}t}$ is a fundamental matrix of the ode of \cref{DE_coef-constants} and has the following properties:
+        \begin{enumerate}
+            \item $\exp{\vf{A}\cdot 0}=\vf{I}_n$
+            \item $\exp{\vf{A}(t+s)}=\exp{\vf{A}t}\exp{\vf{A}s}$
+            \item ${\left(\exp{\vf{A}t}\right)}^{-1}=\exp{-\vf{A}t}$
+            \item $\left(\exp{\vf{A}t}\right)'=\vf{A}\exp{\vf{A}t}=\exp{\vf{A}t}\vf{A}$
+            \item If $\vf{\Phi}(t)$ is an arbitrary fundamental matrix of the ode of \cref{DE_coef-constants}, then: $$\exp{\vf{A}t}=\vf{\Phi}(t){\vf{\Phi}(0)}^{-1}$$
+        \end{enumerate}
+    \end{prop}
+    \begin{lemma}
+        Let $\vf{A},\vf{B},\vf{C}\in\mathcal{M}_n(\RR)$. Then:
+        \begin{enumerate}
+            \item If $\vf{B}\vf{C}=\vf{C}\vf{A}$, then: $$\exp{\vf{B}t}\vf{C}=\vf{C}\exp{\vf{A}t}$$
+            \item If $\vf{A}\vf{B}=\vf{B}\vf{A}$, then: $$\exp{\vf{A}t}\vf{B}=\vf{B}\exp{\vf{A}t}\quad\text{and}\quad\exp{(\vf{A}+\vf{B})t}=\exp{\vf{A}t}\exp{\vf{B}t}$$
+        \end{enumerate}
+    \end{lemma}
+    \begin{corollary}
+        Let $t\in\RR$, $\vf{A}\in\mathcal{M}_n(\RR)$ and $\vf{J}\in\mathcal{M}_n(\RR)$ be the Jordan form of $\vf{A}$ such that $\vf{A}=\vf{C}\vf{J}\vf{C}^{-1}$ for some matrix $\vf{C}\in\GL_n(\RR)$. Then: $$\exp{\vf{A}t}=\vf{C}\exp{\vf{J}t}\vf{C}^{-1}$$
+    \end{corollary}
+    \begin{prop}
+        Let $\vf{A}\in\mathcal{M}_n(\RR)$ and $t\in\RR$. If $\lambda$ is an eigenvalue of $\vf{A}$ with associated eigenvector $\vf{v}$, then $\exp{\lambda t}$ is an eigenvalue of $\exp{\vf{A}t}$ with associated eigenvector $\vf{v}$. That is, $\exp{\vf{A}t}\vf{v}=\exp{\lambda t}\vf{v}$. Hence, $\vf{\varphi}(t)=\exp{\lambda t}\vf{v}$ is a solution of the ivp:
+        $$
+            \left\{
+            \begin{aligned}
+                 & \vf{x}'      =\vf{A}\vf{x} \\
+                 & \vf{x}(0)  =\vf{v}
+            \end{aligned}
+            \right.
+        $$
+    \end{prop}
+    \begin{corollary}
+        Let $\vf{A}\in\mathcal{M}_n(\RR)$ and $t\in\RR$ and consider the linear ode of \cref{DE_coef-constants}. If $(\vf{v}_1,\ldots,\vf{v}_n)$ is a basis of eigenvectors with associated eigenvalues $\lambda_1,\ldots,\lambda_n$, respectively, then $(\vf{\varphi}_1,\ldots,\vf{\varphi}_n)$, where $\vf{\varphi}_i=\exp{\lambda_it}\vf{v}_i$ for $i=1,\ldots,n$, is a basis of $\mathcal{A}_n$.
+    \end{corollary}
+    \begin{lemma}
+        Let $\vf{A}=\diag(\lambda_1,\ldots,\lambda_n)\in\mathcal{M}_n(\RR)$ and $t\in\RR$. Then:
+        $$\exp{\vf{A}t}=\diag(\exp{\lambda_1 t},\ldots,\exp{\lambda_n t})$$
+    \end{lemma}
+    \begin{prop}
+        Let $\vf{A}\in\mathcal{M}_n(\RR)$ and $\lambda=\alpha+\ii\beta\in\CC\setminus\RR$ be an eigenvalue of $\vf{A}$ with associated eigenvector $\vf{v}=\vf{u}+\ii\vf{w}\in\CC^n$. Then:
+        \begin{multline*}
+            \exp{\vf{A}t}\vf{v}=\exp{\vf{A}t}\vf{u}+\ii\exp{\vf{A}t}\vf{w}=\exp{\alpha t}\left[\cos(\beta t)\vf{u}-\sin(\beta t)\vf{w}\right]+\\+\ii\exp{\alpha t}\left[\sin(\beta t)\vf{u}+\cos(\beta t)\vf{w}\right]
+        \end{multline*}
+        and $\exp{\vf{A}t}\vf{u}$, $\exp{\vf{A}t}\vf{w}$ are linearly independent solutions of the ode of \cref{DE_coef-constants} with initial conditions $\vf{x}(0)=\vf{u}$ and $\vf{x}(0)=\vf{w}$, respectively.
+    \end{prop}
+    \begin{definition}
+        Let $\vf{A}\in\mathcal{M}_n(\RR)$. A vector $\vf{w}\in\RR^n$ is a \textit{generalized eigenvector of rank $m$ of $\vf{A}$ corresponding to the eigenvalue $\lambda\in\RR$} if: $${(\vf{A}-\lambda\vf{I}_n)}^m\vf{w}=0\quad\text{but}\quad{(\vf{A}-\lambda\vf{I}_n)}^{m-1}\vf{w}\ne 0$$
+        The set spanned by all generalized eigenvectors of $\lambda$ is called \textit{generalized eigenspace} of $\lambda$.
+    \end{definition}
+    \begin{prop}
+        Let $\vf{A}\in\mathcal{M}_n(\RR)$ and $\lambda\in\sigma(A)$. Then, the dimension of the generalized eigenspace is the algebraic multiplicity of $\lambda$.
+    \end{prop}
+    \begin{lemma}
+        Let $\vf{A}\in\mathcal{M}_n(\RR)$ and $\vf{v}_1\in\RR^n$ be an eigenvector of $\vf{A}$ with associated eigenvalue $\lambda$. We define $\vf{v}_2,\ldots,\vf{v}_m\in\RR^n$ in the following way: $$(\vf{A}-\lambda\vf{I}_n)\vf{v}_k=\vf{v}_{k-1}\qquad k=2,\ldots, m$$
+        That is, $\vf{v}_k$ is a generalized eigenvector of rank $k$ of $\vf{A}$ with associated eigenvalue $\lambda$. Then,
+        $$
+            \left\{
+            \begin{aligned}
+                \vf{\varphi}_1 & =\exp{\lambda t}\vf{v}_1                                                                  \\
+                \vf{\varphi}_2 & =\exp{\lambda t}\left(\vf{v}_2+t\vf{v}_1\right)                                           \\
+                \vf{\varphi}_3 & =\exp{\lambda t}\left(\vf{v}_3+t\vf{v}_2+\frac{t^2}{2}\vf{v}_1\right)                     \\
+                               & \;\;\vdots                                                                                \\
+                \vf{\varphi}_m & =\exp{\lambda t}\left(\vf{v}_m+t\vf{v}_{m-1}+\cdots+\frac{t^{m-1}}{(m-1)!}\vf{v}_1\right) \\
+            \end{aligned}
+            \right.
+        $$
+        are solutions of the ode of \cref{DE_coef-constants}. Furthermore, if $\vf{v}_1,\ldots,\vf{v}_k$ are linearly independent, then so are $\vf{\varphi}_1,\ldots,\vf{\varphi}_k$.
+    \end{lemma}
+    \begin{corollary}
+        Let $\vf{A}\in\mathcal{M}_n(\RR)$ and $\sigma(\vf{A})=\{\lambda_1,\ldots,\lambda_n\}$ be the spectrum of $\vf{A}$ such that:
+        \begin{itemize}
+            \item $\lambda_1,\ldots,\lambda_{2k}\in\CC\setminus\RR$, $\lambda_{k+i}=\overline{\lambda_i}$ and $\lambda_i=\alpha_i+\ii\beta_i$, $\alpha_i,\beta_i\in\RR$ for $i=1,\ldots,k$.
+            \item $\lambda_{2k+1},\ldots,\lambda_n\in\RR$
+        \end{itemize}
+        Then, the general solution of the ode of \cref{DE_coef-constants} is of the form:
+        \begin{multline*}
+            \vf{\varphi}(t)=\sum_{i=1}^k\exp{\alpha_i t}\left(\vf{P}_i(t)\cos(\beta_i t)+\vf{Q}_i(t)\sin(\beta_i t)\right)+\\+\sum_{i=2k+1}^n\exp{\lambda_i t}\vf{R}_i(t)
+        \end{multline*}
+        where $\vf{P}_i,\vf{Q}_i,\vf{R}_i\in\RR^n[t]$ and $\deg \vf{P}_i,\deg\vf{Q}_i,\deg\vf{R}_i<n$ $\forall i$.
+    \end{corollary}
+    \subsection{Dependence on initial conditions and parameters}
+    \begin{definition}
+        Let $U\subseteq\RR\times\RR^n\times\RR^p$ be an open set and $\vf{f}:U\rightarrow\RR^n$ be a continuous function. Suppose that the ivp:
+        \begin{equation}\label{DE_ivp_lambda}
+            \left\{
+            \begin{aligned}
+                 & \vf{x}'      =\vf{f}(t,\vf{x},\vf{\lambda}) \\
+                 & \vf{x}(t_0)  =\vf{x}_0
+            \end{aligned}
+            \right.
+        \end{equation}
+        has a unique maximal solution $\vf{\varphi}_{(t_0,\vf{x}_0,\vf{\lambda})}(t)$ defined on an interval $I_{(t_0,\vf{x}_0,\vf{\lambda})}$. We define the \textit{flux} of the ode $\vf{x}'=\vf{f}(t,\vf{x},\vf{\lambda})$ as: $$\function{\vf{\phi}}{I_{(t_0,\vf{x}_0,\vf{\lambda})}\times\RR\times\RR^n\times\RR^p}{\RR^n}{(t,t_0,\vf{x}_0,\vf{\lambda})}{\vf{\varphi}_{(t_0,\vf{x}_0,\vf{\lambda})}(t)}$$
+    \end{definition}
+    \subsubsection{Continuous and Lipschitz continuous dependence}
+    \begin{lemma}
+        Let $X$ be a compact metric space and $(\vf{\varphi}_m)$ be a sequence of functions $\vf{\varphi}_m:X\rightarrow\RR^n$ such that it is equicontinuous and pointwise bounded. Suppose that all convergent partial subsequences of $(\vf{\varphi}_m)$ have the same limit $\vf{\varphi}$. Then, $(\vf{\varphi}_m)$ converges uniformly to $\vf{\varphi}$.
+    \end{lemma}
+    \begin{prop}
+        Let $U\subseteq\RR\times\RR^n$ be an open set and $\vf{f}_m:U\rightarrow\RR^n$ be continuous function for $m\in\NN$ and such that for all compact $K\subset U$, the sequence $(\vf{f}_m|_K)$ converge uniformly to a function $\vf{f}$. Let $((t_m,\vf{x}_m))\subset U$ be a sequence such that $\displaystyle\lim_{m\to\infty}(t_m,\vf{x}_m)=(t_0,\vf{x}_0)$. Suppose that for all $m\geq 0$ the ivp
+        \begin{equation*}
+            \left\{
+            \begin{aligned}
+                 & \vf{x}'      =\vf{f}_m(t,\vf{x}) \\
+                 & \vf{x}(t_m)  =\vf{x}_m
+            \end{aligned}
+            \right.
+        \end{equation*}
+        has a unique maximal solution $\vf{\varphi}_m$ defined on $I_m$. Then, for all $[a,b]\subset I_0$ with $t_0\in(a,b)$, $\exists m_0\in\NN$ such that $[a,b]\subset I_m$ $\forall m>m_0$. Furthermore, the sequence $\left(\vf{\varphi}_m|_{[a,b]}\right)_{m>m_0}$ converges uniformly to $\vf{\varphi}|_{[a,b]}$.
+    \end{prop}
+    \begin{theorem}
+        Let $U\subseteq\RR\times\RR^n$ be an open set and $\vf{f}:U\rightarrow\RR^n$ be a continuous function. Suppose that each ivp of the form of \cref{DE_ivp} has a unique maximal solution. Then, the flux $\vf{\phi}(t,t_0,\vf{x}_0)$ is a continuous function defined in an open set.
+    \end{theorem}
+    \begin{theorem}
+        Let $U\subseteq\RR\times\RR^n\times\RR^p$ be an open set and $\vf{f}:U\rightarrow\RR^n$ be a continuous function. Suppose that each ivp of the form of \cref{DE_ivp_lambda} has a unique maximal solution. Then, the flux $\vf{\phi}(t,t_0,\vf{x}_0,\vf{\lambda})$ is a continuous function defined in an open set $V\subseteq I_{(t_0,\vf{x}_0,\vf{\lambda})}\times\RR\times\RR^n\times\RR^p$.
+    \end{theorem}
+    \begin{lemma}[Grönwall's lemma]
+        Let $u,v,w:[a,b)\rightarrow\RR$ be continuous functions such that $v(t)\geq 0$ $\forall t\in[a,b)$ and satisfying: $$u(t)\leq w(t)+\int_a^tv(s)u(s)\dd s\quad\forall t\in[a,b)$$
+        Then: $$u(t)\leq w(t)+\int_a^tw(s)v(s)\exp{\int_s^tv(r)\dd r}\dd s\quad\forall t\in[a,b)$$
+        If, moreover, $w\in\mathcal{C}^1((a,b))$, then: $$u(t)\leq w(a)\exp{\int_a^tv(r)\dd r}+\int_a^tw'(s)\exp{\int_s^tv(r)\dd r}\dd s\quad\forall t\in[a,b)$$
+    \end{lemma}
+    \begin{prop}
+        Let $U\subseteq\RR\times\RR^n$ be an open set and $\vf{f}:U\rightarrow\RR^n$ be a continuous function and Lipschitz continuous with respect to the second variable with Lipschitz constant $L$. Let $\vf{\phi}$ be the flux of the ode $\vf{x}'=\vf{f}(t,\vf{x})$. Then, $\forall (t_0,\vf{x}_1),(t_0,\vf{x}_2)\in U$ and $\forall t\in I_{(t_0,\vf{x}_1)}\cap I_{(t_0,\vf{x}_2)}$, we have:
+        $$\|\vf{\phi}(t,t_0,\vf{x}_2)-\vf{\phi}(t,t_0,\vf{x}_1)\|\leq\exp{L|t-t_0|}\|\vf{x}_2-\vf{x}_1\|$$
+        Thus, $\vf{\phi}$ is locally Lipschitz continuous with respect to the third variable.
+    \end{prop}
+    \subsubsection{Differenciable dependence}
+    \begin{theorem}[Dependence on $\vf{x}_0$]
+        Let $U\subseteq\RR\times\RR^n\times\RR^p$ be an open set and $\vf{f}:U\rightarrow\RR^n$ be a continuous function and of class $\mathcal{C}^1$ with respect to the second variable. Suppose that the flux $\vf{\phi}(t,t_0,\vf{x}_0,\vf{\lambda})$ of $\vf{x}'=\vf{f}(t,\vf{x},\vf{\lambda})$ is defined on an open set $V\subseteq\RR\times\RR\times\RR^n\times\RR^p$. Then, $\forall (t,t_0,\vf{x}_0,\vf{\lambda})\in V$, $\vf{\phi}$ is differentiable with respect to $\vf{x}_0$ and $\vf{D}_3\vf{\phi}(t,t_0,\vf{x}_0,\vf{\lambda})$\footnote{Here, $\vf{D}_3\vf{\phi}(t,t_0,\vf{x}_0,\vf{\lambda})=\frac{\partial\vf{\phi}}{\partial \vf{x}_0}(t,t_0,\vf{x}_0,\vf{\lambda})$ denotes the matrix $\left(\frac{\partial\vf{\phi}_i}{\partial{\vf{x}_0}_j}(t,t_0,\vf{x}_0,\vf{\lambda})\right)\in\mathcal{M}_n(\RR)$, where ${\vf{x}_0}_j$ denotes the $j$-th component of $\vf{x}_0$ and $\vf{\phi}_i(t,t_0,\vf{x}_0,\vf{\lambda})$ denotes the $i$-th component of $\vf{\phi}(t,t_0,\vf{x}_0,\vf{\lambda})$.} is continuous on $V$. Furthermore, $\vf{D}_3\vf{\phi}(t,t_0,\vf{x}_0,\vf{\lambda})$ satisfies the following ivp:
+        \begin{equation*}
+            \left\{
+            \begin{aligned}
+                 & \vf{M}'      =\vf{D}_2\vf{f}(t,\vf{\phi}(t,t_0,\vf{x}_0,\vf{\lambda}),\vf{\lambda})\vf{M} \\
+                 & \vf{M}(t_0)  =\vf{I}_n
+            \end{aligned}
+            \right.
+        \end{equation*}
+        or, equivalently, $\frac{\partial\vf{\phi}}{\partial {\vf{x}_0}_i}(t,t_0,\vf{x}_0,\vf{\lambda})=\vf{D}_3\vf{\phi}(t,t_0,\vf{x}_0,\vf{\lambda})\vf{e}_i$ satisfies the following ivp:
+        $$
+            \left\{
+            \begin{aligned}
+                 & \vf{y}'      =\vf{D}_2\vf{f}(t,\vf{\phi}(t,t_0,\vf{x}_0,\vf{\lambda}),\vf{\lambda})\vf{y} \\
+                 & \vf{y}(t_0)  =\vf{e}_i
+            \end{aligned}
+            \right.\quad\text{for }i=1,\ldots,n
+        $$
+        These kind of equations are called \textit{variational equations}.
+    \end{theorem}
+    \begin{theorem}[Dependence on $t_0$]
+        Let $U\subseteq\RR\times\RR^n\times\RR^p$ be an open set and $\vf{f}:U\rightarrow\RR^n$ be a continuous function and of class $\mathcal{C}^1$ with respect to the second variable. Suppose that the flux $\vf{\phi}(t,t_0,\vf{x}_0,\vf{\lambda})$ of $\vf{x}'=\vf{f}(t,\vf{x},\vf{\lambda})$ is defined on an open set $V\subseteq\RR\times\RR\times\RR^n\times\RR^p$. Then, $\forall (t,t_0,\vf{x}_0,\vf{\lambda})\in V$, $\vf{\phi}$ is differentiable with respect to $t_0$ and $\vf{D}_2\vf{\phi}(t,t_0,\vf{x}_0,\vf{\lambda})$ is continuous on $V$. Furthermore, $\vf{D}_2\vf{\phi}(t,t_0,\vf{x}_0,\vf{\lambda})$ satisfies the following ivp:
+        \begin{equation*}
+            \left\{
+            \begin{aligned}
+                 & \vf{y}'      =\vf{D}_2\vf{f}(t,\vf{\phi}(t,t_0,\vf{x}_0,\vf{\lambda}),\vf{\lambda})\vf{y} \\
+                 & \vf{y}(t_0)  = -\vf{f}(t_0,\vf{x}_0,\vf{\lambda})
+            \end{aligned}
+            \right.
+        \end{equation*}
+    \end{theorem}
+    \begin{theorem}[Dependence on $\vf{\lambda}$]
+        Let $U\subseteq\RR\times\RR^n\times\RR^p$ be an open set and $\vf{f}:U\rightarrow\RR^n$ be a continuous function and of class $\mathcal{C}^1$ with respect to the second and third variable. Suppose that the flux $\vf{\phi}(t,t_0,\vf{x}_0,\vf{\lambda})$ of $\vf{x}'=\vf{f}(t,\vf{x},\vf{\lambda})$ is defined on an open set $V\subseteq\RR\times\RR\times\RR^n\times\RR^p$. Then, $\forall (t,t_0,\vf{x}_0,\vf{\lambda})\in V$, $\vf{\phi}$ is differentiable with respect to $\vf{\lambda}$ and $\vf{D}_4\vf{\phi}(t,t_0,\vf{x}_0,\vf{\lambda})$ is continuous on $V$. Furthermore, $\vf{D}_4\vf{\phi}(t,t_0,\vf{x}_0,\vf{\lambda})$ satisfies the following ivp:
+        \begin{equation*}
+            \left\{
+            \begin{aligned}
+                 & \vf{M}'      =\vf{D}_2\vf{f}(t,\vf{\phi}(t,t_0,\vf{x}_0,\vf{\lambda}),\vf{\lambda})\vf{M}+ \vf{B} \\
+                 & \vf{M}(t_0)  =\vf{0}
+            \end{aligned}
+            \right.
+        \end{equation*}
+        where $\vf{B}=\vf{D}_3\vf{f}(t,\vf{\phi}(t,t_0,\vf{x}_0,\vf{\lambda}),\vf{\lambda})$. Equivalently, $\frac{\partial\vf{\phi}}{\partial \vf{\lambda}_i}(t,t_0,\vf{x}_0,\vf{\lambda})$ satisfies the ivp:
+        $$
+            \left\{
+            \begin{aligned}
+                 & \vf{y}'      =\vf{D}_2\vf{f}(t,\vf{\phi}(t,t_0,\vf{x}_0,\vf{\lambda}),\vf{\lambda})\vf{y}+\vf{B}\vf{e}_i \\
+                 & \vf{y}(t_0)  =\vf{0}
+            \end{aligned}
+            \right.\quad\text{for }i=1,\ldots,n
+        $$
+    \end{theorem}
+    \subsubsection{Higher order dependence}
+    \begin{theorem}
+        Let $U\subseteq\RR\times\RR^n$ be an open set and $\vf{f}:U\rightarrow\RR^n$ be a continuous function and of class $\mathcal{C}^k$, $k\in\NN$, with respect to the second variable. Suppose that the flux $\vf{\phi}(t,t_0,\vf{x}_0)$ of $\vf{x}'=\vf{f}(t,\vf{x})$ is defined on an open set $V\subseteq\RR\times\RR\times\RR^n$. Then, $\vf{\phi}(t,t_0,\vf{x}_0)$ is of class $\mathcal{C}^k$ on $V$.
+    \end{theorem}
+    \subsection{Qualitative theory}
+    \subsubsection{Introduction to dynamical systems}
+    \begin{definition}
+        A \textit{dynamical system} is a triplet $(G,X,\Psi)$, where $G$ is a topological abelian group\footnote{That is, $G$ is an abelian group with an inherit topological structure.}, $X$ is a topological space and $\Psi:G\times X\rightarrow X$ is a function such that:
+        \begin{itemize}
+            \item $\Psi$ is continuous.
+            \item $\Psi(0,x)=x$ $\forall x\in X$.
+            \item $\Psi(t,\Psi(s,x))=\Psi(t+s,x)$ $\forall s,t\in G$ and $\forall x\in X$.
+        \end{itemize}
+        We say that a dynamical system $(G,X,\Psi)$ is \textit{discrete} if $G=\ZZ$ and we say that it is \textit{continuous} if $G=\RR$.
+    \end{definition}
+    \begin{definition}
+        Let $(G,X,\Psi)$ be a dynamical system and $x\in X$. The \textit{orbit} through $x$ is defined as: $$\gamma(x)=\gamma_{\Psi}(x):=\{\Psi(t,x):t\in G\}\footnote{In general, if the context is clear we will use the notation $\gamma(x)$ instead of $\gamma_{\Psi}(x)$.}$$ Moreover if $G=\ZZ$ or $G=\RR$ we define the \textit{positive semi-orbit} through $x$ and the \textit{negative semi-orbit} through $x$ as the following respective sets:
+        \begin{gather*}
+            \gamma^+(x)={\gamma_{\Psi}}^+:=\{\Psi(t,x):t\in G_{\geq 0}\}\\
+            \gamma^-(x)={\gamma_{\Psi}}^-:=\{\Psi(t,x):t\in G_{\leq 0}\}
+        \end{gather*}
+    \end{definition}
+    \begin{definition}
+        Let $(G,X,\Psi)$ be a dynamical system. Then, we have an equivalence relation $\sim$ on $X$ given by $$x\sim y\iff\gamma(x)=\gamma(y)\quad\forall x,y\in X$$
+        which creates a partition of $X$, called \textit{phase portrait}.
+    \end{definition}
+    \begin{definition}
+        Let $(G,X,\Psi)$ be a dynamical system and $x\in X$. We define the following function: $$\function{\Psi_x}{G}{\gamma(x)}{t}{\Psi(t,x)}$$
+    \end{definition}
+    \begin{lemma}
+        Let $\vf{f}:\RR^n\rightarrow\RR^n$ be a continuous function such that the flux $\vf{\phi}(t,t_0,\vf{x}_0)$ of the ode $\vf{x}' =\vf{f}(\vf{x})$ is defined for all $t\in\RR$. Then, $(\RR,\RR^n,\vf{\Psi})$ is a dynamical system, where $\vf{\Psi}(t,\vf{x})=\vf{\phi}(t,0,\vf{x})$. Furthermore, note that $\vf{\gamma}(\vf{x})=\im(\vf{\phi}(\cdot,0,\vf{x}))$.
+    \end{lemma}
+    \begin{lemma}
+        Let $\vf{f}:\RR^n\rightarrow\RR^n$ be a continuous function such that $\exists M,N\in\RR_{\geq 0}$ with $\|\vf{f}(x)\|\leq M\|x\|+N$. Then, the solutions of the ode $\vf{x}' =\vf{f}(\vf{x})$ are defined for all $t\in\RR$.
+    \end{lemma}
+    \begin{definition}
+        Let $\vf{f},\vf{g}:\RR^n\rightarrow\RR^n$ be continuous functions and $\vf{x}' =\vf{f}(\vf{x})$, $\vf{x}' =\vf{g}(\vf{x})$ be two odes for which we have existence and uniqueness of solutions. We say that these two odes are \textit{equivalent} if $\exists \alpha\in\RR_{>0}$ such that $\vf{f}(\vf{x})=\alpha \vf{g}(\vf{x})$. In that case, the two odes have the same orbits oriented in the same way.
+    \end{definition}
+    \begin{corollary}
+        Let $\vf{f}:\RR^n\rightarrow\RR^n$ be a continuous function such that the ode $\vf{x}' =\vf{f}(\vf{x})$ has existence and uniqueness of solutions for all initial conditions. Then, there exists a continuous function $\vf{g}:\RR^n\rightarrow\RR^n$ such that the autonomous odes induced by $\vf{f}$ and $\vf{g}$ are equivalent and the flux of the ode $\vf{x}' =\vf{g}(\vf{x})$ is defined $\forall t\in\RR$.
+    \end{corollary}
+    \begin{lemma}
+        Let $H$ be a proper subgroup of $\RR$ which is closed. Then, $\exists T\in\RR_{\geq 0}$ such that $H=T\ZZ$.
+    \end{lemma}
+    \begin{prop}
+        Let $(\RR,\RR^n,\vf{\Psi})$ be a dynamical system and $\vf{\gamma}(\vf{x})$ be an orbit. Then, there are 3 possible cases for $\vf{\gamma}(\vf{x})$:
+        \begin{enumerate}
+            \item $\vf{\gamma}(\vf{x})=\{\vf{x}\}$.
+            \item $\vf{\gamma}(\vf{x})\cong S^1$.
+            \item $\vf{\gamma}(\vf{x})$ is homeomorphic to an injective and continuous image of $\RR$.
+        \end{enumerate}
+    \end{prop}
+    \begin{definition}
+        Let $(\RR,\RR^n,\vf{\Psi})$ be a dynamical system and $\vf{p}\in\RR^n$. We say that $\vf{p}\in\RR^n$ is a \textit{critical point} or \textit{singular point} if $\vf{\gamma}(\vf{p})=\{\vf{p}\}$. Otherwise we say that $\vf{p}$ is \textit{non-singular} or \textit{regular}.
+    \end{definition}
+    \begin{definition}
+        Let $(\RR,\RR^n,\vf{\Psi})$ be a dynamical system and $\vf{\gamma}(\vf{x})$ be an orbit of $(\RR,\RR^n,\vf{\Psi})$. We say that $\vf{\gamma}(\vf{x})$ is \textit{periodic} of period $T>0$ if $\vf{\gamma}(\vf{x})\cong S^1$ and $\ker\vf{\Psi_{\vf{x}}}=T\ZZ$.
+    \end{definition}
+    \begin{prop}
+        Let $(\RR,\RR^n,\vf{\Psi})$ be a dynamical system such that $\vf{\Psi}(t,\vf{x})=\vf{\phi}(t,0,\vf{x})$, where $\vf{\phi}(t,t_0,\vf{x}_0)$ is the flux of the ode $\vf{x}' =\vf{f}(\vf{x})$. Let $\vf{p}\in\RR^n$. Then, the following statements are equivalent:
+        \begin{enumerate}
+            \item $\{\vf{p}\}$ is a critical point.
+            \item $\vf{\phi}(t,0,\vf{p})=\vf{p}$.
+            \item $\vf{f}(\vf{p})=0$.
+        \end{enumerate}
+    \end{prop}
+    \begin{definition}
+        Let $(\RR,\RR^n,\vf{\Psi})$ be a dynamical system and $\vf{x}\in\RR^n$. We say that $\vf{y}\in\RR^n$ is a \textit{$\alpha$-limit point} of $\vf{x}$ if there exists a sequence $(t_n)\subset\RR$ such that $\displaystyle\lim_{n\to\infty}t_n=-\infty$ and $\displaystyle\lim_{n\to\infty}\vf{\Psi}(t_n,\vf{x})=\vf{y}$.
+        The set of all $\alpha$-limit points of $\vf{x}$ is called \textit{$\alpha$-limit set} and it is denoted by $\alpha(\vf{x})$.
+    \end{definition}
+    \begin{definition}
+        Let $(\RR,\RR^n,\vf{\Psi})$ be a dynamical system and $\vf{x}\in\RR^n$. We say that $\vf{y}\in\RR^n$ is a \textit{$\omega$-limit point} of $\vf{x}$ if there exists a sequence $(t_n)\subset\RR$ such that $\displaystyle\lim_{n\to\infty}t_n=+\infty$ and $\displaystyle\lim_{n\to\infty}\vf{\Psi}(t_n,\vf{x})=\vf{y}$.
+        The set of all $\omega$-limit points of $\vf{x}$ is called \textit{$\omega$-limit set} and it is denoted by $\omega(\vf{x})$.
+    \end{definition}
+    \begin{prop}
+        Let $(\RR,\RR^n,\vf{\Psi})$ be a dynamical system and $\vf{x}\in\RR^n$. Then: $$\Cl(\vf{\gamma}(\vf{x}))=\alpha(\vf{x})\cup\vf{\gamma}(\vf{x})\cup\omega(\vf{x})$$
+    \end{prop}
+    \begin{definition}
+        Let $(\RR,\RR^n,\vf{\Psi})$ be a dynamical system and $A\subseteq \RR^n$ be a subset. We say that $A$ is \textit{invariant} if $\vf{\gamma}(\vf{x})\subseteq A$ $\forall\vf{x}\in A$. We say that $A$ is \textit{positively invariant} if $\vf{\gamma}^+(\vf{x})\subseteq A$ $\forall\vf{x}\in A$. Analogously, we say that $A$ is \textit{negatively invariant} if $\vf{\gamma}^-(\vf{x})\subseteq A$ $\forall\vf{x}\in A$
+    \end{definition}
+    \begin{definition}
+        Let $(\RR,\RR^n,\vf{\Psi})$ be a dynamical system and $K\subset \RR^n$ be a compact set. We say that $K$ is \textit{positively stable} if for all neighbourhood $U$ of $K$, there exists a neighbourhood $V$ of $K$ with $V\subseteq U$ and such that $\forall \vf{x}\in V$, $\vf{\gamma}^+(\vf{x})\subset U$. Analogously, we say that $K$ is \textit{negatively stable} if for all neighbourhood $U$ of $K$, there exists a neighbourhood $V$ of $K$ with $V\subseteq U$ and such that $\forall \vf{x}\in V$, $\vf{\gamma}^-(\vf{x})\subset U$.
+    \end{definition}
+    \begin{definition}
+        Let $(\RR,\RR^n,\vf{\Psi})$ be a dynamical system and $K\subset \RR^n$ be a compact set. We say that $K$ is \textit{attractor} if there exists a neighbourhood $U$ of $K$ such that $\forall \vf{x}\in U$, $\omega(\vf{x})\subset K$.  We say that $K$ is \textit{repeller} if there exists a neighbourhood $U$ of $K$ such that $\forall \vf{x}\in U$, $\alpha(\vf{x})\subset K$. We say that $K$ is \textit{asymptotically stable} if it is both attractor and positively stable.
+    \end{definition}
+    \begin{prop}
+        Let $(\RR,\RR^n,\vf{\Psi})$ be a dynamical system and $K\subset \RR^n$ be a compact set. Suppose that $K$ is positively stable. Then, $K$ is positively invariant.
+    \end{prop}
+    \begin{definition}
+        Let $(\RR,\RR^n,\vf{\Psi})$ be a dynamical system and $\vf{p}\in\RR^n$. We say that $\vf{p}$ is a \textit{center} if there exists a neighbourhood $U$ of $\vf{p}$ such that if $\vf{\gamma}(\vf{x})\subset U$, then $\vf{\gamma}(\vf{x})$ is periodic. The largest neighbourhood with this property is called \textit{basin} of the center.
+    \end{definition}
+    \begin{prop}
+        Let $(\RR,\RR^n,\vf{\Psi})$ be a dynamical system and $\vf{p}\in\RR^n$ be a center. Then:
+        \begin{enumerate}
+            \item $\vf{p}$ is positively and negatively stable.
+            \item $\vf{p}$ is not an attractor.
+        \end{enumerate}
+    \end{prop}
+    \subsubsection{Equivalence and conjugacy of dynamical systems}
+    \begin{definition}
+        Let $(G,X,\Psi_1)$ and $(G,X,\Psi_2)$ be dynamical systems and $r\in\NN\cup\{0,\infty\}$. We say that $(G,X,\Psi_1)$ and $(G,X,\Psi_2)$ are \textit{equivalents of class $\mathcal{C}^r$} if there exists a diffeomorphism $h:X\rightarrow Y$ of class $\mathcal{C}^r$ such that $\forall x\in X$, $h(\gamma_{\Psi_1}(x))=\gamma_{\Psi_2}(h(x))$. In particular, if $r=0$ we say that $(G,X,\Psi_1)$ and $(G,X,\Psi_2)$ are \textit{topologically equivalent}.
+    \end{definition}
+    \begin{definition}
+        Let $(G,X,\Psi_1)$ and $(G,X,\Psi_2)$ be dynamical systems and $r\in\NN\cup\{0,\infty\}$. We say that $(G,X,\Psi_1)$ and $(G,X,\Psi_2)$ are \textit{conjugates of class $\mathcal{C}^r$} if there exists a diffeomorphism $h:X\rightarrow Y$ of class $\mathcal{C}^r$ such that $\forall (t,x)\in G\times X$, $h(\Psi_1(t,x))=\Psi_2(t,h(x))$. In particular, if $r=0$ we say that $(G,X,\Psi_1)$ and $(G,X,\Psi_2)$ are \textit{topologically conjugate}.
+    \end{definition}
+    \begin{prop}
+        Let $(G,X,\Psi_1)$ and $(G,X,\Psi_2)$ be dynamical systems and $h$ be a conjugation of class $\mathcal{C}^r$ between them. Then, $h$ is an equivalence of class $\mathcal{C}^r$ between $(G,X,\Psi_1)$ and $(G,X,\Psi_2)$.
+    \end{prop}
+    \begin{prop}
+        Let $(G,X,\Psi_1)$ and $(G,X,\Psi_2)$ be dynamical systems and $h:X\rightarrow Y$ be an equivalence of class $\mathcal{C}^r$ between them. Then:
+        \begin{enumerate}
+            \item $h$ preserves the type of orbit. More precisely if $p\in X$, we have:
+                  \begin{enumerate}
+                      \item If $p$ is a critical point, then so it is $h(p)$.
+                      \item If $\gamma(p)$ is a periodic orbit, then so it is $h(\gamma(p))$\footnote{Note that the period of $\gamma(p)$ and $h(\gamma(p))$ may be different.}.
+                      \item If $\gamma(p)$ is the injective and continuous image of $\RR$, then so it is $h(\gamma(p))$.
+                  \end{enumerate}
+            \item If $p\in X$ is a critical point of $\Psi_1$, we have:
+                  \begin{enumerate}
+                      \item If $p$ is attractor for $(G,X,\Psi_1)$, then so it is $h(p)$ for $(G,X,\Psi_2)$.
+                      \item If $p$ is repeller for $(G,X,\Psi_1)$, then so it is $h(p)$ for $(G,X,\Psi_2)$.
+                      \item If $p$ is positively stable for $(G,X,\Psi_1)$, then so it is $h(p)$ for $(G,X,\Psi_2)$.
+                      \item If $p$ is asymptotically stable for $(G,X,\Psi_1)$, then so it is $h(p)$ for $(G,X,\Psi_2)$.
+                  \end{enumerate}
+        \end{enumerate}
+    \end{prop}
+    \begin{prop}
+        A conjugation between two dynamical systems preserves the period of periodic orbits.
+    \end{prop}
+    \begin{definition}
+        Let $U\subseteq \RR^n$ be an open set and $\vf{f}:U\rightarrow\RR^n$ be a vector field of class $\mathcal{C}^1$. For all $\vf{x}_0\in U$, let $\vf{\varphi}_{\vf{x}_0}(t)$ be the maximal solution to the ivp
+        $$\left\{
+            \begin{aligned}
+                 & \vf{x}'      =\vf{f}(t,\vf{x}) \\
+                 & \vf{x}(0)  =\vf{x}_0
+            \end{aligned}
+            \right.$$
+        We define the \textit{flux} of the vector field $\vf{f}$ as $\vf{\phi}(t,\vf{x}):=\vf{\varphi}_{\vf{x}}(t)$.
+    \end{definition}
+    \begin{prop}
+        Let $U\subseteq \RR^n$ be an open set and $\vf{f}:U\rightarrow\RR^n$ be a vector field of class $\mathcal{C}^1$. Then, the flux $\vf{\phi}(t,\vf{x})$ of $\vf{f}$ defines locally a dynamical system.
+    \end{prop}
+    \begin{definition}
+        Let $U,V\subseteq \RR^n$ be open sets and $\vf{f}:U\rightarrow\RR^n$, $\vf{g}:V\rightarrow\RR^n$ be vector fields of class $\mathcal{C}^1$ with fluxes $\vf{\phi}$ and $\vf{\psi}$. We say that $\vf{f}$ and $\vf{g}$ are \textit{equivalent} if there exists a diffeomorphism $h:U\rightarrow V$ of class $\mathcal{C}^r$ such that $\forall \vf{x}\in U$, $\vf{h}(\vf{\gamma}_{\vf{f}}(\vf{x}))=\vf{\gamma}_{\vf{g}}(\vf{h}(\vf{x}))$.
+    \end{definition}
+    \begin{definition}
+        Let $U,V\subseteq \RR^n$ be open sets and $\vf{f}:U\rightarrow\RR^n$, $\vf{g}:V\rightarrow\RR^n$ be vector fields of class $\mathcal{C}^1$ with fluxes $\vf{\phi}$ and $\vf{\psi}$. We say that $\vf{f}$ and $\vf{g}$ are \textit{conjugate} if there exists a diffeomorphism $\vf{h}:U\rightarrow V$ of class $\mathcal{C}^r$ such that $\forall (t,\vf{x})\in \domain(\vf{f})$, $\vf{h}(\vf{\phi}(t,\vf{x}))=\vf{\psi}(t,\vf{h}(\vf{x}))$.
+    \end{definition}
+    \begin{lemma}
+        Let $U,V\subseteq \RR^n$ be open sets and $\vf{f}:U\rightarrow\RR^n$, $\vf{g}:V\rightarrow\RR^n$ be vector fields of class $\mathcal{C}^1$ and $\vf{h}:U\rightarrow V$ be a diffeomorphism of class $\mathcal{C}^1$. Then, $\vf{h}$ is a conjugation of class $\mathcal{C}^1$ if and only if $\vf{Dh}(\vf{x})(\vf{f}(\vf{x}))=\vf{g}(\vf{h}(\vf{x}))$ $\forall \vf{x}\in U$.
+    \end{lemma}
+    \begin{theorem}[Flow box theorem]
+        Let $U\subseteq \RR^n$ be an open set, $\vf{f}:U\rightarrow\RR^n$ be a vector field of class $\mathcal{C}^r$ with $r\geq 1$ and $\vf{p}\in\RR^n$ be a non-singular point of $\vf{f}$. Let $\vf{g}:\RR^n\rightarrow\RR^n$ be the vector field defined as $\vf{g}(\vf{x})=(1,0\ldots,0)$ $\forall \vf{x}\in\RR^n$. Then, there exist neighbourhoods $V\subseteq U$ of $\vf{p}$ and $W\subseteq \RR^n$ of $\vf{0}$ such that $\vf{f}|_V$ and $\vf{g}|_W$ conjugates of class $\mathcal{C}^r$.
+    \end{theorem}
+    \begin{lemma}
+        Let $U,V\subseteq \RR^n$ be open sets and $\vf{f}:U\rightarrow\RR^n$, $\vf{g}:V\rightarrow\RR^n$ be vector fields of class $\mathcal{C}^1$ and $\vf{p}\in\RR^n$ be a critical point of $\vf{f}$. Suppose that $\vf{h}$ is a conjugation of class $\mathcal{C}^1$ between $\vf{f}$ and $\vf{g}$. Then, the vector fields $\vf{Df}(\vf{p})$ and $\vf{Dg}(\vf{h}(\vf{p}))$ are conjugate by $\vf{Dh}(\vf{p})$. In particular, $\sigma(\vf{Df}(\vf{p}))=\sigma(\vf{Dg}(\vf{h}(\vf{p})))$.
+    \end{lemma}
+    \subsubsection{Topological classification of linear dynamical systems}
+    \begin{theorem}[Hartman-Grobman theorem]
+        Let $U\subseteq \RR^n$ be an open set, $\vf{f}:U\rightarrow\RR^n$ be a vector field of class $\mathcal{C}^1$ and $\vf{p}\in\RR^n$ be an hyperbolic critical point of $\vf{f}$. Let $\vf{g}:\RR^n\rightarrow\RR^n$ be the vector field defined as $\vf{g}(\vf{x})=\vf{Df}(\vf{p})(\vf{x})$. Then, there exist neighbourhoods $V\subseteq U$ of $\vf{p}$ and $W\subseteq \RR^n$ of $\vf{f}(\vf{p})=\vf{0}$ such that $\vf{f}|_V$ and $\vf{g}|_W$ topological conjugates.
+    \end{theorem}
+    \begin{definition}
+        Let $U\subseteq \RR^n$ be an open set, $\vf{f}:U\rightarrow\RR^n$ be a vector field of class $\mathcal{C}^r$ with $r\geq 1$ and $\vf{p}\in\RR^n$ be a critical point of $\vf{f}$. We say that $\vf{p}$ is \emph{hyperbolic critical point} if $\Re(\lambda)\ne 0$ $\forall \lambda\in\sigma(\vf{Df}(\vf{p}))$, where $\sigma(\vf{Df}(\vf{p}))$ denotes the spectrum of $\vf{Df}(\vf{p})$.
+    \end{definition}
+    \begin{corollary}
+        Let $U,V\subseteq \RR^n$ be open sets and $\vf{f}:U\rightarrow\RR^n$, $\vf{g}:V\rightarrow\RR^n$ be vector fields of class $\mathcal{C}^1$ and $\vf{p}\in\RR^n$ be a hyperbolic critical point of $\vf{f}$. Suppose that $\vf{h}$ is a conjugation of class $\mathcal{C}^1$ between $\vf{f}$ and $\vf{g}$. Then, $\vf{h}(\vf{p})$ is a hyperbolic critical point of $\vf{g}$.
+    \end{corollary}
+    \begin{definition}
+        Let $\vf{A}\in\mathcal{M}_n(\RR)$. We say that $\vf{A}$ is \emph{hyperbolic matrix} if $\Re(\lambda)\ne 0$ $\forall\lambda\in\sigma(\vf{A})$.
+    \end{definition}
+    \begin{prop}
+        Let $\vf{A}\in\mathcal{M}_n(\RR)$ be a hyperbolic matrix. Then, $\vf{0}\in\RR^n$ is the unique critical point of $\vf{x}'=\vf{A}\vf{x}$ and it is hyperbolic.
+    \end{prop}
+    \begin{theorem}
+        Let $\vf{A}\in\mathcal{M}_n(\RR)$ such that $\Re(\lambda)<0$ $\forall\lambda\in\sigma(\vf{A})$. Then, $\vf{x}'=\vf{A}\vf{x}$ and $\vf{x}'=-\vf{x}$ are topologically conjugate. In particular, the origin is attractor.
+    \end{theorem}
+    \begin{prop}
+        Let $U,V\subseteq \RR^n$ be open sets and $\vf{f}:U\rightarrow\RR^n$, $\vf{g}:V\rightarrow\RR^n$ be vector fields. Suppose that $\vf{h}$ is a conjugation between $\vf{x}'=\vf{f}(\vf{x})$ and $\vf{y}'=\vf{g}(\vf{y})$. Then, $\vf{x}'=-\vf{f}(\vf{x})$ and $\vf{y}'=-\vf{g}(\vf{y})$ are conjugate by $\vf{h}$.
+    \end{prop}
+    \begin{corollary}
+        Let $\vf{A}\in\mathcal{M}_n(\RR)$ such that $\Re(\lambda)>0$ $\forall\lambda\in\sigma(\vf{A})$. Then, $\vf{x}'=\vf{A}\vf{x}$ and $\vf{x}'=\vf{x}$ are topologically conjugate. In particular, the origin is repeller.
+    \end{corollary}
+    \begin{definition}
+        Let $\vf{A}\in\mathcal{M}_n(\RR)$. We define the \emph{stability number} of $\vf{A}$ as: $$\iota(\vf{A}):=\{\lambda\in\sigma(\vf{A}):\Re(\lambda)<0\}$$
+    \end{definition}
+    \begin{theorem}
+        Let $\vf{A},\vf{B}\in\mathcal{M}_n(\RR)$ be hyperbolic matrices. Then, $\vf{x}'=\vf{A}\vf{x}$ and $\vf{y}'=\vf{B}\vf{y}$ are topologically conjugate if and only if $\iota(\vf{A})=\iota(\vf{B})$.
+    \end{theorem}
+    \begin{corollary}
+        Let $\vf{A},\vf{B}\in\mathcal{M}_n(\RR)$ be hyperbolic matrices. Then:
+        \begin{itemize}
+            \item $\vf{0}$ is attractor for $\vf{x}'=\vf{A}\vf{x}\iff\iota(\vf{A})=n$.
+            \item $\vf{0}$ is repeller for $\vf{x}'=\vf{A}\vf{x}\iff\iota(\vf{A})=0$.
+        \end{itemize}
+    \end{corollary}
+    \begin{theorem}
+        Let $U\subseteq \RR^n$ be an open set, $\vf{f}:U\rightarrow\RR^n$ be a vector field of class $\mathcal{C}^1$ and $\vf{p}\in\RR^n$ be a critical point of $\vf{f}$. Then:
+        \begin{enumerate}
+            \item If $\iota(\vf{Df}(\vf{p}))=n$, then $\vf{p}$ is asymptotically stable for the dynamical system induced by $\vf{x}'=\vf{f}\vf{x}$.
+            \item If $\vf{p}$ is positively stable, then $\Re(\lambda)\leq 0$ $\forall\lambda\in\sigma(\vf{Df}(\vf{p}))$.
+        \end{enumerate}
+    \end{theorem}
 \end{multicols}
 \end{document}
