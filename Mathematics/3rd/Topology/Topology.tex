@@ -193,7 +193,7 @@
         \end{itemize}
     \end{prop}
     \begin{definition}
-        Let $(X,\topo)$ be a topological space and $A\subseteq X$ be a subset. The \emph{boundary} of $A$, $\Fr_{(X,\tau)}A$ or simply $\Fr A$, is: $$\Fr A:=\Cl(A)\cap\Cl(X\setminus A)$$
+        Let $(X,\topo)$ be a topological space and $A\subseteq X$ be a subset. The \emph{boundary} of $A$, $\Fr_{(X,\topo)}A$ or simply $\Fr A$, is: $$\Fr A:=\Cl(A)\cap\Cl(X\setminus A)$$
     \end{definition}
     \begin{definition}
         Let $(X,\topo)$ be a topological space and $x\in X$. We say that $N\subseteq X$ is a \emph{neighbourhood} of $x$ if $\exists U\in\topo$ such that $x\in U\subseteq N$. We denote by $\mathcal{N}_x$, the set of all neighbourhoods in $(X,\topo)$ of $x$.
@@ -249,6 +249,15 @@
             \Cl(\Int(\Cl(\Int A)))=\Cl(\Int A)\\
             \Int(\Cl(\Int (\Cl A)))=\Int(\Cl A)
         \end{gather*}
+    \end{prop}
+    \begin{definition}
+        Let $(X,\topo)$ be a topological space and $A,B\subseteq X$ be subsets. We say that $A$ and $B$ are \emph{separated} if $$\Cl A\cap B=A\cap\Cl B=\varnothing$$
+    \end{definition}
+    \begin{definition}
+        Let $(X,\topo)$ be a topological space and $A,B\subseteq X$ be subsets. We say that $A$ and $B$ are \emph{separated by closed neighbourhoods} if there are closed neighbourhoods $C_A$ and $C_B$ of $A$ and $B$ respectively, such that $C_A\cap C_B=\varnothing$.
+    \end{definition}
+    \begin{prop}
+        Let $(X,\topo)$ be a topological space and $A,B\subseteq X$ be subsets. Then, $A$ and $B$ are separated by closed neighbourhoods if and only if $\Cl A\cap\Cl B=\varnothing$.
     \end{prop}
     \subsection{Functions between topological spaces}
     \begin{definition}[Continuous function]
@@ -312,7 +321,7 @@
         Let $(X,\topo)$ be a topological space. We say that $(X,\topo)$ is $T_0$\footnote{The letter $T$ comes from the German word ``Trennungsaxiom'' which means ``separation axioms''.} (or \emph{Kolmogorov}) if for any two distinct points of $X$, there exists an open set that contain one of them but not the other.
     \end{definition}
     \begin{definition}[$T_1$ space]
-        Let $(X,\topo)$ be a topological space. We say that $(X,\topo)$ is $T_1$ (or \emph{Fréchet}) if for any two distinct points of $x,y\in X$, there exists an open set $U\in\topo$ such that $x\in U$ and $y\notin U$.
+        Let $(X,\topo)$ be a topological space. We say that $(X,\topo)$ is $T_1$ (or \emph{Fréchet}) if for any two distinct points $x,y\in X$, there exists an open set $U\in\topo$ such that $x\in U$ and $y\notin U$.
     \end{definition}
     \begin{theorem}
         Let $(X,\topo)$ be a topological space. The statements following are equivalent:
@@ -323,7 +332,7 @@
         \end{enumerate}
     \end{theorem}
     \begin{definition}[$T_2$ space]
-        Let $(X,\topo)$ be a topological space. We say that $(X,\topo)$ is $T_2$ (or \emph{Hausdorff}) if for any two distinct points of $x,y\in X$, there exist $U,V\in\topo$ such that $x\in U$, $y\in V$ and $U\cap V=\varnothing$.
+        Let $(X,\topo)$ be a topological space. We say that $(X,\topo)$ is $T_2$ (or \emph{Hausdorff}) if for any two distinct points $x,y\in X$, there exist $U,V\in\topo$ such that $x\in U$, $y\in V$ and $U\cap V=\varnothing$.
     \end{definition}
     \begin{theorem}
         Let $(X,\topo)$ be a topological space. The statements following are equivalent:
@@ -333,6 +342,9 @@
             \item The diagonal $\Delta(X):=\{(x,x)\in X\times X\}\subset X\times X$ is closed.
         \end{enumerate}
     \end{theorem}
+    \begin{definition}[$T_{2\frac{1}{2}}$ space]
+        Let $(X,\topo)$ be a topological space. We say that $(X,\topo)$ is $T_{2\frac{1}{2}}$ if for any two distinct points $x,y\in X$, there exist open sets $U,V\in\topo$ separated by closed neighbourhoods such that $x\in U$ and $y\in V$.
+    \end{definition}
     \begin{definition}
         Let $(X,\topo)$ be a topological space. We say that $(X,\topo)$ is \emph{regular} if for all $x\in X$ and for all a closed sets $C\subseteq X$ such that $x\notin C$, there exist $U,V\in\topo$ such that $x\in U$, $C\subseteq V$ and $U\cap V=\varnothing$.
     \end{definition}
@@ -358,6 +370,9 @@
             \item $(X,\topo)$ is $T_4$.
             \item For all closed set $C\subseteq X$ and for all $U\in\topo$ such that $C\subseteq U$, $\exists V\in\topo$ such that $C\subseteq V\subseteq\Cl(V)\subseteq U$.
         \end{enumerate}
+    \end{theorem}
+    \begin{theorem}
+        If we also denote by $T_i$ the set of all topological spaces which are $T_i$, for $i\in\{1,2,2\frac{1}{2},3,4\}$, we have that: $$T_4\subset T_3\subset T_{2\frac{1}{2}}\subset T_2\subset T_1\subset T_0$$
     \end{theorem}
     \begin{lemma}[Urysohn's lemma]
         Let $(X,\topo)$ be a topological space $T_4$ and $A,B\subseteq X$ be closed sets. Then, there exists a continuous function $f:(X,\topo)\rightarrow[0,1]$ such that $A\subseteq f^{-1}(0)$ and $B\subseteq f^{-1}(1)$.
@@ -714,7 +729,7 @@
         Let $(X,\topo_X)$ be a compact topological space, $(Y,\topo_Y)$ be Hausdorff topological space and $f:(X,\topo_X)\rightarrow(Y,\topo_Y)$ be a continuous function. Then, $f$ is closed. Furthermore, if $f$ is bijective, then $f$ is a homeomorphism.
     \end{corollary}
     \begin{corollary}
-        Let $(X,\topo)$ be a compact topological space and $\topo_1\subseteq\topo\subseteq\topo_2$. Then:
+        Let $(X,\topo)$ be a compact Hausdorff topological space and $\topo_1\subseteq\topo\subseteq\topo_2$. Then:
         \begin{itemize}
             \item If $(X,\topo_1)$ is Hausdorff, then $\id:(X,\topo)\rightarrow(X,\topo_1)$ is a homeomorphism and $\topo_1=\topo$.
             \item If $(X,\topo_2)$ is compact, then $\id:(X,\topo_2)\rightarrow(X,\topo)$ is a homeomorphism and $\topo_2=\topo$.
@@ -804,7 +819,7 @@
         Let $(X,\topo)$ be a topological space and $A\subseteq X$ be a subset. We say that $A$ is a \emph{connected subset} of $X$ if $A$, together with the subspace topology, is a connected space.
     \end{definition}
     \begin{prop}
-        Let $(X,\topo)$ be a topological space and $A\subseteq X$ be a subset. $A$ is connected if and only if there are no open sets $U,V\in \tau$ such that $A\subseteq U\cup V$, $A\cap U\ne\varnothing$, $A\cap V\ne\varnothing$ and $A\cap U\cap V=\varnothing$.
+        Let $(X,\topo)$ be a topological space and $A\subseteq X$ be a subset. $A$ is connected if and only if there are no open sets $U,V\in \topo$ such that $A\subseteq U\cup V$, $A\cap U\ne\varnothing$, $A\cap V\ne\varnothing$ and $A\cap U\cap V=\varnothing$.
     \end{prop}
     \begin{prop}
         The connectedness is a topological property.
@@ -813,7 +828,7 @@
         Let $(X,\topo_X)$, $(Y,\topo_Y)$ be a topological spaces such that $(X,\topo_X)$ is connected and $f:(X,\topo_X)\rightarrow(Y,\topo_Y)$ be a continuous function. Then, $f(X)\subset Y$ is connected.
     \end{theorem}
     \begin{lemma}
-        Let $(X,\topo)$ be a topological space and $C,D\subseteq X$ be subsets such that $C\subseteq D$ and $C$ is connected. Suppose that $D$ is disconnected and so that there exists non-empty open sets $U,V\in\topo$ such that $D\subseteq U\sqcup V$, $D\cap U\ne\varnothing$, $D\cap V\ne\varnothing$ and $D\cap U\cap V=\varnothing$. Then, either $X\subseteq U$ or $C\subseteq V$.
+        Let $(X,\topo)$ be a topological space and $C,D\subseteq X$ be subsets such that $C\subseteq D$ and $C$ is connected. Suppose that $D$ is disconnected and so that there exists non-empty open sets $U,V\in\topo$ such that $D\subseteq U\sqcup V$, $D\cap U\ne\varnothing$, $D\cap V\ne\varnothing$ and $D\cap U\cap V=\varnothing$. Then, either $C\subseteq U$ or $C\subseteq V$.
     \end{lemma}
     \begin{prop}
         Let $(X,\topo)$ be a topological space and $\{C_i:i\in I\}$ be a collection of connected subsets of $X$ such that $\bigcap_{i\in I} C_i\ne\varnothing$. Then, $\bigcup_{i\in I} C_i$ is connected.
@@ -833,6 +848,9 @@
     \begin{definition}
         Let $(X,\topo)$ be a topological space with $|X|>1$. We say that $(X,\topo)$ is \emph{totally disconnected} if all subset with cardinal greater than 1 is disconnected.
     \end{definition}
+    \begin{prop}
+        Let $(X,\topo_\text{d})$ be a topological space with $|X|>1$. Then, $(X,\topo_\text{d})$ is totally disconnected.
+    \end{prop}
     \subsubsection{Connectedness of \texorpdfstring{$\RR^n$}{Rn}}
     \begin{theorem}
         Consider $\RR$ together with the usual topology and let $a,b\in\RR$. Then, $[a,b]$ is connected.
@@ -844,8 +862,11 @@
         Consider $\RR$ together with the usual topology and let $A\subseteq \RR$ be a subset. Then: $$A\text{ is connected}\iff A\text{ is an interval}$$
     \end{theorem}
     \begin{theorem}[Intermediate value theorem]
-        Let $(X,\topo)$ be a connected topological space, $f:(X,\topo)\rightarrow\RR$ be a continuous function. Let $p,q\in f(X)$ and $r\in R$ be such that $p\leq r\leq q$. Then, $r\in f(X)$
+        Let $(X,\topo)$ be a connected topological space, $f:(X,\topo)\rightarrow\RR$ be a continuous function. Let $p,q\in \im f$ and $r\in \RR$ be such that $p\leq r\leq q$. Then, $r\in \im f$.
     \end{theorem}
+    \begin{corollary}[Bolzano's theorem]
+        Let $f:[a,b]\rightarrow\RR$ be a continuous function such that $f(a)f(b)\leq 0$. Then, $\exists r\in [a,b]$ such that $f(r)=0$.
+    \end{corollary}
     \begin{theorem}[Brouwer's fixed-point theorem]
         Let $\overline{B}^n\subset\RR$ be a closed $n$-th ball and $\vf{f}:\overline{B}^n\rightarrow\overline{B}^n$ be a continuous function. Then, $\vf{f}$ has a fixed point.
     \end{theorem}
@@ -889,13 +910,13 @@
         Let $(X,\topo)$ be a topological space. A \emph{path} in $(X,\topo)$ is a continuous function $\gamma:[0,1]\rightarrow (X,\topo)$. $\gamma(0)$ is called \emph{initial point} of the path and $\gamma(1)$, \emph{terminal point}.
     \end{definition}
     \begin{definition}
-        Let $(X,\topo)$ be a topological space and $x,y\in X$. A \emph{path from $x$ to $y$} is a path whose initial point is $x$ and whose terminal point is is $y$. If $x=y$, we say that the path is a \emph{loop}.
+        Let $(X,\topo)$ be a topological space and $x,y\in X$. A \emph{path from $x$ to $y$} is a path whose initial point is $x$ and whose terminal point is $y$. If $x=y$, we say that the path is a \emph{loop}.
     \end{definition}
     \begin{prop}
         Let $(X,\topo)$ be a topological space and $\gamma$ be a path in $(X,\topo)$ and $x,y\in X$. Then:
         \begin{enumerate}
             \item $\im(\gamma)$ is a connected subspace of $(X,\topo)$. Therefore, the initial and terminal points of $\gamma$ are in the same connected component.
-            \item If $A\subseteq X$ is a subset satisfying $\gamma(0)\in A$ and $\gamma(1)\notin A$, then $\exists r\in[0,1]$ such that $\gamma(r)\in\Fr(A)$.
+            \item If $A\subseteq X$ is a subset satisfying $\gamma(0)\in A$ and $\gamma(1)\notin A$, then $\exists r\in[0,1]$ such that $\gamma(r)\in\Fr A$.
             \item If $\gamma(t)$ is a path from $x$ to $y$, then  $\gamma(1-t)$ is a path from $y$ to $x$
         \end{enumerate}
     \end{prop}
@@ -912,7 +933,7 @@
         Let $(X,\topo)$ be a topological space. We say that $(X,\topo)$ is \emph{path-connected} if for all $x,y\in X$, there exists a path in $(X,\topo)$ from $x$ to $y$. each of its open covers has a finite subcover.
     \end{definition}
     \begin{prop}
-        Let $(X,\topo_X)$, $(Y,\topo_Y)$ be topological space such that $(X,\topo_X)$ is path-connected, and $f:(X,\topo_X)\rightarrow(Y,\topo_Y)$ be a continuous function. Then $f(X)$ is path-connected.
+        Let $(X,\topo_X)$, $(Y,\topo_Y)$ be topological space such that $(X,\topo_X)$ is path-connected, and $f:(X,\topo_X)\rightarrow(Y,\topo_Y)$ be a continuous function. Then $\im f$ is path-connected.
     \end{prop}
     \begin{definition}
         Let $(X,\topo)$ be a topological space and $A\subseteq X$. We say that $A$ is \emph{path-connected} if $A$, together with the subspace topology, is path-connected.

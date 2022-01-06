@@ -1,0 +1,95 @@
+\documentclass{standalone}
+\usepackage{../../../../preamble_formulas}
+
+\begin{document}
+\begin{tikzpicture}[every node/.style={scale=0.7}]
+  \pgfplotsset{
+    layers/standard/.define layer set={
+        background,
+        pre main,
+        main,
+        foreground
+      }{},
+  }
+  \sffamily
+  \begin{axis}[
+      axis lines=middle,
+      xmin=-6, xmax=6,
+      ymin=-6, ymax=6,
+      xtick=\empty, ytick=\empty,
+      ylabel={$D$},
+      xlabel={$T$},
+      %axis on top,
+    ]
+    \def\xmax{\pgfkeysvalueof{/pgfplots/xmax}}
+    \def\xmin{\pgfkeysvalueof{/pgfplots/xmin}}
+    \def\ymax{\pgfkeysvalueof{/pgfplots/ymax}}
+    \def\ymin{\pgfkeysvalueof{/pgfplots/ymin}}
+
+    \addplot[thin,samples=10,smooth,domain=\xmin:\xmax,name path=A]{x^2/4} node[black,pos=0.77,rotate=59,anchor=north] {$T^2-4D=0$};
+    \addplot[thick,samples=100,dashed,magenta!90!black,domain=-sqrt(4*\ymax):0, postaction={decorate},
+      decoration={
+          %transform={scale=1},
+          raise=3pt,
+          text effects along path,
+          text align=center,
+          %reverse path,
+          text={Stable star or stable degenerated node*},
+          text effects/.cd,
+          characters={text along path,scale=0.85,text=magenta!90!black}
+        }]{x^2/4};
+    \addplot[thick,samples=100,dashed,magenta!50,domain=0:sqrt(4*\ymax), postaction={decorate},
+      decoration={
+          %transform={scale=1},
+          raise=3pt,
+          text effects along path,
+          text align=center,
+          %reverse path,
+          text={Unstable star or unstable degenerated node*},
+          text effects/.cd,
+          characters={text along path,scale=0.85,text=magenta!50}
+        }]{x^2/4};
+    \addplot[thick,samples=100,smooth,dashed,brown!80!black,domain=0:\ymax]({0},{x}) node[pos=0.5,rotate=90,anchor=south] {Center};
+    \addplot[thick,samples=100,smooth,dashed,teal!90!black,domain=\xmin:0]({x},{0}) node[pos=0.5,anchor=north] {Line of stable fixed points};
+    \addplot[thick,samples=100,smooth,dashed,teal!70,domain=0:\xmax]({x},{0}) node[pos=0.5,anchor=north] {Line of unstable fixed points};
+    \path [name path=B] (\xmin,\ymax^2/4) -- (\xmax,\ymax^2/4);
+    \path [name path=C] (\xmin,0) -- (\xmax,0);
+    \path [name path=D] (\xmin,\ymin) -- (\xmax,\ymin);
+    \path [name path=D] (\xmin,\ymin) -- (\xmax,\ymin);
+    % \addplot[very thin,samples=100,smooth,white,domain=-0.1:0.1,name path=B]{\r^2/4};
+    %  \addplot[thick,samples=100,smooth,white,domain=-4:4,name path=C]{0};
+    % \addplot[thick,samples=100,smooth,white,domain=-4:4,name path=D]{-4};
+
+    \addplot[orange!30,opacity=0.5] fill between[
+        of=A and B,
+        soft clip={domain=0:\xmax},
+      ];
+    \addplot[orange!60,opacity=0.5] fill between[
+        of=A and B,
+        soft clip={domain=\xmin:0},
+      ];
+    \addplot[blue!30,opacity=0.5] fill between[
+        of=A and C,
+        soft clip={domain=0:\xmax},
+      ];
+    \addplot[blue!60,opacity=0.5] fill between[
+        of=A and C,
+        soft clip={domain=\xmin:0},
+      ];
+    \addplot[green!30,opacity=0.5] fill between[of = C and D];
+
+    \node[color_green2] at (1/2*\xmax,1/2*\ymin){Saddle point};
+    \node[color_blue3] at (3/4*\xmin,1/4*\ymax){Stable node};
+    \node[color_blue2] at (3/4*\xmax,1/4*\ymax){Unstable node};
+    \node[orange!95!black] at (1/4*\xmin-0.25,3/4*\ymax){Stable spiral};
+    \node[orange!80] at (1/4*\xmax+0.25,3/4*\ymax){Unstable spiral};
+
+    \node[circle,fill=black!60,inner sep=0pt,minimum height=3pt] (01) at (0,0){};
+    \node[black!60,align=center] (02) at (-0.7,-1.5){Plane of fixed points};
+    \draw[very thin,->,black!60] (02) -- (01);
+
+    \node[anchor=south east,scale=0.5] at (\xmax,\ymin){*A star if $\vf{A}$ is diagonalizable and a degenerated node if not.};
+  \end{axis}
+\end{tikzpicture}
+
+\end{document}

@@ -387,7 +387,7 @@
         For each $n\geq 1$, consider $X_n\sim \text{B}(n,p_n)$. Then, $\forall k\in\NN\cup\{0\}$ we have: $$\lim_{n\to\infty}\Prob(X_n=k)=\lim_{n\to\infty}\binom{n}{k}{p_n}^k{(1-p_n)}^{n-k}=\exp{-\lambda}\frac{\lambda^k}{k!}$$
     \end{theorem}
     \begin{corollary}
-        Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and suppose $n\in\NN$ and $p\in (0,1)$ are such that $n\gg 1$ and $p\ll 1$. Then, $\text{B}(n,p)\simeq\text{Pois}(np)$.
+        Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and suppose $n\in\NN$ and $p\in (0,1)$ are such that $n\gg 1$ and $p\ll 1$. Then, $\text{B}(n,p)\simeq\text{Pois}(np)$\footnote{In practice, the approximation is good enough for $n\geq 10$ and $p\leq 0.05$.}.
     \end{corollary}
     \begin{definition}[Geometric distribution]
         Let\\ $(\Omega,\mathcal{A},\Prob)$ be a probability space and $A\in\mathcal{A}$. Suppose $\Prob(A)=p$. The \textit{geometric distribution} is the one whose random variable $X$ is the number of trials needed to get one success. Thus, $S=\NN$ and: $$\Prob(X=k)={(1-p)}^{k-1}p\qquad \forall k\in\NN$$ If $X$ follows a geometric distribution of parameter $p$, we will write $X\sim \text{Geo}(p)$.
@@ -916,37 +916,37 @@
         Then, $(L^0,d_\Prob)$ is a metric space.
     \end{prop}
     \begin{prop}
-        Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X_n)\subset L^0$ be a sequence of random variables and $X\in L^0$. Then:
+        Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X_n)$ be a sequence of random variables and $X$ be a random variable. Then:
         $$X_n\overset{\Prob}{\longrightarrow} X\iff\lim_{n\to\infty} d_\Prob(X_n,X)=0$$
         Because of that, the convergence in probability is said to be \textit{metrizable}.
     \end{prop}
     \begin{definition}
-        Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X_n)\subset L^0$ be a sequence of random variables and $X\in L^0$. We say that $(X_n)$ satisfies the \textit{Cauchy condition in probability} (or is \textit{Cauchy in probability}) if $\forall \varepsilon >0$ we have: $$\lim_{n,m\to\infty}\Prob(|X_n-x_m|\geq \varepsilon)=0$$
+        Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X_n)$ be a sequence of random variables and $X$ be a random variable. We say that $(X_n)$ satisfies the \textit{Cauchy condition in probability} (or is \textit{Cauchy in probability}) if $\forall \varepsilon >0$ we have: $$\lim_{n,m\to\infty}\Prob(|X_n-x_m|\geq \varepsilon)=0$$
     \end{definition}
     \begin{prop}
-        Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X_n)\subset L^0$ be a sequence of random variables and $X\in L^0$. Then:
+        Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X_n)$ be a sequence of random variables and $X$ be a random variable. Then:
         $$X_n\overset{\Prob}{\longrightarrow} X\iff(X_n)\text{ is Cauchy in probability}$$
         Thus, $(L^0,d_\Prob)$ is a complete metric space.
     \end{prop}
     \begin{prop}
-        Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X_n)\subset L^0$ be a sequence of random variables and $X\in L^0$ such that $X_n\overset{\Prob}{\longrightarrow} X$. Then, all subsequence $(X_{n_k})$ of $(X_n)$ converges in probability to $X$.
+        Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X_n)$ be a sequence of random variables and $X$ be a random variable such that $X_n\overset{\Prob}{\longrightarrow} X$. Then, all subsequence $(X_{n_k})$ of $(X_n)$ converges in probability to $X$.
     \end{prop}
     \subsubsection{Almost surely convergence}
     \begin{definition}
-        Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X_n)\subset L^0$ be a sequence of random variables and $X\in L^0$. We say that $(X_n)$ \textit{converges almost surely} to $X$, and we denote it by $X_n\overset{\text{a.s.}}{\longrightarrow} X$, if $$\Prob\left(\lim_{n\to\infty}X_n=X\right)=1$$ That is, $$\lim:{n\to\infty}X_n(\omega)=X(\omega)$$ for all $\omega\in\Omega$ except for maybe a set of probability zero.
+        Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X_n)$ be a sequence of random variables and $X$ be a random variable. We say that $(X_n)$ \textit{converges almost surely} to $X$, and we denote it by $X_n\overset{\text{a.s.}}{\longrightarrow} X$, if $$\Prob\left(\lim_{n\to\infty}X_n=X\right)=1$$ That is, $$\lim:{n\to\infty}X_n(\omega)=X(\omega)$$ for all $\omega\in\Omega$ except for maybe a set of probability zero.
     \end{definition}
     \begin{prop}
-        Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X_n)\subset L^0$ be a sequence of random variables and $X\in L^0$. Then, $X_n\overset{\text{a.s.}}{\longrightarrow} X$ if and only if $\forall \varepsilon>0$ we have: $$\lim_{n\to\infty}\Prob\left(\bigcup_{k=n}^\infty\{|X_k-X|\geq\varepsilon\}\right)=0$$
+        Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X_n)$ be a sequence of random variables and $X$ be a random variable. Then, $X_n\overset{\text{a.s.}}{\longrightarrow} X$ if and only if $\forall \varepsilon>0$ we have: $$\lim_{n\to\infty}\Prob\left(\bigcup_{k=n}^\infty\{|X_k-X|\geq\varepsilon\}\right)=0$$
     \end{prop}
     \begin{prop}
-        Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X_n)\subset L^0$ be a sequence of random variables and $X\in L^0$. Then:
+        Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X_n)$ be a sequence of random variables and $X$ be a random variable. Then:
         $$X_n\overset{\text{a.s.}}{\longrightarrow} X\implies X_n\overset{\Prob}{\longrightarrow} X$$
     \end{prop}
     \begin{prop}
-        Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X_n)\subset L^0$ be a sequence of random variables and $X\in L^0$. Suppose that $X_n\overset{\Prob}{\longrightarrow} X$. Then, there exists a subsequence $(X_{n_k})$ of $(X_n)$ such that $X_{n_k}\overset{\text{a.s.}}{\longrightarrow} X$.
+        Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X_n)$ be a sequence of random variables and $X$ be a random variable. Suppose that $X_n\overset{\Prob}{\longrightarrow} X$. Then, there exists a subsequence $(X_{n_k})$ of $(X_n)$ such that $X_{n_k}\overset{\text{a.s.}}{\longrightarrow} X$.
     \end{prop}
     \begin{prop}
-        Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X_n)\subset L^0$ be a sequence of random variables and $X\in L^0$. Suppose that $\forall\varepsilon >0$ we have: $$\sum_{n=1}^\infty\Prob(|X_n-X|\geq\varepsilon)<\infty$$
+        Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X_n)$ be a sequence of random variables and $X$ be a random variable. Suppose that $\forall\varepsilon >0$ we have: $$\sum_{n=1}^\infty\Prob(|X_n-X|\geq\varepsilon)<\infty$$
         Then, $X_n\overset{\text{a.s.}}{\longrightarrow} X$.
     \end{prop}
     \begin{definition}
@@ -1025,19 +1025,19 @@
     \end{prop}
     \subsubsection{Convergence in distribution}
     \begin{definition}
-        Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X_n)\subset L^0$ be a sequence of random variables and $X\in L^0$. We say that $(X_n)$ \emph{converges in distribution} to $X$, and we denote it by $X_n\overset{\text{d}}{\longrightarrow} X$, if $\forall B\in\mathcal{B}(\RR)$ such that $\Prob(X\in\Fr B)=0$ we have: $$\lim_{n\to\infty}\Prob(X_n\in B)=\Prob(X\in B)$$
+        Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X_n)$ be a sequence of random variables and $X$ be a random variable. We say that $(X_n)$ \emph{converges in distribution} to $X$, and we denote it by $X_n\overset{\text{d}}{\longrightarrow} X$, if $\forall B\in\mathcal{B}(\RR)$ such that $\Prob(X\in\Fr B)=0$ we have: $$\lim_{n\to\infty}\Prob(X_n\in B)=\Prob(X\in B)$$
     \end{definition}
     \begin{definition}
         Let $A\subseteq\RR$ be a set and $f:A\rightarrow\RR$ be a function. We denote by $C(f)$ the set of points where $f$ is continuous.
     \end{definition}
     \begin{prop}
-        Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X_n)\subset L^0$ be a sequence of random variables with cdfs $F_{X_n}$ $\forall n\in\NN$ and $X\in L^0$ be a random variable with cdf $F_X$. Then: $$X_n\overset{\text{d}}{\longrightarrow} X\iff\lim_{n\to\infty} F_{X_n}(t)=F_X(t)\quad\forall t\in C(F_X)$$
+        Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X_n)$ be a sequence of random variables with cdfs $F_{X_n}$ $\forall n\in\NN$ and $X$ be a random variable be a random variable with cdf $F_X$. Then: $$X_n\overset{\text{d}}{\longrightarrow} X\iff\lim_{n\to\infty} F_{X_n}(t)=F_X(t)\quad\forall t\in C(F_X)$$
     \end{prop}
     \begin{prop}
-        Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X_n)\subset L^0$ be a sequence of random variables and $X,Y\in L^0$ be such that $X_n\overset{\text{d}}{\longrightarrow} X$ and $X_n\overset{\text{d}}{\longrightarrow} Y$. Then, $X\overset{\text{d}}{=}Y$.
+        Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X_n)$ be a sequence of random variables and $X$, $Y$ be random variables such that $X_n\overset{\text{d}}{\longrightarrow} X$ and $X_n\overset{\text{d}}{\longrightarrow} Y$. Then, $X\overset{\text{d}}{=}Y$.
     \end{prop}
     \begin{theorem}[Skorokhod's representation theorem]
-        Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X_n)\subset L^0$ be a sequence of random variables and $X\in L^0$ be such that $X_n\overset{\text{d}}{\longrightarrow} X$. Then, there exists a probability space $(\Omega',\mathcal{A}',\Prob')$, and random variables $({X_n}')$ and $X$ defined on $\Omega'$ such that:
+        Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X_n)$ be a sequence of random variables and $X$ be a random variable be such that $X_n\overset{\text{d}}{\longrightarrow} X$. Then, there exists a probability space $(\Omega',\mathcal{A}',\Prob')$, and random variables $({X_n}')$ and $X$ defined on $\Omega'$ such that:
         \begin{enumerate}
             \item $X_n\overset{\text{d}}{=}{X_n}'$ $\forall n\geq 1$
             \item $X\overset{\text{d}}{=}X'$
@@ -1045,30 +1045,30 @@
         \end{enumerate}
     \end{theorem}
     \begin{theorem}
-        Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X_n)\subset L^0$ be a sequence of random variables and $X\in L^0$. Then, $X_n\overset{\text{d}}{\longrightarrow} X$ if and only if for any continuous and bounded function $f:\RR\rightarrow\RR$ we have: $$\lim_{n\to\infty}\Exp(f(X_n))=\Exp(f(X))$$
+        Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X_n)$ be a sequence of random variables and $X$ be a random variable. Then, $X_n\overset{\text{d}}{\longrightarrow} X$ if and only if for any continuous and bounded function $f:\RR\rightarrow\RR$ we have: $$\lim_{n\to\infty}\Exp(f(X_n))=\Exp(f(X))$$
     \end{theorem}
     \begin{lemma}
-        Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X_n)\subset L^0$ be a sequence of random variables and $X\in L^0$ be such that both $(X_n)$ and $X$ take values in $\NN$. Then, $X_n\overset{\text{d}}{\longrightarrow} X$ if and only if $\forall k\in\NN$, we have: $$\lim_{n\to\infty} \Prob(X_n=k)=\Prob(X=k)$$
+        Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X_n)$ be a sequence of random variables and $X$ be a random variable be such that both $(X_n)$ and $X$ take values in $\NN$. Then, $X_n\overset{\text{d}}{\longrightarrow} X$ if and only if $\forall k\in\NN$, we have: $$\lim_{n\to\infty} \Prob(X_n=k)=\Prob(X=k)$$
     \end{lemma}
     \begin{prop}
-        Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X_n)\subset L^0$ be a sequence of random variables and $X\in L^0$.
+        Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X_n)$ be a sequence of random variables and $X$ be a random variable.
         \begin{enumerate}
             \item $X_n\overset{\Prob}{\longrightarrow} X\implies X_n\overset{\text{d}}{\longrightarrow} X$
             \item If $a\in\RR$, $X_n\overset{\text{d}}{\longrightarrow} a\implies X_n\overset{\Prob}{\longrightarrow} a$
         \end{enumerate}
     \end{prop}
     \begin{prop}
-        Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X_n)\subset L^0$ be a sequence of random variables, $X\in L^0$ and $g:\RR\rightarrow\RR$. Then, $g(X_n)\overset{\text{d}}{\longrightarrow}g(X)$.
+        Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X_n)$ be a sequence of random variables, $X$ be a random variable and $g:\RR\rightarrow\RR$. Then, $g(X_n)\overset{\text{d}}{\longrightarrow}g(X)$.
     \end{prop}
     \begin{corollary}
-        Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X_n)\subset L^0$ be a sequence of random variables and $X\in L^0$. Then:
+        Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X_n)$ be a sequence of random variables and $X$ be a random variable. Then:
         \begin{enumerate}
             \item $X_n+a\overset{\text{d}}{\longrightarrow}X+a$
             \item $aX_n\overset{\text{d}}{\longrightarrow}aX$
         \end{enumerate}
     \end{corollary}
     \begin{theorem}[Slutsky's theorem]
-        Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X_n),(Y_n)\subset L^0$ be a sequence of random variables and $X\in L^0$ and $a\in\RR$ such that $X_n\overset{\text{d}}{\longrightarrow} X$ and $Y_n\overset{\text{d}}{\longrightarrow} a$. Then:
+        Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X_n)$, $(Y_n)$ be sequences of random variables and $X$ be a random variable and $a\in\RR$ such that $X_n\overset{\text{d}}{\longrightarrow} X$ and $Y_n\overset{\text{d}}{\longrightarrow} a$. Then:
         \begin{enumerate}
             \item $X_n+Y_n\overset{\text{d}}{\longrightarrow} X+ a$
             \item $X_nY_n\overset{\text{d}}{\longrightarrow} aX$
@@ -1136,7 +1136,7 @@
         \begin{enumerate}
             \item $\varphi_X(0)=1$
             \item $|\varphi_X(t)|\leq 1\ \forall t\in\RR$
-            \item $\overline{\varphi_X(t)}=\varphi(-t)\ \forall t\in\RR$
+            \item $\overline{\varphi_X(t)}=\varphi_X(-t)\ \forall t\in\RR$
             \item If $Y=aX+b$ for some $a,b\in \RR$, then: $$\varphi_Y(t)=\exp{\ii t b}\varphi_X(at)\quad\forall t\in\RR$$
             \item $\varphi_X$ is uniformly continuous.
         \end{enumerate}
@@ -1148,7 +1148,7 @@
         Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$, $Y$ be random variables. Then: $$X\overset{\text{d}}{=}Y\iff \varphi_X(t)=\varphi_Y(t)$$
     \end{theorem}
     \begin{theorem}
-        Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X_n)\subset L^0$ be a sequence of random variables and $X\in L^0$. Then:
+        Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X_n)$ be a sequence of random variables and $X$ be a random variable. Then:
         $$X_n\overset{\text{d}}{\longrightarrow} X\iff\lim_{n\to\infty}\varphi_{X_n}(t)=\varphi_X(t)\quad\forall t\in\RR$$
     \end{theorem}
     \begin{prop}
@@ -1156,8 +1156,24 @@
     \end{prop}
     \subsubsection{Central limit theorem}
     \begin{theorem}[Central limit theorem]
-        Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $(X_n)\subset L^0$ be a sequence of i.i.d. random variables with finite 2nd moments. Let $\mu:=\Exp(X_1)$ and $\sigma^2:=\Var(X_1)$. Then: $$\frac{S_n-n\mu}{\sigma\sqrt{n}}\overset{\text{d}}{\longrightarrow} Z$$
+        Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $(X_n)$ be a sequence of i.i.d. random variables with finite 2nd moments. Let $\mu:=\Exp(X_1)$ and $\sigma^2:=\Var(X_1)$. Then: $$\frac{S_n-n\mu}{\sigma\sqrt{n}}\overset{\text{d}}{\longrightarrow} Z$$
         where $Z\sim N(0,1)$.
     \end{theorem}
+    \begin{corollary}
+        Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $(X_n)$ be a sequence of i.i.d. random variables with finite 2nd moments. Let $\mu:=\Exp(X_1)$ and $\sigma^2:=\Var(X_1)$. Then, $\forall s,t\in\RR$ such that $s<t$ we have $$\lim_{n\to\infty}\Prob\left(s<\frac{S_n-n\mu}{\sigma\sqrt{n}}\leq t\right)=F_Z(t)-F_Z(s)$$ where $Z\sim N(0,1)$.
+    \end{corollary}
+    \begin{definition}
+        Let $(\Omega,\mathcal{A},\Prob)$ and $X_1,\ldots,X_n$ be random variables. We define the \emph{sample mean} of $X_1,\ldots,X_n$ as: $$\overline{X}_n:=\frac{1}{n}S_n=\frac{1}{n}\sum_{i=1}^nX_i$$
+        If the value of $n$ is fixed, we denoted $\overline{X}_n$ by $\overline{X}$.
+    \end{definition}
+    \begin{prop}
+        Let $(\Omega,\mathcal{A},\Prob)$ and $X_1,\ldots,X_n$ be i.i.d. random variables. Then: $$\Exp(\overline{X}_n)=\Exp(X_1)\quad\text{and}\quad\Var(\overline{X}_n)=\frac{1}{n}\Var(X_1)$$
+    \end{prop}
+    \begin{corollary}
+        Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X_1,\ldots,X_n$ be i.i.d. random variables. Let $\mu:=\Exp(X_1)$ and $\sigma^2:=\Var(X_1)$. Then: $$\overline{X}_n\overset{\text{d}}{\simeq }N\left(\mu,\frac{\sigma^2}{n}\right)\quad\text{ for $n$ large enough}$$
+    \end{corollary}
+    \begin{corollary}[De Moivre-Laplace theorem]
+        Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X_1,\ldots,X_n$ be i.i.d. random variables such that $X_n\sim\text{Ber}(p)$ $\forall n\in\NN$. Then: $$\text{B}(n,p)\overset{\text{d}}{\simeq }N\left(np,np(1-p)\right)\quad\text{ for $n$ large enough}\footnote{In practice, the approximation is good enough for $np(1-p)\geq 18$.}$$
+    \end{corollary}
 \end{multicols}
 \end{document}

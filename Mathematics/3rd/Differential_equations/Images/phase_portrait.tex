@@ -1,51 +1,84 @@
 \documentclass{standalone}
 \usepackage{../../../../preamble_formulas}
 
-% Define arrow's style
-\usetikzlibrary{decorations.markings}
- 
-% Arrow style
-\tikzset{decorated arrows/.style={
-    postaction={
-        decorate,
-        decoration={
-            markings,
-            mark=between positions 0 and 1 step 15mm with {\arrow[black]{stealth};}
-            }
-        },
-    }
-}
- 
- 
+\def\eps{0.01}
 \begin{document}
 \begin{tikzpicture}
-
   \begin{axis}[
-      grid=both,
-      grid style={dashed,red!20},
-      xmin = -4, xmax = 4,
-      ymin = -4, ymax = 4,
-      width = \textwidth,
-      height = 0.7\textwidth,
-      xlabel = {$x$},
-      ylabel = {$y$},
-      title={},
-      view = {0}{90},
+      axis lines=middle,
+      xmin=-6, xmax=6,
+      ymin=-6, ymax=6,
+      xtick=\empty, ytick=\empty,
+      ylabel={$y$},
+      xlabel={$x$},
+      axis on top,
     ]
 
-    % Vector Field
-    \addplot3[
-      quiver = {
-          u = {y/sqrt(y^2+(0.8*(1-x^2)*y-x)^2)},
-          v = {(0.8*(1-x^2)*y-x)/sqrt(y^2+(0.8*(1-x^2)*y-x)^2)},
-          scale arrows = 0.25,
-        },
-      -stealth,
-      domain = -4:4,
-      domain y = -4:4,
-      lightgray]
-    {0};
-
+    % y-axis
+    \foreach \i in {-1,1}{
+        \addplot[very thin,lightgray,samples=100,domain=log10(abs(\eps/\i))/log10(e)/0.5:log10(abs(6/\i))/log10(e)/0.5, % log10(5/\i)/log10(e)=ln(5/\i)
+          postaction={decorate},% ------
+          decoration={markings, % ------
+              mark=at position 0.33 with {\arrow{>}},
+              mark=at position 0.66 with {\arrow{>}}}
+        ] (0,{exp(0.5*x)*\i});
+      }
+    % 1st quadrant
+    \foreach \i/\j in {
+        0.7500/ 1.997,
+        1.500/ 1.215,
+        2.250/ 0.8091,
+        3.000/ 0.5469,
+        3.750/ 0.3592,
+        4.500/ 0.2165,
+        5.250/ 0.1034,
+        6.000/ 0.01106,
+        6.750/ -0.2025,
+        7.500/ -0.4132,
+        8.250/ -0.6039,
+        9.000/ -0.7779,
+        9.750/ -0.9380,
+        10.50/ -1.086,
+        11.25/ -1.224,
+        12.00/ -1.353,
+        12.75/ -1.474,
+        13.50/ -1.589}{
+        \addplot[very thin,lightgray,samples=100,domain=-0.47*\i-8.647:\j, % log10(5/\i)/log10(e)=ln(5/\i)
+          postaction={decorate},% ------
+          decoration={markings, % ------
+              mark=at position 0.33 with {\arrow{>}},
+              mark=at position 0.66 with {\arrow{>}}}
+        ] ({\i*exp(0.5*x)},{exp(0.5*x)*(\i+\i*x)});
+      }
+    % 2nd quadrant
+    \foreach \i/\j in {
+        0.7500/ 1.997,
+        1.500/ 1.215,
+        2.250/ 0.8091,
+        3.000/ 0.5469,
+        3.750/ 0.3592,
+        4.500/ 0.2165,
+        5.250/ 0.1034,
+        6.000/ 0.01106,
+        6.750/ -0.2025,
+        7.500/ -0.4132,
+        8.250/ -0.6039,
+        9.000/ -0.7779,
+        9.750/ -0.9380,
+        10.50/ -1.086,
+        11.25/ -1.224,
+        12.00/ -1.353,
+        12.75/ -1.474,
+        13.50/ -1.589}{
+        \addplot[very thin,lightgray,samples=100,domain=-0.47*\i-8.647:\j, % log10(5/\i)/log10(e)=ln(5/\i)
+          postaction={decorate},% ------
+          decoration={markings, % ------
+              mark=at position 0.33 with {\arrow{>}},
+              mark=at position 0.66 with {\arrow{>}}}
+        ] ({-\i*exp(0.5*x)},{exp(0.5*x)*(-\i-\i*x)});
+      }
+    \node[circle,fill=black,inner sep=0pt,minimum height=3pt] at (0,0){};
+    \node[anchor=south west,scale=0.75] at (0,0){(0,0)};
   \end{axis}
 \end{tikzpicture}
 

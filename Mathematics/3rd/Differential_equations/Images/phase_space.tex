@@ -1,0 +1,29 @@
+\documentclass{standalone}
+\usepackage{../../../../preamble_formulas}
+
+\begin{document}
+
+\def\r{0.5}
+
+\begin{tikzpicture}[scale=2]
+  \begin{axis}[
+      axis lines=center,
+      axis on top,
+      xlabel={$t$}, ylabel={$x$}, zlabel={$y$},
+      xtick=\empty, ytick=\empty, ztick=\empty,
+      xmin=-1, xmax=20,
+      ymin=-\r-0.2, ymax=\r+0.5,
+      zmin=-\r-0.2, zmax=\r+0.5,
+      extra y ticks = {\r},
+      extra y tick labels={${(r,0)}$},
+      samples=10,
+      samples y=10,
+      y dir=reverse,
+      every axis y label/.append style={at=(ticklabel* cs:0)}]
+    ]
+
+    % blue cone
+    \addplot3 [draw=color_blue2,samples=200,samples y=1,domain = 0:17] ({x},{\r*cos(deg(x))},{\r*sin(deg(x))});
+  \end{axis}
+\end{tikzpicture}
+\end{document}
