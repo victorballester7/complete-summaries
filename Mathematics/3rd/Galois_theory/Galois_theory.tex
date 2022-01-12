@@ -113,7 +113,7 @@
     Let $R$ be an integral domain and $p\in {R[x_1,\ldots,x_n]}^{\text{S}_n}$. Suppose that $\deg_{<_\text{lex}}(p)=(a_1,\ldots,a_n)$ and let $\lambda\in R\setminus\{0\}$ be the coefficient of ${x_1}^{a_1}\cdots{x_n}^{a_n}$ in $p(x_1,\ldots,x_n)$. Then, $a_1\geq \cdots\geq a_n$ and if $$q:=p-\lambda {s_n}^{a_n}{s_{n-1}}^{a_{n-1}-a_n}{s_{n-2}}^{a_{n-2}-a_{n-1}}\cdots {s_1}^{r_1-r_2}$$ then we have $\deg_{<_\text{lex}}(q)<_\text{lex}\deg_{<_\text{lex}}(p)$.
   \end{lemma}
   \begin{theorem}[Fundamental theorem of symmetric polynomials]
-    Let $R$ be a ring and $n\in\NN$. Then: $${R[x_1,\ldots,x_n]}^{\text{S}_n}=R[s_1,\ldots,s_n]$$ That is, every polynomial in $R[x_1,\ldots,x_n]$ can be expressed uniquely in terms of elementary symmetric polynomials.
+    Let $R$ be a ring and $n\in\NN$. Then: $${R[x_1,\ldots,x_n]}^{\text{S}_n}=R[s_1,\ldots,s_n]$$ That is, every polynomial in $R[x_1,\ldots,x_n]^{\text{S}_n}$ can be expressed uniquely in terms of elementary symmetric polynomials.
   \end{theorem}
   \subsection{Field extensions}
   \begin{prop}
@@ -147,7 +147,7 @@
     A field extension $\quot{L}{K}$ is called \emph{simple} if $L=K(\alpha)$ for some $\alpha\in L$. In that case, this $\alpha$ is called \emph{primitive element} of $L$ over $K$.
   \end{definition}
   \begin{theorem}[Steinitz's theorem]
-    Let $\quot{L}{K}$ be a field extension. Then, $\quot{L}{K}$ is simple if and only if there is a finite number of intermediate fields between $K$ and $L$.
+    Let $\quot{L}{K}$ be a finite field extension. Then, $\quot{L}{K}$ is simple if and only if there is a finite number of intermediate fields between $K$ and $L$.
   \end{theorem}
   \begin{prop}
     Let $\quot{L}{K}$ be a field extension and $\alpha\in L$. Then:
@@ -565,7 +565,7 @@
   \begin{theorem}
     $\text{A}_n$ is simple for all $n\in\NN$.
   \end{theorem}
-  \subsubsection{Cyclotomic and cyclic extensions}
+  \subsubsection{Radical, cyclotomic and cyclic extensions}
   \begin{definition}
     We say that a finite field extension $\quot{L}{K}$ is \emph{radical} if there exist $n\in\NN$ and $\alpha\in L$ such that $L=K(\alpha)$ and $\alpha^n\in K$. Moreover, if $\alpha^n=1$ we say the the extension $\quot{L}{K}$ is \emph{cyclotomic}.
   \end{definition}
@@ -573,13 +573,16 @@
     We say that a tower of fields $K_n/K_{n-1}/\cdots/K_0$ is a \emph{radical tower} if $\quot{K_i}{K_{i-1}}$ is a radical extension $\forall i=1,\ldots,n$.
   \end{definition}
   \begin{definition}
-    We say that a field extension $\quot{L}{K}$ is \emph{solvable by radicals} if there exists a radical tower of fields $K_n/K_{n-1}/\cdots/K_0$ such that $L\subseteq K_n$.
+    We say that a field extension $\quot{L}{K}$ is \emph{solvable by radicals} if there exists a radical tower of fields $K_n/K_{n-1}/\cdots/K_1/K$ such that $L\subseteq K_n$.
   \end{definition}
   \begin{definition}
     Let $K$ be a field and $p(x)\in K[x]$. We say that $p(x)$ is \emph{solvable by radicals} if the splitting field of $p(x)$ over $K$ is solvable by radicals.
   \end{definition}
+  \begin{definition}
+    Let $n\in \NN$ and $K$ be a field. A \emph{$n$-th root of unity} is a number $z\in K$ such that $z^n=1$. A \emph{$n$-th primitive root of unity} is a $n$-th root of unity $z\in K$ such that $z^m\ne 1$ for all $m=1,\ldots,n-1$.
+  \end{definition}
   \begin{prop}
-    Let $K$ be a field such that $\ch K=0$, $n\geq 2$ and $L$ be the splitting field of $x^n-1$ over $K$. Let $\xi_n$ be such that ${\xi_n}^n=1$ and ${\xi_n}^m\ne 1$ for all $m=1,\ldots,n-1$ (that is, $\xi_n$ is the \emph{$n$-th primitive root of unity}). Then, $L=K(\xi_n)$ and $\Gal(\quot{L}{K})\cong H$ for some $H\in\mathcal{S}\left({(\quot{\ZZ}{n\ZZ})}^*\right)$. Furthermore if $K=\QQ$, we have that $\Gal(\quot{L}{K})\cong {(\quot{\ZZ}{n\ZZ})}^*$.
+    Let $K$ be a field such that $\ch K=0$, $n\geq 2$ and $L$ be the splitting field of $x^n-1$ over $K$. Denote by $\xi_n$ a $n$-th primitive root of unity. Then, $L=K(\xi_n)$ and $\Gal(\quot{L}{K})\cong H$ for some $H\in\mathcal{S}\left({(\quot{\ZZ}{n\ZZ})}^*\right)$. Furthermore if $K=\QQ$, we have that $\Gal(\quot{L}{K})\cong {(\quot{\ZZ}{n\ZZ})}^*$.
   \end{prop}
   \begin{prop}
     Let $K$ be a field such that $\ch K=0$ and $x^n-1$ splits into linear factors in $K$. Let $\quot{K(\alpha)}{K}$ be a radical extension. Then, $\quot{L}{K}$ is Galois and $\Gal(\quot{L}{K})\cong\quot{\ZZ}{d\ZZ}$, where $d\mid n$. Furthermore, $\alpha^d\in K$ and $x^d-\alpha^d$ is irreducible over $K$.
@@ -600,22 +603,23 @@
     Let $K$ be a field such that $\ch K=0$, and $p(x)\in K[x]$. Then: $$\textstyle p(x)\text{ is solvable by radicals}\iff\Gal(\quot{p(x)}{K})\text{ is solvable}$$
   \end{theorem}
   \begin{lemma}
-    Let $K$ be a field and $a_1,\ldots,a_n$ be unknowns. Then, $$K(a_1,\ldots,a_n)/K(s_1,\ldots,s_n)\cong \text{S}_n$$
+    Let $K$ be a field and $a_1,\ldots,a_n$ be unknowns. Then: $$K(a_1,\ldots,a_n)/K(s_1,\ldots,s_n)\cong \text{S}_n$$
   \end{lemma}
   \begin{corollary}
-    Let $K$ be a field and $a_1,\ldots,a_n$ be unknowns. Then, $${K(a_1,\ldots,a_n)}^{\text{A}_n}=K(s_1,\ldots,s_n)(\delta)$$
+    Let $K$ be a field, $a_1,\ldots,a_n$ be unknowns and $\delta:=\prod_{1\leq i<j\leq n}(a_j-a_i)$. Then: $${K(a_1,\ldots,a_n)}^{\text{A}_n}=K(s_1,\ldots,s_n)(\delta)$$
   \end{corollary}
   \begin{theorem}[Abel-Ruffini theorem]
     There is no solution in radicals to general polynomial equations of degree five or higher with arbitrary coefficients.
   \end{theorem}
   \begin{prop}
-    Let $K$ be a field such that $\ch K=0$, and $p(x)\in K[x]$ be an irreducible polynomial of degree 5. $p(x)$ is solvable by radicals if and only if $\Gal\quot{p(x)}{K}$ it is not isomorphic to $\text{S}_5$ or $\text{A}_5$
+    Let $K$ be a field such that $\ch K=0$, and $p(x)\in K[x]$ be an irreducible polynomial of degree 5. Then:
+    $$\textstyle p(x)\text{ is solvable by radicals}\iff\Gal(\quot{p(x)}{K})\ncong\text{S}_5,\text{A}_5$$
   \end{prop}
   \begin{theorem}
     For all $n\geq 2$, $\Gal(x^n-x-1/\QQ)\cong \text{S}_n$.
   \end{theorem}
   \begin{corollary}
-    Let $G$ be a finite group. Then, there exists a finite field extension $\quot{K_G}{\QQ}$ and $\quot{L_G}{K_G}$ such that $\Gal(\quot{L_G}{K_G})\cong G$.
+    Let $G$ be a finite group. Then, there exists finite field extensions $\quot{K_G}{\QQ}$ and $\quot{L_G}{K_G}$ such that $\Gal(\quot{L_G}{K_G})\cong G$.
   \end{corollary}
 \end{multicols}
 

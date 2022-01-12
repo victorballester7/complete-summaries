@@ -1,0 +1,40 @@
+\documentclass{standalone}
+\usepackage{../../../../preamble_formulas}
+\begin{document}
+\begin{tikzpicture}
+  \def\a{2}
+  \def\b{0.5}
+  \def\manifold#1#2#3#4{
+    % \draw plot [smooth cycle,tension=0.8] coordinates{(-0.1+#1,0+#2) (-\a+#1,-2*\b+#2) (-2*\a+0.5+#1,0+#2) (-\a+#1,2*\b+#2)};
+    \filldraw[draw=black,fill=#4] (-\a+#1,#2) ellipse (1.75 and 1);
+    % hole
+    \draw[name path=A] plot [smooth,tension=0.75] coordinates{(-\a+0.75+#1,0.2-0.15+#2) (-\a+#1,0-0.15+#2) (-\a-0.75+#1,0.2-0.15+#2)};
+    \draw[name path=B] plot [smooth,tension=0.75] coordinates{(-\a+0.5+#1,-0.2+0.15+#2) (-\a+#1,0+0.15+#2) (-\a-0.5+#1,-0.2+0.15+#2)};
+    \tikzfillbetween[of=A and B]{white};
+
+    \node at (-\a+#1,-1.3+#2){#3};
+  }
+
+  %%% M1
+  \manifold{0}{3}{$M_1$}{red!50}
+  \draw[red,dashed, thick] (-\a/2+0.2,3-0.2) circle (0.3);
+
+  %  %%% M2
+  \manifold{2*\a}{3}{$M_2$}{blue!50}
+  \draw[blue,dashed, thick] (\a/2-0.2,3-0.2) circle (0.3);
+
+
+  %%% M1+M2
+  \draw plot [smooth cycle,tension=0.8] coordinates{(0,\b) (\a,2*\b) (2*\a-0.5,0) (\a,-2*\b) (0,-\b) (-\a,-2*\b) (-2*\a+0.5,0) (-\a,2*\b)};
+
+  % right hole
+  \draw plot [smooth,tension=0.75] coordinates{(\a-0.75-0.15,0.2-0.15) (\a-0.15,0-0.15) (\a+0.75-0.15,0.2-0.15)};
+  \draw plot [smooth,tension=0.75] coordinates{(\a-0.5-0.15,-0.2+0.15) (\a-0.15,0+0.15) (\a+0.5-0.15,-0.2+0.15)};
+
+  % left hole
+  \draw plot [smooth,tension=0.75] coordinates{(-\a+0.75+0.15,0.2-0.15) (-\a+0.15,0-0.15) (-\a-0.75+0.15,0.2-0.15)};
+  \draw plot [smooth,tension=0.75] coordinates{(-\a+0.5+0.15,-0.2+0.15) (-\a+0.15,0+0.15) (-\a-0.5+0.15,-0.2+0.15)};
+  \node at (0,-1){$M_1\#M_2$};
+\end{tikzpicture}
+
+\end{document}
