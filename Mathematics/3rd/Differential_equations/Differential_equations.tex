@@ -764,15 +764,6 @@
     A conjugacy between two dynamical systems preserves the period of periodic orbits.
   \end{prop}
   \begin{prop}
-    Let $\vf{A}\in\mathcal{M}_n(\RR)$ be a matrix and consider the dynamical system induced by $\vf{x}'=\vf{A}\vf{x}$. Then:
-    \begin{enumerate}
-      \item $\vf{0}\in\RR^n$ is attracting for that system if and only if $\Re(\lambda) < 0$ $\forall \lambda\in\sigma(\vf{A})$.
-      \item $\vf{0}\in\RR^n$ is repelling for that system if and only if $\Re(\lambda) > 0$ $\forall \lambda\in\sigma(\vf{A})$.
-      \item If $\vf{0}\in\RR^n$ is positively stable for that system, then $\Re(\lambda) \leq 0$ $\forall \lambda\in\sigma(\vf{A})$.
-      \item If $\vf{0}\in\RR^n$ is negatively stable for that system, then $\Re(\lambda) \geq 0$ $\forall \lambda\in\sigma(\vf{A})$.
-    \end{enumerate}
-  \end{prop}
-  \begin{prop}
     Let $\alpha,\beta\in\RR$ such that $\alpha\beta>0$. Consider the function $h:\RR\rightarrow\RR$ defined by: $$h(x)=\left\{
       \begin{array}{ccc}
         x^{\beta/\alpha}      & \text{if} & x\geq 0 \\
@@ -806,17 +797,51 @@
   \begin{lemma}
     Let $U,V\subseteq \RR^n$ be open sets and $\vf{f}:U\rightarrow\RR^n$, $\vf{g}:V\rightarrow\RR^n$ be vector fields of class $\mathcal{C}^1$ and $\vf{h}:U\rightarrow V$ be a diffeomorphism of class $\mathcal{C}^1$. Then, $\vf{h}$ is a conjugacy of class $\mathcal{C}^1$ if and only if $\vf{Dh}(\vf{x})(\vf{f}(\vf{x}))=\vf{g}(\vf{h}(\vf{x}))$ $\forall \vf{x}\in U$.
   \end{lemma}
+  \begin{prop}
+    Let $U,V\subseteq \RR^n$ be open sets and $\vf{f}:U\rightarrow\RR^n$, $\vf{g}:V\rightarrow\RR^n$ be vector fields. Suppose that $\vf{h}$ is a conjugacy between $\vf{x}'=\vf{f}(\vf{x})$ and $\vf{y}'=\vf{g}(\vf{y})$. Then, $\vf{x}'=-\vf{f}(\vf{x})$ and $\vf{y}'=-\vf{g}(\vf{y})$ are conjugate by $\vf{h}$.
+  \end{prop}
   \begin{theorem}[Flow box theorem]
-    Let $U\subseteq \RR^n$ be an open set, $\vf{f}:U\rightarrow\RR^n$ be a vector field of class $\mathcal{C}^r$ with $r\geq 1$ and $\vf{p}\in\RR^n$ be a non-singular point of $\vf{f}$. Let $\vf{g}:\RR^n\rightarrow\RR^n$ be the vector field defined as $\vf{g}(\vf{x})=(1,0\ldots,0)$ $\forall \vf{x}\in\RR^n$. Then, there exist neighbourhoods $V\subseteq U$ of $\vf{p}$ and $W\subseteq \RR^n$ of $\vf{0}$ such that $\vf{f}|_V$ and $\vf{g}|_W$ are conjugates of class $\mathcal{C}^r$.
+    Let $U\subseteq \RR^n$ be an open set, $\vf{f}:U\rightarrow\RR^n$ be a vector field of class $\mathcal{C}^r$ with $r\geq 1$ and $\vf{p}\in U$ be a non-singular point of $\vf{f}$. Let $\vf{g}:\RR^n\rightarrow\RR^n$ be the vector field defined as $\vf{g}(\vf{x})=(1,0\ldots,0)$ $\forall \vf{x}\in\RR^n$. Then, there exist neighbourhoods $V\subseteq U$ of $\vf{p}$ and $W\subseteq \RR^n$ of $\vf{0}$ such that $\vf{f}|_V$ and $\vf{g}|_W$ are conjugates of class $\mathcal{C}^r$.
   \end{theorem}
   \begin{lemma}
     Let $U,V\subseteq \RR^n$ be open sets and $\vf{f}:U\rightarrow\RR^n$, $\vf{g}:V\rightarrow\RR^n$ be vector fields of class $\mathcal{C}^1$ and $\vf{p}\in\RR^n$ be a critical point of $\vf{f}$. Suppose that $\vf{h}$ is a conjugacy of class $\mathcal{C}^1$ between $\vf{f}$ and $\vf{g}$. Then, the vector fields $\vf{Df}(\vf{p})$ and $\vf{Dg}(\vf{h}(\vf{p}))$ are conjugate by $\vf{Dh}(\vf{p})$. In particular, $\sigma(\vf{Df}(\vf{p}))=\sigma(\vf{Dg}(\vf{h}(\vf{p})))$.
   \end{lemma}
+  \begin{definition}
+    Let $U\subseteq \RR^n$ be an open set, $\vf{f}:U\rightarrow\RR^2$ be a vector field of class $\mathcal{C}^1$ and $\vf{p}\in U$ be an critical point of $\vf{f}$. Suppose $\sigma(\vf{Df}(\vf{p}))=\{\lambda_1,\lambda_2\}$. We say that $\vf{p}$ is a
+    \begin{itemize}
+      \item \emph{stable node} if $\lambda_1,\lambda_2\in\RR_{<0}$ and $\lambda_1\ne\lambda_2$.
+      \item \emph{unstable node} if $\lambda_1,\lambda_2\in\RR_{>0}$ and $\lambda_1\ne\lambda_2$.
+      \item \emph{saddle point} if $\lambda_1,\lambda_2\in\RR$ and $\lambda_1\lambda_2<0$.
+      \item \emph{stable star} if $\lambda_1,\lambda_2\in\RR_{<0}$, $\lambda_1=\lambda_2$ and $\vf{Df}(\vf{p})\sim
+              \begin{pmatrix}
+                \lambda_1 & 0         \\
+                0         & \lambda_1
+              \end{pmatrix}$.
+      \item \emph{unstable star} if $\lambda_1,\lambda_2\in\RR_{>0}$, $\lambda_1=\lambda_2$ and $\vf{Df}(\vf{p})\sim
+              \begin{pmatrix}
+                \lambda_1 & 0         \\
+                0         & \lambda_1
+              \end{pmatrix}$.
+      \item \emph{stable degenerated node} if $\lambda_1,\lambda_2\in\RR_{<0}$, $\lambda_1=\lambda_2$ and $\vf{Df}(\vf{p})\sim
+              \begin{pmatrix}
+                \lambda_1 & 0         \\
+                1         & \lambda_1
+              \end{pmatrix}$.
+      \item \emph{unstable degenerated node} if $\lambda_1,\lambda_2\in\RR_{>0}$, $\lambda_1=\lambda_2$ and $\vf{Df}(\vf{p})\sim
+              \begin{pmatrix}
+                \lambda_1 & 0         \\
+                1         & \lambda_1
+              \end{pmatrix}$.
+      \item \emph{stable spiral} (or \emph{sink}) if $\lambda_1,\lambda_2\in\CC$ and $\Re(\lambda_1)<0$.
+      \item \emph{unstable spiral} (or \emph{source}) if $\lambda_1,\lambda_2\in\CC$ and $\Re(\lambda_1)>0$.
+      \item \emph{center} if $\lambda_1,\lambda_2\in\CC$, $\Re(\lambda_1)=0$ and $\vf{p}$ is enclosed by periodic orbits.
+    \end{itemize}
+  \end{definition}
   \begin{center}
     \begin{minipage}{\linewidth}
       \centering
       \includestandalone[mode=image|tex,width=\linewidth]{Images/singularities_dim2}
-      \captionof{figure}{Classification of singular points of a linear dynamical system of dimension 2, induced by the equation $\vf{x}'=\vf{A}\vf{x}$, $\vf{A}\in\mathcal{M}_2(\RR)$. Here $D=\det\vf{A}$ and $T=\trace\vf{A}$.}
+      \captionof{figure}{Classification of singular points of a linear dynamical system of dimension 2, induced by the equation $\vf{x}'=\vf{A}\vf{x}$, $\vf{A}\in\mathcal{M}_2(\RR)$ in terms of $D=\det\vf{A}$ and $T=\trace\vf{A}$.}
     \end{minipage}
   \end{center}
   \subsubsection{Local behavoir near a hyperbolic critical point}
@@ -835,18 +860,18 @@
   \begin{prop}
     Let $\vf{A}\in\mathcal{M}_n(\RR)$ be a hyperbolic matrix. Then, $\vf{0}\in\RR^n$ is the unique critical point of $\vf{x}'=\vf{A}\vf{x}$ and it is hyperbolic.
   \end{prop}
-  \begin{theorem}
-    Let $\vf{A}\in\mathcal{M}_n(\RR)$ such that $\Re(\lambda)<0$ $\forall\lambda\in\sigma(\vf{A})$. Then, $\vf{x}'=\vf{A}\vf{x}$ and $\vf{x}'=-\vf{x}$ are topologically conjugate. In particular, the origin is attracting.
-  \end{theorem}
-  \begin{prop}
-    Let $U,V\subseteq \RR^n$ be open sets and $\vf{f}:U\rightarrow\RR^n$, $\vf{g}:V\rightarrow\RR^n$ be vector fields. Suppose that $\vf{h}$ is a conjugacy between $\vf{x}'=\vf{f}(\vf{x})$ and $\vf{y}'=\vf{g}(\vf{y})$. Then, $\vf{x}'=-\vf{f}(\vf{x})$ and $\vf{y}'=-\vf{g}(\vf{y})$ are conjugate by $\vf{h}$.
-  \end{prop}
-  \begin{corollary}
-    Let $\vf{A}\in\mathcal{M}_n(\RR)$ such that $\Re(\lambda)>0$ $\forall\lambda\in\sigma(\vf{A})$. Then, $\vf{x}'=\vf{A}\vf{x}$ and $\vf{x}'=\vf{x}$ are topologically conjugate. In particular, the origin is repelling.
-  \end{corollary}
   \begin{definition}
-    Let $\vf{A}\in\mathcal{M}_n(\RR)$. We define the \emph{stability number} of $\vf{A}$ as: $$\iota(\vf{A}):=\{\lambda\in\sigma(\vf{A}):\Re(\lambda)<0\}$$
+    Let $\vf{A}\in\mathcal{M}_n(\RR)$. We define the \emph{stability number} of $\vf{A}$ as: $$\iota(\vf{A}):=|\{\lambda\in\sigma(\vf{A}):\Re(\lambda)<0\}|$$
   \end{definition}
+  \begin{theorem}
+    Let $\vf{A}\in\mathcal{M}_n(\RR)$ be a hyperbolic matrix such that $\iota(\vf{A})=n$. Then, $\vf{x}'=\vf{A}\vf{x}$ and $\vf{y}'=-\vf{y}$, $\vf{y}\in\RR^n$, are topologically conjugate. In particular, the origin is attracting.
+  \end{theorem}
+  \begin{corollary}
+    Let $\vf{A}\in\mathcal{M}_n(\RR)$ be a hyperbolic matrix such that $\iota(\vf{A})=0$. Then, $\vf{x}'=\vf{A}\vf{x}$ and $\vf{y}'=\vf{y}$, $\vf{y}\in\RR^n$, are topologically conjugate. In particular, the origin is repelling.
+  \end{corollary}
+  \begin{corollary}
+    Let $\vf{A}\in\mathcal{M}_n(\RR)$ be a hyperbolic matrix such that $\iota(\vf{A})=k$. Then, $\vf{x}'=\vf{A}\vf{x}$ and $$\{\vf{y}'=-\vf{y}, \vf{z}'=\vf{z}:\vf{y}\in\RR^k,{z}\in\RR^{n-k}\}$$ are topologically conjugate. In particular, the origin is neither attracting nor repelling.
+  \end{corollary}
   \begin{theorem}
     Let $\vf{A},\vf{B}\in\mathcal{M}_n(\RR)$ be hyperbolic matrices. Then, $\vf{x}'=\vf{A}\vf{x}$ and $\vf{y}'=\vf{B}\vf{y}$ are topologically conjugate if and only if $\iota(\vf{A})=\iota(\vf{B})$.
   \end{theorem}
@@ -861,7 +886,9 @@
     Let $U\subseteq \RR^n$ be an open set, $\vf{f}:U\rightarrow\RR^n$ be a vector field of class $\mathcal{C}^1$ and $\vf{p}\in\RR^n$ be a critical point of $\vf{f}$. Then:
     \begin{enumerate}
       \item If $\iota(\vf{Df}(\vf{p}))=n$, then $\vf{p}$ is asymptotically stable for the dynamical system induced by $\vf{x}'=\vf{f}\vf{x}$.
+      \item If $\iota(\vf{Df}(\vf{p}))=0$, then $\vf{p}$ is repelling and negatively stable for the dynamical system induced by $\vf{x}'=\vf{f}\vf{x}$.
       \item If $\vf{p}$ is positively stable, then $\Re(\lambda)\leq 0$ $\forall\lambda\in\sigma(\vf{Df}(\vf{p}))$.
+      \item If $\vf{p}$ is negatively stable, then $\Re(\lambda)\geq 0$ $\forall\lambda\in\sigma(\vf{Df}(\vf{p}))$.
     \end{enumerate}
   \end{theorem}
 \end{multicols}
