@@ -680,7 +680,7 @@
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $X$ be a simple random variable such that $|X|\leq C$ for some $C\in\RR$. Then, $X$ is integrable and: $$|\Exp_\text{s}(X)|\leq C$$
   \end{prop}
   \begin{prop}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$ be a random variable. For all $n\in\NN$ and all $\omega\in\Omega$ $\exists! k\in\ZZ$ such that $X(\omega)\in\left[\frac{k}{2^n},\frac{k+1}{2^n}\right)$. We define $X_n(\omega):=\frac{k}{2^n}$. Then, $$X_n=\sum_{k\in\ZZ}\frac{k}{2^n}\vf{1}_{\left\{\frac{k}{2^n}\leq X\leq \frac{k+1}{2^n}\right\}}$$ is a simple random variable such that $X_n(\omega)\leq X(\omega)$ $\forall n\in\NN$ and $\omega\in \Omega$\footnote{The partition $\displaystyle\RR=\bigsqcup_{k\in\ZZ}\left[\frac{k}{2^n},\frac{k+1}{2^n}\right)$ is called \emph{dyadic partition of order $n$}.}.
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$ be a random variable. For all $n\in\NN$ and all $\omega\in\Omega$ $\exists! k\in\ZZ$ such that $X(\omega)\in\left[\frac{k}{2^n},\frac{k+1}{2^n}\right)$. We define $X_n(\omega):=\frac{k}{2^n}$. Then, $$X_n=\sum_{k\in\ZZ}\frac{k}{2^n}\vf{1}_{\left\{\frac{k}{2^n}\leq X< \frac{k+1}{2^n}\right\}}$$ is a simple random variable such that $X_n(\omega)\leq X(\omega)$ $\forall n\in\NN$ and $\omega\in \Omega$\footnote{The partition $\displaystyle\RR=\bigsqcup_{k\in\ZZ}\left[\frac{k}{2^n},\frac{k+1}{2^n}\right)$ is called \emph{dyadic partition of order $n$}.}.
   \end{prop}
   \subsubsection{Extension of the expectation}
   \begin{prop}
@@ -709,14 +709,14 @@
       \item \textit{Comparison test}: If $X$ is integrable and $|Y|\leq X$, then $Y$ is integrable.
       \item $X$ is integrable $\iff |X|$ is integrable.
       \item If $\Prob(A)=0$ for some $A\in\mathcal{A}$, then for any random variable $X$, we have that $X\vf{1}_A$ is integrable and $\Exp(X\vf{1}_A)=0$.
-      \item If $X\overset{a.s.}{=}Y$ and one of them are integrable, then so will be the other one and furthermore $\Exp(X)=\Exp(Y)$.
+      \item If $X\overset{\text{a.s.}}{=}Y$ and one of them is integrable, then so will be the other one and, furthermore, $\Exp(X)=\Exp(Y)$.
     \end{enumerate}
   \end{prop}
   \begin{theorem}[Monotone convergence theorem]
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $(X_n)$ be an increasing sequence of non-negative random variables such that $\displaystyle\forall\omega\in\Omega\ \lim_{n\to\infty}X_n(\omega)=X(\omega)$, for some random variable $X$. Then: $$\lim_{n\to\infty} \Exp(X_n)=\Exp(X)$$
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $(X_n)$ be an increasing sequence of non-negative random variables such that $\displaystyle\lim_{n\to\infty}X_n\overset{\text{a.s.}}{=}X$\footnote{That is, $\displaystyle\forall\omega\in\Omega\ \lim_{n\to\infty}X_n(\omega)=X(\omega)$ except for, maybe, a set of probability 0.}, for some random variable $X$. Then: $$\lim_{n\to\infty} \Exp(X_n)=\Exp(X)$$
   \end{theorem}
   \begin{theorem}[Dominated convergence theorem]
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $(X_n)$ be sequence of random variables such that $\displaystyle\forall\omega\in\Omega\ \lim_{n\to\infty}X_n(\omega)=X(\omega)$, for some random variable $X$. Suppose that there exists an integrable random variable $Y$ such that $$|X_n|\leq Y\quad\forall n\geq 1$$ Then: $$\lim_{n\to\infty} \Exp(X_n)=\Exp(X)$$
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $(X_n)$ be sequence of random variables such that $\displaystyle\lim_{n\to\infty}X_n\overset{\text{a.s.}}{=}X$, for some random variable $X$. Suppose that there exists an integrable random variable $Y$ such that $$|X_n|\leq Y\quad\forall n\geq 1$$ Then: $$\lim_{n\to\infty} \Exp(X_n)=\Exp(X)$$
   \end{theorem}
   \subsubsection{Expectation of absolutely continuous random variables}
   \begin{theorem}
@@ -746,17 +746,17 @@
     \end{itemize}
   \end{prop}
   \begin{definition}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$ be a mixed random variable. Suppose that the discrete part of $X$ has support $S$ and ``pmf'' $p_X(x)$\footnote{We write pmf in quotation marks because $p_X(x)$ is not exactly a probability mass function since $\sum_{x\in S}p_X(x)<1$.}. Moreover, suppose that the absolutely continuous part of $X$ has ``pdf'' $f_X(x)$\footnote{Again, we write pdf in quotation marks because $f_X(x)$ is not exactly a probability density function since $\int_{-\infty}^{+\infty}f_X(x)\dd x<1$.} We say that $X$ has \textit{finite expectation} if: $$\sum_{x\in S}|x|p_X(x)+\int_{-\infty}^{+\infty}|x|f_X(x)\dd x<1<\infty$$
-    If so, we define the \textit{expectation} of $X$ as: $$\Exp(X):=\sum_{x\in S}xp_X(x)+\int_{-\infty}^{+\infty}xf_X(x)\dd x<1$$
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$ be a mixed random variable. Suppose that the discrete part of $X$ has support $S$ and ``pmf'' $p_X(x)$\footnote{We write pmf in quotation marks because $p_X(x)$ is not exactly a probability mass function since $\sum_{x\in S}p_X(x)<1$.}. Moreover, suppose that the absolutely continuous part of $X$ has ``pdf'' $f_X(x)$\footnote{Again, we write pdf in quotation marks because $f_X(x)$ is not exactly a probability density function since $\int_{-\infty}^{+\infty}f_X(x)\dd x<1$.} We say that $X$ has \textit{finite expectation} if: $$\sum_{x\in S}|x|p_X(x)+\int_{-\infty}^{+\infty}|x|f_X(x)\dd x<\infty$$
+    If so, we define the \textit{expectation} of $X$ as: $$\Exp(X):=\sum_{x\in S}xp_X(x)+\int_{-\infty}^{+\infty}xf_X(x)\dd x$$
   \end{definition}
   \subsubsection{Moments}
   \begin{definition}[Moment]
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $X$ be a random variable and $k\in\NN$. We say that $X$ has \textit{moment of order $k$} (or \textit{$k$-th moment}) if $X^k$ has finite expectation. We denote by $\mu_k$ the $k$-th moment of $X$: $$\mu_k=\Exp(X^k)$$
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $X$ be a random variable and $k\in\NN$. We say that $X$ has \textit{finite moment of order $k$} (or \textit{finite $k$-th moment}) if $X^k$ has finite expectation. We denote by $\mu_k$ the $k$-th moment of $X$: $$\mu_k=\Exp(X^k)$$
   \end{definition}
   \begin{prop}
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $X$, $Y$ be random variables such that they have finite $k$-th moment. Then:
     \begin{enumerate}
-      \item $X$ (and $Y$) has finite $r$-th moment for all $r\in\{1,\ldots,k\}$.
+      \item $X$ and $Y$ have finite $r$-th moment $\forall r\in\{1,\ldots,k\}$.
       \item $X+Y$ has finite $k$-th moment.
     \end{enumerate}
   \end{prop}
@@ -773,10 +773,10 @@
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$ be a random variable such that $\Exp(X^2)<\infty$. Then: $$\Var(X)=\Exp(X^2)-{\Exp(X)}^2$$
   \end{prop}
   \begin{definition}[Standard deviation]
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$ be a random variable such that $\Exp(X^2)<\infty$. We define the \textit{standard deviation} of $X$ as: $$\sigma(X):=\sqrt{\Var(X)}\footnote{Therefore, we will sometimes refer to $\Var(X)$ as $\sigma^2(X)$.}$$
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$ be a random variable such that $\Exp(X^2)<\infty$. We define the \textit{standard deviation} of $X$ as: $$\sigma(X):=\sqrt{\Var(X)}\footnote{Therefore, $\Var(X)$ is sometimes expressed as $\sigma^2(X)$.}$$
   \end{definition}
   \begin{prop}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$ be a random variable such that $\Exp(X^2)<\infty$. If $\Var(X)=0$, then $X\overset{a.s.}{=}\Exp(X)$.
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$ be a random variable such that $\Exp(X^2)<\infty$. If $\Var(X)=0$, then $X\overset{\text{a.s.}}{=}\Exp(X)$.
   \end{prop}
   \begin{prop}
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$, $Y$ be independent random variables with finite expectation. Then, $XY$ has finite expectation and: $$\Exp(XY)=\Exp(X)\Exp(Y)$$
@@ -820,7 +820,7 @@
     $$\Prob(X>\lambda)\leq \Prob(X\geq \lambda)\leq \frac{\Exp(X)}{\lambda}$$
   \end{theorem}
   \begin{corollary}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X\geq 0$ be a non-negative random variable such that $\Exp(X)=0$. Then, $X\overset{a.s.}{=}0$.
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X\geq 0$ be a non-negative random variable such that $\Exp(X)=0$. Then, $X\overset{\text{a.s.}}{=}0$.
   \end{corollary}
   \begin{corollary}
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $p\in\RR_{>0}$ and $X$ be a random variable such that $\Exp({|X|}^p)<\infty$. Then, for all $a\in\RR_{>0}$: $$\Prob(X\geq a)\leq \frac{\Exp({|X|}^p)}{a^p}$$
