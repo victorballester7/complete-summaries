@@ -163,7 +163,7 @@
   \begin{definition}
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $A=\{A_n:1\leq n\leq N\}\subset\mathcal{A}$, $N\in\NN\cup\{\infty\}$, be a collection of events. We say that $A$ is a \textit{partition} of $\Omega$ if: $$\Omega=\bigsqcup_{n=1}^NA_n$$
   \end{definition}
-  \begin{prop}[Total probability formula]
+  \begin{prop}[Law of total probability]
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $\{A_n:1\leq n\leq N\}\subset\mathcal{A}$, $N\in\NN\cup\{\infty\}$, be a partition of $\Omega$ such that $\Prob(A_n)>0$ for all $1\leq n\leq N$. Then, $\forall A\in\mathcal{A}$: $$\Prob(A)=\sum_{n=1}^N\Prob(A_n)\Prob(A\mid A_n)$$
   \end{prop}
   \begin{prop}[Bayes' formula]
@@ -713,7 +713,7 @@
     \end{enumerate}
   \end{prop}
   \begin{theorem}[Monotone convergence theorem]
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $(X_n)$ be an increasing sequence of non-negative random variables such that $\displaystyle\lim_{n\to\infty}X_n\overset{\text{a.s.}}{=}X$\footnote{That is, $\displaystyle\forall\omega\in\Omega\ \lim_{n\to\infty}X_n(\omega)=X(\omega)$ except for, maybe, a set of probability 0.}, for some random variable $X$. Then: $$\lim_{n\to\infty} \Exp(X_n)=\Exp(X)$$
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $(X_n)$ be an increasing sequence of non-negative random variables such that $\displaystyle\lim_{n\to\infty}X_n\overset{\text{a.s.}}{=}X$\footnote{See \cref{P_as-conv}.}, for some random variable $X$. Then: $$\lim_{n\to\infty} \Exp(X_n)=\Exp(X)$$
   \end{theorem}
   \begin{theorem}[Dominated convergence theorem]
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $(X_n)$ be sequence of random variables such that $\displaystyle\lim_{n\to\infty}X_n\overset{\text{a.s.}}{=}X$, for some random variable $X$. Suppose that there exists an integrable random variable $Y$ such that $$|X_n|\leq Y\quad\forall n\geq 1$$ Then: $$\lim_{n\to\infty} \Exp(X_n)=\Exp(X)$$
@@ -805,7 +805,7 @@
     $$\Var(X_1+\cdots+X_n)=\sum_{i=1}^n\Var(X_i)$$
   \end{corollary}
   \begin{definition}[Pearson correlation coefficient]
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$, $Y$ be non-constant random variables with finite 2nd moments. We define the \textit{Pearson correlation coefficient} (or simply \textit{correlation coefficient}) as: $$\rho(X,Y):=\frac{\cov(X,Y)}{\sigma(X)\sigma(Y)}=\frac{\cov(X,Y)}{\sqrt{\Var(X)}\sqrt{\Var(Y)}}$$
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$, $Y$ be non-constant random variables with finite 2nd moments. We define the \textit{Pearson correlation coefficient} (or simply \textit{correlation coefficient})\footnote{The correlation coefficient measures the linear correlation between two random variables.} as: $$\rho(X,Y):=\frac{\cov(X,Y)}{\sigma(X)\sigma(Y)}=\frac{\cov(X,Y)}{\sqrt{\Var(X)}\sqrt{\Var(Y)}}$$
   \end{definition}
   \begin{prop}
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $X$, $Y$ be non-constant random variables with finite 2nd moments and $\rho:=\rho(X,Y)$. Then:
@@ -823,7 +823,7 @@
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X\geq 0$ be a non-negative random variable such that $\Exp(X)=0$. Then, $X\overset{\text{a.s.}}{=}0$.
   \end{corollary}
   \begin{corollary}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $p\in\RR_{>0}$ and $X$ be a random variable such that $\Exp({|X|}^p)<\infty$. Then, for all $a\in\RR_{>0}$: $$\Prob(X\geq a)\leq \frac{\Exp({|X|}^p)}{a^p}$$
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $p\in\RR_{>0}$ and $X$ be a random variable such that $\Exp({|X|}^p)<\infty$. Then, for all $a\in\RR_{>0}$: $$\Prob(|X|\geq a)\leq \frac{\Exp({|X|}^p)}{a^p}$$
   \end{corollary}
   \begin{corollary}[Chebyshev's inequality]
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $X$ be a random variable such that $\Exp(X^2)<\infty$ and $\delta\in\RR_{>0}$. Then: $$\Prob(|X-\Exp(X)|\geq\delta)\leq\frac{\Var(X)}{\delta^2}$$ Furthermore, if $\sigma:=\sigma(X)$ and we take $\delta=k\sigma$, $k\in\RR_{>0}$, then: $$\Prob(|X-\Exp(X)|<k\sigma)\geq1-\frac{1}{k^2}$$
@@ -833,16 +833,16 @@
     $$\function{\psi_X}{\RR}{\RR_{>0}\cup\{+\infty\}}{t}{\Exp(\exp{tX})}$$
   \end{definition}
   \begin{theorem}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $X$, $Y$ be random variables such that $\psi_X,\psi_Y<+\infty$ in a neighbourhood of 0 and such that $\psi_X$, $\psi_Y$ are equal in neighbourhood of 0. Then, $X\overset{\text{d}}{=}Y$.
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $X$, $Y$ be random variables such that $\psi_X(t),\psi_Y(t)<+\infty$ in a neighbourhood of 0 and such that $\psi_X$, $\psi_Y$ are equal in another neighbourhood of 0. Then, $X\overset{\text{d}}{=}Y$.
   \end{theorem}
   \begin{theorem}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$ be a random variable such that $\psi_X<+\infty$ in a neighbourhood of 0. Then, $X$ has moment of order $k$ $\forall k\in\NN$ and: $$\Exp(X^k)={\psi_X}^{(k)}(0)$$
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$ be a random variable such that $\psi_X(t)<+\infty$ in a neighbourhood of 0. Then, $X$ has moment of order $k$ $\forall k\in\NN$ and: $$\Exp(X^k)={\psi_X}^{(k)}(0)$$
   \end{theorem}
   \begin{theorem}
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $X$, $Y$ be independent random variables. Then, for all $t$ such that $\psi_X(t),\psi_Y(t)<+\infty$, the function $\psi_{X+Y}(t)$ is finite and: $$\psi_{X+Y}(t)=\psi_X(t)\psi_Y(t)$$
   \end{theorem}
   \begin{prop}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $p\in(0,1)$, $\lambda\in\RR_{>0}$ and $X_1,\ldots,X_n$ be i.i.d. random variables.
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $p\in(0,1)$, $\lambda\in\RR_{>0}$ and $X_1,\ldots,X_n$ be i.i.d.\ random variables.
     \begin{itemize}
       \item If $X_1\sim\text{Ber}(p)$, then $X_1+\cdots+X_n\sim\text{B}(n,p)$
       \item If $X_1\sim\text{Geo}(p)$, then $X_1+\cdots+X_n\sim\text{NB}(n,p)$
@@ -854,15 +854,15 @@
   \end{prop}
   \subsubsection{Conditional expectation}
   \begin{definition}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X,Y)$ be a discrete random vector with support $S_X\times S_Y$ and $y\in S_Y$. The \textit{conditional expectation} of $X$ given $Y=y$ is defined as: $$\Exp(X\mid Y=y):=\sum_{x\in S_X}x\Prob(X=x\mid Y=y)$$ provided that the series is absolutely convergent. More generally, if $h:S_X\rightarrow\RR$ is a function, then conditional expectation of $h(X)$ given $Y=y$ is defined as: $$\Exp(h(X)\mid Y=y):=\sum_{x\in S_X}h(x)\Prob(X=x\mid Y=y)$$ provided that the series is absolutely convergent.
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X,Y)$ be a discrete random vector with support $S_X\times S_Y$ and $y\in S_Y$. The \textit{conditional expectation} of $X$ given $Y=y$ is defined as: $$\Exp(X\mid Y=y):=\sum_{x\in S_X}x\Prob(X=x\mid Y=y)$$ provided that the series is absolutely convergent. More generally, if $h:S_X\rightarrow\RR$ is a function, then the conditional expectation of $h(X)$ given $Y=y$ is defined as: $$\Exp(h(X)\mid Y=y):=\sum_{x\in S_X}h(x)\Prob(X=x\mid Y=y)$$ provided that the series is absolutely convergent.
   \end{definition}
-  \begin{prop}
+  \begin{prop}[Law of total expectation]
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X,Y)$ be a discrete random vector with support $S_X\times S_Y$ and $h:S_X\rightarrow\RR$ be a function. If $h(X)$ has finite expectation, then: $$\Exp(h(X))=\sum_{y\in S_Y}\Exp(h(X)\mid Y=y)\Prob(Y=y)$$
   \end{prop}
   \begin{definition}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X,Y)$ be an absolutely continuous and $y\in S_Y$. The \textit{conditional expectation} of $X$ given $Y=y$ is defined as: $$\Exp(X\mid Y=y):=\int_{-\infty}^{+\infty}xf_{X\mid Y}(x\mid y)\dd x$$ provided that the integral is absolutely convergent. More generally, if $h:\RR\rightarrow\RR$ is a Borel measurable function, then conditional expectation of $h(X)$ given $Y=y$ is defined as: $$\Exp(h(X)\mid Y=y):=\int_{-\infty}^{+\infty}h(x)f_{X\mid Y}(x\mid y)\dd x$$ provided that the integral is absolutely convergent.
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X,Y)$ be an absolutely continuous and $y\in S_Y$. The \textit{conditional expectation} of $X$ given $Y=y$ is defined as: $$\Exp(X\mid Y=y):=\int_{-\infty}^{+\infty}xf_{X\mid Y}(x\mid y)\dd x$$ provided that the integral is absolutely convergent. More generally, if $h:\RR\rightarrow\RR$ is a Borel measurable function, then the conditional expectation of $h(X)$ given $Y=y$ is defined as: $$\Exp(h(X)\mid Y=y):=\int_{-\infty}^{+\infty}h(x)f_{X\mid Y}(x\mid y)\dd x$$ provided that the integral is absolutely convergent.
   \end{definition}
-  \begin{prop}
+  \begin{prop}[Law of total expectation]
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X,Y)$ be an absolutely continuous and $h:\RR\rightarrow\RR$ be a Borel measurable function. If $h(X)$ has finite expectation, then: $$\Exp(h(X))=\int_{-\infty}^{+\infty}\Exp(h(X)\mid Y=y)f_Y(y)\dd y$$
   \end{prop}
   \begin{center}
@@ -935,7 +935,7 @@
     Because of that, the convergence in probability is said to be \textit{metrizable}.
   \end{prop}
   \begin{definition}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X_n)$ be a sequence of random variables and $X$ be a random variable. We say that $(X_n)$ satisfies the \textit{Cauchy condition in probability} (or is \textit{Cauchy in probability}) if $\forall \varepsilon >0$ we have: $$\lim_{n,m\to\infty}\Prob(|X_n-x_m|\geq \varepsilon)=0$$
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X_n)$ be a sequence of random variables and $X$ be a random variable. We say that $(X_n)$ satisfies the \textit{Cauchy condition in probability} (or is \textit{Cauchy in probability}) if $\forall \varepsilon >0$ we have: $$\lim_{n,m\to\infty}\Prob(|X_n-X_m|\geq \varepsilon)=0$$
   \end{definition}
   \begin{prop}
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X_n)$ be a sequence of random variables and $X$ be a random variable. Then:
@@ -946,18 +946,18 @@
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X_n)$ be a sequence of random variables and $X$ be a random variable such that $X_n\overset{\Prob}{\longrightarrow} X$. Then, all subsequence $(X_{n_k})$ of $(X_n)$ converges in probability to $X$.
   \end{prop}
   \subsubsection{Almost surely convergence}
-  \begin{definition}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X_n)$ be a sequence of random variables and $X$ be a random variable. We say that $(X_n)$ \textit{converges almost surely} to $X$, and we denote it by $X_n\overset{\text{a.s.}}{\longrightarrow} X$, if $$\Prob\left(\lim_{n\to\infty}X_n=X\right)=1$$ That is, $$\lim_{n\to\infty}X_n(\omega)=X(\omega)$$ for all $\omega\in\Omega$ except for maybe a set of probability zero.
+  \begin{definition}\label{P_as-conv}
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X_n)$ be a sequence of random variables and $X$ be a random variable. We say that $(X_n)$ \textit{converges almost surely} to $X$, and we denote it by $X_n\overset{\text{a.s.}}{\longrightarrow} X$, if $$\Prob\left(\lim_{n\to\infty}X_n=X\right)=1$$ That is, $$\lim_{n\to\infty}X_n(\omega)=X(\omega)$$ for all $\omega\in\Omega$ except for maybe a set of probability zero. Another equivalent expression is the following one: $X_n\overset{\text{a.s.}}{\longrightarrow} X$ if an only if $$\Prob\left(\bigcap_{\varepsilon\in\QQ_{>0}}\bigcup_{n=1}^\infty\bigcap_{k=n}^\infty\{\omega\in\Omega:|X_k(\omega)-X(\omega)|<\varepsilon\}\right)=1$$
   \end{definition}
   \begin{prop}
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X_n)$ be a sequence of random variables and $X$ be a random variable. Then, $X_n\overset{\text{a.s.}}{\longrightarrow} X$ if and only if $\forall \varepsilon>0$ we have: $$\lim_{n\to\infty}\Prob\left(\bigcup_{k=n}^\infty\{|X_k-X|\geq\varepsilon\}\right)=0$$
   \end{prop}
   \begin{prop}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X_n)$ be a sequence of random variables, $X$ be a random variable such that $X_n\overset{\text{a.s.}}{\longrightarrow} X$ and $f:\RR\rightarrow\RR$ be continuous function. Then, $f(X_n)\overset{\text{a.s.}}{\longrightarrow} f(X)$.
-  \end{prop}
-  \begin{prop}
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X_n)$ be a sequence of random variables and $X$ be a random variable. Then:
     $$X_n\overset{\text{a.s.}}{\longrightarrow} X\implies X_n\overset{\Prob}{\longrightarrow} X$$
+  \end{prop}
+  \begin{prop}
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X_n)$ be a sequence of random variables, $X$ be a random variable such that $X_n\overset{\text{a.s.}}{\longrightarrow} X$ and $f:\RR\rightarrow\RR$ be continuous function. Then, $f(X_n)\overset{\text{a.s.}}{\longrightarrow} f(X)$.
   \end{prop}
   \begin{prop}
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X_n)$ be a sequence of random variables and $X$ be a random variable. Suppose that $X_n\overset{\Prob}{\longrightarrow} X$. Then, there exists a subsequence $(X_{n_k})$ of $(X_n)$ such that $X_{n_k}\overset{\text{a.s.}}{\longrightarrow} X$.
@@ -968,9 +968,13 @@
   \end{prop}
   \begin{definition}
     Let $\Omega$ be a set and $(A_n)\subset\Omega$ be a sequence of subsets. We define the \textit{limit superior} of $(A_n)$ as: $$\limsup_{n\to\infty}A_n:=\bigcap_{n=1}^\infty\bigcup_{k=n}^\infty A_k$$
+    That is: $$\omega\in\limsup_{n\to\infty}A_n\iff\forall n\geq 1\ \exists k\geq n\text{ such that }\omega\in A_k$$ We can express that as:
+    $$\limsup_{n\to\infty}A_n=\{\omega\in\Omega:\omega\in A_n\text{ infinitely often}\}$$
   \end{definition}
   \begin{definition}
     Let $\Omega$ be a set and $(A_n)\subset\Omega$ be a sequence of subsets. We define the \textit{limit inferior} of $(A_n)$ as: $$\liminf_{n\to\infty}A_n:=\bigcup_{n=1}^\infty\bigcap_{k=n}^\infty A_k$$
+    That is: $$\omega\in\liminf_{n\to\infty}A_n\iff\exists n\geq 1\text{ such that }\forall k\geq n,\ \omega\in A_k$$ We can express that as:
+    $$\liminf_{n\to\infty}A_n=\{\omega\in\Omega:\omega\in A_n\text{ eventually}\}$$
   \end{definition}
   \begin{prop}
     Let $\Omega$ be a set and $(A_n)\subset\Omega$ be a sequence of subsets. Then:
@@ -1048,7 +1052,7 @@
     Let $A\subseteq\RR$ be a set and $f:A\rightarrow\RR$ be a function. We denote by $C(f)$ the set of points where $f$ is continuous.
   \end{definition}
   \begin{prop}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X_n)$ be a sequence of random variables with cdfs $F_{X_n}$ $\forall n\in\NN$ and $X$ be a random variable be a random variable with cdf $F_X$. Then: $$X_n\overset{\text{d}}{\longrightarrow} X\iff\lim_{n\to\infty} F_{X_n}(t)=F_X(t)\quad\forall t\in C(F_X)$$
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X_n)$ be a sequence of random variables with cdfs $F_{X_n}$ $\forall n\in\NN$ and $X$ be a random variable be a random variable with cdf $F_X$. Then: $$X_n\overset{\text{d}}{\longrightarrow} X\iff\lim_{n\to\infty} F_{X_n}(t)=F_X(t)\quad\forall t\in C(F_X)\footnote{That is, $\displaystyle X_n\overset{\text{d}}{\longrightarrow} X\iff\forall t\in\RR\text{ such that }\Prob(X=t)=0\text{ we have }\lim_{n\to\infty}\Prob(X_n\leq t)=\Prob(X\leq t)$.}$$
   \end{prop}
   \begin{prop}
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X_n)$ be a sequence of random variables and $X$, $Y$ be random variables such that $X_n\overset{\text{d}}{\longrightarrow} X$ and $X_n\overset{\text{d}}{\longrightarrow} Y$. Then, $X\overset{\text{d}}{=}Y$.
@@ -1068,14 +1072,14 @@
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X_n)$ be a sequence of random variables and $X$ be a random variable be such that both $(X_n)$ and $X$ take values in $\NN$. Then, $X_n\overset{\text{d}}{\longrightarrow} X$ if and only if $\forall k\in\NN$, we have: $$\lim_{n\to\infty} \Prob(X_n=k)=\Prob(X=k)$$
   \end{lemma}
   \begin{prop}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X_n)$ be a sequence of random variables and $X$ be a random variable.
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X_n)$ be a sequence of random variables, $X$ be a random variable and $a\in\RR$. Then:
     \begin{enumerate}
       \item $X_n\overset{\Prob}{\longrightarrow} X\implies X_n\overset{\text{d}}{\longrightarrow} X$
-      \item If $a\in\RR$, $X_n\overset{\text{d}}{\longrightarrow} a\implies X_n\overset{\Prob}{\longrightarrow} a$
+      \item $X_n\overset{\text{d}}{\longrightarrow} a\implies X_n\overset{\Prob}{\longrightarrow} a$
     \end{enumerate}
   \end{prop}
   \begin{prop}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X_n)$ be a sequence of random variables, $X$ be a random variable and $f:\RR\rightarrow\RR$ be a continuous function. Then, $f(X_n)\overset{\text{d}}{\longrightarrow}f(X)$.
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X_n)$ be a sequence of random variables, $X$ be a random variable such that $X_n\overset{\text{d}}{\longrightarrow} X$ and $f:\RR\rightarrow\RR$ be a continuous function. Then, $f(X_n)\overset{\text{d}}{\longrightarrow}f(X)$.
   \end{prop}
   \begin{corollary}
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X_n)$ be a sequence of random variables and $X$ be a random variable. Then:
@@ -1089,7 +1093,7 @@
     \begin{enumerate}
       \item $X_n+Y_n\overset{\text{d}}{\longrightarrow} X+ a$
       \item $X_nY_n\overset{\text{d}}{\longrightarrow} aX$
-      \item If $a\ne 0$, $\frac{X_n}{Y_n}\overset{\text{d}}{\longrightarrow} \frac{X}{a}$
+      \item $\frac{X_n}{Y_n}\overset{\text{d}}{\longrightarrow} \frac{X}{a}$ provided that $a\ne 0$.
     \end{enumerate}
   \end{theorem}
   \subsection{Laws of large numbers}
@@ -1098,28 +1102,28 @@
   \end{definition}
   \subsubsection{Weak law}
   \begin{theorem}[Weak law]
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $(X_n)$ be a sequence of i.i.d. random variables with finite 2nd moment. Then: $$\frac{S_n}{n}\overset{\Prob}{\longrightarrow}\Exp(X_1)\quad\text{and}\quad\frac{S_n}{n}\overset{L^2}{\longrightarrow}\Exp(X_1)$$
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $(X_n)$ be a sequence of i.i.d.\ random variables with finite 2nd moment. Then: $$\frac{S_n}{n}\overset{\Prob}{\longrightarrow}\Exp(X_1)\quad\text{and}\quad\frac{S_n}{n}\overset{L^2}{\longrightarrow}\Exp(X_1)$$
   \end{theorem}
   \begin{theorem}[Weak law]
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $(X_n)$ be a sequence of pairwise uncorrelated random variables with finite 2nd moment. Suppose that: $$\lim_{n\to\infty}\frac{1}{n}\sum_{i=1}^n\Exp(X_i)=\mu<\infty\;\,\text{and}\;\,\lim_{n\to\infty}\frac{1}{n^2}\sum_{i=1}^n\Var(X_i)=0$$ Then: $$\frac{S_n}{n}\overset{\Prob}{\longrightarrow}\mu\quad\text{and}\quad\frac{S_n}{n}\overset{L^2}{\longrightarrow}\mu$$
   \end{theorem}
   \subsubsection{Strong law}
   \begin{theorem}[Kolmogorov's strong law]
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $(X_n)$ be a sequence of i.i.d. random variables.
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $(X_n)$ be a sequence of i.i.d.\ random variables.
     \begin{enumerate}
       \item If $\Exp(X_1)<\infty$, then: $$\frac{S_n}{n}\overset{\text{a.s.}}{\longrightarrow}\Exp(X_1)$$
       \item If $\Exp(X_1)=\infty$, then: $$\limsup_{n\to\infty}\frac{|S_n|}{n}\overset{\text{a.s.}}{=}+\infty$$
     \end{enumerate}
   \end{theorem}
   \begin{theorem}[Strong law]
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $(X_n)$ be a sequence of i.i.d. random variables such that $\Exp({X_1}^4)<\infty$. Then: $$\frac{S_n}{n}\overset{\text{a.s.}}{\longrightarrow}\Exp(X_1)$$
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $(X_n)$ be a sequence of i.i.d.\ random variables such that $\Exp({X_1}^4)<\infty$. Then: $$\frac{S_n}{n}\overset{\text{a.s.}}{\longrightarrow}\Exp(X_1)$$
   \end{theorem}
   \begin{corollary}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $A\in\mathcal{A}$. Let $(X_n)$ be a sequence of i.i.d. random variables such that $X_n\sim\text{Ber}(\Prob(A))$ $\forall n\in\NN$. Then: $$\frac{S_n}{n}\overset{\text{a.s.}}{\longrightarrow}\Prob(A)$$
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $A\in\mathcal{A}$. Let $(X_n)$ be a sequence of i.i.d.\ random variables such that $X_n\sim\text{Ber}(\Prob(A))$ $\forall n\in\NN$. Then: $$\frac{S_n}{n}\overset{\text{a.s.}}{\longrightarrow}\Prob(A)$$
   \end{corollary}
   \begin{definition}
-    Let $x\in[0,1)$ and $b\geq 2$. Suppose the expression of $x$ in base $b$ is $x_b=0.a_1a_2a_3\cdots$. Let $N_{x,b}(k,n)$ denote the number of times the digit $k\in\{0,1,\ldots,b-1\}$ appears in the decimal expansion of $x_b$ in the first $n$ digits. We say that $x$ is \emph{simply normal} if there exists $b\geq 2$ such that $$\lim_{n\to\infty}\frac{N_{x,b}(k,n)}{n}=\frac{1}{b}\quad\forall k\in\{0,1,\ldots,b-1\}$$
-    We say that $x$ is \emph{normal} if $$\lim_{n\to\infty}\frac{N_{x,b}(k,n)}{n}=\frac{1}{b}\quad\forall k\in\{0,1,\ldots,b-1\}, \forall b\geq 2$$
+    Let $x\in[0,1)$ and $b\in\NN_{\geq 2}$. Suppose the expression of $x$ in base $b$ is $x_b=0.a_1a_2a_3\cdots$. Let $N_{x,b}(k,n)$ denote the number of times the digit $k\in\{0,1,\ldots,b-1\}$ appears in the decimal expansion of $x_b$ in the first $n$ digits. We say that $x$ is \emph{simply normal} if there exists $b\in\NN_{\geq 2}$ such that $$\lim_{n\to\infty}\frac{N_{x,b}(k,n)}{n}=\frac{1}{b}\quad\forall k\in\{0,1,\ldots,b-1\}$$
+    We say that $x$ is \emph{normal} if $$\lim_{n\to\infty}\frac{N_{x,b}(k,n)}{n}=\frac{1}{b}\quad\forall k\in\{0,1,\ldots,b-1\}, \forall b\in\NN_{\geq 2}$$
   \end{definition}
   \begin{theorem}[Borell's theorem]
     All the numbers in $[0,1)$, except for a null set, are normal.
@@ -1133,12 +1137,13 @@
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $Z=X+\ii Y$ be a complex random variable. Then\footnote{Here we have only exposed two properties of the expectation of a complex random variable but in general all the properties of the expectation that we've already seen in \cref{P_exp} can be extended conveniently to complex random variables.}:
     \begin{enumerate}
       \item $\Exp(Z)=\Exp(X)+\ii\Exp(Y)$
+      \item $\overline{\Exp(Z)}=\Exp(\overline{Z})$
       \item $|\Exp(Z)|\leq \Exp(|Z|)$
     \end{enumerate}
   \end{prop}
   \begin{definition}[Characteristic function]
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$ be a real random variable. The \textit{characteristic function} of $X$ is the function $\varphi_X$ defined as:
-    $$\function{\psi_X}{\RR}{\CC}{t}{\Exp(\exp{\ii tX})}$$
+    $$\function{\varphi_X}{\RR}{\CC}{t}{\Exp(\exp{\ii tX})}$$
   \end{definition}
   \begin{prop}
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$ be a discrete random variable with support $S$. Then:
@@ -1169,28 +1174,74 @@
     $$X_n\overset{\text{d}}{\longrightarrow} X\iff\lim_{n\to\infty}\varphi_{X_n}(t)=\varphi_X(t)\quad\forall t\in\RR$$
   \end{theorem}
   \begin{prop}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$ be random variables with finite $n$-th moment for some $n\in\NN$. Then, there exists the derivative of order $n$ of $\varphi_X$ and it satisfies: $${\varphi_X}^{(n)}(t)=\ii^n\Exp\left(X^n\exp{\ii t X}\right)\quad\forall t\in\RR$$
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$ be random variables with finite $n$-th moment for some $n\in\NN$. Then, there exists the derivative of order $n$ of $\varphi_X$ and it satisfies: $${\varphi_X}^{(n)}(t)=\ii^n\Exp\left(X^n\exp{\ii t X}\right)\quad\forall t\in\RR$$ In particular, ${\varphi_X}^{(n)}(0)=\ii^n\Exp\left(X^n\right)$.
   \end{prop}
+\end{multicols}
+\begin{center}
+  \def\arraystretch{1.25}
+  \begin{tabular}{|c|c|c|}
+    \hline
+    $X$                      & $\displaystyle \psi_X(t)$                                               & $\displaystyle \varphi_X(t)$                                 \\
+    \hline
+    $c\in\RR$                & $\displaystyle \exp{tc}$                                                & $\displaystyle \exp{\ii tc}$                                 \\
+    %\hline
+    $U(\{x_1,\ldots,x_n\})$  & $\frac{1}{n}\sum_{i=1}^n \exp{tx_i}$                                    & $\frac{1}{n}\sum_{i=1}^n \exp{\ii tx_i}$                     \\
+    %\hline
+    $\text{B}(n,p)$          & $\displaystyle {(p\exp{t}+1-p)}^n$                                      & $\displaystyle {(p\exp{it}+1-p)}^n$                          \\
+    %\hline
+    $\text{Pois}(\lambda)$   & $\displaystyle \exp{\lambda(\exp{t}-1)}$                                & $\displaystyle \exp{\lambda(\exp{it}-1)}$                    \\
+    %\hline
+    $\text{Geo}(p)$          & $\displaystyle \frac{p\exp{t}}{1-(1-p)\exp{t}}$                         & $\displaystyle \frac{p\exp{it}}{1-(1-p)\exp{it}}$            \\
+    %\hline
+    $\text{NB}(r,p)$         & $\displaystyle {\left(\frac{1-p}{1-p\exp{t}}\right)}^r$ for $t<-\ln p$  & $\displaystyle {\left(\frac{1-p}{1-p\exp{it}}\right)}^r$     \\
+    %\hline
+    $U(a,b)$                 & $\displaystyle \left\{\begin{array}{ccc}
+        \frac{\exp{tb}-\exp{ta}}{t(b-a)} & \text{if} & t\ne 0 \\
+        1                                & \text{if} & t=0
+      \end{array}\right.$               & $\displaystyle \left\{\begin{array}{ccc}
+        \frac{\exp{\ii tb}-\exp{\ii ta}}{\ii t(b-a)} & \text{if} & t\ne 0 \\
+        1                                            & \text{if} & t=0
+      \end{array}\right.$    \\
+    %\hline
+    $\text{Exp}(\lambda)$    & $\displaystyle \frac{\lambda}{\lambda-t}$  for $t<\lambda$              & $\displaystyle \frac{\lambda}{\lambda-\ii t}$                \\
+    %\hline
+    $N(\mu,\sigma^2)$        & $\displaystyle \exp{\mu t+\frac{\sigma^2t^2}{2}}$                       & $\displaystyle \exp{\ii \mu t-\frac{\sigma^2t^2}{2}}$        \\
+    %\hline
+    $\text{Gamma}(r,\alpha)$ & $\displaystyle{\left(\frac{\alpha}{\alpha-t}\right)}^r$  for $t<\alpha$ & $\displaystyle {\left(\frac{\alpha}{\alpha-\ii t}\right)}^r$ \\
+    %\hline
+    $\text{C}(x_0,\gamma)$   & Does not exist                                                          & $\displaystyle \exp{\ii t x_0-\gamma|t|}$                    \\
+    \hline
+  \end{tabular}
+  \captionof{table}{Moment generating and characteristic functions of common distributions.}
+\end{center}
+\begin{multicols}{2}
   \subsubsection{Central limit theorem}
-  \begin{theorem}[Central limit theorem]
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $(X_n)$ be a sequence of i.i.d. random variables with finite 2nd moments. Let $\mu:=\Exp(X_1)$ and $\sigma^2:=\Var(X_1)$. Then: $$\frac{S_n-n\mu}{\sigma\sqrt{n}}\overset{\text{d}}{\longrightarrow} Z$$
+  \begin{theorem}[Lévy-Lindeberg central limit theorem]
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $(X_n)$ be a sequence of i.i.d.\ random variables with finite 2nd moments. Let $\mu:=\Exp(X_1)$ and $\sigma^2:=\Var(X_1)$. Then: $$\frac{S_n-n\mu}{\sigma\sqrt{n}}\overset{\text{d}}{\longrightarrow} Z$$
+    where $Z\sim N(0,1)$.
+  \end{theorem}
+  \begin{theorem}[Lyapunov central limit theorem]
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $(X_n)$ be a sequence of independent random variables each with finite expectation $\mu_i:=\Exp(X_i)$ and variance ${\sigma_i}^2:=\Var(X_i)$ $\forall i=1,\ldots,n$. Then: $$\frac{\sum_{i=1}^n(X_i-\mu_i)}{\sqrt{\sum_{i=1}^n{\sigma_i}^2}}\overset{\text{d}}{\longrightarrow} Z$$
     where $Z\sim N(0,1)$.
   \end{theorem}
   \begin{corollary}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $(X_n)$ be a sequence of i.i.d. random variables with finite 2nd moments. Let $\mu:=\Exp(X_1)$ and $\sigma^2:=\Var(X_1)$. Then, $\forall s,t\in\RR$ such that $s<t$ we have $$\lim_{n\to\infty}\Prob\left(s<\frac{S_n-n\mu}{\sigma\sqrt{n}}\leq t\right)=F_Z(t)-F_Z(s)$$ where $Z\sim N(0,1)$.
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $(X_n)$ be a sequence of i.i.d.\ random variables with finite 2nd moments. Let $\mu:=\Exp(X_1)$ and $\sigma^2:=\Var(X_1)$. Then, $\forall s,t\in\RR$ such that $s<t$ we have $$\lim_{n\to\infty}\Prob\left(s<\frac{S_n-n\mu}{\sigma\sqrt{n}}\leq t\right)=F_Z(t)-F_Z(s)$$ where $Z\sim N(0,1)$.
   \end{corollary}
   \begin{definition}
     Let $(\Omega,\mathcal{A},\Prob)$ and $X_1,\ldots,X_n$ be random variables. We define the \emph{sample mean} of $X_1,\ldots,X_n$ as: $$\overline{X}_n:=\frac{1}{n}S_n=\frac{1}{n}\sum_{i=1}^nX_i$$
     If the value of $n$ is fixed, we denoted $\overline{X}_n$ by $\overline{X}$.
   \end{definition}
   \begin{prop}
-    Let $(\Omega,\mathcal{A},\Prob)$ and $X_1,\ldots,X_n$ be i.i.d. random variables. Then: $$\Exp(\overline{X}_n)=\Exp(X_1)\quad\text{and}\quad\Var(\overline{X}_n)=\frac{1}{n}\Var(X_1)$$
+    Let $(\Omega,\mathcal{A},\Prob)$ and $X_1,\ldots,X_n$ be i.i.d.\ random variables. Then: $$\Exp(\overline{X}_n)=\Exp(X_1)\quad\text{and}\quad\Var(\overline{X}_n)=\frac{1}{n}\Var(X_1)$$
   \end{prop}
   \begin{corollary}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X_1,\ldots,X_n$ be i.i.d. random variables. Let $\mu:=\Exp(X_1)$ and $\sigma^2:=\Var(X_1)$. Then: $$\overline{X}_n\overset{\text{d}}{\simeq }N\left(\mu,\frac{\sigma^2}{n}\right)\quad\text{ for $n$ large enough}$$
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X_1,\ldots,X_n$ be i.i.d.\ random variables. Let $\mu:=\Exp(X_1)$ and $\sigma^2:=\Var(X_1)$. Then: $$\overline{X}_n\overset{\text{d}}{\simeq }N\left(\mu,\frac{\sigma^2}{n}\right)\quad\text{ for $n$ large enough}$$
   \end{corollary}
   \begin{corollary}[De Moivre-Laplace theorem]
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X_1,\ldots,X_n$ be i.i.d. random variables such that $X_n\sim\text{Ber}(p)$ $\forall n\in\NN$. Then: $$\text{B}(n,p)\overset{\text{d}}{\simeq }N\left(np,np(1-p)\right)\quad\text{ for $n$ large enough}\footnote{In practice, the approximation is good enough for $np(1-p)\geq 18$.}$$
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X_1,\ldots,X_n$ be i.i.d.\ random variables such that $X_n\sim\text{Ber}(p)$ $\forall n\in\NN$. Then: $$\text{B}(n,p)\overset{\text{d}}{\simeq }N\left(np,np(1-p)\right)\quad\text{ for $n$ large enough}\footnote{In practice, the approximation is good enough for $np(1-p)\geq 18$.}$$
   \end{corollary}
+  \begin{definition}[Continuity correction]
+    The \emph{continuity correction} is an adjustment that is made when a discrete distribution is approximated by a continuous distribution. For example if $X\sim\text{B}(n,p)$ is a random variable and $np(1-p)$ is large enough, then $\Prob(X\leq k)$ is well approximated by $\Prob(Z\leq k+\frac{1}{2})$, where $Z\sim N(0,1)$ which is even better than the approximation given by $\Prob(Z\leq k)$.
+  \end{definition}
 \end{multicols}
 \end{document}
