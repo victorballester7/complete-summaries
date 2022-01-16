@@ -273,7 +273,7 @@
     \end{align*}
   \end{definition}
   \begin{prop}
-    Let $S=(\Omega,\mathcal{A},\Prob)$ be a probability space, $X$, $Y$ be random variables defined on $S$ and $a\in\RR$. Then:
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $X$, $Y$ be random variables and $a\in\RR$. Then:
     \begin{enumerate}
       \item $X+Y$ is also a random variable.
       \item $aX$ is also a random variable.
@@ -348,16 +348,16 @@
   \end{theorem}
   \subsubsection{Discrete random  variables}
   \begin{definition}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space. We say that a random variable $X$ is \textit{discrete} if there exists a finite or countable set $S\subset\RR$ such that $\Prob(X\in S)=1$. In that case, $S$ is called the \textit{support} of $X$\footnote{By agreement, we will suppose that $S$ only contains points $x$ such that $\Prob(X=x)>0$.}.
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space. We say that a random variable $X$ is \textit{discrete} if there exists a finite or countable set $S\subset\RR$ such that $\Prob(X\in S)=1$\footnote{By agreement, we will suppose that $S$ only contains points $x$ such that $\Prob(X=x)>0$.}. In that case, $S$ is called the \textit{support} of $X$\footnote{In general we will denote $S$ by $S_X$.}.
   \end{definition}
   \begin{definition}[Probability mass function]
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$ be a discrete random variable with support points $S=\{x_i:i\in I\}$, where $I\subseteq\NN$. The \textit{probability mass function (pmf)} of the random variable $X$ is:
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$ be a discrete random variable with support points $S_X=\{x_i:i\in I\}$, where $I\subseteq\NN$. The \textit{probability mass function (pmf)} of the random variable $X$ is:
     $$
-      \function{p_X}{S}{[0,1]}{x_i}{\Prob(X=x_i)}
+      \function{p_X}{S_X}{[0,1]}{x_i}{\Prob(X=x_i)}
     $$
   \end{definition}
   \begin{prop}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $X$ be a discrete random variable with support points $S=\{x_i:i\in I\}$ and $p_X$ be its pmf. Then:
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $X$ be a discrete random variable with support points $S_X=\{x_i:i\in I\}$ and $p_X$ be its pmf. Then:
     \begin{enumerate}
       \item $p_X(x_i)>0$ $\forall i\in I$.
       \item $\displaystyle\sum_{i\in I}p_X(x_i)=1$.
@@ -365,22 +365,22 @@
     \end{enumerate}
   \end{prop}
   \begin{corollary}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $X$ be a discrete random variable with support points $S=\{x_i:i\in I\}$, $F_X$ be its cdf and $p_X$ be its pmf. Then $\forall x\in\RR$ we have: $$F_X(x)=\Prob(X\leq x)=\sum_{i\in I:x_i\leq x}p_X(x_i)$$
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $X$ be a discrete random variable with support points $S_X=\{x_i:i\in I\}$, $F_X$ be its cdf and $p_X$ be its pmf. Then $\forall x\in\RR$ we have: $$F_X(x)=\Prob(X\leq x)=\sum_{i\in I:x_i\leq x}p_X(x_i)$$
   \end{corollary}
   \begin{definition}[Degenerated distribution]
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space. The \textit{degenerated distribution} consists in taking a constant random variable $X$ so that $$\Prob(X=a)=1$$ for some $a\in\RR$. Here we have $S=\{a\}$.
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space. The \textit{degenerated distribution} consists in taking a constant random variable $X$ so that $$\Prob(X=a)=1$$ for some $a\in\RR$. Here we have $S_X=\{a\}$.
   \end{definition}
   \begin{definition}[Bernoulli distribution]
-    Let\\ $(\Omega,\mathcal{A},\Prob)$ be a probability space. The \textit{Bernoulli distribution} is the one that can only take two values (1 and 0)\footnote{Also called \textit{success}/\textit{true} and \textit{failure}/\textit{false} respectively.} with probabilities $p$ and $q:=1-p$: $$\Prob(X=0)=p\qquad \Prob(X=1)=q$$ Here we have $S=\{0,1\}$. If $X$ follows a Bernoulli distribution of parameter $p$, we will write $X\sim \text{Ber}(p)$.
+    Let\\ $(\Omega,\mathcal{A},\Prob)$ be a probability space. The \textit{Bernoulli distribution} is the one whose random variable $X$ can only take two values (1 and 0)\footnote{Also called \textit{success}/\textit{true} or \textit{failure}/\textit{false}, respectively.} with probabilities $p$ and $q:=1-p$: $$\Prob(X=0)=p\qquad \Prob(X=1)=q$$ Here we have $S_X=\{0,1\}$. If $X$ follows a Bernoulli distribution of parameter $p$, we will write $X\sim \text{Ber}(p)$.
   \end{definition}
   \begin{definition}[Discrete uniform distribution]
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space. The \textit{discrete uniform distribution} is the one whose random variable $X$ takes values on $S=\{x_1,\ldots,x_n\}$ each of these with probability $1/n$: $$\Prob(X=x_i)=\frac{1}{n}\qquad \forall i=1,\ldots,n$$ If $X$ follows a discrete uniform distribution, we will write $X\sim U(\{x_1,\ldots,x_n\})$. The probability space $(S,\mathcal{P}(S),\Prob_X)$ is an \textit{equiprobable space}.
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space. The \textit{discrete uniform distribution} is the one whose random variable $X$ takes values on $S_X=\{x_1,\ldots,x_n\}$ each of these with probability $1/n$: $$\Prob(X=x_i)=\frac{1}{n}\qquad \forall i=1,\ldots,n$$ If $X$ follows a discrete uniform distribution, we will write $X\sim U(\{x_1,\ldots,x_n\})$. The probability space $(S,\mathcal{P}(S),\Prob_X)$ is an \textit{equiprobable space}.
   \end{definition}
   \begin{definition}[Binomial distribution]
-    Let\\ $(\Omega,\mathcal{A},\Prob)$ be a probability space and $A\in\mathcal{A}$. Suppose $\Prob(A)=p$. The \textit{binomial distribution} is the one whose random variable $X$ is the number of successes of $A$ in a sequence of $n$ repetitions. Thus, $S=\{0,1,\ldots,n\}$ and: $$\Prob(X=k)=\binom{n}{k}p^k{(1-p)}^{n-k}\qquad \forall k=0,1,\ldots,n$$ If $X$ follows a binomial distribution of parameters $n$ and $p$, we will write $X\sim \text{B}(n,p)$\footnote{Note that, a Bernoulli distribution of parameter $p$ may be considered as a Binomial distribution of parameters $n=1$ and $p$. Hence, $\text{Ber}(p)=\text{B}(1,p)$.}.
+    Let\\ $(\Omega,\mathcal{A},\Prob)$ be a probability space and $A\in\mathcal{A}$. Suppose $\Prob(A)=p$. The \textit{binomial distribution} is the one whose random variable $X$ is the number of successes of $A$ in a sequence of $n$ repetitions. Thus, $S_X=\{0,1,\ldots,n\}$ and: $$\Prob(X=k)=\binom{n}{k}p^k{(1-p)}^{n-k}\qquad \forall k=0,1,\ldots,n$$ If $X$ follows a binomial distribution of parameters $n$ and $p$, we will write $X\sim \text{B}(n,p)$\footnote{Note that, a Bernoulli distribution of parameter $p$ may be considered as a Binomial distribution of parameters $n=1$ and $p$. Hence, $\text{Ber}(p)=\text{B}(1,p)$.}.
   \end{definition}
   \begin{definition}[Poisson distribution]
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $\lambda\in\RR_{>0}$. The \textit{Poisson distribution} of parameter $\lambda$ is the one whose random variable has support $S=\NN\cup\{0\}$ and: $$\Prob(X=k)=\exp{-\lambda}\frac{\lambda^k}{k!}\qquad \forall k\in\NN\cup\{0\}$$ If $X$ follows a Poisson distribution of parameter $\lambda$, we will write $X\sim \text{Pois}(\lambda)$.
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $\lambda\in\RR_{>0}$. The \textit{Poisson distribution} of parameter $\lambda$ is the one whose random variable $X$ has support $S_X=\NN\cup\{0\}$ and: $$\Prob(X=k)=\exp{-\lambda}\frac{\lambda^k}{k!}\qquad \forall k\in\NN\cup\{0\}$$ If $X$ follows a Poisson distribution of parameter $\lambda$, we will write $X\sim \text{Pois}(\lambda)$.
   \end{definition}
   \begin{theorem}
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space. Let $(p_n)\subset(0,1)$ be a sequence such that: $$\lim_{n\to\infty}np_n=\lambda>0$$
@@ -390,7 +390,7 @@
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and suppose $n\in\NN$ and $p\in (0,1)$ are such that $n\gg 1$ and $p\ll 1$. Then, $\text{B}(n,p)\simeq\text{Pois}(np)$\footnote{In practice, the approximation is good enough for $n\geq 10$ and $p\leq 0.05$.}.
   \end{corollary}
   \begin{definition}[Geometric distribution]
-    Let\\ $(\Omega,\mathcal{A},\Prob)$ be a probability space and $A\in\mathcal{A}$. Suppose $\Prob(A)=p$. The \textit{geometric distribution} is the one whose random variable $X$ is the number of trials needed to get one success. Thus, $S=\NN$ and: $$\Prob(X=k)={(1-p)}^{k-1}p\qquad \forall k\in\NN$$ If $X$ follows a geometric distribution of parameter $p$, we will write $X\sim \text{Geo}(p)$.
+    Let\\ $(\Omega,\mathcal{A},\Prob)$ be a probability space and $A\in\mathcal{A}$. Suppose $\Prob(A)=p$. The \textit{geometric distribution} is the one whose random variable $X$ is the number of trials needed to get one success. Thus, $S_X=\NN$ and: $$\Prob(X=k)={(1-p)}^{k-1}p\qquad \forall k\in\NN$$ If $X$ follows a geometric distribution of parameter $p$, we will write $X\sim \text{Geo}(p)$.
   \end{definition}
   \begin{definition}[Discrete memorylessness property]
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$ be a discrete random variable whose support is $\NN$ and such that $\Prob(X >m)>0$ $\forall m\in\NN$. The distribution of $X$ is \textit{memoryless} if $\forall m,n\in\NN$, we have: $$\Prob(X>m+n\mid X >m)=\Prob(X>n)$$
@@ -399,14 +399,14 @@
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $X$ be a discrete random variable and $p\in(0,1)$. Then, $X\sim\text{Geo}(p)$ if and only if the distribution of $X$ is memoryless.
   \end{prop}
   \begin{definition}[Hypergeometric distribution]
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space. Suppose we have a population of size $N$ of whom $K$ have a special feature (success). Let $X$ be the random variable that counts the number of successes that we have obtained in $n$ draws (without replacement). Thus, the support of $X$ is: $$S=\{\max\{n+K-N,0\},\ldots,\min\{n,K\}\}$$ And the pmf is given by: $$\Prob(X=k)=\frac{\binom{K}{k}\binom{N-K}{n-k}}{\binom{N}{n}}$$ This type of distribution is called \textit{hypergeometric distribution} and it is denoted by $X\sim \text{HG}(N,p,n)$, where $p=\frac{K}{N}$ is the proportion of successes in the population.
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space. Suppose we have a population of size $N$ of whom $K$ have a special feature (success). Let $X$ be the random variable that counts the number of successes that we have obtained in $n$ draws (without replacement). Thus, the support of $X$ is: $$S_X=\{\max\{n+K-N,0\},\ldots,\min\{n,K\}\}$$ And the pmf is given by: $$\Prob(X=k)=\frac{\binom{K}{k}\binom{N-K}{n-k}}{\binom{N}{n}}$$ This type of distribution is called \textit{hypergeometric distribution} and it is denoted by $X\sim \text{HG}(N,p,n)$, where $p=\frac{K}{N}$ is the proportion of successes in the population.
   \end{definition}
   \begin{theorem}
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X\sim \text{HG}(N,p,n)$ such that when $N\to\infty$, $p$ remains constant. Then:
     $$\lim_{N\to\infty}\Prob(X=k)=\lim_{N\to\infty}\frac{\binom{K}{k}\binom{N-K}{n-k}}{\binom{N}{n}}=\binom{n}{k}p^k{(1-p)}^{n-k}$$ which is the pmf of a binomial distribution $\text{B}(n,p)$.
   \end{theorem}
   \begin{definition}[Negative binomial distribution]
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $A\in\mathcal{A}$. Suppose $\Prob(A)=p$. The \textit{negative binomial distribution} is the one whose random variable $X$ is the number of trials needed to get $r\geq 1$ successes. Thus, $S=\{r,r+1,\ldots\}$ and: $$\Prob(X=k)=\binom{k-1}{r-1}p^r{(1-p)}^{k-r}\qquad \forall k\geq r$$ If $X$ follows a negative binomial distribution of parameters $r$ and $p$, we will write $X\sim \text{NB}(r,p)$.
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $A\in\mathcal{A}$. Suppose $\Prob(A)=p$. The \textit{negative binomial distribution} is the one whose random variable $X$ is the number of trials needed to get $r\geq 1$ successes. Thus, $S_X=\{r,r+1,\ldots\}$ and: $$\Prob(X=k)=\binom{k-1}{r-1}p^r{(1-p)}^{k-r}\qquad \forall k\geq r$$ If $X$ follows a negative binomial distribution of parameters $r$ and $p$, we will write $X\sim \text{NB}(r,p)$.
   \end{definition}
   \subsubsection{Absolutely continuous random variables}
   \begin{definition}
@@ -1004,7 +1004,7 @@
     $$X_n\overset{L^p}{\longrightarrow} X\implies X_n\overset{\Prob}{\longrightarrow} X$$
   \end{prop}
   \begin{theorem}[Dominated convergence theorem]
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $p\geq 1$, $X$ be a random variable such that $\Exp({|X|}^p)<\infty$ and $(X_n)$ be a sequence of random variables such that $\Exp({|X_n|}^p)<\infty$ and $X_n\overset{\Prob}{\longrightarrow}X$ or $X_n\overset{\text{a.s.}}{\longrightarrow}X$. Suppose that there exists an random variable $Y$ such that $|X_n|\leq Y\ \forall n\geq 1$ and $\Exp({|Y|}^p)$. Then, $X_n\overset{L^p}{\longrightarrow} X$.
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $p\geq 1$, $X$ be a random variable and $(X_n)$ be a sequence of random variables such that $X_n\overset{\Prob}{\longrightarrow}X$ or $X_n\overset{\text{a.s.}}{\longrightarrow}X$. Suppose that there exists an random variable $Y$ such that $|X_n|\leq Y\ \forall n\geq 1$ and $\Exp({|Y|}^p)<\infty$. Then, $X_n\overset{L^p}{\longrightarrow} X$.
   \end{theorem}
   \begin{lemma}
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $p\geq 1$. Define the set $\mathcal{L}^p$ of all random variables of $(\Omega,\mathcal{A},\Prob)$ such that $\Exp({|X|}^p)<\infty$. Then, $\mathcal{L}^p$ is a vector space. Moreover, the relation $\sim$ defined in $\mathcal{L}^p$ as $$X\sim Y\iff X\overset{\text{a.s.}}{=} Y\quad\forall X,Y\in\mathcal{L}^p$$ is an equivalence relation. The quotient set $\quot{\mathcal{L}^p}{\sim}$ is denoted by $L^p$\footnote{If $X\in\mathcal{L}^p$, we will use the same notation for its equivalence class.}.
@@ -1100,14 +1100,14 @@
   \begin{definition}
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $(X_n)$ be a sequence of random variables. We define the sequence of partial sums $(S_n)$ as: $$S_n:=\sum_{i=1}^nX_i$$
   \end{definition}
-  \subsubsection{Weak law}
+  \subsubsection{Weak laws}
   \begin{theorem}[Weak law]
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $(X_n)$ be a sequence of i.i.d.\ random variables with finite 2nd moment. Then: $$\frac{S_n}{n}\overset{\Prob}{\longrightarrow}\Exp(X_1)\quad\text{and}\quad\frac{S_n}{n}\overset{L^2}{\longrightarrow}\Exp(X_1)$$
   \end{theorem}
   \begin{theorem}[Weak law]
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $(X_n)$ be a sequence of pairwise uncorrelated random variables with finite 2nd moment. Suppose that: $$\lim_{n\to\infty}\frac{1}{n}\sum_{i=1}^n\Exp(X_i)=\mu<\infty\;\,\text{and}\;\,\lim_{n\to\infty}\frac{1}{n^2}\sum_{i=1}^n\Var(X_i)=0$$ Then: $$\frac{S_n}{n}\overset{\Prob}{\longrightarrow}\mu\quad\text{and}\quad\frac{S_n}{n}\overset{L^2}{\longrightarrow}\mu$$
   \end{theorem}
-  \subsubsection{Strong law}
+  \subsubsection{Strong laws}
   \begin{theorem}[Kolmogorov's strong law]
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $(X_n)$ be a sequence of i.i.d.\ random variables.
     \begin{enumerate}
@@ -1146,8 +1146,8 @@
     $$\function{\varphi_X}{\RR}{\CC}{t}{\Exp(\exp{\ii tX})}$$
   \end{definition}
   \begin{prop}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$ be a discrete random variable with support $S$. Then:
-    $$\varphi_X(t)=\sum_{x\in S}\exp{\ii tx}\Prob(X=x)$$
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$ be a discrete random variable with support $S_X$. Then:
+    $$\varphi_X(t)=\sum_{x\in S_X}\exp{\ii tx}\Prob(X=x)$$
   \end{prop}
   \begin{prop}
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$ be an absolutely continuous random variable with density $f_X$. Then:
@@ -1187,13 +1187,13 @@
     %\hline
     $U(\{x_1,\ldots,x_n\})$  & $\frac{1}{n}\sum_{i=1}^n \exp{tx_i}$                                    & $\frac{1}{n}\sum_{i=1}^n \exp{\ii tx_i}$                     \\
     %\hline
-    $\text{B}(n,p)$          & $\displaystyle {(p\exp{t}+1-p)}^n$                                      & $\displaystyle {(p\exp{it}+1-p)}^n$                          \\
+    $\text{B}(n,p)$          & $\displaystyle {(p\exp{t}+1-p)}^n$                                      & $\displaystyle {(p\exp{\ii t}+1-p)}^n$                       \\
     %\hline
-    $\text{Pois}(\lambda)$   & $\displaystyle \exp{\lambda(\exp{t}-1)}$                                & $\displaystyle \exp{\lambda(\exp{it}-1)}$                    \\
+    $\text{Pois}(\lambda)$   & $\displaystyle \exp{\lambda(\exp{t}-1)}$                                & $\displaystyle \exp{\lambda(\exp{\ii t}-1)}$                 \\
     %\hline
-    $\text{Geo}(p)$          & $\displaystyle \frac{p\exp{t}}{1-(1-p)\exp{t}}$                         & $\displaystyle \frac{p\exp{it}}{1-(1-p)\exp{it}}$            \\
+    $\text{Geo}(p)$          & $\displaystyle \frac{p\exp{t}}{1-(1-p)\exp{t}}$                         & $\displaystyle \frac{p\exp{\ii t}}{1-(1-p)\exp{\ii t}}$      \\
     %\hline
-    $\text{NB}(r,p)$         & $\displaystyle {\left(\frac{1-p}{1-p\exp{t}}\right)}^r$ for $t<-\ln p$  & $\displaystyle {\left(\frac{1-p}{1-p\exp{it}}\right)}^r$     \\
+    $\text{NB}(r,p)$         & $\displaystyle {\left(\frac{1-p}{1-p\exp{t}}\right)}^r$ for $t<-\ln p$  & $\displaystyle {\left(\frac{1-p}{1-p\exp{\ii t}}\right)}^r$  \\
     %\hline
     $U(a,b)$                 & $\displaystyle \left\{\begin{array}{ccc}
         \frac{\exp{tb}-\exp{ta}}{t(b-a)} & \text{if} & t\ne 0 \\
@@ -1212,7 +1212,7 @@
     $\text{C}(x_0,\gamma)$   & Does not exist                                                          & $\displaystyle \exp{\ii t x_0-\gamma|t|}$                    \\
     \hline
   \end{tabular}
-  \captionof{table}{Moment generating and characteristic functions of common distributions.}
+  \captionof{table}{Moment generating functions and characteristic functions of common distributions.}
 \end{center}
 \begin{multicols}{2}
   \subsubsection{Central limit theorem}
