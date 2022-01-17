@@ -668,9 +668,6 @@
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and suppose that a random variable $X$ can be expressed as $$X=\sum_{n=1}^Na_n\vf{1}_{A_n}$$ where $N\in\NN\cup\{\infty\}$, $\{A_n:n=1,\ldots,N\}\subseteq\mathcal{A}$ is a partition of $\Omega$ and $\{a_n:n=1,\ldots,N\}$ are not necessarily distinct values. Then, $X$ has finite expectation if and only if $$\sum_{n=1}^N|a_n|\Prob(A_n)<\infty$$ and in that case, $\Exp_\text{s}(X)=\sum_{n=1}^Na_n\Prob(A_n)$.
   \end{lemma}
   \begin{prop}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$ be a random variable whose outcomes are in $\NN\cup\{0\}$. Then: $$\Exp_\text{s}(X)=\sum_{k=0}^\infty\Prob(X>k)$$
-  \end{prop}
-  \begin{prop}
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$, $Y$ be simple and integrable random variables. Then, $X+Y$ is also a simple and integrable random variable and: $$\Exp_\text{s}(X+Y)=\Exp_\text{s}(X)+\Exp_\text{s}(Y)$$
   \end{prop}
   \begin{prop}
@@ -712,6 +709,9 @@
       \item If $X\overset{\text{a.s.}}{=}Y$ and one of them is integrable, then so will be the other one and, furthermore, $\Exp(X)=\Exp(Y)$.
     \end{enumerate}
   \end{prop}
+  \begin{prop}
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$ be a random variable whose outcomes are in $\NN\cup\{0\}$. Then: $$\Exp(X)=\sum_{k=0}^\infty\Prob(X>k)$$
+  \end{prop}
   \begin{theorem}[Monotone convergence theorem]
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $(X_n)$ be an increasing sequence of non-negative random variables such that $\displaystyle\lim_{n\to\infty}X_n\overset{\text{a.s.}}{=}X$\footnote{See \cref{P_as-conv}.}, for some random variable $X$. Then: $$\lim_{n\to\infty} \Exp(X_n)=\Exp(X)$$
   \end{theorem}
@@ -746,8 +746,8 @@
     \end{itemize}
   \end{prop}
   \begin{definition}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$ be a mixed random variable. Suppose that the discrete part of $X$ has support $S$ and ``pmf'' $p_X(x)$\footnote{We write pmf in quotation marks because $p_X(x)$ is not exactly a probability mass function since $\sum_{x\in S}p_X(x)<1$.}. Moreover, suppose that the absolutely continuous part of $X$ has ``pdf'' $f_X(x)$\footnote{Again, we write pdf in quotation marks because $f_X(x)$ is not exactly a probability density function since $\int_{-\infty}^{+\infty}f_X(x)\dd x<1$.} We say that $X$ has \textit{finite expectation} if: $$\sum_{x\in S}|x|p_X(x)+\int_{-\infty}^{+\infty}|x|f_X(x)\dd x<\infty$$
-    If so, we define the \textit{expectation} of $X$ as: $$\Exp(X):=\sum_{x\in S}xp_X(x)+\int_{-\infty}^{+\infty}xf_X(x)\dd x$$
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$ be a mixed random variable. Suppose that the discrete part of $X$ has support $S_X$ and ``pmf'' $p_X(x)$\footnote{We write pmf in quotation marks because $p_X(x)$ is not exactly a probability mass function since $\sum_{x\in S_X}p_X(x)<1$.}. Moreover, suppose that the absolutely continuous part of $X$ has ``pdf'' $f_X(x)$\footnote{Again, we write pdf in quotation marks because $f_X(x)$ is not exactly a probability density function since $\int_{-\infty}^{+\infty}f_X(x)\dd x<1$.} We say that $X$ has \textit{finite expectation} if: $$\sum_{x\in S}|x|p_X(x)+\int_{-\infty}^{+\infty}|x|f_X(x)\dd x<\infty$$
+    If so, we define the \textit{expectation} of $X$ as: $$\Exp(X):=\sum_{x\in S_X}xp_X(x)+\int_{-\infty}^{+\infty}xf_X(x)\dd x$$
   \end{definition}
   \subsubsection{Moments}
   \begin{definition}[Moment]

@@ -552,6 +552,7 @@
         \centering
         \includestandalone[mode=image|tex,width=\linewidth]{Images/square}
         \captionof{figure}{Representation of the quotient spaces $\quot{{[0,1]}^2}{\sim}$, where $\sim$ is the equivalence relation defined on \cref{TOP_square-sim}}
+        \label{TOP_fig-MK}
       \end{minipage}
     \end{center}
   \end{prop}
@@ -571,7 +572,7 @@
       \label{TOP_klein}
     \end{minipage}
   \end{center}
-  \begin{prop}
+  \begin{prop}\label{TOP_proj-sim}
     Let $\mathcal{P}_n(\RR)$ be the projective space of $\RR^{n+1}$. Consider the relation $\sim$ on $\RR^{n+1}$ such that $\vf{v}\sim -\vf{v}$ $\forall \vf{v}\in\RR^{n+1}$. Then: $$\mathcal{P}_n(\RR)\cong\quot{S^n}{\sim}$$
   \end{prop}
   \begin{prop}\label{TOP_circle-sim}
@@ -579,8 +580,9 @@
     \begin{center}
       \begin{minipage}{\linewidth}
         \centering
-        \includestandalone[mode=image|tex,width=0.25\linewidth]{Images/circle}
-        \captionof{figure}{Representation of the quotient spaces $\quot{B^2}{\sim}$, where $\sim$ is the equivalence relation defined on \cref{TOP_circle-sim}}
+        \includestandalone[mode=image|tex,width=0.75\linewidth]{Images/circle}
+        \captionof{figure}{Representation of the quotient space $\quot{S^2}{\sim}$ (left), where $\sim$ is the equivalence relation defined on \cref{TOP_proj-sim} and the quotient space $\quot{B^2}{\sim}$ (right), where $\sim$ is the equivalence relation defined on \cref{TOP_circle-sim}}
+        \label{TOP_fig-PS}
       \end{minipage}
     \end{center}
   \end{prop}
@@ -614,7 +616,7 @@
     Let $(X,\topo_X)$, $(Y,\topo_Y)$ be Hausdorff topological spaces. Then, $(X\times Y,\topo_{X\times Y})$ is Hausdorff.
   \end{prop}
   \begin{definition}[$T_{2\frac{1}{2}}$ space]
-    Let $(X,\topo)$ be a topological space. We say that $(X,\topo)$ is $T_{2\frac{1}{2}}$ if for any two distinct points $x,y\in X$, there exist open sets $U,V\in\topo$ separated by closed neighbourhoods such that $x\in U$ and $y\in V$.
+    Let $(X,\topo)$ be a topological space. We say that $(X,\topo)$ is $T_{2\frac{1}{2}}$ if for any two distinct points $x,y\in X$, there exist open sets $U,V\in\topo$ separated by closed neighbourhoods ($\Cl U\cap \Cl V=\varnothing$) such that $x\in U$ and $y\in V$.
   \end{definition}
   \begin{definition}
     Let $(X,\topo)$ be a topological space. We say that $(X,\topo)$ is \emph{regular} if for all $x\in X$ and for all a closed sets $C\subseteq X$ such that $x\notin C$, there exist $U,V\in\topo$ such that $x\in U$, $C\subseteq V$ and $U\cap V=\varnothing$.
@@ -998,7 +1000,7 @@
     Being a topological manifold is a topological property.
   \end{prop}
   \begin{definition}
-    Let $(M,\topo)$ be a $m$-manifold. A \emph{coordinate chart} is a pair $(U,\varphi)$, where $U\in\tau$ and $\varphi:U\rightarrow\RR^n$ is a homeomorphism. A collection $\{(U_i,\varphi_i):i\in I\}$ of coordinate charts is called an \emph{atlas} if $M=\bigcup_{i\in I}U_i$.
+    Let $(M,\topo)$ be a $m$-manifold. A \emph{coordinate chart} is a pair $(U,\varphi)$, where $U\in\topo$ and $\varphi:U\rightarrow\RR^n$ is a homeomorphism. A collection $\{(U_i,\varphi_i):i\in I\}$ of coordinate charts is called an \emph{atlas} if $M=\bigcup_{i\in I}U_i$.
   \end{definition}
   \begin{definition}
     Let $(M,\topo)$ be a $m$-manifold and $\{(U_i,\varphi_i):i\in I\}$ be an atlas. For all $i,j\in I$ such that $U_i\cap U_j\ne \varnothing$, we define the following homeomorphism: $$
@@ -1024,7 +1026,7 @@
   \begin{definition}[Connected sum]
     Let $(M_1,\topo_{M_1})$ and $(M_2,\topo_{M_2})$ be two $m$-manifolds, $p_1\in M_1$, $p_2\in M_2$ and $(U_1,\varphi_1)$, $(U_2,\varphi_2)$ be coordinate charts such that $p_i\in U_i$ and $\varphi_i(p_i)=0$ for $i=1,2$. Let $\varepsilon>0$ be such that $B(0,2\varepsilon)\subseteq \varphi(U_1)\cap \varphi(U_2)$ and $R:=B(0,2\varepsilon)\setminus\Cl (B(0,\varepsilon))$. Now consider the following homeomorphism:
     $$\function{\psi}{R}{R}{(x_1,\ldots,x_n)}{\displaystyle\frac{2\varepsilon^2}{{x_1}^2+\cdots+{x_n}^2}(x_1,\ldots,x_n)}$$
-    Then, note that for $i=1,2$, ${M_i}':=M_i\setminus\Cl(\psi^{-1}(B(0,\varepsilon)))$ is a $m$-manifold. We define the \emph{connected sum} of $(M_1,\topo_{M_1})$ and $(M_2,\topo_{M_2})$ as: $$M_1\#M_2:=\quot{{M_1}'\sqcup{M_2}'}{\sim}$$
+    Then, note that for $i=1,2$, ${M_i}':=M_i\setminus\Cl(\psi^{-1}(B(0,\varepsilon)))$ is a $m$-manifold. We define the \emph{connected sum} of $(M_1,\topo_{M_1})$ and $(M_2,\topo_{M_2})$ as: $$M_1\conn M_2:=\quot{{M_1}'\sqcup{M_2}'}{\sim}$$
     where $x\sim (\psi^{-1}\circ\phi_{21}\circ\psi)(x)$ $\forall x\in \psi^{-1}(B(0,\varepsilon))$\footnote{Roughly speaking, a connected sum of two m-manifolds is a manifold formed by deleting a ball inside each manifold and gluing together the resulting boundary spheres.}.
   \end{definition}
   \subsubsection{Orientability}
@@ -1049,42 +1051,153 @@
   \begin{prop}
     $\RR^n$, $S^n$ and $T^2$ are orientable, but $\mathcal{P}_n(\RR)$, $\mathcal{M}$ and $\mathcal{K}$ are not.
   \end{prop}
+  \subsubsection{1-manifolds}
+  \begin{theorem}[Classification of connected 1-manifolds]
+    Let $(M,\topo)$ be a connected 1-manifold. Then, $M$ is homeomorphic to exactly one of the following manifolds:
+    \begin{itemize}
+      \item $\RR$
+      \item $S^1$
+    \end{itemize}
+  \end{theorem}
   \subsection{Compact surfaces}
+  \subsubsection{Connected sum of surfaces}
   \begin{definition}
     Let $(M,\topo)$ be a $m$-manifold. We say that $(M,\topo)$ is a \emph{surface} if $m=2$.
   \end{definition}
-  \begin{prop}
-    Let $(S,\topo)$ be a compact connected surface. Then:
-    \begin{enumerate}
-      \item $S\# S^2\cong S$.
-      \item $S\# T$ is a handle attached to $S$.
-      \item $S\#\mathcal{P}_n(\RR)$ is attaching a Möbius band to $S$.
-    \end{enumerate}
-  \end{prop}
-  \begin{prop}
-    Let $(S,\topo_S)$, $(R,\topo_R)$, $(M,\topo_M)$ be compact connected surfaces. Then:
-    \begin{enumerate}
-      \item $S\# R\cong R\# S$
-      \item $(S\# R)\# M\cong R\# (S\# M)$
-      \item $S\#S^2\cong S$
-    \end{enumerate}
-  \end{prop}
   \begin{prop}[Connected sum of surfaces]
-    Let $(S_1,\topo_{S_1})$ and $(S_2,\topo_{S_2})$ be two surfaces, $p_1\in M_1$, $p_2\in M_2$ and $(U_1,\varphi_1)$, $(U_2,\varphi_2)$ be coordinate charts such that $p_i\in U_i$ and $\varphi_i(p_i)=0$ for $i=1,2$. Let $D_i:={\varphi_i}^{-1}(B(0,1))$ for $i=1,2$. Then, note that for $i=1,2$, ${S_i}':=S_i\setminus D_i$ is a surface and $\Fr {S_i}'\cong S^1$. Then, the connected sum of $(S_1,\topo_{S_1})$ and $(S_2,\topo_{S_2})$ is: $$S_1\#S_2:=\quot{{S_1}'\sqcup{S_2}'}{\Fr {S_1}'\sim\Fr {S_2}'}$$
+    Let $(S_1,\topo_{S_1})$ and $(S_2,\topo_{S_2})$ be two surfaces, $p_1\in M_1$, $p_2\in M_2$ and $(U_1,\varphi_1)$, $(U_2,\varphi_2)$ be coordinate charts such that $p_i\in U_i$ and $\varphi_i(p_i)=0$ for $i=1,2$. Let $D_i:={\varphi_i}^{-1}(B(0,1))$ for $i=1,2$. Then, note that for $i=1,2$, ${S_i}':=S_i\setminus D_i$ is a surface and $\Fr {S_i}'={\varphi_i}^{-1}(\Fr B(0,1))\cong S^1$. Then, the connected sum of $(S_1,\topo_{S_1})$ and $(S_2,\topo_{S_2})$ is: $$S_1\conn S_2=\quot{{S_1}'\sqcup{S_2}'}{\Fr {S_1}'\sim\Fr {S_2}'}$$
+  \end{prop}
+  \begin{prop}
+    Let $(S_1,\topo_{S_1})$, $(S_2,\topo_{S_2})$, $(S_3,\topo_{S_3})$ be compact connected surfaces. Then:
+    \begin{enumerate}
+      \item $S_1\conn  S_2\cong S_2\conn  S_1$
+      \item $(S_1\conn  S_2)\conn  S_3\cong S_1\conn  (S_2\conn  S_3)$
+      \item $S_1\conn S^2\cong S_1$
+      \item $S_1\conn  S_2$ is orientable $\iff S_1$ and $S_2$ are both orientable.
+    \end{enumerate}
+  \end{prop}
+  \begin{prop}
+    Let $(M,\topo)$ be a compact connected surface. Then:
+    \begin{enumerate}
+      \item $M\conn  T^2$ is a handle attached to $M$.
+      \item $M\conn \mathcal{P}_n(\RR)$ is attaching a Möbius band to $M$.
+    \end{enumerate}
   \end{prop}
   \begin{definition}
-    Let $g\in\NN\cup\{0\}$. We define the genus $g$ orientable surface as: $$S_g:=S^2\#T^2\#\overset{(g)}{\cdots}\# T^2$$
-    We define the genus $g$ non-orientable surface as: $$N_g:=\mathcal{P}_2(\RR)\#\overset{(g)}{\cdots}\# \mathcal{P}_2(\RR)$$
+    Let $g\in\NN\cup\{0\}$. We define the \emph{genus $g$ orientable surface} as: $$S_g:=S^2\conn  T^2\conn \overset{(g)}{\cdots}\conn  T^2$$
   \end{definition}
+  \begin{definition}
+    Let $h\in\NN$. We define the \emph{genus $h$ non-orientable surface} as: $$N_h:=\mathcal{P}_2(\RR)\conn \overset{(h)}{\cdots}\conn  \mathcal{P}_2(\RR)$$
+  \end{definition}
+  \subsubsection{Triangularization}
+  \begin{definition}
+    The \emph{standard $n$-simplex} is the set $$\Delta^n:=\{(x_0,\ldots,x_n)\in{\RR_{\geq 0}}^{n+1}:x_0+\cdots+x_n=1\}$$
+  \end{definition}
+  \begin{definition}
+    Let $(S,\topo)$ be a compact connected surface. A \emph{triangularization} of $S$ is a finite collection $\{T_1,\ldots,T_n\}$ such that $S=\bigcup_{i=1}^nT_i$, $T_i\cong\Delta^2$ for $i=1,\ldots,n$ and if $T_i\cap T_j\ne\varnothing$ for $i\ne j$, then $T_i\cap T_j$ is an edge of $D_i$ and $D_j$ or a vertex of $D_i$ and $D_j$.
+  \end{definition}
+  \begin{definition}
+    A \emph{simple curve} is a non-self-intersecting continuous loop in the plane.
+  \end{definition}
+  \begin{theorem}[Jordan curve theorem]
+    All simple curves divides the plane in 2 connected components. One of these components is bounded and the other is unbounded.
+  \end{theorem}
+  \begin{theorem}[Radó theorem]
+    Each compact surfaces has a triangularization.
+  \end{theorem}
   \begin{theorem}
+    Every compact surface can be constructed from a polygon with an even number of sides, called a \emph{fundamental polygon of the surface}, by pairwise identification of its edges\footnote{Any fundamental polygon can be written symbolically as follows. Begin at any vertex, and proceed around the perimeter of the polygon in either direction until returning to the starting vertex. During this traversal, record the label on each edge in order, with an exponent of $-1$ if the edge points opposite to the direction of traversal.}. Reciprocally, every polygon whose edges are pairwise identified produces a surface.
+  \end{theorem}
+  \begin{prop}
+    We have the following representations\footnote{Note that these representations are not unique.} of the most common surfaces\footnote{See \cref{TOP_fig-MK,TOP_fig-PS} for a better understanding.}:
+    \begin{itemize}
+      \item $S^2$: $aa^{-1}=:1$
+      \item $T^2$: $aba^{-1}b^{-1}$
+      \item $\mathcal{P}_2(\RR)$: $aa$
+      \item $\mathcal{K}$: $aba^{-1}b$
+    \end{itemize}
+  \end{prop}
+  \begin{definition}
+    We say that a representation of a surface is \emph{normalized} if it is of one of the following forms:
+    \begin{gather*}
+      a_1b_1{a_1}^{-1}{b_1}^{-1}\cdots a_nb_n{a_n}^{-1}{b_n}^{-1}\\
+      a_1b_1{a_1}^{-1}{b_1}^{-1}\cdots a_rb_r{a_r}^{-1}{b_r}^{-1}c_1c_1\cdots c_sc_s
+    \end{gather*}
+  \end{definition}
+  \begin{prop}
+    Let $(S_1,\topo_{S_1})$ and $(S_2,\topo_{S_2})$ be two surfaces whose respect representations are: $$a_1\cdots a_n\quad b_1\cdots b_m$$
+    Then, $S_1\conn S_2$ is represented by $$a_1\cdots a_nb_1\cdots b_m$$
+  \end{prop}
+  \begin{prop}
+    On the representations of polygons, we have:
+    \begin{itemize}
+      \item $aba^{-1}b^{-1}\equiv cdc^{-1}d^{-1}$
+      \item $aba^{-1}b^{-1}\equiv a_1a_2b{a_2}^{-1}{a_1}^{-1}b^{-1}$
+      \item $aba^{-1}b^{-1}\equiv ba^{-1}b^{-1}a\equiv a^{-1}b^{-1}ab\equiv b^{-1}aba^{-1}$
+      \item $abab^{-1}\equiv abc, ab^{-1}e^{-1}$
+      \item $abab^{-1}\equiv abcc^{-1}ab^{-1}$
+      \item $abab^{-1}\equiv a^{-1}b^{-1}a^{-1}b$
+    \end{itemize}
+  \end{prop}
+  \begin{corollary}
+    Let $g\in\NN\cup\{0\}$ and $h\in\NN$. Then, the representations of $S_g$ and $N_h$ are:
+    \begin{itemize}
+      \item $S_g$: $a_1b_1{a_1}^{-1}{b_1}^{-1}\cdots a_gb_g{a_g}^{-1}{b_g}^{-1}$ (a polygon with $4g$ sides)
+      \item $N_h$: $a_1a_1\cdots a_ha_h$ (a polygon with $2n$ sides)
+    \end{itemize}
+  \end{corollary}
+  \begin{prop}
+    \hfill
+    \begin{itemize}
+      \item $\mathcal{K}\cong\mathcal{P}_2(\RR)\conn\mathcal{P}_2(\RR)$
+      \item $T^2\conn\mathcal{P}_2(\RR)\cong\mathcal{K}\conn\mathcal{P}_2(\RR)\cong\mathcal{P}_2(\RR)\conn\mathcal{P}_2(\RR)\conn\mathcal{P}_2(\RR)$
+    \end{itemize}
+  \end{prop}
+  \begin{corollary}
+    Let $g\in\NN\cup\{0\}$ and $h\in\NN$. Then: $$S_g\conn N_h\cong N_{h+2g}$$
+  \end{corollary}
+  \begin{prop}
+    Let $(S,\topo)$ be a compact connected surface. Then, $S$ is non-orientable if and only if it contains a Möbius strip, which can be identified by a representation of $S$ of the form $$aWaW'$$ where $W$ and $W'$ may contain more than one edge.
+  \end{prop}
+  \subsubsection{Euler characteristic}
+  \begin{definition}
+    Let $(S,\topo)$ be a compact connected surface and $T=\{T_i:i=1,\ldots,n\}$ be a triangularization of $S$. We define the \emph{Euler characteristic} of $S$ with the triangularization $T$ as: $$\chi_T(S):=V-E+F$$ where $V$, $E$, and $F$ are respectively the numbers of vertices, edges and faces in the polygonal decomposition obtained from $T$.
+  \end{definition}
+  \begin{prop}
+    Let $(S,\topo)$ be a compact connected surface and $T$, $T'$ be triangularizations of $S$. Then: $$\chi_T(S)=\chi_{T'}(S)$$ Therefore, from now on we will denote the Euler characteristic of $S$ as $\chi(S)$.
+  \end{prop}
+  \begin{prop}
+    We have the following Euler characteristics of the most common surfaces:
+    \begin{itemize}
+      \item $\chi(S^2)=2$
+      \item $\chi(T^2)=0$
+      \item $\chi(\mathcal{P}_2(\RR))=1$
+      \item $\chi(\mathcal{K})=0$
+    \end{itemize}
+  \end{prop}
+  \begin{prop}
+    Let $(S_1,\topo_{S_1})$ and $(S_2,\topo_{S_2})$ be two surfaces. Then: $$\chi(S_1\conn S_2)=\chi(S_1)+\chi(S_2)-2$$
+  \end{prop}
+  \begin{corollary}
+    Let $g\in\NN\cup\{0\}$ and $h\in\NN$. Then:
+    \begin{itemize}
+      \item $\chi(S_g)=2-2g$
+      \item $\chi(N_h)=2-h$
+    \end{itemize}
+  \end{corollary}
+  \begin{theorem}
+    The Euler characteristic is a topological property.
+  \end{theorem}
+  \begin{theorem}[Classification of compact connected surfaces]
     Every compact connected surface is homeomorphic to exactly one of the following surfaces:
     \begin{itemize}
       \item $S_g$ for some $g\in\NN\cup\{0\}$.
-      \item $N_g$ for some $g\in\NN\cup\{0\}$.
+      \item $N_h$ for some $h\in\NN$.
     \end{itemize}
   \end{theorem}
-  % falta revisar suma connexa
-  % posar def de localment euclidia? I def equivalents de la tercera propietat de varietat? (document 21)
-  % fet fins el document 21 (inclòs) menys el document 15.
+  \begin{corollary}
+    Two compact connected surface are homeomorphic if and only if they have the same orientability and the same Euler characteristic.
+  \end{corollary}
+  % faltaria posar fotos de l'última part del curs
 \end{multicols}
 \end{document}

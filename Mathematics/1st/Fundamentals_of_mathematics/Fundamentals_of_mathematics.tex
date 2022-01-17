@@ -314,7 +314,7 @@
     \end{enumerate}
   \end{definition}
   \begin{definition}
-    Let $\sim$ be an equivalence relation on a set $A$ and $a\in A$. The \emph{equivalence class} of $a$ under $\sim$ is the subset of $A$: $$[a]:=\bar{a}:=\{b\in A: a\sim b\}.$$
+    Let $\sim$ be an equivalence relation on a set $A$ and $a\in A$. The \emph{equivalence class} of $a$ under $\sim$ is the subset of $A$: $$[a]:=\overline{a}:=\{b\in A: a\sim b\}.$$
   \end{definition}
   \begin{theorem}
     Let $\sim$ be an equivalence relation on a set $A$. The equivalence classes $\sim$ form a partition of $A$. That is, if $\{\omega_i\}$ are the equivalence classes, then:
@@ -520,7 +520,7 @@
   \end{theorem}
   \subsubsection{Modular arithmetic}
   \begin{definition}
-    Let $n,x,y\in\ZZ$. We say $x\sim y\iff x-y\in n\mathbb{Z}$. A commonly used notation for this is $x\equiv y\mod n$. The set of equivalence classes under $\sim$ is denoted by $\quot{\mathbb{Z}}{n\mathbb{Z}}$ and its elements are denoted by $\bar{x}$.
+    Let $n,x,y\in\ZZ$. We say $x\sim y\iff x-y\in n\mathbb{Z}$. A commonly used notation for this is $x\equiv y\mod n$. The set of equivalence classes under $\sim$ is denoted by $\quot{\mathbb{Z}}{n\mathbb{Z}}$ and its elements are denoted by $\overline{x}$.
   \end{definition}
   \begin{lemma}
     $\quot{\ZZ}{n\ZZ}$ has $n$ elements.
@@ -529,19 +529,19 @@
     Addition and multiplication are well-defined in $\quot{\ZZ}{n\ZZ}$ if we do it in the following way:
     \begin{align*}
       +:\quot{\ZZ}{n\ZZ}\times\quot{\ZZ}{n\ZZ} & \longrightarrow\quot{\ZZ}{n\ZZ} & \cdot:\quot{\ZZ}{n\ZZ}\times\quot{\ZZ}{n\ZZ} & \longrightarrow\quot{\ZZ}{n\ZZ} \\
-      (\bar{a},\bar{b})                        & \longmapsto\overline{a+b}       & (\bar{a},\bar{b})                            & \longmapsto\overline{a\cdot b}
+      (\overline{a},\overline{b})              & \longmapsto\overline{a+b}       & (\overline{a},\overline{b})                  & \longmapsto\overline{a\cdot b}
     \end{align*}
   \end{prop}
   \begin{theorem}
     Since $(\mathbb{Z},+,\cdot)$ is a ring, $(\quot{\ZZ}{n\ZZ},+,\cdot)$ is a ring and the projection
     \begin{align*}
       f:\mathbb{Z} & \longrightarrow\quot{\ZZ}{n\ZZ} \\
-      a            & \longmapsto\bar{a}
+      a            & \longmapsto\overline{a}
     \end{align*}
     is a ring morphism.
   \end{theorem}
   \begin{lemma}
-    Let $n\in\mathbb{Z}$. Then, $\bar{a}\in\quot{\ZZ}{n\ZZ}$ has multiplicative inverse if and only if $\gcd(a,n)=1$.
+    Let $n\in\mathbb{Z}$. Then, $\overline{a}\in\quot{\ZZ}{n\ZZ}$ has multiplicative inverse if and only if $\gcd(a,n)=1$.
   \end{lemma}
   \begin{corollary}
     $(\quot{\ZZ}{n\ZZ},+,\cdot)$ is a field if and only if $n\in\mathbb{P}$.
@@ -549,11 +549,22 @@
   \begin{theorem}[Chinese remainder theorem]
     Let $m,n\in\ZZ$ be relatively prime. Then, the function
     \begin{align*}
-      \psi:\quot{\ZZ}{nm\ZZ}               & \longrightarrow\quot{\ZZ}{m\ZZ}\times\quot{\ZZ}{n\ZZ}                                \\
-      \overline{a}^{\scriptscriptstyle mn} & \longmapsto(\overline{a}^{\scriptscriptstyle m},\overline{a}^{\scriptscriptstyle n})
+      \psi:\quot{\ZZ}{nm\ZZ} & \longrightarrow\quot{\ZZ}{m\ZZ}\times\quot{\ZZ}{n\ZZ} \\
+      \overline{a}           & \longmapsto(\overline{a},\overline{a})
     \end{align*}
     is ring isomorphism.
   \end{theorem}
+  \begin{corollary}
+    Let $m,n\in\ZZ$ be relatively prime and $a,b\in\ZZ$. Then, the system of equations:
+    $$\left\{
+      \begin{array}{l}
+        x\equiv a\mod m \\
+        x\equiv b\mod n
+      \end{array}
+      \right.
+    $$
+    has a solution. Moreover any two solutions $x_1$, $x_2$ of the system satisfy $x_1\equiv x_2\mod mn$.
+  \end{corollary}
   \begin{definition}[Euler's totient function]
     Let $n\in\mathbb{N}$. We define the function $\varphi:\NN\rightarrow\NN$ as:
     \begin{multline*}
