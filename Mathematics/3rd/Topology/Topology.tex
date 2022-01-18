@@ -192,6 +192,9 @@
   \begin{definition}[Boundary]
     Let $(X,\topo)$ be a topological space and $A\subseteq X$ be a subset. The \emph{boundary} of $A$, $\Fr_{(X,\topo)}A$ or simply $\Fr A$, is: $$\Fr A:=\Cl(A)\cap\Cl(X\setminus A)$$
   \end{definition}
+  \begin{prop}
+    Let $(X,\topo)$ be a topological space and $A\subseteq X$ be a subset. Then: $$X=\Int A\sqcup\Fr A\sqcup\Int(X\setminus A)$$
+  \end{prop}
   \begin{definition}
     Let $(X,\topo)$ be a topological space and $x\in X$. We say that $N\subseteq X$ is a \emph{neighbourhood} of $x$ if $\exists U\in\topo$ such that $x\in U\subseteq N$. We denote by $\mathcal{N}_x$ the set of all neighbourhoods in $(X,\topo)$ of $x$.
   \end{definition}
@@ -329,7 +332,7 @@
     \end{enumerate}
   \end{prop}
   \begin{prop}
-    Let $(X,\topo)$ be a topological space and $(A,\topo_A)\subseteq (X,\topo)$ be a topological subspace. Then, the inclusion $\iota:(A,\topo_A)\hookrightarrow (X,\topo_X)$ is continuous and $\topo_A$ is the least finer topology where $\iota$ is continuous.
+    Let $(X,\topo)$ be a topological space and $(A,\topo_A)\subseteq (X,\topo)$ be a topological subspace. Then, the inclusion $\iota:(A,\topo_A)\hookrightarrow (X,\topo)$ is continuous and $\topo_A$ is the least finer topology where $\iota$ is continuous.
   \end{prop}
   \begin{corollary}
     Let $(X,\topo_X)$ and $(Y,\topo_Y)$ be topological spaces, $f:(X,\topo_X)\rightarrow (Y,\topo_Y)$ be a continuous function and $(A,\topo_A)\subseteq (X,\topo_X)$ be a topological subspace. Then, $f|_A$ is also continuous.
@@ -344,7 +347,7 @@
     Let $(X,\topo_X)$ and $(Y,\topo_Y)$ be topological spaces and $f:(X,\topo_X)\rightarrow (Y,\topo_Y)$ be a continuous function. Then, $g:(X,\topo_X)\rightarrow (f(X),\topo_{f(X)})$ is also continuous.
   \end{corollary}
   \begin{prop}
-    Let $(X,\topo)$ and $(Y,\topo_Y)$ be topological spaces such that $X=A\cup B$, for some sets $A$, $B$. Consider a function $f:(X,\topo_X)\rightarrow (Y,\topo_Y)$ satisfying that that $f|_A$ and $f|_B$ are continuous. Then:
+    Let $(X,\topo_X)$ and $(Y,\topo_Y)$ be topological spaces such that $X=A\cup B$, for some sets $A$, $B$. Consider a function $f:(X,\topo_X)\rightarrow (Y,\topo_Y)$ satisfying that that $f|_A$ and $f|_B$ are continuous. Then:
     \begin{enumerate}
       \item If $A$, $B$ are open, then $f$ is continuous.
       \item If $A$, $B$ are closed, then $f$ is continuous.
@@ -704,7 +707,7 @@
     Let $(X,\topo_X)$, $(Y,\topo_Y)$ be topological spaces and $f:(X,\topo_X)\rightarrow(Y,\topo_Y)$ be a surjective continuous function. If $(X,\topo_X)$ is compact, then $(Y,\topo_Y)$ is also compact.
   \end{prop}
   \begin{corollary}
-    The quotient space of a compact set is compact.
+    The quotient space of a compact space is compact.
   \end{corollary}
   \begin{definition}
     Let $(X,\topo)$ be a topological space and $A\subseteq X$ be a subset. We say that $A$ is a \emph{compact subset} of $X$ if $(A,\topo_A)$ is a compact space.
@@ -738,11 +741,14 @@
     \end{itemize}
   \end{corollary}
   \begin{prop}
-    Let $(X,\topo_X)$ be a compact Hausdorff topological space and $C\subseteq X$ be a closed subset. Then, $\quot{X}{C}$, together with the quotient topology, is compact and Hausdorff.
+    Let $(X,\topo)$ be a compact Hausdorff topological space and $C\subseteq X$ be a closed subset. Then, $\quot{X}{C}$, together with the quotient topology, is compact Hausdorff.
   \end{prop}
   \begin{prop}
-    Let $(X,\topo_X)$ be a compact Hausdorff topological space. Then, $(X,\topo_X)$ is $T_4$.
+    Let $(X,\topo)$ be a Hausdorff topological space and $C,K\subseteq X$ be compact subsets. Then, there exist $U,V\in\topo$ such that $C\subseteq U$, $K\subseteq V$ and $U\cap V=\varnothing$.
   \end{prop}
+  \begin{corollary}
+    Let $(X,\topo)$ be a compact Hausdorff topological space. Then, $(X,\topo)$ is $T_4$.
+  \end{corollary}
   \subsubsection{Compactness of the product}
   \begin{lemma}
     Let $(X,\topo_X)$, $(Y,\topo_Y)$ be topological spaces such that $(Y,\topo_Y)$ is compact and $U\in\topo_{X\times Y}$ be an open set such that $\{x\}\times Y\subseteq U\subseteq X\times Y$. Then, $\exists V\in\topo_X$ such that $x\in V$ and $\{x\}\times Y\subseteq V\times Y\subseteq U$.
@@ -774,10 +780,10 @@
     Let $(X,\topo)$ be Hausdorff topological space. Then, the inclusion $\iota: (X,\topo)\rightarrow(X^*,\topo^*)$ is a topological embedding.
   \end{prop}
   \begin{definition}
-    Let $(X,\topo)$ be topological space and $P$ be a property. We say that $(X,\topo)$ satisfies \emph{locally} $P$ if $\forall x\in X$ and $\forall U\in\topo$ such that $x\in U$, there exists a neighbourhood $N\in\mathcal{N}_x$, with $N\subseteq U$, that satisfies $P$.
+    Let $(X,\topo)$ be topological space and $P$ be a property. We say that $(X,\topo)$ satisfies \emph{locally} $P$ if $\forall x\in X$ and $\forall U\in\topo$ such that $x\in U$, there exists a neighbourhood $N\in\mathcal{N}_x$, with $x\in N\subseteq U$, that satisfies $P$.
   \end{definition}
   \begin{definition}
-    Let $(X,\topo)$ be topological space. We say that $(X,\topo)$ is \emph{locally compact} if $\forall x\in X$ and $\forall U\in\topo$ such that $x\in U$, there exists a compact neighbourhood $N\in\mathcal{N}_x$ such that $N\subseteq U$.
+    Let $(X,\topo)$ be topological space. We say that $(X,\topo)$ is \emph{locally compact} if $\forall x\in X$ and $\forall U\in\topo$ such that $x\in U$, there exists a compact neighbourhood $N\in\mathcal{N}_x$ such that $x\in N\subseteq U$.
   \end{definition}
   \begin{prop}
     The local compactness is a topological property.
@@ -804,7 +810,9 @@
   \begin{theorem}[Weierstra\ss' theorem]
     Let $(X,\topo)$ be a compact topological space and $f:X\rightarrow\RR$ be a continuous function. Then, $f$ attains a maximum and a minimum.
   \end{theorem}
-
+  \begin{prop}
+    $S^n$, $T^2$, $\mathcal{M}$, $\mathcal{K}$ and $\mathcal{P}_n(\RR)$ are compact.
+  \end{prop}
   \subsection{Connectedness}
   \subsubsection{Connectedness}
   \begin{definition}[Connected space]
@@ -830,8 +838,11 @@
   \begin{theorem}
     Let $(X,\topo_X)$, $(Y,\topo_Y)$ be a topological spaces such that $(X,\topo_X)$ is connected and $f:(X,\topo_X)\rightarrow(Y,\topo_Y)$ be a continuous function. Then, $f(X)\subset Y$ is connected.
   \end{theorem}
+  \begin{corollary}
+    The quotient space of a connected space is connected.
+  \end{corollary}
   \begin{lemma}
-    Let $(X,\topo)$ be a topological space and $C,D\subseteq X$ be subsets such that $C\subseteq D$ and $C$ is connected. Suppose that $D$ is disconnected and so that there exists non-empty open sets $U,V\in\topo$ such that $D\subseteq U\sqcup V$, $D\cap U\ne\varnothing$, $D\cap V\ne\varnothing$ and $D\cap U\cap V=\varnothing$. Then, either $C\subseteq U$ or $C\subseteq V$.
+    Let $(X,\topo)$ be a topological space and $C,D\subseteq X$ be subsets such that $C\subseteq D$ and $C$ is connected. Suppose that $D$ is disconnected and so that there exists non-empty open sets $U,V\in\topo$ such that $D\subseteq U\cup V$, $D\cap U\ne\varnothing$, $D\cap V\ne\varnothing$ and $D\cap U\cap V=\varnothing$. Then, either $C\subseteq U$ or $C\subseteq V$.
   \end{lemma}
   \begin{prop}
     Let $(X,\topo)$ be a topological space and $\{C_i:i\in I\}$ be a collection of connected subsets of $X$ such that $\bigcap_{i\in I} C_i\ne\varnothing$. Then, $\bigcup_{i\in I} C_i$ is connected.
@@ -849,10 +860,16 @@
     Let $(X,\topo)$ be a topological space and $C\subset X$ be a connected non-empty subset. If $A\subseteq X$ is such that $C\cap A\ne\varnothing$ and $C\cap(X\setminus A)\ne\varnothing$, then $C\cap\Fr A\ne\varnothing$.
   \end{prop}
   \begin{definition}
-    Let $(X,\topo)$ be a topological space with $|X|>1$. We say that $(X,\topo)$ is \emph{totally disconnected} if all subset with cardinal greater than 1 is disconnected.
+    Let $(X,\topo)$ be a topological space with $|X|>1$. We say that $(X,\topo)$ is \emph{totally disconnected} if all subsets with cardinal greater than 1 are disconnected.
   \end{definition}
   \begin{prop}
+    Let $(X,\topo)$ be a topological space with $|X|>1$. Then, $(X,\topo)$ is totally disconnected if and only if $\forall x,y\in X$, $x\ne y$, $\exists U,V\in\topo$ such that $x\in U$, $y\in V$ and $X=U\sqcup V$.
+  \end{prop}
+  \begin{prop}
     Let $(X,\topo_\text{d})$ be a topological space with $|X|>1$. Then, $(X,\topo_\text{d})$ is totally disconnected.
+  \end{prop}
+  \begin{prop}
+    $\QQ\subseteq \RR$ with the usual topology is totally disconnected.
   \end{prop}
   \subsubsection{Connectedness of \texorpdfstring{$\RR^n$}{Rn}}
   \begin{theorem}
@@ -903,7 +920,7 @@
     Let $(X,\topo_X)$, $(Y,\topo_Y)$ be homeomorphic topological spaces. Then, they have the same number of connected components.
   \end{corollary}
   \begin{definition}
-    Let $(X,\topo)$ be a topological space. We say that $(X,\topo)$ is \emph{locally connected} if $\forall x\in X$ and $\forall U\in\topo$ such that $x\in U$, there exists a connected neighbourhood $N\in\mathcal{N}_x$ such that $N\subseteq U$.
+    Let $(X,\topo)$ be a topological space. We say that $(X,\topo)$ is \emph{locally connected} if $\forall x\in X$ and $\forall U\in\topo$ such that $x\in U$, there exists a connected neighbourhood $N\in\mathcal{N}_x$ such that $x\in N\subseteq U$.
   \end{definition}
   \begin{prop}
     Let $(X,\topo)$ be a locally connected topological space. Then, the connected components are open.
@@ -933,14 +950,17 @@
     is a path from $x$ to $z$.
   \end{prop}
   \begin{definition}
-    Let $(X,\topo)$ be a topological space. We say that $(X,\topo)$ is \emph{path-connected} if for all $x,y\in X$, there exists a path in $(X,\topo)$ from $x$ to $y$. each of its open covers has a finite subcover.
+    Let $(X,\topo)$ be a topological space. We say that $(X,\topo)$ is \emph{path-connected} if for all $x,y\in X$, there exists a path in $(X,\topo)$ from $x$ to $y$.
   \end{definition}
   \begin{prop}
     The path-connectedness is a topological property.
   \end{prop}
   \begin{prop}
-    Let $(X,\topo_X)$, $(Y,\topo_Y)$ be topological space such that $(X,\topo_X)$ is path-connected, and $f:(X,\topo_X)\rightarrow(Y,\topo_Y)$ be a continuous function. Then $\im f$ is path-connected.
+    Let $(X,\topo_X)$, $(Y,\topo_Y)$ be topological space such that $(X,\topo_X)$ is path-connected, and $f:(X,\topo_X)\rightarrow(Y,\topo_Y)$ be a continuous function. Then $f(X)\subseteq Y$ is path-connected.
   \end{prop}
+  \begin{corollary}
+    The quotient space of a path-connected space is path-connected.
+  \end{corollary}
   \begin{definition}
     Let $(X,\topo)$ be a topological space and $A\subseteq X$. We say that $A$ is \emph{path-connected} if $A$, together with the subspace topology, is path-connected.
   \end{definition}
@@ -970,11 +990,14 @@
     \end{enumerate}
   \end{prop}
   \begin{definition}
-    Let $(X,\topo)$ be a topological space. We say that $(X,\topo)$ is \emph{locally path-connected} if $\forall x\in X$ and $\forall U\in\topo$ such that $x\in U$, there exists a path-connected neighbourhood $N\in\mathcal{N}_x$ such that $N\subseteq U$.
+    Let $(X,\topo)$ be a topological space. We say that $(X,\topo)$ is \emph{locally path-connected} if $\forall x\in X$ and $\forall U\in\topo$ such that $x\in U$, there exists a path-connected neighbourhood $N\in\mathcal{N}_x$ such that $x\in N\subseteq U$.
   \end{definition}
   \begin{theorem}
     Let $(X,\topo)$ be a locally path-connected topological space. Then, the connected components and the path-connected components of $(X,\topo)$ are the same.
   \end{theorem}
+  \begin{prop}
+    $\RR^n$, $S^n$, $T^2$, $\mathcal{M}$, $\mathcal{K}$ and $\mathcal{P}_n(\RR)$ are connected and path-connected.
+  \end{prop}
   \subsection{Topological manifolds}
   \subsubsection{Topological manifolds}
   \begin{definition}[Topological manifold]
@@ -1161,7 +1184,7 @@
   \end{prop}
   \subsubsection{Euler characteristic}
   \begin{definition}
-    Let $(S,\topo)$ be a compact connected surface and $T=\{T_i:i=1,\ldots,n\}$ be a triangularization of $S$. We define the \emph{Euler characteristic} of $S$ with the triangularization $T$ as: $$\chi_T(S):=V-E+F$$ where $V$, $E$, and $F$ are respectively the numbers of vertices, edges and faces in the polygonal decomposition obtained from $T$.
+    Let $(S,\topo)$ be a compact connected surface and $T=\{T_i:i=1,\ldots,n\}$ be a triangularization of $S$. We define the \emph{Euler characteristic} of $S$ with the triangularization $T$ as: $$\chi_T(S):=V-E+F$$ where $V$, $E$, and $F$ are respectively the numbers of vertices, edges and faces in the polygonal decomposition obtained from $T$ taking into account the identifications between vertices and edges\footnote{That is, two identified vertices (or edges) count as one.}.
   \end{definition}
   \begin{prop}
     Let $(S,\topo)$ be a compact connected surface and $T$, $T'$ be triangularizations of $S$. Then: $$\chi_T(S)=\chi_{T'}(S)$$ Therefore, from now on we will denote the Euler characteristic of $S$ as $\chi(S)$.
