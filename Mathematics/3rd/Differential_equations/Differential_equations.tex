@@ -2,18 +2,18 @@
 
 \begin{document}
 \begin{multicols}{2}[\section{Differential equations}]
-  Along this document we will write the points in $\RR^n$, $n\geq 2$, in bold face (as well as the vectors) in order to be consistent while manipulating points and vectors together.
+  Along this document we will write the points in $\RR^n$, $n\geq 2$, in bold face (as well as the vectors) in order to be consistent when handling points and vectors together.
   \subsection{Space of continuous and bounded functions}
   \begin{definition}
     Let $X$, $Y$ be topological spaces. We define the following sets:
     \begin{gather*}
       \mathcal{C}(X,Y)=\{f:X\longrightarrow Y:f\text{ is continuous}\}\\
-      \mathcal{C}_b(X,\RR^n)=\{f\in\mathcal{C}(X,\RR^n):f\text{ is bounded}\}
+      \mathcal{C}_\text{b}(X,\RR^n)=\{f\in\mathcal{C}(X,\RR^n):f\text{ is bounded}\}
     \end{gather*}
   \end{definition}
   \begin{theorem}
-    Let $X$ be a topological space and $f\in\mathcal{C}_b(X,\RR^n)$. We define the norm of $f$ as: $$\|f\|:=\sup\{|f(x)|:x\in X\}$$ and a distance $d$ in $\mathcal{C}_b(X,\RR^n)$ as: $$d(f,g):=\|f-g\|\quad\forall f,g\in\mathcal{C}_b(X,\RR^n)$$
-    Then, $(\mathcal{C}_b(X,\RR^n),d)$ is a complete metric space.
+    Let $X$ be a topological space and $f\in\mathcal{C}_\text{b}(X,\RR^n)$. We define the norm of $f$ as: $$\|f\|:=\sup\{|f(x)|:x\in X\}$$ and a distance $d$ in $\mathcal{C}_\text{b}(X,\RR^n)$ as: $$d(f,g):=\|f-g\|\quad\forall f,g\in\mathcal{C}_\text{b}(X,\RR^n)$$
+    Then, $(\mathcal{C}_\text{b}(X,\RR^n),d)$ is a complete metric space.
   \end{theorem}
   \begin{theorem}
     Let $X$ be a topological space and $C\subseteq\RR^n$ be a closed subset. Then, $(\mathcal{C}(X,C),d)$ is a complete metric space.
@@ -268,13 +268,13 @@
     We say that $F$ is \emph{pointwise equicontinuous} if it is equicontinuous at each point of $X$. Finally, we say that $F$ is \emph{uniformly equicontinuous} if $\forall \varepsilon>0$ $\exists \delta>0$ such that $\forall x,y\in X$ with $d(x,y)<\delta$ we have: $$\|\vf{f}(x)-\vf{f}(y)\|<\varepsilon\quad\forall\vf{f}\in F$$
   \end{definition}
   \begin{prop}
-    Let $(X,d)$ be a metric space and $F\subset\mathcal{C}_b(X,\RR^n)$ be a subset. Suppose that $\vf{f}$ is Lipschitz continuous for all $\vf{f}\in F$. Then, $F$ is uniformly equicontinuous.
+    Let $(X,d)$ be a metric space and $F\subset\mathcal{C}_\text{b}(X,\RR^n)$ be a subset. Suppose that $\vf{f}$ is Lipschitz continuous for all $\vf{f}\in F$. Then, $F$ is uniformly equicontinuous.
   \end{prop}
   \begin{theorem}[Arzelà-Ascoli theorem]
-    Let $(X,d)$ be a compact metric space and $(\vf{f}_m)$ be a sequence of functions such that $\vf{f}_m\in\mathcal{C}(X,\RR^n)$ $\forall m\geq 1$. If the sequence is equicontinuous and pointwise bounded, then there exists a subsequence $(\vf{f}_{m_k})$ that converges on $\mathcal{C}(X,\RR^n)$.
+    Let $(X,d)$ be a compact metric space and $(\vf{f}_m)$ be a sequence of functions such that $\vf{f}_m\in\mathcal{C}(X,\RR^n)$ $\forall m\geq 1$. If the sequence is pointwise equicontinuous and pointwise bounded, then there exists a subsequence $(\vf{f}_{m_k})$ that converges on $\mathcal{C}(X,\RR^n)$.
   \end{theorem}
   \begin{corollary}
-    Let $(X,d)$ be a compact metric space, $D\subset\RR^n$ be a closed set and $(\vf{f}_m)$ be a sequence of functions such that $\vf{f}_m\in\mathcal{C}(X,D)$ $\forall m\geq 1$. If the sequence is equicontinuous and pointwise bounded, then there exists a subsequence $(\vf{f}_{m_k})$ that converges on $\mathcal{C}(X,D)$.
+    Let $(X,d)$ be a compact metric space, $D\subset\RR^n$ be a closed set and $(\vf{f}_m)$ be a sequence of functions such that $\vf{f}_m\in\mathcal{C}(X,D)$ $\forall m\geq 1$. If the sequence is pointwise equicontinuous and pointwise bounded, then there exists a subsequence $(\vf{f}_{m_k})$ that converges on $\mathcal{C}(X,D)$.
   \end{corollary}
   \begin{theorem}[Peano theorem]
     Let $t_0\in\RR$, $\vf{x}_0\in\RR^n$, $a,b\in\RR_{>0}$, $\vf{f}:I_a(t_0)\times\overline{B}_{b}(\vf{x}_0)\subset\RR\times\RR^n\rightarrow\RR^n$ be a continuous function, and define: $$M:=\max\{\|\vf{f}(t,x)\|:(t,x)\in I_a(t_0)\times\overline{B}_{b}(\vf{x}_0)\}$$ Then, the ivp of \cref{DE_ivp} has at least one solution $\vf{\varphi}:I_\alpha(t_0)\rightarrow\RR^n$, where $\alpha:=\min\left\{a,\frac{b}{M}\right\}$.
@@ -326,7 +326,7 @@
   \begin{definition}
     Let $I\subseteq\RR$ be an interval. A \emph{system of linear differential equations} is an expression of the form:
     \begin{equation}\label{DE_linear}
-      \vf{x}'=\vf{A}(t)\vf{x}+\vf{b}
+      \vf{x}'=\vf{A}(t)\vf{x}+\vf{b}(t)
     \end{equation}
     where $\vf{A}:I\rightarrow\mathcal{L}(\RR^n,\RR^n)$ and $\vf{b}:I\rightarrow\RR^n$ are continuous functions.
     We say that linear equation of \cref{DE_linear} is \emph{homogeneous} if $\vf{b}(t)=\vf{0}$ $\forall t\in I$. We say that linear equation of \cref{DE_linear} is of \emph{constant coefficients} if $\vf{A}(t)=\vf{A}$ $\forall t\in I$, where $\vf{A}\in\mathcal{M}_n(\RR)$.
@@ -525,7 +525,7 @@
   \end{definition}
   \subsubsection{Continuous and Lipschitz continuous dependence}
   \begin{lemma}
-    Let $X$ be a compact metric space and $(\vf{\varphi}_m)$ be a sequence of functions $\vf{\varphi}_m:X\rightarrow\RR^n$ such that it is equicontinuous and pointwise bounded. Suppose that all convergent partial subsequences of $(\vf{\varphi}_m)$ have the same limit $\vf{\varphi}$. Then, $(\vf{\varphi}_m)$ converges uniformly to $\vf{\varphi}$.
+    Let $X$ be a compact metric space and $(\vf{\varphi}_m)$ be a sequence of functions $\vf{\varphi}_m:X\rightarrow\RR^n$ such that they are pointwise equicontinuous and pointwise bounded. Suppose that all convergent partial subsequences of $(\vf{\varphi}_m)$ have the same limit $\vf{\varphi}$. Then, $(\vf{\varphi}_m)$ converges uniformly to $\vf{\varphi}$.
   \end{lemma}
   \begin{prop}
     Let $U\subseteq\RR\times\RR^n$ be an open set and $\vf{f}_m:U\rightarrow\RR^n$ be continuous function for $m\in\NN$ and such that for all compact $K\subset U$, the sequence $(\vf{f}_m|_K)$ converge uniformly to a function $\vf{f}_0|_K$. Let $((t_m,\vf{x}_m))\subset U$ be a sequence such that $\displaystyle\lim_{m\to\infty}(t_m,\vf{x}_m)=(t_0,\vf{x}_0)$. Suppose that for all $m\geq 0$ the ivp
@@ -557,7 +557,7 @@
   \end{prop}
   \subsubsection{Differentiable dependence}
   \begin{theorem}[Dependence on $\vf{x}_0$]
-    Let $U\subseteq\RR\times\RR^n\times\RR^p$ be an open set and $\vf{f}:U\rightarrow\RR^n$ be a continuous function and of class $\mathcal{C}^1$ with respect to the second variable. Suppose that the flow $\vf{\phi}(t,t_0,\vf{x}_0,\vf{\lambda})$ of $\vf{x}'=\vf{f}(t,\vf{x},\vf{\lambda})$ is defined on an open set $V\subseteq\RR\times\RR\times\RR^n\times\RR^p$. Then, $\forall (t,t_0,\vf{x}_0,\vf{\lambda})\in V$, $\vf{\phi}$ is differentiable with respect to $\vf{x}_0$ and $\vf{D}_3\vf{\phi}(t,t_0,\vf{x}_0,\vf{\lambda})$\footnote{Here, $\vf{D}_3\vf{\phi}(t,t_0,\vf{x}_0,\vf{\lambda})=\frac{\partial\vf{\phi}}{\partial \vf{x}_0}(t,t_0,\vf{x}_0,\vf{\lambda})$ denotes the matrix $\left(\frac{\partial\vf{\phi}_i}{\partial{\vf{x}_0}_j}(t,t_0,\vf{x}_0,\vf{\lambda})\right)\in\mathcal{M}_n(\RR)$, where ${\vf{x}_0}_j$ denotes the $j$-th component of $\vf{x}_0$ and $\vf{\phi}_i(t,t_0,\vf{x}_0,\vf{\lambda})$ denotes the $i$-th component of $\vf{\phi}(t,t_0,\vf{x}_0,\vf{\lambda})$.} is continuous on $V$. Furthermore, $\vf{D}_3\vf{\phi}(t,t_0,\vf{x}_0,\vf{\lambda})$ satisfies the following ivp:
+    Let $U\subseteq\RR\times\RR^n\times\RR^p$ be an open set and $\vf{f}:U\rightarrow\RR^n$ be a continuous function and of class $\mathcal{C}^1$ with respect to the second variable. Suppose that the flow $\vf{\phi}(t,t_0,\vf{x}_0,\vf{\lambda})$ of $\vf{x}'=\vf{f}(t,\vf{x},\vf{\lambda})$ is defined on an open set $V\subseteq\RR\times\RR\times\RR^n\times\RR^p$. Then, $\forall (t,t_0,\vf{x}_0,\vf{\lambda})\in V$, $\vf{\phi}$ is differentiable with respect to $\vf{x}_0$ and $\vf{D}_3\vf{\phi}(t,t_0,\vf{x}_0,\vf{\lambda})$\footnote{Here, $\vf{D}_3\vf{\phi}(t,t_0,\vf{x}_0,\vf{\lambda})=\frac{\partial\vf{\phi}}{\partial \vf{x}_0}(t,t_0,\vf{x}_0,\vf{\lambda})$ denotes the matrix $\left(\frac{\partial\vf{\phi}_i}{\partial{\vf{x}_0}_j}(t,t_0,\vf{x}_0,\vf{\lambda})\right)\in\mathcal{M}_n(\RR)$, where ${\vf{x}_0}_j$ denotes the $j$-th component of $\vf{x}_0$ and $\vf{\phi}_i$ denotes the $i$-th component of $\vf{\phi}$.} is continuous on $V$. Furthermore, $\vf{D}_3\vf{\phi}(t,t_0,\vf{x}_0,\vf{\lambda})$ satisfies the following ivp:
     \begin{equation*}
       \left\{
       \begin{aligned}
@@ -578,7 +578,7 @@
     These kinds of equations are called \emph{variational equations}.
   \end{theorem}
   \begin{theorem}[Dependence on $t_0$]
-    Let $U\subseteq\RR\times\RR^n\times\RR^p$ be an open set and $\vf{f}:U\rightarrow\RR^n$ be a continuous function and of class $\mathcal{C}^1$ with respect to the second variable. Suppose that the flow $\vf{\phi}(t,t_0,\vf{x}_0,\vf{\lambda})$ of $\vf{x}'=\vf{f}(t,\vf{x},\vf{\lambda})$ is defined on an open set $V\subseteq\RR\times\RR\times\RR^n\times\RR^p$. Then, $\forall (t,t_0,\vf{x}_0,\vf{\lambda})\in V$, $\vf{\phi}$ is differentiable with respect to $t_0$ and $\vf{D}_2\vf{\phi}(t,t_0,\vf{x}_0,\vf{\lambda})$ is continuous on $V$. Furthermore, $\vf{D}_2\vf{\phi}(t,t_0,\vf{x}_0,\vf{\lambda})$ satisfies the following ivp:
+    Let $U\subseteq\RR\times\RR^n\times\RR^p$ be an open set and $\vf{f}:U\rightarrow\RR^n$ be a continuous function and of class $\mathcal{C}^1$. Suppose that the flow $\vf{\phi}(t,t_0,\vf{x}_0,\vf{\lambda})$ of $\vf{x}'=\vf{f}(t,\vf{x},\vf{\lambda})$ is defined on an open set $V\subseteq\RR\times\RR\times\RR^n\times\RR^p$. Then, $\forall (t,t_0,\vf{x}_0,\vf{\lambda})\in V$, $\vf{\phi}$ is differentiable with respect to $t_0$ and $\vf{D}_2\vf{\phi}(t,t_0,\vf{x}_0,\vf{\lambda})$ is continuous on $V$. Furthermore, $\vf{D}_2\vf{\phi}(t,t_0,\vf{x}_0,\vf{\lambda})$ satisfies the following ivp:
     \begin{equation*}
       \left\{
       \begin{aligned}
@@ -772,7 +772,7 @@
     Then, $h$ is a topological conjugation between the systems induced by the odes $x'=\alpha x$ and $y'=\beta y$.
   \end{prop}
   \begin{prop}
-    Let $\vf{A},\vf{B}\in\mathcal{M}_n(\RR)$ be similar matrices, that is, $\exists\vf{P}\in\in\mathcal{M}_n(\RR)$ such that $\vf{B}=\vf{P}\vf{A}\vf{P}^{-1}$. Then, the function $$\function{\vf{h}}{\RR^n}{\RR^n}{\vf{x}}{\vf{Px}}$$ is a conjugation between the systems induced by the odes $\vf{x}'=\vf{A}\vf{x}$ and $\vf{y}'=\vf{B}\vf{y}$.
+    Let $\vf{A},\vf{B}\in\mathcal{M}_n(\RR)$ be similar matrices, that is, $\exists\vf{P}\in\mathcal{M}_n(\RR)$ such that $\vf{B}=\vf{P}\vf{A}\vf{P}^{-1}$. Then, the function $$\function{\vf{h}}{\RR^n}{\RR^n}{\vf{x}}{\vf{Px}}$$ is a conjugation between the systems induced by the odes $\vf{x}'=\vf{A}\vf{x}$ and $\vf{y}'=\vf{B}\vf{y}$.
   \end{prop}
   \subsubsection{Local equivalence and conjugacy of dynamical systems}
   \begin{definition}
@@ -834,7 +834,7 @@
               \end{pmatrix}$.
       \item \emph{stable spiral} (or \emph{sink}) if $\lambda_1,\lambda_2\in\CC$ and $\Re(\lambda_1)<0$.
       \item \emph{unstable spiral} (or \emph{source}) if $\lambda_1,\lambda_2\in\CC$ and $\Re(\lambda_1)>0$.
-      \item \emph{center} if $\lambda_1,\lambda_2\in\CC$, $\Re(\lambda_1)=0$ and $\vf{p}$ is enclosed by periodic orbits.
+      \item \emph{center} if $\lambda_1,\lambda_2\in\CC$, $\Re(\lambda_1)=0$ and $\vf{p}$ is surrounded by periodic orbits.
     \end{itemize}
   \end{definition}
   \begin{center}
