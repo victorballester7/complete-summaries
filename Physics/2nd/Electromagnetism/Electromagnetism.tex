@@ -92,7 +92,7 @@
   \end{definition}
   \begin{definition}[Divergence]
     Let $\vf{F}:\RR^3\rightarrow\RR^3$ be a vector field of class $\mathcal{C}^1$. We define the \emph{divergence} of $\vf{F}$ at a point $x\in\RR^3$ as:
-    $$\divp \vf{F}(x):=\lim_{r\to 0}\frac{1}{\text{vol}(B(x,r))}\oiint_{S}\vf{F}\cdot\vf{n} \dd S$$
+    $$\divp \vf{F}(x):=\lim_{\rho\to 0}\frac{1}{\text{vol}(B(x,r))}\oiint_{S}\vf{F}\cdot\vf{n} \dd S$$
   \end{definition}
   \begin{prop}
     Let $\vf{F}:\RR^3\rightarrow\RR^3$ be a vector field such that $\vf{F}=(F_x,F_y,F_z)$. Then, in Cartesian coordinates we have: $$\divp \vf{F}=\pdv{F_x}{x}+\pdv{F_y}{y}+\pdv{F_z}{z}$$
@@ -110,7 +110,7 @@
   \end{definition}
   \begin{definition}[Rotational]
     Let $\vf{F}:\RR^3\rightarrow\RR^3$ be a vector field of class $\mathcal{C}^1$. We define the \emph{rotational} of $\vf{F}$ at a point $x\in\RR^3$ as:
-    $$\rotp\vf{F}(a)\cdot\vf{n}=\lim_{r\to 0}\frac{1}{\text{area}(D(x,r))}\int_{\partial D_r}\vf{F}\cdot \dd \vf{s}$$
+    $$\rotp\vf{F}(a)\cdot\vf{n}=\lim_{\rho\to 0}\frac{1}{\text{area}(D(x,r))}\int_{\partial D_r}\vf{F}\cdot \dd \vf{s}$$
     where $D(x,r)$ is the disk of center $x$ and radius $r$.
   \end{definition}
   \begin{prop}
@@ -135,13 +135,13 @@
     Let $\vf{F}:V\rightarrow\RR^3$ be a vector field of class $\mathcal{C}^2$ defined on a bounded domain $V\subset\RR^3$. Let $\rho=\divp\vf{F}$ and $\vf{J}=\rotp\vf{F}$. Then, $\vf{F}$ can be written as: $$\vf{F}=-\grad\phi+\rotp\vf{A}$$
     where:
     \begin{gather*}
-      \Phi(\vf{r}) =\frac 1 {4\pi} \int_V \frac{\rho(\vf{r}_1)}{\norm{\vf{r}-\vf{r}_1}}\dd^3r_1 -\frac 1 {4\pi} \oint_S\frac{\vf{F} (\vf{r}_1)\cdot\vf{n}}{\norm{\vf{r}-\vf{r}_1}}\dd^2r_1\\
-      \vf{A}(\vf{r}) =\frac 1 {4\pi} \int_V \frac{\vf{J}(\vf{r}_1)}{\norm{\vf{r}-\vf{r}_1}}\dd^3r_1 +\frac 1 {4\pi} \oint_S \frac{\vf{F} (\vf{r}_1)\times\vf{n}}{\norm{\vf{r}-\vf{r}_1}}\dd^2r_1
+      \Phi(\vf{r}) =\frac 1 {4\pi} \iiint_V \frac{\rho(\vf{r}_1)}{\norm{\vf{r}-\vf{r}_1}}\dd^3r_1 -\frac 1 {4\pi} \oiint_S\frac{\vf{F} (\vf{r}_1)\cdot\vf{n}}{\norm{\vf{r}-\vf{r}_1}}\dd^2r_1\\
+      \vf{A}(\vf{r}) =\frac 1 {4\pi} \iiint_V \frac{\vf{J}(\vf{r}_1)}{\norm{\vf{r}-\vf{r}_1}}\dd^3r_1 +\frac 1 {4\pi} \oiint_S \frac{\vf{F} (\vf{r}_1)\times\vf{n}}{\norm{\vf{r}-\vf{r}_1}}\dd^2r_1
     \end{gather*}
-    Moreover if $V=\RR^3$ (and is therefore unbounded) and $\vf{F}$ vanishes faster than $1/r$, when $r\to\infty$, then:
+    Moreover if $V=\RR^3$ (and is therefore unbounded) and $\vf{F}$ vanishes faster than $1/r$, when $\rho\to\infty$, then:
     \begin{gather*}
-      \Phi(\vf{r}) =\frac 1 {4\pi} \int_{\RR^3} \frac{\rho(\vf{r}_1)}{\norm{\vf{r}-\vf{r}_1}}\dd^3r_1 \\
-      \vf{A}(\vf{r}) =\frac 1 {4\pi} \int_{\RR^3} \frac{\vf{J}(\vf{r}_1)}{\norm{\vf{r}-\vf{r}_1}}\dd^3r_1
+      \Phi(\vf{r}) =\frac 1 {4\pi} \iiint_{\RR^3} \frac{\rho(\vf{r}_1)}{\norm{\vf{r}-\vf{r}_1}}\dd^3r_1 \\
+      \vf{A}(\vf{r}) =\frac 1 {4\pi} \iiint_{\RR^3} \frac{\vf{J}(\vf{r}_1)}{\norm{\vf{r}-\vf{r}_1}}\dd^3r_1
     \end{gather*}
   \end{theorem}
   \begin{theorem}
@@ -156,38 +156,42 @@
   \begin{definition}
     The \emph{cylindrical coordinates} are the coordinates obtained making the change of variable $\varphi:[0,\infty)\times[0,2\pi)\times\RR \rightarrow\RR^3$ defined as:
     \begin{align*}
-      x & =r\cos\varphi \\
-      y & =r\sin\varphi \\
+      x & =\rho\cos\varphi \\
+      y & =\rho\sin\varphi \\
       z & =z
     \end{align*}
   \end{definition}
   \begin{definition}
     The \emph{unit vectors in cylindrical coordinates} are:
     \begin{align*}
-      \vf{e}_r       & =\frac{\pdv{\vf{r}}{r}}{\norm{\pdv{\vf{r}}{r}}}=\cos\varphi\vf{e}_x+\sin\varphi\vf{e}_y              \\
+      \vf{e}_\rho    & =\frac{\pdv{\vf{r}}{\rho}}{\norm{\pdv{\vf{r}}{\rho}}}=\cos\varphi\vf{e}_x+\sin\varphi\vf{e}_y        \\
       \vf{e}_\varphi & =\frac{\pdv{\vf{r}}{\varphi}}{\norm{\pdv{\vf{r}}{\varphi}}}=-\sin\varphi\vf{e}_x+\cos\varphi\vf{e}_y \\
       \vf{e}_z       & =\frac{\pdv{\vf{r}}{z}}{\norm{\pdv{\vf{r}}{z}}}=\vf{e}_z
     \end{align*}
   \end{definition}
   \begin{theorem}[Integral in cylindrical coordinates]
-    Let $f:\RR^3\rightarrow\RR$ be a function and $\varphi:[0,\infty)\times[0,2\pi)\times\RR \rightarrow\RR^3 $ be such that: $$\varphi(r,\varphi,z)\longmapsto(r\cos\varphi,r\sin\varphi,z)$$ Then, we have: $$\int_{\varphi(U)}f(x,y,z)\dd x\dd y\dd z=\int_Uf(r\cos\varphi,r\sin\varphi,z)r\dd r \dd\varphi \dd z$$
+    Let $f:\RR^3\rightarrow\RR$ be a function and $\varphi:[0,\infty)\times[0,2\pi)\times\RR \rightarrow\RR^3 $ be such that: $$\varphi(\rho,\varphi,z)\longmapsto(\rho\cos\varphi,\rho\sin\varphi,z)$$ Then, we have:
+    \begin{multline*}
+      \iiint_{\varphi(U)}f(x,y,z)\dd x\dd y\dd z=\\
+      \iiint_Uf(\rho\cos\varphi,\rho\sin\varphi,z)\rho\dd \rho \dd\varphi \dd z
+    \end{multline*}
   \end{theorem}
   \begin{prop}
     Let $f:\RR^3\rightarrow\RR$ be a function. Then the gradient of $f$ in cylindrical coordinates is:
-    $$\grad f=\pdv{f}{r}\vf{e}_r+\frac{1}{r}\pdv{f}{\varphi}\vf{e}_\varphi+\pdv{f}{z}\vf{e}_z\footnote{In fact, this other expression of the laplacian is used for the definition of the laplacian in non-Cartesian coordiantes.}$$
+    $$\grad f=\pdv{f}{\rho}\vf{e}_\rho+\frac{1}{\rho}\pdv{f}{\varphi}\vf{e}_\varphi+\pdv{f}{z}\vf{e}_z\footnote{In fact, this other expression of the laplacian is used for the definition of the laplacian in non-Cartesian coordiantes.}$$
   \end{prop}
   \begin{prop}
-    Let $f:\RR^3\rightarrow\RR$ be a function and $\vf{F}:\RR^3\rightarrow\RR^3$ be a vector field such that $\vf{F}=F_r\vf{e}_r+F_\theta\vf{e}_\theta+F_z\vf{e}_z$. Then, we have:
+    Let $f:\RR^3\rightarrow\RR$ be a function and $\vf{F}:\RR^3\rightarrow\RR^3$ be a vector field such that $\vf{F}=F_\rho\vf{e}_\rho+F_\theta\vf{e}_\theta+F_z\vf{e}_z$. Then, we have:
     \begin{align*}
-      \grad f      & =\pdv{f}{r}\vf{e}_r+\frac{1}{r}\pdv{f}{z}\vf{e}_z+\pdv{f}{z}\vf{e}_z          \\
-      \divp \vf{F} & =\frac{1}{r}\pdv{(r F_r)}{r}+\frac{1}{r}\pdv{F_\varphi}{\varphi}+\pdv{F_z}{z} \\
-      \rotp \vf{F} & =\frac{1}{r}
+      \grad f      & =\pdv{f}{\rho}\vf{e}_\rho+\frac{1}{\rho}\pdv{f}{z}\vf{e}_z+\pdv{f}{z}\vf{e}_z                \\
+      \divp \vf{F} & =\frac{1}{\rho}\pdv{(\rho F_\rho)}{\rho}+\frac{1}{\rho}\pdv{F_\varphi}{\varphi}+\pdv{F_z}{z} \\
+      \rotp \vf{F} & =\frac{1}{\rho}
       \begin{vmatrix}
-        \vf{e}_r  & r\vf{e}_\varphi & \vf{e}_z  \\
-        \pdv{}{r} & \pdv{}{\varphi} & \pdv{}{z} \\
-        F_r       & rF_\varphi      & F_z       \\
-      \end{vmatrix}                                                                   \\
-      \laplacian f & =\frac{1}{r}\pdv{f}{r}+\frac{1}{r^2}\pdv[2]{f}{\varphi}+\pdv[2]{f}{z}
+        \vf{e}_\rho  & \rho\vf{e}_\varphi & \vf{e}_z  \\
+        \pdv{}{\rho} & \pdv{}{\varphi}    & \pdv{}{z} \\
+        F_\rho       & \rho F_\varphi     & F_z       \\
+      \end{vmatrix}                                                                                  \\
+      \laplacian f & =\frac{1}{\rho}\pdv{f}{\rho}+\frac{1}{\rho^2}\pdv[2]{f}{\varphi}+\pdv[2]{f}{z}
     \end{align*}
   \end{prop}
   \subsubsection{Spherical coordinates}
@@ -210,7 +214,7 @@
   \begin{theorem}[Integral in spherical coordinates]
     Let $f:\RR^3\rightarrow\RR$ be a function and $\varphi:[0,\infty)\times[0,2\pi)\times[0,\pi]\rightarrow\RR^3 $ be such that: $$\varphi(r,\varphi,\theta)\longmapsto(r\sin\theta\cos\varphi,r\sin\theta\sin\varphi,r\cos\theta)$$ Then, we have:
     \begin{multline*}
-      \int f(x,y,z)\dd x\dd y\dd z=\\=\int f(r\sin\theta\cos\varphi,r\sin\theta\sin\varphi,r\cos\theta)r^2\sin\theta \dd r \dd \varphi \dd \theta
+      \iiint f(x,y,z)\dd x\dd y\dd z=\\=\iiint f(r\sin\theta\cos\varphi,r\sin\theta\sin\varphi,r\cos\theta)r^2\sin\theta \dd r \dd \varphi \dd \theta
     \end{multline*}
   \end{theorem}
   \begin{prop}
@@ -224,43 +228,76 @@
         \pdv{}{r} & \pdv{}{\theta} & \pdv{}{\varphi}           \\
         F_r       & rF_\theta      & r\sin\theta F_\varphi     \\
       \end{vmatrix}                                                                                                                                                                           \\
-      \laplacian f  =\frac{1}{r^2}\left[\pdv{\left(r^2\pdv{f}{r}\right)}{r}+\frac{1}{\sin\theta}\pdv{\left(\sin\theta\pdv{f}{\theta}\right)}{\theta}+\frac{1}{{(\sin\theta)}^2}\pdv[2]{f}{\varphi}\right]
+      \laplacian f  =\frac{1}{r^2}\left[\pdv{\left(r^2\pdv{f}{r}\right)}{r}+\frac{1}{\sin\theta}\pdv{\left(\sin\theta\pdv{f}{\theta}\right)}{\theta}+\frac{1}{{[\sin\theta]}^2}\pdv[2]{f}{\varphi}\right]
     \end{gather*}
   \end{prop}
   \subsection{Electrostatics}
-  \begin{prop}[Columb's law]
-    Let $q_1,q_2$ be two point charges at positions $\vf{r}_1,\vf{r}_2$, respectively. Then the force $\vf{F}_2$ experienced by $q_2$ in the vicinity of $q_1$ is given by $$\vf{F}_{12}=kq_1q_2\frac{\vf{r}_1-\vf{r}_2}{\|\vf{r}_1-\vf{r}_2\|^3},$$ where $k=\frac{1}{4\pi\varepsilon_0}$ and $\varepsilon_0=8,854\;F/m$ is the vacuum permittivity.
-  \end{prop}
+  \subsubsection{Coulmb's law}
+  \begin{law}[Columb's law]
+    Let $q_1,q_2$ be two point charges at positions $\vf{r}_1,\vf{r}_2$, respectively. Then the force $\vf{F}_2$ experienced by $q_2$ in the vicinity of $q_1$ is given by $$\vf{F}_{12}=kq_1q_2\frac{\vf{r}_2-\vf{r}_1}{\|\vf{r}_2-\vf{r}_1\|^3}$$ where $k=\frac{1}{4\pi\varepsilon_0}$ and $\varepsilon_0$ is the vacuum electric permittivity.
+  \end{law}
+  \subsubsection{Electric field}
   \begin{prop}[Electric field]
-    We define the \emph{electric field} $\vf{E}$ as the force per unit of charge. For a point charge, we have that the electric field created by $q_1$ at the position of $r_2$ is $$\vf{F}_2=q_2\vf{E}_1(\vf{r}_2),\quad\vf{E}_1(\vf{r}_2)=kq_1\frac{\vf{r}_1-\vf{r}_2}{\|\vf{r}_1-\vf{r}_2\|^3}.$$
+    We define the \emph{electric field} $\vf{E}$ as the force per unit of charge. For a point charge $q_1$, the electric field created by $q_1$ at the position of $\vf{r}_2$ is $$\vf{E}_1(\vf{r}_2)=kq_1\frac{\vf{r}_2-\vf{r}_1}{\|\vf{r}_2-\vf{r}_1\|^3}$$ Furthermore, if we place a point charge $q_2$ at $r_2$ it will experience a force given by: $$\vf{F}_2=q_2\vf{E}_1(\vf{r}_2)$$
   \end{prop}
-  \begin{prop}[Superposition principle] \textcolor{green}{ARREGLAR}
-    Let $\rho(\vf{r})=\frac{dq}{d\mathcal{V}}$ be the volume charge density of an object. Then we have that $$\vf{F}=\int_\mathcal{V}\rho(\vf{r})\vf{E}(\vf{r})d\mathcal{V},\quad\vf{E}(\vf{r})=k\int_\mathcal{V}\rho(\vf{r}')\frac{\vf{r}-\vf{r}'}{\|\vf{r}-\vf{r}'\|^3}d\mathcal{V}.\footnote{Analogously we can define $\sigma(\vf{r})=\frac{dq}{d\mathcal{S}}$ to be the surface charge density and $\lambda(\vf{r})=\frac{dq}{d\ell}$ to be the linear charge density, and the integrals become as expected.}$$
+  \begin{prop}[Superposition principle]
+    Let $\rho(\vf{r})=\dv{q}{^3\vf{r}_1}$ be the volume charge density of a body of volume $V$\footnote{Analogously we can define $\sigma(\vf{r})=\dv{q}{S}$ to be the surface charge density of the body and $\lambda(\vf{r})=\dv{q}{\ell}$ to be the linear charge density of the body. Thus, the volume integral of the electric field become a surface integral and a line integral, respectively.}. Then, the electric field created by the body at a distance $\vf{r}$ of it is: we have that $$\vf{E}(\vf{r})=k\iiint_V\rho(\vf{r}_1)\frac{\vf{r}-\vf{r}_1}{\|\vf{r}-\vf{r}_1\|^3}\dd^3r_1.$$
   \end{prop}
-  \begin{prop}[Electric field superposition principle]
-    Let $\rho(\vf{r})=dq/d\mathcal{V}$, $\sigma(\vf{r})=dq/d\mathcal{A}$ and $\lambda(\vf{r})=dq/d\ell$ be the volume, surface and linear charge densities of an object, respectively. Then the resulting electric field at a point $\vf{r}$ is
+  \begin{theorem}[Electrostatics equations]
+    \textcolor{blue}{falta això?}
+    $$$$
+  \end{theorem}
+  \begin{prop}[Electric field superposition principle]\textcolor{blue}{treure això}
+    Let $\rho(\vf{r})=dq/\dd \mathcal{V}$, $\sigma(\vf{r})=dq/\dd \mathcal{A}$ and $\lambda(\vf{r})=dq/d\ell$ be the volume, surface and linear charge densities of an object, respectively. Then the resulting electric field at a point $\vf{r}$ is
     \begin{gather*}
-      \vf{E}(\vf{r})=k\int_\mathcal{V}\rho(\vf{r}')\frac{\vf{r}-\vf{r}'}{\|\vf{r}-\vf{r}'\|^3}d\mathcal{V}'.\\
-      \vf{E}(\vf{r})=k\int_\mathcal{A}\sigma(\vf{r}')\frac{\vf{r}-\vf{r}'}{\|\vf{r}-\vf{r}'\|^3}d\mathcal{A}'.\\
+      \vf{E}(\vf{r})=k\int_\mathcal{V}\rho(\vf{r}')\frac{\vf{r}-\vf{r}'}{\|\vf{r}-\vf{r}'\|^3}\dd \mathcal{V}'.\\
+      \vf{E}(\vf{r})=k\int_\mathcal{A}\sigma(\vf{r}')\frac{\vf{r}-\vf{r}'}{\|\vf{r}-\vf{r}'\|^3}\dd \mathcal{A}'.\\
       \vf{E}(\vf{r})=k\int_L\lambda(\vf{r}')\frac{\vf{r}-\vf{r}'}{\|\vf{r}-\vf{r}'\|^3}d\ell.
     \end{gather*}
   \end{prop}
-  \begin{prop}[Gau\ss's\space theorem]
+  \begin{theorem}[Gau\ss's\space theorem]
+    The net electric flux through any hypothetical closed surface is:
+    $$
+      \oiint_S\vf{E}\cdot\vf{n}\dd S=\frac{1}{\varepsilon_0}\iiint_V\rho(r)\dd^3 r=\frac{Q}{\varepsilon_0}
+    $$
+    Or, equivalently:
     \begin{equation}
-      \grad\cdot\vf{E}=\frac{\rho}{\varepsilon_0}\iff\oint_\mathcal{S}\vf{E}\cdot\vf{n}d\mathcal{S}=\frac{1}{\varepsilon_0}\int_\mathcal{V}\rho(r)d\mathcal{V}=\frac{Q_T}{\varepsilon_0},
+      \divp\vf{E}=\frac{\rho}{\varepsilon_0}
       \label{E_gauss}
-    \end{equation} where $Q_T$ is the total charge enclosed within $\mathcal{V}$.
+    \end{equation}
+    where $Q$ is the total charge enclosed within $V$.
+  \end{theorem}
+  \begin{prop}
+    Electric field of some common charge distributions:
+    \begin{itemize}
+      \item Point charge $q$ at the origin: $\displaystyle \vf{E}(r)=\frac{q}{4\pi\varepsilon_0 r^2}\vf{e}_r$
+      \item Infinite wire of line charge density $\lambda$ situated at the $z$-axis:  $\displaystyle \vf{E}(\rho)=\frac{\lambda}{2\pi\varepsilon_0 \rho}\vf{e}_\rho$
+      \item Charged sphere of radius $R$ and charge $Q$:
+            $$\vf{E}(r)=\left\{
+              \begin{array}{lcc}
+                \frac{Q}{4\pi\varepsilon_0r^2}\vf{e}_r  & \text{if} & r\geq R \\
+                \frac{Qr}{4\pi\varepsilon_0R^3}\vf{e}_r & \text{if} & r<R
+              \end{array}
+              \right.$$
+    \end{itemize}
   \end{prop}
+  \subsubsection{Electric potential}
+  \begin{definition}[Electric potential]
+    The \emph{electric potential} $\phi$ in a point $\vf{r}$ is defined as:
+    \begin{equation}
+      \phi(\vf{r})=k\int\frac{\rho(\vf{r}_1)}{\|\vf{r}-\vf{r}_1\|}\dd^3 r_1
+    \end{equation}
+    Therefore, we have:
+    \begin{equation}
+      \vf{E}=-\grad\phi
+      \label{E_potential}
+    \end{equation}
+    And then, $$\phi_a-\phi_b=-\int_b^a\vf{E}\cdot d\ell=\int_a^b\vf{E}\cdot d\ell.$$ Alternatively we can define the potential from the electric energy.  And also if we consider the point $P$ as a reference point we can define the \emph{electric energy} $U_a$ as follows $$U_a-U_b=-q\int_P^a\vf{E}\cdot d\ell+q\int_P^b\vf{E}\cdot d\ell=-q\int_b^a\vf{E}\cdot d\ell=W_{b\to a}.$$ And finally we get $$\Delta U(\vf{r})=q\Delta\phi(\vf{r}).$$
+  \end{definition}
   \begin{prop}[Work]
     The work required to move a point charge $q$ from $a$ to $b$ is $$W_{b\to a}=-q\int_a^b\vf{E}\cdot d\ell,$$ where the negative sign indicates that the work is done against the field.
   \end{prop}
-  \begin{prop}[Electric potential]
-    The electric potential $\phi$ in a point $\vf{r}$ is defined as:
-    \begin{equation}
-      \vf{E}=-\grad\phi,\quad\phi(\vf{r})=k\int\frac{\rho(\vf{r}')}{\|r-r'\|}d\mathcal{V}.
-      \label{E_potential}
-    \end{equation} And then, $$\phi_a-\phi_b=-\int_b^a\vf{E}\cdot d\ell=\int_a^b\vf{E}\cdot d\ell.$$ Alternatively we can define the potential from the electric energy.  And also if we consider the point $P$ as a reference point we can define the \emph{electric energy} $U_a$ as follows $$U_a-U_b=-q\int_P^a\vf{E}\cdot d\ell+q\int_P^b\vf{E}\cdot d\ell=-q\int_b^a\vf{E}\cdot d\ell=W_{b\to a}.$$ And finally we get $$\Delta U(\vf{r})=q\Delta\phi(\vf{r}).$$
-  \end{prop}
+
   \begin{prop}[Poisson and Laplace equations]
     Taking into account \cref{E_gauss,E_potential}, we get Poisson's equation $$\laplacian\phi=-\frac{\rho}{\varepsilon_0}.$$ If $\rho=0$, we obtain Laplace's equation: $$\laplacian\phi=0.$$
   \end{prop}
@@ -284,7 +321,7 @@
     Consider a distribution of $n$ charges $q_i$. If $\phi_{ij}$ is the potential caused by the charge $j$ on the point where the charge $i$ is located, we have that the energy of the distribution $W$ is $$W=\sum_{i>j}q_i\phi_{ij}=\frac{1}{2}\sum_{i=1}^nq_i\phi_i,$$ where $\displaystyle\phi_i=\sum_{i\ne j}\phi_{ij}$.
   \end{prop}
   \begin{prop}[Continuous charge distribution]
-    Consider a continuous charge distribution of density $\rho$. Then $$W=\frac{1}{2}\int_\mathcal{V}\rho\phi d\mathcal{V}=\frac{\varepsilon_0}{2}\int_{\mathbb{R}^3}E^2d\mathcal{V}.$$
+    Consider a continuous charge distribution of density $\rho$. Then $$W=\frac{1}{2}\int_\mathcal{V}\rho\phi \dd \mathcal{V}=\frac{\varepsilon_0}{2}\int_{\mathbb{R}^3}E^2\dd \mathcal{V}.$$
   \end{prop}
   \begin{definition}
     The radius in which the electrostatic energy equals the rest energy of an electron is called \emph{classical electron radius} and it's equal to: $$r_0=\frac{1}{4\pi\varepsilon_0}\frac{e^2}{m_ec^2}.$$
