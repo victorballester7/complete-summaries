@@ -2,312 +2,312 @@
 
 \begin{document}
 \begin{multicols}{2}[\section{Classical mechanics}]
-    \subsection{Motion in one dimension}
-    \subsubsection{Integration of Newton's 2nd law}
-    \begin{prop}[Newton's 2nd law]
-        Consider a particle with constant mass $m$ that moves in one dimension. Then, it satisfies: $$\ddot{x}(t)=\frac{1}{m}F(x(t),\dot{x}(t),t)$$
-        where we have supposed the force function $F$ is known and $x(t)$ is the position of the particle as a function of time\footnote{Sometimes, in order to simplify the notation, we will write $x$ instead of $x(t)$ (and similarly with the velocity and other magnitudes).}. We also suppose that the initial position and initial velocity, denoted by $x(t_0)=x_0$ and $\dot{x}(t_0)=\dot{x}_0$ respectively, are known.
-    \end{prop}
-    \begin{prop}[Integration of Newton's 2nd law]
-        Consider a force $F$ that only depends on time, position or velocity. Then, the position and velocity of the particle subjected to $F$ are:
-        \begin{itemize}
-            \item Time dependence:
-                  \begin{gather*}
-                      \dot{x}(t)=\dot{x}_0+\int_{t_0}^t\frac{F(s)}{m}\dd s\\
-                      x(t)=x_0+\int_{t_0}^t\dot{x}(s)\dd s
-                  \end{gather*}
-            \item Position dependence:
-                  \begin{gather*}
-                      {\dot{x}(x)}^2={\dot{x}(x_0)}^2+2\int_{x_0}^x\frac{F(s)}{m}\dd s\\
-                      x(t)=g^{-1}(t)
-                  \end{gather*}
-                  where $\displaystyle g(x):=\int_{x_0}^x\frac{1}{\dot{x}(s)}\dd s$.
-            \item Velocity dependence:
-                  \begin{gather*}
-                      \dot{x}(t)=h^{-1}(t)\\
-                      x(t)=x_0+\int_{t_0}^th^{-1}(s)\dd s
-                  \end{gather*}
-                  where $\displaystyle h(\dot{x}):=\int_{\dot{x}_0}^{\dot{x}}\frac{m}{F(s)}\dd s$.
-        \end{itemize}
-    \end{prop}
-    \subsubsection{Variable mass}
-    \begin{prop}[Mass accretion formula]
-        Consider two objects of masses $m(t)$ and $dm$ and velocities $\vf{v}(t)$ and $\vf{u}(t)$ respectively, which in an interval of time $\dd t$ the second one collide with the first one and become a unique object. If $\vf{F}^\text{ext}$ is the external force acting to the system, we have:
-        \begin{equation}
-            \vf{F}^\text{ext}=m\dot{\vf{v}}+(\vf{v}-\vf{u})\dot{m}=\dot{\vf{p}}-\dot{m}\vf{u}
-            \label{CM_mass}
-        \end{equation}
-        where $\vf{p}$ is the momentum of the object that gains mass\footnote{The formula is also valid for the case when the object is losing mass, i.e. $\dot{m}<0$.}.
-    \end{prop}
-    \begin{definition}[Rocket motion]\label{CM_rocket}
-        Consider a rocket moving at a velocity $\vf{v}$ that expels gas (to propel itself) at a velocity $\vf{c}$ with respect to the rocket. Suppose the mass of the rocket is $m(t)$ and let $m_0:=m(t_0)$. If $\vf{u}=\vf{v}+\vf{c}$ is the velocity of the gas with respect to an external frame of reference and $\vf{F}^\text{ext}$ is the net external force acting on the rocket, by \cref{CM_mass} we have:
-        $$m\dot{\vf{v}}=\vf{F}^\text{ext}+\dot{m}\vf{c}.$$
-    \end{definition}
-    \begin{prop}[Rocket without gravity]
-        In this case, and using the hypothesis of \cref{CM_rocket}, we have $\vf{F}^\text{ext}=0$ and if we suppose $\vf{v}=v\vf{j}$ and $\vf{c}=-c\vf{j}$, we have:
-        \begin{equation}
-            m\dv{v}{t}=-c\dv{m}{t}\implies v=c\log\frac{m_0}{m}
-            \label{CM_rockg0}
-        \end{equation}
-        Consider now the discrete case, i.e. when the function $\dot{m}$ is not differentiable. For that we can consider instantaneous ejections of $\Delta m=(m_0-m_f)/n$ amount of mass where $m_f$ is the mass of the rocket after $n$ ejections of mass. For this case, we have: $$v=c\sum_{k=1}^n\frac{(m_0-m_f)/n}{m_f+k(m_0-m_f)/n}=c\sum_{k=1}^n\frac{\Delta m}{m_f+k\Delta m}\footnote{Obviously if we tend $n$ to infinity we get \cref{CM_rocket}.}$$
-    \end{prop}
-    \begin{prop}[Rocket with gravity]
-        In this case, and using the hypothesis of \cref{CM_rocket}, we have $\vf{F}^\text{ext}=-mg\vf{j}$. Suppose $\vf{v}=v\vf{j}$, $\vf{c}=-c\vf{j}$ and, for simplicity, consider only the case when $\dot{m}=-\beta$, $\beta>0$. Therefore, we obtain:
-        \begin{equation}
-            m\frac{\dd v}{\dd t}=-mg+c\beta\implies v=c\ln\frac{m_0}{m}-\frac{g}{\beta}(m_0-m)
-            \label{CM_rockg1}
-        \end{equation}
-        Observe that if $m_0g>\beta c$, then $\dv{v}{t}$ would be negative, which is not possible. Therefore, in this case the formula is not correct if we are considering the rocket launch. In this case the formula becomes:
-        \begin{equation}
-            v=c\ln\frac{\beta c}{mg}-c+\frac{g}{\beta}m
-            \label{CM_rockg2}
-        \end{equation}
-        Because of $\dot{m}=-\beta\implies m(t)=m_0-\beta t$, we can express \cref{CM_rockg1,CM_rockg2} respectively as:
-        \begin{gather*}
-            v(t)=c\ln\frac{m_0}{m_0-\beta t}-gt\\
-            v(t)=c\ln\frac{\beta c}{m_0g-g\beta t}-c+\frac{g}{\beta}m_0-gt
-        \end{gather*}
-    \end{prop}
-    \subsection{Oscillations}
-    \subsubsection{Simple harmonic oscillator}
-    \begin{prop}
-        Consider the differential equation $$\ddot{x}+\omega_0^2 x=0$$ with initial values $x(0)=x_0$ and $\dot{x}(0)=\dot{x}_0$. Then, the general solution is:
-        \begin{equation}
-            x(t)=x_0\cos(\omega_0t)+\frac{\dot{x}_0}{\omega_0}\sin(\omega_0t)=A\cos(\omega_0t+\phi)
-            \label{CM_mhs}
-        \end{equation} where $\displaystyle A=\sqrt{{x_0}^2+{\left(\frac{\dot{x}_0}{\omega_0}\right)}^2}$ and $\displaystyle \phi=-\arctan\frac{\dot{x}_0}{\omega_0x_0}$. Such constants $\omega_0$ ($[\omega_0]=\text{rad}\cdot \text{s}^{-1}$), $A$ ($[A]=\text{m}$) and $\phi$ ($[\phi]=\text{rad}$) are called \textit{angular frequency}, \textit{amplitude} and \textit{initial phase}, respectively. Observe that the function in \cref{CM_mhs} is periodic with period $T=\frac{2\pi}{\omega_0}$ ($[T]=\text{s}$) and frequency $\nu=T^{-1}=\frac{\omega_0}{2\pi}$ ($[\nu]=\text{s}^{-1}=:\text{Hz}$).
-    \end{prop}
-    \begin{prop}
-        Consider a mass $m$ subjected to a spring of elastic constant $k$ (see \cref{CM_fig1}). If we displace the mass a distance $A$ from its equilibrium state, the mass will start to oscillate and its position $x(t)$ as a function of time will be:
-        $$-kx=m\ddot{x}\implies x(t)=A\cos(\omega_0t+\phi)$$ where $\omega_0=\sqrt{k/m}$. The energies of this systems are:
-        \begin{gather*}
-            K=\frac{1}{2}kA^2\sin(\omega_0 t+\phi)^2\quad U=\frac{1}{2}kA^2\cos(\omega_0 t+\phi)^2\\
-            E=\frac{1}{2}kA^2
-        \end{gather*}
-        of this system is $E=\frac{1}{2}kA^2$.
-        \begin{center}
-            \begin{minipage}{\linewidth}
-                \centering
-                \includestandalone[mode=image|tex,width=0.4\linewidth]{Images/spring}
-                \captionof{figure}{Mass subjected to a spring}
-                \label{CM_fig1}
-            \end{minipage}
-        \end{center}
-    \end{prop}
-    \begin{definition}
-        Let $U(x)$ be a potential function of class $\mathcal{C}^2(\mathbb{R})$. We say $x_0$ is a \textit{point of stable equilibrium} if $U$ attains a minimum in $x_0$. Analogously, we say $x_0$ is a \textit{point of unstable equilibrium} if $U$ attains a maximum in $x_0$.
-    \end{definition}
-    \begin{prop}
-        Let $U(x)$ be a potential function of class $\mathcal{C}^2(\mathbb{R})$ associated with a particle of mass $m$ and $x_0$ be a point of stable equilibrium. Then, if we disturb slightly the particle, it will start to oscillate at a frequency $\omega_0=\sqrt{\frac{U''(x_0)}{m}}$.
-    \end{prop}
-    \begin{prop}
-        Consider a mass hanging from a spring and let $y(t)$ be the position of the mass measured from initial string's length (without the mass) to the position of the mass at time $t$ (see \cref{CM_fig2}). If we disturb the system with an external force so that the mass starts to oscillate, we have: $$mg-ky=m\ddot{y}\implies y(t)=\frac{mg}{k}+A\cos(\omega_0t+\phi)$$ where $\omega_0=\sqrt{\frac{k}{m}}$.
-        \begin{center}
-            \begin{minipage}{\linewidth}
-                \centering
-                \includegraphics[width=\linewidth]{Physics/2nd/Classical_mechanics/Images/springs.tex}
-                \captionof{figure}{Mass hanging from a spring}
-                \label{CM_fig2}
-            \end{minipage}
-        \end{center}
-    \end{prop}
-    \begin{prop}
-        Consider a simple pendulum with a mass $m$ attached to one of the endpoints of the string (massless and of length $\ell$). If we disturb the system a small angle with an external force so that the mass starts to oscillate, then assuming that $\theta(t)$ denotes the angle of the string with respect to the stable equilibrium we have:
-        $$\ddot{\theta}+\frac{g}{\ell}\theta=0\implies\theta(t)=A\cos(\omega_0t+\phi)$$ where $\omega_0=\sqrt{\frac{g}{\ell}}$.
-        \begin{center}
-            \begin{minipage}{\linewidth}
-                \centering
-                \includegraphics[width=0.5\linewidth]{Physics/2nd/Classical_mechanics/Images/simple_pendulum.tex}
-                \captionof{figure}{Simple pendulum}
-            \end{minipage}
-        \end{center}
-    \end{prop}
-    \begin{prop}
-        Consider a physical pendulum of mass $m$ and let $I_e$ be the moment of inertia of the body with respect to the axis $e$ (see \cref{CM_fig3}). If we disturb the system a small angle with an external force so that the mass starts to oscillate, then assuming that $\theta(t)$ denotes the angle between the axis $e$ and the line passing through the fixed point and the CM, we have:
-        $$\ddot{\theta}+\frac{mgD}{I_e}\theta=0\implies\theta(t)=A\cos(\omega_0t+\phi)$$ where $\omega_0=\sqrt{\frac{mgD}{I_e}}$.
-        \begin{center}
-            \begin{minipage}{\linewidth}
-                \centering
-                \includegraphics[width=0.4\linewidth]{Physics/2nd/Classical_mechanics/Images/physical_pendulum.tex}
-                \captionof{figure}{Physical pendulum}
-                \label{CM_fig3}
-            \end{minipage}
-        \end{center}
-    \end{prop}
-    \begin{prop}
-        Consider the LC circuit as shown in figure ...
-        $$L\ddot{q}+\frac{1}{C}q=0\implies q(t)=A\cos(\omega_0t+\phi)$$ where $\omega_0=\frac{1}{\sqrt{LC}}$.
-    \end{prop}
-    \subsubsection{Damped harmonic oscillator}
-    \begin{prop}[Movement equation]
-        Consider the following differential equation: $$\ddot{x}+2\beta\dot{x}+\omega_0^2 x=0,$$ with initials values of $x(0)=x_0$ and $\dot{x}(0)=\dot{x}_0$. Then we have three cases for the general solution:
-        \begin{itemize}
-            \item If $\beta<\omega_0$,
-                  \begin{equation}
-                      x(t)=e^{-\beta t}\left(c_1\cos\Tilde{\omega}t+c_2\sin\Tilde{\omega}t\right).
-                      \label{CM_b<w}
-                  \end{equation}
-            \item If $\beta=\omega_0$,
-                  \begin{equation}
-                      x(t)=e^{-\beta t}\left(c_1+c_2t\right).
-                      \label{CM_b=w}
-                  \end{equation}
-            \item If $\beta>\omega_0$,
-                  \begin{equation}
-                      x(t)=c_1e^{-(\beta+\Tilde{\omega})t}+c_2e^{-(\beta-\Tilde{\omega})t}.
-                      \label{CM_b>w}
-                  \end{equation}
-        \end{itemize}
-        Here $c_1,c_2$ are constants depending on the initial values and we have defined $\displaystyle \Tilde{\omega}=\sqrt{\left|\omega_0^2-\beta^2\right|}$.
-    \end{prop}
-    \begin{prop}[Energy of damped harmonic oscillator]
-        $$E=\frac{\mu}{2}\left(\dot{x}^2+\omega_0^2x^2\right),$$ where $\mu$ is a constant.
-    \end{prop}
-    \begin{prop}[Underdamped harmonic oscillator: $\beta<\omega_0$]
-        Coefficients $c_1,c_2$ of the general solution of \cref{CM_b<w} are: $$c_1=x_0,\quad c_2=\frac{\dot{x}_0+\beta x_0}{\Tilde{\omega}}.$$ The equation, can be simplified to $$x(t)=Ae^{-\beta t}\cos(\Tilde{\omega}t+\phi),$$ where $\displaystyle A=\sqrt{x_0^2+\left(\frac{\dot{x}_0+\beta x_0}{\Tilde{\omega}}\right)^2}$ and\\ $\displaystyle\phi=-\arctan\frac{\dot{x}_0+\beta x_0}{\Tilde{\omega}x_0}$.
-    \end{prop}
-    \begin{definition}[Quality factor]
-        The \textit{quality factor} is defined as follows: $$Q:=\frac{\omega_0}{2\beta}.$$
-    \end{definition}
-    \noindent From that, we can rewrite the expression of $\Tilde{\omega}$ to get: $$\Tilde{\omega}=\omega_0\sqrt{1-\frac{1}{4Q^2}}.$$
-    \begin{prop}[Energy of underdamped harmonic oscillator]
-        For
-        $$E(t)=\frac{\mu\omega_0^2A^2}{2}e^{-2\beta t}=E_0e^{-2\beta t}.$$ The rate at which the energy is dissipated is $$\left|\frac{dE}{\dd t}(t)\right|=2\beta E(t)\implies\frac{E}{\left|dE/\dd t\right|}=\frac{1}{2\beta}.$$
-        If $\beta\ll\omega_0$, then $$Q=2\pi\frac{E}{\Delta E},$$ where $\Delta E$ is the energy dissipated in a pseudo-period $\Tilde{T}=2\pi/\Tilde{\omega}\approx2\pi/\omega_0$.
-    \end{prop}
-    \begin{prop}[Critically damped harmonic oscillator: $\beta=\omega_0$]
-        Coefficients $c_1,c_2$ of the general solution of \cref{CM_b=w} are: $$c_1=x_0,\quad c_2=x_0\omega_0+\dot{x}_0.$$ This harmonic oscillator is the one that returns to balance more quickly.
-    \end{prop}
-    \begin{prop}[Overdamped harmonic oscillator: $\beta<\omega_0$]
-        Coefficients $c_1,c_2$ of the general solution of \cref{CM_b>w} are: $$c_1=\frac{x_0(\Tilde{\omega}-\beta)-\dot{x}_0}{2\Tilde{\omega}},\quad c_2=\frac{x_0(\Tilde{\omega}+\beta)+\dot{x}_0}{2\Tilde{\omega}}.$$
-    \end{prop}
-    \subsubsection{Driven harmonic oscillators}
-    \begin{prop}[Movement equation]
-        Consider the following differential equation: $$\ddot{x}+2\beta\dot{x}+\omega_0^2 x=f(t)=f_0\cos(\omega t+\psi),$$ with initials values of $x(0)=x_0$ and $\dot{x}(0)=\dot{x}_0$. Then the particular solution is:
-        $$x_p(t)=A\cos(\omega t+\psi-\phi),$$
-        where $\displaystyle A=\frac{f_0}{\sqrt{{(\omega_0^2-\omega^2)}^2+4\beta^2\omega^2}}$ and\\ $\displaystyle\phi=\arctan{\frac{2\beta\omega}{\omega_0^2-\omega^2}}$. Therefore for the general solution we have three cases to consider:
-        \begin{itemize}
-            \item If $\beta<\omega_0$,
-                  \begin{equation}
-                      x(t)=e^{-\beta t}(c_1\cos\Tilde{\omega}t+c_2\sin\Tilde{\omega}t)+A\cos(\omega t+\psi-\phi).
-                      \label{CM_d-b<w}
-                  \end{equation}
-            \item If $\beta=\omega_0$,
-                  \begin{equation}
-                      x(t)=e^{-\beta t}\left(c_1+c_2t\right)+A\cos(\omega t+\psi-\phi).
-                      \label{CM_d-b=w}
-                  \end{equation}
-            \item If $\beta>\omega_0$,
-                  \begin{equation}
-                      x(t)=c_1e^{-(\beta+\Tilde{\omega})t}+c_2e^{-(\beta-\Tilde{\omega})t}+A\cos(\omega t+\psi-\phi).
-                      \label{CM_d-b>w}
-                  \end{equation}
-        \end{itemize}
-        Here $c_1,c_2$ are constants depending on the initial values.
-    \end{prop}
-    \begin{prop}[Underdamped driven oscillator]
-        Coefficients $c_1,c_2$ of the general solution of \cref{CM_d-b<w} are:
-        \begin{gather*}
-            c_1=x_0-A\cos\left(\psi-\phi\right),\\
-            c_2=\frac{\dot{x}_0-\omega A\sin\left(\psi-\phi\right)+\beta\left[x_0-A\cos\left(\psi-\phi\right)\right]}{\tilde{\omega}}.
-        \end{gather*}
-    \end{prop}
-    \begin{prop}[Critically damped driven oscillator]
-        Coefficients $c_1,c_2$ of the general solution of \cref{CM_d-b=w} are:
-        \begin{gather*}
-            c_1=x_0-A\cos\left(\psi-\phi\right),\\
-            c_2=\dot{x}_0A+\omega_0x_0+A\left(\omega\sin\left(\phi-\psi\right)-\omega_0\cos\left(\psi-\phi\right)\right).
-        \end{gather*}
-    \end{prop}
-    \begin{prop}[Overdamped driven oscillator]
-        Coefficients $c_1,c_2$ of the general solution of \cref{CM_d-b>w} are:
-        \begin{equation*}
-            \begin{split}
-                \begin{multlined}[t]
-                    c_1=A\frac{(\beta-\Tilde{\omega})\cos\left(\psi-\phi\right)-\omega\sin\left(\psi-\phi\right)}{2\Tilde{\omega}}+\\+\frac{-(\beta-\Tilde{\omega})x_0-\dot{x}_0}{2\Tilde{\omega}},
-                \end{multlined}\\
-                \begin{multlined}[t]
-                    c_2=A\frac{-(\beta+\Tilde{\omega})\cos\left(\psi-\phi\right)+\omega\sin\left(\psi-\phi\right)}{2\Tilde{\omega}}+\\+\frac{(\beta+\Tilde{\omega})x_0+\dot{x}_0}{2\Tilde{\omega}}.
-                \end{multlined}
-            \end{split}
-        \end{equation*}
-    \end{prop}
-    \begin{definition}
-        Given a driven oscillator, we say it is in the \textit{steady-state part} if $t\gg 1/\beta$. In that case $x(t)$ become: $$x(t)=A\cos(\omega t+\psi-\phi).$$ While the dependency on $c_1,c_2$ is non-negligible, we say the driven oscillator is in the \textit{transient part}.
-    \end{definition}
-    \begin{prop}[Resonance in amplitude]
-        If $\omega=\omega_r:=\sqrt{\omega_0^2-2\beta^2}$ we say the oscillator is in \textit{resonance in amplitude}. For $\omega=\omega_r$ we have $$A_r=\frac{f_0}{2\beta\sqrt{\omega_0^2-\beta^2}}.$$
-    \end{prop}
-    \begin{prop}[Energy in steady-state part]
-        $$E=\frac{\mu A^2}{2}\left[\omega^2\sin^2(\omega t+\psi-\phi)+\omega_0^2\cos^2(\omega t+\psi-\phi)\right].$$ If $\omega\approx\omega_0$ and $\beta\ll\omega_0$ then $$E=\frac{\mu f_0^2}{8}\frac{1}{(\omega-\omega_0)^2+\beta^2}.$$ Observe $E$ has a maximum at $\omega=\omega_0$ with the value of $E^\text{max}=\frac{\mu f_0^2}{8\beta^2}$.
-    \end{prop}
-    \begin{definition}
-        We define the \textit{cutoff frequencies} as this two frequencies: $$\omega_1=\omega_0-\beta,\quad\omega_2=\omega_0+\beta.$$ The value  $\Delta\omega=\omega_2-\omega_1=2\beta$ is called the \textit{bandwidth}. Therefore, we can redefined the quality factor as: $$Q=\frac{\omega_0}{2\beta}=\frac{\omega_0}{\Delta\omega}=\frac{\nu_0}{\Delta\nu}$$
-    \end{definition}
-    \textcolor{green}{FALTA COSA.}
-    \begin{prop}[Impulsive forces]
-        Consider a driven oscillator of equation $\ddot{x}+2\beta\dot{x}+\omega_0^2x=f$, where $$f(t)=\left\{
-            \begin{array}{cc}
-                0   & \text{if } t<t'                    \\
-                f_0 & \text{if }t'\leq t\leq t'+\Delta t \\
-                0   & \text{if } t>t'+\Delta t
-            \end{array}\right.$$
-    \end{prop}
-    \textcolor{green}{FALTA COSA.}
-    \subsection{Central forces}
-    \subsubsection{Definition and properties}
-    \begin{definition}[Central force]
-        A \textit{central force} is a force of the form $$\vf{F}(\boldsymbol{r})=f(r)\boldsymbol{e}_r,$$ where $r=\|\boldsymbol{r}\|$ and $\boldsymbol{e}_r=\boldsymbol{r}/r$ is the unit radial vector.
-    \end{definition}
-    \begin{definition}
-        The origin $\boldsymbol{r}=0$ is called \textit{center of forces}.
-    \end{definition}
-    \begin{prop}
-        All central forces are conservative and $$f(r)=-U'(r),$$ where $U(r)$ is the potential energy of the central force.
-    \end{prop}
-    \subsubsection{Conservation of angular momentum and areal velocity}
-    \begin{prop}
-        The angular momentum with respect to the center of forces is conserved, that is, $\dot{\boldsymbol{L}}=0$.
-    \end{prop}
-    \begin{prop}[Kepler's 2nd law]
-        The areal velocity $dA/\dd t$ is constant. In fact, $$\frac{dA}{\dd t}=\frac{L}{2m}.$$
-    \end{prop}
-    \begin{prop}[Unit vectors]
-        Remember we have $$\boldsymbol{e}_r=\boldsymbol{i}\cos\theta+\vf{j}\sin\theta,\quad\boldsymbol{e}_\theta=-\boldsymbol{i}\sin\theta+\vf{j}\cos\theta.$$ Therefore we obtain,
-        \begin{equation}
-            \boldsymbol{r}=r\boldsymbol{e}_r,\quad\boldsymbol{\dot{r}}=\dot{r}\boldsymbol{e}_r+r\dot{\theta}\boldsymbol{e}_\theta,\quad\boldsymbol{\ddot{r}}=(\ddot{r}-r\dot{\theta}^2)\boldsymbol{e}_r+(2\dot{r}\dot{\theta}+r\ddot{\theta})\boldsymbol{e}_\theta.
-            \label{CM_unit}
-        \end{equation}
-    \end{prop}
-    \begin{prop}[Trajectory equation]
-        From \cref{CM_unit}, Newton's second law can be written as: $$\ddot{r}-r\dot{\theta}^2=\frac{f(r)}{m},\quad 2\dot{r}\dot{\theta}+r\ddot{\theta}=0.$$ And we can obtain the following differential equations: $$\dot{\theta}=\frac{L}{m r^2}:=\frac{l}{r^2},\quad\ddot{r}-\frac{l^2}{r^3}=\frac{f(r)}{m},$$ where we have defined the magnitude $l:=L/m$. Finally, we get the \textit{trajectory equation}: $$\frac{d^2}{d\theta^2}\left(\frac{1}{r}\right)+\frac{1}{r}=-\frac{1}{ml^2}r^2f(r).$$
-    \end{prop}
-    \subsubsection{Conservation of energy and orbits}
-    \begin{prop}[Kinetic energy]
-        $$K=\frac{1}{2}m|\boldsymbol{\dot{r}}^2=\frac{1}{2}m\dot{r}^2+\frac{ml^2}{2r^2}.$$
-    \end{prop}
-    \begin{definition}
-        We define the effective potential as $$U_\text{eff}=U(r)+\frac{ml^2}{2r^2}.$$ The term $ml^2/(2r^2)$ gives the centripetal force: $$f_\text{centr}=-\frac{d}{dr}\left(\frac{ml^2}{2r^2}\right)\implies\boldsymbol{f}_\text{centr}=mr\dot{\theta}^2\boldsymbol{e}_r$$
-    \end{definition}
-    \begin{prop}[Energy]
-        \begin{equation}
-            E=\frac{1}{2}m\dot{r}^2+U_\text{eff}=\frac{1}{2}m\dot{r}^2+\frac{ml^2}{2r^2}+U(r).
-            \label{CM_energy}
-        \end{equation}
-    \end{prop}
-    \begin{prop}[Orbits]
-        The minimum of $U_\text{eff}(r)$ determines the radius of the \textit{stable circular orbits}. If $E<0$, the orbits are in a range of radius $r_\text{min}$ and $r_\text{max}$, and so are \textit{bounded orbits}. If $E>0$, the orbits are called \textit{unbounded orbits}. Equating \cref{CM_energy} to ??????, we can obtain the angle $\Delta\theta$ in a \textit{radial oscillation}:\footnote{A radial oscillation is the trajectory when $r$ moves from $r_\text{min}$ to $r_\text{max}$ and the comes back to $r_\text{min}$.} $$\Delta\theta=2\int_{r_\text{min}}^{r_\text{max}}\frac{l/r^2}{\sqrt{(2/m)(E-U_\text{eff}}}dr.\footnote{Here we have taken the positive orientation, that is, $\boldsymbol{L}$ pointing to the positive $z$-axis.}$$ Note, that the orbits are \textit{closed orbits} if $$\Delta\theta=2\pi\frac{p}{q},\quad p,q\in\mathbb{N}.$$
-    \end{prop}
-    \begin{theorem}[Bertrand's theorem]
-        The two unique potentials for which every bounded orbit is closed are: $$U(r)=-\frac{k}{r},\quad U(r)=\frac{k}{2}r^2,\quad k>0.$$
-    \end{theorem}
-    \subsubsection{Potential $-k/r$}
-    \begin{prop}[Movement equation]
-        $$r(\theta)=\frac{\alpha}{\varepsilon\cos\theta+\text{sgn}\,k},$$where $\displaystyle\alpha=\frac{L^2}{m|k|}$ and $\displaystyle\varepsilon=\sqrt{1+\frac{2EL^2}{mk^2}}$. This is the equation of a conic.
-    \end{prop}
-    \begin{definition}
-        We define the \textit{pericenter of an orbit} as the minimum value of $r(\theta)$, that is, $r=r_\text{min}$. Analogously, we define the \textit{apocenter of an orbit} as the maximum value of $r(\theta)$, that is, $r=r_\text{max}$.
-    \end{definition}
-    \subsubsection{Conics}
+  \subsection{Motion in one dimension}
+  \subsubsection{Integration of Newton's 2nd law}
+  \begin{prop}[Newton's 2nd law]
+    Consider a particle with constant mass $m$ that moves in one dimension. Then, it satisfies: $$\ddot{x}(t)=\frac{1}{m}F(x(t),\dot{x}(t),t)$$
+    where we have supposed the force function $F$ is known and $x(t)$ is the position of the particle as a function of time\footnote{Sometimes, in order to simplify the notation, we will write $x$ instead of $x(t)$ (and similarly with the velocity and other magnitudes).}. We also suppose that the initial position and initial velocity, denoted by $x(t_0)=x_0$ and $\dot{x}(t_0)=\dot{x}_0$ respectively, are known.
+  \end{prop}
+  \begin{prop}[Integration of Newton's 2nd law]
+    Consider a force $F$ that only depends on time, position or velocity. Then, the position and velocity of the particle subjected to $F$ are:
+    \begin{itemize}
+      \item Time dependence:
+            \begin{gather*}
+              \dot{x}(t)=\dot{x}_0+\int_{t_0}^t\frac{F(s)}{m}\dd s\\
+              x(t)=x_0+\int_{t_0}^t\dot{x}(s)\dd s
+            \end{gather*}
+      \item Position dependence:
+            \begin{gather*}
+              {\dot{x}(x)}^2={\dot{x}(x_0)}^2+2\int_{x_0}^x\frac{F(s)}{m}\dd s\\
+              x(t)=g^{-1}(t)
+            \end{gather*}
+            where $\displaystyle g(x):=\int_{x_0}^x\frac{1}{\dot{x}(s)}\dd s$.
+      \item Velocity dependence:
+            \begin{gather*}
+              \dot{x}(t)=h^{-1}(t)\\
+              x(t)=x_0+\int_{t_0}^th^{-1}(s)\dd s
+            \end{gather*}
+            where $\displaystyle h(\dot{x}):=\int_{\dot{x}_0}^{\dot{x}}\frac{m}{F(s)}\dd s$.
+    \end{itemize}
+  \end{prop}
+  \subsubsection{Variable mass}
+  \begin{prop}[Mass accretion formula]
+    Consider two objects of masses $m(t)$ and $dm$ and velocities $\vf{v}(t)$ and $\vf{u}(t)$ respectively, which in an interval of time $\dd t$ the second one collide with the first one and become a unique object. If $\vf{F}^\text{ext}$ is the external force acting to the system, we have:
+    \begin{equation}
+      \vf{F}^\text{ext}=m\dot{\vf{v}}+(\vf{v}-\vf{u})\dot{m}=\dot{\vf{p}}-\dot{m}\vf{u}
+      \label{CM_mass}
+    \end{equation}
+    where $\vf{p}$ is the momentum of the object that gains mass\footnote{The formula is also valid for the case when the object is losing mass, i.e. $\dot{m}<0$.}.
+  \end{prop}
+  \begin{definition}[Rocket motion]\label{CM_rocket}
+    Consider a rocket moving at a velocity $\vf{v}$ that expels gas (to propel itself) at a velocity $\vf{c}$ with respect to the rocket. Suppose the mass of the rocket is $m(t)$ and let $m_0:=m(t_0)$. If $\vf{u}=\vf{v}+\vf{c}$ is the velocity of the gas with respect to an external frame of reference and $\vf{F}^\text{ext}$ is the net external force acting on the rocket, by \cref{CM_mass} we have:
+    $$m\dot{\vf{v}}=\vf{F}^\text{ext}+\dot{m}\vf{c}.$$
+  \end{definition}
+  \begin{prop}[Rocket without gravity]
+    In this case, and using the hypothesis of \cref{CM_rocket}, we have $\vf{F}^\text{ext}=0$ and if we suppose $\vf{v}=v\vf{j}$ and $\vf{c}=-c\vf{j}$, we have:
+    \begin{equation}
+      m\dv{v}{t}=-c\dv{m}{t}\implies v=c\log\frac{m_0}{m}
+      \label{CM_rockg0}
+    \end{equation}
+    Consider now the discrete case, i.e. when the function $\dot{m}$ is not differentiable. For that we can consider instantaneous ejections of $\Delta m=(m_0-m_f)/n$ amount of mass where $m_f$ is the mass of the rocket after $n$ ejections of mass. For this case, we have: $$v=c\sum_{k=1}^n\frac{(m_0-m_f)/n}{m_f+k(m_0-m_f)/n}=c\sum_{k=1}^n\frac{\Delta m}{m_f+k\Delta m}\footnote{Obviously if we tend $n$ to infinity we get \cref{CM_rocket}.}$$
+  \end{prop}
+  \begin{prop}[Rocket with gravity]
+    In this case, and using the hypothesis of \cref{CM_rocket}, we have $\vf{F}^\text{ext}=-mg\vf{j}$. Suppose $\vf{v}=v\vf{j}$, $\vf{c}=-c\vf{j}$ and, for simplicity, consider only the case when $\dot{m}=-\beta$, $\beta>0$. Therefore, we obtain:
+    \begin{equation}
+      m\frac{\dd v}{\dd t}=-mg+c\beta\implies v=c\ln\frac{m_0}{m}-\frac{g}{\beta}(m_0-m)
+      \label{CM_rockg1}
+    \end{equation}
+    Observe that if $m_0g>\beta c$, then $\dv{v}{t}$ would be negative, which is not possible. Therefore, in this case the formula is not correct if we are considering the rocket launch. In this case the formula becomes:
+    \begin{equation}
+      v=c\ln\frac{\beta c}{mg}-c+\frac{g}{\beta}m
+      \label{CM_rockg2}
+    \end{equation}
+    Because of $\dot{m}=-\beta\implies m(t)=m_0-\beta t$, we can express \cref{CM_rockg1,CM_rockg2} respectively as:
+    \begin{gather*}
+      v(t)=c\ln\frac{m_0}{m_0-\beta t}-gt\\
+      v(t)=c\ln\frac{\beta c}{m_0g-g\beta t}-c+\frac{g}{\beta}m_0-gt
+    \end{gather*}
+  \end{prop}
+  \subsection{Oscillations}
+  \subsubsection{Simple harmonic oscillator}
+  \begin{prop}
+    Consider the differential equation $$\ddot{x}+\omega_0^2 x=0$$ with initial values $x(0)=x_0$ and $\dot{x}(0)=\dot{x}_0$. Then, the general solution is:
+    \begin{equation}
+      x(t)=x_0\cos(\omega_0t)+\frac{\dot{x}_0}{\omega_0}\sin(\omega_0t)=A\cos(\omega_0t+\phi)
+      \label{CM_mhs}
+    \end{equation} where $\displaystyle A=\sqrt{{x_0}^2+{\left(\frac{\dot{x}_0}{\omega_0}\right)}^2}$ and $\displaystyle \phi=-\arctan\frac{\dot{x}_0}{\omega_0x_0}$. Such constants $\omega_0$ ($[\omega_0]=\text{rad}\cdot \text{s}^{-1}$), $A$ ($[A]=\text{m}$) and $\phi$ ($[\phi]=\text{rad}$) are called \emph{angular frequency}, \emph{amplitude} and \emph{initial phase}, respectively. Observe that the function in \cref{CM_mhs} is periodic with period $T=\frac{2\pi}{\omega_0}$ ($[T]=\text{s}$) and frequency $\nu=T^{-1}=\frac{\omega_0}{2\pi}$ ($[\nu]=\text{s}^{-1}=:\text{Hz}$).
+  \end{prop}
+  \begin{prop}
+    Consider a mass $m$ subjected to a spring of elastic constant $k$ (see \cref{CM_fig1}). If we displace the mass a distance $A$ from its equilibrium state, the mass will start to oscillate and its position $x(t)$ as a function of time will be:
+    $$-kx=m\ddot{x}\implies x(t)=A\cos(\omega_0t+\phi)$$ where $\omega_0=\sqrt{k/m}$. The energies of this systems are:
+    \begin{gather*}
+      K=\frac{1}{2}kA^2\sin(\omega_0 t+\phi)^2\quad U=\frac{1}{2}kA^2\cos(\omega_0 t+\phi)^2\\
+      E=\frac{1}{2}kA^2
+    \end{gather*}
+    of this system is $E=\frac{1}{2}kA^2$.
+    \begin{center}
+      \begin{minipage}{\linewidth}
+        \centering
+        \includestandalone[mode=image|tex,width=0.4\linewidth]{Images/spring}
+        \captionof{figure}{Mass subjected to a spring}
+        \label{CM_fig1}
+      \end{minipage}
+    \end{center}
+  \end{prop}
+  \begin{definition}
+    Let $U(x)$ be a potential function of class $\mathcal{C}^2(\RR)$. We say $x_0$ is a \emph{point of stable equilibrium} if $U$ attains a minimum in $x_0$. Analogously, we say $x_0$ is a \emph{point of unstable equilibrium} if $U$ attains a maximum in $x_0$.
+  \end{definition}
+  \begin{prop}
+    Let $U(x)$ be a potential function of class $\mathcal{C}^2(\RR)$ associated with a particle of mass $m$ and $x_0$ be a point of stable equilibrium. Then, if we disturb slightly the particle, it will start to oscillate at a frequency $\omega_0=\sqrt{\frac{U''(x_0)}{m}}$.
+  \end{prop}
+  \begin{prop}
+    Consider a mass hanging from a spring and let $y(t)$ be the position of the mass measured from initial string's length (without the mass) to the position of the mass at time $t$ (see \cref{CM_fig2}). If we disturb the system with an external force so that the mass starts to oscillate, we have: $$mg-ky=m\ddot{y}\implies y(t)=\frac{mg}{k}+A\cos(\omega_0t+\phi)$$ where $\omega_0=\sqrt{\frac{k}{m}}$.
+    \begin{center}
+      \begin{minipage}{\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{Physics/2nd/Classical_mechanics/Images/springs.tex}
+        \captionof{figure}{Mass hanging from a spring}
+        \label{CM_fig2}
+      \end{minipage}
+    \end{center}
+  \end{prop}
+  \begin{prop}
+    Consider a simple pendulum with a mass $m$ attached to one of the endpoints of the string (massless and of length $\ell$). If we disturb the system a small angle with an external force so that the mass starts to oscillate, then assuming that $\theta(t)$ denotes the angle of the string with respect to the stable equilibrium we have:
+    $$\ddot{\theta}+\frac{g}{\ell}\theta=0\implies\theta(t)=A\cos(\omega_0t+\phi)$$ where $\omega_0=\sqrt{\frac{g}{\ell}}$.
+    \begin{center}
+      \begin{minipage}{\linewidth}
+        \centering
+        \includegraphics[width=0.5\linewidth]{Physics/2nd/Classical_mechanics/Images/simple_pendulum.tex}
+        \captionof{figure}{Simple pendulum}
+      \end{minipage}
+    \end{center}
+  \end{prop}
+  \begin{prop}
+    Consider a physical pendulum of mass $m$ and let $I_e$ be the moment of inertia of the body with respect to the axis $e$ (see \cref{CM_fig3}). If we disturb the system a small angle with an external force so that the mass starts to oscillate, then assuming that $\theta(t)$ denotes the angle between the axis $e$ and the line passing through the fixed point and the CM, we have:
+    $$\ddot{\theta}+\frac{mgD}{I_e}\theta=0\implies\theta(t)=A\cos(\omega_0t+\phi)$$ where $\omega_0=\sqrt{\frac{mgD}{I_e}}$.
+    \begin{center}
+      \begin{minipage}{\linewidth}
+        \centering
+        \includegraphics[width=0.4\linewidth]{Physics/2nd/Classical_mechanics/Images/physical_pendulum.tex}
+        \captionof{figure}{Physical pendulum}
+        \label{CM_fig3}
+      \end{minipage}
+    \end{center}
+  \end{prop}
+  \begin{prop}
+    Consider the LC circuit as shown in figure ...
+    $$L\ddot{q}+\frac{1}{C}q=0\implies q(t)=A\cos(\omega_0t+\phi)$$ where $\omega_0=\frac{1}{\sqrt{LC}}$.
+  \end{prop}
+  \subsubsection{Damped harmonic oscillator}
+  \begin{prop}[Movement equation]
+    Consider the following differential equation: $$\ddot{x}+2\beta\dot{x}+\omega_0^2 x=0,$$ with initials values of $x(0)=x_0$ and $\dot{x}(0)=\dot{x}_0$. Then we have three cases for the general solution:
+    \begin{itemize}
+      \item If $\beta<\omega_0$,
+            \begin{equation}
+              x(t)=e^{-\beta t}\left(c_1\cos\Tilde{\omega}t+c_2\sin\Tilde{\omega}t\right).
+              \label{CM_b<w}
+            \end{equation}
+      \item If $\beta=\omega_0$,
+            \begin{equation}
+              x(t)=e^{-\beta t}\left(c_1+c_2t\right).
+              \label{CM_b=w}
+            \end{equation}
+      \item If $\beta>\omega_0$,
+            \begin{equation}
+              x(t)=c_1e^{-(\beta+\Tilde{\omega})t}+c_2e^{-(\beta-\Tilde{\omega})t}.
+              \label{CM_b>w}
+            \end{equation}
+    \end{itemize}
+    Here $c_1,c_2$ are constants depending on the initial values and we have defined $\displaystyle \Tilde{\omega}=\sqrt{\left|\omega_0^2-\beta^2\right|}$.
+  \end{prop}
+  \begin{prop}[Energy of damped harmonic oscillator]
+    $$E=\frac{\mu}{2}\left(\dot{x}^2+\omega_0^2x^2\right),$$ where $\mu$ is a constant.
+  \end{prop}
+  \begin{prop}[Underdamped harmonic oscillator: $\beta<\omega_0$]
+    Coefficients $c_1,c_2$ of the general solution of \cref{CM_b<w} are: $$c_1=x_0,\quad c_2=\frac{\dot{x}_0+\beta x_0}{\Tilde{\omega}}.$$ The equation, can be simplified to $$x(t)=Ae^{-\beta t}\cos(\Tilde{\omega}t+\phi),$$ where $\displaystyle A=\sqrt{x_0^2+\left(\frac{\dot{x}_0+\beta x_0}{\Tilde{\omega}}\right)^2}$ and\\ $\displaystyle\phi=-\arctan\frac{\dot{x}_0+\beta x_0}{\Tilde{\omega}x_0}$.
+  \end{prop}
+  \begin{definition}[Quality factor]
+    The \emph{quality factor} is defined as follows: $$Q:=\frac{\omega_0}{2\beta}.$$
+  \end{definition}
+  \noindent From that, we can rewrite the expression of $\Tilde{\omega}$ to get: $$\Tilde{\omega}=\omega_0\sqrt{1-\frac{1}{4Q^2}}.$$
+  \begin{prop}[Energy of underdamped harmonic oscillator]
+    For
+    $$E(t)=\frac{\mu\omega_0^2A^2}{2}e^{-2\beta t}=E_0e^{-2\beta t}.$$ The rate at which the energy is dissipated is $$\left|\frac{dE}{\dd t}(t)\right|=2\beta E(t)\implies\frac{E}{\left|dE/\dd t\right|}=\frac{1}{2\beta}.$$
+    If $\beta\ll\omega_0$, then $$Q=2\pi\frac{E}{\Delta E},$$ where $\Delta E$ is the energy dissipated in a pseudo-period $\Tilde{T}=2\pi/\Tilde{\omega}\approx2\pi/\omega_0$.
+  \end{prop}
+  \begin{prop}[Critically damped harmonic oscillator: $\beta=\omega_0$]
+    Coefficients $c_1,c_2$ of the general solution of \cref{CM_b=w} are: $$c_1=x_0,\quad c_2=x_0\omega_0+\dot{x}_0.$$ This harmonic oscillator is the one that returns to balance more quickly.
+  \end{prop}
+  \begin{prop}[Overdamped harmonic oscillator: $\beta<\omega_0$]
+    Coefficients $c_1,c_2$ of the general solution of \cref{CM_b>w} are: $$c_1=\frac{x_0(\Tilde{\omega}-\beta)-\dot{x}_0}{2\Tilde{\omega}},\quad c_2=\frac{x_0(\Tilde{\omega}+\beta)+\dot{x}_0}{2\Tilde{\omega}}.$$
+  \end{prop}
+  \subsubsection{Driven harmonic oscillators}
+  \begin{prop}[Movement equation]
+    Consider the following differential equation: $$\ddot{x}+2\beta\dot{x}+\omega_0^2 x=f(t)=f_0\cos(\omega t+\psi),$$ with initials values of $x(0)=x_0$ and $\dot{x}(0)=\dot{x}_0$. Then the particular solution is:
+    $$x_p(t)=A\cos(\omega t+\psi-\phi),$$
+    where $\displaystyle A=\frac{f_0}{\sqrt{{(\omega_0^2-\omega^2)}^2+4\beta^2\omega^2}}$ and\\ $\displaystyle\phi=\arctan{\frac{2\beta\omega}{\omega_0^2-\omega^2}}$. Therefore for the general solution we have three cases to consider:
+    \begin{itemize}
+      \item If $\beta<\omega_0$,
+            \begin{equation}
+              x(t)=e^{-\beta t}(c_1\cos\Tilde{\omega}t+c_2\sin\Tilde{\omega}t)+A\cos(\omega t+\psi-\phi).
+              \label{CM_d-b<w}
+            \end{equation}
+      \item If $\beta=\omega_0$,
+            \begin{equation}
+              x(t)=e^{-\beta t}\left(c_1+c_2t\right)+A\cos(\omega t+\psi-\phi).
+              \label{CM_d-b=w}
+            \end{equation}
+      \item If $\beta>\omega_0$,
+            \begin{equation}
+              x(t)=c_1e^{-(\beta+\Tilde{\omega})t}+c_2e^{-(\beta-\Tilde{\omega})t}+A\cos(\omega t+\psi-\phi).
+              \label{CM_d-b>w}
+            \end{equation}
+    \end{itemize}
+    Here $c_1,c_2$ are constants depending on the initial values.
+  \end{prop}
+  \begin{prop}[Underdamped driven oscillator]
+    Coefficients $c_1,c_2$ of the general solution of \cref{CM_d-b<w} are:
+    \begin{gather*}
+      c_1=x_0-A\cos\left(\psi-\phi\right),\\
+      c_2=\frac{\dot{x}_0-\omega A\sin\left(\psi-\phi\right)+\beta\left[x_0-A\cos\left(\psi-\phi\right)\right]}{\tilde{\omega}}.
+    \end{gather*}
+  \end{prop}
+  \begin{prop}[Critically damped driven oscillator]
+    Coefficients $c_1,c_2$ of the general solution of \cref{CM_d-b=w} are:
+    \begin{gather*}
+      c_1=x_0-A\cos\left(\psi-\phi\right),\\
+      c_2=\dot{x}_0A+\omega_0x_0+A\left(\omega\sin\left(\phi-\psi\right)-\omega_0\cos\left(\psi-\phi\right)\right).
+    \end{gather*}
+  \end{prop}
+  \begin{prop}[Overdamped driven oscillator]
+    Coefficients $c_1,c_2$ of the general solution of \cref{CM_d-b>w} are:
+    \begin{equation*}
+      \begin{split}
+        \begin{multlined}[t]
+          c_1=A\frac{(\beta-\Tilde{\omega})\cos\left(\psi-\phi\right)-\omega\sin\left(\psi-\phi\right)}{2\Tilde{\omega}}+\\+\frac{-(\beta-\Tilde{\omega})x_0-\dot{x}_0}{2\Tilde{\omega}},
+        \end{multlined}\\
+        \begin{multlined}[t]
+          c_2=A\frac{-(\beta+\Tilde{\omega})\cos\left(\psi-\phi\right)+\omega\sin\left(\psi-\phi\right)}{2\Tilde{\omega}}+\\+\frac{(\beta+\Tilde{\omega})x_0+\dot{x}_0}{2\Tilde{\omega}}.
+        \end{multlined}
+      \end{split}
+    \end{equation*}
+  \end{prop}
+  \begin{definition}
+    Given a driven oscillator, we say it is in the \emph{steady-state part} if $t\gg 1/\beta$. In that case $x(t)$ become: $$x(t)=A\cos(\omega t+\psi-\phi).$$ While the dependency on $c_1,c_2$ is non-negligible, we say the driven oscillator is in the \emph{transient part}.
+  \end{definition}
+  \begin{prop}[Resonance in amplitude]
+    If $\omega=\omega_r:=\sqrt{\omega_0^2-2\beta^2}$ we say the oscillator is in \emph{resonance in amplitude}. For $\omega=\omega_r$ we have $$A_r=\frac{f_0}{2\beta\sqrt{\omega_0^2-\beta^2}}.$$
+  \end{prop}
+  \begin{prop}[Energy in steady-state part]
+    $$E=\frac{\mu A^2}{2}\left[\omega^2\sin^2(\omega t+\psi-\phi)+\omega_0^2\cos^2(\omega t+\psi-\phi)\right].$$ If $\omega\approx\omega_0$ and $\beta\ll\omega_0$ then $$E=\frac{\mu f_0^2}{8}\frac{1}{(\omega-\omega_0)^2+\beta^2}.$$ Observe $E$ has a maximum at $\omega=\omega_0$ with the value of $E^\text{max}=\frac{\mu f_0^2}{8\beta^2}$.
+  \end{prop}
+  \begin{definition}
+    We define the \emph{cutoff frequencies} as this two frequencies: $$\omega_1=\omega_0-\beta,\quad\omega_2=\omega_0+\beta.$$ The value  $\Delta\omega=\omega_2-\omega_1=2\beta$ is called the \emph{bandwidth}. Therefore, we can redefined the quality factor as: $$Q=\frac{\omega_0}{2\beta}=\frac{\omega_0}{\Delta\omega}=\frac{\nu_0}{\Delta\nu}$$
+  \end{definition}
+  \textcolor{green}{FALTA COSA.}
+  \begin{prop}[Impulsive forces]
+    Consider a driven oscillator of equation $\ddot{x}+2\beta\dot{x}+\omega_0^2x=f$, where $$f(t)=\left\{
+      \begin{array}{cc}
+        0   & \text{if } t<t'                    \\
+        f_0 & \text{if }t'\leq t\leq t'+\Delta t \\
+        0   & \text{if } t>t'+\Delta t
+      \end{array}\right.$$
+  \end{prop}
+  \textcolor{green}{FALTA COSA.}
+  \subsection{Central forces}
+  \subsubsection{Definition and properties}
+  \begin{definition}[Central force]
+    A \emph{central force} is a force of the form $$\vf{F}(\boldsymbol{r})=f(r)\boldsymbol{e}_r,$$ where $r=\|\boldsymbol{r}\|$ and $\boldsymbol{e}_r=\boldsymbol{r}/r$ is the unit radial vector.
+  \end{definition}
+  \begin{definition}
+    The origin $\boldsymbol{r}=0$ is called \emph{center of forces}.
+  \end{definition}
+  \begin{prop}
+    All central forces are conservative and $$f(r)=-U'(r),$$ where $U(r)$ is the potential energy of the central force.
+  \end{prop}
+  \subsubsection{Conservation of angular momentum and areal velocity}
+  \begin{prop}
+    The angular momentum with respect to the center of forces is conserved, that is, $\dot{\boldsymbol{L}}=0$.
+  \end{prop}
+  \begin{prop}[Kepler's 2nd law]
+    The areal velocity $dA/\dd t$ is constant. In fact, $$\frac{dA}{\dd t}=\frac{L}{2m}.$$
+  \end{prop}
+  \begin{prop}[Unit vectors]
+    Remember we have $$\boldsymbol{e}_r=\boldsymbol{i}\cos\theta+\vf{j}\sin\theta,\quad\boldsymbol{e}_\theta=-\boldsymbol{i}\sin\theta+\vf{j}\cos\theta.$$ Therefore we obtain,
+    \begin{equation}
+      \boldsymbol{r}=r\boldsymbol{e}_r,\quad\boldsymbol{\dot{r}}=\dot{r}\boldsymbol{e}_r+r\dot{\theta}\boldsymbol{e}_\theta,\quad\boldsymbol{\ddot{r}}=(\ddot{r}-r\dot{\theta}^2)\boldsymbol{e}_r+(2\dot{r}\dot{\theta}+r\ddot{\theta})\boldsymbol{e}_\theta.
+      \label{CM_unit}
+    \end{equation}
+  \end{prop}
+  \begin{prop}[Trajectory equation]
+    From \cref{CM_unit}, Newton's second law can be written as: $$\ddot{r}-r\dot{\theta}^2=\frac{f(r)}{m},\quad 2\dot{r}\dot{\theta}+r\ddot{\theta}=0.$$ And we can obtain the following differential equations: $$\dot{\theta}=\frac{L}{m r^2}:=\frac{l}{r^2},\quad\ddot{r}-\frac{l^2}{r^3}=\frac{f(r)}{m},$$ where we have defined the magnitude $l:=L/m$. Finally, we get the \emph{trajectory equation}: $$\frac{d^2}{d\theta^2}\left(\frac{1}{r}\right)+\frac{1}{r}=-\frac{1}{ml^2}r^2f(r).$$
+  \end{prop}
+  \subsubsection{Conservation of energy and orbits}
+  \begin{prop}[Kinetic energy]
+    $$K=\frac{1}{2}m|\boldsymbol{\dot{r}}^2=\frac{1}{2}m\dot{r}^2+\frac{ml^2}{2r^2}.$$
+  \end{prop}
+  \begin{definition}
+    We define the effective potential as $$U_\text{eff}=U(r)+\frac{ml^2}{2r^2}.$$ The term $ml^2/(2r^2)$ gives the centripetal force: $$f_\text{centr}=-\frac{d}{dr}\left(\frac{ml^2}{2r^2}\right)\implies\boldsymbol{f}_\text{centr}=mr\dot{\theta}^2\boldsymbol{e}_r$$
+  \end{definition}
+  \begin{prop}[Energy]
+    \begin{equation}
+      E=\frac{1}{2}m\dot{r}^2+U_\text{eff}=\frac{1}{2}m\dot{r}^2+\frac{ml^2}{2r^2}+U(r).
+      \label{CM_energy}
+    \end{equation}
+  \end{prop}
+  \begin{prop}[Orbits]
+    The minimum of $U_\text{eff}(r)$ determines the radius of the \emph{stable circular orbits}. If $E<0$, the orbits are in a range of radius $r_\text{min}$ and $r_\text{max}$, and so are \emph{bounded orbits}. If $E>0$, the orbits are called \emph{unbounded orbits}. Equating \cref{CM_energy} to ??????, we can obtain the angle $\Delta\theta$ in a \emph{radial oscillation}:\footnote{A radial oscillation is the trajectory when $r$ moves from $r_\text{min}$ to $r_\text{max}$ and the comes back to $r_\text{min}$.} $$\Delta\theta=2\int_{r_\text{min}}^{r_\text{max}}\frac{l/r^2}{\sqrt{(2/m)(E-U_\text{eff}}}dr.\footnote{Here we have taken the positive orientation, that is, $\boldsymbol{L}$ pointing to the positive $z$-axis.}$$ Note, that the orbits are \emph{closed orbits} if $$\Delta\theta=2\pi\frac{p}{q},\quad p,q\in\NN.$$
+  \end{prop}
+  \begin{theorem}[Bertrand's theorem]
+    The two unique potentials for which every bounded orbit is closed are: $$U(r)=-\frac{k}{r},\quad U(r)=\frac{k}{2}r^2,\quad k>0.$$
+  \end{theorem}
+  \subsubsection{Potential $-k/r$}
+  \begin{prop}[Movement equation]
+    $$r(\theta)=\frac{\alpha}{\varepsilon\cos\theta+\text{sgn}\,k},$$where $\displaystyle\alpha=\frac{L^2}{m|k|}$ and $\displaystyle\varepsilon=\sqrt{1+\frac{2EL^2}{mk^2}}$. This is the equation of a conic.
+  \end{prop}
+  \begin{definition}
+    We define the \emph{pericenter of an orbit} as the minimum value of $r(\theta)$, that is, $r=r_\text{min}$. Analogously, we define the \emph{apocenter of an orbit} as the maximum value of $r(\theta)$, that is, $r=r_\text{max}$.
+  \end{definition}
+  \subsubsection{Conics}
 \end{multicols}
 \end{document}

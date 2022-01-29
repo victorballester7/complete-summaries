@@ -6,10 +6,7 @@
   \subsubsection{Groups and subgroups}
   \begin{definition}[Group]\label{AS_group}
     A \emph{group} is a non-empty set $G$ together with a binary operation
-    \begin{align*}
-      \cdot:G\times G & \longrightarrow G        \\
-      (g_1,g_2)       & \longmapsto g_1\cdot g_2
-    \end{align*}
+    $$\function{\cdot}{G\times G}{G}{(g_1,g_2)}{g_1\cdot g_2}$$
     satisfying the following properties:
     \begin{enumerate}
       \item Associativity: $$(g_1\cdot g_2)\cdot g_3=g_1\cdot(g_2\cdot g_3)\quad\forall g_1,g_2,g_3\in G$$
@@ -44,13 +41,13 @@
     If $(H,+)$ is a subgroup of $(\ZZ ,+)$, then $\exists n\in\ZZ $ such that $H=n\ZZ =\{nk:k\in\ZZ \}$.
   \end{prop}
   \begin{prop}
-    Let $(G_i,*_i)$, $i=1,\ldots, n$, be groups. Then the product $$(G_1,*_1)\times\cdots\times(G_n,*_n)$$ induces a group with the operation $\cdot$ defined as $$(g_1,\ldots,g_n)\cdot(g_1',\ldots,g_n')=(g_1*_1g_1',\ldots,g_n*_ng_n'),$$ where $g_i,g_i'\in G_i$.
+    Let $(G_i,*_i)$, $i=1,\ldots, n$, be groups. Then the product $$(G_1,*_1)\times\cdots\times(G_n,*_n)$$ induces a group with the operation $\cdot$ defined as $$(g_1,\ldots,g_n)\cdot(g_1',\ldots,g_n')=(g_1*_1g_1',\ldots,g_n*_ng_n')$$ where $g_i,g_i'\in G_i$.
   \end{prop}
   \begin{definition}
     The \emph{order} of a group $(G,\cdot)$ is the number of elements in its set, that is, $|G|$.
   \end{definition}
   \begin{lemma}
-    Let $(G,\cdot)$ be a group and $\{(H_i,\cdot):i\in I\}$ be a set of subgroups of $(G,\cdot)$. Then if $$H=\displaystyle\bigcap_{i\in I}H_i,$$ we have that $(H,\cdot)$ is also a subgroup of $(G,\cdot)$.
+    Let $(G,\cdot)$ be a group and $\{(H_i,\cdot):i\in I\}$ be a set of subgroups of $(G,\cdot)$. Then if $$H=\displaystyle\bigcap_{i\in I}H_i$$ we have that $(H,\cdot)$ is also a subgroup of $(G,\cdot)$.
   \end{lemma}
   \begin{definition}
     Let $(G,\cdot)$ be a group and $X\subseteq G$ be a subset of $G$. The \emph{subgroup generated} by $X$, $(\langle X\rangle,\cdot)$, is the smallest subgroup of $(G,\cdot)$ containing $X$, that is, $$\langle X\rangle=\bigcap_{X\subseteq H\leq G}H$$
@@ -147,15 +144,9 @@
     Let $(G,\cdot)$ be a group and $g\in G$ be an element such that $\langle g\rangle=G$.
     \begin{itemize}
       \item If $|G|=\infty$, then $G\cong\ZZ $. We can define the isomorphism as follows:
-            \begin{align*}
-              \phi:\ZZ & \longrightarrow G \\
-              k        & \longmapsto g^k
-            \end{align*}
+            $$\function{\phi}{\ZZ}{G}{k}{g^k}$$
       \item If $|G|=n$, then $G\cong\ZZ /n\ZZ $. We can define the isomorphism as follows:
-            \begin{align*}
-              \phi:\ZZ /n\ZZ & \longrightarrow G \\
-              \Bar{k}        & \longmapsto g^k
-            \end{align*}
+            $$\function{\phi}{\displaystyle\quot{\ZZ}{n\ZZ}}{G}{\overline{k}}{g^k}$$
     \end{itemize}
   \end{theorem}
   \begin{corollary}
@@ -171,8 +162,7 @@
   \begin{definition}
     Let $(G,\cdot)$ be a group. We define the functions:
     \begin{align*}
-      \ell_g:G & \longrightarrow G    & r_g:G & \longrightarrow G    \\
-      x        & \longmapsto g\cdot x & x     & \longmapsto x\cdot g
+      \function{\ell_g}{G}{G}{x}{g\cdot r} & \function{r_g}{G}{G}{x}{x\cdot g}
     \end{align*}
   \end{definition}
   \begin{lemma}
@@ -181,8 +171,7 @@
   \begin{prop}
     Let $(G,\cdot)$ be a group. We define the functions:
     \begin{align*}
-      \phi:G & \longrightarrow S(G) & \psi:G & \longrightarrow S(G)   \\
-      g      & \longmapsto \ell_g   & g      & \longmapsto r_{g^{-1}}
+      \function{\phi}{G}{S(G)}{g}{\ell_g} & \function{\psi}{G}{S(G)}{g}{r_{g^{-1}}}
     \end{align*}
     Then, $\phi$ and $\psi$ are injective group morphisms.
   \end{prop}
@@ -240,18 +229,12 @@
     \end{enumerate}
   \end{corollary}
   \begin{definition}[Quotient group]
-    Let $(G,\cdot)$ be a finite group and $(H,\cdot)$ be a subgroup of $(G,\cdot)$ such that $H\unlhd G$. We define the \emph{quotient group} $\left(G/H,*\right)$ as $$\quot{G}{H}=\quot{G}{\sim}=\quot{G}{\approx}$$ and
-    \begin{align*}
-      *:\quot{G}{H}\times\quot{G}{H} & \longrightarrow\quot{G}{H}        \\
-      (g_1\cdot H,g_2\cdot H)        & \longmapsto (g_1\cdot g_2)\cdot H
-    \end{align*}
+    Let $(G,\cdot)$ be a finite group and $(H,\cdot)$ be a subgroup of $(G,\cdot)$ such that $H\unlhd G$. We define the \emph{quotient group} $\left(G/H,*\right)$ as $$\quot{G}{H}:=\quot{G}{\sim}=\quot{G}{\approx}$$ and
+    $$\function{*}{\displaystyle\quot{G}{H}\times\quot{G}{H}}{\displaystyle\quot{G}{H}}{(g_1\cdot H,g_2\cdot H)}{(g_1\cdot g_2)\cdot H}$$
   \end{definition}
   \begin{lemma}
     Let $(G,\cdot)$ be a finite group and $(H,\cdot)$ be a subgroup of $(G,\cdot)$ such that $H\unlhd G$. The projection
-    \begin{align*}
-      \pi:G & \longrightarrow\quot{G}{H} \\
-      g     & \longmapsto[g]=g\cdot H
-    \end{align*}
+    $$\function{\pi}{G}{\displaystyle\quot{G}{H}}{g}{[g]=g\cdot H}$$
     is a group morphism.
   \end{lemma}
   \subsubsection{Isomorphism theorems}
@@ -293,10 +276,7 @@
   \end{prop}
   \begin{prop}
     Let $(G,\cdot)$ be a group and $(H,\cdot)$, $(K,\cdot)$ be subgroups of $(G,\cdot)$ such that $H\cap K=\{e\}$. If $H,K\unlhd G$, then the function
-    \begin{align*}
-      \phi:H\times K & \longrightarrow H\cdot K \\
-      (h,k)          & \longmapsto h\cdot k
-    \end{align*}
+    $$\function{\pi}{H\times K}{H\cdot K}{(h,k)}{h\cdot k}$$
     is an isomorphism. In particular, $\forall h\in H$ and $\forall k\in K$, $h\cdot k=k\cdot h$.
   \end{prop}
   \begin{theorem}[Second isomorphism theorem]
@@ -310,10 +290,7 @@
   \end{lemma}
   \begin{theorem}[Correspondence theorem]
     Let $(G,\cdot)$ be a group and $(H,\cdot)$ be a subgroup of $(G,\cdot)$ such that $H\unlhd G$. Then, there is a bijection $\phi$ from the set $\mathcal{G}$ of all subgroups $(K,\cdot)$ of $(G,\cdot)$ such that $H\subseteq K$ onto the set $\mathcal{H}$ of all subgroups $\left(K/H,*\right)$ of $\left(G/H,*\right)$. More precisely, the bijection is:
-    \begin{align*}
-      \phi:\mathcal{G} & \longrightarrow\mathcal{H} \\
-      K                & \longmapsto K/H
-    \end{align*}
+    $$\function{\phi}{\mathcal{G}}{\mathcal{H}}{K}{\displaystyle\quot{K}{H}}$$
   \end{theorem}
   \begin{theorem}[Third isomorphism theorem]
     Let $(G,\cdot)$ be a group and $(H,\cdot)$, $(K,\cdot)$ be subgroups of $(G,\cdot)$ such that $H,K\unlhd G$ and $H\subseteq K$. Then $K/H\unlhd G/H$ and $$\quot{\left(\quot{G}{H}\right)}{\left(\quot{K}{H}\right)}\cong\quot{G}{K}$$
@@ -321,10 +298,7 @@
   \subsubsection{Group actions}
   \begin{definition}
     Let $X$ be a set and $(G,\cdot)$ be a group. A \emph{(left) group action} of $(G,\cdot)$ on $X$ is a function
-    \begin{align*}
-      *:G\times X & \longrightarrow X \\
-      (g,x)       & \longmapsto g*x
-    \end{align*}
+    $$\function{*}{G\times X}{X}{(g,x)}{g*x}$$
     satisfying the following properties:
     \begin{enumerate}
       \item $e*x=x$, $\forall x\in X$.
@@ -334,10 +308,7 @@
   \end{definition}
   \begin{lemma}
     Let $(G,\cdot)$ be a group and $X$ be a $G$-set. For all $g\in G$ the function
-    \begin{align*}
-      \ell_g:X & \longrightarrow X \\
-      x        & \longmapsto g*x
-    \end{align*} is bijective an its inverse is $\ell_{g^{-1}}$.
+    $$\function{\ell_g}{X}{X}{x}{g*x}$$ is bijective and its inverse is $\ell_{g^{-1}}$.
   \end{lemma}
   \begin{definition}
     Let $(G,\cdot)$ be a group and $X$ be a $G$-set. For all $x,y\in X$, we say $x\backsim y\iff\exists g\in G:y=g*x$.
@@ -356,10 +327,7 @@
   \end{prop}
   \begin{theorem}[Orbit-stabilizer theorem]
     Let $(G,\cdot)$ be a group, $X$ be a $G$-set and $x\in X$. The surjective function
-    \begin{align*}
-      \phi:G & \longrightarrow \mathcal{O}_x \\
-      g      & \longmapsto g*x
-    \end{align*}
+    $$\function{\phi}{G}{\mathcal{O}_x}{g}{g*x}$$
     induces a bijective function $\psi:\quot{G}{\!\approx}\;\rightarrow\mathcal{O}_x$, where $\approx$ is the equivalence relation $g_1\approx g_2\iff g_2^{-1}\cdot g_1\in G_x$ $\forall g_1,g_2\in G$\footnote{Note that the notation $\approx$ for the equivalence relation correspond with the one defined in \cref{AS_equiv}.}. In particular, if $G$ is finite: $$|\mathcal{O}_x|=|[G:G_x]|$$
   \end{theorem}
   \begin{corollary}[Orbits formula]
@@ -378,10 +346,7 @@
   \end{corollary}
   \begin{prop}
     Let $(G,\cdot)$ be a group. The function
-    \begin{align*}
-      G\times G & \longrightarrow G                \\
-      (g,x)     & \longmapsto g\cdot x\cdot g^{-1}
-    \end{align*} is an action of $(G,\cdot)$ over itself. It is called the \emph{conjugation action}.
+    $$\function{}{G\times G}{G}{(g,x)}{g\cdot x\cdot g^{-1}}$$ is an action of $(G,\cdot)$ over itself. It is called the \emph{conjugation action}.
   \end{prop}
   \begin{definition}[Center of a group]
     Let $(G,\cdot)$ be a group. We define the \emph{center} of $(G,\cdot)$ as: $$Z(G)=\{z\in G:z\cdot g=g\cdot z\;\forall g\in G\}\footnote{Note that, by \cref{AS_obritsformula}, if we consider the conjugation action we have: $$|G|=|Z(G)|+\sum_{|\mathcal{O}_x|>1}|\mathcal{O}_x|$$}$$
@@ -391,10 +356,7 @@
   \end{prop}
   \begin{lemma}
     Let $(G,\cdot)$ be a group and $(H,\cdot)$ be a subgroup of $(G,\cdot)$. Consider the application
-    \begin{align*}
-      H\times\quot{G}{\approx} & \longrightarrow \quot{G}{\approx} \\
-      (h,g\cdot H)             & \longmapsto(h\cdot g)\cdot H
-    \end{align*}
+    $$\function{}{H\times\quot{G}{\approx}}{\quot{G}{\approx}}{(h,g\cdot H)}{(h\cdot g)\cdot H}$$
     This application defines an action of the subgroup $(H,\cdot)$ over the set $\quot{G}{\!\approx}$.
     \label{AS_action1}
   \end{lemma}
@@ -415,7 +377,7 @@
     Let $(G,\cdot)$ be a group of order $n\in\NN $, $p$ be a prime number and $(H,\cdot)$ be a subgroup of $(G,\cdot)$ such that $|H|=p^i$, $i\geq 0$. Suppose $p\mid[G:H]$. Then, there is a subgroup $(H',\cdot)$ of $(G,\cdot)$ such that $H\subset H'$ and $|H'|=p^{i+1}$. Moreover, $H\unlhd H'$ and $H'/H\cong\ZZ /p\ZZ $.
   \end{corollary}
   \begin{theorem}[First Sylow theorem]
-    Let $(G,\cdot)$ be a finite group and $p$ be a prime number. Suppose $|G|=p^r m$, where $r\geq 0$ and $\gcd(p,m)=1$. Then, there is a subgroup $(K,\cdot)$ of $(G,\cdot)$ of order $p^r$. Moreover there is a chain of subgroups $(H_i,\cdot)$ satisfying: $$\{e\}=H_0\unlhd H_1\unlhd\cdots\unlhd H_r=K,$$ such that $H_{i+1}/H_i\cong\ZZ /p\ZZ $ for $0\leq i<r$.
+    Let $(G,\cdot)$ be a finite group and $p$ be a prime number. Suppose $|G|=p^r m$, where $r\geq 0$ and $\gcd(p,m)=1$. Then, there is a subgroup $(K,\cdot)$ of $(G,\cdot)$ of order $p^r$. Moreover there is a chain of subgroups $(H_i,\cdot)$ satisfying $$\{e\}=H_0\unlhd H_1\unlhd\cdots\unlhd H_r=K$$ such that $H_{i+1}/H_i\cong\ZZ /p\ZZ $ for $0\leq i<r$.
   \end{theorem}
   \begin{definition}
     Let $p$ be a prime number. A group $(G,\cdot)$ is a \emph{$p$-group} if $|G|=p^r$, for some $r\in\NN $.
@@ -424,7 +386,7 @@
     Let $p$ be a prime number and $(G,\cdot)$ be a group. A \emph{Sylow $p$-subgroup} is a $p$-subgroup of $(G,\cdot)$ of maximum order.
   \end{definition}
   \begin{definition}
-    Let $(G,\cdot)$ be a finite group. We say $(G,\cdot)$ is \emph{solvable} if there is a chain of subgroups $(H_i,\cdot)$ of $(G,\cdot)$ satisfying: $$\{e\}=H_0\unlhd H_1\unlhd\cdots\unlhd H_r=G,$$ and such that the subgroups $(H_{i+1}/H_i,*)$, $0\leq i<r$, are cyclic.
+    Let $(G,\cdot)$ be a finite group. We say $(G,\cdot)$ is \emph{solvable} if there is a chain of subgroups $(H_i,\cdot)$ of $(G,\cdot)$ satisfying $$\{e\}=H_0\unlhd H_1\unlhd\cdots\unlhd H_r=G$$ and such that the subgroups $(H_{i+1}/H_i,*)$, $0\leq i<r$, are cyclic.
   \end{definition}
   \begin{theorem}[Second Sylow theorem]
     Let $(G,\cdot)$ be a finite group and $p$ be a prime number. Suppose $|G|=p^r m$, where $r\geq 0$ and $\gcd(p,m)=1$. Let $(K,\cdot)$ be a Sylow $p$-subgroup of $(G,\cdot)$. Then, if $(H,\cdot)$ is a subgroup of $(G,\cdot)$ of order $p^i$, $\exists g\in G$ such that $g\cdot H\cdot g^{-1}\subseteq K$. In particular two different Sylow $p$-subgroups $(K_1,\cdot)$ and $(K_2,\cdot)$ are conjugate, that is, there exists an element $g\in G$ such that $g\cdot K_1\cdot g^{-1}=K_2$.
@@ -491,8 +453,7 @@
   \begin{definition}[Ring]
     A \emph{ring} is a set $R$ equipped with two binary operations (called addition and multiplication):
     \begin{align*}
-      +:R\times R & \longrightarrow R    & \cdot:R\times R & \longrightarrow R        \\
-      (r_1,r_2)   & \longmapsto r_1+ r_2 & (r_1,r_2)       & \longmapsto r_1\cdot r_2
+      \function{+}{R\times R}{R}{(r_1,r_2)}{r_1+ r_2} & \function{\cdot}{R\times R}{R}{(r_1,r_2)}{r_1\cdot r_2}
     \end{align*}
     satisfying the following properties:
     \begin{enumerate}
@@ -635,10 +596,7 @@
       \item $\forall r_1,r_2\in R,\ \overline{r_1}\cdot\overline{r_2}=\overline{r_1\cdot r_2}$. $\overline{1}$ is the identity element with respect to this operation.
     \end{itemize}
     Moreover the projection:
-    \begin{align*}
-      \pi:R & \longrightarrow\quot{R}{I} \\
-      r     & \longmapsto\overline{r}
-    \end{align*}
+    $$\function{\pi}{R}{\displaystyle\quot{R}{I}}{r}{\overline{r}}$$
     is a surjective ring morphism with $\ker\pi=I$.
   \end{prop}
   \begin{corollary}
@@ -660,7 +618,7 @@
   \end{theorem}
   \begin{theorem}[Second isomorphism theorem]
     Let $(R,+,\cdot)$ be a ring and $I$, $J$ be ideals of $(R,+,\cdot)$. Then, $\quot{(I+J)}{I}$ is an ideal of $\quot{R}{I}$ and there is a group isomorphism
-    $$\phi:\quot{(I+J)}{I}\longrightarrow\quot{J}{(I\cap J)},$$ such that $\phi(a\cdot b)=\phi(a)\cdot\phi(b)$ $\forall a,b\in J$.
+    $$\phi:\quot{(I+J)}{I}\longrightarrow\quot{J}{(I\cap J)}$$ such that $\phi(a\cdot b)=\phi(a)\cdot\phi(b)$ $\forall a,b\in J$.
   \end{theorem}
   \begin{theorem}[Third isomorphism theorem]
     Let $(R,+,\cdot)$ be a ring and $I$, $J$ be ideals of $(R,+,\cdot)$ such that $I\subseteq J$. Then, there is a ring isomorphism:
@@ -668,10 +626,7 @@
   \end{theorem}
   \begin{theorem}[Correspondence theorem]
     Let $(R,+,\cdot)$ be ring and $I$ be an ideal of $(R,+,\cdot)$. Then there is a bijection $\phi$ from the set $\mathcal{R}$ of all ideals $J$ of $(R,+,\cdot)$ such that $I\subseteq J$ onto the set $\mathcal{I}$ of all ideals $\quot{J}{I}$ of $\quot{R}{I}$. More precisely, the bijection is:
-    \begin{align*}
-      \phi:\mathcal{R} & \longrightarrow\mathcal{I} \\
-      J                & \longmapsto\quot{J}{I}
-    \end{align*}
+    $$\function{\phi}{\mathcal{R}}{\mathcal{I}}{J}{\displaystyle\quot{J}{I}}$$
   \end{theorem}
   \subsubsection{Special rings and ideals}
   \begin{definition}
@@ -755,18 +710,12 @@
   \end{prop}
   \begin{corollary}
     Let $R$ be a ring and $r\in R$. Then, the function
-    \begin{align*}
-      \phi_r:R[x] & \longrightarrow R \\
-      p(x)        & \longmapsto p(r)
-    \end{align*}
+    $$\function{\phi_r}{R[x]}{R}{p(x)}{p(r)}$$
     is a ring morphism. Moreover $\ker\phi_r=(x-r)\cdot R[x]$ and for all $p(x)\in R[x]$ $\exists q(x)\in R[x]$ such that: $$p(x)=(x-r)\cdot q(x)+p(r)$$
   \end{corollary}
   \begin{corollary}
     Let $R$ be a ring and $r_1,\ldots,r_n\in R$. Then, the function
-    \begin{align*}
-      \phi:R[x_1,\ldots,x_n] & \longrightarrow R             \\
-      p(x_1,\ldots,x_n)      & \longmapsto p(r_1,\ldots,r_n)
-    \end{align*}
+    $$\function{\phi}{R[x_1,\ldots,x_n]}{R}{p(x_1,\ldots,x_n)}{p(r_1,\ldots,r_n)}$$
     is a ring morphism. Moreover for all $p(x_1,\ldots,x_n)\in R[x_1,\ldots,x_n]$ $\exists q_i(x_1,\ldots,x_n)\in R[x]$ for $i=1,\ldots,n$ such that: $$p(x_1,\ldots,x_n)=p(r_1,\ldots,r_n)+\sum_{i=1}^n(x_i-r_i)\cdot q_i(x_1,\ldots,x_n)$$ Therefore, $\ker\phi=(x_1-r_1,\ldots,x_n-r_n)$ and consequently: $$\quot{R[x_1,\ldots,x_n]}{(x_1-r_1,\ldots,x_n-r_n)}\cong R$$
   \end{corollary}
   \begin{corollary}
@@ -803,7 +752,7 @@
   \begin{definition}
     Let $R$ be an integral domain. We say that $R$ is a \emph{unique factorization domain} (\emph{UFD}) if $\forall a\in R\setminus\{0\}$:
     \begin{enumerate}
-      \item $$a=up_1^{\alpha_1}\cdots p_r^{\alpha_r},$$ where $u\in R^*$, $p_i$ are irreducible elements of $R$ and $\alpha_i\in\NN$ $\forall i$.
+      \item $$a=up_1^{\alpha_1}\cdots p_r^{\alpha_r}$$ where $u\in R^*$, $p_i$ are irreducible elements of $R$ and $\alpha_i\in\NN$ $\forall i$.
       \item Such representation is unique in the sense that if $a=vq_1^{\beta_1}\cdots q_s^{\beta_s}$, where $v\in R^*$, $q_i$ are irreducible elements of $R$ and $\beta_i\in\NN$ $\forall i$, then $r=s$ and $\exists\sigma\in \text{S}_n$ such that $p_i$ and $q_{\sigma(i)}$ are associated and $\alpha_i=\beta_{\sigma(i)}$ for $i=1,\ldots,r$\footnote{Equivalently, such representation is unique in the sense that if $a=up_1\cdots p_r=vq_1\cdots q_s$, where $u,v\in R^*$ and $p_i,q_i$ are irreducible elements of $R$ $\forall i$, then $r=s$ and $\exists\sigma\in \text{S}_n$ such that $p_i$ and $q_{\sigma(i)}$ are associated for $i=1,\ldots,r$.}.
     \end{enumerate}
   \end{definition}
@@ -821,7 +770,7 @@
     Let $R$ be an integral domain. Then:
     \begin{enumerate}
       \item If $R$ is a UFD, all irreducible elements are prime.
-      \item If $$up_1\cdots p_r=vq_1\cdots q_s,$$ where $u,v\in R^*$ and both $p_i$ and $q_i$ are prime elements $\forall i$, then $r=s$ and $\exists\sigma\in \text{S}_r$ such that $p_i$ is associated with $q_{\sigma(i)}$ for $i=1,\ldots,r$.
+      \item If $$up_1\cdots p_r=vq_1\cdots q_s$$ where $u,v\in R^*$ and both $p_i$ and $q_i$ are prime elements $\forall i$, then $r=s$ and $\exists\sigma\in \text{S}_r$ such that $p_i$ is associated with $q_{\sigma(i)}$ for $i=1,\ldots,r$.
     \end{enumerate}
   \end{prop}
   \begin{prop}
@@ -855,7 +804,7 @@
   \end{corollary}
   \subsubsection{Field of fractions}
   \begin{definition}\label{AS_field-frac}
-    Let $R$ be an integral domain. Consider the set: $$R\times(R\setminus\{0\})=\{(a,b):a,b\in R,b\ne 0\}$$ We define the relation $\sim$ in the following way: $$(a_1,b_1)\sim(a_2,b_2)\iff a_1b_2=a_2b_1,$$ for all $(a_1,b_1),(a_2,b_2)\in R\times(R\setminus\{0\})$.
+    Let $R$ be an integral domain. Consider the set: $$R\times(R\setminus\{0\})=\{(a,b):a,b\in R,b\ne 0\}$$ We define the relation $\sim$ in the following way: $$(a_1,b_1)\sim(a_2,b_2)\iff a_1b_2=a_2b_1$$ for all $(a_1,b_1),(a_2,b_2)\in R\times(R\setminus\{0\})$.
   \end{definition}
   \begin{lemma}
     The relation $\sim$ is an equivalence relation. We denote by $Q(R)$ the set of equivalence classes $\quot{R\times(R\setminus\{0\})}{\sim}$ and by $\frac{a}{b}$ the equivalence class $\overline{(a,b)}\in Q(R)$. $Q(R)$ is called \emph{field of fractions} of $R$.
@@ -872,10 +821,7 @@
     \begin{enumerate}
       \item $(Q(R),+,\cdot)$ is a field.
       \item The function
-            \begin{align*}
-              i:R & \longrightarrow Q(R)    \\
-              r   & \longmapsto \frac{r}{1}
-            \end{align*}
+            $$\function{i}{R}{Q(R)}{r}{\frac{r}{1}}$$
             is an injective ring morphism and satisfies the following property: If $K$ is a field and $\phi:R\rightarrow K$ is an injective ring morphism, then $\exists!\psi:Q(R)\rightarrow K$ such that $\psi$ is a ring morphism, and the diagram of \cref{AS_theorem4} is commutative.
     \end{enumerate}
     \begin{center}

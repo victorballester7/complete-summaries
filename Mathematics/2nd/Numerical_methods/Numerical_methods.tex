@@ -5,815 +5,815 @@
 % - In Successive over-relaxation method.
 \begin{document}
 \begin{multicols}{2}[\section{Numerical methods}]
-    \subsection{Errors}
-    \subsubsection{Floating-point representation}
-    \begin{theorem}
-        Let $b\in\NN$, $b\geq 2$. Any real number $x\in\RR$ can be represented of the form
-        \begin{equation*}
-            x=s\left(\sum_{i=1}^\infty\alpha_ib^{-i}\right)b^q
-        \end{equation*} where $s\in\{-1,1\}$, $q\in\ZZ$ and $\alpha_i\in\{0,1,\ldots,b-1\}$. Moreover, this representation is unique if $\alpha_1\ne0$ and $\forall i_0\in\NN$, $\exists i\geq i_0:\alpha_i\ne b-1$. We will write $$x=s(0.\alpha_1\alpha_2\cdots)_bb^q$$ where the subscript $b$ in the parenthesis indicates that the number $0.\alpha_1\alpha_2\alpha_3\cdots$ is in base $b$.
-    \end{theorem}
-    \begin{definition}[Floating-point representation]
-        Let $x$ be a real number. Then, the \textit{floating-point representation of $x$} is: $$x=s\left(\sum_{i=1}^t\alpha_ib^{-i}\right)b^q$$ Here $s$ is called the \textit{sign}; $\sum_{i=1}^t\alpha_ib^{-i}$, the \textit{significant} or \textit{mantissa}, and $q$, the \textit{exponent}, limited to a prefixed range $q_\text{min}\leq q\leq q_\text{max}$. Therefore, the floating-point representation of $x$ can be expressed as: $$x=smb^q=s(0.\alpha_1\alpha_2\cdots\alpha_t)_bb^q$$ Finally, we say a floating-point number is \textit{normalized} if $\alpha_1\ne0$.
-    \end{definition}
-    \begin{center}
-        \begin{minipage}{\linewidth}
-            \centering
-            \begin{tabular}{c|ccccc}
-                Format      & $b$ & $t$ & $q_\text{min}$ & $q_\text{max}$ & bits \\
-                \hline\hline
-                IEEE simple & 2   & 24  & -126           & 127            & 32   \\
-                IEEE double & 2   & 53  & -1022          & 1023           & 64
-            \end{tabular}
-            \captionof{table}{Parameters of IEEE simple and IEEE double formats.}
-        \end{minipage}
-    \end{center}
-    \begin{definition}
-        Let $x\in\RR$ be such that $x=s(0.\alpha_1\alpha_2\cdots)_bb^q$ with $q_\text{min}\leq q\leq q_\text{max}$. We say the \textit{floating-point representation by truncation of $x$} is: $$fl_T(x)=s(0.\alpha_1\alpha_2\cdots\alpha_t)_bb^q$$ We say the \textit{floating-point representation by rounding of $x$} is:
-        \begin{multline*}
-            fl_R(x)=\\=\left\{\text{\setlength{\tabcolsep}{4pt}
-                \begin{tabular}{m{3.85cm}m{3cm}}
-                    $s(0.\alpha_1\cdots\alpha_t)_bb^q$                 & if $\ 0\leq\alpha_{t+1}<\frac{b}{2}$       \\
-                    $s(0.\alpha_1\cdots\alpha_{t-1}(\alpha_t+1))_bb^q$ & if $\ \frac{b}{2}\leq\alpha_{t+1}\leq b-1$
-                \end{tabular}}\right.
-        \end{multline*}
-    \end{definition}
-    \begin{definition}
-        Given a value $x\in\RR$ and an approximation $\Tilde{x}$ of $x$, the \textit{absolute error} is: $$\Delta x:=|x-\Tilde{x}|$$ If $x\ne 0$, the \textit{relative error} is: $$\delta x:=\frac{|x-\Tilde{x}|}{x}$$ If $x$ is unknown, we take: $$\delta x\approx\frac{|x-\Tilde{x}|}{\Tilde{x}}$$
-    \end{definition}
-    \begin{definition}
-        Let $\Tilde{x}$ be an approximation of $x$. If $\Delta x\leq\frac{1}{2}10^{-t}$, we say \textit{$\Tilde{x}$ has $t$ correct decimal digits}. If $x=sm10^q$ with $0.1\leq m<1$, $\Tilde{x}=s\Tilde{m}10^q$ and $$u:=\max\{i\in\ZZ:|m-\Tilde{m}|\leq\frac{1}{2}10^{-i}\}$$ then we say that $\Tilde{x}$ \textit{has $u$ significant digits}.
-    \end{definition}
-    \begin{prop}
-        Let $x\in\RR$ be such that $x=s(0.\alpha_1\alpha_2\cdots)_bb^q$ with $\alpha_1\ne0$ and $q_\text{min}\leq q\leq q_\text{max}$. Then, its floating-point representation in base $b$ and with $t$ digits satisfy:
-        \begin{align*}
-            \left|fl_T(x)-x\right|\leq b^{q-t}\quad           & \quad \left|fl_R(x)-x\right|\leq\frac{1}{2}b^{q-t}           \\
-            \left|\frac{fl_T(x)-x}{x}\right|\leq b^{1-t}\quad & \quad \left|\frac{fl_R(x)-x}{x}\right|\leq\frac{1}{2}b^{1-t}
-        \end{align*}
-    \end{prop}
-    \begin{definition}
-        The \textit{machine epsilon $\epsilon$} is defined as: $$\epsilon:=\min\{\varepsilon>0:fl(1+\varepsilon)\ne 1\}$$
-    \end{definition}
-    \begin{prop}
-        For a machine working by truncation, $\epsilon=b^{1-t}$. For a machine working by rounding, $\epsilon=\frac{1}{2}b^{1-t}$.
-    \end{prop}
-    \subsubsection{Propagation of errors}
-    \begin{prop}[Propagation of absolute errors]
-        Let $f:\RR^n\rightarrow\RR$ be a function of class $\mathcal{C}^2$. If $\Delta x_j$ is the absolute error of the variable $x_j$ and $\Delta f(x)$ is the absolute error of the function $f$ evaluated at the point $x=(x_1,\ldots,x_n)$, we have: $$|\Delta f(x)|\lesssim\sum_{j=1}^n\left|\frac{\partial f}{\partial x_j}(x)\right||\Delta x_j|\footnote{The symbol $\lesssim$ means that we are omitting terms of order $\Delta x_j\Delta x_k$ and higher.}$$ The coefficients $\left|\frac{\partial f}{\partial x_j}(x)\right|$ are called \textit{absolute condition numbers of the problem}.
-    \end{prop}
-    \begin{prop}[Propagation of relative errors]
-        Let $f:\RR^n\rightarrow\RR$ be a function of class $\mathcal{C}^2$. If $\delta x_j$ is the relative error of the variable $x_j$ and $\delta f(x)$ is the relative error of the function $f$ evaluated at the point $x=(x_1,\ldots,x_n)$, we have: $$|\delta f(x)|\lesssim\sum_{j=1}^n\frac{\left|\frac{\partial f}{\partial x_j}(x)\right|\left|x_j\right|}{\left|f(x)\right|}|\delta x_j|$$ The coefficients $\frac{\left|\frac{\partial f}{\partial x_j}(x)\right|\left|x_j\right|}{\left|f(x)\right|}$ are called \textit{relative condition numbers of the problem}.
-    \end{prop}
-    \subsubsection{Numerical stability of algorithms}
-    \begin{definition}
-        An algorithm is said to be \textit{numerically stable} if  errors in the input lessen in significance as the algorithm executes, having little effect on the final output. On the other hand, an algorithm is said to be \textit{numerically unstable} if errors in the input cause a considerably larger error in the final output.
-    \end{definition}
-    \begin{definition}
-        A problem with a low condition number is said to be \textit{well-conditioned}. Conversely, a problem with a high condition number is said to be \textit{ill-conditioned}.
-    \end{definition}
-    \subsection{Zeros of functions}
-    \begin{definition}
-        Let $f:\RR\rightarrow\RR$ be a function. We say $\alpha$ is a \textit{zero} or a \textit{solution to the equation $f(x)=0$} if $f(\alpha)=0$.
-    \end{definition}
-    \begin{definition}
-        Let $f:\RR\rightarrow\RR$ be a sufficiently differentiable function. We say $\alpha$ is a \textit{zero of multiplicity $m\in\NN$} if $$f(\alpha)=f'(\alpha)=\cdots=f^{(m-1)}(\alpha)=0\quad\text{and}\quad f^{(m)}(\alpha)\ne0$$ If $m=1$, the zero is called \textit{simple}; if $m=2$, \textit{double}; if $m=3$, \textit{triple}...
-    \end{definition}
-    \subsubsection{Root-finding methods}
-    For the following methods consider a continuous function $f:I\subseteq\RR\rightarrow\RR$ with an unknown zero $\alpha\in I$. Given $\varepsilon>0$, we want to approximate $\alpha$ with $\Tilde{\alpha}$ such that $|\alpha-\Tilde{\alpha}|<\varepsilon$.
-    \begin{method}[Bisection method]
-        Suppose $I=[a_0,b_0]$. For each step $n\geq 0$ of the algorithm we will approximate $\alpha$ by $$c_n=\frac{a_n+b_n}{2}$$ If $f(c_n)=0$ we are done. If not, let
-        $$[a_{n+1},b_{n+1}]=\left\{
-            \begin{array}{ccc}
-                [a_n,c_n]            & \text{if} & f(a_n)f(c_n)<0 \\
-                \left[c_n,b_n\right] & \text{if} & f(a_n)f(c_n)>0
-            \end{array}\right.$$
-        and iterate the process again\footnote{Note that bisection method only works for zeros of odd multiplicity.}. The length of the interval $[a_n,b_n]$ is $\frac{b_0-a_0}{2^n}$ and therefore: $$|\alpha-c_n|<\frac{b_0-a_0}{2^{n+1}}<\varepsilon\iff n>\frac{\log\left(\frac{b_0-a_0}{\varepsilon}\right)}{\log 2}-1$$
-    \end{method}
-    \begin{method}[\textit{Regula falsi} method]
-        Suppose $I=[a_0,b_0]$. For each step $n\geq 0$ of the algorithm we will approximate $\alpha$ by $$c_n=b_n-f(b_n)\frac{b_n-a_n}{f(b_n)-f(a_n)}=\frac{a_nf(b_n)-b_nf(a_n)}{f(b_n)-f(a_n)}.$$ If $f(c_n)=0$ we are done. If not, let
-        $$[a_{n+1},b_{n+1}]=\left\{
-            \begin{array}{ccc}
-                [a_n,c_n]            & \text{if} & f(a_n)f(c_n)<0 \\
-                \left[c_n,b_n\right] & \text{if} & f(a_n)f(c_n)>0
-            \end{array}\right.$$
-        and iterate the process again.
-    \end{method}
-    \begin{method}[Secant method]
-        Suppose $I=\RR$ and that we have two different initial approximations $x_0$, $x_1$. Then, for each step $n\geq 0$ of the algorithm we obtain a new approximation $x_{n+2}$, given by: $$x_{n+2}=x_{n+1}-f(x_{n+1})\frac{x_{n+1}-x_n}{f(x_{n+1})-f(x_n)}$$
-    \end{method}
-    \begin{method}[Newton-Raphson method]
-        Suppose $I=\RR$, $f\in\mathcal{C}^1$ and that we have an initial approximation $x_0$. Then, for each step $n\geq 0$ we obtain a new approximation $x_{n+1}$, given by: $$x_{n+1}=x_n-\frac{f(x_n)}{f'(x_n)}$$
-    \end{method}
-    \begin{method}[Newton-Raphson modified method]
-        Suppose $I=\RR$, $f\in\mathcal{C}^1$ and that we have an initial approximation $x_0$ of a zero $\alpha$ of multiplicity $m$. Then, for each step $n\geq 0$ we obtain a new approximation $x_{n+1}$, given by: $$x_{n+1}=x_n-m\frac{f(x_n)}{f'(x_n)}$$
-    \end{method}
-    \begin{method}[Chebyshev method]
-        Suppose $I=\RR$, $f\in\mathcal{C}^2$ and that we have an initial approximation $x_0$. Then, for each step $n\geq 0$ we obtain a new approximation $x_{n+1}$, given by: $$x_{n+1}=x_n-\frac{f(x_n)}{f'(x_n)}-\frac{1}{2}\frac{{f(x_n)}^2f''(x_n)}{{f'(x_n)}^3}$$
-    \end{method}
-    \subsubsection{Fixed-point iterations}
-    \begin{definition}
-        Let $g:[a,b]\rightarrow[a,b]\subset\RR$ be a function. A point $\alpha\in[a,b]$ is \textit{n-periodic} if $g^n(\alpha)=\alpha$ and $g^j(\alpha)\ne\alpha$ for $j=1,\ldots,n-1$\footnote{Note that 1-periodic points are the fixed points of $f$.}.
-    \end{definition}
-    \begin{definition}
-        Let $(X,d)$ and $(Y,d')$  be metric spaces and $f:X\rightarrow Y$ be a function. We say that $f$ is a \textit{contraction} if there exists $0\leq k<1$ such that: $$d'(f(x),f(y))\leq kd(x,y)\qquad\forall x\in X,y\in Y$$
-    \end{definition}
-    \begin{theorem}[Fixed-point theorem]
-        Let $(X,d)$ be a complete metric space and $g:X\rightarrow X$ be a contraction\footnote{Recall \cref{FOSV_metric,FOSV_complete}.}. Then, $g$ has a unique fixed point $\alpha\in X$ and for every $x_0\in X$, $$\lim_{n\to\infty}x_n=\alpha,\quad\text{where }x_n=g(x_{n-1})\quad\forall n\in\NN$$
-    \end{theorem}
-    \begin{prop}
-        Let $(X,d)$ be a metric space and $g:X\rightarrow X$ be a contraction of constant $k$. Then, if we want to approximate a fixed point $\alpha$ by the iteration $x_n=g(x_{n-1})$, we have:
-        \begin{align*}
-            d(x_n,\alpha) & \leq\frac{k^n}{1-k}d(x_1,x_0)\quad   & \text{(a priori estimation)}     \\
-            d(x_n,\alpha) & \leq\frac{k}{1-k}d(x_n,x_{n-1})\quad & \text{(a posteriori estimation)}
-        \end{align*}
-    \end{prop}
-    \begin{corollary}
-        Let $g:\RR\rightarrow\RR$ be a function of class $\mathcal{C}^1$. Suppose $\alpha$ is a fixed point of $g$ and $|g'(\alpha)|<1$. Then, there exists $\varepsilon>0$ and $I_\varepsilon:=[\alpha-\varepsilon,\alpha+\varepsilon]$ such that $g(I_\varepsilon)\subseteq I_\varepsilon$ and $g$ is a contraction on $I_\varepsilon$. In particular, if $x_0\in I_\varepsilon$, the iteration $x_{n+1}=g(x_n)$ converges to $\alpha$.
-    \end{corollary}
-    \begin{definition}
-        Let $g:\RR\rightarrow\RR$ be a function of class $\mathcal{C}^1$ and $\alpha$ be a fixed point of $g$. We say $\alpha$ is an \textit{attractor fixed point} if $|g'(\alpha)|<1$. In this case, any iteration $x_{n+1}=g(x_n)$ in $I_\varepsilon$ converges to $\alpha$. If $|g'(\alpha)|>1$, we say $\alpha$ is a \textit{repulsor fixed point}. In this case, $\forall x_0\in I_\varepsilon$ the iteration $x_{n+1}=g(x_n)$ doesn't converge to $\alpha$.
-    \end{definition}
-    \begin{center}
-        \includestandalone[mode=image|tex,width=0.49\linewidth]{Images/cobweb1}\hfill
-        \includestandalone[mode=image|tex,width=0.49\linewidth]{Images/cobweb2}\\
-        \vspace{0.02\linewidth}
-        \includestandalone[mode=image|tex,width=0.49\linewidth]{Images/cobweb3}\hfill
-        \includestandalone[mode=image|tex,width=0.49\linewidth]{Images/cobweb4}
-        \captionof{figure}{Cobweb diagrams. In the figures at the top, $\alpha$ is a attractor point, that is, $|g'(\alpha)|<1$. More precisely, the figure at the top left occurs when $-1<g'(\alpha)\leq0$ and the figure at the top right when $0\leq g'(\alpha)<1$. In the figure at bottom left, $\alpha$ is a repulsor point. Finally, in the figure at bottom right the iteration $x_{n+1}=g(x_n)$ has no limit. It is said to have a \textit{chaotic behavior}.}
-    \end{center}
-    \subsubsection{Order of convergence}
-    \begin{definition}[Order of convergence]
-        Let $(x_n)$ be a sequence of real numbers that converges to $\alpha\in\RR$. We say $(x_n)$ has \textit{order of convergence $p\in\RR^+$} if exists $C>0$ such that: $$\lim_{n\to\infty}\frac{|x_{n+1}-\alpha|}{|x_n-\alpha|^p}=C$$ The constant $C$ is called \textit{asymptotic error constant}. For the case $p=1$, we need $C<1$. In this case the convergence is called \textit{linear convergence}; for $p=2$, is called \textit{quadratic convergence}; for $p=3$, \textit{cubic convergence}... If it's satisfied that $$\lim_{n\to\infty}\frac{|x_{n+1}-\alpha|}{|x_n-\alpha|^p}=0$$ for some $p\in\RR^+$, we say the sequence has \textit{order of convergence at least $p$}.
-    \end{definition}
-    \begin{theorem}
-        Let $g:\RR\rightarrow\RR$ be a function of class $\mathcal{C}^p$ and let $\alpha$ be a fixed point of $g$. Suppose $$g'(\alpha)=g''(\alpha)=\cdots=g^{(p-1)}(\alpha)=0$$ with $|g'(\alpha)|<1$ if $p=1$. Then, the iteration $x_{n+1}=g(x_n)$, with $x_0$ sufficiently close to $\alpha$, has order of convergence at least $p$. If, moreover, $g^{(p)}(\alpha)\ne0$, then the previous iteration has order of convergence $p$ with asymptotic error constant $C=\frac{|g^{(p)}(\alpha)|}{p!}$.
-    \end{theorem}
-    \begin{theorem}
-        Let $f:\RR\rightarrow\RR$ be a function of class $\mathcal{C}^3$ and $\alpha$ be a simple zero of $f$. If $f''(\alpha)\ne0$, then Newton-Raphson method for finding $\alpha$ has quadratic convergence with asymptotic error constant $C=\frac{1}{2}\left|\frac{f''(\alpha)}{f'(\alpha)}\right|$.\par If $f\in\mathcal{C}^{m+2}$, and $\alpha$ is a zero of multiplicity $m>1$, then Newton-Raphson method has linear convergence but Newton-Raphson modified method has at least quadratic convergence.
-    \end{theorem}
-    \begin{theorem}
-        Let $f:\RR\rightarrow\RR$ be a function of class $\mathcal{C}^3$ and let $\alpha$ be a simple zero of $f$. Then, Chebyshev's method for finding $\alpha$ has at least cubic convergence.
-    \end{theorem}
-    \begin{definition}
-        We define the \textit{computational efficiency of an algorithm} as a function $E(p,t)$, where $t$ is the time taken for each iteration of the method and $p$ is the order of convergence of the method. $E(p,t)$ must satisfy the following properties:
-        \begin{enumerate}
-            \item $E(p,t)$ is increasing with respect to the variable $p$ and decreasing with respect to $t$.
-            \item $E(p,t)=E(p^m,mt)$ $\forall m\in\RR$.
-        \end{enumerate}
-        Examples of such functions are the following: $$E(p,t)=\frac{\log p}{t}\qquad E(p,t)=p^{1/t}$$
-    \end{definition}
-    \subsubsection{Sequence acceleration}
-    \begin{method}[Aitken's $\Delta^2$ method]
-        Let $(x_n)$ be a sequence of real numbers. We denote:
-        \begin{gather*}
-            \Delta x_n:=x_{n+1}-x_n\\
-            \Delta^2 x_n:=\Delta x_{n+1}-\Delta x_n=x_{n+2}-2x_{n+1}+x_n
-        \end{gather*}
-        \textit{Aitken's $\Delta^2$ method} is the transformation of the sequence $(x_n)$ into a sequence $y_n$, defined as: $$y_n:=x_n-\frac{{(\Delta x_n)}^2}{\Delta^2 x_n}=x_n-\frac{{(x_{n+1}-x_n)}^2}{x_{n+2}-2x_{n+1}+x_n}$$ with $y_0=x_0$.
-    \end{method}
-    \begin{theorem}
-        Let $(x_n)$ be a sequence of real numbers such that $\displaystyle\lim_{n\to\infty}x_n=\alpha$, $x_n\ne\alpha$ $\forall n\in\NN$ and $\exists C$, $|C|<1$, satisfying $$x_{n+1}-\alpha=(C+\delta_n)(x_n-\alpha)\quad\text{with }\lim_{n\to\infty}\delta_n=0$$ Then, the sequence $(y_n)$ obtained from Aitken's $\Delta^2$ process is well-defined and $$\lim_{n\to\infty}\frac{y_n-\alpha}{x_n-\alpha}=0\footnote{This means that Aitken's $\Delta^2$ method produces an acceleration of the convergence of the sequence $(x_n)$.}$$
-    \end{theorem}
-    \begin{method}[Steffensen's method]
-        Let $g:\RR\rightarrow\RR$ be a continuous function and suppose we have an iterative method $x_{n+1}=g(x_n)$. Then, for each step $n$ we can consider a new iteration $y_{n+1}$, with $y_0=x_0$, given by: $$y_{n+1}=y_n-\frac{{\left(g(y_n)-y_n\right)}^2}{g(g(y_n))-2g(y_n)+y_n}$$
-    \end{method}
-    \begin{prop}
-        Let $f:\RR\rightarrow\RR$ be a function of class $\mathcal{C}^2$ and $\alpha$ be a simple zero of $f$. Then, Steffensen's method for finding $\alpha$ has at least quadratic convergence\footnote{Note that the advantage of Steffensen's method over Newton-Raphson method is that in the former we don't need the differentiability of the function whereas in the latter we do.}.
-    \end{prop}
-    \subsubsection{Zeros of polynomials}
-    \begin{lemma}
-        Let $p(z)=a_0+a_1z+\cdots+a_nz^n\in\CC [x]$ with $a_n\ne 0$. We define $$\lambda:=\max\left\{\left|\frac{a_i}{a_n}\right|:i=0,1,\ldots,n-1\right\}$$ Then, if $p(\alpha)=0$ for some $\alpha\in\CC $, $|\alpha|\leq\lambda+1$.
-    \end{lemma}
-    \begin{definition}[Strum's sequence]
-        Let $(f_i)$, $i=0,\ldots,n$, be a sequence of continuous functions defined on $[a,b]\subset\RR$ and $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^1$ such that $f(a)f(b)\ne 0$. We say $(f_n)$ is a \textit{Sturm's sequence} if:
-        \begin{enumerate}
-            \item $f_0=f$.
-            \item If $\alpha\in[a,b]$ satisfies $f_0(\alpha)=0\implies f_0'(\alpha)f_1(\alpha)>0$.
-            \item For $i=1,\ldots,n-1$, if $\alpha\in[a,b]$ satisfies $f_i(\alpha)=0\implies f_{i-1}(\alpha)f_{i+1}(\alpha)<0$.
-            \item $f_n(x)\ne0$ $\forall x\in[a,b]$.
-        \end{enumerate}
-    \end{definition}
-    \begin{definition}
-        Let $(a_i)$, $i=0,\ldots,n$, be a sequence. We define $\nu(a_i)$ as the number of sign variations of the sequence $$\{a_0,a_1,\ldots,a_n\}$$ without taking into account null values.
-    \end{definition}
-    \begin{theorem}[Sturm's theorem]
-        Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^1$ such that $f(a)f(b)\ne 0$ and with a finite number of zeros. Let $(f_i)$, $i=0,\ldots,n$, be a Sturm sequence defined on $[a,b]$. Then, the number of zeros of $f$ on $[a,b]$ is $$\nu\left(f_i(a)\right)-\nu\left(f_i(b)\right)$$
-    \end{theorem}
-    \begin{lemma}
-        Let $p\in\CC [x]$ be a polynomial. Then, the polynomial $\displaystyle q=\frac{p}{\gcd(p,p')}$ has the same roots as $p$ but all of them are simple.
-    \end{lemma}
-    \begin{prop}
-        Let $p\in\RR[x]$ be a polynomial with $\deg p=m$. We define $\displaystyle f_0=\frac{p}{\gcd(p,p')}$ and $f_1=f_0'$. If $\deg f_0=n$, then for $i=0,1,\ldots,n-2$, we define $f_{i+2}$ as: $$f_i(x)=q_{i+1}(x)f_{i+1}(x)-f_{i+2}(x)$$ (similarly to the euclidean division between $f_i$ and $f_{i+1}$). Then, $f_n$ is constant and hence the sequence $(f_i)$, $i=0,\ldots,n$, is a Sturm sequence.
-    \end{prop}
-    \begin{theorem}[Budan-Fourier theorem]
-        Let $p\in\RR[x]$ be a polynomial with $\deg p=n$. Consider the sequence $(p^{(i)})$, $i=0,\ldots,n$. If $p(a)p(b)\ne 0$, the number of zeros of $p$ on $[a,b]$ is: $$\nu\left(p^{(i)}(a)\right)-\nu\left(p^{(i)}(b)\right)-2k,\quad\text{for some }k\in\NN\cup\{0\}$$
-    \end{theorem}
-    \begin{corollary}[Descartes' rule of signs]
-        Let $p=a_0+a_1x+\cdots+a_nx^n\in\RR[x]$ be a polynomial. If $p(0)\ne 0$, the number of zeros of $p$ on $[0,\infty)$ is: $$\nu(a_i)-2k,\quad\text{for some }k\in\NN\cup\{0\}\footnote{Note that making the change of variable $t=-x$ one can obtain the number of zeros on $(-\infty,0]$ of $p$ by considering the polynomial $p(t)$.}$$
-    \end{corollary}
-    \begin{theorem}[Gershgorin circle theorem]
-        Let $A=(a_{ij})\in\mathcal{M}_n(\CC )$ be a complex matrix and $\lambda$ be an eigenvalue of $A$. For all $i,j\in\{1,2,\ldots,n\}$ we define:
-        \begin{gather*}
-            r_i=\sum_{\substack{k=1\\k\ne i}}^n|a_{ik}|\qquad R_i=\{z\in\CC :|z-a_{ii}|\leq r_i\}\\
-            c_j=\sum_{\substack{k=1\\k\ne j}}^n|a_{kj}|\qquad C_j=\{z\in\CC :|z-a_{jj}|\leq c_j\}
-        \end{gather*}
-        Then, $\lambda\in\bigcup_{i=1}^nR_i$ and $\lambda\in\bigcup_{j=1}^nC_j$. Moreover in each connected component of $\bigcup_{i=1}^nR_i$ or $\bigcup_{j=1}^nC_j$ there are as many eigenvalues (taking into account the multiplicity) as disks $R_i$ or $C_j$, respectively.
-    \end{theorem}
-    \begin{corollary}
-        Let $p(z)=a_0+a_1z+\cdots+a_nz^n+z^{n+1}\in\CC [x]$. We define
-        \begin{gather*}
-            r=\sum_{i=1}^{n-1}|a_i|\quad c=\max\{|a_0|,|a_1|+1,\ldots,|a_{n-1}|+1\}
-        \end{gather*}
-        Then, if $p(\alpha)=0$ for some $\alpha\in\CC $, $$\alpha\in(B(0,1)\cup B(-a_n,r))\cap(B(-a_n,1)\cup B(0,c))$$
-    \end{corollary}
-    \subsection{Interpolation}
-    \begin{definition}
-        We denote by $\Pi_n$ the \textit{vector space of polynomials with real coefficients and degree less than or equal to $n$}.
-    \end{definition}
-    \begin{definition}
-        Suppose we have a family of real valued functions $\mathfrak{C}$ and a set of points $\{(x_i,y_i)\}_{i=0}^n:=\{(x_i,y_i)\in\RR^2:i=0,\ldots,n\text{ and }x_j\ne x_k\iff j\ne k\}$. These points $\{(x_i,y_i)\}_{i=0}^n$ are called \textit{support points}. The \textit{interpolation problem} consists in finding a function $f\in\mathfrak{C}$ such that $f(x_i)=y_i$ for $i=0,\ldots,n$\footnote{Types of interpolation are for example polynomial interpolation, trigonometric interpolation, Padé interpolation, Hermite interpolation and spline interpolation.}.
-    \end{definition}
-    \subsubsection{Polynomial interpolation}
-    \begin{definition}
-        Given a set of support points $\{(x_i,y_i)\}_{i=0}^n$, \textit{Lagrange's interpolation problem} consists in finding a polynomial $p_n\in\Pi_n$ such that $p_n(x_i)=y_i$ for $i=0,1,\ldots,n$.
-    \end{definition}
-    \begin{definition}
-        Let $\{(x_i,y_i)\}_{i=0}^n$ be a set of support points. We define $\omega_n(x)\in\RR[x]$ as: $$\omega_n(x)=\prod_{i=0}^n(x-x_i)$$ We define \textit{Lagrange basis polynomials} $\ell_i(x)\in\RR[x]$ as: $$\ell_i(x)=\frac{\omega_n(x)}{(x-x_i)\omega_n(x_i)}=\prod_{\substack{j=0\\j\ne i}}^n\frac{x-x_j}{x_i-x_j}$$
-    \end{definition}
-    \begin{prop}
-        Let $\{(x_i,y_i)\}_{i=0}^n$ be a set of support points. Then, Lagrange's interpolation problem has a unique solution and this is: $$p_n(x)=\sum_{i=0}^ny_i\ell_i(x)$$
-    \end{prop}
-    \begin{method}[Neville's algorithm]
-        Let $\{(x_i,y_i)\}_{i=0}^n$ be a set of support points, $\{i_0,\ldots,i_k\}\subset\{0,\ldots,n\}$ and $P_{i_0,\ldots,i_k}(x)\in\Pi_k$ be such that $P_{i_0,\ldots,i_k}(x_{i_j}) = y_{i_j}$ for $j=0,\ldots,k$. Then, it is satisfied that:
-        \begin{enumerate}
-            \item $P_i(x)=y_i$.
-            \item $P_{i_0,\ldots,i_k}(x)=\frac{\begin{vmatrix}
-                          P_{i_1,\ldots,i_k}(x)     & x-x_{i_k} \\
-                          P_{i_0,\ldots,i_{k-1}}(x) & x-x_{i_0}
-                      \end{vmatrix}}{x_{i_k}-x_{i_0}}$.
-        \end{enumerate}
-    \end{method}
-    \begin{definition}
-        Let $f:\RR\rightarrow\RR$ be a function and $\{x_i\}_{i=0}^n\subset\RR$ be pairwise distinct points. We define the \textit{divided difference of order $k$ of $f$ applied to $\{x_i\}_{i=0}^k$}, denoted by $f[x_0,\ldots,x_k]$, as the coefficient of $x^k$ of the interpolating polynomial with support points $\{(x_i,f(x_i))\}_{i=0}^k$.
-    \end{definition}
-    \begin{prop}
-        Let $f:\RR\rightarrow\RR$ be a function and $\{x_i\}_{i=0}^n\subset\RR$ be pairwise distinct points. Lagrange interpolating polynomial with support points $\{(x_i,f(x_i))\}_{i=0}^n$ is: $$p_n(x)=f[x_0]+\sum_{j=1}^nf[x_0,\ldots,x_j]\omega_{j-1}(x)$$
-    \end{prop}
-    \begin{method}[Newton's divided differences\\method]
-        Let $f:\RR\rightarrow\RR$ be a function. For $x\in\RR$, we have $f[x]=f(x)$. And if $\{x_i\}_{i=0}^n\subset\RR$ are different points, then $$f[x_0,\ldots,x_n]=\frac{f[x_1,\ldots,x_n]-f[x_0,\ldots,x_{n-1}]}{x_n-x_0}$$
-    \end{method}
-    \begin{theorem}
-        Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^{n+1}$, $\{x_i\}_{i=0}^n\subset\RR$ be pairwise distinct points and $p_n\in\RR[x]$ be the interpolating polynomial with support points $\{(x_i,f(x_i))\}_{i=0}^n$. Then, $\forall x\in[a,b]$, $$f(x)-p_n(x)=\frac{f^{(n+1)}(\xi_x)}{(n+1)!}\omega_n(x)$$ where $\xi_x\in\langle x_0,\ldots,x_n,x\rangle$\footnote{The interval $\langle a_1,\ldots,a_k\rangle$ is defined as $\langle a_1,\ldots,a_k\rangle:=(\min(a_1,\ldots,a_k),\max(a_1,\ldots,a_k))$.}.
-    \end{theorem}
-    \begin{lemma}
-        Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^{n+1}$ and $\{x_i\}_{i=0}^n\subset\RR$ be pairwise distinct points. Then: $\exists\xi\in\langle x_0,\ldots,x_n\rangle$ such that: $$f[x_0,\ldots,x_n]=\frac{f^{(n)}(\xi)}{n!}$$
-    \end{lemma}
-    \begin{prop}
-        Let $f:\RR\rightarrow\RR$ be a function of class $\mathcal{C}^{n+1}$, $\{x_i\}_{i=0}^n\subset\RR$ be pairwise distinct points and $\sigma\in \text{S}_n$. Then, $$f[x_0,\ldots,x_n]=f[x_{\sigma(0)},\ldots,x_{\sigma(n)}]$$
-    \end{prop}
-    \begin{definition}
-        Let $\{(x_i,y_i)\}_{i=0}^n$ be support points. The points $\{x_i\}_{i=0}^n$ are \textit{equally-spaced} if $$x_i=x_0+ih,\quad\text{for }i=0,\ldots,n\text{ and with }h:=\frac{x_n-x_0}{n}$$
-    \end{definition}
-    \begin{prop}
-        Let $\{x_i\}_{i=0}^n\subset\RR$ be equally-spaced points such that $x_i=x_0+ih$, where $h=\frac{x_n-x_0}{n}$. Then:
-        $$\max\{|\omega_n(x)|:x\in[x_0,x_n]\}\leq\frac{h^{n+1}n!}{4}$$
-    \end{prop}
-    \begin{definition}
-        Let $f:[a,b]\rightarrow\RR$ be a function and $\{x_i\}_{i=0}^n\subset\RR$ be equally-spaced points. We define:
-        \begin{gather*}
-            \Delta f(x):=f(x+h)-f(x)\\
-            \Delta^{n+1}f(x):=\Delta(\Delta^nf(x))
-        \end{gather*}
-    \end{definition}
-    \begin{lemma}
-        Let $f:[a,b]\rightarrow\RR$ be a function and $\{x_i\}_{i=0}^n\subset\RR$ be equally-spaced points. Then: $$\Delta^nf(x_0)=n!h^nf[x_0,\ldots,x_n]$$
-    \end{lemma}
-    \begin{corollary}
-        Let $f\in\RR[x]$ with $\deg f=n$. Suppose we interpolate $f$ with equally-spaced nodes. Then, $\Delta^nf(x)\equiv\text{constant}$.
-    \end{corollary}
-    \subsubsection{Hermite interpolation}
-    \begin{definition}
-        Given sets of points $\{x_i\}_{i=0}^m\subset\RR$, $\{n_i\}_{i=0}^m\subset\NN$ and $\{y_i^{(k)}:k=0,\ldots,n_i-1\}_{i=0}^m\subset\RR$, \textit{Hermite interpolation problem} consists in finding a polynomial $h_n\in\Pi_n$ such that $\sum_{i=0}^mn_i=n+1$ and $$h_n^{(k)}(x_i)=y_i^{(k)}\text{ for }i=0,\ldots,m\text{ and }k=0,\ldots,n_i-1$$
-    \end{definition}
-    \begin{prop}
-        Hermite interpolation problem has a unique solution.
-    \end{prop}
-    \begin{definition}
-        Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^n$ and $\{x_i\}_{i=0}^n\subset\RR$ be points. We define $f[x_i,\overset{(n+1)}{\ldots},x_i]$ as: $$f[x_i,\overset{(n+1)}{\ldots},x_i]=\frac{f^{(n)}(x_i)}{n!}$$
-    \end{definition}
-    \begin{theorem}
-        Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^{n+1}$, $\{x_i\}_{i=0}^m\subset\RR$ be pairwise distinct points and $\{n_i\}_{i=0}^m\subset\NN$ be such that $\sum_{i=0}^mn_i=n+1$. Let $h_n$ be the Hermite interpolating polynomial of $f$ with nodes $\{x_i\}_{i=0}^m\subset\RR$, that is, $$h_n^{(k)}(x_i)=f^{(k)}(x_i)\text{ for }i=0,\ldots,m\text{ and }k=0,\ldots,n_i-1.$$ Then, $\forall x\in[a,b]$ $\exists\xi_x\in\langle x_0,\ldots,x_n,x\rangle$ such that: $$f(x)-h_n(x)=\frac{f^{(n+1)}(\xi_x)}{(n+1)!}(x-x_0)^{n_0}\cdots(x-x_m)^{n_m}$$
-    \end{theorem}
-    \subsubsection{Spline interpolation}
-    \begin{center}
-        \begin{minipage}{\linewidth}
-            \centering
-            \includestandalone[mode=image|tex,width=0.95\linewidth]{Images/runge}
-            \captionof{figure}{Runge's phenomenon. In this case $f(x)=\frac{1}{1+25x^2}$. $p_5(x)$ is the 5th-order Lagrange interpolating polynomial with equally-spaced interpolating points; $p_9(x)$, the 9th-order Lagrange interpolating polynomial with equally-spaced interpolating points, and $p_{13}(x)$, the 13th-order Lagrange interpolating polynomial with equally-spaced interpolating points.}
-        \end{minipage}
-    \end{center}
-    \begin{definition}[Spline]
-        Let $\{(x_i,y_i)\}_{i=0}^n$ be support points of an interval $[a,b]$. A \textit{spline of degree $p$} is a function $s:[a,b]\rightarrow\RR$ of class $\mathcal{C}^{p-1}$ satisfying: $$s|_{[x_i,x_{i+1}]}\in\RR[x]\quad\text{and}\quad\deg (s|_{[x_i,x_{i+1}]})=p$$ for $i=0,\ldots,n-1$ and $s(x_i)=y_i$ for $i=0,\ldots,n$. The most common case are splines of degree  $p=3$ or \textit{cubic splines}. In this case we can impose two more conditions on their definition in one of the following ways:
-        \begin{enumerate}
-            \item \textit{Natural cubic spline}: $$s''(x_0)=s''(x_n)=0$$
-            \item \textit{Cubic Hermite spline}: Given $y_0',y_n'\in\RR$, $$s'(x_0)=y_0',\quad s'(x_n)=y_n'$$
-            \item \textit{Cubic periodic spline}: $$s'(x_0)=s'(x_n),\quad s''(x_0)=s''(x_n)$$
-        \end{enumerate}
-    \end{definition}
-    \begin{definition}
-        Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^2$. We define the \textit{seminorm}\footnote{The term \textit{seminorm} has been used instead of \textit{norm} to emphasize that not all properties of a norm are satisfied with this definition.} \textit{of $f$} as: $$\|f\|^2=\int_a^b(f''(x))^2\dd x$$
-    \end{definition}
-    \begin{prop}
-        Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^2$ interpolating the support points $\{(x_i,y_i)\}_{i=0}^n\subset\RR^2$, $a\leq x_0<\cdots<x_n\leq b$. If $s$ a spline associated with $\{(x_i,y_i)\}_{i=0}^n$, then: $$\|f-s\|^2=\|f\|^2-\|s\|^2-2(f'-s)s''\Big|_{x_0}^{x_n}+2\sum_{i=1}^n(f-s)s'''\Big|_{x_{i-1}^+}^{x_i^-}$$
-    \end{prop}
-    \begin{theorem}
-        Let $f:[a,b]\rightarrow\RR$ a function of class $\mathcal{C}^2$ interpolating the support points $\{(x_i,y_i)\}_{i=0}^n\subset\RR^2$, $a\leq x_0<\cdots<x_n\leq b$. If $s$ is the natural cubic spline associated with $\{(x_i,y_i)\}_{i=0}^n$, then: $$\|s\|\leq\|f\|\footnote{We can interpret this result as the natural cubic spline being the configuration that require the least ``energy" to be ``constructed".}$$
-    \end{theorem}
-    \subsection{Numerical differentiation and integration}
-    \subsubsection{Differentiation}
-    \begin{theorem}[Intermediate value theorem]
-        Let $f:[a,b]\rightarrow\RR$ be a continuous function, $x_0,\ldots,x_n\in[a,b]$ and $\alpha_0,\ldots,\alpha_n\geq 0$. Then, $\exists\xi\in[a,b]$ such that: $$\sum_{i=0}^n\alpha_if(x_i)=\left(\sum_{i=0}^n\alpha_i\right)f(\xi)$$
-    \end{theorem}
-    \begin{theorem}[Forward and backward difference formula of order 1]
-        Let $f:\RR\rightarrow\RR$ be a function of class $\mathcal{C}^2$. Then, the forward difference formula of order 1 is: $$f'(a)=\frac{f(a+h)-f(a)}{h}-\frac{f''(\xi)}{2}h$$ where $\xi\in\langle a,a+h\rangle$. Analogously, the backward difference formula of order 1 is: $$f'(a)=\frac{f(a)-f(a-h)}{h}+\frac{f''(\eta)}{2}h$$ where $\eta\in\langle a-h,a\rangle$.
-    \end{theorem}
-    \begin{theorem}[Symmetric difference formula of order 1]
-        Let $f:\RR\rightarrow\RR$ be a function of class $\mathcal{C}^3$. Then, the symmetric difference formula of order 1 is: $$f'(a)=\frac{f(a+h)-f(a-h)}{2h}-\frac{f^{(3)}(\xi)}{6}h^2$$ where $\xi\in\langle a-h,a+h\rangle$.
-    \end{theorem}
-    \begin{theorem}[Symmetric difference formula of order 2]
-        Let $f:\RR\rightarrow\RR$ be a function of class $\mathcal{C}^4$. Then, the symmetric difference formula of order 2 is: $$f''(a)=\frac{f(a+h)-2f(a)+f(a-h)}{h^2}-\frac{f^{(4)}(\xi)}{12}h^2$$ where $\xi\in\langle a-h,a,a+h\rangle$.
-    \end{theorem}
-    \subsubsection{Richardson extrapolation}
-    \begin{theorem}[Richardson extrapolation]
-        Suppose we have a function $f$ that approximate a value $\alpha$ with an error that depends on a small quantity $h$. That is: $$\alpha=f(h)+a_1h^{k_1}+a_2h^{k_2}+\cdots$$ with $k_1<k_2<\cdots$ and $a_i$ are unknown constants. Given $q>0$, we define: $$D_1(h)=f(h)\quad\text{and}\quad D_{n+1}(h)=\frac{q^{k_n}D_n\left(h/q\right)-D_n(h)}{q^{k_n}-1}$$ And we can observe that $\alpha=D_{n+1}(h)+O(h^{k_{n+1}})$.
-    \end{theorem}
-    \subsubsection{Integration}
-    \begin{definition}
-        Let $f:[a,b]\rightarrow\RR$ be a continuous function, $\{x_i\}_{i=0}^n\subset[a,b]$ be a set of nodes and $p_n$ be the Lagrange interpolating polynomial with support points $\{(x_i,f(x_i))\}_{i=0}^n$. We define the \textit{quadrature formula} as: $$\int_a^bf(x)\dd x\approx\int_a^bp_n(x)\dd x$$
-    \end{definition}
-    \begin{lemma}
-        Let $f:[a,b]\rightarrow\RR$ be a continuous function $\{x_i\}_{i=0}^n\subset[a,b]$ be a set of nodes. Then: $$\int_a^bf(x)\dd x\approx\sum_{i=1}^na_if(x_i)\quad\text{where }a_i:=\int_a^b\ell_i(x)\dd x$$
-    \end{lemma}
-    \begin{definition}
-        The \textit{degree of precision} of a quadrature formula is the largest $m\in\NN$ such that the formula is exact for $x^k$ $\forall k=0,1,\ldots,m$.
-    \end{definition}
-    \begin{lemma}
-        Let $p\in\Pi_n$ be a polynomial and $\{x_i\}_{i=0}^n\subset[a,b]$ be a set of nodes. Then: $$\int_a^bp(x)\dd x=\sum_{i=0}^na_ip(x_i)$$ for some $a_i\in\RR$.
-    \end{lemma}
-    \subsubsection{Newton-Cotes formulas}
-    \begin{theorem}[Mean value theorem for integrals]
-        Let $f,g:[a,b]\rightarrow\RR$ be such that $f$ is continuous and $g$ integrable. Suppose that $g$ does not change the sign on $[a,b]$. Then, $\exists\xi\in[a,b]$ such that: $$\int_a^bf(x)g(x)\dd x=f(\xi)\int_a^bg(x)\dd x$$
-    \end{theorem}
-    \begin{theorem}[Closed Newton-Cotes Formulas]
-        Let $f:[a,b]\rightarrow\RR$ be a function and $\{x_i\}_{i=0}^n\subset[a,b]$ be a set of equally-spaced points. If $I=\int_a^bf(x)\dd x$ and $h=\frac{b-a}{n}$, then $\exists\xi\in[a,b]$ such that:
-        \begin{itemize}
-            \item If $n$ is even and $f\in\mathcal{C}^{n+2}$: $$I=\sum_{i=0}^na_if(x_i)+\frac{h^{n+3}f^{n+2}(\xi)}{(n+2)!}\int_0^nt\prod_{i=0}^n(t-i)\dd t$$
-            \item If $n$ is odd and $f\in\mathcal{C}^{n+1}$: $$I=\sum_{i=0}^na_if(x_i)+\frac{h^{n+2}f^{n+1}(\xi)}{(n+1)!}\int_0^n\prod_{i=0}^n(t-i)\dd t\footnote{Note that when $n$ is even, the degree of precision is $n + 1$, although the interpolation polynomial is of degree at most $n$. When $n$ is odd, the degree of precision is
-                          only $n$.}$$
-        \end{itemize}
-    \end{theorem}
-    \begin{corollary}[Trapezoidal rule]
-        Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^2$. Then, $\exists\xi\in[a,b]$ such that: $$\int_a^bf(x)\dd x=\frac{h}{2}(f(a)+f(b))-\frac{f''(\xi)}{12}h^3$$ where $h=b-a$. This is the case $n=1$ of closed Newton-Cotes formulas.
-    \end{corollary}
-    \begin{corollary}[Simpson's rule]
-        Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^4$. Then, $\exists\xi\in[a,b]$ such that: $$\int_a^bf(x)\dd x=\frac{h}{3}\left(f(a)+4f\left(\frac{a+b}{2}\right)+f(b)\right)-\frac{f^{(4)}(\xi)}{90}h^5$$ where $h=\frac{b-a}{2}$. This is the case $n=2$ of closed Newton-Cotes formulas.
-    \end{corollary}
-    \begin{theorem}[Composite Trapezoidal rule]
-        Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^4$, $h=\frac{b-a}{n}$ and $x_j=a+jh$ for each $j=0,1,\ldots,n$. Then, $\exists\xi\in[a,b]$ such that:
-        \begin{multline*}
-            I=\int_a^bf(x)\dd x=\frac{h}{2}\left[f(a)+2\sum_{j=1}^{n-1}f(x_j)+f(b)\right]-\\-\frac{f''(\xi)(b-a)}{12}h^2
-        \end{multline*}
-        We denote by $T(f,a,b,h)$ the approximation of $I$ by trapezoidal rule.
-    \end{theorem}
-    \begin{theorem}[Composite Simpson's rule]
-        Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^4$, $n$ be an even number, $h=\frac{b-a}{n}$ and $x_j=a+jh$ for each $j=0,1,\ldots,n$. Then, $\exists\xi\in[a,b]$ such that:
-        \begin{multline*}
-            I=\int_a^bf(x)\dd x=\frac{h}{3}\left[f(a)+2\sum_{j=1}^{n/2-1}f(x_{2j})\right.+\\+\left.4\sum_{j=1}^{n/2}f(x_{2j-1})+f(b)\right]-\frac{f^{(4)}(\xi)(b-a)}{180}h^4
-        \end{multline*}
-        We denote by $S(f,a,b,h)$ the approximation of $I$ by Simpson's rule.
-    \end{theorem}
-    \subsubsection{Romberg method}
-    \begin{definition}
-        We define \textit{Bernoulli polynomials} $B_n(x)$ as $B_0(x)=1$, $B_1(x)=x-\frac{1}{2}$ and $$B_{k+1}'=(k+1)B_k\quad\text{for }k\geq 1$$ \textit{Bernoulli numbers} are $B_n=B_n(0)$, $\forall n\geq 0$\footnote{Exponential generating function of the sequence $(B_n)$ of Bernoulli numbers is $\displaystyle\frac{x}{\exp{x}-1}=\sum_{n=1}^\infty\frac{B_n}{n!}x^n$.}.
-    \end{definition}
-    \begin{theorem}[Euler-Maclaurin formula]
-        Let $f\in\mathcal{C}^{2m+2}([a,b])$ be a function. Then:
-        \begin{multline*}
-            T(f,a,b,h)=\int_a^bf(t)\dd t+\sum_{k=1}^m\frac{B_{2k}h^{2k}}{(2k)!}\left(f^{(2k-1)}(b)\right.-\\-\left.f^{(2k-1)}(a)\right)+\frac{(b-a)B_{2m+2}h^{2m+1}}{(2m+2)!}f^{(2m+2)}(\xi)
-        \end{multline*}
-        where $h=\frac{b-a}{n}$, $B_n$ are the Bernoulli numbers and $\xi\in[a,b]$.
-    \end{theorem}
-    \begin{theorem}[Romberg method]
-        Let $f\in\mathcal{C}^{2m+2}([a,b])$ be a function. Then, by Euler-Maclaurin formula, we obtain: $$T(f,a,b,h)=\int_a^bf(t)\dd t+\beta_1 h^2+\beta_2 h^4+\cdots$$ where $h=\frac{b-a}{n}$. For $n=1,2,\ldots$ we define: $$T_{n,1}=T\left(f,a,b,\frac{b-a}{2^n}\right)\quad T_{n,m+1}=\frac{4^mT_{n+1,m}-T_{n,m}}{4^m-1}$$ for $m\leq n$. Then, we can observe that: $$T_{n,m}=\int_a^bf(t)\dd t+O\left(\left(\frac{b-a}{2^n}\right)^{2m}\right)$$
-    \end{theorem}
-    \subsubsection{Orthogonal polynomials}
-    \begin{definition}
-        Let $f,g:[a,b]\rightarrow\RR$ be continuous function and $\omega(x):[a,b]\rightarrow\RR^+$ be a weight function. The expression $$\langle f,g\rangle=\int_a^b\omega(x)f(x)g(x)\dd x$$ defines a positive semidefinite dot product in the vector space of bounded functions on $[a,b]$.
-    \end{definition}
-    \begin{definition}[Orthogonal polynomials]
-        Let $\mathfrak{P}=\{\phi_i(x)\in\RR[x]:\deg \phi_i(x)=i, i\in\NN\cup\{0\}\}$ be a family of polynomials and $\omega(x):[a,b]\rightarrow\RR^+$ be a weight function. We say $\mathfrak{P}$ is \textit{orthogonal with respect to the weight $\omega(x)$ on an interval $[a,b]$} if $$\langle \phi_i,\phi_j\rangle=\int_a^b\omega(x)\phi_i(x)\phi_j(x)\dd x=0\iff i\ne j$$
-        Note that $\langle \phi_i,\phi_i\rangle>0$ for each $i\in\NN\cup\{0\}$.
-    \end{definition}
-    \begin{lemma}
-        We define $\mathfrak{P}_n$ as $\mathfrak{P}_n=\{\phi_i(x)\in\Pi_n:\deg\phi_i(x)=i\text{ and }\langle \phi_i,\phi_j\rangle=0\iff i\ne j,  i=0,\ldots,n\}$. Then, $\mathfrak{P}_n$ is an \textit{orthogonal basis of $\Pi_n$}.
-    \end{lemma}
-    \begin{lemma}
-        Let $\phi_k\in\mathfrak{P}_k$ and $q\in\Pi_n$. Then, $\langle q,\phi_k\rangle=0$ for each $k>n$.
-    \end{lemma}
-    \begin{lemma}
-        Let $\phi_n\in\mathfrak{P}_n$. Then, $\forall n\in\NN\cup\{0\}$, all roots of $\phi_n$ are real, simple and contained in the interval $(a,b)$, where the associated weight function $\omega(x)$ is defined.
-    \end{lemma}
-    \begin{theorem}[Existence of orthogonal polynomials]
-        For each $n\in\NN\cup\{0\}$ there exists a unique monic orthogonal polynomial $\phi_n$ with $\deg\phi_n=n$, associated with the weight function $\omega(x)$, defined by:
-        \begin{gather*}
-            \phi_0=1\quad\phi_1(x)=x-\alpha_0\\
-            \phi_{n+1}(x)=(x-\alpha_n)\phi_n(x)-\beta_n\phi_{n-1}(x)
-        \end{gather*}
-        with $\alpha_n=\frac{\langle\phi_n,x\phi_n\rangle}{\langle\phi_n,\phi_n\rangle}$ $\forall n\in\NN\cup\{0\}$ and $\beta_n=\frac{\langle\phi_n,\phi_n\rangle}{\langle\phi_{n-1},\phi_{n-1}\rangle}$ $\forall n\in\NN$.
-    \end{theorem}
-    \begin{definition}[Chebyshev polynomials]
-        \textit{Chebyshev polynomials} $T_n$ are the orthogonal polynomials defined on $[-1,1]$ with the weight $\omega(x)=\frac{1}{\sqrt{1-x^2}}$. These can be defined recursively as:
-        \begin{gather*}
-            T_0(x)=1\quad T_1(x)=x\\T_{n+1}(x)=2xT_n(x)-T_{n-1}(x)
-        \end{gather*}
-        for $n=1,2,\ldots$ Moreover $T_n(x)=\cos(n\arccos(x))$ which implies that the roots of $T_n(x)$ are: $$x_k=\cos\left(\frac{2k-1}{2n}\pi\right)\quad\text{for }k=1,\ldots,n$$
-    \end{definition}
-    \begin{definition}[Laguerre polynomials]
-        \textit{Laguerre polynomials} $L_n$ are the orthogonal polynomials defined on $[0,\infty)$ with the weight $\omega(x)=\exp{-x}$. These can be defined recursively as:
-        \begin{gather*}
-            L_0(x)=1\quad L_1(x)=1-x\\ L_{n+1}(x)=\frac{(2n+1-x)L_n(x)-nL_{n-1}(x)}{n+1}
-        \end{gather*}
-        for $n=1,2,\ldots$ The closed form of these polynomials is: $$L_n(x)=\sum_{k=0}^n\binom{n}{k}\frac{(-1)^k}{k!}x^k$$
-    \end{definition}
-    \begin{definition}[Legendre polynomials]
-        \textit{Legendre polynomials} $P_n$ are the orthogonal polynomials defined on $[-1,1]$ with the weight $\omega(x)=1$. These can be defined recursively as:
-        \begin{gather*}
-            P_0(x)=1\quad P_1(x)=x\\P_{n+1}(x)=\frac{(2n+1)xP_n(x)-nP_{n-1}(x)}{n+1}
-        \end{gather*}
-        for $n=1,2,\ldots$ The closed form of these polynomials is: $$P_n(x)=\frac{1}{2^n}\sum_{k=0}^n\binom{n}{k}^2(x-1)^{n-k}(x+1)^k$$
-    \end{definition}
-    \subsubsection{Gau\ss ian quadrature}
-    \begin{definition}
-        Let $f:[a,b]\rightarrow\RR$ be a function and $\omega(x):[a,b]\rightarrow\RR^+$ be a weight function. Given a set of nodes $\{x_i\}_{i=1}^n\subset[a,b]$, the \textit{quadrature formula with weight $\omega(x)$ of a function $f$} is $$\int_a^b\omega(x)f(x)\dd x\approx\sum_{i=1}^n\omega_if(x_i)\quad\!\text{with }\omega_i=\int_a^b\omega(x)\ell_i(x)\dd x$$
-    \end{definition}
-    \begin{lemma}
-        Let $f:[a,b]\rightarrow\RR$ be a function and $\{x_i\}_{i=1}^n$ be the zeros of the orthogonal polynomial $\phi_n\in\mathfrak{P}_n$ with weight $\omega(x)$ on the interval $[a,b]$. Then, the formula $$\int_a^b\omega(x)f(x)\dd x\approx\sum_{i=1}^n\omega_if(x_i)\quad\!\text{with }\omega_i=\int_a^b\omega(x)\ell_i(x)\dd x$$ is exact for all polynomials in $\Pi_{2n-1}$.
-    \end{lemma}
-    \begin{prop}
-        Let $f:[a,b]\rightarrow\RR$ be a function and $\{x_i\}_{i=1}^n$ be the zeros of the orthogonal polynomial $\phi_n\in\mathfrak{P}_n$ with weight $\omega(x)$ on the interval $[a,b]$. Then, in the formula $$\int_a^b\omega(x)f(x)\dd x\approx\sum_{i=1}^n\omega_if(x_i)$$ the values $\omega_i$ are positive and real for $i=1,\ldots,n$.
-    \end{prop}
-    \begin{theorem}
-        Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^{2n}$ and $\{x_i\}_{i=1}^n$ be the zeros of the orthogonal polynomial $\phi_n\in\mathfrak{P}_n$ with weight $\omega(x)$ on the interval $[a,b]$. Then: $$\int_a^b\omega(x)f(x)\dd x-\sum_{i=1}^n\omega_if(x_i)=\frac{f^{2n}(\xi)}{(2n)!}\langle\phi_n,\phi_n\rangle$$ where $\xi\in[a,b]$.
-    \end{theorem}
-    \subsection{Numerical linear algebra}
-    \subsubsection{Triangular matrices}
-    \begin{definition}
-        A matrix $\vf{A}=(a_{ij})\in\mathcal{M}_n(\CC)$ is \textit{upper triangular} if $a_{ij}=0$ whenever $i>j$. That is, $\vf{A}$ is of the form:
-        $$\vf{A}=
-            \begin{pmatrix}
-                a_{11} & a_{12} & \cdots & a_{1n}     \\
-                0      & a_{22} & \ddots & \vdots     \\
-                \vdots & \ddots & \ddots & a_{(n-1)n} \\
-                0      & \cdots & 0      & a_{nn}
-            \end{pmatrix}
-        $$
-    \end{definition}
-    \begin{definition}
-        A matrix $\vf{A}=(a_{ij})\in\mathcal{M}_n(\CC)$ is \textit{lower triangular} if $a_{ij}=0$ whenever $j>i$. That is, $\vf{A}$ is of the form:
-        $$\vf{A}=
-            \begin{pmatrix}
-                a_{11} & 0      & \cdots     & 0      \\
-                a_{21} & a_{22} & \ddots     & \vdots \\
+  \subsection{Errors}
+  \subsubsection{Floating-point representation}
+  \begin{theorem}
+    Let $b\in\NN$, $b\geq 2$. Any real number $x\in\RR$ can be represented of the form
+    \begin{equation*}
+      x=s\left(\sum_{i=1}^\infty\alpha_ib^{-i}\right)b^q
+    \end{equation*} where $s\in\{-1,1\}$, $q\in\ZZ$ and $\alpha_i\in\{0,1,\ldots,b-1\}$. Moreover, this representation is unique if $\alpha_1\ne0$ and $\forall i_0\in\NN$, $\exists i\geq i_0:\alpha_i\ne b-1$. We will write $$x=s(0.\alpha_1\alpha_2\cdots)_bb^q$$ where the subscript $b$ in the parenthesis indicates that the number $0.\alpha_1\alpha_2\alpha_3\cdots$ is in base $b$.
+  \end{theorem}
+  \begin{definition}[Floating-point representation]
+    Let $x$ be a real number. Then, the \emph{floating-point representation} of $x$ is: $$x=s\left(\sum_{i=1}^t\alpha_ib^{-i}\right)b^q$$ Here $s$ is called the \emph{sign}; $\sum_{i=1}^t\alpha_ib^{-i}$, the \emph{significant} or \emph{mantissa}, and $q$, the \emph{exponent}, limited to a prefixed range $q_\text{min}\leq q\leq q_\text{max}$. Therefore, the floating-point representation of $x$ can be expressed as: $$x=smb^q=s(0.\alpha_1\alpha_2\cdots\alpha_t)_bb^q$$ Finally, we say a floating-point number is \emph{normalized} if $\alpha_1\ne0$.
+  \end{definition}
+  \begin{center}
+    \begin{minipage}{\linewidth}
+      \centering
+      \begin{tabular}{c|ccccc}
+        Format      & $b$ & $t$ & $q_\text{min}$ & $q_\text{max}$ & bits \\
+        \hline\hline
+        IEEE simple & 2   & 24  & -126           & 127            & 32   \\
+        IEEE double & 2   & 53  & -1022          & 1023           & 64
+      \end{tabular}
+      \captionof{table}{Parameters of IEEE simple and IEEE double formats.}
+    \end{minipage}
+  \end{center}
+  \begin{definition}
+    Let $x\in\RR$ be such that $x=s(0.\alpha_1\alpha_2\cdots)_bb^q$ with $q_\text{min}\leq q\leq q_\text{max}$. We say the \emph{floating-point representation by truncation} of $x$ is: $$\text{fl}_T(x)=s(0.\alpha_1\alpha_2\cdots\alpha_t)_bb^q$$ We say the \emph{floating-point representation by rounding} of $x$ is:
+    \begin{multline*}
+      \text{fl}_R(x)=\\=\left\{\text{\setlength{\tabcolsep}{4pt}
+        \begin{tabular}{m{3.85cm}m{3cm}}
+          $s(0.\alpha_1\cdots\alpha_t)_bb^q$                 & if $\ 0\leq\alpha_{t+1}<\frac{b}{2}$       \\
+          $s(0.\alpha_1\cdots\alpha_{t-1}(\alpha_t+1))_bb^q$ & if $\ \frac{b}{2}\leq\alpha_{t+1}\leq b-1$
+        \end{tabular}}\right.
+    \end{multline*}
+  \end{definition}
+  \begin{definition}
+    Given a value $x\in\RR$ and an approximation $\Tilde{x}$ of $x$, the \emph{absolute error} is: $$\Delta x:=|x-\Tilde{x}|$$ If $x\ne 0$, the \emph{relative error} is: $$\delta x:=\frac{|x-\Tilde{x}|}{x}$$ If $x$ is unknown, we take: $$\delta x\approx\frac{|x-\Tilde{x}|}{\Tilde{x}}$$
+  \end{definition}
+  \begin{definition}
+    Let $\Tilde{x}$ be an approximation of $x$. If $\Delta x\leq\frac{1}{2}10^{-t}$, we say $\Tilde{x}$ \emph{has $t$ correct decimal digits}. If $x=sm10^q$ with $0.1\leq m<1$, $\Tilde{x}=s\Tilde{m}10^q$ and $$u:=\max\{i\in\ZZ:|m-\Tilde{m}|\leq\frac{1}{2}10^{-i}\}$$ then we say that $\Tilde{x}$ \emph{has $u$ significant digits}.
+  \end{definition}
+  \begin{prop}
+    Let $x\in\RR$ be such that $x=s(0.\alpha_1\alpha_2\cdots)_bb^q$ with $\alpha_1\ne0$ and $q_\text{min}\leq q\leq q_\text{max}$. Then, its floating-point representation in base $b$ and with $t$ digits satisfy:
+    \begin{align*}
+      \left|\text{fl}_T(x)-x\right|\leq b^{q-t}\quad           & \quad \left|\text{fl}_R(x)-x\right|\leq\frac{1}{2}b^{q-t}           \\
+      \left|\frac{\text{fl}_T(x)-x}{x}\right|\leq b^{1-t}\quad & \quad \left|\frac{\text{fl}_R(x)-x}{x}\right|\leq\frac{1}{2}b^{1-t}
+    \end{align*}
+  \end{prop}
+  \begin{definition}
+    The \emph{machine epsilon $\epsilon$} is defined as: $$\epsilon:=\min\{\varepsilon>0:\text{fl}(1+\varepsilon)\ne 1\}$$
+  \end{definition}
+  \begin{prop}
+    For a machine working by truncation, $\epsilon=b^{1-t}$. For a machine working by rounding, $\epsilon=\frac{1}{2}b^{1-t}$.
+  \end{prop}
+  \subsubsection{Propagation of errors}
+  \begin{prop}[Propagation of absolute errors]
+    Let $f:\RR^n\rightarrow\RR$ be a function of class $\mathcal{C}^2$. If $\Delta x_j$ is the absolute error of the variable $x_j$ and $\Delta f(x)$ is the absolute error of the function $f$ evaluated at the point $x=(x_1,\ldots,x_n)$, we have: $$|\Delta f(x)|\lesssim\sum_{j=1}^n\left|\frac{\partial f}{\partial x_j}(x)\right||\Delta x_j|\footnote{The symbol $\lesssim$ means that we are omitting terms of order $\Delta x_j\Delta x_k$ and higher.}$$ The coefficients $\left|\frac{\partial f}{\partial x_j}(x)\right|$ are called \emph{absolute condition numbers} of the problem.
+  \end{prop}
+  \begin{prop}[Propagation of relative errors]
+    Let $f:\RR^n\rightarrow\RR$ be a function of class $\mathcal{C}^2$. If $\delta x_j$ is the relative error of the variable $x_j$ and $\delta f(x)$ is the relative error of the function $f$ evaluated at the point $x=(x_1,\ldots,x_n)$, we have: $$|\delta f(x)|\lesssim\sum_{j=1}^n\frac{\left|\frac{\partial f}{\partial x_j}(x)\right|\left|x_j\right|}{\left|f(x)\right|}|\delta x_j|$$ The coefficients $\frac{\left|\frac{\partial f}{\partial x_j}(x)\right|\left|x_j\right|}{\left|f(x)\right|}$ are called \emph{relative condition numbers} of the problem.
+  \end{prop}
+  \subsubsection{Numerical stability of algorithms}
+  \begin{definition}
+    An algorithm is said to be \emph{numerically stable} if  errors in the input lessen in significance as the algorithm executes, having little effect on the final output. On the other hand, an algorithm is said to be \emph{numerically unstable} if errors in the input cause a considerably larger error in the final output.
+  \end{definition}
+  \begin{definition}
+    A problem with a low condition number is said to be \emph{well-conditioned}. Conversely, a problem with a high condition number is said to be \emph{ill-conditioned}.
+  \end{definition}
+  \subsection{Zeros of functions}
+  \begin{definition}
+    Let $f:\RR\rightarrow\RR$ be a function. We say $\alpha$ is a \emph{zero} or a \emph{solution} to the equation $f(x)=0$ if $f(\alpha)=0$.
+  \end{definition}
+  \begin{definition}
+    Let $f:\RR\rightarrow\RR$ be a sufficiently differentiable function. We say $\alpha$ is a \emph{zero of multiplicity $m\in\NN$} if $$f(\alpha)=f'(\alpha)=\cdots=f^{(m-1)}(\alpha)=0\quad\text{and}\quad f^{(m)}(\alpha)\ne0$$ If $m=1$, the zero is called \emph{simple}; if $m=2$, \emph{double}; if $m=3$, \emph{triple}...
+  \end{definition}
+  \subsubsection{Root-finding methods}
+  For the following methods consider a continuous function $f:I\subseteq\RR\rightarrow\RR$ with an unknown zero $\alpha\in I$. Given $\varepsilon>0$, we want to approximate $\alpha$ with $\Tilde{\alpha}$ such that $|\alpha-\Tilde{\alpha}|<\varepsilon$.
+  \begin{method}[Bisection method]
+    Suppose $I=[a_0,b_0]$. For each step $n\geq 0$ of the algorithm we will approximate $\alpha$ by $$c_n=\frac{a_n+b_n}{2}$$ If $f(c_n)=0$ we are done. If not, let
+    $$[a_{n+1},b_{n+1}]=\left\{
+      \begin{array}{ccc}
+        [a_n,c_n]            & \text{if} & f(a_n)f(c_n)<0 \\
+        \left[c_n,b_n\right] & \text{if} & f(a_n)f(c_n)>0
+      \end{array}\right.$$
+    and iterate the process again\footnote{Note that bisection method only works for zeros of odd multiplicity.}. The length of the interval $[a_n,b_n]$ is $\frac{b_0-a_0}{2^n}$ and therefore: $$|\alpha-c_n|<\frac{b_0-a_0}{2^{n+1}}<\varepsilon\iff n>\frac{\log\left(\frac{b_0-a_0}{\varepsilon}\right)}{\log 2}-1$$
+  \end{method}
+  \begin{method}[\textit{Regula falsi} method]
+    Suppose $I=[a_0,b_0]$. For each step $n\geq 0$ of the algorithm we will approximate $\alpha$ by $$c_n=b_n-f(b_n)\frac{b_n-a_n}{f(b_n)-f(a_n)}=\frac{a_nf(b_n)-b_nf(a_n)}{f(b_n)-f(a_n)}$$ If $f(c_n)=0$ we are done. If not, let
+    $$[a_{n+1},b_{n+1}]=\left\{
+      \begin{array}{ccc}
+        [a_n,c_n]            & \text{if} & f(a_n)f(c_n)<0 \\
+        \left[c_n,b_n\right] & \text{if} & f(a_n)f(c_n)>0
+      \end{array}\right.$$
+    and iterate the process again.
+  \end{method}
+  \begin{method}[Secant method]
+    Suppose $I=\RR$ and that we have two different initial approximations $x_0$, $x_1$. Then, for each step $n\geq 0$ of the algorithm we obtain a new approximation $x_{n+2}$, given by: $$x_{n+2}=x_{n+1}-f(x_{n+1})\frac{x_{n+1}-x_n}{f(x_{n+1})-f(x_n)}$$
+  \end{method}
+  \begin{method}[Newton-Raphson method]
+    Suppose $I=\RR$, $f\in\mathcal{C}^1$ and that we have an initial approximation $x_0$. Then, for each step $n\geq 0$ we obtain a new approximation $x_{n+1}$, given by: $$x_{n+1}=x_n-\frac{f(x_n)}{f'(x_n)}$$
+  \end{method}
+  \begin{method}[Newton-Raphson modified method]
+    Suppose $I=\RR$, $f\in\mathcal{C}^1$ and that we have an initial approximation $x_0$ of a zero $\alpha$ of multiplicity $m$. Then, for each step $n\geq 0$ we obtain a new approximation $x_{n+1}$, given by: $$x_{n+1}=x_n-m\frac{f(x_n)}{f'(x_n)}$$
+  \end{method}
+  \begin{method}[Chebyshev method]
+    Suppose $I=\RR$, $f\in\mathcal{C}^2$ and that we have an initial approximation $x_0$. Then, for each step $n\geq 0$ we obtain a new approximation $x_{n+1}$, given by: $$x_{n+1}=x_n-\frac{f(x_n)}{f'(x_n)}-\frac{1}{2}\frac{{f(x_n)}^2f''(x_n)}{{f'(x_n)}^3}$$
+  \end{method}
+  \subsubsection{Fixed-point iterations}
+  \begin{definition}
+    Let $g:[a,b]\rightarrow[a,b]\subset\RR$ be a function. A point $\alpha\in[a,b]$ is \emph{$n$-periodic} if $g^n(\alpha)=\alpha$ and $g^j(\alpha)\ne\alpha$ for $j=1,\ldots,n-1$\footnote{Note that 1-periodic points are the fixed points of $f$.}.
+  \end{definition}
+  \begin{definition}
+    Let $(X,d)$ and $(Y,d')$  be metric spaces and $f:X\rightarrow Y$ be a function. We say that $f$ is a \emph{contraction} if there exists $0\leq k<1$ such that: $$d'(f(x),f(y))\leq kd(x,y)\qquad\forall x\in X,y\in Y$$
+  \end{definition}
+  \begin{theorem}[Fixed-point theorem]
+    Let $(X,d)$ be a complete metric space and $g:X\rightarrow X$ be a contraction\footnote{Recall \cref{FOSV_metric,FOSV_complete}.}. Then, $g$ has a unique fixed point $\alpha\in X$ and for every $x_0\in X$, $$\lim_{n\to\infty}x_n=\alpha,\quad\text{where }x_n=g(x_{n-1})\quad\forall n\in\NN$$
+  \end{theorem}
+  \begin{prop}
+    Let $(X,d)$ be a metric space and $g:X\rightarrow X$ be a contraction of constant $k$. Then, if we want to approximate a fixed point $\alpha$ by the iteration $x_n=g(x_{n-1})$, we have:
+    \begin{align*}
+      d(x_n,\alpha) & \leq\frac{k^n}{1-k}d(x_1,x_0)\quad   & \text{(a priori estimation)}     \\
+      d(x_n,\alpha) & \leq\frac{k}{1-k}d(x_n,x_{n-1})\quad & \text{(a posteriori estimation)}
+    \end{align*}
+  \end{prop}
+  \begin{corollary}
+    Let $g:\RR\rightarrow\RR$ be a function of class $\mathcal{C}^1$. Suppose $\alpha$ is a fixed point of $g$ and $|g'(\alpha)|<1$. Then, there exists $\varepsilon>0$ and $I_\varepsilon:=[\alpha-\varepsilon,\alpha+\varepsilon]$ such that $g(I_\varepsilon)\subseteq I_\varepsilon$ and $g$ is a contraction on $I_\varepsilon$. In particular, if $x_0\in I_\varepsilon$, the iteration $x_{n+1}=g(x_n)$ converges to $\alpha$.
+  \end{corollary}
+  \begin{definition}
+    Let $g:\RR\rightarrow\RR$ be a function of class $\mathcal{C}^1$ and $\alpha$ be a fixed point of $g$. We say $\alpha$ is an \emph{attractor fixed point} if $|g'(\alpha)|<1$. In this case, any iteration $x_{n+1}=g(x_n)$ in $I_\varepsilon$ converges to $\alpha$. If $|g'(\alpha)|>1$, we say $\alpha$ is a \emph{repulsor fixed point}. In this case, $\forall x_0\in I_\varepsilon$ the iteration $x_{n+1}=g(x_n)$ doesn't converge to $\alpha$.
+  \end{definition}
+  \begin{center}
+    \includestandalone[mode=image|tex,width=0.49\linewidth]{Images/cobweb1}\hfill
+    \includestandalone[mode=image|tex,width=0.49\linewidth]{Images/cobweb2}\\
+    \vspace{0.02\linewidth}
+    \includestandalone[mode=image|tex,width=0.49\linewidth]{Images/cobweb3}\hfill
+    \includestandalone[mode=image|tex,width=0.49\linewidth]{Images/cobweb4}
+    \captionof{figure}{Cobweb diagrams. In the figures at the top, $\alpha$ is a attractor point, that is, $|g'(\alpha)|<1$. More precisely, the figure at the top left occurs when $-1<g'(\alpha)\leq0$ and the figure at the top right when $0\leq g'(\alpha)<1$. In the figure at bottom left, $\alpha$ is a repulsor point. Finally, in the figure at bottom right the iteration $x_{n+1}=g(x_n)$ has no limit. It is said to have a \emph{chaotic behavior}.}
+  \end{center}
+  \subsubsection{Order of convergence}
+  \begin{definition}[Order of convergence]
+    Let $(x_n)$ be a sequence of real numbers that converges to $\alpha\in\RR$. We say $(x_n)$ has \emph{order of convergence} $p\in\RR_{>0}$ if exists $C>0$ such that: $$\lim_{n\to\infty}\frac{|x_{n+1}-\alpha|}{|x_n-\alpha|^p}=C$$ The constant $C$ is called \emph{asymptotic error constant}. For the case $p=1$, we need $C<1$. In this case the convergence is called \emph{linear convergence}; for $p=2$, is called \emph{quadratic convergence}; for $p=3$, \emph{cubic convergence}... If it's satisfied that $$\lim_{n\to\infty}\frac{|x_{n+1}-\alpha|}{|x_n-\alpha|^p}=0$$ for some $p\in\RR_{>0}$, we say the sequence has \emph{order of convergence at least $p$}.
+  \end{definition}
+  \begin{theorem}
+    Let $g:\RR\rightarrow\RR$ be a function of class $\mathcal{C}^p$ and let $\alpha$ be a fixed point of $g$. Suppose $$g'(\alpha)=g''(\alpha)=\cdots=g^{(p-1)}(\alpha)=0$$ with $|g'(\alpha)|<1$ if $p=1$. Then, the iteration $x_{n+1}=g(x_n)$, with $x_0$ sufficiently close to $\alpha$, has order of convergence at least $p$. If, moreover, $g^{(p)}(\alpha)\ne0$, then the previous iteration has order of convergence $p$ with asymptotic error constant $C=\frac{|g^{(p)}(\alpha)|}{p!}$.
+  \end{theorem}
+  \begin{theorem}
+    Let $f:\RR\rightarrow\RR$ be a function of class $\mathcal{C}^3$ and $\alpha$ be a simple zero of $f$. If $f''(\alpha)\ne0$, then Newton-Raphson method for finding $\alpha$ has quadratic convergence with asymptotic error constant $C=\frac{1}{2}\left|\frac{f''(\alpha)}{f'(\alpha)}\right|$.\par If $f\in\mathcal{C}^{m+2}$, and $\alpha$ is a zero of multiplicity $m>1$, then Newton-Raphson method has linear convergence but Newton-Raphson modified method has at least quadratic convergence.
+  \end{theorem}
+  \begin{theorem}
+    Let $f:\RR\rightarrow\RR$ be a function of class $\mathcal{C}^3$ and let $\alpha$ be a simple zero of $f$. Then, Chebyshev's method for finding $\alpha$ has at least cubic convergence.
+  \end{theorem}
+  \begin{definition}
+    We define the \emph{computational efficiency} of an algorithm as a function $E(p,t)$, where $t$ is the time taken for each iteration of the method and $p$ is the order of convergence of the method. $E(p,t)$ must satisfy the following properties:
+    \begin{enumerate}
+      \item $E(p,t)$ is increasing with respect to the variable $p$ and decreasing with respect to $t$.
+      \item $E(p,t)=E(p^m,mt)$ $\forall m\in\RR$.
+    \end{enumerate}
+    Examples of such functions are the following: $$E(p,t)=\frac{\log p}{t}\qquad E(p,t)=p^{1/t}$$
+  \end{definition}
+  \subsubsection{Sequence acceleration}
+  \begin{method}[Aitken's $\Delta^2$ method]
+    Let $(x_n)$ be a sequence of real numbers. We denote:
+    \begin{gather*}
+      \Delta x_n:=x_{n+1}-x_n\\
+      \Delta^2 x_n:=\Delta x_{n+1}-\Delta x_n=x_{n+2}-2x_{n+1}+x_n
+    \end{gather*}
+    \emph{Aitken's $\Delta^2$ method} is the transformation of the sequence $(x_n)$ into a sequence $y_n$, defined as: $$y_n:=x_n-\frac{{(\Delta x_n)}^2}{\Delta^2 x_n}=x_n-\frac{{(x_{n+1}-x_n)}^2}{x_{n+2}-2x_{n+1}+x_n}$$ with $y_0=x_0$.
+  \end{method}
+  \begin{theorem}
+    Let $(x_n)$ be a sequence of real numbers such that $\displaystyle\lim_{n\to\infty}x_n=\alpha$, $x_n\ne\alpha$ $\forall n\in\NN$ and $\exists C$, $|C|<1$, satisfying $$x_{n+1}-\alpha=(C+\delta_n)(x_n-\alpha)\quad\text{with }\lim_{n\to\infty}\delta_n=0$$ Then, the sequence $(y_n)$ obtained from Aitken's $\Delta^2$ process is well-defined and $$\lim_{n\to\infty}\frac{y_n-\alpha}{x_n-\alpha}=0\footnote{This means that Aitken's $\Delta^2$ method produces an acceleration of the convergence of the sequence $(x_n)$.}$$
+  \end{theorem}
+  \begin{method}[Steffensen's method]
+    Let $g:\RR\rightarrow\RR$ be a continuous function and suppose we have an iterative method $x_{n+1}=g(x_n)$. Then, for each step $n$ we can consider a new iteration $y_{n+1}$, with $y_0=x_0$, given by: $$y_{n+1}=y_n-\frac{{\left(g(y_n)-y_n\right)}^2}{g(g(y_n))-2g(y_n)+y_n}$$
+  \end{method}
+  \begin{prop}
+    Let $f:\RR\rightarrow\RR$ be a function of class $\mathcal{C}^2$ and $\alpha$ be a simple zero of $f$. Then, Steffensen's method for finding $\alpha$ has at least quadratic convergence\footnote{Note that the advantage of Steffensen's method over Newton-Raphson method is that in the former we don't need the differentiability of the function whereas in the latter we do.}.
+  \end{prop}
+  \subsubsection{Zeros of polynomials}
+  \begin{lemma}
+    Let $p(z)=a_0+a_1z+\cdots+a_nz^n\in\CC [x]$ with $a_n\ne 0$. We define $$\lambda:=\max\left\{\left|\frac{a_i}{a_n}\right|:i=0,1,\ldots,n-1\right\}$$ Then, if $p(\alpha)=0$ for some $\alpha\in\CC $, $|\alpha|\leq\lambda+1$.
+  \end{lemma}
+  \begin{definition}[Strum's sequence]
+    Let $(f_i)$, $i=0,\ldots,n$, be a sequence of continuous functions defined on $[a,b]\subset\RR$ and $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^1$ such that $f(a)f(b)\ne 0$. We say $(f_n)$ is a \emph{Sturm's sequence} if:
+    \begin{enumerate}
+      \item $f_0=f$.
+      \item If $\alpha\in[a,b]$ satisfies $f_0(\alpha)=0\implies f_0'(\alpha)f_1(\alpha)>0$.
+      \item For $i=1,\ldots,n-1$, if $\alpha\in[a,b]$ satisfies $f_i(\alpha)=0\implies f_{i-1}(\alpha)f_{i+1}(\alpha)<0$.
+      \item $f_n(x)\ne0$ $\forall x\in[a,b]$.
+    \end{enumerate}
+  \end{definition}
+  \begin{definition}
+    Let $(a_i)$, $i=0,\ldots,n$, be a sequence. We define $\nu(a_i)$ as the number of sign variations of the sequence $$\{a_0,a_1,\ldots,a_n\}$$ without taking into account null values.
+  \end{definition}
+  \begin{theorem}[Sturm's theorem]
+    Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^1$ such that $f(a)f(b)\ne 0$ and with a finite number of zeros. Let $(f_i)$, $i=0,\ldots,n$, be a Sturm sequence defined on $[a,b]$. Then, the number of zeros of $f$ on $[a,b]$ is $$\nu\left(f_i(a)\right)-\nu\left(f_i(b)\right)$$
+  \end{theorem}
+  \begin{lemma}
+    Let $p\in\CC [x]$ be a polynomial. Then, the polynomial $\displaystyle q=\frac{p}{\gcd(p,p')}$ has the same roots as $p$ but all of them are simple.
+  \end{lemma}
+  \begin{prop}
+    Let $p\in\RR[x]$ be a polynomial with $\deg p=m$. We define $\displaystyle f_0=\frac{p}{\gcd(p,p')}$ and $f_1=f_0'$. If $\deg f_0=n$, then for $i=0,1,\ldots,n-2$, we define $f_{i+2}$ as: $$f_i(x)=q_{i+1}(x)f_{i+1}(x)-f_{i+2}(x)$$ (similarly to the euclidean division between $f_i$ and $f_{i+1}$). Then, $f_n$ is constant and hence the sequence $(f_i)$, $i=0,\ldots,n$, is a Sturm sequence.
+  \end{prop}
+  \begin{theorem}[Budan-Fourier theorem]
+    Let $p\in\RR[x]$ be a polynomial with $\deg p=n$. Consider the sequence $(p^{(i)})$, $i=0,\ldots,n$. If $p(a)p(b)\ne 0$, the number of zeros of $p$ on $[a,b]$ is: $$\nu\left(p^{(i)}(a)\right)-\nu\left(p^{(i)}(b)\right)-2k,\quad\text{for some }k\in\NN\cup\{0\}$$
+  \end{theorem}
+  \begin{corollary}[Descartes' rule of signs]
+    Let $p=a_0+a_1x+\cdots+a_nx^n\in\RR[x]$ be a polynomial. If $p(0)\ne 0$, the number of zeros of $p$ on $[0,\infty)$ is: $$\nu(a_i)-2k,\quad\text{for some }k\in\NN\cup\{0\}\footnote{Note that making the change of variable $t=-x$ one can obtain the number of zeros on $(-\infty,0]$ of $p$ by considering the polynomial $p(t)$.}$$
+  \end{corollary}
+  \begin{theorem}[Gershgorin circle theorem]
+    Let $A=(a_{ij})\in\mathcal{M}_n(\CC )$ be a complex matrix and $\lambda$ be an eigenvalue of $A$. For all $i,j\in\{1,2,\ldots,n\}$ we define:
+    \begin{gather*}
+      r_i=\sum_{\substack{k=1\\k\ne i}}^n|a_{ik}|\qquad R_i=\{z\in\CC :|z-a_{ii}|\leq r_i\}\\
+      c_j=\sum_{\substack{k=1\\k\ne j}}^n|a_{kj}|\qquad C_j=\{z\in\CC :|z-a_{jj}|\leq c_j\}
+    \end{gather*}
+    Then, $\lambda\in\bigcup_{i=1}^nR_i$ and $\lambda\in\bigcup_{j=1}^nC_j$. Moreover in each connected component of $\bigcup_{i=1}^nR_i$ or $\bigcup_{j=1}^nC_j$ there are as many eigenvalues (taking into account the multiplicity) as disks $R_i$ or $C_j$, respectively.
+  \end{theorem}
+  \begin{corollary}
+    Let $p(z)=a_0+a_1z+\cdots+a_nz^n+z^{n+1}\in\CC [x]$. We define
+    \begin{gather*}
+      r=\sum_{i=1}^{n-1}|a_i|\quad c=\max\{|a_0|,|a_1|+1,\ldots,|a_{n-1}|+1\}
+    \end{gather*}
+    Then, if $p(\alpha)=0$ for some $\alpha\in\CC $, $$\alpha\in(B(0,1)\cup B(-a_n,r))\cap(B(-a_n,1)\cup B(0,c))$$
+  \end{corollary}
+  \subsection{Interpolation}
+  \begin{definition}
+    We denote by $\Pi_n$ the \emph{vector space of polynomials with real coefficients and degree less than or equal to $n$}.
+  \end{definition}
+  \begin{definition}
+    Suppose we have a family of real valued functions $\mathfrak{C}$ and a set of points $\{(x_i,y_i)\}_{i=0}^n:=\{(x_i,y_i)\in\RR^2:i=0,\ldots,n\text{ and }x_j\ne x_k\iff j\ne k\}$. These points $\{(x_i,y_i)\}_{i=0}^n$ are called \emph{support points}. The \emph{interpolation problem} consists in finding a function $f\in\mathfrak{C}$ such that $f(x_i)=y_i$ for $i=0,\ldots,n$\footnote{Types of interpolation are for example polynomial interpolation, trigonometric interpolation, Padé interpolation, Hermite interpolation and spline interpolation.}.
+  \end{definition}
+  \subsubsection{Polynomial interpolation}
+  \begin{definition}
+    Given a set of support points $\{(x_i,y_i)\}_{i=0}^n$, \emph{Lagrange's interpolation problem} consists in finding a polynomial $p_n\in\Pi_n$ such that $p_n(x_i)=y_i$ for $i=0,1,\ldots,n$.
+  \end{definition}
+  \begin{definition}
+    Let $\{(x_i,y_i)\}_{i=0}^n$ be a set of support points. We define $\omega_n(x)\in\RR[x]$ as: $$\omega_n(x)=\prod_{i=0}^n(x-x_i)$$ We define \emph{Lagrange basis polynomials} $\ell_i(x)\in\RR[x]$ as: $$\ell_i(x)=\frac{\omega_n(x)}{(x-x_i)\omega_n(x_i)}=\prod_{\substack{j=0\\j\ne i}}^n\frac{x-x_j}{x_i-x_j}$$
+  \end{definition}
+  \begin{prop}
+    Let $\{(x_i,y_i)\}_{i=0}^n$ be a set of support points. Then, Lagrange's interpolation problem has a unique solution and this is: $$p_n(x)=\sum_{i=0}^ny_i\ell_i(x)$$
+  \end{prop}
+  \begin{method}[Neville's algorithm]
+    Let $\{(x_i,y_i)\}_{i=0}^n$ be a set of support points, $\{i_0,\ldots,i_k\}\subset\{0,\ldots,n\}$ and $P_{i_0,\ldots,i_k}(x)\in\Pi_k$ be such that $P_{i_0,\ldots,i_k}(x_{i_j}) = y_{i_j}$ for $j=0,\ldots,k$. Then, it is satisfied that:
+    \begin{enumerate}
+      \item $P_i(x)=y_i$.
+      \item $P_{i_0,\ldots,i_k}(x)=\frac{\begin{vmatrix}
+                P_{i_1,\ldots,i_k}(x)     & x-x_{i_k} \\
+                P_{i_0,\ldots,i_{k-1}}(x) & x-x_{i_0}
+              \end{vmatrix}}{x_{i_k}-x_{i_0}}$.
+    \end{enumerate}
+  \end{method}
+  \begin{definition}
+    Let $f:\RR\rightarrow\RR$ be a function and $\{x_i\}_{i=0}^n\subset\RR$ be pairwise distinct points. We define the \emph{divided difference} of order $k$ of $f$ applied to $\{x_i\}_{i=0}^k$, denoted by $f[x_0,\ldots,x_k]$, as the coefficient of $x^k$ of the interpolating polynomial with support points $\{(x_i,f(x_i))\}_{i=0}^k$.
+  \end{definition}
+  \begin{prop}
+    Let $f:\RR\rightarrow\RR$ be a function and $\{x_i\}_{i=0}^n\subset\RR$ be pairwise distinct points. Lagrange interpolating polynomial with support points $\{(x_i,f(x_i))\}_{i=0}^n$ is: $$p_n(x)=f[x_0]+\sum_{j=1}^nf[x_0,\ldots,x_j]\omega_{j-1}(x)$$
+  \end{prop}
+  \begin{method}[Newton's divided differences\\method]
+    Let $f:\RR\rightarrow\RR$ be a function. For $x\in\RR$, we have $f[x]=f(x)$. And if $\{x_i\}_{i=0}^n\subset\RR$ are different points, then $$f[x_0,\ldots,x_n]=\frac{f[x_1,\ldots,x_n]-f[x_0,\ldots,x_{n-1}]}{x_n-x_0}$$
+  \end{method}
+  \begin{theorem}
+    Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^{n+1}$, $\{x_i\}_{i=0}^n\subset\RR$ be pairwise distinct points and $p_n\in\RR[x]$ be the interpolating polynomial with support points $\{(x_i,f(x_i))\}_{i=0}^n$. Then, $\forall x\in[a,b]$, $$f(x)-p_n(x)=\frac{f^{(n+1)}(\xi_x)}{(n+1)!}\omega_n(x)$$ where $\xi_x\in\langle x_0,\ldots,x_n,x\rangle$\footnote{The interval $\langle a_1,\ldots,a_k\rangle$ is defined as $\langle a_1,\ldots,a_k\rangle:=(\min(a_1,\ldots,a_k),\max(a_1,\ldots,a_k))$.}.
+  \end{theorem}
+  \begin{lemma}
+    Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^{n+1}$ and $\{x_i\}_{i=0}^n\subset\RR$ be pairwise distinct points. Then: $\exists\xi\in\langle x_0,\ldots,x_n\rangle$ such that: $$f[x_0,\ldots,x_n]=\frac{f^{(n)}(\xi)}{n!}$$
+  \end{lemma}
+  \begin{prop}
+    Let $f:\RR\rightarrow\RR$ be a function of class $\mathcal{C}^{n+1}$, $\{x_i\}_{i=0}^n\subset\RR$ be pairwise distinct points and $\sigma\in \text{S}_n$. Then, $$f[x_0,\ldots,x_n]=f[x_{\sigma(0)},\ldots,x_{\sigma(n)}]$$
+  \end{prop}
+  \begin{definition}
+    Let $\{(x_i,y_i)\}_{i=0}^n$ be support points. The points $\{x_i\}_{i=0}^n$ are \emph{equally-spaced} if $$x_i=x_0+ih,\quad\text{for }i=0,\ldots,n\text{ and with }h:=\frac{x_n-x_0}{n}$$
+  \end{definition}
+  \begin{prop}
+    Let $\{x_i\}_{i=0}^n\subset\RR$ be equally-spaced points such that $x_i=x_0+ih$, where $h=\frac{x_n-x_0}{n}$. Then:
+    $$\max\{|\omega_n(x)|:x\in[x_0,x_n]\}\leq\frac{h^{n+1}n!}{4}$$
+  \end{prop}
+  \begin{definition}
+    Let $f:[a,b]\rightarrow\RR$ be a function and $\{x_i\}_{i=0}^n\subset\RR$ be equally-spaced points. We define:
+    \begin{gather*}
+      \Delta f(x):=f(x+h)-f(x)\\
+      \Delta^{n+1}f(x):=\Delta(\Delta^nf(x))
+    \end{gather*}
+  \end{definition}
+  \begin{lemma}
+    Let $f:[a,b]\rightarrow\RR$ be a function and $\{x_i\}_{i=0}^n\subset\RR$ be equally-spaced points. Then: $$\Delta^nf(x_0)=n!h^nf[x_0,\ldots,x_n]$$
+  \end{lemma}
+  \begin{corollary}
+    Let $f\in\RR[x]$ with $\deg f=n$. Suppose we interpolate $f$ with equally-spaced nodes. Then, $\Delta^nf(x)\equiv\text{constant}$.
+  \end{corollary}
+  \subsubsection{Hermite interpolation}
+  \begin{definition}
+    Given sets of points $\{x_i\}_{i=0}^m\subset\RR$, $\{n_i\}_{i=0}^m\subset\NN$ and $\{y_i^{(k)}:k=0,\ldots,n_i-1\}_{i=0}^m\subset\RR$, \emph{Hermite interpolation problem} consists in finding a polynomial $h_n\in\Pi_n$ such that $\sum_{i=0}^mn_i=n+1$ and $$h_n^{(k)}(x_i)=y_i^{(k)}\text{ for }i=0,\ldots,m\text{ and }k=0,\ldots,n_i-1$$
+  \end{definition}
+  \begin{prop}
+    Hermite interpolation problem has a unique solution.
+  \end{prop}
+  \begin{definition}
+    Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^n$ and $\{x_i\}_{i=0}^n\subset\RR$ be points. We define $f[x_i,\overset{(n+1)}{\ldots},x_i]$ as: $$f[x_i,\overset{(n+1)}{\ldots},x_i]=\frac{f^{(n)}(x_i)}{n!}$$
+  \end{definition}
+  \begin{theorem}
+    Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^{n+1}$, $\{x_i\}_{i=0}^m\subset\RR$ be pairwise distinct points and $\{n_i\}_{i=0}^m\subset\NN$ be such that $\sum_{i=0}^mn_i=n+1$. Let $h_n$ be the Hermite interpolating polynomial of $f$ with nodes $\{x_i\}_{i=0}^m\subset\RR$, that is, $$h_n^{(k)}(x_i)=f^{(k)}(x_i)\text{ for }i=0,\ldots,m\text{ and }k=0,\ldots,n_i-1$$ Then, $\forall x\in[a,b]$ $\exists\xi_x\in\langle x_0,\ldots,x_n,x\rangle$ such that: $$f(x)-h_n(x)=\frac{f^{(n+1)}(\xi_x)}{(n+1)!}(x-x_0)^{n_0}\cdots(x-x_m)^{n_m}$$
+  \end{theorem}
+  \subsubsection{Spline interpolation}
+  \begin{center}
+    \begin{minipage}{\linewidth}
+      \centering
+      \includestandalone[mode=image|tex,width=0.95\linewidth]{Images/runge}
+      \captionof{figure}{Runge's phenomenon. In this case $f(x)=\frac{1}{1+25x^2}$. $p_5(x)$ is the 5th-order Lagrange interpolating polynomial with equally-spaced interpolating points; $p_9(x)$, the 9th-order Lagrange interpolating polynomial with equally-spaced interpolating points, and $p_{13}(x)$, the 13th-order Lagrange interpolating polynomial with equally-spaced interpolating points.}
+    \end{minipage}
+  \end{center}
+  \begin{definition}[Spline]
+    Let $\{(x_i,y_i)\}_{i=0}^n$ be support points of an interval $[a,b]$. A \emph{spline} of degree $p$ is a function $s:[a,b]\rightarrow\RR$ of class $\mathcal{C}^{p-1}$ satisfying: $$s|_{[x_i,x_{i+1}]}\in\RR[x]\quad\text{and}\quad\deg (s|_{[x_i,x_{i+1}]})=p$$ for $i=0,\ldots,n-1$ and $s(x_i)=y_i$ for $i=0,\ldots,n$. The most common case are splines of degree  $p=3$ or \emph{cubic splines}. In this case we can impose two more conditions on their definition in one of the following ways:
+    \begin{enumerate}
+      \item \emph{Natural cubic spline}: $$s''(x_0)=s''(x_n)=0$$
+      \item \emph{Cubic Hermite spline}: Given $y_0',y_n'\in\RR$, $$s'(x_0)=y_0',\quad s'(x_n)=y_n'$$
+      \item \emph{Cubic periodic spline}: $$s'(x_0)=s'(x_n),\quad s''(x_0)=s''(x_n)$$
+    \end{enumerate}
+  \end{definition}
+  \begin{definition}
+    Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^2$. We define the \emph{seminorm}\footnote{The term \emph{seminorm} has been used instead of \emph{norm} to emphasize that not all properties of a norm are satisfied with this definition.} of $f$ as: $$\|f\|^2=\int_a^b(f''(x))^2\dd x$$
+  \end{definition}
+  \begin{prop}
+    Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^2$ interpolating the support points $\{(x_i,y_i)\}_{i=0}^n\subset\RR^2$, $a\leq x_0<\cdots<x_n\leq b$. If $s$ a spline associated with $\{(x_i,y_i)\}_{i=0}^n$, then: $$\|f-s\|^2=\|f\|^2-\|s\|^2-2(f'-s)s''\Big|_{x_0}^{x_n}+2\sum_{i=1}^n(f-s)s'''\Big|_{x_{i-1}^+}^{x_i^-}$$
+  \end{prop}
+  \begin{theorem}
+    Let $f:[a,b]\rightarrow\RR$ a function of class $\mathcal{C}^2$ interpolating the support points $\{(x_i,y_i)\}_{i=0}^n\subset\RR^2$, $a\leq x_0<\cdots<x_n\leq b$. If $s$ is the natural cubic spline associated with $\{(x_i,y_i)\}_{i=0}^n$, then: $$\|s\|\leq\|f\|\footnote{We can interpret this result as the natural cubic spline being the configuration that require the least ``energy" to be ``constructed".}$$
+  \end{theorem}
+  \subsection{Numerical differentiation and integration}
+  \subsubsection{Differentiation}
+  \begin{theorem}[Intermediate value theorem]
+    Let $f:[a,b]\rightarrow\RR$ be a continuous function, $x_0,\ldots,x_n\in[a,b]$ and $\alpha_0,\ldots,\alpha_n\geq 0$. Then, $\exists\xi\in[a,b]$ such that: $$\sum_{i=0}^n\alpha_if(x_i)=\left(\sum_{i=0}^n\alpha_i\right)f(\xi)$$
+  \end{theorem}
+  \begin{theorem}[Forward and backward difference formula of order 1]
+    Let $f:\RR\rightarrow\RR$ be a function of class $\mathcal{C}^2$. Then, the forward difference formula of order 1 is: $$f'(a)=\frac{f(a+h)-f(a)}{h}-\frac{f''(\xi)}{2}h$$ where $\xi\in\langle a,a+h\rangle$. Analogously, the backward difference formula of order 1 is: $$f'(a)=\frac{f(a)-f(a-h)}{h}+\frac{f''(\eta)}{2}h$$ where $\eta\in\langle a-h,a\rangle$.
+  \end{theorem}
+  \begin{theorem}[Symmetric difference formula of order 1]
+    Let $f:\RR\rightarrow\RR$ be a function of class $\mathcal{C}^3$. Then, the symmetric difference formula of order 1 is: $$f'(a)=\frac{f(a+h)-f(a-h)}{2h}-\frac{f^{(3)}(\xi)}{6}h^2$$ where $\xi\in\langle a-h,a+h\rangle$.
+  \end{theorem}
+  \begin{theorem}[Symmetric difference formula of order 2]
+    Let $f:\RR\rightarrow\RR$ be a function of class $\mathcal{C}^4$. Then, the symmetric difference formula of order 2 is: $$f''(a)=\frac{f(a+h)-2f(a)+f(a-h)}{h^2}-\frac{f^{(4)}(\xi)}{12}h^2$$ where $\xi\in\langle a-h,a,a+h\rangle$.
+  \end{theorem}
+  \subsubsection{Richardson extrapolation}
+  \begin{theorem}[Richardson extrapolation]
+    Suppose we have a function $f$ that approximate a value $\alpha$ with an error that depends on a small quantity $h$. That is: $$\alpha=f(h)+a_1h^{k_1}+a_2h^{k_2}+\cdots$$ with $k_1<k_2<\cdots$ and $a_i$ are unknown constants. Given $q>0$, we define: $$D_1(h)=f(h)\quad\text{and}\quad D_{n+1}(h)=\frac{q^{k_n}D_n\left(h/q\right)-D_n(h)}{q^{k_n}-1}$$ And we can observe that $\alpha=D_{n+1}(h)+O(h^{k_{n+1}})$.
+  \end{theorem}
+  \subsubsection{Integration}
+  \begin{definition}
+    Let $f:[a,b]\rightarrow\RR$ be a continuous function, $\{x_i\}_{i=0}^n\subset[a,b]$ be a set of nodes and $p_n$ be the Lagrange interpolating polynomial with support points $\{(x_i,f(x_i))\}_{i=0}^n$. We define the \emph{quadrature formula} as: $$\int_a^bf(x)\dd x\approx\int_a^bp_n(x)\dd x$$
+  \end{definition}
+  \begin{lemma}
+    Let $f:[a,b]\rightarrow\RR$ be a continuous function $\{x_i\}_{i=0}^n\subset[a,b]$ be a set of nodes. Then: $$\int_a^bf(x)\dd x\approx\sum_{i=1}^na_if(x_i)\quad\text{where }a_i:=\int_a^b\ell_i(x)\dd x$$
+  \end{lemma}
+  \begin{definition}
+    The \emph{degree of precision} of a quadrature formula is the largest $m\in\NN$ such that the formula is exact for $x^k$ $\forall k=0,1,\ldots,m$.
+  \end{definition}
+  \begin{lemma}
+    Let $p\in\Pi_n$ be a polynomial and $\{x_i\}_{i=0}^n\subset[a,b]$ be a set of nodes. Then: $$\int_a^bp(x)\dd x=\sum_{i=0}^na_ip(x_i)$$ for some $a_i\in\RR$.
+  \end{lemma}
+  \subsubsection{Newton-Cotes formulas}
+  \begin{theorem}[Mean value theorem for integrals]
+    Let $f,g:[a,b]\rightarrow\RR$ be such that $f$ is continuous and $g$ integrable. Suppose that $g$ does not change the sign on $[a,b]$. Then, $\exists\xi\in[a,b]$ such that: $$\int_a^bf(x)g(x)\dd x=f(\xi)\int_a^bg(x)\dd x$$
+  \end{theorem}
+  \begin{theorem}[Closed Newton-Cotes Formulas]
+    Let $f:[a,b]\rightarrow\RR$ be a function and $\{x_i\}_{i=0}^n\subset[a,b]$ be a set of equally-spaced points. If $I=\int_a^bf(x)\dd x$ and $h=\frac{b-a}{n}$, then $\exists\xi\in[a,b]$ such that:
+    \begin{itemize}
+      \item If $n$ is even and $f\in\mathcal{C}^{n+2}$: $$I=\sum_{i=0}^na_if(x_i)+\frac{h^{n+3}f^{n+2}(\xi)}{(n+2)!}\int_0^nt\prod_{i=0}^n(t-i)\dd t$$
+      \item If $n$ is odd and $f\in\mathcal{C}^{n+1}$: $$I=\sum_{i=0}^na_if(x_i)+\frac{h^{n+2}f^{n+1}(\xi)}{(n+1)!}\int_0^n\prod_{i=0}^n(t-i)\dd t\footnote{Note that when $n$ is even, the degree of precision is $n + 1$, although the interpolation polynomial is of degree at most $n$. When $n$ is odd, the degree of precision is
+                only $n$.}$$
+    \end{itemize}
+  \end{theorem}
+  \begin{corollary}[Trapezoidal rule]
+    Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^2$. Then, $\exists\xi\in[a,b]$ such that: $$\int_a^bf(x)\dd x=\frac{h}{2}(f(a)+f(b))-\frac{f''(\xi)}{12}h^3$$ where $h=b-a$. This is the case $n=1$ of closed Newton-Cotes formulas.
+  \end{corollary}
+  \begin{corollary}[Simpson's rule]
+    Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^4$. Then, $\exists\xi\in[a,b]$ such that: $$\int_a^bf(x)\dd x=\frac{h}{3}\left(f(a)+4f\left(\frac{a+b}{2}\right)+f(b)\right)-\frac{f^{(4)}(\xi)}{90}h^5$$ where $h=\frac{b-a}{2}$. This is the case $n=2$ of closed Newton-Cotes formulas.
+  \end{corollary}
+  \begin{theorem}[Composite Trapezoidal rule]
+    Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^4$, $h=\frac{b-a}{n}$ and $x_j=a+jh$ for each $j=0,1,\ldots,n$. Then, $\exists\xi\in[a,b]$ such that:
+    \begin{multline*}
+      I=\int_a^bf(x)\dd x=\frac{h}{2}\left[f(a)+2\sum_{j=1}^{n-1}f(x_j)+f(b)\right]-\\-\frac{f''(\xi)(b-a)}{12}h^2
+    \end{multline*}
+    We denote by $T(f,a,b,h)$ the approximation of $I$ by trapezoidal rule.
+  \end{theorem}
+  \begin{theorem}[Composite Simpson's rule]
+    Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^4$, $n$ be an even number, $h=\frac{b-a}{n}$ and $x_j=a+jh$ for each $j=0,1,\ldots,n$. Then, $\exists\xi\in[a,b]$ such that:
+    \begin{multline*}
+      I=\int_a^bf(x)\dd x=\frac{h}{3}\left[f(a)+2\sum_{j=1}^{n/2-1}f(x_{2j})\right.+\\+\left.4\sum_{j=1}^{n/2}f(x_{2j-1})+f(b)\right]-\frac{f^{(4)}(\xi)(b-a)}{180}h^4
+    \end{multline*}
+    We denote by $S(f,a,b,h)$ the approximation of $I$ by Simpson's rule.
+  \end{theorem}
+  \subsubsection{Romberg method}
+  \begin{definition}
+    We define \emph{Bernoulli polynomials} $B_n(x)$ as $B_0(x)=1$, $B_1(x)=x-\frac{1}{2}$ and $$B_{k+1}'=(k+1)B_k\quad\text{for }k\geq 1$$ \emph{Bernoulli numbers} are $B_n=B_n(0)$, $\forall n\geq 0$\footnote{Exponential generating function of the sequence $(B_n)$ of Bernoulli numbers is $\displaystyle\frac{x}{\exp{x}-1}=\sum_{n=1}^\infty\frac{B_n}{n!}x^n$.}.
+  \end{definition}
+  \begin{theorem}[Euler-Maclaurin formula]
+    Let $f\in\mathcal{C}^{2m+2}([a,b])$ be a function. Then:
+    \begin{multline*}
+      T(f,a,b,h)=\int_a^bf(t)\dd t+\sum_{k=1}^m\frac{B_{2k}h^{2k}}{(2k)!}\left(f^{(2k-1)}(b)\right.-\\-\left.f^{(2k-1)}(a)\right)+\frac{(b-a)B_{2m+2}h^{2m+1}}{(2m+2)!}f^{(2m+2)}(\xi)
+    \end{multline*}
+    where $h=\frac{b-a}{n}$, $B_n$ are the Bernoulli numbers and $\xi\in[a,b]$.
+  \end{theorem}
+  \begin{theorem}[Romberg method]
+    Let $f\in\mathcal{C}^{2m+2}([a,b])$ be a function. Then, by Euler-Maclaurin formula, we obtain: $$T(f,a,b,h)=\int_a^bf(t)\dd t+\beta_1 h^2+\beta_2 h^4+\cdots$$ where $h=\frac{b-a}{n}$. For $n=1,2,\ldots$ we define: $$T_{n,1}=T\left(f,a,b,\frac{b-a}{2^n}\right)\quad T_{n,m+1}=\frac{4^mT_{n+1,m}-T_{n,m}}{4^m-1}$$ for $m\leq n$. Then, we can observe that: $$T_{n,m}=\int_a^bf(t)\dd t+O\left(\left(\frac{b-a}{2^n}\right)^{2m}\right)$$
+  \end{theorem}
+  \subsubsection{Orthogonal polynomials}
+  \begin{definition}
+    Let $f,g:[a,b]\rightarrow\RR$ be continuous function and $\omega(x):[a,b]\rightarrow\RR_{>0}$ be a weight function. The expression $$\langle f,g\rangle=\int_a^b\omega(x)f(x)g(x)\dd x$$ defines a positive semidefinite dot product in the vector space of bounded functions on $[a,b]$.
+  \end{definition}
+  \begin{definition}[Orthogonal polynomials]
+    Let $\mathfrak{P}=\{\phi_i(x)\in\RR[x]:\deg \phi_i(x)=i, i\in\NN\cup\{0\}\}$ be a family of polynomials and $\omega(x):[a,b]\rightarrow\RR_{>0}$ be a weight function. We say $\mathfrak{P}$ is \emph{orthogonal with respect to the weight $\omega(x)$} on an interval $[a,b]$ if $$\langle \phi_i,\phi_j\rangle=\int_a^b\omega(x)\phi_i(x)\phi_j(x)\dd x=0\iff i\ne j$$
+    Note that $\langle \phi_i,\phi_i\rangle>0$ for each $i\in\NN\cup\{0\}$.
+  \end{definition}
+  \begin{lemma}
+    We define $\mathfrak{P}_n$ as $\mathfrak{P}_n=\{\phi_i(x)\in\Pi_n:\deg\phi_i(x)=i\text{ and }\langle \phi_i,\phi_j\rangle=0\iff i\ne j,  i=0,\ldots,n\}$. Then, $\mathfrak{P}_n$ is an \emph{orthogonal basis} of $\Pi_n$.
+  \end{lemma}
+  \begin{lemma}
+    Let $\phi_k\in\mathfrak{P}_k$ and $q\in\Pi_n$. Then, $\langle q,\phi_k\rangle=0$ for each $k>n$.
+  \end{lemma}
+  \begin{lemma}
+    Let $\phi_n\in\mathfrak{P}_n$. Then, $\forall n\in\NN\cup\{0\}$, all roots of $\phi_n$ are real, simple and contained in the interval $(a,b)$, where the associated weight function $\omega(x)$ is defined.
+  \end{lemma}
+  \begin{theorem}[Existence of orthogonal polynomials]
+    For each $n\in\NN\cup\{0\}$ there exists a unique monic orthogonal polynomial $\phi_n$ with $\deg\phi_n=n$, associated with the weight function $\omega(x)$, defined by:
+    \begin{gather*}
+      \phi_0=1\quad\phi_1(x)=x-\alpha_0\\
+      \phi_{n+1}(x)=(x-\alpha_n)\phi_n(x)-\beta_n\phi_{n-1}(x)
+    \end{gather*}
+    with $\alpha_n=\frac{\langle\phi_n,x\phi_n\rangle}{\langle\phi_n,\phi_n\rangle}$ $\forall n\in\NN\cup\{0\}$ and $\beta_n=\frac{\langle\phi_n,\phi_n\rangle}{\langle\phi_{n-1},\phi_{n-1}\rangle}$ $\forall n\in\NN$.
+  \end{theorem}
+  \begin{definition}[Chebyshev polynomials]
+    \emph{Chebyshev polynomials} $T_n$ are the orthogonal polynomials defined on $[-1,1]$ with the weight $\omega(x)=\frac{1}{\sqrt{1-x^2}}$. These can be defined recursively as:
+    \begin{gather*}
+      T_0(x)=1\quad T_1(x)=x\\T_{n+1}(x)=2xT_n(x)-T_{n-1}(x)
+    \end{gather*}
+    for $n=1,2,\ldots$ Moreover $T_n(x)=\cos(n\arccos(x))$ which implies that the roots of $T_n(x)$ are: $$x_k=\cos\left(\frac{2k-1}{2n}\pi\right)\quad\text{for }k=1,\ldots,n$$
+  \end{definition}
+  \begin{definition}[Laguerre polynomials]
+    \emph{Laguerre polynomials} $L_n$ are the orthogonal polynomials defined on $[0,\infty)$ with the weight $\omega(x)=\exp{-x}$. These can be defined recursively as:
+    \begin{gather*}
+      L_0(x)=1\quad L_1(x)=1-x\\ L_{n+1}(x)=\frac{(2n+1-x)L_n(x)-nL_{n-1}(x)}{n+1}
+    \end{gather*}
+    for $n=1,2,\ldots$ The closed form of these polynomials is: $$L_n(x)=\sum_{k=0}^n\binom{n}{k}\frac{(-1)^k}{k!}x^k$$
+  \end{definition}
+  \begin{definition}[Legendre polynomials]
+    \emph{Legendre polynomials} $P_n$ are the orthogonal polynomials defined on $[-1,1]$ with the weight $\omega(x)=1$. These can be defined recursively as:
+    \begin{gather*}
+      P_0(x)=1\quad P_1(x)=x\\P_{n+1}(x)=\frac{(2n+1)xP_n(x)-nP_{n-1}(x)}{n+1}
+    \end{gather*}
+    for $n=1,2,\ldots$ The closed form of these polynomials is: $$P_n(x)=\frac{1}{2^n}\sum_{k=0}^n\binom{n}{k}^2(x-1)^{n-k}(x+1)^k$$
+  \end{definition}
+  \subsubsection{Gau\ss ian quadrature}
+  \begin{definition}
+    Let $f:[a,b]\rightarrow\RR$ be a function and $\omega(x):[a,b]\rightarrow\RR_{>0}$ be a weight function. Given a set of nodes $\{x_i\}_{i=1}^n\subset[a,b]$, the \emph{quadrature formula with weight $\omega(x)$} of a function $f$ is $$\int_a^b\omega(x)f(x)\dd x\approx\sum_{i=1}^n\omega_if(x_i)\quad\!\text{with }\omega_i=\int_a^b\omega(x)\ell_i(x)\dd x$$
+  \end{definition}
+  \begin{lemma}
+    Let $f:[a,b]\rightarrow\RR$ be a function and $\{x_i\}_{i=1}^n$ be the zeros of the orthogonal polynomial $\phi_n\in\mathfrak{P}_n$ with weight $\omega(x)$ on the interval $[a,b]$. Then, the formula $$\int_a^b\omega(x)f(x)\dd x\approx\sum_{i=1}^n\omega_if(x_i)\quad\!\text{with }\omega_i=\int_a^b\omega(x)\ell_i(x)\dd x$$ is exact for all polynomials in $\Pi_{2n-1}$.
+  \end{lemma}
+  \begin{prop}
+    Let $f:[a,b]\rightarrow\RR$ be a function and $\{x_i\}_{i=1}^n$ be the zeros of the orthogonal polynomial $\phi_n\in\mathfrak{P}_n$ with weight $\omega(x)$ on the interval $[a,b]$. Then, in the formula $$\int_a^b\omega(x)f(x)\dd x\approx\sum_{i=1}^n\omega_if(x_i)$$ the values $\omega_i$ are positive and real for $i=1,\ldots,n$.
+  \end{prop}
+  \begin{theorem}
+    Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^{2n}$ and $\{x_i\}_{i=1}^n$ be the zeros of the orthogonal polynomial $\phi_n\in\mathfrak{P}_n$ with weight $\omega(x)$ on the interval $[a,b]$. Then: $$\int_a^b\omega(x)f(x)\dd x-\sum_{i=1}^n\omega_if(x_i)=\frac{f^{2n}(\xi)}{(2n)!}\langle\phi_n,\phi_n\rangle$$ where $\xi\in[a,b]$.
+  \end{theorem}
+  \subsection{Numerical linear algebra}
+  \subsubsection{Triangular matrices}
+  \begin{definition}
+    A matrix $\vf{A}=(a_{ij})\in\mathcal{M}_n(\CC)$ is \emph{upper triangular} if $a_{ij}=0$ whenever $i>j$. That is, $\vf{A}$ is of the form:
+    $$\vf{A}=
+      \begin{pmatrix}
+        a_{11} & a_{12} & \cdots & a_{1n}     \\
+        0      & a_{22} & \ddots & \vdots     \\
+        \vdots & \ddots & \ddots & a_{(n-1)n} \\
+        0      & \cdots & 0      & a_{nn}
+      \end{pmatrix}
+    $$
+  \end{definition}
+  \begin{definition}
+    A matrix $\vf{A}=(a_{ij})\in\mathcal{M}_n(\CC)$ is \emph{lower triangular} if $a_{ij}=0$ whenever $j>i$. That is, $\vf{A}$ is of the form:
+    $$\vf{A}=
+      \begin{pmatrix}
+        a_{11} & 0      & \cdots     & 0      \\
+        a_{21} & a_{22} & \ddots     & \vdots \\
+        \vdots & \ddots & \ddots     & 0      \\
+        a_{n1} & \cdots & a_{n(n-1)} & a_{nn}
+      \end{pmatrix}
+    $$
+  \end{definition}
+  \begin{definition}
+    A linear system with a triangular matrix associated is called a \emph{triangular system}.
+  \end{definition}
+  \subsubsection{Matrix norms}
+  \begin{definition}
+    A \emph{matrix norm} on the vector space $\mathcal{M}_n(\RR)$ is a function $\|\cdot\|:\mathcal{M}_n(\RR)\rightarrow\RR$ satisfying all properties of a norm\footnote{See \cref{FOSV_norm}.} and that: $$\|\vf{A}\vf{B}\|\leq\|\vf{A}\|\|\vf{B}\|,\quad\forall \vf{A}\vf{B}\in\mathcal{M}_n(\RR)$$
+  \end{definition}
+  \begin{definition}
+    Let $\|\cdot\|_\alpha$ be a vector norm. We say a matrix norm $\|\cdot\|_\beta$ is \emph{compatible with} $\|\cdot\|_\alpha$ if $$\|\vf{A}\vf{v}\|_\alpha\leq\|\vf{A}\|_\beta\|\vf{v}\|_\alpha\quad\forall\vf{A}\in\mathcal{M}_n(\RR)\text{ and }\forall\vf{v}\in\RR^n$$
+  \end{definition}
+  \begin{definition}
+    Let $\|\cdot\|$ be a vector norm and $\vf{A}\in\mathcal{M}_n(\RR)$. We define a \emph{subordinated matrix norm} $\|\cdot\|$ as:
+    \begin{multline*}
+      \|\vf{A}\|=\max\{\|\vf{A}\vf{v}\|:\vf{v}\in\RR^n\text{ such that }\|\vf{v}\|=1\}=\\=\sup\left\{\frac{\|\vf{A}\vf{v}\|}{\|\vf{v}\|}:\vf{v}\in\RR^n\text{ such that }\vf{v}\ne 0\right\}
+    \end{multline*}
+  \end{definition}
+  \begin{lemma}
+    All subordinated matrix norms are compatible.
+  \end{lemma}
+  \begin{lemma}
+    For all subordinated matrix norm $\|\cdot\|$, we have $\|\vf{I}\|=1$.
+  \end{lemma}
+  \begin{definition}
+    Let $\vf{A}\in\mathcal{M}_n(\CC)$ be a matrix. We define the \emph{spectrum} $\sigma(\vf{A})$ of $\vf{A}$ as: $$\sigma(\vf{A})=\{\lambda\in\CC:\lambda\text{ is and eigenvalue of }\vf{A}\}$$
+  \end{definition}
+  \begin{definition}
+    Let $\vf{A}\in\mathcal{M}_n(\CC)$ be a matrix. We define the \emph{spectral radius} $\rho(\vf{A})$ of $\vf{A}$ as: $$\rho(\vf{A})=\max\{|\lambda|\in\CC:\lambda\in\sigma(\vf{A})\}$$
+  \end{definition}
+  \begin{prop}
+    Let $\vf{v}=(v_1,\ldots,v_n)\in\RR^n$ and $\vf{A}=(a_{ij})\in\mathcal{M}_n(\RR)$. Given the vector norms:
+    \begin{gather*}
+      \|\vf{v}\|_1=\sum_{i=1}^n|v_i|\\
+      \|\vf{v}\|_2=\sqrt{\sum_{i=1}^nv_i^2}\\
+      \|\vf{v}\|_\infty=\max\{|v_i|:i=1,\ldots,n\}
+    \end{gather*}
+    their subordinated matrix norms are respectively:
+    \begin{gather*}
+      \|\vf{A}\|_1=\max\left\{\sum_{i=1}^n|a_{ij}|:j=1,\ldots,n\right\}\\
+      \|\vf{A}\|_2=\sqrt{\rho(\transpose{A}\vf{A})}\\
+      \|\vf{A}\|_\infty=\max\left\{\sum_{j=1}^n|a_{ij}|:i=1,\ldots,n\right\}
+    \end{gather*}
+  \end{prop}
+  \begin{prop}[Properties of matrix norms]
+    \hfill
+    \begin{enumerate}
+      \item Matrix norms are continuous functions.
+      \item Given two matrix norms $\|\cdot\|_\alpha$ and $\|\cdot\|_\beta$, there exist $\ell, L\in\RR_{>0}$ such that: $$\ell \|\vf{A}\|_\beta\leq\|\vf{A}\|_\alpha\leq L\|\vf{A}\|_\beta\quad\forall\vf{A}\in\mathcal{M}_n(\RR)$$
+      \item For all subordinated matrix norm $\|\cdot\|$ and for all $\vf{A}\in\mathcal{M}_n(\RR)$: $$\rho(\vf{A})\leq\|\vf{A}\|$$
+      \item Given a matrix $\vf{A}\in\mathcal{M}_n(\RR)$ and $\varepsilon>0$, there exist a matrix norm $\|\cdot\|_{\vf{A},\varepsilon}$ such that: $$\rho(\vf{A})\leq\|\vf{A}\|_{\vf{A},\varepsilon}\leq\rho(\vf{A})+\varepsilon$$
+    \end{enumerate}
+  \end{prop}
+  \begin{definition}
+    A matrix $\vf{A}\in\mathcal{M}_n(\RR)$ is \emph{convergent} if $\displaystyle\lim_{k\to\infty}\vf{A}^k=\vf{0}$.
+  \end{definition}
+  \begin{theorem}
+    Let $\vf{A}\in\mathcal{M}_n(\RR)$. The following statements are equivalent:
+    \begin{enumerate}
+      \item $\vf{A}$ is convergent.
+      \item $\displaystyle\lim_{k\to\infty}\|\vf{A}^k\|=\vf{0}$ for some matrix norm $\|\cdot\|$.
+      \item $\rho(\vf{A})<1$.
+    \end{enumerate}
+  \end{theorem}
+  \begin{corollary}
+    Let $\vf{A}\in\mathcal{M}_n(\RR)$. If there is a matrix norm $\|\cdot\|$ satisfying $\|\vf{A}\|<1$, then $\vf{A}$ converges.
+  \end{corollary}
+  \begin{theorem}
+    Let $\vf{A}\in\mathcal{M}_n(\RR)$.
+    \begin{enumerate}
+      \item The series $\sum_{k=0}^\infty \vf{A}^k$ converges if and only if $\vf{A}$ converge.
+      \item If $\vf{A}$ is convergent, then $\vf{I}_n-\vf{A}$ is non-singular and moreover: $$(\vf{I}_n-\vf{A})^{-1}=\sum_{k=0}^\infty\vf{A}^k$$
+    \end{enumerate}
+  \end{theorem}
+  \begin{corollary}
+    Let $\vf{A}\in\mathcal{M}_n(\RR)$. If there is a subordinated matrix norm $\|\cdot\|$ satisfying $\|\vf{A}\|<1$, then $\vf{I}_n-\vf{A}$ is non-singular and moreover: $$\frac{1}{1+\|\vf{A}\|}\leq\|(\vf{I}_n-\vf{A})^{-1}\|\leq\frac{1}{1-\|\vf{A}\|}$$
+  \end{corollary}
+  \subsubsection{Matrix condition number}
+  \begin{definition}
+    Let $\vf{A}\in\GL_n(\RR)$. We define the \emph{condition number} $\kappa(\vf{A})$ of $\vf{A}$ as: $$\kappa(\vf{A})=\|\vf{A}\|\|\vf{A}^{-1}\|$$
+  \end{definition}
+  \begin{theorem}
+    Let $\vf{A}\in\GL_n(\RR)$, $\vf{b}\in\RR^n$, $\vf{A}\vf{x}=\vf{b}$ be a system of linear equations and $\|\cdot\|$ be a subordinated matrix norm. Suppose we know $\vf{A}$ and $\vf{b}$ with absolute errors $\Delta\vf{A}$ and $\Delta\vf{b}$, respectively. Therefore, we actually have to solve the system: $$(\vf{A}+\Delta\vf{A})(\vf{x}+\Delta \vf{x})=(\vf{b}+\Delta\vf{b})$$ If $\|\Delta\vf{A}\|<\frac{1}{\|\vf{A}^{-1}\|}$, then: $$\frac{\|\Delta \vf{x}\|}{\|\vf{x}\|}\leq\frac{\kappa(\vf{A})}{1-\norm{\vf{A}^{-1}}\norm{\Delta\vf{A}}}\left(\frac{\norm{\Delta\vf{b}}}{\norm{\vf{b}}}+\frac{\norm{\Delta\vf{A}}}{\norm{\vf{A}}}\right)$$
+  \end{theorem}
+  \begin{theorem}
+    Let $\vf{A}\in\GL_n(\RR)$ and $\|\cdot\|$ be a subordinated matrix norm. Then:
+    \begin{enumerate}
+      \item $\kappa(\vf{A})\geq\rho(\vf{A})\rho(\vf{A}^{-1})$.
+      \item If $\vf{b},\vf{z}\in\RR^n$ are such that $\vf{A}\vf{z}=\vf{b}$, then: $$\norm{\vf{A}^{-1}}\geq\frac{\norm{\vf{z}}}{\norm{\vf{b}}}$$
+      \item If $\vf{B}\in\mathcal{M}_n(\RR)$ is a singular matrix, then: $$\kappa(\vf{A})\geq\frac{\norm{\vf{A}}}{\norm{\vf{A}-\vf{B}}}$$
+    \end{enumerate}
+  \end{theorem}
+  \subsubsection{Iterative methods}
+  \begin{definition}
+    Suppose we want to solve the system $\vf{A}\vf{x}=\vf{b}$, where $\vf{A}\in\mathcal{M}_n(\RR)$ and $\vf{b}\in\RR^n$. We choose a matrix $\vf{N}\in\GL_n(\RR)$ and define $\vf{P}:=\vf{N}-\vf{A}$. Then: $$\vf{A}\vf{x}=\vf{b}\iff \vf{x}=\vf{N}^{-1}\vf{P}\vf{x}+\vf{N}^{-1}\vf{b}=:\vf{M}\vf{x}+\vf{N}^{-1}\vf{b}$$ The matrix $\vf{M}$ is called the \emph{iteration matrix}. This defines a fixed-point iteration in the following way:
+    \begin{equation*}
+      \left\{
+      \begin{array}{l}
+        \vf{x}^{(k+1)}=\vf{M}\vf{x}^{(k)}+\vf{N}^{-1}\vf{b} \\
+        \vf{x}^{(0)}\quad\text{(initial approximation)}
+      \end{array}\right.
+    \end{equation*}
+  \end{definition}
+  \begin{theorem}
+    The iterative method $\vf{x}^{(k+1)}=\vf{M}\vf{x}^{(k)}+\vf{N}^{-1}\vf{b}$ is convergent if and only if $\vf{M}$ is convergent and if and only if $\rho(\vf{M})<1$.
+  \end{theorem}
+  \begin{corollary}
+    If $\|\vf{M}\|<1$ for some matrix norm, then the iterative method $\vf{x}^{(k+1)}=\vf{M}\vf{x}^{(k)}+\vf{N}^{-1}\vf{b}$ is convergent.
+  \end{corollary}
+  \begin{definition}
+    We define the \emph{rate of convergence} $R$ of an iterative method $\vf{x}^{(k+1)}=\vf{M}\vf{x}^{(k)}+\vf{N}^{-1}\vf{b}$ as: $$R=-\log(\rho(\vf{M}))$$
+  \end{definition}
+  \begin{prop}
+    Let $\vf{x}^{(k+1)}=\vf{M}\vf{x}^{(k)}+\vf{N}^{-1}\vf{b}$ be an iterative method to approximate the solution $\vf{x}$ of a system of equations $\vf{A}\vf{x}=\vf{b}$. Then, we have the following estimations:
+    \begin{align*}
+      \|\vf{x}^{(k)}-\vf{x}\| & \leq\frac{\|\vf{M}\|^k}{1-\|\vf{M}\|}\|\vf{x}^{(1)}-\vf{x}^{(0)}\|\quad & \text{(a priori)}     \\
+      \|\vf{x}^{(k)}-\vf{x}\| & \leq\frac{\|\vf{M}\|}{1-\|\vf{M}\|}\|\vf{x}^{(k)}-\vf{x}^{(k-1)}\|\quad & \text{(a posteriori)}
+    \end{align*}
+  \end{prop}
+  \begin{definition}
+    Let $\vf{A}=(a_{ij})\in\mathcal{M}_n(\RR)$. We say $A$ is \emph{strictly diagonally dominant by rows} if $$|a_{ii}|>\sum_{\substack{j=1\\j\ne i}}^n|a_{ij}|$$
+    We say $A$ is \emph{strictly diagonally dominant by columns} if $$|a_{jj}|>\sum_{\substack{i=1\\i\ne j}}^n|a_{ij}|$$
+  \end{definition}
+  \begin{definition}[Jacobi method]
+    Let $\vf{A}=(a_{ij})\in\mathcal{M}_n(\RR)$ be such that $\prod_{i=1}^na_{ii}\ne 0$, $\vf{b}\in\RR^n$ and $\vf{A}\vf{x}=\vf{b}$ be a system of equations. \emph{Jacobi method} consists in defining a matrix $\vf{N}$ (and consequently matrices $\vf{P}$ and $\vf{M}$ as defined above) in the following way:
+    \begin{equation*}
+      \vf{N}=
+      \begin{pmatrix}
+        a_{11} & 0      & \cdots & 0      \\
+        0      & a_{22} & \ddots & \vdots \\
+        \vdots & \ddots & \ddots & 0      \\
+        0      & \cdots & 0      & a_{nn}
+      \end{pmatrix}
+    \end{equation*}
+    \begin{equation*}
+      \vf{P}=\vf{N}-\vf{A}=
+      \begin{pmatrix}
+        0       & -a_{12} & \cdots      & -a_{1n}     \\
+        -a_{21} & 0       & \ddots      & \vdots      \\
+        \vdots  & \ddots  & \ddots      & -a_{(n-1)n} \\
+        -a_{n1} & \cdots  & -a_{n(n-1)} & 0
+      \end{pmatrix}
+    \end{equation*}
+    \begin{equation*}
+      \vf{M}=\vf{N}^{-1}\vf{P}=
+      \begin{pmatrix}
+        0                      & \frac{-a_{12}}{a_{11}} & \cdots                     & \frac{-a_{1n}}{a_{11}}             \\
+        \frac{-a_{21}}{a_{22}} & 0                      & \ddots                     & \vdots                             \\
+        \vdots                 & \ddots                 & \ddots                     & \frac{-a_{(n-1)n}}{a_{(n-1)(n-1)}} \\
+        \frac{-a_{n1}}{a_{nn}} & \cdots                 & \frac{-a_{n(n-1)}}{a_{nn}} & 0
+      \end{pmatrix}\\
+    \end{equation*}
+    Note that the iterative method $\vf{x}^{(k+1)}=\vf{M}\vf{x}^{(k)}+\vf{N}^{-1}\vf{b}$ can also be written as: $$x_i^{(k+1)}=\frac{1}{a_{ii}}\left(b_i-\sum_{\substack{j=1\\j\ne i}}^na_{ij}x_j^{(k)}\right)\quad\text{for }i=1,\ldots,n$$
+  \end{definition}
+  \begin{theorem}
+    Let $\vf{A}\in\mathcal{M}_n(\RR)$ be such that $\prod_{i=1}^na_{ii}\ne 0$ and $\vf{b}\in\RR^n$. If $\vf{A}$ is strictly diagonally dominant by rows or columns, then Jacobi method applied to solve the system $\vf{A}\vf{x}=\vf{b}$ is convergent.
+  \end{theorem}
+  \begin{definition}[Gau\ss-Seidel method]
+    Let $\vf{A}=(a_{ij})\in\mathcal{M}_n(\RR)$ be such that $\prod_{i=1}^na_{ii}\ne 0$, $\vf{b}\in\RR^n$ and $\vf{A}\vf{x}=\vf{b}$ be a system of equations. \emph{Gau\ss-Seidel method} consists in defining a matrix $\vf{N}$ (and consequently matrices $\vf{P}$ and $\vf{M}$ as defined above) in the following way:
+    \begin{equation*}
+      \vf{N}=
+      \begin{pmatrix}
+        a_{11} & 0      & \cdots     & 0      \\
+        a_{21} & a_{22} & \ddots     & \vdots \\
+        \vdots & \ddots & \ddots     & 0      \\
+        a_{n1} & \cdots & a_{n(n-1)} & a_{nn}
+      \end{pmatrix}
+    \end{equation*}
+    \begin{equation*}
+      \vf{P}=\vf{N}-\vf{A}=
+      \begin{pmatrix}
+        0      & -a_{12} & \cdots & -a_{1n}     \\
+        0      & 0       & \ddots & \vdots      \\
+        \vdots & \ddots  & \ddots & -a_{(n-1)n} \\
+        0      & \cdots  & 0      & 0
+      \end{pmatrix}
+    \end{equation*}
+    \begin{equation*}
+      \vf{M}=\vf{N}^{-1}\vf{P}
+    \end{equation*}
+    Note that the iterative method $\vf{x}^{(k+1)}=\vf{M}\vf{x}^{(k)}+\vf{N}^{-1}\vf{b}$ can also be written as: $$x_i^{(k+1)}=\frac{1}{a_{ii}}\left(b_i-\sum_{j=i+1}^na_{ij}x_j^{(k)}-\sum_{j=1}^{i-1}a_{ij}x_j^{(k+1)}\right)$$ for $i=1,\ldots,n$.
+  \end{definition}
+  \begin{theorem}
+    Let $\vf{A}\in\mathcal{M}_n(\RR)$ be such that $\prod_{i=1}^na_{ii}\ne 0$ and $\vf{b}\in\RR^n$. If $\vf{A}$ is strictly diagonally dominant by rows, then Gau\ss-Seidel method applied to solve the system $\vf{A}\vf{x}=\vf{b}$ is convergent.
+  \end{theorem}
+  \begin{method}[Over-relaxation methods]
+    Let $\vf{A}\in\mathcal{M}_n(\RR)$, $\vf{b}\in\RR^n$, $\vf{A}\vf{x}=\vf{b}$ be a system of equations and $\alpha\in\RR$ be a parameter (called \emph{relaxation factor}). \emph{Over-relaxation methods} consist in defining matrices $\vf{N}(\alpha)$, $\vf{P}(\alpha)$ and $\vf{M}(\alpha)$ as follows:
+    $$\vf{P}(\alpha)=\vf{N}(\alpha)-\vf{A}\qquad\vf{M}(\alpha)={\vf{N}(\alpha)}^{-1}\vf{P}(\alpha)$$
+    Then, the iterative method can be written as: $$\vf{x}^{(k+1)}=\vf{M}(\alpha)\vf{x}^{(k)}+{\vf{N}(\alpha)}^{-1}\vf{b}$$
+  \end{method}
+  \begin{method}[Successive over-relaxation \\method]
+    Let $\vf{A}\in\mathcal{M}_n(\RR)$, $\vf{b}\in\RR^n$, $\alpha\in\RR$ be such that $\alpha\ne-1$ and $\vf{x}^{(k+1)}=\vf{N}^{-1}\vf{P}\vf{x}^{(k)}+\vf{N}^{-1}\vf{b}$ be an iterative method. \emph{Successive over-relaxation method} (\emph{SOR}) consists in defining $$\vf{N}(\alpha)=(1+\alpha)\vf{N}\quad\text{and}\quad\vf{P}(\alpha)=\vf{P}+\alpha\vf{N}$$ because it must be true that $\vf{A}=\vf{N}(\alpha)-\vf{P}(\alpha)$. Then, the previous iteration becomes: $$\vf{x}^{(k+1)}={\vf{N}(\alpha)}^{-1}\vf{P}(\alpha)\vf{x}^{(k)}+{\vf{N}(\alpha)}^{-1}\vf{b}$$
+  \end{method}
+  \begin{definition}
+    Let $\vf{A}\in\mathcal{M}_n(\RR)$, $\vf{b}\in\RR^n$, $\alpha\in\RR$ be such that $\alpha\ne-1$ and $\vf{x}^{(k+1)}={\vf{N}(\alpha)}^{-1}\vf{P}(\alpha)\vf{x}^{(k)}+{\vf{N}(\alpha)}^{-1}\vf{b}$ be a SOR method. Since $\vf{M}(\alpha)={\vf{N}(\alpha)}^{-1}\vf{P}(\alpha)$, we have that $$\vf{M}(\alpha)=\frac{1}{1+\alpha}(\vf{M}+\alpha\vf{I}_n)$$ and therefore: $$\sigma(\vf{M}(\alpha))=\left\{\frac{\lambda+\alpha}{1+\alpha}:\lambda\in\sigma(\vf{M})\right\}$$
+  \end{definition}
+  \begin{theorem}
+    Let $\vf{A}\in\mathcal{M}_n(\RR)$, $\vf{b}\in\RR^n$ and $\vf{x}^{(k+1)}=\vf{M}\vf{x}^{(k)}+\vf{N}^{-1}\vf{b}$ be an iterative method. Suppose that the eigenvalues $\lambda_i$, $i=1,\ldots,n$, of $\vf{M}$ are all real and satisfy: $$0<\lambda_1\leq\lambda_2\leq\cdots\leq\lambda_n<1$$
+    Then, the associated SOR method given by $\vf{N}(\alpha)=(1+\alpha)\vf{N}$ and $\vf{P}(\alpha)=\vf{P}+\alpha\vf{N}$ converges for $\alpha>-\frac{1+\lambda_1}{2}$. Moreover, $\rho(\vf{M}(\alpha))$ is minimum whenever $\alpha=-\frac{\lambda_1+\lambda_n}{2}$.
+  \end{theorem}
+  \subsubsection{Eigenvalues and eigenvectors}
+  \begin{definition}
+    Let $\vf{A}\in\mathcal{M}_n(\RR)$ be a matrix whose eigenvalues are $\lambda_1,\ldots,\lambda_n$. $\lambda_1$ is called \emph{dominant eigenvalue} of $\vf{A}$ if $|\lambda_1|>|\lambda_i|$ for $i=2,\ldots,n$. The associated eigenvector to $\lambda_1$ is called \emph{dominant eigenvector} of $\vf{A}$.
+  \end{definition}
+  \begin{definition}
+    We say a matrix $\vf{A}\in\mathcal{M}_n(\RR)$ is \emph{reducible} if $\exists\vf{P}\in\mathcal{M}_n(\RR)$ a permutation matrix, such that $$\vf{P}\vf{A}\vf{P}^{-1}=
+      \begin{pmatrix}
+        \vf{E} & \vf{0} \\
+        \vf{F} & \vf{G}
+      \end{pmatrix}$$ for some square matrices $\vf{E}$ and $\vf{G}$ and for some other matrix $\vf{F}$. A matrix is \emph{irreducible} if it is not reducible.
+  \end{definition}
+  \begin{theorem}[Perron-Frobenius theorem]
+    Let $\vf{A}\in\mathcal{M}_n(\RR)$ be a non-negative irreducible matrix. Then, $\rho(\vf{A})$ is a real number and it is the dominant eigenvalue.
+  \end{theorem}
+  \begin{method}[Power method]
+    Let $\vf{A}\in\mathcal{M}_n(\RR)$. For simplicity, suppose $\vf{A}$ is diagonalizable with eigenvalues $\lambda_1,\ldots,\lambda_n$ and eigenvectors $\vf{v}_1,\ldots,\vf{v}_n$. Suppose $|\lambda_1|>|\lambda_2|\geq\cdots\geq|\lambda_n|$. The \emph{power method} consists in finding an approximation of the dominant eigenvalue $\lambda_1$ starting from an initial approximation $\vf{x}^{(0)}$ of $\vf{v}_1$. We define: $$\vf{x}^{(k+1)}=\vf{A}\vf{x}^{(k)}\qquad k\geq 0$$ Suppose $\vf{x}^{(0)}=\sum_{i=1}^n\alpha_i\vf{v}_i$. If we denote by $\vf{v}_{i,m}$ the $m$-th component of the vector $\vf{v}_i$ and choose $\ell$ such that $\vf{v}_{1,\ell}\ne0$. Then: $$\lim_{k\to\infty}\frac{\vf{x}^{(k)}}{\lambda_1^k}=\vf{v}_1\qquad\lim_{k\to\infty}\frac{\vf{x}_\ell^{(k+1)}}{\vf{x}_\ell^{(k)}}=\lambda_1$$ provided that $\alpha_1\ne0$. More precisely we have: $$\frac{\vf{x}_\ell^{(k+1)}}{\vf{x}_\ell^{(k)}}=\lambda_1+O\left(\left|\frac{\lambda_2}{\lambda_1}\right|^k\right)$$
+  \end{method}
+  \begin{method}[Normalized power method]
+    Let $\vf{A}\in\mathcal{M}_n(\RR)$ and $\|\cdot\|$ be a vector norm\footnote{For power method it is recommended to use $\|\cdot\|_\infty$.}. For simplicity suppose $\vf{A}$ is diagonalizable with eigenvalues $\lambda_1,\ldots,\lambda_n$ and eigenvectors $\vf{v}_1,\ldots,\vf{v}_n$. Suppose $|\lambda_1|>|\lambda_2|\geq\cdots\geq|\lambda_n|$. The \emph{normalized power method} consists in defining $$\vf{y}^{(k)}=\frac{\vf{x}^{(k)}}{\|\vf{x}^{(k)}\|}\quad\vf{x}^{(k+1)}=\vf{A}\vf{y}^{(k)}\quad\text{for }k\geq 0$$ Suppose $\vf{x}^{(0)}=\sum_{i=1}^n\alpha_i\vf{v}_i$ such that $\alpha_1\ne0$. If we choose $\ell$ such that $\vf{v}_{1,\ell}\ne0$. Then: $$\lim_{k\to\infty}\vf{x}^{(k)}=\vf{v}_1\qquad\lim_{k\to\infty}\frac{\vf{x}_\ell^{(k+1)}}{\vf{y}_\ell^{(k)}}=\lambda_1$$ More precisely we have: $$\frac{\vf{x}_\ell^{(k+1)}}{\vf{y}_\ell^{(k)}}=\lambda_1+O\left(\left|\frac{\lambda_2}{\lambda_1}\right|^k\right)$$
+  \end{method}
+  \begin{method}[Rayleigh quotient]
+    Let $\vf{A}\in\mathcal{M}_n(\RR)$. Suppose we have a power method $\vf{x}^{(k+1)}=\vf{A}\vf{x}^{(k)}$ to approximate the dominant eigenvalue $\lambda_1$ of $\vf{A}$. Then \emph{Rayleigh quotient} approximates $\lambda_1$ as follows: $$\lim_{k\to\infty}\frac{\left(\vf{x}^{(k+1)}\right)^\mathrm{T}\cdot \vf{x}^{(k)}}{\left(\vf{x}^{(k)}\right)^\mathrm{T}\cdot\vf{x}^{(k)}}=\lambda_1$$
+    More precisely: $$\frac{\left(\vf{x}^{(k+1)}\right)^\mathrm{T}\cdot \vf{x}^{(k)}}{\left(\vf{x}^{(k)}\right)^\mathrm{T}\cdot\vf{x}^{(k)}}=\lambda_1+O\left(\left|\frac{\lambda_2}{\lambda_1}\right|^{2k}\right)$$ If instead of a power method, we have a normalized power method $\vf{y}^{(k)}=\frac{\vf{x}^{(k)}}{\|\vf{x}^{(k)}\|}$, $\vf{x}^{(k+1)}=\vf{A}\vf{y}^{(k)}$, then: $$\lim_{k\to\infty}\frac{\left(\vf{x}^{(k+1)}\right)^\mathrm{T}\cdot \vf{y}^{(k)}}{\left(\vf{y}^{(k)}\right)^\mathrm{T}\cdot\vf{y}^{(k)}}=\lambda_1$$
+  \end{method}
+  \begin{method}[Inverse power method]
+    Let $\vf{A}\in\mathcal{M}_n(\RR)$ and $\mu\in\CC$. The \emph{inverse power method} consists in finding an approximation of the eigenvalue $\lambda$ closest to $\mu$ starting from an initial approximation $\vf{x}^{(0)}$ of its associated eigenvector $\vf{v}$. So we applied the power method to the matrix ${(\vf{A}-\mu\vf{I}_n)}^{-1}$. That is, we have the recurrence: $$\vf{y}^{(k)}=\frac{\vf{x}^{(k)}}{\|\vf{x}^{(k)}\|}\quad\vf{x}^{(k+1)}={(\vf{A}-\mu\vf{I}_n)}^{-1}\vf{y}^{(k)}\quad\text{for }k\geq 0$$ Or, equivalently, $$\vf{y}^{(k)}=\frac{\vf{x}^{(k)}}{\|\vf{x}^{(k)}\|}\quad(\vf{A}-\mu\vf{I}_n)\vf{x}^{(k+1)}=\vf{y}^{(k)}\quad\text{for }k\geq 0$$ Therefore, in each step we have to solve a system of equations to obtain $\vf{x}^{(k+1)}$. Finally\footnote{Alternatively, here we could have applied the Rayleigh quotient.}, if we choose $\ell$ such that $\vf{v}_\ell\ne0$, then: $$\lim_{k\to\infty}\vf{x}^{(k)}=\vf{v}\qquad\lim_{k\to\infty}\frac{\vf{x}_\ell^{(k+1)}}{\vf{y}_\ell^{(k)}}=\frac{1}{\lambda-\mu}\footnote{There's another method that applies power method to the matrix $\vf{A}-\mu\vf{I}_n$ with the same purpose as the inverse power method but without having to solve a system of equations in each iteration. In this case, this method gives the farthest eigenvalue of $\vf{A}$ from $\mu$.}$$
+  \end{method}
+  \subsubsection{Exact methods}
+  \begin{method}[Gaussian elimination]
+    Let $\vf{A}=(a_{ij})\in\mathcal{M}_n(\CC)$. We define $a_{ij}^{(1)}:=a_{ij}$ for $i,j=1,\ldots,n$ and
+    $$\vf{A}^{(1)}:=
+      \begin{pmatrix}
+        a_{11}^{(1)} & a_{12}^{(1)} & \cdots           & a_{1n}^{(1)}     \\
+        a_{21}^{(1)} & a_{22}^{(1)} & \ddots           & \vdots           \\
+        \vdots       & \ddots       & \ddots           & a_{(n-1)n}^{(1)} \\
+        a_{n1}^{(1)} & \cdots       & a_{n(n-1)}^{(1)} & a_{nn}^{(1)}
+      \end{pmatrix}
+    $$
+    For $i=2,\ldots,n$ we define $m_{i1}=\frac{a_{i1}^{(1)}}{a_{11}^{(1)}}$ to transform the matrix $\vf{A}^{(1)}$ into a matrix $\vf{A}^{(2)}$ defined by $a_{ij}^{(2)}=a_{ij}^{(1)}-m_{i1}a_{1j}^{(1)}$ for $i=2,\ldots,n$ and by $a_{ij}^{(1)}$ for $i=1$. That is, we obtain a matrix of the form:
+    $$\vf{A}^{(1)}\sim
+      \begin{pmatrix}
+        a_{11}^{(1)} & a_{12}^{(1)} & a_{13}^{(1)} & \cdots           & a_{1n}^{(1)}     \\
+        0            & a_{22}^{(2)} & a_{23}^{(2)} & \cdots           & a_{2n}^{(2)}     \\
+        0            & a_{32}^{(2)} & a_{33}^{(2)} & \ddots           & \vdots           \\
+        \vdots       & \vdots       & \ddots       & \ddots           & a_{(n-1)n}^{(2)} \\
+        0            & a_{n2}^{(2)} & \cdots       & a_{n(n-1)}^{(2)} & a_{nn}^{(2)}
+      \end{pmatrix} =:\vf{A}^{(2)}
+    $$
+    Proceeding analogously creating multipliers $m_{ij}$, $i>j$, to echelon the matrix $\vf{A}$, at the end we will obtain an upper triangular matrix $\vf{A}^{(n)}$ of the form:
+    $$\vf{A}^{(n)}=
+      \begin{pmatrix}
+        a_{11}^{(1)} & a_{12}^{(1)} & a_{13}^{(1)} & a_{14}^{(1)} & \cdots                 & a_{1n}^{(1)}       \\
+        0            & a_{22}^{(2)} & a_{23}^{(2)} & a_{24}^{(2)} & \cdots                 & a_{2n}^{(2)}       \\
+        0            & 0            & a_{33}^{(3)} & a_{34}^{(3)} & \cdots                 & a_{3n}^{(3)}       \\
+        0            & 0            & 0            & \ddots       & \ddots                 & \vdots             \\
+        \vdots       & \vdots       & \vdots       & \ddots       & a_{(n-1)(n-1)}^{(n-1)} & a_{(n-1)n}^{(n-1)} \\
+        0            & 0            & 0            & \cdots       & 0                      & a_{nn}^{(n)}
+      \end{pmatrix}
+    $$
+  \end{method}
+  \begin{method}
+    \emph{Partial pivoting} method in gaussian elimination consists in selecting as the pivot element the entry with largest absolute value from the column of the matrix that is being considered.
+  \end{method}
+  \begin{method}
+    \emph{Complete pivoting} method in gaussian elimination interchanges both rows and columns in order to use the largest element (by absolute value) in the matrix as the pivot.
+  \end{method}
+  \begin{definition}[LU descompostion]
+    Let $\vf{A}\in\GL_n(\RR)$ be a matrix. A \emph{LU decomposition} of $\vf{A}$ is an expression $\vf{A}=\vf{L}\vf{U}$, where $\vf{L}=(\ell_{ij}),\vf{U}=(u_{ij})\in\mathcal{M}_n(\RR)$ are matrices of the form:
+    \begin{gather}\label{NM_L}
+      \vf{L}=
+      \begin{pmatrix}
+        1         & 0      & \cdots        & 0      \\
+        \ell_{21} & 1      & \ddots        & \vdots \\
+        \vdots    & \ddots & \ddots        & 0      \\
+        \ell_{n1} & \cdots & \ell_{n(n-1)} & 1
+      \end{pmatrix}\\\label{NM_U}
+      \vf{U}=
+      \begin{pmatrix}
+        u_{11} & u_{12} & \cdots & u_{1n}     \\
+        0      & u_{22} & \ddots & \vdots     \\
+        \vdots & \ddots & \ddots & u_{(n-1)n} \\
+        0      & \cdots & 0      & u_{nn}
+      \end{pmatrix}
+    \end{gather}
+  \end{definition}
+  \begin{lemma}
+    Let $\vf{A}\in\GL_n(\RR)$, $\vf{b}\in\RR^n$ and $\vf{A}\vf{x}=\vf{b}$ be a system of linear equations. Suppose $\vf{A}=\vf{L}\vf{U}$ for some matrices $\vf{L},\vf{U}\in\mathcal{M}_n(\RR)$ of the form of \cref{NM_L,NM_U}, respectively. Then, to solve the system $\vf{A}\vf{x}=\vf{b}$ we can proceed in the following way:
+    \begin{enumerate}
+      \item Solve the triangular system $\vf{L}\vf{y}=\vf{b}$.
+      \item Solve the triangular system $\vf{U}\vf{x}=\vf{y}$.
+    \end{enumerate}
+  \end{lemma}
+  \begin{prop}
+    Let $\vf{A}\in\GL_n(\RR)$. Then:
+    \begin{enumerate}
+      \item If LU decomposition exists, it is unique.
+      \item If we can make the gaussian elimination without pivoting rows, then\footnote{In practice, LU decomposition is implemented making gaussian elimination and storing the values $m_{ij}$ in the position $ij$ of the matrix $\vf{A}^{(k)}$, where there should be a 0.}:
+            $$
+              \vf{L}=
+              \begin{pmatrix}
+                1      & 0      & \cdots     & 0      \\
+                m_{21} & 1      & \ddots     & \vdots \\
                 \vdots & \ddots & \ddots     & 0      \\
-                a_{n1} & \cdots & a_{n(n-1)} & a_{nn}
-            \end{pmatrix}
-        $$
-    \end{definition}
-    \begin{definition}
-        A linear system with a triangular matrix associated is called a \textit{triangular system}.
-    \end{definition}
-    \subsubsection{Matrix norms}
-    \begin{definition}
-        A \textit{matrix norm} on the vector space $\mathcal{M}_n(\RR)$ is a function $\|\cdot\|:\mathcal{M}_n(\RR)\rightarrow\RR$ satisfying all properties of a norm\footnote{See \cref{FOSV_norm}.} and that: $$\|\vf{A}\vf{B}\|\leq\|\vf{A}\|\|\vf{B}\|,\quad\forall \vf{A}\vf{B}\in\mathcal{M}_n(\RR)$$
-    \end{definition}
-    \begin{definition}
-        Let $\|\cdot\|_\alpha$ be a vector norm. We say a matrix norm $\|\cdot\|_\beta$ is \textit{compatible with $\|\cdot\|_\alpha$} if $$\|\vf{A}\vf{v}\|_\alpha\leq\|\vf{A}\|_\beta\|\vf{v}\|_\alpha\quad\forall\vf{A}\in\mathcal{M}_n(\RR)\text{ and }\forall\vf{v}\in\RR^n$$
-    \end{definition}
-    \begin{definition}
-        Let $\|\cdot\|$ be a vector norm and $\vf{A}\in\mathcal{M}_n(\RR)$. We define a \textit{subordinated matrix norm} $\|\cdot\|$ as:
-        \begin{multline*}
-            \|\vf{A}\|=\max\{\|\vf{A}\vf{v}\|:\vf{v}\in\RR^n\text{ such that }\|\vf{v}\|=1\}=\\=\sup\left\{\frac{\|\vf{A}\vf{v}\|}{\|\vf{v}\|}:\vf{v}\in\RR^n\text{ such that }\vf{v}\ne 0\right\}
-        \end{multline*}
-    \end{definition}
-    \begin{lemma}
-        All subordinated matrix norms are compatible.
-    \end{lemma}
-    \begin{lemma}
-        For all subordinated matrix norm $\|\cdot\|$, we have $\|\vf{I}\|=1$.
-    \end{lemma}
-    \begin{definition}
-        Let $\vf{A}\in\mathcal{M}_n(\CC)$ be a matrix. We define the \textit{spectrum $\sigma(\vf{A})$ of $\vf{A}$} as: $$\sigma(\vf{A})=\{\lambda\in\CC:\lambda\text{ is and eigenvalue of }\vf{A}\}$$
-    \end{definition}
-    \begin{definition}
-        Let $\vf{A}\in\mathcal{M}_n(\CC)$ be a matrix. We define the \textit{spectral radius $\rho(\vf{A})$ of $\vf{A}$} as: $$\rho(\vf{A})=\max\{|\lambda|\in\CC:\lambda\in\sigma(\vf{A})\}$$
-    \end{definition}
-    \begin{prop}
-        Let $\vf{v}=(v_1,\ldots,v_n)\in\RR^n$ and $\vf{A}=(a_{ij})\in\mathcal{M}_n(\RR)$. Given the vector norms:
-        \begin{gather*}
-            \|\vf{v}\|_1=\sum_{i=1}^n|v_i|\\
-            \|\vf{v}\|_2=\sqrt{\sum_{i=1}^nv_i^2}\\
-            \|\vf{v}\|_\infty=\max\{|v_i|:i=1,\ldots,n\}
-        \end{gather*}
-        their subordinated matrix norms are respectively:
-        \begin{gather*}
-            \|\vf{A}\|_1=\max\left\{\sum_{i=1}^n|a_{ij}|:j=1,\ldots,n\right\}\\
-            \|\vf{A}\|_2=\sqrt{\rho(\transpose{A}\vf{A})}\\
-            \|\vf{A}\|_\infty=\max\left\{\sum_{j=1}^n|a_{ij}|:i=1,\ldots,n\right\}
-        \end{gather*}
-    \end{prop}
-    \begin{prop}[Properties of matrix norms]
-        \hfill
-        \begin{enumerate}
-            \item Matrix norms are continuous functions.
-            \item Given two matrix norms $\|\cdot\|_\alpha$ and $\|\cdot\|_\beta$, there exist $\ell, L\in\RR^+$ such that: $$\ell \|\vf{A}\|_\beta\leq\|\vf{A}\|_\alpha\leq L\|\vf{A}\|_\beta\quad\forall\vf{A}\in\mathcal{M}_n(\RR)$$
-            \item For all subordinated matrix norm $\|\cdot\|$ and for all $\vf{A}\in\mathcal{M}_n(\RR)$: $$\rho(\vf{A})\leq\|\vf{A}\|$$
-            \item Given a matrix $\vf{A}\in\mathcal{M}_n(\RR)$ and $\varepsilon>0$, there exist a matrix norm $\|\cdot\|_{\vf{A},\varepsilon}$ such that: $$\rho(\vf{A})\leq\|\vf{A}\|_{\vf{A},\varepsilon}\leq\rho(\vf{A})+\varepsilon$$
-        \end{enumerate}
-    \end{prop}
-    \begin{definition}
-        A matrix $\vf{A}\in\mathcal{M}_n(\RR)$ is \textit{convergent} if $\displaystyle\lim_{k\to\infty}\vf{A}^k=\vf{0}$.
-    \end{definition}
-    \begin{theorem}
-        Let $\vf{A}\in\mathcal{M}_n(\RR)$. The following statements are equivalent:
-        \begin{enumerate}
-            \item $\vf{A}$ is convergent.
-            \item $\displaystyle\lim_{k\to\infty}\|\vf{A}^k\|=\vf{0}$ for some matrix norm $\|\cdot\|$.
-            \item $\rho(\vf{A})<1$.
-        \end{enumerate}
-    \end{theorem}
-    \begin{corollary}
-        Let $\vf{A}\in\mathcal{M}_n(\RR)$. If there is a matrix norm $\|\cdot\|$ satisfying $\|\vf{A}\|<1$, then $\vf{A}$ converges.
-    \end{corollary}
-    \begin{theorem}
-        Let $\vf{A}\in\mathcal{M}_n(\RR)$.
-        \begin{enumerate}
-            \item The series $\sum_{k=0}^\infty \vf{A}^k$ converges if and only if $\vf{A}$ converge.
-            \item If $\vf{A}$ is convergent, then $\vf{I}_n-\vf{A}$ is non-singular and moreover: $$(\vf{I}_n-\vf{A})^{-1}=\sum_{k=0}^\infty\vf{A}^k$$
-        \end{enumerate}
-    \end{theorem}
-    \begin{corollary}
-        Let $\vf{A}\in\mathcal{M}_n(\RR)$. If there is a subordinated matrix norm $\|\cdot\|$ satisfying $\|\vf{A}\|<1$, then $\vf{I}_n-\vf{A}$ is non-singular and moreover: $$\frac{1}{1+\|\vf{A}\|}\leq\|(\vf{I}_n-\vf{A})^{-1}\|\leq\frac{1}{1-\|\vf{A}\|}$$
-    \end{corollary}
-    \subsubsection{Matrix condition number}
-    \begin{definition}
-        Let $\vf{A}\in\GL_n(\RR)$. We define the \textit{condition number $\kappa(\vf{A})$ of $\vf{A}$} as: $$\kappa(\vf{A})=\|\vf{A}\|\|\vf{A}^{-1}\|$$
-    \end{definition}
-    \begin{theorem}
-        Let $\vf{A}\in\GL_n(\RR)$, $\vf{b}\in\RR^n$, $\vf{A}\vf{x}=\vf{b}$ be a system of linear equations and $\|\cdot\|$ be a subordinated matrix norm. Suppose we know $\vf{A}$ and $\vf{b}$ with absolute errors $\Delta\vf{A}$ and $\Delta\vf{b}$, respectively. Therefore, we actually have to solve the system: $$(\vf{A}+\Delta\vf{A})(\vf{x}+\Delta \vf{x})=(\vf{b}+\Delta\vf{b})$$ If $\|\Delta\vf{A}\|<\frac{1}{\|\vf{A}^{-1}\|}$, then: $$\frac{\|\Delta \vf{x}\|}{\|\vf{x}\|}\leq\frac{\kappa(\vf{A})}{1-\norm{\vf{A}^{-1}}\norm{\Delta\vf{A}}}\left(\frac{\norm{\Delta\vf{b}}}{\norm{\vf{b}}}+\frac{\norm{\Delta\vf{A}}}{\norm{\vf{A}}}\right)$$
-    \end{theorem}
-    \begin{theorem}
-        Let $\vf{A}\in\GL_n(\RR)$ and $\|\cdot\|$ be a subordinated matrix norm. Then:
-        \begin{enumerate}
-            \item $\kappa(\vf{A})\geq\rho(\vf{A})\rho(\vf{A}^{-1})$.
-            \item If $\vf{b},\vf{z}\in\RR^n$ are such that $\vf{A}\vf{z}=\vf{b}$, then: $$\norm{\vf{A}^{-1}}\geq\frac{\norm{\vf{z}}}{\norm{\vf{b}}}$$
-            \item If $\vf{B}\in\mathcal{M}_n(\RR)$ is a singular matrix, then: $$\kappa(\vf{A})\geq\frac{\norm{\vf{A}}}{\norm{\vf{A}-\vf{B}}}$$
-        \end{enumerate}
-    \end{theorem}
-    \subsubsection{Iterative methods}
-    \begin{definition}
-        Suppose we want to solve the system $\vf{A}\vf{x}=\vf{b}$, where $\vf{A}\in\mathcal{M}_n(\RR)$ and $\vf{b}\in\RR^n$. We choose a matrix $\vf{N}\in\GL_n(\RR)$ and define $\vf{P}:=\vf{N}-\vf{A}$. Then: $$\vf{A}\vf{x}=\vf{b}\iff \vf{x}=\vf{N}^{-1}\vf{P}\vf{x}+\vf{N}^{-1}\vf{b}=:\vf{M}\vf{x}+\vf{N}^{-1}\vf{b}$$ The matrix $\vf{M}$ is called the \textit{iteration matrix}. This defines a fixed-point iteration in the following way:
-        \begin{equation*}
-            \left\{
-            \begin{array}{l}
-                \vf{x}^{(k+1)}=\vf{M}\vf{x}^{(k)}+\vf{N}^{-1}\vf{b} \\
-                \vf{x}^{(0)}\quad\text{(initial approximation)}
-            \end{array}\right.
-        \end{equation*}
-    \end{definition}
-    \begin{theorem}
-        The iterative method $\vf{x}^{(k+1)}=\vf{M}\vf{x}^{(k)}+\vf{N}^{-1}\vf{b}$ is convergent if and only if $\vf{M}$ is convergent and if and only if $\rho(\vf{M})<1$.
-    \end{theorem}
-    \begin{corollary}
-        If $\|\vf{M}\|<1$ for some matrix norm, then the iterative method $\vf{x}^{(k+1)}=\vf{M}\vf{x}^{(k)}+\vf{N}^{-1}\vf{b}$ is convergent.
-    \end{corollary}
-    \begin{definition}
-        We define the \textit{rate of convergence $R$} of an iterative method $\vf{x}^{(k+1)}=\vf{M}\vf{x}^{(k)}+\vf{N}^{-1}\vf{b}$ as: $$R=-\log(\rho(\vf{M}))$$
-    \end{definition}
-    \begin{prop}
-        Let $\vf{x}^{(k+1)}=\vf{M}\vf{x}^{(k)}+\vf{N}^{-1}\vf{b}$ be an iterative method to approximate the solution $\vf{x}$ of a system of equations $\vf{A}\vf{x}=\vf{b}$. Then, we have the following estimations:
-        \begin{align*}
-            \|\vf{x}^{(k)}-\vf{x}\| & \leq\frac{\|\vf{M}\|^k}{1-\|\vf{M}\|}\|\vf{x}^{(1)}-\vf{x}^{(0)}\|\quad & \text{(a priori)}     \\
-            \|\vf{x}^{(k)}-\vf{x}\| & \leq\frac{\|\vf{M}\|}{1-\|\vf{M}\|}\|\vf{x}^{(k)}-\vf{x}^{(k-1)}\|\quad & \text{(a posteriori)}
-        \end{align*}
-    \end{prop}
-    \begin{definition}
-        Let $\vf{A}=(a_{ij})\in\mathcal{M}_n(\RR)$. We say $A$ is \textit{strictly diagonally dominant by rows} if $$|a_{ii}|>\sum_{\substack{j=1\\j\ne i}}^n|a_{ij}|$$
-        We say $A$ is \textit{strictly diagonally dominant by columns} if $$|a_{jj}|>\sum_{\substack{i=1\\i\ne j}}^n|a_{ij}|$$
-    \end{definition}
-    \begin{definition}[Jacobi method]
-        Let $\vf{A}=(a_{ij})\in\mathcal{M}_n(\RR)$ be such that $\prod_{i=1}^na_{ii}\ne 0$, $\vf{b}\in\RR^n$ and $\vf{A}\vf{x}=\vf{b}$ be a system of equations. \textit{Jacobi method} consists in defining a matrix $\vf{N}$ (and consequently matrices $\vf{P}$ and $\vf{M}$ as defined above) in the following way:
-        \begin{equation*}
-            \vf{N}=
-            \begin{pmatrix}
-                a_{11} & 0      & \cdots & 0      \\
-                0      & a_{22} & \ddots & \vdots \\
-                \vdots & \ddots & \ddots & 0      \\
-                0      & \cdots & 0      & a_{nn}
-            \end{pmatrix}
-        \end{equation*}
-        \begin{equation*}
-            \vf{P}=\vf{N}-\vf{A}=
-            \begin{pmatrix}
-                0       & -a_{12} & \cdots      & -a_{1n}     \\
-                -a_{21} & 0       & \ddots      & \vdots      \\
-                \vdots  & \ddots  & \ddots      & -a_{(n-1)n} \\
-                -a_{n1} & \cdots  & -a_{n(n-1)} & 0
-            \end{pmatrix}
-        \end{equation*}
-        \begin{equation*}
-            \vf{M}=\vf{N}^{-1}\vf{P}=
-            \begin{pmatrix}
-                0                      & \frac{-a_{12}}{a_{11}} & \cdots                     & \frac{-a_{1n}}{a_{11}}             \\
-                \frac{-a_{21}}{a_{22}} & 0                      & \ddots                     & \vdots                             \\
-                \vdots                 & \ddots                 & \ddots                     & \frac{-a_{(n-1)n}}{a_{(n-1)(n-1)}} \\
-                \frac{-a_{n1}}{a_{nn}} & \cdots                 & \frac{-a_{n(n-1)}}{a_{nn}} & 0
-            \end{pmatrix}\\
-        \end{equation*}
-        Note that the iterative method $\vf{x}^{(k+1)}=\vf{M}\vf{x}^{(k)}+\vf{N}^{-1}\vf{b}$ can also be written as: $$x_i^{(k+1)}=\frac{1}{a_{ii}}\left(b_i-\sum_{\substack{j=1\\j\ne i}}^na_{ij}x_j^{(k)}\right)\quad\text{for }i=1,\ldots,n.$$
-    \end{definition}
-    \begin{theorem}
-        Let $\vf{A}\in\mathcal{M}_n(\RR)$ be such that $\prod_{i=1}^na_{ii}\ne 0$ and $\vf{b}\in\RR^n$. If $\vf{A}$ is strictly diagonally dominant by rows or columns, then Jacobi method applied to solve the system $\vf{A}\vf{x}=\vf{b}$ is convergent.
-    \end{theorem}
-    \begin{definition}[Gau\ss-Seidel method]
-        Let $\vf{A}=(a_{ij})\in\mathcal{M}_n(\RR)$ be such that $\prod_{i=1}^na_{ii}\ne 0$, $\vf{b}\in\RR^n$ and $\vf{A}\vf{x}=\vf{b}$ be a system of equations. \textit{Gau\ss-Seidel method} consists in defining a matrix $\vf{N}$ (and consequently matrices $\vf{P}$ and $\vf{M}$ as defined above) in the following way:
-        \begin{equation*}
-            \vf{N}=
-            \begin{pmatrix}
-                a_{11} & 0      & \cdots     & 0      \\
-                a_{21} & a_{22} & \ddots     & \vdots \\
-                \vdots & \ddots & \ddots     & 0      \\
-                a_{n1} & \cdots & a_{n(n-1)} & a_{nn}
-            \end{pmatrix}
-        \end{equation*}
-        \begin{equation*}
-            \vf{P}=\vf{N}-\vf{A}=
-            \begin{pmatrix}
-                0      & -a_{12} & \cdots & -a_{1n}     \\
-                0      & 0       & \ddots & \vdots      \\
-                \vdots & \ddots  & \ddots & -a_{(n-1)n} \\
-                0      & \cdots  & 0      & 0
-            \end{pmatrix}
-        \end{equation*}
-        \begin{equation*}
-            \vf{M}=\vf{N}^{-1}\vf{P}
-        \end{equation*}
-        Note that the iterative method $\vf{x}^{(k+1)}=\vf{M}\vf{x}^{(k)}+\vf{N}^{-1}\vf{b}$ can also be written as: $$x_i^{(k+1)}=\frac{1}{a_{ii}}\left(b_i-\sum_{j=i+1}^na_{ij}x_j^{(k)}-\sum_{j=1}^{i-1}a_{ij}x_j^{(k+1)}\right)$$ for $i=1,\ldots,n$.
-    \end{definition}
-    \begin{theorem}
-        Let $\vf{A}\in\mathcal{M}_n(\RR)$ be such that $\prod_{i=1}^na_{ii}\ne 0$ and $\vf{b}\in\RR^n$. If $\vf{A}$ is strictly diagonally dominant by rows, then Gau\ss-Seidel method applied to solve the system $\vf{A}\vf{x}=\vf{b}$ is convergent.
-    \end{theorem}
-    \begin{method}[Over-relaxation methods]
-        Let $\vf{A}\in\mathcal{M}_n(\RR)$, $\vf{b}\in\RR^n$, $\vf{A}\vf{x}=\vf{b}$ be a system of equations and $\alpha\in\RR$ be a parameter (called \textit{relaxation factor}). \textit{Over-relaxation methods} consist in defining matrices $\vf{N}(\alpha)$, $\vf{P}(\alpha)$ and $\vf{M}(\alpha)$ as follows:
-        $$\vf{P}(\alpha)=\vf{N}(\alpha)-\vf{A}\qquad\vf{M}(\alpha)={\vf{N}(\alpha)}^{-1}\vf{P}(\alpha)$$
-        Then, the iterative method can be written as: $$\vf{x}^{(k+1)}=\vf{M}(\alpha)\vf{x}^{(k)}+{\vf{N}(\alpha)}^{-1}\vf{b}$$
-    \end{method}
-    \begin{method}[Successive over-relaxation \\method]
-        Let $\vf{A}\in\mathcal{M}_n(\RR)$, $\vf{b}\in\RR^n$, $\alpha\in\RR$ be such that $\alpha\ne-1$ and $\vf{x}^{(k+1)}=\vf{N}^{-1}\vf{P}\vf{x}^{(k)}+\vf{N}^{-1}\vf{b}$ be an iterative method. \textit{Successive over-relaxation method (SOR)} consists in defining $$\vf{N}(\alpha)=(1+\alpha)\vf{N}\quad\text{and}\quad\vf{P}(\alpha)=\vf{P}+\alpha\vf{N}$$ because it must be true that $\vf{A}=\vf{N}(\alpha)-\vf{P}(\alpha)$. Then, the previous iteration becomes: $$\vf{x}^{(k+1)}={\vf{N}(\alpha)}^{-1}\vf{P}(\alpha)\vf{x}^{(k)}+{\vf{N}(\alpha)}^{-1}\vf{b}$$
-    \end{method}
-    \begin{definition}
-        Let $\vf{A}\in\mathcal{M}_n(\RR)$, $\vf{b}\in\RR^n$, $\alpha\in\RR$ be such that $\alpha\ne-1$ and $\vf{x}^{(k+1)}={\vf{N}(\alpha)}^{-1}\vf{P}(\alpha)\vf{x}^{(k)}+{\vf{N}(\alpha)}^{-1}\vf{b}$ be a SOR method. Since $\vf{M}(\alpha)={\vf{N}(\alpha)}^{-1}\vf{P}(\alpha)$, we have that $$\vf{M}(\alpha)=\frac{1}{1+\alpha}(\vf{M}+\alpha\vf{I}_n)$$ and therefore: $$\sigma(\vf{M}(\alpha))=\left\{\frac{\lambda+\alpha}{1+\alpha}:\lambda\in\sigma(\vf{M})\right\}$$
-    \end{definition}
-    \begin{theorem}
-        Let $\vf{A}\in\mathcal{M}_n(\RR)$, $\vf{b}\in\RR^n$ and $\vf{x}^{(k+1)}=\vf{M}\vf{x}^{(k)}+\vf{N}^{-1}\vf{b}$ be an iterative method. Suppose that the eigenvalues $\lambda_i$, $i=1,\ldots,n$, of $\vf{M}$ are all real and satisfy: $$0<\lambda_1\leq\lambda_2\leq\cdots\leq\lambda_n<1$$
-        Then, the associated SOR method given by $\vf{N}(\alpha)=(1+\alpha)\vf{N}$ and $\vf{P}(\alpha)=\vf{P}+\alpha\vf{N}$ converges for $\alpha>-\frac{1+\lambda_1}{2}$. Moreover, $\rho(\vf{M}(\alpha))$ is minimum whenever $\alpha=-\frac{\lambda_1+\lambda_n}{2}$.
-    \end{theorem}
-    \subsubsection{Eigenvalues and eigenvectors}
-    \begin{definition}
-        Let $\vf{A}\in\mathcal{M}_n(\RR)$ be a matrix whose eigenvalues are $\lambda_1,\ldots,\lambda_n$. $\lambda_1$ is called \textit{dominant eigenvalue of $\vf{A}$} if $|\lambda_1|>|\lambda_i|$ for $i=2,\ldots,n$. The associated eigenvector to $\lambda_1$ is called \textit{dominant eigenvector of $\vf{A}$}.
-    \end{definition}
-    \begin{definition}
-        We say a matrix $\vf{A}\in\mathcal{M}_n(\RR)$ is \textit{reducible} if $\exists\vf{P}\in\mathcal{M}_n(\RR)$ a permutation matrix, such that $$\vf{P}\vf{A}\vf{P}^{-1}=
-            \begin{pmatrix}
-                \vf{E} & \vf{0} \\
-                \vf{F} & \vf{G}
-            \end{pmatrix}$$ for some square matrices $\vf{E}$ and $\vf{G}$ and for some other matrix $\vf{F}$. A matrix is \textit{irreducible} if it is not reducible.
-    \end{definition}
-    \begin{theorem}[Perron-Frobenius theorem]
-        Let $\vf{A}\in\mathcal{M}_n(\RR)$ be a non-negative irreducible matrix. Then, $\rho(\vf{A})$ is a real number and it is the dominant eigenvalue.
-    \end{theorem}
-    \begin{method}[Power method]
-        Let $\vf{A}\in\mathcal{M}_n(\RR)$. For simplicity, suppose $\vf{A}$ is diagonalizable with eigenvalues $\lambda_1,\ldots,\lambda_n$ and eigenvectors $\vf{v}_1,\ldots,\vf{v}_n$. Suppose $|\lambda_1|>|\lambda_2|\geq\cdots\geq|\lambda_n|$. The \textit{power method} consists in finding an approximation of the dominant eigenvalue $\lambda_1$ starting from an initial approximation $\vf{x}^{(0)}$ of $\vf{v}_1$. We define: $$\vf{x}^{(k+1)}=\vf{A}\vf{x}^{(k)}\qquad k\geq 0$$ Suppose $\vf{x}^{(0)}=\sum_{i=1}^n\alpha_i\vf{v}_i$. If we denote by $\vf{v}_{i,m}$ the $m$-th component of the vector $\vf{v}_i$ and choose $\ell$ such that $\vf{v}_{1,\ell}\ne0$. Then: $$\lim_{k\to\infty}\frac{\vf{x}^{(k)}}{\lambda_1^k}=\vf{v}_1\qquad\lim_{k\to\infty}\frac{\vf{x}_\ell^{(k+1)}}{\vf{x}_\ell^{(k)}}=\lambda_1$$ provided that $\alpha_1\ne0$. More precisely we have: $$\frac{\vf{x}_\ell^{(k+1)}}{\vf{x}_\ell^{(k)}}=\lambda_1+O\left(\left|\frac{\lambda_2}{\lambda_1}\right|^k\right)$$
-    \end{method}
-    \begin{method}[Normalized power method]
-        Let $\vf{A}\in\mathcal{M}_n(\RR)$ and $\|\cdot\|$ be a vector norm\footnote{For power method it is recommended to use $\|\cdot\|_\infty$.}. For simplicity suppose $\vf{A}$ is diagonalizable with eigenvalues $\lambda_1,\ldots,\lambda_n$ and eigenvectors $\vf{v}_1,\ldots,\vf{v}_n$. Suppose $|\lambda_1|>|\lambda_2|\geq\cdots\geq|\lambda_n|$. The \textit{normalized power method} consists in defining $$\vf{y}^{(k)}=\frac{\vf{x}^{(k)}}{\|\vf{x}^{(k)}\|}\quad\vf{x}^{(k+1)}=\vf{A}\vf{y}^{(k)}\quad\text{for }k\geq 0$$ Suppose $\vf{x}^{(0)}=\sum_{i=1}^n\alpha_i\vf{v}_i$ such that $\alpha_1\ne0$. If we choose $\ell$ such that $\vf{v}_{1,\ell}\ne0$. Then: $$\lim_{k\to\infty}\vf{x}^{(k)}=\vf{v}_1\qquad\lim_{k\to\infty}\frac{\vf{x}_\ell^{(k+1)}}{\vf{y}_\ell^{(k)}}=\lambda_1$$ More precisely we have: $$\frac{\vf{x}_\ell^{(k+1)}}{\vf{y}_\ell^{(k)}}=\lambda_1+O\left(\left|\frac{\lambda_2}{\lambda_1}\right|^k\right)$$
-    \end{method}
-    \begin{method}[Rayleigh quotient]
-        Let $\vf{A}\in\mathcal{M}_n(\RR)$. Suppose we have a power method $\vf{x}^{(k+1)}=\vf{A}\vf{x}^{(k)}$ to approximate the dominant eigenvalue $\lambda_1$ of $\vf{A}$. Then \textit{Rayleigh quotient} approximates $\lambda_1$ as follows: $$\lim_{k\to\infty}\frac{\left(\vf{x}^{(k+1)}\right)^\mathrm{T}\cdot \vf{x}^{(k)}}{\left(\vf{x}^{(k)}\right)^\mathrm{T}\cdot\vf{x}^{(k)}}=\lambda_1$$
-        More precisely: $$\frac{\left(\vf{x}^{(k+1)}\right)^\mathrm{T}\cdot \vf{x}^{(k)}}{\left(\vf{x}^{(k)}\right)^\mathrm{T}\cdot\vf{x}^{(k)}}=\lambda_1+O\left(\left|\frac{\lambda_2}{\lambda_1}\right|^{2k}\right)$$ If instead of a power method, we have a normalized power method $\vf{y}^{(k)}=\frac{\vf{x}^{(k)}}{\|\vf{x}^{(k)}\|}$, $\vf{x}^{(k+1)}=\vf{A}\vf{y}^{(k)}$, then: $$\lim_{k\to\infty}\frac{\left(\vf{x}^{(k+1)}\right)^\mathrm{T}\cdot \vf{y}^{(k)}}{\left(\vf{y}^{(k)}\right)^\mathrm{T}\cdot\vf{y}^{(k)}}=\lambda_1$$
-    \end{method}
-    \begin{method}[Inverse power method]
-        Let $\vf{A}\in\mathcal{M}_n(\RR)$ and $\mu\in\CC$. The \textit{inverse power method} consists in finding an approximation of the eigenvalue $\lambda$ closest to $\mu$ starting from an initial approximation $\vf{x}^{(0)}$ of its associated eigenvector $\vf{v}$. So we applied the power method to the matrix ${(\vf{A}-\mu\vf{I}_n)}^{-1}$. That is, we have the recurrence: $$\vf{y}^{(k)}=\frac{\vf{x}^{(k)}}{\|\vf{x}^{(k)}\|}\quad\vf{x}^{(k+1)}={(\vf{A}-\mu\vf{I}_n)}^{-1}\vf{y}^{(k)}\quad\text{for }k\geq 0$$ Or, equivalently, $$\vf{y}^{(k)}=\frac{\vf{x}^{(k)}}{\|\vf{x}^{(k)}\|}\quad(\vf{A}-\mu\vf{I}_n)\vf{x}^{(k+1)}=\vf{y}^{(k)}\quad\text{for }k\geq 0$$ Therefore, in each step we have to solve a system of equations to obtain $\vf{x}^{(k+1)}$. Finally\footnote{Alternatively, here we could have applied the Rayleigh quotient.}, if we choose $\ell$ such that $\vf{v}_\ell\ne0$, then: $$\lim_{k\to\infty}\vf{x}^{(k)}=\vf{v}\qquad\lim_{k\to\infty}\frac{\vf{x}_\ell^{(k+1)}}{\vf{y}_\ell^{(k)}}=\frac{1}{\lambda-\mu}\footnote{There's another method that applies power method to the matrix $\vf{A}-\mu\vf{I}_n$ with the same purpose as the inverse power method but without having to solve a system of equations in each iteration. In this case, this method gives the farthest eigenvalue of $\vf{A}$ from $\mu$.}$$
-    \end{method}
-    \subsubsection{Exact methods}
-    \begin{method}[Gaussian elimination]
-        Let $\vf{A}=(a_{ij})\in\mathcal{M}_n(\CC)$. We define $a_{ij}^{(1)}:=a_{ij}$ for $i,j=1,\ldots,n$ and
-        $$\vf{A}^{(1)}:=
-            \begin{pmatrix}
-                a_{11}^{(1)} & a_{12}^{(1)} & \cdots           & a_{1n}^{(1)}     \\
-                a_{21}^{(1)} & a_{22}^{(1)} & \ddots           & \vdots           \\
-                \vdots       & \ddots       & \ddots           & a_{(n-1)n}^{(1)} \\
-                a_{n1}^{(1)} & \cdots       & a_{n(n-1)}^{(1)} & a_{nn}^{(1)}
-            \end{pmatrix}
-        $$
-        For $i=2,\ldots,n$ we define $m_{i1}=\frac{a_{i1}^{(1)}}{a_{11}^{(1)}}$ to transform the matrix $\vf{A}^{(1)}$ into a matrix $\vf{A}^{(2)}$ defined by $a_{ij}^{(2)}=a_{ij}^{(1)}-m_{i1}a_{1j}^{(1)}$ for $i=2,\ldots,n$ and by $a_{ij}^{(1)}$ for $i=1$. That is, we obtain a matrix of the form:
-        $$\vf{A}^{(1)}\sim
-            \begin{pmatrix}
-                a_{11}^{(1)} & a_{12}^{(1)} & a_{13}^{(1)} & \cdots           & a_{1n}^{(1)}     \\
-                0            & a_{22}^{(2)} & a_{23}^{(2)} & \cdots           & a_{2n}^{(2)}     \\
-                0            & a_{32}^{(2)} & a_{33}^{(2)} & \ddots           & \vdots           \\
-                \vdots       & \vdots       & \ddots       & \ddots           & a_{(n-1)n}^{(2)} \\
-                0            & a_{n2}^{(2)} & \cdots       & a_{n(n-1)}^{(2)} & a_{nn}^{(2)}
-            \end{pmatrix} =:\vf{A}^{(2)}
-        $$
-        Proceeding analogously creating multipliers $m_{ij}$, $i>j$, to echelon the matrix $\vf{A}$, at the end we will obtain an upper triangular matrix $\vf{A}^{(n)}$ of the form:
-        $$\vf{A}^{(n)}=
-            \begin{pmatrix}
-                a_{11}^{(1)} & a_{12}^{(1)} & a_{13}^{(1)} & a_{14}^{(1)} & \cdots                 & a_{1n}^{(1)}       \\
-                0            & a_{22}^{(2)} & a_{23}^{(2)} & a_{24}^{(2)} & \cdots                 & a_{2n}^{(2)}       \\
-                0            & 0            & a_{33}^{(3)} & a_{34}^{(3)} & \cdots                 & a_{3n}^{(3)}       \\
-                0            & 0            & 0            & \ddots       & \ddots                 & \vdots             \\
-                \vdots       & \vdots       & \vdots       & \ddots       & a_{(n-1)(n-1)}^{(n-1)} & a_{(n-1)n}^{(n-1)} \\
-                0            & 0            & 0            & \cdots       & 0                      & a_{nn}^{(n)}
-            \end{pmatrix}
-        $$
-    \end{method}
-    \begin{method}
-        \textit{Partial pivoting} method in gaussian elimination consists in selecting as the pivot element the entry with largest absolute value from the column of the matrix that is being considered.
-    \end{method}
-    \begin{method}
-        \textit{Complete pivoting} method in gaussian elimination interchanges both rows and columns in order to use the largest element (by absolute value) in the matrix as the pivot.
-    \end{method}
-    \begin{definition}[LU descompostion]
-        Let $\vf{A}\in\GL_n(\RR)$ be a matrix. A \textit{LU decomposition of $\vf{A}$} is an expression $\vf{A}=\vf{L}\vf{U}$, where $\vf{L}=(\ell_{ij}),\vf{U}=(u_{ij})\in\mathcal{M}_n(\RR)$ are matrices of the form:
-        \begin{gather}\label{NM_L}
-            \vf{L}=
-            \begin{pmatrix}
-                1         & 0      & \cdots        & 0      \\
-                \ell_{21} & 1      & \ddots        & \vdots \\
-                \vdots    & \ddots & \ddots        & 0      \\
-                \ell_{n1} & \cdots & \ell_{n(n-1)} & 1
-            \end{pmatrix}\\\label{NM_U}
-            \vf{U}=
-            \begin{pmatrix}
-                u_{11} & u_{12} & \cdots & u_{1n}     \\
-                0      & u_{22} & \ddots & \vdots     \\
-                \vdots & \ddots & \ddots & u_{(n-1)n} \\
-                0      & \cdots & 0      & u_{nn}
-            \end{pmatrix}
-        \end{gather}
-    \end{definition}
-    \begin{lemma}
-        Let $\vf{A}\in\GL_n(\RR)$, $\vf{b}\in\RR^n$ and $\vf{A}\vf{x}=\vf{b}$ be a system of linear equations. Suppose $\vf{A}=\vf{L}\vf{U}$ for some matrices $\vf{L},\vf{U}\in\mathcal{M}_n(\RR)$ of the form of \cref{NM_L,NM_U}, respectively. Then, to solve the system $\vf{A}\vf{x}=\vf{b}$ we can proceed in the following way:
-        \begin{enumerate}
-            \item Solve the triangular system $\vf{L}\vf{y}=\vf{b}$.
-            \item Solve the triangular system $\vf{U}\vf{x}=\vf{y}$.
-        \end{enumerate}
-    \end{lemma}
-    \begin{prop}
-        Let $\vf{A}\in\GL_n(\RR)$. Then:
-        \begin{enumerate}
-            \item If LU decomposition exists, it is unique.
-            \item If we can make the gaussian elimination without pivoting rows, then\footnote{In practice, LU decomposition is implemented making gaussian elimination and storing the values $m_{ij}$ in the position $ij$ of the matrix $\vf{A}^{(k)}$, where there should be a 0.}:
-                  $$
-                      \vf{L}=
-                      \begin{pmatrix}
-                          1      & 0      & \cdots     & 0      \\
-                          m_{21} & 1      & \ddots     & \vdots \\
-                          \vdots & \ddots & \ddots     & 0      \\
-                          m_{n1} & \cdots & m_{n(n-1)} & 1
-                      \end{pmatrix}\quad
-                      \vf{U}=\vf{A}^{(n)}
-                  $$
-        \end{enumerate}
-    \end{prop}
-    \begin{definition}
-        A \textit{permutation matrix} is a square binary matrix that has exactly one entry of 1 in each row and each column and 0 elsewhere.
-    \end{definition}
-    \begin{prop}
-        Let $\vf{A}\in\GL_n(\RR)$. Then, there exist a permutation matrix $\vf{P}\in\mathcal{M}_n(\RR)$ and matrices $\vf{L},\vf{U}\in\mathcal{M}_n(\RR)$ of the form of \cref{NM_L,NM_U}, respectively, such that: $$\vf{P}\vf{A}=\vf{L}\vf{U}$$
-    \end{prop}
-    \begin{definition}[QR descompostion]
-        Let $\vf{A}\in\GL_n(\RR)$ be a matrix. A \textit{QR decomposition of $\vf{A}$} is an expression $\vf{A}=\vf{Q}\vf{R}$, where $\vf{Q},\vf{R}\in\mathcal{M}(\RR)$ are such that $\vf{Q}$ is orthogonal and $\vf{R}$ is upper triangular.
-    \end{definition}
-    \begin{lemma}
-        Let $\vf{A}\in\GL_n(\RR)$, $\vf{b}\in\RR^n$ and $\vf{A}\vf{x}=\vf{b}$ be a system of linear equations. Suppose $\vf{A}=\vf{Q}\vf{R}$ for some orthogonal matrix $\vf{Q}$ and some upper triangular matrix $\vf{R}$, both of size $n$. Then, solve the system $\vf{A}\vf{x}=\vf{b}$ is equivalent to solve the triangular system $\vf{R}\vf{x}=\transpose{Q}\vf{b}$.
-    \end{lemma}
-    \begin{lemma}
-        Let $\vf{Q}$ be an orthogonal matrix. Then:
-        \begin{enumerate}
-            \item $\det\vf{Q}=\pm 1$.
-            \item $\|\vf{Q}\|_2=1$.
-        \end{enumerate}
-    \end{lemma}
+                m_{n1} & \cdots & m_{n(n-1)} & 1
+              \end{pmatrix}\quad
+              \vf{U}=\vf{A}^{(n)}
+            $$
+    \end{enumerate}
+  \end{prop}
+  \begin{definition}
+    A \emph{permutation matrix} is a square binary matrix that has exactly one entry of 1 in each row and each column and 0 elsewhere.
+  \end{definition}
+  \begin{prop}
+    Let $\vf{A}\in\GL_n(\RR)$. Then, there exist a permutation matrix $\vf{P}\in\mathcal{M}_n(\RR)$ and matrices $\vf{L},\vf{U}\in\mathcal{M}_n(\RR)$ of the form of \cref{NM_L,NM_U}, respectively, such that: $$\vf{P}\vf{A}=\vf{L}\vf{U}$$
+  \end{prop}
+  \begin{definition}[QR descompostion]
+    Let $\vf{A}\in\GL_n(\RR)$ be a matrix. A \emph{QR decomposition} of $\vf{A}$ is an expression $\vf{A}=\vf{Q}\vf{R}$, where $\vf{Q},\vf{R}\in\mathcal{M}(\RR)$ are such that $\vf{Q}$ is orthogonal and $\vf{R}$ is upper triangular.
+  \end{definition}
+  \begin{lemma}
+    Let $\vf{A}\in\GL_n(\RR)$, $\vf{b}\in\RR^n$ and $\vf{A}\vf{x}=\vf{b}$ be a system of linear equations. Suppose $\vf{A}=\vf{Q}\vf{R}$ for some orthogonal matrix $\vf{Q}$ and some upper triangular matrix $\vf{R}$, both of size $n$. Then, solve the system $\vf{A}\vf{x}=\vf{b}$ is equivalent to solve the triangular system $\vf{R}\vf{x}=\transpose{Q}\vf{b}$.
+  \end{lemma}
+  \begin{lemma}
+    Let $\vf{Q}$ be an orthogonal matrix. Then:
+    \begin{enumerate}
+      \item $\det\vf{Q}=\pm 1$.
+      \item $\|\vf{Q}\|_2=1$.
+    \end{enumerate}
+  \end{lemma}
 \end{multicols}
 \end{document}

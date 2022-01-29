@@ -50,16 +50,24 @@
 
 %%%%%%% Math-commands %%%%%%%
     %%% GENERAL 
-        \newcommand{\function}[5]{
-            \begin{array}{r@{\hspace{0.5\tabcolsep}}c@{\hspace{0.5\tabcolsep}}c@{\hspace{0.5\tabcolsep}}c@{\hspace{0.5\tabcolsep}}c@{\hspace{0.5\tabcolsep}}c}
-                #1: & #2 & \longrightarrow & #3                     \\
-                                        & #4                  & \longmapsto     & #5
-              \end{array}
-        } % 1 - name of the function
-          % 2 - domain
-          % 3 - image
-          % 4 - element in the domain
-          % 5 - element in the image
+          \newcommand{\function}[5]{
+            \if\relax\detokenize{#1}\relax % first argument empty
+            \begin{array}{c@{\hspace{0.5\tabcolsep}}c@{\hspace{0.5\tabcolsep}}c}
+              #2 & \longrightarrow & #3                     \\
+              #4 & \longmapsto     & #5
+            \end{array}
+            \else % first argument non-empty
+            \begin{array}{r@{\hspace{0.5\tabcolsep}}c@{\hspace{0.5\tabcolsep}}c@{\hspace{0.5\tabcolsep}}c}
+              #1: & #2 & \longrightarrow & #3                     \\
+                  & #4 & \longmapsto     & #5
+            \end{array}
+            \fi
+      } % 1 - name of the function
+        % 2 - domain
+        % 3 - image
+        % 4 - element in the domain
+        % 5 - element in the image
+
         \newcommand{\rrightarrow}{\mathrel{\mathrlap{\rightarrow}\mkern1mu\rightarrow}} % a larger version of \twoheadrightarrow
         % Default \Re{} for real part of a number 
         % Default \Im{} for imaginary part of a number 
@@ -115,6 +123,7 @@
         \DeclareMathOperator{\Fr}{\partial} % clousure set
         \newcommand{\topo}{\tau} % symbol for the topology. Feasible options are: \tau, \mathcal{T}...
         \newcommand{\conn}{\mathrel{\#}} % connected sum. \mathrel gives the space of a relation (like +,-,...) while \mathbin gives the space of a binary operator (like =).
+        
     %%% GALOIS THEORY
         \newcommand{\FF}{\ensuremath{\mathbb{F}}} % finite fields
         \DeclareMathOperator{\irr}{Irr} % irreducible polynomial 
