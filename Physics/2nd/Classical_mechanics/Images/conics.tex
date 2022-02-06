@@ -1,0 +1,36 @@
+\documentclass[tikz]{standalone}
+\usepackage{../../../../preamble_formulas}
+
+\begin{document}
+\begin{tikzpicture}
+  \begin{axis}[
+      xmin=-1,xmax=1,ymin=-1,ymax=1,
+      axis lines=middle,
+      ytick = {0},
+      xtick = {0},
+      axis equal image,
+      ylabel={$y$},
+      xlabel={$x$},
+    ]
+    \def\a{2}
+    \def\b{1}
+    \def\c{sqrt(\a^2-\b^2)}
+    \def\ymax{\pgfkeysvalueof{/pgfplots/ymax}}
+    \def\ymin{\pgfkeysvalueof{/pgfplots/ymin}}
+    \addplot[thin,samples=400,domain=-80:80] ({\a*cos(x)-\c},{\b*sin(x)});
+    \addplot[thin,samples=200,domain=\ymin:\ymax] ({\a^2/\c-\c},{x});
+
+    \fill[black] (0,0) circle(1.5pt) node[anchor=north west]{$F$};
+    \fill[black] (0,{\b^2/\a}) circle(1.5pt) node[anchor=north east]{$Q$};
+    \fill[black] (0,{-\b^2/\a}) circle(1.5pt) node[anchor=south east]{$Q'$};
+    \draw[black] ({\a*cos(15)-\c},{\b*sin(15)}) circle(1.5pt) node[anchor=west]{$P$};
+    \draw[thin,<->] (0,{-\b^2/\a-0.3}) -- ({\a^2/\c-\c},{-\b^2/\a-0.3}) node[anchor=south,pos=0.5]{$d$};
+    \draw[thin,-] (0,0) -- ({\a*cos(15)-\c},{\b*sin(15)});
+    \node[anchor=west] at ({\a^2/\c-\c},0.5){$\ell$};
+
+    % angles
+    \draw[domain=0:52.3329,samples=100] plot ({0.1*cos(\x)}, {0.1*sin(\x)});
+    \node[anchor=south west] at (0.075,0.01) {$\theta$};
+  \end{axis}
+\end{tikzpicture}
+\end{document}

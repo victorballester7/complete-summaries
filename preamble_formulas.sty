@@ -33,8 +33,9 @@
     \definecolor{color_blue2}{RGB}{90,90,255}
     \definecolor{color_blue3}{RGB}{0,0,255}
     \definecolor{color_green1}{RGB}{160,240,160}
-    \definecolor{color_green2}{RGB}{0,180,0}
-    \definecolor{color_green3}{RGB}{0,80,0}
+    \definecolor{color_green2}{RGB}{50,200,50}
+    \definecolor{color_green3}{RGB}{10,150,10}
+    \definecolor{color_green4}{RGB}{0,80,0}
 
     \pgfdeclareverticalshading{rainbow}{100bp}{color(0bp)=(red); 
     color(25bp)=(red); color(35bp)=(yellow); color(45bp)=(green); 
@@ -81,14 +82,33 @@
         \newcommand{\divp}{\vf{\nabla}\cdot} % divergence for physics
         % command \laplacian is by default \nabla^2
         %\newcommand{\laplacian}{\nabla^2} % laplacian
+        \DeclareDocumentCommand\derivative{ s o m g d() }
+{ % Total derivative
+    % s: star for \flatfrac flat derivative
+    % o: optional n for nth derivative
+    % m: mandatory (x in df/dx)
+    % g: optional (f in df/dx)
+    % d: long-form d/dx(...)
+    \IfBooleanTF{#1}
+    {\let\fractype\flatfrac}
+    {\let\fractype\frac}
+    \IfNoValueTF{#4}
+    {
+        \IfNoValueTF{#5}
+        {\fractype{\diffd \IfNoValueTF{#2}{}{^{#2}}}{\diffd #3\IfNoValueTF{#2}{}{^{#2}}}}
+        {\fractype{\diffd \IfNoValueTF{#2}{}{^{#2}}}{\diffd #3\IfNoValueTF{#2}{}{^{#2}}} \argopen(#5\argclose)}
+    }
+    {\fractype{\diffd \IfNoValueTF{#2}{}{^{#2}} #3}{\diffd #4\IfNoValueTF{#2}{}{^{#2}}}\IfValueT{#5}{(#5)}}
+} % differential operator
         \newcommand{\ii}{\mathrm{i}} % imaginary unit
         \renewcommand{\exp}[1]{\mathrm{e}^{#1}} % exponential function
         \newcommand{\upint}[2]{\overline{\int_{#1}^{#2}}} % upper integral
         \newcommand{\lowint}[2]{\underline{\int_{#1}^{#2}}} % lower integral
         \DeclareMathOperator{\domain}{dom} % domain of a function
         \DeclareMathOperator{\graph}{graph} % graph of a function
+        \DeclareMathOperator{\supp}{supp} % support of a function
         \DeclareMathOperator{\vol}{vol} % volume of a region
-        \newcommand{\crossprod}{\crossproduct} % cross product      
+        \newcommand{\crossprod}{\crossproduct} % cross product
 
     %%% ALGEBRA
         \newcommand{\bigzero}{\makebox(0,0){\text{\Huge0}}} % 0 big zero in a matrix
@@ -150,7 +170,8 @@
         \newcommand{\GL}{\mathrm{GL}} % set of invertible matrices
         \renewcommand{\norm}[1]{\|#1\|} % norm of a vector
         
-
+    %%% PHYSICS
+        \newcommand{\const}{\text{const.}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%% for long-vector arrows %%%%%

@@ -1,0 +1,28 @@
+\documentclass{standalone}
+\usepackage{../../../../preamble_formulas}
+\def\a{2}
+\def\b{1.5}
+\begin{document}
+\begin{tikzpicture}
+  \begin{axis}[
+      xmin=-\a,xmax=\a,ymin=-\b,ymax=\b,
+      hide axis,
+      axis equal image,
+    ]
+    \node[coordinate] (focus) at (1.3220,0){};
+    \node[coordinate] (A) at (1.8421,0.5841){};
+    \node[coordinate] (B) at (1.8421,-0.5841){};
+    \node[coordinate] (C) at (-1.0806,-1.2622){};
+    \node[coordinate] (D) at (-1.9601,-0.2980){};
+    \draw[gray,name path=fA] (B) -- (focus) -- (A);
+    \draw[gray,name path=fC] (D) -- (focus) -- (C);
+    \addplot[thin,samples=400,domain=0:360] ({\a*cos(x)},{\b*sin(x)});
+    \addplot[thin,black,samples=400,domain=-22.918:22.918,name path=E] ({\a*cos(x)},{\b*sin(x)});
+    \addplot[thin,black,samples=400,domain=191.4595:237.2958,name path=F] ({\a*cos(x)},{\b*sin(x)});
+    \draw[fill=black] (focus) circle(0.04);
+
+    \addplot[color_blue1,opacity=0.5] fill between[of=fA and E];
+    \addplot[color_blue1,opacity=0.5] fill between[of=fC and F];
+  \end{axis}
+\end{tikzpicture}
+\end{document}

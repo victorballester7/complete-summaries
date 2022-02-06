@@ -1,0 +1,33 @@
+\documentclass{standalone}
+\usepackage{../../../../preamble_formulas}
+
+\begin{document}
+\begin{tikzpicture}
+  \begin{axis}[
+      xmin=9.7,xmax=10.3,ymin=0,ymax=100,
+      %x label style={at={(axis description cs:0.95,-0.025)},anchor=north},
+      y label style={rotate=-90},
+      ytick = {0},
+      xtick = {0},
+      extra y ticks = {50,100},
+      extra y tick labels={$E_\text{max}/2$,$E_\text{max}$},
+      extra x ticks = {0,9.9,10,10.1},
+      extra x tick labels={0,$\omega_0-\beta$,$\omega_0$,$\omega_0+\beta$},
+      ylabel={$E$},
+      xlabel={$\omega$},
+    ]
+    \def\xmax{\pgfkeysvalueof{/pgfplots/xmax}}
+    \def\xmin{\pgfkeysvalueof{/pgfplots/xmin}}
+    \def\ymax{\pgfkeysvalueof{/pgfplots/ymax}}
+    \def\ymin{\pgfkeysvalueof{/pgfplots/ymin}}
+
+    \addplot [thick,color_green2,samples=200,smooth,domain=9:11] {1/((x-10)^2+0.1^2)};
+    %\addplot [thick,color_green1,samples=200,domain=0:20] {1};
+    \draw [thin,lightgray,dashed] (axis cs:9.9,0) -- (axis cs:9.9,\ymax);
+    \draw [thin,lightgray,dashed] (axis cs:10.1,0) -- (axis cs:10.1,\ymax);
+    \draw [thin,lightgray,dashed] (axis cs:0,\ymax/2) -- (axis cs:\xmax,\ymax/2);
+    \draw [thin,<->] (axis cs:9.9,\ymax/2-20) -- (axis cs:10.1,\ymax/2-20) node[anchor=south,pos=0.5]{$\Delta\omega$};
+  \end{axis}
+\end{tikzpicture}
+
+\end{document}
