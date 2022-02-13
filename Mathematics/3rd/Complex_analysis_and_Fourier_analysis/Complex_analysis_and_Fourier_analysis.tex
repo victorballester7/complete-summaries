@@ -2,6 +2,290 @@
 
 \begin{document}
 \begin{multicols}{2}[\section{Complex analysis and Fourier analysis}]
-
+  \subsection{Complex numbers}
+  \subsubsection{Definition of complex numbers}
+  \begin{definition}
+    Consider $x^2+1\in\RR[x]$ and the ring $R:=\quot{\RR[x]}{(x^2+1)}$. Then, $R$ is a commutative field, which we will denote by $\CC$, whose elements are of the form $a+b\overline{x}=:a+b\ii$, $a,b\in\RR$\footnote{Such expression of a complex number is called \emph{Cartesian form} of a complex number.}. This field is called \emph{field of complex numbers}.
+  \end{definition}
+  \begin{prop}
+    Let $a_1+b_1\ii,a_2+b_2\ii\in\CC$, $a_1,a_2,b_1,b_2\in\RR$\footnote{From now on, we will omit to say that these values are real numbers. If they aren't, we will explicitly remark it.}. Then:
+    \begin{itemize}
+      \item $(a_1+b_1\ii)+(a_2+b_2\ii)=(a_1+a_2)+(b_1+b_2)\ii$
+      \item $(a_1+b_1\ii)\cdot(a_2+b_2\ii)=(a_1a_2-b_1b_2)+(a_1b_2+a_2b_1)\ii$
+      \item $\displaystyle\frac{a_1+b_1\ii}{a_2+b_2\ii}=\frac{a_1a_2+b_1b_2}{{a_2}^2+{b_2}^2}+\frac{a_2b_1-a_1b_2}{{a_2}^2+{b_2}^2}\ii$, provided that $a_2,b_2\ne 0$.
+    \end{itemize}
+  \end{prop}
+  \begin{theorem}
+    $\CC$ is not an ordered field.
+  \end{theorem}
+  \subsubsection{Complex conjugate, modulus and argument}
+  \begin{definition}
+    Let $z=a+b\ii\in\CC$. We define the \emph{complex conjugate} (or simply \emph{conjugate}) of $z$ as $\overline{z}:=a-b\ii$.
+  \end{definition}
+  \begin{prop}
+    Let $z,w\in\CC$. Then:
+    \begin{enumerate}
+      \item $\overline{\overline{z}}=z$
+      \item $\overline{z+w}=\overline{z}+\overline{w}$
+      \item $\overline{z\cdot w}=\overline{z}\cdot\overline{w}$
+      \item $\displaystyle\overline{\left(\frac{z}{w}\right)}=\frac{\overline{z}}{\overline{w}}$, provided that $w\ne 0$.
+      \item $z\in\RR\iff \overline{z}=z$
+    \end{enumerate}
+  \end{prop}
+  \begin{definition}
+    Let $z=a+b\ii\in\CC$. We define the \emph{real part} of $z$ as $\Re z:=a$. We define the \emph{imaginary part} of $z$ as $\Im z:=b$.
+  \end{definition}
+  \begin{prop}
+    Let $z\in\CC$. Then: $$\Re z=\frac{z+\overline{z}}{2}\quad\text{and}\quad\Im z=\frac{z-\overline{z}}{2\ii}$$
+  \end{prop}
+  \begin{definition}
+    Let $z=a+b\ii\in\CC$. We define the \emph{modulus} of $z$ as: $$|z|:=\sqrt{a^2+b^2}$$
+  \end{definition}
+  \begin{prop}
+    Let $z,w\in\CC$. Then:
+    \begin{enumerate}
+      \item $|z|\geq 0$
+      \item $|z|=0\iff z=0$
+      \item $z\overline{z}={|z|}^2$
+      \item $z^{-1}=\frac{1}{{|z|}^2}\cdot\overline{z}$
+      \item $|\Re z|,|\Im z|\leq |z|\leq|\Re z|+|\Im z|$
+      \item $|z\cdot w|=|z|\cdot |w|$
+      \item $|z^n|={|z|}^n$ $\forall n\in\ZZ$
+      \item $\displaystyle\left|\frac{z}{w}\right|=\frac{|z|}{|w|}$, provided that $w\ne 0$.
+      \item ${|z\pm w|}^2={|z|}^2+{|w|}^2\pm 2\Re(z\overline{w})$
+      \item $|z+w|\leq |z|+ |w|$ and the equality holds if and only if $z=\lambda w$, $\lambda\in\RR_{\geq 0}$.
+      \item $||z|-|w||\leq |z-w|$ and the equality holds if and only if $z=\lambda w$, $\lambda\in\RR_{\geq 0}$.
+    \end{enumerate}
+  \end{prop}
+  \begin{corollary}
+    Let $n\in\NN$ and $z_1, \ldots, z_n \in \CC$. Then:
+    \begin{itemize}
+      \item $\displaystyle \left| \sum_{i=1}^n{z_i} \right| \leq \sum_{i=1}^n{|z_i|}$
+      \item $\displaystyle |z_1 \cdots z_n| = |z_1| \cdots |z_n|$
+      \item $\displaystyle |\Re(z_1 \cdots z_n)|,|\Im(z_1 \cdots z_n)| \leq |z_1| \cdots |z_n|$
+    \end{itemize}
+  \end{corollary}
+  \begin{definition}
+    Let $z \in \CC^*$. We define the \textit{argument} of $z$, denoted by $\arg{z}$, as the real number $\theta$ satisfying: $$z = |z|(\cos{\theta} + \ii\sin{\theta})$$ Note that $\arg{z}$ is not unique. We define the \textit{principal argument} of $z$ as the unique real number $\theta$ satisfying:
+    $$\Arg z := \{\theta \in (-\pi, \pi]:z = |z|(\cos{\theta} + \ii\sin{\theta})\}$$
+  \end{definition}
+  \begin{prop}
+    Let $z=a+b\ii\in\CC$. Then:
+    $$\Arg z=\left\{
+      \begin{array}{lcl}
+        \arctan\left(\frac{y}{x}\right)     & \text{if} & x>0         \\
+        \arctan\left(\frac{y}{x}\right)+\pi & \text{if} & x<0,y\geq 0 \\
+        \arctan\left(\frac{y}{x}\right)-\pi & \text{if} & x<0,y<0     \\
+        \sign{(y)}\frac{\pi}{2}             & \text{if} & x=0
+      \end{array}
+      \right.$$
+  \end{prop}
+  \begin{prop}
+    Let $z, w \in \CC$ and $n\in\ZZ$. Then:
+    \begin{enumerate}
+      \item $\arg{(zw)} = \arg z + \arg w$
+      \item $\arg{(z^n)} = n \arg{z}$
+    \end{enumerate}
+  \end{prop}
+  \begin{definition}
+    Let $z\in\CC$, $r=|z|$ and $\theta=\arg z$. We define the \emph{polar form} of $z$ as: $$z = r(\cos{\theta} + \ii\sin{\theta})$$
+  \end{definition}
+  \subsubsection{Metric topology of \texorpdfstring{$\CC$}{C}}
+  \begin{prop}
+    Consider the distance $d$ defined as: $$\function{d}{\CC\times\CC}{\RR}{(z,w)}{|z-w|}$$ Then, $(\CC,d)$ is a metric space\footnote{In order to simplify the notation we will refer to $(\CC,d)$ simply as $\CC$.}.
+  \end{prop}
+  \begin{prop}
+    Thinking complex numbers as an ordered pair of real numbers, the topology of $\CC$ induced by $d$ is the same as the ordinary topology of $\RR^2$.
+  \end{prop}
+  \subsection{Sequences and series}
+  \subsubsection{Sequences}
+  \begin{definition}
+    A \textit{sequence of complex numbers} is a function of the form $$\function{}{\NN}{\CC}{n}{z_n}$$ In general, we will denote that sequence by $(z_n)$.
+  \end{definition}
+  \begin{definition}
+    Let $(z_n)\in\CC$ be a sequence. A subsequence of $(z_n)$ is a sequence $(z_{k_n})$, where $(k_n)\in\NN$ is an increasing sequence of natural numbers.
+  \end{definition}
+  \begin{definition}
+    Let $(z_n)\in\CC$ be a sequence. We say that $(z_n)$ has \emph{limit} $z\in\CC$ (or it \textit{converges} to $z$) if $\forall\varepsilon>0$, $\exists n_0\in\NN$ such that $$|z_n - z| < \varepsilon\quad \forall n > n_0$$ In that case, we will write $\displaystyle\lim_{n \to \infty} z_n = z$ and the sequence is called \emph{convergent}. Otherwise, we say that the sequence is \emph{divergent}.
+  \end{definition}
+  \begin{definition}
+    Let $(z_n)\in\CC$ be a sequence. We say that $(z_n)$ is \emph{bounded} if $\exists M\in\RR$ such that $|z_n|\leq M$ $\forall n\in\NN$.
+  \end{definition}
+  \begin{definition}
+    Let $(z_n)\in\CC$ be a sequence. We say that $(z_n)$ is \emph{Cauchy} if $\forall\varepsilon>0$, $\exists n_0\in\NN$ such that $$|z_n - z_m| < \varepsilon\quad \forall n,m > n_0$$
+  \end{definition}
+  \begin{prop}
+    Let $(z_n)\in\CC$ be a convergent sequence. Then, $(z_n)$ is bounded and Cauchy.
+  \end{prop}
+  \begin{prop}
+    Let $(z_n)\in\CC$ be a sequence. Then, $(z_n)$ is convergent if and only if all its subsequences are convergent.
+  \end{prop}
+  \begin{prop}
+    Let $(z_n),(w_n)\in\CC$ be two convergent sequences whose limits are $z,w\in \CC$, respectively. Then:
+    \begin{enumerate}
+      \item $\displaystyle\lim_{n\to\infty}z_n+w_n=z+w$
+      \item $\displaystyle\lim_{n\to\infty}z_nw_n=zw$
+      \item $\displaystyle\lim_{n\to\infty}\frac{z_n}{w_n}=\frac{z}{w}$, provided that $w_n\ne 0$ $\forall n\in\NN$.
+    \end{enumerate}
+  \end{prop}
+  \begin{definition}
+    Let $(z_n)\in\CC$ be a sequence such that $z_n=x_n+y_n\ii$ $\forall n\in\NN$, where $x_n,y_n\in\RR$. Then:
+    \begin{enumerate}
+      \item $(z_n)$ is convergent if and only if $(x_n)$ and $(y_n)$ are convergent. In that case, we have: $$\lim_{n\to\infty}z_n=\lim_{n\to\infty}x_n+\ii\lim_{n\to\infty}y_n$$
+      \item $(z_n)$ is Cauchy if and only if $(x_n)$ and $(y_n)$ are Cauchy.
+    \end{enumerate}
+  \end{definition}
+  \begin{theorem}
+    $\CC$ is a complete metric space.
+  \end{theorem}
+  \subsubsection{Series}
+  \begin{definition}
+    Let $(z_n)\in\CC$ be a sequence. A \emph{numeric series of complex numbers} is an expression of the form $$\sum_{n=1}^\infty z_n$$ We call $z_n$ \emph{general term of the series} and $\displaystyle S_N:=\sum_{n=1}^N z_n$, for all $N\in\NN $, \emph{$N$-th partial sum of the series}\footnote{From now on we will write $\sum z_n$ to refer $\displaystyle\sum_{n=1}^\infty z_n$.}.
+  \end{definition}
+  \begin{definition}
+    We say the series of complex numbers $\sum z_n$ is \emph{convergent} if $\displaystyle S=\lim_{N\to\infty}S_N$ exists and it is finite. In that case, $S$ is called the \emph{sum of the series}. If the previous limit doesn't exists or it is infinite, we say the series is \emph{divergent}\footnote{We will use the notation $\sum a_n<\infty$ or $\sum a_n=+\infty$ to express that the series converges or diverges, respectively.}.
+  \end{definition}
+  \begin{definition}
+    Let $\sum z_n$ be a series of complex numbers.  A \emph{reordering} of $\sum z_n$ is any series $\sum z_{\sigma(n)}$, where $\sigma:\NN\rightarrow\NN$ be a bijective function.
+  \end{definition}
+  \begin{prop}
+    Let $(z_n)\in\CC$ be a sequence and $\sum z_n$ be a convergent series. Then, $\displaystyle\lim_{n\to\infty}z_n =0$.
+  \end{prop}
+  \begin{prop}
+    Let $(z_n)\in\CC$ be a sequence such that such that $z_n=x_n+y_n\ii$ $\forall n\in\NN$, where $x_n,y_n\in\RR$, and $\sum z_n$ be a series. Then, $\sum z_n<\infty$ if and only if $\sum x_n$ and $\sum y_n$. In that case, we have: $$\sum_{n=1}^\infty z_n=\sum_{n=1}^\infty x_n+\ii\sum_{n=1}^\infty y_n$$
+  \end{prop}
+  \begin{prop}
+    Let $\sum z_n=z\in\CC$ and $\sum w_n=w\in\CC$ be two series, and $\lambda\in\CC$. Then:
+    \begin{enumerate}
+      \item $\sum (z_n+w_n)$ is convergent and $\sum (z_n+w_n)=z+w$.
+      \item $\sum (\lambda z_n)$ is convergent and $\sum (\lambda z_n)=\lambda z$.
+    \end{enumerate}
+  \end{prop}
+  \begin{definition}
+    Let $\sum z_n$ be a series of complex numbers. We say that $\sum z_n$ is \emph{absolutely convergent} if $\sum |z_n|<\infty$\footnote{Note that since $\sum |z_n|$ is a sequence of real numbers, all the criteria for convergence of numeric series of real numbers are, thus, aplicable.}.
+  \end{definition}
+  \begin{prop}
+    Let $\sum z_n$ be a series of complex numbers.
+    \begin{enumerate}
+      \item $\sum |z_n|<\infty\implies\sum z_n<\infty$
+      \item $\sum |z_n|=z<\infty\implies\forall\sigma\in S(\NN),\ \sum z_{\sigma (n)}=w<\infty$ for some $w\in\CC$.
+    \end{enumerate}
+  \end{prop}
+  \begin{definition}[Cauchy product]
+    Let $\sum z_n$, $\sum w_n$ be absolutely convergent series of complex numbers. We define the \emph{product} of $\sum z_n$ and $\sum w_n$ as the series $\sum p_n$, where $p_n=\sum_{k=0}^nz_kw_{n-k}$.
+  \end{definition}
+  \begin{prop}
+    Let $\sum z_n$, $\sum w_n$ be absolutely convergent series of complex numbers. Then, the product of these series is absolutely convergent and satisfy: $$\sum_{n=1}^\infty p_n=\left(\sum_{n=1}^\infty z_n\right)\left(\sum_{n=1}^\infty w_n\right)$$
+  \end{prop}
+  \subsection{Complex functions}
+  Since $\CC\cong\RR^2$, the study of the continuity of a function $\vf{f}:\CC^n\rightarrow\CC^m$ is the same as the study of the continuity of the function $\vf{g}:\RR^{2n}\rightarrow\RR^{2m}$ defined conveniently. Thus, we will not reproduce here the results of the continuity of complex functions.
+  \subsubsection{Sequences of functions}
+  \begin{definition}
+    Let $D\subseteq\CC$. A set $$(f_n(z))=\{f_1(z),f_2(z),\ldots,f_n(z),\ldots\}$$ is a \emph{sequence of complex functions} if $f_i:D\rightarrow\CC $ is a complex function. In this case we say the sequence $(f_n(z))$, or simply $(f_n)$, is well-defined on $D$\footnote{The majority of definitions and results of sequences of real-valued functions can be extended conveniently to sequences of complex functions. So in this document, we will only expose the most important ones.}.
+  \end{definition}
+  \begin{definition}
+    Let $(f_n)\in D\subseteq\CC$ be a sequence of functions and $f:D\rightarrow\CC$. We say $(f_n)$ \emph{converges pointwise} to $f$ on $D$ if $\forall z\in D$, $\displaystyle\lim_{n\to\infty}f_n(z)=f(z)$
+  \end{definition}
+  \begin{definition}
+    Let $(f_n)\in D\subseteq\CC$ be a sequence of functions and $f:D\rightarrow\CC$. We say $(f_n)$ \emph{converges uniformly} to $f$ on $D$ if $\forall\varepsilon>0$, $\exists n_0:|f_n(z)-f(z)|<\varepsilon$ $\forall n\geq n_0$ and $\forall z\in D$.
+  \end{definition}
+  \begin{lemma}
+    Let $(f_n)\in D\subseteq\CC$ be a sequence of functions. $(f_n)$ converges uniformly to $f:D\rightarrow\CC$ on $D$ if and only if $\displaystyle \lim_{n\to\infty}\sup\left\{|f_n(z)-f(z)|:z\in D\right\}=0$.
+  \end{lemma}
+  \begin{theorem}[Cauchy's test]
+    A sequence of functions $(f_n)\in D\subseteq\CC$ converges uniformly to $f:D\rightarrow\CC$ on $D\subseteq\CC$ if and only if $\forall\varepsilon>0$ $\exists n_0\in\NN$ such that  $\forall n,m\geq n_0$, we have: $$\sup\left\{|f_n(z)-f_m(z)|:z\in D\right\}< \varepsilon$$
+  \end{theorem}
+  \begin{theorem}
+    Let $(f_n)\in D\subseteq\CC$ be a sequence of continuous functions. If $(f_n)$ converges uniformly to $f:D\rightarrow\CC$ on $D$, then $f$ is continuous on $D$.
+  \end{theorem}
+  \subsubsection{Series of functions}
+  \begin{definition}
+    Let $(f_n)\in D\subseteq\CC$ be a sequence of functions. The expression $$\sum_{n=1}^\infty f_n(z)$$ is the \emph{series of functions} associated with $(f_n)$\footnote{The majority of definitions and results of series of real-valued functions can be extended conveniently to series of complex functions. So in this document, we will only expose the most important ones.}.
+  \end{definition}
+  \begin{definition}
+    A series of functions $\sum f_n(z)$ defined on $D\subseteq\CC$ \emph{converges pointwise} on $D$ if the sequence of partials sums $$F_N(z)=\sum_{n=1}^Nf_n(z)$$ converges pointwise. If the pointwise limit of $(F_N)$ is $F(z)$, we say $F$ is the \emph{sum of the series in a pointwise sense}.
+  \end{definition}
+  \begin{definition}
+    A series of functions $\sum f_n(z)$ defined on $D\subseteq\CC$ \emph{converges uniformly} on $D$ if the sequence of partials sums $$F_N(z)=\sum_{n=1}^Nf_n(z)$$ converges uniformly. If the uniform limit of $(F_N)$ is $F(z)$, we say $F$ is the \emph{sum of the series in an uniform sense}.
+  \end{definition}
+  \begin{theorem}[Cauchy's test]
+    A series of functions $\sum f_n(z)$ defined on $D\subseteq\CC$ converges uniformly if and only if $\forall\varepsilon>0$ $\exists n_0$ such that $\forall  M, N\geq n_0$ (with $N\leq M$), we have: $$\sup\left\{\left|\sum_{n=N}^Mf_n(z)\right|:z\in D\right\}< \varepsilon$$
+  \end{theorem}
+  \begin{corollary}
+    Let $(f_n)\in D\subseteq\CC$ be a sequence of functions. If $\sum f_n(z)$ is uniformly convergent on $D\subseteq\CC$, then $(f_n)$ converges uniformly to zero on $D$.
+  \end{corollary}
+  \begin{theorem}
+    Let $(f_n)\in D\subseteq\CC$ be a sequence of continuous functions. If $\sum f_n(z)$ is uniformly convergent on $D\subseteq\CC$, then its sum function is also continuous on $D$.
+  \end{theorem}
+  \begin{theorem}[Weierstra\ss\space M-test]
+    Let $(f_n)\in D\subseteq\CC$ be a sequence of functions such that $|f_n(z)|\leq M_n$ $\forall z\in D$ and suppose that $\sum M_n$ is a convergent series. Then, $\sum f_n(z)$ converges uniformly on $D$.
+  \end{theorem}
+  \subsubsection{Power series}
+  \begin{definition}
+    Let $(z_n)\in\CC$ be a sequence and $z_0\in\RR $. A \emph{power series} centred at $z_0$ is a series of functions of the form $$\sum_{n=0}^\infty a_n{(z-z_0)}^n$$
+  \end{definition}
+  \begin{prop}
+    Let $\sum a_n{(z-z_0)}^n$ be a power series. Suppose there exists an $x_1\in\RR $ such that $\sum a_n(x_1-x_0)^n<\infty$. Then, $\sum a_n{(z-z_0)}^n$ converges uniformly on any closed interval $I\subset A=\{x\in\RR :|z-z_0|<|x_1-x_0|\}$.
+  \end{prop}
+  \begin{theorem}[Cauchy-Hadamard theorem]
+    Let $\sum a_n{(z-z_0)}^n$ be a power series and consider $$R=\left(\limsup_{n\to\infty}\sqrt[n]{|a_n|}\right)^{-1}\in[0,\infty]$$
+    Then:
+    \begin{enumerate}
+      \item If $|z-z_0|<R\implies\sum a_n{(z-z_0)}^n$ converges absolutely.
+      \item If $0\leq r<R\implies\sum a_n{(z-z_0)}^n$ converges uniformly on $\{z\in\CC:|z-z_0|\leq r\}$.
+      \item If $|z-z_0|>R\implies\sum|a_n|{|z-z_0|}^n$ diverges.
+    \end{enumerate}
+    The number $R$ is called \emph{radius of convergence} of series.
+  \end{theorem}
+  \begin{theorem}[Abel's theorem]
+    Let $\sum a_n{(z-z_0)}^n$ be a power series of complex numbers with radius of convergence $R$ satisfying $\sum a_nR^n<\infty$. Then, the series $\sum a_n{(z-z_0)}^n$ converges uniformly on $[0,R]$.
+  \end{theorem}
+  \begin{prop}
+    Let $f:\CC\rightarrow\CC$ be the sum function of a power series. Then $f$ is continuous on the domain of convergence of the series.
+  \end{prop}
+  \subsubsection{Exponential and trigonometric functions}
+  \begin{definition}
+    For all $z \in \CC$, we define the \textit{complex exponential function} as: $$\exp{z}:=\sum_{n=0}^\infty\frac{z^n}{n!}$$
+  \end{definition}
+  \begin{prop}
+    The radius of convergence of $\exp{z}$ is infinite and its image is $\CC^*$.
+  \end{prop}
+  \begin{prop}
+    Let $z,w\in\CC$. Then:
+    \begin{enumerate}
+      \item $\exp{z+w}=\exp{z}\exp{w}$
+      \item $\overline{\exp{z}}=\exp{\overline{z}}$
+      \item $|\exp{z}|=\exp{\Re z}$
+    \end{enumerate}
+  \end{prop}
+  \begin{corollary}[Euler's formula]
+    Let $x\in\RR$. Then: $$\exp{\ii x}=\cos x+\ii \sin x$$
+  \end{corollary}
+  \begin{corollary}
+    Let $z,w\in\CC$. Then:
+    \begin{enumerate}
+      \item $\exp{z}$ is periodic of period $2\pi i$: $\exp{z+2\pi \ii}=\exp{z}$
+      \item $\exp{z}=\exp{w}\iff z=w+2\pi \ii k$, $k\in\ZZ$.
+    \end{enumerate}
+  \end{corollary}
+  \begin{corollary}
+    Let $x\in\RR$. Then: $$\cos x=\sum_{n=0}^\infty\frac{(-1)^nx^{2n}}{(2n)!}\qquad\sin x=\sum_{n=0}^\infty\frac{(-1)^nx^{2n+1}}{(2n+1)!}$$
+  \end{corollary}
+  \begin{prop}[De Moivre's formula]
+    Let $\theta\in\RR$ and $n\in\ZZ$. Then: $${(\cos{\theta} + \ii\sin{\theta})}^n = \cos{(n\theta)} + \ii\sin{(n\theta)}$$
+  \end{prop}
+  \begin{theorem}
+    There are $n$ $n$-th roots of any complex number $z\in \CC^*$. Assuming $z=r(\cos\theta + \ii\sin\theta)$, these roots are: $$\sqrt[n]{r}\left[\cos\left(\frac{\theta}{n}+\frac{2\pi}{n}k\right)+\ii\sin\left(\frac{\theta}{n}+\frac{2\pi}{n}k\right)\right]$$ for $k=0,\ldots,n-1$.
+  \end{theorem}
+  \begin{prop}
+    The solutions to the equation $\exp{z}=1$ are $z=2\pi i k$, $k\in\ZZ$.
+  \end{prop}
+  \begin{corollary}
+    Let $z\in\CC^*$. Then, the equation $\exp{w}=z$ has infinitely many solutions.
+  \end{corollary}
+  \begin{definition}
+    Let $z\in \CC$. We define a \emph{complex natural logarithm} of $z$ as a solution to the equation $\exp{w}=z$. That is: $$\ln z:=\ln |z|+\arg z$$
+    We define the \emph{principal value} of $\ln z$ as: $$\Ln z:=\ln |z|+\Arg z$$
+  \end{definition}
 \end{multicols}
 \end{document}

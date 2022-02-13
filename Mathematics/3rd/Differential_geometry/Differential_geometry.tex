@@ -2,6 +2,80 @@
 
 \begin{document}
 \begin{multicols}{2}[\section{Differential geometry}]
-
+  \subsection{Curves}
+  \subsubsection{Inner product of \texorpdfstring{$\RR^n$}{Rn}}
+  \begin{prop}
+    Let $\vf{u},\vf{v}\in\RR^n$ be vectors and $\langle\vf{u},\vf{v}\rangle$ be the usual inner product between $\vf{u}$ and $\vf{v}$ in $\RR^n$. Then:
+    \begin{itemize}
+      \item Cauchy-Schwarz inequality: $$|\langle\vf{u},\vf{v}\rangle|\leq\|\vf{u}\|\|\vf{v}\|$$
+      \item Triangular inequality: $$\|\vf{u}+\vf{v}\|\leq\|\vf{u}\|+\|\vf{v}\|$$
+      \item Polarization identity: $$\langle\vf{u},\vf{v}\rangle=\frac{1}{2} \left(\|\vf{u}+\vf{v}\|^2-\|\vf{u}\|^2 - \|\vf{v}\|^2\right)$$
+    \end{itemize}
+  \end{prop}
+  \begin{definition}
+    Let $\vf{u},\vf{v}\in\RR^n$ be vectors. We define the angle between $\vf{u}$ and $\vf{v}$ as the unique value $\theta\in[0,\pi]$ such that: $$\cos\theta=\frac{\langle\vf{u},\vf{v}\rangle}{\|\vf{u}\|\|\vf{v}\|}$$
+  \end{definition}
+  \subsubsection{Parametrized curves}
+  \begin{definition}
+    Let $U\subseteq\RR^n$ be an open set and $\vf{f}:U\rightarrow\RR^n$ be a differentiable function. We say that $\vf{f}$ is a \emph{local diffeomorphism} if $\forall p\in U$, there exists a neighborhood $V\subseteq U$ of $p$ such that $\vf{f}|_V:V\rightarrow \vf{f}(V)$ is a diffeomorphism.
+  \end{definition}
+  \begin{prop}
+    Let $I\subseteq\RR$ be an open interval and $f:I\rightarrow\RR$ be a differentiable function. If $f'(x)\ne 0$ $\forall x\in I$, then $f(I)$ is an open set and $f$ is a diffeomorphism.
+  \end{prop}
+  \begin{prop}
+    Let $I\subseteq\RR$ be an open interval and $\vf{\alpha},\vf{\beta}:I\rightarrow\RR^n$ be differentiable functions. Then:
+    \begin{enumerate}
+      \item $\dv{}{t}\langle\vf{\alpha}(t),\vf{\beta}(t)\rangle=\langle\vf{\alpha}'(t),\vf{\beta}(t)\rangle+\langle\vf{\alpha}(t),\vf{\beta}'(t)\rangle$
+      \item If $t\mapsto\|\vf{\alpha}(t)\|$ is a constant function, then $\vf{\alpha}\perp\vf{\alpha}'$.
+    \end{enumerate}
+  \end{prop}
+  \begin{definition}
+    Let $I\subseteq\RR$ be an open interval. A \emph{parametrized curve of class $\mathcal{C}^k$} in $\RR^n$ is a function $\vf{\alpha}:I\rightarrow\RR^n$ of class $\mathcal{C}^k$ .
+  \end{definition}
+  \begin{definition}
+    Let $\vf{\alpha}:I\rightarrow\RR^n$ be a parametrized curve of class $\mathcal{C}^1$. We define the \emph{tangent vector} of $\vf{\alpha}$ at $t_0\in\RR$ as $\vf{\alpha}'(t_0)$. We say that $\vf{\alpha}$ is \emph{regular} if $\vf{\alpha}'(t)\ne 0$ $\forall t\in I$. In that last case, we define the \emph{tangent line} of $\vf{\alpha}$ at $\vf{\alpha}(t_0)$ as the following parametrized line in $\RR^n$: $$s\longmapsto \vf{\alpha}(t_0)+s\vf{\alpha}'(t_0)$$
+  \end{definition}
+  \begin{definition}
+    Let $\vf{\alpha}:I\rightarrow\RR^n$ be a regular parametrized curve of class $\mathcal{C}^1$, $I,J\subseteq\RR$ be open intervals and $h:J\rightarrow I$ be a diffeomorphism. Then, $\vf{\beta}:=\vf{\alpha}\circ h:J\rightarrow\RR^n$ is a curve satisfying: $$\vf{\beta}'(s)=\vf{\alpha}'(h(s))h'(s)\quad\forall s\in J$$ Hence, $\vf{\beta}$ is regular. In that case, we say that $\vf{\beta}$ is a \emph{reparametrization} of $\vf{\alpha}$ and $h$ is a \emph{change of parameter}. Moreover, the parametrization is \emph{positive} if $h'(s)>0$ $\forall s\in J$ and it is \emph{negative} if $h'(s)<0$ $\forall s\in J$.
+  \end{definition}
+  \subsubsection{Length of curves}
+  \begin{definition}
+    Let $\vf{\alpha}:I\rightarrow\RR^n$ be a parametrized curve of class $\mathcal{C}^1$ and $[a,b]\subset I$. We say that the \emph{length} of $\alpha$ between $a$ and $b$ is: $$\ell_{a,b}(\vf{\alpha})=\int_a^b\|\vf{\alpha}'(t)\|\dd t$$
+  \end{definition}
+  \begin{prop}
+    Let $\vf{\alpha}:I\rightarrow\RR^n$ be a parametrized curve of class $\mathcal{C}^1$, $\vf{\beta}=\vf{\alpha}\circ h$ be a reparametrization of $\alpha$ and $[a,b]\subset \im h=I$. Suppose $[c,d]=h^{-1}([a,b])$. Then: $$\int_c^d\|\vf{\beta}'(u)\|\dd u=\int_a^b\|\vf{\alpha}'(t)\|\dd t$$ That is, the length of a curve does not depend on its parametrization.
+  \end{prop}
+  \begin{definition}
+    Let $\vf{\alpha}:I\rightarrow\RR^n$ be a parametrized of a curve of class $\mathcal{C}^0$, $[a,b]\subset I$, $\mathfrak{P}([a,b])$ be the set of all partitions of $[a,b]$ and $\mathcal{P}=\{t_0,\ldots,t_n\}\in\mathfrak{P}$. We define the \emph{length of the polygonal} with vertices at $\vf{\alpha}(t_i)$, $i=1,\ldots,n$ as: $$L_{a,b}(\vf{\alpha},\mathcal{P})=\sum_{i=1}^n\|\vf{\alpha}(t_i)-\vf{\alpha}(t_{i-1})\|$$ We define $L_{a,b}(\vf{\alpha})$ as:
+    $$L_{a,b}(\vf{\alpha}):=\sup\{L_{a,b}(\vf{\alpha},\mathcal{P}):\mathcal{P}\in\mathfrak{P}([a,b])\}\in\RR_{\geq 0}\cup\{+\infty\}$$ If $L_{a,b}(\vf{\alpha})<+\infty$, we say that $\vf{\alpha}$ is \emph{rectifiable} and that $L_{a,b}(\vf{\alpha})$ is its length in $[a,b]$.
+  \end{definition}
+  \begin{prop}
+    Let $\vf{\alpha}:I\rightarrow\RR^n$ be a parametrized curve of class $\mathcal{C}^1$. Then, $\vf{\alpha}$ is rectifiable and: $$L(\vf{\alpha})=\int_a^b\|\vf{\alpha}'(t)\|\dd t$$
+  \end{prop}
+  \begin{definition}
+    Let $\vf{\alpha}:I\rightarrow\RR^n$ be a parametrized curve of class $\mathcal{C}^1$ and $a\in I$. We define the \emph{arc length function} of $\vf{\alpha}$ with origin $a$, the function $s_a:I\rightarrow\RR$ defined as: $$s_a=\int_a^t\|\vf{\alpha}'(u)\|\dd u$$
+  \end{definition}
+  \begin{prop}
+    Let $\vf{\alpha}:I\rightarrow\RR^n$ be a parametrized curve of class $\mathcal{C}^1$ and $a\in I$.
+    \begin{enumerate}
+      \item $s_a$ is of class $\mathcal{C}^1$ and $\dv{s_a}{t}(t_0)=\|\vf{\alpha}'(t_0)\|\geq 0$.
+      \item If $\vf{\alpha}$ is regular, then $J:=s_a(I)\subseteq\RR$ is an open interval and $s_a:I\rightarrow J$ is a diffeomorphism.
+      \item If $\vf{\alpha}$ is regular, then $\vf{\beta}(s_a):=\vf{\alpha}(t(s_a))$\footnote{Here, $t(s_a)$ represent the inverse function of $s_a(t)$.} is a reparametrization which satisfies $\|\vf{\beta}'(s_a)\|=1$ $\forall s_a\in J$.
+    \end{enumerate}
+  \end{prop}
+  \begin{definition}
+    Let $\vf{\alpha}:I\rightarrow\RR^n$ be a parametrized curve of class $\mathcal{C}^1$. We say that $\vf{\alpha}$ is a \emph{unit-speed parametrization} (or that it is parametrized by \emph{arc-length parameter}) if $\|\vf{\alpha}(t)\|=1$ $\forall t\in I$
+  \end{definition}
+  \begin{prop}
+    Let $\vf{\alpha}:I\rightarrow\RR^n$ be a regular parametrized curve of class $\mathcal{C}^1$ and $\vf{\beta}=\vf{\alpha}\circ h$ be a reparametrization of $\alpha$. If $\vf{\alpha}$ and $\vf{\beta}$ are unit-speed parametrizations, then: $$\vf{\beta}(u)=\vf{\alpha}(\pm u+u_0)$$ for some $u_0\in\RR$.
+  \end{prop}
+  \begin{definition}
+    Let $\vf{\alpha},\vf{\beta}:I\rightarrow\RR^n$ be arc-length parametrized curves of class $\mathcal{C}^\infty$ and $t_0\in I$. We say that $\vf{\alpha}$ and $\vf{\beta}$ have \emph{contact} of order $\geq r$ at $t_0$ if $$\lim_{t\to t_0}\frac{\vf{\alpha}(t)-\vf{\beta}(t)}{{(t-t_0)}^r}=0$$
+    We say that $\vf{\alpha}$ and $\vf{\beta}$ have \emph{contact} of order $r$ at $t_0$ if they have contact of order $\geq r$ but not contact of order $\geq r+1$.
+  \end{definition}
+  \begin{prop}
+    Let $\vf{\alpha},\vf{\beta}:I\rightarrow\RR^n$ be arc-length parametrized curves of class $\mathcal{C}^\infty$ and $t_0\in I$. Then, $\vf{\alpha}$ and $\vf{\beta}$ have contact of order $\geq r$ at $t_0$ if and only if: $$\vf{\alpha}^{(k)}(t_0)=\vf{\beta}^{(k)}(t_0)\quad\text{for }k=0,\ldots,r$$
+  \end{prop}
+  \subsubsection{Orientability and cross product}
 \end{multicols}
 \end{document}

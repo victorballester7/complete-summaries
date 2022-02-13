@@ -82,24 +82,42 @@
         \newcommand{\divp}{\vf{\nabla}\cdot} % divergence for physics
         % command \laplacian is by default \nabla^2
         %\newcommand{\laplacian}{\nabla^2} % laplacian
-        \DeclareDocumentCommand\derivative{ s o m g d() }
-{ % Total derivative
-    % s: star for \flatfrac flat derivative
-    % o: optional n for nth derivative
-    % m: mandatory (x in df/dx)
-    % g: optional (f in df/dx)
-    % d: long-form d/dx(...)
-    \IfBooleanTF{#1}
-    {\let\fractype\flatfrac}
-    {\let\fractype\frac}
-    \IfNoValueTF{#4}
-    {
-        \IfNoValueTF{#5}
-        {\fractype{\diffd \IfNoValueTF{#2}{}{^{#2}}}{\diffd #3\IfNoValueTF{#2}{}{^{#2}}}}
-        {\fractype{\diffd \IfNoValueTF{#2}{}{^{#2}}}{\diffd #3\IfNoValueTF{#2}{}{^{#2}}} \argopen(#5\argclose)}
-    }
-    {\fractype{\diffd \IfNoValueTF{#2}{}{^{#2}} #3}{\diffd #4\IfNoValueTF{#2}{}{^{#2}}}\IfValueT{#5}{(#5)}}
-} % differential operator
+        \DeclareDocumentCommand\derivative{ s o m g d() }{ 
+          % Total derivative
+          % s: star for \flatfrac flat derivative
+          % o: optional n for nth derivative
+          % m: mandatory (x in df/dx)
+          % g: optional (f in df/dx)
+          % d: long-form d/dx(...)
+            \IfBooleanTF{#1}
+            {\let\fractype\flatfrac}
+            {\let\fractype\frac}
+            \IfNoValueTF{#4}
+            {
+                \IfNoValueTF{#5}
+                {\fractype{\diffd \IfNoValueTF{#2}{}{^{#2}}}{\diffd #3\IfNoValueTF{#2}{}{^{#2}}}}
+                {\fractype{\diffd \IfNoValueTF{#2}{}{^{#2}}}{\diffd #3\IfNoValueTF{#2}{}{^{#2}}} \argopen(#5\argclose)}
+            }
+            {\fractype{\diffd \IfNoValueTF{#2}{}{^{#2}} #3}{\diffd #4\IfNoValueTF{#2}{}{^{#2}}}\IfValueT{#5}{(#5)}}
+        } % differential operator
+        \DeclareDocumentCommand\partialderivative{ s o m g d() }{ 
+          % Total derivative
+          % s: star for \flatfrac flat derivative
+          % o: optional n for nth derivative
+          % m: mandatory (x in df/dx)
+          % g: optional (f in df/dx)
+          % d: long-form d/dx(...)
+            \IfBooleanTF{#1}
+            {\let\fractype\flatfrac}
+            {\let\fractype\frac}
+            \IfNoValueTF{#4}
+            {
+                \IfNoValueTF{#5}
+                {\fractype{\partial \IfNoValueTF{#2}{}{^{#2}}}{\partial #3\IfNoValueTF{#2}{}{^{#2}}}}
+                {\fractype{\partial \IfNoValueTF{#2}{}{^{#2}}}{\partial #3\IfNoValueTF{#2}{}{^{#2}}} \argopen(#5\argclose)}
+            }
+            {\fractype{\partial \IfNoValueTF{#2}{}{^{#2}} #3}{\partial #4\IfNoValueTF{#2}{}{^{#2}}}\IfValueT{#5}{(#5)}}
+        } % differential operator
         \newcommand{\ii}{\mathrm{i}} % imaginary unit
         \renewcommand{\exp}[1]{\mathrm{e}^{#1}} % exponential function
         \newcommand{\upint}[2]{\overline{\int_{#1}^{#2}}} % upper integral
@@ -109,6 +127,7 @@
         \DeclareMathOperator{\supp}{supp} % support of a function
         \DeclareMathOperator{\vol}{vol} % volume of a region
         \newcommand{\crossprod}{\crossproduct} % cross product
+
 
     %%% ALGEBRA
         \newcommand{\bigzero}{\makebox(0,0){\text{\Huge0}}} % 0 big zero in a matrix
@@ -144,6 +163,7 @@
         \newcommand{\topo}{\tau} % symbol for the topology. Feasible options are: \tau, \mathcal{T}...
         \newcommand{\conn}{\mathrel{\#}} % connected sum. \mathrel gives the space of a relation (like +,-,...) while \mathbin gives the space of a binary operator (like =).
         
+
     %%% GALOIS THEORY
         \newcommand{\FF}{\ensuremath{\mathbb{F}}} % finite fields
         \DeclareMathOperator{\irr}{Irr} % irreducible polynomial 
@@ -160,9 +180,18 @@
         \DeclareMathOperator{\Var}{Var} % varinace
         \DeclareMathOperator{\cov}{Cov} % covarinace
 
+    %%% STATISTICS
+        \DeclareMathOperator{\bias}{bias} % Bias
 
+    %%%% COMPLEX ANALYSIS
+        % \DeclareMathOperator{\arg}{arg} % argument. By default is arg(z).
+        \DeclareMathOperator{\Arg}{Arg} % principal argument
+        \DeclareMathOperator{\Ln}{Ln} % principal logarithm
+        
+
+    
     %%% vectors and matrices
-        \newcommand{\vf}[1]{\boldsymbol{\mathrm{#1}}} % math style for vectors and matrices and vector-values functions (previosuly it was \*vb{#1} but this does not apply to greek letters)
+        \newcommand{\vf}[1]{\boldsymbol{\mathrm{#1}}} % math style for vectors and matrices and vector-values functions (previously it was \*vb{#1} but this does not apply to greek letters)
         \newcommand{\transpose}[1]{\vb{#1}^{\mathrm{T}}} % math style for vectors and matrices
         \DeclareMathOperator{\adjugate}{adj} % adjugate matrix
         \DeclareMathOperator{\cofactor}{cof} % cofactor matrix

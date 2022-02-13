@@ -57,6 +57,7 @@
       \end{aligned}
       \right.
     \end{equation*}
+    This is called a \emph{system of ordinary differential equations} (of order 1) or a \emph{differential system}.
   \end{prop}
   \begin{definition}
     We say that an ode is \emph{autonomous} if it doesn't depend on the independent variable, that is, if it is of the form: $$\vf{x}'=\vf{f}(\vf{x})$$ Otherwise, we say that an ode is \emph{non-autonomous}.
@@ -891,5 +892,43 @@
       \item If $\vf{p}$ is negatively stable, then $\Re(\lambda)\geq 0$ $\forall\lambda\in\sigma(\vf{Df}(\vf{p}))$.
     \end{enumerate}
   \end{theorem}
+  \subsection{Autonomous systems}
+  \subsubsection{Integrable systems}
+  \begin{definition}
+    Let $U\subseteq \RR^n$ be an open set, $\vf{f}:U\rightarrow\RR^n$ be a vector field and $H:U\rightarrow\RR$ be a non-constant function. We say that $H$ is a \emph{first integral} for the differential system $\vf{x}'=\vf{f}(\vf{x})$ if for each solution $\vf{\varphi}(t)$ of that system, we have $H(\vf{\varphi(t)})=\const$ Thus, the phase trajectory of a solution $\vf{\varphi}(t)$ to $\vf{x}'=\vf{f}(\vf{x})$ lies on a level surface of $H$. In particular, if $n=2$, $\vf{\varphi}(t)$ will be a level curve of $H$.
+  \end{definition}
+  \begin{prop}
+    Let $U\subseteq \RR^n$ be an open set, $\vf{f}:U\rightarrow\RR^n$ be a vector field such that $\vf{f}=(f_1,\ldots,f_n)$ and $H:U\rightarrow\RR$ be a non-constant function. Then, $H$ is a first integral for the differential system $\vf{x}'=\vf{f}(\vf{x})$ if and only if: $$\pdv{H}{x_1}(\vf{x})f_1(\vf{\vf{x}})+\cdots+\pdv{H}{x_n}(\vf{x})f_n(\vf{\vf{x}})=0\quad\forall\vf{x}\in U$$
+  \end{prop}
+  \begin{definition}
+    Let $U\subseteq \RR^n$ be an open set, $\vf{f}:U\rightarrow\RR^n$ be a vector field and $H_1,\ldots,H_k:U\rightarrow\RR$ be $k\leq n-1$ first integrals for the differential system $\vf{x}'=\vf{f}(\vf{x})$. We say that $H_1,\ldots,H_k$ are \emph{functionally independent} if for all $\vf{x}\in U$, we have: $$\rank
+      \begin{pmatrix}
+        \pdv{U_1}{x_1}(\vf{x}) & \cdots & \pdv{U_1}{x_n}(\vf{x}) \\
+        \vdots                 & \ddots & \vdots                 \\
+        \pdv{U_k}{x_1}(\vf{x}) & \cdots & \pdv{U_k}{x_n}(\vf{x}) \\
+      \end{pmatrix}=k$$
+  \end{definition}
+  \begin{prop}
+    Let $U\subseteq \RR^n$ be an open set, $\vf{f}:U\rightarrow\RR^n$ be a vector field and $H_1,\ldots,H_k$ be $k\leq n-1$ functionally independent first integrals for the differential system $\vf{x}'=\vf{f}(\vf{x})$. Then, the number of unknowns of the system can be reduced to $n-k$.
+  \end{prop}
+  \begin{definition}
+    Let $U\subseteq \RR^{2n}$ be an open set, $H:U\rightarrow\RR^{2n}$ be a function and $(\vf{x},\vf{y}):=(x_1,\ldots,x_n,y_1,\ldots,y_n)$. The differential system
+    \begin{equation*}
+      \left\{
+      \begin{aligned}
+        {x_1}' & =-\pdv{H}{y_1}(\vf{x}) \\
+               & \;\;\vdots             \\
+        {x_n}' & =-\pdv{H}{y_n}(\vf{x}) \\
+        {y_1}' & =\pdv{H}{x_1}(\vf{x})  \\
+               & \;\;\vdots             \\
+        {y_n}' & =\pdv{H}{x_1}(\vf{x})  \\
+      \end{aligned}
+      \right.
+    \end{equation*}
+    is called \emph{Hamiltonian system} in $2n$ unknowns and $H$ is called \emph{Hamiltonian} of the system.
+  \end{definition}
+  \begin{prop}
+    Let $U\subseteq \RR^{2n}$ be an open set, $H:U\rightarrow\RR^{2n}$ be the Hamiltonian of its Hamiltonian system. Then, $H$ is a first integral of that differential system.
+  \end{prop}
 \end{multicols}
 \end{document}
