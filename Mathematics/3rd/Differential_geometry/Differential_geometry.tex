@@ -77,5 +77,62 @@
     Let $\vf{\alpha},\vf{\beta}:I\rightarrow\RR^n$ be arc-length parametrized curves of class $\mathcal{C}^\infty$ and $t_0\in I$. Then, $\vf{\alpha}$ and $\vf{\beta}$ have contact of order $\geq r$ at $t_0$ if and only if: $$\vf{\alpha}^{(k)}(t_0)=\vf{\beta}^{(k)}(t_0)\quad\text{for }k=0,\ldots,r$$
   \end{prop}
   \subsubsection{Orientability and cross product}
+  \begin{definition}
+    Let $V$ be a vector space and $\mathcal{B}_1$ and $\mathcal{B}_2$ be two bases of $V$. We say that $\mathcal{B}_1\sim\mathcal{B}_2$ if $\det\left([\id]_{\mathcal{B}_1,\mathcal{B}_2}\right)>0$. This relation is an equivalence relation on the set of all bases for $V$ which has two exactly connected components.
+  \end{definition}
+  \begin{definition}
+    Let $V$ be a vector space and $\mathcal{B}_1$ and $\mathcal{B}_2$ be two bases of $V$. We say that $\mathcal{B}_1\sim\mathcal{B}_2$ have the \emph{same orientation} if $\det\left([\id]_{\mathcal{B}_1,\mathcal{B}_2}\right)>0$. Otherwise, we say that they have \emph{opposite orientations}. Note that the property of having the same orientation defines an equivalence relation on the set of all bases for $V$.
+  \end{definition}
+  \begin{definition}
+    An \emph{orientation} on a vector space is the choice of one of the two equivalence classes under $\sim$. A vector space with an orientation selected is called an \emph{oriented vector space}, while one not having an orientation selected, is called an \emph{unoriented vector space}. A basis of an oriented vector space which has the orientation chosen is called \emph{positive basis}, while one with the other orientation is called \emph{negative basis}.
+  \end{definition}
+  \begin{definition}
+    Let $V$ be an oriented vector space, $\mathcal{B}$ be a basis of $V$ and $f:V\rightarrow V$ be a linear isomorphism. We say that $f$ is \emph{orientation-preserving} if $\det \left([f]_{\mathcal{B}}\right)>0$. Analogously, if $\det \left([f]_{\mathcal{B}_1,\mathcal{B}_2}\right)<0$ we say that $f$ is \emph{not orientation-preserving}.
+  \end{definition}
+  \begin{definition}
+    Let $(\vf{v}_1,\ldots,\vf{v}_n)$ be a basis of $\RR^n$. Suppose for each $i\in\{1,\ldots,n\}$ we have $$\vf{v}_i=\sum_{j=1}^n\lambda_{ij}\vf{e}_1$$ where $\lambda_{ij}\in\RR$ and $(\vf{e}_1,\ldots,\vf{e}_n)$ is the standard basis of $\RR^n$. We define the \emph{determinant} of $(\vf{v}_1,\ldots,\vf{v}_n)$ as: $$\det(\vf{v}_1,\ldots,\vf{v}_n):=
+      \begin{pmatrix}
+        \lambda_{11} & \cdots \lambda_{1n} \\
+        \vdots       & \ddots \vdots       \\
+        \lambda_{n1} & \cdots \lambda_{nn} \\
+      \end{pmatrix}$$
+  \end{definition}
+  \begin{prop}
+    Let $\mathcal{B}=(\vf{v}_1,\ldots,\vf{v}_n)$ be a basis of $\RR^n$ and $\vf{A}\in\mathcal{M}_n(\RR)$. Then:
+    $$\det(\vf{A}\vf{v}_1,\ldots,\vf{A}\vf{v}_n)=\det\vf{A}\det(\vf{v}_1,\ldots,\vf{v}_n)$$
+  \end{prop}
+  \begin{prop}
+    Let $\vf{v}_1,\ldots,\vf{v}_n$ be vectors of $\RR^n$ and $P$ be the parallelepiped they generated. Then:
+    $$\vol P=|\det(\vf{v}_1,\ldots,\vf{v}_n)|$$
+  \end{prop}
+  \begin{definition}
+    Let $\vf{u}$, $\vf{v}$ be vectors of $\RR^3$. We define the \emph{cross product} of $\vf{u}$ and $\vf{v}$, denoted by $\vf{u}\times\vf{v}$\footnote{Another commonly used notation for the cross product is $\vf{u}\wedge\vf{v}$.}, as the unique vector $\vf{w}$ satisfying: $$\langle\vf{u}\times\vf{v},\vf{w}\rangle=\det(\vf{u},\vf{v},\vf{w})$$
+  \end{definition}
+  \begin{prop}
+    Let $\vf{u}$, $\vf{v}$ be vectors of $\RR^3$ such that $\vf{u}=\sum_{i=1}^3u_i\vf{e}_i$ and $\vf{v}=\sum_{i=1}^3v_i\vf{e}_i$. Then: $$\vf{u}\times\vf{v}=
+      \begin{vmatrix}
+        \vf{e}_1 & \vf{e}_2 & \vf{e}_3 \\
+        u_1      & u_2      & u_3      \\
+        v_1      & v_2      & v_3      \\
+      \end{vmatrix}$$
+  \end{prop}
+  \begin{prop}
+    Let $\vf{u}$, $\vf{v}$, $\vf{w}$ be vectors of $\RR^3$. Then:
+    \begin{enumerate}
+      \item $\vf{u}\times\vf{v}=-\vf{v}\times\vf{u}$
+      \item $\vf{u}\times\vf{v}=0\iff\vf{u}=\lambda\vf{v}$, for some $\lambda\in\RR$.
+      \item $\vf{u}\times\vf{v}\in{\langle\vf{u},\vf{v}\rangle}^{\perp}$
+      \item If $\vf{u}$ and $\vf{v}$ are linearly independent, $(\vf{u},\vf{v},\vf{u}\times\vf{v})$ is a positive basis of $\RR^n$.
+      \item If $\vf{x}$, $\vf{y}$ are vectors of $\RR^3$, then: $$\langle\vf{u}\times\vf{v},\vf{x}\times\vf{y}\rangle=
+              \begin{vmatrix}
+                \vf{u}\times\vf{x} & \vf{v}\times\vf{x} \\
+                \vf{u}\times\vf{y} & \vf{v}\times\vf{y} \\
+              \end{vmatrix}$$
+      \item Let $\theta\in[0,\pi]$ the angle between $\vf{u}$ and $\vf{v}$. Then: $$\|\vf{u}\times\vf{v}\|=\|\vf{u}\|\|\vf{v}\|\sin\theta$$
+      \item $(\vf{u}\times\vf{v})\times\vf{w}=\langle\vf{u},\vf{w}\rangle\vf{v}-\langle\vf{v},\vf{w}\rangle\vf{u}$
+      \item \emph{Jacobi identity}: $$(\vf{u}\times\vf{v})\times\vf{w}+(\vf{v}\times\vf{w})\times\vf{u}+(\vf{w}\times\vf{u})\times\vf{v}=\vf{0}$$
+    \end{enumerate}
+  \end{prop}
+  \subsubsection{Frenet formulas}
 \end{multicols}
 \end{document}

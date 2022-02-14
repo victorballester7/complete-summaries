@@ -20,20 +20,30 @@
     Let $\Theta\subseteq\CC^p$ be a set and $F:\RR\times\Theta\rightarrow[0,\infty)$ be a function a such that $\forall \theta\in\Theta$, $F(\cdot,\theta)$ is a cdf. In these conditions, we say that $(F(\cdot,\theta))_{\theta\in\Theta}$ is a \emph{family of cdfs} and $\Theta$ is the \emph{parameter space}.
   \end{definition}
   \begin{definition}
-    Let $\Theta$ be a parameter space and $\theta\in\Theta$. An \emph{estimator} of $\theta$ is a statistic $T$ which does not depend on any unknown parameter.
+    Let $n\in\NN$ and $X_1,\ldots,X_n$ be a simple random sample, $\Theta$ be a parameter space and $\theta\in\Theta$. An \emph{estimator} of $\theta$ is a statistic $T_{n,\theta}$ of $X_1,\ldots,X_n$ which does not depend on any unknown parameter\footnote{They are used to give an estimation of the unknown parameter $\theta$.}.
   \end{definition}
   \begin{prop}
-    Let $n\in\NN$ and $X_1,\ldots,X_n$ be a simple random sample with mean $\mu$ and variance $\sigma^2$. Then: $$\Exp(\overline{X}_n)=\mu\quad\text{and}\quad\Var(\overline{X}_n)=\sigma^2$$
+    Let $n\in\NN$ and $X_1,\ldots,X_n$ be a simple random sample with mean $\mu$ and variance $\sigma^2$. Then: $$\Exp{(\overline{X}_n)}=\mu\quad\text{and}\quad\Var{(\overline{X}_n)}=\sigma^2$$
   \end{prop}
   \begin{prop}
-    Let $n\in\NN$ and $X_1,\ldots,X_n$ be a simple random sample with variance $\sigma^2$. Then: $$\Exp({S_n}^2)=\sigma^2$$
+    Let $n\in\NN$ and $X_1,\ldots,X_n$ be a simple random sample with variance $\sigma^2$. Then: $$\Exp{({S_n}^2)}=\sigma^2$$
   \end{prop}
   \begin{definition}
-    Let $\Theta$ be a parameter space and $T$ be an estimator of $\theta\in\Theta$. We define the \emph{bias} of $T$ with respect to $\theta$ as: $$\bias_\theta(T):=\Exp_\theta(T)-\theta$$ We say that $T$ is an \emph{unbiased estimator} of $\theta$ if $\bias_\theta(T)=0$. Otherwise, we say that it is a \emph{biased estimator} of $\theta$.
+    Let $n\in\NN$ and $X_1,\ldots,X_n$ be a simple random sample, $\Theta$ be a parameter space and $T_{n,\theta}$ be an estimator of $\theta\in\Theta$. We define the \emph{bias} of $T_{n,\theta}$ with respect to $\theta$ as: $$\bias{(T_{n,\theta})}:=\Exp{(T_{n,\theta})}-\theta$$ We say that $T_{n,\theta}$ is an \emph{unbiased estimator} of $\theta$ if $\bias{(T_{n,\theta})}=0$. Otherwise, we say that it is a \emph{biased estimator} of $\theta$.
   \end{definition}
   \begin{definition}
-    Let $\Theta$ be a parameter space and $T$ be an estimator of $\theta\in\Theta$. The \emph{mean square error} (\emph{m.s.e.}) of $T$ is the function: $$\text{MSE}_\theta(T):=\Exp_\theta((T-\theta)^2)$$
+    Let $n\in\NN$ and $X_1,\ldots,X_n$ be a simple random sample, $\Theta$ be a parameter space and $T_{n,\theta}$ be an estimator of $\theta\in\Theta$. We say that $T_{n,\theta}$ is \emph{consistent} if $$T_{n,\theta}\overset{\Prob}{\longrightarrow}\theta$$
   \end{definition}
+  \begin{definition}
+    Let $n\in\NN$ and $X_1,\ldots,X_n$ be a simple random sample, $\Theta$ be a parameter space and $T_{n,\theta}^1$, $T_{n,\theta}^2$ be estimators of $\theta\in\Theta$. We say that $T_{n,\theta}^1$ is \emph{more efficient than} $T_{n,\theta}^2$ if $$\Var{(T_{n,\theta}^1)}<\Var{(T_{n,\theta}^2)}\quad\forall\theta\in\Theta$$
+  \end{definition}
+  \begin{definition}
+    Let $n\in\NN$ and $X_1,\ldots,X_n$ be a simple random sample, $\Theta$ be a parameter space and $T_{n,\theta}$ be an estimator of $\theta\in\Theta$. The \emph{mean squared error} (\emph{m.s.e.}) of $T_{n,\theta}$ is the function: $$\MSE{(T_{n,\theta})}:=\Exp{((T_{n,\theta}-\theta)^2)}$$
+  \end{definition}
+  \begin{prop}
+    Let $n\in\NN$ and $X_1,\ldots,X_n$ be a simple random sample, $\Theta$ be a parameter space and $T_{n,\theta}$ be an estimator of $\theta\in\Theta$. Then: $$\MSE{(T_{n,\theta})}=\Var{(T_{n,\theta})}+{\bias{(T_{n,\theta})}}^2$$
+  \end{prop}
+
   % \begin{definition}
   %   Let $n\in\NN$, $X_1,\ldots,X_n$ be a simple random sample and $\vf{g}:\RR^n\rightarrow\RR^m$ be a Borel measurable function. Then, we say that $\vf{T}_n=\vf{g}(X_1,\ldots,X_n)$ is a \emph{vectorial statistic}.
   % \end{definition}
