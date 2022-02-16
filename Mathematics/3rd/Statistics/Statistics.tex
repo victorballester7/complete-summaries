@@ -3,6 +3,17 @@
 \begin{document}
 \begin{multicols}{2}[\section{Statistics}]
   \subsection{Estimation statistics}
+  % \subsubsection{Stadistical models}
+  % \begin{definition}
+  %   Let $(\Omega,\mathcal{A},\Prob)$ be a probability space\footnote{From now on we will assume that the random variables are defined in the same probability space $(\Omega,\mathcal{A},\Prob)$, so we will omit to say that.}, $n\in\NN$, $\vf{X}_n=(X_1,\ldots,X_n)$ be a random vector and $\Theta$ be a set. A \emph{statistical model} is the triplet $(\Omega,\mathcal{A},\{\Prob_{\vf{X}_n}^\theta:\theta\in\Theta\})$. Here, $\{\Prob_{\vf{X}_n}^\theta:\theta\in\Theta\}$ denotes a family of distributions of $\vf{X}_n$, indexed by $\theta\in\Theta$. This last set $\Theta$ is called \emph{parameter space}. The outcomes of $\vf{X}$ are called \emph{random samples} and they are usually denoted as $\vf{x}=(x_1,\ldots,x_n)$.
+  % \end{definition}
+  % \begin{definition}
+  %   A statistical model $(\Omega,\mathcal{A},\{\Prob_{\vf{X}_n}^\theta:\theta\in\Theta\})$ is said to be \emph{parametric} if $\Theta\subseteq \RR^k$ for some $k\in\NN$\footnote{There are cases where $\Theta$ is not a subset of $\RR^k$. For example, we could be $\Theta=\{f:\RR\rightarrow\RR_{\geq 0} : \int_{-\infty}^{+\infty}=1\}$.}.
+  % \end{definition}
+  % \subsubsection{Stadistics and estimators}
+  % \begin{definition}
+  %   Let $(\Omega,\mathcal{A},\{\Prob_{\vf{X}_n}^\theta:\theta\in\Theta\})$ be a statistical model. We define a \emph{statistic} $T$ of $X_1,\ldots,X_n$ is a function $T_n:\RR^n\rightarrow\RR$. Hence, $T_n(X_1,\ldots,X_n)$ is a random variable.
+  % \end{definition}
   \subsubsection{Stadistics and point estimation}
   \begin{definition}
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space\footnote{From now on we will assume that the random variables are defined in the same probability space $(\Omega,\mathcal{A},\Prob)$, so we will omit to say that.}, $n\in\NN$ and $X_1,\ldots,X_n$ be $n$ random variables. We denominate such set of random variables as a \emph{random sample} (or simply \emph{sample}) of size $n$. If, moreover, the random variables are i.i.d., we say they are a \emph{simple random sample} of size $n$.
@@ -17,13 +28,13 @@
     Let $n\in\NN$ and $X_1,\ldots,X_n$ be a simple random sample. We define the statistic \emph{sample variance} as: $${{\hat{\sigma}}_n}^2:=\frac{1}{n}\sum_{i=1}^n{(X_i-\overline{X}_n)}^2$$ We define the statistic \emph{corrected sample variance} as: $${S_n}^2:=\frac{1}{n-1}\sum_{i=1}^n{(X_i-\overline{X}_n)}^2$$
   \end{definition}
   \begin{definition}
-    Let $\Theta\subseteq\CC^p$ be a set and $F:\RR\times\Theta\rightarrow[0,\infty)$ be a function a such that $\forall \theta\in\Theta$, $F(\cdot,\theta)$ is a cdf. In these conditions, we say that $(F(\cdot,\theta))_{\theta\in\Theta}$ is a \emph{family of cdfs} and $\Theta$ is the \emph{parameter space}.
+    Let $\Theta$ be a set and $F:\RR\times\Theta\rightarrow[0,\infty)$ be a function a such that $\forall \theta\in\Theta$, $F(\cdot,\theta)$ is a cdf. In these conditions, we say that $(F(\cdot,\theta))_{\theta\in\Theta}$ is a \emph{family of cdfs} and $\Theta$ is the \emph{parameter space}\footnote{Note that $\Theta$ is not necessarily a subset of $\RR^p$, for some $p\in\NN$. For example, it could be $\Theta=\{f:\RR\rightarrow\RR_{\geq 0} : \int_{-\infty}^{+\infty}=1\}$.}.
   \end{definition}
   \begin{definition}
     Let $n\in\NN$ and $X_1,\ldots,X_n$ be a simple random sample, $\Theta$ be a parameter space and $\theta\in\Theta$. An \emph{estimator} of $\theta$ is a statistic $T_{n,\theta}$ of $X_1,\ldots,X_n$ which does not depend on any unknown parameter\footnote{They are used to give an estimation of the unknown parameter $\theta$.}.
   \end{definition}
   \begin{prop}
-    Let $n\in\NN$ and $X_1,\ldots,X_n$ be a simple random sample with mean $\mu$ and variance $\sigma^2$. Then: $$\Exp{(\overline{X}_n)}=\mu\quad\text{and}\quad\Var{(\overline{X}_n)}=\sigma^2$$
+    Let $n\in\NN$ and $X_1,\ldots,X_n$ be a simple random sample with mean $\mu$ and variance $\sigma^2$. Then: $$\Exp{(\overline{X}_n)}=\mu\quad\text{and}\quad\Var{(\overline{X}_n)}=\frac{\sigma^2}{n}$$
   \end{prop}
   \begin{prop}
     Let $n\in\NN$ and $X_1,\ldots,X_n$ be a simple random sample with variance $\sigma^2$. Then: $$\Exp{({S_n}^2)}=\sigma^2$$
@@ -43,7 +54,10 @@
   \begin{prop}
     Let $n\in\NN$ and $X_1,\ldots,X_n$ be a simple random sample, $\Theta$ be a parameter space and $T_{n,\theta}$ be an estimator of $\theta\in\Theta$. Then: $$\MSE{(T_{n,\theta})}=\Var{(T_{n,\theta})}+{\bias{(T_{n,\theta})}}^2$$
   \end{prop}
-
+  \subsubsection{Sufficient statistics}
+  \begin{definition}
+    Let $n\in\NN$ and $X_1,\ldots,X_n$ be a simple random sample, $\Theta$ be a parameter space and $T_{n,\theta}$ be an estimator of $\theta\in\Theta$. We say that $T_{n,\theta}$ is \emph{sufficient} for $\theta$ if the joint conditional distribution of $(X_1,\ldots,X_n)$ given $T_{n,\theta}=t$ does not depend on $\theta$.
+  \end{definition}
   % \begin{definition}
   %   Let $n\in\NN$, $X_1,\ldots,X_n$ be a simple random sample and $\vf{g}:\RR^n\rightarrow\RR^m$ be a Borel measurable function. Then, we say that $\vf{T}_n=\vf{g}(X_1,\ldots,X_n)$ is a \emph{vectorial statistic}.
   % \end{definition}

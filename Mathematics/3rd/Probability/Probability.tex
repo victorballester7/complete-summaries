@@ -215,9 +215,10 @@
   \end{definition}
   \begin{definition}
     The \emph{$\sigma$-algebra of all Lebesgue measurable sets in $\RR^n$}, $\mathcal{L}_n\subset\mathcal{P}(\RR^n)$, is defined as:
-    \begin{multline*}
-      \mathcal{L}_n:=\{A\subseteq\RR^n:A=B\cup N\text{ with }B\in\mathcal{B}(\RR^n)\\\text{ and $N$ is a null set}\}
-    \end{multline*}
+    \begin{equation*}
+      \mathcal{L}_n:=\{A\subseteq\RR^n:A=B\cup N\}
+    \end{equation*}
+    where $B\in\mathcal{B}(\RR^n)$ and $N$ is a null set.
   \end{definition}
   \begin{theorem}
     We can extend the concept of volume on rectangles in $\RR^n$ to all the elements in $\mathcal{L}_n$. This extension is called \emph{Lebesgue measure} (or simply \emph{volume}) in $\RR^n$.
@@ -433,15 +434,16 @@
   \end{prop}
   \begin{definition}[Continuous uniform distribution]
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space. We say that an absolutely continuous random variable $X$ follows a \emph{continuous uniform distribution} on $(a,b)$ (also $[a,b]$), and we denoted it by $X\sim U(a,b)$, if $X$ has the pdf $$f_X(x)=\frac{1}{b-a}\vf{1}_{(a,b)}(x)$$ where $\vf{1}_{(a,b)}$ is the indicator function. Therefore, its cdf is:
-    \begin{multline*}
-      F_X(x)=\left\{
+    \begin{equation*}
+      F_X(x) =\left\{
       \begin{array}{ccl}
         0                            & \text{if} & x\leq a \\
         \displaystyle\frac{x-a}{b-a} & \text{if} & a<x<b   \\
         1                            & \text{if} & x\geq b \\
       \end{array}
-      \right.=\\=\frac{x-a}{b-a}\vf{1}_{(a,b)}(x)+\vf{1}_{[b,\infty)}(x)
-    \end{multline*}
+      \right.
+    \end{equation*}
+    Or, equivalently: $$F_X(x)=\frac{x-a}{b-a}\vf{1}_{(a,b)}(x)+\vf{1}_{[b,\infty)}(x)$$
   \end{definition}
   \begin{definition}[Exponential distribution]
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space. We say that an absolutely continuous random variable $X$ follows an \emph{exponential distribution} of parameter $\lambda>0$, and we denoted it by $X\sim \text{Exp}(\lambda)$, if $X$ has the pdf: $$f_X(x)=\lambda\exp{-\lambda x}\vf{1}_{(0,\infty)}$$ Furthermore, its cdf is:
@@ -537,9 +539,10 @@
   \end{prop}
   \begin{definition}[Marginal probability mass functions]
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $\vf{X}=(X_1,\ldots,X_n)$ be a discrete random vector with support $S_{\vf{X}}=S_{X_1}\times\cdots\times S_{X_n}$. Then, the \emph{marginal probability mass functions} (\emph{marginal pmf}) of $\vf{X}$ are:
-    \begin{multline*}
-      p_{X_i}(x_i)=\Prob(X_i=x_i)=\\=\sum_{\substack{y_j\in S_{X_j}\\j\ne i}}p_{\vf{X}}(y_1,\ldots,y_{i-1},x_i,y_{i+1},\ldots,y_n)
-    \end{multline*}
+    \begin{align*}
+      p_{X_i}(x_i) & =\Prob(X_i=x_i)                 \\
+                   & =\sum_{\substack{y_j\in S_{X_j} \\j\ne i}}p_{\vf{X}}(y_1,\ldots,y_{i-1},x_i,y_{i+1},\ldots,y_n)
+    \end{align*}
     for $i=1,\ldots,n$.
   \end{definition}
   \begin{definition}[Multinomial distrbution]
@@ -850,6 +853,10 @@
     \end{itemize}
   \end{prop}
   \begin{prop}
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X_i\sim\text{Pois}(\lambda_i)$ be random variables for some $\lambda_i>0$, $i=1,\ldots,n$. Suppose that $X_1,\ldots,X_n$ are independent. Then:
+    $$X_1+\cdots+X_n\sim\text{Pois}(\lambda_1+\cdots+\lambda_n)$$
+  \end{prop}
+  \begin{prop}
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $\mu_i\in\RR$ and $\sigma_i\in\RR$ for $i=1,\ldots,n$. Let $X_i\sim N(\mu_i,{\sigma_i}^2)$ be independent random variables for $i=1,\ldots,n$. Then: $$X_1+\cdots+X_n\sim N(\mu_1+\cdots+\mu_n,{\sigma_1}^2+\cdots+{\sigma_n}^2)$$
   \end{prop}
   \subsubsection{Conditional expectation}
@@ -922,7 +929,7 @@
     \end{itemize}
   \end{corollary}
   \begin{lemma}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space. Then, the set $\mathcal{L}^0$ of all random variables of $(\Omega,\mathcal{A},\Prob)$ is a vector space. Moreover, the relation $\sim$ defined in $\mathcal{L}^0$ as $$X\sim Y\iff X\overset{\text{a.s.}}{=} Y\quad\forall X,Y\in\mathcal{L}^0$$ is an equivalence relation. The quotient set $\quot{\mathcal{L}^0}{\sim}$ is denoted by $L^0$\footnote{If $X\in\mathcal{L}^0$, we will use the same notation for its equivalence class.}.
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space. Then, the set $\mathcal{L}^0$ of all random variables of $(\Omega,\mathcal{A},\Prob)$ is a vector space. Moreover, the relation $\sim$ defined in $\mathcal{L}^0$ as $$X\sim Y\iff X\overset{\text{a.s.}}{=} Y\quad\forall X,Y\in\mathcal{L}^0$$ is an equivalence relation. The quotient set $\quot{\mathcal{L}^0}{\!\sim}$ is denoted by $L^0$\footnote{If $X\in\mathcal{L}^0$, we will use the same notation for its equivalence class.}.
   \end{lemma}
   \begin{prop}
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space. We define the function $d_\Prob$ in $L^0$ as:
@@ -988,11 +995,11 @@
     In that case, $\displaystyle A:=\limsup_{n\to\infty}A_n$ is called the limit of the sequence.
   \end{definition}
   \begin{lemma}[First Borel-Cantelli lemma]
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $(A_n)\subset\mathcal{A}$ be a sequence of events such that $$\sum_{n=1}^\infty\Prob(A_n)<\infty$$
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $(A_n)\subset\mathcal{A}$ be a sequence of events such that: $$\sum_{n=1}^\infty\Prob(A_n)<\infty$$
     Then, $\displaystyle\Prob\left(\limsup_{n\to\infty} A_n\right)=0$.
   \end{lemma}
   \begin{lemma}[Second Borel-Cantelli lemma]
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $(A_n)\subset\mathcal{A}$ be a sequence of independent events such that $$\sum_{n=1}^\infty\Prob(A_n)=\infty$$
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $(A_n)\subset\mathcal{A}$ be a sequence of independent events such that: $$\sum_{n=1}^\infty\Prob(A_n)=\infty$$
     Then, $\displaystyle\Prob\left(\limsup_{n\to\infty} A_n\right)=1$.
   \end{lemma}
   \subsubsection{Convergence in mean}
@@ -1007,7 +1014,7 @@
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $p\geq 1$, $X$ be a random variable and $(X_n)$ be a sequence of random variables such that $X_n\overset{\Prob}{\longrightarrow}X$ or $X_n\overset{\text{a.s.}}{\longrightarrow}X$. Suppose that there exists an random variable $Y$ such that $|X_n|\leq Y\ \forall n\geq 1$ and $\Exp({|Y|}^p)<\infty$. Then, $X_n\overset{L^p}{\longrightarrow} X$.
   \end{theorem}
   \begin{lemma}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $p\geq 1$. Define the set $\mathcal{L}^p$ of all random variables of $(\Omega,\mathcal{A},\Prob)$ such that $\Exp({|X|}^p)<\infty$. Then, $\mathcal{L}^p$ is a vector space. Moreover, the relation $\sim$ defined in $\mathcal{L}^p$ as $$X\sim Y\iff X\overset{\text{a.s.}}{=} Y\quad\forall X,Y\in\mathcal{L}^p$$ is a equivalence relation. The quotient set $\quot{\mathcal{L}^p}{\sim}$ is denoted by $L^p$\footnote{If $X\in\mathcal{L}^p$, we will use the same notation for its equivalence class.}.
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $p\geq 1$. Define the set $\mathcal{L}^p$ of all random variables of $(\Omega,\mathcal{A},\Prob)$ such that $\Exp({|X|}^p)<\infty$. Then, $\mathcal{L}^p$ is a vector space. Moreover, the relation $\sim$ defined in $\mathcal{L}^p$ as $$X\sim Y\iff X\overset{\text{a.s.}}{=} Y\quad\forall X,Y\in\mathcal{L}^p$$ is a equivalence relation. The quotient set $\quot{\mathcal{L}^p}{\!\sim}$ is denoted by $L^p$\footnote{If $X\in\mathcal{L}^p$, we will use the same notation for its equivalence class.}.
   \end{lemma}
   \begin{prop}
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $p\geq 1$. We define the function:
@@ -1039,7 +1046,7 @@
   \begin{prop}
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $p\geq 1$, $X\in L^p$ and $(X_n)\subset L^p$ be a sequence of random variables such that $X_n\overset{L^p}{\longrightarrow} X$. Then:
     \begin{enumerate}
-      \item $\displaystyle\lim_{n\to\infty}{\|X_n\|}_p={\|X\|}_p$.
+      \item $\displaystyle\lim_{n\to\infty}{\|X_n\|}_p={\|X\|}_p$
       \item If $1\leq r< p$, then: $$X_n\overset{L^p}{\longrightarrow} X\implies X_n\overset{L^r}{\longrightarrow} X$$
       \item If $p=1$, then: $$\lim_{n\to\infty}\Exp(X_n)=\Exp(X)$$
     \end{enumerate}
@@ -1058,11 +1065,11 @@
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X_n)$ be a sequence of random variables and $X$, $Y$ be random variables such that $X_n\overset{\text{d}}{\longrightarrow} X$ and $X_n\overset{\text{d}}{\longrightarrow} Y$. Then, $X\overset{\text{d}}{=}Y$.
   \end{prop}
   \begin{theorem}[Skorokhod's representation theorem]
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X_n)$ be a sequence of random variables and $X$ be a random variable be such that $X_n\overset{\text{d}}{\longrightarrow} X$. Then, there exists a probability space $(\Omega',\mathcal{A}',\Prob')$, and random variables $({X_n}')$ and $X$ defined on $\Omega'$ such that:
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X_n)$ be a sequence of random variables and $X$ be a random variable be such that $X_n\overset{\text{d}}{\longrightarrow} X$. Then, there exists a probability space $(\Omega',\mathcal{A}',\Prob')$, and random variables $({X_n'})$ and $X$ defined on $\Omega'$ such that:
     \begin{enumerate}
-      \item $X_n\overset{\text{d}}{=}{X_n}'$ $\forall n\geq 1$
+      \item $X_n\overset{\text{d}}{=}{X_n'}$ $\forall n\geq 1$
       \item $X\overset{\text{d}}{=}X'$
-      \item ${X_n}'\overset{\text{a.s.}}{\longrightarrow}X'$
+      \item ${X_n'}\overset{\text{a.s.}}{\longrightarrow}X'$
     \end{enumerate}
   \end{theorem}
   \begin{theorem}
@@ -1176,9 +1183,37 @@
   \begin{prop}
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$ be random variables with finite $n$-th moment for some $n\in\NN$. Then, there exists the derivative of order $n$ of $\varphi_X$ and it satisfies: $${\varphi_X}^{(n)}(t)=\ii^n\Exp\left(X^n\exp{\ii t X}\right)\quad\forall t\in\RR$$ In particular, ${\varphi_X}^{(n)}(0)=\ii^n\Exp\left(X^n\right)$.
   \end{prop}
+  \subsubsection{Central limit theorem}
+  \begin{theorem}[Lévy-Lindeberg central limit theorem]
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $(X_n)$ be a sequence of i.i.d.\ random variables with finite 2nd moments. Let $\mu:=\Exp(X_1)$ and $\sigma^2:=\Var(X_1)$. Then: $$\frac{S_n-n\mu}{\sigma\sqrt{n}}\overset{\text{d}}{\longrightarrow} Z$$
+    where $Z\sim N(0,1)$.
+  \end{theorem}
+  \begin{theorem}[Lyapunov central limit theorem]
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $(X_n)$ be a sequence of independent random variables each with finite expectation $\mu_i:=\Exp(X_i)$ and variance ${\sigma_i}^2:=\Var(X_i)$ $\forall i=1,\ldots,n$. Then: $$\frac{\sum_{i=1}^n(X_i-\mu_i)}{\sqrt{\sum_{i=1}^n{\sigma_i}^2}}\overset{\text{d}}{\longrightarrow} Z$$
+    where $Z\sim N(0,1)$.
+  \end{theorem}
+  \begin{corollary}
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $(X_n)$ be a sequence of i.i.d.\ random variables with finite 2nd moments. Let $\mu:=\Exp(X_1)$ and $\sigma^2:=\Var(X_1)$. Then, $\forall s,t\in\RR$ such that $s<t$ we have $$\lim_{n\to\infty}\Prob\left(s<\frac{S_n-n\mu}{\sigma\sqrt{n}}\leq t\right)=F_Z(t)-F_Z(s)$$ where $Z\sim N(0,1)$.
+  \end{corollary}
+  \begin{definition}
+    Let $(\Omega,\mathcal{A},\Prob)$ and $X_1,\ldots,X_n$ be random variables. We define the \emph{sample mean} of $X_1,\ldots,X_n$ as: $$\overline{X}_n:=\frac{1}{n}S_n=\frac{1}{n}\sum_{i=1}^nX_i$$
+    If the value of $n$ is fixed, we denoted $\overline{X}_n$ by $\overline{X}$.
+  \end{definition}
+  \begin{prop}
+    Let $(\Omega,\mathcal{A},\Prob)$ and $X_1,\ldots,X_n$ be i.i.d.\ random variables. Then: $$\Exp(\overline{X}_n)=\Exp(X_1)\quad\text{and}\quad\Var(\overline{X}_n)=\frac{1}{n}\Var(X_1)$$
+  \end{prop}
+  \begin{corollary}
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X_1,\ldots,X_n$ be i.i.d.\ random variables. Let $\mu:=\Exp(X_1)$ and $\sigma^2:=\Var(X_1)$. Then: $$\overline{X}_n\overset{\text{d}}{\simeq }N\left(\mu,\frac{\sigma^2}{n}\right)\quad\text{ for $n$ large enough}$$
+  \end{corollary}
+  \begin{corollary}[De Moivre-Laplace theorem]
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X_1,\ldots,X_n$ be i.i.d.\ random variables such that $X_n\sim\text{Ber}(p)$ $\forall n\in\NN$. Then: $$\text{B}(n,p)\overset{\text{d}}{\simeq }N\left(np,np(1-p)\right)\quad\text{ for $n$ large enough}\footnote{In practice, the approximation is good enough for $np(1-p)\geq 18$.}$$
+  \end{corollary}
+  \begin{definition}[Continuity correction]
+    The \emph{continuity correction} is an adjustment that is made when a discrete distribution is approximated by a continuous distribution. For example if $X\sim\text{B}(n,p)$ is a random variable and $np(1-p)$ is large enough, then $\Prob(X\leq k)$ is well approximated by $\Prob(Z\leq k+\frac{1}{2})$, where $Z\sim N(0,1)$ which is even better than the approximation given by $\Prob(Z\leq k)$.
+  \end{definition}
 \end{multicols}
 \begin{center}
-  \def\arraystretch{1.25}
+  \def\arraystretch{1.5}
   \begin{tabular}{|c|c|c|}
     \hline
     $X$                      & $\displaystyle \psi_X(t)$                                               & $\displaystyle \varphi_X(t)$                                 \\
@@ -1214,34 +1249,4 @@
   \end{tabular}
   \captionof{table}{Moment generating functions and characteristic functions of common distributions.}
 \end{center}
-\begin{multicols}{2}
-  \subsubsection{Central limit theorem}
-  \begin{theorem}[Lévy-Lindeberg central limit theorem]
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $(X_n)$ be a sequence of i.i.d.\ random variables with finite 2nd moments. Let $\mu:=\Exp(X_1)$ and $\sigma^2:=\Var(X_1)$. Then: $$\frac{S_n-n\mu}{\sigma\sqrt{n}}\overset{\text{d}}{\longrightarrow} Z$$
-    where $Z\sim N(0,1)$.
-  \end{theorem}
-  \begin{theorem}[Lyapunov central limit theorem]
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $(X_n)$ be a sequence of independent random variables each with finite expectation $\mu_i:=\Exp(X_i)$ and variance ${\sigma_i}^2:=\Var(X_i)$ $\forall i=1,\ldots,n$. Then: $$\frac{\sum_{i=1}^n(X_i-\mu_i)}{\sqrt{\sum_{i=1}^n{\sigma_i}^2}}\overset{\text{d}}{\longrightarrow} Z$$
-    where $Z\sim N(0,1)$.
-  \end{theorem}
-  \begin{corollary}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $(X_n)$ be a sequence of i.i.d.\ random variables with finite 2nd moments. Let $\mu:=\Exp(X_1)$ and $\sigma^2:=\Var(X_1)$. Then, $\forall s,t\in\RR$ such that $s<t$ we have $$\lim_{n\to\infty}\Prob\left(s<\frac{S_n-n\mu}{\sigma\sqrt{n}}\leq t\right)=F_Z(t)-F_Z(s)$$ where $Z\sim N(0,1)$.
-  \end{corollary}
-  \begin{definition}
-    Let $(\Omega,\mathcal{A},\Prob)$ and $X_1,\ldots,X_n$ be random variables. We define the \emph{sample mean} of $X_1,\ldots,X_n$ as: $$\overline{X}_n:=\frac{1}{n}S_n=\frac{1}{n}\sum_{i=1}^nX_i$$
-    If the value of $n$ is fixed, we denoted $\overline{X}_n$ by $\overline{X}$.
-  \end{definition}
-  \begin{prop}
-    Let $(\Omega,\mathcal{A},\Prob)$ and $X_1,\ldots,X_n$ be i.i.d.\ random variables. Then: $$\Exp(\overline{X}_n)=\Exp(X_1)\quad\text{and}\quad\Var(\overline{X}_n)=\frac{1}{n}\Var(X_1)$$
-  \end{prop}
-  \begin{corollary}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X_1,\ldots,X_n$ be i.i.d.\ random variables. Let $\mu:=\Exp(X_1)$ and $\sigma^2:=\Var(X_1)$. Then: $$\overline{X}_n\overset{\text{d}}{\simeq }N\left(\mu,\frac{\sigma^2}{n}\right)\quad\text{ for $n$ large enough}$$
-  \end{corollary}
-  \begin{corollary}[De Moivre-Laplace theorem]
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X_1,\ldots,X_n$ be i.i.d.\ random variables such that $X_n\sim\text{Ber}(p)$ $\forall n\in\NN$. Then: $$\text{B}(n,p)\overset{\text{d}}{\simeq }N\left(np,np(1-p)\right)\quad\text{ for $n$ large enough}\footnote{In practice, the approximation is good enough for $np(1-p)\geq 18$.}$$
-  \end{corollary}
-  \begin{definition}[Continuity correction]
-    The \emph{continuity correction} is an adjustment that is made when a discrete distribution is approximated by a continuous distribution. For example if $X\sim\text{B}(n,p)$ is a random variable and $np(1-p)$ is large enough, then $\Prob(X\leq k)$ is well approximated by $\Prob(Z\leq k+\frac{1}{2})$, where $Z\sim N(0,1)$ which is even better than the approximation given by $\Prob(Z\leq k)$.
-  \end{definition}
-\end{multicols}
 \end{document}
