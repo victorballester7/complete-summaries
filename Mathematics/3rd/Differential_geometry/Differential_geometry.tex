@@ -2,7 +2,7 @@
 
 \begin{document}
 \begin{multicols}{2}[\section{Differential geometry}]
-  \subsection{Curves}
+  \subsection{Differentiable curves}
   \subsubsection{Inner product of \texorpdfstring{$\RR^n$}{Rn}}
   \begin{prop}
     Let $\vf{u},\vf{v}\in\RR^n$ be vectors and $\langle\vf{u},\vf{v}\rangle$ be the usual inner product between $\vf{u}$ and $\vf{v}$ in $\RR^n$. Then:
@@ -34,6 +34,9 @@
   \end{definition}
   \begin{definition}
     Let $\vf{\alpha}:I\rightarrow\RR^n$ be a parametrized curve of class $\mathcal{C}^1$. We define the \emph{tangent vector} of $\vf{\alpha}$ at $t_0\in\RR$ as $\vf{\alpha}'(t_0)$. We say that $\vf{\alpha}$ is \emph{regular} if $\vf{\alpha}'(t)\ne 0$ $\forall t\in I$. In that last case, we define the \emph{tangent line} of $\vf{\alpha}$ at $\vf{\alpha}(t_0)$ as the following parametrized line in $\RR^n$: $$s\longmapsto \vf{\alpha}(t_0)+s\vf{\alpha}'(t_0)$$
+  \end{definition}
+  \begin{definition}
+    Let $\vf{\alpha}:I\rightarrow\RR^n$ be a parametrized curve of class $\mathcal{C}^1$. We say that $\vf{\alpha}$ is a \emph{plane curve} is it is contained in a plane of $\RR^n$.
   \end{definition}
   \begin{definition}
     Let $\vf{\alpha}:I\rightarrow\RR^n$ be a regular parametrized curve of class $\mathcal{C}^1$, $I,J\subseteq\RR$ be open intervals and $h:J\rightarrow I$ be a diffeomorphism. Then, $\vf{\beta}:=\vf{\alpha}\circ h:J\rightarrow\RR^n$ is a curve satisfying: $$\vf{\beta}'(s)=\vf{\alpha}'(h(s))h'(s)\quad\forall s\in J$$ Hence, $\vf{\beta}$ is regular. In that case, we say that $\vf{\beta}$ is a \emph{reparametrization} of $\vf{\alpha}$ and $h$ is a \emph{change of parameter}. Moreover, the parametrization is \emph{positive} if $h'(s)>0$ $\forall s\in J$ and it is \emph{negative} if $h'(s)<0$ $\forall s\in J$.
@@ -142,34 +145,42 @@
     Let $\vf{\alpha}:I\rightarrow\RR^3$ be an arc-length parametrized curve of class $\mathcal{C}^\infty$. We define the unit tangent vector of $\vf{\alpha}$ at $s_0\in I$ as $$\vf{T}(s_0):=\vf{\alpha}'(s_0)$$ Note that $\|\vf{T}\|=1$ and $\vf{T}\perp\vf{T}'$.
   \end{definition}
   \begin{definition}
-    Let $\vf{\alpha}:I\rightarrow\RR^3$ be an arc-length parametrized curve of class $\mathcal{C}^\infty$. We define the \emph{curvature} of $\vf{\alpha}$ at $s_0\in I$ as: $$k(s_0):=\|\vf{\alpha}''(s_0)\|=\|\vf{T}'(s_0)\|$$
+    Let $\vf{\alpha}:I\rightarrow\RR^3$ be an arc-length parametrized curve of class $\mathcal{C}^\infty$. We define the \emph{curvature} of $\vf{\alpha}$ at $s_0\in I$ as: $$\kappa(s_0):=\|\vf{\alpha}''(s_0)\|=\|\vf{T}'(s_0)\|$$
   \end{definition}
   \begin{definition}
-    Let $\vf{\alpha}:I\rightarrow\RR^3$ be an arc-length parametrized curve of class $\mathcal{C}^\infty$, $s_0\in I$ and suppose that $k(s_0)\ne 0$. Then, we define the \emph{unit normal vector} of $\vf{\alpha}$ at $s_0$ as $$\vf{N}(s_0):=\frac{\vf{T}'(s_0)}{k(s_0)}=\frac{\vf{\alpha}''(s_0)}{\|\vf{\alpha}''(s_0)\|}$$
-    Note that $\|\vf{N}\|=1$, $\vf{N}\perp\vf{T}$ and $\vf{T}'(s)=k(s)\vf{N}(s)$ $\forall s\in I$.
+    Let $\vf{\alpha}:I\rightarrow\RR^3$ be an arc-length parametrized curve of class $\mathcal{C}^\infty$, $s_0\in I$ and suppose that $\kappa(s_0)\ne 0$. Then, we define the \emph{unit normal vector} of $\vf{\alpha}$ at $s_0$ as $$\vf{N}(s_0):=\frac{\vf{T}'(s_0)}{\kappa(s_0)}=\frac{\vf{\alpha}''(s_0)}{\|\vf{\alpha}''(s_0)\|}$$
+    Note that $\|\vf{N}\|=1$, $\vf{N}\perp\vf{T}$ and $\vf{T}'(s)=\kappa(s)\vf{N}(s)$ $\forall s\in I$.
   \end{definition}
   \begin{prop}
-    Let $\vf{\alpha}:I\rightarrow\RR^3$ be an arc-length parametrized curve of class $\mathcal{C}^\infty$, $s_0\in I$ and suppose that $k(s_0)\ne 0$. Then, there exists a unique circle of $\RR^3$ that has contact of order $\geq 2$ at $\vf{\alpha}(s_0)$. This cercle is called \emph{osculating circle} and its radius (called \emph{radius of curvature}) is $\rho(s_0)=\frac{1}{k(s_0)}$. Its center is $Q=\vf{\alpha}(s_0)+\rho(s_0)\vf{N}(s_0)$\footnote{An arc-length parametrization of the osculating circle would be $$u\longmapsto Q+\rho(s_0)\left(-\cos\left(\frac{u}{\rho(s_0)}\right)\vf{N}(s_0)+\sin\left(\frac{u}{\rho(s_0)}\right)\vf{T}(s_0)\right)$$}.
+    Let $\vf{\alpha}:I\rightarrow\RR^3$ be an arc-length parametrized curve of class $\mathcal{C}^\infty$, $s_0\in I$ and suppose that $\kappa(s_0)\ne 0$. Then, there exists a unique circle of $\RR^3$ that has contact of order $\geq 2$ at $\vf{\alpha}(s_0)$. This cercle is called \emph{osculating circle} and its radius (called \emph{radius of curvature}) is $\rho(s_0)=\frac{1}{\kappa(s_0)}$. Its center is $Q=\vf{\alpha}(s_0)+\rho(s_0)\vf{N}(s_0)$\footnote{An arc-length parametrization of the osculating circle would be $$u\longmapsto Q+\rho(s_0)\left(-\cos\left(\frac{u}{\rho(s_0)}\right)\vf{N}(s_0)+\sin\left(\frac{u}{\rho(s_0)}\right)\vf{T}(s_0)\right)$$}.
   \end{prop}
   \begin{definition}
-    Let $\vf{\alpha}:I\rightarrow\RR^3$ be a regular arc-length parametrized curve of class $\mathcal{C}^\infty$ such that $\vf{\alpha}''(s)\ne 0$ $\forall s\in I$.. We define the \emph{binormal vector} of $\vf{\alpha}$ at $s_0\in I$ as $$\vf{B}(s_0)=\vf{T}(s_0)\times\vf{N}(s_0)$$
+    Let $\vf{\alpha}:I\rightarrow\RR^3$ be a regular arc-length parametrized curve of class $\mathcal{C}^\infty$ such that $\vf{\alpha}''(s)\ne 0$ $\forall s\in I$. We define the \emph{binormal vector} of $\vf{\alpha}$ at $s_0\in I$ as $$\vf{B}(s_0)=\vf{T}(s_0)\times\vf{N}(s_0)$$
     Then, the triplet $(\vf{T}(s),\vf{N}(s),\vf{B}(s))$ is an orthonormal positive basis\footnote{Observe that the binormal vector (together with the tangent and normal vectors) is the unique vector that satisfies this property.}, which is called \emph{Frenet-Serret frame} (or \emph{TNB frame}).
   \end{definition}
   \begin{prop}
-    Let $\vf{\alpha}:I\rightarrow\RR^3$ be a regular arc-length parametrized curve of class $\mathcal{C}^\infty$ such that $\vf{\alpha}''(s)\ne 0$ $\forall s\in I$.. Then, $$\vf{B}'(s)=\tau(s)\vf{N}(s)\quad\forall s\in I$$ This coefficient $\tau(s)$ is called \emph{torsion} of $\vf{\alpha}$ at $s\in I$.
+    Let $\vf{\alpha}:I\rightarrow\RR^3$ be a regular arc-length parametrized curve of class $\mathcal{C}^\infty$ such that $\vf{\alpha}''(s)\ne 0$ $\forall s\in I$. Then, $$\vf{B}'(s)=\tau(s)\vf{N}(s)\quad\forall s\in I$$ This coefficient $\tau(s)$ is called \emph{torsion} of $\vf{\alpha}$ at $s\in I$.
+  \end{prop}
+  \begin{prop}
+    Let $\vf{\alpha}:I\rightarrow\RR^3$ be a regular arc-length parametrized curve of class $\mathcal{C}^\infty$ such that $\vf{\alpha}''(s)\ne 0$ $\forall s\in I$. The following statements are equivalent:
+    \begin{enumerate}
+      \item $\vf{\alpha}$ is a plane curve.
+      \item $\vf{B}=\const$
+      \item $\tau=0$.
+    \end{enumerate}
   \end{prop}
   \begin{theorem}[Frenet-Serret formulas]
-    Let $\vf{\alpha}:I\rightarrow\RR^3$ be a regular arc-length parametrized curve of class $\mathcal{C}^\infty$ such that $\vf{\alpha}''(s)\ne 0$ $\forall s\in I$.. Then:
+    Let $\vf{\alpha}:I\rightarrow\RR^3$ be a regular arc-length parametrized curve of class $\mathcal{C}^\infty$ such that $\vf{\alpha}''(s)\ne 0$ $\forall s\in I$. Then:
     $$
       \begin{pmatrix}
-        \vf{T}' \\
-        \vf{N}' \\
-        \vf{B}' \\
-      \end{pmatrix}=
+        \vf{T} \\
+        \vf{N} \\
+        \vf{B} \\
+      \end{pmatrix}'=
       \begin{pmatrix}
-        0  & k    & 0     \\
-        -k & 0    & -\tau \\
-        0  & \tau & 0
+        0       & \kappa & 0     \\
+        -\kappa & 0      & -\tau \\
+        0       & \tau   & 0
       \end{pmatrix}
       \begin{pmatrix}
         \vf{T} \\
@@ -186,6 +197,39 @@
       \item \emph{Rectifying plane}: plane generated by $\vf{T}(s_0)$ and $\vf{B}(s_0)$ that contains $\vf{\alpha}(s_0)$.
     \end{itemize}
   \end{definition}
+  \begin{prop}
+    Let $\vf{\alpha}:I\rightarrow\RR^3$ be a regular parametrized curve of class $\mathcal{C}^\infty$ such that $\vf{\alpha}'\times \vf{\alpha}''\ne 0$ and $v(t):=\|\vf{\alpha}'(t)\|$. Then:
+    \begin{itemize}
+      \item $\vf{\alpha}'=v\vf{T}$
+      \item $\vf{\alpha}''=v'\vf{T}'+\kappa v^2\vf{N}$
+    \end{itemize}
+  \end{prop}
+  \begin{theorem}[General Frenet-Serret formulas]
+    Let $\vf{\alpha}:I\rightarrow\RR^3$ be a regular parametrized curve of class $\mathcal{C}^\infty$ such that $\vf{\alpha}'\times \vf{\alpha}''\ne 0$ and $v(t):=\|\vf{\alpha}'(t)\|$. Then:
+    $$
+      \begin{pmatrix}
+        \vf{T} \\
+        \vf{N} \\
+        \vf{B} \\
+      \end{pmatrix}'=
+      \begin{pmatrix}
+        0         & \kappa v & 0       \\
+        -\kappa v & 0        & -\tau v \\
+        0         & \tau v   & 0
+      \end{pmatrix}
+      \begin{pmatrix}
+        \vf{T} \\
+        \vf{N} \\
+        \vf{B} \\
+      \end{pmatrix}
+    $$
+  \end{theorem}
+  \begin{corollary}
+    Let $\vf{\alpha}:I\rightarrow\RR^3$ be a regular parametrized curve of class $\mathcal{C}^\infty$ such that $\vf{\alpha}'\times \vf{\alpha}''\ne 0$. Then:
+    $$\vf{T}=\frac{\vf{\alpha}}{\|\vf{\alpha}\|}\qquad\vf{N}=\vf{B}\times\vf{T}\qquad\vf{B}=\frac{\vf{\alpha}'\times\vf{\alpha}''}{\|\vf{\alpha}'\times\vf{\alpha}''\|}$$
+    Moreover: $$\kappa=\frac{\|\vf{\alpha}'\times\vf{\alpha}''\|}{{\|\vf{\alpha}'\|}^3}\qquad\tau=-\frac{\langle\|\vf{\alpha}'\times\vf{\alpha}''\|,\vf{\alpha}'''\rangle}{{\|\vf{\alpha}'\times\vf{\alpha}''\|}^2}$$
+  \end{corollary}
   \subsubsection{Curvature of plane curves}
+  \subsubsection{Local form of a curve}
 \end{multicols}
 \end{document}
