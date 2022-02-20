@@ -1,0 +1,55 @@
+\documentclass{standalone}
+\usepackage{../../../../preamble_formulas}
+
+\begin{document}
+\begin{tikzpicture}
+  \pgfplotsset{
+    layers/standard/.define layer set={
+        background,
+        pre main,
+        main,
+        foreground
+      }{},
+    set layers=standard, % set my custom layer set
+  }
+  \begin{axis}[
+      xmin = -3, xmax = 3, %
+      ymin = -0.5, ymax = 5, %
+      axis equal image,
+      clip mode=individual,
+      legend style={at={(axis cs:0,-1.35)},anchor=center,legend columns=2,} % position of the legend box and anchor is the point on the box to be fitted exactly at the point of cs:<>,<>. Options are anchor=center,south west,south east,north west,north east,north,south,west...
+    ]
+    \def\n{9}
+    \addplot[
+      domain=-4:4, %Domain of the fucntion
+      samples=200, %This parameter determines the number of point to be plotted for the function, while bigger the number better looks the function.
+      smooth, %f we use this option, the compiler makes an interpolation between the point plotted to get a soft appearance for the function.
+      thick, %Stroke of the function. Options: ultra thin, very thin, thin, semithick, thick, very thick, ultra thick.
+      red, %Color of the function.
+      dashed,
+      name path=tractrix,
+    ]({x-tanh(x)},{1/cosh(x)});
+    \addplot[
+      domain=-2.5:2.5, %Domain of the fucntion
+      samples=200, %This parameter determines the number of point to be plotted for the function, while bigger the number better looks the function.
+      smooth, %f we use this option, the compiler makes an interpolation between the point plotted to get a soft appearance for the function.
+      thick, %Stroke of the function. Options: ultra thin, very thin, thin, semithick, thick, very thick, ultra thick.
+      blue %Color of the function.
+    ]{cosh(x)};
+    \begin{pgfonlayer}{background}
+      \foreach \i in {0,...,\n}{
+          \addplot[
+            domain=-3:3, %Domain of the fucntion
+            samples=10, %This parameter determines the number of point to be plotted for the function, while bigger the number better looks the function.
+            very thin, %Stroke of the function. Options: ultra thin, very thin, thin, semithick, thick, very thick, ultra thick.
+            blue!20, %Color of the function.
+            name path=linetan,
+            on layer=background,
+          ]{cosh(4/\n*\i-2)+sinh(4/\n*\i-2)*(x-(4/\n*\i-2))};
+          \draw[name intersections={of=tractrix and linetan,by=P}] [draw=blue!30, fill=blue!30] (P) circle (1.25pt);;
+        }
+    \end{pgfonlayer}
+    \legend{Catenary,Tractrix}
+  \end{axis}
+\end{tikzpicture}
+\end{document}

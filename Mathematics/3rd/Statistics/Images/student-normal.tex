@@ -1,0 +1,50 @@
+\documentclass{standalone}
+\usepackage{../../../../preamble_formulas}
+
+\def\n{} % level
+
+\begin{document}
+\begin{tikzpicture}
+  \begin{axis}[
+      xmin = - 5, xmax = 5, %
+      ymin = 0, ymax = 0.4, %
+      width = 10cm, %sets the width of the figure
+      height = 7.5cm,  %sets the height of the figure
+      legend cell align = {left}, %
+      %legend style={} % position of the legend box and anchor is the point on the box to be fitted exactly at the point of cs:<>,<>. Options are anchor=center,south west,south east,north west,north east,north,south,west... Example: legend style={at={(axis cs:0,-0.5)},anchor=center}
+    ]
+    % t Student (degree 1)
+    \addplot[
+      domain=-5:5, %Domain of the fucntion
+      samples=200, %This parameter determines the number of point to be plotted for the function, while bigger the number better looks the function.
+      smooth,
+      thick, %Stroke of the function. Options: ultra thin, very thin, thin, semithick, thick, very thick, ultra thick.
+      color_blue1, %Color of the function.
+    ]{(1+x^2)^(-1)/pi};
+    \addlegendentry{$t_1$}
+    % t Student (degree 2, 4, 8)
+    \foreach \i/\j in {2/color_blue2,4/color_blue3,8/color_blue4}{
+        \edef\temp{\noexpand\addplot[
+            domain=-5:5, %Domain of the fucntion
+            samples=200, %This parameter determines the number of point to be plotted for the function, while bigger the number better looks the function.
+            smooth,
+            thick, %Stroke of the function. Options: ultra thin, very thin, thin, semithick, thick, very thick, ultra thick.
+            \j, %Color of the function.
+          ]{\i!/(sqrt(\i)*(\i/2)!*((\i-2)/2)!*2^(\i))*(1+x^2/\i)^(-(\i+1)/2)};
+          \noexpand\addlegendentry{$t_\i$}
+        }
+        \temp
+      }
+    % Normal
+    \addplot[
+      domain=-5:5, %Domain of the fucntion
+      samples=200, %This parameter determines the number of point to be plotted for the function, while bigger the number better looks the function.
+      smooth, %f we use this option, the compiler makes an interpolation between the point plotted to get a soft appearance for the function.
+      thick, %Stroke of the function. Options: ultra thin, very thin, thin, semithick, thick, very thick, ultra thick.
+      color_green2 %Color of the function.
+    ]{1/(2*pi)^(1/2)*exp{-x^2/2}};
+    \addlegendentry{$N(0,1)$}
+    %\legend{$N(0,1)$,$t_1$,$t_2$,$t_4$,$t_8$}
+  \end{axis}
+\end{tikzpicture}
+\end{document}

@@ -44,26 +44,26 @@
   \begin{definition}
     Let $\Tilde{x}$ be an approximation of $x$. If $\Delta x\leq\frac{1}{2}10^{-t}$, we say $\Tilde{x}$ \emph{has $t$ correct decimal digits}. If $x=sm10^q$ with $0.1\leq m<1$, $\Tilde{x}=s\Tilde{m}10^q$ and $$u:=\max\{i\in\ZZ:|m-\Tilde{m}|\leq\frac{1}{2}10^{-i}\}$$ then we say that $\Tilde{x}$ \emph{has $u$ significant digits}.
   \end{definition}
-  \begin{prop}
+  \begin{proposition}
     Let $x\in\RR$ be such that $x=s(0.\alpha_1\alpha_2\cdots)_bb^q$ with $\alpha_1\ne0$ and $q_\text{min}\leq q\leq q_\text{max}$. Then, its floating-point representation in base $b$ and with $t$ digits satisfy:
     \begin{align*}
       \left|\text{fl}_T(x)-x\right|\leq b^{q-t}\quad           & \quad \left|\text{fl}_R(x)-x\right|\leq\frac{1}{2}b^{q-t}           \\
       \left|\frac{\text{fl}_T(x)-x}{x}\right|\leq b^{1-t}\quad & \quad \left|\frac{\text{fl}_R(x)-x}{x}\right|\leq\frac{1}{2}b^{1-t}
     \end{align*}
-  \end{prop}
+  \end{proposition}
   \begin{definition}
     The \emph{machine epsilon $\epsilon$} is defined as: $$\epsilon:=\min\{\varepsilon>0:\text{fl}(1+\varepsilon)\ne 1\}$$
   \end{definition}
-  \begin{prop}
+  \begin{proposition}
     For a machine working by truncation, $\epsilon=b^{1-t}$. For a machine working by rounding, $\epsilon=\frac{1}{2}b^{1-t}$.
-  \end{prop}
+  \end{proposition}
   \subsubsection{Propagation of errors}
-  \begin{prop}[Propagation of absolute errors]
+  \begin{proposition}[Propagation of absolute errors]
     Let $f:\RR^n\rightarrow\RR$ be a function of class $\mathcal{C}^2$. If $\Delta x_j$ is the absolute error of the variable $x_j$ and $\Delta f(x)$ is the absolute error of the function $f$ evaluated at the point $x=(x_1,\ldots,x_n)$, we have: $$|\Delta f(x)|\lesssim\sum_{j=1}^n\left|\frac{\partial f}{\partial x_j}(x)\right||\Delta x_j|\footnote{The symbol $\lesssim$ means that we are omitting terms of order $\Delta x_j\Delta x_k$ and higher.}$$ The coefficients $\left|\frac{\partial f}{\partial x_j}(x)\right|$ are called \emph{absolute condition numbers} of the problem.
-  \end{prop}
-  \begin{prop}[Propagation of relative errors]
+  \end{proposition}
+  \begin{proposition}[Propagation of relative errors]
     Let $f:\RR^n\rightarrow\RR$ be a function of class $\mathcal{C}^2$. If $\delta x_j$ is the relative error of the variable $x_j$ and $\delta f(x)$ is the relative error of the function $f$ evaluated at the point $x=(x_1,\ldots,x_n)$, we have: $$|\delta f(x)|\lesssim\sum_{j=1}^n\frac{\left|\frac{\partial f}{\partial x_j}(x)\right|\left|x_j\right|}{\left|f(x)\right|}|\delta x_j|$$ The coefficients $\frac{\left|\frac{\partial f}{\partial x_j}(x)\right|\left|x_j\right|}{\left|f(x)\right|}$ are called \emph{relative condition numbers} of the problem.
-  \end{prop}
+  \end{proposition}
   \subsubsection{Numerical stability of algorithms}
   \begin{definition}
     An algorithm is said to be \emph{numerically stable} if  errors in the input lessen in significance as the algorithm executes, having little effect on the final output. On the other hand, an algorithm is said to be \emph{numerically unstable} if errors in the input cause a considerably larger error in the final output.
@@ -120,13 +120,13 @@
   \begin{theorem}[Fixed-point theorem]
     Let $(X,d)$ be a complete metric space and $g:X\rightarrow X$ be a contraction\footnote{Recall \cref{FOSV_metric,FOSV_complete}.}. Then, $g$ has a unique fixed point $\alpha\in X$ and for every $x_0\in X$, $$\lim_{n\to\infty}x_n=\alpha,\quad\text{where }x_n=g(x_{n-1})\quad\forall n\in\NN$$
   \end{theorem}
-  \begin{prop}
+  \begin{proposition}
     Let $(X,d)$ be a metric space and $g:X\rightarrow X$ be a contraction of constant $k$. Then, if we want to approximate a fixed point $\alpha$ by the iteration $x_n=g(x_{n-1})$, we have:
     \begin{align*}
       d(x_n,\alpha) & \leq\frac{k^n}{1-k}d(x_1,x_0)\quad   & \text{(a priori estimation)}     \\
       d(x_n,\alpha) & \leq\frac{k}{1-k}d(x_n,x_{n-1})\quad & \text{(a posteriori estimation)}
     \end{align*}
-  \end{prop}
+  \end{proposition}
   \begin{corollary}
     Let $g:\RR\rightarrow\RR$ be a function of class $\mathcal{C}^1$. Suppose $\alpha$ is a fixed point of $g$ and $|g'(\alpha)|<1$. Then, there exists $\varepsilon>0$ and $I_\varepsilon:=[\alpha-\varepsilon,\alpha+\varepsilon]$ such that $g(I_\varepsilon)\subseteq I_\varepsilon$ and $g$ is a contraction on $I_\varepsilon$. In particular, if $x_0\in I_\varepsilon$, the iteration $x_{n+1}=g(x_n)$ converges to $\alpha$.
   \end{corollary}
@@ -177,9 +177,9 @@
   \begin{method}[Steffensen's method]
     Let $g:\RR\rightarrow\RR$ be a continuous function and suppose we have an iterative method $x_{n+1}=g(x_n)$. Then, for each step $n$ we can consider a new iteration $y_{n+1}$, with $y_0=x_0$, given by: $$y_{n+1}=y_n-\frac{{\left(g(y_n)-y_n\right)}^2}{g(g(y_n))-2g(y_n)+y_n}$$
   \end{method}
-  \begin{prop}
+  \begin{proposition}
     Let $f:\RR\rightarrow\RR$ be a function of class $\mathcal{C}^2$ and $\alpha$ be a simple zero of $f$. Then, Steffensen's method for finding $\alpha$ has at least quadratic convergence\footnote{Note that the advantage of Steffensen's method over Newton-Raphson method is that in the former we don't need the differentiability of the function whereas in the latter we do.}.
-  \end{prop}
+  \end{proposition}
   \subsubsection{Zeros of polynomials}
   \begin{lemma}
     Let $p(z)=a_0+a_1z+\cdots+a_nz^n\in\CC [x]$ with $a_n\ne 0$. We define $$\lambda:=\max\left\{\left|\frac{a_i}{a_n}\right|:i=0,1,\ldots,n-1\right\}$$ Then, if $p(\alpha)=0$ for some $\alpha\in\CC $, $|\alpha|\leq\lambda+1$.
@@ -202,9 +202,9 @@
   \begin{lemma}
     Let $p\in\CC [x]$ be a polynomial. Then, the polynomial $\displaystyle q=\frac{p}{\gcd(p,p')}$ has the same roots as $p$ but all of them are simple.
   \end{lemma}
-  \begin{prop}
+  \begin{proposition}
     Let $p\in\RR[x]$ be a polynomial with $\deg p=m$. We define $\displaystyle f_0=\frac{p}{\gcd(p,p')}$ and $f_1=f_0'$. If $\deg f_0=n$, then for $i=0,1,\ldots,n-2$, we define $f_{i+2}$ as: $$f_i(x)=q_{i+1}(x)f_{i+1}(x)-f_{i+2}(x)$$ (similarly to the euclidean division between $f_i$ and $f_{i+1}$). Then, $f_n$ is constant and hence the sequence $(f_i)$, $i=0,\ldots,n$, is a Sturm sequence.
-  \end{prop}
+  \end{proposition}
   \begin{theorem}[Budan-Fourier theorem]
     Let $p\in\RR[x]$ be a polynomial with $\deg p=n$. Consider the sequence $(p^{(i)})$, $i=0,\ldots,n$. If $p(a)p(b)\ne 0$, the number of zeros of $p$ on $[a,b]$ is: $$\nu\left(p^{(i)}(a)\right)-\nu\left(p^{(i)}(b)\right)-2k,\quad\text{for some }k\in\NN\cup\{0\}$$
   \end{theorem}
@@ -240,9 +240,9 @@
   \begin{definition}
     Let $\{(x_i,y_i)\}_{i=0}^n$ be a set of support points. We define $\omega_n(x)\in\RR[x]$ as: $$\omega_n(x)=\prod_{i=0}^n(x-x_i)$$ We define \emph{Lagrange basis polynomials} $\ell_i(x)\in\RR[x]$ as: $$\ell_i(x)=\frac{\omega_n(x)}{(x-x_i)\omega_n(x_i)}=\prod_{\substack{j=0\\j\ne i}}^n\frac{x-x_j}{x_i-x_j}$$
   \end{definition}
-  \begin{prop}
+  \begin{proposition}
     Let $\{(x_i,y_i)\}_{i=0}^n$ be a set of support points. Then, Lagrange's interpolation problem has a unique solution and this is: $$p_n(x)=\sum_{i=0}^ny_i\ell_i(x)$$
-  \end{prop}
+  \end{proposition}
   \begin{method}[Neville's algorithm]
     Let $\{(x_i,y_i)\}_{i=0}^n$ be a set of support points, $\{i_0,\ldots,i_k\}\subset\{0,\ldots,n\}$ and $P_{i_0,\ldots,i_k}(x)\in\Pi_k$ be such that $P_{i_0,\ldots,i_k}(x_{i_j}) = y_{i_j}$ for $j=0,\ldots,k$. Then, it is satisfied that:
     \begin{enumerate}
@@ -256,9 +256,9 @@
   \begin{definition}
     Let $f:\RR\rightarrow\RR$ be a function and $\{x_i\}_{i=0}^n\subset\RR$ be pairwise distinct points. We define the \emph{divided difference} of order $k$ of $f$ applied to $\{x_i\}_{i=0}^k$, denoted by $f[x_0,\ldots,x_k]$, as the coefficient of $x^k$ of the interpolating polynomial with support points $\{(x_i,f(x_i))\}_{i=0}^k$.
   \end{definition}
-  \begin{prop}
+  \begin{proposition}
     Let $f:\RR\rightarrow\RR$ be a function and $\{x_i\}_{i=0}^n\subset\RR$ be pairwise distinct points. Lagrange interpolating polynomial with support points $\{(x_i,f(x_i))\}_{i=0}^n$ is: $$p_n(x)=f[x_0]+\sum_{j=1}^nf[x_0,\ldots,x_j]\omega_{j-1}(x)$$
-  \end{prop}
+  \end{proposition}
   \begin{method}[Newton's divided differences\\method]
     Let $f:\RR\rightarrow\RR$ be a function. For $x\in\RR$, we have $f[x]=f(x)$. And if $\{x_i\}_{i=0}^n\subset\RR$ are different points, then $$f[x_0,\ldots,x_n]=\frac{f[x_1,\ldots,x_n]-f[x_0,\ldots,x_{n-1}]}{x_n-x_0}$$
   \end{method}
@@ -268,16 +268,16 @@
   \begin{lemma}
     Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^{n+1}$ and $\{x_i\}_{i=0}^n\subset\RR$ be pairwise distinct points. Then: $\exists\xi\in\langle x_0,\ldots,x_n\rangle$ such that: $$f[x_0,\ldots,x_n]=\frac{f^{(n)}(\xi)}{n!}$$
   \end{lemma}
-  \begin{prop}
+  \begin{proposition}
     Let $f:\RR\rightarrow\RR$ be a function of class $\mathcal{C}^{n+1}$, $\{x_i\}_{i=0}^n\subset\RR$ be pairwise distinct points and $\sigma\in \text{S}_n$. Then, $$f[x_0,\ldots,x_n]=f[x_{\sigma(0)},\ldots,x_{\sigma(n)}]$$
-  \end{prop}
+  \end{proposition}
   \begin{definition}
     Let $\{(x_i,y_i)\}_{i=0}^n$ be support points. The points $\{x_i\}_{i=0}^n$ are \emph{equally-spaced} if $$x_i=x_0+ih,\quad\text{for }i=0,\ldots,n\text{ and with }h:=\frac{x_n-x_0}{n}$$
   \end{definition}
-  \begin{prop}
+  \begin{proposition}
     Let $\{x_i\}_{i=0}^n\subset\RR$ be equally-spaced points such that $x_i=x_0+ih$, where $h=\frac{x_n-x_0}{n}$. Then:
     $$\max\{|\omega_n(x)|:x\in[x_0,x_n]\}\leq\frac{h^{n+1}n!}{4}$$
-  \end{prop}
+  \end{proposition}
   \begin{definition}
     Let $f:[a,b]\rightarrow\RR$ be a function and $\{x_i\}_{i=0}^n\subset\RR$ be equally-spaced points. We define:
     \begin{gather*}
@@ -295,9 +295,9 @@
   \begin{definition}
     Given sets of points $\{x_i\}_{i=0}^m\subset\RR$, $\{n_i\}_{i=0}^m\subset\NN$ and $\{y_i^{(k)}:k=0,\ldots,n_i-1\}_{i=0}^m\subset\RR$, \emph{Hermite interpolation problem} consists in finding a polynomial $h_n\in\Pi_n$ such that $\sum_{i=0}^mn_i=n+1$ and $$h_n^{(k)}(x_i)=y_i^{(k)}\text{ for }i=0,\ldots,m\text{ and }k=0,\ldots,n_i-1$$
   \end{definition}
-  \begin{prop}
+  \begin{proposition}
     Hermite interpolation problem has a unique solution.
-  \end{prop}
+  \end{proposition}
   \begin{definition}
     Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^n$ and $\{x_i\}_{i=0}^n\subset\RR$ be points. We define $f[x_i,\overset{(n+1)}{\ldots},x_i]$ as: $$f[x_i,\overset{(n+1)}{\ldots},x_i]=\frac{f^{(n)}(x_i)}{n!}$$
   \end{definition}
@@ -321,11 +321,11 @@
     \end{enumerate}
   \end{definition}
   \begin{definition}
-    Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^2$. We define the \emph{seminorm}\footnote{The term \emph{seminorm} has been used instead of \emph{norm} to emphasize that not all properties of a norm are satisfied with this definition.} of $f$ as: $$\|f\|^2=\int_a^b(f''(x))^2\dd x$$
+    Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^2$. We define the \emph{seminorm}\footnote{The term \emph{seminorm} has been used instead of \emph{norm} to emphasize that not all properties of a norm are satisfied with this definition.} of $f$ as: $$\|f\|^2=\int_a^b(f''(x))^2\dd{x}$$
   \end{definition}
-  \begin{prop}
+  \begin{proposition}
     Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^2$ interpolating the support points $\{(x_i,y_i)\}_{i=0}^n\subset\RR^2$, $a\leq x_0<\cdots<x_n\leq b$. If $s$ a spline associated with $\{(x_i,y_i)\}_{i=0}^n$, then: $$\|f-s\|^2=\|f\|^2-\|s\|^2-2(f'-s)s''\Big|_{x_0}^{x_n}+2\sum_{i=1}^n(f-s)s'''\Big|_{x_{i-1}^+}^{x_i^-}$$
-  \end{prop}
+  \end{proposition}
   \begin{theorem}
     Let $f:[a,b]\rightarrow\RR$ a function of class $\mathcal{C}^2$ interpolating the support points $\{(x_i,y_i)\}_{i=0}^n\subset\RR^2$, $a\leq x_0<\cdots<x_n\leq b$. If $s$ is the natural cubic spline associated with $\{(x_i,y_i)\}_{i=0}^n$, then: $$\|s\|\leq\|f\|\footnote{We can interpret this result as the natural cubic spline being the configuration that require the least ``energy" to be ``constructed".}$$
   \end{theorem}
@@ -349,46 +349,46 @@
   \end{theorem}
   \subsubsection{Integration}
   \begin{definition}
-    Let $f:[a,b]\rightarrow\RR$ be a continuous function, $\{x_i\}_{i=0}^n\subset[a,b]$ be a set of nodes and $p_n$ be the Lagrange interpolating polynomial with support points $\{(x_i,f(x_i))\}_{i=0}^n$. We define the \emph{quadrature formula} as: $$\int_a^bf(x)\dd x\approx\int_a^bp_n(x)\dd x$$
+    Let $f:[a,b]\rightarrow\RR$ be a continuous function, $\{x_i\}_{i=0}^n\subset[a,b]$ be a set of nodes and $p_n$ be the Lagrange interpolating polynomial with support points $\{(x_i,f(x_i))\}_{i=0}^n$. We define the \emph{quadrature formula} as: $$\int_a^bf(x)\dd{x}\approx\int_a^bp_n(x)\dd{x}$$
   \end{definition}
   \begin{lemma}
-    Let $f:[a,b]\rightarrow\RR$ be a continuous function $\{x_i\}_{i=0}^n\subset[a,b]$ be a set of nodes. Then: $$\int_a^bf(x)\dd x\approx\sum_{i=1}^na_if(x_i)\quad\text{where }a_i:=\int_a^b\ell_i(x)\dd x$$
+    Let $f:[a,b]\rightarrow\RR$ be a continuous function $\{x_i\}_{i=0}^n\subset[a,b]$ be a set of nodes. Then: $$\int_a^bf(x)\dd{x}\approx\sum_{i=1}^na_if(x_i)\quad\text{where }a_i:=\int_a^b\ell_i(x)\dd{x}$$
   \end{lemma}
   \begin{definition}
     The \emph{degree of precision} of a quadrature formula is the largest $m\in\NN$ such that the formula is exact for $x^k$ $\forall k=0,1,\ldots,m$.
   \end{definition}
   \begin{lemma}
-    Let $p\in\Pi_n$ be a polynomial and $\{x_i\}_{i=0}^n\subset[a,b]$ be a set of nodes. Then: $$\int_a^bp(x)\dd x=\sum_{i=0}^na_ip(x_i)$$ for some $a_i\in\RR$.
+    Let $p\in\Pi_n$ be a polynomial and $\{x_i\}_{i=0}^n\subset[a,b]$ be a set of nodes. Then: $$\int_a^bp(x)\dd{x}=\sum_{i=0}^na_ip(x_i)$$ for some $a_i\in\RR$.
   \end{lemma}
   \subsubsection{Newton-Cotes formulas}
   \begin{theorem}[Mean value theorem for integrals]
-    Let $f,g:[a,b]\rightarrow\RR$ be such that $f$ is continuous and $g$ integrable. Suppose that $g$ does not change the sign on $[a,b]$. Then, $\exists\xi\in[a,b]$ such that: $$\int_a^bf(x)g(x)\dd x=f(\xi)\int_a^bg(x)\dd x$$
+    Let $f,g:[a,b]\rightarrow\RR$ be such that $f$ is continuous and $g$ integrable. Suppose that $g$ does not change the sign on $[a,b]$. Then, $\exists\xi\in[a,b]$ such that: $$\int_a^bf(x)g(x)\dd{x}=f(\xi)\int_a^bg(x)\dd{x}$$
   \end{theorem}
   \begin{theorem}[Closed Newton-Cotes Formulas]
-    Let $f:[a,b]\rightarrow\RR$ be a function and $\{x_i\}_{i=0}^n\subset[a,b]$ be a set of equally-spaced points. If $I=\int_a^bf(x)\dd x$ and $h=\frac{b-a}{n}$, then $\exists\xi\in[a,b]$ such that:
+    Let $f:[a,b]\rightarrow\RR$ be a function and $\{x_i\}_{i=0}^n\subset[a,b]$ be a set of equally-spaced points. If $I=\int_a^bf(x)\dd{x}$ and $h=\frac{b-a}{n}$, then $\exists\xi\in[a,b]$ such that:
     \begin{itemize}
-      \item If $n$ is even and $f\in\mathcal{C}^{n+2}$: $$I=\sum_{i=0}^na_if(x_i)+\frac{h^{n+3}f^{n+2}(\xi)}{(n+2)!}\int_0^nt\prod_{i=0}^n(t-i)\dd t$$
-      \item If $n$ is odd and $f\in\mathcal{C}^{n+1}$: $$I=\sum_{i=0}^na_if(x_i)+\frac{h^{n+2}f^{n+1}(\xi)}{(n+1)!}\int_0^n\prod_{i=0}^n(t-i)\dd t\footnote{Note that when $n$ is even, the degree of precision is $n + 1$, although the interpolation polynomial is of degree at most $n$. When $n$ is odd, the degree of precision is
+      \item If $n$ is even and $f\in\mathcal{C}^{n+2}$: $$I=\sum_{i=0}^na_if(x_i)+\frac{h^{n+3}f^{n+2}(\xi)}{(n+2)!}\int_0^nt\prod_{i=0}^n(t-i)\dd{t}$$
+      \item If $n$ is odd and $f\in\mathcal{C}^{n+1}$: $$I=\sum_{i=0}^na_if(x_i)+\frac{h^{n+2}f^{n+1}(\xi)}{(n+1)!}\int_0^n\prod_{i=0}^n(t-i)\dd{t}\footnote{Note that when $n$ is even, the degree of precision is $n + 1$, although the interpolation polynomial is of degree at most $n$. When $n$ is odd, the degree of precision is
                 only $n$.}$$
     \end{itemize}
   \end{theorem}
   \begin{corollary}[Trapezoidal rule]
-    Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^2$. Then, $\exists\xi\in[a,b]$ such that: $$\int_a^bf(x)\dd x=\frac{h}{2}(f(a)+f(b))-\frac{f''(\xi)}{12}h^3$$ where $h=b-a$. This is the case $n=1$ of closed Newton-Cotes formulas.
+    Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^2$. Then, $\exists\xi\in[a,b]$ such that: $$\int_a^bf(x)\dd{x}=\frac{h}{2}(f(a)+f(b))-\frac{f''(\xi)}{12}h^3$$ where $h=b-a$. This is the case $n=1$ of closed Newton-Cotes formulas.
   \end{corollary}
   \begin{corollary}[Simpson's rule]
-    Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^4$. Then, $\exists\xi\in[a,b]$ such that: $$\int_a^bf(x)\dd x=\frac{h}{3}\left(f(a)+4f\left(\frac{a+b}{2}\right)+f(b)\right)-\frac{f^{(4)}(\xi)}{90}h^5$$ where $h=\frac{b-a}{2}$. This is the case $n=2$ of closed Newton-Cotes formulas.
+    Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^4$. Then, $\exists\xi\in[a,b]$ such that: $$\int_a^bf(x)\dd{x}=\frac{h}{3}\left(f(a)+4f\left(\frac{a+b}{2}\right)+f(b)\right)-\frac{f^{(4)}(\xi)}{90}h^5$$ where $h=\frac{b-a}{2}$. This is the case $n=2$ of closed Newton-Cotes formulas.
   \end{corollary}
   \begin{theorem}[Composite Trapezoidal rule]
     Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^4$, $h=\frac{b-a}{n}$ and $x_j=a+jh$ for each $j=0,1,\ldots,n$. Then, $\exists\xi\in[a,b]$ such that:
     \begin{multline*}
-      I=\int_a^bf(x)\dd x=\frac{h}{2}\left[f(a)+2\sum_{j=1}^{n-1}f(x_j)+f(b)\right]-\\-\frac{f''(\xi)(b-a)}{12}h^2
+      I=\int_a^bf(x)\dd{x}=\frac{h}{2}\left[f(a)+2\sum_{j=1}^{n-1}f(x_j)+f(b)\right]-\\-\frac{f''(\xi)(b-a)}{12}h^2
     \end{multline*}
     We denote by $T(f,a,b,h)$ the approximation of $I$ by trapezoidal rule.
   \end{theorem}
   \begin{theorem}[Composite Simpson's rule]
     Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^4$, $n$ be an even number, $h=\frac{b-a}{n}$ and $x_j=a+jh$ for each $j=0,1,\ldots,n$. Then, $\exists\xi\in[a,b]$ such that:
     \begin{multline*}
-      I=\int_a^bf(x)\dd x=\frac{h}{3}\left[f(a)+2\sum_{j=1}^{n/2-1}f(x_{2j})\right.+\\+\left.4\sum_{j=1}^{n/2}f(x_{2j-1})+f(b)\right]-\frac{f^{(4)}(\xi)(b-a)}{180}h^4
+      I=\int_a^bf(x)\dd{x}=\frac{h}{3}\left[f(a)+2\sum_{j=1}^{n/2-1}f(x_{2j})\right.+\\+\left.4\sum_{j=1}^{n/2}f(x_{2j-1})+f(b)\right]-\frac{f^{(4)}(\xi)(b-a)}{180}h^4
     \end{multline*}
     We denote by $S(f,a,b,h)$ the approximation of $I$ by Simpson's rule.
   \end{theorem}
@@ -399,19 +399,19 @@
   \begin{theorem}[Euler-Maclaurin formula]
     Let $f\in\mathcal{C}^{2m+2}([a,b])$ be a function. Then:
     \begin{multline*}
-      T(f,a,b,h)=\int_a^bf(t)\dd t+\sum_{k=1}^m\frac{B_{2k}h^{2k}}{(2k)!}\left(f^{(2k-1)}(b)\right.-\\-\left.f^{(2k-1)}(a)\right)+\frac{(b-a)B_{2m+2}h^{2m+1}}{(2m+2)!}f^{(2m+2)}(\xi)
+      T(f,a,b,h)=\int_a^bf(t)\dd{t}+\sum_{k=1}^m\frac{B_{2k}h^{2k}}{(2k)!}\left(f^{(2k-1)}(b)\right.-\\-\left.f^{(2k-1)}(a)\right)+\frac{(b-a)B_{2m+2}h^{2m+1}}{(2m+2)!}f^{(2m+2)}(\xi)
     \end{multline*}
     where $h=\frac{b-a}{n}$, $B_n$ are the Bernoulli numbers and $\xi\in[a,b]$.
   \end{theorem}
   \begin{theorem}[Romberg method]
-    Let $f\in\mathcal{C}^{2m+2}([a,b])$ be a function. Then, by Euler-Maclaurin formula, we obtain: $$T(f,a,b,h)=\int_a^bf(t)\dd t+\beta_1 h^2+\beta_2 h^4+\cdots$$ where $h=\frac{b-a}{n}$. For $n=1,2,\ldots$ we define: $$T_{n,1}=T\left(f,a,b,\frac{b-a}{2^n}\right)\quad T_{n,m+1}=\frac{4^mT_{n+1,m}-T_{n,m}}{4^m-1}$$ for $m\leq n$. Then, we can observe that: $$T_{n,m}=\int_a^bf(t)\dd t+O\left(\left(\frac{b-a}{2^n}\right)^{2m}\right)$$
+    Let $f\in\mathcal{C}^{2m+2}([a,b])$ be a function. Then, by Euler-Maclaurin formula, we obtain: $$T(f,a,b,h)=\int_a^bf(t)\dd{t}+\beta_1 h^2+\beta_2 h^4+\cdots$$ where $h=\frac{b-a}{n}$. For $n=1,2,\ldots$ we define: $$T_{n,1}=T\left(f,a,b,\frac{b-a}{2^n}\right)\quad T_{n,m+1}=\frac{4^mT_{n+1,m}-T_{n,m}}{4^m-1}$$ for $m\leq n$. Then, we can observe that: $$T_{n,m}=\int_a^bf(t)\dd{t}+O\left(\left(\frac{b-a}{2^n}\right)^{2m}\right)$$
   \end{theorem}
   \subsubsection{Orthogonal polynomials}
   \begin{definition}
-    Let $f,g:[a,b]\rightarrow\RR$ be continuous function and $\omega(x):[a,b]\rightarrow\RR_{>0}$ be a weight function. The expression $$\langle f,g\rangle=\int_a^b\omega(x)f(x)g(x)\dd x$$ defines a positive semidefinite dot product in the vector space of bounded functions on $[a,b]$.
+    Let $f,g:[a,b]\rightarrow\RR$ be continuous function and $\omega(x):[a,b]\rightarrow\RR_{>0}$ be a weight function. The expression $$\langle f,g\rangle=\int_a^b\omega(x)f(x)g(x)\dd{x}$$ defines a positive semidefinite dot product in the vector space of bounded functions on $[a,b]$.
   \end{definition}
   \begin{definition}[Orthogonal polynomials]
-    Let $\mathfrak{P}=\{\phi_i(x)\in\RR[x]:\deg \phi_i(x)=i, i\in\NN\cup\{0\}\}$ be a family of polynomials and $\omega(x):[a,b]\rightarrow\RR_{>0}$ be a weight function. We say $\mathfrak{P}$ is \emph{orthogonal with respect to the weight $\omega(x)$} on an interval $[a,b]$ if $$\langle \phi_i,\phi_j\rangle=\int_a^b\omega(x)\phi_i(x)\phi_j(x)\dd x=0\iff i\ne j$$
+    Let $\mathfrak{P}=\{\phi_i(x)\in\RR[x]:\deg \phi_i(x)=i, i\in\NN\cup\{0\}\}$ be a family of polynomials and $\omega(x):[a,b]\rightarrow\RR_{>0}$ be a weight function. We say $\mathfrak{P}$ is \emph{orthogonal with respect to the weight $\omega(x)$} on an interval $[a,b]$ if $$\langle \phi_i,\phi_j\rangle=\int_a^b\omega(x)\phi_i(x)\phi_j(x)\dd{x}=0\iff i\ne j$$
     Note that $\langle \phi_i,\phi_i\rangle>0$ for each $i\in\NN\cup\{0\}$.
   \end{definition}
   \begin{lemma}
@@ -454,16 +454,16 @@
   \end{definition}
   \subsubsection{Gau\ss ian quadrature}
   \begin{definition}
-    Let $f:[a,b]\rightarrow\RR$ be a function and $\omega(x):[a,b]\rightarrow\RR_{>0}$ be a weight function. Given a set of nodes $\{x_i\}_{i=1}^n\subset[a,b]$, the \emph{quadrature formula with weight $\omega(x)$} of a function $f$ is $$\int_a^b\omega(x)f(x)\dd x\approx\sum_{i=1}^n\omega_if(x_i)\quad\!\text{with }\omega_i=\int_a^b\omega(x)\ell_i(x)\dd x$$
+    Let $f:[a,b]\rightarrow\RR$ be a function and $\omega(x):[a,b]\rightarrow\RR_{>0}$ be a weight function. Given a set of nodes $\{x_i\}_{i=1}^n\subset[a,b]$, the \emph{quadrature formula with weight $\omega(x)$} of a function $f$ is $$\int_a^b\omega(x)f(x)\dd{x}\approx\sum_{i=1}^n\omega_if(x_i)\quad\!\text{with }\omega_i=\int_a^b\omega(x)\ell_i(x)\dd{x}$$
   \end{definition}
   \begin{lemma}
-    Let $f:[a,b]\rightarrow\RR$ be a function and $\{x_i\}_{i=1}^n$ be the zeros of the orthogonal polynomial $\phi_n\in\mathfrak{P}_n$ with weight $\omega(x)$ on the interval $[a,b]$. Then, the formula $$\int_a^b\omega(x)f(x)\dd x\approx\sum_{i=1}^n\omega_if(x_i)\quad\!\text{with }\omega_i=\int_a^b\omega(x)\ell_i(x)\dd x$$ is exact for all polynomials in $\Pi_{2n-1}$.
+    Let $f:[a,b]\rightarrow\RR$ be a function and $\{x_i\}_{i=1}^n$ be the zeros of the orthogonal polynomial $\phi_n\in\mathfrak{P}_n$ with weight $\omega(x)$ on the interval $[a,b]$. Then, the formula $$\int_a^b\omega(x)f(x)\dd{x}\approx\sum_{i=1}^n\omega_if(x_i)\quad\!\text{with }\omega_i=\int_a^b\omega(x)\ell_i(x)\dd{x}$$ is exact for all polynomials in $\Pi_{2n-1}$.
   \end{lemma}
-  \begin{prop}
-    Let $f:[a,b]\rightarrow\RR$ be a function and $\{x_i\}_{i=1}^n$ be the zeros of the orthogonal polynomial $\phi_n\in\mathfrak{P}_n$ with weight $\omega(x)$ on the interval $[a,b]$. Then, in the formula $$\int_a^b\omega(x)f(x)\dd x\approx\sum_{i=1}^n\omega_if(x_i)$$ the values $\omega_i$ are positive and real for $i=1,\ldots,n$.
-  \end{prop}
+  \begin{proposition}
+    Let $f:[a,b]\rightarrow\RR$ be a function and $\{x_i\}_{i=1}^n$ be the zeros of the orthogonal polynomial $\phi_n\in\mathfrak{P}_n$ with weight $\omega(x)$ on the interval $[a,b]$. Then, in the formula $$\int_a^b\omega(x)f(x)\dd{x}\approx\sum_{i=1}^n\omega_if(x_i)$$ the values $\omega_i$ are positive and real for $i=1,\ldots,n$.
+  \end{proposition}
   \begin{theorem}
-    Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^{2n}$ and $\{x_i\}_{i=1}^n$ be the zeros of the orthogonal polynomial $\phi_n\in\mathfrak{P}_n$ with weight $\omega(x)$ on the interval $[a,b]$. Then: $$\int_a^b\omega(x)f(x)\dd x-\sum_{i=1}^n\omega_if(x_i)=\frac{f^{2n}(\xi)}{(2n)!}\langle\phi_n,\phi_n\rangle$$ where $\xi\in[a,b]$.
+    Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^{2n}$ and $\{x_i\}_{i=1}^n$ be the zeros of the orthogonal polynomial $\phi_n\in\mathfrak{P}_n$ with weight $\omega(x)$ on the interval $[a,b]$. Then: $$\int_a^b\omega(x)f(x)\dd{x}-\sum_{i=1}^n\omega_if(x_i)=\frac{f^{2n}(\xi)}{(2n)!}\langle\phi_n,\phi_n\rangle$$ where $\xi\in[a,b]$.
   \end{theorem}
   \subsection{Numerical linear algebra}
   \subsubsection{Triangular matrices}
@@ -517,7 +517,7 @@
   \begin{definition}
     Let $\vf{A}\in\mathcal{M}_n(\CC)$ be a matrix. We define the \emph{spectral radius} $\rho(\vf{A})$ of $\vf{A}$ as: $$\rho(\vf{A})=\max\{|\lambda|\in\CC:\lambda\in\sigma(\vf{A})\}$$
   \end{definition}
-  \begin{prop}
+  \begin{proposition}
     Let $\vf{v}=(v_1,\ldots,v_n)\in\RR^n$ and $\vf{A}=(a_{ij})\in\mathcal{M}_n(\RR)$. Given the vector norms:
     \begin{gather*}
       \|\vf{v}\|_1=\sum_{i=1}^n|v_i|\\
@@ -530,8 +530,8 @@
       \|\vf{A}\|_2=\sqrt{\rho(\transpose{A}\vf{A})}\\
       \|\vf{A}\|_\infty=\max\left\{\sum_{j=1}^n|a_{ij}|:i=1,\ldots,n\right\}
     \end{gather*}
-  \end{prop}
-  \begin{prop}[Properties of matrix norms]
+  \end{proposition}
+  \begin{proposition}[Properties of matrix norms]
     \hfill
     \begin{enumerate}
       \item Matrix norms are continuous functions.
@@ -539,7 +539,7 @@
       \item For all subordinated matrix norm $\|\cdot\|$ and for all $\vf{A}\in\mathcal{M}_n(\RR)$: $$\rho(\vf{A})\leq\|\vf{A}\|$$
       \item Given a matrix $\vf{A}\in\mathcal{M}_n(\RR)$ and $\varepsilon>0$, there exist a matrix norm $\|\cdot\|_{\vf{A},\varepsilon}$ such that: $$\rho(\vf{A})\leq\|\vf{A}\|_{\vf{A},\varepsilon}\leq\rho(\vf{A})+\varepsilon$$
     \end{enumerate}
-  \end{prop}
+  \end{proposition}
   \begin{definition}
     A matrix $\vf{A}\in\mathcal{M}_n(\RR)$ is \emph{convergent} if $\displaystyle\lim_{k\to\infty}\vf{A}^k=\vf{0}$.
   \end{definition}
@@ -599,13 +599,13 @@
   \begin{definition}
     We define the \emph{rate of convergence} $R$ of an iterative method $\vf{x}^{(k+1)}=\vf{M}\vf{x}^{(k)}+\vf{N}^{-1}\vf{b}$ as: $$R=-\log(\rho(\vf{M}))$$
   \end{definition}
-  \begin{prop}
+  \begin{proposition}
     Let $\vf{x}^{(k+1)}=\vf{M}\vf{x}^{(k)}+\vf{N}^{-1}\vf{b}$ be an iterative method to approximate the solution $\vf{x}$ of a system of equations $\vf{A}\vf{x}=\vf{b}$. Then, we have the following estimations:
     \begin{align*}
       \|\vf{x}^{(k)}-\vf{x}\| & \leq\frac{\|\vf{M}\|^k}{1-\|\vf{M}\|}\|\vf{x}^{(1)}-\vf{x}^{(0)}\|\quad & \text{(a priori)}     \\
       \|\vf{x}^{(k)}-\vf{x}\| & \leq\frac{\|\vf{M}\|}{1-\|\vf{M}\|}\|\vf{x}^{(k)}-\vf{x}^{(k-1)}\|\quad & \text{(a posteriori)}
     \end{align*}
-  \end{prop}
+  \end{proposition}
   \begin{definition}
     Let $\vf{A}=(a_{ij})\in\mathcal{M}_n(\RR)$. We say $A$ is \emph{strictly diagonally dominant by rows} if $$|a_{ii}|>\sum_{\substack{j=1\\j\ne i}}^n|a_{ij}|$$
     We say $A$ is \emph{strictly diagonally dominant by columns} if $$|a_{jj}|>\sum_{\substack{i=1\\i\ne j}}^n|a_{ij}|$$
@@ -779,7 +779,7 @@
       \item Solve the triangular system $\vf{U}\vf{x}=\vf{y}$.
     \end{enumerate}
   \end{lemma}
-  \begin{prop}
+  \begin{proposition}
     Let $\vf{A}\in\GL_n(\RR)$. Then:
     \begin{enumerate}
       \item If LU decomposition exists, it is unique.
@@ -795,13 +795,13 @@
               \vf{U}=\vf{A}^{(n)}
             $$
     \end{enumerate}
-  \end{prop}
+  \end{proposition}
   \begin{definition}
     A \emph{permutation matrix} is a square binary matrix that has exactly one entry of 1 in each row and each column and 0 elsewhere.
   \end{definition}
-  \begin{prop}
+  \begin{proposition}
     Let $\vf{A}\in\GL_n(\RR)$. Then, there exist a permutation matrix $\vf{P}\in\mathcal{M}_n(\RR)$ and matrices $\vf{L},\vf{U}\in\mathcal{M}_n(\RR)$ of the form of \cref{NM_L,NM_U}, respectively, such that: $$\vf{P}\vf{A}=\vf{L}\vf{U}$$
-  \end{prop}
+  \end{proposition}
   \begin{definition}[QR descompostion]
     Let $\vf{A}\in\GL_n(\RR)$ be a matrix. A \emph{QR decomposition} of $\vf{A}$ is an expression $\vf{A}=\vf{Q}\vf{R}$, where $\vf{Q},\vf{R}\in\mathcal{M}(\RR)$ are such that $\vf{Q}$ is orthogonal and $\vf{R}$ is upper triangular.
   \end{definition}

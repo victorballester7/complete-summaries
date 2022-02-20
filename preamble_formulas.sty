@@ -16,7 +16,7 @@
 \usepackage{tkz-euclide} % for getting some useful geometric commands.
 \usepackage{tikz-3dplot} % to draw a visual 3d image with tikz (not with pgfplots).
 \usepackage[RPvoltages]{circuitikz} % to draw electric circuits with tikz
-\usetikzlibrary{arrows,arrows.meta,decorations.pathmorphing,decorations.pathreplacing,decorations.shapes,decorations.markings,patterns,calc,fillbetween}
+\usetikzlibrary{arrows,arrows.meta,decorations.pathmorphing,decorations.pathreplacing,decorations.shapes,decorations.markings,patterns,calc,fillbetween,intersections}
 \usepgfplotslibrary{fillbetween}
 \pgfplotsset{compat=newest}
 %%%%%%%%%%%%%%%%%%%%%%%%
@@ -29,9 +29,10 @@
 \setlength{\parindent}{0pt} % Indentation disabled.
 
 %%%%%%%% Colors %%%%%%%%
-    \definecolor{color_blue1}{RGB}{175,175,255}
-    \definecolor{color_blue2}{RGB}{90,90,255}
+    \definecolor{color_blue1}{RGB}{190,190,255}
+    \definecolor{color_blue2}{RGB}{100,100,255}
     \definecolor{color_blue3}{RGB}{0,0,255}
+    \definecolor{color_blue4}{RGB}{0,0,150}
     \definecolor{color_green1}{RGB}{160,240,160}
     \definecolor{color_green2}{RGB}{50,200,50}
     \definecolor{color_green3}{RGB}{10,150,10}
@@ -71,15 +72,16 @@
 
         \newcommand{\rrightarrow}{\mathrel{\mathrlap{\rightarrow}\mkern1mu\rightarrow}} % a larger version of \twoheadrightarrow
         % Default \Re{} for real part of a number 
-        % Default \Im{} for imaginary part of a number 
-
+        % Default \Im{} for imaginary part of a number
+        % Default \abs for absolute value. \newcommand{\abs}[1]{\lvert#1\rvert}
+        
     %%% CALCULUS
         % command \grad is by default \nabla in bold face
         % \renewcommand{\grad}{\operatorname{\vf{grad}}} % gradient
-        \newcommand{\rot}{\operatorname{\vf{rot}}} % curl
-        \newcommand{\rotp}{\vf{\nabla}\times} % curl for physics
+        \DeclareMathOperator{\rot}{\vf{rot}} % curl
+        \DeclareMathOperator{\rotp}{\vf{\nabla}\times} % curl for physics
         \renewcommand{\div}{\operatorname{\vf{div}}} % divergence
-        \newcommand{\divp}{\vf{\nabla}\cdot} % divergence for physics
+        \DeclareMathOperator{\divp}{\vf{\nabla}\cdot} % divergence for physics
         % command \laplacian is by default \nabla^2
         %\newcommand{\laplacian}{\nabla^2} % laplacian
         \DeclareDocumentCommand\derivative{ s o m g d() }{ 
@@ -189,7 +191,12 @@
         \DeclareMathOperator{\Arg}{Arg} % principal argument
         \DeclareMathOperator{\Ln}{Ln} % principal logarithm
         
-
+    %%% DIFFERENTIAL GEOMETRY
+        \newcommand{\T}[1]{{\vf{T}_{\vf{#1}}}} % tangent vector
+        \newcommand{\N}[1]{{\vf{N}_{\vf{#1}}}} % normal vector
+        \newcommand{\B}[1]{{\vf{B}_{\vf{#1}}}} % binormal vector
+        \newcommand{\ka}[1]{{\kappa_{\vf{#1}}}} % curvature
+        \newcommand{\ta}[1]{{\tau_{\vf{#1}}}} % torsion
     
     %%% vectors and matrices
         \newcommand{\vf}[1]{\boldsymbol{\mathrm{#1}}} % math style for vectors and matrices and vector-values functions (previously it was \*vb{#1} but this does not apply to greek letters)
@@ -230,7 +237,7 @@
     \theoremstyle{math}
     \newtheorem{theorem}{Theorem}[section]
     \newtheorem{lemma}[theorem]{Lemma}
-    \newtheorem{prop}[theorem]{Proposition}
+    \newtheorem{proposition}[theorem]{Proposition}
     \newtheorem{corollary}[theorem]{Corollary}
     \newtheorem{axiom}[theorem]{Axiom}
     \newtheorem{definition}[theorem]{Definition}
@@ -243,7 +250,7 @@
     \renewcommand{\thetheorem}{\arabic{section}.\arabic{theorem}}
     \renewcommand{\thecorollary}{\arabic{section}.\arabic{corollary}}
     \renewcommand{\thelemma}{\arabic{section}.\arabic{lemma}}
-    \renewcommand{\theprop}{\arabic{section}.\arabic{prop}}
+    \renewcommand{\theproposition}{\arabic{section}.\arabic{proposition}}
     \renewcommand{\thelaw}{\arabic{section}.\arabic{law}}
     \renewcommand{\theprinciple}{\arabic{section}.\arabic{principle}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
