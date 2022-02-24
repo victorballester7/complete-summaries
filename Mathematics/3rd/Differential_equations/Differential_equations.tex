@@ -613,7 +613,7 @@
   \begin{theorem}
     Let $U\subseteq\RR\times\RR^n$ be an open set and $\vf{f}:U\rightarrow\RR^n$ be a continuous function and of class $\mathcal{C}^k$, $k\in\NN$. Suppose that the flow $\vf{\phi}(t,t_0,\vf{x}_0)$ of $\vf{x}'=\vf{f}(t,\vf{x})$ is defined on an open set $V\subseteq\RR\times\RR\times\RR^n$. Then, $\vf{\phi}(t,t_0,\vf{x}_0)$ is of class $\mathcal{C}^k$ on $V$.
   \end{theorem}
-  \subsection{Qualitative theory}
+  \subsection{Qualitative theory of autonomous systems}
   \subsubsection{Introduction to dynamical systems}
   \begin{definition}
     A \emph{dynamical system} is a triplet $(G,X,\Psi)$, where $G$ is a topological abelian group\footnote{That is, $G$ is an abelian group with an inherited topological structure.}, $X$ is a topological space and $\Psi:G\times X\rightarrow X$ is a function such that:
@@ -699,11 +699,11 @@
   \end{proposition}
   \begin{definition}
     Let $(\RR,\RR^n,\vf{\Psi})$ be a dynamical system and $\vf{x}\in\RR^n$. We say that $\vf{y}\in\RR^n$ is an \emph{$\alpha$-limit point} of $\vf{x}$ if there exists a sequence $(t_n)\subset\RR$ such that $\displaystyle\lim_{n\to\infty}t_n=-\infty$ and $\displaystyle\lim_{n\to\infty}\vf{\Psi}(t_n,\vf{x})=\vf{y}$.
-    The set of all $\alpha$-limit points of $\vf{x}$ is called \emph{$\alpha$-limit set}, and it is denoted by $\alpha(\vf{x})$.
+    The set of all $\alpha$-limit points of $\vf{x}$ is called \emph{$\alpha$-limit set}, and it is denoted by $\alpha(\vf{x})$. For an orbit $\vf{\gamma}$ of $(\RR,\RR^n,\vf{\Psi})$, we say that $\vf{y}$ is an \emph{$\omega$-limit point} of $\vf{\gamma}$, it is a $\omega$-limit point of some point on the orbit $\vf{\gamma}$.
   \end{definition}
   \begin{definition}
     Let $(\RR,\RR^n,\vf{\Psi})$ be a dynamical system and $\vf{x}\in\RR^n$. We say that $\vf{y}\in\RR^n$ is an \emph{$\omega$-limit point} of $\vf{x}$ if there exists a sequence $(t_n)\subset\RR$ such that $\displaystyle\lim_{n\to\infty}t_n=+\infty$ and $\displaystyle\lim_{n\to\infty}\vf{\Psi}(t_n,\vf{x})=\vf{y}$.
-    The set of all $\omega$-limit points of $\vf{x}$ is called \emph{$\omega$-limit set}, and it is denoted by $\omega(\vf{x})$.
+    The set of all $\omega$-limit points of $\vf{x}$ is called \emph{$\omega$-limit set}, and it is denoted by $\omega(\vf{x})$. For an orbit $\vf{\gamma}$ of $(\RR,\RR^n,\vf{\Psi})$, we say that $\vf{y}$ is an \emph{$\omega$-limit point} of $\vf{\gamma}$, it is a $\omega$-limit point of some point on the orbit $\vf{\gamma}$.
   \end{definition}
   \begin{proposition}
     Let $(\RR,\RR^n,\vf{\Psi})$ be a dynamical system and $\vf{x}\in\RR^n$. Then: $$\Cl(\vf{\gamma}(\vf{x}))=\alpha(\vf{x})\cup\vf{\gamma}(\vf{x})\cup\omega(\vf{x})$$
@@ -711,6 +711,26 @@
   \begin{definition}
     Let $(\RR,\RR^n,\vf{\Psi})$ be a dynamical system and $A\subseteq \RR^n$ be a subset. We say that $A$ is \emph{invariant} if $\vf{\gamma}(\vf{x})\subseteq A$ $\forall\vf{x}\in A$. We say that $A$ is \emph{positively invariant} if $\vf{\gamma}^+(\vf{x})\subseteq A$ $\forall\vf{x}\in A$. Analogously, we say that $A$ is \emph{negatively invariant} if $\vf{\gamma}^-(\vf{x})\subseteq A$ $\forall\vf{x}\in A$
   \end{definition}
+  \begin{proposition}
+    Let $(\RR,\RR^n,\vf{\Psi})$ be a dynamical system and $\vf{p}\in \RR^n$. Suppose $\vf{\gamma}^+$ is contained in a compact set. Then:
+    \begin{itemize}
+      \item $\omega(\vf{p})\ne\varnothing$.
+      \item $\omega(\vf{p})$ is compact.
+      \item $\omega(\vf{p})$ is invariant.
+      \item $\omega(\vf{p})$ is connected.
+      \item If $\omega(\vf{\gamma})\subseteq\vf{\gamma}\implies\omega(\vf{\gamma})=\vf{\gamma}$, then $\vf{\gamma}$ is either a critical point or a period orbit.
+    \end{itemize}
+  \end{proposition}
+  \begin{proposition}
+    Let $(\RR,\RR^n,\vf{\Psi})$ be a dynamical system and $\vf{p}\in \RR^n$. Suppose $\vf{\gamma}^-$ is contained in a compact set. Then:
+    \begin{itemize}
+      \item $\alpha(\vf{p})\ne\varnothing$.
+      \item $\alpha(\vf{p})$ is compact.
+      \item $\alpha(\vf{p})$ is invariant.
+      \item $\alpha(\vf{p})$ is connected.
+      \item If $\alpha(\vf{\gamma})\subseteq\vf{\gamma}\implies\alpha(\vf{\gamma})=\vf{\gamma}$, then $\vf{\gamma}$ is either a critical point or a period orbit.
+    \end{itemize}
+  \end{proposition}
   \begin{definition}
     Let $(\RR,\RR^n,\vf{\Psi})$ be a dynamical system and $K\subset \RR^n$ be a compact set. We say that $K$ is \emph{positively stable} if for all neighbourhood $U$ of $K$, there exists a neighbourhood $V$ of $K$ with $V\subseteq U$ and such that $\forall \vf{x}\in V$, $\vf{\gamma}^+(\vf{x})\subset U$. Analogously, we say that $K$ is \emph{negatively stable} if for all neighbourhood $U$ of $K$, there exists a neighbourhood $V$ of $K$ with $V\subseteq U$ and such that $\forall \vf{x}\in V$, $\vf{\gamma}^-(\vf{x})\subset U$.
   \end{definition}
@@ -808,7 +828,7 @@
     Let $U,V\subseteq \RR^n$ be open sets and $\vf{f}:U\rightarrow\RR^n$, $\vf{g}:V\rightarrow\RR^n$ be vector fields of class $\mathcal{C}^1$ and $\vf{p}\in\RR^n$ be a critical point of $\vf{f}$. Suppose that $\vf{h}$ is a conjugacy of class $\mathcal{C}^1$ between $\vf{f}$ and $\vf{g}$. Then, the vector fields $\vf{Df}(\vf{p})$ and $\vf{Dg}(\vf{h}(\vf{p}))$ are conjugate by $\vf{Dh}(\vf{p})$. In particular, $\sigma(\vf{Df}(\vf{p}))=\sigma(\vf{Dg}(\vf{h}(\vf{p})))$.
   \end{lemma}
   \begin{definition}
-    Let $U\subseteq \RR^n$ be an open set, $\vf{f}:U\rightarrow\RR^2$ be a vector field of class $\mathcal{C}^1$ and $\vf{p}\in U$ be an critical point of $\vf{f}$. Suppose $\sigma(\vf{Df}(\vf{p}))=\{\lambda_1,\lambda_2\}$. We say that $\vf{p}$ is a
+    Let $U\subseteq \RR^2$ be an open set, $\vf{f}:U\rightarrow\RR^2$ be a vector field of class $\mathcal{C}^1$ and $\vf{p}\in U$ be an critical point of $\vf{f}$. Suppose $\sigma(\vf{Df}(\vf{p}))=\{\lambda_1,\lambda_2\}$. We say that $\vf{p}$ is a
     \begin{itemize}
       \item \emph{stable node} if $\lambda_1,\lambda_2\in\RR_{<0}$ and $\lambda_1\ne\lambda_2$.
       \item \emph{unstable node} if $\lambda_1,\lambda_2\in\RR_{>0}$ and $\lambda_1\ne\lambda_2$.
@@ -833,10 +853,13 @@
                 \lambda_1 & 0         \\
                 1         & \lambda_1
               \end{pmatrix}$.
-      \item \emph{stable spiral} (or \emph{sink}) if $\lambda_1,\lambda_2\in\CC$ and $\Re(\lambda_1)<0$.
-      \item \emph{unstable spiral} (or \emph{source}) if $\lambda_1,\lambda_2\in\CC$ and $\Re(\lambda_1)>0$.
+      \item \emph{stable focus} (or \emph{sink}) if $\lambda_1,\lambda_2\in\CC$ and $\Re(\lambda_1)<0$.
+      \item \emph{unstable focus} (or \emph{source}) if $\lambda_1,\lambda_2\in\CC$ and $\Re(\lambda_1)>0$.
       \item \emph{center} if $\lambda_1,\lambda_2\in\CC$, $\Re(\lambda_1)=0$ and $\vf{p}$ is surrounded by periodic orbits.
     \end{itemize}
+  \end{definition}
+  \begin{definition}
+    Let $\vf{A}\in\mathcal{M}_2(\RR)$ and consider the linear system induced by $\vf{A}$. Let $E_1$, $E_2$ be the eigenspaces of $\vf{A}$. The four orbits contained in ${E_1}_{>0}$, ${E_1}_{>0}$, ${E_1}_{>0}$ and ${E_1}_{>0}$ are called \emph{saddle separatrices} of the linear system.
   \end{definition}
   \begin{center}
     \begin{minipage}{\linewidth}
@@ -845,6 +868,46 @@
       \captionof{figure}{Classification of singular points of a linear dynamical system of dimension 2, induced by the equation $\vf{x}'=\vf{A}\vf{x}$, $\vf{A}\in\mathcal{M}_2(\RR)$ in terms of $D=\det\vf{A}$ and $T=\trace\vf{A}$.}
     \end{minipage}
   \end{center}
+  \begin{theorem}
+
+  \end{theorem}
+  \subsubsection{Integrable systems}
+  \begin{definition}
+    Let $U\subseteq \RR^n$ be an open set, $\vf{f}:U\rightarrow\RR^n$ be a vector field and $H:U\rightarrow\RR$ be a non-constant function. We say that $H$ is a \emph{first integral} for the differential system $\vf{x}'=\vf{f}(\vf{x})$ if for each solution $\vf{\varphi}(t)$ of that system, we have $H(\vf{\varphi(t)})=\const$ Thus, the phase trajectory of a solution $\vf{\varphi}(t)$ to $\vf{x}'=\vf{f}(\vf{x})$ lies on a level surface of $H$. In particular, if $n=2$, $\vf{\varphi}(t)$ will be a level curve of $H$.
+  \end{definition}
+  \begin{proposition}
+    Let $U\subseteq \RR^n$ be an open set, $\vf{f}:U\rightarrow\RR^n$ be a vector field such that $\vf{f}=(f_1,\ldots,f_n)$ and $H:U\rightarrow\RR$ be a non-constant function. Then, $H$ is a first integral for the differential system $\vf{x}'=\vf{f}(\vf{x})$ if and only if: $$\pdv{H}{x_1}(\vf{x})f_1(\vf{\vf{x}})+\cdots+\pdv{H}{x_n}(\vf{x})f_n(\vf{\vf{x}})=0\quad\forall\vf{x}\in U$$
+  \end{proposition}
+  \begin{definition}
+    Let $U\subseteq \RR^n$ be an open set, $\vf{f}:U\rightarrow\RR^n$ be a vector field and $H_1,\ldots,H_k:U\rightarrow\RR$ be $k\leq n-1$ first integrals for the differential system $\vf{x}'=\vf{f}(\vf{x})$. We say that $H_1,\ldots,H_k$ are \emph{functionally independent} if for all $\vf{x}\in U$, we have: $$\rank
+      \begin{pmatrix}
+        \pdv{U_1}{x_1}(\vf{x}) & \cdots & \pdv{U_1}{x_n}(\vf{x}) \\
+        \vdots                 & \ddots & \vdots                 \\
+        \pdv{U_k}{x_1}(\vf{x}) & \cdots & \pdv{U_k}{x_n}(\vf{x}) \\
+      \end{pmatrix}=k$$
+  \end{definition}
+  \begin{proposition}
+    Let $U\subseteq \RR^n$ be an open set, $\vf{f}:U\rightarrow\RR^n$ be a vector field and $H_1,\ldots,H_k$ be $k\leq n-1$ functionally independent first integrals for the differential system $\vf{x}'=\vf{f}(\vf{x})$. Then, the number of unknowns of the system can be reduced to $n-k$.
+  \end{proposition}
+  \begin{definition}
+    Let $U\subseteq \RR^{2n}$ be an open set, $H:U\rightarrow\RR$ be a function and $(\vf{x},\vf{y}):=(x_1,\ldots,x_n,y_1,\ldots,y_n)$. The differential system
+    \begin{equation*}
+      \left\{
+      \begin{aligned}
+        {x_1}' & =-\pdv{H}{y_1}(\vf{x}) \\
+               & \;\;\vdots             \\
+        {x_n}' & =-\pdv{H}{y_n}(\vf{x}) \\
+        {y_1}' & =\pdv{H}{x_1}(\vf{x})  \\
+               & \;\;\vdots             \\
+        {y_n}' & =\pdv{H}{x_1}(\vf{x})  \\
+      \end{aligned}
+      \right.
+    \end{equation*}
+    is called \emph{Hamiltonian system} in $2n$ unknowns and $H$ is called \emph{Hamiltonian} of the system.
+  \end{definition}
+  \begin{proposition}
+    Let $U\subseteq \RR^{2n}$ be an open set, $H:U\rightarrow\RR$ be the Hamiltonian of its Hamiltonian system. Then, $H$ is a first integral of that differential system.
+  \end{proposition}
   \subsubsection{Local behavoir near a hyperbolic critical point}
   \begin{definition}
     Let $U\subseteq \RR^n$ be an open set, $\vf{f}:U\rightarrow\RR^n$ be a vector field of class $\mathcal{C}^r$ with $r\geq 1$ and $\vf{p}\in\RR^n$ be a critical point of $\vf{f}$. We say that $\vf{p}$ is \emph{hyperbolic critical point} if $\Re(\lambda)\ne 0$ $\forall \lambda\in\sigma(\vf{Df}(\vf{p}))$.
@@ -892,43 +955,9 @@
       \item If $\vf{p}$ is negatively stable, then $\Re(\lambda)\geq 0$ $\forall\lambda\in\sigma(\vf{Df}(\vf{p}))$.
     \end{enumerate}
   \end{theorem}
-  \subsection{Autonomous systems}
-  \subsubsection{Integrable systems}
+  \subsubsection{Integrability of polynomial vectors fields}
   \begin{definition}
-    Let $U\subseteq \RR^n$ be an open set, $\vf{f}:U\rightarrow\RR^n$ be a vector field and $H:U\rightarrow\RR$ be a non-constant function. We say that $H$ is a \emph{first integral} for the differential system $\vf{x}'=\vf{f}(\vf{x})$ if for each solution $\vf{\varphi}(t)$ of that system, we have $H(\vf{\varphi(t)})=\const$ Thus, the phase trajectory of a solution $\vf{\varphi}(t)$ to $\vf{x}'=\vf{f}(\vf{x})$ lies on a level surface of $H$. In particular, if $n=2$, $\vf{\varphi}(t)$ will be a level curve of $H$.
+
   \end{definition}
-  \begin{proposition}
-    Let $U\subseteq \RR^n$ be an open set, $\vf{f}:U\rightarrow\RR^n$ be a vector field such that $\vf{f}=(f_1,\ldots,f_n)$ and $H:U\rightarrow\RR$ be a non-constant function. Then, $H$ is a first integral for the differential system $\vf{x}'=\vf{f}(\vf{x})$ if and only if: $$\pdv{H}{x_1}(\vf{x})f_1(\vf{\vf{x}})+\cdots+\pdv{H}{x_n}(\vf{x})f_n(\vf{\vf{x}})=0\quad\forall\vf{x}\in U$$
-  \end{proposition}
-  \begin{definition}
-    Let $U\subseteq \RR^n$ be an open set, $\vf{f}:U\rightarrow\RR^n$ be a vector field and $H_1,\ldots,H_k:U\rightarrow\RR$ be $k\leq n-1$ first integrals for the differential system $\vf{x}'=\vf{f}(\vf{x})$. We say that $H_1,\ldots,H_k$ are \emph{functionally independent} if for all $\vf{x}\in U$, we have: $$\rank
-      \begin{pmatrix}
-        \pdv{U_1}{x_1}(\vf{x}) & \cdots & \pdv{U_1}{x_n}(\vf{x}) \\
-        \vdots                 & \ddots & \vdots                 \\
-        \pdv{U_k}{x_1}(\vf{x}) & \cdots & \pdv{U_k}{x_n}(\vf{x}) \\
-      \end{pmatrix}=k$$
-  \end{definition}
-  \begin{proposition}
-    Let $U\subseteq \RR^n$ be an open set, $\vf{f}:U\rightarrow\RR^n$ be a vector field and $H_1,\ldots,H_k$ be $k\leq n-1$ functionally independent first integrals for the differential system $\vf{x}'=\vf{f}(\vf{x})$. Then, the number of unknowns of the system can be reduced to $n-k$.
-  \end{proposition}
-  \begin{definition}
-    Let $U\subseteq \RR^{2n}$ be an open set, $H:U\rightarrow\RR^{2n}$ be a function and $(\vf{x},\vf{y}):=(x_1,\ldots,x_n,y_1,\ldots,y_n)$. The differential system
-    \begin{equation*}
-      \left\{
-      \begin{aligned}
-        {x_1}' & =-\pdv{H}{y_1}(\vf{x}) \\
-               & \;\;\vdots             \\
-        {x_n}' & =-\pdv{H}{y_n}(\vf{x}) \\
-        {y_1}' & =\pdv{H}{x_1}(\vf{x})  \\
-               & \;\;\vdots             \\
-        {y_n}' & =\pdv{H}{x_1}(\vf{x})  \\
-      \end{aligned}
-      \right.
-    \end{equation*}
-    is called \emph{Hamiltonian system} in $2n$ unknowns and $H$ is called \emph{Hamiltonian} of the system.
-  \end{definition}
-  \begin{proposition}
-    Let $U\subseteq \RR^{2n}$ be an open set, $H:U\rightarrow\RR^{2n}$ be the Hamiltonian of its Hamiltonian system. Then, $H$ is a first integral of that differential system.
-  \end{proposition}
 \end{multicols}
 \end{document}

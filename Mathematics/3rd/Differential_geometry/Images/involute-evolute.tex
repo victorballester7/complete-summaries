@@ -26,8 +26,9 @@
           \draw[dashed] (0cm,-0.1cm) -- (0.575cm,-0.1cm);
           \draw[solid] (0cm, 0.1cm) -- (0.575cm, 0.1cm);
         },
-      legend style={at={(4,-4)},anchor=center}, % position of the legend box and anchor is the point on the box to be fitted exactly at the point of cs:<>,<>. Options are anchor=center,south west,south east,north west,north east,north,south,west...
+      %legend style={at={(0,-0.5)},anchor=center}, % position of the legend box and anchor is the point on the box to be fitted exactly at the point of cs:<>,<>. Options are anchor=center,south west,south east,north west,north east,north,south,west...
       title={Tractrix as involute of the catenary},
+      name=left plot,
     ]
     \addplot[
       domain=-4:4, %Domain of the fucntion
@@ -61,11 +62,13 @@
     \legend{Catenary,Tractrix}
     %\node[anchor=center] at (axis cs:0,-1.25){Tractrix as involute of the catenary};
   \end{axis}
-\end{tikzpicture}
-\begin{tikzpicture}
+  \hspace{1cm}
   \begin{axis}[
       xmin = -3, xmax = 3, %
       ymin = -0.5, ymax = 5, %
+      at={(left plot.south east)},
+      %anchor=south west,
+      %xshift=0.2cm,
       axis equal image,
       clip mode=individual,
       title={Catenary as evolute of the tractrix},
@@ -103,8 +106,8 @@
     %\legend{Catenary,Tractrix}
     %\node[anchor=center] at (axis cs:0,-1.25){Catenary as evolute of the tractrix};
   \end{axis}
+  %\centering
+  %\pgfplotslegendfromname{named}
+
 \end{tikzpicture}
-\\
-%\centering
-\pgfplotslegendfromname{named}
 \end{document}

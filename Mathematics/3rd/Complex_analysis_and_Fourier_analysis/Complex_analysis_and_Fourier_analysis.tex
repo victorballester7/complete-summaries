@@ -418,5 +418,69 @@
       \coth z & = \frac{1}{\tanh z}=\frac{\exp{z}+\exp{-z}}{\exp{z}-\exp{-z}}\quad\forall z\in\CC\setminus\bigcup_{k\in\ZZ}\{\pi k\ii\}
     \end{align*}
   \end{definition}
+  \subsection{Holomorphic functions}
+  \begin{definition}
+    Let $U\subseteq \CC$ be an open set, $f:U\rightarrow \CC$ be a function and $z_0\in U$. We say that $f$ is \emph{$\CC$-differentiable} at $z_0$ if the following limit exists: $$\lim_{z \to z_0} \frac{f(z) - f(z_0)}{z - z_0} = \lim_{h \to 0} \frac{f(z_0 + h) - f(z_0)}{h}$$ In that case, the limit is called \textit{derivative of $f$ at $z_0$} and it is denoted by $f'(z_0)$.
+  \end{definition}
+  \begin{proposition}
+    Let $U\subseteq \CC$ be an open set, $f:U\rightarrow \CC$ be a function and $z_0\in U$. Then, $f$ is $\CC$-differentiable at $z_0$ if and only if $\exists a+b\ii\in\CC$ such that $\forall\varepsilon>0$ $\exists\delta>0$ such that $$|f(z_0+s)-f(z_0)-(a+b\ii)s|\leq \varepsilon s$$ whenever $|s|<\delta$.
+  \end{proposition}
+  \begin{proposition}
+    Let $U\subseteq \CC$ be an open set, $z_0 \in U$, $f,g:U\rightarrow \CC$ be two $\CC$-differentiable functions at $z_0$ and $\alpha,\beta\in \CC$. Then:
+    \begin{enumerate}
+      \item $\alpha f + \beta g$ is $\CC$-differentiable at $z_0$ and: $${(\alpha f+ \beta g)}'(z_0) = \alpha f'(z_0) + \beta g'(z_0)$$
+      \item $fg$ is $\CC$-differentiable at $z_0$ and: $${(fg)}'(z_0) = f'(z_0)g(z_0) + f(z_0)g'(z_0)$$
+      \item If $g(z_0) \neq 0$, then $f/g$ is $\CC$-differentiable at $z_0$ and:
+            $${\left(\frac{f}{g}\right)}'(z_0) = \frac{f'(z_0)g(z_0) - f(z_0) g'(z_0)}{{g(z_0)}^2}$$
+    \end{enumerate}
+  \end{proposition}
+  \begin{proposition}
+    Let $z\in\CC$. Then:
+    \begin{itemize}
+      \item ${\left(\exp{z}\right)}'=\exp{z}$
+      \item ${\left(\cosh{z}\right)}'=\sinh{z}$
+      \item ${\left(\sinh{z}\right)}'=\cosh{z}$
+      \item ${\left(\tanh{z}\right)}'=1+{(\tanh{z})}^2$
+    \end{itemize}
+  \end{proposition}
+  \begin{definition}
+    Let $U\subseteq \CC$ be an open set and $f:U\rightarrow \CC$ be a function. We say that $f$ is \emph{holomorphic} on $U$ is $f$ is $\CC$-differentiable at each $z\in U$. We denote the set of all holomorphic functions on $U$ by $\mathcal{H}(U)$.
+  \end{definition}
+  \begin{definition}
+    We say that $f:\CC\rightarrow\CC$ is an \emph{entire function} if $f$ is holomorphic on the whole complex plane.
+  \end{definition}
+  \begin{proposition}
+    Let $U\subseteq \CC$ be an open set, $f:U\rightarrow \CC$ be a function and $z_0 \in \CC$ a point. If $f$ is $\CC$-differentiable at $z_0$, then it is continuous at $z_0$.
+  \end{proposition}
+  \begin{proposition}
+    Let $n\in\NN\cup\{0\}$ and $f:\CC\rightarrow\CC$ be a function defined as  $f(z)=z^n$. Then, $f$ is holomorphic and $f'(z)=nz^{n-1}$ $\forall z\in\CC$.
+  \end{proposition}
+  \begin{corollary}
+    Let $p(z)=\frac{f(z)}{g(z)}\in\CC(z)$ be a rational function. Then, $p(z)$ is a holomorphic on the open set $\CC\setminus Z(g)$, where $Z(g)=\{z\in\CC:g(z)=0\}$.
+    In particular, if $p(z)\in\CC[z]$ is a polynomial, $p(z)$ is holomorphic on $\CC$.
+  \end{corollary}
+  \begin{theorem}[Chain rule]
+    Let $U,V\subseteq \CC$ be open sets, $z_0\in U$, $f:U\rightarrow\CC$ be a $\CC$-differentiable function at $z_0$ such that $f(U)\subseteq V$, and $g:V\rightarrow\CC$ be $\CC$-differentiable function at $f(z_0)$. Then, $g\circ f$ is $\CC$-differentiable at $z_0$ and: $${(g\circ f)}'(z_0)=g'(f(z_0))f'(z_0)$$
+  \end{theorem}
+  \begin{theorem}
+    Let $\sum_{n=0}^\infty a_n{(z-z_0)}^n$ be a complex power series with radius of convergence $R\in[0,\infty]$. Then, the series $\sum_{n=1}^\infty na_n{(z-z_0)}^{n-1}$ has the same radius of convergence $R$ and if $f(z)=\sum_{n=0}^\infty a_n{(z-z_0)}^n$ for $|z-z_0|<R$, then $f$ is holomorphic and: $$f'(z)=\sum_{n=1}^\infty na_n{(z-z_0)}^{n-1}\quad\text{for } |z-z_0|<R$$
+  \end{theorem}
+  \begin{corollary}
+    Let $\sum_{n=0}^\infty a_n{(z-z_0)}^n$ be a complex power series with radius of convergence $R\in[0,\infty]$. Then, the series $\sum_{n=k}^\infty n(n-1)\cdots(n-k+1)a_n{(z-z_0)}^{n-k}$ has the same radius of convergence $R$ for all $k\in\NN \cup\{0\}$ and if $f(z)=\sum_{n=0}^\infty a_n{(z-z_0)}^n$ for $|z-z_0|<R$, then $f^(k)$ is holomorphic and: $$f^{(k)}(z)=\sum_{n=k}^\infty n(n-1)\cdots(n-k+1)a_n{(z-z_0)}^{n-k}$$ for $|z-z_0|<R$ and $\forall k\in\NN \cup\{0\}$. In particular $f^{(k)}(0)=k!a_k$ $\forall k\in\NN\cup\{0\}$.
+  \end{corollary}
+  \begin{proposition}
+    Let $U\subseteq\CC$ be a connected open set and $f\in\mathcal{H}(U)$ such that $f'(z)=0$ $\forall z\in U$. Then, $f$ is constant.
+  \end{proposition}
+  \subsubsection{Logarithm determination}
+  \begin{definition}
+    Let $U\subseteq\CC^*$ be an open set and $f:U\longrightarrow\CC^*$ and $g:U\rightarrow\CC$ be functions. We say that $g$ is a \emph{determination} of $\ln f(z)$ if $g$ is continuos on $U$ and $\exp{g(z)}=f(z)$ $\forall z\in U$.
+  \end{definition}
+  \begin{theorem}
+    Let $U,V\subseteq\CC^*$ be open sets, $f:U\longrightarrow\CC^*$ be a function and $g:V\rightarrow\CC$ be and holomorphic function. Suppose $f(U)\subseteq V$, $g(f(z))=z$ and $g'(f(z))\ne 0$ $\forall z\in U$. Then, $f$ is holomorphic on $U$ and: $$f'(z)=\frac{1}{g'(f(z))}$$
+  \end{theorem}
+  \begin{corollary}
+    Let $U,V\subseteq\CC^*$ be open sets, $g:V\rightarrow\CC$ be and holomorphic function and $f:U\longrightarrow\CC^*$ be a determination of the logarithm. Then: $$f'(z)=\frac{1}{z}$$
+    In particular, ${\left(\ln z\right)}'=\frac{1}{z}$.
+  \end{corollary}
 \end{multicols}
 \end{document}

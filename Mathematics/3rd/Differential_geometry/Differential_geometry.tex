@@ -43,34 +43,37 @@
   \end{definition}
   \subsubsection{Length of curves}
   \begin{definition}
-    Let $\vf{\alpha}:I\rightarrow\RR^n$ be a parametrized curve of class $\mathcal{C}^1$ and $[a,b]\subset I$. We say that the \emph{length} of $\alpha$ between $a$ and $b$ is: $$\ell_{a,b}(\vf{\alpha})=\int_a^b\|\vf{\alpha}'(t)\|\dd{t}$$
+    Let $\vf{\alpha}:I\rightarrow\RR^n$ be a parametrized of a curve of class $\mathcal{C}^0$, $[a,b]\subset I$, $\mathfrak{P}([a,b])$ be the set of all partitions of $[a,b]$ and $\mathcal{P}=\{t_0,\ldots,t_n\}\in\mathfrak{P}$. We define the \emph{length of the polygonal} with vertices at $\vf{\alpha}(t_i)$, $i=1,\ldots,n$ as: $$L_{a,b}(\vf{\alpha},\mathcal{P})=\sum_{i=1}^n\|\vf{\alpha}(t_i)-\vf{\alpha}(t_{i-1})\|$$ We define the $L_{a,b}(\vf{\alpha})$ as:
+    $$L_{a,b}(\vf{\alpha}):=\sup\{L_{a,b}(\vf{\alpha},\mathcal{P}):\mathcal{P}\in\mathfrak{P}([a,b])\}\in\RR_{\geq 0}\cup\{+\infty\}$$ If $L_{a,b}(\vf{\alpha})<+\infty$, we say that $\vf{\alpha}$ is \emph{rectifiable} and that $L_{a,b}(\vf{\alpha})$ is its \emph{length} in $[a,b]$ of $\vf{\alpha}$.
   \end{definition}
+  \begin{proposition}
+    Let $\vf{\alpha}:I\rightarrow\RR^n$ be a parametrized curve of class $\mathcal{C}^1$. Then, $\vf{\alpha}$ is rectifiable and: $$L_{a,b}(\vf{\alpha})=\int_a^b\|\vf{\alpha}'(t)\|\dd{t}$$
+  \end{proposition}
   \begin{proposition}
     Let $\vf{\alpha}:I\rightarrow\RR^n$ be a parametrized curve of class $\mathcal{C}^1$, $\vf{\beta}=\vf{\alpha}\circ h$ be a reparametrization of $\alpha$ and $[a,b]\subset \im h=I$. Suppose $[c,d]=h^{-1}([a,b])$. Then: $$\int_c^d\|\vf{\beta}'(u)\|\dd{u}=\int_a^b\|\vf{\alpha}'(t)\|\dd{t}$$ That is, the length of a curve does not depend on its parametrization.
   \end{proposition}
   \begin{definition}
-    Let $\vf{\alpha}:I\rightarrow\RR^n$ be a parametrized of a curve of class $\mathcal{C}^0$, $[a,b]\subset I$, $\mathfrak{P}([a,b])$ be the set of all partitions of $[a,b]$ and $\mathcal{P}=\{t_0,\ldots,t_n\}\in\mathfrak{P}$. We define the \emph{length of the polygonal} with vertices at $\vf{\alpha}(t_i)$, $i=1,\ldots,n$ as: $$L_{a,b}(\vf{\alpha},\mathcal{P})=\sum_{i=1}^n\|\vf{\alpha}(t_i)-\vf{\alpha}(t_{i-1})\|$$ We define $L_{a,b}(\vf{\alpha})$ as:
-    $$L_{a,b}(\vf{\alpha}):=\sup\{L_{a,b}(\vf{\alpha},\mathcal{P}):\mathcal{P}\in\mathfrak{P}([a,b])\}\in\RR_{\geq 0}\cup\{+\infty\}$$ If $L_{a,b}(\vf{\alpha})<+\infty$, we say that $\vf{\alpha}$ is \emph{rectifiable} and that $L_{a,b}(\vf{\alpha})$ is its length in $[a,b]$.
-  \end{definition}
-  \begin{proposition}
-    Let $\vf{\alpha}:I\rightarrow\RR^n$ be a parametrized curve of class $\mathcal{C}^1$. Then, $\vf{\alpha}$ is rectifiable and: $$L(\vf{\alpha})=\int_a^b\|\vf{\alpha}'(t)\|\dd{t}$$
-  \end{proposition}
-  \begin{definition}
     Let $\vf{\alpha}:I\rightarrow\RR^n$ be a parametrized curve of class $\mathcal{C}^1$ and $a\in I$. We define the \emph{arc-length function} of $\vf{\alpha}$ with origin $a$, the function $s_a:I\rightarrow\RR$ defined as: $$s_a(t)=\int_a^t\|\vf{\alpha}'(u)\|\dd{u}$$
+  \end{definition}
+  \begin{definition}
+    Let $\vf{\alpha}:I\rightarrow\RR^n$ be a parametrized curve of class $\mathcal{C}^1$. We say that $\vf{\alpha}$ is a \emph{unit-speed parametrization} (or that it is parametrized by \emph{arc-length parameter}) if $\|\vf{\alpha}(t)\|=1$ $\forall t\in I$
   \end{definition}
   \begin{proposition}
     Let $\vf{\alpha}:I\rightarrow\RR^n$ be a parametrized curve of class $\mathcal{C}^1$ and $a\in I$.
     \begin{enumerate}
       \item $s_a$ is of class $\mathcal{C}^1$ and $\dv{s_a}{t}(t_0)=\|\vf{\alpha}'(t_0)\|\geq 0$.
       \item If $\vf{\alpha}$ is regular, then $J:=s_a(I)\subseteq\RR$ is an open interval and $s_a:I\rightarrow J$ is a diffeomorphism.
-      \item If $\vf{\alpha}$ is regular, then $\vf{\beta}(s_a):=\vf{\alpha}(t(s_a))$\footnote{Here, $t(s_a)$ represent the inverse function of $s_a(t)$.} is a reparametrization which satisfies $\|\vf{\beta}'(s_a)\|=1$ $\forall s_a\in J$.
+      \item If $\vf{\alpha}$ is regular, then $\vf{\beta}(s_a):=\vf{\alpha}(t(s_a))$\footnote{Here, $t(s_a)$ represent the inverse function of $s_a(t)$.} is an arc-length reparametrization of $\vf{\alpha}$.
     \end{enumerate}
   \end{proposition}
-  \begin{definition}
-    Let $\vf{\alpha}:I\rightarrow\RR^n$ be a parametrized curve of class $\mathcal{C}^1$. We say that $\vf{\alpha}$ is a \emph{unit-speed parametrization} (or that it is parametrized by \emph{arc-length parameter}) if $\|\vf{\alpha}(t)\|=1$ $\forall t\in I$
-  \end{definition}
   \begin{proposition}
-    Let $\vf{\alpha}:I\rightarrow\RR^n$ be a regular parametrized curve of class $\mathcal{C}^1$ and $\vf{\beta}=\vf{\alpha}\circ h$ be a reparametrization of $\alpha$. If $\vf{\alpha}$ and $\vf{\beta}$ are unit-speed parametrizations, then: $$\vf{\beta}(u)=\vf{\alpha}(\pm u+u_0)$$ for some $u_0\in\RR$.
+    Let $\vf{\alpha}:I\rightarrow\RR^n$ be a regular parametrized curve of class $\mathcal{C}^1$ and $\vf{\beta}=\vf{\alpha}\circ h$ be a reparametrization of $\vf{\alpha}$. If $\vf{\alpha}$ and $\vf{\beta}$ are arc-length parametrizations, then: $$\vf{\beta}(u)=\vf{\alpha}(\pm u+u_0)$$ for some $u_0\in\RR$.
+  \end{proposition}
+  \begin{proposition}
+    All regular parametric curves of class $\mathcal{C}^1$ can be arc-length parametrized.
+  \end{proposition}
+  \begin{proposition}
+    The length of any regular parametric curve of class $\mathcal{C}^1$ does not depend on its parametrization.
   \end{proposition}
   \begin{definition}
     Let $\vf{\alpha},\vf{\beta}:I\rightarrow\RR^n$ be arc-length parametrized curves of class $\mathcal{C}^\infty$ and $t_0\in I$. We say that $\vf{\alpha}$ and $\vf{\beta}$ have \emph{contact} of order $\geq r$ at $t_0$ if $$\lim_{t\to t_0}\frac{\vf{\alpha}(t)-\vf{\beta}(t)}{{(t-t_0)}^r}=0$$
@@ -155,8 +158,9 @@
     Let $\vf{\alpha}:I\rightarrow\RR^3$ be an arc-length parametrized curve of class $\mathcal{C}^\infty$, $s_0\in I$ and suppose that $\ka\alpha(s_0)\ne 0$. Then, there exists a unique circle of $\RR^3$ that has contact of order $\geq 2$ at $\vf{\alpha}(s_0)$. This cercle is called \emph{osculating circle} and its radius (called \emph{radius of curvature}) is $\rho_{\vf{\alpha}}(s_0)=\frac{1}{\ka\alpha(s_0)}$. Its center is $Q=\vf{\alpha}(s_0)+\rho_{\vf{\alpha}}(s_0)\N\alpha(s_0)$\footnote{An arc-length parametrization of the osculating circle would be $$u\longmapsto Q+\rho_{\vf{\alpha}}(s_0)\left(-\cos\left(\frac{u}{\rho_{\vf{\alpha}}(s_0)}\right)\N\alpha(s_0)+\sin\left(\frac{u}{\rho_{\vf{\alpha}}(s_0)}\right)\T\alpha(s_0)\right)$$}.
   \end{proposition}
   \begin{definition}
-    Let $\vf{\alpha}:I\rightarrow\RR^3$ be a regular arc-length parametrized curve of class $\mathcal{C}^\infty$ such that $\vf{\alpha}''(s)\ne 0$ $\forall s\in I$. We define the \emph{binormal vector} of $\vf{\alpha}$ at $s_0\in I$ as $$\B\alpha(s_0)=\T\alpha(s_0)\times\N\alpha(s_0)$$
-    Then, the triplet $(\T\alpha(s),\N\alpha(s),\B\alpha(s))$ is an orthonormal positive basis\footnote{Observe that the binormal vector (together with the tangent and normal vectors) is the unique vector that satisfies this property.}, which is called \emph{Frenet-Serret frame} (or \emph{TNB frame}).
+    Let $\vf{\alpha}:I\rightarrow\RR^3$ be a regular arc-length parametrized curve of class $\mathcal{C}^\infty$ such that $\vf{\alpha}''(s)\ne 0$ $\forall s\in I$. We define the \emph{binormal vector}of $\vf{\alpha}$ at $s_0\in I$ as:
+    $$\B\alpha(s_0)=\T\alpha(s_0)\times\N\alpha(s_0)$$
+    Then, the triplet $(\T\alpha(s),\N\alpha(s),\B\alpha(s))$ is an orthonormal positive basis\footnote{Observe that the binormal vector (together with the tangent and normal vectors) is the unique vector that satisfies this property.}, and the affine frame $\{\vf{\alpha}(s_0); (\T\alpha(s),\N\alpha(s),\B\alpha(s))\}$ is called \emph{Frenet-Serret frame} (or \emph{TNB frame}).
   \end{definition}
   \begin{proposition}
     Let $\vf{\alpha}:I\rightarrow\RR^3$ be a regular arc-length parametrized curve of class $\mathcal{C}^\infty$ such that $\vf{\alpha}''(s)\ne 0$ $\forall s\in I$. Then, $$\B\alpha'(s)=\ta\alpha(s)\N\alpha(s)\quad\forall s\in I$$ This coefficient $\ta\alpha(s)$ is called \emph{torsion} of $\vf{\alpha}$ at $s\in I$.
@@ -234,7 +238,7 @@
   \begin{corollary}
     Let $\vf{\alpha}:I\rightarrow\RR^3$ be a regular parametrized curve of class $\mathcal{C}^\infty$ such that $\vf{\alpha}'\times \vf{\alpha}''\ne 0$. Then:
     $$\T\alpha=\frac{\vf{\alpha}'}{\|\vf{\alpha}'\|}\qquad\N\alpha=\B\alpha\times\T\alpha\qquad\B\alpha=\frac{\vf{\alpha}'\times\vf{\alpha}''}{\|\vf{\alpha}'\times\vf{\alpha}''\|}$$
-    Moreover: $$\ka\alpha=\frac{\|\vf{\alpha}'\times\vf{\alpha}''\|}{{\|\vf{\alpha}'\|}^3}\qquad\ta\alpha=-\frac{\langle\|\vf{\alpha}'\times\vf{\alpha}''\|,\vf{\alpha}'''\rangle}{{\|\vf{\alpha}'\times\vf{\alpha}''\|}^2}$$
+    Moreover: $$\ka\alpha=\frac{\|\vf{\alpha}'\times\vf{\alpha}''\|}{{\|\vf{\alpha}'\|}^3}\qquad\ta\alpha=-\frac{\langle\vf{\alpha}'\times\vf{\alpha}'',\vf{\alpha}'''\rangle}{{\|\vf{\alpha}'\times\vf{\alpha}''\|}^2}$$
   \end{corollary}
   \subsubsection{Curvature of plane curves}
   \begin{lemma}
@@ -249,5 +253,84 @@
     Let $\vf{\alpha}:I\rightarrow\RR^2$ be a regular parametrized curve of class $\mathcal{C}^\infty$. Then, the signed curvature of $\vf\alpha$ is: $$k_{\vf\alpha}=\frac{\det(\vf\alpha',\vf\alpha'')}{{\norm{\vf\alpha'}}^3}$$
   \end{proposition}
   \subsubsection{Local form of a curve}
+  \begin{definition}
+    Let $\vf{\alpha}:I\rightarrow\RR^2$ be a regular arc-length parametrized curve of class $\mathcal{C}^\infty$ and $s_0\in I$. Choose a frame of reference $\mathcal{R}$ such that $\vf{\alpha}(s_0)\mapsto (0,0,0)$ and $(\T\alpha,\N\alpha,\B\alpha)\mapsto(\vf{e}_1,\vf{e}_2,\vf{e}_3)$ and suppose $\vf{\alpha}(s)_{\mathcal{R}}=(x(s),y(s),z(s))_\mathcal{R}$. Then:
+    $$\left\{
+      \def\arraystretch{2}
+      \begin{array}{l}
+        \displaystyle x(s)\simeq s-\frac{{\ka\alpha(0)}^2}{6}s^3                          \\
+        \displaystyle y(s)\simeq \frac{{\ka\alpha(0)}^2}{2}s^2-\frac{\ka\alpha'(0)}{6}s^3 \\
+        \displaystyle z(s)\simeq -\frac{\ka\alpha(0)\ta\alpha(0)}{6}s^3                   \\
+      \end{array}
+      \right.
+    $$
+    This expression of $\vf{\alpha}(s)_{\mathcal{R}}$ is called \emph{local canonical form} of $\vf{\alpha}$ in a neighbourhood of $s_0$.
+  \end{definition}
+  \subsubsection{Orthogonal group}
+  \begin{definition}
+    We define that \emph{orthogonal group} as the group of all linear transformations that preserve the inner product. That is: $$\text{O}(n):=\{\vf{A}\in\mathcal{M}_n(\RR):\langle\vf{Au},\vf{Av}\rangle=\langle\vf{u},\vf{v}\rangle\;\forall\vf{u},\vf{v}\in\RR^n\}$$
+  \end{definition}
+  \begin{proposition}
+    Let $\vf{A}\in\text{O}(n)$. Then, $\det\vf{A}=\pm$ and $\vf{A}\transpose{A}=\vf{I}_n$.
+  \end{proposition}
+  \begin{definition}
+    We define that \emph{special orthogonal group} as: $$\text{SO}(n):=\{\vf{A}\in\text{O}(n):\det\vf{A}=1\}$$
+  \end{definition}
+  \begin{lemma}
+    Let $\vf{A}\in\text{O}(n)$ and $\lambda\in\sigma(\vf{A})$. Then, $\lambda\in\RR\implies\lambda=\pm 1$.
+  \end{lemma}
+  \begin{proposition}
+    Let $\vf{A}\in\text{O}(n)$. Then:
+    $$\left\{
+      \begin{array}{lll}
+        \vspace{0.1cm}
+        \vf{A}=\begin{pmatrix}
+          \cos\omega & -\sin\omega \\
+          \sin\omega & \cos\omega  \\
+        \end{pmatrix} &
+        \text{ if }                       & \det\vf{A}=1  \\
+        \vf{A}=\begin{pmatrix}
+          \cos\omega & \sin\omega  \\
+          \sin\omega & -\cos\omega \\
+        \end{pmatrix} &
+        \text{ if }                       & \det\vf{A}=-1
+      \end{array}
+      \right.
+    $$
+    for some $\omega\in\RR$.
+  \end{proposition}
+  \begin{proposition}
+    Let $\vf{A}\in\text{O}(3)$. Then, there exists a orthonormal basis $\mathcal{B}$ of $\RR^3$ such that $$[\id]_{\text{Can}(\RR^3),\mathcal{B}}\vf{A}[\id]_{\text{Can}(\RR^3),\mathcal{B}}=\begin{pmatrix}
+        \pm 1 & 0                                              & 0 \\
+        0     & \multicolumn{2}{c}{\multirow{2}{*}{$\vf{A}'$}}     \\
+        0     &                                                &
+      \end{pmatrix}$$
+    where $\vf{A}'\in\text{O}(2)$.
+  \end{proposition}
+  \begin{proposition}
+    Let $\vf{f}:\RR^n\rightarrow\RR^n$ be an Euclidean motion\footnote{Recall that an Euclidean motion is a function that preserves the distance, that is, if $\vf{f}:\RR^n\rightarrow\RR^n$ is an Euclidean motion, then $\|\vf{f}(p)-\vf{f}(q)\|=\|p-q\|$ $\forall p,q\in\RR^n$.}. Then, $\exists\vf{A}\in\text{O}(n)$ and $\vf{u}\in\RR^n$ such that: $$\vf{f}(\vf{v})=\vf{Av}+\vf{u}$$
+  \end{proposition}
+  \begin{proposition}
+    Let $\vf{\alpha}:I\rightarrow\RR^n$ be a parametrized curve of class $\mathcal{C}^\infty$ and $\vf{A}\in\mathcal{M}_n(\RR)$. Then:
+    $${\left(\vf{A}\vf{\alpha}\right)}^{'}(t)=\vf{A}\vf{\alpha}'(t)$$
+  \end{proposition}
+  \begin{proposition}
+    Let $\vf{A}\in\text{SO}(3)$. Then, $\forall \vf{u},\vf{v}\in\RR^3$ we have: $$\vf{A}\left(\vf{u}\times\vf{v}\right)=\left(\vf{Au}\right)\times\left(\vf{Av}\right)$$
+  \end{proposition}
+  \begin{corollary}
+    Let $\vf{\alpha}:I\rightarrow\RR^3$ be an arc-length parametrized curve of class $\mathcal{C}^\infty$ and $\vf{\beta}:=\vf{A\alpha}+\vf{u}$, where $\vf{A}\in\text{SO}(3)$ and $\vf{u}\in\RR^3$. Then, $\vf{\beta}$ is arc-length parametrized and th TNB frame of $\vf{\beta}$ is:
+    $$\T\beta=\vf{A}\T\alpha\qquad\N\beta=\vf{A}\N\beta\qquad\B\beta=\vf{A}\B\alpha$$
+    And the curvature and torsion of $\vf\beta$ are: $$\ka\beta:=\ka\alpha\qquad\ta\beta:=\ta\alpha$$
+  \end{corollary}
+  \subsubsection{Fundamental theorem of curves}
+  \begin{theorem}[Fundamental theorem of curves]
+    Let $\kappa,\tau:I\rightarrow\RR$ be functions of class $\mathcal{C}^\infty$ with $\kappa(s)>0$ $\forall s\in I$. Then, there is an arc-length parametrized curve $\vf{\alpha}:I\rightarrow\RR^3$ of class $\mathcal{C}^\infty$ whose curvature and torsion are $\kappa$ and $\tau$, respectively. Moreover, if $\tilde{\vf{\alpha}}:I\rightarrow\RR^3$ is another curve satisfying these restrictions, then there exists an Euclidean motion that carries $\tilde{\vf{\alpha}}$ to $\vf{\alpha}$\footnote{In matrix form, $\exists\vf{A}\in\text{SO}(3)$ and $\vf{u}\in\RR^3$ such that $\vf{\alpha}=\vf{A}\tilde{\vf{\alpha}}+\vf{u}$.}.
+  \end{theorem}
+  \subsection{Submanifolds of \texorpdfstring{$\RR^n$}{Rn}}
+  \subsubsection{Planar functions}
+  \begin{definition}
+    Let $U\subseteq\RR^n$ be an open set and $f:U\rightarrow\RR$ be a function. We define the \emph{support} of $f$ as:
+    $$\supp(f):=\Cl\left(\{x\in U:f(x)\ne 0\}\right)$$
+  \end{definition}
 \end{multicols}
 \end{document}
