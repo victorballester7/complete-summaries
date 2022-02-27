@@ -1,7 +1,7 @@
 \documentclass{standalone}
 \usepackage{../../../../preamble_formulas}
 
-\def\n{1}
+\def\n{9}
 \pgfplotsset{
   layers/standard/.define layer set={
       background,
@@ -26,10 +26,16 @@
           \draw[dashed] (0cm,-0.1cm) -- (0.575cm,-0.1cm);
           \draw[solid] (0cm, 0.1cm) -- (0.575cm, 0.1cm);
         },
-      %legend style={at={(0,-0.5)},anchor=center}, % position of the legend box and anchor is the point on the box to be fitted exactly at the point of cs:<>,<>. Options are anchor=center,south west,south east,north west,north east,north,south,west...
       title={Tractrix as involute of the catenary},
       name=left plot,
     ]
+    \addplot[
+      domain=-2.5:2.5, %Domain of the fucntion
+      samples=200, %This parameter determines the number of point to be plotted for the function, while bigger the number better looks the function.
+      smooth, %f we use this option, the compiler makes an interpolation between the point plotted to get a soft appearance for the function.
+      thick, %Stroke of the function. Options: ultra thin, very thin, thin, semithick, thick, very thick, ultra thick.
+      blue %Color of the function.
+    ]{cosh(x)};
     \addplot[
       domain=-4:4, %Domain of the fucntion
       samples=200, %This parameter determines the number of point to be plotted for the function, while bigger the number better looks the function.
@@ -39,13 +45,6 @@
       dashed,
       name path=tractrix,
     ]({x-tanh(x)},{1/cosh(x)});
-    \addplot[
-      domain=-2.5:2.5, %Domain of the fucntion
-      samples=200, %This parameter determines the number of point to be plotted for the function, while bigger the number better looks the function.
-      smooth, %f we use this option, the compiler makes an interpolation between the point plotted to get a soft appearance for the function.
-      thick, %Stroke of the function. Options: ultra thin, very thin, thin, semithick, thick, very thick, ultra thick.
-      blue %Color of the function.
-    ]{cosh(x)};
     \begin{pgfonlayer}{background}
       \foreach \i in {0,...,\n}{
           \addplot[
@@ -56,31 +55,18 @@
             name path=linetan,
             on layer=background,
           ]{cosh(4/\n*\i-2)+sinh(4/\n*\i-2)*(x-(4/\n*\i-2))};
-          %\draw[name intersections={of=tractrix and linetan,by=P}] [draw=blue!30, fill=blue!30] (P) circle (1.25pt);;
+          \draw[name intersections={of=tractrix and linetan,by=P}] [draw=blue!30, fill=blue!30] (P) circle (1.25pt);;
         }
     \end{pgfonlayer}
-    \legend{Catenary,Tractrix}
-    %\node[anchor=center] at (axis cs:0,-1.25){Tractrix as involute of the catenary};
   \end{axis}
-  \hspace{1cm}
   \begin{axis}[
       xmin = -3, xmax = 3, %
       ymin = -0.5, ymax = 5, %
-      at={(left plot.south east)},
-      %anchor=south west,
-      %xshift=0.2cm,
+      at={(7cm,0)},
       axis equal image,
       clip mode=individual,
       title={Catenary as evolute of the tractrix},
     ]
-    \addplot[
-      domain=-4:4, %Domain of the fucntion
-      samples=200, %This parameter determines the number of point to be plotted for the function, while bigger the number better looks the function.
-      smooth, %f we use this option, the compiler makes an interpolation between the point plotted to get a soft appearance for the function.
-      thick, %Stroke of the function. Options: ultra thin, very thin, thin, semithick, thick, very thick, ultra thick.
-      red, %Color of the function.
-      name path=tractrix,
-    ]({x-tanh(x)},{1/cosh(x)});
     \addplot[
       domain=-2.5:2.5, %Domain of the fucntion
       samples=200, %This parameter determines the number of point to be plotted for the function, while bigger the number better looks the function.
@@ -90,6 +76,14 @@
       blue, %Color of the function.
       name path=cate,
     ]{cosh(x)};
+    \addplot[
+      domain=-4:4, %Domain of the fucntion
+      samples=200, %This parameter determines the number of point to be plotted for the function, while bigger the number better looks the function.
+      smooth, %f we use this option, the compiler makes an interpolation between the point plotted to get a soft appearance for the function.
+      thick, %Stroke of the function. Options: ultra thin, very thin, thin, semithick, thick, very thick, ultra thick.
+      red, %Color of the function.
+      name path=tractrix,
+    ]({x-tanh(x)},{1/cosh(x)});
     \begin{pgfonlayer}{background}
       \foreach \i in {0,...,\n}{
           \addplot[
@@ -100,14 +94,10 @@
             name path=linetan,
             on layer=background,
           ]{cosh(4/\n*\i-2)+sinh(4/\n*\i-2)*(x-(4/\n*\i-2))};
-          %\draw[name intersections={of=cate and linetan,by=P}] [draw=red!30, fill=red!30] (P) circle (1.25pt);;
+          \draw[name intersections={of=cate and linetan,by=P}] [draw=red!30, fill=red!30] (P) circle (1.25pt);;
         }
     \end{pgfonlayer}
-    %\legend{Catenary,Tractrix}
-    %\node[anchor=center] at (axis cs:0,-1.25){Catenary as evolute of the tractrix};
+    \node[anchor=center] at (axis cs:-3.38,-1.5){\pgfplotslegendfromname{named}};
   \end{axis}
-  %\centering
-  %\pgfplotslegendfromname{named}
-
 \end{tikzpicture}
 \end{document}

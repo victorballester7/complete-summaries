@@ -88,6 +88,34 @@
             where $d\in\RR$. Hence, the general solution will be: $$\varphi(t)\left(d+\int\varphi(t)^{-1}b(t)\dd{t}\right)$$
     \end{enumerate}
   \end{method}
+  \begin{method}[Characteristic equation]
+    Consider the following ode of order $n$ of constant coefficients:
+    \begin{equation}\label{DE_char}
+      a_n x^{(n)} + a_{n-1}x^{(n-1)} + \cdots + a_1 x' + a_0 x = 0
+    \end{equation}
+    We define the \emph{characteristic equation} of that system as the equation: $$p(r):=a_n r^n + a_{n-1}r^{n-1} + \cdots + a_1 r + a_0 = 0$$
+    In order to find the solution of this ode, we need to find the solutions to $p(r)=0$. So suppose $p$ has $s$ distinct real roots and $2(m-s)$ distinct complex roots.
+    $$\lambda_1,\ldots,\lambda_s,\lambda_{s+1},\overline{\lambda_{s+1}},\ldots,\lambda_{m},\overline{\lambda_m}$$
+    Here, $\lambda_i\in\RR$ $\forall i=1,\ldots,s$ and $\lambda_{i}=\alpha_i+\ii\beta_i\in\CC$ $\forall i=s+1,\ldots,m$. Assume, each of these roots have multiplicity $k_i\in\NN$. Then, the general solution to \cref{DE_char} is:
+    \begin{multline*}
+      \varphi(t)=\sum_{i=1}^s\left(c_{i,1}+c_{i,2}t+\cdots+c_{i,k_i}t^{k_i-1}\right)\exp{\lambda_i t}+\\
+      +\sum_{i=s+1}^m\sum_{j=1}^{k_i}c_{i,j}t^{j-1}\exp{\alpha_i t}\left(\cos(\beta_i t)+\sin(\beta_i t)\right)
+    \end{multline*}
+    where $c_{i,j}\in\RR$ are constants.
+  \end{method}
+  \begin{corollary}
+    Consider the following ode of order $n$ of constant coefficients:
+    \begin{equation}\label{DE_char2}
+      x'' + px' q = 0
+    \end{equation}
+    Let $\lambda_1,\lambda_2$ be the roots of the polynomial $p(r)=r^2+pr+q$.
+    Then, the general solution to \cref{DE_char2} is:
+    \begin{itemize}
+      \item If $p^2-4q>0$: $$\varphi(t)=c_1\exp{\lambda_1t}+c_2\exp{\lambda_2t}$$
+      \item If $p^2-4q=0$, then $\lambda_1=\lambda_2$ and the solution is: $$\varphi(t)=c_1\exp{\lambda_1t}+c_2t\exp{\lambda_1t}$$
+      \item If $p^2-4q<0$, then $\lambda_1=\alpha+\ii\beta\in\CC$ and the solution is: $$\varphi(t)=\exp{\alpha t}\left[c_1\cos(\beta t)+c_2\sin(\beta t)\right]$$
+    \end{itemize}
+  \end{corollary}
   \begin{method}[Reducible linear ode of second order]
     Let $I\subset \RR$ be an interval, $a,b,c,d\in\mathcal{C}(I,\RR)$. Consider the system of odes:
     \begin{equation}\label{DE_ode-complex}
@@ -821,8 +849,15 @@
   \begin{proposition}
     Let $U,V\subseteq \RR^n$ be open sets and $\vf{f}:U\rightarrow\RR^n$, $\vf{g}:V\rightarrow\RR^n$ be vector fields. Suppose that $\vf{h}$ is a conjugacy between $\vf{x}'=\vf{f}(\vf{x})$ and $\vf{y}'=\vf{g}(\vf{y})$. Then, $\vf{x}'=-\vf{f}(\vf{x})$ and $\vf{y}'=-\vf{g}(\vf{y})$ are conjugate by $\vf{h}$.
   \end{proposition}
+  \begin{definition}
+    Let $U\RR^n$ be an open set and $\vf{f}:U\rightarrow\RR^n$ be a vector field of class $\mathcal{C}^r$, $r\geq 1$, and $A\subseteq \RR^{n-1}$ be an open set. We say that function $\vf{s}:A\rightarrow U$ of class $\mathcal{C}^r$ is a \emph{local transversal section} of $\vf{f}$ of class $\mathcal{C}^r$ if $\forall a\in A$, $\langle\im \vf{Dh}(a),\vf{f}(\vf{s}(\vf{a}))\rangle=\RR^n$\footnote{A plane version would be that $\vf{s}:A\subseteq \RR\rightarrow U\subseteq \RR^2$ is a \emph{local transversal section} of $\vf{f}$ if $\forall a\in A$, $\vf{s}'(a)$ and $\vf{f}(\vf{s}(\vf{a}))$ are linearly independent.}. Take $\Sigma:=\vf{s}(A)$. If $\vf{s}:A\rightarrow\Sigma$ is a homeomorphism, we say that $\Sigma$ is a \emph{transversal section} of $\vf{f}$ of class $\mathcal{C}^r$.
+  \end{definition}
   \begin{theorem}[Flow box theorem]
-    Let $U\subseteq \RR^n$ be an open set, $\vf{f}:U\rightarrow\RR^n$ be a vector field of class $\mathcal{C}^r$ with $r\geq 1$ and $\vf{p}\in U$ be a non-singular point of $\vf{f}$. Let $\vf{g}:\RR^n\rightarrow\RR^n$ be the vector field defined as $\vf{g}(\vf{x})=(1,0\ldots,0)$ $\forall \vf{x}\in\RR^n$. Then, there exist neighbourhoods $V\subseteq U$ of $\vf{p}$ and $W\subseteq \RR^n$ of $\vf{0}$ such that $\vf{f}|_V$ and $\vf{g}|_W$ are conjugates of class $\mathcal{C}^r$.
+    Let $U\subseteq \RR^n$ be an open set, $\vf{f}:U\rightarrow\RR^n$ be a vector field of class $\mathcal{C}^r$, $r\geq 1$, $\vf{p}\in U$ be a non-singular point of $\vf{f}$ and $\vf{s}:A\rightarrow\Sigma$ be a transversal section of $\vf{f}$ of class $\mathcal{C}^r$ with $\vf{s}(\vf{0})=\vf{p}$. Then, there exist a neighbourhood $V\subseteq U$ of $\vf{p}$ and a diffeomorphism $\vf{h}:V\rightarrow(-\varepsilon,\varepsilon)\times B$ of class $\mathcal{C}^r$, where $\varepsilon>0$ and $B\subseteq\RR^{n-1}$ is an open ball centered at $\vf{0}=\vf{s}^{-1}(\vf{p})$, such that:
+    \begin{itemize}
+      \item $\vf{h}(\Sigma\cap V)=\{0\}\times B$.
+      \item $\vf{h}$ is a conjugacy of class $\mathcal{C}^r$ between $\vf{f}|_V$ and $\vf{g}:(-\varepsilon,\varepsilon)\times B\rightarrow\RR^n$ defined as $\vf{g}(\vf{x})=(1,0\ldots,0)$ $\forall \vf{x}\in\domain\vf{g}$.
+    \end{itemize}
   \end{theorem}
   \begin{lemma}
     Let $U,V\subseteq \RR^n$ be open sets and $\vf{f}:U\rightarrow\RR^n$, $\vf{g}:V\rightarrow\RR^n$ be vector fields of class $\mathcal{C}^1$ and $\vf{p}\in\RR^n$ be a critical point of $\vf{f}$. Suppose that $\vf{h}$ is a conjugacy of class $\mathcal{C}^1$ between $\vf{f}$ and $\vf{g}$. Then, the vector fields $\vf{Df}(\vf{p})$ and $\vf{Dg}(\vf{h}(\vf{p}))$ are conjugate by $\vf{Dh}(\vf{p})$. In particular, $\sigma(\vf{Df}(\vf{p}))=\sigma(\vf{Dg}(\vf{h}(\vf{p})))$.
@@ -868,9 +903,6 @@
       \captionof{figure}{Classification of singular points of a linear dynamical system of dimension 2, induced by the equation $\vf{x}'=\vf{A}\vf{x}$, $\vf{A}\in\mathcal{M}_2(\RR)$ in terms of $D=\det\vf{A}$ and $T=\trace\vf{A}$.}
     \end{minipage}
   \end{center}
-  \begin{theorem}
-
-  \end{theorem}
   \subsubsection{Integrable systems}
   \begin{definition}
     Let $U\subseteq \RR^n$ be an open set, $\vf{f}:U\rightarrow\RR^n$ be a vector field and $H:U\rightarrow\RR$ be a non-constant function. We say that $H$ is a \emph{first integral} for the differential system $\vf{x}'=\vf{f}(\vf{x})$ if for each solution $\vf{\varphi}(t)$ of that system, we have $H(\vf{\varphi(t)})=\const$ Thus, the phase trajectory of a solution $\vf{\varphi}(t)$ to $\vf{x}'=\vf{f}(\vf{x})$ lies on a level surface of $H$. In particular, if $n=2$, $\vf{\varphi}(t)$ will be a level curve of $H$.
@@ -908,7 +940,7 @@
   \begin{proposition}
     Let $U\subseteq \RR^{2n}$ be an open set, $H:U\rightarrow\RR$ be the Hamiltonian of its Hamiltonian system. Then, $H$ is a first integral of that differential system.
   \end{proposition}
-  \subsubsection{Local behavoir near a hyperbolic critical point}
+  \subsubsection{Local structure of hyperbolic critical points}
   \begin{definition}
     Let $U\subseteq \RR^n$ be an open set, $\vf{f}:U\rightarrow\RR^n$ be a vector field of class $\mathcal{C}^r$ with $r\geq 1$ and $\vf{p}\in\RR^n$ be a critical point of $\vf{f}$. We say that $\vf{p}$ is \emph{hyperbolic critical point} if $\Re(\lambda)\ne 0$ $\forall \lambda\in\sigma(\vf{Df}(\vf{p}))$.
   \end{definition}
@@ -955,9 +987,43 @@
       \item If $\vf{p}$ is negatively stable, then $\Re(\lambda)\geq 0$ $\forall\lambda\in\sigma(\vf{Df}(\vf{p}))$.
     \end{enumerate}
   \end{theorem}
+  \subsubsection{Local structure of periodic orbits}
+  \begin{definition}[Poincaré map]
+    Let $U\subseteq \RR^n$ be an open set, $\vf{f}:U\rightarrow\RR^n$ be a vector field of class $\mathcal{C}^1$ with flow $\vf{\phi}(t,\vf{x})$, $\vf{p}\in\RR^n$ and $\vf{\gamma}(\vf{p})$ be a periodic orbit of period $T$ that passes through $\vf{p}$. Let $\Sigma$ be a transversal section of $\vf{p}$ at $\vf{p}$. For each $\vf{q}\in\Sigma$ (close enough to $\vf{p}$) such that the trajectory $\vf{\phi}(t,\vf{q})$ intersects $\Sigma$ in a distinct point from $\vf{q}$, we define the \emph{Poincaré map} as the function $\pi:\Sigma_0\subset \Sigma\rightarrow\Sigma$ sending $\vf{q}$ to the first point where $\vf{\phi}(t,\vf{q})$ intersects $\Sigma$.
+  \end{definition}
+  \begin{definition}
+    Let $U\subseteq \RR^2$ be an open set, $\vf{f}:U\rightarrow\RR^2$ be a vector field of class $\mathcal{C}^1$ and $\vf{\gamma}$ be a periodic orbit. We say that $\vf{\gamma}$ is a \emph{limit cycle} if there existence a neighbourhood $V$ of $\vf{\gamma}$ such that $\vf{\gamma}$ is the only periodic orbit in $V$.
+  \end{definition}
+  \begin{definition}
+    Let $U\subseteq \RR^2$ be an open set, $\vf{f}:U\rightarrow\RR^2$ be a vector field of class $\mathcal{C}^1$ and $\vf{\gamma}$ be a periodic orbit. We denote by $\Ext(\vf{\gamma})$ the set of points which belong to the unbounded component of $\RR^2\setminus\vf{\gamma}$, and by $\Int(\vf{\gamma})$ the set of points which belong to the bounded component of $\RR^2\setminus\vf{\gamma}$.
+  \end{definition}
+  \begin{proposition}
+    Let $U\subseteq \RR^2$ be an open set, $\vf{f}:U\rightarrow\RR^2$ be a vector field of class $\mathcal{C}^1$ and $\vf{\gamma}$ be a limit cycle and $V$ be a neighbourhood of $\vf{\gamma}$. Then, $\vf{\gamma}$ is exactly one of the following three types of limit cycles:
+    \begin{itemize}
+      \item $\vf{\gamma}$ is \emph{stable} if $\omega(\vf{q})=\vf{\gamma}$ $\forall \vf{q}\in V$.
+      \item $\vf{\gamma}$ is \emph{stable} if $\omega(\vf{q})=\vf{\gamma}$ $\forall \vf{q}\in V$.
+      \item $\vf{\gamma}$ is \emph{semi-stable} if either $\omega(\vf{q})=\vf{\gamma}$ $\forall \vf{q}\in V\cap\Ext(\vf{\gamma})$ and $\alpha(\vf{q})=\vf{\gamma}$ $\forall \vf{q}\in V\cap\Int(\vf{\gamma})$, or $\omega(\vf{q})=\vf{\gamma}$ $\forall \vf{q}\in V\cap\Int(\vf{\gamma})$ and $\alpha(\vf{q})=\vf{\gamma}$ $\forall \vf{q}\in V\cap\Ext(\vf{\gamma})$.
+    \end{itemize}
+  \end{proposition}
   \subsubsection{Integrability of polynomial vectors fields}
   \begin{definition}
-
+    Let $p,q\in\RR[x,y]$ and consider the system of odes
+    \begin{equation}\label{DE_poly}
+      \left\{
+      \begin{aligned}
+         & x'      =p(x,y) \\
+         & y  =q(x,y)
+      \end{aligned}
+      \right.
+    \end{equation}
+    is called a \emph{polynomial system}. We define the degree of that system as $n:=\max\{\deg p,\deg q\}$.
   \end{definition}
+  \begin{definition}
+    Let $f,p,q\in\RR[x,y]$ and consider the polynomial system of degree $n$ of \cref{DE_poly}. We say that $f(x,y)=0$ is \emph{algebraic invariant curve} under the system of \cref{DE_poly} if $$\pdv{f}{x}(x,y)p(x,y)+\pdv{f}{y}q(x,y)=k(x,y)f(x,y)$$
+    where $k\in\RR[x,y]$ is called \emph{cofactor} of the invariant curve $f(x,y)=0$. Note that $\deg k\leq n-1$.
+  \end{definition}
+  \begin{proposition}
+    Let $f,p,q\in\RR[x,y]$ and consider the polynomial system of degree $n$ of \cref{DE_poly}. Then, the invariant curve $f(x,y)=0$ is an orbit of the differential system of \cref{DE_poly}.
+  \end{proposition}
 \end{multicols}
 \end{document}
