@@ -29,11 +29,11 @@
     Let $X_1,\ldots,X_n$ be random variables. Then: $${s_n}^2=\frac{1}{n}\sum_{i=1}^n{X_i}^2-{\overline{X}_n}^2$$
   \end{proposition}
   \begin{definition}
-    Let $(\mathcal{X},\mathcal{F},\{\Prob_{\vf\theta}^{\vf{X}_n}:\vf{\theta}\in\Theta\subseteq \RR^d\})$ be a parametric statistical model and $\vf{\theta} \in\Theta$. An \emph{estimator} of $\vf{\theta}$ is a statistic $\vf{T_\theta}$ whose outcomes are in $\Theta$ and does not depend on any unknown parameter. It is used to give an estimation of the (supposedly unknown) parameter $\vf{\theta}$.
+    Let $(\mathcal{X},\mathcal{F},\{\Prob_{\vf\theta}^{\vf{X}_n}:\vf{\theta}\in\Theta\subseteq \RR^d\})$ be a parametric statistical model and $\vf{\theta} \in\Theta$. An \emph{estimator} of $\vf{\theta}$ is a statistic $\vf{\hat\theta}$ whose outcomes are in $\Theta$ and does not depend on any unknown parameter. It is used to give an estimation of the (supposedly unknown) parameter $\vf{\theta}$.
   \end{definition}
   \subsubsection{Properties of estimators}
   \begin{definition}[Bias]
-    Let $(\mathcal{X},\mathcal{F},\{\Prob_{\vf\theta}^{\vf{X}_n}:\vf{\theta}\in\Theta\subseteq \RR^d\})$ be a parametric statistical model and $\vf{T_\theta}$ be an integrable estimator of $\vf{\theta}\in\Theta$. We define the \emph{bias} of $\vf{T_\theta}$ with respect to $\vf{\theta}$ as: $$\bias(\vf{T_\theta}):=\Exp(\vf{T_\theta})-\vf{\theta}$$ We say that $\vf{T_\theta}$ is an \emph{unbiased estimator} of $\vf{\theta}$ if $\bias(\vf{T_\theta})=0$. Otherwise, we say that it is a \emph{biased estimator} of $\vf{\theta}$.
+    Let $(\mathcal{X},\mathcal{F},\{\Prob_{\vf\theta}^{\vf{X}_n}:\vf{\theta}\in\Theta\subseteq \RR^d\})$ be a parametric statistical model and $\vf{\hat\theta}$ be an integrable estimator of $\vf{\theta}\in\Theta$. We define the \emph{bias} of $\vf{\hat\theta}$ with respect to $\vf{\theta}$ as: $$\bias(\vf{\hat\theta}):=\Exp(\vf{\hat\theta})-\vf{\theta}$$ We say that $\vf{\hat\theta}$ is an \emph{unbiased estimator} of $\vf{\theta}$ if $\bias(\vf{\hat\theta})=0$. Otherwise, we say that it is a \emph{biased estimator} of $\vf{\theta}$.
   \end{definition}
   \begin{proposition}
     Let $(\mathcal{X},\mathcal{F},\{\Prob_{\vf\theta}^{\vf{X}_n}:\vf{\theta}\in\Theta\subseteq \RR^d\})$ be a parametric statistical model such that $X_1,\ldots,X_n$ are square-integrable\footnote{That is, with finite 2nd moments.} i.i.d. random variables with mean $\mu$ and variance $\sigma^2$. Then: $$\Exp(\overline{X}_n)=\mu\quad\text{and}\quad\Var{(\overline{X}_n)}=\frac{\sigma^2}{n}$$
@@ -44,19 +44,16 @@
     Hence, the estimator $\tilde{s}_n{}^2$ of $\sigma^2$ is unbiased whereas the estimator ${s_n}^2$ of $\sigma^2$ is biased.
   \end{proposition}
   \begin{definition}
-    Let $(\mathcal{X},\mathcal{F},\{\Prob_{\vf\theta}^{\vf{X}_n}:\vf{\theta}\in\Theta\subseteq \RR^d\})$ be a parametric statistical model and $\vf{T_\theta}$ be an square integrable estimator of $\vf{\theta}\in\Theta$. The \emph{mean squared error} (\emph{m.s.e.}) of $\vf{T_\theta}$ is the function: $$\MSE(\vf{T_\theta}):=\Exp\left({(\vf{T_\theta}-\vf{\theta})}^2\right)$$
+    Let $(\mathcal{X},\mathcal{F},\{\Prob_{\vf\theta}^{\vf{X}_n}:\vf{\theta}\in\Theta\subseteq \RR^d\})$ be a parametric statistical model and $\vf{\hat\theta}$ be an square integrable estimator of $\vf{\theta}\in\Theta$. The \emph{mean squared error} (\emph{m.s.e.}) of $\vf{\hat\theta}$ is the function: $$\MSE(\vf{\hat\theta}):=\Exp\left({(\vf{\hat\theta}-\vf{\theta})}^2\right)$$
   \end{definition}
   \begin{proposition}
-    Let $(\mathcal{X},\mathcal{F},\{\Prob_{\vf\theta}^{\vf{X}_n}:\vf{\theta}\in\Theta\subseteq \RR^d\})$ be a parametric statistical model and $\vf{T_\theta}$ be an square integrable estimator of $\vf{\theta}\in\Theta$. Then: $$\MSE(\vf{T_\theta})=\Var(\vf{T_\theta})+{(\bias(\vf{T_\theta}))}^2$$
+    Let $(\mathcal{X},\mathcal{F},\{\Prob_{\vf\theta}^{\vf{X}_n}:\vf{\theta}\in\Theta\subseteq \RR^d\})$ be a parametric statistical model and $\vf{\hat\theta}$ be an square integrable estimator of $\vf{\theta}\in\Theta$. Then: $$\MSE(\vf{\hat\theta})=\Var(\vf{\hat\theta})+{(\bias(\vf{\hat\theta}))}^2$$
   \end{proposition}
   \begin{definition}
-    Let $(\mathcal{X},\mathcal{F},\{\Prob_{\vf\theta}^{\vf{X}_n}:\vf{\theta}\in\Theta\subseteq \RR^d\})$ be a parametric statistical model and $\vf{T_\theta}$ be an estimator of $\vf{\theta}\in\Theta$. We say that $\vf{T_\theta}$ is \emph{consistent} if $$\vf{T_\theta}\overset{\Prob}{\longrightarrow}\vf{\theta}$$
+    Let $(\mathcal{X},\mathcal{F},\{\Prob_{\vf\theta}^{\vf{X}_n}:\vf{\theta}\in\Theta\subseteq \RR^d\})$ be a parametric statistical model and $\vf{\hat\theta}$, $\vf{\tilde\theta}$ be estimators of $\vf{\theta}\in\Theta$. We say that $\vf{\hat\theta}$ is \emph{more efficient than} $\vf{\tilde\theta}$ if $$\Var{(\vf{\hat\theta})}<\Var{(\vf{\tilde\theta})}\quad\forall\vf{\theta}\in\Theta$$
   \end{definition}
   \begin{definition}
-    Let $(\mathcal{X},\mathcal{F},\{\Prob_{\vf\theta}^{\vf{X}_n}:\vf{\theta}\in\Theta\subseteq \RR^d\})$ be a parametric statistical model and $\vf{T_\theta}$, $\vf{U_\theta}$ be estimators of $\vf{\theta}\in\Theta$. We say that $\vf{T_\theta}$ is \emph{more efficient than} $\vf{U_\theta}$ if $$\Var{(\vf{T_\theta})}<\Var{(\vf{U_\theta})}\quad\forall\vf{\theta}\in\Theta$$
-  \end{definition}
-  \begin{definition}
-    Let $(\mathcal{X},\mathcal{F},\{\Prob_{\vf\theta}^{\vf{X}_n}:\vf{\theta}\in\Theta\subseteq \RR^d\})$ be a parametric statistical model and $\vf{T_\theta}$ be an square integrable estimator of $\vf{\theta}\in\Theta$. We say that $\vf{T_\theta}$ is a \emph{minimum-variance unbiased estimator} (\emph{mvue}) if an unbiased estimator that has lower variance than any other unbiased estimator $\forall \vf{\theta}\in\Theta$.
+    Let $(\mathcal{X},\mathcal{F},\{\Prob_{\vf\theta}^{\vf{X}_n}:\vf{\theta}\in\Theta\subseteq \RR^d\})$ be a parametric statistical model and $\vf{\hat\theta}$ be an square integrable estimator of $\vf{\theta}\in\Theta$. We say that $\vf{\hat\theta}$ is a \emph{minimum-variance unbiased estimator} (\emph{MVUE}) if it is an unbiased estimator that has lower variance than any other unbiased estimator $\forall \vf{\theta}\in\Theta$.
   \end{definition}
   \begin{proposition}
     Let $(\mathcal{X},\mathcal{F},\{\Prob_{\vf\theta}^{\vf{X}_n}:\vf{\theta}\in\Theta\subseteq \RR^d\})$ be a parametric statistical model. Then, the mvue is unique almost surely.
@@ -67,7 +64,7 @@
   \end{definition}
   \subsubsection{Methods of estimation}
   \begin{definition}[Method of moments]
-    Let $(\mathcal{X},\mathcal{F},\{\Prob_{\vf\theta}^{\vf{X}_n}:\vf{\theta}\in\Theta\subseteq \RR^d\})$ be a parametric statistical model such that $X_1,\ldots,X_n$ are i.i.d. random variables, and $\mu_k$ be $k$-th moment of each of them. Suppose $\vf{\theta}=(\theta_1,\ldots,\theta_d)$. Then, given a realization $\vf{x}=(x_1,\ldots,x_n)\in\mathcal{X}$ of $\vf{X}_n$, a estimator $\tilde{\vf{\theta}}(\vf{x})=(\tilde{\theta}_1(\vf{x}),\ldots,\tilde{\theta}_d(\vf{x}))$ is given by the solution of the following system:
+    Let $(\mathcal{X},\mathcal{F},\{\Prob_{\vf\theta}^{\vf{X}_n}:\vf{\theta}\in\Theta\subseteq \RR^d\})$ be a parametric statistical model such that $X_1,\ldots,X_n$ are i.i.d. random variables, and $\mu_k$ be $k$-th moment of each of them. Suppose $\vf{\theta}=(\theta_1,\ldots,\theta_d)$. Then, given a realization $\vf{x}_n=(x_1,\ldots,x_n)\in\mathcal{X}$ of $\vf{X}_n$, a estimator $\vf{\tilde{\theta}}(\vf{x}_n)=(\tilde{\theta}_1(\vf{x}_n),\ldots,\tilde{\theta}_d(\vf{x}_n))$ of $\vf{\theta}$ is given by the solution of the following system:
     $$
       \left\{
       \begin{aligned}
@@ -80,11 +77,86 @@
     $$
   \end{definition}
   \begin{definition}[Likelihood]
-    Let $(\mathcal{X},\mathcal{F},\{\Prob_{\vf\theta}^{\vf{X}_n}:\vf{\theta}\in\Theta\subseteq \RR^d\})$ be a parametric statistical model, $\vf{x}\in\mathcal{X}$ be a realization of $\vf{X}_n$ and assume that $f_{\vf{X}_n,\vf{\theta}}$ is the pdf\footnote{We will do the study in the continuous case. For the discrete case, we shall replace the pdf of $\vf{X}_n$ by the pmf of $\vf{X}_n$.} of $\Prob_{\vf\theta}^{\vf{X}_n}$. We define the \emph{likelihood function} as the function:
-    $$\function{L(\cdot;\vf{x})}{\Theta}{\RR}{\vf\theta}{f_{\vf{X}_n,\vf{\theta}}(\vf{x})}$$
+    Let $(\mathcal{X},\mathcal{F},\{\Prob_{\vf\theta}^{\vf{X}_n}:\vf{\theta}\in\Theta\subseteq \RR^d\})$ be a parametric statistical model, $\vf{x}_n\in\mathcal{X}$ be a realization of $\vf{X}_n$ and assume that $f_{\vf{X}_n,\vf{\theta}}$ is the pdf\footnote{We will do the study in the continuous case. For the discrete case, we shall replace the pdf of $\vf{X}_n$ by the pmf of $\vf{X}_n$.} of $\Prob_{\vf\theta}^{\vf{X}_n}$. We define the \emph{likelihood function} as the function:
+    $$\function{L(\cdot;\vf{x}_n)}{\Theta}{\RR}{\vf\theta}{f_{\vf{X}_n,\vf{\theta}}(\vf{x}_n)}$$
   \end{definition}
   \begin{definition}[Maximum likelihood method]
-    Let $(\mathcal{X},\mathcal{F},\{\Prob_{\vf\theta}^{\vf{X}_n}:\vf{\theta}\in\Theta\subseteq \RR^d\})$ be a parametric statistical model and $\vf{x}\in\mathcal{X}$ be a realization of $\vf{X}_n$. A \emph{maximum likelihood estimator} (\emph{MLE}) of $\vf{\theta}\in\Theta$ is the estimator $\hat{\vf{\theta}}$ such that: $$L(\hat{\vf{\theta}}(\vf{x});\vf{x})=\sup\{L(\vf\theta;\vf{x}):\vf\theta\in\Theta\}$$
+    Let $(\mathcal{X},\mathcal{F},\{\Prob_{\vf\theta}^{\vf{X}_n}:\theta\in\Theta\})$ be a statistical model and $\vf{x}_n\in\mathcal{X}$ be a realization of $\vf{X}_n$. A \emph{maximum likelihood estimator} (\emph{MLE}) of $\theta\in\Theta$ is the estimator $\hat{\theta}$ such that: $$L(\hat{\theta}(\vf{x}_n);\vf{x}_n)=\sup\{L(\theta;\vf{x}_n):\theta\in\Theta\}$$
+  \end{definition}
+  \begin{definition}
+    Let $(\mathcal{X},\mathcal{F},\{\Prob_{\vf\theta}^{\vf{X}_n}:\theta\in\Theta\})$ be a statistical model, $\vf{x}_n\in\mathcal{X}$ be a realization of $\vf{X}_n$. We define the \emph{log-likelihood function} as: $$\ell(\theta;\vf{x}_n):=\ln L(\theta;\vf{x}_n)$$
+    We define the \emph{score} as: $$U(\theta;\vf{x}_n):=\pdv{\ell}{\theta}(\theta,\vf{x}_n)$$
+  \end{definition}
+  \begin{proposition}
+    Let $(\mathcal{X},\mathcal{F},\{\Prob_{\vf\theta}^{\vf{X}_n}:\vf{\theta}\in\Theta\subseteq \RR^d\})$ be a parametric statistical model, $\vf{x}_n\in\mathcal{X}$ be a realization of $\vf{X}_n$ Then, a MLE $\vf{\hat\theta}$ of $\vf\theta$ is the one that satisfies:
+    $$\pdv{L}{\vf\theta}(\vf{\hat\theta};\vf{x}_n)=0$$
+    Or equivalently $\pdv{\ell}{\vf\theta}(\vf{\hat\theta};\vf{x}_n)=0$.
+  \end{proposition}
+  \begin{proposition}[Invariance of the MLE]
+    Let $(\mathcal{X},\mathcal{F},\{\Prob_{\vf\theta}^{\vf{X}_n}:\theta\in\Theta\})$ be a statistical model, $\Lambda$ be a parameter space and $g:\Theta\rightarrow\Lambda$ be a measurable function. Suppose $\hat\theta$ is a MLE of $\theta$. Then, $g(\hat\theta)$ is a MLE of $g(\theta)$.
+  \end{proposition}
+  \subsubsection{Regular statistical models}
+  \begin{definition}
+    Let $(\mathcal{X},\mathcal{F},\{\Prob_{\vf\theta}^{\vf{X}_n}:\theta\in\Theta\})$ be a statistical model, $\vf{x}_n\in\mathcal{X}$ be a realization of $\vf{X}_n$. We define the \emph{Fisher information} of the model as: $$I(\theta;\vf{x}_n)=\Exp\left[{\left(\pdv{\ell}{\theta}(\theta;\vf{x}_n)\right)}^2\right]$$
+  \end{definition}
+  \begin{definition}
+    A statistical model $(\mathcal{X},\mathcal{F},\{\Prob_{\vf\theta}^{\vf{X}_n}:\theta\in\Theta\})$ is said to be \emph{regular} if it satisfies the following conditions:
+    \begin{enumerate}
+      \item $\Theta$ is open.
+      \item The support of $\Prob_{\vf\theta}^{\vf{X}_n}$ does not depend on $\theta$.
+      \item The function $L(\theta;\vf{x}_n)$ is derivable with respect to $\theta$ $\forall \vf{x}_n\in\mathcal{X}$ (except in a set of probability zero) and moreover:
+            \begin{enumerate}
+              \item For the discrete case: $$\pdv{}{\theta}\sum_{\vf{x}_n\in\mathcal{X}}L(\theta;\vf{x}_n)=\sum_{\vf{x}_n\in\mathcal{X}}\pdv{L}{\theta}(\theta;\vf{x}_n)$$
+              \item\label{EST_regular} For the continuous case: $$\pdv{}{\theta}\int_{\mathcal{X}}L(\theta;\vf{x}_n)\dd{\vf{x}_n}=\int_{\mathcal{X}}\pdv{L}{\theta}(\theta;\vf{x}_n)\dd{\vf{x}_n}$$
+            \end{enumerate}
+      \item For all $\theta\in\Theta$, we have: $$0<I(\theta;\vf{x}_n)<\infty$$
+    \end{enumerate}
+  \end{definition}
+  \begin{proposition}
+    Let $(\mathcal{X},\mathcal{F},\{\Prob_{\vf\theta}^{\vf{X}_n}:\theta\in\Theta\})$ be a regular statistical model and $\vf{x}_n\in\mathcal{X}$ be a realization of $\vf{X}_n$. Then, condition \cref{EST_regular} is equivalent to $$\Exp\left(\pdv{\ell}{\theta}(\theta;\vf{x}_n)\right)\qquad\forall \theta\in\Theta$$
+  \end{proposition}
+  \begin{corollary}
+    Let $(\mathcal{X},\mathcal{F},\{\Prob_{\vf\theta}^{\vf{X}_n}:\theta\in\Theta\})$ be a regular statistical model and $\vf{x}_n\in\mathcal{X}$ be a realization of $\vf{X}_n$. Then: $$I(\theta;\vf{x}_n)=\Var\left(\pdv{\ell}{\theta}(\theta;\vf{x}_n)\right)\qquad\forall\theta\in\Theta$$
+  \end{corollary}
+  \begin{proposition}
+    Let $(\mathcal{X},\mathcal{F},\{\Prob_{\vf\theta}^{\vf{X}_n}:\theta\in\Theta\})$ be a regular statistical model and $\vf{x}_n\in\mathcal{X}$ be a realization of $\vf{X}_n$. If the function $L(\theta;\vf{x}_n)$ is two times derivable with respect to $\theta$ $\forall \vf{x}_n\in\mathcal{X}$ (except in a set of probability zero) and moreover $$\pdv[2]{}{\theta}\int_{\mathcal{X}}L(\theta;\vf{x}_n)\dd{\vf{x}_n}=\int_{\mathcal{X}}\pdv[2]{L}{\theta}(\theta;\vf{x}_n)\dd{\vf{x}_n}$$ then we have: $$I(\theta;\vf{x}_n)=-\Exp\left(\pdv[2]{\ell}{\theta}(\theta;\vf{x}_n)\right)$$
+  \end{proposition}
+  \begin{proposition}
+    Let $(\mathcal{X},\mathcal{F},\{\Prob_{\vf\theta}^{X_1}:\theta\in\Theta\})$ be a regular statistical model of one observation $x_1\in \mathcal{X}$. Then, the model corresponding to $n$ i.i.d. observations $x_1,\ldots,x_n$ is regular and $$I(\theta;(x_1,\ldots,x_n))=n I(\theta;x_1)$$
+  \end{proposition}
+  \begin{definition}
+    Let $(\mathcal{X},\mathcal{F},\{\Prob_{\vf\theta}^{\vf{X}_n}:\theta\in\Theta\})$ be a statistical model and $T$ be a statistic. We say that $T$ is \emph{regular} if
+    \begin{enumerate}
+      \item for the discrete case: $$\pdv{}{\theta}\sum_{\vf{x}_n\in\mathcal{X}}T(\vf{x}_n)L(\theta;\vf{x}_n)=\sum_{\vf{x}_n\in\mathcal{X}}T(\vf{x}_n)\pdv{L}{\theta}(\theta;\vf{x}_n)$$
+      \item for the continuous case: $$\pdv{}{\theta}\int_{\mathcal{X}}T(\vf{x}_n)L(\theta;\vf{x}_n)\dd{\vf{x}_n}=\int_{\mathcal{X}}T(\vf{x}_n)\pdv{L}{\theta}(\theta;\vf{x}_n)\dd{\vf{x}_n}$$
+    \end{enumerate}
+    for all $\theta\in\Theta$.
+  \end{definition}
+  \begin{theorem}[Cramér-Rao bound]
+    Let $(\mathcal{X},\mathcal{F},\{\Prob_{\vf\theta}^{\vf{X}_n}:\theta\in\Theta\})$ be a regular statistical model, $\vf{x}_n\in\mathcal{X}$ be a realization of $\vf{X}_n$ and $\hat\theta$ be a regular statistic and an unbiased estimator of $\theta\in \Theta$. Then: $$\Var(\hat\theta)\geq \frac{1}{I(\theta;\vf{x}_n)}$$
+  \end{theorem}
+  \begin{definition}
+    Let $(\mathcal{X},\mathcal{F},\{\Prob_{\vf\theta}^{\vf{X}_n}:\theta\in\Theta\})$ be a regular statistical model, $\vf{x}_n\in\mathcal{X}$ be a realization of $\vf{X}_n$ and $\hat\theta$ be a regular statistic and an unbiased estimator of $\theta\in \Theta$. We say that $\hat\theta$ is an \emph{efficient estimator} of $\theta$ if $$\Var(\hat\theta)=\frac{1}{I(\theta;\vf{x}_n)}$$
+  \end{definition}
+  \begin{proposition}
+    Let $(\mathcal{X},\mathcal{F},\{\Prob_{\vf\theta}^{\vf{X}_n}:\theta\in\Theta\})$ be a regular statistical model an $\hat\theta$ be an efficient estimator of $\theta\in\Theta$. Then, $\hat\theta$ is MVUE.
+  \end{proposition}
+  \subsubsection{Asymptotic properties}
+  \begin{definition}
+    For each $n\in\NN$, let $(\mathcal{X},\mathcal{F},\{\Prob_{\vf\theta}^{\vf{X}_n}:\vf\theta\in\Theta\subseteq \RR^d\})$ be a parametric statistical model with $X_1,\ldots,X_n$ being i.i.d., and ${\vf{\hat\theta}}_n$ be an estimator of $\vf\theta\in\Theta$. We say that the sequence $({\vf{\hat\theta}}_n)$ is a \emph{weakly consistent estimator} of $\vf\theta$ if $${\vf{\hat\theta}}_n\overset{\Prob}{\longrightarrow}\vf\theta$$
+  \end{definition}
+  \begin{definition}
+    For each $n\in\NN$, let $(\mathcal{X},\mathcal{F},\{\Prob_{\vf\theta}^{\vf{X}_n}:\vf\theta\in\Theta\subseteq \RR^d\})$ be a parametric statistical model with $X_1,\ldots,X_n$ being i.i.d., and ${\vf{\hat\theta}}_n$ be an estimator of $\vf\theta\in\Theta$. We say that the sequence $({\vf{\hat\theta}}_n)$ is a \emph{consistent estimator in $L^2$} of $\vf\theta$ if $$\lim_{n\to\infty}\Exp\left({(\vf{\hat\theta}_n-\vf{\theta})}^2\right)=\lim_{n\to\infty}\MSE(\vf{\hat\theta}_n)=0$$
+  \end{definition}
+  \begin{proposition}
+    For each $n\in\NN$, let $(\mathcal{X},\mathcal{F},\{\Prob_{\vf\theta}^{\vf{X}_n}:\vf\theta\in\Theta\subseteq \RR^d\})$ be a parametric statistical model with $X_1,\ldots,X_n$ being i.i.d., and ${\vf{\hat\theta}}_n$ be a consistent estimator in $L^2$ of $\vf\theta\in\Theta$. Then, ${\vf{\hat\theta}}_n$ is a weakly consistent estimator of $\vf\theta\in\Theta$.
+  \end{proposition}
+  \begin{definition}
+    For each $n\in\NN$, let $(\mathcal{X},\mathcal{F},\{\Prob_{\vf\theta}^{\vf{X}_n}:\vf\theta\in\Theta\subseteq \RR^d\})$ be a parametric statistical model with $X_1,\ldots,X_n$ being i.i.d. and ${\vf{\hat\theta}}_n$ be an estimator of $\vf\theta\in\Theta$. We say that the sequence $({\vf{\hat\theta}}_n)$ is an \emph{asymptotically unbiased estimator} of $\vf\theta$ if $$\Exp({\vf{\hat\theta}}_n)\longrightarrow\vf\theta$$
+  \end{definition}
+  \begin{definition}
+    For each $n\in\NN$, let $(\mathcal{X},\mathcal{F},\{\Prob_{\vf\theta}^{\vf{X}_n}:\theta\in\Theta\subseteq \RR\})$ be a parametric statistical model with $X_1,\ldots,X_n$ being i.i.d. and ${\hat\theta}_n$ be an estimator of $\theta\in\Theta$. We say that the sequence $({\hat\theta}_n)$ is \emph{an asymptotically normal estimator} of $\theta$ with asymptotically variance $\frac{\sigma^2}{n}$ if $$\sqrt{n}({\hat\theta}_n-\theta)\overset{\text{d}}{\longrightarrow}N(0,\sigma^2)$$
+    for all $\theta\in\Theta$. In that case, we denote it by $T_n\sim AN\left(\theta,\frac{\sigma^2}{n}\right)$.
   \end{definition}
   \subsection{Distributions relating \texorpdfstring{$N(\mu,\sigma^2)$}{N(mu,sigma2)}}
   \subsubsection{Standard normal distribution}

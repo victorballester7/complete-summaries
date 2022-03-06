@@ -390,5 +390,68 @@
     Let $U\subseteq\RR^n$ be an open set and $f:U\rightarrow\RR$ be a function. We define the \emph{support} of $f$ as:
     $$\supp(f):=\Cl\left(\{x\in U:f(x)\ne 0\}\right)$$
   \end{definition}
+  \begin{lemma}
+    Let $x_0\in\RR^n$ and $a,b\in \RR_{>0}$ with $a<b$. Then, there exists a function $\rho:\RR^n\rightarrow[0,1]$ of class $\mathcal{C}^\infty$ such that $\supp(\rho)\subseteq\overline{B(x_0,b)}$ and $\rho|_{B(x_0,a)}=1$.
+  \end{lemma}
+  \begin{proposition}
+    Let $U\subseteq\RR^n$ be an open set and $K\subset U$ be a compact set. Then, there exists a function $\rho:\RR^n\rightarrow[0,1]$ of class $\mathcal{C}^\infty$ such that $\supp(\rho)\subseteq U$ such that $\rho|_K=1$.
+  \end{proposition}
+  \begin{corollary}
+    Let $U\subseteq\RR^n$ be an open set, $K\subset U$ be a compact set and $f:U\rightarrow \RR$ be a function of class $\mathcal{C}^\infty$. Then, there exists a function $\tilde{f}:U\rightarrow \RR$ such that $\tilde{f}|_K=f|_K$ and $\tilde{f}|_{\RR^n\setminus U}=0$.
+  \end{corollary}
+  \subsubsection{Immersions and submersion}
+  \begin{definition}[Immersion]
+    Let $U\subseteq\RR^n$ be an open set and $\vf{f}:U\rightarrow \RR^m$ be a function of class $\mathcal{C}^\infty$. We say that $\vf{f}$ is an \emph{immersion} at $x_0\in U$ if $\vf{Df}(x_0)$ is injective. We say that $\vf{f}$ is an \emph{immersion} (on $U$) if it is an immersion at each point $x\in U$.
+  \end{definition}
+  \begin{definition}[Submersion]
+    Let $U\subseteq\RR^n$ be an open set and $\vf{f}:U\rightarrow \RR^m$ be a function of class $\mathcal{C}^\infty$. We say that $\vf{f}$ is an \emph{submersion} at $x_0\in U$ if $\vf{Df}(x_0)$ is surjective. We say that $\vf{f}$ is an \emph{submersion} (on $U$) if it is an submersion at each point $x\in U$.
+  \end{definition}
+  \begin{theorem}[Local structure of immersions]
+    Let $U\subseteq\RR^n$ be an open set, $\vf{f}:U\rightarrow \RR^m$ be an immersion at $x_0\in U$ and $\vf{\iota}:\RR^n\rightarrow\RR^m$ be the inclusion map. Then, there exist neighbourhoods $V\subseteq U$ of $x_0$ and $W\subseteq\RR^m$ of $\vf\iota(x_0)$ and a diffeomorphism $\vf{g}:V\rightarrow g(V)$ such that the following diagram is commutative, that is, $\vf{f}=\vf{g}\circ\vf\iota$.
+    \begin{center}
+      \begin{minipage}{\linewidth}
+        \centering
+        \includestandalone[mode=image|tex,width=0.45\linewidth]{Images/theorem_immersions}
+        \captionof{figure}{}
+      \end{minipage}
+    \end{center}
+  \end{theorem}
+  \begin{theorem}[Local structure of submersions]
+    Let $U\subseteq\RR^n$ be an open set, $\vf{f}:U\rightarrow \RR^m$ be a submersion at $x_0\in U$ and $\vf\pi_1:\RR^m\times\RR^{n-m}\rightarrow\RR^m$ be the projection map into the first coordinate. Then, there exists a neighbourhood $V\subseteq U$ of $x_0$ and a diffeomorphism $\vf{g}:V\rightarrow g(V)$ such that the following diagram is commutative, that is, $\vf{f}=\vf\pi_1\circ\vf{g}$.
+    \begin{center}
+      \begin{minipage}{\linewidth}
+        \centering
+        \includestandalone[mode=image|tex,width=0.45\linewidth]{Images/theorem_submersions}
+        \captionof{figure}{}
+      \end{minipage}
+    \end{center}
+  \end{theorem}
+  \subsubsection{Submanifolds of \texorpdfstring{$\RR^n$}{Rn}}
+  \begin{definition}
+    Let $M\subseteq\RR^n$ be a set. We say that $M$ is a \emph{submanifold} of $\RR^n$ of dimension $p$ (and codimension $q:=n-p$) if $\forall z\in M$ there exists a neighborhood $U\subseteq \RR^n$ of $z$ and a diffeomorphism $\vf{g}:U\rightarrow\vf{g}(U)$ such that: $$\vf{g}(U\cap S)=g(U)\cap\left(\RR^p\times\{0\}\right)$$
+  \end{definition}
+  \begin{theorem}
+    Let $M\subseteq\RR^n$ be a set. The following statements are equivalent:
+    \begin{enumerate}
+      \item $M$ is a submanifold of $\RR^n$ of dimension $p$ and codimension $q$.
+      \item $\forall z\in M$ there exists a neighborhood $U\subseteq \RR^n$ of $z$ and a submersion $\vf\phi:U\rightarrow\RR^q$ such that $S\cap U={\vf\phi}^{-1}(0)$.
+      \item $\forall z\in M$ there exists a neighborhood $V\subseteq \RR^p$ and an immersion $\vf\varphi:V\rightarrow\RR^q$ such that $z\in\vf\varphi(U)\subseteq S$ and such that $\vf\varphi:V\rightarrow\vf\varphi$ is a homeomorphism.
+    \end{enumerate}
+    In the notation of the third condition, we say that the pair $(V,\vf\varphi)$ is a \emph{parametrization} of $S$ and the pair $(\vf\varphi(\Omega),{\vf\varphi}^{-1})$ a \emph{coordinate chart}.
+  \end{theorem}
+  \begin{proposition}
+    Let $(V_1,\vf\varphi_1)$, $(V_2,\vf\varphi_2)$ be two parametrizations of a submanifold $M\subseteq\RR^n$. Then, the composition ${\vf\varphi_2}^{-1}\circ\vf\varphi_1$ is differentiable on its domain.
+  \end{proposition}
+  \begin{proposition}
+    Let $M\subseteq\RR^n$ be a submanifold of $\RR^n$ of dimension $p$, $V\subseteq\RR^p$ be an open set and $\vf\varphi:V\rightarrow M$ be an injective immersion. Then, $\vf\varphi(\Omega)\subseteq M$ is an open set and $\vf\varphi:V\rightarrow \vf\varphi(V)$ is a homeomorphism. Hence, $(V,\vf\varphi)$ is a parametrization of $S$.
+  \end{proposition}
+  \subsubsection{Surfaces of \texorpdfstring{$\RR^3$}{R3}}
+  \begin{definition}
+    A submanifold of $\RR^3$ of dimension 2 is called a \emph{regular surface} (or simply \emph{surface}) of $\RR^3$.
+  \end{definition}
+  \begin{proposition}
+    Let $S\subseteq\RR^3$ be a set. Then, $S$ is a surface if and only if $\forall z\in S$ there exists an open neighborhood $U\subseteq \RR^3$ of $z$, a change of variables $\sigma$ a neighbourhood $V\subseteq \RR^2$ of $\vf\pi_1(\sigma(z))$ (where $\vf\pi_1:\RR^2\times \RR\rightarrow\RR^2$) is the projection map) and a differentiable function $h:V\rightarrow \RR$ such that: $$\vf\sigma(S\cap U)=\graph(h)$$
+  \end{proposition}
+  \subsubsection{Differentiable functions}
 \end{multicols}
 \end{document}

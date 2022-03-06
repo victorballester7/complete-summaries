@@ -252,7 +252,7 @@
       \item $(F_N)$ is uniformly bounded on $X$.
       \item $(g_n(z))$ is a monotone sequence of real numbers and converges uniformly to 0 on $Y$.
     \end{enumerate}
-    Then, $\sum f_n(z)g_n(z)$ converges uniformly on $X\cap Y$.
+    Then, $\sum f_n(z)g_n(z)$ converges uniformly on $X\times Y$.
   \end{theorem}
   \begin{theorem}[Abel's test]
     Let $(f_n)\in X\subseteq \CC$ and $(g_n)\in Y\subseteq \CC$ be two sequences of functions. Suppose:
@@ -260,7 +260,7 @@
       \item $\sum f_n(z)$ is uniformly convergent on $X$.
       \item $(g_n)$ is a monotone and bounded sequence of real numbers.
     \end{enumerate}
-    Then, $\sum f_n(z)g_n(z)$ converges uniformly on $X\cap Y$.
+    Then, $\sum f_n(z)g_n(z)$ converges uniformly on $X\times Y$.
   \end{theorem}
   \begin{theorem}[Dedekind's test]
     Let $(f_n)\in X\subseteq \CC$ and $(g_n)\in Y\subseteq \CC$ be two sequences of functions and $F_N:=\sum_{n=1}^Nf_n(z)$. Suppose:
@@ -269,7 +269,7 @@
       \item $(g_n)$ converges uniformly to 0 on $Y$.
       \item $\sum\abs{g_n(z)-g_{n+1}(z)}$ converges uniformly on $Y$.
     \end{enumerate}
-    Then, $\sum f_n(z)g_n(z)$ converges uniformly on $X\cap Y$.
+    Then, $\sum f_n(z)g_n(z)$ converges uniformly on $X\times Y$.
   \end{theorem}
   \begin{theorem}[Du Bois-Reymond's test]
     Let $(f_n)\in X\subseteq \CC$ and $(g_n)\in Y\subseteq \CC$ be two sequences of functions. Suppose:
@@ -277,7 +277,7 @@
       \item $\sum f_n(z)$ is uniformly convergent on $X$.
       \item $\sum\abs{g_n(z)-g_{n+1}(z)}<\infty$ $\forall z\in Y$.
     \end{enumerate}
-    Then, $\sum f_n(z)g_n(z)$ converges uniformly on $X\cap Y$.
+    Then, $\sum f_n(z)g_n(z)$ converges uniformly on $X\times Y$.
   \end{theorem}
   \subsubsection{Power series}
   \begin{definition}
@@ -347,9 +347,6 @@
     Let $z\in \CC$. We define a \emph{complex natural logarithm} of $z$ as a solution to the equation $\exp{w}=z$. That is: $$\ln z:=\ln \abs{z}+\ii\arg z$$
     We define the \emph{principal value} of $\ln z$ as: $$\Ln z:=\ln \abs{z}+\ii\Arg z$$
   \end{definition}
-  \begin{proposition}
-    Let $z\in \CC$. Then, $\exp{\Ln z}=\Ln{\exp{z}}=z$.
-  \end{proposition}
   \subsubsection{Trigonometric functions}
   \begin{definition}
     Let $z\in \CC$. We define the \emph{complex sine} and \emph{complex cosine} respectively as:
@@ -418,12 +415,16 @@
       \coth z & = \frac{1}{\tanh z}=\frac{\exp{z}+\exp{-z}}{\exp{z}-\exp{-z}}\quad\forall z\in\CC\setminus\bigcup_{k\in\ZZ}\{\pi k\ii\}
     \end{align*}
   \end{definition}
-  \subsection{Holomorphic functions}
+  \subsection{Complex differentiation}
+  \subsubsection{Holomorphic functions}
   \begin{definition}
-    Let $U\subseteq \CC$ be an open set, $f:U\rightarrow \CC$ be a function and $z_0\in U$. We say that $f$ is \emph{$\CC$-differentiable} at $z_0$ if the following limit exists: $$\lim_{z \to z_0} \frac{f(z) - f(z_0)}{z - z_0} = \lim_{h \to 0} \frac{f(z_0 + h) - f(z_0)}{h}$$ In that case, the limit is called \textit{derivative of $f$ at $z_0$} and it is denoted by $f'(z_0)$.
+    Let $U\subseteq \CC$ be an open set, $z_0\in U$ and $f:U\rightarrow \CC$ be a function. We say that $f$ is \emph{$\CC$-differentiable} at $z_0$ if the following limit exists: $$\lim_{z \to z_0} \frac{f(z) - f(z_0)}{z - z_0} = \lim_{h \to 0} \frac{f(z_0 + h) - f(z_0)}{h}$$ In that case, the limit is called \textit{derivative of $f$ at $z_0$} and it is denoted by $f'(z_0)$.
   \end{definition}
   \begin{proposition}
-    Let $U\subseteq \CC$ be an open set, $f:U\rightarrow \CC$ be a function and $z_0\in U$. Then, $f$ is $\CC$-differentiable at $z_0$ if and only if $\exists a+b\ii\in\CC$ such that $\forall\varepsilon>0$ $\exists\delta>0$ such that $$|f(z_0+s)-f(z_0)-(a+b\ii)s|\leq \varepsilon s$$ whenever $|s|<\delta$.
+    Let $U\subseteq \CC$ be an open set, $z_0\in U$ and $f:U\rightarrow \CC$ be a function. Then, $f$ is $\CC$-differentiable at $z_0$ if and only if $\exists a+b\ii\in\CC$ such that $\forall\varepsilon>0$ $\exists\delta>0$ such that $$|f(z_0+h)-f(z_0)-(a+b\ii)h|\leq \varepsilon h$$ whenever $|h|<\delta$.
+  \end{proposition}
+  \begin{proposition}
+    Let $U\subseteq \CC$ be an open set, $z_0 \in U$ and $f:U\rightarrow \CC$ be a $\CC$-differentiable function at $z_0$. Then, $f$ is continuous at $z_0$.
   \end{proposition}
   \begin{proposition}
     Let $U\subseteq \CC$ be an open set, $z_0 \in U$, $f,g:U\rightarrow \CC$ be two $\CC$-differentiable functions at $z_0$ and $\alpha,\beta\in \CC$. Then:
@@ -434,13 +435,19 @@
             $${\left(\frac{f}{g}\right)}'(z_0) = \frac{f'(z_0)g(z_0) - f(z_0) g'(z_0)}{{g(z_0)}^2}$$
     \end{enumerate}
   \end{proposition}
+  \begin{theorem}[Chain rule]
+    Let $U,V\subseteq \CC$ be open sets, $z_0\in U$, $f:U\rightarrow\CC$ be a $\CC$-differentiable function at $z_0$ such that $f(U)\subseteq V$, and $g:V\rightarrow\CC$ be $\CC$-differentiable function at $f(z_0)$. Then, $g\circ f$ is $\CC$-differentiable at $z_0$ and: $${(g\circ f)}'(z_0)=g'(f(z_0))f'(z_0)$$
+  \end{theorem}
   \begin{proposition}
     Let $z\in\CC$. Then:
     \begin{itemize}
       \item ${\left(\exp{z}\right)}'=\exp{z}$
+      \item ${\left(\cos{z}\right)}'=-\sin{z}$
+      \item ${\left(\sin{z}\right)}'=\cos{z}$
+      \item ${\left(\tan{z}\right)}'=1+{(\tan{z})}^2$
       \item ${\left(\cosh{z}\right)}'=\sinh{z}$
       \item ${\left(\sinh{z}\right)}'=\cosh{z}$
-      \item ${\left(\tanh{z}\right)}'=1+{(\tanh{z})}^2$
+      \item ${\left(\tanh{z}\right)}'=1-{(\tanh{z})}^2$
     \end{itemize}
   \end{proposition}
   \begin{definition}
@@ -450,37 +457,126 @@
     We say that $f:\CC\rightarrow\CC$ is an \emph{entire function} if $f$ is holomorphic on the whole complex plane.
   \end{definition}
   \begin{proposition}
-    Let $U\subseteq \CC$ be an open set, $f:U\rightarrow \CC$ be a function and $z_0 \in \CC$ a point. If $f$ is $\CC$-differentiable at $z_0$, then it is continuous at $z_0$.
-  \end{proposition}
-  \begin{proposition}
     Let $n\in\NN\cup\{0\}$ and $f:\CC\rightarrow\CC$ be a function defined as  $f(z)=z^n$. Then, $f$ is holomorphic and $f'(z)=nz^{n-1}$ $\forall z\in\CC$.
   \end{proposition}
   \begin{corollary}
     Let $p(z)=\frac{f(z)}{g(z)}\in\CC(z)$ be a rational function. Then, $p(z)$ is a holomorphic on the open set $\CC\setminus Z(g)$, where $Z(g)=\{z\in\CC:g(z)=0\}$.
     In particular, if $p(z)\in\CC[z]$ is a polynomial, $p(z)$ is holomorphic on $\CC$.
   \end{corollary}
-  \begin{theorem}[Chain rule]
-    Let $U,V\subseteq \CC$ be open sets, $z_0\in U$, $f:U\rightarrow\CC$ be a $\CC$-differentiable function at $z_0$ such that $f(U)\subseteq V$, and $g:V\rightarrow\CC$ be $\CC$-differentiable function at $f(z_0)$. Then, $g\circ f$ is $\CC$-differentiable at $z_0$ and: $${(g\circ f)}'(z_0)=g'(f(z_0))f'(z_0)$$
-  \end{theorem}
   \begin{theorem}
     Let $\sum_{n=0}^\infty a_n{(z-z_0)}^n$ be a complex power series with radius of convergence $R\in[0,\infty]$. Then, the series $\sum_{n=1}^\infty na_n{(z-z_0)}^{n-1}$ has the same radius of convergence $R$ and if $f(z)=\sum_{n=0}^\infty a_n{(z-z_0)}^n$ for $|z-z_0|<R$, then $f$ is holomorphic and: $$f'(z)=\sum_{n=1}^\infty na_n{(z-z_0)}^{n-1}\quad\text{for } |z-z_0|<R$$
   \end{theorem}
   \begin{corollary}
-    Let $\sum_{n=0}^\infty a_n{(z-z_0)}^n$ be a complex power series with radius of convergence $R\in[0,\infty]$. Then, the series $\sum_{n=k}^\infty n(n-1)\cdots(n-k+1)a_n{(z-z_0)}^{n-k}$ has the same radius of convergence $R$ for all $k\in\NN \cup\{0\}$ and if $f(z)=\sum_{n=0}^\infty a_n{(z-z_0)}^n$ for $|z-z_0|<R$, then $f^(k)$ is holomorphic and: $$f^{(k)}(z)=\sum_{n=k}^\infty n(n-1)\cdots(n-k+1)a_n{(z-z_0)}^{n-k}$$ for $|z-z_0|<R$ and $\forall k\in\NN \cup\{0\}$. In particular $f^{(k)}(0)=k!a_k$ $\forall k\in\NN\cup\{0\}$.
+    Let $\sum_{n=0}^\infty a_n{(z-z_0)}^n$ be a complex power series with radius of convergence $R\in[0,\infty]$. Then, the series $\sum_{n=k}^\infty n(n-1)\cdots(n-k+1)a_n{(z-z_0)}^{n-k}$ has the same radius of convergence $R$ for all $k\in\NN \cup\{0\}$ and if $f(z)=\sum_{n=0}^\infty a_n{(z-z_0)}^n$ for $|z-z_0|<R$, then $f^{(k)}$ is holomorphic and: $$f^{(k)}(z)=\sum_{n=k}^\infty n(n-1)\cdots(n-k+1)a_n{(z-z_0)}^{n-k}$$ for $|z-z_0|<R$ and $\forall k\in\NN \cup\{0\}$. In particular $f^{(k)}(0)=k!a_k$ $\forall k\in\NN\cup\{0\}$.
   \end{corollary}
   \begin{proposition}
     Let $U\subseteq\CC$ be a connected open set and $f\in\mathcal{H}(U)$ such that $f'(z)=0$ $\forall z\in U$. Then, $f$ is constant.
   \end{proposition}
-  \subsubsection{Logarithm determination}
+  \subsubsection{Determination of the logarithm}
   \begin{definition}
-    Let $U\subseteq\CC^*$ be an open set and $f:U\longrightarrow\CC^*$ and $g:U\rightarrow\CC$ be functions. We say that $g$ is a \emph{determination} of $\ln f(z)$ if $g$ is continuos on $U$ and $\exp{g(z)}=f(z)$ $\forall z\in U$.
+    Let $U\subseteq\CC$ be an open set and $f:U\longrightarrow\CC^*$ and $g:U\rightarrow\CC$ be functions. We say that $g$ is a \emph{determination} of $\ln f(z)$ if $g$ is continuos on $U$ and $\exp{g(z)}=f(z)$ $\forall z\in U$.
   \end{definition}
+  \begin{proposition}
+    Let $\theta\in[0,2\pi)$, $L_\theta:=\{r\exp{\ii\theta}:r\in\RR_{\geq 0}\}$ and $U=\CC\setminus L_\theta$. Then, there exists a determination of the logarithm $g:U\rightarrow\CC$ defined as:
+    $$g(z)=\log |z|+\ii\arg(z)\quad\arg(z)\in(0,\theta+2\pi)$$
+  \end{proposition}
   \begin{theorem}
-    Let $U,V\subseteq\CC^*$ be open sets, $f:U\longrightarrow\CC^*$ be a function and $g:V\rightarrow\CC$ be and holomorphic function. Suppose $f(U)\subseteq V$, $g(f(z))=z$ and $g'(f(z))\ne 0$ $\forall z\in U$. Then, $f$ is holomorphic on $U$ and: $$f'(z)=\frac{1}{g'(f(z))}$$
+    Let $U,V\subseteq\CC$ be open sets, $f:U\longrightarrow\CC^*$ be a function and $g\in\mathcal{H}(V)$. Suppose $f(U)\subseteq V$, $g(f(z))=z$ and $g'(f(z))\ne 0$ $\forall z\in U$. Then, $f$ is holomorphic on $U$ and: $$f'(z)=\frac{1}{g'(f(z))}\quad\forall z\in U$$
   \end{theorem}
+  \begin{proposition}
+    Let $U,V_1,V_2\subseteq\CC$ be open sets, $f:U\rightarrow\CC^*$ be a continuous function and $g_1:V_1\longrightarrow\CC^*$, $g_2:V_2\longrightarrow\CC^*$ be two determinations of the logarithm. If $W\subseteq V_1\cap V_2\ne\varnothing$ is connectes, then $\exists k\in\ZZ$ such that $$g_2(z)=g_1(z)+2\pi \ii k\qquad\forall z\in W$$
+  \end{proposition}
   \begin{corollary}
-    Let $U,V\subseteq\CC^*$ be open sets, $g:V\rightarrow\CC$ be and holomorphic function and $f:U\longrightarrow\CC^*$ be a determination of the logarithm. Then: $$f'(z)=\frac{1}{z}$$
+    Let $U\subseteq\CC$ be an open set, $f:U\longrightarrow\CC^*$ be a holomorphic function and $g:U\rightarrow\CC$ be a determination of the logarithm. Then, $g$ is holomorphic and: $$g'(z)=\frac{f'(z)}{f(z)}\quad \forall z\in U$$
     In particular, ${\left(\ln z\right)}'=\frac{1}{z}$.
   \end{corollary}
+  \subsubsection{Cauchy-Rieamann equations}
+  \begin{definition}
+    Let $U\subseteq \CC$ be an open set, $z_0 \in U$ and $f:U\rightarrow \CC$ be a function. We define the partial derivatives of $f$ at $z_0$ as
+    \begin{align*}
+      \pdv{f}{x}(z_0) & =\lim_{t\to 0}\frac{f(z_0+t)-f(z_0)}{t}     \\
+      \pdv{f}{y}(z_0) & =\lim_{t\to 0}\frac{f(z_0+\ii t)-f(z_0)}{t}
+    \end{align*}
+    whenever the limits exist.
+  \end{definition}
+  \begin{proposition}
+    Let $U\subseteq \CC$ be an open set and $f:U\rightarrow \CC$ be a function such that $f(z)=u(z)+\ii v(z)$ $\forall z\in U$ with $u,v:U\rightarrow\RR$. Then, if $z=x+\ii y$, we have:
+    \begin{align*}
+      \pdv{f}{x}(z)=\pdv{u}{x}(z)+\ii\pdv{v}{x}(z) \\
+      \pdv{f}{y}(z)=\pdv{u}{y}(z)+\ii\pdv{v}{y}(z)
+    \end{align*}
+  \end{proposition}
+  \begin{definition}
+    Let $U\subseteq \CC$ be an open set, $f:U\rightarrow \CC$ be a function and $z_0\in U$. We say that $f$ is $\RR$-differentiable at $z_0\in U$ if and only if there exists a $\RR$-linear function $L:\CC\rightarrow\CC$ such that: $$\lim_{h+k\ii\to 0}\frac{|f(z_0+h+k\ii)-f(z_0)-L(h+k\ii)|}{|h+k\ii|}=0$$
+    In that case, the function $L$ is called \emph{differential} of $f$ at $z_0$ and it is denoted by $\vf{D}f(z_0)$.
+  \end{definition}
+  \begin{proposition}
+    Let $U\subseteq \CC$ be an open set, $z_0\in U$ and $f:U\rightarrow \CC$ be a $\RR$-differentiable function at $z_0$ such that $f(z)=u(z)+\ii v(z)$ $\forall z\in U$ with $u,v:U\rightarrow\RR$. Then:
+    $$\vf{D}f(z_0)=
+      \begin{pmatrix}
+        \pdv{u}{x}(z_0) & \pdv{u}{y}(z_0) \\
+        \pdv{v}{x}(z_0) & \pdv{v}{y}(z_0)
+      \end{pmatrix}\footnote{From now on, if we use the matrix notation in the complex plane, that should be interpreted as the first row being the real part and the second row being the imaginary part.}
+    $$
+  \end{proposition}
+  \begin{theorem}[Cauchy-Riemann theorem]
+    Let $U\subseteq \CC$ be an open set,  $f:U\rightarrow \CC$ be a function and $z_0\in U$. Then, $f$ is $\CC$-differentiable and $f'(z_0)=a+b\ii$ if and only if $f$ is $\RR$-differentiable and:
+    $$\vf{D}f(z_0)=
+      \begin{pmatrix}
+        a & -b \\
+        b & a
+      \end{pmatrix}$$
+    Which is equivalent to:
+    \begin{equation}\label{CAFA_cauchyrieamann}
+      \pdv{u}{x}(z_0)=\pdv{v}{y}(z_0)\qquad\pdv{v}{x}(z_0)=-\pdv{u}{y}(z_0)
+    \end{equation}
+    Theses equations are called \emph{Cauchy-Riemann equations}.
+  \end{theorem}
+  \begin{corollary}
+    Let $U\subseteq \CC$ be an open set, $u,v:U\rightarrow\CC$ be functions such that they partial derivatives exists, are continuos and satisfying \cref{CAFA_cauchyrieamann}. Then, $f=u+\ii v$ is holomorphic on $U$.
+  \end{corollary}
+  \begin{definition}
+    Let $U\subseteq \CC$ be an open set, $f:U\rightarrow \CC$ be a function. We define \emph{Wirtinger operators} as:
+    \begin{align*}
+      \partial f:=\pdv{f}{z}                       & :=\frac{1}{2}\left(\pdv{f}{x}-\ii\pdv{f}{y}\right) \\
+      \overline{\partial} f:=\pdv{f}{\overline{z}} & :=\frac{1}{2}\left(\pdv{f}{x}+\ii\pdv{f}{y}\right)
+    \end{align*}
+  \end{definition}
+  \begin{proposition}
+    Let $U\subseteq \CC$ be an open set, $f,g:U\rightarrow \CC$ be $\RR$-differentiable functions, $z\in U$ and $w=g(z)$. Then:
+    \begin{enumerate}
+      \item $\partial(f\circ g)(z)=\partial f(w)\partial g(z)+\overline{\partial}f(w)\partial \overline{g}(z)$
+      \item $\overline{\partial}(f\circ g)(z)=\partial f(w)\overline{\partial} g(z)+\overline{\partial}f(w)\overline{\partial} \overline{g}(z)$
+    \end{enumerate}
+  \end{proposition}
+  \begin{proposition}
+    Let $U\subseteq \CC$ be an open set, $z_0\in U$ and $f:U\rightarrow \CC$ be a $\CC$-differentiable function at $z_0$. Then, the Cauchy-Riemann equations of \cref{CAFA_cauchyrieamann} can also be written as: $$\overline{\partial} f(z_0)=0$$
+  \end{proposition}
+  \begin{proposition}
+    Let $U\subseteq \CC$ be an open set, $f:U\rightarrow \CC$ be a function and $z_0\in U$. We say that $f$ is $\RR$-differentiable at $z_0\in U$ if and only if there exist $x,y\in \CC$ such that: $$\lim_{h\to 0}\frac{f(z_0+h)-f(z_0)-xh-y\overline{h}}{h}=0$$
+    In that case, we have $x=\partial f(z_0)$ and $y=\overline{\partial} f(z_0)$.
+  \end{proposition}
+  \begin{proposition}
+    Let $U\subseteq \CC$ be an open set and $f\in\mathcal{H}(U)$ such that $f=u+\ii v$ with $u,v:U\rightarrow\RR$. Then:
+    $${|f'(z)|}^2=\det \vf{D}(u,v)(z)={\left(\pdv{u}{x}\right)}^2+{\left(\pdv{u}{y}\right)}^2$$
+  \end{proposition}
+  \subsubsection{Harmonic functions}
+  \begin{definition}
+    Let $U\subseteq \CC\cong\RR^2$ be an open set and $f:U\rightarrow \CC$ be a function of class $\mathcal{C}^2$. We say that $f$ is \emph{harmonic} if $\laplacian u(z)=0$ $\forall z\in U$.
+  \end{definition}
+  \begin{proposition}
+    Let $U\subseteq \CC$ be an open set and $f\in\mathcal{H}(U)$ such that $f=u+\ii v$ with $u,v:U\rightarrow\RR$. Then, $u$ and $v$ are harmonic.
+  \end{proposition}
+  \begin{definition}
+    Let $S\subseteq\RR^n$ be a subset and $s_0\in S$. We say that $S$ is a \emph{star domain} with respect to $s_0$ if $\forall s\in S$, the line segment from $s_0$ to $s$ lies in $S$.
+  \end{definition}
+  \begin{definition}
+    Let $U\subseteq\RR^n$ be a subset. We say that $U$ is \emph{convex} if it is a star domain with respect to $x\in U$, for all $x\in U$.
+  \end{definition}
+  \begin{proposition}
+    Let $U\subseteq \CC$ be an open star domain with respect to $z_0=x_0+\ii y_0\in U$ and $u:U\rightarrow\RR$ be a harmonic function. Then, there exists an harmonic function $v:U\rightarrow\RR$ such that $f=u+\ii v$ is holomorphic. That function $v$ is:
+    $$v(x+\ii y)=\int_{y_0}^y\pdv{u}{x}(x+\ii t)\dd{t}-\int_{x_0}^x\pdv{u}{y}(t+\ii y_0)\dd{t}+C$$
+    for some constant $C\in\RR$.
+  \end{proposition}
 \end{multicols}
 \end{document}

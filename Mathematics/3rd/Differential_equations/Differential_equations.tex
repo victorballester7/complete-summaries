@@ -778,6 +778,29 @@
       \item $\vf{p}$ is not attracting.
     \end{enumerate}
   \end{proposition}
+  \subsubsection{Polynomial vectors fields}
+  \begin{definition}
+    Let $p,q\in\RR[x,y]$ and consider the system of odes
+    \begin{equation}\label{DE_poly}
+      \left\{
+      \begin{aligned}
+         & x'      =p(x,y) \\
+         & y  =q(x,y)
+      \end{aligned}
+      \right.
+    \end{equation}
+    is called a \emph{polynomial system}. We define the degree of that system as $n:=\max\{\deg p,\deg q\}$.
+  \end{definition}
+  \begin{definition}
+    Let $f\in\RR[x,y]$ be a polynomial. An algebraic curve is the set of points satisfying the equation $f(x,y)=0$.
+  \end{definition}
+  \begin{definition}
+    Let $f(x,y)=0$ be an algebraic curve, $p,q\in\RR[x,y]$ and consider the polynomial system of degree $n$ of \cref{DE_poly}. We say that $f(x,y)=0$ is an \emph{invariant algebraic curve} under the system of \cref{DE_poly} if $$\pdv{f}{x}(x,y)p(x,y)+\pdv{f}{y}q(x,y)=k(x,y)f(x,y)$$
+    where $k\in\RR[x,y]$ is called \emph{cofactor} of the invariant curve $f(x,y)=0$. Note that $\deg k\leq n-1$.
+  \end{definition}
+  \begin{proposition}
+    Let $f(x,y)=0$ be an algebraic curve, $p,q\in\RR[x,y]$ and consider the polynomial system of degree $n$ of \cref{DE_poly}. Then, the invariant curve $f(x,y)=0$ is an orbit of the differential system of \cref{DE_poly}.
+  \end{proposition}
   \subsubsection{Equivalence and conjugacy of dynamical systems}
   \begin{definition}
     Let $(G,X,\Psi_1)$ and $(G,X,\Psi_2)$ be dynamical systems and $r\in\NN\cup\{0,\infty\}$. We say that $(G,X,\Psi_1)$ and $(G,X,\Psi_2)$ are \emph{equivalent dynamical systems} of class $\mathcal{C}^r$ if there exists a diffeomorphism $h:X\rightarrow Y$ of class $\mathcal{C}^r$ such that $\forall x\in X$, $h(\gamma_{\Psi_1}(x))=\gamma_{\Psi_2}(h(x))$ and preserving the orientation of the orbits. In particular, if $r=0$ we say that $(G,X,\Psi_1)$ and $(G,X,\Psi_2)$ are \emph{topologically equivalent}. That diffeomorphism $h$ is called an \emph{equivalence} (of class $\mathcal{C}^r$) between $(G,X,\Psi_1)$ and $(G,X,\Psi_2)$.
@@ -1001,29 +1024,26 @@
     Let $U\subseteq \RR^2$ be an open set, $\vf{f}:U\rightarrow\RR^2$ be a vector field of class $\mathcal{C}^1$ and $\vf{\gamma}$ be a limit cycle and $V$ be a neighbourhood of $\vf{\gamma}$. Then, $\vf{\gamma}$ is exactly one of the following three types of limit cycles:
     \begin{itemize}
       \item $\vf{\gamma}$ is \emph{stable} if $\omega(\vf{q})=\vf{\gamma}$ $\forall \vf{q}\in V$.
-      \item $\vf{\gamma}$ is \emph{stable} if $\omega(\vf{q})=\vf{\gamma}$ $\forall \vf{q}\in V$.
-      \item $\vf{\gamma}$ is \emph{semi-stable} if either $\omega(\vf{q})=\vf{\gamma}$ $\forall \vf{q}\in V\cap\Ext(\vf{\gamma})$ and $\alpha(\vf{q})=\vf{\gamma}$ $\forall \vf{q}\in V\cap\Int(\vf{\gamma})$, or $\omega(\vf{q})=\vf{\gamma}$ $\forall \vf{q}\in V\cap\Int(\vf{\gamma})$ and $\alpha(\vf{q})=\vf{\gamma}$ $\forall \vf{q}\in V\cap\Ext(\vf{\gamma})$.
+      \item $\vf{\gamma}$ is \emph{unstable} if $\alpha(\vf{q})=\vf{\gamma}$ $\forall \vf{q}\in V$.
+      \item $\vf{\gamma}$ is \emph{semi-stable} if either
+            \begin{multline*}
+              \{\omega(\vf{q})=\vf{\gamma}\quad\forall \vf{q}\in V\cap\Ext(\vf{\gamma})\}\land\\\land\{\alpha(\vf{q})=\vf{\gamma}\quad\forall \vf{q}\in V\cap\Int(\vf{\gamma})\}
+            \end{multline*}
+            or
+            \begin{multline*}
+              \{\omega(\vf{q})=\vf{\gamma}\quad\forall \vf{q}\in V\cap\Int(\vf{\gamma})\}\land\\\land \{\alpha(\vf{q})=\vf{\gamma}\quad\forall \vf{q}\in V\cap\Ext(\vf{\gamma})\}
+            \end{multline*}
     \end{itemize}
   \end{proposition}
-  \subsubsection{Integrability of polynomial vectors fields}
   \begin{definition}
-    Let $p,q\in\RR[x,y]$ and consider the system of odes
-    \begin{equation}\label{DE_poly}
-      \left\{
-      \begin{aligned}
-         & x'      =p(x,y) \\
-         & y  =q(x,y)
-      \end{aligned}
-      \right.
-    \end{equation}
-    is called a \emph{polynomial system}. We define the degree of that system as $n:=\max\{\deg p,\deg q\}$.
+    Let $U\subseteq \RR^2$ be an open set, $\vf{f}:U\rightarrow\RR^2$ be a vector field of class $\mathcal{C}^1$ and $\vf{\gamma}$ be a periodic orbit of period $T$. We say that $\vf\gamma$ is a \emph{hyperbolic periodic orbit} if $$I(\vf\gamma):=\int_0^T\div\vf{f}(\vf\gamma(t))\dd{t}\ne 0$$
   \end{definition}
-  \begin{definition}
-    Let $f,p,q\in\RR[x,y]$ and consider the polynomial system of degree $n$ of \cref{DE_poly}. We say that $f(x,y)=0$ is \emph{algebraic invariant curve} under the system of \cref{DE_poly} if $$\pdv{f}{x}(x,y)p(x,y)+\pdv{f}{y}q(x,y)=k(x,y)f(x,y)$$
-    where $k\in\RR[x,y]$ is called \emph{cofactor} of the invariant curve $f(x,y)=0$. Note that $\deg k\leq n-1$.
-  \end{definition}
-  \begin{proposition}
-    Let $f,p,q\in\RR[x,y]$ and consider the polynomial system of degree $n$ of \cref{DE_poly}. Then, the invariant curve $f(x,y)=0$ is an orbit of the differential system of \cref{DE_poly}.
-  \end{proposition}
+  \begin{theorem}
+    Let $U\subseteq \RR^2$ be an open set, $\vf{f}:U\rightarrow\RR^2$ be a vector field of class $\mathcal{C}^1$ and $\vf{\gamma}$ be a periodic orbit of period $T$. Then:
+    \begin{itemize}
+      \item $I(\vf\gamma)>0\implies\vf\gamma(t)$ is an unstable limit cycle.
+      \item $I(\vf\gamma)<0\implies\vf\gamma(t)$ is a stable limit cycle.
+    \end{itemize}
+  \end{theorem}
 \end{multicols}
 \end{document}
