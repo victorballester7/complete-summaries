@@ -1,0 +1,42 @@
+\documentclass{standalone}
+\usepackage{../../../../preamble_formulas}
+
+%%%% Differential system %%%%%
+\def\xdot{y}
+\def\ydot{sin(x)+cos(x)*x}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%% First integral %%%%
+\def\firstint{x*sin(x)-y^2/2}
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\begin{tikzpicture}[every node/.style={scale=0.85}]
+  \begin{axis}[
+      xmin=-6,xmax=6,
+      ymin=-2.5, ymax=4,
+      zmin = 0, zmax = 1, % to prevent a warning
+      view={0}{90},
+      axis equal image,
+      trig format plots=rad,
+    ]
+    \def\xmax{\pgfkeysvalueof{/pgfplots/xmax}}
+    \def\xmin{\pgfkeysvalueof{/pgfplots/xmin}}
+    \def\ymax{\pgfkeysvalueof{/pgfplots/ymax}}
+    \def\ymin{\pgfkeysvalueof{/pgfplots/ymin}}
+
+    % Phase portrait
+    \addplot3 [lightgray,samples=18,domain=\xmin:\xmax,y domain=\xmin:\xmax,quiver={u={\xdot/sqrt((\xdot)^2+(\ydot)^2)}, v={\ydot/sqrt((\xdot)^2+(\ydot)^2)}, scale arrows=0.3, every arrow/.append style={-stealth}}] {0};
+
+    % Orbits
+    \addplot[thick,domain=-4.91318:4.91318,color_green2,samples=200,smooth]{sqrt(2*(x*sin(x)+4.81446))};
+    \addplot[thick,domain=0:pi,color_blue2,samples=200,smooth]{sqrt(2*x*sin(x))};
+    \addplot[thick,domain=0:pi,color_blue2,samples=200,smooth]{-sqrt(2*x*sin(x))};
+
+    % Singular points
+    \filldraw[red] (-4.91318,0) circle (1pt);
+    \filldraw[red] (0,0) circle (1pt);
+    \filldraw[red] (4.91318,0) circle (1pt);
+  \end{axis}
+\end{tikzpicture}
+\end{document}

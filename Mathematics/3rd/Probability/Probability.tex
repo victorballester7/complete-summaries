@@ -610,7 +610,7 @@
   \end{proposition}
   \begin{definition}[Multivariate normal distribution]
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $\vf{X}\sim N(0,1)$ be an absolutely continuous random vector and $\vf{h}:\RR^n\rightarrow\RR^n$ be a function defined as $$\vf{h}(\vf{x})=\vf{A}\vf{x}+\vf{b}\qquad\vf{x}\in\RR^n\footnote{Here, we have thought $(x_1,\ldots,x_n)$ as the vector $\vf{x}$ in $\RR^n$.}$$ where $\vf{A}\in\GL_n(\RR)$ and $\vf{b}\in\RR^n$. Then, $\vf{Y}=\vf{h}(\vf{X})$ is an absolutely continuous random vector and it has joint pdf: $$f_{\vf{Y}}(\vf{y})=\frac{1}{{(2\pi)}^{\frac{n}{2}}}\frac{1}{\det \vf{A}}\exp{-\frac{{\|\vf{A}^{-1}(\vf{y}-\vf{b})\|}^2}{2}}$$
-    In this case, we write $\vf{Y}\sim N(\vf{b},\vf{A}\transpose{A})$. The vector $\vf{b}$ is called \emph{mean vector} and the matrix $\vf{A}\transpose{A}$, \emph{covariance matrix}.
+    In this case, we write $\vf{Y}\sim N(\vf{b},\vf{A}\transpose{\vf{A}})$. The vector $\vf{b}$ is called \emph{mean vector} and the matrix $\vf{A}\transpose{\vf{A}}$, \emph{covariance matrix}.
   \end{definition}
   \subsubsection{Independent random variables}
   \begin{definition}
@@ -839,7 +839,7 @@
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $X$, $Y$ be independent random variables. Then, for all $t$ such that $\psi_X(t),\psi_Y(t)<+\infty$, the function $\psi_{X+Y}(t)$ is finite and: $$\psi_{X+Y}(t)=\psi_X(t)\psi_Y(t)$$
   \end{theorem}
   \begin{proposition}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $p\in(0,1)$, $\lambda\in\RR_{>0}$ and $X_1,\ldots,X_n$ be i.i.d.\ random variables.
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $p\in(0,1)$, $\lambda\in\RR_{>0}$ and $X_1,\ldots,X_n$ be \iid random variables.
     \begin{itemize}
       \item If $X_1\sim\text{Ber}(p)$, then $X_1+\cdots+X_n\sim\text{B}(n,p)$
       \item If $X_1\sim\text{Geo}(p)$, then $X_1+\cdots+X_n\sim\text{NB}(n,p)$
@@ -1103,24 +1103,24 @@
   \end{definition}
   \subsubsection{Weak laws}
   \begin{theorem}[Weak law]
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $(X_n)$ be a sequence of i.i.d.\ random variables with finite 2nd moment. Then: $$\frac{S_n}{n}\overset{\Prob}{\longrightarrow}\Exp(X_1)\quad\text{and}\quad\frac{S_n}{n}\overset{L^2}{\longrightarrow}\Exp(X_1)$$
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $(X_n)$ be a sequence of \iid random variables with finite 2nd moment. Then: $$\frac{S_n}{n}\overset{\Prob}{\longrightarrow}\Exp(X_1)\quad\text{and}\quad\frac{S_n}{n}\overset{L^2}{\longrightarrow}\Exp(X_1)$$
   \end{theorem}
   \begin{theorem}[Weak law]
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $(X_n)$ be a sequence of pairwise uncorrelated random variables with finite 2nd moment. Suppose that: $$\lim_{n\to\infty}\frac{1}{n}\sum_{i=1}^n\Exp(X_i)=\mu<\infty\;\,\text{and}\;\,\lim_{n\to\infty}\frac{1}{n^2}\sum_{i=1}^n\Var(X_i)=0$$ Then: $$\frac{S_n}{n}\overset{\Prob}{\longrightarrow}\mu\quad\text{and}\quad\frac{S_n}{n}\overset{L^2}{\longrightarrow}\mu$$
   \end{theorem}
   \subsubsection{Strong laws}
   \begin{theorem}[Kolmogorov's strong law]
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $(X_n)$ be a sequence of i.i.d.\ random variables.
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $(X_n)$ be a sequence of \iid random variables.
     \begin{enumerate}
       \item If $\Exp(X_1)<\infty$, then: $$\frac{S_n}{n}\overset{\text{a.s.}}{\longrightarrow}\Exp(X_1)$$
       \item If $\Exp(X_1)=\infty$, then: $$\limsup_{n\to\infty}\frac{|S_n|}{n}\overset{\text{a.s.}}{=}+\infty$$
     \end{enumerate}
   \end{theorem}
   \begin{theorem}[Strong law]
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $(X_n)$ be a sequence of i.i.d.\ random variables such that $\Exp({X_1}^4)<\infty$. Then: $$\frac{S_n}{n}\overset{\text{a.s.}}{\longrightarrow}\Exp(X_1)$$
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $(X_n)$ be a sequence of \iid random variables such that $\Exp({X_1}^4)<\infty$. Then: $$\frac{S_n}{n}\overset{\text{a.s.}}{\longrightarrow}\Exp(X_1)$$
   \end{theorem}
   \begin{corollary}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $A\in\mathcal{A}$. Let $(X_n)$ be a sequence of i.i.d.\ random variables such that $X_n\sim\text{Ber}(\Prob(A))$ $\forall n\in\NN$. Then: $$\frac{S_n}{n}\overset{\text{a.s.}}{\longrightarrow}\Prob(A)$$
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $A\in\mathcal{A}$. Let $(X_n)$ be a sequence of \iid random variables such that $X_n\sim\text{Ber}(\Prob(A))$ $\forall n\in\NN$. Then: $$\frac{S_n}{n}\overset{\text{a.s.}}{\longrightarrow}\Prob(A)$$
   \end{corollary}
   \begin{definition}
     Let $x\in[0,1)$ and $b\in\NN_{\geq 2}$. Suppose the expression of $x$ in base $b$ is $x_b=0.a_1a_2a_3\cdots$. Let $N_{x,b}(k,n)$ denote the number of times the digit $k\in\{0,1,\ldots,b-1\}$ appears in the decimal expansion of $x_b$ in the first $n$ digits. We say that $x$ is \emph{simply normal} if there exists $b\in\NN_{\geq 2}$ such that $$\lim_{n\to\infty}\frac{N_{x,b}(k,n)}{n}=\frac{1}{b}\quad\forall k\in\{0,1,\ldots,b-1\}$$
@@ -1179,7 +1179,7 @@
   \end{proposition}
   \subsubsection{Central limit theorem}
   \begin{theorem}[Lévy-Lindeberg central limit theorem]
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $(X_n)$ be a sequence of i.i.d.\ random variables with finite 2nd moments. Let $\mu:=\Exp(X_1)$ and $\sigma^2:=\Var(X_1)$. Then: $$\frac{S_n-n\mu}{\sigma\sqrt{n}}\overset{\text{d}}{\longrightarrow} Z$$
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $(X_n)$ be a sequence of \iid random variables with finite 2nd moments. Let $\mu:=\Exp(X_1)$ and $\sigma^2:=\Var(X_1)$. Then: $$\frac{S_n-n\mu}{\sigma\sqrt{n}}\overset{\text{d}}{\longrightarrow} Z$$
     where $Z\sim N(0,1)$.
   \end{theorem}
   \begin{theorem}[Lyapunov central limit theorem]
@@ -1187,20 +1187,20 @@
     where $Z\sim N(0,1)$.
   \end{theorem}
   \begin{corollary}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $(X_n)$ be a sequence of i.i.d.\ random variables with finite 2nd moments. Let $\mu:=\Exp(X_1)$ and $\sigma^2:=\Var(X_1)$. Then, $\forall s,t\in\RR$ such that $s<t$ we have $$\lim_{n\to\infty}\Prob\left(s<\frac{S_n-n\mu}{\sigma\sqrt{n}}\leq t\right)=F_Z(t)-F_Z(s)$$ where $Z\sim N(0,1)$.
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $(X_n)$ be a sequence of \iid random variables with finite 2nd moments. Let $\mu:=\Exp(X_1)$ and $\sigma^2:=\Var(X_1)$. Then, $\forall s,t\in\RR$ such that $s<t$ we have $$\lim_{n\to\infty}\Prob\left(s<\frac{S_n-n\mu}{\sigma\sqrt{n}}\leq t\right)=F_Z(t)-F_Z(s)$$ where $Z\sim N(0,1)$.
   \end{corollary}
   \begin{definition}
     Let $(\Omega,\mathcal{A},\Prob)$ and $X_1,\ldots,X_n$ be random variables. We define the \emph{sample mean} of $X_1,\ldots,X_n$ as: $$\overline{X}_n:=\frac{1}{n}S_n=\frac{1}{n}\sum_{i=1}^nX_i$$
     If the value of $n$ is fixed, we denoted $\overline{X}_n$ by $\overline{X}$.
   \end{definition}
   \begin{proposition}
-    Let $(\Omega,\mathcal{A},\Prob)$ and $X_1,\ldots,X_n$ be i.i.d.\ random variables. Then: $$\Exp(\overline{X}_n)=\Exp(X_1)\quad\text{and}\quad\Var(\overline{X}_n)=\frac{1}{n}\Var(X_1)$$
+    Let $(\Omega,\mathcal{A},\Prob)$ and $X_1,\ldots,X_n$ be \iid random variables. Then: $$\Exp(\overline{X}_n)=\Exp(X_1)\quad\text{and}\quad\Var(\overline{X}_n)=\frac{1}{n}\Var(X_1)$$
   \end{proposition}
   \begin{corollary}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X_1,\ldots,X_n$ be i.i.d.\ random variables. Let $\mu:=\Exp(X_1)$ and $\sigma^2:=\Var(X_1)$. Then: $$\overline{X}_n\overset{\text{d}}{\simeq }N\left(\mu,\frac{\sigma^2}{n}\right)\quad\text{ for $n$ large enough}$$
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X_1,\ldots,X_n$ be \iid random variables. Let $\mu:=\Exp(X_1)$ and $\sigma^2:=\Var(X_1)$. Then: $$\overline{X}_n\overset{\text{d}}{\simeq }N\left(\mu,\frac{\sigma^2}{n}\right)\quad\text{ for $n$ large enough}$$
   \end{corollary}
   \begin{corollary}[De Moivre-Laplace theorem]
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X_1,\ldots,X_n$ be i.i.d.\ random variables such that $X_n\sim\text{Ber}(p)$ $\forall n\in\NN$. Then: $$\text{B}(n,p)\overset{\text{d}}{\simeq }N\left(np,np(1-p)\right)\quad\text{ for $n$ large enough}\footnote{In practice, the approximation is good enough for $np(1-p)\geq 18$.}$$
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X_1,\ldots,X_n$ be \iid random variables such that $X_n\sim\text{Ber}(p)$ $\forall n\in\NN$. Then: $$\text{B}(n,p)\overset{\text{d}}{\simeq }N\left(np,np(1-p)\right)\quad\text{ for $n$ large enough}\footnote{In practice, the approximation is good enough for $np(1-p)\geq 18$.}$$
   \end{corollary}
   \begin{definition}[Continuity correction]
     The \emph{continuity correction} is an adjustment that is made when a discrete distribution is approximated by a continuous distribution. For example if $X\sim\text{B}(n,p)$ is a random variable and $np(1-p)$ is large enough, then $\Prob(X\leq k)$ is well approximated by $\Prob(Z\leq k+\frac{1}{2})$, where $Z\sim N(0,1)$ which is even better than the approximation given by $\Prob(Z\leq k)$.

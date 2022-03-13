@@ -168,7 +168,7 @@
     \end{equation*}
   \end{lemma}
   \begin{definition}
-    Let $\sum z_n$ be a series of complex numbers. We say that $\sum z_n$ is \emph{absolutely convergent} if $\sum \abs{z_n}<\infty$\footnote{Note that since $\sum \abs{z_n}$ is a sequence of real numbers, all the criteria for convergence of numeric series of real numbers are, thus, aplicable.}.
+    Let $\sum z_n$ be a series of complex numbers. We say that $\sum z_n$ is \emph{absolutely convergent} if $\sum \abs{z_n}<\infty$\footnote{Note that since $\sum \abs{z_n}$ is a sequence of real numbers, all the criteria for convergence of numeric series of real numbers are, thus, applicable.}.
   \end{definition}
   \begin{proposition}
     Let $\sum z_n$ be a series of complex numbers.
@@ -574,9 +574,66 @@
     Let $U\subseteq\RR^n$ be a subset. We say that $U$ is \emph{convex} if it is a star domain with respect to $x\in U$, for all $x\in U$.
   \end{definition}
   \begin{proposition}
-    Let $U\subseteq \CC$ be an open star domain with respect to $z_0=x_0+\ii y_0\in U$ and $u:U\rightarrow\RR$ be a harmonic function. Then, there exists an harmonic function $v:U\rightarrow\RR$ such that $f=u+\ii v$ is holomorphic. That function $v$ is:
+    Let $U\subseteq \CC$ be an open star domain with respect to $z_0=x_0+\ii y_0\in U$ and $u:U\rightarrow\RR$ be a harmonic function. Then, there exists a harmonic function $v:U\rightarrow\RR$ such that $f=u+\ii v$ is holomorphic. That function $v$ is:
     $$v(x+\ii y)=\int_{y_0}^y\pdv{u}{x}(x+\ii t)\dd{t}-\int_{x_0}^x\pdv{u}{y}(t+\ii y_0)\dd{t}+C$$
     for some constant $C\in\RR$.
   \end{proposition}
+  \subsection{Integration}
+  \begin{definition}
+    Let $f:[a,b]\subset\RR\rightarrow\CC$ be a function such that $f=u+\ii v$ with $u,v:[a,b]\rightarrow\RR$. We define the \emph{integral} of $f$ on the interval $[a,b]$ as: $$\int_a^bf(t)\dd{t}:=\int_a^bu(t)\dd{t}+\ii\int_a^bv(t)\dd{t}$$
+  \end{definition}
+  \begin{proposition}
+    Let $f,g:[a,b]\subset\RR\rightarrow\CC$ be functions and $z\in\CC$. Then:
+    \begin{enumerate}
+      \item $\displaystyle\int_a^b(f+g)(t)\dd{t}=\int_a^bf(t)\dd{t}+\int_a^bg(t)\dd{t}$
+      \item $\displaystyle\int_a^b(zf)(t)\dd{t}=z\int_a^bf(t)\dd{t}$
+      \item $\displaystyle\left|\int_a^bf(t)\dd{t}\right|\leq\int_a^b|f(t)|\dd{t}$
+      \item $\displaystyle \int_b^af(t)\dd{t}=-\int_a^bf(t)\dd{t}$
+    \end{enumerate}
+  \end{proposition}
+  \begin{proposition}
+    Let $f:[a,b]\subset\RR\rightarrow\CC$ be a function and $\varphi:[a,b]\rightarrow\RR$ be a change of variable of class $\mathcal{C}^1$ such that $\varphi([a,b])\subseteq[a,b]$. Then: $$\int_a^bf(\varphi(t))\varphi'(t)\dd{t}=\int_{\varphi(a)}^{\varphi(b)}f(t)\dd{t}$$
+  \end{proposition}
+  \subsubsection{Curves}
+  \begin{definition}
+    Let $\gamma_1:[a,b]\rightarrow\CC$, $\gamma_2:[c,d]\rightarrow\CC$ be two curves\footnote{Recall \cref{DG_curves}.} of class $\mathcal{C}^1$ such that $\gamma_1(t_1)=\gamma_2(t_2)=z_0\in\CC$ for some $t_1\in[a,b]$ and $t_2\in[c,d]$. Suppose that ${\gamma_1}'(t_1),{\gamma_2}'(t_2)\ne 0$. We define the angle between $\gamma_1$ and $\gamma_2$ at $z_0$ as $$\arg{\gamma_1}'(t_1)-\arg{\gamma_2}'(t_2)$$ which does not depend on the determination of the argument.
+  \end{definition}
+  \begin{theorem}
+    Let $U\subseteq \CC$ be an open set and $f\in\mathcal{H}(U)$. Then, $f$ preserves angles (magnitude and direction) at the points $z\in U$ such that $f'(z)\ne 0$..
+  \end{theorem}
+  \begin{definition}
+    Let $\gamma:[a,b]\rightarrow U$ be a $\mathcal{C}^1$-piecewise path. We define the inverse path $\gamma^-:[a,b]\rightarrow\CC$ as $\gamma^-(t)=\gamma(a+b-t)$
+  \end{definition}
+  \begin{definition}
+    Let $\gamma:[a,b]\rightarrow U$ be an injective curve. We say that $\gamma$ is a triangular path if $\gamma^*=\Fr T$, where $T\subset\CC$ is a triangle. The domain delimited by $T$ is denoted by $\overline{D(\gamma)}:=\overline{T}$.
+  \end{definition}
+  \subsubsection{Line integration}
+  \begin{definition}
+    Let $U\subseteq \CC$ be an open set, $f:U\subset\RR\rightarrow\CC$ be a continuous function, $\gamma:[a,b]\rightarrow U$ be a rectifiable curve and $\{t_0,\ldots,t_n\}$ be a partition of $[a,b]$. We define the \emph{line integral} of $f$ along $\gamma$ as: $$\int_\gamma f(z)\dd{z}:=\lim_{n\to\infty}\sum_{j=0}^{n-1}f(\gamma(\eta_j))(\gamma(t_{j+1})-\gamma(t_j))$$ where $\eta_j\in[t_j,t_{j+1}]$ $\forall j\in\{0,1,\ldots,n-1\}$.
+  \end{definition}
+  \begin{definition}
+    Let $U\subseteq \CC$ be an open set, $f:U\subset\RR\rightarrow\CC$ be a continuous function and $\gamma:[a,b]\rightarrow U$ be a $\mathcal{C}^1$-piecewise curve. Suppose $\{t_0,\ldots,t_n\}$ is partition of $[a,b]$ with the property that $\gamma$ is of class $\mathcal{C}^1([t_j,t_{j+1}])$ $\forall j\in\{0,1,\ldots,n-1\}$. Then: $$\int_\gamma f(z)\dd{z}=\sum_{j=0}^{n-1}\int_{t_j}^{t_{j+1}}f(\gamma(t))\gamma'(t)\dd{t}$$
+    In particular, if $\gamma\in\mathcal{C}^1([a,b])$, then: $$\int_\gamma f(z)\dd{z}=\int_a^bf(\gamma(t))\gamma'(t)\dd{t}$$
+  \end{definition}
+  \begin{theorem}
+    Let $U\subseteq \CC$ be an open set, $f:U\subset\RR\rightarrow\CC$ be a continuous function and $\gamma:[a,b]\rightarrow U$ be a $\mathcal{C}^1$-piecewise curve. Suppose there exists a function $F\in\mathcal{H}(U)$ such that $F'(z)=f(z)$ $\forall z\in U$. Then:
+    $$\int_\gamma f(z)\dd{z}=F(\gamma(b))-F(\gamma(a))$$ In particular if $\gamma$ is a closed curve, then $\int_\gamma f(z)\dd{z}=0$.
+  \end{theorem}
+  \begin{corollary}
+    There is no determination of the logarithm in any set of the form $\{z\in\CC:0<r\leq\abs{z}\leq R\}$ for $r,R\in\RR_{> 0}$ with $r<R$.
+  \end{corollary}
+  \begin{proposition}
+    Let $U\subseteq \CC$ be an open set, $f:U\subset\RR\rightarrow\CC$ be a continuous function, $\gamma_1:[a,b]\rightarrow U$ be a $\mathcal{C}^1$-piecewise curve and $\gamma_2$ be a reparametrization of $\gamma_1$.
+    \begin{itemize}
+      \item If the parametrization is positive\footnote{Recall \cref{DE_reparam}.}, then: $$\int_{\gamma_1}f(z)\dd{z}=\int_{\gamma_2}f(z)\dd{z}$$
+      \item If the parametrization is negative, then: $$\int_{\gamma_1}f(z)\dd{z}=-\int_{\gamma_2}f(z)\dd{z}$$
+    \end{itemize}
+  \end{proposition}
+  \begin{definition}
+    Let $U\subseteq \CC$ be an open set, $f:U\subset\RR\rightarrow\CC$ be a function, $\gamma:[a,b]\rightarrow\CC$ be a $\mathcal{C}^1$-piecewise curve. We define the following line integral with respect to $\overline{z}$: $$\int_{\gamma}f(z)\dd{\overline{z}}:=\overline{\int_{\gamma}\overline{f(z)}\dd{z}}$$
+  \end{definition}
+  \begin{theorem}[Cauchy's integral theorem]
+    Let $U\subseteq \CC$ be an open set, $f\in\mathcal{H}(U)$ and $\gamma$ be a triangular path such that $\overline{D(\gamma)}\subseteq U$. Then: $$\int_\gamma f(z)\dd{z}=0$$
+  \end{theorem}
 \end{multicols}
 \end{document}

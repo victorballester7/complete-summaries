@@ -218,24 +218,24 @@
     Two finite isomorphic graphs have the same order, size and degree sequence.
   \end{proposition}
   \begin{theorem}
-    Two graphs $G$, $H$ are isomorphic if and only if exists a permutation matrix $\vf{P}$ such that: $$\vf{P}\vf{A}(G)\transpose{P}=\vf{A}(H)$$ where $\vf{A}(G)$, $\vf{A}(H)$ are adjacency matrices of $G$, $H$, respectively.
+    Two graphs $G$, $H$ are isomorphic if and only if exists a permutation matrix $\vf{P}$ such that: $$\vf{P}\vf{A}(G)\transpose{\vf{P}}=\vf{A}(H)$$ where $\vf{A}(G)$, $\vf{A}(H)$ are adjacency matrices of $G$, $H$, respectively.
   \end{theorem}
   \subsection{Linear programming}
   \begin{definition}
     Given vectors $\vf{c},\vf{u},\vf{v}\in\RR ^n$, $\vf{b}\in\RR ^m$ and a matrix $\vf{A}\in\mathcal{M}_{m\times n}(\RR )$, we define the \emph{linear programming to maximize}\footnote{Analogously we can define a \emph{linear programming to minimize} changing the objective function to a minimize function.} as: $$\text{LP}=\left\{\begin{array}{rcl}
-        \max:              & z=\transpose{c}x         & (\emph{objective function}) \\
+        \max:              & z=\transpose{\vf{c}}x    & (\emph{objective function}) \\
         \text{subject to}: & \vf{A}x\lesseqgtr \vf{b} & (\emph{restrictions})       \\
                            & \vf{u}\leq x\leq \vf{v}  &
       \end{array}\right.$$
   \end{definition}
   \begin{definition}
     Given vectors $\vf{c},\vf{u},\vf{v}\in\RR ^n$, $\vf{b}\in\RR ^m$ and a matrix $\vf{A}\in\mathcal{M}_{m\times n}(\RR )$, we define the \emph{canonical form of a linear programming to maximize} as: $$\text{LP}=\left\{\begin{array}{rcl}
-        \max:              & z=\transpose{c}x        & (\emph{objective function}) \\
+        \max:              & z=\transpose{\vf{c}}x   & (\emph{objective function}) \\
         \text{subject to}: & \vf{A}x\leq \vf{b}      & (\emph{restrictions} )      \\
                            & \vf{u}\leq x\leq \vf{v} &
       \end{array}\right.$$
     Analogously we define the \emph{canonical form of a linear programming to minimize} as: $$\text{LP}=\left\{\begin{array}{rc}
-        \min:              & z=\transpose{c}x        \\
+        \min:              & z=\transpose{\vf{c}}x   \\
         \text{subject to}: & \vf{A}x\geq \vf{b}      \\
                            & \vf{u}\leq x\leq \vf{v}
       \end{array}\right.$$
@@ -256,13 +256,13 @@
     Let LP be a linear program. We define the \emph{standard form} of LP as:
     $$\text{LP}=\left\{
       \begin{array}{rc}
-        \min:              & z=\transpose{c}x \\
-        \text{subject to}: & \vf{A}x=\vf{b}   \\
+        \min:              & z=\transpose{\vf{c}}x \\
+        \text{subject to}: & \vf{A}x=\vf{b}        \\
                            & x\geq 0
       \end{array}\right.$$
   \end{definition}
   \begin{definition}
-    Let $\displaystyle \text{LP}=\min_{x\in\RR ^n}\{\transpose{c}x:\vf{A}x=\vf{b},x\geq 0\}$. Feasible solution in which free variables or non-basic variable equal zero with respect to basis of basic variables are called \emph{basic feasible solutions}.
+    Let $\displaystyle \text{LP}=\min_{x\in\RR ^n}\{\transpose{\vf{c}}x:\vf{A}x=\vf{b},x\geq 0\}$. Feasible solution in which free variables or non-basic variable equal zero with respect to basis of basic variables are called \emph{basic feasible solutions}.
   \end{definition}
   \begin{proposition}
     If a linear program admits feasible solutions, exists a basic feasible solution. If a linear program admits an optimal solution, exists an optimal basic feasible solution.
@@ -274,8 +274,8 @@
     Given a linear program in standard form:
     $$\text{LP}=\left\{
       \begin{array}{rc}
-        \min:              & z=\transpose{c}x \\
-        \text{subject to}: & \vf{A}x=\vf{b}   \\
+        \min:              & z=\transpose{\vf{c}}x \\
+        \text{subject to}: & \vf{A}x=\vf{b}        \\
                            & x\geq 0
       \end{array}\right.$$ its associated problem in phase I ($\text{LP}_1$) is: $$\text{LP}_1=\left\{\begin{array}{rc}
         \min:              & \displaystyle w=\sum_{i=1}^my_i \\
@@ -286,7 +286,7 @@
   \end{definition}
   \begin{proposition}[Simplex method: Phase II]
     Suppose in a simplex table with positive pivots and therefore independent-terms vector $\vf{d}\geq 0$, there is a coefficient $c_j<0$. $$\left(\begin{array}{c|c}
-          *      & \transpose{d} \\
+          *      & \transpose{\vf{d}} \\
           \hline
           \vf{c} & z-z_0
         \end{array}\right)$$
@@ -297,22 +297,22 @@
     \item The variable in row $i$ such that: $$\frac{d_i}{a_{ij}}=\min\left\{\frac{d_k}{a_{kj}}:a_{kj}>0\right\}$$ becomes a non-basic variable. If this variable does not exists, that is, $a_{kj}\leq0$ $\forall k$ then the linear program is not bounded.
   \end{enumerate}
   \begin{definition}
-    Let $\text{LP}=\displaystyle\min_{x\in\RR ^n}\{\transpose{c}x:\vf{A}x\geq \vf{b},x\geq 0\}$. We define the \emph{dual program} of LP as: $$\text{LP}^*=\left\{
+    Let $\text{LP}=\displaystyle\min_{x\in\RR ^n}\{\transpose{\vf{c}}x:\vf{A}x\geq \vf{b},x\geq 0\}$. We define the \emph{dual program} of LP as: $$\text{LP}^*=\left\{
       \begin{array}{rc}
-        \max:              & z=\transpose{b}y          \\
-        \text{subject to}: & \transpose{A}y\leq \vf{c} \\
+        \max:              & z=\transpose{\vf{b}}y          \\
+        \text{subject to}: & \transpose{\vf{A}}y\leq \vf{c} \\
                            & y\geq 0
       \end{array}\right.$$ The linear program LP is called \emph{primal}.
   \end{definition}
   \begin{theorem}[Weak duality theorem]
     Let $x$ be a feasible solution of the primal linear program and $y$ a feasible solution of the dual linear program. Then we have:
     \begin{itemize}
-      \item $\transpose{c}x\leq \transpose{d}y$ if the primal linear program is in canonical form to maximize.
-      \item $\transpose{c}x\geq \transpose{d}y$ if the primal linear program is in canonical form to minimize.
+      \item $\transpose{\vf{c}}x\leq \transpose{\vf{d}}y$ if the primal linear program is in canonical form to maximize.
+      \item $\transpose{\vf{c}}x\geq \transpose{\vf{d}}y$ if the primal linear program is in canonical form to minimize.
     \end{itemize}
   \end{theorem}
   \begin{corollary}
-    Let $x$, $y$ be feasible solutions of the primal and dual linear programs respectively such that $\transpose{c}x=\transpose{d}y$. Then $x$ and $y$ are optimal solutions.
+    Let $x$, $y$ be feasible solutions of the primal and dual linear programs respectively such that $\transpose{\vf{c}}x=\transpose{\vf{d}}y$. Then $x$ and $y$ are optimal solutions.
   \end{corollary}
   \begin{theorem}[Strong duality theorem]
     Any linear program has an optimal solution if and only if its dual linear program does, and in this case, the values coincide.
@@ -321,9 +321,9 @@
     Suppose that the optimal table of the primal linear program is of the form:
     $$\left(
       \begin{array}{@{\,} c|c @{\,}}
-          *      & \transpose{d} \\
+          *      & \transpose{\vf{d}} \\
           \hline
-          \vf{c} & z-z_0         \\
+          \vf{c} & z-z_0              \\
         \end{array}\right)$$ where $\vf{c}=(c_1,\ldots,c_{n+m})$ and $\vf{d}=(d_1,\ldots,d_m)$ with $c_i\geq0$, $i=1,\ldots,n+m$. If $(y_1,\ldots y_m,t_1^*,\ldots,t_n^*)$ is the optimal solution of the dual linear program, expressed in standard form, then: $$c_1=t_1^*,\ldots,c_n=t_n^*, c_{n+1}=y_1,\ldots,c_{n+m}=y_m$$
   \end{theorem}
 \end{multicols}
