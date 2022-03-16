@@ -177,6 +177,10 @@
     with $\int_\mathcal{X}h(\vf{x};\theta)L(\theta;\vf{x})\dd{\vf{x}}<\infty$, for all $\tilde{\theta}$ in a neighbourhood of $\theta$. Then:
     $$\hat\theta\overset{\text{d}}{\longrightarrow}N\left(\theta,\frac{1}{I(\theta)}\right)$$
   \end{theorem}
+  \begin{theorem}[Delta method]
+    Let $(\mathcal{X},\mathcal{F},\{\Prob_{\theta}^{\vf{X}_n}:\theta\in\Theta\subseteq\RR\})$ be a statistical model, $g:\Theta\rightarrow\Theta$ be a differentiable function such that $g'(\theta)\ne 0$ and $\hat\theta$ be an estimator of $\theta\in\Theta$. Then:
+    $$g(\hat\theta)\overset{\text{d}}{\longrightarrow}N\left(g(\theta),{g'(\theta)}^2\Var(\hat\theta)\right)$$
+  \end{theorem}
   \subsection{Distributions relating \texorpdfstring{$N(\mu,\sigma^2)$}{N(mu,sigma2)}}
   \subsubsection{Standard normal distribution}
   \begin{definition}
@@ -328,25 +332,25 @@
   \begin{definition}
     Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\theta\in\Theta\})$ be a statistical model and $\Theta=\Theta_0\sqcup\Theta_1$ be a partition of $\Theta$. Our goal is to know whether $\theta\in\Theta_0$ or not and we will use a sample $\vf{x}\in\mathcal{X}$ to conclude our objective. We define the following two propositions which we will call \emph{hypothesis}:
     $$\mathcal{H}_0:\theta\in\Theta_0\qquad\mathcal{H}_1:\theta\in\Theta_1$$
-    $\mathcal{H}_0$ is called \emph{null hypothesis} and $\mathcal{H}_1$ is called \emph{alternative hypothesis}. We say that the hypothesis $\mathcal{H}_i$ is \emph{simple} if $\Theta_i=\{\theta_0\}$ for some $\theta_0\in\Theta$. Otherwise we say that the hypothesis is compound.
+    $\mathcal{H}_0$ is called \emph{null hypothesis} and $\mathcal{H}_1$ is called \emph{alternative hypothesis}. We say that the hypothesis $\mathcal{H}_i$ is \emph{simple} if $\Theta_i=\{\theta_0\}$ for some $\theta_0\in\Theta$. Otherwise we say that the hypothesis $\mathcal{H}_i$ is compound.
   \end{definition}
   \begin{definition}[Hypothesis test]
-    Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\theta\in\Theta\})$ be a statistical model. A \emph{hypothesis test} is a function $$\function{\delta}{\mathcal{X}}{\{\mathcal{H}_0,\mathcal{H}_1\}}{\vf{x}}{\delta(\vf{x})}$$
-    The set $A_0:=\delta^{-1}(\mathcal{H}_0)\subseteq \mathcal{X}$, which is the set of samples that will lead us to accept $\mathcal{H}_0$, is called \emph{acceptation region}. The set $A_1:=\delta^{-1}(\mathcal{H}_1)\subseteq \mathcal{X}$, which is the set of samples that will lead us to reject $\mathcal{H}_0$, is called \emph{critical region}.
+    Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\theta\in\Theta=\Theta_0\sqcup\Theta_1\})$ be a statistical model. A \emph{hypothesis test} is a function $$\function{\delta}{\mathcal{X}}{\{\mathcal{H}_0,\mathcal{H}_1\}}{\vf{x}}{\delta(\vf{x})}$$
+    The set $A_0:=\delta^{-1}(\mathcal{H}_0)\subseteq \mathcal{X}$, which is the set of samples that will lead us to accept $\mathcal{H}_0$, is called \emph{acceptation region}. The set $A_1:=\delta^{-1}(\mathcal{H}_1)\subseteq \mathcal{X}$, which is the set of samples that will lead us to accept $\mathcal{H}_1$ (and therefore reject $\mathcal{H}_0$), is called \emph{critical region}\footnote{In order to denote these concepts more compactly, we will write $\delta:\mathcal{X}=A_1\sqcup A_2\rightarrow\{\mathcal{H}_0,\mathcal{H}_1\}$ to denote the hypothesis test whose acceptation and critical regions are $A_0$ and $A_1$, respectively.}.
   \end{definition}
   \begin{definition}
-    Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\theta\in\Theta\})$ be a statistical model and $\delta:\mathcal{X}\rightarrow\{\mathcal{H}_0,\mathcal{H}_1\}$ be a hypothesis test. An \emph{error of type I} is the rejection of $\mathcal{H}_0$ when it is true. An \emph{error of type II} is the acceptation of $\mathcal{H}_0$ when it is false. We define the probabilities $\alpha$ and $\beta$ as:
+    Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\theta\in\Theta=\Theta_0\sqcup\Theta_1\})$ be a statistical model and $\delta:\mathcal{X}=A_1\sqcup A_2\rightarrow\{\mathcal{H}_0,\mathcal{H}_1\}$ be a hypothesis test. An \emph{error of type I} is the rejection of $\mathcal{H}_0$ when it is true. An \emph{error of type II} is the acceptation of $\mathcal{H}_0$ when it is false. We define the probabilities $\alpha$ and $\beta$ as:
     \begin{align*}
       \alpha & :=\Prob(\text{Error of type I})=\Prob(\text{Reject $\mathcal{H}_0$}\mid\text{$\mathcal{H}_0$ is true})   \\
       \beta  & :=\Prob(\text{Error of type II})=\Prob(\text{Accept $\mathcal{H}_0$}\mid\text{$\mathcal{H}_0$ is false})
     \end{align*}
-    The value $1-\beta$ is called \emph{power} of the test and the value $\alpha$, \emph{significance level}\footnote{In practise, we fix a significance level $\alpha\in[0,1]$ small enough ($\approx 0.05$ but may vary depending on the problem) with which we accept making mistakes and from here we try to minimize the power $\beta$. Thus, $\alpha$ can be thought as $\alpha:=\sup\{\Prob(\text{Reject $\mathcal{H}_0$}\mid\text{$\mathcal{H}_0$ is true}):\theta\in\Theta_0\}$. Moreover having fixed $\alpha$, we obtain a confidence level $1-\alpha$. And if we impose $\Prob(\vf{x}\in A_0)=1-\alpha$, we are able to determine $A_0$.}.
+    The value $1-\beta$ is called \emph{power} of the test and the value $\alpha$, \emph{significance level}\footnote{In practise, we fix a significance level $\alpha\in[0,1]$ small enough ($\approx 0.05$ but may vary depending on the problem) with which we accept making mistakes and from here we try to minimize the $\beta$ (or maximize the power $1-\beta$). Thus, $\alpha$ can be thought as $\alpha:=\sup\{\Prob(\text{Reject $\mathcal{H}_0$}\mid\text{$\mathcal{H}_0$ is true}):\theta\in\Theta_0\}$. Moreover having fixed $\alpha$, we obtain a confidence level $1-\alpha$. And if we impose $\Prob(\vf{x}\in A_0)=1-\alpha$, we are able to determine $A_0$.}.
   \end{definition}
   \begin{definition}
-    Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\theta\in\Theta\})$ be a statistical model, $\delta:\mathcal{X}\rightarrow\{\mathcal{H}_0,\mathcal{H}_1\}$ be a hypothesis test and $\vf{x}\in\mathcal{X}$ be a realization of $\vf{X}_n$. We define the \emph{power function} as: $$\Pi(\theta)=\Prob(\text{Reject $\mathcal{H}_0$})=\Prob(\vf{x}\in A_1)$$
+    Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\theta\in\Theta=\Theta_0\sqcup\Theta_1\})$ be a statistical model, $\delta:\mathcal{X}=A_1\sqcup A_2\rightarrow\{\mathcal{H}_0,\mathcal{H}_1\}$ be a hypothesis test and $\vf{x}\in\mathcal{X}$ be a realization of $\vf{X}_n$. We define the \emph{power function} as: $$\Pi(\theta)=\Prob(\text{Reject $\mathcal{H}_0$})=\Prob(\vf{x}\in A_1)$$
   \end{definition}
   \begin{proposition}
-    Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\theta\in\Theta\})$ be a statistical model, $\vf{x}\in\mathcal{X}$ be a realization of $\vf{X}_n$ and $\delta:\mathcal{X}\rightarrow\{\mathcal{H}_0,\mathcal{H}_1\}$ be a hypothesis test. Then:
+    Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\theta\in\Theta=\Theta_0\sqcup\Theta_1\})$ be a statistical model, $\vf{x}\in\mathcal{X}$ be a realization of $\vf{X}_n$ and $\delta:\mathcal{X}=A_1\sqcup A_2\rightarrow\{\mathcal{H}_0,\mathcal{H}_1\}$ be a hypothesis test. Then:
     $$
       \Pi(\theta)=\left\{
       \begin{array}{lcc}
@@ -356,7 +360,22 @@
     $$
   \end{proposition}
   \begin{definition}[Significance testing]
-    Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\theta\in\Theta\})$ be a statistical model, $\vf{x}\in\mathcal{X}$ be a realization of $\vf{X}_n$,  $\delta:\mathcal{X}\rightarrow\{\mathcal{H}_0,\mathcal{H}_1\}$ such that $\Theta_0=\{\theta_0\}$, and $\hat{\theta}$ be an unbiased estimator of $\theta$. and suppose that we have obtained and observation $\vartheta>\theta_0$. We define the \emph{$p$-value} as the probability $\Prob(\hat{\theta}\geq\vartheta)$. In the case of $\vartheta<\theta_0$ the $p$-value is the probability $\Prob(\hat{\theta}\geq\vartheta)$.
+    Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\theta\in\Theta=\Theta_0\sqcup\Theta_1\})$ be a statistical model, $\vf{x}\in\mathcal{X}$ be a realization of $\vf{X}_n$, $\delta:\mathcal{X}=A_1\sqcup A_2\rightarrow\{\mathcal{H}_0,\mathcal{H}_1\}$ be a hypothesis test such that $\Theta_0=\{\theta_0\}$, and $\hat{\theta}$ be an unbiased estimator of $\theta$. Suppose that we have obtained and observation $\hat{\theta}(\vf{x})=\vartheta>\theta_0$. We define the \emph{$p$-value} as the probability $\Prob(\hat{\theta}\geq\vartheta)$. In the case of $\vartheta<\theta_0$ the $p$-value is defined to be the probability $\Prob(\hat{\theta}\leq\vartheta)$. That is, the $p$-value is the probability of obtaining test results at least as extreme as the results actually observed.
   \end{definition}
+  \subsubsection{Simple hypothesis testing}
+  \begin{definition}[Neymann-Pearson test]
+    Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\theta\in\Theta=\Theta_0\sqcup\Theta_1\})$ be a statistical model, $\vf{x}\in\mathcal{X}$ be a realization of $\vf{X}_n$, $\delta:\mathcal{X}=A_1\sqcup A_2\rightarrow\{\mathcal{H}_0,\mathcal{H}_1\}$ be a hypothesis test such that $\Theta_0=\{\theta_0\}$ and $\Theta_1=\{\theta_1\}$. We say that $\delta$ is a \emph{Neyman-Pearson test} of significance level $\alpha\in[0,1]$ if $\exists C>0$ such that:
+    \begin{gather*}
+      \left\{\vf{x}\in\mathcal{X}:\frac{L(\theta_1;\vf{x})}{L(\theta_0;\vf{x})}\geq C\right\}\subseteq A_1\\
+      \left\{\vf{x}\in\mathcal{X}:\frac{L(\theta_1;\vf{x})}{L(\theta_0;\vf{x})}\leq C\right\}\subseteq A_0
+    \end{gather*}
+    and $\Prob(\vf{x}\in A_1\mid \theta=\theta_0)=\alpha$.
+  \end{definition}
+  \begin{lemma}[Neyman-Pearson lemma]
+    Any Neyman-Pearson test is the most powerful test among all tests with significance level $\alpha$.
+  \end{lemma}
+  \begin{theorem}
+    Any test of significance level $\alpha$ and maximum power is a Neyman-Pearson test.
+  \end{theorem}
 \end{multicols}
 \end{document}
