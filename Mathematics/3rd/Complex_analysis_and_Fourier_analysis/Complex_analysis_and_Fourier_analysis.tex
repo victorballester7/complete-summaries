@@ -97,6 +97,23 @@
   \begin{proposition}
     Thinking complex numbers as an ordered pair of real numbers, the topology of $\CC$ induced by $d$ is the same as the ordinary topology of $\RR^2$.
   \end{proposition}
+  \begin{definition}
+    We define the \emph{extended complex plane} as $\CC_\infty:=\CC\cup\{\infty\}$. We define the \emph{extended real numbers} as $\RR_\infty:=\RR\cup\{\infty\}$. The topologies added to those sets are the ones given by the one-point compactification\footnote{See \cref{TOP_alex}.}.
+  \end{definition}
+  \begin{definition}[Stereographic projection]
+    The \emph{stereographic projection} is the function $p:S^2\rightarrow\CC_\infty$ defined as:
+    $$p(x_1,x_2,x_3)=\left\{
+      \begin{array}{lcl}
+        \frac{x_1}{1-x_3}+\ii\frac{x_2}{1-x_3} & \text{if} & x_3\ne 1 \\
+        \infty                                 & \text{if} & x_3= 1
+      \end{array}\right.$$
+    The inverse of the stereographic projection $p^{-1}:\CC_\infty\rightarrow S^2$ is:
+    $$p^{-1}(z)=\left\{
+      \begin{array}{lcl}
+        \left(\frac{z+\overline{z}}{1+\abs{z}^2},\frac{z-\overline{z}}{\ii(1+{\abs{z}}^2)},\frac{{\abs{z}}^2-1}{1+{\abs{z}}^2}\right) & \text{if} & z\in\CC  \\
+        (0,0,1)                                                                                                                       & \text{if} & z=\infty
+      \end{array}\right.$$
+  \end{definition}
   \subsection{Sequences and series}
   \subsubsection{Sequences}
   \begin{definition}
@@ -143,7 +160,7 @@
     Let $(z_n)\in\CC$ be a sequence. A \emph{numeric series of complex numbers} is an expression of the form $$\sum_{n=1}^\infty z_n$$ We call $z_n$ \emph{general term of the series} and $\displaystyle S_N:=\sum_{n=1}^N z_n$, for all $N\in\NN $, \emph{$N$-th partial sum of the series}\footnote{From now on we will write $\sum z_n$ to refer $\displaystyle\sum_{n=1}^\infty z_n$.}.
   \end{definition}
   \begin{definition}
-    We say the series of complex numbers $\sum z_n$ is \emph{convergent} if $\displaystyle S=\lim_{N\to\infty}S_N$ exists and it is finite. In that case, $S$ is called the \emph{sum of the series}. If the previous limit doesn't exists or it is infinite, we say the series is \emph{divergent}\footnote{We will use the notation $\sum a_n<\infty$ or $\sum a_n=+\infty$ to express that the series converges or diverges, respectively.}.
+    We say the series of complex numbers $\sum z_n$ is \emph{convergent} if $\displaystyle S=\lim_{N\to\infty}S_N$ exists and it is finite. In that case, $S$ is called the \emph{sum of the series}. If the previous limit doesn't exist or it is infinite, we say the series is \emph{divergent}\footnote{We will use the notation $\sum a_n<\infty$ or $\sum a_n=+\infty$ to express that the series converges or diverges, respectively.}.
   \end{definition}
   \begin{definition}
     Let $\sum z_n$ be a series of complex numbers.  A \emph{reordering} of $\sum z_n$ is any series $\sum z_{\sigma(n)}$, where $\sigma:\NN\rightarrow\NN$ be a bijective function.
@@ -281,7 +298,7 @@
   \end{theorem}
   \subsubsection{Power series}
   \begin{definition}
-    Let $(a_n)\in\CC$ be a sequence and $z_0\in\CC$. A \emph{complex power series} centred at $z_0$ is a series of functions of the form $$\sum_{n=0}^\infty a_n{(z-z_0)}^n$$
+    Let $(a_n)\in\CC$ be a sequence and $z_0\in\CC$. A \emph{complex power series} centered at $z_0$ is a series of functions of the form $$\sum_{n=0}^\infty a_n{(z-z_0)}^n$$
   \end{definition}
   \begin{proposition}
     Let $\sum a_n{(z-z_0)}^n$ be a complex power series. Suppose there exists an $x_1\in\RR $ such that $\sum a_n(x_1-x_0)^n<\infty$. Then, $\sum a_n{(z-z_0)}^n$ converges uniformly on any closed interval $I\subset A=\{x\in\RR :\abs{z-z_0}<\abs{x_1-x_0}\}$.
@@ -310,7 +327,7 @@
     For all $z \in \CC$, we define the \textit{complex exponential function} as: $$\exp{z}:=\sum_{n=0}^\infty\frac{z^n}{n!}$$
   \end{definition}
   \begin{proposition}
-    The radius of convergence of $\exp{z}$ is infinite and its image is $\CC^*$.
+    The radius of convergence of $\exp{z}$ is infinite, and its image is $\CC^*$.
   \end{proposition}
   \begin{proposition}
     Let $z,w\in\CC$. Then:
@@ -490,7 +507,7 @@
     Let $U\subseteq\CC$ be an open set, $f:U\longrightarrow\CC^*$ be a holomorphic function and $g:U\rightarrow\CC$ be a determination of the logarithm. Then, $g$ is holomorphic and: $$g'(z)=\frac{f'(z)}{f(z)}\quad \forall z\in U$$
     In particular, ${\left(\ln z\right)}'=\frac{1}{z}$.
   \end{corollary}
-  \subsubsection{Cauchy-Rieamann equations}
+  \subsubsection{Cauchy-Riemann equations}
   \begin{definition}
     Let $U\subseteq \CC$ be an open set, $z_0 \in U$ and $f:U\rightarrow \CC$ be a function. We define the partial derivatives of $f$ at $z_0$ as
     \begin{align*}
@@ -530,10 +547,10 @@
     \begin{equation}\label{CAFA_cauchyrieamann}
       \pdv{u}{x}(z_0)=\pdv{v}{y}(z_0)\qquad\pdv{v}{x}(z_0)=-\pdv{u}{y}(z_0)
     \end{equation}
-    Theses equations are called \emph{Cauchy-Riemann equations}.
+    These equations are called \emph{Cauchy-Riemann equations}.
   \end{theorem}
   \begin{corollary}
-    Let $U\subseteq \CC$ be an open set, $u,v:U\rightarrow\CC$ be functions such that they partial derivatives exists, are continuos and satisfying \cref{CAFA_cauchyrieamann}. Then, $f=u+\ii v$ is holomorphic on $U$.
+    Let $U\subseteq \CC$ be an open set, $u,v:U\rightarrow\CC$ be functions such that their partial derivatives exists, are continuous and satisfying \cref{CAFA_cauchyrieamann}. Then, $f=u+\ii v$ is holomorphic on $U$.
   \end{corollary}
   \begin{definition}
     Let $U\subseteq \CC$ be an open set, $f:U\rightarrow \CC$ be a function. We define \emph{Wirtinger operators} as:
@@ -578,6 +595,96 @@
     $$v(x+\ii y)=\int_{y_0}^y\pdv{u}{x}(x+\ii t)\dd{t}-\int_{x_0}^x\pdv{u}{y}(t+\ii y_0)\dd{t}+C$$
     for some constant $C\in\RR$.
   \end{proposition}
+  \subsection{Möbius transformations}
+  \subsubsection{Möbius transformations}
+  \begin{definition}[Möbius transformations]
+    A \emph{Möbius transformation}\footnote{Also called linear fractional transformation, homography or homographic transformation.} of the complex plane is a rational function $f:\CC_\infty\rightarrow\CC_\infty$ of the form: $$f(z)=\frac{az+b}{cz+d}$$ with $a,b,c,d\in\CC$ and $ad-bc\ne 0$. The special values $f(\infty)$ and $f\left(-\frac{d}{c}\right)$ are defined conveniently as $f(\infty)=\frac{a}{c}$ and $f\left(-\frac{d}{c}\right)=\infty$. The set of all Möbius transformations is denoted by $\mathcal{M}$.
+  \end{definition}
+  \begin{proposition}
+    Let $f,g\in\mathcal{M}$ such that $$f(z)=\frac{az+b}{cz+d}\quad\text{and}\quad g(z)=\frac{a'z+b'}{c'z+d'}$$
+    Then, $f(z)=g(z)\iff \exists\lambda\in\CC^*$ such that $a'=\lambda a$, $b'=\lambda b$, $c'=\lambda c$ and $d'=\lambda d$.
+  \end{proposition}
+  \begin{proposition}
+    If $f\in\mathcal{M}$, then $f$ is a homeomorphism of $\CC_\infty$ and if $\circ$ denotes the composition of Möbius transformations, $(\mathcal{M},\circ)$ is a non-abelian group. Moreover we have the following group morphism:
+    $$\function{}{\GL_2(\CC)}{\mathcal{M}}{\begin{pmatrix}
+          a & b \\
+          c & d
+        \end{pmatrix}}{\displaystyle\frac{az+b}{cz+d}}$$
+  \end{proposition}
+  \begin{definition}
+    Let $f\in\mathcal{M}$ and $a,\exp{\ii\theta}\in\CC$. We say that $f$ is
+    \begin{itemize}
+      \item a \emph{translation} if $f(z)=z+a$.
+      \item a \emph{rotation} if $f(z)=\exp{\ii\theta}z$.
+      \item a \emph{dilatation} if $a\ne 0$ and $f(z)=az$.
+      \item an \emph{inversion} if $f(z)=\frac{1}{z}$.
+    \end{itemize}
+  \end{definition}
+  \begin{theorem}
+    Let $f\in\mathcal{M}$. Then, $f$ is a composition of a finite number of translations and dilatations and an inversion.
+  \end{theorem}
+  \begin{proposition}
+    Let $f=\frac{az+b}{cz+d}\in\mathcal{M}$. Then, $z\in\CC_\infty$ is a fixed point for $f$ if and only if: $$c^2z+(d-a)z-b=0$$
+    Hence, $f$ can have at most two fixed points.
+  \end{proposition}
+  \begin{corollary}
+    Let $f,g\in\mathcal{M}$ such that they coincide in three points. Then, $f=g$.
+  \end{corollary}
+  \subsubsection{Cross ratio}
+  \begin{definition}
+    Let $z_2,z_3,z_4\in\CC_\infty$ be distinct points and $z\in\CC_\infty$. We define the \emph{cross ratio} of $z$, $z_2$, $z_3$ and $z_4$, denoted by $(z,z_2,z_3,z_4)$ as the image under the unique Möbius transformation $f\in\mathcal{M}$ such that $f(z_2)=1$, $f(z_3)=0$ and $f(z_4)=\infty$.
+  \end{definition}
+  \begin{proposition}
+    Let $z_2,z_3,z_4\in\CC_\infty$ be distinct points and $z\in\CC_\infty$. Then: $$(z,z_2,z_3,z_4)=\frac{z-z_3}{z-z_4}\cdot\frac{z_2-z_4}{z_2-z_3}$$
+  \end{proposition}
+  \begin{corollary}
+    Let $z_1,z_2,z_3\in\CC_\infty$ and $w_1,w_2,w_3\in\CC_\infty$ be two triplets of distinct points. Then, $\exists! f\in\mathcal{M}$ such that: $$f(z_1)=w_1\quad f(z_2)=w_2\quad f(z_3)=w_3$$
+  \end{corollary}
+  \begin{theorem}
+    Let $z_1,z_2,z_3\in\CC_\infty$ be distinct points and $f\in\mathcal{M}$. Then: $$(z,z_2,z_3,z_4)=(f(z),f(z_2),f(z_3),f(z_4))$$
+  \end{theorem}
+  \subsubsection{Circles in \texorpdfstring{$\CC_\infty$}{Coo}}
+  \begin{definition}
+    We define a \emph{circle} in $\CC_\infty$ as a circle in $\CC$ or the set $r\cup\{\infty\}$, where $r$ is a line in $\CC$\footnote{Note that with this definition $\RR_\infty$ is a circle.}.
+  \end{definition}
+  \begin{proposition}
+    Given three points of $\CC_\infty$, there exists a unite circle that passes through them.
+  \end{proposition}
+  \begin{proposition}
+    Let $f\in\mathcal{M}$. Then, $f(\RR_\infty)$ is a circle of $\CC_\infty$.
+  \end{proposition}
+  \begin{proposition}
+    Let $z_1,z_2,z_3,z_4\in\CC_\infty$ be distinct points. Then, these points lie on a circle if and only if $(z_1,z_2,z_3,z_4)\in\RR_\infty$
+  \end{proposition}
+  \begin{theorem}
+    Let $f\in\mathcal{M}$ and $C\subset\CC_\infty$ be a circle. Then, $f(C)\subset\CC_\infty$ is also a circle.
+  \end{theorem}
+  \subsubsection{Orientation and symmetry}
+  \begin{definition}
+    Let $C\subset\CC_\infty$ be a circle and $z_2,z_3,z_4\in C$. An \emph{orientation} of $C$ is an ordered triplet $(z_2,z_3,z_4)$\footnote{The orientation is determined by going from $z_2$ to $z_3$ without passing through $z_4$, by going form $z_3$ to $z_4$ without passing through $z_2$ and by going form $z_4$ to $z_2$ without passing through $z_3$, all these travels always on $C$.}. This determines a partition of the plane into three sets:
+    \begin{itemize}
+      \item \emph{Right side} of $C$: $\{z\in\CC_\infty:\Im(z,z_2,z_3,z_4)>0\}$
+      \item \emph{Left side} of $C$: $\{z\in\CC_\infty:\Im(z,z_2,z_3,z_4)<0\}$
+      \item \emph{Center} of $C$: $\{z\in\CC_\infty:\Im(z,z_2,z_3,z_4)=0\}$
+    \end{itemize}
+  \end{definition}
+  \begin{theorem}[Orientation principle]
+    Let $C\subset\CC_\infty$ be a circle, $(z_1,z_2,z_3)$ be an orientation of $C$, and $f\in\mathcal{M}$. Then, $C':=f(C)$ is a circle and $f$ carries the right/left side of $C$ to the right/left side of $C'$.
+  \end{theorem}
+  \begin{definition}
+    Let $C\subset\CC_\infty$ be a circle, $z_2,z_3,z_4\in C$ and $z,z^*\in\CC_\infty$. We say that $z$ and $z^*$ are symmetrics with respect to $C$ if: $$(z,z_2,z_3,z_4)=\overline{(z^*,z_2,z_3,z_4)}\footnote{It can be seen that this definition does not depend on the triplet $(z_2,z_3,z_4)$ chosen.}$$ The function $$\function{R_C}{\CC_\infty}{\CC_\infty}{z}{z^*}$$ is called \emph{reflection}.
+  \end{definition}
+  \begin{theorem}[Symmetry principle]
+    Let $C\subset\CC_\infty$ be a circle, $f\in\mathcal{M}$ and $z,z^*\in\CC_\infty$. Then, if $z$, $z^*$ are symmetric with respect to $C$, then $f(z)$ and $f(z^*)$ are symmetric with respect to $f(C)$.
+  \end{theorem}
+  \begin{proposition}
+    Let $C\subset\CC$ be a circle of center $a$ and radius $R$. Then: $$R_C(z)=a+\frac{R^2}{\abs{z-a}^2}(z-a)$$
+  \end{proposition}
+  \begin{proposition}
+    Let $a\in\CC$ with $\abs{a}<1$ and $\theta\in\RR$. Then, the Möbius transformations
+    $$f(z)=\exp{\ii \theta}\frac{z-a}{1-\overline{a}z}$$
+    are the unique holomorphic and bijective functions that carry $D(0,1)$ to $D(0,1)$.
+  \end{proposition}
   \subsection{Integration}
   \begin{definition}
     Let $f:[a,b]\subset\RR\rightarrow\CC$ be a function such that $f=u+\ii v$ with $u,v:[a,b]\rightarrow\RR$. We define the \emph{integral} of $f$ on the interval $[a,b]$ as: $$\int_a^bf(t)\dd{t}:=\int_a^bu(t)\dd{t}+\ii\int_a^bv(t)\dd{t}$$
@@ -598,8 +705,11 @@
   \begin{definition}
     Let $\gamma_1:[a,b]\rightarrow\CC$, $\gamma_2:[c,d]\rightarrow\CC$ be two curves\footnote{Recall \cref{DG_curves}.} of class $\mathcal{C}^1$ such that $\gamma_1(t_1)=\gamma_2(t_2)=z_0\in\CC$ for some $t_1\in[a,b]$ and $t_2\in[c,d]$. Suppose that ${\gamma_1}'(t_1),{\gamma_2}'(t_2)\ne 0$. We define the angle between $\gamma_1$ and $\gamma_2$ at $z_0$ as $$\arg{\gamma_1}'(t_1)-\arg{\gamma_2}'(t_2)$$ which does not depend on the determination of the argument.
   \end{definition}
+  \begin{definition}
+    Let $U\subseteq \CC$ be an open set, $f:U\rightarrow\CC$ be a function and $z_0\in\CC$. We say that $f$ is \emph{conformal} at $z_0$ if it preserves the oriented angle between curves that intersect at $z_0$. We say that $f$ is \emph{conformal} if it is conformal at each point $z\in U$.
+  \end{definition}
   \begin{theorem}
-    Let $U\subseteq \CC$ be an open set and $f\in\mathcal{H}(U)$. Then, $f$ preserves angles (magnitude and direction) at the points $z\in U$ such that $f'(z)\ne 0$..
+    Let $U\subseteq \CC$ be an open set and $f\in\mathcal{H}(U)$. Then, $f$ conformal at the points $z\in U$ such that $f'(z)\ne 0$.
   \end{theorem}
   \begin{definition}
     Let $\gamma:[a,b]\rightarrow U$ be a $\mathcal{C}^1$-piecewise path. We define the inverse path $\gamma^-:[a,b]\rightarrow\CC$ as $\gamma^-(t)=\gamma(a+b-t)$
@@ -649,11 +759,56 @@
   \begin{theorem}[Goursat's theorem]
     Let $U\subseteq \CC$ be an open set, $f\in\mathcal{H}(U)$ and $\gamma$ be a triangular path such that $\overline{D(\gamma)}\subseteq U$. Then: $$\int_\gamma f(z)\dd{z}=0$$
   \end{theorem}
-  \begin{theorem}[Cauchy's integral theorem]
-    Let $U\subseteq \CC$ be a connected open set, $f\in\mathcal{H}(U)$ and $\gamma:[a,b]\rightarrow\CC$ be a closed $\mathcal{C}^1$-piecewise curve. Then: $$\int_\gamma f(z)\dd{z}=0$$
+  \begin{theorem}[Local Cauchy's integral theorem]
+    Let $U\subseteq \CC$ be a convex open set, $f\in\mathcal{H}(U)$ and $\gamma:[a,b]\rightarrow\CC$ be a closed $\mathcal{C}^1$-piecewise curve with $\gamma^*\subset U$. Then: $$\int_\gamma f(z)\dd{z}=0$$
   \end{theorem}
   \begin{lemma}
-    Let $U\subseteq \CC$ be an open connected set, $z_0\in U$, $f\in\mathcal{H}(U\setminus\{p\})$ and $\gamma:[a,b]\rightarrow\CC$ be a closed $\mathcal{C}^1$-piecewise curve such that $\gamma^*\subseteq U\setminus\{z_0\}$. Suppose $\displaystyle\lim_{z\to z_0}f(z)(z-z_0)=0$. Then: $$\int_\gamma f(z)\dd{z}=0$$
+    Let $U\subseteq \CC$ be an open and convex set, $z_0\in U$, $f\in\mathcal{H}(U\setminus\{p\})$ and $\gamma:[a,b]\rightarrow\CC$ be a closed $\mathcal{C}^1$-piecewise curve such that $\gamma^*\subseteq U\setminus\{z_0\}$. Suppose $\displaystyle\lim_{z\to z_0}f(z)(z-z_0)=0$. Then: $$\int_\gamma f(z)\dd{z}=0$$
   \end{lemma}
+  \begin{definition}
+    We define the \emph{Fresnel integrals} $S(z)$ and $C(z)$ as:
+    $$S(z)=\int_0^z{\left(\sin\zeta\right)}^2\dd{\zeta}\qquad C(z)=\int_0^z{\left(\cos\zeta\right)}^2\dd{\zeta}$$
+  \end{definition}
+  \subsubsection{Index of a curve}
+  \begin{theorem}
+    Let $\gamma:[a,b]\rightarrow\CC$ be a closed curve and $z_0\notin\gamma^*$. Then, there exist an open disc $D_0$ centered at $z_0$ such that $D_0\cap\gamma^*=\varnothing$, and a determination $\Phi:[a,b]\times D_0\rightarrow\CC$ of $\ln(\gamma(t)-z_0)$. Moreover, given $t\in[a,b]$ the function $z\mapsto \Phi(t,z)$ is holomorphic and for each $z\in D_0$ the function $t\mapsto\Phi(t,z)$ has the same differentiability as $\gamma$.
+  \end{theorem}
+  \begin{definition}
+    Let $\gamma:[a,b]\rightarrow\CC$ be a closed curve, $z_0\notin\gamma^*$ and $\Phi:[a,b]\times D_0\rightarrow\CC$ be a determination of $\ln(\gamma(t)-z_0)$. We define the \emph{index} of $\gamma$ with respect to $z_0$, denoted by $\Ind(\gamma,z_0)$, as: $$\Ind(\gamma,z_0):=\frac{\Phi(b,z_0)-\Phi(a,z_0)}{2\pi\ii}\footnote{Intuitively it can be though as the number of turns made by $\gamma$ around $z_0$.}$$
+  \end{definition}
+  \begin{proposition}
+    Let $\gamma:[a,b]\rightarrow\CC$ be a closed curve and $z_0\notin\gamma^*$. Then:
+    \begin{enumerate}
+      \item The value $\Ind(\gamma,z_0)\in\ZZ$ does not depend on the determination of $\ln(\gamma(t)-z_0)$ chosen.
+      \item $\Ind(\gamma,z_0)\in\ZZ$.
+      \item $\Ind(\gamma^-,z_0)=-\Ind(\gamma,z_0)$.
+      \item The function $$\function{}{\gamma^*}{\ZZ}{z}{\Ind(\gamma,z)}$$ is continuous and therefore it is constant on each connected component of $\CC\setminus\gamma^*$.
+      \item If $z\in\CC\setminus\gamma^*$ is in the unbounded component of $\CC\setminus\gamma^*$, then $\Ind(\gamma,z)=0$.
+    \end{enumerate}
+  \end{proposition}
+  \begin{theorem}
+    Let $\gamma:[a,b]\rightarrow\CC$ be a closed $\mathcal{C}^1$-piecewise curve and $z_0\notin\gamma^*$. Then:
+    $$\Ind(\gamma,z_0)=\frac{1}{2\pi\ii}\int_\gamma\frac{\dd{z}}{z-z_0}$$
+  \end{theorem}
+  \begin{theorem}
+    Let $U$ be an open and convex set, $f\in\mathcal{H}(U)$, $\gamma:[a,b]\rightarrow\CC$ be a closed $\mathcal{C}^1$-piecewise curve and $z_0\notin\gamma^*$. Then:
+    $$f(z_0)\Ind(\gamma,z_0)=\frac{1}{2\pi\ii}\int_\gamma\frac{f(z)}{z-z_0}\dd{z}$$
+  \end{theorem}
+  \begin{corollary}
+    Let $U$ be an open and convex set, $f\in\mathcal{H}(U)$, $z_0\in\CC$ and $r\in\RR_{\geq 0}$. Then:
+    $$f(z_0)=\frac{1}{2\pi}\int_0^{2\pi}f(z_0+r\exp{\ii\theta})\dd{\theta}$$
+  \end{corollary}
+  \begin{lemma}
+    Let $(f_n)\in U\subseteq\CC$ be a sequence of functions, $f:D\rightarrow\CC$ such that $(f_n)$ converge uniformly to $f$ over compact sets in $D$, and $\gamma:[a,b]\rightarrow\CC$ be a closed $\mathcal{C}^1$-piecewise curve. Then:
+    $$\lim_{n\to\infty}\int_\gamma f_n(z)\dd{z}=\int_\gamma f(z)\dd{z}$$
+  \end{lemma}
+  \begin{corollary}
+    Let $z_0\in\CC$, $f(z)=\sum_{n=0}^\infty a_n{(z-z_0)}^n$. Then:
+    $$\int_0^z f(\zeta)\dd{\zeta}=\sum_{n=0}^\infty a_n\frac{{(z-z_0)}^{n+1}}{n+1}$$
+  \end{corollary}
+  \subsubsection{Analytic functions}
+  \begin{definition}
+    Let $U$ be an open set and $f:U\rightarrow \CC$ be a function. We say that $f$ is \emph{analytic} on $U$ if for each $z_0\in U$, there exists a power series $\sum_{n=0}^\infty a_n{(z-z_0)}^n$ with radius of convergence $R_{z_0}$ such that $$f(z)=\sum_{n=0}^\infty a_n{(z-z_0)}^n$$ in a neighbourhood of $z$.
+  \end{definition}
 \end{multicols}
 \end{document}
