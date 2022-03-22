@@ -344,7 +344,8 @@
       \alpha & :=\Prob(\text{Error of type I})=\Prob(\text{Reject $\mathcal{H}_0$}\mid\text{$\mathcal{H}_0$ is true})   \\
       \beta  & :=\Prob(\text{Error of type II})=\Prob(\text{Accept $\mathcal{H}_0$}\mid\text{$\mathcal{H}_0$ is false})
     \end{align*}
-    The value $1-\beta$ is called \emph{power} of the test and the value $\alpha$, \emph{significance level}\footnote{In practise, we fix a significance level $\alpha\in[0,1]$ small enough ($\approx 0.05$ but may vary depending on the problem) with which we accept making mistakes and from here we try to minimize the $\beta$ (or maximize the power $1-\beta$). Thus, $\alpha$ can be thought as $\alpha:=\sup\{\Prob(\text{Reject $\mathcal{H}_0$}\mid\text{$\mathcal{H}_0$ is true}):\theta\in\Theta_0\}$. Moreover having fixed $\alpha$, we obtain a confidence level $1-\alpha$. And if we impose $\Prob(\vf{x}\in A_0)=1-\alpha$, we are able to determine $A_0$.}.
+    More precisely, if $\vf{x}\in\mathcal{X}$ is a realization of $\vf{X}_n$, then: $$\alpha:=\sup\{\Prob(\vf{x}\in A_1\mid \theta):\theta\in\Theta_0\}$$
+    The value $1-\beta$ is called \emph{power} of the test and the value $\alpha$, \emph{size} of the test. Moreover we say that the test has \emph{significance level} $\alpha\in[0,1]$ if its size is less than or equal to $\alpha$. In many cases, the size of the test and the significance level are equal\footnote{In practise, we fix a significance level $\alpha\in[0,1]$ small enough ($\approx 0.05$ but may vary depending on the problem) with which we accept making mistakes and from here we try to minimize the $\beta$ (or maximize the power $1-\beta$). Moreover having fixed $\alpha$, we obtain a confidence level $1-\alpha$. And if we impose $\Prob(\vf{x}\in A_0)=1-\alpha$, we are able to determine $A_0$.}.
   \end{definition}
   \begin{definition}
     Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\theta\in\Theta=\Theta_0\sqcup\Theta_1\})$ be a statistical model, $\delta:\mathcal{X}=A_1\sqcup A_2\rightarrow\{\mathcal{H}_0,\mathcal{H}_1\}$ be a hypothesis test and $\vf{x}\in\mathcal{X}$ be a realization of $\vf{X}_n$. We define the \emph{power function} as: $$\Pi(\theta)=\Prob(\text{Reject $\mathcal{H}_0$})=\Prob(\vf{x}\in A_1)$$
@@ -366,10 +367,10 @@
   \begin{definition}[Neymann-Pearson test]
     Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\theta\in\Theta=\Theta_0\sqcup\Theta_1\})$ be a statistical model, $\vf{x}\in\mathcal{X}$ be a realization of $\vf{X}_n$, $\delta:\mathcal{X}=A_1\sqcup A_2\rightarrow\{\mathcal{H}_0,\mathcal{H}_1\}$ be a hypothesis test such that $\Theta_0=\{\theta_0\}$ and $\Theta_1=\{\theta_1\}$. We say that $\delta$ is a \emph{Neyman-Pearson test} of significance level $\alpha\in[0,1]$ if $\exists C>0$ such that:
     \begin{gather*}
-      \left\{\vf{x}\in\mathcal{X}:\frac{L(\theta_1;\vf{x})}{L(\theta_0;\vf{x})}\geq C\right\}\subseteq A_1\\
-      \left\{\vf{x}\in\mathcal{X}:\frac{L(\theta_1;\vf{x})}{L(\theta_0;\vf{x})}\leq C\right\}\subseteq A_0
+      \left\{\vf{x}\in\mathcal{X}:\frac{L(\theta_1;\vf{x})}{L(\theta_0;\vf{x})}< C\right\}= A_0\\
+      \left\{\vf{x}\in\mathcal{X}:\frac{L(\theta_1;\vf{x})}{L(\theta_0;\vf{x})}\geq C\right\}= A_1
     \end{gather*}
-    and $\Prob(\vf{x}\in A_1\mid \theta=\theta_0)=\alpha$.
+    and $\Prob(\vf{x}\in A_1\mid \mathcal{H}_0)=\alpha$.
   \end{definition}
   \begin{lemma}[Neyman-Pearson lemma]
     Any Neyman-Pearson test is the most powerful test among all tests with significance level $\alpha$.
