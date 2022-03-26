@@ -15,11 +15,11 @@
     \begin{equation*}
       \arraycolsep=1pt
       \left\{
-      \begin{array}{ccccc}
-        a_{11}x_1 & + \cdots + & a_{1n}x_n & = & b_1    \\
-        \vdots    & \vdots     & \vdots    &   & \vdots \\
-        a_{m1}x_1 & + \cdots + & a_{mn}x_n & = & b_m
-      \end{array}
+      \begin{aligned}
+        a_{11}x_1  + \cdots +  a_{1n}x_n & =  b_1     \\
+                                         & \;\;\vdots \\
+        a_{m1}x_1  + \cdots +  a_{mn}x_n & =  b_m
+      \end{aligned}
       \right.
     \end{equation*}
     be a system of linear equations. A \emph{solution of a system of equations} is a set of numbers $c_1,\ldots,c_n$ such that $$a_{i1}c_1+\cdots+a_{in}c_n=b_i$$ for $i=1,\ldots,m$. A linear system may behave in three possible ways:
@@ -517,12 +517,12 @@
     is a isomorphism. Therefore, $\dim V^*=\dim V$.
   \end{proposition}
   \begin{definition}
-    We define the \emph{Kronecker delta} $\delta_{ij}$ as the function: $$\delta_{ij}=\left\{
-      \begin{array}{ccc}
-        0 & \text{if} & i\ne j \\
-        1 & \text{if} & i=j
-      \end{array}
-      \right.$$
+    We define the \emph{Kronecker delta} $\delta_{ij}$ as the function: $$\delta_{ij}=
+      \begin{cases}{ccc}
+        0 & \text{if }i\ne j \\
+        1 & \text{if }i=j
+      \end{cases}
+    $$
   \end{definition}
   \begin{definition}
     Let $V$ be a finite vector space and $\mathcal{B}=(\vf{v}_1,\ldots,\vf{v}_n)$ be a basis of $V$. We define the \emph{dual basis} $\mathcal{B}^*$ of $\mathcal{B}$ as the basis of $V^*$ formed by $(\eta_1,\ldots,\eta_n)$ where $$\eta_i(\vf{v}_j)=\delta_{ij}$$
@@ -560,12 +560,13 @@
   \begin{lemma}
     Let $V$ be a vector space and $U\subseteq V^*$ be a vector subspace of $V^*$. If $U=\langle\omega_1,\ldots,\omega_n\rangle$, then $U^0$ is the set of solutions of the system:
     $$\left\{
-      \begin{array}{c}
-        \omega_1(\vf{v})=0 \\
-        \vdots             \\
-        \omega_n(\vf{v})=0
-      \end{array}
-      \right.$$
+      \begin{aligned}
+        \omega_1(\vf{v}) & =0         \\
+                         & \;\;\vdots \\
+        \omega_n(\vf{v}) & =0
+      \end{aligned}
+      \right.
+    $$
   \end{lemma}
   \begin{lemma}
     Let $V$ be a vector space and $U\subseteq V^*$ be a vector subspace of $V^*$. Then, $U^0$ is a vector subspace of $V^*$.
@@ -874,7 +875,7 @@
     for $i=1,2$ is called \emph{orthogonal projection} of $V$ onto $U_i$ according to the decomposition $V=U_1\perp U_2$.
   \end{definition}
   \begin{method}[Gram-Schmidt process]
-    Let $V$ be a finite vector space over a field $K$, $\mathcal{B}=(\vf{v}_1,\ldots,\vf{v}_n)$ be a basis of $V$ and $\varphi:V\times V\rightarrow K$ be a symmetric bilinear form. $\forall\vf{u},\vf{v}\in V$, we define $$\text{proj}_{\vf{u}}(\vf{v})=\frac{\varphi(\vf{u},\vf{v})}{\varphi(\vf{u},\vf{u})}\vf{u}$$ We will create an orthogonal basis $(\vf{u}_1,\ldots,\vf{u}_n)$ of $V$ from $\mathcal{B}$. We define $\vf{u}_i$, $i=1,\ldots,n$ to be:
+    Let $V$ be a finite vector space over a field $K$, $\mathcal{B}=(\vf{v}_1,\ldots,\vf{v}_n)$ be a basis of $V$ and $\varphi:V\times V\rightarrow K$ be a symmetric bilinear form. $\forall\vf{u},\vf{v}\in V$, we define $$\text{proj}_{\vf{u}}(\vf{v})=\frac{\varphi(\vf{u},\vf{v})}{\varphi(\vf{u},\vf{u})}\vf{u}$$ We will create an orthogonal basis $(\vf{u}_1,\ldots,\vf{u}_n)$ of $V$ from $\mathcal{B}$. We define $\vf{u}_i$, $i=1,\ldots,n$, to be:
     \begin{align*}
       \vf{u}_1 & =\vf{v}_1                                                                   \\
       \vf{u}_2 & =\vf{v}_2-\text{proj}_{\vf{u}_1}(\vf{v}_2)                                  \\
@@ -882,7 +883,7 @@
                & \;\;\vdots                                                                  \\
       \vf{u}_n & =\vf{v}_n-\sum_{i=1}^{n-1}\text{proj}_{\vf{u}_i}(\vf{v}_n)
     \end{align*}
-    To obtain an orthogonal basis $(\vf{e}_1,\ldots,\vf{e}_n)$ of $V$ from $\mathcal{B}$, define $\vf{e}_i$, $i=1,\ldots,n$ to be: $$\vf{e}_i=\frac{\vf{u}_i}{\sqrt{\varphi(\vf{u}_i,\vf{u}_i)}}$$
+    To obtain an orthogonal basis $(\vf{e}_1,\ldots,\vf{e}_n)$ of $V$ from $\mathcal{B}$, define $\vf{e}_i$, $i=1,\ldots,n$, to be: $$\vf{e}_i=\frac{\vf{u}_i}{\sqrt{\varphi(\vf{u}_i,\vf{u}_i)}}$$
   \end{method}
   \subsubsection{Sylvester's law of inertia}
   \begin{definition}

@@ -82,20 +82,20 @@
   For the following methods consider a continuous function $f:I\subseteq\RR\rightarrow\RR$ with an unknown zero $\alpha\in I$. Given $\varepsilon>0$, we want to approximate $\alpha$ with $\Tilde{\alpha}$ such that $|\alpha-\Tilde{\alpha}|<\varepsilon$.
   \begin{method}[Bisection method]
     Suppose $I=[a_0,b_0]$. For each step $n\geq 0$ of the algorithm we will approximate $\alpha$ by $$c_n=\frac{a_n+b_n}{2}$$ If $f(c_n)=0$ we are done. If not, let
-    $$[a_{n+1},b_{n+1}]=\left\{
-      \begin{array}{ccc}
-        [a_n,c_n]            & \text{if} & f(a_n)f(c_n)<0 \\
-        \left[c_n,b_n\right] & \text{if} & f(a_n)f(c_n)>0
-      \end{array}\right.$$
+    $$[a_{n+1},b_{n+1}]=
+      \begin{cases}
+        [a_n,c_n]            & \text{if }f(a_n)f(c_n)<0 \\
+        \left[c_n,b_n\right] & \text{if }f(a_n)f(c_n)>0
+      \end{cases}$$
     and iterate the process again\footnote{Note that bisection method only works for zeros of odd multiplicity.}. The length of the interval $[a_n,b_n]$ is $\frac{b_0-a_0}{2^n}$ and therefore: $$|\alpha-c_n|<\frac{b_0-a_0}{2^{n+1}}<\varepsilon\iff n>\frac{\log\left(\frac{b_0-a_0}{\varepsilon}\right)}{\log 2}-1$$
   \end{method}
   \begin{method}[\textit{Regula falsi} method]
     Suppose $I=[a_0,b_0]$. For each step $n\geq 0$ of the algorithm we will approximate $\alpha$ by $$c_n=b_n-f(b_n)\frac{b_n-a_n}{f(b_n)-f(a_n)}=\frac{a_nf(b_n)-b_nf(a_n)}{f(b_n)-f(a_n)}$$ If $f(c_n)=0$ we are done. If not, let
-    $$[a_{n+1},b_{n+1}]=\left\{
-      \begin{array}{ccc}
-        [a_n,c_n]            & \text{if} & f(a_n)f(c_n)<0 \\
-        \left[c_n,b_n\right] & \text{if} & f(a_n)f(c_n)>0
-      \end{array}\right.$$
+    $$[a_{n+1},b_{n+1}]=
+      \begin{cases}
+        [a_n,c_n]            & \text{if }f(a_n)f(c_n)<0 \\
+        \left[c_n,b_n\right] & \text{if }f(a_n)f(c_n)>0
+      \end{cases}$$
     and iterate the process again.
   \end{method}
   \begin{method}[Secant method]
@@ -289,7 +289,7 @@
     Let $f:[a,b]\rightarrow\RR$ be a function and $\{x_i\}_{i=0}^n\subset\RR$ be equally-spaced points. Then: $$\Delta^nf(x_0)=n!h^nf[x_0,\ldots,x_n]$$
   \end{lemma}
   \begin{corollary}
-    Let $f\in\RR[x]$ with $\deg f=n$. Suppose we interpolate $f$ with equally-spaced nodes. Then, $\Delta^nf(x)\equiv\text{constant}$.
+    Let $f\in\RR[x]$ with $\deg f=n$. Suppose we interpolate $f$ with equally-spaced nodes. Then, $\Delta^nf(x)=\const$
   \end{corollary}
   \subsubsection{Hermite interpolation}
   \begin{definition}
@@ -583,11 +583,10 @@
   \begin{definition}
     Suppose we want to solve the system $\vf{A}\vf{x}=\vf{b}$, where $\vf{A}\in\mathcal{M}_n(\RR)$ and $\vf{b}\in\RR^n$. We choose a matrix $\vf{N}\in\GL_n(\RR)$ and define $\vf{P}:=\vf{N}-\vf{A}$. Then: $$\vf{A}\vf{x}=\vf{b}\iff \vf{x}=\vf{N}^{-1}\vf{P}\vf{x}+\vf{N}^{-1}\vf{b}=:\vf{M}\vf{x}+\vf{N}^{-1}\vf{b}$$ The matrix $\vf{M}$ is called the \emph{iteration matrix}. This defines a fixed-point iteration in the following way:
     \begin{equation*}
-      \left\{
-      \begin{array}{l}
+      \begin{cases}
         \vf{x}^{(k+1)}=\vf{M}\vf{x}^{(k)}+\vf{N}^{-1}\vf{b} \\
         \vf{x}^{(0)}\quad\text{(initial approximation)}
-      \end{array}\right.
+      \end{cases}
     \end{equation*}
   \end{definition}
   \begin{theorem}

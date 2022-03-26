@@ -99,7 +99,7 @@
         \frac{1}{n}\sum_{i=1}^nx_i     & =\mu_1(\theta_1,\ldots,\theta_d) \\
         \frac{1}{n}\sum_{i=1}^n{x_i}^2 & =\mu_2(\theta_1,\ldots,\theta_d) \\
                                        & \;\;\vdots                       \\
-        \frac{1}{n}\sum_{i=1}^n{x_i}^d & =\mu_d(\theta_1,\ldots,\theta_d) \\
+        \frac{1}{n}\sum_{i=1}^n{x_i}^d & =\mu_d(\theta_1,\ldots,\theta_d)
       \end{aligned}
       \right.
     $$
@@ -345,7 +345,7 @@
       \beta  & :=\Prob(\text{Error of type II})=\Prob(\text{Accept $\mathcal{H}_0$}\mid\text{$\mathcal{H}_0$ is false})
     \end{align*}
     More precisely, if $\vf{x}\in\mathcal{X}$ is a realization of $\vf{X}_n$, then: $$\alpha:=\sup\{\Prob(\vf{x}\in A_1\mid \theta):\theta\in\Theta_0\}$$
-    The value $1-\beta$ is called \emph{power} of the test and the value $\alpha$, \emph{size} of the test. Moreover we say that the test has \emph{significance level} $\alpha\in[0,1]$ if its size is less than or equal to $\alpha$. In many cases, the size of the test and the significance level are equal\footnote{In practise, we fix a significance level $\alpha\in[0,1]$ small enough ($\approx 0.05$ but may vary depending on the problem) with which we accept making mistakes and from here we try to minimize the $\beta$ (or maximize the power $1-\beta$). Moreover having fixed $\alpha$, we obtain a confidence level $1-\alpha$. And if we impose $\Prob(\vf{x}\in A_0)=1-\alpha$, we are able to determine $A_0$.}.
+    The value $1-\beta$ is called \emph{power} of the test and the value $\alpha$, \emph{size} of the test. Moreover we say that the test has \emph{significance level} $\alpha\in[0,1]$ if its size is less than or equal to $\alpha$. In many cases, the size of the test and the significance level are equal\footnote{In particular, for simple hypostesis they are the same thing.}\footnote{In practise, we fix a significance level $\alpha\in[0,1]$ small enough ($\approx 0.05$ but may vary depending on the problem) with which we accept making mistakes and from here we try to minimize the $\beta$ (or maximize the power $1-\beta$). Moreover having fixed $\alpha$, we obtain a confidence level $1-\alpha$. And if we impose $\Prob(\vf{x}\in A_0)=1-\alpha$, we are able to determine $A_0$.}.
   \end{definition}
   \begin{definition}
     Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\theta\in\Theta=\Theta_0\sqcup\Theta_1\})$ be a statistical model, $\delta:\mathcal{X}=A_1\sqcup A_2\rightarrow\{\mathcal{H}_0,\mathcal{H}_1\}$ be a hypothesis test and $\vf{x}\in\mathcal{X}$ be a realization of $\vf{X}_n$. We define the \emph{power function} as: $$\Pi(\theta)=\Prob(\text{Reject $\mathcal{H}_0$})=\Prob(\vf{x}\in A_1)$$
@@ -353,22 +353,22 @@
   \begin{proposition}
     Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\theta\in\Theta=\Theta_0\sqcup\Theta_1\})$ be a statistical model, $\vf{x}\in\mathcal{X}$ be a realization of $\vf{X}_n$ and $\delta:\mathcal{X}=A_1\sqcup A_2\rightarrow\{\mathcal{H}_0,\mathcal{H}_1\}$ be a hypothesis test. Then:
     $$
-      \Pi(\theta)=\left\{
-      \begin{array}{lcc}
-        \alpha  & \text{if} & \theta\in\Theta_0 \\
-        1-\beta & \text{if} & \theta\in\Theta_1
-      \end{array}\right.
+      \Pi(\theta)=
+      \begin{cases}
+        \alpha  & \text{if }\theta\in\Theta_0 \\
+        1-\beta & \text{if }\theta\in\Theta_1
+      \end{cases}
     $$
   \end{proposition}
   \begin{definition}[Significance testing]
     Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\theta\in\Theta=\Theta_0\sqcup\Theta_1\})$ be a statistical model, $\vf{x}\in\mathcal{X}$ be a realization of $\vf{X}_n$, $\delta:\mathcal{X}=A_1\sqcup A_2\rightarrow\{\mathcal{H}_0,\mathcal{H}_1\}$ be a hypothesis test such that $\Theta_0=\{\theta_0\}$, and $\hat{\theta}$ be an unbiased estimator of $\theta$. Suppose that we have obtained and observation $\hat{\theta}(\vf{x})=\vartheta>\theta_0$. We define the \emph{$p$-value} as the probability $\Prob(\hat{\theta}\geq\vartheta)$. In the case of $\vartheta<\theta_0$ the $p$-value is defined to be the probability $\Prob(\hat{\theta}\leq\vartheta)$. That is, the $p$-value is the probability of obtaining test results at least as extreme as the results actually observed.
   \end{definition}
-  \subsubsection{Simple hypothesis testing}
+  \subsubsection{Neymann-Pearson test}
   \begin{definition}[Neymann-Pearson test]
-    Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\theta\in\Theta=\Theta_0\sqcup\Theta_1\})$ be a statistical model, $\vf{x}\in\mathcal{X}$ be a realization of $\vf{X}_n$, $\delta:\mathcal{X}=A_1\sqcup A_2\rightarrow\{\mathcal{H}_0,\mathcal{H}_1\}$ be a hypothesis test such that $\Theta_0=\{\theta_0\}$ and $\Theta_1=\{\theta_1\}$. We say that $\delta$ is a \emph{Neyman-Pearson test} of significance level $\alpha\in[0,1]$ if $\exists C>0$ such that:
+    Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\theta\in\Theta=\Theta_0\sqcup\Theta_1\})$ be a statistical model, $\vf{x}\in\mathcal{X}$ be a realization of $\vf{X}_n$, $\delta:\mathcal{X}=A_1\sqcup A_2\rightarrow\{\mathcal{H}_0,\mathcal{H}_1\}$ be a hypothesis test such that $\Theta_0=\{\theta_0\}$ and $\Theta_1=\{\theta_1\}$. We say that $\delta$ is a \emph{Neyman-Pearson test} (or \emph{Likelihood-ratio test}) of significance level $\alpha\in[0,1]$ if $\exists C>0$ such that:
     \begin{gather*}
-      \left\{\vf{x}\in\mathcal{X}:\frac{L(\theta_1;\vf{x})}{L(\theta_0;\vf{x})}< C\right\}= A_0\\
-      \left\{\vf{x}\in\mathcal{X}:\frac{L(\theta_1;\vf{x})}{L(\theta_0;\vf{x})}\geq C\right\}= A_1
+      \left\{\vf{x}\in\mathcal{X}:\frac{L(\theta_1;\vf{x})}{L(\theta_0;\vf{x})}\leq C\right\}= A_0\\
+      \left\{\vf{x}\in\mathcal{X}:\frac{L(\theta_1;\vf{x})}{L(\theta_0;\vf{x})}> C\right\}= A_1
     \end{gather*}
     and $\Prob(\vf{x}\in A_1\mid \mathcal{H}_0)=\alpha$.
   \end{definition}

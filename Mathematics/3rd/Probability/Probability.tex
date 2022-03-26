@@ -639,11 +639,11 @@
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $(X,Y)$ be a discrete random vector with support $S_X\times S_Y$. Then, the pmf of $Y$ together with the pmf of $X$ conditioned to $Y=y$ determine the pmf of $X$ in the following way: $$\Prob(X=x)=\sum_{y\in S_Y}p_{X\mid Y}(x\mid y)p_Y(y)\quad\forall x\in S_X$$
   \end{proposition}
   \begin{definition}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X,Y)$ be an absolutely continuous random vector and $y\in S_Y$. The \emph{conditional probability density function} of $X$ given $Y=y$ is defined as: $$f_{X\mid Y}(x\mid y):=\left\{
-      \begin{array}{ccc}
-        \frac{f_{(X,Y)}(x,y)}{f_Y(y)} & \text{if} & f_Y(y)>0 \\
-        a                             & \text{if} & f_Y(y)=0
-      \end{array}\right.
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X,Y)$ be an absolutely continuous random vector and $y\in S_Y$. The \emph{conditional probability density function} of $X$ given $Y=y$ is defined as: $$f_{X\mid Y}(x\mid y):=
+      \begin{cases}
+        \frac{f_{(X,Y)}(x,y)}{f_Y(y)} & \text{if }f_Y(y)>0 \\
+        a                             & \text{if }f_Y(y)=0
+      \end{cases}
     $$ where $x\in\RR$ and $a\in\RR$ is an arbitrary value\footnote{Usually chosen equal to 0.}.
   \end{definition}
   \begin{proposition}
@@ -1224,13 +1224,13 @@
     %\hline
     $\text{NB}(r,p)$             & $\displaystyle {\left(\frac{1-p}{1-p\exp{t}}\right)}^r$ for $t<-\ln p$    & $\displaystyle {\left(\frac{1-p}{1-p\exp{\ii t}}\right)}^r$     \\
     %\hline
-    $U(a,b)$                     & $\displaystyle \left\{\begin{array}{ccc}
-        \frac{\exp{tb}-\exp{ta}}{t(b-a)} & \text{if} & t\ne 0 \\
-        1                                & \text{if} & t=0
-      \end{array}\right.$                 & $\displaystyle \left\{\begin{array}{ccc}
-        \frac{\exp{\ii tb}-\exp{\ii ta}}{\ii t(b-a)} & \text{if} & t\ne 0 \\
-        1                                            & \text{if} & t=0
-      \end{array}\right.$       \\
+    $U(a,b)$                     & $\displaystyle \begin{cases}
+        \frac{\exp{tb}-\exp{ta}}{t(b-a)} & \text{if }t\ne 0 \\
+        1                                & \text{if }t=0
+      \end{cases}$                               & $\displaystyle \begin{cases}
+        \frac{\exp{\ii tb}-\exp{\ii ta}}{\ii t(b-a)} & \text{if }t\ne 0 \\
+        1                                            & \text{if }t=0
+      \end{cases}.$                    \\
     %\hline
     $\text{Exp}(\lambda)$        & $\displaystyle \frac{\lambda}{\lambda-t}$  for $t<\lambda$                & $\displaystyle \frac{\lambda}{\lambda-\ii t}$                   \\
     %\hline

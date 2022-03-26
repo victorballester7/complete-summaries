@@ -71,14 +71,14 @@
   \end{definition}
   \begin{proposition}
     Let $z=a+b\ii\in\CC$. Then:
-    $$\Arg z=\left\{
-      \begin{array}{lcl}
-        \arctan\left(\frac{y}{x}\right)     & \text{if} & x>0         \\
-        \arctan\left(\frac{y}{x}\right)+\pi & \text{if} & x<0,y\geq 0 \\
-        \arctan\left(\frac{y}{x}\right)-\pi & \text{if} & x<0,y<0     \\
-        \sign{(y)}\frac{\pi}{2}             & \text{if} & x=0
-      \end{array}
-      \right.$$
+    $$\Arg z=
+      \begin{cases}
+        \arctan\left(\frac{y}{x}\right)     & \text{if }x>0         \\
+        \arctan\left(\frac{y}{x}\right)+\pi & \text{if }x<0,y\geq 0 \\
+        \arctan\left(\frac{y}{x}\right)-\pi & \text{if }x<0,y<0     \\
+        \sign{(y)}\frac{\pi}{2}             & \text{if }x=0
+      \end{cases}
+    $$
   \end{proposition}
   \begin{proposition}
     Let $z, w \in \CC$ and $n\in\ZZ$. Then:
@@ -102,17 +102,17 @@
   \end{definition}
   \begin{definition}[Stereographic projection]
     The \emph{stereographic projection} is the function $p:S^2\rightarrow\CC_\infty$ defined as:
-    $$p(x_1,x_2,x_3)=\left\{
-      \begin{array}{lcl}
-        \frac{x_1}{1-x_3}+\ii\frac{x_2}{1-x_3} & \text{if} & x_3\ne 1 \\
-        \infty                                 & \text{if} & x_3= 1
-      \end{array}\right.$$
+    $$p(x_1,x_2,x_3)=
+      \begin{cases}
+        \frac{x_1}{1-x_3}+\ii\frac{x_2}{1-x_3} & \text{if }x_3\ne 1 \\
+        \infty                                 & \text{if }x_3= 1
+      \end{cases}$$
     The inverse of the stereographic projection $p^{-1}:\CC_\infty\rightarrow S^2$ is:
-    $$p^{-1}(z)=\left\{
-      \begin{array}{lcl}
-        \left(\frac{z+\overline{z}}{1+\abs{z}^2},\frac{z-\overline{z}}{\ii(1+{\abs{z}}^2)},\frac{{\abs{z}}^2-1}{1+{\abs{z}}^2}\right) & \text{if} & z\in\CC  \\
-        (0,0,1)                                                                                                                       & \text{if} & z=\infty
-      \end{array}\right.$$
+    $$p^{-1}(z)=
+      \begin{cases}
+        \left(\frac{z+\overline{z}}{1+\abs{z}^2},\frac{z-\overline{z}}{\ii(1+{\abs{z}}^2)},\frac{{\abs{z}}^2-1}{1+{\abs{z}}^2}\right) & \text{if }z\in\CC  \\
+        (0,0,1)                                                                                                                       & \text{if }z=\infty
+      \end{cases}$$
   \end{definition}
   \subsection{Sequences and series}
   \subsubsection{Sequences}
@@ -774,7 +774,7 @@
     Let $\gamma:[a,b]\rightarrow\CC$ be a closed curve and $z_0\notin\gamma^*$. Then, there exist an open disc $D_0$ centered at $z_0$ such that $D_0\cap\gamma^*=\varnothing$, and a determination $\Phi:[a,b]\times D_0\rightarrow\CC$ of $\ln(\gamma(t)-z_0)$. Moreover, given $t\in[a,b]$ the function $z\mapsto \Phi(t,z)$ is holomorphic and for each $z\in D_0$ the function $t\mapsto\Phi(t,z)$ has the same differentiability as $\gamma$.
   \end{theorem}
   \begin{definition}
-    Let $\gamma:[a,b]\rightarrow\CC$ be a closed curve, $z_0\notin\gamma^*$ and $\Phi:[a,b]\times D_0\rightarrow\CC$ be a determination of $\ln(\gamma(t)-z_0)$. We define the \emph{index} of $\gamma$ with respect to $z_0$, denoted by $\Ind(\gamma,z_0)$, as: $$\Ind(\gamma,z_0):=\frac{\Phi(b,z_0)-\Phi(a,z_0)}{2\pi\ii}\footnote{Intuitively it can be though as the number of turns made by $\gamma$ around $z_0$.}$$
+    Let $\gamma:[a,b]\rightarrow\CC$ be a closed curve, $z_0\notin\gamma^*$ and $\Phi:[a,b]\times D_0\rightarrow\CC$ be a determination of $\ln(\gamma(t)-z_0)$. We define the \emph{index} (or \emph{winding number}) of $\gamma$ with respect to $z_0$, denoted by $\Ind(\gamma,z_0)$, as: $$\Ind(\gamma,z_0):=\frac{\Phi(b,z_0)-\Phi(a,z_0)}{2\pi\ii}\footnote{Intuitively it can be though as the number of turns made by $\gamma$ around $z_0$.}$$
   \end{definition}
   \begin{proposition}
     Let $\gamma:[a,b]\rightarrow\CC$ be a closed curve and $z_0\notin\gamma^*$. Then:
@@ -790,16 +790,16 @@
     Let $\gamma:[a,b]\rightarrow\CC$ be a closed $\mathcal{C}^1$-piecewise curve and $z_0\notin\gamma^*$. Then:
     $$\Ind(\gamma,z_0)=\frac{1}{2\pi\ii}\int_\gamma\frac{\dd{z}}{z-z_0}$$
   \end{theorem}
-  \begin{theorem}
-    Let $U$ be an open and convex set, $f\in\mathcal{H}(U)$, $\gamma:[a,b]\rightarrow\CC$ be a closed $\mathcal{C}^1$-piecewise curve and $z_0\notin\gamma^*$. Then:
-    $$f(z_0)\Ind(\gamma,z_0)=\frac{1}{2\pi\ii}\int_\gamma\frac{f(z)}{z-z_0}\dd{z}$$
+  \begin{theorem}[Cauchy's integral theorem]
+    Let $U\subseteq\CC$ be an open and convex set, $f\in\mathcal{H}(U)$, $\gamma:[a,b]\rightarrow\CC$ be a closed $\mathcal{C}^1$-piecewise curve and $z_0\notin\gamma^*$. Then:
+    $$f(z_0)\cdot\Ind(\gamma,z_0)=\frac{1}{2\pi\ii}\int_\gamma\frac{f(z)}{z-z_0}\dd{z}$$
   \end{theorem}
   \begin{corollary}
-    Let $U$ be an open and convex set, $f\in\mathcal{H}(U)$, $z_0\in\CC$ and $r\in\RR_{\geq 0}$. Then:
+    Let $U\subseteq\CC$ be an open and convex set, $f\in\mathcal{H}(U)$, $z_0\in\CC$ and $r\in\RR_{\geq 0}$. Then:
     $$f(z_0)=\frac{1}{2\pi}\int_0^{2\pi}f(z_0+r\exp{\ii\theta})\dd{\theta}$$
   \end{corollary}
   \begin{lemma}
-    Let $(f_n)\in U\subseteq\CC$ be a sequence of functions, $f:D\rightarrow\CC$ such that $(f_n)$ converge uniformly to $f$ over compact sets in $D$, and $\gamma:[a,b]\rightarrow\CC$ be a closed $\mathcal{C}^1$-piecewise curve. Then:
+    Let $U\subseteq\CC$ be an open, $(f_n)\in U\subseteq\CC$ be a sequence of functions, $f:D\rightarrow\CC$ such that $(f_n)$ converge uniformly to $f$ over compact sets in $D$, and $\gamma:[a,b]\rightarrow\CC$ be a closed $\mathcal{C}^1$-piecewise curve. Then:
     $$\lim_{n\to\infty}\int_\gamma f_n(z)\dd{z}=\int_\gamma f(z)\dd{z}$$
   \end{lemma}
   \begin{corollary}
@@ -808,7 +808,64 @@
   \end{corollary}
   \subsubsection{Analytic functions}
   \begin{definition}
-    Let $U$ be an open set and $f:U\rightarrow \CC$ be a function. We say that $f$ is \emph{analytic} on $U$ if for each $z_0\in U$, there exists a power series $\sum_{n=0}^\infty a_n{(z-z_0)}^n$ with radius of convergence $R_{z_0}$ such that $$f(z)=\sum_{n=0}^\infty a_n{(z-z_0)}^n$$ in a neighbourhood of $z$.
+    Let $U\subseteq\CC$ be an open set and $f:U\rightarrow \CC$ be a function. We say that $f$ is \emph{analytic} on $U$ if for each $z_0\in U$, there exists a power series $\sum_{n=0}^\infty a_n{(z-z_0)}^n$ with radius of convergence $R_{z_0}$ such that $$f(z)=\sum_{n=0}^\infty a_n{(z-z_0)}^n$$ in a neighbourhood of $z$.
   \end{definition}
+  \begin{theorem}
+    Let $U\subseteq\CC$ be an open set and $f\in\mathcal{H}(U)$. Then, $\forall z_0\in U$ there exists a power series $\sum a_n{(z-z_0)}^n$ with radius of convergence $R_{z_0}\geq d(z_0,\Fr U)>0$ such that: $$f(z)=\sum_{n=0}^\infty a_n{(z-z_0)}^n$$ That is, $f$ is analytic.
+  \end{theorem}
+  \begin{corollary}
+    Let $U\subseteq\CC$ be an open set and $f:U\rightarrow \CC$ be a function. Then, $f$ is analytic on $U$ if and only if $f$ is holomorphic on $U$ .
+  \end{corollary}
+  \begin{corollary}[Cauchy's integral theorem for derivatives]
+    Let $U\subseteq\CC$ be an open set, $f\in\mathcal{H}(U)$ and $z_0\in U$, $r\in\RR_{>0}$ such that $\overline{D(z_0,r)}\subset U$. Let $\gamma(t)=z_0+r\exp{\ii t}$, $t\in[0,2\pi]$. Then:
+    $$f^{(n)}(z_0)=\frac{n!}{2\pi\ii}\int_\gamma\frac{f(z)}{{(z-z_0)}^{n+1}}\dd{z}$$
+  \end{corollary}
+  \begin{corollary}
+    Let $f\in\mathcal{H}(\CC)$. Then, for all $z_0\in\CC$ there exists a power series $\sum a_n{(z-z_0)}^n$ with infintie radius of convergence such that: $$f(z)=\sum_{n=0}^\infty a_n{(z-z_0)}^n$$
+  \end{corollary}
+  \begin{corollary}
+    Let $f(z)=\sum a_n{(z-z_0)}^n$ be a power series with radius of convergence $R\in(0,\infty)$. Then, $f$ is analytic on $D(z_0,R)$ and $\forall w_0\in D(z_0,R)$ we have $$f(z)=\sum_{n=0}^\infty b_n{(z-w_0)}^n$$ whenever $\abs{z-w_0}<R-|z_0-w_0|$. Here the coefficients $b_n$ can be determined with the formula $b_n=\frac{f^{(n)}(w_0)}{n!}$.
+  \end{corollary}
+  \subsubsection{Some important theorems}
+  \begin{proposition}[Cauchy's inequality]
+    Let $U\subseteq\CC$ be an open set, $f\in\mathcal{H}(U)$ and $z_0\in U$, $r\in\RR_{>0}$ such that $\overline{D(z_0,r)}\subset U$. Let $M=\sup\{\abs{f(z)}:\abs{z-z_0}=r\}$. Then:
+    $$\abs{f^{(n)}(z_0)}\leq\frac{n!M}{r^n}$$
+  \end{proposition}
+  \begin{theorem}[Liouville's theorem]
+    Let $f\in\mathcal{H}(\CC)$ and bounded. Then, $f$ is constant.
+  \end{theorem}
+  \begin{corollary}
+    Let $f\in\mathcal{H}(\CC)$ such that $\Re(f(z))>0$ $\forall z\in\CC$. Then, $f$ is constant.
+  \end{corollary}
+  \begin{theorem}[Fundamental theorem of algebra]
+    Let $p(z)=a_0+a_1z\cdots+a_nz^n\in\CC[z]$ with $a_n\ne 0$. Then, $\exists \alpha\in \CC$ such that $p(\alpha)=0$.
+  \end{theorem}
+  \begin{corollary}
+    $\CC$ is an algebraically closed field.
+  \end{corollary}
+  \begin{proposition}[Cardano-Vieta's formulas]
+    Let $p(z)=a_0+a_1z\cdots+a_nz^n\in\CC[z]$ with $a_n\ne 0$ and with roots $\alpha_1,\ldots,\alpha_n$. Then, we have the following relations:
+    \begin{align*}
+      \sum_{i=1}^n\alpha_i                   & =                    -\frac{a_{n-1}}{a_n}  \\
+      \sum_{1\leq i<j\leq n}\alpha_i\alpha_j & =  \frac{a_{n-2}}{a_n}                     \\
+                                             & \;\;\vdots                                 \\
+      \alpha_1\cdots\alpha_n                 & =                  {(-1)}^n\frac{a_0}{a_n}
+    \end{align*}
+  \end{proposition}
+  \subsubsection{Zeros of holomorphic functions}
+  \begin{theorem}
+    Let $U\subseteq\CC$ be an open convex set and $f\in\mathcal{H}(U)$. Then, the following statements are equivalent:
+    \begin{enumerate}
+      \item $f(z)=0$.
+      \item $\exists z_0\in U$ such that $f^{(n)}(z_0)=0$ $\forall n\in\NN\cup\{0\}$.
+      \item ${\{z\in U:f(z)=0\}}'\cap U\ne\varnothing$.
+    \end{enumerate}
+  \end{theorem}
+  \begin{corollary}
+    Let $U\subseteq\CC$ be an open convex set and $f\in\mathcal{H}(U)$ such that $f$ is not identically zero. Then, if $z_0\in U$ is a zero of $f$, $\exists m\in\NN$ and $g\in\mathcal{H}(U)$ such that $g(z_0)\ne 0$ and: $$f(z)={(z-z_0)}^{m}g(z)$$ The value of $m$ is called \emph{multiplicity} of $z_0$. In particular, the zeros of $f$ are isolated.
+  \end{corollary}
+  \begin{theorem}[Analytic contiuation]
+    Let $U\subseteq\CC$ be an open convex set and $f,g\in\mathcal{H}(U)$ such that ${\{z\in U:f(z)-g(z)=0\}}'\cap U\ne\varnothing$. Then, $f(z)=g(z)$ $\forall z\in U$
+  \end{theorem}
 \end{multicols}
 \end{document}
