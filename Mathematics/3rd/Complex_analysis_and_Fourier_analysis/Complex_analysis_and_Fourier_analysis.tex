@@ -52,9 +52,9 @@
       \item $\abs{z\cdot w}=\abs{z}\cdot \abs{w}$
       \item $\abs{z^n}={\abs{z}}^n$ $\forall n\in\ZZ$
       \item $\displaystyle\abs{\frac{z}{w}}=\frac{\abs{z}}{\abs{w}}$, provided that $w\ne 0$.
-      \item ${\abs{z\pm w}}^2={\abs{z}}^2\abs{z}^2+{\abs{w}}^2\pm 2\Re(z\overline{w})$
-      \item $\abs{z+w}\leq \abs{z}+ \abs{w}$ and the equality holds if and only if $z=\lambda w$, $\lambda\in\RR_{\geq 0}$.
-      \item $\abs{\abs{z}-\abs{w}}\leq \abs{z-w}$ and the equality holds if and only if $z=\lambda w$, $\lambda\in\RR_{\geq 0}$.
+      \item ${\abs{z\pm w}}^2={\abs{z}}^2+{\abs{w}}^2\pm 2\Re(z\overline{w})$
+      \item $\abs{z\pm w}\leq \abs{z}+ \abs{w}$ and the equality holds if and only if $z=\lambda w$, $\lambda\in\RR_{\geq 0}$.
+      \item $\abs{\abs{z}-\abs{w}}\leq \abs{z\pm w}$ and the equality holds if and only if $z=\lambda w$, $\lambda\in\RR_{\geq 0}$.
     \end{enumerate}
   \end{proposition}
   \begin{corollary}
@@ -66,8 +66,15 @@
     \end{itemize}
   \end{corollary}
   \begin{definition}
-    Let $z \in \CC^*$. We define the \textit{argument} of $z$, denoted by $\arg{z}$, as the real number $\theta$ satisfying: $$z = \abs{z}(\cos{\theta} + \ii\sin{\theta})$$ Note that $\arg{z}$ is not unique. We define the \textit{principal argument} of $z$ as the unique real number $\theta$ satisfying:
+    Let $z \in \CC^*$. We define the \textit{argument} of $z$, denoted by $\arg{z}$, as the real number $\theta$ satisfying: $$z = \abs{z}(\cos{\theta} + \ii\sin{\theta})$$ Note that $\arg{z}$ is not unique. Because of that, we say that $\arg z$ is a \emph{multivalued function}.
+  \end{definition}
+  \begin{definition}
+    Let $D\subseteq \CC^*$ be a set. A \emph{determination of the argument} on $D$ is a function $g:D\rightarrow \RR$ such that $g(z)\in\arg z$ $\forall z\in D$. That is, $g$ is the choice of a value in $\arg z$ for each $z\in D$.
+  \end{definition}
+  \begin{definition}
+    Let $z \in \CC^*$. We define the \textit{principal argument} of $z$ as the unique real number $\theta$ satisfying:
     $$\Arg z := \{\theta \in (-\pi, \pi]:z = \abs{z}(\cos{\theta} + \ii\sin{\theta})\}$$
+    Note that this determination of the argument is not continuous.
   \end{definition}
   \begin{proposition}
     Let $z=a+b\ii\in\CC$. Then:
@@ -80,16 +87,6 @@
       \end{cases}
     $$
   \end{proposition}
-  \begin{proposition}
-    Let $z, w \in \CC$ and $n\in\ZZ$. Then:
-    \begin{enumerate}
-      \item $\arg(zw) = \arg z + \arg w$
-      \item $\arg(z^n) = n \arg{z}$
-    \end{enumerate}
-  \end{proposition}
-  \begin{definition}[Polar form]
-    Let $z\in\CC$, $r=\abs{z}$ and $\theta=\arg z$. We define the \emph{polar form} of $z$ as: $$z = r(\cos{\theta} + \ii\sin{\theta})$$
-  \end{definition}
   \subsubsection{Metric topology of \texorpdfstring{$\CC$}{C}}
   \begin{proposition}
     Consider the distance $d$ defined as: $$\function{d}{\CC\times\CC}{\RR}{(z,w)}{\abs{z-w}}$$ Then, $(\CC,d)$ is a metric space\footnote{In order to simplify the notation we will refer to $(\CC,d)$ simply as $\CC$.}.
@@ -114,6 +111,13 @@
         (0,0,1)                                                                                                                       & \text{if }z=\infty
       \end{cases}$$
   \end{definition}
+  \begin{center}
+    \begin{minipage}{\linewidth}
+      \centering
+      \includestandalone[mode=image|tex,width=\linewidth]{Images/stereo}
+      \captionof{figure}{Stereographic projection}
+    \end{minipage}
+  \end{center}
   \subsection{Sequences and series}
   \subsubsection{Sequences}
   \begin{definition}
@@ -123,7 +127,7 @@
     Let $(z_n)\in\CC$ be a sequence. A subsequence of $(z_n)$ is a sequence $(z_{k_n})$, where $(k_n)\in\NN$ is an increasing sequence of natural numbers.
   \end{definition}
   \begin{definition}
-    Let $(z_n)\in\CC$ be a sequence. We say that $(z_n)$ has \emph{limit} $z\in\CC$ (or it \textit{converges} to $z$) if $\forall\varepsilon>0$, $\exists n_0\in\NN$ such that $$\abs{z_n - z} < \varepsilon\quad \forall n > n_0$$ In that case, we will write $\displaystyle\lim_{n \to \infty} z_n = z$ and the sequence is called \emph{convergent}. Otherwise, we say that the sequence is \emph{divergent}.
+    Let $(z_n)\in\CC$ be a sequence. We say that $(z_n)$ has \emph{limit} $z\in\CC$ (or it \textit{converges} to $z$) if $\forall\varepsilon>0$, $\exists n_0\in\NN$ such that $$\abs{z_n - z} < \varepsilon\quad \forall n > n_0$$ In that case, we will write $\displaystyle\lim_{n \to \infty} z_n = z$ and we say that sequence is \emph{convergent}. Otherwise, we say that the sequence is \emph{divergent}.
   \end{definition}
   \begin{definition}
     Let $(z_n)\in\CC$ be a sequence. We say that $(z_n)$ is \emph{bounded} if $\exists M\in\RR$ such that $\abs{z_n}\leq M$ $\forall n\in\NN$.
@@ -157,19 +161,19 @@
   \end{theorem}
   \subsubsection{Series}
   \begin{definition}
-    Let $(z_n)\in\CC$ be a sequence. A \emph{numeric series of complex numbers} is an expression of the form $$\sum_{n=1}^\infty z_n$$ We call $z_n$ \emph{general term of the series} and $\displaystyle S_N:=\sum_{n=1}^N z_n$, for all $N\in\NN $, \emph{$N$-th partial sum of the series}\footnote{From now on we will write $\sum z_n$ to refer $\displaystyle\sum_{n=1}^\infty z_n$.}.
+    Let $(z_n)\in\CC$ be a sequence. A \emph{numeric series of complex numbers} is an expression of the form $$\sum_{n=1}^\infty z_n$$ We call $z_n$ \emph{general term of the series} and $\displaystyle S_N:=\sum_{n=1}^N z_n$, for all $N\in\NN $, \emph{$N$-th partial sum of the series}\footnote{Sometimes we will write $\sum z_n$ to refer to $\displaystyle\sum_{n=1}^\infty z_n$.}.
   \end{definition}
   \begin{definition}
-    We say the series of complex numbers $\sum z_n$ is \emph{convergent} if $\displaystyle S=\lim_{N\to\infty}S_N$ exists and it is finite. In that case, $S$ is called the \emph{sum of the series}. If the previous limit doesn't exist or it is infinite, we say the series is \emph{divergent}\footnote{We will use the notation $\sum a_n<\infty$ or $\sum a_n=+\infty$ to express that the series converges or diverges, respectively.}.
+    We say the series of complex numbers $\sum z_n$ is \emph{convergent} if $\displaystyle S=\lim_{N\to\infty}S_N$ exists and it is finite. In that case, $S$ is called the \emph{sum of the series}. If the previous limit doesn't exist or it is infinite, we say the series is \emph{divergent}\footnote{We will use the notation $\sum z_n<\infty$ or $\sum z_n=+\infty$ to express that the series converges or diverges, respectively.}.
   \end{definition}
   \begin{definition}
-    Let $\sum z_n$ be a series of complex numbers.  A \emph{reordering} of $\sum z_n$ is any series $\sum z_{\sigma(n)}$, where $\sigma:\NN\rightarrow\NN$ be a bijective function.
+    Let $\sum z_n$ be a series of complex numbers. A \emph{reordering} of $\sum z_n$ is any series $\sum z_{\sigma(n)}$, where $\sigma:\NN\rightarrow\NN$ be a bijective function.
   \end{definition}
   \begin{proposition}
     Let $(z_n)\in\CC$ be a sequence and $\sum z_n$ be a convergent series. Then, $\displaystyle\lim_{n\to\infty}z_n =0$.
   \end{proposition}
   \begin{proposition}
-    Let $(z_n)\in\CC$ be a sequence such that such that $z_n=x_n+y_n\ii$ $\forall n\in\NN$, where $x_n,y_n\in\RR$, and $\sum z_n$ be a series. Then, $\sum z_n<\infty$ if and only if $\sum x_n$ and $\sum y_n$. In that case, we have: $$\sum_{n=1}^\infty z_n=\sum_{n=1}^\infty x_n+\ii\sum_{n=1}^\infty y_n$$
+    Let $(z_n)\in\CC$ be a sequence such that such that $z_n=x_n+y_n\ii$ $\forall n\in\NN$, where $x_n,y_n\in\RR$, and $\sum z_n$ be a series. Then, $\sum z_n<\infty$ if and only if $\sum x_n<\infty$ and $\sum y_n<\infty$. In that case, we have: $$\sum_{n=1}^\infty z_n=\sum_{n=1}^\infty x_n+\ii\sum_{n=1}^\infty y_n$$
   \end{proposition}
   \begin{proposition}
     Let $\sum z_n=z\in\CC$ and $\sum w_n=w\in\CC$ be two series, and $\lambda\in\CC$. Then:
@@ -207,30 +211,30 @@
     $$\function{f}{D}{\CC}{z}{f(z)}$$
   \end{definition}
   \begin{definition}
-    Let $D \subseteq \CC$ be a set and $f:D\rightarrow\CC$ be a function. We say that $f$ is \emph{continuos} at $z_0\in D$ if and only if $\forall \varphi>0$ $\exists\delta>0$ such that $\abs{f(z)-f(z_0)}<\delta$ whenever $\abs{z-z_0}<\delta$. We say that $f$ is continuos on $D$ is it is continuos at $z$ $\forall x\in D$.
+    Let $D \subseteq \CC$ be a set and $f:D\rightarrow\CC$ be a function. We say that $f$ is \emph{continuos} at $z_0\in D$ if and only if $\forall \varepsilon>0$ $\exists\delta>0$ such that $\abs{f(z)-f(z_0)}<\varepsilon$ whenever $\abs{z-z_0}<\delta$. We say that $f$ is continuos on $D$ if it is continuos at $z$ $\forall z\in D$.
   \end{definition}
   \begin{definition}
     Let $D \subseteq \CC$ be a set and $f:D\rightarrow\CC$ be a function. We define the function $\Re f$ as the function: $$\function{\Re f}{D}{\CC}{z}{\Re(f(z))}$$
     Analogously, we define the function $\Im f$ as the function: $$\function{\Im f}{D}{\CC}{z}{\Im(f(z))}$$
   \end{definition}
   \begin{proposition}
-    Let $D \subseteq \CC$ be a set $f:D\rightarrow\CC$ be a function and $z_0 \in D$. Then, $f = \Re f + \ii \Im f$ is continuous at $z_0$ if and only if $\Re f$ and $\Im f$ are continuous at $z_0$.
+    Let $D \subseteq \CC$ be a set, $f:D\rightarrow\CC$ be a function and $z_0 \in D$. Then, $f = \Re f + \ii \Im f$ is continuous at $z_0$ if and only if $\Re f$ and $\Im f$ are continuous at $z_0$.
   \end{proposition}
   \begin{proposition}
-    Let $D \subseteq \CC$ be a set $f:D\rightarrow\CC$ be a function and $z_0 \in D$. Then, $f$ is continuous at $z_0$ if and only if for all sequence $(w_n)\in D$ convergent to $z_0$, the sequence $(f(w_n))$ converges to $f(z_0)$.
+    Let $D \subseteq \CC$ be a set, $f:D\rightarrow\CC$ be a function and $z_0 \in D$. Then, $f$ is continuous at $z_0$ if and only if for all sequence $(w_n)\in D$ convergent to $z_0$, the sequence $(f(w_n))$ converges to $f(z_0)$.
   \end{proposition}
   \begin{proposition}
-    Let $D \subseteq \CC$ be a set and $f,g:D \subseteq \CC \longrightarrow \CC$ be two continuous function at a point $z_0 \in D$ and $\lambda \in \CC$. Then, $\lambda f$, $f+g$, and $fg$ are continuous at $z_0$. Moreover, if $g(z_0) \neq 0$ then, $f/g$ is continuous at $z_0$.
+    Let $D \subseteq \CC$ be a set, $f,g:D \subseteq \CC \longrightarrow \CC$ be two continuous function at a point $z_0 \in D$ and $\lambda \in \CC$. Then, $\lambda f$, $f+g$, and $fg$ are continuous at $z_0$. Moreover, if $g(z_0) \neq 0$, then $f/g$ is continuous at $z_0$.
   \end{proposition}
   \subsubsection{Sequences of functions}
   \begin{definition}
-    Let $D\subseteq\CC$. A set $$(f_n(z))=\{f_1(z),f_2(z),\ldots,f_n(z),\ldots\}$$ is a \emph{sequence of complex functions} if $f_i:D\rightarrow\CC $ is a complex function. In this case we say the sequence $(f_n(z))$, or simply $(f_n)$, is well-defined on $D$\footnote{The majority of definitions and results of sequences of real-valued functions can be extended conveniently to sequences of complex functions. So in this document, we will only expose the most important ones.}.
+    Let $D\subseteq\CC$. A set $$(f_n(z))=\{f_1(z),f_2(z),\ldots,f_n(z),\ldots\}$$ is a \emph{sequence of complex functions} if $f_i:D\rightarrow\CC $ is a complex function $\forall i\in\NN$. In this case we say the sequence $(f_n(z))$, or simply $(f_n)$, is well-defined on $D$\footnote{The majority of definitions and results of sequences of real-valued functions can be extended conveniently to sequences of complex functions. So in this document, we will only expose the most important ones.}.
   \end{definition}
   \begin{definition}
-    Let $(f_n)\in D\subseteq\CC$ be a sequence of functions and $f:D\rightarrow\CC$. We say $(f_n)$ \emph{converges pointwise} to $f$ on $D$ if $\forall z\in D$, $\displaystyle\lim_{n\to\infty}f_n(z)=f(z)$
+    Let $(f_n)\in D\subseteq\CC$ be a sequence of functions and $f:D\rightarrow\CC$. We say $(f_n)$ \emph{converges pointwise} to $f$ on $D$ if $\forall z\in D$, $\displaystyle\lim_{n\to\infty}f_n(z)=f(z)$.
   \end{definition}
   \begin{definition}
-    Let $(f_n)\in D\subseteq\CC$ be a sequence of functions and $f:D\rightarrow\CC$. We say $(f_n)$ \emph{converges uniformly} to $f$ on $D$ if $\forall\varepsilon>0$, $\exists n_0:\abs{f_n(z)-f(z)}<\varepsilon$ $\forall n\geq n_0$ and $\forall z\in D$.
+    Let $(f_n)\in D\subseteq\CC$ be a sequence of functions and $f:D\rightarrow\CC$. We say $(f_n)$ \emph{converges uniformly} to $f$ on $D$ if $\forall\varepsilon>0$, $\exists n_0$ such that $\abs{f_n(z)-f(z)}<\varepsilon$ $\forall n\geq n_0$ and $\forall z\in D$.
   \end{definition}
   \begin{lemma}
     Let $(f_n)\in D\subseteq\CC$ be a sequence of functions. $(f_n)$ converges uniformly to $f:D\rightarrow\CC$ on $D$ if and only if $\displaystyle \lim_{n\to\infty}\sup\left\{\abs{f_n(z)-f(z)}:z\in D\right\}=0$.
@@ -246,13 +250,13 @@
     Let $(f_n)\in D\subseteq\CC$ be a sequence of functions. The expression $$\sum_{n=1}^\infty f_n(z)$$ is the \emph{series of functions} associated with $(f_n)$\footnote{The majority of definitions and results of series of real-valued functions can be extended conveniently to series of complex functions. So in this document, we will only expose the most important ones.}.
   \end{definition}
   \begin{definition}
-    A series of functions $\sum f_n(z)$ defined on $D\subseteq\CC$ \emph{converges pointwise} on $D$ if the sequence of partials sums $$F_N(z)=\sum_{n=1}^Nf_n(z)$$ converges pointwise. If the pointwise limit of $(F_N)$ is $F(z)$, we say $F$ is the \emph{sum of the series in a pointwise sense}.
+    A series of functions $\sum f_n(z)$ defined on $D\subseteq\CC$ \emph{converges pointwise} on $D$ if the sequence of partials sums $$F_N(z)=\sum_{n=1}^Nf_n(z)$$ converges pointwise on $D$. If the pointwise limit of $(F_N)$ is $F(z)$, we say $F$ is the \emph{sum of the series in a pointwise sense}.
   \end{definition}
   \begin{definition}
-    A series of functions $\sum f_n(z)$ defined on $D\subseteq\CC$ \emph{converges uniformly} on $D$ if the sequence of partials sums $$F_N(z)=\sum_{n=1}^Nf_n(z)$$ converges uniformly. If the uniform limit of $(F_N)$ is $F(z)$, we say $F$ is the \emph{sum of the series in an uniform sense}.
+    A series of functions $\sum f_n(z)$ defined on $D\subseteq\CC$ \emph{converges uniformly} on $D$ if the sequence of partials sums $$F_N(z)=\sum_{n=1}^Nf_n(z)$$ converges uniformly on $D$. If the uniform limit of $(F_N)$ is $F(z)$, we say $F$ is the \emph{sum of the series in an uniform sense}.
   \end{definition}
   \begin{theorem}[Cauchy's test]
-    A series of functions $\sum f_n(z)$ defined on $D\subseteq\CC$ converges uniformly if and only if $\forall\varepsilon>0$ $\exists n_0$ such that $\forall  M, N\geq n_0$ (with $N\leq M$), we have: $$\sup\left\{\abs{\sum_{n=N}^Mf_n(z)}:z\in D\right\}< \varepsilon$$
+    A series of functions $\sum f_n(z)$ defined on $D\subseteq\CC$ converges uniformly on $D$ if and only if $\forall\varepsilon>0$ $\exists n_0$ such that $\forall  M, N\geq n_0$ (with $N\leq M$), we have: $$\sup\left\{\abs{\sum_{n=N}^Mf_n(z)}:z\in D\right\}< \varepsilon$$
   \end{theorem}
   \begin{corollary}
     Let $(f_n)\in D\subseteq\CC$ be a sequence of functions. If $\sum f_n(z)$ is uniformly convergent on $D\subseteq\CC$, then $(f_n)$ converges uniformly to zero on $D$.
@@ -298,11 +302,8 @@
   \end{theorem}
   \subsubsection{Power series}
   \begin{definition}
-    Let $(a_n)\in\CC$ be a sequence and $z_0\in\CC$. A \emph{complex power series} centered at $z_0$ is a series of functions of the form $$\sum_{n=0}^\infty a_n{(z-z_0)}^n$$
+    Let $(a_n)\in\CC$ be a sequence and $z_0\in\CC$. A \emph{complex power series} centered at $z_0$ is a series of functions of the form: $$\sum_{n=0}^\infty a_n{(z-z_0)}^n$$
   \end{definition}
-  \begin{proposition}
-    Let $\sum a_n{(z-z_0)}^n$ be a complex power series. Suppose there exists an $x_1\in\RR $ such that $\sum a_n(x_1-x_0)^n<\infty$. Then, $\sum a_n{(z-z_0)}^n$ converges uniformly on any closed interval $I\subset A=\{x\in\RR :\abs{z-z_0}<\abs{x_1-x_0}\}$.
-  \end{proposition}
   \begin{theorem}[Cauchy-Hadamard theorem]
     Let $\sum a_n{(z-z_0)}^n$ be a complex power series. Then, $\exists! R\in[0,\infty]$ defined as $$R=\left(\limsup_{n\to\infty}\sqrt[n]{\abs{a_n}}\right)^{-1}\in[0,\infty]$$
     that satisfies the following properties:
@@ -314,10 +315,10 @@
     The number $R$ is called \emph{radius of convergence} of series.
   \end{theorem}
   \begin{theorem}[Abel's theorem]
-    Let $\sum a_n{(z-z_0)}^n$ be a complex power series that converges uniformly in $D\subseteq \CC$. Then, the series $\sum a_n{(z-z_0)}^n$ converges uniformly on $\{r\zeta\in\CC:r\in[0,1]\land\zeta\in D\}$, which is a \emph{cone} with base $D$.
+    Let $\sum a_n{z}^n$ be a complex power series that converges uniformly on $D\subseteq \CC$. Then, the series $\sum a_n{z}^n$ converges uniformly on $\{r\zeta\in\CC:r\in[0,1]\land\zeta\in D\}$, which is a \emph{cone} with base $D$.
   \end{theorem}
   \begin{corollary}[Abel's theorem]
-    Let $\sum a_n{(z-z_0)}^n$ be a complex power series with radius of convergence $R\in(0,\infty)$ and $I\subseteq [0,2\pi)$ be a non-empty connected set. Suppose that the series $\sum a_n{(z-z_0)}^n$ is uniformly convergent on $D:=\{R\exp{\ii \theta}\in\CC: \theta\in I\}$. Then, $f(z):=\sum a_n{(z-z_0)}^n$ converges uniformly on the cone $C$ with base $D$. In particular, we have: $$\lim_{\substack{z\to R\exp{\ii \theta}\\z\in C}}f(z)=\sum_{n=0}^\infty a_nR^n\exp{\ii n\theta}\qquad\forall\theta\in J$$
+    Let $\sum a_n{z}^n$ be a complex power series with radius of convergence $R\in(0,\infty)$ and $I\subseteq [0,2\pi)$ be a non-empty connected set. Suppose that the series $\sum a_n{z}^n$ is uniformly convergent on $D:=\{R\exp{\ii \theta}\in\CC: \theta\in I\}$. Then, $f(z):=\sum a_n{z}^n$ converges uniformly on the cone $C$ with base $D$. In particular, we have: $$\lim_{\substack{z\to R\exp{\ii \theta}\\z\in C}}f(z)=\sum_{n=0}^\infty a_nR^n\exp{\ii n\theta}\qquad\forall\theta\in I$$
   \end{corollary}
   \begin{proposition}
     Let $f:\CC\rightarrow\CC$ be the sum function of a complex power series. Then $f$ is continuous on the domain of convergence of the series.
@@ -340,6 +341,16 @@
   \begin{corollary}[Euler's formula]
     Let $x\in\RR$. Then: $$\exp{\ii x}=\cos x+\ii \sin x$$
   \end{corollary}
+  \begin{proposition}
+    Let $z, w \in \CC$ and $n\in\ZZ$. Then:
+    \begin{enumerate}
+      \item $\arg(zw) = \arg z + \arg w$
+      \item $\arg(z^n) = n \arg{z}$
+    \end{enumerate}
+  \end{proposition}
+  \begin{definition}[Polar form]
+    Let $z\in\CC$, $r=\abs{z}$ and $\theta=\arg z$. We define the \emph{polar form} of $z$ as: $$z = r\exp{\ii\theta}=r(\cos{\theta} + \ii\sin{\theta})$$
+  \end{definition}
   \begin{corollary}
     Let $z,w\in\CC$. Then:
     \begin{enumerate}
@@ -361,7 +372,7 @@
     Let $z\in\CC^*$. Then, the equation $\exp{w}=z$ has infinitely many solutions.
   \end{proposition}
   \begin{definition}
-    Let $z\in \CC$. We define a \emph{complex natural logarithm} of $z$ as a solution to the equation $\exp{w}=z$. That is: $$\ln z:=\ln \abs{z}+\ii\arg z$$
+    Let $z\in \CC$. We define a \emph{complex natural logarithm} of $z$ as a solution to the equation $\exp{w}=z$. That is: $$\ln z:=\ln \abs{z}+\ii\arg z$$ Note that $\ln z$ is a multivalued function.
     We define the \emph{principal value} of $\ln z$ as: $$\Ln z:=\ln \abs{z}+\ii\Arg z$$
   \end{definition}
   \subsubsection{Trigonometric functions}
@@ -387,12 +398,12 @@
   \begin{proposition}
     Let $z\in \CC$. Then:
     \begin{itemize}
-      \item $\cos z=0\implies z\in\RR$
-      \item $\sin z=0\implies z\in\RR$
+      \item $\cos z=0\implies z=\frac{\pi}{2}+\pi k\in\RR$, for some $k\in\ZZ$.
+      \item $\sin z=0\implies z=\pi k\in\RR$, for some $k\in\ZZ$.
     \end{itemize}
   \end{proposition}
   \begin{definition}
-    We define the \emph{complex tangent} and \emph{complex secant}, \emph{complex cosecant} and \emph{complex cotangent} respectively as:
+    We define the \emph{complex tangent}, \emph{complex secant}, \emph{complex cosecant} and \emph{complex cotangent} respectively as:
     \begin{align*}
       \tan z & = \frac{\sin z}{\cos z}=-\ii\frac{\exp{\ii z}-\exp{-\ii z}}{\exp{\ii z}+\exp{-\ii z}}\quad \forall z\in\CC\setminus\bigcup_{k\in\ZZ}\left\{\frac{\pi}{2}+\pi k\right\} \\
       \sec z & = \frac{1}{\cos z}=\frac{2}{\exp{\ii z}+\exp{-\ii z}}\quad \forall z\in\CC\setminus\bigcup_{k\in\ZZ}\left\{\frac{\pi}{2}+\pi k\right\}                                 \\
@@ -424,7 +435,7 @@
     \end{enumerate}
   \end{proposition}
   \begin{definition}
-    We define the \emph{complex hyperbolic tangent} and \emph{complex hyperbolic secant}, \emph{complex hyperbolic cosecant} and \emph{complex hyperbolic cotangent} respectively as:
+    We define the \emph{complex hyperbolic tangent}, \emph{complex hyperbolic secant}, \emph{complex hyperbolic cosecant} and \emph{complex hyperbolic cotangent} respectively as:
     \begin{align*}
       \tanh z & = \frac{\sinh z}{\cosh z}=\frac{\exp{z}-\exp{-z}}{\exp{z}+\exp{-z}}\quad \forall z\in\CC\setminus\bigcup_{k\in\ZZ}\left\{\ii\left(\frac{\pi}{2}+\pi k\right)\right\} \\
       \sech z & = \frac{1}{\cosh z}=\frac{2}{\exp{z}+\exp{-z}}\quad \forall z\in\CC\setminus\bigcup_{k\in\ZZ}\left\{\ii\left(\frac{\pi}{2}+\pi k\right)\right\}                      \\
@@ -438,7 +449,7 @@
     Let $U\subseteq \CC$ be an open set, $z_0\in U$ and $f:U\rightarrow \CC$ be a function. We say that $f$ is \emph{$\CC$-differentiable} at $z_0$ if the following limit exists: $$\lim_{z \to z_0} \frac{f(z) - f(z_0)}{z - z_0} = \lim_{h \to 0} \frac{f(z_0 + h) - f(z_0)}{h}$$ In that case, the limit is called \textit{derivative of $f$ at $z_0$} and it is denoted by $f'(z_0)$.
   \end{definition}
   \begin{proposition}
-    Let $U\subseteq \CC$ be an open set, $z_0\in U$ and $f:U\rightarrow \CC$ be a function. Then, $f$ is $\CC$-differentiable at $z_0$ if and only if $\exists a+b\ii\in\CC$ such that $\forall\varepsilon>0$ $\exists\delta>0$ such that $$|f(z_0+h)-f(z_0)-(a+b\ii)h|\leq \varepsilon h$$ whenever $|h|<\delta$.
+    Let $U\subseteq \CC$ be an open set, $z_0\in U$ and $f:U\rightarrow \CC$ be a function. Then, $f$ is $\CC$-differentiable at $z_0$ if and only if $\exists a+b\ii\in\CC$ such that $\forall\varepsilon>0$ $\exists\delta>0$ such that $$|f(z_0+h)-f(z_0)-(a+b\ii)h|\leq \varepsilon \abs{h}$$ whenever $|h|<\delta$.
   \end{proposition}
   \begin{proposition}
     Let $U\subseteq \CC$ be an open set, $z_0 \in U$ and $f:U\rightarrow \CC$ be a $\CC$-differentiable function at $z_0$. Then, $f$ is continuous at $z_0$.
@@ -453,7 +464,7 @@
     \end{enumerate}
   \end{proposition}
   \begin{theorem}[Chain rule]
-    Let $U,V\subseteq \CC$ be open sets, $z_0\in U$, $f:U\rightarrow\CC$ be a $\CC$-differentiable function at $z_0$ such that $f(U)\subseteq V$, and $g:V\rightarrow\CC$ be $\CC$-differentiable function at $f(z_0)$. Then, $g\circ f$ is $\CC$-differentiable at $z_0$ and: $${(g\circ f)}'(z_0)=g'(f(z_0))f'(z_0)$$
+    Let $U,V\subseteq \CC$ be open sets, $z_0\in U$, $f:U\rightarrow\CC$ be a $\CC$-differentiable function at $z_0$ such that $f(U)\subseteq V$, and $g:V\rightarrow\CC$ be a $\CC$-differentiable function at $f(z_0)$. Then, $g\circ f$ is $\CC$-differentiable at $z_0$ and: $${(g\circ f)}'(z_0)=g'(f(z_0))f'(z_0)$$
   \end{theorem}
   \begin{proposition}
     Let $z\in\CC$. Then:
@@ -484,18 +495,18 @@
     Let $\sum_{n=0}^\infty a_n{(z-z_0)}^n$ be a complex power series with radius of convergence $R\in[0,\infty]$. Then, the series $\sum_{n=1}^\infty na_n{(z-z_0)}^{n-1}$ has the same radius of convergence $R$ and if $f(z)=\sum_{n=0}^\infty a_n{(z-z_0)}^n$ for $|z-z_0|<R$, then $f$ is holomorphic and: $$f'(z)=\sum_{n=1}^\infty na_n{(z-z_0)}^{n-1}\quad\text{for } |z-z_0|<R$$
   \end{theorem}
   \begin{corollary}
-    Let $\sum_{n=0}^\infty a_n{(z-z_0)}^n$ be a complex power series with radius of convergence $R\in[0,\infty]$. Then, the series $\sum_{n=k}^\infty n(n-1)\cdots(n-k+1)a_n{(z-z_0)}^{n-k}$ has the same radius of convergence $R$ for all $k\in\NN \cup\{0\}$ and if $f(z)=\sum_{n=0}^\infty a_n{(z-z_0)}^n$ for $|z-z_0|<R$, then $f^{(k)}$ is holomorphic and: $$f^{(k)}(z)=\sum_{n=k}^\infty n(n-1)\cdots(n-k+1)a_n{(z-z_0)}^{n-k}$$ for $|z-z_0|<R$ and $\forall k\in\NN \cup\{0\}$. In particular $f^{(k)}(0)=k!a_k$ $\forall k\in\NN\cup\{0\}$.
+    Let $\sum_{n=0}^\infty a_n{(z-z_0)}^n$ be a complex power series with radius of convergence $R\in[0,\infty]$. Then, the series $\sum_{n=k}^\infty n(n-1)\cdots(n-k+1)a_n{(z-z_0)}^{n-k}$ has the same radius of convergence $R$ for all $k\in\NN \cup\{0\}$ and if $f(z)=\sum_{n=0}^\infty a_n{(z-z_0)}^n$ for $|z-z_0|<R$, then $f^{(k)}$ is holomorphic and: $$f^{(k)}(z)=\sum_{n=k}^\infty n(n-1)\cdots(n-k+1)a_n{(z-z_0)}^{n-k}$$ for $|z-z_0|<R$ and $\forall k\in\NN \cup\{0\}$. In particular $f^{(k)}(z_0)=k!a_k$ $\forall k\in\NN\cup\{0\}$.
   \end{corollary}
   \begin{proposition}
     Let $U\subseteq\CC$ be a connected open set and $f\in\mathcal{H}(U)$ such that $f'(z)=0$ $\forall z\in U$. Then, $f$ is constant.
   \end{proposition}
   \subsubsection{Determination of the logarithm}
   \begin{definition}
-    Let $U\subseteq\CC$ be an open set and $f:U\longrightarrow\CC^*$ and $g:U\rightarrow\CC$ be functions. We say that $g$ is a \emph{determination} of $\ln f(z)$ if $g$ is continuos on $U$ and $\exp{g(z)}=f(z)$ $\forall z\in U$.
+    Let $U\subseteq\CC$ be an open set and $f:U\longrightarrow\CC^*$ and $g:U\rightarrow\CC$ be functions. We say that $g$ is a \emph{determination} of $\ln f(z)$ if $g$ is continuos on $U$ and $\exp{g(z)}=f(z)$ $\forall z\in U$. In particular, we say that $g$ is a \emph{determination of the logarithm} if $g$ is continuos on $U$ and $\exp{g(z)}=z$ $\forall z\in U$.
   \end{definition}
   \begin{proposition}
     Let $\theta\in[0,2\pi)$, $L_\theta:=\{r\exp{\ii\theta}:r\in\RR_{\geq 0}\}$ and $U=\CC\setminus L_\theta$. Then, there exists a determination of the logarithm $g:U\rightarrow\CC$ defined as:
-    $$g(z)=\log |z|+\ii\arg(z)\quad\arg(z)\in(0,\theta+2\pi)$$
+    $$g(z)=\ln |z|+\ii\arg(z)\quad\arg(z)\in(\theta,\theta+2\pi)$$
   \end{proposition}
   \begin{theorem}
     Let $U,V\subseteq\CC$ be open sets, $f:U\longrightarrow\CC^*$ be a function and $g\in\mathcal{H}(V)$. Suppose $f(U)\subseteq V$, $g(f(z))=z$ and $g'(f(z))\ne 0$ $\forall z\in U$. Then, $f$ is holomorphic on $U$ and: $$f'(z)=\frac{1}{g'(f(z))}\quad\forall z\in U$$
@@ -504,7 +515,7 @@
     Let $U,V_1,V_2\subseteq\CC$ be open sets, $f:U\rightarrow\CC^*$ be a continuous function and $g_1:V_1\longrightarrow\CC^*$, $g_2:V_2\longrightarrow\CC^*$ be two determinations of the logarithm. If $W\subseteq V_1\cap V_2\ne\varnothing$ is connectes, then $\exists k\in\ZZ$ such that $$g_2(z)=g_1(z)+2\pi \ii k\qquad\forall z\in W$$
   \end{proposition}
   \begin{corollary}
-    Let $U\subseteq\CC$ be an open set, $f:U\longrightarrow\CC^*$ be a holomorphic function and $g:U\rightarrow\CC$ be a determination of the logarithm. Then, $g$ is holomorphic and: $$g'(z)=\frac{f'(z)}{f(z)}\quad \forall z\in U$$
+    Let $U\subseteq\CC$ be an open set, $f:U\longrightarrow\CC^*$ be a holomorphic function and $g:U\rightarrow\CC$ be a determination of $\ln f$. Then, $g$ is holomorphic and: $$g'(z)=\frac{f'(z)}{f(z)}\quad \forall z\in U$$
     In particular, ${\left(\ln z\right)}'=\frac{1}{z}$.
   \end{corollary}
   \subsubsection{Cauchy-Riemann equations}
@@ -524,8 +535,8 @@
     \end{align*}
   \end{proposition}
   \begin{definition}
-    Let $U\subseteq \CC$ be an open set, $f:U\rightarrow \CC$ be a function and $z_0\in U$. We say that $f$ is $\RR$-differentiable at $z_0\in U$ if and only if there exists a $\RR$-linear function $L:\CC\rightarrow\CC$ such that: $$\lim_{h+k\ii\to 0}\frac{|f(z_0+h+k\ii)-f(z_0)-L(h+k\ii)|}{|h+k\ii|}=0$$
-    In that case, the function $L$ is called \emph{differential} of $f$ at $z_0$ and it is denoted by $\vf{D}f(z_0)$.
+    Let $U\subseteq \CC$ be an open set, $f:U\rightarrow \CC$ be a function and $z_0\in U$. We say that $f$ is \emph{$\RR$-differentiable} at $z_0\in U$ if and only if there exists a $\RR$-linear function $L:\CC\rightarrow\CC$ such that: $$\lim_{h+k\ii\to 0}\frac{|f(z_0+h+k\ii)-f(z_0)-L(h+k\ii)|}{|h+k\ii|}=0$$
+    In that case, the function $L$ is called \emph{differential} of $f$ at $z_0$ and it is denoted by $\vf{D}f(z_0)$\footnote{That is, the $\RR$-differentiability is the usual one if we think $f$ inside $\RR^2$ instead of inside $\CC$.}.
   \end{definition}
   \begin{proposition}
     Let $U\subseteq \CC$ be an open set, $z_0\in U$ and $f:U\rightarrow \CC$ be a $\RR$-differentiable function at $z_0$ such that $f(z)=u(z)+\ii v(z)$ $\forall z\in U$ with $u,v:U\rightarrow\RR$. Then:
@@ -550,10 +561,10 @@
     These equations are called \emph{Cauchy-Riemann equations}.
   \end{theorem}
   \begin{corollary}
-    Let $U\subseteq \CC$ be an open set, $u,v:U\rightarrow\CC$ be functions such that their partial derivatives exists, are continuous and satisfying \cref{CAFA_cauchyrieamann}. Then, $f=u+\ii v$ is holomorphic on $U$.
+    Let $U\subseteq \CC$ be an open set, $u,v:U\rightarrow\CC$ be functions such that their partial derivatives exist, they are continuous and they satisfy \cref{CAFA_cauchyrieamann}. Then, $f=u+\ii v$ is holomorphic on $U$.
   \end{corollary}
   \begin{definition}
-    Let $U\subseteq \CC$ be an open set, $f:U\rightarrow \CC$ be a function. We define \emph{Wirtinger operators} as:
+    Let $U\subseteq \CC$ be an open set, $f:U\rightarrow \CC$ be a function. We define the \emph{Wirtinger operators} as:
     \begin{align*}
       \partial f:=\pdv{f}{z}                       & :=\frac{1}{2}\left(\pdv{f}{x}-\ii\pdv{f}{y}\right) \\
       \overline{\partial} f:=\pdv{f}{\overline{z}} & :=\frac{1}{2}\left(\pdv{f}{x}+\ii\pdv{f}{y}\right)
@@ -577,9 +588,20 @@
     Let $U\subseteq \CC$ be an open set and $f\in\mathcal{H}(U)$ such that $f=u+\ii v$ with $u,v:U\rightarrow\RR$. Then:
     $${|f'(z)|}^2=\det \vf{D}(u,v)(z)={\left(\pdv{u}{x}\right)}^2+{\left(\pdv{u}{y}\right)}^2$$
   \end{proposition}
+  \begin{proposition}
+    Let $U\subseteq \CC$ be an open connected set and $f\in\mathcal{H}(U)$ such that it satisfies one of the following properties:
+    \begin{itemize}
+      \item $\Re f=\const$
+      \item $\Im f=\const$
+      \item $\abs{f}=\const$
+      \item $f(U)$ is contained in a line.
+      \item $f(U)$ is contained in a circle.
+    \end{itemize}
+    Then, $f$ is constant.
+  \end{proposition}
   \subsubsection{Harmonic functions}
   \begin{definition}
-    Let $U\subseteq \CC\cong\RR^2$ be an open set and $f:U\rightarrow \CC$ be a function of class $\mathcal{C}^2$. We say that $f$ is \emph{harmonic} if $\laplacian u(z)=0$ $\forall z\in U$.
+    Let $U\subseteq \CC\cong\RR^2$ be an open set and $f:U\rightarrow \CC$ be a function of class $\mathcal{C}^2$. We say that $f$ is \emph{harmonic} if $\laplacian f(z)=0$ $\forall z\in U$\footnote{Recall \cref{FOSV_laplacian}.}.
   \end{definition}
   \begin{proposition}
     Let $U\subseteq \CC$ be an open set and $f\in\mathcal{H}(U)$ such that $f=u+\ii v$ with $u,v:U\rightarrow\RR$. Then, $u$ and $v$ are harmonic.
@@ -690,10 +712,10 @@
     Let $f:[a,b]\subset\RR\rightarrow\CC$ be a function such that $f=u+\ii v$ with $u,v:[a,b]\rightarrow\RR$. We define the \emph{integral} of $f$ on the interval $[a,b]$ as: $$\int_a^bf(t)\dd{t}:=\int_a^bu(t)\dd{t}+\ii\int_a^bv(t)\dd{t}$$
   \end{definition}
   \begin{proposition}
-    Let $f,g:[a,b]\subset\RR\rightarrow\CC$ be functions and $z\in\CC$. Then:
+    Let $f,g:[a,b]\subset\RR\rightarrow\CC$ be functions and $\alpha\in\CC$. Then:
     \begin{enumerate}
       \item $\displaystyle\int_a^b(f+g)(t)\dd{t}=\int_a^bf(t)\dd{t}+\int_a^bg(t)\dd{t}$
-      \item $\displaystyle\int_a^b(zf)(t)\dd{t}=z\int_a^bf(t)\dd{t}$
+      \item $\displaystyle\int_a^b(\alpha f)(t)\dd{t}=\alpha \int_a^bf(t)\dd{t}$
       \item $\displaystyle\left|\int_a^bf(t)\dd{t}\right|\leq\int_a^b|f(t)|\dd{t}$
       \item $\displaystyle \int_b^af(t)\dd{t}=-\int_a^bf(t)\dd{t}$
     \end{enumerate}
@@ -709,7 +731,7 @@
     Let $U\subseteq \CC$ be an open set, $f:U\rightarrow\CC$ be a function and $z_0\in\CC$. We say that $f$ is \emph{conformal} at $z_0$ if it preserves the oriented angle between curves that intersect at $z_0$. We say that $f$ is \emph{conformal} if it is conformal at each point $z\in U$.
   \end{definition}
   \begin{theorem}
-    Let $U\subseteq \CC$ be an open set and $f\in\mathcal{H}(U)$. Then, $f$ conformal at the points $z\in U$ such that $f'(z)\ne 0$.
+    Let $U\subseteq \CC$ be an open set and $f\in\mathcal{H}(U)$. Then, $f$ is conformal at the points $z\in U$ such that $f'(z)\ne 0$.
   \end{theorem}
   \begin{definition}
     Let $\gamma:[a,b]\rightarrow U$ be a $\mathcal{C}^1$-piecewise path. We define the inverse path $\gamma^-:[a,b]\rightarrow\CC$ as $\gamma^-(t)=\gamma(a+b-t)$
@@ -722,35 +744,35 @@
     Let $U\subseteq \CC$ be an open set, $f:U\subset\RR\rightarrow\CC$ be a continuous function, $\gamma:[a,b]\rightarrow U$ be a rectifiable curve and $\{t_0,\ldots,t_n\}$ be a partition of $[a,b]$. We define the \emph{line integral} of $f$ along $\gamma$ as: $$\int_\gamma f(z)\dd{z}:=\lim_{n\to\infty}\sum_{j=0}^{n-1}f(\gamma(\eta_j))(\gamma(t_{j+1})-\gamma(t_j))$$ where $\eta_j\in[t_j,t_{j+1}]$ $\forall j\in\{0,1,\ldots,n-1\}$.
   \end{definition}
   \begin{definition}
-    Let $U\subseteq \CC$ be an open set, $f:U\subset\RR\rightarrow\CC$ be a continuous function and $\gamma:[a,b]\rightarrow U$ be a $\mathcal{C}^1$-piecewise curve. Suppose $\{t_0,\ldots,t_n\}$ is partition of $[a,b]$ with the property that $\gamma$ is of class $\mathcal{C}^1([t_j,t_{j+1}])$ $\forall j\in\{0,1,\ldots,n-1\}$. Then: $$\int_\gamma f(z)\dd{z}=\sum_{j=0}^{n-1}\int_{t_j}^{t_{j+1}}f(\gamma(t))\gamma'(t)\dd{t}$$
+    Let $U\subseteq \CC$ be an open set, $f:U\subset\RR\rightarrow\CC$ be a continuous function and $\gamma:[a,b]\rightarrow U$ be a piecewise curve of class $\mathcal{C}^1$. Suppose $\{t_0,\ldots,t_n\}$ is partition of $[a,b]$ with the property that $\gamma\in\mathcal{C}^1([t_j,t_{j+1}])$ $\forall j\in\{0,1,\ldots,n-1\}$. Then: $$\int_\gamma f(z)\dd{z}=\sum_{j=0}^{n-1}\int_{t_j}^{t_{j+1}}f(\gamma(t))\gamma'(t)\dd{t}$$
     In particular, if $\gamma\in\mathcal{C}^1([a,b])$, then: $$\int_\gamma f(z)\dd{z}=\int_a^bf(\gamma(t))\gamma'(t)\dd{t}$$
   \end{definition}
   \begin{theorem}
-    Let $U\subseteq \CC$ be an open set, $f:U\subset\RR\rightarrow\CC$ be a continuous function and $\gamma:[a,b]\rightarrow U$ be a $\mathcal{C}^1$-piecewise curve. Suppose there exists a function $F\in\mathcal{H}(U)$ such that $F'(z)=f(z)$ $\forall z\in U$. Then:
+    Let $U\subseteq \CC$ be an open set, $f:U\subset\RR\rightarrow\CC$ be a continuous function and $\gamma:[a,b]\rightarrow U$ be a piecewise curve of class $\mathcal{C}^1$. Suppose there exists a function $F\in\mathcal{H}(U)$ such that $F'(z)=f(z)$ $\forall z\in U$. Then:
     $$\int_\gamma f(z)\dd{z}=F(\gamma(b))-F(\gamma(a))$$ In particular if $\gamma$ is a closed curve, then $\int_\gamma f(z)\dd{z}=0$.
   \end{theorem}
   \begin{corollary}
     There is no determination of the logarithm in any set of the form $\{z\in\CC:0<r\leq\abs{z}\leq R\}$ for $r,R\in\RR_{> 0}$ with $r<R$.
   \end{corollary}
   \begin{proposition}
-    Let $U\subseteq \CC$ be an open set, $f:U\subset\RR\rightarrow\CC$ be a continuous function and $\gamma:[a,b]\rightarrow U$ be a $\mathcal{C}^1$-piecewise curve. Let $L(\gamma)$ be the length of $\gamma$. Then: $$L(\gamma)=\int_a^b\abs{\gamma'(t)}\dd{t}$$
+    Let $U\subseteq \CC$ be an open set, $f:U\subset\RR\rightarrow\CC$ be a continuous function and $\gamma:[a,b]\rightarrow U$ be a piecewise curve of class $\mathcal{C}^1$. Let $L(\gamma)$ be the length of $\gamma$. Then: $$L(\gamma)=\int_a^b\abs{\gamma'(t)}\dd{t}$$
   \end{proposition}
   \begin{proposition}
-    Let $U\subseteq \CC$ be an open set, $f:U\subset\RR\rightarrow\CC$ be a continuous function, $\gamma_1:[a,b]\rightarrow U$ be a $\mathcal{C}^1$-piecewise curve and $\gamma_2$ be a reparametrization of $\gamma_1$.
+    Let $U\subseteq \CC$ be an open set, $f:U\subset\RR\rightarrow\CC$ be a continuous function, $\gamma_1:[a,b]\rightarrow U$ be a piecewise curve of class $\mathcal{C}^1$ and $\gamma_2$ be a reparametrization of $\gamma_1$.
     \begin{itemize}
       \item If the parametrization is positive\footnote{Recall \cref{DE_reparam}.}, then: $$\int_{\gamma_1}f(z)\dd{z}=\int_{\gamma_2}f(z)\dd{z}$$
       \item If the parametrization is negative, then: $$\int_{\gamma_1}f(z)\dd{z}=-\int_{\gamma_2}f(z)\dd{z}$$
-            In particular, for any $\mathcal{C}^1$-piecewise curve $\gamma:[a,b]\rightarrow U$ we have: $$\int_{\gamma}f(z)\dd{z}=-\int_{\gamma^-}f(z)\dd{z}$$
+            In particular, for any piecewise curve of class $\mathcal{C}^1$ $\gamma:[a,b]\rightarrow U$ we have: $$\int_{\gamma}f(z)\dd{z}=-\int_{\gamma^-}f(z)\dd{z}$$
     \end{itemize}
   \end{proposition}
   \begin{definition}
-    Let $U\subseteq \CC$ be an open set, $f:U\subset\RR\rightarrow\CC$ be a continuous function and $\gamma:[a,b]\rightarrow\CC$ be a $\mathcal{C}^1$-piecewise curve. We define the line integral with respect to the length as: $$\int_{\gamma}f(z)\abs{\dd{z}}:=\int_a^bf(\gamma(t))|\gamma'(t)|\dd{t}$$
+    Let $U\subseteq \CC$ be an open set, $f:U\subset\RR\rightarrow\CC$ be a continuous function and $\gamma:[a,b]\rightarrow\CC$ be a piecewise curve of class $\mathcal{C}^1$ with respect to the partition $\{t_0,\ldots,t_n\}$ of $[a,b]$. We define the line integral with respect to the length as: $$\int_{\gamma}f(z)\abs{\dd{z}}:=\sum_{j=0}^{n-1}\int_{t_j}^{t_{j+1}}f(\gamma(t))|\gamma'(t)|\dd{t}$$
   \end{definition}
   \begin{definition}
-    Let $U\subseteq \CC$ be an open set, $f:U\subset\RR\rightarrow\CC$ be a continuous function and $\gamma:[a,b]\rightarrow\CC$ be a $\mathcal{C}^1$-piecewise curve. We define the following line integral with respect to $\overline{z}$: $$\int_{\gamma}f(z)\dd{\overline{z}}:=\overline{\int_{\gamma}\overline{f(z)}\dd{z}}$$
+    Let $U\subseteq \CC$ be an open set, $f:U\subset\RR\rightarrow\CC$ be a continuous function and $\gamma:[a,b]\rightarrow\CC$ be a piecewise curve of class $\mathcal{C}^1$. We define the following line integral with respect to $\overline{z}$: $$\int_{\gamma}f(z)\dd{\overline{z}}:=\overline{\int_{\gamma}\overline{f(z)}\dd{z}}$$
   \end{definition}
   \begin{proposition}
-    Let $U\subseteq \CC$ be an open set, $f:U\subset\RR\rightarrow\CC$ be a continuous function and $\gamma:[a,b]\rightarrow\CC$ be a $\mathcal{C}^1$-piecewise curve. Then:
+    Let $U\subseteq \CC$ be an open set, $f:U\subset\RR\rightarrow\CC$ be a continuous function and $\gamma:[a,b]\rightarrow\CC$ be a piecewise curve of class $\mathcal{C}^1$. Then:
     \begin{enumerate}
       \item $\displaystyle\int_{\gamma}\abs{\dd{z}}=L(\gamma)$
       \item $\displaystyle\left|\int_{\gamma}f(z)\dd{z}\right|\leq\int_{\gamma}|f(z)|\abs{\dd{z}}$
@@ -760,14 +782,14 @@
     Let $U\subseteq \CC$ be an open set, $f\in\mathcal{H}(U)$ and $\gamma$ be a triangular path such that $\overline{D(\gamma)}\subseteq U$. Then: $$\int_\gamma f(z)\dd{z}=0$$
   \end{theorem}
   \begin{theorem}[Local Cauchy's integral theorem]
-    Let $U\subseteq \CC$ be a convex open set, $f\in\mathcal{H}(U)$ and $\gamma:[a,b]\rightarrow\CC$ be a closed $\mathcal{C}^1$-piecewise curve with $\gamma^*\subset U$. Then: $$\int_\gamma f(z)\dd{z}=0$$
+    Let $U\subseteq \CC$ be a convex open set, $f\in\mathcal{H}(U)$ and $\gamma:[a,b]\rightarrow\CC$ be a closed piecewise curve of class $\mathcal{C}^1$ with $\gamma^*\subset U$. Then: $$\int_\gamma f(z)\dd{z}=0$$
   \end{theorem}
   \begin{lemma}
-    Let $U\subseteq \CC$ be an open and convex set, $z_0\in U$, $f\in\mathcal{H}(U\setminus\{p\})$ and $\gamma:[a,b]\rightarrow\CC$ be a closed $\mathcal{C}^1$-piecewise curve such that $\gamma^*\subseteq U\setminus\{z_0\}$. Suppose $\displaystyle\lim_{z\to z_0}f(z)(z-z_0)=0$. Then: $$\int_\gamma f(z)\dd{z}=0$$
+    Let $U\subseteq \CC$ be an open and convex set, $z_0\in U$, $f\in\mathcal{H}(U\setminus\{z_0\})$ and $\gamma:[a,b]\rightarrow\CC$ be a closed piecewise curve of class $\mathcal{C}^1$ such that $\gamma^*\subseteq U\setminus\{z_0\}$. Suppose $\displaystyle\lim_{z\to z_0}f(z)(z-z_0)=0$. Then: $$\int_\gamma f(z)\dd{z}=0$$
   \end{lemma}
   \begin{definition}
     We define the \emph{Fresnel integrals} $S(z)$ and $C(z)$ as:
-    $$S(z)=\int_0^z{\left(\sin\zeta\right)}^2\dd{\zeta}\qquad C(z)=\int_0^z{\left(\cos\zeta\right)}^2\dd{\zeta}$$
+    $$S(z)=\int_0^z\sin\zeta^2\dd{\zeta}\qquad C(z)=\int_0^z\cos\zeta^2\dd{\zeta}$$
   \end{definition}
   \subsubsection{Index of a curve}
   \begin{theorem}
@@ -782,16 +804,16 @@
       \item The value $\Ind(\gamma,z_0)\in\ZZ$ does not depend on the determination of $\ln(\gamma(t)-z_0)$ chosen.
       \item $\Ind(\gamma,z_0)\in\ZZ$.
       \item $\Ind(\gamma^-,z_0)=-\Ind(\gamma,z_0)$.
-      \item The function $$\function{}{\gamma^*}{\ZZ}{z}{\Ind(\gamma,z)}$$ is continuous and therefore it is constant on each connected component of $\CC\setminus\gamma^*$.
+      \item The function $$\function{}{\CC\setminus\gamma^*}{\ZZ}{z}{\Ind(\gamma,z)}$$ is continuous and therefore it is constant on each connected component of $\CC\setminus\gamma^*$.
       \item If $z\in\CC\setminus\gamma^*$ is in the unbounded component of $\CC\setminus\gamma^*$, then $\Ind(\gamma,z)=0$.
     \end{enumerate}
   \end{proposition}
   \begin{theorem}
-    Let $\gamma:[a,b]\rightarrow\CC$ be a closed $\mathcal{C}^1$-piecewise curve and $z_0\notin\gamma^*$. Then:
+    Let $\gamma:[a,b]\rightarrow\CC$ be a closed piecewise curve of class $\mathcal{C}^1$ and $z_0\notin\gamma^*$. Then:
     $$\Ind(\gamma,z_0)=\frac{1}{2\pi\ii}\int_\gamma\frac{\dd{z}}{z-z_0}$$
   \end{theorem}
   \begin{theorem}[Cauchy's integral theorem]
-    Let $U\subseteq\CC$ be an open and convex set, $f\in\mathcal{H}(U)$, $\gamma:[a,b]\rightarrow\CC$ be a closed $\mathcal{C}^1$-piecewise curve and $z_0\notin\gamma^*$. Then:
+    Let $U\subseteq\CC$ be an open and convex set, $f\in\mathcal{H}(U)$, $\gamma:[a,b]\rightarrow\CC$ be a closed piecewise curve of class $\mathcal{C}^1$ and $z_0\notin\gamma^*$. Then:
     $$f(z_0)\cdot\Ind(\gamma,z_0)=\frac{1}{2\pi\ii}\int_\gamma\frac{f(z)}{z-z_0}\dd{z}$$
   \end{theorem}
   \begin{corollary}
@@ -799,11 +821,11 @@
     $$f(z_0)=\frac{1}{2\pi}\int_0^{2\pi}f(z_0+r\exp{\ii\theta})\dd{\theta}$$
   \end{corollary}
   \begin{lemma}
-    Let $U\subseteq\CC$ be an open, $(f_n)\in U\subseteq\CC$ be a sequence of functions, $f:D\rightarrow\CC$ such that $(f_n)$ converge uniformly to $f$ over compact sets in $D$, and $\gamma:[a,b]\rightarrow\CC$ be a closed $\mathcal{C}^1$-piecewise curve. Then:
+    Let $U\subseteq\CC$ be an open, $(f_n)\in U\subseteq\CC$ be a sequence of functions, $f:U\rightarrow\CC$ such that $(f_n)$ converge uniformly to $f$ over compact sets in $U$, and $\gamma:[a,b]\rightarrow\CC$ be a closed piecewise curve of class $\mathcal{C}^1$. Then:
     $$\lim_{n\to\infty}\int_\gamma f_n(z)\dd{z}=\int_\gamma f(z)\dd{z}$$
   \end{lemma}
   \begin{corollary}
-    Let $z_0\in\CC$, $f(z)=\sum_{n=0}^\infty a_n{(z-z_0)}^n$. Then:
+    Let $z_0\in\CC$ and $f(z)=\sum a_n{(z-z_0)}^n$. Then:
     $$\int_0^z f(\zeta)\dd{\zeta}=\sum_{n=0}^\infty a_n\frac{{(z-z_0)}^{n+1}}{n+1}$$
   \end{corollary}
   \subsubsection{Analytic functions}
@@ -835,7 +857,7 @@
     Let $f\in\mathcal{H}(\CC)$ and bounded. Then, $f$ is constant.
   \end{theorem}
   \begin{corollary}
-    Let $f\in\mathcal{H}(\CC)$ such that $\Re(f(z))>0$ $\forall z\in\CC$. Then, $f$ is constant.
+    Let $f\in\mathcal{H}(\CC)$ such that $\Re(f(z))\geq 0$ $\forall z\in\CC$. Then, $f$ is constant.
   \end{corollary}
   \begin{theorem}[Fundamental theorem of algebra]
     Let $p(z)=a_0+a_1z\cdots+a_nz^n\in\CC[z]$ with $a_n\ne 0$. Then, $\exists \alpha\in \CC$ such that $p(\alpha)=0$.
