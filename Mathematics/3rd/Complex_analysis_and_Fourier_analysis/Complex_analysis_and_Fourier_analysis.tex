@@ -516,7 +516,7 @@
   \end{proposition}
   \begin{corollary}
     Let $U\subseteq\CC$ be an open set, $f:U\longrightarrow\CC^*$ be a holomorphic function and $g:U\rightarrow\CC$ be a determination of $\ln f$. Then, $g$ is holomorphic and: $$g'(z)=\frac{f'(z)}{f(z)}\quad \forall z\in U$$
-    In particular, ${\left(\ln z\right)}'=\frac{1}{z}$.
+    In particular, if $g$ is a determination of the logarithm, then $g'(z)=\frac{1}{z}$.
   \end{corollary}
   \subsubsection{Cauchy-Riemann equations}
   \begin{definition}
@@ -601,7 +601,7 @@
   \end{proposition}
   \subsubsection{Harmonic functions}
   \begin{definition}
-    Let $U\subseteq \CC\cong\RR^2$ be an open set and $f:U\rightarrow \CC$ be a function of class $\mathcal{C}^2$. We say that $f$ is \emph{harmonic} if $\laplacian f(z)=0$ $\forall z\in U$\footnote{Recall \cref{FOSV_laplacian}.}.
+    Let $U\subseteq \CC\cong\RR^2$ be an open set and $f:U\rightarrow \RR$ be a function of class $\mathcal{C}^2$. We say that $f$ is \emph{harmonic} if $\laplacian f(z)=0$ $\forall z\in U$\footnote{Recall \cref{FOSV_laplacian}.}.
   \end{definition}
   \begin{proposition}
     Let $U\subseteq \CC$ be an open set and $f\in\mathcal{H}(U)$ such that $f=u+\ii v$ with $u,v:U\rightarrow\RR$. Then, $u$ and $v$ are harmonic.
@@ -627,7 +627,7 @@
     Then, $f(z)=g(z)\iff \exists\lambda\in\CC^*$ such that $a'=\lambda a$, $b'=\lambda b$, $c'=\lambda c$ and $d'=\lambda d$.
   \end{proposition}
   \begin{proposition}
-    If $f\in\mathcal{M}$, then $f$ is a homeomorphism of $\CC_\infty$ and if $\circ$ denotes the composition of Möbius transformations, $(\mathcal{M},\circ)$ is a non-abelian group. Moreover we have the following group morphism:
+    Let $f\in\mathcal{M}$. Then, $f$ is a homeomorphism of $\CC_\infty$ and moreover if $\circ$ denotes the composition of Möbius transformations, $(\mathcal{M},\circ)$ is a non-abelian group. Moreover we have the following group morphism:
     $$\function{}{\GL_2(\CC)}{\mathcal{M}}{\begin{pmatrix}
           a & b \\
           c & d
@@ -646,7 +646,7 @@
     Let $f\in\mathcal{M}$. Then, $f$ is a composition of a finite number of translations and dilatations and an inversion.
   \end{theorem}
   \begin{proposition}
-    Let $f=\frac{az+b}{cz+d}\in\mathcal{M}$. Then, $z\in\CC_\infty$ is a fixed point for $f$ if and only if: $$c^2z+(d-a)z-b=0$$
+    Let $f=\frac{az+b}{cz+d}\in\mathcal{M}$. Then, $z\in\CC_\infty$ is a fixed point for $f$ if and only if: $$c^2z^2+(d-a)z-b=0$$
     Hence, $f$ can have at most two fixed points.
   \end{proposition}
   \begin{corollary}
@@ -670,7 +670,7 @@
     We define a \emph{circle} in $\CC_\infty$ as a circle in $\CC$ or the set $r\cup\{\infty\}$, where $r$ is a line in $\CC$\footnote{Note that with this definition $\RR_\infty$ is a circle.}.
   \end{definition}
   \begin{proposition}
-    Given three points of $\CC_\infty$, there exists a unite circle that passes through them.
+    Given three points of $\CC_\infty$, there exists a unique circle that passes through them.
   \end{proposition}
   \begin{proposition}
     Let $f\in\mathcal{M}$. Then, $f(\RR_\infty)$ is a circle of $\CC_\infty$.
@@ -694,7 +694,7 @@
     Let $C\subset\CC_\infty$ be a circle, $(z_1,z_2,z_3)$ be an orientation of $C$, and $f\in\mathcal{M}$. Then, $C':=f(C)$ is a circle and $f$ carries the right/left side of $C$ to the right/left side of $C'$.
   \end{theorem}
   \begin{definition}
-    Let $C\subset\CC_\infty$ be a circle, $z_2,z_3,z_4\in C$ and $z,z^*\in\CC_\infty$. We say that $z$ and $z^*$ are symmetrics with respect to $C$ if: $$(z,z_2,z_3,z_4)=\overline{(z^*,z_2,z_3,z_4)}\footnote{It can be seen that this definition does not depend on the triplet $(z_2,z_3,z_4)$ chosen.}$$ The function $$\function{R_C}{\CC_\infty}{\CC_\infty}{z}{z^*}$$ is called \emph{reflection}.
+    Let $C\subset\CC_\infty$ be a circle, $z_2,z_3,z_4\in C$ and $z,z^*\in\CC_\infty$. We say that $z$ and $z^*$ are symmetrics with respect to $C$ if: $$(z,z_2,z_3,z_4)=\overline{(z^*,z_2,z_3,z_4)}\footnote{It can be seen that this definition does not depend on the triplet $(z_2,z_3,z_4)$ chosen.}$$ The function $$\function{R_C}{\CC_\infty}{\CC_\infty}{z}{z^*}$$ is called \emph{reflection} with respect to $C$.
   \end{definition}
   \begin{theorem}[Symmetry principle]
     Let $C\subset\CC_\infty$ be a circle, $f\in\mathcal{M}$ and $z,z^*\in\CC_\infty$. Then, if $z$, $z^*$ are symmetric with respect to $C$, then $f(z)$ and $f(z^*)$ are symmetric with respect to $f(C)$.
@@ -702,6 +702,9 @@
   \begin{proposition}
     Let $C\subset\CC$ be a circle of center $a$ and radius $R$. Then: $$R_C(z)=a+\frac{R^2}{\abs{z-a}^2}(z-a)$$
   \end{proposition}
+  \begin{corollary}
+    Let $C_1,C_2\subset\CC_\infty$ be two circles. Then, there exists $f\in\mathcal{M}$ such that $f(C_1)=C_2$. Moreover if we fix the image of three points of $C_1$, the transformation $f$ is unique. Moreover, $f(\Int C_1)$ maps to either $\Int C_2$ or $\Ext C_2$ and the same happens with $\Ext C_2$.
+  \end{corollary}
   \begin{proposition}
     Let $a\in\CC$ with $\abs{a}<1$ and $\theta\in\RR$. Then, the Möbius transformations
     $$f(z)=\exp{\ii \theta}\frac{z-a}{1-\overline{a}z}$$
