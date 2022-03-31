@@ -69,7 +69,7 @@
     Let $z \in \CC^*$. We define the \textit{argument} of $z$, denoted by $\arg{z}$, as the real number $\theta$ satisfying: $$z = \abs{z}(\cos{\theta} + \ii\sin{\theta})$$ Note that $\arg{z}$ is not unique. Because of that, we say that $\arg z$ is a \emph{multivalued function}.
   \end{definition}
   \begin{definition}
-    Let $D\subseteq \CC^*$ be a set. A \emph{determination of the argument} on $D$ is a function $g:D\rightarrow \RR$ such that $g(z)\in\arg z$ $\forall z\in D$. That is, $g$ is the choice of a value in $\arg z$ for each $z\in D$.
+    Let $U\subseteq\CC$ be an open set and $f: U\rightarrow\CC^*$ be a function. A \emph{determination of the argument of $f$} is a continuous function $g:U\rightarrow \RR$ such that $f(z)=\abs{f(z)}\exp{\ii g(z)}$ $\forall z\in U$.
   \end{definition}
   \begin{definition}
     Let $z \in \CC^*$. We define the \textit{principal argument} of $z$ as the unique real number $\theta$ satisfying:
@@ -512,7 +512,7 @@
     Let $U,V\subseteq\CC$ be open sets, $f:U\longrightarrow\CC^*$ be a function and $g\in\mathcal{H}(V)$. Suppose $f(U)\subseteq V$, $g(f(z))=z$ and $g'(f(z))\ne 0$ $\forall z\in U$. Then, $f$ is holomorphic on $U$ and: $$f'(z)=\frac{1}{g'(f(z))}\quad\forall z\in U$$
   \end{theorem}
   \begin{proposition}
-    Let $U,V_1,V_2\subseteq\CC$ be open sets, $f:U\rightarrow\CC^*$ be a continuous function and $g_1:V_1\longrightarrow\CC^*$, $g_2:V_2\longrightarrow\CC^*$ be two determinations of the logarithm. If $W\subseteq V_1\cap V_2\ne\varnothing$ is connectes, then $\exists k\in\ZZ$ such that $$g_2(z)=g_1(z)+2\pi \ii k\qquad\forall z\in W$$
+    Let $U,V_1,V_2\subseteq\CC$ be open sets, $f:U\rightarrow\CC^*$ be a continuous function and $g_1:V_1\longrightarrow\CC^*$, $g_2:V_2\longrightarrow\CC^*$ be two determinations of the logarithm. If $W\subseteq V_1\cap V_2\ne\varnothing$ is connected, then $\exists k\in\ZZ$ such that: $$g_2(z)=g_1(z)+2\pi \ii k\qquad\forall z\in W$$
   \end{proposition}
   \begin{corollary}
     Let $U\subseteq\CC$ be an open set, $f:U\longrightarrow\CC^*$ be a holomorphic function and $g:U\rightarrow\CC$ be a determination of $\ln f$. Then, $g$ is holomorphic and: $$g'(z)=\frac{f'(z)}{f(z)}\quad \forall z\in U$$
@@ -839,7 +839,7 @@
     Let $U\subseteq\CC$ be an open set and $f\in\mathcal{H}(U)$. Then, $\forall z_0\in U$ there exists a power series $\sum a_n{(z-z_0)}^n$ with radius of convergence $R_{z_0}\geq d(z_0,\Fr U)>0$ such that: $$f(z)=\sum_{n=0}^\infty a_n{(z-z_0)}^n$$ That is, $f$ is analytic.
   \end{theorem}
   \begin{corollary}
-    Let $U\subseteq\CC$ be an open set and $f:U\rightarrow \CC$ be a function. Then, $f$ is analytic on $U$ if and only if $f$ is holomorphic on $U$ .
+    Let $U\subseteq\CC$ be an open set and $f:U\rightarrow \CC$ be a function. Then, $f$ is analytic on $U$ if and only if $f$ is holomorphic on $U$.
   \end{corollary}
   \begin{corollary}[Cauchy's integral theorem for derivatives]
     Let $U\subseteq\CC$ be an open set, $f\in\mathcal{H}(U)$ and $z_0\in U$, $r\in\RR_{>0}$ such that $\overline{D(z_0,r)}\subset U$. Let $\gamma(t)=z_0+r\exp{\ii t}$, $t\in[0,2\pi]$. Then:
@@ -879,7 +879,7 @@
   \end{proposition}
   \subsubsection{Zeros of holomorphic functions}
   \begin{theorem}
-    Let $U\subseteq\CC$ be an open convex set and $f\in\mathcal{H}(U)$. Then, the following statements are equivalent:
+    Let $U\subseteq\CC$ be an open connected set and $f\in\mathcal{H}(U)$. Then, the following statements are equivalent:
     \begin{enumerate}
       \item $f(z)=0$.
       \item $\exists z_0\in U$ such that $f^{(n)}(z_0)=0$ $\forall n\in\NN\cup\{0\}$.
@@ -887,10 +887,10 @@
     \end{enumerate}
   \end{theorem}
   \begin{corollary}
-    Let $U\subseteq\CC$ be an open convex set and $f\in\mathcal{H}(U)$ such that $f$ is not identically zero. Then, if $z_0\in U$ is a zero of $f$, $\exists m\in\NN$ and $g\in\mathcal{H}(U)$ such that $g(z_0)\ne 0$ and: $$f(z)={(z-z_0)}^{m}g(z)$$ The value of $m$ is called \emph{multiplicity} of $z_0$. In particular, the zeros of $f$ are isolated.
+    Let $U\subseteq\CC$ be an open connected set and $f\in\mathcal{H}(U)$ such that $f$ is not identically zero. Then, if $z_0\in U$ is a zero of $f$, $\exists m\in\NN$ and $g\in\mathcal{H}(U)$ such that $g(z_0)\ne 0$ and: $$f(z)={(z-z_0)}^{m}g(z)$$ The value of $m$ is called \emph{multiplicity} of $z_0$. In particular, the zeros of $f$ are isolated.
   \end{corollary}
   \begin{theorem}[Analytic contiuation]
-    Let $U\subseteq\CC$ be an open convex set and $f,g\in\mathcal{H}(U)$ such that ${\{z\in U:f(z)-g(z)=0\}}'\cap U\ne\varnothing$. Then, $f(z)=g(z)$ $\forall z\in U$
+    Let $U\subseteq\CC$ be an open connected set and $f,g\in\mathcal{H}(U)$ such that ${\{z\in U:f(z)=g(z)\}}'\cap U\ne\varnothing$. Then, $f(z)=g(z)$ $\forall z\in U$.
   \end{theorem}
 \end{multicols}
 \end{document}
