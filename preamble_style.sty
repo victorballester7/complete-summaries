@@ -9,6 +9,7 @@
 
 %%%%%% Title format and page style %%%%%%
     \titleformat{\chapter}[hang]{\normalfont\Huge\bfseries}{\thechapter.}{20pt}{}
+    \titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{1em}{}[{\titlerule[0.8pt]}]
     \titleformat{\subsection}[hang]{\normalfont\large\bfseries}{\thesubsection\hspace{6pt}{\textbf{$|$}}\hspace{-6pt}}{1em}{}
     
     % For well cross reference in the table of contents
@@ -18,11 +19,13 @@
 
     \ifSubfilesClassLoaded{% show only when the single subfile is compiled
         \titleformat{\section}
-        {\bfseries\Large} % format
+        {\normalfont\huge\bfseries} % format
         {}          % label
         {0.0cm}     % separation between label and body
-        {}          % code preceding title body
+        {}
         []
+        %{{\titlerule[2pt]}\vspace{4pt}}          % code before title body
+        %[\vspace{4pt}{\titlerule[2pt]}]          % code after title body
         \renewcommand{\thesection}{\arabic{section}}
         \renewcommand{\thesubsection}{\arabic{subsection}}
     
