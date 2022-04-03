@@ -95,7 +95,7 @@
   \end{definition}
   \subsubsection{Methods of estimation}
   \begin{definition}[Method of moments]
-    Let $(\mathcal{X},\mathcal{F},\{\Prob_{\vf\theta}^{\vf{X}_n}:\vf{\theta}\in\Theta\subseteq \RR^d\})$ be a parametric statistical model such that $X_1,\ldots,X_n$ are \iid random variables, and $\mu_k$ be $k$-th moment of each of them. Suppose $\vf{\theta}=(\theta_1,\ldots,\theta_d)$. Then, given a realization $\vf{x}_n=(x_1,\ldots,x_n)\in\mathcal{X}$ of $\vf{X}_n$, a estimator $\vf{\tilde{\theta}}(\vf{x}_n)=(\tilde{\theta}_1(\vf{x}_n),\ldots,\tilde{\theta}_d(\vf{x}_n))$ of $\vf{\theta}$ is given by the solution of the following system:
+    Let $(\mathcal{X},\mathcal{F},\{\Prob_{\vf\theta}^{\vf{X}_n}:\vf{\theta}\in\Theta\subseteq \RR^d\})$ be a parametric statistical model such that $X_1,\ldots,X_n$ are \iid random variables, and $\mu_k$ be $k$-th moment of each of them. Suppose $\vf{\theta}=(\theta_1,\ldots,\theta_d)$. Then, given a realization $\vf{x}_n=(x_1,\ldots,x_n)\in\mathcal{X}$ of $\vf{X}_n$, an estimator $\vf{\tilde{\theta}}(\vf{x}_n)=(\tilde{\theta}_1(\vf{x}_n),\ldots,\tilde{\theta}_d(\vf{x}_n))$ of $\vf{\theta}$ is given by the solution of the following system:
     $$
       \left\{
       \begin{aligned}
@@ -173,7 +173,7 @@
     Let $(\mathcal{X}, \mathcal{F}, \{\Prob_{\theta}^{\vf{X}_n}: \theta\in\Theta\subseteq\RR\})$ be a regular parametric statistical model, $\vf{x}_n\in\mathcal{X}$ be a realization of $\vf{X}_n$, $g:\Theta\rightarrow\Theta$ be a differentiable function and ${\hat\theta}$ be a regular and unbiased estimator of $g({\theta})\in\Theta$. Then: $$\Var(\hat\theta)\geq \frac{{g'(\theta)}^2}{I(\theta)}$$
   \end{theorem}
   \begin{definition}
-    Let $(\mathcal{X},\mathcal{F},\{\Prob_{\theta}^{\vf{X}_n}:\theta\in\Theta\subseteq\RR\})$ be a regular statistical model, $\vf{x}_n\in\mathcal{X}$ be a realization of $\vf{X}_n$, $g:\Theta\rightarrow\Theta$ be a differentiable function and ${\hat\theta}$ be a regular and unbiased estimator of $g({\theta})\in\Theta$. We say that $\hat\theta$ is an \emph{efficient estimator} of $\theta$ if $$\Var(\hat\theta)=\frac{{g'(\theta)}^2}{I(\theta)}$$
+    Let $(\mathcal{X},\mathcal{F},\{\Prob_{\theta}^{\vf{X}_n}:\theta\in\Theta\subseteq\RR\})$ be a regular statistical model, $\vf{x}_n\in\mathcal{X}$ be a realization of $\vf{X}_n$, $g:\Theta\rightarrow\Theta$ be a differentiable function and ${\hat\theta}$ be a regular and unbiased estimator of $g({\theta})\in\Theta$. We say that $\hat\theta$ is an \emph{efficient estimator} of $g(\theta)$ if $$\Var(\hat\theta)=\frac{{g'(\theta)}^2}{I(\theta)}$$
   \end{definition}
   \begin{proposition}
     Let $(\mathcal{X},\mathcal{F},\{\Prob_{\theta}^{\vf{X}_n}:\theta\in\Theta\subseteq\RR\})$ be a regular statistical model, $g:\Theta\rightarrow\Theta$ be a function and ${\hat\theta}$ be a regular, unbiased and efficient estimator of $g({\theta})\in\Theta$. Then, $\hat\theta$ is a MVUE in the class of regular estimators.
@@ -182,6 +182,7 @@
     Let $(\mathcal{X},\mathcal{F},\{\Prob_{\theta}^{\vf{X}_n}:\theta\in\Theta\subseteq \RR\})$ be a regular statistical model, $\vf{x}_n\in\mathcal{X}$ be a realization of $\vf{X}_n$ and ${\hat\theta}$ be a MLE of ${\theta}\in\Theta$. Suppose that $\pdv[2]{\ell}{\theta}$ is a continuos function of $\theta$ and that $$\left|\pdv[2]{\ell}{\theta}(\tilde{\theta};\vf{x}_n)\right|<h(\vf{x};\theta)$$
     with $\int_\mathcal{X}h(\vf{x};\theta)L(\theta;\vf{x})\dd{\vf{x}}<\infty$, for all $\tilde{\theta}$ in a neighbourhood of $\theta$. Then:
     $$\hat\theta\overset{\text{d}}{\longrightarrow}N\left(\theta,\frac{1}{I(\theta)}\right)$$
+    Thus, ${\hat\theta}$ is an asymptotically efficient estimator of $\theta$.
   \end{theorem}
   \begin{theorem}[Delta method]
     Let $(\mathcal{X},\mathcal{F},\{\Prob_{\theta}^{\vf{X}_n}:\theta\in\Theta\subseteq\RR\})$ be a statistical model, $g:\Theta\rightarrow\Theta$ be a two-times differentiable function such that $g'(\theta)\ne 0$ and $\hat\theta$ be an estimator of $\theta\in\Theta$. Then:
@@ -230,9 +231,9 @@
     Let $\vf{b},\vf{c}\in\RR^n$, $\vf{\Sigma}\in\mathcal{M}_n(\RR)$ be a symmetric positive-definite matrix, $\vf{B}\in\GL_n(\RR)$, $\vf{X}\sim N(\vf{b},\vf\Sigma)$ and $\vf{Y}:=\vf{BX}+\vf{c}$. Then: $$\vf{Y}\sim N(\vf{Bb}+\vf{c},\vf{B\Sigma}\transpose{\vf{B}})$$
   \end{proposition}
   \subsubsection{\texorpdfstring{$\chi^2$}{chi2}-distribution}
-  \begin{definition}
+  \begin{proposition}
     Let $n\in\NN$ and $X_1,\ldots,X_n$ be independent random variables such that $X_i\sim \text{Gamma}(\alpha_i,\beta)$ for $i=1,\ldots,n$. Then: $$\sum_{i=1}^nX_i\sim\text{Gamma}\left(\sum_{i=1}^n\alpha_i,\beta\right)$$
-  \end{definition}
+  \end{proposition}
   \begin{corollary}
     Let $n\in\NN$ and $Z_1,\ldots,Z_n$ be \iid random variable with standard normal distribution. Then: $${Z_1}^2+\cdots+{Z_n}^2\sim\text{Gamma}\left(\frac{n}{2},\frac{1}{2}\right)$$
   \end{corollary}
@@ -241,6 +242,9 @@
     $$f_{{\chi_n}^2}(x)=\frac{1}{2^\frac{n}{2}\Gamma\left(\frac{n}{2}\right)}x^{\frac{n}{2}-1}\exp{-\frac{x}{2}}\vf{1}_{(0,\infty)}(x)$$
     We will denote by ${\chi_{n;p}}^2:=Q_{{\chi_n}^2}(p)$ the quantile of the ${\chi_n}^2$
   \end{definition}
+  \begin{proposition}
+    Let $X\sim\text{Gamma}(\alpha,\beta)$ and $c\in\RR_{>0}$. Then, $cX\sim\text{Gamma}(\alpha,\beta/c)$. In particular, if $X\sim\text{Gamma}(n,1)$, then $2X\sim {\chi_{2n}}^2$.
+  \end{proposition}
   \subsubsection{Student's \texorpdfstring{$t$}{t}-distribution}
   \begin{definition}
     Let $n\in\NN$ and $Z\sim N(0,1)$ and $Y\sim{\chi_n}^2$ be independent random variables. We define the \emph{Student's $t$-distribution with $n$ degrees of freedom} as the distribution of: $$\frac{Z}{\sqrt{Y/n}}$$
@@ -284,7 +288,6 @@
     Let $(\mathcal{X},\mathcal{F},\{\Prob_{\vf\theta}^{\vf{X}_n}:\vf\theta\in\Theta\subseteq\RR^d\})$ be a parametric statistical model and $\vf{g}:\Theta\rightarrow\RR^m$, $m\leq d$, be a function. A \emph{pivot} for $\vf{g}(\vf\theta)$ is a measurable function
     $$\function{\pi}{\mathcal{X}\times \vf{g}(\Theta)}{\RR^m}{(\vf{x},\vf{g}(\vf\theta))}{\vf\pi(\vf{x},\vf{g}(\vf\theta))}$$
     such that the distribution of $\vf\pi(\vf{x},\vf{g}(\vf\theta))$ does not depend on $\vf\theta$.
-    $$C(\vf{X}_n)$$ such that $$\Prob(\vf{g}(\vf\theta)\in C(\vf{X}_n))\geq \gamma\quad\forall \theta\in\Theta$$ If $d=1$, we talk about \emph{confidence intervals}.
   \end{definition}
   \begin{proposition}
     Let $(\mathcal{X},\mathcal{F},\{\Prob_{\vf\theta}^{\vf{X}_n}:\vf\theta\in\Theta\subseteq\RR^d\})$ be a parametric statistical model, $\gamma\in[0,1]$, $\vf{g}:\Theta\rightarrow\RR^m$, $m\leq d$, be a function, $\vf\pi(\vf{x},\vf{g}(\vf\theta))$ be a pivot for $\vf{g}(\vf\theta)$ and $B\in\mathcal{B}(\RR^m)$ such that: $$\Prob(\vf\pi(\vf{X}_n,\vf{g}(\vf\theta))\in B)\geq \gamma\quad\forall \vf\theta\in\Theta$$
@@ -298,7 +301,7 @@
   \end{proposition}
   \subsubsection{Confidence intervals for \texorpdfstring{$N(\mu,\sigma^2)$}{N(mu,sigma2)}}
   \begin{proposition}[Interval for $\mu$ with $\sigma$ known]
-    Let $\sigma\in\RR_{\geq 0}$ a known parameters, $(\mathcal{X},\mathcal{F},\{X_1,\ldots,X_n\sim N(\mu,\sigma^2)\text{ i.i.d.}:\mu\in\RR\})$ be a parametric statistical model, $\vf{x}_n\in\mathcal{X}$ be a realization of $(X_1,\ldots,X_n)$ and $\alpha\in[0,1]$. Then, a confidence interval for $\mu$ of confidence level $1-\alpha$ is:
+    Let $\sigma\in\RR_{\geq 0}$ be a known parameter, $(\mathcal{X},\mathcal{F},\{X_1,\ldots,X_n\sim N(\mu,\sigma^2)\text{ i.i.d.}:\mu\in\RR\})$ be a parametric statistical model, $\vf{x}_n\in\mathcal{X}$ be a realization of $(X_1,\ldots,X_n)$ and $\alpha\in[0,1]$. Then, a confidence interval for $\mu$ of confidence level $1-\alpha$ is:
     $$\mu\in\left(\overline{x}_n-z_{1-\frac{\alpha}{2}}\frac{\sigma}{\sqrt{n}},\overline{x}_n+z_{1-\frac{\alpha}{2}}\frac{\sigma}{\sqrt{n}}\right)$$
   \end{proposition}
   \begin{proposition}[Intervals for $\mu$ and $\sigma^2$]
@@ -336,16 +339,16 @@
   \subsection{Hypothesis testing}
   \subsubsection{Hypothesis test}
   \begin{definition}
-    Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\theta\in\Theta\})$ be a statistical model and $\Theta=\Theta_0\sqcup\Theta_1$ be a partition of $\Theta$. Our goal is to know whether $\theta\in\Theta_0$ or not and we will use a sample $\vf{x}\in\mathcal{X}$ to conclude our objective. We define the following two propositions which we will call \emph{hypothesis}:
+    Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\theta\in\Theta\})$ be a statistical model and $\Theta_0,\Theta_1\subset\Theta$ be subsets. Our goal is to know whether $\theta\in\Theta_0$ or $\theta\in\Theta_1$ (even if it isn't neither of them) and we will use a sample $\vf{x}\in\mathcal{X}$ to conclude our objective. We define the following two propositions which we will call \emph{hypothesis}:
     $$\mathcal{H}_0:\theta\in\Theta_0\qquad\mathcal{H}_1:\theta\in\Theta_1$$
     $\mathcal{H}_0$ is called \emph{null hypothesis} and $\mathcal{H}_1$ is called \emph{alternative hypothesis}. We say that the hypothesis $\mathcal{H}_i$ is \emph{simple} if $\Theta_i=\{\theta_0\}$ for some $\theta_0\in\Theta$. Otherwise we say that the hypothesis $\mathcal{H}_i$ is compound.
   \end{definition}
   \begin{definition}[Hypothesis test]
-    Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\theta\in\Theta=\Theta_0\sqcup\Theta_1\})$ be a statistical model. A \emph{hypothesis test} is a function $$\function{\delta}{\mathcal{X}}{\{\mathcal{H}_0,\mathcal{H}_1\}}{\vf{x}}{\delta(\vf{x})}$$
+    Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\theta\in\Theta\})$ be a statistical model. A \emph{hypothesis test} is a function $$\function{\delta}{\mathcal{X}}{\{\mathcal{H}_0,\mathcal{H}_1\}}{\vf{x}}{\delta(\vf{x})}$$
     The set $A_0:=\delta^{-1}(\mathcal{H}_0)\subseteq \mathcal{X}$, which is the set of samples that will lead us to accept $\mathcal{H}_0$, is called \emph{acceptation region}. The set $A_1:=\delta^{-1}(\mathcal{H}_1)\subseteq \mathcal{X}$, which is the set of samples that will lead us to accept $\mathcal{H}_1$ (and therefore reject $\mathcal{H}_0$), is called \emph{critical region}\footnote{In order to denote these concepts more compactly, we will write $\delta:\mathcal{X}=A_1\sqcup A_2\rightarrow\{\mathcal{H}_0,\mathcal{H}_1\}$ to denote the hypothesis test whose acceptation and critical regions are $A_0$ and $A_1$, respectively.}.
   \end{definition}
   \begin{definition}
-    Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\theta\in\Theta=\Theta_0\sqcup\Theta_1\})$ be a statistical model and $\delta:\mathcal{X}=A_1\sqcup A_2\rightarrow\{\mathcal{H}_0,\mathcal{H}_1\}$ be a hypothesis test. An \emph{error of type I} is the rejection of $\mathcal{H}_0$ when it is true. An \emph{error of type II} is the acceptation of $\mathcal{H}_0$ when it is false. We define the probabilities $\alpha$ and $\beta$ as:
+    Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\theta\in\Theta\})$ be a statistical model and $\delta:\mathcal{X}=A_1\sqcup A_2\rightarrow\{\mathcal{H}_0,\mathcal{H}_1\}$ be a hypothesis test. An \emph{error of type I} is the rejection of $\mathcal{H}_0$ when it is true. An \emph{error of type II} is the acceptation of $\mathcal{H}_0$ when it is false. We define the probabilities $\alpha$ and $\beta$ as:
     \begin{align*}
       \alpha & :=\Prob(\text{Error of type I})=\Prob(\text{Reject $\mathcal{H}_0$}\mid\text{$\mathcal{H}_0$ is true})   \\
       \beta  & :=\Prob(\text{Error of type II})=\Prob(\text{Accept $\mathcal{H}_0$}\mid\text{$\mathcal{H}_0$ is false})
@@ -354,10 +357,10 @@
     The value $1-\beta$ is called \emph{power} of the test and the value $\alpha$, \emph{size} of the test. Moreover we say that the test has \emph{significance level} $\alpha\in[0,1]$ if its size is less than or equal to $\alpha$. In many cases, the size of the test and the significance level are equal\footnote{In particular, for simple hypostesis they are the same thing.}\footnote{In practise, we fix a significance level $\alpha\in[0,1]$ small enough ($\approx 0.05$ but may vary depending on the problem) with which we accept making mistakes and from here we try to minimize the $\beta$ (or maximize the power $1-\beta$). Moreover having fixed $\alpha$, we obtain a confidence level $1-\alpha$. And if we impose $\Prob(\vf{x}\in A_0)=1-\alpha$, we are able to determine $A_0$.}.
   \end{definition}
   \begin{definition}
-    Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\theta\in\Theta=\Theta_0\sqcup\Theta_1\})$ be a statistical model, $\delta:\mathcal{X}=A_1\sqcup A_2\rightarrow\{\mathcal{H}_0,\mathcal{H}_1\}$ be a hypothesis test and $\vf{x}\in\mathcal{X}$ be a realization of $\vf{X}_n$. We define the \emph{power function} as: $$\Pi(\theta)=\Prob(\text{Reject $\mathcal{H}_0$})=\Prob(\vf{x}\in A_1)$$
+    Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\theta\in\Theta\})$ be a statistical model, $\delta:\mathcal{X}=A_1\sqcup A_2\rightarrow\{\mathcal{H}_0,\mathcal{H}_1\}$ be a hypothesis test and $\vf{x}\in\mathcal{X}$ be a realization of $\vf{X}_n$. We define the \emph{power function} as: $$\Pi(\theta)=\Prob(\text{Reject $\mathcal{H}_0$})=\Prob(\vf{x}\in A_1)$$
   \end{definition}
   \begin{proposition}
-    Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\theta\in\Theta=\Theta_0\sqcup\Theta_1\})$ be a statistical model, $\vf{x}\in\mathcal{X}$ be a realization of $\vf{X}_n$ and $\delta:\mathcal{X}=A_1\sqcup A_2\rightarrow\{\mathcal{H}_0,\mathcal{H}_1\}$ be a hypothesis test. Then:
+    Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\theta\in\Theta\})$ be a statistical model, $\vf{x}\in\mathcal{X}$ be a realization of $\vf{X}_n$ and $\delta:\mathcal{X}=A_1\sqcup A_2\rightarrow\{\mathcal{H}_0,\mathcal{H}_1\}$ be a hypothesis test. Then:
     $$
       \Pi(\theta)=
       \begin{cases}
@@ -367,11 +370,17 @@
     $$
   \end{proposition}
   \begin{definition}[Significance testing]
-    Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\theta\in\Theta=\Theta_0\sqcup\Theta_1\})$ be a statistical model, $\vf{x}\in\mathcal{X}$ be a realization of $\vf{X}_n$, $\delta:\mathcal{X}=A_1\sqcup A_2\rightarrow\{\mathcal{H}_0,\mathcal{H}_1\}$ be a hypothesis test such that $\Theta_0=\{\theta_0\}$, and $\hat{\theta}$ be an unbiased estimator of $\theta$. Suppose that we have obtained and observation $\hat{\theta}(\vf{x})=\vartheta>\theta_0$. We define the \emph{$p$-value} as the probability $\Prob(\hat{\theta}\geq\vartheta)$. In the case of $\vartheta<\theta_0$ the $p$-value is defined to be the probability $\Prob(\hat{\theta}\leq\vartheta)$. That is, the $p$-value is the probability of obtaining test results at least as extreme as the results actually observed.
+    Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\theta\in\Theta\})$ be a statistical model, $\vf{x}\in\mathcal{X}$ be a realization of $\vf{X}_n$, $\delta:\mathcal{X}=A_1\sqcup A_2\rightarrow\{\mathcal{H}_0,\mathcal{H}_1\}$ be a hypothesis test such that $\Theta_0=\{\theta_0\}$, and $\hat{\theta}$ be an unbiased estimator of $\theta$. Suppose that we have obtained and observation $\hat{\theta}(\vf{x})=\vartheta>\theta_0$. We define the \emph{$p$-value} as the probability $\Prob(\hat{\theta}\geq\vartheta)$. In the case of $\vartheta<\theta_0$ the $p$-value is defined to be the probability $\Prob(\hat{\theta}\leq\vartheta)$. That is, the $p$-value is the probability of obtaining test results at least as extreme as the results actually observed.
   \end{definition}
   \subsubsection{Neymann-Pearson test}
+  \begin{definition}
+    Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\theta\in\Theta\})$ be a statistical model. We say that a test $\delta:\mathcal{X}=A_1\sqcup A_2\rightarrow\{\mathcal{H}_0,\mathcal{H}_1\}$ of significance level $\alpha$ is a \emph{uniformly most powerful} (\emph{UMP}) \emph{test} if it has the greatest power among all the tests with significance level $\alpha$.
+  \end{definition}
+  \begin{lemma}
+    Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\theta\in\Theta\})$ be a statistical model. We say that a test $\delta:\mathcal{X}=A_1\sqcup A_2\rightarrow\{\mathcal{H}_0,\mathcal{H}_1\}$ of significance level $\alpha$. If $A_1$ does not depend on the parameter $\theta\in\Theta_1$, then $\delta$ is a UMP test.
+  \end{lemma}
   \begin{definition}[Neymann-Pearson test]
-    Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\theta\in\Theta=\Theta_0\sqcup\Theta_1\})$ be a statistical model, $\vf{x}\in\mathcal{X}$ be a realization of $\vf{X}_n$, $\delta:\mathcal{X}=A_1\sqcup A_2\rightarrow\{\mathcal{H}_0,\mathcal{H}_1\}$ be a hypothesis test such that $\Theta_0=\{\theta_0\}$ and $\Theta_1=\{\theta_1\}$. We say that $\delta$ is a \emph{Neyman-Pearson test} (or \emph{Likelihood-ratio test}) of significance level $\alpha\in[0,1]$ if $\exists C>0$ such that:
+    Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\theta\in\Theta\})$ be a statistical model, $\vf{x}\in\mathcal{X}$ be a realization of $\vf{X}_n$, $\delta:\mathcal{X}=A_1\sqcup A_2\rightarrow\{\mathcal{H}_0,\mathcal{H}_1\}$ be a hypothesis test such that $\Theta_0=\{\theta_0\}$ and $\Theta_1=\{\theta_1\}$. We say that $\delta$ is a \emph{Neyman-Pearson test} of significance level $\alpha\in[0,1]$ if $\exists C>0$ such that:
     \begin{gather*}
       \left\{\vf{x}\in\mathcal{X}:\frac{L(\theta_1;\vf{x})}{L(\theta_0;\vf{x})}\leq C\right\}= A_0\\
       \left\{\vf{x}\in\mathcal{X}:\frac{L(\theta_1;\vf{x})}{L(\theta_0;\vf{x})}> C\right\}= A_1
@@ -379,10 +388,10 @@
     and $\Prob(\vf{x}\in A_1\mid \mathcal{H}_0)=\alpha$.
   \end{definition}
   \begin{lemma}[Neyman-Pearson lemma]
-    Any Neyman-Pearson test is the most powerful test among all tests with significance level $\alpha$.
+    Any Neyman-Pearson test is a UMP test.
   \end{lemma}
   \begin{theorem}
-    Any test of significance level $\alpha$ and maximum power is a Neyman-Pearson test.
+    Any UMP test is a Neyman-Pearson test.
   \end{theorem}
 \end{multicols}
 \end{document}
