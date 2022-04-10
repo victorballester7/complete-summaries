@@ -1,6 +1,8 @@
 \documentclass[../../../main.tex]{subfiles}
 
+
 \begin{document}
+\renewcommand{\col}{\geo}
 \begin{multicols}{2}[\section{Differential geometry}]
   \subsection{Differentiable curves}
   \subsubsection{Inner product of \texorpdfstring{$\RR^n$}{Rn}}
@@ -25,12 +27,12 @@
   \begin{proposition}
     Let $I\subseteq\RR$ be an open interval and $\vf{\alpha},\vf{\beta}:I\rightarrow\RR^n$ be differentiable functions. Then:
     \begin{enumerate}
-      \item $\dv{}{t}\langle\vf{\alpha}(t),\vf{\beta}(t)\rangle=\langle\vf{\alpha}'(t),\vf{\beta}(t)\rangle+\langle\vf{\alpha}(t),\vf{\beta}'(t)\rangle$
+      \item ${\langle\vf{\alpha}(t),\vf{\beta}(t)\rangle}'=\langle\vf{\alpha}'(t),\vf{\beta}(t)\rangle+\langle\vf{\alpha}(t),\vf{\beta}'(t)\rangle$
       \item If $t\mapsto\|\vf{\alpha}(t)\|$ is a constant function, then $\vf{\alpha}\perp\vf{\alpha}'$.
     \end{enumerate}
   \end{proposition}
   \begin{definition}
-    Let $I\subseteq\RR$ be an open interval and $C\subset\RR^n$ be a curve. A \emph{parametrization} of $C$ of class $\mathcal{C}^k$ is a function $\vf{\alpha}:I\rightarrow\RR^n$ of class $\mathcal{C}^k$ such that $\vf\alpha(I)=C$. The image of $\vf\alpha$, $C$, is called the \emph{trace} of $\vf\alpha$ and it is sometimes denoted by $\vf\alpha^*:=\im(\vf\alpha)$\footnote{Sometimes $\vf\alpha$ is referred to the curved instead of the parametrization of it.}.
+    Let $I\subseteq\RR$ be an open interval and $C\subset\RR^n$ be a curve. A \emph{parametrization} of $C$ of class $\mathcal{C}^k$ is a function $\vf{\alpha}:I\rightarrow\RR^n$ of class $\mathcal{C}^k$ such that $\vf\alpha(I)=C$. The image of $\vf\alpha$, $C$, is called the \emph{trace} of $\vf\alpha$ and it is sometimes denoted by $\vf\alpha^*:=\im(\vf\alpha)$\footnote{Sometimes $\vf\alpha$ is referred to the curve as well as to the parametrization of it.}.
   \end{definition}
   \begin{definition}
     Let $I\subseteq\RR$ be an open interval, $C\subset\RR^n$ be a curve and $\vf{\alpha}:I\rightarrow\RR^n$ be a parametrization of $C$ of class $\mathcal{C}^1$. We define the \emph{tangent vector} of $\vf{\alpha}$ at $t_0\in\RR$ as $\vf{\alpha}'(t_0)$. We say that $\vf{\alpha}$ is \emph{regular} if $\vf{\alpha}'(t)\ne 0$ $\forall t\in I$. In that last case, we define the \emph{tangent line} of $\vf{\alpha}$ at $\vf{\alpha}(t_0)$ as the following parametrized line in $\RR^n$: $$s\longmapsto \vf{\alpha}(t_0)+s\vf{\alpha}'(t_0)$$
@@ -59,7 +61,7 @@
     Let $I\subseteq\RR$ be an open interval, $C\subset\RR^n$ be a curve and $\vf{\alpha}:I\rightarrow\RR^n$ be a parametrization $C$ of class $\mathcal{C}^1$. We say that $\vf{\alpha}$ is a \emph{unit-speed parametrization} (or that it is parametrized by \emph{arc-length parameter}) if $\|\vf{\alpha}'(t)\|=1$ $\forall t\in I$.
   \end{definition}
   \begin{proposition}
-    Let $I\subseteq\RR$ be an open interval, $C\subset\RR^n$ be a curve and $\vf{\alpha}:I\rightarrow\RR^n$ be a parametrization $C$ of class $\mathcal{C}^1$ and ${t_0}\in I$.
+    Let $I\subseteq\RR$ be an open interval, $C\subset\RR^n$ be a curve and $\vf{\alpha}:I\rightarrow\RR^n$ be a parametrization $C$ of class $\mathcal{C}^1$ and ${t_0}\in I$. Then:
     \begin{enumerate}
       \item $s_{t_0}$ is of class $\mathcal{C}^1$ and $\dv{s_{t_0}}{t}(t_0)=\|\vf{\alpha}'(t_0)\|\geq 0$.
       \item If $\vf{\alpha}$ is regular, then $J:=s_{t_0}(I)\subseteq\RR$ is an open interval and $s_{t_0}:I\rightarrow J$ is a diffeomorphism.
@@ -74,7 +76,7 @@
   \end{proposition}
   \subsubsection{Orientability and cross product}
   \begin{definition}
-    Let $V$ be a vector space and $\mathcal{B}_1$ and $\mathcal{B}_2$ be two bases of $V$. We say that $\mathcal{B}_1\sim\mathcal{B}_2$ if $\det\left([\id]_{\mathcal{B}_1,\mathcal{B}_2}\right)>0$. This relation is an equivalence relation on the set of all bases for $V$ which has two exactly connected components.
+    Let $V$ be a vector space and $\mathcal{B}_1$ and $\mathcal{B}_2$ be two bases of $V$. We say that $\mathcal{B}_1\sim\mathcal{B}_2$ if $\det\left([\id]_{\mathcal{B}_1,\mathcal{B}_2}\right)>0$. This relation is an equivalence relation on the set of all bases of $V$ which has exactly two connected components.
   \end{definition}
   \begin{definition}
     Let $V$ be a vector space and $\mathcal{B}_1$ and $\mathcal{B}_2$ be two bases of $V$. We say that $\mathcal{B}_1\sim\mathcal{B}_2$ have the \emph{same orientation} if $\det\left([\id]_{\mathcal{B}_1,\mathcal{B}_2}\right)>0$. Otherwise, we say that they have \emph{opposite orientations}. Note that the property of having the same orientation defines an equivalence relation on the set of all bases for $V$.
@@ -124,7 +126,7 @@
                 \vf{u}\times\vf{x} & \vf{v}\times\vf{x} \\
                 \vf{u}\times\vf{y} & \vf{v}\times\vf{y} \\
               \end{vmatrix}$$
-      \item Let $\theta\in[0,\pi]$ the angle between $\vf{u}$ and $\vf{v}$. Then: $$\|\vf{u}\times\vf{v}\|=\|\vf{u}\|\|\vf{v}\|\sin\theta$$
+      \item Let $\theta\in[0,\pi]$ be the angle between $\vf{u}$ and $\vf{v}$. Then: $$\|\vf{u}\times\vf{v}\|=\|\vf{u}\|\|\vf{v}\|\sin\theta$$
       \item $(\vf{u}\times\vf{v})\times\vf{w}=\langle\vf{u},\vf{w}\rangle\vf{v}-\langle\vf{v},\vf{w}\rangle\vf{u}$
       \item \emph{Jacobi identity}: $$(\vf{u}\times\vf{v})\times\vf{w}+(\vf{v}\times\vf{w})\times\vf{u}+(\vf{w}\times\vf{u})\times\vf{v}=\vf{0}$$
     \end{enumerate}
@@ -454,7 +456,7 @@
     A submanifold of $\RR^3$ of dimension 2 is called a \emph{regular surface} (or simply \emph{surface}) of $\RR^3$.
   \end{definition}
   \begin{proposition}
-    Let $S\subseteq\RR^3$ be a set. Then, $S$ is a surface if and only if $\forall z\in S$ there exists an open neighbourhood $U\subseteq \RR^3$ of $z$, a change of variables $\vf\sigma$, a neighbourhood $V\subseteq \RR^2$ of $\vf\pi_1(\sigma(z))$ (where $\vf\pi_1:\RR^2\times \RR\rightarrow\RR^2$ is the projection map) and a differentiable function $h:V\rightarrow \RR$ such that: $$\vf\sigma(S\cap U)=\graph(h)$$
+    Let $S\subseteq\RR^3$ be a set. Then, $S$ is a surface if and only if $\forall z\in S$ there exists an open neighbourhood $U\subseteq \RR^3$ of $z$, a change of the order of the variables $\vf\sigma$, a neighbourhood $V\subseteq \RR^2$ of $\vf\pi_1(\sigma(z))$ (where $\vf\pi_1:\RR^2\times \RR\rightarrow\RR^2$ is the projection map) and a differentiable function $h:V\rightarrow \RR$ such that: $$\vf\sigma(S\cap U)=\graph(h)$$
   \end{proposition}
   \subsubsection{Differentiable functions}
   \begin{definition}
@@ -531,7 +533,7 @@
     and $$\I_p(\vf{u})=a^2 E_{\vf\varphi}+2ab F_{\vf\varphi}+b^2G_{\vf\varphi}$$
   \end{proposition}
   \begin{definition}
-    Let $S\subseteq\RR^3$ be a surface, $(V,\vf\varphi(u,v))$ be a local parametrization of $S$ and $p\in S$. We say that the parametrization $(V,\vf\varphi(u,v))$ is \emph{orthogonal} (or that $u$ and $v$ are \emph{orthogonal cooridnates}) if $F_{\vf\varphi}=0$.
+    Let $S\subseteq\RR^3$ be a surface, $(V,\vf\varphi(u,v))$ be a local parametrization of $S$ and $p\in S$. We say that the parametrization $(V,\vf\varphi(u,v))$ is \emph{orthogonal} (or that $u$ and $v$ are \emph{orthogonal coordinates}) if $F_{\vf\varphi}=0$.
   \end{definition}
   \begin{proposition}
     Let $S\subseteq\RR^3$ be a surface, $(V,\vf\varphi(u,v))$ be a local parametrization of $S$ and $\vf\alpha:I\rightarrow\vf\varphi(V)$ be a parametrization of a curve of class $\mathcal{C}^\infty$. We can write $\vf\alpha$ as $\vf\alpha(t)=\vf\varphi(u(t),v(t))$. Then:
@@ -543,7 +545,7 @@
   \end{proposition}
   \subsubsection{Area}
   \begin{definition}
-    Let $S\subseteq\RR^3$ be a surface and $D\subseteq S$ be a subset. We say that $D$ is a \emph{regular domain} (or simply \emph{domain}) if $D$ is open, connected and $\Fr D\subset S$ is the image of a $\mathcal{C}^1$-piecewise curve. A \emph{region} $R\subseteq S$ is the union of a domain $D$ with its boundary, $R=D\cup\Fr D$.
+    Let $S\subseteq\RR^3$ be a surface and $D\subseteq S$ be a subset. We say that $D$ is a \emph{regular domain} (or simply \emph{domain}) if $D$ is open, connected and $\Fr D\subset S$ is the image of a piecewise curve of class $\mathcal{C}^1$. A \emph{region} $R\subseteq S$ is the union of a domain $D$ with its boundary, $R=D\cup\Fr D$.
   \end{definition}
   \begin{definition}
     Let $S\subseteq\RR^3$ be a surface, $(V,\vf\varphi(u,v))$ be a local parametrization of $S$ and $R\subset \vf\varphi(V)$ be a compact region. Let $Q={\vf\varphi}^{-1}(R)\subseteq\RR^2$. We define the area of $R$ as:
@@ -562,10 +564,10 @@
     We say that $\vf{f}$ is an \emph{isometry} if it is a local isometry and it is invertible.
   \end{definition}
   \begin{proposition}
-    Let $S_1,S_2\subseteq\RR^3$ be surfaces and $\vf{f}:S_1\rightarrow S_2$ be a local isometry. Then, $\vf{\dd{f}}_p$ is a diffeomorphism.
+    Let $S_1,S_2\subseteq\RR^3$ be surfaces and $\vf{f}:S_1\rightarrow S_2$ be a local isometry. Then, $\vf{\dd{f}}_p$ is a isomorphism.
   \end{proposition}
   \begin{proposition}
-    Let $S_1,S_2\subseteq\RR^3$ be surfaces and $\vf{f}:S_1\rightarrow S_2$ be a function of class $\mathcal{C}^1$. Then, $\vf{f}$ is a local isometry if and only if $\vf{f}$ preserves lengths, that is, for any curve $\vf\alpha:I\rightarrow S_1$, we have $L(\vf\alpha)=L(f\circ\vf\alpha)$.
+    Let $S_1,S_2\subseteq\RR^3$ be surfaces and $\vf{f}:S_1\rightarrow S_2$ be a function of class $\mathcal{C}^1$. Then, $\vf{f}$ is a local isometry if and only if $\vf{f}$ preserves lengths, that is, for any curve $\vf\alpha:I\rightarrow S_1$, we have $L(\vf\alpha)=L(\vf{f}\circ\vf\alpha)$.
   \end{proposition}
   \begin{proposition}
     Let $S_1,S_2\subseteq\RR^3$ be surfaces, $(V,\vf\varphi)$ be a local parametrization of $S_1$, $\vf{f}:S_1\rightarrow S_2$ be a function of class $\mathcal{C}^1$. Then, $(V,\vf\psi=\vf{f}\circ\vf\varphi)$ is a local parametrization of $S_2$ and moreover:
@@ -636,7 +638,7 @@
     Let $S\subseteq\RR^3$ be an orientable surface, $p\in S$ and $(\vf{v}_1,\vf{v}_2)$ be an orthonormal basis of $T_pS$, where $\vf{v}_i$ is an eigenvector of eigenvalue $k_i$ of $\vf{W}_p$ for $i=1,2$. Then, for $i=1,2$ we have: $$k_i=k_\text{n}(\vf{v}_i)$$
   \end{proposition}
   \begin{definition}
-    Let $S\subseteq\RR^3$ be an orientable surface, $p\in S$ and $\vf{v}\in T_pS$ with $\|\vf{v}\|=1$. We day that the direction of $\vf{v}$ in $T_pS$ is an \emph{asymptotic direction} if $k_\text{n}(\vf{v})=\II_p(\vf{v})=0$.
+    Let $S\subseteq\RR^3$ be an orientable surface, $p\in S$ and $\vf{v}\in T_pS$ with $\|\vf{v}\|=1$. We say that the direction of $\vf{v}$ in $T_pS$ is an \emph{asymptotic direction} if $k_\text{n}(\vf{v})=\II_p(\vf{v})=0$.
   \end{definition}
   \begin{definition}
     Let $S\subseteq\RR^3$ be an orientable surface and $C\subset S$ be a curve. We say that $C$ is a \emph{line of curvature} of $S$ if the tangent line at $C$ is a principal direction at each point $p\in C$. We say that $C$ is an \emph{asymptotic line} of $S$ if the tangent line at $C$ is an asymptotic direction at each point $p\in C$.

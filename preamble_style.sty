@@ -2,43 +2,59 @@
 \usepackage[a4paper, headheight=14pt, left=1.5cm, right=1.5cm, top=2cm, bottom=2cm]{geometry}
 \usepackage{fancyhdr} % for customizing page-style (mainly headings).
 \usepackage{titlesec} % for changing style of chapters, section... (with title format).
-\usepackage[colorlinks, linkcolor=blue, citecolor=blue, urlcolor=blue]{hyperref} % link automatically references.
 \usepackage{bookmark} % solve some warnings such as writing a section just below a part (i.e. without a chapter between them).
 \usepackage[es-ES]{datetime2} % for writing the current date when compiling.
-\usepackage{subfiles} % for creating subfiles .tex and comiling them seperately to main.tex.
+\usepackage{subfiles} % for creating subfiles .tex and compiling them separately to main.tex.
+\usepackage{lmodern} % modern latin font. Also for avoiding (and correcting) some warnings. 
 
 %%%%%% Title format and page style %%%%%%
     \titleformat{\chapter}[hang]{\normalfont\Huge\bfseries}{\thechapter.}{20pt}{}
-    \titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{1em}{}[{\titlerule[0.8pt]}]
-    \titleformat{\subsection}[hang]{\normalfont\large\bfseries}{\thesubsection\hspace{6pt}{\textbf{$|$}}\hspace{-6pt}}{1em}{}
+    \titleformat{\section}[block]
+        {{\color{\col}\titlerule[1.5pt]}\addvspace{4pt}\normalfont\fontsize{19}{21}\bfseries}
+        {\color{\col}\thesection.}      % label
+        {1em}   % separation between label and body
+        {}      % code before title body
+        [\vspace{2pt}{\color{\col}\titlerule[1.5pt]}] % code after title body 
+    \titleformat{\subsection}[hang]{\normalfont\fontsize{13}{15}\bfseries}{\color{\col}\thesubsection.\hspace{6pt}$\vf{|}$\hspace{-6pt}}{1em}{}
+    \titleformat{\subsubsection}[hang]{\normalfont\fontsize{11}{13}\bfseries}{}{0pt}{}
     
     % For well cross reference in the table of contents
     \renewcommand*{\theHchapter}{\the\value{part}.\the\value{chapter}}
     \renewcommand*{\theHsection}{\the\value{part}.\the\value{chapter}.\the\value{section}}
     \renewcommand*{\theHsubsection}{\the\value{part}.\the\value{chapter}.\the\value{section}.\the\value{subsection}}
-
-    \ifSubfilesClassLoaded{% show only when the single subfile is compiled
-        \titleformat{\section}
-        {\normalfont\huge\bfseries} % format
-        {}          % label
-        {0.0cm}     % separation between label and body
-        {}
-        []
-        %{{\titlerule[2pt]}\vspace{4pt}}          % code before title body
-        %[\vspace{4pt}{\titlerule[2pt]}]          % code after title body
+  
+    \ifSubfilesClassLoaded{% show only when the single subfile is compiled        
+      \titleformat{\section}[block]
+        {{\color{\col}\titlerule[1.5pt]}\addvspace{4pt}\normalfont\fontsize{19}{22}\bfseries}
+        {}      % label
+        {0pt}   % separation between label and body
+        {}      % code before title body
+        [\vspace{2pt}{\color{\col}\titlerule[1.5pt]}] % code after title body     
+        
         \renewcommand{\thesection}{\arabic{section}}
         \renewcommand{\thesubsection}{\arabic{subsection}}
     
-        % For numering by default level-3 headings (i.e. subsubsections). It is not by default beacuse we are in a report class document.
+        % For numbering by default level-3 headings (i.e. subsubsections). It is not by default because we are in a report class document.
         \setcounter{secnumdepth}{3}
         % For creating references in the .pdf file.
         \setcounter{tocdepth}{3}
 
 
-        \titlelabel{\thesubsubsection} % removing space between number and text (i.e. "1.  Probability" -----> "1.Probabiity").
+        \titlelabel{\thesubsubsection} % removing space between number and text (i.e. "1.  Probability" -----> "1.Probability").
         \renewcommand{\thesubsubsection}{} % removing the label of the subsubsection.
 
     }{% show only when the main file is compiled
+        \numberwithin{theorem}{section}
+
+        % \renewcommand{\theaxiom}{\arabic{section}.\arabic{axiom}}
+        % \renewcommand{\thedefinition}{\arabic{section}.\arabic{definition}}
+        % \renewcommand{\thetheorem}{\arabic{section}.\arabic{theorem}}
+        % \renewcommand{\thecorollary}{\arabic{section}.\arabic{corollary}}
+        % \renewcommand{\thelemma}{\arabic{section}.\arabic{lemma}}
+        % \renewcommand{\theproposition}{\arabic{section}.\arabic{proposition}}
+        % \renewcommand{\thelaw}{\arabic{section}.\arabic{law}}
+        % \renewcommand{\theprinciple}{\arabic{section}.\arabic{principle}}
+
         %%% Page-style (heading) %%%
         \renewcommand{\chaptermark}[1]{\markboth{\thechapter.\ #1}{}}
         \pagestyle{fancy}

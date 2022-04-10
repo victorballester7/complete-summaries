@@ -1,15 +1,20 @@
-\usepackage{amsthm, amsmath, mathtools, amssymb} % for math commands and math symbols.
-\usepackage{esint} % for more option on integrals.
+\usepackage{amsthm, amsmath, mathtools, amssymb,physics} % for math and physics commands and symbols.
+\usepackage{esint} % for more options on integrals.
 \usepackage{standalone} % for compiling individually .tex images.
-\usepackage[colorlinks, linkcolor=blue, citecolor=blue, urlcolor=blue]{hyperref} % link automatically references.
-\usepackage[hypcap=false]{caption} % basically for using the command \captionof{}, which is useful in some environments, others than \beging{figure}.
+\usepackage[hypcap=false]{caption} % basically for using the command \captionof{}, which is useful in some environments, others than \begin{figure}.
 \usepackage{subcaption} % for subfigures, when many captions come into play.
 \usepackage{multicol} % organize the whole document in multiple columns.
 \usepackage[USenglish]{babel} % for improving use of English and mainly the use of hyphenation.
 \usepackage[version=4]{mhchem} % used for chemistry and nuclear physics.
 \usepackage{multirow} % multirow in a table, for example.
-\usepackage{array, makecell} % for additional options in tables and tabulars.
+\usepackage{array, makecell} % for additional options in tables and tabular.
+\usepackage{hyperref} % link automatically references.
 \usepackage[capitalise,nameinlink]{cleveref} % for clever references. That is, for example, for automatically write "Definition 2.13" instead of only "2.13".
+\usepackage{graphicx} % for options like \definecolor{}{}{}, \textcolor{}{},...
+\usepackage[usenames,x11names]{xcolor} % to customize RGB colors.
+\usepackage{colortbl} % for colors in tables.
+
+\setlength{\parindent}{0pt} % Indentation disabled.
 
 %%%%% tikz images %%%%%%
 \usepackage{tikz, pgfplots} % for tikz images.
@@ -21,245 +26,244 @@
 \pgfplotsset{compat=newest}
 %%%%%%%%%%%%%%%%%%%%%%%%
 
-\usepackage{graphicx} % for options like \definecolor{}{}{}, \textcolor{}{},...
-\usepackage{xcolor} % to customize RGB colors.
-\usepackage{colortbl} % for colors in tables.
-\usepackage{physics} % commands of math and physics.
+%%%%%%%%%%%%%%% Colors %%%%%%%%%%%%%%%
+  \definecolor{color_blue1}{RGB}{190,190,255}
+  \definecolor{color_blue2}{RGB}{100,100,255}
+  \definecolor{color_blue3}{RGB}{0,0,255}
+  \definecolor{color_blue4}{RGB}{0,0,150}
+  \definecolor{color_green1}{RGB}{160,240,160}
+  \definecolor{color_green2}{RGB}{50,200,50}
+  \definecolor{color_green3}{RGB}{10,150,10}
+  \definecolor{color_green4}{RGB}{0,80,0}
 
-\setlength{\parindent}{0pt} % Indentation disabled.
-
-%%%%%%%% Colors %%%%%%%%
-    \definecolor{color_blue1}{RGB}{190,190,255}
-    \definecolor{color_blue2}{RGB}{100,100,255}
-    \definecolor{color_blue3}{RGB}{0,0,255}
-    \definecolor{color_blue4}{RGB}{0,0,150}
-    \definecolor{color_green1}{RGB}{160,240,160}
-    \definecolor{color_green2}{RGB}{50,200,50}
-    \definecolor{color_green3}{RGB}{10,150,10}
-    \definecolor{color_green4}{RGB}{0,80,0}
-
-    \pgfdeclareverticalshading{rainbow}{100bp}{color(0bp)=(red); 
-    color(25bp)=(red); color(35bp)=(yellow); color(45bp)=(green); 
-    color(55bp)=(cyan); color(65bp)=(blue); color(75bp)=(violet); 
-    color(100bp)=(violet)} % for creating a rainbow shade
-%%%%%%%%%%%%%%%%%%%%%%%%
+  \pgfdeclareverticalshading{rainbow}{100bp}{color(0bp)=(red); 
+  color(25bp)=(red); color(35bp)=(yellow); color(45bp)=(green); 
+  color(55bp)=(cyan); color(65bp)=(blue); color(75bp)=(violet); 
+  color(100bp)=(violet)} % for creating a rainbow shade
+  
+  %% colors - subjects %%
+    \newcommand{\col}{red}
+    \newcommand{\ana}{DeepSkyBlue2}     % analysis
+    \newcommand{\alg}{Green3}    % algebra
+    \newcommand{\geo}{Purple2}   % geometry and topology
+    \newcommand{\apl}{Red2}      % applied mathematics
+    \newcommand{\sta}{Gold2}    % statistics
+  %%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%% Enumeration-commands %%%%%%%
-\usepackage{enumitem} % for the command [leftmargin=1.15cm] in custumized-label enumerations
+\usepackage{enumitem} % for the command [leftmargin=1.15cm] in customized-label enumerations
 \renewcommand{\labelenumi}{\arabic{enumi}.}
 \renewcommand{\theenumii}{\roman{enumii})}
 \renewcommand{\labelenumii}{\roman{enumii})}
+\numberwithin{equation}{section} % resets equation numbering when starting a new section.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%% Math-commands %%%%%%%
     %%% GENERAL 
-          \newcommand{\function}[5]{
-            \if\relax\detokenize{#1}\relax % first argument empty
-            \begin{array}{c@{\hspace{0.5\tabcolsep}}c@{\hspace{0.5\tabcolsep}}c}
-              #2 & \longrightarrow & #3                     \\
-              #4 & \longmapsto     & #5
-            \end{array}
-            \else % first argument non-empty
-            \begin{array}{r@{\hspace{0.5\tabcolsep}}c@{\hspace{0.5\tabcolsep}}c@{\hspace{0.5\tabcolsep}}c}
-              #1: & #2 & \longrightarrow & #3                     \\
-                  & #4 & \longmapsto     & #5
-            \end{array}
-            \fi
+      \newcommand{\function}[5]{
+        \if\relax\detokenize{#1}\relax % first argument empty
+        \begin{array}{c@{\hspace{0.5\tabcolsep}}c@{\hspace{0.5\tabcolsep}}c}
+          #2 & \longrightarrow & #3                     \\
+          #4 & \longmapsto     & #5
+        \end{array}
+        \else % first argument non-empty
+        \begin{array}{r@{\hspace{0.5\tabcolsep}}c@{\hspace{0.5\tabcolsep}}c@{\hspace{0.5\tabcolsep}}c}
+          #1: & #2 & \longrightarrow & #3                     \\
+              & #4 & \longmapsto     & #5
+        \end{array}
+        \fi
       } % 1 - name of the function
         % 2 - domain
         % 3 - image
         % 4 - element in the domain
         % 5 - element in the image
 
-        \newcommand{\rrightarrow}{\mathrel{\mathrlap{\rightarrow}\mkern1mu\rightarrow}} % a larger version of \twoheadrightarrow
-        % Default \Re{} for real part of a number 
-        % Default \Im{} for imaginary part of a number
-        % Default \abs for absolute value. \newcommand{\abs}[1]{\lvert#1\rvert}
+      \newcommand{\rrightarrow}{\mathrel{\mathrlap{\rightarrow}\mkern1mu\rightarrow}} % a larger version of \twoheadrightarrow
+      % Default \Re{} for real part of a number 
+      % Default \Im{} for imaginary part of a number
+      % Default \abs for absolute value. \newcommand{\abs}[1]{\lvert#1\rvert}
         
     %%% CALCULUS
-        % command \grad is by default \nabla in bold face
-        % \renewcommand{\grad}{\operatorname{\vf{grad}}} % gradient
-        \DeclareMathOperator{\rot}{\vf{rot}} % curl
-        \DeclareMathOperator{\rotp}{\vf{\nabla}\times} % curl for physics
-        \renewcommand{\div}{\operatorname{\vf{div}}} % divergence
-        \DeclareMathOperator{\divp}{\vf{\nabla}\cdot} % divergence for physics
-        % command \laplacian is by default \nabla^2
-        %\newcommand{\laplacian}{\nabla^2} % laplacian
-        \DeclareDocumentCommand\derivative{ s o m g d() }{ 
-          % Total derivative
-          % s: star for \flatfrac flat derivative
-          % o: optional n for nth derivative
-          % m: mandatory (x in df/dx)
-          % g: optional (f in df/dx)
-          % d: long-form d/dx(...)
-            \IfBooleanTF{#1}
-            {\let\fractype\flatfrac}
-            {\let\fractype\frac}
-            \IfNoValueTF{#4}
-            {
-                \IfNoValueTF{#5}
-                {\fractype{\diffd \IfNoValueTF{#2}{}{^{#2}}}{\diffd #3\IfNoValueTF{#2}{}{^{#2}}}}
-                {\fractype{\diffd \IfNoValueTF{#2}{}{^{#2}}}{\diffd #3\IfNoValueTF{#2}{}{^{#2}}} \argopen(#5\argclose)}
-            }
-            {\fractype{\diffd \IfNoValueTF{#2}{}{^{#2}} #3}{\diffd #4\IfNoValueTF{#2}{}{^{#2}}}\IfValueT{#5}{(#5)}}
-        } % differential operator
-        \DeclareDocumentCommand\partialderivative{ s o m g d() }{ 
-          % Total derivative
-          % s: star for \flatfrac flat derivative
-          % o: optional n for nth derivative
-          % m: mandatory (x in df/dx)
-          % g: optional (f in df/dx)
-          % d: long-form d/dx(...)
-            \IfBooleanTF{#1}
-            {\let\fractype\flatfrac}
-            {\let\fractype\frac}
-            \IfNoValueTF{#4}
-            {
-                \IfNoValueTF{#5}
-                {\fractype{\partial \IfNoValueTF{#2}{}{^{#2}}}{\partial #3\IfNoValueTF{#2}{}{^{#2}}}}
-                {\fractype{\partial \IfNoValueTF{#2}{}{^{#2}}}{\partial #3\IfNoValueTF{#2}{}{^{#2}}} \argopen(#5\argclose)}
-            }
-            {\fractype{\partial \IfNoValueTF{#2}{}{^{#2}} #3}{\partial #4\IfNoValueTF{#2}{}{^{#2}}}\IfValueT{#5}{(#5)}}
-        } % partial differential operator
-        \newcommand{\ii}{\mathrm{i}} % imaginary unit
-        \renewcommand{\exp}[1]{\mathrm{e}^{#1}} % exponential function
-        \newcommand{\upint}[2]{\overline{\int_{#1}^{#2}}} % upper integral
-        \newcommand{\lowint}[2]{\underline{\int_{#1}^{#2}}} % lower integral
-        \DeclareMathOperator{\domain}{dom} % domain of a function
-        \DeclareMathOperator{\graph}{graph} % graph of a function
-        \DeclareMathOperator{\supp}{supp} % support of a function
-        \DeclareMathOperator{\vol}{vol} % volume of a region
-        \DeclareMathOperator{\area}{area} % area of a region
-        \newcommand{\crossprod}{\crossproduct} % cross product
+      % command \grad is by default \nabla in bold face
+      % \renewcommand{\grad}{\operatorname{\vf{grad}}} % gradient
+      \DeclareMathOperator{\rot}{\vf{rot}} % curl
+      \DeclareMathOperator{\rotp}{\vf{\nabla}\times} % curl for physics
+      \renewcommand{\div}{\operatorname{\vf{div}}} % divergence
+      \DeclareMathOperator{\divp}{\vf{\nabla}\cdot} % divergence for physics
+      % command \laplacian is by default \nabla^2
+      %\newcommand{\laplacian}{\nabla^2} % laplacian
+      \DeclareDocumentCommand\derivative{ s o m g d() }{ 
+        % Total derivative
+        % s: star for \flatfrac flat derivative
+        % o: optional n for nth derivative
+        % m: mandatory (x in df/dx)
+        % g: optional (f in df/dx)
+        % d: long-form d/dx(...)
+          \IfBooleanTF{#1}
+          {\let\fractype\flatfrac}
+          {\let\fractype\frac}
+          \IfNoValueTF{#4}
+          {
+              \IfNoValueTF{#5}
+              {\fractype{\diffd \IfNoValueTF{#2}{}{^{#2}}}{\diffd #3\IfNoValueTF{#2}{}{^{#2}}}}
+              {\fractype{\diffd \IfNoValueTF{#2}{}{^{#2}}}{\diffd #3\IfNoValueTF{#2}{}{^{#2}}} \argopen(#5\argclose)}
+          }
+          {\fractype{\diffd \IfNoValueTF{#2}{}{^{#2}} #3}{\diffd #4\IfNoValueTF{#2}{}{^{#2}}}\IfValueT{#5}{(#5)}}
+      } % differential operator
+      \DeclareDocumentCommand\partialderivative{ s o m g d() }{ 
+        % Total derivative
+        % s: star for \flatfrac flat derivative
+        % o: optional n for nth derivative
+        % m: mandatory (x in df/dx)
+        % g: optional (f in df/dx)
+        % d: long-form d/dx(...)
+        \IfBooleanTF{#1}
+          {\let\fractype\flatfrac}
+          {\let\fractype\frac}
+          \IfNoValueTF{#4}{
+            \IfNoValueTF{#5}
+            {\fractype{\partial \IfNoValueTF{#2}{}{^{#2}}}{\partial #3\IfNoValueTF{#2}{}{^{#2}}}}
+            {\fractype{\partial \IfNoValueTF{#2}{}{^{#2}}}{\partial #3\IfNoValueTF{#2}{}{^{#2}}} \argopen(#5\argclose)}
+          }
+          {\fractype{\partial \IfNoValueTF{#2}{}{^{#2}} #3}{\partial #4\IfNoValueTF{#2}{}{^{#2}}}\IfValueT{#5}{(#5)}}
+      } % partial differential operator
+      \newcommand{\ii}{\mathrm{i}} % imaginary unit
+      \renewcommand{\exp}[1]{\mathrm{e}^{#1}} % exponential function
+      \newcommand{\upint}[2]{\overline{\int_{#1}^{#2}}} % upper integral
+      \newcommand{\lowint}[2]{\underline{\int_{#1}^{#2}}} % lower integral
+      \DeclareMathOperator{\domain}{dom} % domain of a function
+      \DeclareMathOperator{\graph}{graph} % graph of a function
+      \DeclareMathOperator{\supp}{supp} % support of a function
+      \DeclareMathOperator{\vol}{vol} % volume of a region
+      \DeclareMathOperator{\area}{area} % area of a region
+      \newcommand{\crossprod}{\crossproduct} % cross product
 
 
     %%% ALGEBRA
-        \newcommand{\bigzero}{\makebox(0,0){\text{\Huge0}}} % 0 big zero in a matrix
-        \DeclareMathOperator{\lcm}{lcm} % least common multiple
-        \DeclareMathOperator{\im}{im} % Image of a function
-        \newcommand{\id}{\mathrm{id}} % identity function
-        \DeclareMathOperator{\ch}{char} % characteristic of a field
-        \DeclareMathOperator{\sig}{sig} % signature of a bilinear map
-        \DeclareMathOperator{\rad}{rad} % radical of a bilinear map
-        \DeclareMathOperator{\sign}{sgn} % sign of a permutation
-        \newcommand{\quot}[2]{
-            \mathchoice
-                {% \displaystyle 
-                \text{\raise1ex\hbox{$#1$}\!\Big/\!\lower1ex\hbox{$#2$}}}
-                {% \textstyle
-                    #1/#2}
-                {% \scriptstyle
-                    #1/#2}
-                {% \scriptscriptstyle  
-                    #1/#2}
-        }% quotient group. Usage A/B--->\quot{A}{B}.
-        \newcommand{\NN}{\ensuremath{\mathbb{N}}} % set of natural numbers
-        \newcommand{\ZZ}{\ensuremath{\mathbb{Z}}} % set of integers
-        \newcommand{\QQ}{\ensuremath{\mathbb{Q}}} % set of rationals
-        \newcommand{\RR}{\ensuremath{\mathbb{R}}} % set of real numbers
-        \newcommand{\CC}{\ensuremath{\mathbb{C}}} % set of complex numbers
+      \newcommand{\bigzero}{\makebox(0,0){\text{\Huge0}}} % 0 big zero in a matrix
+      \DeclareMathOperator{\lcm}{lcm} % least common multiple
+      \DeclareMathOperator{\im}{im} % Image of a function
+      \newcommand{\id}{\mathrm{id}} % identity function
+      \DeclareMathOperator{\ch}{char} % characteristic of a field
+      \DeclareMathOperator{\sig}{sig} % signature of a bilinear map
+      \DeclareMathOperator{\rad}{rad} % radical of a bilinear map
+      \DeclareMathOperator{\sign}{sgn} % sign of a permutation
+      \newcommand{\quot}[2]{
+        \mathchoice
+            {% \displaystyle 
+            \text{\raise1ex\hbox{$#1$}\!\Big/\!\lower1ex\hbox{$#2$}}}
+            {% \textstyle
+                #1/#2}
+            {% \scriptstyle
+                #1/#2}
+            {% \scriptscriptstyle  
+                #1/#2}
+      }% quotient group. Usage A/B--->\quot{A}{B}.
+      \newcommand{\NN}{\ensuremath{\mathbb{N}}} % set of natural numbers
+      \newcommand{\ZZ}{\ensuremath{\mathbb{Z}}} % set of integers
+      \newcommand{\QQ}{\ensuremath{\mathbb{Q}}} % set of rationals
+      \newcommand{\RR}{\ensuremath{\mathbb{R}}} % set of real numbers
+      \newcommand{\CC}{\ensuremath{\mathbb{C}}} % set of complex numbers
+
 
     %%% TOPOLOGY
-        \DeclareMathOperator{\Int}{Int} % interior set
-        \DeclareMathOperator{\Ext}{Ext} % exterior set
-        \DeclareMathOperator{\Cl}{Cl} % clousure set
-        \DeclareMathOperator{\Fr}{\partial} % clousure set
-        \newcommand{\topo}{\tau} % symbol for the topology. Feasible options are: \tau, \mathcal{T}...
-        \newcommand{\conn}{\mathrel{\#}} % connected sum. \mathrel gives the space of a relation (like +,-,...) while \mathbin gives the space of a binary operator (like =).
+      \DeclareMathOperator{\Int}{Int} % interior set
+      \DeclareMathOperator{\Ext}{Ext} % exterior set
+      \DeclareMathOperator{\Cl}{Cl} % clousure set
+      \DeclareMathOperator{\Fr}{\partial} % clousure set
+      \newcommand{\topo}{\tau} % symbol for the topology. Feasible options are: \tau, \mathcal{T}...
+      \newcommand{\conn}{\mathrel{\#}} % connected sum. \mathrel gives the space of a relation (like +,-,...) while \mathbin gives the space of a binary operator (like =).
         
 
     %%% GALOIS THEORY
-        \newcommand{\FF}{\ensuremath{\mathbb{F}}} % finite fields
-        \DeclareMathOperator{\irr}{Irr} % irreducible polynomial 
-        \DeclareMathOperator{\Mor}{Mor} % set of morphisms
-        \DeclareMathOperator{\Iso}{Iso} % set of isomorphisms
-        \DeclareMathOperator{\Aut}{Aut} % set of automorphisms
-        \DeclareMathOperator{\Gal}{Gal} % Galois group
-        \DeclareMathOperator{\Disc}{Disc} % discriminant of a polynomial
+      \newcommand{\FF}{\ensuremath{\mathbb{F}}} % finite fields
+      \DeclareMathOperator{\irr}{Irr} % irreducible polynomial 
+      \DeclareMathOperator{\Mor}{Mor} % set of morphisms
+      \DeclareMathOperator{\Iso}{Iso} % set of isomorphisms
+      \DeclareMathOperator{\Aut}{Aut} % set of automorphisms
+      \DeclareMathOperator{\Gal}{Gal} % Galois group
+      \DeclareMathOperator{\Disc}{Disc} % discriminant of a polynomial
 
     
     %%% PROBABILITY
-        \newcommand{\Prob}{\ensuremath{\mathbb{P}}} % probability
-        \DeclareMathOperator{\Exp}{\mathbb{E}} % expected value
-        \DeclareMathOperator{\Var}{Var} % variance
-        \DeclareMathOperator{\cov}{Cov} % covariance
-        \newcommand{\iid}{i.i.d.\ } % independent and identically distributed
+      \newcommand{\Prob}{\ensuremath{\mathbb{P}}} % probability
+      \DeclareMathOperator{\Exp}{\mathbb{E}} % expected value
+      \DeclareMathOperator{\Var}{Var} % variance
+      \DeclareMathOperator{\cov}{Cov} % covariance
+      \newcommand{\iid}{i.i.d.\ } % independent and identically distributed
+
 
     %%% STATISTICS
-        \DeclareMathOperator{\bias}{bias} % Bias
-        \DeclareMathOperator{\MSE}{MSE} % Mean Square Error
+      \DeclareMathOperator{\bias}{bias} % Bias
+      \DeclareMathOperator{\MSE}{MSE} % Mean Square Error
+
 
     %%%% COMPLEX ANALYSIS
-        % \DeclareMathOperator{\arg}{arg} % argument. By default is arg(z).
-        \DeclareMathOperator{\Arg}{Arg} % principal argument
-        \DeclareMathOperator{\Ln}{Ln} % principal logarithm
-        \DeclareMathOperator{\Ind}{Ind} % index of a curve
+      % \DeclareMathOperator{\arg}{arg} % argument. By default is arg(z).
+      \DeclareMathOperator{\Arg}{Arg} % principal argument
+      \DeclareMathOperator{\Ln}{Ln} % principal logarithm
+      \DeclareMathOperator{\Ind}{Ind} % index of a curve
         
+
     %%% DIFFERENTIAL GEOMETRY
-        \newcommand{\T}[1]{{\vf{T}_{\vf{#1}}}} % tangent vector
-        \newcommand{\N}[1]{{\vf{N}_{\vf{#1}}}} % normal vector
-        \newcommand{\B}[1]{{\vf{B}_{\vf{#1}}}} % binormal vector
-        \newcommand{\ka}[1]{{\kappa_{\vf{#1}}}} % curvature
-        \newcommand{\ta}[1]{{\tau_{\vf{#1}}}} % torsion
-        \newcommand{\rh}[1]{{\rho_{\vf{#1}}}} % radius of curvature
-        \newcommand{\I}{\ensuremath{\mathrm{I}}} % 1st fundamental form
-        \newcommand{\II}{\ensuremath{\mathrm{I\!I}}} % 2nd fundamental form
+      \newcommand{\T}[1]{{\vf{T}_{\vf{#1}}}} % tangent vector
+      \newcommand{\N}[1]{{\vf{N}_{\vf{#1}}}} % normal vector
+      \newcommand{\B}[1]{{\vf{B}_{\vf{#1}}}} % binormal vector
+      \newcommand{\ka}[1]{{\kappa_{\vf{#1}}}} % curvature
+      \newcommand{\ta}[1]{{\tau_{\vf{#1}}}} % torsion
+      \newcommand{\rh}[1]{{\rho_{\vf{#1}}}} % radius of curvature
+      \newcommand{\I}{\ensuremath{\mathrm{I}}} % 1st fundamental form
+      \newcommand{\II}{\ensuremath{\mathrm{I\!I}}} % 2nd fundamental form
     
+
     %%% vectors and matrices
-        \newcommand{\vf}[1]{\boldsymbol{\mathrm{#1}}} % math style for vectors and matrices and vector-values functions (previously it was \*vb{#1} but this does not apply to greek letters)
-        \newcommand{\transpose}[1]{{#1}^{\mathrm{T}}} % math style for vectors and matrices
-        \DeclareMathOperator{\adjugate}{adj} % adjugate matrix
-        \DeclareMathOperator{\cofactor}{cof} % cofactor matrix
-        \DeclareMathOperator{\diag}{diag} % diagonal matrix
-        \newcommand{\GL}{\mathrm{GL}} % set of invertible matrices
-        \renewcommand{\norm}[1]{\|#1\|} % norm of a vector
+      \newcommand{\vf}[1]{\boldsymbol{\mathrm{#1}}} % math style for vectors and matrices and vector-values functions (previously it was \*vb{#1} but this does not apply to greek letters)
+      \newcommand{\transpose}[1]{{#1}^{\mathrm{T}}} % math style for vectors and matrices
+      \DeclareMathOperator{\adjugate}{adj} % adjugate matrix
+      \DeclareMathOperator{\cofactor}{cof} % cofactor matrix
+      \DeclareMathOperator{\diag}{diag} % diagonal matrix
+      \newcommand{\GL}{\mathrm{GL}} % set of invertible matrices
+      \renewcommand{\norm}[1]{\|#1\|} % norm of a vector
         
+
     %%% PHYSICS
-        \newcommand{\const}{\text{const.}}
+      \newcommand{\const}{\text{const.}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%% for long-vector arrows %%%%%
-    \newcommand{\vect}[1]{%
-    \vbox{\m@th \ialign {##\crcr
-    \vectfill\crcr\noalign{\kern-\p@ \nointerlineskip}
-    $\hfil\displaystyle{#1}\hfil$\crcr}}}
-    \def\vectfill{%
+  \newcommand{\vect}[1]{%
+    \vbox{\m@th \ialign {##\crcr\vectfill\crcr\noalign{\kern-\p@ \nointerlineskip}$\hfil\displaystyle{#1}\hfil$\crcr}}
+  }
+  \def\vectfill{%
     $\m@th\smash-\mkern-7mu%
     \cleaders\hbox{$\mkern-2mu\smash-\mkern-2mu$}\hfill
-    \mkern-7mu\raisebox{-3.66pt}[\p@][\p@]{$\mathord\mathchar"017E$}$}
+    \mkern-7mu\raisebox{-3.66pt}[\p@][\p@]{$\mathord\mathchar"017E$}$
+  }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%% Theorems, definitions,... environments %%%%%
-    \newtheoremstyle{math}
-        {\topsep}   % ABOVESPACE
-        {\topsep}   % BELOWSPACE
-        {}  % BODYFONT
-        {0pt}       % INDENT (empty value is the same as 0pt)
-        {\bfseries} % HEADFONT
-        {.}         % HEADPUNCT
-        {5pt plus 1pt minus 1pt} % HEADSPACE
-        {\thmname{#1}\thmnumber{\@ifnotempty{#1}{ }\@upn{#2}}%
-        \thmnote{{ \bfseries(#3)}}}          % CUSTOM-HEAD-SPEC
+  \newtheoremstyle{math}
+      {\topsep}   % ABOVESPACE
+      {\topsep}   % BELOWSPACE
+      {}          % BODYFONT
+      {0pt}       % INDENT (empty value is the same as 0pt)
+      {\bfseries} % HEADFONT
+      {.}         % HEADPUNCT
+      {5pt plus 1pt minus 1pt} % HEADSPACE
+      {\color{\col}\thmname{#1}\thmnumber{\@ifnotempty{#1}{ }\@upn{#2}}%
+      \thmnote{{ \bfseries\color{black}(#3)}}}          % CUSTOM-HEAD-SPEC
 
-    \theoremstyle{math}
-    \newtheorem{theorem}{Theorem}[section]
-    \newtheorem{lemma}[theorem]{Lemma}
-    \newtheorem{proposition}[theorem]{Proposition}
-    \newtheorem{corollary}[theorem]{Corollary}
-    \newtheorem{axiom}[theorem]{Axiom}
-    \newtheorem{definition}[theorem]{Definition}
-    \newtheorem{method}[theorem]{Method}
-    \newtheorem{law}[theorem]{Law}
-    \newtheorem{principle}[theorem]{Principle}
-
-    \renewcommand{\theaxiom}{\arabic{section}.\arabic{axiom}}
-    \renewcommand{\thedefinition}{\arabic{section}.\arabic{definition}}
-    \renewcommand{\thetheorem}{\arabic{section}.\arabic{theorem}}
-    \renewcommand{\thecorollary}{\arabic{section}.\arabic{corollary}}
-    \renewcommand{\thelemma}{\arabic{section}.\arabic{lemma}}
-    \renewcommand{\theproposition}{\arabic{section}.\arabic{proposition}}
-    \renewcommand{\thelaw}{\arabic{section}.\arabic{law}}
-    \renewcommand{\theprinciple}{\arabic{section}.\arabic{principle}}
+  \theoremstyle{math}
+  \newtheorem{theorem}{Theorem}
+  \newtheorem{lemma}[theorem]{Lemma}
+  \newtheorem{proposition}[theorem]{Proposition}
+  \newtheorem{corollary}[theorem]{Corollary}
+  \newtheorem{axiom}[theorem]{Axiom}
+  \newtheorem{definition}[theorem]{Definition}
+  \newtheorem{method}[theorem]{Method}
+  \newtheorem{law}[theorem]{Law}
+  \newtheorem{principle}[theorem]{Principle}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%% Extra references %%%%%%%
