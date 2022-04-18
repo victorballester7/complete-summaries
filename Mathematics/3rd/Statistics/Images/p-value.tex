@@ -1,0 +1,64 @@
+\documentclass{standalone}
+\usepackage{../../../../preamble_formulas}
+
+\def\o{3} % variance
+\def\t{3} % observed value
+\pgfplotsset{
+  layers/standard/.define layer set={
+      background,
+      pre main,
+      main,
+      foreground
+    }{},
+  set layers=standard, % set my custom layer set
+  custom legend image/.style={
+    legend image code/.code={
+      \draw [densely dashed,mark indices={2},purple,mark=*,mark options={solid},mark size=2pt] plot coordinates {(0cm,0cm) (0.3cm,0cm) (0.6cm,0cm)};
+    },
+  },
+}
+
+\begin{document}
+\begin{tikzpicture}[
+    declare function={
+        f(\x)=1/(2*pi*\o)^(1/2)*exp{-\x*\x/(2*\o)};
+      }
+  ]
+  \begin{axis}[
+      xmin = - 7, xmax = 7, %
+      ymin = 0, ymax = 0.3, %
+      width = 10cm, %sets the width of the figure
+      height = 7.5cm,  %sets the height of the figure
+      legend cell align = {left}, %
+      %legend style={} % position of the legend box and anchor is the point on the box to be fitted exactly at the point of cs:<>,<>. Options are anchor=center,south west,south east,north west,north east,north,south,west... Example: legend style={at={(axis cs:0,-0.5)},anchor=center}
+      %axis on top
+      %legend image post style={mark=*}
+    ]
+    \def\xmax{\pgfkeysvalueof{/pgfplots/xmax}}
+    \def\xmin{\pgfkeysvalueof{/pgfplots/xmin}}
+    \def\ymax{\pgfkeysvalueof{/pgfplots/ymax}}
+    \def\ymin{\pgfkeysvalueof{/pgfplots/ymin}}
+    \addplot+[densely dashed, purple,mark indices={1}, mark options={solid},mark=*,forget plot] coordinates {({\t},0) ({\t},{f(\t)})};
+    \addlegendimage{custom legend image}
+    \addlegendentry{Obsevervation}
+    %\addplot[purple,mark=*,mark size=1pt] coordinates {({\t},0)};
+    % Normal
+    \addplot[
+      domain=\xmin:\xmax, %Domain of the fucntion
+      samples=200, %This parameter determines the number of point to be plotted for the function, while bigger the number better looks the function.
+      smooth, %f we use this option, the compiler makes an interpolation between the point plotted to get a soft appearance for the function.
+      thick, %Stroke of the function. Options: ultra thin, very thin, thin, semithick, thick, very thick, ultra thick.
+      black, %Color of the function.
+      name path = A
+    ]{f(x)};
+    \addlegendentry{Test statistic}
+    \path[name path = B] (\xmin,0) -- (\xmax,0);
+    \addplot [Chartreuse3] fill between [
+        of=A and B,
+        soft clip={domain=\t:\xmax},
+      ];
+    \addlegendentry{$p$-value}
+    %\legend{Obsevervation,Test statistic,$p$-value}
+  \end{axis}
+\end{tikzpicture}
+\end{document}

@@ -49,7 +49,7 @@
     Consider the norm $\|\cdot\|_2$ and distance $d_2$ in $\RR^n$ defined as follows:
     \begin{gather*}
       \|\vf{u}\|_2=\sqrt{\langle \vf{u},\vf{u}\rangle_2}=\sqrt{\sum_{i=1}^nu_i^2}\\
-      d_2(\vf{u},\vf{v})=\|\vf{u}-\vf{v}\|=\sqrt{\sum_{i=1}^n(u_i-v_i)^2}
+      d_2(\vf{u},\vf{v})=\|\vf{u}-\vf{v}\|=\sqrt{\sum_{i=1}^n{(u_i-v_i)}^2}
     \end{gather*}
     Then, $(\RR^n,\|\cdot\|_2)$ is a normed space and $(\RR^n,d_2)$ is a metric space.
   \end{corollary}
@@ -57,9 +57,10 @@
     Let $(V,\langle\cdot,\cdot\rangle)$ be an Euclidean space with the norm defined as $\|\vf{u}\|:=\sqrt{\langle \vf{u},\vf{u}\rangle}$. Then for all $\vf{u},\vf{v}\in V$ the following properties are satisfied:
     \begin{enumerate}
       \item $\langle \vf{u},\vf{v}\rangle\leq\|\vf{u}\|\|\vf{v}\|\quad$(\emph{Cauchy-Schwarz inequality})
-      \item $\|\vf{u}-\vf{v}\|\geq\|\vf{u}\|-\|\vf{v}\|$
-      \item $\|\vf{u}+\vf{v}\|^2+\|\vf{u}-\vf{v}\|^2=2(\|\vf{u}\|^2+\|\vf{v}\|^2)\quad$ (\emph{Parallelogram law})
-      \item $\|\vf{u}+\vf{v}\|^2-\|\vf{u}-\vf{v}\|^2=4\langle \vf{u},\vf{v}\rangle$
+      \item $\|\vf{u}-\vf{v}\|\geq\abs{\|\vf{u}\|-\|\vf{v}\|}$
+      \item ${\|\vf{u}+\vf{v}\|}^2+{\|\vf{u}-\vf{v}\|}^2=2({\|\vf{u}\|}^2+{\|\vf{v}\|}^2)\quad$ (\emph{Parallelogram law})
+      \item ${\|\vf{u}+\vf{v}\|}^2-{\|\vf{u}-\vf{v}\|}^2=4\langle \vf{u},\vf{v}\rangle$
+      \item $\langle\vf{u},\vf{v}\rangle=\frac{1}{2}\left({\|\vf{u}+\vf{v}\|}^2-{\|\vf{u}\|}^2-{\|\vf{v}\|}^2\right)$
       \item On $(\RR^n,\langle\cdot,\cdot\rangle_2)$, if $\vf{u}=(u_1,\ldots,u_n)$, then: $$|u_i|\leq\|\vf{u}\|\leq\sum_{i=1}^n|u_i|$$
     \end{enumerate}
   \end{proposition}
@@ -96,10 +97,10 @@
     Let $(M,d)$ be a metric space. A \emph{neighbourhood} of $p$ is a bounded set $E(p)\subset M$ such that $\exists r\in\RR_{>0}$ satisfying $B(p,r)\subset E(p)$.
   \end{definition}
   \begin{definition}
-    Let $(M,d)$ be a metric space and $A\subseteq M$ be a subset of $M$. $p$ is an \emph{interior point} of $A$ if $\exists r\in\RR_{>0}$ such that $B(p,r)\subset A$. The \emph{interior} of $A$ is the set $\mathring A$\footnote{Sometimes the set $\mathring A$ is denoted as $\text{Int }A$.} containing all interior points of $A$.
+    Let $(M,d)$ be a metric space and $A\subseteq M$ be a subset of $M$. $p$ is an \emph{interior point} of $A$ if $\exists r\in\RR_{>0}$ such that $B(p,r)\subset A$. The \emph{interior} of $A$ is the set $\Int A$ containing all interior points of $A$.
   \end{definition}
   \begin{definition}
-    Let $(M,d)$ be a metric space and $A\subseteq M$ be a subset of $M$. $p$ is an \emph{exterior point} of $A$ if $\exists r\in\RR_{>0}$ such that $B(p,r)\cap A=\varnothing$. The \emph{exterior} of $A$ is the set $\text{Ext } A$ containing all exterior points of $A$.
+    Let $(M,d)$ be a metric space and $A\subseteq M$ be a subset of $M$. $p$ is an \emph{exterior point} of $A$ if $\exists r\in\RR_{>0}$ such that $B(p,r)\cap A=\varnothing$. The \emph{exterior} of $A$ is the set $\Ext A$ containing all exterior points of $A$.
   \end{definition}
   \begin{definition}
     Let $(M,d)$ be a metric space and $A\subseteq M$ be a subset of $M$. $p$ is an \emph{adherent point} of $A$ if $\forall r\in\RR_{>0}$, $B(p,r)\cap A\ne\varnothing$. The \emph{adherence} of $A$ is the set $\overline{A}$ containing all adherent points of $A$.
@@ -129,12 +130,12 @@
     Let $(M,d)$ be a metric space and $A\subseteq M$ be a subset of $M$. $A$ is closed $\iff A=\overline{A}\iff\partial A\subset A\iff A'\subset A$.
   \end{proposition}
   \begin{proposition}
-    Let $(M,d)$ be a metric space and $A\subseteq M$ be a subset of $M$. $A$ is open $\iff A=\mathring A$.
+    Let $(M,d)$ be a metric space and $A\subseteq M$ be a subset of $M$. $A$ is open $\iff A=\Int A$.
   \end{proposition}
   \begin{proposition}
     Let $(M,d)$ be a metric space and $A\subseteq M$ be a subset of $M$.
     \begin{itemize}
-      \item $\mathring A$ is the biggest open set contained in $A$. That is, if $B\subset A$ is open, $B\subset\mathring A$.
+      \item $\Int A$ is the biggest open set contained in $A$. That is, if $B\subset A$ is open, $B\subset\Int A$.
       \item $\overline{A}$ is the smallest set containing $A$. That is, if $B\supset A$ is closed, $B\supset\overline{A}$.
     \end{itemize}
   \end{proposition}
@@ -189,7 +190,7 @@
     Let $\vf{f}:U\subseteq\RR^n\rightarrow\RR^m$, $\vf{f}=(f_1,\ldots,f_m)$, and $p\in U'$.
     \begin{enumerate}
       \item The limit of $\vf{f}$ at point $p$, if exists, is unique.
-      \item Suppose $L=(L_1,\ldots,L_m)$. Then, $\displaystyle\lim_{x\to p}\vf{f}(x)=L\iff\lim_{x\to p}f_j(x)=L_j\quad\forall j=1,\ldots,m$.
+      \item Suppose $L=(L_1,\ldots,L_m)$. Then: $$\lim_{x\to p}\vf{f}(x)=L\iff\lim_{x\to p}f_j(x)=L_j\quad\forall j=1,\ldots,m$$
     \end{enumerate}
   \end{proposition}
   \begin{lemma}

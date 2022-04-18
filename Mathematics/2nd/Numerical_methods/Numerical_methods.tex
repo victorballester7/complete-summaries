@@ -279,6 +279,12 @@
     Let $\{x_i\}_{i=0}^n\subset\RR$ be equally-spaced points such that $x_i=x_0+ih$, where $h=\frac{x_n-x_0}{n}$. Then:
     $$\max\{|\omega_n(x)|:x\in[x_0,x_n]\}\leq\frac{h^{n+1}n!}{4}$$
   \end{proposition}
+  \begin{corollary}
+    Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^{n+1}$, $\{x_i\}_{i=0}^n\subset\RR$ be equally-spaced points such that $x_i=x_0+ih$, where $h=\frac{x_n-x_0}{n}$ and $p_n\in\RR[x]$ be the interpolating polynomial with support points $\{(x_i,f(x_i))\}_{i=0}^n$. Then:
+    \begin{multline*}
+      \max\{|f(x)-p_n(x)|:x\in[x_0,x_n]\}\leq\\\leq \frac{h^{n+1}}{4(n+1)}\max\{|f^{(n+1)}(x)|:x\in[x_0,x_n]\}
+    \end{multline*}
+  \end{corollary}
   \begin{definition}
     Let $f:[a,b]\rightarrow\RR$ be a function and $\{x_i\}_{i=0}^n\subset\RR$ be equally-spaced points. We define:
     \begin{gather*}
@@ -502,9 +508,10 @@
   \end{definition}
   \begin{definition}
     Let $\|\cdot\|$ be a vector norm and $\vf{A}\in\mathcal{M}_n(\RR)$. We define a \emph{subordinated matrix norm} $\|\cdot\|$ as:
-    \begin{multline*}
-      \|\vf{A}\|=\max\{\|\vf{A}\vf{v}\|:\vf{v}\in\RR^n\text{ such that }\|\vf{v}\|=1\}=\\=\sup\left\{\frac{\|\vf{A}\vf{v}\|}{\|\vf{v}\|}:\vf{v}\in\RR^n\text{ such that }\vf{v}\ne 0\right\}
-    \end{multline*}
+    \begin{align*}
+      \|\vf{A}\| & =\max\{\|\vf{A}\vf{v}\|:\vf{v}\in\RR^n\text{ such that }\|\vf{v}\|=1\}                              \\
+                 & =\sup\left\{\frac{\|\vf{A}\vf{v}\|}{\|\vf{v}\|}:\vf{v}\in\RR^n\text{ such that }\vf{v}\ne 0\right\}
+    \end{align*}
   \end{definition}
   \begin{lemma}
     All subordinated matrix norms are compatible.
@@ -531,6 +538,9 @@
       \|\vf{A}\|_2=\sqrt{\rho(\transpose{\vf{A}}\vf{A})}\\
       \|\vf{A}\|_\infty=\max\left\{\sum_{j=1}^n|a_{ij}|:i=1,\ldots,n\right\}
     \end{gather*}
+  \end{proposition}
+  \begin{proposition}
+    Consider the function: $$\function{\|\cdot\|}{\mathcal{M}_n(\RR)}{\RR}{(a_{ij})}{\sum_{i,j=1}^n|a_{ij}|}$$ Then, $\|\cdot\|$ is a matrix norm but it isn't the subordinated matrix norm of any vector norm.
   \end{proposition}
   \begin{proposition}[Properties of matrix norms]
     \hfill

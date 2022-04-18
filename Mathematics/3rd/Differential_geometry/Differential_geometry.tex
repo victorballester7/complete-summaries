@@ -343,7 +343,7 @@
           \cos\omega & -\sin\omega \\
           \sin\omega & \cos\omega  \\
         \end{pmatrix} &
-        \text{if } \det\vf{A}=1      \\
+        \text{if } \det\vf{A}=1  \\
         \begin{pmatrix}
           \cos\omega & \sin\omega  \\
           \sin\omega & -\cos\omega \\
@@ -456,8 +456,18 @@
     A submanifold of $\RR^3$ of dimension 2 is called a \emph{regular surface} (or simply \emph{surface}) of $\RR^3$.
   \end{definition}
   \begin{proposition}
+    Let $U\subseteq\RR^2$ be an open set an $h:U\rightarrow\RR$ be a function of class $\mathcal{C}^1$. Then, $\graph (h)$ is a surface.
+  \end{proposition}
+  \begin{proposition}
     Let $S\subseteq\RR^3$ be a set. Then, $S$ is a surface if and only if $\forall z\in S$ there exists an open neighbourhood $U\subseteq \RR^3$ of $z$, a change of the order of the variables $\vf\sigma$, a neighbourhood $V\subseteq \RR^2$ of $\vf\pi_1(\sigma(z))$ (where $\vf\pi_1:\RR^2\times \RR\rightarrow\RR^2$ is the projection map) and a differentiable function $h:V\rightarrow \RR$ such that: $$\vf\sigma(S\cap U)=\graph(h)$$
   \end{proposition}
+  \begin{proposition}
+    Let $U\subseteq\RR^3$, $f:U\rightarrow\RR$ be a function of class $\mathcal{C}^1$ and $a\in\RR$ such that $\vf{d}f_p\ne\vf{0}$ $\forall p\in f^{-1}(a)$. Then, $f^{-1}(a)$ is a surface.
+  \end{proposition}
+  \begin{definition}
+    Let $(a(u),v(u))$, $u\in I$, be a parametrization of class $\mathcal{C}^1$ of a planar curve $C$. We define the \emph{surface of revolution} created by rotating $C$ around an axis of rotation. The curve $C$ is called \emph{generatrix}. In particular, if we choose the $y$-axis as the axis of rotation, $$\vf\varphi(u,v)=(a(u)\cos v,a(u)\sin v,b(u))\quad (u,v)\in I\times (0,2\pi)$$
+    is a parametrization of the induced surface of revolution.
+  \end{definition}
   \subsubsection{Differentiable functions}
   \begin{definition}
     Let $S\subseteq\RR^3$ be a surface. We say that a function $\vf{f}:S\rightarrow \RR^n$ is \emph{differentiable} at a point $p\in S$ if there is a local parametrization $(V,\vf\varphi)$ of $S$ with $p\in\vf\varphi(V)$ such that $\vf{f}\circ\vf\varphi$ is differentiable at ${\vf\varphi}^{-1}(p)$. We say that $\vf{f}$ is \emph{differentiable} on $S$ if it is differentiable at each point $p\in S$.
@@ -472,8 +482,11 @@
     Let $S\subseteq\RR^3$ be a surface, $(V,\vf\varphi(u,v))$ be a local parametrization of $S$ and $\vf\alpha:I\rightarrow\RR^3$ be a curve of class $\mathcal{C}^\infty$ such that $\vf\alpha(I)\subset \vf\varphi(V)$. Then, $\vf\alpha$ can be written as $\vf\alpha(t)=\vf\varphi(u(t),v(t))$, where $u(t)$, $v(t)$ are differentiable functions.
   \end{corollary}
   \begin{definition}
-    Let $S_1,S_2\subseteq\RR^3$ be surfaces. We say that a function $\vf{f}:S_1\rightarrow S_2$ is differentiable if $\forall p\in S_1$, there exist parametrizations $(V_1,\vf\varphi_1)$ and $(V_2,\vf\varphi_2)$ of $S_1$ and $S_2$ respectively with $p\in\vf\varphi_1$ and $\vf{f}(p)\in\vf\varphi_2$ and such that ${\vf\varphi_2}^{-1}\circ\vf{f}\circ\vf\varphi_1$ is differentiable on its domain.
+    Let $S_1,S_2\subseteq\RR^3$ be surfaces. We say that a function $\vf{f}:S_1\rightarrow S_2$ is differentiable if $\forall p\in S_1$, there exist parametrizations $(V_1,\vf\varphi_1)$ and $(V_2,\vf\varphi_2)$ of $S_1$ and $S_2$ respectively with $p\in\vf\varphi_1$ and $\vf{f}(p)\in\vf\varphi_2$ and such that ${\vf\varphi_2}^{-1}\circ\vf{f}\circ\vf\varphi_1$ is differentiable on its domain\footnote{In particular, note that if $S_1=S_2$ and $\vf{f}=\vf\id$, then ${\vf\varphi_2}^{-1}\circ\vf{\id}\circ\vf\varphi_1={\vf\varphi_2}^{-1}\circ\vf\varphi_1$ is a change of coordinates on the surface.}.
   \end{definition}
+  \begin{proposition}
+    Let $S_1,S_2\subseteq\RR^3$ be surfaces and $\vf{f}:S_1\rightarrow S_2$ be a function. Then, $\vf{f}$ is differentiable if $\vf{f}\circ\vf{\iota}:S_1\hookrightarrow \RR^3$ is differentiable.
+  \end{proposition}
   \subsubsection{Tangent space}
   \begin{definition}
     Let $S\subseteq\RR^3$ be a surface and $p\in S$. If $\vf\alpha:(-\varepsilon,\varepsilon)\rightarrow\RR^3$ is a parametrization of a curve of class $\mathcal{C}^\infty$ such that $\vf\alpha(0)=p$, we say that $\vf\alpha'(0)$ is a \emph{tangent vector} to $S$ at $p$. The set of all such vectors is called \emph{tangent space} (or \emph{tangent plane}) and it is denoted as $T_pS$.
@@ -500,14 +513,14 @@
         \displaystyle\pdv{f_2}{u}({\vf{\varphi}}^{-1}(p)) & \displaystyle\pdv{f_2}{v}({\vf{\varphi}}^{-1}(p))
       \end{pmatrix}$$
   \end{proposition}
-  \begin{proposition}
+  \begin{theorem}[Inverse function theorem for surfaces]
     Let $S_1,S_2\subseteq\RR^3$ be surfaces, $p\in S_1$ and $\vf{f}:S_1\rightarrow S_2$ be a differentiable function. Suppose $\vf{\dd{f}}_p$ is an isomorphism. Then, $\vf{f}$ is a diffeomorphism between a neighbourhood $U_1\subseteq S_1$ of $p$ and a neighbourhood $U_2\subseteq S_2$ of $\vf{f}(p)$.
-  \end{proposition}
+  \end{theorem}
   \subsection{First fundamental form}
   \subsubsection{First fundamental form}
   \begin{definition}
-    Let $S\subseteq\RR^3$ be a surface and $p\in S$. We define the \emph{first fundamental form} of $S$ at $p$ as the quadratic form $\I_p$ of $T_pS$ defined by:
-    $$\I_p(\vf{v}):={\langle\vf{v},\vf{v}\rangle}_p:={\|\vf{v}\|}^2$$
+    Let $S\subseteq\RR^3$ be a surface and $p\in S$. We define the \emph{first fundamental form} of $S$ at $p$ as the quadratic form $\I_p:T_pS\times T_pS\rightarrow \RR$ defined by:
+    $$\I_p(\vf{v}):={\langle\vf{v},\vf{v}\rangle}_p:={\|\vf{v}\|}^2\footnote{Abusing notation, we will denote the bilinear associated function to $\I_p$ also as $\I_p$. That is, $\I_p(\vf{u},\vf{v})={\langle\vf{u},\vf{v}\rangle}_p$.}$$
   \end{definition}
   \begin{proposition}
     Let $S\subseteq\RR^3$ be a surface, $(V,\vf\varphi(u,v))$ be a local parametrization of $S$ and $p\in S$. Then, in the basis $(\vf\varphi_u,\vf\varphi_v)$ we have:
@@ -576,6 +589,14 @@
   \begin{corollary}
     Let $S_1,S_2\subseteq\RR^3$ be surfaces and $\vf{f}:S_1\rightarrow S_2$ be an isometry. Then, $\vf{f}$ preserves areas.
   \end{corollary}
+  \subsubsection{Conformal maps}
+  \begin{definition}
+    Let $U,V\subseteq\RR^n$ be open sets, $\vf{f}:U\rightarrow V$ be a function and $p\in U$. We say that $\vf{f}$ is \emph{conformal} (or \emph{angle-preserving}) at $p$ it preserves angles between directed curves through $p$, as well as preserving orientation. We say that $\vf{f}$ is \emph{conformal} (on $U$) if it is conformal at each $p\in U$.
+  \end{definition}
+  \begin{theorem}
+    Let $S_1,S_2\subseteq\RR^3$ be surfaces, $(V,\vf\varphi)$ be a parametrization of $S_1$ and $\vf{f}:S_1\rightarrow S_2$ be a conformal map. Consider the parametrization $(V,\vf\psi=\vf{f}\circ\vf\varphi)$ be a parametrization of $S_2$. Then, there exists a function $\rho:U\rightarrow\RR$ such that:
+    $$E_{\vf\varphi}=\rho^2 E_{\vf\psi}\quad F_{\vf\varphi}=\rho^2 F_{\vf\psi}\quad G_{\vf\varphi}=\rho^2 G_{\vf\psi}$$
+  \end{theorem}
   \subsection{Second fundamental form}
   \subsubsection{Orientation of surfaces and Gau\ss\ map}
   \begin{definition}
@@ -620,9 +641,12 @@
     We define the \emph{mean curvature} of $S$ at $p$ as:
     $$H(p):=\frac{\trace\vf{W}_p}{2}=\frac{k_1+k_2}{2}$$
   \end{definition}
+  \begin{definition}
+    Let $S\subseteq\RR^3$ be an orientable surface. We say that $S$ is a \emph{minimal surface} if $H=0$.
+  \end{definition}
   \subsubsection{Second fundamental form}
   \begin{definition}
-    Let $S\subseteq\RR^3$ be a surface oriented with a normal unit field $\vf\nu$ and $p\in S$. We define the \emph{second fundamental form} of $S$ at $p$ as the quadratic form: $$\II_p(\vf{v})={\langle\vf{W}_p(\vf{v}),\vf{v}\rangle}_p\footnote{Making an abuse of notation, we will denote the bilinear associated function to $\II_p$ also as $\II_p$. That is, $\II_p(\vf{u},\vf{v})={\langle\vf{W}_p(\vf{u}),\vf{v}\rangle}_p$.}$$
+    Let $S\subseteq\RR^3$ be a surface oriented with a normal unit field $\vf\nu$ and $p\in S$. We define the \emph{second fundamental form} of $S$ at $p$ as the quadratic form $\II_p:T_pS\times T_pS\rightarrow \RR$ defined by: $$\II_p(\vf{v})=\I_p(\vf{W}_p(\vf{v}),\vf{v})={\langle\vf{W}_p(\vf{v}),\vf{v}\rangle}_p\footnote{Abusing notation, we will denote the bilinear associated function to $\II_p$ also as $\II_p$. That is, $\II_p(\vf{u},\vf{v})={\langle\vf{W}_p(\vf{u}),\vf{v}\rangle}_p$.}$$
   \end{definition}
   \begin{definition}
     Let $S\subseteq\RR^3$ be a surface oriented with a normal unit field $\vf\nu$, $p\in S$ and $\vf\alpha:I\rightarrow S$ be a regular curve. Suppose $\cos\theta=\langle\vf{N}_{\vf\alpha}(p),\vf\nu(p)\rangle$. We define the \emph{normal curvature} of $\vf\alpha$ at $p$ as: $$k_\text{n}(p):=k_{\vf\alpha}\cos\theta$$
