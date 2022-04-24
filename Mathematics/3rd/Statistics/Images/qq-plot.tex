@@ -1,0 +1,30 @@
+\documentclass{standalone}
+\usepackage{../../../../preamble_formulas}
+
+\begin{document}
+\begin{tikzpicture}[every node/.style={scale=1.5}]
+  \begin{axis}[
+      legend cell align = {left},
+      title={Sample of size 100 from a $\text{Exp}(4)$},
+      xlabel={Normal theoretical quantiles},
+      ylabel={Sample quantiles},
+    ]
+    \addplot[only marks,mark size=0.5pt,blue] table {exp.dat};
+  \end{axis}
+\end{tikzpicture}\hspace{0.25cm}
+\begin{tikzpicture}[every node/.style={scale=1.5}]
+  \begin{axis}[
+      legend cell align = {left},
+      title={Sample of size 100 from a $N(3,4)$},
+      xlabel={Normal theoretical quantiles},
+      ylabel={Sample quantiles},
+    ]
+    \def\xmax{\pgfkeysvalueof{/pgfplots/xmax}}
+    \def\xmin{\pgfkeysvalueof{/pgfplots/xmin}}
+    \def\ymax{\pgfkeysvalueof{/pgfplots/ymax}}
+    \def\ymin{\pgfkeysvalueof{/pgfplots/ymin}}
+    \addplot[only marks,mark size=0.5pt,red] table {normal.dat};
+    \addplot[dashed,gray,domain=-2.25:2.25]{2.369*x+2.956};
+  \end{axis}
+\end{tikzpicture}
+\end{document}

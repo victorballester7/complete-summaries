@@ -531,7 +531,7 @@
       \end{pmatrix}:=\begin{pmatrix}
         {\langle\vf\varphi_u,\vf\varphi_u\rangle}_p & {\langle\vf\varphi_u,\vf\varphi_v\rangle}_p \\
         {\langle\vf\varphi_v,\vf\varphi_u\rangle}_p & {\langle\vf\varphi_v,\vf\varphi_v\rangle}_p
-      \end{pmatrix}
+      \end{pmatrix}\footnote{Sometimes we will omit writing the subindex of $E_{\vf\varphi}$, $F_{\vf\varphi}$ and $G_{\vf\varphi}$.}
     $$
     That is, if $\vf{u}=a\vf\varphi_u+b\vf\varphi_v$ and $\vf{v}=c\vf\varphi_u+d\vf\varphi_v$, then
     $${\langle\vf{u},\vf{v}\rangle}_p=\begin{pmatrix}
@@ -721,7 +721,7 @@
       \II_p=\begin{pmatrix}
         e_{\vf\varphi} & f_{\vf\varphi} \\
         f_{\vf\varphi} & g_{\vf\varphi}
-      \end{pmatrix}
+      \end{pmatrix}\footnote{Sometimes we will omit writing the subindex of $e_{\vf\varphi}$, $f_{\vf\varphi}$ and $g_{\vf\varphi}$.}
     $$
   \end{proposition}
   \begin{proposition}
@@ -768,5 +768,114 @@
   \end{proposition}
   \subsection{Intrinsic geometry of surfaces}
   \subsubsection{Gau\ss' Theorema Egregium}
+  \begin{definition}
+    Let $S\subseteq\RR^3$ be an orientable surface and $(V,\vf\varphi(u,v))$ be a parametrization of $S$. Then
+    \begin{align*}
+      \vf\varphi_{uu} & =\Gamma_{11}^1\vf\varphi_u+\Gamma_{11}^2\vf\varphi_v+e\vf\nu \\
+      \vf\varphi_{uv} & =\Gamma_{12}^1\vf\varphi_u+\Gamma_{12}^2\vf\varphi_v+f\vf\nu \\
+      \vf\varphi_{vu} & =\Gamma_{21}^1\vf\varphi_u+\Gamma_{21}^2\vf\varphi_v+f\vf\nu \\
+      \vf\varphi_{vv} & =\Gamma_{22}^1\vf\varphi_u+\Gamma_{22}^2\vf\varphi_v+g\vf\nu
+    \end{align*}
+    for some coefficients $\Gamma_{ij}^k$, $i,j,k\in\{1,2\}$. This coefficients are called \emph{Christoffel symbols}\footnote{Observe that $\Gamma_{ij}^k=\Gamma_{ji}^k$  $\forall i,j,k\in\{1,2\}$.}.
+  \end{definition}
+  \begin{proposition}
+    Let $S\subseteq\RR^3$ be an orientable surface and $(V,\vf\varphi(u,v))$ be a parametrization of $S$. Then:
+    \begin{align*}
+      \begin{pmatrix}
+        E & F \\
+        F & G
+      \end{pmatrix}
+      \begin{pmatrix}
+        \Gamma_{11}^1 \\
+        \Gamma_{11}^2
+      \end{pmatrix} & =\begin{pmatrix}
+                         \frac{1}{2}E_u \\
+                         F_u-\frac{1}{2}E_v
+                       \end{pmatrix}  \\
+      \begin{pmatrix}
+        E & F \\
+        F & G
+      \end{pmatrix}
+      \begin{pmatrix}
+        \Gamma_{12}^1 \\
+        \Gamma_{12}^2
+      \end{pmatrix} & =\begin{pmatrix}
+                         \frac{1}{2}E_v \\
+                         \frac{1}{2}G_u
+                       \end{pmatrix}     \\
+      \begin{pmatrix}
+        E & F \\
+        F & G
+      \end{pmatrix}
+      \begin{pmatrix}
+        \Gamma_{22}^1 \\
+        \Gamma_{22}^2
+      \end{pmatrix} & =\begin{pmatrix}
+                         F_v-\frac{1}{2}G_u \\
+                         \frac{1}{2}G_v
+                       \end{pmatrix}
+    \end{align*}
+    That is, the Christoffel symbols only depend on the coefficients of the first fundamental form.
+  \end{proposition}
+  \begin{proposition}
+    Let $S\subseteq\RR^3$ be an orientable surface and $(V,\vf\varphi(u,v))$ be a parametrization of $S$. Then:
+    \begin{enumerate}
+      \item $\displaystyle {\left(\Gamma_{12}^2\right)}_u-{\left(\Gamma_{11}^2\right)}_v +\Gamma_{12}^1\Gamma_{11}^2-\Gamma_{11}^1\Gamma_{12}^2+\Gamma_{12}^2\Gamma_{12}^2-\Gamma_{11}^2\Gamma_{22}^2=-EK$
+      \item $\displaystyle {\left(\Gamma_{12}^1\right)}_u-{\left(\Gamma_{11}^1\right)}_v +\Gamma_{12}^1\Gamma_{12}^2-\Gamma_{11}^2\Gamma_{22}^1=FK$
+      \item $\displaystyle {\left(\Gamma_{22}^2\right)}_u-{\left(\Gamma_{12}^2\right)}_v +\Gamma_{22}^1\Gamma_{11}^2-\Gamma_{12}^1\Gamma_{12}^2=-FK$
+      \item $\displaystyle {\left(\Gamma_{22}^1\right)}_u-{\left(\Gamma_{12}^1\right)}_v +\Gamma_{22}^1\Gamma_{11}^1+\Gamma_{22}^2\Gamma_{12}^1-\Gamma_{12}^1\Gamma_{12}^1-\Gamma_{12}^2\Gamma_{22}^1=GK$
+    \end{enumerate}
+    These equations are called \emph{Gau\ss\ equations}. Moreover, we have:
+    \begin{enumerate}\setcounter{enumi}{4}
+      \item $\displaystyle e_v-f_u=e\Gamma_{12}^1+f\left(\Gamma_{12}^2-\Gamma_{11}^1\right)-g\Gamma_{11}^2$
+      \item $\displaystyle f_v-g_u=e\Gamma_{22}^1+f\left(\Gamma_{22}^2-\Gamma_{12}^1\right)-g\Gamma_{12}^2$
+    \end{enumerate}
+    These equations are called \emph{Codazzi-Mainardi equations}.
+  \end{proposition}
+  \begin{corollary}
+    Let $S\subseteq\RR^3$ be an orientable surface. Then, its Gau\ss\space curvature depends only on the coefficients of the first fundamental form.
+  \end{corollary}
+  \begin{theorem}[Gau\ss' Theorema Egregium]
+    The Gau\ss\space curvature is invariant under local isometries between surfaces.
+  \end{theorem}
+  \begin{theorem}[Bonnet's theorem]
+    Let $V\subseteq\RR^2$ be an open set and $E,F,G,e,f,g:V\rightarrow\RR$ be functions of class $\mathcal{C}^\infty$ such that $E,G,EG-F^2>0$ and such that they satisfy the Gau\ss\space  and Codazzi-Mainardi equations. Then $\forall p\in V$, there exists a neighbourhood $U\subseteq V$ of $p$ and an immersion $\vf\varphi:U\rightarrow\RR^3$ such that $S:=\vf\varphi(U)$ is a regular surface whose first and second fundamental forms coefficients are $E$, $F$, $G$ and $e$, $f$, $g$, respectively. Moreover, if $\vf\psi:U\rightarrow\RR^3$ satisfy the same conditions, then there exist $\vf{A}\in\text{O}(3)$ and $\vf{C}\in\RR^3$ such that $\vf\psi=\vf{A\varphi}+\vf{C}$.
+  \end{theorem}
+  \begin{proposition}
+    Let $S\subseteq\RR^3$ be an orientable surface and $(V,\vf\varphi(u,v))$ be an orthogonal parametrization of $S$. Then: $$K=-\frac{1}{2\sqrt{EG}}\left[{\left(\frac{E_v}{\sqrt{EG}}\right)}_v+{\left(\frac{G_u}{\sqrt{EG}}\right)}_u\right]$$
+  \end{proposition}
+  \subsubsection{Parallel transport}
+  \begin{definition}
+    Let $S\subseteq\RR^3$ be a surface and $U\subseteq S$ be an open set. A \emph{vector field} tangent to $S$ defined on $U$ is a correspondance $\vf{X}$ that at each point $p\in U$ it assigns a tangent vector $\vf{X}(p)=:\vf{X}_p\in T_pS$. We say that $\vf{X}$ is \emph{differentiable} at $p\in U$ if there is a parametrization $\vf\varphi(u,v)$ of $S$ whose image contains $p$ such that $$\vf{X}=a\vf\varphi_u+b\vf\varphi_v$$ for some differentiable functions $a(u,v)$, $b(u,v)$ at $p$. We say that $\vf{X}$ is \emph{differentiable} if it is differentiable at each point $p\in U$\footnote{From now on, all the vector fields considered will be differentiable so sometimes we will omit to say it explicitly.}.
+  \end{definition}
+  \begin{definition}
+    Let $S\subseteq\RR^3$ be a surface, $\vf{X}$ be a differentiable vector field tangent to $S$, $p\in S$ and $\vf{w}\in T_pS$. Let $\vf\alpha:(-\varepsilon,\varepsilon)\rightarrow S$ a parametrized curve of class $\mathcal{C}^\infty$ with $\vf\alpha(0)=p$ and $\vf\alpha'(0)=\vf{w}$. We denote $\vf{X}(t):=(\vf{X}\circ\vf\alpha)(t)$. We define the \emph{covariant derivative} of $\vf{X}$ at the point $p$ in the direction of $\vf{w}$, denoted as $\frac{\text{D}\vf{X}}{\dd{t}}(0)$, as the orthogonal projection $\pi^\perp$ of $\vf{X}'(0)$ over the vector field $T_pS$. That is: $$\frac{\text{D}\vf{X}}{\dd{t}}(0)=\pi^\perp\left(\vf{X}'(0)\right)$$
+  \end{definition}
+  \begin{proposition}
+    Let $S\subseteq\RR^3$ be a surface, $\vf{X}$ be a differentiable vector field tangent to $S$, $p\in S$ and $\vf{w}\in T_pS$. Let $\vf\alpha:(-\varepsilon,\varepsilon)\rightarrow S$ a parametrized curve of class $\mathcal{C}^\infty$ with $\vf\alpha(0)=p$ and $\vf\alpha'(0)=\vf{w}$. Suppose $(V,\vf\varphi(u,v))$ is a parametrization $\vf\varphi(u,v)$ of $S$ whose image contains $p$. Suppose $\vf{X}(t)=a(u(t),v(t))\vf\varphi_u+b(u(t),v(t))\vf\varphi_v=a(t)\vf\varphi_u+b(t)\vf\varphi_v$ Then:
+    \begin{multline}\label{DG_covderivative}
+      \frac{\text{D}\vf{X}}{\dd{t}}(0)=\left(a'+\Gamma_{11}^1au'+\Gamma_{12}^1av'+\Gamma_{21}^1bu'+\Gamma_{22}^1bv'\right)\vf\varphi_u\\
+      +\left(b'+\Gamma_{11}^2au'+\Gamma_{12}^2av'+\Gamma_{21}^2bu'+\Gamma_{22}^2bv'\right)\vf\varphi_v
+    \end{multline}
+  \end{proposition}
+  \begin{definition}
+    Let $S\subseteq\RR^3$ be a surface and $\vf\alpha:I\rightarrow S$ be a curve of class $\mathcal{C}^\infty$. A \emph{vector field} tangent to $S$ along $\vf\alpha$ is a correspondance $\vf{X}$ that at each $t\in U$ it assigns a tangent vector $\vf{X}(t)=:\vf{X}_{\vf\alpha(t)}\in T_{\vf\alpha(t)}S$. We say that $\vf{X}$ is \emph{differentiable} if at each local chart $(V,\vf\varphi(u,v))$ we have: $$\vf{X}(t)=a(t)\vf\varphi_u+b(t)\vf\varphi_v$$ for some differentiable functions $a(t)$, $b(t)$. We define its covariant derivative (along $\vf\alpha$) as the vector field $\frac{\text{D}\vf{X}}{\dd{t}}$ defined by \cref{DG_covderivative}, which is differentible along $\vf\alpha$.
+  \end{definition}
+  \begin{definition}
+    Let $S\subseteq\RR^3$ be a surface and $\vf{X}$ be a vector field tangent to $S$ along a curve $\vf\alpha:I\rightarrow S$ of class $\mathcal{C}^\infty$. We say that $\vf{X}$ is \emph{parallel} if: $$\frac{\text{D}\vf{X}}{\dd{t}}=0$$
+  \end{definition}
+  \begin{proposition}
+    Let $S\subseteq\RR^3$ be a surface and $\vf{X}$, $\vf{Y}$ be vector fields tangent to $S$ along a curve $\vf\alpha:I\rightarrow S$ of class $\mathcal{C}^\infty$. Then, $t\mapsto\langle \vf{X}(t),\vf{Y}(t)\rangle$ is constant. In particular, the norms $\|\vf{X}(t)\|$, $\|\vf{Y}(t)\|$ as well as the angle between $\vf{X}(t)$ and $\vf{Y}(t)$ are constant.
+  \end{proposition}
+  \begin{proposition}
+    Let $S\subseteq\RR^3$ be a surface and $\vf\alpha I\rightarrow S$ be a parametrized curve of class $\mathcal{C}^\infty$. Then, given $t_0\in I$ and $\vf{w}\in T_{\vf\alpha(t_0)}S$ there exists a unique parallel vector field $\vf{X}$ along $\vf\alpha$ such that $\vf{X}(t_0)=\vf{W}$. This vector field is called \emph{parallel transport} of the vector $\vf{w}$ along $\vf{\alpha}$ and it is defined on the entire interval $I$.
+  \end{proposition}
+  \subsubsection{Geodesics}
+  \begin{definition}
+    Let $S\subseteq\RR^3$ be a surface and $\vf\alpha I\rightarrow S$ be a parametrized curve of class $\mathcal{C}^\infty$. We say that $\vf\alpha$ is a \emph{geodesic} of $S$ if the tangent vector $\vf{\alpha}'$ is parallel along $\vf\alpha$. That is, if it satisfies: $$\frac{\text{D}\vf{\alpha}'}{\dd{t}}=0$$
+  \end{definition}
+  \begin{proposition}
+    Let $\vf\alpha$ be a geodesic of a surface $S\subseteq\RR^3$ be a surface. Then, $\|\vf\alpha'\|$ is constant.
+  \end{proposition}
 \end{multicols}
 \end{document}

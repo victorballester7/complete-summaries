@@ -346,7 +346,7 @@
   \subsection{Hypothesis testing}
   \subsubsection{Hypothesis test}
   \begin{definition}
-    Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\theta\in\Theta\})$ be a statistical model and $\Theta_0,\Theta_1\subset\Theta$ be subsets. Our goal is to know whether $\theta\in\Theta_0$ or $\theta\in\Theta_1$ (even if it isn't neither of them) and we will use a sample $\vf{x}\in\mathcal{X}$ to conclude our objective. We define the following two propositions which we will call \emph{hypothesis}:
+    Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\theta\in\Theta\})$ be a statistical model and $\Theta_0,\Theta_1\subset\Theta$ be disjoint subsets. Our goal is to know whether $\theta\in\Theta_0$ or $\theta\in\Theta_1$ (even if it isn't neither of them) and we will use a sample $\vf{x}\in\mathcal{X}$ to conclude our objective. We define the following two propositions which we will call \emph{hypothesis}:
     $$\mathcal{H}_0:\theta\in\Theta_0\qquad\mathcal{H}_1:\theta\in\Theta_1$$
     $\mathcal{H}_0$ is called \emph{null hypothesis} and $\mathcal{H}_1$ is called \emph{alternative hypothesis}. We say that the hypothesis $\mathcal{H}_i$ is \emph{simple} if $\Theta_i=\{\theta_0\}$ for some $\theta_0\in\Theta$. Otherwise we say that the hypothesis $\mathcal{H}_i$ is compound.
   \end{definition}
@@ -361,7 +361,7 @@
       \beta  & :=\Prob(\text{Error of type II})=\Prob(\text{Accept $\mathcal{H}_0$}\mid\text{$\mathcal{H}_0$ is false})
     \end{align*}
     More precisely, if $\vf{x}\in\mathcal{X}$ is a realization of $\vf{X}_n$, then: $$\alpha:=\sup\{\Prob(\vf{x}\in A_1\mid \theta):\theta\in\Theta_0\}$$
-    The value $1-\beta$ is called \emph{power} of the test and the value $\alpha$, \emph{size} of the test. Moreover we say that the test has \emph{significance level} $\alpha\in[0,1]$ if its size is less than or equal to $\alpha$. In many cases, the size of the test and the significance level are equal\footnote{In particular, for simple hypostesis they are the same thing.}\footnote{In practise, we fix a significance level $\alpha\in[0,1]$ small enough ($\approx 0.05$ but may vary depending on the problem) with which we accept making mistakes and from here we try to minimize the $\beta$ (or maximize the power $1-\beta$). Moreover having fixed $\alpha$, we obtain a confidence level $1-\alpha$. And if we impose $\Prob(\vf{x}\in A_0)=1-\alpha$, we are able to determine $A_0$.}.
+    The value $1-\beta$ is called \emph{power} of the test and the value $\alpha$, \emph{size} of the test. Moreover we say that the test has \emph{significance level} $\alpha\in[0,1]$ if its size is less than or equal to $\alpha$. In many cases, the size of the test and the significance level are equal\footnote{In particular, for simple hypostesis they are the same thing.}\footnote{In practise, we fix a significance level $\alpha\in[0,1]$ small enough ($\approx 0.05$ but may vary depending on the problem) with which we accept making mistakes and from here we try to minimize the $\beta$ (or maximize the power $1-\beta$). Moreover having fixed $\alpha$, we obtain a confidence level $1-\alpha$. And if we impose $\Prob(\vf{x}\in A_0\mid \mathcal{H}_0)=1-\alpha$, we are able to determine $A_0$.}.
   \end{definition}
   \begin{definition}
     Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\theta\in\Theta\})$ be a statistical model, $\delta:\mathcal{X}=A_1\sqcup A_2\rightarrow\{\mathcal{H}_0,\mathcal{H}_1\}$ be a hypothesis test and $\vf{x}\in\mathcal{X}$ be a realization of $\vf{X}_n$. We define the \emph{power function} as: $$\Pi(\theta)=\Prob(\text{Reject $\mathcal{H}_0$})=\Prob(\vf{x}\in A_1)$$
@@ -404,7 +404,7 @@
     \begin{minipage}{\linewidth}
       \centering
       \includestandalone[mode=image|tex,width=\linewidth]{Images/p-value}
-      \captionof{figure}{Probability density function of a test statistic together with a observed value and the $p$-value of the test.}
+      \captionof{figure}{Probability density function of a test statistic (assuming the null hypothesis) together with a observed value and the $p$-value of the one-sided right tail test.}
     \end{minipage}
   \end{center}
   \subsubsection{Neymann-Pearson test}
@@ -415,10 +415,10 @@
     Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\theta\in\Theta\})$ be a statistical model. We say that a test $\delta:\mathcal{X}=A_1\sqcup A_2\rightarrow\{\mathcal{H}_0,\mathcal{H}_1\}$ of significance level $\alpha$. If $A_1$ does not depend on the parameter $\theta\in\Theta_1$, then $\delta$ is a UMP test.
   \end{lemma}
   \begin{definition}[Neymann-Pearson test]
-    Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\theta\in\Theta\})$ be a statistical model, $\vf{x}\in\mathcal{X}$ be a realization of $\vf{X}_n$, $\delta:\mathcal{X}=A_1\sqcup A_2\rightarrow\{\mathcal{H}_0,\mathcal{H}_1\}$ be a hypothesis test such that $\Theta_0=\{\theta_0\}$ and $\Theta_1=\{\theta_1\}$. We say that $\delta$ is a \emph{Neyman-Pearson test} of significance level $\alpha\in[0,1]$ if $\exists C>0$ such that:
+    Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\theta\in\Theta\})$ be a statistical model, $\vf{x}\in\mathcal{X}$ be a realization of $\vf{X}_n$ and $\delta:\mathcal{X}=A_1\sqcup A_2\rightarrow\{\mathcal{H}_0,\mathcal{H}_1\}$ be a hypothesis test such that $\Theta_0=\{\theta_0\}$ and $\Theta_1=\{\theta_1\}$. We say that $\delta$ is a \emph{Neyman-Pearson test} of significance level $\alpha\in[0,1]$ if $\exists C>0$ such that:
     \begin{gather*}
-      \left\{\vf{x}\in\mathcal{X}:\frac{L(\theta_1;\vf{x})}{L(\theta_0;\vf{x})}\leq C\right\}= A_0\\
-      \left\{\vf{x}\in\mathcal{X}:\frac{L(\theta_1;\vf{x})}{L(\theta_0;\vf{x})}> C\right\}= A_1
+      \left\{\vf{x}\in\mathcal{X}:\frac{L(\theta_0;\vf{x})}{L(\theta_1;\vf{x})}> C\right\}= A_0\\
+      \left\{\vf{x}\in\mathcal{X}:\frac{L(\theta_0;\vf{x})}{L(\theta_1;\vf{x})}\leq C\right\}= A_1
     \end{gather*}
     and $\Prob(\vf{x}\in A_1\mid \mathcal{H}_0)=\alpha$.
   \end{definition}
@@ -428,5 +428,36 @@
   \begin{theorem}
     Any UMP test is a Neyman-Pearson test.
   \end{theorem}
+  \subsubsection{Likelihood-ratio test}
+  \begin{definition}[Likelihood-ratio test]
+    Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\theta\in\Theta\})$ be a statistical model, $\vf{x}\in\mathcal{X}$ be a realization of $\vf{X}_n$, $\delta:\mathcal{X}=A_1\sqcup A_2\rightarrow\{\mathcal{H}_0,\mathcal{H}_1\}$ be a hypothesis test of compound hypothesis $\mathcal{H}_0$ and $\mathcal{H}_1$.
+    Then, the \emph{likelihood ratio test} (\emph{LRT}) is given by the critical region:
+    $$\left\{\vf{x}\in\mathcal{X}:\frac{\sup\{L(\theta;\vf{x}):\theta\in\Theta_0\}}{\sup\{L(\theta;\vf{x}):\theta\in\Theta\}}\leq C\right\}= A_1$$
+    for some constant $C>0$\footnote{Note that $L(\hat\theta,\vf{x})=\sup\{L(\theta;\vf{x}):\theta\in\Theta\}$, where $\hat\theta$ is the MLE estimator. Similarly $L(\hat\theta_0,\vf{x})=\sup\{L(\theta;\vf{x}):\theta\in\Theta\}$, where $\hat\theta_0$ is the MLE estimator restricted to $\Theta_0$.}.
+  \end{definition}
+  \begin{proposition}
+    Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\theta\in\Theta\})$ be a statistical model, $\vf{x}\in\mathcal{X}$ be a realization of $\vf{X}_n$, $\delta:\mathcal{X}=A_1\sqcup A_2\rightarrow\{\mathcal{H}_0,\mathcal{H}_1\}$ be a hypothesis test of simple hypothesis $\mathcal{H}_0$ and $\mathcal{H}_1$. Then, the LRT is a Neyman-Pearson test.
+  \end{proposition}
+  \subsubsection{\texorpdfstring{$t$}{t}-test}
+  \begin{definition}[$t$-test]
+    Let $(\mathcal{X},\mathcal{F},\{X_1,\ldots,X_n\sim N(\mu,\sigma^2)\ \text{\iid} : \mu\in\RR\})$ be a statistical model, $\vf{x}\in\mathcal{X}$ be a realization of $(X_1,\ldots,X_n)$. The \emph{$t$-test} is the test $\delta:\mathcal{X}=A_1\sqcup A_2\rightarrow\{\mathcal{H}_0,\mathcal{H}_1\}$, where $\mathcal{H}_0:\mu=\mu_0$ for some $\mu_0\in\RR$ and $\mathcal{H}_1$ can be either of $\{\mu>\mu_0,\mu<\mu_0,\mu\ne\mu_0\}$. In this case the test statistic that is taken is: $$\frac{\overline{X}_n-\mu}{\frac{\tilde{s}_n}{\sqrt{n}}}\sim t_{n-1}$$
+  \end{definition}
+  \subsection{Analyzing data}
+  \subsubsection{Comparizing distributions}
+  \begin{definition}[Q-Q plots]
+    Consider a sample $x_1,\ldots,x_n$ of data and the ordered sample $x_{(1)},\ldots,x_{(n)}$. We would like to know whether the data come from a distribution $F$ or not. To do conclude something, we define $$y_{(k)}=y_k:=F^{-1}\left(\frac{k}{n+1}\right)\quad k=1,\ldots,n$$
+    Then, we plot the pairs $(y_{(k)},x_{(k)})$ (or equivalently the pairs $(F(y_{(k)}),F(x_{(k)}))$). The more similar is the plot to a line, the more possible is for the data to come from the distribution $F$. This plot is called \emph{Quantile-Quantile plot} (or \emph{Q-Q plots}), $y_{(k)}$ are called the \emph{theoretical quantiles} and $x_{(k)}$ the \emph{sample quantiles}\footnote{Sometimes the theoretical quantiles taken are $F^{-1}\left(\frac{k-0.5}{n}\right)$ instead of $F^{-1}\left(\frac{k}{n+1}\right)$.}.
+  \end{definition}
+  \begin{proposition}[Normal Q-Q plots]
+    Consider a sample $x_1,\ldots,x_n$ of data and the ordered sample $x_{(1)},\ldots,x_{(n)}$. We would like to know whether the data come from a normal distribution $N(\mu,\sigma^2)$ or not. We define $$z_{(k)}=z_{\frac{k}{n+1}}=\Phi^{-1}\left(\frac{k}{n+1}\right)\quad k=1,\ldots,n$$
+    If the data are reasonably normal, the Q-Q plot of the pairs $(z_{(k)},x_{(k)})$ is approximately a line of slope $\sigma$ and $y$-intercept $\mu$.
+  \end{proposition}
+  \begin{center}
+    \begin{minipage}{\linewidth}
+      \centering
+      \includestandalone[mode=image|tex,width=\linewidth]{Images/qq-plot}
+      \captionof{figure}{Two normal Q-Q plots of samples of size 100. On the right-hand side the sample comes from a exponential distribution and so we can see that the data doesn't fit quite well in a line. On the left-hand side the data come from a normal distribution and so the data is approximately fitted in a line whose slope is $2.369\approx \sqrt{4}$ and whose $y$-intersect is $2.956\approx 3$.}
+    \end{minipage}
+  \end{center}
 \end{multicols}
 \end{document}

@@ -483,7 +483,7 @@
     \end{itemize}
   \end{proposition}
   \begin{definition}
-    Let $U\subseteq \CC$ be an open set and $f:U\rightarrow \CC$ be a function. We say that $f$ is \emph{holomorphic} on $U$ is $f$ is $\CC$-differentiable at each $z\in U$. We denote the set of all holomorphic functions on $U$ by $\mathcal{H}(U)$.
+    Let $U\subseteq \CC$ be an open set and $f:U\rightarrow \CC$ be a function. We say that $f$ is \emph{holomorphic} on $U$ if $f$ is $\CC$-differentiable at each $z\in U$. We denote the set of all holomorphic functions on $U$ by $\mathcal{H}(U)$.
   \end{definition}
   \begin{definition}
     We say that $f:\CC\rightarrow\CC$ is an \emph{entire function} if $f$ is holomorphic on the whole complex plane.
@@ -539,8 +539,12 @@
     \end{align*}
   \end{proposition}
   \begin{definition}
-    Let $U\subseteq \CC$ be an open set, $f:U\rightarrow \CC$ be a function and $z_0\in U$. We say that $f$ is \emph{$\RR$-differentiable} at $z_0\in U$ if and only if there exists a $\RR$-linear function $L:\CC\rightarrow\CC$ such that: $$\lim_{h+k\ii\to 0}\frac{|f(z_0+h+k\ii)-f(z_0)-L(h+k\ii)|}{|h+k\ii|}=0$$
-    In that case, the function $L$ is called \emph{differential} of $f$ at $z_0$ and it is denoted by $\vf{D}f(z_0)$\footnote{That is, the $\RR$-differentiability is the usual one if we think $f$ inside $\RR^2$ instead of inside $\CC$.}.
+    Let $U\subseteq \CC$ be set and $f:U\rightarrow \CC$ be a function such that $f(z)=u(z)+\ii v(z)$ $\forall z\in U$ with $u,v:U\rightarrow\RR$. We define the \emph{associated multivalued function} of $f$ as the function $\vf{F}:\RR^2\rightarrow\RR^2$ defined by $\vf{F}(x,y)=(u(x,y),v(x,y)):=(u(x+\ii y),v(x+\ii y))$.
+  \end{definition}
+  \begin{definition}
+    Let $U\subseteq \CC$ be an open set, $z_0\in U$, $f:U\rightarrow \CC$ be a function. We say that $f$ is \emph{$\RR$-differentiable} at $z_0\in U$ if and only if there exists a $\RR$-linear function $\vf{L}:\CC\rightarrow\RR^2$ such that:
+    $$\lim_{h+k\ii\to 0}\frac{|f(z_0+h+k\ii)-f(z_0)-\vf{L}(h+k\ii)|}{|h+k\ii|}=0\footnote{Here we shall think the outcomes of $\vf{L}$ inside $\CC$ instead of $\RR^2$.}$$
+    In that case, the function $\vf{L}$ is called \emph{differential} of $f$ at $z_0$ and it is denoted by $\vf{D}f(z_0)$\footnote{That is, the $\RR$-differentiability is the usual one if we think $f$ inside $\RR^2$ instead of inside $\CC$.}.
   \end{definition}
   \begin{proposition}
     Let $U\subseteq \CC$ be an open set, $z_0\in U$ and $f:U\rightarrow \CC$ be a $\RR$-differentiable function at $z_0$ such that $f(z)=u(z)+\ii v(z)$ $\forall z\in U$ with $u,v:U\rightarrow\RR$. Then:
@@ -788,6 +792,7 @@
       \item $\displaystyle\left|\int_{\gamma}f(z)\dd{z}\right|\leq\int_{\gamma}|f(z)|\abs{\dd{z}}$
     \end{enumerate}
   \end{proposition}
+  \subsubsection{Local Cauchy theory}
   \begin{theorem}[Goursat's theorem]
     Let $U\subseteq \CC$ be an open set, $f\in\mathcal{H}(U)$ and $\gamma$ be a triangular path such that $\overline{D(\gamma)}\subseteq U$. Then: $$\int_\gamma f(z)\dd{z}=0$$
   \end{theorem}
@@ -799,7 +804,7 @@
   \end{lemma}
   \begin{definition}
     We define the \emph{Fresnel integrals} $S(z)$ and $C(z)$ as:
-    $$S(z)=\int_0^z\sin\zeta^2\dd{\zeta}\qquad C(z)=\int_0^z\cos\zeta^2\dd{\zeta}$$
+    $$S(z)=\int_0^z\sin(\zeta^2)\dd{\zeta}\qquad C(z)=\int_0^z\cos(\zeta^2)\dd{\zeta}$$
   \end{definition}
   \subsubsection{Index of a curve}
   \begin{theorem}
@@ -822,7 +827,7 @@
     Let $\gamma:[a,b]\rightarrow\CC$ be a closed piecewise curve of class $\mathcal{C}^1$ and $z_0\notin\gamma^*$. Then:
     $$\Ind(\gamma,z_0)=\frac{1}{2\pi\ii}\int_\gamma\frac{\dd{z}}{z-z_0}$$
   \end{theorem}
-  \begin{theorem}[Cauchy's integral theorem]
+  \begin{theorem}[Local Cauchy's integral formula]
     Let $U\subseteq\CC$ be an open and convex set, $f\in\mathcal{H}(U)$, $\gamma:[a,b]\rightarrow\CC$ be a closed piecewise curve of class $\mathcal{C}^1$ and $z_0\notin\gamma^*$. Then:
     $$f(z_0)\cdot\Ind(\gamma,z_0)=\frac{1}{2\pi\ii}\int_\gamma\frac{f(z)}{z-z_0}\dd{z}$$
   \end{theorem}
@@ -848,7 +853,7 @@
   \begin{corollary}
     Let $U\subseteq\CC$ be an open set and $f:U\rightarrow \CC$ be a function. Then, $f$ is analytic on $U$ if and only if $f$ is holomorphic on $U$.
   \end{corollary}
-  \begin{corollary}[Cauchy's integral theorem for derivatives]
+  \begin{corollary}[Local Cauchy's integral formula for derivatives]
     Let $U\subseteq\CC$ be an open set, $f\in\mathcal{H}(U)$ and $z_0\in U$, $r\in\RR_{>0}$ such that $\overline{D(z_0,r)}\subset U$. Let $\gamma(t)=z_0+r\exp{\ii t}$, $t\in[0,2\pi]$. Then:
     $$f^{(n)}(z_0)=\frac{n!}{2\pi\ii}\int_\gamma\frac{f(z)}{{(z-z_0)}^{n+1}}\dd{z}$$
   \end{corollary}
@@ -884,6 +889,18 @@
       \alpha_1\cdots\alpha_n                 & =                  {(-1)}^n\frac{a_0}{a_n}
     \end{align*}
   \end{proposition}
+  \begin{theorem}[Morera's theorem]
+    Let $U\subseteq\CC$ be an open set, $f:U\rightarrow\CC$ be a continuos function such that $\displaystyle \int_\gamma f(z)\dd{z}=0$ for all triangular path $\gamma$ with $\gamma^*\subset G$. Then, $f$ is analytic.
+  \end{theorem}
+  \begin{theorem}[Weierstra\ss' theorem]
+    Let $U\subseteq\CC$ be an open set, $(f_n)\in\mathcal{H}(U)$ be a sequence of functions such that they converge uniformly to $f:U\rightarrow\CC$ over compact sets of $U$. Then, $f\in\mathcal{H}(U)$ and $\forall k\in \NN$, ${f_n}^{(k)}$ converge uniformly to $f^{(k)}$ over compact sets.
+  \end{theorem}
+  \begin{corollary}
+    Let $U\subseteq\CC$ be an open set, $(f_n)\in\mathcal{H}(U)$ be a sequence of functions such that they converge uniformly to 0 over compact sets of $U$, and $f(z)=\sum_{n=0}^\infty f_n(z)$. Then, $f\in\mathcal{H}(U)$ and: $$f^{(k)}(z)=\sum_{n=0}^\infty {f_n}^{(k)}(z)$$
+  \end{corollary}
+  \begin{theorem}[Maximum modulus principle]
+    Let $U\subseteq\CC$ be an open connected set, $f\in\mathcal{H}(U)$ and $a\in U$ such that $\abs{f(a)}\geq \abs{f(z)}$ $\forall z\in D(a,r)\subset \overline{D(a,r)}\subset U$, for some $r\in\RR_{>0}$. Then, $f$ is constant.
+  \end{theorem}
   \subsubsection{Zeros of holomorphic functions}
   \begin{theorem}
     Let $U\subseteq\CC$ be an open connected set and $f\in\mathcal{H}(U)$. Then, the following statements are equivalent:
@@ -896,8 +913,9 @@
   \begin{corollary}
     Let $U\subseteq\CC$ be an open connected set and $f\in\mathcal{H}(U)$ such that $f$ is not identically zero. Then, if $z_0\in U$ is a zero of $f$, $\exists m\in\NN$ and $g\in\mathcal{H}(U)$ such that $g(z_0)\ne 0$ and: $$f(z)={(z-z_0)}^{m}g(z)$$ The value of $m$ is called \emph{multiplicity} of $z_0$. In particular, the zeros of $f$ are isolated.
   \end{corollary}
-  \begin{theorem}[Analytic contiuation]
+  \begin{theorem}[Analytic contiuation theorem]
     Let $U\subseteq\CC$ be an open connected set and $f,g\in\mathcal{H}(U)$ such that ${\{z\in U:f(z)=g(z)\}}'\cap U\ne\varnothing$. Then, $f(z)=g(z)$ $\forall z\in U$.
   \end{theorem}
+
 \end{multicols}
 \end{document}
