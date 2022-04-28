@@ -984,14 +984,21 @@
       \end{aligned}
       \right.
     \end{equation}
-    is called a \emph{polynomial system}. The field $\vf{f}=(p,q)$ is called \emph{polynomial vector field}. We define the \emph{degree} of that system as $n:=\max\{\deg p,\deg q\}$.
+    is called a \emph{polynomial system}. The field $\vf{f}=(p,q)$ is called \emph{polynomial vector field}. We define the \emph{degree} of that system as $n:=\max\{\deg p,\deg q\}$. Another commonly used notation for expressing the vector field is through the operator
+    \begin{equation}\label{DE_oper}
+      \vf{X}:=p(x,y)\pdv{}{x}+q(x,y)\pdv{}{y}
+    \end{equation}
   \end{definition}
   \begin{definition}
     Let $f\in\RR[x,y]$ be a polynomial. An \emph{algebraic curve} is the set of points satisfying the equation $f(x,y)=0$.
   \end{definition}
   \begin{definition}
-    Let $f(x,y)=0$ be an algebraic curve, $p,q\in\RR[x,y]$ and consider the polynomial system of degree $n$ of \cref{DE_poly}. We say that $f(x,y)=0$ is an \emph{invariant algebraic curve} under the system of \cref{DE_poly} if $$\pdv{f}{x}(x,y)p(x,y)+\pdv{f}{y}q(x,y)=k(x,y)f(x,y)$$
-    where $k\in\RR[x,y]$ is called \emph{cofactor} of the invariant curve $f(x,y)=0$\footnote{Note that $\deg k\leq n-1$.}.
+    Let $f(x,y)=0$ be an algebraic curve, $p,q\in\RR[x,y]$ and consider the polynomial system of degree $n$ of \cref{DE_poly}. We say that $f(x,y)=0$ is an \emph{invariant algebraic curve} under the system of \cref{DE_poly} if
+    \begin{equation}\label{DE_invarcurve}
+      \pdv{f}{x}(x,y)p(x,y)+\pdv{f}{y}q(x,y)=k(x,y)f(x,y)
+    \end{equation}
+    where $k\in\RR[x,y]$ is called \emph{cofactor} of the invariant curve $f(x,y)=0$\footnote{Note that $\deg k\leq n-1$.}. The \cref{DE_invarcurve} can be write as: $$\vf{X}f=kf$$
+    where $\vf{X}$ is the operator defined in \cref{DE_oper}.
   \end{definition}
   \begin{proposition}
     Let $f(x,y)=0$ be an algebraic curve, $p,q\in\RR[x,y]$ and consider the polynomial system of degree $n$ of \cref{DE_poly}. Then, the invariant curve $f(x,y)=0$ is a set of orbits of the differential system of \cref{DE_poly}.
@@ -1060,6 +1067,9 @@
       \item If $\alpha(\vf{p})$ contains both singular and non-singular points, then $\alpha(\vf{p})$ is a collection of singular points together with homoclinic and heteroclinic orbits connecting these.
     \end{enumerate}
   \end{corollary}
+  \begin{corollary}
+    Let $U\subseteq \RR^2$ be an open set, $\vf{f}:U\rightarrow\RR^2$ be a vector field of class $\mathcal{C}^1$ and ${\vf\gamma}$ be a periodic orbit of $\vf{f}$. Then, there is at least one singular point in $\Int(\vf\gamma)$.
+  \end{corollary}
   \subsubsection{Lyapunov stability}
   \begin{definition}
     Let $U\subseteq \RR^n$ be an open set and $\vf{f}:U\rightarrow\RR^n$ be a vector field of class $\mathcal{C}^1$ and $\vf{p}\in U$ be a critical point of $\vf{f}$. We say that $\vf{p}$ is \emph{Lyapunov stable} if the set $\{\vf{p}\}$ is positively stable.
@@ -1087,7 +1097,10 @@
     Let $U\subseteq \RR^2$ be an open set and $\vf{f}:U\rightarrow\RR^2$ be a vector field of class $\mathcal{C}^1$  such that $\div \vf{f}$ has constant sign in a simply connected region $R$ and is not identically zero on any subregion of $R$ with positive area. Then, the system $\vf{x}'=\vf{f}(\vf{x})$ does not have periodic orbits that lie entirely on $R$.
   \end{theorem}
   \begin{theorem}[Bendixson-Dulac theorem]
-    Let $U\subseteq \RR^2$ be an open set and $\vf{f}:U\rightarrow\RR^2$ be a vector field of class $\mathcal{C}^1$ and suppose that there exists a function $h:\RR^2\rightarrow\RR$ and a simply connected region $R$ such that $h(\vf{x})>0$ $\forall \vf{x}\in R$ or $h(\vf{x})<0$ $\forall \vf{x}\in R$, and $\div (h\vf{f})$ has constant sign on $R$ and is not identically zero on any subregion of $R$ with positive area. Then, the system $\vf{x}'=\vf{f}(\vf{x})$ doesn't have periodic orbits that lie entirely on $R$.
+    Let $U\subseteq \RR^2$ be an open set and $\vf{f}:U\rightarrow\RR^2$ be a vector field of class $\mathcal{C}^1$ and suppose that there exists a function $h:U\rightarrow\RR$ of class $\mathcal{C}^1$ and a simply connected region $R$ such that $h(\vf{x})>0$ $\forall \vf{x}\in R$ or $h(\vf{x})<0$ $\forall \vf{x}\in R$, and $\div (h\vf{f})$ has constant sign on $R$ and is not identically zero on any subregion of $R$ with positive area. Then, the system $\vf{x}'=\vf{f}(\vf{x})$ doesn't have periodic orbits that lie entirely on $R$.
+  \end{theorem}
+  \begin{theorem}[Generalized Bendixson-Dulac theorem]
+    Let $U\subseteq \RR^2$ be an open set homeomorphic to a disk with $n$ holes, $n\in\NN\cup\{0\}$ and $\vf{f}:U\rightarrow\RR^2$ be a vector field of class $\mathcal{C}^1$ and suppose that there exists a function $h:U\rightarrow\RR$ of class $\mathcal{C}^1$ and a subset $R\subseteq U$ such that $h(\vf{x})>0$ $\forall \vf{x}\in R$ or $h(\vf{x})<0$ $\forall \vf{x}\in R$, and $\div (h\vf{f})$ has constant sign on $R$ and is not identically zero on any subregion of $R$ with positive area. Then, the system $\vf{x}'=\vf{f}(\vf{x})$ has at most $n$ periodic orbit that lie entirely on $R$.
   \end{theorem}
   \subsubsection{Poincaré compactification}
   \begin{definition}
@@ -1161,10 +1174,37 @@
   \end{definition}
   \subsubsection{Integrability theory of polynomial systems}
   \begin{definition}
-    Let $U\subseteq\RR^2$ be an open set, $p,q\in\RR[x,y]$ and consider the polynomial system of \cref{DE_poly}. We denote $\vf{X}=(p,q)$. We say that a function $R:U\rightarrow\RR$ is an \emph{integrating factor} if $$\div (R\vf{X})=\pdv{(Rp)}{x}+\pdv{(Rq)}{y}=0$$
+    Let $U\subseteq\RR^2$ be an open set, $p,q\in\RR[x,y]$ and consider the polynomial system of \cref{DE_poly}. We say that a function $R:U\rightarrow\RR$ is an \emph{integrating factor} if $$\div (Rp,Rq)=\pdv{(Rp)}{x}+\pdv{(Rq)}{y}=0$$
   \end{definition}
   \begin{proposition}
-    Let $U\subseteq\RR^2$ be an open set, $R:U\rightarrow\RR$ be a differentiable function, $p,q\in\RR[x,y]$ and consider the polynomial system of \cref{DE_poly}. We denote $\vf{X}=(p,q)$. Then, $R$ is an integrating factor if and only if: $$p\pdv{R}{x}+q\pdv{R}{y}=-R\div \vf{X}$$
+    Let $U\subseteq\RR^2$ be an open set, $R:U\rightarrow\RR$ be a differentiable function, $p,q\in\RR[x,y]$ and consider the polynomial system of \cref{DE_poly}. Then, $R$ is an integrating factor if and only if: $$\vf{X}R=p\pdv{R}{x}+q\pdv{R}{y}=-R\div(p,q)$$
+    where $\vf{X}$ is the operator defined in \cref{DE_oper}.
   \end{proposition}
+  \begin{proposition}\label{DE_intfactor}
+    Let $U\subseteq\RR^2$ be an open set, $p,q\in\RR[x,y]$ and consider the polynomial system of \cref{DE_poly}. Suppose that system admits an integrating factor $R:U\rightarrow\RR$. Then, the system admits a first integral $H:U\rightarrow\RR$ given by:
+    $$H(x,y)=-\int R(x,y)p(x,y)\dd y+h(x)$$
+    where $h(x)$ satisfy $h'(x)=R(x,y)q(x,y)-\pdv{H}{x}(x,y)$.
+  \end{proposition}
+  \begin{definition}
+    Let $p,q,g,h\in\RR[x,y]$ and consider the polynomial system of \cref{DE_poly} of degree $d$ and let $\vf{X}$ be the vector field operator of that system (defined by \cref{DE_oper}). We say that $\exp{\frac{g(x,y)}{h(x,y)}}$ is an \emph{exponential factor} with cofactor $k(x,y)\in\RR[x,y]$ if $\deg k\leq d-1$ and $$\vf{X}\exp{\frac{g(x,y)}{h(x,y)}}=k(x,y)\exp{\frac{g(x,y)}{h(x,y)}}$$
+  \end{definition}
+  \begin{theorem}[Darboux theorem]
+    Let $p,q\in\RR[x,y]$ and consider the polynomial system of \cref{DE_poly} of degree $d$, $f_i(x,y)=0$ be invariant algebraic curves with cofactors $k_i(x,y)$ for $i=1,\ldots,p$ and $\exp{\frac{g_j(x,y)}{h_j(x,y)}}$ be exponential factors with cofactors $\ell_j(x,y)$ for $j=1,\ldots,q$. Then:
+    \begin{enumerate}
+      \item If $\exists \lambda_i,\mu_j\in\RR$, $i=1,\ldots,p$ and $j=1,\ldots,q$, not all zero such that $\sum_{i=1}^p\lambda_ik_i+\sum_{j=1}^q\mu_j\ell_j=0$, then
+            \begin{equation}\label{DE_firstint}
+              H={f_1}^{\lambda_1}\cdots{f_p}^{\lambda_p}\exp{\mu_1\frac{g_1(x,y)}{h_1(x,y)}}\cdots\exp{\mu_q\frac{g_q(x,y)}{h_q(x,y)}}
+            \end{equation}
+            is a first integral for the system.
+      \item If $p+q\geq \frac{d(d+1)}{2}+1$, then $\exists \lambda_i,\mu_j\in\RR$, $i=1,\ldots,p$ and $j=1,\ldots,q$, not all zero such that $\sum_{i=1}^p\lambda_ik_i+\sum_{j=1}^q\mu_j\ell_j=0$. And so, the system has the first integral defined in \cref{DE_firstint}.
+      \item If $p+q\geq \frac{d(d+1)}{2}+2$, then the system has a rational first integral. Consequently all trajectories of the system are contained in
+            invariant algebraic curves.
+      \item If $\exists \lambda_i,\mu_j\in\RR$, $i=1,\ldots,p$ and $j=1,\ldots,q$, not all zero such that $\sum_{i=1}^p\lambda_ik_i+\sum_{j=1}^q\mu_j\ell_j=-\div(p,q)$, then
+            \begin{equation*}
+              R={f_1}^{\lambda_1}\cdots{f_p}^{\lambda_p}\exp{\mu_1\frac{g_1(x,y)}{h_1(x,y)}}\cdots\exp{\mu_q\frac{g_q(x,y)}{h_q(x,y)}}
+            \end{equation*}
+            is an integrating factor for the system. And so the system also admits a first integral by \cref{DE_intfactor}.
+    \end{enumerate}
+  \end{theorem}
 \end{multicols}
 \end{document}

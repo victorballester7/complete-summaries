@@ -215,7 +215,7 @@
     $$\function{f}{D}{\CC}{z}{f(z)}$$
   \end{definition}
   \begin{definition}
-    Let $D \subseteq \CC$ be a set and $f:D\rightarrow\CC$ be a function. We say that $f$ is \emph{continuos} at $z_0\in D$ if and only if $\forall \varepsilon>0$ $\exists\delta>0$ such that $\abs{f(z)-f(z_0)}<\varepsilon$ whenever $\abs{z-z_0}<\delta$. We say that $f$ is continuos on $D$ if it is continuos at $z$ $\forall z\in D$.
+    Let $D \subseteq \CC$ be a set and $f:D\rightarrow\CC$ be a function. We say that $f$ is \emph{continuous} at $z_0\in D$ if and only if $\forall \varepsilon>0$ $\exists\delta>0$ such that $\abs{f(z)-f(z_0)}<\varepsilon$ whenever $\abs{z-z_0}<\delta$. We say that $f$ is continuous on $D$ if it is continuous at $z$ $\forall z\in D$.
   \end{definition}
   \begin{definition}
     Let $D \subseteq \CC$ be a set and $f:D\rightarrow\CC$ be a function. We define the function $\Re f$ as the function: $$\function{\Re f}{D}{\CC}{z}{\Re(f(z))}$$
@@ -506,7 +506,7 @@
   \end{proposition}
   \subsubsection{Determination of the logarithm}
   \begin{definition}
-    Let $U\subseteq\CC$ be an open set and $f:U\longrightarrow\CC^*$ and $g:U\rightarrow\CC$ be functions. We say that $g$ is a \emph{determination} of $\ln f(z)$ if $g$ is continuos on $U$ and $\exp{g(z)}=f(z)$ $\forall z\in U$. In particular, we say that $g$ is a \emph{determination of the logarithm} if $g$ is continuos on $U$ and $\exp{g(z)}=z$ $\forall z\in U$.
+    Let $U\subseteq\CC$ be an open set and $f:U\longrightarrow\CC^*$ and $g:U\rightarrow\CC$ be functions. We say that $g$ is a \emph{determination} of $\ln f(z)$ if $g$ is continuous on $U$ and $\exp{g(z)}=f(z)$ $\forall z\in U$. In particular, we say that $g$ is a \emph{determination of the logarithm} if $g$ is continuous on $U$ and $\exp{g(z)}=z$ $\forall z\in U$.
   \end{definition}
   \begin{proposition}
     Let $\theta\in[0,2\pi)$, $L_\theta:=\{r\exp{\ii\theta}:r\in\RR_{\geq 0}\}$ and $U=\CC\setminus L_\theta$. Then, there exists a determination of the logarithm $g:U\rightarrow\CC$ defined as:
@@ -890,7 +890,7 @@
     \end{align*}
   \end{proposition}
   \begin{theorem}[Morera's theorem]
-    Let $U\subseteq\CC$ be an open set, $f:U\rightarrow\CC$ be a continuos function such that $\displaystyle \int_\gamma f(z)\dd{z}=0$ for all triangular path $\gamma$ with $\gamma^*\subset G$. Then, $f$ is analytic.
+    Let $U\subseteq\CC$ be an open set, $f:U\rightarrow\CC$ be a continuous function such that $\displaystyle \int_\gamma f(z)\dd{z}=0$ for all triangular path $\gamma$ with $\gamma^*\subset G$. Then, $f$ is analytic.
   \end{theorem}
   \begin{theorem}[Weierstra\ss' theorem]
     Let $U\subseteq\CC$ be an open set, $(f_n)\in\mathcal{H}(U)$ be a sequence of functions such that they converge uniformly to $f:U\rightarrow\CC$ over compact sets of $U$. Then, $f\in\mathcal{H}(U)$ and $\forall k\in \NN$, ${f_n}^{(k)}$ converge uniformly to $f^{(k)}$ over compact sets.
@@ -899,8 +899,11 @@
     Let $U\subseteq\CC$ be an open set, $(f_n)\in\mathcal{H}(U)$ be a sequence of functions such that they converge uniformly to 0 over compact sets of $U$, and $f(z)=\sum_{n=0}^\infty f_n(z)$. Then, $f\in\mathcal{H}(U)$ and: $$f^{(k)}(z)=\sum_{n=0}^\infty {f_n}^{(k)}(z)$$
   \end{corollary}
   \begin{theorem}[Maximum modulus principle]
-    Let $U\subseteq\CC$ be an open connected set, $f\in\mathcal{H}(U)$ and $a\in U$ such that $\abs{f(a)}\geq \abs{f(z)}$ $\forall z\in D(a,r)\subset \overline{D(a,r)}\subset U$, for some $r\in\RR_{>0}$. Then, $f$ is constant.
+    Let $U\subseteq\CC$ be an open connected set, $f\in\mathcal{H}(U)$ and $a\in U$ such that $\abs{f(a)}\geq \abs{f(z)}$ $\forall z\in \overline{D(a,r)}\subset U$, for some $r\in\RR_{>0}$. Then, $f$ is constant.
   \end{theorem}
+  \begin{corollary}
+    Let $U\subseteq\CC$ be an open bounded set and $f\in\mathcal{H}(U)$. Then, $\abs{f}$ has an absolute maximum on $\overline{U}$ and $$\max\{\abs{f(z)}:z\in\overline{U}\}=\max\{\abs{f(z)}:z\in\Fr U\}$$
+  \end{corollary}
   \subsubsection{Zeros of holomorphic functions}
   \begin{theorem}
     Let $U\subseteq\CC$ be an open connected set and $f\in\mathcal{H}(U)$. Then, the following statements are equivalent:
@@ -916,6 +919,76 @@
   \begin{theorem}[Analytic contiuation theorem]
     Let $U\subseteq\CC$ be an open connected set and $f,g\in\mathcal{H}(U)$ such that ${\{z\in U:f(z)=g(z)\}}'\cap U\ne\varnothing$. Then, $f(z)=g(z)$ $\forall z\in U$.
   \end{theorem}
-
+  \subsubsection{General Cauchy theory}
+  \begin{definition}
+    Let $\gamma_1:[a,b]\rightarrow\CC$, $\gamma_2:[c,d]\rightarrow\CC$ be two paths and $n\in\ZZ$. We define the path $\gamma_1+\gamma_2$ as the concatenation of $\gamma_1$ and $\gamma_2$. That is:
+    $$
+      (\gamma_1+\gamma_2)(t):=
+      \begin{cases}
+        \gamma_1(2t)   & \text{if }\frac{a}{2}\leq t\leq \frac{b}{2}  \\
+        \gamma_2(2t-b) & \text{if }\frac{c+b}{2} <t\leq \frac{d+b}{2}
+      \end{cases}
+    $$
+    We define the path $n\gamma_1$ as the path:
+    $$
+      (n\gamma_1)(t):=
+      \begin{cases}
+        \gamma_1+\overset{(n)}{\cdots}+\gamma_1               & \text{if }n\geq 0 \\
+        {\gamma_1}^-+\overset{(\abs{n})}{\cdots}+{\gamma_1}^- & \text{if }n<0
+      \end{cases}
+    $$
+  \end{definition}
+  \begin{definition}
+    Let $\gamma_1,\ldots,\gamma_k$ be paths. A \emph{chain of paths} is a linear combination $$\gamma=n_1\gamma_1+\cdots+n_k\gamma_k$$ where $n_i\in\ZZ$ $\forall i=1,\ldots,k$. We define the \emph{image} of $\gamma$, $\gamma^*$, as:
+    $$\gamma^*:=\bigcup_{i=1}^k{\gamma_i}^*$$
+  \end{definition}
+  \begin{definition}
+    Let $\gamma=n_1\gamma_1+\cdots+n_k\gamma_k$ be a chain of paths. We say that $\gamma$ is a \emph{cycle} if the paths $\gamma_i$ are closed $\forall i=1,\ldots,k$.
+  \end{definition}
+  \begin{definition}
+    Let $\gamma=n_1\gamma_1+\cdots+n_k\gamma_k$ be a cycle and $z_0\in\CC\setminus\gamma^*$. We define the \emph{index} of $\gamma$ with respect to $z_0$ as: $$\Ind(\gamma,a):=\sum_{i=1}^kn_i\Ind(\gamma_i,a)$$
+  \end{definition}
+  \begin{definition}
+    Let $U\subseteq \CC$ be an open set and $\gamma$ be a cycle such that $\gamma^*\subset U$. We say that $\gamma$ is \emph{homologous to zero} on $U$, and we denoted it by $\gamma\homoleg{U} 0$, if $\Ind(\gamma,z)=0$ $\forall z\in\CC\setminus U$.
+  \end{definition}
+  \begin{lemma}
+    Let $U\subseteq\CC$ be an open set and $f\in\mathcal{H}(U)$. Consider the function $\varphi:U\times U\rightarrow\CC$ defined as:
+    $$
+      \varphi(z,w)=
+      \begin{cases}
+        \frac{f(z)-f(w)}{z-w} & \text{if }z\ne w \\
+        f'(z)                 & \text{if }z=w
+      \end{cases}
+    $$
+    Then, $\varphi$ is continuous and $\forall w_0\in U$ the function $\varphi(\cdot,w_0)$ is holomorphic on $U$.
+  \end{lemma}
+  \begin{lemma}
+    Let $U,V\subseteq\CC$ be open sets, $g:U\times V\rightarrow\CC$ be a continuous function and $\gamma$ be a piecewise path of class $\mathcal{C}^1$ with $\gamma^*\subset V$. Suppose that given $w_0\in V$ we have $g(\cdot,w_0)\in\mathcal{H}(U)$. Then, $F(z):=\int_\gamma g(z,w)\dd{w}$ is holomorphic on $U$ and $$F'(z)=\int_\gamma\pdv{g}{z}(z,w)\dd{w}$$
+  \end{lemma}
+  \begin{theorem}[General Cauchy's integral formula]
+    Let $U\subseteq\CC$ be an open set, $f\in\mathcal{H}(U)$, $\gamma$ be a piecewise cycle of class $\mathcal{C}^1$ with $\gamma^*\subset U$ and $z_0\in U\setminus\gamma^*$. Suppose that $\gamma\homoleg{U} 0$. Then:
+    $$f(z_0)\cdot\Ind(\gamma,z_0)=\frac{1}{2\pi\ii}\int_\gamma\frac{f(z)}{z-z_0}\dd{z}$$
+    If $\gamma=n_1\gamma_1+\cdots+n_k\gamma_k$, the previous formula is equivalent to:
+    $$f(z_0)\sum_{i=1}^kn_i\Ind(\gamma_i,z_0)=\frac{1}{2\pi\ii}\sum_{i=1}^kn_i\int_{\gamma_i}\frac{f(z)}{z-z_0}\dd{z}$$
+  \end{theorem}
+  \begin{theorem}[Cauchy's integral theorem]
+    Let $U\subseteq \CC$ be an open set, $f\in\mathcal{H}(U)$ and $\gamma:[a,b]\rightarrow\CC$ be a piecewise cycle of class $\mathcal{C}^1$ with $\gamma^*\subset U$. Suppose that $\gamma\homoleg{U} 0$. Then: $$\int_\gamma f(z)\dd{z}=0$$
+  \end{theorem}
+  \begin{corollary}[General Cauchy's integral formula for derivatives]
+    Let $U\subseteq\CC$ be an open set, $f\in\mathcal{H}(U)$, $\gamma$ be a piecewise cycle of class $\mathcal{C}^1$ with $\gamma^*\subset U$ and $z_0\in U\setminus\gamma^*$. Suppose that $\gamma\homoleg{U} 0$. Then:
+    $$f^{(n)}(z_0)\cdot\Ind(\gamma,z_0)=\frac{n!}{2\pi\ii}\int_\gamma\frac{f(z)}{{(z-z_0)}^{n+1}}\dd{z}$$
+  \end{corollary}
+  \begin{theorem}
+    Let $U\subseteq\CC$ be an open connected set and $f\in\mathcal{H}(U)$. Let $z_1,\ldots,z_n$ be the zeros of $f$ (counting repetitions) and $\gamma\homoleg{U} 0$ be a piecewise cycle of class $\mathcal{C}^1$ such that $\gamma^*\cap\{z_1,\ldots,z_n\}=\varnothing$. Then:
+    $$\frac{1}{2\pi\ii}\int_{\gamma}\frac{f'(z)}{f(z)}\dd z=\sum_{j=1}^n\Ind(\gamma,z_j)=:\sum\Ind(\gamma,f^{-1}(0))$$
+    where the last expression is a new notation that we will sometimes use in order to simplify the lecture.
+  \end{theorem}
+  \begin{corollary}
+    Let $U\subseteq\CC$ be an open connected set, $f\in\mathcal{H}(U)$, $w\in \CC$ and $\gamma\homoleg{U} 0$ be a piecewise cycle of class $\mathcal{C}^1$ such that $\gamma^*\cap f^{-1}(w)=\varnothing$. Then:
+    $$\frac{1}{2\pi\ii}\int_{\gamma}\frac{f'(z)}{f(z)-w}\dd z=\sum\Ind(\gamma,f^{-1}(w))$$
+  \end{corollary}
+  \begin{proposition}
+    Let $a\in\CC$, $r\in\RR_{>0}$ and $f\in\mathcal{H}(D(a,r))$ be a non constant function. Suppose $f(a)=b\in \CC$ and so we can write $f(z)-b={(z-a)}^mg(z)$ with $m\in\NN$ and $g\in\mathcal{H}(D(a,r))$. Then, there exists $\varepsilon>0$ and $\delta>0$ such that $D(a,\varepsilon)\subset D(a,r)$ and all the points of $D(b,\delta)\setminus\{b\}$ have $m$ preimages in $D(a,\varepsilon)$ of multiplicity 1.
+  \end{proposition}
 \end{multicols}
 \end{document}
