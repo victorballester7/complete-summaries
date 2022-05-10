@@ -21,13 +21,15 @@
   \end{definition}
   \begin{definition}
     Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\theta\in\Theta\})$ be a statistical model. We define the \emph{sample mean} as the statistic: $$T(X_1,\ldots,X_n)=\frac{1}{n}\sum_{i=1}^nX_i=:\overline{X}_n$$
+    Given a realization $(x_1,\ldots,x_n)\in\mathcal{X}$, we will denote $\overline{x}_n:=\overline{X}_n(x_1,\ldots,x_n)$\footnote{Some times, and if the context is clear, we will denote $\overline{x}_n$ simply as $\overline{x}$.}
   \end{definition}
   \begin{definition}
-    Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\theta\in\Theta\})$ be a statistical model. We define the \emph{sample variance} as the statistic: $$T(X_1,\ldots,X_n)=\frac{1}{n}\sum_{i=1}^n{(X_i-\overline{X}_n)}^2=:{s_n}^2$$ We define the \emph{corrected sample variance} as the statistic:
-    $$T(X_1,\ldots,X_n)=\frac{1}{n-1}\sum_{i=1}^n{(X_i-\overline{X}_n)}^2=:\tilde{s}_n{}^2$$
+    Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\theta\in\Theta\})$ be a statistical model. We define the \emph{sample variance} as the statistic: $$T(X_1,\ldots,X_n)=\frac{1}{n}\sum_{i=1}^n{(X_i-\overline{X}_n)}^2=:{S_n}^2$$ We define the \emph{corrected sample variance} as the statistic:
+    $$T(X_1,\ldots,X_n)=\frac{1}{n-1}\sum_{i=1}^n{(X_i-\overline{X}_n)}^2=:\tilde{S}_n{}^2$$
+    Given a realization $(x_1,\ldots,x_n)\in\mathcal{X}$, we will denote ${s_n}^2:={S_n}^2(x_1,\ldots,x_n)$ and $\tilde{s}_n{}^2:=\tilde{S}_n{}^2(x_1,\ldots,x_n)$\footnote{Some times, and if the context is clear, we will denote ${s_n}^2$ and $\tilde{s}_n{}^2$ simply as $s^2$ and $\tilde{s}^2$, respectively.}
   \end{definition}
   \begin{proposition}
-    Let $X_1,\ldots,X_n$ be random variables. Then: $${s_n}^2=\frac{1}{n}\sum_{i=1}^n{X_i}^2-{\overline{X}_n}^2$$
+    Let $X_1,\ldots,X_n$ be random variables. Then: $${S_n}^2=\frac{1}{n}\sum_{i=1}^n{X_i}^2-{\overline{X}_n}^2$$
   \end{proposition}
   \begin{definition}
     Let $(\mathcal{X},\mathcal{F},\{\Prob_{\theta}^{\vf{X}_n}:{\theta}\in\Theta\subseteq \RR\})$ be a statistical model, ${\theta} \in\Theta$ and $g:\Theta\rightarrow\Theta$ be a function. An \emph{estimator} of $g({\theta})$ is a statistic ${\hat\theta}$ whose outcomes are in $\Theta$ and does not depend on any unknown parameter. It is used to give an estimation of the (supposedly unknown) parameter $g({\theta})$.
@@ -44,8 +46,8 @@
     Hence, the estimator $\overline{X}_n$ of $\mu$ is unbiased.
   \end{proposition}
   \begin{proposition}
-    Let $(\mathcal{X},\mathcal{F},\{\Prob_{\theta}^{\vf{X}_n}:{\theta}\in\Theta\subseteq \RR\})$ be a parametric statistical model such that $X_1,\ldots,X_n$ are square-integrable \iid random variables with mean $\mu$ and variance $\sigma^2$. Then: $$\Exp({s_n}^2)=\frac{n-1}{n}\sigma^2\quad\text{and}\quad\Exp(\tilde{s}_n{}^2)=\sigma^2$$
-    Hence, the estimator $\tilde{s}_n{}^2$ of $\sigma^2$ is unbiased whereas the estimator ${s_n}^2$ of $\sigma^2$ is biased.
+    Let $(\mathcal{X},\mathcal{F},\{\Prob_{\theta}^{\vf{X}_n}:{\theta}\in\Theta\subseteq \RR\})$ be a parametric statistical model such that $X_1,\ldots,X_n$ are square-integrable \iid random variables with mean $\mu$ and variance $\sigma^2$. Then: $$\Exp({S_n}^2)=\frac{n-1}{n}\sigma^2\quad\text{and}\quad\Exp(\tilde{S}_n{}^2)=\sigma^2$$
+    Hence, the estimator $\tilde{S}_n{}^2$ of $\sigma^2$ is unbiased whereas the estimator ${S_n}^2$ of $\sigma^2$ is biased.
   \end{proposition}
   \begin{definition}
     Let $(\mathcal{X},\mathcal{F},\{\Prob_{\theta}^{\vf{X}_n}:{\theta}\in\Theta\subseteq \RR\})$ be a parametric statistical model, $g:\Theta\rightarrow\Theta$ be a function and ${\hat\theta}$ be an integrable estimator of $g({\theta})\in\Theta$. The \emph{mean squared error} (\emph{MSE}) of ${\hat\theta}$ is the function: $$\MSE({\hat\theta}):=\Exp\left({({\hat\theta}-g({\theta}))}^2\right)$$
@@ -261,23 +263,23 @@
     Let $n\in\NN$. Then, the pdf of $t_n$ is: $$f_{t_n}(x)=\frac{\Gamma\left(\frac{n+1}{2}\right)}{\sqrt{\pi n}\Gamma\left(\frac{n}{2}\right)}{\left(1+\frac{x^2}{n}\right)}^{-\frac{n+1}{2}}\footnote{It makes sense if we remplace the value $n\in\NN$ for a value $\nu\in\RR_{>0}$. However the original definition of $t_n$ from the ${\chi_n}^2$ fails.}$$
   \end{proposition}
   \subsubsection{Fisher's theorem}
-  \begin{theorem}
+  \begin{theorem}[Fisher's theorem]
     Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\theta\in\Theta\})$ be a parametric statistical model and suppose $X_1,\ldots,X_n\sim N(\mu,\sigma^2)$ are \iid random variables. Then:
     \begin{enumerate}
       \item $\overline{X}_n\sim N\left(\mu,\frac{\sigma^2}{n}\right)$
-      \item $\tilde{s}_n{}^2\sim\frac{\sigma^2}{n-1}{\chi_{n-1}}^2$
-      \item $\overline{X}_n$ and $\tilde{s}_n{}^2$ are independent.
+      \item $\tilde{S}_n{}^2\sim\frac{\sigma^2}{n-1}{\chi_{n-1}}^2$
+      \item $\overline{X}_n$ and $\tilde{S}_n{}^2$ are independent.
     \end{enumerate}
   \end{theorem}
   \begin{corollary}
-    Let $n\in\NN$ and $X_1,\ldots,X_n\sim N(\mu,\sigma^2)$ be \iid random variables. Then: $$\frac{\overline{X}_n-\mu}{\frac{\tilde{s}_n}{\sqrt{n}}}\sim t_{n-1}$$
+    Let $n\in\NN$ and $X_1,\ldots,X_n\sim N(\mu,\sigma^2)$ be \iid random variables. Then: $$\frac{\overline{X}_n-\mu}{\frac{\tilde{S}_n}{\sqrt{n}}}\sim t_{n-1}$$
   \end{corollary}
   \begin{corollary}
     Let $n\in\NN$ and $X\sim t_n$ be a random variable. Then: $$X\overset{\text{d}}{\longrightarrow }N\left(0,1\right)$$
     Hence, $N(0,1)=t_\infty$.
   \end{corollary}
   \begin{corollary}
-    Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\theta\in\Theta\})$ be a parametric statistical model and suppose $X_1,\ldots,X_n\sim N(\mu,\sigma^2)$ are \iid random variables. Then, the estimators $\overline{X}_n$ of $\mu$ and $\tilde{s}_n{}^2$ of $\sigma^2$ are unbiased and consistent.
+    Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\theta\in\Theta\})$ be a parametric statistical model and suppose $X_1,\ldots,X_n\sim N(\mu,\sigma^2)$ are \iid random variables. Then, the estimators $\overline{X}_n$ of $\mu$ and $\tilde{S}_n{}^2$ of $\sigma^2$ are unbiased and consistent.
   \end{corollary}
   \begin{center}
     \begin{minipage}{\linewidth}

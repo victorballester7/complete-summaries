@@ -504,7 +504,7 @@
   \begin{proposition}
     Let $U\subseteq\CC$ be a connected open set and $f\in\mathcal{H}(U)$ such that $f'(z)=0$ $\forall z\in U$. Then, $f$ is constant.
   \end{proposition}
-  \subsubsection{Determination of the logarithm}
+  \subsubsection{Determination of the logarithm and \texorpdfstring{$n$}{n}-th roots}
   \begin{definition}
     Let $U\subseteq\CC$ be an open set and $f:U\longrightarrow\CC^*$ and $g:U\rightarrow\CC$ be functions. We say that $g$ is a \emph{determination} of $\ln f(z)$ if $g$ is continuous on $U$ and $\exp{g(z)}=f(z)$ $\forall z\in U$. In particular, we say that $g$ is a \emph{determination of the logarithm} if $g$ is continuous on $U$ and $\exp{g(z)}=z$ $\forall z\in U$.
   \end{definition}
@@ -522,6 +522,15 @@
     Let $U\subseteq\CC$ be an open set, $f:U\longrightarrow\CC^*$ be a holomorphic function and $g:U\rightarrow\CC$ be a determination of $\ln f$. Then, $g$ is holomorphic and: $$g'(z)=\frac{f'(z)}{f(z)}\quad \forall z\in U$$
     In particular, if $g$ is a determination of the logarithm, then $g'(z)=\frac{1}{z}$.
   \end{corollary}
+  \begin{definition}
+    Let $U\subseteq\CC$ be an open set and $f:U\longrightarrow\CC^*$ be a continuous function. A \emph{determination} of $\sqrt[n]{f}$ is a continuous function $g:U\rightarrow\CC$ such that $g^n=f$.
+  \end{definition}
+  \begin{proposition}
+    Let $U\subseteq\CC$ be an open set and $f:U\longrightarrow\CC^*$ be a continuous function. Suppose that there exists a determination of $\log f$. Then, there exists a determination of the $\sqrt[n]{f}$ given by: $$\sqrt[n]{f}=\exp{\frac{1}{n}\log f}$$
+  \end{proposition}
+  \begin{definition}
+    Let $z\in\CC\setminus(-\infty,0]$ and $\alpha\in\CC$. We define $z^\alpha$ as $z^\alpha:=\exp{\alpha\log z}$.
+  \end{definition}
   \subsubsection{Cauchy-Riemann equations}
   \begin{definition}
     Let $U\subseteq \CC$ be an open set, $z_0 \in U$ and $f:U\rightarrow \CC$ be a function. We define the partial derivatives of $f$ at $z_0$ as
@@ -609,11 +618,14 @@
   \end{proposition}
   \subsubsection{Harmonic functions}
   \begin{definition}
-    Let $U\subseteq \CC\cong\RR^2$ be an open set and $f:U\rightarrow \RR$ be a function of class $\mathcal{C}^2$. We say that $f$ is \emph{harmonic} if $\laplacian f(z)=0$ $\forall z\in U$\footnote{Recall \cref{FOSV_laplacian}.}.
+    Let $U\subseteq \CC\cong\RR^2$ be an open set and $u:U\rightarrow \RR$ be a function of class $\mathcal{C}^2$. We say that $u$ is \emph{harmonic} if $\laplacian u(z)=0$ $\forall z\in U$\footnote{Recall \cref{FOSV_laplacian}.}.
   \end{definition}
   \begin{proposition}
     Let $U\subseteq \CC$ be an open set and $f\in\mathcal{H}(U)$ such that $f=u+\ii v$ with $u,v:U\rightarrow\RR$. Then, $u$ and $v$ are harmonic.
   \end{proposition}
+  \begin{definition}
+    Let $U\subseteq\RR^n$ be a set. We say that $U$ is a \emph{domain} or \emph{region} if $U$ is open an connected.
+  \end{definition}
   \begin{definition}
     Let $S\subseteq\RR^n$ be a subset and $s_0\in S$. We say that $S$ is a \emph{star domain} with respect to $s_0$ if $\forall s\in S$, the line segment from $s_0$ to $s$ lies in $S$.
   \end{definition}
@@ -621,10 +633,14 @@
     Let $U\subseteq\RR^n$ be a subset. We say that $U$ is \emph{convex} if it is a star domain with respect to $x\in U$, for all $x\in U$.
   \end{definition}
   \begin{proposition}
-    Let $U\subseteq \CC$ be an open star domain with respect to $z_0=x_0+\ii y_0\in U$ and $u:U\rightarrow\RR$ be a harmonic function. Then, there exists a harmonic function $v:U\rightarrow\RR$ such that $f=u+\ii v$ is holomorphic. That function $v$ is:
+    Let $U\subseteq \CC$ be a star domain with respect to $z_0=x_0+\ii y_0\in U$ and $u:U\rightarrow\RR$ be a harmonic function. Then, there exists a harmonic function $v:U\rightarrow\RR$ such that $f=u+\ii v$ is holomorphic. That function $v$ is:
     $$v(x+\ii y)=\int_{y_0}^y\pdv{u}{x}(x+\ii t)\dd{t}-\int_{x_0}^x\pdv{u}{y}(t+\ii y_0)\dd{t}+C$$
     for some constant $C\in\RR$.
   \end{proposition}
+  \begin{theorem}[Mean value property]
+    Let $U\subseteq\CC$, $u:U\rightarrow\CC$ be a harmonic function, $a\in\CC$ and $r\in\RR_{>0}$. Then:
+    $$u(a)=\frac{1}{2\pi}\int_0^{2\pi}u(a+r\exp{\ii t})\dd{t}$$
+  \end{theorem}
   \subsection{Möbius transformations}
   \subsubsection{Möbius transformations}
   \begin{definition}[Möbius transformations]
@@ -718,7 +734,7 @@
     $$f(z)=\exp{\ii \theta}\frac{z-a}{1-\overline{a}z}$$
     are the unique holomorphic and bijective functions that carry $D(0,1)$ to $D(0,1)$.
   \end{proposition}
-  \subsection{Integration}
+  \subsection{Complex integration}
   \begin{definition}
     Let $f:[a,b]\subset\RR\rightarrow\CC$ be a function such that $f=u+\ii v$ with $u,v:[a,b]\rightarrow\RR$. We define the \emph{integral} of $f$ on the interval $[a,b]$ as: $$\int_a^bf(t)\dd{t}:=\int_a^bu(t)\dd{t}+\ii\int_a^bv(t)\dd{t}$$
   \end{definition}
@@ -890,7 +906,7 @@
     \end{align*}
   \end{proposition}
   \begin{theorem}[Morera's theorem]
-    Let $U\subseteq\CC$ be an open set, $f:U\rightarrow\CC$ be a continuous function such that $\displaystyle \int_\gamma f(z)\dd{z}=0$ for all triangular path $\gamma$ with $\gamma^*\subset G$. Then, $f$ is analytic.
+    Let $U\subseteq\CC$ be an open set, $f:U\rightarrow\CC$ be a continuous function such that $\displaystyle \int_\gamma f(z)\dd{z}=0$ for all triangular path $\gamma$ with $\gamma^*\subset U$. Then, $f$ is analytic.
   \end{theorem}
   \begin{theorem}[Weierstra\ss' theorem]
     Let $U\subseteq\CC$ be an open set, $(f_n)\in\mathcal{H}(U)$ be a sequence of functions such that they converge uniformly to $f:U\rightarrow\CC$ over compact sets of $U$. Then, $f\in\mathcal{H}(U)$ and $\forall k\in \NN$, ${f_n}^{(k)}$ converge uniformly to $f^{(k)}$ over compact sets.
@@ -980,15 +996,76 @@
   \end{corollary}
   \begin{theorem}
     Let $U\subseteq\CC$ be an open connected set and $f\in\mathcal{H}(U)$. Let $z_1,\ldots,z_n$ be the zeros of $f$ (counting repetitions) and $\gamma\homoleg{U} 0$ be a piecewise cycle of class $\mathcal{C}^1$ such that $\gamma^*\cap\{z_1,\ldots,z_n\}=\varnothing$. Then:
-    $$\frac{1}{2\pi\ii}\int_{\gamma}\frac{f'(z)}{f(z)}\dd z=\sum_{j=1}^n\Ind(\gamma,z_j)=:\sum\Ind(\gamma,f^{-1}(0))$$
+    $$\frac{1}{2\pi\ii}\int_{\gamma}\frac{f'(z)}{f(z)}\dd{z}=\sum_{j=1}^n\Ind(\gamma,z_j)=:\sum\Ind(\gamma,f^{-1}(0))$$
     where the last expression is a new notation that we will sometimes use in order to simplify the lecture.
   \end{theorem}
   \begin{corollary}
     Let $U\subseteq\CC$ be an open connected set, $f\in\mathcal{H}(U)$, $w\in \CC$ and $\gamma\homoleg{U} 0$ be a piecewise cycle of class $\mathcal{C}^1$ such that $\gamma^*\cap f^{-1}(w)=\varnothing$. Then:
-    $$\frac{1}{2\pi\ii}\int_{\gamma}\frac{f'(z)}{f(z)-w}\dd z=\sum\Ind(\gamma,f^{-1}(w))$$
+    $$\frac{1}{2\pi\ii}\int_{\gamma}\frac{f'(z)}{f(z)-w}\dd{z}=\sum\Ind(\gamma,f^{-1}(w))$$
   \end{corollary}
+  \subsubsection{Some important consequences}
+  \begin{theorem}
+    Let $a\in\CC$, $r\in\RR_{>0}$ and $f\in\mathcal{H}(D(a,r))$ be a non constant function. Suppose $f(a)=b\in \CC$ and so we can write $f(z)-b={(z-a)}^mg(z)$ with $m\in\NN$ and $g\in\mathcal{H}(D(a,r))$ with $g(a)\ne 0$. Then, there exists $\varepsilon>0$ and $\delta>0$ such that $D(a,\varepsilon)\subset D(a,r)$ and all the points of $D(b,\delta)\setminus\{b\}$ have $m$ preimages in $D(a,\varepsilon)$ of multiplicity 1.
+  \end{theorem}
+  \begin{theorem}[Open mapping theorem]
+    Let $U\subseteq\CC$ be an open connected set and $f\in\mathcal{H}(U)$ be a non-constant function. Then, $f$ is open.
+  \end{theorem}
+  \begin{corollary}
+    Let $U\subseteq\CC$ be an open set, $f\in\mathcal{H}(U)$ and $z_0\in U$ such that $f'(z_0)\ne 0$. Then, $f$ is a local homeomorphism at $z_0$.
+  \end{corollary}
+  \begin{corollary}
+    Let $U\subseteq\CC$ be an open set and $f\in\mathcal{H}(U)$ be an injective function. Then, $V:=f(U)\subseteq \CC$ is open and $\forall z\in U$, $f'(z)\ne 0$, $f^{-1}\in \mathcal{H}(V)$ and: $${(f^{-1})}'(w)=\frac{1}{f'(f^{-1}(w))}\quad\forall w\in V$$
+  \end{corollary}
+  \begin{theorem}
+    Let $a\in\CC$, $r\in\RR_{>0}$ and $f\in\mathcal{H}(D(a,r))$ be a non constant function. Suppose $f(a)=b\in \CC$ with multiplicity $m>1$, that is, we can write $f(z)-b={(z-a)}^mg(z)$ with $m>1$ and $g\in\mathcal{H}(D(a,r))$ with $g(a)\ne 0$. Then, there exists $\varepsilon>0$ and $\delta>0$ such that $g(D(a,\varepsilon))\subset D(g(a),\abs{g(a)})$ and there exists $h\in \mathcal{H}(D(a,r))$ such that $h^m=g$ and $f(z)=b+{F(z)}^m$, where $F(z)=(z-a)h(z)$ and $F'(a)\ne 0$.
+  \end{theorem}
+  \begin{definition}
+    Let $U\subseteq\CC$ be an open connected set. We say that $U$ is simply connected if $\CC_\infty\setminus U$ is connected.
+  \end{definition}
   \begin{proposition}
-    Let $a\in\CC$, $r\in\RR_{>0}$ and $f\in\mathcal{H}(D(a,r))$ be a non constant function. Suppose $f(a)=b\in \CC$ and so we can write $f(z)-b={(z-a)}^mg(z)$ with $m\in\NN$ and $g\in\mathcal{H}(D(a,r))$. Then, there exists $\varepsilon>0$ and $\delta>0$ such that $D(a,\varepsilon)\subset D(a,r)$ and all the points of $D(b,\delta)\setminus\{b\}$ have $m$ preimages in $D(a,\varepsilon)$ of multiplicity 1.
+    Let $U\subseteq\CC$ be an open connected set. Then, $U$ is simply connected is and only if for all closed path $\gamma$ with $\gamma^*\subset U$ we have $\gamma\homoleg{U}0$.
+  \end{proposition}
+  \begin{definition}
+    Let $U\subseteq\CC$ be an open set. We say that $U$ is simply connected if each connected component is simply connected.
+  \end{definition}
+  \begin{theorem}
+    Let $U\subseteq\CC$ be an open connected set and $f\in\mathcal{H}(U)$. Then, $f$ has a primitive.
+  \end{theorem}
+  \begin{theorem}
+    Let $U\subseteq\CC$ be a simplify connected domain, $f\in\mathcal{H}(U)$ be such that $f(z)\ne 0$ $\forall z\in U$. Then, there exist a determination of $\log f$. Moreover that determination is unique if we fix its value at a point $z_0\in U$.
+  \end{theorem}
+  \subsubsection{Singularities of holomorphic functions}
+  \begin{definition}
+    Let $a\in\CC$, $r\in\RR_{>0}$ and $f:D(a,r)\setminus\{a\}\rightarrow\CC$ be a function. We say that $a$ is an \emph{isolated singularity} of $f$ if $\exists \varepsilon>0$ such that $f\in\mathcal{H}(D(a,\varepsilon)\setminus\{a\})$. We say that $a$ is a \emph{removable singularity} of $f$ if there exists $g\in \mathcal{H}(D(a,R))$ such that $f(z)=g(z)$ $\forall z\in D(a,r)\setminus\{a\}$.
+  \end{definition}
+  \begin{theorem}[Riemann's theorem on removable singularities]
+    Let $a\in\CC$, $r\in\RR_{>0}$ and $f\in\mathcal{H}(D(a,r))$. Then, $a$ is a removable singularity of $f$ if and only if $$\lim_{z\to a}f(z)(z-a)=0$$
+  \end{theorem}
+  \begin{definition}
+    Let $a\in\CC$, $r\in\RR_{>0}$ and $f:D(a,r)\setminus\{a\}\rightarrow\CC$ be a function such that it has an isolated singularity at $a$. We say that $a$ is a \emph{pole} of $f$ if $\lim_{z\to a}\abs{f(z)}=\infty$.
+  \end{definition}
+  \begin{proposition}
+    Let $a\in\CC$, $r\in\RR_{>0}$ and $f:D(a,r)\setminus\{a\}\rightarrow\CC$ be a function such that it has a pole at $a$. Then, we can write $f$ as: $$f(z)=\frac{A_{-m}}{{(z-a)}^m}+\cdots+\frac{A_{-1}}{z-a}+\sum_{n=0}^\infty A_n{(z-a)}^n$$ where $A_i\in\CC$ for $i\in\{-m,-m+1,\cdots\}$ and $m\in\NN$. The value of $m$ is called \emph{order} of the pole $a$. If $m=1$, we say that the pole is \emph{simple}. The term $A_{-1}$ is called \emph{residue} of $f$ at $a$ and it is denoted as $\Res(f,a):=A_{-1}$.
+  \end{proposition}
+  \begin{definition}
+    Let $a\in\CC$, $r\in\RR_{>0}$ and $f:D(a,r)\setminus\{a\}\rightarrow\CC$ be a function such that it has an isolated singularity at $a$. If $a$ is neither an removable singularity nor a pole, we say that $a$ is an \emph{essential singularity} of $f$.
+  \end{definition}
+  \begin{definition}
+    Let $(z_n)_{n\in\ZZ}\in\CC$ be a sequence. We say that a series of the form of $$\sum_{n=-\infty}^{+\infty} z_n$$ is \emph{convergent}, \emph{absolutely convergent} or \emph{uniformly convergent} if and only if the series $$\sum_{n=1}^{\infty}z_{-n}\quad\text{and}\quad\sum_{n=0}^\infty z_n$$ are both convergent, absolutely convergent or uniformly convergent, respectively.
+  \end{definition}
+  \begin{theorem}[Laurent series theorem]
+    Let $a\in\CC$, $R_1,R_2\in\RR_{>=0}\cup\{\infty\}$ with $r_1<r_2$ and consider the crown $C=\{z\in\CC:R_1<\abs{z-a}<R_2\}$. Let $f\in\mathcal{H}(C)$. Then: $$f(z)\sum_{n=-\infty}^{+\infty} a_n{(z-a)}^n\qquad\forall z\in C$$ and the coefficients are given by: $$a_n=\frac{1}{2\pi\ii}\int_{\gamma_r}\frac{f(z)}{{(z-a)}^{n+1}}\dd{z}$$ where $\gamma_r(t)=a+r\exp{\ii t}$, $t\in[0,2\pi]$ and $r\in(R_1,R_2)$ be any value of that interval. This expression is called \emph{Laurent series} of $f$. Moreover we have the following properties:
+    \begin{enumerate}
+      \item If $z\in C$, then Laurent series converges absolutely at $z$.
+      \item Given $R_1<r_1\leq r_2<R_2$, the Laurent series converges absolutely and uniformly on the crown $\{z\in\CC:r_1\leq\abs{z-z_0}\leq r_2\}$.
+    \end{enumerate}
+  \end{theorem}
+  \begin{theorem}[Residues theorem]
+    Let $U\subseteq \CC$ be an open set, $A\subset U$ such that $A'\cap U=\varnothing$\footnote{That is, all points of $A$ are isolated.}, $f\in\mathcal{H}(U\setminus A)$ and $\gamma\homoleg{U} 0$ be a piecewise cycle of class $\mathcal{C}^1$ such that $\gamma^*\subset U\setminus A$. Then:
+    $$\frac{1}{2\pi\ii}\int_{\gamma}f(z)\dd{z}=\sum_{a\in A}\Res(f,a)\Ind(\gamma,a)$$
+  \end{theorem}
+  \begin{proposition}
+    Let $U\subseteq \CC$ be an open set, $a\in U$, $f=\frac{g}{h}\in\mathcal{H}(U\setminus\{a\})$ be a function with a simple pole at $a$. Then: $$\Res(f,a)=\frac{g(a)}{h'(a)}$$
   \end{proposition}
 \end{multicols}
 \end{document}

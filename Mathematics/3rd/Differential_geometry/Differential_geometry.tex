@@ -551,7 +551,7 @@
   \begin{proposition}
     Let $S\subseteq\RR^3$ be a surface, $(V,\vf\varphi(u,v))$ be a local parametrization of $S$ and $\vf\alpha:I\rightarrow\vf\varphi(V)$ be a parametrization of a curve of class $\mathcal{C}^\infty$. We can write $\vf\alpha$ as $\vf\alpha(t)=\vf\varphi(u(t),v(t))$. Then:
     $$\|\vf\alpha'(t)\|=\sqrt{{u'(t)}^2 E_{\vf\varphi}+2u'(t)v'(t) F_{\vf\varphi}+{v'(t)}^2G_{\vf\varphi}}$$ where $E_{\vf\varphi}=E_{\vf\varphi}(u(t),v(t))$, $F_{\vf\varphi}=F_{\vf\varphi}(u(t),v(t))$, $G_{\vf\varphi}=G_{\vf\varphi}(u(t),v(t))$. The arc-length parameter is thus:
-    $$s(t)=\int_{t_0}^t\sqrt{{u'}^2 E_{\vf\varphi}+2u'v' F_{\vf\varphi}+{v'}^2G_{\vf\varphi}}\dd \xi$$
+    $$s(t)=\int_{t_0}^t\sqrt{{u'}^2 E_{\vf\varphi}+2u'v' F_{\vf\varphi}+{v'}^2G_{\vf\varphi}}\dd{\xi}$$
   \end{proposition}
   \begin{proposition}
     Let $S\subseteq\RR^3$ be a surface, $(V,\vf\varphi(u,v))$ be a local parametrization of $S$ and $p\in S$. Then, the angle $\beta$ between the coordinates lines of the parametrization $(V,\vf\varphi(u,v))$ is: $$\cos\beta=\frac{\langle\vf\varphi_u,\vf\varphi_v\rangle}{\|\vf\varphi_u\|\|\vf\varphi_v\|}=\frac{F_{\vf\varphi}}{\sqrt{E_{\vf\varphi}G_{\vf\varphi}}}$$
@@ -683,6 +683,9 @@
   \begin{proposition}
     Let $S\subseteq\RR^3$ be an orientable surface. Then: $$H=\frac{k_1+k_2}{2}=\frac{1}{2\pi}\int_0^{2\pi}k_\text{n}(\theta)\dd\theta$$
   \end{proposition}
+  \begin{proposition}
+    Let $S\subseteq\RR^3$ be a surface oriented with a normal unit field $\vf\nu$ and $\vf\alpha:I\rightarrow S$ be a regular curve of class $\mathcal{C}^\infty$. Then: $$k_\text{n}=\frac{\langle\vf\alpha'',\vf\nu\circ\vf\alpha\rangle}{{\|\vf\alpha'\|}^2}$$
+  \end{proposition}
   \begin{definition}
     Let $S\subseteq\RR^3$ be an orientable surface and $p\in S$. We say that $p$ is
     \begin{itemize}
@@ -759,12 +762,26 @@
   \begin{lemma}
     Let $S\subseteq\RR^3$ be an orientable surface, $p\in S$, $(\vf{v}_1,\vf{v}_2)$ be a basis of $T_pS$ and $\vf{A}:T_pS\rightarrow T_pS$ be a linear isomorphism. Then: $$\vf{A}\vf{v}_1\times\vf{A}\vf{v}_2=\det\vf{A}\left(\vf{v}_1\times\vf{v}_2\right)$$
     In particular, if $\vf\nu$ is a normal unit field of $S$ and $\vf{w}_1,\vf{w}_2\in T_pS$, then: $$\vf{\dd{\nu}}_p(\vf{w}_1)\times\vf{\dd{\nu}}_p(\vf{w}_2)=K(p)\left(\vf{w}_1\times\vf{w}_1\right)$$
+    If $\vf{w}_1=\vf\varphi_u$ and $\vf{w}_2=\vf\varphi_v$ we have: $$\vf{\nu}_u\times\vf{\nu}_v=K\left(\vf{\varphi}_u\times\vf{\varphi}_v\right)$$
   \end{lemma}
   \begin{definition}
     Let $S\subseteq\RR^3$ be a surface oriented with a normal unit field $\vf\nu$ and $R\subseteq S$ be a region on $S$ where the curvature $K$ doesn't vanish. We define the signed area of $\vf\nu(R)$ as: $$\area_\text{s}(\vf\nu(R))=\sign(K)\area(\vf\nu(R))$$
   \end{definition}
   \begin{proposition}
     Let $S\subseteq\RR^3$ be an orientable surface, $p\in S$ such that $K(p)\ne 0$ and $V\subseteq S$ be a connected neighbourhood of $p$ where $K$ has constant sign. Let $(B_n)\subseteq V$ be a sequence of regions that converge to $p$. Then: $$K(p)=\lim_{n\to\infty}\frac{\area_\text{s}(\vf\nu(B_n))}{\area(B_n)}$$
+  \end{proposition}
+  \subsubsection{Ruled surfaces}
+  \begin{definition}
+    Let $S\subseteq\RR^3$ be a surface is called \emph{ruled surface} if it has a parametrization of the form $$\vf\varphi(u,v)=\vf\alpha(u)+v\bf\beta(u)$$ where $\vf\alpha$ and $\vf\beta$ are curves of $\RR^3$ such that $\abs{\vf\beta}=1$.
+  \end{definition}
+  \begin{proposition}
+    Let $S\subseteq\RR^3$ be a ruled surface. Then, $K\leq 0$.
+  \end{proposition}
+  \begin{definition}
+    Let $S\subseteq\RR^3$ be a surface. We say that $S$ is \emph{developable} if it is ruled and $K=0$.
+  \end{definition}
+  \begin{proposition}
+    Let $S\subseteq\RR^3$ be a developable surface and $(V,\vf\varphi(u,v))$ be a parametrization of $S$. Then, there exists a curve $v=h(u)$ where $\vf\varphi$ stops being regular. This curve is called \emph{regression axis}.
   \end{proposition}
   \subsection{Intrinsic geometry of surfaces}
   \subsubsection{Gau\ss' Theorema Egregium}
@@ -891,5 +908,167 @@
     Let $S\subseteq\RR^3$ be a surface, $p\in S$ and $\vf{v}\in T_pS$. Then, there exists $\varepsilon>0$ and a curve $\vf\alpha:(-\varepsilon,\varepsilon)\rightarrow S$ of class $\mathcal{C}^\infty$ such that it is a geodesic, $\vf\alpha(0)=p$ and $\vf\alpha'(0)=\vf{v}$.
   \end{proposition}
   \subsubsection{Geodesic curvature}
+  \begin{definition}
+    Let $S\subseteq\RR^3$ be a surface oriented with a normal unit field $\vf\nu$ and $\vf{X}$ be a unit vector field tangent to $S$ along a curve $\vf\alpha:I\rightarrow S$ of class $\mathcal{C}^\infty$. We define the by $\vf{\overline{X}}$ the unique unit vector field along $\vf\alpha$ such that $(\vf{X},\vf{\overline{X}},\vf\nu)$ is a positive orthonormal basis of $\RR^3$\footnote{Or equivalently such that $(\vf{X},\vf{\overline{X}})$ is a positive orthonormal basis of $T_{\vf\alpha(t)}S$.}.
+  \end{definition}
+  \begin{definition}
+    Let $S\subseteq\RR^3$ be a surface oriented with a normal unit field $\vf\nu$ and $\vf{X}$ be a unit vector field tangent to $S$ along a curve $\vf\alpha:I\rightarrow S$ of class $\mathcal{C}^\infty$. Since $\vf{X}$ is a unit field, we have: $$\frac{\text{D}\vf{X}}{\dd{t}}=\lambda\vf{\overline{X}}=\lambda\vf\nu\times\vf{X}$$
+    We define the \emph{algebraic value} of the covariant derivative of $\vf{X}$ at time $t$ as: $$\left[\frac{\text{D}\vf{X}}{\dd{t}}(t)\right]:=\lambda(t)\footnote{Note that the sign of $\left[\frac{\text{D}\vf{X}}{\dd{t}}(t)\right]$ does depend on the orientation of $\vf\nu$.}$$
+  \end{definition}
+  \begin{definition}
+    Let $S\subseteq\RR^3$ be an orientable surface and $\vf\alpha:I\rightarrow S$ be a regular arc-length parametrization of a curve $C$ of class $\mathcal{C}^\infty$. The algebraic value of the covariant derivative of $\vf\alpha'$ at $\vf\alpha(s)$ is: $$k_{\text{g}}(s):=\left[\frac{\text{D}\vf{\alpha}'}{\dd{s}}(s)\right]$$
+    This value $k_{\text{g}}$ is called \emph{geodesic curvature} of $C$ at $\vf\alpha(s)$.
+  \end{definition}
+  \begin{proposition}
+    Let $S\subseteq\RR^3$ be an orientable surface and $\vf\alpha:I\rightarrow S$ be a regular arc-length parametrization of a curve $C$ of class $\mathcal{C}^\infty$. Then: $$C\text{ is a geodesic} \iff k_{\text{g}}=0$$
+  \end{proposition}
+  \begin{proposition}
+    Let $S\subseteq\RR^3$ be a surface oriented with a normal unit field $\vf\nu$ and $\vf{X}$ be a unit vector field tangent to $S$ along a curve $\vf\alpha:I\rightarrow S$ of class $\mathcal{C}^\infty$. Then:
+    $$\left[\frac{\text{D}\vf{X}}{\dd{t}}(t)\right]=\left\langle\dv{\vf{X}}{t},\vf{\overline{X}}\right\rangle=\left\langle\dv{\vf{X}}{t},\vf\nu\times\vf{X}\right\rangle$$
+    In particular if $\vf\alpha$ is arc-length parametrized, then: $$k_\text{g}=\langle\vf\alpha'',\vf\nu\times\vf\alpha'\rangle$$ Or more generally: $$k_\text{g}=\frac{\langle\vf\alpha'',\vf\nu\times\T\alpha\rangle}{{\|\vf\alpha'\|}^2}$$
+  \end{proposition}
+  \begin{proposition}
+    Let $S\subseteq\RR^3$ be an orientable surface and $\vf\alpha:I\rightarrow S$ be a regular arc-length parametrization of a curve $C$ of class $\mathcal{C}^\infty$. Then: $$k^2={k_{\text{g}}}^2+{k_\text{n}}^2$$
+  \end{proposition}
+  \begin{proposition}
+    Let $S\subseteq\RR^3$ be an orientable surface and $\vf{X}$, $\vf{Y}$ be two unit vector fields tangent to $S$ along a curve $\vf\alpha:I\rightarrow S$ of class $\mathcal{C}^\infty$. Then: $$\left[\frac{\text{D}\vf{Y}}{\dd{t}}\right]-\left[\frac{\text{D}\vf{X}}{\dd{t}}\right]=\dv{\theta}{t}$$ where $\theta$ is a differentiable determination of the angle between $\vf{X}$ and $\vf{Y}$.
+  \end{proposition}
+  \begin{corollary}
+    Let $S\subseteq\RR^3$ be an orientable surface, $\vf{X}$ be a parallel unit vector field along an arc-length parametrized curve $\vf\alpha:I\rightarrow S$ of class $\mathcal{C}^\infty$ and $\theta$ is a differentiable determination of the angle between $\vf{X}$ and $\vf{\alpha}'$. Then: $$k_\text{g}(s)=\left[\frac{\text{D}\vf{X}}{\dd{s}}(s)\right]$$
+  \end{corollary}
+  \begin{proposition}
+    Let $S\subseteq\RR^3$ be an orientable surface and $(V,\vf\varphi(u,v))$ be an orthogonal parametrization of $S$ compatible with the orientation. Let $\vf{X}$ be a unit vector field tangent to $S$ along a curve $\vf\alpha:I\rightarrow S$ of class $\mathcal{C}^\infty$. Suppose $\vf\alpha(t)=\vf\varphi(u(t),v(t))$. Then: $$\left[\frac{\text{D}\vf{X}}{\dd{t}}\right]=\frac{1}{2\sqrt{EG}}\left(G_uv'-E_vu'\right)+\dv{\theta}{t}$$
+    where $\theta$ is the angle from $\vf\varphi_u$ to $\vf{X}$. In particular if the curve $\vf\alpha$ is arc-length parametrized, then:
+    $$k_\text{g}=\frac{1}{2\sqrt{EG}}\left(G_uv'-E_vu'\right)+\dv{\theta}{t}$$
+  \end{proposition}
+  \begin{theorem}[Liouville's formula]
+    Let $S\subseteq\RR^3$ be an orientable surface and $(V,\vf\varphi(u,v))$ be an orthogonal parametrization of $S$ compatible with the orientation. Let $\vf\alpha:I\rightarrow S$ be an arc-length parametrized curve of class $\mathcal{C}^\infty$ such that $\vf\alpha(t)=\varphi(u(t),v(t))$ and let $\theta=\theta(s)$ be the angle between $\varphi_u$ and $\vf\alpha'(s)$. Then: $$k_\text{g}={(k_\text{g})}_1\cos\theta+{(k_\text{g})}_2\sin\theta+\dv{\theta}{s}$$
+    where ${(k_\text{g})}_1$ and ${(k_\text{g})}_2$ denote the geodesic curvature of the coordinate lines $v=\const$ and $u=\const$, respectively.
+  \end{theorem}
+  \subsection{Differential forms}
+  \subsubsection{Vector fields}
+  \begin{definition}
+    Let $p\in\RR^n$. We denote by $T_p\RR^n$ the vector space defined by: $$T_p\RR^n:=\{(p,\vf{v}):\vf{v}\in\RR^n\}$$
+  \end{definition}
+  \begin{definition}
+    Let $U\subseteq\RR^n$ be an open set. A \emph{vector field} defined on $U$ is a correspondence $\vf{X}$ that at each point $p\in U$ it assigns a vector $\vf{X}(p)=:\vf{X}_p\in T_p\RR^n$.
+  \end{definition}
+  \begin{definition}
+    Let $U\subseteq\RR^n$ be an open set, $(\vf{e}_1,\ldots,\vf{e}_n)$ be the standard basis of $\RR^n$ and $\vf{X}$ be a vector field defined on $U$. For $i=1,\ldots,n$, we defined the following vector fields: $$\function{\vf{E}_i:=\pdv{}{x^i}}{\RR^n}{T_p\RR^n}{p}{(p,\vf{e}_i)}$$
+  \end{definition}
+  \begin{proposition}
+    Let $U\subseteq\RR^n$ be an open set. Then, for each $p\in\RR^n$, $(\vf{E}_1,\ldots,\vf{E}_n)$ is a basis of $T_p\RR^n$. Consequently, given a vector field $\vf{X}$ defined on $U$, it can be uniquely written as: $$\vf{X}=\sum_{i=1}^nX^i\vf{E}_i=\sum_{i=1}^nX^i\pdv{}{x^i}\footnote{The superscript notation is used due to historical resons (Einstein notation). See \url{https://en.wikipedia.org/wiki/Einstein_notation} for further information.}$$
+  \end{proposition}
+  \begin{definition}
+    Let $U\subseteq\RR^n$ be an open set and $\vf{X}=\sum X^i\pdv{}{x^i}$ be a vector field defined on $U$. We say that $\vf{X}$ is \emph{differentiable} at $p\in U$ if the components $X^i$ are differentiable at $p$. We say that $\vf{X}$ is \emph{differentiable} on $U$ if it is differentiable at each point $p\in U$. We denote by $\mathcal{X}(U)$ the set of all differentiable vector fields defined on $U$\footnote{Note that $\mathcal{X}(U)$ is a $\RR$-vector space.}.
+  \end{definition}
+  \begin{definition}
+    Let $U\subseteq\RR^n$ be an open set and $\vf{X},\vf{Y}\in\mathcal{X}(U)$. We define the inner product of $\vf{X}$ and $\vf{Y}$ as: $$\function{\langle\vf{X},\vf{Y}\rangle}{U}{\RR}{p}{\langle\vf{X}_p,\vf{Y}_p\rangle}$$
+  \end{definition}
+  \begin{definition}
+    Let $U\subseteq\RR^n$ be an open set, $f\in\mathcal{C}^\infty(U)$ and $\vf{X}=\sum X^i\pdv{}{x^i}\in\mathcal{X}$. We denote by $\vf{X}f$ the differentiable function defined as: $$\vf{X}f(p):=\vf{X}_pf:=\sum_{i=1}^n X^i(p)\pdv{f}{x^i}$$
+  \end{definition}
+  \begin{lemma}
+    Let $U\subseteq\RR^n$ be an open set and $\vf{X}\in\mathcal{X}(U)$. Then, the function $$\function{\vf{X}}{\mathcal{C}^\infty(U)}{\mathcal{C}^\infty(U)}{f}{\vf{X}f}$$ satisfies the following properties:
+    \begin{enumerate}
+      \item It is $\RR$-linear.
+      \item $\vf{X}(fg)=(\vf{X}f)g+f\vf{X}g$ for all $f,g\in\mathcal{C}^\infty(U)$
+    \end{enumerate}
+  \end{lemma}
+  \begin{lemma}
+    Let $U\subseteq\RR^n$ be an open set, $f\in\mathcal{C}^\infty(U)$ and $\vf{X}\in\mathcal{X}$. Then: $$\vf{X}f=\langle\vf{X},\grad f\rangle$$
+  \end{lemma}
+  \begin{definition}
+    Let $U\subseteq\RR^n$ be an open set and $\vf{X}=\sum X^i\pdv{}{x^i}\in\mathcal{X}(U)$. We say that a parametrized curve $\vf{\alpha}:I\rightarrow\RR^n$ is an \emph{integral curve} of $\vf{X}$ if: $$\vf\alpha'(t)=\vf{X}_{\vf\alpha(t)}\qquad \forall t\in I$$
+    That is, the integral curve $\vf\gamma(t)=(x^1(t),\ldots,x^n(t))$ of $\vf{X}$ satisfies the following system of odes:
+    $$
+      \left\{
+      \begin{aligned}
+        {(x^1)}' & =\vf{X}^1(\vf\gamma(t)) \\
+                 & \;\;\vdots              \\
+        {(x^n)}' & =\vf{X}^n(\vf\gamma(t)) \\
+      \end{aligned}
+      \right.
+    $$
+  \end{definition}
+  \begin{proposition}
+    Let $U\subseteq\RR^n$ be an open set, $F\in\mathcal{C}^\infty(U)$ and $\vf{X}\in\mathcal{X}$. We say that $F$ if a \emph{first integral} of $\vf{X}$ if:
+    \begin{enumerate}
+      \item $\vf{\dd}F_p\ne 0$ $\forall p\in U$
+      \item $F$ is constant over the integral curves of $\vf{X}$. That is, $\vf{X}F=0$.
+    \end{enumerate}
+  \end{proposition}
+  \begin{proposition}
+    Let $n\geq 2$, $U\subseteq\RR^n$ be an open set, $p\in U$ and $\vf{X}\in\mathcal{X}(U)$. Suppose that $\vf{X}_p\ne 0$. Then, there exists a neighbourhood $V\subseteq U$ of $p$ and a differential function $F:V\rightarrow\RR$ such that $F$ is a first integral of $\vf{X}$.
+  \end{proposition}
+  \begin{definition}
+    Let $S\subseteq\RR^3$ be a regular surface. A \emph{vector field} defined on $S$ is a correspondence $\vf{X}$ that at each point $p\in S$ it assigns a vector $\vf{X}(p)=:\vf{X}_p\in T_p\RR^3$. If there is a parametrization $\vf\varphi(u,v)$ of $S$, then we can write
+    $$\vf{X}=\vf{X}(u,v)=\sum_{i=1}^3X^i(u,v)\pdv{}{x^i}$$
+    where $X^i(u,v):=(X^i\circ\vf\varphi)(u,v)$. We say that $\vf{X}$ is \emph{differentiable} if it the functions $X^i(u,v)$ are differentiable. We say that $\vf{X}$ is \emph{tangent} to $S$ if $\vf{X}_p\in T_pS$ $\forall p\in S$. In this case we can write $$\vf{X}=X^1\vf\varphi_u+X^2\vf\varphi_v$$
+  \end{definition}
+  \begin{proposition}
+    Let $S\subseteq\RR^3$ be a regular surface and $\vf{X}$, $\vf{Y}$ be tangent differential vector fields to $S$ such that at some point $p\in S$, the vectors $\vf{X}_p$, $\vf{Y}_p$ are linearly independent. Then, there exists a local parametrization $(V,\vf\varphi(u,v))$ of $S$ such that $p\in\vf\varphi(V)$ and: $$\vf{X}=\lambda\vf\varphi_u\qquad\vf{Y}=\mu\vf\varphi_v$$ for some differentiable functions $\lambda$, $\mu$.
+  \end{proposition}
+  \begin{corollary}
+    Let $S\subseteq\RR^3$ be a regular surface and $p\in S$. Then, there exists an orthogonal parametrization $(V,\vf\varphi(u,v))$ of $S$ such that $p\in\vf\varphi(V)$.
+  \end{corollary}
+  \subsubsection{Multilinear algebra}
+  \begin{definition}
+    Let $V_1,\ldots,V_k,W$ be a vector spaces over a field $K$. A \emph{multilinear map} (or \emph{$k$-linear map}) is a function $$f:V_1\times\cdots\times V_k\longrightarrow W$$ that is linear separately in each variable. The value $k$ is called \emph{degree} of the multilinear map.
+  \end{definition}
+  \begin{definition}
+    Let $V$ be a vector space and $$\omega:V\times\overset{(k)}{\cdots}\times V\longrightarrow \RR$$ be a $k$-linear map. We say that $\omega$ is \emph{antisymmetric} if $$\omega(\vf{u}_{\sigma(1)},\ldots,\vf{u}_{\sigma(k)})=\sign(\sigma)\omega(\vf{u}_1,\ldots,\vf{u}_k)\qquad\forall\sigma\in \text{S}_k$$
+    We denote by $\Lambda^kV^*$ the vector space of the antisymmetric $k$-linear maps. The elements of $\Lambda^kV^*$ are called \emph{multilinear forms}\footnote{Here $V^*$ denotes the dual space of $V$ (see \cref{LA_dual})}. By agreement we denote $\Lambda^0V^*:=\RR$ and: $$\Lambda^*V^*:=\bigoplus_{k=0}^\infty\Lambda^kV^*$$
+  \end{definition}
+  \begin{definition}
+    Let $V$ be a vector space, $\alpha\in\Lambda^pV^*$ and $\beta\in\Lambda^qV^*$. We define its \emph{exterior product} as the multilinear map $\alpha\wedge\beta$ defined as:
+    \begin{multline*}
+      \alpha\wedge\beta(\vf{u}_1,\ldots\vf{u}_{p+q})=\frac{1}{p!q!}\sum_{\sigma\in \text{S}_{p+q}}\sign(\sigma)\cdot\\\cdot\alpha(\vf{u}_{\sigma(1)},\ldots,\vf{u}_{\sigma(p)})\beta(\vf{u}_{\sigma(p+1)},\ldots,\vf{u}_{\sigma(p+q)})
+    \end{multline*}
+  \end{definition}
+  \begin{proposition}
+    Let $V$ be a vector space and $\alpha\in\Lambda^pV^*$, $\beta\in\Lambda^qV^*$ and $\gamma\in\Lambda^rV^*$. Then:
+    \begin{enumerate}
+      \item $\alpha\wedge\beta\in\Lambda^{p+q}V^*$ (that is, $\alpha\wedge\beta$ is antisymmetric)
+      \item $\alpha\wedge(\beta\wedge\gamma)=(\alpha\wedge\beta)\wedge\gamma$
+      \item $\alpha\wedge\beta={(-1)}^{pq}\beta\wedge\gamma$
+    \end{enumerate}
+  \end{proposition}
+  \begin{proposition}
+    Let $V$ be a vector space and $\omega^1,\ldots,\omega^k\in V^*=\Lambda^1V^*$. Then: $$\omega^1\wedge\cdots\wedge\omega^k(\vf{u}_1,\ldots,\vf{u}_k)=
+      \begin{vmatrix}
+        \omega^1(\vf{u}_1) & \cdots & \omega^1(\vf{u}_k) \\
+        \vdots             & \ddots & \vdots             \\
+        \omega^k(\vf{u}_1) & \cdots & \omega^k(\vf{u}_k)
+      \end{vmatrix}$$
+  \end{proposition}
+  \begin{corollary}
+    Let $(\vf{e}_1,\ldots,\vf{e}_n)$ be the standard basis of $\RR^n$ and $({\vf{e}_1}^*,\ldots,{\vf{e}_n}^*)$ be its associated dual basis. Then:
+    $${\vf{e}_1}^*\wedge\cdots\wedge{\vf{e}_n}^*(\vf{u}_1,\ldots,\vf{u}_n)=\det(\vf{u}_1,\ldots,\vf{u}_n)$$
+  \end{corollary}
+  \begin{proposition}
+    Let $(\vf{e}_1,\ldots,\vf{e}_n)$ be the standard basis of $E:=\RR^n$ and $({\vf{e}_1}^*,\ldots,{\vf{e}_n}^*)$ be its associated dual basis. Then, given $\omega\in\Lambda^kE^*$ we have that: $$\omega(\vf{u}_1,\ldots,\vf{u}_k)=\sum_{j_1<\cdots<j_k}A_{j_1,\ldots,j_k}\omega(\vf{e}_{j_1},\ldots,\vf{e}_{j_k})$$
+    where $A_{j_1,\ldots,j_k}:={\vf{e}_1}^*\wedge\cdots\wedge{\vf{e}_k}^*(\vf{u}_1,\ldots,\vf{u}_k)$. Thus: $$\omega=\sum_{j_1<\cdots<j_k}\omega(\vf{e}_{j_1},\ldots,\vf{e}_{j_k}){\vf{e}_1}^*\wedge\cdots\wedge{\vf{e}_k}^*$$
+  \end{proposition}
+  \begin{corollary}
+    Let $(\vf{e}_1,\ldots,\vf{e}_n)$ be the standard basis of $E:=\RR^n$ and $({\vf{e}_1}^*,\ldots,{\vf{e}_n}^*)$ be its associated dual basis. Then, the set $$\{{\vf{e}_1}^*\wedge\cdots\wedge{\vf{e}_k}^*:j_1<\cdots<j_k\}$$
+    is a basis of $\Lambda^kE^*$. In particular, $\dim \Lambda^kE^*)\binom{n}{k}$.
+  \end{corollary}
+  \begin{corollary}
+    Let $(\vf{e}_1,\ldots,\vf{e}_n)$ and $(\vf{v}_1,\ldots,\vf{v}_n)$ be the standard basis and another basis of $E:=\RR^n$ respectively with associated dual basis $({\vf{e}_1}^*,\ldots,{\vf{e}_n}^*)$ and $({\vf{v}_1}^*,\ldots,{\vf{v}_n}^*)$. Suppose $\vf{v}_i=\sum_{j=1}^na_{ij}\vf{e}_i$ for $i=1,\ldots,n$ and define $\vf{A}:=(a_{ij})$. Then: $${\vf{v}_1}^*\wedge\cdots\wedge{\vf{v}_n}^*=\frac{1}{\det\vf{A}}{\vf{e}_1}^*\wedge\cdots\wedge{\vf{e}_n}^*$$
+  \end{corollary}
+  \begin{proposition}
+    Let $\vf{v}_1,\ldots,\vf{v}_n\in\RR^n$ and $P$ be the parallelepiped they generate. Then:
+    $$\vol P=\abs{\det(\vf{v}_1,\ldots,\vf{v}_n)}$$
+  \end{proposition}
+  \subsubsection{Differential forms}
+  \begin{definition}
+    Let $U\subseteq\RR^n$ be an open set. A \emph{differential $k$-form} on $U$ is a differentiable function $\omega_U\rightarrow\Lambda^k{(\RR^n)}^*\cong\RR^{\binom{n}{k}}$\footnote{An element $\omega(p)=:\omega_p$ can be though as an element of $\Lambda^k{(T_p\RR^n)}^*$.}. We will denote dual basis of $\left(\pdv{}{x^1},\ldots,\pdv{}{x^n}\right)$ by $(\dd{x^1},\ldots,\dd{x^n})$. Thus, a differential $k$-form can be written as:
+    $$\omega=\sum_{j_1<\ldots<j_k}\omega_{j_1,\ldots,j_k}\dd{x^{j_1}}\wedge\cdots\wedge\dd{x^{j_k}}$$
+    We denote by $\Omega^k(U)$ the set of all the differential $k$-forms defined on $U$ with the agreement that $\Omega^0(U):=\mathcal{C}^\infty(U)$.
+  \end{definition}
+  \begin{proposition}
+    Let $U\subseteq\RR^n$ be an open set. Then, $\Omega^k(U)$ is a $\RR$-vector space
+  \end{proposition}
 \end{multicols}
 \end{document}
