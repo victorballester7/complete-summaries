@@ -444,10 +444,45 @@
     Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\theta\in\Theta\subseteq\RR^d\})$ be a parametric regular statistical model and consider the test $\delta:\mathcal{X}=A_1\sqcup A_2\rightarrow\{\mathcal{H}_0,\mathcal{H}_1\}$ of compound hypothesis $\mathcal{H}_0:\theta\in\Theta_0$ and $\mathcal{H}_1:\theta\in\Theta_1$. Let $\Lambda(\vf{x}_n):=-2\ln \frac{\sup\{L(\theta;\vf{x}_n):\theta\in\Theta_0\}}{\sup\{L(\theta;\vf{x}_n):\theta\in\Theta\}}$. Then:
     $$\Lambda(\vf{x}_n)\overset{\text{d}}{\longrightarrow}{\chi_r}^2$$ where $r=\dim\Theta-\dim\Theta_0$.
   \end{theorem}
+  \begin{definition}[Test of homogeneity]
+    Consider $r$ \iid random variables $X_1,\ldots,X_r$ that can take different values $a_1,\ldots,a_s$ each with probability $\Prob(X_i=a_j)=p_{ij}$ $\forall i,j$ and such that $\sum_{j=1}^sp_{ij}=1$. Suppose we have $n_{ij}$ observations of the variable $X_i$ taking the value $a_j$ and denote $n_{i\cdot}:=\sum_{j=1}^sn_{ij}$, $n_{\cdot j}:=\sum_{i=1}^rn_{ij}$ and $n:=\sum_{i=1}^r\sum_{j=1}^sn_{ij}$. That is, we have the following table:
+    \begin{center}
+      \begin{minipage}{\linewidth}
+        \centering
+        \begin{tabular}{c|ccccc||c}
+                           & $a_1$         & $\cdots$ & $a_j$         & $\cdots$ & $a_s$         & $\mathbf{Total}$ \\
+          \hline
+          $X_1$            & $n_{11}$      & $\cdots$ & $n_{1j}$      & $\cdots$ & $n_{1s}$      & $n_{1\cdot}$     \\
+          $\vdots$         & $\vdots$      & $\ddots$ & $\vdots$      & $\ddots$ & $\vdots$      & $\vdots$         \\
+          $X_i$            & $n_{i1}$      & $\cdots$ & $n_{ij}$      & $\cdots$ & $n_{is}$      & $n_{i\cdot}$     \\
+          $\vdots$         & $\vdots$      & $\ddots$ & $\vdots$      & $\ddots$ & $\vdots$      & $\vdots$         \\
+          $X_r$            & $n_{r1}$      & $\cdots$ & $n_{rj}$      & $\cdots$ & $n_{rs}$      & $n_{r\cdot}$     \\
+          \hline\hline
+          $\mathbf{Total}$ & $n_{\cdot 1}$ & $\cdots$ & $n_{\cdot j}$ & $\cdots$ & $n_{\cdot s}$ & $n$
+        \end{tabular}
+      \end{minipage}
+    \end{center}
+    We want a test for:
+    $$
+      \begin{cases}
+        \mathcal{H}_0: & p_{1j}=\cdots=p_{rj}\ \forall j \\
+        \mathcal{H}_1: & \text{otherwise}
+      \end{cases}
+    $$
+    taking into account that $X_i\sim\text{Mult}(n_{i\cdot};p_{1s},\ldots,p_{is})$. Note that in this case the dimension of the parameters space is $r(s-1)$ and under $\mathcal{H}_0$ is $s-1$.
+  \end{definition}
   \subsubsection{\texorpdfstring{$t$}{t}-test}
   \begin{definition}[$t$-test]
     Let $(\mathcal{X},\mathcal{F},\{X_1,\ldots,X_n\sim N(\mu,\sigma^2)\ \text{\iid} : \mu\in\RR\})$ be a statistical model, $\vf{x}_n\in\mathcal{X}$ be a realization of $(X_1,\ldots,X_n)$. The \emph{$t$-test} is the test $\delta:\mathcal{X}=A_1\sqcup A_2\rightarrow\{\mathcal{H}_0,\mathcal{H}_1\}$, where $\mathcal{H}_0:\mu=\mu_0$ for some $\mu_0\in\RR$ and $\mathcal{H}_1$ can be either of $\{\mu>\mu_0,\mu<\mu_0,\mu\ne\mu_0\}$. In this case the test statistic that is taken is: $$\frac{\overline{X}_n-\mu}{\frac{\tilde{s}_n}{\sqrt{n}}}\sim t_{n-1}$$
   \end{definition}
+  \subsubsection{Wald and score tests}
+  \begin{definition}[Wald test]
+    Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\vf\theta\in\Theta\subseteq\RR^d\})$ be a parametric regular statistical model and consider the test $\delta:\mathcal{X}=A_1\sqcup A_2\rightarrow\{\mathcal{H}_0,\mathcal{H}_1\}$ of simple hypothesis $\mathcal{H}_0:\vf\theta=\vf\theta_0$ and $\mathcal{H}_1:\vf\theta\ne\vf\theta_0$. The \emph{Wald test} is the test whose statistic is: $$\transpose{(\vf{\hat\theta}-\vf\theta_0)}\vf{I}(\vf{\hat\theta})(\vf{\hat\theta}-\vf\theta_0)\overset{\text{a}}{\sim}{\chi_d}^2$$ where $\vf{\hat\theta}$ is the MLE of $\vf\theta$ and $d=\dim\Theta$.
+  \end{definition}
+  \begin{definition}[Score test]
+    Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\vf\theta\in\Theta\subseteq\RR^d\})$ be a parametric regular statistical model and consider the test $\delta:\mathcal{X}=A_1\sqcup A_2\rightarrow\{\mathcal{H}_0,\mathcal{H}_1\}$ of simple hypothesis $\mathcal{H}_0:\vf\theta=\vf\theta_0$ and $\mathcal{H}_1:\vf\theta\ne\vf\theta_0$. The \emph{score test} is the test whose statistic is: $$\transpose{\vf{S}(\vf\theta_0)}\vf{I}^{-1}(\vf{\theta}_0)\vf{S}(\vf\theta_0)\overset{\text{a}}{\sim}{\chi_d}^2$$ where $d=\dim\Theta$. If $\mathcal{H}_0:\vf\theta=\vf\theta_0$, the we shall replace $\vf\theta_0$ by the MLE under $\mathcal{H}_0$, $\vf{\hat\theta_0}$, in the test statistic.
+  \end{definition}
+  \subsection{Bootstrap}
   \subsection{Analyzing data}
   \subsubsection{Comparizing distributions}
   \begin{definition}[Q-Q plots]

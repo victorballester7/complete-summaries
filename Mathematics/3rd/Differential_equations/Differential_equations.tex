@@ -885,6 +885,21 @@
       \captionof{figure}{A homoclinic orbit (blue) and a heteroclinic orbit (green) of the differential system $x''=\sin(x)+x\cos(x)$.}
     \end{minipage}
   \end{center}
+  \begin{definition}
+    Let $U\subseteq \RR^2$ be an open set, $\vf{f}:U\rightarrow\RR^2$ be a vector field of class $\mathcal{C}^1$ and $\vf{p}\in U$ be an critical point of $\vf{f}$. We say that $\vf{p}$ has an \emph{elliptic sector} if a side of $\vf{p}$ is locally as:
+    We say that $\vf{p}$ has a \emph{hyperbolic sector} if a side of $\vf{p}$ is locally as:
+    We say that $\vf{p}$ has an \emph{attracting parabolic sector} if a side of $\vf{p}$ is locally as:
+    Finally, we say that $\vf{p}$ has a \emph{repelling parabolic sector} if a side of $\vf{p}$ is locally as:
+    The union of all sectors that form a neighbourhood of $\vf{p}$ is called \emph{sectorial decomposition}.
+  \end{definition}
+  \begin{proposition}
+    Any critical point of a analytic differential system in the plane can either be:
+    \begin{enumerate}
+      \item A focus.
+      \item A center.
+      \item A finite collection of elliptic sectors, hyperbolic sectors and/or parabolic sectors.
+    \end{enumerate}
+  \end{proposition}
   \subsubsection{Hamiltonian systems}
   \begin{definition}
     Let $U\subseteq \RR^n$ be an open set, $\vf{f}:U\rightarrow\RR^n$ be a vector field and $H:U\rightarrow\RR$ be a non-constant function. We say that $H$ is a \emph{first integral} for the differential system $\vf{x}'=\vf{f}(\vf{x})$ if for each solution $\vf{\varphi}(t)$ of that system, we have $H(\vf{\varphi(t)})=\const$ Thus, the phase trajectory of a solution $\vf{\varphi}(t)$ to $\vf{x}'=\vf{f}(\vf{x})$ lies on a level surface of $H$. In particular, if $n=2$, $\vf{\varphi}(t)$ will be a level curve of $H$.
@@ -1208,22 +1223,62 @@
   \end{theorem}
   \subsubsection{Poincaré-Hopf theorem}
   \begin{proposition}
-    Let $\gamma:I\rightarrow\RR^2$ be a closed path, $q\in \RR\setminus\gamma^*$ and $L$ be a ray with vertex at $q$. Consider the function $\varphi:I\rightarrow\RR$ that measures the oriented angle between $\gamma(t)$ and $L$. Then: $$\Ind(\gamma,q)=\frac{\varphi(1)-\varphi(0)}{2\pi}$$
+    Let $\vf\gamma:I\rightarrow\RR^2$ be a closed path, $\vf{q}\in \RR\setminus\vf\gamma^*$ and $L$ be a ray with vertex at $\vf{q}$. Consider the function $\varphi:I\rightarrow\RR$ that measures the oriented angle between $\vf\gamma(t)$ and $L$. Then: $$\Ind(\vf\gamma,\vf{q})=\frac{\varphi(1)-\varphi(0)}{2\pi}$$
   \end{proposition}
   \begin{proposition}
-    Let $q_1,q_2\in\RR^2$ and $\gamma:I\rightarrow\RR^2$ be a closed path such that the segment $\overline{q_1q_2}$ does not intersect $\gamma^*$. Then, $\Ind(\gamma,q_1)=\Ind(\gamma,q_2)$
+    Let $\vf{q}_1,\vf{q}_2\in\RR^2$ and $\vf\gamma:I\rightarrow\RR^2$ be a closed path such that the segment $\overline{\vf{q}_1\vf{q}_2}$ does not intersect $\vf\gamma^*$. Then, $\Ind(\vf\gamma,\vf{q}_1)=\Ind(\vf\gamma,\vf{q}_2)$
   \end{proposition}
   \begin{corollary}
-    Let $\gamma:I\rightarrow\RR^2$ be a closed path. Then, all points in the same conencted component of $\RR^2\setminus\gamma^*$ have the same index.
+    Let $\vf\gamma:I\rightarrow\RR^2$ be a closed path. Then, all points in the same conencted component of $\RR^2\setminus\vf\gamma^*$ have the same index.
   \end{corollary}
   \begin{proposition}
-    Let $\gamma_1,\gamma_2:I\rightarrow\RR^2$ be two closed path and $q\in\RR^2$ be such that $q\notin\overline{\gamma_1(t)\gamma_2(t)}$ $\forall t\in I$. Then, $\Ind(\gamma_1,q)=\Ind(\gamma_2,q)$.
+    Let $\vf\gamma_1,\vf\gamma_2:I\rightarrow\RR^2$ be two closed paths and $\vf{q}\in\RR^2$ be such that $\vf{q}\notin\overline{\vf\gamma_1(t)\vf\gamma_2(t)}$ $\forall t\in I$. Then, $\Ind(\vf\gamma_1,\vf{q})=\Ind(\vf\gamma_2,\vf{q})$.
   \end{proposition}
-  % \begin{proposition}[Poincaré index formula]
-  %   Let $q$ be a singular point with a finite number of sectors. Denote by $e$ the number of elliptic sectors; by $h$, the number of hyperbolic sectors, and by $p$, the number of parabolic sectors. Then: $$\Ind(\gamma,q)=\frac{e-h}{2}+1$$
-  % \end{proposition}
-  \begin{theorem}[Poincaré-Hopf theorem]
-    Consider a differential system defined on $S^2$ with a finite number of singular points. Then, the sum of their indices is 2.
+  \begin{proposition}
+    Let $\vf\gamma_1,\vf\gamma_2:I\rightarrow\RR^2$ be two closed paths and $\vf{q}\in\RR^2$ be such that $\vf{q}\notin{\vf\gamma_1}^*\cup{\vf\gamma_2}^*$ and $\|\vf\gamma_1(t)-\vf\gamma_2(t)\|<\|\vf{q}-\vf\gamma_2(t)\|$ $\forall t\in I$. Then, $\Ind(\vf\gamma_1,\vf{q})=\Ind(\vf\gamma_2,\vf{q})$.
+  \end{proposition}
+  \begin{definition}
+    Let $\vf\gamma_1,\vf\gamma_2:I\rightarrow\RR^2$ be two closed paths. We say that the are \emph{homotopic}, and we denote it by $\vf\gamma_1\homotop\vf\gamma_2$, if there exists a continuous function $\vf{h}:I\times[0,1]\rightarrow\RR^2$ such that $\vf\gamma_1(t)=\vf{h}(t,0)$ and $\vf\gamma_2(t)=\vf{h}(t,1)$ $\forall t\in I$. Such function $\vf{h}$ is called the \emph{homotopy} between $\vf\gamma_1$ and $\vf\gamma_2$.
+  \end{definition}
+  \begin{proposition}
+    Let $\vf\gamma_1,\vf\gamma_2:I\rightarrow\RR^2$ be two closed homotopic paths, $\vf{h}:I\times[0,1]\rightarrow\RR^2$ be the respective homotopy. and $\vf{q}\in\RR^2$ be such that $\vf{q}\notin \im(\vf{h})$. Then, $\Ind(\vf\gamma_1,\vf{q})=\Ind(\vf\gamma_2,\vf{q})$.
+  \end{proposition}
+  \begin{definition}
+    Let $\vf\gamma:I\rightarrow\RR^2$ be a closed path. We say that $\vf\gamma$ is \emph{contractible} if it is homotopic to the constant path $\tilde{\vf\gamma}(t)=a\in\RR$.
+  \end{definition}
+  \begin{proposition}
+    Let $\vf\gamma:I\rightarrow\RR^2$ be a closed contractible path and $\vf{q}\in\RR^2\setminus\vf\gamma^*$. Then, $\Ind(\vf\gamma,\vf{q})=0$.
+  \end{proposition}
+  \begin{proposition}
+    Let $\vf{q}\in\RR^2$ and $\vf\gamma:I\rightarrow\RR^2\setminus\{\vf{q}\}$ be a closed path which is homotopic to the path $\vf\alpha_n:=\vf{q}+\exp{2\pi\ii n t}$ (though in $\RR^2$), $n\in\ZZ$. Then, $\Ind(\vf\gamma,\vf{q})=n$.
+  \end{proposition}
+  \begin{proposition}
+    Let $\vf\gamma:I\rightarrow\RR^2$ be a closed path, $\vf{q}\in\RR^2\setminus\vf\gamma^*$ and $\Ind(\vf\gamma,\vf{q})=n$. Then, $\vf\gamma\homotop\vf\alpha_n$.
+  \end{proposition}
+  \begin{theorem}
+    Let $\vf{q}\in\RR^2$ and $\vf\gamma_1,\vf\gamma_2:I\rightarrow\RR^2\setminus\{\vf{q}\}$ be two closed paths. Then, $\vf\gamma_1\sim\vf\gamma_2\iff\Ind(\vf\gamma_1,\vf{q})=\Ind(\vf\gamma_2,\vf{q})$
   \end{theorem}
+  \begin{theorem}
+    Let $\vf{f}:\overline{D(0,1)}=[0,1]\times[0,2\pi]\rightarrow\RR^2$ be a continuous function, $\vf\gamma(t)=\vf(f)(1,2\pi t)$ and $\vf{q}\in\RR^2\setminus \vf{f}(S^1)$ be such that $\Ind(\vf\gamma,\vf{q})\ne 0$. Then, $\vf{q}\in \im f$.
+  \end{theorem}
+  \begin{definition}
+    Let $U\subseteq \RR^2$ be an open set, $\vf{X}:U\rightarrow\RR^2$ be a differentible vector field and $\vf\alpha$ the path defined on the boundary of a closed disk $D\subseteq U$ with center at $\vf{q}$. Let $\vf\gamma(t):=(\vf{X}\circ\vf\alpha)(t)$. We define the \emph{index} of $\vf{X}$ on $\Fr{D}$ as: $$\Ind_{\Fr{D}}(\vf{X}):=\Ind(\vf\gamma,\vf{0})$$
+  \end{definition}
+  \begin{definition}
+    Let $U\subseteq \RR^2$ be an open set, $\vf{X}:U\rightarrow\RR^2$ be a differentible vector field and $\vf{p}$ be an isolated singular point (on the set of all singular points). Let $D$ be a disk that only surrounds the singular point $\vf{p}$. We define the \emph{index} of $\vf{p}$ as $$\Ind_{\vf{p}}(\vf{X}):=\Ind_{\Fr{D}}(\vf{X})\footnote{It can be seen that this definition doesn't depend on the disk $D$ chosen.}$$
+  \end{definition}
+  \begin{proposition}
+    Let $D\subseteq \RR^2$ be an closed disk, $\vf{X}:D\rightarrow\RR^2$ be a continuous vector field such that $\vf{X}(\vf{q})\ne 0$ $\forall \vf{q}\in\Fr{D}$. Suppose that $\vf{X}$ has a finite number of singular points $\vf{p}_1,\ldots,\vf{p}_n$. Then: $$\sum_{i= 1}^n\Ind_{\vf{p}_i}(\vf{X})=\Ind_{\Fr{D}}(\vf{X})$$
+  \end{proposition}
+  \begin{theorem}[Poincaré-Hopf theorem]
+    Consider a continuous vector field on a compact manifold $M$ with a finite number of singular points. Then, the sum of their indices is $\chi(M)$.
+  \end{theorem}
+  \begin{corollary}[Poincaré-Hopf theorem on $S^2$]
+    Consider a continuous vector field on $S^2$ with a finite number of singular points. Then, the sum of their indices is 2.
+  \end{corollary}
+  \begin{proposition}[Poincaré index formula]
+    Let $U\subseteq \RR^2$ be an open set, $\vf{X}:U\rightarrow\RR^2$ be a differentible vector field and $\vf{p}$ be a singular point with a finite finite sectorial decomposition. Denote by $e$ the number of elliptic sectors; by $h$, the number of hyperbolic sectors, and by $p$, the number of parabolic sectors. Then: $$\Ind_{\vf{p}}(\vf{X})=\frac{e-h}{2}+1$$
+  \end{proposition}
+  \subsection{Quasi-linear partial differential equations}
 \end{multicols}
 \end{document}

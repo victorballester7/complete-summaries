@@ -925,7 +925,7 @@
   \begin{proposition}
     Let $S\subseteq\RR^3$ be a surface oriented with a normal unit field $\vf\nu$ and $\vf{X}$ be a unit vector field tangent to $S$ along a curve $\vf\alpha:I\rightarrow S$ of class $\mathcal{C}^\infty$. Then:
     $$\left[\frac{\text{D}\vf{X}}{\dd{t}}(t)\right]=\left\langle\dv{\vf{X}}{t},\vf{\overline{X}}\right\rangle=\left\langle\dv{\vf{X}}{t},\vf\nu\times\vf{X}\right\rangle$$
-    In particular if $\vf\alpha$ is arc-length parametrized, then: $$k_\text{g}=\langle\vf\alpha'',\vf\nu\times\vf\alpha'\rangle$$ Or more generally: $$k_\text{g}=\frac{\langle\vf\alpha'',\vf\nu\times\T\alpha\rangle}{{\|\vf\alpha'\|}^2}$$
+    In particular if $\vf\alpha$ is arc-length parametrized, then: $$k_\text{g}=\langle\vf\alpha'',\vf\nu\times\vf\alpha'\rangle$$ Or more generally: $$k_\text{g}=\frac{\langle\vf\alpha'',\vf\nu\times\vf\alpha'\rangle}{{\|\vf\alpha'\|}^3}$$
   \end{proposition}
   \begin{proposition}
     Let $S\subseteq\RR^3$ be an orientable surface and $\vf\alpha:I\rightarrow S$ be a regular arc-length parametrization of a curve $C$ of class $\mathcal{C}^\infty$. Then: $$k^2={k_{\text{g}}}^2+{k_\text{n}}^2$$
@@ -966,20 +966,20 @@
     Let $U\subseteq\RR^n$ be an open set and $\vf{X},\vf{Y}\in\mathcal{X}(U)$. We define the inner product of $\vf{X}$ and $\vf{Y}$ as: $$\function{\langle\vf{X},\vf{Y}\rangle}{U}{\RR}{p}{\langle\vf{X}_p,\vf{Y}_p\rangle}$$
   \end{definition}
   \begin{definition}
-    Let $U\subseteq\RR^n$ be an open set, $f\in\mathcal{C}^\infty(U)$ and $\vf{X}=\sum X^i\pdv{}{x^i}\in\mathcal{X}$. We denote by $\vf{X}f$ the differentiable function defined as: $$\vf{X}f(p):=\vf{X}_pf:=\sum_{i=1}^n X^i(p)\pdv{f}{x^i}$$
+    Let $U\subseteq\RR^n$ be an open set, $f\in\mathcal{C}^\infty(U)$ and $\vf{X}=\sum X^i\pdv{}{x^i}\in\mathcal{X}$. We denote by $\vf{X}f$ the differentiable function defined as: $$\vf{X}f(p):=\vf{X}_pf:=\sum_{i=1}^n X^i(p)\pdv{f}{x^i}\footnote{Observe that $\vf{X}_pf$ is the partial derivative of $f$ at $p$ in the direction of $\vf{X}_p$.}$$
   \end{definition}
   \begin{lemma}
     Let $U\subseteq\RR^n$ be an open set and $\vf{X}\in\mathcal{X}(U)$. Then, the function $$\function{\vf{X}}{\mathcal{C}^\infty(U)}{\mathcal{C}^\infty(U)}{f}{\vf{X}f}$$ satisfies the following properties:
     \begin{enumerate}
       \item It is $\RR$-linear.
-      \item $\vf{X}(fg)=(\vf{X}f)g+f\vf{X}g$ for all $f,g\in\mathcal{C}^\infty(U)$
+      \item $\vf{X}(fg)=(\vf{X}f)g+f(\vf{X}g)$ for all $f,g\in\mathcal{C}^\infty(U)$
     \end{enumerate}
   \end{lemma}
   \begin{lemma}
-    Let $U\subseteq\RR^n$ be an open set, $f\in\mathcal{C}^\infty(U)$ and $\vf{X}\in\mathcal{X}$. Then: $$\vf{X}f=\langle\vf{X},\grad f\rangle$$
+    Let $U\subseteq\RR^n$ be an open set, $f\in\mathcal{C}^\infty(U)$ and $\vf{X}\in\mathcal{X}(U)$. Then: $$\vf{X}f=\langle\vf{X},\grad f\rangle$$
   \end{lemma}
   \begin{definition}
-    Let $U\subseteq\RR^n$ be an open set and $\vf{X}=\sum X^i\pdv{}{x^i}\in\mathcal{X}(U)$. We say that a parametrized curve $\vf{\alpha}:I\rightarrow\RR^n$ is an \emph{integral curve} of $\vf{X}$ if: $$\vf\alpha'(t)=\vf{X}_{\vf\alpha(t)}\qquad \forall t\in I$$
+    Let $U\subseteq\RR^n$ be an open set and $\vf{X}=\sum X^i\pdv{}{x^i}\in\mathcal{X}(U)$. We say that a parametrized curve $\vf{\gamma}:I\rightarrow\RR^n$ is an \emph{integral curve} of $\vf{X}$ if: $$\vf\gamma'(t)=\vf{X}_{\vf\gamma(t)}\qquad \forall t\in I$$
     That is, the integral curve $\vf\gamma(t)=(x^1(t),\ldots,x^n(t))$ of $\vf{X}$ satisfies the following system of odes:
     $$
       \left\{
@@ -992,7 +992,7 @@
     $$
   \end{definition}
   \begin{proposition}
-    Let $U\subseteq\RR^n$ be an open set, $F\in\mathcal{C}^\infty(U)$ and $\vf{X}\in\mathcal{X}$. We say that $F$ if a \emph{first integral} of $\vf{X}$ if:
+    Let $U\subseteq\RR^n$ be an open set, $F\in\mathcal{C}^\infty(U)$ and $\vf{X}\in\mathcal{X}(U)$. We say that $F$ if a \emph{first integral} of $\vf{X}$ if:
     \begin{enumerate}
       \item $\vf{\dd}F_p\ne 0$ $\forall p\in U$
       \item $F$ is constant over the integral curves of $\vf{X}$. That is, $\vf{X}F=0$.
@@ -1004,21 +1004,21 @@
   \begin{definition}
     Let $S\subseteq\RR^3$ be a regular surface. A \emph{vector field} defined on $S$ is a correspondence $\vf{X}$ that at each point $p\in S$ it assigns a vector $\vf{X}(p)=:\vf{X}_p\in T_p\RR^3$. If there is a parametrization $\vf\varphi(u,v)$ of $S$, then we can write
     $$\vf{X}=\vf{X}(u,v)=\sum_{i=1}^3X^i(u,v)\pdv{}{x^i}$$
-    where $X^i(u,v):=(X^i\circ\vf\varphi)(u,v)$. We say that $\vf{X}$ is \emph{differentiable} if it the functions $X^i(u,v)$ are differentiable. We say that $\vf{X}$ is \emph{tangent} to $S$ if $\vf{X}_p\in T_pS$ $\forall p\in S$. In this case we can write $$\vf{X}=X^1\vf\varphi_u+X^2\vf\varphi_v$$
+    where $X^i(u,v):=(X^i\circ\vf\varphi)(u,v)$. We say that $\vf{X}$ is \emph{differentiable} if it the functions $X^i(u,v)$ are differentiable. We say that $\vf{X}$ is \emph{tangent} to $S$ if $\vf{X}_p\in T_pS$ $\forall p\in S$. In this case we can write $$\vf{X}=\tilde{X}^1\vf\varphi_u+\tilde{X}^2\vf\varphi_v$$
   \end{definition}
   \begin{proposition}
     Let $S\subseteq\RR^3$ be a regular surface and $\vf{X}$, $\vf{Y}$ be tangent differential vector fields to $S$ such that at some point $p\in S$, the vectors $\vf{X}_p$, $\vf{Y}_p$ are linearly independent. Then, there exists a local parametrization $(V,\vf\varphi(u,v))$ of $S$ such that $p\in\vf\varphi(V)$ and: $$\vf{X}=\lambda\vf\varphi_u\qquad\vf{Y}=\mu\vf\varphi_v$$ for some differentiable functions $\lambda$, $\mu$.
   \end{proposition}
   \begin{corollary}
-    Let $S\subseteq\RR^3$ be a regular surface and $p\in S$. Then, there exists an orthogonal parametrization $(V,\vf\varphi(u,v))$ of $S$ such that $p\in\vf\varphi(V)$.
+    Let $S\subseteq\RR^3$ be a regular surface and $p\in S$. Then, there exists a local orthogonal parametrization $(V,\vf\varphi(u,v))$ of $S$ such that $p\in\vf\varphi(V)$.
   \end{corollary}
   \subsubsection{Multilinear algebra}
   \begin{definition}
     Let $V_1,\ldots,V_k,W$ be a vector spaces over a field $K$. A \emph{multilinear map} (or \emph{$k$-linear map}) is a function $$f:V_1\times\cdots\times V_k\longrightarrow W$$ that is linear separately in each variable. The value $k$ is called \emph{degree} of the multilinear map.
   \end{definition}
   \begin{definition}
-    Let $V$ be a vector space and $$\omega:V\times\overset{(k)}{\cdots}\times V\longrightarrow \RR$$ be a $k$-linear map. We say that $\omega$ is \emph{antisymmetric} if $$\omega(\vf{u}_{\sigma(1)},\ldots,\vf{u}_{\sigma(k)})=\sign(\sigma)\omega(\vf{u}_1,\ldots,\vf{u}_k)\qquad\forall\sigma\in \text{S}_k$$
-    We denote by $\Lambda^kV^*$ the vector space of the antisymmetric $k$-linear maps. The elements of $\Lambda^kV^*$ are called \emph{multilinear forms}\footnote{Here $V^*$ denotes the dual space of $V$ (see \cref{LA_dual})}. By agreement we denote $\Lambda^0V^*:=\RR$ and: $$\Lambda^*V^*:=\bigoplus_{k=0}^\infty\Lambda^kV^*$$
+    Let $V$ be a vector space of dimension $n$ and $$\omega:V\times\overset{(k)}{\cdots}\times V\longrightarrow \RR$$ be a $k$-linear map. We say that $\omega$ is \emph{antisymmetric} if $$\omega(\vf{u}_{\sigma(1)},\ldots,\vf{u}_{\sigma(k)})=\sign(\sigma)\omega(\vf{u}_1,\ldots,\vf{u}_k)\qquad\forall\sigma\in \text{S}_k$$
+    We denote by $\Lambda^kV^*$ the vector space of the antisymmetric $k$-linear maps. The elements of $\Lambda^kV^*$ are called \emph{multilinear forms}\footnote{Here $V^*$ denotes the dual space of $V$ (see \cref{LA_dual}).}. By agreement we denote $\Lambda^0V^*:=\RR$ and: $$\Lambda^*V^*:=\bigoplus_{k=0}^{n}\Lambda^kV^*$$
   \end{definition}
   \begin{definition}
     Let $V$ be a vector space, $\alpha\in\Lambda^pV^*$ and $\beta\in\Lambda^qV^*$. We define its \emph{exterior product} as the multilinear map $\alpha\wedge\beta$ defined as:
@@ -1051,8 +1051,8 @@
     where $A_{j_1,\ldots,j_k}:={\vf{e}_1}^*\wedge\cdots\wedge{\vf{e}_k}^*(\vf{u}_1,\ldots,\vf{u}_k)$. Thus: $$\omega=\sum_{j_1<\cdots<j_k}\omega(\vf{e}_{j_1},\ldots,\vf{e}_{j_k}){\vf{e}_1}^*\wedge\cdots\wedge{\vf{e}_k}^*$$
   \end{proposition}
   \begin{corollary}
-    Let $(\vf{e}_1,\ldots,\vf{e}_n)$ be the standard basis of $E:=\RR^n$ and $({\vf{e}_1}^*,\ldots,{\vf{e}_n}^*)$ be its associated dual basis. Then, the set $$\{{\vf{e}_1}^*\wedge\cdots\wedge{\vf{e}_k}^*:j_1<\cdots<j_k\}$$
-    is a basis of $\Lambda^kE^*$. In particular, $\dim \Lambda^kE^*)\binom{n}{k}$.
+    Let $(\vf{e}_1,\ldots,\vf{e}_n)$ be the standard basis of $E:=\RR^n$ and $({\vf{e}_1}^*,\ldots,{\vf{e}_n}^*)$ be its associated dual basis. Then, the set $$\{{\vf{e}_{j_1}}^*\wedge\cdots\wedge{\vf{e}_{j_k}}^*:j_1<\cdots<j_k,j_i\in\NN\ \forall i=1,\ldots,k\}$$
+    is a basis of $\Lambda^kE^*$. In particular, $\dim \Lambda^kE^*=\binom{n}{k}$.
   \end{corollary}
   \begin{corollary}
     Let $(\vf{e}_1,\ldots,\vf{e}_n)$ and $(\vf{v}_1,\ldots,\vf{v}_n)$ be the standard basis and another basis of $E:=\RR^n$ respectively with associated dual basis $({\vf{e}_1}^*,\ldots,{\vf{e}_n}^*)$ and $({\vf{v}_1}^*,\ldots,{\vf{v}_n}^*)$. Suppose $\vf{v}_i=\sum_{j=1}^na_{ij}\vf{e}_i$ for $i=1,\ldots,n$ and define $\vf{A}:=(a_{ij})$. Then: $${\vf{v}_1}^*\wedge\cdots\wedge{\vf{v}_n}^*=\frac{1}{\det\vf{A}}{\vf{e}_1}^*\wedge\cdots\wedge{\vf{e}_n}^*$$
@@ -1063,12 +1063,70 @@
   \end{proposition}
   \subsubsection{Differential forms}
   \begin{definition}
-    Let $U\subseteq\RR^n$ be an open set. A \emph{differential $k$-form} on $U$ is a differentiable function $\omega_U\rightarrow\Lambda^k{(\RR^n)}^*\cong\RR^{\binom{n}{k}}$\footnote{An element $\omega(p)=:\omega_p$ can be though as an element of $\Lambda^k{(T_p\RR^n)}^*$.}. We will denote dual basis of $\left(\pdv{}{x^1},\ldots,\pdv{}{x^n}\right)$ by $(\dd{x^1},\ldots,\dd{x^n})$. Thus, a differential $k$-form can be written as:
-    $$\omega=\sum_{j_1<\ldots<j_k}\omega_{j_1,\ldots,j_k}\dd{x^{j_1}}\wedge\cdots\wedge\dd{x^{j_k}}$$
-    We denote by $\Omega^k(U)$ the set of all the differential $k$-forms defined on $U$ with the agreement that $\Omega^0(U):=\mathcal{C}^\infty(U)$.
+    Let $U\subseteq\RR^n$ be an open set. A \emph{differential $k$-form} on $U$ is a differentiable function $\omega:U\rightarrow\Lambda^k{(\RR^n)}^*\cong\RR^{\binom{n}{k}}$\footnote{An element $\omega(p)=:\omega_p$ can be though as an element of $\Lambda^k{(T_p\RR^n)}^*$.}. We will denote the dual basis of $\left(\pdv{}{x^1},\ldots,\pdv{}{x^n}\right)$ by $(\dd{x^1},\ldots,\dd{x^n})$. Thus, a differential $k$-form can be written as:
+    $$\omega=\sum_{j_1<\cdots<j_k}\omega_{j_1,\ldots,j_k}\dd{x^{j_1}}\wedge\cdots\wedge\dd{x^{j_k}}$$
+    We denote by $\Omega^k(U)$ the set of all differential $k$-forms defined on $U$ with the agreement that $\Omega^0(U):=\mathcal{C}^\infty(U)$.
   \end{definition}
   \begin{proposition}
     Let $U\subseteq\RR^n$ be an open set. Then, $\Omega^k(U)$ is a $\RR$-vector space
   \end{proposition}
+  \begin{definition}
+    Let $U\subseteq\RR^n$ be an open set and $\omega\in \Omega^k(U)$. This $\omega$ defines a $\mathcal{C}^\infty(U)$-multilinear antisymmetric function, which we'll denote also by $\omega$, given by: $$\function{\omega}{\mathcal{X}(U)\times\overset{(k)}{\cdots}\times\mathcal{X}(U)}{\mathcal{C}^\infty(U)}{(\vf{X}_1,\ldots,\vf{X}_k)}{\omega(\vf{X}_1,\ldots,\vf{X}_k)}$$ where $\omega(\vf{X}_1,\ldots,\vf{X}_k)$ is the function defined by $\omega(\vf{X}_1,\ldots,\vf{X}_k)(p)=\omega_p({(\vf{X}_1)}_p,\ldots,{(X_k)}_p)$.
+  \end{definition}
+  \begin{proposition}
+    Let $U\subseteq\RR^n$ be an open set and $h\in\mathcal{C}^\infty$. We define it \emph{differential} as the differential 1-form $\dd{h}$ given by $$\dd{h}=\sum_{i=1}^n\pdv{h}{x^i}\dd{x^i}$$
+  \end{proposition}
+  \begin{definition}
+    Let $U\subseteq\RR^n$, $V\subseteq\RR^m$ be open sets, $\vf{f}:U\rightarrow V$ be a differentiable function and $k\geq 1$. We define the \emph{pull-back} by $\vf{f}$ as the linear function $$\vf{f^*}:\Omega^k(V)\rightarrow\Omega^k(U)$$ defined by $$(\vf{f^*}\omega)(\vf{X}_1,\ldots,\vf{X}_k)(p)=\omega_{f(p)}(\vf{df}_p(\vf{X}_1),\ldots,\vf{df}_p(\vf{X}_k))$$
+    If $k=0$, we define \emph{pull-back} by $\vf{f}$ as $\vf{f^*}h=h\circ\vf{f}$.
+  \end{definition}
+  \begin{proposition}
+    Let $U\subseteq\RR^n$, $V\subseteq\RR^m$, $W\subseteq\RR^r$ be open sets, $\vf{f}:U\rightarrow V$, $\vf{g}:V\rightarrow W$ be a differentiable functions, $\omega,\eta\in\Omega^k(V)$, $h\in\Omega^0(V)$ and $a,b\in\RR$. Then:
+    \begin{enumerate}
+      \item $\vf{f^*}(a\omega+b\eta)=a\vf{f^*}\omega+b\vf{f^*}\eta$
+      \item $\vf{f^*}(\omega\wedge\eta)=\vf{f^*}\omega\wedge \vf{f^*}\eta$
+      \item ${(\vf{g}\circ \vf{f})}^{\vf{*}}=\vf{f^*}\circ \vf{g^*}$
+      \item $\vf{f^*}\dd{h}=\dd{(h\circ \vf{f^*})}=\dd{\vf{f^*}h}$
+    \end{enumerate}
+  \end{proposition}
+  \begin{corollary}
+    Let $U\subseteq\RR^n$, $V\subseteq\RR^m$ be open sets, $\vf{f}=(f^1,\ldots,f^m):U\rightarrow V$ be a differentiable function, $\omega,\eta\in\Omega^k(V)$ and $h\in\Omega^0(V)$. Then:
+    \begin{enumerate}
+      \item $\vf{f^*}(h\omega)=(h\circ \vf{f})\vf{f^*}\omega$
+      \item $\vf{f^*}\dd{y^i}=\dd{(y^j\circ \vf{f^*})}=\dd{f^j}$
+      \item If $\omega=\sum_{j_1<\cdots<j_k}\omega_{j_1,\ldots,j_k}\dd{y^{j_1}}\wedge\cdots\wedge\dd{y^{j_k}}$, then: $$\vf{f^*}(\omega)=\sum_{j_1<\cdots<j_k}(\omega_{j_1,\ldots,j_k}\circ f)\dd{f^{j_1}}\wedge\cdots\wedge\dd{f^{j_k}}$$
+    \end{enumerate}
+  \end{corollary}
+  \begin{definition}
+    Let $U\subseteq\RR^n$ be an open set, $\vf{X}\in\mathcal{X}(U)$ and $\omega\in\Omega^k(U)$, where $k\geq 1$.
+    We define the \emph{interior contraction} of $\omega$ by $\vf{X}$ as the differential $(k-1)$-form $i_{\vf{X}}\omega\in\Omega^{k-1}(U)$ defined by:
+    $$i_{\vf{X}}\omega(\vf{Y}_2,\ldots,\vf{Y}_k)=\omega(\vf{X},\vf{Y}_2,\ldots,\vf{Y}_k)$$
+    By agreement, we define $i_{\vf{X}}h=0$ if $h\in\Omega^0(U)$.
+  \end{definition}
+  \begin{proposition}
+    Let $U\subseteq\RR^n$ be an open set, $\vf{X}\in\mathcal{X}(U)$, $\alpha\in\Omega^k(U)$, and $\beta\in\Omega^m(U)$. Then: $$i_{\vf{X}}(\alpha\wedge\beta)=(i_{\vf{X}}\alpha)\wedge\beta+{(-1)}^k\alpha\wedge(i_{\vf{X}}\beta)$$
+  \end{proposition}
+  \begin{definition}
+    The differential $n$-form $\eta\in\Omega^n(\RR^n)$ defined by $$\eta=\dd{x^1}\wedge\cdots\wedge\dd{x^n}$$ is called \emph{volume element} of $\RR^n$.
+  \end{definition}
+  \begin{proposition}
+    Let $(\vf{u}_1,\ldots,\vf{u}_n)$ be an orthonormal positive basis of $T_p\RR^n$, $p\in\RR^n$, and let $\eta$ be the element of volume. Then: $$\eta_p(\vf{u}_1,\ldots,\vf{u}_n)=1$$
+  \end{proposition}
+  \begin{proposition}
+    Let $U,V\subseteq\RR^n$ be open sets and $\vf{f}:U\rightarrow V$ be a differentiable function. Then: $$\vf{f^*}\eta=J\vf{f}\eta$$ where $J\vf{f}$ is the Jacobian of $\vf{f}$.
+  \end{proposition}
+  \begin{definition}
+    Let $U\subseteq\RR^n$ be an open set and $k\geq 0$. We define the \emph{exterior differential} as the linear function $d:\Omega^k(U)\rightarrow\Omega^{k+1}(U)$ defined as follows: if $$\omega=\sum_{j_1<\cdots<j_k}\omega_{j_1,\ldots,j_k}\dd{x^{j_1}}\wedge\cdots\wedge\dd{x^{j_k}}$$
+    then: $$\dd{\omega}=\sum_{m,j_1<\cdots<j_k}\pdv{\omega_{j_1,\ldots,j_k}}{x^m}\dd{x^m}\wedge\dd{x^{j_1}}\wedge\cdots\wedge\dd{x^{j_k}}$$
+  \end{definition}
+  \begin{proposition}
+    Let $U,V\subseteq\RR^n$ be open sets, $\vf{f}:U\rightarrow V$ be a differentiable function and $\alpha,\beta\in\Omega^k(U)$. Then:
+    \begin{enumerate}
+      \item $\dd{(\alpha\wedge\beta)}=\dd{\alpha}\wedge\beta+{(-1)}^k\alpha\wedge\dd{\beta}$
+      \item $\dd^2=0$
+      \item $\vf{f^*}\circ\dd{}=\dd{}\circ\vf{f^*}$
+    \end{enumerate}
+  \end{proposition}
+  \subsection{Integration}
 \end{multicols}
 \end{document}
