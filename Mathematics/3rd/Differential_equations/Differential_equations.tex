@@ -886,11 +886,42 @@
     \end{minipage}
   \end{center}
   \begin{definition}
-    Let $U\subseteq \RR^2$ be an open set, $\vf{f}:U\rightarrow\RR^2$ be a vector field of class $\mathcal{C}^1$ and $\vf{p}\in U$ be an critical point of $\vf{f}$. We say that $\vf{p}$ has an \emph{elliptic sector} if a side of $\vf{p}$ is locally as:
-    We say that $\vf{p}$ has a \emph{hyperbolic sector} if a side of $\vf{p}$ is locally as:
-    We say that $\vf{p}$ has an \emph{attracting parabolic sector} if a side of $\vf{p}$ is locally as:
-    Finally, we say that $\vf{p}$ has a \emph{repelling parabolic sector} if a side of $\vf{p}$ is locally as:
+    Let $U\subseteq \RR^2$ be an open set, $\vf{f}:U\rightarrow\RR^2$ be a vector field of class $\mathcal{C}^1$ and $\vf{p}\in U$ be an critical point of $\vf{f}$. We say that $\vf{p}$ has
+    \begin{itemize}
+      \item an \emph{elliptic sector} if a side of $\vf{p}$ is locally as \cref{DE_esector}.
+      \item a \emph{hyperbolic sector} if a side of $\vf{p}$ is locally as \cref{DE_hsector}.
+      \item  an \emph{attracting parabolic sector} if a side of $\vf{p}$ is locally as \cref{DE_apsector}.
+      \item a \emph{repelling parabolic sector} if a side of $\vf{p}$ is locally as \cref{DE_rpsector}.
+    \end{itemize}
     The union of all sectors that form a neighbourhood of $\vf{p}$ is called \emph{sectorial decomposition}.
+    \begin{center}
+      \begin{minipage}[b]{0.475\linewidth}
+        \centering
+        \includestandalone[mode=image|tex,width=0.75\linewidth]{Images/esector}
+        \captionof{figure}{Elliptic sector}
+        \label{DE_esector}
+      \end{minipage}\hfill
+      \begin{minipage}[b]{0.475\linewidth}
+        \centering
+        \includestandalone[mode=image|tex,width=0.75\linewidth]{Images/hsector}
+        \captionof{figure}{Hyperbolic sector}
+        \label{DE_hsector}
+      \end{minipage}
+    \end{center}
+    \begin{center}
+      \begin{minipage}[b]{0.475\linewidth}
+        \centering
+        \includestandalone[mode=image|tex,width=0.75\linewidth]{Images/apsector}
+        \captionof{figure}{Attracting parabolic sector}
+        \label{DE_apsector}
+      \end{minipage}\hfill
+      \begin{minipage}[b]{0.475\linewidth}
+        \centering
+        \includestandalone[mode=image|tex,width=0.75\linewidth]{Images/rpsector}
+        \captionof{figure}{Repelling parabolic sector}
+        \label{DE_rpsector}
+      \end{minipage}
+    \end{center}
   \end{definition}
   \begin{proposition}
     Any critical point of a analytic differential system in the plane can either be:
@@ -908,7 +939,7 @@
     Let $U\subseteq \RR^n$ be an open set, $\vf{f}:U\rightarrow\RR^n$ be a vector field such that $\vf{f}=(f_1,\ldots,f_n)$ and $H:U\rightarrow\RR$ be a non-constant function. Then, $H$ is a first integral for the differential system $\vf{x}'=\vf{f}(\vf{x})$ if and only if: $$\pdv{H}{x_1}(\vf{x})f_1(\vf{\vf{x}})+\cdots+\pdv{H}{x_n}(\vf{x})f_n(\vf{\vf{x}})=0\quad\forall\vf{x}\in U$$
   \end{proposition}
   \begin{definition}
-    Let $U\subseteq \RR^n$ be an open set, $\vf{f}:U\rightarrow\RR^n$ be a vector field and $H_1,\ldots,H_k:U\rightarrow\RR$ be $k\leq n-1$ first integrals for the differential system $\vf{x}'=\vf{f}(\vf{x})$. We say that $H_1,\ldots,H_k$ are \emph{functionally independent} if for all $\vf{x}\in U$, we have: $$\rank
+    Let $U\subseteq \RR^n$ be an open set, $\vf{f}:U\rightarrow\RR^n$ be a vector field and $H_1,\ldots,H_k:U\rightarrow\RR$ be $k\leq n-1$ first integrals for the differential system $\vf{x}'=\vf{f}(\vf{x})$. We say that $H_1,\ldots,H_k$ are \emph{functionally independent} (or simply \emph{independent}) if for all $\vf{x}\in U$ (except for maybe a set of zero area), we have: $$\rank
       \begin{pmatrix}
         \pdv{U_1}{x_1}(\vf{x}) & \cdots & \pdv{U_1}{x_n}(\vf{x}) \\
         \vdots                 & \ddots & \vdots                 \\
@@ -1279,6 +1310,40 @@
   \begin{proposition}[Poincaré index formula]
     Let $U\subseteq \RR^2$ be an open set, $\vf{X}:U\rightarrow\RR^2$ be a differentible vector field and $\vf{p}$ be a singular point with a finite finite sectorial decomposition. Denote by $e$ the number of elliptic sectors; by $h$, the number of hyperbolic sectors, and by $p$, the number of parabolic sectors. Then: $$\Ind_{\vf{p}}(\vf{X})=\frac{e-h}{2}+1$$
   \end{proposition}
-  \subsection{Quasi-linear partial differential equations}
+  \subsection{Quasilinear partial differential equations}
+  \begin{definition}
+    Let $U\subseteq \RR^n$ be an open set. A \emph{partial differential equation} (\emph{pde}) of order $k$ is an expression of the form $$F\left(\vf{x},u(\vf{x}),\pdv{u}{\vf{x}},\ldots,\pdv[k]{u}{\vf{x}}\right)=0$$ where $\vf{x}=(x_1,\ldots,x_n)$, $F:U\times\RR\times\RR^{n^1}\times\cdots\times\RR^{n^k}\rightarrow\RR$ is a given function and $u:U\rightarrow \RR$ is an unknown function. The function $u$ is called \emph{solution} of the pde defined by $F$.
+  \end{definition}
+  \subsubsection{Quasilinear partial differential equations}
+  \begin{definition}
+    Let $U\subseteq \RR^n$ be an open set and $u:U\rightarrow\RR$ be a function. A \emph{quasilinear pde} is an expression of the form:
+    \begin{equation}\label{DE_pde1}
+      p_1(\vf{x},u)\pdv{u}{x_1}+\cdots+p_n(\vf{x},u)\pdv{u}{x_n}=q(\vf{x},u)
+    \end{equation}
+  \end{definition}
+  \begin{theorem}
+    Let $U\subseteq \RR^n$ be an open set and $u:U\rightarrow\RR$ be a function and consider the pde of \cref{DE_pde1}. Let $H_1,\ldots,H_{n}$ be the $n$-independent first integrals of the system:
+    $$
+      \left\{
+      \begin{aligned}
+        {x_1}' & =p_1(x_1,\ldots,x_n,u) \\
+               & \;\;\vdots             \\
+        {x_n}' & =p_n(x_1,\ldots,x_n,u) \\
+        {u}'   & = q(x_1,\ldots,x_n,u)
+      \end{aligned}
+      \right.
+    $$
+    Then, for any function $F:\RR^n\rightarrow\RR$ of class $\mathcal{C}^1$, the implicit equation $$F(H_1(\vf{x},u),\ldots,H_n(\vf{x},u))=0$$ is a solution to \cref{DE_pde1}.
+  \end{theorem}
+  \subsubsection{Heat, wave and Laplace equations}
+  \begin{definition}[Heat equation]
+    Let $u:\RR\times\RR\rightarrow\RR$ be an unknown function. The \emph{heat equation} is the pde defined by $$\pdv{u}{t}=\alpha\pdv[2]{u}{x}$$ where $\alpha\in\RR$.
+  \end{definition}
+  \begin{definition}[Wave equation]
+    Let $u:\RR\times\RR\rightarrow\RR$ be an unknown function. The \emph{Wave equation} is the pde defined by $$\pdv[2]{u}{t}=c\pdv[2]{u}{x}$$ where $c\in\RR$.
+  \end{definition}
+  \begin{definition}[Laplace equation]
+    Let $u:\RR\times\RR\rightarrow\RR$ be an unknown function. The \emph{Laplace equation} is the pde defined by $$\pdv[2]{u}{x}=0$$ where $\alpha\in\RR$.
+  \end{definition}
 \end{multicols}
 \end{document}

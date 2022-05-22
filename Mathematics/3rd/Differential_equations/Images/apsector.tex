@@ -2,14 +2,14 @@
 \usepackage{../../../../preamble_formulas}
 
 \begin{document}
-\begin{tikzpicture}[decorated curves/.style={
+\begin{tikzpicture}[,decorated separatrices/.style={
         postaction={
             decorate,
             decoration={
                 markings,
-                mark=at position 0.333 with {\arrow[black,scale=1.5]{stealth}},
-                mark=at position 0.666 with {\arrow[black,scale=1.5]{stealth}}}}
-      },decorated separatrices/.style={
+                mark=at position 0.5 with {\arrow[black,scale=1.5]{stealth[reversed]}},
+              }}
+      },decorated separatrices_rev/.style={
         postaction={
             decorate,
             decoration={
@@ -31,9 +31,10 @@
         (0,0)
       };
     \addplot[thick,decorated separatrices,domain=0:\xmax]{x/2};
-    \addplot[thick,decorated separatrices,domain=\xmin:0]{-x};
-    \draw[thick,black,decorated curves] (A) to[out=50,in=0] (0.25,0.85) to[out=180,in=90+20] (A);
-    \draw[thick,black,decorated curves] (A) to[out=60,in=0] (0.15,0.55) to[out=180,in=90+10] (A);
+    \addplot[thick,decorated separatrices_rev,domain=\xmin:0]{-x};
+    \addplot[thick,decorated separatrices,domain=0:1/60]{60*x};
+    \addplot[thick,decorated separatrices,domain=0:1]{x};
+
 
   \end{axis}
 \end{tikzpicture}

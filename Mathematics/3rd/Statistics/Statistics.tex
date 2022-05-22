@@ -260,7 +260,7 @@
     We will denote by $t_{n;p}:=Q_{t_n}(p)$ the quantile of the $t_n$
   \end{definition}
   \begin{proposition}
-    Let $n\in\NN$. Then, the pdf of $t_n$ is: $$f_{t_n}(x)=\frac{\Gamma\left(\frac{n+1}{2}\right)}{\sqrt{\pi n}\Gamma\left(\frac{n}{2}\right)}{\left(1+\frac{x^2}{n}\right)}^{-\frac{n+1}{2}}\footnote{It makes sense if we remplace the value $n\in\NN$ for a value $\nu\in\RR_{>0}$. However the original definition of $t_n$ from the ${\chi_n}^2$ fails.}$$
+    Let $n\in\NN$. Then, the pdf of $t_n$ is: $$f_{t_n}(x)=\frac{\Gamma\left(\frac{n+1}{2}\right)}{\sqrt{\pi n}\Gamma\left(\frac{n}{2}\right)}{\left(1+\frac{x^2}{n}\right)}^{-\frac{n+1}{2}}\footnote{It makes sense if we replace the value $n\in\NN$ for a value $\nu\in\RR_{>0}$. However the original definition of $t_n$ from the ${\chi_n}^2$ fails.}$$
   \end{proposition}
   \subsubsection{Fisher's theorem}
   \begin{theorem}[Fisher's theorem]
@@ -482,12 +482,40 @@
   \begin{definition}[Score test]
     Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\vf\theta\in\Theta\subseteq\RR^d\})$ be a parametric regular statistical model and consider the test $\delta:\mathcal{X}=A_1\sqcup A_2\rightarrow\{\mathcal{H}_0,\mathcal{H}_1\}$ of simple hypothesis $\mathcal{H}_0:\vf\theta=\vf\theta_0$ and $\mathcal{H}_1:\vf\theta\ne\vf\theta_0$. The \emph{score test} is the test whose statistic is: $$\transpose{\vf{S}(\vf\theta_0)}\vf{I}^{-1}(\vf{\theta}_0)\vf{S}(\vf\theta_0)\overset{\text{a}}{\sim}{\chi_d}^2$$ where $d=\dim\Theta$. If $\mathcal{H}_0:\vf\theta=\vf\theta_0$, the we shall replace $\vf\theta_0$ by the MLE under $\mathcal{H}_0$, $\vf{\hat\theta_0}$, in the test statistic.
   \end{definition}
-  \subsection{Bootstrap}
+  \subsection{Bootstrapping}
+  \subsubsection{Parametric and non-parametric bootstrap}
+  \begin{definition}[Non-parametric bootstrap]
+    Consider a sample $x_1,\ldots,x_n$ from \iid random variables $X_1,\ldots,X_n\sim F$ of an unknown distribution $F$. Our goal is to get an estimator of a parameter $\theta=T(X_1,\ldots,X_n)$. To do so, we define the \emph{empirical distribution} $F_n$ as follows: if $X^*\sim F_n$ then: $$\Prob(X^*=x_i)=\frac{1}{n}\quad\forall i\in\{1,\ldots,n\}$$ First we compute ${\hat\theta}:=T(x_1,\ldots,x_n)$ from the data given.
+    Now we generate $B$ samples of data $\{{x_1^b}^*,\ldots,{x_n^b}^*\}$, $b=1,\ldots,B$, taken from the distribution $F_n$ (with replacement) and for each sample we compute the respective estimator ${\hat\theta}_1^*=T({x_1^b}^*,\ldots,{x_n^b}^*)$. This gives us the \emph{bootstrap distribution} of ${\hat\theta}$ and so the bias and variance of ${\hat\theta}$ is:
+    $$\bias_B({\hat\theta})={\hat\theta}^*-{\hat\theta}\quad\Var_B({\hat\theta})=\frac{1}{B-1}\sum_{b=1}^B{({\hat\theta}_b^*-{\hat\theta}^*)}^2$$
+    where ${\hat\theta}^*:=\frac{1}{B}\sum_{b=1}^B$. And hence, the bootstrap estimate of the standard error is:
+    $$\tilde{s}_B(\hat\theta)=\sqrt{\frac{\sum_{b=1}^B{({\hat\theta}_b^*-{\hat\theta}^*)}^2}{B-1}}$$
+    If we want an unbiased estimator ${\hat\theta}$ of $\theta$ we can replace ${\hat\theta}$ by $2{\hat\theta}-{\hat\theta}^*$.
+  \end{definition}
+  \begin{definition}[Parametric bootstrap]
+    Consider a sample $x_1,\ldots,x_n$ from \iid random variables $X_1,\ldots,X_n\sim F_{\theta}$ and we are interested in estimating $\theta=T(X_1,\ldots,X_n)$. First we compute ${\hat\theta}:=T(x_1,\ldots,x_n)$ from the data given.
+    Now we generate $B$ samples of data $\{{x_1^b}^*,\ldots,{x_n^b}^*\}$, $b=1,\ldots,B$, taken from the distribution $F_{{\hat\theta}}$ (with replacement) and for each sample we compute the respective estimator ${\hat\theta}_1^*=T({x_1^b}^*,\ldots,{x_n^b}^*)$. This gives us the \emph{parametric bootstrap distribution} of ${\hat\theta}$\footnote{Note that in order for bootstrapping to work we need some regular conditions of the function $T$ (Hadamard differentiability). Statistics like minimum or maximum doesn't satisfy these restrictions.}.
+  \end{definition}
+  \subsubsection{Bootstrap confidence intervals}
+  \begin{definition}[Normal confidence interval]
+    Consider a sample $x_1,\ldots,x_n$ from \iid random variables $X_1,\ldots,X_n\sim F$ of an unknown distribution $F$. The \emph{normal confidence interval} for $\theta=T(X_1,\ldots,X_n)$ of level $\alpha$ is: $$\theta\in(\hat\theta-z_{1-\alpha/2}\tilde{s}_B(\hat\theta),\hat\theta+z_{1-\alpha/2}\tilde{s}_B(\hat\theta))$$ To use a bias-corrected bootstrap estimator, replace ${\hat\theta}$ by $2{\hat\theta}-{\hat\theta}^*$.
+  \end{definition}
+  \begin{definition}[Basic bootstrap confidence interval]
+    Consider a sample $x_1,\ldots,x_n$ from \iid random variables $X_1,\ldots,X_n\sim F$ of an unknown distribution $F$. The \emph{basic bootstrap confidence interval} for $\theta=T(X_1,\ldots,X_n)$ of level $\alpha$ is: $$\theta\in(2\hat\theta-\hat\theta_{1-\alpha/2}^*,2\hat\theta-\hat\theta_{\alpha/2}^*)$$ where $\hat\theta_\alpha^*$ is the sample quantiles of the bootstrap relicates.
+  \end{definition}
+  \begin{definition}[Bootstrap-t confidence interval]
+    Consider a sample $x_1,\ldots,x_n$ from \iid random variables $X_1,\ldots,X_n\sim F$ of an unknown distribution $F$. The \emph{bootstrap-t confidence interval} for $\theta=T(X_1,\ldots,X_n)$ of level $\alpha$ is: $$\theta\in(\hat\theta-t_{1-\alpha/2}\tilde{s}_B(\hat\theta),\hat\theta+t_{1-\alpha/2}\tilde{s}_B(\hat\theta))$$ To use a bias-corrected bootstrap estimator, replace ${\hat\theta}$ by $2{\hat\theta}-{\hat\theta}^*$.
+  \end{definition}
+  \begin{definition}[Percentile confidence interval]
+    Consider a sample $x_1,\ldots,x_n$ from \iid random variables $X_1,\ldots,X_n\sim F$ of an unknown distribution $F$. Once we have computed $B$ estimates of $\hat\theta$ order them:
+    $${\hat\theta}_{(1)}^*\leq\cdots\leq{\hat\theta}_{(B)}^*$$
+    The \emph{percentile confidence interval} for $\theta=T(X_1,\ldots,X_n)$ of level $\alpha$ is: $$\theta\in(\hat\theta_{\alpha/2}^*,\hat\theta_{1-\alpha/2}^*)$$
+  \end{definition}
   \subsection{Analyzing data}
   \subsubsection{Comparizing distributions}
   \begin{definition}[Q-Q plots]
     Consider a sample $x_1,\ldots,x_n$ of data and the ordered sample $x_{(1)},\ldots,x_{(n)}$. We would like to know whether the data come from a distribution $F$ or not. To do conclude something, we define $$y_{(k)}=y_k:=F^{-1}\left(\frac{k}{n+1}\right)\quad k=1,\ldots,n$$
-    Then, we plot the pairs $(y_{(k)},x_{(k)})$ (or equivalently the pairs $(F(y_{(k)}),F(x_{(k)}))$). The more similar is the plot to a line, the more possible is for the data to come from the distribution $F$. This plot is called \emph{Quantile-Quantile plot} (or \emph{Q-Q plots}), $y_{(k)}$ are called the \emph{theoretical quantiles} and $x_{(k)}$ the \emph{sample quantiles}\footnote{Sometimes the theoretical quantiles taken are $F^{-1}\left(\frac{k-0.5}{n}\right)$ instead of $F^{-1}\left(\frac{k}{n+1}\right)$.}.
+    Then, we plot the pairs $(y_{(k)},x_{(k)})$ (or equivalently the pairs $(F(y_{(k)}),F(x_{(k)}))$). The more similar is the plot to a line, the more possible is for the data to come from the distribution $F$. This plot is called \emph{Quantile-Quantile plot} (or \emph{Q-Q plots}), $y_{(k)}$ are called the \emph{theoretical quantiles} and $x_{(k)}$ the \emph{sample quantiles}, that is, the quantile function of the discrete distribution induced by the sample (assigning probability $1/n$ to each data of the sample)\footnote{Sometimes the theoretical quantiles taken are $F^{-1}\left(\frac{k-0.5}{n}\right)$ instead of $F^{-1}\left(\frac{k}{n+1}\right)$.}.
   \end{definition}
   \begin{proposition}[Normal Q-Q plots]
     Consider a sample $x_1,\ldots,x_n$ of data and the ordered sample $x_{(1)},\ldots,x_{(n)}$. We would like to know whether the data come from a normal distribution $N(\mu,\sigma^2)$ or not. We define $$z_{(k)}=z_{\frac{k}{n+1}}=\Phi^{-1}\left(\frac{k}{n+1}\right)\quad k=1,\ldots,n$$
