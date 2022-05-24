@@ -85,7 +85,7 @@
     An \emph{orientation} on a vector space is the choice of one of the two equivalence classes under $\sim$. A vector space with an orientation selected is called an \emph{oriented vector space}, while one not having an orientation selected, is called an \emph{unoriented vector space}. A basis of an oriented vector space which has the orientation chosen is called \emph{positive basis}, while one with the other orientation is called \emph{negative basis}.
   \end{definition}
   \begin{definition}
-    Let $V$ be an oriented vector space, $\mathcal{B}$ be a basis of $V$ and $f:V\rightarrow V$ be a linear isomorphism. We say that $f$ is \emph{orientation-preserving} if $\det \left([f]_{\mathcal{B}}\right)>0$. Analogously, if $\det \left([f]_{\mathcal{B}}\right)<0$ we say that $f$ is \emph{not orientation-preserving}.
+    Let $V$ be an oriented vector space, $\mathcal{B}$ be a basis of $V$ and $f:V\rightarrow V$ be a linear isomorphism. We say that $f$ is \emph{orientation-preserving} (or \emph{positively oriented}) if $\det \left([f]_{\mathcal{B}}\right)>0$. Analogously, if $\det \left([f]_{\mathcal{B}}\right)<0$ we say that $f$ is \emph{negatively-oriented}.
   \end{definition}
   \begin{definition}
     Let $(\vf{v}_1,\ldots,\vf{v}_n)$ be a basis of $\RR^n$. Suppose for each $i\in\{1,\ldots,n\}$ we have $$\vf{v}_i=\sum_{j=1}^n\lambda_{ij}\vf{e}_1$$ where $\lambda_{ij}\in\RR$ and $(\vf{e}_1,\ldots,\vf{e}_n)$ is the standard basis of $\RR^n$. We define the \emph{determinant} of $(\vf{v}_1,\ldots,\vf{v}_n)$ as: $$\det(\vf{v}_1,\ldots,\vf{v}_n):=
@@ -1102,7 +1102,7 @@
   \end{corollary}
   \begin{definition}
     Let $U\subseteq\RR^n$ be an open set, $\vf{X}\in\mathcal{X}(U)$ and $\omega\in\Omega^k(U)$, where $k\geq 1$.
-    We define the \emph{interior contraction} of $\omega$ by $\vf{X}$ as the differential $(k-1)$-form $\iota_{\vf{X}}\omega\in\Omega^{k-1}(U)$ defined by:
+    We define the \emph{interior product} of $\omega$ by $\vf{X}$ as the differential $(k-1)$-form $\iota_{\vf{X}}\omega\in\Omega^{k-1}(U)$ defined by:
     $$\iota_{\vf{X}}\omega(\vf{Y}_2,\ldots,\vf{Y}_k)=\omega(\vf{X},\vf{Y}_2,\ldots,\vf{Y}_k)$$
     By agreement, we define $\iota_{\vf{X}}h=0$ if $h\in\Omega^0(U)$.
   \end{definition}
@@ -1119,7 +1119,7 @@
     Let $U,V\subseteq\RR^n$ be open sets and $\vf{f}:U\rightarrow V$ be a differentiable function. Then: $$\vf{f^*}\eta=J\vf{f}\cdot\eta$$ where $J\vf{f}$ is the Jacobian of $\vf{f}$.
   \end{proposition}
   \begin{definition}
-    Let $U\subseteq\RR^n$ be an open set and $k\geq 0$. We define the \emph{exterior differential} as the linear function $d:\Omega^k(U)\rightarrow\Omega^{k+1}(U)$ defined as follows: If $$\omega=\sum_{j_1<\cdots<j_k}\omega_{j_1,\ldots,j_k}\dd{x^{j_1}}\wedge\cdots\wedge\dd{x^{j_k}}$$
+    Let $U\subseteq\RR^n$ be an open set and $k\geq 0$. We define the \emph{exterior differential} as the linear function $\dd:\Omega^k(U)\rightarrow\Omega^{k+1}(U)$ defined as follows: If $$\omega=\sum_{j_1<\cdots<j_k}\omega_{j_1,\ldots,j_k}\dd{x^{j_1}}\wedge\cdots\wedge\dd{x^{j_k}}$$
     then: $$\dd{\omega}:=\sum_{m,j_1<\cdots<j_k}\pdv{\omega_{j_1,\ldots,j_k}}{x^m}\dd{x^m}\wedge\dd{x^{j_1}}\wedge\cdots\wedge\dd{x^{j_k}}$$
   \end{definition}
   \begin{proposition}
@@ -1139,17 +1139,17 @@
   \subsection{Integration}
   \subsubsection{Submanifolds of \texorpdfstring{$\RR^n$}{Rn}}
   \begin{definition}
-    Let $M\subseteq\RR^n$ be a submanifold and $p\in M$. If $\vf\alpha:(-\varepsilon,\varepsilon)\rightarrow\RR^3$ is a parametrization of a curve of class $\mathcal{C}^\infty$ such that $\vf\alpha(0)=p$, we say that $\vf\alpha'(0)$ is a \emph{tangent vector} to $M$ at $p$. The set of all such vectors is called \emph{tangent space} and it is denoted as $T_pM$. Moreover, $T_pM$ is a vector space of dimension $\dim M$.
+    Let $M\subseteq\RR^n$ be a submanifold and $p\in M$. If $\vf\alpha:(-\varepsilon,\varepsilon)\rightarrow\RR^3$ is a parametrization of a curve of class $\mathcal{C}^\infty$ such that $\vf\alpha(0)=p$, we say that $\vf\alpha'(0)$ is a \emph{tangent vector} to $M$ at $p$. The set of all such vectors is called \emph{tangent space} to $M$ at $p$ and it is denoted as $T_pM$. Moreover, $T_pM$ is a vector space of dimension $\dim M$.
   \end{definition}
   \begin{definition}
-    Let $M\subseteq\RR^n$ be a submanifold of dimension $k$ and $U\subseteq S$ be an open set. A \emph{vector field} defined on $U$ is a correspondence $\vf{X}$ that at each point $p\in U$ it assigns a tangent vector $\vf{X}(p)=:\vf{X}_p\in T_p\RR^n$. We say that $\vf{X}$ is \emph{differentiable} at $p\in U$ if there is a parametrization $\vf\varphi(u^1,\ldots,u^k)$ of $M$ whose image contains $p$ such that $$\vf{X}=\sum X^i\vf\varphi_{u^i}$$ for some differentiable functions $X^1,\ldots,X^k$ at $p$. We say that $\vf{X}$ is \emph{differentiable} if it is differentiable at each point $p\in U$. We say that $\vf{X}$ is \emph{tangent} to $M$ if $\vf{X}_p\in T_pM$ $\forall p\in U$. We denote by $\mathcal{X}(U)$ the set of all differentiable vector fields on $U$ that are tangent to $M$.
+    Let $M\subseteq\RR^n$ be a submanifold of dimension $k$ and $U\subseteq S$ be an open set. A \emph{vector field} defined on $U$ is a correspondence $\vf{X}$ that at each point $p\in U$ it assigns a tangent vector $\vf{X}(p)=:\vf{X}_p\in T_p\RR^n$. We say that $\vf{X}$ is \emph{differentiable} at $p\in U$ if there is a parametrization $\vf\varphi(u^1,\ldots,u^k)$ of $M$ whose image contains $p$ such that $$\vf{X}=\sum X^i\vf\varphi_{u^i}$$ for some functions $X^1,\ldots,X^k$ differentiable at $p$. We say that $\vf{X}$ is \emph{differentiable} if it is differentiable at each point $p\in U$. We say that $\vf{X}$ is \emph{tangent} to $M$ if $\vf{X}_p\in T_pM$ $\forall p\in U$. We denote by $\mathcal{X}(U)$ the set of all differentiable vector fields on $U$ that are tangent to $M$.
   \end{definition}
   \begin{definition}
-    Let $M\subseteq\RR^n$ be a submanifold of dimension $k$ and $U\subseteq S$ be an open set and $(V,\vf\varphi(u^1,\ldots,u^k))$ be a local parametrization of $M$ with $\vf\varphi(V)=U$. A \emph{differential $\ell$-form} on $U$ is a differentiable function $\omega:U\rightarrow\Lambda^k{(T_pM)}^*\cong\RR^{\binom{k}{\ell}}$. We denote by $\Omega^\ell(U)$ the set of all differential $\ell$-forms defined on $U$ with the agreement that $\Omega^0(U):=\mathcal{C}^\infty(U)$. We will denote the dual basis of $\left(\pdv{}{u^1},\ldots,\pdv{}{u^k}\right):=\left(\pdv{\vf\varphi}{u^1},\ldots,\pdv{\vf\varphi}{u^k}\right)$ by $(\dd{u^1},\ldots,\dd{u^k})$. Thus, a differential $k$-form can be written as:
+    Let $M\subseteq\RR^n$ be a submanifold of dimension $k$ and $U\subseteq M$ be an open set and $(V,\vf\varphi(u^1,\ldots,u^k))$ be a local parametrization of $M$ with $\vf\varphi(V)=U$. A \emph{differential $\ell$-form} on $U$ is a differentiable function $\omega:U\rightarrow\Lambda^k{(T_pM)}^*\cong\RR^{\binom{k}{\ell}}$. We denote by $\Omega^\ell(U)$ the set of all differential $\ell$-forms defined on $U$ with the agreement that $\Omega^0(U):=\mathcal{C}^\infty(U)$\footnote{All the definitions made in the previous section about differential forms can be applied, conveniently modifed, to submanifolds.}. We will denote the dual basis of $\left(\pdv{}{u^1},\ldots,\pdv{}{u^k}\right):=\left(\pdv{\vf\varphi}{u^1},\ldots,\pdv{\vf\varphi}{u^k}\right)$ by $(\dd{u^1},\ldots,\dd{u^k})$. Thus, a differential $k$-form can be written uniquely as:
     $$\omega=\sum_{j_1<\cdots<j_k}\omega_{j_1,\ldots,j_\ell}\dd{u^{j_1}}\wedge\cdots\wedge\dd{u^{j_\ell}}$$
   \end{definition}
   \begin{definition}
-    Let $M\subseteq\RR^n$ be a submanifold of dimension $k$ and $U\subseteq S$ be an open set, $(V,\vf\varphi(u^1,\ldots,u^k))$ be a local parametrization of $M$ with $\vf\varphi(V)=U$ and $\omega\in\Omega^\ell(U)$. We define the \emph{exterior differential} as the linear function $d:\Omega^k(U)\rightarrow\Omega^{\ell+1}(U)$ defined as follows: if $$\omega=\sum_{j_1<\cdots<j_\ell}\omega_{j_1,\ldots,j_\ell}\dd{x^{j_1}}\wedge\cdots\wedge\dd{x^{j_\ell}}$$
+    Let $M\subseteq\RR^n$ be a submanifold of dimension $k$ and $U\subseteq M$ be an open set, $(V,\vf\varphi(u^1,\ldots,u^k))$ be a local parametrization of $M$ with $\vf\varphi(V)=U$ and $\omega\in\Omega^\ell(U)$. We define the \emph{exterior differential} as the linear function $\dd:\Omega^k(U)\rightarrow\Omega^{\ell+1}(U)$ defined as follows: if $$\omega=\sum_{j_1<\cdots<j_\ell}\omega_{j_1,\ldots,j_\ell}\dd{x^{j_1}}\wedge\cdots\wedge\dd{x^{j_\ell}}$$
     then: $$\dd{\omega}=\sum_{m,j_1<\cdots<j_\ell}\pdv{\omega_{j_1,\ldots,j_\ell}}{x^m}\dd{x^m}\wedge\dd{x^{j_1}}\wedge\cdots\wedge\dd{x^{j_\ell}}$$
   \end{definition}
   \begin{proposition}
@@ -1163,7 +1163,10 @@
     Note that $\Fr{\HH^k}=\{(x^1,\ldots,x^k)\in\RR^k:x^k=0\}$.
   \end{definition}
   \begin{definition}
-    Let $M\subseteq\RR^n$ be a set. We say that $M$ is a submanifold with boundary of dimension $k$ if $\forall p\in M$ there is an open neighbourhood $U\subseteq\RR^n$ of $p$, an open set $V\subset \HH^k$ and a differentiable function $\vf\varphi:V\rightarrow\RR^n$ such that:
+    Let $U\subseteq \HH^k$ be an open set and $\vf{f}:U\rightarrow\RR^m$ be a function. We say that $\vf{f}$ is \emph{differentiable} if $\forall p\in U$ there exists a neighbourhood $W\subseteq \RR^k$ of $p$ and a differentiable function $\vf{\tilde{f}}:W\rightarrow\RR^m$ such that $\vf{\tilde{f}}|_{V\cap W}=\vf{f}|_{V\cap W}$. In this case, we define the \emph{differential} of $\vf{f}$ at a point $p\in U$ as $\vf{df}_p=\vf{d\tilde{f}}_p$.
+  \end{definition}
+  \begin{definition}
+    Let $M\subseteq\RR^n$ be a set. We say that $M$ is a \emph{submanifold with boundary} of dimension $k$ if $\forall p\in M$ there is an open neighbourhood $U\subseteq\RR^n$ of $p$, an open set $V\subset \HH^k$ and a differentiable function $\vf\varphi:V\rightarrow\RR^n$ such that:
     \begin{enumerate}
       \item $\vf\varphi(V)=U\cap M$ and $\vf\varphi:V\rightarrow U\cap M$ is a homeomorphism.
       \item $\vf\varphi$ is an immersion.
@@ -1196,39 +1199,135 @@
     Let $M\subseteq\RR^n$ be a submanifold with boundary of dimension $k$, $p\in \Fr{M}$. We define the \emph{set of interior vectors} $T_p^\text{i}M$ of $T_pM$ as the set:
     $$\{\vf\alpha'(0):\vf\alpha:[0,\varepsilon)\rightarrow M\text{ is differentiable with }\vf\alpha(0)=p\}$$
     Note that $T_p^\text{i}M$ is a closed subspace of $T_pM$ and its boundary is $T_p\Fr{M}\cong\RR^{k-1}$.
-    The elements of $T_M\setminus T_p^\text{i}M$ are called \emph{exterior vectors}.
+    The elements of $T_pM\setminus T_p^\text{i}M$ are called \emph{exterior vectors}.
   \end{definition}
-  \subsubsection{Oritentaility}
+  \begin{lemma}
+    Let $M\subseteq\RR^n$ be a submanifold with boundary of dimension $k$, $p\in M$ and $(V,\vf\varphi(u^1,\ldots,u^k))$ be a local parametrization of $M$ such that $p\in\vf\varphi(V)$. A vector $\vf{w}\in T_pM$ can be written as: $$\vf{w}=a^1{\left(\pdv{\vf\varphi}{u^1}\right)}_p+\cdots+a^k{\left(\pdv{\vf\varphi}{u^k}\right)}_p$$ Then:
+    $$
+      \begin{cases}
+        \vf{w}\text{ is interior}\iff a^k\geq 0 \\
+        \vf{w}\text{ is exterior}\iff a^k< 0    \\
+      \end{cases}
+    $$
+  \end{lemma}
+  \subsubsection{Oritentability}
   \begin{definition}
-    Let $M\subseteq\RR^n$ be a submanifold with boundary of dimension $k$. We say that $M$ is \emph{orientable} if we can assign an orientation to each tangent space $T_pM$ of $M$ in a way that $\forall p\in M$, there is a local parametrization $(V,\vf\varphi)$ of $M$ such that $p\in\vf\varphi(V)$ and $\vf{d\varphi}_x:T_x\RR^k\rightarrow T_{\vf\varphi(x)}M$ is (not) orientation-preserving. In these conditions, we say that $(V,\vf\varphi)$ is \emph{compactible} with the orientation of $M$.
+    Let $M\subseteq\RR^n$ be a submanifold\footnote{From now on the submanifolds may be with boundary or not.} of dimension $k$. We say that $M$ is \emph{orientable} if we can assign an orientation to each tangent space $T_pM$ of $M$ in a way that $\forall p\in M$, there is a local parametrization $(V,\vf\varphi)$ of $M$ such that $p\in\vf\varphi(V)$ and $\vf{d\varphi}_x:T_x\RR^k\rightarrow T_{\vf\varphi(x)}M$ is positive-oriented (or negative-oriented). In these conditions, we say that $(V,\vf\varphi)$ is \emph{compatible} with the orientation of $M$.
   \end{definition}
   \begin{proposition}
-    Let $M\subseteq\RR^n$ be a submanifold with boundary of dimension $k$. $M$ is orientation if and only if there exists an atlas $\{(V_\alpha,\vf\varphi_\alpha):\alpha\in A\}$ such that $\forall \alpha,\beta\in A$ we have: $$J({\vf\varphi_\beta}^{-1}\circ\vf\varphi)>0$$
+    Let $M\subseteq\RR^n$ be a submanifold of dimension $k$. $M$ is orientation if and only if there exists an atlas $\{(V_\alpha,\vf\varphi_\alpha):\alpha\in A\}$ such that $\forall \alpha,\beta\in A$ we have: $$J({\vf\varphi_\beta}^{-1}\circ\vf\varphi_\alpha)>0$$
   \end{proposition}
   \begin{proposition}
-    Let $M\subseteq\RR^n$ be an orientated submanifold with boundary of dimension $k$. Then, there exists a unique differential $k$-form $\eta_M\in\Omega^k(M)$ such that if $(\vf{e}_1,\ldots,\vf{e}_k)$ is a orthonormal positive basis of $T_pM$, then $\eta_M(\vf{e}_1,\ldots,\vf{e}_k)=1$. This form $\eta_M$ is called \emph{volume element} of $M$.
+    Let $M\subseteq\RR^n$ be an orientated submanifold of dimension $k$. Then, there exists a unique differential $k$-form $\eta_M\in\Omega^k(M)$ such that if $(\vf{e}_1,\ldots,\vf{e}_k)$ is a orthonormal positive basis of $T_pM$, then $\eta_M(\vf{e}_1,\ldots,\vf{e}_k)=1$. This form $\eta_M$ is called \emph{volume element} of $M$.
   \end{proposition}
   \begin{proposition}
-    Let $M\subseteq\RR^n$ be a submanifold with boundary of dimension $k$. $M$ is orientation if and only if there exists a differential $k$-form $\eta\in\Omega^k(M)$ that isn't zero at each point of $M$
+    Let $M\subseteq\RR^n$ be a submanifold of dimension $k$. $M$ is orientable if and only if there exists a differential $k$-form $\eta\in\Omega^k(M)$ that isn't zero at each point of $M$
   \end{proposition}
   \begin{lemma}
-    Let $M\subseteq\RR^n$ be a submanifold with boundary of dimension $k$. Then, there is a global exterior vector filed $\vf\nu$ defined on $\Fr{M}$, that is, sa vector field such that $\forall p\in\Fr{M}$, $\vf\nu_p\notin T_p^\text{i}M$ (in particular $\vf\nu_p\ne 0$).
+    Let $M\subseteq\RR^n$ be a submanifold of dimension $k$ with $\Fr{M}\ne\varnothing$. Then, there is a global exterior vector filed $\vf\nu$ defined on $\Fr{M}$, that is, a vector field such that $\forall p\in\Fr{M}$, $\vf\nu_p\notin T_p^\text{i}M$ (in particular $\vf\nu_p\ne 0$).
   \end{lemma}
   \begin{definition}
-    Let $M\subseteq\RR^n$ be a submanifold with boundary of dimension $k$. We call \emph{unit normal exterior vector field} the field $\vf\nu_{\Fr{M}}$ univocally determined by being unit, exterior and perpendicular to $T_p\Fr{M}$ $\forall p\in M$.
+    Let $M\subseteq\RR^n$ be a submanifold of dimension $k$ with $\Fr{M}\ne\varnothing$. We call \emph{unit normal exterior vector field} the field $\vf\nu_{\Fr{M}}$ univocally determined by being unit, exterior and perpendicular to $T_p\Fr{M}$ at each point $p\in M$.
   \end{definition}
   \begin{proposition}
     Let $M\subseteq\RR^n$ be a submanifold with boundary of dimension $k$. If $M$ is orientable, so it is $\Fr{M}$.
   \end{proposition}
   \begin{definition}
-    Let $M\subseteq\RR^n$ be an orientated submanifold with boundary of dimension $k$. We say that a basis $(\vf{e}_1,\ldots,\vf{e}_{k-1})$ of $T_p\Fr{M}$ is \emph{positive} if $(\vf\nu_{\Fr{M}},\vf{e}_1,\ldots,\vf{e}_{k-1})$ is a positive basis of $T_pM$. This choice determines an orientation on $\Fr{M}$, which is called \emph{orientation induced by $M$}.
+    Let $M\subseteq\RR^n$ be an orientated submanifold of dimension $k$ with $\Fr{M}\ne\varnothing$. We say that a basis $(\vf{e}_1,\ldots,\vf{e}_{k-1})$ of $T_p\Fr{M}$ is \emph{positive} if $(\vf\nu_{\Fr{M}},\vf{e}_1,\ldots,\vf{e}_{k-1})$ is a positive basis of $T_pM$. This choice determines an orientation on $\Fr{M}$, which is called \emph{orientation induced by $M$}.
   \end{definition}
   \begin{proposition}
-    Let $M\subseteq\RR^n$ be an orientated submanifold with boundary of dimension $k$, $\eta_M$ be the volume element of $M$ and $\vf\nu_{\Fr{M}}$ be the unit normal exterior vector field. Then the the volume element of $\Fr{M}$ is: $$\eta_{\Fr{M}}=\iota_{\vf\nu}\eta_M$$
+    Let $M\subseteq\RR^n$ be an orientated submanifold of dimension $k$ with $\Fr{M}\ne\varnothing$, $\eta_M$ be the volume element of $M$ and $\vf\nu_{\Fr{M}}$ be the unit normal exterior vector field. Then the the volume element of $\Fr{M}$ associated with the orientation of $\Fr{M}$ induced by the one of $M$ is: $$\eta_{\Fr{M}}=\iota_{\vf\nu}\eta_M$$
   \end{proposition}
   \begin{proposition}
     Let $S\subseteq\RR^3$ be a regular surface oriented with a vector field $\vf\nu_S$. Then, the area element of $S$ is given by $\eta_S=\iota_{\vf\nu}\eta$, where $\eta=\dd{x}\wedge\dd{y}\wedge\dd{z}$. Moreover if $\vf\varphi(u,v)$ is a local parametrization of $S$ compatible with the orientation, then: $$\eta_S=\vf\varphi^*\eta_S=\sqrt{E_{\vf\varphi}G_{\vf\varphi}-{F_{\vf\varphi}}^2}\dd{u}\wedge\dd{v}$$
   \end{proposition}
   \subsubsection{Integration of differential forms}
+  \begin{definition}
+    Let $M\subseteq\RR^n$ be an orientated submanifold of dimension $k$ and $\omega\in\Omega^\ell(M)$ We define the support of $\omega$ as: $$\supp (\omega):=\overline{\{p\in M:\omega_p\ne 0\}}$$
+  \end{definition}
+  \begin{definition}
+    Let $U\subseteq \RR^k$ be an open set and $\omega=h\dd{u^1}\wedge\cdots\wedge\dd{u^k}\in\Omega^k(\RR^k)$ where $h=h(u^1,\ldots,u^k)$ and such that $\supp(\omega)\subset U$ is compact. We define the \emph{integral} of $\omega$ on $U$ as: $$\int_U\omega=\int_Uh\dd{u^1}\wedge\cdots\wedge\dd{u^k}:=\int_Uh\dd{u^1}\cdots\dd{u^k}$$
+  \end{definition}
+  \begin{definition}
+    Let $M\subseteq\RR^n$ be an orientated submanifold of dimension $k$, $(U,\vf\varphi(u^1,\ldots,u^k))$ be a local parametrization of $M$ compatible with the orientation and $\omega\in\Omega^k(M)$ be such that $\supp(\omega)\subset \vf\varphi(U)$ is compact. We define the \emph{integral} of $\omega$ on $M$ as: $$\int_M\omega:=\int_U\vf\varphi^*\omega=\int_U\omega\left(\pdv{\vf\varphi}{u^1},\ldots,\pdv{\vf\varphi}{u^k}\right)\dd{u^1}\cdots\dd{u^k}\footnote{It can be seen that this definition does not depend on the parametrization $(U,\vf\varphi(u^1,\ldots,u^k))$.}$$
+    If $h:U\rightarrow M$ is a differentiable function and $\supp(h)\subset \vf\varphi(U)$, then we define the \emph{integral} of $h$ on $M$ as:
+    $$\int_Mh:=\int_Mh\eta_M=\int_U(h\circ\omega)\vf\varpi^*\eta_M$$
+    where $\eta_M$ is the volume element of $M$.
+  \end{definition}
+  \begin{definition}
+    Let $M\subseteq\RR^n$ be an orientated submanifold of dimension $k$, $(U,\vf\varphi(u^1,\ldots,u^k))$ be a local parametrization of $M$ compatible with the orientation and $R\subset M$ be a compact region contained in $\vf\varphi(U)$. Let $Q:=\vf\varphi^{-1}(R)\subset U$. We define the volume of $R$ as: $$\vol(R)=\int_R\eta_M:=\int_Q\vf\varphi^*\eta_M$$
+  \end{definition}
+  \begin{proposition}
+    Let $K\subseteq \RR^n$ be a compact set, $\{V_\alpha:\alpha\in A\}$ be an open cover of $K$. Then, there exist differentiable and non-negative functions $\rho_1,\ldots,\rho_m\in\mathcal{C}^\infty(\RR^n)$ such that:
+    \begin{enumerate}
+      \item $\sum_{i=1}^m\rho_i(x)=1$ $\forall x\in K$
+      \item For all $i\in\{1,\ldots,m\}$, $\exists \alpha\in A$ such that $\supp(\rho_i)\subset V_\alpha$
+    \end{enumerate}
+    In these conditions the set $\{\rho_i:i=1,\ldots,m\}$ is called a \emph{partition of unity} of $K$ subordinated to $\{V_\alpha:\alpha\in A\}$.
+  \end{proposition}
+  \begin{definition}
+    Let $k\geq 1$ and $M\subseteq\RR^n$ be an orientated submanifold. We define the set $\Omega_\text{c}^k(M)$ as the vector space of all differential $k$-forms of $M$ with compact support.
+  \end{definition}
+  \begin{definition}
+    Let $M\subseteq\RR^n$ be an orientated submanifold of dimension $k$, $\{(V_\alpha,\vf\varphi_\alpha):\alpha\in A\}$ and an atlas of $M$ compatible with the orientation. Given $\omega\in\Omega_\text{c}^k(M)$, let $\{\rho_1,\ldots,\rho_m\}$ be a partition of unity of $K$ subordinated to $\{\vf\varphi(V_\alpha)\}$. We define the \emph{integral} of $\omega$ on $M$ as:
+    $$\int_M\omega=\sum_{i= 1}^m\int_M\rho_i\omega=\sum_{i= 1}^m\int_{U_\alpha}{\vf\varphi_\alpha}^*(\rho_i\omega)$$
+    where $\alpha\in A$ is such that $\supp(\rho_i)\subset \vf\varphi(V_\alpha)$\footnote{It can be seen that this definition doesn't depend neither on the atlas nor on the partition of unity chosen.}.
+  \end{definition}
+  \begin{proposition}
+    Let $M\subseteq\RR^n$ be an orientated submanifold of dimension $k$, $\{(V_i,\vf\varphi_i):i=1,\ldots,m\}$ be a finite set of parametrizations of $M$ compatibles with the orientation and such that:
+    \begin{enumerate}
+      \item $M\setminus\bigcup_{i= 1}^m\vf\varphi_i(U_i)$ is union of submanifolds of dimension less than $<k$.
+      \item $\vf\varphi_i(U_i)\cap\vf\varphi_j(U_j)=\varnothing$ $\forall i\ne j$.
+    \end{enumerate}
+    Then, given $\omega\in \Omega_\text{c}^k(M)$, we have: $$\int_M\omega=\sum_{i= 1}^m\int_{U_i}{\vf\varphi_i}^*\omega$$
+  \end{proposition}
+  \begin{theorem}[Change of variables]
+    Let $M\subseteq\RR^n$, $M'\subseteq \RR^m$ be two orientated submanifolds of dimension $k$, $\vf{F}:M\rightarrow M'$ be a orientation-preserving diffeomorphism and $\omega\in \Omega_\text{c}^k(M')$. Then: $$\int_{M'}\omega=\int_M\vf{F}^*\omega$$
+  \end{theorem}
+  \subsubsection{Stokes theorem}
+  \begin{proposition}
+    Let $\omega\in\Omega_\text{c}^{k-1}(\HH^k)$ and consider $\Fr{\HH^k}$ with the orientation induced by the one of $\HH^k$. Then:
+    \begin{enumerate}
+      \item If $\supp{\omega}\cap \Fr{\HH^k}=\varnothing$, then $\displaystyle\int_{\HH^k}\dd{\omega}=0$.
+      \item If $\supp{\omega}\cap \Fr{\HH^k}\ne\varnothing$, then $\displaystyle\int_{\HH^k}\dd{\omega}=\int_{\Fr{\HH^k}}\omega$.
+    \end{enumerate}
+  \end{proposition}
+  \begin{theorem}[Stokes theorem]
+    Let $M\subseteq\RR^n$ be an orientated submanifold of dimension $k$ and $\omega\in\Omega_\text{c}^{k-1}(M)$. Then: $$\int_M\dd{\omega}=\int_{\Fr{M}}\omega$$
+  \end{theorem}
+  \begin{corollary}
+    Let $M\subseteq\RR^n$ be an orientated submanifold of dimension $k$ with $\Fr{M}=\varnothing$ and $\omega\in\Omega_\text{c}^{k-1}(M)$. Then: $$\int_M\dd{\omega}=0$$
+  \end{corollary}
+  \begin{corollary}[Green's formula]
+    Let $D\subseteq\RR^2$ be a regular domain (manifold of dimension 2 with boundary) and $P,Q:D\rightarrow\RR$ be differentiable functions. Then: $$\iint_D\left(\pdv{Q}{x}-\pdv{P}{y}\right)\dd{x}\dd{y}=\int_{\Fr{D}}P\dd{x}+Q\dd{y}$$
+  \end{corollary}
+  \subsubsection{Vector calculus}
+  \begin{definition}
+    Let $U\subseteq\RR^3$, $f\in\mathcal{C}^\infty(U)$ and $\vf{X}\in\mathcal{X}(U)$. We define the following differential forms on $U$:
+    \begin{align*}
+      \omega_{\vf{X}}^1 & =X^1\dd{x}+X^2\dd{y}+X^3\dd{z}                                     \\
+      \omega_{\vf{X}}^2 & =X^1\dd{y}\wedge\dd{z}+X^2\dd{z}\wedge\dd{z}+X^3\dd{x}\wedge\dd{y} \\
+      \omega_{f}^3      & =f\dd{x}\wedge\dd{y}\wedge\dd{z}
+    \end{align*}
+  \end{definition}
+  \begin{lemma}
+    Let $U\subseteq\RR^3$, $f\in\mathcal{C}^\infty(U)$ and $\vf{X},\vf{Y},\vf{Z}\in\mathcal{X}(U)$. Then:
+    \begin{enumerate}
+      \item $\omega_{\vf{X}}^1(\vf{Y})=\langle\vf{X},\vf{Y}\rangle$
+      \item $\omega_{\vf{X}}^2(\vf{Y},\vf{Z})=\langle\vf{X},\vf{Y}\times\vf{Z}\rangle=\det(\vf{X},\vf{Y},\vf{Z})$
+      \item $\omega_{f}^3(\vf{X},\vf{Y},\vf{Z})=f\det(\vf{X},\vf{Y},\vf{Z})$
+    \end{enumerate}
+  \end{lemma}
+  \begin{proposition}
+    Let $U\subseteq\RR^3$, $f\in\mathcal{C}^\infty(U)$ and $\vf{X}\in\mathcal{X}(U)$. Then:
+    $$\dd{f}=\omega_{\grad{f}}^1\qquad\dd{\omega_{\vf{X}}^1}=\omega_{\rot{\vf{X}}}^2\qquad\dd{\omega_{\vf{X}}^2}=\omega_{\div{\vf{X}}}^3$$
+  \end{proposition}
+  \begin{corollary}
+    Let $U\subseteq\RR^3$, $f\in\mathcal{C}^\infty(U)$ and $\vf{X}\in\mathcal{X}(U)$. Then:
+    \begin{enumerate}
+      \item $\rot(\grad f)=0$
+      \item $\div(\rot\vf{X})=0$
+    \end{enumerate}
+  \end{corollary}
 \end{multicols}
 \end{document}

@@ -1337,11 +1337,30 @@
   \end{theorem}
   \subsubsection{Heat, wave and Laplace equations}
   \begin{definition}[Heat equation]
-    Let $u:\RR\times\RR\rightarrow\RR$ be an unknown function. The \emph{heat equation} is the pde defined by $$\pdv{u}{t}=\alpha\pdv[2]{u}{x}$$ where $\alpha\in\RR$.
+    Let $u:\RR\times\RR\rightarrow\RR$ be an unknown function. The \emph{heat equation} is the pde defined by $$\pdv{u}{t}=k\pdv[2]{u}{x}$$ where $k\in\RR$.
   \end{definition}
+  \begin{proposition}
+    Consider a bar of line $L\in\RR_{>0}$ whose temperature can be modeled by a function $u:\RR\times\RR\rightarrow\RR$, and $f:[0,L]\rightarrow\RR$ be a function. Then, the solution $u(x,t)$ to the heat equation with boundary conditions $u(x,0)=f(x)$ and $u(0,t)=u(L,t)=0$ is: $$u(x,t)=\sum_{n=1}^\infty b_n\sin\left(\frac{\pi n x}{L}\right)\exp{-\frac{n^2\pi^2k}{L^2}t}$$ where $\displaystyle b_n=\frac{1}{L}\int_{-L}^Lf(x)\sin\left(\frac{\pi n x}{L}\right)\dd{x}$.
+  \end{proposition}
   \begin{definition}[Wave equation]
-    Let $u:\RR\times\RR\rightarrow\RR$ be an unknown function. The \emph{Wave equation} is the pde defined by $$\pdv[2]{u}{t}=c\pdv[2]{u}{x}$$ where $c\in\RR$.
+    Let $u:\RR\times\RR\rightarrow\RR$ be an unknown function. The \emph{Wave equation} is the pde defined by $$\pdv[2]{u}{t}=c^2\pdv[2]{u}{x}$$ where $c\in\RR$.
   \end{definition}
+  \begin{proposition}
+    Consider a string of line $L\in\RR_{>0}$ whose position can be modeled by a function $u:\RR\times\RR\rightarrow\RR$, and $f,g:[0,L]\rightarrow\RR$ be functions. Then, the solution $u(x,t)$ to the wave equation with boundary conditions $u(x,0)=f(x)$, $u_t(x,0)=g(x)$ and $u(0,t)=u(L,t)=0$ is: $$u(x,t)=\sum_{n=1}^\infty \sin\left(\frac{\pi n x}{L}\right)\left[a_n\cos\left(\frac{\pi n c}{L}t\right)+ b_n\sin\left( \frac{\pi n c}{L}t\right)\right]$$ where:
+    \begin{align*}
+      a_n & =\frac{1}{L}\int_{-L}^Lf(x)\sin\left(\frac{\pi n x}{L}\right)\dd{x}       \\
+      b_n & =\frac{1}{\pi n c}\int_{-L}^Lg(x)\sin\left(\frac{\pi n x}{L}\right)\dd{x}
+    \end{align*}
+  \end{proposition}
+  \begin{proposition}
+    Let $u(x,t)$ be a solution to the wave equation. Then, $\exists F,G:\RR\rightarrow\RR$ such that: $$u(x,t)=F(x+ct)+G(x-ct)$$
+  \end{proposition}
+  \begin{proposition}[D'Alembert formula]
+    Let $f,g:[0,L]\rightarrow\RR$ be functions. The solution $u(x,t)$ to the wave equation with boundary conditions $u(x,0)=f(x)$ and $u_t(x,0)=g(x)$ is: $$u(x,t)=\frac{f(x-ct)+f(x+ct)}{2}+\frac{1}{2c}\int_{x-ct}^{x+ct}g(s)\dd{s}$$
+  \end{proposition}
+  \begin{proposition}
+    Let $L\in\RR_{>0}$ and $f:[0,L]\rightarrow\RR$ be a function. Then, the solution to the heat equation $u(x,t)$ with the boundary conditions $u(x,0)=f(x)$ and $u(0,t)=u(L,t)=0$ is: $$u(x,t)=\sum_{n=1}^\infty b_n\sin\left(\frac{\pi n x}{L}\right)\exp{-\frac{n^2\pi^2k}{L^2}t}$$ where $\displaystyle b_n=\frac{1}{L}\int_0^Lf(x)\sin\left(\frac{\pi n x}{L}\right)\dd{x}$.
+  \end{proposition}
   \begin{definition}[Laplace equation]
     Let $u:\RR\times\RR\rightarrow\RR$ be an unknown function. The \emph{Laplace equation} is the pde defined by $$\pdv[2]{u}{x}=0$$ where $\alpha\in\RR$.
   \end{definition}

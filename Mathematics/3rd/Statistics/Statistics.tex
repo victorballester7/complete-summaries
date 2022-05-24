@@ -511,6 +511,47 @@
     $${\hat\theta}_{(1)}^*\leq\cdots\leq{\hat\theta}_{(B)}^*$$
     The \emph{percentile confidence interval} for $\theta=T(X_1,\ldots,X_n)$ of level $\alpha$ is: $$\theta\in(\hat\theta_{\alpha/2}^*,\hat\theta_{1-\alpha/2}^*)$$
   \end{definition}
+  \subsection{Bayesian interference}
+  \subsubsection{Prior and posterior distributions}
+  \begin{definition}
+    Let $\vf{X}$ be a random vector with pdf $f(\vf{x}\mid \theta)$. As always we would like to estimate the unknown parameter $\theta\in\Theta$. Bayesian approach to statistical inference treats the parameter $\theta$ as a random variable with an appropriate \emph{prior distribution} (or simply \emph{prior}) $f(\theta)$.
+  \end{definition}
+  \begin{definition}
+    Let $\vf{X}$ be a random vector with pdf $f(\vf{x}\mid \theta)$, $f(\theta)$ be the prior of $\theta$ and $\vf{x}$ be a realization of $\vf{X}$. We define the \emph{posterior distribution} (or simply \emph{posterior}) of $\theta$ as the pdf $f(\theta\mid \vf{x})$ given by Bayes' theorem: $$f(\theta\mid\vf{x})=\frac{f(\vf{x}\mid\theta)f(\theta)}{f(\vf{x})}=\frac{f(\vf{x}\mid\theta)f(\theta)}{\int f(\vf{x}\mid\theta)f(\theta)\dd{\theta}}$$
+    If the prior and the posterior are of the same distribution type, prior and observation model are called \emph{conjugate}.
+  \end{definition}
+  \begin{definition}[Bayesian point estimates]
+    Let $\vf{X}$ be a random vector with pdf $f(\vf{x}\mid \theta)$, $f(\theta)$ be the prior of $\theta\in\Theta$ and $\vf{x}$ be a realization of $\vf{X}$.
+    \begin{itemize}
+      \item The \emph{posterior mean} $\Exp(\theta\mid\vf{x})$ is: $$\Exp(\theta\mid\vf{x})=\int_\Theta\theta f(\theta\mid\vf{x})\dd{\theta}$$
+      \item The \emph{posterior mode} $\Mod(\theta\mid\vf{x})$ is: $$\Mod(\theta\mid\vf{x})=\argmax_{\theta\in\Theta} f(\theta\mid\vf{x})$$
+      \item The \emph{posterior median} $\Med(\theta\mid\vf{x})$ is any number $a$ such that: $$\int_{-\infty}^af(\theta\mid\vf{x})\dd{\theta}\quad\text{and}\quad\int_a^{+\infty}f(\theta\mid\vf{x})\dd{\theta}$$
+    \end{itemize}
+  \end{definition}
+  \subsubsection{Properties of Bayesian point and interval estimates}
+  \begin{definition}
+    Let $\theta$ be the parameter of interest of our model. A \emph{loss function} $\ell(\hat\theta,\theta)\in\RR$ quantifies the loss encountered when estimating the true parameter $\theta$ by $\hat\theta$. Commonly used loss functions are the following ones:
+    \begin{itemize}
+      \item \emph{Quadratic loss function}: $\ell(\hat\theta,\theta)={(\hat\theta-\theta)}^2$
+      \item \emph{Linear loss function}: $\ell(\hat\theta,\theta)=\abs{\hat\theta-\theta}$
+      \item \emph{Zero-one loss function}: $$\ell_\varepsilon(\hat\theta,\theta)=
+              \begin{cases}
+                0 & \text{if }\hat\theta=\theta   \\
+                1 & \text{if }\hat\theta\ne\theta
+              \end{cases}$$
+    \end{itemize}
+  \end{definition}
+  \begin{definition}
+    Let $\vf{X}$ be a random vector with pdf $f(\vf{x}\mid \theta)$, $f(\theta)$ be the prior of $\theta\in\Theta$ and $\vf{x}$ be a realization of $\vf{X}$. A \emph{Bayes estimate} of $\theta$ with respect to a loss function $\ell(\hat\theta,\theta)$ minimizes the expected loss with respect to the posterior distribution $f(\theta\mid\vf{x})$, i.e. it minimizes: $$\Exp(\ell(\hat\theta,\theta)\mid\vf{x})=\int_\Theta\ell(\hat\theta,\theta)f(\theta\mid\vf{x})\dd{\theta}$$
+  \end{definition}
+  \begin{proposition}
+    \hfill
+    \begin{enumerate}
+      \item The posterior mean is the Bayes estimate with respect to quadratic loss.
+      \item The posterior median is the Bayes estimate with respect to linear loss.
+      \item The posterior mode is the Bayes estimate with respect to zero-one loss.
+    \end{enumerate}
+  \end{proposition}
   \subsection{Analyzing data}
   \subsubsection{Comparizing distributions}
   \begin{definition}[Q-Q plots]
