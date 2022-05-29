@@ -1346,9 +1346,9 @@
     Let $u:\RR\times\RR\rightarrow\RR$ be an unknown function. The \emph{Wave equation} is the pde defined by $$\pdv[2]{u}{t}=c^2\pdv[2]{u}{x}$$ where $c\in\RR$.
   \end{definition}
   \begin{proposition}
-    Consider a string of line $L\in\RR_{>0}$ whose position can be modeled by a function $u:\RR\times\RR\rightarrow\RR$, and $f,g:[0,L]\rightarrow\RR$ be functions. Then, the solution $u(x,t)$ to the wave equation with boundary conditions $u(x,0)=f(x)$, $u_t(x,0)=g(x)$ and $u(0,t)=u(L,t)=0$ is: $$u(x,t)=\sum_{n=1}^\infty \sin\left(\frac{\pi n x}{L}\right)\left[a_n\cos\left(\frac{\pi n c}{L}t\right)+ b_n\sin\left( \frac{\pi n c}{L}t\right)\right]$$ where:
+    Consider a string of line $L\in\RR_{>0}$ whose position can be modeled by a function $u:\RR\times\RR\rightarrow\RR$, and $f,g:[0,L]\rightarrow\RR$ be functions. Then, the solution $u(x,t)$ to the wave equation with boundary conditions $u(x,0)=f(x)$, $u_t(x,0)=g(x)$ and $u(0,t)=u(L,t)=0$ is: $$u(x,t)=\sum_{n=0}^\infty \sin\left(\frac{\pi n x}{L}\right)\left[a_n\cos\left(\frac{\pi n c}{L}t\right)+ b_n\sin\left( \frac{\pi n c}{L}t\right)\right]$$ where:
     \begin{align*}
-      a_n & =\frac{1}{L}\int_{-L}^Lf(x)\sin\left(\frac{\pi n x}{L}\right)\dd{x}       \\
+      a_n & =\frac{1}{L}\int_{-L}^Lf(x)\cos\left(\frac{\pi n x}{L}\right)\dd{x}       \\
       b_n & =\frac{1}{\pi n c}\int_{-L}^Lg(x)\sin\left(\frac{\pi n x}{L}\right)\dd{x}
     \end{align*}
   \end{proposition}
@@ -1358,11 +1358,25 @@
   \begin{proposition}[D'Alembert formula]
     Let $f,g:[0,L]\rightarrow\RR$ be functions. The solution $u(x,t)$ to the wave equation with boundary conditions $u(x,0)=f(x)$ and $u_t(x,0)=g(x)$ is: $$u(x,t)=\frac{f(x-ct)+f(x+ct)}{2}+\frac{1}{2c}\int_{x-ct}^{x+ct}g(s)\dd{s}$$
   \end{proposition}
-  \begin{proposition}
-    Let $L\in\RR_{>0}$ and $f:[0,L]\rightarrow\RR$ be a function. Then, the solution to the heat equation $u(x,t)$ with the boundary conditions $u(x,0)=f(x)$ and $u(0,t)=u(L,t)=0$ is: $$u(x,t)=\sum_{n=1}^\infty b_n\sin\left(\frac{\pi n x}{L}\right)\exp{-\frac{n^2\pi^2k}{L^2}t}$$ where $\displaystyle b_n=\frac{1}{L}\int_0^Lf(x)\sin\left(\frac{\pi n x}{L}\right)\dd{x}$.
-  \end{proposition}
   \begin{definition}[Laplace equation]
     Let $u:\RR\times\RR\rightarrow\RR$ be an unknown function. The \emph{Laplace equation} is the pde defined by $$\pdv[2]{u}{x}=0$$ where $\alpha\in\RR$.
   \end{definition}
+  \begin{proposition}
+    The Laplacian of a function $u:(0,\infty)\times[0,2\pi]\rightarrow\RR$ in polar coordinates $(r,\theta)$ is: $$\laplacian u=u_{rr}+\frac{u_r}{r}+\frac{u_{\theta\theta}}{r^2}$$
+  \end{proposition}
+  \begin{proposition}[Dirichlet problem]
+    Let $f:[0,2\pi]\rightarrow\RR$ be a continuous function such that $f(0)=f(2\pi)$. Then, there exists a continuous function $v:\overline{D(0,\rho)}\rightarrow\RR$ such that:
+    \begin{enumerate}
+      \item $v(r,0)=v(r,2\pi)$
+      \item $v\in\mathcal{C}^2(D(0,\rho)\setminus\{0\})$ and $\laplacian v=0$.
+      \item $v(\rho,\theta)=f(\theta)$
+    \end{enumerate}
+    An example of such function is:
+    $$v(r,\theta)=\sum_{n=0}^\infty \frac{r^n}{\rho^n}\left[a_n\cos\left(n\theta\right)+ b_n\sin\left(n\theta\right)\right]$$ where:
+    \begin{align*}
+      a_n & =\frac{1}{\pi}\int_{-\pi}^\pi f(\theta)\cos\left(n\theta\right)\dd{\theta} \\
+      b_n & =\frac{1}{\pi}\int_{-\pi}^\pi f(\theta)\sin\left(n\theta\right)\dd{\theta}
+    \end{align*}
+  \end{proposition}
 \end{multicols}
 \end{document}

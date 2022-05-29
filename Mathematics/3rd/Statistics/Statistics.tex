@@ -524,13 +524,26 @@
     Let $\vf{X}$ be a random vector with pdf $f(\vf{x}\mid \theta)$, $f(\theta)$ be the prior of $\theta\in\Theta$ and $\vf{x}$ be a realization of $\vf{X}$.
     \begin{itemize}
       \item The \emph{posterior mean} $\Exp(\theta\mid\vf{x})$ is: $$\Exp(\theta\mid\vf{x})=\int_\Theta\theta f(\theta\mid\vf{x})\dd{\theta}$$
-      \item The \emph{posterior mode} $\Mod(\theta\mid\vf{x})$ is: $$\Mod(\theta\mid\vf{x})=\argmax_{\theta\in\Theta} f(\theta\mid\vf{x})$$
+      \item The \emph{posterior mode} $\Mod(\theta\mid\vf{x})$ is: $$\Mod(\theta\mid\vf{x})=\argmax\{f(\theta\mid\vf{x}) : \theta\in\Theta\}$$
       \item The \emph{posterior median} $\Med(\theta\mid\vf{x})$ is any number $a$ such that: $$\int_{-\infty}^af(\theta\mid\vf{x})\dd{\theta}\quad\text{and}\quad\int_a^{+\infty}f(\theta\mid\vf{x})\dd{\theta}$$
     \end{itemize}
   \end{definition}
+  \subsubsection{Choice of the prior}
+  \begin{definition}
+    Let $\theta\in\Theta$ be the parameter of interest of our model. A prior distribution with pdf $f(\theta)$ is called \emph{flat} if $$f(\theta)\propto\const\qquad\theta\in\Theta$$
+  \end{definition}
+  \begin{definition}
+    Let $\theta\in\Theta$ be the parameter of interest of our model. A prior distribution with pdf $f(\theta)\geq 0$ is called \emph{improper} if $$\int_\Theta f(\theta)\dd{\theta}=\infty\quad\text{and}\quad\sum_{\theta\in\Theta}f(\theta)=\infty$$
+  \end{definition}
+  \begin{definition}[Jeffrey's prior]
+    Let $\vf{X}$ be a random vector with pdf $f(\vf{x}\mid \theta)$ where $\theta\in\Theta$ is the parameter of interest. \emph{Jeffrey's prior} is defined as: $$f(\theta)\propto\sqrt{I(\theta)}$$
+  \end{definition}
+  \begin{proposition}
+    Let $\vf{X}$ be a random vector with pdf $f(\vf{x}\mid \theta)$ where $\theta\in\Theta$ is the parameter of interest and $\phi=h(\theta)$ where $h$ is an injective function. If $f(\theta)\propto\sqrt{I(\theta)}$, then $f(\phi)\propto\sqrt{I(\phi)}$
+  \end{proposition}
   \subsubsection{Properties of Bayesian point and interval estimates}
   \begin{definition}
-    Let $\theta$ be the parameter of interest of our model. A \emph{loss function} $\ell(\hat\theta,\theta)\in\RR$ quantifies the loss encountered when estimating the true parameter $\theta$ by $\hat\theta$. Commonly used loss functions are the following ones:
+    Let $\theta\in\Theta$ be the parameter of interest of our model. A \emph{loss function} $\ell(\hat\theta,\theta)\in\RR$ quantifies the loss encountered when estimating the true parameter $\theta$ by $\hat\theta$. Commonly used loss functions are the following ones:
     \begin{itemize}
       \item \emph{Quadratic loss function}: $\ell(\hat\theta,\theta)={(\hat\theta-\theta)}^2$
       \item \emph{Linear loss function}: $\ell(\hat\theta,\theta)=\abs{\hat\theta-\theta}$
@@ -552,10 +565,21 @@
       \item The posterior mode is the Bayes estimate with respect to zero-one loss.
     \end{enumerate}
   \end{proposition}
+  \begin{theorem}
+    Let $\vf{X}$ be a random vector (of length $n$) with pdf $f(\vf{x}\mid \theta)$ where $\theta\in\Theta$ is the parameter of interest which has a prior $f(\theta)$ We define: $$m_0:=\argmax\{f(\theta):\theta\in\Theta\}\text{and}\quad\text{and} F_0=-\pdv[2]{(\log f(\theta))}{\theta}(m_0)$$. Then: $$\theta\mid\vf{X}\overset{\text{a}}{\sim} N(m_n,{J_n}^{-1})$$
+    where: $$J_n=J_0+J(\hat\theta_n)\quad\text{and}\quad m_n=\frac{J_0m_0+J(\hat\theta_n)\hat\theta_n}{J_n}$$
+    If $n$ is large enough, we will have: $$\theta\mid\vf{X}\overset{\text{a}}{\sim} N(\hat\theta_n,{I(\hat\theta_n)}^{-1})$$
+  \end{theorem}
+  \begin{definition}
+    Let $\vf{X}$ be a random vector with pdf $f(\vf{x}\mid \theta)$ where $\theta\in\Theta$ is the parameter of interest. A subset $C\subseteq \Theta$ is called a \emph{credible region} for $\theta$ of confidence $\gamma$ if $$\int_Cf(\theta\mid\vf{x})\dd{\theta}=\gamma$$ If $C$ is a real interval, $C$ is also called \emph{credible interval}. If the parameter is discrete, we will define a credible region of confidence $\gamma$ as: $$\sum_{\theta\in C\cap \theta}f(\theta\mid\vf{x})\geq \gamma$$
+  \end{definition}
+  \begin{definition}
+    Let $\vf{X}$ be a random vector with pdf $f(\vf{x}\mid \theta)$ where $\theta\in\Theta$ is the parameter of interest. A confidence $\gamma$ interval $C$ is called a \emph{highest posterior density} (HPC) \emph{region} if $f(\theta\mid\vf{x})\geq f(\tilde{\theta}\mid \vf{x})$ $\forall \theta\in C$ and all $\tilde{\theta}\notin C$.
+  \end{definition}
   \subsection{Analyzing data}
   \subsubsection{Comparizing distributions}
   \begin{definition}[Q-Q plots]
-    Consider a sample $x_1,\ldots,x_n$ of data and the ordered sample $x_{(1)},\ldots,x_{(n)}$. We would like to know whether the data come from a distribution $F$ or not. To do conclude something, we define $$y_{(k)}=y_k:=F^{-1}\left(\frac{k}{n+1}\right)\quad k=1,\ldots,n$$
+    Consider a sample $x_1,\ldots,x_n$ of data and the ordered sample $x_{(1)},\ldots,x_{(n)}$. We would like to know whether the data come from a distribution $F$ or not. To do conclude something, we define: $$y_{(k)}=y_k:=F^{-1}\left(\frac{k}{n+1}\right)\quad k=1,\ldots,n$$
     Then, we plot the pairs $(y_{(k)},x_{(k)})$ (or equivalently the pairs $(F(y_{(k)}),F(x_{(k)}))$). The more similar is the plot to a line, the more possible is for the data to come from the distribution $F$. This plot is called \emph{Quantile-Quantile plot} (or \emph{Q-Q plots}), $y_{(k)}$ are called the \emph{theoretical quantiles} and $x_{(k)}$ the \emph{sample quantiles}, that is, the quantile function of the discrete distribution induced by the sample (assigning probability $1/n$ to each data of the sample)\footnote{Sometimes the theoretical quantiles taken are $F^{-1}\left(\frac{k-0.5}{n}\right)$ instead of $F^{-1}\left(\frac{k}{n+1}\right)$.}.
   \end{definition}
   \begin{proposition}[Normal Q-Q plots]

@@ -1251,7 +1251,7 @@
   \begin{definition}
     Let $M\subseteq\RR^n$ be an orientated submanifold of dimension $k$, $(U,\vf\varphi(u^1,\ldots,u^k))$ be a local parametrization of $M$ compatible with the orientation and $\omega\in\Omega^k(M)$ be such that $\supp(\omega)\subset \vf\varphi(U)$ is compact. We define the \emph{integral} of $\omega$ on $M$ as: $$\int_M\omega:=\int_U\vf\varphi^*\omega=\int_U\omega\left(\pdv{\vf\varphi}{u^1},\ldots,\pdv{\vf\varphi}{u^k}\right)\dd{u^1}\cdots\dd{u^k}\footnote{It can be seen that this definition does not depend on the parametrization $(U,\vf\varphi(u^1,\ldots,u^k))$.}$$
     If $h:U\rightarrow M$ is a differentiable function and $\supp(h)\subset \vf\varphi(U)$, then we define the \emph{integral} of $h$ on $M$ as:
-    $$\int_Mh:=\int_Mh\eta_M=\int_U(h\circ\omega)\vf\varpi^*\eta_M$$
+    $$\int_Mh:=\int_Mh\eta_M=\int_U(h\circ\omega)\vf\varphi^*\eta_M$$
     where $\eta_M$ is the volume element of $M$.
   \end{definition}
   \begin{definition}
@@ -1328,6 +1328,74 @@
       \item $\rot(\grad f)=0$
       \item $\div(\rot\vf{X})=0$
     \end{enumerate}
+  \end{corollary}
+  \begin{definition}
+    Let $C\subset \RR^3$ be a compact regular curve, $U$ be an open neighbourhood of $C$ and $\vf{X}\in\mathcal{X}(U)$. We define the \emph{line intergal} (or \emph{circulation}) of $\vf{X}$ along $C$ as the integral: $$\int_C\vf{X}:=\int_C\vf{X}\cdot\dd{\ell}:=\int_C\omega_{\vf{X}}^1$$
+    where $\dd{\ell}=\eta_C$ is the length element of $C$.
+  \end{definition}
+  \begin{definition}
+    Let $S\subset\RR^3$ be a compact oriented surface, $U$ be an open neighbourhood of $S$ and $\vf{X}\in\mathcal{X}(U)$. We define the \emph{surface intergal} (or \emph{flux}) of $\vf{X}$ through $S$ as the integral: $$\int_S\vf{X}:=\int_S\vf{X}\cdot\dd{S}:=\int_S\omega_{\vf{X}}^2$$
+    where $\dd{S}=\eta_S$ is the area element of $S$.
+  \end{definition}
+  \begin{theorem}[Curl theorem]
+    Let $S\subset\RR^3$ be a compact oriented surface with boundary, $U$ be an open neighbourhood of $S$ and $\vf{X}\in\mathcal{X}(U)$. Then: $$\int_S\rot{\vf{X}}\cdot\dd{S}=\int_{\Fr{S}}\vf{X}\cdot\dd{\ell}$$
+  \end{theorem}
+  \begin{theorem}[Divergence theorem on $\RR^3$]
+    Let $D\subset\RR^3$ be a compact submanifold with boundary of dimension 3, $U$ be an open neighbourhood of $D$ and $\vf{X}\in\mathcal{X}(U)$. Then: $$\int_D\div{\vf{X}}\cdot\dd{V}=\int_{\Fr{D}}\rot{\vf{X}}\cdot\dd{S}$$
+    where $\dd{V}=\eta$ is the volume element of $D$.
+  \end{theorem}
+  \begin{theorem}[Divergence theorem]
+    Let $M\subseteq\RR^n$ be a submanifold of dimension $k$, $\vf{\nu}$ be a unit normal exterior vector field of $M$, $U$ be an open neighbourhood of $M$ and $\vf{X}\in\mathcal{X}(U)$. Then: $$\int_M\div{\vf{X}}\cdot\eta=\int_{\Fr{M}}\langle\vf{X},\vf\nu\rangle\eta_{\Fr{M}}$$
+  \end{theorem}
+  \subsection{Gau\ss-Bonnet theorem}
+  \subsubsection{Local Gau\ss-Bonnet theorem}
+  \begin{definition}
+    Let $S\subset\RR^3$ be an oriented surface and $R\subseteq S$ be a subset. We say that $R$ is a \emph{simple region} if it is homeomorphic to a closed disk and $\Fr{R}$ is a piecewise curve of class $\mathcal{C}^1$ which is closed and simple.
+  \end{definition}
+  \begin{definition}
+    Let $S\subset\RR^3$ be an oriented surface, $(V,\vf\varphi(u,v))$ be a parametrization of $S$ compatible with the orientation and $R\subseteq S$ be a simple region such that $R\subseteq\vf\varphi(V)$ and that $\Fr{R}$ is positively-oriented. Let $\vf\alpha:[0,\ell]\rightarrow\Fr{R}$ be a parametrization of $\Fr{R}$ which is differentiable on the intervals $[t_i,t_{i+1}]$, $i=0,\ldots,n$. For $i=0,\ldots,n$, let $\vf\alpha'({t_i}^-)$ and $\vf\alpha'({t_i}^+)$ denote the respective lateral derivatives of $\vf\alpha$ at the point $t_i$. The arches $\vf\alpha([t_i,t_{i+1}])$ are called \emph{edges} of $R$; the points $\vf\alpha(t_i)$, \emph{vertices} of $R$, and the angle $\theta_i\in[-\pi,\pi]$ between $\vf\alpha'({t_i}^-)$ and $\vf\alpha'({t_i}^+)$, \emph{exterior angle}.
+  \end{definition}
+  \begin{theorem}
+    Let $S\subset\RR^3$ be an oriented surface, $(V,\vf\varphi(u,v))$ be a parametrization of $S$ compatible with the orientation and $R\subseteq S$ be a simple region such that $R\subseteq\vf\varphi(V)$ and that $\Fr{R}$ is positively-oriented.  Let $\vf\alpha:[0,\ell]\rightarrow\Fr{R}$ be a parametrization of $\Fr{R}$ which is differentiable on the intervals $[t_i,t_{i+1}]$, $i=0,\ldots,n$. Suppose $\tau_i[t_i,t_{i+1}]$ is a differentiable determination of the angle between $\vf\varphi_u$ and $\vf\alpha(t)|$, $t\in[t_i,t_{i+1}]$. Then: $$\sum_{i=0}^n[\tau_i(t_{i+1})-\tau_i(t_{i})]+\sum_{i=0}^n\theta_i=\pm 2\pi$$
+    And the sign in the right hand side of the equation is positive if and only if the parametrization $\vf\alpha$ of $\Fr{R}$ is positive.
+  \end{theorem}
+  \begin{theorem}[Local Gau\ss-Bonnet theorem]\label{DG_local-GB}
+    Let $S\subset\RR^3$ be an oriented surface, $(V,\vf\varphi(u,v))$ be an orthogonal parametrization of $S$ compatible with the orientation and $R\subseteq S$ be a simple region such that $R\subseteq\vf\varphi(V)$ and that $\Fr{R}$ is positively-oriented.  Let $\vf\alpha:[0,\ell]\rightarrow\Fr{R}$ be an arclength parametrization of $\Fr{R}$ which is differentiable on the intervals $[t_i,t_{i+1}]$, $i=0,\ldots,n$. Then: $$\sum_{i=0}^n\int_{t_i}^{t_{i+1}}k_{\text{g}}(s)\dd{s}+\iint_{R}K\dd{S}+\sum_{i=0}^n\theta_i=2\pi\chi(R)=2\pi$$
+  \end{theorem}
+  \begin{definition}
+    Let $S\subset\RR^3$ be an oriented surface and $T\subseteq S$ be simple region. We say that $T$ is a \emph{triangle} if it has 3 edges.
+  \end{definition}
+  \begin{corollary}
+    Let $S\subset\RR^3$ be an oriented surface, $T\subseteq S$ be a triangle such that their edges are geodesics. Then, in the notation of \cref{DG_local-GB} we have: $$\iint_{T}K\dd{S}=\sum_{i=0}^n\phi_i-\pi$$
+    where $\phi_i=\pi-\theta_i$ are the interior angles of the triangle.
+  \end{corollary}
+  \subsubsection{Global Gau\ss-Bonnet theorem}
+  \begin{definition}
+    Let $S\subset\RR^3$ be an oriented surface and $R\subseteq S$ be a compact subset. We say that $R$ is a \emph{regular region} if $\Fr{R}$ is a finite uniron of regular curves which are closed and simple and such that they don't intersect themselves.
+  \end{definition}
+  \begin{theorem}[Global Gau\ss-Bonnet theorem]
+    Let $S\subset\RR^3$ be an oriented surface and $R\subseteq S$ be a regular region. Suppose that $C_1,\ldots,C_n$ are the connected components of $\Fr{R}$ and let $\theta_1,\ldots,\theta_m$ be the exterior angles of the curves $C_i$. Then: $$\sum_{i=0}^n\int_{C_i}k_{\text{g}}(s)\dd{s}+\iint_{R}K\dd{S}+\sum_{i=0}^m\theta_i=2\pi\chi(R)$$
+  \end{theorem}
+  \begin{corollary}
+    Let $S\subset\RR^3$ be a compact oriented surface without boundary. Then: $$\iint_{R}K\dd{S}=2\pi\chi(S)$$
+  \end{corollary}
+  \subsubsection{Poincaré-Hopf theorem}
+  \begin{definition}
+    Let $S\subset\RR^3$ be an oriented surface and $\vf{X}$ be a vector field tangent to $S$. We say that $p\in S$ is a \emph{singular point} of $\vf{X}$ if $\vf{X}_p=0$. We say that $p$ is an \emph{isolated singular point} (or and \emph{isolated singularity}) if there is a neighbourhood $V$ of $p$ such that $\vf{X}_q\ne 0$ $\forall q\in V\setminus\{p\}$.
+  \end{definition}
+  \begin{proposition}
+    Let $S\subset\RR^3$ be an oriented surface, $(V,\vf\varphi(u,v))$ be a parametrization of $S$ compatible with the orientation, $\vf{X}$ be a vector field tangent to $S$, $p$ be an isolated singular point and $R\subseteq \vf\varphi(V)$ be a simple region that contains $p$ in its interior (and no other singular point). Let $\vf\alpha:[0,\ell]\rightarrow\Fr{R}$ be a positive parametrization of $\Fr{R}$ and $\tau:[0,\ell]$ be a differentiable determination of the angle between $\vf\varphi_u$ and $\vf{X}_{\vf\alpha(t)}$. Then, $\exists n\in\ZZ$ such that: $$\int_0^\ell\dv{\tau}{t}\dd{t}=\tau(\ell)-\tau(0)=2\pi n$$
+    This value of $n$ is called \emph{index} of $p$.
+  \end{proposition}
+  \begin{theorem}[Poincaré-Hopf theorem]
+    Let $S\subset\RR^3$ be a compact oriented surface without boundary and $\vf{X}$ be a vector field tangent to $S$ with isolated singularities whose indexes are $n_i$, $i\in I$. Then: $$\sum_{i\in I}n_i=\frac{1}{2\pi}\iint_SK\dd{S}=\chi(S)$$
+  \end{theorem}
+  \begin{corollary}
+    Let $S\subset\RR^3$ be a compact oriented surface without boundary and $\vf{X}$ be a vector field tangent to $S$. Then:
+    \begin{itemize}
+      \item If $S\cong S^2$ or $S\cong S_g$ with $g\geq 2$, then $\vf{X}$ has singularities\footnote{Recall \cref{TOP_genus}}.
+      \item If $\vf{X}$ doesn't have singularities, then $S\cong T^2$.
+    \end{itemize}
   \end{corollary}
 \end{multicols}
 \end{document}
