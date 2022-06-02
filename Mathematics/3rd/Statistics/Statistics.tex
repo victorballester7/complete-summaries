@@ -248,7 +248,7 @@
   \end{corollary}
   \begin{definition}
     We define the \emph{chi-squared distribution with $n$ degrees of freedom}, denoted as ${\chi_n}^2$, as the distribution $${\chi_n}^2:=\text{Gamma}\left(\frac{n}{2},\frac{1}{2}\right)$$ which is the distribution of ${Z_1}^2+\cdots+{Z_n}^2$, where $Z_1,\ldots,Z_n\sim N(0,1)$ are \iid random variables. Its pdf is:
-    $$f_{{\chi_n}^2}(x)=\frac{1}{2^\frac{n}{2}\Gamma\left(\frac{n}{2}\right)}x^{\frac{n}{2}-1}\exp{-\frac{x}{2}}\vf{1}_{(0,\infty)}(x)$$
+    $$f_{{\chi_n}^2}(x)=\frac{1}{2^\frac{n}{2}\Gamma\left(\frac{n}{2}\right)}x^{\frac{n}{2}-1}\exp{-\frac{x}{2}}\indi{(0,\infty)}(x)$$
     We will denote by ${\chi_{n;p}}^2:=Q_{{\chi_n}^2}(p)$ the quantile of the ${\chi_n}^2$
   \end{definition}
   \begin{proposition}
@@ -574,8 +574,11 @@
     Let $\vf{X}$ be a random vector with pdf $f(\vf{x}\mid \theta)$ where $\theta\in\Theta$ is the parameter of interest. A subset $C\subseteq \Theta$ is called a \emph{credible region} for $\theta$ of confidence $\gamma$ if $$\int_Cf(\theta\mid\vf{x})\dd{\theta}=\gamma$$ If $C$ is a real interval, $C$ is also called \emph{credible interval}. If the parameter is discrete, we will define a credible region of confidence $\gamma$ as: $$\sum_{\theta\in C\cap \theta}f(\theta\mid\vf{x})\geq \gamma$$
   \end{definition}
   \begin{definition}
-    Let $\vf{X}$ be a random vector with pdf $f(\vf{x}\mid \theta)$ where $\theta\in\Theta$ is the parameter of interest. A confidence $\gamma$ interval $C$ is called a \emph{highest posterior density} (HPC) \emph{region} if $f(\theta\mid\vf{x})\geq f(\tilde{\theta}\mid \vf{x})$ $\forall \theta\in C$ and all $\tilde{\theta}\notin C$.
+    Let $\vf{X}$ be a random vector with pdf $f(\vf{x}\mid \theta)$ where $\theta\in\Theta$ is the parameter of interest. A $\gamma$ credible region $C$ is called a \emph{highest posterior density} (HPC) \emph{region} if $f(\theta\mid\vf{x})\geq f(\tilde{\theta}\mid \vf{x})$ $\forall \theta\in C$ and all $\tilde{\theta}\notin C$.
   \end{definition}
+  \begin{proposition}
+    Let $\vf{X}$ be a random vector with pdf $f(\vf{x}\mid \theta)$ where $\theta\in\Theta$ is the parameter of interest whose posterior is $f(\theta\mid\vf{x})$. Then, among all $\gamma$ credible region $C$, the HPC minimizes the expected loss for the function $\ell(C,\theta)=\abs{C}-\indi{C}(\theta)$.
+  \end{proposition}
   \subsection{Analyzing data}
   \subsubsection{Comparizing distributions}
   \begin{definition}[Q-Q plots]

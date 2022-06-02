@@ -1088,6 +1088,18 @@
             \end{enumerate}
     \end{enumerate}
   \end{method}
+  \begin{theorem}
+    Let $f\in\CC(z)$ be a rational function such that $\lim_{\abs{z}\to\infty}f(z)=0$ and $P$ be the set of poles of $f$. Then, if $P\cap\ZZ=\varnothing$,:
+    \begin{gather*}
+      \lim_{N\to\infty}\sum_{n=-N}^Nf(n)         =-\sum_{p\in P}\Res(\pi\cot(\pi z)f(z),p) \\
+      \lim_{N\to\infty}\sum_{n=-N}^N{(-1)}^nf(n) =-\sum_{p\in P}\Res(\pi\csc(\pi z)f(z),p)
+    \end{gather*}
+    If $P\cap(\ZZ+\frac{1}{2})=\varnothing$, then:
+    \begin{gather*}
+      \lim_{N\to\infty}\sum_{n=-N}^Nf\left(n+\frac{1}{2}\right)         =-\sum_{p\in P}\Res(\pi\cot(\pi z)f(z),p) \\
+      \lim_{N\to\infty}\sum_{n=-N}^N{(-1)}^nf\left(n+\frac{1}{2}\right) =-\sum_{p\in P}\Res(\pi\csc(\pi z)f(z),p)
+    \end{gather*}
+  \end{theorem}
   \begin{theorem}[Casorati-Weierstra\ss\space theorem]
     Let $a\in\CC$, $r\in\RR_{>0}$ and $f\in\mathcal{H}(D(a,r)\setminus\{a\})$ be such that it has an essential singularity at $a$. Then, $\forall \delta>0$: $$\overline{f(D(a,\delta)\setminus\{a\})}=\CC$$
   \end{theorem}
@@ -1113,6 +1125,12 @@
       \frac{1}{2\pi\ii}\int_{\Gamma}g(z)\frac{f'(z)}{f(z)-w}\dd{z}=\\=\sum_{z\in Z(f-w)}g(z)\Ind(\Gamma,z)-\sum_{p\in P(f-w)}g(p)\Ind(\Gamma,p)
     \end{multline*}
   \end{theorem}
+  \begin{corollary}
+    Let $U\subseteq \CC$ be an open set $w\in U$, $f\in\mathfrak{m}(U)$ be not identically $w$ and $g\in\mathcal{H}(U)$. Let $\gamma\homoleg{U} 0$ be a piecewise curve defined on $[a,b]$ of class $\mathcal{C}^1$ such that $\gamma^*\subset U\setminus (Z(f-w)\cup P(f-w))$. Then:
+    \begin{multline*}
+      \ii\left[\arg(f(\gamma(b))-w)-\arg(f(\gamma(a))-w)\right]=\\=\sum_{z\in Z(f-w)}\Ind(\gamma,z)-\sum_{p\in P(f-w)}\Ind(\gamma,p)
+    \end{multline*}
+  \end{corollary}
   \begin{corollary}
     Let $U\subseteq \CC$ be an open set $w\in U$, $f\in\mathfrak{m}(U)$ be not identically $w$ and $\gamma\homoleg{U} 0$ be a piecewise curve of class $\mathcal{C}^1$ such that $\Gamma^*\subset U\setminus (Z(f-w)\cup P(f-w))$. Then:
     \begin{equation*}
@@ -1292,12 +1310,15 @@
     $$d(f,g):=\sum_{n=1}^\infty\frac{1}{2^n}\min\{d_n(f,g),1\}\qquad\forall f,g\in\mathcal{C}(U,\CC)$$ Then:
     \begin{enumerate}
       \item $d$ is a distance.
-      \item If $(f_n),f\in\mathcal{C}(U,\CC)$, then: $$d(f_n,f)\rightarrow 0\iff f_n\rightarrow f\text{ uniformly over compact sets}$$
+      \item If $(f_n),f\in\mathcal{C}(U,\CC)$, then:
+            \begin{multline*}
+              \lim_{n\to\infty}d(f_n,f)= 0\iff (f_n)\text{ converges}\\ \text{uniformly to }f\text{ over compact sets}
+            \end{multline*}
       \item $(\mathcal{C}(U,\CC),d)$ is complete.
     \end{enumerate}
   \end{theorem}
   \begin{proposition}
-    Consider the metric $(\mathcal{C}(U,\CC),d)$ defined above. Then, $\mathcal{H}(U)\subset\mathcal{C}(U,\CC)$ is closed
+    Consider the metric $(\mathcal{C}(U,\CC),d)$ defined above. Then, $\mathcal{H}(U)\subset\mathcal{C}(U,\CC)$ is closed.
   \end{proposition}
   \begin{definition}
     Let $\mathcal{F}\subseteq \mathcal{C}(U,\CC)$. We say that $\mathcal{F}$ is \emph{relatively compact} (or \emph{normal}) if for any sequence $(f_n)\in\mathcal{F}$, $(f_n)$ has a convergent subsequence. Equivalently $\mathcal{F}$ is relatively compact if $\overline{\mathcal{F}}$ is compact.
@@ -1310,6 +1331,26 @@
     \begin{enumerate}
       \item $\forall z\in U$, $\bigcup_{f\in\mathcal{F}}\{f(z)\}$ is relatively compact.
       \item $\mathcal{F}$ is equicontinuous at $z$ $\forall z\in U$.
+    \end{enumerate}
+  \end{theorem}
+  \begin{definition}
+    Let $\mathcal{F}\subseteq \mathcal{C}(U,\CC)$. We say that $\mathcal{F}$ is \emph{locally bounded} if $\forall a\in U$ $\exists r>0$ and $M>0$ such that $\abs{f(z)}\leq M$ $\forall z\in \overline{D(a,r)}$ $\forall f\in\mathcal{F}$.
+  \end{definition}
+  \begin{definition}
+    Let $\mathcal{F}\subseteq \mathcal{C}(U,\CC)$. We say that $\mathcal{F}$ is \emph{bounded by compact sets} if for each compact set $K\subset U$ $\exists M_K>0$ such that $\forall z\in K$ and all $f\in\mathcal{F}$ we have $\abs{f(z)}\leq M_K$.
+  \end{definition}
+  \begin{lemma}
+    Let $\mathcal{F}\subseteq \mathcal{C}(U,\CC)$. $\mathcal{F}$ is locally bounded $\iff \mathcal{F}$ is bounded by compact sets.
+  \end{lemma}
+  \begin{theorem}[Montel's theorem]
+    Let $\mathcal{F}\subseteq \mathcal{C}(U,\CC)$. $\mathcal{F}$ is normal $\iff \mathcal{F}$ is locally bounded.
+  \end{theorem}
+  \begin{theorem}[Riemann conformal representation theorem]
+    Let $U\subset \CC$ be a non-empty (and $U\ne\CC$) simply connected domain and $a\in U$. Then, $\exists!f\in\mathcal{H}(U)$ such that:
+    \begin{enumerate}
+      \item $f(a)=0$, $f'(a)>0$.
+      \item $f$ is injective.
+      \item $f(U)=\DD$.
     \end{enumerate}
   \end{theorem}
 \end{multicols}

@@ -231,7 +231,7 @@
   \end{proposition}
   \begin{definition}
     Let $(E,\mathcal{E},\mu)$ be a measurable space and $f:E\rightarrow\RR$ be a measurable function. We say that $f$ is \emph{Lebesgue integrable} with respect to $\mu$ if: $$\int_E|f|\dd\mu<\infty$$
-    Moreover if $G\in\mathcal{E}$, we define: $$\int_Gf\dd\mu:=\int_Ef\vf{1}_G\dd\mu$$
+    Moreover if $G\in\mathcal{E}$, we define: $$\int_Gf\dd\mu:=\int_Ef\indi{G}\dd\mu$$
   \end{definition}
   \begin{proposition}
     Consider the measurable space $(\RR^n,\mathcal{L}_n,m_n)$, where $m_n$ is the volume in $\RR^n$. Let $f:\RR^n\rightarrow\RR$ be a Riemann integrable function satisfying: $$\int_{\RR^n}|f(x_1,\ldots,x_n)|\dd{x_1}\cdots\dd{x_n}<\infty$$
@@ -435,12 +435,12 @@
     \end{enumerate}
   \end{proposition}
   \begin{definition}[Continuous uniform distribution]
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space. We say that an absolutely continuous random variable $X$ follows a \emph{continuous uniform distribution} on $(a,b)$ (also $[a,b]$), and we denoted it by $X\sim U(a,b)$, if $X$ has the pdf $$f_X(x)=\frac{1}{b-a}\vf{1}_{(a,b)}(x)$$ where $\vf{1}_{(a,b)}$ is the indicator function. Therefore, its cdf is:
-    $$F_X(x)=\frac{x-a}{b-a}\vf{1}_{(a,b)}(x)+\vf{1}_{[b,\infty)}(x)$$
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space. We say that an absolutely continuous random variable $X$ follows a \emph{continuous uniform distribution} on $(a,b)$ (also $[a,b]$), and we denoted it by $X\sim U(a,b)$, if $X$ has the pdf $$f_X(x)=\frac{1}{b-a}\indi{(a,b)}(x)$$ where $\indi{(a,b)}$ is the indicator function. Therefore, its cdf is:
+    $$F_X(x)=\frac{x-a}{b-a}\indi{(a,b)}(x)+\indi{[b,\infty)}(x)$$
   \end{definition}
   \begin{definition}[Exponential distribution]
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space. We say that an absolutely continuous random variable $X$ follows an \emph{exponential distribution} of parameter $\lambda>0$, and we denoted it by $X\sim \text{Exp}(\lambda)$, if $X$ has the pdf: $$f_X(x)=\lambda\exp{-\lambda x}\vf{1}_{(0,\infty)}$$ Furthermore, its cdf is:
-    $$F_X(x)=(1-\exp{-\lambda x})\vf{1}_{(0,\infty)}(x)$$
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space. We say that an absolutely continuous random variable $X$ follows an \emph{exponential distribution} of parameter $\lambda>0$, and we denoted it by $X\sim \text{Exp}(\lambda)$, if $X$ has the pdf: $$f_X(x)=\lambda\exp{-\lambda x}\indi{(0,\infty)}$$ Furthermore, its cdf is:
+    $$F_X(x)=(1-\exp{-\lambda x})\indi{(0,\infty)}(x)$$
   \end{definition}
   \begin{definition}[Continuous memorylessness property]
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$ be an absolutely continuous random variable such that $\Prob(X >s)>0$ $\forall s\in\RR_{\geq 0}$. The distribution of $X$ is \emph{memoryless} if $\forall s,t\in\RR_{\geq 0}$, we have: $$\Prob(X>s+t\mid X >s)=\Prob(X>t)$$
@@ -465,7 +465,7 @@
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X\sim N(\mu,\sigma^2)$ and $Z\sim N(0,1)$ be absolutely continuous random variables. Then: $$\mu+\sigma Z\overset{\text{d}}{=} X$$ Therefore, $\forall x\in\RR$ we have: $$\Prob(X\leq x)=\Prob\left(Z\leq\frac{x-\mu}{\sigma}\right)$$ In this case, $Z$ is called the \emph{standardized form} of $X$.
   \end{proposition}
   \begin{definition}[Gamma distribution]
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space. We say that an absolutely continuous random variable $X$ follows a \emph{gamma distribution} of parameters $\alpha,\beta\in\RR_{>0}$, and we denoted it by $X\sim \text{Gamma}(\alpha,\beta)$, if $X$ has the pdf: $$f_X(x)=\frac{\beta^\alpha}{\Gamma(\alpha)}x^{\alpha-1}\exp{-\beta x}\vf{1}_{(0,\infty)}(x)$$
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space. We say that an absolutely continuous random variable $X$ follows a \emph{gamma distribution} of parameters $\alpha,\beta\in\RR_{>0}$, and we denoted it by $X\sim \text{Gamma}(\alpha,\beta)$, if $X$ has the pdf: $$f_X(x)=\frac{\beta^\alpha}{\Gamma(\alpha)}x^{\alpha-1}\exp{-\beta x}\indi{(0,\infty)}(x)$$
     The parameter $\alpha$ is called \emph{shape}; $\beta$, \emph{rate}, and $1/\beta$, \emph{scale}.
   \end{definition}
   \begin{definition}
@@ -475,7 +475,7 @@
     For all $a,b\in\RR_{>0}$, we have: $$\text{B}(a,b)=\frac{\Gamma(a)\Gamma(b)}{\Gamma(a+b)}$$
   \end{proposition}
   \begin{definition}[Beta distribution]
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space. We say that an absolutely continuous random variable $X$ follows a \emph{beta distribution} of parameters $a,b\in\RR_{>0}$, and we denoted it by $X\sim \text{Beta}(a,b)$, if $X$ has the pdf: $$f_X(x)=\frac{1}{\text{B}(a,b)}x^{a-1}{(1-x)}^{b-1}\vf{1}_{(0,1)}(x)$$
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space. We say that an absolutely continuous random variable $X$ follows a \emph{beta distribution} of parameters $a,b\in\RR_{>0}$, and we denoted it by $X\sim \text{Beta}(a,b)$, if $X$ has the pdf: $$f_X(x)=\frac{1}{\text{B}(a,b)}x^{a-1}{(1-x)}^{b-1}\indi{(0,1)}(x)$$
   \end{definition}
   \begin{definition}[Cauchy distribution]
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $\mu\in\RR$ and $\sigma\in\RR_{>0}$. We say that an absolutely continuous random variable $X$ follows a \emph{Cauchy distribution} of parameters $x_0\in\RR$ and $\gamma\in\RR_{>0}$, and we denoted it by $X\sim \text{C}(x_0,\gamma)$, if $X$ has the pdf: $$f_X(x)=\frac{1}{\pi\gamma\left[1+{\left(\frac{x-x_0}{\gamma}\right)}^2\right]}$$
@@ -495,10 +495,10 @@
   \end{theorem}
   \subsubsection{Transformations of random variables}
   \begin{proposition}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $X$ be an absolutely continuous random variable with pdf $f_X$ and $U$, $V$ be open sets such that $\Prob(X\in U)=1$. Let $h:U\rightarrow V$ be a diffeomorphism of class $\mathcal{C}^1$. Then, $Y:=h(X)$ is also an absolutely continuous random variable and: $$f_Y(y)=f_X(h^{-1}(y))|(h^{-1})'(y)|\vf{1}_V(y)$$
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $X$ be an absolutely continuous random variable with pdf $f_X$ and $U$, $V$ be open sets such that $\Prob(X\in U)=1$. Let $h:U\rightarrow V$ be a diffeomorphism of class $\mathcal{C}^1$. Then, $Y:=h(X)$ is also an absolutely continuous random variable and: $$f_Y(y)=f_X(h^{-1}(y))|(h^{-1})'(y)|\indi{V}(y)$$
   \end{proposition}
   \begin{proposition}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $X$ be an absolutely continuous random variable with pdf $f_X$, $U_1,\ldots, U_k$ be pairwise disjoint open intervals such that $\Prob(X\in U_1\sqcup \cdots\sqcup U_k)=1$. Let $h:U_1\sqcup \cdots\sqcup U_k\rightarrow \RR$ and denote $h_i=h|_{U_i}$. Then, if $h_i:U_i\rightarrow V_i$ are  diffeomorphisms of class $\mathcal{C}^1$ for $i=1,\ldots,k$, then $Y:=h(X)$ is also an absolutely continuous random variable and: $$f_Y(y)=\sum_{i=1}^kf_X({h_i}^{-1}(y))|({h_i}^{-1})'(y)|\vf{1}_{V_i}(y)$$
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $X$ be an absolutely continuous random variable with pdf $f_X$, $U_1,\ldots, U_k$ be pairwise disjoint open intervals such that $\Prob(X\in U_1\sqcup \cdots\sqcup U_k)=1$. Let $h:U_1\sqcup \cdots\sqcup U_k\rightarrow \RR$ and denote $h_i=h|_{U_i}$. Then, if $h_i:U_i\rightarrow V_i$ are  diffeomorphisms of class $\mathcal{C}^1$ for $i=1,\ldots,k$, then $Y:=h(X)$ is also an absolutely continuous random variable and: $$f_Y(y)=\sum_{i=1}^kf_X({h_i}^{-1}(y))|({h_i}^{-1})'(y)|\indi{V_i}(y)$$
   \end{proposition}
   \subsubsection{Random vectors}
   \begin{definition}
@@ -562,7 +562,7 @@
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $\vf{X}=(X_1,\ldots,X_n)$ be an absolutely continuous random vector. We say that $\vf{X}$ follows a \emph{multivariate normal distribution}, denoted by $\vf{X}\sim N(0,1)$, if $\vf{X}$ has a joint pdf: $$f_{\vf{X}}(x_1,\ldots,x_n)=\frac{1}{{(2\pi)}^{\frac{n}{2}}}\exp{-\frac{{x_1}^2+\cdots+{x_n}^2}{2}}$$ Moreover, $X_i\sim N(0,1)$ for $i=1,\ldots,n$.
   \end{definition}
   \begin{definition}[Multivariate uniform distribution]
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $\vf{X}=(X_1,\ldots,X_n)$ be an absolutely continuous random vector. We say that $\vf{X}$ has a \emph{multivariate uniform distribution} over $B\in\mathcal{B}(\RR^n)$, with $\vol(B)<\infty$, if it has joint pdf: $$f_{\vf{X}}(x)=\frac{1}{\vol(B)}\vf{1}_B(x)$$ If $\vf{X}=(X_1,\ldots,X_r)$ follows a multivariate uniform, we will write $\vf{X}\sim U(B)$.
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $\vf{X}=(X_1,\ldots,X_n)$ be an absolutely continuous random vector. We say that $\vf{X}$ has a \emph{multivariate uniform distribution} over $B\in\mathcal{B}(\RR^n)$, with $\vol(B)<\infty$, if it has joint pdf: $$f_{\vf{X}}(x)=\frac{1}{\vol(B)}\indi{B}(x)$$ If $\vf{X}=(X_1,\ldots,X_r)$ follows a multivariate uniform, we will write $\vf{X}\sim U(B)$.
   \end{definition}
   \begin{definition}
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $\vf{X}=(X_1,\ldots,X_n)$ be a random vector. The \emph{multivariate cumulative distribution function} (\emph{multivariate cdf}) of $\vf{X}$ is defined as: $$F_{\vf{X}}(x_1,\ldots,x_n):=\Prob(X_1\leq x_1,\ldots,X_n\leq x_n)$$ for $(x_1,\ldots,x_n)\in\RR^n$.
@@ -605,7 +605,7 @@
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $\vf{X}=(X_1,\ldots,X_n)$ be a random vector and $\vf{h}:\RR^n\rightarrow\RR^m$ be a Borel measurable function. Then, $\vf{Y}:=\vf{h}(\vf{X})$ is also a random vector.
   \end{proposition}
   \begin{proposition}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $U,V\subseteq\RR^n$ be open sets and $\vf{X}=(X_1,\ldots,X_n)$ be an absolutely continuous random vector with joint pdf $f_{\vf{X}}$ such that $\Prob(\vf{X}\in U)=1$. Let $\vf{h}:U\rightarrow V$ be a diffeomorphism of class $\mathcal{C}^1$. Then, $\vf{Y}:=\vf{h}(\vf{X})$ is absolutely continuous and $$f_{\vf{Y}}(y)=f_{\vf{X}}(\vf{h}^{-1}(y))|J\vf{h}^{-1}(y)|\vf{1}_V(y)$$
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $U,V\subseteq\RR^n$ be open sets and $\vf{X}=(X_1,\ldots,X_n)$ be an absolutely continuous random vector with joint pdf $f_{\vf{X}}$ such that $\Prob(\vf{X}\in U)=1$. Let $\vf{h}:U\rightarrow V$ be a diffeomorphism of class $\mathcal{C}^1$. Then, $\vf{Y}:=\vf{h}(\vf{X})$ is absolutely continuous and $$f_{\vf{Y}}(y)=f_{\vf{X}}(\vf{h}^{-1}(y))|J\vf{h}^{-1}(y)|\indi{V}(y)$$
     where $J\vf{h}^{-1}(y)=\det\vf{D}\vf{h}^{-1}(y)$ is the Jacobian of $\vf{h}^{-1}$ evaluated at $y$.
   \end{proposition}
   \begin{definition}[Multivariate normal distribution]
@@ -658,11 +658,11 @@
     A \emph{simple random variable} is a random variable that takes a finite or countable number of values\footnote{Note that a simple random variable is a particular case of a discrete random variable.}.
   \end{definition}
   \begin{definition}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$ be a simple random variable whose outcomes are $\{x_i:i\in I\}$\footnote{Note that we can write $X$ as $X=\sum_{i\in I}x_i\vf{1}_{\{X=x_i\}}$, where the events $\{X=x_i\}$, $i\in I$, form a partition of $\Omega$.}, where $I$ is a finite or countable index set. We say that $X$ has \emph{finite expectation} or that it is \emph{integrable} if: $$\sum_{i\in I}|x_i|\Prob(X=x_i)<\infty$$
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$ be a simple random variable whose outcomes are $\{x_i:i\in I\}$\footnote{Note that we can write $X$ as $X=\sum_{i\in I}x_i\indi{\{X=x_i\}}$, where the events $\{X=x_i\}$, $i\in I$, form a partition of $\Omega$.}, where $I$ is a finite or countable index set. We say that $X$ has \emph{finite expectation} or that it is \emph{integrable} if: $$\sum_{i\in I}|x_i|\Prob(X=x_i)<\infty$$
     If so, we define the \emph{expectation} of $X$ as: $$\Exp_\text{s}(X):=\sum_{i\in I}x_i\Prob(X=x_i)$$ If the series of above is not absolutely convergent, we will say that $X$ is \emph{not integrable}.
   \end{definition}
   \begin{lemma}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and suppose that a random variable $X$ can be expressed as $$X=\sum_{n=1}^Na_n\vf{1}_{A_n}$$ where $N\in\NN\cup\{\infty\}$, $\{A_n:n=1,\ldots,N\}\subseteq\mathcal{A}$ is a partition of $\Omega$ and $\{a_n:n=1,\ldots,N\}$ are not necessarily distinct values. Then, $X$ has finite expectation if and only if $$\sum_{n=1}^N|a_n|\Prob(A_n)<\infty$$ and in that case, $\Exp_\text{s}(X)=\sum_{n=1}^Na_n\Prob(A_n)$.
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and suppose that a random variable $X$ can be expressed as $$X=\sum_{n=1}^Na_n\indi{A_n}$$ where $N\in\NN\cup\{\infty\}$, $\{A_n:n=1,\ldots,N\}\subseteq\mathcal{A}$ is a partition of $\Omega$ and $\{a_n:n=1,\ldots,N\}$ are not necessarily distinct values. Then, $X$ has finite expectation if and only if $$\sum_{n=1}^N|a_n|\Prob(A_n)<\infty$$ and in that case, $\Exp_\text{s}(X)=\sum_{n=1}^Na_n\Prob(A_n)$.
   \end{lemma}
   \begin{proposition}
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$, $Y$ be simple and integrable random variables. Then, $X+Y$ is also a simple and integrable random variable and: $$\Exp_\text{s}(X+Y)=\Exp_\text{s}(X)+\Exp_\text{s}(Y)$$
@@ -671,10 +671,10 @@
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $X$ be a simple and integrable random variable and $c\in\RR$. Then, $cX$ is also a simple and integrable random variable and: $$\Exp_\text{s}(cX)=c\Exp_\text{s}(X)$$
   \end{proposition}
   \begin{proposition}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $X$ be a simple random variable such that $|X|\leq C$ for some $C\in\RR$. Then, $X$ is integrable and: $$|\Exp_\text{s}(X)|\leq C$$
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $X$ be a simple random variable such that $|X|\leq C$ for some $C\in\RR$. Then, $X$ is integrable and: $$\abs{\Exp_\text{s}(X)}\leq C$$
   \end{proposition}
   \begin{proposition}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$ be a random variable. For all $n\in\NN$ and all $\omega\in\Omega$ $\exists! k\in\ZZ$ such that $X(\omega)\in\left[\frac{k}{2^n},\frac{k+1}{2^n}\right)$. We define $X_n(\omega):=\frac{k}{2^n}$. Then, $$X_n=\sum_{k\in\ZZ}\frac{k}{2^n}\vf{1}_{\left\{\frac{k}{2^n}\leq X< \frac{k+1}{2^n}\right\}}$$ is a simple random variable such that $X_n(\omega)\leq X(\omega)$ $\forall n\in\NN$ and $\omega\in \Omega$\footnote{The partition $\displaystyle\RR=\bigsqcup_{k\in\ZZ}\left[\frac{k}{2^n},\frac{k+1}{2^n}\right)$ is called \emph{dyadic partition of order $n$}.}.
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$ be a random variable. For all $n\in\NN$ and all $\omega\in\Omega$ $\exists! k\in\ZZ$ such that $X(\omega)\in\left[\frac{k}{2^n},\frac{k+1}{2^n}\right)$. We define $X_n(\omega):=\frac{k}{2^n}$. Then, $$X_n=\sum_{k\in\ZZ}\frac{k}{2^n}\indi{\left\{\frac{k}{2^n}\leq X< \frac{k+1}{2^n}\right\}}$$ is a simple random variable such that $X_n(\omega)\leq X(\omega)$ $\forall n\in\NN$ and $\omega\in \Omega$\footnote{The partition $\displaystyle\RR=\bigsqcup_{k\in\ZZ}\left[\frac{k}{2^n},\frac{k+1}{2^n}\right)$ is called \emph{dyadic partition of order $n$}.}.
   \end{proposition}
   \subsubsection{Extension of the expectation}
   \begin{proposition}
@@ -702,12 +702,12 @@
       \item If $m\leq X\leq M$ for some $m, M\in\RR$, then $X$ is integrable and $$m\leq \Exp(X)\leq M$$
       \item \emph{Comparison test}: If $X$ is integrable and $|Y|\leq X$, then $Y$ is integrable.
       \item $X$ is integrable $\iff |X|$ is integrable.
-      \item If $\Prob(A)=0$ for some $A\in\mathcal{A}$, then for any random variable $X$, we have that $X\vf{1}_A$ is integrable and $\Exp(X\vf{1}_A)=0$.
+      \item If $\Prob(A)=0$ for some $A\in\mathcal{A}$, then for any random variable $X$, we have that $X\indi{A}$ is integrable and $\Exp(X\indi{A})=0$.
       \item If $X\overset{\text{a.s.}}{=}Y$ and one of them is integrable, then so will be the other one and, furthermore, $\Exp(X)=\Exp(Y)$.
     \end{enumerate}
   \end{proposition}
   \begin{corollary}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $X$ be a random variable and $A\in\mathcal{A}$. Then, $\Exp(\vf{1}_{\{X\in A\}})=\Prob(X\in A)$.
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $X$ be a random variable and $A\in\mathcal{A}$. Then, $\Exp(\indi{\{X\in A\}})=\Prob(X\in A)$.
   \end{corollary}
   \begin{proposition}
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$ be a random variable whose outcomes are in $\NN\cup\{0\}$. Then: $$\Exp(X)=\sum_{k=0}^\infty\Prob(X>k)$$
