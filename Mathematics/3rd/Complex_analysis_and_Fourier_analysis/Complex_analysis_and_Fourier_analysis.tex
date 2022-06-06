@@ -625,7 +625,7 @@
     \begin{enumerate}
       \item $\displaystyle\int_a^b(f+g)(t)\dd{t}=\int_a^bf(t)\dd{t}+\int_a^bg(t)\dd{t}$
       \item $\displaystyle\int_a^b(\alpha f)(t)\dd{t}=\alpha \int_a^bf(t)\dd{t}$
-      \item $\displaystyle\left|\int_a^bf(t)\dd{t}\right|\leq\int_a^b|f(t)|\dd{t}$
+      \item $\displaystyle\abs{\int_a^bf(t)\dd{t}}\leq\int_a^b|f(t)|\dd{t}$
       \item $\displaystyle \int_b^af(t)\dd{t}=-\int_a^bf(t)\dd{t}$
     \end{enumerate}
   \end{proposition}
@@ -637,7 +637,7 @@
     Let $\gamma_1:[a,b]\rightarrow\CC$, $\gamma_2:[c,d]\rightarrow\CC$ be two curves\footnote{Recall \cref{DG_curves}.} of class $\mathcal{C}^1$ such that $\gamma_1(t_1)=\gamma_2(t_2)=z_0\in\CC$ for some $t_1\in[a,b]$ and $t_2\in[c,d]$. Suppose that ${\gamma_1}'(t_1),{\gamma_2}'(t_2)\ne 0$. We define the angle between $\gamma_1$ and $\gamma_2$ at $z_0$ as $$\arg{\gamma_1}'(t_1)-\arg{\gamma_2}'(t_2)$$ which does not depend on the determination of the argument.
   \end{definition}
   \begin{definition}
-    Let $\gamma:[a,b]\rightarrow U$ be a piecewise path of class $\mathcal{C}^1$. We define the inverse path $\gamma^-:[a,b]\rightarrow\CC$ as $\gamma^-(t)=\gamma(a+b-t)$
+    Let $\gamma:[a,b]\rightarrow U$ be a piecewise path of class $\mathcal{C}^1$. We define the inverse path $\gamma^-:[a,b]\rightarrow\CC$ as $\gamma^-(t)=\gamma(a+b-t)$.
   \end{definition}
   \begin{definition}
     Let $\gamma:[a,b]\rightarrow U$ be an injective curve. We say that $\gamma$ is a triangular path if $\gamma^*=\Fr T$, where $T\subset\CC$ is a triangle. The domain delimited by $T$ is denoted by $\overline{D(\gamma)}:=\overline{T}$.
@@ -922,6 +922,8 @@
   \begin{corollary}
     Let $U\subseteq\CC$ be an open connected set, $f\in\mathcal{H}(U)$, $w\in \CC$ and $\Gamma\homoleg{U} 0$ be a piecewise cycle of class $\mathcal{C}^1$ such that $\Gamma^*\cap f^{-1}(w)=\varnothing$. Then:
     $$\frac{1}{2\pi\ii}\int_{\Gamma}\frac{f'(z)}{f(z)-w}\dd{z}=\sum\Ind(\Gamma,f^{-1}(w))$$
+    Moreover we have that:
+    $$\Ind(f\circ\Gamma,w)=\sum\Ind(\Gamma,f^{-1}(w))$$
   \end{corollary}
   \subsubsection{Local behaviour and open mapping theorems}
   \begin{theorem}[Local behaviour of a holomorphic function]
@@ -937,7 +939,7 @@
     Let $U\subseteq\CC$ be an open set and $f\in\mathcal{H}(U)$ be an injective function. Then, $V:=f(U)\subseteq \CC$ is open and $\forall z\in U$, $f'(z)\ne 0$, $f^{-1}\in \mathcal{H}(V)$ and: $${(f^{-1})}'(w)=\frac{1}{f'(f^{-1}(w))}\quad\forall w\in V$$
   \end{corollary}
   \begin{theorem}
-    Let $a\in\CC$, $r\in\RR_{>0}$ and $f\in\mathcal{H}(D(a,r))$ be a non constant function. Suppose $f(a)=b\in \CC$ with multiplicity $m>1$, that is, we can write $f(z)-b={(z-a)}^mg(z)$ with $m>1$ and $g\in\mathcal{H}(D(a,r))$ with $g(a)\ne 0$. Then, there exists $\varepsilon>0$ and $\delta>0$ such that $g(D(a,\varepsilon))\subset D(g(a),\abs{g(a)})$ and there exists $h\in \mathcal{H}(D(a,r))$ such that $h^m=g$ and $f(z)=b+{F(z)}^m$, where $F(z)=(z-a)h(z)$ and $F'(a)\ne 0$.
+    Let $a\in\CC$, $r\in\RR_{>0}$ and $f\in\mathcal{H}(D(a,r))$ be a non constant function. Suppose $f(a)=b\in \CC$ with multiplicity $m>1$, that is, we can write $f(z)-b={(z-a)}^mg(z)$ with $m>1$ and $g\in\mathcal{H}(D(a,r))$ with $g(a)\ne 0$. Then, there exists $\varepsilon>0$ and $\delta>0$ such that $g(D(a,\varepsilon))\subset D(g(a),\abs{g(a)})$ and so $\exists h\in \mathcal{H}(D(a,r))$ such that $h^m=g$ and $f(z)=b+{F(z)}^m$, where $F(z)=(z-a)h(z)$ and $F'(a)\ne 0$.
   \end{theorem}
   \begin{definition}
     Let $U\subseteq\CC$ be an open connected set. We say that $U$ is \emph{simply connected} if $\CC_\infty\setminus U$ is connected.
@@ -1143,6 +1145,10 @@
   \begin{definition}
     Let $\alpha\in\CC^*$ and $n\in\NN$. We define the number $\binom{\alpha}{n}$ as: $$\binom{\alpha}{n}=\frac{\alpha(\alpha-1)\cdots(\alpha-n+1)}{n!}$$ For the case $n=0$, we define $\binom{\alpha}{0}:=1$.
   \end{definition}
+  \begin{proposition}
+    Let $\alpha\in\CC^*$ and $n\in\NN$. Then:
+    $$\binom{\alpha}{n}=\binom{\alpha-1}{n-1}+\binom{\alpha-1}{n}$$
+  \end{proposition}
   \begin{theorem}[Binomial theorem]
     Let $\alpha\in\CC^*$. Then, $\forall z\in\CC$, with $\abs{z}<1$ we have: $${(1+z)}^\alpha=\sum_{n=0}^\infty\binom{\alpha}{n}z^n$$
   \end{theorem}
@@ -1277,20 +1283,20 @@
   \begin{proposition}
     Let $a\in \DD$. Then:
     \begin{enumerate}
+      \item $\varphi_a$ is a bijection from $\overline{\DD}$ to itself.
       \item $\varphi_a(\overline{\DD})=\overline{\DD}$
       \item $\varphi_a(\Fr{\DD})=\Fr{\DD}$
     \end{enumerate}
   \end{proposition}
-  \begin{theorem}
-    Let $f:\DD\rightarrow \DD$ be a holomorphic and bijective function and $a\in \DD$ such that $f(a)=0$. Then, $\exists\theta\in\RR$ such that $f(z)=\exp{\ii \theta} \varphi_a(z)$.
-  \end{theorem}
   \begin{lemma}[Schwarz-Pick lemma]
     Let $f\in\mathcal{H}(\DD)$ such that $f(0)=0$ and $\abs{f(z)}\leq 1$. Then $\forall a,z\in \DD$ we have:
     $$\abs{\frac{f(z)-f(a)}{1-\overline{f(a)}f(z)}}\leq\abs{\frac{z-a}{1-\overline{a}z}}$$
     And therefore: $$\abs{f'(z)}\leq\frac{1-{\abs{f(z)}}^2}{1-{\abs{z}}^2}$$
   \end{lemma}
+  \begin{theorem}
+    Let $f:\DD\rightarrow \DD$ be a holomorphic and bijective function and $a\in \DD$ such that $f(a)=0$. Then, $\exists\theta\in\RR$ such that $f(z)=\exp{\ii \theta} \varphi_a(z)$.
+  \end{theorem}
   \subsection{Space of holomorphic functions}
-  \subsubsection{Metric}
   \begin{definition}
     Let $U\subseteq\CC$ be an open set. We denote by $\mathcal{C}(U,\CC)$ the set of all continuous functions $f:U\rightarrow\CC$
   \end{definition}
@@ -1305,9 +1311,12 @@
       \item Each connected component of $\CC_\infty\setminus K_n$ contains a connected component of $\CC_\infty\setminus U$.
     \end{enumerate}
   \end{proposition}
+  \begin{definition}
+    Let $U\subseteq\CC$ be an open set, $K\subset U$ be a compact set and $f\in\mathcal{H}(U)$. We define: $${\|f\|}_K:=\sup\{\abs{f(z)}:z\in K\}=\max\{\abs{f(z)}:z\in K\}$$
+  \end{definition}
   \begin{theorem}
     Let $(K_n)$ be a sequence of compact sets and $d:\mathcal{C}(U,\CC)\times\mathcal{C}(U,\CC)\rightarrow\RR$ be the function defined by:
-    $$d(f,g):=\sum_{n=1}^\infty\frac{1}{2^n}\min\{d_n(f,g),1\}\qquad\forall f,g\in\mathcal{C}(U,\CC)$$ Then:
+    $$d(f,g):=\sum_{n=1}^\infty\frac{1}{2^n}\min\{{\|f-g\|}_{K_n},1\}\qquad\forall f,g\in\mathcal{C}(U,\CC)$$ Then:
     \begin{enumerate}
       \item $d$ is a distance.
       \item If $(f_n),f\in\mathcal{C}(U,\CC)$, then:
@@ -1337,7 +1346,7 @@
     Let $\mathcal{F}\subseteq \mathcal{C}(U,\CC)$. We say that $\mathcal{F}$ is \emph{locally bounded} if $\forall a\in U$ $\exists r>0$ and $M>0$ such that $\abs{f(z)}\leq M$ $\forall z\in \overline{D(a,r)}$ $\forall f\in\mathcal{F}$.
   \end{definition}
   \begin{definition}
-    Let $\mathcal{F}\subseteq \mathcal{C}(U,\CC)$. We say that $\mathcal{F}$ is \emph{bounded by compact sets} if for each compact set $K\subset U$ $\exists M_K>0$ such that $\forall z\in K$ and all $f\in\mathcal{F}$ we have $\abs{f(z)}\leq M_K$.
+    Let $\mathcal{F}\subseteq \mathcal{C}(U,\CC)$. We say that $\mathcal{F}$ is \emph{bounded by compact sets} if for each compact set $K\subset U$ $\exists M_K>0$ such that $\forall f\in\mathcal{F}$ we have ${\|f\|}_{K}\leq M_K$.
   \end{definition}
   \begin{lemma}
     Let $\mathcal{F}\subseteq \mathcal{C}(U,\CC)$. $\mathcal{F}$ is locally bounded $\iff \mathcal{F}$ is bounded by compact sets.
@@ -1348,7 +1357,7 @@
   \begin{theorem}[Riemann conformal representation theorem]
     Let $U\subset \CC$ be a non-empty (and $U\ne\CC$) simply connected domain and $a\in U$. Then, $\exists!f\in\mathcal{H}(U)$ such that:
     \begin{enumerate}
-      \item $f(a)=0$, $f'(a)>0$.
+      \item $f(a)=0$, $f'(a)\in\RR_{>0}$.
       \item $f$ is injective.
       \item $f(U)=\DD$.
     \end{enumerate}
