@@ -869,7 +869,7 @@
     Let $S\subseteq\RR^3$ be a surface, $\vf{X}$ be a differentiable vector field tangent to $S$, $p\in S$ and $\vf{w}\in T_pS$. Let $\vf\alpha:(-\varepsilon,\varepsilon)\rightarrow S$ a parametrized curve of class $\mathcal{C}^\infty$ with $\vf\alpha(0)=p$ and $\vf\alpha'(0)=\vf{w}$. We denote $\vf{X}(t):=(\vf{X}\circ\vf\alpha)(t)$. We define the \emph{covariant derivative} of $\vf{X}$ at the point $p$ in the direction of $\vf{w}$, denoted as $\frac{\text{D}\vf{X}}{\dd{t}}(0)$, as the orthogonal projection $\vf\pi^\perp$ of $\vf{X}'(0)$ over the vector field $T_pS$. That is: $$\frac{\text{D}\vf{X}}{\dd{t}}(0)=\vf\pi^\perp\left(\vf{X}'(0)\right)$$
   \end{definition}
   \begin{proposition}
-    Let $S\subseteq\RR^3$ be a surface, $\vf{X}$ be a differentiable vector field tangent to $S$, $p\in S$ and $\vf{w}\in T_pS$. Let $\vf\alpha:(-\varepsilon,\varepsilon)\rightarrow S$ a parametrized curve of class $\mathcal{C}^\infty$ with $\vf\alpha(0)=p$ and $\vf\alpha'(0)=\vf{w}$. Suppose $(V,\vf\varphi(u,v))$ is a parametrization $\vf\varphi(u,v)$ of $S$ whose image contains $p$. Suppose $\vf{X}(t)=a(u(t),v(t))\vf\varphi_u+b(u(t),v(t))\vf\varphi_v=a(t)\vf\varphi_u+b(t)\vf\varphi_v$ Then:
+    Let $S\subseteq\RR^3$ be a surface, $\vf{X}$ be a differentiable vector field tangent to $S$, $p\in S$ and $\vf{w}\in T_pS$. Let $\vf\alpha:(-\varepsilon,\varepsilon)\rightarrow S$ a parametrized curve of class $\mathcal{C}^\infty$ with $\vf\alpha(0)=p$ and $\vf\alpha'(0)=\vf{w}$. Suppose $(V,\vf\varphi(u,v))$ is a parametrization of $S$ whose image contains $p$. Suppose $\vf{X}(t)=a(u(t),v(t))\vf\varphi_u+b(u(t),v(t))\vf\varphi_v=a(t)\vf\varphi_u+b(t)\vf\varphi_v$ Then:
     \begin{multline}\label{DG_covderivative}
       \frac{\text{D}\vf{X}}{\dd{t}}=\left(a'+\Gamma_{11}^1au'+\Gamma_{12}^1av'+\Gamma_{21}^1bu'+\Gamma_{22}^1bv'\right)\vf\varphi_u\\
       +\left(b'+\Gamma_{11}^2au'+\Gamma_{12}^2av'+\Gamma_{21}^2bu'+\Gamma_{22}^2bv'\right)\vf\varphi_v
@@ -885,7 +885,15 @@
     Let $S\subseteq\RR^3$ be a surface and $\vf{X}$, $\vf{Y}$ be vector fields tangent to $S$ along a curve $\vf\alpha:I\rightarrow S$ of class $\mathcal{C}^\infty$. Then, $t\mapsto\langle \vf{X}(t),\vf{Y}(t)\rangle$ is constant. In particular, the norms $\|\vf{X}(t)\|$, $\|\vf{Y}(t)\|$ as well as the angle between $\vf{X}(t)$ and $\vf{Y}(t)$ are constant.
   \end{proposition}
   \begin{proposition}
-    Let $S\subseteq\RR^3$ be a surface and $\vf\alpha I\rightarrow S$ be a parametrized curve of class $\mathcal{C}^\infty$. Then, given $t_0\in I$ and $\vf{w}\in T_{\vf\alpha(t_0)}S$ there exists a unique parallel vector field $\vf{X}$ along $\vf\alpha$ such that $\vf{X}(t_0)=\vf{w}$. This vector field is called \emph{parallel transport} of the vector $\vf{w}$ along $\vf{\alpha}$ and it is defined on the entire interval $I$.
+    Let $S\subseteq\RR^3$ be a surface, $(V,\vf\varphi(u,v))$ is a parametrization of $S$ and $\vf\alpha: I\rightarrow S$ be a parametrized curve of class $\mathcal{C}^\infty$ such that $\vf\alpha=\vf\varphi(u(t),v(t))$. Then, given $t_0\in I$ and $\vf{w}\in T_{\vf\alpha(t_0)}S$ there exists a unique parallel vector field $\vf{X}=a\vf\varphi_u+b\vf\varphi_v$ along $\vf\alpha$ such that $\vf{X}(t_0)=\vf{w}$. This vector field is called \emph{parallel transport} of the vector $\vf{w}$ along $\vf{\alpha}$ and it is defined on the entire interval $I$. It can be found by solving this system of edos:
+    $$\left\{
+      \begin{aligned}
+        a'+\Gamma_{11}^1au'+\Gamma_{12}^1av'+\Gamma_{21}^1bu'+\Gamma_{22}^1bv' & =0 \\
+        b'+\Gamma_{11}^2au'+\Gamma_{12}^2av'+\Gamma_{21}^2bu'+\Gamma_{22}^2bv' & =0
+      \end{aligned}
+      \right.
+    $$
+    with initial conditions $a(t_0)=a_0$, $b(t_0)=b_0$ and $\vf{w}=a_0\vf\varphi_u+b_0\vf\varphi_v$.
   \end{proposition}
   \subsubsection{Geodesics}
   \begin{definition}
@@ -945,6 +953,9 @@
     Let $S\subseteq\RR^3$ be an orientable surface and $(V,\vf\varphi(u,v))$ be an orthogonal parametrization of $S$ compatible with the orientation. Let $\vf\alpha:I\rightarrow S$ be an arc-length parametrized curve of class $\mathcal{C}^\infty$ such that $\vf\alpha(t)=\varphi(u(t),v(t))$ and let $\theta=\theta(s)$ be the angle between $\varphi_u$ and $\vf\alpha'(s)$. Then: $$k_\text{g}={(k_\text{g})}_1\cos\theta+{(k_\text{g})}_2\sin\theta+\dv{\theta}{s}$$
     where ${(k_\text{g})}_1$ and ${(k_\text{g})}_2$ denote the geodesic curvature of the coordinate lines $v=\const$ and $u=\const$, respectively.
   \end{theorem}
+  \begin{proposition}
+    Let $S\subseteq\RR^3$ be an orientable surface and $\vf\alpha:I\rightarrow S$ be a parametrized curve of class $\mathcal{C}^\infty$. Then, $\vf\alpha$ is a geodesic in a convenient parametrization if and only if: $$\left[\frac{\text{D}\vf{\alpha}'}{\dd{t}}\right]=\lambda(t)\vf\alpha'(t)$$
+  \end{proposition}
   \subsection{Differential forms}
   \subsubsection{Vector fields of \texorpdfstring{$\RR^n$}{Rn}}
   \begin{definition}
@@ -1306,7 +1317,7 @@
     Let $U\subseteq\RR^3$, $f\in\mathcal{C}^\infty(U)$ and $\vf{X}\in\mathcal{X}(U)$. We define the following differential forms on $U$:
     \begin{align*}
       \omega_{\vf{X}}^1 & =X^1\dd{x}+X^2\dd{y}+X^3\dd{z}                                     \\
-      \omega_{\vf{X}}^2 & =X^1\dd{y}\wedge\dd{z}+X^2\dd{z}\wedge\dd{z}+X^3\dd{x}\wedge\dd{y} \\
+      \omega_{\vf{X}}^2 & =X^1\dd{y}\wedge\dd{z}+X^2\dd{z}\wedge\dd{x}+X^3\dd{x}\wedge\dd{y} \\
       \omega_{f}^3      & =f\dd{x}\wedge\dd{y}\wedge\dd{z}
     \end{align*}
   \end{definition}
@@ -1341,7 +1352,7 @@
     Let $S\subset\RR^3$ be a compact oriented surface with boundary, $U$ be an open neighbourhood of $S$ and $\vf{X}\in\mathcal{X}(U)$. Then: $$\int_S\rot{\vf{X}}\cdot\dd{S}=\int_{\Fr{S}}\vf{X}\cdot\dd{\ell}$$
   \end{theorem}
   \begin{theorem}[Divergence theorem on $\RR^3$]
-    Let $D\subset\RR^3$ be a compact submanifold with boundary of dimension 3, $U$ be an open neighbourhood of $D$ and $\vf{X}\in\mathcal{X}(U)$. Then: $$\int_D\div{\vf{X}}\cdot\dd{V}=\int_{\Fr{D}}\rot{\vf{X}}\cdot\dd{S}$$
+    Let $D\subset\RR^3$ be a compact submanifold with boundary of dimension 3, $U$ be an open neighbourhood of $D$ and $\vf{X}\in\mathcal{X}(U)$. Then: $$\int_D\div{\vf{X}}\cdot\dd{V}=\int_{\Fr{D}}\vf{X}\cdot\dd{S}$$
     where $\dd{V}=\eta$ is the volume element of $D$.
   \end{theorem}
   \begin{theorem}[Divergence theorem]
