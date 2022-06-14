@@ -573,7 +573,7 @@
       \end{pmatrix}$$
     Which is equivalent to:
     \begin{equation}\label{CAFA_cauchyrieamann}
-      \pdv{u}{x}(z_0)=\pdv{v}{y}(z_0)\qquad\pdv{v}{x}(z_0)=-\pdv{u}{y}(z_0)
+      \pdv{u}{x}(z_0)=\pdv{v}{y}(z_0)\qquad\pdv{u}{y}(z_0)=-\pdv{v}{x}(z_0)
     \end{equation}
     These equations are called \emph{Cauchy-Riemann equations}.
   \end{theorem}
@@ -725,7 +725,7 @@
     $$f(z_0)=\frac{1}{2\pi}\int_0^{2\pi}f(z_0+r\exp{\ii\theta})\dd{\theta}$$
   \end{corollary}
   \begin{lemma}
-    Let $U\subseteq\CC$ be an open, $(f_n)\in U\subseteq\CC$ be a sequence of functions, $f:U\rightarrow\CC$ be such that $(f_n)$ converge uniformly to $f$ over compact sets in $U$, and $\gamma:[a,b]\rightarrow\CC$ be a closed piecewise curve of class $\mathcal{C}^1$. Then:
+    Let $U\subseteq\CC$ be an open, $(f_n)\in U\subseteq\CC$ be a sequence of continuous functions, $f:U\rightarrow\CC$ be such that $(f_n)$ converge uniformly to $f$ over compact sets in $U$, and $\gamma:[a,b]\rightarrow\CC$ be a closed piecewise curve of class $\mathcal{C}^1$. Then:
     $$\lim_{n\to\infty}\int_\gamma f_n(z)\dd{z}=\int_\gamma f(z)\dd{z}$$
   \end{lemma}
   \begin{corollary}
@@ -809,7 +809,7 @@
   \begin{corollary}
     Let $U\subseteq\CC$ be an open connected set and $f\in\mathcal{H}(U)$ such that $f$ is not identically zero. Then, if $z_0\in U$ is a zero of $f$, $\exists m\in\NN$ and $g\in\mathcal{H}(U)$ such that $g(z_0)\ne 0$ and: $$f(z)={(z-z_0)}^{m}g(z)$$ The value of $m$ is called \emph{multiplicity} of $z_0$. In particular, the zeros of $f$ are isolated.
   \end{corollary}
-  \begin{theorem}[Analytic contiuation theorem]
+  \begin{theorem}[Analytic continuation theorem]
     Let $U\subseteq\CC$ be an open connected set and $f,g\in\mathcal{H}(U)$ such that ${\{z\in U:f(z)=g(z)\}}'\cap U\ne\varnothing$. Then, $f(z)=g(z)$ $\forall z\in U$.
   \end{theorem}
   \begin{corollary}
@@ -837,7 +837,7 @@
     Let $U\subseteq \CC$ be an open set and $f\in\mathcal{H}(U)$ such that $f=u+\ii v$ with $u,v:U\rightarrow\RR$. Then, $u$ and $v$ are harmonic and $u,v\in\mathcal{C}^\infty(U)$.
   \end{proposition}
   \begin{definition}
-    Let $U\subseteq\RR^n$ be a set. We say that $U$ is a \emph{domain} or \emph{region} if $U$ is open an connected.
+    Let $U\subseteq\RR^n$ be a set. We say that $U$ is a \emph{domain} or \emph{region} if $U$ is open and connected.
   \end{definition}
   \begin{definition}
     Let $S\subseteq\RR^n$ be a subset and $s_0\in S$. We say that $S$ is a \emph{star domain} with respect to $s_0$ if $\forall s\in S$, the line segment from $s_0$ to $s$ lies in $S$.
@@ -1091,7 +1091,8 @@
     \end{enumerate}
   \end{method}
   \begin{theorem}
-    Let $f\in\CC(z)$ be a rational function such that $\lim_{\abs{z}\to\infty}f(z)=0$ and $P$ be the set of poles of $f$. Then, if $P\cap\ZZ=\varnothing$,:
+    Let $f\in\CC(z)$ be a rational function such that $\displaystyle\lim_{\abs{z}\to\infty}f(z)=0$ and $P$ be the set of poles of $f$. \\
+    If $P\cap\ZZ=\varnothing$, then:
     \begin{gather*}
       \lim_{N\to\infty}\sum_{n=-N}^Nf(n)         =-\sum_{p\in P}\Res(\pi\cot(\pi z)f(z),p) \\
       \lim_{N\to\infty}\sum_{n=-N}^N{(-1)}^nf(n) =-\sum_{p\in P}\Res(\pi\csc(\pi z)f(z),p)
@@ -1315,7 +1316,7 @@
     Let $U\subseteq\CC$ be an open set, $K\subset U$ be a compact set and $f\in\mathcal{H}(U)$. We define: $${\|f\|}_K:=\sup\{\abs{f(z)}:z\in K\}=\max\{\abs{f(z)}:z\in K\}$$
   \end{definition}
   \begin{theorem}
-    Let $(K_n)$ be a sequence of compact sets and $d:\mathcal{C}(U,\CC)\times\mathcal{C}(U,\CC)\rightarrow\RR$ be the function defined by:
+    Let $(K_n)$ be a surjective sequence of compact sets and $d:\mathcal{C}(U,\CC)\times\mathcal{C}(U,\CC)\rightarrow\RR$ be the function defined by:
     $$d(f,g):=\sum_{n=1}^\infty\frac{1}{2^n}\min\{{\|f-g\|}_{K_n},1\}\qquad\forall f,g\in\mathcal{C}(U,\CC)$$ Then:
     \begin{enumerate}
       \item $d$ is a distance.
@@ -1333,7 +1334,7 @@
     Let $\mathcal{F}\subseteq \mathcal{C}(U,\CC)$. We say that $\mathcal{F}$ is \emph{relatively compact} (or \emph{normal}) if for any sequence $(f_n)\in\mathcal{F}$, $(f_n)$ has a convergent subsequence. Equivalently $\mathcal{F}$ is relatively compact if $\overline{\mathcal{F}}$ is compact.
   \end{definition}
   \begin{definition}
-    Let $\mathcal{F}\subseteq \mathcal{C}(U,\CC)$. We say that $\mathcal{F}$ is \emph{equicontinuous} at $z_0\in U$ if $\forall \varepsilon>0$ $\exists \delta>0$ such that $\forall z\in X$ with $\abs{z,z_0}<\delta$ we have: $$\abs{f(z)-f(z_0)}<\varepsilon\quad\forall f\in \mathcal{F}$$
+    Let $\mathcal{F}\subseteq \mathcal{C}(U,\CC)$. We say that $\mathcal{F}$ is \emph{equicontinuous} at $z_0\in U$ if $\forall \varepsilon>0$ $\exists \delta>0$ such that $\forall z\in X$ with $\abs{z-z_0}<\delta$ we have: $$\abs{f(z)-f(z_0)}<\varepsilon\quad\forall f\in \mathcal{F}$$
   \end{definition}
   \begin{theorem}[Arzelà-Ascoli theorem]
     Let $\mathcal{F}\subseteq \mathcal{C}(U,\CC)$. Then, $\mathcal{F}$ is normal if and only if:
