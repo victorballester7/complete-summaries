@@ -1,5 +1,6 @@
 \documentclass[../../../main.tex]{subfiles}
 % break in parametric statistical model
+% break in Fisher theorem
 
 \begin{document}
 \renewcommand{\col}{\sta}
@@ -7,7 +8,7 @@
   \subsection{Point estimation}
   \subsubsection{Statistical models}
   \begin{definition}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space\footnote{From now on we will assume that the random variables are defined always in the same probability space $(\Omega,\mathcal{A},\Prob)$, so we will omit to say that.}, $\Theta$ be a set, $n\in\NN$ and $x_1,\ldots,x_n$ be a collection of data that we may assume that they are the outcomes of a random vector $\vf{X}_n=(X_1,\ldots,X_n)$ defined on $(\Omega,\mathcal{A},\Prob)$. Suppose, moreover, that the outcomes of $\vf{X}_n$ are in a set $\mathcal{X}\subseteq\RR^n$, the law $\vf{X}_n$ is one in the set $\mathcal{P}=\{\Prob_\theta^{\vf{X}_n}:\theta\in\Theta\}$ and $\mathcal{F}$ is a $\sigma$-algebra over $\mathcal{X}$\footnote{That is, $\mathcal{P}$ denotes a family of probability distributions of $\vf{X}_n$ in $(\mathcal{X},\mathcal{F})$, indeXed by $\theta\in\Theta$. Note that we denote that distribution of $\vf{X}_n$ by $\Prob^{\vf{X}_n}$ to distinguish it from the probability distribution $\Prob_{\vf{X}_n}$ in $(\Omega,\mathcal{A},\Prob)$.}. We define a \emph{statistical model} as the triplet $(\mathcal{X},\mathcal{F},\mathcal{P})$\footnote{Often we will take $\mathcal{F}=\mathcal{B}(\mathcal{X})$.}. The set $\mathcal{X}$ is called \emph{sample space}, and the set $\Theta$, \emph{parameter space}. The random vector $\vf{X}_n$ is called \emph{random sample}. If, moreover, $X_1,\ldots,X_n$ are \iid random variables, $\vf{X}_n$ is called a \emph{simple random sample}. The value $(x_1,\ldots,x_n)\in\mathcal{X}$ is called a \emph{realization} of $(X_1,\ldots,X_n)$.
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space\footnote{From now on we will assume that the random variables are defined always in the same probability space $(\Omega,\mathcal{A},\Prob)$, so we will omit to say that.}, $\Theta$ be a set, $n\in\NN$ and $x_1,\ldots,x_n$ be a collection of data that we may assume that they are the outcomes of a random vector $\vf{X}_n=(X_1,\ldots,X_n)$ defined on $(\Omega,\mathcal{A},\Prob)$. Suppose, moreover, that the outcomes of $\vf{X}_n$ are in a set $\mathcal{X}\subseteq\RR^n$, the law $\vf{X}_n$ is one in the set $\mathcal{P}=\{\Prob_\theta^{\vf{X}_n}:\theta\in\Theta\}$ and $\mathcal{F}$ is a $\sigma$-algebra over $\mathcal{X}$\footnote{That is, $\mathcal{P}$ denotes a family of probability distributions of $\vf{X}_n$ in $(\mathcal{X},\mathcal{F})$, indexed by $\theta\in\Theta$. Note that we denote that distribution of $\vf{X}_n$ by $\Prob^{\vf{X}_n}$ to distinguish it from the probability distribution $\Prob_{\vf{X}_n}$ in $(\Omega,\mathcal{A},\Prob)$.}. We define a \emph{statistical model} as the triplet $(\mathcal{X},\mathcal{F},\mathcal{P})$\footnote{Often we will take $\mathcal{F}=\mathcal{B}(\mathcal{X})$.}. The set $\mathcal{X}$ is called \emph{sample space}, and the set $\Theta$, \emph{parameter space}. The random vector $\vf{X}_n$ is called \emph{random sample}. If, moreover, $X_1,\ldots,X_n$ are \iid random variables, $\vf{X}_n$ is called a \emph{simple random sample}. The value $(x_1,\ldots,x_n)\in\mathcal{X}$ is called a \emph{realization} of $(X_1,\ldots,X_n)$.
   \end{definition}
   \begin{definition}
     Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\theta\in\Theta\})$ be a statistical model. We say $\mathcal{P}=\{\Prob_\theta^{\vf{X}_n}:\theta\in\Theta\})$ is \emph{identifiable} if the function $$\function{}{\Theta}{\mathcal{P}}{\theta}{\Prob_\theta^{\vf{X}_n}}$$ is injective\footnote{From now on, we will suppose that all the sets $\mathcal{P}$ are always identifiable.}.
@@ -17,26 +18,26 @@
   \end{definition}
   \subsubsection{Statistics and estimators}
   \begin{definition}[Statistic]
-    Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\theta\in\Theta\})$ be a statistical model. We define a \emph{statistic} as a Borel measurable function. That is, $\vf{T}$ can be written as $\vf{T}=\vf{h}(X_1,\ldots,X_n)$, where $\vf{h}:\mathcal{X}\rightarrow\RR^m$ is a Borel measurable function. Hence, $\vf{T}$ is a random vector. The value $m$ is the \emph{dimension} of the statistic.
+    Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\theta\in\Theta\})$ be a statistical model. We define a \emph{statistic} $\vf{T}$ as a Borel measurable function. That is, $\vf{T}$ can be written as $\vf{T}=\vf{h}(X_1,\ldots,X_n)$, where $\vf{h}:\mathcal{X}\rightarrow\RR^m$ is a Borel measurable function. Hence, $\vf{T}$ is a random vector. The value $m$ is the \emph{dimension} of the statistic.
   \end{definition}
   \begin{definition}
     Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\theta\in\Theta\})$ be a statistical model. We define the \emph{sample mean} as the statistic: $$T(X_1,\ldots,X_n)=\frac{1}{n}\sum_{i=1}^nX_i=:\overline{X}_n$$
-    Given a realization $(x_1,\ldots,x_n)\in\mathcal{X}$, we will denote $\overline{x}_n:=\overline{X}_n(x_1,\ldots,x_n)$\footnote{Some times, and if the context is clear, we will denote $\overline{x}_n$ simply as $\overline{x}$.}
+    Given a realization $(x_1,\ldots,x_n)\in\mathcal{X}$, we will denote $\overline{x}_n:=\overline{X}_n(x_1,\ldots,x_n)$\footnote{Some times, and if the context is clear, we will denote $\overline{x}_n$ simply as $\overline{x}$.}.
   \end{definition}
   \begin{definition}
     Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\theta\in\Theta\})$ be a statistical model. We define the \emph{sample variance} as the statistic: $$T(X_1,\ldots,X_n)=\frac{1}{n}\sum_{i=1}^n{(X_i-\overline{X}_n)}^2=:{S_n}^2$$ We define the \emph{corrected sample variance} as the statistic:
     $$T(X_1,\ldots,X_n)=\frac{1}{n-1}\sum_{i=1}^n{(X_i-\overline{X}_n)}^2=:\tilde{S}_n{}^2$$
-    Given a realization $(x_1,\ldots,x_n)\in\mathcal{X}$, we will denote ${s_n}^2:={S_n}^2(x_1,\ldots,x_n)$ and $\tilde{s}_n{}^2:=\tilde{S}_n{}^2(x_1,\ldots,x_n)$\footnote{Some times, and if the context is clear, we will denote ${s_n}^2$ and $\tilde{s}_n{}^2$ simply as $s^2$ and $\tilde{s}^2$, respectively.}
+    Given a realization $(x_1,\ldots,x_n)\in\mathcal{X}$, we will denote ${s_n}^2:={S_n}^2(x_1,\ldots,x_n)$ and $\tilde{s}_n{}^2:=\tilde{S}_n{}^2(x_1,\ldots,x_n)$\footnote{Some times, and if the context is clear, we will denote ${s_n}^2$ and $\tilde{s}_n{}^2$ simply as $s^2$ and $\tilde{s}^2$, respectively.}.
   \end{definition}
   \begin{proposition}
     Let $X_1,\ldots,X_n$ be random variables. Then: $${S_n}^2=\frac{1}{n}\sum_{i=1}^n{X_i}^2-{\overline{X}_n}^2$$
   \end{proposition}
   \begin{definition}
-    Let $(\mathcal{X},\mathcal{F},\{\Prob_{\theta}^{\vf{X}_n}:{\theta}\in\Theta\subseteq \RR\})$ be a statistical model, ${\theta} \in\Theta$ and $g:\Theta\rightarrow\Theta$ be a function. An \emph{estimator} of $g({\theta})$ is a statistic ${\hat\theta}$ whose outcomes are in $\Theta$ and does not depend on any unknown parameter. It is used to give an estimation of the (supposedly unknown) parameter $g({\theta})$.
+    Let $(\mathcal{X},\mathcal{F},\{\Prob_{\theta}^{\vf{X}_n}:{\theta}\in\Theta\subseteq \RR\})$ be a parametric statistical model, ${\theta} \in\Theta$ and $g:\Theta\rightarrow\Theta$ be a function. An \emph{estimator} of $g({\theta})$ is a statistic ${\hat\theta}$ whose outcomes are in $\Theta$ and does not depend on any unknown parameter. It is used to give an estimation of the (supposedly unknown) parameter $g({\theta})$.
   \end{definition}
   \subsubsection{Properties of estimators}
   \begin{definition}[Bias]
-    Let $(\mathcal{X},\mathcal{F},\{\Prob_{\theta}^{\vf{X}_n}:{\theta}\in\Theta\subseteq \RR\})$ be a parametric statistical model, $g:\Theta\rightarrow\Theta$ be a function and ${\hat\theta}$ be an integrable estimator of $g({\theta})\in\Theta$. We define the \emph{bias} of ${\hat\theta}$ with respect to ${\theta}$ as: $$\bias({\hat\theta}):=\Exp({\hat\theta})-g({\theta})$$ We say that ${\hat\theta}$ is an \emph{unbiased estimator} of $g({\theta})$ if $\bias({\hat\theta})=0$ $\forall\theta\in\Theta$. Otherwise, we say that it is a \emph{biased estimator} of $g({\theta})$.
+    Let $(\mathcal{X},\mathcal{F},\{\Prob_{\theta}^{\vf{X}_n}:{\theta}\in\Theta\subseteq \RR\})$ be a parametric statistical model, $g:\Theta\rightarrow\Theta$ be a function and ${\hat\theta}$ be an integrable estimator of $g({\theta})\in\Theta$. We define the \emph{bias} of ${\hat\theta}$ with respect to ${\theta}$ as: $$\bias({\hat\theta}):=\Exp({\hat\theta})-g({\theta})$$ We say that ${\hat\theta}$ is an \emph{unbiased estimator} of $g({\theta})$ if $\bias({\hat\theta})=0$ $\forall\theta\in\Theta$. Otherwise we say that it is a \emph{biased estimator} of $g({\theta})$.
   \end{definition}
   \begin{proposition}
     Let $(\mathcal{X},\mathcal{F},\{\Prob_{\theta}^{\vf{X}_n}:{\theta}\in\Theta\subseteq \RR\})$ be a parametric statistical model, $g:\Theta\rightarrow\Theta$ be a function and ${\hat\theta}$ be an integrable estimator of $g({\theta})\in\Theta$. Suppose that $\bias(\hat\theta)=cg(\theta)$ for some $c\in\RR$. Then, $\frac{\hat\theta}{c+1}$ is an unbiased estimator for $g(\theta)$
@@ -50,10 +51,10 @@
     Hence, the estimator $\tilde{S}_n{}^2$ of $\sigma^2$ is unbiased whereas the estimator ${S_n}^2$ of $\sigma^2$ is biased.
   \end{proposition}
   \begin{definition}
-    Let $(\mathcal{X},\mathcal{F},\{\Prob_{\theta}^{\vf{X}_n}:{\theta}\in\Theta\subseteq \RR\})$ be a parametric statistical model, $g:\Theta\rightarrow\Theta$ be a function and ${\hat\theta}$ be an integrable estimator of $g({\theta})\in\Theta$. The \emph{mean squared error} (\emph{MSE}) of ${\hat\theta}$ is the function: $$\MSE({\hat\theta}):=\Exp\left({({\hat\theta}-g({\theta}))}^2\right)$$
+    Let $(\mathcal{X},\mathcal{F},\{\Prob_{\theta}^{\vf{X}_n}:{\theta}\in\Theta\subseteq \RR\})$ be a parametric statistical model, $g:\Theta\rightarrow\Theta$ be a function and ${\hat\theta}$ be a square-integrable integrable estimator of $g({\theta})\in\Theta$. The \emph{mean squared error} (\emph{MSE}) of ${\hat\theta}$ is the function: $$\MSE({\hat\theta}):=\Exp\left({\left({\hat\theta}-g({\theta})\right)}^2\right)$$
   \end{definition}
   \begin{proposition}
-    Let $(\mathcal{X},\mathcal{F},\{\Prob_{\theta}^{\vf{X}_n}:{\theta}\in\Theta\subseteq \RR\})$ be a parametric statistical model, $g:\Theta\rightarrow\Theta$ be a function and ${\hat\theta}$ be an integrable estimator of $g({\theta})\in\Theta$. Then: $$\MSE({\hat\theta})=\Var({\hat\theta})+{(\bias({\hat\theta}))}^2$$
+    Let $(\mathcal{X},\mathcal{F},\{\Prob_{\theta}^{\vf{X}_n}:{\theta}\in\Theta\subseteq \RR\})$ be a parametric statistical model, $g:\Theta\rightarrow\Theta$ be a function and ${\hat\theta}$ be a square-integrable integrable estimator of $g({\theta})\in\Theta$. Then: $$\MSE({\hat\theta})=\Var({\hat\theta})+{(\bias({\hat\theta}))}^2$$
   \end{proposition}
   \begin{definition}
     Let $(\mathcal{X},\mathcal{F},\{\Prob_{\theta}^{\vf{X}_n}:{\theta}\in\Theta\subseteq \RR\})$ be a parametric statistical model, $g:\Theta\rightarrow\Theta$ be a function and ${\hat\theta}$, ${\tilde\theta}$ be estimators of $g({\theta})\in\Theta$. We say that ${\hat\theta}$ is \emph{more efficient than} ${\tilde\theta}$ if $$\Var{({\hat\theta})}<\Var{({\tilde\theta})}\quad\forall{\theta}\in\Theta$$
@@ -69,32 +70,32 @@
     Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\theta\in\Theta\})$ be a statistical model and $\vf{T}$ be a statistic. We say that $\vf{T}$ is \emph{sufficient} for $\theta\in\Theta$ if the joint conditional distribution of $(X_1,\ldots,X_n)$ given $\vf{T}(X_1,\ldots,X_n)=\vf{t}$ does not depend on $\theta$.
   \end{definition}
   \begin{theorem}[Fisher-Neyman factorization theorem]
-    Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\theta\in\Theta\})$ be a statistical model and $\vf{T}$ be a statistic. Then, $T$ is sufficient if and only if $\forall \vf{x}_n\in\mathcal{X}$ we have:
+    Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\theta\in\Theta\})$ be a statistical model and $T$ be a statistic. Then, $T$ is sufficient if and only if $\forall \vf{x}_n\in\mathcal{X}$ we have:
     \begin{enumerate}
-      \item for the discrete case: $$p_{\vf{X}_n}(\vf{x}_n;\theta)=g(T(\vf{x}_n);\theta)h(\vf{x}_n)$$
-      \item for the continuous case:  $$f_{\vf{X}_n}(\vf{x}_n;\theta)=g(T(\vf{x}_n);\theta)h(\vf{x}_n)$$
+      \item For the discrete case: $$p_{\vf{X}_n}(\vf{x}_n;\theta)=g(T(\vf{x}_n);\theta)h(\vf{x}_n)$$
+      \item For the continuous case:  $$f_{\vf{X}_n}(\vf{x}_n;\theta)=g(T(\vf{x}_n);\theta)h(\vf{x}_n)$$
     \end{enumerate}
     for certain functions $g$ and $h$. Here we have denoted by $p_{\vf{X}_n}(\vf{x}_n;\theta)$ the joint pmf of $\vf{X}_n$ (in the discrete case) and by $f_{\vf{X}_n}(\vf{x}_n;\theta)$ the joint pdf of $\vf{X}_n$ (in the continuous case).
   \end{theorem}
   \subsubsection{Asymptotic properties}
   \begin{definition}
-    For each $n\in\NN$, let $(\mathcal{X},\mathcal{F},\{\Prob_{\theta}^{\vf{X}_n}:\theta\in\Theta\subseteq \RR\})$ be a parametric statistical model with $X_1,\ldots,X_n$ being i.i.d., $g:\Theta\rightarrow\Theta$ be a function and ${\hat\theta}$ be an estimator of $g({\theta})\in\Theta$. We say that the sequence $({{\hat\theta}}_n)$ is a \emph{weakly consistent estimator} of $g(\theta)$ if $${{\hat\theta}}_n\overset{\Prob}{\longrightarrow}g(\theta)$$
+    For each $n\in\NN$, let $(\mathcal{X},\mathcal{F},\{\Prob_{\theta}^{\vf{X}_n}:\theta\in\Theta\subseteq \RR\})$ be a parametric statistical model with $X_1,\ldots,X_n$ being i.i.d., $g:\Theta\rightarrow\Theta$ be a function and ${\hat\theta}_n$ be an estimator of $g({\theta})\in\Theta$. We say that the sequence $({{\hat\theta}}_n)$ is a \emph{weakly consistent estimator} of $g(\theta)$ if ${{\hat\theta}}_n\overset{\Prob}{\longrightarrow}g(\theta)$.
   \end{definition}
   \begin{definition}
-    For each $n\in\NN$, let $(\mathcal{X},\mathcal{F},\{\Prob_{\theta}^{\vf{X}_n}:\theta\in\Theta\subseteq \RR\})$ be a parametric statistical model with $X_1,\ldots,X_n$ being i.i.d., $g:\Theta\rightarrow\Theta$ be a function and ${\hat\theta}$ be an estimator of $g({\theta})\in\Theta$. We say that the sequence $({{\hat\theta}}_n)$ is a \emph{strongly consistent estimator} of $g(\theta)$ if $${{\hat\theta}}_n\overset{\text{a.s.}}{\longrightarrow}g(\theta)$$
+    For each $n\in\NN$, let $(\mathcal{X},\mathcal{F},\{\Prob_{\theta}^{\vf{X}_n}:\theta\in\Theta\subseteq \RR\})$ be a parametric statistical model with $X_1,\ldots,X_n$ being i.i.d., $g:\Theta\rightarrow\Theta$ be a function and ${\hat\theta}_n$ be an estimator of $g({\theta})\in\Theta$. We say that the sequence $({{\hat\theta}}_n)$ is a \emph{strongly consistent estimator} of $g(\theta)$ if ${{\hat\theta}}_n\overset{\text{a.s.}}{\longrightarrow}g(\theta)$.
   \end{definition}
   \begin{definition}
-    For each $n\in\NN$, let $(\mathcal{X},\mathcal{F},\{\Prob_{\theta}^{\vf{X}_n}:\theta\in\Theta\subseteq \RR\})$ be a parametric statistical model with $X_1,\ldots,X_n$ being i.i.d., $g:\Theta\rightarrow\Theta$ be a function and ${\hat\theta}$ be an estimator of $g({\theta})\in\Theta$. We say that the sequence $({{\hat\theta}}_n)$ is a \emph{consistent estimator in $L^2$} of $g(\theta)$ if $$\lim_{n\to\infty}\Exp\left({({\hat\theta}_n-g({\theta}))}^2\right)=\lim_{n\to\infty}\MSE({\hat\theta}_n)=0$$
+    For each $n\in\NN$, let $(\mathcal{X},\mathcal{F},\{\Prob_{\theta}^{\vf{X}_n}:\theta\in\Theta\subseteq \RR\})$ be a parametric statistical model with $X_1,\ldots,X_n$ being i.i.d., $g:\Theta\rightarrow\Theta$ be a function and ${\hat\theta}_n$ be an estimator of $g({\theta})\in\Theta$. We say that the sequence $({{\hat\theta}}_n)$ is a \emph{consistent estimator in $L^2$} of $g(\theta)$ if $$\lim_{n\to\infty}\Exp\left({\left({\hat\theta}_n-g({\theta})\right)}^2\right)=\lim_{n\to\infty}\MSE({\hat\theta}_n)=0$$
   \end{definition}
   \begin{proposition}
-    For each $n\in\NN$, let $(\mathcal{X},\mathcal{F},\{\Prob_{\theta}^{\vf{X}_n}:\theta\in\Theta\subseteq \RR\})$ be a parametric statistical model with $X_1,\ldots,X_n$ being i.i.d., $g:\Theta\rightarrow\Theta$ be a function and ${\hat\theta}$ be a consistent estimator in $L^2$ of $g({\theta})\in\Theta$. Then, ${{\hat\theta}}_n$ is a weakly consistent estimator of $g(\theta)$.
+    For each $n\in\NN$, let $(\mathcal{X},\mathcal{F},\{\Prob_{\theta}^{\vf{X}_n}:\theta\in\Theta\subseteq \RR\})$ be a parametric statistical model with $X_1,\ldots,X_n$ being i.i.d., $g:\Theta\rightarrow\Theta$ be a function and ${\hat\theta}_n$ be a consistent estimator in $L^2$ of $g({\theta})\in\Theta$. Then, ${{\hat\theta}}_n$ is a weakly consistent estimator of $g(\theta)$.
   \end{proposition}
   \begin{definition}
     For each $n\in\NN$, let $(\mathcal{X},\mathcal{F},\{\Prob_{\theta}^{\vf{X}_n}:\theta\in\Theta\subseteq \RR\})$ be a parametric statistical model with $X_1,\ldots,X_n$ being i.i.d., $g:\Theta\rightarrow\Theta$ be a function and ${{\hat\theta}}_n$ be an estimator of $g(\theta)\in\Theta$. We say that the sequence $({{\hat\theta}}_n)$ is an \emph{asymptotically unbiased estimator} of $g(\theta)$ if $$\Exp({{\hat\theta}}_n)\longrightarrow g(\theta)$$
   \end{definition}
   \begin{definition}
-    For each $n\in\NN$, let $(\mathcal{X},\mathcal{F},\{\Prob_{\theta}^{\vf{X}_n}:\theta\in\Theta\subseteq \RR\})$ be a parametric statistical model with $X_1,\ldots,X_n$ being \iid whose variance is $\sigma^2$, $g:\Theta\rightarrow\Theta$ be a function and ${{\hat\theta}}_n$ be an estimator of $g(\theta)\in\Theta$. We say that the sequence $({\hat\theta}_n)$ is \emph{an asymptotically normal estimator} of $g(\theta)$ with asymptotically variance $\frac{\sigma^2}{n}$ if $$\sqrt{n}({\hat\theta}_n-g(\theta))\overset{\text{d}}{\longrightarrow}N(0,\sigma^2)$$
-    for all $\theta\in\Theta$. In that case, we denote it by ${\hat\theta}_n\overset{\text{a}}{\sim}N\left(g(\theta),\frac{\sigma^2}{n}\right)$.
+    For each $n\in\NN$, let $(\mathcal{X},\mathcal{F},\{\Prob_{\theta}^{\vf{X}_n}:\theta\in\Theta\subseteq \RR\})$ be a parametric statistical model with $X_1,\ldots,X_n$ being \iid whose variance is $\sigma^2$, $g:\Theta\rightarrow\Theta$ be a function and ${{\hat\theta}}_n$ be an estimator of $g(\theta)\in\Theta$. We say that the sequence $({\hat\theta}_n)$ is \emph{an asymptotically normal estimator} of $g(\theta)$ with asymptotically variance $\frac{\sigma^2}{n}$ if $$\sqrt{n}({\hat\theta}_n-g(\theta))\overset{\text{d}}{\longrightarrow}N(0,\sigma^2)\qquad\forall \theta\in\Theta$$
+    In that case, we denote it by ${\hat\theta}_n\overset{\text{a}}{\sim}N\left(g(\theta),\frac{\sigma^2}{n}\right)$.
   \end{definition}
   \subsubsection{Methods of estimation}
   \begin{definition}[Method of moments]
@@ -111,7 +112,7 @@
     $$
   \end{definition}
   \begin{proposition}
-    The estimators obtained by the method of moments are strongly consistent (and in $L^2$).
+    The estimators obtained by the method of moments are strongly consistent and consistent in $L^2$.
   \end{proposition}
   \begin{definition}[Likelihood]
     Let $(\mathcal{X},\mathcal{F},\{\Prob_{\theta}^{\vf{X}_n}:{\theta}\in\Theta\subseteq \RR\})$ be a parametric statistical model, $\vf{x}_n\in\mathcal{X}$ be a realization of $\vf{X}_n$.
@@ -146,7 +147,7 @@
       \item The function $L(\theta;\vf{x}_n)$ is two times differentiable with respect to $\theta$ $\forall \vf{x}_n\in\mathcal{X}$ (except in a set of probability zero) and moreover:
             \begin{enumerate}
               \item For the discrete case: $$\pdv[2]{}{\theta}\sum_{\vf{x}_n\in\mathcal{X}}L(\theta;\vf{x}_n)=\sum_{\vf{x}_n\in\mathcal{X}}\pdv[2]{L}{\theta}(\theta;\vf{x}_n)$$
-                    \item\label{EST_regular} For the continuous case: $$\pdv[2]{}{\theta}\int_{\mathcal{X}}L(\theta;\vf{x}_n)\dd{\vf{x}_n}=\int_{\mathcal{X}}\pdv[2]{L}{\theta}(\theta;\vf{x}_n)\dd{\vf{x}_n}$$
+              \item For the continuous case: $$\pdv[2]{}{\theta}\int_{\mathcal{X}}L(\theta;\vf{x}_n)\dd{\vf{x}_n}=\int_{\mathcal{X}}\pdv[2]{L}{\theta}(\theta;\vf{x}_n)\dd{\vf{x}_n}$$
             \end{enumerate}
       \item For all $\theta\in\Theta$, we have: $$0<\int_\mathcal{X}{\left(\pdv[2]{\ell}{\theta}(\theta;\vf{x}_n)\right)}^2 f_{\vf{X}_n}(\vf{x}_n;\vf\theta)\dd{\vf{x}_n}<\infty$$
     \end{enumerate}
@@ -173,10 +174,11 @@
     for all $\theta\in\Theta$.
   \end{definition}
   \begin{theorem}[Cramér-Rao bound]
-    Let $(\mathcal{X}, \mathcal{F}, \{\Prob_{\theta}^{\vf{X}_n}: \theta\in\Theta\subseteq\RR\})$ be a regular parametric statistical model, $\vf{x}_n\in\mathcal{X}$ be a realization of $\vf{X}_n$, $g:\Theta\rightarrow\Theta$ be a differentiable function and ${\hat\theta}$ be a regular and unbiased estimator of $g({\theta})\in\Theta$. Then: $$\Var(\hat\theta)\geq \frac{{g'(\theta)}^2}{I(\theta)}$$
+    Let $(\mathcal{X}, \mathcal{F}, \{\Prob_{\theta}^{\vf{X}_n}: \theta\in\Theta\subseteq\RR\})$ be a regular parametric statistical model, $\vf{x}_n\in\mathcal{X}$ be a realization of $\vf{X}_n$, $g:\Theta\rightarrow\Theta$ be a differentiable function and ${\hat\theta}$ be a regular estimator of $g({\theta})\in\Theta$. Then: $$\Var(\hat\theta)\geq \frac{{g'(\theta)}^2}{I(\theta) }\left[1+{\left(\bias'(\hat\theta)\right)}^2\right]$$ Moreover if the estimator $\hat\theta$ is unbiased we have: $$\Var(\hat\theta)\geq \frac{{g'(\theta)}^2}{I(\theta)}$$
   \end{theorem}
   \begin{definition}
     Let $(\mathcal{X},\mathcal{F},\{\Prob_{\theta}^{\vf{X}_n}:\theta\in\Theta\subseteq\RR\})$ be a regular statistical model, $\vf{x}_n\in\mathcal{X}$ be a realization of $\vf{X}_n$, $g:\Theta\rightarrow\Theta$ be a differentiable function and ${\hat\theta}$ be a regular and unbiased estimator of $g({\theta})\in\Theta$. We say that $\hat\theta$ is an \emph{efficient estimator} of $g(\theta)$ if $$\Var(\hat\theta)=\frac{{g'(\theta)}^2}{I(\theta)}$$
+    We say that $\hat\theta$ is an \emph{asymptotic efficient estimator} of $g(\theta)$ if the asymptotic variance of $\hat\theta$ is $\frac{{g'(\theta)}^2}{I(\theta)}$.
   \end{definition}
   \begin{proposition}
     Let $(\mathcal{X},\mathcal{F},\{\Prob_{\theta}^{\vf{X}_n}:\theta\in\Theta\subseteq\RR\})$ be a regular statistical model, $g:\Theta\rightarrow\Theta$ be a function and ${\hat\theta}$ be a regular, unbiased and efficient estimator of $g({\theta})\in\Theta$. Then, $\hat\theta$ is a MVUE in the class of regular estimators.
@@ -185,7 +187,9 @@
     Let $(\mathcal{X},\mathcal{F},\{\Prob_{\theta}^{\vf{X}_n}:\theta\in\Theta\subseteq \RR\})$ be a regular statistical model, $\vf{x}_n\in\mathcal{X}$ be a realization of $\vf{X}_n$ and ${\hat\theta}$ be a MLE of ${\theta}\in\Theta$. Suppose that $\pdv[2]{\ell}{\theta}$ is a continuous function of $\theta$ and that $$\left|\pdv[2]{\ell}{\theta}(\tilde{\theta};\vf{x}_n)\right|<h(\vf{x}_n;\theta)$$
     for all $\tilde{\theta}$ in a neighbourhood of $\theta$ with $\int_\mathcal{X}h(\vf{x}_n;\theta)L(\theta;\vf{x}_n)\dd{\vf{x}_n}<\infty$. Then:
     $$\hat\theta\overset{\text{d}}{\longrightarrow}N\left(\theta,\frac{1}{I(\theta)}\right)$$
-    Thus, ${\hat\theta}$ is an asymptotically efficient estimator of $\theta$.
+    Thus, ${\hat\theta}$ is an asymptotically efficient estimator of $\theta$. Hence, an asymptotic confidence interval for $\theta$ of confidence $1-\alpha$ is:
+    $$\theta\in\left(\hat\theta-\frac{z_{1-\frac{\alpha}{2}}}{\sqrt{I(\hat\theta)}},\hat\theta+\frac{z_{1-\frac{\alpha}{2}}}{\sqrt{I(\hat\theta)}}\right)$$
+    where $z_{1-\frac{\alpha}{2}}$ denote the $1-\frac{\alpha}{2}$ quantile of the standard normal distribution (see \cref{STA_quantile}).
   \end{theorem}
   \begin{theorem}[Delta method]
     Let $(\mathcal{X},\mathcal{F},\{\Prob_{\theta}^{\vf{X}_n}:\theta\in\Theta\subseteq\RR\})$ be a statistical model, $g:\Theta\rightarrow\Theta$ be a two-times differentiable function such that $g'(\theta)\ne 0$ and $\hat\theta$ be an estimator of $\theta\in\Theta$. Then:
@@ -202,8 +206,8 @@
   \begin{definition}
     We denote by $\Phi(t)$ the cdf of a standard normal distribution $N(0,1)$.
   \end{definition}
-  \begin{definition}[Quantile]
-    We define quantile function $Q_X(p)$ of a distribution of a random variable $X$ as the inverse of the cmf. That is, $Q_X(p)$ satisfies:
+  \begin{definition}[Quantile]\label{STA_quantile}
+    We define quantile function $Q_X(p)$ of a distribution of a random variable $X$ as the inverse function of the cmf. That is, $Q_X(p)$ satisfies:
     $$\Prob(X\leq Q_X(p))=p$$
     In particular, we denote the quantile of a standard normal distribution as $z_p:=Q_X(p)$.
   \end{definition}
@@ -249,7 +253,7 @@
   \begin{definition}
     We define the \emph{chi-squared distribution with $n$ degrees of freedom}, denoted as ${\chi_n}^2$, as the distribution $${\chi_n}^2:=\text{Gamma}\left(\frac{n}{2},\frac{1}{2}\right)$$ which is the distribution of ${Z_1}^2+\cdots+{Z_n}^2$, where $Z_1,\ldots,Z_n\sim N(0,1)$ are \iid random variables. Its pdf is:
     $$f_{{\chi_n}^2}(x)=\frac{1}{2^\frac{n}{2}\Gamma\left(\frac{n}{2}\right)}x^{\frac{n}{2}-1}\exp{-\frac{x}{2}}\indi{(0,\infty)}(x)$$
-    We will denote by ${\chi_{n;p}}^2:=Q_{{\chi_n}^2}(p)$ the quantile of the ${\chi_n}^2$
+    We will denote by ${\chi_{n;p}}^2:=Q_{{\chi_n}^2}(p)$ the quantile of the ${\chi_n}^2$.
   \end{definition}
   \begin{proposition}
     Let $X\sim\text{Gamma}(\alpha,\beta)$ and $c\in\RR_{>0}$. Then, $cX\sim\text{Gamma}(\alpha,\beta/c)$. In particular, if $X\sim\text{Gamma}(n,1)$, then $2X\sim {\chi_{2n}}^2$.
@@ -257,14 +261,14 @@
   \subsubsection{Student's \texorpdfstring{$t$}{t}-distribution}
   \begin{definition}
     Let $n\in\NN$ and $Z\sim N(0,1)$ and $Y\sim{\chi_n}^2$ be independent random variables. We define the \emph{Student's $t$-distribution with $n$ degrees of freedom} as the distribution of: $$\frac{Z}{\sqrt{Y/n}}$$
-    We will denote by $t_{n;p}:=Q_{t_n}(p)$ the quantile of the $t_n$
+    We will denote by $t_{n;p}:=Q_{t_n}(p)$ the quantile of the $t_n$.
   \end{definition}
   \begin{proposition}
     Let $n\in\NN$. Then, the pdf of $t_n$ is: $$f_{t_n}(x)=\frac{\Gamma\left(\frac{n+1}{2}\right)}{\sqrt{\pi n}\Gamma\left(\frac{n}{2}\right)}{\left(1+\frac{x^2}{n}\right)}^{-\frac{n+1}{2}}\footnote{It makes sense if we replace the value $n\in\NN$ for a value $\nu\in\RR_{>0}$. However the original definition of $t_n$ from the ${\chi_n}^2$ fails.}$$
   \end{proposition}
   \subsubsection{Fisher's theorem}
   \begin{theorem}[Fisher's theorem]
-    Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\theta\in\Theta\})$ be a parametric statistical model and suppose $X_1,\ldots,X_n\sim N(\mu,\sigma^2)$ are \iid random variables. Then:
+    Let $(\mathcal{X},\mathcal{F},\{X_1,\ldots, \\X_n\sim N(\mu,\sigma^2)\text{ i.i.d.}:(\mu,\sigma^2)\in\RR\times\RR_{\geq 0}\})$ be a parametric statistical model. Then:
     \begin{enumerate}
       \item $\overline{X}_n\sim N\left(\mu,\frac{\sigma^2}{n}\right)$
       \item $\tilde{S}_n{}^2\sim\frac{\sigma^2}{n-1}{\chi_{n-1}}^2$
@@ -291,7 +295,7 @@
   \subsection{Confidence intervals}
   \subsubsection{Confidence regions}
   \begin{definition}
-    Let $(\mathcal{X},\mathcal{F},\{\Prob_{\vf\theta}^{\vf{X}_n}:\vf\theta\in\Theta\subseteq\RR^d\})$ be a parametric statistical model and $\vf{g}:\Theta\rightarrow\RR^m$ be a function with $m\leq d$. A \emph{confidence region} for $\vf{g}(\vf\theta)$ with \emph{confidence level} $\gamma\in[0,1]$ is a random region $$C(\vf{X}_n)$$ such that $$\Prob(\vf{g}(\vf\theta)\in C(\vf{X}_n))\geq \gamma\quad\forall \theta\in\Theta$$ If $d=1$, we talk about \emph{confidence intervals}. The value $\alpha:=1-\gamma$ is called \emph{significance level}.
+    Let $(\mathcal{X},\mathcal{F},\{\Prob_{\vf\theta}^{\vf{X}_n}:\vf\theta\in\Theta\subseteq\RR^d\})$ be a parametric statistical model and $\vf{g}:\Theta\rightarrow\RR^m$ be a function with $m\leq d$. A \emph{confidence region} for $\vf{g}(\vf\theta)$ with \emph{confidence level} $\gamma\in[0,1]$ is a random region $C(\vf{X}_n)$ such that: $$\Prob(\vf{g}(\vf\theta)\in C(\vf{X}_n))\geq \gamma\quad\forall \theta\in\Theta$$ If $d=1$, we talk about \emph{confidence intervals}. The value $\alpha:=1-\gamma$ is called \emph{significance level}.
   \end{definition}
   \begin{definition}
     Let $(\mathcal{X},\mathcal{F},\{\Prob_{\vf\theta}^{\vf{X}_n}:\vf\theta\in\Theta\subseteq\RR^d\})$ be a parametric statistical model and $\vf{g}:\Theta\rightarrow\RR^m$ be a function with $m\leq d$. A \emph{pivot} for $\vf{g}(\vf\theta)$ is a measurable function
@@ -354,7 +358,7 @@
   \end{definition}
   \begin{definition}[Hypothesis test]
     Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\theta\in\Theta\})$ be a statistical model. A \emph{hypothesis test} is a function $$\function{\delta}{\mathcal{X}}{\{\mathcal{H}_0,\mathcal{H}_1\}}{\vf{x}_n}{\delta(\vf{x}_n)}$$
-    The set $A_0:=\delta^{-1}(\mathcal{H}_0)\subseteq \mathcal{X}$, which is the set of samples that will lead us to accept $\mathcal{H}_0$, is called \emph{acceptation region}. The set $A_1:=\delta^{-1}(\mathcal{H}_1)\subseteq \mathcal{X}$, which is the set of samples that will lead us to accept $\mathcal{H}_1$ (and therefore reject $\mathcal{H}_0$), is called \emph{critical region}\footnote{In order to denote these concepts more compactly, we will write $\delta:\mathcal{X}=A_1\sqcup A_2\rightarrow\{\mathcal{H}_0,\mathcal{H}_1\}$ to denote the hypothesis test whose acceptation and critical regions are $A_0$ and $A_1$, respectively.}.
+    The set $A_0:=\delta^{-1}(\mathcal{H}_0)\subseteq \mathcal{X}$, which is the set of samples that will lead us to accept\footnote{Some authors prefer to say that they don't reject $\mathcal{H}_0$ instead of saying that they accept $\mathcal{H}_0$.} $\mathcal{H}_0$, is called \emph{acceptation region}. The set $A_1:=\delta^{-1}(\mathcal{H}_1)\subseteq \mathcal{X}$, which is the set of samples that will lead us to accept $\mathcal{H}_1$ (and therefore reject $\mathcal{H}_0$), is called \emph{critical region}\footnote{In order to denote these concepts more compactly, we will write $\delta:\mathcal{X}=A_1\sqcup A_2\rightarrow\{\mathcal{H}_0,\mathcal{H}_1\}$ to denote the hypothesis test whose acceptation and critical regions are $A_0$ and $A_1$, respectively.}.
   \end{definition}
   \begin{definition}
     Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\theta\in\Theta\})$ be a statistical model and $\delta:\mathcal{X}=A_1\sqcup A_2\rightarrow\{\mathcal{H}_0,\mathcal{H}_1\}$ be a hypothesis test. An \emph{error of type I} is the rejection of $\mathcal{H}_0$ when it is true. An \emph{error of type II} is the acceptation of $\mathcal{H}_0$ when it is false. We define the probabilities $\alpha$ and $\beta$ as:
@@ -363,7 +367,7 @@
       \beta  & :=\Prob(\text{Error of type II})=\Prob(\text{Accept $\mathcal{H}_0$}\mid\text{$\mathcal{H}_0$ is false})
     \end{align*}
     More precisely, if $\vf{x}_n\in\mathcal{X}$ is a realization of $\vf{X}_n$, then: $$\alpha:=\sup\{\Prob(\vf{x}_n\in A_1\mid \theta):\theta\in\Theta_0\}$$
-    The value $1-\beta$ is called \emph{power} of the test and the value $\alpha$, \emph{size} of the test. Moreover we say that the test has \emph{significance level} $\alpha\in[0,1]$ if its size is less than or equal to $\alpha$. In many cases, the size of the test and the significance level are equal\footnote{In particular, for simple hypostesis they are the same thing.}\footnote{In practise, we fix a significance level $\alpha\in[0,1]$ small enough ($\approx 0.05$ but may vary depending on the problem) with which we accept making mistakes and from here we try to minimize the $\beta$ (or maximize the power $1-\beta$). Moreover having fixed $\alpha$, we obtain a confidence level $1-\alpha$. And if we impose $\Prob(\vf{x}_n\in A_0\mid \mathcal{H}_0)=1-\alpha$, we are able to determine $A_0$.}.
+    The value $1-\beta$ is called \emph{power} of the test and the value $\alpha$, \emph{size} of the test. Moreover we say that the test has \emph{significance level} $\alpha\in[0,1]$ if its size is less than or equal to $\alpha$. In many cases the size of the test and the significance level are equal, hence the use of the same letter\footnote{In particular, for simple hypostesis they are the same thing.}\footnote{In practise, we fix a significance level $\alpha\in[0,1]$ small enough ($\approx 0.05$ but may vary depending on the problem) with which we accept making mistakes and from here we try to minimize the $\beta$ (or maximize the power $1-\beta$). Moreover having fixed $\alpha$, we obtain a confidence level $1-\alpha$. And if we impose $\Prob(\vf{x}_n\in A_0\mid \mathcal{H}_0)=1-\alpha$, we are able to determine $A_0$.}.
   \end{definition}
   \begin{definition}
     Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\theta\in\Theta\})$ be a statistical model, $\delta:\mathcal{X}=A_1\sqcup A_2\rightarrow\{\mathcal{H}_0,\mathcal{H}_1\}$ be a hypothesis test and $\vf{x}_n\in\mathcal{X}$ be a realization of $\vf{X}_n$. We define the \emph{power function} as: $$\Pi(\theta)=\Prob(\text{Reject $\mathcal{H}_0$})=\Prob(\vf{x}_n\in A_1)$$
@@ -432,32 +436,54 @@
   \end{theorem}
   \subsubsection{Likelihood-ratio test}
   \begin{definition}[Likelihood-ratio test]
-    Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\theta\in\Theta\})$ be a statistical model, $\vf{x}_n\in\mathcal{X}$ be a realization of $\vf{X}_n$, $\delta:\mathcal{X}=A_1\sqcup A_2\rightarrow\{\mathcal{H}_0,\mathcal{H}_1\}$ be a hypothesis test of compound hypothesis $\mathcal{H}_0:\theta\in\Theta_0$ and $\mathcal{H}_1:\theta\in\Theta_1$.
+    Let $(\mathcal{X},\mathcal{F},\{\Prob_{\vf\theta}^{\vf{X}_n}:{\vf\theta}\in\Theta\subseteq\RR^d\})$ be a statistical model, $\vf{x}_n\in\mathcal{X}$ be a realization of $\vf{X}_n$, $\delta:\mathcal{X}=A_1\sqcup A_2\rightarrow\{\mathcal{H}_0,\mathcal{H}_1\}$ be a hypothesis test of compound hypothesis $\mathcal{H}_0:{\vf\theta}\in\Theta_0$ and $\mathcal{H}_1:{\vf\theta}\in\Theta_1$.
     Then, the \emph{likelihood ratio test} (\emph{LRT}) is given by the critical region:
-    $$\left\{\vf{x}_n\in\mathcal{X}:\frac{\sup\{L(\theta;\vf{x}_n):\theta\in\Theta_0\}}{\sup\{L(\theta;\vf{x}_n):\theta\in\Theta\}}\leq C\right\}= A_1$$
-    for some constant $C>0$\footnote{Note that $L(\hat\theta,\vf{x}_n)=\sup\{L(\theta;\vf{x}_n):\theta\in\Theta\}$, where $\hat\theta$ is the MLE estimator. Similarly $L(\hat\theta_0,\vf{x}_n)=\sup\{L(\theta;\vf{x}_n):\theta\in\Theta\}$, where $\hat\theta_0$ is the MLE estimator restricted to $\Theta_0$.}.
+    $$\left\{\vf{x}_n\in\mathcal{X}:\frac{\sup\{L({\vf\theta};\vf{x}_n):{\vf\theta}\in\Theta_0\}}{\sup\{L({\vf\theta};\vf{x}_n):{\vf\theta}\in\Theta\}}\leq C\right\}= A_1$$
+    for some constant $C>0$\footnote{Note that $L({\vf{\hat\theta}},\vf{x}_n)=\sup\{L({\vf\theta};\vf{x}_n):{\vf\theta}\in\Theta\}$, where ${\vf{\hat\theta}}$ is the MLE. Similarly $L({\vf{\hat\theta}}_0,\vf{x}_n)=\sup\{L({\vf\theta};\vf{x}_n):{\vf\theta}\in\Theta\}$, where ${\vf{\hat\theta}}_0$ is the MLE restricted to $\Theta_0$.}.
   \end{definition}
   \begin{proposition}
-    Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\theta\in\Theta\})$ be a statistical model, $\vf{x}_n\in\mathcal{X}$ be a realization of $\vf{X}_n$, $\delta:\mathcal{X}=A_1\sqcup A_2\rightarrow\{\mathcal{H}_0,\mathcal{H}_1\}$ be a hypothesis test of simple hypothesis $\mathcal{H}_0$ and $\mathcal{H}_1$. Then, the LRT is a Neyman-Pearson test.
+    Let $(\mathcal{X},\mathcal{F},\{\Prob_{\vf\theta}^{\vf{X}_n}:{\vf\theta}\in\Theta\subseteq\RR^d\})$ be a statistical model, $\vf{x}_n\in\mathcal{X}$ be a realization of $\vf{X}_n$, $\delta:\mathcal{X}=A_1\sqcup A_2\rightarrow\{\mathcal{H}_0,\mathcal{H}_1\}$ be a hypothesis test of simple hypothesis $\mathcal{H}_0$ and $\mathcal{H}_1$. Then, the LRT is a Neyman-Pearson test.
   \end{proposition}
   \begin{theorem}[Asymptotic behaviour of the LRT]
-    Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\theta\in\Theta\subseteq\RR^d\})$ be a parametric regular statistical model and consider the test $\delta:\mathcal{X}=A_1\sqcup A_2\rightarrow\{\mathcal{H}_0,\mathcal{H}_1\}$ of compound hypothesis $\mathcal{H}_0:\theta\in\Theta_0$ and $\mathcal{H}_1:\theta\in\Theta_1$. Let $\Lambda(\vf{x}_n):=-2\ln \frac{\sup\{L(\theta;\vf{x}_n):\theta\in\Theta_0\}}{\sup\{L(\theta;\vf{x}_n):\theta\in\Theta\}}$. Then:
+    Let $(\mathcal{X},\mathcal{F},\{\Prob_{\vf\theta}^{\vf{X}_n}:{\vf\theta}\in\Theta\subseteq\RR^d\})$ be a parametric regular statistical model and consider the test $\delta:\mathcal{X}=A_1\sqcup A_2\rightarrow\{\mathcal{H}_0,\mathcal{H}_1\}$ of compound hypothesis $\mathcal{H}_0:{\vf\theta}\in\Theta_0$ and $\mathcal{H}_1:{\vf\theta}\in\Theta_1$. Let $$\Lambda(\vf{x}_n):=-2\ln \frac{\sup\{L({\vf\theta};\vf{x}_n):{\vf\theta}\in\Theta_0\}}{\sup\{L({\vf\theta};\vf{x}_n):{\vf\theta}\in\Theta\}}$$ which is called \emph{LRT test statistic}. Then if the model is regular, we have:
     $$\Lambda(\vf{x}_n)\overset{\text{d}}{\longrightarrow}{\chi_r}^2$$ where $r=\dim\Theta-\dim\Theta_0$.
   \end{theorem}
-  \begin{definition}[Test of homogeneity]
-    Consider $r$ \iid random variables $X_1,\ldots,X_r$ that can take different values $a_1,\ldots,a_s$ each with probability $\Prob(X_i=a_j)=p_{ij}$ $\forall i,j$ and such that $\sum_{j=1}^sp_{ij}=1$. Suppose we have $n_{ij}$ observations of the variable $X_i$ taking the value $a_j$ and denote $n_{i\cdot}:=\sum_{j=1}^sn_{ij}$, $n_{\cdot j}:=\sum_{i=1}^rn_{ij}$ and $n:=\sum_{i=1}^r\sum_{j=1}^sn_{ij}$. That is, we have the following table:
+  \begin{definition}[Goodness of fit]
+    Suppose we have a random variable $X$ whose outcomes are $x_1,\ldots,x_n$ and that we classify these outcomes in $k$ classes. Thus, we obtain a table of the form:
     \begin{center}
       \begin{minipage}{\linewidth}
         \centering
-        \begin{tabular}{c|ccccc||c}
-                           & $a_1$         & $\cdots$ & $a_j$         & $\cdots$ & $a_s$         & $\mathbf{Total}$ \\
+        \begin{tabular}{l||ccccc|c}
+          Class     & $a_1$   & $\cdots$ & $a_j$   & $\cdots$ & $a_k$   & $\mathbf{Total}$ \\
           \hline
+          Frequency & $n_{1}$ & $\cdots$ & $n_{j}$ & $\cdots$ & $n_{k}$ & $n$              \\
+        \end{tabular}
+      \end{minipage}
+    \end{center}
+    We want a test for:
+    $$
+      \begin{cases}
+        \mathcal{H}_0: & X\sim f_{\vf\theta}                     \\
+        \mathcal{H}_1: & P(X\in a_i)=\frac{n_i}{n}\quad\forall i
+      \end{cases}
+    $$
+    If $\pi_i$ denotes the probability of being in the cell $i$ under $\mathcal{H}_0$, we can approximate $\pi_i$ by $\hat\pi_i=\Prob(X\in a_i\mid {\vf\theta}={\vf{\hat\theta}})$, where ${\vf{\hat\theta}}$ is the MLE of ${\vf\theta}$, for $i=1,\ldots,k-1$ and let $\hat\pi_k:=1-\sum_{i=1}^{k-1}\hat\pi_i$. Hence since the distribution of the data in the table follows a multinomial distribution, we have\footnote{In order to have the expected asymptotic behaviour we need to check that the expectations of each $\hat\pi_i$ are greater than or equal to 5 (heuristic criterion), i.e. $n_i\hat\pi_i\geq 5$ $\forall i$. If this is not the case, we should reduce the number of classes by groupping some of them together.}:
+    $$\Lambda=2\sum_{i=1}^kn_i\log\left(\frac{n_i}{n\hat\pi_i}\right)\overset{\text{d}}{\longrightarrow}{\chi_{k-2}}^2$$
+  \end{definition}
+  \begin{definition}[Test of independence]
+    Consider $r$ \iid random variables $X_1,\ldots,X_r$ whose outcomes can be classified in the classes $a_1,\ldots,a_s$ each with probability $\Prob(X_i=a_j)=p_{ij}$ $\forall i,j$. Suppose we have $n_{ij}$ observations of the variable $X_i$ taking the value $a_j$ and denote $n_{i\cdot}:=\sum_{j=1}^sn_{ij}$, $n_{\cdot j}:=\sum_{i=1}^rn_{ij}$ and $n:=\sum_{i=1}^r\sum_{j=1}^sn_{ij}$. That is, we have the following table:
+    \begin{center}
+      \begin{minipage}{\linewidth}
+        \centering
+        \begin{tabular}{c||ccccc|c}
+                           & $a_1$         & $\cdots$ & $a_j$         & $\cdots$ & $a_s$         & $\mathbf{Total}$ \\
+          \hline\hline
           $X_1$            & $n_{11}$      & $\cdots$ & $n_{1j}$      & $\cdots$ & $n_{1s}$      & $n_{1\cdot}$     \\
           $\vdots$         & $\vdots$      & $\ddots$ & $\vdots$      & $\ddots$ & $\vdots$      & $\vdots$         \\
           $X_i$            & $n_{i1}$      & $\cdots$ & $n_{ij}$      & $\cdots$ & $n_{is}$      & $n_{i\cdot}$     \\
           $\vdots$         & $\vdots$      & $\ddots$ & $\vdots$      & $\ddots$ & $\vdots$      & $\vdots$         \\
           $X_r$            & $n_{r1}$      & $\cdots$ & $n_{rj}$      & $\cdots$ & $n_{rs}$      & $n_{r\cdot}$     \\
-          \hline\hline
+          \hline
           $\mathbf{Total}$ & $n_{\cdot 1}$ & $\cdots$ & $n_{\cdot j}$ & $\cdots$ & $n_{\cdot s}$ & $n$
         \end{tabular}
       \end{minipage}
@@ -467,9 +493,16 @@
       \begin{cases}
         \mathcal{H}_0: & p_{1j}=\cdots=p_{rj}\ \forall j \\
         \mathcal{H}_1: & \text{otherwise}
+      \end{cases}\iff
+      \begin{cases}
+        \mathcal{H}_0: & p_{ij}=\theta_i\phi_j\ \forall i,j \\
+        \mathcal{H}_1: & \text{otherwise}
       \end{cases}
     $$
-    taking into account that $X_i\sim\text{Mult}(n_{i\cdot};p_{1s},\ldots,p_{is})$. Note that in this case the dimension of the parameters space is $r(s-1)$ and under $\mathcal{H}_0$ is $s-1$.
+    Again, the distribution of the data in the table follows a multinomial distribution, so under $\mathcal{H}_0$ we get the following MLEs for $\theta_i$ and $\phi_j$ (with the constraints that $\sum_{i=1}^r\theta_i=\sum_{j=1}^s\theta_j=1$):
+    $$\hat\theta_i=\frac{n_{i\cdot}}{n}\quad\hat\phi_j=\frac{n_{\cdot j}}{n}\qquad\forall i,j$$
+    And in general, using the constriant $\sum_{i=1}^r\sum_{j=1}^sp_{ij}=1$, we have: $$\hat{p}_{ij}=\frac{n_{ij}}{n}\qquad\forall i,j$$
+    Finally we have: $$\Lambda=2\sum_{i=1}^r\sum_{j=1}^sn_{ij}\log\left(\frac{n_{ij}n}{n_{i\cdot}n_{\cdot j}}\right)\overset{\text{d}}{\longrightarrow}{\chi_{(r-1)(s-1)}}^2$$
   \end{definition}
   \subsubsection{\texorpdfstring{$t$}{t}-test}
   \begin{definition}[$t$-test]
@@ -477,10 +510,13 @@
   \end{definition}
   \subsubsection{Wald and score tests}
   \begin{definition}[Wald test]
-    Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\vf\theta\in\Theta\subseteq\RR^d\})$ be a parametric regular statistical model and consider the test $\delta:\mathcal{X}=A_1\sqcup A_2\rightarrow\{\mathcal{H}_0,\mathcal{H}_1\}$ of simple hypothesis $\mathcal{H}_0:\vf\theta=\vf\theta_0$ and $\mathcal{H}_1:\vf\theta\ne\vf\theta_0$. The \emph{Wald test} is the test whose statistic is: $$\transpose{(\vf{\hat\theta}-\vf\theta_0)}\vf{I}(\vf{\hat\theta})(\vf{\hat\theta}-\vf\theta_0)\overset{\text{a}}{\sim}{\chi_d}^2$$ where $\vf{\hat\theta}$ is the MLE of $\vf\theta$ and $d=\dim\Theta$.
+    Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\vf\theta\in\Theta\subseteq\RR^d\})$ be a parametric regular statistical model and consider the test $\delta:\mathcal{X}=A_1\sqcup A_2\rightarrow\{\mathcal{H}_0,\mathcal{H}_1\}$ of simple hypothesis $\mathcal{H}_0:\vf\theta=\vf\theta_0$ and $\mathcal{H}_1:\vf\theta\ne\vf\theta_0$. The \emph{Wald test} is the test whose statistic is: $$\transpose{(\vf{\hat\theta}-\vf\theta_0)}\vf{I}(\vf{\hat\theta})(\vf{\hat\theta}-\vf\theta_0)\overset{\text{a}}{\sim}{\chi_d}^2$$ where $\vf{\hat\theta}$ is the MLE of $\vf\theta$ and $d=\dim\Theta$. If $\mathcal{H}_0:\vf\theta\in\Theta_0$, we shall replace $\vf\theta_0$ by the MLE under $\mathcal{H}_0$, $\vf{\hat\theta_0}$, in the test statistic. For the 1-dimensional case, we have: $$I(\hat\theta){(\hat\theta-\theta_0)}^2\overset{\text{a}}{\sim}{\chi_1}^2$$
   \end{definition}
+  \begin{corollary}
+    Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\vf\theta\in\Theta\subseteq\RR^d\})$ be a parametric regular statistical model and consider the test $\delta:\mathcal{X}=A_1\sqcup A_2\rightarrow\{\mathcal{H}_0,\mathcal{H}_1\}$ of simple hypothesis $\mathcal{H}_0:\vf{R}\vf\theta=\vf{r}$ and $\mathcal{H}_1:\vf{R}\vf\theta\ne\vf{r}$, where $\vf{R}\in\mathcal{M}_{k\times d}(\RR)$, $\vf\theta\in\RR^d$ and $\vf{r}\in\RR^k$. The test statistic of Wald test is: $$\transpose{(\vf{R\hat\theta}-\vf{r})}{\left[\vf{R}{\vf{I}(\vf{\hat\theta})}^{-1}\transpose{\vf{R}}\right]}^{-1}(\vf{R\hat\theta}-\vf{r})\overset{\text{a}}{\sim}{\chi_k}^2$$ where $\vf{\hat\theta}$ is the MLE of $\vf\theta$. The matrix $\vf{R}$ is called \emph{contrast matrix}.
+  \end{corollary}
   \begin{definition}[Score test]
-    Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\vf\theta\in\Theta\subseteq\RR^d\})$ be a parametric regular statistical model and consider the test $\delta:\mathcal{X}=A_1\sqcup A_2\rightarrow\{\mathcal{H}_0,\mathcal{H}_1\}$ of simple hypothesis $\mathcal{H}_0:\vf\theta=\vf\theta_0$ and $\mathcal{H}_1:\vf\theta\ne\vf\theta_0$. The \emph{score test} is the test whose statistic is: $$\transpose{\vf{S}(\vf\theta_0)}\vf{I}^{-1}(\vf{\theta}_0)\vf{S}(\vf\theta_0)\overset{\text{a}}{\sim}{\chi_d}^2$$ where $d=\dim\Theta$. If $\mathcal{H}_0:\vf\theta=\vf\theta_0$, the we shall replace $\vf\theta_0$ by the MLE under $\mathcal{H}_0$, $\vf{\hat\theta_0}$, in the test statistic.
+    Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\vf\theta\in\Theta\subseteq\RR^d\})$ be a parametric regular statistical model and consider the test $\delta:\mathcal{X}=A_1\sqcup A_2\rightarrow\{\mathcal{H}_0,\mathcal{H}_1\}$ of simple hypothesis $\mathcal{H}_0:\vf\theta=\vf\theta_0$ and $\mathcal{H}_1:\vf\theta\ne\vf\theta_0$. The \emph{score test} is the test whose statistic is: $$\transpose{\vf{S}(\vf\theta_0)}\vf{I}^{-1}(\vf{\theta}_0)\vf{S}(\vf\theta_0)\overset{\text{a}}{\sim}{\chi_d}^2$$ where $d=\dim\Theta$. If $\mathcal{H}_0:\vf\theta\in\Theta_0$, we shall replace $\vf\theta_0$ by the MLE under $\mathcal{H}_0$, $\vf{\hat\theta_0}$, in the test statistic. For the 1-dimensional case, we have: $$\frac{{S(\theta_0)}^2}{I(\theta_0)}\overset{\text{a}}{\sim}{\chi_1}^2$$
   \end{definition}
   \subsection{Bootstrapping}
   \subsubsection{Parametric and non-parametric bootstrap}
