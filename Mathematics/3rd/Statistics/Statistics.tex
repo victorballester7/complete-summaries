@@ -521,39 +521,39 @@
   \subsection{Bootstrapping}
   \subsubsection{Parametric and non-parametric bootstrap}
   \begin{definition}[Non-parametric bootstrap]
-    Consider a sample $x_1,\ldots,x_n$ from \iid random variables $X_1,\ldots,X_n\sim F$ of an unknown distribution $F$. Our goal is to get an estimator of a parameter $\theta=T(X_1,\ldots,X_n)$. To do so, we define the \emph{empirical distribution} $F_n$ as follows: if $X^*\sim F_n$ then: $$\Prob(X^*=x_i)=\frac{1}{n}\quad\forall i\in\{1,\ldots,n\}$$ First we compute ${\hat\theta}:=T(x_1,\ldots,x_n)$ from the data given.
-    Now we generate $B$ samples of data $\{{x_1^b}^*,\ldots,{x_n^b}^*\}$, $b=1,\ldots,B$, taken from the distribution $F_n$ (with replacement) and for each sample we compute the respective estimator ${\hat\theta}_1^*=T({x_1^b}^*,\ldots,{x_n^b}^*)$. This gives us the \emph{bootstrap distribution} of ${\hat\theta}$ and so the bias and variance of ${\hat\theta}$ is:
-    $$\bias_B({\hat\theta})={\hat\theta}^*-{\hat\theta}\quad\Var_B({\hat\theta})=\frac{1}{B-1}\sum_{b=1}^B{({\hat\theta}_b^*-{\hat\theta}^*)}^2$$
-    where ${\hat\theta}^*:=\frac{1}{B}\sum_{b=1}^B$. And hence, the bootstrap estimate of the standard error is:
-    $$\tilde{s}_B(\hat\theta)=\sqrt{\frac{\sum_{b=1}^B{({\hat\theta}_b^*-{\hat\theta}^*)}^2}{B-1}}$$
-    If we want an unbiased estimator ${\hat\theta}$ of $\theta$ we can replace ${\hat\theta}$ by $2{\hat\theta}-{\hat\theta}^*$.
+    Consider a sample $x_1,\ldots,x_n$ from \iid random variables $X_1,\ldots,X_n\sim F$ of an unknown distribution $F$. Our goal is to get an estimator of a parameter $\theta=T(X_1,\ldots,X_n)$. To do so, we define the \emph{empirical distribution} $F_n$ as follows: if $X\sim F_n$ then: $$\Prob(X=x_i)=\frac{1}{n}\quad\forall i\in\{1,\ldots,n\}$$ First we compute ${\hat\theta}:=T(x_1,\ldots,x_n)$ from the data given.
+    Now we generate $B$ samples of data $\{{x_1^b},\ldots,{x_n^b}\}$, $b=1,\ldots,B$, taken from the distribution $F_n$ (with replacement) and for each sample we compute the respective estimator ${\hat\theta}_b=T({x_1^b},\ldots,{x_n^b})$. This gives us the \emph{bootstrap distribution} of ${\hat\theta}$ and so the bias and variance of ${\hat\theta}$ is:
+    $$\bias_B({\hat\theta})=\overline{\theta}_B-{\hat\theta}\quad\Var_B({\hat\theta})=\frac{1}{B-1}\sum_{b=1}^B{({\hat\theta}_b-\overline{\theta}_B)}^2$$
+    where $\overline{\theta}_B:=\frac{1}{B}\sum_{b=1}^B{\hat\theta}_b$. And hence, the bootstrap estimate of the standard error is:
+    $$\tilde{s}_B(\hat\theta)=\sqrt{\frac{\sum_{b=1}^B{({\hat\theta}_b-\overline{\theta}_B)}^2}{B-1}}$$
+    If we want an unbiased estimator ${\hat\theta}$ of $\theta$ we can replace ${\hat\theta}$ by $2{\hat\theta}-\overline{\theta}_B$.
   \end{definition}
   \begin{definition}[Parametric bootstrap]
     Consider a sample $x_1,\ldots,x_n$ from \iid random variables $X_1,\ldots,X_n\sim F_{\theta}$ and we are interested in estimating $\theta=T(X_1,\ldots,X_n)$. First we compute ${\hat\theta}:=T(x_1,\ldots,x_n)$ from the data given.
-    Now we generate $B$ samples of data $\{{x_1^b}^*,\ldots,{x_n^b}^*\}$, $b=1,\ldots,B$, taken from the distribution $F_{{\hat\theta}}$ (with replacement) and for each sample we compute the respective estimator ${\hat\theta}_1^*=T({x_1^b}^*,\ldots,{x_n^b}^*)$. This gives us the \emph{parametric bootstrap distribution} of ${\hat\theta}$\footnote{Note that in order for bootstrapping to work we need some regular conditions of the function $T$ (Hadamard differentiability). Statistics like minimum or maximum doesn't satisfy these restrictions.}.
+    Now we generate $B$ samples of data $\{{x_1^b},\ldots,{x_n^b}\}$, $b=1,\ldots,B$, taken from the distribution $F_{{\hat\theta}}$ (with replacement) and for each sample we compute the respective estimator ${\hat\theta}_b=T({x_1^b},\ldots,{x_n^b})$. This gives us the \emph{parametric bootstrap distribution} of ${\hat\theta}$\footnote{Note that in order for bootstrapping to work we need some regular conditions of the function $T$ (Hadamard differentiability). Statistics like minimum or maximum doesn't satisfy these restrictions.}.
   \end{definition}
   \subsubsection{Bootstrap confidence intervals}
   \begin{definition}[Normal confidence interval]
-    Consider a sample $x_1,\ldots,x_n$ from \iid random variables $X_1,\ldots,X_n\sim F$ of an unknown distribution $F$. The \emph{normal confidence interval} for $\theta=T(X_1,\ldots,X_n)$ of level $\alpha$ is: $$\theta\in(\hat\theta-z_{1-\alpha/2}\tilde{s}_B(\hat\theta),\hat\theta+z_{1-\alpha/2}\tilde{s}_B(\hat\theta))$$ To use a bias-corrected bootstrap estimator, replace ${\hat\theta}$ by $2{\hat\theta}-{\hat\theta}^*$.
+    Consider a sample $x_1,\ldots,x_n$ from \iid random variables $X_1,\ldots,X_n\sim F$ of an unknown distribution $F$. The \emph{normal confidence interval} for $\theta=T(X_1,\ldots,X_n)$ of level $\alpha$ is: $$\theta\in(\hat\theta-z_{1-\alpha/2}\tilde{s}_B(\hat\theta),\hat\theta+z_{1-\alpha/2}\tilde{s}_B(\hat\theta))$$ To use a bias-corrected bootstrap estimator, replace ${\hat\theta}$ by $2{\hat\theta}-\overline{\theta}_B$.
   \end{definition}
   \begin{definition}[Basic bootstrap confidence interval]
-    Consider a sample $x_1,\ldots,x_n$ from \iid random variables $X_1,\ldots,X_n\sim F$ of an unknown distribution $F$. The \emph{basic bootstrap confidence interval} for $\theta=T(X_1,\ldots,X_n)$ of level $\alpha$ is: $$\theta\in(2\hat\theta-\hat\theta_{1-\alpha/2}^*,2\hat\theta-\hat\theta_{\alpha/2}^*)$$ where $\hat\theta_\alpha^*$ is the sample quantiles of the bootstrap relicates.
+    Consider a sample $x_1,\ldots,x_n$ from \iid random variables $X_1,\ldots,X_n\sim F$ of an unknown distribution $F$. The \emph{basic bootstrap confidence interval} for $\theta=T(X_1,\ldots,X_n)$ of level $\alpha$ is: $$\theta\in(2\hat\theta-\hat\theta_{1-\alpha/2},2\hat\theta-\hat\theta_{\alpha/2})$$ where $\hat\theta_\alpha$ is the sample quantiles of the bootstrap relicates.
   \end{definition}
   \begin{definition}[Bootstrap-t confidence interval]
-    Consider a sample $x_1,\ldots,x_n$ from \iid random variables $X_1,\ldots,X_n\sim F$ of an unknown distribution $F$. The \emph{bootstrap-t confidence interval} for $\theta=T(X_1,\ldots,X_n)$ of level $\alpha$ is: $$\theta\in(\hat\theta-t_{1-\alpha/2}\tilde{s}_B(\hat\theta),\hat\theta+t_{1-\alpha/2}\tilde{s}_B(\hat\theta))$$ To use a bias-corrected bootstrap estimator, replace ${\hat\theta}$ by $2{\hat\theta}-{\hat\theta}^*$.
+    Consider a sample $x_1,\ldots,x_n$ from \iid random variables $X_1,\ldots,X_n\sim F$ of an unknown distribution $F$. The \emph{bootstrap-t confidence interval} for $\theta=T(X_1,\ldots,X_n)$ of level $\alpha$ is: $$\theta\in(\hat\theta-t_{1-\alpha/2}\tilde{s}_B(\hat\theta),\hat\theta+t_{1-\alpha/2}\tilde{s}_B(\hat\theta))$$ To use a bias-corrected bootstrap estimator, replace ${\hat\theta}$ by $2{\hat\theta}-\overline{\theta}_B$.
   \end{definition}
   \begin{definition}[Percentile confidence interval]
-    Consider a sample $x_1,\ldots,x_n$ from \iid random variables $X_1,\ldots,X_n\sim F$ of an unknown distribution $F$. Once we have computed $B$ estimates of $\hat\theta$ order them:
-    $${\hat\theta}_{(1)}^*\leq\cdots\leq{\hat\theta}_{(B)}^*$$
-    The \emph{percentile confidence interval} for $\theta=T(X_1,\ldots,X_n)$ of level $\alpha$ is: $$\theta\in(\hat\theta_{\alpha/2}^*,\hat\theta_{1-\alpha/2}^*)$$
+    Consider a sample $x_1,\ldots,x_n$ from \iid random variables $X_1,\ldots,X_n\sim F$ of an unknown distribution $F$. Once we have computed $B$ estimates of $\hat\theta$ we order them:
+    $${\hat\theta}_{(1)}\leq\cdots\leq{\hat\theta}_{(B)}$$
+    The \emph{percentile confidence interval} for $\theta=T(X_1,\ldots,X_n)$ of level $\alpha$ is: $$\theta\in(\hat\theta_{\alpha/2},\hat\theta_{1-\alpha/2})$$
   \end{definition}
-  \subsection{Bayesian interference}
+  \subsection{Bayesian inference}
   \subsubsection{Prior and posterior distributions}
   \begin{definition}
     Let $\vf{X}$ be a random vector with pdf $f(\vf{x}\mid \theta)$. As always we would like to estimate the unknown parameter $\theta\in\Theta$. Bayesian approach to statistical inference treats the parameter $\theta$ as a random variable with an appropriate \emph{prior distribution} (or simply \emph{prior}) $f(\theta)$.
   \end{definition}
   \begin{definition}
-    Let $\vf{X}$ be a random vector with pdf $f(\vf{x}\mid \theta)$, $f(\theta)$ be the prior of $\theta$ and $\vf{x}$ be a realization of $\vf{X}$. We define the \emph{posterior distribution} (or simply \emph{posterior}) of $\theta$ as the pdf $f(\theta\mid \vf{x})$ given by Bayes' theorem: $$f(\theta\mid\vf{x})=\frac{f(\vf{x}\mid\theta)f(\theta)}{f(\vf{x})}=\frac{f(\vf{x}\mid\theta)f(\theta)}{\int f(\vf{x}\mid\theta)f(\theta)\dd{\theta}}$$
+    Let $\vf{X}$ be a random vector with pdf $f(\vf{x}\mid \theta)$, $f(\theta)$ be the prior of $\theta$ and $\vf{x}$ be a realization of $\vf{X}$. We define the \emph{posterior distribution} (or simply \emph{posterior}) of $\theta$ as the pdf $f(\theta\mid \vf{x})$ given by Bayes' theorem: $$f(\theta\mid\vf{x})=\frac{f(\vf{x}\mid\theta)f(\theta)}{f(\vf{x})}=\frac{f(\vf{x}\mid\theta)f(\theta)}{\int f(\vf{x}\mid\theta)f(\theta)\dd{\theta}}\footnote{For practical purposes it is sometimes sufficient to study only $f(\vf{x}\mid\theta)f(\theta)$, since $f(\theta\mid \vf{x})\propto f(\vf{x}\mid\theta)f(\theta)$.}$$
     If the prior and the posterior are of the same distribution type, prior and observation model are called \emph{conjugate}.
   \end{definition}
   \begin{definition}[Bayesian point estimates]
@@ -569,13 +569,17 @@
     Let $\theta\in\Theta$ be the parameter of interest of our model. A prior distribution with pdf $f(\theta)$ is called \emph{flat} if $$f(\theta)\propto\const\qquad\theta\in\Theta$$
   \end{definition}
   \begin{definition}
-    Let $\theta\in\Theta$ be the parameter of interest of our model. A prior distribution with pdf $f(\theta)\geq 0$ is called \emph{improper} if $$\int_\Theta f(\theta)\dd{\theta}=\infty\quad\text{and}\quad\sum_{\theta\in\Theta}f(\theta)=\infty$$
+    Let $\theta\in\Theta$ be the parameter of interest of our model. A prior distribution with pdf $f(\theta)\geq 0$ is called \emph{improper} if $$\int_\Theta f(\theta)\dd{\theta}=\infty\quad\text{or}\quad\sum_{\theta\in\Theta}f(\theta)=\infty$$ for continuous or discrete parameters $\theta$, respectively.
   \end{definition}
   \begin{definition}[Jeffrey's prior]
     Let $\vf{X}$ be a random vector with pdf $f(\vf{x}\mid \theta)$ where $\theta\in\Theta$ is the parameter of interest. \emph{Jeffrey's prior} is defined as: $$f(\theta)\propto\sqrt{I(\theta)}$$
+    If $\vf\theta$ is a vector valued parameter, Jeffrey's prior is defined as: $$f(\vf\theta)\propto\sqrt{\det\vf{I}(\vf\theta)}$$
   \end{definition}
   \begin{proposition}
-    Let $\vf{X}$ be a random vector with pdf $f(\vf{x}\mid \theta)$ where $\theta\in\Theta$ is the parameter of interest and $\phi=h(\theta)$ where $h$ is an injective function. If $f(\theta)\propto\sqrt{I(\theta)}$, then $f(\phi)\propto\sqrt{I(\phi)}$
+    Let $\vf{X}$ be a random vector with pdf $f(\vf{x}\mid \theta)$ where $\theta\in\Theta$ is the parameter of interest and $\eta=h(\theta)$ where $h$ is an injective function. If the prior $f_\theta(\theta)$ of $\theta$ is flat, then: $$f_\eta(\eta)\propto\abs{\dv{h^{-1}(\eta)}{\eta}}$$ where $f_\eta(\eta)$ is the prior of $\eta$. And so, $f_\eta(\eta)$ is flat if and only if $h$ is a linear transformation.
+  \end{proposition}
+  \begin{proposition}
+    Let $\vf{X}$ be a random vector with pdf $f(\vf{x}\mid \theta)$ where $\theta\in\Theta$ is the parameter of interest and $\eta=h(\theta)$ where $h$ is an injective function. Suppose $f_\theta(\theta)$ is the prior of $\theta$ and $f_\eta(\eta)$ is the prior of $\eta$. If $f_\theta(\theta)\propto\sqrt{I(\theta)}$, then $f_\eta(\eta)\propto\sqrt{I(\eta)}$
   \end{proposition}
   \subsubsection{Properties of Bayesian point and interval estimates}
   \begin{definition}
@@ -602,19 +606,23 @@
     \end{enumerate}
   \end{proposition}
   \begin{theorem}
-    Let $\vf{X}$ be a random vector (of length $n$) with pdf $f(\vf{x}\mid \theta)$ where $\theta\in\Theta$ is the parameter of interest which has a prior $f(\theta)$ We define: $$m_0:=\argmax\{f(\theta):\theta\in\Theta\}\text{and}\quad\text{and} F_0=-\pdv[2]{(\log f(\theta))}{\theta}(m_0)$$. Then: $$\theta\mid\vf{X}\overset{\text{a}}{\sim} N(m_n,{J_n}^{-1})$$
+    Let $\vf{X}$ be a random vector (of length $n$) with pdf $f(\vf{x}\mid \theta)$ where $\theta\in\Theta$ is the parameter of interest which has a prior $f(\theta)$. Suppose the MLE of $\theta$ is $\hat\theta_n$. We define: $$m_0:=\argmax\{f(\theta):\theta\in\Theta\},\quad J_0=-\pdv[2]{(\log f(\theta))}{\theta}\bigg|_{\theta=m_0}$$ Then: $$\theta\mid\vf{X}\overset{\text{a}}{\sim} N(m_n,{J_n}^{-1})$$
     where: $$J_n=J_0+J(\hat\theta_n)\quad\text{and}\quad m_n=\frac{J_0m_0+J(\hat\theta_n)\hat\theta_n}{J_n}$$
-    If $n$ is large enough, we will have: $$\theta\mid\vf{X}\overset{\text{a}}{\sim} N(\hat\theta_n,{I(\hat\theta_n)}^{-1})$$
+    If $n$ is large enough, we will have: $$\theta\mid\vf{X}\overset{\text{a}}{\sim} N\left(\hat\theta_n,{I(\hat\theta_n)}^{-1}\right)$$
   \end{theorem}
   \begin{definition}
-    Let $\vf{X}$ be a random vector with pdf $f(\vf{x}\mid \theta)$ where $\theta\in\Theta$ is the parameter of interest. A subset $C\subseteq \Theta$ is called a \emph{credible region} for $\theta$ of confidence $\gamma$ if $$\int_Cf(\theta\mid\vf{x})\dd{\theta}=\gamma$$ If $C$ is a real interval, $C$ is also called \emph{credible interval}. If the parameter is discrete, we will define a credible region of confidence $\gamma$ as: $$\sum_{\theta\in C\cap \theta}f(\theta\mid\vf{x})\geq \gamma$$
+    Let $\vf{X}$ be a random vector with pdf $f(\vf{x}\mid \theta)$ where $\theta\in\Theta$ is the parameter of interest. A subset $C\subseteq \Theta$ is called a \emph{credible region} for $\theta$ of confidence $\gamma$ if: $$\int_Cf(\theta\mid\vf{x})\dd{\theta}=\gamma$$ If $C$ is a real interval, $C$ is also called \emph{credible interval}. If the parameter is discrete, we will define a credible region of confidence $\gamma$ as: $$\sum_{\theta\in C\cap \Theta}f(\theta\mid\vf{x})\geq \gamma$$
   \end{definition}
   \begin{definition}
     Let $\vf{X}$ be a random vector with pdf $f(\vf{x}\mid \theta)$ where $\theta\in\Theta$ is the parameter of interest. A $\gamma$ credible region $C$ is called a \emph{highest posterior density} (HPC) \emph{region} if $f(\theta\mid\vf{x})\geq f(\tilde{\theta}\mid \vf{x})$ $\forall \theta\in C$ and all $\tilde{\theta}\notin C$.
   \end{definition}
   \begin{proposition}
-    Let $\vf{X}$ be a random vector with pdf $f(\vf{x}\mid \theta)$ where $\theta\in\Theta$ is the parameter of interest whose posterior is $f(\theta\mid\vf{x})$. Then, among all $\gamma$ credible region $C$, the HPC minimizes the expected loss for the function $\ell(C,\theta)=\abs{C}-\indi{C}(\theta)$.
+    Let $\vf{X}$ be a random vector with pdf $f(\vf{x}\mid \theta)$ where $\theta\in\Theta$ is the parameter of interest whose posterior is $f(\theta\mid\vf{x})$. Then, among all $\gamma$ credible region $C$, the HPC minimizes the expected loss for the function $\ell(C,\theta)=\abs{C}-\indi{C}(\theta)$, where $\abs{C}$ is the size of the region.
   \end{proposition}
+  % \subsubsection{Numerical methods for Bayesian inference}
+  % \begin{definition}[Laplace approximation]
+
+  % \end{definition}
   \subsection{Analyzing data}
   \subsubsection{Comparizing distributions}
   \begin{definition}[Q-Q plots]
