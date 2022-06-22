@@ -207,9 +207,9 @@
     We denote by $\Phi(t)$ the cdf of a standard normal distribution $N(0,1)$.
   \end{definition}
   \begin{definition}[Quantile]\label{STA_quantile}
-    We define quantile function $Q_X(p)$ of a distribution of a random variable $X$ as the inverse function of the cmf. That is, $Q_X(p)$ satisfies:
+    We define quantile function $Q_X(p)$ of a distribution of a random variable $X$ as the inverse function of the cdf. That is, $Q_X(p)$ satisfies:
     $$\Prob(X\leq Q_X(p))=p$$
-    In particular, we denote the quantile of a standard normal distribution as $z_p:=Q_X(p)$.
+    In particular, we denote the quantile of a standard normal distribution as $z_p:=Q_X(p)=\Phi^{-1}(p)$.
   \end{definition}
   \subsubsection{Multivariate normal distribution}
   \begin{definition}
@@ -396,7 +396,7 @@
     Let $(\mathcal{X},\mathcal{F},\{\Prob_\theta^{\vf{X}_n}:\theta\in\Theta\subseteq\RR\})$ be a statistical model, $\vf{x}_n\in\mathcal{X}$ be a realization of $\vf{X}_n$, $\delta:\mathcal{X}=A_1\sqcup A_2\rightarrow\{\mathcal{H}_0,\mathcal{H}_1\}$ be a hypothesis test such that $\Theta_0=\{\theta_0\}$. We say that the test is a
     \begin{itemize}
       \item \emph{one-sided right tail test} if $\Theta_1=(\theta_0,\infty)$.
-      \item \emph{one-sided left tail test} if $\Theta_1=(-\infty,theta_0)$.
+      \item \emph{one-sided left tail test} if $\Theta_1=(-\infty,\theta_0)$.
       \item \emph{two-sided test} if $\Theta_1=\RR\setminus\{\theta_0\}$.
     \end{itemize}
   \end{definition}
@@ -473,7 +473,7 @@
     If $\pi_i$ denotes the probability of being in the cell $i$ under $\mathcal{H}_0$, we can approximate $\pi_i$ by $\hat\pi_i=\Prob(X\in a_i\mid {\vf\theta}={\vf{\hat\theta}})$, where ${\vf{\hat\theta}}$ is the MLE of ${\vf\theta}$, for $i=1,\ldots,k-1$ and let $\hat\pi_k:=1-\sum_{i=1}^{k-1}\hat\pi_i$. Hence since the distribution of the data in the table follows a multinomial distribution, we have\footnote{In order to have the expected asymptotic behaviour we need to check that the expectations of each $\hat\pi_i$ are greater than or equal to 5 (heuristic criterion), i.e. $n_i\hat\pi_i\geq 5$ $\forall i$. If this is not the case, we should reduce the number of classes by groupping some of them together.}:
     $$\Lambda=2\sum_{i=1}^kn_i\log\left(\frac{n_i}{n\hat\pi_i}\right)\overset{\text{d}}{\longrightarrow}{\chi_{k-2}}^2$$
   \end{definition}
-  \begin{definition}[Test of independence]
+  \begin{definition}[Test of homogenity]
     Consider $r$ \iid random variables $X_1,\ldots,X_r$ whose outcomes can be classified in the classes $a_1,\ldots,a_s$ each with probability $\Prob(X_i=a_j)=p_{ij}$ $\forall i,j$. Suppose we have $n_{ij}$ observations of the variable $X_i$ taking the value $a_j$ and denote $n_{i\cdot}:=\sum_{j=1}^sn_{ij}$, $n_{\cdot j}:=\sum_{i=1}^rn_{ij}$ and $n:=\sum_{i=1}^r\sum_{j=1}^sn_{ij}$. That is, we have the following table:
     \begin{center}
       \begin{minipage}{\linewidth}
@@ -489,22 +489,34 @@
           \hline
           $\mathbf{Total}$ & $n_{\cdot 1}$ & $\cdots$ & $n_{\cdot j}$ & $\cdots$ & $n_{\cdot s}$ & $n$
         \end{tabular}
+        \captionof{table}{}
+        \label{STA_table}
       \end{minipage}
     \end{center}
     We want a test for:
     $$
       \begin{cases}
-        \mathcal{H}_0: & p_{1j}=\cdots=p_{rj}\ \forall j \\
+        \mathcal{H}_0: & p_j:=p_{1j}=\cdots=p_{rj}\ \forall j \\
         \mathcal{H}_1: & \text{otherwise}
-      \end{cases}\iff
+      \end{cases}
+    $$
+    Again, the distribution of the data in the table follows a multinomial distribution, so under $\mathcal{H}_0$ we get the following MLEs (with the constraint that $\sum_{j=1}^sp_{j}=1$):
+    $$\hat{p}_j=\frac{n_{\cdot j}}{n}\qquad\forall j$$
+    And in general, using the constraint $\sum_{i=1}^r\sum_{j=1}^sp_{ij}=1$, we have: $$\hat{p}_{ij}=\frac{n_{ij}}{n}\qquad\forall i,j$$
+    Finally we have: $$\Lambda=2\sum_{i=1}^r\sum_{j=1}^sn_{ij}\log\left(\frac{n_{ij}n}{n_{i\cdot}n_{\cdot j}}\right)\overset{\text{d}}{\longrightarrow}{\chi_{(r-1)(s-1)}}^2$$
+  \end{definition}
+  \begin{definition}[Test of independence]
+    Consider $r$ \iid random variables $X_1,\ldots,X_r$ whose outcomes can be classified in the classes $a_1,\ldots,a_s$ each with probability $\Prob(X_i=a_j)=p_{ij}$ $\forall i,j$. Suppose we have $n_{ij}$ observations of the variable $X_i$ taking the value $a_j$ and denote $n_{i\cdot}:=\sum_{j=1}^sn_{ij}$, $n_{\cdot j}:=\sum_{i=1}^rn_{ij}$ and $n:=\sum_{i=1}^r\sum_{j=1}^sn_{ij}$. That is, we have again the \cref{STA_table}.
+    We want a test for:
+    $$
       \begin{cases}
         \mathcal{H}_0: & p_{ij}=\theta_i\phi_j\ \forall i,j \\
         \mathcal{H}_1: & \text{otherwise}
       \end{cases}
     $$
-    Again, the distribution of the data in the table follows a multinomial distribution, so under $\mathcal{H}_0$ we get the following MLEs for $\theta_i$ and $\phi_j$ (with the constraints that $\sum_{i=1}^r\theta_i=\sum_{j=1}^s\theta_j=1$):
+    Again, the distribution of the data in the table follows a multinomial distribution, so under $\mathcal{H}_0$ we get the following MLEs for $\theta_i$ and $\phi_j$ (with the constraints that $\sum_{i=1}^r\theta_i=\sum_{j=1}^s\phi_j=1$):
     $$\hat\theta_i=\frac{n_{i\cdot}}{n}\quad\hat\phi_j=\frac{n_{\cdot j}}{n}\qquad\forall i,j$$
-    And in general, using the constriant $\sum_{i=1}^r\sum_{j=1}^sp_{ij}=1$, we have: $$\hat{p}_{ij}=\frac{n_{ij}}{n}\qquad\forall i,j$$
+    And in general, using the constraint $\sum_{i=1}^r\sum_{j=1}^sp_{ij}=1$, we have: $$\hat{p}_{ij}=\frac{n_{ij}}{n}\qquad\forall i,j$$
     Finally we have: $$\Lambda=2\sum_{i=1}^r\sum_{j=1}^sn_{ij}\log\left(\frac{n_{ij}n}{n_{i\cdot}n_{\cdot j}}\right)\overset{\text{d}}{\longrightarrow}{\chi_{(r-1)(s-1)}}^2$$
   \end{definition}
   \subsubsection{\texorpdfstring{$t$}{t}-test}
