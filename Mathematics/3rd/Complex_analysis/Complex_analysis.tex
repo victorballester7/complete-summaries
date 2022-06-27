@@ -951,10 +951,10 @@
     Let $U\subseteq\CC$ be an open set. We say that $U$ is \emph{simply connected} if each connected component is simply connected.
   \end{definition}
   \begin{theorem}
-    Let $U\subseteq\CC$ be an open connected set and $f\in\mathcal{H}(U)$. Then, $f$ has a primitive.
+    Let $U\subseteq\CC$ be an open simply connected set and $f\in\mathcal{H}(U)$. Then, $f$ has a primitive.
   \end{theorem}
   \begin{theorem}
-    Let $U\subseteq\CC$ be a simplify connected domain, $f\in\mathcal{H}(U)$ be such that $f(z)\ne 0$ $\forall z\in U$. Then, there exist a determination of $\log f$. Moreover that determination is unique if we fix its value at a point $z_0\in U$.
+    Let $U\subseteq\CC$ be a simply connected domain, $f\in\mathcal{H}(U)$ be such that $f(z)\ne 0$ $\forall z\in U$. Then, there exist a determination of $\log f$. Moreover that determination is unique if we fix its value at a point $z_0\in U$.
   \end{theorem}
   \subsubsection{Isolated singularities of holomorphic functions}
   \begin{definition}
@@ -1120,28 +1120,23 @@
   \end{definition}
   \begin{theorem}[Argument principle]
     Let $U\subseteq \CC$ be an open set and $f\in\mathfrak{m}(U)$ be not identically zero. We denote by $Z(f)$ the set of zeros of $f$ and by $P(f)$ the set of its poles. Let $\Gamma\homoleg{U} 0$ be a piecewise cycle of class $\mathcal{C}^1$ such that $\Gamma^*\subset U\setminus (Z(f)\cup P(f))$. Then:
-    $$\frac{1}{2\pi\ii}\int_{\Gamma}\frac{f'(z)}{f(z)}\dd{z}=\sum_{z\in Z(f)}\Ind(\Gamma,z)-\sum_{p\in P(f)}\Ind(\Gamma,p)$$
+    $$\frac{1}{2\pi\ii}\int_{\Gamma}\frac{f'(\zeta)}{f(\zeta)}\dd{\zeta}=\sum_{z\in Z(f)}\Ind(\Gamma,z)-\sum_{p\in P(f)}\Ind(\Gamma,p)$$
   \end{theorem}
   \begin{theorem}[Generalized argument principle]
     Let $U\subseteq \CC$ be an open set $w\in U$, $f\in\mathfrak{m}(U)$ be not identically $w$ and $g\in\mathcal{H}(U)$. We denote by $Z(f-w)$ the set of zeros of the function $f(z)-w$ and by $P(f-w)$ the set of its poles. Let $\Gamma\homoleg{U} 0$ be a piecewise cycle of class $\mathcal{C}^1$ such that $\Gamma^*\subset U\setminus (Z(f-w)\cup P(f-w))$. Then:
     \begin{multline*}
-      \frac{1}{2\pi\ii}\int_{\Gamma}g(z)\frac{f'(z)}{f(z)-w}\dd{z}=\\=\sum_{z\in Z(f-w)}g(z)\Ind(\Gamma,z)-\sum_{p\in P(f-w)}g(p)\Ind(\Gamma,p)
+      \frac{1}{2\pi\ii}\int_{\Gamma}g(\zeta)\frac{f'(\zeta)}{f(\zeta)-w}\dd{\zeta}=\\=\sum_{z\in Z(f-w)}g(z)\Ind(\Gamma,z)-\sum_{p\in P(f-w)}g(p)\Ind(\Gamma,p)
     \end{multline*}
   \end{theorem}
   \begin{corollary}
     Let $U\subseteq \CC$ be an open set $w\in U$, $f\in\mathfrak{m}(U)$ be not identically $w$ and $g\in\mathcal{H}(U)$. Let $\gamma\homoleg{U} 0$ be a piecewise curve defined on $[a,b]$ of class $\mathcal{C}^1$ such that $\gamma^*\subset U\setminus (Z(f-w)\cup P(f-w))$. Then:
-    \begin{multline*}
-      \ii\left[\arg(f(\gamma(b))-w)-\arg(f(\gamma(a))-w)\right]=\\=\sum_{z\in Z(f-w)}\Ind(\gamma,z)-\sum_{p\in P(f-w)}\Ind(\gamma,p)
-    \end{multline*}
-  \end{corollary}
-  \begin{corollary}
-    Let $U\subseteq \CC$ be an open set $w\in U$, $f\in\mathfrak{m}(U)$ be not identically $w$ and $\gamma\homoleg{U} 0$ be a piecewise curve of class $\mathcal{C}^1$ such that $\Gamma^*\subset U\setminus (Z(f-w)\cup P(f-w))$. Then:
-    \begin{equation*}
-      \Ind(f\circ\gamma,w)=\sum_{z\in Z(f-w)}\Ind(\Gamma,z)-\sum_{p\in P(f-w)}\Ind(\Gamma,p)
-    \end{equation*}
+    \begin{align*}
+      \Ind(f\circ\gamma,w) & =\frac{\arg(f(\gamma(b))-w)-\arg(f(\gamma(a))-w)}{2\pi}            \\
+                           & =\sum_{z\in Z(f-w)}\Ind(\gamma,z)-\sum_{p\in P(f-w)}\Ind(\gamma,p)
+    \end{align*}
   \end{corollary}
   \begin{theorem}[Rouché's theorem]
-    Let $U\subseteq \CC$ be an open set, $f,g\in\mathfrak{m}(U)$ and $\gamma\homoleg{U} 0$ be a piecewise path of class $\mathcal{C}^1$ such that $\Gamma^*\subset U\setminus (Z(f)\cup P(f)\cup Z(g)\cup P(g))$ and $\Ind(\gamma,z)\in\{0,1\}$ $\forall z\in U$. Suppose that: $$\abs{f(z)+g(z)}<\abs{f(z)}+\abs{g(z)}\quad\forall z\in \gamma^*$$ Then if $Z_f$ and $Z_g$ denote the number of zeros of the respective functions on $\overline{D(\gamma)}$ and $P_f$ and $P_g$ denote the number of poles of the respective functions on $\overline{D(\gamma)}$, we have: $$Z_f-P_f=Z_g-P_g$$
+    Let $U\subseteq \CC$ be an open set, $f,g\in\mathfrak{m}(U)$ and $\gamma\homoleg{U} 0$ be a piecewise path of class $\mathcal{C}^1$ such that $\gamma^*\subset U\setminus (Z(f)\cup P(f)\cup Z(g)\cup P(g))$ and $\Ind(\gamma,z)\in\{0,1\}$ $\forall z\in U$. Suppose that: $$\abs{f(z)+g(z)}<\abs{f(z)}+\abs{g(z)}\quad\forall z\in \gamma^*$$ Then if $Z_f$ and $Z_g$ denote the number of zeros of the respective functions on $\overline{D(\gamma)}$ and $P_f$ and $P_g$ denote the number of poles of the respective functions on $\overline{D(\gamma)}$, we have: $$Z_f-P_f=Z_g-P_g$$
   \end{theorem}
   \begin{definition}
     Let $\alpha\in\CC^*$ and $n\in\NN$. We define the number $\binom{\alpha}{n}$ as: $$\binom{\alpha}{n}=\frac{\alpha(\alpha-1)\cdots(\alpha-n+1)}{n!}$$ For the case $n=0$, we define $\binom{\alpha}{0}:=1$.
@@ -1157,7 +1152,7 @@
     Let $U\subseteq \CC$ be a domain, $(f_n)\in\mathcal{H}(U)$ be a sequence of functions such that they converge uniformly to $f:U\rightarrow\CC$ over compact sets of $U$. Suppose $f(z)\ne 0$ $\forall z\in\Fr{D(a,r)}$, with $D(a,r)\subseteq U$. Then, $\exists m\in\NN$ such that $\forall n\geq m$, $f_n$ and $f$ have the same number of zeros on $D(a,r)$.
   \end{theorem}
   \begin{corollary}
-    Let $U\subseteq \CC$ be a domain, $(f_n)\in\mathcal{H}(U)$ be a sequence of functions such that they converge uniformly to $f:U\rightarrow\CC$ over compact sets of $U$. Suppose $f_n\ne 0$ $\forall n\in\NN$. Then, either $f=0$ or $f\ne 0$ $\forall z\in U$.
+    Let $U\subseteq \CC$ be a domain, $(f_n)\in\mathcal{H}(U)$ be a sequence of functions such that they converge uniformly to $f:U\rightarrow\CC$ over compact sets of $U$. Suppose $f_n(z)\ne 0$ $\forall n\in\NN$ and $\forall z\in U$. Then, either $f=0$ or $f(z)\ne 0$ $\forall z\in U$.
   \end{corollary}
   \begin{corollary}
     Let $U\subseteq \CC$ be a domain, $(f_n)\in\mathcal{H}(U)$ be a sequence of injective functions such that they converge uniformly to $f:U\rightarrow\CC$ over compact sets of $U$. Then, either $f$ is injective or $f=\const$
@@ -1313,7 +1308,7 @@
     \end{enumerate}
   \end{proposition}
   \begin{definition}
-    Let $U\subseteq\CC$ be an open set, $K\subset U$ be a compact set and $f\in\mathcal{H}(U)$. We define: $${\|f\|}_K:=\sup\{\abs{f(z)}:z\in K\}=\max\{\abs{f(z)}:z\in K\}$$
+    Let $U\subseteq\CC$ be an open set, $K\subset U$ be a compact set and $f\in\mathcal{C}(U,\CC)$. We define: $${\|f\|}_K:=\sup\{\abs{f(z)}:z\in K\}=\max\{\abs{f(z)}:z\in K\}$$
   \end{definition}
   \begin{theorem}
     Let $(K_n)$ be a surjective sequence of compact sets and $d:\mathcal{C}(U,\CC)\times\mathcal{C}(U,\CC)\rightarrow\RR$ be the function defined by:
@@ -1331,7 +1326,7 @@
     Consider the metric $(\mathcal{C}(U,\CC),d)$ defined above. Then, $\mathcal{H}(U)\subset\mathcal{C}(U,\CC)$ is closed.
   \end{proposition}
   \begin{definition}
-    Let $\mathcal{F}\subseteq \mathcal{C}(U,\CC)$. We say that $\mathcal{F}$ is \emph{relatively compact} (or \emph{normal}) if for any sequence $(f_n)\in\mathcal{F}$, $(f_n)$ has a convergent subsequence. Equivalently $\mathcal{F}$ is relatively compact if $\overline{\mathcal{F}}$ is compact.
+    Let $\mathcal{F}\subseteq \mathcal{C}(U,\CC)$. We say that $\mathcal{F}$ is \emph{relatively compact} (or \emph{normal}) if for any sequence $(f_n)\in\mathcal{F}$, $(f_n)$ has a subsequence uniformly convergent over compact sets of $U$. Equivalently $\mathcal{F}$ is relatively compact if $\overline{\mathcal{F}}$ is compact.
   \end{definition}
   \begin{definition}
     Let $\mathcal{F}\subseteq \mathcal{C}(U,\CC)$. We say that $\mathcal{F}$ is \emph{equicontinuous} at $z_0\in U$ if $\forall \varepsilon>0$ $\exists \delta>0$ such that $\forall z\in X$ with $\abs{z-z_0}<\delta$ we have: $$\abs{f(z)-f(z_0)}<\varepsilon\quad\forall f\in \mathcal{F}$$
@@ -1339,7 +1334,7 @@
   \begin{theorem}[Arzelà-Ascoli theorem]
     Let $\mathcal{F}\subseteq \mathcal{C}(U,\CC)$. Then, $\mathcal{F}$ is normal if and only if:
     \begin{enumerate}
-      \item $\forall z\in U$, $\bigcup_{f\in\mathcal{F}}\{f(z)\}$ is relatively compact.
+      \item The set $\bigcup_{f\in\mathcal{F}}\{f(z)\}$ is relatively compact $\forall z\in U$.
       \item $\mathcal{F}$ is equicontinuous at $z$ $\forall z\in U$.
     \end{enumerate}
   \end{theorem}
@@ -1353,14 +1348,13 @@
     Let $\mathcal{F}\subseteq \mathcal{C}(U,\CC)$. $\mathcal{F}$ is locally bounded $\iff \mathcal{F}$ is bounded by compact sets.
   \end{lemma}
   \begin{theorem}[Montel's theorem]
-    Let $\mathcal{F}\subseteq \mathcal{C}(U,\CC)$. $\mathcal{F}$ is normal $\iff \mathcal{F}$ is locally bounded.
+    Let $\mathcal{F}\subseteq \mathcal{H}(U)$. Then, $\mathcal{F}$ is normal $\iff \mathcal{F}$ is locally bounded.
   \end{theorem}
   \begin{theorem}[Riemann conformal representation theorem]
-    Let $U\subset \CC$ be a non-empty (and $U\ne\CC$) simply connected domain and $a\in U$. Then, $\exists!f\in\mathcal{H}(U)$ such that:
+    Let $U\subset \CC$ be a simply connected domain such that $U\ne\varnothing,\CC$ and $a\in U$. Then, $\exists!f\in\mathcal{H}(U)$ such that:
     \begin{enumerate}
       \item $f(a)=0$, $f'(a)\in\RR_{>0}$.
-      \item $f$ is injective.
-      \item $f(U)=\DD$.
+      \item $f:U\rightarrow \DD$ is a bijection.
     \end{enumerate}
   \end{theorem}
 \end{multicols}
