@@ -1,17 +1,86 @@
 \documentclass[../../../main.tex]{subfiles}
 
 \begin{document}
+\renewcommand{\col}{\phy}
 \begin{multicols}{2}[\section{Quantum physics}]
   \subsection{Mathematical formulism of quantum mechanics}
   \subsubsection{Bras and kets}
-  \begin{definition}
-    We define a \emph{Hilbert space} $\mathcal{H}$ as a complete vector space over $\CC$ (whose elements are called \emph{kets} and they are reperesented by $\ket{\phi}\in\CC$) together with an inner product $\langle\cdot,\cdot\rangle$ such that satisfy the following properties $\forall a,b\in\CC$ and $\forall \ket{\phi_1},\ket{\phi_2},\ket\psi\in \CC$:
+  \begin{definition}[Ket]
+    We define a \emph{Hilbert space} $\mathcal{H}$ as a complete vector space over $\CC$ (whose elements are called \emph{kets} and they are reperesented by $\ket{\vf{\psi}}\in\mathcal{H}$ as a column vector) together with an inner product $\langle\cdot,\cdot\rangle$ such that satisfy the following properties $\forall a,b\in\CC$ and $\forall \ket{\vf{\phi}_1},\ket{\vf{\phi}_2},\ket{\vf\psi},\ket{\vf\phi}\in \CC$:
     \begin{enumerate}
-      \item Linearity: $\braket{a\ket{\phi_1}+b\ket{\phi_2}}{\psi}=a\braket{\phi_1}{\psi}+b\braket{\phi_2}{\psi}$
-      \item Positive defined: $\braket{\phi}{\phi}>0$ if $\ket{\phi}\ne 0$
-      \item Hermitian: $\braket{\phi}{\psi}=\overline{\braket{\psi}{\phi}}$
+      \item Linearity: $\braket{\vf\psi}{a\ket{\vf{\phi}_1}+b\ket{\vf{\phi}_2}}=a\braket{\vf\psi}{\vf{\phi}_1}+b\braket{\vf\psi}{\vf{\phi}_2}$
+      \item Positive defined: $\braket{\psi}{\psi}>0$ if $\ket{\psi}\ne 0$
+      \item Hermitian: $\braket{\vf{\phi}}{\vf\psi}={\braket{\vf\psi}{\vf{\phi}}}^*$
     \end{enumerate}
-    It is complete with the norm $\norm{\ket{\phi}}:=\sqrt{\braket{\phi}{\phi}}$.
+    It is complete with the norm $\norm{\ket{\psi}}:=\sqrt{\braket{\psi}{\psi}}$. Along the document we will suppose that the dimension of the Hilbert space is $n$.
+  \end{definition}
+  \begin{definition}[Bra]
+    Let $\ket{\vf{e}_i}$, $i=1,\cdots,n$ be a basis of the Hilbert space $\mathcal{H}$ of dimension $n$ and $\ket{\vf\psi}=\sum_{i=1}^n\alpha_i\ket{\vf{e}_i}\in\mathcal{H}$. We define the \emph{bra}, $\bra{\vf\psi}$, of $\ket{\vf\psi}$ as the adjoint, ${\ket{\vf\psi}}^\dag\in\mathcal{H}^*$, of $\ket{\vf\psi}$. In coordinates it is represented as a row vector:
+    $$\bra{\vf\psi}=\sum_{i=1}^n{\alpha_i}^*\bra{\vf{e}_i}({\alpha_1}^*,\cdots,{\alpha_n}^*)$$ where $\bra{\vf{e}_i}$, $i=1,\cdots,n$, is the dual basis of the dual space $\mathcal{H}^*$.
+  \end{definition}
+  \subsubsection{Inner and outer products}
+  \begin{definition}
+    Let $\mathcal{H}$ be Hilbert space of dimension $n$ and $\ket{\vf\psi}=\sum_{i=1}^n\alpha_i\ket{\vf{e}_i},\ket{\vf{\phi}}=\sum_{i=1}^n\beta_i\ket{\vf{e}_i}\in\mathcal{H}$. We will write the inner product between them as the following \emph{bracket}: $$\braket{\vf\psi}{\vf{\phi}}=
+      \begin{pmatrix}
+        {\alpha_1}^* & \cdots & {\alpha_n}^*
+      \end{pmatrix}
+      \begin{pmatrix}
+        \beta_1 \\
+        \vdots  \\
+        \beta_n
+      \end{pmatrix}=\sum_{i=1}^n{\alpha_i}^*\beta_i$$
+    We will say that $\ket{\vf\psi}$ is \emph{normalized} if $\braket{\vf\psi}=1$. We will say that $\ket{\vf\psi}$ and $\ket{\vf{\phi}}$ are \emph{orthogonal} if $\braket{\vf\psi}{\vf{\phi}}=0$.
+  \end{definition}
+  \begin{definition}
+    Let $\mathcal{H}$ be Hilbert space of dimension $n$ and $\ket{\vf\psi}=\sum_{i=1}^n\alpha_i\ket{\vf{e}_i},\ket{\vf{\phi}}=\sum_{i=1}^n\beta_i\ket{\vf{e}_i}\in\mathcal{H}$. We will define the \emph{outer product} between them as:
+    \begin{align*}
+      \dyad{\vf\psi}{\vf{\phi}} & =
+      \begin{pmatrix}
+        \alpha_1 \\
+        \vdots   \\
+        \alpha_n
+      \end{pmatrix}\begin{pmatrix}
+                     {\beta_1}^* & \cdots & {\beta_n}^*
+                   \end{pmatrix}= \\
+                                & =
+      \begin{pmatrix}
+        \alpha_1{\beta_1}^* & \cdots & \alpha_1{\beta_n}^* \\
+        \vdots              & \ddots & \vdots              \\
+        \alpha_n{\beta_1}^* & \cdots & \alpha_n{\beta_n}^* \\
+      \end{pmatrix}
+    \end{align*}
+  \end{definition}
+  \subsubsection{Linear operators}
+  \begin{definition}
+    A \emph{linear operator} $\vf{A}$ is an operator that carries vectors to vectors in a way that $\forall a,b\in\CC$ and $\forall \ket{\vf\psi_1},\ket{\vf\psi_2}\in \CC$ we have: $$\vf{A}\left(a\ket{\vf\psi_1}+b\ket{\vf\psi_2}\right)=a\vf{A}\ket{\vf\psi_1}+b\vf{A}\ket{\vf\psi_2}$$
+    Moreover is the standard basis $\ket{\vf{e}_i}$ is mapped to the basis $\ket{\vf{v}_j}=\sum_{i=1}^nv_{ij}\ket{\vf{e}_i}$, $j=1,\ldots,n$, we can write the operator $\vf{A}$ in the form: $$\vf{A}=\sum_{j=1}^n\dyad{\vf{v}_j}{\vf{e}_j}=\sum_{i,j=1}^nv_{ij}\dyad{\vf{e}_i}{\vf{e}_j}=:\sum_{i,j=1}^nA_{ij}\dyad{\vf{e}_i}{\vf{e}_j}$$ where we have defined $A_{ij}:=v_{ij}=\mel{\vf{e}_i}{\vf{A}}{\vf{e}_j}$. This way, the matrix $\vf{A}$ can also be written as $\vf{A}=(A_{ij})$.
+  \end{definition}
+  \begin{definition}
+    Let $\vf{A}$ be a linear operator. We define its \emph{adjoint}, $\vf{A}^\dag$, as the operator defined as follows. If $\ket{\vf\psi}$, $\ket{\vf\phi}$ are two vectors such that $\ket{\vf\phi}=\vf{A}\ket{\vf\psi}$, then $\bra{\vf\phi}=\bra{\vf\psi}\vf{A}^\dag$. Moreover, if $\vf{A}=\sum_{i,j=1}^nA_{ij}\dyad{\vf{e}_i}{\vf{e}_j}$, then: $$\vf{A}^\dag=\sum_{i,j=1}^n{A_{ij}}^*\dyad{\vf{e}_j}{\vf{e}_i}$$ That is, $\vf{A}^\dag=(\transpose{({A_{ij}}^*)})$.
+  \end{definition}
+  \begin{proposition}
+    The \emph{daga} $\dag$ operator satisfies the following properties $\forall a\in\CC$, for all vectors $\ket{\vf\psi}$, $\ker{\vf\phi}$ and for all linear operators $\vf{A}$, $\vf{B}$.
+    \begin{enumerate}
+      \item ${\ket{\vf\psi}}^\dag=\bra{\vf\psi}$
+      \item ${(\dyad{\vf\phi}{\vf\psi})}^\dag=\dyad{\vf\psi}{\vf\phi}$
+      \item ${(a\vf{A})}^\dag=a^*\vf{A}^\dag$
+      \item ${(\vf{A}\ket{\vf\psi})}^\dag=\bra{\vf\psi}\vf{A}^\dag$
+      \item ${(\vf{AB})}^\dag=\vf{B}^\dag\vf{A}^\dag$
+    \end{enumerate}
+  \end{proposition}
+  \begin{definition}
+    Let $\vf{A}=(A_{ij})$ be a linear operator. The \emph{trace} of $\vf{A}$ is: $$\trace\vf{A}=\sum_{i=1}^n\mel{\vf{e}_i}{\vf{A}}{\vf{e}_i}$$
+  \end{definition}
+  \begin{proposition}
+    The trace of an operator has the following properties for all vectors $\ket{\vf\psi}$, $\ker{\vf\phi}$ and for all linear operators $\vf{A}$, $\vf{B}$ and $\vf{C}$.
+    \begin{enumerate}
+      \item $\trace(\vf{ABC})=\trace(\vf{BCA})=\trace(\vf{CAB})$
+      \item $\trace(\vf{A}\ket{\vf\psi}\bra{\vf\phi})=\mel{\vf\phi}{\vf{A}}{\vf\psi}$
+    \end{enumerate}
+  \end{proposition}
+  \subsubsection{Hermitian operators and diagonalization}
+  \begin{definition}
+    Let $\vf{A}=(A_{ij})$ be a linear operator. We say that $\vf{A}$ is \emph{Hermitian} (or \emph{self-adjoint}) if $\vf{A}=\vf{A}^\dag$.
   \end{definition}
 \end{multicols}
 \end{document}
