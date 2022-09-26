@@ -4,15 +4,131 @@
 \begin{document}
 \renewcommand{\col}{\sta}
 \begin{multicols}{2}[\section{Linear models}]
-  \subsection{Linear regression}
+  \subsection{Introduction}
+  \subsubsection{Sample coeffcients}
+  \begin{definition}[Sample variance and covariance]
+    Let $\{(x_i,y_i):i=1,\ldots,n\}$ be a set of data. We define the \emph{sample covariance} between the $x_i$ and the $y_i$ as: $$s_{xy}:=\frac{1}{n}\sum_{i=1}^n(x_i-\overline{x})(y_i-\overline{y})$$
+    We define the \emph{sample variance} as: $${s_{x}}^2:=\frac{1}{n}\sum_{i=1}^n{(x_i-\overline{x})}^2$$
+  \end{definition}
+  \begin{definition}
+    Let $\{(x_i,y_i):i=1,\ldots,n\}$ be a set of data. We define the \emph{sample correlation coefficient} between the $x_i$ and the $y_i$ as: $$r:=\frac{s_{xy}}{s_xs_y}$$
+  \end{definition}
+  \begin{proposition}
+    Let $\{(x_i,y_i):i=1,\ldots,n\}$ be a set of data. Then, $r^2\leq 1$.
+  \end{proposition}
+  \subsubsection{Multivariate properties}
+  \begin{definition}
+    Let $\vf{x}=(X_1,\ldots,X_n)$ be a random vector. We define its \emph{expectation} as:
+    $$
+      \Exp(\vf{x}):=
+      \begin{pmatrix}
+        \Exp(X_1) \\
+        \vdots    \\
+        \Exp(X_n)
+      \end{pmatrix}
+    $$
+    Analogously, the expectation of a matrix is defined component by component.
+  \end{definition}
+  \begin{theorem}
+    Let $\vf{x}$, $\vf{y}$ be random vectors of dimension $n$. We have the following properties regarding the expectation:
+    \begin{enumerate}
+      \item $\Exp(\alpha\vf{x}+\beta\vf{y}+\gamma\vf{1})=\alpha\Exp(\vf{x})+\beta\Exp(\vf{y})+\gamma\vf{1}\ \forall\alpha,\beta,\gamma\in\RR$\footnote{Here $\vf{1}$ represents the vector $\vf{1}:=\transpose{(1,\ldots,1)}$.}.
+      \item $\Exp(\transpose{\vf{a}}\vf{x}+\transpose{\vf{b}}\vf{y}+\transpose{\vf{c}}\vf{1})=\transpose{\vf{a}}\Exp(\vf{x})+\transpose{\vf{b}}\Exp(\vf{y})+\transpose{\vf{c}}\vf{1}\ \forall\vf{a},\vf{b},\vf{c}\in\RR^n$.
+      \item $\Exp(\vf{Ax})=\vf{A}\Exp(\vf{x})$ $\forall \vf{A}\in\mathcal{M}_{m\times n}(\RR)$.
+    \end{enumerate}
+  \end{theorem}
+  \begin{definition}
+    Let $\vf{x}=(X_1,\ldots,X_n)$ be a random vector. We define the \emph{covariance matrix} of $\vf{x}$ as the following matrix:
+    $$\vf\Sigma_{\vf{x}}:=\cov(\vf{x}):=\Exp\left((\vf{x}-\Exp(\vf{x}))\transpose{(\vf{x}-\Exp(\vf{x}))}\right)$$
+  \end{definition}
+  \begin{proposition}
+    Let $\vf{x}=(X_1,\ldots,X_n)$ be a random vector. Then:
+    $$\vf\Sigma_{\vf{x}}=
+      \begin{pmatrix}
+        \Var(X_1)     & \cov(X_1,X_2) & \cdots & \cov(X_1,X_n) \\
+        \cov(X_2,X_1) & \Var(X_2)     & \cdots & \cov(X_2,X_n) \\
+        \vdots        & \vdots        & \ddots & \vdots        \\
+        \cov(X_n,X_1) & \cov(X_n,X_2) & \cdots & \Var(X_n)     \\
+      \end{pmatrix}$$
+  \end{proposition}
+  \begin{definition}
+    Let $\vf{x}$, $\vf{y}$ be random vectors. We define the \emph{covariance} between them as the following matrix:
+    $$\cov(\vf{x},\vf{y}):=\Exp\left((\vf{x}-\Exp(\vf{x}))\transpose{(\vf{y}-\Exp(\vf{y}))}\right)$$
+  \end{definition}
+  \begin{proposition}
+    Let $\vf{x}$, $\vf{y}$ be random vectors, $\vf{a},\vf{b}\in\RR^n$ and $\vf{A},\vf{B}\in\mathcal{M}_n(\RR)$. Then:
+    \begin{enumerate}
+      \item $\cov(\vf{x},\vf{y})=\Exp(\vf{x}\transpose{\vf{y}})-\Exp(\vf{x})\transpose{\Exp(\vf{x})}$
+      \item $\cov(\vf{x}-\vf{a},\vf{y}-\vf{b})=\cov(\vf{x},\vf{y})$
+      \item $\cov(\vf{Ax},\vf{By})=\vf{A}\cov(\vf{x},\vf{y})\transpose{\vf{B}}$
+      \item $\Exp\left(\transpose{\vf{x}}\vf{Ax}\right)=\trace(\vf{A\Sigma_{\vf{x}}}) + \transpose{\Exp(\vf{x}}\vf{A}\Exp(\vf{x})$
+      \item $\Exp\left((\vf{x}-\vf{a})\transpose{(\vf{x}-\vf{a})}\right)=\vf\Sigma_{\vf{x}}+(\Exp(\vf{x})-\vf{a})\transpose{(\Exp(\vf{x})-\vf{a})}$
+      \item $\Exp(\norm{\vf{x}-\vf{a}})=\trace\vf\Sigma_{\vf{x}}+\norm{\Exp(\vf{x})-\vf{a}}$
+    \end{enumerate}
+  \end{proposition}
+  \subsection{Simple regression}
+  \subsubsection{The model and estimations of the coefficients}
+  \begin{definition}[Simple model]
+    Suppose we have a sample of data $\{(x_i,y_i):i=1,\ldots,n\}$. We can describe the relationship between $x_i$ and $y_i$ with the following model:
+    $$y_i=\beta_0+\beta_1x_i+\varepsilon_i\qquad i=1,\ldots,n$$
+    where we assume that $y_i$ and $\varepsilon_i$ are random variables whereas $x_i$ are known constants. Moreover in the model, we suppose the following hypothesis:
+    \begin{enumerate}
+      \item $\Exp(\varepsilon_i)=0$ and $\Var(\varepsilon_i)=\sigma^2$, $i=1,\ldots,n$.
+      \item $\cov(\varepsilon_i,\varepsilon_j)=0$ if for all $i\ne j$.
+    \end{enumerate}
+    Sometimes we add an additional condition of normality:
+    \begin{enumerate}\setcounter{enumii}{2}
+      \item $\varepsilon_i\sim N(0,\sigma^2)$, $i=1,\ldots,n$.
+    \end{enumerate}
+    If we write $\vf{y}=(y_1,\ldots,y_n)$, $\vf{x}=(x_1,\ldots,x_n)$ and $\vf{\varepsilon}=(\varepsilon_1,\ldots,\varepsilon_n)$ we can write the model in a more compact way:
+    \begin{equation}\label{LM_simple}
+      \vf{y}=\beta_0+\beta_1\vf{x}+\vf\varepsilon
+    \end{equation}
+  \end{definition}
+  \begin{proposition}[Least-squares method]
+    Given the simple linear model of \eqref{LM_simple}, we need to estimate the parameters $\beta_0$, $\beta_1$ and $\sigma^2$. To do so, \emph{least-squares method} seek estimators $\hat\beta_0$ and $\hat\beta_1$ that minimize the sum of square of the deviations $y_i-\hat{y}_i$ (also called \emph{residuals}), where $\hat{y}_i$ is the predicted value $\hat{y}_i=\hat\beta_0+\hat\beta_1 x_i$. Hence:
+    \begin{align*}
+      \hat\beta_0 & =\argmin_{\beta_0}\left\{\sum_{i=1}^n{(y_i-\beta_0-\beta_1x_i):\beta_0,\beta_1\in\RR}^2\right\} \\
+      \hat\beta_1 & =\argmin_{\beta_1}\left\{\sum_{i=1}^n{(y_i-\beta_0-\beta_1x_i):\beta_0,\beta_1\in\RR}^2\right\}
+    \end{align*}
+    And we obtain:
+    \begin{align*}
+      \hat\beta_1 & =\frac{\sum_{i=1}^n(x_i-\overline{x})(y_i-\overline{y})}{\sum_{i=1}^n{(x_i-\overline{x})}^2}=\frac{s_{xy}}{{s_x}^2} \\
+      \hat\beta_0 & =\overline{y}-\hat\beta_1\overline{x}
+    \end{align*}
+    To estimate $\sigma^2$ we use: $$s^2=\frac{1}{n-2}\sum_{i=1}^n{(y_i-\hat{y}_i)}^2$$
+  \end{proposition}
+  \begin{theorem}
+    Given the model of \eqref{LM_simple}, if we consider the hypothesis of normality for $\varepsilon_i$, then the estimates of the least-squares method coincide with the MLEs.
+  \end{theorem}
+  \subsubsection{Coefficient of determination}
+  \begin{definition}
+    Given the model of \eqref{LM_simple}, we define the \emph{coefficient of determination} $R$ as:
+    $$R^2:=\frac{\mathrm{SSR}}{\mathrm{SST}}:=\frac{\sum_{i=1}^n{(\hat{y}_i-\overline{y})}^2}{\sum_{i=1}^n{(y_i-\overline{y})}^2}$$ where $\mathrm{SSR}=\sum_{i=1}^n{(\hat{y}_i-\overline{y})}^2$ is the \emph{total sum of squares} and $\mathrm{SST}=\sum_{i=1}^n{(y_i-\overline{y})}^2$ is the \emph{regression sum of squares}. Furthermore, we can partition $\mathrm{SST}$ into $\mathrm{SST}=\mathrm{SSR}+\mathrm{SSE}$, where $\mathrm{SSE}$ is the \emph{error sum of squares}. That is: $$\sum_{i=1}^n{(y_i-\overline{y})}^2=\sum_{i=1}^n{(\hat{y}_i-\overline{y})}^2+\sum_{i=1}^n{(y_i-\hat{y}_i)}^2$$
+  \end{definition}
+  \begin{proposition}
+    Given the model of \eqref{LM_simple}, we have that $R^2=r^2$.
+  \end{proposition}
+  \subsection{Multiple regression}
   \begin{definition}[General linear model]
-    Let $\vf{Y}$ be a random vector that fluctuates around and unknown parameter $\vf{\nu}$ with an error of $\vf{\varepsilon}$. That is, $\vf{Y}=\vf{\nu}+\vf{\varepsilon}$. We will assume that $\vf{\nu}$ can be expressed of the form $$\vf{\eta}=\beta_0(1,\ldots,1)+\beta_1\vf{x}_1+\cdots+\beta_k\vf{x}_k$$ where the \emph{explanatory variables} (or \emph{regressors}) $\vf{x}_1,\ldots,\vf{x}_k$ are known constants, the parameters $\beta_i$, $i=0,\ldots,k$ are parameters to be estimated and $\vf{Y}$ is the response variable. Expressing the relation in matrix form:
+    Suppose we have a sample of data $\{(x_{i1},\ldots,x_{ik},y_i):i=1,\ldots,n\}$. We can describe the relationship between $x_{i1},\ldots,x_{ik}$ and $y_i$ with the following model:
+    $$y_i=\beta_0+\beta_1x_{i1}+\cdots+\beta_kx_{ik}+\varepsilon_i\qquad i=1,\ldots,n$$
+    where we assume that $y_i$ and $\varepsilon_i$ are random variables whereas $x_i$ are known constants. Moreover in the model, we suppose the following hypothesis:
+    \begin{enumerate}
+      \item $\Exp(\varepsilon_i)=0$ and $\Var(\varepsilon_i)=\sigma^2$, $i=1,\ldots,n$.
+      \item $\cov(\varepsilon_i,\varepsilon_j)=0$ if for all $i\ne j$.
+    \end{enumerate}
+    Sometimes we add an additional condition of normality:
+    \begin{enumerate}\setcounter{enumii}{2}
+      \item $\varepsilon_i\sim N(0,\sigma^2)$, $i=1,\ldots,n$.
+    \end{enumerate}
+    Analogously to what we did with the simple model, we can write the relation in matrix notation as:
     \begin{align*}
       \begin{pmatrix}
-        Y_1    \\
-        Y_2    \\
+        y_1    \\
+        y_2    \\
         \vdots \\
-        Y_n
+        y_n
       \end{pmatrix} & =
       \begin{pmatrix}
         1      & x_{11} & \cdots     & x_{1k} \\
@@ -31,8 +147,9 @@
         \vdots        \\
         \varepsilon_n \\
       \end{pmatrix}                                       \\
-                      & =\vf{X}\vf{\beta}+\vf{\varepsilon}
+                      & =\vf{x}\vf{\beta}+\vf{\varepsilon}
     \end{align*}
+    where the matrix $\vf{x}$ is called \emph{design matrix}, and $\vf\beta$, \emph{regression coefficients}.
   \end{definition}
 \end{multicols}
 \end{document}

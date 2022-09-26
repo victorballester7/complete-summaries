@@ -4,6 +4,80 @@
 \begin{document}
 \renewcommand{\col}{\apl}
 \begin{multicols}{2}[\section{Partial differential equations}]
+  \subsection{Introduction}
+  \subsubsection{Wave and membrane dynamics}
+  \begin{proposition}[Wave equation]
+    Consider a one-dimensional string of length $L$ and constant $k(x)$, $\rho$ be its linear density and $u(x,t)$ be the displacement of the point $x$ at the time $t$ from its equilibrium point. Then, the dynamics of the string are given by: $$\rho u_{tt}={(ku_x)}_x$$ If both $k$ and $\rho$ are constant, this equation is sometimes written as:
+    \begin{equation}\label{PDE_waveeq}
+      u_{tt}=c^2u_{xx}
+    \end{equation}
+    The solution $u(x,t)$ to the wave equation with boundary conditions $u(x,0)=f(x)$, $u_t(x,0)=g(x)$ and $u(0,t)=u(L,t)=0$ is: $$u(x,t)=\sum_{n=0}^\infty \sin\left(\frac{\pi n x}{L}\right)\left[a_n\cos\left(\frac{\pi n c}{L}t\right)+ b_n\sin\left( \frac{\pi n c}{L}t\right)\right]$$ where:
+    \begin{align*}
+      a_n & =\frac{1}{L}\int_{-L}^Lf(x)\cos\left(\frac{\pi n x}{L}\right)\dd{x}       \\
+      b_n & =\frac{1}{\pi n c}\int_{-L}^Lg(x)\sin\left(\frac{\pi n x}{L}\right)\dd{x}
+    \end{align*}
+  \end{proposition}
+  \begin{proposition}[Navier-Cauchy equation]
+    Consider a solid of mass density $\rho$ and $\mu$ and $\lambda$ are the so-called \emph{Lamé coefficients} that describe the material. If $\vf{u}(x,t)$ is the displacement vector of the point $x$ at the instant $t$, the equations that describes the deformation of the solid (\emph{elastodynamics}) is:
+    $$\rho\vf{u}_{tt}=\mu\laplacian\vf{u}+(\lambda+\mu)\grad(\divp{\vf{u}})$$
+  \end{proposition}
+  \subsubsection{Fluid dynamics}
+  \begin{definition}
+    Given a vector field $\vf{u}(x,t)$, we define the \emph{material derivative operator as} as: $$\matdv{\vf{u}}{t}:=\vf{u}_t+(\vf{u}\cdot\grad)\vf{u}$$
+  \end{definition}
+  \begin{definition}
+    An \emph{incompressible flow} is a flow in which the material density is constant.
+  \end{definition}
+  \begin{proposition}[Continuous equation]
+    Consider a fluid of density $\rho$ moving at a velocity $\vf{u}(x,t)$. The conservation of mass implies that the following equation (called \emph{continuous equation}) must hold:
+    $$\rho_t+\divp(\rho\vf{u})=0$$
+    If the fluid is incompressible, the previous equation becomes: $$\divp{\vf{u}}=0$$
+  \end{proposition}
+  \begin{proposition}[Cauchy momentum equation]
+    Consider an inviscid fluid of density $\rho$ moving at a velocity $\vf{u}(x,t)$ and undergoing a pressure of $p(x,t)$. The conservation of momentum implies that the following equation (called \emph{Cauchy momentum equation}) must hold:
+    $$\rho\matdv{\vf{u}}{t}+\grad p=0$$
+    If the fluid is incompressible, the previous equation becomes: $$\divp{\vf{u}}=0$$
+  \end{proposition}
+  \begin{theorem}[Inviscid flow]
+    Consider an incompressible inviscid flow of density $\rho$ moving at a velocity $\vf{u}(x,t)$ and undergoing a pressure of $p(x,t)$. The equations describing the dynamics of the flow are:
+    \begin{equation*}
+      \left\{
+      \begin{aligned}
+        \rho\matdv{\vf{u}}{t}+\grad p & =0 \\
+        \divp{\vf{u}}                 & =0
+      \end{aligned}
+      \right.
+    \end{equation*}
+    If however the flow is compressible, the equations become:
+    \begin{equation*}
+      \left\{
+      \begin{aligned}
+        \rho\matdv{\vf{u}}{t}+\grad p & =0 \\
+        \rho_t+\divp(\rho\vf{u})      & =0
+      \end{aligned}
+      \right.
+    \end{equation*}
+  \end{theorem}
+  \begin{theorem}[Viscid flow]
+    Consider an incompressible viscid fluid of density $\rho$, viscosity $\eta$, moving at a velocity $\vf{u}(x,t)$ and undergoing a pressure of $p(x,t)$. The equations describing the dynamics of the flow are:
+    \begin{equation*}
+      \left\{
+      \begin{aligned}
+        \rho\matdv{\vf{u}}{t}+\grad p & =\eta\laplacian\vf{u} \\
+        \divp{\vf{u}}                 & =0
+      \end{aligned}
+      \right.
+    \end{equation*}
+    If however the flow is compressible, the equations become:
+    \begin{equation*}
+      \left\{
+      \begin{aligned}
+        \rho\matdv{\vf{u}}{t}+\grad p & =\eta\left(\laplacian\vf{u}+\frac{1}{3}\grad(\divp{\vf{u}})\right) \\
+        \rho_t+\divp(\rho\vf{u})      & =0
+      \end{aligned}
+      \right.
+    \end{equation*}
+  \end{theorem}
 
 \end{multicols}
 \end{document}
