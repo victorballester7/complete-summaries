@@ -39,10 +39,10 @@
   \end{theorem}
   \begin{definition}
     Let $\vf{x}=(X_1,\ldots,X_n)$ be a random vector. We define the \emph{covariance matrix} of $\vf{x}$ as the following matrix:
-    $$\vf\Sigma_{\vf{x}}:=\cov(\vf{x}):=\Exp\left((\vf{x}-\Exp(\vf{x}))\transpose{(\vf{x}-\Exp(\vf{x}))}\right)$$
+    $$\vf\Sigma_{\vf{x}}:=\Var(\vf{x}):=\Exp\left((\vf{x}-\Exp(\vf{x}))\transpose{(\vf{x}-\Exp(\vf{x}))}\right)$$
   \end{definition}
   \begin{proposition}
-    Let $\vf{x}=(X_1,\ldots,X_n)$ be a random vector. Then:
+    Let $\vf{x}=(X_1,\ldots,X_n)$ be a random vector. Then, $\vf\Sigma_{\vf{x}}$ is symmetric and:
     $$\vf\Sigma_{\vf{x}}=
       \begin{pmatrix}
         \Var(X_1)     & \cov(X_1,X_2) & \cdots & \cov(X_1,X_n) \\
@@ -61,10 +61,32 @@
       \item $\cov(\vf{x},\vf{y})=\Exp(\vf{x}\transpose{\vf{y}})-\Exp(\vf{x})\transpose{\Exp(\vf{x})}$
       \item $\cov(\vf{x}-\vf{a},\vf{y}-\vf{b})=\cov(\vf{x},\vf{y})$
       \item $\cov(\vf{Ax},\vf{By})=\vf{A}\cov(\vf{x},\vf{y})\transpose{\vf{B}}$
-      \item $\Exp\left(\transpose{\vf{x}}\vf{Ax}\right)=\trace(\vf{A\Sigma_{\vf{x}}}) + \transpose{\Exp(\vf{x}}\vf{A}\Exp(\vf{x})$
+      \item $\Exp\left(\transpose{\vf{x}}\vf{Ax}\right)=\trace(\vf{A\Sigma_{\vf{x}}}) + \transpose{\Exp(\vf{x})}\vf{A}\Exp(\vf{x})$
       \item $\Exp\left((\vf{x}-\vf{a})\transpose{(\vf{x}-\vf{a})}\right)=\vf\Sigma_{\vf{x}}+(\Exp(\vf{x})-\vf{a})\transpose{(\Exp(\vf{x})-\vf{a})}$
       \item $\Exp(\norm{\vf{x}-\vf{a}})=\trace\vf\Sigma_{\vf{x}}+\norm{\Exp(\vf{x})-\vf{a}}$
+      \item $\transpose{\vf{a}}\vf\Sigma_{\vf{x}}\vf{a}=\Var(\transpose{\vf{a}}\vf{x})$. Thus, $\vf\Sigma_{\vf{x}}$ is positive semi-definite.
+      \item If $\vf{x}=(X_1,\ldots,X_n)$ and no $Y_j$ can be expressed as a linear combination of the other ones, then $\vf\Sigma_{\vf{x}}$ is positive definite.
     \end{enumerate}
+  \end{proposition}
+  \subsubsection{Multivariate normal}
+  \begin{definition}
+    We say that $\vf{x}\sim N_n(\vf\mu,\vf\Sigma)$, where $\vf\mu\in\RR^n$ and $\vf\Sigma\in\mathcal{M}_n(\RR)$ is symmetric and positive definite, if its moment generating function\footnote{Remember definition \cref{P_moment-generating}.} is: $$\psi_{\vf{x}}(\vf{u})=\exp{\transpose{\vf{u}}\vf{u}}\exp{\frac{1}{2}\transpose{\vf{u}}\vf\Sigma\vf{u}}\qquad\forall\vf{u}\in\RR^n$$
+  \end{definition}
+  \begin{proposition}
+    Let $\vf{z}=(Z_1,\ldots,Z_n)$, where $Z_i\sim N(0,1)$ for $i=1,\ldots,n$. Then, $\vf{z}\sim N_n(\vf{0},\vf{I}_n)$.
+  \end{proposition}
+  \begin{definition}
+    Let $\vf{A}\in\mathcal{M}_n(\RR)$ be symmetric and positive definite. Suppose the Jordan descomposition of $\vf{A}$ is $\vf{A}=\vf{P}\vf{\Lambda}\vf{P}^{-1}$, where $\vf{\Lambda}=\diag(\lambda_1,\ldots,\lambda_n)$. Then $\forall \alpha\in\RR$, $$\vf{A}^\alpha:=\vf{P}\vf{\Lambda}^\alpha\vf{P}^{-1}$$ where $\vf{\Lambda}^\alpha:=\diag({\lambda_1}^\alpha,\ldots,{\lambda_n}^\alpha)$.
+  \end{definition}
+  \begin{proposition}
+    Let $\vf{x}\sim N_n(\vf\mu,\vf\Sigma)$, where $\vf\mu\in\RR^n$ and $\vf\Sigma\in\mathcal{M}_n(\RR)$ is symmetric and positive definite\footnote{From now on this hypothesis will be implicit in the definition of $\vf{x}$.}. Then, $\vf{z}:={\vf\Sigma}^{-1/2}(\vf{x}-\vf{\mu})\sim N_n(\vf{0},\vf{I}_n)$.
+    Analogously if $\vf{z}\sim N_n(\vf{0},\vf{I}_n)$, then $\vf{x}:={\vf\Sigma}^{1/2}\vf{z}+\vf\mu\sim N_n(\vf\mu,\vf\Sigma)$.
+  \end{proposition}
+  \begin{proposition}
+    Let $\vf{x}\sim N_n(\vf\mu,\vf\Sigma)$. Then, $$f_{\vf{x}}(\vf{y})=\frac{1}{\sqrt{\det\Sigma}}\frac{1}{(2\pi)^{\frac{n}{2}}}\exp{-\frac{1}{2}\transpose{(\vf{y}-\vf\mu)}{\vf\Sigma}^{-1}(\vf{y}-\vf\mu)}$$
+  \end{proposition}
+  \begin{proposition}
+    Let $\vf{x}\sim N_n(\vf\mu,\vf\Sigma)$ such that $\vf{x}=(X_1,\ldots,X_n)$. Then, the variables $X_i$ are normal for $i=1,\ldots,n$.
   \end{proposition}
   \subsection{Simple regression}
   \subsubsection{The model and estimations of the coefficients}
@@ -85,8 +107,8 @@
       \vf{y}=\beta_0+\beta_1\vf{x}+\vf\varepsilon
     \end{equation}
   \end{definition}
-  \begin{proposition}[Least-squares method]
-    Given the simple linear model of \eqref{LM_simple}, we need to estimate the parameters $\beta_0$, $\beta_1$ and $\sigma^2$. To do so, \emph{least-squares method} seek estimators $\hat\beta_0$ and $\hat\beta_1$ that minimize the sum of square of the deviations $y_i-\hat{y}_i$ (also called \emph{residuals}), where $\hat{y}_i$ is the predicted value $\hat{y}_i=\hat\beta_0+\hat\beta_1 x_i$. Hence:
+  \begin{proposition}[Least-Squares method]
+    Given the simple linear model of \cref{LM_simple}, we need to estimate the parameters $\beta_0$, $\beta_1$ and $\sigma^2$. To do so, \emph{least-squares method} seek estimators $\hat\beta_0$ and $\hat\beta_1$ that minimize the sum of square of the deviations $y_i-\hat{y}_i$ (also called \emph{residuals}), where $\hat{y}_i$ is the predicted value $\hat{y}_i=\hat\beta_0+\hat\beta_1 x_i$. Hence:
     \begin{align*}
       \hat\beta_0 & =\argmin_{\beta_0}\left\{\sum_{i=1}^n{(y_i-\beta_0-\beta_1x_i):\beta_0,\beta_1\in\RR}^2\right\} \\
       \hat\beta_1 & =\argmin_{\beta_1}\left\{\sum_{i=1}^n{(y_i-\beta_0-\beta_1x_i):\beta_0,\beta_1\in\RR}^2\right\}
@@ -99,15 +121,15 @@
     To estimate $\sigma^2$ we use: $$s^2=\frac{1}{n-2}\sum_{i=1}^n{(y_i-\hat{y}_i)}^2$$
   \end{proposition}
   \begin{theorem}
-    Given the model of \eqref{LM_simple}, if we consider the hypothesis of normality for $\varepsilon_i$, then the estimates of the least-squares method coincide with the MLEs.
+    Given the model of \cref{LM_simple}, if we consider the hypothesis of normality for $\varepsilon_i$, then the estimates of the least-squares method coincide with the MLEs.
   \end{theorem}
   \subsubsection{Coefficient of determination}
   \begin{definition}
-    Given the model of \eqref{LM_simple}, we define the \emph{coefficient of determination} $R$ as:
+    Given the model of \cref{LM_simple}, we define the \emph{coefficient of determination} $R$ as:
     $$R^2:=\frac{\mathrm{SSR}}{\mathrm{SST}}:=\frac{\sum_{i=1}^n{(\hat{y}_i-\overline{y})}^2}{\sum_{i=1}^n{(y_i-\overline{y})}^2}$$ where $\mathrm{SSR}=\sum_{i=1}^n{(\hat{y}_i-\overline{y})}^2$ is the \emph{total sum of squares} and $\mathrm{SST}=\sum_{i=1}^n{(y_i-\overline{y})}^2$ is the \emph{regression sum of squares}. Furthermore, we can partition $\mathrm{SST}$ into $\mathrm{SST}=\mathrm{SSR}+\mathrm{SSE}$, where $\mathrm{SSE}$ is the \emph{error sum of squares}. That is: $$\sum_{i=1}^n{(y_i-\overline{y})}^2=\sum_{i=1}^n{(\hat{y}_i-\overline{y})}^2+\sum_{i=1}^n{(y_i-\hat{y}_i)}^2$$
   \end{definition}
   \begin{proposition}
-    Given the model of \eqref{LM_simple}, we have that $R^2=r^2$.
+    Given the model of \cref{LM_simple}, we have that $R^2=r^2$.
   \end{proposition}
   \subsection{Multiple regression}
   \begin{definition}[General linear model]
@@ -123,13 +145,13 @@
       \item $\varepsilon_i\sim N(0,\sigma^2)$, $i=1,\ldots,n$.
     \end{enumerate}
     Analogously to what we did with the simple model, we can write the relation in matrix notation as:
-    \begin{align*}
-      \begin{pmatrix}
-        y_1    \\
-        y_2    \\
-        \vdots \\
-        y_n
-      \end{pmatrix} & =
+    \begin{align}
+      \nonumber\begin{pmatrix}
+                 y_1    \\
+                 y_2    \\
+                 \vdots \\
+                 y_n
+               \end{pmatrix} & =
       \begin{pmatrix}
         1      & x_{11} & \cdots     & x_{1k} \\
         1      & x_{21} &            & x_{2k} \\
@@ -146,10 +168,49 @@
         \varepsilon_1 \\
         \vdots        \\
         \varepsilon_n \\
-      \end{pmatrix}                                       \\
-                      & =\vf{x}\vf{\beta}+\vf{\varepsilon}
-    \end{align*}
-    where the matrix $\vf{x}$ is called \emph{design matrix}, and $\vf\beta$, \emph{regression coefficients}.
+      \end{pmatrix}                                                \\
+      \label{LM_generalized}   & =\vf{X}\vf{\beta}+\vf{\varepsilon}
+    \end{align}
+    where the matrix $\vf{X}$ is called \emph{design matrix}, and $\vf\beta$, \emph{regression coefficients}.
   \end{definition}
+  \subsubsection{Least-Squares estimation}
+  \begin{proposition}[Least-Squares method]
+    Consider the model $\vf{y}\sim N_n(\vf{X\beta},\sigma^2\vf{I}_n)$ of \cref{LM_generalized}. We want to minimize the value $${\norm{\vf{y}-\vf{X\beta}}}_2^2=\sum_{i=1}^n{\left(\beta_0+\beta_1x_{i1}+\cdots+\beta_kx_{ik}-y_i\right)}^2$$
+    The value $\hat{\vf\beta}=(\hat\beta_0,\ldots,\hat\beta_k)$ that minimizes the previous values is given by the solution of: $$\transpose{\vf{X}}\vf{X\hat\beta}=\transpose{\vf{X}}\vf{y}$$
+    In particular, if $\transpose{\vf{X}}\vf{X}$ is invertible, we get the explicit solution $$\vf{\hat\beta}={\left(\transpose{\vf{X}}\vf{X}\right)}^{-1}\transpose{\vf{X}}\vf{y}$$
+  \end{proposition}
+  \begin{proposition}
+    Consider the model $\vf{y}\sim N_n(\vf{X\beta},\sigma^2\vf{I}_n)$ of \cref{LM_generalized}. If $\Exp(\vf{y})=\vf{X\beta}$, then $\vf{\hat\beta}$ is an unbiased estimator for $\vf\beta$.
+  \end{proposition}
+  \begin{proposition}
+    Consider the model $\vf{y}\sim N_n(\vf{X\beta},\sigma^2\vf{I}_n)$ of \cref{LM_generalized}. If $\Var(\vf{y})=\sigma^2\vf{I}_n$, then the covariance matrix for $\vf{\hat\beta}$ is $\vf\Sigma_{\vf{\hat\beta}}=\sigma^2{\left(\transpose{\vf{X}}\vf{X}\right)}^{-1}$.
+  \end{proposition}
+  \subsubsection{MLE estimation}
+  \begin{proposition}[MLE method]
+    Consider the model $\vf{y}\sim N_n(\vf{X\beta},\sigma^2\vf{I}_n)$ of \cref{LM_generalized}. We want to find the value $\vf{\hat\beta}$ that maximises the likelihood which in this case is: $$L(\vf{y};\vf\beta,\sigma^2)=\frac{1}{(\sqrt{2\pi\sigma^2})^n}\exp{-\frac{1}{2\sigma^2}{\norm{\vf{y}-\vf{X\beta}}}}$$
+    Solving for $\vf{\hat\beta}$ and ${\hat\sigma}^2$ we get:
+    \begin{align*}
+      \transpose{\vf{X}}\vf{X\hat\beta} & =\transpose{\vf{X}}\vf{y}     \\
+      {\hat\sigma}^2                    & =\frac{1}{n}{\norm{\vf{e}}}^2
+    \end{align*}
+    where $\vf{e}=\vf{y}-\vf{\hat{y}}=\vf{y}-\vf{X\hat{\beta}}$. Note that ${\hat\sigma}^2$ is biased and if we want an unbiased estimator we should use:
+    $${\hat\sigma}^2=\frac{1}{n-k-1}{\norm{\vf{e}}}^2$$
+  \end{proposition}
+  \begin{definition}
+    Consider the model $\vf{y}\sim N_n(\vf{X\beta},\sigma^2\vf{I}_n)$ of \cref{LM_generalized} and suppose that $\transpose{\vf{X}}\vf{X}\in\GL_{k+1}(\RR)$. We define the following deterministic matrices:
+    $$\vf{A}={\left(\transpose{\vf{X}}\vf{X}\right)}^{-1}\transpose{\vf{X}}\qquad \vf{H}=\vf{XA}\qquad \vf{M}=\vf{I}-\vf{H}$$
+    Hence, $$\vf{\hat\beta}=\vf{Ay}\qquad\vf{\hat{y}}=\vf{Hy}\qquad\vf{e}=\vf{My}$$
+  \end{definition}
+  \begin{proposition}
+    Consider the model $\vf{y}\sim N_n(\vf{X\beta},\sigma^2\vf{I}_n)$ of \cref{LM_generalized} and suppose that $\transpose{\vf{X}}\vf{X}\in\GL_{k+1}(\RR)$. Then:
+    \begin{enumerate}
+      \item $\hat\beta_0,\ldots,\hat\beta_k$ are independent normally distributed random variables, as well as $\hat{y}_1,\ldots,\hat{y}_n$ and $\hat{e}_1,\ldots,\hat{e}_n$
+      \item $\vf{H}$ and $\vf{M}$ are symmetric and idempotent. Moreover, $\vf{MH}=\vf{0}_n$.
+      \item $\vf{MX}=0$
+      \item $\vf{e}=\vf{M\varepsilon}$
+      \item $\transpose{\vf{X}}\vf{e}=0$. In particular, $\sum_{i=1}^n e_i=0$ and $\sum_{i=1}^n x_{ij}e_i=0$ $\forall j$. So the sample covariance of $(x_{1j},\ldots,x_{nj})$ and $\vf{e}$ is 0 $\forall j$.
+      \item $\transpose{\vf{y}}\vf{e}=0$. Analogously, we have that the sample covariance of $\vf{\hat{y}}$ and $\vf{e}$ is 0.
+    \end{enumerate}
+  \end{proposition}
 \end{multicols}
 \end{document}

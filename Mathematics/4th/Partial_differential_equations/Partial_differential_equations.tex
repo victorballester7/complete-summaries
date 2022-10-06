@@ -30,12 +30,16 @@
   \end{definition}
   \begin{proposition}[Continuous equation]
     Consider a fluid of density $\rho$ moving at a velocity $\vf{u}(x,t)$. The conservation of mass implies that the following equation (called \emph{continuous equation}) must hold:
-    $$\rho_t+\divp(\rho\vf{u})=0$$
+    \begin{equation}\label{PDE_continuous}
+      \rho_t+\divp(\rho\vf{u})=0
+    \end{equation}
     If the fluid is incompressible, the previous equation becomes: $$\divp{\vf{u}}=0$$
   \end{proposition}
   \begin{proposition}[Cauchy momentum equation]
     Consider an inviscid fluid of density $\rho$ moving at a velocity $\vf{u}(x,t)$ and undergoing a pressure of $p(x,t)$. The conservation of momentum implies that the following equation (called \emph{Cauchy momentum equation}) must hold:
-    $$\rho\matdv{\vf{u}}{t}+\grad p=0$$
+    \begin{equation}\label{PDE_cauchy}
+      \rho\matdv{\vf{u}}{t}+\grad p=0
+    \end{equation}
     If the fluid is incompressible, the previous equation becomes: $$\divp{\vf{u}}=0$$
   \end{proposition}
   \begin{theorem}[Inviscid flow]
@@ -87,8 +91,100 @@
     Consider a body $\Omega\subset\RR^3$ with a density of mass $\rho$. Then, $\vf{F}(\vf{x})=m\grad{u(\vf{x})}$ where $$u(\vf{x})=G\int_{\Omega}\frac{1}{\norm{\vf{x}-\vf{y}}}\rho(\vf{y})\dd^3{\vf{y}}$$ is the \emph{potential} created by the body $\Omega$ at the point $\vf{x}\in\RR^3$. Furthermore, if $\rho$ is regular enough, we have $\divp\vf{F}(\vf{x})=-4\pi\rho(\vf{x})$\footnote{That is, $\divp\vf{F}(\vf{x})=0$ $\forall\vf{x}\in\RR^3\setminus\Omega$}. Combining these two equation, we get: $$\laplacian u=-4\pi\rho$$ which the \emph{Poisson equation} (and also it is a \emph{elliptic equation}).
   \end{proposition}
   \subsubsection{Diffusion and heat equations}
+  \begin{proposition}[Fick's law of diffusion]
+    Consider a material with \emph{diffusivity} (or \emph{diffusion coefficient}) $D$, $\vf{\phi}$ the \emph{diffusion flux} and $u$ be its concentration. Then, \emph{Fick's law} states that: $$\vf{\phi}=-D\grad{u}$$
+  \end{proposition}
+  \begin{proposition}[Diffusion equation]
+    Consider a material with diffusivity $D$, $\vf{\phi}$ the diffusion flux and $u$ its concentration. Then, the concentration of the material satisfies: $$\pdv{u}{t}=\divp\left(D\grad{u}\right)$$
+    In particular, if $D=\const$, then we get $\pdv{u}{t}=D\laplacian{u}$.
+  \end{proposition}
+  \begin{proposition}[Fourier's law of diffusion]
+    Consider a material with \emph{thermal conductivity} $k$, $\vf{q}$ be the \emph{heat flux} and $T$ its temperature. Then, \emph{Fourier's law} states that: $$\vf{q}=-k\grad{T}$$
+  \end{proposition}
+  \begin{proposition}[Heat equation]
+    Consider a material with thermal conductivity $k$ and $u$ be its temperature. Then, the temperature of the material satisfies: $$\pdv{u}{t}=\frac{1}{c\rho}\divp\left(k\grad{u}\right)$$
+    where $c$ is the \emph{specific heat capacity} and $\rho$ is the \emph{density}. In particular, if $k=\const$, then we get $\pdv{u}{t}=\alpha\laplacian{u}$, where $\alpha:=\frac{k}{c\rho}$ is the \emph{thermal diffusivity}.
+  \end{proposition}
+  \subsubsection{Maxwell equations}
+  \begin{proposition}[Gau\ss's law]
+    \emph{Gau\ss's law} states that a static electric field points away from positive charges and towards negative charges, and the net outflow of the electric field through a closed surface $\Fr{\Omega}$ is proportional to the enclosed charge.
+    \begin{align*}
+      \divp\vf{E}                                 & =\frac{\rho}{\varepsilon_0}                     & \text{(Differential form)} \\
+      \oiint_{\Fr{\Omega}}\vf{E}\cdot \dd{\vf{S}} & =\frac{1}{\varepsilon_0}\iiint_\Omega\rho\dd{V} & \text{(Integral form)}
+    \end{align*}
+  \end{proposition}
+  \begin{proposition}[Gau\ss's law for magnetism]
+    \emph{Gau\ss's law for magnetism} states that for each volume element $\Omega$ in space, there are exactly the same number of magnetic field lines entering and exiting the volume. No total magnetic charge can build up in any point in space.
+    \begin{align*}
+      \divp\vf{B}                                 & =0 \\
+      \oiint_{\Fr{\Omega}}\vf{B}\cdot \dd{\vf{S}} & =0
+    \end{align*}
+  \end{proposition}
+  \begin{proposition}[Maxwell-Faraday equation]
+    \emph{Maxwell-Faraday equation} states that a time-varying magnetic field always accompanies a spatially varying (also possibly time-varying), non-conservative electric field, and vice versa
+    \begin{align*}
+      \rotp\vf{E}                                   & =\pdv{\vf{B}}{t}                              \\
+      \oint_{\Fr{\Sigma}}\vf{E}\cdot \dd{\vf{\ell}} & =-\dv{}{t}\iint_\Sigma\vf{B}\cdot \dd{\vf{S}}
+    \end{align*}
+  \end{proposition}
+  \begin{proposition}[Ampère-Maxwell circuital law]
+    The original \emph{Ampère's law} ($\rotp\vf{B}=\mu_0\vf{J}$) stats a relation between the total amount of magnetic field around some closed path $\Fr{\Sigma}$ due to the current that passes through that enclosed path $\Sigma$. The second term on the right-hand-side (added later by Maxwell) is the \emph{displacement current} associated with the polarization of the individual molecules of the dielectric material.
+    \begin{align*}
+      \rotp\vf{B}                                   & =\mu_0\left(\vf{J}+\varepsilon_0\pdv{\vf{E}}{t}\right)                                                          \\
+      \oint_{\Fr{\Sigma}}\vf{B}\cdot \dd{\vf{\ell}} & =\mu_0 \left(\iint_\Sigma\vf{J}\cdot\dd{\vf{S}}+\varepsilon_0\dv{}{t}\iint_\Sigma\vf{E}\cdot \dd{\vf{S}}\right)
+    \end{align*}
+  \end{proposition}
+  \subsubsection{Mechanics and optics}
+  \begin{definition}
+    We define the \emph{refractive index} is defined as: $$n(\vf{x})=\frac{c}{v(\vf{x})}$$ where $c$ is the speed of the light in the vacuum and $v(\vf{x})$ the speed of the light at the position $\vf{x}$ (located in some medium).
+  \end{definition}
+  \begin{proposition}[Fermat's principle]
+    \emph{Fermat's principle} states that the path taken by a ray between two given points $a$ and $b$ is the path that can be traveled in the least time. Mathematically, we want to minimize the functional: $$\mathcal{T}(\vf{x})=\int_a^b\frac{\abs{\dd{\vf{x}}}}{v(\vf{x})}$$
+    So we shall solve the equation $\delta \mathcal{T}=0$, which is equivalent to solve: $$\int_a^bn(\vf{x})\dd{s}$$ where $s$ is the arc-length parameter. From the Euler-Lagrange equations, we get the following ode: $$\dv{}{s}\left(n\dv{\vf{x}}{s}\right)=\grad{n}$$
+  \end{proposition}
+  \begin{proposition}[Eikonal equation]
+    The time $T(x)$ taken by the light to travel from a fixed point $x_0$ to $x$ in a medium of refractive index $n$ is given by: $$\abs{\grad{T}}$$
+  \end{proposition}
+  \begin{definition}
+    The \emph{action} $\mathcal{S}$ of a physical system is defined as the integral of the Lagrangian $L:=T-V$ between two instants of time $t_1$ and $t_2$. That is: $$\mathcal{S}(\vf{x},t)=\int_{t_1}^{t_2}L(\vf{x}(t),\vf{\dot{x}}(t),t)\dd{t}=\int_{t_1}^{t_2}\left(\frac{1}{2}m{\norm{\vf{\dot{x}}}}^2-V(\vf{x})\right)\dd{t}$$
+    where $m$ is the mass of the particle and $V$ is the potential energy of the particle.
+  \end{definition}
+  \begin{proposition}[Principle of least action]
+    The path taken by a physical system between times $t_1$ and $t_2$ and configurations $\vf{x}_1$ and $\vf{x}_2$ is the one for which the action is stationary (no change) to first order. Mathematically, $\delta \mathcal{S}=0$, where $\delta$ means a \emph{small change}. This value $S(\vf{x},t)$ of the action satisfies the \emph{Hamilton-Jacobi equation}: $$\pdv{S}{t}+\frac{1}{2m}{\norm{\grad S}}^2+V=0$$
+  \end{proposition}
+  \begin{proposition}[Schrödinger equation]
+    The \emph{Schrödinger equation} is a pde that governs the \emph{wave function} $\vf\Psi$, which describes the quantum state of an isolated quantum system, of a quantum-mechanical system. This is given by: $$\ii \hbar\pdv{\Psi}{t}=\left(-\frac{\hbar^2}{2m}\laplacian+V\right)\vf{\Psi}$$ where $m$ is the mass of the particle and $V$ is the potential in which the particle exists. Furthermore, $\abs{\Psi}^2$ is the probability density function of the position of the particle.
+  \end{proposition}
   \begin{proposition}
-    Consider a material with thermal conductivity $k$
+    Substituting $\vf{\Psi}=\sqrt{\rho}\exp{\ii \frac{S}{\hbar}}$ into the Schrödinger equation and taking the limit $\hbar\to 0$ in the resulting equation yield the Hamilton-Jacobi equation. Moreover, if we define $\vf{v}=\frac{\grad{S}}{m}$ from one real equation (from the original one complex equation) we get the continuous equation (\cref{PDE_continuous}) and from the other equation taking the limit $\hbar\to 0$ we get the Cauchy momentum equation (\cref{PDE_cauchy}).
+  \end{proposition}
+  \subsection{First order partial differential equation}
+  \subsubsection{Method of characteristics and traffic equation}
+  \begin{proposition}[Method of characteristics]
+    Consider the following quasilinear PDE:
+    \begin{equation}\label{PDE_char}
+      a(x,t,u)\pdv{u}{x}+b(x,t,u)\pdv{u}{t}=c(x,t,u)
+    \end{equation}
+    Note that we can write this equation as: $$\begin{pmatrix}
+        a(x,t,u) & b(x,t,u) & c(x,t,u)
+      \end{pmatrix}\cdot\begin{pmatrix}
+        \pdv{u}{x} \\
+        \pdv{u}{t} \\
+        -1
+      \end{pmatrix}=0$$
+    And so the solutions of \cref{PDE_char} are the integral curves (called \emph{characteristic curves}) that form the surface of the graph $u(x,t)$. This are given by:
+    \begin{equation*}
+      \left\{
+      \begin{aligned}
+        \dv{x}{\tau} & = a(x,t,u) \\
+        \dv{t}{\tau} & = b(x,t,u) \\
+        \dv{u}{\tau} & = c(x,t,u) \\
+      \end{aligned}
+      \right.
+    \end{equation*}
+  \end{proposition}
+  \begin{proposition}[Traffic equation]
+    Consider a one lane motorway with one entry an one exit. Let $\rho$ be the density of cars per unit of length, $u(\rho)$ the average speed of the cars and $q=\rho u$ be the flux of cars. Then, we can model the traffic in the motorway with the equation: $$\rho_t+{(\rho u)}_x=rho_t+q'(\rho){\rho}_x=0$$
   \end{proposition}
 \end{multicols}
 \end{document}

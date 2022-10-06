@@ -4,10 +4,10 @@
 \begin{document}
 \renewcommand{\col}{\ana}
 \begin{multicols}{2}[\section{Real and functional analysis}]
-  \subsection{Lebesgue integral}
+  \subsection{Measure theorey and Lebesgue integral}
   \subsubsection{Measures}
   \begin{definition}[$\sigma$-algebra]
-    Let $\Omega$ be a set and $\Sigma\subseteq\mathcal{P}(\Omega)$. We say that $\Sigma$ is a \emph{$\sigma$-algebra} over $\Omega$ if:
+    Let $\Omega$ be a  set and $\Sigma\subseteq\mathcal{P}(\Omega)$. We say that $\Sigma$ is a \emph{$\sigma$-algebra} over $\Omega$ if:
     \begin{enumerate}
       \item $\Omega\in\Sigma$.
       \item If $A\in\Sigma$, then $A^c\in\Sigma$.
@@ -59,7 +59,6 @@
   \begin{proposition}
     All nonempty open set $U\subseteq\RR^n$ can be written as a countable union of disjoint dyadic cubes whose closure is in $U$.
   \end{proposition}
-  \subsubsection{Measure of sets in \texorpdfstring{$\RR^n$}{Rn}}
   \begin{definition}
     Let $A\subseteq\RR^n$ be a set. We denote by $\mathcal{I}(A)$ the set of covers of $A$ that are intervals. Analogously, we denote by $\mathcal{I}_0(A)$ the set of open covers of $A$ that are intervals.
   \end{definition}
@@ -120,7 +119,7 @@
     A \emph{real function} is a function $f:\RR^n\rightarrow[-\infty,+\infty]$. We will say that $f$ is \emph{finite} if $\pm\infty\notin\im f$.
   \end{definition}
   \begin{definition}
-    Let $f$ be a real function. We say that $f$ is \emph{Lebesgue measurable} if $\{f(x)> r:x\in\RR^n\}\in \mathcal{M}$ $\forall r\in\RR$.
+    Let $f$ be a real function. We say that $f$ is \emph{Lebesgue measurable} if $\{x\in\RR^n:f(x)> r\}\in \mathcal{M}$ $\forall r\in\RR$.
   \end{definition}
   \begin{lemma}
     Let $a,b\in[-\infty,+\infty]$ and $f$ be a real function. The sets:
@@ -142,7 +141,7 @@
     Let $u$, $v$ be two finite measurable real functions, $U\subseteq\RR^2$ be an open set such that $(u(x),v(x))\in U$ $\forall x\in\RR^n$ and $\varphi:U\rightarrow\RR$ be a continuous function. Then, $\varphi(u(x),v(x))$ is also measurable.
   \end{proposition}
   \begin{proposition}
-    Let $f$, $g$ be two real functions such that $f$ is measurable and $g\overset{\text{a.e.}}{=} f$. Then, $g$ is also measurable.
+    Let $f$, $g$ be two real functions such that $f$ is measurable and $g\almoste{=} f$. Then, $g$ is also measurable.
   \end{proposition}
   \begin{proposition}
     Let $f$, $g$ be two measurable real functions. Then, so are $f\pm g$, $fg$ and $f/g$ if $g(x)\ne 0$ $\forall x\in\RR^n$.
@@ -158,10 +157,15 @@
     Furthermore, any function being pointwise limit a.e. of a sequence of measurable functions is measurable.
   \end{proposition}
   \begin{definition}
+    Let $f$ be a measurable function. We define the following measurable functions:
+    $$f^+:=\sup\{f,0\}\qquad f^-:=\sup\{-f,0\}$$
+    Note that then, $f=f^+-f^-$ and $\abs{f}=f^++f^-$.
+  \end{definition}
+  \begin{definition}
     A \emph{simple function} is a linear combination $$s:=\sum_{k=1}^N\alpha_k\indi{A_k}$$ where $\alpha_k\in\RR$ and $A_k\in\mathcal{M}$ for $K=1,\ldots,k$\footnote{We may suppose that the sets $A_k$ are pairwise disjoint, the quantities $\alpha_k$ are all different and that $A_k=s^{-\alpha_k}$.}.
   \end{definition}
   \begin{theorem}
-    Let $f:\RR^n\rightarrow[0,+\infty]$ be a measurable function and let $$E(k,m):=\{\frac{k-1}{2^m}\leq f<\frac{k}{2^m}\}\quad\text{and}\quad F(m):=\{f\geq m\}$$
+    Let $f:\RR^n\rightarrow[0,+\infty]$ be a measurable function and let $$E(k,m):=\left\{\frac{k-1}{2^m}\leq f<\frac{k}{2^m}\right\}\;\;\text{and}\;\; F(m):=\{f\geq m\}$$
     Then, the sequence of positive simple functions $$s_m=m+\indi{F(k)}+\sum_{k=1}^{m2^m}\frac{k-1}{2^m}\indi{E(k,m)}$$ is increasing and $\displaystyle\lim_{m\to\infty}s_m(x)=f(x)$ $\forall x\in\RR^n$
   \end{theorem}
   \begin{theorem}
@@ -175,14 +179,123 @@
   \begin{proposition}
     Let $A_1,A_2,\ldots$ be measurable sets and $s$, $t$ be simple functions. Then:
     \begin{itemize}
-      \item If $E=\bigcap_{k=1}^\infty A_k$, then $\int_E s=\sum_{k=1}^\infty \int_{A_k} s$.
-      \item $\int(s+t)=\int s+\int t$.
-      \item $\int \alpha s=\alpha\int s$ if $\alpha\in\RR_{\geq 0}$.
-      \item If $s\leq t$, then $\int s\leq\int t$.
+      \item If $\displaystyle E=\bigcap_{k=1}^\infty A_k$, then $\displaystyle\int_E s=\sum_{k=1}^\infty \int_{A_k} s$.
+      \item $\displaystyle\int(s+t)=\int s+\int t$.
+      \item If $\alpha\in\RR_{\geq 0}$, then $\displaystyle\int \alpha s=\alpha\int s$.
+      \item If $s\leq t$, then $\displaystyle\int s\leq\int t$.
     \end{itemize}
   \end{proposition}
   \begin{proposition}
     The function $$\function{\mu_s}{\mathcal{M}}{[0,\infty]}{E}{\displaystyle\int_E s}$$ is a measure.
   \end{proposition}
+  \begin{definition}
+    Let $f:\RR^n\rightarrow[0,+\infty]$ be a measurable function. We define: $$\mathcal{S}(f):=\{s:s\text{ is a simple function such that }0\leq s\leq f\}$$
+  \end{definition}
+  \begin{definition}
+    Let $f:\RR^n\rightarrow[0,+\infty]$ be a measurable function. We define the \emph{integral of $f$ over $\RR^n$} as: $$\int_{\RR^n}f(x)\dd{x}:=\sup_{s\in\mathcal{S}(f)}\int s$$ We define the \emph{integral of $f$ over a measurable set $E\subseteq \RR^n$} as: $$\int_{E}f(x)\dd{x}:=\int_{\RR^n}f(x)\indi{E}(x)\dd{x}=\sup_{s\in\mathcal{S}(f)}\int s$$
+  \end{definition}
+  \begin{proposition}
+    Let $E\subseteq\RR^n$ be a measurable set, $s$ be a simple function and $f$, $g$ be measurable function such that $f(x)\leq g(x)$ $\forall x\in E$. Then:
+    \begin{enumerate}
+      \item $\displaystyle\int_E s=\int_Es(x)\dd{x}$
+      \item $\displaystyle\int_E f\leq \int_Eg$
+    \end{enumerate}
+  \end{proposition}
+  \begin{theorem}[Monotone convergence theorem]
+    Let $E\subseteq\RR^n$ be a measurable set, $f\geq 0$ be a non-negative measurable function such that $\exists (f_m)\geq 0$ with $f_m\nearrow f$. Then: $$\int_Ef(x)\dd{x}=\lim_{m\to\infty}\int_Ef_m(x)\dd{x}$$
+  \end{theorem}
+  \begin{proposition}
+    Let $E\subseteq\RR^n$ be a measurable set, $f, g, (f_m)\geq 0$ be a non-negative measurable functions. Then:
+    \begin{enumerate}
+      \item $\displaystyle\int_E\sum_{m=1}^\infty f_m(x)\dd{x}=\sum_{m=1}^\infty\int_E f_m(x)\dd{x}$
+      \item If $(E_k)$ is a sequence of measurable sets such that $E=\bigsqcup_{k=1}^\infty E_k$, then: $$\int_Ef(x)\dd{x}=\sum_{k=1}^\infty\int_{E_k}f(x)\dd{x}$$
+      \item If $\alpha\in[0,\infty)$, then $\displaystyle\int_E\alpha f(x)\dd{x}=\alpha\int_Ef(x)\dd{x}$.
+      \item If $f\leq g$ on $E$, then $\displaystyle\int_Ef(x)\dd{x}\leq\int_Eg(x)\dd{x}$.
+      \item $\displaystyle\int_Ef(x)\dd{x}=0\iff f\almoste{=}0$ on $E$.
+      \item If $N\subset E$ is a null set, then $\displaystyle\int_Ef(x)\dd{x}=\int_{E\setminus N}f(x)\dd{x}$.
+      \item If $\displaystyle\int_Ef(x)\dd{x}<\infty$, then $f\almoste{<}\infty$ on $E$.
+      \item If $h\in\RR^n$, then $\displaystyle\int_{E-h}f(x+h)\dd{x}=\int_{-E}f(-x)\dd{x}=\int_{E}f(x)\dd{x}$
+    \end{enumerate}
+  \end{proposition}
+  \begin{corollary}
+    Let $E\subseteq\RR^n$ be a measurable set, $f\geq 0$ be a non-negative measurable function such that $\exists (f_m)\geq 0$ with $f_m\almoste{\nearrow} f$. Then: $$\int_Ef(x)\dd{x}=\lim_{m\to\infty}\int_Ef_m(x)\dd{x}$$
+  \end{corollary}
+  \begin{lemma}[Fatou lemma]
+    Let $E\subseteq\RR^n$ be a measurable set and $(f_m)\geq 0$ be a sequence of non-negative measurable functions over $E$. Then: $$\int_E\liminf_{m\to\infty}f_m(x)\dd{x}\leq \liminf_{m\to\infty}\int_Ef_m(x)\dd{x}$$
+  \end{lemma}
+  \begin{definition}
+    Let $E\subseteq\RR^n$ be a measurable set and $f:E\rightarrow[-\infty,+\infty]$ be a measurable function such that either $\int_Ef^+(x)\dd{x}<\infty$ or $\int_Ef^-(x)\dd{x}<\infty$. Then, we define the \emph{integral of $f$ over $E$} as: $$\int_Ef(x)\dd{x}:=\int_Ef^+(x)\dd{x}-\int_Ef^-(x)\dd{x}$$
+    We say that $f$ is an \emph{integrable function over $E$} if $${\norm{f}}_1:=\int_E\abs{f(x)}\dd{x}<\infty$$ The set of such functions is denoted by $\mathcal{L}^1(E)$.
+  \end{definition}
+  \begin{proposition}
+    Let $E\subseteq\RR^n$ be a measurable set and $f:E\rightarrow[-\infty,+\infty]$ be a measurable function. Then, the function $g=f\indi{\abs{f}<\infty}$ is finite and $f\almoste{=}g$.
+  \end{proposition}
+  \begin{proposition}
+    Let $E\subseteq\RR^n$ be a measurable set. Then:
+    \begin{enumerate}
+      \item $\mathcal{L}^1(E)$ is a vector spaceover $\RR$.
+      \item The integral $$\function{\int_E}{\mathcal{L}^1(E)}{\RR}{f}{\int_Ef}$$ is a linear form.
+      \item If $f,g\in\mathcal{L}^1(E)$are such that $f\almoste{leq} g$ on $E$, then $\int_E f\leq\int_E g$. Moreover: $$\abs{\int_Ef(x)\dd{x}}\leq \int_E\abs{f(x)}\dd{x}$$
+      \item If $f\in\mathcal{L}^1(E)$ and $E=E_1\sqcup E_2$ with $E_1$, $E_2$ measurable, then $$\int_{E_1\sqcup E_2}f(x)\dd{x}=\int_{E_1}f(x)\dd{x}+\int_{E_2}f(x)\dd{x}$$
+      \item If $h\in\RR^n$, $f\in\mathcal{L}^1(E)$, then: $$\int_{E-h}f(x+h)\dd{x}=\int_{-E}f(-x)\dd{x}=\int_{E}f(x)\dd{x}$$
+    \end{enumerate}
+  \end{proposition}
+  \begin{theorem}[Dominated convergence theorem]
+    Let $E\subseteq\RR^n$ be a measurable set, $f$ be a measurable function over $E$ such that $\exists (f_m)\geq 0$ with $f_m\almoste{\rightarrow} f$ and $\abs{f_m(x)}\almoste\leq g(x)$ on $E$ with $g\in\mathcal{L}^1(E)$. Then, $f, f_m\in\mathcal{L}^1(E)$ $\forall m\in\NN$ and: $$\int_Ef(x)\dd{x}=\lim_{m\to\infty}\int_Ef_m(x)\dd{x}$$
+  \end{theorem}
+  \begin{proposition}
+    Let $E\subseteq\RR^n$ be a measurable set, $f,g\in\mathcal{L}^1(E)$ and $\lambda\in\RR$. Then:
+    \begin{enumerate}
+      \item ${\norm{f+g}}_1\leq{\norm{f}}_1+{\norm{g}}_1$
+      \item ${\norm{\lambda f}}_1=\abs{\lambda}{\norm{f}}_1$
+      \item ${\norm{f}}_1=0\iff f\almoste{=}0$.
+    \end{enumerate}
+  \end{proposition}
+  \begin{definition}
+    Let $E\subseteq\RR^n$ be a measurable set and $(f_m),f\in\mathcal{L}^1(E)$. We say that $(f_m)$ \emph{converge in mean} to $f$ if $\lim_{m\to\infty}{\norm{f_m-f}}_1=0$, or equivalently $\lim_{m\to\infty} f_m=f$ on $\mathcal{L}^1(E)$.
+  \end{definition}
+  \begin{theorem}
+    Let $E\subseteq\RR^n$ be a measurable set and $(f_m)\in\mathcal{L}^1(E)$.
+    \begin{enumerate}
+      \item If $\sum_{m=1}^\infty {\norm{f_m}}_1<\infty$, $\exists f\in\mathcal{L}^1(E)$ such that $\sum_{m=1}^\infty f_m =f$ on $\mathcal{L}^1(E)$ and $\sum_{m=1}^\infty f_m(x)=f(x)$ converges absolutely $\forall x\in E\setminus N$, where $N$ is a null set.
+      \item If $\lim_{m\to\infty} f_m=f$ on $\mathcal{L}^1(E)$, then there exists a subsequence $(f_{m_k})$ such that $\lim_{k\to\infty} f_{m_k}=f$ on $\mathcal{L}^1(E)$ and  $\lim_{k\to\infty} f_{m_k}(x)=f(x)$ $\forall x\in E\setminus N$, where $N$ is a null set.
+    \end{enumerate}
+  \end{theorem}
+  \begin{proposition}
+    Let $E\subseteq\RR^n$ be a measurable set and $f\in\mathcal{L}^1(E)$. Then, there exists a sequence of integrable simple functions $(s_m)$ such that $\lim_{m\to\infty} s_m=f$ on $\mathcal{L}^1(E)$ and $\lim_{m\to\infty} s_m(x)=f(x)$ $\forall x\in E$, with $\abs{s_1}\leq\abs{s_2}\leq \cdots\leq \abs{f}$.
+  \end{proposition}
+  \subsubsection{Integral calculus in one variable and Riemann integral}
+  \begin{definition}
+    Given a function $f:\RR\rightarrow\RR$, we say that $\int_a^bf(x)\dd{x}$ \emph{exists and it is finite} if$f$ is integrable on $(\min\{a,b\},\max\{a,b\})$\footnote{Note that if $f$ is measurable, the integral always exists but it may be $\pm\infty$.}.
+  \end{definition}
+  \begin{theorem}[Mean value theorem for integrals]
+    Let $f:\RR\rightarrow\RR_{\geq 0}$ be an positive integrable function over $(a,b)$ and $g:(a,b)\rightarrow\RR$ be a measurable and bounded function such that $\alpha\leq g(x)\leq\beta$ almost everywhere on $(a,b)$. Then, $\exists\gamma\in[\alpha,\beta]$ such that: $$\int_a^bg(x)f(x)\dd{x}=\gamma\int_a^bf(x)\dd{x}$$
+    Moreover if $g$ is continuous, $\exists\xi\in(a,b)$ such that: $$\int_a^bg(x)f(x)\dd{x}=g(\xi)\int_a^bf(x)\dd{x}$$
+    In particular, taking $f=1$, we get:  $$\int_a^bg(x)\dd{x}=g(\xi)(b-a)$$
+  \end{theorem}
+  \begin{theorem}[Barrow's law]
+    If $f:[a,b]\rightarrow\RR$ is a continuous function and derivable on $(a,b)$ with bounded derivative, then $f'\in\mathcal{L}^1((a,b))$ and $$\int_a^bf'(x)\dd{x}=f(b)-f(a)$$
+  \end{theorem}
+  \begin{theorem}[Fundamental theorem of calculus]
+    Let $f:(a,b)\rightarrow\RR$ be an integrable function and continuous at $y\in (a,b)$. Then, $F(x)=\int_a^xf(x)\dd{x}$ is derivable at $y$ and $F'(y)=f(y)$.
+  \end{theorem}
+  \begin{theorem}
+    Let $\varphi:[\alpha,\beta]\rightarrow[c,d]$ be a continuous function and derivable with bounded derivative on $(\alpha,\beta)$. Let $a=\varphi(\alpha)$ and $b=\varphi(\beta)$. If $f:[c,d]\rightarrow\RR$ is a continuous function, then $(f\circ\varphi)\varphi'$ is integrable on $(\alpha,\beta)$ and: $$\int_c^df(x)\dd{x}=\int_\alpha^\beta f(\varphi(t))\varphi'(t)\dd{t}$$
+  \end{theorem}
+  \begin{theorem}[Integration by parts]
+    Let $F,G:[a,b]\rightarrow\RR$ be the primitives of the two bounded functions $f,g:(a,b)\rightarrow\RR$. Then, $Fg,fG\in\mathcal{L}^(a,b)$ and: $$\int_a^bF(x)g(x)\dd{x}=F(a)G(a)-F(b)G(b)-\int_a^bf(x)G(x)\dd{x}$$
+  \end{theorem}
+  \begin{theorem}
+    Let $f:[a,b]\rightarrow\RR$ be a Riemann integrable function. Then, $f$ is also Lebesgue integrable and both integrals coincide.
+  \end{theorem}
+  \subsubsection{Functions defined by integrals}
+  \begin{theorem}
+    Let $E\subseteq\RR^n$ be a measurable set, $I\subseteq \RR$ be an interval, $g\in\mathcal{L}^1(E)$ be such that $g\geq 0$ and $f(\cdot, t)$ be an integrable function $\forall t\in I$. We denote: $$\Phi(t):=\int_Ef(x,t)\dd{x}$$
+    \begin{enumerate}
+      \item If $f(x,\cdot)$ is continuous on $t_0$ almost everywhere on $E$ and $\abs{f(x,t)}\almoste\leq g(x)$ $\forall t\in I$, then $\Phi$ is continuous at $t_0$.
+      \item If $f(x,\cdot)$ is derivable on $t_0$ almost everywhere on $E$ and $$\abs{\pdv{f}{t}(x,t)}\almoste\leq g(x)$$ then the function $\pdv{f}{t}(x,\cdot)$ is integrable on $E$ and $$\Phi'(t_0)=\int_E\pdv{f}{t}(x,t_0)\dd{x}$$
+    \end{enumerate}
+  \end{theorem}
+  \subsubsection{Fubini-Tonell theorem}
 \end{multicols}
 \end{document}
