@@ -190,11 +190,11 @@
     Consider the model $\vf{y}\sim N_n(\vf{X\beta},\sigma^2\vf{I}_n)$ of \cref{LM_generalized}. We want to find the value $\vf{\hat\beta}$ that maximises the likelihood which in this case is: $$L(\vf{y};\vf\beta,\sigma^2)=\frac{1}{(\sqrt{2\pi\sigma^2})^n}\exp{-\frac{1}{2\sigma^2}{\norm{\vf{y}-\vf{X\beta}}}}$$
     Solving for $\vf{\hat\beta}$ and ${\hat\sigma}^2$ we get:
     \begin{align*}
-      \transpose{\vf{X}}\vf{X\hat\beta} & =\transpose{\vf{X}}\vf{y}     \\
-      {\hat\sigma}^2                    & =\frac{1}{n}{\norm{\vf{e}}}^2
+      \transpose{\vf{X}}\vf{X\hat\beta} & =\transpose{\vf{X}}\vf{y}                            \\
+      {\hat\sigma}^2                    & =\frac{1}{n}{\norm{\vf{e}}}^2=\frac{\mathrm{SSE}}{n}
     \end{align*}
     where $\vf{e}=\vf{y}-\vf{\hat{y}}=\vf{y}-\vf{X\hat{\beta}}$. Note that ${\hat\sigma}^2$ is biased and if we want an unbiased estimator we should use:
-    $${\hat\sigma}^2=\frac{1}{n-k-1}{\norm{\vf{e}}}^2$$
+    $${s}^2=\frac{1}{n-k-1}{\norm{\vf{e}}}^2$$
   \end{proposition}
   \begin{definition}
     Consider the model $\vf{y}\sim N_n(\vf{X\beta},\sigma^2\vf{I}_n)$ of \cref{LM_generalized} and suppose that $\transpose{\vf{X}}\vf{X}\in\GL_{k+1}(\RR)$. We define the following deterministic matrices:
@@ -205,11 +205,25 @@
     Consider the model $\vf{y}\sim N_n(\vf{X\beta},\sigma^2\vf{I}_n)$ of \cref{LM_generalized} and suppose that $\transpose{\vf{X}}\vf{X}\in\GL_{k+1}(\RR)$. Then:
     \begin{enumerate}
       \item $\hat\beta_0,\ldots,\hat\beta_k$ are independent normally distributed random variables, as well as $\hat{y}_1,\ldots,\hat{y}_n$ and $\hat{e}_1,\ldots,\hat{e}_n$
-      \item $\vf{H}$ and $\vf{M}$ are symmetric and idempotent. Moreover, $\vf{MH}=\vf{0}_n$.
-      \item $\vf{MX}=0$
+      \item $\vf{H}$ and $\vf{M}$ are symmetric and idempotent. Moreover, $\vf{MH}=\vf{0}_n$. Hence, they orthogonally project $\RR^n$ into orthogonal subspaces.
+      \item $\vf{MX}=\vf{0}$
       \item $\vf{e}=\vf{M\varepsilon}$
       \item $\transpose{\vf{X}}\vf{e}=0$. In particular, $\sum_{i=1}^n e_i=0$ and $\sum_{i=1}^n x_{ij}e_i=0$ $\forall j$. So the sample covariance of $(x_{1j},\ldots,x_{nj})$ and $\vf{e}$ is 0 $\forall j$.
       \item $\transpose{\vf{y}}\vf{e}=0$. Analogously, we have that the sample covariance of $\vf{\hat{y}}$ and $\vf{e}$ is 0.
+    \end{enumerate}
+  \end{proposition}
+  \begin{proposition}
+    Let $\vf{A}\in\mathcal{M}_n(\RR)$ be symmetric and idempotent. Then, $\vf{A}$ is positive semi-definite. If moreover $\rank\vf{A} =r$, then $\vf{A}$ has $r$ eigenvalues equal to 1 and the rest are 0.
+  \end{proposition}
+  \begin{lemma}
+    Let $\vf{A}\in\mathcal{M}_n(\RR)$ be symmetric and idempotent of rank $d$ and $\vf{z}\sim N_n(\vf{0},\vf{I}_n)$. Then, $\norm{\vf{Az}}^2\sim{\chi_d}^2$.
+  \end{lemma}
+  \begin{proposition}
+    Consider the model $\vf{y}\sim N_n(\vf{X\beta},\sigma^2\vf{I}_n)$ of \cref{LM_generalized}. Then:
+    \begin{enumerate}
+      \item $\vf{\hat\beta}\sim N_{k+1}(\vf\beta,\sigma^2{\left(\transpose{\vf{X}}\vf{X}\right)}^{-1})$
+      \item $\frac{(n-k-1)s^2}{\sigma^2}\sim{\chi_{n-k-1}}^2$
+      \item $\vf{\hat\beta}$ and $s^2$ are independent.
     \end{enumerate}
   \end{proposition}
 \end{multicols}
