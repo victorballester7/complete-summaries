@@ -1,0 +1,26 @@
+\documentclass{standalone}
+\usepackage{../../../../preamble_formulas}
+
+\begin{document}
+\begin{tikzpicture}
+  \begin{axis}[
+      axis lines=middle,
+      xmin=-4, xmax=4,
+      ymin=-4, ymax=4,
+      xtick=\empty, ytick=\empty,
+      ylabel={$x$},
+      xlabel={$\mu$},
+      %axis on top,
+    ]
+    \def\xmax{\pgfkeysvalueof{/pgfplots/xmax}}
+    \def\xmin{\pgfkeysvalueof{/pgfplots/xmin}}
+    \def\ymax{\pgfkeysvalueof{/pgfplots/ymax}}
+    \def\ymin{\pgfkeysvalueof{/pgfplots/ymin}}
+    \addplot[thick,samples=10,smooth,red,domain=\xmin:0]{-x};
+    \addplot[thick,samples=10,smooth,blue,domain=\xmin:0]{0};
+    \addplot[thick,samples=10,smooth,red,domain=0:\xmax]{0};
+    \addplot[thick,samples=10,smooth,blue,domain=0:\xmax]{-x};
+  \end{axis}
+\end{tikzpicture}
+
+\end{document}
