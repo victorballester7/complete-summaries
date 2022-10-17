@@ -1,4 +1,4 @@
-\documentclass[../../../main.tex]{subfiles}
+\documentclass[../../../main_math.tex]{subfiles}
 
 
 \begin{document}
@@ -114,12 +114,11 @@
             \end{align*}
     \end{enumerate}
   \end{theorem}
-  \subsubsection{Lebsegue measurable functions}
   \begin{definition}
     A \emph{real function} is a function $f:\RR^n\rightarrow[-\infty,+\infty]$. We will say that $f$ is \emph{finite} if $\pm\infty\notin\im f$.
   \end{definition}
   \begin{definition}
-    Let $f$ be a real function. We say that $f$ is \emph{Lebesgue measurable} if $\{x\in\RR^n:f(x)> r\}\in \mathcal{M}$ $\forall r\in\RR$.
+    Let $f$ be a real function. We say that $f$ is \emph{Lebesgue measurable} (or simply \emph{measurable}) if $\{x\in\RR^n:f(x)> r\}\in \mathcal{M}$ $\forall r\in\RR$.
   \end{definition}
   \begin{lemma}
     Let $a,b\in[-\infty,+\infty]$ and $f$ be a real function. The sets:
@@ -152,9 +151,15 @@
       \item $\displaystyle\sup\{f_n(x):n\in\NN,x\in\RR^n\}$
       \item $\displaystyle\inf\{f_n(x):n\in\NN,x\in\RR^n\}$
       \item $\displaystyle\limsup_{m\to\infty} f_m$
-      \item $\displaystyle\limsup_{m\to\infty} f_m$
+      \item $\displaystyle\liminf_{m\to\infty} f_m$
     \end{itemize}
     Furthermore, any function being pointwise limit a.e. of a sequence of measurable functions is measurable.
+  \end{proposition}
+  \begin{definition}
+    A function $g:\RR\rightarrow\RR$ is \emph{Borel measurable} if $\{x\in\RR^n:g(x)> r\}\in \mathcal{B}(\RR)$ $\forall r\in\RR$\footnote{Remember \cref{P_borel}.}.
+  \end{definition}
+  \begin{proposition}
+    Let $f:\RR\rightarrow\RR$ be a Lebesgue measurable function and $f:\RR\rightarrow\RR$ be a Borel measurable function. Then, $g\circ f$ is Lebesgue measurable.
   \end{proposition}
   \begin{definition}
     Let $f$ be a measurable function. We define the following measurable functions:
@@ -179,7 +184,7 @@
   \begin{proposition}
     Let $A_1,A_2,\ldots$ be measurable sets and $s$, $t$ be simple functions. Then:
     \begin{itemize}
-      \item If $\displaystyle E=\bigcap_{k=1}^\infty A_k$, then $\displaystyle\int_E s=\sum_{k=1}^\infty \int_{A_k} s$.
+      \item If $\displaystyle E=\bigsqcup_{k=1}^\infty A_k$, then $\displaystyle\int_E s=\sum_{k=1}^\infty \int_{A_k} s$.
       \item $\displaystyle\int(s+t)=\int s+\int t$.
       \item If $\alpha\in\RR_{\geq 0}$, then $\displaystyle\int \alpha s=\alpha\int s$.
       \item If $s\leq t$, then $\displaystyle\int s\leq\int t$.
@@ -192,20 +197,20 @@
     Let $f:\RR^n\rightarrow[0,+\infty]$ be a measurable function. We define: $$\mathcal{S}(f):=\{s:s\text{ is a simple function such that }0\leq s\leq f\}$$
   \end{definition}
   \begin{definition}
-    Let $f:\RR^n\rightarrow[0,+\infty]$ be a measurable function. We define the \emph{integral of $f$ over $\RR^n$} as: $$\int_{\RR^n}f(x)\dd{x}:=\sup_{s\in\mathcal{S}(f)}\int s$$ We define the \emph{integral of $f$ over a measurable set $E\subseteq \RR^n$} as: $$\int_{E}f(x)\dd{x}:=\int_{\RR^n}f(x)\indi{E}(x)\dd{x}=\sup_{s\in\mathcal{S}(f)}\int s$$
+    Let $f:\RR^n\rightarrow[0,+\infty]$ be a measurable function. We define the \emph{integral of $f$ over $\RR^n$} as: $$\int_{\RR^n}f(x)\dd{x}:=\sup_{s\in\mathcal{S}(f)}\int s$$ We define the \emph{integral of $f$ over a measurable set $E\subseteq \RR^n$} as: $$\int_{E}f(x)\dd{x}:=\int_{\RR^n}f(x)\indi{E}(x)\dd{x}=\sup_{s\in\mathcal{S}(f\indi{E})}\int s$$
   \end{definition}
   \begin{proposition}
-    Let $E\subseteq\RR^n$ be a measurable set, $s$ be a simple function and $f$, $g$ be measurable function such that $f(x)\leq g(x)$ $\forall x\in E$. Then:
+    Let $E\subseteq\RR^n$ be a measurable set, $s$ be a simple function and $f$, $g$ be measurable functions such that $f(x)\leq g(x)$ $\forall x\in E$. Then:
     \begin{enumerate}
       \item $\displaystyle\int_E s=\int_Es(x)\dd{x}$
-      \item $\displaystyle\int_E f\leq \int_Eg$
+      \item $\displaystyle\int_E f(x)\dd{x}\leq \int_Eg(x)\dd{x}$
     \end{enumerate}
   \end{proposition}
   \begin{theorem}[Monotone convergence theorem]
     Let $E\subseteq\RR^n$ be a measurable set, $f\geq 0$ be a non-negative measurable function such that $\exists (f_m)\geq 0$ with $f_m\nearrow f$. Then: $$\int_Ef(x)\dd{x}=\lim_{m\to\infty}\int_Ef_m(x)\dd{x}$$
   \end{theorem}
   \begin{proposition}
-    Let $E\subseteq\RR^n$ be a measurable set, $f, g, (f_m)\geq 0$ be a non-negative measurable functions. Then:
+    Let $E\subseteq\RR^n$ be a measurable set, $f, g, (f_m)\geq 0$ be non-negative measurable functions. Then:
     \begin{enumerate}
       \item $\displaystyle\int_E\sum_{m=1}^\infty f_m(x)\dd{x}=\sum_{m=1}^\infty\int_E f_m(x)\dd{x}$
       \item If $(E_k)$ is a sequence of measurable sets such that $E=\bigsqcup_{k=1}^\infty E_k$, then: $$\int_Ef(x)\dd{x}=\sum_{k=1}^\infty\int_{E_k}f(x)\dd{x}$$
@@ -220,7 +225,10 @@
   \begin{corollary}
     Let $E\subseteq\RR^n$ be a measurable set, $f\geq 0$ be a non-negative measurable function such that $\exists (f_m)\geq 0$ with $f_m\almoste{\nearrow} f$. Then: $$\int_Ef(x)\dd{x}=\lim_{m\to\infty}\int_Ef_m(x)\dd{x}$$
   \end{corollary}
-  \begin{lemma}[Fatou lemma]
+  \begin{theorem}[Chebyshev's inequality]
+    Let $E\subseteq\RR^n$ be a measurable set, $f:E\rightarrow\RR$ be a measurable function and $\alpha\in\RR_{>0}$. Then: $$\abs{\{x\in E:\abs{f(x)}\geq\alpha\}}\leq\frac{1}{\alpha}\int_E \abs{f(x)}\dd{x}$$
+  \end{theorem}
+  \begin{lemma}[Fatou's lemma]
     Let $E\subseteq\RR^n$ be a measurable set and $(f_m)\geq 0$ be a sequence of non-negative measurable functions over $E$. Then: $$\int_E\liminf_{m\to\infty}f_m(x)\dd{x}\leq \liminf_{m\to\infty}\int_Ef_m(x)\dd{x}$$
   \end{lemma}
   \begin{definition}
@@ -297,5 +305,162 @@
     \end{enumerate}
   \end{theorem}
   \subsubsection{Fubini-Tonell theorem}
+  \begin{definition}
+    Let $E\subseteq\RR^{p+q}$ and $y\in\RR^q$. We define the \emph{section} of $E$ at $y$ as: $$E(y):=\{x\in\RR^p:(x,y\in E)\}$$
+  \end{definition}
+  \begin{proposition}
+    Let $E,F,E_k\subseteq\RR^{p+q}$, $k\in\NN$, and $y\in\RR^q$. Then:
+    \begin{enumerate}
+      \item If $E= A\times B$, with $A\subseteq \RR^p$ and $B\subseteq \RR^q$, then $E(y)=A$ if $y\in B$ and $E(y)=\varepsilon$ if $y\notin B$.
+      \item $E\cap F=\varnothing\implies E(y)\cap F(y)=\varnothing$.
+      \item \hfill\begin{enumerate}
+              \item $\displaystyle\left(\bigcap_{k=1}^\infty E_k\right)(y)=\bigcap_{k=1}^\infty E_k(y)$
+              \item $\displaystyle\left(\bigcup_{k=1}^\infty E_k\right)(y)=\bigcup_{k=1}^\infty E_k(y)$
+              \item $\displaystyle\left(E\setminus F\right)(y)=E(y)\setminus F(y)$
+            \end{enumerate}
+      \item If $E(y)$ is measurable, then: $$\m{E(y)}=\int_{\RR^p}\indi{E}(x,y)\dd{x}$$ In particular, if $E$ is an interval $E=I_p\times I_q$, then: $$\m{I(y)}=\m{I_p}\indi{I_q}(y)$$
+    \end{enumerate}
+  \end{proposition}
+  \begin{lemma}
+    Let $E\subseteq\RR^{p+q}$ be a measurable set. Then:
+    \begin{enumerate}
+      \item There exits a null set $N\subset \RR^q$ such that $E(y)$ is measurable $\forall y\in\RR^q\setminus N$ (that is $E(y)$ is measurable almost everywhere $\forall y\in\RR^q$).
+      \item The function $$\Phi(y)=\begin{cases}
+                \m{E(y)} & \text{if } y\in\RR^q\setminus N \\
+                0        & \text{if } y\in N
+              \end{cases}$$ is measurable and positive on $\RR^q$.
+      \item $\displaystyle\m{E}=\int_{\RR^q}\m{E(y)}\dd{y}$
+    \end{enumerate}
+  \end{lemma}
+  \begin{theorem}[Tonelli's theorem]
+    Let $f:\RR^{p+q}\rightarrow[0,\infty]$ be a non-negative measurable function. Then:
+    \begin{enumerate}
+      \item $f(\cdot,y)$ and $f(x,\cdot)$ are measurable almost everywhere $x\in\RR^p$, $y\in\RR^q$.
+      \item Let $N_p$ and $N_q$ be the respective null sets where the above functions aren't measurable. Then the functions
+            \begin{align*}
+              \Phi(y) & =\begin{cases}
+                           \int_{\RR^p}f(x,y)\dd{x} & \text{if } y\in\RR^q\setminus N_q \\
+                           0                        & \text{if } y\in N_q
+                         \end{cases} \\ \Psi(x)&=\begin{cases}
+                \int_{\RR^q}f(x,y)\dd{y} & \text{if } x\in\RR^p\setminus N_p \\
+                0                        & \text{if } x\in N_p
+              \end{cases}
+            \end{align*}
+            are measurable on $\RR^q$ and $\RR^x$, respectively.
+      \item \hfill $$\int_{\RR^q}\Phi(y)\dd{y}=\int_{\RR^{p+q}}f(x,y)\dd{(x,y)}=\int_{\RR^p}\Psi(x)\dd{x}$$
+    \end{enumerate}
+  \end{theorem}
+  \begin{corollary}
+    Let $f:\RR^{p+q}\rightarrow[0,\infty]$ be a non-negative measurable function. Then:
+    \begin{align*}
+      \int_{\RR^{p+q}}f(x,y)\dd{(x,y)} & =\int_{\RR^q}\left(\int_{\RR^p}f(x,y)\dd{x}\right)\dd{y} \\
+                                       & =\int_{\RR^p}\left(\int_{\RR^q}f(x,y)\dd{y}\right)\dd{x}
+    \end{align*}
+    These identities are sometimes written as:
+    \begin{align*}
+      \int_{\RR^{p+q}}f(x,y)\dd{x}\dd{y} & =\int_{\RR^q}\dd{y}\int_{\RR^p}f(x,y)\dd{x} \\
+                                         & =\int_{\RR^p}\dd{x}\int_{\RR^q}f(x,y)\dd{y}
+    \end{align*}
+  \end{corollary}
+  \begin{corollary}
+    Let $f:\RR^{p+q}\rightarrow\RR$ be a measurable function. Then, $f$ is integrable if and only if: $$\int_{\RR^q}\dd{y}\int_{\RR^p}\abs{f(x,y)}\dd{x}<\infty$$
+  \end{corollary}
+  \begin{theorem}[Fubini's theorem]
+    Let $f\in L(\RR^{p+q})$. Then:
+    \begin{enumerate}
+      \item $f(\cdot,y)\overset{\text{a.e.}}{\in} L(\RR^p)$ and $f(x,\cdot)\overset{\text{a.e.}}{\in}L(\RR^q)$, $x\in\RR^p$, $y\in\RR^q$.
+      \item Let $N_p$ and $N_q$ be the respective null sets where the above functions aren't integrable. Then the functions
+            \begin{align*}
+              \Phi(y) & =\begin{cases}
+                           \int_{\RR^p}f(x,y)\dd{x} & \text{if } y\in\RR^q\setminus N_q \\
+                           0                        & \text{if } y\in N_q
+                         \end{cases} \\ \Psi(x)&=\begin{cases}
+                \int_{\RR^q}f(x,y)\dd{y} & \text{if } x\in\RR^p\setminus N_p \\
+                0                        & \text{if } x\in N_p
+              \end{cases}
+            \end{align*}
+            are integrable on $\RR^q$ and $\RR^p$, respectively.
+      \item \hfill $$\int_{\RR^q}\Phi(y)\dd{y}=\int_{\RR^{p+q}}f(x,y)\dd{(x,y)}=\int_{\RR^p}\Psi(x)\dd{x}$$
+    \end{enumerate}
+  \end{theorem}
+  \subsubsection{Change of variables}
+  \begin{definition}
+    Let $U,V\subseteq\RR^n$ be open sets. A \emph{change of variables} is a diffeomorphism $\vf\varphi:U\rightarrow V$ of class $\mathcal{C}^1$.
+  \end{definition}
+  \begin{theorem}[Change of variables]
+    Let $U,V\subseteq\RR^n$ be open sets and $\vf\varphi:U\rightarrow V$ be a change of variables. If $f:\RR^n\rightarrow[0,\infty]$ is measurable or integrable on $V$, then so is $(f\circ\vf\varphi)\abs{J\vf\varphi}$ and: $$\int_{V} f(x)\dd{x}=\int_Uf(\vf\varphi(t))\abs{J\vf\varphi(t)}\dd{t}$$
+  \end{theorem}
+  \subsection{Functional analysis}
+  \subsubsection{Normed vector spaces}
+  \begin{definition}
+    Let $M$ be a set. A \emph{distance} in $M$ is a function $d:M\times M\rightarrow\RR $ such that $\forall x,y,z\in M$ the following properties are satisfied:
+    \begin{enumerate}
+      \item $d(x,y)\geq 0$
+      \item $d(x,y)=0\iff x=y$
+      \item $d(x,y)=d(y,x)$
+      \item $d(x,y)\leq d(x,z)+d(z,y)\quad$(\emph{triangular inequality})
+    \end{enumerate}
+    We define a \emph{metric space} as a pair $(M,d)$ that satisfy the previous properties.
+  \end{definition}
+  \begin{proposition}
+    Let $(M_1,d_1),\ldots,(M_n,d_n)$ be metric spaces. Then, $M_1\times\cdots\times M_n$ with the distance $$d(x,y)=\max\{d_i(x_i,y_i):i=1,\ldots,n\}$$ where $x=(x_1,\ldots,x_n)$, $y=(y_1,\ldots,y_n)$, is a metric spaces.
+  \end{proposition}
+  \begin{definition}
+    A metric space $(M,d)$ is \emph{complete} if every Cauchy sequence in $M$ converges in $M$.
+  \end{definition}
+  \begin{definition}
+    Let $E$ be a real (or complex) vector space. A \emph{norm} on $E$ is a function $\|\cdot\|:E\rightarrow\RR $ such that $\forall \vf{u},\vf{v}\in E$ and $\forall\lambda\in\RR $ the following properties are satisfied:
+    \begin{enumerate}
+      \item $\|\vf{u}\|\geq 0$
+      \item $\|\vf{u}\|=0\iff \vf{u}=0$
+      \item $\|\lambda \vf{u}\|=|\lambda|\|\vf{u}\|$
+      \item $\|\vf{u}+\vf{v}\|\leq \|\vf{u}\|+\|\vf{v}\|\quad$(\emph{triangular inequality})
+    \end{enumerate}
+    We define a \emph{normed vector space} as a pair $(E,\|\cdot\|)$ that satisfy the previous properties.
+  \end{definition}
+  \begin{proposition}
+    Let $(E_1,\norm{\cdot}_1),\ldots,(E_n,\norm{\cdot}_n)$ be normed vector spaces. Then, $E_1\times\cdots\times E_n$ with the norm $$\norm{(x_1,\ldots,x_n)}=\max\{{\norm{x_i}}_i:i=1,\ldots,n\}$$ is a normed vector spaces.
+  \end{proposition}
+  \begin{proposition}
+    Let $(E,\|\cdot\|)$ be a normed vector space and consider the following functions:
+    $$\function{S}{E\times E}{E}{(x,y)}{x+y}\quad\function{P}{\RR\times E}{E}{(\lambda,x)}{\lambda x}$$ Then:
+    \begin{enumerate}
+      \item $S$ is uniformly continuous.
+      \item $P$ is continuous.
+      \item $\norm{\cdot}$ is uniformly continuous and: $$\abs{\norm{x}-\norm{y}}\leq\norm{x-y}\qquad\forall x,y\in E$$
+    \end{enumerate}
+  \end{proposition}
+  \begin{definition}
+    Let $(E,\|\cdot\|)$ be a normed vector space and $(x_n)\in E$ be a sequence. We say that $\sum_{n=1}^\infty x_n$ is a \emph{convergent series} in $E$ that converges to $x\in E$ if: $$\lim_{n\to\infty}\norm{x-\sum_{n=1}^\infty x_n}=0 $$
+    We say that $\sum_{n=1}^\infty x_n$ is \emph{absolutely convergent} if: $$\sum_{n=1}^\infty\norm{x_n}<\infty$$
+  \end{definition}
+  \begin{proposition}
+    Let $(E,\|\cdot\|)$ be a normed vector space and $\sum_{n=1}^\infty x_n=x$ be a convergent series. Then: $$\norm{x}\leq \sum_{n=1}^\infty\norm{x_n}$$
+  \end{proposition}
+  \begin{definition}[Banach space]
+    A \emph{Banach space} is normed vector space which is complete with the distance associated with the norm.
+  \end{definition}
+  \begin{theorem}
+    Let $(E,\|\cdot\|)$ be a normed vector space. Then, $(E,\|\cdot\|)$ is a Banach space if and only if every series in $E$ that converges absolutely converges.
+  \end{theorem}
+  \begin{proposition}
+    Let $(E,\|\cdot\|)$ be a normed vector space and $F\subseteq E$ be a vector subspace. Then, $\overline{F}$ is a vector subspace of $E$.
+  \end{proposition}
+  \begin{proposition}
+    Let $(E,\|\cdot\|)$ be a normed vector space and $F\subseteq E$ be a vector subspace.
+    \begin{enumerate}
+      \item If $F$ is complete, it is closed.
+      \item If $F$ is closed and $E$ is Banach, then $F$ is complete.
+    \end{enumerate}
+  \end{proposition}
+  \begin{definition}
+    Let $(E,\|\cdot\|)$ be a normed vector space and $F\subseteq E$ be a vector subspace. We say that $F$ is a \emph{total subspace} if $\langle F\rangle$ is dense in $E$.
+  \end{definition}
+  \begin{definition}
+    A metric space is called \emph{separable} if it contains a finite or countable dense subset.
+  \end{definition}
+  \begin{proposition}
+    A normed vector space is separable if and only if it contains a total countable subset.
+  \end{proposition}
 \end{multicols}
 \end{document}

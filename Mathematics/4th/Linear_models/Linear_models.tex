@@ -1,4 +1,4 @@
-\documentclass[../../../main.tex]{subfiles}
+\documentclass[../../../main_math.tex]{subfiles}
 
 
 \begin{document}
@@ -106,6 +106,7 @@
     \begin{equation}\label{LM_simple}
       \vf{y}=\beta_0+\beta_1\vf{x}+\vf\varepsilon
     \end{equation}
+    From here, we would like to estimate the parameters $\beta_0$ and $\beta_1$ to make \emph{preditions} $\hat{y}_h$ from new data $x_h$.
   \end{definition}
   \begin{proposition}[Least-Squares method]
     Given the simple linear model of \cref{LM_simple}, we need to estimate the parameters $\beta_0$, $\beta_1$ and $\sigma^2$. To do so, \emph{least-squares method} seek estimators $\hat\beta_0$ and $\hat\beta_1$ that minimize the sum of square of the deviations $y_i-\hat{y}_i$ (also called \emph{residuals}), where $\hat{y}_i$ is the predicted value $\hat{y}_i=\hat\beta_0+\hat\beta_1 x_i$. Hence:
@@ -171,7 +172,7 @@
       \end{pmatrix}                                                \\
       \label{LM_generalized}   & =\vf{X}\vf{\beta}+\vf{\varepsilon}
     \end{align}
-    where the matrix $\vf{X}$ is called \emph{design matrix}, and $\vf\beta$, \emph{regression coefficients}.
+    where the matrix $\vf{X}$ is called \emph{design matrix}, and $\vf\beta$, \emph{regression coefficients}. From here, we would like to estimate the parameters $(\beta_0,\ldots,\beta_k)$ with estimators $\vf{\hat\beta}=(\hat\beta_0,\ldots,\hat\beta_k)$ to make \emph{preditions} $\hat{y}_h$ from new data $\vf{x}_h$ in the following way: $$\hat{y}_h=\transpose{\vf{x}_h}\vf{\hat\beta}$$
   \end{definition}
   \subsubsection{Least-Squares estimation}
   \begin{proposition}[Least-Squares method]
@@ -190,11 +191,12 @@
     Consider the model $\vf{y}\sim N_n(\vf{X\beta},\sigma^2\vf{I}_n)$ of \cref{LM_generalized}. We want to find the value $\vf{\hat\beta}$ that maximises the likelihood which in this case is: $$L(\vf{y};\vf\beta,\sigma^2)=\frac{1}{(\sqrt{2\pi\sigma^2})^n}\exp{-\frac{1}{2\sigma^2}{\norm{\vf{y}-\vf{X\beta}}}}$$
     Solving for $\vf{\hat\beta}$ and ${\hat\sigma}^2$ we get:
     \begin{align*}
-      \transpose{\vf{X}}\vf{X\hat\beta} & =\transpose{\vf{X}}\vf{y}     \\
-      {\hat\sigma}^2                    & =\frac{1}{n}{\norm{\vf{e}}}^2
+      \transpose{\vf{X}}\vf{X\hat\beta} & =\transpose{\vf{X}}\vf{y}                            \\
+      {\hat\sigma}^2                    & =\frac{1}{n}{\norm{\vf{e}}}^2=\frac{\mathrm{SSE}}{n}
     \end{align*}
     where $\vf{e}=\vf{y}-\vf{\hat{y}}=\vf{y}-\vf{X\hat{\beta}}$. Note that ${\hat\sigma}^2$ is biased and if we want an unbiased estimator we should use:
-    $${\hat\sigma}^2=\frac{1}{n-k-1}{\norm{\vf{e}}}^2$$
+    $${s}^2=\frac{1}{n-k-1}{\norm{\vf{e}}}^2=:\MSE$$
+    Here $\MSE$ stands for \emph{mean square error}.
   \end{proposition}
   \begin{definition}
     Consider the model $\vf{y}\sim N_n(\vf{X\beta},\sigma^2\vf{I}_n)$ of \cref{LM_generalized} and suppose that $\transpose{\vf{X}}\vf{X}\in\GL_{k+1}(\RR)$. We define the following deterministic matrices:
@@ -205,12 +207,63 @@
     Consider the model $\vf{y}\sim N_n(\vf{X\beta},\sigma^2\vf{I}_n)$ of \cref{LM_generalized} and suppose that $\transpose{\vf{X}}\vf{X}\in\GL_{k+1}(\RR)$. Then:
     \begin{enumerate}
       \item $\hat\beta_0,\ldots,\hat\beta_k$ are independent normally distributed random variables, as well as $\hat{y}_1,\ldots,\hat{y}_n$ and $\hat{e}_1,\ldots,\hat{e}_n$
-      \item $\vf{H}$ and $\vf{M}$ are symmetric and idempotent. Moreover, $\vf{MH}=\vf{0}_n$.
-      \item $\vf{MX}=0$
+      \item $\vf{H}$ and $\vf{M}$ are symmetric and idempotent. Moreover, $\vf{MH}=\vf{0}_n$. Hence, they orthogonally project $\RR^n$ into orthogonal subspaces.
+      \item $\vf{MX}=\vf{0}$
       \item $\vf{e}=\vf{M\varepsilon}$
       \item $\transpose{\vf{X}}\vf{e}=0$. In particular, $\sum_{i=1}^n e_i=0$ and $\sum_{i=1}^n x_{ij}e_i=0$ $\forall j$. So the sample covariance of $(x_{1j},\ldots,x_{nj})$ and $\vf{e}$ is 0 $\forall j$.
       \item $\transpose{\vf{y}}\vf{e}=0$. Analogously, we have that the sample covariance of $\vf{\hat{y}}$ and $\vf{e}$ is 0.
     \end{enumerate}
+  \end{proposition}
+  \begin{proposition}
+    Consider the model $\vf{y}\sim N_n(\vf{X\beta},\sigma^2\vf{I}_n)$ of \cref{LM_generalized}, then $\vf{\hat\beta}$, $s^2$ are unbiased estimator for $\vf\beta$ and $\sigma^2$, respectively, and: $$\vf\Sigma_{\vf{\hat\beta}}=\sigma^2{\left(\transpose{\vf{X}}\vf{X}\right)}^{-1}$$
+    Moreover, and unbiased estimator for $\vf\Sigma_{\vf{\hat\beta}}$ is: $$\vf\Sigma_{\vf{\hat\beta}}=s^2{\left(\transpose{\vf{X}}\vf{X}\right)}^{-1}$$
+  \end{proposition}
+  \begin{proposition}
+    Let $\vf{A}\in\mathcal{M}_n(\RR)$ be symmetric and idempotent. Then, $\vf{A}$ is positive semi-definite. If moreover $\rank\vf{A} =r$, then $\vf{A}$ has $r$ eigenvalues equal to 1 and the rest are 0.
+  \end{proposition}
+  \begin{lemma}
+    Let $\vf{A}\in\mathcal{M}_n(\RR)$ be symmetric and idempotent of rank $d$ and $\vf{z}\sim N_n(\vf{0},\vf{I}_n)$. Then, $\norm{\vf{Az}}^2\sim{\chi_d}^2$.
+  \end{lemma}
+  \begin{proposition}
+    Consider the model $\vf{y}\sim N_n(\vf{X\beta},\sigma^2\vf{I}_n)$ of \cref{LM_generalized}. Then:
+    \begin{enumerate}
+      \item $\vf{\hat\beta}\sim N_{k+1}(\vf\beta,\sigma^2{\left(\transpose{\vf{X}}\vf{X}\right)}^{-1})$
+      \item $\frac{(n-k-1)s^2}{\sigma^2}\sim{\chi_{n-k-1}}^2$
+      \item $\vf{\hat\beta}$ and $s^2$ are independent.
+    \end{enumerate}
+  \end{proposition}
+  \begin{theorem}[Gau\ss-Markov]
+    Consider the model $\vf{y}\sim N_n(\vf{X\beta},\sigma^2\vf{I}_n)$ of \cref{LM_generalized}, then the least-squares estimators for $\beta_j$, $j=0,1,\ldots,k$, have minimum variance among all linear unbiased estimators.
+  \end{theorem}
+  \begin{corollary}
+    The predicted value $\hat{y}_h$ is invariant to a full-rank linear transformation on the $x$'s. That is: $$\hat{y}_z=\transpose{\vf{z}_h}\vf{\hat{\beta}_z}=\transpose{\vf{x}_h}\vf{\hat{\beta}}$$ where $\vf{z}_h=\transpose{\vf{K}}\vf{x}_h$ and $\vf{Z}=\vf{XK}$ is the full-rank linear transformation.
+  \end{corollary}
+  \subsubsection{Model in centered form}
+  \begin{definition}
+    Consider the model $\vf{y}\sim N_n(\vf{X\beta},\sigma^2\vf{I}_n)$ of \cref{LM_generalized}. Then, for each $i=1,\ldots,n$ we can write:
+    \begin{equation}\label{LM_centered}
+      \tilde{y}_i=y_i-\overline{y}=\beta_1\tilde{x}_{i1}+\cdots+\beta_k\tilde{x}_{ik}+\varepsilon_i
+    \end{equation}
+    where $\tilde{x}_{ij}=x_{ij}-\overline{x}_i$. This way we obtain a \emph{no-intercept} linear model, which is a little bit easier to estimate. The estimation of $\beta_0$ will be: $$\hat{\beta}_0=\overline{y}-\transpose{\vf{\overline{x}}}\vf{\hat\beta}_{1}$$ where $\vf{\hat{\beta}}_1=\transpose{(\beta_1,\ldots,\beta_k)}$
+  \end{definition}
+  \begin{proposition}
+    Consider the model $\vf{y}\sim N_n(\vf{X\beta},\sigma^2\vf{I}_n)$ of \cref{LM_generalized} in its centered form (\cref{LM_centered}). Then: $$\vf{\hat\beta}_{1}={\left(\transpose{\vf{\tilde{X}}}\vf{\tilde{X}}\right)}^{-1}\transpose{\vf{\tilde{X}}}\vf{\tilde{y}}$$
+    where: $$\vf{\tilde{y}}=\begin{pmatrix}
+        y_1  -\overline{y} \\
+        \vdots             \\
+        y_n -\overline{y}
+      \end{pmatrix}\quad\vf{\tilde{X}}=
+      \begin{pmatrix}
+        x_{11}-\overline{x}_1      & \cdots & x_{1k}-\overline{x}_k \\
+        \vdots                     & \ddots & \vdots                \\
+        x_{n(k-1)} -\overline{x}_1 & \cdots & x_{nk}-\overline{x}_k
+      \end{pmatrix}$$
+    And so: $$\vf{\hat\beta}_{1}={\vf{S}_{\vf{X}}}^{-1}{\vf{s}_{\vf{Xy}}}$$ where:
+    \begin{align*}
+      {(\vf{S}_{\vf{X}})}_{ij} & =\frac{1}{n-1}\sum_{\ell=1}^n{(x_{\ell i}-\overline{x}_i)(x_{\ell j}-\overline{x}_j)} \\
+      {(\vf{s}_{\vf{Xy}})}_i   & =\frac{1}{n-1}\sum_{\ell=1}^n{(x_{\ell i}-\overline{x}_i)(y_{\ell i}-\overline{y})}
+    \end{align*}
+    are the respective sample covariance matrices\footnote{Note that the expression for $\vf{\hat\beta}_{1}$ is quite similar to the least-square estimate for $\beta_1$ in the simple linear model.}.
   \end{proposition}
 \end{multicols}
 \end{document}

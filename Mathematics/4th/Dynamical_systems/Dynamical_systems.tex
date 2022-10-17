@@ -1,4 +1,4 @@
-\documentclass[../../../main.tex]{subfiles}
+\documentclass[../../../main_math.tex]{subfiles}
 
 
 \begin{document}
@@ -95,6 +95,62 @@
     \end{equation}
   \end{definition}
   \subsection{Study of local dynamics}
+  \begin{theorem}[The stable manifold theorem]
+    Let $E\subseteq\RR^n$ be an open subset containing the origin, $\vf{f}\in\mathcal{C}^1(E)$ and $\vf\phi_t$ be the flow of the following system of $n$ equations:
+    \begin{equation}\label{DS_general}
+      \vf{x}' =\vf{f}(\vf{x})
+    \end{equation}
+    Suppose that $\vf{f}(\vf{0})=\vf{0}$ and that $\vf{Df}(0)$ has $n_+$ eigenvalues with positive real part and $n_-=n-n_+$ eigenvalues with negative real part. Then, there exists a unique $n_+$-dimensional differentiable manifold $S$ tangent to the stable eigenspace $E^\text{s}$ of the linear system at $\vf{0}$ such that $\forall t\geq 0$, $\vf\phi_t(S)\subseteq S$ and $\forall \vf{x}_0\in S$: $$\lim_{t\to\infty}\vf\phi_t(\vf{x}_0)=\vf{0}$$
+    Analogously, there exists a unique $n_-$-dimensional differentiable manifold $U$ tangent to the stable eigenspace $E^\text{u}$ of the linear system at $\vf{0}$ such that $\forall t\leq 0$, $\vf\phi_t(U)\subseteq U$ and $\forall \vf{x}_0\in U$: $$\lim_{t\to-\infty}\vf\phi_t(\vf{x}_0)=\vf{0}$$
+  \end{theorem}
+  \begin{definition}
+    Let $E\subseteq\RR^n$ be an open subset containing the origin, $\vf{f}\in\mathcal{C}^1(E)$ and $\vf\phi_t$ be the flow of the system of \cref{DS_general}. The \emph{global stable manifold} and \emph{global unstable manifold} at $\vf{0}$ are defined respectively by:
+    $$W^\text{s}(\vf{0})=\bigcup_{t\leq 0}\vf\phi_t(S)\qquad W^\text{u}(\vf{0})=\bigcup_{t\geq 0}\vf\phi_t(U)$$
+  \end{definition}
+  \begin{proposition}
+    Let $E\subseteq\RR^n$ be an open subset containing the origin, $\vf{f}\in\mathcal{C}^1(E)$ and $\vf\phi_t$ be the flow of the system of \cref{DS_general}. Then, the manifolds $W^\text{s}$ and $W^\text{u}$ are unique and invariant with respect to the flow $\vf\phi_t$
+  \end{proposition}
+  \begin{theorem}[The center manifold theorem]
+    Let $E\subseteq\RR^n$ be an open subset containing the origin, $\vf{f}\in\mathcal{C}^r(E)$, $r\geq 1$ and consider the system of \cref{DS_general}. Suppose that $\vf{f}(\vf{0})=\vf{0}$ and that $\vf{Df}(0)$ has $n_+$ eigenvalues with positive real part, $n_-$ eigenvalues with negative real part and $n_0=n-n_+-n_-$ eigenvalues with zero real part. Then, there exists a $n_0$-dimensional differentiable manifold $W^\text{c}$ of class $\mathcal{C}^r$ tangent to the center eigenspace $E^\text{c}$ of the linear system at $\vf{0}$; there exists a $n_+$-dimensional differentiable manifold $S$ tangent to the stable eigenspace $E^\text{s}$ of the linear system at $\vf{0}$, and there exists a $n_-$-dimensional differentiable manifold $U$ tangent to the stable eigenspace $E^\text{u}$ of the linear system at $\vf{0}$. Furthermore, $W^\text{c}$, $W^\text{s}$ and $W^\text{u}$ are invariant under the flow $\vf\phi_t$.
+  \end{theorem}
+  \subsubsection{Local bifurcation theory}
+  \begin{definition}
+    A \emph{local bifurcation} on a differential systems $\vf{x}'=\vf{f}(\vf{x},\vf\mu)$ is the study of the changes in the local stability properties of equilibrium points, periodic orbits or other invariant sets as the parameter $\vf\mu$ cross through critical thresholds.
+  \end{definition}
+  \begin{definition}
+    The \emph{normal form} of a dynamical system is a simplified form that can be useful in determining the system's behavior.
+  \end{definition}
+  \begin{definition}[Saddle-node bifurcation]
+    The normal form of a \emph{saddle-node bifurcation} is: $$x'=x^2+\mu$$
+    \cref{DS_sn-trans-fork--bif} shows the qualitative behavior of that system\footnote{In these images, the red lies means that the point $(\mu,x)$ is a repulsor. The blue lines means that the point $(\mu,x)$ is an attractor.}.
+  \end{definition}
+  \begin{definition}[Transcritical bifurcation]
+    The normal form of a \emph{transcritical bifurcation} is: $$x'=x^2+\mu x$$
+    \cref{DS_sn-trans-fork--bif} shows a qualitative behavior of the stability of the equilibria.
+  \end{definition}
+  \begin{definition}[Pitchfork bifurcation]
+    The normal form of a \emph{pitchfork bifurcation} is: $$x'=x^3+\mu x$$
+    \cref{DS_sn-trans-fork--bif} shows a qualitative behavior of the stability of the equilibria.
+  \end{definition}
+  \begin{center}
+    \begin{minipage}{0.32\linewidth}
+      \centering
+      \includestandalone[mode=image|tex,width=\linewidth]{Images/sn-bif}
+      \captionof*{figure}{Saddle-node}
+    \end{minipage}\hfill
+    \begin{minipage}{0.32\linewidth}
+      \centering
+      \includestandalone[mode=image|tex,width=\linewidth]{Images/trans-bif}
+      \captionof*{figure}{Transcritical}
+    \end{minipage}\hfill
+    \begin{minipage}{0.32\linewidth}
+      \centering
+      \includestandalone[mode=image|tex,width=\linewidth]{Images/fork-bif}
+      \captionof*{figure}{Pitchfork}
+    \end{minipage}
+    \captionof{figure}{Principal kinds of bifurcation}
+    \label{DS_sn-trans-fork--bif}
+  \end{center}
   \subsection{Global dynamics in continuous systems}
   \subsection{Global dynamics in discrete systems}
 \end{multicols}
