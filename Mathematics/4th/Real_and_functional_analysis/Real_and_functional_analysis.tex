@@ -391,5 +391,76 @@
     Let $U,V\subseteq\RR^n$ be open sets and $\vf\varphi:U\rightarrow V$ be a change of variables. If $f:\RR^n\rightarrow[0,\infty]$ is measurable or integrable on $V$, then so is $(f\circ\vf\varphi)\abs{J\vf\varphi}$ and: $$\int_{V} f(x)\dd{x}=\int_Uf(\vf\varphi(t))\abs{J\vf\varphi(t)}\dd{t}$$
   \end{theorem}
   \subsection{Functional analysis}
+  \subsubsection{Normed vector spaces}
+  \begin{definition}
+    Let $M$ be a set. A \emph{distance} in $M$ is a function $d:M\times M\rightarrow\RR $ such that $\forall x,y,z\in M$ the following properties are satisfied:
+    \begin{enumerate}
+      \item $d(x,y)\geq 0$
+      \item $d(x,y)=0\iff x=y$
+      \item $d(x,y)=d(y,x)$
+      \item $d(x,y)\leq d(x,z)+d(z,y)\quad$(\emph{triangular inequality})
+    \end{enumerate}
+    We define a \emph{metric space} as a pair $(M,d)$ that satisfy the previous properties.
+  \end{definition}
+  \begin{proposition}
+    Let $(M_1,d_1),\ldots,(M_n,d_n)$ be metric spaces. Then, $M_1\times\cdots\times M_n$ with the distance $$d(x,y)=\max\{d_i(x_i,y_i):i=1,\ldots,n\}$$ where $x=(x_1,\ldots,x_n)$, $y=(y_1,\ldots,y_n)$, is a metric spaces.
+  \end{proposition}
+  \begin{definition}
+    A metric space $(M,d)$ is \emph{complete} if every Cauchy sequence in $M$ converges in $M$.
+  \end{definition}
+  \begin{definition}
+    Let $E$ be a real (or complex) vector space. A \emph{norm} on $E$ is a function $\|\cdot\|:E\rightarrow\RR $ such that $\forall \vf{u},\vf{v}\in E$ and $\forall\lambda\in\RR $ the following properties are satisfied:
+    \begin{enumerate}
+      \item $\|\vf{u}\|\geq 0$
+      \item $\|\vf{u}\|=0\iff \vf{u}=0$
+      \item $\|\lambda \vf{u}\|=|\lambda|\|\vf{u}\|$
+      \item $\|\vf{u}+\vf{v}\|\leq \|\vf{u}\|+\|\vf{v}\|\quad$(\emph{triangular inequality})
+    \end{enumerate}
+    We define a \emph{normed vector space} as a pair $(E,\|\cdot\|)$ that satisfy the previous properties.
+  \end{definition}
+  \begin{proposition}
+    Let $(E_1,\norm{\cdot}_1),\ldots,(E_n,\norm{\cdot}_n)$ be normed vector spaces. Then, $E_1\times\cdots\times E_n$ with the norm $$\norm{(x_1,\ldots,x_n)}=\max\{{\norm{x_i}}_i:i=1,\ldots,n\}$$ is a normed vector spaces.
+  \end{proposition}
+  \begin{proposition}
+    Let $(E,\|\cdot\|)$ be a normed vector space and consider the following functions:
+    $$\function{S}{E\times E}{E}{(x,y)}{x+y}\quad\function{P}{\RR\times E}{E}{(\lambda,x)}{\lambda x}$$ Then:
+    \begin{enumerate}
+      \item $S$ is uniformly continuous.
+      \item $P$ is continuous.
+      \item $\norm{\cdot}$ is uniformly continuous and: $$\abs{\norm{x}-\norm{y}}\leq\norm{x-y}\qquad\forall x,y\in E$$
+    \end{enumerate}
+  \end{proposition}
+  \begin{definition}
+    Let $(E,\|\cdot\|)$ be a normed vector space and $(x_n)\in E$ be a sequence. We say that $\sum_{n=1}^\infty x_n$ is a \emph{convergent series} in $E$ that converges to $x\in E$ if: $$\lim_{n\to\infty}\norm{x-\sum_{n=1}^\infty x_n}=0 $$
+    We say that $\sum_{n=1}^\infty x_n$ is \emph{absolutely convergent} if: $$\sum_{n=1}^\infty\norm{x_n}<\infty$$
+  \end{definition}
+  \begin{proposition}
+    Let $(E,\|\cdot\|)$ be a normed vector space and $\sum_{n=1}^\infty x_n=x$ be a convergent series. Then: $$\norm{x}\leq \sum_{n=1}^\infty\norm{x_n}$$
+  \end{proposition}
+  \begin{definition}[Banach space]
+    A \emph{Banach space} is normed vector space which is complete with the distance associated with the norm.
+  \end{definition}
+  \begin{theorem}
+    Let $(E,\|\cdot\|)$ be a normed vector space. Then, $(E,\|\cdot\|)$ is a Banach space if and only if every series in $E$ that converges absolutely converges.
+  \end{theorem}
+  \begin{proposition}
+    Let $(E,\|\cdot\|)$ be a normed vector space and $F\subseteq E$ be a vector subspace. Then, $\overline{F}$ is a vector subspace of $E$.
+  \end{proposition}
+  \begin{proposition}
+    Let $(E,\|\cdot\|)$ be a normed vector space and $F\subseteq E$ be a vector subspace.
+    \begin{enumerate}
+      \item If $F$ is complete, it is closed.
+      \item If $F$ is closed and $E$ is Banach, then $F$ is complete.
+    \end{enumerate}
+  \end{proposition}
+  \begin{definition}
+    Let $(E,\|\cdot\|)$ be a normed vector space and $F\subseteq E$ be a vector subspace. We say that $F$ is a \emph{total subspace} if $\langle F\rangle$ is dense in $E$.
+  \end{definition}
+  \begin{definition}
+    A metric space is called \emph{separable} if it contains a finite or countable dense subset.
+  \end{definition}
+  \begin{proposition}
+    A normed vector space is separable if and only if it contains a total countable subset.
+  \end{proposition}
 \end{multicols}
 \end{document}
