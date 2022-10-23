@@ -109,8 +109,11 @@
   \begin{definition}[Commutator]
     Let $\vf{A}$, $\vf{B}$ be two linear operators. We define the \emph{commutator} between them as: $$[\vf{A},\vf{B}]:=\vf{AB}-\vf{BA}$$
   \end{definition}
+  \begin{definition}
+    Two operators $\vf{A}$, $\vf{B}$ are \emph{compatible} if there exists a basis $(\ket{\vf{e}_1},\ldots,\ket{\vf{e}_n})$ such that $\vf{A}\ket{\vf{e}_i}=a_i\ket{\vf{e}_i}$ and $\vf{B}\ket{\vf{e}_i}=b_i\ket{\vf{e}_i}$ $\forall i$.
+  \end{definition}
   \begin{theorem}
-    Two Hermitian operators $\vf{A}$, $\vf{B}$ commute (i.e. $[\vf{A},\vf{B}]=0$) if and only if there exists an orthonormal basis that is proper for both.
+    Two Hermitian operators $\vf{A}$, $\vf{B}$ commute (i.e. $[\vf{A},\vf{B}]=0$) if and only if they are compatible.
   \end{theorem}
   \begin{definition}
     Given a $f\in\mathcal{C}^\infty(\RR)$ and a linear operator $\vf{A}$, we define $f(\vf{A})$ as: $$f(\vf{A}):=\sum_{n=0}^\infty \frac{f^{(n)}(0)}{n!}\vf{A}^n$$
@@ -159,8 +162,75 @@
   \end{definition}
   \subsubsection{Statistic analysis}
   \begin{proposition}
-    The expected value of the observable $\vf{A}$ for the system in state represented by the unit vector $\ket{\psi}\in\mathcal{H}$ is: $$\ev{\vf{A}}_{\vf\psi}=\ev{\vf{A}}{\vf\psi}$$
+    The expected value of the observable $\vf{A}$ for the system in state represented by the unit vector $\ket{\vf\psi}\in\mathcal{H}$ is: $$\ev{\vf{A}}_{\vf\psi}=\ev{\vf{A}}{\vf\psi}$$
     Its variance is: $${{(\Delta\vf{A})}_{\vf\psi}}^2=\ev{\vf{A}^2}_{\vf\psi}-{\ev{\vf{A}}_{\vf\psi}}^2=\ev{\vf{A}^2}{\vf\psi}-\ev{\vf{A}}{\vf\psi}^2$$
   \end{proposition}
+  \subsubsection{Indetermination relation}
+  \begin{theorem}[Robertson inequality]
+    For all state and for any pair of observables $(\vf{A},\vf{B})$ we have: $$\Delta\vf{A}\Delta\vf{B}\geq \frac{1}{2}\abs{\langle\comm{\vf{A}}{\vf{B}}\rangle}$$
+  \end{theorem}
+  \begin{corollary}[Heisenberg uncertainty principle]
+    In the case of the position $\vf{X}$ and moment $\vf{P}$ we have $\comm{\vf{X}}{\vf{Y}}=\ii \hbar\vf{I}$ and so Robertson inequality becomes: $$\Delta\vf{X}\Delta\vf{P}\geq \frac{\hbar}{2}$$
+  \end{corollary}
+  \subsubsection{Evolution of expected values}
+  \begin{proposition}
+    The time evolution of the expected value in the state $\ket{\vf\psi}\in\mathcal{H}$ is given by:
+    $$\dv{}{t}\ev{\vf{A}}_{\vf\psi}=\frac{1}{\ii\hbar}\ev{\comm{\vf{A}}{\vf{H}}}{\vf\psi(t)}=\frac{1}{\ii\hbar}\ev{\comm{\vf{A}}{\vf{H}}}_{\vf\psi}$$
+  \end{proposition}
+  \subsubsection{Compativility and commutation between observables}
+  \begin{definition}
+    A \emph{Complete set of commuting observables} is a set $\{\vf{A}_i:i\in I\}$ of observables such that $\comm{\vf{A}_i}{\vf{A}_j}=0$ $\forall i,j\in\ I$ and the basis in common in unique (i.e. they share always the base basis of eigenvectors).
+  \end{definition}
+  \subsubsection{Stern-Gerlach experiment, Larmor precession and the qubit}
+  \begin{proposition}
+    The \emph{Stern-Gerlach} experiment let us measure the component of the magnetic moment that points towards the direction of the magnetic field. The magnetic moment in each component $i$ is proportional to the spin $S_i$ with the following relation:
+    $$\vf\mu_i=-g\frac{q}{2 m} \vf{S}_i=\gamma\vf{S}_i\qquad i\in\{x,y,z\}$$
+    where $\gamma$ is the \emph{gyromagnetic ratio}. So measure the observable $\vf\mu_i$ is equivalent to measure the observable $\vf{S}_i=\pm\frac{\hbar}{2}$. The postulates give the following matrix for each $\vf{S}_i$: $$\vf{S}_x=\frac{\hbar}{2}
+      \begin{pmatrix}
+        0 & 1 \\
+        1 & 0
+      \end{pmatrix}\quad\vf{S}_y=\frac{\hbar}{2}
+      \begin{pmatrix}
+        0   & -\ii \\
+        \ii & 0
+      \end{pmatrix}\quad\vf{S}_z=\frac{\hbar}{2}
+      \begin{pmatrix}
+        1 & 0  \\
+        0 & -1
+      \end{pmatrix}$$
+    Moreover we have that $$\comm{\hat{S}_i}{\hat{S}_j}=\ii\hbar\varepsilon_{ijk}\vf{S}_k$$ where $$\varepsilon_{ijk}=
+      \begin{cases}
+        +1 & \text{if } (i,j,k) =(1,2,3), (2,3,1), (3,1,2), \\
+        -1 & \text{if } (i,j,k) =(3,2,1), (1,3,2), (2,1,3), \\
+        0  & \text{if } i = j, j = k, k = i
+      \end{cases}$$
+  \end{proposition}
+  \begin{definition}
+    We define the \emph{Pauli matrices} as: $$\vf{\sigma}_x=
+      \begin{pmatrix}
+        0 & 1 \\
+        1 & 0
+      \end{pmatrix}\quad\vf{\sigma}_y=
+      \begin{pmatrix}
+        0   & -\ii \\
+        \ii & 0
+      \end{pmatrix}\quad\vf{\sigma}_z=
+      \begin{pmatrix}
+        1 & 0  \\
+        0 & -1
+      \end{pmatrix}$$
+    Hence, $\vf{S}_i=\frac{\hbar}{2}\vf\sigma_i$.
+  \end{definition}
+  \begin{definition}
+    Given $\vf{n}\in\RR^3$ with $\norm{n}=1$ and $\vf{n}=(\sin\theta\cos\varphi,\sin\theta\sin\varphi,\cos\theta)$ in spherical coordinates. We define the operator $\vf{S}_{\vf{n}}$ as:
+    $$\vf{S}_{\vf{n}}=\vf{n}\cdot\vf\Sigma=\frac{\hbar}{2}\begin{pmatrix}
+        \cos\theta                 & \sin\theta\exp{-\ii\varphi} \\
+        \sin\theta\exp{\ii\varphi} & -\cos\theta
+      \end{pmatrix}$$
+    where $\vf\Sigma=\transpose{\begin{pmatrix}
+          \vf{\sigma}_x & \vf{\sigma}_y & \vf{\sigma}_z
+        \end{pmatrix}}$.
+    Thus, given a state $\ker{\vf{\psi}}\in\mathcal{H}$ we can find a representant of the ray it creates centered at the unit sphere. This sphere is called \emph{Bloch sphere}.
+  \end{definition}
 \end{multicols}
 \end{document}

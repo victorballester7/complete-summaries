@@ -5,25 +5,27 @@
 \begin{tikzpicture}
   \def\X{3}
   \def\Y{2}
-  \def\eps{0.072}
+  \def\x{1.1423}
+  \def\y{1.1423}
+  \def\h{-2.783}
+  \def\O{6*\x+0.5}
   \begin{axis}[
       name=plot1,
       axis lines=middle,
+      x label style={at={(axis description cs:0.97,-0.025)},anchor=north},
+      y label style={at={(axis description cs:0.46,0.83)},anchor=south},
       xmin=-\X, xmax=\X,
       ymin=0, ymax=\Y,
-      %xtick=\empty, ytick=\empty,
+      xtick=\empty, ytick=\empty,
       ylabel={$t$},
       xlabel={$x$},
       axis equal image,
       %axis on top,
     ]
-    % \def\xmax{\pgfkeysvalueof{/pgfplots/xmax}}
-    % \def\xmin{\pgfkeysvalueof{/pgfplots/xmin}}
-    % \def\ymax{\pgfkeysvalueof{/pgfplots/ymax}}
-    % \def\ymin{\pgfkeysvalueof{/pgfplots/ymin}}
-    % \addplot [thick,samples=400,smooth,blue,domain=\xmin:0]
-    % ({-x^2}, {x});
-    % \addplot[thick,samples=400,smooth,red,domain=0:\xmax] ({-x^2}, {x});
+    \addplot[thick,samples=10,smooth,color_green2,dashed]{0-3.2666666*(x+1)};
+    \addplot[thick,samples=10,smooth,color_green3,dashed]{0+2.77777777*(x)};
+    \addplot[thick,samples=10,smooth,color_green4,dashed]{0+1.46221285*(x-2)};
+
   \end{axis}
 
   \begin{axis}[
@@ -39,6 +41,8 @@
       extra y tick labels={0,$\rho_{\textrm{max}}$},
       ylabel={$\rho(x,0)$},
       xlabel={$x$},
+      x label style={at={(axis description cs:0.97,-0.025)},anchor=north},
+      y label style={at={(axis description cs:0.41,0.83)},anchor=south},
       axis equal image,
       restrict x to domain=-\X:\X,
       %axis on top,
@@ -46,30 +50,45 @@
     \addplot[thick,samples=400,smooth,blue]{3/2*(rad(atan(-x))/pi+0.5)};
   \end{axis}
   \begin{axis}[scale=0.4,
-      name=plot3,
+      name=plot2,
       at=(plot2.east),
       anchor=west,
       xshift=0.5cm,
       axis lines=middle,
-      xmin=0, xmax=\X,
-      ymin=0, ymax=\X,
-      %xtick=\empty, ytick=\empty,
-      extra y ticks = {0,2.25},
+      xmin=0, xmax=1,
+      ymin=0, ymax=\Y,
+      xtick=\empty, ytick=\empty,
+      extra y ticks = {0,1.5},
       extra y tick labels={0,$\rho_{\textrm{max}}$},
-      ylabel={$\rho$},
+      ylabel={$\rho(x,0)$},
       xlabel={$q$},
+      x label style={at={(axis description cs:0.85,-0.025)},anchor=north},
+      y label style={at={(axis description cs:-0.55,0.83)},anchor=south},
       axis equal image,
-      % y=2cm/\Y,
-      % x=2cm/2/\X,
+      restrict x to domain=-\X:\X,
+      %x=4cm,
       %axis on top,
     ]
-    \addplot[thick,samples=400,smooth,blue,domain=0:2.25]({-(-x+0.3802+2.25)-1/(-x+0.3802+2.25)+3.0104},{x});
-    \addplot[thick,samples=10,smooth,red]{1.125-1.790122*(x-0.8408364)};
+    \addplot[thick,samples=400,smooth,blue,domain=0:1.5]({-(-x+2)-1/(-x+2)+2.5},{x});
+    \addplot[thick,samples=10,smooth,color_green2,dashed]{1.125-3.2666666*(x-0.48214285)};
+    \addplot[thick,samples=10,smooth,color_green3,dashed]{0.75+2.77777777*(x-0.45)};
+    \addplot[thick,samples=10,smooth,color_green4,dashed]{0.2213754+1.46221285*(x-0.15914323)};
   \end{axis}
-  \node (11) at ({-2+\X},{-1-\eps-(1.5-1.127862457)})  [shape=circle,draw=red,inner sep=0pt,minimum size=0.1cm,fill=red] {};
-  \node (12) at ({2*\X+0.5+\eps+1.535},{-1-\eps-(1.5-1.127862457)})  [shape=circle,draw=red,inner sep=0pt,minimum size=0.1cm,fill=red] {};
+  \node (10) at ({2*\x},{0})  [shape=circle,draw=color_green2,inner sep=0pt,minimum size=0.1cm,fill=color_green2] {};
+  \node (11) at ({2*\x},{\h + 1.125*\y})  [shape=circle,draw=color_green2,inner sep=0pt,minimum size=0.1cm,fill=color_green2] {};
+  \node (12) at ({\O+0.48214285*\x},{\h+1.125*\y})  [shape=circle,draw=color_green2,inner sep=0pt,minimum size=0.1cm,fill=color_green2] {};
 
-  \draw[red,dashed] ({-2+\X},0) -- (11) -- (12);
+  \node (20) at ({3*\x},{0})  [shape=circle,draw=color_green3,inner sep=0pt,minimum size=0.1cm,fill=color_green3] {};
+  \node (21) at ({3*\x},{\h + 0.75*\y})  [shape=circle,draw=color_green3,inner sep=0pt,minimum size=0.1cm,fill=color_green3] {};
+  \node (22) at ({\O+0.45*\x},{\h+0.75*\y})  [shape=circle,draw=color_green3,inner sep=0pt,minimum size=0.1cm,fill=color_green3] {};
+
+  \node (30) at ({5*\x},{0})  [shape=circle,draw=color_green4,inner sep=0pt,minimum size=0.1cm,fill=color_green4] {};
+  \node (31) at ({5*\x},{\h + 0.2213754*\y})  [shape=circle,draw=color_green4,inner sep=0pt,minimum size=0.1cm,fill=color_green4] {};
+  \node (32) at ({\O+0.15914323*\x},{\h+0.2213754*\y})  [shape=circle,draw=color_green4,inner sep=0pt,minimum size=0.1cm,fill=color_green4] {};
+
+  \draw[color_green2,dotted] (10) -- (11) -- (12);
+  \draw[color_green3,dotted] (20) -- (21) -- (22);
+  \draw[color_green4,dotted] (30) -- (31) -- (32);
 \end{tikzpicture}
 
 \end{document}

@@ -1,0 +1,44 @@
+\documentclass{standalone}
+\usepackage{../../../../preamble_formulas}
+
+\begin{document}
+\begin{tikzpicture}[decorated curves/.style={
+        postaction={
+            decorate,
+            decoration={
+                markings,
+                mark=at position 0.333 with {\arrow[gray,scale=1.5]{stealth}},
+                mark=at position 0.666 with {\arrow[gray,scale=1.5]{stealth}}}}
+      },decorated separatrices/.style={
+        postaction={
+            decorate,
+            decoration={
+                markings,
+                mark=at position 0.5 with {\arrow[gray,scale=1.5]{stealth}},
+              }}
+      }]
+  \begin{axis}[
+      axis lines=middle,
+      xmin=-4, xmax=4,
+      ymin=-4, ymax=4,
+      xtick=\empty, ytick=\empty,
+      ylabel={$y$},
+      xlabel={$x$},
+      %axis on top,
+    ]
+    \def\xmax{\pgfkeysvalueof{/pgfplots/xmax}}
+    \def\xmin{\pgfkeysvalueof{/pgfplots/xmin}}
+    \def\ymax{\pgfkeysvalueof{/pgfplots/ymax}}
+    \def\ymin{\pgfkeysvalueof{/pgfplots/ymin}}
+    \draw[gray, thick,decorated separatrices] (\xmin,0) -- (0,0);
+    \draw[gray, thick,decorated separatrices] (0,0) --  (\xmax,0);
+    \draw[gray, thick,decorated separatrices] (0,0) --(0,\ymin);
+    \draw[gray, thick,decorated separatrices]  (0,0) -- (0,\ymax);
+    \addplot[thick,samples=100,gray,domain=\xmin:-1,decorated separatrices]{exp(x+2.3)+0.5};
+    \addplot[thick,samples=100,gray,domain=\xmin:-1,decorated separatrices]{-exp(x+2.3)-0.5};
+    \addplot[thick,samples=100,gray,domain=0:\xmax,decorated separatrices]{exp(x-1/x^2)/10};
+    \addplot[thick,samples=100,gray,domain=0:\xmax,decorated separatrices]{-exp(x-1/x^2)/10};
+  \end{axis}
+\end{tikzpicture}
+
+\end{document}
