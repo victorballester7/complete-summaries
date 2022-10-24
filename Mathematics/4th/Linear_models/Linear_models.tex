@@ -124,14 +124,7 @@
   \begin{theorem}
     Given the model of \cref{LM_simple}, if we consider the hypothesis of normality for $\varepsilon_i$, then the estimates of the least-squares method coincide with the MLEs.
   \end{theorem}
-  \subsubsection{Coefficient of determination}
-  \begin{definition}
-    Given the model of \cref{LM_simple}, we define the \emph{coefficient of determination} $R$ as:
-    $$R^2:=\frac{\mathrm{SSR}}{\mathrm{SST}}:=\frac{\sum_{i=1}^n{(\hat{y}_i-\overline{y})}^2}{\sum_{i=1}^n{(y_i-\overline{y})}^2}$$ where $\mathrm{SSR}=\sum_{i=1}^n{(\hat{y}_i-\overline{y})}^2$ is the \emph{total sum of squares} and $\mathrm{SST}=\sum_{i=1}^n{(y_i-\overline{y})}^2$ is the \emph{regression sum of squares}. Furthermore, we can partition $\mathrm{SST}$ into $\mathrm{SST}=\mathrm{SSR}+\mathrm{SSE}$, where $\mathrm{SSE}$ is the \emph{error sum of squares}. That is: $$\sum_{i=1}^n{(y_i-\overline{y})}^2=\sum_{i=1}^n{(\hat{y}_i-\overline{y})}^2+\sum_{i=1}^n{(y_i-\hat{y}_i)}^2$$
-  \end{definition}
-  \begin{proposition}
-    Given the model of \cref{LM_simple}, we have that $R^2=r^2$.
-  \end{proposition}
+
   \subsection{Multiple regression}
   \begin{definition}[General linear model]
     Suppose we have a sample of data $\{(x_{i1},\ldots,x_{ik},y_i):i=1,\ldots,n\}$. We can describe the relationship between $x_{i1},\ldots,x_{ik}$ and $y_i$ with the following model:
@@ -210,8 +203,9 @@
       \item $\vf{H}$ and $\vf{M}$ are symmetric and idempotent. Moreover, $\vf{MH}=\vf{0}_n$. Hence, they orthogonally project $\RR^n$ into orthogonal subspaces.
       \item $\vf{MX}=\vf{0}$
       \item $\vf{e}=\vf{M\varepsilon}$
+      \item $\rank \vf{H}=k+1$ and $\rank \vf{M}=n-(k+1)$
       \item $\transpose{\vf{X}}\vf{e}=0$. In particular, $\sum_{i=1}^n e_i=0$ and $\sum_{i=1}^n x_{ij}e_i=0$ $\forall j$. So the sample covariance of $(x_{1j},\ldots,x_{nj})$ and $\vf{e}$ is 0 $\forall j$.
-      \item $\transpose{\vf{y}}\vf{e}=0$. Analogously, we have that the sample covariance of $\vf{\hat{y}}$ and $\vf{e}$ is 0.
+      \item $\transpose{\vf{\hat{y}}}\vf{e}=0$. Analogously, we have that the sample covariance of $\vf{\hat{y}}$ and $\vf{e}$ is 0.
     \end{enumerate}
   \end{proposition}
   \begin{proposition}
@@ -268,6 +262,46 @@
     \end{align*}
     are the respective sample covariance matrices\footnote{Note that the expression for $\vf{\hat\beta}_{1}$ is quite similar to the least-square estimate for $\beta_1$ in the simple linear model.}.
   \end{proposition}
+  \subsubsection{Coefficient of determination}
+  \begin{definition}
+    Given the model of \cref{LM_generalized}, we define the \emph{coefficient of determination} $R$ as:
+    $$R^2:=\frac{\mathrm{SSR}}{\mathrm{SST}}:=1-\frac{\mathrm{SSE}}{\mathrm{SST}}:=\frac{\sum_{i=1}^n{(\hat{y}_i-\overline{y})}^2}{\sum_{i=1}^n{(y_i-\overline{y})}^2}$$ where $\mathrm{SSR}=\sum_{i=1}^n{(\hat{y}_i-\overline{y})}^2$ is the \emph{total sum of squares} and $\mathrm{SST}=\sum_{i=1}^n{(y_i-\overline{y})}^2$ is the \emph{regression sum of squares}. Furthermore, we can partition $\mathrm{SST}$ into $\mathrm{SST}=\mathrm{SSR}+\mathrm{SSE}$, where $\mathrm{SSE}$ is the \emph{error sum of squares}. That is: $$\sum_{i=1}^n{(y_i-\overline{y})}^2=\sum_{i=1}^n{(\hat{y}_i-\overline{y})}^2+\sum_{i=1}^n{(y_i-\hat{y}_i)}^2$$
+  \end{definition}
+  \begin{lemma}
+    Consider the model of \cref{LM_generalized}. Then, $R^2\leq 1$
+  \end{lemma}
+  \begin{proposition}
+    Given the simple model of \cref{LM_simple}, we have that $R^2=r^2$.
+  \end{proposition}
+  \begin{definition}
+    Given the model of \cref{LM_generalized}, we define the \emph{adjusted coefficient of determination} $R_{\mathrm{adj}}$ as: $${R_{\mathrm{adj}}}^2=1-\frac{\MSE}{\mathrm{MST}}:=1-\frac{n-1}{n-k-1}\frac{\mathrm{SSE}}{\mathrm{SST}}$$ where we have defined the \emph{total mean of squares} as $\mathrm{MST}=\frac{1}{n-1}\sum_{i=1}^n{(y_i-\overline{y})}^2$.
+  \end{definition}
+  \begin{lemma}
+    Consider the model of \cref{LM_generalized}. The function ${R_{\mathrm{adj}}}^2(k)$ attains a maximum at $k=k_0$ which is the optimal number of variables we should consider for our model.
+  \end{lemma}
+  \subsubsection{Analysis of variance}
+  \begin{definition}
+    Let $X_1\sim{\chi_{d_1}}$ and $X_2\sim{\chi_{d_2}}$ be independent random variables. We define the \emph{$F$-distribution with degrees of freedom $d_1$ and $d_2$} as the distribution of: $$F=\frac{X_1/d_1}{X_2/d_2}\sim F_{d_1, d_2}$$
+  \end{definition}
+  \begin{lemma}
+    Let $\transpose{\vf{x}}=(x_1,\ldots,x_n)\in\RR^n$. Suppose that $\sum_{i=1}^n {x_i}^2=Q_1+\cdots+Q_k$, where $Q_j=\transpose{\vf{x}}\vf{A}_j\vf{x}$ is a quadratic form and $\vf{A}_j$ is a symmetric positive semi-definite matrix of rank $r_j$, $j=1,\ldots,k$. If $r_1+\cdots+r_k=n$, then there exists an orthogonal matrix $\vf{C}\in\mathcal{M}_n(\RR)$ such that if $\vf{y}=\transpose{\vf{C}}\vf{x}$, then:
+    \begin{equation*}
+      \begin{aligned}
+        Q_1 & = {y_1}^2+\cdots+{y_{r_1}}^2                    \\
+        Q_2 & = {y_{r_1+1}}^2+\cdots+{y_{r_1+r_2}}^2          \\
+            & \;\;\vdots                                      \\
+        Q_k & = {y_{r_1+\cdots+r_{k-1}+1}}^2+\cdots+{y_{n}}^2
+      \end{aligned}
+    \end{equation*}
+  \end{lemma}
+  \begin{theorem}[Cochran's theorem]
+    Let $\vf{x}=(X_1,\ldots,X_n)\in N_n(\vf{0},\sigma^2\vf{I}_n)$. Suppose that $\sum_{i=1}^n {X_i}^2=Q_1+\cdots+Q_k$, where $Q_j=\transpose{\vf{x}}\vf{A}_j\vf{x}$ is a quadratic form and $\vf{A}_j$ is a symmetric positive semi-definite matrix of rank $r_j$, $j=1,\ldots,k$. If $r_1+\cdots+r_k=n$, then:
+    \begin{enumerate}
+      \item $Q_1,\ldots,Q_k$ are independent random variables.
+      \item $\frac{Q_j}{\sigma^2}\sim{\chi_{r_j}}$, $j=1,\ldots,k$.
+    \end{enumerate}
+  \end{theorem}
+  % POSAR QUE R^2-1 té distribució de Fisher.
   \subsubsection{Hypothesis testing}
   \begin{proposition}[Bonferroni's method]
     Consider the model of \cref{LM_generalized} and suppose we want a confidence $k+1$-dimensional interval $I$ for $\vf{\beta}$ of confidence $1-\alpha$. Then, it suffices to take any interval $I_j$ for each $\beta_j$ of confidence $1-\frac{\alpha}{k+1}$ and let $I=I_0\times\cdots\times I_{k}$.

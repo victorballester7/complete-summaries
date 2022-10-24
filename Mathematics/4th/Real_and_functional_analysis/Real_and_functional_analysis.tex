@@ -304,37 +304,6 @@
       \item If $f(x,\cdot)$ is derivable on $t_0$ almost everywhere on $E$ and $$\abs{\pdv{f}{t}(x,t)}\almoste\leq g(x)$$ then the function $\pdv{f}{t}(x,\cdot)$ is integrable on $E$ and $$\Phi'(t_0)=\int_E\pdv{f}{t}(x,t_0)\dd{x}$$
     \end{enumerate}
   \end{theorem}
-  \begin{definition}
-    Let $E\subseteq\RR^n$ be a measurable set and $1\leq p<\infty$. We define:
-    \begin{align*}
-      \mathcal{L}^p(E) & :=\left\{\vf{f}:E\rightarrow \RR^n\text{ measurable}:\int_E\abs{\vf{f}}^p<\infty\right\}                                                                                    \\
-      \begin{split}
-        \mathcal{L}^\infty(E) &:=\left\{\vf{f}:E\rightarrow \RR^n\text{ measurable}:\exists M>0\text{ with }\right.\\&\hspace{4.5cm}\left.\abs{\vf{f}(x)}\almoste{\leq} M, x\in E\right\}
-      \end{split} \\
-      \mathcal{N}(E)   & :=\{\vf{f}:E\rightarrow \RR^n\text{ measurable}:\vf{f}\almoste{=} 0\}
-    \end{align*}
-  \end{definition}
-  \begin{definition}
-    Let $E\subseteq\RR^n$ be a measurable set and $1\leq p\leq\infty$. We define: $$L^p(E):=\quot{\mathcal{L}^p(E)}{\mathcal{N}(E)}$$
-  \end{definition}
-  \begin{proposition}
-    Let $E\subseteq\RR^n$ be a measurable set and $1\leq p<\infty$. The set $L^p$ is a normed vector space with the norm: $$\norm{\vf{f}}_p:={\left(\int_E\abs{\vf{f}}^p\right)}^{1/p}\qquad\forall\vf{f}\in L^p$$
-    And the set $L^\infty$ is also a normed vector space with the norm $$\norm{\vf{f}}_\infty=\inf \{M:\abs{\vf{f}(x)}\almoste{\leq} M, x\in E\}\qquad\forall\vf{f}\in L^\infty$$
-  \end{proposition}
-  \begin{definition}
-    Let $E\subseteq\RR^n$ be a measurable set and $U\subseteq \RR^n$ be an open set. We define:
-    \begin{align*}
-      S(E)              & =\{f:E\rightarrow\RR:f\text{ is simple}\}                             \\
-      C_{\textrm{c}}(U) & =\{f:U\rightarrow\RR:f\in\mathcal{C}^0(U),\supp f\text{ is compact}\}
-    \end{align*}
-  \end{definition}
-  \begin{theorem}
-    Let $1\leq p<\infty$, $E\subseteq\RR^n$ be a measurable set and $U\subseteq \RR^n$ be an open set. Then:
-    \begin{enumerate}
-      \item $S(E)$ is dense in $L^p(E)$.
-      \item $C_{\textrm{c}}(U)$ is dense in $L^p(U)$.
-    \end{enumerate}
-  \end{theorem}
   \begin{definition}[Hardy-Littlewood maximal function]
     Let $f\in L^1(\RR^n)$ and $B\subseteq \RR^n$ be a ball. We define the \emph{Hardy-Littlewood maximal function} as: $$Mf(x)=\sup_{x\in B}\frac{1}{\m{B}}\int_B\abs{f(y)}\dd{y}$$
   \end{definition}
@@ -352,19 +321,6 @@
   \begin{proposition}
     Let $f\in L^1(\RR^n)$ and suppose $Mf\in L^1(\RR^n)$. Then, $f=0$.
   \end{proposition}
-  \begin{definition}
-    Let $T$ be an operator. We say that $T$ is \emph{sublinear} is $$\abs{T(f+g)}\leq \abs{Tf}+\abs{Tg}\qquad\forall f,g\in L^p$$
-  \end{definition}
-  \begin{theorem}[Marcinkiewicz interpolation theorem]
-    Let $T$ be a sublinear operator. Then:
-    \begin{enumerate}
-      \item $\displaystyle\m{x\in\RR^n:\abs{Tf(x)}>t}\leq \frac{A}{t}\norm{f}_1$
-      \item $\norm{Tf}_\infty\leq A_\infty\norm{f}_\infty$
-    \end{enumerate}
-  \end{theorem}
-  \begin{corollary}
-    Let $T$ be a sublinear operator. Then, $\norm{Tf}_p\leq A_p\norm{f}_p$ $\forall 1<p<\infty$ and $\forall f\in L^p$
-  \end{corollary}
   \subsubsection{Fubini-Tonell theorem}
   \begin{definition}
     Let $E\subseteq\RR^{p+q}$ and $y\in\RR^q$. We define the \emph{section} of $E$ at $y$ as: $$E(y):=\{x\in\RR^p:(x,y\in E)\}$$
@@ -524,5 +480,105 @@
   \begin{proposition}
     A normed vector space is separable if and only if it contains a total countable subset.
   \end{proposition}
+  \subsubsection{\texorpdfstring{$L^p$}{Lp} spaces}
+  \begin{definition}
+    Let $E\subseteq\RR^n$ be a measurable set and $1\leq p<\infty$. We define:
+    \begin{align*}
+      \mathcal{L}^p(E) & :=\left\{{f}:E\rightarrow \RR^n\text{ measurable}:\int_E\abs{{f}}^p<\infty\right\}                                                                                                          \\
+      \begin{split}
+        \mathcal{L}^\infty(E) &:=\left\{{f}:E\rightarrow \RR^n\text{ measurable}:\exists M>0\text{ with }\right.\\&\hspace{4.5cm}\left.\abs{{f}(x)}\almoste{\leq} M, x\in E\right\}
+      \end{split} \\
+      \mathcal{N}(E)   & :=\{{f}:E\rightarrow \RR^n\text{ measurable}:{f}\almoste{=} 0\}
+    \end{align*}
+  \end{definition}
+  \begin{definition}
+    Let $E\subseteq\RR^n$ be a measurable set and $1\leq p\leq\infty$. We define: $$L^p(E):=\quot{\mathcal{L}^p(E)}{\mathcal{N}(E)}$$
+  \end{definition}
+  \begin{lemma}[Young's inequality for products]
+    Let $a,b\in\RR$ and $1\leq p,q\leq \infty$ be such that $\frac{1}{p}+\frac{1}{q}=1$. Then:
+    $$ab\leq\frac{a^p}{p}+\frac{b^q}{q}$$
+    And the equality holds if and only if $a^p=b^q$.
+  \end{lemma}
+  \begin{lemma}[Hölder's inequality]
+    Let $E\subseteq\RR^n$ be a measurable set, $1\leq p,q\leq \infty$ be such that $\frac{1}{p}+\frac{1}{q}=1$ and ${f}\in L^p(E)$, ${g}\in L^q(E)$. Then:
+    $$\norm{{fg}}_1\leq\norm{{f}}_p\norm{{g}}_q$$
+    And the equality holds if and only if $\exists \alpha,\beta\in\RR_{\geq 0}$ such that $\alpha{\norm{{f}}}^p\almoste{=}\beta{\norm{{g}}}^q$.
+  \end{lemma}
+  \begin{proposition}
+    Let $E\subseteq\RR^n$ be a measurable set and $1\leq p<\infty$. The set $L^p$ is a normed vector space with the norm: $$\norm{{f}}_p:={\left(\int_E\abs{{f}}^p\right)}^{1/p}\qquad\forall{f}\in L^p$$
+    And the set $L^\infty$ is also a normed vector space with the norm $$\norm{{f}}_\infty=\inf \{M:\abs{{f}(x)}\almoste{\leq} M, x\in E\}\qquad\forall{f}\in L^\infty$$
+  \end{proposition}
+  \begin{definition}
+    Let $E\subseteq\RR^n$ be a measurable set and $U\subseteq \RR^n$ be an open set. We define:
+    \begin{align*}
+      S(E)                        & =\{f:E\rightarrow\RR:f\text{ is simple}\}                             \\
+      \mathcal{C}_{\textrm{c}}(U) & =\{f:U\rightarrow\RR:f\in\mathcal{C}^0(U),\supp f\text{ is compact}\}
+    \end{align*}
+  \end{definition}
+  \begin{theorem}
+    Let $1\leq p<\infty$, $E\subseteq\RR^n$ be a measurable set and $U\subseteq \RR^n$ be an open set. Then:
+    \begin{enumerate}
+      \item $S(E)$ is dense in $L^p(E)$.
+      \item $\mathcal{C}_{\textrm{c}}(U)$ is dense in $L^p(U)$.
+    \end{enumerate}
+  \end{theorem}
+  \begin{theorem}
+    Let $E\subseteq\RR^n$ be a measurable space, $({f}_k)\in L^p(E)$ be a sequence of functions and $1\leq p<\infty$. Then:
+    \begin{enumerate}
+      \item If $\lim_{k\to\infty}f_k(x)\almoste{=}{f}(x)$, $\norm{{f}_k}\almoste\leq g(x)\in L^p(E)$. Then, ${f}\in L^p(E)$ and $\lim_{k\to\infty}\norm{{f}_k-{f}}_p=0$ and we will write ${f}_k\overset{L^p}{\rightarrow}{f}$.
+      \item If $\sum_{k=1}^\infty\norm{{f}_k}_p<\infty$, then $\sum_{k=1}^\infty\abs{f_k(x)}<\infty$ and $\exists f\in L^p(E)$ such that $\sum_{k=1}^\infty f_k(x)\almoste{=}f(x)$ and $\sum_{k=1}^N{f}_k\overset{L^p}{\rightarrow}{f}$. In particular, $(L^p,\norm{\cdot}_p)$ is a Banach space.
+      \item If ${f}_k\overset{L^p}{\rightarrow}{f}$, then $\exists(f_{k_j})$ such that $\lim_{j\to\infty}f_{k_j}(x)\almoste{=}{f}(x)$.
+    \end{enumerate}
+  \end{theorem}
+  \begin{theorem}
+    Let $E\subseteq\RR^n$ be a measurable space and $1\leq p<\infty$. Then, $L^p(E)$ is separable.
+  \end{theorem}
+  \begin{definition}
+    Let $T$ be an operator. We say that $T$ is \emph{sublinear} is $$\abs{T(f+g)}\leq \abs{Tf}+\abs{Tg}\qquad\forall f,g\in L^p$$
+  \end{definition}
+  \begin{theorem}[Marcinkiewicz interpolation theorem]
+    Let $T$ be a sublinear operator. Then:
+    \begin{enumerate}
+      \item $\displaystyle\m{x\in\RR^n:\abs{Tf(x)}>t}\leq \frac{A}{t}\norm{f}_1$
+      \item $\norm{Tf}_\infty\leq A_\infty\norm{f}_\infty$
+    \end{enumerate}
+  \end{theorem}
+  \begin{corollary}
+    Let $T$ be a sublinear operator. Then, $\norm{Tf}_p\leq A_p\norm{f}_p$ $\forall 1<p<\infty$ and $\forall f\in L^p$.
+  \end{corollary}
+  \subsubsection{Space of continuous functions}
+  \begin{definition}
+    Let $X\ne \varnothing$ be a set and $\mathcal{B}(X)$ be the vector space over $\KK=\RR,\CC$ of the functions $f:X\rightarrow\KK$ that are bounded with the \emph{uniform norm} (or \emph{supremum norm}): $$\norm{f}:=\norm{f}_X:=\sum\{\abs{f(x)}:x\in X\}$$
+  \end{definition}
+  \begin{proposition}
+    Let $X\ne \varnothing$ be a set and $(f_n),f\in\mathcal{B}(X)$ be functions. Then: $$\lim_{n\to\infty}\norm{f_n-f}=0\iff f_n\text{ converges uniformly to }f$$
+  \end{proposition}
+  \begin{definition}
+    Let $K\subseteq \RR^n$ be a compact set. We define $\mathcal{C}(K)$ as the closed subspace of $\mathcal{B}(K)$ containing the continuous functions.
+  \end{definition}
+  \begin{proposition}
+    Let $K\subseteq \RR^n$ be a compact set and $f,g\in\mathcal{C}(K)$. Then: $$\norm{fg}_k\leq\norm{f}_K\norm{g}_K$$
+  \end{proposition}
+  \begin{definition}
+    Let $K\subseteq \RR^n$ be a compact set and $A\subseteq \mathcal{C}(K)$ be a subset. We say that $A$ is a \emph{subalgebra} if $A$ is stable under the product, that is if $\forall f,g\in A$ we have $fg\in A$.
+  \end{definition}
+  \begin{proposition}
+    Let $K\subseteq \RR^n$ be a compact set and $A\subseteq \mathcal{C}(K)$ be a subalgebra. Then, $\overline{A}$ is also a subalgebra.
+  \end{proposition}
+  \begin{definition}
+    Let $K\subseteq \RR^n$ be a compact set and $A\subseteq \mathcal{C}(K)$ be a subalgebra. We say that $A$ is a \emph{separating set} (or \emph{separate} the points of $K$) if $\forall x,y\in K$ $\exists f\in A$ such that $f(x)\ne f(y)$.
+  \end{definition}
+  \begin{definition}
+    Let $K\subseteq \RR^n$ be a compact set and $A\subseteq \mathcal{C}(K)$ be a subalgebra. We say that $A$ \emph{does not vanish} if $\forall x\in K$ $\exists f_x\in A$ such that $f_x(x)\ne 0$.
+  \end{definition}
+  \begin{lemma}
+    Let $K\subseteq \RR^n$ be a compact set and $A\subseteq \mathcal{C}(K)$ be a subalgebra. If $A$ contains the constant functions, then $A$ does not vanish.
+  \end{lemma}
+  \begin{definition}
+    Let $K\subseteq \RR^n$ be a compact set and $A\subseteq \mathcal{C}(K)$ be a subalgebra. We say that $A$ is \emph{autoconjugate} if $\overline{f}\in A$ whenever $f\in A$.
+  \end{definition}
+  \begin{theorem}[Stone-Weierstra\ss\ theorem]
+    Let $K\subseteq \RR^n$ be a compact set and $A\subseteq \mathcal{C}(K)$ be a separating autoconjugate subalgebra that does not vanish. Then, $A$ is dense in $\mathcal{C}(K)$.
+  \end{theorem}
 \end{multicols}
 \end{document}
