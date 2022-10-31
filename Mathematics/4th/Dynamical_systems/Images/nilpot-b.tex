@@ -1,0 +1,64 @@
+\documentclass{standalone}
+\usepackage{../../../../preamble_formulas}
+
+\begin{document}
+\begin{tikzpicture}[decorated separatrices rev/.style={
+        postaction={
+            decorate,
+            decoration={
+                markings,
+                mark=at position 0.5 with {\arrow[scale=1.5]{stealth[reversed]}},
+              }}
+      },decorated separatrices/.style={
+        postaction={
+            decorate,
+            decoration={
+                markings,
+                mark=at position 0.5 with {\arrow[scale=1.5]{stealth}},
+              }}
+      }]
+  \begin{axis}[
+      xmin=-4, xmax=4,
+      ymin=-4, ymax=4,
+      xtick=\empty, ytick=\empty,
+      ylabel={$y$},
+      xlabel={$x$},
+      %axis on top,
+      hide axis,
+    ]
+    \def\xmax{\pgfkeysvalueof{/pgfplots/xmax}}
+    \def\xmin{\pgfkeysvalueof{/pgfplots/xmin}}
+    \def\ymax{\pgfkeysvalueof{/pgfplots/ymax}}
+    \def\ymin{\pgfkeysvalueof{/pgfplots/ymin}}
+    \def\s{4}
+    \foreach \i in{1,...,2}{
+        \addplot[thick,samples=100,black,decorated separatrices] {x^2/\s+\i};
+        \addplot[thick,samples=100,domain=\xmin:-sqrt(\s*\i),black,decorated separatrices] {x^2/\s-\i};
+        \addplot[thick,samples=100,domain=-sqrt(\s*\i):sqrt(\s*\i),black,decorated separatrices rev] {x^2/\s-\i};
+        \addplot[thick,samples=100,domain=sqrt(\s*\i):\xmax,black,decorated separatrices] {x^2/\s-\i};
+      }
+    \addplot[thick,samples=100,black,domain=\xmin:0,decorated separatrices] {x^2/\s};
+    \addplot[thick,samples=100,black,domain=0:\xmax,decorated separatrices] {x^2/\s};
+    \def\eps{0.18}
+    %\addplot[thin,samples=100,white] {3+\eps};
+    \addplot[thin,samples=100,white] {-2-\eps};
+
+    \def\N{60}
+    \def\n{\N/2-2}
+    \def\ell{(\xmax-\xmin)/\N}
+    \foreach \i in{1,...,27}{
+        \addplot[thin,mark=*,only marks, mark size=\ell/2*0.852cm,black] coordinates {
+            ({\xmin +\ell/2+(\i-1)*\ell},0)
+          };
+      }
+    \addplot[thin,mark=*,only marks, mark size=\ell/2*0.852*2cm,black] coordinates {
+        ({\xmin +\ell/2+(\N/2-1)*\ell},0)
+      };
+    \foreach \i in{33,...,\N}{
+        \addplot[thin,mark=*,only marks, mark size=\ell/2*0.852cm,black] coordinates {
+            ({\xmin +\ell/2+(\i-1)*\ell},0)
+          };
+      }
+  \end{axis}
+\end{tikzpicture}
+\end{document}

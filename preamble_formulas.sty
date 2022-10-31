@@ -22,9 +22,11 @@
 \usepackage{tikz-3dplot} % to draw a visual 3d image with tikz (not with pgfplots).
 \usepackage[RPvoltages]{circuitikz} % to draw electric circuits with tikz
 \usetikzlibrary{arrows,arrows.meta,decorations.pathmorphing,decorations.pathreplacing,decorations.shapes,decorations.markings,patterns,calc,fillbetween,intersections}
-\usepgfplotslibrary{fillbetween}
+\usepgfplotslibrary{fillbetween, polar}
 \pgfplotsset{compat=newest}
 %%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{float} % to allow using argument [H] in figure environtment 
 
 %%%%%%%%%%%%%%% Colors %%%%%%%%%%%%%%%
   \definecolor{color_blue1}{RGB}{190,190,255}
@@ -48,7 +50,7 @@
     \newcommand{\geo}{Purple2}        % geometry and topology
     \newcommand{\apl}{Red2}           % applied mathematics
     \newcommand{\sta}{DarkGoldenrod2} % statistics
-    \newcommand{\phy}{SlateBlue2}            % physics
+    \newcommand{\phy}{SlateBlue2}     % physics
   %%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -57,6 +59,7 @@
 \renewcommand{\labelenumi}{\arabic{enumi}.}
 \renewcommand{\theenumii}{\roman{enumii})}
 \renewcommand{\labelenumii}{\roman{enumii})}
+\renewcommand{\labelenumiii}{\alph{enumiii})}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%% Math-commands %%%%%%%
@@ -251,6 +254,17 @@
       \newcommand{\matdv}[2]{\frac{\mathrm{D}#1}{\mathrm{D}#2}} % binormal vector
       
 
+    %%% LINEAR MODELS
+      \DeclareMathOperator{\MST}{MST} % Total Mean Square
+      \DeclareMathOperator{\MSR}{MSR} % Regression Mean Square
+      \DeclareMathOperator{\SSE}{SSE} % Sum Square Error
+      \DeclareMathOperator{\SST}{SST} % Total Sum of Squares
+      \DeclareMathOperator{\SSR}{SSR} % Regression Sum of Squares
+      
+    %%% DYNAMICAL SYSTEMS
+      \renewcommand{\o}[1]{\mathrm{o}\left(#1\right)} % little O notation
+      \renewcommand{\O}[1]{\mathrm{O}\left(#1\right)} % big O notation
+
     %%% vectors and matrices
       \newcommand{\vf}[1]{\boldsymbol{\mathrm{#1}}} % math style for vectors and matrices and vector-values functions (previously it was \*vb{#1} but this does not apply to greek letters)
       \newcommand{\transpose}[1]{{#1}^{\mathrm{T}}} % math style for vectors and matrices
@@ -301,6 +315,20 @@
   
   \renewenvironment{proof}{{\textcolor{\col}{\textit{Sketch of the proof.}}}}{\hfill\textcolor{\col}{\openbox}} 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%% Colored boxes %%%%%%%%%%%
+% \usepackage[most]{tcolorbox} % for colored boxes
+% \newtcolorbox[auto counter,number within=section]{exercise}{
+%   enhanced,
+%   breakable,
+%   theorem style = plain,
+%   coltitle = \col,
+%   colback=white,
+%   colframe=\col,
+%   fonttitle=\bfseries,
+%   title={Exercise \thetcbcounter.}
+%   }
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%% Extra references %%%%%%%
 \makeatletter

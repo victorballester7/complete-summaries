@@ -4,7 +4,7 @@
 \begin{document}
 \renewcommand{\col}{\apl}
 \begin{multicols}{2}[\section{Partial differential equations}]
-  \subsection{Introduction}
+  \subsection{PDE in Physics}
   \subsubsection{Wave and membrane dynamics}
   \begin{proposition}[Wave equation]
     Consider a one-dimensional string of length $L$ and constant $k(x)$, $\rho$ be its linear density and $u(x,t)$ be the displacement of the point $x$ at the time $t$ from its equilibrium point. Then, the dynamics of the string are given by: $$\rho u_{tt}={(ku_x)}_x$$ If both $k$ and $\rho$ are constant, this equation is sometimes written as:
@@ -143,7 +143,7 @@
     So we shall solve the equation $\delta \mathcal{T}=0$, which is equivalent to solve: $$\int_a^bn(\vf{x})\dd{s}$$ where $s$ is the arc-length parameter. From the Euler-Lagrange equations, we get the following ode: $$\dv{}{s}\left(n\dv{\vf{x}}{s}\right)=\grad{n}$$
   \end{proposition}
   \begin{proposition}[Eikonal equation]
-    The time $T(x)$ taken by the light to travel from a fixed point $x_0$ to $x$ in a medium of refractive index $n$ is given by: $$\abs{\grad{T}}$$
+    The time $T(x)$ taken by the light to travel from a fixed point $x_0$ to $x$ in a medium of refractive index $n$ is given by: $${\norm{\grad{T}}}^2=n^2$$
   \end{proposition}
   \begin{definition}
     The \emph{action} $\mathcal{S}$ of a physical system is defined as the integral of the Lagrangian $L:=T-V$ between two instants of time $t_1$ and $t_2$. That is: $$\mathcal{S}(\vf{x},t)=\int_{t_1}^{t_2}L(\vf{x}(t),\vf{\dot{x}}(t),t)\dd{t}=\int_{t_1}^{t_2}\left(\frac{1}{2}m{\norm{\vf{\dot{x}}}}^2-V(\vf{x})\right)\dd{t}$$
@@ -159,7 +159,7 @@
     Substituting $\vf{\Psi}=\sqrt{\rho}\exp{\ii \frac{S}{\hbar}}$ into the Schrödinger equation and taking the limit $\hbar\to 0$ in the resulting equation yield the Hamilton-Jacobi equation. Moreover, if we define $\vf{v}=\frac{\grad{S}}{m}$ from one real equation (from the original one complex equation) we get the continuous equation (\cref{PDE_continuous}) and from the other equation taking the limit $\hbar\to 0$ we get the Cauchy momentum equation (\cref{PDE_cauchy}).
   \end{proposition}
   \subsection{First order partial differential equations}
-  \subsubsection{Method of characteristics and traffic equation}
+  \subsubsection{Method of characteristics}
   \begin{proposition}[Method of characteristics]
     Consider the following quasilinear PDE
     \begin{equation}\label{PDE_char}
@@ -185,6 +185,7 @@
     \end{equation*}
     with initial conditions $x(0,s)=x_0(s)$, $t(0,s)=t_0(s)$ and $u(0,s)=u_0(s)$.
   \end{proposition}
+  \subsubsection{Traffic flow equation}
   \begin{proposition}[Traffic flow equation]
     Consider a one lane motorway with one entry an one exit. Let $\rho(x,t)$ be the density of cars per unit of length, $u(\rho)$ the average speed of the cars and $q=\rho u$ be the flux of cars. Then, we can model the traffic in the motorway with the equation: $$\rho_t+{(\rho u)}_x=\rho_t+q'(\rho){\rho}_x=0$$
     The integral form of the latter equation is: $$\pdv{}{t}\int_{a}^b\rho(x,t)\dd{x}=q(a,t)-q(b,t)$$
@@ -202,10 +203,43 @@
     \end{minipage}
   \end{center}
   \begin{proposition}[Rankine-Hugoniot equation]
-    Let $x_s(t)$ be the position at time $t$ of a (jump) discontinuity in the function $\rho$. Then: $$\dv{x_s}{t}=\frac{[\rho u]}{[\rho]}=\frac{{(\rho u)}_+-{(\rho u)}_-}{\rho_+-\rho_-}$$ where the notation $[x(t)]$ refers to: $$[x(t_0)]:=\lim_{t\to{t_0}^+}x(t)-\lim_{t\to{t_0}^-}x(t)=:x_+(t_0)-x_-(t_0)$$.
+    Let $x_s(t)$ be the position at time $t$ of a (jump) discontinuity in the function $\rho$. Then: $$\dv{x_s}{t}=\frac{[q]}{[\rho]}=\frac{{(\rho u)}_+-{(\rho u)}_-}{\rho_+-\rho_-}$$ where the notation $[x(t)]$ refers to: $$[x(t_0)]:=\lim_{t\to{t_0}^+}x(t)-\lim_{t\to{t_0}^-}x(t)=:x_+(t_0)-x_-(t_0)$$
   \end{proposition}
   \begin{lemma}[Entropy condition]
-    We will have existence and unicity of solutions for the traffic flow equation if: $$q'(\rho_+)<\frac{[\rho u]}{[\rho]}<q'(\rho_-)$$
+    We will have existence and unicity of solutions for the traffic flow equation if: $$q'(\rho_+)<\frac{[q]}{[\rho]}<q'(\rho_-)$$
   \end{lemma}
+  \subsection{Wave equation}
+  \begin{proposition}
+    Let $u:\RR^2\rightarrow\RR$ two times differentiable such that:
+    \begin{multline*}
+      \left.\int_{x_1}^{x_2}\rho u_t\dd{t}\right|_{t=t_2}-\left.\int_{x_1}^{x_2}\rho u_t\dd{t}\right|_{t=t_1}=\left.\int_{t_1}^{t_2}ku_x\dd{t}\right|_{x=x_2}-\\-\left.\int_{t_1}^{t_2}ku_x\dd{t}\right|_{x=x_1}+\int_{t_1}^{t_2}\int_{x_1}^{x_2}f(x,t)\dd{x}\dd{t}
+    \end{multline*}
+    for certain functions $\rho(x,t)$, $k(x)$, $f(x,t)$. Also suppose that we can freely exchange the derivative and the integral sign\footnote{From now on, we will simply say that $u$ is a \emph{good enough} function.}. Then, $u(x,t)$ is a solution to the wave equation with driven force $f$:
+    $$\rho u_{tt}-{(ku_x)}_x=f(x,t)$$
+  \end{proposition}
+  \begin{proposition}[D'Alembert formula]
+    Let $u_0,v_0:\RR\rightarrow\RR$ be functions. The solution $u(x,t)$ to the wave equation with initial conditions $u(x,0)=u_0(x)$ and $u_t(x,0)=v_0(x)$ is: $$u(x,t)=\frac{u_0(x-ct)+u_0(x+ct)}{2}+\frac{1}{2c}\int_{x-ct}^{x+ct}v_0(s)\dd{s}$$
+  \end{proposition}
+  \begin{theorem}
+    Let $u_0,v_0:\RR\rightarrow\RR$ and $f:\RR^2\rightarrow\RR$ be functions. The solution $u(x,t)$ to the wave equation with driven force $f$ and initial conditions $u(x,0)=u_0(x)$ and $u_t(x,0)=v_0(x)$ is:
+    \begin{multline*}
+      u(x,t)=\frac{u_0(x-ct)+u_0(x+ct)}{2}+\frac{1}{2c}\int_{x-ct}^{x+ct}v_0(s)\dd{s}+\\+\frac{1}{2c}\int_0^t\int_{x-c(t-\tau)}^{x+c(t-\tau)}f(s,\tau)\dd{s}\dd{\tau}
+    \end{multline*}
+  \end{theorem}
+  \begin{theorem}
+    Let $U\subset\RR^2$ be an open set, $u:U\rightarrow\RR$ be a good enough function such that it satisfies the wave equation with density $\rho(x,t)$, constant $k(x)$ and driven force $f(x,t)$. Then:
+    $$\oint_{\Fr{U}}\rho u_t\dd{x}+k u_x\dd{t}=\iint_Uf(x,t)\dd{x}\dd{t}$$
+  \end{theorem}
+  \begin{proposition}
+    Let $U\subset\RR^2$ be an open set, $u:U\rightarrow\RR$ be a good enough function such that it satisfies the wave equation with constant $c^2=\frac{k}{\rho}$ and driven force $f(x,t)$. Consider the four points $A$, $B$, $C$ and $D$ as shown in \cref{PDE_waves-char}. Then: $$u(A)-u(B)+u(C)-u(D)=0$$
+    \begin{center}
+      \begin{minipage}{\linewidth}
+        \centering
+        \includestandalone[mode=image|tex,width=0.7\linewidth]{Images/waves_char}
+        \captionof{figure}{Characteristics of the waves equation.}
+        \label{PDE_waves-char}
+      \end{minipage}
+    \end{center}
+  \end{proposition}
 \end{multicols}
 \end{document}

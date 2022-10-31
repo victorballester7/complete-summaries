@@ -184,8 +184,8 @@
     Consider the model $\vf{y}\sim N_n(\vf{X\beta},\sigma^2\vf{I}_n)$ of \cref{LM_generalized}. We want to find the value $\vf{\hat\beta}$ that maximises the likelihood which in this case is: $$L(\vf{y};\vf\beta,\sigma^2)=\frac{1}{(\sqrt{2\pi\sigma^2})^n}\exp{-\frac{1}{2\sigma^2}{\norm{\vf{y}-\vf{X\beta}}}}$$
     Solving for $\vf{\hat\beta}$ and ${\hat\sigma}^2$ we get:
     \begin{align*}
-      \transpose{\vf{X}}\vf{X\hat\beta} & =\transpose{\vf{X}}\vf{y}                            \\
-      {\hat\sigma}^2                    & =\frac{1}{n}{\norm{\vf{e}}}^2=\frac{\mathrm{SSE}}{n}
+      \transpose{\vf{X}}\vf{X\hat\beta} & =\transpose{\vf{X}}\vf{y}                    \\
+      {\hat\sigma}^2                    & =\frac{1}{n}{\norm{\vf{e}}}^2=\frac{\SSE}{n}
     \end{align*}
     where $\vf{e}=\vf{y}-\vf{\hat{y}}=\vf{y}-\vf{X\hat{\beta}}$. Note that ${\hat\sigma}^2$ is biased and if we want an unbiased estimator we should use:
     $${s}^2=\frac{1}{n-k-1}{\norm{\vf{e}}}^2=:\MSE$$
@@ -265,7 +265,7 @@
   \subsubsection{Coefficient of determination}
   \begin{definition}
     Given the model of \cref{LM_generalized}, we define the \emph{coefficient of determination} $R$ as:
-    $$R^2:=\frac{\mathrm{SSR}}{\mathrm{SST}}:=1-\frac{\mathrm{SSE}}{\mathrm{SST}}:=\frac{\sum_{i=1}^n{(\hat{y}_i-\overline{y})}^2}{\sum_{i=1}^n{(y_i-\overline{y})}^2}$$ where $\mathrm{SSR}=\sum_{i=1}^n{(\hat{y}_i-\overline{y})}^2$ is the \emph{total sum of squares} and $\mathrm{SST}=\sum_{i=1}^n{(y_i-\overline{y})}^2$ is the \emph{regression sum of squares}. Furthermore, we can partition $\mathrm{SST}$ into $\mathrm{SST}=\mathrm{SSR}+\mathrm{SSE}$, where $\mathrm{SSE}$ is the \emph{error sum of squares}. That is: $$\sum_{i=1}^n{(y_i-\overline{y})}^2=\sum_{i=1}^n{(\hat{y}_i-\overline{y})}^2+\sum_{i=1}^n{(y_i-\hat{y}_i)}^2$$
+    $$R^2:=\frac{\SSR}{\SST}:=1-\frac{\SSE}{\SST}:=\frac{\sum_{i=1}^n{(\hat{y}_i-\overline{y})}^2}{\sum_{i=1}^n{(y_i-\overline{y})}^2}$$ where $\SSR=\sum_{i=1}^n{(\hat{y}_i-\overline{y})}^2$ is the \emph{regression sum of squares} and $\SST=\sum_{i=1}^n{(y_i-\overline{y})}^2$ is the \emph{total sum of squares}. Furthermore, we can partition $\SST$ into $\SST=\SSR+\SSE$, where $\SSE$ is the \emph{error sum of squares}. That is: $$\sum_{i=1}^n{(y_i-\overline{y})}^2=\sum_{i=1}^n{(\hat{y}_i-\overline{y})}^2+\sum_{i=1}^n{(y_i-\hat{y}_i)}^2$$
   \end{definition}
   \begin{lemma}
     Consider the model of \cref{LM_generalized}. Then, $R^2\leq 1$
@@ -274,7 +274,7 @@
     Given the simple model of \cref{LM_simple}, we have that $R^2=r^2$.
   \end{proposition}
   \begin{definition}
-    Given the model of \cref{LM_generalized}, we define the \emph{adjusted coefficient of determination} $R_{\mathrm{adj}}$ as: $${R_{\mathrm{adj}}}^2=1-\frac{\MSE}{\mathrm{MST}}:=1-\frac{n-1}{n-k-1}\frac{\mathrm{SSE}}{\mathrm{SST}}$$ where we have defined the \emph{total mean of squares} as $\mathrm{MST}=\frac{1}{n-1}\sum_{i=1}^n{(y_i-\overline{y})}^2$.
+    Given the model of \cref{LM_generalized}, we define the \emph{adjusted coefficient of determination} $R_{\mathrm{adj}}$ as: $${R_{\mathrm{adj}}}^2=1-\frac{\MSE}{\MST}:=1-\frac{n-1}{n-k-1}\frac{\SSE}{\SST}$$ where we have defined the \emph{total mean of squares} as $\MST=\frac{1}{n-1}\sum_{i=1}^n{(y_i-\overline{y})}^2$.
   \end{definition}
   \begin{lemma}
     Consider the model of \cref{LM_generalized}. The function ${R_{\mathrm{adj}}}^2(k)$ attains a maximum at $k=k_0$ which is the optimal number of variables we should consider for our model.
@@ -301,10 +301,19 @@
       \item $\frac{Q_j}{\sigma^2}\sim{\chi_{r_j}}$, $j=1,\ldots,k$.
     \end{enumerate}
   \end{theorem}
-  % POSAR QUE R^2-1 té distribució de Fisher.
   \subsubsection{Hypothesis testing}
   \begin{proposition}[Bonferroni's method]
-    Consider the model of \cref{LM_generalized} and suppose we want a confidence $k+1$-dimensional interval $I$ for $\vf{\beta}$ of confidence $1-\alpha$. Then, it suffices to take any interval $I_j$ for each $\beta_j$ of confidence $1-\frac{\alpha}{k+1}$ and let $I=I_0\times\cdots\times I_{k}$.
+    Consider the model $\vf{y}\sim N_n(\vf{X\beta},\sigma^2\vf{I}_n)$ of \cref{LM_generalized} and suppose we want a confidence $k+1$-dimensional interval $I$ for $\vf{\beta}$ of confidence $1-\alpha$. Then, it suffices to take any interval $I_j$ for each $\beta_j$ of confidence $1-\frac{\alpha}{k+1}$ and let $I=I_0\times\cdots\times I_{k}$.
+  \end{proposition}
+  \begin{theorem}
+    Let $\vf{y}\sim N_n(\vf{0},\sigma^2\vf{I}_n)$ be a random variable. Then:
+    $$\frac{\SSE}{\sigma^2}\sim{\chi_{n-k-1}}^2$$
+    Moreover if $\vf\beta_1:=\transpose{(\beta_1,\ldots,\beta_k)}=0$ we have:
+    $$\frac{\SSR}{\sigma^2}\sim{\chi_{k}}^2$$
+    Hence in this case we have that: $$\frac{\SSR/ k}{\SSE/(n-k-1)}\sim F_{k,n-k-1}$$
+  \end{theorem}
+  \begin{proposition}
+    Consider the model $\vf{y}\sim N_n(\vf{X\beta},\sigma^2\vf{I}_n)$ of \cref{LM_generalized} and suppose we want to test the hypothesis $\mathcal{H}_0:\vf\beta_1=\vf{0}$ versus $\mathcal{H}_1=\vf\beta_1\ne\vf{0}$. The statistic that we take is: $$F=\frac{\SSR/ k}{\SSE/(n-k-1)}\sim F_{k,n-k-1}$$
   \end{proposition}
 \end{multicols}
 \end{document}

@@ -7,14 +7,14 @@
             decorate,
             decoration={
                 markings,
-                mark=at position 0.333 with {\arrow[gray,scale=1.5]{stealth}},
-                mark=at position 0.666 with {\arrow[gray,scale=1.5]{stealth}}}}
+                mark=at position 0.333 with {\arrow[black,scale=1.5]{stealth}},
+                mark=at position 0.666 with {\arrow[black,scale=1.5]{stealth}}}}
       },decorated separatrices/.style={
         postaction={
             decorate,
             decoration={
                 markings,
-                mark=at position 0.5 with {\arrow[gray,scale=1.5]{stealth[reversed]}},
+                mark=at position 0.5 with {\arrow[black,scale=1.5]{stealth[reversed]}},
               }}
       }]
   \begin{axis}[
@@ -25,19 +25,25 @@
       ylabel={$y$},
       xlabel={$x$},
       %axis on top,
+      hide axis,
     ]
     \def\xmax{\pgfkeysvalueof{/pgfplots/xmax}}
     \def\xmin{\pgfkeysvalueof{/pgfplots/xmin}}
     \def\ymax{\pgfkeysvalueof{/pgfplots/ymax}}
     \def\ymin{\pgfkeysvalueof{/pgfplots/ymin}}
-    \draw[gray, thick,decorated separatrices] (\xmin,0) -- (0,0);
-    \draw[gray, thick,decorated separatrices] (0,0) --  (\xmax,0);
-    \draw[gray, thick,decorated separatrices] (0,\ymin) --(0,0);
-    \draw[gray, thick,decorated separatrices]  (0,\ymax) -- (0,0);
-    \addplot[thick,samples=100,gray,domain=1:\xmax,decorated separatrices]{exp(-x+2.3)+0.5};
-    \addplot[thick,samples=100,gray,domain=1:\xmax,decorated separatrices]{-exp(-x+2.3)-0.5};
-    \addplot[thick,samples=100,gray,domain=\xmin:0.01,decorated separatrices]{-exp(-x-1/x^2)/10};
-    \addplot[thick,samples=100,gray,domain=\xmin:0.01,decorated separatrices]{exp(-x-1/x^2)/10};
+    \draw[black, thick,decorated separatrices] (\xmin,0) -- (0,0);
+    \draw[black, thick,decorated separatrices] (0,0) --  (\xmax,0);
+    \draw[black, thick,decorated separatrices] (0,\ymin) --(0,0);
+    \draw[black, thick,decorated separatrices]  (0,\ymax) -- (0,0);
+    \addplot[thick,samples=100,black,domain=1:\xmax,decorated separatrices]{exp(-x+2.3)+0.5};
+    \addplot[thick,samples=100,black,domain=1:\xmax,decorated separatrices]{-exp(-x+2.3)-0.5};
+    \addplot[thick,samples=100,black,domain=\xmin:0.01,decorated separatrices]{-exp(-x-1/x^2)/10};
+    \addplot[thick,samples=100,black,domain=\xmin:0.01,decorated separatrices]{exp(-x-1/x^2)/10};
+    \def\N{60}
+    \def\ell{(\xmax-\xmin)/\N}
+    \addplot[thin,mark=*,only marks, mark size=\ell/2*0.852*2cm,black] coordinates {
+        (0,0)
+      };
   \end{axis}
 \end{tikzpicture}
 
