@@ -209,6 +209,7 @@
     We will have existence and unicity of solutions for the traffic flow equation if: $$q'(\rho_+)<\frac{[q]}{[\rho]}<q'(\rho_-)$$
   \end{lemma}
   \subsection{Wave equation}
+  \subsubsection{Solution of the non-homogeneous equation}
   \begin{proposition}
     Let $u:\RR^2\rightarrow\RR$ two times differentiable such that:
     \begin{multline*}
@@ -221,10 +222,11 @@
     Let $u_0,v_0:\RR\rightarrow\RR$ be functions. The solution $u(x,t)$ to the wave equation with initial conditions $u(x,0)=u_0(x)$ and $u_t(x,0)=v_0(x)$ is: $$u(x,t)=\frac{u_0(x-ct)+u_0(x+ct)}{2}+\frac{1}{2c}\int_{x-ct}^{x+ct}v_0(s)\dd{s}$$
   \end{proposition}
   \begin{theorem}
-    Let $u_0,v_0:\RR\rightarrow\RR$ and $f:\RR^2\rightarrow\RR$ be functions. The solution $u(x,t)$ to the wave equation with driven force $f$ and initial conditions $u(x,0)=u_0(x)$ and $u_t(x,0)=v_0(x)$ is:
+    Let $u_0,v_0:\RR\rightarrow\RR$ and $f:\RR^2\rightarrow\RR$ be functions. The wave equation with driven force $f$ and initial conditions $u(x,0)=u_0(x)$ and $u_t(x,0)=v_0(x)$ has existence and unicity of solutions and the solution $u(x,t)$ of this equation is:
     \begin{multline*}
       u(x,t)=\frac{u_0(x-ct)+u_0(x+ct)}{2}+\frac{1}{2c}\int_{x-ct}^{x+ct}v_0(s)\dd{s}+\\+\frac{1}{2c}\int_0^t\int_{x-c(t-\tau)}^{x+c(t-\tau)}f(s,\tau)\dd{s}\dd{\tau}
     \end{multline*}
+    If we think $u(t):x\rightarrow u(x,t)$, then we can write the expression above more compactly as: $$u(t)=\mathcal{S}'(t)u_0+\mathcal{S}(t)v_0+\int_0^t\mathcal{S}(t-\tau) f(\tau)\dd{\tau}$$ where the operator $\mathcal{S}(t)$ is defined as: $$\left[\mathcal{S}(t)\varphi\right](x)=\frac{1}{2c}\int_{x-ct}^{x+ct}\varphi(s)\dd{s}$$
   \end{theorem}
   \begin{theorem}
     Let $U\subset\RR^2$ be an open set, $u:U\rightarrow\RR$ be a good enough function such that it satisfies the wave equation with density $\rho(x,t)$, constant $k(x)$ and driven force $f(x,t)$. Then:
@@ -240,6 +242,10 @@
         \label{PDE_waves-char}
       \end{minipage}
     \end{center}
+  \end{proposition}
+  \subsubsection{Conservation of energy}
+  \begin{proposition}
+    Consider the wave equation $\rho u_{tt}-{(ku_x)}_x=0$ and assume the functions $u_0$, $v_0$ of the initial conditions have compact support. Then: $$\dv{}{t}\int_{-\infty}^\infty\left(\frac{1}{2}\rho{u_t}^2+\frac{1}{2}k{u_x}^2\right)\dd{x}=0$$ That is, the energy is conserved.
   \end{proposition}
 \end{multicols}
 \end{document}

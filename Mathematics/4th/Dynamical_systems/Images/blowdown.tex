@@ -9,12 +9,26 @@
                 markings,
                 mark=at position 0.333 with {\arrow[black,scale=1.5]{stealth}},
                 mark=at position 0.666 with {\arrow[black,scale=1.5]{stealth}}}}
+      },decorated curves rev/.style={
+        postaction={
+            decorate,
+            decoration={
+                markings,
+                mark=at position 0.333 with {\arrow[black,scale=1.5]{stealth[reversed]}},
+                mark=at position 0.666 with {\arrow[black,scale=1.5]{stealth[reversed]}}}}
+      },decorated separatrices rev/.style={
+        postaction={
+            decorate,
+            decoration={
+                markings,
+                mark=at position 0.5 with {\arrow[scale=1.5]{stealth[reversed]}},
+              }}
       },decorated separatrices/.style={
         postaction={
             decorate,
             decoration={
                 markings,
-                mark=at position 0.5 with {\arrow[black,scale=1.5]{stealth}},
+                mark=at position 0.5 with {\arrow[scale=1.5]{stealth}},
               }}
       }]
   \begin{axis}[
@@ -36,9 +50,22 @@
     \draw[black, thick,decorated separatrices] (0,0) --(0,\ymin);
     \draw[black, thick,decorated separatrices]  (0,0) -- (0,\ymax);
     \addplot[thick,samples=100,black,domain=\xmin:-0.45,decorated separatrices]{exp(x+1.8)+0.2};
-    \addplot[thick,samples=100,black,domain=\xmin:-0.45,decorated separatrices]{-exp(x+1.8)-0.2};
-    \addplot[thick,samples=100,black,domain=0:\xmax,decorated separatrices]{exp(x-1/x^2)/10};
-    \addplot[thick,samples=100,black,domain=0:\xmax,decorated separatrices]{-exp(x-1/x^2)/10};
+    \addplot[thick,samples=100,black,domain=\xmin:0,decorated separatrices]{-(-x)^0.75/2};
+    \addplot[thick,samples=10,black,domain=\xmin:0,decorated separatrices]{x};
+    \def\alph{1.1}
+    \def\beta{0.5}
+    \addplot[thick,samples=100,black,domain=\xmin:-0.1,decorated curves]{\alph*x+\beta/x};
+
+
+
+    \addplot[thick,samples=10,black,domain=0:\xmax,decorated separatrices rev]{x};
+    \addplot[thick,samples=10,black,domain=0:\xmax,decorated separatrices]{-x/2};
+    \addplot[thick,samples=10,black,domain=0:\xmax/2+0.01,decorated separatrices]{-2*x};
+    \addplot[thick,samples=100,black,domain=0.1:\xmax,decorated curves rev]{\alph*x+\beta/x};
+
+    \addplot[thick,black,smooth,decorated curves] coordinates {(0,0) (1,0.1) (2.25,0.3) (2.4,1.1) (2,1.5) (0.707,0.65) (0,0)};
+
+
     \def\N{60}
     \def\ell{(\xmax-\xmin)/\N}
     \addplot[thin,mark=*,only marks, mark size=\ell/2*0.852*2cm,black] coordinates {
@@ -46,5 +73,4 @@
       };
   \end{axis}
 \end{tikzpicture}
-
 \end{document}

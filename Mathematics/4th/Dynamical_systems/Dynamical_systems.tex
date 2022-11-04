@@ -94,6 +94,17 @@
       \right.
     \end{equation}
   \end{definition}
+  \subsubsection{Homogeneous systems}
+  \begin{definition}
+    We say that function $f:\RR^n\rightarrow\RR$ is \emph{homogeneous of degree $k$} if $\forall\lambda\in\RR$ we have:
+    $$f(\lambda x_1,\ldots,\lambda x_n)=\lambda^k f(x_1,\ldots,x_n)$$
+  \end{definition}
+  \begin{definition}
+    We say that differential system $\vf{x}'=\vf{f}(\vf{x})$ is \emph{homogeneous of degree $k$} if the components of $\vf{f}$ are homogeneous functions of degree $k$. That is, if $\vf{f}(\lambda \vf{x})=\lambda^k\vf{f}(\vf{x})$ $\forall \lambda\in \RR$.
+  \end{definition}
+  \begin{proposition}
+    The study of the global dynamics of a homogeneous system with only one equilibrium point (at the origin) is the same as the study of local dynamics at the origin.
+  \end{proposition}
   \subsection{Study of local dynamics}
   \subsubsection{Stable manifold and center manifold theorems}
   \begin{theorem}[The stable manifold theorem]
@@ -127,35 +138,40 @@
   \end{definition}
   \begin{definition}[Saddle-node bifurcation]
     The normal form of a \emph{saddle-node bifurcation} is: $$x'=x^2+\mu$$
-    \cref{DS_sn-trans-fork--bif} shows the qualitative behavior of that system\footnote{In these images, the red lies means that the point $(\mu,x)$ is repelling. The blue lines means that the point $(\mu,x)$ is attracting.}.
+    \cref{DS_sn} shows the qualitative behavior of that system\footnote{In these images, the red lies means that the point $(\mu,x)$ is repelling. The blue lines means that the point $(\mu,x)$ is attracting.}.
   \end{definition}
   \begin{definition}[Transcritical bifurcation]
     The normal form of a \emph{transcritical bifurcation} is: $$x'=x^2+\mu x$$
-    \cref{DS_sn-trans-fork--bif} shows a qualitative behavior of the stability of the equilibria.
+    \cref{DS_trans} shows a qualitative behavior of the stability of the equilibria.
   \end{definition}
   \begin{definition}[Pitchfork bifurcation]
     The normal form of a \emph{pitchfork bifurcation} is: $$x'=x^3+\mu x$$
-    \cref{DS_sn-trans-fork--bif} shows a qualitative behavior of the stability of the equilibria.
+    \cref{DS_fork} shows a qualitative behavior of the stability of the equilibria.
   \end{definition}
-  \begin{center}
-    \begin{minipage}{0.32\linewidth}
+  \begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.32\linewidth}
       \centering
       \includestandalone[mode=image|tex,width=\linewidth]{Images/sn-bif}
-      \captionof*{figure}{Saddle-node}
-    \end{minipage}\hfill
-    \begin{minipage}{0.32\linewidth}
+      \caption{Saddle-node}
+      \label{DS_sn}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.32\linewidth}
       \centering
       \includestandalone[mode=image|tex,width=\linewidth]{Images/trans-bif}
-      \captionof*{figure}{Transcritical}
-    \end{minipage}\hfill
-    \begin{minipage}{0.32\linewidth}
+      \caption{Transcritical}
+      \label{DS_trans}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.32\linewidth}
       \centering
       \includestandalone[mode=image|tex,width=\linewidth]{Images/fork-bif}
-      \captionof*{figure}{Pitchfork}
-    \end{minipage}
-    \captionof{figure}{Principal kinds of bifurcation in 1-dimensional systems}
-    \label{DS_sn-trans-fork--bif}
-  \end{center}
+      \caption{Pitchfork}
+      \label{DS_fork}
+    \end{subfigure}
+    \caption{Principal kinds of bifurcation in 1-dimensional systems}
+  \end{figure}
   \begin{theorem}
     Consider the system of \cref{DS_mu-system}. Then, it will have a saddle-node bifurcation at the origin if $\vf{f}(0,0)=0$, $\vf{f}_x(0,0)=0$, $\vf{f}_{xx}(0,0)\ne 0$ and $\vf{f}_\mu(0,0)\ne0$.
   \end{theorem}
@@ -165,7 +181,8 @@
   \begin{theorem}
     Consider the system of \cref{DS_mu-system}. Then, it will have a pitchfork bifurcation at the origin if $\vf{f}(0,0)=0$, $\vf{f}_x(0,0)=0$, $\vf{f}_{xx}(0,0)=0$, $\vf{f}_{xxx}(0,0)\ne 0$, $\vf{f}_\mu(0,0)=0$ and $\vf{f}_{x\mu}(0,0)\ne 0$.
   \end{theorem}
-  \begin{theorem}[Semi-hyperbolic singular points classification theorem]
+  \subsubsection{Non-hyperbolic equilibrium points}
+  \begin{theorem}[Semi-hyperbolic singular points classification theorem]\label{DS_thmA}
     Consider the differential system
     $$
       \left\{
@@ -183,7 +200,7 @@
     \begin{enumerate}
       \item If $m$ is odd and $a_m>0$, the origin is a repelling node.
       \item If $m$ is odd and $a_m<0$, the origin is a saddle.
-      \item If $m$ is even, the origin is a saddle-node (See \cref{DS_meven}).
+      \item If $m$ is even, the origin is a \emph{saddle-node} (See \cref{DS_meven}).
     \end{enumerate}
     \begin{figure}[H]
       \centering
@@ -205,7 +222,7 @@
   \begin{definition}
     A singular point of a differential system is called \emph{nilpotent} if the differential at this point is nilpotent.
   \end{definition}
-  \begin{theorem}[Nilpotent singular points classification theorem]
+  \begin{theorem}[Nilpotent singular points classification theorem]\label{DS_thmB}
     Consider the differential system
     $$
       \left\{
@@ -341,6 +358,69 @@
       \end{subfigure}
       \caption{Phase portraits of nilpotent singular points}
     \end{figure}
+  \end{theorem}
+  \begin{theorem}[Blow-up in polar coordinates]\label{DS_blowpolar}
+    Consider a planar differential system with an equilibrium at the origin such that its differential at $(0,0)$ is:
+    $$\begin{pmatrix}
+        0 & 0 \\
+        0 & 0
+      \end{pmatrix}$$
+    Hence, a change form cartesian coordinates to polar coordinates will transform the equations into the following ones:
+    $$
+      \left\{
+      \begin{aligned}
+        \dot{r}      & = \sum_{k=2}^\infty r^{k-1}f_{k}(\theta) \\
+        \dot{\theta} & = \sum_{k=2}^\infty r^{k-2}g_{k}(\theta)
+      \end{aligned}
+      \right.
+    $$
+    where $f_k(\theta)$ and $g_k(\theta)$ are trigonometric polynomials of degree $k$. The above system has the same phase portrait as:
+    $$
+      \left\{
+      \begin{aligned}
+        \dot{r}      & = \sum_{k=2}^\infty r^{k-2}f_{k}(\theta) \\
+        \dot{\theta} & = \sum_{k=2}^\infty r^{k-3}g_{k}(\theta)
+      \end{aligned}
+      \right.
+    $$
+    We are interested in the local behavior of the origin so we should first think this problem in the cylinder $(r,\theta)\in[0,\infty]\times[0,2\pi)$. The equilibrium points of that system at $r=0$ will be the isolated zeros of $g_3(\theta)$. Let $Z(g_3)$ be the set of such zeros. Now we want to study the behavior on each of these points. To do so, we can apply either Hartman's theorem, \cref{DS_thmA} or \cref{DS_thmB}. If none of these are applicable of some $\theta^*\in Z(g_3)$, we should repeat the procedure by doing another polar transformation centered at $\theta^*$\footnote{See \cref{DS_blowcarte} for a bettern solution to this problem.}. We can then represent all these local behavior by \emph{blowing-up} the origin to $S^1$ and once done, we should \emph{blow-down} until contract $S^1$ into the origin (See the example \cref{DS_blowup} for a better understanding).
+  \end{theorem}
+  \begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{\linewidth}
+      \centering
+      \includestandalone[mode=image|tex,width=\linewidth]{Images/cylinder}
+      \caption{System on the cylinder}
+    \end{subfigure}
+    \\
+    \begin{subfigure}[b]{0.48\linewidth}
+      \centering
+      \includestandalone[mode=image|tex,width=\linewidth]{Images/blowup}
+      \caption{Blow-up}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.48\linewidth}
+      \centering
+      \includestandalone[mode=image|tex,width=\linewidth]{Images/blowdown}
+      \caption{Blow-down}
+    \end{subfigure}
+    \caption{Blowing-up of a non-hyperbolic critical point. The kinds of equilibrium points in the cylinder (here $Z(g_3)=\{0,\frac{\pi}{4},\frac{\pi}{2}, \pi, \frac{5\pi}{4}, \frac{3\pi}{2}\}$) are three saddles, two saddle-node and one node. These are transformed in parabolic, hyperbolic and elliptic sectors when blowing-down the origin.}
+    \label{DS_blowup}
+  \end{figure}
+  \begin{corollary}[Blow-up in generalized polar coordinates]
+    If, in the above theorem, in a neighbourhood of the origin we have $x^\alpha \sim y^\beta$ where $\alpha,\beta>0$, then a better change of variables instead of the ordinary change to polars would be:
+    \begin{align*}
+      x & =r^\beta\cos\theta  \\
+      y & =r^\alpha\sin\theta
+    \end{align*}
+  \end{corollary}
+  \begin{theorem}[Blow-up in cartesian coordinates]\label{DS_blowcarte}
+    Consider a planar differential system with an equilibrium at the origin such that its differential at $(0,0)$ is:
+    $$\begin{pmatrix}
+        0 & 0 \\
+        0 & 0
+      \end{pmatrix}$$
+    We would like to do not a blow-up equally-weighted in all directions (as in the polar blow-up) but two blow-ups: one by leaving one axis undefined and the other one covering that axis left. Thus, if at the origin $x^\alpha \sim y^\beta$ where $\alpha,\beta>0$ we seek transformations of the form $(x,y)\rightarrow\left(x,\frac{y^\beta}{x^\alpha}\right)$, which is undefined at $x=0$, and transformations of the form $(x,y)\rightarrow\left(\frac{x^\alpha}{y^\beta},y\right)$, which is undefined at $y=0$. From here, we proceed as in \cref{DS_blowpolar}.
   \end{theorem}
   \subsection{Global dynamics in continuous systems}
   \subsection{Global dynamics in discrete systems}

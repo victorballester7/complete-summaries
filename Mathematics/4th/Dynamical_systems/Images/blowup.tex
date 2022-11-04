@@ -1,0 +1,86 @@
+\documentclass{standalone}
+\usepackage{../../../../preamble_formulas}
+
+\begin{document}
+\begin{tikzpicture}[decorated curves/.style={
+        postaction={
+            decorate,
+            decoration={
+                markings,
+                mark=at position 0.333 with {\arrow[black,scale=1.5]{stealth}},
+                mark=at position 0.666 with {\arrow[black,scale=1.5]{stealth}}}}
+      },decorated curves rev/.style={
+        postaction={
+            decorate,
+            decoration={
+                markings,
+                mark=at position 0.333 with {\arrow[black,scale=1.5]{stealth[reversed]}},
+                mark=at position 0.666 with {\arrow[black,scale=1.5]{stealth[reversed]}}}}
+      },decorated separatrices rev/.style={
+        postaction={
+            decorate,
+            decoration={
+                markings,
+                mark=at position 0.5 with {\arrow[scale=1.5]{stealth[reversed]}},
+              }}
+      },decorated separatrices/.style={
+        postaction={
+            decorate,
+            decoration={
+                markings,
+                mark=at position 0.5 with {\arrow[scale=1.5]{stealth}},
+              }}
+      },special/.style={
+        postaction={
+            decorate,
+            decoration={
+                markings,
+                mark=at position 0.6 with {\arrow[scale=1.5]{stealth}},
+              }}
+      }]
+  \begin{axis}[
+      axis lines=middle,
+      xmin=-4, xmax=4,
+      ymin=-4, ymax=4,
+      xtick=\empty, ytick=\empty,
+      ylabel={$y$},
+      xlabel={$x$},
+      axis equal image,
+      %axis on top,
+      hide axis,
+    ]
+    \def\xmax{\pgfkeysvalueof{/pgfplots/xmax}}
+    \def\xmin{\pgfkeysvalueof{/pgfplots/xmin}}
+    \def\ymax{\pgfkeysvalueof{/pgfplots/ymax}}
+    \def\ymin{\pgfkeysvalueof{/pgfplots/ymin}}
+    \draw[black, thick,decorated separatrices] (\xmin,0) -- (-1,0);
+    \draw[black, thick,decorated separatrices] (1,0) --  (\xmax,0);
+    \draw[black, thick,decorated separatrices] (0,-1) --(0,\ymin);
+    \draw[black, thick,decorated separatrices]  (0,1) -- (0,\ymax);
+
+    \addplot[thick,samples=100,black,domain=0:45,special]({cos(x)},{sin(x)});
+    \addplot[thick,samples=100,black,domain=45:90,special]({cos(x)},{sin(x)});
+    \addplot[thick,samples=100,black,domain=180:90,special]({cos(x)},{sin(x)});
+    \addplot[thick,samples=100,black,domain=225:180,special]({cos(x)},{sin(x)});
+    \addplot[thick,samples=100,black,domain=225:270,special]({cos(x)},{sin(x)});
+    \addplot[thick,samples=100,black,domain=360:270,special]({cos(x)},{sin(x)});
+
+    \addplot[thick,samples=100,black,domain=\xmin:-0.45,decorated separatrices]{exp(x+1.8)+0.2};
+    \def\gam{2}
+    \addplot[thick,samples=10,black,domain=\xmin:-1,decorated separatrices]{(\gam*(-sqrt(-x)+1))};
+    \addplot[thick,samples=10,black,domain=\xmin:-1/sqrt(2),decorated separatrices]{x};
+    \def\alph{1.1}
+    \def\beta{0.5}
+    \addplot[thick,samples=100,black,domain=\xmin:-0.1,decorated curves]{\alph*x+\beta/x};
+
+
+    \addplot[thick,black,smooth,decorated separatrices] coordinates {(1,0) (1.5,-0.75) (2.2,-2) (3,-3) (4,-4)};
+
+    \addplot[thick,black,smooth,decorated separatrices] coordinates {(1,0) (2.25,0.3) (2.5,1.1) (2,1.5) (0.707,0.707)};
+
+    \addplot[thick,samples=10,black,domain=1/sqrt(2):\xmax,decorated separatrices rev]{x};
+    \addplot[thick,samples=100,black,domain=0.1:\xmax,decorated curves rev]{\alph*x+\beta/x};
+
+  \end{axis}
+\end{tikzpicture}
+\end{document}
