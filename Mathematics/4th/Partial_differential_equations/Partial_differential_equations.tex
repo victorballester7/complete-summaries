@@ -4,7 +4,7 @@
 \begin{document}
 \renewcommand{\col}{\apl}
 \begin{multicols}{2}[\section{Partial differential equations}]
-  \subsection{PDE in Physics}
+  \subsection{PDEs in Physics}
   \subsubsection{Wave and membrane dynamics}
   \begin{proposition}[Wave equation]
     Consider a one-dimensional string of length $L$ and constant $k(x)$, $\rho$ be its linear density and $u(x,t)$ be the displacement of the point $x$ at the time $t$ from its equilibrium point. Then, the dynamics of the string are given by: $$\rho u_{tt}={(ku_x)}_x$$ If both $k$ and $\rho$ are constant, this equation is sometimes written as:
@@ -18,12 +18,12 @@
     \end{align*}
   \end{proposition}
   \begin{proposition}[Navier-Cauchy equation]
-    Consider a solid of mass density $\rho$ and $\mu$ and $\lambda$ are the so-called \emph{Lamé coefficients} that describe the material. If $\vf{u}(x,t)$ is the displacement vector of the point $x$ at the instant $t$, the equations that describes the deformation of the solid (\emph{elastodynamics}) is:
+    Consider a solid of mass density $\rho$ and let $\mu$ and $\lambda$ be the so-called \emph{Lamé coefficients} that describe the material. If $\vf{u}(x,t)$ is the displacement vector at the point $x$ and the instant $t$, the equation that describes the deformation of the solid (\emph{elastodynamics}) is:
     $$\rho\vf{u}_{tt}=\mu\laplacian\vf{u}+(\lambda+\mu)\grad(\divp{\vf{u}})$$
   \end{proposition}
   \subsubsection{Fluid dynamics}
   \begin{definition}
-    Given a vector field $\vf{u}(x,t)$, we define the \emph{material derivative operator as} as: $$\matdv{\vf{u}}{t}:=\vf{u}_t+(\vf{u}\cdot\grad)\vf{u}$$
+    Given a vector field $\vf{u}(x,t)$, we define the \emph{material derivative operator} as: $$\matdv{\vf{u}}{t}:=\vf{u}_t+(\vf{u}\cdot\grad)\vf{u}$$
   \end{definition}
   \begin{definition}
     An \emph{incompressible flow} is a flow in which the material density is constant.
@@ -88,7 +88,7 @@
     $$\vf{F}(\vf{x})=-Gm\int_{\Omega}\frac{\vf{x}-\vf{y}}{{\norm{\vf{x}-\vf{y}}}^3}\rho(\vf{y})\dd^3{\vf{y}}$$
   \end{proposition}
   \begin{proposition}
-    Consider a body $\Omega\subset\RR^3$ with a density of mass $\rho$. Then, $\vf{F}(\vf{x})=m\grad{u(\vf{x})}$ where $$u(\vf{x})=G\int_{\Omega}\frac{1}{\norm{\vf{x}-\vf{y}}}\rho(\vf{y})\dd^3{\vf{y}}$$ is the \emph{potential} created by the body $\Omega$ at the point $\vf{x}\in\RR^3$. Furthermore, if $\rho$ is regular enough, we have $\divp\vf{F}(\vf{x})=-4\pi\rho(\vf{x})$\footnote{That is, $\divp\vf{F}(\vf{x})=0$ $\forall\vf{x}\in\RR^3\setminus\Omega$}. Combining these two equation, we get: $$\laplacian u=-4\pi\rho$$ which the \emph{Poisson equation} (and also it is a \emph{elliptic equation}).
+    Consider a body $\Omega\subset\RR^3$ with a density of mass $\rho$. Then, $\vf{F}(\vf{x})=m\grad{u(\vf{x})}$ where $$u(\vf{x})=G\int_{\Omega}\frac{1}{\norm{\vf{x}-\vf{y}}}\rho(\vf{y})\dd^3{\vf{y}}$$ is the \emph{potential} created by the body $\Omega$ at the point $\vf{x}\in\RR^3$. Furthermore, if $\rho$ is regular enough, we have $\divp\vf{F}(\vf{x})=-4\pi\rho(\vf{x})$\footnote{That is, $\divp\vf{F}(\vf{x})=0$ $\forall\vf{x}\in\RR^3\setminus\Omega$.}. Combining these two equation, we get: $$\laplacian u=-4\pi\rho$$ which the \emph{Poisson equation} (and also it is a \emph{elliptic equation}).
   \end{proposition}
   \subsubsection{Diffusion and heat equations}
   \begin{proposition}[Fick's law of diffusion]
@@ -159,6 +159,24 @@
     Substituting $\vf{\Psi}=\sqrt{\rho}\exp{\ii \frac{S}{\hbar}}$ into the Schrödinger equation and taking the limit $\hbar\to 0$ in the resulting equation yield the Hamilton-Jacobi equation. Moreover, if we define $\vf{v}=\frac{\grad{S}}{m}$ from one real equation (from the original one complex equation) we get the continuous equation (\cref{PDE_continuous}) and from the other equation taking the limit $\hbar\to 0$ we get the Cauchy momentum equation (\cref{PDE_cauchy}).
   \end{proposition}
   \subsection{First order partial differential equations}
+  \subsubsection{Vector calculus}
+  \begin{theorem}[Fundamental lemma of calculus of variations]
+    Let $\Omega\subset\RR^n$ be a domain and $\vf{f}:\Omega\rightarrow\RR^m$ be a continuous function. If $$\dotsint_U \vf{f}(\vf{x})\dd{\vf{x}}=0$$ for any subset  $U\subseteq\Omega$, then $\vf{f}=\vf{0}$ in $\Omega$.
+  \end{theorem}
+  \begin{proposition}
+    Let $\Omega\subseteq\RR^3$ be a closed region and $f,g,k:\Omega\rightarrow\RR$ be functions of class $\mathcal{C}^1(\Omega)$. Then:
+    \begin{gather*}
+      \int_\Omega f\div(k\grad{g})                                =\int_{\Fr{\Omega}}fk\grad{g}\cdot\dd{\vf{S}} -\int_\Omega k\grad{f}\cdot\grad{g} \\
+      \int_\Omega \left(f\div(k\grad{g})-g\div(k\grad{f})\right)  =\int_{\Fr{\Omega}} k\left(f\grad{g}-g\grad{f}\right)\cdot\dd{\vf{S}}
+    \end{gather*}
+  \end{proposition}
+  \begin{corollary}
+    Let $\Omega\subseteq\RR^3$ be a closed region and $f,g,k:\Omega\rightarrow\RR$ be functions of class $\mathcal{C}^1(\Omega)$. Then:
+    \begin{gather*}
+      \int_\Omega f\laplacian{g}                              =\int_{\Fr{\Omega}}f\grad{g}\cdot\dd{\vf{S}} -\int_\Omega \grad{f}\cdot\grad{g} \\
+      \int_\Omega \left(f\laplacian{g}-g\laplacian{f}\right)  =\int_{\Fr{\Omega}} \left(f\grad{g}-g\grad{f}\right)\cdot\dd{\vf{S}}
+    \end{gather*}
+  \end{corollary}
   \subsubsection{Method of characteristics}
   \begin{proposition}[Method of characteristics]
     Consider the following quasilinear PDE
@@ -192,13 +210,13 @@
   \end{proposition}
   \begin{proposition}
     In the hypothesis of the traffic equation, an observer situated at $x(t)$ will observe a constant density $\rho(x(t),t)$ if $x'(t)=q'(\rho(x(t),t))$ (that is, if the frame of reference situated at $x(t)$ is moving at a speed of $q'(\rho(x(t),t))$)\footnote{Note that this
-      velocity may be different from the velocity at which an individual car moves.}. Therefore, $\rho$ is constant in each line of the form $x(t)=x_0+q'(\rho(x_0,0))t$ (\emph{characteristic line}) (see \cref{PDE_traffic-char}). This determines $\rho(x,t)$ provided that we already know the initial condition $\rho(x,0)$, $x\in\RR$. In other words, $\rho(x,t)$ is the solution $\xi$ of the density at the appropriate $x$-intercept of the line passing through $(x,t)$: $$\xi=\rho(x-q'(\xi)t,0)$$
+      velocity may be different from the velocity at which an individual car moves.}. Therefore, $\rho$ is constant in each line of the form $x(t)=x_0+q'(\rho(x_0,0))t$ (\emph{characteristic line}) (see \cref{PDE_traffic-char}). This determines $\rho(x,t)$ provided that we already know the initial condition $\rho_0(x):=\rho(x,0)$, $x\in\RR$. In other words, $\rho(x,t)$ is the solution $\xi$ of the density at the appropriate $x$-intercept of the line passing through $(x,t)$: $$\xi=\rho_0(x-q'(\xi)t)$$
   \end{proposition}
   \begin{center}
     \begin{minipage}{\linewidth}
       \centering
       \includestandalone[mode=image|tex,width=\linewidth]{Images/traffic_char}
-      \captionof{figure}{Characteristics of the traffic flow. In each line, the density $\rho$ is constant.}
+      \captionof{figure}{Characteristics of the traffic flow. In each line the density $\rho$ is constant.}
       \label{PDE_traffic-char}
     \end{minipage}
   \end{center}
@@ -222,7 +240,7 @@
     Let $u_0,v_0:\RR\rightarrow\RR$ be functions. The solution $u(x,t)$ to the wave equation with initial conditions $u(x,0)=u_0(x)$ and $u_t(x,0)=v_0(x)$ is: $$u(x,t)=\frac{u_0(x-ct)+u_0(x+ct)}{2}+\frac{1}{2c}\int_{x-ct}^{x+ct}v_0(s)\dd{s}$$
   \end{proposition}
   \begin{theorem}
-    Let $u_0,v_0:\RR\rightarrow\RR$ and $f:\RR^2\rightarrow\RR$ be functions. The wave equation with driven force $f$ and initial conditions $u(x,0)=u_0(x)$ and $u_t(x,0)=v_0(x)$ has existence and unicity of solutions and the solution $u(x,t)$ of this equation is:
+    Let $u_0,v_0:\RR\rightarrow\RR$ and $f:\RR^2\rightarrow\RR$ be functions. The solution to the wave equation with driven force $f$ and initial conditions $u(x,0)=u_0(x)$ and $u_t(x,0)=v_0(x)$ is:
     \begin{multline*}
       u(x,t)=\frac{u_0(x-ct)+u_0(x+ct)}{2}+\frac{1}{2c}\int_{x-ct}^{x+ct}v_0(s)\dd{s}+\\+\frac{1}{2c}\int_0^t\int_{x-c(t-\tau)}^{x+c(t-\tau)}f(s,\tau)\dd{s}\dd{\tau}
     \end{multline*}
@@ -247,5 +265,8 @@
   \begin{proposition}
     Consider the wave equation $\rho u_{tt}-{(ku_x)}_x=0$ and assume the functions $u_0$, $v_0$ of the initial conditions have compact support. Then: $$\dv{}{t}\int_{-\infty}^\infty\left(\frac{1}{2}\rho{u_t}^2+\frac{1}{2}k{u_x}^2\right)\dd{x}=0$$ That is, the energy is conserved.
   \end{proposition}
+  \begin{corollary}
+    The wave equation with drive force has existence and unicity of solutions.
+  \end{corollary}
 \end{multicols}
 \end{document}
