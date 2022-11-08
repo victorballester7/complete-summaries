@@ -18,32 +18,32 @@
     \end{align*}
   \end{proposition}
   \begin{proposition}[Navier-Cauchy equation]
-    Consider a solid of mass density $\rho$ and let $\mu$ and $\lambda$ be the so-called \emph{Lamé coefficients} that describe the material. If $\vf{u}(x,t)$ is the displacement vector at the point $x$ and the instant $t$, the equation that describes the deformation of the solid (\emph{elastodynamics}) is:
+    Consider a solid of mass density $\rho$ and let $\mu$ and $\lambda$ be the so-called \emph{Lamé coefficients} that describe the material. If $\vf{u}(\vf{x},t)$ is the displacement vector at the point $\vf{x}$ and the instant $t$, the equation that describes the deformation of the solid (\emph{elastodynamics}) is:
     $$\rho\vf{u}_{tt}=\mu\laplacian\vf{u}+(\lambda+\mu)\grad(\divp{\vf{u}})$$
   \end{proposition}
   \subsubsection{Fluid dynamics}
   \begin{definition}
-    Given a vector field $\vf{u}(x,t)$, we define the \emph{material derivative operator} as: $$\matdv{\vf{u}}{t}:=\vf{u}_t+(\vf{u}\cdot\grad)\vf{u}$$
+    Given a vector field $\vf{u}(\vf{x},t)$, we define the \emph{material derivative operator} as: $$\matdv{\vf{u}}{t}:=\vf{u}_t+(\vf{u}\cdot\grad)\vf{u}$$
   \end{definition}
   \begin{definition}
     An \emph{incompressible flow} is a flow in which the material density is constant.
   \end{definition}
   \begin{proposition}[Continuous equation]
-    Consider a fluid of density $\rho$ moving at a velocity $\vf{u}(x,t)$. The conservation of mass implies that the following equation (called \emph{continuous equation}) must hold:
+    Consider a fluid of density $\rho$ moving at a velocity $\vf{u}(\vf{x},t)$. The conservation of mass implies that the following equation (called \emph{continuous equation}) must hold:
     \begin{equation}\label{PDE_continuous}
       \rho_t+\divp(\rho\vf{u})=0
     \end{equation}
     If the fluid is incompressible, the previous equation becomes: $$\divp{\vf{u}}=0$$
   \end{proposition}
   \begin{proposition}[Cauchy momentum equation]
-    Consider an inviscid fluid of density $\rho$ moving at a velocity $\vf{u}(x,t)$ and undergoing a pressure of $p(x,t)$. The conservation of momentum implies that the following equation (called \emph{Cauchy momentum equation}) must hold:
+    Consider an inviscid fluid of density $\rho$ moving at a velocity $\vf{u}(\vf{x},t)$ and undergoing a pressure of $p(\vf{x},t)$. The conservation of momentum implies that the following equation (called \emph{Cauchy momentum equation}) must hold:
     \begin{equation}\label{PDE_cauchy}
       \rho\matdv{\vf{u}}{t}+\grad p=0
     \end{equation}
     If the fluid is incompressible, the previous equation becomes: $$\divp{\vf{u}}=0$$
   \end{proposition}
   \begin{theorem}[Inviscid flow]
-    Consider an incompressible inviscid flow of density $\rho$ moving at a velocity $\vf{u}(x,t)$ and undergoing a pressure of $p(x,t)$. The equations describing the dynamics of the flow are:
+    Consider an incompressible inviscid flow of density $\rho$ moving at a velocity $\vf{u}(\vf{x},t)$ and undergoing a pressure of $p(\vf{x},t)$. The equations describing the dynamics of the flow are:
     \begin{equation*}
       \left\{
       \begin{aligned}
@@ -63,7 +63,7 @@
     \end{equation*}
   \end{theorem}
   \begin{theorem}[Viscid flow]
-    Consider an incompressible viscid fluid of density $\rho$, viscosity $\eta$, moving at a velocity $\vf{u}(x,t)$ and undergoing a pressure of $p(x,t)$. The equations describing the dynamics of the flow are:
+    Consider an incompressible viscid fluid of density $\rho$, viscosity $\eta$, moving at a velocity $\vf{u}(\vf{x},t)$ and undergoing a pressure of $p(\vf{x},t)$. The equations describing the dynamics of the flow are:
     \begin{equation*}
       \left\{
       \begin{aligned}
@@ -88,7 +88,7 @@
     $$\vf{F}(\vf{x})=-Gm\int_{\Omega}\frac{\vf{x}-\vf{y}}{{\norm{\vf{x}-\vf{y}}}^3}\rho(\vf{y})\dd^3{\vf{y}}$$
   \end{proposition}
   \begin{proposition}
-    Consider a body $\Omega\subset\RR^3$ with a density of mass $\rho$. Then, $\vf{F}(\vf{x})=m\grad{u(\vf{x})}$ where $$u(\vf{x})=G\int_{\Omega}\frac{1}{\norm{\vf{x}-\vf{y}}}\rho(\vf{y})\dd^3{\vf{y}}$$ is the \emph{potential} created by the body $\Omega$ at the point $\vf{x}\in\RR^3$. Furthermore, if $\rho$ is regular enough, we have $\divp\vf{F}(\vf{x})=-4\pi\rho(\vf{x})$\footnote{That is, $\divp\vf{F}(\vf{x})=0$ $\forall\vf{x}\in\RR^3\setminus\Omega$.}. Combining these two equation, we get: $$\laplacian u=-4\pi\rho$$ which the \emph{Poisson equation} (and also it is a \emph{elliptic equation}).
+    Consider a body $\Omega\subset\RR^3$ with a density of mass $\rho$. Then, $\vf{F}(\vf{x})=m\grad{u(\vf{x})}$ where $$u(\vf{x})=G\int_{\Omega}\frac{1}{\norm{\vf{x}-\vf{y}}}\rho(\vf{y})\dd^3{\vf{y}}$$ is the \emph{potential} created by the body $\Omega$ at the point $\vf{x}\in\RR^3$. Furthermore, if $\rho$ is regular enough, we have $\divp\vf{F}(\vf{x})=-4\pi\rho(\vf{x})$\footnote{That is, $\divp\vf{F}(\vf{x})=0$ $\forall\vf{x}\in\RR^3\setminus\Omega$.}. Combining these two equation, we get: $$\laplacian u=-4\pi\rho$$ which is the \emph{Poisson equation} (and also it is a \emph{elliptic equation}).
   \end{proposition}
   \subsubsection{Diffusion and heat equations}
   \begin{proposition}[Fick's law of diffusion]
@@ -153,10 +153,10 @@
     The path taken by a physical system between times $t_1$ and $t_2$ and configurations $\vf{x}_1$ and $\vf{x}_2$ is the one for which the action is stationary (no change) to first order. Mathematically, $\delta \mathcal{S}=0$, where $\delta$ means a \emph{small change}. This value $S(\vf{x},t)$ of the action satisfies the \emph{Hamilton-Jacobi equation}: $$\pdv{S}{t}+\frac{1}{2m}{\norm{\grad S}}^2+V=0$$
   \end{proposition}
   \begin{proposition}[Schrödinger equation]
-    The \emph{Schrödinger equation} is a pde that governs the \emph{wave function} $\vf\Psi$, which describes the quantum state of an isolated quantum system, of a quantum-mechanical system. This is given by: $$\ii \hbar\pdv{\Psi}{t}=\left(-\frac{\hbar^2}{2m}\laplacian+V\right)\vf{\Psi}$$ where $m$ is the mass of the particle and $V$ is the potential in which the particle exists. Furthermore, $\abs{\Psi}^2$ is the probability density function of the position of the particle.
+    The \emph{Schrödinger equation} is a pde that governs the \emph{wave function} $\Psi$, which describes the quantum state of an isolated quantum system, of a quantum-mechanical system. This is given by: $$\ii \hbar\pdv{\Psi}{t}=\left(-\frac{\hbar^2}{2m}\laplacian+V\right){\Psi}$$ where $m$ is the mass of the particle and $V$ is the potential in which the particle exists. Furthermore, $\abs{\Psi}^2$ is the probability density function of the position of the particle.
   \end{proposition}
   \begin{proposition}
-    Substituting $\vf{\Psi}=\sqrt{\rho}\exp{\ii \frac{S}{\hbar}}$ into the Schrödinger equation and taking the limit $\hbar\to 0$ in the resulting equation yield the Hamilton-Jacobi equation. Moreover, if we define $\vf{v}=\frac{\grad{S}}{m}$ from one real equation (from the original one complex equation) we get the continuous equation (\cref{PDE_continuous}) and from the other equation taking the limit $\hbar\to 0$ we get the Cauchy momentum equation (\cref{PDE_cauchy}).
+    Substituting ${\Psi}=\sqrt{\rho}\exp{\ii \frac{S}{\hbar}}$ into the Schrödinger equation and taking the limit $\hbar\to 0$ in the resulting equation yield the Hamilton-Jacobi equation. Moreover, if we define $\vf{v}=\frac{\grad{S}}{m}$, from one real equation (from the original one complex equation) we get the continuous equation (\cref{PDE_continuous}) and from the imaginary equation taking the limit $\hbar\to 0$ we get the Cauchy momentum equation (\cref{PDE_cauchy}).
   \end{proposition}
   \subsection{First order partial differential equations}
   \subsubsection{Vector calculus}
@@ -221,7 +221,7 @@
     \end{minipage}
   \end{center}
   \begin{proposition}[Rankine-Hugoniot equation]
-    Let $x_s(t)$ be the position at time $t$ of a (jump) discontinuity in the function $\rho$. Then: $$\dv{x_s}{t}=\frac{[q]}{[\rho]}=\frac{{(\rho u)}_+-{(\rho u)}_-}{\rho_+-\rho_-}$$ where the notation $[x(t)]$ refers to: $$[x(t_0)]:=\lim_{t\to{t_0}^+}x(t)-\lim_{t\to{t_0}^-}x(t)=:x_+(t_0)-x_-(t_0)$$
+    Let $x_s(t)$ be the position at time $t$ of a (jump) discontinuity in the function $\rho$. Then: $$\dv{x_s}{t}=\frac{[q]}{[\rho]}=\frac{{(\rho u)}_+-{(\rho u)}_-}{\rho_+-\rho_-}$$ where the notation $[x(t)]$ refers to: $$[x(t_0)]:=x_+(t_0)-x_-(t_0):=\lim_{t\to{t_0}^+}x(t)-\lim_{t\to{t_0}^-}x(t)$$
   \end{proposition}
   \begin{lemma}[Entropy condition]
     We will have existence and unicity of solutions for the traffic flow equation if: $$q'(\rho_+)<\frac{[q]}{[\rho]}<q'(\rho_-)$$
