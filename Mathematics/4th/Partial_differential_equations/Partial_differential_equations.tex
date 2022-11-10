@@ -11,7 +11,7 @@
     \begin{equation}\label{PDE_waveeq}
       u_{tt}=c^2u_{xx}
     \end{equation}
-    This kind of equations are called \emph{hyperbolic equations}. The solution $u(x,t)$ to the wave equation with boundary conditions $u(x,0)=f(x)$, $u_t(x,0)=g(x)$ and $u(0,t)=u(L,t)=0$ is: $$u(x,t)=\sum_{n=0}^\infty \sin\left(\frac{\pi n x}{L}\right)\left[a_n\cos\left(\frac{\pi n c}{L}t\right)+ b_n\sin\left( \frac{\pi n c}{L}t\right)\right]$$ where:
+    These kind of equations are called \emph{hyperbolic equations}. The solution $u(x,t)$ to the wave equation with boundary conditions $u(x,0)=f(x)$, $u_t(x,0)=g(x)$ and $u(0,t)=u(L,t)=0$ is: $$u(x,t)=\sum_{n=0}^\infty \sin\left(\frac{\pi n x}{L}\right)\left[a_n\cos\left(\frac{\pi n c}{L}t\right)+ b_n\sin\left( \frac{\pi n c}{L}t\right)\right]$$ where:
     \begin{align*}
       a_n & =\frac{1}{L}\int_{-L}^Lf(x)\cos\left(\frac{\pi n x}{L}\right)\dd{x}       \\
       b_n & =\frac{1}{\pi n c}\int_{-L}^Lg(x)\sin\left(\frac{\pi n x}{L}\right)\dd{x}
@@ -40,7 +40,6 @@
     \begin{equation}\label{PDE_cauchy}
       \rho\matdv{\vf{u}}{t}+\grad p=0
     \end{equation}
-    If the fluid is incompressible, the previous equation becomes: $$\divp{\vf{u}}=0$$
   \end{proposition}
   \begin{theorem}[Inviscid flow]
     Consider an incompressible inviscid flow of density $\rho$ moving at a velocity $\vf{u}(\vf{x},t)$ and undergoing a pressure of $p(\vf{x},t)$. The equations describing the dynamics of the flow are:
@@ -99,7 +98,7 @@
     In particular, if $D=\const$, then we get $\pdv{u}{t}=D\laplacian{u}$.
   \end{proposition}
   \begin{proposition}[Fourier's law of diffusion]
-    Consider a material with \emph{thermal conductivity} $k$, $\vf{q}$ be the \emph{heat flux} and $T$ its temperature. Then, \emph{Fourier's law} states that: $$\vf{q}=-k\grad{T}$$
+    Consider a material with \emph{thermal conductivity} $k$, $\vf{q}$ be the \emph{heat flux} and $u(x,t)$ its temperature. Then, \emph{Fourier's law} states that: $$\vf{q}=-k\grad{u}$$
   \end{proposition}
   \begin{proposition}[Heat equation]
     Consider a material with thermal conductivity $k$ and $u$ be its temperature. Then, the temperature of the material satisfies: $$\pdv{u}{t}=\frac{1}{c\rho}\divp\left(k\grad{u}\right)$$
@@ -140,14 +139,14 @@
   \end{definition}
   \begin{proposition}[Fermat's principle]
     \emph{Fermat's principle} states that the path taken by a ray between two given points $a$ and $b$ is the path that can be traveled in the least time. Mathematically, we want to minimize the functional: $$\mathcal{T}(\vf{x})=\int_a^b\frac{\abs{\dd{\vf{x}}}}{v(\vf{x})}$$
-    So we shall solve the equation $\delta \mathcal{T}=0$, which is equivalent to solve: $$\int_a^bn(\vf{x})\dd{s}$$ where $s$ is the arc-length parameter. From the Euler-Lagrange equations, we get the following ode: $$\dv{}{s}\left(n\dv{\vf{x}}{s}\right)=\grad{n}$$
+    So we shall solve the equation $\delta \mathcal{T}=0$, which is equivalent to solve: $$\delta\int_a^bn(\vf{x})\dd{s}=0$$ where $s$ is the arc-length parameter. From the Euler-Lagrange equations, we get the following ode: $$\dv{}{s}\left(n\dv{\vf{x}}{s}\right)=\grad{n}$$
   \end{proposition}
   \begin{proposition}[Eikonal equation]
     The time $T(x)$ taken by the light to travel from a fixed point $x_0$ to $x$ in a medium of refractive index $n$ is given by: $${\norm{\grad{T}}}^2=n^2$$
   \end{proposition}
   \begin{definition}
     The \emph{action} $\mathcal{S}$ of a physical system is defined as the integral of the Lagrangian $L:=T-V$ between two instants of time $t_1$ and $t_2$. That is: $$\mathcal{S}(\vf{x},t)=\int_{t_1}^{t_2}L(\vf{x}(t),\vf{\dot{x}}(t),t)\dd{t}=\int_{t_1}^{t_2}\left(\frac{1}{2}m{\norm{\vf{\dot{x}}}}^2-V(\vf{x})\right)\dd{t}$$
-    where $m$ is the mass of the particle and $V$ is the potential energy of the particle.
+    where $m$ is the mass of the particle, $T$ is the kinetic energy of the particle and $V$ is its potential energy.
   \end{definition}
   \begin{proposition}[Principle of least action]
     The path taken by a physical system between times $t_1$ and $t_2$ and configurations $\vf{x}_1$ and $\vf{x}_2$ is the one for which the action is stationary (no change) to first order. Mathematically, $\delta \mathcal{S}=0$, where $\delta$ means a \emph{small change}. This value $S(\vf{x},t)$ of the action satisfies the \emph{Hamilton-Jacobi equation}: $$\pdv{S}{t}+\frac{1}{2m}{\norm{\grad S}}^2+V=0$$
@@ -229,7 +228,7 @@
   \subsection{Wave equation}
   \subsubsection{Solution of the non-homogeneous equation}
   \begin{proposition}
-    Let $u:\RR^2\rightarrow\RR$ two times differentiable such that:
+    Let $u:\RR^2\rightarrow\RR$ be a two-times differentiable function such that:
     \begin{multline*}
       \left.\int_{x_1}^{x_2}\rho u_t\dd{t}\right|_{t=t_2}-\left.\int_{x_1}^{x_2}\rho u_t\dd{t}\right|_{t=t_1}=\left.\int_{t_1}^{t_2}ku_x\dd{t}\right|_{x=x_2}-\\-\left.\int_{t_1}^{t_2}ku_x\dd{t}\right|_{x=x_1}+\int_{t_1}^{t_2}\int_{x_1}^{x_2}f(x,t)\dd{x}\dd{t}
     \end{multline*}
