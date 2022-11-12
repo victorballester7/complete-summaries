@@ -103,15 +103,16 @@
     We say that $A\subseteq\RR^n$ is \emph{Lebesgue measurable} (or simply \emph{measurable}) if $\forall \varepsilon>0$, there exists an open set $U\supseteq A$ such that $\om{U\setminus A}<\varepsilon$. We denote by $\mathcal{M}(\RR^n)$ the set of all Lebesgue measurable sets of $\RR^n$ and by $\m{}$ the restriction of $\om{}$ to ${\mathcal{M}(\RR^n)}$.
   \end{definition}
   \begin{theorem}
-    $\mathcal{M}(\RR^n)$ is a $\sigma$-algebra and $m:\mathcal{M}(\RR^n)\rightarrow[0,\infty]$ is a measure (called \emph{Lebesgue measure}) that satisfies:
+    $\mathcal{M}(\RR^n)$ is a $\sigma$-algebra and $\m{\cdot}:\mathcal{M}(\RR^n)\rightarrow[0,\infty]$ is a measure (called \emph{Lebesgue measure}) that satisfies:
     \begin{enumerate}
       \item The open sets, closed sets and null sets are in $\mathcal{M}(\RR^n)$.
       \item Each interval $I\subseteq \RR^n$ is measurable and $\m{I}=\vol(I)$.
       \item If $A\in\mathcal{M}(\RR^n)$ and $x\in\RR^n$, then $A+x,-A\in\mathcal{M}(\RR^n)$ and $\m{A+x}=\m{-A}=\m{A}$.
       \item If $A\in\mathcal{M}(\RR^n)$:
             \begin{align*}
-              \m{A} & =\inf\{\m{U}:A\subseteq U \subseteq\RR^n, U\text{ open}\}  \\
-                    & =\sup\{\m{C}:C\subseteq A\subseteq\RR^n, C\text{ closed}\}
+              \m{A} & =\inf\{\m{U}:A\subseteq U \subseteq\RR^n, U\text{ open}\}   \\
+                    & =\sup\{\m{C}:C\subseteq A\subseteq\RR^n, C\text{ closed}\}  \\
+                    & =\sup\{\m{K}:K\subseteq A\subseteq\RR^n, K\text{ compact}\}
             \end{align*}
     \end{enumerate}
   \end{theorem}
@@ -166,7 +167,7 @@
     A function $g:\RR\rightarrow\RR$ is \emph{Borel measurable} if $\{x\in\RR^n:g(x)> r\}\in \mathcal{B}(\RR^n)$ $\forall r\in\RR$.
   \end{definition}
   \begin{proposition}
-    Let $f:\RR\rightarrow\RR$ be a Lebesgue measurable function and $f:\RR\rightarrow\RR$ be a Borel measurable function. Then, $g\circ f$ is Lebesgue measurable.
+    Let $f:\RR\rightarrow\RR$ be a Lebesgue measurable function and $g:\RR\rightarrow\RR$ be a Borel measurable function. Then, $g\circ f$ is Lebesgue measurable.
   \end{proposition}
   \begin{definition}
     Let $f$ be a measurable function. We define the following measurable functions:
@@ -217,7 +218,7 @@
     Let $E\subseteq\RR^n$ be a measurable set, $f\geq 0$ be a non-negative measurable function such that $\exists (f_m)\geq 0$ with $f_m\nearrow f$. Then: $$\int_Ef(x)\dd{x}=\lim_{m\to\infty}\int_Ef_m(x)\dd{x}$$
   \end{theorem}
   \begin{proposition}
-    Let $E\subseteq\RR^n$ be a measurable set, $f, g, (f_m)\geq 0$ be non-negative measurable functions. Then:
+    Let $E\subseteq\RR^n$ be a measurable set with $\m{E}>0$, $f, g, (f_m)\geq 0$ be non-negative measurable functions. Then:
     \begin{enumerate}
       \item $\displaystyle\int_E (f+g)(x)\dd{x}=\int_Ef(x)\dd{x}+\int_Eg(x)\dd{x}$
       \item $\displaystyle\int_E\sum_{m=1}^\infty f_m(x)\dd{x}=\sum_{m=1}^\infty\int_E f_m(x)\dd{x}$
@@ -320,7 +321,7 @@
     \begin{enumerate}
       \item $Mf$ is measurable.
       \item $Mf\almoste{<}\infty$.
-      \item $\displaystyle\m{x\in\RR^n : (Mf)(x) > \alpha} \leq \frac{A}{\alpha}\int_{\mathbf{R}^n} |f(x)|\dd{x}$.
+      \item $\displaystyle\m{x\in\RR^n : (Mf)(x) > \alpha} \leq \frac{A}{\alpha}\int_{\RR^n} \abs{f(x)}\dd{x}$.
     \end{enumerate}
   \end{theorem}
   \begin{theorem}[Lebesgue differentiation theorem]
@@ -329,14 +330,14 @@
   \begin{proposition}
     Let $f\in \mathcal{L}^1(\RR^n)$ and suppose $Mf\in \mathcal{L}^1(\RR^n)$. Then, $f=0$.
   \end{proposition}
-  \subsubsection{Fubini-Tonell theorem}
+  \subsubsection{Fubini-Tonelli theorem}
   \begin{definition}
     Let $E\subseteq\RR^{p+q}$ and $y\in\RR^q$. We define the \emph{section} of $E$ at $y$ as: $$E(y):=\{x\in\RR^p:(x,y\in E)\}$$
   \end{definition}
   \begin{proposition}
     Let $E,F,E_k\subseteq\RR^{p+q}$, $k\in\NN$, and $y\in\RR^q$. Then:
     \begin{enumerate}
-      \item If $E= A\times B$, with $A\subseteq \RR^p$ and $B\subseteq \RR^q$, then $E(y)=A$ if $y\in B$ and $E(y)=\varepsilon$ if $y\notin B$.
+      \item If $E= A\times B$, with $A\subseteq \RR^p$ and $B\subseteq \RR^q$, then $E(y)=A$ if $y\in B$ and $E(y)=\varnothing$ if $y\notin B$.
       \item $E\cap F=\varnothing\implies E(y)\cap F(y)=\varnothing$.
       \item \hfill\begin{enumerate}
               \item $\displaystyle\left(\bigcap_{k=1}^\infty E_k\right)(y)=\bigcap_{k=1}^\infty E_k(y)$
@@ -510,7 +511,7 @@
   \begin{lemma}[Hölder's inequality]
     Let $E\subseteq\RR^n$ be a measurable set, $1\leq p,q\leq \infty$ be such that $\frac{1}{p}+\frac{1}{q}=1$ and ${f}\in L^p(E)$, ${g}\in L^q(E)$. Then:
     $$\norm{{fg}}_1\leq\norm{{f}}_p\norm{{g}}_q$$
-    And the equality holds if and only if $\exists \alpha,\beta\in\RR_{\geq 0}$ such that $\alpha{\norm{{f}}}^p\almoste{=}\beta{\norm{{g}}}^q$.
+    And the equality holds if and only if $\exists \alpha,\beta\in\RR_{\geq 0}$ such that $\alpha{\abs{{f}}}^p\almoste{=}\beta{\abs{{g}}}^q$.
   \end{lemma}
   \begin{proposition}
     Let $E\subseteq\RR^n$ be a measurable set and $1\leq p<\infty$. The set $L^p$ is a normed vector space with the norm: $$\norm{{f}}_p:={\left(\int_E\abs{{f}}^p\right)}^{1/p}\qquad\forall{f}\in L^p$$

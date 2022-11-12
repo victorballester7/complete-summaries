@@ -93,22 +93,34 @@
   \begin{method}[Characteristic equation]
     Consider the following ode of order $n$ of constant coefficients:
     \begin{equation}\label{DE_char}
-      a_n x^{(n)} + a_{n-1}x^{(n-1)} + \cdots + a_1 x' + a_0 x = 0
+      x^{(n)} + a_{n-1}x^{(n-1)} + \cdots + a_1 x' + a_0 x = 0
     \end{equation}
-    We define the \emph{characteristic equation} of that system as the equation: $$p(r):=a_n r^n + a_{n-1}r^{n-1} + \cdots + a_1 r + a_0 = 0$$
+    We define the \emph{characteristic equation} of that system as the equation: $$p(r):=r^n + a_{n-1}r^{n-1} + \cdots + a_1 r + a_0 = 0$$
     In order to find the solution of this ode, we need to find the solutions to $p(r)=0$. So suppose $p$ has $s$ distinct real roots and $2(m-s)$ distinct complex roots.
     $$\lambda_1,\ldots,\lambda_s,\lambda_{s+1},\overline{\lambda_{s+1}},\ldots,\lambda_{m},\overline{\lambda_m}$$
     Here, $\lambda_i\in\RR$ $\forall i=1,\ldots,s$ and $\lambda_{i}=\alpha_i+\ii\beta_i\in\CC$ $\forall i=s+1,\ldots,m$. Assume, each of these roots have multiplicity $k_i\in\NN$. Then, the general solution to \cref{DE_char} is:
     \begin{multline*}
-      \varphi(t)=\sum_{i=1}^s\left(c_{i,1}+c_{i,2}t+\cdots+c_{i,k_i}t^{k_i-1}\right)\exp{\lambda_i t}+\\
-      +\sum_{i=s+1}^m\sum_{j=1}^{k_i}c_{i,j}t^{j-1}\exp{\alpha_i t}\left(\cos(\beta_i t)+\sin(\beta_i t)\right)
+      \varphi(t)=\sum_{i=1}^s\left(c_{i,0}+c_{i,1}t+\cdots+c_{i,k_i-1}t^{k_i-1}\right)\exp{\lambda_i t}+\\
+      +\sum_{i=s+1}^m\sum_{j=0}^{k_i-1}t^{j}\exp{\alpha_i t}\left(c_{i,j,1}\cos(\beta_i t)+c_{i,j,2}\sin(\beta_i t)\right)
     \end{multline*}
-    where $c_{i,j}\in\RR$ are constants.
+    where $c_{i,j,k}\in\RR$ are constants.
   \end{method}
+  \begin{proposition}
+    Consider a system of the form \cref{DE_char} which is equivalent to: $$\vf{x}'=
+      \begin{pmatrix}
+        0      & 1      & 0      & \cdots & 0        \\
+        0      & 0      & 1      & \ddots & \vdots   \\
+        \vdots & \vdots & \ddots & \ddots & 0        \\
+        0      & 0      & \cdots & 0      & 1        \\
+        -a_0   & -a_1   & -a_2   & \cdots & -a_{n-1}
+      \end{pmatrix}
+      =:\vf{Ax}$$
+    Then, the characteristic equation is precisely the characteristic polynomial of $\vf{A}$.
+  \end{proposition}
   \begin{corollary}
     Consider the following ode of order $n$ of constant coefficients:
     \begin{equation}\label{DE_char2}
-      x'' + px' q = 0
+      x'' + px' + q = 0
     \end{equation}
     Let $\lambda_1,\lambda_2$ be the roots of the polynomial $p(r)=r^2+pr+q$.
     Then, the general solution to \cref{DE_char2} is:
@@ -837,32 +849,32 @@
   \begin{definition}
     Let $U\subseteq \RR^2$ be an open set, $\vf{f}:U\rightarrow\RR^2$ be a vector field of class $\mathcal{C}^1$ and $\vf{p}\in U$ be a critical point of $\vf{f}$. Suppose $\sigma(\vf{Df}(\vf{p}))=\{\lambda_1,\lambda_2\}$. We say that $\vf{p}$ is a
     \begin{itemize}
-      \item \emph{stable node} if $\lambda_1,\lambda_2\in\RR_{<0}$ and $\lambda_1\ne\lambda_2$.
-      \item \emph{unstable node} if $\lambda_1,\lambda_2\in\RR_{>0}$ and $\lambda_1\ne\lambda_2$.
-      \item \emph{saddle point} if $\lambda_1,\lambda_2\in\RR$ and $\lambda_1\lambda_2<0$.
-      \item \emph{stable star} if $\lambda_1,\lambda_2\in\RR_{<0}$, $\lambda_1=\lambda_2$ and $\vf{Df}(\vf{p})\sim
-              \begin{pmatrix}
-                \lambda_1 & 0         \\
-                0         & \lambda_1
-              \end{pmatrix}$.
-      \item \emph{unstable star} if $\lambda_1,\lambda_2\in\RR_{>0}$, $\lambda_1=\lambda_2$ and $\vf{Df}(\vf{p})\sim
-              \begin{pmatrix}
-                \lambda_1 & 0         \\
-                0         & \lambda_1
-              \end{pmatrix}$.
+      \item \emph{stable node} if $\lambda_1,\lambda_2\in\RR_{<0}$ and $\lambda_1\ne\lambda_2$ (see \cref{DE_linear-a}).
       \item \emph{stable degenerated node} if $\lambda_1,\lambda_2\in\RR_{<0}$, $\lambda_1=\lambda_2$ and $\vf{Df}(\vf{p})\sim
               \begin{pmatrix}
                 \lambda_1 & 0         \\
                 1         & \lambda_1
-              \end{pmatrix}$.
+              \end{pmatrix}$ (see \cref{DE_linear-b}).
+      \item \emph{stable star} if $\lambda_1,\lambda_2\in\RR_{<0}$, $\lambda_1=\lambda_2$ and $\vf{Df}(\vf{p})\sim
+              \begin{pmatrix}
+                \lambda_1 & 0         \\
+                0         & \lambda_1
+              \end{pmatrix}$ (see \cref{DE_linear-c}).
+      \item \emph{unstable node} if $\lambda_1,\lambda_2\in\RR_{>0}$ and $\lambda_1\ne\lambda_2$ (see \cref{DE_linear-d}).
       \item \emph{unstable degenerated node} if $\lambda_1,\lambda_2\in\RR_{>0}$, $\lambda_1=\lambda_2$ and $\vf{Df}(\vf{p})\sim
               \begin{pmatrix}
                 \lambda_1 & 0         \\
                 1         & \lambda_1
-              \end{pmatrix}$.
-      \item \emph{stable focus} (or \emph{sink}) if $\lambda_1,\lambda_2\in\CC$ and $\Re(\lambda_1)<0$.
-      \item \emph{unstable focus} (or \emph{source}) if $\lambda_1,\lambda_2\in\CC$ and $\Re(\lambda_1)>0$.
-      \item \emph{center} if $\lambda_1,\lambda_2\in\CC$, $\Re(\lambda_1)=0$ and $\vf{p}$ is surrounded by periodic orbits.
+              \end{pmatrix}$ (see \cref{DE_linear-e}).
+      \item \emph{unstable star} if $\lambda_1,\lambda_2\in\RR_{>0}$, $\lambda_1=\lambda_2$ and $\vf{Df}(\vf{p})\sim
+              \begin{pmatrix}
+                \lambda_1 & 0         \\
+                0         & \lambda_1
+              \end{pmatrix}$ (see \cref{DE_linear-f}).
+      \item \emph{saddle point} if $\lambda_1,\lambda_2\in\RR$ and $\lambda_1\lambda_2<0$ (see \cref{DE_linear-j}).
+      \item \emph{stable focus} (or \emph{sink}) if $\lambda_1,\lambda_2\in\CC$ and $\Re(\lambda_1)<0$ (see \cref{DE_linear-h}).
+      \item \emph{unstable focus} (or \emph{source}) if $\lambda_1,\lambda_2\in\CC$ and $\Re(\lambda_1)>0$ (see \cref{DE_linear-i}).
+      \item \emph{center} if $\lambda_1,\lambda_2\in\CC$, $\Re(\lambda_1)=0$ and $\vf{p}$ is surrounded by periodic orbits (see \cref{DE_linear-g}).
     \end{itemize}
   \end{definition}
   \begin{definition}
@@ -1018,6 +1030,76 @@
       \item If $\vf{p}$ is negatively stable, then $\Re(\lambda)\geq 0$ $\forall\lambda\in\sigma(\vf{Df}(\vf{p}))$.
     \end{enumerate}
   \end{theorem}
+  \begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.3\linewidth}
+      \centering
+      \includestandalone[mode=image|tex,width=\linewidth]{Images/linear-a}
+      \caption{}
+      \label{DE_linear-a}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.3\linewidth}
+      \centering
+      \includestandalone[mode=image|tex,width=\linewidth]{Images/linear-b}
+      \caption{}
+      \label{DE_linear-b}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.3\linewidth}
+      \centering
+      \includestandalone[mode=image|tex,width=\linewidth]{Images/linear-c}
+      \caption{}
+      \label{DE_linear-c}
+    \end{subfigure}\\
+    \begin{subfigure}[b]{0.3\linewidth}
+      \centering
+      \includestandalone[mode=image|tex,width=\linewidth]{Images/linear-d}
+      \caption{}
+      \label{DE_linear-d}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.3\linewidth}
+      \centering
+      \includestandalone[mode=image|tex,width=\linewidth]{Images/linear-e}
+      \caption{}
+      \label{DE_linear-e}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.3\linewidth}
+      \centering
+      \includestandalone[mode=image|tex,width=\linewidth]{Images/linear-f}
+      \caption{}
+      \label{DE_linear-f}
+    \end{subfigure}\\
+    \begin{subfigure}[b]{0.3\linewidth}
+      \centering
+      \includestandalone[mode=image|tex,width=\linewidth]{../../4th/Dynamical_systems/Images/nilpot-e}
+      \caption{}
+      \label{DE_linear-g}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.3\linewidth}
+      \centering
+      \includestandalone[mode=image|tex,width=\linewidth]{../../4th/Dynamical_systems/Images/nilpot-g}
+      \caption{}
+      \label{DE_linear-h}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.3\linewidth}
+      \centering
+      \includestandalone[mode=image|tex,width=\linewidth]{../../4th/Dynamical_systems/Images/nilpot-f}
+      \caption{}
+      \label{DE_linear-i}
+    \end{subfigure}\\
+    \begin{subfigure}[b]{0.3\linewidth}
+      \centering
+      \includestandalone[mode=image|tex,width=\linewidth]{Images/linear-j}
+      \caption{}
+      \label{DE_linear-j}
+    \end{subfigure}
+    \caption{Phase portraits of hyperbolic singular points}
+  \end{figure}
   \subsection{Qualitative theory of planar differential systems}
   \subsubsection{Polynomial vectors fields}
   \begin{definition}

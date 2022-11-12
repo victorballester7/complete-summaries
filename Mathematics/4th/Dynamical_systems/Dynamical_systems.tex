@@ -13,7 +13,7 @@
       \item $\Pi(x,0)=x$ $\forall x\in X$.
       \item $\Pi(\Pi(t,x),s)=\Pi(x,t+s)$ $\forall s,t\in G$ and $\forall x\in X$.
     \end{itemize}
-    We say that a dynamical system $(X,G,\Pi)$ is \emph{discrete} if $G=\ZZ$ and we say that it is \emph{continuous} if $G=\RR$.
+    We say that a dynamical system $(X,G,\Pi)$ is \emph{discrete} if $G=\ZZ$ and we say that it is \emph{continuous} if $G=\RR$. If we have defined our system for $G_{\geq 0}$, we will say that we have a \emph{semidynamical system}.
   \end{definition}
   \begin{definition}
     Let $(X,G,\Pi)$ be a dynamical system and $x\in X$. We define the \emph{orbit} of $x$ as: $$\gamma_x=\gamma_{x,\Pi}:=\{\Pi(x,t):t\in G\}$$
@@ -42,6 +42,13 @@
       \item $\gamma_x\cong\ZZ$.
     \end{enumerate}
   \end{theorem}
+  \begin{theorem}
+    Let $(X,\ZZ_{\geq 0},\Pi)$ be a discrete semidynamical system and $\gamma_x$ be an orbit. Then, apart form the above possibilities the orbit can also be of the form:
+    \begin{enumerate}
+      \item $\gamma_x=\{x_1,\ldots,x_{n-1},x_n,x_n,x_n,x_n,\ldots\}$
+      \item $\gamma_x=\{x_1,\ldots,x_{n-1},x_n,\ldots,x_{n+T},x_n,\ldots,x_{n+T},\ldots\}$
+    \end{enumerate}
+  \end{theorem}
   \subsubsection{Equivalence and conjugacy of dynamical systems}
   \begin{definition}
     Let $(X_1,G,\Pi_1)$ and $(X_2,G,\Pi_2)$ be two dynamical systems and $r\in\NN\cup\{0,\infty,\omega\}$. We say that $(X_1,G,\Pi_1)$ and $(X_2,G,\Pi_2)$ are \emph{equivalent dynamical systems} of class $\mathcal{C}^r$ if there exists a diffeomorphism $h:X_1\rightarrow X_2$ of class $\mathcal{C}^r$ such that $\forall x\in X_1$, $h(\gamma_{x,\Pi_1})=\gamma_{h(x),\Pi_2}$ and preserving the orientation of the orbits. In particular, if $r=0$ we say that $(X_1,G,\Pi_1)$ and $(X_2,G,\Pi_2)$ are \emph{topologically equivalent}. That diffeomorphism $h$ is called an \emph{equivalence} (of class $\mathcal{C}^r$) between $(X_1,G,\Pi_1)$ and $(X_2,G,\Pi_2)$.
@@ -66,7 +73,7 @@
   \end{theorem}
   \begin{theorem}
     Consider the differential system in $\CC$ defined by:
-    $$z'=\ii z+ a_2z^2+a_3z^3+\cdots=:\ii z+f(z)$$ This is a \emph{holomorphic differential equation}. Then, there exists a conjugaction that conjugues this system with $z'=\ii z$. This process of finding the conjugacy is called \emph{linearization} of the first system.
+    $$z'=\ii z+ a_2z^2+a_3z^3+\cdots=:\ii z+f(z)$$ This is a \emph{holomorphic differential equation}. Then, there exists a conjugaction that conjugues this system with $z'=\ii z$. This process of finding the conjugacy is called \emph{linearization} of the first system. In particular, the periods of the periodic orbits are always the same.
   \end{theorem}
   \subsubsection{Invariant sets and limit sets}
   \begin{definition}
@@ -105,6 +112,71 @@
   \begin{proposition}
     The study of the global dynamics of a homogeneous system with only one equilibrium point (at the origin) is the same as the study of local dynamics at the origin.
   \end{proposition}
+  \subsubsection{Discrete maps}
+  \begin{definition}
+    A \emph{discrete map of order $m$} is a recurrence of the form:
+    \begin{equation}
+      f(n,x_n,x_{n+1},\ldots,x_{n+m})=0
+    \end{equation}
+    where $f:\RR^{m+1}\rightarrow\RR^m$ is a function. Sometimes we will be able to express it in its explicit form as:
+    \begin{equation}\label{DS_discretemap}
+      x_{n+m}=f(x_n,x_{n+1},\ldots,x_{n+m-1})
+    \end{equation}
+  \end{definition}
+  \begin{proposition}
+    Let $f:\RR^{m}\rightarrow\RR^m$ be a function. Consider a discrete map of \cref{DS_discretemap}. Then, we can transform this map into a map of order 1 of $m$ equations:
+    \begin{equation*}
+      \left\{
+      \begin{aligned}
+        {(y_1)}_{n+1}     & ={(y_2)}_{n}                                   \\
+        {(y_2)}_{n+1}     & ={(y_3)}_{n}                                   \\
+                          & \;\;\vdots                                     \\
+        {(y_{m-1})}_{n+1} & ={(y_m)}_{n}                                   \\
+        {(y_m)}_{n+1}     & =f(n,{(y_1)}_n,{(y_2)}_n,\ldots,{(y_{m-1})}_n) \\
+      \end{aligned}
+      \right.
+    \end{equation*}
+    where ${(y_i)}_n=x_{n+i-1}$ for $i=1,\ldots,m$.
+  \end{proposition}
+  \begin{proposition}
+    Let $\vf{f}:\RR^m\rightarrow\RR^m$ be an invertible function and consider the discrete map of \cref{DS_discretemap}. Then, $\Pi(\vf{x},n):=\vf{f}^n(\vf{x})$ defines a discrete dynamical system.
+  \end{proposition}
+  \begin{method}[Characteristic equation]
+    Consider the following \emph{linear discrete map}:
+    \begin{equation*}
+      x_{n+m}+a_{m-1}x_{n+m-1} + \cdots + a_1 x_{n+1} + a_0 x_n = 0
+    \end{equation*}
+    Let:
+    $$p(y):=y^m + a_{m-1}y^{m-1} + \cdots + a_1 y + a_0 = 0$$
+    Suppose $p$ has $r$ distinct real roots and $2(s-r)$ distinct complex roots.
+    $$\lambda_1,\ldots,\lambda_r,\lambda_{r+1},\overline{\lambda_{r+1}},\ldots,\lambda_{s},\overline{\lambda_s}$$
+    Here, $\lambda_i\in\RR$ $\forall i=1,\ldots,r$ and $\lambda_{i}=\alpha_i+\ii\beta_i\in\CC$ $\forall i=r+1,\ldots,s$. Assume, each of these roots have multiplicity $k_i\in\NN$. Then, the general solution to that discret map is:
+    \begin{multline*}
+      \vf{x}_n=\sum_{i=1}^r\left(c_{i,0}+c_{i,1}n+\cdots+c_{i,k_i-1}n^{k_i-1}\right){\lambda_i}^n+\\
+      +\sum_{i=r+1}^s\sum_{j=0}^{k_i-1}n^{j}{\rho_i}^n\left(c_{i,j,1}\cos(\theta_i n)+c_{i,j,2}\sin(\theta_i n)\right)
+    \end{multline*}
+    where $c_{i,j,k}\in\RR$ are constants and $\lambda_i=\rho_i\exp{\ii\theta_i}$.
+  \end{method}
+  \begin{proposition}
+    Consider the discrete map $$\vf{x}_{n+1}=\vf{f}(\vf{x}_n)$$
+    and let $\vf{p}$ be a fixed point of $\vf{f}$.
+    \begin{itemize}
+      \item If $\forall \lambda\in\sigma(\vf{Df}(\vf{p}))$ we have $\abs{\Re\lambda}<1$, then $\vf{p}$ is asymptotically stable.
+      \item If $\forall \lambda\in\sigma(\vf{Df}(\vf{p}))$ we have $\abs{\Re\lambda}>1$, then $\vf{p}$ is repelling and negatively stable.
+      \item If $\vf{p}$ is positively stable, then $\abs{\Re\lambda}\leq 1$ $\forall\lambda\in\sigma(\vf{Df}(\vf{p}))$.
+      \item If $\vf{p}$ is negatively stable, then $\abs{\Re\lambda}\geq 1$ $\forall\lambda\in\sigma(\vf{Df}(\vf{p}))$.
+    \end{itemize}
+  \end{proposition}
+  \begin{theorem}
+    Consider the discrete map $$\vf{x}_{n+1}=\vf{f}(\vf{x}_n)$$ where $\vf{f}:\RR^2\rightarrow\RR^2$. Let $\vf{p}\in U$ be a fixed point of $\vf{f}$ and suppose $\sigma(\vf{Df}(\vf{p}))=\{\abs{\lambda_1},\abs{\lambda_2}\}$. Then, $\vf{p}$ will be a
+    \begin{itemize}
+      \item {stable node} if $\lambda_1,\lambda_2\in\RR$ and $\abs{\lambda_1},\abs{\lambda_2}<1$.
+      \item {unstable node} if $\lambda_1,\lambda_2\in\RR$ and $\abs{\lambda_1},\abs{\lambda_2}>1$.
+      \item {saddle point} if $\lambda_1,\lambda_2\in\RR$ and $\abs{\lambda_1}<1$ and $\abs{\lambda_2}>1$ (or viceversa).
+      \item {stable focus} if $\lambda_1,\lambda_2\in\CC$ and $\abs{\Re\lambda_1}<1$.
+      \item {unstable focus} if $\lambda_1,\lambda_2\in\CC$ and $\abs{\Re\lambda_1}>1$.
+    \end{itemize}
+  \end{theorem}
   \subsection{Study of local dynamics}
   \subsubsection{Stable manifold and center manifold theorems}
   \begin{theorem}[The stable manifold theorem]
@@ -112,8 +184,10 @@
     \begin{equation}\label{DS_general}
       \vf{x}' =\vf{f}(\vf{x})
     \end{equation}
-    Suppose that $\vf{f}(\vf{0})=\vf{0}$ and that $\vf{Df}(0)$ has $n_+$ eigenvalues with positive real part and $n_-=n-n_+$ eigenvalues with negative real part. Then, there exists a unique $n_+$-dimensional differentiable manifold $S$ tangent to the stable eigenspace $E^\text{s}$ of the linear system at $\vf{0}$ such that $\forall t\geq 0$, $\vf\phi_t(S)\subseteq S$ and $\forall \vf{x}_0\in S$: $$\lim_{t\to\infty}\vf\phi_t(\vf{x}_0)=\vf{0}$$
+    Suppose that $\vf{f}(\vf{0})=\vf{0}$ and that $\vf{Df}(\vf{0})$ has $n_+$ eigenvalues with positive real part and $n_-=n-n_+$ eigenvalues with negative real part. Then, there exists a unique $n_+$-dimensional differentiable manifold $S$ tangent to the stable eigenspace $E^\text{s}$ of the linear system at $\vf{0}$ such that $\forall t\geq 0$, $\vf\phi_t(S)\subseteq S$ and $\forall \vf{x}_0\in S$: $$\lim_{t\to\infty}\vf\phi_t(\vf{x}_0)=\vf{0}$$
+    This manifold is called \emph{stable manifold}.
     Analogously, there exists a unique $n_-$-dimensional differentiable manifold $U$ tangent to the stable eigenspace $E^\text{u}$ of the linear system at $\vf{0}$ such that $\forall t\leq 0$, $\vf\phi_t(U)\subseteq U$ and $\forall \vf{x}_0\in U$: $$\lim_{t\to-\infty}\vf\phi_t(\vf{x}_0)=\vf{0}$$
+    This manifold is called \emph{unstable manifold}.
   \end{theorem}
   \begin{definition}
     Let $E\subseteq\RR^n$ be an open subset containing the origin, $\vf{f}\in\mathcal{C}^1(E)$ and $\vf\phi_t$ be the flow of the system of \cref{DS_general}. The \emph{global stable manifold} and \emph{global unstable manifold} at $\vf{0}$ are defined respectively by:
@@ -123,7 +197,7 @@
     Let $E\subseteq\RR^n$ be an open subset containing the origin, $\vf{f}\in\mathcal{C}^1(E)$ and $\vf\phi_t$ be the flow of the system of \cref{DS_general}. Then, the manifolds $W^\text{s}$ and $W^\text{u}$ are unique and invariant with respect to the flow $\vf\phi_t$
   \end{proposition}
   \begin{theorem}[The center manifold theorem]
-    Let $E\subseteq\RR^n$ be an open subset containing the origin, $\vf{f}\in\mathcal{C}^r(E)$, $r\geq 1$ and consider the system of \cref{DS_general}. Suppose that $\vf{f}(\vf{0})=\vf{0}$ and that $\vf{Df}(0)$ has $n_+$ eigenvalues with positive real part, $n_-$ eigenvalues with negative real part and $n_0=n-n_+-n_-$ eigenvalues with zero real part. Then, there exists a $n_0$-dimensional differentiable manifold $W^\text{c}$ of class $\mathcal{C}^r$ tangent to the center eigenspace $E^\text{c}$ of the linear system at $\vf{0}$; there exists a $n_+$-dimensional differentiable manifold $S$ tangent to the stable eigenspace $E^\text{s}$ of the linear system at $\vf{0}$, and there exists a $n_-$-dimensional differentiable manifold $U$ tangent to the stable eigenspace $E^\text{u}$ of the linear system at $\vf{0}$. Furthermore, $W^\text{c}$, $W^\text{s}$ and $W^\text{u}$ are invariant under the flow $\vf\phi_t$.
+    Let $E\subseteq\RR^n$ be an open subset containing the origin, $\vf{f}\in\mathcal{C}^r(E)$, $r\geq 1$ and consider the system of \cref{DS_general}. Suppose that $\vf{f}(\vf{0})=\vf{0}$ and that $\vf{Df}(\vf{0})$ has $n_+$ eigenvalues with positive real part, $n_-$ eigenvalues with negative real part and $n_0=n-n_+-n_-$ eigenvalues with zero real part. Then, there exists a $n_0$-dimensional differentiable manifold $W^\text{c}$ (called \emph{central manifolds}) of class $\mathcal{C}^{r-1}$ tangent to the center eigenspace $E^\text{c}$ of the linear system at $\vf{0}$; there exists a $n_+$-dimensional differentiable manifold $S$ tangent to the stable eigenspace $E^\text{s}$ of the linear system at $\vf{0}$, and there exists a $n_-$-dimensional differentiable manifold $U$ tangent to the stable eigenspace $E^\text{u}$ of the linear system at $\vf{0}$. Furthermore, $W^\text{c}$, $W^\text{s}$ and $W^\text{u}$ are invariant under the flow $\vf\phi_t$. If moreover, $\vf{f}\in\mathcal{C}^\omega(E)$, the the manifold $W^\text{c}$ is also of class $\mathcal{C}^{\omega}$ and it is unique\footnote{Unique in the sense that there is no other manifold of class $\mathcal{C}^{\omega}$ tangent to $E^\text{c}$ at $\vf{0}$ but it may be other manifolds of class $\mathcal{C}^{r}$, $r\in\NN\cup\{\infty\}$, satisfying this property.}.
   \end{theorem}
   \subsubsection{Local bifurcation theory}
   \begin{definition}
@@ -170,7 +244,7 @@
       \caption{Pitchfork}
       \label{DS_fork}
     \end{subfigure}
-    \caption{Principal kinds of bifurcation in 1-dimensional systems}
+    \caption{Bifurcation diagrams of the principal bifurcations in 1-dimensional systems}
   \end{figure}
   \begin{theorem}
     Consider the system of \cref{DS_mu-system}. Then, it will have a saddle-node bifurcation at the origin if $\vf{f}(0,0)=0$, $\vf{f}_x(0,0)=0$, $\vf{f}_{xx}(0,0)\ne 0$ and $\vf{f}_\mu(0,0)\ne0$.

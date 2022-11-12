@@ -21,7 +21,7 @@
             decorate,
             decoration={
                 markings,
-                mark=at position 0.5 with {\arrow[scale=1.5]{stealth[reversed]}},
+                mark=at position 0.55 with {\arrow[scale=1.5]{stealth[reversed]}},
               }}
       },decorated separatrices/.style={
         postaction={
@@ -31,24 +31,34 @@
                 mark=at position 0.5 with {\arrow[scale=1.5]{stealth}},
               }}
       }]
-  \begin{polaraxis}[
-      % xmin=-4, xmax=4,
-      % ymin=-4, ymax=4,
+  \begin{axis}[
+      axis lines=middle,
+      xmin=-4, xmax=4,
+      ymin=-4, ymax=4,
       xtick=\empty, ytick=\empty,
       ylabel={$y$},
       xlabel={$x$},
       %axis on top,
       hide axis,
     ]
-
-    \addplot[thin,samples=100,domain=85:95,white] {425};
-
-    \def\alph{0.5}
-    \addplot[thick,samples=1000,domain=0:1000,black,decorated curves] {\alph*x};
-
-    \addplot[thin,mark=*,only marks, mark size=0.1136cm,black] coordinates {
+    \def\xmax{\pgfkeysvalueof{/pgfplots/xmax}}
+    \def\xmin{\pgfkeysvalueof{/pgfplots/xmin}}
+    \def\ymax{\pgfkeysvalueof{/pgfplots/ymax}}
+    \def\ymin{\pgfkeysvalueof{/pgfplots/ymin}}
+    \draw[black, thick,decorated separatrices] (0,0) --  (\xmin,0);
+    \draw[black, thick,decorated separatrices] (0,0) --  (\xmax,0);
+    \draw[black, thick,decorated separatrices] (0,\ymin) --(0,0);
+    \draw[black, thick,decorated separatrices]  (0,\ymax) -- (0,0);
+    \addplot[thick,samples=100,black,domain=0.45:\xmax,decorated separatrices]{exp(-x+1.8)+0.2};
+    \addplot[thick,samples=100,black,domain=0.45:\xmax,decorated separatrices]{-exp(-x+1.8)-0.2};
+    \addplot[thick,samples=100,black,domain=\xmin:-0.45,decorated separatrices rev]{exp(x+1.8)+0.2};
+    \addplot[thick,samples=100,black,domain=\xmin:-0.45,decorated separatrices rev]{-exp(x+1.8)-0.2};
+    \def\N{60}
+    \def\ell{(\xmax-\xmin)/\N}
+    \addplot[thin,mark=*,only marks, mark size=\ell/2*0.852*2cm,black] coordinates {
         (0,0)
       };
-  \end{polaraxis}
+  \end{axis}
 \end{tikzpicture}
+
 \end{document}
