@@ -1,0 +1,49 @@
+\documentclass{standalone}
+\usepackage{../../../../preamble_formulas}
+
+\begin{document}
+\begin{tikzpicture}[decorated curves red/.style={
+        postaction={
+            decorate,
+            decoration={
+                markings,
+                mark=at position 0.333 with {\arrow[red,scale=1.5]{stealth}},
+                mark=at position 0.666 with {\arrow[red,scale=1.5]{stealth}}}}
+      },
+    decorated curves red rev/.style={
+        postaction={
+            decorate,
+            decoration={
+                markings,
+                mark=at position 0.333 with {\arrow[red,scale=1.5]{stealth[reversed]}},
+                mark=at position 0.666 with {\arrow[red,scale=1.5]{stealth[reversed]}}}}
+      },decorated curves green/.style={
+        postaction={
+            decorate,
+            decoration={
+                markings,
+                mark=at position 0.333 with {\arrow[color_green2,scale=1.5]{stealth}},
+                mark=at position 0.666 with {\arrow[color_green2,scale=1.5]{stealth}}}}
+      }]
+  \begin{polaraxis}[
+      % xmin=-4, xmax=4,
+      % ymin=-4, ymax=4,
+      xtick=\empty, ytick=\empty,
+      ylabel={$y$},
+      xlabel={$x$},
+      %axis on top,
+      hide axis,
+    ]
+
+
+    \def\alph{0.25}
+    \addplot[thick,samples=1000,domain=0:600,red,decorated curves red] {\alph*x+220};
+    \addplot[thick,samples=1000,domain=-700:0,red,decorated curves red] {\alph*x};
+    \addplot[thick,samples=1000,domain=0:360,color_green2,decorated curves green] {200};
+
+    \addplot[thin,mark=*,only marks, mark size=0.1136cm,black] coordinates {
+        (0,0)
+      };
+  \end{polaraxis}
+\end{tikzpicture}
+\end{document}

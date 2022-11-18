@@ -557,7 +557,7 @@
   \end{corollary}
   \subsubsection{Space of continuous functions}
   \begin{definition}
-    Let $X\ne \varnothing$ be a set and $\mathcal{B}(X)$ be the vector space over $\KK=\RR,\CC$ of the functions $f:X\rightarrow\KK$ that are bounded with the \emph{uniform norm} (or \emph{supremum norm}): $$\norm{f}:=\norm{f}_X:=\sum\{\abs{f(x)}:x\in X\}$$
+    Let $X\ne \varnothing$ be a set and $\mathcal{B}(X)$ be the vector space over $\KK=\RR,\CC$ of the functions $f:X\rightarrow\KK$ that are bounded with the \emph{uniform norm} (or \emph{supremum norm}): $$\norm{f}:=\norm{f}_X:=\sup\{\abs{f(x)}:x\in X\}$$
   \end{definition}
   \begin{proposition}
     Let $X\ne \varnothing$ be a set and $(f_n),f\in\mathcal{B}(X)$ be functions. Then: $$\lim_{n\to\infty}\norm{f_n-f}=0\iff f_n\text{ converges uniformly to }f$$
@@ -588,6 +588,42 @@
   \end{definition}
   \begin{theorem}[Stone-Weierstra\ss\ theorem]
     Let $K\subseteq \RR^n$ be a compact set and $A\subseteq \mathcal{C}(K)$ be a separating autoconjugate subalgebra that does not vanish. Then, $A$ is dense in $\mathcal{C}(K)$.
+  \end{theorem}
+  \begin{definition}
+    Let $(X,d_X)$, $(Y,d_Y)$ be two metric spaces and $F\subset\mathcal{C}(X,Y)$ be a subset. We say that $F$ is \emph{pointwise bounded} if $\forall x\in X$ $\exists M_x>0$ such that $\abs{f(x)}\leq M_x$ $\forall f\in F$.
+    We say that $F$ is \emph{uniformly bounded} if $\exists M>0$ such that $\abs{f(x)}\leq M$ $\forall x\in X$ and $\forall f\in F$.
+  \end{definition}
+  \begin{definition}
+    Let $(X,d_X)$, $(Y,d_Y)$ be two metric spaces and $F\subset\mathcal{C}(X,Y)$ be a subset. We say that $F$ \emph{equicontinuous at a point} $x_0\in X$ if $\forall \varepsilon>0$ $\exists \delta>0$ such that $\forall x\in X$ with $d_X(x,x_0)<\delta$ we have: $$d_Y(f(x),f(x_0))<\varepsilon\quad\forall f\in F$$
+    We say that $F$ is \emph{pointwise equicontinuous} if it is equicontinuous at each point of $X$. Finally, we say that $F$ is \emph{uniformly equicontinuous} if $\forall \varepsilon>0$ $\exists \delta>0$ such that $\forall x,y\in X$ with $d(x,y)<\delta$ we have: $$d_Y(f(x),f(y))<\varepsilon\quad\forall f\in F$$
+  \end{definition}
+  \begin{theorem}[Arzelà-Ascoli theorem]
+    Let $(X,d)$ be a metric space, $K\subset X$ be a compact set and $F\subset \mathcal{C}(K)$ be a subset. Then, $F$ is relatively compact in $\mathcal{C}(K)$ if and only if $F$ is pointwise equicontinuous and pointwise bounded.
+  \end{theorem}
+  \subsubsection{Operators}
+  \begin{definition}
+    Let $E$, $F$ be normed spaces. An \emph{operator} $T$ is a linear function $T:E\rightarrow F$.
+  \end{definition}
+  \begin{definition}
+    Let $E$, $F$ be normed spaces and $T:E\rightarrow F$ be an operator. We say that $T$ is a \emph{compact operator} if $T(B_E)$ is relatively compact on $F$, where: $$B_E:=\{x\in E:\norm{x}_E\leq 1\}$$
+  \end{definition}
+  \begin{definition}
+    Let $E$, $F$ be normed spaces and $T:E\rightarrow F$ be an operator. We define the \emph{norm} of $T$ as: $$\norm{T}:=\sup\{\norm{T(x)}_F:\norm{x}_E\leq 1\}$$
+  \end{definition}
+  \begin{lemma}
+    Let $E$, $F$ be normed spaces and $T:E\rightarrow F$ be an operator. Then:
+    $$\norm{T}=\sup\{\norm{T(x)}_F:\norm{x}_E< 1\}=\sup\left\{\frac{\norm{T(x)}_F}{\norm{x}_E}:x\ne 0\right\}$$
+  \end{lemma}
+  \begin{theorem}
+    Let $E$, $F$ be normed spaces and $T:E\rightarrow F$ be an operator. The following are equivalent:
+    \begin{enumerate}
+      \item $T$ is continuous at 0.
+      \item $T$ is continuous.
+      \item $T(B_E)$ is bounded on $F$.
+      \item $\norm{T}<\infty$.
+      \item $\exists C\geq 0$ such that $\forall x\in E$ we have: $$\norm{T(x)}_F\leq C\norm{x}_E$$
+            If, moreover, $T$ is continuous, $\norm{T}$ is the least of such constants $C$.
+    \end{enumerate}
   \end{theorem}
 \end{multicols}
 \end{document}

@@ -11,11 +11,7 @@
     \begin{equation}\label{PDE_waveeq}
       u_{tt}=c^2u_{xx}
     \end{equation}
-    These kind of equations are called \emph{hyperbolic equations}. The solution $u(x,t)$ to the wave equation with boundary conditions $u(x,0)=f(x)$, $u_t(x,0)=g(x)$ and $u(0,t)=u(L,t)=0$ is: $$u(x,t)=\sum_{n=0}^\infty \sin\left(\frac{\pi n x}{L}\right)\left[a_n\cos\left(\frac{\pi n c}{L}t\right)+ b_n\sin\left( \frac{\pi n c}{L}t\right)\right]$$ where:
-    \begin{align*}
-      a_n & =\frac{1}{L}\int_{-L}^Lf(x)\cos\left(\frac{\pi n x}{L}\right)\dd{x}       \\
-      b_n & =\frac{1}{\pi n c}\int_{-L}^Lg(x)\sin\left(\frac{\pi n x}{L}\right)\dd{x}
-    \end{align*}
+    These kind of equations are called \emph{hyperbolic equations}.
   \end{proposition}
   \begin{proposition}[Navier-Cauchy equation]
     Consider a solid of mass density $\rho$ and let $\mu$ and $\lambda$ be the so-called \emph{Lamé coefficients} that describe the material. If $\vf{u}(\vf{x},t)$ is the displacement vector at the point $\vf{x}$ and the instant $t$, the equation that describes the deformation of the solid (\emph{elastodynamics}) is:
@@ -97,7 +93,7 @@
     Consider a material with diffusivity $D$, $\vf{\phi}$ the diffusion flux and $u$ its concentration. Then, the concentration of the material satisfies: $$\pdv{u}{t}=\divp\left(D\grad{u}\right)$$
     In particular, if $D=\const$, then we get $\pdv{u}{t}=D\laplacian{u}$.
   \end{proposition}
-  \begin{proposition}[Fourier's law of diffusion]
+  \begin{proposition}[Fourier's law]
     Consider a material with \emph{thermal conductivity} $k$, $\vf{q}$ be the \emph{heat flux} and $u(x,t)$ its temperature. Then, \emph{Fourier's law} states that: $$\vf{q}=-k\grad{u}$$
   \end{proposition}
   \begin{proposition}[Heat equation]
@@ -226,7 +222,6 @@
     We will have existence and unicity of solutions for the traffic flow equation if: $$q'(\rho_+)<\frac{[q]}{[\rho]}<q'(\rho_-)$$
   \end{lemma}
   \subsection{Wave equation}
-  \subsubsection{Solution of the non-homogeneous equation}
   \begin{proposition}
     Let $u:\RR^2\rightarrow\RR$ be a two-times differentiable function such that:
     \begin{multline*}
@@ -235,8 +230,12 @@
     for certain functions $\rho(x,t)$, $k(x)$, $f(x,t)$. Also suppose that we can freely exchange the derivative and the integral sign\footnote{From now on, we will simply say that $u$ is a \emph{good enough} function.}. Then, $u(x,t)$ is a solution to the wave equation with driven force $f$:
     $$\rho u_{tt}-{(ku_x)}_x=f(x,t)$$
   \end{proposition}
+  \subsubsection{Constant coefficients}
   \begin{proposition}[D'Alembert formula]
-    Let $u_0,v_0:\RR\rightarrow\RR$ be functions. The solution $u(x,t)$ to the wave equation with initial conditions $u(x,0)=u_0(x)$ and $u_t(x,0)=v_0(x)$ is: $$u(x,t)=\frac{u_0(x-ct)+u_0(x+ct)}{2}+\frac{1}{2c}\int_{x-ct}^{x+ct}v_0(s)\dd{s}$$
+    Let $u_0,v_0:\RR\rightarrow\RR$ be functions. The solution $u(x,t)$ to the wave equation with initial conditions $u(x,0)=u_0(x)$ and $u_t(x,0)=v_0(x)$ is:
+    \begin{equation}\label{PDE_dAlembert}
+      u(x,t)=\frac{u_0(x-ct)+u_0(x+ct)}{2}+\frac{1}{2c}\int_{x-ct}^{x+ct}v_0(s)\dd{s}
+    \end{equation}
   \end{proposition}
   \begin{theorem}
     Let $u_0,v_0:\RR\rightarrow\RR$ and $f:\RR^2\rightarrow\RR$ be functions. The solution to the wave equation with driven force $f$ and initial conditions $u(x,0)=u_0(x)$ and $u_t(x,0)=v_0(x)$ is:
@@ -250,7 +249,10 @@
     $$\oint_{\Fr{U}}\rho u_t\dd{x}+k u_x\dd{t}=\iint_Uf(x,t)\dd{x}\dd{t}$$
   \end{theorem}
   \begin{proposition}
-    Let $U\subset\RR^2$ be an open set, $u:U\rightarrow\RR$ be a good enough function such that it satisfies the wave equation with constant $c^2=\frac{k}{\rho}$ and driven force $f(x,t)$. Consider the four points $A$, $B$, $C$ and $D$ as shown in \cref{PDE_waves-char}. Then: $$u(A)-u(B)+u(C)-u(D)=0$$
+    Let $U\subset\RR^2$ be an open set, $u:U\rightarrow\RR$ be a good enough function such that it satisfies the wave equation with constant $c^2=\frac{k}{\rho}$ and driven force $f(x,t)$. Consider the four points $A$, $B$, $C$ and $D$ as shown in \cref{PDE_waves-char}. Then:
+    \begin{equation}\label{PDE_charwaveseq}
+      u(A)-u(B)+u(C)-u(D)=0
+    \end{equation}
     \begin{center}
       \begin{minipage}{\linewidth}
         \centering
@@ -260,12 +262,85 @@
       \end{minipage}
     \end{center}
   \end{proposition}
-  \subsubsection{Conservation of energy}
-  \begin{proposition}
+  \begin{proposition}[Conservation of energy]
     Consider the wave equation $\rho u_{tt}-{(ku_x)}_x=0$ and assume the functions $u_0$, $v_0$ of the initial conditions have compact support. Then: $$\dv{}{t}\int_{-\infty}^\infty\left(\frac{1}{2}\rho{u_t}^2+\frac{1}{2}k{u_x}^2\right)\dd{x}=0$$ That is, the energy is conserved.
   \end{proposition}
   \begin{corollary}
     The wave equation with drive force has existence and unicity of solutions.
   \end{corollary}
+  \begin{proposition}
+    Consider the wave equation $u_{tt}=c^2u_{xx}$ with initial conditions:
+    $$
+      \left\{
+      \begin{aligned}
+        u(x,0)   & =u_0(x)   \\
+        u_t(x,0) & =v_0(x)   \\
+        u_x(0,t) & =\beta(t)
+      \end{aligned}
+      \right.
+    $$
+    Then, the d'Alembert solution is $$u(x,t)=\phi(x+ct)+\psi(x-ct)$$ where:
+    \begin{align*}
+      \phi(x) & =\frac{1}{2}u_0(x)+\frac{1}{2c}\int_0^xv_0(s)\dd{s}\quad\text{for }x\geq 0 \\
+      \psi(x) & =
+      \begin{cases}
+        \displaystyle\frac{1}{2}u_0(x)-\frac{1}{2c}\int_0^xv_0(s)\dd{s} & \text{if } x\geq 0 \\
+        \displaystyle\phi(-x)+\int_0^x\beta(-s/c)\dd{s}                 & \text{if } x< 0
+      \end{cases}
+    \end{align*}
+    In particular, if $\beta(t)=0$ and we make the even extension of both $u_0$ and $v_0$, we have:
+    \begin{equation*}
+      \psi(x) =\frac{1}{2}u_0(x)-\frac{1}{2c}\int_0^xv_0(s)\dd{s} \quad\forall x\in\RR
+    \end{equation*}
+  \end{proposition}
+  \subsubsection*{Fixed-endpoints boundary condition}
+  \begin{definition}
+    Consider a string of length $L$ with its two endpoints fixed. In this section we will discuss how to obtain the solutions of its movement solving following boundary problem:
+    \begin{equation}\label{PDE_fixedendpoints}
+      \left\{
+      \begin{aligned}
+        u_{tt}   & =c^2u_{xx} \\
+        u(0,t)   & =0         \\
+        u(L,t)   & =0         \\
+        u(x,0)   & =u_0(x)    \\
+        u_t(x,0) & =v_0(x)
+      \end{aligned}
+      \right.
+    \end{equation}
+  \end{definition}
+  \begin{method}
+    Consider the odd extensions for $u_0$ and $v_0$ of \cref{PDE_fixedendpoints}. Then, the solutions of that equation are given by the d'Alembert formula (\cref{PDE_dAlembert})
+  \end{method}
+  \begin{method}\label{PDE_methodchar}
+    Suppose we want to know the displacement $u(x,t)$ of the string at the position $x\in[0,L]$ and time $t\geq 0$. We will use \cref{PDE_charwaveseq} to determine $u(x,t)$. Construct the characteristic lines $x\pm ct$ passing through the point $(x,t)$ (highest green dot) and then the corresponding ones passing through the intersecting points of the previous ones with lines $x=0$ and $x=L$ (as shown in \cref{PDE_waves-char-solve}). Then, by \cref{PDE_charwaveseq} we have that the $u(x,t)$ in the green dots is $-u(x,t)$ in the yellow dots (because $u(x,t) = 0$ in the purple dots). Since we are provided with the equation at $t=0$, we can determine $u(x,t)$ in the brown dots and get back, thus, to the original green point through the last yellow point.
+  \end{method}
+  \begin{center}
+    \begin{minipage}{\linewidth}
+      \centering
+      \includestandalone[mode=image|tex,width=0.7\linewidth]{Images/waves_char_solve}
+      \captionof{figure}{Scheme for \cref{PDE_methodchar} of solving the wave equation}
+      \label{PDE_waves-char-solve}
+    \end{minipage}
+  \end{center}
+  \begin{method}[Separation of variables]
+    The solution $u(x,t)$ to \cref{PDE_fixedendpoints}, using \emph{separation of variables} (i.e. assuming $u(x,t)=f(x)g(t)$), is: $$u(x,t)=\sum_{n=0}^\infty \sin\left(\frac{\pi n x}{L}\right)\left[a_n\cos\left(\frac{\pi n c}{L}t\right)+ b_n\sin\left( \frac{\pi n c}{L}t\right)\right]$$ where:
+    \begin{align*}
+      a_n & =\frac{1}{L}\int_{-L}^Lf(x)\cos\left(\frac{\pi n x}{L}\right)\dd{x}       \\
+      b_n & =\frac{1}{\pi n c}\int_{-L}^Lg(x)\sin\left(\frac{\pi n x}{L}\right)\dd{x}
+    \end{align*}
+  \end{method}
+  \subsubsection{Variable coefficients}
+  \begin{theorem}[Sturm-Picone comparison theorem]
+    Let $p_i,q_i:\RR\rightarrow\RR$, $i=1,2$, be functions such that $0<p_2<p_1$ and $q_1<q_2$. Suppose we have that the functions $u(x)$ and $v(x)$ satisfy the following differential equations:
+    \begin{align*}
+      {p_1(x)u'}'+q_1(x)u=0 \\
+      {p_2(x)u'}'+q_2(x)u=0
+    \end{align*}
+    If $\alpha_1$, $\alpha_2$ are two successive roots of $u$, then one of the following holds:
+    \begin{enumerate}
+      \item $\exists \beta\in(\alpha_1,\alpha_2)$ such that $v(\beta)=0$.
+      \item $\exists\lambda\in\RR$ such that $v(x)=\lambda u(x)$ $\forall x\in\RR$.
+    \end{enumerate}
+  \end{theorem}
 \end{multicols}
 \end{document}

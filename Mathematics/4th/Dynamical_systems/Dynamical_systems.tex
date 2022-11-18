@@ -495,7 +495,60 @@
       \end{pmatrix}$$
     We would like to do not a blow-up equally-weighted in all directions (as in the polar blow-up) but two blow-ups: one by leaving one axis undefined and the other one covering that axis left. Thus, if at the origin $x^\alpha \sim y^\beta$ where $\alpha,\beta>0$ we seek transformations of the form $(x,y)\rightarrow\left(x,\frac{y^\beta}{x^\alpha}\right)$, which is undefined at $x=0$, and transformations of the form $(x,y)\rightarrow\left(\frac{x^\alpha}{y^\beta},y\right)$, which is undefined at $y=0$. From here, we proceed as in \cref{DS_blowpolar}.
   \end{theorem}
-  \subsection{Global dynamics in continuous systems}
-  \subsection{Global dynamics in discrete systems}
+  \begin{proposition}[Lyapunov's method]
+    Consider the differential system:
+    \begin{equation}\label{DS_eqhopf}
+      \left\{
+      \begin{aligned}
+        x' & =\mu x-y + X(x,y) \\
+        y' & =x+\mu y + Y(x,y)
+      \end{aligned}
+      \right.
+    \end{equation}
+    where $X,Y\in\mathcal{C}^\omega$ have order $\geq 2$ in their Taylor's series. In polar coordinates this system is transformed into:
+    $$
+      \left\{
+      \begin{aligned}
+        r'      & =\mu r+  \sum_{k=3}^\infty f_{k}(\theta) r^{k-1} \\
+        \theta' & =1+\sum_{k=3}^\infty g_{k}(\theta) r^{k-1}
+      \end{aligned}
+      \right.
+    $$
+    where $f_k(\theta)$ and $g_k(\theta)$ are trigonometric homogeneous polynomials of degree $k$. And so, in a neighbourhood of the origin, we can express $\dv{r}{\theta}$ as:
+    $$\dv{r}{\theta}=\mu r +\sum_{k=3}^\infty h_{k}(\theta) r^{k-1}$$
+    where $h_k(\theta)$ are trigonometric polynomials of degree $k$. If we impose $r(0)=\rho\simeq 0$ and assume $\mu=0$, then the solution $r(\theta,\rho)$ can be written as: $$r(\theta,\rho)=\rho+v_2(\theta)\rho^2+v_3(\theta)\rho^3+\cdots\footnote{Because of the differentiable dependence on initial conditions.}$$
+    We define the \emph{$n$-th Lyapunov constant} as: $$\lyapunov{n}:=v_{2n+1}(2\pi)\footnote{Note that this has a strong relation with the Poincaré map $\Pi(\rho)=r(2\pi,\rho)$ given the section $\{(r,0):r\simeq 0\}$.}\footnote{In practice we will only compute the $\lyapunov{n}$ coefficient if $v_k(2\pi)=0$ for $k=2,\ldots,2n$.}$$
+  \end{proposition}
+  \begin{theorem}[Hopf bifurcation theorem]
+    Consider the system of \cref{DS_eqhopf} with $\mu=0$ and suppose $\lyapunov{1}\ne 0$. Then, for $\mu\gtrsim 0$ there exists a unique periodic orbit that bifurcates (i.e. it appears and disappears) at the origin. If $\lyapunov{1}> 0$ the periodic orbit is an unstable limit cycle, and if $\lyapunov{1}< 0$ the periodic orbit is an stable limit cycle (see \cref{DS_hopf}).
+  \end{theorem}
+  \begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.48\linewidth}
+      \centering
+      \includestandalone[mode=image|tex,width=\linewidth]{Images/hopf1}
+      \caption{$\mu\leq 0$}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.48\linewidth}
+      \centering
+      \includestandalone[mode=image|tex,width=\linewidth]{Images/hopf2}
+      \caption{$\mu\gtrsim 0$}
+    \end{subfigure}
+    \caption{Hopf bifurcation with $\lyapunov{1}< 0$}
+    \label{DS_hopf}
+  \end{figure}
+  \begin{theorem}
+    Consider the system of \cref{DS_eqhopf} with $\mu=0$ and the functions $v_k(\theta)$. We have that $v_{2n}(2\pi)=0$.
+  \end{theorem}
+  \begin{corollary}
+    Consider the system of \cref{DS_eqhopf} with $\mu=0$. Then, the origin is a center if and only if: $$\lyapunov{n}=0\qquad \forall n\in\NN$$
+  \end{corollary}
+  \begin{theorem}[Poicaré's method]
+    Consider the system of \cref{DS_eqhopf} with $\mu=0$. Then, there exists a function $H(x,y)$\footnote{This $H$ will be either a first integral of the system or a Lyapunov function. In the first case, we obtain a center for the system; in the second one, a focus.} of the form $$H(x,y)=x^2+y^2+H_3(x,y)+H_4(x,y)+\cdots$$
+    where each $H_j(x,y)$ is an homogeneous polynomial of degree $j$, such that: $$H'=\sum_{k=1}^\infty \lyapunov{k}{(x^2+y^2)}^{2k}\footnote{Note that finding such a function $H$ is computationally more efficient that finding the values of $v_{2n+1}(2\pi)$ of Lyapunov's method.}$$
+  \end{theorem}
+  % \subsection{Global dynamics in continuous systems}
+  % \subsection{Global dynamics in discrete systems}
 \end{multicols}
 \end{document}
