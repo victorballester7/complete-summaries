@@ -49,7 +49,7 @@
         \cov(X_2,X_1) & \Var(X_2)     & \cdots & \cov(X_2,X_n) \\
         \vdots        & \vdots        & \ddots & \vdots        \\
         \cov(X_n,X_1) & \cov(X_n,X_2) & \cdots & \Var(X_n)     \\
-      \end{pmatrix}$$
+      \end{pmatrix}\!\!$$
   \end{proposition}
   \begin{definition}
     Let $\vf{x}$, $\vf{y}$ be random vectors. We define the \emph{covariance} between them as the following matrix:
@@ -233,7 +233,7 @@
     Consider the model of \cref{LM_generalized}\footnote{Here the normality hypothesis does not play any role.}, then the least-squares estimators for $\beta_j$, $j=0,1,\ldots,k$, are \emph{BLUE} (\emph{the Best Linear Unbiased Estimator})\footnote{That is, they have minimum variance among all linear unbiased estimators.}.
   \end{theorem}
   \begin{corollary}
-    The predicted value $\hat{y}_h$ is invariant to a full-rank linear transformation on the $x$'s. That is: $$\hat{y}_z=\transpose{\vf{z}_h}\vf{\hat{\beta}_z}=\transpose{\vf{x}_h}\vf{\hat{\beta}}$$ where $\vf{z}_h=\transpose{\vf{K}}\vf{x}_h$ and $\vf{Z}=\vf{XK}$ is the full-rank linear transformation.
+    The predicted value $\hat{y}_h$ is invariant to a full-rank linear transformation on the $x$'s. That is: $$\hat{y}_z=\transpose{\vf{z}_h}\vf{\hat{\beta}_z}=\transpose{\vf{x}_h}\vf{\hat{\beta}}=\hat{y}_h$$ where $\vf{z}_h=\transpose{\vf{K}}\vf{x}_h$ and $\vf{Z}=\vf{XK}$ is the full-rank linear transformation.
   \end{corollary}
   \subsubsection{Model in centered form}
   \begin{definition}
@@ -283,6 +283,9 @@
   \begin{definition}
     Let $X_1\sim{\chi_{d_1}}$ and $X_2\sim{\chi_{d_2}}$ be independent random variables. We define the \emph{$F$-distribution with degrees of freedom $d_1$ and $d_2$} as the distribution of: $$F=\frac{X_1/d_1}{X_2/d_2}\sim F_{d_1, d_2}$$
   \end{definition}
+  \begin{proposition}\label{LM_tF}
+    Let $X\sim t_n$ be a random variable. Then: $$X^2\sim F_{1,n}$$
+  \end{proposition}
   \begin{lemma}
     Let $\transpose{\vf{x}}=(x_1,\ldots,x_n)\in\RR^n$. Suppose that $\sum_{i=1}^n {x_i}^2=Q_1+\cdots+Q_k$, where $Q_j=\transpose{\vf{x}}\vf{A}_j\vf{x}$ is a quadratic form and $\vf{A}_j$ is a symmetric positive semi-definite matrix of rank $r_j$, $j=1,\ldots,k$. If $r_1+\cdots+r_k=n$, then there exists an orthogonal matrix $\vf{C}\in\mathcal{M}_n(\RR)$ such that if $\vf{y}=\transpose{\vf{C}}\vf{x}$, then:
     \begin{equation*}
@@ -313,14 +316,87 @@
     Hence in this case we have that: $$\frac{\SSR/ k}{\SSE/(n-k-1)}\sim F_{k,n-k-1}$$
   \end{theorem}
   \begin{proposition}
-    Consider the model $\vf{y}\sim N_n(\vf{X\beta},\sigma^2\vf{I}_n)$ of \cref{LM_generalized} and suppose we want to test the hypothesis $\mathcal{H}_0:\vf\beta_1=\vf{0}$ versus $\mathcal{H}_1=\vf\beta_1\ne\vf{0}$. The statistic that we take is: $$F=\frac{\SSR/ k}{\SSE/(n-k-1)}\sim F_{k,n-k-1}$$
+    Consider the model $\vf{y}\sim N_n(\vf{X\beta},\sigma^2\vf{I}_n)$ of \cref{LM_generalized} and suppose we want to test the hypothesis $\mathcal{H}_0:\vf\beta=\vf{0}$ versus $\mathcal{H}_1:\vf\beta\ne\vf{0}$. The statistic that we take is: $$F=\frac{\SSR/ k}{\SSE/(n-k-1)}\sim F_{k,n-k-1}$$
   \end{proposition}
   \begin{proposition}
-    Consider the model $\vf{y}\sim N_n(\vf{X\beta},\sigma^2\vf{I}_n)$ of \cref{LM_generalized}, $\vf{R}\in\mathcal{M}_{r\times {k+1}}(\RR)$ where $r\leq k+1$ and suppose we want to test the hypothesis $\mathcal{H}_0:\vf{R}\vf\beta_1=\vf{0}$ versus $\mathcal{H}_1=\vf{R}\vf\beta_1\ne\vf{0}$.
-    Without loss of generality suppose we can eliminate the first $\beta_1,\ldots,\beta_r$ under $\mathcal{H}_0$ and so rearranging the model equation we obtain:
+    Consider the model $\vf{y}\sim N_n(\vf{X\beta},\sigma^2\vf{I}_n)$ of \cref{LM_generalized}, $\vf{R}\in\mathcal{M}_{r\times {k+1}}(\RR)$ where $r\leq k+1$, $\vf{c}\in\RR^{k+1}$ and suppose we want to test the hypothesis $\mathcal{H}_0:\vf{R}\vf\beta=\vf{c}$ versus $\mathcal{H}_1:\vf{R}\vf\beta\ne\vf{c}$.
+    Without loss of generality suppose we can eliminate the first $\beta,\ldots,\beta_r$ under $\mathcal{H}_0$ and so rearranging the model equation we obtain:
     $$\vf{y}_\ell=\vf{X}_\ell\vf{\beta}_\ell+\vf\varepsilon$$
-    where $\vf{\beta}_\ell=(\beta_{r+1},\ldots,\beta_k)$. The statistic that we take is: $$F=\frac{(\SSE_\ell-\SSE)/ r}{\SSE/(n-k-1)}\sim F_{r,n-k-1}$$
-    where the subindex in $\SSE_\ell$ indicates that this is the $\SSE$ for the model under $\mathcal{H}_0$.
+    where $\vf{\beta}_\ell=(\beta_{r+1},\ldots,\beta_k)$. The statistic that we take is:
+    \begin{equation}\label{LM_hypothesisgen}
+      F=\frac{(\SSE_\ell-\SSE)/ r}{\SSE/(n-k-1)}=\frac{(\SSR-\SSR_\ell)/ r}{\SSE/(n-k-1)}\sim F_{r,n-k-1}
+    \end{equation}
+    where the subindex in $\SSE_\ell$ and $\SSR_\ell$ indicates that this is the $\SSE$ and $\SSR$ for the model under $\mathcal{H}_0$, respectively.
   \end{proposition}
+  \subsubsection{Dummy variables}
+  \begin{definition}[Model without interaction]
+    Suppose we have a linear model of the form of \cref{LM_generalized}. We would like to measure the change in the response when adding a binary parameter (say men and women) to the model. Hence we identify that deterministic variable with a \emph{dummy variable} as follows:
+    \begin{equation}\label{LM_dummy}
+      d:=
+      \begin{cases}
+        1 & \text{for men}   \\
+        0 & \text{for women}
+      \end{cases}
+    \end{equation}
+    And we consider the new model: $$\vf{y}=\vf{X}\vf{\beta}+d\gamma\vf{1}+\vf{\varepsilon}$$
+    where $\vf{1}=(1,\ldots,1)$. Finally we may want to conclude whether the variable $d$ is relevant or not. This can be obtained by doing the $t$-test $\mathcal{H}_0:\gamma=0$\footnote{Note that this test is equivalent to the one in \cref{LM_hypothesisgen} due to \cref{LM_tF}.}. Note that, independently of the conclusion of the test, both regression lines (the one for men and the one for women) will be parallel.
+  \end{definition}
+  \begin{definition}[Model with interaction]
+    Suppose we have a linear model of the form of \cref{LM_generalized}. We would like to measure the change in the response when adding a dummy variable $d$ as in \cref{LM_dummy}. Now, consider the following \emph{model with interaction}: $$\vf{y}=\vf{X}\vf{\beta}+d\vf{X}\vf{\delta}+\vf{\varepsilon}$$
+    Let $\gamma:=\delta_0$. And now we can do tests for $\vf{\delta}$ or for $\gamma$. Note that, these regression lines won't be in general parallel.
+  \end{definition}
+  \begin{definition}[Segmented regression]
+    Suppose we have a linear model of the form of \cref{LM_generalized} and that for some reason we have noticeable change of the slope at $\vf{x}^*$ (known). Then, defining the dummy variable
+    \begin{equation}
+      d_i:=
+      \begin{cases}
+        1 & \text{if }x_{ki}\geq {x_i}^* \\
+        0 & \text{if }x_{ki}\leq {x_i}^*
+      \end{cases}
+    \end{equation}
+    we can consider the following model:
+    $$\vf{y}=\vf{X}\vf{\beta}+\vf{Y}\vf{\gamma}+\vf{\varepsilon}$$
+    where: $$\vf{Y}=\begin{pmatrix}
+        d_1(x_{11}-{x_1}^*) & \cdots & d_k(x_{1k}-{x_k}^*) \\
+        \vdots              & \ddots & \vdots              \\
+        d_1(x_{n1}-{x_1}^*) & \cdots & d_k(x_{nk}-{x_k}^*) \\
+      \end{pmatrix}$$
+  \end{definition}
+  \begin{figure}[H]
+    \centering
+    \includestandalone[mode=image|tex,width=0.5\linewidth]{Images/segmented_regression}
+    \caption{Segmented regression of a simple linear model}
+  \end{figure}
+  \subsubsection{Predicted confidence intervals}
+  \begin{definition}
+    Consider the model of \cref{LM_generalized} and suppose we have observed a new data value $\transpose{\vf{x}_h}=(1,x_{1h},\ldots,x_{kn})$. The \emph{response} or \emph{prediction} of this observation is $$y_h=\transpose{\vf{x}_h}\vf{\beta}+\varepsilon_h=\mu_h+\varepsilon_h$$
+    where $\mu_h$ is the \emph{average response}. The \emph{estimated average response} $\hat\mu_h$ and the \emph{estimation of the prediction} $\hat{y}_h$ coincide and they are: $$\hat{y}_h=\hat\mu_h=\transpose{\vf{x}_h}\vf{\hat\beta}$$
+  \end{definition}
+  \begin{proposition}[Confidence interval for the average response]
+    Consider the model of \cref{LM_generalized} and suppose we have observed a new data value $\transpose{\vf{x}_h}=(1,x_{1h},\ldots,x_{kn})$. Then:
+    \begin{enumerate}
+      \item The random variable $\hat\mu_h$ is a linear combination of $y_1,\ldots,y_n$ and: $$\Exp(\hat\mu_h)=\mu_h\qquad\Var(\hat\mu_h)=\sigma^2v_{hh}$$ where we have defined $v_{hh}:=\transpose{\vf{x}_h}{\left(\transpose{\vf{X}}\vf{X}\right)}^{-1}\vf{x}_h$.
+      \item $\hat\mu_h\sim N(\mu_h,\sigma^2v_{hh})$
+      \item $\displaystyle\frac{\hat\mu_h-\mu_h}{\sqrt{\MSE v_{hh}}}\sim t_{n-k-1}$
+    \end{enumerate}
+    Varying the value of $\vf{x}_h$ along the space of parameters we obtain a family of confidence intervals for $y_h$ which is called \emph{confidence band}.
+  \end{proposition}
+  \begin{proposition}[Confidence interval for the predicted value]
+    Consider the model of \cref{LM_generalized} and suppose we have observed a new data value $\transpose{\vf{x}_h}=(1,x_{1h},\ldots,x_{kn})$. Then:
+    \begin{enumerate}
+      \item The random variable $y_h-\hat{y}_h$ is a linear combination of $y_1,\ldots,y_n$ and: $$\Exp(y_h-\hat{y}_h)=0\qquad\Var(y_h-\hat{y}_h)=\sigma^2(1+v_{hh})$$
+      \item $y_h-\hat{y}_h\sim N(0,\sigma^2(1+v_{hh}))$
+      \item $\displaystyle\frac{y_h-\hat{y}_h}{\sqrt{\MSE (1+v_{hh})}}\sim t_{n-k-1}$
+    \end{enumerate}
+    Varying the value of $\vf{x}_h$ along the space of parameters we obtain a family of confidence intervals for $y_h$ which is called \emph{prediction band}.
+  \end{proposition}
+  \begin{figure}[H]
+    \centering
+    \includestandalone[mode=image|tex,width=0.5\linewidth]{Images/confidence_band}
+    \caption{Example of a confidence band (green-shaded region) and a prediction band (yellow-shaded region) for a simple linear model. Note that always the prediction band is greater than the confidence band}
+  \end{figure}
+  \begin{corollary}
+    Consider the simple model of \cref{LM_simple} and suppose we have observed a new data value $x_h$. Then: $$v_{hh}=\frac{1}{n}+\frac{{(x_h-\overline{x})}^2}{\sum_{i=1}^n{(x_i-\overline{x})}^2}$$
+  \end{corollary}
 \end{multicols}
 \end{document}

@@ -329,12 +329,29 @@
       b_n & =\frac{1}{\pi n c}\int_{-L}^Lg(x)\sin\left(\frac{\pi n x}{L}\right)\dd{x}
     \end{align*}
   \end{method}
+  \begin{proposition}
+    Consider the simplified Schrödinger equation problem:
+    \begin{equation}\label{PDE_schro-fixedendpoints}
+      \left\{
+      \begin{aligned}
+        \ii u_{t} & =u_{xx} \\
+        u(0,t)    & =0      \\
+        u(L,t)    & =0      \\
+        u(x,0)    & =u_0(x)
+      \end{aligned}
+      \right.
+    \end{equation}
+    The solution $u(x,t)$ to \cref{PDE_schro-fixedendpoints}, using separation of variables is: $$u(x,t)=\sum_{n=1}^\infty a_n\exp{-\ii\frac{\pi^2n^2}{L^2}t}\sin\left(\frac{\pi n x}{L}\right)$$ where:
+    \begin{equation*}
+      a_n =\frac{1}{L}\int_{-L}^Lf(x)\sin\left(\frac{\pi n x}{L}\right)\dd{x}
+    \end{equation*}
+  \end{proposition}
   \subsubsection{Variable coefficients}
   \begin{theorem}[Sturm-Picone comparison theorem]
     Let $p_i,q_i:\RR\rightarrow\RR$, $i=1,2$, be functions such that $0<p_2<p_1$ and $q_1<q_2$. Suppose we have that the functions $u(x)$ and $v(x)$ satisfy the following differential equations:
     \begin{align*}
-      {p_1(x)u'}'+q_1(x)u=0 \\
-      {p_2(x)u'}'+q_2(x)u=0
+      {(p_1(x)u')}'+q_1(x)u=0 \\
+      {(p_2(x)u')}'+q_2(x)u=0
     \end{align*}
     If $\alpha_1$, $\alpha_2$ are two successive roots of $u$, then one of the following holds:
     \begin{enumerate}
@@ -342,5 +359,51 @@
       \item $\exists\lambda\in\RR$ such that $v(x)=\lambda u(x)$ $\forall x\in\RR$.
     \end{enumerate}
   \end{theorem}
+  \begin{proposition}
+    Consider the following problem of the wave equation of non-constant coefficients:
+    \begin{equation}
+      \left\{
+      \begin{aligned}
+        \rho u_{tt} & ={(ku_x)}_x \\
+        u(0,t)      & =0          \\
+        u(L,t)      & =0          \\
+        u(x,0)      & =u_0(x)     \\
+        u_t(x,0)    & =v_0(x)
+      \end{aligned}
+      \right.
+    \end{equation}
+    Then, the general solution to this problem is:
+    $$u(x,t)=\sum_{n=0}^\infty X_n(x)\left[a_n\cos\left(\sqrt{\lambda_n}t\right)+ b_n\sin\left( \sqrt{\lambda_n}t\right)\right]$$ where $X_n(x)$ is the solution to the problem $$ \left\{
+      \begin{aligned}
+         & {(k(x)X_n')}'+\lambda_n\rho(x)X_n =0 \\
+         & X_n(0)                          =0   \\
+         & X_n(L)                          =0
+      \end{aligned}
+      \right.$$
+    and:
+    \begin{equation*}
+      a_n =\frac{\displaystyle\int_{0}^Lu_0(x)X_n(x)\rho(x)\dd{x}}{\displaystyle\int_{0}^LX_n(x)^2\rho(x)\dd{x}}\ \
+      b_n =\frac{\displaystyle\int_{0}^Lv_0(x)X_n(x)\rho(x)\dd{x}}{\displaystyle\sqrt{\lambda_n}\int_{0}^LX_n(x)^2\rho(x)\dd{x}}
+    \end{equation*}
+  \end{proposition}
+  \subsection{Heat equation}
+  \begin{proposition}
+    Consider the following boundary problem of the heat equation:
+    \begin{equation}\label{PDE_heat-fixedendpoints}
+      \left\{
+      \begin{aligned}
+        u_{t}  & =\alpha u_{xx} \\
+        u(0,t) & =0             \\
+        u(L,t) & =0             \\
+        u(x,0) & =u_0(x)
+      \end{aligned}
+      \right.
+    \end{equation}
+    with $\alpha=\const$.
+    The solution $u(x,t)$ to \cref{PDE_heat-fixedendpoints}, using separation of variables is: $$u(x,t)=\sum_{n=1}^\infty a_n\exp{-\frac{\alpha\pi^2n^2}{L^2}t}\sin\left(\frac{\pi n x}{L}\right)$$ where:
+    \begin{equation*}
+      a_n =\frac{1}{L}\int_{-L}^Lf(x)\sin\left(\frac{\pi n x}{L}\right)\dd{x}
+    \end{equation*}
+  \end{proposition}
 \end{multicols}
 \end{document}

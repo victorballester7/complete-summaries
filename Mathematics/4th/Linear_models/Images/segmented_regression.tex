@@ -1,0 +1,31 @@
+\documentclass{standalone}
+\usepackage{../../../../preamble_formulas}
+
+\begin{document}
+\begin{tikzpicture}[every node/.style={scale=1.25}]
+  \begin{axis}[
+      axis lines=middle,
+      xtick=\empty, ytick=\empty,
+      extra x ticks = {1},
+      extra x tick labels={$x^*$},
+      ylabel={$y$},
+      xlabel={$x$},
+    ]
+    \def\xmax{\pgfkeysvalueof{/pgfplots/xmax}}
+    \def\xmin{\pgfkeysvalueof{/pgfplots/xmin}}
+    \def\ymax{\pgfkeysvalueof{/pgfplots/ymax}}
+    \def\ymin{\pgfkeysvalueof{/pgfplots/ymin}}
+    % \addplot[only marks,mark size=0.5pt,red] table {normal.dat};
+    \def\eps{0.2}
+    \def\m{2}
+    \def\n{0.5}
+    \addplot[only marks,red,mark=*,mark size=0.5pt,domain=0:1,samples=200] {\m*x+ \eps*rand};
+    \addplot[thick,color_blue3,domain=0:1]{\m*x};
+    \addplot[only marks,red,mark=*,mark size=0.5pt,domain=1:2,samples=200] {\n*x+ \m -\n +\eps*rand};
+    \addplot[thick,color_blue3,domain=1:2]{\n*x+\m -\n};
+
+    \draw [thin,dashed] (axis cs:1,0) -- (axis cs:1,\m);
+
+  \end{axis}
+\end{tikzpicture}
+\end{document}

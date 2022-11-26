@@ -173,8 +173,8 @@
       \item {stable node} if $\lambda_1,\lambda_2\in\RR$ and $\abs{\lambda_1},\abs{\lambda_2}<1$.
       \item {unstable node} if $\lambda_1,\lambda_2\in\RR$ and $\abs{\lambda_1},\abs{\lambda_2}>1$.
       \item {saddle point} if $\lambda_1,\lambda_2\in\RR$ and $\abs{\lambda_1}<1$ and $\abs{\lambda_2}>1$ (or viceversa).
-      \item {stable focus} if $\lambda_1,\lambda_2\in\CC$ and $\abs{\Re\lambda_1}<1$.
-      \item {unstable focus} if $\lambda_1,\lambda_2\in\CC$ and $\abs{\Re\lambda_1}>1$.
+      \item {stable focus} if $\lambda_1,\lambda_2\in\CC$ and $\abs{\lambda_1}<1$.
+      \item {unstable focus} if $\lambda_1,\lambda_2\in\CC$ and $\abs{\lambda_1}>1$.
     \end{itemize}
   \end{theorem}
   \subsection{Study of local dynamics}
@@ -210,16 +210,19 @@
   \begin{definition}
     The \emph{normal form} of a dynamical system is a simplified form that can be useful in determining the system's behavior.
   \end{definition}
+  \begin{definition}
+    The \emph{codimension} of a bifurcation is the number of parameters which must be varied for the bifurcation to occur.
+  \end{definition}
   \begin{definition}[Saddle-node bifurcation]
-    The normal form of a \emph{saddle-node bifurcation} is: $$x'=x^2+\mu$$
+    The normal form of the codimension-one \emph{saddle-node bifurcation} is: $$x'=x^2+\mu$$
     \cref{DS_sn} shows the qualitative behavior of that system\footnote{In these images, the red lies means that the point $(\mu,x)$ is repelling. The blue lines means that the point $(\mu,x)$ is attracting.}.
   \end{definition}
   \begin{definition}[Transcritical bifurcation]
-    The normal form of a \emph{transcritical bifurcation} is: $$x'=x^2+\mu x$$
+    The normal form of the codimension-one \emph{transcritical bifurcation} is: $$x'=x^2+\mu x$$
     \cref{DS_trans} shows a qualitative behavior of the stability of the equilibria.
   \end{definition}
   \begin{definition}[Pitchfork bifurcation]
-    The normal form of a \emph{pitchfork bifurcation} is: $$x'=x^3+\mu x$$
+    The normal form of the codimension-one \emph{pitchfork bifurcation} is: $$x'=x^3+\mu x$$
     \cref{DS_fork} shows a qualitative behavior of the stability of the equilibria.
   \end{definition}
   \begin{figure}[H]
@@ -520,7 +523,7 @@
     We define the \emph{$n$-th Lyapunov constant} as: $$\lyapunov{n}:=v_{2n+1}(2\pi)\footnote{Note that this has a strong relation with the Poincaré map $\Pi(\rho)=r(2\pi,\rho)$ given the section $\{(r,0):r\simeq 0\}$.}\footnote{In practice we will only compute the $\lyapunov{n}$ coefficient if $v_k(2\pi)=0$ for $k=2,\ldots,2n$.}$$
   \end{proposition}
   \begin{theorem}[Hopf bifurcation theorem]
-    Consider the system of \cref{DS_eqhopf} with $\mu=0$ and suppose $\lyapunov{1}\ne 0$. Then, for $\mu\gtrsim 0$ there exists a unique periodic orbit that bifurcates (i.e. it appears and disappears) at the origin. If $\lyapunov{1}> 0$ the periodic orbit is an unstable limit cycle, and if $\lyapunov{1}< 0$ the periodic orbit is an stable limit cycle (see \cref{DS_hopf}).
+    Consider the system of \cref{DS_eqhopf} with $\mu=0$ and suppose $\lyapunov{1}\ne 0$. Then, for $\mu\gtrsim 0$ there exists a unique periodic orbit that bifurcates (i.e. it appears and disappears) at the origin. If $\lyapunov{1}> 0$ the periodic orbit is an unstable limit cycle, and if $\lyapunov{1}< 0$ the periodic orbit is an stable limit cycle (see \cref{DS_hopf}). This codimension-one bifurcation is called \emph{Hopf-bifurcation}.
   \end{theorem}
   \begin{figure}[H]
     \centering
@@ -546,9 +549,84 @@
   \end{corollary}
   \begin{theorem}[Poicaré's method]
     Consider the system of \cref{DS_eqhopf} with $\mu=0$. Then, there exists a function $H(x,y)$\footnote{This $H$ will be either a first integral of the system or a Lyapunov function. In the first case, we obtain a center for the system; in the second one, a focus.} of the form $$H(x,y)=x^2+y^2+H_3(x,y)+H_4(x,y)+\cdots$$
-    where each $H_j(x,y)$ is an homogeneous polynomial of degree $j$, such that: $$H'=\sum_{k=1}^\infty \lyapunov{k}{(x^2+y^2)}^{2k}\footnote{Note that finding such a function $H$ is computationally more efficient that finding the values of $v_{2n+1}(2\pi)$ of Lyapunov's method.}$$
+    where each $H_j(x,y)$ is an homogeneous polynomial of degree $j$, such that: $$H'=\sum_{k=1}^\infty \lyapunov{k}{(x^2+y^2)}^{k}\footnote{Note that finding such a function $H$ is computationally more efficient that finding the values of $v_{2n+1}(2\pi)$ of Lyapunov's method.}$$
   \end{theorem}
-  % \subsection{Global dynamics in continuous systems}
+  \subsection{Global dynamics in continuous systems}
+  \subsubsection{Bifurcation of periodic orbits}
+  \begin{proposition}
+    Consider the differential system:
+    \begin{equation}\label{DS_eqhopf}
+      \left\{
+      \begin{aligned}
+        x' & =-y + p_2(x,y) \\
+        y' & =x+ q_2(x,y)
+      \end{aligned}
+      \right.
+    \end{equation}
+    where $p_2$ and $q_2$ are homogeneous polynomials of degree 2. Then, in a neighbourhood of the origin there is at most 3 limit cycles.
+  \end{proposition}
+  \begin{theorem}[Bendixson's theorem]
+    Let $U\subseteq \RR^2$ be an open set and $\vf{f}:U\rightarrow\RR^2$ be a vector field of class $\mathcal{C}^1$ such that $\div \vf{f}$ has constant sign in a simply connected region $R$ and is not identically zero on any subregion of $R$ with positive area. Then, the system $\vf{x}'=\vf{f}(\vf{x})$ does not have periodic orbits that lie entirely on $R$.
+  \end{theorem}
+  \begin{theorem}[Bendixson-Dulac theorem]
+    Let $U\subseteq \RR^2$ be an open set and $\vf{f}:U\rightarrow\RR^2$ be a vector field of class $\mathcal{C}^1$. Suppose that there exists a simply connected region $R$ and a function $h:R\rightarrow\RR$ of class $\mathcal{C}^1$ such that $\div (h\vf{f})$ has constant sign on $R$ and is not identically zero on any subregion of $R$ with positive area. Then, the system $\vf{x}'=\vf{f}(\vf{x})$ doesn't have periodic orbits that lie entirely on $R$.
+  \end{theorem}
+  \begin{theorem}[Generalized Bendixson-Dulac theorem]
+    Let $U\subseteq \RR^2$ be an open set, $n\in\NN\cup\{0\}$ and $\vf{f}:U\rightarrow\RR^2$ be a vector field of class $\mathcal{C}^1$. Suppose that there exists a subset $R\subseteq U$ homeomorphic to a disk with $n$ holes and a function $h:R\rightarrow\RR$ of class $\mathcal{C}^1$ such that $\div (h\vf{f})$ has constant sign on $R$ and is not identically zero on any subregion of $R$ with positive area. Then, the system $\vf{x}'=\vf{f}(\vf{x})$ has at most $n$ periodic orbits that lie entirely on $R$.
+  \end{theorem}
+  \begin{definition}[Homoclinic bifurcation]
+    A \emph{homoclinic bifurcation} is a bifurcation in which a limit cycle collides with a saddle point.
+  \end{definition}
+  \begin{theorem}[Bogdanov-Takens bifurcation]
+    The normal form of the codimension-two \emph{Bogdanov-Takens bifurcation} is:
+    \begin{equation}\label{DS_eqhopf}
+      \left\{
+      \begin{aligned}
+        x' & =y                       \\
+        y' & =\beta_1+\beta_2x+x^2-xy
+      \end{aligned}
+      \right.
+    \end{equation}
+    Observe that three codimension-one bifurcations occur nearby: a saddle-node bifurcation, a Hopf bifurcation and a homoclinic bifurcation.
+  \end{theorem}
+  \begin{proposition}[Routh-Hurwitz stability criterion]
+    Consider the following polynomial: $$p(x)=a_nx^n+a_{n-1}x^{n-1}+\cdots+a_1x+1$$
+    The \emph{Routh-Hurwitz stability criterion} gives a method to conclude whether all the real parts of the roots of $p$ are negative or not. Construct a table as follows:
+    \begin{center}
+      \def\arraystretch{1}
+      \begin{tabular}{|c|c|c|c|}
+        \hline
+        $a_n$     & $a_{n-2}$ & $a_{n-4}$ & $\cdots$ \\
+        \hline
+        $a_{n-1}$ & $a_{n-3}$ & $a_{n-5}$ & $\cdots$ \\
+        \hline
+        $b_{11}$  & $b_{12}$  & $b_{13}$  & $\cdots$ \\
+        \hline
+        $b_{21}$  & $b_{22}$  & $b_{23}$  & $\cdots$ \\
+        \hline
+        $\vdots$  & $\vdots$  & $\vdots$  & $\ddots$ \\
+        \hline
+      \end{tabular}
+      \captionof{table}{}
+      \label{DS_routhhurwitz}
+    \end{center}
+    where the coefficient $b_{ij}$  is obtained by computing the determinant of the matrix whose first column is formed by the the first two elements of the two rows just above $b_{ij}$, and the second column is formed by the two elements of the $(i+1)$-th column in the two rows just above $b_{ij}$. Finally this determinant is divided by the first by minus the first coefficient of the row just above $b_{ij}$. That is:
+    \begin{align*}
+      b_{1j} & =-\frac{1}{a_{n-1}}\begin{vmatrix}
+                                    a_n     & a_{n-2j}   \\
+                                    a_{n-1} & a_{n-2j-1}
+                                  \end{vmatrix}                  \\
+      b_{2j} & =-\frac{1}{b_{11}}\begin{vmatrix}
+                                   a_{n-1} & a_{n-2j-1} \\
+                                   b_{11}  & b_{1(j+1)}
+                                 \end{vmatrix}                   \\
+      b_{ij} & =-\frac{1}{b_{(i-1)1}}\begin{vmatrix}
+                                       b_{(i-2)1} & b_{(i-2)(j+1)} \\
+                                       b_{(i-1)1} & b_{(i-1)(i+1)}
+                                     \end{vmatrix} \quad\forall i\geq 3
+    \end{align*}
+    When completed, the number of sign changes in the first column of \cref{DS_routhhurwitz} will be the number of non-negative roots.
+  \end{proposition}
   % \subsection{Global dynamics in discrete systems}
 \end{multicols}
 \end{document}
