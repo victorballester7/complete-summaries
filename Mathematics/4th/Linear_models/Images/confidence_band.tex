@@ -1,0 +1,52 @@
+\documentclass{standalone}
+\usepackage{../../../../preamble_formulas}
+
+\begin{document}
+\begin{tikzpicture}[every node/.style={scale=1.25}]
+  \begin{axis}[
+      axis lines=middle,
+      ymin=-0.25,
+      % xmin=-10,xmax=10,ymin=-10,ymax=10, 
+      xtick=\empty, ytick=\empty,
+      extra x ticks = {0.5},
+      extra x tick labels={$\overline{x}$},
+      extra y ticks = {0.5*\m+\n},
+      extra y tick labels={$\overline{y}$},
+      ylabel={$y$},
+      xlabel={$x$},
+    ]
+    \def\xmax{\pgfkeysvalueof{/pgfplots/xmax}}
+    \def\xmin{\pgfkeysvalueof{/pgfplots/xmin}}
+    \def\ymax{\pgfkeysvalueof{/pgfplots/ymax}}
+    \def\ymin{\pgfkeysvalueof{/pgfplots/ymin}}
+    % \addplot[only marks,mark size=0.5pt,red] table {normal.dat};
+    \def\eps{0.2}
+    \def\m{1}
+    \def\n{0.5}
+    \addplot[only marks,red,mark=*,mark size=0.5pt,domain=0:1,samples=200] {\m*x+\n+ ((x-0.5)^2+\eps/2)*rand};
+    \addplot[thick,color_blue3,domain=0:1]{\m*x +\n};
+
+    \draw [thin,dashed] (axis cs:0.5,0) -- (axis cs:0.5,\m*0.5+\n);
+    \draw [thin,dashed] (axis cs:0,0.5*\m+\n) -- (axis cs:0.5,0.5*\m+\n);
+
+    \def\alpha{0.35}
+    \def\alphb{0.25}
+    \def\beta{-\alpha+\n}
+    \def\betb{-\alphb+\n}
+    \addplot[domain=0:1,name path=A,color_green3,thick]{exp(x-\alpha)+\beta};
+    \addplot[domain=0:1,name path=B,\sta,thick]{exp(x-\alphb)+\betb};
+
+    \addplot[domain=0:1,name path=C,color_green3,thick]{log10(1+x-0.65)/log10(e)+0.85};
+    \addplot[domain=0:1,name path=D,\sta,thick]{log10(1+x-0.75)/log10(e)+0.75};
+    % \addplot[domain=0:1,name path=B,\sta]{exp(x-\alphb)+\betb};
+    \addplot[color_green3!30,opacity=0.5] fill between[
+        of=A and C,
+        soft clip={domain=0:1},
+      ];
+    \addplot[\sta!30,opacity=0.5] fill between[
+        of=B and D,
+        soft clip={domain=0:1},
+      ];
+  \end{axis}
+\end{tikzpicture}
+\end{document}

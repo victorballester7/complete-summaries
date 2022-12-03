@@ -1,0 +1,69 @@
+\documentclass{standalone}
+\usepackage{../../../../preamble_formulas}
+
+\begin{document}
+\begin{tikzpicture}[decorated curves/.style={
+        postaction={
+            decorate,
+            decoration={
+                markings,
+                mark=at position 0.333 with {\arrow[black,scale=1.5]{stealth}},
+                mark=at position 0.666 with {\arrow[black,scale=1.5]{stealth}}}}
+      },decorated curves rev/.style={
+        postaction={
+            decorate,
+            decoration={
+                markings,
+                mark=at position 0.333 with {\arrow[black,scale=1.5]{stealth[reversed]}},
+                mark=at position 0.666 with {\arrow[black,scale=1.5]{stealth[reversed]}}}}
+      },decorated separatrices rev/.style={
+        postaction={
+            decorate,
+            decoration={
+                markings,
+                mark=at position 0.5 with {\arrow[scale=1.5]{stealth[reversed]}},
+              }}
+      },decorated separatrices/.style={
+        postaction={
+            decorate,
+            decoration={
+                markings,
+                mark=at position 0.5 with {\arrow[scale=1.5]{stealth}},
+              }}
+      }]
+  \begin{axis}[
+      xmin=-4, xmax=4,
+      ymin=-4, ymax=4,
+      xtick=\empty, ytick=\empty,
+      ylabel={$y$},
+      xlabel={$x$},
+      %axis on top,
+      hide axis,
+    ]
+    \def\xmax{\pgfkeysvalueof{/pgfplots/xmax}}
+    \def\xmin{\pgfkeysvalueof{/pgfplots/xmin}}
+    \def\ymax{\pgfkeysvalueof{/pgfplots/ymax}}
+    \def\ymin{\pgfkeysvalueof{/pgfplots/ymin}}
+    \def\s{4}
+    \foreach \i in{1}{
+        \addplot[thick,samples=100,black,decorated separatrices] {x^2/\s+\i};
+        \addplot[thick,samples=100,black,decorated separatrices rev] {-x^2/\s-\i};
+      }
+    \addplot[thick,samples=100,black,domain=\xmin:0,decorated separatrices] {x^2/\s};
+    \addplot[thick,samples=100,black,domain=0:\xmax,decorated separatrices] {x^2/\s};
+    \addplot[thick,samples=100,black,domain=\xmin:0,decorated separatrices rev] {-x^2/\s};
+    \addplot[thick,samples=100,black,domain=0:\xmax,decorated separatrices rev] {-x^2/\s};
+    % \def\eps{0.18}
+    % %\addplot[thin,samples=100,white] {3+\eps};
+    % \addplot[thin,samples=100,white] {-2-\eps};
+    \addplot[thick,black,smooth,decorated curves] coordinates {(-4,3.25) (-3,1.5) (-2.5,0.85) (-1.5,0.15) (-1.5,-0.15) (-2.5,-0.85) (-3,-1.5) (-4,-3.25)};
+    \addplot[thick,black,smooth,decorated curves rev] coordinates {(4,3.25) (3,1.5) (2.5,0.85) (1.5,0.15) (1.5,-0.15) (2.5,-0.85) (3,-1.5) (4,-3.25)};
+
+    \def\N{60}
+    \def\ell{(\xmax-\xmin)/\N}
+    \addplot[thin,mark=*,only marks, mark size=\ell/2*0.852*2cm,black] coordinates {
+        (0,0)
+      };
+  \end{axis}
+\end{tikzpicture}
+\end{document}

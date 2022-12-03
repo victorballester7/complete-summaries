@@ -107,10 +107,16 @@
     where $\ket{\vf\phi_{i,r}}$ are the different eigenvectors of eigenvalue $\lambda_i$.
   \end{proposition}
   \begin{definition}[Commutator]
-    Let $\vf{A}$, $\vf{B}$ be two linear operators. We define the \emph{commutator} between them as: $$[\vf{A},\vf{B}]:=\vf{AB}-\vf{BA}$$
+    Let $\vf{A}$, $\vf{B}$ be two linear operators. We define the \emph{commutator} between them as: $$\comm{\vf{A}}{\vf{B}}:=\vf{AB}-\vf{BA}$$
+  \end{definition}
+  \begin{definition}[Anticommutator]
+    Let $\vf{A}$, $\vf{B}$ be two linear operators. We define the \emph{commutator} between them as: $$\acomm{\vf{A}}{\vf{B}}:=\vf{AB}+\vf{BA}$$
+  \end{definition}
+  \begin{definition}
+    Two operators $\vf{A}$, $\vf{B}$ are \emph{compatible} if there exists a basis $(\ket{\vf{e}_1},\ldots,\ket{\vf{e}_n})$ such that $\vf{A}\ket{\vf{e}_i}=a_i\ket{\vf{e}_i}$ and $\vf{B}\ket{\vf{e}_i}=b_i\ket{\vf{e}_i}$ $\forall i$.
   \end{definition}
   \begin{theorem}
-    Two Hermitian operators $\vf{A}$, $\vf{B}$ commute (i.e. $[\vf{A},\vf{B}]=0$) if and only if there exists an orthonormal basis that is proper for both.
+    Two Hermitian operators $\vf{A}$, $\vf{B}$ commute (i.e. $\comm{\vf{A}}{\vf{B}}=0$) if and only if they are compatible.
   \end{theorem}
   \begin{definition}
     Given a $f\in\mathcal{C}^\infty(\RR)$ and a linear operator $\vf{A}$, we define $f(\vf{A})$ as: $$f(\vf{A}):=\sum_{n=0}^\infty \frac{f^{(n)}(0)}{n!}\vf{A}^n$$
@@ -157,10 +163,123 @@
   \begin{definition}[Postulate V]
     The time evolution of the state vector $\ket{\vf\psi}$ is governed by the \emph{Schrödinger equation}, where $\vf{H}$ is the observable associated with the total energy of the system (called the \emph{Hamiltonian}): $$\ii \hbar\dv{}{t}\ket{\vf\psi}=\vf{H}\ket{\vf{\psi}}$$
   \end{definition}
+  \begin{proposition}
+    Let $\ket{\vf{E}_i(t)}$ be an eigenvector of the Hamiltonian such that $\vf{H}\ket{\vf{E}_i(t)}=E_i\ket{\vf{E}_i(t)}$. Then, the evolution of the state is given by: $$\ket{\vf{E}_i(t)}=\exp{-\ii\frac{E_i t}{\hbar}}\ket{\vf{E}_i(t_0)}$$ These kind of states are called \emph{stationary states} because they only have a global phase varying and so the physical properties remain the same.
+  \end{proposition}
+  \begin{proposition}
+    The time evolution maps the orthonormal basis of eigenvectors $(\ket{\vf{E}_1},\ldots,\ket{\vf{E}_n})$ of $\vf{H}$ into another orthogonal basis $(\exp{-\ii\frac{E_it}{\hbar}}\ket{\vf{E}_1},\ldots,\exp{-\ii\frac{E_it}{\hbar}}\ket{\vf{E}_n})$. Hence, this is equivalent to say that the linear operator that describes the evolution is unitary: $$\vf{U}_t=\sum_{i=1}^n\exp{-\ii\frac{E_it}{\hbar}}\dyad{\vf{E}_i}=\exp{-\ii\frac{\vf{H}t}{\hbar}}$$
+  \end{proposition}
   \subsubsection{Statistic analysis}
   \begin{proposition}
-    The expected value of the observable $\vf{A}$ for the system in state represented by the unit vector $\ket{\psi}\in\mathcal{H}$ is: $$\ev{\vf{A}}_{\vf\psi}=\ev{\vf{A}}{\vf\psi}$$
+    The expected value of the observable $\vf{A}$ for the system in state represented by the unit vector $\ket{\vf\psi}\in\mathcal{H}$ is: $$\ev{\vf{A}}_{\vf\psi}=\ev{\vf{A}}{\vf\psi}$$
     Its variance is: $${{(\Delta\vf{A})}_{\vf\psi}}^2=\ev{\vf{A}^2}_{\vf\psi}-{\ev{\vf{A}}_{\vf\psi}}^2=\ev{\vf{A}^2}{\vf\psi}-\ev{\vf{A}}{\vf\psi}^2$$
   \end{proposition}
+  \subsubsection{Indetermination relation}
+  \begin{theorem}[Robertson inequality]
+    For all state and for any pair of observables $(\vf{A},\vf{B})$ we have: $$\Delta\vf{A}\Delta\vf{B}\geq \frac{1}{2}\abs{\langle\comm{\vf{A}}{\vf{B}}\rangle}$$
+  \end{theorem}
+  \begin{corollary}[Heisenberg uncertainty principle]
+    In the case of the position $\vf{X}$ and moment $\vf{P}$ we have $\comm{\vf{X}}{\vf{Y}}=\ii \hbar\vf{I}$ and so Robertson inequality becomes: $$\Delta\vf{X}\Delta\vf{P}\geq \frac{\hbar}{2}$$
+  \end{corollary}
+  \subsubsection{Evolution of expected values}
+  \begin{proposition}[Ehrenfest theorem]
+    The time evolution of the expected value in the state $\ket{\vf\psi}\in\mathcal{H}$ is given by:
+    $$\dv{}{t}\ev{\vf{A}}_{\vf\psi}=\frac{1}{\ii\hbar}\ev{\comm{\vf{A}}{\vf{H}}}{\vf\psi(t)}=\frac{1}{\ii\hbar}\ev{\comm{\vf{A}}{\vf{H}}}_{\vf\psi}$$
+  \end{proposition}
+  \subsubsection{Compativility and commutation between observables}
+  \begin{definition}
+    A \emph{Complete set of commuting observables} is a set $\{\vf{A}_i:i\in I\}$ of observables such that $\comm{\vf{A}_i}{\vf{A}_j}=0$ $\forall i,j\in\ I$ and the basis in common in unique (i.e. they share always the base basis of eigenvectors).
+  \end{definition}
+  \subsubsection{Stern-Gerlach experiment, Larmor precession and the qubit}
+  \begin{proposition}
+    The \emph{Stern-Gerlach} experiment let us measure the component of the magnetic moment that points towards the direction of the magnetic field. The magnetic moment in each component $i$ is proportional to the spin $S_i$ with the following relation:
+    $$\vf\mu_i=-g\frac{q}{2 m} \vf{S}_i=\gamma\vf{S}_i\qquad i\in\{x,y,z\}$$
+    where $\gamma$ is the \emph{gyromagnetic ratio}. So measure the observable $\vf\mu_i$ is equivalent to measure the observable $\vf{S}_i=\pm\frac{\hbar}{2}$. The postulates give the following matrix for each $\vf{S}_i$: $$\vf{S}_x=\frac{\hbar}{2}
+      \begin{pmatrix}
+        0 & 1 \\
+        1 & 0
+      \end{pmatrix}\quad\vf{S}_y=\frac{\hbar}{2}
+      \begin{pmatrix}
+        0   & -\ii \\
+        \ii & 0
+      \end{pmatrix}\quad\vf{S}_z=\frac{\hbar}{2}
+      \begin{pmatrix}
+        1 & 0  \\
+        0 & -1
+      \end{pmatrix}$$
+    Moreover we have that $$\comm{\hat{S}_i}{\hat{S}_j}=\ii\hbar\varepsilon_{ijk}\vf{S}_k$$ where $\varepsilon_{ijk}$ is the \emph{Levi-Civita symbol}: $$\varepsilon_{ijk}=
+      \begin{cases}
+        +1 & \text{if } (i,j,k) =(1,2,3), (2,3,1), (3,1,2), \\
+        -1 & \text{if } (i,j,k) =(3,2,1), (1,3,2), (2,1,3), \\
+        0  & \text{if } i = j, j = k, k = i
+      \end{cases}$$
+  \end{proposition}
+  \begin{definition}
+    We define the \emph{Pauli matrices} as: $$\vf{\sigma}_x=
+      \begin{pmatrix}
+        0 & 1 \\
+        1 & 0
+      \end{pmatrix}\quad\vf{\sigma}_y=
+      \begin{pmatrix}
+        0   & -\ii \\
+        \ii & 0
+      \end{pmatrix}\quad\vf{\sigma}_z=
+      \begin{pmatrix}
+        1 & 0  \\
+        0 & -1
+      \end{pmatrix}$$
+    Hence, $\vf{S}_i=\frac{\hbar}{2}\vf\sigma_i$.
+  \end{definition}
+  \begin{definition}
+    Given $\vf{n}\in\RR^3$ with $\norm{n}=1$ and $\vf{n}=(\sin\theta\cos\varphi,\sin\theta\sin\varphi,\cos\theta)$ in spherical coordinates. We define the operator $\vf{S}_{\vf{n}}$ as:
+    $$\vf{S}_{\vf{n}}=\vf{n}\cdot\vf\sigma=\frac{\hbar}{2}\begin{pmatrix}
+        \cos\theta                 & \sin\theta\exp{-\ii\varphi} \\
+        \sin\theta\exp{\ii\varphi} & -\cos\theta
+      \end{pmatrix}$$
+    where $\vf\sigma:=\transpose{\begin{pmatrix}
+          \vf{\sigma}_x & \vf{\sigma}_y & \vf{\sigma}_z
+        \end{pmatrix}}$.
+    Thus, given a state $\ker{\vf{\psi}}\in\mathcal{H}$ we can find a representant of the ray it creates centered at the unit sphere. This sphere is called \emph{Bloch sphere}.
+  \end{definition}
+  \begin{definition}
+    A \emph{qubit} is a quantum system of dimension 2.
+  \end{definition}
+  \begin{definition}
+    Suppose we apply a magnetic field $\vf{B}$ in the $z$-axis. The Hamiltonian of the system will be $$\vf{H}=-\vf\mu\cdot\vf{B}=-\vf\mu_z B=g\frac{e}{2m} \vf{S}_z B = \frac{e}{m}\vf{S}_z B$$ beacause $g\approx 2$ for the electron.
+    We define the \emph{Bohr magneton} as: $$\mu_{\mathrm{B}}:=\frac{e\hbar}{2 m}$$
+    And so we have that: $$\vf{H}=\mu_{\mathrm{B}} B\vf\sigma_z=\mu_{\mathrm{B}} B\begin{pmatrix}
+        1 & 0  \\
+        0 & -1
+      \end{pmatrix}=\frac{1}{2}\hbar \omega\vf\sigma_z$$
+    where $\omega=\frac{2\mu_{\mathrm{B}} B}{\hbar}$. In this case the unitary operator that describes the evolution is: $$\vf{U}_t=\exp{-\ii\frac{\vf{H}t}{\hbar}}=\exp{-\ii\frac{\omega t}{2}\vf\sigma_z}$$
+  \end{definition}
+  \begin{proposition}
+    Pauli matrices $\vf\sigma_x$, $\vf\sigma_y$ and $\vf\sigma_z$ satisfy the following properties $\forall i,j,k\in\{x,y,z\}$:
+    \begin{enumerate}
+      \item $\trace \vf\sigma_i=0$
+      \item $\comm{\vf\sigma_i}{\vf\sigma_j}=2\ii \varepsilon_{ijk}\vf\sigma_k$
+      \item ${\vf\sigma_x}^2={\vf\sigma_y}^2={\vf\sigma_z}^2=\vf{I}_2$
+      \item $\acomm{\vf\sigma_i}{\vf\sigma_j}=2\delta_{jk}\vf{I}_2$
+      \item $\vf\sigma_i\vf\sigma_j=\ii \varepsilon_{ijk}\vf\sigma_k+\delta_{jk}\vf{I}_2$
+    \end{enumerate}
+  \end{proposition}
+  \begin{theorem}
+    The set $(\vf{I}_2,\vf\sigma_x,\vf\sigma_y,\vf\sigma_z)$ is a basis on the vector space of real Hermitian matrices of dimension 2. Hence,any Hermitian operator $\vf{A}$ can be written as $\vf{A}=\frac{1}{2}\sum_{i=0}^3d_i\vf\sigma_i$, where we have denoted $\vf\sigma_0=:\vf{I}_2$.
+  \end{theorem}
+  \begin{lemma}
+    Let $\vf{A}=\frac{1}{2}\sum_{i=0}^3d_i\vf\sigma_i$ be a Hermitian operator. Then: $$\trace(\vf\sigma_j\vf{A})=d_j\in\RR$$
+  \end{lemma}
+  \begin{proposition}
+    Let $\vf{A}=\frac{1}{2}\sum_{i=0}^3d_i\vf\sigma_i$ be a Hermitian operator and denote $\vf{d}:=\transpose{(d_1,d_2,d_3)}=:\norm{d}\vf{n}$. Then we can write $\vf{A}$ as:
+    \begin{align*}
+      \vf{A}=\frac{1}{2}\left(d_0+\norm{d}\vf{n}\cdot\vf\sigma\right)=: & \frac{1}{2}\left(d_0\vf{I}_2+\norm{d}\vf{n}\cdot\vf\sigma\right) \\=:&\frac{1}{2}\left(d_0\vf{I}_2+\norm{d}\vf\sigma_{\vf{n}}\right)
+    \end{align*}
+    Hence, its eigenvalues will be $\frac{1}{2}(d_0\pm\norm{d})$.
+  \end{proposition}
+  \begin{theorem}
+    The equation of movement of a state $\ket{\vf{m}}$ in a hamiltonian $\vf{H}=\frac{\hbar}{2}\left(d_0\vf{I}_2+\norm{d}\vf\sigma_{\vf{n}}\right)$ is:
+    $$\dv{\vf{m}}{t}=-\norm{\vf{d}}({\vf{m}}\crossprod{\vf{n}})$$
+  \end{theorem}
+  \subsection{Wave mechanics}
 \end{multicols}
 \end{document}

@@ -93,22 +93,34 @@
   \begin{method}[Characteristic equation]
     Consider the following ode of order $n$ of constant coefficients:
     \begin{equation}\label{DE_char}
-      a_n x^{(n)} + a_{n-1}x^{(n-1)} + \cdots + a_1 x' + a_0 x = 0
+      x^{(n)} + a_{n-1}x^{(n-1)} + \cdots + a_1 x' + a_0 x = 0
     \end{equation}
-    We define the \emph{characteristic equation} of that system as the equation: $$p(r):=a_n r^n + a_{n-1}r^{n-1} + \cdots + a_1 r + a_0 = 0$$
+    We define the \emph{characteristic equation} of that system as the equation: $$p(r):=r^n + a_{n-1}r^{n-1} + \cdots + a_1 r + a_0 = 0$$
     In order to find the solution of this ode, we need to find the solutions to $p(r)=0$. So suppose $p$ has $s$ distinct real roots and $2(m-s)$ distinct complex roots.
     $$\lambda_1,\ldots,\lambda_s,\lambda_{s+1},\overline{\lambda_{s+1}},\ldots,\lambda_{m},\overline{\lambda_m}$$
     Here, $\lambda_i\in\RR$ $\forall i=1,\ldots,s$ and $\lambda_{i}=\alpha_i+\ii\beta_i\in\CC$ $\forall i=s+1,\ldots,m$. Assume, each of these roots have multiplicity $k_i\in\NN$. Then, the general solution to \cref{DE_char} is:
     \begin{multline*}
-      \varphi(t)=\sum_{i=1}^s\left(c_{i,1}+c_{i,2}t+\cdots+c_{i,k_i}t^{k_i-1}\right)\exp{\lambda_i t}+\\
-      +\sum_{i=s+1}^m\sum_{j=1}^{k_i}c_{i,j}t^{j-1}\exp{\alpha_i t}\left(\cos(\beta_i t)+\sin(\beta_i t)\right)
+      \varphi(t)=\sum_{i=1}^s\left(c_{i,0}+c_{i,1}t+\cdots+c_{i,k_i-1}t^{k_i-1}\right)\exp{\lambda_i t}+\\
+      +\sum_{i=s+1}^m\sum_{j=0}^{k_i-1}t^{j}\exp{\alpha_i t}\left(c_{i,j,1}\cos(\beta_i t)+c_{i,j,2}\sin(\beta_i t)\right)
     \end{multline*}
-    where $c_{i,j}\in\RR$ are constants.
+    where $c_{i,j,k}\in\RR$ are constants.
   \end{method}
+  \begin{proposition}
+    Consider a system of the form \cref{DE_char} which is equivalent to: $$\vf{x}'=
+      \begin{pmatrix}
+        0      & 1      & 0      & \cdots & 0        \\
+        0      & 0      & 1      & \ddots & \vdots   \\
+        \vdots & \vdots & \ddots & \ddots & 0        \\
+        0      & 0      & \cdots & 0      & 1        \\
+        -a_0   & -a_1   & -a_2   & \cdots & -a_{n-1}
+      \end{pmatrix}
+      =:\vf{Ax}$$
+    Then, the characteristic equation is precisely the characteristic polynomial of $\vf{A}$.
+  \end{proposition}
   \begin{corollary}
     Consider the following ode of order $n$ of constant coefficients:
     \begin{equation}\label{DE_char2}
-      x'' + px' q = 0
+      x'' + px' + q = 0
     \end{equation}
     Let $\lambda_1,\lambda_2$ be the roots of the polynomial $p(r)=r^2+pr+q$.
     Then, the general solution to \cref{DE_char2} is:
@@ -816,7 +828,7 @@
     Let $U,V\subseteq \RR^n$ be open sets and $\vf{f}:U\rightarrow\RR^n$, $\vf{g}:V\rightarrow\RR^n$ be vector fields of class $\mathcal{C}^1$ with flows $\vf{\phi}$ and $\vf{\psi}$, respectively, and $r\in\NN\cup\{0,\infty\}$. We say that $\vf{f}$ and $\vf{g}$ are \emph{conjugate} of class $\mathcal{C}^r$ if there exists a diffeomorphism $\vf{h}:U\rightarrow V$ of class $\mathcal{C}^r$ such that $\vf{h}(\vf{\phi}(t,\vf{x}))=\vf{\psi}(t,\vf{h}(\vf{x}))$ $\forall(t,\vf{x})\in \domain(\vf{\phi})$ when the equation is well-defined\footnote{That is, $\forall(t,\vf{x})\in \domain(\vf{\phi})$ such that $(t,\vf{h}(\vf{x}))\in \domain(\vf{\psi})$.}. In particular, if $r=0$ we say that $\vf{f}$ and $\vf{g}$ are \emph{locally topologically conjugate}. That diffeomorphism $\vf{h}$ is called a \emph{local conjugacy} (of class $\mathcal{C}^r$) between $\vf{f}$ and $\vf{g}$.
   \end{definition}
   \begin{lemma}
-    Let $U,V\subseteq \RR^n$ be open sets and $\vf{f}:U\rightarrow\RR^n$, $\vf{g}:V\rightarrow\RR^n$ be vector fields of class $\mathcal{C}^1$ and $\vf{h}:U\rightarrow V$ be a diffeomorphism of class $\mathcal{C}^1$. Then, $\vf{h}$ is a conjugacy of class $\mathcal{C}^1$ if and only if $\vf{Dh}(\vf{x})(\vf{f}(\vf{x}))=\vf{g}(\vf{h}(\vf{x}))$ $\forall \vf{x}\in U$.
+    Let $U,V\subseteq \RR^n$ be open sets and $\vf{f}:U\rightarrow\RR^n$, $\vf{g}:V\rightarrow\RR^n$ be vector fields of class $\mathcal{C}^1$ and $\vf{h}:U\rightarrow V$ be a diffeomorphism of class $\mathcal{C}^1$. Then, $\vf{h}$ is a conjugacy of class $\mathcal{C}^1$ between them if and only if $\vf{Dh}(\vf{x})(\vf{f}(\vf{x}))=\vf{g}(\vf{h}(\vf{x}))$ $\forall \vf{x}\in U$.
   \end{lemma}
   \begin{proposition}
     Let $U,V\subseteq \RR^n$ be open sets and $\vf{f}:U\rightarrow\RR^n$, $\vf{g}:V\rightarrow\RR^n$ be vector fields. Suppose that $\vf{h}$ is a conjugacy between $\vf{x}'=\vf{f}(\vf{x})$ and $\vf{y}'=\vf{g}(\vf{y})$. Then, $\vf{x}'=-\vf{f}(\vf{x})$ and $\vf{y}'=-\vf{g}(\vf{y})$ are conjugate by $\vf{h}$.
@@ -837,32 +849,32 @@
   \begin{definition}
     Let $U\subseteq \RR^2$ be an open set, $\vf{f}:U\rightarrow\RR^2$ be a vector field of class $\mathcal{C}^1$ and $\vf{p}\in U$ be a critical point of $\vf{f}$. Suppose $\sigma(\vf{Df}(\vf{p}))=\{\lambda_1,\lambda_2\}$. We say that $\vf{p}$ is a
     \begin{itemize}
-      \item \emph{stable node} if $\lambda_1,\lambda_2\in\RR_{<0}$ and $\lambda_1\ne\lambda_2$.
-      \item \emph{unstable node} if $\lambda_1,\lambda_2\in\RR_{>0}$ and $\lambda_1\ne\lambda_2$.
-      \item \emph{saddle point} if $\lambda_1,\lambda_2\in\RR$ and $\lambda_1\lambda_2<0$.
-      \item \emph{stable star} if $\lambda_1,\lambda_2\in\RR_{<0}$, $\lambda_1=\lambda_2$ and $\vf{Df}(\vf{p})\sim
-              \begin{pmatrix}
-                \lambda_1 & 0         \\
-                0         & \lambda_1
-              \end{pmatrix}$.
-      \item \emph{unstable star} if $\lambda_1,\lambda_2\in\RR_{>0}$, $\lambda_1=\lambda_2$ and $\vf{Df}(\vf{p})\sim
-              \begin{pmatrix}
-                \lambda_1 & 0         \\
-                0         & \lambda_1
-              \end{pmatrix}$.
+      \item \emph{stable node} if $\lambda_1,\lambda_2\in\RR_{<0}$ and $\lambda_1\ne\lambda_2$ (see \cref{DE_linear-a}).
       \item \emph{stable degenerated node} if $\lambda_1,\lambda_2\in\RR_{<0}$, $\lambda_1=\lambda_2$ and $\vf{Df}(\vf{p})\sim
               \begin{pmatrix}
                 \lambda_1 & 0         \\
                 1         & \lambda_1
-              \end{pmatrix}$.
+              \end{pmatrix}$ (see \cref{DE_linear-b}).
+      \item \emph{stable star} if $\lambda_1,\lambda_2\in\RR_{<0}$, $\lambda_1=\lambda_2$ and $\vf{Df}(\vf{p})\sim
+              \begin{pmatrix}
+                \lambda_1 & 0         \\
+                0         & \lambda_1
+              \end{pmatrix}$ (see \cref{DE_linear-c}).
+      \item \emph{unstable node} if $\lambda_1,\lambda_2\in\RR_{>0}$ and $\lambda_1\ne\lambda_2$ (see \cref{DE_linear-d}).
       \item \emph{unstable degenerated node} if $\lambda_1,\lambda_2\in\RR_{>0}$, $\lambda_1=\lambda_2$ and $\vf{Df}(\vf{p})\sim
               \begin{pmatrix}
                 \lambda_1 & 0         \\
                 1         & \lambda_1
-              \end{pmatrix}$.
-      \item \emph{stable focus} (or \emph{sink}) if $\lambda_1,\lambda_2\in\CC$ and $\Re(\lambda_1)<0$.
-      \item \emph{unstable focus} (or \emph{source}) if $\lambda_1,\lambda_2\in\CC$ and $\Re(\lambda_1)>0$.
-      \item \emph{center} if $\lambda_1,\lambda_2\in\CC$, $\Re(\lambda_1)=0$ and $\vf{p}$ is surrounded by periodic orbits.
+              \end{pmatrix}$ (see \cref{DE_linear-e}).
+      \item \emph{unstable star} if $\lambda_1,\lambda_2\in\RR_{>0}$, $\lambda_1=\lambda_2$ and $\vf{Df}(\vf{p})\sim
+              \begin{pmatrix}
+                \lambda_1 & 0         \\
+                0         & \lambda_1
+              \end{pmatrix}$ (see \cref{DE_linear-f}).
+      \item \emph{saddle point} if $\lambda_1,\lambda_2\in\RR$ and $\lambda_1\lambda_2<0$ (see \cref{DE_linear-j}).
+      \item \emph{stable focus} (or \emph{sink}) if $\lambda_1,\lambda_2\in\CC$ and $\Re(\lambda_1)<0$ (see \cref{DE_linear-h}).
+      \item \emph{unstable focus} (or \emph{source}) if $\lambda_1,\lambda_2\in\CC$ and $\Re(\lambda_1)>0$ (see \cref{DE_linear-i}).
+      \item \emph{center} if $\lambda_1,\lambda_2\in\CC$, $\Re(\lambda_1)=0$ and $\vf{p}$ is surrounded by periodic orbits (see \cref{DE_linear-g}).
     \end{itemize}
   \end{definition}
   \begin{definition}
@@ -1018,6 +1030,76 @@
       \item If $\vf{p}$ is negatively stable, then $\Re(\lambda)\geq 0$ $\forall\lambda\in\sigma(\vf{Df}(\vf{p}))$.
     \end{enumerate}
   \end{theorem}
+  \begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.3\linewidth}
+      \centering
+      \includestandalone[mode=image|tex,width=\linewidth]{Images/linear-a}
+      \caption{}
+      \label{DE_linear-a}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.3\linewidth}
+      \centering
+      \includestandalone[mode=image|tex,width=\linewidth]{Images/linear-b}
+      \caption{}
+      \label{DE_linear-b}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.3\linewidth}
+      \centering
+      \includestandalone[mode=image|tex,width=\linewidth]{Images/linear-c}
+      \caption{}
+      \label{DE_linear-c}
+    \end{subfigure}\\
+    \begin{subfigure}[b]{0.3\linewidth}
+      \centering
+      \includestandalone[mode=image|tex,width=\linewidth]{Images/linear-d}
+      \caption{}
+      \label{DE_linear-d}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.3\linewidth}
+      \centering
+      \includestandalone[mode=image|tex,width=\linewidth]{Images/linear-e}
+      \caption{}
+      \label{DE_linear-e}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.3\linewidth}
+      \centering
+      \includestandalone[mode=image|tex,width=\linewidth]{Images/linear-f}
+      \caption{}
+      \label{DE_linear-f}
+    \end{subfigure}\\
+    \begin{subfigure}[b]{0.3\linewidth}
+      \centering
+      \includestandalone[mode=image|tex,width=\linewidth]{../../4th/Dynamical_systems/Images/nilpot-e}
+      \caption{}
+      \label{DE_linear-g}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.3\linewidth}
+      \centering
+      \includestandalone[mode=image|tex,width=\linewidth]{../../4th/Dynamical_systems/Images/nilpot-g}
+      \caption{}
+      \label{DE_linear-h}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.3\linewidth}
+      \centering
+      \includestandalone[mode=image|tex,width=\linewidth]{../../4th/Dynamical_systems/Images/nilpot-f}
+      \caption{}
+      \label{DE_linear-i}
+    \end{subfigure}\\
+    \begin{subfigure}[b]{0.3\linewidth}
+      \centering
+      \includestandalone[mode=image|tex,width=\linewidth]{Images/linear-j}
+      \caption{}
+      \label{DE_linear-j}
+    \end{subfigure}
+    \caption{Phase portraits of hyperbolic singular points}
+  \end{figure}
   \subsection{Qualitative theory of planar differential systems}
   \subsubsection{Polynomial vectors fields}
   \begin{definition}
@@ -1062,8 +1144,8 @@
   \begin{proposition}
     Let $U\subseteq \RR^2$ be an open set, $\vf{f}:U\rightarrow\RR^2$ be a vector field of class $\mathcal{C}^1$, $\vf{\gamma}$ be a limit cycle and $V$ be a neighbourhood of $\vf{\gamma}$. Then, $\vf{\gamma}$ is exactly one of the following three types of limit cycles:
     \begin{itemize}
-      \item $\vf{\gamma}$ is \emph{stable} if $\omega(\vf{q})=\vf{\gamma}$ $\forall \vf{q}\in V$.
-      \item $\vf{\gamma}$ is \emph{unstable} if $\alpha(\vf{q})=\vf{\gamma}$ $\forall \vf{q}\in V$.
+      \item $\vf{\gamma}$ is \emph{stable} if $\omega(\vf{q})=\vf{\gamma}$ $\forall \vf{q}\in V$ (\cref{DE_limitcycles_a}).
+      \item $\vf{\gamma}$ is \emph{unstable} if $\alpha(\vf{q})=\vf{\gamma}$ $\forall \vf{q}\in V$ (\cref{DE_limitcycles_b}).
       \item $\vf{\gamma}$ is \emph{semi-stable} if either
             \begin{multline*}
               \{\omega(\vf{q})=\vf{\gamma}\quad\forall \vf{q}\in V\cap\Ext(\vf{\gamma})\} \land \\\land\{\alpha(\vf{q})=\vf{\gamma}\quad\forall \vf{q}\in V\cap\Int(\vf{\gamma})\}
@@ -1072,8 +1154,41 @@
             \begin{multline*}
               \{\omega(\vf{q})=\vf{\gamma}\quad\forall \vf{q}\in V\cap\Int(\vf{\gamma})\}\land\\\land \{\alpha(\vf{q})=\vf{\gamma}\quad\forall \vf{q}\in V\cap\Ext(\vf{\gamma})\}
             \end{multline*}
+            (\cref{DE_limitcycles_c,DE_limitcycles_d})
     \end{itemize}
   \end{proposition}
+  \begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.24\linewidth}
+      \centering
+      \includestandalone[mode=image|tex,width=\linewidth]{../../4th/Dynamical_systems/Images/hopf2}
+      \caption{}
+      \label{DE_limitcycles_a}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.24\linewidth}
+      \centering
+      \includestandalone[mode=image|tex,width=\linewidth]{Images/unstable_cycle}
+      \caption{}
+      \label{DE_limitcycles_b}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.24\linewidth}
+      \centering
+      \includestandalone[mode=image|tex,width=\linewidth]{Images/semistable_cycle1}
+      \caption{}
+      \label{DE_limitcycles_c}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.24\linewidth}
+      \centering
+      \includestandalone[mode=image|tex,width=\linewidth]{Images/semistable_cycle2}
+      \caption{}
+      \label{DE_limitcycles_d}
+    \end{subfigure}
+    \caption{Stability of limit cycles}
+    \label{DE_limitcycles}
+  \end{figure}
   \begin{definition}
     Let $U\subseteq \RR^2$ be an open set, $\vf{f}:U\rightarrow\RR^2$ be a vector field of class $\mathcal{C}^1$ and $\vf{\gamma}$ be a periodic orbit of period $T$. We say that $\vf\gamma$ is a \emph{hyperbolic periodic orbit} if $$I(\vf\gamma):=\int_0^T\div\vf{f}(\vf\gamma(t))\dd{t}\ne 0$$
   \end{definition}
@@ -1362,7 +1477,7 @@
     Consider a bar of line $L\in\RR_{>0}$ whose temperature can be modeled by a function $u:\RR\times\RR\rightarrow\RR$, and $f:[0,L]\rightarrow\RR$ be a function. Then, the solution $u(x,t)$ to the heat equation with boundary conditions $u(x,0)=f(x)$ and $u(0,t)=u(L,t)=0$ is: $$u(x,t)=\sum_{n=1}^\infty b_n\sin\left(\frac{\pi n x}{L}\right)\exp{-\frac{n^2\pi^2k}{L^2}t}$$ where $\displaystyle b_n=\frac{1}{L}\int_{-L}^Lf(x)\sin\left(\frac{\pi n x}{L}\right)\dd{x}$.
   \end{proposition}
   \begin{definition}[Wave equation]
-    Let $u:\RR\times\RR\rightarrow\RR$ be an unknown function. The \emph{Wave equation} is the pde defined by $$\pdv[2]{u}{t}=c^2\pdv[2]{u}{x}$$ where $c\in\RR$.
+    Let $u:\RR\times\RR\rightarrow\RR$ be an unknown function. The \emph{wave equation} is the pde defined by $$\pdv[2]{u}{t}=c^2\pdv[2]{u}{x}$$ where $c\in\RR$.
   \end{definition}
   \begin{proposition}
     Consider a string of line $L\in\RR_{>0}$ whose position can be modeled by a function $u:\RR\times\RR\rightarrow\RR$, and $f,g:[0,L]\rightarrow\RR$ be functions. Then, the solution $u(x,t)$ to the wave equation with boundary conditions $u(x,0)=f(x)$, $u_t(x,0)=g(x)$ and $u(0,t)=u(L,t)=0$ is: $$u(x,t)=\sum_{n=0}^\infty \sin\left(\frac{\pi n x}{L}\right)\left[a_n\cos\left(\frac{\pi n c}{L}t\right)+ b_n\sin\left( \frac{\pi n c}{L}t\right)\right]$$ where:
@@ -1375,7 +1490,7 @@
     Let $u(x,t)$ be a solution to the wave equation. Then, $\exists F,G:\RR\rightarrow\RR$ such that: $$u(x,t)=F(x+ct)+G(x-ct)$$
   \end{proposition}
   \begin{proposition}[D'Alembert formula]
-    Let $f,g:[0,L]\rightarrow\RR$ be functions. The solution $u(x,t)$ to the wave equation with boundary conditions $u(x,0)=f(x)$ and $u_t(x,0)=g(x)$ is: $$u(x,t)=\frac{f(x-ct)+f(x+ct)}{2}+\frac{1}{2c}\int_{x-ct}^{x+ct}g(s)\dd{s}$$
+    Let $f,g:\RR\rightarrow\RR$ be functions. The solution $u(x,t)$ to the wave equation with boundary conditions $u(x,0)=f(x)$ and $u_t(x,0)=g(x)$ is: $$u(x,t)=\frac{f(x-ct)+f(x+ct)}{2}+\frac{1}{2c}\int_{x-ct}^{x+ct}g(s)\dd{s}$$
   \end{proposition}
   \begin{definition}[Laplace equation]
     Let $u:\RR\times\RR\rightarrow\RR$ be an unknown function. The \emph{Laplace equation} is the pde defined by: $$\pdv[2]{u}{x}+\pdv[2]{u}{y}=\laplacian u=0$$

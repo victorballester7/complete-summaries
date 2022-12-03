@@ -35,6 +35,7 @@
   \begin{proposition}
     Let $\Sigma$ be a $\sigma$-algebra over a set $\Omega$, $\mu:\Sigma\longrightarrow[0,\infty]$ be a measure over $\Omega$ and $A_n,A,B\in\Sigma$, $n\in\NN$. Then:
     \begin{itemize}
+      \item If $A\subseteq B$, then $\mu(B\setminus A)=\mu(B)-\mu(A)$.
       \item If $A\subseteq B$, then $\mu(A)\subseteq\mu(B)$.
       \item If $A_n\nearrow A$, then $\displaystyle\mu(A)=\lim_{n\to\infty} A_n$.
       \item If $A_n\searrow A$ and $\mu(A_1)<\infty$, then $\displaystyle\mu(A)=\lim_{n\to\infty} A_n$.
@@ -51,19 +52,19 @@
   \end{definition}
   \begin{definition}
     Let $m\in\NN\cup\{0\}$. We define the \emph{$m$-th dyadic cube} as the set: $$\mathcal{D}_m:=[a_1,a_1+2^{-m})\times\cdots\times [a_n,a_n+2^{-m})$$
-    where $a_i\in 2^{-m}\ZZ$\footnote{Note that each $\mathcal{D}_m$ forms a partition of $\RR^n$}.
+    where $a_i\in 2^{-m}\ZZ$\footnote{Note that each $\mathcal{D}_m$ forms a partition of $\RR^n$.}.
   \end{definition}
   \begin{lemma}
-    Let $m\in\NN\cup\{0\}$. Then the sidelength of $\mathcal{D}_m$ is $2^{-m}$, $\vol(\mathcal{D}_m)= 2^{-mn}$ and its diameter is $\mathcal{D}_m= 2^{-m}\sqrt{n}$.
+    Let $m\in\NN\cup\{0\}$. Then the sidelength of $\mathcal{D}_m$ is $2^{-m}$, $\vol(\mathcal{D}_m)= 2^{-mn}$ and its diameter is $2^{-m}\sqrt{n}$.
   \end{lemma}
   \begin{proposition}
-    All nonempty open set $U\subseteq\RR^n$ can be written as a countable union of disjoint dyadic cubes whose closure is in $U$.
+    Any nonempty open set $U\subseteq\RR^n$ can be written as a countable union of disjoint dyadic cubes whose closure is in $U$.
   \end{proposition}
   \begin{definition}
     Let $A\subseteq\RR^n$ be a set. We denote by $\mathcal{I}(A)$ the set of covers of $A$ that are intervals. Analogously, we denote by $\mathcal{I}_0(A)$ the set of open covers of $A$ that are intervals.
   \end{definition}
   \begin{definition}[Outer measure]
-    Let $A\subseteq\RR^n$ be a set. We define its \emph{outer measure} as the measure $\om{}$ defined by:
+    Let $A\subseteq\RR^n$ be a set. We define its \emph{outer measure} as the function $\om{}$ defined by:
     $$\om{A}:=\inf\left\{\sum_{k= 1}^\infty \vol(I_k):\{I_k:k\geq 1\}\in \mathcal{I}(A)\right\}$$
   \end{definition}
   \begin{proposition}
@@ -81,7 +82,7 @@
       \item If $A_1, A_2,\ldots \subseteq \RR^n$, then: $$\om{\bigcup_{k=1}^\infty A_k}\leq \sum_{k=1}^\infty \om{A_k}$$
       \item If $I\subseteq \RR^n$ is an open interval and $I\subseteq A\subseteq \cl{I}$, then $\om{A}=\vol(I)$.
       \item If $I_1,\ldots,I_N\subseteq \RR^n$ are disjoint intervals, then: $$\displaystyle \om{\bigsqcup_{k=1}^N I_k}= \sum_{k=1}^N \vol(I_k)$$
-      \item If $A,B\subseteq \RR^n$ and $d(A,B):=\inf\{d(a,b):a\in A,b\in B\}>0$, then $\om{A\cup B}=\om{A}+\om{B}$.
+      \item If $A,B\subseteq \RR^n$ and $d(A,B):=\inf\{d(a,b):a\in A,b\in B\}>0$, then $\om{A\sqcup B}=\om{A}+\om{B}$.
       \item If $A\subseteq\RR^n$ and $x\in\RR^n$, then $\om{A+x}=\om{-A}=\om{A}$\footnote{Here $A+x:=\{a+x:a\in A\}$ and $-A:=\{-a:a\in A\}$}.
     \end{enumerate}
   \end{theorem}
@@ -99,18 +100,19 @@
   \end{lemma}
   \subsubsection{Lebesgue measure}
   \begin{definition}[Lebesgue measure]
-    We say that $A\subseteq\RR^n$ is \emph{Lebesgue measurable} (or simply \emph{measurable}) if $\forall \varepsilon>0$, there exists an open set $U\supseteq A$ such that $\om{U\setminus A}<\varepsilon$. We denote by $\mathcal{M}$ the set of all Lebesgue measurable sets of $\RR^n$ and by $\m{}$ the restriction of $\om{}$ to ${\mathcal{M}}$.
+    We say that $A\subseteq\RR^n$ is \emph{Lebesgue measurable} (or simply \emph{measurable}) if $\forall \varepsilon>0$, there exists an open set $U\supseteq A$ such that $\om{U\setminus A}<\varepsilon$. We denote by $\mathcal{M}(\RR^n)$ the set of all Lebesgue measurable sets of $\RR^n$ and by $\m{}$ the restriction of $\om{}$ to ${\mathcal{M}(\RR^n)}$.
   \end{definition}
   \begin{theorem}
-    In $\RR^n$, $\mathcal{M}$ is a $\sigma$-algebra and $m:\mathcal{M}\rightarrow[0,\infty]$ is a measure (called \emph{Lebesgue measure}) that satisfies:
+    $\mathcal{M}(\RR^n)$ is a $\sigma$-algebra and $\m{\cdot}:\mathcal{M}(\RR^n)\rightarrow[0,\infty]$ is a measure (called \emph{Lebesgue measure}) that satisfies:
     \begin{enumerate}
-      \item The open sets, closed sets and null sets are in $\mathcal{M}$.
+      \item The open sets, closed sets and null sets are in $\mathcal{M}(\RR^n)$.
       \item Each interval $I\subseteq \RR^n$ is measurable and $\m{I}=\vol(I)$.
-      \item If $A\subseteq\mathcal{M}$ and $x\in\RR^n$, then $A+x,-A\in\mathcal{M}$ and $\m{A+x}=\m{-A}=\m{A}$.
-      \item If $A\subseteq\mathcal{M}$:
+      \item If $A\in\mathcal{M}(\RR^n)$ and $x\in\RR^n$, then $A+x,-A\in\mathcal{M}(\RR^n)$ and $\m{A+x}=\m{-A}=\m{A}$.
+      \item If $A\in\mathcal{M}(\RR^n)$:
             \begin{align*}
-              \m{A} & =\inf\{\m{U}:A\subseteq U \subseteq\RR^n, U\text{ open}\}  \\
-                    & =\sup\{\m{C}:C\subseteq A\subseteq\RR^n, C\text{ closed}\}
+              \m{A} & =\inf\{\m{U}:A\subseteq U \subseteq\RR^n, U\text{ open}\}   \\
+                    & =\sup\{\m{C}:C\subseteq A\subseteq\RR^n, C\text{ closed}\}  \\
+                    & =\sup\{\m{K}:K\subseteq A\subseteq\RR^n, K\text{ compact}\}
             \end{align*}
     \end{enumerate}
   \end{theorem}
@@ -118,7 +120,7 @@
     A \emph{real function} is a function $f:\RR^n\rightarrow[-\infty,+\infty]$. We will say that $f$ is \emph{finite} if $\pm\infty\notin\im f$.
   \end{definition}
   \begin{definition}
-    Let $f$ be a real function. We say that $f$ is \emph{Lebesgue measurable} (or simply \emph{measurable}) if $\{x\in\RR^n:f(x)> r\}\in \mathcal{M}$ $\forall r\in\RR$.
+    Let $f$ be a real function. We say that $f$ is \emph{Lebesgue measurable} (or simply \emph{measurable}) if $\{x\in\RR^n:f(x)> r\}\in \mathcal{M}(\RR^n)$ $\forall r\in\RR$.
   \end{definition}
   \begin{lemma}
     Let $a,b\in[-\infty,+\infty]$ and $f$ be a real function. The sets:
@@ -131,7 +133,7 @@
     are all measurable.
   \end{lemma}
   \begin{proposition}
-    A function $f:\RR^n\rightarrow\RR$ is measurable if and only if for all open set $U\subseteq \RR$, $f^{-1}(U)\in\mathcal{M}$.
+    A function $f:\RR^n\rightarrow\RR$ is measurable if and only if for all open set $U\subseteq \RR$, $f^{-1}(U)\in\mathcal{M}(\RR^n)$.
   \end{proposition}
   \begin{proposition}
     Let $f$ be a finite measurable real function, $U\subseteq\RR$ be an open set such that $\im f\subseteq U$ and $\varphi:U\rightarrow\RR$ be a continuous function. Then, $\varphi\circ f$ is also measurable.
@@ -146,20 +148,26 @@
     Let $f$, $g$ be two measurable real functions. Then, so are $f\pm g$, $fg$ and $f/g$ if $g(x)\ne 0$ $\forall x\in\RR^n$.
   \end{proposition}
   \begin{proposition}
-    Let $(f_m)$ be a sequence of measurable real functions. Then, the following sets are measurable:
+    Let $(f_n)$ be a sequence of measurable real functions. Then, the following sets are measurable:
     \begin{itemize}
-      \item $\displaystyle\sup\{f_n(x):n\in\NN,x\in\RR^n\}$
-      \item $\displaystyle\inf\{f_n(x):n\in\NN,x\in\RR^n\}$
-      \item $\displaystyle\limsup_{m\to\infty} f_m$
-      \item $\displaystyle\liminf_{m\to\infty} f_m$
+      \item $\displaystyle\sup\{f_n:n\in\NN\}$
+      \item $\displaystyle\inf\{f_n:n\in\NN\}$
+      \item $\displaystyle\limsup_{n\to\infty} f_n$
+      \item $\displaystyle\liminf_{n\to\infty} f_n$
     \end{itemize}
     Furthermore, any function being pointwise limit a.e. of a sequence of measurable functions is measurable.
   \end{proposition}
   \begin{definition}
-    A function $g:\RR\rightarrow\RR$ is \emph{Borel measurable} if $\{x\in\RR^n:g(x)> r\}\in \mathcal{B}(\RR)$ $\forall r\in\RR$\footnote{Remember \cref{P_borel}.}.
+    The \emph{Borel $\sigma$-algebra} over $\RR^n$, $\mathcal{B}(\RR^n)$, is the smallest $\sigma$-algebra that contains the open sets of $\RR^n$.
+  \end{definition}
+  \begin{lemma}
+    We have that $\mathcal{B}(\RR^n)\subset \mathcal{M}(\RR^n)$.
+  \end{lemma}
+  \begin{definition}
+    A function $g:\RR\rightarrow\RR$ is \emph{Borel measurable} if $\{x\in\RR^n:g(x)> r\}\in \mathcal{B}(\RR^n)$ $\forall r\in\RR$.
   \end{definition}
   \begin{proposition}
-    Let $f:\RR\rightarrow\RR$ be a Lebesgue measurable function and $f:\RR\rightarrow\RR$ be a Borel measurable function. Then, $g\circ f$ is Lebesgue measurable.
+    Let $f:\RR\rightarrow\RR$ be a Lebesgue measurable function and $g:\RR\rightarrow\RR$ be a Borel measurable function. Then, $g\circ f$ is Lebesgue measurable.
   \end{proposition}
   \begin{definition}
     Let $f$ be a measurable function. We define the following measurable functions:
@@ -167,11 +175,11 @@
     Note that then, $f=f^+-f^-$ and $\abs{f}=f^++f^-$.
   \end{definition}
   \begin{definition}
-    A \emph{simple function} is a linear combination $$s:=\sum_{k=1}^N\alpha_k\indi{A_k}$$ where $\alpha_k\in\RR$ and $A_k\in\mathcal{M}$ for $K=1,\ldots,k$\footnote{We may suppose that the sets $A_k$ are pairwise disjoint, the quantities $\alpha_k$ are all different and that $A_k=s^{-\alpha_k}$.}.
+    A \emph{simple function} is a linear combination $$s:=\sum_{k=1}^N\alpha_k\indi{A_k}$$ where $\alpha_k\in\RR$ and $A_k\in\mathcal{M}(\RR^n)$ for $k=1,\ldots,N$\footnote{We may suppose that the sets $A_k$ are pairwise disjoint, the quantities $\alpha_k$ are all different and that $A_k=s^{-\alpha_k}$.}.
   \end{definition}
   \begin{theorem}
     Let $f:\RR^n\rightarrow[0,+\infty]$ be a measurable function and let $$E(k,m):=\left\{\frac{k-1}{2^m}\leq f<\frac{k}{2^m}\right\}\;\;\text{and}\;\; F(m):=\{f\geq m\}$$
-    Then, the sequence of positive simple functions $$s_m=m+\indi{F(k)}+\sum_{k=1}^{m2^m}\frac{k-1}{2^m}\indi{E(k,m)}$$ is increasing and $\displaystyle\lim_{m\to\infty}s_m(x)=f(x)$ $\forall x\in\RR^n$
+    Then, the sequence of positive simple functions $$s_m=m+\indi{F(k)}+\sum_{k=1}^{m2^m}\frac{k-1}{2^m}\indi{E(k,m)}$$ is increasing and $\displaystyle\lim_{m\to\infty}s_m(x)=f(x)$ $\forall x\in\RR^n$.
   \end{theorem}
   \begin{theorem}
     Let $f:\RR^n\rightarrow[-\infty,+\infty]$ be a measurable function. Then, there exists a sequence of simple functions $(s_m)$ such that $\displaystyle\lim_{m\to\infty}s_m(x)=f(x)$ $\forall x\in\RR^n$ and $\abs{s_m}\leq\abs{s_{m+1}}\leq \abs{f}$ $\forall m\in\NN$.
@@ -182,16 +190,16 @@
     We define the \emph{integral of $s$ over a measurable set $E$} as: $$\int_E s:=\int s\indi{E}=\sum_{k=1}^N\alpha_k\m{E_k\cap E}$$
   \end{definition}
   \begin{proposition}
-    Let $A_1,A_2,\ldots$ be measurable sets and $s$, $t$ be simple functions. Then:
+    Let $E_1,E_2,\ldots$ be measurable sets and $s$, $t$ be simple functions. Then:
     \begin{itemize}
-      \item If $\displaystyle E=\bigsqcup_{k=1}^\infty A_k$, then $\displaystyle\int_E s=\sum_{k=1}^\infty \int_{A_k} s$.
+      \item If $\displaystyle E=\bigsqcup_{k=1}^\infty E_k$, then $\displaystyle\int_E s=\sum_{k=1}^\infty \int_{E_k} s$.
       \item $\displaystyle\int(s+t)=\int s+\int t$.
       \item If $\alpha\in\RR_{\geq 0}$, then $\displaystyle\int \alpha s=\alpha\int s$.
       \item If $s\leq t$, then $\displaystyle\int s\leq\int t$.
     \end{itemize}
   \end{proposition}
   \begin{proposition}
-    The function $$\function{\mu_s}{\mathcal{M}}{[0,\infty]}{E}{\displaystyle\int_E s}$$ is a measure.
+    The function $$\function{\mu_s}{\mathcal{M}(\RR^n)}{[0,\infty]}{E}{\displaystyle\int_E s}$$ is a measure.
   \end{proposition}
   \begin{definition}
     Let $f:\RR^n\rightarrow[0,+\infty]$ be a measurable function. We define: $$\mathcal{S}(f):=\{s:s\text{ is a simple function such that }0\leq s\leq f\}$$
@@ -210,8 +218,9 @@
     Let $E\subseteq\RR^n$ be a measurable set, $f\geq 0$ be a non-negative measurable function such that $\exists (f_m)\geq 0$ with $f_m\nearrow f$. Then: $$\int_Ef(x)\dd{x}=\lim_{m\to\infty}\int_Ef_m(x)\dd{x}$$
   \end{theorem}
   \begin{proposition}
-    Let $E\subseteq\RR^n$ be a measurable set, $f, g, (f_m)\geq 0$ be non-negative measurable functions. Then:
+    Let $E\subseteq\RR^n$ be a measurable set with $\m{E}>0$, $f, g, (f_m)\geq 0$ be non-negative measurable functions. Then:
     \begin{enumerate}
+      \item $\displaystyle\int_E (f+g)(x)\dd{x}=\int_Ef(x)\dd{x}+\int_Eg(x)\dd{x}$
       \item $\displaystyle\int_E\sum_{m=1}^\infty f_m(x)\dd{x}=\sum_{m=1}^\infty\int_E f_m(x)\dd{x}$
       \item If $(E_k)$ is a sequence of measurable sets such that $E=\bigsqcup_{k=1}^\infty E_k$, then: $$\int_Ef(x)\dd{x}=\sum_{k=1}^\infty\int_{E_k}f(x)\dd{x}$$
       \item If $\alpha\in[0,\infty)$, then $\displaystyle\int_E\alpha f(x)\dd{x}=\alpha\int_Ef(x)\dd{x}$.
@@ -233,7 +242,7 @@
   \end{lemma}
   \begin{definition}
     Let $E\subseteq\RR^n$ be a measurable set and $f:E\rightarrow[-\infty,+\infty]$ be a measurable function such that either $\int_Ef^+(x)\dd{x}<\infty$ or $\int_Ef^-(x)\dd{x}<\infty$. Then, we define the \emph{integral of $f$ over $E$} as: $$\int_Ef(x)\dd{x}:=\int_Ef^+(x)\dd{x}-\int_Ef^-(x)\dd{x}$$
-    We say that $f$ is an \emph{integrable function over $E$} if $${\norm{f}}_1:=\int_E\abs{f(x)}\dd{x}<\infty$$ The set of such functions is denoted by $\mathcal{L}^1(E)$.
+    We say that $f$ is an \emph{integrable function over $E$} if $${\norm{f}}_1:=\int_E\abs{f(x)}\dd{x}<\infty$$ The set of such functions is denoted by $ \mathcal{L}^1(E)$.
   \end{definition}
   \begin{proposition}
     Let $E\subseteq\RR^n$ be a measurable set and $f:E\rightarrow[-\infty,+\infty]$ be a measurable function. Then, the function $g=f\indi{\abs{f}<\infty}$ is finite and $f\almoste{=}g$.
@@ -241,18 +250,18 @@
   \begin{proposition}
     Let $E\subseteq\RR^n$ be a measurable set. Then:
     \begin{enumerate}
-      \item $\mathcal{L}^1(E)$ is a vector spaceover $\RR$.
-      \item The integral $$\function{\int_E}{\mathcal{L}^1(E)}{\RR}{f}{\int_Ef}$$ is a linear form.
-      \item If $f,g\in\mathcal{L}^1(E)$are such that $f\almoste{leq} g$ on $E$, then $\int_E f\leq\int_E g$. Moreover: $$\abs{\int_Ef(x)\dd{x}}\leq \int_E\abs{f(x)}\dd{x}$$
-      \item If $f\in\mathcal{L}^1(E)$ and $E=E_1\sqcup E_2$ with $E_1$, $E_2$ measurable, then $$\int_{E_1\sqcup E_2}f(x)\dd{x}=\int_{E_1}f(x)\dd{x}+\int_{E_2}f(x)\dd{x}$$
-      \item If $h\in\RR^n$, $f\in\mathcal{L}^1(E)$, then: $$\int_{E-h}f(x+h)\dd{x}=\int_{-E}f(-x)\dd{x}=\int_{E}f(x)\dd{x}$$
+      \item $ \mathcal{L}^1(E)$ is a vector space over $\RR$.
+      \item The integral $$\function{\int_E}{ \mathcal{L}^1(E)}{\RR}{f}{\int_Ef}$$ is a linear form.
+      \item If $f,g\in \mathcal{L}^1(E)$ are such that $f\almoste{\leq} g$ on $E$, then $\int_E f\leq\int_E g$. Moreover: $$\abs{\int_Ef(x)\dd{x}}\leq \int_E\abs{f(x)}\dd{x}$$
+      \item If $f\in \mathcal{L}^1(E)$ and $E=E_1\sqcup E_2$ with $E_1$, $E_2$ measurable, then $$\int_{E_1\sqcup E_2}f(x)\dd{x}=\int_{E_1}f(x)\dd{x}+\int_{E_2}f(x)\dd{x}$$
+      \item If $h\in\RR^n$, $f\in \mathcal{L}^1(E)$, then: $$\int_{E-h}f(x+h)\dd{x}=\int_{-E}f(-x)\dd{x}=\int_{E}f(x)\dd{x}$$
     \end{enumerate}
   \end{proposition}
   \begin{theorem}[Dominated convergence theorem]
-    Let $E\subseteq\RR^n$ be a measurable set, $f$ be a measurable function over $E$ such that $\exists (f_m)\geq 0$ with $f_m\almoste{\rightarrow} f$ and $\abs{f_m(x)}\almoste\leq g(x)$ on $E$ with $g\in\mathcal{L}^1(E)$. Then, $f, f_m\in\mathcal{L}^1(E)$ $\forall m\in\NN$ and: $$\int_Ef(x)\dd{x}=\lim_{m\to\infty}\int_Ef_m(x)\dd{x}$$
+    Let $E\subseteq\RR^n$ be a measurable set, $f$ be a measurable function over $E$ such that $\exists (f_m)\geq 0$ with $f_m\almoste{\rightarrow} f$ and $\abs{f_m(x)}\almoste\leq g(x)$ on $E$ with $g\in \mathcal{L}^1(E)$ $\forall m\in\NN$. Then, $f, f_m\in \mathcal{L}^1(E)$ $\forall m\in\NN$ and: $$\int_Ef(x)\dd{x}=\lim_{m\to\infty}\int_Ef_m(x)\dd{x}$$
   \end{theorem}
   \begin{proposition}
-    Let $E\subseteq\RR^n$ be a measurable set, $f,g\in\mathcal{L}^1(E)$ and $\lambda\in\RR$. Then:
+    Let $E\subseteq\RR^n$ be a measurable set, $f,g\in \mathcal{L}^1(E)$ and $\lambda\in\RR$. Then:
     \begin{enumerate}
       \item ${\norm{f+g}}_1\leq{\norm{f}}_1+{\norm{g}}_1$
       \item ${\norm{\lambda f}}_1=\abs{\lambda}{\norm{f}}_1$
@@ -260,21 +269,21 @@
     \end{enumerate}
   \end{proposition}
   \begin{definition}
-    Let $E\subseteq\RR^n$ be a measurable set and $(f_m),f\in\mathcal{L}^1(E)$. We say that $(f_m)$ \emph{converge in mean} to $f$ if $\lim_{m\to\infty}{\norm{f_m-f}}_1=0$, or equivalently $\lim_{m\to\infty} f_m=f$ on $\mathcal{L}^1(E)$.
+    Let $E\subseteq\RR^n$ be a measurable set and $(f_m),f\in \mathcal{L}^1(E)$. We say that $(f_m)$ \emph{converge in mean} to $f$ if $\displaystyle\lim_{m\to\infty}{\norm{f_m-f}}_1=0$, or equivalently $\displaystyle\lim_{m\to\infty} f_m=f$ on $ \mathcal{L}^1(E)$.
   \end{definition}
   \begin{theorem}
-    Let $E\subseteq\RR^n$ be a measurable set and $(f_m)\in\mathcal{L}^1(E)$.
+    Let $E\subseteq\RR^n$ be a measurable set and $(f_m)\in \mathcal{L}^1(E)$.
     \begin{enumerate}
-      \item If $\sum_{m=1}^\infty {\norm{f_m}}_1<\infty$, $\exists f\in\mathcal{L}^1(E)$ such that $\sum_{m=1}^\infty f_m =f$ on $\mathcal{L}^1(E)$ and $\sum_{m=1}^\infty f_m(x)=f(x)$ converges absolutely $\forall x\in E\setminus N$, where $N$ is a null set.
-      \item If $\lim_{m\to\infty} f_m=f$ on $\mathcal{L}^1(E)$, then there exists a subsequence $(f_{m_k})$ such that $\lim_{k\to\infty} f_{m_k}=f$ on $\mathcal{L}^1(E)$ and  $\lim_{k\to\infty} f_{m_k}(x)=f(x)$ $\forall x\in E\setminus N$, where $N$ is a null set.
+      \item If $\sum_{m=1}^\infty {\norm{f_m}}_1<\infty$, $\exists f\in \mathcal{L}^1(E)$ such that $\sum_{m=1}^\infty f_m =f$ on $ \mathcal{L}^1(E)$ and $\sum_{m=1}^\infty f_m(x)=f(x)$ converges absolutely $\forall x\in E\setminus N$, where $N$ is a null set.
+      \item If $\displaystyle\lim_{m\to\infty} f_m=f$ on $ \mathcal{L}^1(E)$, then there exists a subsequence $(f_{m_k})$ such that $\displaystyle\lim_{k\to\infty} f_{m_k}=f$ on $ \mathcal{L}^1(E)$ and  $\displaystyle\lim_{k\to\infty} f_{m_k}(x)=f(x)$ $\forall x\in E\setminus N$, where $N$ is a null set.
     \end{enumerate}
   \end{theorem}
   \begin{proposition}
-    Let $E\subseteq\RR^n$ be a measurable set and $f\in\mathcal{L}^1(E)$. Then, there exists a sequence of integrable simple functions $(s_m)$ such that $\lim_{m\to\infty} s_m=f$ on $\mathcal{L}^1(E)$ and $\lim_{m\to\infty} s_m(x)=f(x)$ $\forall x\in E$, with $\abs{s_1}\leq\abs{s_2}\leq \cdots\leq \abs{f}$.
+    Let $E\subseteq\RR^n$ be a measurable set and $f\in \mathcal{L}^1(E)$. Then, there exists a sequence of integrable simple functions $(s_m)$ such that $\displaystyle\lim_{m\to\infty} s_m=f$ on $ \mathcal{L}^1(E)$, $\displaystyle\lim_{m\to\infty} s_m(x)=f(x)$ $\forall x\in E$ and $\abs{s_m}\leq\abs{s_{m+1}}\leq \abs{f}$ $\forall m\in\NN$.
   \end{proposition}
   \subsubsection{Integral calculus in one variable and Riemann integral}
   \begin{definition}
-    Given a function $f:\RR\rightarrow\RR$, we say that $\int_a^bf(x)\dd{x}$ \emph{exists and it is finite} if$f$ is integrable on $(\min\{a,b\},\max\{a,b\})$\footnote{Note that if $f$ is measurable, the integral always exists but it may be $\pm\infty$.}.
+    Given a function $f:\RR\rightarrow\RR$, we say that $\int_a^bf(x)\dd{x}$ \emph{exists and it is finite} if $f$ is integrable on $(\min\{a,b\},\max\{a,b\})$\footnote{Note that if $f$ is measurable, the integral always exists but it may be $\pm\infty$.}.
   \end{definition}
   \begin{theorem}[Mean value theorem for integrals]
     Let $f:\RR\rightarrow\RR_{\geq 0}$ be an positive integrable function over $(a,b)$ and $g:(a,b)\rightarrow\RR$ be a measurable and bounded function such that $\alpha\leq g(x)\leq\beta$ almost everywhere on $(a,b)$. Then, $\exists\gamma\in[\alpha,\beta]$ such that: $$\int_a^bg(x)f(x)\dd{x}=\gamma\int_a^bf(x)\dd{x}$$
@@ -282,36 +291,53 @@
     In particular, taking $f=1$, we get:  $$\int_a^bg(x)\dd{x}=g(\xi)(b-a)$$
   \end{theorem}
   \begin{theorem}[Barrow's law]
-    If $f:[a,b]\rightarrow\RR$ is a continuous function and derivable on $(a,b)$ with bounded derivative, then $f'\in\mathcal{L}^1((a,b))$ and $$\int_a^bf'(x)\dd{x}=f(b)-f(a)$$
+    If $f:[a,b]\rightarrow\RR$ is a continuous function and derivable on $(a,b)$ with bounded derivative, then $f'\in \mathcal{L}^1((a,b))$ and $$\int_a^bf'(x)\dd{x}=f(b)-f(a)$$
   \end{theorem}
   \begin{theorem}[Fundamental theorem of calculus]
-    Let $f:(a,b)\rightarrow\RR$ be an integrable function and continuous at $y\in (a,b)$. Then, $F(x)=\int_a^xf(x)\dd{x}$ is derivable at $y$ and $F'(y)=f(y)$.
+    Let $f:(a,b)\rightarrow\RR$ be an integrable function and continuous at $y\in (a,b)$. Then, $F(x)=\int_a^xf(s)\dd{s}$ is derivable at $y$ and $F'(y)=f(y)$.
   \end{theorem}
   \begin{theorem}
     Let $\varphi:[\alpha,\beta]\rightarrow[c,d]$ be a continuous function and derivable with bounded derivative on $(\alpha,\beta)$. Let $a=\varphi(\alpha)$ and $b=\varphi(\beta)$. If $f:[c,d]\rightarrow\RR$ is a continuous function, then $(f\circ\varphi)\varphi'$ is integrable on $(\alpha,\beta)$ and: $$\int_c^df(x)\dd{x}=\int_\alpha^\beta f(\varphi(t))\varphi'(t)\dd{t}$$
   \end{theorem}
   \begin{theorem}[Integration by parts]
-    Let $F,G:[a,b]\rightarrow\RR$ be the primitives of the two bounded functions $f,g:(a,b)\rightarrow\RR$. Then, $Fg,fG\in\mathcal{L}^(a,b)$ and: $$\int_a^bF(x)g(x)\dd{x}=F(a)G(a)-F(b)G(b)-\int_a^bf(x)G(x)\dd{x}$$
+    Let $F,G:[a,b]\rightarrow\RR$ be the primitives of the two bounded functions $f,g:(a,b)\rightarrow\RR$. Then, $Fg,fG\in \mathcal{L}^1(a,b)$ and: $$\int_a^bF(x)g(x)\dd{x}=F(a)G(a)-F(b)G(b)-\int_a^bf(x)G(x)\dd{x}$$
   \end{theorem}
   \begin{theorem}
     Let $f:[a,b]\rightarrow\RR$ be a Riemann integrable function. Then, $f$ is also Lebesgue integrable and both integrals coincide.
   \end{theorem}
   \subsubsection{Functions defined by integrals}
   \begin{theorem}
-    Let $E\subseteq\RR^n$ be a measurable set, $I\subseteq \RR$ be an interval, $g\in\mathcal{L}^1(E)$ be such that $g\geq 0$ and $f(\cdot, t)$ be an integrable function $\forall t\in I$. We denote: $$\Phi(t):=\int_Ef(x,t)\dd{x}$$
+    Let $E\subseteq\RR^n$ be a measurable set, $I\subseteq \RR$ be an interval, $g\in \mathcal{L}^1(E)$ be such that $g\geq 0$ and $f(\cdot, t)$ be an integrable function $\forall t\in I$. We denote: $$\Phi(t):=\int_Ef(x,t)\dd{x}$$
     \begin{enumerate}
       \item If $f(x,\cdot)$ is continuous on $t_0$ almost everywhere on $E$ and $\abs{f(x,t)}\almoste\leq g(x)$ $\forall t\in I$, then $\Phi$ is continuous at $t_0$.
-      \item If $f(x,\cdot)$ is derivable on $t_0$ almost everywhere on $E$ and $$\abs{\pdv{f}{t}(x,t)}\almoste\leq g(x)$$ then the function $\pdv{f}{t}(x,\cdot)$ is integrable on $E$ and $$\Phi'(t_0)=\int_E\pdv{f}{t}(x,t_0)\dd{x}$$
+      \item If $f(x,\cdot)$ is derivable on $t_0$ almost everywhere on $E$ and $$\abs{\pdv{f}{t}(x,t)}\almoste\leq g(x)\quad\forall t\in I$$ then the function $\pdv{f}{t}(x,\cdot)$ is integrable on $E$ and $$\Phi'(t_0)=\int_E\pdv{f}{t}(x,t_0)\dd{x}$$
     \end{enumerate}
   \end{theorem}
-  \subsubsection{Fubini-Tonell theorem}
+  \begin{definition}[Hardy-Littlewood maximal function]
+    Let $f\in \mathcal{L}^1(\RR^n)$ and $B\subseteq \RR^n$ be a ball. We define the \emph{Hardy-Littlewood maximal function} as: $$Mf(x)=\sup_{x\in B}\frac{1}{\m{B}}\int_B\abs{f(y)}\dd{y}$$
+  \end{definition}
+  \begin{theorem}
+    Let $f\in \mathcal{L}^1(\RR^n)$ and $B\subseteq \RR^n$ be a ball. Then:
+    \begin{enumerate}
+      \item $Mf$ is measurable.
+      \item $Mf\almoste{<}\infty$.
+      \item $\displaystyle\m{x\in\RR^n : (Mf)(x) > \alpha} \leq \frac{A}{\alpha}\int_{\RR^n} \abs{f(x)}\dd{x}$.
+    \end{enumerate}
+  \end{theorem}
+  \begin{theorem}[Lebesgue differentiation theorem]
+    Let $f\in \mathcal{L}^1(\RR^n)$ and $B\subseteq \RR^n$ be a ball. Then: $$\lim_{\m{B}\to 0}\frac{1}{\m{B}}\int_Bf(y)\dd{y} \almoste{=} f(x) \qquad x\in  B$$
+  \end{theorem}
+  \begin{proposition}
+    Let $f\in \mathcal{L}^1(\RR^n)$ and suppose $Mf\in \mathcal{L}^1(\RR^n)$. Then, $f=0$.
+  \end{proposition}
+  \subsubsection{Fubini-Tonelli theorem}
   \begin{definition}
     Let $E\subseteq\RR^{p+q}$ and $y\in\RR^q$. We define the \emph{section} of $E$ at $y$ as: $$E(y):=\{x\in\RR^p:(x,y\in E)\}$$
   \end{definition}
   \begin{proposition}
     Let $E,F,E_k\subseteq\RR^{p+q}$, $k\in\NN$, and $y\in\RR^q$. Then:
     \begin{enumerate}
-      \item If $E= A\times B$, with $A\subseteq \RR^p$ and $B\subseteq \RR^q$, then $E(y)=A$ if $y\in B$ and $E(y)=\varepsilon$ if $y\notin B$.
+      \item If $E= A\times B$, with $A\subseteq \RR^p$ and $B\subseteq \RR^q$, then $E(y)=A$ if $y\in B$ and $E(y)=\varnothing$ if $y\notin B$.
       \item $E\cap F=\varnothing\implies E(y)\cap F(y)=\varnothing$.
       \item \hfill\begin{enumerate}
               \item $\displaystyle\left(\bigcap_{k=1}^\infty E_k\right)(y)=\bigcap_{k=1}^\infty E_k(y)$
@@ -366,9 +392,9 @@
     Let $f:\RR^{p+q}\rightarrow\RR$ be a measurable function. Then, $f$ is integrable if and only if: $$\int_{\RR^q}\dd{y}\int_{\RR^p}\abs{f(x,y)}\dd{x}<\infty$$
   \end{corollary}
   \begin{theorem}[Fubini's theorem]
-    Let $f\in L(\RR^{p+q})$. Then:
+    Let $f\in \mathcal{L}^1(\RR^{p+q})$. Then:
     \begin{enumerate}
-      \item $f(\cdot,y)\overset{\text{a.e.}}{\in} L(\RR^p)$ and $f(x,\cdot)\overset{\text{a.e.}}{\in}L(\RR^q)$, $x\in\RR^p$, $y\in\RR^q$.
+      \item $f(\cdot,y)\overset{\text{a.e.}}{\in} \mathcal{L}^1(\RR^p)$ and $f(x,\cdot)\overset{\text{a.e.}}{\in}\mathcal{L}^1(\RR^q)$, $x\in\RR^p$, $y\in\RR^q$.
       \item Let $N_p$ and $N_q$ be the respective null sets where the above functions aren't integrable. Then the functions
             \begin{align*}
               \Phi(y) & =\begin{cases}
@@ -390,6 +416,7 @@
   \begin{theorem}[Change of variables]
     Let $U,V\subseteq\RR^n$ be open sets and $\vf\varphi:U\rightarrow V$ be a change of variables. If $f:\RR^n\rightarrow[0,\infty]$ is measurable or integrable on $V$, then so is $(f\circ\vf\varphi)\abs{J\vf\varphi}$ and: $$\int_{V} f(x)\dd{x}=\int_Uf(\vf\varphi(t))\abs{J\vf\varphi(t)}\dd{t}$$
   \end{theorem}
+
   \subsection{Functional analysis}
   \subsubsection{Normed vector spaces}
   \begin{definition}
@@ -403,13 +430,13 @@
     We define a \emph{metric space} as a pair $(M,d)$ that satisfy the previous properties.
   \end{definition}
   \begin{proposition}
-    Let $(M_1,d_1),\ldots,(M_n,d_n)$ be metric spaces. Then, $M_1\times\cdots\times M_n$ with the distance $$d(x,y)=\max\{d_i(x_i,y_i):i=1,\ldots,n\}$$ where $x=(x_1,\ldots,x_n)$, $y=(y_1,\ldots,y_n)$, is a metric spaces.
+    Let $(M_1,d_1),\ldots,(M_n,d_n)$ be metric spaces. Then, $M_1\times\cdots\times M_n$ with the distance $$d(x,y)=\max\{d_i(x_i,y_i):i=1,\ldots,n\}$$ where $x=(x_1,\ldots,x_n)$, $y=(y_1,\ldots,y_n)$, is a metric space.
   \end{proposition}
   \begin{definition}
     A metric space $(M,d)$ is \emph{complete} if every Cauchy sequence in $M$ converges in $M$.
   \end{definition}
   \begin{definition}
-    Let $E$ be a real (or complex) vector space. A \emph{norm} on $E$ is a function $\|\cdot\|:E\rightarrow\RR $ such that $\forall \vf{u},\vf{v}\in E$ and $\forall\lambda\in\RR $ the following properties are satisfied:
+    Let $E$ be a real (or complex) vector space. A \emph{norm} on $E$ is a function $\|\cdot\|:E\rightarrow\KK$ (where $\KK=\RR,\CC$) such that $\forall \vf{u},\vf{v}\in E$ and $\forall\lambda\in\KK $ the following properties are satisfied:
     \begin{enumerate}
       \item $\|\vf{u}\|\geq 0$
       \item $\|\vf{u}\|=0\iff \vf{u}=0$
@@ -419,7 +446,7 @@
     We define a \emph{normed vector space} as a pair $(E,\|\cdot\|)$ that satisfy the previous properties.
   \end{definition}
   \begin{proposition}
-    Let $(E_1,\norm{\cdot}_1),\ldots,(E_n,\norm{\cdot}_n)$ be normed vector spaces. Then, $E_1\times\cdots\times E_n$ with the norm $$\norm{(x_1,\ldots,x_n)}=\max\{{\norm{x_i}}_i:i=1,\ldots,n\}$$ is a normed vector spaces.
+    Let $(E_1,\norm{\cdot}_1),\ldots,(E_n,\norm{\cdot}_n)$ be normed vector spaces. Then, $E_1\times\cdots\times E_n$ with the norm $$\norm{(x_1,\ldots,x_n)}=\max\{{\norm{x_i}}_i:i=1,\ldots,n\}$$ is a normed vector space.
   \end{proposition}
   \begin{proposition}
     Let $(E,\|\cdot\|)$ be a normed vector space and consider the following functions:
@@ -431,7 +458,7 @@
     \end{enumerate}
   \end{proposition}
   \begin{definition}
-    Let $(E,\|\cdot\|)$ be a normed vector space and $(x_n)\in E$ be a sequence. We say that $\sum_{n=1}^\infty x_n$ is a \emph{convergent series} in $E$ that converges to $x\in E$ if: $$\lim_{n\to\infty}\norm{x-\sum_{n=1}^\infty x_n}=0 $$
+    Let $(E,\|\cdot\|)$ be a normed vector space and $(x_n)\in E$ be a sequence. We say that $\sum_{n=1}^\infty x_n$ is a \emph{convergent series} in $E$ that converges to $x\in E$ if: $$\lim_{N\to\infty}\norm{x-\sum_{n=1}^N x_n}=0 $$
     We say that $\sum_{n=1}^\infty x_n$ is \emph{absolutely convergent} if: $$\sum_{n=1}^\infty\norm{x_n}<\infty$$
   \end{definition}
   \begin{proposition}
@@ -462,5 +489,283 @@
   \begin{proposition}
     A normed vector space is separable if and only if it contains a total countable subset.
   \end{proposition}
+  \subsubsection{\texorpdfstring{$L^p$}{Lp} spaces}
+  \begin{definition}
+    Let $E\subseteq\RR^n$ be a measurable set and $1\leq p<\infty$. We define:
+    \begin{align*}
+      \mathcal{L}^p(E) & :=\left\{{f}:E\rightarrow \RR^n\text{ measurable}:\int_E\abs{{f}}^p<\infty\right\}                                                                                                          \\
+      \begin{split}
+        \mathcal{L}^\infty(E) &:=\left\{{f}:E\rightarrow \RR^n\text{ measurable}:\exists M>0\text{ with }\right.\\&\hspace{4.4cm}\left.\abs{{f}(x)}\almoste{\leq} M, x\in E\right\}
+      \end{split} \\
+      \mathcal{N}(E)   & :=\{{f}:E\rightarrow \RR^n\text{ measurable}:{f}\almoste{=} 0\}
+    \end{align*}
+  \end{definition}
+  \begin{definition}
+    Let $E\subseteq\RR^n$ be a measurable set and $1\leq p\leq\infty$. We define: $$L^p(E):=\quot{\mathcal{L}^p(E)}{\mathcal{N}(E)}$$
+  \end{definition}
+  \begin{proposition}
+    Let $E\subseteq\RR^n$ be a measurable set and $1\leq p<\infty$. The set $L^p$ is a normed vector space with the norm: $$\norm{{f}}_p:={\left(\int_E\abs{{f}}^p\right)}^{1/p}\qquad\forall{f}\in L^p$$
+    And the set $L^\infty$ is also a normed vector space with the norm $$\norm{{f}}_\infty=\inf \{M:\abs{{f}(x)}\almoste{\leq} M, x\in E\}\qquad\forall{f}\in L^\infty$$
+  \end{proposition}
+  \begin{lemma}[Young's inequality for products]
+    Let $a,b\in\RR$ and $1\leq p,q\leq \infty$ be such that $\frac{1}{p}+\frac{1}{q}=1$. Then:
+    $$ab\leq\frac{a^p}{p}+\frac{b^q}{q}$$
+    And the equality holds if and only if $a^p=b^q$.
+  \end{lemma}
+  \begin{lemma}[Hölder's inequality]
+    Let $E\subseteq\RR^n$ be a measurable set, $1\leq p,q\leq \infty$ be such that $\frac{1}{p}+\frac{1}{q}=1$ and ${f}\in L^p(E)$, ${g}\in L^q(E)$. Then:
+    $$\norm{{fg}}_1\leq\norm{{f}}_p\norm{{g}}_q$$
+    And the equality holds if and only if $\exists \alpha,\beta\in\RR_{\geq 0}$ such that $\alpha{\abs{{f}}}^p\almoste{=}\beta{\abs{{g}}}^q$.
+  \end{lemma}
+  \begin{definition}
+    Let $E\subseteq\RR^n$ be a measurable set and $U\subseteq \RR^n$ be an open set. We define:
+    \begin{align*}
+      \mathcal{S}(E)              & =\{f:E\rightarrow\RR:f\text{ is simple}\}                               \\
+      \mathcal{C}_{\textrm{c}}(U) & =\{f:U\rightarrow\RR:f\in\mathcal{C}^0(U),\ \supp f\text{ is compact}\}
+    \end{align*}
+  \end{definition}
+  \begin{theorem}
+    Let $1\leq p<\infty$, $E\subseteq\RR^n$ be a measurable set and $U\subseteq \RR^n$ be an open set. Then:
+    \begin{enumerate}
+      \item $\mathcal{S}(E)$ is dense in $L^p(E)$.
+      \item $\mathcal{C}_{\textrm{c}}(U)$ is dense in $L^p(U)$.
+    \end{enumerate}
+  \end{theorem}
+  \begin{theorem}
+    Let $E\subseteq\RR^n$ be a measurable space, $({f}_k)\in L^p(E)$ be a sequence of functions and $1\leq p<\infty$. Then:
+    \begin{enumerate}
+      \item If $\displaystyle\lim_{k\to\infty}f_k(x)\almoste{=}{f}(x)$, $\norm{{f}_k}\almoste\leq g(x)\in L^p(E)$. Then, ${f}\in L^p(E)$ and $\displaystyle\lim_{k\to\infty}\norm{{f}_k-{f}}_p=0$ and we will write ${f}_k\overset{L^p}{\rightarrow}{f}$.
+      \item If $\sum_{k=1}^\infty\norm{{f}_k}_p<\infty$, then $\sum_{k=1}^\infty\abs{f_k(x)}<\infty$ and $\exists f\in L^p(E)$ such that $\sum_{k=1}^\infty f_k(x)\almoste{=}f(x)$ and $\sum_{k=1}^N{f}_k\overset{L^p}{\rightarrow}{f}$. In particular, $(L^p,\norm{\cdot}_p)$ is a Banach space.
+      \item If ${f}_k\overset{L^p}{\rightarrow}{f}$, then $\exists(f_{k_j})$ such that $\displaystyle\lim_{j\to\infty}f_{k_j}(x)\almoste{=}{f}(x)$.
+    \end{enumerate}
+  \end{theorem}
+  \begin{theorem}
+    Let $E\subseteq\RR^n$ be a measurable space and $1\leq p<\infty$. Then, $L^p(E)$ is separable.
+  \end{theorem}
+  \begin{definition}
+    Let $T$ be an operator. We say that $T$ is \emph{sublinear} if: $$\abs{T(f+g)}\leq \abs{Tf}+\abs{Tg}\qquad\forall f,g\in L^p$$
+  \end{definition}
+  \begin{theorem}[Marcinkiewicz interpolation theorem]
+    Let $T$ be a sublinear operator. Then:
+    \begin{enumerate}
+      \item $\displaystyle\m{x\in\RR^n:\abs{Tf(x)}>t}\leq \frac{A}{t}\norm{f}_1$
+      \item $\norm{Tf}_\infty\leq A_\infty\norm{f}_\infty$
+    \end{enumerate}
+  \end{theorem}
+  \begin{corollary}
+    Let $T$ be a sublinear operator. Then, $\norm{Tf}_p\leq A_p\norm{f}_p$ $\forall 1<p<\infty$ and $\forall f\in L^p$.
+  \end{corollary}
+  \subsubsection{Space of continuous functions}
+  \begin{definition}
+    Let $X\ne \varnothing$ be a set. We define the set $\mathcal{B}(X)$ as the vector space over $\KK=\RR,\CC$ of the functions $f:X\rightarrow\KK$ that are bounded with the \emph{uniform norm} (or \emph{supremum norm}): $$\norm{f}:=\norm{f}_X:=\sup\{\abs{f(x)}:x\in X\}$$
+  \end{definition}
+  \begin{proposition}
+    Let $X\ne \varnothing$ be a set and $(f_n),f\in\mathcal{B}(X)$ be functions. Then: $$\lim_{n\to\infty}\norm{f_n-f}=0\iff f_n\text{ converges uniformly to }f$$
+  \end{proposition}
+  \begin{definition}
+    Let $K\subseteq \RR^n$ be a compact set. We define $\mathcal{C}(K)$ as the closed subspace of $\mathcal{B}(K)$ containing the continuous functions.
+  \end{definition}
+  \begin{proposition}
+    Let $K\subseteq \RR^n$ be a compact set and $f,g\in\mathcal{C}(K)$. Then: $$\norm{fg}_K\leq\norm{f}_K\norm{g}_K$$
+  \end{proposition}
+  \begin{definition}
+    Let $K\subseteq \RR^n$ be a compact set and $A\subseteq \mathcal{C}(K)$ be a subset. We say that $A$ is a \emph{subalgebra} if $A$ is stable under the product, that is if $\forall f,g\in A$ we have $fg\in A$.
+  \end{definition}
+  \begin{proposition}
+    Let $K\subseteq \RR^n$ be a compact set and $A\subseteq \mathcal{C}(K)$ be a subalgebra. Then, $\overline{A}$ is also a subalgebra.
+  \end{proposition}
+  \begin{definition}
+    Let $K\subseteq \RR^n$ be a compact set and $A\subseteq \mathcal{C}(K)$ be a subalgebra. We say that $A$ is a \emph{separating set} (or \emph{separate} the points of $K$) if $\forall x,y\in K$ $\exists f\in A$ such that $f(x)\ne f(y)$.
+  \end{definition}
+  \begin{definition}
+    Let $K\subseteq \RR^n$ be a compact set and $A\subseteq \mathcal{C}(K)$ be a subalgebra. We say that $A$ \emph{does not vanish} if $\forall x\in K$ $\exists f_x\in A$ such that $f_x(x)\ne 0$.
+  \end{definition}
+  \begin{lemma}
+    Let $K\subseteq \RR^n$ be a compact set and $A\subseteq \mathcal{C}(K)$ be a subalgebra. If $A$ contains the constant functions, then $A$ does not vanish.
+  \end{lemma}
+  \begin{definition}
+    Let $K\subseteq \RR^n$ be a compact set and $A\subseteq \mathcal{C}(K)$ be a subalgebra. We say that $A$ is \emph{autoconjugate} if $\overline{f}\in A$ whenever $f\in A$.
+  \end{definition}
+  \begin{theorem}[Stone-Weierstra\ss\ theorem]
+    Let $K\subseteq \RR^n$ be a compact set and $A\subseteq \mathcal{C}(K)$ be a separating autoconjugate subalgebra that does not vanish. Then, $A$ is dense in $\mathcal{C}(K)$.
+  \end{theorem}
+  \begin{definition}
+    Let $(X,d_X)$, $(Y,d_Y)$ be two metric spaces and $F\subset\mathcal{C}(X,Y)$ be a subset. We say that $F$ is \emph{pointwise bounded} if $\forall x\in X$ $\exists M_x>0$ such that $\abs{f(x)}\leq M_x$ $\forall f\in F$.
+    We say that $F$ is \emph{uniformly bounded} if $\exists M>0$ such that $\abs{f(x)}\leq M$ $\forall x\in X$ and $\forall f\in F$.
+  \end{definition}
+  \begin{definition}
+    Let $(X,d_X)$, $(Y,d_Y)$ be two metric spaces and $F\subset\mathcal{C}(X,Y)$ be a subset. We say that $F$ \emph{equicontinuous at a point} $x_0\in X$ if $\forall \varepsilon>0$ $\exists \delta>0$ such that $\forall x\in X$ with $d_X(x,x_0)<\delta$ we have: $$d_Y(f(x),f(x_0))<\varepsilon\quad\forall f\in F$$
+    We say that $F$ is \emph{pointwise equicontinuous} if it is equicontinuous at each point of $X$. Finally, we say that $F$ is \emph{uniformly equicontinuous} if $\forall \varepsilon>0$ $\exists \delta>0$ such that $\forall x,y\in X$ with $d(x,y)<\delta$ we have: $$d_Y(f(x),f(y))<\varepsilon\quad\forall f\in F$$
+  \end{definition}
+  \begin{theorem}[Arzelà-Ascoli theorem]
+    Let $(X,d)$ be a metric space, $K\subset X$ be a compact set and $F\subset \mathcal{C}(K)$ be a subset. Then, $F$ is relatively compact in $\mathcal{C}(K)$ if and only if $F$ is pointwise equicontinuous and pointwise bounded.
+  \end{theorem}
+  \subsubsection{Operators}
+  \begin{definition}
+    Let $E$, $F$ be normed vector spaces. An \emph{operator} $T$ is a linear function $T:E\rightarrow F$.
+  \end{definition}
+  \begin{definition}
+    Let $E$, $F$ be normed vector spaces and $T:E\rightarrow F$ be an operator. We say that $T$ is a \emph{compact operator} if $T(B_E)$ is relatively compact on $F$, where: $$B_E:=\{x\in E:\norm{x}_E\leq 1\}$$
+  \end{definition}
+  \begin{definition}
+    Let $E$, $F$ be normed vector spaces and $T:E\rightarrow F$ be an operator. We define the \emph{norm} of $T$ as:
+    \begin{equation}\label{RFA_normoperator}
+      \norm{T}:=\sup\{\norm{T(x)}_F:\norm{x}_E\leq 1\}
+    \end{equation}
+  \end{definition}
+  \begin{lemma}
+    Let $E$, $F$ be normed vector spaces and $T:E\rightarrow F$ be an operator. Then:
+    \begin{align*}
+      \norm{T} & =\sup\{\norm{T(x)}_F:\norm{x}_E< 1\}                        \\
+               & =\sup\left\{\norm{T(x)}_F:\norm{x}_E= 1\right\}             \\
+               & =\sup\left\{\frac{\norm{T(x)}_F}{\norm{x}_E}:x\ne 0\right\}
+    \end{align*}
+  \end{lemma}
+  \begin{theorem}
+    Let $E$, $F$ be normed vector spaces and $T:E\rightarrow F$ be an operator. The following are equivalent:
+    \begin{enumerate}
+      \item $T$ is continuous at 0.
+      \item $T$ is continuous.
+      \item $T(B_E)$ is bounded on $F$.
+      \item $\norm{T}<\infty$.
+      \item $\exists C\geq 0$ such that $\forall x\in E$ we have: $$\norm{T(x)}_F\leq C\norm{x}_E$$
+            If, moreover, $T$ is continuous, $\norm{T}$ is the least of such constants $C$.
+    \end{enumerate}
+  \end{theorem}
+  \subsubsection{Finite dimensional normed vector spaces}
+  \begin{definition}
+    A \emph{topological isomorphism} is a linear homeomorphism between any two normed vector spaces. If there exists such an isomorphism we will say that the two normed vector spaces are \emph{isomorphic}.
+  \end{definition}
+  \begin{definition}
+    Let $E$ be a normed vector space and $\norm{\cdot}_1$, $\norm{\cdot}_2$ be two norms on $E$. We say that $\norm{\cdot}_1$ \emph{is finer than} $\norm{\cdot}_2$ if $\exists\alpha\in\RR$ such that: $$\norm{x}_1\leq\alpha\norm{x}_2\qquad \forall x\in E$$
+  \end{definition}
+  \begin{definition}
+    Let $E$ be a normed vector space and $\norm{\cdot}_1$, $\norm{\cdot}_2$ be two norms on $E$. We say that the norms $\norm{\cdot}_1$, $\norm{\cdot}_2$ are \emph{equivalent} if $\exists\alpha,\beta\in\RR$ such that: $$\alpha\norm{x}_2\leq \norm{x}_1\leq\beta\norm{x}_2\qquad \forall x\in E$$
+  \end{definition}
+  \begin{theorem}
+    Let $E$ be a normed vector space over $\KK$ of dimension $n\in\NN$. Then, any algebraic isomorphism $T:\KK^n\rightarrow E$ is a topological isomorphism.
+  \end{theorem}
+  \begin{corollary}
+    In a finite-dimensional normed vector space any two norms are always equivalent.
+  \end{corollary}
+  \begin{corollary}
+    In a normed vector space any finite-dimensional subspace is complete and therefore closed.
+  \end{corollary}
+  \begin{corollary}
+    Let $E$, $F$ be normed vector spaces and $T:E\rightarrow F$ be an operator. If $T$ is linear and $\dim E<\infty$, then $T$ is continuous.
+  \end{corollary}
+  \begin{lemma}[Almost orthogonality lemma]
+    Let $E$ be a normed vector space and $F\subseteq E$ be a proper subspace of $E$. Then, $\forall \varepsilon>0$, $\exists u\in E$ such that $\norm{u}=1$ and $d(u,F)\geq 1-\varepsilon$.
+  \end{lemma}
+  \begin{theorem}[Riesz's theorem]
+    Let $E$ be a normed vector space. If the unit closed sphere $\{x\in E:\norm{x}=1\}$ is compact, then $\dim E<\infty$.
+  \end{theorem}
+  \subsubsection{Space of bounded operators}
+  \begin{definition}
+    Let $E$, $F$ be normed vector spaces. We define the following set:
+    $$\mathcal{L}(E,F):=\{T:E\rightarrow F: T\text{ is a bounded operator}\}$$
+  \end{definition}
+  \begin{theorem}
+    Let $E$, $F$ be normed vector spaces. Then, $\mathcal{L}(E,F)$ is a vector normed space with the norm of\cref{RFA_normoperator} and the usual operators. Moreover, if $F$ is Banach, so it is $\mathcal{L}(E,F)$.
+  \end{theorem}
+  \begin{proposition}
+    Let $E$, $F$, $G$ be normed vector spaces and $T:E\rightarrow F$, $S:F\rightarrow G$ be operators. Then: $$\norm{S\circ T}\leq\norm{S}\norm{T}$$
+  \end{proposition}
+  \begin{definition}
+    We denote $\mathcal{L}(E):=\mathcal{L}(E,E)$ which, together with the composition, has a structure of \emph{normed algebra}. That is, $\forall T,S\in\mathcal{L}(E)$, we have:
+    \begin{enumerate}
+      \item $T\circ S\in\mathcal{L}(E)$
+      \item $\norm{S\circ T}\leq\norm{S}\norm{T}$
+    \end{enumerate}
+  \end{definition}
+  \begin{definition}
+    Let $E$ be a normed vector space. The Banach space $E^*:=\mathcal{L}(E,\KK)$ is called \emph{dual space} of $E$.
+  \end{definition}
+  \subsubsection{Neumann series}
+  \begin{definition}
+    Let $E$ be a normed vector space, $T\in\mathcal{L}(E)$ and $v\in E$. We would like to find the solution of the equation: $$(T-\lambda\id)u=v$$ for some $\lambda\in\KK^*$.
+  \end{definition}
+  \begin{definition}
+    Let $E$ be a Banach space, $T\in\mathcal{L}(E)$ and $\lambda\in\KK^*$. We define the Neumann series as the series:
+    $$-\frac{1}{\lambda}\sum_{n= 0}^\infty\frac{1}{\lambda^n}T^n$$
+  \end{definition}
+  \begin{theorem}
+    Let $E$ be a Banach space, $T\in\mathcal{L}(E)$ and $\lambda\in\KK^*$. If the Neumann series converges absolutely, then ${(T-\lambda\id)}^{-1}\in\mathcal{L}(E)$ and: $${(T-\lambda\id)}^{-1}=-\frac{1}{\lambda}\sum_{n= 0}^\infty\frac{1}{\lambda^n}T^n$$
+  \end{theorem}
+  \begin{definition}
+    Let $K(x,y)\in\mathcal{C}(\RR^2)$. We define the \emph{Volterra operator with kernel $K(x,y)$} as the following operator: $$Tf(x):=\int_a^xK(x,y)f(y)\dd{y}$$
+  \end{definition}
+  \begin{theorem}
+    Let $T:\mathcal{C}([a,b])\rightarrow\mathcal{C}([a,b])$ be the Volterra operator of kernel $K(x,y)$. Then,
+    $${(T-\lambda\id)}^{-1}=-\frac{1}{\lambda}\sum_{n= 0}^\infty\frac{1}{\lambda^n}T^n$$
+    is absolutely convergent on $\mathcal{L}(\mathcal{C}([a,b]))$.
+  \end{theorem}
+  \subsubsection{Duality}
+  \begin{definition}
+    Let $E$ be a real vector space. A \emph{convex functional} $p:E\rightarrow\RR$ is a function that satisfies:
+    \begin{enumerate}
+      \item $p(x+y)\leq p(x)+p(y)\quad\forall x,y\in E$
+      \item $p(\alpha x)=\alpha p(x)\quad\forall x\in E,\ \alpha\geq 0$
+    \end{enumerate}
+  \end{definition}
+  \begin{theorem}[Hahn-Banach theorem]
+    Let $E$ be a real vector space, $F\subseteq E$ be a subspace, $p:E\rightarrow\RR$ be a convex functional and $u\in F^*$. If $u(z)\leq p(z)$ $\forall z\in F$, then $\exists v\in E^*$ such that $v(z)=u(z)$ $\forall z\in F$ and $v(x)\leq p(x)$ $\forall x\in E$ ($v$ is called a \emph{prolongation} of $u$).
+  \end{theorem}
+  \begin{definition}[Seminorm]
+    Let $E$ be a vector space over $\KK$. A \emph{seminorm} $p:E\rightarrow[0\infty)$ is a functional that satisfies:
+    \begin{enumerate}
+      \item $p(x+y)\leq p(x)+p(y)\quad\forall x,y\in E$
+      \item $p(\lambda x)=\abs{\lambda} p(x)\quad\forall x\in E,\ \lambda\in\KK$
+    \end{enumerate}
+  \end{definition}
+  \begin{lemma}
+    Let $E$ be a vector space over $\KK$. A norm defined on $E$ is a seminorm.
+  \end{lemma}
+  \begin{theorem}[Hahn-Banach theorem]
+    Let $E$ be a vector space over $\KK=\RR,\CC$, $F\subseteq E$ be a subspace, $p:E\rightarrow\RR$ be a seminorm and $u\in F^*$. If $\abs{u(z)}\leq p(z)$ $\forall z\in F$, then $\exists v\in E^*$ such that $v(z)=u(z)$ $\forall z\in F$ and $\abs{v(x)}\leq p(x)$ $\forall x\in E$. That is, $v$ prolongates $u$.
+  \end{theorem}
+  \begin{theorem}[Hahn-Banach theorem]
+    Let $E\ne\{0\}$ be a normed vector space.
+    \begin{enumerate}
+      \item If $F\subseteq E$ is a subspace and $u\in F^*$, then $\exists v\in E^*$ such that prolongates $u$ and $\norm{v}=\norm{u}$.
+      \item For all $a\in E$, $\exists v\in E^*$ such that $v(a)=\norm{a}$ and $\norm{v}=1$.
+      \item If $F\subseteq E$ is a closed subspace and $a\in E\setminus F$, then $\exists v\in E^*$ such that $v(a)=1$ and $v(F)=\{0\}$.
+    \end{enumerate}
+  \end{theorem}
+  \begin{definition}
+    Let $E$ be a normed vector space, $x\in E$ and $v\in E^*$. We denote $\langle x,v\rangle := v(x)$ and $\hat{x}:=\langle x,\cdot\rangle$. Thus, $\hat{x}(v)=\langle x,v\rangle$ and $\hat{x}$ is a bilinear form on $E^*$ that satisfies: $$\abs{\hat{x}(v)}\leq\norm{v}_{E^*}\norm{x}_E$$ Thus, $\hat{x}\in E^{**}$ with $\norm{\hat{x}}_{E^{**}}\leq \norm{x}_E$.
+  \end{definition}
+  \begin{proposition}
+    Let $E$ be a normed vector space and $x\in E$ with $x\ne 0$. Then, $\norm{\hat{x}}_{E^{**}}= \norm{x}_E$.
+  \end{proposition}
+  \begin{proposition}
+    Let $E$ be a normed vector space. The function $$\function{J}{E}{E^{**}}{x}{\hat{x}}$$ is linear, continuous, injective and isometric. Thus, $J(E)=E\subseteq E^{**}$. Moreover if $J$ is surjective, we have $E=E^{**}$. In this case, $E$ is called \emph{reflexive}.
+  \end{proposition}
+  \begin{definition}
+    Let $E$, $F$ be normed vector spaces and $T\in\mathcal{L}(E,F)$. We define the \emph{dual map}, $T^*\in\mathcal{L}(F^*,E^*)$, of $T$ as $T^*(v)=v\circ T$.
+  \end{definition}
+  \begin{proposition}
+    Let $E$, $F$ be normed vector spaces and $T\in\mathcal{L}(E,F)$. Then, $\forall x\in E$ and $v\in F^*$ we have: $$\langle T(x),v\rangle=\langle x,T^*(v)\rangle$$
+  \end{proposition}
+  \begin{proposition}
+    Let $E$, $F$ be normed vector spaces. The function $$\function{}{\mathcal{L}(E,F)}{\mathcal{L}(F^*,E^*)}{T}{T^*}$$ is linear, bijective and isometric. That is, $\norm{T}=\norm{T^*}$.
+  \end{proposition}
+  \subsection{General theorems on linear maps}
+  \subsubsection{Open mapping and closed graph theorems}
+  \begin{theorem}[Baire's theorem]
+    Let $(U_n)$ be a sequence of dense open sets on a metric space $X$. Then, $\bigcap_{n=1}^\infty$ is dense on $X$.
+  \end{theorem}
+  \begin{corollary}
+    Let $X$ be a metric space such that $X=\bigcup_{n=1}^\infty C_n$, where $C_n\subseteq X$ are closed sets. Then, $\exists n_0$ such that $\Int F_{n_0}\ne \varnothing$.
+  \end{corollary}
+  \begin{theorem}[Open mapping theorem]
+    Let $E$, $F$ be a Banach spaces and $T:E\rightarrow F$ be a surjective bounded operator. Then, $T$ is open.
+  \end{theorem}
+  \begin{theorem}[Closed graph theorem]
+    Let $E$, $F$ be a Banach spaces and $T:E\rightarrow F$ be an operator. Consider the graph of $T$: $$\graph(T)=\{(x,y)\in E\times F:y=Tx\}$$
+    Then, $T$ is bounded if and only if $\graph(T)$ is a closed set on $E\times F$.
+  \end{theorem}
+  \subsubsection{Uniform boundedness principle}
+  \subsection{Hilbert spaces}
 \end{multicols}
 \end{document}

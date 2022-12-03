@@ -4,46 +4,41 @@
 \begin{document}
 \renewcommand{\col}{\apl}
 \begin{multicols}{2}[\section{Partial differential equations}]
-  \subsection{Introduction}
+  \subsection{PDEs in Physics}
   \subsubsection{Wave and membrane dynamics}
   \begin{proposition}[Wave equation]
     Consider a one-dimensional string of length $L$ and constant $k(x)$, $\rho$ be its linear density and $u(x,t)$ be the displacement of the point $x$ at the time $t$ from its equilibrium point. Then, the dynamics of the string are given by: $$\rho u_{tt}={(ku_x)}_x$$ If both $k$ and $\rho$ are constant, this equation is sometimes written as:
     \begin{equation}\label{PDE_waveeq}
       u_{tt}=c^2u_{xx}
     \end{equation}
-    This kind of equations are called \emph{hyperbolic equations}. The solution $u(x,t)$ to the wave equation with boundary conditions $u(x,0)=f(x)$, $u_t(x,0)=g(x)$ and $u(0,t)=u(L,t)=0$ is: $$u(x,t)=\sum_{n=0}^\infty \sin\left(\frac{\pi n x}{L}\right)\left[a_n\cos\left(\frac{\pi n c}{L}t\right)+ b_n\sin\left( \frac{\pi n c}{L}t\right)\right]$$ where:
-    \begin{align*}
-      a_n & =\frac{1}{L}\int_{-L}^Lf(x)\cos\left(\frac{\pi n x}{L}\right)\dd{x}       \\
-      b_n & =\frac{1}{\pi n c}\int_{-L}^Lg(x)\sin\left(\frac{\pi n x}{L}\right)\dd{x}
-    \end{align*}
+    These kind of equations are called \emph{hyperbolic equations}.
   \end{proposition}
   \begin{proposition}[Navier-Cauchy equation]
-    Consider a solid of mass density $\rho$ and $\mu$ and $\lambda$ are the so-called \emph{Lamé coefficients} that describe the material. If $\vf{u}(x,t)$ is the displacement vector of the point $x$ at the instant $t$, the equations that describes the deformation of the solid (\emph{elastodynamics}) is:
+    Consider a solid of mass density $\rho$ and let $\mu$ and $\lambda$ be the so-called \emph{Lamé coefficients} that describe the material. If $\vf{u}(\vf{x},t)$ is the displacement vector at the point $\vf{x}$ and the instant $t$, the equation that describes the deformation of the solid (\emph{elastodynamics}) is:
     $$\rho\vf{u}_{tt}=\mu\laplacian\vf{u}+(\lambda+\mu)\grad(\divp{\vf{u}})$$
   \end{proposition}
   \subsubsection{Fluid dynamics}
   \begin{definition}
-    Given a vector field $\vf{u}(x,t)$, we define the \emph{material derivative operator as} as: $$\matdv{\vf{u}}{t}:=\vf{u}_t+(\vf{u}\cdot\grad)\vf{u}$$
+    Given a vector field $\vf{u}(\vf{x},t)$, we define the \emph{material derivative operator} as: $$\matdv{\vf{u}}{t}:=\vf{u}_t+(\vf{u}\cdot\grad)\vf{u}$$
   \end{definition}
   \begin{definition}
     An \emph{incompressible flow} is a flow in which the material density is constant.
   \end{definition}
   \begin{proposition}[Continuous equation]
-    Consider a fluid of density $\rho$ moving at a velocity $\vf{u}(x,t)$. The conservation of mass implies that the following equation (called \emph{continuous equation}) must hold:
+    Consider a fluid of density $\rho$ moving at a velocity $\vf{u}(\vf{x},t)$. The conservation of mass implies that the following equation (called \emph{continuous equation}) must hold:
     \begin{equation}\label{PDE_continuous}
       \rho_t+\divp(\rho\vf{u})=0
     \end{equation}
     If the fluid is incompressible, the previous equation becomes: $$\divp{\vf{u}}=0$$
   \end{proposition}
   \begin{proposition}[Cauchy momentum equation]
-    Consider an inviscid fluid of density $\rho$ moving at a velocity $\vf{u}(x,t)$ and undergoing a pressure of $p(x,t)$. The conservation of momentum implies that the following equation (called \emph{Cauchy momentum equation}) must hold:
+    Consider an inviscid fluid of density $\rho$ moving at a velocity $\vf{u}(\vf{x},t)$ and undergoing a pressure of $p(\vf{x},t)$. The conservation of momentum implies that the following equation (called \emph{Cauchy momentum equation}) must hold:
     \begin{equation}\label{PDE_cauchy}
       \rho\matdv{\vf{u}}{t}+\grad p=0
     \end{equation}
-    If the fluid is incompressible, the previous equation becomes: $$\divp{\vf{u}}=0$$
   \end{proposition}
   \begin{theorem}[Inviscid flow]
-    Consider an incompressible inviscid flow of density $\rho$ moving at a velocity $\vf{u}(x,t)$ and undergoing a pressure of $p(x,t)$. The equations describing the dynamics of the flow are:
+    Consider an incompressible inviscid flow of density $\rho$ moving at a velocity $\vf{u}(\vf{x},t)$ and undergoing a pressure of $p(\vf{x},t)$. The equations describing the dynamics of the flow are:
     \begin{equation*}
       \left\{
       \begin{aligned}
@@ -63,7 +58,7 @@
     \end{equation*}
   \end{theorem}
   \begin{theorem}[Viscid flow]
-    Consider an incompressible viscid fluid of density $\rho$, viscosity $\eta$, moving at a velocity $\vf{u}(x,t)$ and undergoing a pressure of $p(x,t)$. The equations describing the dynamics of the flow are:
+    Consider an incompressible viscid fluid of density $\rho$, viscosity $\eta$, moving at a velocity $\vf{u}(\vf{x},t)$ and undergoing a pressure of $p(\vf{x},t)$. The equations describing the dynamics of the flow are:
     \begin{equation*}
       \left\{
       \begin{aligned}
@@ -88,7 +83,7 @@
     $$\vf{F}(\vf{x})=-Gm\int_{\Omega}\frac{\vf{x}-\vf{y}}{{\norm{\vf{x}-\vf{y}}}^3}\rho(\vf{y})\dd^3{\vf{y}}$$
   \end{proposition}
   \begin{proposition}
-    Consider a body $\Omega\subset\RR^3$ with a density of mass $\rho$. Then, $\vf{F}(\vf{x})=m\grad{u(\vf{x})}$ where $$u(\vf{x})=G\int_{\Omega}\frac{1}{\norm{\vf{x}-\vf{y}}}\rho(\vf{y})\dd^3{\vf{y}}$$ is the \emph{potential} created by the body $\Omega$ at the point $\vf{x}\in\RR^3$. Furthermore, if $\rho$ is regular enough, we have $\divp\vf{F}(\vf{x})=-4\pi\rho(\vf{x})$\footnote{That is, $\divp\vf{F}(\vf{x})=0$ $\forall\vf{x}\in\RR^3\setminus\Omega$}. Combining these two equation, we get: $$\laplacian u=-4\pi\rho$$ which the \emph{Poisson equation} (and also it is a \emph{elliptic equation}).
+    Consider a body $\Omega\subset\RR^3$ with a density of mass $\rho$. Then, $\vf{F}(\vf{x})=m\grad{u(\vf{x})}$ where $$u(\vf{x})=G\int_{\Omega}\frac{1}{\norm{\vf{x}-\vf{y}}}\rho(\vf{y})\dd^3{\vf{y}}$$ is the \emph{potential} created by the body $\Omega$ at the point $\vf{x}\in\RR^3$. Furthermore, if $\rho$ is regular enough, we have $\divp\vf{F}(\vf{x})=-4\pi\rho(\vf{x})$\footnote{That is, $\divp\vf{F}(\vf{x})=0$ $\forall\vf{x}\in\RR^3\setminus\Omega$.}. Combining these two equation, we get: $$\laplacian u=-4\pi\rho$$ which is the \emph{Poisson equation} (and also it is a \emph{elliptic equation}).
   \end{proposition}
   \subsubsection{Diffusion and heat equations}
   \begin{proposition}[Fick's law of diffusion]
@@ -98,8 +93,8 @@
     Consider a material with diffusivity $D$, $\vf{\phi}$ the diffusion flux and $u$ its concentration. Then, the concentration of the material satisfies: $$\pdv{u}{t}=\divp\left(D\grad{u}\right)$$
     In particular, if $D=\const$, then we get $\pdv{u}{t}=D\laplacian{u}$.
   \end{proposition}
-  \begin{proposition}[Fourier's law of diffusion]
-    Consider a material with \emph{thermal conductivity} $k$, $\vf{q}$ be the \emph{heat flux} and $T$ its temperature. Then, \emph{Fourier's law} states that: $$\vf{q}=-k\grad{T}$$
+  \begin{proposition}[Fourier's law]
+    Consider a material with \emph{thermal conductivity} $k$, $\vf{q}$ be the \emph{heat flux} and $u(x,t)$ its temperature. Then, \emph{Fourier's law} states that: $$\vf{q}=-k\grad{u}$$
   \end{proposition}
   \begin{proposition}[Heat equation]
     Consider a material with thermal conductivity $k$ and $u$ be its temperature. Then, the temperature of the material satisfies: $$\pdv{u}{t}=\frac{1}{c\rho}\divp\left(k\grad{u}\right)$$
@@ -140,26 +135,44 @@
   \end{definition}
   \begin{proposition}[Fermat's principle]
     \emph{Fermat's principle} states that the path taken by a ray between two given points $a$ and $b$ is the path that can be traveled in the least time. Mathematically, we want to minimize the functional: $$\mathcal{T}(\vf{x})=\int_a^b\frac{\abs{\dd{\vf{x}}}}{v(\vf{x})}$$
-    So we shall solve the equation $\delta \mathcal{T}=0$, which is equivalent to solve: $$\int_a^bn(\vf{x})\dd{s}$$ where $s$ is the arc-length parameter. From the Euler-Lagrange equations, we get the following ode: $$\dv{}{s}\left(n\dv{\vf{x}}{s}\right)=\grad{n}$$
+    So we shall solve the equation $\delta \mathcal{T}=0$, which is equivalent to solve: $$\delta\int_a^bn(\vf{x})\dd{s}=0$$ where $s$ is the arc-length parameter. From the Euler-Lagrange equations, we get the following ode: $$\dv{}{s}\left(n\dv{\vf{x}}{s}\right)=\grad{n}$$
   \end{proposition}
   \begin{proposition}[Eikonal equation]
-    The time $T(x)$ taken by the light to travel from a fixed point $x_0$ to $x$ in a medium of refractive index $n$ is given by: $$\abs{\grad{T}}$$
+    The time $T(x)$ taken by the light to travel from a fixed point $x_0$ to $x$ in a medium of refractive index $n$ is given by: $${\norm{\grad{T}}}^2=n^2$$
   \end{proposition}
   \begin{definition}
     The \emph{action} $\mathcal{S}$ of a physical system is defined as the integral of the Lagrangian $L:=T-V$ between two instants of time $t_1$ and $t_2$. That is: $$\mathcal{S}(\vf{x},t)=\int_{t_1}^{t_2}L(\vf{x}(t),\vf{\dot{x}}(t),t)\dd{t}=\int_{t_1}^{t_2}\left(\frac{1}{2}m{\norm{\vf{\dot{x}}}}^2-V(\vf{x})\right)\dd{t}$$
-    where $m$ is the mass of the particle and $V$ is the potential energy of the particle.
+    where $m$ is the mass of the particle, $T$ is the kinetic energy of the particle and $V$ is its potential energy.
   \end{definition}
   \begin{proposition}[Principle of least action]
     The path taken by a physical system between times $t_1$ and $t_2$ and configurations $\vf{x}_1$ and $\vf{x}_2$ is the one for which the action is stationary (no change) to first order. Mathematically, $\delta \mathcal{S}=0$, where $\delta$ means a \emph{small change}. This value $S(\vf{x},t)$ of the action satisfies the \emph{Hamilton-Jacobi equation}: $$\pdv{S}{t}+\frac{1}{2m}{\norm{\grad S}}^2+V=0$$
   \end{proposition}
   \begin{proposition}[Schrödinger equation]
-    The \emph{Schrödinger equation} is a pde that governs the \emph{wave function} $\vf\Psi$, which describes the quantum state of an isolated quantum system, of a quantum-mechanical system. This is given by: $$\ii \hbar\pdv{\Psi}{t}=\left(-\frac{\hbar^2}{2m}\laplacian+V\right)\vf{\Psi}$$ where $m$ is the mass of the particle and $V$ is the potential in which the particle exists. Furthermore, $\abs{\Psi}^2$ is the probability density function of the position of the particle.
+    The \emph{Schrödinger equation} is a pde that governs the \emph{wave function} $\Psi$, which describes the quantum state of an isolated quantum system, of a quantum-mechanical system. This is given by: $$\ii \hbar\pdv{\Psi}{t}=\left(-\frac{\hbar^2}{2m}\laplacian+V\right){\Psi}$$ where $m$ is the mass of the particle and $V$ is the potential in which the particle exists. Furthermore, $\abs{\Psi}^2$ is the probability density function of the position of the particle.
   \end{proposition}
   \begin{proposition}
-    Substituting $\vf{\Psi}=\sqrt{\rho}\exp{\ii \frac{S}{\hbar}}$ into the Schrödinger equation and taking the limit $\hbar\to 0$ in the resulting equation yield the Hamilton-Jacobi equation. Moreover, if we define $\vf{v}=\frac{\grad{S}}{m}$ from one real equation (from the original one complex equation) we get the continuous equation (\cref{PDE_continuous}) and from the other equation taking the limit $\hbar\to 0$ we get the Cauchy momentum equation (\cref{PDE_cauchy}).
+    Substituting ${\Psi}=\sqrt{\rho}\exp{\ii \frac{S}{\hbar}}$ into the Schrödinger equation and taking the limit $\hbar\to 0$ in the resulting equation yield the Hamilton-Jacobi equation. Moreover, if we define $\vf{v}=\frac{\grad{S}}{m}$, from one real equation (from the original one complex equation) we get the continuous equation (\cref{PDE_continuous}) and from the imaginary equation taking the limit $\hbar\to 0$ we get the Cauchy momentum equation (\cref{PDE_cauchy}).
   \end{proposition}
   \subsection{First order partial differential equations}
-  \subsubsection{Method of characteristics and traffic equation}
+  \subsubsection{Vector calculus}
+  \begin{theorem}[Fundamental lemma of calculus of variations]
+    Let $\Omega\subset\RR^n$ be a domain and $\vf{f}:\Omega\rightarrow\RR^m$ be a continuous function. If $$\dotsint_U \vf{f}(\vf{x})\dd{\vf{x}}=0$$ for any subset  $U\subseteq\Omega$, then $\vf{f}=\vf{0}$ in $\Omega$.
+  \end{theorem}
+  \begin{proposition}
+    Let $\Omega\subseteq\RR^3$ be a closed region and $f,g,k:\Omega\rightarrow\RR$ be functions of class $\mathcal{C}^1(\Omega)$. Then:
+    \begin{gather*}
+      \int_\Omega f\div(k\grad{g})                                =\int_{\Fr{\Omega}}fk\grad{g}\cdot\dd{\vf{S}} -\int_\Omega k\grad{f}\cdot\grad{g} \\
+      \int_\Omega \left(f\div(k\grad{g})-g\div(k\grad{f})\right)  =\int_{\Fr{\Omega}} k\left(f\grad{g}-g\grad{f}\right)\cdot\dd{\vf{S}}
+    \end{gather*}
+  \end{proposition}
+  \begin{corollary}[Green identities]
+    Let $\Omega\subseteq\RR^3$ be a closed region and $f,g,k:\Omega\rightarrow\RR$ be functions of class $\mathcal{C}^1(\Omega)$. Then:
+    \begin{gather*}
+      \int_\Omega f\laplacian{g}                              =\int_{\Fr{\Omega}}f\grad{g}\cdot\dd{\vf{S}} -\int_\Omega \grad{f}\cdot\grad{g} \\
+      \int_\Omega \left(f\laplacian{g}-g\laplacian{f}\right)  =\int_{\Fr{\Omega}} \left(f\grad{g}-g\grad{f}\right)\cdot\dd{\vf{S}}
+    \end{gather*}
+  \end{corollary}
+  \subsubsection{Method of characteristics}
   \begin{proposition}[Method of characteristics]
     Consider the following quasilinear PDE
     \begin{equation}\label{PDE_char}
@@ -185,34 +198,212 @@
     \end{equation*}
     with initial conditions $x(0,s)=x_0(s)$, $t(0,s)=t_0(s)$ and $u(0,s)=u_0(s)$.
   \end{proposition}
+  \subsubsection{Traffic flow equation}
   \begin{proposition}[Traffic flow equation]
     Consider a one lane motorway with one entry an one exit. Let $\rho(x,t)$ be the density of cars per unit of length, $u(\rho)$ the average speed of the cars and $q=\rho u$ be the flux of cars. Then, we can model the traffic in the motorway with the equation: $$\rho_t+{(\rho u)}_x=\rho_t+q'(\rho){\rho}_x=0$$
     The integral form of the latter equation is: $$\pdv{}{t}\int_{a}^b\rho(x,t)\dd{x}=q(a,t)-q(b,t)$$
   \end{proposition}
   \begin{proposition}
     In the hypothesis of the traffic equation, an observer situated at $x(t)$ will observe a constant density $\rho(x(t),t)$ if $x'(t)=q'(\rho(x(t),t))$ (that is, if the frame of reference situated at $x(t)$ is moving at a speed of $q'(\rho(x(t),t))$)\footnote{Note that this
-      velocity may be different from the velocity at which an individual car moves.}. Therefore, $\rho$ is constant in each line of the form $x(t)=x_0+q'(\rho(x_0,0))t$ (\emph{characteristic line}). This determines $\rho(x,t)$ provided that we already know the initial condition $\rho(x,0)$, $x\in\RR$. In other words, $\rho(x,t)$ is the solution $\xi$ of the density at the appropriate $x$-intercept of the line passing through $(x,t)$: $$\xi=\rho(x-q'(\xi)t,0)$$
+      velocity may be different from the velocity at which an individual car moves.}. Therefore, $\rho$ is constant in each line of the form $x(t)=x_0+q'(\rho(x_0,0))t$ (\emph{characteristic line}) (see \cref{PDE_traffic-char}). This determines $\rho(x,t)$ provided that we already know the initial condition $\rho_0(x):=\rho(x,0)$, $x\in\RR$. In other words, $\rho(x,t)$ is the solution $\xi$ of the density at the appropriate $x$-intercept of the line passing through $(x,t)$: $$\xi=\rho_0(x-q'(\xi)t)$$
   \end{proposition}
-  % \begin{center}
-  %   \begin{minipage}{\linewidth}
-  %     \centering
-  %     \includestandalone[mode=image|tex,width=0.45\linewidth]{Images/traffic_char}
-  %     \captionof{figure}{Characteristics of the traffic flow. In each line, the density $\rho$ is constant.}
-  %     \label{PDE_traffic_char}
-  %   \end{minipage}
-  % \end{center}
-  % \begin{center}
-  %   \begin{minipage}{\linewidth}
-  %     \centering
-  %     \includestandalone[mode=image|tex,width=0.45\linewidth]{Images/density_sol}
-  %     \captionof{figure}{}
-  %     \label{PDE_density-sol}
-  %   \end{minipage}
-  % \end{center}
+  \begin{center}
+    \begin{minipage}{\linewidth}
+      \centering
+      \includestandalone[mode=image|tex,width=\linewidth]{Images/traffic_char}
+      \captionof{figure}{Characteristics of the traffic flow. In each line the density $\rho$ is constant.}
+      \label{PDE_traffic-char}
+    \end{minipage}
+  \end{center}
   \begin{proposition}[Rankine-Hugoniot equation]
-    Let $x_s(t)$ be the position at time $t$ of a (jump) discontinuity in the function $\rho$. Then: $$\dv{x_s}{t}=\frac{[\rho u]}{[\rho]}=\frac{{(\rho u)}_+-{(\rho u)}_-}{\rho_+-\rho_-}$$ where the notation $[x(t)]$ refers to: $$[x(t_0)]:=\lim_{t\to{t_0}^+}x(t)-\lim_{t\to{t_0}^-}x(t)=:x_+(t_0)-x_-(t_0)$$.
+    Let $x_s(t)$ be the position at time $t$ of a (jump) discontinuity in the function $\rho$. Then: $$\dv{x_s}{t}=\frac{[q]}{[\rho]}=\frac{{(\rho u)}_+-{(\rho u)}_-}{\rho_+-\rho_-}$$ where the notation $[x(t)]$ refers to: $$[x(t_0)]:=x_+(t_0)-x_-(t_0):=\lim_{t\to{t_0}^+}x(t)-\lim_{t\to{t_0}^-}x(t)$$
   \end{proposition}
-  If the functions aren't derivable, a more general equation can be written as: $$\oint_C q\dd{t}-\rho\dd{x}=0$$
-  where $C$ is a closed curve.
+  \begin{lemma}[Entropy condition]
+    We will have existence and unicity of solutions for the traffic flow equation if: $$q'(\rho_+)<\frac{[q]}{[\rho]}<q'(\rho_-)$$
+  \end{lemma}
+  \subsection{Wave equation}
+  \begin{proposition}
+    Let $u:\RR^2\rightarrow\RR$ be a two-times differentiable function such that:
+    \begin{multline*}
+      \left.\int_{x_1}^{x_2}\rho u_t\dd{t}\right|_{t=t_2}-\left.\int_{x_1}^{x_2}\rho u_t\dd{t}\right|_{t=t_1}=\left.\int_{t_1}^{t_2}ku_x\dd{t}\right|_{x=x_2}-\\-\left.\int_{t_1}^{t_2}ku_x\dd{t}\right|_{x=x_1}+\int_{t_1}^{t_2}\int_{x_1}^{x_2}f(x,t)\dd{x}\dd{t}
+    \end{multline*}
+    for certain functions $\rho(x,t)$, $k(x)$, $f(x,t)$. Also suppose that we can freely exchange the derivative and the integral sign\footnote{From now on, we will simply say that $u$ is a \emph{good enough} function.}. Then, $u(x,t)$ is a solution to the wave equation with driven force $f$:
+    $$\rho u_{tt}-{(ku_x)}_x=f(x,t)$$
+  \end{proposition}
+  \subsubsection{Constant coefficients}
+  \begin{proposition}[D'Alembert formula]
+    Let $u_0,v_0:\RR\rightarrow\RR$ be functions. The solution $u(x,t)$ to the wave equation with initial conditions $u(x,0)=u_0(x)$ and $u_t(x,0)=v_0(x)$ is:
+    \begin{equation}\label{PDE_dAlembert}
+      u(x,t)=\frac{u_0(x-ct)+u_0(x+ct)}{2}+\frac{1}{2c}\int_{x-ct}^{x+ct}v_0(s)\dd{s}
+    \end{equation}
+  \end{proposition}
+  \begin{theorem}
+    Let $u_0,v_0:\RR\rightarrow\RR$ and $f:\RR^2\rightarrow\RR$ be functions. The solution to the wave equation with driven force $f$ and initial conditions $u(x,0)=u_0(x)$ and $u_t(x,0)=v_0(x)$ is:
+    \begin{multline*}
+      u(x,t)=\frac{u_0(x-ct)+u_0(x+ct)}{2}+\frac{1}{2c}\int_{x-ct}^{x+ct}v_0(s)\dd{s}+\\+\frac{1}{2c}\int_0^t\int_{x-c(t-\tau)}^{x+c(t-\tau)}f(s,\tau)\dd{s}\dd{\tau}
+    \end{multline*}
+    If we think $u(t):x\rightarrow u(x,t)$, then we can write the expression above more compactly as: $$u(t)=\mathcal{S}'(t)u_0+\mathcal{S}(t)v_0+\int_0^t\mathcal{S}(t-\tau) f(\tau)\dd{\tau}$$ where the operator $\mathcal{S}(t)$ is defined as: $$\left[\mathcal{S}(t)\varphi\right](x)=\frac{1}{2c}\int_{x-ct}^{x+ct}\varphi(s)\dd{s}$$
+  \end{theorem}
+  \begin{theorem}
+    Let $U\subset\RR^2$ be an open set, $u:U\rightarrow\RR$ be a good enough function such that it satisfies the wave equation with density $\rho(x,t)$, constant $k(x)$ and driven force $f(x,t)$. Then:
+    $$\oint_{\Fr{U}}\rho u_t\dd{x}+k u_x\dd{t}=\iint_Uf(x,t)\dd{x}\dd{t}$$
+  \end{theorem}
+  \begin{proposition}
+    Let $U\subset\RR^2$ be an open set, $u:U\rightarrow\RR$ be a good enough function such that it satisfies the wave equation with constant $c^2=\frac{k}{\rho}$ and driven force $f(x,t)$. Consider the four points $A$, $B$, $C$ and $D$ as shown in \cref{PDE_waves-char}. Then:
+    \begin{equation}\label{PDE_charwaveseq}
+      u(A)-u(B)+u(C)-u(D)=0
+    \end{equation}
+    \begin{center}
+      \begin{minipage}{\linewidth}
+        \centering
+        \includestandalone[mode=image|tex,width=0.7\linewidth]{Images/waves_char}
+        \captionof{figure}{Characteristics of the waves equation.}
+        \label{PDE_waves-char}
+      \end{minipage}
+    \end{center}
+  \end{proposition}
+  \begin{proposition}[Conservation of energy]
+    Consider the wave equation $\rho u_{tt}-{(ku_x)}_x=0$ and assume the functions $u_0$, $v_0$ of the initial conditions have compact support. Then: $$\dv{}{t}\int_{-\infty}^\infty\left(\frac{1}{2}\rho{u_t}^2+\frac{1}{2}k{u_x}^2\right)\dd{x}=0$$ That is, the energy is conserved.
+  \end{proposition}
+  \begin{corollary}
+    The wave equation with drive force has existence and unicity of solutions.
+  \end{corollary}
+  \begin{proposition}
+    Consider the wave equation $u_{tt}=c^2u_{xx}$ with initial conditions:
+    $$
+      \left\{
+      \begin{aligned}
+        u(x,0)   & =u_0(x)   \\
+        u_t(x,0) & =v_0(x)   \\
+        u_x(0,t) & =\beta(t)
+      \end{aligned}
+      \right.
+    $$
+    Then, the d'Alembert solution is $$u(x,t)=\phi(x+ct)+\psi(x-ct)$$ where:
+    \begin{align*}
+      \phi(x) & =\frac{1}{2}u_0(x)+\frac{1}{2c}\int_0^xv_0(s)\dd{s}\quad\text{for }x\geq 0 \\
+      \psi(x) & =
+      \begin{cases}
+        \displaystyle\frac{1}{2}u_0(x)-\frac{1}{2c}\int_0^xv_0(s)\dd{s} & \text{if } x\geq 0 \\
+        \displaystyle\phi(-x)+\int_0^x\beta(-s/c)\dd{s}                 & \text{if } x< 0
+      \end{cases}
+    \end{align*}
+    In particular, if $\beta(t)=0$ and we make the even extension of both $u_0$ and $v_0$, we have:
+    \begin{equation*}
+      \psi(x) =\frac{1}{2}u_0(x)-\frac{1}{2c}\int_0^xv_0(s)\dd{s} \quad\forall x\in\RR
+    \end{equation*}
+  \end{proposition}
+  \subsubsection*{Fixed-endpoints boundary condition}
+  \begin{definition}
+    Consider a string of length $L$ with its two endpoints fixed. In this section we will discuss how to obtain the solutions of its movement solving following boundary problem:
+    \begin{equation}\label{PDE_fixedendpoints}
+      \left\{
+      \begin{aligned}
+        u_{tt}   & =c^2u_{xx} \\
+        u(0,t)   & =0         \\
+        u(L,t)   & =0         \\
+        u(x,0)   & =u_0(x)    \\
+        u_t(x,0) & =v_0(x)
+      \end{aligned}
+      \right.
+    \end{equation}
+  \end{definition}
+  \begin{method}
+    Consider the odd extensions for $u_0$ and $v_0$ of \cref{PDE_fixedendpoints}. Then, the solutions of that equation are given by the d'Alembert formula (\cref{PDE_dAlembert})
+  \end{method}
+  \begin{method}\label{PDE_methodchar}
+    Suppose we want to know the displacement $u(x,t)$ of the string at the position $x\in[0,L]$ and time $t\geq 0$. We will use \cref{PDE_charwaveseq} to determine $u(x,t)$. Construct the characteristic lines $x\pm ct$ passing through the point $(x,t)$ (highest green dot) and then the corresponding ones passing through the intersecting points of the previous ones with lines $x=0$ and $x=L$ (as shown in \cref{PDE_waves-char-solve}). Then, by \cref{PDE_charwaveseq} we have that the $u(x,t)$ in the green dots is $-u(x,t)$ in the yellow dots (because $u(x,t) = 0$ in the purple dots). Since we are provided with the equation at $t=0$, we can determine $u(x,t)$ in the brown dots and get back, thus, to the original green point through the last yellow point.
+  \end{method}
+  \begin{center}
+    \begin{minipage}{\linewidth}
+      \centering
+      \includestandalone[mode=image|tex,width=0.7\linewidth]{Images/waves_char_solve}
+      \captionof{figure}{Scheme for \cref{PDE_methodchar} of solving the wave equation}
+      \label{PDE_waves-char-solve}
+    \end{minipage}
+  \end{center}
+  \begin{method}[Separation of variables]
+    The solution $u(x,t)$ to \cref{PDE_fixedendpoints}, using \emph{separation of variables} (i.e. assuming $u(x,t)=f(x)g(t)$), is: $$u(x,t)=\sum_{n=0}^\infty \sin\left(\frac{\pi n x}{L}\right)\left[a_n\cos\left(\frac{\pi n c}{L}t\right)+ b_n\sin\left( \frac{\pi n c}{L}t\right)\right]$$ where:
+    \begin{align*}
+      a_n & =\frac{1}{L}\int_{-L}^Lf(x)\cos\left(\frac{\pi n x}{L}\right)\dd{x}       \\
+      b_n & =\frac{1}{\pi n c}\int_{-L}^Lg(x)\sin\left(\frac{\pi n x}{L}\right)\dd{x}
+    \end{align*}
+  \end{method}
+  \begin{proposition}
+    Consider the simplified Schrödinger equation problem:
+    \begin{equation}\label{PDE_schro-fixedendpoints}
+      \left\{
+      \begin{aligned}
+        \ii u_{t} & =u_{xx} \\
+        u(0,t)    & =0      \\
+        u(L,t)    & =0      \\
+        u(x,0)    & =u_0(x)
+      \end{aligned}
+      \right.
+    \end{equation}
+    The solution $u(x,t)$ to \cref{PDE_schro-fixedendpoints}, using separation of variables is: $$u(x,t)=\sum_{n=1}^\infty a_n\exp{-\ii\frac{\pi^2n^2}{L^2}t}\sin\left(\frac{\pi n x}{L}\right)$$ where:
+    \begin{equation*}
+      a_n =\frac{1}{L}\int_{-L}^Lf(x)\sin\left(\frac{\pi n x}{L}\right)\dd{x}
+    \end{equation*}
+  \end{proposition}
+  \subsubsection{Variable coefficients}
+  \begin{theorem}[Sturm-Picone comparison theorem]
+    Let $p_i,q_i:\RR\rightarrow\RR$, $i=1,2$, be functions such that $0<p_2<p_1$ and $q_1<q_2$. Suppose we have that the functions $u(x)$ and $v(x)$ satisfy the following differential equations:
+    \begin{align*}
+      {(p_1(x)u')}'+q_1(x)u=0 \\
+      {(p_2(x)u')}'+q_2(x)u=0
+    \end{align*}
+    If $\alpha_1$, $\alpha_2$ are two successive roots of $u$, then one of the following holds:
+    \begin{enumerate}
+      \item $\exists \beta\in(\alpha_1,\alpha_2)$ such that $v(\beta)=0$.
+      \item $\exists\lambda\in\RR$ such that $v(x)=\lambda u(x)$ $\forall x\in\RR$.
+    \end{enumerate}
+  \end{theorem}
+  \begin{proposition}
+    Consider the following problem of the wave equation of non-constant coefficients:
+    \begin{equation}
+      \left\{
+      \begin{aligned}
+        \rho u_{tt} & ={(ku_x)}_x \\
+        u(0,t)      & =0          \\
+        u(L,t)      & =0          \\
+        u(x,0)      & =u_0(x)     \\
+        u_t(x,0)    & =v_0(x)
+      \end{aligned}
+      \right.
+    \end{equation}
+    Then, the general solution to this problem is:
+    $$u(x,t)=\sum_{n=0}^\infty X_n(x)\left[a_n\cos\left(\sqrt{\lambda_n}t\right)+ b_n\sin\left( \sqrt{\lambda_n}t\right)\right]$$ where $X_n(x)$ is the solution to the problem $$ \left\{
+      \begin{aligned}
+         & {(k(x)X_n')}'+\lambda_n\rho(x)X_n =0 \\
+         & X_n(0)                          =0   \\
+         & X_n(L)                          =0
+      \end{aligned}
+      \right.$$
+    and:
+    \begin{equation*}
+      a_n =\frac{\displaystyle\int_{0}^Lu_0(x)X_n(x)\rho(x)\dd{x}}{\displaystyle\int_{0}^LX_n(x)^2\rho(x)\dd{x}}\ \
+      b_n =\frac{\displaystyle\int_{0}^Lv_0(x)X_n(x)\rho(x)\dd{x}}{\displaystyle\sqrt{\lambda_n}\int_{0}^LX_n(x)^2\rho(x)\dd{x}}
+    \end{equation*}
+  \end{proposition}
+  \subsection{Heat equation}
+  \begin{proposition}
+    Consider the following boundary problem of the heat equation:
+    \begin{equation}\label{PDE_heat-fixedendpoints}
+      \left\{
+      \begin{aligned}
+        u_{t}  & =\alpha u_{xx} \\
+        u(0,t) & =0             \\
+        u(L,t) & =0             \\
+        u(x,0) & =u_0(x)
+      \end{aligned}
+      \right.
+    \end{equation}
+    with $\alpha=\const$.
+    The solution $u(x,t)$ to \cref{PDE_heat-fixedendpoints}, using separation of variables is: $$u(x,t)=\sum_{n=1}^\infty a_n\exp{-\frac{\alpha\pi^2n^2}{L^2}t}\sin\left(\frac{\pi n x}{L}\right)$$ where:
+    \begin{equation*}
+      a_n =\frac{1}{L}\int_{-L}^Lf(x)\sin\left(\frac{\pi n x}{L}\right)\dd{x}
+    \end{equation*}
+  \end{proposition}
 \end{multicols}
 \end{document}

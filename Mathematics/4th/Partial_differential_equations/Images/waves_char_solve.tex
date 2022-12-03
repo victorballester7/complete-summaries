@@ -1,0 +1,80 @@
+\documentclass{standalone}
+\usepackage{../../../../preamble_formulas}
+
+\begin{document}
+\begin{tikzpicture}
+  \def\c{1.4}
+  \begin{axis}[
+      axis lines=middle,
+      % x label style={at={(axis description cs:0.97,-0.025)},anchor=north},
+      % y label style={at={(axis description cs:0.46,0.83)},anchor=south},
+      xmin=-0.1, xmax=6,
+      ymin=-0.1, ymax=6,
+      xtick = \empty, ytick=\empty, % A random number (out of the graphic), which is necessary (it cannot be: xtick = {})
+      extra x ticks = {1,4},
+      extra x tick labels={0,$L$},
+      ylabel={$t$},
+      xlabel={$x$},
+      axis equal image,
+      %axis on top,
+    ]
+    \def\xmax{\pgfkeysvalueof{/pgfplots/xmax}}
+    \def\xmin{\pgfkeysvalueof{/pgfplots/xmin}}
+    \def\ymax{\pgfkeysvalueof{/pgfplots/ymax}}
+    \def\ymin{\pgfkeysvalueof{/pgfplots/ymin}}
+    %\addplot[thick,samples=10,black,domain=0:\ymax] (4,x);
+    % \addplot[thick,samples=10,black,domain=0:\ymax] (1,x);
+
+    \fill [pattern = north east lines] (0.75,0) rectangle (1,\ymax);
+    \draw[thick] (1,0) -- (1,\ymax);
+
+    \fill [pattern = north west lines] (4.25,0) rectangle (4,\ymax);
+    \draw[thick] (4,0) -- (4,\ymax);
+
+    \addplot[thick,samples=10,red,domain=1:4]{x/2+5};
+    \addplot[thick,samples=10,red,domain=1:4]{x/2+4};
+    \addplot[thick,samples=10,red,domain=1:4]{x/2+2};
+    \addplot[thick,samples=10,red,domain=1:4]{x/2+1};
+    \addplot[thick,samples=10,red,domain=2:4]{x/2-1};
+
+
+    \addplot[thick,samples=10,blue,domain=1:4]{-x/2+6};
+    \addplot[thick,samples=10,blue,domain=1:4]{-x/2+5};
+    \addplot[thick,samples=10,blue,domain=1:4]{-x/2+3};
+    \addplot[thick,samples=10,blue,domain=1:4]{-x/2+2};
+
+    \addplot[thin,mark=*,only marks, mark size=0.075cm,color_green3] coordinates {
+        (2,5)
+        (2,2)
+      };
+    \addplot[thin,mark=*,only marks, mark size=0.075cm,\geo] coordinates {
+        (1,5.5)
+        (1,4.5)
+        (1,2.5)
+        (1,1.5)
+        (4,1)
+        (4,3)
+        (4,4)
+      };
+    \addplot[thin,mark=*,only marks, mark size=0.075cm,\sta] coordinates {
+        (3,0.5)
+        (3,3.5)
+      };
+
+    \addplot[thin,mark=*,only marks, mark size=0.075cm,brown] coordinates {
+        (4,0)
+        (2,0)
+      };
+    % \node[anchor=south,yshift=2pt] at (2.95,0.25){$A$};
+    % \node[anchor=north,yshift=-2pt] at (5.15,1.82142857){$B$};
+    % \node[anchor=south,yshift=2pt] at (3.85,2.75){$C$};
+    % \node[anchor=south,yshift=2pt] at (1.65,1.1785714){$D$};
+
+    %\node[anchor=south,yshift=2pt,color_blue3,rotate=-35.5376777] at (0.8,2){$x+ct=\xi_1$};
+    % \node[anchor=south,yshift=2pt,color_blue3,rotate=35.5376777] at (2.5,2.2){$x+ct=\xi_2$};
+    % \node[anchor=south,yshift=2pt,red] at (3.85,2.75){$x-ct=\eta_1$};
+    % \node[anchor=south,yshift=2pt,red] at (4.3,1){$x-ct=\eta_2$};
+  \end{axis}
+\end{tikzpicture}
+
+\end{document}

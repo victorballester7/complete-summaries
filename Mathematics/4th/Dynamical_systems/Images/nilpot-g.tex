@@ -1,0 +1,53 @@
+\documentclass{standalone}
+\usepackage{../../../../preamble_formulas}
+
+\begin{document}
+\begin{tikzpicture}[decorated curves/.style={
+        postaction={
+            decorate,
+            decoration={
+                markings,
+                mark=at position 0.333 with {\arrow[black,scale=1.5]{stealth}},
+                mark=at position 0.666 with {\arrow[black,scale=1.5]{stealth}}}}
+      },decorated curves rev/.style={
+        postaction={
+            decorate,
+            decoration={
+                markings,
+                mark=at position 0.333 with {\arrow[black,scale=1.5]{stealth[reversed]}},
+                mark=at position 0.666 with {\arrow[black,scale=1.5]{stealth[reversed]}}}}
+      },decorated separatrices rev/.style={
+        postaction={
+            decorate,
+            decoration={
+                markings,
+                mark=at position 0.5 with {\arrow[scale=1.5]{stealth[reversed]}},
+              }}
+      },decorated separatrices/.style={
+        postaction={
+            decorate,
+            decoration={
+                markings,
+                mark=at position 0.5 with {\arrow[scale=1.5]{stealth}},
+              }}
+      }]
+  \begin{polaraxis}[
+      % xmin=-4, xmax=4,
+      % ymin=-4, ymax=4,
+      xtick=\empty, ytick=\empty,
+      ylabel={$y$},
+      xlabel={$x$},
+      %axis on top,
+      hide axis,
+    ]
+    \addplot[thin,samples=100,domain=85:95,white] {425};
+
+    \def\alph{0.5}
+    \addplot[thick,samples=1000,domain=-1000:0,black,decorated curves] {\alph*x};
+
+    \addplot[thin,mark=*,only marks, mark size=0.1136cm,black] coordinates {
+        (0,0)
+      };
+  \end{polaraxis}
+\end{tikzpicture}
+\end{document}

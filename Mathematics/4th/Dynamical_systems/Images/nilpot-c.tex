@@ -1,0 +1,61 @@
+\documentclass{standalone}
+\usepackage{../../../../preamble_formulas}
+
+\begin{document}
+\begin{tikzpicture}[decorated separatrices rev/.style={
+        postaction={
+            decorate,
+            decoration={
+                markings,
+                mark=at position 0.5 with {\arrow[scale=1.5]{stealth[reversed]}},
+              }}
+      },decorated separatrices/.style={
+        postaction={
+            decorate,
+            decoration={
+                markings,
+                mark=at position 0.5 with {\arrow[scale=1.5]{stealth}},
+              }}
+      }]
+  \begin{axis}[
+      xmin=-4, xmax=4,
+      ymin=-4, ymax=4,
+      xtick=\empty, ytick=\empty,
+      ylabel={$y$},
+      xlabel={$x$},
+      %axis on top,
+      hide axis,
+    ]
+    \def\xmax{\pgfkeysvalueof{/pgfplots/xmax}}
+    \def\xmin{\pgfkeysvalueof{/pgfplots/xmin}}
+    \def\ymax{\pgfkeysvalueof{/pgfplots/ymax}}
+    \def\ymin{\pgfkeysvalueof{/pgfplots/ymin}}
+    \def\s{1}
+    \addplot[thick,samples=100,domain=-1.33:0,black,decorated separatrices rev] {tan(deg(x))};
+    \addplot[thick,samples=100,domain=0:1.33,black,decorated separatrices] {tan(deg(x))};
+    \foreach \i in{-1.4,-2.8,1.4,2.8}{
+        \addplot[thick,samples=100,domain=-1.33+\i:\i,black,decorated separatrices rev] {tan(deg(x-\i))/\s};
+        \addplot[thick,samples=100,domain=\i:1.33+\i,black,decorated separatrices] {tan(deg(x-\i))/\s};
+      }
+    % \def\eps{0.18}
+    % %\addplot[thin,samples=100,white] {3+\eps};
+    % \addplot[thin,samples=100,white] {-2-\eps};
+
+    \def\N{60}
+    \def\ell{(\xmax-\xmin)/\N}
+    \foreach \i in{1,...,28}{
+        \addplot[thin,mark=*,only marks, mark size=\ell/2*0.852cm,black] coordinates {
+            ({\xmin +\ell/2+(\i-1)*\ell},0)
+          };
+      }
+    \addplot[thin,mark=*,only marks, mark size=\ell/2*0.852*2cm,black] coordinates {
+        ({\xmin +\ell/2+(\N/2-1)*\ell},0)
+      };
+    \foreach \i in{32,...,\N}{
+        \addplot[thin,mark=*,only marks, mark size=\ell/2*0.852cm,black] coordinates {
+            ({\xmin +\ell/2+(\i-1)*\ell},0)
+          };
+      }
+  \end{axis}
+\end{tikzpicture}
+\end{document}

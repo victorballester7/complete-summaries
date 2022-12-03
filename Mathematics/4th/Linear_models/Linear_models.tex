@@ -49,7 +49,7 @@
         \cov(X_2,X_1) & \Var(X_2)     & \cdots & \cov(X_2,X_n) \\
         \vdots        & \vdots        & \ddots & \vdots        \\
         \cov(X_n,X_1) & \cov(X_n,X_2) & \cdots & \Var(X_n)     \\
-      \end{pmatrix}$$
+      \end{pmatrix}\!\!$$
   \end{proposition}
   \begin{definition}
     Let $\vf{x}$, $\vf{y}$ be random vectors. We define the \emph{covariance} between them as the following matrix:
@@ -124,14 +124,7 @@
   \begin{theorem}
     Given the model of \cref{LM_simple}, if we consider the hypothesis of normality for $\varepsilon_i$, then the estimates of the least-squares method coincide with the MLEs.
   \end{theorem}
-  \subsubsection{Coefficient of determination}
-  \begin{definition}
-    Given the model of \cref{LM_simple}, we define the \emph{coefficient of determination} $R$ as:
-    $$R^2:=\frac{\mathrm{SSR}}{\mathrm{SST}}:=\frac{\sum_{i=1}^n{(\hat{y}_i-\overline{y})}^2}{\sum_{i=1}^n{(y_i-\overline{y})}^2}$$ where $\mathrm{SSR}=\sum_{i=1}^n{(\hat{y}_i-\overline{y})}^2$ is the \emph{total sum of squares} and $\mathrm{SST}=\sum_{i=1}^n{(y_i-\overline{y})}^2$ is the \emph{regression sum of squares}. Furthermore, we can partition $\mathrm{SST}$ into $\mathrm{SST}=\mathrm{SSR}+\mathrm{SSE}$, where $\mathrm{SSE}$ is the \emph{error sum of squares}. That is: $$\sum_{i=1}^n{(y_i-\overline{y})}^2=\sum_{i=1}^n{(\hat{y}_i-\overline{y})}^2+\sum_{i=1}^n{(y_i-\hat{y}_i)}^2$$
-  \end{definition}
-  \begin{proposition}
-    Given the model of \cref{LM_simple}, we have that $R^2=r^2$.
-  \end{proposition}
+
   \subsection{Multiple regression}
   \begin{definition}[General linear model]
     Suppose we have a sample of data $\{(x_{i1},\ldots,x_{ik},y_i):i=1,\ldots,n\}$. We can describe the relationship between $x_{i1},\ldots,x_{ik}$ and $y_i$ with the following model:
@@ -191,8 +184,8 @@
     Consider the model $\vf{y}\sim N_n(\vf{X\beta},\sigma^2\vf{I}_n)$ of \cref{LM_generalized}. We want to find the value $\vf{\hat\beta}$ that maximises the likelihood which in this case is: $$L(\vf{y};\vf\beta,\sigma^2)=\frac{1}{(\sqrt{2\pi\sigma^2})^n}\exp{-\frac{1}{2\sigma^2}{\norm{\vf{y}-\vf{X\beta}}}}$$
     Solving for $\vf{\hat\beta}$ and ${\hat\sigma}^2$ we get:
     \begin{align*}
-      \transpose{\vf{X}}\vf{X\hat\beta} & =\transpose{\vf{X}}\vf{y}                            \\
-      {\hat\sigma}^2                    & =\frac{1}{n}{\norm{\vf{e}}}^2=\frac{\mathrm{SSE}}{n}
+      \transpose{\vf{X}}\vf{X\hat\beta} & =\transpose{\vf{X}}\vf{y}                    \\
+      {\hat\sigma}^2                    & =\frac{1}{n}{\norm{\vf{e}}}^2=\frac{\SSE}{n}
     \end{align*}
     where $\vf{e}=\vf{y}-\vf{\hat{y}}=\vf{y}-\vf{X\hat{\beta}}$. Note that ${\hat\sigma}^2$ is biased and if we want an unbiased estimator we should use:
     $${s}^2=\frac{1}{n-k-1}{\norm{\vf{e}}}^2=:\MSE$$
@@ -210,8 +203,9 @@
       \item $\vf{H}$ and $\vf{M}$ are symmetric and idempotent. Moreover, $\vf{MH}=\vf{0}_n$. Hence, they orthogonally project $\RR^n$ into orthogonal subspaces.
       \item $\vf{MX}=\vf{0}$
       \item $\vf{e}=\vf{M\varepsilon}$
+      \item $\rank \vf{H}=k+1$ and $\rank \vf{M}=n-(k+1)$
       \item $\transpose{\vf{X}}\vf{e}=0$. In particular, $\sum_{i=1}^n e_i=0$ and $\sum_{i=1}^n x_{ij}e_i=0$ $\forall j$. So the sample covariance of $(x_{1j},\ldots,x_{nj})$ and $\vf{e}$ is 0 $\forall j$.
-      \item $\transpose{\vf{y}}\vf{e}=0$. Analogously, we have that the sample covariance of $\vf{\hat{y}}$ and $\vf{e}$ is 0.
+      \item $\transpose{\vf{\hat{y}}}\vf{e}=0$. Analogously, we have that the sample covariance of $\vf{\hat{y}}$ and $\vf{e}$ is 0.
     \end{enumerate}
   \end{proposition}
   \begin{proposition}
@@ -232,11 +226,14 @@
       \item $\vf{\hat\beta}$ and $s^2$ are independent.
     \end{enumerate}
   \end{proposition}
+  \begin{proposition}
+    Consider the model $\vf{y}\sim N_n(\vf{X\beta},\sigma^2\vf{I}_n)$ of \cref{LM_generalized}. Then, if the variables $x_{i1},\ldots,x_{ik}$ are uncorrelated $\forall i=1,\ldots,n$, then the MLE estimators $\hat\beta_j$ coincide with the ones of the equivalent simple models: $$y=\beta_0+\beta_i x_i\qquad i=1,\ldots,n$$
+  \end{proposition}
   \begin{theorem}[Gau\ss-Markov]
-    Consider the model $\vf{y}\sim N_n(\vf{X\beta},\sigma^2\vf{I}_n)$ of \cref{LM_generalized}, then the least-squares estimators for $\beta_j$, $j=0,1,\ldots,k$, have minimum variance among all linear unbiased estimators.
+    Consider the model of \cref{LM_generalized}\footnote{Here the normality hypothesis does not play any role.}, then the least-squares estimators for $\beta_j$, $j=0,1,\ldots,k$, are \emph{BLUE} (\emph{the Best Linear Unbiased Estimator})\footnote{That is, they have minimum variance among all linear unbiased estimators.}.
   \end{theorem}
   \begin{corollary}
-    The predicted value $\hat{y}_h$ is invariant to a full-rank linear transformation on the $x$'s. That is: $$\hat{y}_z=\transpose{\vf{z}_h}\vf{\hat{\beta}_z}=\transpose{\vf{x}_h}\vf{\hat{\beta}}$$ where $\vf{z}_h=\transpose{\vf{K}}\vf{x}_h$ and $\vf{Z}=\vf{XK}$ is the full-rank linear transformation.
+    The predicted value $\hat{y}_h$ is invariant to a full-rank linear transformation on the $x$'s. That is: $$\hat{y}_z=\transpose{\vf{z}_h}\vf{\hat{\beta}_z}=\transpose{\vf{x}_h}\vf{\hat{\beta}}=\hat{y}_h$$ where $\vf{z}_h=\transpose{\vf{K}}\vf{x}_h$ and $\vf{Z}=\vf{XK}$ is the full-rank linear transformation.
   \end{corollary}
   \subsubsection{Model in centered form}
   \begin{definition}
@@ -265,5 +262,141 @@
     \end{align*}
     are the respective sample covariance matrices\footnote{Note that the expression for $\vf{\hat\beta}_{1}$ is quite similar to the least-square estimate for $\beta_1$ in the simple linear model.}.
   \end{proposition}
+  \subsubsection{Coefficient of determination}
+  \begin{definition}
+    Given the model of \cref{LM_generalized}, we define the \emph{coefficient of determination} $R$ as:
+    $$R^2:=\frac{\SSR}{\SST}:=1-\frac{\SSE}{\SST}:=\frac{\sum_{i=1}^n{(\hat{y}_i-\overline{y})}^2}{\sum_{i=1}^n{(y_i-\overline{y})}^2}$$ where $\SSR=\sum_{i=1}^n{(\hat{y}_i-\overline{y})}^2$ is the \emph{regression sum of squares} and $\SST=\sum_{i=1}^n{(y_i-\overline{y})}^2$ is the \emph{total sum of squares}. Furthermore, we can partition $\SST$ into $\SST=\SSR+\SSE$, where $\SSE$ is the \emph{error sum of squares}. That is: $$\sum_{i=1}^n{(y_i-\overline{y})}^2=\sum_{i=1}^n{(\hat{y}_i-\overline{y})}^2+\sum_{i=1}^n{(y_i-\hat{y}_i)}^2$$
+  \end{definition}
+  \begin{lemma}
+    Consider the model of \cref{LM_generalized}. Then, $R^2\leq 1$
+  \end{lemma}
+  \begin{proposition}
+    Given the simple model of \cref{LM_simple}, we have that $R^2=r^2$.
+  \end{proposition}
+  \begin{definition}
+    Given the model of \cref{LM_generalized}, we define the \emph{adjusted coefficient of determination} $R_{\mathrm{adj}}$ as: $${R_{\mathrm{adj}}}^2=1-\frac{\MSE}{\MST}:=1-\frac{n-1}{n-k-1}\frac{\SSE}{\SST}$$ where we have defined the \emph{total mean of squares} as $\MST=\frac{1}{n-1}\sum_{i=1}^n{(y_i-\overline{y})}^2$.
+  \end{definition}
+  \begin{lemma}
+    Consider the model of \cref{LM_generalized}. The function ${R_{\mathrm{adj}}}^2(k)$ attains a maximum at $k=k_0$ which is the optimal number of variables we should consider for our model.
+  \end{lemma}
+  \subsubsection{Analysis of variance}
+  \begin{definition}
+    Let $X_1\sim{\chi_{d_1}}$ and $X_2\sim{\chi_{d_2}}$ be independent random variables. We define the \emph{$F$-distribution with degrees of freedom $d_1$ and $d_2$} as the distribution of: $$F=\frac{X_1/d_1}{X_2/d_2}\sim F_{d_1, d_2}$$
+  \end{definition}
+  \begin{proposition}\label{LM_tF}
+    Let $X\sim t_n$ be a random variable. Then: $$X^2\sim F_{1,n}$$
+  \end{proposition}
+  \begin{lemma}
+    Let $\transpose{\vf{x}}=(x_1,\ldots,x_n)\in\RR^n$. Suppose that $\sum_{i=1}^n {x_i}^2=Q_1+\cdots+Q_k$, where $Q_j=\transpose{\vf{x}}\vf{A}_j\vf{x}$ is a quadratic form and $\vf{A}_j$ is a symmetric positive semi-definite matrix of rank $r_j$, $j=1,\ldots,k$. If $r_1+\cdots+r_k=n$, then there exists an orthogonal matrix $\vf{C}\in\mathcal{M}_n(\RR)$ such that if $\vf{y}=\transpose{\vf{C}}\vf{x}$, then:
+    \begin{equation*}
+      \begin{aligned}
+        Q_1 & = {y_1}^2+\cdots+{y_{r_1}}^2                    \\
+        Q_2 & = {y_{r_1+1}}^2+\cdots+{y_{r_1+r_2}}^2          \\
+            & \;\;\vdots                                      \\
+        Q_k & = {y_{r_1+\cdots+r_{k-1}+1}}^2+\cdots+{y_{n}}^2
+      \end{aligned}
+    \end{equation*}
+  \end{lemma}
+  \begin{theorem}[Cochran's theorem]
+    Let $\vf{x}=(X_1,\ldots,X_n)\in N_n(\vf{0},\sigma^2\vf{I}_n)$. Suppose that $\sum_{i=1}^n {X_i}^2=Q_1+\cdots+Q_k$, where $Q_j=\transpose{\vf{x}}\vf{A}_j\vf{x}$ is a quadratic form and $\vf{A}_j$ is a symmetric positive semi-definite matrix of rank $r_j$, $j=1,\ldots,k$. If $r_1+\cdots+r_k=n$, then:
+    \begin{enumerate}
+      \item $Q_1,\ldots,Q_k$ are independent random variables.
+      \item $\frac{Q_j}{\sigma^2}\sim{\chi_{r_j}}$, $j=1,\ldots,k$.
+    \end{enumerate}
+  \end{theorem}
+  \subsubsection{Hypothesis testing}
+  \begin{proposition}[Bonferroni's method]
+    Consider the model $\vf{y}\sim N_n(\vf{X\beta},\sigma^2\vf{I}_n)$ of \cref{LM_generalized} and suppose we want a confidence $k+1$-dimensional interval $I$ for $\vf{\beta}$ of confidence $1-\alpha$. Then, it suffices to take any interval $I_j$ for each $\beta_j$ of confidence $1-\frac{\alpha}{k+1}$ and let $I=I_0\times\cdots\times I_{k}$.
+  \end{proposition}
+  \begin{theorem}
+    Let $\vf{y}\sim N_n(\vf{0},\sigma^2\vf{I}_n)$ be a random variable. Then:
+    $$\frac{\SSE}{\sigma^2}\sim{\chi_{n-k-1}}^2$$
+    Moreover if $\vf\beta_1:=\transpose{(\beta_1,\ldots,\beta_k)}=0$ we have:
+    $$\frac{\SSR}{\sigma^2}\sim{\chi_{k}}^2$$
+    Hence in this case we have that: $$\frac{\SSR/ k}{\SSE/(n-k-1)}\sim F_{k,n-k-1}$$
+  \end{theorem}
+  \begin{proposition}
+    Consider the model $\vf{y}\sim N_n(\vf{X\beta},\sigma^2\vf{I}_n)$ of \cref{LM_generalized} and suppose we want to test the hypothesis $\mathcal{H}_0:\vf\beta=\vf{0}$ versus $\mathcal{H}_1:\vf\beta\ne\vf{0}$. The statistic that we take is: $$F=\frac{\SSR/ k}{\SSE/(n-k-1)}\sim F_{k,n-k-1}$$
+  \end{proposition}
+  \begin{proposition}
+    Consider the model $\vf{y}\sim N_n(\vf{X\beta},\sigma^2\vf{I}_n)$ of \cref{LM_generalized}, $\vf{R}\in\mathcal{M}_{r\times {k+1}}(\RR)$ where $r\leq k+1$, $\vf{c}\in\RR^{k+1}$ and suppose we want to test the hypothesis $\mathcal{H}_0:\vf{R}\vf\beta=\vf{c}$ versus $\mathcal{H}_1:\vf{R}\vf\beta\ne\vf{c}$.
+    Without loss of generality suppose we can eliminate the first $\beta,\ldots,\beta_r$ under $\mathcal{H}_0$ and so rearranging the model equation we obtain:
+    $$\vf{y}_\ell=\vf{X}_\ell\vf{\beta}_\ell+\vf\varepsilon$$
+    where $\vf{\beta}_\ell=(\beta_{r+1},\ldots,\beta_k)$. The statistic that we take is:
+    \begin{equation}\label{LM_hypothesisgen}
+      F=\frac{(\SSE_\ell-\SSE)/ r}{\SSE/(n-k-1)}=\frac{(\SSR-\SSR_\ell)/ r}{\SSE/(n-k-1)}\sim F_{r,n-k-1}
+    \end{equation}
+    where the subindex in $\SSE_\ell$ and $\SSR_\ell$ indicates that this is the $\SSE$ and $\SSR$ for the model under $\mathcal{H}_0$, respectively.
+  \end{proposition}
+  \subsubsection{Dummy variables}
+  \begin{definition}[Model without interaction]
+    Suppose we have a linear model of the form of \cref{LM_generalized}. We would like to measure the change in the response when adding a binary parameter (say men and women) to the model. Hence we identify that deterministic variable with a \emph{dummy variable} as follows:
+    \begin{equation}\label{LM_dummy}
+      d:=
+      \begin{cases}
+        1 & \text{for men}   \\
+        0 & \text{for women}
+      \end{cases}
+    \end{equation}
+    And we consider the new model: $$\vf{y}=\vf{X}\vf{\beta}+d\gamma\vf{1}+\vf{\varepsilon}$$
+    where $\vf{1}=(1,\ldots,1)$. Finally we may want to conclude whether the variable $d$ is relevant or not. This can be obtained by doing the $t$-test $\mathcal{H}_0:\gamma=0$\footnote{Note that this test is equivalent to the one in \cref{LM_hypothesisgen} due to \cref{LM_tF}.}. Note that, independently of the conclusion of the test, both regression lines (the one for men and the one for women) will be parallel.
+  \end{definition}
+  \begin{definition}[Model with interaction]
+    Suppose we have a linear model of the form of \cref{LM_generalized}. We would like to measure the change in the response when adding a dummy variable $d$ as in \cref{LM_dummy}. Now, consider the following \emph{model with interaction}: $$\vf{y}=\vf{X}\vf{\beta}+d\vf{X}\vf{\delta}+\vf{\varepsilon}$$
+    Let $\gamma:=\delta_0$. And now we can do tests for $\vf{\delta}$ or for $\gamma$. Note that, these regression lines won't be in general parallel.
+  \end{definition}
+  \begin{definition}[Segmented regression]
+    Suppose we have a linear model of the form of \cref{LM_generalized} and that for some reason we have noticeable change of the slope at $\vf{x}^*$ (known). Then, defining the dummy variable
+    \begin{equation}
+      d_i:=
+      \begin{cases}
+        1 & \text{if }x_{ki}\geq {x_i}^* \\
+        0 & \text{if }x_{ki}\leq {x_i}^*
+      \end{cases}
+    \end{equation}
+    we can consider the following model:
+    $$\vf{y}=\vf{X}\vf{\beta}+\vf{Y}\vf{\gamma}+\vf{\varepsilon}$$
+    where: $$\vf{Y}=\begin{pmatrix}
+        d_1(x_{11}-{x_1}^*) & \cdots & d_k(x_{1k}-{x_k}^*) \\
+        \vdots              & \ddots & \vdots              \\
+        d_1(x_{n1}-{x_1}^*) & \cdots & d_k(x_{nk}-{x_k}^*) \\
+      \end{pmatrix}$$
+  \end{definition}
+  \begin{figure}[H]
+    \centering
+    \includestandalone[mode=image|tex,width=0.5\linewidth]{Images/segmented_regression}
+    \caption{Segmented regression of a simple linear model}
+  \end{figure}
+  \subsubsection{Predicted confidence intervals}
+  \begin{definition}
+    Consider the model of \cref{LM_generalized} and suppose we have observed a new data value $\transpose{\vf{x}_h}=(1,x_{1h},\ldots,x_{kn})$. The \emph{response} or \emph{prediction} of this observation is $$y_h=\transpose{\vf{x}_h}\vf{\beta}+\varepsilon_h=\mu_h+\varepsilon_h$$
+    where $\mu_h$ is the \emph{average response}. The \emph{estimated average response} $\hat\mu_h$ and the \emph{estimation of the prediction} $\hat{y}_h$ coincide and they are: $$\hat{y}_h=\hat\mu_h=\transpose{\vf{x}_h}\vf{\hat\beta}$$
+  \end{definition}
+  \begin{proposition}[Confidence interval for the average response]
+    Consider the model of \cref{LM_generalized} and suppose we have observed a new data value $\transpose{\vf{x}_h}=(1,x_{1h},\ldots,x_{kn})$. Then:
+    \begin{enumerate}
+      \item The random variable $\hat\mu_h$ is a linear combination of $y_1,\ldots,y_n$ and: $$\Exp(\hat\mu_h)=\mu_h\qquad\Var(\hat\mu_h)=\sigma^2v_{hh}$$ where we have defined $v_{hh}:=\transpose{\vf{x}_h}{\left(\transpose{\vf{X}}\vf{X}\right)}^{-1}\vf{x}_h$.
+      \item $\hat\mu_h\sim N(\mu_h,\sigma^2v_{hh})$
+      \item $\displaystyle\frac{\hat\mu_h-\mu_h}{\sqrt{\MSE v_{hh}}}\sim t_{n-k-1}$
+    \end{enumerate}
+    Varying the value of $\vf{x}_h$ along the space of parameters we obtain a family of confidence intervals for $y_h$ which is called \emph{confidence band}.
+  \end{proposition}
+  \begin{proposition}[Confidence interval for the predicted value]
+    Consider the model of \cref{LM_generalized} and suppose we have observed a new data value $\transpose{\vf{x}_h}=(1,x_{1h},\ldots,x_{kn})$. Then:
+    \begin{enumerate}
+      \item The random variable $y_h-\hat{y}_h$ is a linear combination of $y_1,\ldots,y_n$ and: $$\Exp(y_h-\hat{y}_h)=0\qquad\Var(y_h-\hat{y}_h)=\sigma^2(1+v_{hh})$$
+      \item $y_h-\hat{y}_h\sim N(0,\sigma^2(1+v_{hh}))$
+      \item $\displaystyle\frac{y_h-\hat{y}_h}{\sqrt{\MSE (1+v_{hh})}}\sim t_{n-k-1}$
+    \end{enumerate}
+    Varying the value of $\vf{x}_h$ along the space of parameters we obtain a family of confidence intervals for $y_h$ which is called \emph{prediction band}.
+  \end{proposition}
+  \begin{figure}[H]
+    \centering
+    \includestandalone[mode=image|tex,width=0.5\linewidth]{Images/confidence_band}
+    \caption{Example of a confidence band (green-shaded region) and a prediction band (yellow-shaded region) for a simple linear model. Note that always the prediction band is greater than the confidence band}
+  \end{figure}
+  \begin{corollary}
+    Consider the simple model of \cref{LM_simple} and suppose we have observed a new data value $x_h$. Then: $$v_{hh}=\frac{1}{n}+\frac{{(x_h-\overline{x})}^2}{\sum_{i=1}^n{(x_i-\overline{x})}^2}$$
+  \end{corollary}
 \end{multicols}
 \end{document}
