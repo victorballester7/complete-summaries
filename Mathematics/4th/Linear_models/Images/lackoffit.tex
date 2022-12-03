@@ -1,0 +1,23 @@
+\documentclass{standalone}
+\usepackage{../../../../preamble_formulas}
+
+\begin{document}
+\begin{tikzpicture}[every node/.style={scale=1.25}]
+  \begin{axis}[
+      axis lines=middle,
+      ymin=-0.55,ymax=0.6,
+      xtick=\empty, ytick=\empty,
+      ylabel={$y$},
+      xlabel={$x$},
+    ]
+    \def\xmax{\pgfkeysvalueof{/pgfplots/xmax}}
+    \def\xmin{\pgfkeysvalueof{/pgfplots/xmin}}
+    \def\ymax{\pgfkeysvalueof{/pgfplots/ymax}}
+    \def\ymin{\pgfkeysvalueof{/pgfplots/ymin}}
+    % \addplot[only marks,mark size=0.5pt,red] table {normal.dat};
+    \def\eps{0.1}
+    \addplot[only marks,red,mark=*,mark size=0.5pt,domain=-0.5:1.5,samples=200] {x*(x-1) -0.2+ \eps*rand};
+
+  \end{axis}
+\end{tikzpicture}
+\end{document}

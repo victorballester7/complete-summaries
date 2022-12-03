@@ -75,6 +75,18 @@
     Consider the differential system in $\CC$ defined by:
     $$z'=\ii z+ a_2z^2+a_3z^3+\cdots=:\ii z+f(z)$$ This is a \emph{holomorphic differential equation}. Then, there exists a conjugaction that conjugues this system with $z'=\ii z$. This process of finding the conjugacy is called \emph{linearization} of the first system. In particular, the periods of the periodic orbits are always the same.
   \end{theorem}
+  \begin{theorem}
+    Consider the differential system
+    $$
+      \left\{
+      \begin{aligned}
+        {x}' & = \lambda + p(x,y) \\
+        {y}' & = \mu y+ q(x,y)
+      \end{aligned}
+      \right.
+    $$
+    where $p,q\in\RR[x,y]$ and $\deg p,\deg q\geq 2$. TIf $\frac{\lambda}{\mu}\notin\QQ$, then there exists a conjugacy of class $\mathcal{C}^\omega$ between them.
+  \end{theorem}
   \subsubsection{Invariant sets and limit sets}
   \begin{definition}
     Let $(X,G,\Pi)$ be a dynamical system and $A\subseteq \RR^n$ be a subset. We say that $A$ is \emph{invariant} if $\gamma_x\subseteq A$ $\forall x\in A$. We say that $A$ is \emph{positively invariant} if ${\gamma_x}^+\subseteq A$ $\forall x\in A$ Analogously, we say that $A$ is \emph{negatively invariant} if ${\gamma_x}^-\subseteq A$ $\forall x\in A$.
@@ -259,6 +271,15 @@
     Consider the system of \cref{DS_mu-system}. Then, it will have a pitchfork bifurcation at the origin if $\vf{f}(0,0)=0$, $\vf{f}_x(0,0)=0$, $\vf{f}_{xx}(0,0)=0$, $\vf{f}_{xxx}(0,0)\ne 0$, $\vf{f}_\mu(0,0)=0$ and $\vf{f}_{x\mu}(0,0)\ne 0$.
   \end{theorem}
   \subsubsection{Non-hyperbolic equilibrium points}
+  \begin{theorem}[Lyapunov's theorem]
+    Let $U\subseteq \RR^n$ be an open set and $\vf{f}:U\rightarrow\RR^n$ be a vector field of class $\mathcal{C}^1$ and $\vf{p}\in U$ be a critical point of $\vf{f}$. Suppose there exists a function $V:U\rightarrow\RR$ of class $\mathcal{C}^1$ and a neighbourhood $\tilde{U}\subseteq U$ of $\vf{p}$ such that $V(\vf{p})=0$ and $V(\vf{x})>0$ $\forall \vf{x}\in\tilde{U}\setminus\{\vf{p}\}$. Then:
+    \begin{itemize}
+      \item If $V'(\vf{q})\leq 0$ $\forall \vf{q}\in \tilde{U}$, then $\vf{p}$ is stable.
+      \item If $V'(\vf{q})< 0$ $\forall \vf{q}\in \tilde{U}$, then $\vf{p}$ is asymptotically stable.
+      \item If $V'(\vf{q})\leq 0$ $\forall \vf{q}\in \tilde{U}$ and $\omega(\tilde{U})=\{\vf{p}\}$, then $\vf{p}$ is asymptotically stable.
+      \item If $V'(\vf{q})> 0$ $\forall \vf{q}\in \tilde{U}$, then $\vf{p}$ is unstable.
+    \end{itemize}
+  \end{theorem}
   \begin{theorem}[Semi-hyperbolic singular points classification theorem]\label{DS_thmA}
     Consider the differential system
     $$
@@ -627,6 +648,71 @@
     \end{align*}
     When completed, the number of sign changes in the first column of \cref{DS_routhhurwitz} will be the number of non-negative roots.
   \end{proposition}
+  \subsubsection{Rotated vector fields}
+  \begin{definition}
+    Let $\vf{f}(\vf{x})=(X(\vf{x}),Y(\vf{x}))$ be a vector field in $\RR$. We say that $\{\vf{f}(\cdot,\mu):\mu\in\RR\}$ is a \emph{family of rotated vector fields} if the equilibrium points of $\vf{x}'=\vf{f}(\vf{x},\mu)$ are isolated and:
+    $$\vf{f}\crossprod\pdv{\vf{f}}{\mu}=
+      \begin{vmatrix}
+        X & \pdv{X}{\mu} \\
+        Y & \pdv{Y}{\mu}
+      \end{vmatrix}\ne 0
+    $$
+  \end{definition}
+  \begin{theorem}
+    Stable and unstable limit cycles of a family of rotated vector fields expand or contract monotonically as the parameter $\mu$ varies in a fixed sense and the motion covers an annular neighbourhood of the initial position.
+  \end{theorem}
+  \begin{theorem}
+    A semiestable limit cycle $\Gamma_\mu$ of a family of rotated vector fields splits into two simple limit cycles, one stable and one unstable, as the parameter $\mu$ is varied in one sense and it disappears as $\mu$ is varied in the opposite sense.
+  \end{theorem}
+  \begin{theorem}[Melinikov's method]
+    Let $H,P,Q\in\mathcal{C}^1(\RR)$ and $\varepsilon\simeq 0$. Consider the following system of odes:
+    \begin{equation*}
+      \left\{
+      \begin{aligned}
+        x' & =-H_y +\varepsilon P(x,y) \\
+        y' & =H_x +\varepsilon Q(x,y)
+      \end{aligned}
+      \right.
+    \end{equation*}
+    Let $\vf\gamma_h=\{H(x,y)=h\in\RR\}$ and consider the function: $$M(h)=\int_{\vf\gamma_h}Q\dd{x}-P\dd{y}$$ If $M$ has a simple zero at $h=h^*$, then there exists a cycle limit $\vf\Gamma_\varepsilon$ for $\varepsilon\simeq 0$ such that $\displaystyle\lim_{\varepsilon\to 0}\vf\Gamma_\varepsilon=\vf\gamma_{h^*}$.
+  \end{theorem}
+  \subsubsection{Liénard system}
+  \begin{definition}
+    Let $f,g:\RR\rightarrow\RR$ be functions of class $\mathcal{C}^1$. A \emph{Liénard system} is a system of the form:
+    \begin{equation}\label{DS_lienard}
+      x''+f(x)x'+g(x)=0\iff\left\{
+      \begin{aligned}
+        x' & =y-F(x) \\
+        y' & =-g(x)
+      \end{aligned}
+      \right.
+    \end{equation}
+    where we have denoted $F(x):=\int_0^xf(\xi)\dd{\xi}$.
+  \end{definition}
+  \begin{theorem}[Liénard's theorem]
+    Let $F,g\in \mathcal{C}^1(\RR)$ be odd functions such that:
+    \begin{itemize}
+      \item $xg(x)>0$ for $x\ne 0$.
+      \item $F'(0)<0$.
+      \item $F$ has a single positive zero at $x=a$.
+      \item $F$ increases monotonically to infinity for $x\geq a$ as $x\to\infty$.
+    \end{itemize}
+    Then, the Liénard system of \cref{DS_lienard} has exactly one limit cycle and it is stable.
+  \end{theorem}
+  \begin{definition}
+    Let $\mu\in\RR$. A \emph{Van der Pol oscillator} is a Liénard system of the form:
+    \begin{equation}\label{DS_vanderpol}
+      x''+\mu(x^2-1)x'+x=0\iff\left\{
+      \begin{aligned}
+        x' & =y              \\
+        y' & =-x +\mu(1-x^2)
+      \end{aligned}
+      \right.
+    \end{equation}
+  \end{definition}
+  \begin{corollary}
+    For $\mu>0$, Van der Pol oscillator has a unique cycle limit and it is stable.
+  \end{corollary}
   % \subsection{Global dynamics in discrete systems}
 \end{multicols}
 \end{document}

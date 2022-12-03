@@ -225,7 +225,7 @@
   \begin{proposition}
     Let $u:\RR^2\rightarrow\RR$ be a two-times differentiable function such that:
     \begin{multline*}
-      \left.\int_{x_1}^{x_2}\rho u_t\dd{t}\right|_{t=t_2}-\left.\int_{x_1}^{x_2}\rho u_t\dd{t}\right|_{t=t_1}=\left.\int_{t_1}^{t_2}ku_x\dd{t}\right|_{x=x_2}-\\-\left.\int_{t_1}^{t_2}ku_x\dd{t}\right|_{x=x_1}+\int_{t_1}^{t_2}\int_{x_1}^{x_2}f(x,t)\dd{x}\dd{t}
+      \left.\int_{x_1}^{x_2}\rho u_t\dd{x}\right|_{t=t_2}-\left.\int_{x_1}^{x_2}\rho u_t\dd{x}\right|_{t=t_1}=\left.\int_{t_1}^{t_2}ku_x\dd{t}\right|_{x=x_2}-\\-\left.\int_{t_1}^{t_2}ku_x\dd{t}\right|_{x=x_1}+\int_{t_1}^{t_2}\int_{x_1}^{x_2}f(x,t)\dd{x}\dd{t}
     \end{multline*}
     for certain functions $\rho(x,t)$, $k(x)$, $f(x,t)$. Also suppose that we can freely exchange the derivative and the integral sign\footnote{From now on, we will simply say that $u$ is a \emph{good enough} function.}. Then, $u(x,t)$ is a solution to the wave equation with driven force $f$:
     $$\rho u_{tt}-{(ku_x)}_x=f(x,t)$$
@@ -375,8 +375,8 @@
     Then, the general solution to this problem is:
     $$u(x,t)=\sum_{n=0}^\infty X_n(x)\left[a_n\cos\left(\sqrt{\lambda_n}t\right)+ b_n\sin\left( \sqrt{\lambda_n}t\right)\right]$$ where $X_n(x)$ is the solution to the problem $$ \left\{
       \begin{aligned}
-         & {(k(x)X_n')}'+\lambda_n\rho(x)X_n =0 \\
-         & X_n(0)                          =0   \\
+         & {(k{X_n}')}'+\lambda_n\rho X_n =0  \\
+         & X_n(0)                          =0 \\
          & X_n(L)                          =0
       \end{aligned}
       \right.$$
@@ -405,5 +405,29 @@
       a_n =\frac{1}{L}\int_{-L}^Lf(x)\sin\left(\frac{\pi n x}{L}\right)\dd{x}
     \end{equation*}
   \end{proposition}
+  \begin{definition}
+    A function $f(x,t)$ is said to be \emph{self-similar} if $\exists \alpha\in\RR$ such that $\frac{x}{t^\alpha}=\const$.
+  \end{definition}
+  \begin{proposition}
+    Consider the heat equation of constant coefficients $ u_{t} =\alpha u_{xx}$ on the whole real line. Then, if we impose $u$ being self-similar satisfying $u(x,t)=u(\lambda x,\lambda^2t)$ $\forall\lambda\in\RR$, we obtain: $$u(x,t)=c_1\int_0^{\frac{x}{\sqrt{t}}}\exp{-\frac{z^2}{4\alpha}}\dd{z} +c_2$$
+  \end{proposition}
+  \begin{definition}
+    The \emph{Dirac delta distribution} $\delta(x)$ is the pdf defined as $\delta(x)=0$ for $x\ne 0$ and such that: $$\int_{-\infty}^{+\infty}\delta(x)\dd{x}=1$$
+  \end{definition}
+  \begin{definition}
+    A \emph{fundamental solution} (or \emph{heat kernel}) is a solution of the heat equation corresponding to the initial condition of an initial point source of heat at a known position. That is, it is the solution to the problem:
+    \begin{equation}\label{PDE_fundamental}
+      \left\{
+      \begin{aligned}
+        u_{t}  & =\alpha u_{xx} \\
+        u(x,0) & =\delta(x)
+      \end{aligned}
+      \right.
+    \end{equation}
+    where $\delta(x)$ is the Dirac delta distribution.
+  \end{definition}
+  \begin{theorem}
+    The heat kernel of \cref{PDE_fundamental} is: $$u(x,t)=\frac{1}{\sqrt{4\pi\alpha t}}\exp{-\frac{x^2}{4\alpha t}}$$
+  \end{theorem}
 \end{multicols}
 \end{document}

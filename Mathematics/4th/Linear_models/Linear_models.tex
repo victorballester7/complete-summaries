@@ -163,25 +163,25 @@
         \vdots        \\
         \varepsilon_n \\
       \end{pmatrix}                                                \\
-      \label{LM_generalized}   & =\vf{X}\vf{\beta}+\vf{\varepsilon}
+      \label{LM_multiple}      & =\vf{X}\vf{\beta}+\vf{\varepsilon}
     \end{align}
-    where the matrix $\vf{X}$ is called \emph{design matrix}, and $\vf\beta$, \emph{regression coefficients}. From here, we would like to estimate the parameters $(\beta_0,\ldots,\beta_k)$ with estimators $\vf{\hat\beta}=(\hat\beta_0,\ldots,\hat\beta_k)$ to make \emph{preditions} $\hat{y}_h$ from new data $\vf{x}_h$ in the following way: $$\hat{y}_h=\transpose{\vf{x}_h}\vf{\hat\beta}$$
+    where the matrix $\vf{X}$ is called \emph{design matrix} (and its components, \emph{regressor coefficients}), and $\vf\beta$, \emph{regression coefficients}. From here, we would like to estimate the parameters $(\beta_0,\ldots,\beta_k)$ with estimators $\vf{\hat\beta}=(\hat\beta_0,\ldots,\hat\beta_k)$ to make \emph{preditions} $\hat{y}_h$ from new data $\vf{x}_h$ in the following way: $$\hat{y}_h=\transpose{\vf{x}_h}\vf{\hat\beta}$$
   \end{definition}
   \subsubsection{Least-Squares estimation}
   \begin{proposition}[Least-Squares method]
-    Consider the model $\vf{y}\sim N_n(\vf{X\beta},\sigma^2\vf{I}_n)$ of \cref{LM_generalized}. We want to minimize the value $${\norm{\vf{y}-\vf{X\beta}}}_2^2=\sum_{i=1}^n{\left(\beta_0+\beta_1x_{i1}+\cdots+\beta_kx_{ik}-y_i\right)}^2$$
+    Consider the model $\vf{y}\sim N_n(\vf{X\beta},\sigma^2\vf{I}_n)$ of \cref{LM_multiple}. We want to minimize the value $${\norm{\vf{y}-\vf{X\beta}}}_2^2=\sum_{i=1}^n{\left(\beta_0+\beta_1x_{i1}+\cdots+\beta_kx_{ik}-y_i\right)}^2$$
     The value $\hat{\vf\beta}=(\hat\beta_0,\ldots,\hat\beta_k)$ that minimizes the previous values is given by the solution of: $$\transpose{\vf{X}}\vf{X\hat\beta}=\transpose{\vf{X}}\vf{y}$$
     In particular, if $\transpose{\vf{X}}\vf{X}$ is invertible, we get the explicit solution $$\vf{\hat\beta}={\left(\transpose{\vf{X}}\vf{X}\right)}^{-1}\transpose{\vf{X}}\vf{y}$$
   \end{proposition}
   \begin{proposition}
-    Consider the model $\vf{y}\sim N_n(\vf{X\beta},\sigma^2\vf{I}_n)$ of \cref{LM_generalized}. If $\Exp(\vf{y})=\vf{X\beta}$, then $\vf{\hat\beta}$ is an unbiased estimator for $\vf\beta$.
+    Consider the model $\vf{y}\sim N_n(\vf{X\beta},\sigma^2\vf{I}_n)$ of \cref{LM_multiple}. If $\Exp(\vf{y})=\vf{X\beta}$, then $\vf{\hat\beta}$ is an unbiased estimator for $\vf\beta$.
   \end{proposition}
   \begin{proposition}
-    Consider the model $\vf{y}\sim N_n(\vf{X\beta},\sigma^2\vf{I}_n)$ of \cref{LM_generalized}. If $\Var(\vf{y})=\sigma^2\vf{I}_n$, then the covariance matrix for $\vf{\hat\beta}$ is $\vf\Sigma_{\vf{\hat\beta}}=\sigma^2{\left(\transpose{\vf{X}}\vf{X}\right)}^{-1}$.
+    Consider the model $\vf{y}\sim N_n(\vf{X\beta},\sigma^2\vf{I}_n)$ of \cref{LM_multiple}. If $\Var(\vf{y})=\sigma^2\vf{I}_n$, then the covariance matrix for $\vf{\hat\beta}$ is $\vf\Sigma_{\vf{\hat\beta}}=\sigma^2{\left(\transpose{\vf{X}}\vf{X}\right)}^{-1}$.
   \end{proposition}
   \subsubsection{MLE estimation}
   \begin{proposition}[MLE method]
-    Consider the model $\vf{y}\sim N_n(\vf{X\beta},\sigma^2\vf{I}_n)$ of \cref{LM_generalized}. We want to find the value $\vf{\hat\beta}$ that maximises the likelihood which in this case is: $$L(\vf{y};\vf\beta,\sigma^2)=\frac{1}{(\sqrt{2\pi\sigma^2})^n}\exp{-\frac{1}{2\sigma^2}{\norm{\vf{y}-\vf{X\beta}}}}$$
+    Consider the model $\vf{y}\sim N_n(\vf{X\beta},\sigma^2\vf{I}_n)$ of \cref{LM_multiple}. We want to find the value $\vf{\hat\beta}$ that maximises the likelihood which in this case is: $$L(\vf{y};\vf\beta,\sigma^2)=\frac{1}{(\sqrt{2\pi\sigma^2})^n}\exp{-\frac{1}{2\sigma^2}{\norm{\vf{y}-\vf{X\beta}}}}$$
     Solving for $\vf{\hat\beta}$ and ${\hat\sigma}^2$ we get:
     \begin{align*}
       \transpose{\vf{X}}\vf{X\hat\beta} & =\transpose{\vf{X}}\vf{y}                    \\
@@ -192,12 +192,12 @@
     Here $\MSE$ stands for \emph{mean square error}.
   \end{proposition}
   \begin{definition}
-    Consider the model $\vf{y}\sim N_n(\vf{X\beta},\sigma^2\vf{I}_n)$ of \cref{LM_generalized} and suppose that $\transpose{\vf{X}}\vf{X}\in\GL_{k+1}(\RR)$. We define the following deterministic matrices:
+    Consider the model $\vf{y}\sim N_n(\vf{X\beta},\sigma^2\vf{I}_n)$ of \cref{LM_multiple} and suppose that $\transpose{\vf{X}}\vf{X}\in\GL_{k+1}(\RR)$. We define the following deterministic matrices:
     $$\vf{A}={\left(\transpose{\vf{X}}\vf{X}\right)}^{-1}\transpose{\vf{X}}\qquad \vf{H}=\vf{XA}\qquad \vf{M}=\vf{I}-\vf{H}$$
     Hence, $$\vf{\hat\beta}=\vf{Ay}\qquad\vf{\hat{y}}=\vf{Hy}\qquad\vf{e}=\vf{My}$$
   \end{definition}
   \begin{proposition}
-    Consider the model $\vf{y}\sim N_n(\vf{X\beta},\sigma^2\vf{I}_n)$ of \cref{LM_generalized} and suppose that $\transpose{\vf{X}}\vf{X}\in\GL_{k+1}(\RR)$. Then:
+    Consider the model $\vf{y}\sim N_n(\vf{X\beta},\sigma^2\vf{I}_n)$ of \cref{LM_multiple} and suppose that $\transpose{\vf{X}}\vf{X}\in\GL_{k+1}(\RR)$. Then:
     \begin{enumerate}
       \item $\hat\beta_0,\ldots,\hat\beta_k$ are independent normally distributed random variables, as well as $\hat{y}_1,\ldots,\hat{y}_n$ and $\hat{e}_1,\ldots,\hat{e}_n$
       \item $\vf{H}$ and $\vf{M}$ are symmetric and idempotent. Moreover, $\vf{MH}=\vf{0}_n$. Hence, they orthogonally project $\RR^n$ into orthogonal subspaces.
@@ -209,7 +209,7 @@
     \end{enumerate}
   \end{proposition}
   \begin{proposition}
-    Consider the model $\vf{y}\sim N_n(\vf{X\beta},\sigma^2\vf{I}_n)$ of \cref{LM_generalized}, then $\vf{\hat\beta}$, $s^2$ are unbiased estimator for $\vf\beta$ and $\sigma^2$, respectively, and: $$\vf\Sigma_{\vf{\hat\beta}}=\sigma^2{\left(\transpose{\vf{X}}\vf{X}\right)}^{-1}$$
+    Consider the model $\vf{y}\sim N_n(\vf{X\beta},\sigma^2\vf{I}_n)$ of \cref{LM_multiple}, then $\vf{\hat\beta}$, $s^2$ are unbiased estimator for $\vf\beta$ and $\sigma^2$, respectively, and: $$\vf\Sigma_{\vf{\hat\beta}}=\sigma^2{\left(\transpose{\vf{X}}\vf{X}\right)}^{-1}$$
     Moreover, and unbiased estimator for $\vf\Sigma_{\vf{\hat\beta}}$ is: $$\vf\Sigma_{\vf{\hat\beta}}=s^2{\left(\transpose{\vf{X}}\vf{X}\right)}^{-1}$$
   \end{proposition}
   \begin{proposition}
@@ -219,7 +219,7 @@
     Let $\vf{A}\in\mathcal{M}_n(\RR)$ be symmetric and idempotent of rank $d$ and $\vf{z}\sim N_n(\vf{0},\vf{I}_n)$. Then, $\norm{\vf{Az}}^2\sim{\chi_d}^2$.
   \end{lemma}
   \begin{proposition}
-    Consider the model $\vf{y}\sim N_n(\vf{X\beta},\sigma^2\vf{I}_n)$ of \cref{LM_generalized}. Then:
+    Consider the model $\vf{y}\sim N_n(\vf{X\beta},\sigma^2\vf{I}_n)$ of \cref{LM_multiple}. Then:
     \begin{enumerate}
       \item $\vf{\hat\beta}\sim N_{k+1}(\vf\beta,\sigma^2{\left(\transpose{\vf{X}}\vf{X}\right)}^{-1})$
       \item $\frac{(n-k-1)s^2}{\sigma^2}\sim{\chi_{n-k-1}}^2$
@@ -227,24 +227,24 @@
     \end{enumerate}
   \end{proposition}
   \begin{proposition}
-    Consider the model $\vf{y}\sim N_n(\vf{X\beta},\sigma^2\vf{I}_n)$ of \cref{LM_generalized}. Then, if the variables $x_{i1},\ldots,x_{ik}$ are uncorrelated $\forall i=1,\ldots,n$, then the MLE estimators $\hat\beta_j$ coincide with the ones of the equivalent simple models: $$y=\beta_0+\beta_i x_i\qquad i=1,\ldots,n$$
+    Consider the model $\vf{y}\sim N_n(\vf{X\beta},\sigma^2\vf{I}_n)$ of \cref{LM_multiple}. Then, if the variables $x_{i1},\ldots,x_{ik}$ are uncorrelated $\forall i=1,\ldots,n$, then the MLE estimators $\hat\beta_j$ coincide with the ones of the equivalent simple models: $$y=\beta_0+\beta_i x_i\qquad i=1,\ldots,n$$
   \end{proposition}
   \begin{theorem}[Gau\ss-Markov]
-    Consider the model of \cref{LM_generalized}\footnote{Here the normality hypothesis does not play any role.}, then the least-squares estimators for $\beta_j$, $j=0,1,\ldots,k$, are \emph{BLUE} (\emph{the Best Linear Unbiased Estimator})\footnote{That is, they have minimum variance among all linear unbiased estimators.}.
+    Consider the model of \cref{LM_multiple}\footnote{Here the normality hypothesis does not play any role.}, then the least-squares estimators for $\beta_j$, $j=0,1,\ldots,k$, are \emph{BLUE} (\emph{the Best Linear Unbiased Estimator})\footnote{That is, they have minimum variance among all linear unbiased estimators.}.
   \end{theorem}
   \begin{corollary}
     The predicted value $\hat{y}_h$ is invariant to a full-rank linear transformation on the $x$'s. That is: $$\hat{y}_z=\transpose{\vf{z}_h}\vf{\hat{\beta}_z}=\transpose{\vf{x}_h}\vf{\hat{\beta}}=\hat{y}_h$$ where $\vf{z}_h=\transpose{\vf{K}}\vf{x}_h$ and $\vf{Z}=\vf{XK}$ is the full-rank linear transformation.
   \end{corollary}
   \subsubsection{Model in centered form}
   \begin{definition}
-    Consider the model $\vf{y}\sim N_n(\vf{X\beta},\sigma^2\vf{I}_n)$ of \cref{LM_generalized}. Then, for each $i=1,\ldots,n$ we can write:
+    Consider the model $\vf{y}\sim N_n(\vf{X\beta},\sigma^2\vf{I}_n)$ of \cref{LM_multiple}. Then, for each $i=1,\ldots,n$ we can write:
     \begin{equation}\label{LM_centered}
       \tilde{y}_i=y_i-\overline{y}=\beta_1\tilde{x}_{i1}+\cdots+\beta_k\tilde{x}_{ik}+\varepsilon_i
     \end{equation}
     where $\tilde{x}_{ij}=x_{ij}-\overline{x}_i$. This way we obtain a \emph{no-intercept} linear model, which is a little bit easier to estimate. The estimation of $\beta_0$ will be: $$\hat{\beta}_0=\overline{y}-\transpose{\vf{\overline{x}}}\vf{\hat\beta}_{1}$$ where $\vf{\hat{\beta}}_1=\transpose{(\beta_1,\ldots,\beta_k)}$
   \end{definition}
   \begin{proposition}
-    Consider the model $\vf{y}\sim N_n(\vf{X\beta},\sigma^2\vf{I}_n)$ of \cref{LM_generalized} in its centered form (\cref{LM_centered}). Then: $$\vf{\hat\beta}_{1}={\left(\transpose{\vf{\tilde{X}}}\vf{\tilde{X}}\right)}^{-1}\transpose{\vf{\tilde{X}}}\vf{\tilde{y}}$$
+    Consider the model $\vf{y}\sim N_n(\vf{X\beta},\sigma^2\vf{I}_n)$ of \cref{LM_multiple} in its centered form (\cref{LM_centered}). Then: $$\vf{\hat\beta}_{1}={\left(\transpose{\vf{\tilde{X}}}\vf{\tilde{X}}\right)}^{-1}\transpose{\vf{\tilde{X}}}\vf{\tilde{y}}$$
     where: $$\vf{\tilde{y}}=\begin{pmatrix}
         y_1  -\overline{y} \\
         \vdots             \\
@@ -264,20 +264,20 @@
   \end{proposition}
   \subsubsection{Coefficient of determination}
   \begin{definition}
-    Given the model of \cref{LM_generalized}, we define the \emph{coefficient of determination} $R$ as:
+    Given the model of \cref{LM_multiple}, we define the \emph{coefficient of determination} $R$ as:
     $$R^2:=\frac{\SSR}{\SST}:=1-\frac{\SSE}{\SST}:=\frac{\sum_{i=1}^n{(\hat{y}_i-\overline{y})}^2}{\sum_{i=1}^n{(y_i-\overline{y})}^2}$$ where $\SSR=\sum_{i=1}^n{(\hat{y}_i-\overline{y})}^2$ is the \emph{regression sum of squares} and $\SST=\sum_{i=1}^n{(y_i-\overline{y})}^2$ is the \emph{total sum of squares}. Furthermore, we can partition $\SST$ into $\SST=\SSR+\SSE$, where $\SSE$ is the \emph{error sum of squares}. That is: $$\sum_{i=1}^n{(y_i-\overline{y})}^2=\sum_{i=1}^n{(\hat{y}_i-\overline{y})}^2+\sum_{i=1}^n{(y_i-\hat{y}_i)}^2$$
   \end{definition}
   \begin{lemma}
-    Consider the model of \cref{LM_generalized}. Then, $R^2\leq 1$
+    Consider the model of \cref{LM_multiple}. Then, $R^2\leq 1$
   \end{lemma}
   \begin{proposition}
     Given the simple model of \cref{LM_simple}, we have that $R^2=r^2$.
   \end{proposition}
   \begin{definition}
-    Given the model of \cref{LM_generalized}, we define the \emph{adjusted coefficient of determination} $R_{\mathrm{adj}}$ as: $${R_{\mathrm{adj}}}^2=1-\frac{\MSE}{\MST}:=1-\frac{n-1}{n-k-1}\frac{\SSE}{\SST}$$ where we have defined the \emph{total mean of squares} as $\MST=\frac{1}{n-1}\sum_{i=1}^n{(y_i-\overline{y})}^2$.
+    Given the model of \cref{LM_multiple}, we define the \emph{adjusted coefficient of determination} $R_{\mathrm{adj}}$ as: $${R_{\mathrm{adj}}}^2=1-\frac{\MSE}{\MST}:=1-\frac{n-1}{n-k-1}\frac{\SSE}{\SST}$$ where we have defined the \emph{total mean of squares} as $\MST=\frac{1}{n-1}\sum_{i=1}^n{(y_i-\overline{y})}^2$.
   \end{definition}
   \begin{lemma}
-    Consider the model of \cref{LM_generalized}. The function ${R_{\mathrm{adj}}}^2(k)$ attains a maximum at $k=k_0$ which is the optimal number of variables we should consider for our model.
+    Consider the model of \cref{LM_multiple}. The function ${R_{\mathrm{adj}}}^2(k)$ attains a maximum at $k=k_0$ which is the optimal number of variables we should consider for our model.
   \end{lemma}
   \subsubsection{Analysis of variance}
   \begin{definition}
@@ -306,7 +306,7 @@
   \end{theorem}
   \subsubsection{Hypothesis testing}
   \begin{proposition}[Bonferroni's method]
-    Consider the model $\vf{y}\sim N_n(\vf{X\beta},\sigma^2\vf{I}_n)$ of \cref{LM_generalized} and suppose we want a confidence $k+1$-dimensional interval $I$ for $\vf{\beta}$ of confidence $1-\alpha$. Then, it suffices to take any interval $I_j$ for each $\beta_j$ of confidence $1-\frac{\alpha}{k+1}$ and let $I=I_0\times\cdots\times I_{k}$.
+    Consider the model $\vf{y}\sim N_n(\vf{X\beta},\sigma^2\vf{I}_n)$ of \cref{LM_multiple} and suppose we want a confidence $k+1$-dimensional interval $I$ for $\vf{\beta}$ of confidence $1-\alpha$. Then, it suffices to take any interval $I_j$ for each $\beta_j$ of confidence $1-\frac{\alpha}{k+1}$ and let $I=I_0\times\cdots\times I_{k}$.
   \end{proposition}
   \begin{theorem}
     Let $\vf{y}\sim N_n(\vf{0},\sigma^2\vf{I}_n)$ be a random variable. Then:
@@ -316,10 +316,10 @@
     Hence in this case we have that: $$\frac{\SSR/ k}{\SSE/(n-k-1)}\sim F_{k,n-k-1}$$
   \end{theorem}
   \begin{proposition}
-    Consider the model $\vf{y}\sim N_n(\vf{X\beta},\sigma^2\vf{I}_n)$ of \cref{LM_generalized} and suppose we want to test the hypothesis $\mathcal{H}_0:\vf\beta=\vf{0}$ versus $\mathcal{H}_1:\vf\beta\ne\vf{0}$. The statistic that we take is: $$F=\frac{\SSR/ k}{\SSE/(n-k-1)}\sim F_{k,n-k-1}$$
+    Consider the model $\vf{y}\sim N_n(\vf{X\beta},\sigma^2\vf{I}_n)$ of \cref{LM_multiple} and suppose we want to test the hypothesis $\mathcal{H}_0:\vf\beta=\vf{0}$ versus $\mathcal{H}_1:\vf\beta\ne\vf{0}$. The statistic that we take is: $$F=\frac{\SSR/ k}{\SSE/(n-k-1)}\sim F_{k,n-k-1}$$
   \end{proposition}
   \begin{proposition}
-    Consider the model $\vf{y}\sim N_n(\vf{X\beta},\sigma^2\vf{I}_n)$ of \cref{LM_generalized}, $\vf{R}\in\mathcal{M}_{r\times {k+1}}(\RR)$ where $r\leq k+1$, $\vf{c}\in\RR^{k+1}$ and suppose we want to test the hypothesis $\mathcal{H}_0:\vf{R}\vf\beta=\vf{c}$ versus $\mathcal{H}_1:\vf{R}\vf\beta\ne\vf{c}$.
+    Consider the model $\vf{y}\sim N_n(\vf{X\beta},\sigma^2\vf{I}_n)$ of \cref{LM_multiple}, $\vf{R}\in\mathcal{M}_{r\times {k+1}}(\RR)$ where $r\leq k+1$, $\vf{c}\in\RR^{k+1}$ and suppose we want to test the hypothesis $\mathcal{H}_0:\vf{R}\vf\beta=\vf{c}$ versus $\mathcal{H}_1:\vf{R}\vf\beta\ne\vf{c}$.
     Without loss of generality suppose we can eliminate the first $\beta,\ldots,\beta_r$ under $\mathcal{H}_0$ and so rearranging the model equation we obtain:
     $$\vf{y}_\ell=\vf{X}_\ell\vf{\beta}_\ell+\vf\varepsilon$$
     where $\vf{\beta}_\ell=(\beta_{r+1},\ldots,\beta_k)$. The statistic that we take is:
@@ -330,7 +330,7 @@
   \end{proposition}
   \subsubsection{Dummy variables}
   \begin{definition}[Model without interaction]
-    Suppose we have a linear model of the form of \cref{LM_generalized}. We would like to measure the change in the response when adding a binary parameter (say men and women) to the model. Hence we identify that deterministic variable with a \emph{dummy variable} as follows:
+    Suppose we have a linear model of the form of \cref{LM_multiple}. We would like to measure the change in the response when adding a binary parameter (say men and women) to the model. Hence we identify that deterministic variable with a \emph{dummy variable} as follows:
     \begin{equation}\label{LM_dummy}
       d:=
       \begin{cases}
@@ -342,11 +342,11 @@
     where $\vf{1}=(1,\ldots,1)$. Finally we may want to conclude whether the variable $d$ is relevant or not. This can be obtained by doing the $t$-test $\mathcal{H}_0:\gamma=0$\footnote{Note that this test is equivalent to the one in \cref{LM_hypothesisgen} due to \cref{LM_tF}.}. Note that, independently of the conclusion of the test, both regression lines (the one for men and the one for women) will be parallel.
   \end{definition}
   \begin{definition}[Model with interaction]
-    Suppose we have a linear model of the form of \cref{LM_generalized}. We would like to measure the change in the response when adding a dummy variable $d$ as in \cref{LM_dummy}. Now, consider the following \emph{model with interaction}: $$\vf{y}=\vf{X}\vf{\beta}+d\vf{X}\vf{\delta}+\vf{\varepsilon}$$
+    Suppose we have a linear model of the form of \cref{LM_multiple}. We would like to measure the change in the response when adding a dummy variable $d$ as in \cref{LM_dummy}. Now, consider the following \emph{model with interaction}: $$\vf{y}=\vf{X}\vf{\beta}+d\vf{X}\vf{\delta}+\vf{\varepsilon}$$
     Let $\gamma:=\delta_0$. And now we can do tests for $\vf{\delta}$ or for $\gamma$. Note that, these regression lines won't be in general parallel.
   \end{definition}
   \begin{definition}[Segmented regression]
-    Suppose we have a linear model of the form of \cref{LM_generalized} and that for some reason we have noticeable change of the slope at $\vf{x}^*$ (known). Then, defining the dummy variable
+    Suppose we have a linear model of the form of \cref{LM_multiple} and that for some reason we have noticeable change of the slope at $\vf{x}^*$ (known). Then, defining the dummy variable
     \begin{equation}
       d_i:=
       \begin{cases}
@@ -369,24 +369,24 @@
   \end{figure}
   \subsubsection{Predicted confidence intervals}
   \begin{definition}
-    Consider the model of \cref{LM_generalized} and suppose we have observed a new data value $\transpose{\vf{x}_h}=(1,x_{1h},\ldots,x_{kn})$. The \emph{response} or \emph{prediction} of this observation is $$y_h=\transpose{\vf{x}_h}\vf{\beta}+\varepsilon_h=\mu_h+\varepsilon_h$$
+    Consider the model of \cref{LM_multiple} and suppose we have observed a new data value $\transpose{\vf{x}_h}=(1,x_{1h},\ldots,x_{kn})$. The \emph{response} or \emph{prediction} of this observation is $$y_h=\transpose{\vf{x}_h}\vf{\beta}+\varepsilon_h=\mu_h+\varepsilon_h$$
     where $\mu_h$ is the \emph{average response}. The \emph{estimated average response} $\hat\mu_h$ and the \emph{estimation of the prediction} $\hat{y}_h$ coincide and they are: $$\hat{y}_h=\hat\mu_h=\transpose{\vf{x}_h}\vf{\hat\beta}$$
   \end{definition}
   \begin{proposition}[Confidence interval for the average response]
-    Consider the model of \cref{LM_generalized} and suppose we have observed a new data value $\transpose{\vf{x}_h}=(1,x_{1h},\ldots,x_{kn})$. Then:
+    Consider the model of \cref{LM_multiple} and suppose we have observed a new data value $\transpose{\vf{x}_h}=(1,x_{1h},\ldots,x_{kn})$. Then:
     \begin{enumerate}
-      \item The random variable $\hat\mu_h$ is a linear combination of $y_1,\ldots,y_n$ and: $$\Exp(\hat\mu_h)=\mu_h\qquad\Var(\hat\mu_h)=\sigma^2v_{hh}$$ where we have defined $v_{hh}:=\transpose{\vf{x}_h}{\left(\transpose{\vf{X}}\vf{X}\right)}^{-1}\vf{x}_h$.
-      \item $\hat\mu_h\sim N(\mu_h,\sigma^2v_{hh})$
-      \item $\displaystyle\frac{\hat\mu_h-\mu_h}{\sqrt{\MSE v_{hh}}}\sim t_{n-k-1}$
+      \item The random variable $\hat\mu_h$ is a linear combination of $y_1,\ldots,y_n$ and: $$\Exp(\hat\mu_h)=\mu_h\qquad\Var(\hat\mu_h)=\sigma^2h_{hh}$$ where we have defined the \emph{leverage} as $h_{hh}:=\transpose{\vf{x}_h}{\left(\transpose{\vf{X}}\vf{X}\right)}^{-1}\vf{x}_h$.
+      \item $\hat\mu_h\sim N(\mu_h,\sigma^2h_{hh})$
+      \item $\displaystyle\frac{\hat\mu_h-\mu_h}{\sqrt{\MSE h_{hh}}}\sim t_{n-k-1}$
     \end{enumerate}
     Varying the value of $\vf{x}_h$ along the space of parameters we obtain a family of confidence intervals for $y_h$ which is called \emph{confidence band}.
   \end{proposition}
   \begin{proposition}[Confidence interval for the predicted value]
-    Consider the model of \cref{LM_generalized} and suppose we have observed a new data value $\transpose{\vf{x}_h}=(1,x_{1h},\ldots,x_{kn})$. Then:
+    Consider the model of \cref{LM_multiple} and suppose we have observed a new data value $\transpose{\vf{x}_h}=(1,x_{1h},\ldots,x_{kn})$. Then:
     \begin{enumerate}
-      \item The random variable $y_h-\hat{y}_h$ is a linear combination of $y_1,\ldots,y_n$ and: $$\Exp(y_h-\hat{y}_h)=0\qquad\Var(y_h-\hat{y}_h)=\sigma^2(1+v_{hh})$$
-      \item $y_h-\hat{y}_h\sim N(0,\sigma^2(1+v_{hh}))$
-      \item $\displaystyle\frac{y_h-\hat{y}_h}{\sqrt{\MSE (1+v_{hh})}}\sim t_{n-k-1}$
+      \item The random variable $y_h-\hat{y}_h$ is a linear combination of $y_1,\ldots,y_n$ and: $$\Exp(y_h-\hat{y}_h)=0\qquad\Var(y_h-\hat{y}_h)=\sigma^2(1+h_{hh})$$
+      \item $y_h-\hat{y}_h\sim N(0,\sigma^2(1+h_{hh}))$
+      \item $\displaystyle\frac{y_h-\hat{y}_h}{\sqrt{\MSE (1+h_{hh})}}\sim t_{n-k-1}$
     \end{enumerate}
     Varying the value of $\vf{x}_h$ along the space of parameters we obtain a family of confidence intervals for $y_h$ which is called \emph{prediction band}.
   \end{proposition}
@@ -396,7 +396,86 @@
     \caption{Example of a confidence band (green-shaded region) and a prediction band (yellow-shaded region) for a simple linear model. Note that always the prediction band is greater than the confidence band}
   \end{figure}
   \begin{corollary}
-    Consider the simple model of \cref{LM_simple} and suppose we have observed a new data value $x_h$. Then: $$v_{hh}=\frac{1}{n}+\frac{{(x_h-\overline{x})}^2}{\sum_{i=1}^n{(x_i-\overline{x})}^2}$$
+    Consider the simple model of \cref{LM_simple} and suppose we have observed a new data value $x_h$. Then: $$h_{h}:=h_{hh}=\frac{1}{n}+\frac{{(x_h-\overline{x})}^2}{\sum_{i=1}^n{(x_i-\overline{x})}^2}$$
   \end{corollary}
+  \subsubsection{Lack of fit}
+  \begin{definition}
+    Consider the simple model of \cref{LM_simple}. Then, the residuals $e_i=y_i-\hat{y}_i$ satisfy:
+    \begin{enumerate}
+      \item $\sum_{i=1}^ne_i=0$
+      \item $\sum_{i=1}^nx_ie_i=0$
+      \item $\hat{e}=\frac{\sum_{i=1}^n{e_i-\overline{e}}}{n-2}=\MSE$.
+      \item They are pairwise correlated.
+      \item $\Exp(e_i)= 0$
+      \item $\Var(e_i)=\sigma^2(1-h_{i})$
+    \end{enumerate}
+  \end{definition}
+  \begin{proposition}
+    Consider the simple model of \cref{LM_simple}. We will perceive a lack of fit in the model if the graph of the $e_i$ in terms of the regressors coefficients $x_i$ and the prediction $\hat{y}_i$ follow a chaotic behavior inside of a rectangle centered at $\hat{y}=0$ (see \cref{LM_lackoffit}).
+  \end{proposition}
+  \begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.48\linewidth}
+      \centering
+      \includestandalone[mode=image|tex,width=\linewidth]{Images/NOTlackoffit}
+      \caption{Absence of lack of fit}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.48\linewidth}
+      \centering
+      \includestandalone[mode=image|tex,width=\linewidth]{Images/lackoffit}
+      \caption{Lack of fit}
+    \end{subfigure}
+    \caption{Stability of limit cycles}
+    \label{LM_lackoffit}
+  \end{figure}
+  \begin{proposition}[LOF test]
+    Consider the simple model of \cref{LM_simple}. The \emph{lack of fit test} (\emph{LOF test}) has a the following null hypothesis:
+    \begin{align*}
+      \mathcal{H}_0: & \text{ For each $x_i$, the mean of all outcomes obtained for} \\
+                     & \text{ this fixed value lies on the regression line}
+    \end{align*}
+    Otherwise, $\mathcal{H}_1: \text{There is a LOF}$.
+    Suppose now that we have $m$ distinct $x_i$ and for each of those we have the observation $y_{ij}$, $j=1,\ldots,n_i$. In order to properly do this test we need to have at least one index $i=i^*$ such that number $n_{i^*}\geq 2$. In this case, we have that:
+    \begin{multline*}
+      \SSE=\sum_{i=1}^m\sum_{j=1}^{n_i}{(y_{ij}-\hat{y}_i)}^2 =\sum_{i=1}^m\sum_{j=1}^{n_i}{(y_{ij}-\overline{y}_i)}^2+\\+\sum_{i=1}^mn_i{(\overline{y}_i-\hat{y}_i)}^2=:\SSPE+\SSLOF
+    \end{multline*}
+    where $\overline{y}_i:=\frac{1}{n_i}\sum_{j=1}^{n_i}y_{ij}$. Finally the test that we take is (under $\mathcal{H}_0$):
+    $$\frac{\frac{\SSLOF}{m-2}}{\frac{\SSPE}{n-m}}=:\frac{\MSLOF}{\MSPE}\sim F_{m-2,n-m}$$
+  \end{proposition}
+  \subsection{Generalized linear models}
+  \subsubsection{Box-Cox transformation}
+  \begin{definition}
+    Consider a simple model like in \cref{LM_simple} in which we have observed a notable LOF. We define the \emph{Box-Cox transformation} as the following transformation on the $y$:
+    $$
+      y^{(\lambda)}:=\begin{cases}
+        \displaystyle\frac{y^\lambda-1}{\lambda} & \text{if $\lambda\ne 0$} \\
+        \log y                                   & \text{if $\lambda= 0$}
+      \end{cases}
+    $$
+  \end{definition}
+  \begin{proposition}
+    Consider a simple model like in \cref{LM_simple} in which we have observed a notable LOF. Making the Box-Cox transformation and assuming that for some unknown $\lambda$ the transformed observations satisfy the normal hypothesis of a linear model, we will choose the MLE $\lambda=\hat\lambda$ that maximises the likelihood of the problem.
+  \end{proposition}
+  \subsubsection{Exponential families}
+  \begin{definition}
+    Let $\{f(\vf{x},\vf{\theta}):\vf\theta\in\Theta\}$ be a family of pdfs from a probability distribution. We say that this family is \emph{exponential} if $f(\vf{x},\vf{\theta})$ can be expressed as:
+    \begin{equation}\label{LM_expofamily}
+      f(\vf{x},\vf{\theta})=h(x)\exp{\transpose{\vf\theta}\cdot \vf{T}(\vf{x})-A(\vf{\theta})}
+    \end{equation}
+    where $\vf{\eta}$ is a function of $\vf\theta$.
+  \end{definition}
+  \begin{definition}
+    Given a probability $p\in(0,1)$ we define the \emph{odds} as the value: $$\frac{p}{1-p}$$ It measures how likely the event of probability $p$ in a scale of $(0,\infty)$.
+  \end{definition}
+  \begin{definition}
+    Given a probability $p\in(0,1)$, we define the \emph{log-odds} (or \emph{logit}) as: $$\logit p:=\log\left(\frac{p}{1-p}\right)$$
+  \end{definition}
+  \begin{proposition}
+    The families of Bernoulli\footnote{In the Bernoulli's case, $\eta(p)=\logit(p)$.}, Poisson, Binomial, normal, exponential, gamma, chi-squared and beta distributions are all exponential families.
+  \end{proposition}
+  \begin{theorem}
+    Let $\{f(\vf{x},\vf{\theta}):\vf\theta\in\Theta\}$  an exponential family that can be written as \cref{LM_expofamily}. Then, the statistic $\vf{T}$ is a sufficient statistic.
+  \end{theorem}
 \end{multicols}
 \end{document}
