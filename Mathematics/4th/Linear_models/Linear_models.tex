@@ -221,10 +221,13 @@
   \begin{proposition}
     Consider the model $\vf{y}\sim N_n(\vf{X\beta},\sigma^2\vf{I}_n)$ of \cref{LM_multiple}. Then:
     \begin{enumerate}
-      \item $\vf{\hat\beta}\sim N_{k+1}(\vf\beta,\sigma^2{\left(\transpose{\vf{X}}\vf{X}\right)}^{-1})$
+      \item $\vf{\hat\beta}\sim N_{k+1}\left(\vf\beta,\sigma^2{\left(\transpose{\vf{X}}\vf{X}\right)}^{-1}\right)$
       \item $\frac{(n-k-1)s^2}{\sigma^2}\sim{\chi_{n-k-1}}^2$
       \item $\vf{\hat\beta}$ and $s^2$ are independent.
     \end{enumerate}
+  \end{proposition}
+  \begin{proposition}
+    Consider the model $\vf{y}\sim N_n(\vf{X\beta},\sigma^2\vf{I}_n)$ of \cref{LM_multiple} in which $\sigma^2$ is unknown. Then, for each $j=1,\ldots,n$ we have $$\frac{\beta_j-\hat\beta_j}{\sqrt{\MSE}}\sim t_{n-k-1}$$
   \end{proposition}
   \begin{proposition}
     Consider the model $\vf{y}\sim N_n(\vf{X\beta},\sigma^2\vf{I}_n)$ of \cref{LM_multiple}. Then, if the variables $x_{i1},\ldots,x_{ik}$ are uncorrelated $\forall i=1,\ldots,n$, then the MLE estimators $\hat\beta_j$ coincide with the ones of the equivalent simple models: $$y=\beta_0+\beta_i x_i\qquad i=1,\ldots,n$$
@@ -404,7 +407,7 @@
     \begin{enumerate}
       \item $\sum_{i=1}^ne_i=0$
       \item $\sum_{i=1}^nx_ie_i=0$
-      \item $\hat{e}=\frac{\sum_{i=1}^n{e_i-\overline{e}}}{n-2}=\MSE$.
+      \item $\hat\sigma_e=\frac{\sum_{i=1}^n{(e_i-\overline{e})}}{n-2}=\MSE$.
       \item They are pairwise correlated.
       \item $\Exp(e_i)= 0$
       \item $\Var(e_i)=\sigma^2(1-h_{i})$
@@ -442,6 +445,31 @@
     \end{multline*}
     where $\overline{y}_i:=\frac{1}{n_i}\sum_{j=1}^{n_i}y_{ij}$. Finally the test that we take is (under $\mathcal{H}_0$):
     $$\frac{\frac{\SSLOF}{m-2}}{\frac{\SSPE}{n-m}}=:\frac{\MSLOF}{\MSPE}\sim F_{m-2,n-m}$$
+  \end{proposition}
+  \begin{definition}
+    Consider the simple model of \cref{LM_simple}. In order to normalize the errors we define the \emph{internally studentized residuals} as: $$r_i=\frac{e_i}{\sqrt{\MSE(1-h_i)}}\sim t_{n-k-1}$$
+    We define the \emph{externally studentized residuals} as: $$dr_i=\frac{e_i}{\sqrt{\MSE_{(i)}(1-h_i)}}\sim t_{n-k}$$ where $\displaystyle\MSE_{(i)}=\frac{1}{n-k}\sum_{\substack{j=1\\j\ne i}}^n{(y_j-\hat{y}_j)}^2$.
+  \end{definition}
+  \begin{definition}
+    Consider the simple model of \cref{LM_simple}. There are two types of atypical data: the \emph{high-leverage points} and the \emph{outliars}.
+    To detect them, we will say the the data $i$ is a \emph{high-leverage point} if: $$h_{ii}\geq 3\overline{h}=3\frac{k+1}{n}$$
+    We will say that the data $j$ such that $\abs{dr_j}=\max{\abs{dr_i}:i=1,\ldots,n}$ is an outliars if $$2n\gamma\geq \alpha=0.05$$ where $\gamma=1-\Prob(t_{n-k}>\abs{dr_j})$.
+  \end{definition}
+  \begin{definition}
+    Consider the simple model of \cref{LM_simple}. We will say that the influence of the $i$-th point on $\hat\beta_j$ is significative if $$\abs{\mathrm{DFBETAS}_{j(i)}}:=\frac{\hat\beta_j-\hat\beta_{j(i)}}{\sqrt{\MSE_{(i)}b_jj}}\geq \frac{2}{\sqrt{n}}$$ where $\hat\beta_{j(i)}$ and $\MSE_{(i)}$ are the estimator of $\hat\beta_j$ and $\MSE$ in a model without the $i$-th point and $b_ii$ is the $i$-th element on the diagonal of ${(\transpose{\vf{X}}\vf{X})}^{-1}$.
+  \end{definition}
+  \begin{definition}
+    Consider the simple model of \cref{LM_simple}. We will say that the influence of the $i$-th point on the prediction is significative if $$\abs{\mathrm{DFFITS}_{j(i)}}:=\frac{\hat{y}_j-\hat{y}_{i(i)}}{\sqrt{\MSE_{(i)}h_ii}}\geq 2\sqrt{\frac{p}{n}}$$ where $\hat{y}_{i(i)}$ is the prediction $\hat{y}_{i}$ in a model without the $i$-th point.
+  \end{definition}
+  \begin{definition}
+    Consider the simple model of \cref{LM_simple}. We will say that the $i$-th point has a global influence the influence on the model if the \emph{Cook's distance} $$D_i=\frac{\sum_{j=1}^n{(\hat{y}_j-\hat{y}_{j(i)})}^2}{(k+1)\MSE}=\frac{{r_i}^2}{k+1}\frac{h_{ii}}{1-h_{ii}}$$ satisfy: $$D_i\geq 1$$
+  \end{definition}
+  \subsubsection{Multicollinearity}
+  \begin{definition}
+    Consider the simple model of \cref{LM_multiple}. We will have \emph{multicollinearity} in our data if $\exists \vf{c}\in\RR^{k+1}$ such that $\vf{Xc}\simeq \vf{0}$. Thus, $\transpose{\vf{X}}\vf{X}$ will be approximately singular. In particular, since $\vf\Sigma_{\hat{\vf\beta}}=\sigma^2{\left(\transpose{\vf{X}}\vf{X}\right)}^{-1}$, we will notice a large variance on the approximations.
+  \end{definition}
+  \begin{proposition}
+    Consider the simple model of \cref{LM_multiple} with a notabl
   \end{proposition}
   \subsection{Generalized linear models}
   \subsubsection{Box-Cox transformation}

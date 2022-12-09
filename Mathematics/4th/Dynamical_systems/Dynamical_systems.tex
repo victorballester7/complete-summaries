@@ -570,7 +570,8 @@
   \end{corollary}
   \begin{theorem}[Poicaré's method]
     Consider the system of \cref{DS_eqhopf} with $\mu=0$. Then, there exists a function $H(x,y)$\footnote{This $H$ will be either a first integral of the system or a Lyapunov function. In the first case, we obtain a center for the system; in the second one, a focus.} of the form $$H(x,y)=x^2+y^2+H_3(x,y)+H_4(x,y)+\cdots$$
-    where each $H_j(x,y)$ is an homogeneous polynomial of degree $j$, such that: $$H'=\sum_{k=1}^\infty \lyapunov{k}{(x^2+y^2)}^{k}\footnote{Note that finding such a function $H$ is computationally more efficient that finding the values of $v_{2n+1}(2\pi)$ of Lyapunov's method.}$$
+    where each $H_j(x,y)$ is an homogeneous polynomial of degree $j$, such that: $$H'=\sum_{k=1}^\infty \poincare{k}{(x^2+y^2)}^{k}\footnote{Note that finding such a function $H$ is computationally more efficient that finding the values of $v_{2n+1}(2\pi)$ of Lyapunov's method.}$$
+    Note that due to the given stability of the problem, if $k = k_0$ is the index of the first non-zero Lyapunov coefficient, we must have $\lyapunov{k} = a_k\poincare{k}$, with $a_k>0$.
   \end{theorem}
   \subsection{Global dynamics in continuous systems}
   \subsubsection{Bifurcation of periodic orbits}
@@ -676,6 +677,13 @@
     \end{equation*}
     Let $\vf\gamma_h=\{H(x,y)=h\in\RR\}$ and consider the function: $$M(h)=\int_{\vf\gamma_h}Q\dd{x}-P\dd{y}$$ If $M$ has a simple zero at $h=h^*$, then there exists a cycle limit $\vf\Gamma_\varepsilon$ for $\varepsilon\simeq 0$ such that $\displaystyle\lim_{\varepsilon\to 0}\vf\Gamma_\varepsilon=\vf\gamma_{h^*}$.
   \end{theorem}
+  \begin{proposition}
+    Consider a system with a heteroclinic cycle $\Gamma$ and such that each of the $n$ equilibrium points that are in $\Gamma$ are linear saddles with eigenvalues $\lambda_i$ and $\mu_i$. Then:
+    \begin{enumerate}
+      \item If $\displaystyle\prod_{i=1}^n\frac{\mu_i}{\lambda_i}<1$, then $\Gamma$ is unstable.
+      \item If $\displaystyle\prod_{i=1}^n\frac{\mu_i}{\lambda_i}>1$, then $\Gamma$ is stable.
+    \end{enumerate}
+  \end{proposition}
   \subsubsection{Liénard system}
   \begin{definition}
     Let $f,g:\RR\rightarrow\RR$ be functions of class $\mathcal{C}^1$. A \emph{Liénard system} is a system of the form:
@@ -713,6 +721,7 @@
   \begin{corollary}
     For $\mu>0$, Van der Pol oscillator has a unique cycle limit and it is stable.
   \end{corollary}
+  \subsubsection{Dynamics on \texorpdfstring{$\RR^3$}{R3}}
   % \subsection{Global dynamics in discrete systems}
 \end{multicols}
 \end{document}

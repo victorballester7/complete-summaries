@@ -782,5 +782,106 @@
     Then, $T$ can be prolongated into a bounded operator such that: $$\norm{T}\leq \liminf_{n\to\infty}\norm{T_n}$$
   \end{corollary}
   \subsection{Hilbert spaces}
+  \subsubsection{Inner products}
+  \begin{definition}
+    Let $E$, $F$ be vector spaces over $\KK=\RR,\CC$ and $u:E\rightarrow F$ be a function. We say that $u$ is \emph{semilinear} if $\forall x,y\in E$ and $\forall\lambda\in \KK$ we have:
+    \begin{enumerate}
+      \item $u(x+y)=u(x)+u(y)$
+      \item $u(\lambda x)=\overline{\lambda}u(x)$
+    \end{enumerate}
+  \end{definition}
+  \begin{definition}
+    Let $E$ be a vector space over $\KK=\RR,\CC$. An \emph{inner product} $\dotp{\cdot}{\cdot}: E\times E\rightarrow\KK$ is a function such that $\forall x,y\in E$ we have:
+    \begin{enumerate}
+      \item $\dotp{\cdot}{y}$ is linear and $\dotp{x}{\cdot}$ is semilinear.
+      \item $\dotp{x}{y}=\overline{\dotp{y}{x}}$
+      \item $\dotp{x}{x}>0 \iff x\ne 0$
+    \end{enumerate}
+    We denote the norm associated with this inner product as $\norm{x}:=\sqrt{\dotp{x}{x}}$.
+  \end{definition}
+  \begin{definition}
+    A \emph{pre-Hilbert space} $(H,\dotp{\cdot}{\cdot}_H)$ is a vector space $H$ over $\KK=\RR,\CC$ together with an inner product $\dotp{\cdot}{\cdot}_H$\footnote{In order to simplify the notation, if the context is clear, we will denote the inner product of $H$ simply as $\dotp{\cdot}{\cdot}$.}.
+  \end{definition}
+  \begin{proposition}
+    Let $(H,\dotp{\cdot}{\cdot})$ be a pre-Hilbert space and $x,y\in H$. Then:
+    \begin{enumerate}
+      \item $\displaystyle \abs{\dotp{x}{y}}\leq \norm{x}\norm{y}$ (\emph{Cauchy-Schwarz inequality})
+      \item $\norm{x+y}\leq \norm{x} + \norm{y}$ (\emph{Minkowski inequality})
+    \end{enumerate}
+  \end{proposition}
+  \begin{lemma}[Polarization identity]
+    Let $(H,\dotp{\cdot}{\cdot})$ be a pre-Hilbert space and $x,y\in H$. Then if $\KK=\CC$ we have:
+    $$\dotp{x}{y}=\frac{{\norm{x+y}}^2-{\norm{x-y}}^2+\ii{\norm{x+\ii y}}^2-\ii{\norm{x-\ii y}}^2}{4}$$
+    If $\KK=\RR$ we have:
+    $$\dotp{x}{y}=\frac{1}{4}\left({\norm{x+y}}^2-{\norm{x-y}}^2\right)$$
+  \end{lemma}
+  \begin{proposition}
+    Let $(H,\dotp{\cdot}{\cdot})$ be a pre-Hilbert space. Them:
+    \begin{itemize}
+      \item The inner product is a continuous function.
+      \item The map $$\function{}{H}{H^*}{x}{\dotp{\cdot}{x}}$$ is semilinear, injective and isometric.
+    \end{itemize}
+  \end{proposition}
+  \begin{definition}
+    Let $(H,\dotp{\cdot}{\cdot})$ be a pre-Hilbert space and $x,y\in H$. We say that $x$ and $y$ are \emph{orthogonal} if $\dotp{x}{y}=0$. Moreover we define the \emph{orthogonal complement} of a subspace $A\subseteq H$ as: $$A^\perp:=\{x\in H:\dotp{x}{a}=0\ \forall a\in A\}$$
+  \end{definition}
+  \begin{lemma}
+    Let $(H,\dotp{\cdot}{\cdot})$ be a pre-Hilbert space and $A\subseteq H$ be a subspace. Then: $$A^\perp=\bigcap_{a\in A}\ker\dotp{\cdot}{a}$$
+    Hence, $A^\perp$ is a closed subspace of $H$.
+  \end{lemma}
+  \begin{proposition}[Pythagorean theorem]
+    Let $(H,\dotp{\cdot}{\cdot})$ be a pre-Hilbert space and $x_1,\ldots, x_n\in H$ be pairwise orthogonal elements of $H$. Then: $${\norm{x_1}}^2+\cdots + {\norm{x_n}}^2={\norm{x_1+\cdots+x_n}}^2$$
+  \end{proposition}
+  \begin{lemma}[Parallelogram law]
+    Let $(H,\dotp{\cdot}{\cdot})$ be a pre-Hilbert space and $x,y\in H$. Then: $$\norm{x+y}^2+{\norm{x-y}}^2=2\norm{x}^2+2{\norm{y}}^2$$
+  \end{lemma}
+  \begin{definition}[Hilbert space]
+    A \emph{Hilbert space} is a complete pre-Hilbert space.
+  \end{definition}
+  \begin{proposition}
+    Let $X\subseteq \RR$ and $A=\NN,\ZZ,\{1,\ldots,m\}$. Then:
+    \begin{enumerate}
+      \item $\RR^n$ and $\CC^n$ are Hilbert spaces with the inner product: $$\dotp{(x_1,\ldots,x_n)}{(y_1,\ldots,y_n)}=\sum_{i= 1}^nx_i\overline{y_i}$$
+      \item The $L^2(X)$ space with the inner product $$\dotp{f}{g}_2=\int_Xf(x)\overline{g(x)}\dd{x}$$ is a Hilbert space.
+      \item The $\ell^2(A)$ space with the inner product $$\dotp{(x_1,x_2,\ldots)}{(y_1,y_2,\ldots)}=\sum_{a\in A}^nx_a\overline{y_a}$$ is a Hilbert space.
+    \end{enumerate}
+    The $L^2(X)$ space with the inner product $$\dotp{f}{g}_2=\int_Xf(x)\overline{g(x)}\dd{x}$$ is a Hilbert space.
+  \end{proposition}
+  \subsubsection{Projection theorem}
+  \begin{definition}
+    Let $X$ be a metric space and $A\subseteq X$ be a subset. We say that $y\in A$ is a \emph{minimizer} of $x$ in $A$ if $d(x, A)=\norm{x-y}$.
+  \end{definition}
+  \begin{proposition}
+    Let $(H,\dotp{\cdot}{\cdot})$ be a Hilbert space and $C\subseteq H$ be a convex subset. Then, each $x\in H$ has at most one minimizer in $C$.
+  \end{proposition}
+  \begin{theorem}
+    Let $(H,\dotp{\cdot}{\cdot})$ be a Hilbert space and $C\subseteq H$ be a nonempty convex subset. Then, $\forall x\in H$, there exists a unique minimizer of $x$ in $C$, which is denoted by $P_Cx\in C$.
+  \end{theorem}
+  \begin{theorem}[Projection theorem]
+    Let $(H,\dotp{\cdot}{\cdot})$ be a Hilbert space and $F\subseteq H$ be a closed subspace. Then:
+    \begin{enumerate}
+      \item $H=F\oplus F^\perp$ and $\forall x\in H$, we can write $x=P_Fx+P_{F^\perp}x$.
+      \item If $x\in H$ and $y\in F$, then $y=P_Fx\iff x-y\in F^\perp$.
+    \end{enumerate}
+  \end{theorem}
+  \begin{corollary}
+    Let $(H,\dotp{\cdot}{\cdot})$ be a Hilbert space and $F\subseteq H$ be a closed subspace. The funcion $P_F:H\rightarrow H$, called \emph{orthogonal projection on $F$}, satisfy the following properties:
+    \begin{enumerate}
+      \item ${P_F}^2 = P_F$
+      \item $\dotp{P_Fx_1}{x_2}=\dotp{x_1}{P_Fx_2}$ $\forall x_1, x_2\in H$
+      \item $P_F$ is linear and $\norm{P_Fx}\leq \norm{x}$ and the equality holds if and only if $x\in F$.
+      \item If $F\ne\{0\}$, $\norm{P_F}=1$
+      \item $\im P_F=F=\{y\in H:P_Fy=y\}$
+      \item $\ker P_F=F^\perp$
+    \end{enumerate}
+  \end{corollary}
+  \begin{proposition}
+    Let $(H,\dotp{\cdot}{\cdot})$ be a Hilbert space, $F\subseteq H$ be a closed subspace and $x\notin F$. Then:
+    \begin{align*}
+      \max\{\abs{\dotp{x}{u}}:u\in F^\perp, \norm{u}\leq 1\} & =d(x, F)                                            \\
+                                                             & =\dotp{x}{\frac{P_{F^\perp}x}{\norm{P_{F^\perp}x}}}
+    \end{align*}
+  \end{proposition}
+  \subsubsection{Duality}
 \end{multicols}
 \end{document}
