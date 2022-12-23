@@ -13,7 +13,7 @@
 \usepackage{graphicx} % for options like \definecolor{}{}{}, \textcolor{}{},...
 \usepackage[usenames,x11names]{xcolor} % to customize RGB colors.
 \usepackage{colortbl} % for colors in tables.
-
+\usepackage{tcolorbox} % for coloring boxes.
 \setlength{\parindent}{0pt} % Indentation disabled.
 
 %%%%% tikz images %%%%%%
@@ -52,6 +52,10 @@
     \newcommand{\sta}{DarkGoldenrod2} % statistics
     \newcommand{\phy}{SlateBlue2}     % physics
   %%%%%%%%%%%%%%%%%%%%%%%
+  
+  %% Color box for important theorems
+  \def\sep{1mm}
+  \newtcolorbox{important}{colback=\col!5, colframe=\col,left=\sep, right=\sep, top=\sep, bottom=\sep} 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%% Enumeration-commands %%%%%%%
@@ -180,6 +184,7 @@
       \DeclareMathOperator{\Fr}{\partial} % boundary set
       \newcommand{\topo}{\tau} % symbol for the topology. Feasible options are: \tau, \mathcal{T}...
       \newcommand{\conn}{\mathrel{\#}} % connected sum. \mathrel gives the space of a relation (like +,-,...) while \mathbin gives the space of a binary operator (like =).
+      \renewcommand{\S}{S} % S of the S ^ n (n-th dimensional sphere)
         
 
     %%% GALOIS THEORY
@@ -206,8 +211,8 @@
       \DeclareMathOperator{\MSE}{MSE} % Mean Square Error
       \DeclareMathOperator{\Mod}{Mod} % mode
       \DeclareMathOperator{\Med}{Med} % median
-      \DeclareMathOperator*{\argmax}{arg\,max}
-      \DeclareMathOperator*{\argmin}{arg\,min}
+      \DeclareMathOperator*{\argmax}{arg\,max} % argument where the maximum is attained
+      \DeclareMathOperator*{\argmin}{arg\,min} % argument where the minimum is attained
 
 
     %%%% COMPLEX ANALYSIS
@@ -266,12 +271,16 @@
       \DeclareMathOperator{\SSLOF}{SSLOF}
       \DeclareMathOperator{\MSLOF}{MSLOF}
       \DeclareMathOperator{\logit}{logit} % logit
+      \DeclareMathOperator{\VIF}{VIF} % Variance inflation factor
       
+
     %%% DYNAMICAL SYSTEMS
       \renewcommand{\o}[1]{\mathrm{o}\left(#1\right)} % little O notation
       \renewcommand{\O}[1]{\mathrm{O}\left(#1\right)} % big O notation
       \newcommand{\lyapunov}[1]{{\mathrm{L}}_{#1}} % Lyapunov constants
       \newcommand{\poincare}[1]{{\mathrm{P}}_{#1}} % Poincaré constants
+      \newcommand{\shark}{\mathbin{\geq_{\mathrm{s}}}} % Sharkovskii order. \mathrel gives the space of a relation (like +,-,...) while \mathbin gives the space of a binary operator (like =). 
+      \DeclareMathOperator{\Per}{Per} % Periods of a function
 
     %%% vectors and matrices
       \newcommand{\vf}[1]{\boldsymbol{\mathrm{#1}}} % math style for vectors and matrices and vector-values functions (previously it was \*vb{#1} but this does not apply to greek letters)
@@ -317,11 +326,15 @@
   \newtheorem{corollary}[theorem]{Corollary}
   \newtheorem{axiom}[theorem]{Axiom}
   \newtheorem{definition}[theorem]{Definition}
-  \newtheorem{method}[theorem]{Method}
   \newtheorem{law}[theorem]{Law}
   \newtheorem{principle}[theorem]{Principle}
   
-  \renewenvironment{proof}{{\textcolor{\col}{\textit{Sketch of the proof.}}}}{\hfill\textcolor{\col}{\openbox}} 
+  \renewenvironment{proof}{{\textcolor{\col}{\textit{\proofname.}}}}{\hfill\textcolor{\col}{\openbox}} 
+  \newcommand\explanationname{Sketch of the proof} % could be made language-dependent
+\newenvironment{sproof}%
+   {\renewcommand\proofname\explanationname%
+    \begin{proof}}%
+   {\end{proof}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%% Colored boxes %%%%%%%%%%%

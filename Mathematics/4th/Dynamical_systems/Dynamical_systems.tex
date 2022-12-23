@@ -153,7 +153,7 @@
   \begin{proposition}
     Let $\vf{f}:\RR^m\rightarrow\RR^m$ be an invertible function and consider the discrete map of \cref{DS_discretemap}. Then, $\Pi(\vf{x},n):=\vf{f}^n(\vf{x})$ defines a discrete dynamical system.
   \end{proposition}
-  \begin{method}[Characteristic equation]
+  \begin{proposition}[Characteristic equation]
     Consider the following \emph{linear discrete map}:
     \begin{equation*}
       x_{n+m}+a_{m-1}x_{n+m-1} + \cdots + a_1 x_{n+1} + a_0 x_n = 0
@@ -162,13 +162,13 @@
     $$p(y):=y^m + a_{m-1}y^{m-1} + \cdots + a_1 y + a_0 = 0$$
     Suppose $p$ has $r$ distinct real roots and $2(s-r)$ distinct complex roots.
     $$\lambda_1,\ldots,\lambda_r,\lambda_{r+1},\overline{\lambda_{r+1}},\ldots,\lambda_{s},\overline{\lambda_s}$$
-    Here, $\lambda_i\in\RR$ $\forall i=1,\ldots,r$ and $\lambda_{i}=\alpha_i+\ii\beta_i\in\CC$ $\forall i=r+1,\ldots,s$. Assume, each of these roots have multiplicity $k_i\in\NN$. Then, the general solution to that discret map is:
+    Here, $\lambda_i\in\RR$ $\forall i=1,\ldots,r$ and $\lambda_{i}=\alpha_i+\ii\beta_i\in\CC$ $\forall i=r+1,\ldots,s$. Assume, each of these roots have multiplicity $k_i\in\NN$. Then, the general solution to that discrete map is:
     \begin{multline*}
       \vf{x}_n=\sum_{i=1}^r\left(c_{i,0}+c_{i,1}n+\cdots+c_{i,k_i-1}n^{k_i-1}\right){\lambda_i}^n+\\
       +\sum_{i=r+1}^s\sum_{j=0}^{k_i-1}n^{j}{\rho_i}^n\left(c_{i,j,1}\cos(\theta_i n)+c_{i,j,2}\sin(\theta_i n)\right)
     \end{multline*}
     where $c_{i,j,k}\in\RR$ are constants and $\lambda_i=\rho_i\exp{\ii\theta_i}$.
-  \end{method}
+  \end{proposition}
   \begin{proposition}
     Consider the discrete map $$\vf{x}_{n+1}=\vf{f}(\vf{x}_n)$$
     and let $\vf{p}$ be a fixed point of $\vf{f}$.
@@ -480,7 +480,7 @@
       \end{aligned}
       \right.
     $$
-    We are interested in the local behavior of the origin so we should first think this problem in the cylinder $(r,\theta)\in[0,\infty]\times[0,2\pi)$. The equilibrium points of that system at $r=0$ will be the isolated zeros of $g_3(\theta)$. Let $Z(g_3)$ be the set of such zeros. Now we want to study the behavior on each of these points. To do so, we can apply either Hartman's theorem, \cref{DS_thmA} or \cref{DS_thmB}. If none of these are applicable of some $\theta^*\in Z(g_3)$, we should repeat the procedure by doing another polar transformation centered at $\theta^*$\footnote{See \cref{DS_blowcarte} for a bettern solution to this problem.}. We can then represent all these local behavior by \emph{blowing-up} the origin to $S^1$ and once done, we should \emph{blow-down} until contract $S^1$ into the origin (See the example \cref{DS_blowup} for a better understanding).
+    We are interested in the local behavior of the origin so we should first think this problem in the cylinder $(r,\theta)\in[0,\infty]\times[0,2\pi)$. The equilibrium points of that system at $r=0$ will be the isolated zeros of $g_3(\theta)$. Let $Z(g_3)$ be the set of such zeros. Now we want to study the behavior on each of these points. To do so, we can apply either Hartman's theorem, \cref{DS_thmA} or \cref{DS_thmB}. If none of these are applicable of some $\theta^*\in Z(g_3)$, we should repeat the procedure by doing another polar transformation centered at $\theta^*$\footnote{See \cref{DS_blowcarte} for a bettern solution to this problem.}. We can then represent all these local behavior by \emph{blowing-up} the origin to $\S^1$ and once done, we should \emph{blow-down} until contract $\S^1$ into the origin (See the example \cref{DS_blowup} for a better understanding).
   \end{theorem}
   \begin{figure}[H]
     \centering
@@ -580,12 +580,12 @@
     \begin{equation}\label{DS_eqhopf}
       \left\{
       \begin{aligned}
-        x' & =-y + p_2(x,y) \\
-        y' & =x+ q_2(x,y)
+        x' & =\alpha x-y + p_2(x,y,\vf{\mu}) \\
+        y' & =x+ \alpha y +q_2(x,y,\vf{\mu})
       \end{aligned}
       \right.
     \end{equation}
-    where $p_2$ and $q_2$ are homogeneous polynomials of degree 2. Then, in a neighbourhood of the origin there is at most 3 limit cycles.
+    where $p_2$ and $q_2$ are homogeneous polynomials of degree 2. Then, in a neighbourhood of the origin and for $(\alpha,\vf\mu)\simeq 0$ there are at most 3 limit cycles that born from the origin.
   \end{proposition}
   \begin{theorem}[Bendixson's theorem]
     Let $U\subseteq \RR^2$ be an open set and $\vf{f}:U\rightarrow\RR^2$ be a vector field of class $\mathcal{C}^1$ such that $\div \vf{f}$ has constant sign in a simply connected region $R$ and is not identically zero on any subregion of $R$ with positive area. Then, the system $\vf{x}'=\vf{f}(\vf{x})$ does not have periodic orbits that lie entirely on $R$.
@@ -677,13 +677,27 @@
     \end{equation*}
     Let $\vf\gamma_h=\{H(x,y)=h\in\RR\}$ and consider the function: $$M(h)=\int_{\vf\gamma_h}Q\dd{x}-P\dd{y}$$ If $M$ has a simple zero at $h=h^*$, then there exists a cycle limit $\vf\Gamma_\varepsilon$ for $\varepsilon\simeq 0$ such that $\displaystyle\lim_{\varepsilon\to 0}\vf\Gamma_\varepsilon=\vf\gamma_{h^*}$.
   \end{theorem}
+  \subsubsection{Graphics}
+  \begin{definition}
+    A \emph{graphic} in a continuous dynamical system is the collection of a set of equilibrium points joined together with orbits which have them as $\alpha$- and $\omega$-limits.
+  \end{definition}
+  \begin{definition}
+    We say that a graph in the system $\vf{x}'=\vf{f}(\vf{x})$ is \emph{non-degenerated} if all the equilibrium points on it are \emph{linear saddles}, that is, saddles $p\in\RR^n$ such that $\det\vf{Df}(p)\ne 0$.
+  \end{definition}
   \begin{proposition}
-    Consider a system with a heteroclinic cycle $\Gamma$ and such that each of the $n$ equilibrium points that are in $\Gamma$ are linear saddles with eigenvalues $\lambda_i$ and $\mu_i$. Then:
+    Consider a system with a non-degenerated graph $\Gamma$ and such that the differential at each of the $n$ saddles has eigenvalues $\lambda_i$ and $\mu_i$. Then:
     \begin{enumerate}
-      \item If $\displaystyle\prod_{i=1}^n\frac{\mu_i}{\lambda_i}<1$, then $\Gamma$ is unstable.
-      \item If $\displaystyle\prod_{i=1}^n\frac{\mu_i}{\lambda_i}>1$, then $\Gamma$ is stable.
+      \item If $\displaystyle\prod_{i=1}^n\abs{\frac{\mu_i}{\lambda_i}}<1$, then $\Gamma$ is unstable.
+      \item If $\displaystyle\prod_{i=1}^n\abs{\frac{\mu_i}{\lambda_i}}>1$, then $\Gamma$ is stable.
     \end{enumerate}
   \end{proposition}
+  \begin{corollary}
+    Suppose that the system $\vf{x}'=\vf{f}(\vf{x})$ has a homoclinic orbit $\vf\gamma$ which has $p$ as $\alpha$- and $\omega$-limit. Then:
+    \begin{enumerate}
+      \item If $\div \vf{f}(p)>0$, then $\vf\gamma$ is unstable.
+      \item If $\div \vf{f}(p)<0$, then $\vf\gamma$ is stable.
+    \end{enumerate}
+  \end{corollary}
   \subsubsection{Liénard system}
   \begin{definition}
     Let $f,g:\RR\rightarrow\RR$ be functions of class $\mathcal{C}^1$. A \emph{Liénard system} is a system of the form:
@@ -722,6 +736,192 @@
     For $\mu>0$, Van der Pol oscillator has a unique cycle limit and it is stable.
   \end{corollary}
   \subsubsection{Dynamics on \texorpdfstring{$\RR^3$}{R3}}
-  % \subsection{Global dynamics in discrete systems}
+  \begin{proposition}
+    Let $\vf{f}:\RR^3\rightarrow\RR^3$ be a vector field and $\vf\gamma(t)$ be a periodic orbit of period $T$ of it. Consider a transversal section $\Sigma\subset \RR^3$ that cuts $\vf{\gamma}$ and let $\vf\Pi:\Sigma\rightarrow\Sigma$ be the Poincaré map on it. If $\vf{M}(t)$ is the solution to the variational equation
+    $$
+      \begin{cases}
+        \vf{M}'      =\vf{D}\vf{f}(\vf{\gamma}(t))\vf{M} \\
+        \vf{M}(0)  =\vf{I}_n
+      \end{cases}
+    $$
+    then, $\sigma(\vf{M}(T))=\sigma(\vf{D\Pi})\cup\{1\}$. Hence, the stability of the orbit can be studied from $\vf{M}(T)$.
+  \end{proposition}
+  \subsubsection{Lorenz System}
+  \begin{definition}
+    The \emph{Lorenz system} is defined as:
+    $$
+      \left\{
+      \begin{aligned}
+        x' & =\sigma(y-x)   \\
+        y' & = x(\rho-z) -y \\
+        z' & = xy -\beta z
+      \end{aligned}
+      \right.
+    $$
+  \end{definition}
+  \subsection{Global dynamics in discrete systems}
+  \begin{definition}
+    Let $\vf{f}:\RR^m\rightarrow\RR^m$ be a function and consider the discrete map $\vf{x}_{n+1}=\vf{f}(\vf{x}_n)$. A \emph{periodic point} $\vf{y}$ of period $m$ is a solution to the equation $\vf{f}^m(\vf{x})=\vf{x}$. If moreover it satisfies that $\vf{f}^k(\vf{y})\ne\vf{y}$ $\forall k=1,\ldots,m-1$, then $m$ is called \emph{prime period} of $\vf{y}$. We denote the set of periodic points of period (not necessarily prime) $n$ by $\Per_n(f)$. The set $\Per(f)\subseteq\NN$ as follows:
+    \begin{align*}
+      m\in\Per(f)\iff & \exists\vf{y}\in\RR^m\text{ such that $\vf{y}$ is a periodic} \\
+                      & \text{point of prime period $m$ under $\vf{f}$}
+    \end{align*}
+  \end{definition}
+  \subsubsection{Logistic map}
+  \begin{definition}
+    The \emph{logistic map} is the one-dimensional iteration
+    \begin{equation}\label{DS_logistic}
+      x_{n+1}=\mu x_n(1-x_n)=:f_\mu(x_n)
+    \end{equation}
+    where $\mu\in\RR^*$.
+  \end{definition}
+  \begin{proposition}
+    The logistic map of \cref{DS_logistic} satisfies that $f_\mu(0)=f_\mu(1)=0$ and $f_\mu(p_\mu)=p_\mu$, where $p_\mu=1-\frac{1}{\mu}$. Moreover for $\mu > 1$ we have the following properties:
+    \begin{itemize}
+      \item $0<p_\mu<1$
+      \item If $x>1$ or $x<0$, then $\displaystyle\lim_{n\to\infty} \omega(x)=-\infty$.
+    \end{itemize}
+  \end{proposition}
+  \begin{proposition}
+    The logistic map of \cref{DS_logistic} has a transcritical bifurcation at $\mu = 1$.
+  \end{proposition}
+  \begin{proposition}
+    Consider the logistic map of \cref{DS_logistic} with $\mu\in(1,3)$. Then:
+    \begin{itemize}
+      \item $p_\mu$ is attracting and 0 i repelling.
+      \item If $0<x<1$, then $\displaystyle\lim_{n\to\infty} \omega(x)=p_\mu$.
+    \end{itemize}
+  \end{proposition}
+  \begin{definition}[Period-doubling bifurcation]
+    A \emph{period-doubling bifurcation} occurs when a slight change in a system's parameters causes a new periodic trajectory to emerge from an existing periodic trajectory—the new one having double the period of the original. A \emph{period-halving bifurcation} occurs when a system switches to a new behavior with half the period of the original system.
+  \end{definition}
+  \begin{definition}
+    A \emph{period-doubling cascade} is an infinite sequence of period-doubling bifurcations.
+  \end{definition}
+  \begin{theorem}
+    The logistic map of \cref{DS_logistic} has a period-doubling cascade starting at $\mu = 3$.
+  \end{theorem}
+  \begin{definition}[Sharkovskii's order]
+    Consider the following order relation $\shark$ on $\NN$:
+    \begin{center}
+      \def\arraystretch{1}
+      \begin{tabular}{c@{ $\shark$ }c@{ $\shark$ }c@{ $\shark$ }c@{ $\shark$ }c@{ $\shark$ }c}
+        \multicolumn{1}{c}{} & $3$                                   & $5$                                  & $\cdots$             & $(2n+1)$                             & $\cdots$             \\
+        $\cdots$             & $2\cdot 3$                            & $2\cdot5$                            & $\cdots$             & $2\cdot(2n+1)$                       & $\cdots$             \\
+        $\cdots$             & $2^2\cdot 3$                          & $2^2\cdot5$                          & $\cdots$             & $2^2\cdot(2n+1)$                     & $\cdots$             \\
+        \multicolumn{1}{c}{} & \multicolumn{1}{c}{$\vdots\quad\ \ $} & \multicolumn{1}{c}{$\vdots\qquad\!$} & \multicolumn{1}{c}{} & \multicolumn{1}{c}{$\vdots\qquad\!$} & \multicolumn{1}{c}{} \\
+        $\cdots$             & $2^k\cdot 3$                          & $2^k\cdot5$                          & $\cdots$             & $2^k\cdot(2n+1)$                     & $\cdots$             \\
+        $\cdots$             & $2^k$                                 & $\cdots$                             & $2^4$                & $2$                                  & $1$                  \\
+      \end{tabular}
+    \end{center}
+  \end{definition}
+  \begin{lemma}
+    $(\NN,\shark)$ is a totally ordered set.
+  \end{lemma}
+  \begin{proposition}[Expansive fixed point theorem]
+    Let $I\subseteq\RR$ be an interval and $f:I\rightarrow \RR$ be a continuous function such that $I\subseteq f(I)$. Then, $f$ has a fixed point.
+  \end{proposition}
+  \begin{proposition}
+    Let $f:\RR\rightarrow \RR$ be a continuous function ans suppose that there exists closed intervals $I_0,I_1,\ldots, I_{n-1}$ such that:
+    $$f(I_0)\subseteq I_1,f(I_1)\subseteq I_2,\ldots, f(I_{n-2})\subseteq I_{n-1}, f(I_{n-1})\subseteq I_0$$
+    Then, $\exists x\in I_0$ such that $f^n(x)=x$ and $f^j(x)\in I_j$ $\forall j\in\NN$.
+  \end{proposition}
+  \begin{theorem}[Sharkovskii's theorem]\hfill
+    \begin{enumerate}
+      \item Let $I\subseteq\RR$ be an interval and $f:I\rightarrow I$ be a continuous function with only one maximum. If $n\in\Per(f)$, then $\forall m\shark n$ we have $m\in\Per(f)$.
+      \item Given $n\in\NN$, there exists a continuous function $f:I\rightarrow I$ defined on an interval $I\subseteq\RR$ such that $n\in\Per(f)$ and $\forall m\shark n$, $m\notin\Per(f)$.
+    \end{enumerate}
+  \end{theorem}
+  \begin{corollary}[Period three theorem]
+    Let $I\subseteq\RR$ be an interval and $f:I\rightarrow I$ be a continuous function. If $3\in \Per(f)$, then $\Per(f)=\NN$.
+  \end{corollary}
+  \begin{definition}
+    Consider the logistic map of \cref{DS_logistic} with $\mu >4$ and define the following set: $$A_0:=\{x\in [0,1]: f_\mu(x)\notin [0,1]\}$$ Note that $A_0$ breaks the interval $[0,1]$ in itself and two other intervals: one on the right of it, $I_0$, and one on its left, $I_1$. Thus, $[0,1]=I_0\cup A_0\cup I_1$.
+  \end{definition}
+  \begin{proposition}
+    Consider the logistic map of \cref{DS_logistic} with $\mu >4$ and let $(s_0,s_1,s_2,\ldots)\in\{0,1\}$ be a sequence of zeros and ones. We define the following sets
+    \begin{multline*}
+      I_{s_0s_1\cdots s_n}:=\\:=\{x\in I: x\in I_{s_0}, f_\mu(x)\in I_{s_1},\ldots,{f_\mu}^n(x)\in I_{s_n}\}
+    \end{multline*}
+    Then, $\Lambda_\mu:=\bigcap_{n=0}^\infty I_{s_0s_1\cdots s_n}$ is homeomorphic to the Cantor set.
+  \end{proposition}
+  \begin{proposition}
+    Consider the logistic map of \cref{DS_logistic} with $\mu >4$. Then, $\Lambda_\mu$ is invariant under $f_\mu$.
+  \end{proposition}
+  \subsubsection{Symbolic dynamics}
+  \begin{definition}
+    Consider the set $$\Sigma_2:=\{(s_0,s_1,s_2,\ldots):s_n\in\{0,1\}\ \forall n\in\NN\}$$ and define the following distance on $\Sigma_2$: $$d_2((s_0,s_1,s_2,\ldots),(t_0,t_1,t_2,\ldots))=\sum_{n=0}^\infty \frac{\abs{s_n-t_n}}{2^n}$$
+    In order to simplify the notation we will write from now on $s=(s_0,s_1,s_2,\ldots)$ and $t=(t_0,t_1,t_2,\ldots)$.
+  \end{definition}
+  \begin{lemma}
+    $(\Sigma_2,d_2)$ is a metric space.
+  \end{lemma}
+  \begin{proposition}[Proximity theorem]
+    Let $s, t\in\Sigma_2$. Then, $s_i=t_i$ for $i=0,\ldots,n$ if and only if $d_2(s,t)\leq \frac{1}{2^n}$.
+  \end{proposition}
+  \begin{definition}[Shift map]
+    The \emph{shift map} is defined as:
+    $$\function{\sigma}{\Sigma_2}{\Sigma_2}{(s_0,s_1,s_2,\ldots)}{(s_1,s_2,s_3,\ldots)}$$
+  \end{definition}
+  \begin{proposition}
+    The shift map is continuous.
+  \end{proposition}
+  \begin{proposition}
+    The triplet $(\Sigma_2, \ZZ_{\geq 0}, \sigma)$ is a discrete semidynamical system.
+  \end{proposition}
+  \begin{proposition}\hfill
+    \begin{enumerate}
+      \item $\abs{\Per_n(\sigma)}=2^n$
+      \item There exists a dense orbit for $\sigma$ in $\Sigma_2$.
+      \item The set of periodic orbits, that is $\bigcup_{n=1}^\infty \Per_n(\sigma)$, of $\sigma$ is dense in $\Sigma_2$.
+    \end{enumerate}
+  \end{proposition}
+  \begin{definition}
+    Consider the logistic map of \cref{DS_logistic}. We define the \emph{itinerary} of $x\in\Lambda_\mu$ as the function $S_\mu:\Lambda_\mu\rightarrow\Sigma_2$ defined by $S_\mu(x)=(s_n)$, where:
+    $$s_n=
+      \begin{cases}
+        0 & \text{if ${f_\mu}^n\in I_0$} \\
+        1 & \text{if ${f_\mu}^n\in I_1$}
+      \end{cases}
+    $$
+  \end{definition}
+  \begin{proposition}
+    For $\mu>2+\sqrt{5}$, the itinerary map is a homeomorphism.
+  \end{proposition}
+  \begin{theorem}
+    Consider the logistic map of \cref{DS_logistic}. Then, $S_\mu\circ f_\mu=\sigma\circ S_\mu$.
+  \end{theorem}
+  \begin{corollary}
+    Consider the logistic map of \cref{DS_logistic} for $\mu>2+\sqrt{5}$. Then:
+    \begin{enumerate}
+      \item $\abs{\Per_n(f_\mu)}=2^n$
+      \item There exists a dense orbit for $f_\mu$ in $\Lambda_\mu$.
+      \item The set of periodic orbits of $f_\mu$ is dense in $\Sigma_2$.
+    \end{enumerate}
+  \end{corollary}
+  \subsubsection{Introduction to chaos}
+  \begin{definition}
+    Let $f : I\rightarrow I$ be a function. The iteration $x_{n+1}=f(x_n)$ is \emph{topologically transitive} if for any pair of open subsets $U,V\subseteq I$, $\exists k\in\NN$ such that $f^k(U)\cap V\ne\varnothing$.
+  \end{definition}
+  \begin{definition}
+    Let $f : I\rightarrow I$ be a function. The iteration $x_{n+1}=f(x_n)$ has \emph{sensitive dependence on initial conditions} on $I$ if $\exists\delta >0$ such that for each $x\in I$ and any neighborhood $N$ of x, exists $y \in N$ and $n \geq  0$ such that $\abs{f^n(x)-f^n(y)} > \delta$.
+  \end{definition}
+  \begin{lemma}
+    Let $f : I\rightarrow I$ be a function such that the iteration $x_{n+1}=f(x_n)$ is topologically transitive. Then, it has a dense orbit.
+  \end{lemma}
+  \begin{definition}[Chaos]
+    Let $f : I\rightarrow I$ be a function. The iteration $x_{n+1}=f(x_n)$ is said to be \emph{chaotic} on $I$ if $f$ has the following properties:
+    \begin{enumerate}
+      \item Periodic points are dense in $I$.
+      \item $f$ is topologically transitive.
+      \item $f$ has sensitive dependence on initial conditions\footnote{Although this is the classical definition of chaos, it has been shown that the first two properties imply the third one.}.
+    \end{enumerate}
+  \end{definition}
+  \begin{theorem}
+    The logistic maps $x_{n+1}=\mu x_n(1-x_n)$ are chaotic on $\Lambda$ for $\mu>2+\sqrt{5}$.
+  \end{theorem}
+  \begin{theorem}
+    The logistic map $x_{n+1}=4x_n(1-x_n)$ is chaotic on $[0,1]$.
+  \end{theorem}
 \end{multicols}
 \end{document}

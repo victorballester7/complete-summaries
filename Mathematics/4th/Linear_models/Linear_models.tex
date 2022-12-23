@@ -170,7 +170,7 @@
   \subsubsection{Least-Squares estimation}
   \begin{proposition}[Least-Squares method]
     Consider the model $\vf{y}\sim N_n(\vf{X\beta},\sigma^2\vf{I}_n)$ of \cref{LM_multiple}. We want to minimize the value $${\norm{\vf{y}-\vf{X\beta}}}_2^2=\sum_{i=1}^n{\left(\beta_0+\beta_1x_{i1}+\cdots+\beta_kx_{ik}-y_i\right)}^2$$
-    The value $\hat{\vf\beta}=(\hat\beta_0,\ldots,\hat\beta_k)$ that minimizes the previous values is given by the solution of: $$\transpose{\vf{X}}\vf{X\hat\beta}=\transpose{\vf{X}}\vf{y}$$
+    The value $\vf{\hat\beta}=(\hat\beta_0,\ldots,\hat\beta_k)$ that minimizes the previous values is given by the solution of: $$\transpose{\vf{X}}\vf{X\hat\beta}=\transpose{\vf{X}}\vf{y}$$
     In particular, if $\transpose{\vf{X}}\vf{X}$ is invertible, we get the explicit solution $$\vf{\hat\beta}={\left(\transpose{\vf{X}}\vf{X}\right)}^{-1}\transpose{\vf{X}}\vf{y}$$
   \end{proposition}
   \begin{proposition}
@@ -210,7 +210,7 @@
   \end{proposition}
   \begin{proposition}
     Consider the model $\vf{y}\sim N_n(\vf{X\beta},\sigma^2\vf{I}_n)$ of \cref{LM_multiple}, then $\vf{\hat\beta}$, $s^2$ are unbiased estimator for $\vf\beta$ and $\sigma^2$, respectively, and: $$\vf\Sigma_{\vf{\hat\beta}}=\sigma^2{\left(\transpose{\vf{X}}\vf{X}\right)}^{-1}$$
-    Moreover, and unbiased estimator for $\vf\Sigma_{\vf{\hat\beta}}$ is: $$\vf\Sigma_{\vf{\hat\beta}}=s^2{\left(\transpose{\vf{X}}\vf{X}\right)}^{-1}$$
+    Moreover, and unbiased estimator for $\vf\Sigma_{\vf{\hat\beta}}$ is: $$\vf\Sigma_{\vf{\hat\beta}}=\MSE{\left(\transpose{\vf{X}}\vf{X}\right)}^{-1}$$
   \end{proposition}
   \begin{proposition}
     Let $\vf{A}\in\mathcal{M}_n(\RR)$ be symmetric and idempotent. Then, $\vf{A}$ is positive semi-definite. If moreover $\rank\vf{A} =r$, then $\vf{A}$ has $r$ eigenvalues equal to 1 and the rest are 0.
@@ -466,11 +466,63 @@
   \end{definition}
   \subsubsection{Multicollinearity}
   \begin{definition}
-    Consider the simple model of \cref{LM_multiple}. We will have \emph{multicollinearity} in our data if $\exists \vf{c}\in\RR^{k+1}$ such that $\vf{Xc}\simeq \vf{0}$. Thus, $\transpose{\vf{X}}\vf{X}$ will be approximately singular. In particular, since $\vf\Sigma_{\hat{\vf\beta}}=\sigma^2{\left(\transpose{\vf{X}}\vf{X}\right)}^{-1}$, we will notice a large variance on the approximations.
+    Consider the simple model of \cref{LM_multiple}. We will have \emph{multicollinearity} in our data if $\exists \vf{c}\in\RR^{k+1}$ such that $\vf{Xc}\simeq \vf{0}$. Thus, $\transpose{\vf{X}}\vf{X}$ will be approximately singular. In particular, since $\vf\Sigma_{\vf{\hat\beta}}=\sigma^2{\left(\transpose{\vf{X}}\vf{X}\right)}^{-1}$, we will notice a large variance on the approximations.
   \end{definition}
-  \begin{proposition}
-    Consider the simple model of \cref{LM_multiple} with a notabl
+  \begin{definition}
+    Consider the simple model of \cref{LM_multiple}. We define the \emph{variance inflation factor} (or \emph{VIF}) of the data $\vf{x}_j=\transpose{(x_{1j},\ldots,x_{n1})}$ as: $$\VIF(\vf{x}_j):=\frac{1}{1-{R_j}^2}$$ where ${R_j}$ is the coefficient of determination of the regression of $\vf{x}_j$ in terms of the data $\vf{x}_1,\ldots,\vf{x}_{j-1},\vf{x}_{j+1},\ldots,\vf{x}_k$.
+  \end{definition}
+  \begin{lemma}
+    Consider the simple model of \cref{LM_multiple}. Then: $$\Var(\hat\beta_j)=\frac{\sigma^2}{(n-1) {s_j}^2}\VIF(\vf{x}_j)$$ where ${s_j}^2:=\Var(\vf{x}_j)=\frac{1}{n-1}\sum_{i=1}^n{(x_{ij}-\overline{x}_j)}^2$.
+  \end{lemma}
+  \begin{definition}
+    Consider the simple model of \cref{LM_multiple}. We define the \emph{tolerance} of multicollinearity as the inverse of $\VIF$.
+  \end{definition}
+  \begin{definition}
+    Consider the simple model of \cref{LM_multiple}.  We impose that the data $\vf{x}_j$ is affected by multicollinearity if $\VIF(\vf{x}_j)\ge 5$. Or alternatively, if the tolerance if $\leq 0.2$. Thus, we will proceed to remove it unless it is significant for the model.
+  \end{definition}
+  \begin{theorem}
+    Let $\vf{A},\vf{B}\in\mathcal{M}_k(\RR)$ be symmetric matrices such that $\vf{A}$ is positive semi-definite. and $\vf{B}$ is positive definite. Let $Q(\vf{v})=\transpose{\vf{v}}\vf{Av}$, $\vf{v}\in\RR^k$. Then:
+    $$\lambda_1=\max\{Q(\vf{v}):\transpose{\vf{v}}\vf{Bv}=1\}\quad \vf{v}_1=\argmax\{Q(\vf{v}):\transpose{\vf{v}}\vf{Bv}=1\}$$
+    where $\vf{v}_1$ is the eigenvector of the largest eigenvalue $\lambda_1$ of $\vf{B}^{-1}\vf{A}$.
+  \end{theorem}
+  % \begin{definition}
+  %   Let $\vf{X}\in\RR^k$ be a random vector with covariance matrix $\vf\Sigma$. The \emph{components} of $\vf{X}$ are the elements of a new random vector $\vf{Y}=\transpose{\begin{pmatrix}
+  %     Y_1 & \cdots & Y_k\\
+  %   \end{pmatrix}} 
+  % \end{definition}$ such that:
+  % \begin{enumerate}
+  %   \item 
+  % \end{enumerate}
+  \subsubsection{Mallow's \texorpdfstring{$C_p$}{Cp} statistic}
+  \begin{definition}
+    Consider the model of \cref{LM_multiple} and let $p-1<k$. We would like to compare the original model with the model when the variables $\vf{x}_j$, $j=p,\ldots,k$, are removed. We define the following matrices:
+    \begin{align*}
+      \vf{X}_1 & =\begin{pmatrix}
+                    1      & x_{11} & \cdots & x_{1(p-1)} \\
+                    1      & x_{21} &        & x_{2(p-1)} \\
+                    \vdots &        & \ddots & \vdots     \\
+                    1      & x_{n1} & \cdots & x_{n(p-1)}
+                  \end{pmatrix} \\
+      \vf{X}_2 & =\begin{pmatrix}
+                    x_{1p} & \cdots & x_{1k} \\
+                    \vdots & \ddots & \vdots \\
+                    x_{np} & \cdots & x_{nk}
+                  \end{pmatrix}
+    \end{align*}
+    That is, $\vf{X}=(\vf{X}_1 \mid \vf{X}_2)$, expressed as a block matrix. Similarly we define $\vf\beta_1=\transpose{(\beta_0,\ldots,\beta_{p-1})}$ and $\vf\beta_2=\transpose{(\beta_p,\ldots,\beta_{k})}$. Finally, we define $\vf{\hat\beta}_1$ to be the estimators of the new model $\vf{y}=\vf{X}_1\vf\beta_1+\vf\varepsilon_1$. That is: $$\vf{\hat\beta}={\left(\transpose{\vf{X}_1}\vf{X}_1\right)}^{-1}\transpose{\vf{X}_1}\vf{y}$$
+  \end{definition}
+  \begin{proposition}[Bias on the estimations]
+    Consider the model of \cref{LM_multiple} and the new model considering only the first $p-1<k$ columns of data. Then, the bias of each the new estimation $\vf{\hat\beta}_1$ is: $$\bias(\vf{\hat\beta}_1)={\left(\transpose{\vf{X}_1}\vf{X}_1\right)}^{-1}\transpose{\vf{X}_1}\vf{X}_2\vf\beta_2\footnote{Note that if the submatrices $\vf{X}_1$ and $\vf{X}_2$ are orthogonal we won't have bias.}$$
   \end{proposition}
+  \begin{proposition}[Bias on the predictions]
+    Consider the model of \cref{LM_multiple} and the new model considering only the first $p-1<k$ columns of data. Then, the bias of each the predictions $\vf{\hat{y}}_1$ is: $${\bias(\vf{\hat{y}}_1)}^2=\transpose{\vf{X}\vf\beta}(1-\vf{H}_1)\vf{X\beta}$$
+    where we have defined $\vf{H}_1:=\vf{X}_1{\left(\transpose{\vf{X}_1}\vf{X}_1\right)}^{-1}\transpose{\vf{X}_1}$.
+  \end{proposition}
+  \begin{theorem}[Mallow's $C_p$ statistic]
+    Consider the model of \cref{LM_multiple} and the new model considering only the first $p-1<k$ columns of data. We define the \emph{Mallow's $C_p$ statistic} as: $$\mathrm{C}_p:=\frac{\SSE_p}{\MSE}-(n-2p)$$
+    where $\SSE_p$ is the error sum of squares of the new model with $p$ variables.
+    From here, we can conclude that the closer $\mathrm{C}_p$ is to $p$ (i.e. $\mathrm{C}_p\approx p$) the lower the bias is for this new model. Moreover the smaller $\mathrm{C}_p$ is, the lower the mean square error is.
+  \end{theorem}
   \subsection{Generalized linear models}
   \subsubsection{Box-Cox transformation}
   \begin{definition}

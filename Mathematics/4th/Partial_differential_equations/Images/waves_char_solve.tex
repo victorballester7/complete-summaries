@@ -9,7 +9,7 @@
       % x label style={at={(axis description cs:0.97,-0.025)},anchor=north},
       % y label style={at={(axis description cs:0.46,0.83)},anchor=south},
       xmin=-0.1, xmax=6,
-      ymin=-0.1, ymax=6,
+      ymin=-0.45, ymax=6,
       xtick = \empty, ytick=\empty, % A random number (out of the graphic), which is necessary (it cannot be: xtick = {})
       extra x ticks = {1,4},
       extra x tick labels={0,$L$},
@@ -31,39 +31,48 @@
     \fill [pattern = north west lines] (4.25,0) rectangle (4,\ymax);
     \draw[thick] (4,0) -- (4,\ymax);
 
-    \addplot[thick,samples=10,red,domain=1:4]{x/2+5};
-    \addplot[thick,samples=10,red,domain=1:4]{x/2+4};
-    \addplot[thick,samples=10,red,domain=1:4]{x/2+2};
-    \addplot[thick,samples=10,red,domain=1:4]{x/2+1};
-    \addplot[thick,samples=10,red,domain=2:4]{x/2-1};
+
+    \def\eps{0.2}
+    \addplot[thick,samples=10,red,domain=1:4]{x/2+5-\eps};
+    \addplot[thick,samples=10,red,domain=1:4]{x/2+4-\eps};
+    \addplot[thick,samples=10,red,domain=1:4]{x/2+2-\eps};
+    \addplot[thick,samples=10,red,domain=1:4]{x/2+1-\eps};
+    \addplot[thick,samples=10,red,domain={2+2*\eps}:4]{x/2-1-\eps};
 
 
-    \addplot[thick,samples=10,blue,domain=1:4]{-x/2+6};
-    \addplot[thick,samples=10,blue,domain=1:4]{-x/2+5};
-    \addplot[thick,samples=10,blue,domain=1:4]{-x/2+3};
-    \addplot[thick,samples=10,blue,domain=1:4]{-x/2+2};
+    \addplot[thick,samples=10,blue,domain=1:4]{-x/2+8-\eps};
+    \addplot[thick,samples=10,blue,domain=1:4]{-x/2+6-\eps};
+    \addplot[thick,samples=10,blue,domain=1:4]{-x/2+5-\eps};
+    \addplot[thick,samples=10,blue,domain=1:4]{-x/2+3-\eps};
+    \addplot[thick,samples=10,blue,domain=1:{4-2*\eps}]{-x/2+2-\eps};
+
+    \node[anchor = south] at (2,5-\eps) {$A$};
+    \node[anchor = south] at (3,0.5-\eps) {$B$};
+    \node[anchor = north] at (2+2*\eps,0) {$C$};
+    \node[anchor = north] at (4-2*\eps,0) {$D$};
 
     \addplot[thin,mark=*,only marks, mark size=0.075cm,color_green3] coordinates {
-        (2,5)
-        (2,2)
+        (2,5-\eps)
+        (2,2-\eps)
       };
     \addplot[thin,mark=*,only marks, mark size=0.075cm,\geo] coordinates {
-        (1,5.5)
-        (1,4.5)
-        (1,2.5)
-        (1,1.5)
-        (4,1)
-        (4,3)
-        (4,4)
+        (1,5.5-\eps)
+        (1,4.5-\eps)
+        (1,2.5-\eps)
+        (1,1.5-\eps)
+        (4,1-\eps)
+        (4,3-\eps)
+        (4,4-\eps)
+        (4,6-\eps)
       };
     \addplot[thin,mark=*,only marks, mark size=0.075cm,\sta] coordinates {
-        (3,0.5)
-        (3,3.5)
+        (3,0.5-\eps)
+        (3,3.5-\eps)
       };
 
     \addplot[thin,mark=*,only marks, mark size=0.075cm,brown] coordinates {
-        (4,0)
-        (2,0)
+        (4-2*\eps,0)
+        (2+2*\eps,0)
       };
     % \node[anchor=south,yshift=2pt] at (2.95,0.25){$A$};
     % \node[anchor=north,yshift=-2pt] at (5.15,1.82142857){$B$};

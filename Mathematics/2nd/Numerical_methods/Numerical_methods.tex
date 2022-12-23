@@ -81,7 +81,7 @@
   \end{definition}
   \subsubsection{Root-finding methods}
   For the following methods consider a continuous function $f:I\subseteq\RR\rightarrow\RR$ with an unknown zero $\alpha\in I$. Given $\varepsilon>0$, we want to approximate $\alpha$ with $\Tilde{\alpha}$ such that $|\alpha-\Tilde{\alpha}|<\varepsilon$.
-  \begin{method}[Bisection method]
+  \begin{proposition}[Bisection method]
     Suppose $I=[a_0,b_0]$. For each step $n\geq 0$ of the algorithm we will approximate $\alpha$ by $$c_n=\frac{a_n+b_n}{2}$$ If $f(c_n)=0$ we are done. If not, let
     $$[a_{n+1},b_{n+1}]=
       \begin{cases}
@@ -89,8 +89,8 @@
         \left[c_n,b_n\right] & \text{if }f(a_n)f(c_n)>0
       \end{cases}$$
     and iterate the process again\footnote{Note that bisection method only works for zeros of odd multiplicity.}. The length of the interval $[a_n,b_n]$ is $\frac{b_0-a_0}{2^n}$ and therefore: $$|\alpha-c_n|<\frac{b_0-a_0}{2^{n+1}}<\varepsilon\iff n>\frac{\log\left(\frac{b_0-a_0}{\varepsilon}\right)}{\log 2}-1$$
-  \end{method}
-  \begin{method}[\textit{Regula falsi} method]
+  \end{proposition}
+  \begin{proposition}[\textit{Regula falsi} method]
     Suppose $I=[a_0,b_0]$. For each step $n\geq 0$ of the algorithm we will approximate $\alpha$ by $$c_n=b_n-f(b_n)\frac{b_n-a_n}{f(b_n)-f(a_n)}=\frac{a_nf(b_n)-b_nf(a_n)}{f(b_n)-f(a_n)}$$ If $f(c_n)=0$ we are done. If not, let
     $$[a_{n+1},b_{n+1}]=
       \begin{cases}
@@ -98,19 +98,19 @@
         \left[c_n,b_n\right] & \text{if }f(a_n)f(c_n)>0
       \end{cases}$$
     and iterate the process again.
-  \end{method}
-  \begin{method}[Secant method]
+  \end{proposition}
+  \begin{proposition}[Secant method]
     Suppose $I=\RR$ and that we have two different initial approximations $x_0$, $x_1$. Then, for each step $n\geq 0$ of the algorithm we obtain a new approximation $x_{n+2}$, given by: $$x_{n+2}=x_{n+1}-f(x_{n+1})\frac{x_{n+1}-x_n}{f(x_{n+1})-f(x_n)}$$
-  \end{method}
-  \begin{method}[Newton-Raphson method]
+  \end{proposition}
+  \begin{proposition}[Newton-Raphson method]
     Suppose $I=\RR$, $f\in\mathcal{C}^1$ and that we have an initial approximation $x_0$. Then, for each step $n\geq 0$ we obtain a new approximation $x_{n+1}$, given by: $$x_{n+1}=x_n-\frac{f(x_n)}{f'(x_n)}$$
-  \end{method}
-  \begin{method}[Newton-Raphson modified method]
+  \end{proposition}
+  \begin{proposition}[Newton-Raphson modified method]
     Suppose $I=\RR$, $f\in\mathcal{C}^1$ and that we have an initial approximation $x_0$ of a zero $\alpha$ of multiplicity $m$. Then, for each step $n\geq 0$ we obtain a new approximation $x_{n+1}$, given by: $$x_{n+1}=x_n-m\frac{f(x_n)}{f'(x_n)}$$
-  \end{method}
-  \begin{method}[Chebyshev method]
+  \end{proposition}
+  \begin{proposition}[Chebyshev method]
     Suppose $I=\RR$, $f\in\mathcal{C}^2$ and that we have an initial approximation $x_0$. Then, for each step $n\geq 0$ we obtain a new approximation $x_{n+1}$, given by: $$x_{n+1}=x_n-\frac{f(x_n)}{f'(x_n)}-\frac{1}{2}\frac{{f(x_n)}^2f''(x_n)}{{f'(x_n)}^3}$$
-  \end{method}
+  \end{proposition}
   \subsubsection{Fixed-point iterations}
   \begin{definition}
     Let $g:[a,b]\rightarrow[a,b]\subset\RR$ be a function. A point $\alpha\in[a,b]$ is \emph{$n$-periodic} if $g^n(\alpha)=\alpha$ and $g^j(\alpha)\ne\alpha$ for $j=1,\ldots,n-1$\footnote{Note that 1-periodic points are the fixed points of $f$.}.
@@ -164,20 +164,20 @@
     Examples of such functions are the following: $$E(p,t)=\frac{\log p}{t}\qquad E(p,t)=p^{1/t}$$
   \end{definition}
   \subsubsection{Sequence acceleration}
-  \begin{method}[Aitken's $\Delta^2$ method]
+  \begin{proposition}[Aitken's $\Delta^2$ method]
     Let $(x_n)$ be a sequence of real numbers. We denote:
     \begin{gather*}
       \Delta x_n:=x_{n+1}-x_n\\
       \Delta^2 x_n:=\Delta x_{n+1}-\Delta x_n=x_{n+2}-2x_{n+1}+x_n
     \end{gather*}
     \emph{Aitken's $\Delta^2$ method} is the transformation of the sequence $(x_n)$ into a sequence $y_n$, defined as: $$y_n:=x_n-\frac{{(\Delta x_n)}^2}{\Delta^2 x_n}=x_n-\frac{{(x_{n+1}-x_n)}^2}{x_{n+2}-2x_{n+1}+x_n}$$ with $y_0=x_0$.
-  \end{method}
+  \end{proposition}
   \begin{theorem}
     Let $(x_n)$ be a sequence of real numbers such that $\displaystyle\lim_{n\to\infty}x_n=\alpha$, $x_n\ne\alpha$ $\forall n\in\NN$ and $\exists C$, $|C|<1$, satisfying $$x_{n+1}-\alpha=(C+\delta_n)(x_n-\alpha)\quad\text{with }\lim_{n\to\infty}\delta_n=0$$ Then, the sequence $(y_n)$ obtained from Aitken's $\Delta^2$ process is well-defined and $$\lim_{n\to\infty}\frac{y_n-\alpha}{x_n-\alpha}=0\footnote{This means that Aitken's $\Delta^2$ method produces an acceleration of the convergence of the sequence $(x_n)$.}$$
   \end{theorem}
-  \begin{method}[Steffensen's method]
+  \begin{proposition}[Steffensen's method]
     Let $g:\RR\rightarrow\RR$ be a continuous function and suppose we have an iterative method $x_{n+1}=g(x_n)$. Then, for each step $n$ we can consider a new iteration $y_{n+1}$, with $y_0=x_0$, given by: $$y_{n+1}=y_n-\frac{{\left(g(y_n)-y_n\right)}^2}{g(g(y_n))-2g(y_n)+y_n}$$
-  \end{method}
+  \end{proposition}
   \begin{proposition}
     Let $f:\RR\rightarrow\RR$ be a function of class $\mathcal{C}^2$ and $\alpha$ be a simple zero of $f$. Then, Steffensen's method for finding $\alpha$ has at least quadratic convergence\footnote{Note that the advantage of Steffensen's method over Newton-Raphson method is that in the former we don't need the differentiability of the function whereas in the latter we do.}.
   \end{proposition}
@@ -244,7 +244,7 @@
   \begin{proposition}
     Let $\{(x_i,y_i)\}_{i=0}^n$ be a set of support points. Then, Lagrange's interpolation problem has a unique solution and this is: $$p_n(x)=\sum_{i=0}^ny_i\ell_i(x)$$
   \end{proposition}
-  \begin{method}[Neville's algorithm]
+  \begin{proposition}[Neville's algorithm]
     Let $\{(x_i,y_i)\}_{i=0}^n$ be a set of support points, $\{i_0,\ldots,i_k\}\subset\{0,\ldots,n\}$ and $P_{i_0,\ldots,i_k}(x)\in\Pi_k$ be such that $P_{i_0,\ldots,i_k}(x_{i_j}) = y_{i_j}$ for $j=0,\ldots,k$. Then, it is satisfied that:
     \begin{enumerate}
       \item $P_i(x)=y_i$.
@@ -253,16 +253,16 @@
                 P_{i_0,\ldots,i_{k-1}}(x) & x-x_{i_0}
               \end{vmatrix}}{x_{i_k}-x_{i_0}}$.
     \end{enumerate}
-  \end{method}
+  \end{proposition}
   \begin{definition}
     Let $f:\RR\rightarrow\RR$ be a function and $\{x_i\}_{i=0}^n\subset\RR$ be pairwise distinct points. We define the \emph{divided difference} of order $k$ of $f$ applied to $\{x_i\}_{i=0}^k$, denoted by $f[x_0,\ldots,x_k]$, as the coefficient of $x^k$ of the interpolating polynomial with support points $\{(x_i,f(x_i))\}_{i=0}^k$.
   \end{definition}
   \begin{proposition}
     Let $f:\RR\rightarrow\RR$ be a function and $\{x_i\}_{i=0}^n\subset\RR$ be pairwise distinct points. Lagrange interpolating polynomial with support points $\{(x_i,f(x_i))\}_{i=0}^n$ is: $$p_n(x)=f[x_0]+\sum_{j=1}^nf[x_0,\ldots,x_j]\omega_{j-1}(x)$$
   \end{proposition}
-  \begin{method}[Newton's divided differences\\method]
+  \begin{proposition}[Newton's divided differences\\method]
     Let $f:\RR\rightarrow\RR$ be a function. For $x\in\RR$, we have $f[x]=f(x)$. And if $\{x_i\}_{i=0}^n\subset\RR$ are different points, then $$f[x_0,\ldots,x_n]=\frac{f[x_1,\ldots,x_n]-f[x_0,\ldots,x_{n-1}]}{x_n-x_0}$$
-  \end{method}
+  \end{proposition}
   \begin{theorem}
     Let $f:[a,b]\rightarrow\RR$ be a function of class $\mathcal{C}^{n+1}$, $\{x_i\}_{i=0}^n\subset\RR$ be pairwise distinct points and $p_n\in\RR[x]$ be the interpolating polynomial with support points $\{(x_i,f(x_i))\}_{i=0}^n$. Then, $\forall x\in[a,b]$, $$f(x)-p_n(x)=\frac{f^{(n+1)}(\xi_x)}{(n+1)!}\omega_n(x)$$ where $\xi_x\in\langle x_0,\ldots,x_n,x\rangle$\footnote{The interval $\langle a_1,\ldots,a_k\rangle$ is defined as $\langle a_1,\ldots,a_k\rangle:=(\min(a_1,\ldots,a_k),\max(a_1,\ldots,a_k))$.}.
   \end{theorem}
@@ -520,10 +520,13 @@
     For all subordinated matrix norm $\|\cdot\|$, we have $\|\vf{I}\|=1$.
   \end{lemma}
   \begin{definition}
-    Let $\vf{A}\in\mathcal{M}_n(\CC)$ be a matrix. We define the \emph{spectrum} $\sigma(\vf{A})$ of $\vf{A}$ as: $$\sigma(\vf{A})=\{\lambda\in\CC:\lambda\text{ is and eigenvalue of }\vf{A}\}$$
+    Let $\vf{A}\in\mathcal{M}_n(\CC)$ be a matrix. We define the \emph{spectrum} $\sigma(\vf{A})$ of $\vf{A}$ as: $$\sigma(\vf{A}):=\{\lambda\in\CC:\vf{A}-\lambda\id\text{ is not invertible}\}$$
   \end{definition}
+  \begin{proposition}
+    Let $\vf{A}\in\mathcal{M}_n(\CC)$ be a matrix. Then: $$\sigma(\vf{A})=\{\lambda\in\CC:\lambda\text{ is an eigenvalue of }\vf{A}\}$$
+  \end{proposition}
   \begin{definition}
-    Let $\vf{A}\in\mathcal{M}_n(\CC)$ be a matrix. We define the \emph{spectral radius} $\rho(\vf{A})$ of $\vf{A}$ as: $$\rho(\vf{A})=\max\{|\lambda|\in\CC:\lambda\in\sigma(\vf{A})\}$$
+    Let $\vf{A}\in\mathcal{M}_n(\CC)$ be a matrix. We define the \emph{spectral radius} $\rho(\vf{A})$ of $\vf{A}$ as: $$\rho(\vf{A}):=\max\{|\lambda|\in\CC:\lambda\in\sigma(\vf{A})\}$$
   \end{definition}
   \begin{proposition}
     Let $\vf{v}=(v_1,\ldots,v_n)\in\RR^n$ and $\vf{A}=(a_{ij})\in\mathcal{M}_n(\RR)$. Given the vector norms:
@@ -682,14 +685,14 @@
   \begin{theorem}
     Let $\vf{A}\in\mathcal{M}_n(\RR)$ be such that $\prod_{i=1}^na_{ii}\ne 0$ and $\vf{b}\in\RR^n$. If $\vf{A}$ is strictly diagonally dominant by rows, then Gau\ss-Seidel method applied to solve the system $\vf{A}\vf{x}=\vf{b}$ is convergent.
   \end{theorem}
-  \begin{method}[Over-relaxation methods]
+  \begin{proposition}[Over-relaxation methods]
     Let $\vf{A}\in\mathcal{M}_n(\RR)$, $\vf{b}\in\RR^n$, $\vf{A}\vf{x}=\vf{b}$ be a system of equations and $\alpha\in\RR$ be a parameter (called \emph{relaxation factor}). \emph{Over-relaxation methods} consist in defining matrices $\vf{N}(\alpha)$, $\vf{P}(\alpha)$ and $\vf{M}(\alpha)$ as follows:
     $$\vf{P}(\alpha)=\vf{N}(\alpha)-\vf{A}\qquad\vf{M}(\alpha)={\vf{N}(\alpha)}^{-1}\vf{P}(\alpha)$$
     Then, the iterative method can be written as: $$\vf{x}^{(k+1)}=\vf{M}(\alpha)\vf{x}^{(k)}+{\vf{N}(\alpha)}^{-1}\vf{b}$$
-  \end{method}
-  \begin{method}[Successive over-relaxation \\method]
+  \end{proposition}
+  \begin{proposition}[Successive over-relaxation \\method]
     Let $\vf{A}\in\mathcal{M}_n(\RR)$, $\vf{b}\in\RR^n$, $\alpha\in\RR$ be such that $\alpha\ne-1$ and $\vf{x}^{(k+1)}=\vf{N}^{-1}\vf{P}\vf{x}^{(k)}+\vf{N}^{-1}\vf{b}$ be an iterative method. \emph{Successive over-relaxation method} (\emph{SOR}) consists in defining $$\vf{N}(\alpha)=(1+\alpha)\vf{N}\quad\text{and}\quad\vf{P}(\alpha)=\vf{P}+\alpha\vf{N}$$ because it must be true that $\vf{A}=\vf{N}(\alpha)-\vf{P}(\alpha)$. Then, the previous iteration becomes: $$\vf{x}^{(k+1)}={\vf{N}(\alpha)}^{-1}\vf{P}(\alpha)\vf{x}^{(k)}+{\vf{N}(\alpha)}^{-1}\vf{b}$$
-  \end{method}
+  \end{proposition}
   \begin{definition}
     Let $\vf{A}\in\mathcal{M}_n(\RR)$, $\vf{b}\in\RR^n$, $\alpha\in\RR$ be such that $\alpha\ne-1$ and $\vf{x}^{(k+1)}={\vf{N}(\alpha)}^{-1}\vf{P}(\alpha)\vf{x}^{(k)}+{\vf{N}(\alpha)}^{-1}\vf{b}$ be a SOR method. Since $\vf{M}(\alpha)={\vf{N}(\alpha)}^{-1}\vf{P}(\alpha)$, we have that $$\vf{M}(\alpha)=\frac{1}{1+\alpha}(\vf{M}+\alpha\vf{I}_n)$$ and therefore: $$\sigma(\vf{M}(\alpha))=\left\{\frac{\lambda+\alpha}{1+\alpha}:\lambda\in\sigma(\vf{M})\right\}$$
   \end{definition}
@@ -711,21 +714,21 @@
   \begin{theorem}[Perron-Frobenius theorem]
     Let $\vf{A}\in\mathcal{M}_n(\RR)$ be a non-negative irreducible matrix. Then, $\rho(\vf{A})$ is a real number and it is the dominant eigenvalue.
   \end{theorem}
-  \begin{method}[Power method]
+  \begin{proposition}[Power method]
     Let $\vf{A}\in\mathcal{M}_n(\RR)$. For simplicity, suppose $\vf{A}$ is diagonalizable with eigenvalues $\lambda_1,\ldots,\lambda_n$ and eigenvectors $\vf{v}_1,\ldots,\vf{v}_n$. Suppose $|\lambda_1|>|\lambda_2|\geq\cdots\geq|\lambda_n|$. The \emph{power method} consists in finding an approximation of the dominant eigenvalue $\lambda_1$ starting from an initial approximation $\vf{x}^{(0)}$ of $\vf{v}_1$. We define: $$\vf{x}^{(k+1)}=\vf{A}\vf{x}^{(k)}\qquad k\geq 0$$ Suppose $\vf{x}^{(0)}=\sum_{i=1}^n\alpha_i\vf{v}_i$. If we denote by $\vf{v}_{i,m}$ the $m$-th component of the vector $\vf{v}_i$ and choose $\ell$ such that $\vf{v}_{1,\ell}\ne0$. Then: $$\lim_{k\to\infty}\frac{\vf{x}^{(k)}}{\lambda_1^k}=\vf{v}_1\qquad\lim_{k\to\infty}\frac{\vf{x}_\ell^{(k+1)}}{\vf{x}_\ell^{(k)}}=\lambda_1$$ provided that $\alpha_1\ne0$. More precisely we have: $$\frac{\vf{x}_\ell^{(k+1)}}{\vf{x}_\ell^{(k)}}=\lambda_1+\O{\left|\frac{\lambda_2}{\lambda_1}\right|^k}$$
-  \end{method}
-  \begin{method}[Normalized power method]
+  \end{proposition}
+  \begin{proposition}[Normalized power method]
     Let $\vf{A}\in\mathcal{M}_n(\RR)$ and $\|\cdot\|$ be a vector norm\footnote{For power method it is recommended to use $\|\cdot\|_\infty$.}. For simplicity suppose $\vf{A}$ is diagonalizable with eigenvalues $\lambda_1,\ldots,\lambda_n$ and eigenvectors $\vf{v}_1,\ldots,\vf{v}_n$. Suppose $|\lambda_1|>|\lambda_2|\geq\cdots\geq|\lambda_n|$. The \emph{normalized power method} consists in defining $$\vf{y}^{(k)}=\frac{\vf{x}^{(k)}}{\|\vf{x}^{(k)}\|}\quad\vf{x}^{(k+1)}=\vf{A}\vf{y}^{(k)}\quad\text{for }k\geq 0$$ Suppose $\vf{x}^{(0)}=\sum_{i=1}^n\alpha_i\vf{v}_i$ such that $\alpha_1\ne0$. If we choose $\ell$ such that $\vf{v}_{1,\ell}\ne0$. Then: $$\lim_{k\to\infty}\vf{x}^{(k)}=\vf{v}_1\qquad\lim_{k\to\infty}\frac{\vf{x}_\ell^{(k+1)}}{\vf{y}_\ell^{(k)}}=\lambda_1$$ More precisely we have: $$\frac{\vf{x}_\ell^{(k+1)}}{\vf{y}_\ell^{(k)}}=\lambda_1+\O{\left|\frac{\lambda_2}{\lambda_1}\right|^k}$$
-  \end{method}
-  \begin{method}[Rayleigh quotient]
+  \end{proposition}
+  \begin{proposition}[Rayleigh quotient]
     Let $\vf{A}\in\mathcal{M}_n(\RR)$. Suppose we have a power method $\vf{x}^{(k+1)}=\vf{A}\vf{x}^{(k)}$ to approximate the dominant eigenvalue $\lambda_1$ of $\vf{A}$. Then \emph{Rayleigh quotient} approximates $\lambda_1$ as follows: $$\lim_{k\to\infty}\frac{\left(\vf{x}^{(k+1)}\right)^\mathrm{T}\cdot \vf{x}^{(k)}}{\left(\vf{x}^{(k)}\right)^\mathrm{T}\cdot\vf{x}^{(k)}}=\lambda_1$$
     More precisely: $$\frac{\left(\vf{x}^{(k+1)}\right)^\mathrm{T}\cdot \vf{x}^{(k)}}{\left(\vf{x}^{(k)}\right)^\mathrm{T}\cdot\vf{x}^{(k)}}=\lambda_1+\O{\left|\frac{\lambda_2}{\lambda_1}\right|^{2k}}$$ If instead of a power method, we have a normalized power method $\vf{y}^{(k)}=\frac{\vf{x}^{(k)}}{\|\vf{x}^{(k)}\|}$, $\vf{x}^{(k+1)}=\vf{A}\vf{y}^{(k)}$, then: $$\lim_{k\to\infty}\frac{\left(\vf{x}^{(k+1)}\right)^\mathrm{T}\cdot \vf{y}^{(k)}}{\left(\vf{y}^{(k)}\right)^\mathrm{T}\cdot\vf{y}^{(k)}}=\lambda_1$$
-  \end{method}
-  \begin{method}[Inverse power method]
+  \end{proposition}
+  \begin{proposition}[Inverse power method]
     Let $\vf{A}\in\mathcal{M}_n(\RR)$ and $\mu\in\CC$. The \emph{inverse power method} consists in finding an approximation of the eigenvalue $\lambda$ closest to $\mu$ starting from an initial approximation $\vf{x}^{(0)}$ of its associated eigenvector $\vf{v}$. So we applied the power method to the matrix ${(\vf{A}-\mu\vf{I}_n)}^{-1}$. That is, we have the recurrence: $$\vf{y}^{(k)}=\frac{\vf{x}^{(k)}}{\|\vf{x}^{(k)}\|}\quad\vf{x}^{(k+1)}={(\vf{A}-\mu\vf{I}_n)}^{-1}\vf{y}^{(k)}\quad\text{for }k\geq 0$$ Or, equivalently, $$\vf{y}^{(k)}=\frac{\vf{x}^{(k)}}{\|\vf{x}^{(k)}\|}\quad(\vf{A}-\mu\vf{I}_n)\vf{x}^{(k+1)}=\vf{y}^{(k)}\quad\text{for }k\geq 0$$ Therefore, in each step we have to solve a system of equations to obtain $\vf{x}^{(k+1)}$. Finally\footnote{Alternatively, here we could have applied the Rayleigh quotient.}, if we choose $\ell$ such that $\vf{v}_\ell\ne0$, then: $$\lim_{k\to\infty}\vf{x}^{(k)}=\vf{v}\qquad\lim_{k\to\infty}\frac{\vf{x}_\ell^{(k+1)}}{\vf{y}_\ell^{(k)}}=\frac{1}{\lambda-\mu}\footnote{There's another method that applies power method to the matrix $\vf{A}-\mu\vf{I}_n$ with the same purpose as the inverse power method but without having to solve a system of equations in each iteration. In this case, this method gives the farthest eigenvalue of $\vf{A}$ from $\mu$.}$$
-  \end{method}
+  \end{proposition}
   \subsubsection{Exact methods}
-  \begin{method}[Gaussian elimination]
+  \begin{proposition}[Gaussian elimination]
     Let $\vf{A}=(a_{ij})\in\mathcal{M}_n(\CC)$. We define $a_{ij}^{(1)}:=a_{ij}$ for $i,j=1,\ldots,n$ and
     $$\vf{A}^{(1)}:=
       \begin{pmatrix}
@@ -756,13 +759,13 @@
         0            & 0            & 0            & \cdots       & 0                      & a_{nn}^{(n)}
       \end{pmatrix}
     $$
-  \end{method}
-  \begin{method}
+  \end{proposition}
+  \begin{proposition}
     \emph{Partial pivoting} method in gaussian elimination consists in selecting as the pivot element the entry with largest absolute value from the column of the matrix that is being considered.
-  \end{method}
-  \begin{method}
+  \end{proposition}
+  \begin{proposition}
     \emph{Complete pivoting} method in gaussian elimination interchanges both rows and columns in order to use the largest element (by absolute value) in the matrix as the pivot.
-  \end{method}
+  \end{proposition}
   \begin{definition}[LU descompostion]
     Let $\vf{A}\in\GL_n(\RR)$ be a matrix. A \emph{LU decomposition} of $\vf{A}$ is an expression $\vf{A}=\vf{L}\vf{U}$, where $\vf{L}=(\ell_{ij}),\vf{U}=(u_{ij})\in\mathcal{M}_n(\RR)$ are matrices of the form:
     \begin{gather}\label{NM_L}
