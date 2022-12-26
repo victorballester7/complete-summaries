@@ -155,6 +155,9 @@
   \end{proposition}
   \subsection{First order partial differential equations}
   \subsubsection{Vector calculus}
+  \begin{definition}
+    Let $\Omega\subseteq \RR^n$ be a set. We define the space $\mathcal{C}_0^\infty(\Omega)$ as the set of all compactly supported functions in $\mathcal{C}^\infty(\Omega)$.
+  \end{definition}
   \begin{important}
     \begin{theorem}[Fundamental lemma of calculus of variations]\label{PDE_fundamentallemma}
       Let $\Omega\subset\RR^n$ be a domain and $f:\Omega\rightarrow\RR$ be a continuous function. If $$\dotsint_U f(\vf{x})\dd{\vf{x}}=0$$ for any subset  $U\subseteq\Omega$, then $f=0$ in $\Omega$.
@@ -162,7 +165,17 @@
   \end{important}
   \begin{proof}
     If there were a point $\vf{x}_0\in \Omega$ such that without loss of generality $f(\vf{x}_0)>0$, the continuity would imply the existence of an open set $U$ containing $\vf{x}_0$ and a $\varepsilon >0$ such that $f(\vf{x})>\varepsilon$ $\forall \vf{x}\in U$. Then we would have: $$0=\dotsint_U f(\vf{x})\dd{\vf{x}}>\varepsilon\abs{U}>0$$
-
+  \end{proof}
+  \begin{theorem}\label{PDE_postfundamentallemma}
+    Let $\Omega\subset\RR^n$ be a domain and $f:\Omega\rightarrow\RR$ be a continuous function such that $$\dotsint_\Omega f(\vf{x})\varphi(\vf{x})\dd{\vf{x}}=0$$ for all $\varphi\in\mathcal{C}_0^\infty(\Omega)$. Then, $f=0$ in $\Omega$.
+  \end{theorem}
+  \begin{proof}
+    For any open subset $U\subseteq \Omega$ let $(\varphi_n)\in\mathcal{C}_0^\infty(\Omega)$ be a sequence of functions that converge to $\indi{U}$. Then by the \nameref{RFA_dominated} we have:
+    \begin{align*}
+      0 & = \lim_{n\to\infty}\dotsint_\Omega f(\vf{x})\varphi_n(\vf{x})\dd{\vf{x}}=\dotsint_\Omega f(\vf{x})\indi{U}(\vf{x})\dd{\vf{x}} \\
+        & =\dotsint_U f(\vf{x})\dd{\vf{x}}
+    \end{align*}
+    Now use \cref{PDE_fundamentallemma}.
   \end{proof}
   \begin{proposition}
     Let $\Omega\subseteq\RR^3$ be a closed region and $f,g,k:\Omega\rightarrow\RR$ be functions of class $\mathcal{C}^1(\Omega)$. Then:
@@ -251,9 +264,13 @@
     Let $x_\mathrm{s}(t)$ be the position at time $t$ of a (jump) discontinuity in the function $\rho$. Then: $$\dv{x_\mathrm{s}}{t}=\frac{[q]}{[\rho]}=\frac{{(\rho u)}_+-{(\rho u)}_-}{\rho_+-\rho_-}$$ where the notation $[x(t)]$ refers to: $$[x(t_0)]:=x_+(t_0)-x_-(t_0):=\lim_{t\to{t_0}^+}x(t)-\lim_{t\to{t_0}^-}x(t)$$
   \end{proposition}
   \begin{sproof}
-    Let $a(t)\leq x_\mathrm{s}\leq b(t)$ and $t_2\geq t_1$. Then, using \cref{PDE_trafficintegral2} we have:
+    Let $a(t)\leq x_\mathrm{s}(t)\leq b(t)$ and $t_2\geq t_1$. Then, using \cref{PDE_trafficintegral2} we have:
     \begin{multline*}
-      \int_{a(t_2)}^{b(t_2)}\rho(x,t_2)\dd{x}-\int_{a(t_1)}^{b(t_1)}\rho(x,t_1)\dd{x}=\\=\int_{t_1}^{t_2}[q(a(t),t)-q(b(t),t)]\dd{t}=\\=\int_{t_1}^{t_2}[\rho(a(t),t)(u-a') -\rho(b(t),t)(u-b')]\dd{t}
+      \int_{a(t_2)}^{b(t_2)}\rho(x,t_2)\dd{x}-\int_{a(t_1)}^{b(t_1)}\rho(x,t_1)\dd{x}=\\
+      \begin{aligned}
+         & =\int_{t_1}^{t_2}[q(a(t),t)-q(b(t),t)]\dd{t}                    \\
+         & =\int_{t_1}^{t_2}[\rho(a(t),t)(u-a') -\rho(b(t),t)(u-b')]\dd{t}
+      \end{aligned}
     \end{multline*}
     Letting $a(t)\nearrow x_\mathrm{s}(t)\swarrow b(t)$ and using \nameref{PDE_fundamentallemma} we get: $$[\rho(x_\mathrm{s}(t),t)(u-{x_\mathrm{s}}')]_-- [\rho(x_\mathrm{s}(t),t)(u-{x_\mathrm{s}}')]_+=0$$
     Rearranging the terms we get the desired result.
@@ -401,7 +418,7 @@
     \end{equation*}
   \end{proposition}
   \begin{sproof}
-    We already saw the expressions of $\phi$ and $\psi$ for $x\geq 0$ in \nameref{PDE_propdAlembert}. For $x<0$, note that: $$\beta(t)=u_t(0,t)=c\phi'(ct)-c\psi'(-ct)$$
+    We already saw the expressions of $\phi$ and $\psi$ for $x\geq 0$ in \nameref{PDE_propdAlembert}. For $x<0$, note that: $$\psi'(x)=-\phi'(-x)+\beta(-x/c)$$ because $\beta(t)=u_x(0,t)=\phi'(ct)+\psi'(-ct)$.
   \end{sproof}
   \subsubsection*{Solution with two fixed endpoints}
   \begin{definition}
@@ -570,40 +587,40 @@
   \end{sproof}
   \subsubsection{Distributions}
   \begin{definition}
-    Let $\Omega$ be a set. We define the space $\mathcal{C}_0^\infty(\Omega)=:\mathcal{D}(\Omega)$ as the set of all functions in $\mathcal{C}^\infty(\Omega)$ that have compact support. We define the space $L_{\mathrm{loc}}^1(\Omega)$ as the set of all locally integrable functions on $\Omega$.
+    Let $\Omega\subseteq \RR^n$ be a set. We denote $\mathcal{C}_0^\infty(\Omega)=:\mathcal{D}(\Omega)$. We define the space $L_{\mathrm{loc}}^1(\Omega)$ as the set of all locally integrable functions on $\Omega$.
   \end{definition}
   \begin{definition}[Distribution]
-    Let $\Omega$ be a set. A \emph{distribution} on $\Omega$ is a continuous linear functional on $\mathcal{D}(\Omega)$. The vector space of all distributions on $\Omega$ is denoted by $\mathcal{D}^*(\Omega)$.
+    Let $\Omega\subseteq \RR^n$ be a set. A \emph{distribution} on $\Omega$ is a continuous linear functional on $\mathcal{D}(\Omega)$. The vector space of all distributions on $\Omega$ is denoted by $\mathcal{D}^*(\Omega)$.
   \end{definition}
   \begin{proposition}
-    Let $\Omega$ be a set and $f\in L_{\mathrm{loc}}^1(\Omega)$. Then, the map
+    Let $\Omega\subseteq \RR^n$ be a set and $f\in L_{\mathrm{loc}}^1(\Omega)$. Then, the map
     $$
-      \function{\Lambda_f}{\mathcal{D}(\Omega)}{\RR}{\varphi}{\displaystyle\int_\Omega f(x)\varphi(x)\dd{x}}
+      \function{\Lambda_f}{\mathcal{D}(\Omega)}{\RR}{\varphi}{\displaystyle\idotsint_\Omega f(\vf{x})\varphi(\vf{x})\dd{\vf{x}}}
     $$
-    is a distribution. Hence, $\Lambda_f(\varphi)$ is usually denoted by $\dotp{f}{\varphi}$. Sometimes we will do an abuse of notation denoting $\Lambda_f$ as $f$.
+    is a distribution. Hence, $\Lambda_f(\varphi)$ is usually denoted by $\dotp{f}{\varphi}$. Sometimes we will do an abuse of notation denoting $\Lambda_f$ as $f$ (by the \nameref{PDE_postfundamentallemma}).
   \end{proposition}
   \begin{proof}
-    $\Lambda_f$ is clearly linear. Moreover: $$\abs{\Lambda_f(\varphi)}\leq\int_\Omega\abs{f(x)\varphi(x)}\leq \norm{f}_1\norm{\varphi}_\infty$$
+    $\Lambda_f$ is clearly linear. Moreover: $$\abs{\Lambda_f(\varphi)}\leq\idotsint_\Omega\abs{f(\vf{x})\varphi(\vf{x})}\leq \norm{f}_1\norm{\varphi}_\infty$$
     Hence, $\Lambda_f$ is bounded and therefore continuous.
   \end{proof}
   \begin{proposition}[Dirac's $\delta$ distribution]
-    Let $\Omega$ be a set and $x_0\in\Omega$. Then, the map
+    Let $\Omega\subseteq \RR^n$ be a set and $\vf{x}_0\in\Omega$. Then, the map
     $$
-      \function{\delta_{x_0}}{\mathcal{D}(\Omega)}{\RR}{\varphi}{\varphi(x_0)}
+      \function{\delta_{\vf{x}_0}}{\mathcal{D}(\Omega)}{\RR}{\varphi}{\varphi(\vf{x}_0)}
     $$
-    is a distribution. Note that, we can write $$\Lambda_{\delta_{x_0}}=\dotp{\delta_{x_0}}{\varphi}=\int_\Omega\delta_{x_0}(x)\varphi(x)\dd{x}=\varphi(x_0)=\delta_{x_0}(\varphi)$$ We will denote $\delta_0$ simply by $\delta$.
+    is a distribution. Note that, we can write $$\Lambda_{\delta_{\vf{x}_0}}=\dotp{\delta_{\vf{x}_0}}{\varphi}=\idotsint_\Omega\delta_{\vf{x}_0}(\vf{x})\varphi(\vf{x})\dd{\vf{x}}=\varphi(\vf{x}_0)=\delta_{\vf{x}_0}(\varphi)$$ We will denote $\delta_{\vf{0}}$ simply by $\delta$.
   \end{proposition}
   \begin{proof}
-    Clearly $\delta_{x_0}$ is linear and bounded because $\abs{\delta_{x_0}(\varphi)}=\abs{\varphi(x_0)}\leq \norm{\varphi}_\infty$.
+    Clearly $\delta_{\vf{x}_0}$ is linear and bounded because $\abs{\delta_{\vf{x}_0}(\varphi)}=\abs{\varphi(\vf{x}_0)}\leq \norm{\varphi}_\infty$.
   \end{proof}
   \begin{proposition}
-    Let $\Omega$ be a set and $x_0\in\Omega$. Then: $$\int_\Omega \delta_{x_0}(x)\dd{x}=1$$
+    Let $\Omega\subseteq \RR^n$ be a set and $\vf{x}_0\in\Omega$. Then: $$\idotsint_\Omega \delta_{\vf{x}_0}(\vf{x})\dd{\vf{x}}=1$$
   \end{proposition}
   \begin{proof}
-    $$\int_\Omega \delta_{x_0}(x)\dd{x}=\dotp{\delta_{x_0}}{1}=1(x_0)=1$$
+    $$\idotsint_\Omega \delta_{\vf{x}_0}(\vf{x})\dd{\vf{x}}=\dotp{\delta_{\vf{x}_0}}{1}=1(\vf{x}_0)=1$$
   \end{proof}
   \begin{definition}
-    Let $\Omega$ be a set and $n\in\NN$. We define the \emph{differentiation operator} $D^n:\mathcal{D}^*(\Omega)\rightarrow\mathcal{D}^*(\Omega)$ by: $$\dotp{D^n\Lambda}{\varphi}=\dotp{\Lambda}{{(-1)}^nD^n\varphi}$$
+    Let $\Omega\subseteq \RR^n$ be a set and $n\in\NN$. We define the \emph{differentiation operator} $D^n:\mathcal{D}^*(\Omega)\rightarrow\mathcal{D}^*(\Omega)$ by: $$\dotp{D^n\Lambda}{\varphi}=\dotp{\Lambda}{{(-1)}^nD^n\varphi}$$
     for all $\Lambda\in\mathcal{D}^*(\Omega)$ and all $\varphi\in\mathcal{D}(\Omega)$.
   \end{definition}
   \begin{definition}
@@ -614,10 +631,10 @@
   \end{proposition}
   \begin{proof}
     For all $\varphi\in\mathcal{D}(\Omega)$ we have:
-    \begin{multline*}
-      \dotp{H'}{\varphi}=-\dotp{H}{\varphi'}=-\int_{-\infty}^\infty H(x)\varphi'(x)\dd{x} =\\
-      =-\int_{0}^\infty\varphi'(x)\dd{x}= \varphi(x_0)=\delta_{x_0}(\varphi)
-    \end{multline*}
+    \begin{align*}
+      \dotp{H'}{\varphi}=-\dotp{H}{\varphi'} & =-\int_{-\infty}^\infty H(x)\varphi'(x)\dd{x}                  \\
+                                             & =-\int_{0}^\infty\varphi'(x)\dd{x}= \varphi(0)=\delta(\varphi)
+    \end{align*}
     because $\varphi$ has compact support.
   \end{proof}
   \subsubsection{Fundamental solution}
@@ -667,7 +684,7 @@
     where $f:\RR\rightarrow\RR$ is continuous and bounded is: $$u(x,t)=[H(t)*f](x)=\int_{-\infty}^{+\infty}\frac{1}{\sqrt{4\pi\alpha t}}\exp{-\frac{{(x - y)}^2}{4\alpha t}}f(y)\dd{y}$$
   \end{corollary}
   \begin{sproof}
-    Clearly the heat equation holds by construction. The proof of $\displaystyle\lim_{t\to 0}\abs{H(t)*f - f}=0$ follows in the same way as the one in \cref{PDE_heatkernelprop}.
+    Clearly the heat equation holds by construction. The proof of $\displaystyle\lim_{t\to 0}\norm{H(t)*f - f}_\infty=0$ follows in the same way as the one in \cref{PDE_heatkernelprop}.
   \end{sproof}
   \begin{proposition}
     Let $[H(t)](x)$ be the heat kernel of \cref{PDE_heatkernel} at a fixed point $t\geq 0$. Then, $\forall s,t>0$ we have: $$H(s+t)=H(s)*H(t)$$

@@ -11,7 +11,7 @@
     \begin{enumerate}
       \item $\Omega\in\Sigma$.
       \item If $A\in\Sigma$, then $A^c\in\Sigma$.
-      \item If $A_1,A_2,\ldots\in\Sigma$, then: $$\bigcup_{n=1}^\infty A_n\in\Sigma$$
+      \item If $(A_n)\in\Sigma$, then: $$\bigcup_{n=1}^\infty A_n\in\Sigma$$
     \end{enumerate}
   \end{definition}
   \begin{proposition}
@@ -19,28 +19,48 @@
     \begin{enumerate}
       \item $\varnothing\in\Sigma$.
       \item If $A,B\in\Sigma$, then $A\setminus B\in\Sigma$.
-      \item If $A_1,A_2,\ldots\in\Sigma$, then: $$\bigcap_{n=1}^\infty A_n\in\Sigma$$
+      \item If $(A_n)\in\Sigma$, then: $$\bigcap_{n=1}^\infty A_n\in\Sigma$$
     \end{enumerate}
   \end{proposition}
+  \begin{sproof}
+    Use \nameref{FM_morgan} to show that $A\cap B\in \Sigma$ if $A,B\in\Sigma$.
+  \end{sproof}
   \begin{definition}[Measure]
     Let $\Sigma$ be a $\sigma$-algebra over a set $\Omega$. A \emph{measure} over $\Omega$ is any function $$\mu:\Sigma\longrightarrow[0,\infty]$$ satisfying the following properties:
     \begin{itemize}
       \item $\mu(\varnothing)=0$.
-      \item \emph{$\sigma$-additivity}: If $\{A_n:n\geq1\}\subseteq\Sigma$ are pairwise disjoint, then: $$\mu\left(\bigsqcup_{n=1}^\infty A_n\right)=\sum_{n=1}^\infty \mu(A_n)$$
+      \item \emph{$\sigma$-additivity}: If $(A_n)\in\Sigma$ are pairwise disjoint, then: $$\mu\left(\bigsqcup_{n=1}^\infty A_n\right)=\sum_{n=1}^\infty \mu(A_n)$$
     \end{itemize}
   \end{definition}
   \begin{definition}
-    Let $\Sigma$ be a set and $\{A_n:n\geq1\}\subseteq\Sigma$ be subsets. We say that $A_n\nearrow A$ if $A_n\subseteq A_{n+1}$ $\forall n\in\NN$ and $A=\bigcup_{n=1}^\infty A_n$. Analogously, we say that $A_n\searrow A$ if $A_n\supseteq A_{n+1}$ $\forall n\in\NN$ and $A=\bigcap_{n=1}^\infty A_n$.
+    Let $\Sigma$ be a set and $(A_n)\in\Sigma$ be subsets. We say that $A_n\nearrow A$ if $A_n\subseteq A_{n+1}$ $\forall n\in\NN$ and $A=\bigcup_{n=1}^\infty A_n$. Analogously, we say that $A_n\searrow A$ if $A_n\supseteq A_{n+1}$ $\forall n\in\NN$ and $A=\bigcap_{n=1}^\infty A_n$.
   \end{definition}
   \begin{proposition}
     Let $\Sigma$ be a $\sigma$-algebra over a set $\Omega$, $\mu:\Sigma\longrightarrow[0,\infty]$ be a measure over $\Omega$ and $A_n,A,B\in\Sigma$, $n\in\NN$. Then:
-    \begin{itemize}
+    \begin{enumerate}
       \item If $A\subseteq B$, then $\mu(B\setminus A)=\mu(B)-\mu(A)$.
-      \item If $A\subseteq B$, then $\mu(A)\subseteq\mu(B)$.
-      \item If $A_n\nearrow A$, then $\displaystyle\mu(A)=\lim_{n\to\infty} A_n$.
-      \item If $A_n\searrow A$ and $\mu(A_1)<\infty$, then $\displaystyle\mu(A)=\lim_{n\to\infty} A_n$.
-    \end{itemize}
+      \item If $A\subseteq B$, then $\mu(A)\leq\mu(B)$.
+      \item If $A_n\nearrow A$, then $\displaystyle\mu(A)=\lim_{n\to\infty} \mu(A_n)$.
+      \item If $A_n\searrow A$ and $\mu(A_1)<\infty$, then $\displaystyle\mu(A)=\lim_{n\to\infty} \mu(A_n)$.
+    \end{enumerate}
   \end{proposition}
+  \begin{sproof}
+    \begin{enumerate}
+      \doubleitem $$\mu(B)=\mu(A\sqcup (B\setminus A))=\mu(A) +\mu(B\setminus A)$$
+      \item Let $E_1=A_1$ and $E_n=A_n\setminus A_{n-1}$ for $n\geq 2$. Then, $A=\bigcup_{n=1}^\infty A_n=\bigsqcup_{n=1}^\infty E_n$ and:
+            \begin{align*}
+              \mu(A) & =\sum_{n=1}^\infty \mu(E_n)=\lim_{N\to\infty}\sum_{n=1}^N(\mu(A_n)-\mu(A_{n-1})) \\
+                     & =\lim_{N\to\infty}\mu(A_N)
+            \end{align*}
+      \item Let $E_n=A_{n}\setminus A_{n+1}$ for $n\in\NN$. Then, $A_1=A\sqcup\bigsqcup_{n=1}^\infty E_n$ and:
+            \begin{align*}
+              \mu(A_1) & =\mu(A)+\sum_{n=1}^\infty \mu(E_n)                           \\
+                       & =\mu(A)+\lim_{N\to\infty}\sum_{n=1}^N(\mu(A_n)-\mu(A_{n+1})) \\
+                       & =\mu(A)+\mu(A_1)-\lim_{N\to\infty}\mu(A_N)
+            \end{align*}
+            And since $\mu(A_1)<\infty$, we get the desired result.
+    \end{enumerate}
+  \end{sproof}
   \begin{definition}
     An \emph{interval} $I\subseteq\RR^n$ is a set of the form:
     $$I=\abs{a_1,b_1}\times\cdots\times\abs{a_n,b_n}$$
@@ -51,17 +71,20 @@
     $$\vol(I):=\prod_{i=1}^n(b_i-a_i)$$
   \end{definition}
   \begin{definition}
-    Let $m\in\NN\cup\{0\}$. We define the \emph{$m$-th dyadic cube} as the set: $$\mathcal{D}_m:=[a_1,a_1+2^{-m})\times\cdots\times [a_n,a_n+2^{-m})$$
-    where $a_i\in 2^{-m}\ZZ$\footnote{Note that each $\mathcal{D}_m$ forms a partition of $\RR^n$.}.
+    Let $m\in\NN\cup\{0\}$. We define the \emph{$m$-th dyadic cube} as the set: $$[a_1,a_1+2^{-m})\times\cdots\times [a_n,a_n+2^{-m})$$
+    where $a_i\in 2^{-m}\ZZ$\footnote{Note that for each $m\in\NN$ we can make a partition of $\RR^n$ in dyadic cubes.}.
   \end{definition}
   \begin{lemma}
-    Let $m\in\NN\cup\{0\}$. Then the sidelength of $\mathcal{D}_m$ is $2^{-m}$, $\vol(\mathcal{D}_m)= 2^{-mn}$ and its diameter is $2^{-m}\sqrt{n}$.
+    Let $m\in\NN\cup\{0\}$. Then the sidelength of the $m$-th dyadic cube is $2^{-m}$, its volume $2^{-mn}$ and its diameter is $2^{-m}\sqrt{n}$.
   \end{lemma}
   \begin{proposition}
     Any nonempty open set $U\subseteq\RR^n$ can be written as a countable union of disjoint dyadic cubes whose closure is in $U$.
   \end{proposition}
+  \begin{proof}
+    Let $\mathcal{D}_0$ be a union of disjoint $0$-th dyadic cubes whose closure is contained in $U$. Now let $\mathcal{D}_1$ be a family of disjoint $1$-th dyadic cubes contained in $U\setminus\mathcal{D}_0$ whose closure is in $U\setminus\overline{\mathcal{D}_0}$. In general, let $\mathcal{D}_n$ be a family of disjoint $n$-th dyadic cubes contained in $U\setminus\bigcup_{k=0}^{n-1}\mathcal{D}_k$ whose closure is in $U\setminus\bigcup_{k=0}^{n-1}\overline{\mathcal{D}_k}$. By construction we have that $\bigcup_{n=0}^\infty \overline{\mathcal{D}_0}\subseteq U$ and the $\mathcal{D}_n$ are clearly pairwise disjoint. Moreover if $x\in U$, $\delta:=d(x,U^c)>0$ and so it will be contained (at least) in a $m$-th dyadic cube, with $2^{-m}\sqrt{n}<\delta$. Hence, $\bigcup_{n=0}^\infty \mathcal{D}_0=U$
+  \end{proof}
   \begin{definition}
-    Let $A\subseteq\RR^n$ be a set. We denote by $\mathcal{I}(A)$ the set of covers of $A$ that are intervals. Analogously, we denote by $\mathcal{I}_0(A)$ the set of open covers of $A$ that are intervals.
+    Let $A\subseteq\RR^n$ be a set. We denote by $\mathcal{I}(A)$ the set of sequences of intervals that cover $A$. Analogously, we denote by $\mathcal{I}_0(A)$ the set of sequences of open intervals that cover $A$.
   \end{definition}
   \begin{definition}[Outer measure]
     Let $A\subseteq\RR^n$ be a set. We define its \emph{outer measure} as the function $\om{}$ defined by:
@@ -71,33 +94,81 @@
     Let $A\subseteq\RR^n$ be a set. Then:
     $$\om{A}=\inf\left\{\sum_{k= 1}^\infty \vol(I_k):\{I_k:k\geq 1\}\in \mathcal{I}_0(A)\right\}$$
   \end{proposition}
+  \begin{proof}
+    Let $$\om{A}_0=\inf\left\{\sum_{k= 1}^\infty \vol(I_k):\{I_k:k\geq 1\}\in \mathcal{I}_0(A)\right\}$$ We shall see $\om{A}=\om{A}_0$. As $\mathcal{I}_0(A)\subset\mathcal{I}(A)$, we have $\om{A}\leq\om{A}_0$.
+
+    Now let $\varepsilon>0$ and by the definition of infimum we can take $(I_k)\in\mathcal{I}(A)$ of the form $$I_k=\abs{a_1^k,b_1^k}\times\cdots\times\abs{a_n^k,b_n^k}$$ such that $\sum_{k=1}^\infty\vol(I_k)\leq \om{A}+\frac{\varepsilon}{2}$.
+    It is clear $\forall k\in\NN$ $\exists\delta_k>0$ such that:
+    $$J_k=\abs{a_1^k-\delta_k,b_1^k+\delta_k}\times\cdots\times\abs{a_n^k-\delta_k,b_n^k+\delta_k}$$
+    satisfy $\vol(J_k)\leq\vol(I_k) +\frac{\varepsilon}{2^{k+1}}$ and so:
+    $$\om{A}_0\leq \sum_{k=1}^\infty\vol(J_k)\leq\sum_{k=1}^\infty\vol(I_k) +\frac{\varepsilon}{2}\leq\om{A}+\varepsilon$$
+    This is true $\forall \varepsilon>0$. Thus, $\om{A}_0\leq\om{A}$.
+  \end{proof}
   \begin{lemma}
     Let $I,J_1,\ldots,J_N\subseteq \RR^n$ be intervals such that $I\subseteq \bigcup_{k=1}^N J_k$. Then, $\vol(I)\leq\sum_{k=1}^N \vol(J_k)$.
   \end{lemma}
+  \begin{sproof}
+    Note that we can suppose $I=\bigcup_{k=1}^N J_k$ by intersecting (if necessary) with $I$. Suppose $I=I_1\times\cdots\times I_n$ and let $\{R_k:k=1,\ldots,M\}$ be an appropriate partition of subrectangles of $I$. Note that $\vol(I)=\sum_{k=1}^M\vol(R_k)$. If $(J_k)$ were pairwise disjoint we would have $\sum_{k=1}^M\vol(R_k)=\sum_{k=1}^{N}\vol(J_k)$. If not, some of these $R_k$ are \textit{repeated} and so $\vol(I)=\sum_{k=1}^M\vol(R_k)\leq\sum_{k=1}^{N}\vol(J_k)$.
+  \end{sproof}
   \begin{theorem}
     The outer measure has the following properties:
     \begin{enumerate}
       \item $\om{\varnothing}=0$.
-      \item If $A\subseteq B\subseteq\RR^n$, then $\om{A}\leq \om{B}$.
-      \item If $A_1, A_2,\ldots \subseteq \RR^n$, then: $$\om{\bigcup_{k=1}^\infty A_k}\leq \sum_{k=1}^\infty \om{A_k}$$
-      \item If $I\subseteq \RR^n$ is an open interval and $I\subseteq A\subseteq \cl{I}$, then $\om{A}=\vol(I)$.
-      \item If $I_1,\ldots,I_N\subseteq \RR^n$ are disjoint intervals, then: $$\displaystyle \om{\bigsqcup_{k=1}^N I_k}= \sum_{k=1}^N \vol(I_k)$$
+            \item\label{RFA_measureB} If $A\subseteq B\subseteq\RR^n$, then $\om{A}\leq \om{B}$.
+      \item \label{RFA_measureC} If $(A_k)\subseteq \RR^n$, then: $$\om{\bigcup_{k=1}^\infty A_k}\leq \sum_{k=1}^\infty \om{A_k}$$
+      \item \label{RFA_measureD}If $I\subseteq \RR^n$ is an open interval and $I\subseteq A\subseteq \cl{I}$, then $\om{A}=\vol(I)$.
+            \item\label{RFA_measureE} If $I_1,\ldots,I_N\subseteq \RR^n$ are disjoint intervals, then: $$\displaystyle \om{\bigsqcup_{k=1}^N I_k}= \sum_{k=1}^N \vol(I_k)$$
       \item If $A,B\subseteq \RR^n$ and $d(A,B):=\inf\{d(a,b):a\in A,b\in B\}>0$, then $\om{A\sqcup B}=\om{A}+\om{B}$.
-      \item If $A\subseteq\RR^n$ and $x\in\RR^n$, then $\om{A+x}=\om{-A}=\om{A}$\footnote{Here $A+x:=\{a+x:a\in A\}$ and $-A:=\{-a:a\in A\}$}.
+            \item\label{RFA_measureG} If $A\subseteq\RR^n$ and $x\in\RR^n$, then $\om{A+x}=\om{-A}=\om{A}$\footnote{Here $A+x:=\{a+x:a\in A\}$ and $-A:=\{-a:a\in A\}$}.
     \end{enumerate}
   \end{theorem}
+  \begin{sproof}
+    \begin{enumerate}
+      \item Clear because $\varnothing\subset I$ for any interval $I\subset\RR^n$.
+      \item Use the fact that $\mathcal{I}(B)\subseteq\mathcal{I}(A)$.
+      \item Let $\varepsilon>0$. For each $k\in\NN$ let $(I_n^k)\in\mathcal{I}(A_k)$ be such that: $$\sum_{n=1}^\infty\vol{(I_n^k)}\leq\om{A_k}+\frac{\varepsilon}{2^k}$$
+            Since, $\bigcup_{k=1}^\infty A_k\subseteq \bigcup_{k,n=1}^\infty I_n^k$ we have that:
+            \begin{align*}
+              \om{\bigcup_{k=1}^\infty A_k} & \leq \sum_{k,n=1}^\infty\vol{(I_n^k)}\leq\sum_{k= 1}^\infty\left(\om{A_k}+\frac{\varepsilon}{2^k}\right) \\
+                                            & =\sum_{k=1}^\infty \om{A_k}+\varepsilon
+            \end{align*}
+            for all $\varepsilon>0$.
+      \item If follows from \cref{RFA_measureB} and the fact that $\vol(I)=\vol(\overline{I})$.
+      \item The inequality $\leq$ follows from \cref{RFA_measureC}.
+
+            For the other one, let $\varepsilon>0$, $I:=\bigsqcup_{k=1}^N I_k$ and $K\subset I$ be a compact interval such that $\sum_{k=1}^N\vol{(I_k)}\leq\vol(K)+\varepsilon$. Now take $(J_k)\in\mathcal{I}_0(I)$ such that $\sum_{k=1}^\infty\vol(J_k)\leq\om{I}+\varepsilon$. In particular $(J_k)\in \mathcal{I}_0(K)$. Since $K$ is compact, there exists a finite covering of $K$ which without loss of generality we may assume it is $K\subset \bigcup_{k=1}^M J_k$. Then
+            \begin{align*}
+              \sum_{k=1}^N\vol{(I_k)} & \leq\vol(K)+\varepsilon\leq \sum_{k=1}^M\vol(J_k)+\varepsilon     \\
+                                      & \leq\sum_{k=1}^\infty\vol(J_k)+\varepsilon\leq\om{I}+2\varepsilon
+            \end{align*}
+            by \cref{RFA_measureB,RFA_measureC}. Since this is true $\forall\varepsilon>0$, we get $\sum_{k=1}^N\vol{(I_k)}\leq\om{I}$.
+      \item If $\delta=d(A,B)>0$, it suffices to consider two sequences $(I_k)\in\mathcal{I}(A)$ and $(J_k)\in\mathcal{I}(B)$ such that $\diam(I_k)<\delta/3$ and $\diam(J_k)<\delta/3$ $\forall k\in\NN$.
+      \item It follows from the property that the volume of intervals is invariant under translations and reflections.
+    \end{enumerate}
+  \end{sproof}
   \begin{definition}
     A set $N\subset\RR^n$ is called a \emph{null set} if $\om{N}=0$.
   \end{definition}
   \begin{definition}
     We say that a property holds \emph{almost everywhere} (\emph{a.e.}) if the set of points that doesn't hold it is null.
   \end{definition}
-  \begin{lemma}
+  \begin{lemma}\label{RFA_countable}
     The countable union of null sets is null.
   \end{lemma}
+  \begin{proof}
+    Let $(N_n)\subset\RR^n$ be a sequence of null sets. Then:
+    $$\om{\bigcup_{n=1}^\infty N_n}\leq\sum_{n=1}^\infty \om{N_n}=0$$
+  \end{proof}
   \begin{lemma}
     A point is null. Therefore, all countable sets are null.
   \end{lemma}
+  \begin{proof}
+    Let $x=(x_1,\ldots,x_n)\in\RR^n$. Then, $\forall\varepsilon>0$ we have:
+    $$
+      \om{\{x\}}\leq\vol\left(\prod_{i=1}^n\left(x_i-\frac{\varepsilon}{2},x_i+\frac{\varepsilon}{2}\right)\right)=\varepsilon^n
+    $$
+    And if $Q\subset\RR^n$ is a countable subset, then using \cref{RFA_countable} we deduce that $\om{Q}= 0$ from the fact that $Q=\bigcup_{q\in Q}\{q\}$.
+  \end{proof}
   \subsubsection{Lebesgue measure}
   \begin{definition}[Lebesgue measure]
     We say that $A\subseteq\RR^n$ is \emph{Lebesgue measurable} (or simply \emph{measurable}) if $\forall \varepsilon>0$, there exists an open set $U\supseteq A$ such that $\om{U\setminus A}<\varepsilon$. We denote by $\mathcal{M}(\RR^n)$ the set of all Lebesgue measurable sets of $\RR^n$ and by $\m{}$ the restriction of $\om{}$ to ${\mathcal{M}(\RR^n)}$.
@@ -116,47 +187,120 @@
             \end{align*}
     \end{enumerate}
   \end{theorem}
+  \begin{sproof}
+    Let's prove first that $\mathcal{M}(\RR^n)$ is a $\sigma$-algebra.
+    \begin{itemize}
+      \item $\RR^n\in\mathcal{M}(\RR^n)$ because $\RR^n$ is open and $0=\om{\mathcal{M}(\RR^n)\setminus\RR^n}<\varepsilon$ $\forall \varepsilon>0$
+      \item Let $(A_n)\in\mathcal{M}(\RR^n)$. Then, $\forall \varepsilon>0$ for each $n\in\NN$ there exists an open set $U_n\supseteq A_n$ such that $\om{U_n\setminus A_n}<\frac{\varepsilon}{2^n}$. Now, $U:=\bigcup_{n=1}^\infty U_n$ is open an satisfy:
+            \begin{align*}
+              \om{\bigcup_{n=1}^\infty U_n\setminus\bigcup_{n=1}^\infty A_n} & \leq \om{\bigcup_{n=1}^\infty (U_n\setminus A_n)}                                                      \\
+                                                                             & \leq\sum_{n=1}^{\infty}\om{U_n\setminus A_n}\leq\sum_{n=1}^{\infty}\frac{\varepsilon}{2^n}=\varepsilon
+            \end{align*}
+    \end{itemize}
+    Let's see now the first property.
+    \begin{enumerate}
+      \item Clearly open sets are measurable and so are the null sets since $\om{U\setminus N}\leq\om{U}$ for all open sets $U$ and null sets $N$. To show that the closed sets are measurable, let's prove first that the compact sets are measurable. Given a compact set $K$ and $\varepsilon>0$, there exists an open set $U$ such that $K\subset U$, $\m{U}\leq\om{K}+\varepsilon$ and $U\setminus K=\bigsqcup_{k=1}^\infty D_k$, where $(D_k)$ are dyadic cubes. Thus:
+            $$\om{K}+\varepsilon\geq \m{U}\geq\om{K\sqcup\bigsqcup_{k=1}^\infty D_k}=\om{K}+\sum_{k=1}^\infty \vol{D_k}$$
+            by \cref{RFA_measureE}. Thus, $\om{U\setminus K}\leq \sum_{k=1}^\infty \vol{D_k}\leq \varepsilon$. Finally, as any closed set can be written a countable union of compact sets, since $\mathcal{M}(\RR^n)$ is a $\sigma$-algebra, we get the desired result.
+    \end{enumerate}
+    Finally:
+    \begin{itemize} \item Let $A\in\mathcal{M}(\RR^n)$. Then, $\forall k\in\NN$ there exists an open set $U_k\supseteq A$ such that $\om{U_k\setminus A}<\frac{1}{k}$. Let $U:=\bigcup_{k=1}^\infty {U_k}^c$. Then, $U\subseteq A^c$ and if $N=A^c\setminus U$ we have that $N\subseteq U_k\setminus A$ $\forall k\in\NN$. So $\om{N}\leq\frac{1}{k}$ $\forall k\in\NN$ and therefore $N$ is null. So $A^c = U\cup N$ is union of two measurable sets ($U$ is a countable union of closed sets) and thereby measurable.
+    \end{itemize}
+    So $\mathcal{M}(\RR^n)$ is a $\sigma$-algebra. Now let's see that $\m{\cdot}$ is a measure.
+    \begin{itemize}
+      \item Consequence of $\varnothing\in\mathcal{M}(\RR^n)$ and $\om{\varnothing}=0$.
+      \item Let $(A_n)\in\mathcal{M}(\RR^n)$ be pairwise disjoint. We need to prove that: $$\m{\bigsqcup_{n=1}^\infty A_n}=\sum_{n=1}^\infty \m{A_n}$$
+            One inequality has already been given in \cref{RFA_measureC}. For the other one, first suppose that the $(A_n)$ are bounded. Then, $\forall \varepsilon >0$ there exist compact sets $K_n\subset A_n$ such that $\m{A_n}\leq \om{K_n}+\frac{\varepsilon}{2^k}$. Then:
+            $$\sum_{n=1}^\infty \m{A_n}\leq \sum_{n=1}^\infty\left(\om{K_n}+\frac{\varepsilon}{2^k}\right)\leq \m{A}+\varepsilon$$
+            If the $(A_n)$ aren't bounded, then take $(B_m^n)$ measurable and bounded such that $A_n=\bigsqcup_{m=1}^\infty B_m^n$ and so:
+            $$\sum_{n=1}^\infty \m{A_n}=\sum_{n,m=1}^\infty \m{B_m^n}= \m{\bigsqcup_{n,m=1}^\infty B_m^n}=\m{A}$$
+    \end{itemize}
+    So $\m{\cdot}$ is a measure. Now let's continue with the remaining properties:
+    \begin{enumerate}\setcounter{enumi}{1}
+      \item $I=\Fr{I}\cup\Int(I)$ which is a union of a closed set and an open set. Hence, $I\in\mathcal{M}(\RR^n)$ and $\m{I}=\vol(I)$ (by \cref{RFA_measureD}).
+      \item It follows from \cref{RFA_measureG}.
+      \item Note that if $A\in\mathcal{M}(\RR^n)$, then there exists a closed set $C\subseteq A$ such that $\om{A\setminus C}<\varepsilon$ $\forall\varepsilon>0$. Indeed, there exists an open set $U\supseteq A^c$ such that $\om{U\setminus A^c}<\varepsilon$. Now take $C=U^c$. From here we deduce the first two equalities. For the third one, it suffices to bound to closed sets by intersecting them with balls to become compact sets.
+    \end{enumerate}
+  \end{sproof}
   \begin{definition}
     A \emph{real function} is a function $f:\RR^n\rightarrow[-\infty,+\infty]$. We will say that $f$ is \emph{finite} if $\pm\infty\notin\im f$.
   \end{definition}
   \begin{definition}
-    Let $f$ be a real function. We say that $f$ is \emph{Lebesgue measurable} (or simply \emph{measurable}) if $\{x\in\RR^n:f(x)> r\}\in \mathcal{M}(\RR^n)$ $\forall r\in\RR$.
+    Let $f$ be a real function. We say that $f$ is \emph{Lebesgue measurable} (or simply \emph{measurable}) if $\{f(x)> r\}\in \mathcal{M}(\RR^n)$ $\forall r\in\RR$.
   \end{definition}
-  \begin{lemma}
+  \begin{lemma}\label{RFA_lemmamesurable}
     Let $a,b\in[-\infty,+\infty]$ and $f$ be a real function. The sets:
     \begin{itemize}
-      \item $\{a<f(x)<b:x\in\RR^n\}$
-      \item $\{a\leq f(x)<b:x\in\RR^n\}$
-      \item $\{a<f(x)\leq b:x\in\RR^n\}$
-      \item $\{a\leq f(x)\leq b:x\in\RR^n\}$
+      \item $\{a<f(x)<b\}$
+      \item $\{a\leq f(x)<b\}$
+      \item $\{a<f(x)\leq b\}$
+      \item $\{a\leq f(x)\leq b\}$
     \end{itemize}
     are all measurable.
   \end{lemma}
+  \begin{sproof}
+    Rewrite the sets as union of antiimages of $f$. For example, for the second one:
+    \begin{multline*}
+      \{a\leq f(x)<b\}  =\{f(x)\geq a\}\cup{\{f(x)\geq b\}}^c                                                  \\
+      =\bigcap_{n=1}^\infty \left\{f(x)>a-\frac{1}{n}\right\}\cup{\left(\bigcup_{n=1}^\infty\left\{f(x)>b-\frac{1}{n}\right\}\right)}^c
+    \end{multline*}
+    Since all the sets in the unions are measurable, so is the initial set.
+  \end{sproof}
   \begin{proposition}
     A function $f:\RR^n\rightarrow\RR$ is measurable if and only if for all open set $U\subseteq \RR$, $f^{-1}(U)\in\mathcal{M}(\RR^n)$.
   \end{proposition}
+  \begin{sproof}
+    \begin{itemizeiff}
+      Let $U\subseteq \RR$ be an open set. We can write $U$ as a countable union of intervals $I_n$. Then: $$f^{-1}(U)=f^{-1}\left(\bigcup_{n=1}^\infty I_n\right)=\bigcup_{n=1}^\infty f^{-1}(I_n)$$ And $f^{-1}(I_n)\in\mathcal{M}(\RR^n)$ by \cref{RFA_lemmamesurable}.
+      \item Take the open set $(r,\infty)\subset\RR$ and note that: $$\{f>r\}=f^{-1}((r,\infty))\in\mathcal{M}(\RR^n)$$
+    \end{itemizeiff}
+  \end{sproof}
   \begin{proposition}
     Let $f$ be a finite measurable real function, $U\subseteq\RR$ be an open set such that $\im f\subseteq U$ and $\varphi:U\rightarrow\RR$ be a continuous function. Then, $\varphi\circ f$ is also measurable.
   \end{proposition}
-  \begin{proposition}
+  \begin{proof}
+    For any open set $V\subseteq\RR$ we have that: $${(\varphi\circ f)}^{-1}(V)=f^{-1}(\varphi^{-1}(V))\in\mathcal{M}(\RR^n)$$ because $\varphi^{-1}(V)$ is open as $\varphi$ is continuous.
+  \end{proof}
+  \begin{proposition}\label{RFA_sumproduct}
     Let $u$, $v$ be two finite measurable real functions, $U\subseteq\RR^2$ be an open set such that $(u(x),v(x))\in U$ $\forall x\in\RR^n$ and $\varphi:U\rightarrow\RR$ be a continuous function. Then, $\varphi(u(x),v(x))$ is also measurable.
   \end{proposition}
-  \begin{proposition}
-    Let $f$, $g$ be two real functions such that $f$ is measurable and $g\almoste{=} f$. Then, $g$ is also measurable.
-  \end{proposition}
+  \begin{sproof}
+    For any open set $V\subseteq\RR$, $\varphi^{-1}(V)$ is open and therefore it is a countable union of intervals of the form $I\times J$. Now, use the fact that $\{(u,v)\in I\times J\}=\{u\in I\}\cap\{v\in J\}$.
+  \end{sproof}
   \begin{proposition}
     Let $f$, $g$ be two measurable real functions. Then, so are $f\pm g$, $fg$ and $f/g$ if $g(x)\ne 0$ $\forall x\in\RR^n$.
   \end{proposition}
+  \begin{proof}
+    Use \cref{RFA_sumproduct} with $\varphi(x,y)=x\om y$, $\varphi(x,y)=xy$ and $\varphi(x,y)=x/y$, respectively.
+  \end{proof}
   \begin{proposition}
-    Let $(f_n)$ be a sequence of measurable real functions. Then, the following sets are measurable:
-    \begin{itemize}
-      \item $\displaystyle\sup\{f_n:n\in\NN\}$
-      \item $\displaystyle\inf\{f_n:n\in\NN\}$
-      \item $\displaystyle\limsup_{n\to\infty} f_n$
-      \item $\displaystyle\liminf_{n\to\infty} f_n$
-    \end{itemize}
-    Furthermore, any function being pointwise limit a.e. of a sequence of measurable functions is measurable.
+    Let $f$, $g$ be two real functions such that $f$ is measurable and $f\almoste{=} g$. Then, $g$ is also measurable.
   \end{proposition}
+  \begin{sproof}
+    Let $N:=\{f\ne g\}$ which is null. Moreover note that $\forall r\in\RR$:
+    $$\{g>r\}=\{f>r\} \cup (\{g>r\}\cap N)$$
+    which is measurable.
+  \end{sproof}
+  \begin{proposition}
+    Let $(f_m)$ be a sequence of measurable real functions. Then, the following functions are measurable:
+    \begin{itemize}
+      \item $\displaystyle\sup\{f_m:m\in\NN\}$
+      \item $\displaystyle\inf\{f_m:m\in\NN\}$
+      \item $\displaystyle\limsup_{m\to\infty} f_m$
+      \item $\displaystyle\liminf_{m\to\infty} f_m$
+    \end{itemize}
+    Furthermore, any function being pointwise limit a.e.\ of a sequence of measurable functions is measurable.
+  \end{proposition}
+  \begin{sproof}
+    Use de following identities for each case:
+    \begin{itemize}
+      \item $\displaystyle\{\sup\{f_m:m\in\NN\}>r\}=\bigcup_{n=1}^\infty \{f_m> r\}$
+      \item $\displaystyle\inf\{f_m:m\in\NN\}=-\sup\{-f_m:m\in\NN\}$
+      \item $\displaystyle\limsup_{m\to\infty} f_m=\inf\{\sup\{f_k:k\geq n\}:m\in\NN\}$
+      \item $\displaystyle\liminf_{m\to\infty} f_m =\sup\{\inf\{f_k:k\geq n\}:m\in\NN\}$
+    \end{itemize}
+    For the last property, if $\displaystyle f(x)=\lim_{m\to\infty} f_m(x)$ $\forall x\in\RR^n\setminus N$ with $f_m$ measurable functions and $\m{N}=0$, then $f_m\indi{\RR^n\setminus N}$ are measurable, $\displaystyle f\indi{\RR^n\setminus N}=\lim_{m\to\infty} f_m\indi{\RR^n\setminus N}$ and $f\almoste{=}f\indi{\RR^n\setminus N}$.
+  \end{sproof}
   \begin{definition}
     The \emph{Borel $\sigma$-algebra} over $\RR^n$, $\mathcal{B}(\RR^n)$, is the smallest $\sigma$-algebra that contains the open sets of $\RR^n$.
   \end{definition}
@@ -169,6 +313,13 @@
   \begin{proposition}
     Let $f:\RR\rightarrow\RR$ be a Lebesgue measurable function and $g:\RR\rightarrow\RR$ be a Borel measurable function. Then, $g\circ f$ is Lebesgue measurable.
   \end{proposition}
+  \begin{sproof}
+    The set
+    $$
+      \Sigma_f=\{A\in\mathcal{M}(\RR^n):f^{-1}(A)\text{ is measurable}\}
+    $$
+    is a $\sigma$-algebra that contain the open sets. Keeping this in mind, for any open set $U\subseteq\RR$ we have that: $${(g\circ f)}^{-1}(U)=f^{-1}(g^{-1}(U))\in\mathcal{M}(\RR^n)$$ because $g^{-1}(U)\in\mathcal{B}(\RR^n)\subseteq \Sigma_f$.
+  \end{sproof}
   \begin{definition}
     Let $f$ be a measurable function. We define the following measurable functions:
     $$f^+:=\sup\{f,0\}\qquad f^-:=\sup\{-f,0\}$$
@@ -181,6 +332,17 @@
     Let $f:\RR^n\rightarrow[0,+\infty]$ be a measurable function and let $$E(k,m):=\left\{\frac{k-1}{2^m}\leq f<\frac{k}{2^m}\right\}\;\;\text{and}\;\; F(m):=\{f\geq m\}$$
     Then, the sequence of positive simple functions $$s_m=m+\indi{F(k)}+\sum_{k=1}^{m2^m}\frac{k-1}{2^m}\indi{E(k,m)}$$ is increasing and $\displaystyle\lim_{m\to\infty}s_m(x)=f(x)$ $\forall x\in\RR^n$.
   \end{theorem}
+  \begin{sproof}
+    The sets $E(k,m)$ an $F(m)$ are measurable and satisfy:
+    \begin{equation*}
+      E(k,m)=E(h,m+1)\sqcup E(h+1,m+1)
+    \end{equation*}
+    provided that $h=2k-1<m2^{m+1}$, and:
+    \begin{equation*}
+      F(m)=\left(\bigsqcup_{h=m2^{m+1}+1}^{(m+1)2^{m+1}}E(h,m+1)\right)\sqcup F
+    \end{equation*}
+
+  \end{sproof}
   \begin{theorem}
     Let $f:\RR^n\rightarrow[-\infty,+\infty]$ be a measurable function. Then, there exists a sequence of simple functions $(s_m)$ such that $\displaystyle\lim_{m\to\infty}s_m(x)=f(x)$ $\forall x\in\RR^n$ and $\abs{s_m}\leq\abs{s_{m+1}}\leq \abs{f}$ $\forall m\in\NN$.
   \end{theorem}
@@ -214,9 +376,11 @@
       \item $\displaystyle\int_E f(x)\dd{x}\leq \int_Eg(x)\dd{x}$
     \end{enumerate}
   \end{proposition}
-  \begin{theorem}[Monotone convergence theorem]
-    Let $E\subseteq\RR^n$ be a measurable set, $f\geq 0$ be a non-negative measurable function such that $\exists (f_m)\geq 0$ with $f_m\nearrow f$. Then: $$\int_Ef(x)\dd{x}=\lim_{m\to\infty}\int_Ef_m(x)\dd{x}$$
-  \end{theorem}
+  \begin{important}
+    \begin{theorem}[Monotone convergence theorem]\label{RFA_monotone}
+      Let $E\subseteq\RR^n$ be a measurable set, $f\geq 0$ be a non-negative measurable function such that $\exists (f_m)\geq 0$ with $f_m\nearrow f$. Then: $$\int_Ef(x)\dd{x}=\lim_{m\to\infty}\int_Ef_m(x)\dd{x}$$
+    \end{theorem}
+  \end{important}
   \begin{proposition}
     Let $E\subseteq\RR^n$ be a measurable set with $\m{E}>0$, $f, g, (f_m)\geq 0$ be non-negative measurable functions. Then:
     \begin{enumerate}
@@ -257,9 +421,11 @@
       \item If $h\in\RR^n$, $f\in \mathcal{L}^1(E)$, then: $$\int_{E-h}f(x+h)\dd{x}=\int_{-E}f(-x)\dd{x}=\int_{E}f(x)\dd{x}$$
     \end{enumerate}
   \end{proposition}
-  \begin{theorem}[Dominated convergence theorem]
-    Let $E\subseteq\RR^n$ be a measurable set, $f$ be a measurable function over $E$ such that $\exists (f_m)\geq 0$ with $f_m\almoste{\rightarrow} f$ and $\abs{f_m(x)}\almoste\leq g(x)$ on $E$ with $g\in \mathcal{L}^1(E)$ $\forall m\in\NN$. Then, $f, f_m\in \mathcal{L}^1(E)$ $\forall m\in\NN$ and: $$\int_Ef(x)\dd{x}=\lim_{m\to\infty}\int_Ef_m(x)\dd{x}$$
-  \end{theorem}
+  \begin{important}
+    \begin{theorem}[Dominated convergence theorem]\label{RFA_dominated}
+      Let $E\subseteq\RR^n$ be a measurable set, $f$ be a measurable function over $E$ such that $\exists (f_m)\geq 0$ with $f_m\almoste{\rightarrow} f$ and $\abs{f_m(x)}\almoste\leq g(x)$ on $E$ with $g\in \mathcal{L}^1(E)$ $\forall m\in\NN$. Then, $f, f_m\in \mathcal{L}^1(E)$ $\forall m\in\NN$ and: $$\int_Ef(x)\dd{x}=\lim_{m\to\infty}\int_Ef_m(x)\dd{x}$$
+    \end{theorem}
+  \end{important}
   \begin{proposition}
     Let $E\subseteq\RR^n$ be a measurable set, $f,g\in \mathcal{L}^1(E)$ and $\lambda\in\RR$. Then:
     \begin{enumerate}

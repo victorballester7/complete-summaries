@@ -61,9 +61,38 @@
 %%%%%%% Enumeration-commands %%%%%%%
 \usepackage{enumitem} % for the command [leftmargin=1.15cm] in customized-label enumerations
 \renewcommand{\labelenumi}{\arabic{enumi}.}
-\renewcommand{\theenumii}{\roman{enumii})}
+\renewcommand{\theenumi}{\thetheorem-\arabic{enumi}}
+
 \renewcommand{\labelenumii}{\roman{enumii})}
+\renewcommand{\theenumii}{\roman{enumii})}
+
 \renewcommand{\labelenumiii}{\alph{enumiii})}
+\renewcommand{\theenumiii}{\alph{enumiii})}
+
+
+% for doing things like:
+% 1. ..............
+% 2. ..............
+% 3, 4. ...........
+% 5. ..............
+\newcommand{\doubleitem}{%
+  \begingroup
+  \stepcounter{enumi}%
+  \edef\tmp{\theenumi, }%
+  \stepcounter{enumi}
+  \edef\tmp{\endgroup\noexpand\item[\tmp\labelenumi]}%
+  \tmp}
+
+
+\newlist{itemizeiff}{enumerate}{2}
+\setlist[itemizeiff]{
+    first=\item[{$\implies\!\!$)}],
+    label={$\impliedby\!\!$)},
+    leftmargin=1.2cm,
+}
+
+\newcommand*\ifftoright{\item[$\implies$:]}
+\newcommand*\ifftoleft{\item[$\ \impliedby$:]}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%% Math-commands %%%%%%%
@@ -255,6 +284,7 @@
       } % outer measure
       \newcommand{\almoste}[1]{\overset{\text{a.e.}}{#1}} % almost everywhere
       \newcommand{\dotp}[2]{{\left\langle#1,#2\right\rangle}} % inner product
+      \DeclareMathOperator{\diam}{diam} % diameter
     
     %%% PARTIAL DIFFERENTIAL EQUATIONS
       \newcommand{\matdv}[2]{\frac{\mathrm{D}#1}{\mathrm{D}#2}} % binormal vector
