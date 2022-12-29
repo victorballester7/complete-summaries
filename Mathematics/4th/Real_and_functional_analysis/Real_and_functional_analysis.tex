@@ -27,10 +27,10 @@
   \end{sproof}
   \begin{definition}[Measure]
     Let $\Sigma$ be a $\sigma$-algebra over a set $\Omega$. A \emph{measure} over $\Omega$ is any function $$\mu:\Sigma\longrightarrow[0,\infty]$$ satisfying the following properties:
-    \begin{itemize}
+    \begin{enumerate}[ref = $\sigma$-additivity]
       \item $\mu(\varnothing)=0$.
-      \item \emph{$\sigma$-additivity}: If $(A_n)\in\Sigma$ are pairwise disjoint, then: $$\mu\left(\bigsqcup_{n=1}^\infty A_n\right)=\sum_{n=1}^\infty \mu(A_n)$$
-    \end{itemize}
+            \item\label{RFA_sigmaadditivity} \emph{$\sigma$-additivity}: If $(A_n)\in\Sigma$ are pairwise disjoint, then: $$\mu\left(\bigsqcup_{n=1}^\infty A_n\right)=\sum_{n=1}^\infty \mu(A_n)$$
+    \end{enumerate}
   \end{definition}
   \begin{definition}
     Let $\Sigma$ be a set and $(A_n)\in\Sigma$ be subsets. We say that $A_n\nearrow A$ if $A_n\subseteq A_{n+1}$ $\forall n\in\NN$ and $A=\bigcup_{n=1}^\infty A_n$. Analogously, we say that $A_n\searrow A$ if $A_n\supseteq A_{n+1}$ $\forall n\in\NN$ and $A=\bigcap_{n=1}^\infty A_n$.
@@ -40,8 +40,8 @@
     \begin{enumerate}
       \item If $A\subseteq B$, then $\mu(B\setminus A)=\mu(B)-\mu(A)$.
       \item If $A\subseteq B$, then $\mu(A)\leq\mu(B)$.
-      \item If $A_n\nearrow A$, then $\displaystyle\mu(A)=\lim_{n\to\infty} \mu(A_n)$.
-      \item If $A_n\searrow A$ and $\mu(A_1)<\infty$, then $\displaystyle\mu(A)=\lim_{n\to\infty} \mu(A_n)$.
+            \item\label{RFA_incresingseq} If $A_n\nearrow A$, then $\displaystyle\mu(A)=\lim_{n\to\infty} \mu(A_n)$.
+            \item\label{RFA_decresingseq} If $A_n\searrow A$ and $\mu(A_1)<\infty$, then $\displaystyle\mu(A)=\lim_{n\to\infty} \mu(A_n)$.
     \end{enumerate}
   \end{proposition}
   \begin{sproof}
@@ -328,41 +328,63 @@
   \begin{definition}
     A \emph{simple function} is a linear combination $$s:=\sum_{k=1}^N\alpha_k\indi{A_k}$$ where $\alpha_k\in\RR$ and $A_k\in\mathcal{M}(\RR^n)$ for $k=1,\ldots,N$\footnote{We may suppose that the sets $A_k$ are pairwise disjoint, the quantities $\alpha_k$ are all different and that $A_k=s^{-\alpha_k}$.}.
   \end{definition}
-  \begin{theorem}
-    Let $f:\RR^n\rightarrow[0,+\infty]$ be a measurable function and let $$E(k,m):=\left\{\frac{k-1}{2^m}\leq f<\frac{k}{2^m}\right\}\;\;\text{and}\;\; F(m):=\{f\geq m\}$$
-    Then, the sequence of positive simple functions $$s_m=m+\indi{F(k)}+\sum_{k=1}^{m2^m}\frac{k-1}{2^m}\indi{E(k,m)}$$ is increasing and $\displaystyle\lim_{m\to\infty}s_m(x)=f(x)$ $\forall x\in\RR^n$.
+  \begin{theorem}\label{RFA_increasing-sm}
+    Let $f:\RR^n\rightarrow[0,+\infty]$ be a measurable function and $\forall k\in\NN$, $m\in\NN\cup\{0\}$ let: $$E(k,m):=\left\{\frac{k-1}{2^m}\leq f<\frac{k}{2^m}\right\}\;\;\text{and}\;\; F(m):=\{f\geq m\}$$
+    Then, the sequence of positive simple functions $$s_m=m\indi{F(m)}+\sum_{k=1}^{m2^m}\frac{k-1}{2^m}\indi{E(k,m)}$$ is increasing and $\displaystyle\lim_{m\to\infty}s_m(x)=f(x)$ $\forall x\in\RR^n$.
   \end{theorem}
   \begin{sproof}
     The sets $E(k,m)$ an $F(m)$ are measurable and satisfy:
     \begin{equation*}
-      E(k,m)=E(h,m+1)\sqcup E(h+1,m+1)
+      E(k,m)=E(2k-1,m+1)\sqcup E(2k,m+1)
     \end{equation*}
-    provided that $h=2k-1<m2^{m+1}$, and:
+    % provided that $h=2k-1<m2^{m+1}$, 
+    and:
     \begin{equation*}
-      F(m)=\left(\bigsqcup_{h=m2^{m+1}+1}^{(m+1)2^{m+1}}E(h,m+1)\right)\sqcup F
+      F(m)=\left(\bigsqcup_{h=m2^{m+1}+1}^{(m+1)2^{m+1}}E(h,m+1)\right)\sqcup F(m+1)
     \end{equation*}
+    The proof of $s_m(x)\leq s_{m+1}(x)$ follows from distinguish the following three cases: $x\in F(m+1)$, $x\in F(m)\setminus F(m+1)$ and $x\in E(k,m)$ for some $k\in\NN$.
 
+    Now given $x\in\{f\ne\infty\}$, we have that $x\in E(k,m)$ for some $k\in\NN$. Thus:
+    $$\frac{k-1}{2^m}\leq f(x)<\frac{k}{2^m}\implies 0\leq f(x)-s_m(x)<\frac{1}{2^m}$$
+    If $x\in\{f=\infty\}$, then $\displaystyle\lim_{m\to\infty}s_m(x)=m=\infty=f(x)$.
   \end{sproof}
   \begin{theorem}
     Let $f:\RR^n\rightarrow[-\infty,+\infty]$ be a measurable function. Then, there exists a sequence of simple functions $(s_m)$ such that $\displaystyle\lim_{m\to\infty}s_m(x)=f(x)$ $\forall x\in\RR^n$ and $\abs{s_m}\leq\abs{s_{m+1}}\leq \abs{f}$ $\forall m\in\NN$.
   \end{theorem}
+  \begin{sproof}
+    Apply \cref{RFA_increasing-sm} to the functions $f^+$ and $f^-$ and use that $f=f^+-f^-$ and $\abs{f}=f^++f^-$.
+  \end{sproof}
   \subsubsection{Lebesgue integral}
   \begin{definition}
-    Let $N\in\NN$, $E_1,\ldots,E_N$ be measurable sets and $s=\sum_{k=1}^N\alpha_k\indi{E_k}$ be a positive simple function such that $0<\alpha_1<\cdots<\alpha_N<\infty$. We define the \emph{integral of $s$ over $\RR^n$} as: $$\int s:=\sum_{k=1}^N\alpha_k\m{E_k}$$
+    Let $N\in\NN$, $E_1,\ldots,E_N$ be disjoint measurable sets and $s=\sum_{k=1}^N\alpha_k\indi{E_k}$ be a positive simple function such that $0\leq\alpha_1<\cdots<\alpha_N<\infty$. We define the \emph{integral of $s$ over $\RR^n$} as: $$\int s:=\sum_{k=1}^N\alpha_k\m{E_k}$$
     We define the \emph{integral of $s$ over a measurable set $E$} as: $$\int_E s:=\int s\indi{E}=\sum_{k=1}^N\alpha_k\m{E_k\cap E}$$
   \end{definition}
   \begin{proposition}
-    Let $E_1,E_2,\ldots$ be measurable sets and $s$, $t$ be simple functions. Then:
-    \begin{itemize}
-      \item If $\displaystyle E=\bigsqcup_{k=1}^\infty E_k$, then $\displaystyle\int_E s=\sum_{k=1}^\infty \int_{E_k} s$.
+    Let $(E_n)$ be a sequence of measurable sets and $s$, $t$ be simple functions. Then:
+    \begin{enumerate}
+      \item\label{RFA_proofsigma} If $\displaystyle E=\bigsqcup_{n=1}^\infty E_n$, then $\displaystyle\int_E s=\sum_{n=1}^\infty \int_{E_n} s$.
       \item $\displaystyle\int(s+t)=\int s+\int t$.
-      \item If $\alpha\in\RR_{\geq 0}$, then $\displaystyle\int \alpha s=\alpha\int s$.
+      \item If $\lambda\in\RR_{\geq 0}$, then $\displaystyle\int \lambda s=\lambda\int s$.
       \item If $s\leq t$, then $\displaystyle\int s\leq\int t$.
-    \end{itemize}
+    \end{enumerate}
   \end{proposition}
+  \begin{sproof}
+    Note that we can suppose $s=\sum_{k=1}^N\alpha_k\vf{1}_{F_k}$ and $t=\sum_{k=1}^N\beta_k\vf{1}_{F_k}$ with $\alpha_k,\beta_k\geq 0$.
+    \begin{enumerate}
+      \item
+            \begin{align*}
+              \int_E s & =\sum_{k=1}^N\alpha_k\m{F_k\cap \bigsqcup_{n=1}^\infty E_n}= \sum_{k=1}^N\alpha_k\m{\bigsqcup_{n=1}^\infty(F_k\cap E_n)} \\
+                       & =\sum_{n=1}^\infty\sum_{k=1}^N\alpha_k\m{F_k\cap E_n}=\sum_{n=1}^\infty \int_{E_n} s
+            \end{align*}
+    \end{enumerate}
+    The other proofs are straightforward by considering $t\pm s = \sum_{k=1}^N(\beta_k\pm \alpha_k)\vf{1}_{F_k}$ and $\lambda s=\sum_{k=1}^N\lambda\alpha_k\vf{1}_{F_k}$.
+  \end{sproof}
   \begin{proposition}
-    The function $$\function{\mu_s}{\mathcal{M}(\RR^n)}{[0,\infty]}{E}{\displaystyle\int_E s}$$ is a measure.
+    Given a simple function $s$, the function $$\function{\mu_s}{\mathcal{M}(\RR^n)}{[0,\infty]}{E}{\displaystyle\int_E s}$$ is a measure.
   \end{proposition}
+  \begin{sproof}
+    Clearly $\mu_s(\varnothing)=0$ and the property of \ref{RFA_sigmaadditivity} is exactly \cref{RFA_proofsigma}.
+  \end{sproof}
   \begin{definition}
     Let $f:\RR^n\rightarrow[0,+\infty]$ be a measurable function. We define: $$\mathcal{S}(f):=\{s:s\text{ is a simple function such that }0\leq s\leq f\}$$
   \end{definition}
@@ -376,34 +398,71 @@
       \item $\displaystyle\int_E f(x)\dd{x}\leq \int_Eg(x)\dd{x}$
     \end{enumerate}
   \end{proposition}
+  \begin{sproof}
+    The first property is clear. Regarding the second one, just note that: $$\mathcal{S}(f\indi{E})\subseteq \mathcal{S}(g\indi{E})\implies \sup_{s\in\mathcal{S}(f\indi{E})}\int s\leq \sup_{s\in\mathcal{S}(g\indi{E})}\int s$$
+  \end{sproof}
   \begin{important}
     \begin{theorem}[Monotone convergence theorem]\label{RFA_monotone}
-      Let $E\subseteq\RR^n$ be a measurable set, $f\geq 0$ be a non-negative measurable function such that $\exists (f_m)\geq 0$ with $f_m\nearrow f$. Then: $$\int_Ef(x)\dd{x}=\lim_{m\to\infty}\int_Ef_m(x)\dd{x}$$
+      Let $E\subseteq\RR^n$ be a measurable set, $f\geq 0$ be a non-negative measurable function such that $\exists (f_m)\geq 0$ with $f_m$ measurable $\forall m\in\NN$ and $f_m\nearrow f$. Then: $$\int_Ef(x)\dd{x}=\lim_{m\to\infty}\int_Ef_m(x)\dd{x}$$
     \end{theorem}
   \end{important}
+  \begin{proof}
+    The inequality $\int_Ef_m(x)\dd{x}\leq \int_Ef(x)\dd{x}$ is obvious. We need to prove the other one. To do so it suffices to show that $\forall \varepsilon>0$ and $\forall s\in\mathcal{S}(f\indi{E})$ we have $(1-\varepsilon)\int_E s\leq {\displaystyle\lim_{m\to\infty}}\int_Ef_m(x)\dd{x}$.
+    Let $E_m:=\{f_m\geq (1-\varepsilon)s\}$. Note that $E_m\nearrow E$ and moreover:
+    $$\int_Ef_m\geq\int_{E_m}f_m\geq(1-\varepsilon)\int_{E_m}s$$
+    Since $\mu_s$ is a measure we can use \cref{RFA_incresingseq} to conclude that $\int_{E_m}s\nearrow \int_{E}s$. Therefore $\forall\varepsilon>0$ we have: $$(1-\varepsilon)\int_{E}s\leq \lim_{m\to\infty}\int_Ef_m$$
+  \end{proof}
   \begin{proposition}
     Let $E\subseteq\RR^n$ be a measurable set with $\m{E}>0$, $f, g, (f_m)\geq 0$ be non-negative measurable functions. Then:
     \begin{enumerate}
-      \item $\displaystyle\int_E (f+g)(x)\dd{x}=\int_Ef(x)\dd{x}+\int_Eg(x)\dd{x}$
-      \item $\displaystyle\int_E\sum_{m=1}^\infty f_m(x)\dd{x}=\sum_{m=1}^\infty\int_E f_m(x)\dd{x}$
-      \item If $(E_k)$ is a sequence of measurable sets such that $E=\bigsqcup_{k=1}^\infty E_k$, then: $$\int_Ef(x)\dd{x}=\sum_{k=1}^\infty\int_{E_k}f(x)\dd{x}$$
-      \item If $\alpha\in[0,\infty)$, then $\displaystyle\int_E\alpha f(x)\dd{x}=\alpha\int_Ef(x)\dd{x}$.
-      \item If $f\leq g$ on $E$, then $\displaystyle\int_Ef(x)\dd{x}\leq\int_Eg(x)\dd{x}$.
-      \item $\displaystyle\int_Ef(x)\dd{x}=0\iff f\almoste{=}0$ on $E$.
-      \item If $N\subset E$ is a null set, then $\displaystyle\int_Ef(x)\dd{x}=\int_{E\setminus N}f(x)\dd{x}$.
-      \item If $\displaystyle\int_Ef(x)\dd{x}<\infty$, then $f\almoste{<}\infty$ on $E$.
-      \item If $h\in\RR^n$, then $\displaystyle\int_{E-h}f(x+h)\dd{x}=\int_{-E}f(-x)\dd{x}=\int_{E}f(x)\dd{x}$
+      \item\label{RFA_postmonotoneA} $\displaystyle\int_E (f+g)(x)\dd{x}=\int_Ef(x)\dd{x}+\int_Eg(x)\dd{x}$
+      \item\label{RFA_postmonotoneB} $\displaystyle\int_E\sum_{m=1}^\infty f_m(x)\dd{x}=\sum_{m=1}^\infty\int_E f_m(x)\dd{x}$
+      \item\label{RFA_postmonotoneC} If $(E_k)$ is a sequence of measurable sets such that $E=\bigsqcup_{m=1}^\infty E_m$, then: $$\int_Ef(x)\dd{x}=\sum_{m=1}^\infty\int_{E_m}f(x)\dd{x}$$
+      \item\label{RFA_postmonotoneD} If $\alpha\in[0,\infty)$, then $\displaystyle\int_E\alpha f(x)\dd{x}=\alpha\int_Ef(x)\dd{x}$.
+      \item\label{RFA_postmonotoneE} $\displaystyle\int_Ef(x)\dd{x}=0\iff f\almoste{=}0$ on $E$.
+      \item\label{RFA_postmonotoneF} If $N\subset E$ is a null set, then $\displaystyle\int_Ef(x)\dd{x}=\int_{E\setminus N}f(x)\dd{x}$.
+      \item\label{RFA_postmonotoneG} If $\displaystyle\int_Ef(x)\dd{x}<\infty$, then $f\almoste{<}\infty$ on $E$.
+      \item\label{RFA_postmonotoneH} If $h\in\RR^n$, then $\displaystyle\int_{E-h}f(x+h)\dd{x}=\int_{-E}f(-x)\dd{x}=\int_{E}f(x)\dd{x}$
     \end{enumerate}
   \end{proposition}
+  \begin{sproof}
+    \begin{enumerate}
+      \item Use the \nameref{RFA_monotone} to the sequences of simple functions $s_m\nearrow f$ and $t_m\nearrow g$ (that exists by \cref{RFA_increasing-sm}).
+      \item Use induction from \cref{RFA_postmonotoneA} and the \nameref{RFA_monotone} to the sequence $F_N=\sum_{m=1}^N f_m(x)$.
+      \item Apply \cref{RFA_postmonotoneB} to $f_m=f\indi{E_m}$.
+      \item Use the \nameref{RFA_monotone} and this property for simple functions (as in \cref{RFA_postmonotoneA}).
+      \item The implication to the left is clear. For the other one, define $A_m=\{f>\frac{1}{m}\}$. We would like to see that $\displaystyle\m{\{f>0\}}=\m{\lim_{m\to\infty}A_m}=0$. But $A_{m}\subseteq A_{m+1}$ and they are clearly measurable. So by \cref{RFA_incresingseq} we have:
+            \begin{align*}
+              \displaystyle\m{\{f>0\}} & =\lim_{m\to\infty} \m{A_m}=\lim_{m\to\infty} \int_{A_m}\dd{x} \\
+                                       & \leq\lim_{m\to\infty} m\int_{A_m}f\dd{x}=0
+            \end{align*}
+            Hence, the set $\{f>0\}$ is null, i.e. $f\almoste{=}0$ on $E$.
+      \item Just note that $$\int_Ef=\int_{E\setminus N} f+\int_N f$$ and $\int_Nf=0$ because $\int_Ns=0$ $\forall s\in\mathcal{S}(\indi{N})$ by the construction of the Lebesgue integral.
+      \item Apply \cref{RFA_incresingseq} to the sets $A_m=\{f\geq m\}$.
+      \item For indicator functions the statement is clear since if $f(x)=\indi{E}(x)$, then $f(x+h)=\indi{E-h}(x)$ and $f(-x)=\indi{-E}(x)$. Now extend this to positive simple functions and the to positive measurable functions.
+    \end{enumerate}
+  \end{sproof}
   \begin{corollary}
     Let $E\subseteq\RR^n$ be a measurable set, $f\geq 0$ be a non-negative measurable function such that $\exists (f_m)\geq 0$ with $f_m\almoste{\nearrow} f$. Then: $$\int_Ef(x)\dd{x}=\lim_{m\to\infty}\int_Ef_m(x)\dd{x}$$
   \end{corollary}
+  \begin{sproof}
+    Consequence of \cref{RFA_postmonotoneF} with the null set $N=\{\displaystyle\lim_{m\to\infty} f_m\ne f\}$.
+  \end{sproof}
   \begin{theorem}[Chebyshev's inequality]
-    Let $E\subseteq\RR^n$ be a measurable set, $f:E\rightarrow\RR$ be a measurable function and $\alpha\in\RR_{>0}$. Then: $$\abs{\{x\in E:\abs{f(x)}\geq\alpha\}}\leq\frac{1}{\alpha}\int_E \abs{f(x)}\dd{x}$$
+    Let $E\subseteq\RR^n$ be a measurable set, $f:E\rightarrow\RR$ be a measurable function and $\alpha\in\RR_{>0}$. Then: $$\m{\{\abs{f}\geq\alpha\}}\leq\frac{1}{\alpha}\int_E \abs{f(x)}\dd{x}$$
   \end{theorem}
+  \begin{proof}
+    \begin{align*}
+      \m{\{\abs{f}\geq\alpha\}} & =\int_{\{\abs{f}\geq\alpha\}}\dd{x}\leq\frac{1}{\alpha}\int_{\{\abs{f}\geq\alpha\}} \abs{f(x)}\dd{x} \\
+                                & \leq\frac{1}{\alpha}\int_E \abs{f(x)}\dd{x}
+    \end{align*}
+  \end{proof}
   \begin{lemma}[Fatou's lemma]
     Let $E\subseteq\RR^n$ be a measurable set and $(f_m)\geq 0$ be a sequence of non-negative measurable functions over $E$. Then: $$\int_E\liminf_{m\to\infty}f_m(x)\dd{x}\leq \liminf_{m\to\infty}\int_Ef_m(x)\dd{x}$$
   \end{lemma}
+  \begin{sproof}
+    Remember that $\displaystyle\liminf_{m\to\infty} f_m=\lim_{k\to\infty}\inf\{f_m:m\geq k\}$. Now apply \nameref{RFA_monotone} to the increasing sequence of functions $(F_k)$ defined by $F_k=\inf\{f_m:m\geq k\}$. Bear in mind that $F_k\leq f_k$.
+  \end{sproof}
   \begin{definition}
     Let $E\subseteq\RR^n$ be a measurable set and $f:E\rightarrow[-\infty,+\infty]$ be a measurable function such that either $\int_Ef^+(x)\dd{x}<\infty$ or $\int_Ef^-(x)\dd{x}<\infty$. Then, we define the \emph{integral of $f$ over $E$} as: $$\int_Ef(x)\dd{x}:=\int_Ef^+(x)\dd{x}-\int_Ef^-(x)\dd{x}$$
     We say that $f$ is an \emph{integrable function over $E$} if $${\norm{f}}_1:=\int_E\abs{f(x)}\dd{x}<\infty$$ The set of such functions is denoted by $ \mathcal{L}^1(E)$.
@@ -487,7 +546,7 @@
     \begin{enumerate}
       \item $Mf$ is measurable.
       \item $Mf\almoste{<}\infty$.
-      \item $\displaystyle\m{x\in\RR^n : (Mf)(x) > \alpha} \leq \frac{A}{\alpha}\int_{\RR^n} \abs{f(x)}\dd{x}$.
+      \item $\displaystyle\m{\{x\in\RR^n : Mf(x) > \alpha\}} \leq \frac{A}{\alpha}\int_{\RR^n} \abs{f(x)}\dd{x}$.
     \end{enumerate}
   \end{theorem}
   \begin{theorem}[Lebesgue differentiation theorem]
@@ -582,13 +641,11 @@
   \begin{theorem}[Change of variables]
     Let $U,V\subseteq\RR^n$ be open sets and $\vf\varphi:U\rightarrow V$ be a change of variables. If $f:\RR^n\rightarrow[0,\infty]$ is measurable or integrable on $V$, then so is $(f\circ\vf\varphi)\abs{J\vf\varphi}$ and: $$\int_{V} f(x)\dd{x}=\int_Uf(\vf\varphi(t))\abs{J\vf\varphi(t)}\dd{t}$$
   \end{theorem}
-
-  \subsection{Functional analysis}
+  \subsection{Banach spaces}
   \subsubsection{Normed vector spaces}
   \begin{definition}
     Let $M$ be a set. A \emph{distance} in $M$ is a function $d:M\times M\rightarrow\RR $ such that $\forall x,y,z\in M$ the following properties are satisfied:
     \begin{enumerate}
-      \item $d(x,y)\geq 0$
       \item $d(x,y)=0\iff x=y$
       \item $d(x,y)=d(y,x)$
       \item $d(x,y)\leq d(x,z)+d(z,y)\quad$(\emph{triangular inequality})
@@ -603,26 +660,31 @@
   \end{definition}
   \begin{definition}
     Let $E$ be a real (or complex) vector space. A \emph{norm} on $E$ is a function $\|\cdot\|:E\rightarrow\KK$ (where $\KK=\RR,\CC$) such that $\forall \vf{u},\vf{v}\in E$ and $\forall\lambda\in\KK $ the following properties are satisfied:
-    \begin{enumerate}
-      \item $\|\vf{u}\|\geq 0$
+    \begin{enumerate}[ref = Triangular inequality]
       \item $\|\vf{u}\|=0\iff \vf{u}=0$
       \item $\|\lambda \vf{u}\|=|\lambda|\|\vf{u}\|$
-      \item $\|\vf{u}+\vf{v}\|\leq \|\vf{u}\|+\|\vf{v}\|\quad$(\emph{triangular inequality})
+            \item\label{RFA_triangularineq} $\|\vf{u}+\vf{v}\|\leq \|\vf{u}\|+\|\vf{v}\|\quad$(\emph{triangular inequality})
     \end{enumerate}
     We define a \emph{normed vector space} as a pair $(E,\|\cdot\|)$ that satisfy the previous properties.
   \end{definition}
   \begin{proposition}
     Let $(E_1,\norm{\cdot}_1),\ldots,(E_n,\norm{\cdot}_n)$ be normed vector spaces. Then, $E_1\times\cdots\times E_n$ with the norm $$\norm{(x_1,\ldots,x_n)}=\max\{{\norm{x_i}}_i:i=1,\ldots,n\}$$ is a normed vector space.
   \end{proposition}
-  \begin{proposition}
+  \begin{proposition}\label{RFA_sumproduct_func}
     Let $(E,\|\cdot\|)$ be a normed vector space and consider the following functions:
     $$\function{S}{E\times E}{E}{(x,y)}{x+y}\quad\function{P}{\RR\times E}{E}{(\lambda,x)}{\lambda x}$$ Then:
     \begin{enumerate}
       \item $S$ is uniformly continuous.
       \item $P$ is continuous.
-      \item $\norm{\cdot}$ is uniformly continuous and: $$\abs{\norm{x}-\norm{y}}\leq\norm{x-y}\qquad\forall x,y\in E$$
+      \item $\norm{\cdot}:E\rightarrow\RR$ is Lipschitz continuous: $$\abs{\norm{x}-\norm{y}}\leq\norm{x-y}\qquad\forall x,y\in E$$
     \end{enumerate}
   \end{proposition}
+  \begin{sproof}
+    \begin{enumerate}
+      \doubleitem It follows from the \ref{RFA_triangularineq}.
+      \item Consider the inequalities: $$\norm{x}\leq\norm{x-y}+\norm{y}\qquad\norm{y}\leq\norm{y-x}+\norm{x}$$
+    \end{enumerate}
+  \end{sproof}
   \begin{definition}
     Let $(E,\|\cdot\|)$ be a normed vector space and $(x_n)\in E$ be a sequence. We say that $\sum_{n=1}^\infty x_n$ is a \emph{convergent series} in $E$ that converges to $x\in E$ if: $$\lim_{N\to\infty}\norm{x-\sum_{n=1}^N x_n}=0 $$
     We say that $\sum_{n=1}^\infty x_n$ is \emph{absolutely convergent} if: $$\sum_{n=1}^\infty\norm{x_n}<\infty$$
@@ -630,15 +692,44 @@
   \begin{proposition}
     Let $(E,\|\cdot\|)$ be a normed vector space and $\sum_{n=1}^\infty x_n=x$ be a convergent series. Then: $$\norm{x}\leq \sum_{n=1}^\infty\norm{x_n}$$
   \end{proposition}
+  \begin{proof}
+    $$\norm{x}=\lim_{N\to\infty}\norm{\sum_{n=1}^N x_n}\leq \lim_{N\to\infty}\sum_{n=1}^N\norm{x_n}= \sum_{n=1}^\infty\norm{x_n}$$
+  \end{proof}
   \begin{definition}[Banach space]
     A \emph{Banach space} is normed vector space which is complete with the distance associated with the norm.
   \end{definition}
   \begin{theorem}
     Let $(E,\|\cdot\|)$ be a normed vector space. Then, $(E,\|\cdot\|)$ is a Banach space if and only if every series in $E$ that converges absolutely converges.
   \end{theorem}
+  \begin{proof}
+    \begin{itemizeiff}
+      Let $\sum_{n=1}^\infty x_n$ be a sequence in $E$ that converges absolutely. Then, $\forall \varepsilon>0$ and $\forall M>N>0$ large enough we have:
+      \begin{align*}
+        \norm{\sum_{n=1}^M x_n-\sum_{n=1}^Nx_n} & \leq \sum_{n=N+1}^M\norm{x_n}\leq \sum_{n=N+1}^\infty\norm{x_n} \\
+                                                & <\varepsilon
+      \end{align*}
+      because it is the tail of a convergent series. Thus, $\sum_{n=1}^\infty x_n<\infty$ because it is Cauchy and $E$ is Banach.
+      \item Let $(y_n)\in E$ be a Cauchy sequence. Then, $\forall k\in\NN$, $\exists n_k$ such that $\forall p,q\geq n_k$ we have: $$\norm{y_p-y_q}<\frac{1}{2^k}$$
+      Now consider the sequence $(x_m)\in E$ defined as $x_1=y_{n_1}$ and $x_m=y_{n_m}-y_{n_{m-1}}$ $\forall m\geq 2$. Therefore, $\norm{x_m}\leq \frac{1}{2^{m-1}}$ $\forall m\geq 2$ and so the series $\sum_{m=1}^\infty \norm{x_m}$ converges, and so does the series $\sum_{m=1}^\infty x_m=:x\in E$. Since, $\sum_{m=1}^M x_m=y_{n_M}$ we have that $\displaystyle \lim_{M\to\infty} y_{n_M}=x$. Finally, as $(y_{n_M})$ is a subsequence of $(y_n)$, which is Cauchy, we have that $\displaystyle \lim_{n\to\infty} y_n=x$.
+    \end{itemizeiff}
+  \end{proof}
   \begin{proposition}
-    Let $(E,\|\cdot\|)$ be a normed vector space and $F\subseteq E$ be a vector subspace. Then, $\overline{F}$ is a vector subspace of $E$.
+    The space $\mathcal{C}_0([a,b])$ of continuous and bounded functions with the \emph{uniform norm} $$\norm{f}_\infty:=\sup\{\abs{f(t)}:t\in[a,b]\}$$
+    is Banach.
   \end{proposition}
+  \begin{definition}
+    We define by $\ell^\infty$ the space of all bounded sequences.
+  \end{definition}
+  \begin{proposition}
+    The space $\ell^\infty$ with the \emph{uniform norm} $$\norm{(x_n)}_\infty:=\sup\{\abs{x_n}:n\in\NN\}$$
+    is Banach.
+  \end{proposition}
+  \begin{proposition}\label{RFA_closurevectorsubspace}
+    Let $(E,\|\cdot\|)$ be a normed vector space and $F\subseteq E$ be a vector subspace. Then, $\overline{F}$ is also a vector subspace of $E$.
+  \end{proposition}
+  \begin{sproof}
+    Let $x,y\in\overline{F}$ and $\lambda\in\KK$. Then, $\exists(x_n),(y_n)\in F$ such that $\displaystyle \lim_{n\to\infty}x_n=x$ and $\displaystyle \lim_{n\to\infty}y_n=y$. The continuity of the functions defined in \cref{RFA_sumproduct_func} implies $x+y\in\overline{F}$ and $\lambda x\in\overline{F}$.
+  \end{sproof}
   \begin{proposition}
     Let $(E,\|\cdot\|)$ be a normed vector space and $F\subseteq E$ be a vector subspace.
     \begin{enumerate}
@@ -646,15 +737,60 @@
       \item If $F$ is closed and $E$ is Banach, then $F$ is complete.
     \end{enumerate}
   \end{proposition}
+  \begin{proof}
+    \begin{enumerate}
+      \item Let $x\in\overline{F}$. Then, $\exists(x_n)\in F$ such that $\displaystyle \lim_{n\to\infty}x_n=x$. In particular, $(x_n)$ is Cauchy and since $F$ is complete, we conclude $x\in F$.
+      \item Let $(x_n)\in F$ be a Cauchy sequence. In particular it is a Cauchy sequence in $E$ and so $\exists x\in E$ with $\displaystyle \lim_{n\to\infty}x_n=x$. Moreover this $x$ satisfies $x\in \overline{F}$ and since $F$ is closed, $x\in F$.
+    \end{enumerate}
+  \end{proof}
   \begin{definition}
-    Let $(E,\|\cdot\|)$ be a normed vector space and $F\subseteq E$ be a vector subspace. We say that $F$ is a \emph{total subspace} if $\langle F\rangle$ is dense in $E$.
+    Let $(E,\|\cdot\|)$ be a normed vector space and $A\subseteq E$ be a subset. We say that $A$ is a \emph{total subset} if $\langle A\rangle$ is dense in $E$.
   \end{definition}
   \begin{definition}
-    A metric space is called \emph{separable} if it contains a finite or countable dense subset.
+    A metric space is called \emph{separable} if it contains a countable dense subset.
   \end{definition}
   \begin{proposition}
-    A normed vector space is separable if and only if it contains a total countable subset.
+    A normed vector space $E$ is separable if and only if it contains a total countable subset.
   \end{proposition}
+  \begin{proof}
+    The implication to the right is evident. For the other one, let $A$ be the total countable subset and consider the set $\langle A\rangle_{\QQ}$ of rational linear combinations. This set is countable and dense in $\langle A\rangle$. Since the latter one is also dense in $E$, we conclude that $\langle A\rangle_{\QQ}$ is dense in $E$.
+  \end{proof}
+  \subsubsection{Quotient space}
+  \begin{definition}
+    Let $E$ be a normed vector space and $F$ be a closed subspace. We define the \emph{quotient space} $\quot{E}{F}$ as the respective quotient vector space with the associated norm: $$\norm{\overline{x}}_{\quot{E}{F}}:=\inf\{\norm{z}_E:z\in E\text{ with }\overline{z} = \overline{x}\}$$
+  \end{definition}
+  \begin{proposition}
+    Let $E$ be a normed vector space and $F$ be a closed subspace. The quotient space $\quot{E}{F}$ is a normed vector space. Moreover the map $$\function{\pi}{E}{\quot{E}{F}}{x}{\overline{x}}$$ is continuous with $\norm{\overline{x}}_{\quot{E}{F}}\leq \norm{x}_E$.
+  \end{proposition}
+  \begin{sproof}
+    Note that $\overline{x}=x+F$ and so $$\norm{\overline{x}}_{\quot{E}{F}}=d(0,x+F)=0\iff \overline{0}\in x+ F\iff \overline{x}=\overline{0}$$
+    The inequality follows from the fact that $\norm{\overline{y}}_{\quot{E}{F}}=0$ $\forall y\in F$. From here, the continuity is clear.
+  \end{sproof}
+  \begin{lemma}
+    Let $E$ be a normed vector space and $F$ be a closed subspace.
+    \begin{enumerate}
+      \item If $E$ is Banach, so is $\quot{E}{F}$.
+      \item If $E$ is separable, so is $\quot{E}{F}$.
+    \end{enumerate}
+  \end{lemma}
+  \begin{sproof}
+    \begin{enumerate}
+      \item Let $\sum_{n=1}^\infty\norm{\overline{x_n}}_{\quot{E}{F}}<\infty$ and for each $n\in\NN$ take $x_n\in\overline{x_n}$ with $\norm{x_n}\leq 2\norm{\overline{x_n}}_{\quot{E}{F}}$. Then, $\sum_{n=1}^\infty\norm{x_n}<\infty$ and since $E$ is Banach, $\sum_{n=1}^\infty x_n=x\in E$. The continuity and linearity of $\pi$ implies $\sum_{n=1}^\infty \overline{x_n}=\overline{x}$. Hence, $\quot{E}{F}$ is Banach.
+      \item Note that the density and countability of sets are invariant under $\pi$.
+    \end{enumerate}
+  \end{sproof}
+  \begin{proposition}
+    Let $M$ be a separable metric space and $S\subseteq M$ be a subspace. Then, $S$ is separable.
+  \end{proposition}
+  \begin{proof}
+    Let $A$ be the countable dense subset of $M$. The balls $B(y,1/n)$ with $y\in A$, $n\in\NN$ cover $S$. For each $y\in N$, let $A_n$ be the set formed by one point of each nonempty $B(y,1/n)\cap S$. The set $\bigcup_{n=1}^\infty A_n$ is dense in $S$.
+  \end{proof}
+  \begin{proposition}
+    Let $M$, $N$ be separable metric spaces. Then, $M\times N$ is separable.
+  \end{proposition}
+  \begin{sproof}
+    The product of two dense subsets is dense with the product topology.
+  \end{sproof}
   \subsubsection{\texorpdfstring{$L^p$}{Lp} spaces}
   \begin{definition}
     Let $E\subseteq\RR^n$ be a measurable set and $1\leq p<\infty$. We define:
@@ -669,58 +805,51 @@
   \begin{definition}
     Let $E\subseteq\RR^n$ be a measurable set and $1\leq p\leq\infty$. We define: $$L^p(E):=\quot{\mathcal{L}^p(E)}{\mathcal{N}(E)}$$
   \end{definition}
-  \begin{proposition}
-    Let $E\subseteq\RR^n$ be a measurable set and $1\leq p<\infty$. The set $L^p$ is a normed vector space with the norm: $$\norm{{f}}_p:={\left(\int_E\abs{{f}}^p\right)}^{1/p}\qquad\forall{f}\in L^p$$
-    And the set $L^\infty$ is also a normed vector space with the norm $$\norm{{f}}_\infty=\inf \{M:\abs{{f}(x)}\almoste{\leq} M, x\in E\}\qquad\forall{f}\in L^\infty$$
-  \end{proposition}
-  \begin{lemma}[Young's inequality for products]
+  \begin{lemma}[Young's inequality for products]\label{RFA_young}
     Let $a,b\in\RR$ and $1\leq p,q\leq \infty$ be such that $\frac{1}{p}+\frac{1}{q}=1$. Then:
     $$ab\leq\frac{a^p}{p}+\frac{b^q}{q}$$
     And the equality holds if and only if $a^p=b^q$.
   \end{lemma}
-  \begin{lemma}[Hölder's inequality]
+  \begin{sproof}
+    Let $f:[0,a]\rightarrow\RR$ be continuous and invertible such that $f(0)=0$. Then, we have:
+    $$ab\leq \int_{0}^{a}f(x)\dd{x}+\int_{0}^{b}f^{-1}(x)\dd{x}$$
+    with equality if and only if $f(a)=b$ (see \cref{RFA_youngfigure} for a better understanding). Now take $f(x)= x^{p-1}$ and so $f^{-1}(x)=x^{q-1}$. The equality is held if: $$a^{p-1} = b\text{ and }b^{q-1}=a\iff a^p = b^q$$
+    \begin{figure}[H]
+      \centering
+      \includestandalone[mode=image|tex,width=0.7\linewidth]{Images/young}
+      \caption{}
+      \label{RFA_youngfigure}
+    \end{figure}
+  \end{sproof}
+  \begin{proposition}[Hölder's inequality]
     Let $E\subseteq\RR^n$ be a measurable set, $1\leq p,q\leq \infty$ be such that $\frac{1}{p}+\frac{1}{q}=1$ and ${f}\in L^p(E)$, ${g}\in L^q(E)$. Then:
+    $$\int_E\abs{fg}\leq {\left(\int_E\abs{f}^p\right)}^{1/p}{\left(\int_E\abs{f}^q\right)}^{1/q}$$
+    Or equivalently (see \cref{RFA_lpnorm}):
     $$\norm{{fg}}_1\leq\norm{{f}}_p\norm{{g}}_q$$
     And the equality holds if and only if $\exists \alpha,\beta\in\RR_{\geq 0}$ such that $\alpha{\abs{{f}}}^p\almoste{=}\beta{\abs{{g}}}^q$.
-  \end{lemma}
-  \begin{definition}
-    Let $E\subseteq\RR^n$ be a measurable set and $U\subseteq \RR^n$ be an open set. We define:
+  \end{proposition}
+  \begin{proof}
+    Dividing $f$ by $\norm{f}_p$ and $g$ by $\norm{g}_q$ we can assume that $\norm{f}_p=\norm{g}_q=1$. Then, using \nameref{RFA_young} we have:
+    $$\int_E\abs{f(x)g(x)}\dd{x}\leq\int_E\left(\frac{\abs{f(x)}^p}{p}+\frac{\abs{g(x)}^q}{q}\right)\dd{x}=\frac{1}{p}+\frac{1}{q}=1$$
+    The equality follows from the equality in \nameref{RFA_young}.
+  \end{proof}
+  \begin{proposition}\label{RFA_lpnorm}
+    Let $E\subseteq\RR^n$ be a measurable set and $1\leq p<\infty$. The set $L^p(E)$ is a normed vector space with the norm: $$\norm{{f}}_p:={\left(\int_E\abs{{f}}^p\right)}^{1/p}\qquad\forall{f}\in L^p(E)$$
+    And the set $L^\infty(E)$ is also a normed vector space with the norm: $$\norm{{f}}_\infty=\inf \{M:\abs{{f}(x)}\almoste{\leq} M, x\in E\}\qquad\forall{f}\in L^\infty(E)$$
+  \end{proposition}
+  \begin{sproof}
+    The case for $L^\infty(E)$ is easy and the first two properties for $L^p(E)$, $p\geq 1$, too (remember \cref{RFA_postmonotoneE}). It's missing to prove the \ref{RFA_triangularineq} (also called \emph{Minkowski inequality} in this case): $$\norm{f+g}_p\leq \norm{f}_p+\norm{g}_p$$
+    We have that:
     \begin{align*}
-      \mathcal{S}(E)              & =\{f:E\rightarrow\RR:f\text{ is simple}\}                               \\
-      \mathcal{C}_{\textrm{c}}(U) & =\{f:U\rightarrow\RR:f\in\mathcal{C}^0(U),\ \supp f\text{ is compact}\}
+      {\norm{f+g}_p}^p & =\int_E\abs{f+g}\abs{f+g}^{p-1}                                            \\
+                       & \leq \int_E\abs{f}\abs{f+g}^{p-1}+\int_E\abs{g}\abs{f+g}^{p-1}             \\
+      \begin{split}
+        & \leq \left[{\left(\int_E\abs{f}^p\right)}^{1/p}+{\left(\int_E\abs{f}^q\right)}^{1/q}\right]\cdot \\
+        &\hspace{3cm}\cdot{\left(\int_E\abs{f+g}^{(p-1)\frac{p}{p-1}}\right)}^{1-\frac{1}{p}}
+      \end{split} \\
+                       & =(\norm{f}_p+\norm{g}_p)\frac{{\norm{f+g}_p}^p }{{\norm{f+g}_p}}
     \end{align*}
-  \end{definition}
-  \begin{theorem}
-    Let $1\leq p<\infty$, $E\subseteq\RR^n$ be a measurable set and $U\subseteq \RR^n$ be an open set. Then:
-    \begin{enumerate}
-      \item $\mathcal{S}(E)$ is dense in $L^p(E)$.
-      \item $\mathcal{C}_{\textrm{c}}(U)$ is dense in $L^p(U)$.
-    \end{enumerate}
-  \end{theorem}
-  \begin{theorem}
-    Let $E\subseteq\RR^n$ be a measurable space, $({f}_k)\in L^p(E)$ be a sequence of functions and $1\leq p<\infty$. Then:
-    \begin{enumerate}
-      \item If $\displaystyle\lim_{k\to\infty}f_k(x)\almoste{=}{f}(x)$, $\norm{{f}_k}\almoste\leq g(x)\in L^p(E)$. Then, ${f}\in L^p(E)$ and $\displaystyle\lim_{k\to\infty}\norm{{f}_k-{f}}_p=0$ and we will write ${f}_k\overset{L^p}{\rightarrow}{f}$.
-      \item If $\sum_{k=1}^\infty\norm{{f}_k}_p<\infty$, then $\sum_{k=1}^\infty\abs{f_k(x)}<\infty$ and $\exists f\in L^p(E)$ such that $\sum_{k=1}^\infty f_k(x)\almoste{=}f(x)$ and $\sum_{k=1}^N{f}_k\overset{L^p}{\rightarrow}{f}$. In particular, $(L^p,\norm{\cdot}_p)$ is a Banach space.
-      \item If ${f}_k\overset{L^p}{\rightarrow}{f}$, then $\exists(f_{k_j})$ such that $\displaystyle\lim_{j\to\infty}f_{k_j}(x)\almoste{=}{f}(x)$.
-    \end{enumerate}
-  \end{theorem}
-  \begin{theorem}
-    Let $E\subseteq\RR^n$ be a measurable space and $1\leq p<\infty$. Then, $L^p(E)$ is separable.
-  \end{theorem}
-  \begin{definition}
-    Let $T$ be an operator. We say that $T$ is \emph{sublinear} if: $$\abs{T(f+g)}\leq \abs{Tf}+\abs{Tg}\qquad\forall f,g\in L^p$$
-  \end{definition}
-  \begin{theorem}[Marcinkiewicz interpolation theorem]
-    Let $T$ be a sublinear operator. Then:
-    \begin{enumerate}
-      \item $\displaystyle\m{x\in\RR^n:\abs{Tf(x)}>t}\leq \frac{A}{t}\norm{f}_1$
-      \item $\norm{Tf}_\infty\leq A_\infty\norm{f}_\infty$
-    \end{enumerate}
-  \end{theorem}
-  \begin{corollary}
-    Let $T$ be a sublinear operator. Then, $\norm{Tf}_p\leq A_p\norm{f}_p$ $\forall 1<p<\infty$ and $\forall f\in L^p$.
-  \end{corollary}
+  \end{sproof}
   \subsubsection{Space of continuous functions}
   \begin{definition}
     Let $X\ne \varnothing$ be a set. We define the set $\mathcal{B}(X)$ as the vector space over $\KK=\RR,\CC$ of the functions $f:X\rightarrow\KK$ that are bounded with the \emph{uniform norm} (or \emph{supremum norm}): $$\norm{f}:=\norm{f}_X:=\sup\{\abs{f(x)}:x\in X\}$$
@@ -728,6 +857,9 @@
   \begin{proposition}
     Let $X\ne \varnothing$ be a set and $(f_n),f\in\mathcal{B}(X)$ be functions. Then: $$\lim_{n\to\infty}\norm{f_n-f}=0\iff f_n\text{ converges uniformly to }f$$
   \end{proposition}
+  \begin{sproof}
+    Remember the characterization \cref{MA_sup-equivalence}.
+  \end{sproof}
   \begin{definition}
     Let $K\subseteq \RR^n$ be a compact set. We define $\mathcal{C}(K)$ as the closed subspace of $\mathcal{B}(K)$ containing the continuous functions.
   \end{definition}
@@ -735,13 +867,21 @@
     Let $K\subseteq \RR^n$ be a compact set and $f,g\in\mathcal{C}(K)$. Then: $$\norm{fg}_K\leq\norm{f}_K\norm{g}_K$$
   \end{proposition}
   \begin{definition}
-    Let $K\subseteq \RR^n$ be a compact set and $A\subseteq \mathcal{C}(K)$ be a subset. We say that $A$ is a \emph{subalgebra} if $A$ is stable under the product, that is if $\forall f,g\in A$ we have $fg\in A$.
+    Let $K\subseteq \RR^n$ be a compact set and $A\subseteq \mathcal{C}(K)$ be a subset. We say that $A$ is a \emph{subalgebra} if $A$ is a vector subspace and it is stable under the product, that is if $\forall f,g\in A$ we have $fg\in A$.
   \end{definition}
   \begin{proposition}
     Let $K\subseteq \RR^n$ be a compact set and $A\subseteq \mathcal{C}(K)$ be a subalgebra. Then, $\overline{A}$ is also a subalgebra.
   \end{proposition}
+  \begin{proof}
+    In \cref{RFA_closurevectorsubspace} we saw that $\overline{A}$ is a vector subspace. To show that is stable under the product, consider $f,g\in\overline{A}$. Then, we can write $\displaystyle f=\lim_{n\to\infty} f_n$ and $\displaystyle g=\lim_{n\to\infty} g_n$ with $(f_n), (g_n)\in A$. Finally:
+    \begin{align*}
+      \norm{fg-f_ng_n}_K & \leq \norm{fg-f_ng}_K+\norm{f_ng-fg}_K                  \\
+                         & \leq\norm{g}_K\norm{f-f_n}_K+\norm{f_n}_K\norm{g-g_n}_K
+    \end{align*}
+    which has limit 0 when $n\to\infty$.
+  \end{proof}
   \begin{definition}
-    Let $K\subseteq \RR^n$ be a compact set and $A\subseteq \mathcal{C}(K)$ be a subalgebra. We say that $A$ is a \emph{separating set} (or \emph{separate} the points of $K$) if $\forall x,y\in K$ $\exists f\in A$ such that $f(x)\ne f(y)$.
+    Let $K\subseteq \RR^n$ be a compact set and $A\subseteq \mathcal{C}(K)$ be a subalgebra. We say that $A$ is a \emph{separating set} (or \emph{separate the points} of $K$) if $\forall x,y\in K$ $\exists f\in A$ such that $f(x)\ne f(y)$.
   \end{definition}
   \begin{definition}
     Let $K\subseteq \RR^n$ be a compact set and $A\subseteq \mathcal{C}(K)$ be a subalgebra. We say that $A$ \emph{does not vanish} if $\forall x\in K$ $\exists f_x\in A$ such that $f_x(x)\ne 0$.
@@ -772,6 +912,44 @@
   \begin{theorem}[Arzelà-Ascoli theorem]
     Let $(X,d)$ be a metric space, $K\subset X$ be a compact set and $F\subset \mathcal{C}(K)$ be a subset. Then, $F$ is relatively compact in $\mathcal{C}(K)$ if and only if $F$ is pointwise equicontinuous and pointwise bounded.
   \end{theorem}
+  \begin{definition}
+    Let $E\subseteq\RR^n$ be a measurable set and $U\subseteq \RR^n$ be an open set. We define:
+    \begin{align*}
+      \mathcal{S}(E)              & =\{f:E\rightarrow\RR:f\text{ is simple}\}                               \\
+      \mathcal{C}_{\textrm{c}}(U) & =\{f:U\rightarrow\RR:f\in\mathcal{C}^0(U),\ \supp f\text{ is compact}\}
+    \end{align*}
+  \end{definition}
+  \begin{theorem}
+    Let $1\leq p<\infty$, $E\subseteq\RR^n$ be a measurable set and $U\subseteq \RR^n$ be an open set. Then:
+    \begin{enumerate}
+      \item $\mathcal{S}(E)$ is dense in $L^p(E)$.
+      \item $\mathcal{C}_{\textrm{c}}(U)$ is dense in $L^p(U)$.
+    \end{enumerate}
+  \end{theorem}
+  \begin{theorem}
+    Let $E\subseteq\RR^n$ be a measurable space, $({f}_k)\in L^p(E)$ be a sequence of functions and $1\leq p<\infty$. Then:
+    \begin{enumerate}
+      \item If $\displaystyle\lim_{k\to\infty}f_k(x)\almoste{=}{f}(x)$, $\norm{{f}_k}\almoste\leq g(x)\in L^p(E)$. Then, ${f}\in L^p(E)$ and $\displaystyle\lim_{k\to\infty}\norm{{f}_k-{f}}_p=0$ and we will write ${f}_k\overset{L^p}{\rightarrow}{f}$.
+      \item If $\sum_{k=1}^\infty\norm{{f}_k}_p<\infty$, then $\sum_{k=1}^\infty\abs{f_k(x)}<\infty$ and $\exists f\in L^p(E)$ such that $\sum_{k=1}^\infty f_k(x)\almoste{=}f(x)$ and $\sum_{k=1}^N{f}_k\overset{L^p}{\rightarrow}{f}$. In particular, $(L^p,\norm{\cdot}_p)$ is a Banach space.
+      \item If ${f}_k\overset{L^p}{\rightarrow}{f}$, then $\exists(f_{k_j})$ such that $\displaystyle\lim_{j\to\infty}f_{k_j}(x)\almoste{=}{f}(x)$.
+    \end{enumerate}
+  \end{theorem}
+  \begin{theorem}
+    Let $E\subseteq\RR^n$ be a measurable space and $1\leq p<\infty$. Then, $L^p(E)$ is separable.
+  \end{theorem}
+  \begin{definition}
+    Let $T$ be an operator. We say that $T$ is \emph{sublinear} if: $$\norm{T(f+g)}\leq \norm{Tf}+\norm{Tg}\qquad\forall f,g\in L^p$$
+  \end{definition}
+  \begin{theorem}[Marcinkiewicz interpolation theorem]
+    Let $T$ be a sublinear operator. Then:
+    \begin{enumerate}
+      \item $\displaystyle\m{\{x\in\RR^n:\abs{Tf(x)}>t\}}\leq \frac{A}{t}\norm{f}_1$
+      \item $\norm{Tf}_\infty\leq A_\infty\norm{f}_\infty$
+    \end{enumerate}
+  \end{theorem}
+  \begin{corollary}
+    Let $T$ be a sublinear operator. Then, $\norm{Tf}_p\leq A_p\norm{f}_p$ $\forall 1<p<\infty$ and $\forall f\in L^p$.
+  \end{corollary}
   \subsubsection{Operators}
   \begin{definition}
     Let $E$, $F$ be normed vector spaces. An \emph{operator} $T$ is a linear function $T:E\rightarrow F$.
@@ -1132,7 +1310,7 @@
     Let $H$ be a Hilbert space. An \emph{orthogonal system} on $H$ is a nonempty subset $E\subseteq H$ such that its vectors are pairwise orthogonal. If moreover $\norm{e}=1 $ $\forall e\in E$, we will say that $E$ is a \emph{orthonormal system}.
   \end{definition}
   \begin{definition}
-    Let $H$ be a Hilbert space and $E$ be an orthonormal system. We say that $E$ is \emph{complete} (or \emph{maximal}) if $E^\perp =\{0\}$. Equivalently, $E$ is complete if there is no other ortogonal system $E'\subseteq H$ such that $E\subsetneq E'$.
+    Let $H$ be a Hilbert space and $E$ be an orthonormal system. We say that $E$ is \emph{complete} (or \emph{maximal}) if $E^\perp =\{0\}$. Equivalently, $E$ is complete if there is no other orthogonal system $E'\subseteq H$ such that $E\subsetneq E'$.
   \end{definition}
   \begin{lemma}
     Let $H$ be a Hilbert space and $E=\{e_1,\ldots,e_n\}$ be an orthonormal system and $F=\langle E\rangle$. Then, each $x\in H$ can be written as: $$P_Fx=\sum_{k=1}^n\dotp{x}{e_k}e_k$$
