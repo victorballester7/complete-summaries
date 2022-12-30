@@ -717,13 +717,6 @@
     The space $\mathcal{C}_0([a,b])$ of continuous and bounded functions with the \emph{uniform norm} $$\norm{f}_\infty:=\sup\{\abs{f(t)}:t\in[a,b]\}$$
     is Banach.
   \end{proposition}
-  \begin{definition}
-    We define by $\ell^\infty$ the space of all bounded sequences.
-  \end{definition}
-  \begin{proposition}
-    The space $\ell^\infty$ with the \emph{uniform norm} $$\norm{(x_n)}_\infty:=\sup\{\abs{x_n}:n\in\NN\}$$
-    is Banach.
-  \end{proposition}
   \begin{proposition}\label{RFA_closurevectorsubspace}
     Let $(E,\|\cdot\|)$ be a normed vector space and $F\subseteq E$ be a vector subspace. Then, $\overline{F}$ is also a vector subspace of $E$.
   \end{proposition}
@@ -763,7 +756,7 @@
     Let $E$ be a normed vector space and $F$ be a closed subspace. The quotient space $\quot{E}{F}$ is a normed vector space. Moreover the map $$\function{\pi}{E}{\quot{E}{F}}{x}{\overline{x}}$$ is continuous with $\norm{\overline{x}}_{\quot{E}{F}}\leq \norm{x}_E$.
   \end{proposition}
   \begin{sproof}
-    Note that $\overline{x}=x+F$ and so $$\norm{\overline{x}}_{\quot{E}{F}}=d(0,x+F)=0\iff \overline{0}\in x+ F\iff \overline{x}=\overline{0}$$
+    Note that $\overline{x}=x+F$ and so $$\norm{\overline{x}}_{\quot{E}{F}}=d(0,x+F)=0\iff 0\in x+ F\iff \overline{x}=\overline{0}$$
     The inequality follows from the fact that $\norm{\overline{y}}_{\quot{E}{F}}=0$ $\forall y\in F$. From here, the continuity is clear.
   \end{sproof}
   \begin{lemma}
@@ -806,7 +799,7 @@
     Let $E\subseteq\RR^n$ be a measurable set and $1\leq p\leq\infty$. We define: $$L^p(E):=\quot{\mathcal{L}^p(E)}{\mathcal{N}(E)}$$
   \end{definition}
   \begin{lemma}[Young's inequality for products]\label{RFA_young}
-    Let $a,b\in\RR$ and $1\leq p,q\leq \infty$ be such that $\frac{1}{p}+\frac{1}{q}=1$. Then:
+    Let $a,b>0$ and $1\leq p,q\leq \infty$ be such that $\frac{1}{p}+\frac{1}{q}=1$. Then:
     $$ab\leq\frac{a^p}{p}+\frac{b^q}{q}$$
     And the equality holds if and only if $a^p=b^q$.
   \end{lemma}
@@ -850,6 +843,24 @@
                        & =(\norm{f}_p+\norm{g}_p)\frac{{\norm{f+g}_p}^p }{{\norm{f+g}_p}}
     \end{align*}
   \end{sproof}
+  \begin{proposition}
+    Let $E\subseteq\RR^n$ be a measurable set and $1\leq p\leq\infty$. Then, $(L^p(E),\norm{\cdot}_p)$ is Banach.
+  \end{proposition}
+  \subsubsection{Other important Banach spaces}
+  \begin{definition}
+    We denote by $c_0$ the space of all sequences convergent to 0; by $c$, the space of all convergent sequences, and by $\ell^\infty$, the space of all bounded sequences.
+  \end{definition}
+  \begin{proposition}
+    The spaces $c_0$, $c$ and $\ell^\infty$ with the \emph{uniform norm} $$\norm{(x_n)}_\infty:=\sup\{\abs{x_n}:n\in\NN\}$$
+    are Banach.
+  \end{proposition}
+  \begin{definition}
+    Let $1\leq p<\infty$. We define the space $\ell^p$ as the space of the sequences $x=(x_n)$ such that:
+    $$\norm{x}_p:={\left(\sum_{n=1}^\infty{x_n}^p\right)}^{1/p}<\infty$$
+  \end{definition}
+  \begin{proposition}
+    The space $(\ell^p,\norm{\cdot}_p)$ is Banach.
+  \end{proposition}
   \subsubsection{Space of continuous functions}
   \begin{definition}
     Let $X\ne \varnothing$ be a set. We define the set $\mathcal{B}(X)$ as the vector space over $\KK=\RR,\CC$ of the functions $f:X\rightarrow\KK$ that are bounded with the \emph{uniform norm} (or \emph{supremum norm}): $$\norm{f}:=\norm{f}_X:=\sup\{\abs{f(x)}:x\in X\}$$
@@ -861,16 +872,16 @@
     Remember the characterization \cref{MA_sup-equivalence}.
   \end{sproof}
   \begin{definition}
-    Let $K\subseteq \RR^n$ be a compact set. We define $\mathcal{C}(K)$ as the closed subspace of $\mathcal{B}(K)$ containing the continuous functions.
+    Let $K\subseteq \KK^n$ be a compact set. We define $\mathcal{C}(K)$ as the closed subspace of $\mathcal{B}(K)$ containing the continuous functions.
   \end{definition}
   \begin{proposition}
-    Let $K\subseteq \RR^n$ be a compact set and $f,g\in\mathcal{C}(K)$. Then: $$\norm{fg}_K\leq\norm{f}_K\norm{g}_K$$
+    Let $K\subseteq \KK^n$ be a compact set and $f,g\in\mathcal{C}(K)$. Then: $$\norm{fg}_K\leq\norm{f}_K\norm{g}_K$$
   \end{proposition}
   \begin{definition}
-    Let $K\subseteq \RR^n$ be a compact set and $A\subseteq \mathcal{C}(K)$ be a subset. We say that $A$ is a \emph{subalgebra} if $A$ is a vector subspace and it is stable under the product, that is if $\forall f,g\in A$ we have $fg\in A$.
+    Let $K\subseteq \KK^n$ be a compact set and $A\subseteq \mathcal{C}(K)$ be a subset. We say that $A$ is a \emph{subalgebra} if $A$ is a vector subspace and it is stable under the product, that is if $\forall f,g\in A$ we have $fg\in A$.
   \end{definition}
   \begin{proposition}
-    Let $K\subseteq \RR^n$ be a compact set and $A\subseteq \mathcal{C}(K)$ be a subalgebra. Then, $\overline{A}$ is also a subalgebra.
+    Let $K\subseteq \KK^n$ be a compact set and $A\subseteq \mathcal{C}(K)$ be a subalgebra. Then, $\overline{A}$ is also a subalgebra.
   \end{proposition}
   \begin{proof}
     In \cref{RFA_closurevectorsubspace} we saw that $\overline{A}$ is a vector subspace. To show that is stable under the product, consider $f,g\in\overline{A}$. Then, we can write $\displaystyle f=\lim_{n\to\infty} f_n$ and $\displaystyle g=\lim_{n\to\infty} g_n$ with $(f_n), (g_n)\in A$. Finally:
@@ -881,22 +892,54 @@
     which has limit 0 when $n\to\infty$.
   \end{proof}
   \begin{definition}
-    Let $K\subseteq \RR^n$ be a compact set and $A\subseteq \mathcal{C}(K)$ be a subalgebra. We say that $A$ is a \emph{separating set} (or \emph{separate the points} of $K$) if $\forall x,y\in K$ $\exists f\in A$ such that $f(x)\ne f(y)$.
+    Let $K\subseteq \KK^n$ be a compact set and $A\subseteq \mathcal{C}(K)$ be a subalgebra. We say that $A$ is a \emph{separating set} (or \emph{separate the points} of $K$) if $\forall x,y\in K$ $\exists f\in A$ such that $f(x)\ne f(y)$.
   \end{definition}
   \begin{definition}
-    Let $K\subseteq \RR^n$ be a compact set and $A\subseteq \mathcal{C}(K)$ be a subalgebra. We say that $A$ \emph{does not vanish} if $\forall x\in K$ $\exists f_x\in A$ such that $f_x(x)\ne 0$.
+    Let $K\subseteq \KK^n$ be a compact set and $A\subseteq \mathcal{C}(K)$ be a subalgebra. We say that $A$ \emph{vanishes nowhere} if $\forall x\in K$ $\exists f_x\in A$ such that $f_x(x)\ne 0$\footnote{Note that it suffices for $A$ to contain the constant functions so that it vanishes nowhere.}.
+  \end{definition}
+  \begin{lemma}\label{RFA_lemmaalphabeta}
+    Let $K\subseteq \KK^n$ be a compact set and $A\subseteq \mathcal{C}(K)$ be a separating subalgebra that vanishes nowhere. Then, $\forall x,y\in K$ and $\forall \alpha,\beta\in\KK$, $\exists f\in A$ such that $f(x)=\alpha$ and $f(y)=\beta$.
+  \end{lemma}
+  \begin{proof}
+    By hypothesis $\exists g\in A$ such that $g(x)\ne g(y)$. Then consider:
+    $$f=\alpha\frac{g-g(y)}{g(x)-g(y)}+\beta\frac{g-g(x)}{g(y)-g(x)}$$
+    Note that $f\in A$ because $A$ vanishes nowhere and so the constants functions are in $A$.
+  \end{proof}
+  \begin{definition}
+    Let $K\subseteq \KK^n$ be a compact set and $A\subseteq \mathcal{C}(K)$ be a subalgebra. We say that $A$ is \emph{autoconjugate} if $\overline{f}\in A$ whenever $f\in A$.
   \end{definition}
   \begin{lemma}
-    Let $K\subseteq \RR^n$ be a compact set and $A\subseteq \mathcal{C}(K)$ be a subalgebra. If $A$ contains the constant functions, then $A$ does not vanish.
+    Let $K\subseteq \RR^n$ be a compact set and $A\subseteq \mathcal{C}(K)$ be a subalgebra. If $f\in A$, then $\abs{f}\in \overline{A}$.
   \end{lemma}
-  \begin{definition}
-    Let $K\subseteq \RR^n$ be a compact set and $A\subseteq \mathcal{C}(K)$ be a subalgebra. We say that $A$ is \emph{autoconjugate} if $\overline{f}\in A$ whenever $f\in A$.
-  \end{definition}
+  \begin{proof}
+    First note that since $f\in \mathcal{C}(K)$, $f$ is bounded and so $\exists a,b\in\RR$ such that $f(K)\subseteq[a,b]$. Consider $v(x)=\abs{x}$, $x\in[a,b]$. Then, by \nameref{MA_weierstrasspolynomials} $\exists (q_n)\in\RR[x_1,\ldots,x_n]$ such that $\displaystyle\lim_{n\to\infty}\norm{q_n-v}_{[a,b]}=0$. Now construct $p_n(x)=q_n(x)-q_n(0)$ which also satisfies $\displaystyle\lim_{n\to\infty}\norm{p_n-v}_{[a,b]}=0$ because $\displaystyle\lim_{n\to\infty} q_n(0)=v(0)=0$. Since we can write $p_n(x)=\sum_{k=1}^na_kx^k$, we have that $p_n(f)=\sum_{k=1}^na_kf^k\in A$ and so: $$\lim_{n\to\infty}\norm{p_n(f)-\abs{f}}_{K}\leq\lim_{n\to\infty}\norm{p_n-v}_{[a,b]}=0$$
+  \end{proof}
+  \begin{corollary}
+    Let $K\subseteq \KK^n$ be a compact set and $A\subseteq \mathcal{C}(K)$ be a subalgebra. If $f,g\in A$, then $\sup\{f,g\}, \inf\{f,g\}\in \overline{A}$.
+  \end{corollary}
+  \begin{sproof}
+    $$\sup\{f,g\}=\frac{f+g+\abs{f-g}}{2}\quad\inf\{f,g\}=\frac{f+g-\abs{f-g}}{2}$$
+  \end{sproof}
+  \begin{lemma}\label{RFA_lemmaStone}
+    Let $K\subseteq \KK^n$ be a compact set, $A\subseteq \mathcal{C}(K)$ be a separating subalgebra that vanishes nowhere, $x\in K$ and $f\in\mathcal{C}(K)$. Then, $\forall \varepsilon>0$ $\exists g_x\in\overline{A}$ such that $g_x(x)=f(x)$ and $g_x<f+\varepsilon$ in $K$.
+  \end{lemma}
+  \begin{proof}
+    By \cref{RFA_lemmaalphabeta}, $\forall y\in K$ $\exists h_y\in\mathcal{C}(A)$ such that $h_y(y)=f(y)$ and $h_y(x)=f(x)$. By continuity there is a neighbourhood $N_y$ of $y$ such that $h_y<f+\varepsilon$. Now note that $K\subset\bigcup_{y\in K}N_y$ and the compactness implies that $K\subset\bigcup_{i=1}^mN_{y_i}$ for certain $y_i\in K$, $i=1,\ldots,m$. Finally take $g_x:=\inf\{h_{y_i}:i=1,\ldots,m\}\in\overline{A}$.
+  \end{proof}
   \begin{theorem}[Stone-Weierstra\ss\ theorem]
-    Let $K\subseteq \RR^n$ be a compact set and $A\subseteq \mathcal{C}(K)$ be a separating autoconjugate subalgebra that does not vanish. Then, $A$ is dense in $\mathcal{C}(K)$.
+    Let $K\subseteq \KK^n$ be a compact set and $A\subseteq \mathcal{C}(K)$ be a separating autoconjugate subalgebra that vanishes nowhere. Then, $A$ is dense in $\mathcal{C}(K)$.
   \end{theorem}
+  \begin{proof}
+    We distinguish between $\KK=\RR$ and $\KK=\CC$.
+    \begin{itemize}[leftmargin=1.3cm]
+      \item[$\KK=\RR$:] Let $f\in\mathcal{C}(K)$. We should find $g\in\mathcal{A}$ such that $\forall \varepsilon>0$, $\norm{f-g}_K<\varepsilon$. For each $x\in K$, let $g_x$ be the function of \cref{RFA_lemmaStone} that satisfies $g_x<f+\varepsilon$. By continuity there is a neighbourhood $N_x$ of $x$ such that $g_x>f-\varepsilon$. The compactness of $K$ implies $K\subset\bigcup_{i=1}^mN_{x_i}$ for certain $x_i\in K$, $i=1,\ldots,m$. Finally take $g:=\sup\{g_{x_i}:i=1,\ldots,m\}\in\overline{A}$ that satisfies $\norm{f-g}_K<\varepsilon$.
+      \item[$\KK=\CC$:] Note that $A_0:=\{\Re f:f\in A\}=\{\Im f:f\in A\}$ because $A$ is autoconjugate. Moreover $A_0$ is a separating subalgebra that vanishes nowhere. By the case $\KK=\RR$ we know that exists sequences $(u_n),(v_n)\in A_0$ such that $\displaystyle\lim_{n\to\infty}\norm{\Re f-u_n}_K=\lim_{n\to\infty}\norm{\Im f-v_n}_K=0$. And it suffice to consider $g_n:=u_n+\ii v_n$ that converges uniformly to $f$.
+    \end{itemize}
+  \end{proof}
   \begin{definition}
-    Let $(X,d_X)$, $(Y,d_Y)$ be two metric spaces and $F\subset\mathcal{C}(X,Y)$ be a subset. We say that $F$ is \emph{pointwise bounded} if $\forall x\in X$ $\exists M_x>0$ such that $\abs{f(x)}\leq M_x$ $\forall f\in F$.
+    Let $(X,d_X)$, $(Y,d_Y)$ be two metric spaces and $F\subset\mathcal{C}(X,Y)$ be a subset.
+    We say that $F$ is \emph{pointwise bounded} if $\forall x\in X$ $\exists M_x>0$ such that $\abs{f(x)}\leq M_x$ $\forall f\in F$.
+    We say that $F$ is \emph{locally bounded} if $\forall x\in X$ there exist a neighborhood $N_x$ of $x$ and a $M_x>0$ such that $\abs{f(N_x)}\leq M_x$ $\forall f\in F$.
     We say that $F$ is \emph{uniformly bounded} if $\exists M>0$ such that $\abs{f(x)}\leq M$ $\forall x\in X$ and $\forall f\in F$.
   \end{definition}
   \begin{definition}
@@ -906,12 +949,15 @@
   \begin{definition}
     Let $(X,d)$ be a metric space and $F\subseteq X$. We say that $F$ is relatively compact on $X$ if $\overline{F}$ is compact on $X$.
   \end{definition}
-  \begin{lemma}
-    Let $(X,d)$ be a metric space and $F\subseteq X$. $F$ is relatively compact on $X$ if and only if any bounded sequence $(x_n)\in F$ has a partial convergent subsequence.
-  \end{lemma}
-  \begin{theorem}[Arzelà-Ascoli theorem]
+  % \begin{lemma}
+  %   Let $(X,d)$ be a metric space and $F\subseteq X$. $F$ is relatively compact on $X$ if and only if any bounded sequence $(x_n)\in F$ has a partial convergent subsequence.
+  % \end{lemma}
+  \begin{theorem}[Arzelà-Ascoli theorem]\label{RFA_arzela}
     Let $(X,d)$ be a metric space, $K\subset X$ be a compact set and $F\subset \mathcal{C}(K)$ be a subset. Then, $F$ is relatively compact in $\mathcal{C}(K)$ if and only if $F$ is pointwise equicontinuous and pointwise bounded.
   \end{theorem}
+  \begin{proof}
+
+  \end{proof}
   \begin{definition}
     Let $E\subseteq\RR^n$ be a measurable set and $U\subseteq \RR^n$ be an open set. We define:
     \begin{align*}
@@ -920,23 +966,90 @@
     \end{align*}
   \end{definition}
   \begin{theorem}
+    Let $E\subseteq\RR^n$ be a measurable space, $({f}_k)\in L^p(E)$ be a sequence of functions and $1\leq p<\infty$. Then:
+    \begin{enumerate}
+      \item\label{RFA_thmLpBanachA} If $\displaystyle\lim_{k\to\infty}f_k(x)\almoste{=}{f}(x)$, $\abs{{f}_k}\almoste\leq g\in L^p(E)$. Then, ${f}\in L^p(E)$ and $\displaystyle\lim_{k\to\infty}\norm{{f}_k-{f}}_p=0$ and we will write ${f}_k\overset{L^p}{\rightarrow}{f}$.
+      \item\label{RFA_thmLpBanachB} If $\sum_{k=1}^\infty\norm{{f}_k}_p<\infty$, then $\sum_{k=1}^\infty\abs{f_k(x)}\almoste{<}\infty$ and $\exists f\in L^p(E)$ such that $\sum_{k=1}^\infty f_k(x)\almoste{=}f(x)$ and $\sum_{k=1}^N{f}_k\overset{L^p}{\rightarrow}{f}$. In particular, $(L^p,\norm{\cdot}_p)$ is a Banach space.
+      \item If ${f}_k\overset{L^p}{\rightarrow}{f}$, then $\exists(f_{k_j})$ such that $\displaystyle\lim_{j\to\infty}f_{k_j}(x)\almoste{=}{f}(x)$.
+    \end{enumerate}
+  \end{theorem}
+  \begin{sproof}
+    \begin{enumerate}
+      \item A direct application of the \nameref{RFA_dominated} shows that $f\in L^p(E)$. Moreover, $\abs{f_k-f}^p\leq{2g}^p\in L^1(E)$. So again the \nameref{RFA_dominated} allows us to conclude ${f}_k\overset{L^p}{\rightarrow}{f}$.
+      \item Let $g_N(x):=\sum_{k=1}^N\abs{f_k(x)}$. Then:
+            \begin{align*}
+              \norm{g_N}_p & ={\left(\int_E{\abs{g_N}}^p\right)}^{1/p}\leq \sum_{k=1}^N\norm{{f}_k}_p \\
+                           & \leq\sum_{k=1}^\infty\norm{{f}_k}_p<\infty
+            \end{align*}
+            where we have use the \ref{RFA_triangularineq}. Thus, ${\norm{g_N}_p}^p\infty$ and by the \nameref{RFA_monotone} we have ${\norm{g}_p}^p<\infty$ which implies:
+            $$\sum_{k=1}^\infty\abs{f_k(x)}\almoste{<}\infty$$
+            Now use \cref{RFA_thmLpBanachA} to show that $F_N\overset{L^p}{\rightarrow}{f}$, where $F_N=\sum_{k=1}^{N}f_k$.
+      \item The Cauchy condition for $(f_k)$ implies that $\forall m\in\NN$ $\exists k_m$ such that if $p,q>k_m$ then $\norm{f_p-f_q}_p<\frac{1}{2^m}$. Now consider the partial sequence defined by the series of partial sums:
+            $$f_{k_1}+(f_{k_2}-f_{k_1})+\cdots+(f_{k_{m+1}}-f_{k_{m}})+\cdots$$
+            Now use \cref{RFA_thmLpBanachB}.
+    \end{enumerate}
+  \end{sproof}
+  \begin{theorem}
     Let $1\leq p<\infty$, $E\subseteq\RR^n$ be a measurable set and $U\subseteq \RR^n$ be an open set. Then:
     \begin{enumerate}
       \item $\mathcal{S}(E)$ is dense in $L^p(E)$.
       \item $\mathcal{C}_{\textrm{c}}(U)$ is dense in $L^p(U)$.
     \end{enumerate}
   \end{theorem}
-  \begin{theorem}
-    Let $E\subseteq\RR^n$ be a measurable space, $({f}_k)\in L^p(E)$ be a sequence of functions and $1\leq p<\infty$. Then:
+  \begin{sproof}
     \begin{enumerate}
-      \item If $\displaystyle\lim_{k\to\infty}f_k(x)\almoste{=}{f}(x)$, $\norm{{f}_k}\almoste\leq g(x)\in L^p(E)$. Then, ${f}\in L^p(E)$ and $\displaystyle\lim_{k\to\infty}\norm{{f}_k-{f}}_p=0$ and we will write ${f}_k\overset{L^p}{\rightarrow}{f}$.
-      \item If $\sum_{k=1}^\infty\norm{{f}_k}_p<\infty$, then $\sum_{k=1}^\infty\abs{f_k(x)}<\infty$ and $\exists f\in L^p(E)$ such that $\sum_{k=1}^\infty f_k(x)\almoste{=}f(x)$ and $\sum_{k=1}^N{f}_k\overset{L^p}{\rightarrow}{f}$. In particular, $(L^p,\norm{\cdot}_p)$ is a Banach space.
-      \item If ${f}_k\overset{L^p}{\rightarrow}{f}$, then $\exists(f_{k_j})$ such that $\displaystyle\lim_{j\to\infty}f_{k_j}(x)\almoste{=}{f}(x)$.
+      \item Consequence of \cref{RFA_thmLpBanachA} and \cref{RFA_increasing-sm}.
+      \item
     \end{enumerate}
-  \end{theorem}
+  \end{sproof}
   \begin{theorem}
     Let $E\subseteq\RR^n$ be a measurable space and $1\leq p<\infty$. Then, $L^p(E)$ is separable.
   \end{theorem}
+  \subsubsection{Operators}
+  \begin{definition}
+    Let $E$, $F$ be normed vector spaces. An \emph{operator} $T$ is a linear function $T:E\rightarrow F$.
+  \end{definition}
+  \begin{definition}
+    Let $E$, $F$ be normed vector spaces and $T:E\rightarrow F$ be an operator. We define the \emph{norm} of $T$ as:
+    \begin{equation}\label{RFA_normoperator}
+      \norm{T}:=\sup\{\norm{Tx}_F:\norm{x}_E\leq 1\}
+    \end{equation}
+  \end{definition}
+  \begin{lemma}\label{RFA_normT}
+    Let $E$, $F$ be normed vector spaces and $T:E\rightarrow F$ be an operator. Then:
+    \begin{align*}
+      \norm{T} & =\sup\{\norm{Tx}_F:\norm{x}_E< 1\}                        \\
+               & =\sup\left\{\norm{Tx}_F:\norm{x}_E= 1\right\}             \\
+               & =\sup\left\{\frac{\norm{Tx}_F}{\norm{x}_E}:x\ne 0\right\}
+    \end{align*}
+  \end{lemma}
+  \begin{sproof}
+    Note that due to the linearity of $T$ we have $$\norm{Tx}_F=\lim_{\varepsilon \to 0}\norm{T((1-\varepsilon)x)}_F\leq \sup_{\norm{x}_E< 1}\norm{Tx}_F$$
+    And this proves the first equality. For the second one, use the latter one and the fact that:
+    $$\norm{Tx}_F=\norm{x}_E\norm{T\left(\frac{x}{\norm{x}_E}\right)}_F\leq \sup_{\norm{x}_E= 1}\norm{Tx}_F$$
+    The last one follows from applying the second equality to $\frac{x}{\norm{x}_E}$.
+  \end{sproof}
+  \begin{theorem}
+    Let $E$, $F$ be normed vector spaces and $T:E\rightarrow F$ be an operator. The following are equivalent:
+    \begin{enumerate}[ref = \arabic{enumi}]
+      \item\label{RFA_TcontinuousA} $T$ is continuous at 0.
+      \item\label{RFA_TcontinuousB} $T$ is continuous.
+      \item\label{RFA_TcontinuousC} $T(B_E)$ is bounded on $F$, where $B_E:=\{x\in E:\norm{x}_E\leq 1\}$.
+      \item\label{RFA_TcontinuousD} $\norm{T}<\infty$.
+      \item\label{RFA_TcontinuousE} $\exists C\geq 0$ such that $\forall x\in E$ we have: $$\norm{Tx}_F\leq C\norm{x}_E$$
+      If, moreover, $T$ is continuous, $\norm{T}$ is the least of such constants $C$.
+    \end{enumerate}
+  \end{theorem}
+  \begin{sproof}
+    \begin{enumerate}[leftmargin=1.5cm]
+      \item[\ref{RFA_TcontinuousA}$\implies$\ref{RFA_TcontinuousB}:] Let $x\in E$ and $(x_n)\in E$ such that $\displaystyle \lim_{n\to\infty}x_n=x$. Then $\displaystyle \lim_{n\to\infty}(x_n - x)=0$ and the continuity and linearity imply $\displaystyle \lim_{n\to\infty}(Tx_n-Tx)=0$.
+      \item[\ref{RFA_TcontinuousB}$\implies$\ref{RFA_TcontinuousC}:] The continuity at the origin of $T$ implies that given $\varepsilon =1$, $\exists \delta>0$ such that: $$T(B_E(0,\delta))\subseteq B_F(0,1)$$
+        The linearity of $T$ implies that $T(B_E(0,1))\subseteq B_F(0,1/\delta)$.
+      \item[\ref{RFA_TcontinuousC}$\implies$\ref{RFA_TcontinuousD}:] Consequence of \cref{RFA_normT}.
+      \item[\ref{RFA_TcontinuousD}$\implies$\ref{RFA_TcontinuousE}:] By the definition of supremum we have: $$\norm{T\left(\frac{x}{\norm{x}_E}\right)}_F\leq \norm{T}$$ And so $\norm{Tx}_F\leq \norm{T}\norm{x}_E$.
+      \item[\ref{RFA_TcontinuousE}$\implies$\ref{RFA_TcontinuousA}:] Evident.
+    \end{enumerate}
+  \end{sproof}
   \begin{definition}
     Let $T$ be an operator. We say that $T$ is \emph{sublinear} if: $$\norm{T(f+g)}\leq \norm{Tf}+\norm{Tg}\qquad\forall f,g\in L^p$$
   \end{definition}
@@ -950,74 +1063,76 @@
   \begin{corollary}
     Let $T$ be a sublinear operator. Then, $\norm{Tf}_p\leq A_p\norm{f}_p$ $\forall 1<p<\infty$ and $\forall f\in L^p$.
   \end{corollary}
-  \subsubsection{Operators}
-  \begin{definition}
-    Let $E$, $F$ be normed vector spaces. An \emph{operator} $T$ is a linear function $T:E\rightarrow F$.
-  \end{definition}
-  \begin{definition}
-    Let $E$, $F$ be normed vector spaces and $T:E\rightarrow F$ be an operator. We define the \emph{norm} of $T$ as:
-    \begin{equation}\label{RFA_normoperator}
-      \norm{T}:=\sup\{\norm{T(x)}_F:\norm{x}_E\leq 1\}
-    \end{equation}
-  \end{definition}
-  \begin{lemma}
-    Let $E$, $F$ be normed vector spaces and $T:E\rightarrow F$ be an operator. Then:
-    \begin{align*}
-      \norm{T} & =\sup\{\norm{T(x)}_F:\norm{x}_E< 1\}                        \\
-               & =\sup\left\{\norm{T(x)}_F:\norm{x}_E= 1\right\}             \\
-               & =\sup\left\{\frac{\norm{T(x)}_F}{\norm{x}_E}:x\ne 0\right\}
-    \end{align*}
-  \end{lemma}
-  \begin{theorem}
-    Let $E$, $F$ be normed vector spaces and $T:E\rightarrow F$ be an operator. The following are equivalent:
-    \begin{enumerate}
-      \item $T$ is continuous at 0.
-      \item $T$ is continuous.
-      \item $T(B_E)$ is bounded on $F$.
-      \item $\norm{T}<\infty$.
-      \item $\exists C\geq 0$ such that $\forall x\in E$ we have: $$\norm{T(x)}_F\leq C\norm{x}_E$$
-            If, moreover, $T$ is continuous, $\norm{T}$ is the least of such constants $C$.
-    \end{enumerate}
-  \end{theorem}
   \subsubsection{Finite dimensional normed vector spaces}
   \begin{definition}
-    A \emph{topological isomorphism} is a linear homeomorphism between any two normed vector spaces. If there exists such an isomorphism we will say that the two normed vector spaces are \emph{isomorphic}.
+    A \emph{topological homeomorphism} is a linear homeomorphism between any two normed vector spaces. If there exists such an isomorphism we will say that the two normed vector spaces are \emph{isomorphic}.
   \end{definition}
   \begin{definition}
     Let $E$ be a normed vector space and $\norm{\cdot}_1$, $\norm{\cdot}_2$ be two norms on $E$. We say that $\norm{\cdot}_1$ \emph{is finer than} $\norm{\cdot}_2$ if $\exists\alpha\in\RR$ such that: $$\norm{x}_1\leq\alpha\norm{x}_2\qquad \forall x\in E$$
   \end{definition}
   \begin{definition}
-    Let $E$ be a normed vector space and $\norm{\cdot}_1$, $\norm{\cdot}_2$ be two norms on $E$. We say that the norms $\norm{\cdot}_1$, $\norm{\cdot}_2$ are \emph{equivalent} if $\exists\alpha,\beta\in\RR$ such that: $$\alpha\norm{x}_2\leq \norm{x}_1\leq\beta\norm{x}_2\qquad \forall x\in E$$
+    Let $E$ be a normed vector space and $\norm{\cdot}_1$, $\norm{\cdot}_2$ be two norms on $E$. We say that the norms $\norm{\cdot}_1$, $\norm{\cdot}_2$ are \emph{equivalent} if $\exists\alpha,\beta>0$ such that: $$\alpha\norm{x}_2\leq \norm{x}_1\leq\beta\norm{x}_2\qquad \forall x\in E$$
   \end{definition}
   \begin{theorem}
     Let $E$ be a normed vector space over $\KK$ of dimension $n\in\NN$. Then, any algebraic isomorphism $T:\KK^n\rightarrow E$ is a topological isomorphism.
   \end{theorem}
+  \begin{proof}
+    We need to show that the Euclidean norm $\norm{\cdot}$ and the norm $\norm{x}':=\norm{Tx}_E$ are equivalent. Let $(u_1,\ldots,u_n)$ be a basis of $\KK^n$ and suppose $x=\sum_{i=1}^n x_ju_j$. Then:
+    $$\norm{x}'\leq\sum_{i=1}^n \abs{x_j}\norm{u_j}\leq\norm{x}\sum_{i=1}^n \norm{u_j}=:C\norm{x}$$
+    To show the other inequality, consider the function $f(x)=\norm{x}'$ defined on $B=\{x\in \KK^n:\norm{x}=1\}$. Then, $f$ is continuous and \nameref{RVF_weierstrass} implies the existence of and absolute minimum $c\in B$ such that $f\left(\frac{x}{\norm{x}}\right)\geq c$, i.e. $\norm{x}'\geq c\norm{x}$.
+  \end{proof}
   \begin{corollary}
     In a finite-dimensional normed vector space any two norms are always equivalent.
   \end{corollary}
   \begin{corollary}
     In a normed vector space any finite-dimensional subspace is complete and therefore closed.
   \end{corollary}
+  \begin{sproof}
+    The topological isomorphisms preverve the completeness.
+  \end{sproof}
   \begin{corollary}
     Let $E$, $F$ be normed vector spaces and $T:E\rightarrow F$ be an operator. If $T$ is linear and $\dim E<\infty$, then $T$ is continuous.
   \end{corollary}
-  \begin{lemma}[Almost orthogonality lemma]
-    Let $E$ be a normed vector space and $F\subseteq E$ be a proper subspace of $E$. Then, $\forall \varepsilon>0$, $\exists u\in E$ such that $\norm{u}=1$ and $d(u,F)\geq 1-\varepsilon$.
+  \begin{sproof}
+    Since $T$ is linear, it is the composition of continuous functions $T:E\rightarrow \KK^n\rightarrow\KK^m\rightarrow F$.
+  \end{sproof}
+  \begin{lemma}[Almost orthogonality lemma]\label{RFA_almostorthogonality}
+    Let $E$ be a normed vector space and $F\subseteq E$ be a proper subspace of $E$. Then, $\forall \varepsilon>0$ $\exists u\in E$ such that $\norm{u}=1$ and $d(u,F)\geq 1-\varepsilon$.
   \end{lemma}
+  \begin{proof}
+    We may suppose $\varepsilon<1$. Let $v\in E$ such that $d(v,F)=\delta>0$. Then, consider $u=\frac{v-x_0}{\norm{v-x_0}}$, where $x_0\in F$ satisfies $\delta\leq \norm{v-x_0}\leq \frac{\delta}{1-\varepsilon}$. Finally, $\forall x\in F$:
+    $$\norm{u-x}=\frac{v-(x_0+\norm{v-x_0}x)}{\norm{v-x_0}}\geq \frac{\delta}{\norm{v-x_0}}\geq 1-\varepsilon$$
+  \end{proof}
   \begin{theorem}[Riesz's theorem]
     Let $E$ be a normed vector space. If the unit closed sphere $\{x\in E:\norm{x}=1\}$ is compact, then $\dim E<\infty$.
   \end{theorem}
+  \begin{proof}
+    Suppose $\dim E=\infty$. Then, there exists a strictly increasing sequence $(E_n)$ of closed finite-dimensional subspaces of $E$. Using the \nameref{RFA_almostorthogonality} at the spaces $E_n\subset E_{n+1}$ with $\varepsilon =\frac{1}{2}$, we can construct a sequence $(x_n)$ such that $\norm{x_n}=1$, $x_n\in E_{n+1}\setminus E_n$ and $d(x_n, E_n)>\frac{1}{2}$. That is, $\norm{x_i-x_j}>\frac{1}{2}$ $\forall i, j\in\NN$, $i\ne j$. Therefore, $S$ is not compact because there is no convergent subsequence on $(x_n)$.
+  \end{proof}
   \subsubsection{Space of bounded operators}
   \begin{definition}
     Let $E$, $F$ be normed vector spaces. We define the following set:
-    $$\mathcal{L}(E,F):=\{T:E\rightarrow F: T\text{ is a bounded operator}\}$$
+    \begin{align*}
+      \mathcal{L}(E,F) & := \{T:E\rightarrow F: T\text{ is a bounded operator}\}            \\
+                       & \;=                   \{T:E\rightarrow F: T\text{ is continuous}\}
+    \end{align*}
   \end{definition}
   \begin{theorem}
-    Let $E$, $F$ be normed vector spaces. Then, $\mathcal{L}(E,F)$ is a vector normed space with the norm of\cref{RFA_normoperator} and the usual operators. Moreover, if $F$ is Banach, so it is $\mathcal{L}(E,F)$.
+    Let $E$, $F$ be normed vector spaces. Then, $\mathcal{L}(E,F)$ is a vector normed space with the norm of \cref{RFA_normoperator} and the usual operations. Moreover, if $F$ is Banach, so is $\mathcal{L}(E,F)$.
   \end{theorem}
+  \begin{sproof}
+    An easy check shows that $\mathcal{L}(E,F)$ is a vector space and that the associated norm is indeed a norm. It's missing to show that $\mathcal{L}(E,F)$ is Banach whenever $F$ is Banach. Let $\sum_{n=1}^\infty\norm{T_n}<\infty$. Then, $\forall x\in E$, $\sum_{n=1}^\infty\norm{T_nx}_F\leq \sum_{n=1}^\infty\norm{T_n}\norm{x}_E<\infty$. Since $F$ is Banach, $\exists y\in F$ with $y=\sum_{n=1}^\infty T_nx$. By the linearity and continuity of $T_n$, the operator
+    $$\function{T}{E}{F}{x}{\sum_{n=1}^\infty T_nx}$$
+    is linear and continuous. So $T=\sum_{n=1}^\infty T_n$ and finally $\forall \varepsilon>0$ if $x\in E$ $\exists N\in\NN$ such that:
+    $$\norm{T-\sum_{n=1}^N T_n}\leq \sum_{n=N+1}^\infty \norm{T_n x}_F\leq \norm{x}_E\sum_{n=N+1}^\infty \norm{T_n}<\varepsilon$$
+    because is the tail of a convergent series.
+  \end{sproof}
   \begin{proposition}
     Let $E$, $F$, $G$ be normed vector spaces and $T:E\rightarrow F$, $S:F\rightarrow G$ be operators. Then: $$\norm{S\circ T}\leq\norm{S}\norm{T}$$
   \end{proposition}
+  \begin{proof}
+    $$\norm{(S\circ T)x}\leq \norm{S}\norm{Tx}\leq \norm{S}\norm{T}\norm{x}$$
+  \end{proof}
   \begin{definition}
     We denote $\mathcal{L}(E):=\mathcal{L}(E,E)$ which, together with the composition, has a structure of \emph{normed algebra}. That is, $\forall T,S\in\mathcal{L}(E)$, we have:
     \begin{enumerate}
@@ -1028,25 +1143,74 @@
   \begin{definition}
     Let $E$ be a normed vector space. The Banach space $E^*:=\mathcal{L}(E,\KK)$ is called \emph{dual space} of $E$.
   \end{definition}
-  \subsubsection{Neumann series}
+  \subsubsection{Compact operators}
   \begin{definition}
-    Let $E$ be a normed vector space, $T\in\mathcal{L}(E)$ and $v\in E$. We would like to find the solution of the equation: $$(T-\lambda\id)u=v$$ for some $\lambda\in\KK^*$.
+    Let $E$, $F$ be Banach spaces and $T\in\mathcal{L}(E,F)$ be an operator. We say that $T$ is a \emph{compact operator} if $T(B_E)$ is relatively compact on $F$ where: $$B_E:=\{x\in E:\norm{x}_E\leq 1\}$$
   \end{definition}
   \begin{definition}
-    Let $E$ be a Banach space, $T\in\mathcal{L}(E)$ and $\lambda\in\KK^*$. We define the Neumann series as the series:
+    Let $X$, $Y$ be compact metric spaces and $K\in\mathcal{C}(X\times Y)$. We define the \emph{Fredholm operator with kernel $K$} as the operator $T:\mathcal{C}(Y)\rightarrow\mathcal{C}(X)$ defined by: $$Tf(x)=\int_YK(x,y)f(y)\dd{y}$$
+  \end{definition}
+  \begin{definition}
+    Let $K\in\mathcal{C}(\Delta)$, where $\Delta:=\{(x,y)\in\RR^2:a\leq y\leq x\leq b\}$. We define the \emph{Volterra operator with kernel $K$} as the operator $T:\mathcal{C}([a,b])\rightarrow\mathcal{C}([a,b])$ defined by: $$Tf(x)=\int_a^xK(x,y)f(y)\dd{y}$$
+  \end{definition}
+  \begin{proposition}\label{RFA_fredholm}
+    Let $X$, $Y$ be compact metric spaces spaces and $K\in\mathcal{C}(X\times Y)$. The Fredholm operator $T$ with kernel $K$ is compact and satisfies $\norm{T}\leq\norm{K}_{X\times Y}\m{Y}$
+  \end{proposition}
+  \begin{sproof}
+    It is a direct application of \nameref{RFA_arzela}. The proof of the equicontinuity follows from the inequality
+    $$\abs{Tf(a)-Tf(b)}\leq \norm{f}\sup_{y\in Y}\{\abs{K(a,y)-K(b,y)}\}\m{Y}$$
+    and the fact that $\norm{f}\leq 1$ and that $K$ is uniformly continuous. The pointwise boundedness follows from:
+    $$\abs{Tf(a)}\leq\sup_{(x,y)\in X\times Y}\{\abs{K(x,y)}\}\m{Y}$$
+    because $\norm{f}\leq 1$.
+    And from here the inequality of the norm is clear.
+  \end{sproof}
+  \begin{proposition}
+    Let $K\in\mathcal{C}(\Delta)$. The Volterra operator $T$ with kernel $K$ is compact and $\norm{T}\leq\norm{K}_{\Delta}(b-a)$.
+  \end{proposition}
+  \begin{sproof}
+    Use \nameref{RFA_arzela} and a similar scheme of the proof of \cref{RFA_fredholm}.
+  \end{sproof}
+  \begin{definition}
+    Let $E$, $F$ be Banach spaces and $T\in\mathcal{L}(E,F)$ be an operator. We say that $T$ is a \emph{finite-rank operator} if $\dim T(E)<\infty$.
+  \end{definition}
+  \begin{lemma}\label{RFA_lemmarank}
+    Let $E$, $F$ be Banach spaces and $T\in\mathcal{L}(E,F)$ be a finite-rank bounded operator. Then, $T$ is compact.
+  \end{lemma}
+  \begin{sproof}
+    Since $\dim T(E)<\infty$, the closed bounded spaces on $T(E)$ are compact and since $T(B_E)$ is bounded, it is compact.
+  \end{sproof}
+  \begin{proposition}
+    Let $E$, $F$ be Banach spaces and $(T_n)\in\mathcal{L}(E,F)$ be a sequence of compact operators with limit $T\in\mathcal{L}(E,F)$. Then, $T$ is compact. In particular, the limit of any sequence of finite-rank bounded operators is compact.
+  \end{proposition}
+  \begin{sproof}
+    Let $(x_k)\in B_E$ be a sequence. Since $T_1$ is compact, there exists a subsequence $(x_{k,1})$ of $(x_k)$ such that $T_1x_{k,1}$ converges. Similarly,  there exists a subsequence $(x_{k,2})$ of $(T_1x_{k,1})$ such that $T_2x_{k,2}$ converges. In general for each $n\in\NN$, there exists a subsequence $(x_{k,n})$ of $(T_{n-1}x_{k,n-1})$ such that $T_nx_{k,n}$ converges. Now consider the sequence $(x_{k,k})$ and show that $(Tx_{k,k})$ is Cauchy.
+
+    The particularity follows from \cref{RFA_lemmarank}.
+  \end{sproof}
+  \subsubsection{Neumann series}
+  \begin{interpretation}
+    In Theory of Differential Equations, many times we need to find the solution of $Tu-u=v$, with $T\in\mathcal{L}(E)$ and $E=\mathcal{C}([a,b])$. Here, we will describe a general approach. Let $E$ be a normed vector space, $T\in\mathcal{L}(E)$ and $v\in E$. We would like to find the solution of the equation: $$(T-\lambda\id)u=v$$ for some $\lambda\in\KK^*$.
+  \end{interpretation}
+  \begin{definition}
+    Let $E$ be a Banach space, $T\in\mathcal{L}(E)$ and $\lambda\in\KK^*$. We define the \emph{Neumann series} as the series:
     $$-\frac{1}{\lambda}\sum_{n= 0}^\infty\frac{1}{\lambda^n}T^n$$
   \end{definition}
   \begin{theorem}
     Let $E$ be a Banach space, $T\in\mathcal{L}(E)$ and $\lambda\in\KK^*$. If the Neumann series converges absolutely, then ${(T-\lambda\id)}^{-1}\in\mathcal{L}(E)$ and: $${(T-\lambda\id)}^{-1}=-\frac{1}{\lambda}\sum_{n= 0}^\infty\frac{1}{\lambda^n}T^n$$
   \end{theorem}
-  \begin{definition}
-    Let $K(x,y)\in\mathcal{C}(\RR^2)$. We define the \emph{Volterra operator with kernel $K(x,y)$} as the following operator: $$Tf(x):=\int_a^xK(x,y)f(y)\dd{y}$$
-  \end{definition}
+  \begin{sproof}
+    Remember that $\mathcal{L}(E)$ is Banach and note that:
+    $$\lim_{N\to\infty}-\frac{1}{\lambda}\sum_{n= 0}^N\frac{1}{\lambda^n}T^n(T-\lambda\id)=\id-\lim_{N\to\infty}\frac{T^{N+1}}{\lambda^{N+1}}$$
+  \end{sproof}
   \begin{theorem}
-    Let $T:\mathcal{C}([a,b])\rightarrow\mathcal{C}([a,b])$ be the Volterra operator of kernel $K(x,y)$. Then,
+    Let $T:\mathcal{C}([a,b])\rightarrow\mathcal{C}([a,b])$ be the Volterra operator of kernel $K(x,y)$. Then, $\forall \lambda\ne 0$ the series
     $${(T-\lambda\id)}^{-1}=-\frac{1}{\lambda}\sum_{n= 0}^\infty\frac{1}{\lambda^n}T^n$$
     is absolutely convergent on $\mathcal{L}(\mathcal{C}([a,b]))$.
   \end{theorem}
+  \begin{sproof}
+    Use induction to prove: $$\norm{T^nf(x)}\leq \frac{M^n{(x-a)}^n}{n!}\norm{f}$$
+    where $\abs{K(x,y)}\leq M$.
+  \end{sproof}
   \subsubsection{Duality}
   \begin{definition}
     Let $E$ be a real vector space. A \emph{convex functional} $p:E\rightarrow\RR$ is a function that satisfies:
@@ -1097,41 +1261,51 @@
   \begin{proposition}
     Let $E$, $F$ be normed vector spaces. The function $$\function{}{\mathcal{L}(E,F)}{\mathcal{L}(F^*,E^*)}{T}{T^*}$$ is linear, bijective and isometric. That is, $\norm{T}=\norm{T^*}$.
   \end{proposition}
-  \subsubsection{Compact operators}
-  \begin{definition}
-    Let $E$, $F$ be Banach spaces and $T\in\mathcal{L}(E,F)$ be an operator. We say that $T$ is a \emph{compact operator} if $T(B_E)$ is relatively compact on $F$ where: $$B_E:=\{x\in E:\norm{x}_E\leq 1\}$$
-  \end{definition}
-  \begin{lemma}
-    Let $E$, $F$ be Banach spaces and $T\in\mathcal{L}(E,F)$ be a bounded operator of finite rank. Then, $T$ is compact.
-  \end{lemma}
-  \begin{proposition}
-    Let $E$, $F$ be Banach spaces and $(T_n)\in\mathcal{L}(E,F)$ be a sequence of compact operators with limit $T\in\mathcal{L}(E,F)$. Then, $T$ is compact. In particular, the limit any sequence of bounded operators of finite rank is compact.
-  \end{proposition}
   \subsubsection{Spectrum and eigenvalues}
   \begin{proposition}
-    Let $E$ be a Banach space and $T\in\mathcal{L}(E)$. Then, $\forall \alpha\in\KK$, $\im(T-\alpha\id)$ and $\ker(T-\alpha\id)$ are invariant over $T$. Moreover if $\alpha\ne 0$, the function $$\function{}{\ker(T-\alpha\id)}{\ker(T-\alpha\id)}{x}{\alpha x}$$ is an isomorphism.
+    Let $E$ be a Banach space and $T\in\mathcal{L}(E)$. Then, $\forall \alpha\in\KK$, $\im(T-\alpha\id)$ and $\ker(T-\alpha\id)$ are invariant over $T$. Moreover if $\alpha\ne 0$, the function $$\function{S}{\ker(T-\alpha\id)}{\ker(T-\alpha\id)}{x}{\alpha x}$$ is an isomorphism.
   \end{proposition}
+  \begin{proof}
+    Let $y\in \im(T-\alpha \id)$. Then, $y=Tx-\alpha x$ for some $x\in E$ and so: $$Ty=T(Tx-\alpha x)=(T-\alpha\id)(Tx)\in\im(T-\alpha\id)$$
+    Similarly if $x\in\ker(T-\alpha\id)$, then: $$(T-\alpha\id)(Tx)=(T-\alpha\id)(\alpha x)=\alpha(Tx-\alpha x)=0$$
+    The function $S=\alpha \id$ is clearly an isomorphism because $\alpha\ne 0$.
+  \end{proof}
   \begin{definition}
     Let $E$ be a Banach space, $T\in\mathcal{L}(E)$ and $\alpha\in \KK$. If $\ker(T-\alpha\id)\ne\{0\}$, we say that $\ker(T-\alpha\id)$ is a \emph{proper subspace of $T$} and that its non-zero elements are the \emph{eigenvectors} of \emph{eigenvalue} $\alpha$ of $T$.
   \end{definition}
   \begin{definition}
-    Let $E$ be a Banach space and $T\in\mathcal{L}(E)$. We define the \emph{spectrum} of $T$ as: $$\sigma(T):=\{\alpha\in\KK:T-\alpha\id\text{is not bijective}\}$$
+    Let $E$ be a Banach space and $T\in\mathcal{L}(E)$. We define the \emph{spectrum} of $T$ as: $$\sigma(T):=\{\alpha\in\KK:T-\alpha\id\text{ is not bijective}\}$$
     The elements of $\sigma(T)$ are called \emph{spectral values} of $T$.
   \end{definition}
   \begin{proposition}
-    Let $E$ be a finite-dimensional Banach space and $T\in\mathcal{L}(E)$. Then: $$\sigma(T)=\{\alpha\in\KK:\alpha\text{ is eigenvalue of }T\}$$
+    Let $E$ be a finite-dimensional Banach space and $T\in\mathcal{L}(E)$. Then: $$\sigma(T)=\{\alpha\in\KK:\alpha\text{ is eigenvalue of }T\}=:\Lambda(T)$$
   \end{proposition}
+  \begin{proof}
+    The inclusion $\Lambda(T)\subseteq \sigma(T)$ is always true. For the other inclusion note that if $\alpha\notin \Lambda(T)$, then $Tx\ne \alpha x$ $\forall x\in E$, $x\ne 0$, and so $\ker (T-\alpha \id)=\{0\}$. Hence, $\alpha\notin \sigma(T)$ as in finite dimension injectivity in $\mathcal{L}(E)$ is equivalent to bijectivity in $\mathcal{L}(E)$.
+  \end{proof}
   \begin{proposition}
-    Let $E$ be a Banach space and $T\in\mathcal{L}(E)$. Then, $\sigma(T)$ is compact and: $$\sigma(T)\subseteq\{w\in E:\norm{w}\leq\norm{T}\}$$
+    Let $E$ be a Banach space and $T\in\mathcal{L}(E)$. Then, $\sigma(T)$ is compact and: $$\sigma(T)\subseteq\{w\in \KK:\abs{w}\leq\norm{T}\}$$
   \end{proposition}
+  \begin{proof}
+    Let's first check that $\sigma(T)\subseteq\{w\in \KK:\abs{w}\leq\norm{T}\}$. Let $\alpha\notin\{w\in \KK:\abs{w}\leq\norm{T}\}$ (i.e. satisfies $\abs{\alpha}>\norm{T}$), $z\in E$ and define $f(x)=\frac{1}{\alpha} (Tx-z)$. Then, $f$ is a contraction and by the \nameref{DE_fixedpoint} $\exists!x\in E$ such that $Tx-\alpha x=z$, i.e. $T-\alpha\id$ is bijective, and so $\alpha\notin\sigma (T)$.
+
+    Now let's see that ${\sigma(T)}^c$ is open. Let $\beta\notin\sigma(T)$ and $\alpha,z\in E$ be such that $\abs{\alpha-\beta}<\frac{1}{\norm{{(T-\beta\id)}^{-1}}}$. Now consider the function:
+    $$g(x)={(T-\beta \id)}^{-1}(\alpha z-\beta x +z)$$
+    We have that $g$ is a contraction and by the \nameref{DE_fixedpoint} $\exists!x\in E$ such that $Tx-(\alpha-\beta) x=z$, i.e. $T-(\alpha-\beta)\id$ is bijective. This is true $\forall\alpha\in E$ satisfying $\abs{\alpha-\beta}<\frac{1}{\norm{{(T-\beta\id)}^{-1}}}$. Hence ${\sigma(T)}^c$ is open.
+
+    Finally, since $\sigma(T)$ is a bounded closed subset of $\CC$, it is compact.
+  \end{proof}
   \subsection{General theorems on linear maps}
   \subsubsection{Open mapping and closed graph theorems}
   \begin{theorem}[Baire's theorem]
-    Let $(U_n)$ be a sequence of dense open sets on a metric space $X$. Then, $\bigcap_{n=1}^\infty$ is dense on $X$.
+    Let $(U_n)$ be a sequence of dense open sets on a metric space $X$. Then, $\bigcap_{n=1}^\infty U_n$ is dense on $X$.
   \end{theorem}
   \begin{corollary}
     Let $X$ be a metric space such that $X=\bigcup_{n=1}^\infty C_n$, where $C_n\subseteq X$ are closed sets. Then, $\exists n_0$ such that $\Int F_{n_0}\ne \varnothing$.
   \end{corollary}
+  \begin{sproof}
+    If a closed set $C$ has empty interior, then $X\setminus C$ is an open dense set.
+  \end{sproof}
   \begin{theorem}[Open mapping theorem]
     Let $E$, $F$ be a Banach spaces and $T:E\rightarrow F$ be a surjective bounded operator. Then, $T$ is open.
   \end{theorem}
@@ -1144,14 +1318,14 @@
     Let $E$, $F$ be a Banach spaces and $\{T_i:i\in I\}\subset\mathcal{L}(E, F)$ be a family of bounded operators. Then, one of the following statements holds:
     \begin{enumerate}
       \item $\sup\{\norm{T_i}:i\in I\}<\infty$
-      \item $\exists A\subseteq E$ such that it is an intersection of dense open subsets such that: $$\sup\{\norm{T_i(x)}_F:i\in I\}=\infty\quad\forall x\in A$$
+      \item $\exists A\subseteq E$ such that it is a countable intersection of dense open subsets such that: $$\sup\{\norm{T_ix}_F:i\in I\}=\infty\quad\forall x\in A$$
     \end{enumerate}
   \end{theorem}
   \begin{corollary}[Banach-Steinhaus theorem]
     Let $E$, $F$ be a Banach spaces and $(T_n)\in\mathcal{L}(E,F)$ be sequence of bounded operators such that:
     \begin{itemize}
-      \item The limit $\lim_{n\to\infty}T_n(x)$ $\forall x\in D\subseteq E$, where $D$ is a dense set in $E$.
-      \item The sequence $(T_n(x))$ is bounded $\forall x\in E$.
+      \item The limit $Tx:=\displaystyle\lim_{n\to\infty}T_nx$ exists $\forall x\in D\subseteq E$, where $D$ is a dense set in $E$.
+      \item The sequence $(T_nx)$ is bounded $\forall x\in E$.
     \end{itemize}
     Then, $T$ can be prolongated into a bounded operator such that: $$\norm{T}\leq \liminf_{n\to\infty}\norm{T_n}$$
   \end{corollary}
