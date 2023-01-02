@@ -34,7 +34,7 @@
   \end{definition}
   \begin{definition}
     Consider the following ode of $m$ unknowns and of order $n$:
-    \begin{equation}\label{DE_ode1}
+    \begin{equation}\label{DE:ode1}
       \vf{x}^{(n)}(t)=\vf{f}\left(t,\vf{x}(t),\vf{x}'(t),\ldots,\vf{x}^{(n-1)}(t)\right)
     \end{equation}
     We say that $\vf{\varphi}:I\subseteq\RR\rightarrow\RR^m$ is a \emph{solution of the ode} if:
@@ -47,7 +47,7 @@
     The set of all solutions of an ode is called \emph{general solution of the ode}.
   \end{definition}
   \begin{proposition}
-    Consider an ode of $m$ unknowns and order $n$ of the form of \cref{DE_ode1}. Then, we can transform this ode to an ode of $m\cdot n$ unknowns and order 1 in the following way\footnote{Therefore, we will mainly study the odes of order 1.}. Define $\vf{y}_i=\vf{x}^{(i-1)}$ for $i=1,\ldots,n$. Therefore, the functions $\vf{y}_i$ must satisfy:
+    Consider an ode of $m$ unknowns and order $n$ of the form of \mcref{DE:ode1}. Then, we can transform this ode to an ode of $m\cdot n$ unknowns and order 1 in the following way\footnote{Therefore, we will mainly study the odes of order 1.}. Define $\vf{y}_i=\vf{x}^{(i-1)}$ for $i=1,\ldots,n$. Therefore, the functions $\vf{y}_i$ must satisfy:
     \begin{equation*}
       \left\{
       \begin{aligned}
@@ -66,10 +66,10 @@
   \end{definition}
   \begin{definition}
     We say that an ode of order $n$ is \emph{linear} if it is of the form:
-    \begin{equation}\label{DE_linear0}
+    \begin{equation}\label{DE:linear0}
       a_0(t)\vf{x}+a_1(t)\vf{x}'+\cdots+a_n(t)\vf{x}^{(n)}=\vf{b}(t)
     \end{equation}
-    where $a_i\in\mathcal{C}(I,\RR)$ for $i=0,\ldots,n$ and $\vf{b}\in\mathcal{C}(I,\RR^m)$ are arbitrary functions which do not need to be linear. We say that the linear ode of \cref{DE_linear0} is \emph{homogeneous} if $\vf{b}(t)=\vf{0}$ $\forall t\in I$. We say that linear ode of \cref{DE_linear0} is of \emph{constant coefficients} if $a_i(t):=a_{i0}\in\RR$ $\forall t\in I$ and $\forall i=0,\ldots,n$.
+    where $a_i\in\mathcal{C}(I,\RR)$ for $i=0,\ldots,n$ and $\vf{b}\in\mathcal{C}(I,\RR^m)$ are arbitrary functions which do not need to be linear. We say that the linear ode of \mcref{DE:linear0} is \emph{homogeneous} if $\vf{b}(t)=\vf{0}$ $\forall t\in I$. We say that linear ode of \mcref{DE:linear0} is of \emph{constant coefficients} if $a_i(t):=a_{i0}\in\RR$ $\forall t\in I$ and $\forall i=0,\ldots,n$.
   \end{definition}
   \begin{definition}[Initial value problem]
     Let $U\subseteq\RR\times\RR^n$ be an open set and $\vf{f}:U\rightarrow\RR^n$ be a function. Given $(t_0,\vf{x}_0)\in U$, the \emph{initial value problem} (\emph{ivp}) (or \emph{Cauchy problem}) consists in finding a solution of the ode $$\vf{x}'=\vf{f}(t,\vf{x})$$ with \emph{initial conditions} $\vf{x}(t_0)=\vf{x}_0$.
@@ -92,13 +92,13 @@
   \end{proposition}
   \begin{proposition}[Characteristic equation]
     Consider the following ode of order $n$ of constant coefficients:
-    \begin{equation}\label{DE_char}
+    \begin{equation}\label{DE:char}
       x^{(n)} + a_{n-1}x^{(n-1)} + \cdots + a_1 x' + a_0 x = 0
     \end{equation}
     We define the \emph{characteristic equation} of that system as the equation: $$p(r):=r^n + a_{n-1}r^{n-1} + \cdots + a_1 r + a_0 = 0$$
     In order to find the solution of this ode, we need to find the solutions to $p(r)=0$. So suppose $p$ has $s$ distinct real roots and $2(m-s)$ distinct complex roots.
     $$\lambda_1,\ldots,\lambda_s,\lambda_{s+1},\overline{\lambda_{s+1}},\ldots,\lambda_{m},\overline{\lambda_m}$$
-    Here, $\lambda_i\in\RR$ $\forall i=1,\ldots,s$ and $\lambda_{i}=\alpha_i+\ii\beta_i\in\CC$ $\forall i=s+1,\ldots,m$. Assume, each of these roots have multiplicity $k_i\in\NN$. Then, the general solution to \cref{DE_char} is:
+    Here, $\lambda_i\in\RR$ $\forall i=1,\ldots,s$ and $\lambda_{i}=\alpha_i+\ii\beta_i\in\CC$ $\forall i=s+1,\ldots,m$. Assume, each of these roots have multiplicity $k_i\in\NN$. Then, the general solution to \mcref{DE:char} is:
     \begin{multline*}
       \varphi(t)=\sum_{i=1}^s\left(c_{i,0}+c_{i,1}t+\cdots+c_{i,k_i-1}t^{k_i-1}\right)\exp{\lambda_i t}+\\
       +\sum_{i=s+1}^m\sum_{j=0}^{k_i-1}t^{j}\exp{\alpha_i t}\left(c_{i,j,1}\cos(\beta_i t)+c_{i,j,2}\sin(\beta_i t)\right)
@@ -106,7 +106,7 @@
     where $c_{i,j,k}\in\RR$ are constants.
   \end{proposition}
   \begin{proposition}
-    Consider a system of the form \cref{DE_char} which is equivalent to: $$\vf{x}'=
+    Consider a system of the form \mcref{DE:char} which is equivalent to: $$\vf{x}'=
       \begin{pmatrix}
         0      & 1      & 0      & \cdots & 0        \\
         0      & 0      & 1      & \ddots & \vdots   \\
@@ -119,11 +119,11 @@
   \end{proposition}
   \begin{corollary}
     Consider the following ode of order $n$ of constant coefficients:
-    \begin{equation}\label{DE_char2}
+    \begin{equation}\label{DE:char2}
       x'' + px' + q = 0
     \end{equation}
     Let $\lambda_1,\lambda_2$ be the roots of the polynomial $p(r)=r^2+pr+q$.
-    Then, the general solution to \cref{DE_char2} is:
+    Then, the general solution to \mcref{DE:char2} is:
     \begin{itemize}
       \item If $p^2-4q>0$: $$\varphi(t)=c_1\exp{\lambda_1t}+c_2\exp{\lambda_2t}$$
       \item If $p^2-4q=0$, then $\lambda_1=\lambda_2$ and the solution is: $$\varphi(t)=c_1\exp{\lambda_1t}+c_2t\exp{\lambda_1t}$$
@@ -132,7 +132,7 @@
   \end{corollary}
   \begin{proposition}[Reducible linear ode of second order]
     Let $I\subset \RR$ be an interval, $a,b,c,d\in\mathcal{C}(I,\RR)$. Consider the system of odes:
-    \begin{equation}\label{DE_ode-complex}
+    \begin{equation}\label{DE:ode-complex}
       \left\{
       \begin{aligned}
         x' & =a(t)x-b(t)y+c(t) \\
@@ -140,34 +140,34 @@
       \end{aligned}
       \right.
     \end{equation}
-    In order to find the solution of this ode, consider the change of variable $z=x+\ii y$. Then, \cref{DE_ode-complex} becomes:
+    In order to find the solution of this ode, consider the change of variable $z=x+\ii y$. Then, \mcref{DE:ode-complex} becomes:
     $$z'=[a(t)+\ii b(t)]z+c(t)+\ii d(t)$$ which is a linear ode of order 1 and can be easily solved.
   \end{proposition}
   \begin{proposition}[Bernoulli differential equation]
     Let $p,q\in\mathcal{C}((a,b),\RR)$ and $\alpha\in\RR$. Consider the \emph{Bernoulli differential equation}:
-    \begin{equation}\label{DE_bernoulli}
+    \begin{equation}\label{DE:bernoulli}
       x'+p(t)x=q(t)x^\alpha
     \end{equation}
-    If $\alpha=0,1$ the ode is linear. So suppose $\alpha\ne 0,1$. In order to solve it, consider the change of variable $y=x^{1-\alpha}$. Then, \cref{DE_bernoulli} becomes:
+    If $\alpha=0,1$ the ode is linear. So suppose $\alpha\ne 0,1$. In order to solve it, consider the change of variable $y=x^{1-\alpha}$. Then, \mcref{DE:bernoulli} becomes:
     $$y'+(1-\alpha)p(t)y=(1-\alpha)q(t)$$  which is a linear ode of order 1 and can be easily solved.
   \end{proposition}
   \begin{proposition}[Riccati differential equation]
     Let $q_0,q_1,q_2\in\mathcal{C}((a,b),\RR)$. Consider the \emph{Riccati differential equation}:
-    \begin{equation}\label{DE_riccati}
+    \begin{equation}\label{DE:riccati}
       x'=q_0(t)+q_1(t)x+q_2(t)x^2
     \end{equation}
-    Suppose we have found a particular solution $x_1(t)$ of the ode of \cref{DE_riccati}. In order to find the general solution, consider the change of variable $x=x_1(t)+\frac{1}{y}$. Then, \cref{DE_riccati} becomes:
+    Suppose we have found a particular solution $x_1(t)$ of the ode of \mcref{DE:riccati}. In order to find the general solution, consider the change of variable $x=x_1(t)+\frac{1}{y}$. Then, \mcref{DE:riccati} becomes:
     $$y'+[q_1(t)+2q_2(t)x_1(t)]y=-q_2(t)$$ which is a linear ode of order 1 and can be easily solved.
   \end{proposition}
   \begin{proposition}[Integrating factor]
     Consider the ode: $$p(t,x)+q(t,x)x'=0\iff p(t,x)\dd{t}+q(t,x)\dd{x}=0$$ where $p,q\in\mathcal{C}^1(U,\RR)$ and $U\subseteq\RR^2$ is an open set.
     An \emph{integrating factor} $\mu(t,x)\in\mathcal{C}^1(U)$, $\mu(t,x)\ne 0$, is a function so that $$\mu(t,x)p(t,x)\dd{t}+\mu(t,x)q(t,x)\dd{x}$$ is an exact differential ($\dd{\Phi(t,x)}$) of a function $\Phi(t,x)$, that is:
     \begin{gather}
-      \label{DE_ifactor1}\frac{\partial\Phi}{\partial t}(t,x)=\mu(t,x)p(t,x)\\
-      \label{DE_ifactor2}\frac{\partial\Phi}{\partial x}(t,x)=\mu(t,x)q(t,x)
+      \label{DE:ifactor1}\frac{\partial\Phi}{\partial t}(t,x)=\mu(t,x)p(t,x)\\
+      \label{DE:ifactor2}\frac{\partial\Phi}{\partial x}(t,x)=\mu(t,x)q(t,x)
     \end{gather}
     So we need that: $$\frac{\partial}{\partial x}\left(\mu(t,x)p(t,x)\right)=\frac{\partial}{\partial t}\left(\mu(t,x)q(t,x)\right)$$
-    From here, in certain cases, we will be able to find $\mu(x,y)$ and, therefore, $\Phi(t,x)$ by integrating \cref{DE_ifactor1,DE_ifactor2}.
+    From here, in certain cases, we will be able to find $\mu(x,y)$ and, therefore, $\Phi(t,x)$ by integrating \mcref{DE:ifactor1,DE:ifactor2}.
   \end{proposition}
   \subsection{Existence and uniqueness of solutions}
   \begin{proposition}
@@ -194,7 +194,7 @@
         x'      =a(t)x+b(t) \\
         x(t_0)  =x_0
       \end{cases}$$
-    has a unique solution $\forall t_0\in I$ and $\forall x_0\in\RR$\footnote{See \cref{DE_sol-lin} for the solution.}.
+    has a unique solution $\forall t_0\in I$ and $\forall x_0\in\RR$\footnote{See \mcref{DE:sol-lin} for the solution.}.
   \end{proposition}
   \subsubsection{Lipschitz continuity}
   \begin{definition}
@@ -226,7 +226,7 @@
         \vf{x}'=\vf{f}(t,\vf{x}) \\
         \vf{x}(t_0)=\vf{x}_0
       \end{cases}
-      \label{DE_ivp}
+      \label{DE:ivp}
     \end{equation}
     if and only if $$\vf{\varphi}(t)=\vf{x}_0+\int_{t_0}^tf(s,\vf{\varphi}(s))\dd{s}\quad\forall t\in I$$
   \end{proposition}
@@ -243,7 +243,7 @@
       {\displaystyle\vf{T}\vf{\varphi}(t)=\vf{x}_0+\int_{t_0}^tf(s,\vf{\varphi}(s))\dd{s}\footnotemark}
     $$
   \end{definition}
-  \begin{theorem}[Banach fixed-point theorem]\label{DE_fixedpoint}\footnotetext{Note that the fixed points of this operator are precisely the solutions of the ivp of \cref{DE_ivp}.}
+  \begin{theorem}[Banach fixed-point theorem]\label{DE:fixedpoint}\footnotetext{Note that the fixed points of this operator are precisely the solutions of the ivp of \mcref{DE:ivp}.}
     Let $(X,d)$ be a complete metric space and $f:(X,d)\rightarrow (X,d)$ be a contraction. Then, $f$ has a unique fixed point $p\in X$\footnote{Furthermore, $p$ can be found as follows: start with an arbitrary element $x_0\in X$ and define a sequence $(x_n)$ by $x_n=f(x_{n-1})$ for $n\geq 1$. Then, $\displaystyle\lim_{n\to\infty} x_n=p$.}.
   \end{theorem}
   \begin{corollary}
@@ -252,22 +252,22 @@
   \begin{definition}
     Let $t_0\in\RR$, $\vf{x}_0\in\RR^n$ and $a,b\in\RR_{>0}$. We define the following sets: $$I_a(t_0):=[t_0-a,t_0+a]\subset\RR\;\;\text{and}\;\;\overline{B}_{b}(\vf{x}_0):=\overline{B}(\vf{x}_0,b)\subset\RR^n$$
   \end{definition}
-  \begin{theorem}[Picard theorem]\label{DE_picard}
-    Let $t_0\in\RR$, $\vf{x}_0\in\RR^n$, $a,b\in\RR_{>0}$, $\vf{f}:I_a(t_0)\times\overline{B}_{b}(\vf{x}_0)\subset\RR\times\RR^n\rightarrow\RR^n$ be a continuous function and Lipschitz continuous with respect to the second variable, and define: $$M:=\max\{\|\vf{f}(t,x)\|:(t,x)\in I_a(t_0)\times\overline{B}_{b}(\vf{x}_0)\}$$ Then, the ivp of \cref{DE_ivp} has a unique solution $\vf{\varphi}:I_\alpha(t_0)\rightarrow\overline{B}_{b}(\vf{x}_0)$, where $\alpha:=\min\left\{a,\frac{b}{M}\right\}$.
+  \begin{theorem}[Picard theorem]\label{DE:picard}
+    Let $t_0\in\RR$, $\vf{x}_0\in\RR^n$, $a,b\in\RR_{>0}$, $\vf{f}:I_a(t_0)\times\overline{B}_{b}(\vf{x}_0)\subset\RR\times\RR^n\rightarrow\RR^n$ be a continuous function and Lipschitz continuous with respect to the second variable, and define: $$M:=\max\{\|\vf{f}(t,x)\|:(t,x)\in I_a(t_0)\times\overline{B}_{b}(\vf{x}_0)\}$$ Then, the ivp of \mcref{DE:ivp} has a unique solution $\vf{\varphi}:I_\alpha(t_0)\rightarrow\overline{B}_{b}(\vf{x}_0)$, where $\alpha:=\min\left\{a,\frac{b}{M}\right\}$.
   \end{theorem}
   \begin{corollary}
-    Let $I\subset \RR$ be a closed interval, $t_0\in I$, $\vf{x}_0\in\RR^n$ and $\vf{f}:I\times\RR^n\rightarrow\RR^n$ be a continuous function and Lipschitz continuous with respect to the second variable. Then, the ivp of \cref{DE_ivp} has a unique solution $\vf{\varphi}:I\rightarrow\RR^n$.
+    Let $I\subset \RR$ be a closed interval, $t_0\in I$, $\vf{x}_0\in\RR^n$ and $\vf{f}:I\times\RR^n\rightarrow\RR^n$ be a continuous function and Lipschitz continuous with respect to the second variable. Then, the ivp of \mcref{DE:ivp} has a unique solution $\vf{\varphi}:I\rightarrow\RR^n$.
   \end{corollary}
   \begin{corollary}[Picard iteration process]
-    Suppose we want to solve the ivp of \cref{DE_ivp}. That is, we look for a solution $\vf{\varphi}(t)$. Let $\vf{\varphi}_0$ be a fixed function (usually chosen to be $\vf{\varphi}_0=\vf{x}_0$) and define
+    Suppose we want to solve the ivp of \mcref{DE:ivp}. That is, we look for a solution $\vf{\varphi}(t)$. Let $\vf{\varphi}_0$ be a fixed function (usually chosen to be $\vf{\varphi}_0=\vf{x}_0$) and define
     $$\vf{\varphi}_{n+1}(t)=\vf{T}\vf{\varphi}_n(t)=\vf{x}_0+\int_{t_0}^tf(s,\vf{\varphi}_n(s))\dd{s}$$
     for all $n\geq 0$. Then, $\displaystyle\vf{\varphi}(t)=\lim_{n\to\infty}\vf{\varphi}_n(t)$.
   \end{corollary}
   \begin{corollary}
-    Let $U\subseteq\RR\times\RR^n$ be an open set and $\vf{f}:U\rightarrow\RR^n$ be a continuous function and locally Lipschitz continuous with respect to the second variable. Then, $\forall(t_0,\vf{x}_0)\in U$, there exists $\alpha(t_0,\vf{x}_0)\in\RR_{>0}$ and a neighbourhood $V_{t_0,\vf{x}_0}=I_{a(t_0,\vf{x}_0)}(t_0)\times\overline{B}_{b(t_0,\vf{x}_0)}(\vf{x}_0)$ of $(t_0,\vf{x}_0)$ in $U$ such that the ivp of \cref{DE_ivp} has a unique solution $\vf{\varphi}_{t_0,\vf{x}_0}$ defined on $I_{\alpha(t_0,\vf{x}_0)}\subseteq I_{a(t_0,\vf{x}_0)}$ with $\graph(\vf{\varphi}_{t_0,\vf{x}_0})\subset V_{t_0,\vf{x}_0}$.
+    Let $U\subseteq\RR\times\RR^n$ be an open set and $\vf{f}:U\rightarrow\RR^n$ be a continuous function and locally Lipschitz continuous with respect to the second variable. Then, $\forall(t_0,\vf{x}_0)\in U$, there exists $\alpha(t_0,\vf{x}_0)\in\RR_{>0}$ and a neighbourhood $V_{t_0,\vf{x}_0}=I_{a(t_0,\vf{x}_0)}(t_0)\times\overline{B}_{b(t_0,\vf{x}_0)}(\vf{x}_0)$ of $(t_0,\vf{x}_0)$ in $U$ such that the ivp of \mcref{DE:ivp} has a unique solution $\vf{\varphi}_{t_0,\vf{x}_0}$ defined on $I_{\alpha(t_0,\vf{x}_0)}\subseteq I_{a(t_0,\vf{x}_0)}$ with $\graph(\vf{\varphi}_{t_0,\vf{x}_0})\subset V_{t_0,\vf{x}_0}$.
   \end{corollary}
   \begin{proposition}
-    Let $I\subseteq\RR$ be an interval and $\vf{f}:I\times\RR^n\rightarrow\RR^n$ be a continuous function and Lipschitz continuous with respect to the second variable. Then, $\forall(t_0,\vf{x}_0)\in I\times\RR^n$ there is a unique solution of the ivp of \cref{DE_ivp} defined on $I$.
+    Let $I\subseteq\RR$ be an interval and $\vf{f}:I\times\RR^n\rightarrow\RR^n$ be a continuous function and Lipschitz continuous with respect to the second variable. Then, $\forall(t_0,\vf{x}_0)\in I\times\RR^n$ there is a unique solution of the ivp of \mcref{DE:ivp} defined on $I$.
   \end{proposition}
   \begin{corollary}
     Let $I\subseteq\RR$ be an interval and $\vf{A}:I\rightarrow\mathcal{L}(\RR^n,\RR^n)$ and $\vf{b}:I\rightarrow\RR^n$ be continuous functions. Then, for all $(t_0,\vf{x}_0)\in I\times\RR^n$ the ivp
@@ -308,16 +308,16 @@
     Let $(X,d)$ be a compact metric space, $D\subset\RR^n$ be a closed set and $(\vf{f}_m)$ be a sequence of functions such that $\vf{f}_m\in\mathcal{C}(X,D)$ $\forall m\geq 1$. If the sequence is pointwise equicontinuous and pointwise bounded, then there exists a subsequence $(\vf{f}_{m_k})$ that converges on $\mathcal{C}(X,D)$.
   \end{corollary}
   \begin{theorem}[Peano theorem]
-    Let $t_0\in\RR$, $\vf{x}_0\in\RR^n$, $a,b\in\RR_{>0}$, $\vf{f}:I_a(t_0)\times\overline{B}_{b}(\vf{x}_0)\subset\RR\times\RR^n\rightarrow\RR^n$ be a continuous function, and define: $$M:=\max\{\|\vf{f}(t,x)\|:(t,x)\in I_a(t_0)\times\overline{B}_{b}(\vf{x}_0)\}$$ Then, the ivp of \cref{DE_ivp} has at least one solution $\vf{\varphi}:I_\alpha(t_0)\rightarrow\RR^n$, where $\alpha:=\min\left\{a,\frac{b}{M}\right\}$.
+    Let $t_0\in\RR$, $\vf{x}_0\in\RR^n$, $a,b\in\RR_{>0}$, $\vf{f}:I_a(t_0)\times\overline{B}_{b}(\vf{x}_0)\subset\RR\times\RR^n\rightarrow\RR^n$ be a continuous function, and define: $$M:=\max\{\|\vf{f}(t,x)\|:(t,x)\in I_a(t_0)\times\overline{B}_{b}(\vf{x}_0)\}$$ Then, the ivp of \mcref{DE:ivp} has at least one solution $\vf{\varphi}:I_\alpha(t_0)\rightarrow\RR^n$, where $\alpha:=\min\left\{a,\frac{b}{M}\right\}$.
   \end{theorem}
   \begin{corollary}
-    Let $U\subseteq\RR\times\RR^n$ be an open set, $K\subset U$ be a compact set and $\vf{f}:U\rightarrow\RR^n$ be a continuous function. Then, $\exists\alpha\in\RR_{>0}$ such that $\forall (t_0,\vf{x}_0)\in K$, the ivp of \cref{DE_ivp} has a solution defined in $I_\alpha(t_0)$.
+    Let $U\subseteq\RR\times\RR^n$ be an open set, $K\subset U$ be a compact set and $\vf{f}:U\rightarrow\RR^n$ be a continuous function. Then, $\exists\alpha\in\RR_{>0}$ such that $\forall (t_0,\vf{x}_0)\in K$, the ivp of \mcref{DE:ivp} has a solution defined in $I_\alpha(t_0)$.
   \end{corollary}
   \subsubsection{Maximal solutions}
   \begin{definition}
     Let $U\subseteq\RR\times\RR^n$ be an open set, $(t_0,\vf{x}_0)\in U$ and $\vf{f}:U\rightarrow\RR^n$ be a continuous function. We define the set $\mathcal{S}(U,\vf{f},t_0,\vf{x}_0)$ as:
     \begin{multline*}
-      \mathcal{S}(U,\vf{f},t_0,\vf{x}_0):=\{(I,\vf{\varphi}):I\subseteq\RR\text{ is an interval},t_0\in I\\\text{and }\vf{\varphi}:I\rightarrow\RR^n\text{ is a solution of the ivp of \cref{DE_ivp}}\}
+      \mathcal{S}(U,\vf{f},t_0,\vf{x}_0):=\{(I,\vf{\varphi}):I\subseteq\RR\text{ is an interval},t_0\in I\\\text{and }\vf{\varphi}:I\rightarrow\RR^n\text{ is a solution of the ivp of \mcref{DE:ivp}}\}
     \end{multline*}
   \end{definition}
   \begin{definition}
@@ -345,7 +345,7 @@
     Let $U\subseteq\RR\times\RR^n$ be an open set, $(t_0,\vf{x}_0)\in U$ and $\vf{f}:U\rightarrow\RR^n$ be a continuous function. Consider the poset $(\mathcal{S}(U,\vf{f},t_0,\vf{x}_0),\leq)$. Then, $\mathcal{S}(U,\vf{f},t_0,\vf{x}_0)$ has maximal elements. Furthermore, if $(I,\vf{\varphi})$ is a maximal solution, then $I$ is open.
   \end{theorem}
   \begin{proposition}
-    Let $U\subseteq\RR\times\RR^n$ be an open set and $\vf{f}:U\rightarrow\RR^n$ be such that $\forall(t_0,\vf{x}_0)\in U$ the ivp of \cref{DE_ivp} has a unique solution defined in a neighbourhood of $t_0$. Then, $\forall(t_0,\vf{x}_0)\in U$ the ivp of \cref{DE_ivp} has a unique maximal solution.
+    Let $U\subseteq\RR\times\RR^n$ be an open set and $\vf{f}:U\rightarrow\RR^n$ be such that $\forall(t_0,\vf{x}_0)\in U$ the ivp of \mcref{DE:ivp} has a unique solution defined in a neighbourhood of $t_0$. Then, $\forall(t_0,\vf{x}_0)\in U$ the ivp of \mcref{DE:ivp} has a unique maximal solution.
   \end{proposition}
   \begin{lemma}[Wintner lemma]
     Let $U\subseteq\RR\times\RR^n$ be an open set, $\vf{f}:U\rightarrow\RR^n$ be a continuous function, $\vf{\varphi}:I\rightarrow\RR^n$ be a solution of $\vf{x}'=\vf{f}(t,\vf{x})$ and $(b,y)\in U$ be an accumulation point of $\vf{\varphi}$. Then, $\displaystyle\lim_{t\to b}\vf{\varphi}(t)=y$ and the solution can be extended up to $b$.
@@ -356,18 +356,18 @@
   \subsection{Linear differential equations}
   \begin{definition}
     Let $I\subseteq\RR$ be an interval. A \emph{system of linear differential equations} is an expression of the form:
-    \begin{equation}\label{DE_linear}
+    \begin{equation}\label{DE:linear}
       \vf{x}'=\vf{A}(t)\vf{x}+\vf{b}(t)
     \end{equation}
     where $\vf{A}:I\rightarrow\mathcal{L}(\RR^n,\RR^n)$ and $\vf{b}:I\rightarrow\RR^n$ are continuous functions.
-    We say that linear equation of \cref{DE_linear} is \emph{homogeneous} if $\vf{b}(t)=\vf{0}$ $\forall t\in I$. We say that linear equation of \cref{DE_linear} is of \emph{constant coefficients} if $\vf{A}(t)=\vf{A}$ $\forall t\in I$, where $\vf{A}\in\mathcal{M}_n(\RR)$.
+    We say that linear equation of \mcref{DE:linear} is \emph{homogeneous} if $\vf{b}(t)=\vf{0}$ $\forall t\in I$. We say that linear equation of \mcref{DE:linear} is of \emph{constant coefficients} if $\vf{A}(t)=\vf{A}$ $\forall t\in I$, where $\vf{A}\in\mathcal{M}_n(\RR)$.
   \end{definition}
   \begin{definition}
-    Let $I\subseteq\RR$ be an interval, $t_0\in I$, $\vf{x}_0\in\RR^n$ and consider the ode of \cref{DE_linear}. We define the \emph{flow of the linear ode} as the function:
+    Let $I\subseteq\RR$ be an interval, $t_0\in I$, $\vf{x}_0\in\RR^n$ and consider the ode of \mcref{DE:linear}. We define the \emph{flow of the linear ode} as the function:
     $$
       \function{\vf{\phi}}{I\times I\times \RR^n}{\RR^n}{(t,t_0,\vf{x}_0)}{\vf{\varphi}_{(t_0,\vf{x}_0)}(t)}
     $$
-    where $\vf{\varphi}_{(t_0,\vf{x}_0)}$ is the solution of \cref{DE_linear} with initial conditions $(t_0,\vf{x}_0)$.
+    where $\vf{\varphi}_{(t_0,\vf{x}_0)}$ is the solution of \mcref{DE:linear} with initial conditions $(t_0,\vf{x}_0)$.
   \end{definition}
   \begin{proposition}
     Let $I\subseteq\RR$ be an interval and $a,b\in\mathcal{C}(I,\RR)$. Then, the general solution of the ivp
@@ -376,7 +376,7 @@
         x(t_0)  =x_0
       \end{cases}$$
     is given by:
-    \begin{equation}\label{DE_sol-lin}
+    \begin{equation}\label{DE:sol-lin}
       \varphi(t,t_0,x_0)=\exp{\int_{t_0}^ta(s)\dd{s}}\left(x_0+\int_{t_0}^tb(u)\exp{-\int_{t_0}^ua(s)\dd{s}}\dd{u}\right)
     \end{equation}
     for all $t\in I$.
@@ -384,7 +384,7 @@
   \subsubsection{Homogeneous systems}
   \begin{theorem}
     Let $I\subseteq\RR$ be an interval and $\vf{A}\in\mathcal{C}(I,\mathcal{L}(\RR^n))$. We define $\mathcal{A}_n$ as the set of all solutions of the linear ode:
-    \begin{equation}\label{DE_homo}
+    \begin{equation}\label{DE:homo}
       \vf{x}'=\vf{A}(t)\vf{x}
     \end{equation} Then, $\mathcal{A}_n$ is a vector space of dimension $n$ and for each $t_0\in I$, the function
     $$
@@ -415,38 +415,38 @@
     \end{enumerate}
   \end{corollary}
   \begin{definition}
-    Let $I\subseteq \RR$ be an interval, $\vf{A}\in\mathcal{C}(I,\mathcal{L}(\RR^n))$ and $\vf{M}(t)=(m_{ij}(t))\in\mathcal{M}_n(\RR)$. We say that $\vf{M}(t)$ is a \emph{matrix solution} of the ode of \cref{DE_homo} if $\vf{\varphi}_j={(m_{1j}(t),\ldots,m_{nj}(t))}^\mathrm{T}\in\mathcal{A}_n$ for $j=1,\ldots,n$. We say that $\vf{M}(t)$ is a \emph{fundamental matrix solution} of the ode of \cref{DE_homo} if $\vf{M}(t)$ is a matrix solution and $\vf{\varphi}_1,\ldots,\vf{\varphi}_n$ are linearly independent.
+    Let $I\subseteq \RR$ be an interval, $\vf{A}\in\mathcal{C}(I,\mathcal{L}(\RR^n))$ and $\vf{M}(t)=(m_{ij}(t))\in\mathcal{M}_n(\RR)$. We say that $\vf{M}(t)$ is a \emph{matrix solution} of the ode of \mcref{DE:homo} if $\vf{\varphi}_j={(m_{1j}(t),\ldots,m_{nj}(t))}^\mathrm{T}\in\mathcal{A}_n$ for $j=1,\ldots,n$. We say that $\vf{M}(t)$ is a \emph{fundamental matrix solution} of the ode of \mcref{DE:homo} if $\vf{M}(t)$ is a matrix solution and $\vf{\varphi}_1,\ldots,\vf{\varphi}_n$ are linearly independent.
   \end{definition}
   \begin{proposition}
     Let $I\subseteq \RR$ be an interval, $\vf{A}\in\mathcal{C}(I,\mathcal{L}(\RR^n))$ and $\vf{M}(t)\in\mathcal{M}_n(\RR)$. Then:
     \begin{enumerate}
-      \item $\vf{M}(t)$ is a matrix solution of the ode of \cref{DE_homo} $\iff\vf{M}'(t)=\vf{A}(t)\vf{M}(t)$\footnote{By definition, if $\vf{M}(t)=(m_{ij}(t))$, then $\vf{M}'(t):=({m_{ij}}'(t))$.}.
-      \item $\vf{M}(t)$ is a matrix solution of the ode of \cref{DE_homo} $\iff\forall \vf{c}\in\RR^n$, $\vf{M}(t)\vf{c}\in\mathcal{A}_n$.
-      \item If $\vf{M}(t)$ is a matrix solution of the ode of \cref{DE_homo}, then $\forall \vf{C}\in\mathcal{M}_n(\RR)$, $\vf{M}(t)\vf{C}$ is a matrix solution of the ode of \cref{DE_homo}.
-      \item If $\vf{M}(t)$ is a fundamental matrix solution of the ode of \cref{DE_homo}, then $\det\vf{M}(t)\ne 0$ $\forall t\in I$.
-      \item $\vf{M}(t)$ is a fundamental matrix solution of the ode of \cref{DE_homo} $\iff\vf{M}(t)$ is a matrix solution of the ode of \cref{DE_homo} and $\exists t_0\in I$ such that $\det\vf{M}(t_0)\ne 0$.
+      \item $\vf{M}(t)$ is a matrix solution of the ode of \mcref{DE:homo} $\iff\vf{M}'(t)=\vf{A}(t)\vf{M}(t)$\footnote{By definition, if $\vf{M}(t)=(m_{ij}(t))$, then $\vf{M}'(t):=({m_{ij}}'(t))$.}.
+      \item $\vf{M}(t)$ is a matrix solution of the ode of \mcref{DE:homo} $\iff\forall \vf{c}\in\RR^n$, $\vf{M}(t)\vf{c}\in\mathcal{A}_n$.
+      \item If $\vf{M}(t)$ is a matrix solution of the ode of \mcref{DE:homo}, then $\forall \vf{C}\in\mathcal{M}_n(\RR)$, $\vf{M}(t)\vf{C}$ is a matrix solution of the ode of \mcref{DE:homo}.
+      \item If $\vf{M}(t)$ is a fundamental matrix solution of the ode of \mcref{DE:homo}, then $\det\vf{M}(t)\ne 0$ $\forall t\in I$.
+      \item $\vf{M}(t)$ is a fundamental matrix solution of the ode of \mcref{DE:homo} $\iff\vf{M}(t)$ is a matrix solution of the ode of \mcref{DE:homo} and $\exists t_0\in I$ such that $\det\vf{M}(t_0)\ne 0$.
     \end{enumerate}
   \end{proposition}
   \begin{proposition}
-    Let $I\subseteq \RR$ be an interval, $\vf{A}\in\mathcal{C}(I,\mathcal{L}(\RR^n))$ and $\vf{\Phi}(t),\vf{\psi}(t)\in\mathcal{M}_n(\RR)$ be matrix solutions of the ode of \cref{DE_homo} such that $\vf{\Phi}(t)$ is fundamental. Then, $\exists! \vf{C}\in\mathcal{M}_n(\RR)$ such that $\vf{\psi}(t)=\vf{\Phi}(t)\vf{C}$. Moreover, $\vf{\psi}(t)$ is fundamental if and only if $\det \vf{C}\ne 0$.
+    Let $I\subseteq \RR$ be an interval, $\vf{A}\in\mathcal{C}(I,\mathcal{L}(\RR^n))$ and $\vf{\Phi}(t),\vf{\psi}(t)\in\mathcal{M}_n(\RR)$ be matrix solutions of the ode of \mcref{DE:homo} such that $\vf{\Phi}(t)$ is fundamental. Then, $\exists! \vf{C}\in\mathcal{M}_n(\RR)$ such that $\vf{\psi}(t)=\vf{\Phi}(t)\vf{C}$. Moreover, $\vf{\psi}(t)$ is fundamental if and only if $\det \vf{C}\ne 0$.
   \end{proposition}
   \subsubsection{Non-homogeneous linear systems}
   \begin{proposition}
-    Let $I\subseteq \RR$ be an interval, $\vf{A}\in\mathcal{C}(I,\mathcal{L}(\RR^n))$ and $\vf{b}\in\mathcal{C}(I,\RR^n)$. Suppose $\vf{\phi}(t,t_0,\vf{x}_0)$ is the flow of the ode of \cref{DE_linear}. Then, $$\vf{\phi}(t,t_0,\vf{x}_0)=\Phi(t)\left[{\Phi(t_0)}^{-1}\vf{x}_0+\int_{t_0}^t{\Phi(s)}^{-1}\vf{b}(s)\dd{s}\right]$$ where $\Phi(t)$ is a fundamental matrix of the associated homogeneous system.
+    Let $I\subseteq \RR$ be an interval, $\vf{A}\in\mathcal{C}(I,\mathcal{L}(\RR^n))$ and $\vf{b}\in\mathcal{C}(I,\RR^n)$. Suppose $\vf{\phi}(t,t_0,\vf{x}_0)$ is the flow of the ode of \mcref{DE:linear}. Then, $$\vf{\phi}(t,t_0,\vf{x}_0)=\Phi(t)\left[{\Phi(t_0)}^{-1}\vf{x}_0+\int_{t_0}^t{\Phi(s)}^{-1}\vf{b}(s)\dd{s}\right]$$ where $\Phi(t)$ is a fundamental matrix of the associated homogeneous system.
   \end{proposition}
   \begin{corollary}
-    Let $I\subseteq \RR$ be an interval, $\vf{A}\in\mathcal{C}(I,\mathcal{L}(\RR^n))$ and $\vf{b}\in\mathcal{C}(I,\RR^n)$. Then, the general solution $\vf{\varphi}(t)$ of the ode of \cref{DE_homo} can be written as: $$\vf{\varphi}(t)=\vf{\varphi}_\mathrm{h}(t)+\vf{\varphi}_\mathrm{p}(t)$$ where $\vf{\varphi}_\mathrm{h}(t)$ is the general solution to the associated homogeneous system and $\vf{\varphi}_\mathrm{p}(t)$ is a particular solution of \cref{DE_homo}.
+    Let $I\subseteq \RR$ be an interval, $\vf{A}\in\mathcal{C}(I,\mathcal{L}(\RR^n))$ and $\vf{b}\in\mathcal{C}(I,\RR^n)$. Then, the general solution $\vf{\varphi}(t)$ of the ode of \mcref{DE:homo} can be written as: $$\vf{\varphi}(t)=\vf{\varphi}_\mathrm{h}(t)+\vf{\varphi}_\mathrm{p}(t)$$ where $\vf{\varphi}_\mathrm{h}(t)$ is the general solution to the associated homogeneous system and $\vf{\varphi}_\mathrm{p}(t)$ is a particular solution of \mcref{DE:homo}.
   \end{corollary}
   \begin{proposition}[Liouville's formula]
-    Let $I\subseteq \RR$ be an interval, $\vf{A}\in\mathcal{C}(I,\mathcal{L}(\RR^n))$, $\vf{\Phi}(t)\in\mathcal{M}_n(\RR)$ be a matrix solution of the ode of \cref{DE_homo} and $t_0\in I$. Then, for all $t\in I$ we have: $$\det(\Phi(t))=\det (\Phi(t_0))\exp{\int_{t_0}^t\trace(\vf{A}(s))\dd{s}}$$
+    Let $I\subseteq \RR$ be an interval, $\vf{A}\in\mathcal{C}(I,\mathcal{L}(\RR^n))$, $\vf{\Phi}(t)\in\mathcal{M}_n(\RR)$ be a matrix solution of the ode of \mcref{DE:homo} and $t_0\in I$. Then, for all $t\in I$ we have: $$\det(\Phi(t))=\det (\Phi(t_0))\exp{\int_{t_0}^t\trace(\vf{A}(s))\dd{s}}$$
   \end{proposition}
   \subsubsection{Constant coefficients linear systems}
   \begin{lemma}
-    Let $I\subseteq\RR$ be a compact interval and $\vf{f}:I\times\RR^n\rightarrow\RR^n$ be a continuous function and Lipschitz continuous with respect to the second variable. Let $\vf{\varphi}:I\rightarrow\RR^n$ be the solution of the ivp of \cref{DE_ivp}. Then, $\forall\vf{\psi}\in\mathcal{C}(I,\RR^n)$ the sequence $(\vf{T}^m\vf{\psi})$ converges uniformly to $\vf{\varphi}$ on $I$.
+    Let $I\subseteq\RR$ be a compact interval and $\vf{f}:I\times\RR^n\rightarrow\RR^n$ be a continuous function and Lipschitz continuous with respect to the second variable. Let $\vf{\varphi}:I\rightarrow\RR^n$ be the solution of the ivp of \mcref{DE:ivp}. Then, $\forall\vf{\psi}\in\mathcal{C}(I,\RR^n)$ the sequence $(\vf{T}^m\vf{\psi})$ converges uniformly to $\vf{\varphi}$ on $I$.
   \end{lemma}
   \begin{theorem}
     Let $\vf{A}\in\mathcal{M}_n(\RR)$ and $\vf{\Phi}(t)\in\mathcal{M}_n(\RR)$ be a matrix solution of the ode
-    \begin{equation}\label{DE_coef-constants}
+    \begin{equation}\label{DE:coef-constants}
       \vf{x}'=\vf{A}\vf{x}
     \end{equation}
     such that $\Phi(0)=\vf{I}_n$. Then:
@@ -458,18 +458,18 @@
   \end{theorem}
   \begin{definition}
     Let $\vf{A}\in\mathcal{M}_n(\RR)$ and $t\in\RR$. We define the \emph{matrix exponential} $\exp{\vf{A}t}$ as:
-    \begin{equation}\label{DE_matrixexp}
+    \begin{equation}\label{DE:matrixexp}
       \exp{\vf{A}t}=\sum_{k=0}^\infty\frac{\vf{A}^kt^k}{k!}
     \end{equation}
   \end{definition}
   \begin{proposition}
-    Let $\vf{A}\in\mathcal{M}_n(\RR)$ and $t,s\in \RR$. Then, the matrix exponential $\exp{\vf{A}t}$ is a fundamental matrix of the ode of \cref{DE_coef-constants} and has the following properties:
+    Let $\vf{A}\in\mathcal{M}_n(\RR)$ and $t,s\in \RR$. Then, the matrix exponential $\exp{\vf{A}t}$ is a fundamental matrix of the ode of \mcref{DE:coef-constants} and has the following properties:
     \begin{enumerate}
       \item $\exp{\vf{A}\cdot 0}=\vf{I}_n$
       \item $\exp{\vf{A}(t+s)}=\exp{\vf{A}t}\exp{\vf{A}s}$
       \item ${\left(\exp{\vf{A}t}\right)}^{-1}=\exp{-\vf{A}t}$
       \item $\left(\exp{\vf{A}t}\right)'=\vf{A}\exp{\vf{A}t}=\exp{\vf{A}t}\vf{A}$
-      \item If $\vf{\Phi}(t)$ is an arbitrary fundamental matrix of the ode of \cref{DE_coef-constants}, then: $$\exp{\vf{A}t}=\vf{\Phi}(t){\vf{\Phi}(0)}^{-1}$$
+      \item If $\vf{\Phi}(t)$ is an arbitrary fundamental matrix of the ode of \mcref{DE:coef-constants}, then: $$\exp{\vf{A}t}=\vf{\Phi}(t){\vf{\Phi}(0)}^{-1}$$
     \end{enumerate}
   \end{proposition}
   \begin{lemma}
@@ -492,7 +492,7 @@
     $$
   \end{proposition}
   \begin{corollary}
-    Let $\vf{A}\in\mathcal{M}_n(\RR)$ and $t\in\RR$ and consider the linear ode of \cref{DE_coef-constants}. If $(\vf{v}_1,\ldots,\vf{v}_n)$ is a basis of eigenvectors with associated eigenvalues $\lambda_1,\ldots,\lambda_n$, respectively, then $(\vf{\varphi}_1,\ldots,\vf{\varphi}_n)$, where $\vf{\varphi}_i=\exp{\lambda_it}\vf{v}_i$ for $i=1,\ldots,n$, is a basis of $\mathcal{A}_n$.
+    Let $\vf{A}\in\mathcal{M}_n(\RR)$ and $t\in\RR$ and consider the linear ode of \mcref{DE:coef-constants}. If $(\vf{v}_1,\ldots,\vf{v}_n)$ is a basis of eigenvectors with associated eigenvalues $\lambda_1,\ldots,\lambda_n$, respectively, then $(\vf{\varphi}_1,\ldots,\vf{\varphi}_n)$, where $\vf{\varphi}_i=\exp{\lambda_it}\vf{v}_i$ for $i=1,\ldots,n$, is a basis of $\mathcal{A}_n$.
   \end{corollary}
   \begin{lemma}
     Let $\vf{A}=\diag(\lambda_1,\ldots,\lambda_n)\in\mathcal{M}_n(\RR)$ and $t\in\RR$. Then:
@@ -503,7 +503,7 @@
     \begin{multline*}
       \exp{\vf{A}t}\vf{v}=\exp{\vf{A}t}\vf{u}+\ii\exp{\vf{A}t}\vf{w}=\exp{\alpha t}\left[\cos(\beta t)\vf{u}-\sin(\beta t)\vf{w}\right]+\\+\ii\exp{\alpha t}\left[\sin(\beta t)\vf{u}+\cos(\beta t)\vf{w}\right]
     \end{multline*}
-    and $\exp{\vf{A}t}\vf{u}$, $\exp{\vf{A}t}\vf{w}$ are linearly independent solutions of the ode of \cref{DE_coef-constants} with initial conditions $\vf{x}(0)=\vf{u}$ and $\vf{x}(0)=\vf{w}$, respectively.
+    and $\exp{\vf{A}t}\vf{u}$, $\exp{\vf{A}t}\vf{w}$ are linearly independent solutions of the ode of \mcref{DE:coef-constants} with initial conditions $\vf{x}(0)=\vf{u}$ and $\vf{x}(0)=\vf{w}$, respectively.
   \end{proposition}
   \begin{definition}
     Let $\vf{A}\in\mathcal{M}_n(\RR)$. A vector $\vf{w}\in\RR^n$ is a \emph{generalized eigenvector} of rank $m$ of $\vf{A}$ corresponding to the eigenvalue $\lambda\in\RR$ if: $${(\vf{A}-\lambda\vf{I}_n)}^m\vf{w}=0\quad\text{but}\quad{(\vf{A}-\lambda\vf{I}_n)}^{m-1}\vf{w}\ne 0$$
@@ -526,7 +526,7 @@
       \end{aligned}
       \right.
     $$
-    are solutions of the ode of \cref{DE_coef-constants}. Furthermore, if $\vf{v}_1,\ldots,\vf{v}_k$ are linearly independent, then so are $\vf{\varphi}_1,\ldots,\vf{\varphi}_k$.
+    are solutions of the ode of \mcref{DE:coef-constants}. Furthermore, if $\vf{v}_1,\ldots,\vf{v}_k$ are linearly independent, then so are $\vf{\varphi}_1,\ldots,\vf{\varphi}_k$.
   \end{lemma}
   \begin{corollary}
     Let $\vf{A}\in\mathcal{M}_n(\RR)$ and $\sigma(\vf{A})=\{\lambda_1,\ldots,\lambda_n\}$ be the spectrum of $\vf{A}$ such that:
@@ -534,7 +534,7 @@
       \item $\lambda_1,\ldots,\lambda_{2k}\in\CC\setminus\RR$, $\lambda_{k+i}=\overline{\lambda_i}$ and $\lambda_i=\alpha_i+\ii\beta_i$, $\alpha_i,\beta_i\in\RR$ for $i=1,\ldots,k$.
       \item $\lambda_{2k+1},\ldots,\lambda_n\in\RR$
     \end{itemize}
-    Then, the general solution of the ode of \cref{DE_coef-constants} is of the form:
+    Then, the general solution of the ode of \mcref{DE:coef-constants} is of the form:
     \begin{multline*}
       \vf{\varphi}(t)=\sum_{i=1}^k\exp{\alpha_i t}\left(\vf{P}_i(t)\cos(\beta_i t)+\vf{Q}_i(t)\sin(\beta_i t)\right)+\\+\sum_{i=2k+1}^n\exp{\lambda_i t}\vf{R}_i(t)
     \end{multline*}
@@ -543,7 +543,7 @@
   \subsection{Dependence on initial conditions and parameters}
   \begin{definition}
     Let $U\subseteq\RR\times\RR^n\times\RR^p$ be an open set and $\vf{f}:U\rightarrow\RR^n$ be a continuous function. Suppose that the ivp:
-    \begin{equation}\label{DE_ivp_lambda}
+    \begin{equation}\label{DE:ivp_lambda}
       \begin{cases}
         \vf{x}'      =\vf{f}(t,\vf{x},\vf{\lambda}) \\
         \vf{x}(t_0)  =\vf{x}_0
@@ -566,10 +566,10 @@
     has a unique maximal solution $\vf{\varphi}_m$ defined on $I_m$. Then, for all $[a,b]\subset I_0$ with $t_0\in(a,b)$, $\exists m_0\in\NN$ such that $[a,b]\subset I_m$ $\forall m>m_0$. Furthermore, the sequence $\left(\vf{\varphi}_m|_{[a,b]}\right)_{m>m_0}$ converges uniformly to $\vf{\varphi}_0|_{[a,b]}$.
   \end{proposition}
   \begin{theorem}
-    Let $U\subseteq\RR\times\RR^n$ be an open set and $\vf{f}:U\rightarrow\RR^n$ be a continuous function. Suppose that each ivp of the form of \cref{DE_ivp} has a unique maximal solution. Then, the flow $\vf{\phi}(t,t_0,\vf{x}_0)$ is a continuous function defined in an open set.
+    Let $U\subseteq\RR\times\RR^n$ be an open set and $\vf{f}:U\rightarrow\RR^n$ be a continuous function. Suppose that each ivp of the form of \mcref{DE:ivp} has a unique maximal solution. Then, the flow $\vf{\phi}(t,t_0,\vf{x}_0)$ is a continuous function defined in an open set.
   \end{theorem}
   \begin{theorem}
-    Let $U\subseteq\RR\times\RR^n\times\RR^p$ be an open set and $\vf{f}:U\rightarrow\RR^n$ be a continuous function. Suppose that each ivp of the form of \cref{DE_ivp_lambda} has a unique maximal solution. Then, the flow $\vf{\phi}(t,t_0,\vf{x}_0,\vf{\lambda})$ is a continuous function defined in an open set $V\subseteq I_{(t_0,\vf{x}_0,\vf{\lambda})}\times\RR\times\RR^n\times\RR^p$.
+    Let $U\subseteq\RR\times\RR^n\times\RR^p$ be an open set and $\vf{f}:U\rightarrow\RR^n$ be a continuous function. Suppose that each ivp of the form of \mcref{DE:ivp_lambda} has a unique maximal solution. Then, the flow $\vf{\phi}(t,t_0,\vf{x}_0,\vf{\lambda})$ is a continuous function defined in an open set $V\subseteq I_{(t_0,\vf{x}_0,\vf{\lambda})}\times\RR\times\RR^n\times\RR^p$.
   \end{theorem}
   \begin{lemma}[Grönwall's lemma]
     Let $u,v,w:[a,b)\rightarrow\RR$ be continuous functions such that $v(t)\geq 0$ $\forall t\in[a,b)$ and satisfying: $$u(t)\leq w(t)+\int_a^tv(s)u(s)\dd{s}\quad\forall t\in[a,b)$$
@@ -852,32 +852,32 @@
   \begin{definition}
     Let $U\subseteq \RR^2$ be an open set, $\vf{f}:U\rightarrow\RR^2$ be a vector field of class $\mathcal{C}^1$ and $\vf{p}\in U$ be a critical point of $\vf{f}$. Suppose $\sigma(\vf{Df}(\vf{p}))=\{\lambda_1,\lambda_2\}$. We say that $\vf{p}$ is a
     \begin{itemize}
-      \item \emph{stable node} if $\lambda_1,\lambda_2\in\RR_{<0}$ and $\lambda_1\ne\lambda_2$ (see \cref{DE_linear-a}).
+      \item \emph{stable node} if $\lambda_1,\lambda_2\in\RR_{<0}$ and $\lambda_1\ne\lambda_2$ (see \mcref{DE:linear-a}).
       \item \emph{stable degenerated node} if $\lambda_1,\lambda_2\in\RR_{<0}$, $\lambda_1=\lambda_2$ and $\vf{Df}(\vf{p})\sim
               \begin{pmatrix}
                 \lambda_1 & 0         \\
                 1         & \lambda_1
-              \end{pmatrix}$ (see \cref{DE_linear-b}).
+              \end{pmatrix}$ (see \mcref{DE:linear-b}).
       \item \emph{stable star} if $\lambda_1,\lambda_2\in\RR_{<0}$, $\lambda_1=\lambda_2$ and $\vf{Df}(\vf{p})\sim
               \begin{pmatrix}
                 \lambda_1 & 0         \\
                 0         & \lambda_1
-              \end{pmatrix}$ (see \cref{DE_linear-c}).
-      \item \emph{unstable node} if $\lambda_1,\lambda_2\in\RR_{>0}$ and $\lambda_1\ne\lambda_2$ (see \cref{DE_linear-d}).
+              \end{pmatrix}$ (see \mcref{DE:linear-c}).
+      \item \emph{unstable node} if $\lambda_1,\lambda_2\in\RR_{>0}$ and $\lambda_1\ne\lambda_2$ (see \mcref{DE:linear-d}).
       \item \emph{unstable degenerated node} if $\lambda_1,\lambda_2\in\RR_{>0}$, $\lambda_1=\lambda_2$ and $\vf{Df}(\vf{p})\sim
               \begin{pmatrix}
                 \lambda_1 & 0         \\
                 1         & \lambda_1
-              \end{pmatrix}$ (see \cref{DE_linear-e}).
+              \end{pmatrix}$ (see \mcref{DE:linear-e}).
       \item \emph{unstable star} if $\lambda_1,\lambda_2\in\RR_{>0}$, $\lambda_1=\lambda_2$ and $\vf{Df}(\vf{p})\sim
               \begin{pmatrix}
                 \lambda_1 & 0         \\
                 0         & \lambda_1
-              \end{pmatrix}$ (see \cref{DE_linear-f}).
-      \item \emph{saddle point} if $\lambda_1,\lambda_2\in\RR$ and $\lambda_1\lambda_2<0$ (see \cref{DE_linear-j}).
-      \item \emph{stable focus} (or \emph{sink}) if $\lambda_1,\lambda_2\in\CC$ and $\Re(\lambda_1)<0$ (see \cref{DE_linear-h}).
-      \item \emph{unstable focus} (or \emph{source}) if $\lambda_1,\lambda_2\in\CC$ and $\Re(\lambda_1)>0$ (see \cref{DE_linear-i}).
-      \item \emph{center} if $\lambda_1,\lambda_2\in\CC$, $\Re(\lambda_1)=0$ and $\vf{p}$ is surrounded by periodic orbits (see \cref{DE_linear-g}).
+              \end{pmatrix}$ (see \mcref{DE:linear-f}).
+      \item \emph{saddle point} if $\lambda_1,\lambda_2\in\RR$ and $\lambda_1\lambda_2<0$ (see \mcref{DE:linear-j}).
+      \item \emph{stable focus} (or \emph{sink}) if $\lambda_1,\lambda_2\in\CC$ and $\Re(\lambda_1)<0$ (see \mcref{DE:linear-h}).
+      \item \emph{unstable focus} (or \emph{source}) if $\lambda_1,\lambda_2\in\CC$ and $\Re(\lambda_1)>0$ (see \mcref{DE:linear-i}).
+      \item \emph{center} if $\lambda_1,\lambda_2\in\CC$, $\Re(\lambda_1)=0$ and $\vf{p}$ is surrounded by periodic orbits (see \mcref{DE:linear-g}).
     \end{itemize}
   \end{definition}
   \begin{definition}
@@ -903,10 +903,10 @@
   \begin{definition}
     Let $U\subseteq \RR^2$ be an open set, $\vf{f}:U\rightarrow\RR^2$ be a vector field of class $\mathcal{C}^1$ and $\vf{p}\in U$ be a critical point of $\vf{f}$. We say that $\vf{p}$ has
     \begin{itemize}
-      \item an \emph{elliptic sector} if a side of $\vf{p}$ is locally as \cref{DE_esector}.
-      \item a \emph{hyperbolic sector} if a side of $\vf{p}$ is locally as \cref{DE_hsector}.
-      \item  an \emph{attracting parabolic sector} if a side of $\vf{p}$ is locally as \cref{DE_apsector}.
-      \item a \emph{repelling parabolic sector} if a side of $\vf{p}$ is locally as \cref{DE_rpsector}.
+      \item an \emph{elliptic sector} if a side of $\vf{p}$ is locally as \mcref{DE:esector}.
+      \item a \emph{hyperbolic sector} if a side of $\vf{p}$ is locally as \mcref{DE:hsector}.
+      \item  an \emph{attracting parabolic sector} if a side of $\vf{p}$ is locally as \mcref{DE:apsector}.
+      \item a \emph{repelling parabolic sector} if a side of $\vf{p}$ is locally as \mcref{DE:rpsector}.
     \end{itemize}
     The union of all sectors that form a neighbourhood of $\vf{p}$ is called \emph{sectorial decomposition}.
     \begin{center}
@@ -914,13 +914,13 @@
         \centering
         \includestandalone[mode=image|tex,width=0.75\linewidth]{Images/esector}
         \captionof{figure}{Elliptic sector}
-        \label{DE_esector}
+        \label{DE:esector}
       \end{minipage}\hfill
       \begin{minipage}[b]{0.475\linewidth}
         \centering
         \includestandalone[mode=image|tex,width=0.75\linewidth]{Images/hsector}
         \captionof{figure}{Hyperbolic sector}
-        \label{DE_hsector}
+        \label{DE:hsector}
       \end{minipage}
     \end{center}
     \begin{center}
@@ -928,13 +928,13 @@
         \centering
         \includestandalone[mode=image|tex,width=0.75\linewidth]{Images/apsector}
         \captionof{figure}{Attracting parabolic sector}
-        \label{DE_apsector}
+        \label{DE:apsector}
       \end{minipage}\hfill
       \begin{minipage}[b]{0.475\linewidth}
         \centering
         \includestandalone[mode=image|tex,width=0.75\linewidth]{Images/rpsector}
         \captionof{figure}{Repelling parabolic sector}
-        \label{DE_rpsector}
+        \label{DE:rpsector}
       \end{minipage}
     \end{center}
   \end{definition}
@@ -1039,67 +1039,67 @@
       \centering
       \includestandalone[mode=image|tex,width=\linewidth]{Images/linear-a}
       \caption{}
-      \label{DE_linear-a}
+      \label{DE:linear-a}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.3\linewidth}
       \centering
       \includestandalone[mode=image|tex,width=\linewidth]{Images/linear-b}
       \caption{}
-      \label{DE_linear-b}
+      \label{DE:linear-b}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.3\linewidth}
       \centering
       \includestandalone[mode=image|tex,width=\linewidth]{Images/linear-c}
       \caption{}
-      \label{DE_linear-c}
+      \label{DE:linear-c}
     \end{subfigure}\\
     \begin{subfigure}[b]{0.3\linewidth}
       \centering
       \includestandalone[mode=image|tex,width=\linewidth]{Images/linear-d}
       \caption{}
-      \label{DE_linear-d}
+      \label{DE:linear-d}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.3\linewidth}
       \centering
       \includestandalone[mode=image|tex,width=\linewidth]{Images/linear-e}
       \caption{}
-      \label{DE_linear-e}
+      \label{DE:linear-e}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.3\linewidth}
       \centering
       \includestandalone[mode=image|tex,width=\linewidth]{Images/linear-f}
       \caption{}
-      \label{DE_linear-f}
+      \label{DE:linear-f}
     \end{subfigure}\\
     \begin{subfigure}[b]{0.3\linewidth}
       \centering
       \includestandalone[mode=image|tex,width=\linewidth]{../../4th/Dynamical_systems/Images/nilpot-e}
       \caption{}
-      \label{DE_linear-g}
+      \label{DE:linear-g}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.3\linewidth}
       \centering
       \includestandalone[mode=image|tex,width=\linewidth]{../../4th/Dynamical_systems/Images/nilpot-g}
       \caption{}
-      \label{DE_linear-h}
+      \label{DE:linear-h}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.3\linewidth}
       \centering
       \includestandalone[mode=image|tex,width=\linewidth]{../../4th/Dynamical_systems/Images/nilpot-f}
       \caption{}
-      \label{DE_linear-i}
+      \label{DE:linear-i}
     \end{subfigure}\\
     \begin{subfigure}[b]{0.3\linewidth}
       \centering
       \includestandalone[mode=image|tex,width=\linewidth]{Images/linear-j}
       \caption{}
-      \label{DE_linear-j}
+      \label{DE:linear-j}
     \end{subfigure}
     \caption{Phase portraits of hyperbolic singular points}
   \end{figure}
@@ -1107,7 +1107,7 @@
   \subsubsection{Polynomial vectors fields}
   \begin{definition}
     Let $p,q\in\RR[x,y]$. The system of odes
-    \begin{equation}\label{DE_poly}
+    \begin{equation}\label{DE:poly}
       \left\{
       \begin{aligned}
         x' & =p(x,y) \\
@@ -1116,7 +1116,7 @@
       \right.
     \end{equation}
     is called a \emph{polynomial system}. The field $\vf{f}=(p,q)$ is called \emph{polynomial vector field}. We define the \emph{degree} of that system as $n:=\max\{\deg p,\deg q\}$. Another commonly used notation for expressing the vector field is through the operator
-    \begin{equation}\label{DE_oper}
+    \begin{equation}\label{DE:oper}
       \vf{X}:=p(x,y)\pdv{}{x}+q(x,y)\pdv{}{y}
     \end{equation}
   \end{definition}
@@ -1124,15 +1124,15 @@
     Let $f\in\RR[x,y]$ be a polynomial. An \emph{algebraic curve} is the set of points satisfying the equation $f(x,y)=0$.
   \end{definition}
   \begin{definition}
-    Let $f(x,y)=0$ be an algebraic curve, $p,q\in\RR[x,y]$ and consider the polynomial system of degree $n$ of \cref{DE_poly}. We say that $f(x,y)=0$ is an \emph{invariant algebraic curve} under the system of \cref{DE_poly} if
-    \begin{equation}\label{DE_invarcurve}
+    Let $f(x,y)=0$ be an algebraic curve, $p,q\in\RR[x,y]$ and consider the polynomial system of degree $n$ of \mcref{DE:poly}. We say that $f(x,y)=0$ is an \emph{invariant algebraic curve} under the system of \mcref{DE:poly} if
+    \begin{equation}\label{DE:invarcurve}
       \pdv{f}{x}(x,y)p(x,y)+\pdv{f}{y}q(x,y)=k(x,y)f(x,y)
     \end{equation}
-    where $k\in\RR[x,y]$ is called \emph{cofactor} of the invariant curve $f(x,y)=0$\footnote{Note that $\deg k\leq n-1$.}. The \cref{DE_invarcurve} can be written as: $$\vf{X}f=kf$$
-    where $\vf{X}$ is the operator defined in \cref{DE_oper}.
+    where $k\in\RR[x,y]$ is called \emph{cofactor} of the invariant curve $f(x,y)=0$\footnote{Note that $\deg k\leq n-1$.}. The \mcref{DE:invarcurve} can be written as: $$\vf{X}f=kf$$
+    where $\vf{X}$ is the operator defined in \mcref{DE:oper}.
   \end{definition}
   \begin{proposition}
-    Let $f(x,y)=0$ be an algebraic curve, $p,q\in\RR[x,y]$ and consider the polynomial system of degree $n$ of \cref{DE_poly}. Then, the invariant curve $f(x,y)=0$ is a set of orbits of the differential system of \cref{DE_poly}.
+    Let $f(x,y)=0$ be an algebraic curve, $p,q\in\RR[x,y]$ and consider the polynomial system of degree $n$ of \mcref{DE:poly}. Then, the invariant curve $f(x,y)=0$ is a set of orbits of the differential system of \mcref{DE:poly}.
   \end{proposition}
   \subsubsection{Local structure of periodic orbits}
   \begin{definition}[Poincaré map]
@@ -1147,8 +1147,8 @@
   \begin{proposition}
     Let $U\subseteq \RR^2$ be an open set, $\vf{f}:U\rightarrow\RR^2$ be a vector field of class $\mathcal{C}^1$, $\vf{\gamma}$ be a limit cycle and $V$ be a neighbourhood of $\vf{\gamma}$. Then, $\vf{\gamma}$ is exactly one of the following three types of limit cycles:
     \begin{itemize}
-      \item $\vf{\gamma}$ is \emph{stable} if $\omega(\vf{q})=\vf{\gamma}$ $\forall \vf{q}\in V$ (\cref{DE_limitcycles_a}).
-      \item $\vf{\gamma}$ is \emph{unstable} if $\alpha(\vf{q})=\vf{\gamma}$ $\forall \vf{q}\in V$ (\cref{DE_limitcycles_b}).
+      \item $\vf{\gamma}$ is \emph{stable} if $\omega(\vf{q})=\vf{\gamma}$ $\forall \vf{q}\in V$ (\mcref{DE:limitcycles_a}).
+      \item $\vf{\gamma}$ is \emph{unstable} if $\alpha(\vf{q})=\vf{\gamma}$ $\forall \vf{q}\in V$ (\mcref{DE:limitcycles_b}).
       \item $\vf{\gamma}$ is \emph{semi-stable} if either
             \begin{multline*}
               \{\omega(\vf{q})=\vf{\gamma}\quad\forall \vf{q}\in V\cap\Ext(\vf{\gamma})\} \land \\\land\{\alpha(\vf{q})=\vf{\gamma}\quad\forall \vf{q}\in V\cap\Int(\vf{\gamma})\}
@@ -1157,7 +1157,7 @@
             \begin{multline*}
               \{\omega(\vf{q})=\vf{\gamma}\quad\forall \vf{q}\in V\cap\Int(\vf{\gamma})\}\land\\\land \{\alpha(\vf{q})=\vf{\gamma}\quad\forall \vf{q}\in V\cap\Ext(\vf{\gamma})\}
             \end{multline*}
-            (\cref{DE_limitcycles_c,DE_limitcycles_d})
+            (\mcref{DE:limitcycles_c,DE:limitcycles_d})
     \end{itemize}
   \end{proposition}
   \begin{figure}[H]
@@ -1166,31 +1166,31 @@
       \centering
       \includestandalone[mode=image|tex,width=\linewidth]{../../4th/Dynamical_systems/Images/hopf2}
       \caption{}
-      \label{DE_limitcycles_a}
+      \label{DE:limitcycles_a}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.24\linewidth}
       \centering
       \includestandalone[mode=image|tex,width=\linewidth]{Images/unstable_cycle}
       \caption{}
-      \label{DE_limitcycles_b}
+      \label{DE:limitcycles_b}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.24\linewidth}
       \centering
       \includestandalone[mode=image|tex,width=\linewidth]{Images/semistable_cycle1}
       \caption{}
-      \label{DE_limitcycles_c}
+      \label{DE:limitcycles_c}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.24\linewidth}
       \centering
       \includestandalone[mode=image|tex,width=\linewidth]{Images/semistable_cycle2}
       \caption{}
-      \label{DE_limitcycles_d}
+      \label{DE:limitcycles_d}
     \end{subfigure}
     \caption{Stability of limit cycles}
-    \label{DE_limitcycles}
+    \label{DE:limitcycles}
   \end{figure}
   \begin{definition}
     Let $U\subseteq \RR^2$ be an open set, $\vf{f}:U\rightarrow\RR^2$ be a vector field of class $\mathcal{C}^1$ and $\vf{\gamma}$ be a periodic orbit of period $T$. We say that $\vf\gamma$ is a \emph{hyperbolic periodic orbit} if $$I(\vf\gamma):=\int_0^T\div\vf{f}(\vf\gamma(t))\dd{t}\ne 0$$
@@ -1338,36 +1338,36 @@
   \end{definition}
   \subsubsection{Integrability theory of polynomial systems}
   \begin{definition}
-    Let $U\subseteq\RR^2$ be an open set, $p,q\in\RR[x,y]$ and consider the polynomial system of \cref{DE_poly}. We say that a function $R:U\rightarrow\RR$ is an \emph{integrating factor} if $$\div (Rp,Rq)=\pdv{(Rp)}{x}+\pdv{(Rq)}{y}=0$$
+    Let $U\subseteq\RR^2$ be an open set, $p,q\in\RR[x,y]$ and consider the polynomial system of \mcref{DE:poly}. We say that a function $R:U\rightarrow\RR$ is an \emph{integrating factor} if $$\div (Rp,Rq)=\pdv{(Rp)}{x}+\pdv{(Rq)}{y}=0$$
   \end{definition}
   \begin{lemma}
-    Let $U\subseteq\RR^2$ be an open set, $R:U\rightarrow\RR$ be a differentiable function, $p,q\in\RR[x,y]$ and consider the polynomial system of \cref{DE_poly}. Then, $R$ is an integrating factor if and only if: $$\vf{X}R=p\pdv{R}{x}+q\pdv{R}{y}=-R\div(p,q)$$
-    where $\vf{X}$ is the operator defined in \cref{DE_oper}.
+    Let $U\subseteq\RR^2$ be an open set, $R:U\rightarrow\RR$ be a differentiable function, $p,q\in\RR[x,y]$ and consider the polynomial system of \mcref{DE:poly}. Then, $R$ is an integrating factor if and only if: $$\vf{X}R=p\pdv{R}{x}+q\pdv{R}{y}=-R\div(p,q)$$
+    where $\vf{X}$ is the operator defined in \mcref{DE:oper}.
   \end{lemma}
-  \begin{proposition}\label{DE_intfactor}
-    Let $U\subseteq\RR^2$ be an open set, $p,q\in\RR[x,y]$ and consider the polynomial system of \cref{DE_poly}. Suppose that system admits an integrating factor $R:U\rightarrow\RR$. Then, the system admits a first integral $H:U\rightarrow\RR$ given by:
+  \begin{proposition}\label{DE:intfactor}
+    Let $U\subseteq\RR^2$ be an open set, $p,q\in\RR[x,y]$ and consider the polynomial system of \mcref{DE:poly}. Suppose that system admits an integrating factor $R:U\rightarrow\RR$. Then, the system admits a first integral $H:U\rightarrow\RR$ given by:
     $$H(x,y)=-\int R(x,y)p(x,y)\dd{y}+h(x)$$
     where $h(x)$ satisfy: $$h'(x)=R(x,y)q(x,y)+\pdv{}{x}\left(\int R(x,y)p(x,y)\dd{y}\right)$$
   \end{proposition}
   \begin{definition}
-    Let $p,q,g,h\in\RR[x,y]$ and consider the polynomial system of \cref{DE_poly} of degree $d$ and let $\vf{X}$ be the vector field operator of that system (defined by \cref{DE_oper}). We say that $\exp{\frac{g(x,y)}{h(x,y)}}$ is an \emph{exponential factor} with cofactor $k(x,y)\in\RR[x,y]$ if $\deg k\leq d-1$ and: $$\vf{X}\exp{\frac{g(x,y)}{h(x,y)}}=k(x,y)\exp{\frac{g(x,y)}{h(x,y)}}$$
+    Let $p,q,g,h\in\RR[x,y]$ and consider the polynomial system of \mcref{DE:poly} of degree $d$ and let $\vf{X}$ be the vector field operator of that system (defined by \mcref{DE:oper}). We say that $\exp{\frac{g(x,y)}{h(x,y)}}$ is an \emph{exponential factor} with cofactor $k(x,y)\in\RR[x,y]$ if $\deg k\leq d-1$ and: $$\vf{X}\exp{\frac{g(x,y)}{h(x,y)}}=k(x,y)\exp{\frac{g(x,y)}{h(x,y)}}$$
   \end{definition}
   \begin{theorem}[Darboux theorem]
-    Let $p,q\in\RR[x,y]$ and consider the polynomial system of \cref{DE_poly} of degree $d$, $f_i(x,y)=0$ be invariant algebraic curves with cofactors $k_i(x,y)$ for $i=1,\ldots,r$ and $\exp{\frac{g_j(x,y)}{h_j(x,y)}}$ be exponential factors with cofactors $\ell_j(x,y)$ for $j=1,\ldots,s$. Then:
+    Let $p,q\in\RR[x,y]$ and consider the polynomial system of \mcref{DE:poly} of degree $d$, $f_i(x,y)=0$ be invariant algebraic curves with cofactors $k_i(x,y)$ for $i=1,\ldots,r$ and $\exp{\frac{g_j(x,y)}{h_j(x,y)}}$ be exponential factors with cofactors $\ell_j(x,y)$ for $j=1,\ldots,s$. Then:
     \begin{enumerate}
       \item If $\exists \lambda_i,\mu_j\in\RR$, $i=1,\ldots,r$ and $j=1,\ldots,s$, not all zero such that $\sum_{i=1}^r\lambda_ik_i+\sum_{j=1}^s\mu_j\ell_j=0$, then
-            \begin{equation}\label{DE_firstint}
+            \begin{equation}\label{DE:firstint}
               H={f_1}^{\lambda_1}\cdots{f_r}^{\lambda_r}\exp{\mu_1\frac{g_1(x,y)}{h_1(x,y)}}\cdots\exp{\mu_s\frac{g_s(x,y)}{h_s(x,y)}}
             \end{equation}
             is a first integral for the system.
-      \item If $r+s\geq \frac{d(d+1)}{2}+1$, then $\exists \lambda_i,\mu_j\in\RR$, $i=1,\ldots,r$ and $j=1,\ldots,s$, not all zero such that $\sum_{i=1}^p\lambda_ik_i+\sum_{j=1}^q\mu_j\ell_j=0$. And so, the system has the first integral defined in \cref{DE_firstint}.
+      \item If $r+s\geq \frac{d(d+1)}{2}+1$, then $\exists \lambda_i,\mu_j\in\RR$, $i=1,\ldots,r$ and $j=1,\ldots,s$, not all zero such that $\sum_{i=1}^p\lambda_ik_i+\sum_{j=1}^q\mu_j\ell_j=0$. And so, the system has the first integral defined in \mcref{DE:firstint}.
       \item If $r+s\geq \frac{d(d+1)}{2}+2$, then the system has a rational first integral. Consequently all trajectories of the system are contained in
             invariant algebraic curves.
       \item If $\exists \lambda_i,\mu_j\in\RR$, $i=1,\ldots,r$ and $j=1,\ldots,s$, not all zero such that $\sum_{i=1}^p\lambda_ik_i+\sum_{j=1}^q\mu_j\ell_j=-\div(p,q)$, then
             \begin{equation*}
               R={f_1}^{\lambda_1}\cdots{f_r}^{\lambda_r}\exp{\mu_1\frac{g_1(x,y)}{h_1(x,y)}}\cdots\exp{\mu_s\frac{g_s(x,y)}{h_s(x,y)}}
             \end{equation*}
-            is an integrating factor for the system. And so the system also admits a first integral by \cref{DE_intfactor}.
+            is an integrating factor for the system. And so the system also admits a first integral by \mcref{DE:intfactor}.
     \end{enumerate}
   \end{theorem}
   \subsubsection{Index of paths and homotopy}
@@ -1430,7 +1430,7 @@
     Let $\overline{D}\subseteq \RR^2$ be a closed disk and $\vf{X}:\overline{D}\rightarrow\RR^2$ be a continuous vector field such that $\vf{X}(q)\ne 0$ $\forall q\in\Fr{\overline{D}}$. Suppose that $\vf{X}$ has a finite number of singular points $p_1,\ldots,p_n$. Then: $$\sum_{i= 1}^n\Ind_{p_i}(\vf{X})=\Ind_{\Fr{D}}(\vf{X})$$
   \end{proposition}
   \begin{definition}
-    Let $U\subseteq \S^2$ be an open set. A \emph{tangent vector field} defined on $\S^2$ is a vector field $\vf{X}$ such that $\vf{X}(q)\in T_p\S^2$ $\forall q\in U$\footnote{Recall \cref{DG_tangent}.}.
+    Let $U\subseteq \S^2$ be an open set. A \emph{tangent vector field} defined on $\S^2$ is a vector field $\vf{X}$ such that $\vf{X}(q)\in T_p\S^2$ $\forall q\in U$\footnote{Recall \mcref{DG:tangent}.}.
   \end{definition}
   \begin{definition}
     Let $U\subseteq \S^2$ be an open set and $\vf{X}:U\rightarrow\RR^3$ be a tangent vector field and $p$ be a singular point of $\vf{X}$. Suppose (rotating the sphere if necessary) that $p$ is in one of its poles. Let $\vf{\tilde{X}}$ be the field created from the stereographic projection from $-p$ to the equator plane. We define the index of $p$ with respect to the field $\vf{X}$ as: $$\Ind_p(X)=\Ind_0(\vf{\tilde{X}})$$
@@ -1454,12 +1454,12 @@
   \subsubsection{Quasilinear partial differential equations}
   \begin{definition}
     Let $U\subseteq \RR^n$ be an open set and $u:U\rightarrow\RR$ be a function. A \emph{quasilinear pde} is an expression of the form:
-    \begin{equation}\label{DE_pde1}
+    \begin{equation}\label{DE:pde1}
       p_1(\vf{x},u)\pdv{u}{x_1}+\cdots+p_n(\vf{x},u)\pdv{u}{x_n}=q(\vf{x},u)
     \end{equation}
   \end{definition}
   \begin{theorem}
-    Let $U\subseteq \RR^n$ be an open set and $u:U\rightarrow\RR$ be a function and consider the pde of \cref{DE_pde1}. Let $H_1,\ldots,H_{n}$ be the $n$ independent first integrals of the system:
+    Let $U\subseteq \RR^n$ be an open set and $u:U\rightarrow\RR$ be a function and consider the pde of \mcref{DE:pde1}. Let $H_1,\ldots,H_{n}$ be the $n$ independent first integrals of the system:
     $$
       \left\{
       \begin{aligned}
@@ -1470,7 +1470,7 @@
       \end{aligned}
       \right.
     $$
-    Then, for any function $F:\RR^n\rightarrow\RR$ of class $\mathcal{C}^1$, the implicit equation $$F(H_1(\vf{x},u),\ldots,H_n(\vf{x},u))=0$$ is a solution to \cref{DE_pde1}.
+    Then, for any function $F:\RR^n\rightarrow\RR$ of class $\mathcal{C}^1$, the implicit equation $$F(H_1(\vf{x},u),\ldots,H_n(\vf{x},u))=0$$ is a solution to \mcref{DE:pde1}.
   \end{theorem}
   \subsubsection{Heat, wave and Laplace equations}
   \begin{definition}[Heat equation]

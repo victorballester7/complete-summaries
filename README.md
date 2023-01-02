@@ -4,7 +4,7 @@ Summary of each subject in Mathematics and Physics degree at UAB (Universitat Au
 
 ### TODO
 
-> Remember:! We doing writing the proofs of the remaining summaries, reread and review the `\emph{}` definitions in order to appear properly in the index.
+> Remember: When writing the proofs of the remaining summaries, reread and review the `\emph{}` definitions in order to appear properly in the index.
 
 - Mathematics 1
   - Fundamentals of mathematics

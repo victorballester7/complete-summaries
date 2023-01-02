@@ -47,15 +47,54 @@
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
   %% colors - subjects %%
-    \newcommand{\col}{red}            % DEFAULT
-    \newcommand{\ana}{DeepSkyBlue2}   % analysis
-    \newcommand{\alg}{Green3}         % algebra
-    \newcommand{\geo}{Purple2}        % geometry and topology
-    \newcommand{\apl}{Red2}           % applied mathematics
-    \newcommand{\sta}{DarkGoldenrod2} % statistics
-    \newcommand{\phy}{SlateBlue2}     % physics
+    \newcommand{\col}{red}%            % DEFAULT
+    \newcommand{\ana}{DeepSkyBlue2}%   % analysis
+    \newcommand{\alg}{Green3}%         % algebra
+    \newcommand{\geo}{Purple2}%        % geometry and topology
+    \newcommand{\apl}{Red2}%           % applied mathematics
+    \newcommand{\sta}{DarkGoldenrod2}% % statistics
+    \newcommand{\phy}{SlateBlue2}%     % physics
+
+  \ExplSyntaxOn
+  \NewExpandableDocumentCommand{\refcol}{m}{
+    \str_case_e:nnF {\FirstWord{#1}}{
+      {FM}{\alg}    % fundamentals of mathematics 
+      {LA}{\alg}    % linear algebra
+      {RVF}{\ana}   % real valued functions
+      {AS}{\alg}    % algebraic structures
+      {DM}{\alg}    % discrete mathematics
+      {FSV}{\ana}   % functions of several variables
+      {LG}{\geo}    % linear geometry
+      {MA}{\ana}    % mathematical analysis
+      {NM}{\apl}    % numerical methods
+      {CA}{\ana}    % complex analysis
+      {DE}{\apl}    % differential equations
+      {DG}{\geo}    % differential geometry
+      {GT}{\alg}    % Galois theory
+      {P}{\sta}     % probability
+      {STA}{\sta}   % statistics
+      {TOP}{\geo}   % topology
+      {AT}{\geo}    % algebraic topology
+      {A}{\alg}     % arithmetic
+      {CAL}{\alg}   % commutative algebra
+      {DS}{\apl}    % dynamical systems
+      {HA}{\ana}    % harmonic analysis
+      {LM}{\sta}    % linear models
+      {NC}{\apl}    % numeric calculus
+      {NIPDE}{\apl} % numeric integration of pde
+      {PDE}{\apl}   % partial differential equations
+      {RFA}{\ana}   % real and functional analysis
+      {SP}{\sta}    % stochastic processes
+    }{\col}%
+  }
+  \ExplSyntaxOff
   %%%%%%%%%%%%%%%%%%%%%%%
+
+  \newcommand\FirstWord[1]{\@removedots#1:\@nil}%
+  \newcommand\@removedots{}%
+  \def\@removedots#1:#2\@nil{#1}%
   
+
   %% for references (hyperref)
    \hypersetup{
      colorlinks = true,
@@ -447,6 +486,10 @@
 \crefname{axiom}{axiom}{axioms}
 \fi
 \makeatother
+
+\newcommand{\mref}[1]{\hypersetup{linkcolor = \refcol{#1}}\ref{#1}\hypersetup{linkcolor = magenta}}         % custom ref
+\newcommand{\mcref}[1]{\hypersetup{linkcolor = \refcol{#1}}\cref{#1}\hypersetup{linkcolor = magenta}}       % custom cref
+\newcommand{\mnameref}[1]{\hypersetup{linkcolor = \refcol{#1}}\nameref{#1}\hypersetup{linkcolor = magenta}} % custom nameref
 
 % \crefformat{enumerate}{#2\textcolor{\col}{Item} #1#3}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

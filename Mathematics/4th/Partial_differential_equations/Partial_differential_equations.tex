@@ -26,14 +26,14 @@
   \end{definition}
   \begin{proposition}[Continuous equation]
     Consider a fluid of density $\rho$ moving at a velocity $\vf{u}(\vf{x},t)$. The conservation of mass implies that the following equation (called \emph{continuous equation}) must hold:
-    \begin{equation}\label{PDE_continuous}
+    \begin{equation}\label{PDE:continuous}
       \rho_t+\divp(\rho\vf{u})=0
     \end{equation}
     If the fluid is incompressible, the previous equation becomes: $$\divp{\vf{u}}=0$$
   \end{proposition}
   \begin{proposition}[Cauchy momentum equation]
     Consider an inviscid fluid of density $\rho$ moving at a velocity $\vf{u}(\vf{x},t)$ and undergoing a pressure of $p(\vf{x},t)$. The conservation of momentum implies that the following equation (called \emph{Cauchy momentum equation}) must hold:
-    \begin{equation}\label{PDE_cauchy}
+    \begin{equation}\label{PDE:cauchy}
       \rho\matdv{\vf{u}}{t}+\grad p=0
     \end{equation}
   \end{proposition}
@@ -151,7 +151,7 @@
     The \emph{Schrödinger equation} is a pde that governs the \emph{wave function} $\Psi$, which describes the quantum state of an isolated quantum system, of a quantum-mechanical system. This is given by: $$\ii \hbar\pdv{\Psi}{t}=\left(-\frac{\hbar^2}{2m}\laplacian+V\right){\Psi}$$ where $m$ is the mass of the particle and $V$ is the potential in which the particle exists. Furthermore, $\abs{\Psi}^2$ is the probability density function of the position of the particle.
   \end{proposition}
   \begin{proposition}
-    Substituting ${\Psi}=\sqrt{\rho}\exp{\ii \frac{S}{\hbar}}$ into the Schrödinger equation and taking the limit $\hbar\to 0$ in the resulting equation yield the Hamilton-Jacobi equation. Moreover, if we define $\vf{v}=\frac{\grad{S}}{m}$, from one real equation (from the original one complex equation) we get the continuous equation (\cref{PDE_continuous}) and from the imaginary equation taking the limit $\hbar\to 0$ we get the Cauchy momentum equation (\cref{PDE_cauchy}).
+    Substituting ${\Psi}=\sqrt{\rho}\exp{\ii \frac{S}{\hbar}}$ into the Schrödinger equation and taking the limit $\hbar\to 0$ in the resulting equation yield the Hamilton-Jacobi equation. Moreover, if we define $\vf{v}=\frac{\grad{S}}{m}$, from one real equation (from the original one complex equation) we get the continuous equation (\mcref{PDE:continuous}) and from the imaginary equation taking the limit $\hbar\to 0$ we get the Cauchy momentum equation (\mcref{PDE:cauchy}).
   \end{proposition}
   \subsection{First order partial differential equations}
   \subsubsection{Vector calculus}
@@ -159,23 +159,23 @@
     Let $\Omega\subseteq \RR^n$ be a set. We define the space $\mathcal{C}_0^\infty(\Omega)$ as the set of all compactly supported functions in $\mathcal{C}^\infty(\Omega)$.
   \end{definition}
   \begin{important}
-    \begin{theorem}[Fundamental lemma of calculus of variations]\label{PDE_fundamentallemma}
+    \begin{theorem}[Fundamental lemma of calculus of variations]\label{PDE:fundamentallemma}
       Let $\Omega\subset\RR^n$ be a domain and $f:\Omega\rightarrow\RR$ be a continuous function. If $$\dotsint_U f(\vf{x})\dd{\vf{x}}=0$$ for any subset  $U\subseteq\Omega$, then $f=0$ in $\Omega$.
     \end{theorem}
   \end{important}
   \begin{proof}
     If there were a point $\vf{x}_0\in \Omega$ such that without loss of generality $f(\vf{x}_0)>0$, the continuity would imply the existence of an open set $U$ containing $\vf{x}_0$ and a $\varepsilon >0$ such that $f(\vf{x})>\varepsilon$ $\forall \vf{x}\in U$. Then we would have: $$0=\dotsint_U f(\vf{x})\dd{\vf{x}}>\varepsilon\abs{U}>0$$
   \end{proof}
-  \begin{theorem}\label{PDE_postfundamentallemma}
+  \begin{theorem}\label{PDE:postfundamentallemma}
     Let $\Omega\subset\RR^n$ be a domain and $f:\Omega\rightarrow\RR$ be a continuous function such that $$\dotsint_\Omega f(\vf{x})\varphi(\vf{x})\dd{\vf{x}}=0$$ for all $\varphi\in\mathcal{C}_0^\infty(\Omega)$. Then, $f=0$ in $\Omega$.
   \end{theorem}
   \begin{proof}
-    For any open subset $U\subseteq \Omega$ let $(\varphi_n)\in\mathcal{C}_0^\infty(\Omega)$ be a sequence of functions that converge to $\indi{U}$. Then by the \nameref{RFA_dominated} we have:
+    For any open subset $U\subseteq \Omega$ let $(\varphi_n)\in\mathcal{C}_0^\infty(\Omega)$ be a sequence of functions that converge to $\indi{U}$. Then by the \mnameref{RFA:dominated} we have:
     \begin{align*}
       0 & = \lim_{n\to\infty}\dotsint_\Omega f(\vf{x})\varphi_n(\vf{x})\dd{\vf{x}}=\dotsint_\Omega f(\vf{x})\indi{U}(\vf{x})\dd{\vf{x}} \\
         & =\dotsint_U f(\vf{x})\dd{\vf{x}}
     \end{align*}
-    Now use \nameref{PDE_fundamentallemma}.
+    Now use \mnameref{PDE:fundamentallemma}.
   \end{proof}
   \begin{proposition}
     Let $\Omega\subseteq\RR^3$ be a closed region and $f,g,k:\Omega\rightarrow\RR$ be functions of class $\mathcal{C}^1(\Omega)$. Then:
@@ -185,7 +185,7 @@
     \end{gather*}
   \end{proposition}
   \begin{sproof}
-    For the first one apply \nameref{FSV_divergencethm} with the vector field $\vf{X}_1 = kf\grad{g}$ and for the second one, use the previous formula and the symmetry of $f$ and $g$.
+    For the first one apply \mnameref{FSV:divergencethm} with the vector field $\vf{X}_1 = kf\grad{g}$ and for the second one, use the previous formula and the symmetry of $f$ and $g$.
   \end{sproof}
   \begin{corollary}[Green identities]
     Let $\Omega\subseteq\RR^3$ be a closed region and $f,g:\Omega\rightarrow\RR$ be functions of class $\mathcal{C}^1(\Omega)$. Then:
@@ -197,7 +197,7 @@
   \subsubsection{Method of characteristics}
   \begin{proposition}[Method of characteristics]
     Consider the following quasilinear PDE
-    \begin{equation}\label{PDE_char}
+    \begin{equation}\label{PDE:char}
       a(x,t,u)\pdv{u}{x}+b(x,t,u)\pdv{u}{t}=c(x,t,u)
     \end{equation}
     with initial condition $u(x_0(s),t_0(s))=u_0(s)$. The solutions of this equation are the integral curves (called \emph{characteristic curves}) that form the surface of the graph $u(x,t)$. These are given by:
@@ -213,7 +213,7 @@
     with initial conditions $x(0,s)=x_0(s)$, $t(0,s)=t_0(s)$ and $u(0,s)=u_0(s)$.
   \end{proposition}
   \begin{sproof}
-    Note that we can rewrite \cref{PDE_char} as: $$\begin{pmatrix}
+    Note that we can rewrite \mcref{PDE:char} as: $$\begin{pmatrix}
         a(x,t,u) & b(x,t,u) & c(x,t,u)
       \end{pmatrix}\cdot\begin{pmatrix}
         \pdv{u}{x} \\
@@ -226,27 +226,27 @@
   \begin{proposition}[Traffic flow equation]
     Consider a one lane motorway with one entry an one exit. Let $\rho(x,t)$ be the density of cars per unit of length, $u(\rho)$ the average speed of the cars and $q=\rho u$ be the flux of cars. Then, we can model the traffic in the motorway with the equation: $$\rho_t+{(\rho u)}_x=\rho_t+q'(\rho){\rho}_x=0$$
     The integral form of the latter equation is:
-    \begin{equation}\label{PDE_trafficintegral}
+    \begin{equation}\label{PDE:trafficintegral}
       \pdv{}{t}\int_{a}^b\rho(x,t)\dd{x}=q(a,t)-q(b,t)
     \end{equation}
   \end{proposition}
   \begin{sproof}
     The integral form is due to the conservation of ``mass''. Thus, using the regularity of the functions:
     $$\int_a^b\rho_t\dd{x}=\pdv{}{t}\int_{a}^b\rho(x,t)\dd{x}=q(a,t)-q(b,t)=-\int_a^bq_x\dd{x}$$
-    Now use the \nameref{PDE_fundamentallemma}.
+    Now use the \mnameref{PDE:fundamentallemma}.
   \end{sproof}
   \begin{proposition}
     In the hypothesis of the traffic equation, if $t_2\geq t_1$, then:
-    \begin{equation}\label{PDE_trafficintegral2}
+    \begin{equation}\label{PDE:trafficintegral2}
       \int_{a}^b[\rho(x,t_2)-\rho(x,t_1)]\dd{x}=\int_{t_1}^{t_2}[q(a,t)-q(b,t)]\dd{t}
     \end{equation}
   \end{proposition}
   \begin{sproof}
-    Intrate \cref{PDE_trafficintegral} with respect to $t$ between $t_1$ and $t_2$.
+    Intrate \mcref{PDE:trafficintegral} with respect to $t$ between $t_1$ and $t_2$.
   \end{sproof}
   \begin{proposition}
     In the hypothesis of the traffic equation, an observer situated at $x(t)$ will observe a constant density $\rho(x(t),t)$ if $x'(t)=q'(\rho(x(t),t))$ (that is, if the frame of reference situated at $x(t)$ is moving at a speed of $q'(\rho(x(t),t))$)\footnote{Note that this
-      velocity may be different from the velocity at which an individual car moves.}. Therefore, $\rho$ is constant in each line of the form $x(t)=x_0+q'(\rho(x_0,0))t$ (\emph{characteristic line}) (see \cref{PDE_traffic-char}). This determines $\rho(x,t)$ provided that we already know the initial condition $\rho_0(x):=\rho(x,0)$, $x\in\RR$. In other words, $\rho(x,t)$ is the solution $\xi$ of the density at the appropriate $x$-intercept of the line passing through $(x,t)$: $$\xi=\rho_0(x-q'(\xi)t)$$
+      velocity may be different from the velocity at which an individual car moves.}. Therefore, $\rho$ is constant in each line of the form $x(t)=x_0+q'(\rho(x_0,0))t$ (\emph{characteristic line}) (see \mcref{PDE:traffic-char}). This determines $\rho(x,t)$ provided that we already know the initial condition $\rho_0(x):=\rho(x,0)$, $x\in\RR$. In other words, $\rho(x,t)$ is the solution $\xi$ of the density at the appropriate $x$-intercept of the line passing through $(x,t)$: $$\xi=\rho_0(x-q'(\xi)t)$$
   \end{proposition}
   \begin{sproof}
     Note that $x'(t)=q'(\rho(x(t),t))$ implies $\dv{\rho(x(t),t)}{t}=0$. On the other hand, if $\xi$ is the density at $(x,t)$, we have: $$x=x_0+q'(\xi)t$$ where $x_0$ is the $x$-intercept at $t=0$ of the line passing through $(x,t)$ and slope $q'(\xi)$. Rearranging the previous equation and applying $\rho_0$ we get the desired result:
@@ -257,14 +257,14 @@
       \centering
       \includestandalone[mode=image|tex,width=\linewidth]{Images/traffic_char}
       \captionof{figure}{Characteristics of the traffic flow. In each line the density $\rho$ is constant.}
-      \label{PDE_traffic-char}
+      \label{PDE:traffic-char}
     \end{minipage}
   \end{center}
   \begin{proposition}[Rankine-Hugoniot equation]
     Let $x_\mathrm{s}(t)$ be the position at time $t$ of a (jump) discontinuity in the function $\rho$. Then: $$\dv{x_\mathrm{s}}{t}=\frac{[q]}{[\rho]}=\frac{{(\rho u)}_+-{(\rho u)}_-}{\rho_+-\rho_-}$$ where the notation $[x(t)]$ refers to: $$[x(t_0)]:=x_+(t_0)-x_-(t_0):=\lim_{t\to{t_0}^+}x(t)-\lim_{t\to{t_0}^-}x(t)$$
   \end{proposition}
   \begin{sproof}
-    Let $a(t)\leq x_\mathrm{s}(t)\leq b(t)$ and $t_2\geq t_1$. Then, using \cref{PDE_trafficintegral2} we have:
+    Let $a(t)\leq x_\mathrm{s}(t)\leq b(t)$ and $t_2\geq t_1$. Then, using \mcref{PDE:trafficintegral2} we have:
     \begin{multline*}
       \int_{a(t_2)}^{b(t_2)}\rho(x,t_2)\dd{x}-\int_{a(t_1)}^{b(t_1)}\rho(x,t_1)\dd{x}=\\
       \begin{aligned}
@@ -272,7 +272,7 @@
          & =\int_{t_1}^{t_2}[\rho(a(t),t)(u-a') -\rho(b(t),t)(u-b')]\dd{t}
       \end{aligned}
     \end{multline*}
-    Letting $a(t)\nearrow x_\mathrm{s}(t)\swarrow b(t)$ and using \nameref{PDE_fundamentallemma} we get: $$[\rho(x_\mathrm{s}(t),t)(u-{x_\mathrm{s}}')]_-- [\rho(x_\mathrm{s}(t),t)(u-{x_\mathrm{s}}')]_+=0$$
+    Letting $a(t)\nearrow x_\mathrm{s}(t)\swarrow b(t)$ and using \mnameref{PDE:fundamentallemma} we get: $$[\rho(x_\mathrm{s}(t),t)(u-{x_\mathrm{s}}')]_-- [\rho(x_\mathrm{s}(t),t)(u-{x_\mathrm{s}}')]_+=0$$
     Rearranging the terms we get the desired result.
   \end{sproof}
   \begin{lemma}[Entropy condition]
@@ -290,7 +290,7 @@
     for certain functions $\rho(x,t)$, $k(x)$, $f(x,t)$. Also suppose that we can freely exchange the derivative and the integral sign\footnote{From now on, we will simply assume that $u$ satisfies these properties.}. Then, $u(x,t)$ is a solution to the wave equation with driven force $f$:
     $${(\rho u_{t})}_t-{(ku_x)}_x=f(x,t)$$
     If $f=0$ and $\rho$ and $k$ are constant, the equation is sometimes rewritten as:
-    \begin{equation}\label{PDE_waveeq}
+    \begin{equation}\label{PDE:waveeq}
       u_{tt}=c^2 u_{xx}
     \end{equation}
   \end{proposition}
@@ -298,14 +298,14 @@
     Let $x_1 = x$, $x_2=x+h$, $t_1=t$, $t_2=t+h$, multiply the equation by $\frac{1}{h^2}$ and make $h\to 0$.
   \end{sproof}
   \subsubsection{Solution on \texorpdfstring{$\RR$}{R}}
-  \begin{proposition}[D'Alembert formula]\label{PDE_propdAlembert}
+  \begin{proposition}[D'Alembert formula]\label{PDE:propdAlembert}
     Let $u_0,v_0:\RR\rightarrow\RR$ be functions. The solution $u(x,t)$ to the wave equation of constant coefficients with initial conditions $u(x,0)=u_0(x)$ and $u_t(x,0)=v_0(x)$ is:
-    \begin{equation}\label{PDE_dAlembert}
+    \begin{equation}\label{PDE:dAlembert}
       u(x,t)=\frac{u_0(x+ct)+u_0(x-ct)}{2}+\frac{1}{2c}\int_{x-ct}^{x+ct}v_0(s)\dd{s}
     \end{equation}
   \end{proposition}
   \begin{sproof}
-    \cref{PDE_waveeq} with the coordinates $(\xi, \eta) = (x+ ct,x-ct)$ is simplified to $u_{\xi\eta}=0$. Thus, $u(x,t)=\phi(x+ct)+\psi(x-ct)$. Now use the initial conditions to conclude:
+    \mcref{PDE:waveeq} with the coordinates $(\xi, \eta) = (x+ ct,x-ct)$ is simplified to $u_{\xi\eta}=0$. Thus, $u(x,t)=\phi(x+ct)+\psi(x-ct)$. Now use the initial conditions to conclude:
     $$
       \begin{cases}
         \displaystyle \phi(y)=\frac{1}{2}u_0(y)+\frac{1}{2c}\int_0^yv_0(s)\dd{s}+C \\
@@ -315,7 +315,7 @@
   \end{sproof}
   \begin{theorem}
     Let $u_0,v_0:\RR\rightarrow\RR$ and $f:\RR^2\rightarrow\RR$ be functions. The solution to the wave equation of constant coefficients with driven force $f$
-    \begin{equation}\label{PDE_waveeqdriven}
+    \begin{equation}\label{PDE:waveeqdriven}
       u_{tt}=c^2 u_{xx} +f
     \end{equation}
     and initial conditions $u(x,0)=u_0(x)$ and $u_t(x,0)=v_0(x)$ is:
@@ -325,30 +325,30 @@
     If we think $u(t):x\rightarrow u(x,t)$, then we can write the expression above more compactly as: $$u(t)=T'(t)u_0+T(t)v_0+\int_0^tT(t-\tau) f(\tau)\dd{\tau}$$ where the operator $T(t)$ is defined as: $$\left[T(t)\varphi\right](x)=\frac{1}{2c}\int_{x-ct}^{x+ct}\varphi(s)\dd{s}$$
   \end{theorem}
   \begin{sproof}
-    \cref{PDE_waveeq} with the coordinates $(\xi, \eta) = (x+ ct,x-ct)$ is simplified to $u_{\xi\eta}=-\frac{f}{4c^2}$.
+    \mcref{PDE:waveeq} with the coordinates $(\xi, \eta) = (x+ ct,x-ct)$ is simplified to $u_{\xi\eta}=-\frac{f}{4c^2}$.
   \end{sproof}
-  \begin{theorem}\label{PDE_greenwave}
+  \begin{theorem}\label{PDE:greenwave}
     Let $U\subseteq\RR^2$ be an open set, $u:U\rightarrow\RR$ be a function such that it satisfies the wave equation with density $\rho(x,t)$, constant $k(x)$ and driven force $f(x,t)$. Then:
     $$\int_{\Fr{U}}\rho u_t\dd{x}+k u_x\dd{t}=-\iint_Uf(x,t)\dd{x}\dd{t}$$
   \end{theorem}
   \begin{sproof}
-    Apply \nameref{FSV_green} to the vector field $\vf{X}= (\rho u_t,k u_x)$.
+    Apply \mnameref{FSV:green} to the vector field $\vf{X}= (\rho u_t,k u_x)$.
   \end{sproof}
   \begin{proposition}
-    Let $U\subset\RR^2$ be an open set, $u:U\rightarrow\RR$ be a function such that it satisfies the wave equation with constant $c^2=\frac{k}{\rho}$ and no driven force. Consider the four points $A$, $B$, $C$ and $D$ as shown in \cref{PDE_waves-char}. Then:
-    \begin{equation}\label{PDE_charwaveseq}
+    Let $U\subset\RR^2$ be an open set, $u:U\rightarrow\RR$ be a function such that it satisfies the wave equation with constant $c^2=\frac{k}{\rho}$ and no driven force. Consider the four points $A$, $B$, $C$ and $D$ as shown in \mcref{PDE:waves-char}. Then:
+    \begin{equation}\label{PDE:charwaveseq}
       u(A)-u(B)+u(C)-u(D)=0
     \end{equation}
   \end{proposition}
   \begin{sproof}
-    Use \cref{PDE_greenwave} together with the fact that $\dd{\xi}=\dd{x}+c\dd{t}=0$ and $\dd{\eta}=\dd{x}-c\dd{t}=0$ in the respective characteristic lines.
+    Use \mcref{PDE:greenwave} together with the fact that $\dd{\xi}=\dd{x}+c\dd{t}=0$ and $\dd{\eta}=\dd{x}-c\dd{t}=0$ in the respective characteristic lines.
   \end{sproof}
   \begin{center}
     \begin{minipage}{\linewidth}
       \centering
       \includestandalone[mode=image|tex,width=0.7\linewidth]{Images/waves_char}
       \captionof{figure}{Characteristics of the waves equation.}
-      \label{PDE_waves-char}
+      \label{PDE:waves-char}
     \end{minipage}
   \end{center}
   \begin{proposition}[Conservation of energy]
@@ -364,7 +364,7 @@
     The existence has already been proved for a sufficiently regular $f$. For the uniqueness, suppose $u_1$ and $u_2$ are two solutions. Then, $u=u_1-u_2$ is a solution to $\rho u_{tt}-ku_{xx}=0$ with initial conditions $u(x,0)=0$ and $u_t(x,0)=0$. Moreover: $$\int_{-\infty}^\infty\left(\frac{1}{2}\rho{u_t}^2+\frac{1}{2}k{u_x}^2\right)\dd{x}=0$$ because it is constant and attains the value of 0 at $t=0$. This implies $u=0$ using again the initial conditions.
   \end{sproof}
   \subsubsection{Solution with one fixed point}
-  \begin{proposition}\label{PDE_wave1fixed}
+  \begin{proposition}\label{PDE:wave1fixed}
     Consider the wave equation $u_{tt}=c^2u_{xx}$ with initial conditions:
     $$
       \left\{
@@ -390,7 +390,7 @@
     \end{equation*}
   \end{proposition}
   \begin{sproof}
-    We already saw the expressions of $\phi$ and $\psi$ for $x\geq 0$ in \nameref{PDE_propdAlembert}. For $x<0$, note that: $$\alpha(t)=u(0,t)=\phi(ct)+\psi(-ct)$$
+    We already saw the expressions of $\phi$ and $\psi$ for $x\geq 0$ in \mnameref{PDE:propdAlembert}. For $x<0$, note that: $$\alpha(t)=u(0,t)=\phi(ct)+\psi(-ct)$$
   \end{sproof}
   \begin{proposition}
     Consider the wave equation $u_{tt}=c^2u_{xx}$ with initial conditions:
@@ -418,12 +418,12 @@
     \end{equation*}
   \end{proposition}
   \begin{sproof}
-    We already saw the expressions of $\phi$ and $\psi$ for $x\geq 0$ in \nameref{PDE_propdAlembert}. For $x<0$, note that: $$\psi'(x)=-\phi'(-x)+\beta(-x/c)$$ because $\beta(t)=u_x(0,t)=\phi'(ct)+\psi'(-ct)$.
+    We already saw the expressions of $\phi$ and $\psi$ for $x\geq 0$ in \mnameref{PDE:propdAlembert}. For $x<0$, note that: $$\psi'(x)=-\phi'(-x)+\beta(-x/c)$$ because $\beta(t)=u_x(0,t)=\phi'(ct)+\psi'(-ct)$.
   \end{sproof}
   \subsubsection{Solution with two fixed endpoints}
   \begin{definition}
     Consider a string of length $L$ with its two endpoints fixed. In this section we will discuss how to obtain the solutions of its movement solving following boundary problem:
-    \begin{equation}\label{PDE_fixedendpoints}
+    \begin{equation}\label{PDE:fixedendpoints}
       \left\{
       \begin{aligned}
         u_{tt}   & =c^2u_{xx} \\
@@ -436,28 +436,28 @@
     \end{equation}
   \end{definition}
   \begin{proposition}
-    Consider the odd extensions for $u_0$ and $v_0$ of \cref{PDE_fixedendpoints}. Then, the solutions of that equation are given by the d'Alembert formula (\cref{PDE_dAlembert})
+    Consider the odd extensions for $u_0$ and $v_0$ of \mcref{PDE:fixedendpoints}. Then, the solutions of that equation are given by the d'Alembert formula (\mcref{PDE:dAlembert})
   \end{proposition}
   \begin{sproof}
-    Consequence of \cref{PDE_wave1fixed}.
+    Consequence of \mcref{PDE:wave1fixed}.
   \end{sproof}
-  \begin{proposition}\label{PDE_methodchar}
-    Suppose we want to know the displacement $u(x,t)$ of the string at the position $A=(x,t)\in[0,L]\times\RR_{\geq 0}$ (see \cref{PDE_waves-char-solve}). Then:
+  \begin{proposition}\label{PDE:methodchar}
+    Suppose we want to know the displacement $u(x,t)$ of the string at the position $A=(x,t)\in[0,L]\times\RR_{\geq 0}$ (see \mcref{PDE:waves-char-solve}). Then:
     $$u(A)=-\frac{u_0(D)+u_0(C)}{2}-\frac{1}{2c}\int_{C}^{D}v_0(s)\dd{s}$$
   \end{proposition}
   \begin{sproof}
-    We will use \cref{PDE_charwaveseq} to determine $u(A)$. Construct the characteristic lines $x\pm ct$ as shown in \cref{PDE_waves-char-solve}. Then, by \cref{PDE_charwaveseq} we have that the $u(A) = - u(B)$. Since we are provided with the equation at $t=0$, we can determine $u(B)$ using the points $C$ and $D$ and the \nameref{PDE_propdAlembert}.
+    We will use \mcref{PDE:charwaveseq} to determine $u(A)$. Construct the characteristic lines $x\pm ct$ as shown in \mcref{PDE:waves-char-solve}. Then, by \mcref{PDE:charwaveseq} we have that the $u(A) = - u(B)$. Since we are provided with the equation at $t=0$, we can determine $u(B)$ using the points $C$ and $D$ and the \mnameref{PDE:propdAlembert}.
   \end{sproof}
   \begin{center}
     \begin{minipage}{\linewidth}
       \centering
       \includestandalone[mode=image|tex,width=0.7\linewidth]{Images/waves_char_solve}
-      \captionof{figure}{Scheme for \cref{PDE_methodchar} of solving the wave equation}
-      \label{PDE_waves-char-solve}
+      \captionof{figure}{Scheme for \protect\mcref{PDE:methodchar} of solving the wave equation}
+      \label{PDE:waves-char-solve}
     \end{minipage}
   \end{center}
   \begin{proposition}[Separation of variables]
-    The solution $u(x,t)$ to \cref{PDE_fixedendpoints}, using \emph{separation of variables} (i.e. assuming $u(x,t)=X(x)T(t)$), is: $$u(x,t)=\sum_{n=0}^\infty \sin\left(\frac{\pi n x}{L}\right)\left[a_n\cos\left(\frac{\pi n c}{L}t\right)+ b_n\sin\left( \frac{\pi n c}{L}t\right)\right]$$ where:
+    The solution $u(x,t)$ to \mcref{PDE:fixedendpoints}, using \emph{separation of variables} (i.e. assuming $u(x,t)=X(x)T(t)$), is: $$u(x,t)=\sum_{n=0}^\infty \sin\left(\frac{\pi n x}{L}\right)\left[a_n\cos\left(\frac{\pi n c}{L}t\right)+ b_n\sin\left( \frac{\pi n c}{L}t\right)\right]$$ where:
     \begin{align*}
       a_n & =\frac{2}{L}\int_{0}^Lu_0(x)\sin\left(\frac{\pi n x}{L}\right)\dd{x}       \\
       b_n & =\frac{2}{\pi n c}\int_{0}^Lv_0(x)\sin\left(\frac{\pi n x}{L}\right)\dd{x}
@@ -487,7 +487,7 @@
     \end{align*}
     Finally, observe that: $$\frac{u^2{v'}^2- 2uu'vv'}{v^2}=\frac{{(uv'-u'v)}^2}{v^2}-{u'}^2$$ And from the hypothesis we conclude $u=0$, which is a contradiction.
   \end{sproof}
-  \begin{proposition}\label{PDE_orthogonality}
+  \begin{proposition}\label{PDE:orthogonality}
     Let $\lambda,\mu\in\RR$ such that $\lambda\ne \mu$ and $k,\rho:\RR\rightarrow\RR$. Suppose that the functions $f,g:[0,L]\rightarrow\RR$ satisfy the following differential equations:
     \begin{align*}
       {(k(x)f')}'+\lambda \rho(x)f=0 \\
@@ -529,12 +529,12 @@
     \end{equation*}
   \end{proposition}
   \begin{sproof}
-    Use separation of variables and \cref{PDE_orthogonality}.
+    Use separation of variables and \mcref{PDE:orthogonality}.
   \end{sproof}
   \subsection{Heat equation}
   \begin{proposition}
     Consider the following boundary problem of the heat equation:
-    \begin{equation}\label{PDE_heat-fixedendpoints}
+    \begin{equation}\label{PDE:heat-fixedendpoints}
       \left\{
       \begin{aligned}
         u_{t}  & =\alpha u_{xx} \\
@@ -545,7 +545,7 @@
       \right.
     \end{equation}
     with $\alpha=\const$
-    The solution $u(x,t)$ to \cref{PDE_heat-fixedendpoints}, using separation of variables, is: $$u(x,t)=\sum_{n=1}^\infty a_n\exp{-\frac{\alpha\pi^2n^2}{L^2}t}\sin\left(\frac{\pi n x}{L}\right)$$ where:
+    The solution $u(x,t)$ to \mcref{PDE:heat-fixedendpoints}, using separation of variables, is: $$u(x,t)=\sum_{n=1}^\infty a_n\exp{-\frac{\alpha\pi^2n^2}{L^2}t}\sin\left(\frac{\pi n x}{L}\right)$$ where:
     \begin{equation*}
       a_n =\frac{2}{L}\int_{0}^Lu_0(x)\sin\left(\frac{\pi n x}{L}\right)\dd{x}
     \end{equation*}
@@ -555,7 +555,7 @@
   \end{sproof}
   \begin{proposition}
     Consider the simplified Schrödinger equation problem:
-    \begin{equation}\label{PDE_schro-fixedendpoints}
+    \begin{equation}\label{PDE:schro-fixedendpoints}
       \left\{
       \begin{aligned}
         \ii u_{t} & =u_{xx} \\
@@ -565,7 +565,7 @@
       \end{aligned}
       \right.
     \end{equation}
-    The solution $u(x,t)$ to \cref{PDE_schro-fixedendpoints}, using separation of variables is: $$u(x,t)=\sum_{n=1}^\infty a_n\exp{-\ii\frac{\pi^2n^2}{L^2}t}\sin\left(\frac{\pi n x}{L}\right)$$ where:
+    The solution $u(x,t)$ to \mcref{PDE:schro-fixedendpoints}, using separation of variables is: $$u(x,t)=\sum_{n=1}^\infty a_n\exp{-\ii\frac{\pi^2n^2}{L^2}t}\sin\left(\frac{\pi n x}{L}\right)$$ where:
     \begin{equation*}
       a_n =\frac{2}{L}\int_{0}^Lu_0(x)\sin\left(\frac{\pi n x}{L}\right)\dd{x}
     \end{equation*}
@@ -578,7 +578,7 @@
   \end{definition}
   \begin{proposition}
     Consider the heat equation of constant coefficients $ u_{t} =\alpha u_{xx}$ on the whole real line. Then, if we impose $u$ being self-similar satisfying $u(x,t)=u(\lambda x,\lambda^2t)$ $\forall\lambda>0$, we obtain:
-    \begin{equation}\label{PDE_selfsimilarsol}
+    \begin{equation}\label{PDE:selfsimilarsol}
       u(x,t)=C_1\int_0^{\frac{x}{\sqrt{t}}}\exp{-\frac{z^2}{4\alpha}}\dd{z} +C_2
     \end{equation}
   \end{proposition}
@@ -597,7 +597,7 @@
     $$
       \function{\Lambda_f}{\mathcal{D}(\Omega)}{\RR}{\varphi}{\displaystyle\idotsint_\Omega f(\vf{x})\varphi(\vf{x})\dd{\vf{x}}}
     $$
-    is a distribution. Hence, $\Lambda_f(\varphi)$ is usually denoted by $\dotp{f}{\varphi}$. Sometimes we will do an abuse of notation denoting $\Lambda_f$ as $f$ (by the \nameref{PDE_postfundamentallemma}).
+    is a distribution. Hence, $\Lambda_f(\varphi)$ is usually denoted by $\dotp{f}{\varphi}$. Sometimes we will do an abuse of notation denoting $\Lambda_f$ as $f$ (by the \mnameref{PDE:postfundamentallemma}).
   \end{proposition}
   \begin{proof}
     $\Lambda_f$ is clearly linear. Moreover: $$\abs{\Lambda_f(\varphi)}\leq\idotsint_\Omega\abs{f(\vf{x})\varphi(\vf{x})}\leq \norm{f}_1\norm{\varphi}_\infty$$
@@ -640,7 +640,7 @@
   \subsubsection{Fundamental solution}
   \begin{definition}
     A \emph{fundamental solution} (or \emph{heat kernel}) is a solution of the heat equation corresponding to the initial condition of an initial point source of heat at a known position. That is, it is the solution to the problem:
-    \begin{equation}\label{PDE_fundamental}
+    \begin{equation}\label{PDE:fundamental}
       \left\{
       \begin{aligned}
         u_{t}  & =\alpha u_{xx} \\
@@ -650,14 +650,14 @@
     \end{equation}
     where $\delta(x)$ is the Dirac delta distribution.
   \end{definition}
-  \begin{theorem}\label{PDE_heatkernelprop}
-    The heat kernel of \cref{PDE_fundamental} is:
-    \begin{equation}\label{PDE_heatkernel}
+  \begin{theorem}\label{PDE:heatkernelprop}
+    The heat kernel of \mcref{PDE:fundamental} is:
+    \begin{equation}\label{PDE:heatkernel}
       u(x,t)=\frac{1}{\sqrt{4\pi\alpha t}}\exp{-\frac{x^2}{4\alpha t}}
     \end{equation}
   \end{theorem}
   \begin{proof}
-    An easy check shows that if $u$ is a solution to the heat equation, so it is $u_x$. Thus, from this fact and \cref{PDE_selfsimilarsol} we get the solution:
+    An easy check shows that if $u$ is a solution to the heat equation, so it is $u_x$. Thus, from this fact and \mcref{PDE:selfsimilarsol} we get the solution:
     $$u(x,t)=\frac{C}{\sqrt{t}}\exp{-\frac{x^2}{4\alpha t}}$$
     Imposing $\int_{-\infty}^{+\infty}u(x,t)\dd{x}=1$ we get the desired result. Let's see now that $\displaystyle\lim_{t\to 0}u(x,t)=\delta(x)$. Let $\varphi\in\mathcal{D}(\RR)$. Then, $\forall \varepsilon>0$ $\exists\delta>0$ such that $\abs{\varphi(x)-\varphi(0)}<\frac{\varepsilon}{2K}$ whenever $\abs{x}<\delta$, where $K=\int_{\abs{x}<\delta}\frac{1}{\sqrt{4\pi\alpha t}}\exp{-\frac{y^2}{4\alpha t}}$.
     \begin{align*}
@@ -671,9 +671,9 @@
     $$I\leq \frac{\varepsilon}{2} + 2\norm{\varphi}_\infty\int_{\abs{x}\geq\delta}\frac{1}{\sqrt{4\pi\alpha t}}\exp{-\frac{y^2}{4\alpha t}}<\varepsilon$$
     Hence, $\displaystyle\lim_{t\to 0}u(x,t)=\delta(x)$.
   \end{proof}
-  \begin{corollary}\label{PDE_heatgeneralcoro}
-    Let $[H(t)](x)$ be the heat kernel of \cref{PDE_heatkernel} at a fixed point $t>0$. Then, the general solution to the problem
-    \begin{equation}\label{PDE_heatgeneral}
+  \begin{corollary}\label{PDE:heatgeneralcoro}
+    Let $[H(t)](x)$ be the heat kernel of \mcref{PDE:heatkernel} at a fixed point $t>0$. Then, the general solution to the problem
+    \begin{equation}\label{PDE:heatgeneral}
       \left\{
       \begin{aligned}
         u_{t}  & =\alpha u_{xx} \\
@@ -684,10 +684,10 @@
     where $f:\RR\rightarrow\RR$ is continuous and bounded is: $$u(x,t)=[H(t)*f](x)=\int_{-\infty}^{+\infty}\frac{1}{\sqrt{4\pi\alpha t}}\exp{-\frac{{(x - y)}^2}{4\alpha t}}f(y)\dd{y}$$
   \end{corollary}
   \begin{sproof}
-    Clearly the heat equation holds by construction. The proof of $\displaystyle\lim_{t\to 0}\norm{H(t)*f - f}_\infty=0$ follows in the same way as the one in \cref{PDE_heatkernelprop}.
+    Clearly the heat equation holds by construction. The proof of $\displaystyle\lim_{t\to 0}\norm{H(t)*f - f}_\infty=0$ follows in the same way as the one in \mcref{PDE:heatkernelprop}.
   \end{sproof}
   \begin{proposition}
-    Let $[H(t)](x)$ be the heat kernel of \cref{PDE_heatkernel} at a fixed point $t\geq 0$. Then, $\forall s,t>0$ we have: $$H(s+t)=H(s)*H(t)$$
+    Let $[H(t)](x)$ be the heat kernel of \mcref{PDE:heatkernel} at a fixed point $t\geq 0$. Then, $\forall s,t>0$ we have: $$H(s+t)=H(s)*H(t)$$
   \end{proposition}
   \begin{proof}
     Let $x\in\RR$. Then:
@@ -708,19 +708,19 @@
     \begin{equation}
       u_t=\alpha\laplacian u
     \end{equation} Then, the \emph{generalized heat kernel} for this equation is: $$[H(t)](\vf{x}) = \frac{1}{{(4\pi\alpha t)}^{n/2}}\exp{-\frac{\norm{\vf{x}}^2}{4\alpha t}}$$ Its associated integral form can be written as the operator:
-    \begin{equation}\label{PDE_Toperator}
+    \begin{equation}\label{PDE:Toperator}
       T(t)u_0=\int_{\RR^n}\frac{1}{{(4\pi\alpha t)}^{n/2}}\exp{-\frac{\norm{\vf{x-y}}^2}{4\alpha t}}u_0(\vf{y})\dd{\vf{y}}
     \end{equation}
-    \cref{RFA_representationtheorem} gives a representation of $T(t)$ in the form $T(t)=\exp{t\laplacian}$.
+    \mcref{RFA:representationtheorem} gives a representation of $T(t)$ in the form $T(t)=\exp{t\laplacian}$.
   \end{proposition}
   \begin{sproof}
-    An easy check shows that $[H(t)](\vf{x})$ solves the heat equation $u_t=\alpha\laplacian u$. To show that the initial condition holds, use the 1-dimensional case (\cref{PDE_heatkernelprop}) and \nameref{RFA_fubini}.
+    An easy check shows that $[H(t)](\vf{x})$ solves the heat equation $u_t=\alpha\laplacian u$. To show that the initial condition holds, use the 1-dimensional case (\mcref{PDE:heatkernelprop}) and \mnameref{RFA:fubini}.
   \end{sproof}
   \begin{proposition}
-    Consider the operator $T(t)$ defined on \cref{PDE_Toperator}. Then, $\{T(t):t\in\RR_{\geq 0}\}$ is a semigroup with the composition. That is, $T(0)=\id$ and $T(s)\circ T(t)=T(s+t)$.
+    Consider the operator $T(t)$ defined on \mcref{PDE:Toperator}. Then, $\{T(t):t\in\RR_{\geq 0}\}$ is a semigroup with the composition. That is, $T(0)=\id$ and $T(s)\circ T(t)=T(s+t)$.
   \end{proposition}
   \begin{sproof}
-    It is a consequence of the generalization of $\displaystyle \lim_{t\to\infty}[H(t)*f]=f$, which it can be proven using the 1-dimensional case (\cref{PDE_heatgeneralcoro}) and \nameref{RFA_fubini}.
+    It is a consequence of the generalization of $\displaystyle \lim_{t\to\infty}[H(t)*f]=f$, which it can be proven using the 1-dimensional case (\mcref{PDE:heatgeneralcoro}) and \mnameref{RFA:fubini}.
   \end{sproof}
   \begin{lemma}
     The function
@@ -735,7 +735,7 @@
   \subsubsection{Operators}
   \begin{definition}[Explicit scheme in finite differences]
     Let $E$ be a Banach space and $A:E\rightarrow E$ be an linear operator. Consider the following ivp:
-    \begin{equation}\label{PDE_operatorpde}
+    \begin{equation}\label{PDE:operatorpde}
       \left\{
       \begin{aligned}
         u_{t}  & =A u    \\
@@ -743,13 +743,13 @@
       \end{aligned}
       \right.
     \end{equation}
-    We would like to extend the notion of \cref{DE_matrixexp}. Thus for $n\gg t$ we can rewrite the previous equation as:
+    We would like to extend the notion of \mcref{DE:matrixexp}. Thus for $n\gg t$ we can rewrite the previous equation as:
     $$u(t +t/n)= \left(I+\frac{t}{n}A\right)u(t)$$
     Thus, taking the limit as $n\to \infty$ we can conclude: $$u(t)=\lim_{n\to\infty}{\left(I+\frac{t}{n}A\right)}^n=:\exp{tA}u(0)$$
     Note that for this to be well-defined we need that $A$ must be a bounded operator. And in that case, the following identity also holds: $$\exp{tA}=\sum_{k=0}^\infty\frac{t^kA^k}{k!}$$
   \end{definition}
   \begin{definition}[Implicit scheme in finite differences]
-    Let $E$ be a Banach space and $A:E\rightarrow E$ be an linear operator. Consider the ivp of \cref{PDE_operatorpde} and rewrite it this time as:
+    Let $E$ be a Banach space and $A:E\rightarrow E$ be an linear operator. Consider the ivp of \mcref{PDE:operatorpde} and rewrite it this time as:
     $$ u(t)= {\left(I-\frac{t}{n}A\right)}^{-1}u(t-t/n)$$
     for $n\gg t$.
     Thus, taking the limit as $n\to \infty$ we can conclude: $$u(t)=\lim_{n\to\infty}{\left(I-\frac{t}{n}A\right)}^{-n}=:\exp{tA}u(0)$$
@@ -780,7 +780,7 @@
     Let $U\subset\RR^n$ be open and bounded and fix a time $t=T$. We define the \emph{parabolic cylinder} as $U_T:= U\times (0, T]$. We define the \emph{parabolic boundary} as $\Gamma_T=\overline{U_T}\setminus U_T=\Fr{U_T}\setminus(U\times \{T\})$.
   \end{definition}
   \begin{important}
-    \begin{theorem}[Strong maximum principle]\label{PDE_strongmax}
+    \begin{theorem}[Strong maximum principle]\label{PDE:strongmax}
       Let $U\subset\RR^n$ be open and bounded and fix a time $t=T$. Suppose $u\in\mathcal{C}_1^2(U_t)\cap\mathcal{C}(\overline{U_T})$ solve the heat equation in $U_T$. Then:
       \begin{enumerate}
         \item $\displaystyle\max\{u(\vf{x},t):(\vf{x},t)\in\overline{U_T}\}=\max\{u(\vf{x},t):(\vf{x},t)\in\Gamma_T\}$
@@ -811,7 +811,7 @@
     \end{enumerate}
   \end{theorem}
   \begin{proof}
-    Use \nameref{PDE_strongmax} with $v(\vf{x},t)=-u(\vf{x},t)$.
+    Use \mnameref{PDE:strongmax} with $v(\vf{x},t)=-u(\vf{x},t)$.
   \end{proof}
   \begin{theorem}[Uniqueness on bounded domains]
     Let $U\subset\RR^n$ be open and bounded, $g\in\mathcal{C}(\Gamma_T)$ and $f\in\mathcal{C}(U_T)$. Then, there exists at most one solution $u\in\mathcal{C}_1^2(U_T)\cap\mathcal{C}(\overline{U_T})$ of the problem:
@@ -823,9 +823,9 @@
     $$
   \end{theorem}
   \begin{sproof}
-    Suppose $u_1$ and $u_2$ are two solutions of this problem. Apply \nameref{PDE_strongmax} to the function $u_1-u_2$.
+    Suppose $u_1$ and $u_2$ are two solutions of this problem. Apply \mnameref{PDE:strongmax} to the function $u_1-u_2$.
   \end{sproof}
-  \begin{theorem}[Maximum principle for Cauchy problem]\label{PDE_Cauchymax}
+  \begin{theorem}[Maximum principle for Cauchy problem]\label{PDE:Cauchymax}
     Let $U\subset\RR^n$ be open and bounded and $g\in\mathcal{C}(\Gamma_T)$. Suppose $u\in\mathcal{C}^2(\RR^n\times (0,T])\cap\mathcal{C}(\RR^n\times (0,T])$ solves the problem
     $$
       \begin{cases}
@@ -851,7 +851,7 @@
     satisfying $\abs{u(\vf{x},t)}\leq A\exp{a\norm{\vf{x}}^2}$ $\forall \vf{x}\in\RR^n\times [0,T]$ for some constants $a, A>0$.
   \end{theorem}
   \begin{sproof}
-    Suppose $u_1$ and $u_2$ are two solutions of this problem. Apply \nameref{PDE_Cauchymax} to the function $u_1-u_2$.
+    Suppose $u_1$ and $u_2$ are two solutions of this problem. Apply \mnameref{PDE:Cauchymax} to the function $u_1-u_2$.
   \end{sproof}
   \begin{theorem}[Smoothness]
     Let $U\subset\RR^n$ be open and bounded and suppose $u\in\mathcal{C}^2( U_T)$ solves the heat equation in $U_T$. Then, $u\in\mathcal{C}^\infty(U_T)$.
