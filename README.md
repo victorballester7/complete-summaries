@@ -4,6 +4,8 @@ Summary of each subject in Mathematics and Physics degree at UAB (Universitat Au
 
 ### TODO
 
+> Remember:! We doing writing the proofs of the remaining summaries, reread and review the `\emph{}` definitions in order to appear properly in the index.
+
 - Mathematics 1
   - Fundamentals of mathematics
     - Proofs
@@ -24,6 +26,7 @@ Summary of each subject in Mathematics and Physics degree at UAB (Universitat Au
   - Mathematical analysis
     - Proofs
   - Numerical analysis
+    - Proofs
 - Mathematics 3
   - Complex analysis
     - Proofs
@@ -39,16 +42,18 @@ Summary of each subject in Mathematics and Physics degree at UAB (Universitat Au
   - Statistics
     - Proofs
   - Topology
+    - Proofs
 - Mathematics 4
   - Algebraic topology
     - All
   - Arithmetic
     - All
   - Commutative algebra
+    - All
   - Dynamical systems
     - Proofs
   - Harmonic analysis
-    - Proofs
+    - All
   - Linear models
     - Proofs
     - More organization!!!
@@ -56,6 +61,7 @@ Summary of each subject in Mathematics and Physics degree at UAB (Universitat Au
   - Numeric calculus
     - All
   - Numeric integration of PDEs
+    - All
   - PDEs
     - Initial proofs
     - Entropy condition
@@ -72,4 +78,6 @@ Summary of each subject in Mathematics and Physics degree at UAB (Universitat Au
     - Hilbert
     - Lp is Banach
   - Stochastic processes - All
-    Feel free to help us with this summaries!
+    - All
+
+Feel free to help us with this summaries!

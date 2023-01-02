@@ -8,7 +8,8 @@
 \usepackage[version=4]{mhchem} % used for chemistry and nuclear physics.
 \usepackage{multirow} % multirow in a table, for example.
 \usepackage{array, makecell} % for additional options in tables and tabular.
-\usepackage[colorlinks=true]{hyperref} % link automatically references.
+\usepackage{hyperref} % link automatically references.
+% \usepackage{hycolor} % implements options of colors for hyperref (it ables the user to use colors from xcolor package)
 \usepackage[capitalise,nameinlink]{cleveref} % for clever references. That is, for example, for automatically write "Definition 2.13" instead of only "2.13".
 \usepackage{graphicx} % for options like \definecolor{}{}{}, \textcolor{}{},...
 \usepackage[usenames,x11names]{xcolor} % to customize RGB colors.
@@ -38,11 +39,13 @@
   \definecolor{color_green3}{RGB}{10,150,10}
   \definecolor{color_green4}{RGB}{0,80,0}
 
+  %% for creating a rainbow shade
   \pgfdeclareverticalshading{rainbow}{100bp}{color(0bp)=(red); 
   color(25bp)=(red); color(35bp)=(yellow); color(45bp)=(green); 
   color(55bp)=(cyan); color(65bp)=(blue); color(75bp)=(violet); 
-  color(100bp)=(violet)} % for creating a rainbow shade
-  
+  color(100bp)=(violet)}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
   %% colors - subjects %%
     \newcommand{\col}{red}            % DEFAULT
     \newcommand{\ana}{DeepSkyBlue2}   % analysis
@@ -53,21 +56,33 @@
     \newcommand{\phy}{SlateBlue2}     % physics
   %%%%%%%%%%%%%%%%%%%%%%%
   
+  %% for references (hyperref)
+   \hypersetup{
+     colorlinks = true,
+     linkcolor = magenta, % color of internal links (sections, pages, etc.) 
+     filecolor = cyan, % color for URLs which open local files
+     citecolor = green, %	color for bibliographical citations in text.     
+     urlcolor = cyan, % color of URL links (mail, web) 
+     }
+  %%%%%%%%%%%%%%%%%%%%
+
   %% Color box for important theorems
   \def\sep{1mm}
-  \newtcolorbox{important}{colback=\col!5, colframe=\col,left=\sep, right=\sep, top=\sep, bottom=\sep} 
+  \newtcolorbox{important}{colback=\col!5, colframe=\col, left=\sep, right=\sep, top=\sep, bottom=\sep} 
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%%% Enumeration-commands %%%%%%%
+%%%%%%% Enumeration - commands %%%%%%%
 \usepackage{enumitem} % for the command [leftmargin=1.15cm] in customized-label enumerations
 \renewcommand{\labelenumi}{\arabic{enumi}.}
 \renewcommand{\theenumi}{\thetheorem-\arabic{enumi}}
 
 \renewcommand{\labelenumii}{\roman{enumii})}
-\renewcommand{\theenumii}{\roman{enumii})}
+\renewcommand{\theenumii}{\theenumi.\roman{enumii})}
 
 \renewcommand{\labelenumiii}{\alph{enumiii})}
-\renewcommand{\theenumiii}{\alph{enumiii})}
+\renewcommand{\theenumiii}{\theenumii.\alph{enumiii})}
 
 
 % for doing things like:
@@ -94,6 +109,7 @@
 \newcommand*\ifftoright{\item[$\implies$:]}
 \newcommand*\ifftoleft{\item[$\ \impliedby$:]}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 %%%%%%% Math-commands %%%%%%%
     %%% GENERAL 
@@ -347,7 +363,7 @@
       {.}         % HEADPUNCT
       {5pt plus 1pt minus 1pt} % HEADSPACE
       {\color{\col}\thmname{#1}\thmnumber{\@ifnotempty{#1}{ }\@upn{#2}}%
-      \thmnote{{ \bfseries\color{black}(#3)}}}          % CUSTOM-HEAD-SPEC
+      \thmnote{{ \bfseries\color{black}(#3)\index{#3}}}}          % CUSTOM-HEAD-SPEC
 
   \theoremstyle{math_theorems}
   \newtheorem{theorem}{Theorem}
@@ -397,23 +413,6 @@
   }
   \makeatother
 
-  % \makeatletter
-  % \renewenvironment{proof}[1][\textcolor{\col!30}\itshape\proofname]{
-  % \par%
-  % \pushQED{\qed}%
-  % \color{black!30}%
-  % \normalfont%
-  % \topsep5\p@\@plus\p@\@minus\p@\relax%
-  % \trivlist%
-  % \item\relax%
-  % {\color{\col!30}\itshape%
-  % #1\@addpunct{.}}\hspace\labelsep\ignorespaces%
-  % }{%
-  % \color{\col!30}\popQED\endtrivlist\@endpefalse%
-  % }
-  % \makeatother
-
-
   \newcommand\explanationname{Sketch of the proof} % could be made language-dependent
   \newenvironment{sproof}%
    {\renewcommand\proofname\explanationname%
@@ -421,26 +420,33 @@
    {\end{proof}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%%%%%%% Colored boxes %%%%%%%%%%%
-% \usepackage[most]{tcolorbox} % for colored boxes
-% \newtcolorbox[auto counter,number within=section]{exercise}{
-%   enhanced,
-%   breakable,
-%   theorem style = plain,
-%   coltitle = \col,
-%   colback=white,
-%   colframe=\col,
-%   fonttitle=\bfseries,
-%   title={Exercise \thetcbcounter.}
-%   }
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 %%%%%% Extra references %%%%%%%
 \makeatletter
 \if@cref@capitalise % if we pass the option 'capitalise' on cleveref package
+% \crefname{theorem}{\bfseries\color{\col} Theorem}{\bfseries\color{\col} Theorems}
+% \crefname{lemma}{\bfseries\color{\col} Lemma}{\bfseries\color{\col} Lemmas}
+% \crefname{proposition}{\bfseries\color{\col} Proposition}{\bfseries\color{\col} Propositions}
+% \crefname{corollary}{\bfseries\color{\col} Corollary}{\bfseries\color{\col} Corollary}
+% \crefname{axiom}{\bfseries\color{\col} Axiom}{\bfseries\color{\col} Axioms}
+% \crefname{definition}{\bfseries\color{\col} Definition}{\bfseries\color{\col} Definitions}
+% \crefname{law}{\bfseries\color{\col} Law}{\bfseries\color{\col} Laws}
+% \crefname{principle}{\bfseries\color{\col} Principle}{\bfseries\color{\col} Principles}
+% \crefname{enumi}{\textcolor{\col}{Item}}{\textcolor{\col}{Items}}
+% \else
+% \crefname{theorem}{\bfseries\color{\col} theorem}{\bfseries\color{\col} theorems}
+% \crefname{lemma}{\bfseries\color{\col} lemma}{\bfseries\color{\col} lemmas}
+% \crefname{proposition}{\bfseries\color{\col} proposition}{\bfseries\color{\col} propositions}
+% \crefname{corollary}{\bfseries\color{\col} corollary}{\bfseries\color{\col} corollary}
+% \crefname{axiom}{\bfseries\color{\col} axiom}{\bfseries\color{\col} axioms}
+% \crefname{definition}{\bfseries\color{\col} definition}{\bfseries\color{\col} definitions}
+% \crefname{law}{\bfseries\color{\col} law}{\bfseries\color{\col} laws}
+% \crefname{principle}{\bfseries\color{\col} principle}{\bfseries\color{\col} principles}
+% \crefname{enumi}{\textcolor{\col}{item}}{\textcolor{\col}{items}}
 \crefname{axiom}{Axiom}{Axioms}
 \else
 \crefname{axiom}{axiom}{axioms}
 \fi
 \makeatother
+
+% \crefformat{enumerate}{#2\textcolor{\col}{Item} #1#3}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

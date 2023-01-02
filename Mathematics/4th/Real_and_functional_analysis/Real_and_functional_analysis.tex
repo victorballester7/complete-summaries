@@ -108,7 +108,7 @@
     Let $I,J_1,\ldots,J_N\subseteq \RR^n$ be intervals such that $I\subseteq \bigcup_{k=1}^N J_k$. Then, $\vol(I)\leq\sum_{k=1}^N \vol(J_k)$.
   \end{lemma}
   \begin{sproof}
-    Note that we can suppose $I=\bigcup_{k=1}^N J_k$ by intersecting (if necessary) with $I$. Suppose $I=I_1\times\cdots\times I_n$ and let $\{R_k:k=1,\ldots,M\}$ be an appropriate partition of subrectangles of $I$. Note that $\vol(I)=\sum_{k=1}^M\vol(R_k)$. If $(J_k)$ were pairwise disjoint we would have $\sum_{k=1}^M\vol(R_k)=\sum_{k=1}^{N}\vol(J_k)$. If not, some of these $R_k$ are \textit{repeated} and so $\vol(I)=\sum_{k=1}^M\vol(R_k)\leq\sum_{k=1}^{N}\vol(J_k)$.
+    Note that we can suppose $I=\bigcup_{k=1}^N J_k$ by intersecting (if necessary) with $I$. Suppose $I=I_1\times\cdots\times I_n$ and let $\{R_k:k=1,\ldots,M\}$ be an appropriate partition of subrectangles of $I$. Note that $\vol(I)=\sum_{k=1}^M\vol(R_k)$. If $(J_k)$ were pairwise disjoint we would have $\sum_{k=1}^M\vol(R_k)=\sum_{k=1}^{N}\vol(J_k)$. If not, some of these $R_k$ are ``repeated'' and so $\vol(I)=\sum_{k=1}^M\vol(R_k)\leq\sum_{k=1}^{N}\vol(J_k)$.
   \end{sproof}
   \begin{theorem}
     The outer measure has the following properties:
@@ -901,9 +901,8 @@
     Let $K\subseteq \KK^n$ be a compact set and $A\subseteq \mathcal{C}(K)$ be a separating subalgebra that vanishes nowhere. Then, $\forall x,y\in K$ and $\forall \alpha,\beta\in\KK$, $\exists f\in A$ such that $f(x)=\alpha$ and $f(y)=\beta$.
   \end{lemma}
   \begin{proof}
-    By hypothesis $\exists g\in A$ such that $g(x)\ne g(y)$. Then consider:
-    $$f=\alpha\frac{g-g(y)}{g(x)-g(y)}+\beta\frac{g-g(x)}{g(y)-g(x)}$$
-    Note that $f\in A$ because $A$ vanishes nowhere and so the constants functions are in $A$.
+    By hypothesis $\exists g,h_x,h_y\in A$ such that $g(x)\ne g(y)$, $h_x(x)\ne 0$ and $h_y(y)\ne 0$. Then consider:
+    $$f=\alpha\frac{h_x}{h_x(x)}\frac{g-g(y)}{g(x)-g(y)}+\beta\frac{h_y}{h_y(y)}\frac{g-g(x)}{g(y)-g(x)}$$
   \end{proof}
   \begin{definition}
     Let $K\subseteq \KK^n$ be a compact set and $A\subseteq \mathcal{C}(K)$ be a subalgebra. We say that $A$ is \emph{autoconjugate} if $\overline{f}\in A$ whenever $f\in A$.
@@ -912,7 +911,7 @@
     Let $K\subseteq \RR^n$ be a compact set and $A\subseteq \mathcal{C}(K)$ be a subalgebra. If $f\in A$, then $\abs{f}\in \overline{A}$.
   \end{lemma}
   \begin{proof}
-    First note that since $f\in \mathcal{C}(K)$, $f$ is bounded and so $\exists a,b\in\RR$ such that $f(K)\subseteq[a,b]$. Consider $v(x)=\abs{x}$, $x\in[a,b]$. Then, by \nameref{MA_weierstrasspolynomials} $\exists (q_n)\in\RR[x_1,\ldots,x_n]$ such that $\displaystyle\lim_{n\to\infty}\norm{q_n-v}_{[a,b]}=0$. Now construct $p_n(x)=q_n(x)-q_n(0)$ which also satisfies $\displaystyle\lim_{n\to\infty}\norm{p_n-v}_{[a,b]}=0$ because $\displaystyle\lim_{n\to\infty} q_n(0)=v(0)=0$. Since we can write $p_n(x)=\sum_{k=1}^na_kx^k$, we have that $p_n(f)=\sum_{k=1}^na_kf^k\in A$ and so: $$\lim_{n\to\infty}\norm{p_n(f)-\abs{f}}_{K}\leq\lim_{n\to\infty}\norm{p_n-v}_{[a,b]}=0$$
+    First note that since $f\in \mathcal{C}(K)$, $f$ is bounded and so $\exists a,b\in\RR$ such that $f(K)\subseteq[a,b]$. Consider $v(x)=\abs{x}$, $x\in[a,b]$. Then, by \nameref{MA_weierstrasspolynomials} $\exists (q_n)\in\RR[x]$ such that $\displaystyle\lim_{n\to\infty}\norm{q_n-v}_{[a,b]}=0$. Now construct $p_n(x)=q_n(x)-q_n(0)$ which also satisfies $\displaystyle\lim_{n\to\infty}\norm{p_n-v}_{[a,b]}=0$ because $\displaystyle\lim_{n\to\infty} q_n(0)=v(0)=0$. Since we can write $p_n(x)=\sum_{k=1}^na_kx^k$, we have that $p_n(f)=\sum_{k=1}^na_kf^k\in A$ and so: $$\lim_{n\to\infty}\norm{p_n(f)-\abs{f}}_{K}\leq\lim_{n\to\infty}\norm{p_n-v}_{[a,b]}=0$$
   \end{proof}
   \begin{corollary}
     Let $K\subseteq \KK^n$ be a compact set and $A\subseteq \mathcal{C}(K)$ be a subalgebra. If $f,g\in A$, then $\sup\{f,g\}, \inf\{f,g\}\in \overline{A}$.
@@ -1318,7 +1317,7 @@
     Let $E$, $F$ be a Banach spaces and $\{T_i:i\in I\}\subset\mathcal{L}(E, F)$ be a family of bounded operators. Then, one of the following statements holds:
     \begin{enumerate}
       \item $\sup\{\norm{T_i}:i\in I\}<\infty$
-      \item $\exists A\subseteq E$ such that it is a countable intersection of dense open subsets such that: $$\sup\{\norm{T_ix}_F:i\in I\}=\infty\quad\forall x\in A$$
+      \item $\exists A\subseteq E$ such that it is a countable intersection of dense open subsets (and therefore dense) such that: $$\sup\{\norm{T_ix}_F:i\in I\}=\infty\quad\forall x\in A$$
     \end{enumerate}
   \end{theorem}
   \begin{corollary}[Banach-Steinhaus theorem]
@@ -1364,7 +1363,7 @@
     $$\dotp{x}{y}=\frac{1}{4}\left({\norm{x+y}}^2-{\norm{x-y}}^2\right)$$
   \end{lemma}
   \begin{proposition}
-    Let $(H,\dotp{\cdot}{\cdot})$ be a pre-Hilbert space. Them:
+    Let $(H,\dotp{\cdot}{\cdot})$ be a pre-Hilbert space. Then:
     \begin{itemize}
       \item The inner product is a continuous function.
       \item The map $$\function{}{H}{H^*}{x}{\dotp{\cdot}{x}}$$ is semilinear, injective and isometric.
@@ -1393,7 +1392,6 @@
       \item The $L^2(X)$ space with the inner product $$\dotp{f}{g}_2=\int_Xf(x)\overline{g(x)}\dd{x}$$ is a Hilbert space.
       \item The $\ell^2(A)$ space with the inner product $$\dotp{(x_1,x_2,\ldots)}{(y_1,y_2,\ldots)}=\sum_{a\in A}^nx_a\overline{y_a}$$ is a Hilbert space.
     \end{enumerate}
-    The $L^2(X)$ space with the inner product $$\dotp{f}{g}_2=\int_Xf(x)\overline{g(x)}\dd{x}$$ is a Hilbert space.
   \end{proposition}
   \subsubsection{Projection theorem}
   \begin{definition}
@@ -1418,7 +1416,7 @@
       \item ${P_F}^2 = P_F$
       \item $\dotp{P_Fx_1}{x_2}=\dotp{x_1}{P_Fx_2}$ $\forall x_1, x_2\in H$
       \item $P_F$ is linear, $\norm{P_Fx}\leq \norm{x}$ and the equality holds if and only if $x\in F$.
-      \item If $F\ne\{0\}$, $\norm{P_F}=1$
+      \item If $F\ne\{0\}$, $\norm{P_F}=1$.
       \item $\im P_F=F=\{y\in H:P_Fy=y\}$
       \item $\ker P_F=F^\perp$
     \end{enumerate}
@@ -1457,7 +1455,7 @@
       \item $T^*\in\mathcal{L}(H_2,H_1)$, $\norm{T^*}=\norm{T}$ and $\norm{T^*\circ T}=\norm{T\circ T^*}=\norm{T}^2$.
       \item The map $$\function{}{\mathcal{L}(H_1,H_2)}{\mathcal{L}(H_2,H_1)}{T}{T^*}$$ is semilinear.
       \item ${(T^*)}^* = T$.
-      \item If $H_3$ is Hilbert and $S\in\mathcal{L}(H_2,H_3)$, then ${S\circ T}^*=T^*\circ S^*$.
+      \item If $H_3$ is Hilbert and $S\in\mathcal{L}(H_2,H_3)$, then ${(S\circ T)}^*=T^*\circ S^*$.
     \end{enumerate}
   \end{proposition}
   \begin{proposition}
@@ -1484,7 +1482,13 @@
     Let $H$ be a Hilbert space. An \emph{orthogonal system} on $H$ is a nonempty subset $E\subseteq H$ such that its vectors are pairwise orthogonal. If moreover $\norm{e}=1 $ $\forall e\in E$, we will say that $E$ is a \emph{orthonormal system}.
   \end{definition}
   \begin{definition}
-    Let $H$ be a Hilbert space and $E$ be an orthonormal system. We say that $E$ is \emph{complete} (or \emph{maximal}) if $E^\perp =\{0\}$. Equivalently, $E$ is complete if there is no other orthogonal system $E'\subseteq H$ such that $E\subsetneq E'$.
+    Let $H$ be a Hilbert space and $E$ be an orthonormal system. We say that $E$ is \emph{complete} (or \emph{maximal}) if $E^\perp =\{0\}$.
+  \end{definition}
+  \begin{lemma}
+    Let $H$ be a Hilbert space. $E$ is complete if and only if there is no other orthogonal system $E'\subseteq H$ such that $E\subsetneq E'$.
+  \end{lemma}
+  \begin{definition}
+    Let $H$ be a Hilbert space. A complete orthonormal system is called a \emph{Hilbert basis}.
   \end{definition}
   \begin{lemma}
     Let $H$ be a Hilbert space and $E=\{e_1,\ldots,e_n\}$ be an orthonormal system and $F=\langle E\rangle$. Then, each $x\in H$ can be written as: $$P_Fx=\sum_{k=1}^n\dotp{x}{e_k}e_k$$
@@ -1499,7 +1503,7 @@
     Let $H$ be a Hilbert space, $\mathcal{B}=\{x_1,x_2,\ldots\}\subset H$ be a finite or countable sequence. The \emph{orthonormalization} of $\mathcal{B}$ is the orthonormal sequence $U=\{u_1,u_2,\ldots\}\subset H$ such that for each $n\in \NN$, we have $\langle x_1,\dots,x_n\rangle = \langle u_1,\dots,u_n\rangle$. It is built as follows:
     \begin{itemize}
       \item For $n = 1$, define $y_1:=x_1$ and then $u_1:=\frac{y_1}{\norm{y_1}}$
-      \item For $n\geq 2$, define $$y_n=x_n-\sum_{i=1}^{n-1}\frac{\dotp{x_n}{u_i}}u_i$$
+      \item For $n\geq 2$, define $$y_n=x_n-\sum_{i=1}^{n-1}\dotp{x_n}{u_i}u_i$$
             and then $u_n:=\frac{y_n}{\norm{y_n}}$.
     \end{itemize}
   \end{proposition}
@@ -1513,14 +1517,14 @@
     Let $H$ be a Hilbert space, $\{e_k:k\in\NN\}$ be an arbitrary orthonormal system $and x\in H$. We define: $$s_k(x):=\sum_{k=1}^n\widehat{x}(k)e_k$$
   \end{definition}
   \begin{lemma}
-    Let $H$ be a Hilbert space, $\{e_k:k\in\NN\}$ be an arbitrary orthonormal system $and x\in H$. Then, the limit $z = \lim_{n\to\infty} s_n(x)$ exists and satisfies $\widehat{z}=\widehat{x}$, but $x$ and $z$ may be different.
+    Let $H$ be a Hilbert space, $\{e_k:k\in\NN\}$ be an arbitrary orthonormal system $and x\in H$. Then, the limit $\displaystyle z = \lim_{n\to\infty} s_n(x)$ exists and satisfies $\widehat{z}=\widehat{x}$, but $x$ and $z$ may be different.
   \end{lemma}
-  \begin{theorem}[Riesz-Fischer theore]
-    Let $H$ be a Hilbert space and $E=\{e_k:k\in I\}$ be an arbitrary orthonormal system. The following statements are equivalent:
+  \begin{theorem}[Riesz-Fischer theorem]
+    Let $H$ be a Hilbert space and $E=\{e_i:i\in I\}$ be an arbitrary orthonormal system. The following statements are equivalent:
     \begin{enumerate}
       \item $E$ is complete.
-      \item $\displaystyle x=\lim_{n\to\infty} s_n(x)=\sum_{k\in \NN} \widehat{x}(k)e_k$ on $H$ and $\forall x\in H$.
-      \item \emph{Parseval identity}: For all $x\in H$, we have: $$\norm{x}^2=\sum_{k\in\NN}\abs{\widehat{x}(k)}^2$$
+      \item $\displaystyle x=\lim_{n\to\infty} s_n(x)=\sum_{i\in I} \widehat{x}(i)e_i$ on $H$ and $\forall x\in H$.
+      \item \emph{Parseval identity}: For all $x\in H$, we have: $$\norm{x}^2=\sum_{i\in I}\abs{\widehat{x}(i)}^2$$
       \item $\dotp{x}{y}_H=\dotp{\widehat{x}}{\widehat{y}}_2$ $\forall x,y\in H$
     \end{enumerate}
   \end{theorem}
@@ -1540,7 +1544,7 @@
     Let $H$ be a Hilbert space and $T\in\mathcal{L}(H)$ be compact and self-adjoint. Suppose $\alpha_1$ is an eigenvalue of $T$ such that $\abs{\alpha}=\norm{T}$. Now consider $T_1:=T|_{{\ker(T-\alpha\id)}^\perp}$. By \cref{RFA_spectraltheorem}, we obtain an eigenvalue $\alpha_2$ of $T_1$ (an therefore of $T$) such that $\abs{\alpha_1}\geq \abs{\alpha_2}$. Iterating the process, we get a sequence of eigenvalues $(\alpha_n)$ with the property that $\abs{\alpha_1}\geq \abs{\alpha_2}\geq\abs{\alpha_3}\geq\cdots$.
   \end{corollary}
   \begin{theorem}
-    Let $H$ be a Hilbert space and $T\in\mathcal{L}(H)$ be compact and self-adjoint. The sequence $(\alpha_n)$ of eigenvalues of $T$ (each repeated according its multiplicity) is a sequence of real numbers. If the sequence is countable (i.e. not finite), then $\lim_{n\to\infty}\alpha_n=0$. Moreover, for each eigenvalue $\alpha_n$, $\dim\ker(T-\alpha_n\id)<\infty$.
+    Let $H$ be a Hilbert space and $T\in\mathcal{L}(H)$ be compact and self-adjoint. The sequence $(\alpha_n)$ of eigenvalues of $T$ (each repeated according its multiplicity) is a sequence of real numbers. If the sequence is countable (i.e. not finite), then $\displaystyle\lim_{n\to\infty}\alpha_n=0$. Moreover, for each eigenvalue $\alpha_n$, $\dim\ker(T-\alpha_n\id)<\infty$.
   \end{theorem}
   \begin{lemma}
     Let $H$ be a Hilbert space and $T\in\mathcal{L}(H)$ be compact and self-adjoint. Consider the sequence $(v_n)$ of orthonormal eigenvectors associated with the eigenvalues $(\alpha_n)$ of $T$. Then: $$H=\langle v_1,v_2,\ldots\rangle\oplus \ker(T)$$ and $\langle v_1,v_2,\ldots\rangle={\ker(T)}^\perp$.

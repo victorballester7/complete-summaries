@@ -6,6 +6,21 @@
 \usepackage[es-ES]{datetime2} % for writing the current date when compiling.
 \usepackage{subfiles} % for creating subfiles .tex and compiling them separately to main.tex.
 \usepackage{lmodern} % modern latin font. Also for avoiding (and correcting) some warnings. 
+\usepackage{titlecaps}
+
+%%%%%%%% Index %%%%%%%%%
+\usepackage{makeidx}  % note the use of \makeindex in the preamble_style.sty
+% \let\emph\relax % there's no \RedeclareTextFontCommand
+% \DeclareTextFontCommand{\emph}{\bfseries\em}
+\newcommand\capmystring[1]{\capmystringaux#1\relax}
+\def\capmystringaux#1#2\relax{\uppercase{#1}#2} % only uppercase the text, ignore math
+\renewcommand{\emph}[1]{{\em#1\index{\capmystring{#1}}}}
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+% %%%%%% For cross-refering among documents %%%%%%
+% \usepackage{xr}
+% \externaldocument{Mathematics/1st/Fundamentals_of_mathematics/Fundamentals_of_mathematics}
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%% Title format and page style %%%%%%
     \titleformat{\chapter}[hang]{\normalfont\Huge\bfseries}{\thechapter.}{20pt}{}
@@ -55,5 +70,7 @@
         \fancyhead[R]{\nouppercase{\rightmark}}
         \fancyfoot[C]{\thepage}
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+        \makeindex
     }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
