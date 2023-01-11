@@ -1,6 +1,6 @@
 \documentclass[../../../main_math.tex]{subfiles}
 
-
+% posar Bautin theoremW
 \begin{document}
 \changecolor{DS}
 \begin{multicols}{2}[\section{Dynamical systems}]
@@ -544,7 +544,7 @@
     We define the \emph{$n$-th Lyapunov constant} as: $$\lyapunov{n}:=v_{2n+1}(2\pi)\footnote{Note that this has a strong relation with the Poincaré map $\Pi(\rho)=r(2\pi,\rho)$ given the section $\{(r,0):r\simeq 0\}$.}\footnote{In practice we will only compute the $\lyapunov{n}$ coefficient if $v_k(2\pi)=0$ for $k=2,\ldots,2n$.}$$
   \end{proposition}
   \begin{theorem}[Hopf bifurcation theorem]
-    Consider the system of \mcref{DS:eqhopf} with $\mu=0$ and suppose $\lyapunov{1}\ne 0$. Then, for $\mu\gtrsim 0$ there exists a unique periodic orbit that bifurcates (i.e. it appears and disappears) at the origin. If $\lyapunov{1}> 0$ the periodic orbit is an unstable limit cycle, and if $\lyapunov{1}< 0$ the periodic orbit is an stable limit cycle (see \mcref{DS:hopf}). This codimension-one bifurcation is called \emph{Hopf-bifurcation}.
+    Consider the system of \mcref{DS:eqhopf} with $\mu=0$ and suppose $\lyapunov{1}\ne 0$. Then, for $\mu\gtrsim 0$ there exists a unique periodic orbit that bifurcates at the origin. If $\lyapunov{1}> 0$ the periodic orbit is an unstable limit cycle, and if $\lyapunov{1}< 0$ the periodic orbit is an stable limit cycle (see \mcref{DS:hopf}). This codimension-one bifurcation is called \emph{Hopf-bifurcation}.
   \end{theorem}
   \begin{figure}[H]
     \centering
@@ -568,9 +568,9 @@
   \begin{corollary}
     Consider the system of \mcref{DS:eqhopf} with $\mu=0$. Then, the origin is a center if and only if: $$\lyapunov{n}=0\qquad \forall n\in\NN$$
   \end{corollary}
-  \begin{theorem}[Poicaré's method]
+  \begin{theorem}[Poincaré's method]
     Consider the system of \mcref{DS:eqhopf} with $\mu=0$. Then, there exists a function $H(x,y)$\footnote{This $H$ will be either a first integral of the system or a Lyapunov function. In the first case, we obtain a center for the system; in the second one, a focus.} of the form $$H(x,y)=x^2+y^2+H_3(x,y)+H_4(x,y)+\cdots$$
-    where each $H_j(x,y)$ is an homogeneous polynomial of degree $j$, such that: $$H'=\sum_{k=1}^\infty \poincare{k}{(x^2+y^2)}^{k}\footnote{Note that finding such a function $H$ is computationally more efficient that finding the values of $v_{2n+1}(2\pi)$ of Lyapunov's method.}$$
+    where each $H_j(x,y)$ is an homogeneous polynomial of degree $j$, such that: $$H'=\sum_{k=1}^\infty \poincare{k}{(x^2+y^2)}^{k+1}\footnote{Note that finding such a function $H$ is computationally more efficient that finding the values of $v_{2n+1}(2\pi)$ of Lyapunov's method.}$$
     Note that due to the given stability of the problem, if $k = k_0$ is the index of the first non-zero Lyapunov coefficient, we must have $\lyapunov{k} = a_k\poincare{k}$, with $a_k>0$.
   \end{theorem}
   \subsection{Global dynamics in continuous systems}
@@ -651,14 +651,19 @@
   \end{proposition}
   \subsubsection{Rotated vector fields}
   \begin{definition}
-    Let $\vf{f}(\vf{x})=(X(\vf{x}),Y(\vf{x}))$ be a vector field in $\RR$. We say that $\{\vf{f}(\cdot,\mu):\mu\in\RR\}$ is a \emph{family of rotated vector fields} if the equilibrium points of $\vf{x}'=\vf{f}(\vf{x},\mu)$ are isolated and:
+    Let $\vf{f}(\vf{x})=(X(\vf{x}),Y(\vf{x}))$ be a vector field in $\RR$. We say that $\{\vf{f}(\cdot,\mu):\mu\in\RR\}$ is a \emph{one-parameter family of rotated vector fields} if the equilibrium points of $\vf{x}'=\vf{f}(\vf{x},\mu)$ are isolated and:
     $$\vf{f}\crossprod\pdv{\vf{f}}{\mu}=
       \begin{vmatrix}
-        X & \pdv{X}{\mu} \\
-        Y & \pdv{Y}{\mu}
+        X     & Y     \\
+        X_\mu & Y_\mu
       \end{vmatrix}\ne 0
     $$
+    The vector field is \emph{positively rotated} if $\vf{f}\crossprod\pdv{\vf{f}}{\mu}>0$. Otherwise it is \emph{negatively rotated}.
   \end{definition}
+  \begin{remark}
+    The word ``rotated'' can be explained by the following the expression of the rate of rotation in terms of $\mu$ is:
+    $$\pdv{\theta}{\mu}=\frac{XY_\mu-YX_\mu}{X^2+Y^2}=\frac{\vf{f}\crossprod\pdv{\vf{f}}{\mu}}{X^2+Y^2}$$
+  \end{remark}
   \begin{theorem}
     Stable and unstable limit cycles of a family of rotated vector fields expand or contract monotonically as the parameter $\mu$ varies in a fixed sense and the motion covers an annular neighbourhood of the initial position.
   \end{theorem}
@@ -670,12 +675,12 @@
     \begin{equation*}
       \left\{
       \begin{aligned}
-        x' & =-H_y +\varepsilon P(x,y) \\
-        y' & =H_x +\varepsilon Q(x,y)
+        x' & =-H_y -\varepsilon Q(x,y) \\
+        y' & =H_x +\varepsilon P(x,y)
       \end{aligned}
       \right.
     \end{equation*}
-    Let $\vf\gamma_h=\{H(x,y)=h\in\RR\}$ and consider the function: $$M(h)=\int_{\vf\gamma_h}Q\dd{x}-P\dd{y}$$ If $M$ has a simple zero at $h=h^*$, then there exists a cycle limit $\vf\Gamma_\varepsilon$ for $\varepsilon\simeq 0$ such that $\displaystyle\lim_{\varepsilon\to 0}\vf\Gamma_\varepsilon=\vf\gamma_{h^*}$.
+    Let $\vf\gamma_h=\{H(x,y)=h\in\RR\}$ and consider the function: $$M(h)=\int_{\vf\gamma_h}P\dd{x}+Q\dd{y}$$ If $M$ has a simple zero at $h=h^*$, then there exists a cycle limit $\vf\Gamma_\varepsilon$ for $\varepsilon\simeq 0$ such that $\displaystyle\lim_{\varepsilon\to 0}\vf\Gamma_\varepsilon=\vf\gamma_{h^*}$.
   \end{theorem}
   \subsubsection{Graphics}
   \begin{definition}
@@ -761,7 +766,7 @@
   \end{definition}
   \subsection{Global dynamics in discrete systems}
   \begin{definition}
-    Let $\vf{f}:\RR^m\rightarrow\RR^m$ be a function and consider the discrete map $\vf{x}_{n+1}=\vf{f}(\vf{x}_n)$. A \emph{periodic point} $\vf{y}$ of period $m$ is a solution to the equation $\vf{f}^m(\vf{x})=\vf{x}$. If moreover it satisfies that $\vf{f}^k(\vf{y})\ne\vf{y}$ $\forall k=1,\ldots,m-1$, then $m$ is called \emph{prime period} of $\vf{y}$. We denote the set of periodic points of period (not necessarily prime) $n$ by $\Per_n(f)$. The set $\Per(f)\subseteq\NN$ as follows:
+    Let $\vf{f}:\RR^m\rightarrow\RR^m$ be a function and consider the discrete map $\vf{x}_{n+1}=\vf{f}(\vf{x}_n)$. A \emph{periodic point} $\vf{y}$ of period $m$ is a solution to the equation $\vf{f}^m(\vf{x})=\vf{x}$. If moreover it satisfies that $\vf{f}^k(\vf{y})\ne\vf{y}$ $\forall k=1,\ldots,m-1$, then $m$ is called \emph{prime period} of $\vf{y}$. We denote the \emph{set of periodic points} of period (not necessarily prime) $n$ by $\Per_n(f)$. Finally we define the \emph{set of periods} $\Per(f)\subseteq\NN$ as follows:
     \begin{align*}
       m\in\Per(f)\iff & \exists\vf{y}\in\RR^m\text{ such that $\vf{y}$ is a periodic} \\
                       & \text{point of prime period $m$ under $\vf{f}$}

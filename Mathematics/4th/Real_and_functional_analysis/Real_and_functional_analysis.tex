@@ -974,7 +974,7 @@
   \begin{sproof}
     \begin{enumerate}
       \item A direct application of the \mnameref{RFA:dominated} shows that $f\in L^p(E)$. Moreover, $\abs{f_k-f}^p\leq{2g}^p\in L^1(E)$. So again the \mnameref{RFA:dominated} allows us to conclude ${f}_k\overset{L^p}{\rightarrow}{f}$.
-      \item Let $g_N(x):=\sum_{k=1}^N\abs{f_k(x)}$. Then:
+      \item Let $g_N(x):=\sum_{k=1}^N\abs{f_k(x)}\nearrow g(x)$ (possibly infinity). Then:
             \begin{align*}
               \norm{g_N}_p & ={\left(\int_E{\abs{g_N}}^p\right)}^{1/p}\leq \sum_{k=1}^N\norm{{f}_k}_p \\
                            & \leq\sum_{k=1}^\infty\norm{{f}_k}_p<\infty
@@ -1099,7 +1099,7 @@
   \end{lemma}
   \begin{proof}
     We may suppose $\varepsilon<1$. Let $v\in E$ such that $d(v,F)=\delta>0$. Then, consider $u=\frac{v-x_0}{\norm{v-x_0}}$, where $x_0\in F$ satisfies $\delta\leq \norm{v-x_0}\leq \frac{\delta}{1-\varepsilon}$. Finally, $\forall x\in F$:
-    $$\norm{u-x}=\frac{v-(x_0+\norm{v-x_0}x)}{\norm{v-x_0}}\geq \frac{\delta}{\norm{v-x_0}}\geq 1-\varepsilon$$
+    $$\norm{u-x}=\frac{\norm{v-(x_0+\norm{v-x_0}x)}}{\norm{v-x_0}}\geq \frac{\delta}{\norm{v-x_0}}\geq 1-\varepsilon$$
   \end{proof}
   \begin{theorem}[Riesz's theorem]
     Let $E$ be a normed vector space. If the unit closed sphere $\{x\in E:\norm{x}=1\}$ is compact, then $\dim E<\infty$.
@@ -1186,9 +1186,9 @@
     The particularity follows from \mcref{RFA:lemmarank}.
   \end{sproof}
   \subsubsection{Neumann series}
-  \begin{interpretation}
+  \begin{remark}
     In Theory of Differential Equations, many times we need to find the solution of $Tu-u=v$, with $T\in\mathcal{L}(E)$ and $E=\mathcal{C}([a,b])$. Here, we will describe a general approach. Let $E$ be a normed vector space, $T\in\mathcal{L}(E)$ and $v\in E$. We would like to find the solution of the equation: $$(T-\lambda\id)u=v$$ for some $\lambda\in\KK^*$.
-  \end{interpretation}
+  \end{remark}
   \begin{definition}
     Let $E$ be a Banach space, $T\in\mathcal{L}(E)$ and $\lambda\in\KK^*$. We define the \emph{Neumann series} as the series:
     $$-\frac{1}{\lambda}\sum_{n= 0}^\infty\frac{1}{\lambda^n}T^n$$
@@ -1513,10 +1513,10 @@
     Let $H$ be a Hilbert space and $\{e_i:i\in I\}$ be an arbitrary orthonormal system. The map $$\function{}{H}{\ell^2(I)}{x}{\widehat{x}}$$ is linear, surjective and satisfies $\norm{\widehat{x}}_2\leq\norm{x}_H$.
   \end{lemma}
   \begin{definition}
-    Let $H$ be a Hilbert space, $\{e_k:k\in\NN\}$ be an arbitrary orthonormal system $and x\in H$. We define: $$s_k(x):=\sum_{k=1}^n\widehat{x}(k)e_k$$
+    Let $H$ be a Hilbert space, $\{e_k:k\in\NN\}$ be an arbitrary orthonormal system and $x\in H$. We define: $$s_k(x):=\sum_{k=1}^n\widehat{x}(k)e_k$$
   \end{definition}
   \begin{lemma}
-    Let $H$ be a Hilbert space, $\{e_k:k\in\NN\}$ be an arbitrary orthonormal system $and x\in H$. Then, the limit $\displaystyle z = \lim_{n\to\infty} s_n(x)$ exists and satisfies $\widehat{z}=\widehat{x}$, but $x$ and $z$ may be different.
+    Let $H$ be a Hilbert space, $\{e_k:k\in\NN\}$ be an arbitrary orthonormal system and $x\in H$. Then, the limit $\displaystyle z = \lim_{n\to\infty} s_n(x)$ exists and satisfies $\widehat{z}=\widehat{x}$, but $x$ and $z$ may be different.
   \end{lemma}
   \begin{theorem}[Riesz-Fischer theorem]
     Let $H$ be a Hilbert space and $E=\{e_i:i\in I\}$ be an arbitrary orthonormal system. The following statements are equivalent:

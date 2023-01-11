@@ -187,7 +187,7 @@
   \begin{sproof}
     For the first one apply \mnameref{FSV:divergencethm} with the vector field $\vf{X}_1 = kf\grad{g}$ and for the second one, use the previous formula and the symmetry of $f$ and $g$.
   \end{sproof}
-  \begin{corollary}[Green identities]
+  \begin{corollary}[Green identities]\label{PDE:greenidentities}
     Let $\Omega\subseteq\RR^3$ be a closed region and $f,g:\Omega\rightarrow\RR$ be functions of class $\mathcal{C}^1(\Omega)$. Then:
     \begin{gather*}
       \iiint_\Omega f\laplacian{g}                              =\iint_{\Fr{\Omega}}f\grad{g}\cdot\dd{\vf{S}} -\iiint_\Omega \grad{f}\cdot\grad{g} \\
@@ -597,7 +597,7 @@
     $$
       \function{\Lambda_f}{\mathcal{D}(\Omega)}{\RR}{\varphi}{\displaystyle\idotsint_\Omega f(\vf{x})\varphi(\vf{x})\dd{\vf{x}}}
     $$
-    is a distribution. Hence, $\Lambda_f(\varphi)$ is usually denoted by $\dotp{f}{\varphi}$. Sometimes we will do an abuse of notation denoting $\Lambda_f$ as $f$ (by the \mnameref{PDE:postfundamentallemma}).
+    is a distribution. Hence, $\Lambda_f(\varphi)$ is usually denoted by $\dotp{f}{\varphi}$. Sometimes we will do an abuse of notation denoting $\Lambda_f$ as $f$ (by the \mcref{PDE:postfundamentallemma}).
   \end{proposition}
   \begin{proof}
     $\Lambda_f$ is clearly linear. Moreover: $$\abs{\Lambda_f(\varphi)}\leq\idotsint_\Omega\abs{f(\vf{x})\varphi(\vf{x})}\leq \norm{f}_1\norm{\varphi}_\infty$$
@@ -813,7 +813,7 @@
   \begin{proof}
     Use \mnameref{PDE:strongmax} with $v(\vf{x},t)=-u(\vf{x},t)$.
   \end{proof}
-  \begin{theorem}[Uniqueness on bounded domains]
+  \begin{theorem}[Uniqueness of the heat equation]
     Let $U\subset\RR^n$ be open and bounded, $g\in\mathcal{C}(\Gamma_T)$ and $f\in\mathcal{C}(U_T)$. Then, there exists at most one solution $u\in\mathcal{C}_1^2(U_T)\cap\mathcal{C}(\overline{U_T})$ of the problem:
     $$
       \begin{cases}
@@ -861,10 +861,10 @@
     Let $u:\RR\times\RR\rightarrow\RR$ be an unknown function. The \emph{Laplace equation} is the pde defined by: $$\laplacian u=0$$
   \end{definition}
   \begin{proposition}[Dirichlet problem]
-    Let $f:[0,2\pi]\rightarrow\RR$ be a continuous function such that $f(0)=f(2\pi)$. Then, there exists a continuous function $v:\overline{D(0,\rho)}\rightarrow\RR$ such that:
+    Let $f:[0,2\pi]\rightarrow\RR$ be a continuous function such that $f(0)=f(2\pi)$. Then, there exists a continuous function $v:\overline{D(0,\rho)}\rightarrow\RR$ that $v\in\mathcal{C}^2(D(0,\rho)\setminus\{0\})$ and such that:
     \begin{enumerate}
       \item $v(r,0)=v(r,2\pi)$ $\forall r\in[0,\rho]$
-      \item $v\in\mathcal{C}^2(D(0,\rho)\setminus\{0\})$ and $\laplacian v=0$.
+      \item $\laplacian v=0$.
       \item $v(\rho,\theta)=f(\theta)$ $\forall\theta\in[0,2\pi]$
     \end{enumerate}
     An example of such function is:
@@ -877,5 +877,36 @@
   \begin{sproof}
     The Laplacian in polar coordinates is: $$\laplacian u=\frac{1}{r}\pdv{}{r}\left(r\pdv{u}{r}\right)+\frac{1}{r^2}\pdv[2]{u}{r}$$ Now use separation of variables $v(r,\theta)=R(r)\Theta(\theta)$.
   \end{sproof}
+  \begin{definition}[Dirichlet problem]
+    Let $U\subseteq \RR^n$ be an open bounded set such that $\Fr{U}$ is differentiable. The \emph{Dirichlet problem} is defined as he following ivp:
+    \begin{equation}\label{PDE:dirichlet}
+      \begin{cases}
+        -\laplacian{u} = f & \text{in $U$}      \\
+        u=g                & \text{on $\Fr{U}$}
+      \end{cases}
+    \end{equation}
+  \end{definition}
+  \begin{proposition}[Uniqueness of Dirichlet problem]
+    Let $U\subseteq \RR^n$ be an open bounded set such that $\Fr{U}$ is differentiable. Then, there exists at most one solution of \mcref{PDE:dirichlet}.
+  \end{proposition}
+  \begin{sproof}
+    Suppose $u_1$ and $u_2$ are two solutions of the problem. Apply the first of the \mnameref{PDE:greenidentities} to the functions $f = g = u_1-u_2$.
+  \end{sproof}
+  \begin{definition}
+    Let $U\subseteq \RR^n$ be an open bounded set such that $\Fr{U}$ is differentiable. Considering \mcref{PDE:dirichlet} we define the \emph{energy functional} as the operator $$Iw=\idotsint_U\frac{1}{2}\norm{\grad w}^2 - wf$$
+    defined on the set $\{w\in\mathcal{C}^2(\overline{U}): w=g\text{ on $\Fr{U}$}\}$.
+  \end{definition}
+  \begin{theorem}[Dirichlet's principle]
+    Let $U\subseteq \RR^n$ be an open bounded set such that $\Fr{U}$ is differentiable. Then, $u\in\mathcal{C}^2(\overline{U})$ solves \mcref{PDE:dirichlet} if and only if it minimizes $I$.
+  \end{theorem}
+  \begin{proof}
+    \begin{itemizeiff}
+      Let $u$ be a solution of \mcref{PDE:dirichlet} and $w = u+v\in \domain(I)$. Thus, $v=0$ on $\Fr{U}$. We need to show that $Iw\geq Iu$. A calculation shows that: $$Iw=Iu+\idotsint_U\frac{1}{2}\norm{\grad v}^2$$ where we have use the \mnameref{PDE:greenidentities} to conclude that: $$\idotsint_U\grad u\cdot\grad v-vf=0$$
+      Hence $Iw\geq Iu$.
+      \item Let $u$ be a minimizer of $I$ and $\lambda(t)=I(u+vt)$, $t\in \RR$. By the definition of a minimum, we have that $\lambda'(0)=0$ and so:
+      $$0 = \lambda'(0)=\idotsint_U\grad u\cdot\grad v-vf=\idotsint_Uv(-\laplacian u-f)$$
+      again by  the \mnameref{PDE:greenidentities}. Since, this is valid $\forall v\in\domain(I)$ it follows that $-\laplacian u = f$ by \mcref{PDE:postfundamentallemma}.
+    \end{itemizeiff}
+  \end{proof}
 \end{multicols}
 \end{document}
