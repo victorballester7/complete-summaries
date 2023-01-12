@@ -608,17 +608,15 @@
     $$
       \function{\delta_{\vf{x}_0}}{\mathcal{D}(\Omega)}{\RR}{\varphi}{\varphi(\vf{x}_0)}
     $$
-    is a distribution. Note that, we can write $$\Lambda_{\delta_{\vf{x}_0}}=\dotp{\delta_{\vf{x}_0}}{\varphi}=\idotsint_\Omega\delta_{\vf{x}_0}(\vf{x})\varphi(\vf{x})\dd{\vf{x}}=\varphi(\vf{x}_0)=\delta_{\vf{x}_0}(\varphi)$$ We will denote $\delta_{\vf{0}}$ simply by $\delta$.
+    is a distribution. We will denote $\delta_{\vf{0}}$ simply by $\delta$.
   \end{proposition}
   \begin{proof}
     Clearly $\delta_{\vf{x}_0}$ is linear and bounded because $\abs{\delta_{\vf{x}_0}(\varphi)}=\abs{\varphi(\vf{x}_0)}\leq \norm{\varphi}_\infty$.
   \end{proof}
-  \begin{proposition}
-    Let $\Omega\subseteq \RR^n$ be a set and $\vf{x}_0\in\Omega$. Then: $$\idotsint_\Omega \delta_{\vf{x}_0}(\vf{x})\dd{\vf{x}}=1$$
-  \end{proposition}
-  \begin{proof}
-    $$\idotsint_\Omega \delta_{\vf{x}_0}(\vf{x})\dd{\vf{x}}=\dotp{\delta_{\vf{x}_0}}{1}=1(\vf{x}_0)=1$$
-  \end{proof}
+  \begin{lemma}
+    Let $\Omega\subseteq \RR^n$ be a set, $\vf{x}_0\in\Omega$ and $\mu_{\vf{x}_0}$ be the measure that equals 1 on the set $\{\vf{x}_0\}$ and $0$ otherwise. Then, $\forall\varphi\in\mathcal{D}(\Omega)$ we have:
+    $$\delta_{\vf{x}_0}(\varphi)=\varphi(\vf{x}_0)=\idotsint_\Omega\varphi\dd{\mu_{\vf{x}_0}}$$
+  \end{lemma}
   \begin{definition}
     Let $\Omega\subseteq \RR^n$ be a set and $n\in\NN$. We define the \emph{differentiation operator} $D^n:\mathcal{D}^*(\Omega)\rightarrow\mathcal{D}^*(\Omega)$ by: $$\dotp{D^n\Lambda}{\varphi}=\dotp{\Lambda}{{(-1)}^nD^n\varphi}$$
     for all $\Lambda\in\mathcal{D}^*(\Omega)$ and all $\varphi\in\mathcal{D}(\Omega)$.
@@ -643,12 +641,12 @@
     \begin{equation}\label{PDE:fundamental}
       \left\{
       \begin{aligned}
-        u_{t}  & =\alpha u_{xx} \\
-        u(x,0) & =\delta(x)
+        u_{t}  =\alpha u_{xx}                        \\
+        \lim_{t\to 0} \Lambda_{u(\cdot,t)} & =\delta
       \end{aligned}
       \right.
     \end{equation}
-    where $\delta(x)$ is the Dirac delta distribution.
+    where $\delta$ is the Dirac delta distribution.
   \end{definition}
   \begin{theorem}\label{PDE:heatkernelprop}
     The heat kernel of \mcref{PDE:fundamental} is:
@@ -659,7 +657,7 @@
   \begin{proof}
     An easy check shows that if $u$ is a solution to the heat equation, so it is $u_x$. Thus, from this fact and \mcref{PDE:selfsimilarsol} we get the solution:
     $$u(x,t)=\frac{C}{\sqrt{t}}\exp{-\frac{x^2}{4\alpha t}}$$
-    Imposing $\int_{-\infty}^{+\infty}u(x,t)\dd{x}=1$ we get the desired result. Let's see now that $\displaystyle\lim_{t\to 0}u(x,t)=\delta(x)$. Let $\varphi\in\mathcal{D}(\RR)$. Then, $\forall \varepsilon>0$ $\exists\delta>0$ such that $\abs{\varphi(x)-\varphi(0)}<\frac{\varepsilon}{2K}$ whenever $\abs{x}<\delta$, where $K=\int_{\abs{x}<\delta}\frac{1}{\sqrt{4\pi\alpha t}}\exp{-\frac{y^2}{4\alpha t}}$.
+    Imposing $\int_{-\infty}^{+\infty}u(x,t)\dd{x}=1$ we get the desired result. Let's see now that $\displaystyle\lim_{t\to 0} \Lambda_{u(\cdot,t)} =\delta$. Let $\varphi\in\mathcal{D}(\RR)$. Then, $\forall \varepsilon>0$ $\exists\delta>0$ such that $\abs{\varphi(x)-\varphi(0)}<\frac{\varepsilon}{2K}$ whenever $\abs{x}<\delta$, where $K=\int_{\abs{x}<\delta}\frac{1}{\sqrt{4\pi\alpha t}}\exp{-\frac{y^2}{4\alpha t}}$.
     \begin{align*}
       I & =\abs{\int_{-\infty}^{+\infty}\frac{1}{\sqrt{4\pi\alpha t}}\exp{-\frac{y^2}{4\alpha t}}\varphi(y)\dd{y}-\varphi(0)}    \\
         & = \abs{\int_{-\infty}^{+\infty}\frac{1}{\sqrt{4\pi\alpha t}}\exp{-\frac{y^2}{4\alpha t}}(\varphi(y)-\varphi(0))\dd{y}} \\
@@ -667,9 +665,9 @@
         &\leq \int_{\abs{x}<\delta}\frac{1}{\sqrt{4\pi\alpha t}}\exp{-\frac{y^2}{4\alpha t}}\abs{\varphi(y)-\varphi(0)}\dd{y}\\&\hspace{2cm}+\int_{\abs{x}\geq\delta}\frac{1}{\sqrt{4\pi\alpha t}}\exp{-\frac{y^2}{4\alpha t}}\abs{\varphi(y)-\varphi(0)}\dd{y}
       \end{split}
     \end{align*}
-    The first integral is bounded by $\varepsilon$, while for the second one, given that $\delta$ we can find $t>0$ such that $\int_{\abs{x}\geq\delta}\frac{1}{\sqrt{4\pi\alpha t}}\exp{-\frac{y^2}{4\alpha t}}\leq \frac{\varepsilon}{4\norm{\varphi}_\infty}$. Finally, for $t\to 0$:
+    The first integral is bounded by $\frac{\varepsilon}{2}$, while for the second one, given that $\delta$ we can find $t>0$ such that $\int_{\abs{x}\geq\delta}\frac{1}{\sqrt{4\pi\alpha t}}\exp{-\frac{y^2}{4\alpha t}}\leq \frac{\varepsilon}{4\norm{\varphi}_\infty}$. Finally, for $t\to 0$:
     $$I\leq \frac{\varepsilon}{2} + 2\norm{\varphi}_\infty\int_{\abs{x}\geq\delta}\frac{1}{\sqrt{4\pi\alpha t}}\exp{-\frac{y^2}{4\alpha t}}<\varepsilon$$
-    Hence, $\displaystyle\lim_{t\to 0}u(x,t)=\delta(x)$.
+    This is valid $\forall\varphi\in\mathcal{D}(\Omega)$. Hence, $\displaystyle\lim_{t\to 0} \Lambda_{u(\cdot,t)} =\delta$.
   \end{proof}
   \begin{corollary}\label{PDE:heatgeneralcoro}
     Let $[H(t)](x)$ be the heat kernel of \mcref{PDE:heatkernel} at a fixed point $t>0$. Then, the general solution to the problem
@@ -857,6 +855,7 @@
     Let $U\subset\RR^n$ be open and bounded and suppose $u\in\mathcal{C}^2( U_T)$ solves the heat equation in $U_T$. Then, $u\in\mathcal{C}^\infty(U_T)$.
   \end{theorem}
   \subsection{Laplace equation}
+  \subsubsection{General properties and solutions}
   \begin{definition}[Laplace equation]
     Let $u:\RR\times\RR\rightarrow\RR$ be an unknown function. The \emph{Laplace equation} is the pde defined by: $$\laplacian u=0$$
   \end{definition}
@@ -908,5 +907,26 @@
       again by  the \mnameref{PDE:greenidentities}. Since, this is valid $\forall v\in\domain(I)$ it follows that $-\laplacian u = f$ by \mcref{PDE:postfundamentallemma}.
     \end{itemizeiff}
   \end{proof}
+  \subsection{Sobolev spaces}
+  \begin{definition}
+    Let $\Omega\subseteq \RR^n$. We define the \emph{Sobolev space} $H^1(\Omega)$ (or $W^{1,2}(\Omega)$) as the following space: $$H^1(\Omega):=\{f\in L^2(\Omega):D_if\in L^2(\Omega), i=1,\ldots,n\}$$
+    Here $D_i$ denotes the distributional derivative with respect to the $i$-th component.
+  \end{definition}
+  \begin{proposition}
+    Let $\Omega\subseteq \RR^n$. Then, $H^1(\Omega)$ with the inner product
+    \begin{align*}
+      \dotp{f}{g}_{H^1} & :=\dotp{f}{g}_{2}+\sum_{i=1}^n\dotp{D_if}{D_ig}_{2}      \\
+                        & =\dotp{f}{g}_{2}+\idotsint_\Omega \grad{f}\cdot \grad{g}
+    \end{align*}
+    and associated norm
+    $${\norm{f}_{H^1}}^2={\norm{f}_2}^2 +\sum_{i=1}^n{\norm{D_if}_2}^2$$
+    is a Hilbert space.
+  \end{proposition}
+  \begin{sproof}
+    Clearly, $H^1(\Omega)$ is pre-Hilbert. It's missing to show that $H^1$ is complete. Let $(f_n)\in H^1(\Omega)$ be Cauchy. Then, $(f_n), (D_if_n)\in L^2(\Omega)$ are also Cauchy as $\norm{f}_2\leq \norm{f}_{H^1}$ and $\norm{D_if}_2\leq \norm{f}_{H^1}$ $\forall i=1,\ldots,n$. Hence, $\displaystyle\lim_{n\to\infty}f_n\overset{L^2}{=}G$ and $\displaystyle\lim_{n\to\infty}D_if_n\overset{L^2}{=}g_i$ $\forall i=1,\ldots,n$. If we prove that $D_iG=g_i$, we will be done. But this is clear from the definition of distributional derivative as $\forall\varphi\in\mathcal{D}(\Omega)$ we have:
+    $$\idotsint_\Omega D_if_n\varphi =\idotsint_\Omega f_n D_i\varphi$$
+    And the \mnameref{RFA:dominated} allow us to conclude that:
+    $$\idotsint_\Omega g_i\varphi =\idotsint_\Omega G D_i\varphi$$
+  \end{sproof}
 \end{multicols}
 \end{document}

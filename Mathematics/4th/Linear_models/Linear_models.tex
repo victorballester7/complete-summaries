@@ -482,7 +482,10 @@
   \end{definition}
   \begin{theorem}
     Let $\vf{A},\vf{B}\in\mathcal{M}_k(\RR)$ be symmetric matrices such that $\vf{A}$ is positive semi-definite. and $\vf{B}$ is positive definite. Let $Q(\vf{v})=\transpose{\vf{v}}\vf{Av}$, $\vf{v}\in\RR^k$. Then:
-    $$\lambda_1=\max\{Q(\vf{v}):\transpose{\vf{v}}\vf{Bv}=1\}\quad \vf{v}_1=\argmax\{Q(\vf{v}):\transpose{\vf{v}}\vf{Bv}=1\}$$
+    \begin{align*}
+      \lambda_1 & =\max\{Q(\vf{v}):\transpose{\vf{v}}\vf{Bv}=1\}    \\
+      \vf{v}_1  & =\argmax\{Q(\vf{v}):\transpose{\vf{v}}\vf{Bv}=1\}
+    \end{align*}
     where $\vf{v}_1$ is the eigenvector of the largest eigenvalue $\lambda_1$ of $\vf{B}^{-1}\vf{A}$.
   \end{theorem}
   % \begin{definition}
@@ -523,6 +526,67 @@
     where $\SSE_p$ is the error sum of squares of the new model with $p$ variables.
     From here, we can conclude that the closer $\mathrm{C}_p$ is to $p$ (i.e. $\mathrm{C}_p\approx p$) the lower the bias is for this new model. Moreover the smaller $\mathrm{C}_p$ is, the lower the mean square error is.
   \end{theorem}
+  \begin{remark}
+    Given our initial data for the model of \mcref{LM:multiple}, we can get some submodels by considering the best ones regarding the residuals, multicollinearity, $C_p$ statistic... Once we have all these submodels $M_1,\ldots,M_r$ done, we should choose only one of them among the others. To do so, we randomly partitionate our data in $\ell$-folds to obtain deterministic matrices $\vf{X}_{1},\ldots,\vf{X}_\ell$ (each with $k+1$ columns) and vectors $\vf{y}_1,\ldots,\vf{y}_\ell$. Now, for each $j\in\{1,\ldots, \ell\}$ and for each model $M_i$ we measure how good is the prediction of $\vf{y}_j$ (with the $\SSE$) taking all the other data. We obtain thus a value $\SSE_{i,j}$ for each $i$, $j$. We will take the the model $i_0$ such that: $$i_0=\argmin_{i\in\{1,\ldots,r\}}\sum_{j=1}^{\ell}\SSE_{i,j}$$
+  \end{remark}
+  \subsubsection{Information and entropy}
+  \begin{axiom}[Information]\label{LM:info}
+    The \emph{information of an event} in a probability space is a continuous function $I(A)$ that satisfies the following properties:
+    \begin{itemize}
+      \item It depends on $\Prob(A)$.
+      \item It increases as $\Prob(A)$ decreases and if $\Prob(A)=1$, then $I(A)=0$.
+      \item $I(A\cap B)= I(A) + I(B)$ for any event $A$, $B$.
+    \end{itemize}
+  \end{axiom}
+  \begin{theorem}[Cauchy's functional equation]\label{LM:cauchy_functional}
+    Let $f:\RR\rightarrow\RR$ be a continuous function such that $$f(x+y) = f(x)+f(y)$$
+    Then, $\exists c\in\RR$ such that $f(x)=cx$ $\forall x\in\RR$.
+  \end{theorem}
+  \begin{proof}
+    We will prove that $f(q)=cq$ $\forall q\in\QQ$ and the density of $\QQ$ in $\RR$ will finish the proof.
+
+    First note that $f(0)=f(0+0)=2f(0)$, so $f(0)=0$ and therefore $0=f(x-x)=f(x)+f(-x)$, which implies that the function $f$ is odd.
+    Let $n\in\NN$ and $x\in\RR$. Then:
+    $$f(nx)=f((n-1)x) +f(x)=\cdots=nf(x)$$
+    If $x= \frac{1}{n}$, then $f(\frac{1}{n})=f(1)\frac{1}{n}$ and define $c:= f(1)$. Finally, $\forall \frac{n}{m}\in\QQ$ we have: $$f\left(\frac{n}{m}\right)=nf\left(\frac{1}{m}\right)=c\frac{n}{m}$$
+  \end{proof}
+  \begin{lemma}
+    The information of an event $A$ is $$I(A)=-c\log\Prob(A)$$ for some $c\in\RR_{> 0}$\footnote{Usually we take $c=1$ or $\frac{1}{\log b}$ in order to use the logarithm in base $b$.}.
+  \end{lemma}
+  \begin{proof}
+    By the first axiom of \mnameref{LM:info} we have that $I(A)=f(\Prob(A))$ and by the third one that if $A$, $B$ are independent we have that: $$f(\Prob(A)\Prob(B))=f(\Prob(A\cap B))=f(\Prob(A))+f(\Prob(B))$$
+    That is, $f(xy) = f(x)+f(y)$ $\forall x,y\in[0,1]$. Now consider $g(x)=f(\exp{x})$. Then:
+    $$g(x+y)=f(\exp{x}\exp{y})=f(\exp{x})+f(\exp{y})=g(x)+g(y)$$
+    So by \mnameref{LM:cauchy_functional}, we have that $g(x)=cx$ and so $f(x)=c\log x$ for some $c\in\RR$. The second axiom of \mnameref{LM:info} implies $c<0$.
+  \end{proof}
+  \begin{definition}[Entropy]
+    Let $X$ be a random variable. We define the \emph{entropy} of $X$ as:
+    $$\Ent(X):=\Exp(I(X))$$
+    In particular if $X$ has outcomes in $\mathcal{X}$ and it is discrete, then:
+    $$\Ent(X)=-\sum_{x\in\mathcal{X}}p(x)\log_bp(x)$$
+    where $p$ is the pmf. If it is continuous we have:
+    $$\Ent(X)=-\int_{x\in\mathcal{X}}f(x)\log_bf(x)\dd{x}$$
+    where $f$ is the pdf.
+  \end{definition}
+  \begin{definition}
+    Let $X$, $Y$ be two random variables of support $\mathcal{X}$. We define the \emph{Kullback-Leibler divergence} as the quantity:
+    $$D_{\mathrm{KL}}(p\parallel q)=\sum_{x\in\mathcal{X}}p(x)\log\left(\frac{p(x)}{q(x)}\right)$$
+    where $p$, $q$ are the pmf of $X$ and $Y$ (in the discrete case) or as:
+    $$D_{\mathrm{KL}}(f\parallel g)=\int_{x\in\mathcal{X}}f(x)\log\left(\frac{f(x)}{g(x)}\right)\dd{x}$$
+    where $f$, $g$ are the pdf of $X$ and $Y$ (in the continuous case).
+  \end{definition}
+  \begin{remark}
+    Observe that in both discrete and continuous cases we have:
+    $$D_{\mathrm{KL}}(p\parallel q)=\Ent(X,Y)-\Ent(Y)$$
+    where we have denoted $\Ent(X, Y) = -\sum_{x\in\mathcal{X}}p(x)\log q(x)$ (or $\Ent(X, Y) = -\int_{x\in\mathcal{X}}p(x)\log q(x)\dd{x}$) the mixed entropy between $p$ and $q$. Thus, $D_{\mathrm{KL}}(p\parallel q)$ expresses in some sense how different is if $p$ from $q$. The lower $D_{\mathrm{KL}}(p\parallel q)$ is, the more closer is $q$ to $p$.
+  \end{remark}
+  \begin{definition}[Akaike information criterion]
+    Consider the model of \mcref{LM:multiple}. The \emph{Akaike information criterion} (\emph{AIC}) is an estimator of prediction error that is defined as: $$\mathrm{AIC}=2k-2\log(\Phi_n(y;\vf{\hat\beta},\hat\sigma^2))$$
+    where $\Phi_n$ is the pdf of $N_n(\vf{X\beta},\sigma^2\vf{I}_n)$.
+  \end{definition}
+  \begin{remark}
+    The lower $\mathrm{AIC}$ is, the better a model is.
+  \end{remark}
   \subsection{Generalized linear models}
   \subsubsection{Box-Cox transformation}
   \begin{definition}
