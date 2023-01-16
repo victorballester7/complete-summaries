@@ -280,6 +280,13 @@
       \item If $V'(\vf{q})> 0$ $\forall \vf{q}\in \tilde{U}$, then $\vf{p}$ is unstable.
     \end{itemize}
   \end{theorem}
+  \begin{theorem}[Lyapunov's theorem]
+    Let $U\subseteq \RR^n$ be an open set, $\vf{f}:U\rightarrow\RR^n$ be a continuous function and consider the iteration $\vf{x}_{n+1}=\vf{f}(\vf{x}_n)$. Let $\vf{p}\in U$ be a fixed point of $\vf{f}$. Suppose there exists a continuous function $V:U\rightarrow\RR$ and a neighbourhood $\tilde{U}\subseteq U$ of $\vf{p}$ such that $V(\vf{p})=0$ and $V(\vf{x})>0$ $\forall \vf{x}\in\tilde{U}\setminus\{\vf{p}\}$. Then:
+    \begin{itemize}
+      \item If $V(\vf{x}_{n+1})-V(\vf{x}_{n})\leq 0$ $\forall \vf{x}_{n}\in \tilde{U}$, then $\vf{p}$ is stable.
+      \item If $V(\vf{x}_{n+1})-V(\vf{x}_{n})< 0$ $\forall  \vf{x}_{n}\in \tilde{U}$, then $\vf{p}$ is asymptotically stable.
+    \end{itemize}
+  \end{theorem}
   \begin{theorem}[Semi-hyperbolic singular points classification theorem]\label{DS:thmA}
     Consider the differential system
     $$
@@ -671,7 +678,7 @@
   \begin{theorem}
     A semiestable limit cycle $\Gamma_\mu$ of a family of rotated vector fields splits into two simple limit cycles, one stable and one unstable, as the parameter $\mu$ is varied in one sense and it disappears as $\mu$ is varied in the opposite sense.
   \end{theorem}
-  \begin{theorem}[Melinikov's method]
+  \begin{theorem}[Melnikov's method]
     Let $H,P,Q\in\mathcal{C}^1(\RR)$ and $\varepsilon\simeq 0$. Consider the following system of odes:
     \begin{equation*}
       \left\{
@@ -683,15 +690,15 @@
     \end{equation*}
     Let $\vf\gamma_h=\{H(x,y)=h\in\RR\}$ and consider the function: $$M(h)=\int_{\vf\gamma_h}P\dd{x}+Q\dd{y}$$ If $M$ has a simple zero at $h=h^*$, then there exists a cycle limit $\vf\Gamma_\varepsilon$ for $\varepsilon\simeq 0$ such that $\displaystyle\lim_{\varepsilon\to 0}\vf\Gamma_\varepsilon=\vf\gamma_{h^*}$.
   \end{theorem}
-  \subsubsection{Graphics}
+  \subsubsection{Graphs}
   \begin{definition}
-    A \emph{graphic} in a continuous dynamical system is the collection of a set of equilibrium points joined together with orbits which have them as $\alpha$- and $\omega$-limits.
+    A \emph{graph} in a continuous dynamical system is the collection of a set of equilibrium points joined together with orbits which have them as $\alpha$- and $\omega$-limits.
   \end{definition}
   \begin{definition}
     We say that a graph in the system $\vf{x}'=\vf{f}(\vf{x})$ is \emph{non-degenerated} if all the equilibrium points on it are \emph{linear saddles}, that is, saddles $p\in\RR^n$ such that $\det\vf{Df}(p)\ne 0$.
   \end{definition}
   \begin{proposition}
-    Consider a system with a non-degenerated graph $\Gamma$ and such that the differential at each of the $n$ saddles has eigenvalues $\lambda_i$ and $\mu_i$. Then:
+    Consider a system with a non-degenerated graph $\Gamma$ with $n$ equilibria and such that the differential at each of the $n$ saddles has eigenvalues $\lambda_i > 0$ and $\mu_i<0$. Then:
     \begin{enumerate}
       \item If $\displaystyle\prod_{i=1}^n\abs{\frac{\mu_i}{\lambda_i}}<1$, then $\Gamma$ is unstable.
       \item If $\displaystyle\prod_{i=1}^n\abs{\frac{\mu_i}{\lambda_i}}>1$, then $\Gamma$ is stable.
@@ -799,7 +806,7 @@
     \end{itemize}
   \end{proposition}
   \begin{definition}[Period-doubling bifurcation]
-    A \emph{period-doubling bifurcation} occurs when a slight change in a system's parameters causes a new periodic trajectory to emerge from an existing periodic trajectory—the new one having double the period of the original. A \emph{period-halving bifurcation} occurs when a system switches to a new behavior with half the period of the original system.
+    A \emph{period-doubling bifurcation} occurs when a slight change in a system's parameters causes a new periodic trajectory to emerge from an existing periodic trajectory, the new one having double the period of the original. A \emph{period-halving bifurcation} occurs when a system switches to a new behavior with half the period of the original system.
   \end{definition}
   \begin{definition}
     A \emph{period-doubling cascade} is an infinite sequence of period-doubling bifurcations.
@@ -808,10 +815,10 @@
     The logistic map of \mcref{DS:logistic} has a period-doubling cascade starting at $\mu = 3$.
   \end{theorem}
   \begin{definition}[Sharkovskii's order]
-    Consider the following order relation $\shark$ on $\NN$:
+    Consider the following order relation $\sharkgeq$ on $\NN$:
     \begin{center}
       \def\arraystretch{1}
-      \begin{tabular}{c@{ $\shark$ }c@{ $\shark$ }c@{ $\shark$ }c@{ $\shark$ }c@{ $\shark$ }c}
+      \begin{tabular}{c@{ $\sharkgeq$ }c@{ $\sharkgeq$ }c@{ $\sharkgeq$ }c@{ $\sharkgeq$ }c@{ $\sharkgeq$ }c}
         \multicolumn{1}{c}{} & $3$                                   & $5$                                  & $\cdots$             & $(2n+1)$                             & $\cdots$             \\
         $\cdots$             & $2\cdot 3$                            & $2\cdot5$                            & $\cdots$             & $2\cdot(2n+1)$                       & $\cdots$             \\
         $\cdots$             & $2^2\cdot 3$                          & $2^2\cdot5$                          & $\cdots$             & $2^2\cdot(2n+1)$                     & $\cdots$             \\
@@ -822,20 +829,20 @@
     \end{center}
   \end{definition}
   \begin{lemma}
-    $(\NN,\shark)$ is a totally ordered set.
+    $(\NN,\sharkgeq)$ is a totally ordered set.
   \end{lemma}
   \begin{proposition}[Expansive fixed point theorem]
     Let $I\subseteq\RR$ be an interval and $f:I\rightarrow \RR$ be a continuous function such that $I\subseteq f(I)$. Then, $f$ has a fixed point.
   \end{proposition}
   \begin{proposition}
-    Let $f:\RR\rightarrow \RR$ be a continuous function ans suppose that there exists closed intervals $I_0,I_1,\ldots, I_{n-1}$ such that:
+    Let $f:\RR\rightarrow \RR$ be a continuous function and suppose that there exists closed intervals $I_0,I_1,\ldots, I_{n-1}$ such that:
     $$f(I_0)\subseteq I_1,f(I_1)\subseteq I_2,\ldots, f(I_{n-2})\subseteq I_{n-1}, f(I_{n-1})\subseteq I_0$$
     Then, $\exists x\in I_0$ such that $f^n(x)=x$ and $f^j(x)\in I_j$ $\forall j\in\NN$.
   \end{proposition}
   \begin{theorem}[Sharkovskii's theorem]\hfill
     \begin{enumerate}
-      \item Let $I\subseteq\RR$ be an interval and $f:I\rightarrow I$ be a continuous function with only one maximum. If $n\in\Per(f)$, then $\forall m\shark n$ we have $m\in\Per(f)$.
-      \item Given $n\in\NN$, there exists a continuous function $f:I\rightarrow I$ defined on an interval $I\subseteq\RR$ such that $n\in\Per(f)$ and $\forall m\shark n$, $m\notin\Per(f)$.
+      \item Let $I\subseteq\RR$ be an interval and $f:I\rightarrow I$ be a continuous function with only one maximum. If $n\in\Per(f)$, then $m\in\Per(f)$ $\forall m\sharkleq n$.
+      \item Given $n\in\NN$, there exists a continuous function $f:I\rightarrow I$ defined on an interval $I\subseteq\RR$ such that $n\in\Per(f)$ and $\forall m\sharkgeq n$, $m\notin\Per(f)$.
     \end{enumerate}
   \end{theorem}
   \begin{corollary}[Period three theorem]
@@ -879,7 +886,7 @@
     \begin{enumerate}
       \item $\abs{\Per_n(\sigma)}=2^n$
       \item There exists a dense orbit for $\sigma$ in $\Sigma_2$.
-      \item The set of periodic orbits, that is $\bigcup_{n=1}^\infty \Per_n(\sigma)$, of $\sigma$ is dense in $\Sigma_2$.
+      \item The set of periodic orbits of $\sigma$ is dense in the set of orbits of $\sigma$.
     \end{enumerate}
   \end{proposition}
   \begin{definition}
