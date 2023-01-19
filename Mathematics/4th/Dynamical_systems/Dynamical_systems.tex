@@ -7,28 +7,14 @@
   \subsection{Dynamical systems in Euclidean spaces}
   \subsubsection{Introduction}
   \begin{definition}
-    A \emph{dynamical system} is a triplet $(X,G,\Pi)$, where $G$ is a topological abelian group\footnote{That is, $G$ is an abelian group with an inherited topological structure.}, $X$ is a topological space and $\Pi:X\times G\rightarrow X$ is a function such that:
-    \begin{itemize}
-      \item $\Pi(\cdot,t)$ is continuous $\forall t\in G$.
-      \item $\Pi(x,0)=x$ $\forall x\in X$.
-      \item $\Pi(\Pi(t,x),s)=\Pi(x,t+s)$ $\forall s,t\in G$ and $\forall x\in X$.
-    \end{itemize}
-    We say that a dynamical system $(X,G,\Pi)$ is \emph{discrete} if $G=\ZZ$ and we say that it is \emph{continuous} if $G=\RR$. If we have defined our system for $G_{\geq 0}$, we will say that we have a \emph{semidynamical system}.
-  \end{definition}
-  \begin{definition}
-    Let $(X,G,\Pi)$ be a dynamical system and $x\in X$. We define the \emph{orbit} of $x$ as: $$\gamma_x=\gamma_{x,\Pi}:=\{\Pi(x,t):t\in G\}$$
-  \end{definition}
-  \begin{definition}
     Let $(X,G,\Pi)$ be a dynamical system. In the continuous case, we say that $x\in X$ is an \emph{equilibrium point} if $\Pi(x,t)=x$ $\forall t\in G$. In the discrete case, a point $x\in X$ satisfying this property is called a \emph{fixed point}.
   \end{definition}
   \begin{definition}
     Let $(X,G,\Pi)$ be a dynamical system. A \emph{periodic orbit of period $T$} is an orbit of the system that satisfies $\Pi(x,t+T)=\Pi(x,t)$ $\forall t\in G$ and for some $x\in X$.
   \end{definition}
-  \begin{lemma}
-    Let $\vf{f}:\RR^n\rightarrow\RR^n$ be a continuous function such that $\exists M,N\in\RR_{\geq 0}$ with $\|\vf{f}(\vf{x})\|\leq M\|\vf{x}\|+N$. Then, the solutions of the ode $\vf{x}' =\vf{f}(\vf{x})$ are defined for all $t\in\RR$.
-  \end{lemma}
   \begin{theorem}
-    Let $(X,G,\Pi)$ be a dynamical system and $\gamma_x$ be an orbit. Then, there are 3 possible cases for $\gamma_x$:
+    Let $(X,G,\Pi)$ be a dynamical system and $\gamma_x$ be an orbit. Then, there are 3 possible cases for $\gamma_x$.
+
     In the continuous case:
     \begin{enumerate}
       \item $\gamma_x$ is an equilibrium point.
@@ -49,13 +35,6 @@
       \item $\gamma_x=\{x_1,\ldots,x_{n-1},x_n,\ldots,x_{n+T},x_n,\ldots,x_{n+T},\ldots\}$
     \end{enumerate}
   \end{theorem}
-  \subsubsection{Equivalence and conjugacy of dynamical systems}
-  \begin{definition}
-    Let $(X_1,G,\Pi_1)$ and $(X_2,G,\Pi_2)$ be two dynamical systems and $r\in\NN\cup\{0,\infty,\omega\}$. We say that $(X_1,G,\Pi_1)$ and $(X_2,G,\Pi_2)$ are \emph{equivalent dynamical systems} of class $\mathcal{C}^r$ if there exists a diffeomorphism $h:X_1\rightarrow X_2$ of class $\mathcal{C}^r$ such that $\forall x\in X_1$, $h(\gamma_{x,\Pi_1})=\gamma_{h(x),\Pi_2}$ and preserving the orientation of the orbits. In particular, if $r=0$ we say that $(X_1,G,\Pi_1)$ and $(X_2,G,\Pi_2)$ are \emph{topologically equivalent}. That diffeomorphism $h$ is called an \emph{equivalence} (of class $\mathcal{C}^r$) between $(X_1,G,\Pi_1)$ and $(X_2,G,\Pi_2)$.
-  \end{definition}
-  \begin{definition}
-    Let $(X_1,G,\Pi_1)$ and $(X_2,G,\Pi_2)$ two be dynamical systems and $r\in\NN\cup\{0,\infty,\omega\}$. We say that $(X_1,G,\Pi_1)$ and $(X_2,G,\Pi_2)$ are \emph{conjugate dynamical systems} of class $\mathcal{C}^r$ if there exists a diffeomorphism $h:X_1\rightarrow X_2$ of class $\mathcal{C}^r$ such that $\forall (x,t)\in X_1\times G$, $h(\Pi_1(x,t))=\Pi_2(h(x),t)$. In particular, if $r=0$ we say that $(X_1,G,\Pi_1)$ and $(X_2,G,\Pi_2)$ are \emph{topologically conjugate}. That diffeomorphism $h$ is called a \emph{conjugacy} (of class $\mathcal{C}^r$) between $(X_1,G,\Pi_1)$ and $(X_2,G,\Pi_2)$.
-  \end{definition}
   \begin{definition}
     Let $f,g:\RR^2\rightarrow\RR$ be two functions and consider the system of odes:
     \begin{equation}\label{DS:plane}
@@ -80,26 +59,15 @@
     $$
       \left\{
       \begin{aligned}
-        {x}' & = \lambda + p(x,y) \\
+        {x}' & = \lambda x+ p(x,y) \\
         {y}' & = \mu y+ q(x,y)
       \end{aligned}
       \right.
     $$
-    where $p,q\in\RR[x,y]$ and $\deg p,\deg q\geq 2$. TIf $\frac{\lambda}{\mu}\notin\QQ$, then there exists a conjugacy of class $\mathcal{C}^\omega$ between them.
+    where $p,q\in\RR[x,y]$ and $\deg p,\deg q\geq 2$. If $\frac{\lambda}{\mu}\notin\QQ$, then there exists a conjugacy of class $\mathcal{C}^\omega$ between them.
   \end{theorem}
-  \subsubsection{Invariant sets and limit sets}
-  \begin{definition}
-    Let $(X,G,\Pi)$ be a dynamical system and $A\subseteq \RR^n$ be a subset. We say that $A$ is \emph{invariant} if $\gamma_x\subseteq A$ $\forall x\in A$. We say that $A$ is \emph{positively invariant} if ${\gamma_x}^+\subseteq A$ $\forall x\in A$ Analogously, we say that $A$ is \emph{negatively invariant} if ${\gamma_x}^-\subseteq A$ $\forall x\in A$.
-  \end{definition}
   \begin{definition}
     Let $(X,G,\Pi)$ be a dynamical system and $A\subseteq \RR^n$ be an invariant subset. We say that $A$ is \emph{minimal} if it doesn't contain any proper invariant subset.
-  \end{definition}
-  \begin{definition}
-    Let $f(x,y)=0$ be an algebraic curve, $p,q\in\RR[x,y]$ and consider the polynomial system of degree $n$ of \mcref{DS:plane}. We say that $f(x,y)=0$ is an \emph{invariant algebraic curve} under the system of \mcref{DS:plane} if
-    \begin{equation}
-      \pdv{f}{x}(x,y)p(x,y)+\pdv{f}{y}q(x,y)=k(x,y)f(x,y)
-    \end{equation}
-    where $k\in\RR[x,y]$ is called \emph{cofactor} of the invariant curve $f(x,y)=0$\footnote{Note that $\deg k\leq n-1$.}.
   \end{definition}
   \begin{definition}
     A \emph{Kolmogorov system} is a dynamical system of the form:
@@ -123,6 +91,13 @@
   \end{definition}
   \begin{proposition}
     The study of the global dynamics of a homogeneous system with only one equilibrium point (at the origin) is the same as the study of local dynamics at the origin.
+  \end{proposition}
+  \subsubsection{Poincaré map}
+  \begin{proposition}
+    Let $\vf{f}\in\mathcal{C}^1(\RR^2)$, $\vf{x}'=\vf{f}(\vf{x})$ be a planar differential system and $\Sigma\subset \RR^2$ be a transversal section. Then, the Poincaré map $\vf\Pi:\Sigma\rightarrow\Sigma$ is monotone.
+  \end{proposition}
+  \begin{proposition}
+    Let $\vf{f}\in\mathcal{C}^k(\RR^n)$, $\vf{x}'=\vf{f}(\vf{x})$ be a differential system and $\Sigma\subset \RR^k$ be a transversal section. Then, $\vf\Pi\in\mathcal{C}^k(\RR^n)$.
   \end{proposition}
   \subsubsection{Discrete maps}
   \begin{definition}
@@ -179,8 +154,8 @@
       \item If $\vf{p}$ is negatively stable, then $\abs{\lambda}\geq 1$ $\forall\lambda\in\sigma(\vf{Df}(\vf{p}))$.
     \end{itemize}
   \end{proposition}
-  \begin{theorem}
-    Consider the discrete map $$\vf{x}_{n+1}=\vf{f}(\vf{x}_n)$$ where $\vf{f}:\RR^2\rightarrow\RR^2$. Let $\vf{p}\in U$ be a fixed point of $\vf{f}$ and suppose $\sigma(\vf{Df}(\vf{p}))=\{\abs{\lambda_1},\abs{\lambda_2}\}$. Then, $\vf{p}$ will be a
+  \begin{theorem}[Hartman-Grobman theorem]
+    Consider the discrete map $$\vf{x}_{n+1}=\vf{f}(\vf{x}_n)$$ where $\vf{f}:\RR^2\rightarrow\RR^2$. Let $\vf{p}\in U$ be a fixed point of $\vf{f}$ and suppose $\sigma(\vf{Df}(\vf{p}))=\{\lambda_1,\lambda_2\}$. Then, $\vf{p}$ will be a
     \begin{itemize}
       \item {stable node} if $\lambda_1,\lambda_2\in\RR$ and $\abs{\lambda_1},\abs{\lambda_2}<1$.
       \item {unstable node} if $\lambda_1,\lambda_2\in\RR$ and $\abs{\lambda_1},\abs{\lambda_2}>1$.
@@ -583,7 +558,7 @@
   \end{theorem}
   \subsection{Global dynamics in continuous systems}
   \subsubsection{Bifurcation of periodic orbits}
-  \begin{proposition}
+  \begin{theorem}[Bautin's theorem]
     Consider the differential system:
     \begin{equation}
       \left\{
@@ -594,15 +569,6 @@
       \right.
     \end{equation}
     where $p_2$ and $q_2$ are homogeneous polynomials of degree 2. Then, in a neighbourhood of the origin and for $(\alpha,\vf\mu)\simeq 0$ there are at most 3 limit cycles that born from the origin.
-  \end{proposition}
-  \begin{theorem}[Bendixson's theorem]
-    Let $U\subseteq \RR^2$ be an open set and $\vf{f}:U\rightarrow\RR^2$ be a vector field of class $\mathcal{C}^1$ such that $\div \vf{f}$ has constant sign in a simply connected region $R$ and is not identically zero on any subregion of $R$ with positive area. Then, the system $\vf{x}'=\vf{f}(\vf{x})$ does not have periodic orbits that lie entirely on $R$.
-  \end{theorem}
-  \begin{theorem}[Bendixson-Dulac theorem]
-    Let $U\subseteq \RR^2$ be an open set and $\vf{f}:U\rightarrow\RR^2$ be a vector field of class $\mathcal{C}^1$. Suppose that there exists a simply connected region $R$ and a function $h:R\rightarrow\RR$ of class $\mathcal{C}^1$ such that $\div (h\vf{f})$ has constant sign on $R$ and is not identically zero on any subregion of $R$ with positive area. Then, the system $\vf{x}'=\vf{f}(\vf{x})$ doesn't have periodic orbits that lie entirely on $R$.
-  \end{theorem}
-  \begin{theorem}[Generalized Bendixson-Dulac theorem]
-    Let $U\subseteq \RR^2$ be an open set, $n\in\NN\cup\{0\}$ and $\vf{f}:U\rightarrow\RR^2$ be a vector field of class $\mathcal{C}^1$. Suppose that there exists a subset $R\subseteq U$ homeomorphic to a disk with $n$ holes and a function $h:R\rightarrow\RR$ of class $\mathcal{C}^1$ such that $\div (h\vf{f})$ has constant sign on $R$ and is not identically zero on any subregion of $R$ with positive area. Then, the system $\vf{x}'=\vf{f}(\vf{x})$ has at most $n$ periodic orbits that lie entirely on $R$.
   \end{theorem}
   \begin{definition}[Homoclinic bifurcation]
     A \emph{homoclinic bifurcation} is a bifurcation in which a limit cycle collides with a saddle point.
@@ -882,7 +848,7 @@
   \end{proposition}
   \subsubsection{Symbolic dynamics}
   \begin{definition}
-    Consider the set $$\Sigma_2:=\{(s_0,s_1,s_2,\ldots):s_n\in\{0,1\}\ \forall n\in\NN\}$$ and define the following distance on $\Sigma_2$: $$d_2((s_0,s_1,s_2,\ldots),(t_0,t_1,t_2,\ldots))=\sum_{n=0}^\infty \frac{\abs{s_n-t_n}}{2^n}$$
+    Consider the set $$\Sigma_2:=\{(s_0,s_1,s_2,\ldots):s_n\in\{0,1\}\ \forall n\in\NN\cup\{0\}\}$$ and define the following distance on $\Sigma_2$: $$d_2((s_0,s_1,s_2,\ldots),(t_0,t_1,t_2,\ldots))=\sum_{n=0}^\infty \frac{\abs{s_n-t_n}}{2^n}$$
     In order to simplify the notation we will write from now on $s=(s_0,s_1,s_2,\ldots)$ and $t=(t_0,t_1,t_2,\ldots)$.
   \end{definition}
   \begin{lemma}
@@ -898,6 +864,9 @@
   \begin{proposition}
     The shift map is continuous.
   \end{proposition}
+  \begin{proof}
+    Let $\varepsilon>0$ and $s,t\in\Sigma$ with $d_2(s,t)<\delta$. Then: $$d_2(\sigma(s),\sigma(t))=\abs{s_0-t_0} + 2d_2(\sigma(s),\sigma(t))<\varepsilon$$ if $\delta<\frac{\varepsilon - \abs{s_0-t_0}}{2}$.
+  \end{proof}
   \begin{proposition}
     The triplet $(\Sigma_2, \ZZ_{\geq 0}, \sigma)$ is a discrete semidynamical system.
   \end{proposition}
@@ -908,6 +877,18 @@
       \item The set of periodic orbits of $\sigma$ is dense in the set of orbits of $\sigma$.
     \end{enumerate}
   \end{proposition}
+  \begin{sproof}
+    \begin{enumerate}
+      \item Just note that there are $2^n$ different sequences in $\Sigma$ of the form:
+            $$(s_0,\ldots,s_{n-1},s_0,\ldots,s_{n-1},s_0,\ldots,s_{n-1},\ldots)$$
+      \item Consider the sequence of ``all sequences":
+            \begin{multline*}
+              (0,1,0,0,0,1,1,0,1,1,0,0,0,0,0,1,0,1,0,1,0,0,\\ 0,1,1,1,0,1,1,1,0,1,1,1,\ldots)
+            \end{multline*}
+      \item Let $\varepsilon>0$, take $k\in\NN$ such that $\sum_{n=k}^{\infty}\frac{1}{2^n}<\varepsilon$ and let $s=(s_n)\in\Sigma$. The element $$t_s:=(s_0,\ldots,s_{k-1},s_0,\ldots,s_{k-1},s_0,\ldots,s_{k-1},\ldots)$$
+            is periodic and satisfies $d_2(s,t_s)<\varepsilon$.
+    \end{enumerate}
+  \end{sproof}
   \begin{definition}
     Consider the logistic map of \mcref{DS:logistic}. We define the \emph{itinerary} of $x\in\Lambda_\mu$ as the function $S_\mu:\Lambda_\mu\rightarrow\Sigma_2$ defined by $S_\mu(x)=(s_n)$, where:
     $$s_n=
