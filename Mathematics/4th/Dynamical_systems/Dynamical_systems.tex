@@ -817,17 +817,20 @@
     $(\NN,\sharkgeq)$ is a totally ordered set.
   \end{lemma}
   \begin{proposition}[Expansive fixed point theorem]
-    Let $I\subseteq\RR$ be an interval and $f:I\rightarrow \RR$ be a continuous function such that $I\subseteq f(I)$. Then, $f$ has a fixed point.
+    Let $I\subseteq\RR$ be a closed bounded interval and $f:I\rightarrow \RR$ be a continuous function such that $I\subseteq f(I)$. Then, $f$ has a fixed point.
   \end{proposition}
-  \begin{proposition}
-    Let $f:\RR\rightarrow \RR$ be a continuous function and suppose that there exists closed intervals $I_0,I_1,\ldots, I_{n-1}$ such that:
+  \begin{proof}
+    Suppose $I=[a_1,a_2]$. Then, $\exists b_1,b_2\in I$ such that $f(b_1)=a_1$ and $f(b_2)=a_2$. Now use the \mnameref{RVF:ivt}.
+  \end{proof}
+  \begin{lemma}[Itinerary lemma]
+    Let $f:\RR\rightarrow \RR$ be a continuous function and suppose that there exists closed bounded intervals $I_0,I_1,\ldots, I_{n-1}$ such that:
     $$f(I_0)\subseteq I_1,f(I_1)\subseteq I_2,\ldots, f(I_{n-2})\subseteq I_{n-1}, f(I_{n-1})\subseteq I_0$$
     Then, $\exists x\in I_0$ such that $f^n(x)=x$ and $f^j(x)\in I_j$ $\forall j\in\NN$.
-  \end{proposition}
+  \end{lemma}
   \begin{theorem}[Sharkovskii's theorem]\hfill
     \begin{enumerate}
-      \item Let $I\subseteq\RR$ be an interval and $f:I\rightarrow I$ be a continuous function with only one maximum. If $n\in\Per(f)$, then $m\in\Per(f)$ $\forall m\sharkleq n$.
-      \item Given $n\in\NN$, there exists a continuous function $f:I\rightarrow I$ defined on an interval $I\subseteq\RR$ such that $n\in\Per(f)$ and $\forall m\sharkgeq n$, $m\notin\Per(f)$.
+      \item Let $I\subseteq\RR$ be a closed bounded interval and $f:I\rightarrow I$ be a continuous function. If $n\in\Per(f)$, then $m\in\Per(f)$ $\forall m\sharkleq n$.
+      \item Given $n\in\NN$, there exists a continuous function $f:I\rightarrow I$ defined on a closed bounded interval $I\subseteq\RR$ such that $n\in\Per(f)$ and $\forall m\sharkgeq n$, $m\notin\Per(f)$.
     \end{enumerate}
   \end{theorem}
   \begin{corollary}[Period three theorem]
@@ -865,7 +868,7 @@
     The shift map is continuous.
   \end{proposition}
   \begin{proof}
-    Let $\varepsilon>0$ and $s,t\in\Sigma$ with $d_2(s,t)<\delta$. Then: $$d_2(\sigma(s),\sigma(t))=\abs{s_0-t_0} + 2d_2(\sigma(s),\sigma(t))<\varepsilon$$ if $\delta<\frac{\varepsilon - \abs{s_0-t_0}}{2}$.
+    Let $\varepsilon>0$ and $s,t\in\Sigma_2$ with $d_2(s,t)<\delta$. Then: $$d_2(\sigma(s),\sigma(t))=\abs{s_0-t_0} + 2d_2(\sigma(s),\sigma(t))<\varepsilon$$ if $\delta<\frac{\varepsilon - \abs{s_0-t_0}}{2}$.
   \end{proof}
   \begin{proposition}
     The triplet $(\Sigma_2, \ZZ_{\geq 0}, \sigma)$ is a discrete semidynamical system.
@@ -879,13 +882,13 @@
   \end{proposition}
   \begin{sproof}
     \begin{enumerate}
-      \item Just note that there are $2^n$ different sequences in $\Sigma$ of the form:
+      \item Just note that there are $2^n$ different sequences in $\Sigma_2$ of the form:
             $$(s_0,\ldots,s_{n-1},s_0,\ldots,s_{n-1},s_0,\ldots,s_{n-1},\ldots)$$
       \item Consider the sequence of ``all sequences":
             \begin{multline*}
               (0,1,0,0,0,1,1,0,1,1,0,0,0,0,0,1,0,1,0,1,0,0,\\ 0,1,1,1,0,1,1,1,0,1,1,1,\ldots)
             \end{multline*}
-      \item Let $\varepsilon>0$, take $k\in\NN$ such that $\sum_{n=k}^{\infty}\frac{1}{2^n}<\varepsilon$ and let $s=(s_n)\in\Sigma$. The element $$t_s:=(s_0,\ldots,s_{k-1},s_0,\ldots,s_{k-1},s_0,\ldots,s_{k-1},\ldots)$$
+      \item Let $\varepsilon>0$, take $k\in\NN$ such that $\sum_{n=k}^{\infty}\frac{1}{2^n}<\varepsilon$ and let $s=(s_n)\in\Sigma_2$. The element $$t_s:=(s_0,\ldots,s_{k-1},s_0,\ldots,s_{k-1},s_0,\ldots,s_{k-1},\ldots)$$
             is periodic and satisfies $d_2(s,t_s)<\varepsilon$.
     \end{enumerate}
   \end{sproof}
