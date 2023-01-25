@@ -6,6 +6,8 @@ Summary of each subject in Mathematics and Physics degree at UAB (Universitat Au
 
 > Remember: When writing the proofs of the remaining summaries, reread and review the `\emph{}` definitions in order to appear properly in the index.
 
+> Remember: Do not use `\multline*{}` as it leave a undesired initial space. Use `\equation{}` + `\split{}` instead.
+
 - Mathematics 1
   - Fundamentals of mathematics
     - Proofs

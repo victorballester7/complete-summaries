@@ -7,7 +7,7 @@
   \subsection{PDEs in Physics}
   \subsubsection{Wave and membrane dynamics}
   \begin{proposition}[Wave equation]
-    Consider a one-dimensional string of length $L$ and constant $k(x)$, $\rho$ be its linear density and $u(x,t)$ be the displacement of the point $x$ at the time $t$ from its equilibrium point. Then, the dynamics of the string are given by: $${(\rho u_{t})}_t={(ku_x)}_x$$ If both $k$ and $\rho$ are constant, this equation is sometimes written as:
+    Consider a one-dimensional string of length $L$ and constant $k(x)$, $\rho(x,t)$ be its linear density and $u(x,t)$ be the displacement of the point $x$ at the time $t$ from its equilibrium point. Then, the dynamics of the string are given by: $${(\rho u_{t})}_t={(ku_x)}_x$$ If both $k$ and $\rho$ are constant, this equation is sometimes written as:
     \begin{equation}
       u_{tt}=c^2u_{xx}
     \end{equation}
@@ -164,43 +164,45 @@
     \end{theorem}
   \end{important}
   \begin{proof}
-    If there were a point $\vf{x}_0\in \Omega$ such that without loss of generality $f(\vf{x}_0)>0$, the continuity would imply the existence of an open set $U$ containing $\vf{x}_0$ and a $\varepsilon >0$ such that $f(\vf{x})>\varepsilon$ $\forall \vf{x}\in U$. Then we would have: $$0=\dotsint_U f(\vf{x})\dd{\vf{x}}>\varepsilon\abs{U}>0$$
+    If there were a point $\vf{x}_0\in \Omega$ such that (without loss of generality) $f(\vf{x}_0)>0$, the continuity would imply the existence of an open set $U$ containing $\vf{x}_0$ and a $\varepsilon >0$ such that $f(\vf{x})>\varepsilon$ $\forall \vf{x}\in U$. But then we would have: $$0=\dotsint_U f(\vf{x})\dd{\vf{x}}>\varepsilon\abs{U}>0$$
   \end{proof}
-  \begin{theorem}\label{PDE:postfundamentallemma}
+  \begin{corollary}\label{PDE:postfundamentallemma}
     Let $\Omega\subset\RR^n$ be a domain and $f:\Omega\rightarrow\RR$ be a continuous function such that $$\dotsint_\Omega f(\vf{x})\varphi(\vf{x})\dd{\vf{x}}=0$$ for all $\varphi\in\mathcal{C}_0^\infty(\Omega)$. Then, $f=0$ in $\Omega$.
-  \end{theorem}
+  \end{corollary}
   \begin{proof}
     For any open subset $U\subseteq \Omega$ let $(\varphi_n)\in\mathcal{C}_0^\infty(\Omega)$ be a sequence of functions that converge to $\indi{U}$. Then by the \mnameref{RFA:dominated} we have:
     \begin{align*}
       0 & = \lim_{n\to\infty}\dotsint_\Omega f(\vf{x})\varphi_n(\vf{x})\dd{\vf{x}}=\dotsint_\Omega f(\vf{x})\indi{U}(\vf{x})\dd{\vf{x}} \\
         & =\dotsint_U f(\vf{x})\dd{\vf{x}}
     \end{align*}
-    Now use \mnameref{PDE:fundamentallemma}.
+    Now use the \mnameref{PDE:fundamentallemma}.
   \end{proof}
   \begin{proposition}
-    Let $\Omega\subseteq\RR^3$ be a closed region and $f,g,k:\Omega\rightarrow\RR$ be functions of class $\mathcal{C}^1(\Omega)$. Then:
+    Let $\Omega\subseteq\RR^n$ be a closed region and $k\in\mathcal{C}^1(\Omega)$ and $f,g\in\mathcal{C}^2(\Omega)$. Then:
     \begin{gather*}
-      \iiint_\Omega f\div(k\grad{g})                                =\iint_{\Fr{\Omega}}fk\grad{g}\cdot\dd{\vf{S}} -\iiint_\Omega k\grad{f}\cdot\grad{g} \\
-      \iiint_\Omega f\div(k\grad{g})-g\div(k\grad{f})  =\iint_{\Fr{\Omega}} k\left(f\grad{g}-g\grad{f}\right)\cdot\dd{\vf{S}}
+      \idotsint_\Omega f\div(k\grad{g})                                =\idotsint_{\Fr{\Omega}}fk\grad{g}\cdot\dd{\vf{S}} -\idotsint_\Omega k\grad{f}\cdot\grad{g} \\
+      \begin{split}
+        \idotsint_\Omega f\div(k\grad{g})-g\div(k\grad{f})= \hspace{2cm}\\\hspace{2cm}=\idotsint_{\Fr{\Omega}} k\left(f\grad{g}-g\grad{f}\right)\cdot\dd{\vf{S}}
+      \end{split}
     \end{gather*}
   \end{proposition}
   \begin{sproof}
-    For the first one apply \mnameref{FSV:divergencethm} with the vector field $\vf{X}_1 = kf\grad{g}$ and for the second one, use the previous formula and the symmetry of $f$ and $g$.
+    For the first one apply the \mnameref{DG:divergenceRn} with the vector field $\vf{X} = kf\grad{g}$ and for the second one, use the previous formula and the symmetry of $f$ and $g$.
   \end{sproof}
   \begin{corollary}[Green identities]\label{PDE:greenidentities}
-    Let $\Omega\subseteq\RR^3$ be a closed region and $f,g:\Omega\rightarrow\RR$ be functions of class $\mathcal{C}^1(\Omega)$. Then:
+    Let $\Omega\subseteq\RR^n$ be a closed region and $f,g\in\mathcal{C}^2(\Omega)$. Then:
     \begin{gather*}
-      \iiint_\Omega f\laplacian{g}                              =\iint_{\Fr{\Omega}}f\grad{g}\cdot\dd{\vf{S}} -\iiint_\Omega \grad{f}\cdot\grad{g} \\
-      \iiint_\Omega f\laplacian{g}-g\laplacian{f}  =\iint_{\Fr{\Omega}} \left(f\grad{g}-g\grad{f}\right)\cdot\dd{\vf{S}}
+      \idotsint_\Omega f\laplacian{g}                              =\idotsint_{\Fr{\Omega}}f\grad{g}\cdot\dd{\vf{S}} -\idotsint_\Omega \grad{f}\cdot\grad{g} \\
+      \idotsint_\Omega f\laplacian{g}-g\laplacian{f}  =\idotsint_{\Fr{\Omega}} \left(f\grad{g}-g\grad{f}\right)\cdot\dd{\vf{S}}
     \end{gather*}
   \end{corollary}
   \subsubsection{Method of characteristics}
   \begin{proposition}[Method of characteristics]
-    Consider the following quasilinear PDE
+    Consider the following quasilinear partial differential equation
     \begin{equation}\label{PDE:char}
       a(x,t,u)\pdv{u}{x}+b(x,t,u)\pdv{u}{t}=c(x,t,u)
     \end{equation}
-    with initial condition $u(x_0(s),t_0(s))=u_0(s)$. The solutions of this equation are the integral curves (called \emph{characteristic curves}) that form the surface of the graph $u(x,t)$. These are given by:
+    with initial condition $u(x_0(s),t_0(s))=u_0(s)$, $s\in I$ where $I\subseteq \RR$ is an interval. The solutions of this equation are the integral curves (called \emph{characteristic curves}) that form the surface of the graph $u(x,t)$. These are given by the solution of the system
     \begin{equation*}
       \left\{
       \begin{aligned}
@@ -220,7 +222,7 @@
         \pdv{u}{t} \\
         -1
       \end{pmatrix}=0$$
-    And $\transpose{(\pdv{u}{x},\pdv{u}{t}, -1)}$ is perpendicular to the surface of $u(x,t)$.
+    And $\transpose{(\pdv{u}{x},\pdv{u}{t}, -1)}$ is perpendicular to the surface of $u(x,t)$. Now for each $s\in I$ it suffices to find a curve $C\subset\RR^3$ parametrized by $\tau$ whose tangent vector is $\transpose{(a(x,t,u), b(x,t,u), c(x,t,u))}$.
   \end{sproof}
   \subsubsection{Traffic flow equation}
   \begin{proposition}[Traffic flow equation]
@@ -242,14 +244,14 @@
     \end{equation}
   \end{proposition}
   \begin{sproof}
-    Intrate \mcref{PDE:trafficintegral} with respect to $t$ between $t_1$ and $t_2$.
+    Integrate \mcref{PDE:trafficintegral} with respect to $t$ between $t_1$ and $t_2$.
   \end{sproof}
   \begin{proposition}
     In the hypothesis of the traffic equation, an observer situated at $x(t)$ will observe a constant density $\rho(x(t),t)$ if $x'(t)=q'(\rho(x(t),t))$ (that is, if the frame of reference situated at $x(t)$ is moving at a speed of $q'(\rho(x(t),t))$)\footnote{Note that this
       velocity may be different from the velocity at which an individual car moves.}. Therefore, $\rho$ is constant in each line of the form $x(t)=x_0+q'(\rho(x_0,0))t$ (\emph{characteristic line}) (see \mcref{PDE:traffic-char}). This determines $\rho(x,t)$ provided that we already know the initial condition $\rho_0(x):=\rho(x,0)$, $x\in\RR$. In other words, $\rho(x,t)$ is the solution $\xi$ of the density at the appropriate $x$-intercept of the line passing through $(x,t)$: $$\xi=\rho_0(x-q'(\xi)t)$$
   \end{proposition}
   \begin{sproof}
-    Note that $x'(t)=q'(\rho(x(t),t))$ implies $\dv{\rho(x(t),t)}{t}=0$. On the other hand, if $\xi$ is the density at $(x,t)$, we have: $$x=x_0+q'(\xi)t$$ where $x_0$ is the $x$-intercept at $t=0$ of the line passing through $(x,t)$ and slope $q'(\xi)$. Rearranging the previous equation and applying $\rho_0$ we get the desired result:
+    Note that $x'(t)=q'(\rho(x(t),t))$ implies $\dv{\rho(x(t),t)}{t}=0$. On the other hand, if $\xi$ is the density at $(x,t)$, we have: $$x=x_0+q'(\xi)t$$ where $x_0$ is the $x$-intercept at $t=0$ of the line passing through $(x,t)$ with slope $q'(\xi)$. Rearranging the previous equation and applying $\rho_0$ we get the desired result:
     $$x_0=x-q'(\xi)t\implies \xi=\rho(x_0)=\rho_0(x-q'(\xi)t)$$
   \end{sproof}
   \begin{center}
@@ -261,7 +263,7 @@
     \end{minipage}
   \end{center}
   \begin{proposition}[Rankine-Hugoniot equation]
-    Let $x_\mathrm{s}(t)$ be the position at time $t$ of a (jump) discontinuity in the function $\rho$. Then: $$\dv{x_\mathrm{s}}{t}=\frac{[q]}{[\rho]}=\frac{{(\rho u)}_+-{(\rho u)}_-}{\rho_+-\rho_-}$$ where the notation $[x(t)]$ refers to: $$[x(t_0)]:=x_+(t_0)-x_-(t_0):=\lim_{t\to{t_0}^+}x(t)-\lim_{t\to{t_0}^-}x(t)$$
+    In the hypothesis of the traffic equation, let $x_\mathrm{s}(t)$ be the position at time $t$ of a (jump) discontinuity in the function $\rho$. Then: $$\dv{x_\mathrm{s}}{t}=\frac{[q]}{[\rho]}=\frac{{(\rho u)}_+-{(\rho u)}_-}{\rho_+-\rho_-}$$ where the notation $[x(t)]$ refers to: $$[x(t_0)]:=x_+(t_0)-x_-(t_0):=\lim_{t\to{t_0}^+}x(t)-\lim_{t\to{t_0}^-}x(t)$$
   \end{proposition}
   \begin{sproof}
     Let $a(t)\leq x_\mathrm{s}(t)\leq b(t)$ and $t_2\geq t_1$. Then, using \mcref{PDE:trafficintegral2} we have:
@@ -272,11 +274,11 @@
          & =\int_{t_1}^{t_2}[\rho(a(t),t)(u-a') -\rho(b(t),t)(u-b')]\dd{t}
       \end{aligned}
     \end{multline*}
-    Letting $a(t)\nearrow x_\mathrm{s}(t)\swarrow b(t)$ and using \mnameref{PDE:fundamentallemma} we get: $$[\rho(x_\mathrm{s}(t),t)(u-{x_\mathrm{s}}')]_-- [\rho(x_\mathrm{s}(t),t)(u-{x_\mathrm{s}}')]_+=0$$
+    Letting $a(t)\nearrow x_\mathrm{s}(t)\swarrow b(t)$ and using the \mnameref{PDE:fundamentallemma} we get: $$[\rho(x_\mathrm{s}(t),t)(u-{x_\mathrm{s}}')]_-- [\rho(x_\mathrm{s}(t),t)(u-{x_\mathrm{s}}')]_+=0$$
     Rearranging the terms we get the desired result.
   \end{sproof}
   \begin{lemma}[Entropy condition]
-    We will have existence and uniqueness of solutions for the traffic flow equation if: $$q'(\rho_+)<\frac{[q]}{[\rho]}< q'(\rho_-)$$
+    In the hypothesis of the traffic equation, we will have existence and uniqueness of solutions for the traffic flow equation if: $$q'(\rho_+)<\frac{[q]}{[\rho]}< q'(\rho_-)$$
   \end{lemma}
   % \begin{sproof}
   %   If $\frac{[q]}{[\rho]}=q'(\rho)$, the statement is clear by assuming the existence of two solutions an integrating 
@@ -284,10 +286,15 @@
   \subsection{Wave equation}
   \begin{proposition}
     Let $u:\RR^2\rightarrow\RR$ be a two-times differentiable function such that:
-    \begin{multline*}
-      \left.\int_{x_1}^{x_2}\rho u_t\dd{x}\right|_{t=t_2}-\left.\int_{x_1}^{x_2}\rho u_t\dd{x}\right|_{t=t_1}=\left.\int_{t_1}^{t_2}ku_x\dd{t}\right|_{x=x_2}-\\-\left.\int_{t_1}^{t_2}ku_x\dd{t}\right|_{x=x_1}+\int_{t_1}^{t_2}\int_{x_1}^{x_2}f(x,t)\dd{x}\dd{t}
-    \end{multline*}
-    for certain functions $\rho(x,t)$, $k(x)$, $f(x,t)$. Also suppose that we can freely exchange the derivative and the integral sign\footnote{From now on, we will simply assume that $u$ satisfies these properties.}. Then, $u(x,t)$ is a solution to the wave equation with driven force $f$:
+    % \begin{multline*}
+    %   \left.\int_{x_1}^{x_2}\rho u_t\dd{x}\right|_{t=t_2}-\left.\int_{x_1}^{x_2}\rho u_t\dd{x}\right|_{t=t_1}=\left.\int_{t_1}^{t_2}ku_x\dd{t}\right|_{x=x_2}-\\-\left.\int_{t_1}^{t_2}ku_x\dd{t}\right|_{x=x_1}+\int_{t_1}^{t_2}\int_{x_1}^{x_2}f(x,t)\dd{x}\dd{t}
+    % \end{multline*}
+    \begin{equation*}
+      \begin{split}
+        \int_{x_1}^{x_2}(\rho u_t)(x,t_2)\dd{x}-\int_{x_1}^{x_2}(\rho u_t)(x,t_1)\dd{x}=\int_{t_1}^{t_2}(ku_x)(x_2,t)\dd{t}-\\-\int_{t_1}^{t_2}(ku_x)(x_1,t)\dd{t}+\int_{t_1}^{t_2}\int_{x_1}^{x_2}f(x,t)\dd{x}\dd{t}
+      \end{split}
+    \end{equation*}
+    for certain smooth functions $\rho(x,t)$, $k(x)$, $f(x,t)$. Then, $u(x,t)$ is a solution to the wave equation with driven force $f$:
     $${(\rho u_{t})}_t-{(ku_x)}_x=f(x,t)$$
     If $f=0$ and $\rho$ and $k$ are constant, the equation is sometimes rewritten as:
     \begin{equation}\label{PDE:waveeq}
@@ -295,53 +302,74 @@
     \end{equation}
   \end{proposition}
   \begin{sproof}
-    Let $x_1 = x$, $x_2=x+h$, $t_1=t$, $t_2=t+h$, multiply the equation by $\frac{1}{h^2}$ and make $h\to 0$.
+    Rewrite the equation as:
+    $$\int_{t_1}^{t_2}\pdv{}{t}\int_{x_1}^{x_2}\rho u_t\dd{x}\dd{t}=\int_{x_1}^{x_2}\pdv{}{x}\int_{t_1}^{t_2}ku_x\dd{t}\dd{x}+\int_{t_1}^{t_2}\int_{x_1}^{x_2}f(x,t)\dd{x}\dd{t}$$
+    Now use the regularity of the functions and the \mnameref{PDE:fundamentallemma} to get the result.
   \end{sproof}
   \subsubsection{Solution on \texorpdfstring{$\RR$}{R}}
   \begin{proposition}[D'Alembert formula]\label{PDE:propdAlembert}
-    Let $u_0,v_0:\RR\rightarrow\RR$ be functions. The solution $u(x,t)$ to the wave equation of constant coefficients with initial conditions $u(x,0)=u_0(x)$ and $u_t(x,0)=v_0(x)$ is:
+    Let $u_0,v_0:\RR\rightarrow\RR$ be functions. The solution $u(x,t)$ to the problem
+    \begin{equation*}
+      \left\{
+      \begin{aligned}
+        u_{tt}   & =c^2u_{xx} \\
+        u(x,0)   & =u_0(x)    \\
+        u_t(x,0) & =v_0(x)
+      \end{aligned}
+      \right.
+    \end{equation*} is:
     \begin{equation}\label{PDE:dAlembert}
       u(x,t)=\frac{u_0(x+ct)+u_0(x-ct)}{2}+\frac{1}{2c}\int_{x-ct}^{x+ct}v_0(s)\dd{s}
     \end{equation}
   \end{proposition}
   \begin{sproof}
-    \mcref{PDE:waveeq} with the coordinates $(\xi, \eta) = (x+ ct,x-ct)$ is simplified to $u_{\xi\eta}=0$. Thus, $u(x,t)=\phi(x+ct)+\psi(x-ct)$. Now use the initial conditions to conclude:
+    \mcref{PDE:waveeq} with the coordinates $(\xi, \eta) = (x+ ct,x-ct)$ is simplified to $u_{\xi\eta}=0$. Thus, $u(x,t)=\phi(x+ct)+\psi(x-ct)$ for certain smooth functions $\phi$, $\psi$. Now use the initial conditions to conclude
     $$
       \begin{cases}
         \displaystyle \phi(y)=\frac{1}{2}u_0(y)+\frac{1}{2c}\int_0^yv_0(s)\dd{s}+C \\
         \displaystyle \psi(y) = \frac{1}{2}u_0(y)-\frac{1}{2c}\int_0^yv_0(s)\dd{s}-C
       \end{cases}
     $$
+    for certain constant $C\in\RR$.
   \end{sproof}
+  \begin{remark}
+    \mnameref{PDE:dAlembert} show us that the state at $(x,t)$ depends entirely on the quantities $x+ct$ and $x-ct$ and the functions $\phi(x+ct)$, $\psi(x-ct)$ represent two waves traveling at velocities $-c$ and $c$ respectively. Hence, a small perturbation far from $(x,t)$ will not affect $u(x,t)$ in a neighborhood of $(x,t)$ but it will do it eventually.
+  \end{remark}
   \begin{theorem}
-    Let $u_0,v_0:\RR\rightarrow\RR$ and $f:\RR^2\rightarrow\RR$ be functions. The solution to the wave equation of constant coefficients with driven force $f$
+    Let $u_0,v_0:\RR\rightarrow\RR$ and $f:\RR^2\rightarrow\RR$ be functions. The solution to the problem
+    The solution $u(x,t)$ to the problem
     \begin{equation}\label{PDE:waveeqdriven}
-      u_{tt}=c^2 u_{xx} +f
-    \end{equation}
-    and initial conditions $u(x,0)=u_0(x)$ and $u_t(x,0)=v_0(x)$ is:
+      \left\{
+      \begin{aligned}
+        u_{tt}   & =c^2 u_{xx} +f \\
+        u(x,0)   & =u_0(x)        \\
+        u_t(x,0) & =v_0(x)
+      \end{aligned}
+      \right.
+    \end{equation} is:
     \begin{multline*}
       u(x,t)=\frac{u_0(x-ct)+u_0(x+ct)}{2}+\frac{1}{2c}\int_{x-ct}^{x+ct}v_0(s)\dd{s}+\\+\frac{1}{2c}\int_0^t\int_{x-c(t-\tau)}^{x+c(t-\tau)}f(s,\tau)\dd{s}\dd{\tau}
     \end{multline*}
     If we think $u(t):x\rightarrow u(x,t)$, then we can write the expression above more compactly as: $$u(t)=T'(t)u_0+T(t)v_0+\int_0^tT(t-\tau) f(\tau)\dd{\tau}$$ where the operator $T(t)$ is defined as: $$\left[T(t)\varphi\right](x)=\frac{1}{2c}\int_{x-ct}^{x+ct}\varphi(s)\dd{s}$$
   \end{theorem}
   \begin{sproof}
-    \mcref{PDE:waveeq} with the coordinates $(\xi, \eta) = (x+ ct,x-ct)$ is simplified to $u_{\xi\eta}=-\frac{f}{4c^2}$.
+    \mcref{PDE:waveeqdriven} with the coordinates $(\xi, \eta) = (x+ ct,x-ct)$ is simplified to $u_{\xi\eta}=-\frac{f}{4c^2}$. Now integrate this equation using the \mnameref{FSV:changeofvariable}.
   \end{sproof}
   \begin{theorem}\label{PDE:greenwave}
-    Let $U\subseteq\RR^2$ be an open set, $u:U\rightarrow\RR$ be a function such that it satisfies the wave equation with density $\rho(x,t)$, constant $k(x)$ and driven force $f(x,t)$. Then:
+    Let $U\subseteq\RR^2$ be an open set and $u:U\rightarrow\RR$ be a function. Then, $u$ satisfies the wave equation with density $\rho(x,t)$, constant $k(x)$ and driven force $f(x,t)$ if and only if:
     $$\int_{\Fr{U}}\rho u_t\dd{x}+k u_x\dd{t}=-\iint_Uf(x,t)\dd{x}\dd{t}$$
   \end{theorem}
   \begin{sproof}
-    Apply \mnameref{FSV:green} to the vector field $\vf{X}= (\rho u_t,k u_x)$.
+    It is a consequence of the \mnameref{FSV:green} with the vector field $\vf{X}= (\rho u_t,k u_x)$ and the \mnameref{PDE:fundamentallemma}.
   \end{sproof}
   \begin{proposition}
-    Let $U\subset\RR^2$ be an open set, $u:U\rightarrow\RR$ be a function such that it satisfies the wave equation with constant $c^2=\frac{k}{\rho}$ and no driven force. Consider the four points $A$, $B$, $C$ and $D$ as shown in \mcref{PDE:waves-char}. Then:
+    Let $U\subset\RR^2$ be an open set, $u:U\rightarrow\RR$ be a function. Then, $u$ satisfies the wave equation with constant $c^2=\frac{k}{\rho}$ and no driven force if and only if for any four points $A$, $B$, $C$ and $D$ delimiting the boundary of an open set $V\subseteq U$ (as in \mcref{PDE:waves-char}) we have:
     \begin{equation}\label{PDE:charwaveseq}
       u(A)-u(B)+u(C)-u(D)=0
     \end{equation}
   \end{proposition}
   \begin{sproof}
-    Use \mcref{PDE:greenwave} together with the fact that $\dd{\xi}=\dd{x}+c\dd{t}=0$ and $\dd{\eta}=\dd{x}-c\dd{t}=0$ in the respective characteristic lines.
+    Prove $$\int_{\Fr{V}}u_t\dd{x}+c^2 u_x\dd{t}=2c(u(A)-u(B)+u(C)-u(D))$$ and then use \mcref{PDE:greenwave}. To show this latter equality note that $u_x=u_\xi+u_\eta$, $u_t=c(u_\xi-u_\eta)$ and use the fact that $\dd{\xi}=\dd{x}+c\dd{t}=0$ and $\dd{\eta}=\dd{x}-c\dd{t}=0$ in the respective characteristic lines of $\Fr{V}$.
   \end{sproof}
   \begin{center}
     \begin{minipage}{\linewidth}
@@ -358,7 +386,7 @@
     Enter the derivate inside the integral and integrate by parts.
   \end{sproof}
   \begin{corollary}
-    The wave equation $\rho u_{tt}-ku_{xx}=f$ with initial condition $u(x,0)=u_0(x)$ and $u_t(x,0)=v_0(x)$ (with compact support) has existence and uniqueness of solutions.
+    The problem of \mcref{PDE:waveeqdriven} in which the functions $u_0$ and $v_0$ have compact support has existence and uniqueness of solutions.
   \end{corollary}
   \begin{sproof}
     The existence has already been proved for a sufficiently regular $f$. For the uniqueness, suppose $u_1$ and $u_2$ are two solutions. Then, $u=u_1-u_2$ is a solution to $\rho u_{tt}-ku_{xx}=0$ with initial conditions $u(x,0)=0$ and $u_t(x,0)=0$. Moreover: $$\int_{-\infty}^\infty\left(\frac{1}{2}\rho{u_t}^2+\frac{1}{2}k{u_x}^2\right)\dd{x}=0$$ because it is constant and attains the value of 0 at $t=0$. This implies $u=0$ using again the initial conditions.
@@ -375,22 +403,23 @@
       \end{aligned}
       \right.
     $$
+    where $u_0,v_0:(0,\infty)\rightarrow\RR$.
     Then, the d'Alembert solution is $$u(x,t)=\phi(x+ct)+\psi(x-ct)$$ where:
     \begin{align*}
-      \phi(x) & =\frac{1}{2}u_0(x)+\frac{1}{2c}\int_0^xv_0(s)\dd{s}\quad\text{for }x\geq 0 \\
-      \psi(x) & =
+      \phi(y) & =\frac{1}{2}u_0(y)+\frac{1}{2c}\int_0^yv_0(s)\dd{s}\quad\text{for }y\geq 0 \\
+      \psi(y) & =
       \begin{cases}
-        \displaystyle\frac{1}{2}u_0(x)-\frac{1}{2c}\int_0^xv_0(s)\dd{s} & \text{if } x\geq 0 \\
-        \displaystyle -\phi(-x)+\alpha(-x/c)                            & \text{if } x< 0
+        \displaystyle\frac{1}{2}u_0(y)-\frac{1}{2c}\int_0^yv_0(s)\dd{s} & \text{if } y\geq 0 \\
+        \displaystyle -\phi(-y)+\alpha(-y/c)                            & \text{if } y< 0
       \end{cases}
     \end{align*}
     In particular, if $\alpha(t)=0$ and we make the odd extension of both $u_0$ and $v_0$, we have:
     \begin{equation*}
-      \psi(x) =\frac{1}{2}u_0(x)-\frac{1}{2c}\int_0^xv_0(s)\dd{s} \quad\forall x\in\RR
+      \psi(y) =\frac{1}{2}u_0(y)-\frac{1}{2c}\int_0^yv_0(s)\dd{s} \quad\forall y\in\RR
     \end{equation*}
   \end{proposition}
   \begin{sproof}
-    We already saw the expressions of $\phi$ and $\psi$ for $x\geq 0$ in \mnameref{PDE:propdAlembert}. For $x<0$, note that: $$\alpha(t)=u(0,t)=\phi(ct)+\psi(-ct)$$
+    We already saw the expressions of $\phi$ and $\psi$ for $y\geq 0$ in \mnameref{PDE:propdAlembert}. For $y<0$, note that: $$\alpha(t)=u(0,t)=\phi(ct)+\psi(-ct)$$
   \end{sproof}
   \begin{proposition}
     Consider the wave equation $u_{tt}=c^2u_{xx}$ with initial conditions:
@@ -403,43 +432,55 @@
       \end{aligned}
       \right.
     $$
-    Then, the d'Alembert solution is $$u(x,t)=\phi(x+ct)+\psi(x-ct)$$ where:
+    where $u_0,v_0:(0,\infty)\rightarrow\RR$. Then, the d'Alembert solution is $$u(x,t)=\phi(x+ct)+\psi(x-ct)$$ where:
     \begin{align*}
-      \phi(x) & =\frac{1}{2}u_0(x)+\frac{1}{2c}\int_0^xv_0(s)\dd{s}\quad\text{for }x\geq 0 \\
-      \psi(x) & =
+      \phi(y) & =\frac{1}{2}u_0(y)+\frac{1}{2c}\int_0^yv_0(s)\dd{s}\quad\text{for }y\geq 0 \\
+      \psi(y) & =
       \begin{cases}
-        \displaystyle\frac{1}{2}u_0(x)-\frac{1}{2c}\int_0^xv_0(s)\dd{s} & \text{if } x\geq 0 \\
-        \displaystyle\phi(-x)+\int_0^x\beta(-s/c)\dd{s}                 & \text{if } x< 0
+        \displaystyle\frac{1}{2}u_0(y)-\frac{1}{2c}\int_0^yv_0(s)\dd{s} & \text{if } y\geq 0 \\
+        \displaystyle\phi(-y)+\int_0^y\beta(-s/c)\dd{s}                 & \text{if } y< 0
       \end{cases}
     \end{align*}
     In particular, if $\beta(t)=0$ and we make the even extension of both $u_0$ and $v_0$, we have:
     \begin{equation*}
-      \psi(x) =\frac{1}{2}u_0(x)-\frac{1}{2c}\int_0^xv_0(s)\dd{s} \quad\forall x\in\RR
+      \psi(y) =\frac{1}{2}u_0(y)-\frac{1}{2c}\int_0^yv_0(s)\dd{s} \quad\forall y\in\RR
     \end{equation*}
   \end{proposition}
   \begin{sproof}
     We already saw the expressions of $\phi$ and $\psi$ for $x\geq 0$ in \mnameref{PDE:propdAlembert}. For $x<0$, note that: $$\psi'(x)=-\phi'(-x)+\beta(-x/c)$$ because $\beta(t)=u_x(0,t)=\phi'(ct)+\psi'(-ct)$.
   \end{sproof}
   \subsubsection{Solution with two fixed endpoints}
+  Consider a string of length $L$ with its two endpoints fixed. In this section we will discuss how to obtain the solutions of its movement solving the following boundary problem:
+  \begin{equation}\label{PDE:fixedendpoints}
+    \left\{
+    \begin{aligned}
+      u_{tt}   & =c^2u_{xx} \\
+      u(x,0)   & =u_0(x)    \\
+      u_t(x,0) & =v_0(x)    \\
+      u(0,t)   & =0         \\
+      u(L,t)   & =0
+    \end{aligned}
+    \right.
+  \end{equation}
   \begin{definition}
-    Consider a string of length $L$ with its two endpoints fixed. In this section we will discuss how to obtain the solutions of its movement solving following boundary problem:
-    \begin{equation}\label{PDE:fixedendpoints}
-      \left\{
-      \begin{aligned}
-        u_{tt}   & =c^2u_{xx} \\
-        u(x,0)   & =u_0(x)    \\
-        u_t(x,0) & =v_0(x)    \\
-        u(0,t)   & =0         \\
-        u(L,t)   & =0
-      \end{aligned}
-      \right.
-    \end{equation}
+    Let $f:[0,T]\rightarrow\RR$ be a function. We define the \emph{even periodic extension} of $f$ as the function $f_{\mathrm{e}}$ such that:
+    \begin{itemize}
+      \item $f_{\mathrm{e}}(x)=f(x)$ for $x\in[0, T]$.
+      \item $f_{\mathrm{e}}$ is even.
+      \item $f_{\mathrm{e}}$ is $2T$-periodic.
+    \end{itemize}
+    We define the \emph{odd periodic extension} of $f$ as the function $f_{\mathrm{o}}$ such that:
+    \begin{itemize}
+      \item $f_{\mathrm{o}}(x)=f(x)$ for $x\in[0, T]$.
+      \item $f_{\mathrm{o}}$ is odd.
+      \item $f_{\mathrm{o}}$ is $2T$-periodic.
+    \end{itemize}
   \end{definition}
   \begin{proposition}
-    Consider the odd extensions for $u_0$ and $v_0$ of \mcref{PDE:fixedendpoints}. Then, the solutions of that equation are given by the d'Alembert formula (\mcref{PDE:dAlembert})
+    Consider the odd periodic extensions for $u_0$ and $v_0$ of \mcref{PDE:fixedendpoints}. Then, the solutions of that equation are given by the d'Alembert formula (\mcref{PDE:dAlembert}).
   \end{proposition}
   \begin{sproof}
-    Consequence of \mcref{PDE:wave1fixed}.
+    Consequence of \mcref{PDE:dAlembert}.
   \end{sproof}
   \begin{proposition}\label{PDE:methodchar}
     Suppose we want to know the displacement $u(x,t)$ of the string at the position $A=(x,t)\in[0,L]\times\RR_{\geq 0}$ (see \mcref{PDE:waves-char-solve}). Then:
@@ -459,13 +500,17 @@
   \begin{proposition}[Separation of variables]
     The solution $u(x,t)$ to \mcref{PDE:fixedendpoints}, using \emph{separation of variables} (i.e. assuming $u(x,t)=X(x)T(t)$), is: $$u(x,t)=\sum_{n=0}^\infty \sin\left(\frac{\pi n x}{L}\right)\left[a_n\cos\left(\frac{\pi n c}{L}t\right)+ b_n\sin\left( \frac{\pi n c}{L}t\right)\right]$$ where:
     \begin{align*}
-      a_n & =\frac{2}{L}\int_{0}^Lu_0(x)\sin\left(\frac{\pi n x}{L}\right)\dd{x}       \\
-      b_n & =\frac{2}{\pi n c}\int_{0}^Lv_0(x)\sin\left(\frac{\pi n x}{L}\right)\dd{x}
+      a_n & =\frac{1}{L}\int_{-L}^Lu_0(x)\sin\left(\frac{\pi n x}{L}\right)\dd{x}       \\
+      b_n & =\frac{1}{\pi n c}\int_{-L}^Lv_0(x)\sin\left(\frac{\pi n x}{L}\right)\dd{x}
     \end{align*}
+    Here we have thought $u_0$ and $v_0$ as the respective odd periodic extensions.
   \end{proposition}
   \begin{sproof}
-    Assume $u(x,t)=X(x)T(t)$. Then: $$\frac{T''}{c^2T}=\frac{X''}{X}=-\lambda=\const$$ because the left-hand-side depends entirely on $t$, whereas the right-hand-side depends entirely on $x$. From $X''+\lambda X=0$, we can deduce that $\lambda>0$ by multiplying the equation by $X$ and integrating (between 0 and $L$) by parts the result. Finally, imposing the boundary and initial conditions (using Fourier series) leads to the solution.
+    Assume $u(x,t)=X(x)T(t)$. Then: $$\frac{T''}{c^2T}=\frac{X''}{X}=-\lambda$$ and $\lambda=\const$ because the left-hand-side depends entirely on $t$, whereas the right-hand-side depends entirely on $x$. From $X''+\lambda X=0$, we can deduce that $\lambda>0$ by multiplying the equation by $X$ and integrating (between 0 and $L$) by parts the result. Finally, imposing the boundary and initial conditions (using Fourier series) leads to the solution.
   \end{sproof}
+  \begin{remark}
+    Note that with the wave equation the derivatives $u_x$ and $u_t$ converge (if they do) more slowly than $u$. The situation worsen with higher derivatives.
+  \end{remark}
   \subsubsection{Variable coefficients}
   \begin{theorem}[Sturm-Picone comparison theorem]
     Let $p_i,q_i:\RR\rightarrow\RR$, $i=1,2$, be functions such that $0<p_2<p_1$ and $q_1<q_2$. Suppose that the functions $u(x)$ and $v(x)$ satisfy the following differential equations:
@@ -532,6 +577,7 @@
     Use separation of variables and \mcref{PDE:orthogonality}.
   \end{sproof}
   \subsection{Heat equation}
+  \subsubsection{Basic solution}
   \begin{proposition}
     Consider the following boundary problem of the heat equation:
     \begin{equation}\label{PDE:heat-fixedendpoints}
@@ -545,7 +591,7 @@
       \right.
     \end{equation}
     with $\alpha=\const$
-    The solution $u(x,t)$ to \mcref{PDE:heat-fixedendpoints}, using separation of variables, is: $$u(x,t)=\sum_{n=1}^\infty a_n\exp{-\frac{\alpha\pi^2n^2}{L^2}t}\sin\left(\frac{\pi n x}{L}\right)$$ where:
+    The solution $u(x,t)$ to \mcref{PDE:heat-fixedendpoints} is: $$u(x,t)=\sum_{n=1}^\infty a_n\exp{-\frac{\alpha\pi^2n^2}{L^2}t}\sin\left(\frac{\pi n x}{L}\right)$$ where:
     \begin{equation*}
       a_n =\frac{2}{L}\int_{0}^Lu_0(x)\sin\left(\frac{\pi n x}{L}\right)\dd{x}
     \end{equation*}
@@ -553,8 +599,11 @@
   \begin{sproof}
     Use separation of variables.
   \end{sproof}
+  \begin{remark}
+    Note that unlike the wave equation, the heat equation is infinitely many times differentiable for any time $t>0$ although it is not defined for negative times.
+  \end{remark}
   \begin{proposition}
-    Consider the simplified Schrödinger equation problem:
+    Consider the simplified Schrödinger equation:
     \begin{equation}\label{PDE:schro-fixedendpoints}
       \left\{
       \begin{aligned}
@@ -565,7 +614,7 @@
       \end{aligned}
       \right.
     \end{equation}
-    The solution $u(x,t)$ to \mcref{PDE:schro-fixedendpoints}, using separation of variables is: $$u(x,t)=\sum_{n=1}^\infty a_n\exp{-\ii\frac{\pi^2n^2}{L^2}t}\sin\left(\frac{\pi n x}{L}\right)$$ where:
+    The solution $u(x,t)$ to \mcref{PDE:schro-fixedendpoints} is: $$u(x,t)=\sum_{n=1}^\infty a_n\exp{-\ii\frac{\pi^2n^2}{L^2}t}\sin\left(\frac{\pi n x}{L}\right)$$ where:
     \begin{equation*}
       a_n =\frac{2}{L}\int_{0}^Lu_0(x)\sin\left(\frac{\pi n x}{L}\right)\dd{x}
     \end{equation*}
@@ -574,13 +623,14 @@
     Use separation of variables.
   \end{sproof}
   \begin{definition}
-    A function $f(x,t)$ is said to be \emph{self-similar} if $\exists \alpha,\beta\in\RR$ such that $f(x,t)=t^\beta\varphi\left(\frac{x}{t^\alpha}\right)$
+    A function $f(x,t)$ is said to be \emph{self-similar} if $\exists \alpha,\beta\in\RR$ such that $f(x,t)=t^\beta\varphi\left(\frac{x}{t^\alpha}\right)$ for some function $\varphi:\RR\rightarrow\RR$.
   \end{definition}
   \begin{proposition}
     Consider the heat equation of constant coefficients $ u_{t} =\alpha u_{xx}$ on the whole real line. Then, if we impose $u$ being self-similar satisfying $u(x,t)=u(\lambda x,\lambda^2t)$ $\forall\lambda>0$, we obtain:
     \begin{equation}\label{PDE:selfsimilarsol}
       u(x,t)=C_1\int_0^{\frac{x}{\sqrt{t}}}\exp{-\frac{z^2}{4\alpha}}\dd{z} +C_2
     \end{equation}
+    for certain constants $C_1, C_2\in\RR$.
   \end{proposition}
   \begin{sproof}
     Observe that $u(x,t) = f(\frac{x}{\sqrt{t}})=:f(s)$ and the heat equation is transformed into $-f's=2\alpha f''$. The solution of this ode is straightforward.
@@ -614,12 +664,12 @@
     Clearly $\delta_{\vf{x}_0}$ is linear and bounded because $\abs{\delta_{\vf{x}_0}(\varphi)}=\abs{\varphi(\vf{x}_0)}\leq \norm{\varphi}_\infty$.
   \end{proof}
   \begin{lemma}
-    Let $\Omega\subseteq \RR^n$ be a set, $\vf{x}_0\in\Omega$ and $\mu_{\vf{x}_0}$ be the measure that equals 1 on the set $\{\vf{x}_0\}$ and $0$ otherwise. Then, $\forall\varphi\in\mathcal{D}(\Omega)$ we have:
+    Let $\Omega\subseteq \RR^n$ be a set, $\vf{x}_0\in\Omega$ and $\mu_{\vf{x}_0}$ be the measure that equals 1 on the set $\{\vf{x}_0\}$ and $0$ on the sets disjoint from $\{x_0\}$. Then, $\forall\varphi\in\mathcal{D}(\Omega)$ we have:
     $$\delta_{\vf{x}_0}(\varphi)=\varphi(\vf{x}_0)=\idotsint_\Omega\varphi\dd{\mu_{\vf{x}_0}}$$
   \end{lemma}
   \begin{definition}
     Let $\Omega\subseteq \RR^n$ be a set and $n\in\NN$. We define the \emph{differentiation operator} $D^n:\mathcal{D}^*(\Omega)\rightarrow\mathcal{D}^*(\Omega)$ by: $$\dotp{D^n\Lambda}{\varphi}=\dotp{\Lambda}{{(-1)}^nD^n\varphi}$$
-    for all $\Lambda\in\mathcal{D}^*(\Omega)$ and all $\varphi\in\mathcal{D}(\Omega)$.
+    for all $\Lambda\in\mathcal{D}^*(\Omega)$ and all $\varphi\in\mathcal{D}(\Omega)$. The distribution $D^n\Lambda$ is called \emph{distributional derivative}.
   \end{definition}
   \begin{definition}
     We define the \emph{Heaviside step function} as the function $H(x)=\indi{x>0}$.
@@ -641,8 +691,8 @@
     \begin{equation}\label{PDE:fundamental}
       \left\{
       \begin{aligned}
-        u_{t}  =\alpha u_{xx}                        \\
-        \lim_{t\to 0} \Lambda_{u(\cdot,t)} & =\delta
+        u_{t}                                       & =\alpha u_{xx}                                          \\
+        \lim_{t\to 0} \Lambda_{u(\cdot,t)}(\varphi) & = \delta(\varphi)\quad\forall\varphi\in\mathcal{D}(\RR)
       \end{aligned}
       \right.
     \end{equation}
@@ -662,7 +712,8 @@
       I & =\abs{\int_{-\infty}^{+\infty}\frac{1}{\sqrt{4\pi\alpha t}}\exp{-\frac{y^2}{4\alpha t}}\varphi(y)\dd{y}-\varphi(0)}    \\
         & = \abs{\int_{-\infty}^{+\infty}\frac{1}{\sqrt{4\pi\alpha t}}\exp{-\frac{y^2}{4\alpha t}}(\varphi(y)-\varphi(0))\dd{y}} \\
       \begin{split}
-        &\leq \int_{\abs{x}<\delta}\frac{1}{\sqrt{4\pi\alpha t}}\exp{-\frac{y^2}{4\alpha t}}\abs{\varphi(y)-\varphi(0)}\dd{y}\\&\hspace{2cm}+\int_{\abs{x}\geq\delta}\frac{1}{\sqrt{4\pi\alpha t}}\exp{-\frac{y^2}{4\alpha t}}\abs{\varphi(y)-\varphi(0)}\dd{y}
+        &\leq \int_{\abs{x}<\delta}\frac{1}{\sqrt{4\pi\alpha t}}\exp{-\frac{y^2}{4\alpha t}}\abs{\varphi(y)-\varphi(0)}\dd{y}\\
+        &\hspace{2cm}+\int_{\abs{x}\geq\delta}\frac{1}{\sqrt{4\pi\alpha t}}\exp{-\frac{y^2}{4\alpha t}}\abs{\varphi(y)-\varphi(0)}\dd{y}
       \end{split}
     \end{align*}
     The first integral is bounded by $\frac{\varepsilon}{2}$, while for the second one, given that $\delta$ we can find $t>0$ such that $\int_{\abs{x}\geq\delta}\frac{1}{\sqrt{4\pi\alpha t}}\exp{-\frac{y^2}{4\alpha t}}\leq \frac{\varepsilon}{4\norm{\varphi}_\infty}$. Finally, for $t\to 0$:
@@ -693,9 +744,9 @@
       [H(s)*H(t)](x) =       \\
       \begin{aligned}
          & =\int_{-\infty}^{+\infty}\frac{1}{\sqrt{4\pi\alpha s}}\exp{-\frac{{(x-y)}^2}{4\alpha s}}\frac{1}{\sqrt{4\pi\alpha t}}\exp{-\frac{y^2}{4\alpha t}}\dd{y}                                                    \\
-         & =\frac{1}{\sqrt{4\pi\alpha s}}\exp{-\frac{x^2}{4\alpha (s+t)}}\int_{-\infty}^{+\infty}\frac{1}{\sqrt{4\pi\alpha t}}\exp{\frac{x^2}{4\alpha (s+t)}-\frac{{(x-y)}^2}{4\alpha s}-\frac{y^2}{4\alpha t}}\dd{y} \\
-         & =\frac{1}{\sqrt{4\pi\alpha s}}\exp{-\frac{x^2}{4\alpha (s+t)}}\int_{-\infty}^{+\infty}\frac{1}{\sqrt{4\pi\alpha t}}\exp{-\frac{(s+t){\left(y-\frac{xt}{s+t}\right)}^2}{4\alpha st}}\dd{y}                  \\
-         & =\frac{1}{\sqrt{4\pi\alpha s}}\exp{-\frac{x^2}{4\alpha (s+t)}}\frac{1}{\sqrt{4\pi\alpha t}}\sqrt{4\pi\alpha \frac{st}{s+t}}                                                                                \\
+         & =\frac{1}{\sqrt{4\pi\alpha s}}\frac{1}{\sqrt{4\pi\alpha t}}\exp{-\frac{x^2}{4\alpha (s+t)}}\int_{-\infty}^{+\infty}\exp{\frac{x^2}{4\alpha (s+t)}-\frac{{(x-y)}^2}{4\alpha s}-\frac{y^2}{4\alpha t}}\dd{y} \\
+         & =\frac{1}{\sqrt{4\pi\alpha s}}\frac{1}{\sqrt{4\pi\alpha t}}\exp{-\frac{x^2}{4\alpha (s+t)}}\int_{-\infty}^{+\infty}\exp{-\frac{(s+t){\left(y-\frac{xt}{s+t}\right)}^2}{4\alpha st}}\dd{y}                  \\
+         & =\frac{1}{\sqrt{4\pi\alpha s}}\frac{1}{\sqrt{4\pi\alpha t}}\exp{-\frac{x^2}{4\alpha (s+t)}}\sqrt{4\pi\alpha \frac{st}{s+t}}                                                                                \\
          & =\frac{1}{\sqrt{4\pi\alpha (s+t)}}\exp{-\frac{x^2}{4\alpha (s+t)}}                                                                                                                                         \\
          & = [H(s+t)](x)
       \end{aligned}
@@ -709,7 +760,7 @@
     \begin{equation}\label{PDE:Toperator}
       T(t)u_0=\int_{\RR^n}\frac{1}{{(4\pi\alpha t)}^{n/2}}\exp{-\frac{\norm{\vf{x-y}}^2}{4\alpha t}}u_0(\vf{y})\dd{\vf{y}}
     \end{equation}
-    \mcref{RFA:representationtheorem} gives a representation of $T(t)$ in the form $T(t)=\exp{t\laplacian}$.
+    \mnameref{RFA:representationtheorem} gives a representation of $T(t)$ in the form $T(t)=\exp{t\laplacian}$.
   \end{proposition}
   \begin{sproof}
     An easy check shows that $[H(t)](\vf{x})$ solves the heat equation $u_t=\alpha\laplacian u$. To show that the initial condition holds, use the 1-dimensional case (\mcref{PDE:heatkernelprop}) and \mnameref{RFA:fubini}.
@@ -718,7 +769,7 @@
     Consider the operator $T(t)$ defined on \mcref{PDE:Toperator}. Then, $\{T(t):t\in\RR_{\geq 0}\}$ is a semigroup with the composition. That is, $T(0)=\id$ and $T(s)\circ T(t)=T(s+t)$.
   \end{proposition}
   \begin{sproof}
-    It is a consequence of the generalization of $\displaystyle \lim_{t\to\infty}[H(t)*f]=f$, which it can be proven using the 1-dimensional case (\mcref{PDE:heatgeneralcoro}) and \mnameref{RFA:fubini}.
+    It is a consequence of the generalization of $\displaystyle\lim_{t\to 0}\norm{H(t)*f - f}_\infty=0$, which it can be proven using the 1-dimensional case (\mcref{PDE:heatgeneralcoro}) and \mnameref{RFA:fubini}.
   \end{sproof}
   \begin{lemma}
     The function
@@ -742,15 +793,15 @@
       \right.
     \end{equation}
     We would like to extend the notion of \mcref{DE:matrixexp}. Thus for $n\gg t$ we can rewrite the previous equation as:
-    $$u(t +t/n)= \left(I+\frac{t}{n}A\right)u(t)$$
-    Thus, taking the limit as $n\to \infty$ we can conclude: $$u(t)=\lim_{n\to\infty}{\left(I+\frac{t}{n}A\right)}^n=:\exp{tA}u(0)$$
+    $$u(t +t/n)\simeq \left(I+\frac{t}{n}A\right)u(t)$$
+    Thus, taking the limit as $n\to \infty$ we can conclude: $$u(t)=\lim_{n\to\infty}{\left(I+\frac{t}{n}A\right)}^nu(0)=:\exp{tA}u(0)$$
     Note that for this to be well-defined we need that $A$ must be a bounded operator. And in that case, the following identity also holds: $$\exp{tA}=\sum_{k=0}^\infty\frac{t^kA^k}{k!}$$
   \end{definition}
   \begin{definition}[Implicit scheme in finite differences]
     Let $E$ be a Banach space and $A:E\rightarrow E$ be an linear operator. Consider the ivp of \mcref{PDE:operatorpde} and rewrite it this time as:
     $$ u(t)= {\left(I-\frac{t}{n}A\right)}^{-1}u(t-t/n)$$
     for $n\gg t$.
-    Thus, taking the limit as $n\to \infty$ we can conclude: $$u(t)=\lim_{n\to\infty}{\left(I-\frac{t}{n}A\right)}^{-n}=:\exp{tA}u(0)$$
+    Thus, taking the limit as $n\to \infty$ we can conclude: $$u(t)=\lim_{n\to\infty}{\left(I-\frac{t}{n}A\right)}^{-n}u(0)=:\exp{tA}u(0)$$
     Note that for this to be well-defined we need that $A^{-1}$ must be a bounded operator\footnote{It can be proved that this definition of exponential matrix for an operator is more appropriate for the differential operators than the previous one. Also, computationally is more efficient.}.
   \end{definition}
   \begin{proposition}
@@ -767,7 +818,7 @@
     $$u(t)=\exp{tD}u_0+\int_0^t\exp{(t-s)D}F(u(s))\dd{s}$$
   \end{proposition}
   \begin{sproof}
-    The solution of the homogeneous system is $\exp{tD}u_0$. Let $u(t)=\exp{tD}g$. We will the variation of constants method to find the solution. Imposing that $u(t)$ has to be the solution we have:
+    The solution of the homogeneous system is $\exp{tD}u_0$. Let $u(t)=\exp{tD}g$. We will use the variation of constants method to find the solution. Imposing that $u(t)$ has to be the solution we have:
     \begin{equation*}
       D\exp{tD}g+\exp{tD}g'=D\exp{tD}g+F(u)\iff\exp{tD}g'=F(u)
     \end{equation*}
@@ -778,56 +829,46 @@
     Let $U\subset\RR^n$ be open and bounded and fix a time $t=T$. We define the \emph{parabolic cylinder} as $U_T:= U\times (0, T]$. We define the \emph{parabolic boundary} as $\Gamma_T=\overline{U_T}\setminus U_T=\Fr{U_T}\setminus(U\times \{T\})$.
   \end{definition}
   \begin{important}
-    \begin{theorem}[Strong maximum principle]\label{PDE:strongmax}
-      Let $U\subset\RR^n$ be open and bounded and fix a time $t=T$. Suppose $u\in\mathcal{C}_1^2(U_t)\cap\mathcal{C}(\overline{U_T})$ solve the heat equation in $U_T$. Then:
-      \begin{enumerate}
-        \item $\displaystyle\max\{u(\vf{x},t):(\vf{x},t)\in\overline{U_T}\}=\max\{u(\vf{x},t):(\vf{x},t)\in\Gamma_T\}$
-        \item If, in addition, $U$ is connected and there exists a point $(\vf{x}_0, t_0)\in U_T$ such that $$u(\vf{x}_0,t_0)=\max\{u(\vf{x},t):(\vf{x},t)\in\overline{U_T}\}$$ then $u$ is constant on $\overline{U_T}$.
-      \end{enumerate}
+    \begin{theorem}[Maximum principle]\label{PDE:max}
+      Let $U\subset\RR^n$ be open and bounded and fix a time $t=T$. Suppose $u\in\mathcal{C}_1^2(U_T)\cap\mathcal{C}(\overline{U_T})$ solve the heat equation in $U_T$. Then: $$\max\{u(\vf{x},t):(\vf{x},t)\in\overline{U_T}\}=\max\{u(\vf{x},t):(\vf{x},t)\in\Gamma_T\}$$
     \end{theorem}
   \end{important}
   \begin{proof}
-    \begin{enumerate}
-      \item Let $v\in\mathcal{C}_1^2(U_t)\cap\mathcal{C}(\overline{U_T})$ such that $v_t-\alpha\laplacian v<0$. Then, $\displaystyle\max\{v(\vf{x},t):(\vf{x},t)\in\overline{U_T}\}=\max\{v(\vf{x},t):(\vf{x},t)\in\Gamma_T\}$. Indeed, if the maximum was in $U_T$ or $U\times\{T\}$ we would have $v_t\geq 0$ and $\laplacian v<0$, which contradicts $v_t-\alpha\laplacian v<0$ because $\alpha>0$.
+    Let $v\in\mathcal{C}_1^2(U_T)\cap\mathcal{C}(\overline{U_T})$ such that $v_t-\alpha\laplacian v<0$. Then, $\displaystyle\max\{v(\vf{x},t):(\vf{x},t)\in\overline{U_T}\}=\max\{v(\vf{x},t):(\vf{x},t)\in\Gamma_T\}$. Indeed, if the maximum was in $U_T$ or $U\times\{T\}$ we would have $v_t\geq 0$ and $\laplacian v\leq 0$, which contradicts $v_t-\alpha\laplacian v<0$ because $\alpha>0$.
 
-            Now take $v=u-\varepsilon t$ with $\varepsilon>0$. We have that: $$v_t-\alpha \laplacian v=u_t-\laplacian u -\varepsilon = -\varepsilon <0$$
-            Thus:
-            \begin{align*}
-              u & =v+\varepsilon t                                              \\
-                & \leq \max\{v(\vf{x},t):(\vf{x},t)\in\Gamma_T\} +\varepsilon t \\
-                & \leq \max\{u(\vf{x},t):(\vf{x},t)\in\Gamma_T\} +\varepsilon t
-            \end{align*}
-            forall $\varepsilon >0$ and all $t\in[0,T]$.
-      \item
-    \end{enumerate}
+    Now take $v=u-\varepsilon t$ with $\varepsilon>0$. We have that: $$v_t-\alpha \laplacian v=u_t-\laplacian u -\varepsilon = -\varepsilon <0$$
+    Thus:
+    \begin{align*}
+      u & =v+\varepsilon t                                              \\
+        & \leq \max\{v(\vf{x},t):(\vf{x},t)\in\Gamma_T\} +\varepsilon t \\
+        & \leq \max\{u(\vf{x},t):(\vf{x},t)\in\Gamma_T\} +\varepsilon t
+    \end{align*}
+    forall $\varepsilon >0$ and all $t\in[0,T]$.
   \end{proof}
-  \begin{theorem}[Strong minimum principle]
+  \begin{theorem}[Minimum principle]\label{PDE:min}
     Let $U\subset\RR^n$ be open and bounded and fix a time $t=T$. Suppose $u\in\mathcal{C}_1^2(U_T)\cap\mathcal{C}(\overline{U_T})$\footnote{Here the subindex 1 in $\mathcal{C}_1^2(U_T)$ indicates that the differentiability is with respect to the first component of $u$, that is, with respect to $\vf{x}$.} solves the heat equation in $U_T$. Then:
-    \begin{enumerate}
-      \item $\displaystyle\min\{u(\vf{x},t):(\vf{x},t)\in\overline{U_T}\}=\min\{u(\vf{x},t):(\vf{x},t)\in\Gamma_T\}$
-      \item If, in addition, $U$ is connected and there exists a point $(\vf{x}_0, t_0)\in U_T$ such that $$u(\vf{x}_0,t_0)=\min\{u(\vf{x},t):(\vf{x},t)\in\overline{U_T}\}$$ then $u$ is constant on $\overline{U_T}$.
-    \end{enumerate}
+    $$\min\{u(\vf{x},t):(\vf{x},t)\in\overline{U_T}\}=\min\{u(\vf{x},t):(\vf{x},t)\in\Gamma_T\}$$
   \end{theorem}
   \begin{proof}
-    Use \mnameref{PDE:strongmax} with $v(\vf{x},t)=-u(\vf{x},t)$.
+    Apply the \mnameref{PDE:max} to the function $-u(\vf{x},t)$.
   \end{proof}
   \begin{theorem}[Uniqueness of the heat equation]
     Let $U\subset\RR^n$ be open and bounded, $g\in\mathcal{C}(\Gamma_T)$ and $f\in\mathcal{C}(U_T)$. Then, there exists at most one solution $u\in\mathcal{C}_1^2(U_T)\cap\mathcal{C}(\overline{U_T})$ of the problem:
     $$
       \begin{cases}
-        u_{t}  -\laplacian{u} = f & \text{in $U_T$}      \\
-        u=g                       & \text{on $\Gamma_T$}
+        u_{t}  -\alpha\laplacian{u} = f & \text{in $U_T$}      \\
+        u=g                             & \text{on $\Gamma_T$}
       \end{cases}
     $$
   \end{theorem}
   \begin{sproof}
-    Suppose $u_1$ and $u_2$ are two solutions of this problem. Apply \mnameref{PDE:strongmax} to the function $u_1-u_2$.
+    Suppose $u_1$ and $u_2$ are two solutions of this problem. Apply both \mnameref{PDE:max} and \mnameref{PDE:min} to the function $u_1-u_2$.
   \end{sproof}
   \begin{theorem}[Maximum principle for Cauchy problem]\label{PDE:Cauchymax}
-    Let $U\subset\RR^n$ be open and bounded and $g\in\mathcal{C}(\Gamma_T)$. Suppose $u\in\mathcal{C}^2(\RR^n\times (0,T])\cap\mathcal{C}(\RR^n\times (0,T])$ solves the problem
+    Let $g\in\mathcal{C}(\RR^n\times \{0\})$. Suppose $u\in\mathcal{C}^2(\RR^n\times (0,T])\cap\mathcal{C}(\RR^n\times (0,T])$ solves the problem
     $$
       \begin{cases}
-        u_{t}  -\laplacian{u} = 0 & \text{in $\RR^n\times (0,T)$} \\
+        u_{t}  -\laplacian{u} = 0 & \text{in $\RR^n\times (0,T]$} \\
         u=g                       & \text{on $\RR^n\times \{0\}$}
       \end{cases}
     $$ and satisfies that $u(\vf{x},t)\leq A\exp{a\norm{\vf{x}}^2}$ $\forall (\vf{x},t)\in\RR^n\times [0,T]$ and for some constants $a, A> 0$. Then:
@@ -838,28 +879,38 @@
   %   $$v(\vf{x},t)=u(\vf{x},t)-\frac{\delta}{{(4\pi(T+\varepsilon -t))}^{n/2}}\exp{\frac{\norm{\vf{\vf{x}}}^2}{4(T+\varepsilon -t)}}$$
   %   with $\varepsilon>0$ such that $T+\varepsilon<\frac{1}{4a}$ and $\delta>0$. It can be checked that $v_t- \laplacian v\leq 0$.
   % \end{proof}
-  \begin{theorem}[Uniqueness for Cauchy problem]
-    Let $U\subset\RR^n$ be open and bounded, $g\in\mathcal{C}(\Gamma_T)$ and $f\in\mathcal{C}(U_T)$. Then, there exists at most one solution $u\in\mathcal{C}^2(\RR^n\times (0,T])\cap\mathcal{C}(\RR^n\times (0,T])$ of the problem:
+  \begin{theorem}[Minimum principle for Cauchy problem]\label{PDE:Cauchymin}
+    Let $g\in\mathcal{C}(\RR^n\times \{0\})$. Suppose $u\in\mathcal{C}^2(\RR^n\times (0,T])\cap\mathcal{C}(\RR^n\times (0,T])$ solves the problem
     $$
       \begin{cases}
-        u_{t}  -\laplacian{u} = f & \text{in $\RR^n\times (0,T)$} \\
+        u_{t}  -\laplacian{u} = 0 & \text{in $\RR^n\times (0,T]$} \\
+        u=g                       & \text{on $\RR^n\times \{0\}$}
+      \end{cases}
+    $$ and satisfies that $u(\vf{x},t)\geq -A\exp{a\norm{\vf{x}}^2}$ $\forall (\vf{x},t)\in\RR^n\times [0,T]$ and for some constants $a, A> 0$. Then:
+    $$\displaystyle\inf\{u(\vf{x},t):(\vf{x},t)\in\RR^n\times[0,T]\}=\inf\{g(\vf{x}):\vf{x}\in\RR^n\}$$
+  \end{theorem}
+  \begin{proof}
+    Apply the \mnameref{PDE:Cauchymax} to the function $-u(\vf{x},t)$.
+  \end{proof}
+  \begin{theorem}[Uniqueness for Cauchy problem]
+    Let $g\in\mathcal{C}(\RR^n\times \{0\})$ and $f\in\mathcal{C}(\RR^n\times (0,T))$. Then, there exists at most one solution $u\in\mathcal{C}^2(\RR^n\times (0,T])\cap\mathcal{C}(\RR^n\times (0,T])$ of the problem:
+    $$
+      \begin{cases}
+        u_{t}  -\laplacian{u} = f & \text{in $\RR^n\times (0,T]$} \\
         u=g                       & \text{on $\RR^n\times \{0\}$}
       \end{cases}
     $$
     satisfying $\abs{u(\vf{x},t)}\leq A\exp{a\norm{\vf{x}}^2}$ $\forall \vf{x}\in\RR^n\times [0,T]$ for some constants $a, A>0$.
   \end{theorem}
   \begin{sproof}
-    Suppose $u_1$ and $u_2$ are two solutions of this problem. Apply \mnameref{PDE:Cauchymax} to the function $u_1-u_2$.
+    Suppose $u_1$ and $u_2$ are two solutions of this problem. Apply both the \mnameref{PDE:Cauchymax} and \mnameref{PDE:Cauchymin} to the function $u_1-u_2$.
   \end{sproof}
-  \begin{theorem}[Smoothness]
-    Let $U\subset\RR^n$ be open and bounded and suppose $u\in\mathcal{C}^2( U_T)$ solves the heat equation in $U_T$. Then, $u\in\mathcal{C}^\infty(U_T)$.
-  \end{theorem}
   \subsection{Laplace equation}
   \subsubsection{General properties and solutions}
   \begin{definition}[Laplace equation]
     Let $u:\RR\times\RR\rightarrow\RR$ be an unknown function. The \emph{Laplace equation} is the pde defined by: $$\laplacian u=0$$
   \end{definition}
-  \begin{proposition}[Dirichlet problem]
+  \begin{proposition}[Dirichlet problem in the disc]
     Let $f:[0,2\pi]\rightarrow\RR$ be a continuous function such that $f(0)=f(2\pi)$. Then, there exists a continuous function $v:\overline{D(0,\rho)}\rightarrow\RR$ that $v\in\mathcal{C}^2(D(0,\rho)\setminus\{0\})$ and such that:
     \begin{enumerate}
       \item $v(r,0)=v(r,2\pi)$ $\forall r\in[0,\rho]$
@@ -874,10 +925,10 @@
     \end{align*}
   \end{proposition}
   \begin{sproof}
-    The Laplacian in polar coordinates is: $$\laplacian u=\frac{1}{r}\pdv{}{r}\left(r\pdv{u}{r}\right)+\frac{1}{r^2}\pdv[2]{u}{r}$$ Now use separation of variables $v(r,\theta)=R(r)\Theta(\theta)$.
+    The Laplacian in polar coordinates is: $$\laplacian u=\frac{1}{r}\pdv{}{r}\left(r\pdv{u}{r}\right)+\frac{1}{r^2}\pdv[2]{u}{\theta}$$ Now use separation of variables $v(r,\theta)=R(r)\Theta(\theta)$.
   \end{sproof}
   \begin{definition}[Dirichlet problem]
-    Let $U\subseteq \RR^n$ be an open bounded set such that $\Fr{U}$ is differentiable. The \emph{Dirichlet problem} is defined as he following ivp:
+    Let $U\subseteq \RR^n$ be an open bounded set such that $\Fr{U}$ is of class $\mathcal{C}^1$, $f\in\mathcal{C}^2(\Omega)$ and $g\in\mathcal{C}^2(\Fr{\Omega})$ The \emph{Dirichlet problem} is defined as the following ivp:
     \begin{equation}\label{PDE:dirichlet}
       \begin{cases}
         -\laplacian{u} = f & \text{in $U$}      \\
@@ -886,50 +937,101 @@
     \end{equation}
   \end{definition}
   \begin{proposition}[Uniqueness of Dirichlet problem]
-    Let $U\subseteq \RR^n$ be an open bounded set such that $\Fr{U}$ is differentiable. Then, there exists at most one solution of \mcref{PDE:dirichlet}.
+    Let $U\subseteq \RR^n$ be an open bounded set such that $\Fr{U}$ is of class $\mathcal{C}^1$, $f\in\mathcal{C}^2(\Omega)$ and $g\in\mathcal{C}^2(\Fr{\Omega})$. Then, there exists at most one solution of \mcref{PDE:dirichlet}.
   \end{proposition}
   \begin{sproof}
     Suppose $u_1$ and $u_2$ are two solutions of the problem. Apply the first of the \mnameref{PDE:greenidentities} to the functions $f = g = u_1-u_2$.
   \end{sproof}
   \begin{definition}
-    Let $U\subseteq \RR^n$ be an open bounded set such that $\Fr{U}$ is differentiable. Considering \mcref{PDE:dirichlet} we define the \emph{energy functional} as the operator $$Iw=\idotsint_U\frac{1}{2}\norm{\grad w}^2 - wf$$
+    Let $U\subseteq \RR^n$ be an open bounded set such that $\Fr{U}$ is of class $\mathcal{C}^1$, $f\in\mathcal{C}^2(\Omega)$ and $g\in\mathcal{C}^2(\Fr{\Omega})$. Considering \mcref{PDE:dirichlet} we define the \emph{energy functional} as the operator $$Ew=\idotsint_U\frac{1}{2}\norm{\grad w}^2 - wf$$
     defined on the set $\{w\in\mathcal{C}^2(\overline{U}): w=g\text{ on $\Fr{U}$}\}$.
   \end{definition}
   \begin{theorem}[Dirichlet's principle]
-    Let $U\subseteq \RR^n$ be an open bounded set such that $\Fr{U}$ is differentiable. Then, $u\in\mathcal{C}^2(\overline{U})$ solves \mcref{PDE:dirichlet} if and only if it minimizes $I$.
+    Let $U\subseteq \RR^n$ be an open bounded set such that $\Fr{U}$ is of class $\mathcal{C}^1$, $f\in\mathcal{C}^2(\Omega)$ and $g\in\mathcal{C}^2(\Fr{\Omega})$. Then, $u\in\mathcal{C}^2(\overline{U})$ solves \mcref{PDE:dirichlet} if and only if $u$ minimizes $E$.
   \end{theorem}
   \begin{proof}
     \begin{itemizeiff}
-      Let $u$ be a solution of \mcref{PDE:dirichlet} and $w = u+v\in \domain(I)$. Thus, $v=0$ on $\Fr{U}$. We need to show that $Iw\geq Iu$. A calculation shows that: $$Iw=Iu+\idotsint_U\frac{1}{2}\norm{\grad v}^2$$ where we have use the \mnameref{PDE:greenidentities} to conclude that: $$\idotsint_U\grad u\cdot\grad v-vf=0$$
-      Hence $Iw\geq Iu$.
-      \item Let $u$ be a minimizer of $I$ and $\lambda(t)=I(u+vt)$, $t\in \RR$. By the definition of a minimum, we have that $\lambda'(0)=0$ and so:
+      Let $u$ be a solution of \mcref{PDE:dirichlet} and take $w\in \domain(E)$ such that $w=u+v$. Thus, $v=0$ on $\Fr{U}$. We need to show that $Ew\geq Eu$. A calculation shows that: $$Ew=Eu+\idotsint_U\frac{1}{2}\norm{\grad v}^2$$ where we have use the \mnameref{PDE:greenidentities} to conclude that: $$\idotsint_U\grad u\cdot\grad v-vf=0$$
+      Hence $Ew\geq Eu$.
+      \item Let $u$ be a minimizer of $E$ and $\lambda(t)=E(u+vt)$, $t\in \RR$. By the definition of a minimum, we have that $\lambda'(0)=0$ and so:
       $$0 = \lambda'(0)=\idotsint_U\grad u\cdot\grad v-vf=\idotsint_Uv(-\laplacian u-f)$$
-      again by  the \mnameref{PDE:greenidentities}. Since, this is valid $\forall v\in\domain(I)$ it follows that $-\laplacian u = f$ by \mcref{PDE:postfundamentallemma}.
+      again by  the \mnameref{PDE:greenidentities}. Since, this is valid $\forall v\in\domain(E)$ it follows that $-\laplacian u = f$ by \mcref{PDE:postfundamentallemma}.
     \end{itemizeiff}
   \end{proof}
   \subsection{Sobolev spaces}
   \begin{definition}
-    Let $\Omega\subseteq \RR^n$. We define the \emph{Sobolev space} $H^1(\Omega)$ (or $W^{1,2}(\Omega)$) as the following space: $$H^1(\Omega):=\{f\in L^2(\Omega):D_if\in L^2(\Omega), i=1,\ldots,n\}$$
+    Let $\Omega\subseteq \RR^n$ be a bounded subset. We define the \emph{Sobolev space} $H^1(\Omega)$ (or $W^{1,2}(\Omega)$) as the following space: $$H^1(\Omega):=\{f\in L^2(\Omega):D_if\in L^2(\Omega), i=1,\ldots,n\}$$
     Here $D_i$ denotes the distributional derivative with respect to the $i$-th component.
   \end{definition}
   \begin{proposition}
-    Let $\Omega\subseteq \RR^n$. Then, $H^1(\Omega)$ with the inner product
+    Let $\Omega\subseteq \RR^n$ be a bounded subset. Then, $H^1(\Omega)$ with the inner product
     \begin{align*}
-      \dotp{f}{g}_{H^1} & :=\dotp{f}{g}_{2}+\sum_{i=1}^n\dotp{D_if}{D_ig}_{2}      \\
-                        & =\dotp{f}{g}_{2}+\idotsint_\Omega \grad{f}\cdot \grad{g}
+      \dotp{f}{g}_{H^1} := & \dotp{f}{g}_{2}+\sum_{i=1}^n\dotp{D_if}{D_ig}_{2}       \\
+      =                    & \dotp{f}{g}_{2}+\idotsint_\Omega \grad{f}\cdot \grad{g}
     \end{align*}
     and associated norm
     $${\norm{f}_{H^1}}^2={\norm{f}_2}^2 +\sum_{i=1}^n{\norm{D_if}_2}^2$$
     is a Hilbert space.
   \end{proposition}
   \begin{sproof}
-    Clearly, $H^1(\Omega)$ is pre-Hilbert. It's missing to show that $H^1$ is complete. Let $(f_n)\in H^1(\Omega)$ be Cauchy. Then, $(f_n), (D_if_n)\in L^2(\Omega)$ are also Cauchy as $\norm{f}_2\leq \norm{f}_{H^1}$ and $\norm{D_if}_2\leq \norm{f}_{H^1}$ $\forall i=1,\ldots,n$. Hence, $\displaystyle\lim_{n\to\infty}f_n\overset{L^2}{=}G$ and $\displaystyle\lim_{n\to\infty}D_if_n\overset{L^2}{=}g_i$ $\forall i=1,\ldots,n$. If we prove that $D_iG=g_i$, we will be done. But this is clear from the definition of distributional derivative as $\forall\varphi\in\mathcal{D}(\Omega)$ we have:
+    Clearly, $H^1(\Omega)$ is pre-Hilbert. It's missing to show that $H^1$ is complete. Let $(f_n)\in H^1(\Omega)$ be Cauchy. Then, $(f_n), (D_if_n)\in L^2(\Omega)$ are also Cauchy as $\norm{f}_2\leq \norm{f}_{H^1}$ and $\norm{D_if}_2\leq \norm{f}_{H^1}$ $\forall i=1,\ldots,n$. Hence, $\displaystyle\lim_{n\to\infty}f_n\overset{L^2}{=}G$ and $\displaystyle\lim_{n\to\infty}D_if_n\overset{L^2}{=}g_i$ for some $G,g_i\in L^2(\Omega)$, $\forall i=1,\ldots,n$. If we prove that $D_iG=g_i$, we will be done. But this is clear from the definition of distributional derivative as $\forall\varphi\in\mathcal{D}(\Omega)$ we have:
     $$\idotsint_\Omega D_if_n\varphi =\idotsint_\Omega f_n D_i\varphi$$
     And the \mnameref{RFA:dominated} allow us to conclude that:
     $$\idotsint_\Omega g_i\varphi =\idotsint_\Omega G D_i\varphi$$
   \end{sproof}
   \begin{definition}
-    Let $\Omega\subseteq \RR^n$. We define the space $H_0^1(\Omega):=\Cl_{H^1(\Omega)}(\mathcal{D}(\Omega))$.
+    Let $\Omega\subseteq \RR^n$ be a bounded subset. We define the space $H_0^1(\Omega):=\Cl_{H^1(\Omega)}(\mathcal{D}(\Omega))$.
   \end{definition}
+  \begin{definition}
+    Let $\Omega\subseteq \RR^n$ be a bounded subset and $u\in L^2(\Omega)$. We define the \emph{average} of $u$ over $\Omega$ as: $$\overline{u}:=\frac{1}{\m{\Omega}}\idotsint_\Omega u$$
+  \end{definition}
+  \begin{theorem}[Trace theorem]
+    Let $\Omega\subseteq \RR^n$ be a bounded subset such that $\Fr{\Omega}$ is of class $\mathcal{C}^1$. Then, there exists a bounded linear operator
+    $$T:H^1(\Omega)\rightarrow L^2(\Fr{\Omega})$$
+    such that:
+    $$Tu=u|_{\Fr{\Omega}}\qquad\forall u\in H^1(\Omega)\cap \mathcal{C}(\overline{\Omega})$$
+    We call $Tu$ the \emph{trace} of $u$ on $\Fr{\Omega}$\footnote{From now on we will call $Tu$ as $u|_{\Fr{\Omega}}$.}.
+  \end{theorem}
+  \begin{theorem}\label{PDE:traceequivalence}
+    Let $\Omega\subseteq \RR^n$ be a bounded subset such that $\Fr{\Omega}$ is of class $\mathcal{C}^1$ and let $u\in H^1(\Omega)$. Then:
+    $$u\in H_0^1(\Omega)\iff u|_{\Fr{\Omega}}=0$$
+  \end{theorem}
+  \begin{proposition}[Poincaré inequality]\label{PDE:poincareinequality}
+    Let $\Omega\subseteq \RR^n$ be a bounded subset and $u\in H^1(\Omega)$. Then, there exists $C\in\RR$ such that:
+    $$\idotsint_\Omega{(u-\overline{u})}^2\leq C\idotsint_\Omega\norm{\grad u}^2$$
+  \end{proposition}
+  % \begin{proof}
+  %   Suppose first that $\overline{u}=0$.
+  % \end{proof}
+  \begin{proposition}
+    Let $\Omega\subseteq \RR^n$ be a bounded subset. Consider the map:
+    $$\function{Q}{H^1(\Omega)}{H^1(\Omega)\ominus\RR}{u}{u-\overline{u}}$$
+    Then, the space $H(\Omega):=Q(H^1(\Omega))$ equipped with the inner product $$\dotp{f}{g}_{H}=\idotsint_\Omega \grad{f}\cdot \grad{g}$$
+    is Hilbert.
+  \end{proposition}
+  \begin{proof}
+    First of all the map is well-defined. Indeed, if $Q(u)=\const$, then $u=\const$ But in this case $u=\overline{u}$ and so $Q(u)=0$. Let's see now that $H(\Omega)$ is Hilbert.
+    Clearly $H(\Omega)$ is pre-Hilbert as $Q$ is linear and continuous. To show the completeness note that the norms on $H(\Omega)$ and $H^1(\Omega)$ are equivalent. Indeed by the \mnameref{PDE:poincareinequality} we have that $\forall \tilde{u}\in H(\Omega)$:
+    $$\idotsint_\Omega \norm{\grad{u}}^2\leq\idotsint_\Omega (u^2+\norm{\grad{u}}^2)\leq(C+1)\idotsint_\Omega \norm{\grad{u}}^2$$
+    for certain $C\in\RR$ and because $\overline{\tilde{u}}=0$. Thus, the Cauchy convergence is the same with both norms. And since $H^1(\Omega)$ is complete, so it is $H(\Omega)$.
+  \end{proof}
+  \begin{proposition}
+    Let $\Omega\subseteq \RR^n$ be a bounded subset. Then, $V(\Omega):=Q(H_0^1(\Omega))$ is closed in $H(\Omega)$.
+  \end{proposition}
+  \begin{proof}
+    Let $(w_n)\in Q(H_0^1(\Omega))$ be a sequence that converges in $H_0^1(\Omega)$ to $w$. We need to show that $w\in Q(H_0^1(\Omega))$. Note that $w_n=Q(u_n)=u_n-\overline{u_n}$ for certain $(u_n)\in H_0^1(\Omega)$. Thus, $\overline{u_n} = u_n -w_n$. By \mcref{PDE:traceequivalence} we have that $\overline{u_n} = -w_n|_{\Fr{\Omega}}$ which converges in $L^2(\Fr{\Omega})$ by the continuity of the trace and therefore, as $L^2(\Fr{\Omega})$, $\overline{u_n}$ converges on $\RR$. Let $\displaystyle c:=\lim_{n\to\infty}\overline{u_n}$. Now, $u=w_n+\overline{u_n}$ converges in $H_0^1(\Omega)$ to $w+c=:u$. We claim that $c=\overline{u}$, which is clear by the continuity of the average. Hence, $w=u-\overline{u} =Q(u)$ with $u\in H_0^1(\Omega)$ because $ H_0^1(\Omega)$ is closed. So $w\in Q(H_0^1(\Omega))$.
+  \end{proof}
+  \begin{proposition}\label{PDE:preexistence}
+    Let $\Omega\subseteq \RR^n$ be a bounded subset and $\tilde{g}\in H(\Omega)$. Then, $\exists! \tilde{u}\in {V(\Omega)}^\perp=H\ominus V(\Omega)$ such that $$\tilde{u}=\argmin_{w\in V(\Omega)}\left\{\idotsint_\Omega\frac{1}{2}\norm{\grad w}^2:\tilde{g}-w\in V(\Omega)\right\}$$
+  \end{proposition}
+  \begin{sproof}
+    Use the \mnameref{RFA:projection}.
+  \end{sproof}
+  \begin{theorem}[Existence and uniqueness of the Dirichlet problem]
+    Let $\Omega\subseteq \RR^n$ be a bounded subset. Consider the Dirichlet problem of \mcref{PDE:dirichlet} with $f=0$ and $g\in H^1(\Omega)$. Then, this problem has existence and uniqueness of solutions.
+  \end{theorem}
+  \begin{proof}
+    Let $\tilde{g}=Q(g)=g-\overline{g}\in H(\Omega)$ and $\tilde{u}\in{V(\Omega)}^\perp$ be the minimizer of \mcref{PDE:preexistence} given $\tilde{g}$. Thus, $\tilde{u}-\tilde{g}\in V(\Omega)$ and so $\tilde{u}-\tilde{g}=v-\overline{v}$, $v\in H_0^1(\Omega)$. Define $u:=\tilde{u}+\overline{g}+\overline{v}$. Note that $u-g=v\in H_0^1(\Omega)$ and \mcref{PDE:traceequivalence} implies $u=g$ on $\Fr{\Omega}$. It's missing to show that $u$ minimizes $E$. But this is clear from the fact that $u-\tilde{u}\in\RR$ and so $\norm{u}_{H(\Omega)}=\norm{\tilde{u}}_{H(\Omega)}$ and the existence and uniqueness of $\tilde{u}$.
+  \end{proof}
 \end{multicols}
 \end{document}
