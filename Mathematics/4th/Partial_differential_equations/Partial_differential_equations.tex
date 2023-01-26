@@ -307,7 +307,7 @@
     Now use the regularity of the functions and the \mnameref{PDE:fundamentallemma} to get the result.
   \end{sproof}
   \subsubsection{Solution on \texorpdfstring{$\RR$}{R}}
-  \begin{proposition}[D'Alembert formula]\label{PDE:propdAlembert}
+  \begin{proposition}[D'Alembert formula]\label{PDE:dAlembert}
     Let $u_0,v_0:\RR\rightarrow\RR$ be functions. The solution $u(x,t)$ to the problem
     \begin{equation*}
       \left\{
@@ -318,7 +318,7 @@
       \end{aligned}
       \right.
     \end{equation*} is:
-    \begin{equation}\label{PDE:dAlembert}
+    \begin{equation}
       u(x,t)=\frac{u_0(x+ct)+u_0(x-ct)}{2}+\frac{1}{2c}\int_{x-ct}^{x+ct}v_0(s)\dd{s}
     \end{equation}
   \end{proposition}
@@ -336,8 +336,7 @@
     \mnameref{PDE:dAlembert} show us that the state at $(x,t)$ depends entirely on the quantities $x+ct$ and $x-ct$ and the functions $\phi(x+ct)$, $\psi(x-ct)$ represent two waves traveling at velocities $-c$ and $c$ respectively. Hence, a small perturbation far from $(x,t)$ will not affect $u(x,t)$ in a neighborhood of $(x,t)$ but it will do it eventually.
   \end{remark}
   \begin{theorem}
-    Let $u_0,v_0:\RR\rightarrow\RR$ and $f:\RR^2\rightarrow\RR$ be functions. The solution to the problem
-    The solution $u(x,t)$ to the problem
+    Let $u_0,v_0:\RR\rightarrow\RR$ and $f:\RR^2\rightarrow\RR$ be functions. The solution $u(x,t)$ to the problem
     \begin{equation}\label{PDE:waveeqdriven}
       \left\{
       \begin{aligned}
@@ -393,10 +392,11 @@
   \end{sproof}
   \subsubsection{Solution with one fixed point}
   \begin{proposition}\label{PDE:wave1fixed}
-    Consider the wave equation $u_{tt}=c^2u_{xx}$ with initial conditions:
+    Consider the problem:
     $$
       \left\{
       \begin{aligned}
+        u_{tt}   & =c^2u_{xx} \\
         u(x,0)   & =u_0(x)    \\
         u_t(x,0) & =v_0(x)    \\
         u(0,t)   & =\alpha(t)
@@ -419,15 +419,16 @@
     \end{equation*}
   \end{proposition}
   \begin{sproof}
-    We already saw the expressions of $\phi$ and $\psi$ for $y\geq 0$ in \mnameref{PDE:propdAlembert}. For $y<0$, note that: $$\alpha(t)=u(0,t)=\phi(ct)+\psi(-ct)$$
+    We already saw the expressions of $\phi$ and $\psi$ for $y\geq 0$ in \mnameref{PDE:dAlembert}. For $y<0$, note that we must have: $$\alpha(t)=u(0,t)=\phi(ct)+\psi(-ct)$$
   \end{sproof}
   \begin{proposition}
-    Consider the wave equation $u_{tt}=c^2u_{xx}$ with initial conditions:
+    Consider the problem:
     $$
       \left\{
       \begin{aligned}
-        u(x,0)   & =u_0(x)   \\
-        u_t(x,0) & =v_0(x)   \\
+        u_{tt}   & =c^2u_{xx} \\
+        u(x,0)   & =u_0(x)    \\
+        u_t(x,0) & =v_0(x)    \\
         u_x(0,t) & =\beta(t)
       \end{aligned}
       \right.
@@ -447,10 +448,10 @@
     \end{equation*}
   \end{proposition}
   \begin{sproof}
-    We already saw the expressions of $\phi$ and $\psi$ for $x\geq 0$ in \mnameref{PDE:propdAlembert}. For $x<0$, note that: $$\psi'(x)=-\phi'(-x)+\beta(-x/c)$$ because $\beta(t)=u_x(0,t)=\phi'(ct)+\psi'(-ct)$.
+    We already saw the expressions of $\phi$ and $\psi$ for $y\geq 0$ in \mnameref{PDE:dAlembert}. For $y<0$, note that: $$\psi'(y)=-\phi'(y)+\beta(y/c)$$ because $\beta(t)=u_x(0,t)=\phi'(ct)+\psi'(-ct)$.
   \end{sproof}
   \subsubsection{Solution with two fixed endpoints}
-  Consider a string of length $L$ with its two endpoints fixed. In this section we will discuss how to obtain the solutions of its movement solving the following boundary problem:
+  Consider a string of length $L$ with its two endpoints fixed. In this section we will discuss how to obtain the solutions of its movement solving the following initial-and-boundary conditions problem:
   \begin{equation}\label{PDE:fixedendpoints}
     \left\{
     \begin{aligned}
@@ -477,17 +478,17 @@
     \end{itemize}
   \end{definition}
   \begin{proposition}
-    Consider the odd periodic extensions for $u_0$ and $v_0$ of \mcref{PDE:fixedendpoints}. Then, the solutions of that equation are given by the d'Alembert formula (\mcref{PDE:dAlembert}).
+    Consider the odd periodic extensions for $u_0$ and $v_0$ of \mcref{PDE:fixedendpoints}. Then, the solutions of that equation are given by the \mnameref{PDE:dAlembert}.
   \end{proposition}
   \begin{sproof}
-    Consequence of \mcref{PDE:dAlembert}.
+    Consequence of \mnameref{PDE:dAlembert}.
   \end{sproof}
   \begin{proposition}\label{PDE:methodchar}
     Suppose we want to know the displacement $u(x,t)$ of the string at the position $A=(x,t)\in[0,L]\times\RR_{\geq 0}$ (see \mcref{PDE:waves-char-solve}). Then:
     $$u(A)=-\frac{u_0(D)+u_0(C)}{2}-\frac{1}{2c}\int_{C}^{D}v_0(s)\dd{s}$$
   \end{proposition}
   \begin{sproof}
-    We will use \mcref{PDE:charwaveseq} to determine $u(A)$. Construct the characteristic lines $x\pm ct$ as shown in \mcref{PDE:waves-char-solve}. Then, by \mcref{PDE:charwaveseq} we have that the $u(A) = - u(B)$. Since we are provided with the equation at $t=0$, we can determine $u(B)$ using the points $C$ and $D$ and the \mnameref{PDE:propdAlembert}.
+    We will use \mcref{PDE:charwaveseq} to determine $u(A)$. Construct the characteristic lines $x\pm ct$ as shown in \mcref{PDE:waves-char-solve}. Then, by \mcref{PDE:charwaveseq} we have that the $u(A) = - u(B)$. Since we are provided with the equation at $t=0$, we can determine $u(B)$ using the points $C$ and $D$ and the \mnameref{PDE:dAlembert}.
   \end{sproof}
   \begin{center}
     \begin{minipage}{\linewidth}
@@ -707,7 +708,7 @@
   \begin{proof}
     An easy check shows that if $u$ is a solution to the heat equation, so it is $u_x$. Thus, from this fact and \mcref{PDE:selfsimilarsol} we get the solution:
     $$u(x,t)=\frac{C}{\sqrt{t}}\exp{-\frac{x^2}{4\alpha t}}$$
-    Imposing $\int_{-\infty}^{+\infty}u(x,t)\dd{x}=1$ we get the desired result. Let's see now that $\displaystyle\lim_{t\to 0} \Lambda_{u(\cdot,t)} =\delta$. Let $\varphi\in\mathcal{D}(\RR)$. Then, $\forall \varepsilon>0$ $\exists\delta>0$ such that $\abs{\varphi(x)-\varphi(0)}<\frac{\varepsilon}{2K}$ whenever $\abs{x}<\delta$, where $K=\int_{\abs{x}<\delta}\frac{1}{\sqrt{4\pi\alpha t}}\exp{-\frac{y^2}{4\alpha t}}$.
+    Imposing $\int_{-\infty}^{+\infty}u(x,t)\dd{x}=1$ we get the desired result. Let's see now that $\displaystyle \lim_{t\to 0} \Lambda_{u(\cdot,t)}(\varphi) = \delta(\varphi)$ $\forall\varphi\in\mathcal{D}(\RR)$. Let $\varphi\in\mathcal{D}(\RR)$. Then, $\forall \varepsilon>0$ $\exists\delta>0$ such that $\abs{\varphi(x)-\varphi(0)}<\frac{\varepsilon}{2K}$ whenever $\abs{x}<\delta$, where $K=\int_{\abs{x}<\delta}\frac{1}{\sqrt{4\pi\alpha t}}\exp{-\frac{y^2}{4\alpha t}}$.
     \begin{align*}
       I & =\abs{\int_{-\infty}^{+\infty}\frac{1}{\sqrt{4\pi\alpha t}}\exp{-\frac{y^2}{4\alpha t}}\varphi(y)\dd{y}-\varphi(0)}    \\
         & = \abs{\int_{-\infty}^{+\infty}\frac{1}{\sqrt{4\pi\alpha t}}\exp{-\frac{y^2}{4\alpha t}}(\varphi(y)-\varphi(0))\dd{y}} \\
@@ -718,7 +719,7 @@
     \end{align*}
     The first integral is bounded by $\frac{\varepsilon}{2}$, while for the second one, given that $\delta$ we can find $t>0$ such that $\int_{\abs{x}\geq\delta}\frac{1}{\sqrt{4\pi\alpha t}}\exp{-\frac{y^2}{4\alpha t}}\leq \frac{\varepsilon}{4\norm{\varphi}_\infty}$. Finally, for $t\to 0$:
     $$I\leq \frac{\varepsilon}{2} + 2\norm{\varphi}_\infty\int_{\abs{x}\geq\delta}\frac{1}{\sqrt{4\pi\alpha t}}\exp{-\frac{y^2}{4\alpha t}}<\varepsilon$$
-    This is valid $\forall\varphi\in\mathcal{D}(\Omega)$. Hence, $\displaystyle\lim_{t\to 0} \Lambda_{u(\cdot,t)} =\delta$.
+    This is valid $\forall\varphi\in\mathcal{D}(\RR)$. Hence, $\displaystyle \lim_{t\to 0} \Lambda_{u(\cdot,t)}(\varphi) = \delta(\varphi)$ $\forall\varphi\in\mathcal{D}(\RR)$.
   \end{proof}
   \begin{corollary}\label{PDE:heatgeneralcoro}
     Let $[H(t)](x)$ be the heat kernel of \mcref{PDE:heatkernel} at a fixed point $t>0$. Then, the general solution to the problem
@@ -758,7 +759,7 @@
       u_t=\alpha\laplacian u
     \end{equation} Then, the \emph{generalized heat kernel} for this equation is: $$[H(t)](\vf{x}) = \frac{1}{{(4\pi\alpha t)}^{n/2}}\exp{-\frac{\norm{\vf{x}}^2}{4\alpha t}}$$ Its associated integral form can be written as the operator:
     \begin{equation}\label{PDE:Toperator}
-      T(t)u_0=\int_{\RR^n}\frac{1}{{(4\pi\alpha t)}^{n/2}}\exp{-\frac{\norm{\vf{x-y}}^2}{4\alpha t}}u_0(\vf{y})\dd{\vf{y}}
+      T(t)u_0=\idotsint_{\RR^n}\frac{1}{{(4\pi\alpha t)}^{n/2}}\exp{-\frac{\norm{\vf{x-y}}^2}{4\alpha t}}u_0(\vf{y})\dd{\vf{y}}
     \end{equation}
     \mnameref{RFA:representationtheorem} gives a representation of $T(t)$ in the form $T(t)=\exp{t\laplacian}$.
   \end{proposition}
@@ -799,13 +800,13 @@
   \end{definition}
   \begin{definition}[Implicit scheme in finite differences]
     Let $E$ be a Banach space and $A:E\rightarrow E$ be an linear operator. Consider the ivp of \mcref{PDE:operatorpde} and rewrite it this time as:
-    $$ u(t)= {\left(I-\frac{t}{n}A\right)}^{-1}u(t-t/n)$$
+    $$ u(t)\simeq{\left(I-\frac{t}{n}A\right)}^{-1}u(t-t/n)$$
     for $n\gg t$.
     Thus, taking the limit as $n\to \infty$ we can conclude: $$u(t)=\lim_{n\to\infty}{\left(I-\frac{t}{n}A\right)}^{-n}u(0)=:\exp{tA}u(0)$$
     Note that for this to be well-defined we need that $A^{-1}$ must be a bounded operator\footnote{It can be proved that this definition of exponential matrix for an operator is more appropriate for the differential operators than the previous one. Also, computationally is more efficient.}.
   \end{definition}
-  \begin{proposition}
-    Let $E$ be a Banach space, $D:E\rightarrow E$ be a differential operator and $F:E\rightarrow E$ be a functional. Consider the following ivp:
+  \begin{proposition}[Duhamel principle]
+    Let $E$ be a Banach space, $D:E\rightarrow E$ be a linear differential operator that involves no time derivatives and $F:E\rightarrow E$ be a functional. Consider the following ivp:
     \begin{equation}
       \left\{
       \begin{aligned}
