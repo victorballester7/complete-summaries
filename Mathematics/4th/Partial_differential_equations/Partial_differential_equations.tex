@@ -837,14 +837,14 @@
   \begin{proof}
     Let $v\in\mathcal{C}_1^2(U_T)\cap\mathcal{C}(\overline{U_T})$ such that $v_t-\alpha\laplacian v<0$. Then, $\displaystyle\max\{v(\vf{x},t):(\vf{x},t)\in\overline{U_T}\}=\max\{v(\vf{x},t):(\vf{x},t)\in\Gamma_T\}$. Indeed, if the maximum was in $U_T$ or $U\times\{T\}$ we would have $v_t\geq 0$ and $\laplacian v\leq 0$, which contradicts $v_t-\alpha\laplacian v<0$ because $\alpha>0$.
 
-    Now take $v=u-\varepsilon t$ with $\varepsilon>0$. We have that: $$v_t-\alpha \laplacian v=u_t-\laplacian u -\varepsilon = -\varepsilon <0$$
+    Now take $v=u-\varepsilon t$ with $\varepsilon>0$. We have that: $$v_t-\alpha \laplacian v=u_t-\laplacian u -\alpha\varepsilon = -\varepsilon <0$$
     Thus:
     \begin{align*}
       u & =v+\varepsilon t                                              \\
         & \leq \max\{v(\vf{x},t):(\vf{x},t)\in\Gamma_T\} +\varepsilon t \\
         & \leq \max\{u(\vf{x},t):(\vf{x},t)\in\Gamma_T\} +\varepsilon t
     \end{align*}
-    forall $\varepsilon >0$ and all $t\in[0,T]$.
+    for all $\varepsilon >0$ and all $t\in[0,T]$.
   \end{proof}
   \begin{theorem}[Minimum principle]\label{PDE:min}
     Let $U\subset\RR^n$ be open and bounded and fix a time $t=T$. Suppose $u\in\mathcal{C}_1^2(U_T)\cap\mathcal{C}(\overline{U_T})$\footnote{Here the subindex 1 in $\mathcal{C}_1^2(U_T)$ indicates that the differentiability is with respect to the first component of $u$, that is, with respect to $\vf{x}$.} solves the heat equation in $U_T$. Then:
@@ -865,8 +865,8 @@
   \begin{sproof}
     Suppose $u_1$ and $u_2$ are two solutions of this problem. Apply both \mnameref{PDE:max} and \mnameref{PDE:min} to the function $u_1-u_2$.
   \end{sproof}
-  \begin{theorem}[Maximum principle for Cauchy problem]\label{PDE:Cauchymax}
-    Let $g\in\mathcal{C}(\RR^n\times \{0\})$. Suppose $u\in\mathcal{C}^2(\RR^n\times (0,T])\cap\mathcal{C}(\RR^n\times (0,T])$ solves the problem
+  \begin{theorem}[Maximum principle on unbounded domains]\label{PDE:maxunbounded}
+    Let $g\in\mathcal{C}(\RR^n)$. Suppose $u\in\mathcal{C}^2(\RR^n\times (0,T])\cap\mathcal{C}(\RR^n\times [0,T])$ solves the problem
     $$
       \begin{cases}
         u_{t}  -\laplacian{u} = 0 & \text{in $\RR^n\times (0,T]$} \\
@@ -875,13 +875,24 @@
     $$ and satisfies that $u(\vf{x},t)\leq A\exp{a\norm{\vf{x}}^2}$ $\forall (\vf{x},t)\in\RR^n\times [0,T]$ and for some constants $a, A> 0$. Then:
     $$\displaystyle\sup\{u(\vf{x},t):(\vf{x},t)\in\RR^n\times[0,T]\}=\sup\{g(\vf{x}):\vf{x}\in\RR^n\}$$
   \end{theorem}
-  % \begin{proof} % See Evans book
-  %   First divide $[0,T]$ into subintervals with size $r < \frac{1}{4a}$. It suffices to prove the claim on one of such subintervals. So from now on assume $T < \frac{1}{4a}$. Consider the function
-  %   $$v(\vf{x},t)=u(\vf{x},t)-\frac{\delta}{{(4\pi(T+\varepsilon -t))}^{n/2}}\exp{\frac{\norm{\vf{\vf{x}}}^2}{4(T+\varepsilon -t)}}$$
-  %   with $\varepsilon>0$ such that $T+\varepsilon<\frac{1}{4a}$ and $\delta>0$. It can be checked that $v_t- \laplacian v\leq 0$.
-  % \end{proof}
-  \begin{theorem}[Minimum principle for Cauchy problem]\label{PDE:Cauchymin}
-    Let $g\in\mathcal{C}(\RR^n\times \{0\})$. Suppose $u\in\mathcal{C}^2(\RR^n\times (0,T])\cap\mathcal{C}(\RR^n\times (0,T])$ solves the problem
+  \begin{proof}
+    First divide $[0,T]$ into subintervals with size $\ell < \frac{1}{4a}$. It suffices to prove the claim on one of such subintervals. So from now on assume $T < \frac{1}{4a}$. Let $\vf{y}\in\RR^n$ and consider the function
+    $$v(\vf{x},t)=u(\vf{x},t)-\frac{\delta}{{(T+\varepsilon -t)}^{n/2}}\exp{\frac{\norm{\vf{x}-\vf{y}}^2}{4(T+\varepsilon -t)}}$$
+    with $\varepsilon>0$ such that $T+\varepsilon<\frac{1}{4a}$ and $\delta>0$. It can be checked that $v_t- \laplacian v= 0$. Now fix $r>0$ and consider the set $U_T=B(\vf{y}, r)\times(0,T]$. By the \mnameref{PDE:max}, we have that: $$\max\{v(\vf{x},t):(\vf{x},t)\in\overline{U_T}\}=\max\{v(\vf{x},t):(\vf{x},t)\in\Gamma_T\}=:M$$
+    Now let's prove that we can bound $M$ by $\sup_{\vf{x}\in\RR^n} g(\vf{x})$. If $\vf{x}\in\RR^n$ and $t=0$, then:
+    $$v(\vf{x},0)=u(\vf{x},0)-\frac{\delta}{{(T+\varepsilon)}^{n/2}}\exp{\frac{\norm{\vf{x}-\vf{y}}^2}{4(T+\varepsilon)}}\leq u(\vf{x},0) = g(\vf{x})$$
+    And if $\norm{\vf{x}-\vf{y}}=r$ and $t\in[0,T]$, then:
+    \begin{align*}
+      v(\vf{x},t) & =u(\vf{x},t)-\frac{\delta}{{(T+\varepsilon -t)}^{n/2}}\exp{\frac{r^2}{4(T+\varepsilon -t)}}                  \\
+                  & \leq A\exp{a\norm{\vf{x}}^2}-\frac{\delta}{{(T+\varepsilon)}^{n/2}}\exp{\frac{r^2}{4(T+\varepsilon)}}        \\
+                  & \leq A\exp{a\norm{\vf{y}}^2 + ar^2}-\frac{\delta}{{(T+\varepsilon)}^{n/2}}\exp{\frac{r^2}{4(T+\varepsilon)}} \\
+                  & \leq A\exp{a\norm{\vf{y}}^2 + ar^2}-\frac{\delta}{{(T+\varepsilon)}^{n/2}}\exp{ar^2 +\gamma r^2}
+    \end{align*}
+    where $\gamma>0$ satisfies $a+\gamma=\frac{1}{4(T+\varepsilon)}$. Letting $r\to\infty$ this last inequality is bounded by $\sup_{\vf{x}\in\RR^n} g(\vf{x})$. So $\forall\vf{y}\in\RR^n$ and all $t\in[0,T]$ we have $$v(\vf{y},t)\leq \sup_{\vf{x}\in\RR^n} g(\vf{x})$$
+    Finally, letting $\delta\to 0$ we get $\forall\vf{y}\in\RR^n$ and all $t\in[0,T]$ the desired result: $$u(\vf{y},t)\leq \sup_{\vf{x}\in\RR^n} g(\vf{x})$$
+  \end{proof}
+  \begin{theorem}[Minimum principle on unbounded domains]\label{PDE:minunbounded}
+    Let $g\in\mathcal{C}(\RR^n)$. Suppose $u\in\mathcal{C}^2(\RR^n\times (0,T])\cap\mathcal{C}(\RR^n\times [0,T])$ solves the problem
     $$
       \begin{cases}
         u_{t}  -\laplacian{u} = 0 & \text{in $\RR^n\times (0,T]$} \\
@@ -891,20 +902,20 @@
     $$\displaystyle\inf\{u(\vf{x},t):(\vf{x},t)\in\RR^n\times[0,T]\}=\inf\{g(\vf{x}):\vf{x}\in\RR^n\}$$
   \end{theorem}
   \begin{sproof}
-    Apply the \mnameref{PDE:Cauchymax} to the function $-u(\vf{x},t)$.
+    Apply the \mnameref{PDE:maxunbounded} to the function $-u(\vf{x},t)$.
   \end{sproof}
-  \begin{theorem}[Uniqueness for Cauchy problem]
-    Let $g\in\mathcal{C}(\RR^n\times \{0\})$ and $f\in\mathcal{C}(\RR^n\times (0,T))$. Then, there exists at most one solution $u\in\mathcal{C}^2(\RR^n\times (0,T])\cap\mathcal{C}(\RR^n\times (0,T])$ of the problem:
+  \begin{theorem}[Uniqueness of the heat equation on the unbounded domains]
+    Let $g\in\mathcal{C}(\RR^n)$ and $f\in\mathcal{C}(\RR^n\times [0,T])$. Then, there exists at most one solution $u\in\mathcal{C}^2(\RR^n\times (0,T])\cap\mathcal{C}(\RR^n\times [0,T])$ of the problem:
     $$
       \begin{cases}
         u_{t}  -\laplacian{u} = f & \text{in $\RR^n\times (0,T]$} \\
         u=g                       & \text{on $\RR^n\times \{0\}$}
       \end{cases}
     $$
-    satisfying $\abs{u(\vf{x},t)}\leq A\exp{a\norm{\vf{x}}^2}$ $\forall \vf{x}\in\RR^n\times [0,T]$ for some constants $a, A>0$.
+    satisfying $\abs{u(\vf{x},t)}\leq A\exp{a\norm{\vf{x}}^2}$ $\forall (\vf{x},t)\in\RR^n\times [0,T]$ and for some constants $a, A>0$.
   \end{theorem}
   \begin{sproof}
-    Suppose $u_1$ and $u_2$ are two solutions of this problem. Apply both the \mnameref{PDE:Cauchymax} and \mnameref{PDE:Cauchymin} to the function $u_1-u_2$.
+    Suppose $u_1$ and $u_2$ are two solutions of this problem. Apply both the \mnameref{PDE:maxunbounded} and \mnameref{PDE:minunbounded} to the function $u_1-u_2$.
   \end{sproof}
   \subsection{Laplace equation}
   \subsubsection{General properties and solutions}
@@ -926,7 +937,7 @@
     \end{align*}
   \end{proposition}
   \begin{sproof}
-    The Laplacian in polar coordinates is: $$\laplacian u=\frac{1}{r}\pdv{}{r}\left(r\pdv{u}{r}\right)+\frac{1}{r^2}\pdv[2]{u}{\theta}$$ Now use separation of variables $v(r,\theta)=R(r)\Theta(\theta)$.
+    The Laplacian in polar coordinates is: $$\laplacian u=\frac{1}{r}\pdv{}{r}\left(r\pdv{u}{r}\right)+\frac{1}{r^2}\pdv[2]{u}{\theta}$$ Now use separation of variables $v(r,\theta)=R(r)\Theta(\theta)$ imposing that $\Theta(\theta)$ must be $2\pi$-periodic.
   \end{sproof}
   \begin{definition}[Dirichlet problem]
     Let $U\subseteq \RR^n$ be an open bounded set such that $\Fr{U}$ is of class $\mathcal{C}^1$, $f\in\mathcal{C}^2(\Omega)$ and $g\in\mathcal{C}^2(\Fr{\Omega})$ The \emph{Dirichlet problem} is defined as the following ivp:
@@ -975,7 +986,7 @@
     is a Hilbert space.
   \end{proposition}
   \begin{sproof}
-    Clearly, $H^1(\Omega)$ is pre-Hilbert. It's missing to show that $H^1$ is complete. Let $(f_n)\in H^1(\Omega)$ be Cauchy. Then, $(f_n), (D_if_n)\in L^2(\Omega)$ are also Cauchy as $\norm{f}_2\leq \norm{f}_{H^1}$ and $\norm{D_if}_2\leq \norm{f}_{H^1}$ $\forall i=1,\ldots,n$. Hence, $\displaystyle\lim_{n\to\infty}f_n\overset{L^2}{=}G$ and $\displaystyle\lim_{n\to\infty}D_if_n\overset{L^2}{=}g_i$ for some $G,g_i\in L^2(\Omega)$, $\forall i=1,\ldots,n$. If we prove that $D_iG=g_i$, we will be done. But this is clear from the definition of distributional derivative as $\forall\varphi\in\mathcal{D}(\Omega)$ we have:
+    Clearly, $H^1(\Omega)$ is pre-Hilbert. It's missing to show that $H^1(\Omega)$ is complete. Let $(f_n)\in H^1(\Omega)$ be Cauchy. Then, $(f_n), (D_if_n)\in L^2(\Omega)$ are also Cauchy as $\norm{f}_2\leq \norm{f}_{H^1}$ and $\norm{D_if}_2\leq \norm{f}_{H^1}$ $\forall i=1,\ldots,n$. Hence, $\displaystyle\lim_{n\to\infty}f_n\overset{L^2}{=}G$ and $\displaystyle\lim_{n\to\infty}D_if_n\overset{L^2}{=}g_i$ for some $G,g_i\in L^2(\Omega)$, $\forall i=1,\ldots,n$. If we prove that $D_iG=g_i$, we will be done. But this is clear from the definition of distributional derivative as $\forall\varphi\in\mathcal{D}(\Omega)$ we have:
     $$\idotsint_\Omega D_if_n\varphi =\idotsint_\Omega f_n D_i\varphi$$
     And the \mnameref{RFA:dominated} allow us to conclude that:
     $$\idotsint_\Omega g_i\varphi =\idotsint_\Omega G D_i\varphi$$
@@ -1017,22 +1028,22 @@
     for certain $C\in\RR$ and because $\overline{\tilde{u}}=0$. Thus, the Cauchy convergence is the same with both norms. And since $H^1(\Omega)$ is complete, so it is $H(\Omega)$.
   \end{proof}
   \begin{proposition}
-    Let $\Omega\subseteq \RR^n$ be a bounded subset. Then, $V(\Omega):=Q(H_0^1(\Omega))$ is closed in $H(\Omega)$.
+    Let $\Omega\subseteq \RR^n$ be a bounded subset. Then, $H_0(\Omega):=Q(H_0^1(\Omega))$ is closed in $H(\Omega)$.
   \end{proposition}
   \begin{proof}
     Let $(w_n)\in Q(H_0^1(\Omega))$ be a sequence that converges in $H_0^1(\Omega)$ to $w$. We need to show that $w\in Q(H_0^1(\Omega))$. Note that $w_n=Q(u_n)=u_n-\overline{u_n}$ for certain $(u_n)\in H_0^1(\Omega)$. Thus, $\overline{u_n} = u_n -w_n$. By \mcref{PDE:traceequivalence} we have that $\overline{u_n} = -w_n|_{\Fr{\Omega}}$ which converges in $L^2(\Fr{\Omega})$ by the continuity of the trace and therefore, as $L^2(\Fr{\Omega})$, $\overline{u_n}$ converges on $\RR$. Let $\displaystyle c:=\lim_{n\to\infty}\overline{u_n}$. Now, $u=w_n+\overline{u_n}$ converges in $H_0^1(\Omega)$ to $w+c=:u$. We claim that $c=\overline{u}$, which is clear by the continuity of the average. Hence, $w=u-\overline{u} =Q(u)$ with $u\in H_0^1(\Omega)$ because $ H_0^1(\Omega)$ is closed. So $w\in Q(H_0^1(\Omega))$.
   \end{proof}
   \begin{proposition}\label{PDE:preexistence}
-    Let $\Omega\subseteq \RR^n$ be a bounded subset and $\tilde{g}\in H(\Omega)$. Then, $\exists! \tilde{u}\in {V(\Omega)}^\perp=H\ominus V(\Omega)$ such that $$\tilde{u}=\argmin_{w\in V(\Omega)}\left\{\idotsint_\Omega\frac{1}{2}\norm{\grad w}^2:\tilde{g}-w\in V(\Omega)\right\}$$
+    Let $\Omega\subseteq \RR^n$ be a bounded subset and $\tilde{g}\in H(\Omega)$. Then, $\exists! \tilde{u}\in {H_0(\Omega)}^\perp=H\ominus H_0(\Omega)$ such that $$\tilde{u}=\argmin_{w\in H_0(\Omega)}\left\{\idotsint_\Omega\frac{1}{2}\norm{\grad w}^2:\tilde{g}-w\in H_0(\Omega)\right\}$$
   \end{proposition}
   \begin{sproof}
     Use the \mnameref{RFA:projection}.
   \end{sproof}
-  \begin{theorem}[Existence and uniqueness of the Dirichlet problem]
+  \begin{theorem}
     Let $\Omega\subseteq \RR^n$ be a bounded subset. Consider the Dirichlet problem of \mcref{PDE:dirichlet} with $f=0$ and $g\in H^1(\Omega)$. Then, this problem has existence and uniqueness of solutions.
   \end{theorem}
   \begin{proof}
-    Let $\tilde{g}=Q(g)=g-\overline{g}\in H(\Omega)$ and $\tilde{u}\in{V(\Omega)}^\perp$ be the minimizer of \mcref{PDE:preexistence} given $\tilde{g}$. Thus, $\tilde{u}-\tilde{g}\in V(\Omega)$ and so $\tilde{u}-\tilde{g}=v-\overline{v}$, $v\in H_0^1(\Omega)$. Define $u:=\tilde{u}+\overline{g}+\overline{v}$. Note that $u-g=v\in H_0^1(\Omega)$ and \mcref{PDE:traceequivalence} implies $u=g$ on $\Fr{\Omega}$. It's missing to show that $u$ minimizes $E$. But this is clear from the fact that $u-\tilde{u}\in\RR$ and so $\norm{u}_{H(\Omega)}=\norm{\tilde{u}}_{H(\Omega)}$ and the existence and uniqueness of $\tilde{u}$.
+    Let $\tilde{g}=Q(g)=g-\overline{g}\in H(\Omega)$ and $\tilde{u}\in{H_0(\Omega)}^\perp$ be the minimizer of \mcref{PDE:preexistence} given $\tilde{g}$. Thus, $\tilde{u}-\tilde{g}\in H_0(\Omega)$ and so $\tilde{u}-\tilde{g}=v-\overline{v}$, $v\in H_0^1(\Omega)$. Define $u:=\tilde{u}+\overline{g}+\overline{v}$. Note that $u-g=v\in H_0^1(\Omega)$ and \mcref{PDE:traceequivalence} implies $u=g$ on $\Fr{\Omega}$. It's missing to show that $u$ minimizes $E$. But this is clear from the fact that $u-\tilde{u}\in\RR$ and so $\norm{u}_{H(\Omega)}=\norm{\tilde{u}}_{H(\Omega)}$ and the existence and uniqueness of $\tilde{u}$.
   \end{proof}
 \end{multicols}
 \end{document}
