@@ -88,7 +88,7 @@
   \end{definition}
   \begin{definition}[Flux]
     Let $\vf{F}:\RR^3\rightarrow\RR^3$ be a vector field and $S\subset\RR^3$ be a surface. We define the \emph{flux} $\Phi$ of $\vf{F}$ across $S$ as:
-    $$\Phi:=\iint_S\vf{F}\cdot \dd{\vf{S}}=\iint_S\vf{F}\cdot\vf{n} \dd{S}$$
+    $$\Phi:=\int_S\vf{F}\cdot \dd{\vf{S}}=\int_S\vf{F}\cdot\vf{n} \dd{S}$$
     where $\vf{n}$ is the unit normal vector to $\dd{S}$.
   \end{definition}
   \begin{definition}[Divergence]
@@ -127,22 +127,22 @@
   \end{proposition}
   \subsubsection{Theorems of vector calculus}
   \begin{theorem}[Stokes' theorem]
-    Let $S$ be a parametrized surface of class $\mathcal{C}^1$ and $\partial S$ be its boundary. Let $\vf{F}:\RR^3\rightarrow\RR^3$ be a vector field of class $\mathcal{C}^1$ in a domain containing $S\cup\partial S$. Then: $$\int_{\partial S}\vf{F}\cdot \dd{\vf{s}}=\iint_S\rotp\vf{F}\cdot\vf{n} \dd{S}$$
+    Let $S$ be a parametrized surface of class $\mathcal{C}^1$ and $\partial S$ be its boundary. Let $\vf{F}:\RR^3\rightarrow\RR^3$ be a vector field of class $\mathcal{C}^1$ in a domain containing $S\cup\partial S$. Then: $$\int_{\partial S}\vf{F}\cdot \dd{\vf{s}}=\int_S\rotp\vf{F}\cdot\vf{n} \dd{S}$$
   \end{theorem}
   \begin{theorem}[Gau\ss' or divergence theorem]
-    Let $\vf{F}:\RR^3\rightarrow\RR^3$ be a vector field of class $\mathcal{C}^1$ on a symmetric region $V\subset\RR^3$ with boundary $\partial V$. Then: $$\iint_{\partial V}\vf{F}\cdot\vf{n} \dd{S}=\iiint_V\divp\vf{F}\dd{V}$$
+    Let $\vf{F}:\RR^3\rightarrow\RR^3$ be a vector field of class $\mathcal{C}^1$ on a symmetric region $V\subset\RR^3$ with boundary $\partial V$. Then: $$\int_{\partial V}\vf{F}\cdot\vf{n} \dd{S}=\int_V\divp\vf{F}\dd{V}$$
   \end{theorem}
   \begin{theorem}[Helmholtz theorem]
     Let $\vf{F}:V\rightarrow\RR^3$ be a vector field of class $\mathcal{C}^2$ defined on a bounded domain $V\subset\RR^3$. Let $\rho=\divp\vf{F}$ and $\vf{J}=\rotp\vf{F}$. Then, $\vf{F}$ can be written as: $$\vf{F}=-\grad\phi+\rotp\vf{A}$$
     where:
     \begin{gather*}
-      \Phi(\vf{r}) =\frac 1 {4\pi} \iiint_V \frac{\rho(\vf{r}_1)}{\norm{\vf{r}-\vf{r}_1}}\dd^3r_1 -\frac 1 {4\pi} \oiint_S\frac{\vf{F} (\vf{r}_1)\cdot\vf{n}}{\norm{\vf{r}-\vf{r}_1}}\dd^2r_1\\
-      \vf{A}(\vf{r}) =\frac 1 {4\pi} \iiint_V \frac{\vf{J}(\vf{r}_1)}{\norm{\vf{r}-\vf{r}_1}}\dd^3r_1 +\frac 1 {4\pi} \oiint_S \frac{\vf{F} (\vf{r}_1)\times\vf{n}}{\norm{\vf{r}-\vf{r}_1}}\dd^2r_1
+      \Phi(\vf{r}) =\frac 1 {4\pi} \int_V \frac{\rho(\vf{r}_1)}{\norm{\vf{r}-\vf{r}_1}}\dd^3r_1 -\frac 1 {4\pi} \oiint_S\frac{\vf{F} (\vf{r}_1)\cdot\vf{n}}{\norm{\vf{r}-\vf{r}_1}}\dd^2r_1\\
+      \vf{A}(\vf{r}) =\frac 1 {4\pi} \int_V \frac{\vf{J}(\vf{r}_1)}{\norm{\vf{r}-\vf{r}_1}}\dd^3r_1 +\frac 1 {4\pi} \oiint_S \frac{\vf{F} (\vf{r}_1)\times\vf{n}}{\norm{\vf{r}-\vf{r}_1}}\dd^2r_1
     \end{gather*}
     Moreover if $V=\RR^3$ (and is therefore unbounded) and $\vf{F}$ vanishes faster than $1/r$, when $\rho\to\infty$, then:
     \begin{gather*}
-      \Phi(\vf{r}) =\frac 1 {4\pi} \iiint_{\RR^3} \frac{\rho(\vf{r}_1)}{\norm{\vf{r}-\vf{r}_1}}\dd^3r_1 \\
-      \vf{A}(\vf{r}) =\frac 1 {4\pi} \iiint_{\RR^3} \frac{\vf{J}(\vf{r}_1)}{\norm{\vf{r}-\vf{r}_1}}\dd^3r_1
+      \Phi(\vf{r}) =\frac 1 {4\pi} \int_{\RR^3} \frac{\rho(\vf{r}_1)}{\norm{\vf{r}-\vf{r}_1}}\dd^3r_1 \\
+      \vf{A}(\vf{r}) =\frac 1 {4\pi} \int_{\RR^3} \frac{\vf{J}(\vf{r}_1)}{\norm{\vf{r}-\vf{r}_1}}\dd^3r_1
     \end{gather*}
   \end{theorem}
   \begin{theorem}
@@ -173,8 +173,8 @@
   \begin{theorem}[Integral in cylindrical coordinates]
     Let $f:\RR^3\rightarrow\RR$ be a function and $\varphi:[0,\infty)\times[0,2\pi)\times\RR \rightarrow\RR^3 $ be such that: $$\varphi(\rho,\varphi,z)\longmapsto(\rho\cos\varphi,\rho\sin\varphi,z)$$ Then, we have:
     \begin{multline*}
-      \iiint_{\varphi(U)}f(x,y,z)\dd{x}\dd{y}\dd{z}=\\
-      \iiint_Uf(\rho\cos\varphi,\rho\sin\varphi,z)\rho\dd{\rho} \dd{\varphi} \dd{z}
+      \int_{\varphi(U)}f(x,y,z)\dd{x}\dd{y}\dd{z}=\\
+      \int_Uf(\rho\cos\varphi,\rho\sin\varphi,z)\rho\dd{\rho} \dd{\varphi} \dd{z}
     \end{multline*}
   \end{theorem}
   \begin{proposition}
@@ -215,7 +215,7 @@
   \begin{theorem}[Integral in spherical coordinates]
     Let $f:\RR^3\rightarrow\RR$ be a function and $\varphi:[0,\infty)\times[0,2\pi)\times[0,\pi]\rightarrow\RR^3 $ be such that: $$\varphi(r,\varphi,\theta)\longmapsto(r\sin\theta\cos\varphi,r\sin\theta\sin\varphi,r\cos\theta)$$ Then, we have:
     \begin{multline*}
-      \iiint f(x,y,z)\dd{x}\dd{y}\dd{z}=\\=\iiint f(r\sin\theta\cos\varphi,r\sin\theta\sin\varphi,r\cos\theta)r^2\sin\theta \dd{r} \dd{\varphi} \dd{\theta}
+      \int f(x,y,z)\dd{x}\dd{y}\dd{z}=\\=\int f(r\sin\theta\cos\varphi,r\sin\theta\sin\varphi,r\cos\theta)r^2\sin\theta \dd{r} \dd{\varphi} \dd{\theta}
     \end{multline*}
   \end{theorem}
   \begin{proposition}
@@ -242,7 +242,7 @@
     We define the \emph{electric field} $\vf{E}$ as the force per unit of charge. For a point charge $q_1$, the electric field created by $q_1$ at the position of $\vf{r}_2$ is $$\vf{E}_1(\vf{r}_2)=kq_1\frac{\vf{r}_2-\vf{r}_1}{\|\vf{r}_2-\vf{r}_1\|^3}$$ Furthermore, if we place a point charge $q_2$ at $r_2$ it will experience a force given by: $$\vf{F}_2=q_2\vf{E}_1(\vf{r}_2)$$
   \end{proposition}
   \begin{proposition}[Superposition principle]
-    Let $\rho(\vf{r})=\dv{q}{^3\vf{r}_1}$ be the volume charge density of a body of volume $V$\footnote{Analogously we can define $\sigma(\vf{r})=\dv{q}{S}$ to be the surface charge density of the body and $\lambda(\vf{r})=\dv{q}{\ell}$ to be the linear charge density of the body. Thus, the volume integral of the electric field become a surface integral and a line integral, respectively.}. Then, the electric field created by the body at a distance $\vf{r}$ of it is: $$\vf{E}(\vf{r})=k\iiint_V\rho(\vf{r}_1)\frac{\vf{r}-\vf{r}_1}{\|\vf{r}-\vf{r}_1\|^3}\dd^3{r_1}$$
+    Let $\rho(\vf{r})=\dv{q}{^3\vf{r}_1}$ be the volume charge density of a body of volume $V$\footnote{Analogously we can define $\sigma(\vf{r})=\dv{q}{S}$ to be the surface charge density of the body and $\lambda(\vf{r})=\dv{q}{\ell}$ to be the linear charge density of the body. Thus, the volume integral of the electric field become a surface integral and a line integral, respectively.}. Then, the electric field created by the body at a distance $\vf{r}$ of it is: $$\vf{E}(\vf{r})=k\int_V\rho(\vf{r}_1)\frac{\vf{r}-\vf{r}_1}{\|\vf{r}-\vf{r}_1\|^3}\dd^3{r_1}$$
   \end{proposition}
   \begin{theorem}[Electrostatics equations]
     The two fundamental electrostatic equations are:
@@ -252,7 +252,7 @@
   \begin{theorem}[Gau\ss'\  theorem]
     The net electric flux through any hypothetical closed surface is:
     $$
-      \oiint_S\vf{E}\cdot\vf{n}\dd{S}=\frac{1}{\varepsilon_0}\iiint_V\rho(r)\dd^3 r=\frac{Q}{\varepsilon_0}
+      \oiint_S\vf{E}\cdot\vf{n}\dd{S}=\frac{1}{\varepsilon_0}\int_V\rho(r)\dd^3 r=\frac{Q}{\varepsilon_0}
     $$
     where $Q$ is the total charge enclosed within $V$. Equivalently:
     \begin{equation}
@@ -368,7 +368,7 @@
     where $\displaystyle\phi_i=\sum_{\substack{j=1\\j\ne i}}^n\phi_{ij}$.
   \end{proposition}
   \begin{proposition}[Continuous charge distribution]
-    Consider a continuous charge distribution of density $\rho$ enclosed in a volume $V$. Then $$U_\text{e}=\frac{1}{2}\iiint_V\rho\phi \dd^3r$$
+    Consider a continuous charge distribution of density $\rho$ enclosed in a volume $V$. Then $$U_\text{e}=\frac{1}{2}\int_V\rho\phi \dd^3r$$
     If the surface of the volume $V$ is large enough, we have: $$U_\text{e}\simeq\frac{\varepsilon_0}{2}\int_VE^2\dd^3r$$
   \end{proposition}
   \begin{definition}
@@ -380,8 +380,8 @@
   \subsection{Dielectric materials}
   \subsubsection{Multipole expansion}
   \begin{definition}
-    Consider a continuous distribution of charge enclosed in a volume $V$. We define the \emph{electric dipole moment} at a point $\vf{p}(\vf{r})$ as: $$\vf{p}:=\iiint\vf{r}_1\rho(\vf{r}_1)\dd{r}_1$$
-    We define the \emph{quadrupole moment tensor} as: $$Q_{ij}:=\iiint_V(3x_ix_j-r^2\delta_{ij})\rho(\vf{r})\dd^3 r)$$ where $\delta_{ij}$ is the Kronecker delta and $i,j\in\{1,2,3\}$.
+    Consider a continuous distribution of charge enclosed in a volume $V$. We define the \emph{electric dipole moment} at a point $\vf{p}(\vf{r})$ as: $$\vf{p}:=\int\vf{r}_1\rho(\vf{r}_1)\dd{r}_1$$
+    We define the \emph{quadrupole moment tensor} as: $$Q_{ij}:=\int_V(3x_ix_j-r^2\delta_{ij})\rho(\vf{r})\dd^3 r)$$ where $\delta_{ij}$ is the Kronecker delta and $i,j\in\{1,2,3\}$.
   \end{definition}
   \begin{proposition}
     Consider a continuous distribution of charge of total charge $Q_T$ enclosed in a volume $V$. Then:

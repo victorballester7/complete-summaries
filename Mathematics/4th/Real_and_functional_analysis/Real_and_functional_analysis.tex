@@ -615,31 +615,35 @@
   \begin{corollary}
     Let $f:\RR^{p+q}\rightarrow\RR$ be a measurable function. Then, $f$ is integrable if and only if: $$\int_{\RR^q}\dd{y}\int_{\RR^p}\abs{f(x,y)}\dd{x}<\infty$$
   \end{corollary}
-  \begin{theorem}[Fubini's theorem]\label{RFA:fubini}
-    Let $f\in \mathcal{L}^1(\RR^{p+q})$. Then:
-    \begin{enumerate}
-      \item $f(\cdot,y)\overset{\text{a.e.}}{\in} \mathcal{L}^1(\RR^p)$ and $f(x,\cdot)\overset{\text{a.e.}}{\in}\mathcal{L}^1(\RR^q)$, $x\in\RR^p$, $y\in\RR^q$.
-      \item Let $N_p$ and $N_q$ be the respective null sets where the above functions aren't integrable. Then the functions
-            \begin{align*}
-              \Phi(y) & =\begin{cases}
-                           \int_{\RR^p}f(x,y)\dd{x} & \text{if } y\in\RR^q\setminus N_q \\
-                           0                        & \text{if } y\in N_q
-                         \end{cases} \\ \Psi(x)&=\begin{cases}
-                \int_{\RR^q}f(x,y)\dd{y} & \text{if } x\in\RR^p\setminus N_p \\
-                0                        & \text{if } x\in N_p
-              \end{cases}
-            \end{align*}
-            are integrable on $\RR^q$ and $\RR^p$, respectively.
-      \item \hfill $$\int_{\RR^q}\Phi(y)\dd{y}=\int_{\RR^{p+q}}f(x,y)\dd{(x,y)}=\int_{\RR^p}\Psi(x)\dd{x}$$
-    \end{enumerate}
-  \end{theorem}
+  \begin{important}
+    \begin{theorem}[Fubini's theorem]\label{RFA:fubini}
+      Let $f\in \mathcal{L}^1(\RR^{p+q})$. Then:
+      \begin{enumerate}
+        \item $f(\cdot,y)\overset{\text{a.e.}}{\in} \mathcal{L}^1(\RR^p)$ and $f(x,\cdot)\overset{\text{a.e.}}{\in}\mathcal{L}^1(\RR^q)$, $x\in\RR^p$, $y\in\RR^q$.
+        \item Let $N_p$ and $N_q$ be the respective null sets where the above functions aren't integrable. Then the functions
+              \begin{align*}
+                \Phi(y) & =\begin{cases}
+                             \int_{\RR^p}f(x,y)\dd{x} & \text{if } y\in\RR^q\setminus N_q \\
+                             0                        & \text{if } y\in N_q
+                           \end{cases} \\ \Psi(x)&=\begin{cases}
+                  \int_{\RR^q}f(x,y)\dd{y} & \text{if } x\in\RR^p\setminus N_p \\
+                  0                        & \text{if } x\in N_p
+                \end{cases}
+              \end{align*}
+              are integrable on $\RR^q$ and $\RR^p$, respectively.
+        \item \hfill $$\int_{\RR^q}\Phi(y)\dd{y}=\int_{\RR^{p+q}}f(x,y)\dd{(x,y)}=\int_{\RR^p}\Psi(x)\dd{x}$$
+      \end{enumerate}
+    \end{theorem}
+  \end{important}
   \subsubsection{Change of variables}
   \begin{definition}
     Let $U,V\subseteq\RR^n$ be open sets. A \emph{change of variables} is a diffeomorphism $\vf\varphi:U\rightarrow V$ of class $\mathcal{C}^1$.
   \end{definition}
-  \begin{theorem}[Change of variables]
-    Let $U,V\subseteq\RR^n$ be open sets and $\vf\varphi:U\rightarrow V$ be a change of variables. If $f:\RR^n\rightarrow[0,\infty]$ is measurable or integrable on $V$, then so is $(f\circ\vf\varphi)\abs{J\vf\varphi}$ and: $$\int_{V} f(x)\dd{x}=\int_Uf(\vf\varphi(t))\abs{J\vf\varphi(t)}\dd{t}$$
-  \end{theorem}
+  \begin{important}
+    \begin{theorem}[Change of variables]
+      Let $U,V\subseteq\RR^n$ be open sets and $\vf\varphi:U\rightarrow V$ be a change of variables. If $f:\RR^n\rightarrow[0,\infty]$ is measurable or integrable on $V$, then so is $(f\circ\vf\varphi)\abs{J\vf\varphi}$ and: $$\int_{V} f(x)\dd{x}=\int_Uf(\vf\varphi(t))\abs{J\vf\varphi(t)}\dd{t}$$
+    \end{theorem}
+  \end{important}
   \subsection{Banach spaces}
   \subsubsection{Normed vector spaces}
   \begin{definition}
@@ -713,9 +717,13 @@
     \end{itemizeiff}
   \end{proof}
   \begin{proposition}
-    The space $\mathcal{C}_0([a,b])$ of continuous and bounded functions with the \emph{uniform norm} $$\norm{f}_\infty:=\sup\{\abs{f(t)}:t\in[a,b]\}$$
+    The space $\mathcal{B}([a,b])$ of continuous and bounded functions with the \emph{uniform norm} $$\norm{f}_\infty:=\sup\{\abs{f(t)}:t\in[a,b]\}$$
     is Banach.
   \end{proposition}
+  \begin{proof}
+    Let $(f_n)\in \mathcal{B}([a,b])$ be Cauchy. Then, for each $x\in[a,b]$, the numeric sequence $(f_n(x))$ is Cauchy and so it  converges pointwise to a function $f(x)$. Thus, we have:
+    $$\lim_{n,m\to\infty}\abs{f_n(x)-f_m(x)}=\lim_{n\to\infty}\abs{f_n(x)-f(x)}$$ which is valid $\forall x\in[a,b]$. Hence, $\displaystyle\lim_{n\to\infty}\norm{f_n-f}_\infty$ and clearly $f\in\mathcal{B}([a,b])$, as it is the uniform limit of continuous and bounded functions.
+  \end{proof}
   \begin{proposition}\label{RFA:closurevectorsubspace}
     Let $(E,\|\cdot\|)$ be a normed vector space and $F\subseteq E$ be a vector subspace. Then, $\overline{F}$ is also a vector subspace of $E$.
   \end{proposition}
@@ -731,7 +739,7 @@
   \end{proposition}
   \begin{proof}
     \begin{enumerate}
-      \item Let $x\in\overline{F}$. Then, $\exists(x_n)\in F$ such that $\displaystyle \lim_{n\to\infty}x_n=x$. In particular, $(x_n)$ is Cauchy and since $F$ is complete, we conclude $x\in F$.
+      \item Let $x\in\overline{F}$. Then, $\exists(x_n)\in F$ such that $\displaystyle \lim_{n\to\infty}x_n=x$. In particular $(x_n)$ is Cauchy and since $F$ is complete, we conclude $x\in F$.
       \item Let $(x_n)\in F$ be a Cauchy sequence. In particular it is a Cauchy sequence in $E$ and so $\exists x\in E$ with $\displaystyle \lim_{n\to\infty}x_n=x$. Moreover this $x$ satisfies $x\in \overline{F}$ and since $F$ is closed, $x\in F$.
     \end{enumerate}
   \end{proof}
@@ -747,9 +755,25 @@
   \begin{proof}
     The implication to the right is evident. For the other one, let $A$ be the total countable subset and consider the set $\langle A\rangle_{\QQ}$ of rational linear combinations. This set is countable and dense in $\langle A\rangle$. Since the latter one is also dense in $E$, we conclude that $\langle A\rangle_{\QQ}$ is dense in $E$.
   \end{proof}
+  \begin{proposition}
+    Let $M$ be a separable metric space and $S\subseteq M$ be a subspace. Then, $S$ is separable.
+  \end{proposition}
+  \begin{proof}
+    Let $A$ be the countable dense subset of $M$. The balls $B(y,1/n)$ with $y\in A$, $n\in\NN$ cover $S$. For each $y\in N$, let $A_n$ be the set formed by one point of each nonempty $B(y,1/n)\cap S$. The set $\bigcup_{n=1}^\infty A_n$ is dense in $S$.
+  \end{proof}
+  \begin{proposition}
+    Let $M$, $N$ be separable metric spaces. Then, $M\times N$ is separable.
+  \end{proposition}
+  \begin{sproof}
+    The product of two dense subsets is dense with the product topology.
+  \end{sproof}
   \subsubsection{Quotient space}
   \begin{definition}
-    Let $E$ be a normed vector space and $F$ be a closed subspace. We define the \emph{quotient space} $\quot{E}{F}$ as the respective quotient vector space with the associated norm: $$\norm{\overline{x}}_{\quot{E}{F}}:=\inf\{\norm{z}_E:z\in E\text{ with }\overline{z} = \overline{x}\}$$
+    Let $E$ be a normed vector space and $F$ be a closed subspace. We define the \emph{quotient space} $\quot{E}{F}$ as the respective quotient vector space with the associated norm:
+    \begin{align*}
+      \norm{\overline{x}}_{\quot{E}{F}} & :=\inf\{\norm{z}_E:z\in E\text{ with }\overline{z} = \overline{x}\} \\
+                                        & =\inf\{\norm{x+y}_E:y\in F\}
+    \end{align*}
   \end{definition}
   \begin{proposition}
     Let $E$ be a normed vector space and $F$ be a closed subspace. The quotient space $\quot{E}{F}$ is a normed vector space. Moreover the map $$\function{\pi}{E}{\quot{E}{F}}{x}{\overline{x}}$$ is continuous with $\norm{\overline{x}}_{\quot{E}{F}}\leq \norm{x}_E$.
@@ -771,18 +795,6 @@
       \item Note that the density and countability of sets are invariant under $\pi$.
     \end{enumerate}
   \end{sproof}
-  \begin{proposition}
-    Let $M$ be a separable metric space and $S\subseteq M$ be a subspace. Then, $S$ is separable.
-  \end{proposition}
-  \begin{proof}
-    Let $A$ be the countable dense subset of $M$. The balls $B(y,1/n)$ with $y\in A$, $n\in\NN$ cover $S$. For each $y\in N$, let $A_n$ be the set formed by one point of each nonempty $B(y,1/n)\cap S$. The set $\bigcup_{n=1}^\infty A_n$ is dense in $S$.
-  \end{proof}
-  \begin{proposition}
-    Let $M$, $N$ be separable metric spaces. Then, $M\times N$ is separable.
-  \end{proposition}
-  \begin{sproof}
-    The product of two dense subsets is dense with the product topology.
-  \end{sproof}
   \subsubsection{\texorpdfstring{$L^p$}{Lp} spaces}
   \begin{definition}
     Let $E\subseteq\RR^n$ be a measurable set and $1\leq p<\infty$. We define:
@@ -803,7 +815,7 @@
     And the equality holds if and only if $a^p=b^q$.
   \end{lemma}
   \begin{sproof}
-    Let $f:[0,a]\rightarrow\RR$ be continuous and invertible such that $f(0)=0$. Then, we have:
+    Let $f:[0,a]\rightarrow\RR$ be continuous and invertible such that $f(0)=0$. Then, we have
     $$ab\leq \int_{0}^{a}f(x)\dd{x}+\int_{0}^{b}f^{-1}(x)\dd{x}$$
     with equality if and only if $f(a)=b$ (see \mcref{RFA:youngfigure} for a better understanding). Now take $f(x)= x^{p-1}$ and so $f^{-1}(x)=x^{q-1}$. The equality is held if: $$a^{p-1} = b\text{ and }b^{q-1}=a\iff a^p = b^q$$
     \begin{figure}[H]
@@ -815,7 +827,7 @@
   \end{sproof}
   \begin{proposition}[Hölder's inequality]
     Let $E\subseteq\RR^n$ be a measurable set, $1\leq p,q\leq \infty$ be such that $\frac{1}{p}+\frac{1}{q}=1$ and ${f}\in L^p(E)$, ${g}\in L^q(E)$. Then:
-    $$\int_E\abs{fg}\leq {\left(\int_E\abs{f}^p\right)}^{1/p}{\left(\int_E\abs{f}^q\right)}^{1/q}$$
+    $$\int_E\abs{fg}\leq {\left(\int_E\abs{f}^p\right)}^{1/p}{\left(\int_E\abs{g}^q\right)}^{1/q}$$
     Or equivalently (see \mcref{RFA:lpnorm}):
     $$\norm{{fg}}_1\leq\norm{{f}}_p\norm{{g}}_q$$
     And the equality holds if and only if $\exists \alpha,\beta\in\RR_{\geq 0}$ such that $\alpha{\abs{{f}}}^p\almoste{=}\beta{\abs{{g}}}^q$.
@@ -830,21 +842,18 @@
     And the set $L^\infty(E)$ is also a normed vector space with the norm: $$\norm{{f}}_\infty=\inf \{M:\abs{{f}(x)}\almoste{\leq} M, x\in E\}\qquad\forall{f}\in L^\infty(E)$$
   \end{proposition}
   \begin{sproof}
-    The case for $L^\infty(E)$ is easy and the first two properties for $L^p(E)$, $p\geq 1$, too (remember \mcref{RFA:postmonotoneE}). It's missing to prove the \mref{RFA:triangularineq} (also called \emph{Minkowski inequality} in this case): $$\norm{f+g}_p\leq \norm{f}_p+\norm{g}_p$$
+    The case of $L^\infty(E)$ is easy and the first two properties for $L^p(E)$, $p\geq 1$, too (remember \mcref{RFA:postmonotoneE}). It's missing to prove the \mref{RFA:triangularineq} (also called \emph{Minkowski inequality} in this case): $$\norm{f+g}_p\leq \norm{f}_p+\norm{g}_p$$
     We have that:
     \begin{align*}
       {\norm{f+g}_p}^p & =\int_E\abs{f+g}\abs{f+g}^{p-1}                                            \\
                        & \leq \int_E\abs{f}\abs{f+g}^{p-1}+\int_E\abs{g}\abs{f+g}^{p-1}             \\
       \begin{split}
-        & \leq \left[{\left(\int_E\abs{f}^p\right)}^{1/p}+{\left(\int_E\abs{f}^q\right)}^{1/q}\right]\cdot \\
-        &\hspace{3cm}\cdot{\left(\int_E\abs{f+g}^{(p-1)\frac{p}{p-1}}\right)}^{1-\frac{1}{p}}
+        & \leq \left[{\left(\int_E\abs{f}^p\right)}^{1/p}+{\left(\int_E\abs{g}^p\right)}^{1/p}\right]\cdot \\
+        &\hspace{2.5cm}\cdot{\left(\int_E\abs{f+g}^{(p-1)\frac{p}{p-1}}\right)}^{1-1/p}
       \end{split} \\
                        & =(\norm{f}_p+\norm{g}_p)\frac{{\norm{f+g}_p}^p }{{\norm{f+g}_p}}
     \end{align*}
   \end{sproof}
-  \begin{proposition}
-    Let $E\subseteq\RR^n$ be a measurable set and $1\leq p\leq\infty$. Then, $(L^p(E),\norm{\cdot}_p)$ is Banach.
-  \end{proposition}
   \subsubsection{Other important Banach spaces}
   \begin{definition}
     We denote by $c_0$ the space of all sequences convergent to 0; by $c$, the space of all convergent sequences, and by $\ell^\infty$, the space of all bounded sequences.
@@ -904,7 +913,7 @@
     $$f=\alpha\frac{h_x}{h_x(x)}\frac{g-g(y)}{g(x)-g(y)}+\beta\frac{h_y}{h_y(y)}\frac{g-g(x)}{g(y)-g(x)}$$
   \end{proof}
   \begin{definition}
-    Let $K\subseteq \KK^n$ be a compact set and $A\subseteq \mathcal{C}(K)$ be a subalgebra. We say that $A$ is \emph{autoconjugate} if $\overline{f}\in A$ whenever $f\in A$.
+    Let $K\subseteq \KK^n$ be a compact set and $A\subseteq \mathcal{C}(K)$ be a subalgebra. We say that $A$ is \emph{self-conjugate} if $\overline{f}\in A$ whenever $f\in A$.
   \end{definition}
   \begin{lemma}
     Let $K\subseteq \RR^n$ be a compact set and $A\subseteq \mathcal{C}(K)$ be a subalgebra. If $f\in A$, then $\abs{f}\in \overline{A}$.
@@ -916,7 +925,7 @@
     Let $K\subseteq \KK^n$ be a compact set and $A\subseteq \mathcal{C}(K)$ be a subalgebra. If $f,g\in A$, then $\sup\{f,g\}, \inf\{f,g\}\in \overline{A}$.
   \end{corollary}
   \begin{sproof}
-    $$\sup\{f,g\}=\frac{f+g+\abs{f-g}}{2}\quad\inf\{f,g\}=\frac{f+g-\abs{f-g}}{2}$$
+    $$\sup\{f,g\}=\frac{f+g+\abs{f-g}}{2}\;\;\inf\{f,g\}=\frac{f+g-\abs{f-g}}{2}$$
   \end{sproof}
   \begin{lemma}\label{RFA:lemmaStone}
     Let $K\subseteq \KK^n$ be a compact set, $A\subseteq \mathcal{C}(K)$ be a separating subalgebra that vanishes nowhere, $x\in K$ and $f\in\mathcal{C}(K)$. Then, $\forall \varepsilon>0$ $\exists g_x\in\overline{A}$ such that $g_x(x)=f(x)$ and $g_x<f+\varepsilon$ in $K$.
@@ -924,20 +933,22 @@
   \begin{proof}
     By \mcref{RFA:lemmaalphabeta}, $\forall y\in K$ $\exists h_y\in\mathcal{C}(A)$ such that $h_y(y)=f(y)$ and $h_y(x)=f(x)$. By continuity there is a neighbourhood $N_y$ of $y$ such that $h_y<f+\varepsilon$. Now note that $K\subset\bigcup_{y\in K}N_y$ and the compactness implies that $K\subset\bigcup_{i=1}^mN_{y_i}$ for certain $y_i\in K$, $i=1,\ldots,m$. Finally take $g_x:=\inf\{h_{y_i}:i=1,\ldots,m\}\in\overline{A}$.
   \end{proof}
-  \begin{theorem}[Stone-Weierstra\ss\ theorem]
-    Let $K\subseteq \KK^n$ be a compact set and $A\subseteq \mathcal{C}(K)$ be a separating autoconjugate subalgebra that vanishes nowhere. Then, $A$ is dense in $\mathcal{C}(K)$.
-  \end{theorem}
+  \begin{important}
+    \begin{theorem}[Stone-Weierstra\ss\ theorem]
+      Let $K\subseteq \KK^n$ be a compact set and $A\subseteq \mathcal{C}(K)$ be a separating self-conjugate subalgebra that vanishes nowhere. Then, $A$ is dense in $\mathcal{C}(K)$.
+    \end{theorem}
+  \end{important}
   \begin{proof}
     We distinguish between $\KK=\RR$ and $\KK=\CC$.
     \begin{itemize}[leftmargin=1.3cm]
       \item[$\KK=\RR$:] Let $f\in\mathcal{C}(K)$. We should find $g\in\mathcal{A}$ such that $\forall \varepsilon>0$, $\norm{f-g}_K<\varepsilon$. For each $x\in K$, let $g_x$ be the function of \mcref{RFA:lemmaStone} that satisfies $g_x<f+\varepsilon$. By continuity there is a neighbourhood $N_x$ of $x$ such that $g_x>f-\varepsilon$. The compactness of $K$ implies $K\subset\bigcup_{i=1}^mN_{x_i}$ for certain $x_i\in K$, $i=1,\ldots,m$. Finally take $g:=\sup\{g_{x_i}:i=1,\ldots,m\}\in\overline{A}$ that satisfies $\norm{f-g}_K<\varepsilon$.
-      \item[$\KK=\CC$:] Note that $A_0:=\{\Re f:f\in A\}=\{\Im f:f\in A\}$ because $A$ is autoconjugate. Moreover $A_0$ is a separating subalgebra that vanishes nowhere. By the case $\KK=\RR$ we know that exists sequences $(u_n),(v_n)\in A_0$ such that $\displaystyle\lim_{n\to\infty}\norm{\Re f-u_n}_K=\lim_{n\to\infty}\norm{\Im f-v_n}_K=0$. And it suffice to consider $g_n:=u_n+\ii v_n$ that converges uniformly to $f$.
+      \item[$\KK=\CC$:] Note that $A_0:=\{\Re f:f\in A\}=\{\Im f:f\in A\}$ because $A$ is self-conjugate. Moreover $A_0$ is a separating subalgebra that vanishes nowhere. By the case $\KK=\RR$ we know that exists sequences $(u_n),(v_n)\in A_0$ such that $\displaystyle\lim_{n\to\infty}\norm{\Re f-u_n}_K=\lim_{n\to\infty}\norm{\Im f-v_n}_K=0$. And it suffice to consider $g_n:=u_n+\ii v_n$ that converges uniformly to $f$.
     \end{itemize}
   \end{proof}
   \begin{definition}
     Let $(X,d_X)$, $(Y,d_Y)$ be two metric spaces and $F\subset\mathcal{C}(X,Y)$ be a subset.
     We say that $F$ is \emph{pointwise bounded} if $\forall x\in X$ $\exists M_x>0$ such that $\abs{f(x)}\leq M_x$ $\forall f\in F$.
-    We say that $F$ is \emph{locally bounded} if $\forall x\in X$ there exist a neighborhood $N_x$ of $x$ and a $M_x>0$ such that $\abs{f(N_x)}\leq M_x$ $\forall f\in F$.
+    We say that $F$ is \emph{locally bounded} if $\forall x\in X$ there exist a neighborhood $N_x$ of $x$ and a constant $M_x>0$ such that $\abs{f(N_x)}\leq M_x$ $\forall f\in F$.
     We say that $F$ is \emph{uniformly bounded} if $\exists M>0$ such that $\abs{f(x)}\leq M$ $\forall x\in X$ and $\forall f\in F$.
   \end{definition}
   \begin{definition}
@@ -950,23 +961,25 @@
   % \begin{lemma}
   %   Let $(X,d)$ be a metric space and $F\subseteq X$. $F$ is relatively compact on $X$ if and only if any bounded sequence $(x_n)\in F$ has a partial convergent subsequence.
   % \end{lemma}
-  \begin{theorem}[Arzelà-Ascoli theorem]\label{RFA:arzela}
-    Let $(X,d)$ be a metric space, $K\subset X$ be a compact set and $F\subset \mathcal{C}(K)$ be a subset. Then, $F$ is relatively compact in $\mathcal{C}(K)$ if and only if $F$ is pointwise equicontinuous and pointwise bounded.
-  \end{theorem}
-  \begin{proof}
+  \begin{important}
+    \begin{theorem}[Arzelà-Ascoli theorem]\label{RFA:arzela}
+      Let $(X,d)$ be a metric space, $K\subset X$ be a compact set and $F\subset \mathcal{C}(K)$ be a subset. Then, $F$ is relatively compact in $\mathcal{C}(K)$ if and only if $F$ is pointwise equicontinuous and pointwise bounded.
+    \end{theorem}
+  \end{important}
+  % \begin{proof}
 
-  \end{proof}
+  % \end{proof}
   \begin{definition}
     Let $E\subseteq\RR^n$ be a measurable set and $U\subseteq \RR^n$ be an open set. We define:
     \begin{align*}
-      \mathcal{S}(E)              & =\{f:E\rightarrow\RR:f\text{ is simple}\}                               \\
-      \mathcal{C}_{\textrm{c}}(U) & =\{f:U\rightarrow\RR:f\in\mathcal{C}^0(U),\ \supp f\text{ is compact}\}
+      \mathcal{S}(E)   & =\{f:E\rightarrow\RR:f\text{ is simple}\}         \\
+      \mathcal{C}_0(U) & =\{f\in\mathcal{C}(U):\supp f\text{ is compact}\}
     \end{align*}
   \end{definition}
   \begin{theorem}
     Let $E\subseteq\RR^n$ be a measurable space, $({f}_k)\in L^p(E)$ be a sequence of functions and $1\leq p<\infty$. Then:
     \begin{enumerate}
-      \item\label{RFA:thmLpBanachA} If $\displaystyle\lim_{k\to\infty}f_k(x)\almoste{=}{f}(x)$, $\abs{{f}_k}\almoste\leq g\in L^p(E)$. Then, ${f}\in L^p(E)$ and $\displaystyle\lim_{k\to\infty}\norm{{f}_k-{f}}_p=0$ and we will write ${f}_k\overset{L^p}{\rightarrow}{f}$.
+      \item\label{RFA:thmLpBanachA} If $\displaystyle\lim_{k\to\infty}f_k(x)\almoste{=}{f}(x)$ with $\abs{{f}_k}\almoste\leq g\in L^p(E)$, then ${f}\in L^p(E)$ and $\displaystyle\lim_{k\to\infty}\norm{{f}_k-{f}}_p=0$ and we will write ${f}_k\overset{L^p}{\rightarrow}{f}$.
       \item\label{RFA:thmLpBanachB} If $\sum_{k=1}^\infty\norm{{f}_k}_p<\infty$, then $\sum_{k=1}^\infty\abs{f_k(x)}\almoste{<}\infty$ and $\exists f\in L^p(E)$ such that $\sum_{k=1}^\infty f_k(x)\almoste{=}f(x)$ and $\sum_{k=1}^N{f}_k\overset{L^p}{\rightarrow}{f}$. In particular, $(L^p,\norm{\cdot}_p)$ is a Banach space.
       \item If ${f}_k\overset{L^p}{\rightarrow}{f}$, then $\exists(f_{k_j})$ such that $\displaystyle\lim_{j\to\infty}f_{k_j}(x)\almoste{=}{f}(x)$.
     \end{enumerate}
@@ -991,7 +1004,7 @@
     Let $1\leq p<\infty$, $E\subseteq\RR^n$ be a measurable set and $U\subseteq \RR^n$ be an open set. Then:
     \begin{enumerate}
       \item $\mathcal{S}(E)$ is dense in $L^p(E)$.
-      \item $\mathcal{C}_{\textrm{c}}(U)$ is dense in $L^p(U)$.
+      \item $\mathcal{C}_0(U)$ is dense in $L^p(U)$.
     \end{enumerate}
   \end{theorem}
   \begin{sproof}
@@ -1023,7 +1036,7 @@
   \end{lemma}
   \begin{sproof}
     Note that due to the linearity of $T$ we have $$\norm{Tx}_F=\lim_{\varepsilon \to 0}\norm{T((1-\varepsilon)x)}_F\leq \sup_{\norm{x}_E< 1}\norm{Tx}_F$$
-    And this proves the first equality. For the second one, use the latter one and the fact that:
+    And this proves the first equality as the reverse inequality is clear. For the second one, use the latter one and the fact that:
     $$\norm{Tx}_F=\norm{x}_E\norm{T\left(\frac{x}{\norm{x}_E}\right)}_F\leq \sup_{\norm{x}_E= 1}\norm{Tx}_F$$
     The last one follows from applying the second equality to $\frac{x}{\norm{x}_E}$.
   \end{sproof}
@@ -1040,7 +1053,7 @@
   \end{theorem}
   \begin{sproof}
     \begin{enumerate}[leftmargin=1.5cm]
-      \item[\mref{RFA:TcontinuousA}$\implies$\mref{RFA:TcontinuousB}:] Let $x\in E$ and $(x_n)\in E$ such that $\displaystyle \lim_{n\to\infty}x_n=x$. Then $\displaystyle \lim_{n\to\infty}(x_n - x)=0$ and the continuity and linearity imply $\displaystyle \lim_{n\to\infty}(Tx_n-Tx)=0$.
+      \item[\mref{RFA:TcontinuousA}$\implies$\mref{RFA:TcontinuousB}:] Let $x\in E$ and $(x_n)\in E$ such that $\displaystyle \lim_{n\to\infty}x_n=x$. Then $\displaystyle \lim_{n\to\infty}(x_n - x)=0$ and the continuity and linearity imply $\displaystyle \lim  _{n\to\infty}(Tx_n-Tx)=0$.
       \item[\mref{RFA:TcontinuousB}$\implies$\mref{RFA:TcontinuousC}:] The continuity at the origin of $T$ implies that given $\varepsilon =1$, $\exists \delta>0$ such that: $$T(B_E(0,\delta))\subseteq B_F(0,1)$$
         The linearity of $T$ implies that $T(B_E(0,1))\subseteq B_F(0,1/\delta)$.
       \item[\mref{RFA:TcontinuousC}$\implies$\mref{RFA:TcontinuousD}:] Consequence of \mcref{RFA:normT}.
@@ -1063,10 +1076,10 @@
   \end{corollary}
   \subsubsection{Finite dimensional normed vector spaces}
   \begin{definition}
-    A \emph{topological homeomorphism} is a linear homeomorphism between any two normed vector spaces. If there exists such an isomorphism we will say that the two normed vector spaces are \emph{isomorphic}.
+    A \emph{topological homeomorphism} is a linear homeomorphism between any two normed vector spaces. If there exists such a homeomorphism we will say that the two normed vector spaces are \emph{isomorphic}.
   \end{definition}
   \begin{definition}
-    Let $E$ be a normed vector space and $\norm{\cdot}_1$, $\norm{\cdot}_2$ be two norms on $E$. We say that $\norm{\cdot}_1$ \emph{is finer than} $\norm{\cdot}_2$ if $\exists\alpha\in\RR$ such that: $$\norm{x}_1\leq\alpha\norm{x}_2\qquad \forall x\in E$$
+    Let $E$ be a normed vector space and $\norm{\cdot}_1$, $\norm{\cdot}_2$ be two norms on $E$. We say that $\norm{\cdot}_1$ \emph{is finer than} $\norm{\cdot}_2$ if $\exists\alpha>0$ such that: $$\norm{x}_1\leq\alpha\norm{x}_2\qquad \forall x\in E$$
   \end{definition}
   \begin{definition}
     Let $E$ be a normed vector space and $\norm{\cdot}_1$, $\norm{\cdot}_2$ be two norms on $E$. We say that the norms $\norm{\cdot}_1$, $\norm{\cdot}_2$ are \emph{equivalent} if $\exists\alpha,\beta>0$ such that: $$\alpha\norm{x}_2\leq \norm{x}_1\leq\beta\norm{x}_2\qquad \forall x\in E$$
@@ -1175,7 +1188,7 @@
     Let $E$, $F$ be Banach spaces and $T\in\mathcal{L}(E,F)$ be a finite-rank bounded operator. Then, $T$ is compact.
   \end{lemma}
   \begin{sproof}
-    Since $\dim T(E)<\infty$, the closed bounded spaces on $T(E)$ are compact and since $T(B_E)$ is bounded, it is compact.
+    Since $\dim T(E)<\infty$, the bounded spaces on $T(E)$ are the relatively compact sets and since $T(B_E)$ is bounded, it is relatively compact.
   \end{sproof}
   \begin{proposition}
     Let $E$, $F$ be Banach spaces and $(T_n)\in\mathcal{L}(E,F)$ be a sequence of compact operators with limit $T\in\mathcal{L}(E,F)$. Then, $T$ is compact. In particular, the limit of any sequence of finite-rank bounded operators is compact.
@@ -1221,7 +1234,7 @@
     Let $E$ be a real vector space, $F\subseteq E$ be a subspace, $p:E\rightarrow\RR$ be a convex functional and $u\in F^*$. If $u(z)\leq p(z)$ $\forall z\in F$, then $\exists v\in E^*$ such that $v(z)=u(z)$ $\forall z\in F$ and $v(x)\leq p(x)$ $\forall x\in E$ ($v$ is called a \emph{prolongation} of $u$).
   \end{theorem}
   \begin{definition}[Seminorm]
-    Let $E$ be a vector space over $\KK$. A \emph{seminorm} $p:E\rightarrow[0\infty)$ is a functional that satisfies:
+    Let $E$ be a vector space over $\KK$. A \emph{seminorm} $p:E\rightarrow[0,\infty)$ is a functional that satisfies:
     \begin{enumerate}
       \item $p(x+y)\leq p(x)+p(y)\quad\forall x,y\in E$
       \item $p(\lambda x)=\abs{\lambda} p(x)\quad\forall x\in E,\ \lambda\in\KK$
@@ -1350,17 +1363,38 @@
   \end{definition}
   \begin{proposition}
     Let $(H,\dotp{\cdot}{\cdot})$ be a pre-Hilbert space and $x,y\in H$. Then:
-    \begin{enumerate}
-      \item $\displaystyle \abs{\dotp{x}{y}}\leq \norm{x}\norm{y}$ (\emph{Cauchy-Schwarz inequality})
+    \begin{enumerate}[ref = Cauchy-Schwarz inequality]
+      \item\label{RFA:cauchyschwarz} $\displaystyle \abs{\dotp{x}{y}}\leq \norm{x}\norm{y}$ (\emph{Cauchy-Schwarz inequality})
       \item $\norm{x+y}\leq \norm{x} + \norm{y}$ (\emph{Minkowski inequality})
     \end{enumerate}
   \end{proposition}
+  \begin{proof}
+    \begin{enumerate}
+      \item Note that $\norm{x+\lambda y}^2\geq 0$ $\forall\lambda\in\KK$. Taking $\lambda = -\frac{\dotp{x}{y}}{\norm{y}^2}$ we have:
+            \begin{align*}
+              0 & \leq \norm{x+\lambda y}^2                                                                                                        \\
+                & =\norm{x}^2+\overline{\lambda}\dotp{x}{y}+\lambda\overline{\dotp{x}{y}}+\abs{\lambda}^2\norm{y}^2                                \\
+                & =\norm{x}^2-\frac{\abs{\dotp{x}{y}}^2}{\norm{y}^2}-\frac{\abs{\dotp{x}{y}}^2}{\norm{y}^2}+\frac{\abs{\dotp{x}{y}}^2}{\norm{y}^2} \\
+                & =\norm{x}^2-\frac{\abs{\dotp{x}{y}}^2}{\norm{y}^2}
+            \end{align*}
+      \item Using \mref{RFA:cauchyschwarz} we have:
+            \begin{align*}
+              \norm{x+y}^2 & =\norm{x}^2+\dotp{x}{y}+\dotp{y}{x}+\norm{y}^2 \\
+                           & =\norm{x}^2+2\Re\dotp{x}{y}+\norm{y}^2         \\
+                           & \leq\norm{x}^2+2\abs{\dotp{x}{y}}+\norm{y}^2   \\
+                           & \leq{(\norm{x} + \norm{y})}^2
+            \end{align*}
+    \end{enumerate}
+  \end{proof}
   \begin{lemma}[Polarization identity]
     Let $(H,\dotp{\cdot}{\cdot})$ be a pre-Hilbert space and $x,y\in H$. Then if $\KK=\CC$ we have:
     $$\dotp{x}{y}=\frac{{\norm{x+y}}^2-{\norm{x-y}}^2+\ii{\norm{x+\ii y}}^2-\ii{\norm{x-\ii y}}^2}{4}$$
     If $\KK=\RR$ we have:
     $$\dotp{x}{y}=\frac{1}{4}\left({\norm{x+y}}^2-{\norm{x-y}}^2\right)$$
   \end{lemma}
+  \begin{sproof}
+    Expand the right hand side of the equalities using the definition of norm.
+  \end{sproof}
   \begin{proposition}
     Let $(H,\dotp{\cdot}{\cdot})$ be a pre-Hilbert space. Then:
     \begin{itemize}
@@ -1375,10 +1409,20 @@
     Let $(H,\dotp{\cdot}{\cdot})$ be a pre-Hilbert space and $A\subseteq H$ be a subspace. Then: $$A^\perp=\bigcap_{a\in A}\ker\dotp{\cdot}{a}$$
     Hence, $A^\perp$ is a closed subspace of $H$.
   \end{lemma}
-  \begin{proposition}[Pythagorean theorem]
+  \begin{proof}
+    $$x\in A^\perp\!\iff \dotp{x}{a}=0\ \forall a\in A\iff x\in\ker\dotp{\cdot}{a}\ \forall a\in A$$
+  \end{proof}
+  \begin{proposition}[Pythagorean theorem]\label{RFA:pythagorean}
     Let $(H,\dotp{\cdot}{\cdot})$ be a pre-Hilbert space and $x_1,\ldots, x_n\in H$ be pairwise orthogonal elements of $H$. Then: $${\norm{x_1}}^2+\cdots + {\norm{x_n}}^2={\norm{x_1+\cdots+x_n}}^2$$
   \end{proposition}
-  \begin{lemma}[Parallelogram law]
+  \begin{proof}
+    \begin{align*}
+      {\norm{x_1+\cdots+x_n}}^2 & = \dotp{x_1+\cdots+x_n}{x_1+\cdots+x_n}                       \\
+                                & ={\norm{x_1}}^2+\cdots + {\norm{x_n}}^2+\sum_{\substack{i,j=1 \\i\ne j}}^n\dotp{x_i}{x_j}\\
+                                & ={\norm{x_1}}^2+\cdots + {\norm{x_n}}^2
+    \end{align*}
+  \end{proof}
+  \begin{lemma}[Parallelogram law]\label{RFA:parallelogram}
     Let $(H,\dotp{\cdot}{\cdot})$ be a pre-Hilbert space and $x,y\in H$. Then: $$\norm{x+y}^2+{\norm{x-y}}^2=2\norm{x}^2+2{\norm{y}}^2$$
   \end{lemma}
   \begin{definition}[Hilbert space]
@@ -1389,37 +1433,90 @@
     \begin{enumerate}
       \item $\RR^n$ and $\CC^n$ are Hilbert spaces with the inner product: $$\dotp{(x_1,\ldots,x_n)}{(y_1,\ldots,y_n)}=\sum_{i= 1}^nx_i\overline{y_i}$$
       \item The $L^2(X)$ space with the inner product $$\dotp{f}{g}_2=\int_Xf(x)\overline{g(x)}\dd{x}$$ is a Hilbert space.
-      \item The $\ell^2(A)$ space with the inner product $$\dotp{(x_1,x_2,\ldots)}{(y_1,y_2,\ldots)}=\sum_{a\in A}^nx_a\overline{y_a}$$ is a Hilbert space.
+      \item The $\ell^2(A)$ space with the inner product $$\dotp{(x_1,x_2,\ldots)}{(y_1,y_2,\ldots)}=\sum_{a\in A}x_a\overline{y_a}$$ is a Hilbert space.
     \end{enumerate}
   \end{proposition}
   \subsubsection{Projection theorem}
   \begin{definition}
     Let $X$ be a metric space and $A\subseteq X$ be a subset. We say that $y\in A$ is a \emph{minimizer} of $x$ in $A$ if $d(x, A)=\norm{x-y}$.
   \end{definition}
-  \begin{proposition}
+  \begin{proposition}\label{RFA:minimizeruniqueness}
     Let $(H,\dotp{\cdot}{\cdot})$ be a Hilbert space and $C\subseteq H$ be a convex subset. Then, each $x\in H$ has at most one minimizer in $C$.
   \end{proposition}
+  \begin{proof}
+    Suppose there are two minimizers $y,z\in C$ and let $\delta:=d(x,A)$. Then, using \mnameref{RFA:parallelogram} we have:
+    $$4\delta^2=\norm{2x-(y+z)}^2+\norm{y-z}^2\geq 4\delta^4+\norm{y-z}^2$$
+    because $\frac{y+z}{2}\in C$ as $C$ is convex. Thus, $\norm{y-z}$ and so $y=z$.
+  \end{proof}
   \begin{theorem}
-    Let $(H,\dotp{\cdot}{\cdot})$ be a Hilbert space and $C\subseteq H$ be a nonempty convex subset. Then, $\forall x\in H$, there exists a unique minimizer of $x$ in $C$, which is denoted by $P_Cx\in C$.
+    Let $(H,\dotp{\cdot}{\cdot})$ be a Hilbert space and $C\subseteq H$ be a nonempty convex complete subset. Then, $\forall x\in H$, there exists a unique minimizer of $x$ in $C$, which is denoted by $P_Cx\in C$.
   \end{theorem}
-  \begin{theorem}[Projection theorem]\label{RFA:projection}
-    Let $(H,\dotp{\cdot}{\cdot})$ be a Hilbert space and $F\subseteq H$ be a closed subspace. Then:
+  \begin{sproof}
+    The uniqueness has been proved in \mcref{RFA:minimizeruniqueness}. To show the existence, let $\delta:=d(x,C)$ and let $(y_n)\in C$ such that $\norm{y_n-x}\to \delta$. By the \mnameref{RFA:parallelogram}:
+    $$\norm{y_n-y_m}^2\leq 2\norm{y_n-x}^2+2\norm{y_m-x}^2 - 4\delta^2\to 0$$
+    Hence $(y_n)$ is Cauchy and so its limit $y\in C$ satisfies $\delta=d(x,y)$ by the continuity of the norm.
+  \end{sproof}
+  \begin{important}
+    \begin{theorem}[Projection theorem]\label{RFA:projection}
+      Let $(H,\dotp{\cdot}{\cdot})$ be a Hilbert space and $F\subseteq H$ be a closed subspace. Then:
+      \begin{enumerate}
+        \item\label{RFA:projA} $H=F\oplus F^\perp$ and $\forall x\in H$, we can write $x=P_Fx+P_{F^\perp}x$.
+        \item If $x\in H$ and $y\in F$, then $y=P_Fx\iff x-y\in F^\perp$.
+      \end{enumerate}
+    \end{theorem}
+  \end{important}
+  \begin{proof}
     \begin{enumerate}
-      \item $H=F\oplus F^\perp$ and $\forall x\in H$, we can write $x=P_Fx+P_{F^\perp}x$.
-      \item If $x\in H$ and $y\in F$, then $y=P_Fx\iff x-y\in F^\perp$.
+      \item The equality $F\cap F^\perp=\{0\}$ follows from noting that $\dotp{u}{u}=0$ $\forall u\in F\cap F^\perp$. Now let $x\in H$ and $y=P_Fx$. We need to show that $z:=x-y\in F^\perp$. Let $u\in F$. Then, $\exists\lambda\in\KK$ such that $\norm{\lambda}= 1$ and $\lambda\dotp{u}{z}=\abs{\dotp{u}{z}}$. Now consider $f(t)=\norm{z-vt}^2$, where $v=\lambda u\in F$. Note that $f$ has a minimum at the origin because:
+            $$f(t)=\norm{x-y -vt}^2\geq\norm{x-y}^2=\norm{z}^2=f(0)$$
+            because $y+vt\in F$ and $y$ is the minimizer of  $x$ in $F$. Thus, $0=f'(0)=-2\dotp{v}{z}$ and so $\dotp{u}{z}=0$ $\forall u\in F$. Moreover $z$ is the minimizer of $x$ in $F^\perp$ because $\forall w\in F^\perp$ we have by the \mnameref{RFA:pythagorean}:
+            $$\norm{x-w}^2=\norm{x-z}^2+\norm{z-w}^2\geq \norm{z-w}^2$$
+      \item We have just seen the implication to the right. For the other one note that by \mcref{RFA:projA} we can write $x=P_Fx+P_{F^\perp}x$. But, $x-y=P_Fx+P_{F^\perp}x -y\in F^\perp$ and $F\cap F^\perp=\{0\}$, so $y=P_Fx$.
     \end{enumerate}
-  \end{theorem}
+  \end{proof}
   \begin{corollary}
     Let $(H,\dotp{\cdot}{\cdot})$ be a Hilbert space and $F\subseteq H$ be a closed subspace. The function $P_F:H\rightarrow H$, called \emph{orthogonal projection on $F$}, satisfy the following properties:
     \begin{enumerate}
-      \item ${P_F}^2 = P_F$
-      \item $\dotp{P_Fx_1}{x_2}=\dotp{x_1}{P_Fx_2}$ $\forall x_1, x_2\in H$
-      \item $P_F$ is linear, $\norm{P_Fx}\leq \norm{x}$ and the equality holds if and only if $x\in F$.
+      \item\label{RFA:corprojA} ${P_F}^2 = P_F$
+      \item\label{RFA:corprojB} $\dotp{P_Fx_1}{x_2}=\dotp{x_1}{P_Fx_2}$ $\forall x_1, x_2\in H$
+      \item\label{RFA:corprojC} $P_F$ is linear, $\norm{P_Fx}\leq \norm{x}$ and the equality holds if and only if $x\in F$.
       \item If $F\ne\{0\}$, $\norm{P_F}=1$.
       \item $\im P_F=F=\{y\in H:P_Fy=y\}$
       \item $\ker P_F=F^\perp$
+      \item $\norm{x}^2={d(x,F)}^2+{d(x,F^\perp)}^2$
     \end{enumerate}
   \end{corollary}
+  \begin{proof}
+    \begin{enumerate}
+      \item Note that $P_F|_{F}=\id$ and $\im P_F\subseteq F$.
+      \item
+            \begin{align*}
+              \dotp{P_Fx_1}{x_2} & =\dotp{P_Fx_1}{P_Fx_2+P_{F^\perp}x_2} \\
+                                 & =\dotp{P_Fx_1}{P_Fx_2}                \\
+                                 & =\dotp{P_Fx_1+P_{F^\perp}x_1}{P_Fx_2} \\
+                                 & =\dotp{x_1}{P_Fx_2}
+            \end{align*}
+      \item Let $x_1,x_2,y\in H$, $\lambda,\mu\in\KK$. Then using \mcref{RFA:corprojB}:
+            \begin{align*}
+              \dotp{P_F(\lambda x_1+\mu x_2)}{y} & =\dotp{\lambda x_1+\mu x_2}{P_Fy}            \\
+                                                 & =\lambda\dotp{x_1}{P_Fy}+\mu\dotp{x_2}{P_Fy} \\
+                                                 & =\lambda\dotp{P_Fx_1}{y}+\mu\dotp{P_Fx_2}{y} \\
+                                                 & =\dotp{\lambda P_Fx_1+\mu P_Fx_2}{y}
+            \end{align*}
+            for all $y\in H$. Thus, $P_F(\lambda x_1+\mu x_2)=\lambda P_Fx_1+\mu P_Fx_2$. Moreover, using \mcref{RFA:corprojA} and the \mnameref{RFA:cauchyschwarz}:
+            $$\norm{P_Fx}^2=\dotp{P_Fx}{P_Fx}=\dotp{P_Fx}{x}\leq\norm{P_Fx}\norm{x}$$
+            and the inequality follows if and only if $P_Fx=\lambda x$, for some $\lambda\in\KK$, that is, $x\in F$.
+      \item Consequence of the equality case in \mcref{RFA:corprojC}.
+      \item Clearly $\im P_F\subseteq F$. The other follows from the fact that if $u\in F$, then $P_Fu=u$ by the \mnameref{RFA:projection}.
+      \item Clearly $\ker P_F\supseteq F^\perp$. Moreover, if $x\in \ker P_F$, the \mnameref{RFA:projection} implies $x\in F^\perp$.
+      \item By the \mnameref{RFA:pythagorean} we have:
+            \begin{align*}
+              \norm{x}^2 & =\norm{P_Fx}^2+\norm{P_{F^\perp}x}^2      \\
+                         & =\norm{x -P_{F^\perp}x}^2+\norm{x-P_Fx}^2 \\
+                         & ={d(x,F)}^2+{d(x,F^\perp)}^2
+            \end{align*}
+    \end{enumerate}
+  \end{proof}
   \begin{proposition}
     Let $(H,\dotp{\cdot}{\cdot})$ be a Hilbert space and $A\subseteq H$ be subset. Then:
     \begin{enumerate}

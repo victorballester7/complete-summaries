@@ -104,8 +104,8 @@
   \begin{proposition}[Gau\ss' law]
     \emph{Gau\ss' law} states that a static electric field points away from positive charges and towards negative charges, and the net outflow of the electric field through a closed surface $\Fr{\Omega}$ is proportional to the enclosed charge.
     \begin{align*}
-      \divp\vf{E}                                 & =\frac{\rho}{\varepsilon_0}                     & \text{(Differential form)} \\
-      \oiint_{\Fr{\Omega}}\vf{E}\cdot \dd{\vf{S}} & =\frac{1}{\varepsilon_0}\iiint_\Omega\rho\dd{V} & \text{(Integral form)}
+      \divp\vf{E}                                 & =\frac{\rho}{\varepsilon_0}                   & \text{(Differential form)} \\
+      \oiint_{\Fr{\Omega}}\vf{E}\cdot \dd{\vf{S}} & =\frac{1}{\varepsilon_0}\int_\Omega\rho\dd{V} & \text{(Integral form)}
     \end{align*}
   \end{proposition}
   \begin{proposition}[Gau\ss' law for magnetism]
@@ -118,15 +118,15 @@
   \begin{proposition}[Maxwell-Faraday equation]
     \emph{Maxwell-Faraday equation} states that a time-varying magnetic field always accompanies a spatially varying (also possibly time-varying), non-conservative electric field, and vice versa
     \begin{align*}
-      \rotp\vf{E}                                   & =\pdv{\vf{B}}{t}                              \\
-      \oint_{\Fr{\Sigma}}\vf{E}\cdot \dd{\vf{\ell}} & =-\dv{}{t}\iint_\Sigma\vf{B}\cdot \dd{\vf{S}}
+      \rotp\vf{E}                                   & =\pdv{\vf{B}}{t}                             \\
+      \oint_{\Fr{\Sigma}}\vf{E}\cdot \dd{\vf{\ell}} & =-\dv{}{t}\int_\Sigma\vf{B}\cdot \dd{\vf{S}}
     \end{align*}
   \end{proposition}
   \begin{proposition}[Ampère-Maxwell circuital law]
     The original \emph{Ampère's law} ($\rotp\vf{B}=\mu_0\vf{J}$) stats a relation between the total amount of magnetic field around some closed path $\Fr{\Sigma}$ due to the current that passes through that enclosed path $\Sigma$. The second term on the right-hand-side (added later by Maxwell) is the \emph{displacement current} associated with the polarization of the individual molecules of the dielectric material.
     \begin{align*}
-      \rotp\vf{B}                                   & =\mu_0\left(\vf{J}+\varepsilon_0\pdv{\vf{E}}{t}\right)                                                          \\
-      \oint_{\Fr{\Sigma}}\vf{B}\cdot \dd{\vf{\ell}} & =\mu_0 \left(\iint_\Sigma\vf{J}\cdot\dd{\vf{S}}+\varepsilon_0\dv{}{t}\iint_\Sigma\vf{E}\cdot \dd{\vf{S}}\right)
+      \rotp\vf{B}                                   & =\mu_0\left(\vf{J}+\varepsilon_0\pdv{\vf{E}}{t}\right)                                                        \\
+      \oint_{\Fr{\Sigma}}\vf{B}\cdot \dd{\vf{\ell}} & =\mu_0 \left(\int_\Sigma\vf{J}\cdot\dd{\vf{S}}+\varepsilon_0\dv{}{t}\int_\Sigma\vf{E}\cdot \dd{\vf{S}}\right)
     \end{align*}
   \end{proposition}
   \subsubsection{Mechanics and optics}
@@ -170,39 +170,40 @@
     Let $\Omega\subset\RR^n$ be a domain and $f:\Omega\rightarrow\RR$ be a continuous function such that $$\dotsint_\Omega f(\vf{x})\varphi(\vf{x})\dd{\vf{x}}=0$$ for all $\varphi\in\mathcal{C}_0^\infty(\Omega)$. Then, $f=0$ in $\Omega$.
   \end{corollary}
   \begin{proof}
-    For any open subset $U\subseteq \Omega$ let $(\varphi_n)\in\mathcal{C}_0^\infty(\Omega)$ be a sequence of functions that converge to $\indi{U}$. Then by the \mnameref{RFA:dominated} we have:
-    \begin{align*}
-      0 & = \lim_{n\to\infty}\dotsint_\Omega f(\vf{x})\varphi_n(\vf{x})\dd{\vf{x}}=\dotsint_\Omega f(\vf{x})\indi{U}(\vf{x})\dd{\vf{x}} \\
-        & =\dotsint_U f(\vf{x})\dd{\vf{x}}
-    \end{align*}
-    Now use the \mnameref{PDE:fundamentallemma}.
+    % For any open subset $U\subseteq \Omega$ let $(\varphi_n)\in\mathcal{C}_0^\infty(\Omega)$ be an increasing sequence of functions that converge pointwise to $\indi{U}$. Then by the \mnameref{RFA:monotone} we have:
+    % \begin{align*}
+    %   0 & = \lim_{n\to\infty}\dotsint_\Omega f(\vf{x})\varphi_n(\vf{x})\dd{\vf{x}}=\dotsint_\Omega f(\vf{x})\indi{U}(\vf{x})\dd{\vf{x}} \\
+    %     & =\dotsint_U f(\vf{x})\dd{\vf{x}}
+    % \end{align*}
+    % Now use the \mnameref{PDE:fundamentallemma}.
+    If there were a point $\vf{x}_0\in \Omega$ such that (without loss of generality) $f(\vf{x}_0)>0$, the continuity would imply the existence of an open set $U$ containing $\vf{x}_0$ and a $\varepsilon >0$ such that $f(\vf{x})>\varepsilon$ $\forall \vf{x}\in U$. Now take $\varphi\in\mathcal{C}_0^\infty(\Omega)$ such that $\varphi\geq 0$, $\supp\varphi\subset U$ and $\varphi>0$ in some open set $V\subseteq U$. And we would have: $$0=\dotsint_\Omega f(\vf{x})\varphi(\vf{x})\dd{\vf{x}}=\dotsint_U f(\vf{x})\varphi(\vf{x})\dd{\vf{x}}>0$$
   \end{proof}
   \begin{proposition}
-    Let $\Omega\subseteq\RR^n$ be a closed region and $k\in\mathcal{C}^1(\Omega)$ and $f,g\in\mathcal{C}^2(\Omega)$. Then:
+    Let $\Omega\subseteq\RR^n$ be a compact set with a piecewise smooth boundary, $U\supset \Omega$ be an open neighborhood of $\Omega$, $k\in\mathcal{C}^1(U)$ and $f,g\in\mathcal{C}^2(U)$. Then:
     \begin{gather*}
-      \idotsint_\Omega f\div(k\grad{g})                                =\idotsint_{\Fr{\Omega}}fk\grad{g}\cdot\dd{\vf{S}} -\idotsint_\Omega k\grad{f}\cdot\grad{g} \\
+      \int_\Omega f\div(k\grad{g})                                =\int_{\Fr{\Omega}}fk\grad{g}\cdot\dd{\vf{S}} -\int_\Omega k\grad{f}\cdot\grad{g} \\
       \begin{split}
-        \idotsint_\Omega f\div(k\grad{g})-g\div(k\grad{f})= \hspace{2cm}\\\hspace{2cm}=\idotsint_{\Fr{\Omega}} k\left(f\grad{g}-g\grad{f}\right)\cdot\dd{\vf{S}}
+        \int_\Omega f\div(k\grad{g})-g\div(k\grad{f})= \hspace{2cm}\\\hspace{2cm}=\int_{\Fr{\Omega}} k\left(f\grad{g}-g\grad{f}\right)\cdot\dd{\vf{S}}
       \end{split}
     \end{gather*}
   \end{proposition}
   \begin{sproof}
-    For the first one apply the \mnameref{DG:divergenceRn} with the vector field $\vf{X} = kf\grad{g}$ and for the second one, use the previous formula and the symmetry of $f$ and $g$.
+    For the first one apply the \mnameref{DG:divergenceRn} with the vector field $kf\grad{g}$ and for the second one, use the previous formula and the symmetry of $f$ and $g$.
   \end{sproof}
   \begin{corollary}[Green identities]\label{PDE:greenidentities}
-    Let $\Omega\subseteq\RR^n$ be a closed region and $f,g\in\mathcal{C}^2(\Omega)$. Then:
+    Let $\Omega\subseteq\RR^n$ be a compact set with a piecewise smooth boundary, $U\supset \Omega$ be an open neighborhood of $\Omega$ and $f,g\in\mathcal{C}^2(U)$.
     \begin{gather*}
-      \idotsint_\Omega f\laplacian{g}                              =\idotsint_{\Fr{\Omega}}f\grad{g}\cdot\dd{\vf{S}} -\idotsint_\Omega \grad{f}\cdot\grad{g} \\
-      \idotsint_\Omega f\laplacian{g}-g\laplacian{f}  =\idotsint_{\Fr{\Omega}} \left(f\grad{g}-g\grad{f}\right)\cdot\dd{\vf{S}}
+      \int_\Omega f\laplacian{g}                              =\int_{\Fr{\Omega}}f\grad{g}\cdot\dd{\vf{S}} -\int_\Omega \grad{f}\cdot\grad{g} \\
+      \int_\Omega f\laplacian{g}-g\laplacian{f}  =\int_{\Fr{\Omega}} \left(f\grad{g}-g\grad{f}\right)\cdot\dd{\vf{S}}
     \end{gather*}
   \end{corollary}
   \subsubsection{Method of characteristics}
-  \begin{proposition}[Method of characteristics]
-    Consider the following quasilinear partial differential equation
+  \begin{proposition}[Method of characteristics]\label{PDE:charmethod} % improve the theorem adding the determinant to prove the unicity (see Notes in partial differential equations course)
+    Let $a$, $b$, $c$, $x_0$, $t_0$ and $u_0$ be of class $\mathcal{C}^1$. Consider the following quasilinear partial differential equation
     \begin{equation}\label{PDE:char}
       a(x,t,u)\pdv{u}{x}+b(x,t,u)\pdv{u}{t}=c(x,t,u)
     \end{equation}
-    with initial condition $u(x_0(s),t_0(s))=u_0(s)$, $s\in I$ where $I\subseteq \RR$ is an interval. The solutions of this equation are the integral curves (called \emph{characteristic curves}) that form the surface of the graph $u(x,t)$. These are given by the solution of the system
+    with initial condition $u(x_0(s),t_0(s))=u_0(s)$, $s\in I$ where $I\subseteq \RR$ is an interval. The solutions curves of the system
     \begin{equation*}
       \left\{
       \begin{aligned}
@@ -212,7 +213,7 @@
       \end{aligned}
       \right.
     \end{equation*}
-    with initial conditions $x(0,s)=x_0(s)$, $t(0,s)=t_0(s)$ and $u(0,s)=u_0(s)$.
+    with initial conditions $x(0,s)=x_0(s)$, $t(0,s)=t_0(s)$ and $u(0,s)=u_0(s)$, form the surface of the graph $u(x,t)$. Such curves are called \emph{characteristic curves}.
   \end{proposition}
   \begin{sproof}
     Note that we can rewrite \mcref{PDE:char} as: $$\begin{pmatrix}
@@ -247,11 +248,11 @@
     Integrate \mcref{PDE:trafficintegral} with respect to $t$ between $t_1$ and $t_2$.
   \end{sproof}
   \begin{proposition}
-    In the hypothesis of the traffic equation, an observer situated at $x(t)$ will observe a constant density $\rho(x(t),t)$ if $x'(t)=q'(\rho(x(t),t))$ (that is, if the frame of reference situated at $x(t)$ is moving at a speed of $q'(\rho(x(t),t))$)\footnote{Note that this
-      velocity may be different from the velocity at which an individual car moves.}. Therefore, $\rho$ is constant in each line of the form $x(t)=x_0+q'(\rho(x_0,0))t$ (\emph{characteristic line}) (see \mcref{PDE:traffic-char}). This determines $\rho(x,t)$ provided that we already know the initial condition $\rho_0(x):=\rho(x,0)$, $x\in\RR$. In other words, $\rho(x,t)$ is the solution $\xi$ of the density at the appropriate $x$-intercept of the line passing through $(x,t)$: $$\xi=\rho_0(x-q'(\xi)t)$$
+    In the hypothesis of the traffic equation, $\rho$ is constant in each line of the form $x(t)=x_0+q'(\rho(x_0,0))t$.
+    This determines $\rho(x,t)$ provided that we already know the initial condition $\rho_0(x):=\rho(x,0)$, $x\in\RR$. In other words, $\rho(x,t)$ is the solution $\xi$ of the density at the appropriate $x$-intercept of the line passing through $(x,t)$: $$\xi=\rho_0(x-q'(\xi)t)$$
   \end{proposition}
   \begin{sproof}
-    Note that $x'(t)=q'(\rho(x(t),t))$ implies $\dv{\rho(x(t),t)}{t}=0$. On the other hand, if $\xi$ is the density at $(x,t)$, we have: $$x=x_0+q'(\xi)t$$ where $x_0$ is the $x$-intercept at $t=0$ of the line passing through $(x,t)$ with slope $q'(\xi)$. Rearranging the previous equation and applying $\rho_0$ we get the desired result:
+    Apply the \mnameref{PDE:charmethod}. On the other hand, if $\xi$ is the density at $(x,t)$, we have: $$x=x_0+q'(\xi)t$$ where $x_0$ is the $x$-intercept at $t=0$ of the line passing through $(x,t)$ with slope $q'(\xi)$. Rearranging the previous equation and applying $\rho_0$ we get the desired result:
     $$x_0=x-q'(\xi)t\implies \xi=\rho(x_0)=\rho_0(x-q'(\xi)t)$$
   \end{sproof}
   \begin{center}
@@ -356,7 +357,7 @@
   \end{sproof}
   \begin{theorem}\label{PDE:greenwave}
     Let $U\subseteq\RR^2$ be an open set and $u:U\rightarrow\RR$ be a function. Then, $u$ satisfies the wave equation with density $\rho(x,t)$, constant $k(x)$ and driven force $f(x,t)$ if and only if:
-    $$\int_{\Fr{U}}\rho u_t\dd{x}+k u_x\dd{t}=-\iint_Uf(x,t)\dd{x}\dd{t}$$
+    $$\int_{\Fr{U}}\rho u_t\dd{x}+k u_x\dd{t}=-\int_Uf(x,t)\dd{x}\dd{t}$$
   \end{theorem}
   \begin{sproof}
     It is a consequence of the \mnameref{FSV:green} with the vector field $\vf{X}= (\rho u_t,k u_x)$ and the \mnameref{PDE:fundamentallemma}.
@@ -646,12 +647,12 @@
   \begin{proposition}
     Let $\Omega\subseteq \RR^n$ be a set and $f\in L_{\mathrm{loc}}^1(\Omega)$. Then, the map
     $$
-      \function{\Lambda_f}{\mathcal{D}(\Omega)}{\RR}{\varphi}{\displaystyle\idotsint_\Omega f(\vf{x})\varphi(\vf{x})\dd{\vf{x}}}
+      \function{\Lambda_f}{\mathcal{D}(\Omega)}{\RR}{\varphi}{\displaystyle\int_\Omega f(\vf{x})\varphi(\vf{x})\dd{\vf{x}}}
     $$
     is a distribution. Hence, $\Lambda_f(\varphi)$ is usually denoted by $\dotp{f}{\varphi}$. Sometimes we will do an abuse of notation denoting $\Lambda_f$ as $f$ (by the \mcref{PDE:postfundamentallemma}).
   \end{proposition}
   \begin{proof}
-    $\Lambda_f$ is clearly linear. Moreover: $$\abs{\Lambda_f(\varphi)}\leq\idotsint_\Omega\abs{f(\vf{x})\varphi(\vf{x})}\leq \norm{f}_1\norm{\varphi}_\infty$$
+    $\Lambda_f$ is clearly linear. Moreover: $$\abs{\Lambda_f(\varphi)}\leq\int_\Omega\abs{f(\vf{x})\varphi(\vf{x})}\leq \norm{f}_1\norm{\varphi}_\infty$$
     Hence, $\Lambda_f$ is bounded and therefore continuous.
   \end{proof}
   \begin{proposition}[Dirac's $\delta$ distribution]
@@ -666,7 +667,7 @@
   \end{proof}
   \begin{lemma}
     Let $\Omega\subseteq \RR^n$ be a set, $\vf{x}_0\in\Omega$ and $\mu_{\vf{x}_0}$ be the measure that equals 1 on the set $\{\vf{x}_0\}$ and $0$ on the sets disjoint from $\{x_0\}$. Then, $\forall\varphi\in\mathcal{D}(\Omega)$ we have:
-    $$\delta_{\vf{x}_0}(\varphi)=\varphi(\vf{x}_0)=\idotsint_\Omega\varphi\dd{\mu_{\vf{x}_0}}$$
+    $$\delta_{\vf{x}_0}(\varphi)=\varphi(\vf{x}_0)=\int_\Omega\varphi\dd{\mu_{\vf{x}_0}}$$
   \end{lemma}
   \begin{definition}
     Let $\Omega\subseteq \RR^n$ be a set and $n\in\NN$. We define the \emph{differentiation operator} $D^n:\mathcal{D}^*(\Omega)\rightarrow\mathcal{D}^*(\Omega)$ by: $$\dotp{D^n\Lambda}{\varphi}=\dotp{\Lambda}{{(-1)}^nD^n\varphi}$$
@@ -759,7 +760,7 @@
       u_t=\alpha\laplacian u
     \end{equation} Then, the \emph{generalized heat kernel} for this equation is: $$[H(t)](\vf{x}) = \frac{1}{{(4\pi\alpha t)}^{n/2}}\exp{-\frac{\norm{\vf{x}}^2}{4\alpha t}}$$ Its associated integral form can be written as the operator:
     \begin{equation}\label{PDE:Toperator}
-      T(t)u_0=\idotsint_{\RR^n}\frac{1}{{(4\pi\alpha t)}^{n/2}}\exp{-\frac{\norm{\vf{x-y}}^2}{4\alpha t}}u_0(\vf{y})\dd{\vf{y}}
+      T(t)u_0=\int_{\RR^n}\frac{1}{{(4\pi\alpha t)}^{n/2}}\exp{-\frac{\norm{\vf{x-y}}^2}{4\alpha t}}u_0(\vf{y})\dd{\vf{y}}
     \end{equation}
     \mnameref{RFA:representationtheorem} gives a representation of $T(t)$ in the form $T(t)=\exp{t\laplacian}$.
   \end{proposition}
@@ -955,7 +956,7 @@
     Suppose $u_1$ and $u_2$ are two solutions of the problem. Apply the first of the \mnameref{PDE:greenidentities} to the functions $f = g = u_1-u_2$.
   \end{sproof}
   \begin{definition}
-    Let $U\subseteq \RR^n$ be an open bounded set such that $\Fr{U}$ is of class $\mathcal{C}^1$, $f\in\mathcal{C}^2(\Omega)$ and $g\in\mathcal{C}^2(\Fr{\Omega})$. Considering \mcref{PDE:dirichlet} we define the \emph{energy functional} as the operator $$Ew=\idotsint_U\frac{1}{2}\norm{\grad w}^2 - wf$$
+    Let $U\subseteq \RR^n$ be an open bounded set such that $\Fr{U}$ is of class $\mathcal{C}^1$, $f\in\mathcal{C}^2(\Omega)$ and $g\in\mathcal{C}^2(\Fr{\Omega})$. Considering \mcref{PDE:dirichlet} we define the \emph{energy functional} as the operator $$Ew=\int_U\frac{1}{2}\norm{\grad w}^2 - wf$$
     defined on the set $\{w\in\mathcal{C}^2(\overline{U}): w=g\text{ on $\Fr{U}$}\}$.
   \end{definition}
   \begin{theorem}[Dirichlet's principle]
@@ -963,10 +964,10 @@
   \end{theorem}
   \begin{proof}
     \begin{itemizeiff}
-      Let $u$ be a solution of \mcref{PDE:dirichlet} and take $w\in \domain(E)$ such that $w=u+v$. Thus, $v=0$ on $\Fr{U}$. We need to show that $Ew\geq Eu$. A calculation shows that: $$Ew=Eu+\idotsint_U\frac{1}{2}\norm{\grad v}^2$$ where we have use the \mnameref{PDE:greenidentities} to conclude that: $$\idotsint_U\grad u\cdot\grad v-vf=0$$
+      Let $u$ be a solution of \mcref{PDE:dirichlet} and take $w\in \domain(E)$ such that $w=u+v$. Thus, $v=0$ on $\Fr{U}$. We need to show that $Ew\geq Eu$. A calculation shows that: $$Ew=Eu+\int_U\frac{1}{2}\norm{\grad v}^2$$ where we have use the \mnameref{PDE:greenidentities} to conclude that: $$\int_U\grad u\cdot\grad v-vf=0$$
       Hence $Ew\geq Eu$.
       \item Let $u$ be a minimizer of $E$ and $\lambda(t)=E(u+vt)$, $t\in \RR$. By the definition of a minimum, we have that $\lambda'(0)=0$ and so:
-      $$0 = \lambda'(0)=\idotsint_U\grad u\cdot\grad v-vf=\idotsint_Uv(-\laplacian u-f)$$
+      $$0 = \lambda'(0)=\int_U\grad u\cdot\grad v-vf=\int_Uv(-\laplacian u-f)$$
       again by  the \mnameref{PDE:greenidentities}. Since, this is valid $\forall v\in\domain(E)$ it follows that $-\laplacian u = f$ by \mcref{PDE:postfundamentallemma}.
     \end{itemizeiff}
   \end{proof}
@@ -978,8 +979,8 @@
   \begin{proposition}
     Let $\Omega\subseteq \RR^n$ be a bounded subset. Then, $H^1(\Omega)$ with the inner product
     \begin{align*}
-      \dotp{f}{g}_{H^1} := & \dotp{f}{g}_{2}+\sum_{i=1}^n\dotp{D_if}{D_ig}_{2}       \\
-      =                    & \dotp{f}{g}_{2}+\idotsint_\Omega \grad{f}\cdot \grad{g}
+      \dotp{f}{g}_{H^1} := & \dotp{f}{g}_{2}+\sum_{i=1}^n\dotp{D_if}{D_ig}_{2}  \\
+      =                    & \dotp{f}{g}_{2}+\int_\Omega \grad{f}\cdot \grad{g}
     \end{align*}
     and associated norm
     $${\norm{f}_{H^1}}^2={\norm{f}_2}^2 +\sum_{i=1}^n{\norm{D_if}_2}^2$$
@@ -987,15 +988,15 @@
   \end{proposition}
   \begin{sproof}
     Clearly, $H^1(\Omega)$ is pre-Hilbert. It's missing to show that $H^1(\Omega)$ is complete. Let $(f_n)\in H^1(\Omega)$ be Cauchy. Then, $(f_n), (D_if_n)\in L^2(\Omega)$ are also Cauchy as $\norm{f}_2\leq \norm{f}_{H^1}$ and $\norm{D_if}_2\leq \norm{f}_{H^1}$ $\forall i=1,\ldots,n$. Hence, $\displaystyle\lim_{n\to\infty}f_n\overset{L^2}{=}G$ and $\displaystyle\lim_{n\to\infty}D_if_n\overset{L^2}{=}g_i$ for some $G,g_i\in L^2(\Omega)$, $\forall i=1,\ldots,n$. If we prove that $D_iG=g_i$, we will be done. But this is clear from the definition of distributional derivative as $\forall\varphi\in\mathcal{D}(\Omega)$ we have:
-    $$\idotsint_\Omega D_if_n\varphi =\idotsint_\Omega f_n D_i\varphi$$
+    $$\int_\Omega D_if_n\varphi =\int_\Omega f_n D_i\varphi$$
     And the \mnameref{RFA:dominated} allow us to conclude that:
-    $$\idotsint_\Omega g_i\varphi =\idotsint_\Omega G D_i\varphi$$
+    $$\int_\Omega g_i\varphi =\int_\Omega G D_i\varphi$$
   \end{sproof}
   \begin{definition}
     Let $\Omega\subseteq \RR^n$ be a bounded subset. We define the space $H_0^1(\Omega):=\Cl_{H^1(\Omega)}(\mathcal{D}(\Omega))$.
   \end{definition}
   \begin{definition}
-    Let $\Omega\subseteq \RR^n$ be a bounded subset and $u\in L^2(\Omega)$. We define the \emph{average} of $u$ over $\Omega$ as: $$\overline{u}:=\frac{1}{\m{\Omega}}\idotsint_\Omega u$$
+    Let $\Omega\subseteq \RR^n$ be a bounded subset and $u\in L^2(\Omega)$. We define the \emph{average} of $u$ over $\Omega$ as: $$\overline{u}:=\frac{1}{\m{\Omega}}\int_\Omega u$$
   \end{definition}
   \begin{theorem}[Trace theorem]
     Let $\Omega\subseteq \RR^n$ be a bounded subset such that $\Fr{\Omega}$ is of class $\mathcal{C}^1$. Then, there exists a bounded linear operator
@@ -1010,7 +1011,7 @@
   \end{theorem}
   \begin{proposition}[Poincaré inequality]\label{PDE:poincareinequality}
     Let $\Omega\subseteq \RR^n$ be a bounded subset and $u\in H^1(\Omega)$. Then, there exists $C\in\RR$ such that:
-    $$\idotsint_\Omega{(u-\overline{u})}^2\leq C\idotsint_\Omega\norm{\grad u}^2$$
+    $$\int_\Omega{(u-\overline{u})}^2\leq C\int_\Omega\norm{\grad u}^2$$
   \end{proposition}
   % \begin{proof}
   %   Suppose first that $\overline{u}=0$.
@@ -1018,13 +1019,13 @@
   \begin{proposition}
     Let $\Omega\subseteq \RR^n$ be a bounded subset. Consider the map:
     $$\function{Q}{H^1(\Omega)}{H^1(\Omega)\ominus\RR}{u}{u-\overline{u}}$$
-    Then, the space $H(\Omega):=Q(H^1(\Omega))$ equipped with the inner product $$\dotp{f}{g}_{H}=\idotsint_\Omega \grad{f}\cdot \grad{g}$$
+    Then, the space $H(\Omega):=Q(H^1(\Omega))$ equipped with the inner product $$\dotp{f}{g}_{H}=\int_\Omega \grad{f}\cdot \grad{g}$$
     is Hilbert.
   \end{proposition}
   \begin{proof}
     First of all the map is well-defined. Indeed, if $Q(u)=\const$, then $u=\const$ But in this case $u=\overline{u}$ and so $Q(u)=0$. Let's see now that $H(\Omega)$ is Hilbert.
     Clearly $H(\Omega)$ is pre-Hilbert as $Q$ is linear and continuous. To show the completeness note that the norms on $H(\Omega)$ and $H^1(\Omega)$ are equivalent. Indeed by the \mnameref{PDE:poincareinequality} we have that $\forall \tilde{u}\in H(\Omega)$:
-    $$\idotsint_\Omega \norm{\grad{u}}^2\leq\idotsint_\Omega (u^2+\norm{\grad{u}}^2)\leq(C+1)\idotsint_\Omega \norm{\grad{u}}^2$$
+    $$\int_\Omega \norm{\grad{u}}^2\leq\int_\Omega (u^2+\norm{\grad{u}}^2)\leq(C+1)\int_\Omega \norm{\grad{u}}^2$$
     for certain $C\in\RR$ and because $\overline{\tilde{u}}=0$. Thus, the Cauchy convergence is the same with both norms. And since $H^1(\Omega)$ is complete, so it is $H(\Omega)$.
   \end{proof}
   \begin{proposition}
@@ -1034,7 +1035,7 @@
     Let $(w_n)\in Q(H_0^1(\Omega))$ be a sequence that converges in $H_0^1(\Omega)$ to $w$. We need to show that $w\in Q(H_0^1(\Omega))$. Note that $w_n=Q(u_n)=u_n-\overline{u_n}$ for certain $(u_n)\in H_0^1(\Omega)$. Thus, $\overline{u_n} = u_n -w_n$. By \mcref{PDE:traceequivalence} we have that $\overline{u_n} = -w_n|_{\Fr{\Omega}}$ which converges in $L^2(\Fr{\Omega})$ by the continuity of the trace and therefore, as $L^2(\Fr{\Omega})$, $\overline{u_n}$ converges on $\RR$. Let $\displaystyle c:=\lim_{n\to\infty}\overline{u_n}$. Now, $u=w_n+\overline{u_n}$ converges in $H_0^1(\Omega)$ to $w+c=:u$. We claim that $c=\overline{u}$, which is clear by the continuity of the average. Hence, $w=u-\overline{u} =Q(u)$ with $u\in H_0^1(\Omega)$ because $ H_0^1(\Omega)$ is closed. So $w\in Q(H_0^1(\Omega))$.
   \end{proof}
   \begin{proposition}\label{PDE:preexistence}
-    Let $\Omega\subseteq \RR^n$ be a bounded subset and $\tilde{g}\in H(\Omega)$. Then, $\exists! \tilde{u}\in {H_0(\Omega)}^\perp=H\ominus H_0(\Omega)$ such that $$\tilde{u}=\argmin_{w\in H_0(\Omega)}\left\{\idotsint_\Omega\frac{1}{2}\norm{\grad w}^2:\tilde{g}-w\in H_0(\Omega)\right\}$$
+    Let $\Omega\subseteq \RR^n$ be a bounded subset and $\tilde{g}\in H(\Omega)$. Then, $\exists! \tilde{u}\in {H_0(\Omega)}^\perp=H(\Omega)\ominus H_0(\Omega)$ such that $$\tilde{u}=\argmin_{w\in H_0(\Omega)}\left\{\int_\Omega\frac{1}{2}\norm{\grad w}^2:\tilde{g}-w\in H_0(\Omega)\right\}$$
   \end{proposition}
   \begin{sproof}
     Use the \mnameref{RFA:projection}.

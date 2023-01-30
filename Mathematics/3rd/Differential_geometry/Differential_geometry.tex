@@ -389,7 +389,7 @@
   \end{definition}
   \begin{lemma}
     Let $x_0\in\RR^n$ and $a,b\in \RR_{>0}$ with $a<b$. Then, there exists a function $\rho:\RR^n\rightarrow[0,1]$ of class $\mathcal{C}^\infty$ such that $\supp(\rho)\subseteq\overline{B(x_0,b)}$ and $\rho|_{B(x_0,a)}=1$.
-  \end{lemma}
+  \end{lemma}% note that it can be increasing the sequences that converge to indicatrix{U}
   \begin{proposition}
     Let $U\subseteq\RR^n$ be an open set and $K\subset U$ be a compact set. Then, there exists a function $\rho:\RR^n\rightarrow[0,1]$ of class $\mathcal{C}^\infty$ such that $\supp(\rho)\subseteq U$ and $\rho|_K=1$.
   \end{proposition}
@@ -563,12 +563,12 @@
   \begin{definition}
     Let $S\subseteq\RR^3$ be a surface, $(V,\vf\varphi(u,v))$ be a local parametrization of $S$ and $R\subset \vf\varphi(V)$ be a compact region. Let $Q={\vf\varphi}^{-1}(R)\subseteq\RR^2$. We define the area of $R$ as:
     \begin{align*}
-      \area(R) & =\iint_Q\|\vf\varphi_u\times\vf\varphi_v\|\dd{u}\dd{v}                                                                                                                                       \\
-               & =\iint_Q\sqrt{E_{\vf\varphi}G_{\vf\varphi}-{F_{\vf\varphi}}^2}\dd{u}\dd{v}\footnote{One can check that this definition does not depend on the parametrization $(V,\vf\varphi(u,v))$ of $S$.}
+      \area(R) & =\int_Q\|\vf\varphi_u\times\vf\varphi_v\|\dd{u}\dd{v}                                                                                                                                       \\
+               & =\int_Q\sqrt{E_{\vf\varphi}G_{\vf\varphi}-{F_{\vf\varphi}}^2}\dd{u}\dd{v}\footnote{One can check that this definition does not depend on the parametrization $(V,\vf\varphi(u,v))$ of $S$.}
     \end{align*}
   \end{definition}
   \begin{definition}
-    Let $S\subseteq\RR^3$ be a surface, $(V,\vf\varphi(u,v))$ be a local parametrization of $S$, $R\subset \vf\varphi(V)$ be a compact region and $f:S\rightarrow \RR$ be a function. Let $Q={\vf\varphi}^{-1}(R)\subseteq\RR^2$. We define the \emph{integral of $f$ over the region $R$} as: $$\iint_Rf\dd{S}:=\iint_Q(f\circ\vf\varphi)\sqrt{E_{\vf\varphi}G_{\vf\varphi}-{F_{\vf\varphi}}^2}\dd{u}\dd{v}\footnote{One can check that this definition does not depend on the parametrization $(V,\vf\varphi(u,v))$ of $S$.}$$
+    Let $S\subseteq\RR^3$ be a surface, $(V,\vf\varphi(u,v))$ be a local parametrization of $S$, $R\subset \vf\varphi(V)$ be a compact region and $f:S\rightarrow \RR$ be a function. Let $Q={\vf\varphi}^{-1}(R)\subseteq\RR^2$. We define the \emph{integral of $f$ over the region $R$} as: $$\int_Rf\dd{S}:=\int_Q(f\circ\vf\varphi)\sqrt{E_{\vf\varphi}G_{\vf\varphi}-{F_{\vf\varphi}}^2}\dd{u}\dd{v}\footnote{One can check that this definition does not depend on the parametrization $(V,\vf\varphi(u,v))$ of $S$.}$$
   \end{definition}
   \subsubsection{Isometries}
   \begin{definition}
@@ -1310,7 +1310,7 @@
     Let $M\subseteq\RR^n$ be an orientated submanifold of dimension $k$ with $\Fr{M}=\varnothing$ and $\omega\in\Omega_\text{c}^{k-1}(M)$. Then: $$\int_M\dd{\omega}=0$$
   \end{corollary}
   \begin{corollary}[Green's formula]
-    Let $D\subseteq\RR^2$ be a regular domain (manifold of dimension 2 with boundary) and $P,Q:D\rightarrow\RR$ be differentiable functions. Then: $$\iint_D\left(\pdv{Q}{x}-\pdv{P}{y}\right)\dd{x}\dd{y}=\int_{\Fr{D}}P\dd{x}+Q\dd{y}$$
+    Let $D\subseteq\RR^2$ be a regular domain (manifold of dimension 2 with boundary) and $P,Q:D\rightarrow\RR$ be differentiable functions. Then: $$\int_D\left(\pdv{Q}{x}-\pdv{P}{y}\right)\dd{x}\dd{y}=\int_{\Fr{D}}P\dd{x}+Q\dd{y}$$
   \end{corollary}
   \subsubsection{Vector calculus}
   \begin{definition}
@@ -1371,13 +1371,13 @@
     And the sign in the right hand side of the equation is positive if and only if the parametrization $\vf\alpha$ of $\Fr{R}$ is positive.
   \end{theorem}
   \begin{theorem}[Local Gau\ss-Bonnet theorem]\label{DG:local-GB}
-    Let $S\subset\RR^3$ be an oriented surface, $(V,\vf\varphi(u,v))$ be an orthogonal parametrization of $S$ compatible with the orientation and $R\subseteq S$ be a simple region such that $R\subseteq\vf\varphi(V)$ and that $\Fr{R}$ is positively-oriented.  Let $\vf\alpha:[0,\ell]\rightarrow\Fr{R}$ be an arclength parametrization of $\Fr{R}$ which is differentiable on the intervals $[t_i,t_{i+1}]$, $i=0,\ldots,n$. Then: $$\sum_{i=0}^n\int_{t_i}^{t_{i+1}}k_{\text{g}}(s)\dd{s}+\iint_{R}K\dd{S}+\sum_{i=0}^n\theta_i=2\pi\chi(R)=2\pi$$
+    Let $S\subset\RR^3$ be an oriented surface, $(V,\vf\varphi(u,v))$ be an orthogonal parametrization of $S$ compatible with the orientation and $R\subseteq S$ be a simple region such that $R\subseteq\vf\varphi(V)$ and that $\Fr{R}$ is positively-oriented.  Let $\vf\alpha:[0,\ell]\rightarrow\Fr{R}$ be an arclength parametrization of $\Fr{R}$ which is differentiable on the intervals $[t_i,t_{i+1}]$, $i=0,\ldots,n$. Then: $$\sum_{i=0}^n\int_{t_i}^{t_{i+1}}k_{\text{g}}(s)\dd{s}+\int_{R}K\dd{S}+\sum_{i=0}^n\theta_i=2\pi\chi(R)=2\pi$$
   \end{theorem}
   \begin{definition}
     Let $S\subset\RR^3$ be an oriented surface and $T\subseteq S$ be simple region. We say that $T$ is a \emph{triangle} if it has 3 edges.
   \end{definition}
   \begin{corollary}
-    Let $S\subset\RR^3$ be an oriented surface, $T\subseteq S$ be a triangle such that their edges are geodesics. Then, in the notation of \mcref{DG:local-GB} we have: $$\iint_{T}K\dd{S}=\sum_{i=0}^n\phi_i-\pi$$
+    Let $S\subset\RR^3$ be an oriented surface, $T\subseteq S$ be a triangle such that their edges are geodesics. Then, in the notation of \mcref{DG:local-GB} we have: $$\int_{T}K\dd{S}=\sum_{i=0}^n\phi_i-\pi$$
     where $\phi_i=\pi-\theta_i$ are the interior angles of the triangle.
   \end{corollary}
   \subsubsection{Global Gau\ss-Bonnet theorem}
@@ -1385,10 +1385,10 @@
     Let $S\subset\RR^3$ be an oriented surface and $R\subseteq S$ be a compact subset. We say that $R$ is a \emph{regular region} if $\Fr{R}$ is a finite uniron of regular curves which are closed and simple and such that they don't intersect themselves.
   \end{definition}
   \begin{theorem}[Global Gau\ss-Bonnet theorem]
-    Let $S\subset\RR^3$ be an oriented surface and $R\subseteq S$ be a regular region. Suppose that $C_1,\ldots,C_n$ are the connected components of $\Fr{R}$ and let $\theta_1,\ldots,\theta_m$ be the exterior angles of the curves $C_i$. Then: $$\sum_{i=0}^n\int_{C_i}k_{\text{g}}(s)\dd{s}+\iint_{R}K\dd{S}+\sum_{i=0}^m\theta_i=2\pi\chi(R)$$
+    Let $S\subset\RR^3$ be an oriented surface and $R\subseteq S$ be a regular region. Suppose that $C_1,\ldots,C_n$ are the connected components of $\Fr{R}$ and let $\theta_1,\ldots,\theta_m$ be the exterior angles of the curves $C_i$. Then: $$\sum_{i=0}^n\int_{C_i}k_{\text{g}}(s)\dd{s}+\int_{R}K\dd{S}+\sum_{i=0}^m\theta_i=2\pi\chi(R)$$
   \end{theorem}
   \begin{corollary}
-    Let $S\subset\RR^3$ be a compact oriented surface without boundary. Then: $$\iint_{R}K\dd{S}=2\pi\chi(S)$$
+    Let $S\subset\RR^3$ be a compact oriented surface without boundary. Then: $$\int_{R}K\dd{S}=2\pi\chi(S)$$
   \end{corollary}
   \subsubsection{Poincaré-Hopf theorem}
   \begin{definition}
@@ -1399,7 +1399,7 @@
     This value of $n$ is called \emph{index} of $p$.
   \end{proposition}
   \begin{theorem}[Poincaré-Hopf theorem]
-    Let $S\subset\RR^3$ be a compact oriented surface without boundary and $\vf{X}$ be a vector field tangent to $S$ with isolated singularities whose indexes are $n_i$, $i\in I$. Then: $$\sum_{i\in I}n_i=\frac{1}{2\pi}\iint_SK\dd{S}=\chi(S)$$
+    Let $S\subset\RR^3$ be a compact oriented surface without boundary and $\vf{X}$ be a vector field tangent to $S$ with isolated singularities whose indexes are $n_i$, $i\in I$. Then: $$\sum_{i\in I}n_i=\frac{1}{2\pi}\int_SK\dd{S}=\chi(S)$$
   \end{theorem}
   \begin{corollary}
     Let $S\subset\RR^3$ be a compact oriented surface without boundary and $\vf{X}$ be a vector field tangent to $S$. Then:
