@@ -702,7 +702,7 @@
     A \emph{Banach space} is normed vector space which is complete with the distance associated with the norm.
   \end{definition}
   \begin{theorem}
-    Let $(E,\|\cdot\|)$ be a normed vector space. Then, $(E,\|\cdot\|)$ is a Banach space if and only if every series in $E$ that converges absolutely converges.
+    Let $(E,\|\cdot\|)$ be a normed vector space. Then, $(E,\|\cdot\|)$ is a Banach space if and only if every series in $E$ that converges absolutely, converges.
   \end{theorem}
   \begin{proof}
     \begin{itemizeiff}
@@ -746,6 +746,9 @@
   \begin{definition}
     Let $(E,\|\cdot\|)$ be a normed vector space and $A\subseteq E$ be a subset. We say that $A$ is a \emph{total subset} if $\langle A\rangle$ is dense in $E$.
   \end{definition}
+  \begin{remark}
+    The linear span $\langle A\rangle$ exclude the infinite linear combinations of elements in $A$, even if $A$ is a in a subspace of infinite dimension.
+  \end{remark}
   \begin{definition}
     A metric space is called \emph{separable} if it contains a countable dense subset.
   \end{definition}
@@ -825,7 +828,7 @@
       \label{RFA:youngfigure}
     \end{figure}
   \end{sproof}
-  \begin{proposition}[Hölder's inequality]
+  \begin{proposition}[Hölder's inequality]\label{RFA:holder}
     Let $E\subseteq\RR^n$ be a measurable set, $1\leq p,q\leq \infty$ be such that $\frac{1}{p}+\frac{1}{q}=1$ and ${f}\in L^p(E)$, ${g}\in L^q(E)$. Then:
     $$\int_E\abs{fg}\leq {\left(\int_E\abs{f}^p\right)}^{1/p}{\left(\int_E\abs{g}^q\right)}^{1/q}$$
     Or equivalently (see \mcref{RFA:lpnorm}):
@@ -1118,7 +1121,7 @@
     Let $E$ be a normed vector space. If the unit closed sphere $\{x\in E:\norm{x}=1\}$ is compact, then $\dim E<\infty$.
   \end{theorem}
   \begin{proof}
-    Suppose $\dim E=\infty$. Then, there exists a strictly increasing sequence $(E_n)$ of closed finite-dimensional subspaces of $E$. Using the \mnameref{RFA:almostorthogonality} at the spaces $E_n\subset E_{n+1}$ with $\varepsilon =\frac{1}{2}$, we can construct a sequence $(x_n)$ such that $\norm{x_n}=1$, $x_n\in E_{n+1}\setminus E_n$ and $d(x_n, E_n)>\frac{1}{2}$. That is, $\norm{x_i-x_j}>\frac{1}{2}$ $\forall i, j\in\NN$, $i\ne j$. Therefore, $S$ is not compact because there is no convergent subsequence on $(x_n)$.
+    Suppose $\dim E=\infty$. Then, there exists a strictly increasing sequence $(E_n)$ of closed finite-dimensional subspaces of $E$. Using the \mnameref{RFA:almostorthogonality} to the spaces $E_n\subset E_{n+1}$ with $\varepsilon =\frac{1}{2}$, we can construct a sequence $(x_n)$ such that $\norm{x_n}=1$, $x_n\in E_{n+1}\setminus E_n$ and $d(x_n, E_n)>\frac{1}{2}$. That is, $\norm{x_i-x_j}>\frac{1}{2}$ $\forall i, j\in\NN$, $i\ne j$. Therefore, $S$ is not compact because there is no convergent subsequence of $(x_n)$.
   \end{proof}
   \subsubsection{Space of bounded operators}
   \begin{definition}
@@ -1159,10 +1162,13 @@
     Let $E$, $F$ be Banach spaces and $T\in\mathcal{L}(E,F)$ be an operator. We say that $T$ is a \emph{compact operator} if $T(B_E)$ is relatively compact on $F$ where: $$B_E:=\{x\in E:\norm{x}_E\leq 1\}$$
   \end{definition}
   \begin{definition}
-    Let $X$, $Y$ be compact metric spaces and $K\in\mathcal{C}(X\times Y)$. We define the \emph{Fredholm operator with kernel $K$} as the operator $T:\mathcal{C}(Y)\rightarrow\mathcal{C}(X)$ defined by: $$Tf(x)=\int_YK(x,y)f(y)\dd{y}$$
+    Let $X,Y\subseteq \RR^n$ be compact metric spaces and $K\in\mathcal{C}(X\times Y)$. We define the \emph{Fredholm operator with kernel $K$} as the operator $T:\mathcal{C}(Y)\rightarrow\mathcal{C}(X)$ defined by: $$Tf(x)=\int_YK(x,y)f(y)\dd{y}$$
   \end{definition}
   \begin{definition}
     Let $K\in\mathcal{C}(\Delta)$, where $\Delta:=\{(x,y)\in\RR^2:a\leq y\leq x\leq b\}$. We define the \emph{Volterra operator with kernel $K$} as the operator $T:\mathcal{C}([a,b])\rightarrow\mathcal{C}([a,b])$ defined by: $$Tf(x)=\int_a^xK(x,y)f(y)\dd{y}$$
+  \end{definition}
+  \begin{definition}
+    Let $X,Y\subseteq \RR^n$ be measurable spaces and $K\in L^2(X\times Y)$. We define the \emph{Hilbert-Schmidt operator with kernel $K$} as the operator $T:L^2(Y)\rightarrow L^2(X)$ defined by: $$Tf(x)\almoste{=}\int_YK(x,y)f(y)\dd{y}$$
   \end{definition}
   \begin{proposition}\label{RFA:fredholm}
     Let $X$, $Y$ be compact metric spaces spaces and $K\in\mathcal{C}(X\times Y)$. The Fredholm operator $T$ with kernel $K$ is compact and satisfies $\norm{T}\leq\norm{K}_{X\times Y}\m{Y}$
@@ -1181,6 +1187,17 @@
   \begin{sproof}
     Use \mnameref{RFA:arzela} and a similar scheme of the proof of \mcref{RFA:fredholm}.
   \end{sproof}
+  \begin{proposition}
+    Let $X,Y\subseteq \RR^n$ be measurable spaces and $K\in L^2(X\times Y)$. The Hilbert-Schmidt operator $T$ with kernel $K$ satisfies $\norm{T}\leq\norm{K}_{L^2(X\times Y)}$.
+  \end{proposition}
+  \begin{proof}
+    By \mnameref{RFA:holder} we have:
+    \begin{align*}
+      \norm{Tf}^2 & =\int_X{\left(\int_YK(x,y)f(y)\dd{y}\right)}^2                                    \\
+                  & \leq \int_X\left(\int_YK(x,y)^2\dd{y}\right)\left(\int_Y\abs{f(y)}^2\dd{y}\right) \\
+                  & = {\left(\norm{K}_{L^2(X\times Y)}\norm{f}_{L^2(Y)}\right)}^2
+    \end{align*}
+  \end{proof}
   \begin{definition}
     Let $E$, $F$ be Banach spaces and $T\in\mathcal{L}(E,F)$ be an operator. We say that $T$ is a \emph{finite-rank operator} if $\dim T(E)<\infty$.
   \end{definition}
@@ -1483,7 +1500,7 @@
       \item If $F\ne\{0\}$, $\norm{P_F}=1$.
       \item $\im P_F=F=\{y\in H:P_Fy=y\}$
       \item $\ker P_F=F^\perp$
-      \item $\norm{x}^2={d(x,F)}^2+{d(x,F^\perp)}^2$
+      \item $\norm{x}^2={d(x,F)}^2+{d(x,F^\perp)}^2$ $\forall x\in H$
     \end{enumerate}
   \end{corollary}
   \begin{proof}
@@ -1513,7 +1530,7 @@
             \begin{align*}
               \norm{x}^2 & =\norm{P_Fx}^2+\norm{P_{F^\perp}x}^2      \\
                          & =\norm{x -P_{F^\perp}x}^2+\norm{x-P_Fx}^2 \\
-                         & ={d(x,F)}^2+{d(x,F^\perp)}^2
+                         & ={d(x,F^\perp)}^2+{d(x,F)}^2
             \end{align*}
     \end{enumerate}
   \end{proof}
@@ -1578,7 +1595,7 @@
     Let $H$ be a Hilbert space. An \emph{orthogonal system} on $H$ is a nonempty subset $E\subseteq H$ such that its vectors are pairwise orthogonal. If moreover $\norm{e}=1 $ $\forall e\in E$, we will say that $E$ is a \emph{orthonormal system}.
   \end{definition}
   \begin{definition}
-    Let $H$ be a Hilbert space and $E$ be an orthonormal system. We say that $E$ is \emph{complete} (or \emph{maximal}) if $E^\perp =\{0\}$.
+    Let $H$ be a Hilbert space and $E$ be an orthonormal system. We say that $E$ is \emph{complete} if $E^\perp =\{0\}$.
   \end{definition}
   \begin{lemma}
     Let $H$ be a Hilbert space. $E$ is complete if and only if there is no other orthogonal system $E'\subseteq H$ such that $E\subsetneq E'$.
@@ -1590,7 +1607,7 @@
     Let $H$ be a Hilbert space and $E=\{e_1,\ldots,e_n\}$ be an orthonormal system and $F=\langle E\rangle$. Then, each $x\in H$ can be written as: $$P_Fx=\sum_{k=1}^n\dotp{x}{e_k}e_k$$
   \end{lemma}
   \begin{definition}
-    Let $H$ be a Hilbert space and $\{e_i:i\in I\}$ be an arbitrary orthonormal system. We define the \emph{Fourier coefficients} of an element $x\in H$ as the numbers $\widehat{x}(i):=\dotp{x}{e_i}\in\KK$. We will denote $\widehat{x}:=\{\widehat{x}(i):i\in I\}$ and we will say that $$\sum_{i\in I}\widehat{x}(i)e_i$$ is the \emph{Fourier series} of $x$.
+    Let $H$ be a Hilbert space and $\{e_i:i\in I\}$ be an orthonormal system. We define the \emph{Fourier coefficients} of an element $x\in H$ as the numbers $\widehat{x}(i):=\dotp{x}{e_i}\in\KK$. We will denote $\widehat{x}:=\{\widehat{x}(i):i\in I\}$ and we will say that $$\sum_{i\in I}\widehat{x}(i)e_i$$ is the \emph{Fourier series} of $x$.
   \end{definition}
   \begin{proposition}
     Let $H$ be a Hilbert space, $E=\{e_i:i\in I\}$ be a finite orthonormal system, $x\in H$ and $s=\sum_{i\in I}d_ie_i\in\langle E\rangle$. Then, $\norm{x-s}$ is minimum if and only if $d_i=\widehat{x}(i)$ $\forall i\in I$.
@@ -1604,29 +1621,32 @@
     \end{itemize}
   \end{proposition}
   \begin{theorem}[Bessel's inequality]
-    Let $H$ be a Hilbert space and $\{e_i:i\in I\}$ be an arbitrary orthonormal system. Then, $\forall x\in H$ we have: $$\sum_{i\in I}\abs{\widehat{x}(i)}^2\leq\norm{x}^2$$
+    Let $H$ be a Hilbert space and $\{e_i:i\in I\}$ be an orthonormal system. Then, $\forall x\in H$ we have: $$\sum_{i\in I}\abs{\widehat{x}(i)}^2\leq\norm{x}^2$$
   \end{theorem}
   \begin{lemma}
-    Let $H$ be a Hilbert space and $\{e_i:i\in I\}$ be an arbitrary orthonormal system. The map $$\function{}{H}{\ell^2(I)}{x}{\widehat{x}}$$ is linear, surjective and satisfies $\norm{\widehat{x}}_2\leq\norm{x}_H$.
+    Let $H$ be a Hilbert space and $\{e_i:i\in I\}$ be an orthonormal system. The map $$\function{}{H}{\ell^2(I)}{x}{\widehat{x}}$$ is linear, surjective and satisfies $\norm{\widehat{x}}_2\leq\norm{x}_H$. This map is called \emph{Fourier transform}.
   \end{lemma}
   \begin{definition}
-    Let $H$ be a Hilbert space, $\{e_k:k\in\NN\}$ be an arbitrary orthonormal system and $x\in H$. We define: $$s_k(x):=\sum_{k=1}^n\widehat{x}(k)e_k$$
+    Let $H$ be a Hilbert space, $\{e_k:k\in\NN\}$ be an orthonormal system and $x\in H$. We define: $$s_k(x):=\sum_{k=1}^n\widehat{x}(k)e_k$$
   \end{definition}
   \begin{lemma}
-    Let $H$ be a Hilbert space, $\{e_k:k\in\NN\}$ be an arbitrary orthonormal system and $x\in H$. Then, the limit $\displaystyle z = \lim_{n\to\infty} s_n(x)$ exists and satisfies $\widehat{z}=\widehat{x}$, but $x$ and $z$ may be different.
+    Let $H$ be a Hilbert space, $\{e_k:k\in\NN\}$ be an orthonormal system and $x\in H$. Then, the limit $\displaystyle z = \lim_{n\to\infty} s_n(x)$ exists and satisfies $\widehat{z}=\widehat{x}$, but $x$ and $z$ may be different.
   \end{lemma}
   \begin{theorem}[Riesz-Fischer theorem]
-    Let $H$ be a Hilbert space and $E=\{e_i:i\in I\}$ be an arbitrary orthonormal system. The following statements are equivalent:
+    Let $H$ be a Hilbert space and $E=\{e_i:i\in I\}$ be an orthonormal system. The following statements are equivalent:
     \begin{enumerate}
       \item $E$ is complete.
-      \item $\displaystyle x=\lim_{n\to\infty} s_n(x)=\sum_{i\in I} \widehat{x}(i)e_i$ on $H$ and $\forall x\in H$.
+      \item For all $x\in H$, $\displaystyle x=\lim_{n\to\infty} s_n(x)=\sum_{i\in I} \widehat{x}(i)e_i$ on $H$.
       \item \emph{Parseval identity}: For all $x\in H$, we have: $$\norm{x}^2=\sum_{i\in I}\abs{\widehat{x}(i)}^2$$
       \item $\dotp{x}{y}_H=\dotp{\widehat{x}}{\widehat{y}}_2$ $\forall x,y\in H$
     \end{enumerate}
   \end{theorem}
+  \begin{proposition}
+    Let $X,Y\subseteq \RR^n$ be measurable spaces and $K\in L^2(X\times Y)$. The Hilbert-Schmidt operator $T$ with kernel $K$ is compact. Moreover if $K(x,y)=K(y,x)$ $\forall (x,y)\in X\times Y$, then $T$ is self-adjoint.
+  \end{proposition}
   \subsubsection{Spectral theorem}
   \begin{proposition}
-    Let $H$ be a Hilbert space and $T\in\mathcal{L}(H)$ be compact and self-adjoint. Then:
+    Let $H$ be a Hilbert space and $T\in\mathcal{L}(H)$ be self-adjoint. Then:
     \begin{enumerate}
       \item Any eigenvalue of $T$ belongs to $[m(T),M(T)]\subset\RR$.
       \item Eigenvectors of distinct eigenvalues are orthogonal.
@@ -1634,10 +1654,10 @@
     \end{enumerate}
   \end{proposition}
   \begin{theorem}[Spectral theorem]\label{RFA:spectraltheorem}
-    Let $H$ be a Hilbert space and $T\in\mathcal{L}(H)$ be compact and self-adjoint. Then, $\exists \alpha\in \KK$ such that $\alpha$ is eigenvalue of $T$ such that $\abs{\alpha}=\norm{T}$.
+    Let $H$ be a Hilbert space and $T\in\mathcal{L}(H)$ be compact and self-adjoint. Then, $\exists \alpha\in \KK$ such that $\alpha$ is eigenvalue of $T$ with $\abs{\alpha}=\norm{T}$.
   \end{theorem}
   \begin{corollary}
-    Let $H$ be a Hilbert space and $T\in\mathcal{L}(H)$ be compact and self-adjoint. Suppose $\alpha_1$ is an eigenvalue of $T$ such that $\abs{\alpha}=\norm{T}$. Now consider $T_1:=T|_{{\ker(T-\alpha\id)}^\perp}$. By \mcref{RFA:spectraltheorem}, we obtain an eigenvalue $\alpha_2$ of $T_1$ (an therefore of $T$) such that $\abs{\alpha_1}\geq \abs{\alpha_2}$. Iterating the process, we get a sequence of eigenvalues $(\alpha_n)$ with the property that $\abs{\alpha_1}\geq \abs{\alpha_2}\geq\abs{\alpha_3}\geq\cdots$.
+    Let $H$ be a Hilbert space and $T\in\mathcal{L}(H)$ be compact and self-adjoint. Suppose $\alpha_1$ is an eigenvalue of $T$ with $\abs{\alpha_1}=\norm{T}$. Now consider $T_1:=T|_{{\ker(T-\alpha_1\id)}^\perp}$. By \mcref{RFA:spectraltheorem}, we obtain an eigenvalue $\alpha_2$ of $T_1$ (an therefore of $T$) such that $\abs{\alpha_1}\geq \abs{\alpha_2}$. Iterating the process, we get a sequence of eigenvalues $(\alpha_n)$ with the property that $\abs{\alpha_1}\geq \abs{\alpha_2}\geq\abs{\alpha_3}\geq\cdots$.
   \end{corollary}
   \begin{theorem}
     Let $H$ be a Hilbert space and $T\in\mathcal{L}(H)$ be compact and self-adjoint. The sequence $(\alpha_n)$ of eigenvalues of $T$ (each repeated according its multiplicity) is a sequence of real numbers. If the sequence is countable (i.e. not finite), then $\displaystyle\lim_{n\to\infty}\alpha_n=0$. Moreover, for each eigenvalue $\alpha_n$, $\dim\ker(T-\alpha_n\id)<\infty$.
@@ -1645,15 +1665,17 @@
   \begin{lemma}
     Let $H$ be a Hilbert space and $T\in\mathcal{L}(H)$ be compact and self-adjoint. Consider the sequence $(v_n)$ of orthonormal eigenvectors associated with the eigenvalues $(\alpha_n)$ of $T$. Then: $$H=\langle v_1,v_2,\ldots\rangle\oplus \ker(T)$$ and $\langle v_1,v_2,\ldots\rangle={\ker(T)}^\perp$.
   \end{lemma}
-  \begin{theorem}[Hilbert-Schmidt spectral representation theorem] \label{RFA:representationtheorem}
-    Let $H$ be a Hilbert space and $T\in\mathcal{L}(H)$ be compact and self-adjoint. Consider the sequence $(v_n)$ of orthonormal eigenvectors associated with the eigenvalues $(\alpha_n)$ of $T$. Then: $$Tx=\sum_{n=1}^\infty\alpha_n\dotp{x}{v_n}v_n$$ assuming that $\alpha_n=0$ eventually if the sequence $(\alpha_n)$ is finite.
-  \end{theorem}
+  \begin{important}
+    \begin{theorem}[Hilbert-Schmidt spectral representation theorem] \label{RFA:representationtheorem}
+      Let $H$ be a Hilbert space and $T\in\mathcal{L}(H)$ be compact and self-adjoint. Consider the sequence $(v_n)$ of orthonormal eigenvectors associated with the eigenvalues $(\alpha_n)$ of $T$. Then: $$Tx=\sum_{n=1}^\infty\alpha_n\dotp{x}{v_n}v_n$$ assuming that $\alpha_n=0$ eventually if the sequence $(\alpha_n)$ is finite.
+    \end{theorem}
+  \end{important}
   \begin{theorem}[Fredholm alternative]
     Let $H$ be a Hilbert space, $T\in\mathcal{L}(H)$ be compact and self-adjoint and $\alpha\in\KK^*$. Consider the sequence $(v_n)$ of orthonormal eigenvectors associated with the eigenvalues $(\alpha_n)$ of $T$. Then:
     \begin{enumerate}
       \item If $\alpha\ne\alpha_n$ $\forall n\in\NN$, then $\forall y\in H$ the unique solution to $Tx-\alpha x=y$ is: $$x=\frac{1}{\alpha}\left(\sum_{n=1}^\infty\frac{\alpha_n}{\alpha_n-\alpha}\dotp{y}{v_n}v_n -y\right)$$
-      \item If $\alpha=\alpha_{n_0}$ for some $n_0\in\NN$, then the equation $Tx-\alpha x=y$ has solution if and only if $y\in {\ker(T-\alpha \id)}^\perp$. In this case the solution is: $$x=\frac{1}{\alpha}\left(\sum_{\substack{n\geq 1\\\alpha_n\ne\alpha}}^\infty\frac{\alpha_n}{\alpha_n-\alpha}\dotp{y}{v_n}v_n -y\right) + \sum_{\substack{n\geq 1\\\alpha_n=\alpha}}^\infty \beta_nv_n$$
-            where $\beta_n\in\KK$ are arbitrary coefficients.
+      \item If $\alpha=\alpha_{n_0}$ for some $n_0\in\NN$, then the equation $Tx-\alpha x=y$ has solution if and only if $y\in {\ker(T-\alpha \id)}^\perp$. In this case the solution is: $$x=\frac{1}{\alpha}\left(\sum_{\substack{n\geq 1\\\alpha_n\ne\alpha}}^\infty\frac{\alpha_n}{\alpha_n-\alpha}\dotp{y}{v_n}v_n -y\right) + \sum_{n\geq 1}^\infty \beta_nu_n$$
+            where $\beta_n\in\KK$ are arbitrary coefficients and the $u_n$ are the eigenvectors associated with $\alpha_{n_0}$.
     \end{enumerate}
   \end{theorem}
 \end{multicols}
