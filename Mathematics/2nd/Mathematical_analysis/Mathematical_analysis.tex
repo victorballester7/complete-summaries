@@ -197,10 +197,10 @@
   \begin{corollary}
     If $\sum f_n(x)$ is an uniformly convergent series of functions on $D\subseteq\RR $, then $(f_n)$ converges uniformly to zero on $D$.
   \end{corollary}
-  \begin{theorem}
+  \begin{theorem}\label{MA:seriessumcontinuous}
     If $\sum f_n(x)$ is an uniformly convergent series of continuous functions on $D\subseteq\RR $, then its sum function is also continuous on $D$.
   \end{theorem}
-  \begin{theorem}
+  \begin{theorem}\label{MA:seriesuniformintegral}
     Let $(f_n)$ be a sequence of functions defined on $I=[a,b]\subseteq\RR $. If $(f_n)$ are Riemann-integrable on $I$ and $\sum f_n(x)$ converges uniformly on $I$, then $\sum f_n(x)$ is Riemann-integrable on $I$ and $$\int_a^b\sum_{n=1}^\infty f_n(x) \dd{x}=\sum_{n=1}^\infty \int_a^bf_n(x) \dd{x}$$
   \end{theorem}
   \begin{theorem}
@@ -384,45 +384,81 @@
   \begin{corollary}[Stirling's formula]
     $$\lim_{n\to\infty}\frac{n!}{n^n\exp{-n}\sqrt{2\pi n}}=1$$
   \end{corollary}
-  \subsection{Fourier series}
+  \subsection{Fourier series}\label{MA:fouriersection}
   \subsubsection{Periodic functions}
   \begin{definition}
     Let $f:\RR \rightarrow\CC $ be a function. We say that $f$ is \emph{$T$-periodic}, or is \emph{periodic with period $T$}, being $T>0$, if $f(x+T)=f(x)$ for all $x\in\RR $.
   \end{definition}
+  \begin{remark}
+    In general we take $T$ to be the least positive constant satisfying that property.
+  \end{remark}
   \begin{lemma}
     Let $f:\RR \rightarrow\CC $ be a $T$-periodic function. Then, $f(x+T')=f(x)$ for all $x\in\RR $ if and only if $T'=kT$ for some $k\in\ZZ $.
   \end{lemma}
-  \begin{proposition}
+  \begin{sproof}
+    \begin{itemizeiff}
+      $$f(x+kT)=f(x+(k-1)T)=\cdots=f(x)$$
+      \item Assume $T'=kT+\alpha$, $\alpha\in[0,T)$. Then:
+      $$f(x)=f(x+T')=f(x+\alpha)\quad\forall x\in\RR$$
+      which implies $\alpha=0$ because otherwise $f$ would be $\alpha$-periodic with $\alpha<T$.
+    \end{itemizeiff}
+  \end{sproof}
+  \begin{proposition}\label{MA:invarianceperiodicint}
     Let $f:\RR \rightarrow\CC $ be a $T$-periodic function. Then: $$\int_a^{a+T}f(x)\dd{x}=\int_0^Tf(x)\dd{x}$$ where $a\in\RR $. In particular, $$\int_a^{a+kT}f(x)\dd{x}=k\int_0^Tf(x)\dd{x}$$
   \end{proposition}
-  \begin{lemma}
+  \begin{lemma}\label{MA:periodicbounded}
     Let $f:\RR \rightarrow\CC $ be a $T$-periodic continuous function. Then, $|f|$ is bounded.
   \end{lemma}
+  \begin{sproof}
+    Use \mnameref{RVF:weierstrass} on the interval $[0,T]$ and the periodicity of $f$.
+  \end{sproof}
   \begin{proposition}
-    Given a $T$-periodic function $f$, there is no power series uniformly convergent to $f$ on $\RR $.
+    Given a $T$-periodic function $f$, there are no power series uniformly convergent to $f$ on $\RR$.
   \end{proposition}
+  \begin{proof}
+    Suppose $\sum a_nx^n$ converges uniformly to $f$. By \mcref{MA:seriessumcontinuous}, $f$ is continuous and by \mcref{MA:periodicbounded}, $\abs{f}$ is bounded. Therefore $$\sup_{x\in\RR}\left|\sum_{n=1}^{N}a_nx^n-f(x)\right|$$
+    cannot be arbitrarily small as $N\to\infty$ because $\sum_{n=1}^{N}a_nx^n$ is a polynomial, and therefore, unbounded.
+  \end{proof}
   \subsubsection{Orthogonal systems}
   \begin{definition}
-    Let $f:\RR \rightarrow\CC $ be a function. Then, $f\in L^p(I)$, $p\geq1$, if $$\|f\|_p:=\left(\int_I|f(t)|^p\dd{t}\right)^{1/p}<\infty$$
+    Let $f:\RR \rightarrow\CC $ be a function. We say that $f\in L^p(I)$, $p\geq1$, if: $$\|f\|_p:=\left(\int_I{|f(t)|}^p\dd{t}\right)^{1/p}<\infty$$
   \end{definition}
   \begin{definition}
-    Let $f,g:[a,b]\rightarrow\CC $ be Riemann-integrable functions. We define the \emph{inner product} of $f$ and $g$ as $$\langle f,g\rangle:=\int_a^bf(x)\overline{g(x)}\dd{x}$$ where $\overline{g}$ is the complex conjugate of $g$. Now, it's natural to define the \emph{norm} of $f$ as $$\|f\|:=\langle f,f\rangle^{1/2}=\left(\int_a^b{|f(x)|}^2\dd{x}\right)^{1/2}=\|f\|_2$$ And the \emph{distance} between $f$ and $g$ as $$d(f,g):=\|f-g\|$$
+    Let $f,g:[a,b]\rightarrow\CC $ be Riemann-integrable functions. We define the \emph{inner product} of $f$ and $g$ as $$\langle f,g\rangle:=\int_a^bf(x)\overline{g(x)}\dd{x}$$ where $\overline{g}$ denotes the complex conjugate of $g$. We define the \emph{norm} of $f$ as: $$\|f\|:={\langle f,f\rangle}^{1/2}=\left(\int_a^b{|f(x)|}^2\dd{x}\right)^{1/2}=\|f\|_2$$ And the \emph{distance} between $f$ and $g$ as: $$d(f,g):=\|f-g\|$$
   \end{definition}
   \begin{proposition}
     Let $f,g:[a,b]\rightarrow\CC $ be Riemann-integrable functions and let $\alpha\in\CC $. Then, we have:
     \begin{enumerate}
       \item $\langle f,f\rangle\geq 0$.
       \item $\langle f+h,g\rangle=\langle f,g\rangle+\langle h,g\rangle$ and $\langle f,g+h\rangle=\langle f,g\rangle+\langle f,h\rangle$.
-      \item $\langle f,g\rangle=\overline{\langle g,f\rangle}$.
+            \item\label{MA:orto3} $\langle f,g\rangle=\overline{\langle g,f\rangle}$.
       \item $\langle \alpha f,g\rangle=\alpha\langle f,g\rangle$ and $\langle f,\alpha g\rangle=\overline{\alpha}\langle f,g\rangle$.
     \end{enumerate}
   \end{proposition}
-  \begin{theorem}[Cauchy-Schwarz inequality]
-    Let $f,g:[a,b]\rightarrow\CC $ be Riemann-integrable functions. Then: $$|\langle f,g\rangle|\leq\|f\|\cdot\|g\|$$ which can be written as: $$\int_a^bf\overline{g}\leq\left(\int_a^b{|f|}^2\right)^{1/2}\left(\int_a^b{|g|}^2\right)^{1/2}$$
+  \begin{sproof}
+    They follow from the linearity of the integral. For \mcref{MA:orto3}, write $f=\Re f+\ii \Im f$ and $g=\Re g+\ii \Im g$ and expand the products of both sides of the equation.
+  \end{sproof}
+  \begin{theorem}[Cauchy-Schwarz inequality]\label{MA:cauchyschwarz}
+    Let $f,g:[a,b]\rightarrow\CC $ be Riemann-integrable functions. Then: $$\abs{\langle f,g\rangle}\leq\|f\|\cdot\|g\|$$ which can be written as: $$\int_a^bf\overline{g}\leq\left(\int_a^b{|f|}^2\right)^{1/2}\left(\int_a^b{|g|}^2\right)^{1/2}$$
   \end{theorem}
+  \begin{proof}
+    First suppose that $\norm{f}=\norm{g}=1$. Then:
+    $$\abs{\langle f,g\rangle}\leq\int_a^b\abs{fg}\leq\int_a^b\frac{\abs{f}^2+\abs{g}^2}{2}=1$$
+    because $\abs{ab}\leq \frac{a^2+b^2}{2}$ $\forall a,b\in\RR$.
+
+    For the general case, note that $\frac{f}{\norm{f}}$ and $\frac{g}{\norm{g}}$ have norm 1 and so: $$\abs{\left\langle \frac{f}{\norm{f}},\frac{g}{\norm{g}}\right\rangle}\leq 1\implies\abs{\langle f,g\rangle}\leq\norm{f}\norm{g}$$
+  \end{proof}
   \begin{theorem}[Minkowski inequality]
     Let $f,g:[a,b]\rightarrow\CC $ be Riemann-integrable functions. Then: $$\| f+g\|\leq\|f\|+\|g\|$$
   \end{theorem}
+  \begin{proof}
+    Using \mnameref{MA:cauchyschwarz} we have:
+    \begin{align*}
+      \norm{f+g}^2 & =\norm{f}^2+\norm{g}^2+2\langle f,g\rangle \\
+                   & \leq\norm{f}^2+\norm{g}^2+\|f\|\cdot\|g\|  \\
+                   & ={\left(\norm{f}+\norm{g}\right)}^2
+    \end{align*}
+  \end{proof}
   \begin{definition}
     Let $f,g:[a,b]\rightarrow\CC $ be Riemann-integrable functions with $f\ne g$. We say $f$ and $g$ are \emph{orthogonal} if $\langle f,g\rangle=0$. We say $f$ and $g$ are \emph{orthonormal} if they are orthogonal and $\|f\|=\|g\|=1$.
   \end{definition}
@@ -430,7 +466,8 @@
     Let $S=\{\phi_0,\phi_1,\ldots\}$ be a collection of Riemann-integrable functions on $[a,b]$. We say $S$ is an \emph{orthonormal system} if $\|\phi_n\|=1$ $\forall n$ and $\langle\phi_n,\phi_m\rangle=0$ $\forall n\ne m$.
   \end{definition}
   \begin{proposition}
-    Let: \begin{gather*}
+    Let $T>0$ and:
+    \begin{gather*}
       S_1=\left\{\frac{1}{\sqrt{T}}\exp{\frac{2\pi\ii nx}{T}}:n\in\ZZ \right\}\\ S_2=\left\{\frac{1}{\sqrt{T}},\frac{\cos\left(\frac{2\pi nx}{T}\right)}{\sqrt{T/2}},\frac{\sin\left(\frac{2\pi mx}{T}\right)}{\sqrt{T/2}}:n,m\in\NN \right\}
     \end{gather*} Then, $S_1$ and $S_2$ orthonormal systems on $[-T/2,T/2]$.
   \end{proposition}
@@ -438,39 +475,76 @@
     A collection of functions $S=\{\phi_0,\phi_1,\\\ldots,\phi_n\}$ is \emph{linearly dependent} on $[a,b]$ if there exist $c_0,c_1,\ldots,c_n\in\RR $ not all zero, such that $$c_0\phi_0+c_1\phi_1+\cdots+c_n\phi_n=0,\quad\forall x\in[a,b]$$ Otherwise we say $S$ is \emph{linearly independent}. If the collection $S$ has an infinity number of functions, we say $S$ is linearly independent on $[a,b]$ if any finite subset of $S$ is linearly independent on $[a,b]$.
   \end{definition}
   \begin{theorem}
-    Let $S=\{\phi_0,\phi_1,\ldots\}$ be an orthonormal system on $[a,b]$. Suppose that $\sum c_n\phi_n(x)$ converges uniformly to a function $f$ on $[a,b]$. Then, $f$ is Riemann-integrable on $[a,b]$ and, moreover, $$c_n=\langle f,\phi_n\rangle=\int_a^bf(x)\overline{\phi_n(x)}\dd{x},\quad\forall n\geq 0$$
+    Let $S=\{\phi_0,\phi_1,\ldots\}$ be an orthonormal system on $[a,b]$. Suppose that $\sum c_n\phi_n(x)$ converges uniformly to a function $f$ on $[a,b]$. Then, $f$ is Riemann-integrable on $[a,b]$ and, moreover: $$c_n=\langle f,\phi_n\rangle=\int_a^bf(x)\overline{\phi_n(x)}\dd{x},\quad\forall n\geq 0$$
   \end{theorem}
+  \begin{proof}
+    Using \mcref{MA:seriesuniformintegral} we have that $f$ is Riemann-integrable and that $\forall m\in\NN$:
+    $$\langle f,\phi_m\rangle=\sum_{n=0}^\infty c_n\langle \phi_n,\phi_m\rangle = c_n$$
+    by the orthonormality of $S$.
+  \end{proof}
   \subsubsection{Fourier coefficients and Fourier series}
   \begin{definition}
-    Let $\displaystyle S=\left\{\frac{1}{T}\exp{\frac{2\pi\ii nx}{T}},n\in\ZZ \right\}$ be an orthonormal system on $[-T/2,T/2]$ and let $f\in L^1([-T/2,T/2])$\footnote{Saying that $f\in L^1([-T/2,T/2])$ is equivalent to say that $f$ is integrable on $[-T/2,T/2]$.} be a $T$-periodic function\footnote{From now on, we will work only with functions defined on $[-T/2,T/2]$ and extended periodically on $\RR $.}. We define the \emph{$n$-th Fourier coefficient} of $f$ as $$\widehat{f}(n)=\left\langle f,\frac{1}{T}\exp{\frac{2\pi\ii nx}{T}}\right\rangle=\frac{1}{T}\int_{-T/2}^{T/2}f(x)\exp{-\frac{2\pi\ii nx}{T}}\dd{x}$$ for all $n\in\ZZ $.
+    Let $\displaystyle S=\left\{\frac{1}{\sqrt{T}}\exp{\frac{2\pi\ii nx}{T}},n\in\ZZ \right\}$ be an orthonormal system on $[-T/2,T/2]$ and let $f\in L^1([-T/2,T/2])$\footnote{Saying that $f\in L^1([-T/2,T/2])$ is equivalent to say that $f$ is integrable on $[-T/2,T/2]$.} be a $T$-periodic function\footnote{From now on, we will work only with functions defined on $[-T/2,T/2]$ and extended periodically on $\RR $.}. We define the \emph{$n$-th Fourier coefficient} of $f$ as $$\widehat{f}(n)=\frac{1}{T}\left\langle f,\exp{\frac{2\pi\ii nx}{T}}\right\rangle=\frac{1}{T}\int_{-T/2}^{T/2}f(x)\exp{-\frac{2\pi\ii nx}{T}}\dd{x}$$ for all $n\in\ZZ $.
   \end{definition}
   \begin{proposition}
     Let $f,g\in L^1([-T/2,T/2])$. The following properties are satisfied:
     \begin{enumerate}
-      \item For all $\lambda,\mu\in\CC $, $$\widehat{\lambda f+\mu g}(n)=\lambda\widehat{f}(n)+\mu\widehat{g}(n)$$
-      \item Let $\tau\in\RR $. We define $f_\tau(x)=f(x-\tau)$. Then: $$\widehat{f_\tau}(n)=\exp{-\frac{2\pi\ii n\tau}{T}}\widehat{f}(n)$$
+      \item For all $\lambda,\mu\in\CC $:
+            $$\widehat{(\lambda f+\mu g)}(n)=\lambda\widehat{f}(n)+\mu\widehat{g}(n)$$
+            \item\label{MA:fouriercoeffs2} Let $\tau\in\RR $. We define $f_\tau(x)=f(x-\tau)$. Then: $$\widehat{f_\tau}(n)=\exp{-\frac{2\pi\ii n\tau}{T}}\widehat{f}(n)$$
       \item If $f$ is even, then $\widehat{f}(n)=\widehat{f}(-n)$, $\forall n\in\ZZ $.\newline If $f$ is odd, then $\widehat{f}(n)=-\widehat{f}(-n)$, $\forall n\in\ZZ $.
       \item If $f\in \mathcal{C}^k$, then $$\widehat{f^{(k)}}(n)=\left(\frac{2\pi\ii n}{T}\right)^k\widehat{f}(n)$$
       \item $\widehat{(f*g)}(n)=\widehat{f}(n)\widehat{g}(n)$.
     \end{enumerate}
   \end{proposition}
+  \begin{proof}
+    \begin{enumerate}
+      \item It follows from the linearity of the integral.
+      \item \begin{align*}
+              \widehat{f_\tau}(n) & =\frac{1}{T}\int_{-T/2}^{T/2}f(x-\tau)\exp{-\frac{2\pi\ii nx}{T}}\dd{x}             \\
+                                  & =\frac{1}{T}\int_{-T/2-\tau}^{T/2-\tau}f(u)\exp{-\frac{2\pi\ii n(u+\tau)}{T}}\dd{x} \\
+                                  & =\exp{-\frac{2\pi\ii n\tau}{T}}\widehat{f}(n)
+            \end{align*}
+            where we have done the change of variable $u=x-\tau$ and we have used \mcref{MA:invarianceperiodicint}.
+      \item Make the change of variable $u=-x$.
+      \item We will use induction. The case $k=0$ is clear. For the other ones:
+            \begin{align*}
+              \widehat{f^{(k)}}(n) & =\frac{1}{T}\int_{-T/2}^{T/2} f^{(k)}(x)\exp{-\frac{2\pi\ii nx}{T}}\dd{x}       \\
+                                   & =\frac{\ii n}{T}\int_{-T/2}^{T/2} f^{(k-1)}(x)\exp{-\frac{2\pi\ii nx}{T}}\dd{x} \\
+                                   & =\left(\frac{2\pi\ii n}{T}\right)\widehat{f^{(k-1)}}(n)                         \\
+                                   & ={\left(\frac{2\pi\ii n}{T}\right)}^k\widehat{f}(n)
+            \end{align*}
+            where we have used integration by parts.
+      \item Using \mnameref{FSV:fubini} we have that:
+            \begin{align*}
+              \widehat{(f*g)}(n) & =\int_{-T/2}^{T/2}\int_{-T/2}^{T/2} f(t)g(x-t)\exp{-\frac{2\pi\ii n x}{T}}\dd{t}\dd{x}              \\
+                                 & =\int_{-T/2}^{T/2}f(t)\left(\int_{-T/2}^{T/2} g(x-t)\exp{-\frac{2\pi\ii n x}{T}}\dd{x}\right)\dd{t} \\
+                                 & =\int_{-T/2}^{T/2}f(t)\exp{-\frac{2\pi\ii nt}{T}}\widehat{g}(n)\dd{t}                               \\
+                                 & =\widehat{f}(n)\widehat{g}(n)
+            \end{align*}
+            where we have used \mcref{MA:fouriercoeffs2}.
+    \end{enumerate}
+  \end{proof}
   \begin{definition}
-    Let $f\in L^1([-T/2,T/2])$. We define the \emph{Fourier series} of $f$ as $$\displaystyle Sf(x)=\sum_{n\in\ZZ }\widehat{f}(n)\exp{\frac{2\pi\ii nx}{T}}$$
+    Let $f\in L^1([-T/2,T/2])$. We define the \emph{Fourier series} of $f$ as: $$\displaystyle Sf(x)=\sum_{n\in\ZZ }\widehat{f}(n)\exp{\frac{2\pi\ii nx}{T}}$$
   \end{definition}
   \begin{definition}
-    Let $f\in L^1([-T/2,T/2])$ and $Sf$ be the Fourier series of $f$. The \emph{$N$-th partial sum} of $Sf$ is $$S_Nf(x)=\sum_{n=-N}^N\widehat{f}(n)\exp{\frac{2\pi\ii nx}{T}}$$
+    Let $f\in L^1([-T/2,T/2])$ and $Sf$ be the Fourier series of $f$. We define \emph{$N$-th partial sum of $Sf$} as: $$S_Nf(x)=\sum_{n=-N}^N\widehat{f}(n)\exp{\frac{2\pi\ii nx}{T}}$$
   \end{definition}
   \begin{proposition}
     Let $f\in L^1([-T/2,T/2])$. Then: $$Sf(x)=\frac{a_0}{2}+\sum_{n=1}^\infty a_n\cos\left(\frac{2\pi nx}{T}\right)+b_n\sin\left(\frac{2\pi nx}{T}\right)$$ where \begin{gather*}
       a_n=\frac{2}{T}\int_{-T/2}^{T/2}f(x)\cos\left(\frac{2\pi nx}{T}\right)\dd{x},\\ b_n=\frac{2}{T}\int_{-T/2}^{T/2}f(x)\sin\left(\frac{2\pi nx}{T}\right)\dd{x},
-    \end{gather*} for $n\geq 0$\footnote{The relation between $a_n,b_n$ and $\widehat{f}(n)$ is given by: $$a_n=\widehat{f}(n)+\widehat{f}(-n)\quad\text{and}\quad b_n=\ii\left[\widehat{f}(n)-\widehat{f}(-n)\right],\quad\forall n\in\NN \cup\{0\}$$}. In particular, if $f$ is even we have $$Sf(x)=\frac{a_0}{2}+\sum_{n=1}^\infty a_n\cos\left(\frac{2\pi nx}{T}\right)$$ and if $f$ is odd we have $$Sf(x)=\sum_{n=1}^\infty b_n\sin\left(\frac{2\pi nx}{T}\right)$$
+    \end{gather*} for $n\geq 0$\footnote{The relation between $a_n,b_n$ and $\widehat{f}(n)$ is given by: $$a_n=\widehat{f}(n)+\widehat{f}(-n)\quad\text{and}\quad b_n=\ii\left[\widehat{f}(n)-\widehat{f}(-n)\right],\quad\forall n\in\NN \cup\{0\}$$}. In particular, if $f$ is even we have: $$Sf(x)=\frac{a_0}{2}+\sum_{n=1}^\infty a_n\cos\left(\frac{2\pi nx}{T}\right)$$ and if $f$ is odd we have: $$Sf(x)=\sum_{n=1}^\infty b_n\sin\left(\frac{2\pi nx}{T}\right)$$
   \end{proposition}
+  \begin{sproof}
+    Remember that: $$\exp{\frac{2\pi\ii nx}{T}}=\cos\left(\frac{2\pi nx}{T}\right)+\ii\sin\left(\frac{2\pi nx}{T}\right)$$
+  \end{sproof}
   \begin{definition}
-    Let $f:(0,L)\rightarrow\CC $ be a function. We define the \emph{even extension} of $f$ as $$\Tilde{f}(x)=
+    Let $f:(0,L)\rightarrow\CC $ be a function. We define the \emph{even extension} of $f$ as $$f_\mathrm{e}(x)=
       \begin{cases}
         f(x)  & \text{if }x\in(0,L)  \\
         f(-x) & \text{if }x\in(-L,0)
-      \end{cases}$$ Analogously, we define the \emph{odd extension} of $f$ as $$\hat{f}(x)=
+      \end{cases}$$ Analogously, we define the \emph{odd extension} of $f$ as $$f_\mathrm{o}(x)=
       \begin{cases}
         f(x)   & \text{if }x\in(0,L)  \\
         -f(-x) & \text{if }x\in(-L,0)
@@ -481,37 +555,86 @@
   \end{proposition}
   \subsubsection{Pointwise convergence}
   \begin{definition}[Dirichlet kernel]
-    We define the \emph{Dirichlet kernel} of order $N$ as $$D_N(t)=\frac{1}{T}\sum_{n=-N}^N\exp{\frac{2\pi\ii nt}{T}}=\frac{1}{T}\frac{\sin\left(\frac{(2N+1)\pi t}{T}\right)}{\sin\left(\frac{\pi t}{T}\right)}$$
+    We define the \emph{Dirichlet kernel} of order $N\in\NN$ as: $$D_N(t)=\sum_{n=-N}^N\exp{\frac{2\pi\ii nt}{T}}$$
   \end{definition}
+  \begin{lemma}\label{MA:dirichletkernelchar}
+    Let $N\in\NN$. Then, $\forall t\in(0,T)$ we have:
+    $$D_N(t)=\frac{\sin\left(\frac{(2N+1)\pi t}{T}\right)}{\sin\left(\frac{\pi t}{T}\right)}$$
+  \end{lemma}
+  \begin{proof}
+    Using the geometric sum formula we have:
+    \begin{align*}
+      D_N(t) & =\frac{\exp{-\frac{2\pi\ii Nt}{T}}-\exp{\frac{2\pi\ii (N+1)t}{T}}}{1-\exp{\frac{2\pi\ii t}{T}}}                            \\
+             & =\frac{\exp{-\frac{\pi\ii (2N+1)t}{T}}-\exp{\frac{\pi\ii (2N+1)t}{T}}}{\exp{-\frac{\pi\ii t}{T}}-\exp{\frac{\pi\ii t}{T}}} \\
+             & =\frac{\sin\left(\frac{(2N+1)\pi t}{T}\right)}{\sin\left(\frac{\pi t}{T}\right)}
+    \end{align*}
+  \end{proof}
   \begin{proposition}
     The Dirichlet kernel has the following properties:
     \begin{enumerate}
       \item $D_N$ is a $T$-periodic and even function.
-      \item $\displaystyle\int_0^TD_N(t)\dd{t}=1,\;\forall N$.
+      \item $\displaystyle\frac{1}{T}\int_0^TD_N(t)\dd{t}=1,\;\forall N\in\NN$.
     \end{enumerate}
   \end{proposition}
+  \begin{sproof}
+    \begin{enumerate}
+      \item Use the characterization of \mcref{MA:dirichletkernelchar}.
+      \item Note that if $n\ne 0$, $\displaystyle\int_0^T \exp{\frac{2\pi\ii nt}{T}}\dd{t}=0$
+    \end{enumerate}
+  \end{sproof}
   \begin{proposition}
     Let $f\in L^1([-T/2,T/2])$. Then:
     \begin{multline*}
       S_Nf(x)=(f*D_N)(x)=\int_{-T/2}^{T/2}f(x-t)D_N(t)\dd{t}=\\=\int_0^{T/2}[f(x+t)+f(x-t)]D_N(t)\dd{t}
     \end{multline*}
   \end{proposition}
-  \begin{lemma}[Riemann-Lebesgue lemma]
+  \begin{sproof}
+    The first equality follows from expandind the Fourier coefficients inside $S_Nf$. The second one, making the change of variables $u=x-t$ and noting that both integrant functions are $T$-periodic. For the last one, make the change of variables $u=-t$ and use that $D_N(t)$ is even.
+  \end{sproof}
+  \begin{lemma}[Riemann-Lebesgue lemma]\label{MA:riemannlebesgue}
     Let $f\in L^1([-T/2,T/2])$ and $\lambda\in\RR $. Then: $$\lim_{\lambda\to\infty}\int_{-T/2}^{T/2}f(t)\sin(\lambda t)\dd{t}=\lim_{\lambda\to\infty}\int_{-T/2}^{T/2}f(t)\cos(\lambda t)\dd{t}=0$$ In particular, $\displaystyle\lim_{|n|\to\infty}\widehat{f}(n)=0$.
   \end{lemma}
-  \begin{theorem}
+  \begin{proof}
+    We first proof the statement for indicators functions $f(x)=\indi{[a,b]}(x)$, $(a,b)\subseteq [-T/2,T/2]$. We have that:
+    $$\lim_{\lambda\to\infty}\int_{-T/2}^{T/2}\indi{[a,b]}(t)\sin(\lambda t)\dd{t}=\lim_{\lambda\to\infty}\frac{\cos(\lambda a)-\cos(\lambda b)}{\lambda}=0$$
+    From the linearity of the integral the statement remains true for $f$ being linear combination of indicator functions. Finally note that taking an upper sum $g_\varepsilon$ of $f$ (see \mcref{RVF:upperlower}) such that $\int_{-T/2}^{T/2}\abs{f-g_\varepsilon}<\varepsilon$, we have:
+    \begin{multline*}
+      \abs{\int_{-T/2}^{T/2}f(t)\sin(\lambda t)\dd{t}}\leq\int_{-T/2}^{T/2}\abs{f(t)-g_\varepsilon(t)}\dd{t}+\\+\abs{\int_{-T/2}^{T/2}g_\varepsilon(t)\sin(\lambda t)\dd{t}}\overset{\substack{\lambda\to\infty\\\varepsilon\to 0}}{\longrightarrow}0
+    \end{multline*}
+    The same proof applies for the $\cos(\lambda t)$.
+  \end{proof}
+  \begin{theorem}[Dini's theorem]\label{MA:dini}
+    Let \\$f\in L^1([-T/2,T/2])$, $x_0\in (-T/2,T/2)$ and $\ell\in\RR $ such that $$\int_0^\delta\frac{|f(x_0+t)+f(x_0-t)-2\ell|}{t}\dd{t}<\infty$$ for some $\delta>0$. Then, $\displaystyle\lim_{N\to\infty}S_Nf(x_0)=\ell$.
+  \end{theorem}
+  \begin{proof}
+    Note that $-\ell=-2\ell\int_{0}^{T/2}D_N(t)\dd{t}$. So:
+    \begin{align*}
+      S_Nf(x_0)-\ell & =\int_0^{T/2}[f(x_0+t)+f(x_0-t) - 2\ell]D_N(t)\dd{t} \\
+      \begin{split}
+        &=\int_{0}^{T/2}\frac{f(x_0+t)+f(x_0-t) - 2\ell}{t}\frac{t}{\sin\left(\frac{\pi t}{T}\right)}\cdot\\
+        &\hspace{3cm}\cdot\sin\left(\frac{(2N+1)\pi t}{T}\right)\dd{t}
+      \end{split}
+    \end{align*}
+    Since the first terms form an integrable function, we can use now the \mnameref{MA:riemannlebesgue}.
+  \end{proof}
+  \begin{corollary}
     Let $f\in L^1([-T/2,T/2])$ be a function left and right differentiable at $x_0$, that is, there exists the following limits
     \begin{gather*}
       f'({x_0}^+)=\lim_{t\to0^+}\frac{f(x_0+t)-f({x_0}^+)}{t}\\
       f'({x_0}^-)=\lim_{t\to0^-}\frac{f(x_0+t)-f({x_0}^-)}{t}
     \end{gather*}(supposing the existence of left- and right-sided limits). Then: $$\lim_{N\to\infty}S_Nf(x_0)=\frac{f({x_0}^+)+f({x_0}^-)}{2}$$
-  \end{theorem}
-  \begin{theorem}[Dini's theorem]
-    Let \\$f\in L^1([-T/2,T/2])$, $x_0\in (-T/2,T/2)$ and $\ell\in\RR $ such that $$\int_0^\delta\frac{|f(x_0+t)+f(x_0-t)-2\ell|}{t}\dd{t}<\infty$$ for some $\delta>0$. Then, $\displaystyle\lim_{N\to\infty}S_Nf(x_0)=\ell$.
-  \end{theorem}
+  \end{corollary}
+  \begin{sproof}
+    Use \mnameref{MA:dini} with $\ell=\frac{f({x_0}^+)+f({x_0}^-)}{2}$.
+  \end{sproof}
   \begin{theorem}[Lipschitz's theorem]
     Let $f\in L^1([-T/2,T/2])$ such that at a point $x_0\in (-T/2,T/2)$ it satisfies $$|f(x_0+t)-f(x_0)|\leq k|t|$$ for some constant $k\in\RR $ and for $|t|<\delta$. Then, $\displaystyle\lim_{N\to\infty}S_Nf(x_0)=f(x_0)$.
   \end{theorem}
+  \begin{sproof}
+    Note that
+    $$S_Nf(x_0)-f(x_0) =\int_{-T/2}^{T/2}[f(x_0+t) - f(x_0)]D_N(t)\dd{t}$$
+    and proceed as in the proof of \mnameref{MA:dini}.
+  \end{sproof}
   \subsubsection{Uniform convergence}
   \begin{definition}
     Let $\sum a_n$ be a series with partial sums $S_k$. The series $\sum a_n$ is called \emph{Cesàro summable} with sum $S$ if $$\lim_{N\to\infty}\frac{S_1+\cdots+S_N}{N}=S$$

@@ -4,6 +4,147 @@
 \begin{document}
 \changecolor{A}
 \begin{multicols}{2}[\section{Arithmetic}]
+  \subsection{Primes and congruences}
+  \subsubsection{Divisibility}
+  \begin{theorem}
+    Let $a,b\in\ZZ$ with $b>1$. Then, $\exists q,r\in\ZZ$ such that: $$a=bq+r, \quad 0\leq r<d$$
+    The integer $q$ is called \emph{quotient} of $a$ and $b$, and $r$ is called \emph{remainder}. If $r=0$, we will say that $b$ divides $a$ and we will denote it as $b\mid a$.
+  \end{theorem}
+  \begin{theorem}
+    Let $m\in\NN$, $m\geq 2$, and $n\in \NN$. Then, there exists a unique representation of $n$ in the form: $$n=a_0+a_1m+a_2m^2+\cdots +a_km^k$$ with $a_i\in\ZZ$, $0\leq a_i\leq m-1$ $\forall i$ and $a_k\ne 0$. Moreover $k\in\NN\cup\{0\}$ is the unique integer such that $m^k\leq n<m^{k+1}$.
+  \end{theorem}
+  \begin{proof}
+    The existence is clear by constructing recursively the element s $a_i$ in a decreasing way. First take the unique value $k$ that satisfies $m^k\leq n<m^{k+1}$. Then, start taking $a_k$ such that $$m^{k-1}\leq n-a_km^k<m^{k}$$ and proceed recursively.
 
+    For the unicity suppose we have two descompositions of the form:
+    \begin{align*}
+      n & =a_0+a_1m+a_2m^2+\cdots +a_km^k \\
+      n & =b_0+b_1m+b_2m^2+\cdots +b_km^k
+    \end{align*}
+    and suppose that $a_k\geq b_k$. Then substracting the two equations we get:
+    \begin{align*}
+      0 & =\sum_{\ell=0}^k (a_\ell-b_\ell) m^\ell                 \\
+        & \geq -\sum_{\ell=0}^{k-1} (m - 1) m^\ell + (a_k-b_k)m^k \\
+        & =1+ (a_k-b_k - 1)m^k
+    \end{align*}
+    So we need $a_k - b_k< 1$, and thus $a_k=b_k$. Recursively, we get that all $a_i$ and $b_i$ must be equal.
+  \end{proof}
+  \begin{definition}
+    We define the \emph{greatest common divisor} of two integers $a,b\in\ZZ$ (not both zero) as: $$\gcd(a,b):=\max\{d:d\mid a\text{ and }d\mid b\}$$
+    We also define $\gcd(0,0):=0$.
+  \end{definition}
+  \begin{lemma}
+    Let $a,b\in\ZZ$. Then:
+    $$\gcd(a,b)=\gcd(b,a)=\gcd(\pm a,\pm b)=\gcd(a, b\pm a)$$
+  \end{lemma}
+  \begin{sproof}
+    Use the definition of $\gcd$ and note that $d\mid a$ and $d\mid b$ if and only if $d\mid a$ then $d\mid a\pm b$.
+  \end{sproof}
+  \begin{corollary}
+    Let $a,b, t\in\ZZ$. Then: $$\gcd(a,b+at)=\gcd(a,b)$$
+  \end{corollary}
+  \begin{lemma}
+    Let $a,b, n\in\ZZ$. Then: $$\gcd(an,bn)=\abs{n}\gcd(a,b)$$
+  \end{lemma}
+  \begin{proof}
+    Let $d:=\gcd(a,b)$. Since, $d\mid a$ and $d\mid b$, we have that $\pm nd\mid na$ and $\pm nd\mid nb$. So $\abs{n}d\leq \gcd(na, nb)=:c$ and we can write $c=q\abs{n} d +r$, with $0\leq r<\abs{n}d$. But the fact that $q\mid a$ and $c\mid nb$ implies that $\abs{n}d\mid r$, and so $r=0$. Finally, since $c=q\abs{n}d\mid na$ and $q\abs{n}d\mid nb$, the fact that $d=\gcd(a,b)$ implies $q=1$.
+  \end{proof}
+  \begin{lemma}\label{A:gcddiv}
+    Let $a,b, n\in\ZZ$ be such that $n\mid a$ and $n\mid b$. Then, $n\mid\gcd(a,b)$
+  \end{lemma}
+  \begin{proof}
+    We have that $a=nr$ and $b=ns$ for certain $r, s\in\ZZ$. Thus:
+    $$n\mid \pm n\gcd(r,s)=\gcd(a,b)$$
+  \end{proof}
+  \subsubsection{Factorization}
+  \begin{definition}
+    A number $p\in\NN$ is a \emph{prime number} (or simply is \emph{prime}) if $p$ has exactly two positive divisors (1 and $p$).
+  \end{definition}
+  \begin{definition}
+    We say that $a,b\in\ZZ$ are \emph{coprime} if $\gcd(a,b)=1$.
+  \end{definition}
+  \begin{remark}
+    The first 15 prime numbers are the following: $$2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47$$
+  \end{remark}
+  \begin{theorem}[Euclid theorem]
+    Let $p$ be a prime number and $a,b\in \ZZ$ such that $p\mid ab$. Then, either $p\mid a$ or $p\mid b$.
+  \end{theorem}
+  \begin{proof}
+    If $p\mid a$ we are done. If not, then $\gcd(p,a)=1$ and therefore $\gcd(pb,ab)=\abs{b}$. Since $p\mid pb$ and $p\mid ab$, and by \mcref{A:gcddiv} we conclude that $p\mid b$.
+  \end{proof}
+  \begin{important}
+    \begin{theorem}[Fundamental theorem of Arithmetic]\label{A:fundamentalthm}
+      Let $n\in\NN$, the there exists unique prime numbers $p_1,\ldots, p_r$ such that: $$n=p_1p_2\cdots p_r$$
+    \end{theorem}
+  \end{important}
+  \begin{proof}
+    We will proof the existence by induction on $n$. If $n=1$, we are done (empty product). If $n>1$ and $n$ is prime, we are done too. If $n>1$ and $n$ is not prime, we can write $n=ab$ with $a,b<n$ and apply the induction hypothesis.
+
+    For the unicity suppose we can write
+    \begin{equation}\label{A:fundamentalproof}
+      n=p_1p_2\cdots p_r=q_1q_2\cdots q_s
+    \end{equation}
+    with $p_i,q_j$ primes. Then, $p_1\mid q_1q_2\cdots q_s$ and since the $q_j$ are primes, we can suppose that $p_1=q_1$ and cancel out the two factors on the expresion of \cref{A:fundamentalproof}. Proceeding recursively in this way, we obtain $r=s$ and $p_i=q_i$, $1\leq i\leq r$.
+  \end{proof}
+  \begin{remark}
+    Note that this theorem doesn't hold in other commutative rings. For example in $\ZZ[\sqrt{-5}]$ we have that $$6=2\cdot 3=(1+\sqrt{-5})(1-\sqrt{-5})$$
+    and all these numbers are prime (recall \mcref{AS:primernumber}).
+  \end{remark}
+  \begin{theorem}[Euclid theorem]
+    There are infinite prime numbers.
+  \end{theorem}
+  \begin{sproof}
+    Suppose there was a finite number of them, and let $N$ be the product of all of these. But in this case $N+1$ would be prime as none of the previous primes divide it. This leads us to a contradiction.
+  \end{sproof}
+  \begin{theorem}[Dirichlet theorem]
+    Let $a,r\in\ZZ$ be coprime numbers. There are infinite prime numbers of the form $a+rx$, $x\in \ZZ$
+  \end{theorem}
+  \subsubsection{Modular arithmetic}
+  \begin{definition}
+    Let $a,b\in\ZZ$ and $n\in\NN$. We say that $a\equiv b\mod n$ if $n\mid a-b$.
+  \end{definition}
+  \begin{proposition}
+    Let $a,b,c\in\ZZ$ and $n\in\NN$ such that $\gcd(c,n)=1$ and $ac\equiv bc\mod n$. Then, $a\equiv b\mod n$.
+  \end{proposition}
+  \begin{sproof}
+    Since $n\mid c(a-b)$ and $\gcd(c,n)=1$ we must have $n\mid a-b$.
+  \end{sproof}
+  \begin{proposition}\label{A:cancellity}
+    Let $a\in\ZZ$ and $n\in\NN$ such that $\gcd(a,n)=1$. The function $$\function{m_a}{\quot{\ZZ}{n\ZZ}}{\quot{\ZZ}{n\ZZ}}{x}{ax}$$ is a isomorphism.
+  \end{proposition}
+  \begin{sproof}
+    Clearly $m_a$ is a group morphism. Moreover by \mcref{A:cancellity} we have that $$ax\equiv 0 \mod n\implies x\equiv 0\mod n$$
+    Hence, $\ker m_a=\{0\}$ and so $m_a$ is injective. Since, the domain and image sets are the same and are finite, we have that $m_a$ is a bijection.
+  \end{sproof}
+  \begin{corollary}\label{A:multgroupunits}
+    The group of units of the $\quot{\ZZ}{n\ZZ}$ is: $${\left(\quot{\ZZ}{n\ZZ}\right)}^*=\left\{a\in\quot{\ZZ}{n\ZZ}:\gcd(a,n)=1\right\}$$
+  \end{corollary}
+  \begin{proof}
+    Let $A$ be the set of the right-hand-side of the equality. The surjectivity of the function $m_a$ leads to the inclusion $A\subseteq {\left(\quot{\ZZ}{n\ZZ}\right)}^*$. Now take $a\in{\left(\quot{\ZZ}{n\ZZ}\right)}^*$. Then, there exists $x\in\left(\quot{\ZZ}{n\ZZ}\right)$ such that $ax\equiv 1\mod n$, so $ax+qn=1$ for certain $q\in\ZZ$. Finally, if $d=\gcd(a,n)$, we have that $d\mid (ax+qn)$ because $d\mid a$ and $d\mid n$, and so $d=1$.
+  \end{proof}
+  \begin{definition}
+    For each $n\in\NN$, we define the \emph{Euler's totient function} as: $$\varphi(n)=\left|{\left(\quot{\ZZ}{n\ZZ}\right)}^*\right|$$
+  \end{definition}
+  \begin{proposition}
+    Let $a,b\in\ZZ$, $n\in\NN$. The equation $ax\equiv b\mod n$ has solution if and only if $\gcd(a,n)\mid b$.
+  \end{proposition}
+  \begin{sproof}
+    \begin{itemizeiff}
+      If $x$ is a solution to that equation, note that $ax+qn=b$ for certain $q\in\ZZ$. And so $\gcd(a,n)\mid b$.
+      \item Let $d=\gcd(a,n)$. Then, $\frac{a}{d}x\equiv \frac{b}{d}\mod \frac{n}{d}$. But since $\gcd\left(\frac{a}{d},\frac{n}{d}\right)=1$, we have that $\frac{a}{d}\in {\left(\quot{\ZZ}{n\ZZ}\right)}^*$ by \mcref{A:multgroupunits}. So a solution to the equation is $x\equiv \frac{b}{d}{\left(\frac{a}{d}\right)}^{-1}\mod n$.
+    \end{itemizeiff}
+  \end{sproof}
+  \begin{theorem}[Euler theorem]
+    Let $a\in\ZZ$, $n\in\NN$ such that $\gcd(a, n)=1$. Then: $$a^{\varphi(n)}\equiv 1\mod n$$
+  \end{theorem}
+  \begin{proof}
+    Let $G={\left(\quot{\ZZ}{n\ZZ}\right)}^*$ and $H=\langle a\rangle\subseteq G$. By \mnameref{AS:lagrange} we have that $\ord(a)\mid \varphi(n)$, so $\varphi(n)=k\ord(a)$ for certain $k\in\NN$. Finally: $$a^{\varphi(n)}\equiv{(a^m)}^k\equiv 1^k\equiv 1\mod n$$
+  \end{proof}
+  \begin{corollary}[Fermat's little theorem]
+    Let $p$ be a prime number and $a\in\ZZ$ such that $p\nmid a$. Then: $$a^{p-1}\equiv 1\mod p$$
+  \end{corollary}
+  \begin{theorem}[Wilson theorem]
+    Let $n\in\NN$. $n$ is prime if and only if: $$(n-1)!\equiv -1\mod n$$
+  \end{theorem}
 \end{multicols}
 \end{document}

@@ -427,9 +427,9 @@
   \begin{definition}
     Let $R\subset\RR^n$ be a compact rectangle and $f:R\rightarrow\RR $ be a bounded function. We define the \emph{lower integral} and \emph{upper integral} of $f$ on $R$ as
     \begin{gather*}
-      \underline{\dotsint_{R}}f:=\sup\{L(f,\mathcal{P}):\mathcal{P}\in\textbf{P}\}\\
-      \overline{\dotsint_{R}}f:=\inf\{U(f,\mathcal{P}):\mathcal{P}\in\textbf{P}\}
-    \end{gather*} We say that $f$ is \emph{Riemann-integrable} on $R$ if $\displaystyle\underline{\dotsint_{R}}f=\overline{\dotsint_{R}}f$.
+      \underline{\int_{R}}f:=\sup\{L(f,\mathcal{P}):\mathcal{P}\in\textbf{P}\}\\
+      \overline{\int_{R}}f:=\inf\{U(f,\mathcal{P}):\mathcal{P}\in\textbf{P}\}
+    \end{gather*} We say that $f$ is \emph{Riemann-integrable} on $R$ if $\displaystyle\underline{\int_{R}}f=\overline{\int_{R}}f$.
   \end{definition}
   \begin{proposition}
     Let $R\subset\RR^n$ be a compact rectangle and $f:R\rightarrow\RR $ be a bounded function. $f$ is Riemann-integrable if and only if $\forall\varepsilon$ $\exists\mathcal{P}\in\textbf{P}(R)$ such that $U(f,\mathcal{P})-L(f,\mathcal{P})<\varepsilon$.
@@ -438,27 +438,27 @@
     Let $R\subset\RR^n$ be a compact rectangle, $f:R\rightarrow\RR $ be a bounded function, $\mathcal{P}\in\textbf{P}(R)$ and $\xi_j$ be an arbitrary point of the subrectangle $R_j$ for $j=1,\ldots,m$. Then, we define the \emph{Riemann sum} of $f$ associated to $\mathcal{P}$ as: $$S(f,\mathcal{P})=\sum_{j=1}^mf(\xi_j)\text{vol}(R_j)$$
   \end{definition}
   \begin{theorem}
-    Let $R\subset\RR^n$ be a compact rectangle and $f:R\rightarrow\RR $ be a bounded function. $f$ is Riemann-integrable over $R$ if and only if $\forall\varepsilon>0$ $\exists\mathcal{P}_\varepsilon\in\textbf{P}(R)$ such that: $$\left|S(f,\mathcal{P})-\dotsint_Rf\right|=\left|\sum_{j=1}^mf(\xi_j)\text{vol}(R_j)-\dotsint_Rf\right|<\varepsilon$$ for any $\mathcal{P}\in\textbf{P}(R)$ finer than $\mathcal{P}_\varepsilon$ and for any $\xi_j\in R_j$.
+    Let $R\subset\RR^n$ be a compact rectangle and $f:R\rightarrow\RR $ be a bounded function. $f$ is Riemann-integrable over $R$ if and only if $\forall\varepsilon>0$ $\exists\mathcal{P}_\varepsilon\in\textbf{P}(R)$ such that: $$\left|S(f,\mathcal{P})-\int_Rf\right|=\left|\sum_{j=1}^mf(\xi_j)\text{vol}(R_j)-\int_Rf\right|<\varepsilon$$ for any $\mathcal{P}\in\textbf{P}(R)$ finer than $\mathcal{P}_\varepsilon$ and for any $\xi_j\in R_j$.
   \end{theorem}
   \subsubsection{Fubini's theorem}
-  \begin{theorem}[Fubini's theorem]
-    Let $R_1\subset\RR^n$ and $R_2\subset\RR^m$ be closed rectangles and $f:R_1\times R_2\rightarrow\RR $ be an integrable\footnote{As we have only defined Riemann-integration, it goes without saying that an \emph{integrable function} means a \emph{Riemann-integrable function}.} function. Suppose for every $x_0\in R_1$, $f(x_0,y)$ is integrable over $R_2$. Then, the function $\displaystyle g(x)=\dotsint_{R_2}f(x,y)\dd{y}$ is integrable over $R_1$ and $$\dotsint_{R_1\times R_2}f(x,y)=\dotsint_{R_1}\dd{x}\dotsint_{R_2}f(x,y)\dd{y}$$ Similarly if for every $y_0\in R_2$, $f(x,y_0)$ is integrable over $R_1$, then the function $\displaystyle h(y)=\dotsint_{R_1}f(x,y)\dd{x}$ is integrable over $R_2$ and $$\dotsint_{R_1\times R_2}f(x,y)=\dotsint_{R_2}\dd{y}\dotsint_{R_1}f(x,y)\dd{x}$$
+  \begin{theorem}[Fubini's theorem]\label{FSV:fubini}
+    Let $R_1\subset\RR^n$ and $R_2\subset\RR^m$ be closed rectangles and $f:R_1\times R_2\rightarrow\RR $ be an integrable\footnote{As we have only defined Riemann-integration, it goes without saying that an \emph{integrable function} means a \emph{Riemann-integrable function}.} function. Suppose for every $x_0\in R_1$, $f(x_0,y)$ is integrable over $R_2$. Then, the function $\displaystyle g(x)=\int_{R_2}f(x,y)\dd{y}$ is integrable over $R_1$ and $$\int_{R_1\times R_2}f(x,y)=\int_{R_1}\dd{x}\int_{R_2}f(x,y)\dd{y}$$ Similarly if for every $y_0\in R_2$, $f(x,y_0)$ is integrable over $R_1$, then the function $\displaystyle h(y)=\int_{R_1}f(x,y)\dd{x}$ is integrable over $R_2$ and $$\int_{R_1\times R_2}f(x,y)=\int_{R_2}\dd{y}\int_{R_1}f(x,y)\dd{x}$$
     \begin{corollary}
       Let $R_1\subset\RR^n$ and $R_2\subset\RR^m$ be closed rectangles and let $f:R_1\times R_2\rightarrow\RR $ be a continuous function on $R_1\times R_2$. Then: \begin{multline*}
-        \dotsint_{R_1\times R_2}f=\dotsint_{R_1}\dd{x}\dotsint_{R_2}f(x,y)\dd{y}=\\=\dotsint_{R_2}\dd{y}\dotsint_{R_1}f(x,y)\dd{x}
+        \int_{R_1\times R_2}f=\int_{R_1}\dd{x}\int_{R_2}f(x,y)\dd{y}=\\=\int_{R_2}\dd{y}\int_{R_1}f(x,y)\dd{x}
       \end{multline*}
     \end{corollary}
     \begin{corollary}
-      Let $R=[a_1,b_1]\times\cdots\times[a_n,b_n]\subset\RR^n$ be a rectangle. If $f:R\rightarrow\RR $ is a continuous function, then $$\dotsint_Rf=\int_{a_n}^{b_n}\dd{x_n}\int_{a_{n-1}}^{b_{n-1}}\dd{x_{n-1}}\cdots\int_{a_1}^{b_1}f(x_1,\ldots,x_n)\dd{x_1}$$
+      Let $R=[a_1,b_1]\times\cdots\times[a_n,b_n]\subset\RR^n$ be a rectangle. If $f:R\rightarrow\RR $ is a continuous function, then $$\int_Rf=\int_{a_n}^{b_n}\dd{x_n}\int_{a_{n-1}}^{b_{n-1}}\dd{x_{n-1}}\cdots\int_{a_1}^{b_1}f(x_1,\ldots,x_n)\dd{x_1}$$
     \end{corollary}
     \begin{definition}
       Let $D\subset\RR^{n-1}$ be a compact set and $\varphi_1,\varphi_2:D\rightarrow\RR $ be continuous functions such that $\varphi_1(x)\leq\varphi_2(x)$ $\forall x\in D$. The set $$S=\{(x,y)\subset\RR^n:x\in D, \varphi_1(x)\leq y\leq\varphi_2(x)\}$$ is called an \emph{elementary region} in $\RR^n$. In particular, if $n=2$, we say $S$ is \emph{$x$-simple}. An elementary region in $V\subset\RR^3$ is called \emph{$xy$-simple} if it is of the form: $$V=\{(x,y,z)\in\RR^3:(x,y)\in U, \phi_1(x,y)\leq z\leq\phi_2(x,y)\}$$ where $U$ is an elementary region in $\RR^2$ and $\phi_1,\phi_2$ are continuous functions on $U$\footnote{Analogously we define \emph{$y$-simple} regions in $\RR^2$ and \emph{$yz$-simple} or \emph{$xz$-simple} regions in $\RR^3$.}.
     \end{definition}
     \begin{theorem}[Fubini's theorem for elementary regions]
-      Let $D\subset\RR^{n-1}$ be a compact set, $\varphi_1,\varphi_2:D\rightarrow\RR $ be continuous functions such that $\varphi_1(x)\leq\varphi_2(x)$ $\forall x\in D$, $S=\{(x,y)\subset\RR^n:x\in D, \varphi_1(x)\leq y\leq\varphi_2(x)\}$ be an elementary region in $\RR^n$ and $f:S\rightarrow\RR $. If $f$ is integrable over $S$ and for all $x_0\in D$ the function $f(x_0,y)$ is integrable over $[-M,M]$, $M\in\RR $, then: $$\dotsint_Sf=\dotsint_D\dd{x}\int_{\varphi_1(x)}^{\varphi_2(x)}f(x,y)\dd{y}$$
+      Let $D\subset\RR^{n-1}$ be a compact set, $\varphi_1,\varphi_2:D\rightarrow\RR $ be continuous functions such that $\varphi_1(x)\leq\varphi_2(x)$ $\forall x\in D$, $S=\{(x,y)\subset\RR^n:x\in D, \varphi_1(x)\leq y\leq\varphi_2(x)\}$ be an elementary region in $\RR^n$ and $f:S\rightarrow\RR $. If $f$ is integrable over $S$ and for all $x_0\in D$ the function $f(x_0,y)$ is integrable over $[-M,M]$, $M\in\RR $, then: $$\int_Sf=\int_D\dd{x}\int_{\varphi_1(x)}^{\varphi_2(x)}f(x,y)\dd{y}$$
     \end{theorem}
     \begin{definition}
-      Let $D\subset\RR^{n-1}$ be a compact set, $\varphi_1,\varphi_2:D\rightarrow\RR $ be continuous functions such that $\varphi_1(x)\leq\varphi_2(x)$ $\forall x\in D$ and $S=\{(x,y)\subset\RR^n:x\in D, \varphi_1(x)\leq y\leq\varphi_2(x)\}$ an elementary region. We define the \emph{$n$-dimensional volume} of $S$ as $$\text{vol}(S):=\dotsint_S\dd{x}=\dotsint_D\dd{x}\int_{\varphi_1(x)}^{\varphi_2(x)}\dd{y}\footnote{In particular, we define the area of a region $S\subset\RR^2$ as $\displaystyle\area(S)=\int_S\dd{x}\dd{y}$ and the volume of a region $\Omega\subset\RR^3$ as $\displaystyle\text{vol}(\Omega)=\int_\Omega \dd{x}\dd{y}\dd{z}$.}$$
+      Let $D\subset\RR^{n-1}$ be a compact set, $\varphi_1,\varphi_2:D\rightarrow\RR $ be continuous functions such that $\varphi_1(x)\leq\varphi_2(x)$ $\forall x\in D$ and $S=\{(x,y)\subset\RR^n:x\in D, \varphi_1(x)\leq y\leq\varphi_2(x)\}$ an elementary region. We define the \emph{$n$-dimensional volume} of $S$ as $$\text{vol}(S):=\int_S\dd{x}=\int_D\dd{x}\int_{\varphi_1(x)}^{\varphi_2(x)}\dd{y}\footnote{In particular, we define the area of a region $S\subset\RR^2$ as $\displaystyle\area(S)=\int_S\dd{x}\dd{y}$ and the volume of a region $\Omega\subset\RR^3$ as $\displaystyle\text{vol}(\Omega)=\int_\Omega \dd{x}\dd{y}\dd{z}$.}$$
     \end{definition}
     \begin{corollary}[Cavalieri's principle]
       Let $\Omega\subset R\times[a,b]$ be a set in $\RR^n$ where $R\subset\RR^{n-1}$ is a rectangle. For every $t\in[a,b]$ let $$\Omega_t=\{(x,y)\in\Omega:y=t\}\subset\RR^n$$ be the section of $\Omega$ corresponding to the hyperplane $y=t$. If $\nu(\Omega_t)$ is the $(n-1)$-dimensional volume (length if $n=2$ and area if $n=3$) of $\Omega_t$, then: $$\text{vol}(\Omega)=\int_a^b\nu(\Omega_t)\dd{t}$$
@@ -478,7 +478,7 @@
   \end{definition}
   \subsubsection{Change of variable}
   \begin{theorem}[Change of variable theorem]\label{FSV:changeofvariable}
-    Let $U\subseteq\RR^n$ be an open set and let $\vf{\varphi}:U\rightarrow\RR^n$ be a diffeomorphism. If $f:\vf{\varphi}(U)\rightarrow\RR $ is integrable on $\vf{\varphi}(U)$, then: $$\int_{\vf{\varphi}(U)} f=\dotsint_U(f\circ\vf{\varphi})|J\vf{\varphi}|$$
+    Let $U\subseteq\RR^n$ be an open set and let $\vf{\varphi}:U\rightarrow\RR^n$ be a diffeomorphism. If $f:\vf{\varphi}(U)\rightarrow\RR $ is integrable on $\vf{\varphi}(U)$, then: $$\int_{\vf{\varphi}(U)} f=\int_U(f\circ\vf{\varphi})|J\vf{\varphi}|$$
   \end{theorem}
   \begin{corollary}[Integral in polar coordinates]
     Let $\varphi:U\subseteq[0,\infty)\times[0,2\pi)\rightarrow\RR^2 $ be such that:
@@ -514,7 +514,7 @@
     Let $\vf{\gamma}:[a,b]\rightarrow\RR^n$ be a parametrization of class $\mathcal{C}^1$ of a curve $C$. Then $C$ is rectifiable and $$L(C)=\int_a^b\|\vf{\gamma}'(t)\|\dd{t}\footnote{It can be seen that the arc length of a curve does not depend on its parametrization.}$$
   \end{proposition}
   \begin{definition}
-    Let $\vf{F}:U\subset\RR^m\rightarrow\RR^n$ be a vector field\footnote{A \emph{vector field} is nothing more than a vector-valued function.}. If all its component functions $F_i$ are integrable, we define: $$\dotsint_U\vf{F}:=\left(\dotsint_UF_1,\ldots,\dotsint_UF_n\right)\in\RR^n$$
+    Let $\vf{F}:U\subset\RR^m\rightarrow\RR^n$ be a vector field\footnote{A \emph{vector field} is nothing more than a vector-valued function.}. If all its component functions $F_i$ are integrable, we define: $$\int_U\vf{F}:=\left(\int_UF_1,\ldots,\int_UF_n\right)\in\RR^n$$
   \end{definition}
   \begin{definition}
     Let $C$ be a curve in $\RR^2$ parametrized by $\vf{\gamma}=(x(t),y(t))$. The unit tangent vector to the curve at time $t$ is: $$\vf{t}=\frac{\vf{\gamma}'(t)}{\|\vf{\gamma}'(t)\|}$$ The normal vector to the curve is $N(t)=(y'(t),-x'(t))$ and the unit normal vector to the curve is: $$\vf{n}=\frac{N(t)}{\|N(t)\|}\footnote{Observe that $-N(t)$ is also a normal vector to the curve but, by agreement, we take the one pointing to the right of the curve or, if the curve is closed, the one pointing outwards from the curve.}$$
