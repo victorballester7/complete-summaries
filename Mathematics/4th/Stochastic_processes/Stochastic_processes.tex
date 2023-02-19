@@ -4,6 +4,82 @@
 \begin{document}
 \changecolor{SP}
 \begin{multicols}{2}[\section{Stochastic processes}]
-
+  \subsection{Preliminaries}
+  \begin{proposition}
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $(X_n)$ be sequence of random variables such that: $$\sum_{n=1}^{\infty}\Exp(\abs{X_n})<\infty$$
+    Then, $\sum_{n=1}^{\infty}X_n$ is a random variable and: $$
+      \Exp\left(\sum_{n=1}^{\infty}X_n\right)=\sum_{n=1}^{\infty}\Exp(X_n)
+    $$
+  \end{proposition}
+  \begin{proof}
+    By the \mnameref{P:monotone} we have that
+    $$\Exp\left(\sum_{n=1}^{\infty}\abs{X_n}\right)=\sum_{n=1}^{\infty}\Exp(\abs{X_n})<\infty$$
+    so the random variable $Y:=\sum_{n=1}^{\infty}\abs{X_n}$ is integrable and $\forall N\in\NN$ satisfies: $$\abs{\sum_{n=1}^{N}X_n}\leq Y$$
+    Now use the \mnameref{P:dominated}.
+  \end{proof}
+  \begin{proposition}[Law of total probability]
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $\{A_n:1\leq n\leq N\}\subset\mathcal{A}$, $N\in\NN\cup\{\infty\}$, be such that $\bigsqcup_{n=1}^N A_n=\Omega'$ with $\Prob(\Omega')=1$. Then, $\forall A\in\mathcal{A}$: $$\Prob(A)=\sum_{n=1}^N\Prob(A_n)\Prob(A\mid A_n)$$
+  \end{proposition}
+  \begin{sproof}
+    See the proof of \mnameref{P:totalprob}.
+  \end{sproof}
+  \begin{remark}
+    Note that if there is some $A_n$ for which $\Prob(A_n)=0$, the conditional probability is not well-defined. But note that:
+    $$0\leq \Prob(A_n)\Prob(A\mid A_n)=\Prob(A\cap A_n)\leq \Prob(A_n)=0$$
+    So we can omit this term in the sum.
+  \end{remark}
+  \subsubsection{Conditional expectation}
+  \begin{proposition}[Substitution principle]
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $\vf{X}$ be a discrete random vector with support $S_{\vf{X}}$, $Y$ be a discrete random variable with support $S_Y$, $h:S_{\vf{X}}\times S_Y\rightarrow\RR$ be a function and $y\in S_Y$. Then:
+    $$\Exp(h(\vf{X},Y=y)\mid Y=y)=\Exp((h(\vf{X}),Y)\mid Y=y)$$
+  \end{proposition}
+  \begin{proposition}[Law of total expectation]\label{SP:totalexp}
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $\vf{X}$ is a discrete random vector with support $S_{\vf{X}}$, $\{A_n:1\leq n\leq N\}\subset\mathcal{A}$, $N\in\NN\cup\{\infty\}$, be such that $\bigsqcup_{n=1}^N A_n=\Omega'$ with $\Prob(\Omega')=1$ and $h:S_{\vf{X}}\rightarrow\RR$ be a function. If $h(\vf{X})$ has finite expectation or $h\geq 0$, then: $$\Exp(h(\vf{X}))=\sum_{n=1}^N\Exp(h(\vf{X})\mid A_n)\Prob(A_n)$$
+  \end{proposition}
+  \begin{sproof}
+    See the proof of \mnameref{P:totalexp}.
+  \end{sproof}
+  \begin{definition}
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $\vf{X}$ be a discrete random vector with support $S_{\vf{X}}$, $Y$ be a discrete random variable with support $S_Y$ and $h:S_{\vf{X}}\rightarrow\RR$ be a function. For all $\omega\in\Omega$ we define the random variable $\Exp(h(\vf{X})\mid Y)$ as
+    $$\Exp(h(\vf{X})\mid Y)(\omega)=\Exp(h(\vf{X})\mid Y=y)$$
+    provided that $Y(\omega)=y$.
+    Note that it can also be written as:
+    $$\Exp(h(\vf{X})\mid Y)=\sum_{y\in S_Y}\Exp(h(\vf{X})\mid Y=y)\indi{\{Y=y\}}$$
+  \end{definition}
+  \begin{proposition}
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $\vf{X}$ be a discrete random vector with support $S_{\vf{X}}$, $Y$ be a discrete random variable with support $S_Y$, $h,h_1,h_2:S_{\vf{X}}\rightarrow\RR$ be functions and $a,b\in\RR$. Then:
+    \begin{enumerate}
+      \item $\Exp(ah_1(\vf{X})+bh_2(\vf{X})\mid Y)=a\Exp(h_1(\vf{X})\mid Y)+b\Exp(h_1(\vf{X})\mid Y)$
+      \item If $\vf{X}$ and $Y$ are independent, then $\Exp(h(\vf{X})\mid Y)=\Exp(h(\vf{X}))$.
+      \item $\Exp(\Exp(h(\vf{X})\mid Y))=\Exp(h(\vf{X}))$.
+    \end{enumerate}
+  \end{proposition}
+  \begin{sproof}
+    The first two properties are consequence of the fact that the conditional expectation is an expectation. For the last one note that:
+    \begin{align*}
+      \Exp(\Exp(h(\vf{X})\mid Y)) & =\sum_{y\in S_y}\Exp(h(\vf{X})\mid Y=y)\Prob(Y=y) \\
+                                  & =\Exp(h(\vf{X}))
+    \end{align*}
+    where the last equality is due to the \mnameref{SP:totalexp}.
+  \end{sproof}
+  \begin{theorem}[Wald theorem]
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(Z_n)$ be a sequence of random variables, all of them with expectation $\mu\in\RR$, such that $\sup_{n\geq 1}\Exp(\abs{Z_n})=A<\infty$. If $N$ is an integrable random variable with support $\NN$ independent of $Z_n$ $\forall n\in\NN$, we have that:
+    $$\Exp\left(\sum_{n=1}^NZ_n\right)=\mu\Exp(N)$$
+  \end{theorem}
+  \begin{proof}
+    Note that $\Exp\left(\sum_{n=1}^NZ_n\right)=\Exp\left(\sum_{n=1}^\infty Z_n\indi{N\geq n}\right)$ and it is integrable because:
+    \begin{align*}
+      \Exp\left(\sum_{n=1}^\infty \abs{Z_n\indi{N\geq n}}\right) & =\sum_{n=1}^\infty \Exp(\abs{Z_n})\Exp(\indi{N\geq n}) \\
+                                                                 & \leq A\sum_{n=1}^\infty \Prob(N\geq n)                 \\
+                                                                 & =A\Exp(N)                                              \\
+                                                                 & <\infty
+    \end{align*}
+    where we have used the Independence of $(Z_n)$ and $N$ in the first equality.
+    And so:
+    $$\Exp\left(\sum_{n=1}^NZ_n\right)=\sum_{n=1}^\infty \Exp(Z_n)\Exp(\indi{N\geq n})=\mu\Exp(N)$$
+  \end{proof}
+  \begin{remark}
+    Note that the equality remains true if $Z_n\geq 0$ $\forall n\in\NN$ even if $\Exp(N)=\infty$ because the equality $\sum_{n=1}^\infty \Prob(N\geq n)=\Exp(N)$ remains true.
+  \end{remark}
 \end{multicols}
 \end{document}

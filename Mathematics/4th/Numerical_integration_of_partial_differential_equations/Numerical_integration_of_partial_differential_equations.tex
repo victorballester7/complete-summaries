@@ -1,5 +1,6 @@
 \documentclass[../../../main_math.tex]{subfiles}
 
+%break on finite difference equations
 
 \begin{document}
 \changecolor{NIPDE}
@@ -10,19 +11,40 @@
     for certain matrices $\vf{A},\vf{B},\vf{C}, \vf{D}\in \mathcal{M}_n(\RR)$. The system is called \emph{hyperbolic} if $\vf{A}^{-1}\vf{B}$ is diagonalizable.
   \end{definition}
   \begin{definition}
-    Let $n\in\NN$, $m\in\ZZ$, $h,k>0$ and $u:\RR^2\rightarrow\RR$ be a function. We define $u_m^n:=u(t_n,x_m)$, where $(t_n, x_m):=(nk,x0+mh)$, $x0\in\RR$. The set of points $\{(t_n,x_m):n\in\NN,\ m\in\ZZ\}$ is called a \emph{grid}.
+    Let $n\in\NN$, $m\in\ZZ$, $h,k>0$ and $u:\RR^2\rightarrow\RR$ be a function. We define $u_m^n:=u(t_n,x_m)$, where $(t_n, x_m):=(nk,x_0+mh)$, $x_0\in\RR$. We denoted by $v_m^n$ an approximation to $u_m^n$. The set of points $\{(t_n,x_m):n\in\NN,\ m\in\ZZ\}$ is called a \emph{grid}.
   \end{definition}
   \begin{proposition}
-    Consider the one dimensional homogeneous traffic equation of constant coefficients $$u_t+au_x=0$$
+    Consider the one dimensional homogeneous traffic equation of constant coefficients
+    \begin{equation}\label{NIPDE:traffic}
+      u_t+au_x=0
+    \end{equation}
     where $a\in\RR$.
     The following are satisfied:
     \begin{enumerate}
-      \item $\displaystyle\frac{u_m^{n+1}-u_m^n}{k}+a\frac{u_{m+1}^n-u_m^n}{h}+\O(h)+\O(k)=0$
-      \item
+      \item $\displaystyle\frac{u_m^{n+1}-u_m^n}{k}+a\frac{u_{m+1}^n-u_m^n}{h}+\O{k}+\O{h}=0$
+      \item $\displaystyle\frac{u_m^{n+1}-u_m^n}{k}+a\frac{u_{m}^n-u_{m-1}^n}{h}+\O{k}+\O{h}=0$
+      \item $\displaystyle\frac{u_m^{n+1}-u_m^n}{k}+a\frac{u_{m+1}^n-u_{m-1}^n}{2h}+\O{k}+\O{h^2}=0$
+      \item \emph{Leapfrog scheme}: $$\frac{u_m^{n+1}-u_m^{n-1}}{2k}+a\frac{u_{m+1}^n-u_{m-1}^n}{2h}+\O{k^2}+\O{h^2}=0$$
+      \item \emph{Lax-Friedrichs scheme}:
+            \begin{equation}
+              \begin{split}
+                \frac{u_m^{n+1}-\frac{1}{2}(u_{m+1}^n+u_{m-1}^n)}{k}+a\frac{u_{m+1}^n-u_{m-1}^n}{2h} + \\ + \O{k}+\O{\frac{k^2}{h}}=0
+              \end{split}
+            \end{equation}
     \end{enumerate}
   \end{proposition}
   \begin{sproof}
     Use the Taylor expansion of $u(t,x)$.
   \end{sproof}
+  \begin{corollary}
+    Consider the traffic equation of \mcref{NIPDE:traffic} and let $\lambda:=k/h$. Then, we have the following schemes for approximating the solution:
+    \begin{enumerate}
+      \item $\displaystyle v_m^{n+1}=(1+\lambda a)v_m^n-\lambda av_{m+1}^n$
+      \item $\displaystyle v_m^{n+1}=(1-\lambda a)v_m^n+\lambda av_{m+1}^n$
+      \item $\displaystyle v_m^{n+1}=v_m^n-\frac{\lambda a}{2}v_{m+1}^n+\frac{\lambda a}{2}v_{m-1}^n$
+      \item Leapfrog scheme: $$v_m^{n+1}=v_m^{n-1}-\lambda av_{m+1}^n+\lambda av_{m-1}^n$$
+      \item Lax-Friedrichs scheme: $$v_m^{n+1}=\frac{1}{2}\left((1-\lambda a)v_{m+1}^n+(1+\lambda a)v_{m-1}^n\right)$$
+    \end{enumerate}
+  \end{corollary}
 \end{multicols}
 \end{document}

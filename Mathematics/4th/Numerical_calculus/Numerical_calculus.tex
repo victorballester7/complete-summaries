@@ -1,0 +1,85 @@
+\documentclass[../../../main_math.tex]{subfiles}
+
+
+\begin{document}
+\changecolor{NC}
+\begin{multicols}{2}[\section{Numerical calculus}]
+  \subsection{Ordinary differential equations}
+  \begin{definition}
+    An initial-value problem is said to be \emph{well-posed} if it has existence and uniqueness of solutions and it has continuos dependence on initial conditions and parameters.
+  \end{definition}
+  \subsubsection{One-step methods}
+  Consider the ivp
+  \begin{equation}\label{NC:ivp}
+    \left\{
+    \begin{aligned}
+      \vf{x}'     & = \vf{f}(t,\vf{x}) \\
+      \vf{x}(t_0) & = \vf{x}_0
+    \end{aligned}
+    \right.
+  \end{equation}
+  For $i\in\NN\cup\{0\}$ let $t_{i+1}:=t_{i}+h$, where $h>0$ is called \emph{step size}. We would like to create a sequence $(\vf{\tilde{x}}_i)$ that approximates (in some sense) $\vf{{x}}_i:=\vf{{x}}(t_i)$ from a first iterate $\vf{\tilde{x}}_0:=\vf{x}_0$. In this section we will describe several algorithms that intend to do so. We will denote $\vf{f}_i:=\vf{f}(t_i,\vf{\tilde{x}}_{i})$.
+  \begin{definition}
+    A numerical method is called \emph{explicit} if the $i$-th iterate can be computed directly in terms of some of the previous iterates. A method is called \emph{implicit} if the $i$-th iterate depends implicitly on itself.
+  \end{definition}
+  \begin{definition}
+    A \emph{one-step explicit method} for the approximation of \mcref{NC:ivp} can be cast in the concise form $$\vf{\tilde{x}}_{i+1}=\vf{\tilde{x}}_{i}+h\vf\Phi(t_i,\vf{\tilde{x}}_{i},\vf{f}_i,h)$$
+    The function $\vf\Phi$ is called \emph{incremental function}. From here we can define the \emph{residuals} $\vf\varepsilon$ as
+    $$\vf{x}_{i+1}=\vf{x}_{i}+h\vf\Phi(t_i,\vf{x}_{i},\vf{f}(t_i,\vf{x}_i),h)+\vf\varepsilon_{i+1}$$
+    and the \emph{local truncation errors} as $h\vf\tau_{i}(h)=\vf\varepsilon_i$. Finally, we define the \emph{global truncation error} as: $$\tau(h)=\max_{i\geq 1}\norm{\vf\tau_i(h)}$$
+  \end{definition}
+  \begin{definition}[Euler method]
+    Consider the ivp of \mcref{NC:ivp}. The \emph{forward Euler method} is defined as:
+    $$\vf{\tilde{x}}_{i+1}=\vf{\tilde{x}}_{i}+h\vf{f}_i$$
+    The \emph{backward Euler method} is defined as:
+    $$\vf{\tilde{x}}_{i+1}=\vf{\tilde{x}}_{i}+h\vf{f}_{i+1}$$
+    Note that the forward method is explicit, whereas the backward method is \emph{implicit}.
+  \end{definition}
+  \begin{figure}[H]
+    \centering
+    \includestandalone[mode=image|tex,width=0.7\linewidth]{Images/euler}
+    \caption{Euler method for approximating the ivp $\{x'=x, x(0)=1\}$ with different number of steps.}
+    \label{NC:euler_fig}
+  \end{figure}
+  \begin{definition}[Trapezoidal method]
+    Consider the ivp of \mcref{NC:ivp}. The \emph{Trapezoidal method} is defined as:
+    $$\vf{\tilde{x}}_{i+1}=\vf{\tilde{x}}_{i}+\frac{h}{2}\left(\vf{f}_i+\vf{f}_{i+1}\right)$$
+  \end{definition}
+  \begin{definition}[Heun method]
+    Consider the ivp of \mcref{NC:ivp}. The \emph{Heun method} is defined as:
+    $$\vf{\tilde{x}}_{i+1}=\vf{\tilde{x}}_{i}+\frac{h}{2}\left(\vf{f}_i+\vf{f}(t_{i+1},\vf{\tilde{x}}_{i}+h\vf{f}_i)\right)$$
+  \end{definition}
+  \begin{definition}
+    A numerical method is \emph{consistent} if $\displaystyle\lim_{h\to 0}\tau(h)=0$. Moreover, we say that the algorithm has \emph{order} $p$ if $\tau(h)=\O{h^p}$.
+  \end{definition}
+  \begin{lemma}
+    Euler method has order 1, whereas Heun method has order 2.
+  \end{lemma}
+  \begin{proof}
+    Using the Taylor series expansion of $\vf{x}(t)$ we have that:
+    $$\vf{x}(t+h) = \vf{x}(t)+h\vf{f}(t,\vf{x}) + \O{h^2}$$
+    Hence, Euler method has order 1. For the Heun method we will describe a general procedure for constructing methods of arbitrary order. Let
+    \begin{gather*}
+      \vf{k}_1=\vf{f}(t_i,\vf{x}_i)\quad \vf{k}_2=\vf{f}(t_i+c_2h,\vf{x}_i+ha_{21}\vf{k}_1)\\
+      \vf{x}_{i+1}=\vf{x}_i+h(b_1\vf{k}_1+b_2\vf{k}_2)+\O{h^3}
+    \end{gather*}
+    Expanding $\vf{k}_2$ we have that:
+    $$\vf{k}_2=\vf{f}+c_2h\vf{f}_t+a_{21}h\vf{D}_2\vf{f}(\vf{k}_1)+\O{h^2}$$
+    So:
+    \begin{equation}\label{NC:heun1}
+      \vf{x}_{i+1}=\vf{x}_i+(b_1+b_2)h\vf{f}+h^2(b_2c_2\vf{f}_t+b_2a_{21}\vf{D}_2\vf{f}(\vf{f}))+\O{h^3}
+    \end{equation}
+    But the $\vf{x}'=\vf{f}(t,\vf{x})$ we have:
+    \begin{equation}\label{NC:heun2}
+      \vf{x}_{i+1}=\vf{x}_i+h\vf{f}+\frac{h^2}{2}(\vf{f}_t+\vf{D}_2\vf{f}(\vf{f}))+\O{h^3}
+    \end{equation}
+    Matching coefficients from \mcref{NC:heun1,NC:heun2}, we get the desired result.
+  \end{proof}
+  \begin{remark}
+    For a method of order $\ell$ (see \mfullref{NC:rungekutta}), just start with $\ell$ values $\vf{k}_1,\ldots,\vf{k}_\ell$ of the form: $$\vf{k}_s=\vf{f}(t_i+c_sh,\vf{x}_i+h(a_{s1}\vf{k}_1+\cdots+a_{s(s-1)}\vf{k}_{s-1}))$$
+    for $s\geq 2$ and $\vf{k}_1=\vf{f}(t_i,\vf{x}_i)$, and impose:
+    $$\vf{x}_{i+1}=\vf{x}_i+h\sum_{s=1}^\ell b_s\vf{k}_s+\O{h^{\ell+1}}$$
+  \end{remark}
+  \subsubsection{Runge-Kutta methods}\label{NC:rungekutta}
+\end{multicols}
+\end{document}
