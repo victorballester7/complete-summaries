@@ -1,5 +1,5 @@
 \documentclass[../../../main_math.tex]{subfiles}
-% break in Fejer's and Dini's theorem 
+% break in Fejér's and Dini's theorem 
 
 \begin{document}
 \changecolor{MA}
@@ -206,7 +206,7 @@
   \begin{theorem}
     Let $(f_n)$ be a sequence of functions defined on $I=(a,b)\subset\RR $. If $(f_n)$ are derivable on $I$, $\sum f_n'(x)$ converges uniformly on $I$ and $\exists c\in I:\sum f_n(c)<\infty$, then $\sum f_n(x)$ converges uniformly on $I$, $\sum f_n(x)$ is derivable on $I$ and $$\left(\sum_{n=1}^\infty f_n(x)\right)'=\sum_{n=1}^\infty f_n'(x)$$
   \end{theorem}
-  \begin{theorem}[Weierstra\ss\  M-test]
+  \begin{theorem}[Weierstra\ss\  M-test]\label{MA:Mweierstrass}
     Let $(f_n)$ be a sequence of functions defined on $D\subseteq\RR $ such that $|f_n(x)|\leq M_n$ $\forall x\in D$ and suppose that $\sum M_n$ is a convergent numeric series. Then, $\sum f_n(x)$ converges uniformly on $D$.
   \end{theorem}
   \begin{theorem}[Dirichlet's test]
@@ -242,7 +242,7 @@
     \end{enumerate}
     The number $R$ is called \emph{radius of convergence of the power series}.
   \end{theorem}
-  \begin{theorem}[Abel's theorem]
+  \begin{theorem}[Abel's theorem]\label{MA:abelthm}
     Let $\sum a_nx^n$ be a power series\footnote{From now on we will suppose, for simplicity, $x_0=0$.} with radius of convergence $R$ satisfying $\sum a_nR^n<\infty$. Then, the series $\sum a_nx^n$ converges uniformly on $[0,R]$. In particular, if $f(x)=\sum a_nx^n$, $$\lim_{x\to R^-}f(x)=\sum_{n=0}^\infty a_nR^n$$
   \end{theorem}
   \begin{corollary}
@@ -421,10 +421,10 @@
   \end{proof}
   \subsubsection{Orthogonal systems}
   \begin{definition}
-    Let $f:\RR \rightarrow\CC $ be a function. We say that $f\in L^p(I)$, $p\geq1$, if: $$\|f\|_p:=\left(\int_I{|f(t)|}^p\dd{t}\right)^{1/p}<\infty$$
+    Let $f:\RR \rightarrow\CC $ be a function. We say that $f\in L^p(I)$, $p\geq1$, if: $$\norm{f}_p:=\left(\int_I{|f(t)|}^p\dd{t}\right)^{1/p}<\infty$$
   \end{definition}
   \begin{definition}
-    Let $f,g:[a,b]\rightarrow\CC $ be Riemann-integrable functions. We define the \emph{inner product} of $f$ and $g$ as $$\langle f,g\rangle:=\int_a^bf(x)\overline{g(x)}\dd{x}$$ where $\overline{g}$ denotes the complex conjugate of $g$. We define the \emph{norm} of $f$ as: $$\|f\|:={\langle f,f\rangle}^{1/2}=\left(\int_a^b{|f(x)|}^2\dd{x}\right)^{1/2}=\|f\|_2$$ And the \emph{distance} between $f$ and $g$ as: $$d(f,g):=\|f-g\|$$
+    Let $f,g:[a,b]\rightarrow\CC $ be Riemann-integrable functions. We define the \emph{inner product} of $f$ and $g$ as $$\langle f,g\rangle:=\int_a^bf(x)\overline{g(x)}\dd{x}$$ where $\overline{g}$ denotes the complex conjugate of $g$. We define the \emph{norm} of $f$ as: $$\norm{f}:={\langle f,f\rangle}^{1/2}=\left(\int_a^b{|f(x)|}^2\dd{x}\right)^{1/2}=\norm{f}_2$$ And the \emph{distance} between $f$ and $g$ as: $$d(f,g):=\|f-g\|$$
   \end{definition}
   \begin{proposition}
     Let $f,g:[a,b]\rightarrow\CC $ be Riemann-integrable functions and let $\alpha\in\CC $. Then, we have:
@@ -439,7 +439,7 @@
     They follow from the linearity of the integral. For \mcref{MA:orto3}, write $f=\Re f+\ii \Im f$ and $g=\Re g+\ii \Im g$ and expand the products of both sides of the equation.
   \end{sproof}
   \begin{theorem}[Cauchy-Schwarz inequality]\label{MA:cauchyschwarz}
-    Let $f,g:[a,b]\rightarrow\CC $ be Riemann-integrable functions. Then: $$\abs{\langle f,g\rangle}\leq\|f\|\cdot\|g\|$$ which can be written as: $$\int_a^bf\overline{g}\leq\left(\int_a^b{|f|}^2\right)^{1/2}\left(\int_a^b{|g|}^2\right)^{1/2}$$
+    Let $f,g:[a,b]\rightarrow\CC $ be Riemann-integrable functions. Then: $$\abs{\langle f,g\rangle}\leq\norm{f}\cdot\|g\|$$ which can be written as: $$\int_a^bf\overline{g}\leq\left(\int_a^b{|f|}^2\right)^{1/2}\left(\int_a^b{|g|}^2\right)^{1/2}$$
   \end{theorem}
   \begin{proof}
     First suppose that $\norm{f}=\norm{g}=1$. Then:
@@ -449,18 +449,18 @@
     For the general case, note that $\frac{f}{\norm{f}}$ and $\frac{g}{\norm{g}}$ have norm 1 and so: $$\abs{\left\langle \frac{f}{\norm{f}},\frac{g}{\norm{g}}\right\rangle}\leq 1\implies\abs{\langle f,g\rangle}\leq\norm{f}\norm{g}$$
   \end{proof}
   \begin{theorem}[Minkowski inequality]
-    Let $f,g:[a,b]\rightarrow\CC $ be Riemann-integrable functions. Then: $$\| f+g\|\leq\|f\|+\|g\|$$
+    Let $f,g:[a,b]\rightarrow\CC $ be Riemann-integrable functions. Then: $$\| f+g\|\leq\norm{f}+\|g\|$$
   \end{theorem}
   \begin{proof}
     Using \mnameref{MA:cauchyschwarz} we have:
     \begin{align*}
-      \norm{f+g}^2 & =\norm{f}^2+\norm{g}^2+2\langle f,g\rangle \\
-                   & \leq\norm{f}^2+\norm{g}^2+\|f\|\cdot\|g\|  \\
+      \norm{f+g}^2 & =\norm{f}^2+\norm{g}^2+2\langle f,g\rangle   \\
+                   & \leq\norm{f}^2+\norm{g}^2+\norm{f}\cdot\|g\| \\
                    & ={\left(\norm{f}+\norm{g}\right)}^2
     \end{align*}
   \end{proof}
   \begin{definition}
-    Let $f,g:[a,b]\rightarrow\CC $ be Riemann-integrable functions with $f\ne g$. We say $f$ and $g$ are \emph{orthogonal} if $\langle f,g\rangle=0$. We say $f$ and $g$ are \emph{orthonormal} if they are orthogonal and $\|f\|=\|g\|=1$.
+    Let $f,g:[a,b]\rightarrow\CC $ be Riemann-integrable functions with $f\ne g$. We say $f$ and $g$ are \emph{orthogonal} if $\langle f,g\rangle=0$. We say $f$ and $g$ are \emph{orthonormal} if they are orthogonal and $\norm{f}=\|g\|=1$.
   \end{definition}
   \begin{definition}
     Let $S=\{\phi_0,\phi_1,\ldots\}$ be a collection of Riemann-integrable functions on $[a,b]$. We say $S$ is an \emph{orthonormal system} if $\|\phi_n\|=1$ $\forall n$ and $\langle\phi_n,\phi_m\rangle=0$ $\forall n\ne m$.
@@ -573,20 +573,22 @@
     The Dirichlet kernel has the following properties:
     \begin{enumerate}
       \item $D_N$ is a $T$-periodic and even function.
-      \item $\displaystyle\frac{1}{T}\int_0^TD_N(t)\dd{t}=1,\;\forall N\in\NN$.
+      \item $\displaystyle\frac{1}{T}\int_{-T/2}^{T/2}D_N(t)\dd{t}=1,\;\forall N\in\NN$.
     \end{enumerate}
   \end{proposition}
   \begin{sproof}
     \begin{enumerate}
       \item Use the characterization of \mcref{MA:dirichletkernelchar}.
-      \item Note that if $n\ne 0$, $\displaystyle\int_0^T \exp{\frac{2\pi\ii nt}{T}}\dd{t}=0$
+      \item Note that if $n\ne 0$, $\displaystyle\int_{-T/2}^{T/2} \exp{\frac{2\pi\ii nt}{T}}\dd{t}=0$
     \end{enumerate}
   \end{sproof}
-  \begin{proposition}
+  \begin{proposition}\label{MA:dirichletconvolution}
     Let $f\in L^1([-T/2,T/2])$. Then:
-    \begin{multline*}
-      S_Nf(x)=(f*D_N)(x)=\int_{-T/2}^{T/2}f(x-t)D_N(t)\dd{t}=\\=\int_0^{T/2}[f(x+t)+f(x-t)]D_N(t)\dd{t}
-    \end{multline*}
+    \begin{align*}
+      S_Nf(x) & =(f*D_N)(x)                              \\
+              & =\int_{-T/2}^{T/2}f(x-t)D_N(t)\dd{t}     \\
+              & =\int_0^{T/2}[f(x+t)+f(x-t)]D_N(t)\dd{t}
+    \end{align*}
   \end{proposition}
   \begin{sproof}
     The first equality follows from expandind the Fourier coefficients inside $S_Nf$. The second one, making the change of variables $u=x-t$ and noting that both integrant functions are $T$-periodic. For the last one, make the change of variables $u=-t$ and use that $D_N(t)$ is even.
@@ -595,7 +597,7 @@
     Let $f\in L^1([-T/2,T/2])$ and $\lambda\in\RR $. Then: $$\lim_{\lambda\to\infty}\int_{-T/2}^{T/2}f(t)\sin(\lambda t)\dd{t}=\lim_{\lambda\to\infty}\int_{-T/2}^{T/2}f(t)\cos(\lambda t)\dd{t}=0$$ In particular, $\displaystyle\lim_{|n|\to\infty}\widehat{f}(n)=0$.
   \end{lemma}
   \begin{proof}
-    We first proof the statement for indicators functions $f(x)=\indi{[a,b]}(x)$, $(a,b)\subseteq [-T/2,T/2]$. We have that:
+    We first proof the statement for indicators functions $f(x)=\indi{[a,b]}(x)$, $[a,b]\subseteq [-T/2,T/2]$. We have that:
     $$\lim_{\lambda\to\infty}\int_{-T/2}^{T/2}\indi{[a,b]}(t)\sin(\lambda t)\dd{t}=\lim_{\lambda\to\infty}\frac{\cos(\lambda a)-\cos(\lambda b)}{\lambda}=0$$
     From the linearity of the integral the statement remains true for $f$ being linear combination of indicator functions. Finally note that taking an upper sum $g_\varepsilon$ of $f$ (see \mcref{RVF:upperlower}) such that $\int_{-T/2}^{T/2}\abs{f-g_\varepsilon}<\varepsilon$, we have:
     \begin{multline*}
@@ -635,78 +637,208 @@
     $$S_Nf(x_0)-f(x_0) =\int_{-T/2}^{T/2}[f(x_0+t) - f(x_0)]D_N(t)\dd{t}$$
     and proceed as in the proof of \mnameref{MA:dini}.
   \end{sproof}
+  \begin{remark}
+    Note that only the continuity is not sufficient to ensure the pointwise convergence of $Sf$ to $f$.
+  \end{remark}
   \subsubsection{Uniform convergence}
   \begin{definition}
     Let $\sum a_n$ be a series with partial sums $S_k$. The series $\sum a_n$ is called \emph{Cesàro summable} with sum $S$ if $$\lim_{N\to\infty}\frac{S_1+\cdots+S_N}{N}=S$$
   \end{definition}
-  \begin{definition}[Fejer kernel]
-    We define the \emph{Fejer kernel} of order $N$ as $$K_N(t)=\frac{1}{N+1}\sum_{k=0}^ND_k(t)=\frac{1}{T(N+1)}\frac{\sin^2\left(\frac{(N+1)\pi t}{T}\right)}{\sin^2\left(\frac{\pi t}{T}\right)}$$ being $D_k(t)$ the Dirichlet kernel of order $k$, $0\leq k\leq N$.
+  \begin{remark}
+    Note that if $(a_n)\in\RR$ has limit $\ell$, by \mnameref{RVF:stolz} we have that $(a_n)$ is Cesàro summable and $\displaystyle\lim_{n\to\infty}\frac{a_1+\cdots+a_n}{n}=\ell$. The other inclusion is false though. For example by taking $a_n={(-1)}^n$.
+  \end{remark}
+  \begin{definition}[Fejér kernel]\label{MA:fejerdef}
+    We define the \emph{Fejér kernel} of order $N$ as $$F_N(t)=\frac{1}{N+1}\sum_{k=0}^ND_k(t)$$ being $D_k(t)$ the Dirichlet kernel of order $k$, $0\leq k\leq N$.
   \end{definition}
-  \begin{proposition}
-    The Fejer kernel has the following properties:
+  \begin{lemma}\label{MA:fejerkernelchar}
+    Let $N\in\NN$. Then, $\forall t\in(0,T)$ we have:
+    $$F_N(t)=\frac{1}{N+1}\frac{\sin^2\left(\frac{(N+1)\pi t}{T}\right)}{\sin^2\left(\frac{\pi t}{T}\right)}$$
+  \end{lemma}
+  \begin{proof}
+    Multiplying the expression of \mcref{MA:dirichletkernelchar} by $\sin(\frac{\pi t}{T})$ and using the trigonometry identity $\sin(x)\sin(y)=\frac{\cos(x-y)-\cos(x+y)}{2}$ we have that $F_N$ is a telescopic sum that simplifies to:
+    $$F_N(t)=\frac{1-\cos(\frac{2(N+1)\pi t}{T})}{2(N+1)\sin^2\left(\frac{\pi t}{T}\right)}=\frac{1}{N+1}\frac{\sin^2\left(\frac{(N+1)\pi t}{T}\right)}{\sin^2\left(\frac{\pi t}{T}\right)}$$
+  \end{proof}
+  \begin{proposition}\label{MA:fejerprop}
+    The Fejér kernel has the following properties:
     \begin{enumerate}
-      \item $K_N$ is a $T$-periodic, even and non-negative function.
-      \item $\displaystyle\int_{-T/2}^{T/2}K_N(t)\dd{t}=1,\;\forall N$.
-      \item $\forall\delta>0$, $\displaystyle\lim_{N\to\infty}\sup\{|K_N(t)|:\delta\leq|t|\leq T/2\}=0$.
+      \item $F_N$ is a $T$-periodic, even and non-negative function.
+      \item $\displaystyle\frac{1}{T}\int_{-T/2}^{T/2}F_N(t)\dd{t}=1\quad\forall N$.
+      \item $\forall\delta>0$, $\displaystyle\lim_{N\to\infty}\sup\{\abs{F_N(t)}:\delta\leq\abs{t}\leq T/2\}=0$
     \end{enumerate}
   \end{proposition}
+  \begin{proof}
+    The first two properties are consequence of the definition of Fejér kernel and the reexpression of \mcref{MA:fejerkernelchar}. For the last one, note that:
+    $$|F_N(t)|\leq \frac{1}{N+1}\frac{1}{\sin^2\left(\frac{\pi \delta}{T}\right)}\overset{N\to\infty}{\longrightarrow} 0$$
+  \end{proof}
   \begin{definition}
-    Let $f\in L^1([-T/2,T/2])$. We define the \emph{Fejér means} $\sigma_Nf$, for all $N\in\NN $, as $$\sigma_Nf(x)=\frac{S_0f(x)+\cdots+S_Nf(x)}{N+1}$$
+    Let $f\in L^1([-T/2,T/2])$. We define the \emph{Fejér means} $\sigma_Nf$, for all $N\in\NN $, as:
+    \begin{equation}\label{MA:fejermeans}
+      \sigma_Nf(x)=\frac{S_0f(x)+\cdots+S_Nf(x)}{N+1}
+    \end{equation}
   \end{definition}
   \begin{proposition}
     Let $f\in L^1([-T/2,T/2])$. Then:
-    \begin{multline*}
-      \sigma_Nf(x)=(f*K_N)(x)=\int_{-T/2}^{T/2}f(x-t)K_N(t)\dd{t}=\\=\int_0^{T/2}[f(x+t)+f(x-t)]K_N(t)\dd{t}
-    \end{multline*}
+    \begin{align*}
+      \sigma_Nf(x) & =(f*F_N)(x)                              \\
+                   & =\int_{-T/2}^{T/2}f(x-t)F_N(t)\dd{t}     \\
+                   & =\int_0^{T/2}[f(x+t)+f(x-t)]F_N(t)\dd{t}
+    \end{align*}
   \end{proposition}
+  \begin{proof}
+    Consequence of \mcref{MA:dirichletconvolution} and the linearity of the convolution.
+  \end{proof}
   \begin{theorem}[Fejér's theorem]
     Let \\$f\in L^1([-T/2,T/2])$ be a function having left- and right-sided limits at point $x_0$. Then: $$\lim_{N\to\infty}\sigma_Nf(x_0)=\frac{f({x_0}^+)+f({x_0}^-)}{2}$$ In particular, if $f$ is continuous at $x_0$, $\displaystyle\lim_{N\to\infty}\sigma_Nf(x_0)=f(x_0).$
   \end{theorem}
-  \begin{theorem}[Fejér's theorem]
+  \begin{sproof}
+    Let $\delta>0$ be small enough. Then:
+    \begin{multline*}
+      \abs{\sigma_Nf(x_0)-\frac{f({x_0}^+)+f({x_0}^-)}{2}}=\\
+      =\abs{\int_0^{T/2}[f(x+t)-f({x_0}^+)+f(x-t)-f({x_0}^-)]F_N(t)\dd{t}} \\
+      \leq \int_0^{T/2}\abs{f(x+t)-f({x_0}^+)}F_N(t)\dd{t}+\\+\int_0^{T/2}\abs{f(x-t)-f({x_0}^-)}F_N(t)\dd{t}
+    \end{multline*}
+    In order to bound the to intervals, divide the interval $[0,T/2]=[0,\delta]\cup[\delta,T/2]$. The first part is bounded by the right- (or left-) sided limit at $x_0$, and the second one is due to the uniform convergence (see \mcref{MA:fejerprop}).
+  \end{sproof}
+  \begin{theorem}[Fejér's theorem]\label{MA:fejerthm}
     Let $f$ be a continuous function on $[-T/2,T/2]$. Then, $\sigma_Nf$ converges uniformly to $f$ on $[-T/2,T/2]$.
   \end{theorem}
+  \begin{proof}
+    Let $\delta>0$ be small enough. Then:
+    \begin{align*}
+      \abs{\sigma_Nf(x)-f(x)}= & \abs{\int_0^{T/2}[f(x-t)-f(x)]F_N(t)\dd{t}} \\
+      \begin{split}
+        & \leq \int_0^{\delta}\abs{f(x-t)-f(x)}F_N(t)\dd{t}+\\
+        &\hspace{1cm}+\int_\delta^{T/2}\abs{f(x-t)-f(x)}F_N(t)\dd{t}
+      \end{split}
+    \end{align*}
+    To bound the first integral use the uniform continuity of $f$ in $[0,\delta]$ and for the second one use \mcref{MA:fejerprop}.
+  \end{proof}
   \begin{corollary}
-    Let $f$ be a continuous function on $[-T/2,T/2]$. Then, there exists a sequence of trigonometric polynomials that converge uniformly to $f$ on $[-T/2,T/2]$. In fact, $$\sigma_Nf(x)=\sum_{k=-N}^N\left(1-\frac{|k|}{N+1}\right)\widehat{f}(k)\exp{2\pi\ii kx}$$
+    Let $f$ be a continuous function on $[-T/2,T/2]$. Then, there exists a sequence of trigonometric polynomials that converge uniformly to $f$ on $[-T/2,T/2]$. In fact: $$\sigma_Nf(x)=\sum_{k=-N}^N\left(1-\frac{|k|}{N+1}\right)\widehat{f}(k)\exp{\frac{2\pi\ii kx}{T}}$$
   \end{corollary}
+  \begin{sproof}
+    Observe that the term $\widehat{f}(k)\exp{\frac{2\pi \ii k x}{T}}$ appears $N+1 - \abs{k}$ times on the numerator of the fraction of \mcref{MA:fejermeans}. Hence
+    $$\sigma_Nf(x)=\sum_{k=-N}^N\left(1-\frac{|k|}{N+1}\right)\widehat{f}(k)\exp{\frac{2\pi\ii kx}{T}}$$
+    which is a trigonometric polynomial.
+  \end{sproof}
   \begin{corollary}
     Let $f$ and $g$ be continuous functions on $[-T/2,T/2]$ such that $Sf(x)=Sg(x)$. Then, $f=g$.
   \end{corollary}
+  \begin{proof}
+    $h:=f-g$ satisfies that $\widehat{h}(n)=0$ $\forall n\in\ZZ$. So $\sigma_Nh=0$ $\forall N\in\NN$. \mnameref{MA:fejerthm} implies $h=0$.
+  \end{proof}
   \subsubsection{Convergence in norm}
   \begin{definition}
     We say a sequence $(f_N)$ \emph{converge in norm $L^p$} to $f$ if $\displaystyle\lim_{N\to\infty}\|f_N-f\|_p=0$.
   \end{definition}
   \begin{theorem}
-    Let $f\in L^2([-T/2,T/2])$. Then: $$\lim_{N\to\infty}\|\sigma_Nf-f\|=0$$
+    Let $f\in L^2([-T/2,T/2])$. Then: $$\lim_{N\to\infty}\norm{\sigma_Nf-f}_2=0$$
   \end{theorem}
+  \begin{sproof}
+    Use \mnameref{FSV:fubini} and the scheme of the proof of \mnameref{MA:fejerthm}.
+  \end{sproof}
   \begin{corollary}
-    Let $f\in L^1([-T/2,T/2])$. Then: $$\lim_{N\to\infty}\|\sigma_Nf-f\|_1=0$$
+    Let $f\in L^1([-T/2,T/2])$. Then: $$\lim_{N\to\infty}\norm{\sigma_Nf-f}_1=0$$
   \end{corollary}
+  \begin{sproof}
+    Note that $\norm{\sigma_Nf-f}_1\leq\norm{\sigma_Nf-f}_2$ by the \mnameref{MA:cauchyschwarz}.
+  \end{sproof}
   \begin{corollary}
-    Let $f,g\in L^1([-T/2,T/2])$ be functions such that $Sf(x)=Sg(x)$. Then, $\displaystyle\lim_{N\to\infty}\|g-f\|_1=0$.
+    Let $f,g\in L^1([-T/2,T/2])$ be functions such that $Sf(x)=Sg(x)$. Then, $\displaystyle\lim_{N\to\infty}\norm{g-f}_1=0$.
   \end{corollary}
-  \begin{theorem}[Bessel's inequality]
-    Let $f\in L^2(I)$, where $I$ is any interval on the real line. Then: \begin{gather*}T\sum_{n=-N}^N{|\widehat{f}(n)|}^2\leq{\|f\|}^2,\\\frac{T}{2}\left(\frac{{|a_0|}^2}{2}+\sum_{n=1}^N{|a_n|}^2+{|b_n|}^2\right)\leq \|f\|^2,\end{gather*} for all $N\in\NN $.
-  \end{theorem}
+  \begin{proof}
+    $h:=f-g$ satisfies that $\widehat{h}(n)=0$ $\forall n\in\ZZ$. So $\sigma_Nh=0$ $\forall N\in\NN$. Thus:
+    $$\lim_{N\to\infty}\norm{h}_1=\lim_{N\to\infty}\norm{\sigma_Nh-h}=0$$
+  \end{proof}
   \begin{theorem}
     $S_Nf$ is the trigonometric polynomial of degree $N$ that best approximates $f$ in norm $L^2$.
   \end{theorem}
-  \begin{corollary}
+  \begin{proof}
+    Let $P(x)=\sum_{n=-N}^{N}c_n\exp{\frac{2\pi\ii nx}{T}}$ be a trigonometric polynomial. Expanding the norm $\norm{f-P}^2$ we have:
+    $$\norm{f-P}^2=\norm{f}^2+\norm{P}^2-2\Re\left(\int_{-T/2}^{T/2}f(x)\overline{P(x)}\dd{x}\right)$$
+    One the one hand:
+    \begin{align*}
+      \norm{P}^2 & =\int_{-T/2}^{T/2}\left(\sum_{n=-N}^{N}c_n\exp{\frac{2\pi\ii nx}{T}}\right)\left(\sum_{m=-N}^{N}\overline{c_m}\exp{-\frac{2\pi\ii mx}{T}}\right)\dd{x} \\
+                 & =T\sum_{n=-N}^{N}\abs{c_n}^2
+    \end{align*} by the orthogonality of the system.
+    On the other hand:
+    $$\int_{-T/2}^{T/2}f(x)\overline{P(x)}\dd{x}=T\sum_{n=-N}^N\overline{c_n}\widehat{f}(n)$$
+    Finally using that $\abs{z-w}^2 -\abs{z}^2=\abs{w}^2-2\Re(z\overline{w})$, $z,w\in\CC$, we have:
+    \begin{equation}\label{MA:minimumL2}
+      \norm{f-P}^2=\norm{f}^2+T\sum_{n=-N}^{N}\abs{c_n-\widehat{f}(n)}^2-T\sum_{n=-N}^{N}\abs{\widehat{f}(n)}^2
+    \end{equation}
+    which is minimum if $c_n=\widehat{f}(n)$ $\forall n=-N,\ldots,N$. That is, $P=S_Nf$.
+  \end{proof}
+  \begin{corollary}[Bessel's inequality]\label{MA:bessel}
+    Let $f\in L^2([-T/2,T/2])$. Then:
+    \begin{gather*}
+      T\sum_{n=-N}^N\abs{\widehat{f}(n)}^2\leq{\norm{f}}^2\\
+      \frac{T}{2}\left(\frac{\abs{a_0}^2}{2}+\sum_{n=1}^N\abs{a_n}^2+\abs{b_n}^2\right)\leq \norm{f}^2
+    \end{gather*} for all $N\in\NN $.
+  \end{corollary}
+  \begin{sproof}
+    If follows from \mcref{MA:minimumL2} with $P=S_Nf$.
+  \end{sproof}
+  \begin{corollary}\label{MA:corollaryPolyAprox}
     Let $f\in L^2([-T/2,T/2])$. Then, $\displaystyle\lim_{N\to\infty}\|S_Nf-f\|=0$.
   \end{corollary}
-  \begin{theorem}[Parseval's identity]
-    Let $f,g\in L^2([-T/2,T/2])$ be bounded functions. Then: $$\langle f,g\rangle=T\sum_{n\in\ZZ }\widehat{f}(n)\overline{\widehat{g}(n)}$$
+  \begin{theorem}[Parseval's identity]\label{MA:parseval}
+    Let $f,g\in L^2([-T/2,T/2])$. Then: $$\langle f,g\rangle=T\sum_{n\in\ZZ }\widehat{f}(n)\overline{\widehat{g}(n)}$$
     In particular, if $f=g$:
-    \begin{gather*}\|f\|^2=T\sum_{n\in\ZZ }{|\widehat{f}(n)|}^2,\\{\|f\|}^2=\frac{T}{2}\left(\frac{{|a_0|}^2}{2}+\sum_{n=1}^\infty{|a_n|}^2+{|b_n|}^2\right).\end{gather*}
+    \begin{gather*}
+      T\sum_{n\in\ZZ}\abs{\widehat{f}(n)}^2={\norm{f}}^2\\
+      \frac{T}{2}\left(\frac{\abs{a_0}^2}{2}+\sum_{n=1}^\infty\abs{a_n}^2+\abs{b_n}^2\right)= \norm{f}^2
+    \end{gather*}
   \end{theorem}
+  \begin{proof}
+    Note that $\displaystyle\dotp{f}{g}=\lim_{N\to\infty}\dotp{f}{S_Ng}$. Indeed:
+    $$\abs{\dotp{f}{g}-\dotp{f}{S_Ng}}=\abs{\dotp{f}{g-S_Ng}}\leq \norm{f}\norm{g-S_Ng}$$
+    where we have applied \mnameref{MA:cauchyschwarz}. Now use \mcref{MA:corollaryPolyAprox} to conclude that the right side of the equation tends to 0 as $N\to\infty$.
+    Thus:
+    \begin{align*}
+      \dotp{f}{g} & =\lim_{N\to\infty}\dotp{f}{S_Ng}                                                              \\
+                  & =\lim_{N\to\infty}\sum_{n=-N}^N\overline{\widehat{g}(n)}\dotp{f}{\exp{\frac{2\pi\ii n x}{T}}} \\
+                  & =T\sum_{n\in\ZZ }\widehat{f}(n)\overline{\widehat{g}(n)}
+    \end{align*}
+  \end{proof}
   \subsubsection{Applications of Fourier series}
-  \begin{theorem}[Wirtinger's inequality]
-    Let $f$ be a function such that $f(0)=f(T)$, $f'\in L^2([0,T])$ and $\displaystyle\int_a^bf(t)\dd{t}=0$. Then: $$\int_0^T{|f(x)|}^2\dd{x}\leq\frac{T^2}{4\pi^2}\int_0^T{|f'(x)|}^2\dd{x}$$ And the inequality holds if and only if $$f(x)=A\cos\left(\frac{2\pi x}{T}\right)+B\sin\left(\frac{2\pi x}{T}\right)$$
+  \begin{theorem}[Wirtinger's inequality]\label{MA:wirtinger1}
+    Let $f$ be a function such that $f(0)=f(T)$, $f'\in L^2([0,T])$ and $\displaystyle\int_0^Tf(t)\dd{t}=0$. Then: $$\int_0^T\abs{f(x)}^2\dd{x}\leq\frac{T^2}{4\pi^2}\int_0^T\abs{f'(x)}^2\dd{x}$$ And the inequality holds if and only if $$f(x)=A\cos\left(\frac{2\pi x}{T}\right)+B\sin\left(\frac{2\pi x}{T}\right)$$
   \end{theorem}
-  \begin{theorem}[Wirtinger's inequality]
-    Let $f\in \mathcal{C}^1([a,b])$ with $f(a)=f(b)=0$. Then: $$\int_a^b{|f(x)|}^2\dd{x}\leq\frac{{(b-a)}^2}{\pi^2}\int_a^b|f'(x)|^2\dd{x}$$
+  \begin{proof}
+    The continuity of $f$ and $f(0)=f(T)$, implies that $f\in L^2([0,T])$ and that $\widehat{f'}(n)=\frac{2\pi\ii n}{T}\widehat{f}(n)$. Moreover, note that $\widehat{f'}(0)=0$ and by hypothesis $\widehat{f}(0)=0$. By \mnameref{MA:parseval} we have:
+    \begin{multline*}
+      \int_0^T\abs{f(x)}^2\dd{x} = T\sum_{n\in\ZZ}\abs{\widehat{f}(n)}^2 \leq T\sum_{\substack{n\in\ZZ                  \\n\ne 0}}n^2\abs{\widehat{f}(n)}^2=\\
+      = T\sum_{\substack{n\in\ZZ                     \\n\ne 0}}\frac{T^2}{4\pi^2}\abs{\widehat{f'}(n)}^2=\frac{T^2}{4\pi^2}\int_0^T\abs{f'(x)}^2\dd{x}
+    \end{multline*}
+    The equality holds if and only if $\abs{\widehat{f}(n)}^2(n^2 - 1)=0$ $\forall n\in\ZZ\setminus\{0\}$. That is, if and only if $$f(x)=c_{-1}\exp{\frac{-2\pi\ii x}{T}}+c_{1}\exp{\frac{2\pi\ii x}{T}}$$
+  \end{proof}
+  \begin{theorem}[Wirtinger's inequality]\label{MA:wirtinger2}
+    Let $f\in \mathcal{C}^1([a,b])$ with $f(a)=f(b)=0$. Then: $$\int_a^b\abs{f(x)}^2\dd{x}\leq\frac{{(b-a)}^2}{\pi^2}\int_a^b\abs{f'(x)}^2\dd{x}$$
+    with equality if and only if $$f(x)=A\sin\left(\frac{\pi}{b-a}(x-a)\right)$$
   \end{theorem}
+  \begin{sproof}
+    Let $\tilde{f}:[a,2b-a]\rightarrow\RR$ be the odd extension of $f$ centered at $b$:
+    $$
+      \tilde{f}(x)=\begin{cases}
+        f(x)     & \text{if }x\in[a,b]    \\
+        -f(2b-x) & \text{if }x\in[b,2b-a]
+      \end{cases}
+    $$
+    Now use \mnameref{MA:wirtinger1} to the function $\tilde{f}$.
+  \end{sproof}
   \begin{theorem}[Isoperimetric inequality]
-    Let $c$ be a simple and closed curve of class $\mathcal{C}^1$ whose length is $\ell$. If $A_c$ is the area enclosed by $c$, then $$A_c\leq\frac{\ell^2}{4\pi}$$ and the equality holds if and only if $c$ is a circle.
+    Let $c$ be a planar simple and closed curve of class $\mathcal{C}^1$ whose length is $\ell$. If $A_\mathrm{c}$ is the area enclosed by $c$, then $$A_\mathrm{c}\leq\frac{\ell^2}{4\pi}$$ and the equality holds if and only if $c$ is a circle.
   \end{theorem}
+  \begin{proof}
+    Let $\vf\gamma(s)=(x(s),y(s))$ be the arc-length parametrization of $c$ (see \mcref{DG:arclength}). Thus:
+    $$s=\int_0^s\sqrt{{x'(t)}^2+{y'(t)}^2}\dd{t}$$
+    which implies ${x'(s)}^2+{y'(s)}^2=1$, by the \mnameref{RVF:fundamentalthmCalculus}. Now, by \mcref{FSV:areaR2} we have that:
+    \begin{multline*}
+      A_\mathrm{c}=\int_{0}^{\ell}x(s)y'(s)\dd{s}\leq\frac{2\pi}{\ell}\int_{0}^{\ell}\frac{{x(s)}^2+\frac{\ell^2}{4\pi^2}{y'(s)}^2}{2}\dd{s}=\\
+      =\frac{2\pi}{\ell}\int_{0}^{\ell}\left(\frac{\ell^2}{8\pi^2}+\frac{{x(s)}^2-\frac{\ell^2}{4\pi^2}{x'(s)}^2}{2}\right)\dd{s}\leq \frac{\ell^2}{4\pi}
+    \end{multline*}
+    by the \mnameref{MA:wirtinger1} (with a translation we can suppose $x(0)=x(\ell)=0$ and $\int_0^\ell x(s)\dd{s}=0$). Clearly if $c$ is a circle, the equality is hold. Moreover if we have equality, by \mnameref{MA:wirtinger1} we have that $x(s)=A\cos\left(\frac{2\pi s}{\ell}\right)+B\sin\left(\frac{2\pi s}{\ell}\right)$ and since $2ab=a^2+b^2$ implies $b=a$, we have that $\frac{\ell}{2\pi}y'(s)=x(s)$. So $y(s)=A\sin\left(\frac{2\pi s}{\ell}\right)-B\cos\left(\frac{2\pi s}{\ell}\right)+C$ and therefore $c$ is a circle.
+  \end{proof}
 \end{multicols}
 \end{document}

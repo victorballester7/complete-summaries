@@ -4,8 +4,66 @@
 \begin{document}
 \changecolor{HA}
 \begin{multicols}{2}[\section{Harmonic analysis}]
-  Refer to \mfullref{MA:fouriersection} for a reminder of the introductory concepts of Fourier series.
-
+  \subsection{Introduction}
+  Refer to \mnameref{MA:fouriersection} for a reminder of the introductory concepts of Fourier series.
+  \subsubsection{Uniform convergence}
+  \begin{theorem}
+    Let $f$ be a continuous $T$-periodic function such that $f'$ exists except for a finite number of points and it is continuous and bounded. Then, $Sf$ converges uniformly to $f$ on $[-T/2,T/2]$.
+  \end{theorem}
+  \begin{proof}
+    We have pointwise convergence towards $f$. Moreover:
+    \begin{align*}
+      \sum_{n\in\ZZ}\abs{\widehat{f}(n)} & \leq \sum_{n\in\ZZ\setminus\{0\}}\frac{1}{n}n\abs{\widehat{f}(n)}                                             \\
+                                         & \leq\frac{1}{2}\sum_{n\in\ZZ\setminus\{0\}}\left(\frac{1}{n^2} + n^2\abs{\widehat{f}(n)}^2\right)             \\
+                                         & =\frac{1}{2}\sum_{n\in\ZZ\setminus\{0\}}\frac{1}{n^2}+\frac{T^2}{8\pi^2}\sum_{n\in\ZZ}\abs{\widehat{f'}(n)}^2 \\
+                                         & \leq\frac{1}{2}\sum_{n\in\ZZ\setminus\{0\}}\frac{1}{n^2}+\frac{T^2}{8\pi^2}\norm{f'}^2                        \\
+                                         & <\infty
+    \end{align*}
+    by \mnameref{MA:bessel} and because $f'$ is bounded. Thus, the \mnameref{MA:Mweierstrass} implies that $Sf$ converges uniformly to $f$.
+  \end{proof}
+  \begin{corollary}
+    Let $f\in\mathcal{C}^{r-1}$ be a $T$-periodic function such that $f^{(r)}$ exists except for a finite number of points and it is continuous and bounded. Then: $$\sup_{x\in[-T/2,T/2]}\abs{S_Nf(x)-f(x)}\leq \frac{\varepsilon_N}{N^{r-1/2}}$$ for some sequence $(\varepsilon_N)\overset{N\to\infty}{\longrightarrow}0$.
+  \end{corollary}
+  \begin{proof}
+    By \mref{RFA:cauchyschwarz} we have:
+    \begin{align*}
+      \abs{S_Nf(x)-f(x)} & \leq\sum_{n>\abs{N}}\frac{1}{n^r}n^r\abs{\widehat{f}(n)}                                                                                         \\
+                         & \leq{\left(\sum_{n>\abs{N}}\frac{1}{n^{2r}}\right)}^{\frac{1}{2}}{\left(\sum_{n>\abs{N}}n^{2r}\abs{\widehat{f}(n)}^2 \right)}^{\frac{1}{2}}      \\
+                         & \lesssim{\left(\int_N^\infty\frac{1}{x^{2r}}\dd{x}\right)}^{\frac{1}{2}}{\left(\sum_{n>\abs{N}}\abs{\widehat{f^{r}}(n)}^2 \right)}^{\frac{1}{2}} \\
+                         & =\frac{\tilde{C}}{N^{r-1/2}}\varepsilon_N
+    \end{align*}
+    with $\varepsilon_N\overset{N\to\infty}{\longrightarrow}0$ because it is the tail of a convergent sequence.
+  \end{proof}
+  \subsubsection{Poisson kernel}
+  For most of the proofs in this section check the analogous ones with the \mnameref{MA:fejerdef}.
+  \begin{definition}[Poisson kernel]
+    Let $r\in[0,1]$. We define the \emph{Poisson kernel} as $$P_r(t)=\sum_{n\in\ZZ}r^{\abs{n}}\exp{\frac{2\pi\ii n t}{T}}$$
+  \end{definition}
+  \begin{lemma}\label{HA:poisskernelchar}
+    Let $r\in[0,1]$. Then:
+    $$P_r(t)=\frac{1-r^2}{1-2r\cos\left(\frac{2\pi t}{T}\right)+r^2}$$
+  \end{lemma}
+  \begin{sproof}
+    Use the geometric progression formula.
+  \end{sproof}
+  \begin{proposition}\label{HA:poissprop}
+    The Poisson kernel has the following properties:
+    \begin{enumerate}
+      \item $P_r$ is a $T$-periodic, even and non-negative function.
+      \item $\displaystyle\frac{1}{T}\int_{-T/2}^{T/2}P_r(t)\dd{t}=1\quad\forall N$.
+      \item $\forall\delta>0$, $\displaystyle\lim_{r\to 1^-}\sup\{\abs{P_r(t)}:\delta\leq\abs{t}\leq T/2\}=0$.
+    \end{enumerate}
+  \end{proposition}
+  \begin{theorem}
+    Let $f\in L^1([-T/2,T/2])$ be a function having left- and right-sided limits at point $x_0$. Then: $$\lim_{r\to 1^-}f*P_r=\frac{f({x_0}^+)+f({x_0}^-)}{2}$$ In particular, if $f$ is continuous at $x_0$, $\displaystyle\lim_{r\to 1^-}f*P_r=f(x_0)$.
+  \end{theorem}
+  \begin{theorem}
+    Let $p\geq 1$ and $f\in L^p([-T/2,T/2])$. Then:
+    \begin{gather*}
+      \lim_{N\to\infty}\norm{\sigma_Nf-f}_p=0\\
+      \lim_{r\to 1^-}\norm{f*P_r-f}_p=0
+    \end{gather*}
+  \end{theorem}
   \subsection{Fourier transform}
 \end{multicols}
 \end{document}

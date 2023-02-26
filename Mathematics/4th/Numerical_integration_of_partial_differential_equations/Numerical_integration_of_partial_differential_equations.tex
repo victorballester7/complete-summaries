@@ -6,31 +6,37 @@
 \changecolor{NIPDE}
 \begin{multicols}{2}[\section{Numerical integration of partial differential equations}]
   \subsection{Finite difference schemes}
+  \subsubsection{Introduction}
   \begin{definition}
     A linear system of $n$ first order of pdes for $\vf{u}(t,x)$ is a system of the form: $$\vf{A}(t,x)\vf{u}_t+\vf{B}(t,x)\vf{u}_x=\vf{C}(t,x)\vf{u}+\vf{D}(t,x)$$
-    for certain matrices $\vf{A},\vf{B},\vf{C}, \vf{D}\in \mathcal{M}_n(\RR)$. The system is called \emph{hyperbolic} if $\vf{A}^{-1}\vf{B}$ is diagonalizable.
+    for certain matrices $\vf{A},\vf{B},\vf{C}, \vf{D}\in \mathcal{M}_q(\RR)$. The system is called \emph{hyperbolic} if $\vf{A}^{-1}\vf{B}$ is diagonalizable.
   \end{definition}
   \begin{definition}
-    Let $n\in\NN$, $m\in\ZZ$, $h,k>0$ and $u:\RR^2\rightarrow\RR$ be a function. We define $u_m^n:=u(t_n,x_m)$, where $(t_n, x_m):=(nk,x_0+mh)$, $x_0\in\RR$. We denoted by $v_m^n$ an approximation to $u_m^n$. The set of points $\{(t_n,x_m):n\in\NN,\ m\in\ZZ\}$ is called a \emph{grid}.
+    Let $n\in\NN$, $m\in\ZZ$, $h,k>0$ and $\vf{u}:\RR^2\rightarrow\RR^q$ be a function. We define $\vf{u}_m^n:=\vf{u}(t_n,x_m)$, where $(t_n, x_m):=(nk,x_0+mh)$, $x_0\in\RR$. We denoted by $\vf{v}_m^n$ an approximation to $\vf{u}_m^n$. The set of points $G:=\{(t_n,x_m):n\in\NN,\ m\in\ZZ\}$ is called a \emph{grid}.
+  \end{definition}
+  \begin{definition}
+    Let $G$ be a grid. A \emph{finite difference scheme} is a function $$\function{\vf{v}}{G}{\RR}{(t_n,x_m)}{\vf{v}_m^n}$$
+    that aims to approximate $\vf{u}_m^n$, where $\vf{u}:\RR^2\rightarrow\RR^q$ is a function. Here $\vf{v}_m^n$ is a function of $\vf{v}_m^{n-j}$, $m\in\ZZ$, $j=0,\ldots,J-1$. The number $J$ is called \emph{number of steps}. If $J=1$, we say that the scheme is a \emph{one-step} scheme. Otherwise we say that the scheme is \emph{multi-step}.
   \end{definition}
   \begin{proposition}
     Consider the one dimensional homogeneous traffic equation of constant coefficients
     \begin{equation}\label{NIPDE:traffic}
-      u_t+au_x=0
+      u_t+au_x=f
     \end{equation}
-    where $a\in\RR$.
+    where $a\in\RR$ and $f$ is a function.
     The following are satisfied:
     \begin{enumerate}
-      \item $\displaystyle\frac{u_m^{n+1}-u_m^n}{k}+a\frac{u_{m+1}^n-u_m^n}{h}+\O{k}+\O{h}=0$
-      \item $\displaystyle\frac{u_m^{n+1}-u_m^n}{k}+a\frac{u_{m}^n-u_{m-1}^n}{h}+\O{k}+\O{h}=0$
-      \item $\displaystyle\frac{u_m^{n+1}-u_m^n}{k}+a\frac{u_{m+1}^n-u_{m-1}^n}{2h}+\O{k}+\O{h^2}=0$
-      \item \emph{Leapfrog scheme}: $$\frac{u_m^{n+1}-u_m^{n-1}}{2k}+a\frac{u_{m+1}^n-u_{m-1}^n}{2h}+\O{k^2}+\O{h^2}=0$$
+      \item $\displaystyle\frac{u_m^{n+1}-u_m^n}{k}+a\frac{u_{m+1}^n-u_m^n}{h}+\O{k}+\O{h}=f_m^n$
+      \item $\displaystyle\frac{u_m^{n+1}-u_m^n}{k}+a\frac{u_{m}^n-u_{m-1}^n}{h}+\O{k}+\O{h}=f_m^n$
+      \item $\displaystyle\frac{u_m^{n+1}-u_m^n}{k}+a\frac{u_{m+1}^n-u_{m-1}^n}{2h}+\O{k}+\O{h^2}=f_m^n$
+      \item \emph{Leapfrog scheme}:
+            \begin{multline*}
+              \frac{u_m^{n+1}-u_m^{n-1}}{2k}+a\frac{u_{m+1}^n-u_{m-1}^n}{2h}+\\+\O{k^2}+\O{h^2}=f_m^n
+            \end{multline*}
       \item \emph{Lax-Friedrichs scheme}:
-            \begin{equation}
-              \begin{split}
-                \frac{u_m^{n+1}-\frac{1}{2}(u_{m+1}^n+u_{m-1}^n)}{k}+a\frac{u_{m+1}^n-u_{m-1}^n}{2h} + \\ + \O{k}+\O{\frac{k^2}{h}}=0
-              \end{split}
-            \end{equation}
+            \begin{multline*}
+              \frac{u_m^{n+1}-\frac{1}{2}(u_{m+1}^n+u_{m-1}^n)}{k}+a\frac{u_{m+1}^n-u_{m-1}^n}{2h} + \\ + \O{k}+\O{\frac{h^2}{k}}+\O{h^2}=f_m^n
+            \end{multline*}
     \end{enumerate}
   \end{proposition}
   \begin{sproof}
@@ -39,12 +45,69 @@
   \begin{corollary}
     Consider the traffic equation of \mcref{NIPDE:traffic} and let $\lambda:=k/h$. Then, we have the following schemes for approximating the solution:
     \begin{enumerate}
-      \item $\displaystyle v_m^{n+1}=(1+\lambda a)v_m^n-\lambda av_{m+1}^n$
-      \item $\displaystyle v_m^{n+1}=(1-\lambda a)v_m^n+\lambda av_{m+1}^n$
-      \item $\displaystyle v_m^{n+1}=v_m^n-\frac{\lambda a}{2}v_{m+1}^n+\frac{\lambda a}{2}v_{m-1}^n$
-      \item Leapfrog scheme: $$v_m^{n+1}=v_m^{n-1}-\lambda av_{m+1}^n+\lambda av_{m-1}^n$$
-      \item Lax-Friedrichs scheme: $$v_m^{n+1}=\frac{1}{2}\left((1-\lambda a)v_{m+1}^n+(1+\lambda a)v_{m-1}^n\right)$$
+      \item $\displaystyle v_m^{n+1}=(1+\lambda a)v_m^n-\lambda av_{m+1}^n+f_m^n$
+      \item $\displaystyle v_m^{n+1}=(1-\lambda a)v_m^n+\lambda av_{m+1}^n+f_m^n$
+      \item $\displaystyle v_m^{n+1}=v_m^n-\frac{\lambda a}{2}v_{m+1}^n+\frac{\lambda a}{2}v_{m-1}^n+f_m^n$
+      \item Leapfrog scheme: $$v_m^{n+1}=v_m^{n-1}-\lambda av_{m+1}^n+\lambda av_{m-1}^n+f_m^n$$
+      \item Lax-Friedrichs scheme: $$v_m^{n+1}=\frac{1}{2}\left((1-\lambda a)v_{m+1}^n+(1+\lambda a)v_{m-1}^n\right)+f_m^n$$
     \end{enumerate}
   \end{corollary}
+  \subsubsection{Convergence and consistency}
+  \begin{definition}
+    A \emph{stability region} is a set $\Lambda\subseteq{\RR_>0}^2$ such that $(0,0)\in\Lambda'$, that is $(0,0)$ in an accumulation point.
+  \end{definition}
+  \begin{definition}
+    Let $(G_j)$ be a sequence of grids such that the time and space steps $k_j,h_j>0$ of each one satisfy $\displaystyle \lim_{j\to\infty}k_j=\lim_{j\to\infty}h_j=0$.
+    We say that a finite difference scheme $v$ approximating a pde with initial condition $u_0(x)$ is \emph{unconditionally convergent} if for any solution $u(x,t)$ to the pde we have:
+    \begin{itemize}
+      \item For all $x\in\domain u_0$ and all increasing sequence $(m_j)\in\NN$ such that $(\cdot,x_{m_j})\in G_j$ and $\displaystyle\lim_{j\to\infty} x_{m_j}=x$, we have $\displaystyle\lim_{j\to\infty} v_{m_j}^0=u_0(x)$.
+      \item For all $(t,x)\in\domain u$ and all increasing sequences $(m_j),(n_j)\in\NN$ such that $(t_{n_j},x_{m_j})\in G_j$ and $\displaystyle\lim_{j\to\infty} x_{m_j}=x$, $\displaystyle\lim_{j\to\infty} t_{n_j}=t$, we have $\displaystyle\lim_{j\to\infty} v_{m_j}^{n_j}=u(t,x)$.
+    \end{itemize}
+    The scheme is \emph{conditionally convergent} if $\forall j\in\NN$, $(k_j,h_j)\in\Lambda$, for some stability region $\Lambda$.
+  \end{definition}
+  \begin{definition}
+    Let $P$ be a partial differential operator and $\vf{f}$ be a function. Given the pde $P\vf{u}=\vf{f}$ and a finite difference scheme $P_{k,h}\vf{v}=\vf{f}$, we say that the scheme is \emph{consistent} with the pde if for any smooth function $\vf\phi(t,x)$ we have: $$\lim_{k,h\to 0}P\vf\phi-P_{k,h}\vf\phi=\vf{0}$$
+    where the convergence is pointwise at each point $(t,x)$ in the domain of solutions.
+  \end{definition}
+  \begin{lemma}
+    The Lax-Friedrichs scheme is consistent if and only if $\displaystyle\lim_{h,k\to 0}\frac{h^2}{k}=0$.
+  \end{lemma}
+  \subsubsection{Stability}
+  \begin{definition}
+    Let $P_{k,h}\vf{v}=0$ be a finite difference scheme with $J$ steps and $\Lambda$ be a stability region. We say that it is \emph{stable} is given $T>0$, there exists $C_T>0$ such that for any grid with $(k,h)\in \Lambda$ and for any initial values $\vf{v}_m^j$, $m\in\ZZ$, $j=0,\ldots,J-1$ we have $$\sum_{m\in\ZZ}\norm{\vf{v}_m^n}^2\leq C_T\sum_{j=0}^{J-1}\sum_{m\in\ZZ}\norm{\vf{v}_m^j}^2$$ for all $n\in\NN$ such that $0\leq nk\leq T$.
+  \end{definition}
+  \begin{lemma}
+    If finite difference scheme of the form of $$\vf{v}_m^{n+1}=\alpha \vf{v}_m^n+\beta \vf{v}_{m+1}^n$$ satisfies $\abs{\alpha}+\abs{\beta}\leq 1$, then it is stable.
+  \end{lemma}
+  \begin{sproof}
+    \begin{align*}
+      \sum_{m\in\ZZ}\norm{\vf{v}_m^{n+1}}^2 & \leq \sum_{m\in\ZZ}\left(\abs{\alpha}^2\norm{\vf{v}_m^n}^2+2\abs{\alpha}\abs{\beta}\norm{\vf{v}_m^n}\cdot\right. \\
+                                            & \hspace{2.5cm}\cdot\norm{\vf{v}_{m+1}^n}+\left.\abs{\beta}^2\norm{\vf{v}_{m+1}^n}^2\right)
+      \\
+                                            & \leq \sum_{m\in\ZZ}\left(\abs{\alpha}^2\norm{\vf{v}_m^n}^2+\abs{\alpha}\abs{\beta}(\norm{\vf{v}_m^n}^2 \right.+  \\
+                                            & \hspace{2cm}\left.+\norm{\vf{v}_{m+1}^n}^2)+\abs{\beta}^2\norm{\vf{v}_{m+1}^n}^2\right)                          \\
+                                            & = \sum_{m\in\ZZ}\left(\abs{\alpha}^2+2\abs{\alpha}\abs{\beta}+\abs{\beta}^2\right)\norm{\vf{v}_{m}^n}^2          \\
+                                            & ={(\abs{\alpha}+\abs{\beta})}^2 \sum_{m\in\ZZ}\norm{\vf{v}_{m}^n}^2                                              \\
+                                            & \leq{(\abs{\alpha}+\abs{\beta})}^{2(n+1)} \sum_{m\in\ZZ}\norm{\vf{v}_{m}^0}^2
+    \end{align*}
+  \end{sproof}
+  \begin{theorem}[Lax-Richtmyer equivalence theorem]
+    Consider and well-posed linear and of constant coefficients ivp of 1st order in time and let $P_{k,h}\vf{v}=\vf{f}$ be a consistent finite difference scheme for it. Then, the scheme is convergent if and only if it is stable.
+  \end{theorem}
+  \begin{theorem}[Courant-Friedrichs-Lewy condition]
+    Consider the traffic equation $$\vf{u}_t+\vf{A}\vf{u}_x=0$$ with $\vf{A}\in\mathcal{M}_q(\RR)$ and a finite difference scheme of the form $$\vf{v}_m^{n+1}=\alpha \vf{v}_{m-1}^n+\beta \vf{v}_m^n+\gamma \vf{v}_{m+1}^n$$ with $k/h=\lambda=\const$ Then, if the scheme is convergent, we have $\abs{a_i\lambda}\leq 1$ $\forall a_i\in\sigma(\vf{A})$.
+  \end{theorem}
+  \begin{proof}
+    Suppose $\abs{a_i\lambda}>1$ for some eigenvalue $a_i$ and let $\vf{u}_0(x)=\vf{c}\indi{\{\abs{x}> \frac{1}{\abs{\lambda}}\}}$ with $\vf{c}=(c_1,\ldots,c_q)$ and $c_i\ne 0$. As shown in figure \mcref{NIPDE:courant-friedrichs-lewy_fig} the numerical solution at $\vf{u}(1,0)$ will have the $i$-th component always equal to 0, whereas in general the exact solution won't be.
+    \begin{figure}[H]
+      \centering
+      \includestandalone[mode=image|tex,width=\linewidth]{Images/courant-friedrichs-lewy}
+      \caption{Finite difference scheme (blue) versus the characteristic lines (in red). The arrows inward a bullet come from the points from which it depends.}
+      \label{NIPDE:courant-friedrichs-lewy_fig}
+    \end{figure}
+  \end{proof}
+  \begin{theorem}
+    There are no explicit, unconditionally stable, consistent finite difference schemes for hyperbolic systems of partial differential equations.
+  \end{theorem}
 \end{multicols}
 \end{document}
