@@ -29,25 +29,25 @@
     So we can omit this term in the sum.
   \end{remark}
   \subsubsection{Conditional expectation}
-  \begin{proposition}[Substitution principle]
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $\vf{X}$ be a discrete random vector with support $S_{\vf{X}}$, $Y$ be a discrete random variable with support $S_Y$, $h:S_{\vf{X}}\times S_Y\rightarrow\RR$ be a function and $y\in S_Y$. Then:
+  \begin{proposition}[Substitution principle]\label{SP:substitutionPrinciple}
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $\vf{X}$ be a discrete random vector with outcomes in $S_{\vf{X}}$, $Y$ be a discrete random variable with outcomes in $S_Y$, $h:S_{\vf{X}}\times S_Y\rightarrow\RR$ be a function and $y\in S_Y$. Then:
     $$\Exp(h(\vf{X},Y=y)\mid Y=y)=\Exp((h(\vf{X}),Y)\mid Y=y)$$
   \end{proposition}
   \begin{proposition}[Law of total expectation]\label{SP:totalexp}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $\vf{X}$ is a discrete random vector with support $S_{\vf{X}}$, $\{A_n:1\leq n\leq N\}\subset\mathcal{A}$, $N\in\NN\cup\{\infty\}$, be such that $\bigsqcup_{n=1}^N A_n=\Omega'$ with $\Prob(\Omega')=1$ and $h:S_{\vf{X}}\rightarrow\RR$ be a function. If $h(\vf{X})$ has finite expectation or $h\geq 0$, then: $$\Exp(h(\vf{X}))=\sum_{n=1}^N\Exp(h(\vf{X})\mid A_n)\Prob(A_n)$$
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $\vf{X}$ is a discrete random vector with outcomes in $S_{\vf{X}}$, $\{A_n:1\leq n\leq N\}\subset\mathcal{A}$, $N\in\NN\cup\{\infty\}$, be such that $\bigsqcup_{n=1}^N A_n=\Omega'$ with $\Prob(\Omega')=1$ and $h:S_{\vf{X}}\rightarrow\RR$ be a function. If $h(\vf{X})$ has finite expectation or $h\geq 0$, then: $$\Exp(h(\vf{X}))=\sum_{n=1}^N\Exp(h(\vf{X})\mid A_n)\Prob(A_n)$$
   \end{proposition}
   \begin{sproof}
     See the proof of \mnameref{P:totalexp}.
   \end{sproof}
   \begin{definition}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $\vf{X}$ be a discrete random vector with support $S_{\vf{X}}$, $Y$ be a discrete random variable with support $S_Y$ and $h:S_{\vf{X}}\rightarrow\RR$ be a function. For all $\omega\in\Omega$ we define the random variable $\Exp(h(\vf{X})\mid Y)$ as
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $\vf{X}$ be a discrete random vector with outcomes in $S_{\vf{X}}$, $Y$ be a discrete random variable with outcomes in $S_Y$ and $h:S_{\vf{X}}\rightarrow\RR$ be a function. For all $\omega\in\Omega$ we define the random variable $\Exp(h(\vf{X})\mid Y)$ as
     $$\Exp(h(\vf{X})\mid Y)(\omega)=\Exp(h(\vf{X})\mid Y=y)$$
     provided that $Y(\omega)=y$.
     Note that it can also be written as:
     $$\Exp(h(\vf{X})\mid Y)=\sum_{y\in S_Y}\Exp(h(\vf{X})\mid Y=y)\indi{\{Y=y\}}$$
   \end{definition}
   \begin{proposition}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $\vf{X}$ be a discrete random vector with support $S_{\vf{X}}$, $Y$ be a discrete random variable with support $S_Y$, $h,h_1,h_2:S_{\vf{X}}\rightarrow\RR$ be functions and $a,b\in\RR$. Then:
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $\vf{X}$ be a discrete random vector with outcomes in $S_{\vf{X}}$, $Y$ be a discrete random variable with outcomes in $S_Y$, $h,h_1,h_2:S_{\vf{X}}\rightarrow\RR$ be functions and $a,b\in\RR$. Then:
     \begin{enumerate}
       \item $\Exp(ah_1(\vf{X})+bh_2(\vf{X})\mid Y)=a\Exp(h_1(\vf{X})\mid Y)+b\Exp(h_1(\vf{X})\mid Y)$
       \item If $\vf{X}$ and $Y$ are independent, then $\Exp(h(\vf{X})\mid Y)=\Exp(h(\vf{X}))$.
@@ -63,7 +63,7 @@
     where the last equality is due to the \mnameref{SP:totalexp}.
   \end{sproof}
   \begin{theorem}[Wald theorem]
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(Z_n)$ be a sequence of random variables, all of them with expectation $\mu\in\RR$, such that $\sup_{n\geq 1}\Exp(\abs{Z_n})=A<\infty$. If $N$ is an integrable random variable with support $\NN$ independent of $Z_n$ $\forall n\in\NN$, we have that:
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(Z_n)$ be a sequence of random variables, all of them with expectation $\mu\in\RR$, such that $\sup_{n\geq 1}\Exp(\abs{Z_n})=A<\infty$. If $N$ is an integrable random variable with outcomes in $\NN$ independent of $Z_n$ $\forall n\in\NN$, we have that:
     $$\Exp\left(\sum_{n=1}^NZ_n\right)=\mu\Exp(N)$$
   \end{theorem}
   \begin{proof}
@@ -83,28 +83,28 @@
   \end{remark}
   \subsubsection{Probability-generating function}
   \begin{definition}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$ be a random variable with support $\NN\cup\{0\}$. The \emph{probability-generating function} of $X$ is the function $g_X:\mathcal{D}_X\rightarrow \RR$ defined as:
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$ be a random variable with outcomes in $\NN\cup\{0\}$. The \emph{probability-generating function} (or \emph{pgf}) of $X$ is the function $g_X:\mathcal{D}_X\rightarrow \RR$ defined as:
     \begin{equation}\label{SP:probgenfunc}
       g_X(s)=\sum_{k=0}^\infty s^k\Prob(X=k)=\Prob(X=0)+\sum_{k=1}^\infty s^k\Prob(X=k)
     \end{equation}
     The set $\mathcal{D}_X$ is defined as a all the points for which the series of \mcref{SP:probgenfun} converges absolutely.
   \end{definition}
   \begin{lemma}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$ be a random variable with support $\NN\cup\{0\}$. Then, $[-1,1]\subseteq \mathcal{D}_X$ and if $s\ne 0$, $g_X(s)=\Exp(s^X)$.
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$ be a random variable with outcomes in $\NN\cup\{0\}$. Then, $[-1,1]\subseteq \mathcal{D}_X$ and if $s\ne 0$, $g_X(s)=\Exp(s^X)$.
   \end{lemma}
   \begin{proof}
     Clearly $g_X(s)=\Exp(s^X)$ and furthermore $\forall s\in[-1,1]$ we have $s\in \mathcal{D}_X$ because:
     $$\sum_{k=0}^\infty \abs{s}^k\Prob(X=k)\leq \sum_{k=0}^\infty \Prob(X=k)=1<\infty$$
   \end{proof}
   \begin{theorem}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$, $Y$ be random variables with support $\NN\cup\{0\}$. Then: $$X\overset{\text{d}}{=}Y\iff g_X=g_Y$$
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$, $Y$ be random variables with outcomes in $\NN\cup\{0\}$. Then: $$X\overset{\text{d}}{=}Y\iff g_X=g_Y$$
     Moreover: $$\Prob(X=k)=\frac{{g_X}^{(k)}(0)}{k!}\quad \forall k\geq 0$$
   \end{theorem}
   \begin{sproof}
     Note that $g_X(s)$ is a power series defined in a neighbourhood of $s=0$.
   \end{sproof}
   \begin{theorem}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$, $Y$ be independent random variables with support $\NN\cup\{0\}$. Then, $\forall s\in\mathcal{D}_X\cap \mathcal{D}_Y$ we have: $$g_{X+Y}(s)=g_X(s)g_Y(s)$$
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$, $Y$ be independent random variables with outcomes in $\NN\cup\{0\}$. Then, $\forall s\in\mathcal{D}_X\cap \mathcal{D}_Y$ we have: $$g_{X+Y}(s)=g_X(s)g_Y(s)$$
   \end{theorem}
   \begin{proof}
     Note that if $s\in \in\mathcal{D}_X\cap \mathcal{D}_Y$, then $s\in\mathcal{D}_{X+Y}$ because
@@ -116,7 +116,7 @@
     If $s\ne 0$, as before: $$g_{X+Y}({s})=\Exp({s}^{X+Y})=\Exp({s}^X)\Exp({s}^Y)=g_{X}({s})g_{Y}({s})$$
   \end{proof}
   \begin{theorem}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$ be a random variable with support $\NN\cup\{0\}$. Then, $\forall k\geq 1$ we have:
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$ be a random variable with outcomes in $\NN\cup\{0\}$. Then, $\forall k\geq 1$ we have:
     $$\lim_{s\to 1^-}{g_X}^{(k)}(s)=\Exp(X(X-1)\cdots(X-k+1))$$
   \end{theorem}
   \begin{sproof}
@@ -145,14 +145,44 @@
   \subsection{Discrete-time Markov chain}
   \subsubsection{Galton-Watson process}
   \begin{model}\label{SP:galtonwatsonModel}
-    Let $(X_n)$, $n\in\NN\cup\{0\}$ be a sequence of discrete random vairables representing the number of new individuals of a certain population at the $n$-th generation. Suppose they are defined as $$X_{n+1}=\sum_{k=1}^{X_n}Y_{n+1}^{(k)}$$ and $X_0=1$. Here $Y_{n+1}^{(k)}$ has support $\NN\cup\{0\}$ $\forall n,k$ and represent the number of descendants (to the next generation) of the $k$-th individual of the $n$-th generation. Suppose that $Y_{n+1}^{(k)}\sim Y$ are \iid We would like to study the probability $\rho$ of extinction of this population: $$\rho=\Prob(\{X_n=0:\text{for some $n\in\NN$}\})=\Prob\left(\bigcup_{n=1}^\infty\{X_n=0\}\right)$$
+    Let $(X_n)$, $n\in\NN\cup\{0\}$ be a sequence of discrete random vairables representing the number of new individuals of a certain population at the $n$-th generation. Suppose they are defined as $$X_{n+1}=\sum_{k=1}^{X_n}Y_{n+1}^{(k)}$$ and $X_0=1$. Here $Y_{n+1}^{(k)}$ has outcomes in $\NN\cup\{0\}$ $\forall n,k$ and represent the number of descendants (to the next generation) of the $k$-th individual of the $n$-th generation. Suppose that $Y_{n+1}^{(k)}\sim Y$ are \iid We would like to study the probability $\rho$ of extinction of this population: $$\rho=\Prob(\{X_n=0:\text{for some $n\in\NN$}\})=\Prob\left(\bigcup_{n=1}^\infty\{X_n=0\}\right)$$
   \end{model}
-  \begin{lemma}
-    Let $(Y_n)$ be a sequence of \iid random variables distributed as $Y$, whose support is $\NN\cup\{0\}$, and $N$ be a random variable also with support $\NN\cup\{0\}$ and independent to $(Y_n)$. Let $X=\sum_{k=1}^NY_k$. Then, $\forall s\in[-1,1]$ we have: $$g_X(s)=g_N(g_Z(s))$$
+  \begin{lemma}\label{SP:lemmaGaltonWatson}
+    Let $(Y_n)$ be a sequence of \iid random variables distributed as $Y$, whose outcomes are in $\NN\cup\{0\}$, and $N$ be a random variable also with outcomes in $\NN\cup\{0\}$ and independent to $(Y_n)$. Let $X=\sum_{k=1}^NY_k$. Then, $\forall s\in[-1,1]$ we have: $$g_X(s)=g_N(g_Y(s))$$
   \end{lemma}
+  \begin{proof}
+    First suppose $N\leq M$ with $M\in\NN$ fixed. Then using the independence, the \mnameref{P:totalexp} and the \mnameref{SP:substitutionPrinciple}:
+    \begin{align*}
+      g_X(s)=\Exp(s^X) & =\sum_{k=1}^M\Exp(s^X\mid N=k)\Prob(N=k)                                        \\
+                       & = \sum_{k=1}^{M} \Exp\left(s^{\sum_{i=1}^{N}Y_i} \mid N = k\right) \Prob(N = k) \\
+                       & = \sum_{k=1}^{M} \Exp\left(s^{\sum_{i=1}^{k}Y_i}\right) \Prob(N = k)            \\
+                       & = \sum_{k=1}^{M} {g_Y(s)}^k \Prob(N = k)                                        \\
+                       & = g_N(g_Y(s))
+    \end{align*}
+    Now if $N$ can take any value of $\NN\cup\{0\}$ we have that:
+    \begin{align*}
+      g_X(s) & =\Exp(s^{\sum_{i=1}^{N}Y_i})                                     \\
+             & =\Exp\left(\lim_{M\to\infty}s^{\sum_{i=1}^{\min(N,M)}Y_i}\right) \\
+             & =\lim_{M\to\infty}\Exp\left(s^{\sum_{i=1}^{\min(N,M)}Y_i}\right) \\
+             & =\lim_{M\to\infty}g_{\min(N,M)}(g_Y(s))                          \\
+             & =\lim_{M\to\infty}\Exp\left({(g_Y(s))}^{\min(N,M)}\right)        \\
+             & =\Exp\left(\lim_{M\to\infty}{(g_Y(s))}^{\min(N,M)}\right)        \\
+             & =g_N(g_Z(s))
+    \end{align*}
+    where both limit exchangings are due to the \mnameref{P:dominated} using the intagrable random variable 1.
+  \end{proof}
   \begin{theorem}
     In the hypothesis of \mcref{SP:galtonwatsonModel}, we have that: $$\rho=g_Y(\rho)$$
   \end{theorem}
+  \begin{proof}
+    Note that $\{X_n=0\}\subseteq \{x_{n+1}=0\}$. Hence:
+    $$\rho=\Prob\left(\bigcup_{n=1}^\infty\{X_n=0\}\right)\!=\lim_{n\to\infty}\Prob(X_n=0)=\lim_{n\to\infty}g_{X_n}(0)$$
+    Now, using \mcref{SP:lemmaGaltonWatson} we have:
+    $$g_{X_{n}}(s)=g_{X_{n-1}}(g_Y(s))=\cdots=g_{X_1}({g_Y}^n(s))$$
+    But $X_1=1$ and so $g_{X_1}(s)=s$. So $g_{X_{n}}(s)={g_Y}^n(s)$ and therefore
+    $g_{X_{n+1}}(0)=g_Y(g_{X_{n}}(0))$.
+    Taking the limit as $n\to\infty$ and using the continuity of the pgf we get the result.
+  \end{proof}
   \begin{theorem}
     In the hypothesis of \mcref{SP:galtonwatsonModel} and the additional assumption that $0<\Prob(Y=0)<1$ we have:
     \begin{enumerate}

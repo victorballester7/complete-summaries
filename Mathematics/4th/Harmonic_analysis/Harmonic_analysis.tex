@@ -13,10 +13,10 @@
   \begin{proof}
     We have pointwise convergence towards $f$. Moreover:
     \begin{align*}
-      \sum_{n\in\ZZ}\abs{\widehat{f}(n)} & \leq \sum_{n\in\ZZ\setminus\{0\}}\frac{1}{n}n\abs{\widehat{f}(n)}                                             \\
-                                         & \leq\frac{1}{2}\sum_{n\in\ZZ\setminus\{0\}}\left(\frac{1}{n^2} + n^2\abs{\widehat{f}(n)}^2\right)             \\
-                                         & =\frac{1}{2}\sum_{n\in\ZZ\setminus\{0\}}\frac{1}{n^2}+\frac{T^2}{8\pi^2}\sum_{n\in\ZZ}\abs{\widehat{f'}(n)}^2 \\
-                                         & \leq\frac{1}{2}\sum_{n\in\ZZ\setminus\{0\}}\frac{1}{n^2}+\frac{T^2}{8\pi^2}\norm{f'}^2                        \\
+      \sum_{n\in\ZZ}\abs{\widehat{f}(n)} & \leq\abs{\widehat{f}(0)}+ \sum_{n\in\ZZ\setminus\{0\}}\frac{1}{n}n\abs{\widehat{f}(n)}                                             \\
+                                         & \leq\abs{\widehat{f}(0)}+\frac{1}{2}\sum_{n\in\ZZ\setminus\{0\}}\left(\frac{1}{n^2} + n^2\abs{\widehat{f}(n)}^2\right)             \\
+                                         & =\abs{\widehat{f}(0)}+\frac{1}{2}\sum_{n\in\ZZ\setminus\{0\}}\frac{1}{n^2}+\frac{T^2}{8\pi^2}\sum_{n\in\ZZ}\abs{\widehat{f'}(n)}^2 \\
+                                         & \leq\abs{\widehat{f}(0)}+\frac{1}{2}\sum_{n\in\ZZ\setminus\{0\}}\frac{1}{n^2}+\frac{T}{8\pi^2}\norm{f'}^2                          \\
                                          & <\infty
     \end{align*}
     by \mnameref{MA:bessel} and because $f'$ is bounded. Thus, the \mnameref{MA:Mweierstrass} implies that $Sf$ converges uniformly to $f$.
@@ -65,5 +65,253 @@
     \end{gather*}
   \end{theorem}
   \subsection{Fourier transform}
+  \subsubsection{Definition and first properties}
+  \begin{definition}
+    Let $f\in L^1(\RR)$. We define the \emph{Fourier transform} of $f$ as:
+    $$\widehat{f}(\xi)=\int_{-\infty}^{+\infty}f(x)\exp{-2\pi \ii\xi x}\dd{x}$$
+    The function $f$ is also called \emph{inverse Fourier transform} of $\widehat{f}$.
+  \end{definition}
+  \begin{proposition}\label{HA:fourierTransProperties}
+    Let $f,g\in L^1(\RR)$ and $\alpha,\beta\in\RR$. Then:
+    \begin{enumerate}
+      \item $\widehat{(\alpha f+\beta g)}(\xi)=\alpha\widehat{f}(\xi)+\beta \widehat{g}(\xi)$
+            \item\label{HA:FTprop2} Let $h\in\RR$. We define $T_hf(x)=f(x+h)$. Then: $$\widehat{T_hf}(\xi)=\exp{2\pi\ii \xi h}\widehat{f}(\xi)$$
+            \item\label{HA:FTprop3} If $g(x)=\exp{2\pi\ii x h}f(x)$, then: $$\widehat{g}(\xi)=\widehat{f}(\xi-h)$$
+            \item\label{HA:FTprop4} If $\lambda\in\RR^*$, then: $$\frac{1}{\lambda}\widehat{f\left(\frac{x}{\lambda}\right)}(\xi)=\widehat{f}(\lambda\xi)$$
+            \item\label{HA:FTprop5} If $g(x)=\overline{f(x)}$, then: $$\widehat{g}(\xi)=\overline{\widehat{f}(-\xi)}$$
+    \end{enumerate}
+  \end{proposition}
+  \begin{sproof}
+    They follow from the linearity of the integral and some change of variable.
+  \end{sproof}
+  \begin{definition}
+    Let $f\in L^1(\RR)$. We define the \emph{Fourier transform operator} as $\F f=\widehat{f}$.
+  \end{definition}
+  \begin{theorem}[Riemann-Lebesgue lemma]\label{HA:riemannlebesgue}
+    Let $f\in L^1(\RR)$. Then:
+    \begin{enumerate}
+      \item $\F f$ is uniformly continuous.
+      \item $\F$ is a continuous linear operator from $L^1(\RR)$ to $L^\infty(\RR)$ and $\norm{\F f}_{\infty}\leq \norm{f}_1$.
+      \item $\displaystyle\lim_{\abs{\xi}\to\infty} \abs{\widehat{f}(\xi)}=0$
+    \end{enumerate}
+  \end{theorem}
+  \begin{sproof}
+    \begin{enumerate}
+      \item Using \mcref{HA:FTprop3} we have:
+            $$\abs{\F f(\xi+h)-\F f(\xi)}\leq \int_{-\infty}^{+\infty}\abs{\exp{-2\pi\ii x h}-1}\abs{f(x)}\dd{x}$$
+            By the \mnameref{RFA:dominated} we have that the integral is bounded by $2\norm{f}_1$ and so entering the limit we obtain the bound $\varepsilon \norm{f}_1$ $\forall \varepsilon>0$. As the bound does not depend on the point $\xi$, the convergence is uniform.
+      \item Clearly $\norm{\F f}_{\infty}\leq \norm{f}_1$. Hence the operator is bounded and therefore continuous.
+      \item Note that $2\abs{\widehat{f}(\xi)}=\abs{\widehat{f}(\xi)-\exp{\ii\pi}\widehat{f}(\xi)}$ and:
+            \begin{align*}
+              \exp{\ii\pi}\widehat{f}(\xi) & =\int_{-\infty}^{+\infty}f(x)\exp{-2\pi\ii\xi x+\ii\pi}\dd{x}                    \\
+                                           & =\int_{-\infty}^{+\infty}f\left(u+\frac{1}{2\xi}\right)\exp{-2\pi\ii\xi u}\dd{u}
+            \end{align*}
+            So: $$\abs{\widehat{f}(\xi)}\leq\frac{1}{2}\int_{-\infty}^{+\infty}\left[f(x)-f\left(x+\frac{1}{2\xi}\right)\right]\exp{-2\pi\ii\xi x}\dd{x}$$
+            Now use again the \mnameref{RFA:dominated}.
+    \end{enumerate}
+  \end{sproof}
+  \begin{proposition}\label{HA:symmetryFT}
+    Let $f,g\in L^1(\RR)$. Then, $f\widehat{g},\widehat{f}g\in L^1(\RR)$ and:
+    $$\int_{-\infty}^{+\infty}\widehat{f}(x)g(x)\dd{x}=\int_{-\infty}^{+\infty}f(x)\widehat{g}(x)\dd{x}$$
+  \end{proposition}
+  \begin{sproof}
+    By \mnameref{HA:riemannlebesgue}, $\widehat{g}$ is bounded. Hence, $f\widehat{g}\in L^1(\RR)$ and the same applies for $\widehat{f}g$. For the equality, use \mnameref{FSV:fubini}.
+  \end{sproof}
+  \begin{proposition}\label{HA:diffFourierXf}
+    Let $f$ be a function such that $x^k f\in L^1(\RR)$ for $k=0,\ldots,r$. Then, $\widehat{f}$ is $r$ times differentiable and:
+    $${(\F f)}^{(k)}=\F({(-2\pi\ii x)}^kf(x))$$
+    for $k=0,1,\ldots, r$.
+  \end{proposition}
+  \begin{proof}
+    Note that the function $h:\xi\rightarrow\exp{-2\pi\ii \xi x}f(x)$ is $\mathcal{C}^\infty(\RR)$ and $h^{(k)}(\xi)={(-2\pi\ii x)}^k\exp{-2\pi\ii \xi x}f(x)$. Since $\abs{h^{(k)}(\xi)}\leq \abs{x^kf(x)}$ we can use \mcref{RFA:diffUnderIntegralSign} to conclude the result.
+  \end{proof}
+  \begin{proposition}\label{HA:diffFourierTransf}
+    Let $f\in \mathcal{C}^r(\RR)\cap L^1(\RR)$ be such that $f^(k)\in L^1(\RR)$ for $k=1,\ldots,r$. Then: $$\widehat{f^{(k)}}(\xi)={(2\pi\ii\xi)}^k\widehat{f}(\xi)$$ for $k=0,1,\ldots, r$.
+  \end{proposition}
+  \begin{proof}
+    We'll prove it by induction on $k$. The case $k=0$ is clear.
+    For the other ones:
+    \begin{align*}
+      \widehat{f^{(k)}}(n) & =\int_{-\infty}^{+\infty} f^{(k)}(x)\exp{-2\pi\ii \xi x}\dd{x}              \\
+                           & =2\pi\ii \xi\int_{-\infty}^{+\infty} f^{(k-1)}(x)\exp{-2\pi\ii \xi x}\dd{x} \\
+                           & =\left(2\pi\ii \xi\right)\widehat{f^{(k-1)}}(n)                             \\
+                           & ={\left(2\pi\ii \xi\right)}^k\widehat{f}(\xi)
+    \end{align*}
+    where we have used integration by parts and the fact that $\displaystyle\lim_{a\to\infty}f^{(k-1)}(x)\exp{-2\pi\ii \xi x}\Big|_{-a}^a=0$. This is due to the existence of $\displaystyle\lim_{a\to\infty}f^{(k-1)}(a)$, which is a consequence of the \mnameref{RVF:fundamentalthmCalculus}:
+    $$f^{(k-1)}(a)=f^{(k-1)}(0)+\int_0^af^{(k)}(x)\dd{x}$$
+    whose limit exists because $f^{(k)}\in L^1(\RR)$.
+  \end{proof}
+  \begin{remark}
+    Note that there exists functions $f\in\mathcal{C}(\RR)\cap L^1(\RR)$ for which the limit $\displaystyle\lim_{x\to\infty} f(x)$ does not exist.
+  \end{remark}
+  \begin{proposition}
+    Let $f\in L^1(\RR)$ be such that it has compact support. Then, $\F f\in\mathcal{C}^\omega(\RR)$.
+  \end{proposition}
+  \begin{sproof}
+    Suppose $f(x)\in[-K,K]$, $K>0$. Then, expanding $\F f$ with the power series of $\exp{-2\pi\ii\xi x}$ centered at $a\in\RR$ we have:
+    \begin{align*}
+      \F f(\xi) & =\int_{-K}^Kf(x)\sum_{n=0}^{\infty}\frac{{(-2\pi\ii x)}^n\exp{-2\pi\ii \xi x}}{n!}{(\xi-a)}^n\dd{x} \\
+                & =\sum_{n=0}^\infty c_n{(\xi-a)}^n
+    \end{align*}
+    where $\abs{c_n}\leq\frac{{(2\pi K)}^n}{n!}\norm{f}_1$. Finally, use this to show that the radius of convergences (see \mcref{MA:radius}) is $\infty$.
+  \end{sproof}
+  \begin{lemma}\label{HA:expX2}
+    Let $f(x)=\exp{-a x^2}$. Then, $\F f(\xi)=\sqrt{\frac{\pi}{a}}\exp{-\frac{{(\pi x)}^2}{a}}$ and moreover $\F^2f=f$. In particular if $a=\pi$, then $\F f=f$, that is $\widehat{f}(\xi)=f(\xi)=\exp{-\pi \xi^2}$.
+  \end{lemma}
+  \begin{sproof}
+    $f$ satisfies the ode $y'=-2a x y$. Taking $\ \widehat{}\ $ on this expression and using \mcref{HA:diffFourierXf,HA:diffFourierTransf} we obtain that $\widehat{f}$ must satisfy the following ode:
+    $$y'=-\frac{2\pi^2\xi}{a} y$$
+    with initial condition $y(0)=\int_{-\infty}^{+\infty}\exp{-a x^2}\dd{x}=\sqrt{\frac{\pi}{a}}$.
+  \end{sproof}
+  \begin{lemma}\label{HA:expAbsX}
+    Let $f(x)=\exp{-a\abs{x}}$. Then, $\F f(\xi)=\frac{2a}{a^2+4\pi^2\xi^2}$ and moreover $\F^2f=f$.
+  \end{lemma}
+  \begin{sproof}
+    $$\F f(\xi)=2\int_0^{+\infty}\exp{-ax}\cos(2\pi\xi x)\dd{x}=\frac{2a}{a^2+4\pi^2\xi^2}$$
+  \end{sproof}
+  \subsubsection{The inverse Fourier transform}
+  \begin{theorem}\label{HA:inverseFT}
+    Let $f\in L^1(\RR)$ such that $\F f\in L^1(\RR)$. Then:
+    $$f(x)\almoste{=}\int_{-\infty}^{+\infty}\widehat{f}(\xi)\exp{2\pi \ii \xi x}\dd{\xi}$$
+  \end{theorem}
+  \begin{proof}
+    Consider the integral: $$I=\int_{-\infty}^{+\infty}f(x+y)\frac{1}{t}\exp{-\pi \frac{y^2}{t^2}}\dd{y}$$
+    Note that using \mcref{HA:expX2} and \mcref{HA:FTprop4}, we have that $\F \left(\frac{1}{\lambda}\exp{-\pi \frac{x^2}{\lambda^2}}\right)=\exp{-\pi\lambda^2\xi^2}$. On the one hand and using this latter thing, \mcref{HA:symmetryFT} we have:
+    \begin{multline*}
+      I=\int_{-\infty}^{+\infty}f(x+y)\frac{1}{t}\exp{-\pi \frac{y^2}{t^2}}\dd{y}=\int_{-\infty}^{+\infty}f(x+\xi)\widehat{\exp{-\pi t^2\xi^2}}\dd{\xi}=\\
+      =\int_{-\infty}^{+\infty}\exp{2\pi\ii\xi x}\widehat{f}(\xi)\exp{-\pi t^2\xi^2}\dd{\xi}
+    \end{multline*}
+    which by \mnameref{RFA:dominated} converges to $\int_{-\infty}^{+\infty}\widehat{f}(\xi)\exp{2\pi \ii \xi x}\dd{\xi}$ as $t\to 0$.
+
+    On the other hand with a change of variable we have: $$I=\int_{-\infty}^{+\infty}f(x+ty)\exp{-\pi y^2}\dd{y}$$ Using \mcref{RFA:thmLpBanachC} it suffices to prove that $\displaystyle\lim_{t\to 0}\norm{I-f(x)}_1=0$. But using that $\int_{-\infty}^{+\infty}\exp{-\pi y^2}\dd{y}=1$:
+    \begin{align*}
+      \norm{I-f(x)}_1 & =\int_{-\infty}^{+\infty}\abs{\int_{-\infty}^{+\infty}(f(x+ty)-f(x))\exp{-\pi y^2}\dd{y}}\dd{x}  \\
+                      & \leq\int_{-\infty}^{+\infty}\exp{-\pi y^2}\int_{-\infty}^{+\infty}\abs{f(x+ty)-f(x)}\dd{x}\dd{y}
+    \end{align*}
+    where we have used \mnameref{RFA:fubini}. Now use the \mnameref{RFA:dominated}.
+  \end{proof}
+  \begin{corollary}
+    Let $f\in L^1(\RR)$ such that $\F f\almoste{=}0$. Then, $f\almoste{=}0$.
+  \end{corollary}
+  \begin{lemma}\label{HA:periodicity}
+    Let $f\in L^1(\RR)$. Then, $\F^2f(x)\almoste{=}f(-x)$. Hence, $\F^4\almoste{=}\id$.
+  \end{lemma}
+  \begin{proof}
+    $$f(-x)=\int_{-\infty}^{+\infty}\widehat{f}(\xi)\exp{-2\pi\ii\xi x}\dd{\xi}=\F\widehat{f}(x)=\F^2 f(x)$$
+  \end{proof}
+  \begin{lemma}
+    Let $f,g\in L^1(\RR)$. Then, $f*g\in L^1(\RR)$, $\norm{f*g}_1\leq\norm{f}_1\norm{g}_1$ and $\F(f*g)=\F f \F g$.
+  \end{lemma}
+  \begin{sproof}
+    Use \mnameref{RFA:fubini}.
+  \end{sproof}
+  \subsubsection{Pointwise convergence}
+  \begin{definition}
+    Let $f\in L^1(\RR)$. We define the \emph{partial Fourier transform} as: $$S_Rf(x)=\int_{-R}^{R}\widehat{f}(\xi)\exp{2\pi\ii \xi x}\dd{\xi}$$
+  \end{definition}
+  \begin{definition}[Dirichlet kernel]
+    We define the \emph{Dirichlet kernel} of order $R\in\RR_{>0}$ as: $$D_R(t)=\int_{-R}^{R}\exp{-2\pi\ii \xi t}\dd{\xi}=\frac{\sin(2\pi Rt)}{\pi t}$$
+  \end{definition}
+  \begin{proposition}
+    The Dirichlet kernel has the following properties:
+    \begin{enumerate}
+      \item $D_R$ is an even function.
+      \item \begin{align*}
+              S_Rf(x) & =(f*D_R)(x)                                  \\
+                      & =\int_{-\infty}^{+\infty}f(x-t)D_R(t)\dd{t}  \\
+                      & =\int_0^{+\infty}[f(x+t)+f(x-t)]D_R(t)\dd{t}
+            \end{align*}
+    \end{enumerate}
+  \end{proposition}
+  \begin{theorem}[Dini's theorem]\label{HA:dini}
+    Let $f\in L^1(\RR)$ and $x,\ell\in \RR$ such that $h(t):=\frac{\abs{f(x+t)+f(x-t)-2\ell}}{t}\in L^1((0,\delta))$ for some $\delta>0$. Then, $\displaystyle\lim_{R\to\infty}S_Rf(x)=\ell$.
+  \end{theorem}
+  \begin{sproof}
+    Note that $$S_Rf(x)-\ell=\int_0^\infty[f(x+t)+f(x-t)-2\ell]D_R(t)\dd{t}$$ Now separate this integrals as a sum of the following ones:
+    \begin{align*}
+      I_1 & =\int_0^N[f(x+t)+f(x-t)-2\ell]D_R(t)\dd{t} \\
+      I_2 & =\int_N^\infty[f(x+t)+f(x-t)]D_R(t)\dd{t}  \\
+      I_3 & =-2\ell \int_N^\infty D_R(t)\dd{t}
+    \end{align*}
+    Given $\varepsilon>0$ take $N$ such that $\int_N^\infty\abs{\frac{f(x+t)+f(x-t)}{\pi t}}\dd{t}<\varepsilon$. Since $h$ is integrable in $(0,N)$, by \mnameref{HA:riemannlebesgue} we have that $I_1\overset{R\to\infty}{\longrightarrow}0$. Then, as we can write $I_3=-2\ell \int_{\pi RN}^\infty \frac{\sin(u)}{\pi u}\dd{u}$ we have that $I_3\overset{R\to\infty}{\longrightarrow}0$.
+  \end{sproof}
+  \begin{lemma}
+    Let $f\in L^p(\RR)$ with $1\leq p<\infty$. Then, $\displaystyle \lim_{a\to 0}\norm{f-T_af}_p=0$.
+  \end{lemma}
+  \begin{sproof}
+    Clearly is is true if $f\in\mathcal{C}_0^\infty(\RR)$ using \mnameref{RFA:dominated}. Now use that since $\mathcal{C}_0^\infty(\RR)$ is dense in $\mathcal{C}_0(\RR)$, which is dense in $L^p(\RR)$, $\exists(f_n)\in \mathcal{C}_0^\infty(\RR)$ such that $\displaystyle\lim_{n\to\infty}\norm{f_n-f}_p=0$.
+  \end{sproof}
+  \subsubsection{Uniform convergence}
+  \begin{definition}
+    Let $f\in L^1(\RR)$ and $R>0$. We define the \emph{Fejér mean} $\sigma_Rf(x)$ as: $$\sigma_Rf(x)=\frac{1}{R}\int_{0}^RS_rf(x)\dd{r}$$
+  \end{definition}
+  \begin{definition}
+    Let $f\in L^1(\RR)$ and $R>0$. We define the \emph{Fejér kernel} $F_Rf(x)$ as: $$F_R(x)=\frac{1}{R}\int_{0}^RD_r(x)\dd{r}$$
+  \end{definition}
+  \begin{lemma}
+    Let $f\in L^1(\RR)$ and $R>0$. Then, $\sigma_Rf=f*F_R$ and moreover:
+    $$F_R(x)=\frac{{\left(\sin\left(\pi R x\right)\right)}^2}{\pi^2 R x^2}$$
+  \end{lemma}
+  \begin{definition}
+    Let $f\in L^1(\RR)$ and $t>0$. We define the \emph{Poisson kernel} $P_t$ as $P_t(x):=\F^{-1}(\exp{-2\pi t\abs{\xi}})$.
+  \end{definition}
+  \begin{lemma}
+    Let $f\in L^1(\RR)$ and $t>0$. Then: $$P_t(x)=\frac{t^2}{\pi(t^2+x^2)}$$
+  \end{lemma}
+  \begin{proof}
+    Check \mcref{HA:expAbsX}.
+  \end{proof}
+  \begin{definition}
+    Let $f\in L^1(\RR)$ and $t>0$. We define the \emph{Weierstra\ss\ kernel} $W_t$ as $W_t(x):=\F^{-1}(\exp{-\pi t\xi^2})$.
+  \end{definition}
+  \begin{lemma}
+    Let $f\in L^1(\RR)$ and $t>0$. Then: $$W_t(x)=\frac{1}{\sqrt{t}}\exp{-\pi\frac{x^2}{t}}$$
+  \end{lemma}
+  \begin{proof}
+    Check \mcref{HA:expX2}.
+  \end{proof}
+  \begin{proposition}
+    Let $R>0$ and $t>0$. Then:
+    \begin{enumerate}
+      \item $F_R$, $P_t$ and $W_t$ are non-negative even functions.
+      \item $\int_{-\infty}^{+\infty}F_R(x)\dd{x}=\int_{-\infty}^{+\infty}P_t(x)\dd{x}=\int_{-\infty}^{+\infty}W_t(x)\dd{x}=1$
+      \item For all $\delta>0$, we have:
+            \begin{multline*}
+              \lim_{R\to \infty}\sup_{\abs{x}\geq \delta}F_R(x)=\lim_{t\to 0}\sup_{\abs{x}\geq \delta}P_t(x)=\\=\lim_{t\to 0}\sup_{\abs{x}\geq \delta}W_t(x)=0
+            \end{multline*}
+      \item For all $\delta>0$, we have:
+            \begin{multline*}
+              \lim_{R\to \infty}\int_{\abs{x}\geq \delta}F_R(x)\dd{x}=\lim_{t\to 0}\int_{\abs{x}\geq \delta}P_t(x)\dd{x}=\\=\lim_{t\to 0}\int_{\abs{x}\geq \delta}W_t(x)\dd{x}=0
+            \end{multline*}
+    \end{enumerate}
+  \end{proposition}
+  \begin{sproof}
+    The first two properties are straightforward. For the third one, note that:
+    \begin{align*}
+      \sup_{\abs{x}\geq \delta}F_R(x) & \leq \frac{1}{\pi^2 R \delta^2}                      \\
+      \sup_{\abs{x}\geq \delta}P_t(x) & =\frac{t^2}{\pi(t^2+\delta^2)}                       \\
+      \sup_{\abs{x}\geq \delta}W_t(x) & =\frac{1}{\sqrt{\delta}}\exp{-\pi\frac{x^2}{\delta}}
+    \end{align*}
+
+    The last one is a consequence of the previous ones.
+  \end{sproof}
+  \begin{theorem}
+    Let $f\in L^1(\RR)$ be a function having left- and right-sided limits at point $x_0$. Then:
+    \begin{multline*}
+      \lim_{R\to\infty}\sigma_Rf(x_0)=\lim_{t\to 0}(f*P_t)(x_0)=\lim_{t\to 0}(f*W_t)(x_0)=\\=\frac{f({x_0}^+)+f({x_0}^-)}{2}
+    \end{multline*}
+    Moreover if $f$ is uniformly continuous, the convergence is uniform.
+  \end{theorem}
+  \begin{sproof}
+    Copy the proofs of \mnameref{MA:fejerthm0,MA:fejerthm}.
+  \end{sproof}
+  \begin{theorem}
+    Let $f\in L^1(\RR)$. Then:
+    \begin{gather*}
+      \lim_{R\to\infty}\norm{\sigma_Rf-f}_1=0\\
+      \lim_{t\to 0}\norm{f*P_t-f}_1=0\\
+      \lim_{t\to 0}\norm{f*W_t-f}_1=0
+    \end{gather*}
+  \end{theorem}
 \end{multicols}
 \end{document}

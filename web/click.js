@@ -36,6 +36,21 @@ function incrementCounter(text) {
 function updateCount(code, count) {
   document.getElementById(code).innerHTML = "Clicked " + count + " times!";
 }
+
+// window.onload = function () {
+//   // make an AJAX request to the hitcounter.php script
+//   var xhr = new XMLHttpRequest();
+//   xhr.open("GET", "hitcount.txt", true);
+//   xhr.send();
+
+//   // when the AJAX request is complete, update the hit count display
+//   xhr.onreadystatechange = function () {
+//     if (xhr.readyState == 4 && xhr.status == 200) {
+//       var count = xhr.responseText;
+//       document.getElementById("hitcount").innerHTML = count;
+//     }
+//   };
+// };
 // var button = document.getElementById("clickme"), count = 0;
 // button.onclick = function() {
 //   count += 1;

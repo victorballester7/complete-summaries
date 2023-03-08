@@ -18,21 +18,31 @@
     \end{aligned}
     \right.
   \end{equation}
-  For $i\in\NN\cup\{0\}$ let $t_{i+1}:=t_{i}+h$, where $h>0$ is called \emph{step size}. We would like to create a sequence $(\vf{\tilde{x}}_i)$ that approximates (in some sense) $\vf{{x}}_i:=\vf{{x}}(t_i)$ from a first iterate $\vf{\tilde{x}}_0:=\vf{x}_0$. In this section we will describe several algorithms that intend to do so. We will denote $\vf{f}_i:=\vf{f}(t_i,\vf{\tilde{x}}_{i})$.
+  For $n\in\NN\cup\{0\}$ let $t_{n+1}:=t_{n}+h$, where $h>0$ is called \emph{step size}. We would like to create a sequence $(\vf{\tilde{x}}_n)$ that approximates (in some sense) $\vf{{x}}_n:=\vf{{x}}(t_n)$ from a first iterate $\vf{\tilde{x}}_0:=\vf{x}_0$. In this section we will describe several algorithms that intend to do so. We will denote $\vf{f}_n:=\vf{f}(t_n,\vf{x}_{n})$ and $\vf{\tilde{f}}_n:=\vf{f}(t_n,\vf{\tilde{x}}_{n})$.
   \begin{definition}
     A numerical method is called \emph{explicit} if the $i$-th iterate can be computed directly in terms of some of the previous iterates. A method is called \emph{implicit} if the $i$-th iterate depends implicitly on itself.
   \end{definition}
   \begin{definition}
-    A \emph{one-step explicit method} for the approximation of \mcref{NC:ivp} can be cast in the concise form $$\vf{\tilde{x}}_{i+1}=\vf{\tilde{x}}_{i}+h\vf\Phi(t_i,\vf{\tilde{x}}_{i},\vf{f}_i,h)$$
-    The function $\vf\Phi$ is called \emph{incremental function}. From here we can define the \emph{residuals} $\vf\varepsilon$ as
-    $$\vf{x}_{i+1}=\vf{x}_{i}+h\vf\Phi(t_i,\vf{x}_{i},\vf{f}(t_i,\vf{x}_i),h)+\vf\varepsilon_{i+1}$$
-    and the \emph{local truncation errors} as $h\vf\tau_{i}(h)=\vf\varepsilon_i$. Finally, we define the \emph{global truncation error} as: $$\tau(h)=\max_{i\geq 1}\norm{\vf\tau_i(h)}$$
+    A \emph{one-step explicit method} $\vf\Phi$ for the approximation of \mcref{NC:ivp} can be cast in the concise form $$\vf{\tilde{x}}_{n+1}=\vf\Phi(t_n,\vf{\tilde{x}}_{n},\vf{f},h)=\vf{\tilde{x}}_{n}+h\vf\phi(t_n,\vf{\tilde{x}}_{n},\vf{f},h)$$
+    The function $\vf\phi$ is called \emph{incremental function}. From here we can define the \emph{residuals} $\vf\varepsilon$ as
+    $$\vf{x}_{n+1}=\vf{x}_{n}+h\vf\phi(t_n,\vf{x}_{n},\vf{f},h)+\vf\varepsilon_{n+1}$$
+    and the \emph{local truncation errors} as $h\vf\tau_{n}(h)=\vf\varepsilon_n$. We define $\tau(h)$ as: $$\tau(h)=\max_{n\geq 1}\norm{\vf\tau_n(h)}$$
+    Finally, we define the \emph{global truncation error} as:
+    $$\vf{e}_n=\vf{x}_n-\vf{\tilde{x}}_n$$
+    We can also define the interates $\vf{\tilde{x}^*}_{n}$ as defined by:
+    $$\vf{\tilde{x}^*}_{n}=\vf{x}_{n}+h\vf\phi(t_n,\vf{x}_{n},\vf{f},h)$$
   \end{definition}
+  \begin{figure}[H]
+    \centering
+    \includestandalone[mode=image|tex,width=0.7\linewidth]{Images/errors}
+    \caption{Geometrical interpretation of the local and global truncation errors}
+    \label{NC:errors_fig}
+  \end{figure}
   \begin{definition}[Euler method]\label{NC:euler}
     Consider the ivp of \mcref{NC:ivp}. The \emph{forward Euler method} is defined as:
-    $$\vf{\tilde{x}}_{i+1}=\vf{\tilde{x}}_{i}+h\vf{f}_i$$
+    $$\vf{\tilde{x}}_{n+1}=\vf{\tilde{x}}_{n}+h\vf{\tilde{f}}_n$$
     The \emph{backward Euler method} is defined as:
-    $$\vf{\tilde{x}}_{i+1}=\vf{\tilde{x}}_{i}+h\vf{f}_{i+1}$$
+    $$\vf{\tilde{x}}_{n+1}=\vf{\tilde{x}}_{n}+h\vf{\tilde{f}}_{n+1}$$
     Note that the forward method is explicit, whereas the backward method is \emph{implicit}.
   \end{definition}
   \begin{figure}[H]
@@ -43,29 +53,52 @@
   \end{figure}
   \begin{definition}[Trapezoidal method]
     Consider the ivp of \mcref{NC:ivp}. The \emph{Trapezoidal method} is defined as:
-    $$\vf{\tilde{x}}_{i+1}=\vf{\tilde{x}}_{i}+\frac{h}{2}\left(\vf{f}_i+\vf{f}_{i+1}\right)$$
+    $$\vf{\tilde{x}}_{n+1}=\vf{\tilde{x}}_{n}+\frac{h}{2}\left(\vf{\tilde{f}}_n+\vf{\tilde{f}}_{n+1}\right)$$
   \end{definition}
   \begin{definition}[Heun method]
     Consider the ivp of \mcref{NC:ivp}. The \emph{Heun method} is defined as:
-    $$\vf{\tilde{x}}_{i+1}=\vf{\tilde{x}}_{i}+\frac{h}{2}\left(\vf{f}_i+\vf{f}(t_{i+1},\vf{\tilde{x}}_{i}+h\vf{f}_i)\right)$$
+    $$\vf{\tilde{x}}_{n+1}=\vf{\tilde{x}}_{n}+\frac{h}{2}\left(\vf{\tilde{f}}_n+\vf{f}(t_{n+1},\vf{\tilde{x}}_{n}+h\vf{\tilde{f}}_n)\right)$$
   \end{definition}
   \begin{definition}[Taylor method]
-    Consider the ivp of \mcref{NC:ivp} and suppose that $\vf{f}\in\mathcal{C}^r(\RR\times\RR^n)$. The \emph{Taylor method of order $r$} is the method constructed from the Taylor series of the solution $\vf{x}(t)$. For the sake of simplicity, suppose that $\vf{x}=x$ is univalued. Thus the Taylor method of order $r$ is::
-    $$\tilde{x}_{i+1}=\tilde{x}_{i}+\sum_{k=1}^r\frac{h^k}{k!}(\vf{D}^k{x})(t_i,\tilde{x}_{i})$$
+    Consider the ivp of \mcref{NC:ivp} and suppose that $\vf{f}\in\mathcal{C}^r(\RR\times\RR^d)$. The \emph{Taylor method of order $r$} is the method constructed from the Taylor series of the solution $\vf{x}(t)$. For the sake of simplicity, suppose that $\vf{x}=x$ is univalued. Thus the Taylor method of order $r$ is::
+    $$\tilde{x}_{n+1}=\tilde{x}_{n}+\sum_{k=1}^r\frac{h^k}{k!}(\vf{D}^k{x})(t_n,\tilde{x}_{n})$$
     For example the Taylor method of order 2 would be:
-    $$\vf{\tilde{x}}_{i+1}=\vf{\tilde{x}}_{i}+h\vf{f}_i+\frac{h^2}{2}\left(\vf{f}_t(t_i,\vf{\tilde{x}}_{i})+\vf{D}_1\vf{f}(\vf{f}_i)\right)$$
+    $$\vf{\tilde{x}}_{n+1}=\vf{\tilde{x}}_{n}+h\vf{\tilde{f}}_n+\frac{h^2}{2}\left(\vf{{f}}_t(t_n,\vf{\tilde{x}}_{n})+\vf{D}_2\vf{f}(\vf{\tilde{f}}_n)\right)$$
     Note that the Taylor method of order 1 is precisely the \mnameref{NC:euler}.
   \end{definition}
   \begin{definition}
-    A numerical method is \emph{consistent} if $\displaystyle\lim_{h\to 0}\tau(h)=0$. Moreover, we say that the algorithm has \emph{order} $p$ if $\tau(h)=\O{h^p}$.
+    A numerical method is \emph{consistent} if $\displaystyle\lim_{h\to 0}\tau(h)=0$. Moreover, we say that the algorithm has \emph{order of consistency} $p$ if $\tau(h)=\O{h^p}$.
   \end{definition}
   \begin{definition}
-    A one-step method for the approximation of \mcref{NC:ivp} is \emph{convergent} if $$\lim_{h\to 0}\max_{i\geq 1}\norm{\vf{\tilde{x}}_i-\vf{x}_i}=0$$
+    A one-step method for the approximation of \mcref{NC:ivp} is \emph{convergent} if $$\lim_{h\to 0}\max_{n\geq 1}\norm{\vf{e}_n}=0$$
+    Moreover, we say that the algorithm has \emph{order of accuracy} $p$ if $\norm{\vf{e}_n}=\O{h^p}$.
   \end{definition}
   \begin{remark}
-    Note that in a consistent method the difference equation for the
-    method approaches the ode as the step size goes to zero, whereas in a convergent method is the solution to the difference equation that approaches the solution to the ode as the step size goes to zero.
+    Note that in a consistent method the difference equation for the method approaches the ode as the step size goes to zero, whereas in a convergent method is the solution to the difference equation that approaches the solution to the ode as the step size goes to zero.
   \end{remark}
+  \begin{theorem}
+    Consider a consistent one-step method such that its incremental function $\vf\phi$ is Lipschitz continuous (with constant $L$) with respect to $\vf{x}$. Then:
+    $$\norm{\vf{e}_{n+1}}\leq \frac{\exp{L(t_{n+1}-t_0)}-1}{L}\tau(h)$$
+  \end{theorem}
+  \begin{proof}
+    \begin{align*}
+      \norm{\vf{e}_{n+1}} & \leq \norm{\vf{x}_{n+1}-\vf{\tilde{x}^*}_{n+1}}+\norm{\vf{\tilde{x}^*}_{n+1}-\vf{\tilde{x}}_{n+1}}                                \\
+      \begin{split}
+        & \leq h\norm{\vf\tau_{n+1}(h)}+\norm{\vf{e}_n}+\\&\hspace{2cm}+h\norm{\vf\phi(t_n,\vf{x}_{n},\vf{f},h)-\vf\phi(t_n,\vf{\tilde{x}}_{n},\vf{{f}},h)}
+      \end{split} \\
+                          & \leq h\norm{\vf\tau_{n+1}(h)}+(1+hL)\norm{\vf{e}_n}
+    \end{align*}
+    Iterating the process (note that $\vf{e}_0=\vf{0}$) we have:
+    \begin{align*}
+      \norm{\vf{e}_{n+1}} & \leq h[1+(1+hL)+\cdots+{(1+hL)}^n]\tau(h)    \\
+                          & = \frac{{(1+hL)}^{n+1}-1}{L}\tau(h)          \\
+                          & \leq \frac{\exp{L(t_{n+1}-t_0)}-1}{L}\tau(h)
+    \end{align*}
+    where in the last inequality we have used that $1+x\leq\exp{x}$.
+  \end{proof}
+  \begin{corollary}
+    Consider a one-step method with order of consistency $p$ such that their incremental functions $\vf\phi$ are Lipschitz continuous with respect to $\vf{x}$. Then its accuracy has also order $p$.
+  \end{corollary}
   \begin{lemma}
     Euler method has order 1, whereas Heun method has order 2.
   \end{lemma}
@@ -74,26 +107,79 @@
     $$\vf{x}(t+h) = \vf{x}(t)+h\vf{f}(t,\vf{x}) + \O{h^2}$$
     Hence, Euler method has order 1. For the Heun method we will describe a general procedure for constructing methods of arbitrary order. Let
     \begin{gather*}
-      \vf{k}_1=\vf{f}(t_i,\vf{x}_i)\quad \vf{k}_2=\vf{f}(t_i+c_2h,\vf{x}_i+ha_{21}\vf{k}_1)\\
-      \vf{x}_{i+1}=\vf{x}_i+h(b_1\vf{k}_1+b_2\vf{k}_2)+\O{h^3}
+      \vf{k}_1=\vf{f}_n\quad \vf{k}_2=\vf{f}(t_n+c_2h,\vf{x}_n+ha_{21}\vf{k}_1)\\
+      \vf{x}_{n+1}=\vf{x}_n+h(b_1\vf{k}_1+b_2\vf{k}_2)+\O{h^3}
     \end{gather*}
     Expanding $\vf{k}_2$ we have that:
-    $$\vf{k}_2=\vf{f}+c_2h\vf{f}_t+a_{21}h\vf{D}_2\vf{f}(\vf{k}_1)+\O{h^2}$$
+    $$\vf{k}_2=\vf{f}+c_2h\vf{{f}}_t+a_{21}h\vf{D}_2\vf{f}(\vf{k}_1)+\O{h^2}$$
     So:
     \begin{equation}\label{NC:heun1}
-      \vf{x}_{i+1}=\vf{x}_i+(b_1+b_2)h\vf{f}+h^2(b_2c_2\vf{f}_t+b_2a_{21}\vf{D}_2\vf{f}(\vf{f}))+\O{h^3}
+      \vf{x}_{n+1}=\vf{x}_n+(b_1+b_2)h\vf{f}+h^2(b_2c_2\vf{{f}}_t+b_2a_{21}\vf{D}_2\vf{f}(\vf{f}))+\O{h^3}
     \end{equation}
     But the $\vf{x}'=\vf{f}(t,\vf{x})$ we have:
     \begin{equation}\label{NC:heun2}
-      \vf{x}_{i+1}=\vf{x}_i+h\vf{f}+\frac{h^2}{2}(\vf{f}_t+\vf{D}_2\vf{f}(\vf{f}))+\O{h^3}
+      \vf{x}_{n+1}=\vf{x}_n+h\vf{f}+\frac{h^2}{2}(\vf{{f}}_t+\vf{D}_2\vf{f}(\vf{f}))+\O{h^3}
     \end{equation}
     Matching coefficients from \mcref{NC:heun1,NC:heun2}, we get the desired result.
   \end{proof}
   \begin{remark}
-    For a method of order $\ell$ (see \mnameref{NC:rungekutta}), just start with $\ell$ values $\vf{k}_1,\ldots,\vf{k}_\ell$ of the form: $$\vf{k}_s=\vf{f}(t_i+c_sh,\vf{x}_i+h(a_{s1}\vf{k}_1+\cdots+a_{s(s-1)}\vf{k}_{s-1}))$$
-    for $s\geq 2$ and $\vf{k}_1=\vf{f}(t_i,\vf{x}_i)$, and impose:
-    $$\vf{x}_{i+1}=\vf{x}_i+h\sum_{s=1}^\ell b_s\vf{k}_s+\O{h^{\ell+1}}$$
+    For a method of order $s$ (see \mnameref{NC:rungekutta}), just start with $s$ values $\vf{k}_1,\ldots,\vf{k}_s$ of the form: $$\vf{k}_i=\vf{f}(t_n+c_sh,\vf{x}_n+h(a_{s1}\vf{k}_1+\cdots+a_{i(i-1)}\vf{k}_{i-1}))$$
+    for $i\geq 2$ and $\vf{k}_1=\vf{f}_n$, and impose:
+    $$\vf{x}_{n+1}=\vf{x}_n+h\sum_{i=1}^s b_i\vf{k}_i+\O{h^{s+1}}$$
   \end{remark}
   \subsubsection{Runge-Kutta methods}\label{NC:rungekutta}
+  \begin{definition}
+    The family of \emph{$s$-stage Runge-Kutta} (or \emph{RK}) methods is defined by $$\vf\phi(t,\vf{x},\vf{f},h)=\vf{x}+h\sum_{i=1}^sb_i\vf{k}_i$$
+    where the stages $\vf{k}_i\in\RR^d$ are the solutions to the coupled system of (generally nonlinear) equations
+    $$\vf{k}_i=\vf{f}(t+c_ih,\vf{x}+h\sum_{j=1}^{s}a_{ij}\vf{k}_j)\quad i=1,\ldots,s$$
+    where $c_i:=\sum_{j=1}^{s}a_{ij}$ for $i=1,\ldots,s$. Denoting $\vf{c}=(c_i)$, $\vf{b}=(b_i)$ and $\vf{A}=(a_{ij})$ we can construct the \emph{Butcher tableau}:
+    \begin{center}
+      \renewcommand{\arraystretch}{1.25}
+      \begin{tabular}{c|c}
+        $\vf{c}$ & $\vf{A}$             \\
+        \hline
+                 & $\transpose{\vf{b}}$
+      \end{tabular}
+    \end{center}
+  \end{definition}
+  \begin{lemma}
+    A Runge-Kutta method is consistent if and only if $\sum_{i=1}^sb_i=1$. If moreover, $\sum_{i=1}^sb_ic_i=\frac{1}{2}$, then it has order 2 consistency. And if the conditions $\sum_{i=1}^sb_i{c_i}^2=\frac{1}{3}$ and $\sum_{i=1}^sb_i\sum_{j=1}^sa_{ij}c_j=\frac{1}{6}$ are also satisfied, then the consistency is of order 3.
+  \end{lemma}
+  \begin{proof}
+    In the following equations we omit the evaluation at $(t_n,\vf{x}_n)$.
+    On the one hand we have:
+    \begin{align*}
+      \vf{x}'   & =\vf{f}                                                                                                                                       \\
+      \vf{x}''  & =\vf{f}_t+\vf{f}_{\vf{x}}\vf{f}=:\vf{F}                                                                                                       \\
+      \vf{x}''' & =\vf{f}_{tt}+2\vf{f}_{\vf{x}t}\vf{f}+{\vf{f}_{\vf{xx}}}\vf{f}+\vf{f}_{\vf{x}}(\vf{f}_t+{\vf{f}_{\vf{x}}}\vf{f})=:\vf{G}+\vf{f}_{\vf{x}}\vf{F}
+    \end{align*}
+    And on the other hand:
+    \begin{align*}
+      \begin{split}
+        \vf{k}_i & =\vf{f}+c_i h\vf{f}_t+\vf{f}_{\vf{x}}\left(h\sum_{j=1}^{s}a_{ij}\vf{k}_j\right)+\frac{{c_i}^2 h^2}{2}\vf{f}_{tt}+\\
+        &+c_i h^2\vf{f}_{\vf{x}t}\left(\sum_{j=1}^{s}a_{ij}\vf{k}_j\right)+\frac{h^2}{2}\vf{f}_{\vf{xx}}{\left(\sum_{j=1}^{s}a_{ij}\vf{k}_j\right)}^2\!+\O{h^3}
+      \end{split} \\
+       & =\vf{f}+c_i h\vf{F}+\frac{{c_i}^2}{2}h^2\vf{G}+\left(\sum_{j=1}^{s}a_{ij}c_j\right)\vf{f}_{\vf{x}}\vf{F}+\O{h^3}                                          \\
+    \end{align*}
+    Therefore:
+    $$\vf\tau_{n}(h)=\vf{f}+\frac{1}{2}h\vf{F}+\frac{1}{6}h^2\left(\vf{G}+\vf{f}_{\vf{x}}\vf{F}\right)+\O{h^3}-\sum_{i=1}^sb_i\vf{k}_i$$
+    Matching coefficients we get the desired result.
+  \end{proof}
+  \begin{lemma}
+    The (consistency) order $p$ of an $s$-stage Runge-Kutta method is bounded by $p\leq 2 s$. If the Runge-Kutta method is explicit, then $p\leq s$.
+  \end{lemma}
+  \begin{remark}
+    Looking at \mcref{NC:stages-orderRK} we see why the RK4, i.e. the RK method with 4 stages, is widely known.
+  \end{remark}
+  \begin{table}[H]
+    \centering
+    \begin{tabular}{c|cccccccc}
+      order & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8  \\
+      \hline
+      $s$   & 1 & 2 & 3 & 4 & 6 & 7 & 9 & 11
+    \end{tabular}
+    \caption{Number of stages of an explicit RK method needed for a given order of consistency}
+    \label{NC:stages-orderRK}
+  \end{table}
 \end{multicols}
 \end{document}

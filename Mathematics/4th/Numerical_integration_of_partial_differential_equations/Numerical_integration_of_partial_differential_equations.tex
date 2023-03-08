@@ -106,8 +106,48 @@
       \label{NIPDE:courant-friedrichs-lewy_fig}
     \end{figure}
   \end{proof}
+  % \begin{theorem}
+  %   There are no explicit, unconditionally stable, consistent finite difference schemes for hyperbolic systems of partial differential equations.
+  % \end{theorem}
+  \subsubsection{Von Neumann stability analysis}
+  \begin{definition}
+    Let $P_{k,h}{v}={f}$ be a finite difference scheme. For each $n\in\NN$, let ${\hat{v}}^n\in L^2\left(\left[-\frac{\pi}{h},\frac{\pi}{h}\right]\right)$ be the function defined as the Fourier series: $${\hat{v}}^n(\xi)=\sum_{m\in\ZZ}{v}_{m}^n\exp{-\ii m h \xi}$$ Hence $\displaystyle {v}_m^n=\frac{h}{2\pi}\int_{-\pi/h}^{\pi/h} {\hat{v}}^n(\xi)\exp{\ii mh \xi}\dd{\xi}$. We denote by ${v}^n:=({v}_m^n)\in\ell^2(\ZZ)$. We define the \emph{amplification factor} as the $2\pi$-periodic function in $\theta$, $g(\theta, k, h)$ that satisfies:
+    $${\hat{v}}^{n+1}(\xi)=g(\xi h,k,h){\hat{v}}^n(\xi)$$
+  \end{definition}
   \begin{theorem}
-    There are no explicit, unconditionally stable, consistent finite difference schemes for hyperbolic systems of partial differential equations.
+    Let $P_{k,h}{v}={f}$ be a one-step finite difference scheme with constant coefficients whose amplification factor $g(\theta,k,h)$ is continuous on $\RR\times\Lambda$, where $(k,h)\in\Lambda$ is a stability region. Then:
+    \begin{enumerate}
+      \item If $\exists K>0$ such that $\forall\theta\in\RR$ and $\forall(k,h)\in\Lambda$ we have $\abs{g(\theta,k,h)}\leq 1+Kk$, then the scheme is stable in $\Lambda$.
+      \item If $\forall K>0$ and $\forall\varepsilon>0$ $\exists\theta\in\RR$ and $\exists(k,h)\in\Lambda$ with $k<\varepsilon$ such that $\abs{g(\theta, k,h)}>1+Kk$, then the scheme is unstable.
+    \end{enumerate}
   \end{theorem}
+  \begin{proof}
+    \begin{enumerate}
+      \item We have that $${\hat{v}}^{n}(\xi)={(g(\xi h,k,h))}^n{\hat{v}}^0(\xi)$$ Therefore applying twice the \mcref{MA:parseval}:
+            \begin{align*}
+              {\norm{{v}^n}_2}^2 & =\sum_{m\in\ZZ}\abs{{v}_m^n}^2                                                      \\
+                                 & =\frac{h}{2\pi}\int_{-\pi/h}^{\pi/h} \abs{\hat{v}^n(\xi)}^2\dd{\xi}                 \\
+                                 & \leq{(1+Kk)}^{2n}\frac{h}{2\pi}\int_{-\pi/h}^{\pi/h} \abs{\hat{v}^0(\xi)}^2\dd{\xi} \\
+                                 & ={(1+Kk)}^{2n} {\norm{{v}^0}_2}^2
+            \end{align*}
+            And note that $\forall T>0$ with $nk\leq T$ we have that:
+            \begin{multline*}
+              {(1+Kk)}^{2n}\leq{(1+Kk)}^{2\frac{T}{k}}={\left({(1+Kk)}^\frac{1}{Kk}\right)}^{2 K T}\leq\\\leq \exp{2K T}=:C_T
+            \end{multline*}
+            because $\sup_{x>0}{(1+x)}^{1/x}=\exp{}$.
+      \item Let $T\geq 2$, $K>0$, and $\theta_0,h,k$ be the ones of the hypothesis with $\varepsilon=\min(1,\frac{1}{K})$. Hence, $k\leq 1$ and $Kk\leq 1$. By the continuity of $g$, $\exists \theta_1,\theta_2\in\RR$ such that $\abs{g(\theta, k,h)}>1+Kk$ $\forall\theta\in[\theta_1,\theta_2]$. Let $\hat{v}^0(\xi):=\sqrt{\frac{2\pi}{h(\theta_2-\theta_1)}}\indi{\left[\frac{\theta_1}{h},\frac{\theta_2}{h}\right]}$ and denote $v^0:=(v_m^0)\in\ell^2(\ZZ)$ its inverse transform. An easy check using show that $\norm{v^0}_2=1$. Now take $n:=\lfloor T/k \rfloor$. Thus:
+            \begin{align*}
+              {\norm{v^n}_2}^2 & =\frac{h}{2\pi}\int_{-\pi/h}^{\pi/h} \abs{\hat{v}^n(\xi)}^2\dd{\xi}                        \\
+                               & =\frac{h}{2\pi}\int_{-\pi/h}^{\pi/h} \abs{g(h\xi, k,h)}^{2n}\abs{\hat{v}^0(\xi)}^2\dd{\xi} \\
+                               & >{(1+Kk)}^{2n}                                                                             \\
+                               & >{(1+Kk)}^{\frac{2}{k}}                                                                    \\
+                               & ={\left({(1+Kk)}^{\frac{1}{Kk}}\right)}^{2K}                                               \\
+                               & \geq 2^{2K}                                                                                \\
+                               & =2^{2K}{\norm{v^0}_2}^2
+            \end{align*}
+            where the penultimate step is because $\inf_{x\in[0,1]}{(1+x)}^{1/x}=2$.
+            Hence the scheme is unstable.
+    \end{enumerate}
+  \end{proof}
 \end{multicols}
 \end{document}

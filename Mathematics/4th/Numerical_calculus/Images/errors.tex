@@ -1,0 +1,50 @@
+\documentclass{standalone}
+\usepackage{../../../../preamble_formulas}
+
+\begin{document}
+\begin{tikzpicture}
+  \begin{axis}[
+      axis lines=middle,
+      xmin=-0.02, xmax=3,
+      ymin=-0.02, ymax=1,
+      xtick=\empty, ytick=\empty,
+      ylabel={$x$},
+      xlabel={$t$},
+      legend style={at={(0.5,0)},anchor=north},
+      legend cell align={left},
+      %axis on top,
+    ]
+    \def\xmax{\pgfkeysvalueof{/pgfplots/xmax}}
+    \def\xmin{\pgfkeysvalueof{/pgfplots/xmin}}
+    \def\ymax{\pgfkeysvalueof{/pgfplots/ymax}}
+    \def\ymin{\pgfkeysvalueof{/pgfplots/ymin}}
+
+    \def\a{1}
+    \def\b{2}
+    \addplot[thick,samples=100,smooth,red,domain=0:\xmax]{0.1*exp(x)};
+    \node[circle, fill, inner sep=0pt, minimum size = 5pt,color_blue2] (A1) at ({\a},{0.1*exp(\a)}) {};
+    \node[xshift=-0.1cm,yshift=0.3cm] at (A1) {$x_n$};
+
+    \node[circle, fill, inner sep=0pt, minimum size = 5pt,color_blue2] (A2) at ({\b},{0.1*exp(\b)}) {};
+    \node[xshift=-0.3cm,yshift=0.3cm] at (A2) {$x_{n+1}$};
+
+    \node[circle, fill, inner sep=0pt, minimum size = 5pt,color_green2] (B1) at ({\a},{0.1*exp(\a)-0.2}) {};
+    \node[xshift=0.5cm,yshift=0cm] at (B1) {$\tilde{x}_n$};
+
+    \node[circle, fill, inner sep=0pt, minimum size = 5pt,color_green2] (B2) at ({\b},{0.1*exp(\b)-0.4}) {};
+    \node[xshift=0.3cm,yshift=-0.3cm] at (B2) {$\tilde{x}_{n+1}$};
+
+    \node[circle, fill, inner sep=0pt, minimum size = 5pt,orange] (C2) at ({\b},{0.1*exp(\b)-0.15}) {};
+    \node[xshift=0.3cm,yshift=-0.3cm] at (C2) {${\tilde{x}^*}_{n+1}$};
+
+    \draw[dashed, orange] (A1) -- (C2);
+    \draw[dashed, orange,color_green2] (\xmin,0.01)--(B1) -- (B2);
+
+    \draw[<->, lightgray] ({\b + 0.2},{0.1*exp(\b)}) --node[darkgray,right,pos=0.5] {$h\tau_{n+1}$}({\b + 0.2},{0.1*exp(\b)-0.15});
+
+    \draw[<->, lightgray] ({\b + 0.5},{0.1*exp(\b)}) --node[darkgray,right,pos=0.5] {$e_{n+1}$} ({\b + 0.5},{0.1*exp(\b)-0.4}) ;
+
+  \end{axis}
+\end{tikzpicture}
+
+\end{document}
