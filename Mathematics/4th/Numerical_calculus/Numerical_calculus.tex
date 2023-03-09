@@ -123,11 +123,11 @@
     Matching coefficients from \mcref{NC:heun1,NC:heun2}, we get the desired result.
   \end{proof}
   \begin{remark}
-    For a method of order $s$ (see \mnameref{NC:rungekutta}), just start with $s$ values $\vf{k}_1,\ldots,\vf{k}_s$ of the form: $$\vf{k}_i=\vf{f}(t_n+c_sh,\vf{x}_n+h(a_{s1}\vf{k}_1+\cdots+a_{i(i-1)}\vf{k}_{i-1}))$$
+    For a method of order $s$ (see \mnameref{NC:consistencyRK}), just start with $s$ values $\vf{k}_1,\ldots,\vf{k}_s$ of the form: $$\vf{k}_i=\vf{f}(t_n+c_sh,\vf{x}_n+h(a_{s1}\vf{k}_1+\cdots+a_{i(i-1)}\vf{k}_{i-1}))$$
     for $i\geq 2$ and $\vf{k}_1=\vf{f}_n$, and impose:
     $$\vf{x}_{n+1}=\vf{x}_n+h\sum_{i=1}^s b_i\vf{k}_i+\O{h^{s+1}}$$
   \end{remark}
-  \subsubsection{Runge-Kutta methods}\label{NC:rungekutta}
+  \subsubsection{Runge-Kutta methods}
   \begin{definition}
     The family of \emph{$s$-stage Runge-Kutta} (or \emph{RK}) methods is defined by $$\vf\phi(t,\vf{x},\vf{f},h)=\vf{x}+h\sum_{i=1}^sb_i\vf{k}_i$$
     where the stages $\vf{k}_i\in\RR^d$ are the solutions to the coupled system of (generally nonlinear) equations
@@ -142,7 +142,7 @@
       \end{tabular}
     \end{center}
   \end{definition}
-  \begin{lemma}
+  \begin{lemma}\label{NC:consistencyRK}
     A Runge-Kutta method is consistent if and only if $\sum_{i=1}^sb_i=1$. If moreover, $\sum_{i=1}^sb_ic_i=\frac{1}{2}$, then it has order 2 consistency. And if the conditions $\sum_{i=1}^sb_i{c_i}^2=\frac{1}{3}$ and $\sum_{i=1}^sb_i\sum_{j=1}^sa_{ij}c_j=\frac{1}{6}$ are also satisfied, then the consistency is of order 3.
   \end{lemma}
   \begin{proof}
