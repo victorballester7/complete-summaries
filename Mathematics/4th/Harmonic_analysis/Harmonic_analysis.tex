@@ -235,7 +235,7 @@
     \end{align*}
     Given $\varepsilon>0$ take $N$ such that $\int_N^\infty\abs{\frac{f(x+t)+f(x-t)}{\pi t}}\dd{t}<\varepsilon$. Since $h$ is integrable in $(0,N)$, by \mnameref{HA:riemannlebesgue} we have that $I_1\overset{R\to\infty}{\longrightarrow}0$. Then, as we can write $I_3=-2\ell \int_{2\pi RN}^\infty \frac{\sin(u)}{\pi u}\dd{u}$ we have that $I_3\overset{R\to\infty}{\longrightarrow}0$.
   \end{sproof}
-  \begin{lemma}
+  \begin{lemma}\label{HA:translated}
     Let $f\in L^p(\RR)$ with $1\leq p<\infty$. Then, $\displaystyle \lim_{a\to 0}\norm{f-T_af}_p=0$.
   \end{lemma}
   \begin{sproof}
@@ -253,22 +253,40 @@
     $$F_R(x)=\frac{{\left(\sin\left(\pi R x\right)\right)}^2}{\pi^2 R x^2}$$
   \end{lemma}
   \begin{definition}
-    Let $f\in L^1(\RR)$ and $t>0$. We define the \emph{Poisson kernel} $P_t$ as $P_t(x):=\F^{-1}(\exp{-2\pi t\abs{\xi}})$.
+    Let $t>0$. We define the \emph{Poisson kernel} $P_t$ as $P_t(x):=\F^{-1}(\exp{-2\pi t\abs{\xi}})$.
   \end{definition}
   \begin{lemma}
-    Let $f\in L^1(\RR)$ and $t>0$. Then: $$P_t(x)=\frac{t^2}{\pi(t^2+x^2)}$$
+    Let $f\in L^1(\RR)$ and $t>0$. Then:
+    \begin{align*}
+      P_t(x)     & =\frac{t^2}{\pi(t^2+x^2)}                                                                 \\
+      (f*P_t)(x) & =\int_{-\infty}^{+\infty}\exp{-2\pi t\abs{\xi}}\widehat{f}(\xi)\exp{2\pi\ii\xi x}\dd{\xi}
+    \end{align*}
   \end{lemma}
   \begin{proof}
-    Check \mcref{HA:expAbsX}.
+    Check \mcref{HA:expAbsX} for the first equality. For the other one:
+    \begin{align*}
+      (f*P_t)(x) & =\int_{-\infty}^{+\infty}f(y)P_t(x-y)\dd{y}                                                                      \\
+                 & =\int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty}f(y)\exp{-2\pi t\abs{\xi}}\exp{2\pi\ii \xi (x-y)}\dd{\xi}\dd{y} \\
+                 & =\int_{-\infty}^{+\infty}\exp{-2\pi t\abs{\xi}}\widehat{f}(\xi)\exp{2\pi\ii\xi x}\dd{\xi}
+    \end{align*}
   \end{proof}
   \begin{definition}
-    Let $f\in L^1(\RR)$ and $t>0$. We define the \emph{Weierstra\ss\ kernel} $W_t$ as $W_t(x):=\F^{-1}(\exp{-\pi t\xi^2})$.
+    Let $t>0$. We define the \emph{Weierstra\ss\ kernel} $W_t$ as $W_t(x):=\F^{-1}(\exp{-4\pi^2 t\xi^2})$.
   \end{definition}
-  \begin{lemma}
-    Let $f\in L^1(\RR)$ and $t>0$. Then: $$W_t(x)=\frac{1}{\sqrt{t}}\exp{-\pi\frac{x^2}{t}}$$
+  \begin{lemma}\label{HA:weierstrassKernel2}
+    Let $f\in L^1(\RR)$ and $t>0$. Then:
+    \begin{align*}
+      W_t(x)     & =\frac{1}{\sqrt{4\pi t}}\exp{-\frac{x^2}{4t}}                                           \\
+      (f*W_t)(x) & =\int_{-\infty}^{+\infty}\exp{-4\pi^2 t\xi^2}\widehat{f}(\xi)\exp{2\pi\ii\xi x}\dd{\xi}
+    \end{align*}
   \end{lemma}
   \begin{proof}
-    Check \mcref{HA:expX2}.
+    Check \mcref{HA:expX2} for the first equality. For the other one:
+    \begin{align*}
+      (f*W_t)(x) & =\int_{-\infty}^{+\infty}f(y)W_t(x-y)\dd{y}                                                                    \\
+                 & =\int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty}f(y)\exp{-4\pi^2 t\xi^2}\exp{2\pi\ii \xi (x-y)}\dd{\xi}\dd{y} \\
+                 & =\int_{-\infty}^{+\infty}\exp{-4\pi^2 t\xi^2}\widehat{f}(\xi)\exp{2\pi\ii\xi x}\dd{\xi}
+    \end{align*}
   \end{proof}
   \begin{proposition}
     Let $R>0$ and $t>0$. Then:
@@ -279,7 +297,7 @@
             \begin{multline*}
               \lim_{R\to \infty}\sup_{\abs{x}\geq \delta}F_R(x)=\lim_{t\to 0}\sup_{\abs{x}\geq \delta}P_t(x)=\\=\lim_{t\to 0}\sup_{\abs{x}\geq \delta}W_t(x)=0
             \end{multline*}
-      \item For all $\delta>0$, we have:
+            \item\label{HA:propsKernelsitem4} For all $\delta>0$, we have:
             \begin{multline*}
               \lim_{R\to \infty}\int_{\abs{x}\geq \delta}F_R(x)\dd{x}=\lim_{t\to 0}\int_{\abs{x}\geq \delta}P_t(x)\dd{x}=\\=\lim_{t\to 0}\int_{\abs{x}\geq \delta}W_t(x)\dd{x}=0
             \end{multline*}
@@ -288,9 +306,9 @@
   \begin{sproof}
     The first two properties are straightforward. For the third one, note that:
     \begin{align*}
-      \sup_{\abs{x}\geq \delta}F_R(x) & \leq \frac{1}{\pi^2 R \delta^2}                      \\
-      \sup_{\abs{x}\geq \delta}P_t(x) & =\frac{t^2}{\pi(t^2+\delta^2)}                       \\
-      \sup_{\abs{x}\geq \delta}W_t(x) & =\frac{1}{\sqrt{\delta}}\exp{-\pi\frac{x^2}{\delta}}
+      \sup_{\abs{x}\geq \delta}F_R(x) & \leq \frac{1}{\pi^2 R \delta^2}                        \\
+      \sup_{\abs{x}\geq \delta}P_t(x) & =\frac{t^2}{\pi(t^2+\delta^2)}                         \\
+      \sup_{\abs{x}\geq \delta}W_t(x) & =\frac{1}{\sqrt{4\pi\delta}}\exp{-\frac{x^2}{4\delta}}
     \end{align*}
 
     The last one is a consequence of the previous ones.
@@ -305,13 +323,80 @@
   \begin{sproof}
     Copy the proofs of \mnameref{MA:fejerthm0,MA:fejerthm}.
   \end{sproof}
-  \begin{theorem}
-    Let $f\in L^1(\RR)$. Then:
-    \begin{gather*}
-      \lim_{R\to\infty}\norm{\sigma_Rf-f}_1=0\\
-      \lim_{t\to 0}\norm{f*P_t-f}_1=0\\
-      \lim_{t\to 0}\norm{f*W_t-f}_1=0
-    \end{gather*}
+  \begin{lemma}\label{HA:normLpEquiv}
+    Let $E\subseteq\RR^n$ be a measurable space, $p\geq 1$, $f\in L^p(E)$ and $q$ be such that $\frac{1}{p}+\frac{1}{q}=1$. Then:
+    $$\norm{f}_p=\sup\left\{\int_Efg:\norm{g}_q=1\right\}$$
+  \end{lemma}
+  \begin{proof}
+    On the one hand using \mnameref{RFA:holder}: $$\int_Efg\leq\norm{fg}_1\leq\norm{f}_p\norm{g}_q=\norm{f}_p$$
+    Now consider $g=\frac{f^{p-1}}{{\norm{f}_p}^{\frac{p}{q}}}$. Then, $\norm{g}_q=1$ and moreover: $$\int_Efg=\int_E\frac{f^p}{{\norm{f}_p}^{\frac{p}{q}}}={\norm{f}_p}^{p-\frac{p}{q}}=\norm{f}_p$$
+  \end{proof}
+  \begin{lemma}[Minkowski's integral inequality]\label{HA:minkowski}
+    Let $E,F\subseteq\RR^n$ be measurable spaces, $p\geq 1$ and $f\in L^p(E\times F)$. Then:
+    $$\norm{\int_F h(x,y)\dd{y}}_p\leq\int_F\norm{h(\cdot,y)}_p\dd{y}$$
+  \end{lemma}
+  \begin{proof}
+    Let $q$ be such that $\frac{1}{p}+\frac{1}{q}=1$ and $g\in L^q(E)$ with $\norm{g}_q=1$. Then, using \mnameref{RFA:holder,RFA:fubini}:
+    \begin{align*}
+      \int_Eg(x)\int_F h(x,y)\dd{y}\dd{x} & =\int_F\int_E h(x,y)g(x)\dd{x}\dd{y}           \\
+                                          & \leq \int_F\norm{h(\cdot,y)}_p\norm{g}_q\dd{y} \\
+                                          & =\int_F\norm{h(\cdot,y)}_p\dd{y}
+    \end{align*}
+    Now use \mcref{HA:normLpEquiv}.
+  \end{proof}
+  \begin{theorem}\label{HA:kernelConvLp}
+    Let $f\in L^p(\RR)$ with $1\leq p\leq\infty$. Then:
+    \begin{align*}
+      \lim_{R\to\infty}\norm{\sigma_Rf-f}_p & =0 \\
+      \lim_{t\to 0}\norm{f*P_t-f}_p         & =0 \\
+      \lim_{t\to 0}\norm{f*W_t-f}_p         & =0
+    \end{align*}
   \end{theorem}
+  \begin{sproof}
+    The three of them are similar, so we only prove the first one. Using \mnameref{HA:minkowski}, we have:
+    \begin{align*}
+      \norm{\sigma_Rf-f}_p & =\norm{\int_{-\infty}^{\infty}F_R(y)(f(x-y)-f(x))\dd{y}}_p                                                               \\
+                           & \leq\int_{-\infty}^{\infty}{\left[\int_{-\infty}^{\infty}{F_R(y)}^p\abs{f(x-y)-f(x)}^p\dd{x}\right]}^{\frac{1}{p}}\dd{y} \\
+                           & = \int_{-\infty}^{\infty}F_R(y)\norm{f-T_{y/R}f}_p\dd{y}                                                                 \\
+      \begin{split}
+        & \leq \int_{\abs{y}< \delta}F_R(y)\norm{f-T_{y/R}f}_p\dd{y}+\\
+        &\hspace{3.5cm}+2\norm{f}_p\int_{\abs{y}\geq\delta}F_R(y)\dd{y}
+      \end{split}
+    \end{align*}
+    Given $\varepsilon>0$, by \mcref{HA:translated} $\exists\delta>0$ such that the first integral is bounded by $\varepsilon$. Now use this $\delta$ and \mcref{HA:propsKernelsitem4} to conclude that the second integral goes to 0 as $R\to\infty$.
+  \end{sproof}
+  \subsubsection{Fourier transform on \texorpdfstring{$L^2$}{L2}}
+  \begin{lemma}\label{HA:lemaPrePlancherel}
+    Let $f,g\in L^2(\RR)$. Then, $f*g$ is continuous and bounded. Moreover, $\norm{f*g}_\infty\leq \norm{f}_2\norm{g}_2$.
+  \end{lemma}
+  \begin{sproof}
+    The inequality follows from \mnameref{RFA:holder}. Moreover:
+    \begin{multline*}
+      \abs{(f*g)(x+h)-(f*g)(x)} \leq\\
+      \leq\int_{-\infty}^{+\infty}\abs{f(x+h-y)-f(x-y)}\abs{g(y)}\dd{y}\leq\\
+      \leq\norm{g}_2\norm{f-T_{-h}f}_2
+    \end{multline*}
+    So $f*g$ is continuous, by \mcref{HA:translated}.
+  \end{sproof}
+  \begin{theorem}[Plancherel theorem]\label{HA:plancherel}
+    Let $f\in L^1(\RR)\cap L^2(\RR)$. Then, $\widehat{f}\in L^2(\RR)$ and:
+    $$\int_{-\infty}^{+\infty}\abs{f(x)}^2\dd{x}=\int_{-\infty}^{+\infty}\abs{\widehat{f}(\xi)}^2\dd{\xi}$$
+  \end{theorem}
+  \begin{proof}
+    Let $\tilde{f}(x):=\overline{f(-x)}$. Then, $\widehat{\tilde{f}}(\xi)=\overline{\widehat{f}(\xi)}$ and so by \mcref{HA:lemaPrePlancherel} we have that $g:=f*\tilde{f}$ is continuous and bounded. Moreover $\widehat{g}(\xi)=\widehat{f}(\xi)\widehat{\tilde{f}}(\xi)=\abs{\widehat{f}(\xi)}^2$ and $g(0)=\int_{-\infty}^{+\infty}\tilde{f}(-y)f(y)\dd{y}={\norm{f}_2}^2$. On the other hand, by \mcref{HA:weierstrassKernel2} we have:
+    \begin{equation}\label{HA:planchEq}
+      (g*W_t)(0)=\int_{-\infty}^{+\infty}\exp{-4\pi^2 t\xi^2}\widehat{g}(\xi)\dd{\xi}=\int_{-\infty}^{+\infty}\exp{-4\pi^2 t\xi^2}\abs{\widehat{f}(\xi)}\dd{\xi}
+    \end{equation}
+    And by \mcref{HA:kerelConvLp}, $\displaystyle\lim_{t\to 0^+}(g*W_t)(x)=g(0)={\norm{f}_2}^2$. Thus, by the definition of limit taking $\varepsilon = {\norm{f}_2}^2$, we have that $\abs{\int_{-\infty}^{+\infty}\exp{-4\pi^2 t\xi^2}\widehat{g}(\xi)\dd{\xi}}\leq 2{\norm{f}_2}^2$ for $t$ small enough. Finally, if $t$ is that small, then $1\leq 2\exp{-4\pi^2 t\xi^2}$ and so:
+    $$\int_{-\infty}^{+\infty}\abs{\widehat{f}(\xi)}^2\dd{\xi}\leq 2\int_{-\infty}^{+\infty}\widehat{g}(\xi)\exp{-4\pi^2 t\xi^2}\dd{\xi}\leq 4{\norm{f}_2}^2<\infty$$
+    Now use \mnameref{RFA:dominated} in \mcref{HA:planchEq}.
+  \end{proof}
+  \begin{corollary}
+    Let $f,g\in L^1(\RR)\cap L^2(\RR)$. Then:
+    $$\int_{-\infty}^{+\infty}f(x)\overline{g(x)}\dd{x}=\int_{-\infty}^{+\infty}\widehat{f}(\xi)\overline{\widehat{g}(\xi)}\dd{\xi}$$
+  \end{corollary}
+  \begin{proof}
+    Use \mnameref{HA:plancherel} and \mnameref{RFA:polarization}.
+  \end{proof}
 \end{multicols}
 \end{document}

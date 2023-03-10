@@ -190,5 +190,29 @@
       \item If $\Exp(Y)> 1$, $g_Y$ has a unique non-trivial fixed point on (0,1).
     \end{enumerate}
   \end{theorem}
+  \begin{proof}
+    First suppose $\Prob(Y=0)+\Prob(Y=1)=1$. Thus, $Y\almoste{\leq}1$ and so $\Exp(Y)\leq 1$. Moreover, $g_Y(s)=\Prob(Y=0)+s\Prob(Y=1)$, which is a line with slope $\Prob(Y=1)<1$. Hence, it has a unique fixed point, which is $s=1$.
+
+    Now assume $\Prob(Y=0)+\Prob(Y=1)<1$. Then, $\exists k\geq 2$ with $\Prob(Y=k)>0$. Hence, ${g_Y}'(s)>0$ and ${g_Y}''(s)>0$ $\forall s\in (0,1)$. Now consider $f(s)=g(s)-s$. Note that $f$ is strictly convex in $(0,1)$ and $f(0)=g(0)=\Prob(Y=0)>0$. Finally note that $$\lim_{t\to 1^-} f'(s)=\lim_{t\to 1^-}g(s)-1=\Exp(Y)-1$$
+    and so $\displaystyle\lim_{t\to 1^-} f'(s)$ is negative in the first case and positive in the second case. This imply that $f$ has no zeros on $(0,1)$ in the first case and exactly 1 zero in $(0,1)$ in the second case.
+
+    It's missing to see that in the second case the probability of extinction $\rho$ is given by the fixed point in $(0,1)$, rather than 1. We have that:
+    $$\rho=\lim_{n\to\infty}g_{X_n}(0)=\lim_{n\to\infty}{g_Y}^n(0)$$
+    Since $g'>0$, we have that $g$ is increasing and so it is $g^n$ $\forall n\in\NN$. Moreover if $g(x_0)=x_0$, we have that $g^n(x_0)=x_0$ $\forall n\in\NN$. Therefore $$0<g(0)<g^2(0)<\cdots<g^n(0)<\cdots <x_0<\cdots <1$$
+    And so the limit has to be $x_0$ (note that the limit does exist because $({g_Y}^n(0))$ is an increasing bounded sequence).
+  \end{proof}
+  \subsubsection{Random walk}
+  \begin{definition}
+    A \emph{random walk} is a sequence $(\vf{S}_n)$ with $\vf{S}_0=0$ and $\vf{S}_n=\sum_{k=1}^{n}\vf{X}_n$, where $(\vf{X}_n)$ is a sequence of \iid random vectors.
+  \end{definition}
+  \begin{definition}
+    A \emph{simple random walk} is a random walk in which $X_k$ are random variables such that:
+    $$
+      X_k=\begin{cases}
+        1  & \text{with probability $p$}   \\
+        -1 & \text{with probability $1-p$}
+      \end{cases}
+    $$
+  \end{definition}
 \end{multicols}
 \end{document}
