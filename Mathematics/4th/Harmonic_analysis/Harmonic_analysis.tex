@@ -126,20 +126,23 @@
     Note that the function $h:\xi\rightarrow\exp{-2\pi\ii \xi x}f(x)$ is $\mathcal{C}^\infty(\RR)$ and $h^{(k)}(\xi)={(-2\pi\ii x)}^k\exp{-2\pi\ii \xi x}f(x)$. Since $\abs{h^{(k)}(\xi)}\leq \abs{x^kf(x)}$ we can use \mcref{RFA:diffUnderIntegralSign} to conclude the result.
   \end{proof}
   \begin{proposition}\label{HA:diffFourierTransf}
-    Let $f\in \mathcal{C}^r(\RR)\cap L^1(\RR)$ be such that $f^(k)\in L^1(\RR)$ for $k=1,\ldots,r$. Then: $$\widehat{f^{(k)}}(\xi)={(2\pi\ii\xi)}^k\widehat{f}(\xi)$$ for $k=0,1,\ldots, r$.
+    Let $f\in L^1(\RR)$ be such that $f^{(k)}\in L^1(\RR)$ for $k=1,\ldots,r$. Then: $$\widehat{f^{(k)}}(\xi)={(2\pi\ii\xi)}^k\widehat{f}(\xi)$$ for $k=0,1,\ldots, r$.
   \end{proposition}
   \begin{proof}
     We'll prove it by induction on $k$. The case $k=0$ is clear.
-    For the other ones:
+    For the other ones note that $\exists(a_n),(b_n)\in\RR$ with $\displaystyle\lim_{n\to\infty}a_n=-\infty$ and $\displaystyle\lim_{n\to\infty}b_n=+\infty$ and such that:
+    $$\lim_{n\to\infty}f^{(k-1)}(a_n)=\lim_{n\to\infty}f^{(k-1)}(b_n)=0$$
+    Hence using integration by parts:
     \begin{align*}
-      \widehat{f^{(k)}}(n) & =\int_{-\infty}^{+\infty} f^{(k)}(x)\exp{-2\pi\ii \xi x}\dd{x}              \\
+      \widehat{f^{(k)}}(n) & =\lim_{n\to\infty}\int_{a_n}^{b_n} f^{(k)}(x)\exp{-2\pi\ii \xi x}\dd{x}     \\
+      \begin{split}
+        & =\lim_{n\to\infty}  f^{(k-1)}(x)\exp{-2\pi\ii \xi x}\Big|_{a_n}^{b_n}\dd{x} +\\
+        &\hspace{2cm}+2\pi\ii \xi\lim_{n\to\infty}\int_{a_n}^{b_n}f^{(k-1)}(x)\exp{-2\pi\ii \xi x}\dd{x}
+      \end{split}    \\
                            & =2\pi\ii \xi\int_{-\infty}^{+\infty} f^{(k-1)}(x)\exp{-2\pi\ii \xi x}\dd{x} \\
                            & =\left(2\pi\ii \xi\right)\widehat{f^{(k-1)}}(n)                             \\
                            & ={\left(2\pi\ii \xi\right)}^k\widehat{f}(\xi)
     \end{align*}
-    where we have used integration by parts and the fact that $\displaystyle\lim_{a\to\infty}f^{(k-1)}(x)\exp{-2\pi\ii \xi x}\Big|_{-a}^a=0$. This is due to the existence of $\displaystyle\lim_{a\to\infty}f^{(k-1)}(a)$, which is a consequence of the \mnameref{RVF:fundamentalthmCalculus}:
-    $$f^{(k-1)}(a)=f^{(k-1)}(0)+\int_0^af^{(k)}(x)\dd{x}$$
-    whose limit exists because $f^{(k)}\in L^1(\RR)$.
   \end{proof}
   \begin{remark}
     Note that there exists functions $f\in\mathcal{C}(\RR)\cap L^1(\RR)$ for which the limit $\displaystyle\lim_{x\to\infty} f(x)$ does not exist.
@@ -365,7 +368,39 @@
     \end{align*}
     Given $\varepsilon>0$, by \mcref{HA:translated} $\exists\delta>0$ such that the first integral is bounded by $\varepsilon$. Now use this $\delta$ and \mcref{HA:propsKernelsitem4} to conclude that the second integral goes to 0 as $R\to\infty$.
   \end{sproof}
-  \subsubsection{Fourier transform on \texorpdfstring{$L^2$}{L2}}
+  \subsubsection{Fourier transform on \texorpdfstring{$\RR^n$}{Rn}}
+  In this section we will only expose the most important results of extending the Fourier transform to $L^1(\RR^n)$. Moreover we will not prove any of the results of this section as they are completely analogous to the previous ones.
+  \begin{definition}
+    Let $f\in L^1(\RR^n)$. We define the \emph{Fourier transform} of $f$ as:
+    $$\widehat{f}(\vf\xi)=\int_{\RR^n}f(\vf{x})\exp{-2\pi \ii\langle \vf\xi, \vf{x}\rangle}\dd{\vf{x}}$$
+    The function $f$ is also called \emph{inverse Fourier transform} of $\widehat{f}$.
+  \end{definition}
+  \begin{proposition}
+    Let $f,g\in L^1(\RR^n)$ and $\alpha,\beta\in\RR$. Then:
+    \begin{enumerate}
+      \item $\widehat{(\alpha f+\beta g)}(\vf\xi)=\alpha\widehat{f}(\xi)+\beta \widehat{g}(\vf\xi)$
+      \item Let $\vf{h}\in\RR^n$. We define $T_{\vf{h}}f(x)=f(\vf{x}+\vf{h})$. Then: $$\widehat{T_{\vf{h}}f}(\vf\xi)=\exp{2\pi\ii \langle\vf\xi, \vf{h}\rangle}\widehat{f}(\vf\xi)$$
+      \item If $g(\vf{x})=\exp{2\pi\ii \langle\vf{x}, \vf{h}\rangle}f(\vf{x})$, then: $$\widehat{g}(\vf\xi)=\widehat{f}(\vf\xi-\vf{h})$$
+      \item If $\lambda\in\RR^*$, then: $$\frac{1}{\lambda^n}\widehat{f\left(\frac{\vf{x}}{\lambda}\right)}(\xi)=\widehat{f}(\lambda\vf\xi)$$
+      \item If $g(\vf{x})=\overline{f(\vf{x})}$, then: $$\widehat{g}(\vf\xi)=\overline{\widehat{f}(-\vf\xi)}$$
+    \end{enumerate}
+  \end{proposition}
+  \begin{theorem}[Riemann-Lebesgue lemma]
+    Let $f\in L^1(\RR^n)$ and denote also by $\F$ the extension of the Fourier transform operator to $L^1(\RR^n)$. Then:
+    \begin{enumerate}
+      \item $\F f$ is uniformly continuous.
+      \item $\F$ is a continuous linear operator from $L^1(\RR)$ to $L^\infty(\RR)$ and $\norm{\F f}_{\infty}\leq \norm{f}_1$.
+      \item $\displaystyle\lim_{\abs{\vf\xi}\to\infty} \abs{\widehat{f}(\vf\xi)}=0$
+    \end{enumerate}
+  \end{theorem}
+  \begin{proposition}
+    Let $f$ be a function such that $\xi_j f\in L^1(\RR^n)$. Then, $\widehat{f}$ is differentiable with respect to $\xi_j$ and:
+    $$\pdv{(\F f)}{\xi_j}(\vf\xi)=\F({(-2\pi\ii \xi_j)}f(\vf{x}))$$
+  \end{proposition}
+  \begin{proposition}
+    Let $f\in L^1(\RR^n)$ be differentiable with respect to $x_j$ such that $\pdv{f}{x_j}\in L^1(\RR^n)$. Then: $$\widehat{\pdv{f}{x_j}}(\vf\xi)={2\pi\ii\xi_j}\widehat{f}(\vf\xi)$$
+  \end{proposition}
+  \subsubsection{Fourier transform on \texorpdfstring{$L^2(\RR)$}{L2(R)}}
   \begin{lemma}\label{HA:lemaPrePlancherel}
     Let $f,g\in L^2(\RR)$. Then, $f*g$ is continuous and bounded. Moreover, $\norm{f*g}_\infty\leq \norm{f}_2\norm{g}_2$.
   \end{lemma}
@@ -389,7 +424,7 @@
     \end{equation}
     And by \mcref{HA:kerelConvLp}, $\displaystyle\lim_{t\to 0^+}(g*W_t)(x)=g(0)={\norm{f}_2}^2$. Thus, by the definition of limit taking $\varepsilon = {\norm{f}_2}^2$, we have that $\abs{\int_{-\infty}^{+\infty}\exp{-4\pi^2 t\xi^2}\widehat{g}(\xi)\dd{\xi}}\leq 2{\norm{f}_2}^2$ for $t$ small enough. Finally, if $t$ is that small, then $1\leq 2\exp{-4\pi^2 t\xi^2}$ and so:
     $$\int_{-\infty}^{+\infty}\abs{\widehat{f}(\xi)}^2\dd{\xi}\leq 2\int_{-\infty}^{+\infty}\widehat{g}(\xi)\exp{-4\pi^2 t\xi^2}\dd{\xi}\leq 4{\norm{f}_2}^2<\infty$$
-    Now use \mnameref{RFA:dominated} in \mcref{HA:planchEq}.
+    Now use \mnameref{RFA:dominated} in \mcref{HA:planchEq} and make $t\to 0$.
   \end{proof}
   \begin{corollary}
     Let $f,g\in L^1(\RR)\cap L^2(\RR)$. Then:
@@ -397,6 +432,220 @@
   \end{corollary}
   \begin{proof}
     Use \mnameref{HA:plancherel} and \mnameref{RFA:polarization}.
+  \end{proof}
+  \begin{proposition}\label{HA:preDefFTinL2}
+    Let $f\in L^2(\RR)$. Then, $\exists(f_n)\in L^1(\RR)\cap L^2(\RR)$ such that $\displaystyle\lim_{n\to\infty}\norm{f-f_n}_2=0$.
+  \end{proposition}
+  \begin{sproof}
+    Take the sequence $f_n(x)=f(x)\indi{[-n,n]}(x)$.
+  \end{sproof}
+  \begin{proposition}
+    Let $f\in L^2(\RR)$ and $(f_n)\in L^1(\RR)\cap L^2(\RR)$ such that $\displaystyle\lim_{n\to\infty}\norm{f-f_n}_2=0$. Then, the limit $\displaystyle\lim_{n\to\infty}\widehat{f_n}(\xi)$ exists and we will call it $\widehat{f}(\xi)$.
+  \end{proposition}
+  \begin{proof}
+    Since $L^2(\RR)$ is Hilbert, $(f_n)$ is Cauchy. But by \mnameref{HA:plancherel}, $(\widehat{f_n})$ is also Cauchy and so it has limit, because $(\widehat{f_n})\in L^2(\RR)$.
+
+    To see that the definition is well-defined, suppose $(g_n)\in L^1(\RR)\cap L^2(\RR)$ is another sequence such that $\displaystyle\lim_{n\to\infty}\norm{f-g_n}_2=0$. But in that case:
+    $$\norm{g_n-f_n}_2\leq\norm{g_n-f}_2+\norm{f-f_n}_2\overset{N\to\infty}{\longrightarrow}0$$
+  \end{proof}
+  \begin{remark}
+    Note that the abuse of notation in the definition of the limit make sense as it coincides with the ordinary Fourier transform when $f\in L^1(\RR)$ (by taking $f_n=f$ $\forall n\in\NN$).
+  \end{remark}
+  \begin{theorem}
+    Let $f,g\in L^2(\RR)$. Then:
+    \begin{enumerate}
+      \item $\displaystyle\widehat{f}(\xi)\overset{L^2}{=}\lim_{n\to\infty}\int_{-n}^nf(x)\exp{-2\pi\ii \xi x}\dd{x}$
+      \item $\norm{f}_2=\norm{\widehat{f}}_2$
+      \item $\displaystyle\int_{-\infty}^{+\infty}f(x)\widehat{g}(x)\dd{x}=\int_{-\infty}^{+\infty}\widehat{f}(x)g(x)\dd{x}$
+      \item $\displaystyle\int_{-\infty}^{+\infty}f(x)\overline{g}(x)\dd{x}=\int_{-\infty}^{+\infty}\widehat{f}(x)\overline{\widehat{g}}(x)\dd{x}$
+    \end{enumerate}
+  \end{theorem}
+  \begin{proof}
+    The first property follows from its definition. For the second one, if $\displaystyle f(x)\overset{L^2}{=}\lim_{n\to\infty}f_n(x)$, by \mnameref{HA:plancherel} we have $\norm{f_n}_2=\norm{\widehat{f}}_2$. Now use the continuity of the norm. For the other properties, take the function given in the proof of \mcref{HA:preDefFTinL2} and use the \mnameref{RFA:monotone}.
+  \end{proof}
+  \begin{lemma}[Generalized Hölder's inequality]\label{HA:holderGeneralized}
+    Let $E\subseteq\RR^n$ be a measurable set, $1\leq p_1,\ldots,p_n\leq \infty$ be such that $\sum_{i=1}^n\frac{1}{p_i}=1$ and ${f_i}\in L^{p_i}(E)$. Then:
+    $$\norm{\prod_{i=1}^{n}f_i}_r\leq\prod_{i=1}^{n}\norm{{f_i}}_{p_i}$$
+  \end{lemma}
+  \begin{proof}
+    We will prove it by induction on $n$. For $n=1$ the result is clear. For $n\geq 2$, note that the numbers $q_n=\frac{p_n}{p_n-1}$ and $p_n$ are Hölder conjugates. Moreover, if we define $r_i=p_i\left(1-\frac{1}{p_n}\right)$ we have that $\sum_{i=1}^{n-1}\frac{1}{r_i}=1$ and so using \mnameref{RFA:holder} we have:
+    \begin{align*}
+      \norm{{f_1\cdots f_n}}_1 & \leq \norm{{f_1\cdots f_{n-1}}}_{q_n}\norm{f_n}_{p_n}                                                                    \\
+                               & = {\norm{\abs{f_1\cdots f_{n-1}}^{q_n}}_{1}}^{\frac{1}{q_n}}\norm{f_n}_{p_n}                                             \\
+                               & \leq {\norm{\abs{f_1}^{q_n}}_{r_1}}^{\frac{1}{q_n}}\cdots {\norm{\abs{f_1}^{q_n}}_{r_1}}^{\frac{1}{q_n}}\norm{f_n}_{p_n} \\
+                               & =\norm{f_1}_{p_1}\cdots\norm{f_n}_{p_n}
+    \end{align*}
+    where in the penultimate step we have used the induction hypothesis and in the last equality we have used the fact that $r_iq_n=p_i$.
+  \end{proof}
+  \begin{lemma}[Young's convolution inequality]\label{HA:youngConvolution}
+    Let $f\in L^p(\RR^n)$, $g\in L^q(\RR^n)$ and take $r$ such that $$\frac{1}{p}+\frac{1}{q}=\frac{1}{r}+1$$ with $1\leq p,q,r\leq \infty$. Then: $$\norm{f*g}_r\leq\norm{f}_p\norm{g}_q$$
+  \end{lemma}
+  \begin{sproof}
+    Note that:
+    \begin{multline*}
+      \abs{(f*g)(x)} \\
+      \leq\int_{\RR^n}{\left(\abs{f(y)}^{p}\abs{g(x-y)}^{q}\right)}^\frac{1}{r}\abs{f(y)}^{1-\frac{p}{r}}\abs{g(x-y)}^{1-\frac{q}{r}}\dd{y}    \\
+      \leq \norm{{\left(\abs{f(y)}^{p}\abs{g(x-y)}^{q}\right)}^\frac{1}{r}}_r\norm{\abs{f(y)}^{\frac{r-p}{r}}}_{\frac{pr}{r-p}}\cdot\\\cdot\norm{\abs{g(x-y)}^{\frac{r-q}{r}}}_{\frac{qr}{r-q}}
+    \end{multline*}
+    where in the second inequality we have used the \mnameref{HA:holderGeneralized} because:
+    $$\frac{1}{r}+\frac{r-p}{pr}+\frac{r-q}{qr}=\frac{1}{p}+\frac{1}{q}-\frac{1}{r}=1$$
+    Finally:
+    \begin{align*}
+      {\norm{f*g}_r}^r & \leq {\norm{f}_p}^{r-p}{\norm{g}_q}^{r-q} \int_{\RR^n}\int_{\RR^n}\abs{f(y)}^{p}\abs{g(x-y)}^{q}\dd{y}\dd{x} \\
+                       & ={\norm{f}_p}^{r-p}{\norm{g}_q}^{r-q} {\norm{f}_p}^{p}{\norm{g}_q}^{q}                                       \\
+                       & ={\norm{f}_p}^{r}{\norm{g}_q}^{r}
+    \end{align*}
+    where in the second equality we have used the \mnameref{RFA:fubini}.
+  \end{sproof}
+  \begin{theorem}
+    Let $f\in L^2(\RR)$ and $g\in L^1(\RR)$. Then, $\widehat{f*g}\in L^2(\RR)$ and:$$\widehat{f*g}(\xi)=\widehat{f}(\xi)\widehat{g}(\xi)$$
+  \end{theorem}
+  \begin{proof}
+    By \mnameref{HA:youngConvolution} with $p=r=2$ and $q=1$ we have:
+    $$\norm{f*g}_2\leq\norm{f}_2\norm{g}_1<\infty$$
+    The equality follows in the same way as in $L^1(\RR)$.
+  \end{proof}
+  \begin{lemma}
+    Let $f\in L^p(\RR)$ with $1<p<2$. Then, there exist functions $f_1\in L^1(\RR)$ and $f_2\in L^2(\RR)$ such that $f=f_1+f_2$.
+  \end{lemma}
+  \begin{proof}
+    The set $E:=\{\abs{f}\geq 1\}$ has finite measure because $f\in L^p(\RR)$. Now consider the Functions
+    \begin{gather*}
+      f_1(x):=\begin{cases}
+        f(x) & \text{if }x\in E    \\
+        0    & \text{if }x\notin E
+      \end{cases}\qquad
+      f_2(x):=\begin{cases}
+        0    & \text{if }x\in E    \\
+        f(x) & \text{if }x\notin E
+      \end{cases}
+    \end{gather*}
+    By \mnameref{RFA:holder}, $f_1\in L^1(\RR)$ because $\m{E}<\infty$. On the other hand: $$\int_{-\infty}^{\infty}\abs{f_2(x)}^2\dd{x}=\int_{\RR\setminus E}\abs{f(x)}^2\dd{x}\leq \int_{\RR\setminus E}\abs{f(x)}^p\dd{x}<\infty$$
+    because $\abs{f}<1$ in $\RR\setminus E$.
+    So $f_2\in L^2(\RR)$.
+  \end{proof}
+  \begin{definition}
+    Let $f=f_1+f_2\in L^p(\RR)$ with $1<p<2$ with $f_1\in L^1(\RR)$ and $f_2\in L^2(\RR)$. We define the Fourier transform of $f$ as:
+    $$\widehat{f}(\xi):=\widehat{f_1}(\xi)+\widehat{f_2}(\xi)$$
+  \end{definition}
+  \begin{remark}
+    This definition is well-defined. Indeed, suppose $f=g_1+g_2$ with $1<p<2$ with $g_1\in L^1(\RR)$ and $g_2\in L^2(\RR)$. Then, $f_1-g_1=g_2-f_2\in L^1(\RR)\cap L^2(\RR)$ and so $$\widehat{f_1}-\widehat{g_1}=\widehat{f_1-g_1}=\widehat{f_2-g_2}=\widehat{f_2}-\widehat{g_2}$$
+    Hence, $\widehat{f}=\widehat{f_1}+\widehat{f_2}=\widehat{g_1}+\widehat{g_2}$.
+  \end{remark}
+  \subsubsection{Applications of the Fourier transform}
+  \begin{remark}
+    Probably the most important application of Fourier series is the resolution of pdes and it is a consequence of \mcref{HA:diffFourierTransf}, which reduces any order of a pde in the spatial variable to 1. The procedure is to compute the Fourier transform $\F$ of the pde, solve it, and then get back to the first function using the inverse transform.
+  \end{remark}
+  \begin{theorem}[Uncertainty principle]
+    Let $f\in L^2(\RR)$ such that $xf^2\in L^1(\RR)$ and $f'\in L^2(\RR)$. Then:
+    $$\left(\int_{-\infty}^\infty x^2 \abs{f(x)}^2\dd{x}\right)\left(\int_{-\infty}^\infty \xi^2 \abs{\widehat{f}(\xi)}^2\dd{\xi}\right)\geq \frac{{\norm{f}_2}^4}{16\pi^2}$$
+    and the equality holds if and only if $f(x)=\exp{-\lambda^2x^2}$, $\lambda\in\RR$.
+  \end{theorem}
+  \begin{proof}
+    Let $I$ be the left-hand-side term of the inequality. First note that:
+    $$\int_{-\infty}^\infty \xi^2 \abs{\widehat{f}(\xi)}^2\dd{\xi}=\frac{1}{4\pi^2}\int_{-\infty}^\infty \abs{\widehat{f'}(\xi)}^2\dd{\xi}=\frac{1}{4\pi^2}\int_{-\infty}^\infty \abs{{f'}(\xi)}^2\dd{\xi}$$
+    where the first equality is by the analogous \mcref{HA:diffFourierTransf} in $L^2(\RR)$ and in the second one we have used \mnameref{HA:plancherel}.
+    Now by the \mnameref{RFA:cauchyschwarz}, we have:
+    \begin{align*}
+      I & \geq \frac{1}{4\pi^2}{\left(\int_{-\infty}^\infty x\abs{f(x){f'}(x)}\dd{x}\right)}^2         \\
+        & \geq \frac{1}{4\pi^2}{\left(\int_{-\infty}^\infty x\Re(f(x)\overline{f'(x)})\dd{x}\right)}^2 \\
+        & = \frac{1}{16\pi^2}{\left(\int_{-\infty}^\infty x\dv{}{x}(\abs{f(x)}^2)\dd{x}\right)}^2      \\
+        & = \frac{1}{16\pi^2}{\left(\int_{-\infty}^\infty \abs{f(x)}^2\dd{x}\right)}^2                 \\
+    \end{align*}
+    where in the third step we have used that:
+    $$\dv{}{x}(\abs{f(x)}^2)=2\Re(f(x)\overline{f'(x)})$$
+    and in the last step we have integrated by parts (here we use that $xf^2\in L^1(\RR)$).
+  \end{proof}
+  \begin{theorem}[Poisson summation formula]
+    Let $f\in\mathcal{C}(\RR)\cap L^1(\RR)$ be such that $\sum_{k\in\ZZ}f(x+k)$ converges uniformly for $x\in[0,1]$ and such that $\sum_{k\in\ZZ}\abs{\widehat{f}(k)}<\infty$. Then:
+    $$\sum_{k\in\ZZ}f(x+k)=\sum_{k\in\ZZ}\widehat{f}(k)\exp{2\pi\ii k x}$$
+    In particular, for $x=0$ we have:
+    $$\sum_{k\in\ZZ}f(k)=\sum_{k\in\ZZ}\widehat{f}(k)$$
+  \end{theorem}
+  \begin{proof}
+    Let $F(x):=\sum_{k\in\ZZ}f(x+k)$. Note that $F$ is 1-periodic. If we see that $\widehat{F}(n)=\widehat{f}(n)$ $\forall n\in\ZZ$, the continuity of $f$ and the convergence of its Fourier series will imply $F(x)=\sum_{k\in\ZZ}\widehat{f}(k)\exp{2\pi\ii k x}$. But:
+    \begin{align*}
+      \widehat{F}(n) & =\int_{0}^{1}\sum_{k\in\ZZ}f(x+k)\exp{-2\pi\ii n x}\dd{x}     \\
+                     & =\sum_{k\in\ZZ}\int_{0}^{1}f(x+k)\exp{-2\pi\ii n x}\dd{x}     \\
+                     & =\sum_{k\in\ZZ}\int_{k}^{k+1}f(x)\exp{-2\pi\ii n (x-k)}\dd{x} \\
+                     & =\sum_{k\in\ZZ}\int_{k}^{k+1}f(x)\exp{-2\pi\ii n x}\dd{x}     \\
+                     & =\int_{-\infty}^{\infty}f(x)\exp{-2\pi\ii n x}\dd{x}          \\
+                     & =\widehat{f}(n)
+    \end{align*}
+  \end{proof}
+  \begin{definition}
+    Let $f\in L^2(\RR)$. We say that $f$ is \emph{bandlimited} if $\exists B\in\RR$ such that $\supp\widehat{f}\subseteq[-B,B]$.
+  \end{definition}
+  \begin{theorem}[Nyquist-Shannon sampling theorem]
+    Let $f\in L^2(\RR)$ be bandlimited with constant $B$. Then:
+    $$f(x)\overset{L^2}{=}\sum_{k\in\ZZ}f\left(\frac{k}{2B}\right)\frac{\sin(\pi(2Bx-k))}{\pi(2Bx-k)}$$
+    Moreover: $${\norm{f}_2}^2=\frac{1}{2B}\sum_{k\in\ZZ}\abs{f\left(\frac{k}{2B}\right)}^2$$
+  \end{theorem}
+  \begin{proof}
+    An easy check shows that the Fourier series of $\xi\mapsto\exp{2\pi\ii x\xi}$ on $[-B, B]$ is: $$\exp{2\pi\ii x\xi}=\sum_{k\in\ZZ}\frac{\sin(\pi(2Bx-k))}{\pi(2Bx-k)}\exp{\frac{\pi\ii k\xi}{B}}$$
+    Thus:
+    \begin{align*}
+      f(x) & =\int_{-B}^{B}\widehat{f}(\xi)\exp{2\pi\ii \xi x}\dd{\xi}                                                           \\
+           & =\sum_{k\in\ZZ}\frac{\sin(\pi(2Bx-k))}{\pi(2Bx-k)}\int_{-B}^{B}\widehat{f}(\xi)\exp{\frac{\pi\ii k\xi}{B}} \dd{\xi} \\
+           & =\sum_{k\in\ZZ}f\left(\frac{k}{2B}\right)\frac{\sin(\pi(2Bx-k))}{\pi(2Bx-k)}
+    \end{align*}
+    The second equality follows from both \mnameref{HA:plancherel,MA:parseval}:
+    $${\norm{f}_2}^2={\norm{\widehat{f}}_2}^2=\frac{1}{2B}\sum_{k\in\ZZ}\abs{f\left(\frac{k}{2B}\right)}^2$$
+    because by a similar argument as before, the Fourier coefficients of $\widehat{f}(k)$ (thought as periodically extended) are $\frac{1}{2B}f\left(\frac{-k}{2B}\right)$.
+  \end{proof}
+  \subsubsection{Discrete Fourier transform}
+  \begin{definition}
+    Consider a function $f$ with support $\{0,\ldots,N-1\}$. We can think $f$ as:
+    $$\function{f}{\ZZ}{\CC}{k}{f(k\mod{n})=:f[k]}$$
+    Note that with this definition, $f$ is $N$-periodic. We define the \emph{discrete Fourier transform} (\emph{DFT}) of $f$ as:
+    $$\widehat{f}[k]:=\sum_{n=0}^{N-1}f[n]\exp{-\frac{2\pi\ii nk}{N}}$$
+    If we denote $\omega_N:=\exp{-\frac{2\pi\ii nk}{N}}$ we can write:
+    $$\widehat{f}[k]=\sum_{n=0}^{N-1}f[n]{\omega_N}^n$$
+    We will denote $\vf{f}:=(f[0],\ldots,f[N-1])$
+  \end{definition}
+  \begin{proposition}
+    Let $f,g:\ZZ\rightarrow\CC$. Then:
+    \begin{enumerate}
+      \item $\widehat{f}$ is linear.
+      \item If $n\in\ZZ$ and $g[k]=f[k-n]$ $\forall k\in\ZZ$, then: $$\widehat{g}[k]=\widehat{f}[k]\exp{-\frac{2\pi\ii k n}{N}}$$
+      \item If $g[k]=\overline{f[k]}$ $\forall k\in\ZZ$, then: $$\widehat{g}[k]=\overline{\widehat{f}[N-k]}$$
+    \end{enumerate}
+  \end{proposition}
+  \begin{proposition}
+    Let $f:\ZZ\rightarrow\CC$. Then, $\vf{\widehat{f}}=\vf{A}(\omega_N)\vf{f}$, where
+    $$\vf{A}(\omega_N)=\!\begin{pmatrix}
+        1      & 1                & 1                   & \cdots & 1                       \\
+        1      & \omega_N         & {\omega_N}^2        & \cdots & {\omega_N}^{N-1}        \\
+        1      & {\omega_N}^2     & {\omega_N}^4        & \cdots & {\omega_N}^{2(N-1)}     \\
+        \vdots & \vdots           & \vdots              & \ddots & \vdots                  \\
+        1      & {\omega_N}^{N-1} & {\omega_N}^{2(N-1)} & \cdots & {\omega_N}^{(N-1)(N-1)}
+      \end{pmatrix}$$
+  \end{proposition}
+  is a symmetric matrix.
+  \begin{lemma}
+    Let $N\in\NN$. Then, $$\vf{A}(\omega_N)\vf{A}(\overline{\omega_N})=\vf{A}(\overline{\omega_N})\vf{A}(\omega_N)=N\vf{I}_N$$
+  \end{lemma}
+  \begin{sproof}
+    Remember that both ${\omega_N}$ and $\overline{\omega_N}$ are roots of $1+x+\cdots+x^{N-1}$.
+  \end{sproof}
+  \begin{definition}
+    Let $f:\ZZ\rightarrow\CC$. We define the \emph{inverse discrete Fourier transform} as:
+    $$\vf{f}=\frac{1}{N}\vf{A}(\overline{\omega_N})\vf{\widehat{f}}$$
+  \end{definition}
+  \begin{theorem}[Plancherel theorem]
+    Let $f:\ZZ\rightarrow\CC$. Then:
+    $$\sum_{k=0}^{N-1}f[k]\overline{g[k]}=\frac{1}{N}\sum_{k=0}^{N-1}\widehat{f}[k]\overline{\widehat{g}[k]}$$
+    In particular, if $f=g$, we have:
+    $$\sum_{k=0}^{N-1}\abs{f[k]}^2=\frac{1}{N}\sum_{k=0}^{N-1}\abs{\widehat{f}[k]}^2$$
+  \end{theorem}
+  \begin{proof}
+    Using vector notation:
+    \begin{align*}
+      \dotp{\transpose{\vf{f}}}{\overline{\vf{g}}} & =\transpose{\left(\frac{1}{N}\vf{A}(\overline{\omega_N})\vf{\widehat{f}}\right)}\left(\frac{1}{N}\overline{\vf{A}(\overline{\omega_N})}\vf{\widehat{\overline{g}}}\right) \\
+                                                   & =\frac{1}{N^2}\transpose{\vf{\widehat{f}}}\transpose{\vf{A}(\overline{\omega_N})}\vf{A}({\omega_N})\vf{\widehat{\overline{g}}}                                            \\
+                                                   & =\frac{1}{N}\dotp{\transpose{\vf{\widehat{f}}}}{\vf{\widehat{\overline{g}}}}
+    \end{align*}
+    because $\vf{A}(\overline{\omega_N})$ is symmetric.
   \end{proof}
 \end{multicols}
 \end{document}

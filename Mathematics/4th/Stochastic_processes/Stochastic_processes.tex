@@ -142,7 +142,7 @@
     \end{tabular}
     \captionof{table}{Probability-generating functions of common distributions.}
   \end{center}
-  \subsection{Discrete-time Markov chain}
+  \subsection{Discrete-time Markov chains}
   \subsubsection{Galton-Watson process}
   \begin{model}\label{SP:galtonwatsonModel}
     Let $(X_n)$, $n\in\NN\cup\{0\}$ be a sequence of discrete random vairables representing the number of new individuals of a certain population at the $n$-th generation. Suppose they are defined as $$X_{n+1}=\sum_{k=1}^{X_n}Y_{n+1}^{(k)}$$ and $X_0=1$. Here $Y_{n+1}^{(k)}$ has outcomes in $\NN\cup\{0\}$ $\forall n,k$ and represent the number of descendants (to the next generation) of the $k$-th individual of the $n$-th generation. Suppose that $Y_{n+1}^{(k)}\sim Y$ are \iid We would like to study the probability $\rho$ of extinction of this population: $$\rho=\Prob(\{X_n=0:\text{for some $n\in\NN$}\})=\Prob\left(\bigcup_{n=1}^\infty\{X_n=0\}\right)$$
@@ -161,7 +161,7 @@
     \end{align*}
     Now if $N$ can take any value of $\NN\cup\{0\}$ we have that:
     \begin{align*}
-      g_X(s) & =\Exp(s^{\sum_{i=1}^{N}Y_i})                                     \\
+      g_X(s) & =\Exp\left(s^{\sum_{i=1}^{N}Y_i}\right)                          \\
              & =\Exp\left(\lim_{M\to\infty}s^{\sum_{i=1}^{\min(N,M)}Y_i}\right) \\
              & =\lim_{M\to\infty}\Exp\left(s^{\sum_{i=1}^{\min(N,M)}Y_i}\right) \\
              & =\lim_{M\to\infty}g_{\min(N,M)}(g_Y(s))                          \\
@@ -201,9 +201,79 @@
     Since $g'>0$, we have that $g$ is increasing and so it is $g^n$ $\forall n\in\NN$. Moreover if $g(x_0)=x_0$, we have that $g^n(x_0)=x_0$ $\forall n\in\NN$. Therefore $$0<g(0)<g^2(0)<\cdots<g^n(0)<\cdots <x_0<\cdots <1$$
     And so the limit has to be $x_0$ (note that the limit does exist because $({g_Y}^n(0))$ is an increasing bounded sequence).
   \end{proof}
-  \subsubsection{Random walk}
+  \subsubsection{Gambler's ruin}
+  \begin{definition}[Gambler's ruin problem]
+    Consider a gambler with an initial capital $z\in\ZZ$ and suppose that he plays a game in which wins 1 unit of capital with probability $p$ and loses 1 unit of capital with probability $q:=1-p$. The game ends whenever the player is ruined or if he arrives to a capital of $a\in\ZZ$. All the plays are independent. We denote by $(X_k)$ the variables that measure the $k$-th play. That is: $$\Prob(X_k=1)=p\qquad\Prob(X_k=-1)=q$$
+    We define $q_z$ as the probability of ruining himself starting with a capital of $z$, $p_z$ as the probability of winning the game starting with a capital of $z$ and $D_z$ as the duration of the game starting with a capital of $z$.
+  \end{definition}
+  \begin{proposition}
+    Consider the Gambler's ruin problem. Then:
+    $$q_z=\begin{cases}
+        \frac{-{\left(\frac{q}{p}\right)}^a+{\left(\frac{q}{p}\right)}^z}{1-{\left(\frac{q}{p}\right)}^a} & \text{if $p\ne 1/2$} \\
+        1-\frac{z}{a}                                                                                     & \text{if $p= 1/2$}
+      \end{cases}$$
+  \end{proposition}
+  \begin{sproof}
+    We have that $q_k$ solves the differenc equation:
+    \begin{multline*}
+      q_k =\Prob(\text{ruin}\mid X_k=1)\Prob(X_1=1)+\\
+      +\Prob(\text{ruin}\mid X_k=-1)\Prob(X_1=-1) =q_{k+1}p+q_{k-1}q
+    \end{multline*}
+    with $q_0=1$ and $q_a=0$, whose solution is straightforward.
+  \end{sproof}
+  \begin{proposition}
+    Consider the Gambler's ruin problem. Suppose that we play against another player (and so when we lose, he wins and viceversa). Let $p_z^*$, $q_z^*$ be the respective probabilities for the other player. Then:
+    $$q_z+q_z^*=1$$
+    Hence, $D\almoste{<}\infty$.
+  \end{proposition}
+  \begin{sproof}
+    Note that
+    $$q_z^*=\begin{cases}
+        \frac{-{\left(\frac{p}{q}\right)}^a+{\left(\frac{p}{a}\right)}^{a-z}}{1-{\left(\frac{p}{q}\right)}^a} & \text{if $p\ne 1/2$} \\
+        1-\frac{a-z}{a}                                                                                       & \text{if $p= 1/2$}
+      \end{cases}$$
+  \end{sproof}
+  \begin{proposition}
+    Let $d_z=\Exp(D_z)$ and suppose that this expectation is finite. Then:
+    $$
+      d_z=\begin{cases}
+        \frac{z}{q-p}-\frac{a}{q-p}\frac{1-{\left(\frac{q}{p}\right)}^z}{1-{\left(\frac{q}{p}\right)}^a} & \text{if $p\ne 1/2$} \\
+        z(a-z)                                                                                           & \text{if $p= 1/2$}
+      \end{cases}
+    $$
+  \end{proposition}
+  \begin{proof}
+    We have that $q_k$ solves the differenc equation:
+    \begin{multline*}
+      d_k =\Exp(D_k\mid X_k=1)\Prob(X_1=1)+\\
+      +\Exp(D_k\mid X_k=-1)\Prob(X_1=-1) =\\=\Exp(D_{k+1}+1)p+\Exp(D_{k-1}+1)q= d_{k+1}p+d_{k-1}q+1
+    \end{multline*}
+    with $d_0=0$ and $d_a=0$, whose solution is straightforward. The second equality is due to the independence and the \mnameref{SP:substitutionPrinciple}.
+  \end{proof}
+  \subsubsection{Markov chains}
   \begin{definition}
-    A \emph{random walk} is a sequence $(\vf{S}_n)$ with $\vf{S}_0=0$ and $\vf{S}_n=\sum_{k=1}^{n}\vf{X}_n$, where $(\vf{X}_n)$ is a sequence of \iid random vectors.
+    A \emph{Markov chain} is a sequence of random variables discrete random variables $(X_n)$ with support $I$ such that:
+    \begin{multline*}
+      \Prob(X_{n+1}=j\mid X_0=i_0,\ldots,X_{n-1}=i_{n-1},X_n=i)=\\=\Prob(X_{n+1}=j\mid X_n=i)
+    \end{multline*} for all $i_0,\ldots,i_{n-1},i,j\in I$. This property is usually called \emph{Markov property}.
+    If moreover $\Prob(X_{n+1}=j\mid X_n=i)$ does not depend on $n$, then we say that the Markov chain is a \emph{time-homogeneous Markov chain}.
+  \end{definition}
+  \begin{definition}[Stochastic matrix]
+    A matrix $\vf{P}=(p_{ij})_{i,j\in I}$ is a \emph{stochastic matrix} if $p_{ij}\geq 0$ $\forall i,j\in I$ and: $$\sum_{j\in I}p_{ij}=1$$
+  \end{definition}
+  \begin{definition}
+    Let $(X_n)$ be a time-homogeneous Markov chain. We define $p_{ij}$ as the probability of going from state $i$ to state $j$. That is: $$p_{ij}=\Prob(X_{1}=j\mid X_0=i)$$
+    The matrix $\vf{P}=(p_{ij})_{i,j\in I}$ is called the \emph{transition matrix} of the Markov chain. Finally, we define the probabilities $\pi_i$ as $\pi_i=\Prob(X_0=i)$. We define the vector $\vf{\pi}=(\pi_i)_{i\in I}$ as the \emph{initial distribution} of the Markov chain.
+  \end{definition}
+  \begin{proposition}
+    Let $(X_n)$ be a time-homogeneous Markov chain. Then:
+    \begin{enumerate}
+      \item $\vf{P}$ is a stochastic matrix.
+      \item $\sum_{i\in I}\pi_i=1$.
+    \end{enumerate}
+  \end{proposition}
+  \begin{definition}[Random walk]
+    A \emph{random walk} is a sequence $(\vf{S}_n)$ with $\vf{S}_0=\vf{X}_0$ and $\vf{S}_n=\sum_{k=0}^{n}\vf{X}_n$, where $(\vf{X}_n)_{n\geq 1}$ is a sequence of \iid random vectors and $\vf{X}_0$ is a random vector independent from $(\vf{X}_n)$.
   \end{definition}
   \begin{definition}
     A \emph{simple random walk} is a random walk in which $X_k$ are random variables such that:
@@ -214,5 +284,94 @@
       \end{cases}
     $$
   \end{definition}
+  \begin{lemma}
+    A sequence of \iid random variables, a random walk and a Galton-Watson process are all time-homogeneous Markov chains.
+  \end{lemma}
+  \begin{definition}
+    Let $(X_n)$ be a time-homogeneous Markov chain. We define the probabilities $p_{ij}^{(n)}$ as the probability of going from state $i$ to state $j$ in $n$ steps. That is: $$p_{ij}^{(n)}=\Prob(X_{n}=j\mid X_0=i)$$ The matrix $\vf{P}^{(n)}=(p_{ij}^{(n)})_{i,j\in I}$ is called the \emph{$n$-step transition matrix} of the Markov chain.
+  \end{definition}
+  \begin{definition}
+    Let $(X_n)$ be a time-homogeneous Markov chain. We define the probabilities $\pi_i^{(n)}$ as the probability of being in state $i$ after $n$ steps. That is: $$\pi_i^{(n)}=\Prob(X_n=i)$$
+    We define the vector $\vf{\pi}^{(n)}=(\pi_i^{(n)})_{i\in I}$ as the $n$-step stationary distribution of the Markov chain.
+  \end{definition}
+  \begin{definition}
+    Let $(X_n)$ be a time-homogeneous Markov chain. We define the \emph{stationary distribution} of the Markov chain as the distribution of the random variable $X_0$.
+  \end{definition}
+  \begin{lemma}\label{SP:lema1Markov}
+    Let $A$, $B$, $C$ be events in a probability space such that $\Prob(B\cap C)>0$. Then:
+    $$\Prob(A\cap B\mid C)=\Prob(B\mid C)\Prob(A\mid B\cap C)$$
+  \end{lemma}
+  \begin{proof}
+    \begin{align*}
+      \Prob(A\cap B\mid C) & =\frac{\Prob(A\cap B\cap C)}{\Prob(C)}\frac{\Prob(B\cap C)}{\Prob(B\cap C)} \\
+                           & =\Prob(B\mid C)\Prob(A\mid B\cap C)
+    \end{align*}
+  \end{proof}
+  \begin{lemma}\label{SP:lema2Markov}
+    Let $I$ be a finite or countable set and $A$ and $D_i$ for $i\in I$ be events in a probability space such that $\Prob(A\mid D_i)=p$ for all $i\in I$ and such that the $D_i$ are pairwise disjoint. Then:
+    $$\Prob\left(A\mid \bigsqcup_{i\in I}D_i\right)=p$$
+  \end{lemma}
+  \begin{proof}
+    \begin{align*}
+      \Prob\left(A\mid \bigsqcup_{i\in I}D_i\right) & =\frac{\Prob(A\cap \bigsqcup_{i\in I}D_i)}{\Prob(\bigsqcup_{i\in I}D_i)} \\
+                                                    & =\frac{\sum_{i\in I}\Prob(A\cap D_i)}{\sum_{i\in I}\Prob(D_i)}           \\
+                                                    & =\frac{\sum_{i\in I}\Prob(A\mid D_i)\Prob(D_i)}{\sum_{i\in I}\Prob(D_i)} \\
+                                                    & =\frac{\sum_{i\in I}p\Prob(D_i)}{\sum_{i\in I}\Prob(D_i)}                \\
+                                                    & =p
+    \end{align*}
+  \end{proof}
+  \begin{theorem}
+    Let $(X_n)$ be a time-homogeneous Markov chain. Then, $\vf{P}^{(n)}=\vf{P}^n$.
+  \end{theorem}
+  \begin{proof}
+    By induction on $n$. The case $n=1$ is clear. For $n\geq 2$ we have:
+    \begin{align*}
+      p_{ij}^{(n+1)} & =\Prob(X_{n+1}=j\mid X_0=i)                     \\
+                     & =\sum_{k\in I}\Prob(X_{n+1}=j, X_n=k\mid X_0=i) \\
+      \begin{split}
+        &=\sum_{k\in I}\Prob(X_{n}=k\mid X_0=i)\cdot\\
+        &\hspace{2.5cm}\cdot\Prob(X_{n+1}=j\mid X_n=k, X_0=i)
+      \end{split}             \\
+                     & =\sum_{k\in I}p_{ij}^{(n)}p_{kj}^{(1)}
+    \end{align*}
+    where the penultimate equality follows from \mcref{SP:lema1Markov} and the last equality follows from \mcref{SP:lema2Markov} and the Markov property because if $D=\{X_n=k, X_0=i\}$ we have that:
+    \begin{multline*}
+      D=\\\!=\bigsqcup_{i_1,\ldots,i_{n-1}\in I}\{X_n=k, X_0=i,X_1=i_1,\ldots,X_{n-1}=i_{n-1}\}
+    \end{multline*}
+    and so:
+    \begin{multline*}
+      \Prob(X_{n+1}=j\mid X_n=k, X_0=i)=\Prob(X_{n+1}=j\mid X_n=k,\\ X_0=i,X_1=i_1,\ldots,X_{n-1}=i_{n-1})=\\=\Prob(X_{n+1}=j\mid X_n=k)
+    \end{multline*}
+    Therefore, $\vf{P}^{(n+1)}=\vf{P}^n\vf{P}$, by induction hypothesis.
+  \end{proof}
+  \begin{proposition}
+    Let $(X_n)$ be a time-homogeneous Markov chain. Then:
+    \begin{enumerate}
+      \item $\vf{P}^{(0)}=\vf{I}_I$
+      \item $\vf{\pi}^{(n)}=\vf{\pi}^{(0)}\vf{P}^n$
+      \item $\Prob(X_0=i_0,\ldots,X_n=i_n)=\pi_{i_0}^{(0)}p_{i_0i_1}\cdots p_{i_{n-1}i_n}$
+    \end{enumerate}
+  \end{proposition}
+  \begin{sproof}
+    \begin{enumerate}
+      \item $p_{ij}^{(0)}=\Prob(X_1=j\mid X_0=i)=\delta_{ij}$.
+      \item $\pi_i^{(n)}=\Prob(X_n=i)=\sum_{k\in I}\Prob(X_n=i\mid X_0=k)=\sum_{k\in I}\pi_k^{(0)}p_{ki}^{(n)}$
+      \item Use the \mnameref{P:totalprob} and the Markov property.
+    \end{enumerate}
+  \end{sproof}
+  \subsubsection{Classification of states}
+  \begin{definition}
+    Let $(X_n)$ be a time-homogeneous Markov chain. We say that a state $j\in I$ is \emph{reachable} form $i\in I$ if $\exists n\in I$ such that $p_{ij}^{(n)}>0$. In this case we will write $i\to j$.
+  \end{definition}
+  \begin{definition}
+    Let $(X_n)$ be a time-homogeneous Markov chain. We say that two states $i,j\in I$ \emph{communicate} if $i\to j$ and $j\to i$. In this case we will write $i\leftrightarrow j$.
+  \end{definition}
+  \begin{lemma}
+    Let $(X_n)$ be a time-homogeneous Markov chain. Then, the relation $\leftrightarrow$ is an equivalence relation.
+  \end{lemma}
+  \begin{proof}
+    The reflexivity and symmetry are clear. For the transitivity, suppose $i\leftrightarrow j$ and $j\leftrightarrow k$. Then, $\exists n,m\in I$ such that $p_{ij}^{(n)}>0$ and $p_{jk}^{(m)}>0$. Then:
+    $$p_{ik}^{(n+m)}=\sum_{\ell\in I} p_{i\ell}^{(n)}p_{\ell k}^{(m)}\geq p_{ij}^{(n)}p_{jk}^{(m)}>0>0$$
+  \end{proof}
 \end{multicols}
 \end{document}

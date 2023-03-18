@@ -66,8 +66,8 @@
     The scheme is \emph{conditionally convergent} if $\forall j\in\NN$, $(k_j,h_j)\in\Lambda$, for some stability region $\Lambda$.
   \end{definition}
   \begin{definition}
-    Let $P$ be a partial differential operator and $\vf{f}$ be a function. Given the pde $P\vf{u}=\vf{f}$ and a finite difference scheme $P_{k,h}\vf{v}=\vf{f}$, we say that the scheme is \emph{consistent} with the pde if for any smooth function $\vf\phi(t,x)$ we have: $$\lim_{k,h\to 0}P\vf\phi-P_{k,h}\vf\phi=\vf{0}$$
-    where the convergence is pointwise at each point $(t,x)$ in the domain of solutions.
+    Let $P$ be a partial differential operator and $\vf{f}$ be a function. Given the pde $P\vf{u}=\vf{f}$ and a finite difference scheme $P_{k,h}\vf{v}=R_{k,h}\vf{f}$ with $R_{k,h}\vf{1}=\vf{1}$, we say that the scheme is \emph{consistent} with the pde if for any smooth function $\vf\phi(t,x)$ we have: $$\lim_{k,h\to 0}R_{k,h}P\vf\phi-P_{k,h}\vf\phi=\vf{0}$$
+    where the convergence is pointwise at each point $(t,x)$ in the domain of solutions. We say that the consistency is of order $(p,q)$ in time and space or order $r$ in $k=\lambda(h)$ if: $$\lim_{k,h\to 0}R_{k,h}P\vf\phi-P_{k,h}\vf\phi=\O{k^p}+\O{h^q}=\O{h^r}$$  The consistency is a \emph{conditional consistency} if the limit is for $(k,h)\in \Lambda$, for some stability region $\Lambda$.
   \end{definition}
   \begin{lemma}
     The Lax-Friedrichs scheme is consistent if and only if $\displaystyle\lim_{h,k\to 0}\frac{h^2}{k}=0$.
@@ -149,5 +149,29 @@
             Hence the scheme is unstable.
     \end{enumerate}
   \end{proof}
+  \begin{corollary}
+    Let $P_{k,h}{v}={f}$ be a one-step finite difference scheme with constant coefficients whose amplification factor $g(\theta,k,h)$ is continuous on $\RR\times\Lambda$, where $(k,h)\in\Lambda$ is a stability region. Then:
+    \begin{enumerate}
+      \item If $\abs{g(\theta,k,h)}\leq 1$ $\forall \theta$ and $\forall(k,h)\in\Lambda$, then the scheme is stable.
+      \item If $\exists\theta_0\in\RR$ and $\delta>0$ such that $\abs{g(\theta_0,k,h)}>1+\delta$ $\forall(k,h)\in\Lambda$, then the scheme is unstable.
+    \end{enumerate}
+  \end{corollary}
+  \begin{proposition}[Lax-Wendroff]
+    Consider the traffic equation of \mcref{NIPDE:traffic}.
+    The \emph{Lax-Wendroff scheme} is:
+    \begin{multline*}
+      \frac{u_m^{n+1}-u_{m}^n}{k}+a\frac{u_{m+1}^{n}-u_{m-1}^n}{2h}+\frac{a^2k}{2}\frac{u_{m+1}^n-2u_m^n+u_{m-1}^n}{h^2} \\ =\frac{f_m^{n+1}-f_m^n}{2}-\frac{ak}{4}\frac{f_{m+1}^n-f_{m-1}^n}{h}+\O{k^2}+\O{h^2}
+    \end{multline*}
+  \end{proposition}
+  \begin{sproof}
+    Expand $u(t+k,x)$ in Taylor series and use that:
+    \begin{align*}
+      u_t    & =-au_x+f            \\
+      u_{tt} & =a^2u_{xx}-af_x+f_t
+    \end{align*}
+  \end{sproof}
+  \begin{proposition}
+    The Lax-Wendroff scheme is a one-step method that has order of consistency 2.
+  \end{proposition}
 \end{multicols}
 \end{document}

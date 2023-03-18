@@ -18,7 +18,9 @@
     \end{aligned}
     \right.
   \end{equation}
-  For $n\in\NN\cup\{0\}$ let $t_{n+1}:=t_{n}+h$, where $h>0$ is called \emph{step size}. We would like to create a sequence $(\vf{\tilde{x}}_n)$ that approximates (in some sense) $\vf{{x}}_n:=\vf{{x}}(t_n)$ from a first iterate $\vf{\tilde{x}}_0:=\vf{x}_0$. In this section we will describe several algorithms that intend to do so. We will denote $\vf{f}_n:=\vf{f}(t_n,\vf{x}_{n})$ and $\vf{\tilde{f}}_n:=\vf{f}(t_n,\vf{\tilde{x}}_{n})$.
+  For $n\in\NN\cup\{0\}$ let $t_{n+1}:=t_{n}+h$, where $h>0$ is called \emph{step size}. We would like to create a sequence $(\vf{\tilde{x}}_n)$ that approximates (in some sense) $\vf{{x}}_n:=\vf{{x}}(t_n)$ from a first iterate $\vf{\tilde{x}}_0:=\vf{x}_0$. In this section we will describe several algorithms that intend to do so. We will denote $\vf{f}_n:=\vf{f}(t_n,\vf{x}_{n})$ and $\vf{\tilde{f}}_n:=\vf{f}(t_n,\vf{\tilde{x}}_{n})$. Note that solving \mcref{NC:ivp} is equivalent to solve the integral problem:
+  $$\vf{x}(t)=\vf{x}_0+\int_0^t\vf{f}(t,\vf{x}(s))\dd{s}$$
+  Choosing a different numerical integration methods for approximating this latter integral will lead to different methods for solving the ivp.
   \begin{definition}
     A numerical method is called \emph{explicit} if the $i$-th iterate can be computed directly in terms of some of the previous iterates. A method is called \emph{implicit} if the $i$-th iterate depends implicitly on itself.
   \end{definition}
@@ -76,7 +78,7 @@
   \begin{remark}
     Note that in a consistent method the difference equation for the method approaches the ode as the step size goes to zero, whereas in a convergent method is the solution to the difference equation that approaches the solution to the ode as the step size goes to zero.
   \end{remark}
-  \begin{theorem}
+  \begin{theorem}\label{NC:errorLipschitz}
     Consider a consistent one-step method such that its incremental function $\vf\phi$ is Lipschitz continuous (with constant $L$) with respect to $\vf{x}$. Then:
     $$\norm{\vf{e}_{n+1}}\leq \frac{\exp{L(t_{n+1}-t_0)}-1}{L}\tau(h)$$
   \end{theorem}
@@ -123,7 +125,7 @@
     Matching coefficients from \mcref{NC:heun1,NC:heun2}, we get the desired result.
   \end{proof}
   \begin{remark}
-    For a method of order $s$ (see \mnameref{NC:consistencyRK}), just start with $s$ values $\vf{k}_1,\ldots,\vf{k}_s$ of the form: $$\vf{k}_i=\vf{f}(t_n+c_sh,\vf{x}_n+h(a_{s1}\vf{k}_1+\cdots+a_{i(i-1)}\vf{k}_{i-1}))$$
+    For a method of order $s$ (see \mcref{NC:consistencyRK}), just start with $s$ values $\vf{k}_1,\ldots,\vf{k}_s$ of the form: $$\vf{k}_i=\vf{f}(t_n+c_sh,\vf{x}_n+h(a_{s1}\vf{k}_1+\cdots+a_{i(i-1)}\vf{k}_{i-1}))$$
     for $i\geq 2$ and $\vf{k}_1=\vf{f}_n$, and impose:
     $$\vf{x}_{n+1}=\vf{x}_n+h\sum_{i=1}^s b_i\vf{k}_i+\O{h^{s+1}}$$
   \end{remark}
@@ -181,5 +183,81 @@
     \caption{Number of stages of an explicit RK method needed for a given order of consistency}
     \label{NC:stages-orderRK}
   \end{table}
+  \subsubsection{Step-size control for Runge-Kutta methods}
+  \begin{theorem}\label{NC:errorControl}
+    Let $\vf{f}:[t_0,t_n]\times\RR^d\rightarrow\RR^d$ be a function of class $\mathcal{C}^{N+1}$ with respect to the second variable and let $\vf{\tilde{x}}(t)$ be the numerical solution to the ivp \mcref{NC:ivp} obtained by a one-step method of order $p\leq N$ with step-size $h$. Then, $\vf{\tilde{x}}(t)$ has an asymptotic expansion of:
+    $$\vf{\tilde{x}}(t)=\vf{x}(t)+\vf{e}_p(t)h^p+\cdots+\vf{e}_N(t)h^N+E_{N+1}(t,h)h^{N+1}$$
+    with $\vf{e}_k(t_0)=0$ $\forall k\geq p$. This is valid $\forall t\in[t_0,t_n]$ and all $h>0$. Moreover the functions $\vf{e}_k$ are differentiable and independent of $h$ and $\norm{E_{N+1}(t,\cdot)}_\infty<\infty$ $\forall t\in[t_0,t_n]$.
+  \end{theorem}
+  \begin{proof}
+    In order to simplify the notation, we will only prove it for $N=p+1$. Let $\vf{\phi}$ be the incremental function. Since the method is of order $p\leq N$, we have:
+    $$\vf{x}(t+h)-\vf{x}(t)-h\vf\phi(t,\vf{x},\vf{f},h)=\vf{d}_{p+1}h^{p+1}+\O{h^{p+2}}$$
+    We will show that there is a differentiable function $\vf{e}_{p}$ such that:
+    $$\vf{x}(t+h)-\vf{x}(t)-h\vf\phi(t,\vf{x},\vf{f},h)=\vf{e}_{p}(t)h^{p}+\O{h^{p+1}}$$
+    Consider $\vf{\hat{x}}(t):=\vf{\tilde{x}}(t)-\vf{e}_p(t)h^p$ where the choice of $\vf{e}_p$ is still left open. It is easy to see that $\vf{\hat{x}}(t)$ can be chosen as the result of another one-step method: $$\vf{\hat{x}}(t+h)=\vf{\hat{x}}(t)+h\vf{\hat\phi}(t,\vf{\hat{x}},\vf{f},h)$$
+    where: $$\vf{\hat\phi}(t,\vf{{x}},\vf{f},h)=\vf{\phi}(t,\vf{{x}}+\vf{e}_p(t)h^p,\vf{f},h)-(\vf{e}_p(t+h)-\vf{e}_p(t))h^{p-1}$$
+    Taylor expanding to find the local truncation error of this new method:
+    \begin{multline*}
+      \vf{x}(t+h)-\vf{x}(t)-h\vf{\hat\phi}(t,\vf{x},\vf{f},h)=\\
+      =(\vf{d}_{p+1}-\vf{f}_{\vf{x}}\vf{e}_p(t)-{\vf{e}_p}'(t))h^{p+1}+\O{h^{p+2}}
+    \end{multline*}
+    So if we take $\vf{e}_p$ to be the solution of the ivp:
+    $$\begin{cases}
+        {\vf{e}_p}'=\vf{d}_{p+1}-\vf{f}_{\vf{x}}\vf{e}_p(t) \\
+        \vf{e}_p(t_0)=0
+      \end{cases}$$
+    Then we have that this new method is of order $p+1$ and by \mcref{NC:errorLipschitz} we have that:
+    $$\vf{\hat{x}}(t)-\vf{x}(t)=\vf{\tilde{x}}(t)-\vf{x}(t)-\vf{e}_p(t)h^p=\O{h^{p+1}}$$
+    A repetition of these arguments with  $\vf{\hat\phi}$ in place of $\vf{\phi}$ completes the proof.
+  \end{proof}
+  \begin{theorem}[Richardson extrapolation]
+    Consider the ivp of \mcref{NC:ivp} and let $\vf{\tilde{x}}(t;h)$ be the numerical solution obtained by a one-step method of order $p\leq N$ with step-size $h$. Then:
+    $$\vf{x}(t)=\vf{\tilde{x}}(t;h/2)-\frac{\vf{\tilde{x}}(t;h)-\vf{\tilde{x}}(t;h/2)}{2^p-1}+\O{h^{p+2}}$$
+  \end{theorem}
+  \begin{proof}
+    By \mcref{NC:errorControl} we have that:
+    \begin{align*}
+      \vf{x}(t;h)   & =\vf{x}(t)+\vf{e}_p(t)h^p+\O{h^{p+1}}                          \\
+      \vf{x}(t;h/2) & =\vf{x}(t)+\vf{e}_p(t){\left(\frac{h}{2}\right)}^p+\O{h^{p+1}}
+    \end{align*}
+    Substracting the two equations we have:
+    $$\vf{e}_p(t){\left(\frac{h}{2}\right)}^p=\frac{\vf{\tilde{x}}(t;h)-\vf{\tilde{x}}(t;h/2)}{2^p-1}+\O{h^{p+1}}$$
+  \end{proof}
+  \begin{theorem}[Runge-Kutta-Fehlberg method]
+    Consider two RK methods of orders $p$ and $p+1$ with incremental functions $\vf{\phi}$ and $\vf{\hat\phi}$ respectively such that their Butcher tableaus have the same $(a_{ij})$ coefficients (and therefore the same $(c_{ij})$ coefficients):
+    \begin{center}
+      \renewcommand{\arraystretch}{1.25}
+      \begin{tabular}{c|c}
+        $\vf{c}$ & $\vf{A}$                   \\
+        \hline
+                 & $\transpose{\vf{b}}$       \\
+                 & $\transpose{\vf{\hat{b}}}$
+      \end{tabular}
+    \end{center}
+    These methods $\vf{\phi}$ and $\vf{\hat\phi}$ are called \emph{embedded methods}\footnote{Usually the notation $\mathrm{RK}p(q)s$ is used to refer for a method of order $p$ with an embedded method of order $q< p$ and a total of $s$ stages.}. Denote by $\vf{\tilde{x}}$ and $\vf{\hat{x}}$ the numerical solutions using the respective incremental functions. Then, given a tolerance $\epsilon$ and a older step-size $h$, we have to choose the new step-size
+    \begin{equation}\label{NC:RFF}
+      h_{\mathrm{new}}\simeq h\sqrt[p+1]{\frac{\epsilon}{\norm{\vf{\hat{x}}(t_i+h)-\vf{\tilde{x}}(t_i+h)}}}
+    \end{equation}
+    If with this new step-size we have $$\norm{\vf{\hat{x}}(t_{i+1}+h_\mathrm{new})-\vf{\tilde{x}}(t_{i+1}+h_\mathrm{new})}>\epsilon$$ we will have to repeat the last step with an another step-size $h_{\mathrm{new}}^*<h_{\mathrm{new}}$.
+  \end{theorem}
+  \begin{proof}
+    Assuming that the $i$-th iteration was successful, i.e.:
+    $$\norm{\vf{\hat{x}}(t_i+h)-\vf{\tilde{x}}(t_i+h)}\leq\epsilon$$
+    Neglecting terms of higher order, we then have:
+    $$\vf{\hat{x}}(t_i+h)-\vf{\tilde{x}}(t_i+h)\approx \vf{C}(\vf{x}(t_i))h^{p+1}$$
+    Moreover, up to errors of first order, we have $\vf{C}(\vf{x}(t_i))\approx\vf{C}(\vf{x}(t_{i+1}))$. Finally imposing
+    $$\norm{\vf{C}(\vf{x}(t_{i+1})){h_\mathrm{new}}^{p+1}}\leq\epsilon$$
+    yields to:
+    $$\norm{\vf{\hat{x}}(t_i+h)-\vf{\tilde{x}}(t_i+h)}{\left(\frac{h_{\mathrm{new}}}{h}\right)}^{p+1}\lesssim\epsilon$$
+  \end{proof}
+  \begin{remark}
+    Note that there exists RK embedded methods by the following argument. Start with a RK method of order $p+1$ that has $s$ stages. Then we can construct a RK method of order $p$ with $s$ stages by copying the coefficients $\vf{A}$ and $\vf{c}$ and adjusting the coefficients $\vf{b}$ in a proper way.
+  \end{remark}
+  \begin{remark}
+    In practise in order to avoid many unsuccessful steps, instead of the new step in \mcref{NC:RFF} we use the following:
+    $$h_{\mathrm{new}}\simeq\alpha h\sqrt[p+1]{\frac{\epsilon}{\norm{\vf{\hat{x}}(t_i+h)-\vf{\tilde{x}}(t_i+h)}}}$$
+    with $\alpha\simeq 0.9$.
+    Furthermore, in order to avoid rapid oscillations of the stepsize, $h$ should not, however, be changed by more than a factor of 2 to 5 from one step to the next.
+  \end{remark}
 \end{multicols}
 \end{document}
