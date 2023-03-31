@@ -173,9 +173,10 @@
     $$\F f(\xi)=2\int_0^{+\infty}\exp{-ax}\cos(2\pi\xi x)\dd{x}=\frac{2a}{a^2+4\pi^2\xi^2}$$
   \end{sproof}
   \subsubsection{The inverse Fourier transform}
-  \begin{theorem}\label{HA:inverseFT}
+  \begin{theorem}[Inversion theorem]\label{HA:inverseFT}
     Let $f\in L^1(\RR)$ such that $\F f\in L^1(\RR)$. Then:
     $$f(x)\almoste{=}\int_{-\infty}^{+\infty}\widehat{f}(\xi)\exp{2\pi \ii \xi x}\dd{\xi}$$
+    Moreover if $f$ is continuous we can remove the ``almost everywhere''.
   \end{theorem}
   \begin{proof}
     Consider the integral: $$I=\int_{-\infty}^{+\infty}f(x+y)\frac{1}{t}\exp{-\pi \frac{y^2}{t^2}}\dd{y}$$
@@ -200,7 +201,8 @@
     Let $f\in L^1(\RR)$. Then, $\F^2f(x)\almoste{=}f(-x)$. Hence, $\F^4\almoste{=}\id$.
   \end{lemma}
   \begin{proof}
-    $$f(-x)=\int_{-\infty}^{+\infty}\widehat{f}(\xi)\exp{-2\pi\ii\xi x}\dd{\xi}=\F\widehat{f}(x)=\F^2 f(x)$$
+    By the \mnameref{HA:inverseFT} we have:
+    $$f(-x)\almoste{=}\int_{-\infty}^{+\infty}\widehat{f}(\xi)\exp{-2\pi\ii\xi x}\dd{\xi}=\F\widehat{f}(x)=\F^2 f(x)$$
   \end{proof}
   \begin{lemma}
     Let $f,g\in L^1(\RR)$. Then, $f*g\in L^1(\RR)$, $\norm{f*g}_1\leq\norm{f}_1\norm{g}_1$ and $\F(f*g)=\F f \F g$.
@@ -230,7 +232,7 @@
     Let $f\in L^1(\RR)$ and $x,\ell\in \RR$ such that $h(t):=\frac{\abs{f(x+t)+f(x-t)-2\ell}}{t}\in L^1((0,\delta))$ for some $\delta>0$. Then, $\displaystyle\lim_{R\to\infty}S_Rf(x)=\ell$.
   \end{theorem}
   \begin{sproof}
-    Note that $$S_Rf(x)-\ell=\int_0^\infty[f(x+t)+f(x-t)-2\ell]D_R(t)\dd{t}$$ Now separate this integrals as a sum of the following ones:
+    Note that $$S_Rf(x)-\ell=\int_0^\infty[f(x+t)+f(x-t)-2\ell]D_R(t)\dd{t}$$ Now split this integral as a sum of the following ones:
     \begin{align*}
       I_1 & =\int_0^N[f(x+t)+f(x-t)-2\ell]D_R(t)\dd{t} \\
       I_2 & =\int_N^\infty[f(x+t)+f(x-t)]D_R(t)\dd{t}  \\
@@ -324,7 +326,7 @@
     Moreover if $f$ is uniformly continuous, the convergence is uniform.
   \end{theorem}
   \begin{sproof}
-    Copy the proofs of \mnameref{MA:fejerthm0,MA:fejerthm}.
+    Copy the proofs of \mnameref{MA:fejerthm0} and \mnameref{MA:fejerthm}.
   \end{sproof}
   \begin{lemma}\label{HA:normLpEquiv}
     Let $E\subseteq\RR^n$ be a measurable space, $p\geq 1$, $f\in L^p(E)$ and $q$ be such that $\frac{1}{p}+\frac{1}{q}=1$. Then:
@@ -339,7 +341,7 @@
     $$\norm{\int_F h(x,y)\dd{y}}_p\leq\int_F\norm{h(\cdot,y)}_p\dd{y}$$
   \end{lemma}
   \begin{proof}
-    Let $q$ be such that $\frac{1}{p}+\frac{1}{q}=1$ and $g\in L^q(E)$ with $\norm{g}_q=1$. Then, using \mnameref{RFA:holder,RFA:fubini}:
+    Let $q$ be such that $\frac{1}{p}+\frac{1}{q}=1$ and $g\in L^q(E)$ with $\norm{g}_q=1$. Then, using \mnameref{RFA:holder} and \mnameref{RFA:fubini}:
     \begin{align*}
       \int_Eg(x)\int_F h(x,y)\dd{y}\dd{x} & =\int_F\int_E h(x,y)g(x)\dd{x}\dd{y}           \\
                                           & \leq \int_F\norm{h(\cdot,y)}_p\norm{g}_q\dd{y} \\
@@ -348,26 +350,32 @@
     Now use \mcref{HA:normLpEquiv}.
   \end{proof}
   \begin{theorem}\label{HA:kernelConvLp}
+    Let $f\in L^p(\RR)$, $1\leq p\leq\infty$, and $\phi_\varepsilon$ be an approximation of unity. Then:
+    \begin{equation*}
+      \lim_{\varepsilon\to 0}\norm{f*\phi_\varepsilon-f}_p =0 \\
+    \end{equation*}
+  \end{theorem}
+  \begin{sproof}
+    Using \mnameref{HA:minkowski}, we have:
+    \begin{align*}
+      \norm{f*\phi_\varepsilon-f}_p & =\norm{\int_{-\infty}^{\infty}\phi_\varepsilon(y)(f(x-y)-f(x))\dd{y}}_p                                                                       \\
+                                    & \leq\int_{-\infty}^{\infty}\!\!{\left[\int_{-\infty}^{\infty}{\phi_\varepsilon(y)}^p\abs{f(x-y)-f(x)}^p\dd{x}\right]}^{\frac{1}{p}}\!\!\dd{y} \\
+                                    & = \int_{-\infty}^{\infty}\phi_\varepsilon(y)\norm{f-T_{-y}f}_p\dd{y}                                                                          \\
+      \begin{split}
+        & \leq \int_{\abs{y}< \delta}\phi_\varepsilon(y)\norm{f-T_{-y}f}_p\dd{y}+\\
+        &\hspace{3cm}+2\norm{f}_p\int_{\abs{y}\geq\delta}\phi_\varepsilon(y)\dd{y}
+      \end{split}
+    \end{align*}
+    Given $\varepsilon>0$, by \mcref{HA:translated} $\exists\delta>0$ such that the first integral is bounded by $\varepsilon$. Now use this $\delta$ and \mcref{HA:propsKernelsitem4} to conclude that the second integral goes to 0 as $R\to\infty$.
+  \end{sproof}
+  \begin{corollary}
     Let $f\in L^p(\RR)$ with $1\leq p\leq\infty$. Then:
     \begin{align*}
       \lim_{R\to\infty}\norm{\sigma_Rf-f}_p & =0 \\
       \lim_{t\to 0}\norm{f*P_t-f}_p         & =0 \\
       \lim_{t\to 0}\norm{f*W_t-f}_p         & =0
     \end{align*}
-  \end{theorem}
-  \begin{sproof}
-    The three of them are similar, so we only prove the first one. Using \mnameref{HA:minkowski}, we have:
-    \begin{align*}
-      \norm{\sigma_Rf-f}_p & =\norm{\int_{-\infty}^{\infty}F_R(y)(f(x-y)-f(x))\dd{y}}_p                                                               \\
-                           & \leq\int_{-\infty}^{\infty}{\left[\int_{-\infty}^{\infty}{F_R(y)}^p\abs{f(x-y)-f(x)}^p\dd{x}\right]}^{\frac{1}{p}}\dd{y} \\
-                           & = \int_{-\infty}^{\infty}F_R(y)\norm{f-T_{y/R}f}_p\dd{y}                                                                 \\
-      \begin{split}
-        & \leq \int_{\abs{y}< \delta}F_R(y)\norm{f-T_{y/R}f}_p\dd{y}+\\
-        &\hspace{3.5cm}+2\norm{f}_p\int_{\abs{y}\geq\delta}F_R(y)\dd{y}
-      \end{split}
-    \end{align*}
-    Given $\varepsilon>0$, by \mcref{HA:translated} $\exists\delta>0$ such that the first integral is bounded by $\varepsilon$. Now use this $\delta$ and \mcref{HA:propsKernelsitem4} to conclude that the second integral goes to 0 as $R\to\infty$.
-  \end{sproof}
+  \end{corollary}
   \subsubsection{Fourier transform on \texorpdfstring{$\RR^n$}{Rn}}
   In this section we will only expose the most important results of extending the Fourier transform to $L^1(\RR^n)$. Moreover we will not prove any of the results of this section as they are completely analogous to the previous ones.
   \begin{definition}
@@ -378,10 +386,10 @@
   \begin{proposition}
     Let $f,g\in L^1(\RR^n)$ and $\alpha,\beta\in\RR$. Then:
     \begin{enumerate}
-      \item $\widehat{(\alpha f+\beta g)}(\vf\xi)=\alpha\widehat{f}(\xi)+\beta \widehat{g}(\vf\xi)$
+      \item $\widehat{(\alpha f+\beta g)}(\vf\xi)=\alpha\widehat{f}(\vf\xi)+\beta \widehat{g}(\vf\xi)$
       \item Let $\vf{h}\in\RR^n$. We define $T_{\vf{h}}f(x)=f(\vf{x}+\vf{h})$. Then: $$\widehat{T_{\vf{h}}f}(\vf\xi)=\exp{2\pi\ii \langle\vf\xi, \vf{h}\rangle}\widehat{f}(\vf\xi)$$
       \item If $g(\vf{x})=\exp{2\pi\ii \langle\vf{x}, \vf{h}\rangle}f(\vf{x})$, then: $$\widehat{g}(\vf\xi)=\widehat{f}(\vf\xi-\vf{h})$$
-      \item If $\lambda\in\RR^*$, then: $$\frac{1}{\lambda^n}\widehat{f\left(\frac{\vf{x}}{\lambda}\right)}(\xi)=\widehat{f}(\lambda\vf\xi)$$
+      \item If $\lambda\in\RR^*$, then: $$\frac{1}{\lambda^n}\widehat{f\left(\frac{\vf{x}}{\lambda}\right)}(\vf\xi)=\widehat{f}(\lambda\vf\xi)$$
       \item If $g(\vf{x})=\overline{f(\vf{x})}$, then: $$\widehat{g}(\vf\xi)=\overline{\widehat{f}(-\vf\xi)}$$
     \end{enumerate}
   \end{proposition}
@@ -422,7 +430,7 @@
     \begin{equation}\label{HA:planchEq}
       (g*W_t)(0)=\int_{-\infty}^{+\infty}\exp{-4\pi^2 t\xi^2}\widehat{g}(\xi)\dd{\xi}=\int_{-\infty}^{+\infty}\exp{-4\pi^2 t\xi^2}\abs{\widehat{f}(\xi)}\dd{\xi}
     \end{equation}
-    And by \mcref{HA:kerelConvLp}, $\displaystyle\lim_{t\to 0^+}(g*W_t)(x)=g(0)={\norm{f}_2}^2$. Thus, by the definition of limit taking $\varepsilon = {\norm{f}_2}^2$, we have that $\abs{\int_{-\infty}^{+\infty}\exp{-4\pi^2 t\xi^2}\widehat{g}(\xi)\dd{\xi}}\leq 2{\norm{f}_2}^2$ for $t$ small enough. Finally, if $t$ is that small, then $1\leq 2\exp{-4\pi^2 t\xi^2}$ and so:
+    And by \mcref{HA:kernelConvLp}, $\displaystyle\lim_{t\to 0^+}(g*W_t)(x)=g(0)={\norm{f}_2}^2$. Thus, by the definition of limit taking $\varepsilon = {\norm{f}_2}^2$, we have that $\abs{\int_{-\infty}^{+\infty}\exp{-4\pi^2 t\xi^2}\widehat{g}(\xi)\dd{\xi}}\leq 2{\norm{f}_2}^2$ for $t$ small enough. Finally, if $t$ is that small, then $1\leq 2\exp{-4\pi^2 t\xi^2}$ and so:
     $$\int_{-\infty}^{+\infty}\abs{\widehat{f}(\xi)}^2\dd{\xi}\leq 2\int_{-\infty}^{+\infty}\widehat{g}(\xi)\exp{-4\pi^2 t\xi^2}\dd{\xi}\leq 4{\norm{f}_2}^2<\infty$$
     Now use \mnameref{RFA:dominated} in \mcref{HA:planchEq} and make $t\to 0$.
   \end{proof}
@@ -457,7 +465,8 @@
       \item $\displaystyle\widehat{f}(\xi)\overset{L^2}{=}\lim_{n\to\infty}\int_{-n}^nf(x)\exp{-2\pi\ii \xi x}\dd{x}$
       \item $\norm{f}_2=\norm{\widehat{f}}_2$
       \item $\displaystyle\int_{-\infty}^{+\infty}f(x)\widehat{g}(x)\dd{x}=\int_{-\infty}^{+\infty}\widehat{f}(x)g(x)\dd{x}$
-      \item $\displaystyle\int_{-\infty}^{+\infty}f(x)\overline{g}(x)\dd{x}=\int_{-\infty}^{+\infty}\widehat{f}(x)\overline{\widehat{g}}(x)\dd{x}$
+      \item $\displaystyle\int_{-\infty}^{+\infty}f(x)\overline{g(x)}
+              \dd{x}=\int_{-\infty}^{+\infty}\widehat{f}(x)\overline{\widehat{g}(x)}\dd{x}$
     \end{enumerate}
   \end{theorem}
   \begin{proof}
@@ -537,15 +546,15 @@
     Probably the most important application of Fourier series is the resolution of pdes and it is a consequence of \mcref{HA:diffFourierTransf}, which reduces any order of a pde in the spatial variable to 1. The procedure is to compute the Fourier transform $\F$ of the pde, solve it, and then get back to the first function using the inverse transform.
   \end{remark}
   \begin{theorem}[Uncertainty principle]
-    Let $f\in L^2(\RR)$ such that $xf^2\in L^1(\RR)$ and $f'\in L^2(\RR)$. Then:
+    Let $f\in L^2(\RR)$ be differentiable such that $xf^2\in L^1(\RR)$ and $f'\in L^2(\RR)$. Then:
     $$\left(\int_{-\infty}^\infty x^2 \abs{f(x)}^2\dd{x}\right)\left(\int_{-\infty}^\infty \xi^2 \abs{\widehat{f}(\xi)}^2\dd{\xi}\right)\geq \frac{{\norm{f}_2}^4}{16\pi^2}$$
     and the equality holds if and only if $f(x)=\exp{-\lambda^2x^2}$, $\lambda\in\RR$.
   \end{theorem}
   \begin{proof}
     Let $I$ be the left-hand-side term of the inequality. First note that:
-    $$\int_{-\infty}^\infty \xi^2 \abs{\widehat{f}(\xi)}^2\dd{\xi}=\frac{1}{4\pi^2}\int_{-\infty}^\infty \abs{\widehat{f'}(\xi)}^2\dd{\xi}=\frac{1}{4\pi^2}\int_{-\infty}^\infty \abs{{f'}(\xi)}^2\dd{\xi}$$
+    $$\int_{-\infty}^\infty \!\xi^2 \abs{\widehat{f}(\xi)}^2\dd{\xi}=\frac{1}{4\pi^2}\int_{-\infty}^\infty \abs{\widehat{f'}(\xi)}^2\dd{\xi}=\frac{1}{4\pi^2}\int_{-\infty}^\infty \abs{{f'}(\xi)}^2\dd{\xi}$$
     where the first equality is by the analogous \mcref{HA:diffFourierTransf} in $L^2(\RR)$ and in the second one we have used \mnameref{HA:plancherel}.
-    Now by the \mnameref{RFA:cauchyschwarz}, we have:
+    Now by the \mref{RFA:cauchyschwarz}, we have:
     \begin{align*}
       I & \geq \frac{1}{4\pi^2}{\left(\int_{-\infty}^\infty x\abs{f(x){f'}(x)}\dd{x}\right)}^2         \\
         & \geq \frac{1}{4\pi^2}{\left(\int_{-\infty}^\infty x\Re(f(x)\overline{f'(x)})\dd{x}\right)}^2 \\
@@ -589,7 +598,7 @@
            & =\sum_{k\in\ZZ}\frac{\sin(\pi(2Bx-k))}{\pi(2Bx-k)}\int_{-B}^{B}\widehat{f}(\xi)\exp{\frac{\pi\ii k\xi}{B}} \dd{\xi} \\
            & =\sum_{k\in\ZZ}f\left(\frac{k}{2B}\right)\frac{\sin(\pi(2Bx-k))}{\pi(2Bx-k)}
     \end{align*}
-    The second equality follows from both \mnameref{HA:plancherel,MA:parseval}:
+    The second equality follows from both \mnameref{HA:plancherel} and \mnameref{MA:parseval}:
     $${\norm{f}_2}^2={\norm{\widehat{f}}_2}^2=\frac{1}{2B}\sum_{k\in\ZZ}\abs{f\left(\frac{k}{2B}\right)}^2$$
     because by a similar argument as before, the Fourier coefficients of $\widehat{f}(k)$ (thought as periodically extended) are $\frac{1}{2B}f\left(\frac{-k}{2B}\right)$.
   \end{proof}
@@ -599,8 +608,8 @@
     $$\function{f}{\ZZ}{\CC}{k}{f(k\mod{n})=:f[k]}$$
     Note that with this definition, $f$ is $N$-periodic. We define the \emph{discrete Fourier transform} (\emph{DFT}) of $f$ as:
     $$\widehat{f}[k]:=\sum_{n=0}^{N-1}f[n]\exp{-\frac{2\pi\ii nk}{N}}$$
-    If we denote $\omega_N:=\exp{-\frac{2\pi\ii nk}{N}}$ we can write:
-    $$\widehat{f}[k]=\sum_{n=0}^{N-1}f[n]{\omega_N}^n$$
+    If we denote $\omega_N:=\exp{-\frac{2\pi\ii}{N}}$ we can write:
+    $$\widehat{f}[k]=\sum_{n=0}^{N-1}f[n]{\omega_N}^{kn}$$
     We will denote $\vf{f}:=(f[0],\ldots,f[N-1])$
   \end{definition}
   \begin{proposition}
@@ -647,5 +656,174 @@
     \end{align*}
     because $\vf{A}(\overline{\omega_N})$ is symmetric.
   \end{proof}
+  \begin{definition}
+    Let $f,g:\ZZ\rightarrow\CC$. We define the \emph{convolution} of $f$ and $g$ as:
+    $$(f*g)[k]:=\sum_{n=0}^{N-1}f[n]g[k-n]$$
+  \end{definition}
+  \begin{lemma}
+    Let $f,g:\ZZ\rightarrow\CC$. Then:
+    $$\widehat{f*g}[k]=\widehat{f}[k]\widehat{g}[k]$$
+  \end{lemma}
+  \begin{proof}
+    \begin{align*}
+      \widehat{f*g}[k] & =\sum_{n=0}^{N-1}\sum_{j=0}^{N-1}f[j]g[n-j]{\omega_N}^{nk}                    \\
+                       & =\sum_{j=0}^{N-1}f[j]{\omega_N}^{jk}\sum_{n=0}^{N-1}g[n-j]{\omega_N}^{(n-j)k} \\
+                       & =\widehat{f}[k]\widehat{g}[k]
+    \end{align*}
+  \end{proof}
+  \begin{theorem}[Poisson summation formula]
+    Let $f:\ZZ\rightarrow\CC$. Then:
+    $$\sum_{k=0}^{N-1}\widehat{f}[k]=Nf[0]$$
+  \end{theorem}
+  \begin{proof}
+    $$\sum_{k=0}^{N-1}\widehat{f}[k]=\sum_{k,n=0}^{N-1}f[n]{\omega_N}^{kn}=Nf[0]$$
+    because $\sum_{k=0}^{N-1}{\omega_N}^{kn}=N$ if $n=0$ and 0 otherwise because ${\omega_N}^{n}$ are roots of $1+x+\cdots+x^{N-1}$.
+  \end{proof}
+  \subsubsection{Fast Fourier transform}
+  \begin{definition}
+    Let $f:\ZZ\rightarrow\CC$. Note that we need $\O{N^2}$ operations in order to compute $\widehat{f}$. The \emph{fast Fourier transform} (\emph{FFT}) aims to minimize that number by maxing use of some tricks.
+  \end{definition}
+  \begin{definition}[Radix-2 DIT Cooley-Tukey FFT algorithm]
+    Let $f:\ZZ\rightarrow\CC$ and assume that $N=2m$. The \emph{radix-2 decimation-in-time (DIT) FFT} is defined as follows. We can write:
+    \begin{multline*}
+      \widehat{f}[k] =\sum_{n=0}^{N/2-1}f[2n]{\omega_N}^{2nk}+\sum_{n=0}^{N/2-1}f[2n+1]{\omega_N}^{(2n+1)k}    \\ =\sum_{n=0}^{N/2-1}f[2n]{(\exp{-\frac{2\pi\ii}{N/2}})}^{nk}+\exp{-\frac{2\pi\ii k}{N}}\sum_{n=0}^{N/2-1}f[2n+1]{(\exp{-\frac{2\pi\ii}{N/2}})}^{nk} \\
+      =:E_k+\exp{-\frac{2\pi\ii k}{N}}O_k
+    \end{multline*}
+    for $k=0,\ldots,N/2-1$ even though the equality holds for $k=0,\ldots,N-1$. For the other cases, we use the periodicity of $\exp{-\frac{2\pi\ii k}{N}}$ to get:
+    $$\widehat{f}[k+N/2] =E_k-\exp{-\frac{2\pi\ii k}{N}}O_k$$
+    for $k=0,\ldots,N/2-1$.
+    Note that $E_k$ and $O_k$ are both $N/2$-dimensional DFT of the even terms of $f$ and the odd terms of $f$, respectively. We can thus compute them recursively until the respective $m$ is odd. Using this method we can get the DFT of $f$ in at most $O{N\log N}$ time.
+  \end{definition}
+  \subsection{Distributions}
+  \begin{definition}
+    Let $\Omega\subseteq \RR^n$ and $(\varphi_n),\varphi\in\mathcal{D}(\Omega):=\mathcal{C}_0^\infty(\Omega)$. We say that $\varphi_n\rightarrow \varphi$ in $\mathcal{D}(\Omega)$ if:
+    \begin{enumerate}
+      \item There exists a compact set such that $\supp \varphi_n\subseteq K$ $\forall n\in\NN$.
+      \item $\displaystyle\lim_{n\to\infty}\norm{\partial^\alpha\varphi_n-\partial^\alpha\varphi}_{L^\infty(K)}=0$ $\forall \alpha$.
+    \end{enumerate}
+  \end{definition}
+  \begin{definition}[Distribution]
+    Let $\Omega\subseteq \RR^n$ be a set. A \emph{distribution} on $\Omega$ is a continuous linear form on $\mathcal{D}(\Omega)$. The vector space of all distributions on $\Omega$ is denoted by $\mathcal{D}^*(\Omega)$.
+  \end{definition}
+  \begin{lemma}
+    Let $\Omega\subseteq\RR^n$ and $T:\mathcal{D}(\Omega)\rightarrow\CC$ be linear. Then, $T$ is continuous if $\forall (\varphi_n)\in\mathcal{D}(\Omega)$ with $\varphi_n\rightarrow 0$ in $\mathcal{D}(\Omega)$ we have that $T(\varphi_n)\rightarrow 0$.
+  \end{lemma}
+  \begin{lemma}[Fundamental lemma of calculus of variations]\label{HA:fundamentallemma}
+    Let $\Omega\subseteq\RR^n$ be a domain and $f\in L_\mathrm{loc}^1(\Omega)$ such that $$\int_\Omega f(\vf{x})\varphi(\vf{x})\dd{\vf{x}}=0$$ for all $\varphi\in\mathcal{D}(\Omega)$. Then, $f\almoste{=}0$ in $\Omega$.
+  \end{lemma}
+  \begin{proposition}
+    Let $\Omega\subseteq\RR^n$ and $T:\mathcal{D}(\Omega)\rightarrow\CC$ be linear. Then, $T\in \mathcal{D}^*(\Omega)$ if and only if for all compact set $K\subseteq \Omega$, there exist $C>0$ and $m\in\NN\cup\{0\}$ such that $\forall \varphi\in\mathcal{D}(\Omega)$ we have:
+    $$\abs{T(\varphi)}\leq C\sum_{\abs{\alpha}\leq m}\norm{\partial^\alpha\varphi}_{L^\infty(K)}$$
+  \end{proposition}
+  \begin{proof}
+    The right-to-left implication is clear. For the other one, suppose that there exists a compact set $K$ such that $\forall C>0$ and all $m\in\NN\cup\{0\}$ there exists a sequence $(\varphi_k)\in\mathcal{D}(\Omega)$ such that
+    $$\abs{T(\varphi_k)}> C\sum_{\abs{\alpha}\leq m}\norm{\partial^\alpha\varphi_k}_{L^\infty(K)}=:C\norm{\varphi_k}_{m,K}$$
+    Now consider $\psi_k:=\frac{\varphi_k}{k\norm{\varphi_k}_{m,K}}$. Clearly $\norm{\psi_k}_{L^\infty(K)}\leq\frac{1}{k}\overset{k\to\infty}{\longrightarrow}0$ but $\abs{T(\psi_k)}=\frac{\abs{T(\varphi_k)}}{k\norm{\varphi_k}_{m,K}}>1$ by considering the particular case of $C=m$. Hence, $T$ cannot be continuous, which is a contradiction.
+  \end{proof}
+  \begin{proposition}
+    Let $\Omega\subseteq \RR^n$ be a set and $f\in L_{\mathrm{loc}}^1(\Omega)$. Then, the map
+    \begin{equation}\label{HA:regularDistribution}
+      \function{\Lambda_f}{\mathcal{D}(\Omega)}{\CC}{\varphi}{\displaystyle\int_\Omega f(\vf{x})\varphi(\vf{x})\dd{\vf{x}}}
+    \end{equation}
+    is a distribution. Hence, $\Lambda_f(\varphi)$ is usually denoted by $\dotp{f}{\varphi}$. Sometimes we will do an abuse of notation denoting $\Lambda_f$ as $f$ (in view of the \mnameref{HA:fundamentallemma}).
+  \end{proposition}
+  \begin{proof}
+    $\Lambda_f$ is clearly linear. Moreover: $$\abs{\Lambda_f(\varphi)}\leq\int_\Omega\abs{f(\vf{x})\varphi(\vf{x})}\leq \norm{f}_1\norm{\varphi}_\infty$$
+    Hence, $\Lambda_f$ is bounded and therefore continuous.
+  \end{proof}
+  \begin{definition}
+    The distributions that can be expressed as in \mcref{HA:regularDistribution} are called \emph{regular distributions}.
+  \end{definition}
+  \begin{proposition}[Dirac's $\delta$ distribution]
+    Let $\Omega\subseteq \RR^n$ be a set and $\vf{x}_0\in\Omega$. Then, the map
+    $$
+      \function{\delta_{\vf{x}_0}}{\mathcal{D}(\Omega)}{\RR}{\varphi}{\varphi(\vf{x}_0)}
+    $$
+    is a distribution. We will denote $\delta_{\vf{0}}$ simply by $\delta$.
+  \end{proposition}
+  \begin{proof}
+    Clearly $\delta_{\vf{x}_0}$ is linear and bounded because $\abs{\delta_{\vf{x}_0}(\varphi)}=\abs{\varphi(\vf{x}_0)}\leq \norm{\varphi}_\infty$.
+  \end{proof}
+  \begin{lemma}
+    The Dirac's $\delta_{\vf{0}}$ distribution is not regular.
+  \end{lemma}
+  \begin{proof}
+    Suppose it is regular. Then, $\exists f\in L_{\mathrm{loc}}^1(\Omega)$ such that $\delta=\Lambda_f$. Hence, $\varphi(\vf{0})=\delta(\varphi)=\int_\Omega f(\vf{x})\varphi(\vf{x})\dd{\vf{x}}$ for all $\varphi\in\mathcal{D}(\Omega)$. Then, if we take $\varphi_n(x):=\varphi(nx)$, where:
+    $$\varphi(x)=\begin{cases}
+        \exp{-\frac{1}{1-\norm{x}^2}} & \text{if } \norm{x}\leq 1 \\
+        0                             & \text{if } \norm{x}> 1
+      \end{cases}
+    $$
+    then $\varphi_n\in\mathcal{D}(\Omega)$ and have support $\overline{B(\vf{0},1/n)}$. So:
+    $$\exp{-1}=\abs{\int_{\Omega\cap \overline{B(\vf{0},1/n)}} f(\vf{x})\varphi_n(\vf{x})\dd{\vf{x}}}\leq \int_{\norm{x}<\frac{1}{n}}\abs{f(\vf{x})}\dd{\vf{x}}\overset{n\to\infty}{\longrightarrow}0$$
+  \end{proof}
+  \begin{proposition}[Cauchy principal value]
+    We define the \emph{Cauchy principal value} $T:=\pv\left(\frac{1}{x}\right)$ as the distribution
+    $$T(\varphi)=\lim_{\varepsilon\to 0}\int_{\abs{x}\geq \varepsilon}\frac{\varphi(x)}{x}\dd{x}$$
+  \end{proposition}
+  \begin{proof}
+    First of all note that it is well defined because we can write:
+    $$T(\varphi)=\lim_{\varepsilon\to 0}\int_{\varepsilon}^\infty\frac{\varphi(x)-\varphi(-x)}{x}\dd{x}=\int_{0}^\infty\frac{\varphi(x)-\varphi(-x)}{x}\dd{x}$$
+    which is well-defined because $\varphi$ has compact support and in a neighborhood of $0$ the integrand is bounded (by the \mnameref{RVF:meanvaluetheorem}). Moreover it is clearly linear and continuous because $$\abs{T(\varphi)}\leq \m{K} \norm{\varphi'}_\infty$$
+    where $\abs{K}$ is the measure of the support of $\varphi$.
+  \end{proof}
+  \begin{definition}
+    Let $\Omega\subseteq \RR^n$. We say that a distribution $T\in\mathcal{D}^*(\Omega)$ is a \emph{distribution of order $N\in\NN\cup\{0\}$} if $\exists N\in\NN\cup\{0\}$ such that for all compact set $K$ $\exists C_K>0$ with
+    $$\abs{T(\varphi)}\leq C_K\norm{\varphi}_{N,K}$$
+    for all $\varphi\in\mathcal{D}(\Omega)$. We say that $T$ is has \emph{infinite order} if it is not of order $N$ for any $N\in\NN$.
+  \end{definition}
+  \subsubsection{Convergency of distributions}
+  \begin{definition}
+    Let $\Omega\subseteq \RR^n$ be a set and $(T_n)\in \mathcal{D}^*(\Omega)$. We say that $(T_n)$ converges to $T\in\mathcal{D}^*(\Omega)$ if $T_n(\varphi)\overset{n\to\infty}{\longrightarrow}T(\varphi)$ for all $\varphi\in\mathcal{D}(\Omega)$.
+  \end{definition}
+  \begin{definition}
+    Let $\Omega\subseteq \RR^n$ be a set. We say that a sequence of functions $(\phi_\varepsilon)\in L_\mathrm{loc}^1(\Omega)$ is an \emph{approximation of unity} if
+    \begin{enumerate}
+      \item $\displaystyle\int_\Omega \phi_\varepsilon=1$
+      \item $\displaystyle\int_\Omega \abs{\phi_\varepsilon}\leq M$ $\forall \varepsilon>0$
+      \item $\displaystyle\lim_{\varepsilon\to 0}\int_{\norm{\vf{x}}\geq \delta}\phi_\varepsilon(\vf{x})\dd{\vf{x}}=0$ $\forall \delta>0$.
+    \end{enumerate}
+  \end{definition}
+  \begin{proposition}
+    Let $\Omega\subseteq \RR^n$ be a set and $\phi\in L^1(\Omega)$ such that $\int_\Omega\phi=1$. Let $\phi_\varepsilon:=\frac{1}{\varepsilon^n}\phi(\frac{x}{\varepsilon})$. Then, $(\phi_\varepsilon)$ is an approximation of unity, $\phi_\varepsilon \in L_\mathrm{loc}^1$ $\forall \varepsilon$ and $\phi_\varepsilon\to \delta_{\vf{0}}$ in $\mathcal{D}^*(\Omega)$.
+  \end{proposition}
+  \begin{sproof}
+    Let $\varphi\in\mathcal{D}(\Omega)$. Then:
+    \begin{align*}
+      \abs{\phi_\varepsilon(\varphi)-\delta_{\vf{0}}(\varphi)} & \leq \int_\Omega \abs{\phi_\varepsilon(x)}\abs{\varphi(\vf{x})-\varphi(\vf{0})}\dd{\vf{x}} \\
+      \begin{split}
+        & =\int_{\norm{\vf{x}}<\delta} \abs{\phi_\varepsilon(x)}\abs{\varphi(\vf{x})-\varphi(\vf{0})}\dd{\vf{x}}+\\
+        &\hspace{1cm}+\int_{\norm{\vf{x}}\geq\delta} \abs{\phi_\varepsilon(x)}\abs{\varphi(\vf{x})-\varphi(\vf{0})}\dd{\vf{x}}
+      \end{split}
+    \end{align*}
+    Now use the properties of approximation of unity to see that each interval goes to zero as $\varepsilon\to 0$.
+  \end{sproof}
+  \begin{theorem}
+    Let $\Omega\subseteq \RR^n$ be a set and $(f_n)\in L_\mathrm{loc}^p$ such that $f_n\overset{L_\mathrm{loc}^p}{f}$ (which means that $\int_K\abs{f_n-f}\to 0$ for any compact set $K$). Then, $T_{f_n}$ converges to $T_f$ in $\mathcal{D}(\Omega)$.
+  \end{theorem}
+  \begin{proof}
+    Use \mnameref{RFA:holder}.
+  \end{proof}
+  \begin{remark}
+    Clearly if $f_n$ converge uniformly to $f$, the condition of the theorem holds and we get the same result. But it can be seen that only with pointwise convergence is not enough (consider $f_n(x)=n^kx^n(1-x)\indi{[0,1]}$ for $k\in\NN$). Moreover, $T_{f_n}$ converges to $T_f$ in $\mathcal{D}(\Omega)$ does not imply pointwise convergence of $f_n$ towards $f$.
+  \end{remark}
+  % \begin{definition}
+  %   Let $\Omega\subseteq \RR^n$ be a set and $n\in\NN$. We define the \emph{differentiation operator} $D^n:\mathcal{D}^*(\Omega)\rightarrow\mathcal{D}^*(\Omega)$ by: $$\dotp{D^n\Lambda}{\varphi}=\dotp{\Lambda}{{(-1)}^nD^n\varphi}$$
+  %   for all $\Lambda\in\mathcal{D}^*(\Omega)$ and all $\varphi\in\mathcal{D}(\Omega)$. The distribution $D^n\Lambda$ is called \emph{distributional derivative}.
+  % \end{definition}
+  % \begin{definition}
+  %   We define the \emph{Heaviside step function} as the function $H(x)=\indi{x>0}$.
+  % \end{definition}
+  % \begin{proposition}
+  %   We have that $\Lambda_{H}=:H\in\mathcal{D}^*(\RR)$ and: $$H'=\delta$$
+  % \end{proposition}
+  % \begin{proof}
+  %   For all $\varphi\in\mathcal{D}(\Omega)$ we have:
+  %   \begin{align*}
+  %     \dotp{H'}{\varphi}=-\dotp{H}{\varphi'} & =-\int_{-\infty}^\infty H(x)\varphi'(x)\dd{x}                  \\
+  %                                            & =-\int_{0}^\infty\varphi'(x)\dd{x}= \varphi(0)=\delta(\varphi)
+  %   \end{align*}
+  %   because $\varphi$ has compact support.
+  % \end{proof}
 \end{multicols}
 \end{document}

@@ -91,9 +91,6 @@
                                             & \leq{(\abs{\alpha}+\abs{\beta})}^{2(n+1)} \sum_{m\in\ZZ}\norm{\vf{v}_{m}^0}^2
     \end{align*}
   \end{sproof}
-  \begin{theorem}[Lax-Richtmyer equivalence theorem]
-    Consider and well-posed linear and of constant coefficients ivp of 1st order in time and let $P_{k,h}\vf{v}=\vf{f}$ be a consistent finite difference scheme for it. Then, the scheme is convergent if and only if it is stable.
-  \end{theorem}
   \begin{theorem}[Courant-Friedrichs-Lewy condition]
     Consider the traffic equation $$\vf{u}_t+\vf{A}\vf{u}_x=0$$ with $\vf{A}\in\mathcal{M}_q(\RR)$ and a finite difference scheme of the form $$\vf{v}_m^{n+1}=\alpha \vf{v}_{m-1}^n+\beta \vf{v}_m^n+\gamma \vf{v}_{m+1}^n$$ with $k/h=\lambda=\const$ Then, if the scheme is convergent, we have $\abs{a_i\lambda}\leq 1$ $\forall a_i\in\sigma(\vf{A})$.
   \end{theorem}
@@ -160,7 +157,7 @@
     Consider the traffic equation of \mcref{NIPDE:traffic}.
     The \emph{Lax-Wendroff scheme} is:
     \begin{multline*}
-      \frac{u_m^{n+1}-u_{m}^n}{k}+a\frac{u_{m+1}^{n}-u_{m-1}^n}{2h}+\frac{a^2k}{2}\frac{u_{m+1}^n-2u_m^n+u_{m-1}^n}{h^2} \\ =\frac{f_m^{n+1}-f_m^n}{2}-\frac{ak}{4}\frac{f_{m+1}^n-f_{m-1}^n}{h}+\O{k^2}+\O{h^2}
+      \frac{u_m^{n+1}-u_{m}^n}{k}+a\frac{u_{m+1}^{n}-u_{m-1}^n}{2h}+\frac{a^2k}{2}\frac{u_{m+1}^n-2u_m^n+u_{m-1}^n}{h^2} \\ =\frac{f_m^{n+1}+f_m^n}{2}-\frac{ak}{4}\frac{f_{m+1}^n-f_{m-1}^n}{h}+\O{k^2}+\O{h^2}
     \end{multline*}
   \end{proposition}
   \begin{sproof}
@@ -173,5 +170,125 @@
   \begin{proposition}
     The Lax-Wendroff scheme is a one-step method that has order of consistency 2.
   \end{proposition}
+  \begin{sproof}
+    Show that $P_{k,h}\phi-R_{k,h}P\phi=\O{h^2}+\O{k^2}$ using a Taylor expansion and is stable if $a\lambda\leq 1$.
+  \end{sproof}
+  \begin{proposition}[Crank-Nicolson]
+    Consider the traffic equation of \mcref{NIPDE:traffic}.
+    The \emph{Crank-Nicolson scheme} is:
+    \begin{multline*}
+      \frac{u_m^{n+1}-u_{m}^n}{k}+a\frac{u_{m+1}^{n+1}-u_{m-1}^{n+1}+u_{m+1}^{n}-u_{m-1}^{n}}{4h}=\\ =\frac{f_m^{n+1}+f_m^n}{2}+\O{k^2}+\O{h^2}
+    \end{multline*}
+    Note that it is an implicit scheme.
+  \end{proposition}
+  \begin{proposition}
+    The Crank-Nicolson scheme is a one-step method that has order of consistency 2 and it is unconditionally stable.
+  \end{proposition}
+  \begin{sproof}
+    An easy check shows that:
+    $$P_{k,h}\phi-R_{k,h}P\phi=\O{{(k+h)}^2}+\O{\frac{k^3}{h}}$$
+    For the stability...
+  \end{sproof}
+  \begin{definition}
+    Given scheme $P_{k,h}{v}={f}$, usually we cannot use the recurrence to compute the last term of the (finite) grid, with $n\in\{0,\ldots,N\}$ and $m\in\{0,\ldots,M\}$, $v_M^{n}$ for each $n\in\NN$. Thus the \emph{numerical boundary condition} is used in this cases. A numerical solution of order $p$ is a extrapolation of order $\O{h^p}$ of the last term of the grid in terms of the orther ones. Each $u(t,x-\ell h)$ can be expressed as: $$u(t,x-\ell h)=\sum_{k=1}^{p-1}\frac{{(-1)}^k \ell^kh^k}{k!}u^{(k)}+\O{h^p}$$
+    If we want to get a linear approximation of the form
+    $$u(t,x)=\sum_{k=1}^{p}\lambda_ku(x-kh)$$
+    we need to solve the following linear system:
+    $$
+      \begin{pmatrix}
+        1      & 1       & \cdots & 1             \\
+        1      & 2       & \cdots & {(p-1)}       \\
+        \vdots & \vdots  & \ddots & \vdots        \\
+        1      & 2^{p-1} & \cdots & {(p-1)}^{p-1}
+      \end{pmatrix}
+      \begin{pmatrix}
+        \lambda_1 \\
+        \lambda_2 \\
+        \vdots    \\
+        \lambda_p
+      \end{pmatrix}=
+      \begin{pmatrix}
+        1      \\
+        0      \\
+        \vdots \\
+        0
+      \end{pmatrix}
+    $$
+    Note that the solution always exists because the matrix is a Vandermonde matrix.
+    For example, numerical boundary conditions of order 1, 2 and 3 are respectively:
+    \begin{align*}
+      v_M^{n} & =v_{M-1}^{n}                           \\
+      v_M^n   & =2v_{M-1}^{n}-v_{M-2}^{n}              \\
+      v_M^n   & =3v_{M-1}^{n}-3v_{M-2}^{n}+v_{M-3}^{n}
+    \end{align*}
+  \end{definition}
+  \begin{proposition}\label{NIPDE:preLax}
+    Consider the following initial value and boundary problem with constant coefficients:
+    \begin{equation}\label{NIPDE:eqLax}
+      \begin{cases}
+        u_t=L(u)                                                                                                                    \\
+        u(0,\vf{x})=u_0(\vf{x}) & \!\text{if }\vf{x}\in\Omega \subseteq\RR^n                                                        \\
+        u(t,\vf{x})=g(t,\vf{x}) & \!\text{if }(t,\vf{x})\in[0,\infty)\times\partial\Omega_1\subseteq [0,\infty)\times\partial\Omega
+      \end{cases}
+    \end{equation}
+    where $L$ is a differential operator and $g$ is a function. Let $M(\Omega)$ be the set of indices that we compute $\vf{v}^n=(v_m^n)_{m\in M(\Omega)}$. Consider a finite difference scheme of the form
+    \begin{equation}\label{NIPDE:eqpreLax}
+      \vf{B}_1\vf{v}^{n+1}=\vf{B}_0\vf{v}^n+\vf{f}^n
+    \end{equation}
+    where $\vf{B}_0$ and $\vf{B}_1$ are matrices and $\vf{f}^n$ is a vector. Then, the scheme is stable with stability region $\Lambda\subseteq \RR_{\geq 0}\times\RR$ if and only if $\forall T>0$ $\exists C_T>0$ such that $\forall (k,h)\in\Lambda$ and $\forall \ell\in\NN$ with $0\leq \ell k\leq T$ we have $\norm{{\left({\vf{B}_1}^{-1}\vf{B}_0\right)}^\ell}\leq C_T$.
+  \end{proposition}
+  \begin{proof}
+    \begin{itemizeiff}
+      We will prove by contradiction. Suppose that $\exists T>0$ such that $\forall C_T>0$ exist $(k,h)\in \Lambda$ and $\ell \in \NN$ with $0\leq \ell k\leq T$ such that $\norm{{\left({\vf{B}_1}^{-1}\vf{B}_0\right)}^\ell}> C_T$. Let $\vf{A}:= {\left({\vf{B}_1}^{-1}\vf{B}_0\right)}^\ell$. Then, taking $\vf{x^*}$ such that $\norm{\vf{x^*}}=1$ and $\norm{A}=\norm{\vf{A}\vf{x^*}}$ we have that for any $\vf{v}^0$, defining $\vf{w}^0:=\vf{v}^0+\vf{x^*}$ we have that:
+      \begin{multline*}
+        \norm{\vf{v}^\ell -\vf{w}^\ell}= \norm{\vf{A} \vf{x^*}}=\norm{A}>C_T\norm{\vf{v}^0-\vf{w}^0}
+      \end{multline*}
+      where the first equality follows from expanding recursively the norm $\norm{\vf{v}^\ell -\vf{w}^\ell}$. Hence the scheme is not stable.
+      \item An easy check show that if $\vf{v}^0$ and $\vf{w}^0$ are such that satisfy the recurrence of \mcref{NIPDE:eqpreLax}, then ${\vf{v}^\ell -\vf{w}^\ell}=\vf{A}(\vf{v}^0-\vf{w}^0)$. So if
+      $$
+        \norm{\vf{v}^\ell -\vf{w}^\ell}\leq C_T\norm{\vf{v}^0-\vf{w}^0}
+      $$
+      then necessarily $\norm{\vf{A}}\leq C_T$.
+    \end{itemizeiff}
+  \end{proof}
+  \begin{theorem}[Lax-Richtmyer equivalence theorem]
+    Consider the problem of \mcref{NIPDE:eqLax} and define
+    $$
+      \vf{T}^n:=\vf{B}_1\vf{u}^{n+1}-\vf{B}_0\vf{u}^n -\vf{f}^n
+    $$
+    Suppose that:
+    \begin{enumerate}
+      \item $\norm{\vf{T}^n}=\O{k^p+\norm{\vf{h}}^q}$ independent of $n$ and $\forall (k,h)\in\Lambda$ and all $(t,x)\in[0,T]\times\Omega$.
+      \item $\forall (k,h)\in\Lambda$, $\vf{B}_1$ is invertible and $\norm{{\vf{B}_1}^{-1}}\leq C_1k$ for certain $C_1>0$ independent of $(k,h)$.
+      \item The scheme is stable.
+      \item $\vf{v}^0$ is such that $\norm{\vf{v}^0-\vf{u}^0}=\O{k^p+\norm{\vf{h}}^q}$ uniformly for $(k,h)\in\Lambda$ and $(t,x)\in[0,T]\times\Omega$.
+    \end{enumerate}
+    Then, $\forall n\in\NN$ with $0\leq nk\leq T$ we have:
+    $$
+      \norm{\vf{v}^n-\vf{u}^n}=\O{k^p+\norm{\vf{h}}^q}
+    $$
+    uniformly for $(k,h)\in\Lambda$ and $(t,x)\in[0,T]\times\Omega$.
+  \end{theorem}
+  \begin{proof}
+    We have that
+    \begin{align*}
+      \vf{B}_1\vf{v}^{n} & =\vf{B}_0\vf{v}^{n-1}+\vf{f}^{n-1}               \\
+      \vf{B}_1\vf{u}^{n} & =\vf{B}_0\vf{u}^{n-1} +\vf{f}^{n-1}+\vf{T}^{n-1}
+    \end{align*}
+    Then if $\vf{A}= {\vf{B}_1}^{-1}\vf{B}_0$ we have that
+    $$\vf{v}^n-\vf{u}^n=\vf{A}^n(\vf{v}^0-\vf{u}^0)-\sum_{\ell=0}^{n-1}\vf{A}^{n-1-\ell}{\vf{B_1}}^{-1}\vf{T}^\ell$$
+    And so:
+    $$
+      \norm{\vf{v}^n-\vf{u}^n}\leq C_T \O{k^p+\norm{\vf{h}}^q}+\sum_{\ell=0}^{n-1}C_T C_1k\O{k^p+\norm{\vf{h}}^q}
+    $$
+    where we have used \mcref{NIPDE:preLax} for noting that $\forall\ell=0,\ldots,n-1$ $\norm{\vf{A}^{n-1-\ell}}\leq C_T$.
+    Finally observe that $kn\leq T$ and the uniformity of the $\O{k^p+\norm{\vf{h}}^q}$ allows us to conclude the proof.
+  \end{proof}
+  \begin{remark}
+    It can also be shown that the consistency and convergency imply stability.
+  \end{remark}
+  \begin{theorem}
+    Consider a scheme of $J$ steps for a 1st-order-in-time linear pde of constant coefficients whose amplification factor is $g$. Let $\Phi(\theta, g)$ be the \emph{amplification polynomial}, that is the polynomial that satisfies $g$ of degree $J-1$. Then, the scheme is stable if and only if for any root $g_j(\theta)$ of $\Phi$ we have $\abs{g_j(\theta)}\leq 1$ and if $\exists \theta_0$ and $k$ such that $\abs{g_k(\theta_0)}=1$ then this root is simple.
+  \end{theorem}
 \end{multicols}
 \end{document}

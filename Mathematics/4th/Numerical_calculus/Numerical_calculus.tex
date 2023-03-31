@@ -6,7 +6,7 @@
 \begin{multicols}{2}[\section{Numerical calculus}]
   \subsection{Ordinary differential equations}
   \begin{definition}
-    An initial-value problem is said to be \emph{well-posed} if it has existence and uniqueness of solutions and it has continuos dependence on initial conditions and parameters.
+    An initial-value problem is said to be \emph{well-posed in the Hadamard sense} (or simply \emph{well-posed}) if it has existence and uniqueness of solutions and it has continuos dependence on initial conditions and parameters.
   \end{definition}
   \subsubsection{One-step methods}
   Consider the ivp
@@ -259,5 +259,62 @@
     with $\alpha\simeq 0.9$.
     Furthermore, in order to avoid rapid oscillations of the stepsize, $h$ should not, however, be changed by more than a factor of 2 to 5 from one step to the next.
   \end{remark}
+  \subsubsection{Multistep method}
+  \begin{definition}
+    A $k$-step method is a method that uses the previous $k$ steps to compute the next step.
+  \end{definition}
+  \begin{definition}[Linear multistep method]
+    Consider the ivp of \mcref{NC:ivp}. A \emph{linear $k$-step method} is a method of the form:
+    \begin{equation}\label{NC:multistep}
+      \sum_{j=0}^k\alpha_j\vf{\tilde{y}}_{n+j}=h\sum_{j=0}^{k}\beta_j\vf{\tilde{f}}_n
+    \end{equation}
+    that computes the $(n+k)$-th iterate from the previous $k$ iterates. Here $\alpha_j,\beta_j\in\mathbb{R}$ are such that $\alpha_k\ne 0$ and ${\alpha_0}^2+{\beta_0}^2\ne 0$. Observe that we need $k$ initial values in order to use the method. Finally note that if $\beta_k=0$ then the method is explicit.
+  \end{definition}
+  \begin{remark}
+    Since in practise we only have one initial value, we can use a one-step method to compute the first $k$ iterates and then use the $k$-step method.
+  \end{remark}
+  \begin{definition}
+    Consider the multistep method of \mcref{NC:multistep}. We define the \emph{first and second characteristic polynomials} of the method as:
+    \begin{gather*}
+      \rho(z) =\sum_{j=0}^k\alpha_jz^j                  \qquad
+      \sigma (z) =\sum_{j=0}^k\beta_jz^j
+    \end{gather*}
+  \end{definition}
+  \begin{definition}
+    A linear $k$-step method is said to be \emph{zero-stable} if there is a constant $C>0$ such that for every $N\in\NN$ sufficiently large and for any two different sets of initial data $\vf{\tilde{y}}_0,\ldots,\vf{\tilde{y}}_{k-1}$ and $\vf{\hat{y}}_0,\ldots,\vf{\hat{y}}_{k-1}$, the two respective sequences $(\vf{\tilde{y}}_n)_{0\leq n\leq N}$ and $(\vf{\hat{y}}_n)_{0\leq n\leq N}$ satisfy:
+    $$\max_{0\leq n\leq N}\norm{\vf{\tilde{y}}_n-\vf{\hat{y}}_n}\leq C\max_{0\leq n\leq k-1}\norm{\vf{\tilde{y}}_n-\vf{\hat{y}}_n}$$
+  \end{definition}
+  \begin{definition}
+    A linear $k$-step method satisfies the \emph{root condition} if all zeros of its first characteristic polynomial $\rho(z)$ lie inside the closed unit disc, and every zero that lies on the unit circle is simple.
+  \end{definition}
+  \begin{theorem}
+    Consider the ivp of \mcref{NC:ivp} and suppose that $\vf{f}$ is Lipschitz continuous. Then, a linear $k$-step method is zero-stable if and only if it satisfies the root condition.
+  \end{theorem}
+  \begin{remark}
+    This theorem implies that zero-stability of a multi-step method can be determined by merely considering its behavior when applied to the trivial differential equation $y'=0$; it is for this reason that it is called \textit{zero}-stability.
+  \end{remark}
+  \begin{definition}[Adams method]
+    Consider the ivp of \mcref{NC:ivp}. The \emph{Adams method} is a linear multistep method of the form:
+    $$
+      \vf{\tilde{y}}_{n+k}=\vf{\tilde{y}}_{n+k-1}+h\sum_{j=0}^{k}\beta_j\vf{\tilde{f}}_{n+j}
+    $$
+    If $\beta_{k}=0$ then the method is explicit and it is called \emph{Adams-Bashforth method}. If $\beta_{k}\ne 0$ then the method is implicit and it is called \emph{Adams-Moulton method}.
+
+    The coefficients $\beta_j$ are found by integrating the Lagrange interpolating polynomial between $t_{n+k-1}$ and $t_{n+k}$ constructed from the nodes $(t_{n+j},\vf{\tilde{f}}_{n+j})$ for $j=0,\ldots,k$, for the Adams-Bashforth method, and for $j=0,\ldots,k-1$ for the Adams-Moulton method.
+  \end{definition}
+  \subsection{Non-linear systems of equations}
+  \subsubsection{Newton method}
+  \begin{definition}
+    Let $\vf{F}:\RR^n\rightarrow\RR^n$ be a differentiable field. We would like to find the solutions of $\vf{F}(\vf{x})=\vf{0}$.
+    The \emph{Newton method} is a recurrence of the form:
+    \begin{equation*}
+      \vf{x}_{n+1}=\vf{x}_n-\vf{DF}^{-1}(\vf{x}_n)\vf{F}(\vf{x}_n)
+    \end{equation*}
+    Rather than actually computing the inverse of the Jacobian matrix, one may save time and increase numerical stability by solving the system of linear equations
+    $$
+      \vf{DF}(\vf{x}_n)(\vf{x}_{n+1}-\vf{x}_n)=-\vf{F}(\vf{x}_n)
+    $$
+    for the unknown $\vf{x}_{n+1}-\vf{x}_n$.
+  \end{definition}
 \end{multicols}
 \end{document}
