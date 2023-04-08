@@ -724,6 +724,9 @@
   \begin{theorem}[Dominated convergence theorem]\label{P:dominated}
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $(X_n)$ be sequence of random variables such that $\displaystyle\lim_{n\to\infty}X_n\overset{\text{a.s.}}{=}X$, for some random variable $X$. Suppose that there exists an integrable random variable $Y$ such that $$|X_n|\leq Y\quad\forall n\geq 1$$ Then: $$\lim_{n\to\infty} \Exp(X_n)=\Exp(X)$$
   \end{theorem}
+  \begin{theorem}[Fatou's lemma]
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $(X_n)$ be a sequence of non-negative random variables. Then: $$\Exp(\liminf_{n\to\infty}X_n)\leq \liminf_{n\to\infty}\Exp(X_n)$$
+  \end{theorem}
   \subsubsection{Expectation of absolutely continuous random variables}
   \begin{theorem}
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$ be an absolutely continuous random variable with density $f_X$. Then, $X$ is integrable if and only if $$\int_{-\infty}^{+\infty}|x|f_X(x)\dd{x}<\infty$$
@@ -847,6 +850,10 @@
   \begin{theorem}
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $X$, $Y$ be independent random variables. Then, for all $t$ such that $\psi_X(t),\psi_Y(t)<+\infty$, the function $\psi_{X+Y}(t)$ is finite and: $$\psi_{X+Y}(t)=\psi_X(t)\psi_Y(t)$$
   \end{theorem}
+  \begin{proof}
+    $$\psi_{X+Y}(t)=\Exp(\exp{t(X+Y)})=\Exp(\exp{tX})\Exp(\exp{tY})=\psi_X(t)\psi_Y(t)$$
+  \end{proof}
+  where the second equality is because of the independence of $X$ and $Y$.
   \begin{proposition}
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $p\in(0,1)$, $\lambda\in\RR_{>0}$ and $X_1,\ldots,X_n$ be \iid random variables.
     \begin{itemize}
@@ -869,12 +876,25 @@
   \begin{proposition}[Law of total expectation]\label{P:totalexp}
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $\vf{X}$ be a discrete random vector with support $S_{\vf{X}}$, $Y$ be a random variable with support $S_Y$ and $h:S_{\vf{X}}\rightarrow\RR$ be a function. If $h(\vf{X})$ has finite expectation, then: $$\Exp(h(\vf{X}))=\sum_{y\in S_Y}\Exp(h(\vf{X})\mid Y=y)\Prob(Y=y)$$
   \end{proposition}
+  \begin{proof}
+    We have that:
+    \begin{align*}
+      \Exp(h(\vf{X})) & =\sum_{\vf{x}\in S_{\vf{X}}}h(\vf{x})\Prob(\vf{X}=\vf{x})                                  \\
+                      & =\sum_{\vf{x}\in S_{\vf{X}}}\sum_{y\in S_Y}h(\vf{x})\Prob(\vf{X}=\vf{x}\mid Y=y)\Prob(Y=y) \\
+                      & =\sum_{y\in S_Y}\sum_{\vf{x}\in S_{\vf{X}}}h(\vf{x})\Prob(\vf{X}=\vf{x}\mid Y=y)\Prob(Y=y) \\
+                      & =\sum_{y\in S_Y}\Exp(h(\vf{X})\mid Y=y)\Prob(Y=y)
+    \end{align*}
+    where in the second equality we have used the \mnameref{P:totalprob} and in the third step we can rearrange the terms due to the finite expectation of $h(\vf{X})$.
+  \end{proof}
   \begin{definition}
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(X,Y)$ be an absolutely continuous random vector with support $S_X\times S_Y$ and $y\in S_Y$. The \emph{conditional expectation} of $X$ given $Y=y$ is defined as: $$\Exp(X\mid Y=y):=\int_{S_{X}}xf_{X\mid Y}(x\mid y)\dd{x}$$ provided that the integral is absolutely convergent. More generally, if $\vf{X}$ is an absolutely continuous random vector with support $S_{\vf{X}}$ and $h:S_{\vf{X}}\rightarrow\RR$ is a function, then the conditional expectation of $h(\vf{X})$ given $Y=y$ is defined as: $$\Exp(h(\vf{X})\mid Y=y):=\int_{S_{\vf{X}}}h(\vf{x})f_{\vf{X}\mid Y}(\vf{x}\mid y)\dd{\vf{x}}$$ provided that the integral is absolutely convergent.
   \end{definition}
   \begin{proposition}[Law of total expectation]
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $\vf{X}$ be an absolutely continuous random vector with support $S_{\vf{X}}$, $Y$ be a random variable with support $S_Y$ and $h:S_{\vf{X}}\rightarrow\RR$ be a function. If $h(\vf{X})$ has finite expectation, then: $$\Exp(h(\vf{X}))=\int_{-\infty}^{+\infty}\Exp(h(\vf{X})\mid Y=y)f_Y(y)\dd{y}$$
   \end{proposition}
+  \begin{sproof}
+    Adapt the proof of \mnameref{P:totalexp}.
+  \end{sproof}
   \begin{center}
     \def\arraystretch{1.25}
     \begin{tabular}{|c|c|c|}

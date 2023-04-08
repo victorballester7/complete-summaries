@@ -30,50 +30,48 @@
   \end{remark}
   \subsubsection{Conditional expectation}
   \begin{proposition}[Substitution principle]\label{SP:substitutionPrinciple}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $\vf{X}$ be a discrete random vector with outcomes in $S_{\vf{X}}$, $Y$ be a discrete random variable with outcomes in $S_Y$, $h:S_{\vf{X}}\times S_Y\rightarrow\RR$ be a function and $y\in S_Y$. Then:
-    $$\Exp(h(\vf{X},Y=y)\mid Y=y)=\Exp((h(\vf{X}),Y)\mid Y=y)$$
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $\vf{X}$ be a discrete random vector with support $S_{\vf{X}}$, $Y$ be a discrete random variable with support $S_Y$, $h:S_{\vf{X}}\times S_Y\rightarrow\RR$ be a function and $y\in S_Y$. Then:
+    $$\Exp(h(\vf{X},Y)\mid Y=y)=\Exp((h(\vf{X}),Y=y)\mid Y=y)$$
   \end{proposition}
   \begin{proposition}[Law of total expectation]\label{SP:totalexp}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $\vf{X}$ is a discrete random vector with outcomes in $S_{\vf{X}}$, $\{A_n:1\leq n\leq N\}\subset\mathcal{A}$, $N\in\NN\cup\{\infty\}$, be such that $\bigsqcup_{n=1}^N A_n=\Omega'$ with $\Prob(\Omega')=1$ and $h:S_{\vf{X}}\rightarrow\RR$ be a function. If $h(\vf{X})$ has finite expectation or $h\geq 0$, then: $$\Exp(h(\vf{X}))=\sum_{n=1}^N\Exp(h(\vf{X})\mid A_n)\Prob(A_n)$$
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $\vf{X}$ is a discrete random vector with support $S_{\vf{X}}$, $\{A_n:1\leq n\leq N\}\subset\mathcal{A}$, $N\in\NN\cup\{\infty\}$, be such that $\bigsqcup_{n=1}^N A_n=\Omega'$ with $\Prob(\Omega')=1$ and $h:S_{\vf{X}}\rightarrow\RR$ be a function. If $h(\vf{X})$ has finite expectation or $h\geq 0$, then: $$\Exp(h(\vf{X}))=\sum_{n=1}^N\Exp(h(\vf{X})\mid A_n)\Prob(A_n)$$
   \end{proposition}
   \begin{sproof}
     See the proof of \mnameref{P:totalexp}.
   \end{sproof}
   \begin{definition}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $\vf{X}$ be a discrete random vector with outcomes in $S_{\vf{X}}$, $Y$ be a discrete random variable with outcomes in $S_Y$ and $h:S_{\vf{X}}\rightarrow\RR$ be a function. For all $\omega\in\Omega$ we define the random variable $\Exp(h(\vf{X})\mid Y)$ as
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $\vf{X}$ be a discrete random vector with support $S_{\vf{X}}$, $Y$ be a discrete random variable with support $S_Y$ and $h:S_{\vf{X}}\rightarrow\RR$ be a function. For all $\omega\in\Omega$ we define the random variable $\Exp(h(\vf{X})\mid Y)$ as
     $$\Exp(h(\vf{X})\mid Y)(\omega)=\Exp(h(\vf{X})\mid Y=y)$$
     provided that $Y(\omega)=y$.
     Note that it can also be written as:
     $$\Exp(h(\vf{X})\mid Y)=\sum_{y\in S_Y}\Exp(h(\vf{X})\mid Y=y)\indi{\{Y=y\}}$$
   \end{definition}
   \begin{proposition}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $\vf{X}$ be a discrete random vector with outcomes in $S_{\vf{X}}$, $Y$ be a discrete random variable with outcomes in $S_Y$, $h,h_1,h_2:S_{\vf{X}}\rightarrow\RR$ be functions and $a,b\in\RR$. Then:
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $\vf{X}$ be a discrete random vector with support $S_{\vf{X}}$, $Y$ be a discrete random variable with support $S_Y$, $h,h_1,h_2:S_{\vf{X}}\rightarrow\RR$ be functions and $a,b\in\RR$. Then:
     \begin{enumerate}
       \item $\Exp(ah_1(\vf{X})+bh_2(\vf{X})\mid Y)=a\Exp(h_1(\vf{X})\mid Y)+b\Exp(h_1(\vf{X})\mid Y)$
       \item If $\vf{X}$ and $Y$ are independent, then $\Exp(h(\vf{X})\mid Y)=\Exp(h(\vf{X}))$.
-      \item $\Exp(\Exp(h(\vf{X})\mid Y))=\Exp(h(\vf{X}))$.
+      \item $\Exp(\Exp(h(\vf{X})\mid Y))=\Exp(h(\vf{X}))$
     \end{enumerate}
   \end{proposition}
   \begin{sproof}
     The first two properties are consequence of the fact that the conditional expectation is an expectation. For the last one note that:
     \begin{align*}
-      \Exp(\Exp(h(\vf{X})\mid Y)) & =\sum_{y\in S_y}\Exp(h(\vf{X})\mid Y=y)\Prob(Y=y) \\
+      \Exp(\Exp(h(\vf{X})\mid Y)) & =\sum_{y\in S_Y}\Exp(h(\vf{X})\mid Y=y)\Prob(Y=y) \\
                                   & =\Exp(h(\vf{X}))
     \end{align*}
     where the last equality is due to the \mnameref{SP:totalexp}.
   \end{sproof}
   \begin{theorem}[Wald theorem]
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(Z_n)$ be a sequence of random variables, all of them with expectation $\mu\in\RR$, such that $\sup_{n\geq 1}\Exp(\abs{Z_n})=A<\infty$. If $N$ is an integrable random variable with outcomes in $\NN$ independent of $Z_n$ $\forall n\in\NN$, we have that:
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $(Z_n)$ be a sequence of random variables, all of them with expectation $\mu\in\RR$, such that $\sup_{n\geq 1}\Exp(\abs{Z_n})=A<\infty$. If $N$ is an integrable random variable with support $\NN$ independent of $Z_n$ $\forall n\in\NN$, we have that:
     $$\Exp\left(\sum_{n=1}^NZ_n\right)=\mu\Exp(N)$$
   \end{theorem}
   \begin{proof}
     Note that $\Exp\left(\sum_{n=1}^NZ_n\right)=\Exp\left(\sum_{n=1}^\infty Z_n\indi{N\geq n}\right)$ and it is integrable because:
-    \begin{align*}
-      \Exp\left(\sum_{n=1}^\infty \abs{Z_n\indi{N\geq n}}\right) & =\sum_{n=1}^\infty \Exp(\abs{Z_n})\Exp(\indi{N\geq n}) \\
-                                                                 & \leq A\sum_{n=1}^\infty \Prob(N\geq n)                 \\
-                                                                 & =A\Exp(N)                                              \\
-                                                                 & <\infty
-    \end{align*}
+    \begin{multline*}
+      \Exp\left(\sum_{n=1}^\infty \abs{Z_n\indi{N\geq n}}\right) =\sum_{n=1}^\infty \Exp(\abs{Z_n})\Exp(\indi{N\geq n}) \leq              \\
+      \leq A\sum_{n=1}^\infty \Prob(N\geq n) =A\Exp(N)<\infty
+    \end{multline*}
     where we have used the Independence of $(Z_n)$ and $N$ in the first equality.
     And so:
     $$\Exp\left(\sum_{n=1}^NZ_n\right)=\sum_{n=1}^\infty \Exp(Z_n)\Exp(\indi{N\geq n})=\mu\Exp(N)$$
@@ -83,31 +81,31 @@
   \end{remark}
   \subsubsection{Probability-generating function}
   \begin{definition}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$ be a random variable with outcomes in $\NN\cup\{0\}$. The \emph{probability-generating function} (or \emph{pgf}) of $X$ is the function $g_X:\mathcal{D}_X\rightarrow \RR$ defined as:
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$ be a random variable with support $\NN\cup\{0\}$. The \emph{probability-generating function} (or \emph{pgf}) of $X$ is the function $g_X:\mathcal{D}_X\rightarrow \RR$ defined as:
     \begin{equation}\label{SP:probgenfunc}
       g_X(s)=\sum_{k=0}^\infty s^k\Prob(X=k)=\Prob(X=0)+\sum_{k=1}^\infty s^k\Prob(X=k)
     \end{equation}
-    The set $\mathcal{D}_X$ is defined as a all the points for which the series of \mcref{SP:probgenfunc} converges absolutely.
+    The set $\mathcal{D}_X$ is defined as all the points for which the series of \mcref{SP:probgenfunc} converges absolutely.
   \end{definition}
   \begin{lemma}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$ be a random variable with outcomes in $\NN\cup\{0\}$. Then, $[-1,1]\subseteq \mathcal{D}_X$ and if $s\ne 0$, $g_X(s)=\Exp(s^X)$.
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$ be a random variable with support $\NN\cup\{0\}$. Then, $[-1,1]\subseteq \mathcal{D}_X$ and $g_X(s)=\Exp(s^X)$ (with the convention that $0^0=1$).
   \end{lemma}
   \begin{proof}
     Clearly $g_X(s)=\Exp(s^X)$ and furthermore $\forall s\in[-1,1]$ we have $s\in \mathcal{D}_X$ because:
     $$\sum_{k=0}^\infty \abs{s}^k\Prob(X=k)\leq \sum_{k=0}^\infty \Prob(X=k)=1<\infty$$
   \end{proof}
   \begin{theorem}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$, $Y$ be random variables with outcomes in $\NN\cup\{0\}$. Then: $$X\overset{\text{d}}{=}Y\iff g_X=g_Y$$
-    Moreover: $$\Prob(X=k)=\frac{{g_X}^{(k)}(0)}{k!}\quad \forall k\geq 0$$
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$, $Y$ be random variables with support $\NN\cup\{0\}$. Then: $$X\overset{\text{d}}{=}Y\iff g_X=g_Y$$
+    Moreover: $$\Prob(X=k)=\frac{{g_Y}^{(k)}(0)}{k!}\quad \forall k\geq 0$$
   \end{theorem}
   \begin{sproof}
-    Note that $g_X(s)$ is a power series defined in a neighbourhood of $s=0$.
+    Note that $g_X(s)$ is a power series defined in a neighbourhood of $s=0$ (recall \mcref{MA:derivk_powerseries}).
   \end{sproof}
   \begin{theorem}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$, $Y$ be independent random variables with outcomes in $\NN\cup\{0\}$. Then, $\forall s\in\mathcal{D}_X\cap \mathcal{D}_Y$ we have: $$g_{X+Y}(s)=g_X(s)g_Y(s)$$
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$, $Y$ be independent random variables with support $\NN\cup\{0\}$. Then, $\forall s\in\mathcal{D}_X\cap \mathcal{D}_Y$ we have: $$g_{X+Y}(s)=g_X(s)g_Y(s)$$
   \end{theorem}
   \begin{proof}
-    Note that if $s\in \in\mathcal{D}_X\cap \mathcal{D}_Y$, then $s\in\mathcal{D}_{X+Y}$ because
+    Note that if $s\in\mathcal{D}_X\cap \mathcal{D}_Y$, then $s\in\mathcal{D}_{X+Y}$ because
     $$g_{X+Y}(\abs{s})=\Exp\left(\abs{s}^{X+Y}\right)=\Exp\left(\abs{s}^X\right)\Exp\left(\abs{s}^Y\right)<\infty$$
     due to the independence of $X$ and $Y$.
     To show the equality if $s=0$, we have:
@@ -116,90 +114,100 @@
     If $s\ne 0$, as before: $$g_{X+Y}({s})=\Exp({s}^{X+Y})=\Exp({s}^X)\Exp({s}^Y)=g_{X}({s})g_{Y}({s})$$
   \end{proof}
   \begin{theorem}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$ be a random variable with outcomes in $\NN\cup\{0\}$. Then, $\forall k\geq 1$ we have:
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$ be a random variable with support $\NN\cup\{0\}$. Then, $\forall k\geq 1$ we have:
     $$\lim_{s\to 1^-}{g_X}^{(k)}(s)=\Exp(X(X-1)\cdots(X-k+1))$$
   \end{theorem}
   \begin{sproof}
-    Differentiate term by term and use \mnameref{MA:abelthm}.
+    Take $(s_n)\in\RR$ such that $s_n\nearrow 1$. Differentiating term by term we have that:
+    $$
+      g_{X}^{(k)}(s_n)=\Exp(X(X-1)\cdots (X-k+1){(s_n)}^{X-k})
+    $$
+    for all $n\in\NN$. Moreover note that $X(X-1)\cdots (X-k+1){(s_n)}^{X-k}\nearrow X(X-1)\cdots (X-k+1)$. Now use the \mnameref{P:monotone}.
   \end{sproof}
   \begin{center}
     \def\arraystretch{1.3}
     \begin{tabular}{|c|c|c|}
       \hline
-      $X$                     & Probability-generating function     \\
+      $X$                     & $g_X(s)$                            & $\mathcal{D}_X$                                          \\
       \hline
-      $c\in\RR$               & $\displaystyle s^{c}$               \\
+      $k\in\NN$               & $\displaystyle s^{k}$               & $\RR$                                                    \\
       %\hline
-      $U(\{x_1,\ldots,x_n\})$ & $\frac{1}{n}\sum_{i=1}^n s^{x_i}$   \\
+      $U(\{k_1,\ldots,k_n\})$ & $\frac{1}{n}\sum_{i=1}^n s^{k_i}$   & $\RR$                                                    \\
       %\hline
-      $\text{B}(n,p)$         & $\displaystyle {(ps+1-p)}^n$        \\
+      $\text{B}(n,p)$         & $\displaystyle {(ps+1-p)}^n$        & $\RR$                                                    \\
       %\hline
-      $\text{Pois}(\lambda)$  & $\displaystyle \exp{\lambda(s-1)}$  \\
+      $\text{Pois}(\lambda)$  & $\displaystyle \exp{\lambda(s-1)}$  & $\RR$                                                    \\
       %\hline
-      $\text{Geo}(p)$         & $\displaystyle \frac{ps}{1-(1-p)s}$ \\
+      $\text{Geo}(p)$         & $\displaystyle \frac{ps}{1-(1-p)s}$ & $\displaystyle\left(\frac{-1}{1-p},\frac{1}{1-p}\right)$ \\
       %\hline
       \hline
     \end{tabular}
     \captionof{table}{Probability-generating functions of common distributions.}
   \end{center}
   \subsection{Discrete-time Markov chains}
+  \begin{definition}[Stochastic process]
+    Let $T\subseteq \RR^n$ be a set, $(E,\mathcal{E})$ be a measurable space and $(\Omega,\mathcal{A},\Prob)$ be a probability space. A \emph{stochastic process} on $(\Omega,\mathcal{A},\Prob)$ with \emph{parameter set} $T$ and \emph{state space} $(E,\mathcal{E})$ is a family of random variables ${\{X_t\}}_{t\in T}$ from $(\Omega,\mathcal{A})$ to $(E,\mathcal{E})$. That is, $X_t:\Omega\to E$ satisfies ${X_t}^{-1}(B)\in\mathcal{A}$ for all $B\in\mathcal{E}$ and all $t\in T$.
+  \end{definition}
+  \begin{remark}
+    In general we wil consider stochastic processes with parameter sets $T=\NN,\NN\cup\{0\},\ZZ,\RR,\RR_{\geq 0}$ and state spaces $(\NN\cup\{0\},\mathcal{P}(\NN \cup \{0\}))$ or $(\RR,\mathcal{B}(\RR))$.
+  \end{remark}
   \subsubsection{Galton-Watson process}
   \begin{model}\label{SP:galtonwatsonModel}
-    Let $(X_n)$, $n\in\NN\cup\{0\}$ be a sequence of discrete random vairables representing the number of new individuals of a certain population at the $n$-th generation. Suppose they are defined as $$X_{n+1}=\sum_{k=1}^{X_n}Y_{n+1}^{(k)}$$ and $X_0=1$. Here $Y_{n+1}^{(k)}$ has outcomes in $\NN\cup\{0\}$ $\forall n,k$ and represent the number of descendants (to the next generation) of the $k$-th individual of the $n$-th generation. Suppose that $Y_{n+1}^{(k)}\sim Y$ are \iid We would like to study the probability $\rho$ of extinction of this population: $$\rho=\Prob(\{X_n=0:\text{for some $n\in\NN$}\})=\Prob\left(\bigcup_{n=1}^\infty\{X_n=0\}\right)$$
+    Let $(X_n)$, $n\in\NN\cup\{0\}$ be a sequence of discrete random vairables representing the number of new individuals of a certain population at the $n$-th generation. Suppose they are defined as $$X_{n+1}=\sum_{k=1}^{X_n}Z_{n+1}^{(k)}$$ and $X_0=1$. Here $Z_{n+1}^{(k)}$ has support $\NN\cup\{0\}$ $\forall n,k$ and represent the number of descendants (to the next generation) of the $k$-th individual of the $n$-th generation. Suppose that $Z_{n+1}^{(k)}\sim Z$ are \iid We would like to study the probability $\rho$ of extinction of this population: $$\rho=\Prob(\{X_n=0:\text{for some $n\in\NN$}\})=\Prob\left(\bigcup_{n=1}^\infty\{X_n=0\}\right)$$
   \end{model}
   \begin{lemma}\label{SP:lemmaGaltonWatson}
-    Let $(Y_n)$ be a sequence of \iid random variables distributed as $Y$, whose outcomes are in $\NN\cup\{0\}$, and $N$ be a random variable also with outcomes in $\NN\cup\{0\}$ and independent to $(Y_n)$. Let $X=\sum_{k=1}^NY_k$. Then, $\forall s\in[-1,1]$ we have: $$g_X(s)=g_N(g_Y(s))$$
+    Let $(Z_n)$ be a sequence of \iid random variables distributed as $Z$ with support $\NN\cup\{0\}$, and $N$ be a random variable also with support $\NN\cup\{0\}$ and independent to $(Z_n)$. Let $X=\sum_{k=1}^NZ_k$. Then, $\forall s\in[-1,1]$ we have: $$g_X(s)=g_N(g_Z(s))$$
   \end{lemma}
   \begin{proof}
-    First suppose $N\leq M$ with $M\in\NN$ fixed. Then using the independence, the \mnameref{P:totalexp} and the \mnameref{SP:substitutionPrinciple}:
+    First suppose $N\leq M$ with $M\in\NN$ fixed. Then using the independence, the \mnameref{SP:totalexp} and the \mnameref{SP:substitutionPrinciple}:
     \begin{align*}
       g_X(s)=\Exp(s^X) & =\sum_{k=1}^M\Exp(s^X\mid N=k)\Prob(N=k)                                        \\
-                       & = \sum_{k=1}^{M} \Exp\left(s^{\sum_{i=1}^{N}Y_i} \mid N = k\right) \Prob(N = k) \\
-                       & = \sum_{k=1}^{M} \Exp\left(s^{\sum_{i=1}^{k}Y_i}\right) \Prob(N = k)            \\
-                       & = \sum_{k=1}^{M} {g_Y(s)}^k \Prob(N = k)                                        \\
-                       & = g_N(g_Y(s))
+                       & = \sum_{k=1}^{M} \Exp\left(s^{\sum_{i=1}^{N}Z_i} \mid N = k\right) \Prob(N = k) \\
+                       & = \sum_{k=1}^{M} \Exp\left(s^{\sum_{i=1}^{k}Z_i}\right) \Prob(N = k)            \\
+                       & = \sum_{k=1}^{M} {g_Z(s)}^k \Prob(N = k)                                        \\
+                       & = g_N(g_Z(s))
     \end{align*}
     Now if $N$ can take any value of $\NN\cup\{0\}$ we have that:
     \begin{align*}
-      g_X(s) & =\Exp\left(s^{\sum_{i=1}^{N}Y_i}\right)                          \\
-             & =\Exp\left(\lim_{M\to\infty}s^{\sum_{i=1}^{\min(N,M)}Y_i}\right) \\
-             & =\lim_{M\to\infty}\Exp\left(s^{\sum_{i=1}^{\min(N,M)}Y_i}\right) \\
-             & =\lim_{M\to\infty}g_{\min(N,M)}(g_Y(s))                          \\
-             & =\lim_{M\to\infty}\Exp\left({(g_Y(s))}^{\min(N,M)}\right)        \\
-             & =\Exp\left(\lim_{M\to\infty}{(g_Y(s))}^{\min(N,M)}\right)        \\
+      g_X(s) & =\Exp\left(s^{\sum_{i=1}^{N}Z_i}\right)                          \\
+             & =\Exp\left(\lim_{M\to\infty}s^{\sum_{i=1}^{\min(N,M)}Z_i}\right) \\
+             & =\lim_{M\to\infty}\Exp\left(s^{\sum_{i=1}^{\min(N,M)}Z_i}\right) \\
+             & =\lim_{M\to\infty}g_{\min(N,M)}(g_Z(s))                          \\
+             & =\lim_{M\to\infty}\Exp\left({(g_Z(s))}^{\min(N,M)}\right)        \\
+             & =\Exp\left(\lim_{M\to\infty}{(g_Z(s))}^{\min(N,M)}\right)        \\
              & =g_N(g_Z(s))
     \end{align*}
     where both limit exchangings are due to the \mnameref{P:dominated} using the intagrable random variable 1.
   \end{proof}
   \begin{theorem}
-    In the hypothesis of \mcref{SP:galtonwatsonModel}, we have that: $$\rho=g_Y(\rho)$$
+    In the hypothesis of \mcref{SP:galtonwatsonModel}, we have that: $$\rho=g_Z(\rho)$$
   \end{theorem}
   \begin{proof}
-    Note that $\{X_n=0\}\subseteq \{x_{n+1}=0\}$. Hence:
+    Note that $\{X_n=0\}\subseteq \{X_{n+1}=0\}$. Hence:
     $$\rho=\Prob\left(\bigcup_{n=1}^\infty\{X_n=0\}\right)\!=\lim_{n\to\infty}\Prob(X_n=0)=\lim_{n\to\infty}g_{X_n}(0)$$
     Now, using \mcref{SP:lemmaGaltonWatson} we have:
-    $$g_{X_{n}}(s)=g_{X_{n-1}}(g_Y(s))=\cdots=g_{X_1}({g_Y}^n(s))$$
-    But $X_1=1$ and so $g_{X_1}(s)=s$. So $g_{X_{n}}(s)={g_Y}^n(s)$ and therefore
-    $g_{X_{n+1}}(0)=g_Y(g_{X_{n}}(0))$.
+    $$g_{X_{n}}(s)=g_{X_{n-1}}(g_Z(s))=\cdots=g_{X_1}({g_Z}^n(s))$$
+    But $X_1=1$ and so $g_{X_1}(s)=s$. So $g_{X_{n}}(s)={g_Z}^n(s)$ and therefore
+    $g_{X_{n+1}}(0)=g_Z(g_{X_{n}}(0))$.
     Taking the limit as $n\to\infty$ and using the continuity of the pgf we get the result.
   \end{proof}
   \begin{theorem}
-    In the hypothesis of \mcref{SP:galtonwatsonModel} and the additional assumption that $0<\Prob(Y=0)<1$ we have:
     \begin{enumerate}
-      \item If $\Exp(Y)\leq 1$, $g_Y$ has only 1 fixed point (the trivial one, 1). Hence, the population will extinct with probability 1.
-      \item If $\Exp(Y)> 1$, $g_Y$ has a unique non-trivial fixed point on (0,1).
+      In the hypothesis of \mcref{SP:galtonwatsonModel} and the additional assumption that $0<\Prob(Z=0)<1$ we have:
+      \item If $\Exp(Z)\leq 1$, $g_Z$ has only 1 fixed point (the trivial one, $s=1$). Hence, the population will extinct with probability 1.
+      \item If $\Exp(Z)> 1$, $g_Z$ has a unique non-trivial fixed point on (0,1).
     \end{enumerate}
   \end{theorem}
   \begin{proof}
-    First suppose $\Prob(Y=0)+\Prob(Y=1)=1$. Thus, $Y\almoste{\leq}1$ and so $\Exp(Y)\leq 1$. Moreover, $g_Y(s)=\Prob(Y=0)+s\Prob(Y=1)$, which is a line with slope $\Prob(Y=1)<1$. Hence, it has a unique fixed point, which is $s=1$.
+    First suppose $\Prob(Z=0)+\Prob(Z=1)=1$. Thus, $Z\almoste{\leq}1$ and so $\Exp(Z)\leq 1$. Moreover, $g_Z(s)=\Prob(Z=0)+s\Prob(Z=1)$, which is a line with slope $\Prob(Z=1)<1$. Hence, it has a unique fixed point, which is $s=1$.
 
-    Now assume $\Prob(Y=0)+\Prob(Y=1)<1$. Then, $\exists k\geq 2$ with $\Prob(Y=k)>0$. Hence, ${g_Y}'(s)>0$ and ${g_Y}''(s)>0$ $\forall s\in (0,1)$. Now consider $f(s)=g(s)-s$. Note that $f$ is strictly convex in $(0,1)$ and $f(0)=g(0)=\Prob(Y=0)>0$. Finally note that $$\lim_{t\to 1^-} f'(s)=\lim_{t\to 1^-}g(s)-1=\Exp(Y)-1$$
+    Now assume $\Prob(Z=0)+\Prob(Z=1)<1$. Then, $\exists k\geq 2$ with $\Prob(Z=k)>0$. Hence, ${g_Z}'(s)>0$ and ${g_Z}''(s)>0$ $\forall s\in (0,1)$. Now consider $f(s)=g(s)-s$. Note that $f$ is strictly convex in $(0,1)$ and $f(0)=g(0)=\Prob(Z=0)>0$. Finally note that $$\lim_{t\to 1^-} f'(s)=\lim_{t\to 1^-}g(s)-1=\Exp(Z)-1$$
     and so $\displaystyle\lim_{t\to 1^-} f'(s)$ is negative in the first case and positive in the second case. This imply that $f$ has no zeros on $(0,1)$ in the first case and exactly 1 zero in $(0,1)$ in the second case.
 
     It's missing to see that in the second case the probability of extinction $\rho$ is given by the fixed point in $(0,1)$, rather than 1. We have that:
-    $$\rho=\lim_{n\to\infty}g_{X_n}(0)=\lim_{n\to\infty}{g_Y}^n(0)$$
-    Since $g'>0$, we have that $g$ is increasing and so it is $g^n$ $\forall n\in\NN$. Moreover if $g(x_0)=x_0$, we have that $g^n(x_0)=x_0$ $\forall n\in\NN$. Therefore $$0<g(0)<g^2(0)<\cdots<g^n(0)<\cdots <x_0<\cdots <1$$
-    And so the limit has to be $x_0$ (note that the limit does exist because $({g_Y}^n(0))$ is an increasing bounded sequence).
+    $$\rho=\lim_{n\to\infty}g_{X_n}(0)=\lim_{n\to\infty}{g_Z}^n(0)$$
+    Since ${g_Z}'>0$, we have that ${g_Z}$ is increasing and so it is ${g_Z}^n$ $\forall n\in\NN$. Moreover if ${g_Z}(x_0)=x_0$, we have that ${g_Z}^n(x_0)=x_0$ $\forall n\in\NN$. Therefore $$0<{g_Z}(0)<{g_Z}^2(0)<\cdots<{g_Z}^n(0)<\cdots <x_0<\cdots <1$$
+    And so the limit has to be $x_0$ (note that the limit does exist because $({g_Z}^n(0))$ is an increasing bounded sequence).
   \end{proof}
   \subsubsection{Gambler's ruin}
   \begin{definition}[Gambler's ruin problem]
@@ -214,7 +222,7 @@
       \end{cases}$$
   \end{proposition}
   \begin{sproof}
-    We have that $q_k$ solves the differenc equation:
+    We have that $q_k$ solves the difference equation
     \begin{multline*}
       q_k =\Prob(\text{ruin}\mid X_k=1)\Prob(X_1=1)+\\
       +\Prob(\text{ruin}\mid X_k=-1)\Prob(X_1=-1) =q_{k+1}p+q_{k-1}q
@@ -224,7 +232,7 @@
   \begin{proposition}
     Consider the Gambler's ruin problem. Suppose that we play against another player (and so when we lose, he wins and viceversa). Let $p_z^*$, $q_z^*$ be the respective probabilities for the other player. Then:
     $$q_z+q_z^*=1$$
-    Hence, $D\almoste{<}\infty$.
+    Hence, $D_z\almoste{<}\infty$.
   \end{proposition}
   \begin{sproof}
     Note that
@@ -248,7 +256,7 @@
       d_k =\Exp(D_k\mid X_k=1)\Prob(X_1=1)+\\
       +\Exp(D_k\mid X_k=-1)\Prob(X_1=-1) =\\=\Exp(D_{k+1}+1)p+\Exp(D_{k-1}+1)q= d_{k+1}p+d_{k-1}q+1
     \end{multline*}
-    with $d_0=0$ and $d_a=0$, whose solution is straightforward. The second equality is due to the independence and the \mnameref{SP:substitutionPrinciple}.
+    with $d_0=0$ and $d_a=0$, whose solution is straightforward ($d_k=\frac{k}{p-q}$ and $d_k=-k^2$ are particular solutions for the case $p\ne q$ and $p=q$, respectively). The second equality is due to the independence and the \mnameref{SP:substitutionPrinciple}.
   \end{proof}
   \subsubsection{Markov chains}
   \begin{definition}
@@ -258,10 +266,10 @@
     \end{multline*} for all $n\geq 0$ and all $i_0,\ldots,i_{n-1},i,j\in I$. This property is usually called \emph{Markov property}.
     If moreover $\Prob(X_{n+1}=j\mid X_n=i)$ does not depend on $n$, that is
     $$\Prob(X_{n+1}=j\mid X_n=i)=\Prob(X_{1}=j\mid X_0=i)$$
-    then we say that the Markov chain is a \emph{time-homogeneous Markov chain}.
+    then we say that the Markov chain is a \emph{time-homogeneous Markov chain}. The elements of $I$ are called \emph{states} of the Markov chain.
   \end{definition}
   \begin{definition}[Stochastic matrix]
-    A matrix $\vf{P}=(p_{ij})_{i,j\in I}$ is a \emph{stochastic matrix} if $p_{ij}\geq 0$ $\forall i,j\in I$ and: $$\sum_{j\in I}p_{ij}=1$$
+    Let $I$ be an index set. A matrix $\vf{P}=(p_{ij})_{i,j\in I}$ is called a \emph{stochastic matrix} if $p_{ij}\geq 0$ $\forall i,j\in I$ and: $$\sum_{j\in I}p_{ij}=1$$
   \end{definition}
   \begin{definition}
     Let $(X_n)$ be a time-homogeneous Markov chain. We define $p_{ij}$ as the probability of going from state $i$ to state $j$. That is: $$p_{ij}=\Prob(X_{1}=j\mid X_0=i)$$
@@ -275,7 +283,7 @@
     \end{enumerate}
   \end{proposition}
   \begin{definition}[Random walk]
-    A \emph{random walk} is a sequence $(\vf{S}_n)$ with $\vf{S}_0=\vf{X}_0$ and $\vf{S}_n=\sum_{k=0}^{n}\vf{X}_n$, where $(\vf{X}_n)_{n\geq 1}$ is a sequence of \iid random vectors and $\vf{X}_0$ is a random vector independent from $(\vf{X}_n)$.
+    A \emph{random walk} is a sequence $(\vf{S}_n)$ with $\vf{S}_0=\vf{X}_0$ and $\vf{S}_n=\sum_{k=0}^{n}\vf{X}_k$, where $(\vf{X}_k)_{k\geq 1}$ is a sequence of \iid random vectors and $\vf{X}_0$ is a random vector independent from $(\vf{X}_k)$.
   \end{definition}
   \begin{definition}
     A \emph{simple random walk} is a random walk in which $X_k$ are random variables such that:
@@ -294,7 +302,7 @@
   \end{definition}
   \begin{definition}
     Let $(X_n)$ be a time-homogeneous Markov chain. We define the probabilities $\pi_i^{(n)}$ as the probability of being in state $i$ after $n$ steps. That is: $$\pi_i^{(n)}=\Prob(X_n=i)$$
-    We define the vector $\vf{\pi}^{(n)}=(\pi_i^{(n)})_{i\in I}$ as the $n$-step stationary distribution of the Markov chain.
+    We define the vector $\vf{\pi}^{(n)}=(\pi_i^{(n)})_{i\in I}$ as the \emph{$n$-step distribution} of the Markov chain.
   \end{definition}
   \begin{definition}
     Let $(X_n)$ be a time-homogeneous Markov chain. We define the \emph{stationary distribution} of the Markov chain as the distribution of the random variable $X_0$.
@@ -334,7 +342,7 @@
         &=\sum_{k\in I}\Prob(X_{n}=k\mid X_0=i)\cdot\\
         &\hspace{2.5cm}\cdot\Prob(X_{n+1}=j\mid X_n=k, X_0=i)
       \end{split}             \\
-                     & =\sum_{k\in I}p_{ij}^{(n)}p_{kj}^{(1)}
+                     & =\sum_{k\in I}p_{ik}^{(n)}p_{kj}^{(1)}
     \end{align*}
     where the penultimate equality follows from \mcref{SP:lema1Markov} and the last equality follows from \mcref{SP:lema2Markov} and the Markov property because if $D=\{X_n=k, X_0=i\}$ we have that:
     \begin{multline*}
@@ -361,13 +369,16 @@
   \begin{sproof}
     \begin{enumerate}
       \item $p_{ij}^{(0)}=\Prob(X_1=j\mid X_0=i)=\delta_{ij}$.
-      \item $\pi_i^{(n)}=\Prob(X_n=i)=\sum_{k\in I}\Prob(X_n=i\mid X_0=k)=\sum_{k\in I}\pi_k^{(0)}p_{ki}^{(n)}$
+      \item
+            \begin{multline*}
+              \pi_i^{(n)}=\Prob(X_n=i)=\sum_{k\in I}\Prob(X_n=i\mid X_0=k)\cdot\\\cdot\Prob(X_0=k)=\sum_{k\in I}\pi_k^{(0)}p_{ki}^{(n)}
+            \end{multline*}
       \item Use the \mnameref{P:totalprob} and the Markov property.
     \end{enumerate}
   \end{sproof}
   \subsubsection{Classification of states}
   \begin{definition}
-    Let $(X_n)$ be a time-homogeneous Markov chain. We say that a state $j\in I$ is \emph{reachable} form $i\in I$ if $\exists n\in I$ such that $p_{ij}^{(n)}>0$. In this case we will write $i\to j$.
+    Let $(X_n)$ be a time-homogeneous Markov chain. We say that a state $j\in I$ is \emph{reachable} from $i\in I$ if $\exists n\in I$ such that $p_{ij}^{(n)}>0$. In this case we will write $i\to j$.
   \end{definition}
   \begin{definition}
     Let $(X_n)$ be a time-homogeneous Markov chain. We say that two states $i,j\in I$ \emph{communicate} if $i\to j$ and $j\to i$. In this case we will write $i\leftrightarrow j$.
@@ -380,9 +391,10 @@
     \begin{equation}\label{SP:corolariChapKolmo}
       p_{ik}^{(n+m)}=\sum_{\ell\in I} p_{i\ell}^{(n)}p_{\ell k}^{(m)}\geq p_{ij}^{(n)}p_{jk}^{(m)}>0
     \end{equation}
+    Similarly, we have $p_{ki}^{(r+s)}>0$ for some $r,s\in I$. Therefore, $i\leftrightarrow k$.
   \end{proof}
   \begin{definition}
-    Let $(X_n)$ be a time-homogeneous Markov chain. A subset $C\subseteq I$ is called \emph{irreducible class} if for any $i,j\in C$ we have $i\leftrightarrow j$. That is, if $C$ is a equivalence class of $\leftrightarrow$. If all the states are in the same equivalence class, then $C$ is called an \emph{irreducible chain}.
+    Let $(X_n)$ be a time-homogeneous Markov chain. A subset $C\subseteq I$ is called \emph{irreducible class} if for any $i,j\in C$ we have $i\leftrightarrow j$. That is, if $C$ is an equivalence class of $\leftrightarrow$. If all the states are in the same equivalence class, then the Markov chain is called an \emph{irreducible chain}.
   \end{definition}
   \begin{definition}
     Let $(X_n)$ be a time-homogeneous Markov chain and $i\in I$. We define the \emph{period} of $i$ as:
@@ -390,20 +402,20 @@
     with the convention that if $\{n\in\NN:p_{ii}^{(n)}>0\}=\varnothing$, then $d(i)=\infty$. If $d(i)=1$ we say that $i$ is \emph{aperiodic}.
   \end{definition}
   \begin{proposition}
-    Let $(X_n)$ be a time-homogeneous Markov chain. Then: $$i\leftrightarrow j\implies d(i)=d(j)$$
+    Let $(X_n)$ be a time-homogeneous Markov chain and $i,j\in I$. Then: $$i\leftrightarrow j\implies d(i)=d(j)$$
   \end{proposition}
   \begin{proof}
     Suppose $i\ne j$. We will see that if $p_{jj}^{(n)}>0$, then $d(i)\mid n$. Since $i\leftrightarrow j$, then $\exists r,s\in I$ such that $p_{ij}^{(r)}>0$ and $p_{ji}^{(s)}>0$. So as in \mcref{SP:corolariChapKolmo}, we have $p_{ii}^{(r+s)}>0$. Thus, $d(i)\mid r+s$. Moreover if $p_{jj}^{(n)}>0$, then:
     $$p_{ii}^{(r+n+s)}\geq p_{ij}^{(r)}p_{jj}^{(n)}p_{ji}^{(s)}>0$$
-    So $d(i)\mid r+n+s$. Thus, $d(i)\mid n$ and so $d(j)\geq d(i)$ because $\{n\in\NN:p_{jj}^{(n)}>0\}=d(i)\ZZ$. Repeating the argument exchanging $i$ and $j$ we get $d(j)= d(i)$.
+    So $d(i)\mid r+n+s$. Thus, $d(i)\mid n$ and so $d(j)\geq d(i)$ because $\{n\in\NN:p_{jj}^{(n)}>0\}=d(i)(\NN\cup\{0\})$. Repeating the argument exchanging $i$ and $j$ we get $d(j)= d(i)$.
   \end{proof}
   \begin{definition}
-    Let $(X_n)$ be a time-homogeneous Markov chain. If the chain of states is irreducible, we will denote the common period by $d$. If $d=1$ we say that the chain is \emph{aperiodic}.
+    Let $(X_n)$ be a time-homogeneous Markov chain. If the chain is irreducible, we will denote the common period by $d$. If $d=1$ we say that the chain is \emph{aperiodic}.
   \end{definition}
   \begin{proposition}
-    Let $(X_n)$ be a time-homogeneous Markov chain. Suppose we have an irreducible chain of period $d>1$. Then, there exist subsets $C_0,\ldots,C_{d-1}\subseteq I$ such that $I=C_0\sqcup\cdots\sqcup C_{d-1}$ and such that if $i\in C_\alpha$, then:
-    $$p_{ij}>0\implies j\in C_{{[\alpha+1]}_d}$$
-    for all $j\in I$. Here ${[\alpha+1]}_d$ denotes $\alpha+1\mod{d}$.
+    Let $(X_n)$ be a time-homogeneous Markov chain. Suppose we have an irreducible chain of period $d>1$. Then, there exist subsets $C_0,\ldots,C_{d-1}\subseteq I$ such that $I=C_0\sqcup\cdots\sqcup C_{d-1}$ and such that if $j\in C_\alpha$, then:
+    $$p_{jk}>0\implies k\in C_{{[\alpha+1]}_d}$$
+    for all $k\in I$. Here ${[\alpha+1]}_d$ denotes $\alpha+1\mod{d}$.
   \end{proposition}
   \begin{proof}
     Let $i\in I$ and define
@@ -423,7 +435,7 @@
     for all $n\geq 0$.
   \end{proposition}
   \begin{proof}
-    By \mcref{SP:lema2Markov} it suffices to prove the statement for $B=\{i_0\}\times\cdots\times\{i_n\}$. Moreover since $A$ is countable we can suppose $A=\{j_1\}\times\cdots\times\{j_k\}$. We will prove it by induction on $k$ the homogeneous equality (the other one is even easier). The case $k=1$ is by definition. Now suppose $k\geq 2$. Then, denoting $C:=\{X_0=i_0,\ldots,X_{n-1}=i_{n-1},X_n=i\}$ we have:
+    By \mcref{SP:lema2Markov} it suffices to prove the statement for $B=\{i_0\}\times\cdots\times\{i_{n-1}\}$. Moreover since $A$ is countable we can suppose $A=\{j_1\}\times\cdots\times\{j_k\}$. We will prove it by induction on $k$ the homogeneous equality (the other one is even easier). The case $k=1$ is by definition. Now suppose $k\geq 2$. Then, denoting $C:=\{X_0=i_0,\ldots,X_{n-1}=i_{n-1},X_n=i\}$ we have:
     \begin{multline*}
       \Prob(X_{n+1}=j_1,\ldots,X_{n+k+1}=j_{k+1}\mid C) \\
       =\Prob(X_{n+k+1}=j_{k+1}\mid C,X_{n+1}=j_1,\ldots,X_{n+k}=j_k)\cdot\\
@@ -435,7 +447,7 @@
     where in the second equality we have used the Markov property, the homogeneous property and induction hypothesis.
   \end{proof}
   \begin{definition}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and let $I$ be a finite or countable set. For each $i\in I$, let $\mathcal{F}_i$ be a sub $\sigma$-algebra of $\mathcal{A}$. We say that $(\mathcal{F}_i)_{i\in I}$ is \emph{filtration} if for all $i\in I$ we have $\mathcal{F}_i\subseteq\mathcal{F}_{i+1}$. The tuple $(\Omega,\mathcal{A},(\mathcal{F}_i)_{i\in I},\Prob)$ is called a \emph{filtration space}.
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and let $I$ be a finite or countable set. For each $i\in I$, let $\mathcal{F}_i$ be a sub $\sigma$-algebra of $\mathcal{A}$, that is a subset of $\mathcal{A}$ which also $\sigma$-algebra. We say that $(\mathcal{F}_i)_{i\in I}$ is \emph{filtration} if for all $i\in I$ we have $\mathcal{F}_i\subseteq\mathcal{F}_{i+1}$. The tuple $(\Omega,\mathcal{A},(\mathcal{F}_i)_{i\in I},\Prob)$ is called a \emph{filtration space}.
   \end{definition}
   \begin{definition}
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $\vf{X}$ be a random vector. the \emph{$\sigma$-algebra generated by $\vf{X}$} is:
@@ -470,7 +482,7 @@
     \end{itemizeiff}
   \end{proof}
   \begin{proposition}
-    Let $(X_n)$ be a time-homogeneous Markov chain, $(\Omega,\mathcal{F},(\mathcal{F}_n)_{n\geq 0},\Prob)$ be a filtration space defined with $(X_n)$, $i\in I$ and $\tau_i$ be the random variable, whose outcomes are in $\NN\cup\{0,\infty\}$, defined by:
+    Let $(X_n)$ be a time-homogeneous Markov chain, $(\Omega,\mathcal{F},(\mathcal{F}_n)_{n\geq 0},\Prob)$ be a filtration space defined with $(X_n)$, $i\in I$ and $\tau_i$ be the random variable with support $\NN\cup\{0,\infty\}$ defined by:
     \begin{equation}\label{SP:tau_i}
       \tau_i(\omega)=\inf\{n\geq 1:X_n(\omega)=i\}
     \end{equation}
@@ -484,7 +496,7 @@
   \begin{theorem}[Strong Markov property]\label{SP:MarkovStrong}
     Let $(X_n)$ be a time-homogeneous Markov chain, $(\Omega,\mathcal{F},(\mathcal{F}_n)_{n\geq 0},\Prob)$ be a filtration space defined with $(X_n)$ and $\tau$ be a stopping time. Suppose that $\Prob(\tau<\infty)>0$. Then:
     \begin{multline*}
-      \Prob(X_{\tau+n+1}=j\mid X_{\tau}=i_0,\ldots,X_{\tau+n-1}=i_{n-1},X_{\tau +n}=i,\\\tau<\infty)=\Prob(X_{\tau+n+1}=j\mid X_{\tau+n}=i,\tau<\infty)=\\=\Prob(X_{n+1}=j\mid X_n=i)
+      \Prob(X_{\tau+n+1}=j\mid X_{\tau}=i_0,\ldots,X_{\tau+n-1}=i_{n-1},X_{\tau +n}=i,\\\tau<\infty)=\Prob(X_{\tau+n+1}=j\mid X_{\tau+n}=i,\tau<\infty)=\\=\Prob(X_{1}=j\mid X_0=i)
     \end{multline*}
     on account that $\Prob(A)>0$, where $A:=\{X_{\tau}=i_0,\ldots,X_{\tau+n-1}=i_{n-1},X_{\tau +n}=i,\tau<\infty\}$.
   \end{theorem}
@@ -502,6 +514,13 @@
       \Prob(X_{\tau+n+1}=j\mid A) =\sum_{\substack{m=0 \\\Prob(\tau=m,A)>0}}^{\infty}\Prob(X_1=j\mid X_0=i)\cdot\\\cdot\Prob(\tau=m\mid A)=\Prob(X_1=j\mid X_0=i)
     \end{multline*}
   \end{proof}
+  \begin{corollary}[Strong Markov property]\label{SP:MarkovStrong2}
+    Let $(X_n)$ be a time-homogeneous Markov chain, $(\Omega,\mathcal{F},(\mathcal{F}_n)_{n\geq 0},\Prob)$ be a filtration space defined with $(X_n)$, $\tau$ be a stopping time, $k\in\NN$ and $A\subseteq I^k$ and $B\subseteq I^n$. Suppose that $\Prob(\tau<\infty)>0$. Then:
+    \begin{multline*}
+      \Prob((X_{\tau+n+1},\ldots,X_{\tau+n+k})\in A\mid (X_{\tau},,\ldots,X_{\tau+n-1})\in B, \\X_{\tau +n}=i,\tau<\infty)=\Prob((X_{1},\ldots,X_{k})\in A\mid X_0=i)
+    \end{multline*}
+    for all $n\geq 0$.
+  \end{corollary}
   \subsubsection{Recurrence and transience}
   From now on we will omit saying that a stopping time $\tau$ is defined in a filtration space $(\Omega,\mathcal{F},(\mathcal{F}_n)_{n\geq 0},\Prob)$. Moreover given a Markov chain $(X_n)$, we will denote by $\Prob_i(A):=\Prob(A\mid X_0=i)$, for any event $A$.
   \begin{definition}
@@ -513,9 +532,6 @@
   \begin{remark}
     Roughly speaking, if $i$ is recurrent it means that the chain will return at least once to $i$. On the other hand, if $i$ is transient, it means that the chain may never return to $i$.
   \end{remark}
-  \begin{definition}
-    Let $(X_n)$ be a time-homogeneous Markov chain and $i\in I$.
-  \end{definition}
   \begin{proposition}\label{SP:recurrence}
     Let $(X_n)$ be a time-homogeneous Markov chain and $i\in I$. Then:
     $$
@@ -531,7 +547,7 @@
     $$
       \tau_i^k:= \inf\{n>\tau_i^{k-1}:X_n=i\}
     $$
-    with the convention that $\tau_i^1=\tau_1$. An easy check shows that $\tau_i^k$ is a stopping time $\forall k\in\NN$ and $\{\tau_i^k<\infty\}\subseteq \{\tau_i^{k-1}<\infty\}$. Thus:
+    with the convention that $\tau_i^1=\tau_i$. An easy check shows that $\tau_i^k$ is a stopping time $\forall k\in\NN$ and $\{\tau_i^k<\infty\}\subseteq \{\tau_i^{k-1}<\infty\}$. Thus:
     \begin{multline*}
       \Prob_i(N_i\geq k) =\Prob_i(\tau_i^k<\infty)=\Prob_i(\tau_i^k<\infty,\tau_i^{k-1}<\infty)\\=\Prob_i(\tau_i^{k-1}<\infty)\Prob_i(\tau_i^k<\infty\mid\tau_i^{k-1}<\infty)=\\={(f_{ii})}^{k-1}\Prob_i(\tau_i^k<\infty\mid\tau_i^{k-1}<\infty)
     \end{multline*}

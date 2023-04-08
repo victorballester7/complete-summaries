@@ -26,9 +26,12 @@
     where $a\in\RR$ and $f$ is a function.
     The following are satisfied:
     \begin{enumerate}
-      \item $\displaystyle\frac{u_m^{n+1}-u_m^n}{k}+a\frac{u_{m+1}^n-u_m^n}{h}+\O{k}+\O{h}=f_m^n$
-      \item $\displaystyle\frac{u_m^{n+1}-u_m^n}{k}+a\frac{u_{m}^n-u_{m-1}^n}{h}+\O{k}+\O{h}=f_m^n$
-      \item $\displaystyle\frac{u_m^{n+1}-u_m^n}{k}+a\frac{u_{m+1}^n-u_{m-1}^n}{2h}+\O{k}+\O{h^2}=f_m^n$
+      \item \emph{Forward-time forward-space}:
+            $$\frac{u_m^{n+1}-u_m^n}{k}+a\frac{u_{m+1}^n-u_m^n}{h}+\O{k}+\O{h}=f_m^n$$
+      \item \emph{Forward-time backward-space}:
+            $$\frac{u_m^{n+1}-u_m^n}{k}+a\frac{u_{m}^n-u_{m-1}^n}{h}+\O{k}+\O{h}=f_m^n$$
+      \item \emph{Forward-time central-space}:
+            $$\frac{u_m^{n+1}-u_m^n}{k}+a\frac{u_{m+1}^n-u_{m-1}^n}{2h}+\O{k}+\O{h^2}=f_m^n$$
       \item \emph{Leapfrog scheme}:
             \begin{multline*}
               \frac{u_m^{n+1}-u_m^{n-1}}{2k}+a\frac{u_{m+1}^n-u_{m-1}^n}{2h}+\\+\O{k^2}+\O{h^2}=f_m^n
@@ -45,11 +48,14 @@
   \begin{corollary}
     Consider the traffic equation of \mcref{NIPDE:traffic} and let $\lambda:=k/h$. Then, we have the following schemes for approximating the solution:
     \begin{enumerate}
-      \item $\displaystyle v_m^{n+1}=(1+\lambda a)v_m^n-\lambda av_{m+1}^n+f_m^n$
-      \item $\displaystyle v_m^{n+1}=(1-\lambda a)v_m^n+\lambda av_{m+1}^n+f_m^n$
-      \item $\displaystyle v_m^{n+1}=v_m^n-\frac{\lambda a}{2}v_{m+1}^n+\frac{\lambda a}{2}v_{m-1}^n+f_m^n$
-      \item Leapfrog scheme: $$v_m^{n+1}=v_m^{n-1}-\lambda av_{m+1}^n+\lambda av_{m-1}^n+f_m^n$$
-      \item Lax-Friedrichs scheme: $$v_m^{n+1}=\frac{1}{2}\left((1-\lambda a)v_{m+1}^n+(1+\lambda a)v_{m-1}^n\right)+f_m^n$$
+      \item Forward-time forward-space
+            $$\displaystyle v_m^{n+1}=(1+\lambda a)v_m^n-\lambda av_{m+1}^n+kf_m^n$$
+      \item Forward-time backward-space
+            $$\displaystyle v_m^{n+1}=(1-\lambda a)v_m^n+\lambda av_{m-1}^n+kf_m^n$$
+      \item Forward-time central-space
+            $$\displaystyle v_m^{n+1}=v_m^n-\frac{\lambda a}{2}v_{m+1}^n+\frac{\lambda a}{2}v_{m-1}^n+kf_m^n$$
+      \item Leapfrog scheme: $$v_m^{n+1}=v_m^{n-1}-\lambda av_{m+1}^n+\lambda av_{m-1}^n+kf_m^n$$
+      \item Lax-Friedrichs scheme: $$v_m^{n+1}=\frac{1}{2}\left((1-\lambda a)v_{m+1}^n+(1+\lambda a)v_{m-1}^n\right)+kf_m^n$$
     \end{enumerate}
   \end{corollary}
   \subsubsection{Convergence and consistency}
@@ -157,7 +163,7 @@
     Consider the traffic equation of \mcref{NIPDE:traffic}.
     The \emph{Lax-Wendroff scheme} is:
     \begin{multline*}
-      \frac{u_m^{n+1}-u_{m}^n}{k}+a\frac{u_{m+1}^{n}-u_{m-1}^n}{2h}+\frac{a^2k}{2}\frac{u_{m+1}^n-2u_m^n+u_{m-1}^n}{h^2} \\ =\frac{f_m^{n+1}+f_m^n}{2}-\frac{ak}{4}\frac{f_{m+1}^n-f_{m-1}^n}{h}+\O{k^2}+\O{h^2}
+      \frac{u_m^{n+1}-u_{m}^n}{k}+a\frac{u_{m+1}^{n}-u_{m-1}^n}{2h}-\frac{a^2k}{2}\frac{u_{m+1}^n-2u_m^n+u_{m-1}^n}{h^2} \\ =\frac{f_m^{n+1}+f_m^n}{2}-\frac{ak}{4}\frac{f_{m+1}^n-f_{m-1}^n}{h}+\O{k^2}+\O{h^2}
     \end{multline*}
   \end{proposition}
   \begin{sproof}
