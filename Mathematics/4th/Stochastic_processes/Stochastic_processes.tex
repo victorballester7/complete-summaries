@@ -153,7 +153,7 @@
   \end{remark}
   \subsubsection{Galton-Watson process}
   \begin{model}\label{SP:galtonwatsonModel}
-    Let $(X_n)$, $n\in\NN\cup\{0\}$ be a sequence of discrete random vairables representing the number of new individuals of a certain population at the $n$-th generation. Suppose they are defined as $$X_{n+1}=\sum_{k=1}^{X_n}Z_{n+1}^{(k)}$$ and $X_0=1$. Here $Z_{n+1}^{(k)}$ has support $\NN\cup\{0\}$ $\forall n,k$ and represent the number of descendants (to the next generation) of the $k$-th individual of the $n$-th generation. Suppose that $Z_{n+1}^{(k)}\sim Z$ are \iid We would like to study the probability $\rho$ of extinction of this population: $$\rho=\Prob(\{X_n=0:\text{for some $n\in\NN$}\})=\Prob\left(\bigcup_{n=1}^\infty\{X_n=0\}\right)$$
+    Let $(X_n)$, $n\in\NN\cup\{0\}$ be a sequence of discrete random vairables representing the number of new individuals of a certain population at the $n$-th generation. Suppose they are defined as $$X_{n+1}=\sum_{k=1}^{X_n}Z_{n+1}^{(k)}$$ and $X_0=1$. Here $Z_{n+1}^{(k)}$ has support $\NN\cup\{0\}$ $\forall n,k$ and represent the number of descendants (to the next generation) of the $k$-th individual of the $n$-th generation. Suppose that $Z_{n+1}^{(k)}\sim Z$ are \iid and independent from $(X_n)$. We would like to study the probability $\rho$ of extinction of this population: $$\rho=\Prob(\{X_n=0:\text{for some $n\in\NN$}\})=\Prob\left(\bigcup_{n=1}^\infty\{X_n=0\}\right)$$
   \end{model}
   \begin{lemma}\label{SP:lemmaGaltonWatson}
     Let $(Z_n)$ be a sequence of \iid random variables distributed as $Z$ with support $\NN\cup\{0\}$, and $N$ be a random variable also with support $\NN\cup\{0\}$ and independent to $(Z_n)$. Let $X=\sum_{k=1}^NZ_k$. Then, $\forall s\in[-1,1]$ we have: $$g_X(s)=g_N(g_Z(s))$$
@@ -260,7 +260,7 @@
   \end{proof}
   \subsubsection{Markov chains}
   \begin{definition}
-    A \emph{Markov chain} is a sequence of random variables discrete random variables $(X_n)$ with support $I$ such that:
+    A \emph{Markov chain} is a sequence of random variables discrete random variables $(X_n)$ with support $I$, the state space, such that:
     \begin{multline*}
       \Prob(X_{n+1}=j\mid X_0=i_0,\ldots,X_{n-1}=i_{n-1},X_n=i)=\\=\Prob(X_{n+1}=j\mid X_n=i)
     \end{multline*} for all $n\geq 0$ and all $i_0,\ldots,i_{n-1},i,j\in I$. This property is usually called \emph{Markov property}.
@@ -282,6 +282,33 @@
       \item $\sum_{i\in I}\pi_i=1$.
     \end{enumerate}
   \end{proposition}
+  \begin{proof}
+    The first statement is a consequence of the conditional probability being a probability. The second statement is clear.
+  \end{proof}
+  \begin{lemma}
+    Let $I$, $F$ be finite or countable set, $(Z_n)$ be a sequence of random variables with support $F$, $X_0$ be a random variable with support $I$ and $f:I\times F\rightarrow I$ be a function. Consider the sequence $(X_n)$ defined by:
+    $$
+      X_{n+1}=f(X_n,Z_{n+1})
+    $$
+    If $\forall i_0,\ldots,i_{n-1},i\in I$ and $\forall k\in F$ we have:
+    \begin{multline*}
+      \Prob(Z_{n+1}=k\mid X_0=i_0,\ldots,X_{n-1}=i_{n-1},X_n=i)=\\=\Prob(Z_{n+1}=k\mid X_n=i)=\Prob(Z_{1}=k\mid X_0=i)
+    \end{multline*}
+    then $(X_n)$ is a time-homogeneous Markov chain with transition matrix $\vf{P}=(p_{ij})_{i,j\in I}$ given by:
+    $$
+      p_{ij}=\Prob(f(i,Z_1)=j\mid X_0=i)
+    $$
+  \end{lemma}
+  \begin{proof}
+    Let $C=\{X_0=i_0,\ldots,X_{n-1}=i_{n-1},X_n=i\}$ and let $A_{i,j}:=\{k\in F:f(i,k)=j\}$. We have:
+    \begin{align*}
+      \Prob(X_{n+1}=j\mid C) & =\Prob(f(i,Z_{n+1})=j\mid C)                 \\
+                             & =\Prob(Z_{n+1}\in A_{i,j}\mid C)             \\
+                             & =\sum_{k\in A_{i,j}}\Prob(Z_{n+1}=k\mid C)   \\
+                             & =\sum_{k\in A_{i,j}}\Prob(Z_{1}=k\mid X_0=i) \\
+                             & =\Prob(f(i,Z_{1})=j\mid X_0=i)
+    \end{align*}
+  \end{proof}
   \begin{definition}[Random walk]
     A \emph{random walk} is a sequence $(\vf{S}_n)$ with $\vf{S}_0=\vf{X}_0$ and $\vf{S}_n=\sum_{k=0}^{n}\vf{X}_k$, where $(\vf{X}_k)_{k\geq 1}$ is a sequence of \iid random vectors and $\vf{X}_0$ is a random vector independent from $(\vf{X}_k)$.
   \end{definition}
@@ -346,7 +373,7 @@
     \end{align*}
     where the penultimate equality follows from \mcref{SP:lema1Markov} and the last equality follows from \mcref{SP:lema2Markov} and the Markov property because if $D=\{X_n=k, X_0=i\}$ we have that:
     \begin{multline*}
-      D=\\\!=\bigsqcup_{i_1,\ldots,i_{n-1}\in I}\{X_n=k, X_0=i,X_1=i_1,\ldots,X_{n-1}=i_{n-1}\}
+      D=\bigsqcup_{i_1,\ldots,i_{n-1}\in I}\{X_n=k, X_0=i,X_1=i_1,\ldots, X_{n-1}=\\=i_{n-1}\}
     \end{multline*}
     and so:
     \begin{multline*}
@@ -526,7 +553,7 @@
   \begin{definition}
     Let $(X_n)$ be a time-homogeneous Markov chain, $i,j\in I$ and consider the stopping time $\tau_j$ of \mcref{SP:tau_i}. We define $f_{ij}:=\Prob_i(\tau_j<\infty)$. We say that $i$ is \emph{transient} if $f_{ii}<1$ and \emph{recurrent} if $f_{ii}=1$. Finally we define $N_i$ as:
     $$
-      N_i:=\abs{\{n\in\NN:X_n=1\}}=\sum_{n=1}^{\infty}\indi{\{X_n=i\}}
+      N_i:=\abs{\{n\in\NN:X_n=i\}}=\sum_{n=1}^{\infty}\indi{\{X_n=i\}}
     $$
   \end{definition}
   \begin{remark}

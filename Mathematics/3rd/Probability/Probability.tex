@@ -716,17 +716,31 @@
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $X$ be a random variable and $A\in\mathcal{A}$. Then, $\Exp(\indi{\{X\in A\}})=\Prob(X\in A)$.
   \end{corollary}
   \begin{proposition}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$ be a random variable whose outcomes are in $\NN\cup\{0\}$. Then: $$\Exp(X)=\sum_{k=0}^\infty\Prob(X>k)$$
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$ be a random variable with support $\NN\cup\{0\}$. Then: $$\Exp(X)=\sum_{k=0}^\infty\Prob(X>k)$$
   \end{proposition}
+  \begin{proof}
+    \begin{multline*}
+      \sum_{k=0}^\infty\Prob(X>k)=\sum_{k=0}^\infty\sum_{n=k+1}^{\infty}\Prob(X=n)=\\=\sum_{n=1}^\infty\sum_{k=0}^{n-1}\Prob(X=n)=\sum_{n=1}^\infty n\Prob(X=n)= \Exp(X)
+    \end{multline*}
+  \end{proof}
   \begin{theorem}[Monotone convergence theorem]\label{P:monotone}
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $(X_n)$ be an increasing sequence of non-negative random variables such that $\displaystyle\lim_{n\to\infty}X_n\overset{\text{a.s.}}{=}X$\footnote{See \mcref{P:as-conv}.}, for some random variable $X$. Then: $$\lim_{n\to\infty} \Exp(X_n)=\Exp(X)$$
   \end{theorem}
+  \begin{sproof}
+    Check the proof of \mnameref{RFA:monotone}.
+  \end{sproof}
   \begin{theorem}[Dominated convergence theorem]\label{P:dominated}
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $(X_n)$ be sequence of random variables such that $\displaystyle\lim_{n\to\infty}X_n\overset{\text{a.s.}}{=}X$, for some random variable $X$. Suppose that there exists an integrable random variable $Y$ such that $$|X_n|\leq Y\quad\forall n\geq 1$$ Then: $$\lim_{n\to\infty} \Exp(X_n)=\Exp(X)$$
   \end{theorem}
+  \begin{sproof}
+    Check the proof of \mnameref{RFA:dominated}.
+  \end{sproof}
   \begin{theorem}[Fatou's lemma]
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $(X_n)$ be a sequence of non-negative random variables. Then: $$\Exp(\liminf_{n\to\infty}X_n)\leq \liminf_{n\to\infty}\Exp(X_n)$$
   \end{theorem}
+  \begin{sproof}
+    Check the proof of \mnameref{RFA:fatou}.
+  \end{sproof}
   \subsubsection{Expectation of absolutely continuous random variables}
   \begin{theorem}
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $X$ be an absolutely continuous random variable with density $f_X$. Then, $X$ is integrable if and only if $$\int_{-\infty}^{+\infty}|x|f_X(x)\dd{x}<\infty$$
