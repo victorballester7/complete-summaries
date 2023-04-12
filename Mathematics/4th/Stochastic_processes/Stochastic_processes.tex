@@ -192,8 +192,8 @@
     Taking the limit as $n\to\infty$ and using the continuity of the pgf we get the result.
   \end{proof}
   \begin{theorem}
+    In the hypothesis of \mcref{SP:galtonwatsonModel} and the additional assumption that $0<\Prob(Z=0)<1$ we have:
     \begin{enumerate}
-      In the hypothesis of \mcref{SP:galtonwatsonModel} and the additional assumption that $0<\Prob(Z=0)<1$ we have:
       \item If $\Exp(Z)\leq 1$, $g_Z$ has only 1 fixed point (the trivial one, $s=1$). Hence, the population will extinct with probability 1.
       \item If $\Exp(Z)> 1$, $g_Z$ has a unique non-trivial fixed point on (0,1).
     \end{enumerate}
@@ -251,28 +251,28 @@
     $$
   \end{proposition}
   \begin{proof}
-    We have that $q_k$ solves the differenc equation:
+    We have that $q_k$ solves the difference equation:
     \begin{multline*}
       d_k =\Exp(D_k\mid X_k=1)\Prob(X_1=1)+\\
       +\Exp(D_k\mid X_k=-1)\Prob(X_1=-1) =\\=\Exp(D_{k+1}+1)p+\Exp(D_{k-1}+1)q= d_{k+1}p+d_{k-1}q+1
     \end{multline*}
-    with $d_0=0$ and $d_a=0$, whose solution is straightforward ($d_k=\frac{k}{p-q}$ and $d_k=-k^2$ are particular solutions for the case $p\ne q$ and $p=q$, respectively). The second equality is due to the independence and the \mnameref{SP:substitutionPrinciple}.
+    with $d_0=0$ and $d_a=0$, whose solution is straightforward ($d_k=\frac{k}{p-q}$ and $d_k=-k^2$ are particular solutions for the case $p\ne q$ and $p=q$, respectively).
   \end{proof}
   \subsubsection{Markov chains}
   \begin{definition}
-    A \emph{Markov chain} is a sequence of random variables discrete random variables $(X_n)$ with support $I$, the state space, such that:
+    A \emph{Markov chain} is a sequence of discrete random variables $(X_n)$ with support $I$ such that:
     \begin{multline*}
       \Prob(X_{n+1}=j\mid X_0=i_0,\ldots,X_{n-1}=i_{n-1},X_n=i)=\\=\Prob(X_{n+1}=j\mid X_n=i)
     \end{multline*} for all $n\geq 0$ and all $i_0,\ldots,i_{n-1},i,j\in I$. This property is usually called \emph{Markov property}.
     If moreover $\Prob(X_{n+1}=j\mid X_n=i)$ does not depend on $n$, that is
     $$\Prob(X_{n+1}=j\mid X_n=i)=\Prob(X_{1}=j\mid X_0=i)$$
-    then we say that the Markov chain is a \emph{time-homogeneous Markov chain}. The elements of $I$ are called \emph{states} of the Markov chain.
+    then we say that the Markov chain is a \emph{time-homogeneous Markov chain}. The set $I$ is called \emph{state space} and its elements are called \emph{states} of the Markov chain.
   \end{definition}
   \begin{definition}[Stochastic matrix]
     Let $I$ be an index set. A matrix $\vf{P}=(p_{ij})_{i,j\in I}$ is called a \emph{stochastic matrix} if $p_{ij}\geq 0$ $\forall i,j\in I$ and: $$\sum_{j\in I}p_{ij}=1$$
   \end{definition}
   \begin{definition}
-    Let $(X_n)$ be a time-homogeneous Markov chain. We define $p_{ij}$ as the probability of going from state $i$ to state $j$. That is: $$p_{ij}=\Prob(X_{1}=j\mid X_0=i)$$
+    Let $(X_n)$ be a time-homogeneous Markov chain. We define the \emph{transition probabilities} $p_{ij}$ as the probability of going from state $i$ to state $j$. That is: $$p_{ij}=\Prob(X_{1}=j\mid X_0=i)$$
     The matrix $\vf{P}=(p_{ij})_{i,j\in I}$ is called the \emph{transition matrix} of the Markov chain. Finally, we define the probabilities $\pi_i$ as $\pi_i=\Prob(X_0=i)$. We define the vector $\vf{\pi}=(\pi_i)_{i\in I}$ as the \emph{initial distribution} of the Markov chain.
   \end{definition}
   \begin{proposition}
@@ -282,9 +282,6 @@
       \item $\sum_{i\in I}\pi_i=1$.
     \end{enumerate}
   \end{proposition}
-  \begin{proof}
-    The first statement is a consequence of the conditional probability being a probability. The second statement is clear.
-  \end{proof}
   \begin{lemma}
     Let $I$, $F$ be finite or countable set, $(Z_n)$ be a sequence of random variables with support $F$, $X_0$ be a random variable with support $I$ and $f:I\times F\rightarrow I$ be a function. Consider the sequence $(X_n)$ defined by:
     $$
@@ -325,14 +322,11 @@
     A sequence of \iid random variables, a random walk and a Galton-Watson process are all time-homogeneous Markov chains.
   \end{lemma}
   \begin{definition}
-    Let $(X_n)$ be a time-homogeneous Markov chain. We define the probabilities $p_{ij}^{(n)}$ as the probability of going from state $i$ to state $j$ in $n$ steps. That is: $$p_{ij}^{(n)}=\Prob(X_{n}=j\mid X_0=i)$$ The matrix $\vf{P}^{(n)}=(p_{ij}^{(n)})_{i,j\in I}$ is called the \emph{$n$-step transition matrix} of the Markov chain.
+    Let $(X_n)$ be a time-homogeneous Markov chain. We define the \emph{$n$-step transition probabilities} $p_{ij}^{(n)}$ as the probability of going from state $i$ to state $j$ in $n$ steps. That is: $$p_{ij}^{(n)}=\Prob(X_{n}=j\mid X_0=i)$$ The matrix $\vf{P}^{(n)}=(p_{ij}^{(n)})_{i,j\in I}$ is called \emph{$n$-step transition matrix} of the Markov chain.
   \end{definition}
   \begin{definition}
     Let $(X_n)$ be a time-homogeneous Markov chain. We define the probabilities $\pi_i^{(n)}$ as the probability of being in state $i$ after $n$ steps. That is: $$\pi_i^{(n)}=\Prob(X_n=i)$$
-    We define the vector $\vf{\pi}^{(n)}=(\pi_i^{(n)})_{i\in I}$ as the \emph{$n$-step distribution} of the Markov chain.
-  \end{definition}
-  \begin{definition}
-    Let $(X_n)$ be a time-homogeneous Markov chain. We define the \emph{stationary distribution} of the Markov chain as the distribution of the random variable $X_0$.
+    We define the vector $\vf{\pi}^{(n)}=(\pi_i^{(n)})_{i\in I}$ as \emph{$n$-step distribution} of the Markov chain.
   \end{definition}
   \begin{lemma}\label{SP:lema1Markov}
     Let $A$, $B$, $C$ be events in a probability space such that $\Prob(B\cap C)>0$. Then:
@@ -405,7 +399,7 @@
   \end{sproof}
   \subsubsection{Classification of states}
   \begin{definition}
-    Let $(X_n)$ be a time-homogeneous Markov chain. We say that a state $j\in I$ is \emph{reachable} from $i\in I$ if $\exists n\in I$ such that $p_{ij}^{(n)}>0$. In this case we will write $i\to j$.
+    Let $(X_n)$ be a time-homogeneous Markov chain. We say that a state $j\in I$ is \emph{reachable} from $i\in I$ if $\exists n\in \NN\cup\{0\}$ such that $p_{ij}^{(n)}>0$. In this case we will write $i\to j$.
   \end{definition}
   \begin{definition}
     Let $(X_n)$ be a time-homogeneous Markov chain. We say that two states $i,j\in I$ \emph{communicate} if $i\to j$ and $j\to i$. In this case we will write $i\leftrightarrow j$.
@@ -434,7 +428,7 @@
   \begin{proof}
     Suppose $i\ne j$. We will see that if $p_{jj}^{(n)}>0$, then $d(i)\mid n$. Since $i\leftrightarrow j$, then $\exists r,s\in I$ such that $p_{ij}^{(r)}>0$ and $p_{ji}^{(s)}>0$. So as in \mcref{SP:corolariChapKolmo}, we have $p_{ii}^{(r+s)}>0$. Thus, $d(i)\mid r+s$. Moreover if $p_{jj}^{(n)}>0$, then:
     $$p_{ii}^{(r+n+s)}\geq p_{ij}^{(r)}p_{jj}^{(n)}p_{ji}^{(s)}>0$$
-    So $d(i)\mid r+n+s$. Thus, $d(i)\mid n$ and so $d(j)\geq d(i)$ because $\{n\in\NN:p_{jj}^{(n)}>0\}=d(i)(\NN\cup\{0\})$. Repeating the argument exchanging $i$ and $j$ we get $d(j)= d(i)$.
+    So $d(i)\mid r+n+s$. Thus, $d(i)\mid n$ and so $d(j)\geq d(i)$ because $d(j)$ is the greatest common divisor of all such $n$. Repeating the argument exchanging $i$ and $j$ we get $d(j)= d(i)$.
   \end{proof}
   \begin{definition}
     Let $(X_n)$ be a time-homogeneous Markov chain. If the chain is irreducible, we will denote the common period by $d$. If $d=1$ we say that the chain is \emph{aperiodic}.
@@ -490,7 +484,7 @@
     \end{multline*}
   \end{proof}
   \begin{definition}
-    Let $(\Omega,\mathcal{F},(\mathcal{F}_n)_{n\geq 0},\Prob)$ be a filtration space and $\tau$ a random variable on it. We say that $\tau$ is a \emph{stopping time} if $\forall n\geq 0$ we have:
+    Let $(\Omega,\mathcal{F},(\mathcal{F}_n)_{n\geq 0},\Prob)$ be a filtration space and $\tau$ a random variable on it with support $\NN\cup\{0\}$. We say that $\tau$ is a \emph{stopping time} if $\forall n\geq 0$ we have:
     $$\{\tau= n\}\in\mathcal{F}_n$$
   \end{definition}
   \begin{remark}
