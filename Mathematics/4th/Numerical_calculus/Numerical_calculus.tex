@@ -273,7 +273,7 @@
     $$
       \tilde{y}_{n+1}=g(h\lambda)\tilde{y}_n
     $$
-    for some function $g:\RR\rightarrow\RR$. This function is called \emph{stability function}. Given $h$ and $\lambda$, the method is said to be \emph{stable} if $\abs{g(h\lambda)}\leq 1$ and \emph{absolutely stable} if $\abs{g(h\lambda)}< 1$ (that is, $h\lambda\in\mathcal{A}$). If $\abs{g(h\lambda)}> 1$, the method is said to be \emph{unstable}.
+    for some function $g:\RR\rightarrow\RR$. This function is called \emph{stability function}. Given $h$ and $\lambda$, the method is said to be \emph{stable} if $\abs{g(h\lambda)}\leq 1$ and \emph{absolutely stable} if $\abs{g(h\lambda)}< 1$ (that is, $h\lambda\in\mathcal{A}$). Given $\lambda<0$, the method is said to be \emph{conditionally absolutely stable} for a fixed $h$ if there exists a function $\Lambda(\lambda)$ such that $g(h\lambda)<1\iff h<\Lambda(\lambda)$. If the condition $g(h \lambda)<1$ holds $\forall h\in\RR_{>0}$, we say that the method is \emph{unconditionally absolutely stable}. If $\abs{g(h\lambda)}> 1$, the method is said to be \emph{unstable}.
   \end{definition}
   \begin{definition}
     Consider a RK method with stability function $g$. We define the \emph{stability region} of the method as the set:
@@ -291,12 +291,12 @@
   \begin{proof}
     We will prove it only for the \emph{test problem} $y'=\lambda y$. We have:
     \begin{multline*}
-      \vf{e}_{n+1}=\vf{y}_{n+1}-\vf{\tilde{y}}_{n+1}=\vf{y}_{n+1}-g(h\lambda)\vf{\tilde{y}}_n=\\
-      =\vf{y}_{n+1}-g(h\lambda)(\vf{y}_n-\vf{e}_n)=h\vf{\tau}_n(h)+g(h\lambda)\vf{e}_n
+      e_{n+1}={y}_{n+1}-{\tilde{y}}_{n+1}={y}_{n+1}-g(h\lambda){\tilde{y}}_n=\\
+      ={y}_{n+1}-g(h\lambda)({y}_n-e_n)=h{\tau}_n(h)+g(h\lambda)e_n
     \end{multline*}
     Iterating the proces and taking norms we have:
     $$
-      \norm{\vf{e}_n}\leq\sum_{j=0}^n{\abs{g(h\lambda)}}^jh\norm{\vf{\tau}_n(h)}\leq nh\tau(h)\overset{h\to 0}{\longrightarrow}0
+      \abs{{e}_n}\leq\sum_{j=0}^n{\abs{g(h\lambda)}}^jh\abs{{\tau}_n(h)}\leq nh\tau(h)\overset{h\to 0}{\longrightarrow}0
     $$
     because $nh=(t_n-t_0)$ is bounded.
   \end{proof}
@@ -337,12 +337,27 @@
   \end{remark}
   \begin{definition}[Adams method]
     Consider the ivp of \mcref{NC:ivp}. The \emph{Adams method} is a linear multistep method of the form:
-    $$
+    \begin{equation}\label{NC:Adams}
       \vf{\tilde{y}}_{n+k}=\vf{\tilde{y}}_{n+k-1}+h\sum_{j=0}^{k}\beta_j\vf{\tilde{f}}_{n+j}
-    $$
+    \end{equation}
     If $\beta_{k}=0$ then the method is explicit and it is called \emph{Adams-Bashforth method}. If $\beta_{k}\ne 0$ then the method is implicit and it is called \emph{Adams-Moulton method}.
 
-    The coefficients $\beta_j$ are found by integrating the Lagrange interpolating polynomial between $t_{n+k-1}$ and $t_{n+k}$ constructed from the nodes $(t_{n+j},\vf{\tilde{f}}_{n+j})$ for $j=0,\ldots,k$, for the Adams-Bashforth method, and for $j=0,\ldots,k-1$ for the Adams-Moulton method.
+    The coefficients $\beta_j$ are found by integrating the Lagrange interpolating polynomial between $t_{n+k-1}$ and $t_{n+k}$ constructed from the nodes $(t_{n+j},\vf{\tilde{f}}_{n+j})$ for $j=0,\ldots,k-1$, for the Adams-Bashforth method, and for $j=0,\ldots,k$ for the Adams-Moulton method. That is, the respective incremental functions are given by:
+    \begin{align*}
+      \vf\phi_\mathrm{AB} & =\int_{t_{n+k-1}}^{t_{n+k}}\sum_{j=0}^{k-1}\vf{f}_{n+j}\prod_{\substack{i=0 \\i\ne j}}^{k-1}\frac{t-t_{n+i}}{t_{n+j}-t_{n+i}}\dd{t}\\
+      \vf\phi_\mathrm{AM} & =\int_{t_{n+k-1}}^{t_{n+k}}\sum_{j=0}^{k}\vf{f}_{n+j}\prod_{\substack{i=0   \\i\ne j}}^{k}\frac{t-t_{n+i}}{t_{n+j}-t_{n+i}}\dd{t}
+    \end{align*}
+    In the following table we expose the first three Adams' incremental functions for the explicit and implicit methods of the form of \mcref{NC:Adams}:
+    \begin{center}
+      \renewcommand{\arraystretch}{1.7}
+      \begin{tabular}[ht]{c|c|c}
+        $k$ & Adams-Bashforth                                                   & Adams-Moulton                                                  \\
+        \hline
+        1   & $\vf{f}_n$                                                        & $\vf{f}_{n+1}$                                                 \\
+        2   & $\displaystyle\frac{3\vf{f}_{n+1}-\vf{f}_n}{2}$                   & $\displaystyle\frac{\vf{f}_{n+1}+\vf{f}_n}{2}$                 \\
+        3   & $\displaystyle\frac{23\vf{f}_{n+1}-16\vf{f}_n+5\vf{f}_{n-1}}{12}$ & $\displaystyle\frac{5\vf{f}_{n+2}+8\vf{f}_{n+1}-\vf{f}_n}{12}$ \\
+      \end{tabular}
+    \end{center}
   \end{definition}
   \begin{definition}
     Consider the $k$-step method of \mcref{NC:multistep}. We define the \emph{local truncation error} of the method as:
@@ -358,6 +373,9 @@
   \begin{remark}
     The global error of the method and the convergency of it are the same as in the one-step case.
   \end{remark}
+  \begin{proposition}
+    The $k$-step method of Adams-Bashforth method has order of consistency $k$, whereas the Adams-Moulton method has order of consistency $k+1$.
+  \end{proposition}
   \begin{theorem}
     A necessary condition for the convergence of the linear multi-step method of \mcref{NC:multistep} is that it has to be zero-stable and consistent.
   \end{theorem}
