@@ -22,19 +22,25 @@
   $$\vf{x}(t)=\vf{x}_0+\int_0^t\vf{f}(t,\vf{x}(s))\dd{s}$$
   Choosing different numerical-integration methods for approximating this latter integral will lead to different methods for solving the ivp.
   \begin{definition}
-    A numerical method is called \emph{explicit} if the $i$-th iterate can be computed directly in terms of some of the previous iterates. A method is called \emph{implicit} if the $i$-th iterate depends implicitly on itself.
+    A numerical method is called \emph{explicit} if the $n$-th iterate can be computed directly in terms of some of the previous iterates. A method is called \emph{implicit} if the $n$-th iterate depends implicitly on itself.
   \end{definition}
   \begin{definition}
-    A \emph{one-step explicit method} $\vf\Phi$ for the approximation of \mcref{NC:ivp} can be cast in the concise form $$\vf{\tilde{x}}_{n+1}=\vf\Phi(t_n,\vf{\tilde{x}}_{n},\vf{f},h)=\vf{\tilde{x}}_{n}+h\vf\phi(t_n,\vf{\tilde{x}}_{n},\vf{f},h)$$
+    A \emph{one-step method} $\vf\Phi$ for the approximation of \mcref{NC:ivp} can be cast in the concise form
+    \begin{equation}\label{NC:onestep}
+      \vf{\tilde{x}}_{n+1}=\vf\Phi(t_n,\vf{\tilde{x}}_{n},\vf{\tilde{x}}_{n+1},\vf{f},h)=\vf{\tilde{x}}_{n}+h\vf\phi(t_n,\vf{\tilde{x}}_{n},\vf{\tilde{x}}_{n+1},\vf{f},h)
+    \end{equation}
     The remarkable fact is that the $n$-th iterate only depends on the previous one.
     The function $\vf\phi$ is called \emph{incremental function}. From here we can define the \emph{local truncation errors} as
-    $$\vf\tau_{n}(h)=\frac{\vf{x}_{n+1}-\vf{x}_{n}-h\vf\phi(t_n,\vf{x}_{n},\vf{f},h)}{h}$$
+    $$\vf\tau_{n}(h)=\frac{\vf{x}_{n+1}-\vf{x}_{n}-h\vf\phi(t_n,\vf{x}_{n},\vf{x}_{n+1},\vf{f},h)}{h}$$
     We define $\tau(h)$ as: $$\tau(h)=\sup_{n\geq 1}\norm{\vf\tau_n(h)}$$
     Finally, we define the \emph{global truncation error} as:
     $$\vf{e}_n=\vf{x}_n-\vf{\tilde{x}}_n$$
     We can also define the interates $\vf{\tilde{x}}_n^{\vf{*}}$ as defined by:
-    $$\vf{\tilde{x}}_n^{\vf{*}}=\vf{x}_{n}+h\vf\phi(t_n,\vf{x}_{n},\vf{f},h)$$
+    $$\vf{\tilde{x}}_n^{\vf{*}}=\vf{x}_{n}+h\vf\phi(t_n,\vf{x}_{n},\vf{x}_{n+1},\vf{f},h)$$
   \end{definition}
+  \begin{remark}
+    In reality in \mcref{NC:onestep} we should add a term of the form $h^{q}\vf{\varepsilon}_nK$ with $K>0$, $q\in\NN$ and $\norm{\vf{\varepsilon}}\leq 1$ on account of the approximation errors due to the float-precision arithmetic. But from here on, we should omit it in order to simplify the notation.
+  \end{remark}
   \begin{figure}[H]
     \centering
     \includestandalone[mode=image|tex,width=0.7\linewidth]{Images/errors}
@@ -51,7 +57,7 @@
   \begin{figure}[H]
     \centering
     \includestandalone[mode=image|tex,width=0.7\linewidth]{Images/euler}
-    \caption{Euler method for approximating the ivp $\{x'=x, x(0)=1\}$ with different number of steps.}
+    \caption{Explicit Euler method for approximating the ivp $\{x'=x, x(0)=1\}$ with different number of steps.}
     \label{NC:euler_fig}
   \end{figure}
   \begin{definition}[Trapezoidal method]
@@ -64,13 +70,14 @@
   \end{definition}
   \begin{definition}[Taylor method]
     Consider the ivp of \mcref{NC:ivp} and suppose that $\vf{f}\in\mathcal{C}^r(\RR\times\RR^d)$. The \emph{Taylor method of order $r$} is the method constructed from the Taylor series of the solution $\vf{x}(t)$. Thus the Taylor method of order $r$ is:
-    $$\vf{\tilde{x}}_{n+1}=\vf{\tilde{x}}_{n}+\sum_{k=1}^r\frac{h^k}{k!}(\vf{D}^k\vf{x})(t_n,\vf{\tilde{x}}_{n})$$
+    $$\vf{\tilde{x}}_{n+1}=\vf{\tilde{x}}_{n}+\sum_{k=1}^r\frac{h^k}{k!}\vf{x}_n^{(k)}$$
+    We should then substitute each unknown derivative $\vf{x}_n^{(k)}$ a function of $\vf{f}_n$.
     For example the Taylor method of order 2 would be:
     $$\vf{\tilde{x}}_{n+1}=\vf{\tilde{x}}_{n}+h\vf{\tilde{f}}_n+\frac{h^2}{2}\left(\vf{{f}}_t(t_n,\vf{\tilde{x}}_{n})+\vf{D}_2\vf{f}(\vf{\tilde{f}}_n)\right)$$
     Note that the Taylor method of order 1 is precisely the \mnameref{NC:euler}.
   \end{definition}
   \begin{definition}
-    A one-step method for the approximation of \mcref{NC:ivp} is said to be \emph{consistent} if $\displaystyle\lim_{h\to 0}\tau(h)=0$. Moreover, we say that the algorithm has \emph{order of consistency} or \emph{order of accuracy} $p$ if $\tau(h)=\O{h^p}$.
+    A one-step method for the approximation of \mcref{NC:ivp} is said to be \emph{consistent} if $\displaystyle\lim_{h\to 0}\tau(h)=0$. Moreover, we say that the algorithm has \emph{order of consistency} (\emph{order of accuracy} or simply \emph{order}) $p$ if $\tau(h)=\O{h^p}$.
   \end{definition}
   \begin{definition}
     A one-step method for the approximation of \mcref{NC:ivp} is \emph{convergent} if $$\lim_{h\to 0}\sup_{n\geq 1}\norm{\vf{e}_n}=0$$
@@ -153,17 +160,18 @@
     In the following equations we omit the evaluation at $(t_n,\vf{x}_n)$.
     On the one hand we have:
     \begin{align*}
-      \vf{x}'   & =\vf{f}                                                                                                                                       \\
-      \vf{x}''  & =\vf{f}_t+\vf{f}_{\vf{x}}\vf{f}=:\vf{F}                                                                                                       \\
-      \vf{x}''' & =\vf{f}_{tt}+2\vf{f}_{\vf{x}t}\vf{f}+{\vf{f}_{\vf{xx}}}\vf{f}+\vf{f}_{\vf{x}}(\vf{f}_t+{\vf{f}_{\vf{x}}}\vf{f})=:\vf{G}+\vf{f}_{\vf{x}}\vf{F}
+      \vf{x}'   & =\vf{f}                                                                                                                                         \\
+      \vf{x}''  & =\vf{f}_t+\vf{f}_{\vf{x}}\vf{f}=:\vf{F}                                                                                                         \\
+      \vf{x}''' & =\vf{f}_{tt}+2\vf{f}_{\vf{x}t}\vf{f}+{\vf{f}_{\vf{xx}}}\vf{f}^2+\vf{f}_{\vf{x}}(\vf{f}_t+{\vf{f}_{\vf{x}}}\vf{f})=:\vf{G}+\vf{f}_{\vf{x}}\vf{F}
     \end{align*}
+    Note that here $\vf{f}_{\vf{xx}}\in\mathcal{L}(\RR^d,\mathcal{L}(\RR^d,\RR^d))$. That is, is a vector of matrices. And the vector product ${\vf{f}_{\vf{xx}}}\vf{f}^2$ is do it ${(\vf{f}_{\vf{xx}})}_i\vf{f}$, for each $i=1,\ldots,d$, which result in $d$-column vectors that form a matrix that gets multiplied by $\vf{f}$.
     And on the other hand:
     \begin{align*}
       \begin{split}
         \vf{k}_i & =\vf{f}+c_i h\vf{f}_t+\vf{f}_{\vf{x}}\left(h\sum_{j=1}^{s}a_{ij}\vf{k}_j\right)+\frac{{c_i}^2 h^2}{2}\vf{f}_{tt}+\\
         &+c_i h^2\vf{f}_{\vf{x}t}\left(\sum_{j=1}^{s}a_{ij}\vf{k}_j\right)+\frac{h^2}{2}\vf{f}_{\vf{xx}}{\left(\sum_{j=1}^{s}a_{ij}\vf{k}_j\right)}^2\!+\O{h^3}
       \end{split} \\
-       & =\vf{f}+c_i h\vf{F}+\frac{{c_i}^2}{2}h^2\vf{G}+\left(\sum_{j=1}^{s}a_{ij}c_j\right)\vf{f}_{\vf{x}}\vf{F}+\O{h^3}                                          \\
+       & =\vf{f}+c_i h\vf{F}+\frac{{c_i}^2}{2}h^2\vf{G}+h^2\left(\sum_{j=1}^{s}a_{ij}c_j\right)\vf{f}_{\vf{x}}\vf{F}+\O{h^3}                                       \\
     \end{align*}
     Therefore:
     $$\vf\tau_{n}(h)=\vf{f}+\frac{1}{2}h\vf{F}+\frac{1}{6}h^2\left(\vf{G}+\vf{f}_{\vf{x}}\vf{F}\right)+\O{h^3}-\sum_{i=1}^sb_i\vf{k}_i$$
@@ -173,7 +181,7 @@
     The consistency order $p$ of an $s$-stage Runge-Kutta method is bounded by $p\leq 2 s$. If the Runge-Kutta method is explicit, then $p\leq s$.
   \end{lemma}
   \begin{remark}
-    Looking at \mcref{NC:stages-orderRK} we see why the RK4, i.e. the RK method with 4 stages, is widely known.
+    Looking at \mcref{NC:stages-orderRK} we see why the RK4, i.e. the RK method with 4 stages, is so widely known.
   \end{remark}
   \begin{table}[H]
     \centering
@@ -237,33 +245,33 @@
       \end{tabular}
     \end{center}
     These methods $\vf{\phi}$ and $\vf{\hat\phi}$ are called \emph{embedded methods}\footnote{Usually the notation $\mathrm{RK}p(q)s$ is used to refer for a method of order $p$ with an embedded method of order $q< p$ and a total of $s$ stages.}. Denote by $\vf{\tilde{x}}$ and $\vf{\hat{x}}$ the numerical solutions using the respective incremental functions.
-    Then, given a tolerance $\epsilon$ and a older step-size $h$, we would like to choose a new step size $h_\mathrm{new}$ for which our approximate solutions differ no more than $\epsilon$ between them. At the time $t_i$ we have:
+    Then, given a tolerance $\epsilon$ and a older step-size $h$, we would like to choose a new step size $h_\mathrm{new}$ for which our approximate solutions differ no more than $\epsilon$ between them. At the time $t_n$ we have:
     \begin{align*}
-      \vf{\tilde{x}}_{i+1} & =\vf{\tilde{x}}_i+h\vf{\phi}(t_i,\vf{\tilde{x}}_i,\vf{f})   \\
-      \vf{\hat{x}}_{i+1}   & =\vf{\tilde{x}}_i+h\vf{\hat\phi}(t_i,\vf{\hat{x}}_i,\vf{f})
+      \vf{\tilde{x}}_{n+1} & =\vf{\tilde{x}}_n+h\vf{\phi}(t_n,\vf{\tilde{x}}_n,\vf{f},h)   \\
+      \vf{\hat{x}}_{n+1}   & =\vf{\tilde{x}}_n+h\vf{\hat\phi}(t_n,\vf{\hat{x}}_n,\vf{f},h)
     \end{align*}
     To obtain this we have to choose the new step-size
     \begin{equation}\label{NC:RFF}
-      h_{\mathrm{new}}\simeq h\sqrt[p+1]{\frac{\epsilon}{\norm{\vf{\hat{x}}(t_i+h)-\vf{\tilde{x}}(t_i+h)}}}
+      h_{\mathrm{new}}\simeq h\sqrt[p+1]{\frac{\epsilon}{\norm{\vf{\hat{x}}(t_n+h)-\vf{\tilde{x}}(t_n+h)}}}
     \end{equation}
-    If this new step-size was not successful, i.e. we have $$\norm{\vf{\hat{x}}(t_{i+1}+h_\mathrm{new})-\vf{\tilde{x}}(t_{i+1}+h_\mathrm{new})}>\epsilon$$ we will have to repeat the last step with an another step-size $h_{\mathrm{new}}^*<h_{\mathrm{new}}$.
+    If this new step-size was not successful, i.e. we have $$\norm{\vf{\hat{x}}(t_{n+1}+h_\mathrm{new})-\vf{\tilde{x}}(t_{n+1}+h_\mathrm{new})}>\epsilon$$ we will have to repeat the last step with an another step-size $h_{\mathrm{new}}^*<h_{\mathrm{new}}$.
   \end{theorem}
   \begin{proof}
-    We assume that the $i$-th iteration was successful, i.e.:
-    $$\norm{\vf{\hat{x}}(t_i+h)-\vf{\tilde{x}}(t_i+h)}\leq\epsilon$$
-    From the hypothesis we have:
-    $$\norm{\vf{\hat{x}}_{i+1}-\vf{\tilde{x}}_{i+1}}\leq c(\vf{x}(t_i))h^{p+1}$$
-    Moreover, up to errors of first order, we have $\vf{C}(\vf{x}(t_i))\approx\vf{C}(\vf{x}(t_{i+1}))$. Finally imposing
-    $$\norm{\vf{C}(\vf{x}(t_{i+1})){h_\mathrm{new}}^{p+1}}\leq\epsilon$$
+    We assume that the $n$-th iteration was successful, i.e.:
+    $$\norm{\vf{\hat{x}}(t_n+h)-\vf{\tilde{x}}(t_n+h)}\leq\epsilon$$
+    From the hypothesis and \mcref{NC:errorControl} we have:
+    $$\norm{\vf{\hat{x}}(t_n+h)-\vf{\tilde{x}}(t_n+h)}\leq \vf{c}(\vf{x}(t_n))h^{p+1}$$
+    Moreover, up to errors of first order, we have $\vf{c}(\vf{x}(t_n))\approx\vf{c}(\vf{x}(t_{n}+h))$. Finally imposing
+    $$\norm{\vf{c}(\vf{x}(t_{n}+h)){h_\mathrm{new}}^{p+1}}\lesssim\epsilon$$
     yields to:
-    $$\norm{\vf{\hat{x}}(t_i+h)-\vf{\tilde{x}}(t_i+h)}{\left(\frac{h_{\mathrm{new}}}{h}\right)}^{p+1}\lesssim\epsilon$$
+    $$\norm{\vf{\hat{x}}(t_n+h)-\vf{\tilde{x}}(t_n+h)}{\left(\frac{h_{\mathrm{new}}}{h}\right)}^{p+1}\lesssim\epsilon$$
   \end{proof}
   \begin{remark}
     Note that there exist RK embedded methods by the following argument. Start with a RK method of order $p+1$ that has $s$ stages. Then we can construct a RK method of order $p$ with $s$ stages by copying the coefficients $\vf{A}$ and $\vf{c}$ and adjusting the coefficients $\vf{b}$ in a proper way to make it ``less'' consistent.
   \end{remark}
   \begin{remark}
     In practise in order to avoid many unsuccessful steps, instead of the new step in \mcref{NC:RFF} we use the following:
-    $$h_{\mathrm{new}}\simeq\alpha h\sqrt[p+1]{\frac{\epsilon}{\norm{\vf{\hat{x}}(t_i+h)-\vf{\tilde{x}}(t_i+h)}}}$$
+    $$h_{\mathrm{new}}\simeq\alpha h\sqrt[p+1]{\frac{\epsilon}{\norm{\vf{\hat{x}}(t_n+h)-\vf{\tilde{x}}(t_n+h)}}}$$
     with $\alpha\simeq 0.9$.
     Furthermore, in order to avoid rapid oscillations of the stepsize, $h$ should not, however, be changed by more than a factor of 2 to 5 from one step to the next.
   \end{remark}
@@ -273,7 +281,7 @@
     $$
       \tilde{y}_{n+1}=g(h\lambda)\tilde{y}_n
     $$
-    for some function $g:\RR\rightarrow\RR$. This function is called \emph{stability function}. Given $h$ and $\lambda$, the method is said to be \emph{stable} if $\abs{g(h\lambda)}\leq 1$ and \emph{absolutely stable} if $\abs{g(h\lambda)}< 1$ (that is, $h\lambda\in\mathcal{A}$). Given $\lambda<0$, the method is said to be \emph{conditionally absolutely stable} for a fixed $h$ if there exists a function $\Lambda(\lambda)$ such that $g(h\lambda)<1\iff h<\Lambda(\lambda)$. If the condition $g(h \lambda)<1$ holds $\forall h\in\RR_{>0}$, we say that the method is \emph{unconditionally absolutely stable}. If $\abs{g(h\lambda)}> 1$, the method is said to be \emph{unstable}.
+    for some function $g:\RR\rightarrow\RR$. This function is called \emph{stability function}. Given $h$ and $\lambda$, the method is said to be \emph{stable} if $\abs{g(h\lambda)}\leq 1$ and \emph{absolutely stable} if $\abs{g(h\lambda)}< 1$. Given $\lambda<0$, the method is said to be \emph{conditionally absolutely stable} for a fixed $h$ if there exists a function $\Lambda(\lambda):\CC\to\RR_{>0}$ such that $g(h\lambda)<1\iff h<\Lambda(\lambda)$. If the condition $g(h \lambda)<1$ holds $\forall h\in\RR_{>0}$, we say that the method is \emph{unconditionally absolutely stable}. If $\abs{g(h\lambda)}> 1$, the method is said to be \emph{unstable}.
   \end{definition}
   \begin{definition}
     Consider a RK method with stability function $g$. We define the \emph{stability region} of the method as the set:
@@ -296,9 +304,9 @@
     \end{multline*}
     Iterating the proces and taking norms we have:
     $$
-      \abs{{e}_n}\leq\sum_{j=0}^n{\abs{g(h\lambda)}}^jh\abs{{\tau}_n(h)}\leq nh\tau(h)\overset{h\to 0}{\longrightarrow}0
+      \abs{{e}_n}\leq\sum_{j=0}^n{\abs{g(h\lambda)}}^jh\abs{{\tau}_{n-j}(h)}\leq nh\tau(h)\overset{h\to 0}{\longrightarrow}0
     $$
-    because $nh=(t_n-t_0)$ is bounded.
+    because $nh=t_n-t_0$ is bounded.
   \end{proof}
   \subsubsection{Multistep method}
   \begin{definition}
@@ -322,7 +330,7 @@
     \end{gather*}
   \end{definition}
   \begin{definition}
-    A linear $k$-step method is said to be \emph{zero-stable} if there is a constant $C>0$ such that for every $N\in\NN$ sufficiently large and for any two different sets of initial data $\vf{\tilde{y}}_0,\ldots,\vf{\tilde{y}}_{k-1}$ and $\vf{\hat{y}}_0,\ldots,\vf{\hat{y}}_{k-1}$, the two respective sequences $(\vf{\tilde{y}}_n)_{0\leq n\leq N}$ and $(\vf{\hat{y}}_n)_{0\leq n\leq N}$ of iterates satisfy:
+    A linear $k$-step method is said to be \emph{zero-stable} if there is a constant $C>0$ such that for every $N\in\NN$ sufficiently large and for any two different sets of initial data $\vf{\tilde{y}}_0,\ldots,\vf{\tilde{y}}_{k-1}$ and $\vf{\hat{y}}_0,\ldots,\vf{\hat{y}}_{k-1}$, the two respective sequences $(\vf{\tilde{y}}_n)_{0\leq n\leq N}$ and $(\vf{\hat{y}}_n)_{0\leq n\leq N}$ of iterates satisfy
     $$\max_{0\leq n\leq N}\norm{\vf{\tilde{y}}_n-\vf{\hat{y}}_n}\leq C\max_{0\leq n\leq k-1}\norm{\vf{\tilde{y}}_n-\vf{\hat{y}}_n}$$
     as $h\to 0$.
   \end{definition}
@@ -347,7 +355,7 @@
       \vf\phi_\mathrm{AB} & =\int_{t_{n+k-1}}^{t_{n+k}}\sum_{j=0}^{k-1}\vf{f}_{n+j}\prod_{\substack{i=0 \\i\ne j}}^{k-1}\frac{t-t_{n+i}}{t_{n+j}-t_{n+i}}\dd{t}\\
       \vf\phi_\mathrm{AM} & =\int_{t_{n+k-1}}^{t_{n+k}}\sum_{j=0}^{k}\vf{f}_{n+j}\prod_{\substack{i=0   \\i\ne j}}^{k}\frac{t-t_{n+i}}{t_{n+j}-t_{n+i}}\dd{t}
     \end{align*}
-    In the following table we expose the first three Adams' incremental functions for the explicit and implicit methods of the form of \mcref{NC:Adams}:
+    In the following table we expose the first three Adams' incremental functions for the explicit and implicit methods:
     \begin{center}
       \renewcommand{\arraystretch}{1.7}
       \begin{tabular}[ht]{c|c|c}
@@ -364,7 +372,7 @@
     $$
       \vf\tau_n(h)=\frac{\sum_{j=0}^k[\alpha_j\vf{y}_{n+j}-h\beta_j\vf{{f}}_{n+j}]}{h}
     $$
-    We define the $\tau(h)$ as:
+    We define $\tau(h)$ as:
     $$
       \tau(h)=\sup_{n\geq 1}\norm{\vf\tau_n(h)}
     $$
@@ -374,7 +382,7 @@
     The global error of the method and the convergency of it are the same as in the one-step case.
   \end{remark}
   \begin{proposition}
-    The $k$-step method of Adams-Bashforth method has order of consistency $k$, whereas the Adams-Moulton method has order of consistency $k+1$.
+    The Adams-Bashforth $k$-step method has order of consistency $k$, whereas the Adams-Moulton method has order of consistency $k+1$.
   \end{proposition}
   \begin{theorem}
     A necessary condition for the convergence of the linear multi-step method of \mcref{NC:multistep} is that it has to be zero-stable and consistent.
