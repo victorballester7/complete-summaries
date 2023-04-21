@@ -706,7 +706,7 @@
     Let $\Omega\subseteq \RR^n$ be a set. A \emph{distribution} on $\Omega$ is a continuous linear form on $\mathcal{D}(\Omega)$. The vector space of all distributions on $\Omega$ is denoted by $\mathcal{D}^*(\Omega)$.
   \end{definition}
   \begin{lemma}
-    Let $\Omega\subseteq\RR^n$ and $T:\mathcal{D}(\Omega)\rightarrow\CC$ be linear. Then, $T$ is continuous if $\forall (\varphi_n)\in\mathcal{D}(\Omega)$ with $\varphi_n\rightarrow 0$ in $\mathcal{D}(\Omega)$ we have that $T(\varphi_n)\rightarrow 0$.
+    Let $\Omega\subseteq\RR^n$ and $T:\mathcal{D}(\Omega)\rightarrow\CC$ be linear. Then, $T$ is continuous if $\forall (\varphi_n)\in\mathcal{D}(\Omega)$ with $\varphi_n\rightarrow 0$ in $\mathcal{D}(\Omega)$ we have that $T(\varphi_n)\rightarrow 0$\footnote{Sometimes we will denote $T(\varphi)$ as $\langle T,\varphi\rangle$.}.
   \end{lemma}
   \begin{lemma}[Fundamental lemma of calculus of variations]\label{HA:fundamentallemma}
     Let $\Omega\subseteq\RR^n$ be a domain and $f\in L_\mathrm{loc}^1(\Omega)$ such that $$\int_\Omega f(\vf{x})\varphi(\vf{x})\dd{\vf{x}}=0$$ for all $\varphi\in\mathcal{D}(\Omega)$. Then, $f\almoste{=}0$ in $\Omega$.
@@ -723,13 +723,13 @@
   \begin{proposition}
     Let $\Omega\subseteq \RR^n$ be a set and $f\in L_{\mathrm{loc}}^1(\Omega)$. Then, the map
     \begin{equation}\label{HA:regularDistribution}
-      \function{\Lambda_f}{\mathcal{D}(\Omega)}{\CC}{\varphi}{\displaystyle\int_\Omega f(\vf{x})\varphi(\vf{x})\dd{\vf{x}}}
+      \function{T_f}{\mathcal{D}(\Omega)}{\CC}{\varphi}{\displaystyle\int_\Omega f(\vf{x})\varphi(\vf{x})\dd{\vf{x}}}
     \end{equation}
-    is a distribution. Hence, $\Lambda_f(\varphi)$ is usually denoted by $\dotp{f}{\varphi}$. Sometimes we will do an abuse of notation denoting $\Lambda_f$ as $f$ (in view of the \mnameref{HA:fundamentallemma}).
+    is a distribution. Hence, $T_f(\varphi)$ is usually denoted by $\dotp{f}{\varphi}$. Sometimes we will do an abuse of notation denoting $T_f$ as $f$ (in view of the \mnameref{HA:fundamentallemma}).
   \end{proposition}
   \begin{proof}
-    $\Lambda_f$ is clearly linear. Moreover: $$\abs{\Lambda_f(\varphi)}\leq\int_\Omega\abs{f(\vf{x})\varphi(\vf{x})}\leq \norm{f}_1\norm{\varphi}_\infty$$
-    Hence, $\Lambda_f$ is bounded and therefore continuous.
+    $T_f$ is clearly linear. Moreover: $$\abs{T_f(\varphi)}\leq\int_\Omega\abs{f(\vf{x})\varphi(\vf{x})}\leq \norm{f}_1\norm{\varphi}_\infty$$
+    Hence, $T_f$ is bounded and therefore continuous.
   \end{proof}
   \begin{definition}
     The distributions that can be expressed as in \mcref{HA:regularDistribution} are called \emph{regular distributions}.
@@ -748,7 +748,7 @@
     The Dirac's $\delta_{\vf{0}}$ distribution is not regular.
   \end{lemma}
   \begin{proof}
-    Suppose it is regular. Then, $\exists f\in L_{\mathrm{loc}}^1(\Omega)$ such that $\delta=\Lambda_f$. Hence, $\varphi(\vf{0})=\delta(\varphi)=\int_\Omega f(\vf{x})\varphi(\vf{x})\dd{\vf{x}}$ for all $\varphi\in\mathcal{D}(\Omega)$. Then, if we take $\varphi_n(x):=\varphi(nx)$, where:
+    Suppose it is regular. Then, $\exists f\in L_{\mathrm{loc}}^1(\Omega)$ such that $\delta=T_f$. Hence, $\varphi(\vf{0})=\delta(\varphi)=\int_\Omega f(\vf{x})\varphi(\vf{x})\dd{\vf{x}}$ for all $\varphi\in\mathcal{D}(\Omega)$. Then, if we take $\varphi_n(x):=\varphi(nx)$, where:
     $$\varphi(x)=\begin{cases}
         \exp{-\frac{1}{1-\norm{x}^2}} & \text{if } \norm{x}\leq 1 \\
         0                             & \text{if } \norm{x}> 1
@@ -772,6 +772,18 @@
     $$\abs{T(\varphi)}\leq C_K\norm{\varphi}_{N,K}$$
     for all $\varphi\in\mathcal{D}(\Omega)$. We say that $T$ is has \emph{infinite order} if it is not of order $N$ for any $N\in\NN$.
   \end{definition}
+  \begin{definition}
+    Let $\Omega\subseteq \RR^n$, $T,S\in\mathcal{D}^*(\Omega)$, $a\in\RR$ and $f\in\mathcal{C}^\infty(\RR^n)$. We define the distributions $T+S$, $aT$ and $fT$ as:
+    \begin{align*}
+      \langle T+S,\varphi\rangle & := \langle T, \varphi\rangle+\langle S, \varphi\rangle \\
+      \langle aT,\varphi\rangle  & := \langle T, a\varphi\rangle                          \\
+      \langle fT,\varphi\rangle  & := \langle T, f\varphi\rangle
+    \end{align*}
+  \end{definition}
+  \begin{remark}
+    In general the product of two distributions is not associative. For example, one can check that $\delta x=0$ and $x\pv\left(\frac{1}{x}\right)=1$. So:
+    $$\left(\delta x\right)\pv\left(\frac{1}{x}\right)\ne\delta \left(x\pv\left(\frac{1}{x}\right)\right)$$
+  \end{remark}
   \subsubsection{Convergency of distributions}
   \begin{definition}
     Let $\Omega\subseteq \RR^n$ be a set and $(T_n)\in \mathcal{D}^*(\Omega)$. We say that $(T_n)$ converges to $T\in\mathcal{D}^*(\Omega)$ if $T_n(\varphi)\overset{n\to\infty}{\longrightarrow}T(\varphi)$ for all $\varphi\in\mathcal{D}(\Omega)$.
@@ -799,7 +811,7 @@
     Now use the properties of approximation of unity to see that each interval goes to zero as $\varepsilon\to 0$.
   \end{sproof}
   \begin{theorem}
-    Let $\Omega\subseteq \RR^n$ be a set and $(f_n)\in L_\mathrm{loc}^p$ such that $f_n\overset{L_\mathrm{loc}^p}{f}$ (which means that $\int_K\abs{f_n-f}\to 0$ for any compact set $K$). Then, $T_{f_n}$ converges to $T_f$ in $\mathcal{D}(\Omega)$.
+    Let $\Omega\subseteq \RR^n$ be a set and $(f_n)\in L_\mathrm{loc}^p$ such that $f_n\overset{L_\mathrm{loc}^p}{\longrightarrow}f$ (which means that $\int_K\abs{f_n-f}\to 0$ for any compact set $K$). Then, $T_{f_n}$ converges to $T_f$ in $\mathcal{D}(\Omega)$.
   \end{theorem}
   \begin{proof}
     Use \mnameref{RFA:holder}.
@@ -807,23 +819,112 @@
   \begin{remark}
     Clearly if $f_n$ converge uniformly to $f$, the condition of the theorem holds and we get the same result. But it can be seen that only with pointwise convergence is not enough (consider $f_n(x)=n^kx^n(1-x)\indi{[0,1]}$ for $k\in\NN$). Moreover, $T_{f_n}$ converges to $T_f$ in $\mathcal{D}(\Omega)$ does not imply pointwise convergence of $f_n$ towards $f$.
   \end{remark}
-  % \begin{definition}
-  %   Let $\Omega\subseteq \RR^n$ be a set and $n\in\NN$. We define the \emph{differentiation operator} $D^n:\mathcal{D}^*(\Omega)\rightarrow\mathcal{D}^*(\Omega)$ by: $$\dotp{D^n\Lambda}{\varphi}=\dotp{\Lambda}{{(-1)}^nD^n\varphi}$$
-  %   for all $\Lambda\in\mathcal{D}^*(\Omega)$ and all $\varphi\in\mathcal{D}(\Omega)$. The distribution $D^n\Lambda$ is called \emph{distributional derivative}.
-  % \end{definition}
-  % \begin{definition}
-  %   We define the \emph{Heaviside step function} as the function $H(x)=\indi{x>0}$.
-  % \end{definition}
-  % \begin{proposition}
-  %   We have that $\Lambda_{H}=:H\in\mathcal{D}^*(\RR)$ and: $$H'=\delta$$
-  % \end{proposition}
-  % \begin{proof}
-  %   For all $\varphi\in\mathcal{D}(\Omega)$ we have:
-  %   \begin{align*}
-  %     \dotp{H'}{\varphi}=-\dotp{H}{\varphi'} & =-\int_{-\infty}^\infty H(x)\varphi'(x)\dd{x}                  \\
-  %                                            & =-\int_{0}^\infty\varphi'(x)\dd{x}= \varphi(0)=\delta(\varphi)
-  %   \end{align*}
-  %   because $\varphi$ has compact support.
-  % \end{proof}
+  \subsubsection{Differentiation of distributions}
+  \begin{definition}
+    Let $\Omega\subseteq \RR^n$ be a set, $T\in\mathcal{D}^*(\Omega)$ and $\alpha$ be a multiindex. We define the distribution $\partial^\alpha T$ as: $$\dotp{\partial^\alpha T}{\varphi}=\dotp{T}{{(-1)}^n\partial^\alpha\varphi}$$
+    for all $\varphi\in\mathcal{D}(\Omega)$. The distribution $\partial^\alpha T$ is called \emph{distributional derivative}.
+  \end{definition}
+  \begin{definition}
+    We define the \emph{Heaviside step function} as the function $H(x)=\indi{x>0}$.
+  \end{definition}
+  \begin{proposition}
+    We have that $T_{H}=:H\in\mathcal{D}^*(\RR)$ and: $$H'=\delta$$
+  \end{proposition}
+  \begin{proof}
+    For all $\varphi\in\mathcal{D}(\Omega)$ we have:
+    \begin{align*}
+      \dotp{H'}{\varphi}=-\dotp{H}{\varphi'} & =-\int_{-\infty}^\infty H(x)\varphi'(x)\dd{x}                  \\
+                                             & =-\int_{0}^\infty\varphi'(x)\dd{x}= \varphi(0)=\delta(\varphi)
+    \end{align*}
+    because $\varphi$ has compact support.
+  \end{proof}
+  \begin{proposition}[Schwarz theorem]
+    Let $\Omega\subseteq \RR^n$ be a set and $T\in\mathcal{D}^*(\Omega)$. Then:
+    $$
+      \frac{\partial^2 T}{\partial x_i\partial x_j}=\frac{\partial^2 T}{\partial x_j\partial x_i}
+    $$
+  \end{proposition}
+  \begin{proposition}[Leibnitz rule]
+    Let $\Omega\subseteq \RR^n$ be a set, $T\in\mathcal{D}^*(\Omega)$, $f\in \mathcal{C}^\infty(\Omega)$ and $\alpha$ be a multiindex. Then:
+    $$
+      \partial^\alpha (fT)=\sum_{\beta\leq \alpha}\binom{\alpha}{\beta}\partial^\beta f\partial^{\alpha-\beta} T
+    $$
+  \end{proposition}
+  \subsubsection{Schwartz class of functions}
+  \begin{definition}
+    Let $d\in\NN$. The \emph{Schwartz space} or \emph{space of rapidly decreasing functions} on $\RR^n$ is defined as:
+    $$
+      \mathcal{S}(\RR^d):=\{f\in \mathcal{C}^\infty(\RR^n):\norm{f}_{\alpha,\beta}<\infty\ \forall\alpha,\beta\in\NN^d\}
+    $$
+    where:
+    $$
+      \norm{f}_{\alpha,\beta}:=\sup_{x\in\RR^n}\abs{x^\alpha (\partial^\beta f)(x)}
+    $$
+  \end{definition}
+  \begin{lemma}
+    Let $f\in \mathcal{S}(\RR^d)$. Then, $x^\alpha f,\partial^\alpha f\in \mathcal{S}(\RR^d)$ for all $\alpha\in\NN^d$.
+  \end{lemma}
+  \begin{lemma}
+    Let $d\in\NN$. Then, $\mathcal{D}(\RR^d)\subset\mathcal{S}(\RR^d)$.
+  \end{lemma}
+  \begin{definition}
+    Let $f,(f_n)\in \mathcal{S}(\RR^d)$. We say that $f_n\overset{S}{\longrightarrow}f$ if $\norm{f_n-f}_{\alpha,\beta}\to 0$ for all $\alpha,\beta\in\NN^d$.
+  \end{definition}
+  \begin{proposition}
+    Let $d\in\NN$. Then, $\mathcal{S}(\RR^d)\subset L^p(\RR^d)$ for all $p\in[1,\infty]$.
+  \end{proposition}
+  \begin{proof}
+    For $p=\infty$ the result is clear. Now suppose that $p\in[1,\infty)$ and let $\phi\in \mathcal{S}(\RR^d)$. Then:
+    \begin{align*}
+      \int_{\RR^d}\abs{\phi}^p & = \int_{B(0,1)}\abs{\phi}^p+\int_{\RR^d\setminus B(0,1)}\frac{\abs{\phi}^p\abs{x}^{kp}}{\abs{x}^{kp}} \\
+                               & \leq C_1+C_2\int_{\RR^d\setminus B(0,1)}\frac{1}{\abs{x}^{kp}}
+    \end{align*}
+    for some $k\in \NN$ yet to be determined. Here in the last step we have used $\abs{\abs{\phi}\abs{x}^{k}}\leq \norm{f}_{k,0}=:C_2$. Now if $R_j:=\{x\in\RR^d:2^j\leq \abs{x}\leq 2^{j+1}\}$, $j\in\NN\cup\{0\}$, then:
+    \begin{align*}
+      \int_{\RR^d\setminus B(0,1)}\frac{1}{\abs{x}^{kp}} & \leq \sum_{j=0}^\infty \int_{R_j}\frac{1}{\abs{x}^{kp}} \\
+                                                         & \leq\sum_{j=0}^\infty \frac{C2^{(j+1)d}}{2^{kpj}}       \\
+                                                         & <\infty
+    \end{align*}
+    if $kp-d>0$. So take $k> \frac{d}{p}$.
+  \end{proof}
+  \begin{lemma}
+    Let $f$ be a function that has Fourier transform. Then, $f\in \mathcal{S}(\RR^d)\iff \widehat{f} \in \mathcal{S}(\RR^d)$.
+  \end{lemma}
+  \begin{proof}
+    By symmetry, it suffices to do one implication. Moreover we will only do the case $d=1$ in order to keep the notation simple. Let $f\in \mathcal{S}(\RR)$ and $\alpha,\beta\in\NN\cup\{0\}$. Then, using \mcref{HA:diffFourierTransf,HA:diffFourierXf}:
+    \begin{align*}
+      \abs{\xi}^\alpha\abs{\partial^\beta \widehat{f}(\xi)} & =\abs{\xi}^\alpha\abs{\F({(-2\pi\ii x)}^\beta f)(\xi)}                                 \\
+                                                            & =\frac{1}{\abs{2\pi\ii}^\alpha}\abs{\F[\partial^\alpha ({(-2\pi\ii x)}^\beta f)](\xi)} \\
+                                                            & \leq \norm{\partial^\alpha ({(-2\pi\ii x)}^\beta f)}_1                                 \\
+                                                            & <\infty
+    \end{align*}
+    where in the last inequality we have used that $\norm{\widehat{g}}_\infty\leq \norm{g}_1$.
+  \end{proof}
+  \subsubsection{Tempered distributions}
+  \begin{definition}
+    Let $(\varphi_n),\varphi\in\mathcal{S}(\RR^d)$. We say that $(\varphi_n)\overset{S}{\longrightarrow}\varphi$ if $\norm{\varphi_n-\varphi}_{\alpha,\beta}\to 0$ for all $\alpha,\beta\in\NN^d$.
+  \end{definition}
+  \begin{definition}
+    A \emph{tempered distribution} is a linear and continuous operator $T:\mathcal{S}(\RR^d)\to \CC$. The space of all tempered distributions is denoted by $\mathcal{S}^*(\RR^d)$.
+  \end{definition}
+  \begin{lemma}
+    Let $T:\mathcal{S}(\RR^d)\to \CC$ be linear. Then, $T\in\mathcal{S}^*(\RR^d)$ if and only for all compact set $K\subset\RR^d$, there exists $C>0$ and $m\in\NN\cup\{0\}$ such that $\forall \varphi\in \mathcal{S}(\RR^d)$ we have:
+    $$
+      \abs{T(\varphi)}\leq C\sum_{\abs{\alpha}+\abs{\beta}\leq m}\norm{\varphi}_{\alpha,\beta}
+    $$
+  \end{lemma}
+  \begin{lemma}
+    $L^p(\RR^d)\subset\mathcal{S}^*(\RR^d)\subsetneq \mathcal{D}^*(\RR^d)$.
+  \end{lemma}
+  \begin{lemma}
+    Let $T\in \mathcal{S}^*(\RR^d)$. Then, $\partial^\alpha T\in \mathcal{S}^*(\RR^d)$ for all $\alpha\in\NN^d$.
+  \end{lemma}
+  \begin{definition}
+    Let $T\in \mathcal{S}^*(\RR^d)$. We define the \emph{Fourier transform} $\widehat{T}$ of $T$ as
+    $$
+      \langle \widehat{T},\varphi\rangle:=\langle T,\widehat{\varphi}\rangle
+    $$
+    for all $\varphi\in \mathcal{S}(\RR^d)$.
+  \end{definition}
 \end{multicols}
 \end{document}

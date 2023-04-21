@@ -310,7 +310,7 @@
     A \emph{random walk} is a sequence $(\vf{S}_n)$ with $\vf{S}_0=\vf{X}_0$ and $\vf{S}_n=\sum_{k=0}^{n}\vf{X}_k$, where $(\vf{X}_k)_{k\geq 1}$ is a sequence of \iid random vectors and $\vf{X}_0$ is a random vector independent from $(\vf{X}_k)$.
   \end{definition}
   \begin{definition}
-    A \emph{simple random walk} is a random walk in which $X_k$ are random variables such that:
+    A \emph{simple random walk} is a random walk in which in one step we can only pass from one state to its neighbours. That is, if the random walk is in $\ZZ$, $X_k$ are random variables such that:
     $$
       X_k=\begin{cases}
         1  & \text{with probability $p$}   \\
@@ -318,6 +318,12 @@
       \end{cases}
     $$
   \end{definition}
+  \begin{figure}[H]
+    \centering
+    \includestandalone[mode=image|tex,width=0.75\linewidth]{Images/randomWalk}
+    \caption{A simple random walk of 10000 steps in $\ZZ^2$. The green and blue dots are the respective initial and final positions of the random walk.}
+    \label{fig:simple_random_walk}
+  \end{figure}
   \begin{lemma}
     A sequence of \iid random variables, a random walk and a Galton-Watson process are all time-homogeneous Markov chains.
   \end{lemma}
@@ -543,7 +549,7 @@
     for all $n\geq 0$.
   \end{corollary}
   \subsubsection{Recurrence and transience}
-  From now on we will omit saying that a stopping time $\tau$ is defined in a filtration space $(\Omega,\mathcal{F},(\mathcal{F}_n)_{n\geq 0},\Prob)$. Moreover given a Markov chain $(X_n)$, we will denote by $\Prob_i(A):=\Prob(A\mid X_0=i)$, for any event $A$.
+  From now on we will omit saying that a stopping time $\tau$ is defined in a filtration space $(\Omega,\mathcal{F},(\mathcal{F}_n)_{n\geq 0},\Prob)$. Moreover given a Markov chain $(X_n)$, we will denote by $\Prob_i(A):=\Prob(A\mid X_0=i)$ and $\Exp_i(A):=\Exp(A\mid X_0=i)$, for any event $A$.
   \begin{definition}
     Let $(X_n)$ be a time-homogeneous Markov chain, $i,j\in I$ and consider the stopping time $\tau_j$ of \mcref{SP:tau_i}. We define $f_{ij}:=\Prob_i(\tau_j<\infty)$. We say that $i$ is \emph{transient} if $f_{ii}<1$ and \emph{recurrent} if $f_{ii}=1$. Finally we define $N_i$ as:
     $$
@@ -553,6 +559,16 @@
   \begin{remark}
     Roughly speaking, if $i$ is recurrent it means that the chain will return at least once to $i$. On the other hand, if $i$ is transient, it means that the chain may never return to $i$.
   \end{remark}
+  \begin{definition}
+    Let $(X_n)$ be a time-homogeneous Markov chain, $i,j\in I$ and consider the stopping time $\tau_j$ of \mcref{SP:tau_i}. For $k\geq 2$, we define the \emph{$k$-th hitting time} of $i$ by:
+    $$
+      \tau_i^k:= \inf\{n>\tau_i^{k-1}:X_n=i\}
+    $$
+    with the convention that $\tau_i^1=\tau_i$ and $\tau_i^0=0$. Moreover we define the time difference $T_i^k:=\tau_i^k-\tau_i^{k-1}$.
+  \end{definition}
+  \begin{lemma}
+    Let $(X_n)$ be a time-homogeneous Markov chain. Then, $\tau_i^k$ is a stopping time $\forall k\in\NN$ and moreover $T_i^k$ are \iid random variables distributed as $\tau_i$.
+  \end{lemma}
   \begin{proposition}\label{SP:recurrence}
     Let $(X_n)$ be a time-homogeneous Markov chain and $i\in I$. Then:
     $$
@@ -564,11 +580,7 @@
     $$
       \Prob_i(N_i\geq k)\leq\Prob_i(N_i\geq 1)=\Prob_i(\tau_i<\infty)=f_{ii}=0
     $$
-    Now assume $f_{ii}=\Prob_i(\tau_i<\infty)>0$. We will prove the statement by induction on $k$. The case $k=1$ is clear. For $k\geq 2$, we define:
-    $$
-      \tau_i^k:= \inf\{n>\tau_i^{k-1}:X_n=i\}
-    $$
-    with the convention that $\tau_i^1=\tau_i$. An easy check shows that $\tau_i^k$ is a stopping time $\forall k\in\NN$ and $\{\tau_i^k<\infty\}\subseteq \{\tau_i^{k-1}<\infty\}$. Thus:
+    Now assume $f_{ii}=\Prob_i(\tau_i<\infty)>0$. We will prove the statement by induction on $k$. The case $k=1$ is clear. Note that $\{\tau_i^k<\infty\}\subseteq \{\tau_i^{k-1}<\infty\}$. Thus:
     \begin{multline*}
       \Prob_i(N_i\geq k) =\Prob_i(\tau_i^k<\infty)=\Prob_i(\tau_i^k<\infty,\tau_i^{k-1}<\infty)\\=\Prob_i(\tau_i^{k-1}<\infty)\Prob_i(\tau_i^k<\infty\mid\tau_i^{k-1}<\infty)=\\={(f_{ii})}^{k-1}\Prob_i(\tau_i^k<\infty\mid\tau_i^{k-1}<\infty)
     \end{multline*}
@@ -595,6 +607,176 @@
         0 & \text{if }i\text{ is transient}
       \end{cases}
     \end{multline*}
+  \end{proof}
+  \begin{definition}
+    Let $(X_n)$ be a time-homogeneous Markov chain, $i, j\in I$ and $n\in\NN$. We define $f_{ij}^{(n)}$ as:
+    $$f_{ij}^{(n)}:=\Prob_i(\tau_j=n)$$
+    Note that in these conditions we have:
+    $$
+      f_{ij}=\sum_{n=1}^{\infty}f_{ij}^{(n)}
+    $$
+  \end{definition}
+  \begin{proposition}\label{SP:pij-fij}
+    Let $(X_n)$ be a time-homogeneous Markov chain, $i, j\in I$ and $n\in\NN$. Then:
+    $$
+      p_{ij}^{(n)}=\sum_{m=1}^{n} f_{ij}^{(m)}p_{jj}^{(n-m)}
+    $$
+  \end{proposition}
+  \begin{proof}
+    Note that $\{X_n=j\}\subseteq \{\tau_j\leq n\}=\bigsqcup_{m=1}^n\{\tau_j=m\}$. Hence, $\{X_n=j\}=\bigsqcup_{m=1}^n[\{X_n=j\}\cap \{\tau_j=m\}]$. Thus:
+    \begin{align*}
+      p_{ij}^{(n)} & =\Prob_i(X_n=j)                                              \\
+                   & =\sum_{m=1}^n \Prob_i(X_n=j,\tau_j=m)                        \\
+                   & =\sum_{m=1}^n \Prob_i(X_n=j\mid\tau_j=m)\Prob_i(\tau_j=m)    \\
+      \begin{split}
+        & =\sum_{m=1}^n \Prob_i(X_n=j\mid X_m=j,X_{m-1}\ne j,\ldots, X_1\ne j)\cdot \\
+        &\hspace{7cm}\cdot f_{ij}^{(m)}
+      \end{split} \\
+                   & =\sum_{m=1}^n \Prob_i(X_{n-m}=j)f_{ij}^{(m)}                 \\
+                   & =\sum_{m=1}^nf_{ij}^{(m)}p_{jj}^{(n-m)}
+    \end{align*}
+  \end{proof}
+  \begin{proposition}
+    Let $(X_n)$ be a time-homogeneous Markov chain, $i, j\in I$. Then:
+    $$
+      i\to j\iff f_{ij}>0
+    $$
+  \end{proposition}
+  \begin{proof}
+    First note that $f_{ij}>0\iff \exists m\in\NN$ such that $f_{ij}^{(m)}>0$. So, we have:
+    \begin{itemizeiff}
+      If $i\to j$, $\exists n\in\NN$ such that $p_{ij}^{(n)}>0$. So by \mcref{SP:pij-fij} we have that $ \exists m\in\NN$ such that $f_{ij}^{(m)}>0$.
+      \item Now suppose $f_{ij}^{(m)}>0$ for some $m\in\NN$. Then:
+      $$
+        0<f_{ij}^{(m)}=\Prob_i(\tau_j=m)\leq \Prob_i(X_m=j)=p_{ij}^{(m)}
+      $$
+      Thus, $i\to j$.
+    \end{itemizeiff}
+  \end{proof}
+  \begin{definition}
+    Let $(X_n)$ be a time-homogeneous Markov chain, $i, j\in I$. We define: $S_{ij}:=\sum_{n=1}^{\infty}p_{ij}^{(n)}$.
+  \end{definition}
+  \begin{lemma}\label{SP:lemaPrerec}
+    Let $(X_n)$ be a time-homogeneous Markov chain and $j\in I$ be such that $S_{jj}<\infty$. Then, $\forall i\in I$ we have:
+    $$
+      S_{ij}=f_{ij}(1+S_{jj})
+    $$
+  \end{lemma}
+  \begin{proof}
+    \begin{multline*}
+      \sum_{n=1}^\infty p_{ij}^{(n)}= \sum_{n=1}^\infty \sum_{m=1}^n f_{ij}^{(m)}p_{jj}^{(n-m)}=\sum_{m=1}^\infty \sum_{n=m}^\infty f_{ij}^{(m)}p_{jj}^{(n-m)}=\\=\sum_{m=1}^\infty f_{ij}^{(m)}(1+S_{jj})=f_{ij}(1+S_{jj})
+    \end{multline*}
+  \end{proof}
+  \begin{lemma}\label{SP:lemaPrerec2}
+    Let $(X_n)$ be a time-homogeneous Markov chain and $j\in I$. Then, $\forall i\in I$ and all $N\in\NN$ we have:
+    $$
+      \sum_{n=1}^Np_{ij}^{(n)}\leq f_{ij}\left(1+\sum_{n=1}^Np_{jj}^{(n)}\right)
+    $$
+  \end{lemma}
+  \begin{sproof}
+    Same as in \mcref{SP:lemaPrerec}.
+  \end{sproof}
+  \begin{theorem}
+    Let $(X_n)$ be a time-homogeneous Markov chain and $i,j\in I$. Then:
+    \begin{enumerate}
+      \item\label{thmRecA} $i$ is recurrent $\iff S_{ii}=\infty$.
+      \item\label{thmRecB} If $i\leftrightarrow j$, then $i$ is recurrent $\iff j$ is recurrent.
+      \item\label{thmRecC} If $j$ is recurrent and $i\to j$, then $i$ is recurrent.
+      \item\label{thmRecD} If $j$ is transient, then $S_{ij}<\infty$ $\forall i\in I$. In particular, $\forall i\in I$, we have $\displaystyle \lim_{n\to\infty}p_{ij}^{(n)}=0$.
+    \end{enumerate}
+  \end{theorem}
+  \begin{proof}
+    \begin{enumerate}
+      \item \begin{itemizeiff}
+              Suppose $S_{ii}<\infty$. Then, since $f_{ii}=1$, \mcref{SP:lemaPrerec} implies $S_{ii}=1+S_{ii}$, which is a contradiction.
+              \item Using \mcref{SP:lemaPrerec2} we have:
+              $$
+                f_{ii}\geq\frac{\sum_{n=1}^Np_{ii}^{(n)}}{1+\sum_{n=1}^Np_{ii}^{(n)}}\overset{N\to\infty}{\longrightarrow}1
+              $$
+            \end{itemizeiff}
+      \item If $i\leftrightarrow j$, then $\exists r,s\geq 1$ such that $p_{ij}^{(r)}, p_{ji}^{(s)}>0$. So by \mcref{SP:corolariChapKolmo} we have that $\forall n\geq 0$:
+            $$
+              p_{jj}^{(n+r+s)} \geq p_{ji}^{(s)}p_{ii}^{(n)}p_{ij}^{(r)}=:C p_{ii}^{(n)}
+            $$
+            And so, $\sum p_{ii}^{(n)}=\infty\implies \sum p_{jj}^{(n)} = \infty$ by \mcref{thmRecA}.
+      \item Similarly as before, since $i\to j$, $\exists r\geq 1$ such that $p_{ij}^{(r)}>0$. Thus, $p_{ii}^{(n+r)}\geq p_{ij}^{(r)}p_{jj}^{(n)}$. So, $\sum p_{jj}^{(n)}=\infty\implies \sum p_{ii}^{(n)} = \infty$.
+      \item It follows from \mcref{thmRecA} and \mcref{SP:lemaPrerec}.
+    \end{enumerate}
+  \end{proof}
+  \begin{definition}
+    Let $(X_n)$ be a time-homogeneous Markov chain. We say that the chain is \emph{recurrent} if $i$ is recurrent for all $i\in I$. We say that the chain is \emph{transient} if $i$ is transient for all $i\in I$.
+  \end{definition}
+  \begin{theorem}[Polya's theorem on $\ZZ$]
+    The simple random walk on $\ZZ$ is recurrent if and only if $p=q$.
+  \end{theorem}
+  \begin{proof}
+    By \cref{SP:thmRecA} we need to study the convergence of $\sum p_{ii}^{(n)}=\sum_{ii}^{(2n)}$. Note that:
+    \begin{equation*}
+      p_{ii}^{(2n)}=\binom{2n}{n}p^nq^n
+    \end{equation*}
+    because we choose $n$ steps to the right from a total of $2n$ and the rest must be steps to the left. Finally using \mcref{MA:stirling} one can check that:
+    \begin{equation}\label{SP:stirling_polya1}
+      p_{ii}^{(2n)}\sim \frac{1}{\sqrt{n}}{(4pq)}^n
+    \end{equation}
+    which lead to a convergent series if and only if $p\ne q$.
+  \end{proof}
+  \begin{lemma}\label{SP:2n-n_convinatoria}
+    Let $n\in\NN$. Then:
+    $$
+      \sum_{m=0}^{n}\binom{n}{m}^2=\binom{2n}{n}
+    $$
+  \end{lemma}
+  \begin{sproof}
+    Equate the coefficients of $x^n$ of the two series
+    $$
+      \sum_{j=0}^{2n}\binom{2n}{j}x^j={[{(1+x)}^{n}]}^2={\left(\sum_{j=0}^n\binom{n}{j}x^j\right)}^2
+    $$
+    and use the fact that $\binom{n}{m}=\binom{n}{n-m}$.
+  \end{sproof}
+  \begin{theorem}[Polya's theorem on $\ZZ^2$]
+    The simple random walk on $\ZZ^2$ is recurrent if and only if $\Prob(X_1=(1,0))=\Prob(X_1=(-1,0))=\Prob(X_1=(0,1))=\Prob(X_1=(0,-1))=1/4$.
+  \end{theorem}
+  \begin{sproof}
+    We will proof only the implication to the left, in order to keep the proof short. Note that we have:
+    $$
+      p_{ii}^{(2n)}=\sum_{m=0}^{n}\frac{(2n)!}{{(m!)}^2{(n-m)!}^2}\frac{1}{4^{2n}}=\frac{1}{4^{2n}}\binom{2n}{n}\sum_{m=0}^n \binom{n}{m}^2
+    $$
+    In the formula $m$ denotes the number of steps rightwards, $n-m$, the number of steps upwards, $n-m$ the number of steps leftwards, and $m$, the number of steps downwards. Now using \mcref{SP:2n-n_convinatoria,SP:stirling_polya1} we have:
+    $$
+      p_{ii}^{(2n)}=\frac{1}{4^{2n}}\binom{2n}{n}^2\sim \frac{1}{n}
+    $$
+  \end{sproof}
+  \begin{theorem}[Polya's theorem on $\ZZ^3$]
+    The simple random walk on $\ZZ^3$ is always transient.
+  \end{theorem}
+  \begin{corollary}
+    Let $(X_n)$ be a time-homogeneous Markov chain and $i,j\in I$. Then, if $j$ is recurrent $\Exp_i(N_i)<\infty$.
+  \end{corollary}
+  \begin{proof}
+    $$
+      \Exp_i(N_j)=\Exp_i\left(\sum_{n=1}^{\infty}1_{\{X_n=j\}}\right)=\sum_{n=1}^{\infty}p_{ij}^{(n)}<\infty
+    $$
+    where the last inequality follows from \mcref{thmRecD}.
+  \end{proof}
+  \subsubsection{Limit distributions}
+  \begin{definition}
+    Let $(X_n)$ be a time-homogeneous Markov chain and $i\in I$ be recurrent. We denote $\mu_i:=\Exp_i(\tau_i)$. We say that $i$ is \emph{positive recurrent} if $\mu_i<\infty$ and \emph{null recurrent} if $\mu_i=\infty$.
+  \end{definition}
+  \begin{theorem}[Ergotic theorem]
+    Let $(X_n)$ be a time-homogeneous Markov chain and $i\in I$ be positively recurrent. Then:
+    $$
+      \lim_{n\to\infty}\frac{1}{n}\sum_{n=1}^\infty p_{ii}^{(n)}=\frac{1}{\mu_i}
+    $$
+  \end{theorem}
+  \begin{proof}
+    Note that $T_i^k$ has finite expectation and so by the \mcref{P:stronglawKolmo} we have:
+    $$\frac{1}{n}\sum_{j=1}^{k}T_i^j\almoste{\longrightarrow}\mu_i$$
+    Let $N_i^n=\sum_{j=1}^n\indi{X_j=i}\leq n$
+    FALTACOSA
+    Observe that $\frac{N_i^n}{n}\leq 1$. Thus, by the \mcref{P:dominated} we have that:
+    $$
+      \Exp_i\left(\frac{N_i^n}{n}\right)=\frac{\sum_{j=1}^n \Prob(X_j=i)}{n}=\frac{\sum_{j=1}^n p_{ii}^{(j)}}{n}\almoste{\longrightarrow}\frac{1}{\mu_i}
+    $$
   \end{proof}
 \end{multicols}
 \end{document}
