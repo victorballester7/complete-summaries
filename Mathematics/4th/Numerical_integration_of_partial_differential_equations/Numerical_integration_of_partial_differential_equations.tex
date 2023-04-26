@@ -361,6 +361,72 @@
       \item \emph{Robin}: $\alpha u+\pdv{u}{n}=h$
     \end{enumerate}
   \end{definition}
+  \begin{definition}
+    Consider the following scheme for the Poisson equation $u_{xx}+u_{yy}=f$:
+    \begin{equation}\label{NIPDE:poisson_eq}
+      \frac{v_{\ell+1,m}-2v_{\ell,m}+v_{\ell-1,m}}{h^2}+\frac{v_{\ell,m+1}-2v_{\ell,m}+v_{\ell,m-1}}{h^2}=f_{\ell,m}
+    \end{equation}
+    where we have chosen the same step size $h$ for both $x$ and $y$ directions. We define the \emph{discrete laplacian} as:
+    $$
+      {(\laplacian_h v)}_{\ell,m}:=\frac{v_{\ell+1,m}+v_{\ell-1,m}+v_{\ell,m+1}+v_{\ell,m-1}-4v_{\ell,m}}{h^2}
+    $$
+    Note that $\laplacian_hv=f$.
+  \end{definition}
+  \begin{theorem}[Discrete maximum principle]\label{NIPDE:maximumPrinc}
+    Consider the Poisson equation $u_{xx}+u_{yy}=f$, $v$ be a scheme of \mcref{NIPDE:poisson_eq} and suppose that $\laplacian_hv\geq 0$ on a region $\Omega$. Then:
+    $$\max_{\overline{\Omega}} v=\max_{\Fr{\Omega}} v$$
+  \end{theorem}
+  \begin{sproof}
+    The condition $\laplacian_hv\geq 0$ is equivalent to:
+    $$
+      v_{\ell,m}\leq \frac{1}{4}(v_{\ell+1,m}+v_{\ell-1,m}+v_{\ell,m+1}+v_{\ell,m-1})
+    $$
+    Now note that if there is a maximum in the interior of the region, its four neighbours must be equal to it.
+  \end{sproof}
+  \begin{corollary}[Discrete minimum principle]\label{NIPDE:minimumPrinc}
+    Consider the Poisson equation $u_{xx}+u_{yy}=f$, $v$ be a scheme of \mcref{NIPDE:poisson_eq} and suppose that $\laplacian_hv\leq 0$ on a region $\Omega$. Then:
+    $$\min_{\overline{\Omega}} v=\min_{\Fr{\Omega}} v$$
+  \end{corollary}
+  \begin{proof}
+    Apply \mnameref{NIPDE:maximumPrinc} to $-v$.
+  \end{proof}
+  \begin{theorem}\label{NIPDE:pois_bound_V}
+    Consider the Poisson equation $u_{xx}+u_{yy}=f$, $v$ be a scheme of \mcref{NIPDE:poisson_eq} defined on $\Omega={[0,1]}^2$. If $v=0$ on $\Fr{\Omega}$ then:
+    $$
+      \norm{v}_\infty\leq \frac{1}{8}\norm{\laplacian_h v}_\infty
+    $$
+  \end{theorem}
+  \begin{proof}
+    From $\laplacian_h v_{\ell,m}=f_{\ell,m}$ in the internal nodes of the grid, we have that $\abs{\laplacian_h v}\leq \norm{f}_\infty$. Now consider the non-negative function $w_{\ell,m}$ defined as:
+    $$
+      w_{\ell,m}:= \frac{1}{4}\left[{\left(x_\ell-1/2\right)}^2+{\left(y_m-1/2\right)}^2\right]
+    $$
+    An easy check shows that $\laplacian_h w_{\ell,m}=1$ and $\norm{w}_{L^\infty(\Fr{\Omega})}=\frac{1}{8}$. So on the one hand, $\laplacian_h(v-\norm{f}_\infty w)\leq 0$ and by the \mnameref{NIPDE:minimumPrinc}:
+    $$
+      -\norm{f}_\infty\norm{w}_{L^\infty(\Fr{\Omega})}\leq v_{\ell,m}-\norm{f} w_{\ell,m}\leq v_{\ell,m}
+    $$
+    And on the other hand, $\laplacian_h(v+\norm{f}_\infty w)\geq 0$ and by the \mnameref{NIPDE:maximumPrinc}:
+    $$
+      \norm{f}_\infty\norm{w}_{L^\infty(\Fr{\Omega})}\geq v_{\ell,m}
+    $$
+    Thus:
+    $$
+      \norm{v}_\infty\leq \norm{w}_{L^\infty(\Fr{\Omega})}\norm{f}_\infty= \frac{1}{8}\norm{\laplacian_h v}_\infty
+    $$
+  \end{proof}
+  \begin{theorem}
+    Let $u$ be the solution to $\laplacian u=f$ with Dirichlet boundary condition on the unit square and let $v_{\ell,m}$ be the solution to $\laplacian_h v=f_{\ell,m}$ with $v_{\ell,m}=u(x_\ell,y_m)$ on the boundary. Then:
+    $$
+      \norm{u-v}_\infty\leq C h^2\norm{\partial^4u}_\infty
+    $$
+    for some constant $C\in\RR$, where $\norm{\partial^4u}_\infty:=\max\left\{\norm{{\partial_x}^4u}_\infty,\norm{{\partial_y}^4u}_\infty\right\}$
+  \end{theorem}
+  \begin{proof}
+    Note that $\laplacian_h u=f+\varepsilon$, with $\abs{\varepsilon}\leq \tilde{C} h^2\norm{\partial^4u}_\infty$ for some constant $\tilde{C}\in\RR$. Since $u-v=0$ on the boundary, by \mcref{NIPDE:pois_bound_V} we have:
+    $$
+      \norm{u-v}_\infty\leq\frac{1}{8}\norm{f+\varepsilon -f}_\infty\leq C h^2\norm{\partial^4u}_\infty
+    $$
+  \end{proof}
   \subsection{Finite element methods}
 \end{multicols}
 \end{document}

@@ -428,7 +428,7 @@
     $$d(i):=\gcd\{n\in\NN:p_{ii}^{(n)}>0\}$$
     with the convention that if $\{n\in\NN:p_{ii}^{(n)}>0\}=\varnothing$, then $d(i)=\infty$. If $d(i)=1$ we say that $i$ is \emph{aperiodic}.
   \end{definition}
-  \begin{proposition}
+  \begin{proposition}\label{SP:period_classes}
     Let $(X_n)$ be a time-homogeneous Markov chain and $i,j\in I$. Then: $$i\leftrightarrow j\implies d(i)=d(j)$$
   \end{proposition}
   \begin{proof}
@@ -676,13 +676,13 @@
   \begin{sproof}
     Same as in \mcref{SP:lemaPrerec}.
   \end{sproof}
-  \begin{theorem}
+  \begin{theorem}\label{SP:thmRec}
     Let $(X_n)$ be a time-homogeneous Markov chain and $i,j\in I$. Then:
     \begin{enumerate}
-      \item\label{thmRecA} $i$ is recurrent $\iff S_{ii}=\infty$.
-      \item\label{thmRecB} If $i\leftrightarrow j$, then $i$ is recurrent $\iff j$ is recurrent.
-      \item\label{thmRecC} If $j$ is recurrent and $i\to j$, then $i$ is recurrent.
-      \item\label{thmRecD} If $j$ is transient, then $S_{ij}<\infty$ $\forall i\in I$. In particular, $\forall i\in I$, we have $\displaystyle \lim_{n\to\infty}p_{ij}^{(n)}=0$.
+      \item\label{SP:thmRecA} $i$ is recurrent $\iff S_{ii}=\infty$.
+      \item\label{SP:thmRecB} If $i\leftrightarrow j$, then $i$ is recurrent $\iff j$ is recurrent.
+      \item\label{SP:thmRecC} If $j$ is recurrent and $i\to j$, then $i$ is recurrent.
+      \item\label{SP:thmRecD} If $j$ is transient, then $S_{ij}<\infty$ $\forall i\in I$. In particular, $\forall i\in I$, we have $\displaystyle \lim_{n\to\infty}p_{ij}^{(n)}=0$.
     \end{enumerate}
   \end{theorem}
   \begin{proof}
@@ -698,9 +698,9 @@
             $$
               p_{jj}^{(n+r+s)} \geq p_{ji}^{(s)}p_{ii}^{(n)}p_{ij}^{(r)}=:C p_{ii}^{(n)}
             $$
-            And so, $\sum p_{ii}^{(n)}=\infty\implies \sum p_{jj}^{(n)} = \infty$ by \mcref{thmRecA}.
+            And so, $\sum p_{ii}^{(n)}=\infty\implies \sum p_{jj}^{(n)} = \infty$ by \mcref{SP:thmRecA}.
       \item Similarly as before, since $i\to j$, $\exists r\geq 1$ such that $p_{ij}^{(r)}>0$. Thus, $p_{ii}^{(n+r)}\geq p_{ij}^{(r)}p_{jj}^{(n)}$. So, $\sum p_{jj}^{(n)}=\infty\implies \sum p_{ii}^{(n)} = \infty$.
-      \item It follows from \mcref{thmRecA} and \mcref{SP:lemaPrerec}.
+      \item It follows from \mcref{SP:thmRecA} and \mcref{SP:lemaPrerec}.
     \end{enumerate}
   \end{proof}
   \begin{definition}
@@ -756,7 +756,7 @@
     $$
       \Exp_i(N_j)=\Exp_i\left(\sum_{n=1}^{\infty}1_{\{X_n=j\}}\right)=\sum_{n=1}^{\infty}p_{ij}^{(n)}<\infty
     $$
-    where the last inequality follows from \mcref{thmRecD}.
+    where the last inequality follows from \mcref{SP:thmRecD}.
   \end{proof}
   \subsubsection{Limit distributions}
   \begin{definition}
@@ -770,13 +770,50 @@
   \end{theorem}
   \begin{proof}
     Note that $T_i^k$ has finite expectation and so by the \mcref{P:stronglawKolmo} we have:
-    $$\frac{1}{n}\sum_{j=1}^{k}T_i^j\almoste{\longrightarrow}\mu_i$$
-    Let $N_i^n=\sum_{j=1}^n\indi{X_j=i}\leq n$
-    FALTACOSA
-    Observe that $\frac{N_i^n}{n}\leq 1$. Thus, by the \mcref{P:dominated} we have that:
+    $$\frac{1}{k}\sum_{j=1}^{k}T_i^j=\frac{\tau_i^k}{k}\almoste{\longrightarrow}\mu_i$$
+    Let $N_i^n=\sum_{j=1}^n\indi{X_j=i}\leq n$, which counts the number of visits of the state $i$ in the first $n$ steps. Note that if $N_i^n=k\leq n$, $\tau_i^k\leq n<\tau_i^{k+1}$ and so:
     $$
-      \Exp_i\left(\frac{N_i^n}{n}\right)=\frac{\sum_{j=1}^n \Prob(X_j=i)}{n}=\frac{\sum_{j=1}^n p_{ii}^{(j)}}{n}\almoste{\longrightarrow}\frac{1}{\mu_i}
+      \frac{k}{k+1}\frac{k+1}{\tau_i^{k+1}}<\frac{N_i^n}{n}=\frac{k}{n}\leq \frac{k}{\tau_i^k}
+    $$
+    Hence, taking the limit $k\to\infty$ we have: $$\displaystyle\lim_{n\to\infty}\frac{N_i^n}{n}=\lim_{k\to\infty}\frac{k}{\tau_i^k}\almoste{\longrightarrow}\frac{1}{\mu_i}$$ Moreover note that $\frac{N_i^n}{n}\leq 1$. Thus, by the \mcref{P:dominated} we have that:
+    $$
+      \Exp_i\left(\frac{N_i^n}{n}\right)=\frac{\sum_{j=1}^n \Prob_i(X_j=i)}{n}=\frac{\sum_{j=1}^n p_{ii}^{(j)}}{n}\almoste{\longrightarrow}\frac{1}{\mu_i}
     $$
   \end{proof}
+  \begin{corollary}
+    Let $(X_n)$ be a time-homogeneous Markov chain and $i\in I$ be positive recurrent such that $\displaystyle\exists\lim_{n\to\infty}p_{ii}^{(n)}$. Then:
+    $$
+      \lim_{n\to\infty} p_{ii}^{(n)}=\frac{1}{\mu_i}
+    $$
+  \end{corollary}
+  \begin{sproof}
+    Recall \mcref{MA:cesaro}.
+  \end{sproof}
+  \begin{theorem}[Erogotic theorem]\label{SP:ergotic2}
+    Let $(X_n)$ be a time-homogeneous Markov chain and $i\in I$ be recurrent and aperiodic. Then, the limit $\displaystyle\lim_{n\to\infty}p_{ii}^{(n)}$ exists and:
+    $$
+      \lim_{n\to\infty}\frac{1}{n}\sum_{n=1}^\infty p_{ii}^{(n)}=\frac{1}{\mu_i}
+    $$
+  \end{theorem}
+  \begin{proposition}
+    Let $(X_n)$ be a time-homogeneous Markov chain, $i\in I$ be recurrent and aperiodic and $j\in I$ be such that $i\leftrightarrow j$. Then:
+    \begin{enumerate}
+      \item $i$ positive recurrent $\implies$ $j$ positive recurrent.
+      \item $i$ null recurrent $\implies$ $j$ null recurrent.
+    \end{enumerate}
+  \end{proposition}
+  \begin{proof}
+    By \mcref{SP:thmRec,SP:period_classes} we have that $j$ is recurrent and aperiodic. Thus, by \mnameref{SP:ergotic2}, the limits $\displaystyle \lim_{n\to\infty}p_{ij}^{(n)}$ and $\displaystyle \lim_{n\to\infty}p_{ji}^{(n)}$ exist. Moreover since $i\leftrightarrow j$ $\exists r,s\in\NN$ such that $p_{ij}^{(r)}, p_{ji}^{(s)}>0$. By \mcref{SP:corolariChapKolmo} we have that $p_{jj}^{(n+r+s)}\geq C p_{ii}^{(n)}$. If $i$ is positive recurrent then:
+    $$
+      \lim_{n\to\infty}p_{jj}^{(n+r+s)}\geq C\lim_{n\to\infty}p_{ii}^{(n)}>0
+    $$
+    If $i$ is null and $j$ was positive, then $i$ would be positive by the previous argument, which is a contradiction.
+  \end{proof}
+  \begin{theorem}
+    Let $(X_n)$ be a time-homogeneous Markov chain and $i\in I$ be recurrent and periodic of period $d$. Then:
+    $$
+      \lim_{n\to\infty} p_{ii}^{(n)}=\frac{d}{\mu_i}
+    $$
+  \end{theorem}
 \end{multicols}
 \end{document}
