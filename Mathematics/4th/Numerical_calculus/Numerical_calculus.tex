@@ -4,7 +4,7 @@
 \begin{document}
 \changecolor{NC}
 \begin{multicols}{2}[\section{Numerical calculus}]
-  \subsection{Ordinary differential equations}
+  \subsection{Initial value problems}
   \begin{definition}
     An initial-value problem is said to be \emph{well-posed in the Hadamard sense} (or simply \emph{well-posed}) if it has existence and uniqueness of solutions and it has continuos dependence on initial conditions and parameters.
   \end{definition}
@@ -391,8 +391,7 @@
     Let $\vf{f}$ be a Lipschitz continuous function and consider the multistep method of \mcref{NC:multistep}. Suppose the method is consistent. Then, the method is zero-stable if and only if it is convergent. Moreover if the solution $\vf{y}$ is of class $\mathcal{C}^{p+1}$ and the consistency error is $\O{h^p}$, then the global error is $\O{h^{p}}$.
   \end{theorem}
   \subsection{Non-linear systems of equations}
-  \subsubsection{Newton method}
-  \begin{definition}
+  \begin{definition}[Newton method]
     Let $\vf{F}:\RR^n\rightarrow\RR^n$ be a differentiable field. We would like to find the solutions of $\vf{F}(\vf{x})=\vf{0}$.
     The \emph{Newton method} is a recurrence of the form:
     \begin{equation*}
@@ -405,6 +404,51 @@
     $$
     for the unknown $\vf{x}_{n+1}-\vf{x}_n$.
   \end{definition}
+  \begin{remark}
+    Computing the Jacobian is a difficult and expensive operation. Broyden proposed a method that compute the whole Jacobian only at the first iteration and to do rank-one updates at other iterations.
+  \end{remark}
+  \begin{definition}[Broyden's method]
+    Let $\vf{F}:\RR^n\rightarrow\RR^n$. The \emph{Broyden's method} is a recurrence for the Jacobian matrix of the form:
+    $$
+      \vf{DF}_{n+1}=\vf{DF}_n+\frac{\vf{F}_n-\vf{DF}_n\Delta\vf{x}_n}{\norm{\Delta\vf{x}_n}^2}\transpose{(\Delta\vf{x}_n)}
+    $$
+    where $\Delta\vf{x}_n=\vf{x}_{n+1}-\vf{x}_n$ and $\vf{F}_n=\vf{F}(\vf{x}_n)$. We then proceed with the Newton method:
+    $$
+      \vf{x}_{n+1}=\vf{x}_n-{\vf{DF}_{n}}^{-1}\vf{F}_n
+    $$
+    A variant to the Broyen's method for computing directly the inverse of the Jacobian matrix is:
+    $$
+      {\vf{DF}_{n+1}}^{-1}\!={\vf{DF}_n}^{-1}+\frac{\Delta\vf{x}_n-{\vf{DF}_n}^{-1}\Delta\vf{F}_n}{\transpose{(\Delta\vf{x}_n)}{\vf{DF}_n}^{-1}\Delta\vf{F}_n}\transpose{(\Delta\vf{x}_n)}{\vf{DF}_n}^{-1}
+    $$
+    where $\Delta\vf{F}_n=\vf{F}_{n+1}-\vf{F}_n$.
+  \end{definition}
+  \subsubsection{Boundary value problems}
+  \begin{definition}[Shooting method]
+    Suppose we want to solve the boundary value problem:
+    \begin{equation*}
+      \begin{cases}
+        x'' =f(t, x, x') \\
+        x(t_0)=\alpha    \\
+        x(t_f)=\beta
+      \end{cases}
+    \end{equation*}
+    Let $x(t;s)$ be the solution to the ivp:
+    \begin{equation*}
+      \begin{cases}
+        x'' =f(t, x, x') \\
+        x(t_0)=\alpha    \\
+        x'(t_0)=s
+      \end{cases}
+    \end{equation*}
+    If $x(t_1;s)=\beta$, $x(t,s)$ is also a solution to the boundary value problem. The \emph{shooting method} is the process of solving the initial value problem for many different values of $a$ until one finds the solution $x(t;s)$ that satisfies the desired boundary conditions. That is, the solutions correspond to roots of:
+    $$
+      F(s)=x(t_1;s)-\beta
+    $$
+  \end{definition}
+  \begin{remark}
+    Given to initial guesses $\tilde\beta_0$ and $\tilde\beta_1$, we can use interpolation with nodes $(\tilde\beta_0, F(\tilde\beta_0))$ and $(\tilde\beta_1, F(\tilde\beta_1))$, find the root of the interpolating polynomial and use it as the new guess. Alternatively, one can use the Newton's method.
+  \end{remark}
   %%% It's missing the theorem of convergence of the Newton method
+  %%% It's missing the minimization of functions
 \end{multicols}
 \end{document}

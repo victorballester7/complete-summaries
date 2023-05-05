@@ -815,5 +815,204 @@
       \lim_{n\to\infty} p_{ii}^{(n)}=\frac{d}{\mu_i}
     $$
   \end{theorem}
+  \begin{proof}
+    $(Y_n)=(X_{nd})$ is a time-homogeneous Markov chain and $i\in I$ is recurrent and aperiodic. Thus by \mnameref{SP:ergotic2} we have that $\displaystyle\lim_{n\to\infty}p_{ii}^{(nd)}=\frac{1}{\Exp_i(\tau_i^Y)}$. But:
+    $$
+      \tau_i^Y=\inf\{ n\geq 1: Y_n=i\}=\frac{1}{d}\inf\{n\geq 1: X_{n}=i\}=\frac{\tau_i}{d}
+    $$
+  \end{proof}
+  \begin{theorem}
+    Let $(X_n)$ be a time-homogeneous irreducible and aperiodic Markov chain. Then we have exactly one of the following results:
+    \begin{enumerate}
+      \item All the states are transient and $\forall i,j\in I$: $$\lim_{n\to\infty} p_{ij}^{(n)}=\lim_{n\to\infty} \pi_j^{(n)}=0$$ Moreover $\sum_{n=1}^\infty p_{ij}^{(n)}<\infty$.
+      \item All the states are null recurrent and $\forall i,j\in I$: $$\lim_{n\to\infty} p_{ij}^{(n)}=\lim_{n\to\infty} \pi_j^{(n)}=0$$ Moreover $\sum_{n=1}^\infty p_{ij}^{(n)}=\infty$.
+      \item All the states are positive recurrent and $\forall i,j\in I$: $$\lim_{n\to\infty} p_{ij}^{(n)}=\lim_{n\to\infty} \pi_j^{(n)}=\frac{1}{\mu_j}$$
+    \end{enumerate}
+  \end{theorem}
+  \begin{proof}
+    It can be seen that $\displaystyle\lim_{n\to\infty}p_{ij}^{(n)}=\lim_{n\to\infty} p_{jj}^{(n)}$ $\forall i, j\in I$. We will prove that $\displaystyle\lim_{n\to\infty}p_{ij}^{(n)}=\lim_{n\to\infty} \pi_j^{(n)}$ $\forall i, j\in I$. We have that:
+    \begin{multline*}
+      \lim_{n\to\infty}\pi_j^{(n)}=\lim_{n\to\infty}\Prob(X_n=j)=\lim_{n\to\infty}\sum_{i\in I}p_{ij}^{(n)}\pi_i=\\=\sum_{i\in I}\lim_{n\to\infty}p_{ij}^{(n)}\pi_i=\sum_{i\in I}\frac{\pi_i}{\mu_i}=\mu_i
+    \end{multline*}
+    where we have used the dominated convergence theorem for series.
+  \end{proof}
+  \begin{corollary}\label{SP:coroClassificationStates}
+    Let $(X_n)$ be a time-homogeneous irreducible and aperiodic Markov chain such that $I$ is finite. Then all the states are positive recurrent.
+  \end{corollary}
+  \begin{sproof}
+    Note that we must have $\sum_{j\in I}\pi_j^{(n)}=1$ $\forall n\in\NN$.
+  \end{sproof}
+  \begin{definition}
+    Let $(X_n)$ be a time-homogeneous Markov chain. A vector $\vf\nu={(\nu_i)}_{i\in I}$ is called a \emph{stationary distribution} if:
+    $$
+      \vf\nu\geq 0\qquad\sum_{i\in I}\nu_i=1\qquad\vf\nu\vf P=\vf\nu
+    $$
+  \end{definition}
+  \begin{remark}
+    In general we cannot guarantee neither existence nor uniqueness of a stationary distributions.
+  \end{remark}
+  \begin{lemma}
+    Let $(X_n)$ be a time-homogeneous Markov chain, $\vf\nu$ be a stationary distribution and suppose $\vf\pi_0=\vf\nu$. Then, $\vf\pi_n=\vf\nu$ $\forall n\in\NN$.
+  \end{lemma}
+  \begin{proof}
+    $\displaystyle
+      \vf\pi_{n}=\vf\nu\vf P^n=\vf\nu\vf P^{n-1}=\cdots=\vf\nu
+    $
+  \end{proof}
+  \begin{theorem}
+    Let $(X_n)$ be a time-homogeneous irreducible and aperiodic Markov chain. Then, $(X_n)$ is positive recurrent if and only if it admits a stationary distribution. Moreover this distribution is unique and it is given by $\nu_i=\frac{1}{\mu_i}$.
+  \end{theorem}
+  \begin{proof}
+    We will only proof the case when $I$ is finite. By \mcref{SP:coroClassificationStates} we only need to prove the impication to the right. Since $\displaystyle\lim_{n\to\infty}p_{ij}^{(n)}=\frac{1}{\mu_j}$ $\forall i,j\in I$ we have that $\vf\nu={(1/\mu_i)}_{i\in I}\geq 0$ satisfies:
+    \begin{align*}
+      \sum_{j\in I}\nu_j        & =\sum_{j\in I}\lim_{n\to\infty}p_{ij}^{(n)}=\lim_{n\to\infty}\sum_{j\in I}p_{ij}^{(n)}=1 \\
+      \sum_{i\in I}\nu_i p_{ij} & =\sum_{i\in I}\lim_{n\to\infty}p_{ki}^{(n)}p_{ij}=\lim_{n\to\infty}p_{kj}^{(n+1)}=\nu_j
+    \end{align*}
+    where we have used \mnameref{SP:ChapKolmo}. Hence, $\vf\nu$ is a stationary distribution. Now, for the uniqueness, suppose $\vf\nu$ is an arbitrary stationary distribution. Then, $\nu_j=\sum_{i\in I}\nu_i p_{ij}^{(n)}$ $\forall n\in\NN$. Thus, taking $n\to\infty$ we get that $\nu_i = \frac{1}{\mu_i}$ $\forall i\in I$.
+  \end{proof}
+  \subsection{Continuous-time Markov chains}
+  \begin{definition}
+    Let ${(X_t)}_{t\geq 0}$ be a stochastic process. We say that ${(X_t)}_{t\geq 0}$ is a \emph{continuous-time Markov chain} with state space $I$ (finite or countable) if $\forall n\in\NN$ and all $0\leq t_1<\cdots<t_n<t_{n+1}$ and all $i_1,\ldots,i_{n-1},i,j\in I$ we have that:
+    \begin{multline*}
+      \Prob(X_{t_{n+1}}=j\mid X_{t_n}=i, X_{t_{n-1}}=i_{n-1}\ldots,X_{t_1}=i_1)=\\=\Prob(X_{t_{n+1}}=j\mid X_{t_n}=i)
+    \end{multline*}
+    The chain is called homogeneous if $\Prob(X_{t_{n+1}}=j\mid X_{t_n}=i)$ does only depend on the difference $t_{n+1}-t_n$. That is, if $\forall s\leq t$ we have:
+    $$
+      \Prob(X_{t+s}=j\mid X_{s}=i)=\Prob(X_{t}=j\mid X_0=i)
+    $$
+    In order to simplify the lecture we will write CTHMC for continuous-time homogeneous Markov chains.
+  \end{definition}
+  \begin{definition}
+    Let ${(X_t)}_{t\geq 0}$ be a CTHMC. We define the \emph{transition probabilities} as:
+    $$
+      p_{ij}(t)=\Prob(X_t=j\mid X_0=i)
+    $$
+    The transition matrix is $\vf{P}(t)=(p_{ij}(t))_{i,j\in I}$.
+  \end{definition}
+  \begin{proposition}[Chapman-Kolmogorov equation]
+    Let ${(X_t)}_{t\geq 0}$ be a CTHMC. Then, $\vf{P}(t)$ is a stochastic matrix $\forall t\geq 0$ and $\forall s,t \geq 0$: $$\vf{P}(t+s)=\vf{P}(t)\vf{P}(s)$$
+  \end{proposition}
+  \begin{proof}
+    \begin{align*}
+      p_{ij}(t+s) & =\sum_{k\in I} \Prob(X_{t+s}=j,X_s=k\mid X_0=i) \\
+      \begin{split}
+        & =\sum_{k\in I} \Prob(X_{t+s}=j\mid X_s=k,X_0=i)\cdot\\
+        &\hspace{3.5cm}\cdot\Prob(X_s=k\mid X_0=i) \\
+      \end{split}         \\
+                  & =\sum_{k\in I} p_{ik}(t)p_{kj}(s)
+    \end{align*}
+  \end{proof}
+  \subsubsection{Poisson process}
+  \begin{definition}
+    Let $\lambda>0$. A stochastic process ${(N_t)}_{t\geq 0}$ is called a \emph{Poisson process} with parameter $\lambda$ if:
+    \begin{enumerate}
+      \item $N_0=0$.
+      \item $N_t$ has \emph{independent increments}, that is $N_{t_1}, N_{t_2}-N_{t_1},\ldots,N_{t_n}-N_{t_{n-1}}$ are independent random variables for all $0\leq t_1<\cdots<t_n$ and all $n\in\NN$.
+      \item $N_t$ has \emph{stationary increments}, that is $N_t-N_s\sim\text{Pois}(\lambda(t-s))$ $\forall 0\leq s\leq t$.
+      \item For all $\omega\in\Omega$ the functions (called \emph{trajectories})
+            $$
+              \function{N_\cdot(\omega)}{[0,\infty)}{\NN\cup\{0\}}{t}{N_t(\omega)}
+            $$
+            are right-continuous (\emph{càd}).
+    \end{enumerate}
+  \end{definition}
+  \begin{proposition}
+    Let ${(X_t)}_{t\geq 0}$ be a stochastic process with independent increments. Then, ${(X_t)}_{t\geq 0}$ is a continuous-time Markov chain.
+  \end{proposition}
+  \begin{proof}
+    \begin{align*}
+      \Prob(X_{t_{n+1}} & =  j\mid X_{t_n}=i, X_{t_{n-1}}=i_{n-1}\ldots,X_{t_1}=i_1)                 \\
+                        & =\Prob(X_{t_{n+1}}-X_{t_n}=j-i\mid X_{t_n}-X_{t_{n-1}}=i-                  \\
+                        & \hspace{0.45cm}-i_{n-1},\ldots,\ldots,X_{t_2}-X_{t_1}=i_2-i_1,X_{t_1}=i_1) \\
+                        & =\Prob(X_{t_{n+1}}-X_{t_n}=j-i)                                            \\
+                        & =\Prob(X_{t_{n+1}}=j\mid X_{t_n}=i)
+    \end{align*}
+  \end{proof}
+  \begin{corollary}
+    Let ${(N_t)}_{t\geq 0}$ be a Poisson process with parameter $\lambda$. Then, ${(N_t)}_{t\geq 0}$ is a CTHMC with transition probabilities:
+    $$
+      p_{ij}(t)=\Prob(N_t=j\mid N_0=i)=\frac{(\lambda t)^j}{j!}e^{-\lambda t}
+    $$
+  \end{corollary}
+  \begin{lemma}
+    Let ${(N_t)}_{t\geq 0}$ be a Poisson process with parameter $\lambda$. Then: $$\Prob(N_h\geq 2)=\o{h}$$
+  \end{lemma}
+  \begin{proof}
+    \begin{multline*}
+      \Prob(N_h\geq 2)=1-\Prob(N_h=0)-\Prob(N_h=1)=\\
+      =1-e^{-\lambda h}-\lambda h e^{-\lambda h}=\o{h}
+    \end{multline*}
+  \end{proof}
+  \begin{proposition}
+    Let ${(N_t)}_{t\geq 0}$ be a Poisson process with parameter $\lambda$. Then, the trajectories are almost surely non-decreasing and have jumps of size at most $1$.
+  \end{proposition}
+  \begin{proof}
+    We need to see that the event $\{N_s\leq N_t: \forall t,s\in\RR, 0\leq s < t\}$ has probability $1$. We have:
+    $$
+      \bigcap_{0\leq s < t}\{N_s\leq N_t\}= \bigcap_{\substack{0\leq s < t\\s,t\in\QQ}}\{N_s\leq N_t\}
+    $$
+    because the trajectories are càd. Finally since $\Prob(N_s\leq N_t)=\Prob(N_t-N_s\geq 0)=1$, the intersection has probability $1$. Now, let:
+    \begin{align*}
+      A     & :=\{\omega\in\Omega:N(\omega)\text{ has jumps of size }\geq 2\}                   \\
+      A_R   & :=\{\omega\in\Omega:N(\omega)\text{ has jumps of size }\geq 2\text{ in $[0,R]$}\} \\
+      B_R^n & :=\{\exists k\in\{1,\ldots,n\}: N_{\frac{kR}{n}}-N_{\frac{(k-1)R}{n}}\geq 2\}
+    \end{align*}
+    Note that $A=\bigcup_{R=1}^\infty A_R$ and $A_R\subseteq B_R^n$ $\forall n\geq 1$ because the trajectories are càd. Thus:
+    \begin{multline*}
+      \Prob(A_R)\leq \Prob(B_R^n)=\Prob\left(\bigcup_{k=1}^n\left\{N_{\frac{kR}{n}}-N_{\frac{(k-1)R}{n}}\geq 2\right\}\right)\leq\\
+      \leq\sum_{k=1}^n\Prob\left(N_{\frac{kR}{n}}-N_{\frac{(k-1)R}{n}}\geq 2\right)=n\Prob(N_{\frac{R}{n}}\geq 2)=\\=n\o{\frac{R}{n}}\overset{n\to\infty}{\longrightarrow}0
+    \end{multline*}
+  \end{proof}
+  \begin{definition}
+    Let ${(N_t)}_{t\geq 0}$ be a Poisson process with parameter $\lambda$. We define the \emph{holding times} as:
+    $$
+      T_k:=\inf\{t> T_{k-1}:N_t=k\}
+    $$
+    with $T_0:=0$. The \emph{inter-arrival times} are:
+    $$
+      S_k:=T_k-T_{k-1}
+    $$
+  \end{definition}
+  \begin{lemma}
+    Let ${(N_t)}_{t\geq 0}$ be a Poisson process with parameter $\lambda$. Then, $\Prob(T_k < \infty)=1$ $\forall k\in\NN\cup\{0\}$.
+  \end{lemma}
+  \begin{proof}
+    Since the trajectories are càd:
+    \begin{multline*}
+      \Prob(T_k=\infty)=\Prob(\forall t\in\RR: N_t\leq k-1)\leq \Prob(N_1=0,\\N_2-N_1 =0,\ldots,N_n-N_{n-1}=0)=\exp{-\lambda n} \overset{n\to\infty}{\longrightarrow}0
+    \end{multline*}
+  \end{proof}
+  \begin{theorem}
+    Let ${(N_t)}_{t\geq 0}$ be a Poisson process with parameter $\lambda$. Then, the inter-arrival times $(S_k)$ are \iid variables distributed as $\Exp(\lambda)$.
+  \end{theorem}
+  \begin{proof}
+    Let $\vf{T}:=(T_1,\ldots,T_n)$. Recall that:
+    $$
+      f_{\vf{T}}(\vf{t})=\frac{\partial^nF_{\vf{X}}}{\partial x_1\cdots\partial x_n}(\vf{t})=\lim_{\vf{h}\to \vf{0}^+}\frac{\Prob(\vf{T}\in \prod_{k=1}^n(t_k,t_k+h_k])}{h_1\cdots h_n}
+    $$
+    Assume that $t_k+h_k<t_{k+1}$ $\forall k\in\{1,\ldots,n-1\}$. Then:
+    \begin{multline*}
+      \Prob\left(\vf{T}\in \prod_{k=1}^n(t_k,t_k+h_k]\right)=\Prob(N_{t_1}=0, N_{t_1+h_1}-N_{t_1}=1, \\ N_{t_2}-N_{t_1+h_1}=0,\ldots,N_{t_{n}}-N_{t_{n-1}+h_{n-1}}=0,\\N_{t_n+h_n}-N_{t_n}>1)=\lambda^{n-1}h_1\cdots h_{n-1}\exp{-\lambda t_n}(1-\exp{-\lambda h_n})
+    \end{multline*}
+    Hence:
+    $$
+      f_{\vf{T}}(\vf{t})=\lambda^{n}\exp{-\lambda t_n}
+    $$
+    Now consider
+    $$
+      \function{\vf{g}}{\{0<t_1<\cdots<t_n\}}{{(0,\infty)}^n}{(t_1,\ldots,t_n)}{(t_1,t_2-t_1,\ldots,t_n-t_{n-1})}
+    $$
+    which is a diffeomorphism such that $\det \vf{Dg}(\vf{t})=1$. The density of $\vf{S}:=\vf{g}(\vf{T})$ is thus:
+    $$
+      f_{\vf{S}}(\vf{s})=f_{\vf{T}}(\vf{g}^{-1}(\vf{s}))\indi{{(0,\infty)}^n}(\vf{s})=\prod_{k= 1}^n \lambda \exp{-\lambda s_k}\indi{(0,\infty)}(s_k)
+    $$
+    by \mcref{P:transRV}. And this last expression is the joint pdf of $n$ \iid $\Exp(\lambda)$ variables.
+  \end{proof}
+  \begin{theorem}
+    Let ${(S_k)}$ be a sequence of \iid random variables distributed as $\Exp(\lambda)$. Consider the sequence $(T_n)$ defined as $T_0:=0$ and $T_n=\sum_{k=1}^{n}S_k$. Let $N_t:=\sup\{n\geq 1:T_n\leq t\}$. Then, ${(N_t)}_{t\geq 0}$ is a Poisson process with parameter $\lambda$. In this case, we can also express $N_t$ as:
+    $$
+      N_t=\sum_{n=1}^\infty n \indi{T_n\leq t<T_{n+1}}
+    $$
+  \end{theorem}
 \end{multicols}
 \end{document}

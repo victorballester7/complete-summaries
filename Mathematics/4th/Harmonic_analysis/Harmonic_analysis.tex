@@ -854,7 +854,7 @@
   \begin{definition}
     Let $d\in\NN$. The \emph{Schwartz space} or \emph{space of rapidly decreasing functions} on $\RR^n$ is defined as:
     $$
-      \mathcal{S}(\RR^d):=\{f\in \mathcal{C}^\infty(\RR^n):\norm{f}_{\alpha,\beta}<\infty\ \forall\alpha,\beta\in\NN^d\}
+      \mathcal{S}(\RR^d):=\{f\in \mathcal{C}^\infty(\RR^n):\norm{f}_{\alpha,\beta}<\infty\ \forall\alpha,\beta\in{(\NN\cup\{0\})}^d\}
     $$
     where:
     $$
@@ -862,13 +862,13 @@
     $$
   \end{definition}
   \begin{lemma}
-    Let $f\in \mathcal{S}(\RR^d)$. Then, $x^\alpha f,\partial^\alpha f\in \mathcal{S}(\RR^d)$ for all $\alpha\in\NN^d$.
+    Let $f\in \mathcal{S}(\RR^d)$. Then, $x^\alpha f,\partial^\alpha f\in \mathcal{S}(\RR^d)$ for all $\alpha\in{(\NN\cup\{0\})}^d$.
   \end{lemma}
   \begin{lemma}
     Let $d\in\NN$. Then, $\mathcal{D}(\RR^d)\subset\mathcal{S}(\RR^d)$.
   \end{lemma}
   \begin{definition}
-    Let $f,(f_n)\in \mathcal{S}(\RR^d)$. We say that $f_n\overset{S}{\longrightarrow}f$ if $\norm{f_n-f}_{\alpha,\beta}\to 0$ for all $\alpha,\beta\in\NN^d$.
+    Let $f,(f_n)\in \mathcal{S}(\RR^d)$. We say that $f_n\overset{S}{\longrightarrow}f$ if $\norm{f_n-f}_{\alpha,\beta}\to 0$ for all $\alpha,\beta\in{(\NN\cup\{0\})}^d$.
   \end{definition}
   \begin{proposition}
     Let $d\in\NN$. Then, $\mathcal{S}(\RR^d)\subset L^p(\RR^d)$ for all $p\in[1,\infty]$.
@@ -902,7 +902,7 @@
   \end{proof}
   \subsubsection{Tempered distributions}
   \begin{definition}
-    Let $(\varphi_n),\varphi\in\mathcal{S}(\RR^d)$. We say that $(\varphi_n)\overset{S}{\longrightarrow}\varphi$ if $\norm{\varphi_n-\varphi}_{\alpha,\beta}\to 0$ for all $\alpha,\beta\in\NN^d$.
+    Let $(\varphi_n),\varphi\in\mathcal{S}(\RR^d)$. We say that $(\varphi_n)\overset{S}{\longrightarrow}\varphi$ if $\norm{\varphi_n-\varphi}_{\alpha,\beta}\to 0$ for all $\alpha,\beta\in{(\NN\cup\{0\})}^d$.
   \end{definition}
   \begin{definition}
     A \emph{tempered distribution} is a linear and continuous operator $T:\mathcal{S}(\RR^d)\to \CC$. The space of all tempered distributions is denoted by $\mathcal{S}^*(\RR^d)$.
@@ -917,7 +917,7 @@
     $L^p(\RR^d)\subset\mathcal{S}^*(\RR^d)\subsetneq \mathcal{D}^*(\RR^d)$.
   \end{lemma}
   \begin{lemma}
-    Let $T\in \mathcal{S}^*(\RR^d)$. Then, $\partial^\alpha T\in \mathcal{S}^*(\RR^d)$ for all $\alpha\in\NN^d$.
+    Let $T\in \mathcal{S}^*(\RR^d)$. Then, $\partial^\alpha T\in \mathcal{S}^*(\RR^d)$ for all $\alpha\in{(\NN\cup\{0\})}^d$.
   \end{lemma}
   \begin{definition}
     Let $T\in \mathcal{S}^*(\RR^d)$ and $\psi\in \mathcal{S}(\RR^d)$. We define the \emph{convolution} $T*\psi$ as:
@@ -934,25 +934,21 @@
     and the equality holds if and only if $a=b$ or $m=0$.
   \end{lemma}
   \begin{proof}
-    For $m=0$, the equality is true. Now suppose $m\in\NN$ and $b\leq a$. By the binomial theorem we have:
-    \begin{align*}
-      {(a+b)}^m & =\sum_{k=0}^m \binom{m}{k}a^{m-k}b^k           \\
-                & \leq a^m\sum_{k=0}^{m-1} \binom{m}{k}+b^m      \\
-                & =a^m(2^m-1)+b^m                                \\
-                & =2^{m-1}a^m+2^{m-1}a^m-a^m+b^m                 \\
-                & \leq 2^{m-1}(b^m+{(a-b)}^m)+2^{m-1}a^m-a^m+b^m \\
-                & \leq  2^{m-1}(a^m+b^m)
-    \end{align*}
-    where the last inequality follows from:
+    For $m=0,1$, the equality is true. Now suppose $m\geq 2$ and $b=\lambda a$ with $\lambda\in [0,\infty)$. We need to show that:
     $$
-      {(2a-2b)}^m\leq 2(a^m-b^m)
+      {(1+\lambda)}^m\leq 2^{m-1}(1+\lambda^m)
     $$
+    Consider $f(\lambda):=2^{m-1}(1+\lambda^m)-{(1+\lambda)}^m$. Then:
+    $$
+      f'(\lambda)=m\left[{(2\lambda)}^{m-1}-{(1+\lambda)}^{m-1}\right]
+    $$
+    Note that $\forall m\geq 2$, $f'(\lambda)<0$ for $\lambda\in[0,1)$, $f'(1)=0$ and $f'(\lambda)>0$ for $\lambda\in(1,\infty)$. Moreover $f(1)=0$. So $f(\lambda)\geq 0$ for all $\lambda\in [0,\infty)$ and the equality holds if and only if $\lambda=1$.
   \end{proof}
   \begin{lemma}
     Let $T\in \mathcal{S}^*(\RR^d)$ and $\psi\in \mathcal{S}(\RR^d)$. Then, $T*\psi\in \mathcal{S}^*(\RR^d)$.
   \end{lemma}
   \begin{proof}
-    Clearly $T*\psi$ is linear. Let $\varphi_n\overset{S}{\longrightarrow}0$. Then, it suffices to see that $\tilde\psi*\varphi_n\overset{S}{\longrightarrow}0$. For all $\alpha,\beta\in \NN^d$ we have:
+    Clearly $T*\psi$ is linear. Let $\varphi_n\overset{S}{\longrightarrow}0$. Then, it suffices to see that $\tilde\psi*\varphi_n\overset{S}{\longrightarrow}0$. For all $\alpha,\beta\in{(\NN\cup\{0\})}^d$ we have:
     \begin{align*}
       \abs{x^\alpha \partial^\beta(\psi\tilde*\varphi_n)(x)} & =\abs{x^\alpha (\partial^\beta\psi\tilde*\varphi_n)(x)}                    \\
                                                              & \leq \int_{\RR^d} \abs{x^\alpha \partial^\beta\psi(y)\varphi_n(x-y)}\dd{y} \\
@@ -968,15 +964,15 @@
     where in the second inequality we have used \mcref{HA:lemma_aMbM}. Note that the this latter terms tend to zero as $n\to\infty$ because of the properties of the Schwartz space.
   \end{proof}
   \begin{lemma}
-    Let $T\in \mathcal{S}^*(\RR^d)$, $\psi\in \mathcal{S}(\RR^d)$ and $\beta\in\NN^d$. Then:
+    Let $T\in \mathcal{S}^*(\RR^d)$, $\psi\in \mathcal{S}(\RR^d)$ and $\alpha\in{(\NN\cup\{0\})}^d$. Then:
     $$
-      \partial^\beta(T*\psi)=\partial^\beta T*\psi=T*\partial^\beta\psi
+      \partial^\alpha(T*\psi)=\partial^\alpha T*\psi=T*\partial^\alpha\psi
     $$
   \end{lemma}
   \begin{proof}
     \begin{multline*}
-      \langle \partial^\beta(T*\psi),\varphi\rangle={(-1)}^{\abs{\beta}}\langle T*\psi,\partial^\beta\varphi\rangle={(-1)}^{\abs{\beta}}\langle T,\psi*\partial^\beta\varphi\rangle\\={(-1)}^{\abs{\beta}}\langle T,\partial^\beta(\psi*\varphi)\rangle
-      =\langle \partial^\beta T,\psi*\varphi\rangle   =\langle \partial^\beta T*\psi,\varphi\rangle
+      \langle \partial^\alpha(T*\psi),\varphi\rangle={(-1)}^{\abs{\alpha}}\langle T*\psi,\partial^\alpha\varphi\rangle={(-1)}^{\abs{\alpha}}\langle T,\psi*\partial^\alpha\varphi\rangle\\={(-1)}^{\abs{\alpha}}\langle T,\partial^\alpha(\psi*\varphi)\rangle
+      =\langle \partial^\alpha T,\psi*\varphi\rangle   =\langle \partial^\alpha T*\psi,\varphi\rangle
     \end{multline*}
     The other equality is analogous.
   \end{proof}
@@ -995,10 +991,10 @@
     Let $T\in \mathcal{S}^*(\RR^d)$. Then, $\F{T},\F^{-1}T\in \mathcal{S}^*(\RR^d)$.
   \end{lemma}
   \begin{proposition}
-    Let $T\in \mathcal{S}^*(\RR^d)$, $\psi \in \mathcal{S}(\RR^d)$ and $\beta\in\NN^d$. Then:
+    Let $T\in \mathcal{S}^*(\RR^d)$, $\psi \in \mathcal{S}(\RR^d)$ and $\alpha\in{(\NN\cup\{0\})}^d$. Then:
     \begin{enumerate}
-      \item $\partial^\beta\widehat{T}=\F({{(-2\pi\ii x)}^{\beta}\partial^\beta T})$
-      \item $\widehat{\partial^\beta T}={(2\pi\ii \xi)}^{\beta}\widehat{T}$
+      \item $\partial^\alpha\widehat{T}=\F({{(-2\pi\ii x)}^{\alpha} T})$
+      \item $\widehat{\partial^\alpha T}={(2\pi\ii \xi)}^{\alpha}\widehat{T}$
       \item $\widehat{T*\psi}=\widehat{T}\widehat{\psi}$
     \end{enumerate}
   \end{proposition}
@@ -1057,6 +1053,26 @@
     $$
     The other implication is similar using $\F^{-1}$ instead.
   \end{proof}
+  \begin{definition}
+    Let $T\in \mathcal{D}^*(\RR^n)$ and $S\in \mathcal{D}^*(\RR^m)$. We define the \emph{direct product} $TS$ as the distribution in $\mathcal{D}^*(\RR^{n+m})$ given by:
+    $$
+      \langle TS,\varphi\rangle=\langle T,\langle S ,\varphi(x,\cdot)\rangle\rangle
+    $$
+    for all $\varphi\in \mathcal{D}(\RR^{n+m})$. Usually we will dentote
+    $$\langle TS,\varphi(x,y)\rangle=\langle T(x),\langle S(y) ,\varphi(x,y)\rangle\rangle$$
+    in order to distinguish the variables
+  \end{definition}
+  \begin{lemma}
+    Let $T\in \mathcal{D}^*(\RR^n)$ and $S\in \mathcal{D}^*(\RR^m)$. Then:
+    \begin{enumerate}
+      \item $TS$ is indeed a distribution.
+      \item $TS=ST$
+      \item $\phi(x):=\langle S(y), \varphi(x,y)\rangle\in \mathcal{D}(\RR)$ and $\forall \alpha\in\NN^n$ we have $$\partial_x^\alpha\phi(x)=\langle S(y), \partial_x^\alpha\varphi(x,y)\rangle$$
+    \end{enumerate}
+  \end{lemma}
+  \begin{proposition}
+    Let $T\in \mathcal{D}^*(\RR^n)$ and $S\in \mathcal{D}^*(\RR^m)$. Then, $\widehat{TS}=\widehat{T}\widehat{S}$.
+  \end{proposition}
   \subsubsection{Applications to some PDEs}
 
 \end{multicols}

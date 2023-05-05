@@ -364,7 +364,7 @@
   \begin{definition}
     Consider the following scheme for the Poisson equation $u_{xx}+u_{yy}=f$:
     \begin{equation}\label{NIPDE:poisson_eq}
-      \frac{v_{\ell+1,m}-2v_{\ell,m}+v_{\ell-1,m}}{h^2}+\frac{v_{\ell,m+1}-2v_{\ell,m}+v_{\ell,m-1}}{h^2}=f_{\ell,m}
+      \frac{v_{\ell+1,m}-2v_{\ell,m}+v_{\ell-1,m}}{h^2}+\frac{v_{\ell,m+1}-2v_{\ell,m}+v_{\ell,m-1}}{h^2}\!=\!f_{\ell,m}
     \end{equation}
     where we have chosen the same step size $h$ for both $x$ and $y$ directions. We define the \emph{discrete laplacian} as:
     $$
@@ -427,6 +427,97 @@
       \norm{u-v}_\infty\leq\frac{1}{8}\norm{f+\varepsilon -f}_\infty\leq C h^2\norm{\partial^4u}_\infty
     $$
   \end{proof}
-  \subsection{Finite element methods}
+  \subsection{Introduction to finite element methods}
+  \begin{definition}
+    The \emph{finite element method} is one of the most popular, general,
+    powerful and elegant approaches for approximating the solutions of
+    PDEs. Unlike finite difference methods, it naturally handles complicated domains (useful for engines and aeroplanes) and minimally
+    regular data (such as discontinuous forcing terms).
+
+    There are four basic ingredients in the finite element method:
+    \begin{enumerate}
+      \item A variational formulation of the problem in an infinite-dimensional space $V$.
+      \item A variational formulation of the problem in a finite-dimensional space $V_h\subset V$.
+      \item The construction of a basis for $V_h$.
+      \item The assembly and solution of the resulting linear system of equations.
+    \end{enumerate}
+  \end{definition}
+  \subsubsection{The variational formulation}
+  \begin{definition}
+    Let $\Omega\subseteq \RR^n$ be an open bounded connected set such that $\Fr{U}$ is of class $\mathcal{C}^1$, $f\in\mathcal{C}(\Omega)$ and $g\in\mathcal{C}(\Fr{\Omega})$. Consider the following Dirichlet problem of finding $u\in\mathcal{C}^2(\Omega)\cap \mathcal{C}(\overline{\Omega})$ such that:
+    \begin{equation}\label{NIPDE:Dirichlet}
+      \begin{cases}
+        -\laplacian{u} = f & \text{in $U$}      \\
+        u=0                & \text{on $\Fr{U}$}
+      \end{cases}
+    \end{equation}
+    Let
+    $$V:=\{v:\Omega\rightarrow\RR:\norm{v}_{L^2(\Omega)}+\norm{\grad{v}}_{L^2(\Omega)}<\infty, v|_{\Fr{\Omega}}=0\}$$
+    The \emph{variational formulation} of the problem is to find $u\in V$ such that:
+    \begin{equation}\label{NIPDE:varDirichlet}
+      \int_\Omega \grad{u}\cdot\grad{v}\dd{x}=\int_\Omega fv\dd{x}\quad\forall v\in V
+    \end{equation}
+  \end{definition}
+  \begin{remark}
+    The variational formulation can be obtained by multiplying \cref{NIPDE:Dirichlet} by $v$ and the use the \mnameref{PDE:greenidentities}.
+  \end{remark}
+  \begin{lemma}
+    If $u\in V$ is a solution to \cref{NIPDE:varDirichlet}, then $u$ is a solution to \cref{NIPDE:Dirichlet}.
+  \end{lemma}
+  \begin{theorem}
+    If $f\in \mathcal{C}(\Omega)$, then the solutions to \cref{NIPDE:varDirichlet} are $\mathcal{C}^2(\Omega)$.
+  \end{theorem}
+  \begin{definition}[Galerkin approximation]
+    Let $V_h\subset V$ be a finite-dimensional subspace of $V$. The \emph{Galerkin approximation} of \cref{NIPDE:varDirichlet} is to find $u_h\in V_h$ such that:
+    \begin{equation}\label{NIPDE:Galerkin}
+      \int_\Omega \grad{u_h}\cdot\grad{v_h}\dd{x}=\int_\Omega fv_h\dd{x}\quad\forall v_h\in V_h
+    \end{equation}
+  \end{definition}
+  \subsubsection{Construction of function spaces}
+  \begin{definition}[Mesh]
+    A \emph{mesh} is a geometric decomposition of a domain $\Omega$ into a finite collection of cells ${\{K_i\}}_{i=1}^N$ such that:
+    \begin{enumerate}
+      \item $\Int(K_i) \cap \Int(K_j) = \emptyset$ for all $i\neq j$.
+      \item $\bigcup_{i=1}^N K_i = \overline{\Omega}$.
+    \end{enumerate}
+  \end{definition}
+  \begin{definition}
+    The \emph{finite element method} is a particular choice of Galerkin approximation, where the discrete function space
+    $V_h$ is:
+    \begin{multline*}
+      V_h:=\{v\in\mathcal{C}(\Omega):v\text{ is piecewise linear when restricted}\\\text{to a cell}\}
+    \end{multline*}
+    Note that the functions in $V_h$ are uniquely determined by its values at the vertices of the cell. The vertices of the cells are called \emph{nodes}.
+  \end{definition}
+  \begin{definition}
+    Given the location $x_i$ of $M$ \emph{nodes} in $\Int\Omega$, we define the \emph{nodal basis} $(\phi_1,\ldots,\phi_M)$ as:
+    $$\phi_i(x_j)=\delta_{ij}$$
+  \end{definition}
+  \subsubsection{Linear algebraic formulation}
+  \begin{proposition}
+    Given a mesh of $\Omega$, consider the space $V_h\subset V$ and its associate nodal basis. Suppose:
+    $$
+      u_h=\sum_{i=1}^M u_i\phi_i\qquad v_h=\sum_{i=1}^M v_i\phi_i
+    $$
+    Then, if $\vf{u}=\transpose{(u_1,\ldots,u_M)}$ we have:
+    $$\vf{Au}=\vf{b}$$
+    where $\vf{A}=(a_{ij})$ and $\vf{b}=(b_i)$ are defined as:
+    \begin{equation*}
+      a_{ij} =\int_\Omega \grad{\phi_i}\cdot\grad{\phi_j}\dd{x} \qquad b_i    =\int_\Omega f\phi_i\dd{x}
+    \end{equation*}
+  \end{proposition}
+  \begin{proof}
+    Since, $u_h\in V_h$, and using the linearity of the integral we have:
+    \begin{align*}
+      \int_\Omega \grad{u_h}\cdot\grad{v_h}\dd{x}                     & =\int_\Omega f v_h\dd{x}                    \\
+      \sum_{i=1}^M v_i \int_\Omega \grad{u_h}\cdot\grad{\phi_i}\dd{x} & =\sum_{i=1}^M v_i \int_\Omega f\phi_i\dd{x}
+    \end{align*}
+    As this holds for all $v_h\in V_h$, we have that this is equivalent to
+    $$\int_\Omega \grad{u_h}\cdot\grad{\phi_i}\dd{x} =\int_\Omega f\phi_i\dd{x}$$
+    which implies:
+    $$\sum_{j=1}^M u_j \int_\Omega \grad{\phi_j}\cdot\grad{\phi_i}\dd{x} =\int_\Omega f\phi_i\dd{x}$$
+  \end{proof}
+  %   Let $\Omega\subset\RR^2n$ be a bounded domain with a polygonal boundary. Thus, $\Omega$ can be exactly covered by a finite number of triangles. It will be assumed that any pair of triangles in a triangulation of $\Omega$ intersect along a complete edge, at a vertex, or not at all, as shown in Fig. 2.3. We will denote by $h_K$ the diameter (longest side) of the triangle $K$, and we define $h = \max_K h_K$. We define the associate basis functions 
+  % \end{definition}
 \end{multicols}
 \end{document}
