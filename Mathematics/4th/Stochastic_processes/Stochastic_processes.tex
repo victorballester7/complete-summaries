@@ -1011,8 +1011,48 @@
   \begin{theorem}
     Let ${(S_k)}$ be a sequence of \iid random variables distributed as $\Exp(\lambda)$. Consider the sequence $(T_n)$ defined as $T_0:=0$ and $T_n=\sum_{k=1}^{n}S_k$. Let $N_t:=\sup\{n\geq 1:T_n\leq t\}$. Then, ${(N_t)}_{t\geq 0}$ is a Poisson process with parameter $\lambda$. In this case, we can also express $N_t$ as:
     $$
-      N_t=\sum_{n=1}^\infty n \indi{T_n\leq t<T_{n+1}}
+      N_t=\sum_{n=1}^\infty n \indi{\{T_n\leq t<T_{n+1}\}}
     $$
+  \end{theorem}
+  \begin{sproof}
+    We'll see only that $N_t\sim \text{Pois}(\lambda t)$. Let $k\in\NN\cup \{0\}$. Then, $\Prob(N_t=k)=\Prob(T_k\leq t<T_{k+1})$. Since $T_k=\sum_{i=1}^k S_i$, we have that $T_{k}$ and $S_{k+1}$ are independent. Hence, $f_{T_k,S_{k+1}}(x,y)=f_{T_k}(x)f_{S_{k+1}}(y)$ and since $S_{k+1}\sim \Exp(\lambda)$ and $T_k\sim \Gamma(k,\lambda)$, we have that:
+    $$
+      f_{T_k,S_{k+1}}(x,y)=\frac{\lambda^k}{\Gamma(k)}t^{k-1}\exp{-\lambda x}\lambda \exp{-\lambda y}=\frac{\lambda^{k+1}t^{k-1}}{(k-1)!}\exp{-\lambda (x+y)}
+    $$
+    Finally:
+    $$
+      \Prob(N_t=k)=\iint_{A}f_{T_k,S_{k+1}}(x,y) \dd{x}\dd{y}=\frac{{(\lambda t)}^k}{k!}\exp{-\lambda t}
+    $$
+    where $A:=\{(x,y)\in{\RR_{\geq 0}}^2: x\leq t< x+y\}$.
+  \end{sproof}
+  From here on, we'll assume that the transition marices $\vf{P}(t)$ satisfy that $\displaystyle\lim_{h\to 0} \vf{P} (h)=\vf{I}$. That is, we have right continuity at $0$. This is equivalent to say that $\displaystyle\lim_{h\to 0} p_{ij}(h)=\delta_{ij}$.
+  \begin{lemma}
+    Let $X$ be a CTMC with transition matrix $\vf{P}(t)$. Then, $(p_{ij}(t))$ are continuous functions for all $i,j\in I$.
+  \end{lemma}
+  \begin{proof}
+    The result follows from the inequality:
+    $$
+      \abs{p_{ij}(t+h) - p_{ij}(t)}\leq 1-p_{ij}(\abs{h})
+    $$
+    and the right-continuity at 0. Let's prove the inequality. Suppose that $h>0$. Then:
+    \begin{align*}
+      \abs{p_{ij}(t+h) - p_{ij}(t)} & = \abs{\sum_{k\in I} p_{ik}(h)p_{kj}(t)-p_{ij}(t)} \\
+                                    & =\abs{\sum_{\substack{k \in I                      \\ k\neq i}} p_{ik}(h)p_{kj}(t)-p_{ij}(t)[1\! -\! p_{ii}(h)]}\\
+                                    & =\abs{\sum_{\substack{k \in I                      \\ k\neq i}} p_{ik}(h)p_{kj}(t)+p_{ij}(t)\sum_{\substack{k \in I\\ k\neq i}}p_{ik}(h)}\\
+                                    & \leq \sum_{\substack{k \in I                       \\ k\neq i}} p_{ik}(h)\abs{p_{kj}(t)-p_{ij}(t)}\\
+                                    & \leq 1-p_{ii}(h)
+    \end{align*}
+    The case $h<0$ follows from considering $t'=t+h$.
+  \end{proof}
+  \begin{theorem}
+    Let $X$ be a CTMC with transition matrix $\vf{P}(t)$. Then, for any $i,j\in I$, the following limits exist:
+    $$
+      \begin{cases}
+        q_{ij}:=\displaystyle\lim_{h\to 0} \frac{p_{ij}(h)}{h}\in[0,\infty) & \text{if } i\neq j \\
+        q_i:= \displaystyle\lim_{h\to 0} \frac{1-p_{ii}(h)}{h}\in[0,\infty] & \text{if } i=j
+      \end{cases}
+    $$
+    Note that if the limits are finite we have $q_{ij} = -{p_{ij}}'(0)$ and $q_i = -{p_{ii}}'(0)$.
   \end{theorem}
 \end{multicols}
 \end{document}

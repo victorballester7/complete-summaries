@@ -425,29 +425,45 @@
   \subsubsection{Boundary value problems}
   \begin{definition}[Shooting method]
     Suppose we want to solve the boundary value problem:
+    \begin{equation}\label{NC:bvp}
+      \begin{cases}
+        \vf{x}' =f(t, \vf{x}) \\
+        \vf{r}(\vf{x}(t_0), \vf{x}(t_1))=\vf{0}
+      \end{cases}
+    \end{equation}
+    where $\vf{r}: \RR^n\times\RR^n\rightarrow\RR^n$ is a function that defines the boundary conditions.
+    Let $\vf{x}(t;\vf{s})$ be the solution to the ivp:
     \begin{equation*}
       \begin{cases}
-        x'' =f(t, x, x') \\
-        x(t_0)=\alpha    \\
-        x(t_f)=\beta
+        \vf{x}' =f(t, \vf{x}) \\
+        \vf{x}(t_0)=\vf{s}
       \end{cases}
     \end{equation*}
-    Let $x(t;s)$ be the solution to the ivp:
-    \begin{equation*}
-      \begin{cases}
-        x'' =f(t, x, x') \\
-        x(t_0)=\alpha    \\
-        x'(t_0)=s
-      \end{cases}
-    \end{equation*}
-    If $x(t_1;s)=\beta$, $x(t,s)$ is also a solution to the boundary value problem. The \emph{shooting method} is the process of solving the initial value problem for many different values of $a$ until one finds the solution $x(t;s)$ that satisfies the desired boundary conditions. That is, the solutions correspond to roots of:
+    If $\vf{r}(\vf{s}, \vf{x}(t_1;\vf{s}))=0$, $\vf{x}(t,\vf{s})$ is also a solution to the boundary value problem. The \emph{shooting method} is the process of solving the initial value problem for many different values of $\vf{s}$ until one finds the solution $\vf{x}(t;\vf{s})$ that satisfies the desired boundary conditions. That is, the solutions correspond to roots of:
     $$
-      F(s)=x(t_1;s)-\beta
+      \vf{F}(s):=\vf{r}(\vf{s},\vf{x}(t_1;\vf{s}))
     $$
   \end{definition}
   \begin{remark}
-    Given to initial guesses $\tilde\beta_0$ and $\tilde\beta_1$, we can use interpolation with nodes $(\tilde\beta_0, F(\tilde\beta_0))$ and $(\tilde\beta_1, F(\tilde\beta_1))$, find the root of the interpolating polynomial and use it as the new guess. Alternatively, one can use the Newton's method.
+    Given several initial guesses, we can use interpolation with nodes these nodes, find the root of the interpolating polynomial and use it as the new guess. Alternatively, one can use the Newton's method. or a quasi-Newton method.
   \end{remark}
+  \begin{definition}[Multiple shooting method]
+    Suppose we want to solve the problem of \mcref{NC:bvp} and consider the partition of the time-interval of integration $t_0<t_1<\cdots<t_N$. The method starts by guessing the solution $\vf{x}_k$ of the BVP at $t_k$, $k=0,\ldots,N$. Now let, $\vf{x}(t;\vf{x}_k,t_k)$ be the solution to the ivp:
+    \begin{equation*}
+      \begin{cases}
+        \vf{x}' =f(t, \vf{x}) \\
+        \vf{x}(t_k)=\vf{x}_k
+      \end{cases}
+    \end{equation*}
+    All these solutions can be pieced together to form a continuous trajectory if the values $\vf{x}$ match at the grid points. Thus, solutions of the boundary value problem correspond to solutions of the following system of $N$ equations:
+    $$
+      \begin{cases}
+        \vf{x}(t_1;\vf{x}_0,t_0)=\vf{x}_1 \\
+        \vdots                            \\
+        \vf{x}(t_N;\vf{x}_{N-1},t_{N-1})=\vf{x}_N
+      \end{cases}
+    $$
+  \end{definition}
   %%% It's missing the theorem of convergence of the Newton method
   %%% It's missing the minimization of functions
 \end{multicols}
