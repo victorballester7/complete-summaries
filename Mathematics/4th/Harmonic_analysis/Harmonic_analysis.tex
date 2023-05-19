@@ -358,9 +358,9 @@
   \begin{sproof}
     Using \mnameref{HA:minkowski}, we have:
     \begin{align*}
-      \norm{f*\phi_\varepsilon-f}_p & =\norm{\int_{-\infty}^{\infty}\phi_\varepsilon(\vf{y})(f(\vf{x}-\vf{y})-f(\vf{x}))\dd{\vf{y}}}_p                                                                       \\
-                                    & \leq\int_{-\infty}^{\infty}\!\!{\left[\int_{-\infty}^{\infty}{\phi_\varepsilon(\vf{y})}^p\abs{f(\vf{x}-\vf{y})-f(\vf{x})}^p\dd{x}\right]}^{\frac{1}{p}}\!\!\dd{\vf{y}} \\
-                                    & = \int_{-\infty}^{\infty}\phi_\varepsilon(\vf{y})\norm{f-T_{-\vf{y}}f}_p\dd{\vf{y}}                                                                                    \\
+      \norm{f*\phi_\varepsilon-f}_p & =\norm{\int_{-\infty}^{\infty}\phi_\varepsilon(\vf{y})(f(\vf{x}-\vf{y})-f(\vf{x}))\dd{\vf{y}}}_p                                                                         \\
+                                    & \leq\int_{-\infty}^{\infty}\!\!{\left[\int_{-\infty}^{\infty}{\phi_\varepsilon(\vf{y})}^p\abs{f(\vf{x}-\vf{y})-f(\vf{x})}^p\dd{x}\right]}^{\!\frac{1}{p}}\!\!\dd{\vf{y}} \\
+                                    & = \int_{-\infty}^{\infty}\phi_\varepsilon(\vf{y})\norm{f-T_{-\vf{y}}f}_p\dd{\vf{y}}                                                                                      \\
       \begin{split}
         & \leq \int_{\abs{\vf{y}}< \delta}\phi_\varepsilon(\vf{y})\norm{f-T_{-\vf{y}}f}_p\dd{\vf{y}}+\\
         &\hspace{3cm}+2\norm{f}_p\int_{\abs{\vf{y}}\geq\delta}\phi_\varepsilon(\vf{y})\dd{\vf{y}}
@@ -699,7 +699,7 @@
     Let $\Omega\subseteq \RR^n$ and $(\varphi_n),\varphi\in\mathcal{D}(\Omega):=\mathcal{C}_0^\infty(\Omega)$. We say that $\varphi_n\rightarrow \varphi$ in $\mathcal{D}(\Omega)$ if:
     \begin{enumerate}
       \item There exists a compact set such that $\supp \varphi_n\subseteq K$ $\forall n\in\NN$.
-      \item $\displaystyle\lim_{n\to\infty}\norm{\partial^\alpha\varphi_n-\partial^\alpha\varphi}_{L^\infty(K)}=0$ $\forall \alpha$.
+      \item $\displaystyle\lim_{n\to\infty}\norm{\partial^\alpha\varphi_n-\partial^\alpha\varphi}_{L^\infty(K)}=0$ $\forall \alpha\in{(\NN\cup\{0\})}^n$.
     \end{enumerate}
   \end{definition}
   \begin{definition}[Distribution]
@@ -1179,6 +1179,175 @@
   \end{corollary}
   \begin{sproof}
     Recall that $\partial_z\partial_{\overline{z}}=\partial_{\overline{z}}\partial_z=\frac{1}{4}\laplacian$. $E=\frac{\log(z\overline{z})}{4\pi}$ is a fundamental solution of the Laplace equation and $\partial_z E=\frac{1}{4\pi z}$, $\partial_{\overline{z}} E=\frac{1}{4\pi \overline{z}}$.
+  \end{sproof}
+  \subsection{Singular intergals}
+  \subsubsection{Hilbert transform}
+  \begin{definition}
+    Let $f\in L^p(\RR)$, $1\leq p<\infty$. The \emph{truncated Hilbert transform} is defined as:
+    $$
+      \H^\varepsilon f(x)=\frac{1}{\pi}\int_{\abs{x-y}>\varepsilon}\frac{f(y)}{x-y}\dd{y}
+    $$
+  \end{definition}
+  \begin{definition}
+    Let $f\in \mathcal{S}(\RR)$. We define the \emph{Hilbert transform} of $f$ as:
+    $$
+      \H f(x)=\frac{1}{\pi}\left(\pv\frac{1}{x}*f\right)(x)=\lim_{\varepsilon\to 0} \H^\varepsilon f(x)
+    $$
+  \end{definition}
+  \begin{lemma}
+    Let $a,b\in\RR$, $a<b$. Then:
+    $$
+      \H(\indi{[a,b]})(x)=\frac{1}{\pi}\log\left| \frac{x-a}{x-b}\right|
+    $$
+  \end{lemma}
+  \begin{proposition}
+    Let $f\in L^p(\RR)$, $1\leq p<\infty$. Then:
+    $$
+      \F(\H f)(\xi)=\ii\sign(\xi)\F f(\xi)=:m(\xi)\F f(\xi)
+    $$
+  \end{proposition}
+  \begin{proof}
+    \begin{multline*}
+      \F(\H f)(\xi)=\frac{1}{\pi}\F\left(\pv\left(\frac{1}{x}\right)*f\right)(\xi)=\\
+      =\frac{1}{\pi}\ii \widehat{\pv\left(\frac{1}{x}\right)}\widehat{f}(\xi)=m(\xi)\widehat{f}(\xi)
+    \end{multline*}
+  \end{proof}
+  \begin{lemma}
+    Let $f\in L^2(\RR)$. Then, $\H f\in L^2(\RR)$ and $\norm{\H f}_{2}= \norm{f}_{2}$.
+  \end{lemma}
+  \begin{proof}
+    Using \mnameref{HA:plancherel}:
+    $$
+      \norm{\H f}_{2} = \norm{\widehat{\H f}}_{2}=\norm{m\widehat{f}}_{2}=\norm{\widehat{f}}_{2}=\norm{f}_{2}
+    $$
+  \end{proof}
+  \begin{lemma}
+    We have that $H^2=-\id$ on $L^p(\RR)$, $1\leq p<\infty$.
+  \end{lemma}
+  \begin{proof}
+    $\displaystyle
+      \H^2 f=\H(\F^{-1}(m\widehat{f}))=\F^{-1}(m^2\widehat{f})=-f
+    $
+  \end{proof}
+  \begin{lemma}\label{HA:prethmSingInt}
+    Let $f\in \mathcal{S}(\RR)$. Then, ${(\H f)}^2=f^2+2\H(f\H f)$.
+  \end{lemma}
+  \begin{proof}
+    We'll prove the equality using the Fourier transform and the uniqueness of it will imply the result.
+
+    In general we have that $\widehat{fg}=\widehat{f}*\widehat{g}$. Thus:
+    $$
+      \widehat{f^2}= \widehat{f}*\widehat{f}\qquad
+      2\F{(\H(f\H f))}=2m \widehat{f}*(m \widehat{f})
+    $$
+    The first term is $\int_{\RR} \widehat{f}(\eta)\widehat{f}(\xi-\eta)\dd{\eta}$ whereas the second one is $2\int_{\RR} m(\xi)\widehat{f}(\eta)m(\xi-\eta)\widehat{f}(\xi-\eta)\dd{\eta}=2\int_{\RR} m(\xi)\widehat{f}(\xi-\eta)\widehat{f}(\eta)m(\eta)\dd{\eta}$
+    Averaging those terms we have:
+    \begin{align*}
+      \begin{split}
+        \widehat{f^2}+2\F{(\H(f\H f))} & =\int_{\RR} \widehat{f}(\xi)\widehat{f}(\xi-\eta)[1+m(\xi)\cdot\\
+          &\hspace{2cm}\cdot(m(\xi-\eta)+m(\eta))]\dd{\eta}
+      \end{split} \\
+       & =\int_{\RR} \widehat{f}(\xi)\widehat{f}(\xi-\eta)m(\xi-\eta)m(\xi)\dd{\eta}                  \\
+       & =\widehat{\H f}*\widehat{\H f}=\widehat{(\H f)^2}
+    \end{align*}
+    where the second equality follows for all $\xi,\eta\in\RR^2\setminus\{(0,0)\}$
+  \end{proof}
+  \begin{theorem}[Riesz theorem]
+    Let $f\in L^p(\RR)$, $1<p<\infty$. Then, $\exists C_p>0$ such that:
+    $$
+      \norm{\H f}_p \leq C_p \norm{f}_p
+    $$
+  \end{theorem}
+  \begin{proof}
+    We will prove only the cases $p=2^k$, $k\in\NN$ and we'll do it by induction. The case $k=1$ is clear. Using \mcref{HA:prethmSingInt} we have:
+    \begin{multline*}
+      {\norm{\H f}_{2p}}^2=\norm{{(\H f)}^2}_p\leq \norm{f^2}_p+2\norm{\H(f\H f)}_p\leq\\\leq {\norm{f}_{2p}}^2+2C_p\norm{f\H f}_{p}\leq {\norm{f}_{2p}}^2+2C_p\norm{f}_{2p}\norm{\H f}_{2p}
+    \end{multline*}
+    where the last inequality follows from the \mref{RFA:cauchyschwarz}. This reduces to find for which $y$ we have $y^2 - 2C_p \alpha y - \alpha^2\leq 0$, where $\alpha={\norm{f}_{2p}}^2$. An easy check shows that:
+    $$
+      \norm{\H f}_{2p}\leq \left(C_p + \sqrt{C_p^2+1}\right)\norm{f}_{2p}
+    $$
+  \end{proof}
+  \begin{lemma}
+    Let $P_\varepsilon$ be the Poisson kernel and $f\in L^p(\RR)$. Then, if $z=x+\ii y$:
+    $$
+      (P_y*f)(x)=\Re\left(\frac{\ii}{\pi}\int_\RR\frac{f(t)}{z-t}\dd{t}\right)=:\Re F_f(z)
+    $$
+    Moreover, $F_f\in\mathcal{H}(\{\Im f>0\})$.
+  \end{lemma}
+  \begin{sproof}
+    The first part follows from:
+    $$
+      (P_y*f)(x)=\frac{y}{\pi}\int_\RR\frac{f(t)}{{(x-t)}^2+y^2}\dd{t}
+    $$
+    To show the last part, note that $F_f$ is $\RR$-differentiable and $\overline{\partial}F_f=0$.
+  \end{sproof}
+  \begin{definition}
+    We define the \emph{conjugate Poisson kernel} $Q_y$ as:
+    $$
+      Q_y(x)=\frac{x}{\pi(x^2+y^2)}
+    $$
+  \end{definition}
+  \begin{lemma}
+    Let $f\in L^p(\RR)$, $1\leq p <\infty$. Then, if $z=x+\ii y$:
+    $$
+      \Im F_f(z) =\int_{\RR} \frac{f(t)(x-t)}{{(x-t)}^2+y^2}\dd{t}
+    $$
+  \end{lemma}
+  \begin{theorem}
+    Let $f\in L^p(\RR)$, $1\leq p <\infty$. Then:
+    $$
+      f*Q_\varepsilon -\H^\varepsilon f\overset{L^p}{\underset{\varepsilon\to 0}{\longrightarrow}} 0
+    $$
+    In particular:
+    $$
+      F_\varphi(x+\ii y) \overset{y\to 0}{\longrightarrow} \varphi(x) + \ii \H \varphi(x)
+    $$
+  \end{theorem}
+  \subsubsection{Riesz transform}
+  \begin{definition}
+    We define $W_j:=\pv\left(\frac{x_j}{\norm{\vf{x}}^{n+1}}\right)$, $j=1,\ldots,n$.
+  \end{definition}
+  \begin{lemma}
+    For each $n\in\NN$ and $j=1,\ldots,n$, $W_j\in\mathcal{S}^*(\RR^n)$.
+  \end{lemma}
+  \begin{definition}
+    We define the \emph{Riesz transform} $R_jf$ as:
+    \begin{multline*}
+      R_jf(\vf{x}):=c_n(W_j*f)(\vf{x})=\\=\lim_{\varepsilon\to 0}c_n\int_{\norm{\vf{x}-\vf{y}} > \varepsilon}\frac{x_j-y_j}{\norm{\vf{x}-\vf{y}}^{n+1}}f(\vf{y})\dd{\vf{y}}
+    \end{multline*}
+    with $c_n=\frac{\Gamma\left(\frac{n+1}{2}\right)}{\pi^{\frac{n+1}{2}}}$.
+  \end{definition}
+  \begin{lemma}\label{lem:preRiesz1}
+    $\partial_j\left(\frac{1}{\norm{\vf{x}}^{n-1}}\right)=(1-n)W_j$
+  \end{lemma}
+  \begin{lemma}\label{lem:preRiesz2}
+    Let $0<k<n$. Then: $$\F\left(\frac{1}{\norm{\vf{x}}^k}\right)=\frac{C_k}{\norm{\vf{x}}^{n-k}}$$
+    with $C_k=\frac{{(2\pi)}^{\frac{n}{2}}}{{2}^{\frac{\alpha}{2}}}\frac{\Gamma\left(\frac{n-k}{2}\right)}{\Gamma\left(\frac{k}{2}\right)}$.
+  \end{lemma}
+  \begin{sproof}
+    An easy check shows that $\F\left(\frac{1}{\norm{\vf{x}}^k}\right)=\frac{C_k}{\norm{\vf{x}}^{n-k}}$. To find the exact value of the constant we use that $\langle \widehat{f}, g\rangle = \langle f, \widehat{g}\rangle$ with $f=\frac{1}{\norm{\vf{x}}^k}$ and $g=\exp{-\pi\norm{\vf{x}}^2}=\widehat{g}$.
+  \end{sproof}
+  \begin{theorem}
+    For each $j=1, \ldots, n$ we have: $$\widehat{W_j}=-\frac{\ii}{c_n}\frac{\xi_j}{\norm{\vf\xi}}$$
+  \end{theorem}
+  \begin{proof}
+    Using \mcref{lem:preRiesz1,lem:preRiesz2} we have:
+    \begin{multline*}
+      \widehat{W_j}=\frac{1}{1-n}\F{(\partial_j\norm{\vf{x}}^{1-n})}=\frac{2\pi\ii\xi_j}{1-n} \widehat{\norm{\vf{x}}^{1-n}}=\\=\frac{2\pi\ii\xi_j}{1-n}\frac{\pi^{\frac{n-1}{2}}}{\Gamma\left(\frac{n-1}{2}\right)}\frac{1}{\norm{\vf{\xi}}}=\frac{\ii\pi^{\frac{n+1}{2}}}{\Gamma\left(\frac{n+1}{2}\right)}\frac{\xi_j}{\norm{\vf{\xi}}}
+    \end{multline*}
+  \end{proof}
+  \begin{corollary}
+    For each $j=1, \ldots, n$ we have: $$\F{(R_jf)}(\vf{\xi})=-\ii\frac{\xi_j}{\norm{\vf{\xi}}} \widehat{f}(\vf{\xi})$$
+  \end{corollary}
+  \begin{proposition}\hfill
+    \begin{enumerate}
+      \item $\displaystyle\sum_{j=1}^{n}R_j^2=-\id$
+      \item For all $1\leq j,k\leq n$, $\partial_j\partial_k=R_jR_k\Delta$
+    \end{enumerate}
+  \end{proposition}
+  \begin{sproof}
+    Apply $\F$ on each of the equations and use the Fourier transform properties.
   \end{sproof}
 \end{multicols}
 \end{document}

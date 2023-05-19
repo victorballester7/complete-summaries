@@ -871,6 +871,7 @@
     where we have used \mnameref{SP:ChapKolmo}. Hence, $\vf\nu$ is a stationary distribution. Now, for the uniqueness, suppose $\vf\nu$ is an arbitrary stationary distribution. Then, $\nu_j=\sum_{i\in I}\nu_i p_{ij}^{(n)}$ $\forall n\in\NN$. Thus, taking $n\to\infty$ we get that $\nu_i = \frac{1}{\mu_i}$ $\forall i\in I$.
   \end{proof}
   \subsection{Continuous-time Markov chains}
+  \subsubsection{Introduction}
   \begin{definition}
     Let ${(X_t)}_{t\geq 0}$ be a stochastic process. We say that ${(X_t)}_{t\geq 0}$ is a \emph{continuous-time Markov chain} with state space $I$ (finite or countable) if $\forall n\in\NN$ and all $0\leq t_1<\cdots<t_n<t_{n+1}$ and all $i_1,\ldots,i_{n-1},i,j\in I$ we have that:
     \begin{multline*}
@@ -889,7 +890,7 @@
     $$
     The transition matrix is $\vf{P}(t)=(p_{ij}(t))_{i,j\in I}$.
   \end{definition}
-  \begin{proposition}[Chapman-Kolmogorov equation]
+  \begin{proposition}[Chapman-Kolmogorov equation]\label{SP:ChapKolmo_continuous}
     Let ${(X_t)}_{t\geq 0}$ be a CTHMC. Then, $\vf{P}(t)$ is a stochastic matrix $\forall t\geq 0$ and $\forall s,t \geq 0$: $$\vf{P}(t+s)=\vf{P}(t)\vf{P}(s)$$
   \end{proposition}
   \begin{proof}
@@ -902,6 +903,21 @@
                   & =\sum_{k\in I} p_{ik}(t)p_{kj}(s)
     \end{align*}
   \end{proof}
+  \begin{proposition}
+    Let ${(X_t)}_{t\geq 0}$ be a CTHMC. Then, for all $0\leq t_1 < \cdots < t_n$ and all $i_1,\ldots,i_{n}\in I$ we have that:
+    \begin{multline*}
+      \Prob(X_{t_n}=i_n\mid X_{t_{n-1}}=i_{n-1},\ldots,X_{t_1}=i_1)=\\
+      =p_{i_1}(t_1)p_{i_1i_2}(t_2-t_1)\cdots p_{i_{n-1}i_n}(t_n-t_{n-1})
+    \end{multline*}
+    where $p_{i}(t):= \Prob(X_t=i)$.
+  \end{proposition}
+  \begin{sproof}
+    First note that:
+    $$
+      p_j(t)=\sum_{i\in I}p_i(0)\Prob(X_t=j\mid X_0=i)=\sum_{i\in I}p_i(0)p_{ij}(t)
+    $$
+    The formula is a consequences of the \mnameref{P:compound}.
+  \end{sproof}
   \subsubsection{Poisson process}
   \begin{definition}
     Let $\lambda>0$. A stochastic process ${(N_t)}_{t\geq 0}$ is called a \emph{Poisson process} with parameter $\lambda$ if:
@@ -1025,9 +1041,10 @@
     $$
     where $A:=\{(x,y)\in{\RR_{\geq 0}}^2: x\leq t< x+y\}$.
   \end{sproof}
+  \subsubsection{Kolmogorov's differential equations}
   From here on, we'll assume that the transition marices $\vf{P}(t)$ satisfy that $\displaystyle\lim_{h\to 0} \vf{P} (h)=\vf{I}$. That is, we have right continuity at $0$. This is equivalent to say that $\displaystyle\lim_{h\to 0} p_{ij}(h)=\delta_{ij}$.
   \begin{lemma}
-    Let $X$ be a CTMC with transition matrix $\vf{P}(t)$. Then, $(p_{ij}(t))$ are continuous functions for all $i,j\in I$.
+    Let $X$ be a CTHMC with transition matrix $\vf{P}(t)$. Then, $(p_{ij}(t))$ are continuous functions for all $i,j\in I$.
   \end{lemma}
   \begin{proof}
     The result follows from the inequality:
@@ -1045,7 +1062,13 @@
     The case $h<0$ follows from considering $t'=t+h$.
   \end{proof}
   \begin{theorem}
-    Let $X$ be a CTMC with transition matrix $\vf{P}(t)$. Then, for any $i,j\in I$, the following limits exist:
+    Let $\vf{P}(t)$ be a stochastic matrix such that:
+    \begin{enumerate}\label{SP:StochMatrixProps}
+      \item $\vf{P}(0) = \vf{I}$.
+      \item $\vf{P}(t+s) = \vf{P}(t)\vf{P}(s)$ for all $t,s\geq 0$.
+      \item $\displaystyle\lim_{h\to 0} \vf{P} (h)=\vf{I}$.
+    \end{enumerate}
+    Then, for any $i,j\in I$, the following limits exist:
     $$
       \begin{cases}
         q_{ij}:=\displaystyle\lim_{h\to 0} \frac{p_{ij}(h)}{h}\in[0,\infty) & \text{if } i\neq j \\
@@ -1054,5 +1077,149 @@
     $$
     Note that if the limits are finite we have $q_{ij} = -{p_{ij}}'(0)$ and $q_i = -{p_{ii}}'(0)$.
   \end{theorem}
+  \begin{definition}
+    Let $X$ be a CTHMC with transition matrix $\vf{P}(t)$. Then, the \emph{infinitesimal generator} of $X$ is the matrix $\vf{Q}$ defined as $\vf{Q}:={\left(q_{ij}\right)}_{i,j\in I}$, where $q_{ii}:=-q_i$. We define the \emph{infinitesimal transition scheme} as:
+    $$
+      \begin{cases}
+        p_{ii}(h) = 1-q_ih+\o{h}  & \text{if } i=j     \\
+        p_{ij}(h) = q_{ij}h+\o{h} & \text{if } i\neq j
+      \end{cases}
+    $$
+  \end{definition}
+  \begin{theorem}
+    Let $X$ be a CTHMC with infinitesimal generator $\vf{Q}$ and assume that $I$ is finite. Then, $\vf{P}'=\vf{Q}\vf{P}$ and $\vf{P}'=\vf{P}\vf{Q}$. The first equation is called the \emph{Kolmogorov's backward equation} and the second one the \emph{Kolmogorov's forward equation}.
+  \end{theorem}
+  \begin{proof}
+    Note that since $I$ is finite, $q_i<\infty$ $\forall i\in I$. Indeed:
+    $$
+      q_i=\lim_{h\to 0}\frac{1-p_{ii}(h)}{h}=\sum_{\substack{k\in I\\k\ne i}}\lim_{h\to 0}\frac{p_{ik}(h)}{h}=\sum_{\substack{k\in I\\k\ne i}}q_{ik}< \infty
+    $$
+    Now, let $t\geq 0$, $h>0$ and $i,j\in I$. Then, using \mnameref{SP:ChapKolmo_continuous}
+    \begin{multline*}
+      p_{ij}(t+h)-p_{ij}(t)=\sum_{\substack{k\in I\\k\ne i}}p_{ik}(h)p_{kj}(t)+p_{ii}(h)p_{ij}(t)-p_{ij}(t)=\\=\sum_{\substack{k\in I\\k\ne i}}(q_{ik}h+\o{h})p_{kj}(t)+(1+q_{ii} h+\o{h})p_{ij}(t)-p_{ij}(t)=\\=\sum_{k\in I}q_{ik}h p_{kj}(t)+\o{h}
+    \end{multline*}
+    Dividing by $h$ and taking limits we get the result with the right derivative. Now take $t>0$ and $h<0$. Then in a similar way:
+    $$
+      p_{ij}(t)-p_{ij}(t+h)=-\sum_{k\in I}q_{ik}h p_{kj}(t+h)+\o{h}
+    $$
+    Using the continuity of the $p_{ij}$'s we get the result with the left derivative. The other equation follows analogously by exchanging the roles of $h$ and $t$ in the Chapman-Kolmogorov equations.
+  \end{proof}
+  \begin{theorem}
+    Let $X$ be a CTHMC with infinitesimal generator $\vf{Q}$. Assume that $q_i<\infty$ and $q_i=\sum_{\substack{k\in I\\k\ne i}}q_{ik}$ for all $i\in I$. Then, $\vf{P}'=\vf{Q}\vf{P}$.
+  \end{theorem}
+  \begin{theorem}
+    Let $X$ be a CTHMC with infinitesimal generator $\vf{Q}$. Assume that $q_i<\infty$ and $q_i=\sum_{\substack{k\in I\\k\ne i}}q_{ik}$ for all $i\in I$ and that $\sum_{k\in I}p_{ik}(t)q_k<\infty$ for all $i\in I$ and $t\geq 0$. Then, $\vf{P}'=\vf{Q}\vf{P}$.
+  \end{theorem}
+  \begin{remark}
+    Note that in this latter theorem if $\sup_{k\in I}q_k<\infty$, then $\sum_{k\in I}p_{ik}(t)q_k<\infty$ for all $i\in I$ and $t\geq 0$.
+  \end{remark}
+  \subsubsection{Jump processes}
+  \begin{definition}
+    Let ${(X_t)}_{t\geq 0}$ be a stochastic process with state space $E$ (not necessarily countable) and $\tilde\Omega$ be such that $\Prob(\tilde{\Omega})=1$. We say that ${(X_t)}_{t\geq 0}$ is a \emph{jump process} if $\forall \omega \in \tilde{\Omega}$ and $\forall t\geq 0$, $\exists \varepsilon>0$ such that $X_t(\omega)=X_{s}(\omega)$ for all $s\in[t,t+\varepsilon)$.
+  \end{definition}
+  \begin{definition}
+    Let ${(X_t)}_{t\geq 0}$ be a jump process. For each $\omega\in\Omega$, we define $A(\omega)$ as the number of jumps of the trajectory $X_{\cdot}(\omega)$. We say that the jump process is \emph{regular} if $\forall C>0$, the number of jumps of $X_{\cdot}(\omega)$ in $[0,C]$ is finite for all $\omega\in\Omega$.
+  \end{definition}
+  \begin{theorem}
+    Let ${(X_t)}_{t\geq 0}$ be a CTHMC and a regular jump process. Then, $\forall i\in I$, $q_i<\infty$ and $q_i=\sum_{\substack{k\in I\\k\ne i}}q_{ik}$.
+  \end{theorem}
+  \begin{definition}
+    Let ${(X_t)}_{t\geq 0}$ be a CTHMC. Then, ${(X_t)}_{t\geq 0}$ is said to be \emph{stable} if $\forall i\in I$, $q_i<\infty$ and \emph{conservative} if $\forall i\in I$, $q_i=\sum_{\substack{k\in I\\k\ne i}}q_{ik}$.
+  \end{definition}
+  \begin{theorem}
+    Let ${(X_t)}_{t\geq 0}$ be a CTHMC and a regular jump process. Then, the two Kolmogorov odes are satisfied.
+  \end{theorem}
+  \subsubsection{Limit and stationary distributions}
+  \begin{definition}
+    Let $X$ be a CTHMC. We say that $\vf{\overline{p}}$ is a \emph{stationary distribution} for $X_t$ if $\overline{p}_i\geq 0$ $\forall i\in I$, $\sum_{i\in I}\overline{p}_i =1$ and $\vf{\overline{p}}\vf{P}(t)=\vf{\overline{p}}$ $\forall t\geq 0$.
+  \end{definition}
+  \begin{lemma}
+    Let $X$ be a CTHMC. Then:
+    $$
+      {p_j}'(t)=\sum_{k\in I} q_{kj}p_k(t)
+    $$
+    In particular if we have a stationary distribution $\vf{\overline{p}}$, then $\vf{\overline{p}}\vf{Q}=0$, or equivalently:
+    $$
+      \sum_{\substack{k\in I\\k\ne j}}\overline{p}_kq_{kj}=\overline{p}_jq_j
+    $$
+    This equation is called \emph{balance equation}.
+  \end{lemma}
+  \begin{proof}
+    $$
+      p_j(t) = \Prob(X_t=j) = \sum_{i\in I} p_i(0)p_{ij}(t)
+    $$
+    A result allows us to differentiate term by term and rearrange the following series:
+    \begin{multline*}
+      {p_j}'(t) = \sum_{i\in I} p_i(0){p_{ij}}'(t) = \sum_{i\in I} p_i(0)\sum_{k\in I}p_{ik}(t)q_{kj}  = \\= \sum_{k\in I}q_{kj}\sum_{i\in I}p_i(0)p_{ik}(t)=\sum_{k\in I}q_{kj}p_k(t)
+    \end{multline*}
+    If we have a stationary distribution, then ${\overline{p}_j}' (t)=0$.
+  \end{proof}
+  \begin{remark}
+    In the CTHMC there is no periodic behaviour as in the discrete case. Indeed, given $t>0$ and $\delta>0$ small enough, $\exists n\in\NN\cup\{0\}$ such that $t=n\delta +h$ with $h\in[0,\delta)$. And so:
+    $$
+      p_{ii}(t)\geq p_{ii}{(n\delta)} p_{ii}(h) \geq \cdots\geq {(p_{ii}(\delta))}^n p_{ii}(h)>0
+    $$
+    where the last inequality is due to the fact that $\displaystyle\lim_{h\to 0}p_{ii}(h)=1$.
+  \end{remark}
+  \begin{definition}
+    Let $X$ be a CTHMC. We say that the chain is \emph{irreducible} if $\forall i,j\in I$, $\exists t_1,t_2>0$ such that $p_{ij}(t_1)>0$ and $p_{ji}(t_2)>0$.
+  \end{definition}
+  \begin{theorem}\label{SP:limit_distribution}
+    Let $X$ be an irreducible CTHMC and a regular jump process. Then, we have exactly one of the following:
+    \begin{enumerate}
+      \item The balance equation has a unique solution $\vf{\overline{p}}$ and in that case $\displaystyle \lim_{t\to\infty}p_{ij}(t)=\overline{p}_j$ $\forall i,j\in I$. In that case, $\vf{\overline{p}}$ is called a \emph{limit distribution}.
+      \item The balance equation has no solution and in that case $\displaystyle \lim_{t\to\infty}p_{ij}(t)=0$ $\forall i,j\in I$.
+    \end{enumerate}
+  \end{theorem}
+  \begin{remark}
+    Note that if $I$ is finite, we are always in the first case since we always need to have $\sum_{j\in I}p_{ij}(t)=1$.
+  \end{remark}
+  \subsubsection{Birth and death processes}
+  \begin{definition}
+    Let $I=\NN\cup\{0\}$. The following infinitesimal transition scheme describe the \emph{birth and death processes}:
+    $$
+      \begin{cases}
+        p_{i,i+1}(h)=\lambda_i h+\o{h}       & i\geq 0          \\
+        p_{i,i-1}(h)=\mu_i h+\o{h}           & i\geq 1          \\
+        p_{ii}(h)=1-\lambda_ih+\o{h}         & i=0              \\
+        p_{ii}(h)=1-(\lambda_i+\mu_i)h+\o{h} & i\geq 1          \\
+        p_{ij} = \o{h}                       & \text{otherwise}
+      \end{cases}
+    $$
+    This model describes a population of individuals, each of whom having $\lambda_i h + \o{h}$ probability of giving birth to a new individual in the time interval $[t,t+h)$ and $\mu_i h + \o{h}$ probability of dying in the same time interval. The probability of having more than one birth or death in that interval is $\o{h}$. In this case infinitesimal generator is:
+    $$
+      \vf{Q}=\begin{pmatrix}
+        -\lambda_0 & \lambda_0          & 0                  & 0         & \cdots \\
+        \mu_1      & -(\lambda_1+\mu_1) & \lambda_1          & 0         & \cdots \\
+        0          & \mu_2              & -(\lambda_2+\mu_2) & \lambda_2 & \cdots \\
+        \vdots     & \vdots             & \vdots             & \ddots    & \ddots
+      \end{pmatrix}
+    $$
+    If $\lambda_i=0$ $\forall i\in I$, then we said that the process is a \emph{pure death process}. If $\mu_i=0$ $\forall i\in I$, then we said that the process is a \emph{pure birth process}.
+  \end{definition}
+  \begin{proposition}
+    The Poisson process is a birth and death process with $\lambda_i=\lambda$ and $\mu_i=0$ $\forall i\in I$.
+  \end{proposition}
+  \begin{theorem}
+    Consider a birth and death process. Then, a limit distribution $\vf{\overline{p}}$ exists if $\lambda_i>0$ and $\mu_i>0$ $\forall i\in I$ and
+    $$
+      \sum_{i\in I}\frac{\lambda_0\lambda_1\cdots\lambda_{i-1}}{\mu_1\mu_2\cdots\mu_i}<\infty
+    $$
+    This distribution is given by:
+    \begin{equation}\label{SP:limit_distribution_birth_death}
+      \overline{p}_i=\frac{\lambda_0\lambda_1\cdots\lambda_{i-1}}{\mu_1\mu_2\cdots\mu_i}\overline{p}_0 \qquad i\geq 1
+    \end{equation}
+    with $\overline{p}_0=\left(1+\sum_{i\in I}\frac{\lambda_0\lambda_1\cdots\lambda_{i-1}}{\mu_1\mu_2\cdots\mu_i}\right)^{-1}$.
+  \end{theorem}
+  \begin{proof}
+    First let's prove by induction that if $\vf{\overline{p}}$ is a stationary distribution, then the components are those of \mcref{SP:limit_distribution_birth_death}. Indeed, for $i=1$, using the balance equation we have $\lambda_0 \overline{p}_0=\mu_1\overline{p}_1$. Now, suppose that the hypothesis holds $\forall i\leq j$. Then, we have:
+    \begin{align*}
+      (\lambda_j+\mu_j) \overline{p}_j                                                      & = \lambda_{j-1}\overline{p}_{j-1}+\mu_{j+1}\overline{p}_{j+1}                                                      \\
+      (\lambda_j+\mu_j) \frac{\lambda_0\cdots\lambda_{j-1}}{\mu_1\cdots\mu_j}\overline{p}_0 & = \lambda_{j-1}\frac{\lambda_0\cdots\lambda_{j-2}}{\mu_1\cdots\mu_{j-1}}\overline{p}_0+\mu_{j+1}\overline{p}_{j+1} \\
+      \frac{\lambda_0\cdots\lambda_{j-1}\lambda_j}{\mu_1\cdots\mu_j}\overline{p}_0          & = \mu_{j+1}\overline{p}_{j+1}
+    \end{align*}
+    The first argument is determined from the condition $1=\sum_{i\in I} \overline{p}_i=\overline{p}_0+\overline{p}_0\sum_{i\in I}\frac{\lambda_0\lambda_1\cdots\lambda_{i-1}}{\mu_1\mu_2\cdots\mu_i}$. Now if we see that for $\lambda_i>0$ and $\mu_i>0$ $\forall i\in I$ the chain is irreducible, then the theorem will be proved by \mcref{SP:limit_distribution}.
+  \end{proof}
+  \subsection{Brownian motion}
 \end{multicols}
 \end{document}
