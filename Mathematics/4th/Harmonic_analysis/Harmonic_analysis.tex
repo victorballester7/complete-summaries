@@ -695,30 +695,31 @@
     Note that $E_k$ and $O_k$ are both $N/2$-dimensional DFT of the even terms of $f$ and the odd terms of $f$, respectively. We can thus compute them recursively until the respective $m$ is odd. Using this method we can get the DFT of $f$ in at most $O{N\log N}$ time.
   \end{definition}
   \subsection{Distributions}
+  \subsubsection{Introduction}
   \begin{definition}
     Let $\Omega\subseteq \RR^n$ and $(\varphi_n),\varphi\in\mathcal{D}(\Omega):=\mathcal{C}_0^\infty(\Omega)$. We say that $\varphi_n\rightarrow \varphi$ in $\mathcal{D}(\Omega)$ if:
     \begin{enumerate}
-      \item There exists a compact set such that $\supp \varphi_n\subseteq K$ $\forall n\in\NN$.
-      \item $\displaystyle\lim_{n\to\infty}\norm{\partial^\alpha\varphi_n-\partial^\alpha\varphi}_{L^\infty(K)}=0$ $\forall \alpha\in{(\NN\cup\{0\})}^n$.
+      \item There exists a compact set such that $\supp \varphi_n,\supp \varphi\subseteq K$ $\forall n\in\NN$.
+      \item $\displaystyle\lim_{n\to\infty}\norm{\partial^\alpha\varphi_n-\partial^\alpha\varphi}_{L^\infty(K)}=0$ $\forall \alpha\in{(\NN\cup\{0\})}^d$.
     \end{enumerate}
   \end{definition}
   \begin{definition}[Distribution]
-    Let $\Omega\subseteq \RR^n$ be a set. A \emph{distribution} on $\Omega$ is a continuous linear form on $\mathcal{D}(\Omega)$. The vector space of all distributions on $\Omega$ is denoted by $\mathcal{D}^*(\Omega)$.
+    Let $\Omega\subseteq \RR^d$ be a set. A \emph{distribution} on $\Omega$ is a continuous linear form on $\mathcal{D}(\Omega)$. The vector space of all distributions on $\Omega$ is denoted by $\mathcal{D}^*(\Omega)$.
   \end{definition}
   \begin{lemma}
-    Let $\Omega\subseteq\RR^n$ and $T:\mathcal{D}(\Omega)\rightarrow\CC$ be linear. Then, $T$ is continuous if $\forall (\varphi_n)\in\mathcal{D}(\Omega)$ with $\varphi_n\rightarrow 0$ in $\mathcal{D}(\Omega)$ we have that $T(\varphi_n)\rightarrow 0$\footnote{Sometimes we will denote $T(\varphi)$ as $\langle T,\varphi\rangle$.}.
+    Let $\Omega\subseteq\RR^d$ and $T:\mathcal{D}(\Omega)\rightarrow\CC$ be linear. Then, $T$ is continuous if $\forall (\varphi_n)\in\mathcal{D}(\Omega)$ with $\varphi_n\rightarrow 0$ in $\mathcal{D}(\Omega)$ we have that $T(\varphi_n)\rightarrow 0$\footnote{Sometimes we will denote $T(\varphi)$ as $\langle T,\varphi\rangle$.}.
   \end{lemma}
   \begin{lemma}[Fundamental lemma of calculus of variations]\label{HA:fundamentallemma}
-    Let $\Omega\subseteq\RR^n$ be a domain and $f\in L_\mathrm{loc}^1(\Omega)$ such that $$\int_\Omega f(\vf{x})\varphi(\vf{x})\dd{\vf{x}}=0$$ for all $\varphi\in\mathcal{D}(\Omega)$. Then, $f\almoste{=}0$ in $\Omega$.
+    Let $\Omega\subseteq\RR^d$ be a domain and $f\in L_\mathrm{loc}^1(\Omega)$ such that $$\int_\Omega f(\vf{x})\varphi(\vf{x})\dd{\vf{x}}=0$$ for all $\varphi\in\mathcal{D}(\Omega)$. Then, $f\almoste{=}0$ in $\Omega$.
   \end{lemma}
   \begin{proposition}
-    Let $\Omega\subseteq\RR^n$ and $T:\mathcal{D}(\Omega)\rightarrow\CC$ be linear. Then, $T\in \mathcal{D}^*(\Omega)$ if and only if for all compact set $K\subseteq \Omega$, there exist $C>0$ and $m\in\NN\cup\{0\}$ such that $\forall \varphi\in\mathcal{D}(\Omega)$ we have:
+    Let $\Omega\subseteq\RR^d$ and $T:\mathcal{D}(\Omega)\rightarrow\CC$ be linear. Then, $T\in \mathcal{D}^*(\Omega)$ if and only if for all compact set $K\subseteq \Omega$, there exist $C>0$ and $m\in\NN\cup\{0\}$ such that $\forall \varphi\in\mathcal{D}(K)$ we have:
     $$\abs{T(\varphi)}\leq C\sum_{\abs{\alpha}\leq m}\norm{\partial^\alpha\varphi}_{L^\infty(K)}$$
   \end{proposition}
   \begin{proof}
     The right-to-left implication is clear. For the other one, suppose that there exists a compact set $K$ such that $\forall C>0$ and all $m\in\NN\cup\{0\}$ there exists a sequence $(\varphi_k)\in\mathcal{D}(\Omega)$ such that
     $$\abs{T(\varphi_k)}> C\sum_{\abs{\alpha}\leq m}\norm{\partial^\alpha\varphi_k}_{L^\infty(K)}=:C\norm{\varphi_k}_{m,K}$$
-    Now consider $\psi_k:=\frac{\varphi_k}{k\norm{\varphi_k}_{m,K}}$. Clearly $\norm{\psi_k}_{L^\infty(K)}\leq\frac{1}{k}\overset{k\to\infty}{\longrightarrow}0$ but $\abs{T(\psi_k)}=\frac{\abs{T(\varphi_k)}}{k\norm{\varphi_k}_{m,K}}>1$ by considering the particular case of $C=m$. Hence, $T$ cannot be continuous, which is a contradiction.
+    Now consider $\psi_k:=\frac{\varphi_k}{k\norm{\varphi_k}_{m,K}}$. Clearly $\forall \alpha\in {(\NN\cup\{0\})}^d$ $\norm{\partial^\alpha\psi_k}_{L^\infty(K)}\leq\frac{1}{k}\overset{k\to\infty}{\longrightarrow}0$ but $\abs{T(\psi_k)}=\frac{\abs{T(\varphi_k)}}{k\norm{\varphi_k}_{m,K}}>1$ by considering the particular case of $C=m$. Hence, $T$ cannot be continuous, which is a contradiction.
   \end{proof}
   \begin{proposition}
     Let $\Omega\subseteq \RR^n$ be a set and $f\in L_{\mathrm{loc}}^1(\Omega)$. Then, the map
@@ -735,7 +736,7 @@
     The distributions that can be expressed as in \mcref{HA:regularDistribution} are called \emph{regular distributions}.
   \end{definition}
   \begin{proposition}[Dirac's $\delta$ distribution]
-    Let $\Omega\subseteq \RR^n$ be a set and $\vf{x}_0\in\Omega$. Then, the map
+    Let $\Omega\subseteq \RR^d$ be a set and $\vf{x}_0\in\Omega$. Then, the map
     $$
       \function{\delta_{\vf{x}_0}}{\mathcal{D}(\Omega)}{\RR}{\varphi}{\varphi(\vf{x}_0)}
     $$
