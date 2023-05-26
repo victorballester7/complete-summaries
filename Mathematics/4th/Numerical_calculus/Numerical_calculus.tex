@@ -464,6 +464,86 @@
       \end{cases}
     $$
   \end{definition}
+  \subsection{Numerical linear algebra}
+  \subsubsection{Singular values}
+  \begin{lemma}
+    Let $\vf{A}\in\mathcal{M}_{m\times n}(\RR)$. Then, all the eigenvalues of $\transpose{\vf{A}}\vf{A}$ are non-negative.
+  \end{lemma}
+  \begin{proof}
+    Assume $\transpose{\vf{A}}\vf{A}\vf{v}=\lambda\vf{v}$, with $\vf{v}$ unitary. Then:
+    $$
+      \lambda=\dotp{\lambda \vf{v}}{\vf{v}}=\dotp{\transpose{\vf{A}}\vf{A}\vf{v}}{\vf{v}}=\dotp{\vf{A}\vf{v}}{\vf{A}\vf{v}}=\norm{\vf{A}\vf{v}}^2\geq0
+    $$
+  \end{proof}
+  \begin{definition}[Singular value]
+    Let $m\geq n$ and $\vf{A}\in\mathcal{M}_{m\times n}(\RR)$. The \emph{singular values} of $\vf{A}$ are the square roots of the eigenvalues of $\transpose{\vf{A}}\vf{A}$.
+  \end{definition}
+  \begin{theorem}[Singular value decomposition]\label{NC:svd}
+    Let $m\geq n$ and $\vf{A}\in\mathcal{M}_{m\times n}(\RR)$. Then there exist orthogonal matrices $\vf{V}\in\mathcal{O}_{n}(\RR)$, $\vf{U}\in\mathcal{M}_{m\times n}(\RR)$ and a diagonal matrix $\vf{\Sigma}\in\mathcal{M}_{n}(\RR)$ such that:
+    $$
+      \vf{A} = \vf{U}\vf{\Sigma}\transpose{\vf{V}}
+    $$
+    where $\vf{\Sigma}=\diag(\sigma_1, \ldots, \sigma_n)$ and $\sigma_1\geq\sigma_2\geq\cdots\geq\sigma_n\geq0$ are the singular values of $\vf{A}$. This decomposition is called \emph{singular value decomposition} (\emph{SVD}) of $\vf{A}$.The columns of $\vf{U}$ are called \emph{left singular vectors}, while the columns of $\vf{V}$ are called \emph{right singular vectors}. Writing $\vf{U}= [\vf{u}_1, \ldots, \vf{u}_n]$ and $\vf{V}= [\vf{v}_1, \ldots, \vf{v}_n]$, we have another expression for the singular value decomposition:
+    $$
+      \vf{A} = \sum_{i=1}^n \sigma_i \vf{u}_i\transpose{\vf{v}_i}
+    $$
+  \end{theorem}
+  \begin{proof}
+    For simplicity we assume $\sigma_n>0$ and $m\geq n$. From linear algebra (check \mcref{LA:symmetric-diagonalizable}) we know that since $\transpose{\vf{A}}\vf{A}$ is symmetric, it admits a decomposition of the form $\transpose{\vf{A}}\vf{A}=\vf{V}\vf{\Lambda}\transpose{\vf{V}}$, where $\vf{\Lambda}$ is diagonal and $\vf{V}\in \mathcal{O}_n(\RR)$. Thus, we have that $\transpose{(\vf{AV})}(\vf{AV})=\vf\Lambda=:\vf\Sigma^2$ is diagonal and so $\vf{U}:=\vf{AV}\vf\Sigma^{-1}$ is orthonormal.
+  \end{proof}
+  \begin{remark}
+    From here one, we will assume that the singular values are ordered in decreasing order. Thus, $\sigma_1$ will always be the largest singular value and $\sigma_n$ the smallest.
+  \end{remark}
+  \begin{corollary}\label{NC:svd-cor}
+    Let $m\geq n$, $\vf{A}\in\mathcal{M}_{m\times n}(\RR)$ and consider a SVD $\vf{A}=\vf{U}\vf{\Sigma}\transpose{\vf{V}}$. Then:
+    \begin{enumerate}
+      \item The columns of $V$ are the eigenvectors of $\transpose{\vf{A}}\vf{A}$.
+      \item The columns of $U$ are the eigenvectors of $\vf{A}\transpose{\vf{A}}$.
+      \item $\sigma_i=\sqrt{\lambda_i}$, $\forall\lambda_i\in\sigma(\transpose{\vf{A}}\vf{A})$.
+      \item If $\vf{A}$ is symmetric, then $\sigma_i=\abs{\lambda_i}$, $\forall\lambda_i\in\sigma(\vf{A})$.
+    \end{enumerate}
+  \end{corollary}
+  \begin{sproof}
+    They follow from the proof of \mnameref{NC:svd}.
+  \end{sproof}
+  \begin{proposition}
+    Let $m\geq n$ and $\vf{A}\in\mathcal{M}_{m\times n}(\RR)$. Then, $\norm{A}_2 = \sigma_1$ and $\norm{A^{-1}}_2=\frac{1}{\sigma_n}$.
+  \end{proposition}
+  \begin{proof}
+    Let $\vf{A}=\vf{U}\vf{\Sigma}\transpose{\vf{V}}$ be a SVD of $\vf{A}$ and $\vf{x}\in\RR^n$ be such that $\norm{x}_2=1$. We know that if $\vf{y}=\transpose{\vf{V}}\vf{x}$, then $\norm{\vf{y}}_2=1$. Thus:
+    \begin{multline*}
+      {\norm{\vf{Ax}}_2}^2={\norm{\vf{U}\vf{\Sigma}\transpose{\vf{V}}\vf{x}}_2}^2={\norm{\vf{\Sigma}\transpose{\vf{V}}\vf{x}}_2}^2={\norm{\vf\Sigma \vf{y}}_2}^2 =\\= \sum_{i=1}^n {\sigma_i}^2 {y_i}^2 \leq {\sigma_1}^2{\norm{\vf{y}}_2}^2 = {\sigma_1}^2
+    \end{multline*}
+    And this value is reachable by taking $\vf{x}=\vf{v}_1$. The second part is analogous.
+  \end{proof}
+  \subsubsection{QR decomposition}
+  \begin{lemma}\label{NC:eigenvalues_orto}
+    Let $\vf{Q}\in\mathcal{O}_n(\RR)$. Then, $\forall\lambda\in\sigma(\vf{Q})$, $\abs{\lambda}=1$. Moreover $\sigma_i = 1$, $i=1, \ldots, n$.
+  \end{lemma}
+  \begin{proof}
+    Let $\vf{v}$ be an unitary eigenvector of $\vf{Q}$ associated to $\lambda$. Then:
+    $$\lambda^2 = \dotp{\lambda \vf{v}}{\lambda \vf{v}} = \dotp{\vf{Q}\vf{v}}{\vf{Q}\vf{v}} = \dotp{\vf{v}}{\transpose{\vf{Q}}\vf{Q}\vf{v}} = \dotp{\vf{v}}{\vf{v}} = 1$$
+    To see that all the singular values are 1, note that if $\lambda\in\sigma(\vf{Q})$ with eigenvector $\vf{v}$, then $\lambda^{-1}\in \sigma(\transpose{\vf{Q}})$ with eigenvector $\vf{v}$. Thus, $\forall\lambda\in\sigma(\vf{Q})$ with associated eigenvector $\vf{v}$, we have:
+    $$
+      \transpose{\vf{Q}}\vf{Qv}=\transpose{\vf{Q}}\lambda \vf{v} = \vf{v}
+    $$
+  \end{proof}
+  \begin{lemma}
+    Let $\vf{Q}\in\mathcal{O}_n(\RR)$. Then:
+    \begin{enumerate}
+      \item $\det\vf{Q}=\pm 1$.
+      \item $\norm{\vf{Q}}_2=1$.
+    \end{enumerate}
+  \end{lemma}
+  \begin{proof}
+    Note that $\vf{Q} \transpose{\vf{Q}}=\vf{I}_n$. Taking determinants, we obtain the first equality. The second equality, follows from \mcref{NC:eigenvalues_orto,NC:svd-cor}.
+  \end{proof}
+  \begin{definition}[QR descompostion]
+    Let $\vf{A}\in\mathcal{M}_{m\times n}(\RR)$ be a matrix. A \emph{QR decomposition} of $\vf{A}$ is an expression $\vf{A}=\vf{Q}\vf{R}$, where $\vf{Q}\in\mathcal{O}_n(\RR),\vf{R}\in\mathcal{M}_n(\RR)$ are such that $\vf{Q}$ is orthogonal and $\vf{R}$ is upper triangular.
+  \end{definition}
+  \begin{lemma}
+    Let $\vf{A}\in\GL_n(\RR)$, $\vf{b}\in\RR^n$ and $\vf{A}\vf{x}=\vf{b}$ be a system of linear equations. Suppose $\vf{A}=\vf{Q}\vf{R}$ for some orthogonal matrix $\vf{Q}$ and some upper triangular matrix $\vf{R}$, both of size $n$. Then, solving the system $\vf{A}\vf{x}=\vf{b}$ is equivalent to solving the triangular system $\vf{R}\vf{x}=\transpose{\vf{Q}}\vf{b}$.
+  \end{lemma}
   %%% It's missing the theorem of convergence of the Newton method
   %%% It's missing the minimization of functions
 \end{multicols}

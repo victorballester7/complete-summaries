@@ -1221,5 +1221,140 @@
     The first argument is determined from the condition $1=\sum_{i\in I} \overline{p}_i=\overline{p}_0+\overline{p}_0\sum_{i\in I}\frac{\lambda_0\lambda_1\cdots\lambda_{i-1}}{\mu_1\mu_2\cdots\mu_i}$. Now if we see that for $\lambda_i>0$ and $\mu_i>0$ $\forall i\in I$ the chain is irreducible, then the theorem will be proved by \mcref{SP:limit_distribution}.
   \end{proof}
   \subsection{Brownian motion}
+  \subsubsection{Gaussian processes}
+  \begin{proposition}\label{SP:gaussian_vector}
+    Let $\vf{x}\in \RR^n$ be a random vector. Then, $\vf{x}$ is a \emph{gaussian vector}, that is it distributes as a $n$-dimensional normal, if and only if there exists $k\in\NN$, $\vf{A}\in\mathcal{M}_{n\times k}(\RR)$, $\vf{z}\in\RR^k$ with \iid components distributed as $N(0,1)$, and $\vf\mu\in\RR^n$ such that: $$\vf{x}=\vf{A}\vf{z}+\vf\mu$$
+  \end{proposition}
+  \begin{definition}
+    A stochastic process ${(X_t)}_{t\geq 0}$ is called a \emph{gaussian process} if for all $t_1,\ldots,t_n\geq 0$ the random vector $(X_{t_1},\ldots,X_{t_n})$ is gaussian.
+  \end{definition}
+  \begin{definition}
+    Let ${(X_t)}_{t\geq 0}$ be a gaussian process.
+    Then, the \emph{mean function} is defined as:
+    $$
+      \function{\mu}{[0,\infty)}{\RR}{t}{\Exp{X_t}=:\mu_t}
+    $$
+    and the \emph{covariance function} is defined as:
+    $$
+      \function{C}{[0,\infty)\times[0,\infty)}{\RR}{(s,t)}{\cov(X_s,X_t)=\Exp(X_sX_t)-\mu_s\mu_t}
+    $$
+  \end{definition}
+  \subsubsection{Brownian motion}
+  \begin{definition}
+    A stochastic process ${(B_t)}_{t\geq 0}$ is called a \emph{Brownian motion} with parameter $\lambda$ if:
+    \begin{enumerate}
+      \item $B_0=0$.
+      \item $B_t$ has independent increments.
+      \item $B_t$ has stationary increments with distribution $B_t-B_s\sim N(0,\sigma^2(t-s))$ $\forall 0\leq s\leq t$ with $\sigma>0$.
+      \item The trajectories $t\to B_t$ are continuous.
+    \end{enumerate}
+    The Brownian motion is said to be \emph{standard} if $\sigma=1$.
+  \end{definition}
+  \begin{proposition}
+    Let $B:={(B_t)}_{t\geq 0}$ be a standard Brownian motion. Then, $B$ is a gaussian process with mean function $\mu_t=0$ and covariance function $C(s,t)=\min(s,t)$.
+  \end{proposition}
+  \begin{proof}
+    Let $0< t_1<\cdots<t_n$. We can write the vector $\vf{b}:=(B_{t_1},\ldots,B_{t_n})$ as:
+    $$
+      \vf{b}=\vf{A}\begin{pmatrix}
+        B_{t_1}           \\
+        B_{t_2} - B_{t_1} \\
+        \vdots            \\
+        B_{t_n} - B_{t_{n-1}}
+      \end{pmatrix}
+    $$
+    And so $\vf{b}$ is gaussian because is a linear combination of gaussian. Now in the general, let $s_1, \ldots, s_n\geq 0$. We can write any vector $(B_{s_1}, \ldots, B_{s_n})$ as a linear transformation of the vector $(B_{t_1}, \ldots, B_{t_n})$ with $0< t_1<\cdots<t_n$. On the other hand, it is clear that $\mu_t=\Exp(B_t)=\Exp(B_t-B_0)=0$ and if $s\leq t$: $$\Exp(B_sB_t)=\Exp(B_s(B_t-B_s))+\Exp(B_s^2)=\mu_s\mu_{t-s}+s=s$$
+  \end{proof}
+  \begin{proposition}
+    Let $B:={(B_t)}_{t\geq 0}$ be a gaussian process with $B_0=0$, mean function $\mu_t=0$ and covariance function $C(s,t)=\min(s,t)$. Then, $B$ is a standard Brownian motion.
+  \end{proposition}
+  \begin{proof}
+    Since gaussian uncorrelated variables are independent, it suffices to show that the covariance matrix of $(B_{t_1}, B_{t_2}-B_{t_1}, \ldots, B_{t_n}-B_{t_{n-1}})$ is:
+    $$
+      \begin{pmatrix}
+        t_1    & 0       & \cdots & 0            \\
+        0      & t_2-t_1 & \ddots & \vdots       \\
+        \vdots & \ddots  & \ddots & 0            \\
+        0      & \cdots  & 0      & t_n- t_{n-1}
+      \end{pmatrix}
+    $$
+    for all $0<t_1<\cdots<t_n$. One the one hand, if $t_i<t_j$, then $t_{i-1}<t_i\leq t_{j-1}<t_j$ and:
+    \begin{multline*}
+      \Exp((B_{t_i}-B_{t_{i-1}})(B_{t_j}-B_{t_{j-1}}))=\Exp(B_{t_i}B_{t_j})-\Exp(B_{t_i}B_{t_{j-1}})-\\-\Exp(B_{t_{i-1}}B_{t_j})+\Exp(B_{t_{i-1}}B_{t_{j-1}})=t_i-t_{i}-t_{j-1}+t_{i-1}=0
+    \end{multline*}
+    On the other hand:
+    \begin{multline*}
+      \Exp\left({(B_{t_i}-B_{t_{i-1}})}^2\right)= \Exp(B_{t_i}^2)-2\Exp(B_{t_i}B_{t_{i-1}})+\Exp(B_{t_{i-1}}^2)=\\=t_i-t_{i-1}
+    \end{multline*}
+  \end{proof}
+  \begin{proposition}
+    Let $B:={(B_t)}_{t\geq 0}$ be a standard Brownian motion. Then, the following stochastic processes are also standard Brownian motions:
+    \begin{enumerate}
+      \item $\forall c\in \RR^*$, ${(cB_{t/c^2})}_{t\geq 0}$
+      \item ${(-B_t)}_{t\geq 0}$
+      \item ${(B_{t+s}-B_s)}_{t\geq 0}$ for all $s\geq 0$.
+      \item $$
+              Y_t = \begin{cases}
+                t B_{1/t} & \text{if } t>0 \\
+                0         & \text{if } t=0
+              \end{cases}
+            $$
+    \end{enumerate}
+  \end{proposition}
+  \begin{definition}
+    Let ${(X_t)}_{t\in T}$ and ${(Y_t)}_{t\in T}$ be two stochastic processes. We say that $X$ and $Y$ are \emph{stochastically equivalent} if $\forall t\in T$ we have: $$\Prob(X_t=Y_t)=1$$ In that case we also say that ${(X_t)}_{t\in T}$ is a \emph{version} of ${(Y_t)}_{t\in T}$ (or viceversa). We say that $X$ and $Y$ are \emph{indistinguishable} if: $$
+      \Prob(X_t=Y_t\ \forall t\in T)=1
+    $$
+  \end{definition}
+  \begin{remark}
+    Note that if the set $T$ is finite or countable, then the two notions are equivalent because:
+    $$
+      \Prob(X_t=Y_t\ \forall t\in T)=\Prob\left(\bigcap_{t\in T} \{X_t=Y_t\}\right)=1
+    $$
+  \end{remark}
+  \begin{proposition}
+    Let $({X_t})_{t\in T}$ and $({Y_t})_{t\in T}$ be equivalent stochastic processes. Then, $\forall n\in\NN$ and all $t_1,\ldots,t_n\in T$ we have:
+    $$
+      \vf{X}:=(X_{t_1},\ldots,X_{t_n})\overset{\mathrm{d}}{=} (Y_{t_1},\ldots,Y_{t_n})=:\vf{Y}
+    $$
+  \end{proposition}
+  \begin{proof}
+    Let $B\in\mathcal{B}(\RR^n)$ and $A:=\{ X_{t_i} = Y_{t_i}\ \forall i\}$. Using that $\Prob(A)=1$ we have:
+    \begin{align*}
+      \Prob(\vf{X}\in B) & =\Prob(\vf{X}\in B, A)+ \Prob(\vf{X}\in B, A^c) \\
+                         & =\Prob(\vf{Y}\in B, A)+ 0                       \\
+                         & =\Prob(\vf{Y}\in B, A)+ \Prob(\vf{Y}\in B, A^c) \\
+                         & =\Prob(\vf{Y}\in B)
+    \end{align*}
+  \end{proof}
+  \begin{corollary}
+    Let $B$ be a standard Brownian motion and $\overline{B}$ be a version of $B$. Then, $\overline{B}$ is also a standard Brownian motion.
+  \end{corollary}
+  \begin{theorem}[Kolmogorov's continuity theorem]
+    Let ${(X_t)}_{t\geq 0}$ be a stochastic process such that $\exists \alpha,\beta, C>0$ such that:
+    $$
+      \Exp(\abs{X_t-X_s}^\alpha)\leq C\abs{t-s}^{1+\beta}
+    $$
+    for all $t,s\geq 0$. Then, there exists a version of ${(X_t)}_{t\geq 0}$ with continuous trajectories.
+  \end{theorem}
+  \begin{lemma}
+    Let $X\sim N(0,\sigma^2)$. Then, $\Exp(\abs{X}^n)=C_n\sigma^n$ where:
+    $$
+      C_n=\Exp(\abs{Z}^n)=\Gamma(\frac{n+1}{2})\frac{2^{n/2}}{\sqrt{\pi}}
+    $$
+    and $Z\sim N(0,1)$.
+  \end{lemma}
+  \begin{proposition}
+    Let $B:= {(B_t)}_{t\geq 0}$ be a standard Brownian motion. Then, for any interval $[a,b]\subset \RR$:
+    $$
+      \Prob(\omega\in \Omega:B_\cdot(\omega)\text{ is monotone on }[a,b])=0
+    $$
+  \end{proposition}
+  \begin{figure}[H]
+    \centering
+    \includestandalone[mode=image|tex,width=0.75\linewidth]{Images/brownianMotion}
+    \caption{A Brownian motion simulated with 7500 increments. Observe the non-differentiability of the path.}
+    \label{fig:BrownianMotion}
+  \end{figure}
 \end{multicols}
 \end{document}
