@@ -862,14 +862,32 @@
     We denote $\mathcal{E}(\RR^n):=\mathcal{C}^\infty(\RR^n)$ and $\mathcal{E}^*(\RR^n)$ its dual space.
   \end{definition}
   \begin{definition}
-    Let $T\in\mathcal{D}^*(\RR^n)$. We can extent the definition of $T$ to $\mathcal{E}(\RR^n)$ in the following way. Let $\varphi\in\mathcal{E}(\RR^n)$ and take $\rho\in\mathcal{D}(\RR^n)$ such that $\rho=1$ on $\supp\varphi$. Then, we define:
+    Let $T\in\mathcal{D}^*(\RR^n)$ with compact support. We can extent the definition of $T$ to $\mathcal{E}(\RR^n)$ in the following way. Let $\varphi\in\mathcal{E}(\RR^n)$ and take $\rho\in\mathcal{D}(\RR^n)$ such that $\rho=1$ on $\supp T$. Then, we define:
     $$
       \langle T,\varphi\rangle := \langle T,\rho\varphi\rangle
     $$
   \end{definition}
   \begin{remark}
-    Note that in view of \mcref{HA:supp_well_def}, this definition is well defined because if $\rho,\omega\in\mathcal{D}(\RR^n)$ are two different test functions such that $\rho,\omega=1$ on $\supp\varphi$, then $\varphi(\rho- \omega)=0$ on $\supp\varphi$ and therefore $\langle T,\varphi(\rho- \omega)\rangle=0$.
+    Note that in view of \mcref{HA:supp_well_def}, this definition is well defined because if $\rho,\omega\in\mathcal{D}(\RR^n)$ are two different test functions such that $\rho,\omega=1$ on $\supp T$, then $\varphi(\rho- \omega)=0$ on $\supp T$ and therefore $\langle T,\varphi(\rho- \omega)\rangle=0$.
   \end{remark}
+  \begin{proposition}
+    Let $T\in\mathcal{D}^*(\RR^n)$ with compact support. Then, $T\in \mathcal{E}^*(\RR^n)$ if and only if $\exists C>0$, $N\in\NN$ and $m\in \NN\cup\{0\}$ such that:
+    $$
+      \abs{\langle T,\varphi\rangle}\leq C\sum_{\abs{\alpha}\leq m} \sup_{\norm{\vf{x}}\leq N}\abs{\partial^\alpha\varphi(\vf{x})}
+    $$
+    for all $\varphi\in\mathcal{E}(\RR^n)$.
+  \end{proposition}
+  \begin{proof}
+    The implication to the left is clear. For the other one, from the continuity in $\mathcal{D}^*(\RR^n)$ we know that for all compact $K$, there exist $C>0$ and $m\in\NN\cup\{0\}$ such that:
+    $$
+      \abs{\langle T,\varphi\rangle}= \abs{\langle T,\rho\varphi\rangle}\leq C\sum_{\abs{\alpha}\leq m} \sup_{\vf{x}\in K}\abs{\partial^\alpha(\rho\varphi)(\vf{x})}
+    $$
+    Now take $N>0$ such that $\supp\rho\subseteq\supp T\subseteq B(0,N)$. Thus:
+    \begin{multline*}
+      \abs{\langle T,\varphi\rangle}\leq C\sum_{\abs{\alpha}\leq m} \sup_{\vf{x}\in \supp\rho\leq N}\abs{\partial^\alpha\varphi(\vf{x})}\leq\\
+      \leq C\sum_{\abs{\alpha}\leq m} \sup_{\norm{\vf{x}}\leq N}\abs{\partial^\alpha\varphi(\vf{x})}
+    \end{multline*}
+  \end{proof}
   \subsubsection{Differentiation of distributions}
   \begin{definition}
     Let $\Omega\subseteq \RR^n$ be a set, $T\in\mathcal{D}^*(\Omega)$ and $\alpha$ be a multiindex. We define the distribution $\partial^\alpha T$ as: $$\dotp{\partial^\alpha T}{\varphi}=\dotp{T}{{(-1)}^\abs{\alpha}\partial^\alpha\varphi}$$
