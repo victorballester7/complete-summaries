@@ -271,7 +271,7 @@
   \begin{lemma}
     Let $f\in L^1(\RR)$ and $t>0$. Then:
     \begin{align*}
-      P_t(x)     & =\frac{t^2}{\pi(t^2+x^2)}                                                                 \\
+      P_t(x)     & =\frac{t}{\pi(t^2+x^2)}                                                                   \\
       (f*P_t)(x) & =\int_{-\infty}^{+\infty}\exp{-2\pi t\abs{\xi}}\widehat{f}(\xi)\exp{2\pi\ii\xi x}\dd{\xi}
     \end{align*}
   \end{lemma}
@@ -315,7 +315,7 @@
               \lim_{R\to \infty}\int_{\abs{x}\geq \delta}F_R(x)\dd{x}=\lim_{t\to 0}\int_{\abs{x}\geq \delta}P_t(x)\dd{x}=\\=\lim_{t\to 0}\int_{\abs{x}\geq \delta}W_t(x)\dd{x}=0
             \end{multline*}
     \end{enumerate}
-    That is, $F_R$, $P_t$ and $W_t$ are \emph{approximations of the unity}.
+    That is, $F_R$, $P_t$ and $W_t$ are \emph{approximations of the identity}.
   \end{proposition}
   \begin{sproof}
     The first two properties are straightforward. For the third one, note that:
@@ -359,7 +359,7 @@
     Now use \mcref{HA:normLpEquiv}.
   \end{proof}
   \begin{theorem}\label{HA:kernelConvLp}
-    Let $f\in L^p(\RR)$, $1\leq p\leq\infty$, and $\phi_\varepsilon$ be an approximation of unity. Then:
+    Let $f\in L^p(\RR)$, $1\leq p\leq\infty$, and $\phi_\varepsilon$ be an approximation of identity. Then:
     \begin{equation*}
       \lim_{\varepsilon\to 0}\norm{f*\phi_\varepsilon-f}_p =0 \\
     \end{equation*}
@@ -367,9 +367,9 @@
   \begin{sproof}
     Using \mnameref{HA:minkowski}, we have:
     \begin{align*}
-      \norm{f*\phi_\varepsilon-f}_p & =\norm{\int_{-\infty}^{\infty}\phi_\varepsilon(\vf{y})(f(\vf{x}-\vf{y})-f(\vf{x}))\dd{\vf{y}}}_p                                                                              \\
-                                    & \leq\int_{-\infty}^{\infty}\!\!{\left[\int_{-\infty}^{\infty}{\phi_\varepsilon(\vf{y})}^p\abs{f(\vf{x}-\vf{y})-f(\vf{x})}^p\dd{\vf{x}}\right]}^{\!\frac{1}{p}}\!\!\dd{\vf{y}} \\
-                                    & = \int_{-\infty}^{\infty}\phi_\varepsilon(\vf{y})\norm{f-T_{-\vf{y}}f}_p\dd{\vf{y}}                                                                                           \\
+      \norm{f*\phi_\varepsilon-f}_p & =\norm{\int_{-\infty}^{\infty}\phi_\varepsilon(\vf{y})(f(\vf{x}-\vf{y})-f(\vf{x}))\dd{\vf{y}}}_p                                                                                \\
+                                    & \leq\int_{-\infty}^{\infty}\!\!{\left[\int_{-\infty}^{\infty}\!{\phi_\varepsilon(\vf{y})}^p\abs{f(\vf{x}-\vf{y})-f(\vf{x})}^p\dd{\vf{x}}\right]}^{\!\frac{1}{p}}\!\!\dd{\vf{y}} \\
+                                    & = \int_{-\infty}^{\infty}\phi_\varepsilon(\vf{y})\norm{f-T_{-\vf{y}}f}_p\dd{\vf{y}}                                                                                             \\
       \begin{split}
         & \leq \int_{\abs{\vf{y}}< \delta}\phi_\varepsilon(\vf{y})\norm{f-T_{-\vf{y}}f}_p\dd{\vf{y}}+\\
         &\hspace{3cm}+2\norm{f}_p\int_{\abs{\vf{y}}\geq\delta}\phi_\varepsilon(\vf{y})\dd{\vf{y}}
@@ -526,7 +526,7 @@
     $$\widehat{f}(\vf\xi)=\int_{\RR^n}f(\vf{x})\exp{-2\pi \ii\langle \vf\xi, \vf{x}\rangle}\dd{\vf{x}}$$
     The function $f$ is also called \emph{inverse Fourier transform} of $\widehat{f}$.
   \end{definition}
-  \begin{proposition}
+  \begin{proposition}\label{HA:fourierPropertiesRn}
     Let $f,g\in L^1(\RR^n)$ and $\alpha,\beta\in\RR$. Then:
     \begin{enumerate}
       \item $\widehat{(\alpha f+\beta g)}(\vf\xi)=\alpha\widehat{f}(\vf\xi)+\beta \widehat{g}(\vf\xi)$
@@ -811,7 +811,7 @@
     Let $\Omega\subseteq \RR^n$ be a set and $(T_n)\in \mathcal{D}^*(\Omega)$. We say that $(T_n)$ converges to $T\in\mathcal{D}^*(\Omega)$ if $T_n(\varphi)\overset{n\to\infty}{\longrightarrow}T(\varphi)$ for all $\varphi\in\mathcal{D}(\Omega)$.
   \end{definition}
   \begin{definition}
-    Let $\Omega\subseteq \RR^n$ be a set. We say that a sequence of functions $(\phi_\varepsilon)\in L_\mathrm{loc}^1(\Omega)$ is an \emph{approximation of unity} if
+    Let $\Omega\subseteq \RR^n$ be a set. We say that a sequence of functions $(\phi_\varepsilon)\in L_\mathrm{loc}^1(\Omega)$ is an \emph{approximation of identity} if
     \begin{enumerate}
       \item $\displaystyle\int_\Omega \phi_\varepsilon=1$
       \item $\displaystyle\int_\Omega \abs{\phi_\varepsilon}\leq M$ $\forall \varepsilon>0$
@@ -819,7 +819,7 @@
     \end{enumerate}
   \end{definition}
   \begin{proposition}
-    Let $\Omega\subseteq \RR^n$ be a set and $\phi\in L^1(\Omega)$ such that $\int_\Omega\phi=1$. Let $\phi_\varepsilon:=\frac{1}{\varepsilon^n}\phi(\frac{\vf{x}}{\varepsilon})$. Then, $(\phi_\varepsilon)$ is an approximation of unity, $\phi_\varepsilon \in L_\mathrm{loc}^1(\Omega)$ $\forall \varepsilon>0$ and $\phi_\varepsilon\overset{\varepsilon\to 0}{\longrightarrow} \delta_{\vf{0}}$ in $\mathcal{D}^*(\Omega)$.
+    Let $\Omega\subseteq \RR^n$ be a set and $\phi\in L^1(\Omega)$ such that $\int_\Omega\phi=1$. Let $\phi_\varepsilon:=\frac{1}{\varepsilon^n}\phi(\frac{\vf{x}}{\varepsilon})$. Then, $(\phi_\varepsilon)$ is an approximation of identity, $\phi_\varepsilon \in L_\mathrm{loc}^1(\Omega)$ $\forall \varepsilon>0$ and $\phi_\varepsilon\overset{\varepsilon\to 0}{\longrightarrow} \delta_{\vf{0}}$ in $\mathcal{D}^*(\Omega)$.
   \end{proposition}
   \begin{sproof}
     Let $\varphi\in\mathcal{D}(\Omega)$. Then:
@@ -830,7 +830,7 @@
         &\hspace{1cm}+\int_{\norm{\vf{x}}\geq\delta} \abs{\phi_\varepsilon(x)}\abs{\varphi(\vf{x})-\varphi(\vf{0})}\dd{\vf{x}}
       \end{split}
     \end{align*}
-    Now use the properties of approximation of unity to see that each interval goes to zero as $\varepsilon\to 0$.
+    Now use the properties of approximation of identity to see that each interval goes to zero as $\varepsilon\to 0$.
   \end{sproof}
   \begin{theorem}
     Let $\Omega\subseteq \RR^n$ and $(f_n)\in L_\mathrm{loc}^p(\Omega)$ such that $f_n\overset{L_\mathrm{loc}^p}{\longrightarrow}f$ (which means that $\norm{f_n-f}_{L^p(K)}\to 0$ for any compact set $K\subseteq \Omega$). Then, $T_{f_n}$ converges to $T_f$ in $\mathcal{D}(\Omega)$.
@@ -843,7 +843,7 @@
   \end{remark}
   \subsubsection{Support of a distribution}
   \begin{definition}
-    Let $T\in\mathcal{D}^*(\RR^n)$. We define the \emph{support} of $T$, $\supp T$, as the intersection of all compact sets such that if $\varphi\in\mathcal{D}(\RR^n)$ has support in $\RR^n\setminus K$, then $\langle T, \varphi\rangle=0$.
+    Let $T\in\mathcal{D}^*(\RR^n)$. We define the \emph{support} of $T$, $\supp T$, as the intersection of all closed sets $K$ such that if $\varphi\in\mathcal{D}(\RR^n)$ has support in $\RR^n\setminus K$, then $\langle T, \varphi\rangle=0$.
   \end{definition}
   \begin{lemma}\label{HA:supp_well_def}
     Let $T\in\mathcal{D}^*(\RR^n)$ and $\varphi\in\mathcal{D}(\RR^n)$ be such that $\supp \varphi \cap \supp T=\varnothing$. Then, $\langle T, \varphi\rangle=0$.
@@ -906,6 +906,9 @@
     \end{equation*}
     because $\varphi$ has compact support.
   \end{proof}
+  \begin{lemma}
+    Let $f\in L_{\text{loc}}^1(\RR^n)$. Then, ${(T_f)}'=T_{f'}$.
+  \end{lemma}
   \begin{proposition}[Schwarz theorem]
     Let $\Omega\subseteq \RR^n$ be a set and $T\in\mathcal{D}^*(\Omega)$. Then:
     $$
@@ -918,6 +921,35 @@
       \partial^\alpha (fT)=\sum_{\beta\leq \alpha}\binom{\alpha}{\beta}\partial^\beta f\partial^{\alpha-\beta} T
     $$
   \end{proposition}
+  \begin{proposition}
+    Let $T\in \mathcal{D}^*(\RR)$ be such that $T'=0$. Then, $T$ is constant (in the sense of distributions).
+  \end{proposition}
+  \begin{proof}
+    Let $\varphi\in\mathcal{D}(\RR)$ with $\int_\RR\varphi=0$. Then, $\phi(x):=\int_{-\infty}^x\varphi(t)\dd{t}\in\mathcal{D}(\RR)$ and $\phi'=\varphi$. Thus:
+    $$
+      \dotp{T}{\varphi}=\dotp{T}{\phi'}=\dotp{T'}{\phi}=0
+    $$
+    Now consider a general $\varphi\in \mathcal{D}(\RR)$ and $\omega \in \mathcal{D}(\RR)$ such that $\int_\RR \omega = 1$. Then, $\phi(x):=\varphi - \omega \int_\RR\varphi$ integrates 0 and thus:
+    $$
+      \dotp{T}{\varphi} =\int_\RR\varphi\dotp{T}{\omega} = \dotp{C}{\varphi}
+    $$
+    with $C:=\dotp{T}{\omega}$.
+  \end{proof}
+  \begin{proposition}
+    Let $T\in \mathcal{D}^*(\RR)$ be such that $x^m T=0$ for some $m\in\NN$. Then, $T=\sum_{j=0}^{m-1}a_j\delta^{(j)}$ for some $a_j\in\RR$.
+  \end{proposition}
+  \begin{proof}
+    Let $\varphi\in\mathcal{D}(\RR)$ with Taylor polynomial:
+    $$
+      P_\varphi (x)=\sum_{j=0}^{m-1}\frac{\varphi^{(j)}(0)}{j!}x^j+\frac{\varphi^{(m)}(\xi_x)}{m!}x^m
+    $$
+    with $\xi_x\in(0,x)$. Then:
+    \begin{align*}
+      \langle T,\varphi\rangle & =\sum_{j= 0}^{m-1} \frac{\varphi^{(j)}(0)}{j!}\langle T,x^j\rangle+\frac{1}{m!}\langle x^m T,\varphi^{(m)}(\xi_x)\rangle \\
+                               & =\sum_{j= 0}^{m-1} a_j\langle \delta^{(j)},\varphi\rangle
+    \end{align*}
+    with $a_j=\frac{{(-1)^j}}{j!}\langle T,x^j\rangle$.
+  \end{proof}
   \subsubsection{Schwartz class of functions}
   \begin{definition}
     Let $d\in\NN$. The \emph{Schwartz space} or \emph{space of rapidly decreasing functions} on $\RR^n$ is defined as:
@@ -933,10 +965,10 @@
     Let $f\in \mathcal{S}(\RR^d)$. Then, ${\vf{x}}^\alpha f,\partial^\alpha f\in \mathcal{S}(\RR^d)$ for all $\alpha\in{(\NN\cup\{0\})}^d$.
   \end{lemma}
   \begin{lemma}
-    Let $d\in\NN$. Then, $\mathcal{D}(\RR^d)\subset\mathcal{S}(\RR^d)$.
+    Let $d\in\NN$. Then, $\mathcal{D}(\RR^d)\subset\mathcal{S}(\RR^d)\subset \mathcal{E}(\RR^d)$.
   \end{lemma}
   \begin{definition}
-    Let $f,(f_n)\in \mathcal{S}(\RR^d)$. We say that $f_n\overset{S}{\longrightarrow}f$ if $\norm{f_n-f}_{\alpha,\beta}\to 0$ for all $\alpha,\beta\in{(\NN\cup\{0\})}^d$.
+    Let $f,(f_n)\in \mathcal{S}(\RR^d)$. We say that $f_n\overset{\mathcal{S}}{\longrightarrow}f$ if $\norm{f_n-f}_{\alpha,\beta}\to 0$ for all $\alpha,\beta\in{(\NN\cup\{0\})}^d$.
   \end{definition}
   \begin{proposition}
     Let $d\in\NN$. Then, $\mathcal{S}(\RR^d)\subset L^p(\RR^d)$ for all $p\in[1,\infty]$.
@@ -944,39 +976,42 @@
   \begin{proof}
     For $p=\infty$ the result is clear. Now suppose that $p\in[1,\infty)$ and let $\phi\in \mathcal{S}(\RR^d)$. Then:
     \begin{align*}
-      \int_{\RR^d}\abs{\phi}^p & = \int_{B(0,1)}\abs{\phi}^p+\int_{\RR^d\setminus B(0,1)}\frac{\abs{\phi}^p\abs{x}^{kp}}{\abs{x}^{kp}} \\
-                               & \leq C_1+C_2\int_{\RR^d\setminus B(0,1)}\frac{1}{\abs{x}^{kp}}
+      \int_{\RR^d}\abs{\phi}^p & = \int_{B(0,1)}\abs{\phi}^p+\int_{\RR^d\setminus B(0,1)}\frac{\abs{\phi}^p\norm{\vf{x}}^{kp}}{\norm{\vf{x}}^{kp}} \\
+                               & \leq C_1+C_2\int_{\RR^d\setminus B(0,1)}\frac{1}{\norm{\vf{x}}^{kp}}
     \end{align*}
-    for some $k\in \NN$ yet to be determined. Here in the last step we have used $\abs{\abs{\phi}\abs{x}^{k}}\leq \norm{f}_{k,0}=:C_2$. Now if $R_j:=\{x\in\RR^d:2^j\leq \abs{x}\leq 2^{j+1}\}$, $j\in\NN\cup\{0\}$, then:
+    for some $k\in \NN$ yet to be determined. Here in the last step we have used $\abs{\abs{\phi}\norm{\vf{x}}^{k}}\leq \norm{f}_{k,0}=:C_2$. Now if $R_j:=\{\vf{x}\in\RR^d:2^j\leq \norm{\vf{x}}\leq 2^{j+1}\}$, $j\in\NN\cup\{0\}$, then:
     \begin{align*}
-      \int_{\RR^d\setminus B(0,1)}\frac{1}{\abs{x}^{kp}} & \leq \sum_{j=0}^\infty \int_{R_j}\frac{1}{\abs{x}^{kp}} \\
-                                                         & \leq\sum_{j=0}^\infty \frac{C2^{(j+1)d}}{2^{kpj}}       \\
-                                                         & <\infty
+      \int_{\RR^d\setminus B(0,1)}\frac{1}{\norm{\vf{x}}^{kp}} & \leq \sum_{j=0}^\infty \int_{R_j}\frac{1}{\norm{\vf{x}}^{kp}} \\
+                                                               & \leq\sum_{j=0}^\infty \frac{C2^{(j+1)d}}{2^{kpj}}             \\
+                                                               & <\infty
     \end{align*}
-    if $kp-d>0$. So take $k> \frac{d}{p}$.
+    if and only if $kp-d>0$. So take $k> \frac{d}{p}$.
   \end{proof}
+  \begin{remark}
+    In $\RR^n$, the integrals of the form $\displaystyle\int_{B(0,1)}\frac{1}{\norm{\vf{x}}^k}\dd{\vf{x}}$ converge if and only if $k<n=\dim\RR^n$ whereas the integrals of the form $\displaystyle\int_{\RR^n\setminus B(0,1)}\frac{1}{\norm{\vf{x}}^k}\dd{\vf{x}}$ converge if and only if $k>n$. The limit case $k=n$ is diverges in both cases.
+  \end{remark}
   \begin{lemma}
     Let $f$ be a function that has Fourier transform. Then, $f\in \mathcal{S}(\RR^d)\iff \widehat{f} \in \mathcal{S}(\RR^d)$.
   \end{lemma}
   \begin{proof}
     By symmetry, it suffices to do one implication. Moreover we will only do the case $d=1$ in order to keep the notation simple. Let $f\in \mathcal{S}(\RR)$ and $\alpha,\beta\in\NN\cup\{0\}$. Then, using \mcref{HA:diffFourierTransf,HA:diffFourierXf}:
     \begin{align*}
-      \abs{\xi}^\alpha\abs{\partial^\beta \widehat{f}(\xi)} & =\abs{\xi}^\alpha\abs{\F({(-2\pi\ii x)}^\beta f)(\xi)}                                 \\
-                                                            & =\frac{1}{\abs{2\pi\ii}^\alpha}\abs{\F[\partial^\alpha ({(-2\pi\ii x)}^\beta f)](\xi)} \\
-                                                            & \leq \norm{\partial^\alpha ({(-2\pi\ii x)}^\beta f)}_1                                 \\
+      \abs{\vf\xi^\alpha\partial^\beta \widehat{f}(\vf\xi)} & =\abs{\vf\xi^\alpha\F({(-2\pi\ii \vf{x})}^\beta f)(\vf\xi)}                                    \\
+                                                            & =\frac{1}{\abs{2\pi\ii}^\alpha}\abs{\F[\partial^\alpha ({(-2\pi\ii \vf{x})}^\beta f)](\vf\xi)} \\
+                                                            & \leq \norm{\partial^\alpha ({(-2\pi\ii \vf{x})}^\beta f)}_1                                    \\
                                                             & <\infty
     \end{align*}
     where in the last inequality we have used that $\norm{\widehat{g}}_\infty\leq \norm{g}_1$.
   \end{proof}
   \subsubsection{Tempered distributions}
   \begin{definition}
-    Let $(\varphi_n),\varphi\in\mathcal{S}(\RR^d)$. We say that $(\varphi_n)\overset{S}{\longrightarrow}\varphi$ if $\norm{\varphi_n-\varphi}_{\alpha,\beta}\to 0$ for all $\alpha,\beta\in{(\NN\cup\{0\})}^d$.
+    Let $(\varphi_n),\varphi\in\mathcal{S}(\RR^d)$. We say that $(\varphi_n)\overset{\mathcal{S}}{\longrightarrow}\varphi$ if $\norm{\varphi_n-\varphi}_{\alpha,\beta}\to 0$ for all $\alpha,\beta\in{(\NN\cup\{0\})}^d$.
   \end{definition}
   \begin{definition}
     A \emph{tempered distribution} is a linear and continuous operator $T:\mathcal{S}(\RR^d)\to \CC$. The space of all tempered distributions is denoted by $\mathcal{S}^*(\RR^d)$.
   \end{definition}
   \begin{lemma}
-    Let $T:\mathcal{S}(\RR^d)\to \CC$ be linear. Then, $T\in\mathcal{S}^*(\RR^d)$ if and only for all compact set $K\subset\RR^d$, there exists $C>0$ and $m\in\NN\cup\{0\}$ such that $\forall \varphi\in \mathcal{S}(\RR^d)$ we have:
+    Let $T:\mathcal{S}(\RR^d)\to \CC$ be linear. Then, $T\in\mathcal{S}^*(\RR^d)$ if and only if there exists $C>0$ and $m\in\NN\cup\{0\}$ such that $\forall \varphi\in \mathcal{S}(\RR^d)$ we have:
     $$
       \abs{T(\varphi)}\leq C\sum_{\abs{\alpha}+\abs{\beta}\leq m}\norm{\varphi}_{\alpha,\beta}
     $$
@@ -999,7 +1034,7 @@
     $$
       {(a+b)}^m\leq 2^{m-1}(a^m+b^m)
     $$
-    and the equality holds if and only if $a=b$ or $m=0$.
+    and the equality holds if and only if $a=b$ or $m=0,1$.
   \end{lemma}
   \begin{proof}
     For $m=0,1$, the equality is true. Now suppose $m\geq 2$ and $b=\lambda a$ with $\lambda\in [0,\infty)$. We need to show that:
@@ -1016,20 +1051,20 @@
     Let $T\in \mathcal{S}^*(\RR^d)$ and $\psi\in \mathcal{S}(\RR^d)$. Then, $T*\psi\in \mathcal{S}^*(\RR^d)$.
   \end{lemma}
   \begin{proof}
-    Clearly $T*\psi$ is linear. Let $\varphi_n\overset{S}{\longrightarrow}0$. Then, it suffices to see that $\tilde\psi*\varphi_n\overset{S}{\longrightarrow}0$. For the sake of simplicity we only do the case $d=1$. For all $\alpha,\beta\in{\NN\cup\{0\}}$ we have:
+    Clearly $T*\psi$ is linear. Let $\varphi_n\overset{\mathcal{S}}{\longrightarrow}0$. Then, it suffices to see that $\tilde\psi*\varphi_n\overset{\mathcal{S}}{\longrightarrow}0$. For the sake of simplicity we only do the case $d=1$. For all $\alpha,\beta\in{\NN\cup\{0\}}$ we have:
     \begin{align*}
-      \abs{{x}^\alpha \partial^\beta(\tilde\psi*\varphi_n)({x})} & =\abs{{x}^\alpha (\partial^\beta\tilde\psi*\varphi_n)({x})}                                                                           \\
-                                                                 & \leq \int_{\RR^d} \abs{{x}^\alpha \partial^\beta\psi(y)\varphi_n({x}-{y})}\dd{y}                                                      \\
+      \abs{\vf{x}^\alpha \partial^\beta(\tilde\psi*\varphi_n)(\vf{x})} & =\abs{\vf{x}^\alpha (\partial^\beta\tilde\psi*\varphi_n)(\vf{x})}                                                                 \\
+                                                                       & \leq \int_{\RR^d} \abs{\vf{x}^\alpha \partial^\beta\psi(\vf{y})\varphi_n(\vf{x}-\vf{y})}\dd{\vf{y}}                               \\
       \begin{split}
-        & \leq 2^m\!\int_{\RR^d} \abs{{x}-{y}}^\alpha \abs{\partial^\beta\psi({y})}\abs{\varphi_n({x}-{y})}\dd{{y}} \\
-        &\quad+2^m\int_{\RR^d} \abs{{y}}^\alpha\abs{\partial^\beta\psi({y})} \abs{\varphi_n({x}-{y})}\dd{{y}} \\
+        & \leq 2^m\!\!\int_{\RR^d}\!\abs{\vf{x}-\vf{y}}^\alpha \abs{\partial^\beta\psi(\vf{y})}\abs{\varphi_n(\vf{x}-\vf{y})}\!\dd{\vf{y}} \\
+        &\quad\;+2^m\int_{\RR^d} \abs{\vf{y}}^\alpha\abs{\partial^\beta\psi(\vf{y})} \abs{\varphi_n(\vf{x}-\vf{y})}\dd{\vf{y}} \\
       \end{split} \\
       \begin{split}
-        & \leq 2^m\sup_{{x}\in\RR^d}\abs{{x}}^\alpha\abs{\varphi_n({y})}\int_{\RR^d}  \abs{\partial^\beta\psi({y})}\dd{{y}} \\
-        &\quad+2^m\sup_{{x}\in\RR^d}\abs{\varphi_n({y})}\int_{\RR^d} \abs{{y}}^\alpha\abs{\partial^\beta\psi({y})}\dd{{y}} \\
+        & \leq 2^m\sup_{\vf{x}\in\RR^d}\abs{\vf{x}}^\alpha\abs{\varphi_n(\vf{y})}\int_{\RR^d}  \abs{\partial^\beta\psi(\vf{y})}\dd{\vf{y}} \\
+        &\;\;\;+2^m\sup_{\vf{x}\in\RR^d}\abs{\varphi_n(\vf{y})}\int_{\RR^d} \abs{\vf{y}}^\alpha\abs{\partial^\beta\psi(\vf{y})}\dd{\vf{y}} \\
       \end{split}
     \end{align*}
-    where in the second inequality we have used \mcref{HA:lemma_aMbM}. Note that the this latter terms tend to zero as $n\to\infty$ because of the properties of the Schwartz space.
+    where in the second inequality we have used \mcref{HA:lemma_aMbM} with $m=\abs{\alpha}+1$. Note that this latter terms tend to zero as $n\to\infty$ because of the properties of the Schwartz space.
   \end{proof}
   \begin{lemma}
     Let $T\in \mathcal{S}^*(\RR^d)$, $\psi\in \mathcal{S}(\RR^d)$ and $\alpha\in{(\NN\cup\{0\})}^d$. Then:
@@ -1039,8 +1074,8 @@
   \end{lemma}
   \begin{proof}
     \begin{multline*}
-      \langle \partial^\alpha(T*\psi),\varphi\rangle={(-1)}^{\abs{\alpha}}\langle T*\psi,\partial^\alpha\varphi\rangle={(-1)}^{\abs{\alpha}}\langle T,\psi*\partial^\alpha\varphi\rangle\\={(-1)}^{\abs{\alpha}}\langle T,\partial^\alpha(\psi*\varphi)\rangle
-      =\langle \partial^\alpha T,\psi*\varphi\rangle   =\langle \partial^\alpha T*\psi,\varphi\rangle
+      \langle \partial^\alpha(T*\psi),\varphi\rangle={(-1)}^{\abs{\alpha}}\langle T*\psi,\partial^\alpha\varphi\rangle={(-1)}^{\abs{\alpha}}\langle T,\tilde\psi*\partial^\alpha\varphi\rangle\\={(-1)}^{\abs{\alpha}}\langle T,\partial^\alpha(\tilde\psi*\varphi)\rangle
+      =\langle \partial^\alpha T,\tilde\psi*\varphi\rangle   =\langle \partial^\alpha T*\psi,\varphi\rangle
     \end{multline*}
     The other equality is analogous.
   \end{proof}
@@ -1058,7 +1093,7 @@
   \begin{lemma}
     Let $T\in \mathcal{S}^*(\RR^d)$. Then, $\F{T},\F^{-1}T\in \mathcal{S}^*(\RR^d)$.
   \end{lemma}
-  \begin{proposition}
+  \begin{proposition}\label{HA:diff_FourierTrans_distribution}
     Let $T\in \mathcal{S}^*(\RR^d)$, $\psi \in \mathcal{S}(\RR^d)$ and $\alpha\in{(\NN\cup\{0\})}^d$. Then:
     \begin{enumerate}
       \item $\partial^\alpha\widehat{T}=\F({{(-2\pi\ii \vf{x})}^{\alpha} T})$
@@ -1067,11 +1102,24 @@
     \end{enumerate}
   \end{proposition}
   \begin{proof}
-    We prove the third one. The other to are similar. We have:
+    We prove the third one. The other are similar. We have:
     \begin{multline*}
       \langle \widehat{T*\psi},\varphi\rangle=\langle T*\psi,\widehat{\varphi}\rangle=\langle T,\tilde\psi*\widehat{\varphi}\rangle=\langle \widehat{T},\F^{-1}(\tilde{\psi}\widehat{\varphi})\rangle=\\
       =\langle \widehat{T},\F^{-1}(\tilde{\psi})\varphi\rangle=\langle \widehat{T},\widehat{\psi}\varphi\rangle=\langle \widehat{T}\widehat{\psi},\varphi\rangle
     \end{multline*}
+  \end{proof}
+  \begin{lemma}\label{HA:xT_equal_0}
+    Let $T\in \mathcal{D}*(\RR)$ be such that $x T =0$. Then, $T=C\delta$ for some $C\in \RR$.
+  \end{lemma}
+  \begin{proof}
+    Let $\varphi\in \mathcal{D}(\RR)$ be such that $\varphi(0)=0$. Then, $\phi:=\frac{\varphi}{x}\in \mathcal{D}(\RR)$ and:
+    $$
+      \langle T,\varphi\rangle=\langle T,x\phi\rangle=\langle xT,\phi\rangle=0
+    $$
+    Now consider $\omega\in \mathcal{D}(\RR)$ such that $\omega(0)=1$ and $\varphi\in\mathcal{D}(\RR)$ arbitrary. Then, $\phi:=\varphi-\omega\varphi(0)\in \mathcal{D}(\RR)$ and satisfies $\phi(0)=0$. Hence, $\langle T, \phi\rangle=0$ and so:
+    $$
+      \langle T,\varphi\rangle=\varphi(0)\langle T,\omega\rangle=:C\delta(\varphi)
+    $$
   \end{proof}
   \begin{lemma}\label{HA:lemma_propdelta}
     We have that:
@@ -1082,6 +1130,77 @@
       \item $\delta*f=f$ $\forall f\in \mathcal{D}(\RR^d)$
     \end{enumerate}
   \end{lemma}
+  \begin{proof}
+    We prove the second one, the others are easier. Note that ${(\indi{(0,\infty)})}'=\delta$. Taking Fourier transform and using \mcref{HA:diff_FourierTrans_distribution}, we get
+    $ 2\pi\ii x \widehat{\indi{(0,\infty)}}=1$. Hence, since $x\pv\left(\frac{1}{x}\right)=1$, we have:
+    $$
+      x\left(2\pi\ii \widehat{\indi{(0,\infty)}}-\pv\left(\frac{1}{x}\right)\right)=0
+    $$
+    By \mcref{HA:xT_equal_0}, we get that $\widehat{\indi{(0,\infty)}}=\frac{1}{2\pi\ii}\pv\left(\frac{1}{x}\right)+C\delta_0$, for some $C\in \RR$. To find the constant change $x\to -x$ in the equation or alternatively apply the distribution to the function $\exp{-\pi x^2}$.
+  \end{proof}
+  \begin{definition}
+    Let $T\in \mathcal{D}^*(\RR^n)$ and $S\in \mathcal{D}^*(\RR^m)$. We define the \emph{direct product} $TS$ as the distribution in $\mathcal{D}^*(\RR^{n+m})$ given by:
+    $$
+      \langle TS,\varphi\rangle=\langle T,\langle S ,\varphi(\vf{x},\cdot)\rangle\rangle
+    $$
+    for all $\varphi\in \mathcal{D}(\RR^{n+m})$. Usually we will dentote
+    $$\langle TS,\varphi(\vf{x},\vf{y})\rangle=\langle T(\vf{x}),\langle S(\vf{y}) ,\varphi(\vf{x},\vf{y})\rangle\rangle$$
+    in order to distinguish the variables
+  \end{definition}
+  \begin{lemma}
+    Let $T\in \mathcal{D}^*(\RR^n)$ and $S\in \mathcal{D}^*(\RR^m)$. Then:
+    \begin{enumerate}
+      \item $\phi(\vf{x}):=\langle S(\vf{y}), \varphi(\vf{x},\vf{y})\rangle\in \mathcal{D}(\RR^n)$ and $\forall \alpha\in{(\NN\cup\{0\})}^n$ we have $$\partial_{\vf{x}}^\alpha\phi(\vf{x})=\langle S(\vf{y}), \partial_{\vf{x}}^\alpha\varphi(\vf{x},\vf{y})\rangle$$
+      \item $TS$ is indeed a distribution.
+      \item $TS=ST$
+    \end{enumerate}
+  \end{lemma}
+  \begin{proposition}
+    Let $T\in \mathcal{D}^*(\RR^n)$ and $S\in \mathcal{D}^*(\RR^m)$. Then, $\widehat{TS}=\widehat{T}\widehat{S}$.
+  \end{proposition}
+  \begin{proof}
+    Given $\varphi(\vf{x},\vf{y})\in \mathcal{D}(\RR^{n+m})$ we have:
+    \begin{align*}
+      \F(\varphi(\vf{x},\vf{y})) & =\int_{\RR^{n+m}}\varphi(\vf{x},\vf{y})e^{-2\pi\ii(\vf{x},\vf{y})\cdot(\vf{\xi},\vf{\eta})}\dd{\vf{x}}\dd{\vf{y}}                                      \\
+                                 & = \int_{\RR^{n}}e^{-2\pi\ii\vf{x}\cdot\vf{\xi}}\left(\int_{\RR^{m}}\varphi(\vf{x},\vf{y})e^{-2\pi\ii\vf{y}\cdot\vf{\eta}}\dd{\vf{y}}\right)\dd{\vf{x}} \\
+                                 & =:\F_{\vf{x}}(\F_{\vf{y}}(\varphi))=\F_{\vf{y}}\F_{\vf{x}}\varphi
+    \end{align*}
+    by \mnameref{RFA:fubini}.
+    Therefore:
+    \begin{multline*}
+      \langle \F(TS),\varphi\rangle=\langle T,\langle S,\F_{\vf{y}}\F_{\vf{x}}\varphi\rangle\rangle= \langle T,\langle \widehat{S}, \F_{\vf{x}}\varphi\rangle\rangle=\\=\langle \widehat{S}T, \F_{\vf{x}}\varphi \rangle=\langle \widehat{S}, \langle T, \F_{\vf{x}}\varphi \rangle\rangle=\langle \widehat{S}, \langle \widehat{T}, \varphi \rangle\rangle=\langle \widehat{S}\widehat{T}, \varphi \rangle
+    \end{multline*}
+  \end{proof}
+  \subsubsection{Homogeneous distributions}
+  \begin{definition}[Homogeneous distribution]
+    A distribution $T\in \mathcal{S}^*(\RR^n)$ is said to be \emph{homogeneous of degree $r\in \RR$} if:
+    $$
+      \langle T,\varphi(\lambda\vf{x})\rangle=\lambda^{- n -r}\langle T,\varphi(\vf{x})\rangle
+    $$
+    for all $\lambda>0$ and all $\varphi\in \mathcal{S}(\RR^n)$.
+  \end{definition}
+  \begin{proposition}
+    Let $T\in \mathcal{S}^*(\RR^n)$ be a homogeneous distribution of degree $r\in\RR$. Then, $\partial^\alpha T$ is homogeneous of degree $r-\abs{\alpha}$ for all $\alpha\in{(\NN\cup\{0\})}^n$.
+  \end{proposition}
+  \begin{proof}
+    Let $\varphi\in \mathcal{S}(\RR^n)$ and $\lambda>0$. Then:
+    \begin{multline*}
+      \langle \partial^\alpha T,\varphi(\lambda\vf{x})\rangle={(-1)}^{\abs{\alpha}}\langle T,(\partial^\alpha\varphi)(\lambda\vf{x})\lambda^{\abs{\alpha}}\rangle=\\={(-1)}^{\abs{\alpha}}\lambda^{-n-r+\abs{\alpha}}\langle T,\partial^\alpha\varphi\rangle=\lambda^{-n-(r-\abs{\alpha})}\langle \partial^\alpha T,\varphi\rangle
+    \end{multline*}
+  \end{proof}
+  \begin{proposition}
+    Let $T\in \mathcal{S}^*(\RR^n)$ and $r\in \RR$. Then, $T$ is homogeneous of degree $r$ if and only if $\widehat{T}$ is homogeneous of degree $-n-r$.
+  \end{proposition}
+  \begin{proof}
+    We only check one implication, the other is analogous. Using \mcref{HA:fourierPropertiesRn} we have:
+    \begin{multline*}
+      \langle \widehat{T}, \varphi(\lambda\vf{x})\rangle=\left\langle T, \widehat{\varphi}(\vf{\xi}/\lambda)\frac{1}{\lambda^n}\right\rangle =\\=\lambda^{n+r - n}\left\langle T, \widehat{\varphi}\right\rangle=\lambda^{-n-(-r-n)}\langle \widehat{T}, \varphi\rangle
+    \end{multline*}
+  \end{proof}
+  \begin{corollary}\label{lem:preRiesz2}
+    Let $k\in\RR$, $n\in\NN$ with $k<n$. Then, $\frac{1}{\norm{\vf{x}}^k}\in \mathcal{S}^*(\RR^n)$ and it is homogeneous of degree $-k$. Moreover, $\F\left(\frac{1}{\norm{\vf{x}}^k}\right) = C_{k,n}\frac{1}{\norm{\vf{\xi}}^{n-s}}$ with $C_{k,n}=\frac{{(2\pi)}^{\frac{n}{2}}}{{2}^{\frac{\alpha}{2}}}\frac{\Gamma\left(\frac{n-k}{2}\right)}{\Gamma\left(\frac{k}{2}\right)}$.
+  \end{corollary}
+  \subsubsection{Differential operators over distributions}
   \begin{definition}
     A \emph{differential operator over distributions} is an operator of the form:
     $$
@@ -1122,39 +1241,6 @@
     The other implication is similar using $\F^{-1}$ instead.
   \end{proof}
   \begin{definition}
-    Let $T\in \mathcal{D}^*(\RR^n)$ and $S\in \mathcal{D}^*(\RR^m)$. We define the \emph{direct product} $TS$ as the distribution in $\mathcal{D}^*(\RR^{n+m})$ given by:
-    $$
-      \langle TS,\varphi\rangle=\langle T,\langle S ,\varphi(x,\cdot)\rangle\rangle
-    $$
-    for all $\varphi\in \mathcal{D}(\RR^{n+m})$. Usually we will dentote
-    $$\langle TS,\varphi(\vf{x},\vf{y})\rangle=\langle T(\vf{x}),\langle S(\vf{y}) ,\varphi(\vf{x},\vf{y})\rangle\rangle$$
-    in order to distinguish the variables
-  \end{definition}
-  \begin{lemma}
-    Let $T\in \mathcal{D}^*(\RR^n)$ and $S\in \mathcal{D}^*(\RR^m)$. Then:
-    \begin{enumerate}
-      \item $TS$ is indeed a distribution.
-      \item $TS=ST$
-      \item $\phi(\vf{x}):=\langle S(\vf{y}), \varphi(\vf{x},\vf{y})\rangle\in \mathcal{D}(\RR^n)$ and $\forall \alpha\in\NN^n$ we have $$\partial_{\vf{x}}^\alpha\phi(\vf{x})=\langle S(\vf{y}), \partial_{\vf{x}}^\alpha\varphi(\vf{x},\vf{y})\rangle$$
-    \end{enumerate}
-  \end{lemma}
-  \begin{proposition}
-    Let $T\in \mathcal{D}^*(\RR^n)$ and $S\in \mathcal{D}^*(\RR^m)$. Then, $\widehat{TS}=\widehat{T}\widehat{S}$.
-  \end{proposition}
-  \begin{proof}
-    Given $\varphi(\vf{x},\vf{y})\in \mathcal{D}(\RR^{n+m})$ we have:
-    \begin{align*}
-      \F(\varphi(\vf{x},\vf{y})) & =\int_{\RR^{n+m}}\varphi(\vf{x},\vf{y})e^{-2\pi\ii(\vf{x},\vf{y})\cdot(\vf{\xi},\vf{\eta})}\dd{\vf{x}}\dd{\vf{y}}                                      \\
-                                 & = \int_{\RR^{n}}e^{-2\pi\ii\vf{x}\cdot\vf{\xi}}\left(\int_{\RR^{m}}\varphi(\vf{x},\vf{y})e^{-2\pi\ii\vf{y}\cdot\vf{\eta}}\dd{\vf{y}}\right)\dd{\vf{x}} \\
-                                 & =:\F_{\vf{x}}(\F_{\vf{y}}(\varphi))=\F_{\vf{y}}\F_{\vf{x}}\varphi
-    \end{align*}
-    by \mnameref{RFA:fubini}.
-    Therefore:
-    \begin{multline*}
-      \langle \F(TS),\varphi\rangle=\langle T,\langle S,\F_{\vf{y}}\F_{\vf{x}}\varphi\rangle\rangle= \langle T,\langle \widehat{S}, \F_{\vf{x}}\varphi\rangle\rangle=\\=\langle \widehat{S}T, \F_{\vf{x}}\varphi \rangle=\langle \widehat{S}, \langle T, \F_{\vf{x}}\varphi \rangle\rangle=\langle \widehat{S}, \langle \widehat{T}, \varphi \rangle\rangle=\langle \widehat{S}\widehat{T}, \varphi \rangle
-    \end{multline*}
-  \end{proof}
-  \begin{definition}
     Let $L(\partial)$ be a differential operator. We say that $E$ is a \emph{fundamental solution} of the Cauchy problem
     \begin{equation}\label{HA:cauchy}
       \begin{cases}
@@ -1165,36 +1251,36 @@
     if $L(\partial)E(t,\vf{x})=0$ and $E(0,\vf{x})=\delta(\vf{x})$.
   \end{definition}
   \begin{theorem}
-    Let $L(\partial)$ be a differential operator. Then, $E*f$ is a solution of the Cauchy problem \mcref{HA:cauchy}, where $E$ is a fundamental solution of it.
+    Let $L(\partial)$ be a differential operator and $E$ be a fundamental solution of the Cauchy problem of \mcref{HA:cauchy}. Then, $E*f$ is a solution of it.
   \end{theorem}
   \subsubsection{Applications to some PDEs}
-  \begin{proposition}
-    Consider the operator
+  \begin{proposition}\label{HA:heat}
+    Consider the operator:
     $$
       L(\partial)=\partial_t-a^2\sum_{j=1}^{n}\partial_{x_j}^2
     $$
     Then, $$
-      E(t)=\frac{\indi{[0,\infty)}(t)}{{(4\pi a^2t)}^{n/2}}e^{-\frac{\abs{x}^2}{4a^2t}}
+      E(t)=\frac{\indi{[0,\infty)}(t)}{{(4\pi a^2t)}^{n/2}}\exp{-\frac{\norm{\vf{x}}^2}{4a^2t}}
     $$
     is a fundamental solution the heat equation $L(\partial)u=0$.
   \end{proposition}
   \begin{proof}
     Taking $\F_{\vf{x}}$ on the equation $L(\partial) E=\delta$ we can transform it to:
     $$
-      \partial_t \widehat{E}+4\pi^2a^2\abs{\xi}^2\widehat{E}=\delta_t
+      \partial_t \widehat{E}+4\pi^2a^2\norm{\vf\xi}^2\widehat{E}=\delta_t
     $$
     because $\delta=\delta_{\vf{x}}\delta_t$. It can be seen that a solution of this ode is:
     $$
-      \widehat{E}(t,\xi)=\indi{[0,\infty)}(t)\exp{-4\pi^2a^2\abs{\xi}^2t}
+      \widehat{E}(t,\xi)=\indi{[0,\infty)}(t)\exp{-4\pi^2a^2\norm{\vf\xi}^2t}
     $$
     Taking the Fourier transform (in this case $\F^{-1}=\F$) we have:
     $$
-      E(t,x)=\frac{\indi{[0,\infty)}(t)}{{(4\pi a^2t)}^{n/2}}e^{-\frac{\abs{x}^2}{4a^2t}}
+      E(t,x)=\frac{\indi{[0,\infty)}(t)}{{(4\pi a^2t)}^{n/2}}e^{-\frac{\norm{\vf{x}}^2}{4a^2t}}
     $$
     where we have used \mcref{HA:FTprop4,HA:expX2}.
   \end{proof}
   \begin{proposition}
-    Consider the operator
+    Consider the Laplace operator:
     $$
       L(\partial)=\sum_{j=1}^{n}\partial_{x_j}^2
     $$
@@ -1209,23 +1295,23 @@
   \begin{proof}
     Taking $\F_{\vf{x}}$ on the equation $L(\partial) E=\delta$ we see that $\widehat{E}$ satisfies:
     $$
-      \widehat{E}(\vf\xi) = \frac{-1}{4\pi^2\abs{\vf\xi}^2}
+      \widehat{E}(\vf\xi) = \frac{-1}{4\pi^2\norm{\vf\xi}^2}
     $$
     Let's study the integrability of this latter function in a neighbourhood of $0$. Let $R_j:=\{\vf{x}\in\RR^n:2^{-j}\leq \norm{x}\leq 2^{-j+1}\}$. Then:
     \begin{multline*}
       \int_{B(0,1)}\frac{1}{\norm{\vf{x}}^2}=\sum_{j=1}^{\infty}\int_{R_j} \frac{1}{\norm{\vf{x}}^2}\lesssim \sum_{j=1}^{\infty}\frac{{(2^{-j})}^n}{2^{-2j}}=\\= \sum_{j=1}^{\infty}2^{j(n-2)}<\infty\iff n\geq 3
     \end{multline*}
-    Let's study first the case $n\geq 3$. We need to compute $\F^{-1}(\widehat{E})=\F(\widehat{E})$. Recall that $\F(\exp{-k\norm{\vf{x}}^2})= {\left(\frac{\pi}{k}\right)}^{\frac{n}{2}}\exp{-\frac{\pi^2\norm{\vf\xi}^2}{k}}$. Therefore:
+    Let's study first the case $n\geq 3$. We need to compute $\F^{-1}(\widehat{E})=\F(\widehat{E})$. Recall that $\F(\exp{-k\norm{\vf{x}}^2})= {\left(\frac{\pi}{k}\right)}^{\frac{n}{2}}\exp{-\frac{\pi^2\norm{\vf\xi}^2}{k}}$ (try to generalize \mcref{HA:expX2}). Therefore:
     \begin{multline*}
-      {\left(\frac{\pi}{k}\right)}^{\frac{n}{2}}\int_{\RR^n} \exp{-\frac{\pi^2\abs{\xi}^2}{k}}\varphi(\vf{x})\dd{\vf{x}}=\langle \F(\exp{-k\norm{\vf{x}}^2}),\varphi\rangle=\\=\int_{\RR^n} \exp{-k\norm{\vf{x}}^2}\widehat{\varphi}(\vf{x})\dd{\vf{x}}
+      {\left(\frac{\pi}{k}\right)}^{\frac{n}{2}}\int_{\RR^n} \exp{-\frac{\pi^2\norm{\vf\xi}^2}{k}}\varphi(\vf{\xi})\dd{\vf{\xi}}=\langle \F(\exp{-k\norm{\vf{x}}^2}),\varphi\rangle=\\=\int_{\RR^n} \exp{-k\norm{\vf{x}}^2}\widehat{\varphi}(\vf{x})\dd{\vf{x}}
     \end{multline*}
     Integrating both sides with respect to $k$ and using \mnameref{RFA:fubini} we have that, on the one hand:
     \begin{equation*}
       \int_{\RR^n} \widehat{\varphi}(\vf{\xi})\int_0^\infty\exp{-k\norm{\vf{\xi}}^2}\dd{k}\dd{\vf{\xi}}=\int_{\RR^n} \widehat{\varphi}(\vf{\xi})\frac{1}{\norm{\vf\xi}^2}\dd{\vf{\xi}}=\left\langle \frac{1}{\norm{\vf\xi}^2}, \widehat\varphi\right\rangle
     \end{equation*}
     On the other hand:
-    $$\int_{\RR^n}\varphi(\vf{x})\int_{0}^\infty{\left(\frac{\pi}{k}\right)}^{\frac{n}{2}} \exp{-\frac{\pi^2\norm{\vf{x}}^2}{k}}\dd{k}\dd{\vf{x}}=\frac{\Gamma\left(\frac{n}{2}-1\right)}{\pi^{\frac{n}{2}-2}}\int_{\RR^n}\frac{\varphi(\vf{x})}{\vf{x}^{n-2}}$$
-    where we have used the change of variable $r=\frac{\pi^2\vf{\xi}^2}{k}$. Let's do now the case $n=2$. Consider $E_n=\frac{1}{2}\log(\abs{\vf{x}}^2+1/n^2)\overset{\mathcal{S}}{\longrightarrow}\log\norm{\vf{x}}$. We have that $\laplacian E_n = \frac{2n^2}{(n^2\norm{\vf{x}}^2+1)^2}$. Thus, $\forall \varphi\in \mathcal{S}(\RR^2)$:
+    $$\int_{\RR^n}\varphi(\vf{x})\int_{0}^\infty{\left(\frac{\pi}{k}\right)}^{\frac{n}{2}} \exp{-\frac{\pi^2\norm{\vf{x}}^2}{k}}\dd{k}\dd{\vf{x}}=\frac{\Gamma\left(\frac{n}{2}-1\right)}{\pi^{\frac{n}{2}-2}}\int_{\RR^n}\frac{\varphi(\vf{x})}{\norm{\vf{x}}^{n-2}}$$
+    where we have used the change of variable $r=\frac{\pi^2\vf{\xi}^2}{k}$. Let's do now the case $n=2$. Consider $E_n=\frac{1}{2}\log(\norm{\vf{x}}^2+1/n^2)\overset{\mathcal{S}}{\longrightarrow}\log\norm{\vf{x}}$ (by the \mnameref{RFA:dominated}). Hence, we have that $\laplacian E_n = \frac{2n^2}{(n^2\norm{\vf{x}}^2+1)^2}\overset{\mathcal{S}}{\longrightarrow}\laplacian\log\norm{\vf{x}}$. Thus, $\forall \varphi\in \mathcal{S}(\RR^2)$:
     \begin{align*}
       \langle \laplacian\log\norm{\vf{x}},\varphi\rangle & = \lim_{n\to\infty}\langle \laplacian E_n,\varphi\rangle                                        \\
                                                          & = \lim_{n\to\infty}\int_{\RR^2} \frac{2n^2}{(n^2\norm{\vf{x}}^2+1)^2}\varphi(\vf{x})\dd{\vf{x}} \\
@@ -1233,14 +1319,14 @@
                                                          & =\varphi(0)\int_{\RR^2}\frac{2}{(\norm{\vf{x}}^2+1)^2}\dd{\vf{x}}                               \\
                                                          & =2\pi\varphi(0)
     \end{align*}
-    where in the first and forth equality we have used the \mnameref{RFA:dominated} and at the end we have calculated the integral using polar coordinates.
+    where in the forth equality we have used the \mnameref{RFA:dominated} and at the end we have calculated the integral using polar coordinates.
   \end{proof}
   \begin{corollary}
     Consider the Cauchy-Riemann operators:
     $$
       \partial_z=\frac{1}{2}\left(\partial_x-i\partial_y\right)\qquad \partial_{\overline{z}}=\frac{1}{2}\left(\partial_x+i\partial_y\right)
     $$
-    The fundamental solutions to $\partial_z=f$ and $\partial_{\overline{z}}=f$ are respectively:
+    The fundamental solutions to $\partial_zu=f$ and $\partial_{\overline{z}}u=f$ are respectively:
     $$
       E=\frac{1}{\pi}\frac{1}{\overline{z}}\qquad E=\frac{1}{\pi}\frac{1}{z}
     $$
@@ -1248,6 +1334,33 @@
   \begin{sproof}
     Recall that $\partial_z\partial_{\overline{z}}=\partial_{\overline{z}}\partial_z=\frac{1}{4}\laplacian$. $E=\frac{\log(z\overline{z})}{4\pi}$ is a fundamental solution of the Laplace equation and $\partial_z E=\frac{1}{4\pi z}$, $\partial_{\overline{z}} E=\frac{1}{4\pi \overline{z}}$.
   \end{sproof}
+  \begin{proposition}
+    Consider the Cauchy problem:
+    $$
+      \begin{cases}
+        u_t=a^2\laplacian u   & \text{in }(0,\infty)\times\RR^n \\
+        u(0,\vf{x})=f(\vf{x}) & \text{in }\RR^n
+      \end{cases}
+    $$
+    Then, a fundamental solution is given by:
+    $$
+      E(t,\vf{x})=\frac{1}{{(4\pi a^2t)}^{\frac{n}{2}}}\exp{-\frac{\norm{\vf{x}}^2}{4a^2t}}
+    $$
+    And the general solution is:
+    $$
+      u(t,\vf{x})=(E*f)(t,\vf{x})=\int_{\RR^n} \frac{f(\vf{y})}{{(4\pi a^2t)}^{\frac{n}{2}}}\exp{-\frac{\norm{\vf{x}-\vf{y}}^2}{4a^2t}}\dd{\vf{y}}
+    $$
+  \end{proposition}
+  \begin{proof}
+    Taking $\F_{\vf{x}}$ on the equation we obtain:
+    $$
+      \widehat{E}_t=-4\pi^2\norm{\vf{\xi}}^2\widehat{E}
+    $$
+    Solving it we obtain, $\widehat{E}=C\exp{-4\pi^2\norm{\vf{\xi}}^2t}$. Using the initial condition we see that $C=1$. Now proceeding as in the proof of the \mcref{HA:heat} we obtain the result.
+  \end{proof}
+  \begin{theorem}[Malgrange-Ehrenpreis theorem]
+    Every non-zero linear partial differential operator with constant coefficients has a fundamental solution.
+  \end{theorem}
   \subsection{Singular intergals}
   \subsubsection{Hilbert transform}
   \begin{definition}
@@ -1259,9 +1372,17 @@
   \begin{definition}
     Let $f\in \mathcal{S}(\RR)$. We define the \emph{Hilbert transform} of $f$ as:
     $$
-      \H f(x)=\frac{1}{\pi}\left(\pv\frac{1}{x}*f\right)(x)=\lim_{\varepsilon\to 0} \H^\varepsilon f(x)
+      \H f(x)=\frac{1}{\pi}\left(\pv\left(\frac{1}{x}\right)*f\right)(x)=\lim_{\varepsilon\to 0} \H^\varepsilon f(x)
     $$
   \end{definition}
+  \begin{remark}
+    We can extend the definition of $\H$ to functions that satisfy locally a \emph{Hölder condition}: $\forall x\in\RR$, $\exists C_x,\alpha_x,\delta_x>0$ such that $$\abs{f(x)-f(y)}\leq C_x\abs{x-y}^{\alpha_x}\qquad\text{for all}\abs{x-y}<\delta_x$$
+    In that case we write:
+    $$
+      \H^\varepsilon f(x)=\frac{1}{\pi}\!\int_{\varepsilon<\abs{x-y}<\delta_x}\!\!\frac{f(y)-f(x)}{x-y}\dd{y} + \frac{1}{\pi}\!\int_{\abs{x-y}>\delta_x}\!\!\frac{f(y)}{x-y}\dd{y}
+    $$
+
+  \end{remark}
   \begin{lemma}
     Let $a,b\in\RR$, $a<b$. Then:
     $$
@@ -1290,7 +1411,7 @@
     $$
   \end{proof}
   \begin{lemma}
-    We have that $H^2=-\id$ on $L^p(\RR)$, $1\leq p<\infty$.
+    We have that $\H^2=-\id$ on $L^p(\RR)$, $1\leq p<\infty$.
   \end{lemma}
   \begin{proof}
     $\displaystyle
@@ -1303,19 +1424,23 @@
   \begin{proof}
     We'll prove the equality using the Fourier transform and the uniqueness of it will imply the result.
 
-    In general we have that $\widehat{fg}=\widehat{f}*\widehat{g}$. Thus:
+    In general we have that $\widehat{fg}=\widehat{f}*\widehat{g}$ because:
+    $$
+      \F^{-1}(\widehat{f}*\widehat{g})=\F^3(\widehat{f}*\widehat{g})=\F^2(\F^2 f \F^2 g)=fg
+    $$
+    Thus:
     $$
       \widehat{f^2}= \widehat{f}*\widehat{f}\qquad
       2\F{(\H(f\H f))}=2m \widehat{f}*(m \widehat{f})
     $$
-    The first term is $\int_{\RR} \widehat{f}(\eta)\widehat{f}(\xi-\eta)\dd{\eta}$ whereas the second one is $2\int_{\RR} m(\xi)\widehat{f}(\eta)m(\xi-\eta)\widehat{f}(\xi-\eta)\dd{\eta}=2\int_{\RR} m(\xi)\widehat{f}(\xi-\eta)\widehat{f}(\eta)m(\eta)\dd{\eta}$
+    The first term is $\int_{\RR} \widehat{f}(\eta)\widehat{f}(\xi-\eta)\dd{\eta}$ whereas the second one is $2\int_{\RR} m(\xi)\widehat{f}(\eta)m(\xi-\eta)\widehat{f}(\xi-\eta)\dd{\eta}=2\int_{\RR} m(\xi)\widehat{f}(\xi-\eta)\widehat{f}(\eta)m(\eta)\dd{\eta}$.
     Averaging those terms we have:
     \begin{align*}
       \begin{split}
-        \widehat{f^2}+2\F{(\H(f\H f))} & =\int_{\RR} \widehat{f}(\xi)\widehat{f}(\xi-\eta)[1+m(\xi)\cdot\\
+        \widehat{f^2}+2\F{(\H(f\H f))} & =\int_{\RR} \widehat{f}(\eta)\widehat{f}(\xi-\eta)[1+m(\xi)\cdot\\
           &\hspace{2cm}\cdot(m(\xi-\eta)+m(\eta))]\dd{\eta}
       \end{split} \\
-       & =\int_{\RR} \widehat{f}(\xi)\widehat{f}(\xi-\eta)m(\xi-\eta)m(\xi)\dd{\eta}                  \\
+       & =\int_{\RR} \widehat{f}(\eta)\widehat{f}(\xi-\eta)m(\xi-\eta)m(\eta)\dd{\eta}                 \\
        & =\widehat{\H f}*\widehat{\H f}=\widehat{(\H f)^2}
     \end{align*}
     where the second equality follows for all $\xi,\eta\in\RR^2\setminus\{(0,0)\}$
@@ -1337,16 +1462,16 @@
     $$
   \end{proof}
   \begin{lemma}
-    Let $P_\varepsilon$ be the Poisson kernel and $f\in L^p(\RR)$. Then, if $z=x+\ii y$:
+    Let $P_y$ be the Poisson kernel and $f\in L^p(\RR)$. Then, if $z=x+\ii y$:
     $$
-      (P_y*f)(x)=\Re\left(\frac{\ii}{\pi}\int_\RR\frac{f(t)}{z-t}\dd{t}\right)=:\Re F_f(z)
+      (P_y*f)(z)=\Re\left(\frac{\ii}{\pi}\int_\RR\frac{f(t)}{z-t}\dd{t}\right)=:\Re F_f(z)
     $$
     Moreover, $F_f\in\mathcal{H}(\{\Im f>0\})$.
   \end{lemma}
   \begin{sproof}
     The first part follows from:
     $$
-      (P_y*f)(x)=\frac{y}{\pi}\int_\RR\frac{f(t)}{{(x-t)}^2+y^2}\dd{t}
+      (P_y*f)(z)=\frac{y}{\pi}\int_\RR\frac{f(t)}{{(x-t)}^2+y^2}\dd{t}
     $$
     To show the last part, note that $F_f$ is $\RR$-differentiable and $\overline{\partial}F_f=0$.
   \end{sproof}
@@ -1389,13 +1514,15 @@
   \begin{lemma}\label{lem:preRiesz1}
     $\partial_j\left(\frac{1}{\norm{\vf{x}}^{n-1}}\right)=(1-n)W_j$
   \end{lemma}
-  \begin{lemma}\label{lem:preRiesz2}
-    Let $0<k<n$. Then: $$\F\left(\frac{1}{\norm{\vf{x}}^k}\right)=\frac{C_k}{\norm{\vf{x}}^{n-k}}$$
-    with $C_k=\frac{{(2\pi)}^{\frac{n}{2}}}{{2}^{\frac{\alpha}{2}}}\frac{\Gamma\left(\frac{n-k}{2}\right)}{\Gamma\left(\frac{k}{2}\right)}$.
-  \end{lemma}
-  \begin{sproof}
-    An easy check shows that $\F\left(\frac{1}{\norm{\vf{x}}^k}\right)=\frac{C_k}{\norm{\vf{x}}^{n-k}}$. To find the exact value of the constant we use that $\langle \widehat{f}, g\rangle = \langle f, \widehat{g}\rangle$ with $f=\frac{1}{\norm{\vf{x}}^k}$ and $g=\exp{-\pi\norm{\vf{x}}^2}=\widehat{g}$.
-  \end{sproof}
+  \begin{proof}
+    Let $\varphi\in\mathcal{S}(\RR^n)$ and write it as $\varphi=\varphi_\mathrm{e}+\varphi_\mathrm{o}$, where $\varphi_\mathrm{e}$ is even and $\varphi_\mathrm{o}$ is odd. Then:
+    \begin{align*}
+      \left\langle \partial_j\left(\frac{1}{\norm{\vf{x}}^{n-1}}\right),\varphi\right\rangle & = -\int_{\RR^n} \frac{\partial_j\varphi_\mathrm{o}}{\norm{\vf{x}}^{n-1}}\dd{\vf{x}}                                                   \\
+                                                                                             & =-\lim_{\varepsilon \to 0}\int_{\RR^n\setminus B(0,\varepsilon)} \frac{\partial_j\varphi_\mathrm{o}}{\norm{\vf{x}}^{n-1}} \dd{\vf{x}} \\
+                                                                                             & = (1-n)\lim_{\varepsilon \to 0}\int_{\RR^n\setminus B(0,\varepsilon)} \frac{x_j\varphi_\mathrm{o}}{\norm{\vf{x}}^{n+1}} \dd{\vf{x}}   \\
+                                                                                             & = (1-n)\lim_{\varepsilon \to 0}\int_{\RR^n\setminus B(0,\varepsilon)} \frac{x_j\varphi}{\norm{\vf{x}}^{n+1}} \dd{\vf{x}}
+    \end{align*}
+  \end{proof}
   \begin{theorem}
     For each $j=1, \ldots, n$ we have: $$\widehat{W_j}=-\frac{\ii}{c_n}\frac{\xi_j}{\norm{\vf\xi}}$$
   \end{theorem}
