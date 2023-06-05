@@ -112,7 +112,7 @@
       \exp{\ii\pi}\widehat{f}(\xi) & =\int_{-\infty}^{+\infty}f(x)\exp{-2\pi\ii\xi x+\ii\pi}\dd{x}                    \\
                                    & =\int_{-\infty}^{+\infty}f\left(u+\frac{1}{2\xi}\right)\exp{-2\pi\ii\xi u}\dd{u}
     \end{align*}
-    So: $$\abs{\widehat{f}(\xi)}\leq\frac{1}{2}\int_{-\infty}^{+\infty}\left|f(x)-f\left(x+\frac{1}{2\xi}\right)\right|-\dd{x}$$
+    So: $$\abs{\widehat{f}(\xi)}\leq\frac{1}{2}\int_{-\infty}^{+\infty}\left|f(x)-f\left(x+\frac{1}{2\xi}\right)\right|\dd{x}$$
     Now use again the \mnameref{RFA:dominated}.
   \end{sproof}
   \begin{proposition}\label{HA:symmetryFT}
@@ -935,7 +935,7 @@
     $$
     with $C:=\dotp{T}{\omega}$.
   \end{proof}
-  \begin{proposition}
+  \begin{proposition}\label{HA:xmT_equal_0}
     Let $T\in \mathcal{D}^*(\RR)$ be such that $x^m T=0$ for some $m\in\NN$. Then, $T=\sum_{j=0}^{m-1}a_j\delta^{(j)}$ for some $a_j\in\RR$.
   \end{proposition}
   \begin{proof}
@@ -1004,9 +1004,6 @@
     where in the last inequality we have used that $\norm{\widehat{g}}_\infty\leq \norm{g}_1$.
   \end{proof}
   \subsubsection{Tempered distributions}
-  \begin{definition}
-    Let $(\varphi_n),\varphi\in\mathcal{S}(\RR^d)$. We say that $(\varphi_n)\overset{\mathcal{S}}{\longrightarrow}\varphi$ if $\norm{\varphi_n-\varphi}_{\alpha,\beta}\to 0$ for all $\alpha,\beta\in{(\NN\cup\{0\})}^d$.
-  \end{definition}
   \begin{definition}
     A \emph{tempered distribution} is a linear and continuous operator $T:\mathcal{S}(\RR^d)\to \CC$. The space of all tempered distributions is denoted by $\mathcal{S}^*(\RR^d)$.
   \end{definition}
@@ -1108,19 +1105,6 @@
       =\langle \widehat{T},\F^{-1}(\tilde{\psi})\varphi\rangle=\langle \widehat{T},\widehat{\psi}\varphi\rangle=\langle \widehat{T}\widehat{\psi},\varphi\rangle
     \end{multline*}
   \end{proof}
-  \begin{lemma}\label{HA:xT_equal_0}
-    Let $T\in \mathcal{D}*(\RR)$ be such that $x T =0$. Then, $T=C\delta$ for some $C\in \RR$.
-  \end{lemma}
-  \begin{proof}
-    Let $\varphi\in \mathcal{D}(\RR)$ be such that $\varphi(0)=0$. Then, $\phi:=\frac{\varphi}{x}\in \mathcal{D}(\RR)$ and:
-    $$
-      \langle T,\varphi\rangle=\langle T,x\phi\rangle=\langle xT,\phi\rangle=0
-    $$
-    Now consider $\omega\in \mathcal{D}(\RR)$ such that $\omega(0)=1$ and $\varphi\in\mathcal{D}(\RR)$ arbitrary. Then, $\phi:=\varphi-\omega\varphi(0)\in \mathcal{D}(\RR)$ and satisfies $\phi(0)=0$. Hence, $\langle T, \phi\rangle=0$ and so:
-    $$
-      \langle T,\varphi\rangle=\varphi(0)\langle T,\omega\rangle=:C\delta(\varphi)
-    $$
-  \end{proof}
   \begin{lemma}\label{HA:lemma_propdelta}
     We have that:
     \begin{enumerate}
@@ -1136,7 +1120,7 @@
     $$
       x\left(2\pi\ii \widehat{\indi{(0,\infty)}}-\pv\left(\frac{1}{x}\right)\right)=0
     $$
-    By \mcref{HA:xT_equal_0}, we get that $\widehat{\indi{(0,\infty)}}=\frac{1}{2\pi\ii}\pv\left(\frac{1}{x}\right)+C\delta_0$, for some $C\in \RR$. To find the constant change $x\to -x$ in the equation or alternatively apply the distribution to the function $\exp{-\pi x^2}$.
+    By \mcref{HA:xmT_equal_0}, we get that $\widehat{\indi{(0,\infty)}}=\frac{1}{2\pi\ii}\pv\left(\frac{1}{x}\right)+C\delta_0$, for some $C\in \RR$. To find the constant change $x\to -x$ in the equation or alternatively apply the distribution to the function $\exp{-\pi x^2}$.
   \end{proof}
   \begin{definition}
     Let $T\in \mathcal{D}^*(\RR^n)$ and $S\in \mathcal{D}^*(\RR^m)$. We define the \emph{direct product} $TS$ as the distribution in $\mathcal{D}^*(\RR^{n+m})$ given by:
@@ -1198,7 +1182,7 @@
     \end{multline*}
   \end{proof}
   \begin{corollary}\label{lem:preRiesz2}
-    Let $k\in\RR$, $n\in\NN$ with $k<n$. Then, $\frac{1}{\norm{\vf{x}}^k}\in \mathcal{S}^*(\RR^n)$ and it is homogeneous of degree $-k$. Moreover, $\F\left(\frac{1}{\norm{\vf{x}}^k}\right) = C_{k,n}\frac{1}{\norm{\vf{\xi}}^{n-s}}$ with $C_{k,n}=\frac{{(2\pi)}^{\frac{n}{2}}}{{2}^{\frac{\alpha}{2}}}\frac{\Gamma\left(\frac{n-k}{2}\right)}{\Gamma\left(\frac{k}{2}\right)}$.
+    Let $k\in\RR$, $n\in\NN$ with $k<n$. Then, $\frac{1}{\norm{\vf{x}}^k}\in \mathcal{S}^*(\RR^n)$ and it is homogeneous of degree $-k$. Moreover, $\F\left(\frac{1}{\norm{\vf{x}}^k}\right) = C_{k,n}\frac{1}{\norm{\vf{\xi}}^{n-k}}$ with $C_{k,n}=\frac{{(2\pi)}^{\frac{n}{2}}}{{2}^{\frac{\alpha}{2}}}\frac{\Gamma\left(\frac{n-k}{2}\right)}{\Gamma\left(\frac{k}{2}\right)}$.
   \end{corollary}
   \subsubsection{Differential operators over distributions}
   \begin{definition}

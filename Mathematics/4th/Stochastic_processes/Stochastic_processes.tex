@@ -1340,7 +1340,7 @@
   \begin{lemma}
     Let $X\sim N(0,\sigma^2)$. Then, $\Exp(\abs{X}^n)=C_n\sigma^n$ where:
     $$
-      C_n=\Exp(\abs{Z}^n)=\Gamma(\frac{n+1}{2})\frac{2^{n/2}}{\sqrt{\pi}}
+      C_n=\Exp(\abs{Z}^n)=\Gamma\left(\frac{n+1}{2}\right)\frac{2^{n/2}}{\sqrt{\pi}}
     $$
     and $Z\sim N(0,1)$.
   \end{lemma}
@@ -1350,11 +1350,185 @@
       \Prob(\omega\in \Omega:B_\cdot(\omega)\text{ is monotone on }[a,b])=0
     $$
   \end{proposition}
+  \begin{proof}
+    Let $A=\{\omega\in\Omega:B_\cdot(\omega)\text{ is monotone on }[a,b]\}$. Using the density and continuity of $B$ we have:
+    \begin{multline*}
+      A=\{B_s\leq B_t:\forall s,t \in\QQ, a\leq s< t\leq b\}+  \\+ \{B_s\geq B_t:\forall s,t \in\QQ, a\leq s< t\leq b\}
+    \end{multline*}
+    Hence, given $n\in\NN$ and a partition ${\{t_i\}}_{0\leq i\leq n}$ of $[a,b]$ we have:
+    \begin{multline*}
+      A\subseteq \{ B_{t_i+1} - B_{t_i}\geq 0: i=0,\ldots,n-1\}+ \\ + \{ B_{t_i+1} - B_{t_i}\leq 0: i=0,\ldots,n-1\}
+    \end{multline*}
+    Therefore, using the independence of the increments of $B$ and the symmetry of the normal distribution we have:
+    $$
+      \Prob(A)\leq 2\prod_{i=0}^{n-1} \Prob(B_{t_{i+1}}-B_{t_i}\geq 0)=2{\left(\frac{1}{2}\right)}^n\overset{n\to \infty}{\longrightarrow} 0
+    $$
+  \end{proof}
+  \begin{proposition}
+    Let $B$ be a standard Brownian motion. Then, $\forall t\geq 0$ the set
+    $$
+      A:=\left\{\omega\in\Omega:\limsup_{h\to 0}\frac{\abs{B_{t+h}(\omega)-B_t(\omega)}}{h}=+\infty\right\}
+    $$
+    which could not be in the $\sigma$-algebra, contains an event of probability $1$.
+  \end{proposition}
+  \begin{proof}
+    Note that $A\supseteq \{\omega\in\Omega:\sup_{n\in\NN}\frac{\abs{B_{t+1/n}(\omega)-B_t(\omega)}}{1/n}=+\infty\}=\bigcap_{M\geq 1} A_{M}$ where:
+    $$
+      A_M:=\left\{\omega\in\Omega:\sup_{n\in\NN}\frac{\abs{B_{t+1/n}(\omega)-B_t(\omega)}}{1/n}\geq M\right\}
+    $$
+    If we see that $\Prob(A_M)=1$ for all $M\geq 1$ we are done.
+    \begin{multline*}
+      \Prob(A_M)\geq \Prob \left(\frac{\abs{B_{t+1/n}(\omega)-B_t(\omega)}}{1/n}\geq M\right) = \\ = \Prob\left(\abs{Z}\geq \frac{M}{\sqrt{n}}\right)=2 \left(1-\Phi\left(\frac{M}{\sqrt{n}}\right)\right)\overset{n\to\infty}{\longrightarrow} 1
+    \end{multline*}
+    where $Z\sim N(0,1)$ and $\Phi$ is the cumulative distribution function of the standard normal distribution. 
+  \end{proof}
+  \begin{theorem}[Paley-Wiener-Zygmund theorem]
+    The Brownian trajectories are almost surely nowhere differentiable.
+  \end{theorem}
   \begin{figure}[H]
     \centering
     \includestandalone[mode=image|tex,width=0.75\linewidth]{Images/brownianMotion}
-    \caption{A Brownian motion simulated with 7500 increments. Observe the non-differentiability of the path.}
+    \caption{A Brownian motion simulated with 7500 increments. Observe the ``non-differentiability'' of the path.}
     \label{fig:BrownianMotion}
   \end{figure}
+  \begin{definition}
+    Let $B$ be a standard Brownian motion and $a>0$. We define:
+    $$
+      \tau_a:=\inf\{t\geq 0:B_t\geq a\}
+    $$
+    If $a<0$ we define: $$\tau_a:=\inf\{t\geq 0:B_t\leq a\}$$
+  \end{definition}
+  \begin{remark}
+    Note that if $\tau_a(\omega)<\infty$, then $B_{\tau_a(\omega)}(\omega)=a$ by the continuity of the trajectories.
+  \end{remark}
+  \begin{lemma}\label{SP:distrTauA}
+    Let $B$ be a standard Brownian motion. Then, $\forall t\geq 0$ and $a>0$:
+    $$
+      \Prob(\tau_a\leq t)=\Prob\left(\max_{0\leq s\leq t}B_s\geq a\right)=2\Prob(B_t\geq a)
+    $$
+    If $a<0$ we have:
+    $$
+      \Prob(\tau_a\leq t)=\Prob\left(\min_{0\leq s\leq t}B_s\leq a\right)=2\Prob(B_t\leq a)
+    $$
+  \end{lemma}
+  \begin{corollary}
+    Let $B$ be a standard Brownian motion and $a>0$. Then, $\Prob(\tau_a<\infty)=1$.
+  \end{corollary}
+  \begin{proof}
+    Assume $a>0$, the other case is similar. Then:
+    \begin{multline*}
+      \Prob(\tau_a<\infty)=\Prob\left(\bigcup_{n=1}^\infty\{\tau_a\leq n\}\right)=\lim_{n\to\infty}\Prob(\tau_a\leq n)=\\
+      =2\lim_{n\to\infty}\Prob(B_n\geq a)=2\lim_{n\to\infty}\left(1-\Phi\left(\frac{a}{\sqrt{n}}\right)\right)=1
+    \end{multline*}
+  \end{proof}
+  \begin{proposition}
+    Let $B$ be a standard Brownian motion. Then:
+    $$
+      \Prob\left(\sup_{t\geq 0}B_t=+\infty,\inf_{t\geq 0}B_t=-\infty\right)=1
+    $$
+  \end{proposition}
+  \begin{proof}
+    It suffices to prove only $\Prob(\sup_{t\geq 0}B_t=+\infty)=1$. Note that:
+    $$
+      \Prob\left(\sup_{t\geq 0}B_t=+\infty\right)=\Prob\left(\bigcap_{n=1}^\infty\left\{\sup_{t\geq 0}B_t\geq n\right\}\right)
+    $$
+    Let's see that all the events $A_n:=\{\sup_{t\geq 0}B_t\geq n\}$ in the intersection have probability 1:
+    \begin{multline*}
+      \Prob(A_n)\geq \Prob\left(\max_{0\leq t\leq s} B_t\geq n\right)=2\Prob(B_s\geq n)=\\=2\left(1-\Phi\left(\frac{n}{\sqrt{s}}\right)\right)\overset{s\to\infty}{\longrightarrow} 1
+    \end{multline*}
+  \end{proof}
+  \begin{corollary}
+    The Brownian trajectories have infinite zeros almost surely and they tend to infinity.
+  \end{corollary}
+  \begin{proof}
+    Let $A=\{\omega\in\Omega:B_{\cdot}(\omega)\text{ has finite zeros}\}\subseteq \bigcup_{n=1}^\infty\{\omega\in\Omega:B_{\cdot}(\omega)\text{ doesn't vanish in $[n,\infty)$}\}$. Let's see that all the events $A_n:=\{B_{\cdot}\text{ doesn't vanish in $[n,\infty)$}\}$ in the union have probability 0.
+    \begin{multline*}
+      \Prob(A_n)=\Prob(B_{\cdot}>0\text{ in $[n,\infty)$})+\Prob(B_{\cdot}<0\text{ in $[n,\infty)$})\leq\\\leq \Prob\left(\inf_{t\geq n}B_t\ne-\infty\right)+\Prob\left(\sup_{t\geq n}B_t\ne+\infty\right)=0
+    \end{multline*}
+  \end{proof}
+  \begin{corollary}
+    The Brownian trajectories pass through every point $a\in\RR$ infinitely many times almost surely.
+  \end{corollary}
+  \begin{proposition}
+    Let $B$ be a standard Brownian motion. Then, $\forall h>0$:
+    $$
+      \Prob\left(\max_{0\leq t\leq h}B_t>0,\min_{0\leq t\leq h}B_t<0\right)=1
+    $$
+  \end{proposition}
+  \begin{proof}
+    It suffices to prove $\Prob\left(\max_{0\leq t\leq h}B_t>0\right)=1$. Let $a>0$. Then:
+    \begin{multline*}
+      \Prob\left(\max_{0\leq t\leq h}B_t>0\right)\geq \Prob\left(\max_{0\leq t\leq h}B_t>a\right) =2\Prob(B_h>a)=\\=2\left(1-\Phi\left(\frac{a}{\sqrt{h}}\right)\right)\overset{a\to 0}{\longrightarrow} 1
+    \end{multline*}
+  \end{proof}
+  \begin{proposition}
+    Let $B$ be a standard Brownian motion and $a\in\RR^*$. Then, $\Exp(\tau_a)=\infty$. 
+  \end{proposition}
+\begin{proof}
+  Using the symmetry of the Brownian motion, we have:
+    $$
+      F_{\tau_a}(t)=\Prob(\tau_a\leq t) =2\Prob(B_t<-a) =\frac{2}{\sqrt{2\pi}}\int_{-\infty}^{-\frac{a}{\sqrt{t}}} e^{-\frac{x^2}{2}}\dd{x}
+    $$
+    and $F_{\tau_a}(0)=0$. An easy check of the hypothesis of \mcref{P:Fprime} shows that the density of $\tau_a$ is ${F_{\tau_a}}'$ and so:
+    $$
+      \Exp(\tau_a)=\frac{a}{\sqrt{2\pi}}\int_{0}^{\infty} \frac{e^{-\frac{a^2}{2t}}}{\sqrt{t}}\dd{t}=\infty
+    $$
+    because it diverges at $\infty$.
+\end{proof}
+\begin{definition}
+  An $n$-dimensional Brownian motion is a $d$-dimensional stochastic process $\vf{B}=(B^1,\dots,B^d)$ such that $\forall i\in\{1,\dots,d\}$, $B^i$ is a standard Brownian motion, and it is independent of the other components.
+\end{definition}
+\begin{theorem}
+  Let $\vf{B}$ be a $d$-dimensional Brownian motion. Then:
+  \begin{enumerate}
+    \item If $d=2$, then $B$ is recurrent, that is $\forall \vf{x}\in\RR^2$ and $\forall \delta>0$ $\exists (\tau_n)$ such that $\Prob(\tau_n)$
+    \item If $d\geq 3$, then $B$ is transient, that is $\forall T>0$
+  \end{enumerate}
+\end{theorem}
+\begin{theorem}[Law of the iterated logarithm]
+  Let $B$ be a standard Brownian motion. Then:
+  $$
+    \limsup_{t\to\infty}\frac{B_t}{\sqrt{2t\log\log t}}\almoste{=}\liminf_{t\to\infty}\frac{B_t}{\sqrt{2t\log\log t}}\almoste{=}1
+  $$
+\end{theorem}
+\begin{corollary}
+  Let $B$ be a standard Brownian motion. Then:
+  $$
+    \limsup_{h\to 0} \frac{B_h}{\sqrt{2h\log\log\frac{1}{h}}}\almoste{=}\liminf_{h\to 0} \frac{B_h}{\sqrt{2h\log\log\frac{1}{h}}}\almoste{=}1
+  $$
+\end{corollary}
+\begin{sproof}
+  Recall that $xB_{1/x}$ is a standard Brownian motion.
+\end{sproof}
+\begin{proposition}
+  Let $S_n=\sum_{i=1}^n X_i$ be a simple random walk with $\Prob(X_i=1)=\Prob(X_i=-1)=\frac{1}{2}$ and $B=(B_t)$ be a standard Brownian motion. We define the following sequence of stochastic processes:
+  $$
+    {Y_t^n}:=\frac{1}{\sqrt{n}}\left[S_{\floor{nt}}+(nt-\floor{nt})X_{\floor{nt}+1}\right]
+  $$ 
+  Then, $Y_t^n\overset{\mathrm{d}}{\longrightarrow} B_t$.
+\end{proposition}
+\begin{definition}[Finite-dimensional distributions]
+  Let $(\Omega, \mathcal{A}, \Prob)$ be a probability space and $X: I\times\Omega\rightarrow (E,\mathcal{E})$ be a stochastic process. The \emph{finite-dimensional distributions} of $X$ are the probability measures $\Prob_{t_1,\dots,t_n}$ defined on $(E^n,\mathcal{E}^n)$ by:
+  $$
+    \Prob_{t_1,\dots,t_n}(B):=\Prob((X_{t_1},\dots,X_{t_n})\in B)
+  $$
+  for all $B\in\mathcal{E}^n$.
+\end{definition}
+\begin{lemma}
+  Let $(\Omega, \mathcal{A}, \Prob)$ be a probability space and $X: I\times\Omega\rightarrow (E,\mathcal{E})$ be a stochastic process. Then, the finite-dimensional distributions satisfy the following \emph{consistency condition}:
+  \begin{enumerate}
+    \item For all $n\in\NN$, $t_1,\dots,t_n\in I$, $B_1,\dots,B_n\in\mathcal{E}$ and $\sigma\in\S_n$, we have: 
+    $$
+      \Prob_{t_1,\dots,t_n}(B_1\times\dots\times B_n)=\Prob_{t_{\sigma(1)},\dots,t_{\sigma(n)}}(B_{\sigma(1)}\times\dots\times B_{\sigma(n)})
+    $$
+    \item  For all $n\in\NN$, $t_1,\dots,t_n\in I$ and $B_1,\dots,B_{n-1}\in\mathcal{E}$, we have: 
+    $$
+      \Prob_{t_1,\dots,t_n}(B_1\times\dots\times B_{n-1}\times E)=\Prob_{t_1,\dots,t_{n-1}}(B_1\times\dots\times B_{n-1})
+    $$
+  \end{enumerate}
+\end{lemma}
+\begin{theorem}[Kolmogorov extension theorem]
+  Let $I$ be a set and $\{\Prob_{t_1,\dots,t_n}:n\in\NN,t_1,\ldots,t_n\in I\}$ be a family of probabilities defined on $\mathcal{B}(\RR^n)$ satisfying the consistency conditions. Then, there exists a probability space $(\Omega, \mathcal{A}, \Prob)$ and a stochastic process $X: I\times\Omega\rightarrow (\RR,\mathcal{B}(\RR))$ such that $\Prob_{t_1,\dots,t_n}$ is the finite-dimensional distribution of $X$ for all $n\in\NN$ and $t_1,\dots,t_n\in I$. 
+\end{theorem}
 \end{multicols}
 \end{document}
