@@ -6,7 +6,7 @@
 \begin{multicols}{2}[\section{Numerical calculus}]
   \subsection{Initial value problems}
   \begin{definition}
-    An initial-value problem is said to be \emph{well-posed in the Hadamard sense} (or simply \emph{well-posed}) if it has existence and uniqueness of solutions and it has continuos dependence on initial conditions and parameters.
+    An initial-value problem is said to be \emph{well-posed in the Hadamard sense} (or simply \emph{well-posed}) if it has existence and uniqueness of solutions, and if it has continuous dependence on initial conditions and parameters.
   \end{definition}
   \subsubsection{One-step methods}
   Consider the ivp
@@ -22,7 +22,7 @@
   $$\vf{x}(t)=\vf{x}_0+\int_0^t\vf{f}(t,\vf{x}(s))\dd{s}$$
   Choosing different numerical-integration methods for approximating this latter integral will lead to different methods for solving the ivp.
   \begin{definition}
-    A numerical method is called \emph{explicit} if the $n$-th iterate can be computed directly in terms of some of the previous iterates. A method is called \emph{implicit} if the $n$-th iterate depends implicitly on itself.
+    A numerical method is called \emph{explicit} if the $n$-th iterate can be computed directly in terms of some previous iterates. A method is called \emph{implicit} if the $n$-th iterate depends implicitly on itself.
   \end{definition}
   \begin{definition}
     A \emph{one-step method} $\vf\Phi$ for the approximation of \mcref{NC:ivp} can be cast in the concise form
@@ -35,7 +35,7 @@
     We define $\tau(h)$ as: $$\tau(h)=\sup_{n\geq 1}\norm{\vf\tau_n(h)}$$
     Finally, we define the \emph{global truncation error} as:
     $$\vf{e}_n=\vf{x}_n-\vf{\tilde{x}}_n$$
-    We can also define the interates $\vf{\tilde{x}}_n^{\vf{*}}$ as defined by:
+    We can also define the iterates $\vf{\tilde{x}}_n^{\vf{*}}$ as defined by:
     $$\vf{\tilde{x}}_n^{\vf{*}}=\vf{x}_{n}+h\vf\phi(t_n,\vf{x}_{n},\vf{x}_{n+1},\vf{f},h)$$
   \end{definition}
   \begin{remark}
@@ -43,7 +43,7 @@
   \end{remark}
   \begin{figure}[H]
     \centering
-    \includestandalone[mode=image|tex,width=0.7\linewidth]{Images/errors}
+    \includestandalone[mode=image|tex, width=0.7\linewidth]{Images/errors}
     \caption{Geometrical interpretation of the local and global truncation errors}
     \label{NC:errors_fig}
   \end{figure}
@@ -56,7 +56,7 @@
   \end{definition}
   \begin{figure}[H]
     \centering
-    \includestandalone[mode=image|tex,width=0.7\linewidth]{Images/euler}
+    \includestandalone[mode=image|tex, width=0.7\linewidth]{Images/euler}
     \caption{Explicit Euler method for approximating the ivp $\{x'=x, x(0)=1\}$ with different number of steps.}
     \label{NC:euler_fig}
   \end{figure}
@@ -69,25 +69,25 @@
     $$\vf{\tilde{x}}_{n+1}=\vf{\tilde{x}}_{n}+\frac{h}{2}\left(\vf{\tilde{f}}_n+\vf{f}(t_{n+1},\vf{\tilde{x}}_{n}+h\vf{\tilde{f}}_n)\right)$$
   \end{definition}
   \begin{definition}[Taylor method]
-    Consider the ivp of \mcref{NC:ivp} and suppose that $\vf{f}\in\mathcal{C}^r(\RR\times\RR^d)$. The \emph{Taylor method of order $r$} is the method constructed from the Taylor series of the solution $\vf{x}(t)$. Thus the Taylor method of order $r$ is:
+    Consider the ivp of \mcref{NC:ivp} and suppose that $\vf{f}\in\mathcal{C}^r(\RR\times\RR^d)$. The \emph{Taylor method of order $r$} is the method constructed from the Taylor series of the solution $\vf{x}(t)$. Thus, the Taylor method of order $r$ is:
     $$\vf{\tilde{x}}_{n+1}=\vf{\tilde{x}}_{n}+\sum_{k=1}^r\frac{h^k}{k!}\vf{x}_n^{(k)}$$
-    We should then substitute each unknown derivative $\vf{x}_n^{(k)}$ a function of $\vf{f}_n$.
+    We should then substitute each unknown derivative $\vf{x}_n^{(k)}$ by a function of $\vf{f}_n$.
     For example the Taylor method of order 2 would be:
     $$\vf{\tilde{x}}_{n+1}=\vf{\tilde{x}}_{n}+h\vf{\tilde{f}}_n+\frac{h^2}{2}\left(\vf{{f}}_t(t_n,\vf{\tilde{x}}_{n})+\vf{D}_2\vf{f}(\vf{\tilde{f}}_n)\right)$$
     Note that the Taylor method of order 1 is precisely the \mnameref{NC:euler}.
   \end{definition}
   \begin{definition}
-    A one-step method for the approximation of \mcref{NC:ivp} is said to be \emph{consistent} if $\displaystyle\lim_{h\to 0}\tau(h)=0$. Moreover, we say that the algorithm has \emph{order of consistency} (\emph{order of accuracy} or simply \emph{order}) $p$ if $\tau(h)=\O{h^p}$.
+    A one-step method for the approximation of \mcref{NC:ivp} is said to be \emph{consistent} if $\displaystyle\lim_{h\to 0}\tau(h)=0$. Moreover, we say that the algorithm has \emph{order of consistency} (or \emph{order of accuracy}, or simply \emph{order}) $p$ if $\tau(h)=\O{h^p}$.
   \end{definition}
   \begin{definition}
     A one-step method for the approximation of \mcref{NC:ivp} is \emph{convergent} if $$\lim_{h\to 0}\sup_{n\geq 1}\norm{\vf{e}_n}=0$$
-    Moreover, we say that the algorithm has \emph{order of convergency} $p$ if $\norm{\vf{e}_n}=\O{h^p}$.
+    Moreover, we say that the algorithm has \emph{order of convergence} $p$ if $\norm{\vf{e}_n}=\O{h^p}$.
   \end{definition}
   \begin{remark}
     Note that in a consistent method the difference equation for the method approaches the ode as the step size goes to zero, whereas in a convergent method is the solution to the difference equation that approaches the solution to the ode as the step size goes to zero.
   \end{remark}
   \begin{theorem}\label{NC:errorLipschitz}
-    Consider a consistent one-step method such that its incremental function $\vf\phi$ is Lipschitz continuous (with constant $L$) with respect to $\vf{x}$. Then:
+    Consider a consistent one-step explicit method such that its incremental function $\vf\phi$ is Lipschitz continuous (with constant $L$) with respect to $\vf{x}$. Then:
     $$\norm{\vf{e}_{n+1}}\leq \frac{\exp{L(t_{n+1}-t_0)}-1}{L}\tau(h)$$
   \end{theorem}
   \begin{proof}
@@ -107,7 +107,7 @@
     where the last inequality follows from $1+x\leq\exp{x}$.
   \end{proof}
   \begin{corollary}
-    Consider a one-step method with order of consistency $p$ such that its incremental function $\vf\phi$ is Lipschitz continuous with respect to $\vf{x}$. Then, if $t_n\leq T$ for a fixed $T\in\RR$, the accuracy of the method has also order $p$.
+    Consider a one-step method with order of consistency $p$ such that its incremental function $\vf\phi$ is Lipschitz continuous with respect to $\vf{x}$. Then, if $t_n\leq T$ for a fixed $T\in\RR$, the convergence of the method has also order $p$.
   \end{corollary}
   \begin{lemma}
     Euler method has order of consistency 1, whereas Heun method has order of consistency 2.
@@ -133,9 +133,10 @@
     Matching coefficients from \mcref{NC:heun1,NC:heun2}, we get the desired result.
   \end{proof}
   \begin{remark}
-    For a method of order $s$ (see \mcref{NC:consistencyRK}), just start with $s$ values $\vf{k}_1,\ldots,\vf{k}_s$ of the form: $$\vf{k}_i=\vf{f}(t_n+c_sh,\vf{x}_n+h(a_{s1}\vf{k}_1+\cdots+a_{i(i-1)}\vf{k}_{i-1}))$$
+    For a method of order $s$ (see \mcref{NC:consistencyRK}), just start with $r\geq s$ values $\vf{k}_1,\ldots,\vf{k}_r$ of the form: $$\vf{k}_i=\vf{f}(t_n+c_sh,\vf{x}_n+h(a_{s1}\vf{k}_1+\cdots+a_{i(i-1)}\vf{k}_{i-1}))$$
     for $i\geq 2$ and $\vf{k}_1=\vf{f}_n$, and impose:
-    $$\vf{x}_{n+1}=\vf{x}_n+h\sum_{i=1}^s b_i\vf{k}_i+\O{h^{s+1}}$$
+    $$\vf{x}_{n+1}=\vf{x}_n+h\sum_{i=1}^r b_i\vf{k}_i+\O{h^{s+1}}$$
+    There are tables that determine the smallest $r$ necessary for a given order $s$ (see \mcref{NC:stages-orderRK}).
   \end{remark}
   \subsubsection{Runge-Kutta methods}
   \begin{definition}
@@ -151,7 +152,7 @@
                  & $\transpose{\vf{b}}$
       \end{tabular}
     \end{center}
-    to summarize the information about the method. The method is explicit if $a_{ij}=0$ $\forall j\geq i$. Otherwise it is implicit.
+    to summarize the information about the method. The method is explicit if $a_{ij}=0$ $\forall j\geq i$. Otherwise, it is implicit.
   \end{definition}
   \begin{lemma}\label{NC:consistencyRK}
     A Runge-Kutta method is consistent if and only if $\sum_{i=1}^sb_i=1$. If moreover, $\sum_{i=1}^sb_ic_i=\frac{1}{2}$, then it has order of consistency 2. And if the conditions $\sum_{i=1}^sb_i{c_i}^2=\frac{1}{3}$ and $\sum_{i=1}^sb_i\sum_{j=1}^sa_{ij}c_j=\frac{1}{6}$ are also satisfied, then the consistency is of order 3.
@@ -164,7 +165,7 @@
       \vf{x}''  & =\vf{f}_t+\vf{f}_{\vf{x}}\vf{f}=:\vf{F}                                                                                                         \\
       \vf{x}''' & =\vf{f}_{tt}+2\vf{f}_{\vf{x}t}\vf{f}+{\vf{f}_{\vf{xx}}}\vf{f}^2+\vf{f}_{\vf{x}}(\vf{f}_t+{\vf{f}_{\vf{x}}}\vf{f})=:\vf{G}+\vf{f}_{\vf{x}}\vf{F}
     \end{align*}
-    Note that here $\vf{f}_{\vf{xx}}\in\mathcal{L}(\RR^d,\mathcal{L}(\RR^d,\RR^d))$. That is, is a vector of matrices. And the vector product ${\vf{f}_{\vf{xx}}}\vf{f}^2$ is do it ${(\vf{f}_{\vf{xx}})}_i\vf{f}$, for each $i=1,\ldots,d$, which result in $d$-column vectors that form a matrix that gets multiplied by $\vf{f}$.
+    Note that here $\vf{f}_{\vf{xx}}\in\mathcal{L}(\RR^d,\mathcal{L}(\RR^d,\RR^d))$. That is, is a vector of matrices. And the vector product ${\vf{f}_{\vf{xx}}}\vf{f}^2$ is done as follows: ${(\vf{f}_{\vf{xx}})}_i\vf{f}$, for each $i=1,\ldots,d$, which result in $d$-column vectors that form a matrix that gets multiplied by $\vf{f}$.
     And on the other hand:
     \begin{align*}
       \begin{split}
@@ -186,7 +187,7 @@
   \begin{table}[H]
     \centering
     \begin{tabular}{c|cccccccc}
-      order & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8  \\
+      Order & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8  \\
       \hline
       $s$   & 1 & 2 & 3 & 4 & 6 & 7 & 9 & 11
     \end{tabular}
@@ -197,7 +198,7 @@
   \begin{theorem}\label{NC:errorControl}
     Let $\vf{f}:[t_0,t_n]\times\RR^d\rightarrow\RR^d$ be a function of class $\mathcal{C}^{N+1}$ with respect to the second variable and let $\vf{\tilde{x}}(t)$ be the numerical solution to the ivp \mcref{NC:ivp} obtained by a one-step method of order $p\leq N$ with step-size $h$. Then, $\vf{\tilde{x}}(t)$ has an asymptotic expansion of:
     $$\vf{\tilde{x}}(t)=\vf{x}(t)+\vf{e}_p(t)h^p+\cdots+\vf{e}_N(t)h^N+E_{N+1}(t,h)h^{N+1}$$
-    with $\vf{e}_k(t_0)=0$ $\forall k\geq p$. This is valid $\forall t\in[t_0,t_n]$ and all $h>0$. Moreover the functions $\vf{e}_k$ are differentiable and independent of $h$ and $\norm{E_{N+1}(t,\cdot)}_\infty<\infty$ $\forall t\in[t_0,t_n]$.
+    with $\vf{e}_k(t_0)=0$ $\forall k\geq p$. This is valid $\forall t\in[t_0,t_n]$ and all $h>0$. Moreover, the functions $\vf{e}_k$ are differentiable and independent of $h$ and $\norm{E_{N+1}(t,\cdot)}_\infty<\infty$ $\forall t\in[t_0,t_n]$.
   \end{theorem}
   % \begin{proof}
   %   In order to simplify the notation, we will only prove it for $N=p+1$. Let $\vf{\phi}$ be the incremental function. Since the method is of order $p\leq N$, we have:
@@ -230,11 +231,11 @@
       \vf{x}(t;h)   & =\vf{x}(t)+\vf{e}_p(t)h^p+\O{h^{p+1}}                          \\
       \vf{x}(t;h/2) & =\vf{x}(t)+\vf{e}_p(t){\left(\frac{h}{2}\right)}^p+\O{h^{p+1}}
     \end{align*}
-    Substracting the two equations we have:
+    Subtracting the two equations we have:
     $$\vf{e}_p(t){\left(\frac{h}{2}\right)}^p=\frac{\vf{\tilde{x}}(t;h)-\vf{\tilde{x}}(t;h/2)}{2^p-1}+\O{h^{p+1}}$$
   \end{proof}
   \begin{theorem}[Runge-Kutta-Fehlberg method]
-    Consider two RK methods of orders $p$ and $p+1$ with incremental functions $\vf{\hat\phi}$ and $\vf{\phi}$ respectively such that their Butcher tableaus have the same $(a_{ij})$ coefficients (and therefore the same $(c_{ij})$ coefficients):
+    Consider two explicit RK methods of orders $p$ and $p+1$ with incremental functions $\vf{\hat\phi}$ and $\vf{\phi}$ respectively such that their Butcher tableaus have the same $(a_{ij})$ coefficients (and therefore the same $(c_{ij})$ coefficients):
     \begin{center}
       \renewcommand{\arraystretch}{1.25}
       \begin{tabular}{c|c}
@@ -245,7 +246,7 @@
       \end{tabular}
     \end{center}
     These methods $\vf{\phi}$ and $\vf{\hat\phi}$ are called \emph{embedded methods}\footnote{Usually the notation $\mathrm{RK}p(q)s$ is used to refer for a method of order $p$ with an embedded method of order $q< p$ and a total of $s$ stages.}. Denote by $\vf{\tilde{x}}$ and $\vf{\hat{x}}$ the numerical solutions using the respective incremental functions.
-    Then, given a tolerance $\epsilon$ and a older step-size $h$, we would like to choose a new step size $h_\mathrm{new}$ for which our approximate solutions differ no more than $\epsilon$ between them. At the time $t_n$ we have:
+    Then, given a tolerance $\epsilon$ and an older step-size $h$, we would like to choose a new step size $h_\mathrm{new}$ for which our approximate solutions differ no more than $\epsilon$ between them. At the time $t_n$ we have:
     \begin{align*}
       \vf{\tilde{x}}_{n+1} & =\vf{\tilde{x}}_n+h\vf{\phi}(t_n,\vf{\tilde{x}}_n,\vf{f},h)   \\
       \vf{\hat{x}}_{n+1}   & =\vf{\tilde{x}}_n+h\vf{\hat\phi}(t_n,\vf{\hat{x}}_n,\vf{f},h)
@@ -254,26 +255,26 @@
     \begin{equation}\label{NC:RFF}
       h_{\mathrm{new}}\simeq h\sqrt[p+1]{\frac{\epsilon}{\norm{\vf{\hat{x}}(t_n+h)-\vf{\tilde{x}}(t_n+h)}}}
     \end{equation}
-    If this new step-size was not successful, i.e. we have $$\norm{\vf{\hat{x}}(t_{n+1}+h_\mathrm{new})-\vf{\tilde{x}}(t_{n+1}+h_\mathrm{new})}>\epsilon$$ we will have to repeat the last step with an another step-size $h_{\mathrm{new}}^*<h_{\mathrm{new}}$.
+    If this new step-size was not successful, i.e. we have $$\norm{\vf{\hat{x}}(t_{n+1}+h_\mathrm{new})-\vf{\tilde{x}}(t_{n+1}+h_\mathrm{new})}>\epsilon$$ we will have to repeat the last step with another step-size $h_{\mathrm{new}}^*<h_{\mathrm{new}}$.
   \end{theorem}
   \begin{proof}
     We assume that the $n$-th iteration was successful, i.e.:
     $$\norm{\vf{\hat{x}}(t_n+h)-\vf{\tilde{x}}(t_n+h)}\leq\epsilon$$
     From the hypothesis and \mcref{NC:errorControl} we have:
     $$\norm{\vf{\hat{x}}(t_n+h)-\vf{\tilde{x}}(t_n+h)}\leq \vf{c}(\vf{x}(t_n))h^{p+1}$$
-    Moreover, up to errors of first order, we have $\vf{c}(\vf{x}(t_n))\approx\vf{c}(\vf{x}(t_{n}+h))$. Finally imposing
+    Moreover, up to errors of first order, we have $\vf{c}(\vf{x}(t_n))\approx\vf{c}(\vf{x}(t_{n}+h))$. Finally, imposing
     $$\norm{\vf{c}(\vf{x}(t_{n}+h)){h_\mathrm{new}}^{p+1}}\lesssim\epsilon$$
     yields to:
     $$\norm{\vf{\hat{x}}(t_n+h)-\vf{\tilde{x}}(t_n+h)}{\left(\frac{h_{\mathrm{new}}}{h}\right)}^{p+1}\lesssim\epsilon$$
   \end{proof}
   \begin{remark}
-    Note that there exist RK embedded methods by the following argument. Start with a RK method of order $p+1$ that has $s$ stages. Then we can construct a RK method of order $p$ with $s$ stages by copying the coefficients $\vf{A}$ and $\vf{c}$ and adjusting the coefficients $\vf{b}$ in a proper way to make it ``less'' consistent.
+    Note that there exist RK embedded methods by the following argument. Start with a RK method of order $p+1$ that has $s$ stages. Then we can construct a RK method of order $p$ with $s$ stages by copying the coefficients $\vf{A}$ and $\vf{c}$ and adjusting the coefficients $\vf{b}$ properly to make it ``less'' consistent.
   \end{remark}
   \begin{remark}
-    In practise in order to avoid many unsuccessful steps, instead of the new step in \mcref{NC:RFF} we use the following:
+    In practice in order to avoid many unsuccessful steps, instead of the new step in \mcref{NC:RFF} we use the following:
     $$h_{\mathrm{new}}\simeq\alpha h\sqrt[p+1]{\frac{\epsilon}{\norm{\vf{\hat{x}}(t_n+h)-\vf{\tilde{x}}(t_n+h)}}}$$
     with $\alpha\simeq 0.9$.
-    Furthermore, in order to avoid rapid oscillations of the stepsize, $h$ should not, however, be changed by more than a factor of 2 to 5 from one step to the next.
+    Furthermore, in order to avoid rapid oscillations of the step-size, $h$ should not, however, be changed by more than a factor of 2 to 5 from one step to the next.
   \end{remark}
   \subsubsection{Stability of Runge-Kutta methods}
   \begin{definition}
@@ -281,20 +282,20 @@
     $$
       \tilde{y}_{n+1}=g(h\lambda)\tilde{y}_n
     $$
-    for some function $g:\RR\rightarrow\RR$. This function is called \emph{stability function}. Given $h$ and $\lambda$, the method is said to be \emph{stable} if $\abs{g(h\lambda)}\leq 1$ and \emph{absolutely stable} if $\abs{g(h\lambda)}< 1$. Given $\lambda<0$, the method is said to be \emph{conditionally absolutely stable} for a fixed $h$ if there exists a function $\Lambda(\lambda):\CC\to\RR_{>0}$ such that $g(h\lambda)<1\iff h<\Lambda(\lambda)$. If the condition $g(h \lambda)<1$ holds $\forall h\in\RR_{>0}$, we say that the method is \emph{unconditionally absolutely stable}. If $\abs{g(h\lambda)}> 1$, the method is said to be \emph{unstable}.
+    for some function $g:\RR\rightarrow\RR$. This function is called \emph{stability function}. Given $h$ and $\lambda$, the method is said to be \emph{stable} if $\abs{g(h\lambda)}\leq 1$ and \emph{absolutely stable} if $\abs{g(h\lambda)}< 1$.
   \end{definition}
   \begin{definition}
     Consider a RK method with stability function $g$. We define the \emph{stability region} of the method as the set:
     $$
       \mathcal{A}:=\{z\in\CC:\abs{g(z)}< 1\}
     $$
-    We say that the method is \emph{A-stable} if $\{\Re(z)<0\}\subseteq \mathcal{A}$.
+    We say that the method is \emph{A-stable} (or \emph{unconditionally absolutely stable}) if $\{\Re(z)<0\}\subseteq \mathcal{A}$. Otherwise, we say that the method is \emph{conditionally absolutely stable}
   \end{definition}
   \begin{remark}
-    The motivation behind this definition of stability is on the \emph{stiff equations}, which are differential equations for which certain numerical methods for solving the equation are numerically unstable, unless the step size is taken to be extremely small. A-stable methods do not exhibit the instability problems.
+    The motivation behind this definition of stability is on the \emph{stiff equations}, which are differential equations for which certain numerical methods for solving the equation are numerically unstable, unless the step size is taken extremely small. A-stable methods do not exhibit these instability problems.
   \end{remark}
   \begin{theorem}[Lax theorem]
-    Consider a RK consistent and stable method. Then, the method is convergent.
+    Consider a consistent and stable RK method. Then, the method is convergent.
   \end{theorem}
   \begin{proof}
     We will prove it only for the \emph{test problem} $y'=\lambda y$. We have:
@@ -302,7 +303,7 @@
       e_{n+1}={y}_{n+1}-{\tilde{y}}_{n+1}={y}_{n+1}-g(h\lambda){\tilde{y}}_n=\\
       ={y}_{n+1}-g(h\lambda)({y}_n-e_n)=h{\tau}_n(h)+g(h\lambda)e_n
     \end{multline*}
-    Iterating the proces and taking norms we have:
+    Iterating the process and taking norms we have:
     $$
       \abs{{e}_n}\leq\sum_{j=0}^n{\abs{g(h\lambda)}}^jh\abs{{\tau}_{n-j}(h)}\leq nh\tau(h)\overset{h\to 0}{\longrightarrow}0
     $$
@@ -317,10 +318,10 @@
     \begin{equation}\label{NC:multistep}
       \sum_{j=0}^k\alpha_j\vf{\tilde{y}}_{n+j}=h\sum_{j=0}^{k}\beta_j\vf{\tilde{f}}_{n+j}
     \end{equation}
-    that computes the $(n+k)$-th iterate from the previous $k$ iterates. Here $\alpha_j,\beta_j\in\mathbb{R}$ are such that $\alpha_k\ne 0$ and ${\alpha_0}^2+{\beta_0}^2\ne 0$. Observe that we need $k$ initial values in order to use the method. Finally note that if $\beta_k=0$ then the method is explicit.
+    that computes the $(n+k)$-th iterate from the previous $k$ iterates. Here $\alpha_j,\beta_j\in\mathbb{R}$ are such that $\alpha_k\ne 0$ and ${\alpha_0}^2+{\beta_0}^2\ne 0$. Observe that we need $k$ initial values in order to use the method. Finally, note that if $\beta_k=0$ then the method is explicit.
   \end{definition}
   \begin{remark}
-    Since in practise we only have one initial value, we can use a one-step method to compute the first $k$ iterates and then use the $k$-step method.
+    Since in practice we only have one initial value, we can use a one-step method to compute the first $k$ iterates and then use the $k$-step method.
   \end{remark}
   \begin{definition}
     Consider the multistep method of \mcref{NC:multistep}. We define the \emph{first and second characteristic polynomials} of the method as:
@@ -341,16 +342,14 @@
     Consider the ivp of \mcref{NC:ivp} and suppose that $\vf{f}$ is Lipschitz continuous. Then, a linear $k$-step method is zero-stable if and only if it satisfies the root condition.
   \end{theorem}
   \begin{remark}
-    This theorem implies that zero-stability of a multi-step method can be determined by merely considering its behavior when applied to the trivial differential equation $y'=0$. It is for this reason that it is called \textit{zero}-stability.
+    This theorem implies that zero-stability of a multistep method can be determined by merely considering its behavior when applied to the trivial differential equation $y'=0$. It is for this reason that it is called \textit{zero}-stability.
   \end{remark}
   \begin{definition}[Adams method]
     Consider the ivp of \mcref{NC:ivp}. The \emph{Adams method} is a linear multistep method of the form:
     \begin{equation}\label{NC:Adams}
       \vf{\tilde{y}}_{n+k}=\vf{\tilde{y}}_{n+k-1}+h\sum_{j=0}^{k}\beta_j\vf{\tilde{f}}_{n+j}
     \end{equation}
-    If $\beta_{k}=0$ then the method is explicit and it is called \emph{Adams-Bashforth method}. If $\beta_{k}\ne 0$ then the method is implicit and it is called \emph{Adams-Moulton method}.
-
-    The coefficients $\beta_j$ are found by integrating the Lagrange interpolating polynomial between $t_{n+k-1}$ and $t_{n+k}$ constructed from the nodes $(t_{n+j},\vf{\tilde{f}}_{n+j})$ for $j=0,\ldots,k-1$, for the Adams-Bashforth method, and for $j=0,\ldots,k$ for the Adams-Moulton method. That is, the respective incremental functions are given by:
+    If $\beta_{k}=0$ then the method is explicit, and it is called \emph{Adams-Bashforth method}. If $\beta_{k}\ne 0$ then the method is implicit, and it is called \emph{Adams-Moulton method}. The coefficients $\beta_j$ are found by integrating the Lagrange interpolating polynomial between $t_{n+k-1}$ and $t_{n+k}$ constructed from the nodes $(t_{n+j},\vf{\tilde{f}}_{n+j})$ for $j=0,\ldots,k-1$, for the Adams-Bashforth method, and for $j=0,\ldots,k$ for the Adams-Moulton method. That is, the respective incremental functions are given by:
     \begin{align*}
       \vf\phi_\mathrm{AB} & =\int_{t_{n+k-1}}^{t_{n+k}}\sum_{j=0}^{k-1}\vf{f}_{n+j}\prod_{\substack{i=0 \\i\ne j}}^{k-1}\frac{t-t_{n+i}}{t_{n+j}-t_{n+i}}\dd{t}\\
       \vf\phi_\mathrm{AM} & =\int_{t_{n+k-1}}^{t_{n+k}}\sum_{j=0}^{k}\vf{f}_{n+j}\prod_{\substack{i=0   \\i\ne j}}^{k}\frac{t-t_{n+i}}{t_{n+j}-t_{n+i}}\dd{t}
@@ -379,20 +378,21 @@
     We say that the method is \emph{consistent} if $\displaystyle\lim_{h\to 0}\tau(h)=0$. Moreover, we say that the algorithm has \emph{order of consistency} or \emph{order of accuracy} $p$ if $\tau(h)=\O{h^p}$.
   \end{definition}
   \begin{remark}
-    The global error of the method and the convergency of it are the same as in the one-step case.
+    The global error of the method and the convergence of it are the same as in the one-step case.
   \end{remark}
   \begin{proposition}
     The Adams-Bashforth $k$-step method has order of consistency $k$, whereas the Adams-Moulton method has order of consistency $k+1$.
   \end{proposition}
   \begin{theorem}
-    A necessary condition for the convergence of the linear multi-step method of \mcref{NC:multistep} is that it has to be zero-stable and consistent.
+    A necessary condition for the convergence of the linear multistep method of \mcref{NC:multistep} is that it has to be zero-stable and consistent.
   \end{theorem}
   \begin{theorem}[Dahlquist's theorem]
-    Let $\vf{f}$ be a Lipschitz continuous function and consider the multistep method of \mcref{NC:multistep}. Suppose the method is consistent. Then, the method is zero-stable if and only if it is convergent. Moreover if the solution $\vf{y}$ is of class $\mathcal{C}^{p+1}$ and the consistency error is $\O{h^p}$, then the global error is $\O{h^{p}}$.
+    Let $\vf{f}$ be a Lipschitz continuous function and consider the multistep method of \mcref{NC:multistep}. Suppose the method is consistent. Then, the method is zero-stable if and only if it is convergent. Moreover, if the solution $\vf{y}$ is of class $\mathcal{C}^{p+1}$ and the consistency error is $\O{h^p}$, then the global error is $\O{h^{p}}$.
   \end{theorem}
-  \subsection{Non-linear systems of equations}
+  \subsection{Nonlinear systems of equations}
+  \subsubsection{Newton method}
   \begin{definition}[Newton method]
-    Let $\vf{F}:\RR^n\rightarrow\RR^n$ be a differentiable field. We would like to find the solutions of $\vf{F}(\vf{x})=\vf{0}$.
+    Let $\vf{F}:\RR^d\rightarrow\RR^d$ be a differentiable field. We would like to find the solutions of $\vf{F}(\vf{x})=\vf{0}$.
     The \emph{Newton method} is a recurrence of the form:
     \begin{equation*}
       \vf{x}_{n+1}=\vf{x}_n-\vf{DF}^{-1}(\vf{x}_n)\vf{F}(\vf{x}_n)
@@ -404,11 +404,82 @@
     $$
     for the unknown $\vf{x}_{n+1}-\vf{x}_n$.
   \end{definition}
+  \begin{lemma}\label{NC:preNewton}
+    Let $C\subseteq \RR^d$ be an open convex set and $\vf{F}\in\mathcal{C}^0(C)$ be such that $\vf{DF}(\vf{x})$ exists and satisfies:
+    $$
+      \norm{\vf{DF}(\vf{x})-\vf{DF}(\vf{y})}\leq L\norm{\vf{x}-\vf{y}}
+    $$
+    for some $L>0$ and for all $\vf{x},\vf{y}\in C$. Then, $\forall \vf{x}, \vf{y}\in C$ we have:
+    $$
+      \norm{\vf{F}(\vf{x}) - \vf{F}(\vf{y}) - \vf{DF}(\vf{y})(\vf{x}-\vf{y})}\leq \frac{L}{2}\norm{\vf{x}-\vf{y}}^2
+    $$
+  \end{lemma}
+  \begin{proof}
+    Consider $\vf\varphi:[0,1]\rightarrow\RR^d$ defined by $\vf\varphi(t)=\vf{F}(\vf{y} + t(\vf{x}-\vf{y}))$. Then, $\vf\varphi$ is differentiable,
+    $$
+      \vf\varphi'(t) = \vf{DF}(\vf{y} + t(\vf{x}-\vf{y}))(\vf{x}-\vf{y})
+    $$
+    and satisfies:
+    \begin{align*}
+      \norm{\vf\varphi'(t) -\vf\varphi(0)} & \leq \norm{\vf{DF}(\vf{y}+t(\vf{x}-\vf{y})) - \vf{DF}(\vf{y})}\norm{\vf{x}-\vf{y}} \\
+                                           & \leq Lt\norm{\vf{x}-\vf{y}}^2
+    \end{align*}
+    Moreover:
+    \begin{multline*}
+      \Delta :=\vf{F}(x) - \vf{F}(y) - \vf{DF}(\vf{y})(\vf{x}-\vf{y})= \\
+      =\vf\varphi(1)-\vf\varphi(0)-\vf\varphi'(0)=\int_0^1\vf\varphi'(t)-\vf\varphi'(0)\dd{t}
+    \end{multline*}
+    Therefore:
+    $$\norm{\Delta}\leq \int_0^1Lt \norm{\vf{x}-\vf{y}}^2\dd{t}=\frac{L}{2}\norm{\vf{x}-\vf{y}}^2
+    $$
+  \end{proof}
+  \begin{theorem}
+    Let $C\subseteq \RR^d$ be an open convex set and $\vf{F}\in\mathcal{C}^1(C)$ with a zero $\vf{x}^*\in C$. Suppose that $\vf{DF}(\vf{x}^*)$ is invertible and satisfies:
+    \begin{enumerate}
+      \item $\norm{{\vf{DF}}^{-1}(\vf{x}^*)}\leq M$ for some $M>0$.
+      \item $\norm{\vf{DF}(\vf{x}) - \vf{DF}(\vf{y})}\leq L\norm{\vf{x}-\vf{y}}$ for some $L>0$ and for all $\vf{x},\vf{y}\in B(\vf{x}^*,R)$, for some $R$.
+    \end{enumerate}
+    Then, $\exists r>0$ such that $\forall \vf{x}_0\in B(\vf{x}^*,r)$, the Newton method sequence is well-defined and converges quadratically (at least) to $\vf{x}^*$.
+  \end{theorem}
+  \begin{proof}
+    Let $r:=\min\left(R,\frac{1}{2ML}\right)$. We first prove that if $\vf{y}\in B(\vf{x}^*,r)$, then $\vf{DF}(\vf{y})$ is invertible. It's clear that for any matrix $\vf{A}$, we have $\rho(\vf{A})\leq\norm{\vf{A}}$. Moreover, from \mcref{NM:A-I_sum}, if $\rho(\vf{A})<1$, then $\vf{I}+\vf{A}$ is invertible and $\norm{{(\vf{I}+\vf{A})}^{-1}}\leq\frac{1}{1-\norm{\vf{A}}}$. With that in mind, if $\vf{A}:={\vf{DF}}^{-1}(\vf{x}^*)\vf{DF}(\vf{y}) -\vf{I}_d$, then:
+    \begin{multline*}
+      \rho(\vf{A})\leq\norm{\vf{A}}\leq\norm{{\vf{DF}}^{-1}(\vf{x}^*)}\norm{\vf{DF}(\vf{y})-\vf{DF}(\vf{x}^*)}\leq \\
+      \leq MLr\leq\frac{1}{2}
+    \end{multline*}
+    Hence, $\vf{A}+\vf{I}_d={\vf{DF}}^{-1}(\vf{x}^*)\vf{DF}(\vf{y})$ is invertible and therefore so is $\vf{DF}(\vf{y})$. Furthermore:
+    \begin{equation}\label{NC:insideNew}
+      \norm{{\vf{DF}}^{-1}(\vf{y})} \leq \frac{\norm{{\vf{DF}}^{-1}(\vf{x}^*)}}{1 - \norm{\vf{A}}}\leq  2M
+    \end{equation}
+    Now we prove by induction that any term $\vf{x}_n$ on the sequence is well-defined and satisfies:
+    $$
+      \norm{\vf{x}_{n+1}-\vf{x}^*}\leq ML\norm{\vf{x}_n-\vf{x}^*}^2
+    $$
+    By hypothesis, we know that $\vf{x}_0\in B(\vf{x}^*,r)$, so $\vf{DF}(\vf{x}_0)$ is invertible and $\vf{x}_1=\vf{x}_0-\vf{DF}^{-1}(\vf{x}_0)\vf{F}(\vf{x}_0)$ is well-defined. Moreover:
+    \begin{align*}
+      \norm{\vf{x}_1-\vf{x}^*} & = \norm{\vf{x}_0-\vf{x}^*-\vf{DF}^{-1}(\vf{x}_0)[\vf{F}(\vf{x}_0) - \vf{F}(\vf{x}^*)]} \\
+      \begin{split}
+        & =\left\|\vf{DF}^{-1}(\vf{x}_0)[\vf{F}(\vf{x}^*)-\vf{F}(\vf{x}_0)-\right.\\
+            &\hspace{3.5cm}-\left.\vf{DF}(\vf{x}_0)(\vf{x}^*-\vf{x}_0)]\right\| \\
+      \end{split}                           \\
+                               & \leq 2M \frac{L}{2} \norm{\vf{x}_0-\vf{x}^*}^2                                         \\
+                               & \leq \frac{\norm{\vf{x}_0-\vf{x}^*}}{2}
+    \end{align*}
+    where in the penultimate step we used \mcref{NC:insideNew,NC:preNewton}. Thus, $\vf{x}_1\in B(\vf{x}^*,r)$ and so $\vf{x}_2$ is well-defined. Recursively, we prove that $\vf{x}_{n+1}$ is well-defined and:
+    $$
+      \norm{\vf{x}_{n+1}-\vf{x}^*}\leq \frac{\norm{\vf{x}_n-\vf{x}^*}}{2}\leq\cdots \leq \frac{\norm{\vf{x}_0-\vf{x}^*}}{2^{n+1}}\overset{n\to\infty}{\longrightarrow}0
+    $$
+    So the limit exists, and it is $\vf{x}^*$.
+  \end{proof}
+  \subsubsection{Quasi-Newton methods}
+  \begin{definition}
+    A \emph{quasi-Newton method} for finding the zero of a function $\vf{F}:\RR^d\rightarrow\RR^d$ is a method that uses an approximation $\vf{DF}_n$ of the Jacobian $\vf{DF}(\vf{x}_n)$ to compute the next iterate $\vf{x}_{n+1}$, instead of computing the Jacobian directly, as in Newton's method. Once solved the system $\vf{DF}_n\vf{y} = -\vf{F}(x_n)$, the next iterate in a quasi-Newton method is given by $\vf{x}_{n+1}=\vf{x}_n+\alpha_n\vf{y}$, where $\alpha_n$ is a \emph{damping parameter}.
+  \end{definition}
   \begin{remark}
-    Computing the Jacobian is a difficult and expensive operation. Broyden proposed a method that compute the whole Jacobian only at the first iteration and to do rank-one updates at other iterations.
+    Computing the Jacobian is a difficult and expensive operation. Broyden proposed a method that computes the whole Jacobian only at the first iteration and does rank-one updates at other iterations.
   \end{remark}
   \begin{definition}[Broyden's method]
-    Let $\vf{F}:\RR^n\rightarrow\RR^n$. The \emph{Broyden's method} is a recurrence for the Jacobian matrix of the form:
+    Let $\vf{F}:\RR^d\rightarrow\RR^d$. The \emph{Broyden's method} is \emph{secant-like method} which uses a recurrence for the Jacobian matrix of the form:
     $$
       \vf{DF}_{n+1}=\vf{DF}_n+\frac{\vf{F}_n-\vf{DF}_n\Delta\vf{x}_n}{\norm{\Delta\vf{x}_n}^2}\transpose{(\Delta\vf{x}_n)}
     $$
@@ -422,51 +493,158 @@
     $$
     where $\Delta\vf{F}_n=\vf{F}_{n+1}-\vf{F}_n$.
   \end{definition}
-  \subsubsection{Boundary value problems}
+  \begin{remark}
+    Another alternativer for the computation of the Jacobian matrix would be to use the finite difference method for each column of the matrix:
+    $$
+      \vf{DF}_{j}(\vf{x}_n)\simeq\frac{\vf{F}(\vf{x}_n+h\vf{e}_j)-\vf{F}(\vf{x}_n)}{h}
+    $$
+  \end{remark}
+  \subsubsection{Optimization}
+  \begin{definition}[Descent method]
+    Let $f:\RR^d\rightarrow\RR$ be a differentiable function. We want to find the minimum of $f$, or equivalently, the zeros of $\grad f$. A \emph{descent method} is a method for finding the minimum of $f$ using the following iteration:
+    $$
+      \vf{x}_{n+1}=\vf{x}_n+\alpha_n\vf{d}_n
+    $$
+    where $\alpha_n$ is a \emph{step size} and $\vf{d}_n$ is a \emph{descent direction}, i.e. satisfying $\transpose{\vf{d}_n}\grad f(\vf{x}_n)<0$ whenever $\grad f(\vf{x}_n)\neq\vf{0}$ and $\vf{d}_n=\vf{0}$ otherwise. Some of the most common descent methods are:
+    \begin{itemize}
+      \item \emph{Newton method}: $\vf{d}_n=-{(\vf{H}f)}^{-1}(\vf{x}_n)\grad f(\vf{x}_n)$
+      \item \emph{Inexact Newton method}: $\vf{d}_n=-{\vf{B}_n}^{-1}(\vf{x}_n)\grad f(\vf{x}_n)$, where $\vf{B}_n$ is an approximation of the Hessian matrix $\vf{H}f(\vf{x}_n)$.
+      \item \emph{Steepest descent} or \emph{Gradient descent}: $\vf{d}_n=-\grad f(\vf{x}_n)$.
+      \item \emph{Conjugate gradient method}: $\vf{d}_n=-\grad f(\vf{x}_n)+\beta_n\vf{d}_{n-1}$, where $\beta_n$ is a parameter chosen such that the directions $(\vf{d}_n)$ are pairwise conjugate by the Hessian matrix $\vf{H}f(\vf{x}_n)$, that is, $\transpose{\vf{d}_\ell}\vf{H}f(\vf{x}_n)\vf{d}_{k}=0$ for $\ell, k\leq n$.
+    \end{itemize}
+    In order to find a suitable step size $\alpha_n$, we need to solve the following optimization problem:
+    $$
+      \text{minimize } \phi(\alpha)=f(\vf{x}_n+\alpha\vf{d}_n)
+    $$
+  \end{definition}
+  \begin{remark}
+    In practice, this latter problem is solved using a \emph{line search method}. For $n\geq 1$, if $f(\vf{x}_{n+1})<f(\vf{x}_n)$, then $\alpha_n$ is accepted, and we choose $\alpha_{n+1}=\alpha_n$. Otherwise, $\alpha_{n}\leftarrow\alpha_n/2$ and we repeat the proces until the difference between $f(\vf{x}_{n+1})$ and $f(\vf{x}_n)$ is sufficiently small. We shall start with $\alpha_0$ sufficiently large.
+  \end{remark}
+  \begin{definition}[Broyden-Fletcher-Goldfarb-Shanno method]
+    Let $f:\RR^d\rightarrow\RR$ be a differentiable function. The \emph{Broyden-Fletcher-Goldfarb-Shanno method} (\emph{BFGS method}) is a quasi-Newton descent method for finding the minimum of $f$ using an approximation of the Hessian matrix. The algorithm is as follows. Start with an approximation $\vf{B}_0$ of $\vf{H}f(\vf{x}_0)$. Then, for $n\geq 0$:
+    \begin{enumerate}
+      \item Solve $\vf{B}_n\vf{d}_n=-\grad f(\vf{x}_n)$.
+      \item Perform a line search to find $\alpha_n$.
+      \item Update $\vf{x}_{n+1}=\vf{x}_n+\alpha_n\vf{d}_n$.
+      \item Define $\vf{y}_n=\grad f(\vf{x}_{n+1})-\grad f(\vf{x}_n)$.
+      \item Update $\vf{B}_{n}$:
+            $$
+              \vf{B}_{n+1}=\vf{B}_n+\frac{\vf{y}_n\transpose{\vf{y}_n}}{\alpha_n\transpose{\vf{y}_n}\vf{d}_n}-\frac{\vf{B}_n\vf{d}_n\transpose{\vf{d}_n}\transpose{\vf{B}_n}}{\transpose{\vf{d}_n}\vf{B}_n\vf{d}_n}
+            $$
+    \end{enumerate}
+  \end{definition}
+  \begin{remark}
+    There is also a variant of the BFGS method that computes recursively an approximation of the inverse of the Hessian matrix.
+  \end{remark}
+  \subsection{Boundary value problems}
+  \subsubsection{Shooting method}
   \begin{definition}[Shooting method]
     Suppose we want to solve the boundary value problem:
     \begin{equation}\label{NC:bvp}
       \begin{cases}
-        \vf{x}' =f(t, \vf{x}) \\
+        \vf{x}' =\vf{f}(t, \vf{x}) \\
         \vf{r}(\vf{x}(t_0), \vf{x}(t_1))=\vf{0}
       \end{cases}
     \end{equation}
     where $\vf{r}: \RR^n\times\RR^n\rightarrow\RR^n$ is a function that defines the boundary conditions.
-    Let $\vf{x}(t;\vf{s})$ be the solution to the ivp:
+    Let $\vf{x}(t;t_0,\vf{s})$ be the flow of the ivp:
     \begin{equation*}
       \begin{cases}
-        \vf{x}' =f(t, \vf{x}) \\
+        \vf{x}' =\vf{f}(t, \vf{x}) \\
         \vf{x}(t_0)=\vf{s}
       \end{cases}
     \end{equation*}
-    If $\vf{r}(\vf{s}, \vf{x}(t_1;\vf{s}))=0$, $\vf{x}(t,\vf{s})$ is also a solution to the boundary value problem. The \emph{shooting method} is the process of solving the initial value problem for many different values of $\vf{s}$ until one finds the solution $\vf{x}(t;\vf{s})$ that satisfies the desired boundary conditions. That is, the solutions correspond to roots of:
+    If
+    \begin{equation}\label{NC:eq_shooting_bound}
+      \vf{r}(\vf{s}, \vf{x}(t_1;t_0,\vf{s}))=0
+    \end{equation}
+    then $\vf{x}(t;t_0,\vf{s})$ will also be a solution to the boundary value problem. The \emph{shooting method} is the process of solving the initial value problem for many values of $\vf{s}$ until one finds the solution $\vf{x}(t;t_0,\vf{s})$ that satisfies the desired boundary conditions of \mcref{NC:eq_shooting_bound}. That is, the solutions $\vf{s}$ correspond to roots of:
     $$
-      \vf{F}(s):=\vf{r}(\vf{s},\vf{x}(t_1;\vf{s}))
+      \vf{F}(s):=\vf{r}(\vf{s},\vf{x}(t_1;t_0,\vf{s}))
     $$
   \end{definition}
   \begin{remark}
-    Given several initial guesses, we can use interpolation with nodes these nodes, find the root of the interpolating polynomial and use it as the new guess. Alternatively, one can use the Newton's method. or a quasi-Newton method.
+    Given several initial guesses, we can use interpolation these nodes, find the root of the interpolating polynomial and use it as the new guess. Alternatively, one can use the Newton's method or a quasi-Newton method for finding a root of $\vf{F}$.
   \end{remark}
+  \subsubsection{Multiple shooting method}
   \begin{definition}[Multiple shooting method]
-    Suppose we want to solve the problem of \mcref{NC:bvp} and consider the partition of the time-interval of integration $t_0<t_1<\cdots<t_N$. The method starts by guessing the solution $\vf{x}_k$ of the BVP at $t_k$, $k=0,\ldots,N$. Now let, $\vf{x}(t;\vf{x}_k,t_k)$ be the solution to the ivp:
+    Suppose we want to solve the problem of \mcref{NC:bvp} and consider the partition of the time-interval of integration $t_0<t_1<\cdots<t_N$. The \emph{multiple shooting method} starts by guessing the solution $\vf{s}_k$ of the BVP at $t_k$, $k=0,\ldots,N$. Now let, $\vf{x}(t;t_k,\vf{x}_k)$ be the flow of the ivp:
     \begin{equation*}
       \begin{cases}
-        \vf{x}' =f(t, \vf{x}) \\
+        \vf{x}' =\vf{f}(t, \vf{x}) \\
         \vf{x}(t_k)=\vf{x}_k
       \end{cases}
     \end{equation*}
-    All these solutions can be pieced together to form a continuous trajectory if the values $\vf{x}$ match at the grid points. Thus, solutions of the boundary value problem correspond to solutions of the following system of $N$ equations:
+    All these solutions can be pieced together to form a continuous trajectory if the functions $\vf{x}(t;t_k,\vf{s}_k)$ match at the grid points $t_1, \ldots, t_{N-1}$. Thus, solutions of the boundary value problem correspond to solutions of the following system of $N$ equations:
     $$
       \begin{cases}
-        \vf{x}(t_1;\vf{x}_0,t_0)=\vf{x}_1 \\
+        \vf{x}(t_1;t_0,\vf{s}_0)=\vf{s}_1 \\
         \vdots                            \\
-        \vf{x}(t_N;\vf{x}_{N-1},t_{N-1})=\vf{x}_N
+        \vf{x}(t_N;t_{N-1},\vf{s}_{N-1})=\vf{s}_N
       \end{cases}
     $$
   \end{definition}
+  \subsubsection{Finite difference method}
+  \begin{definition}
+    Suppose we want to solve the BVP:
+    \begin{equation}\label{NC:eq_finitediff}
+      \begin{cases}
+        x'' + \lambda(t) x'+\mu(t) x=f(t, x) \\
+        x(a)=\alpha                          \\
+        x(b)=\beta
+      \end{cases}
+    \end{equation}
+    Consider an equally-spaced partition of the time-interval of integration $t_n= t_0+kn$, $k=0,\ldots,N$, with $t_0=a$ and $t_N=b$. The \emph{finite difference method} starts by approximating the derivatives of $x$ by finite differences (usually centered derivatives). For example, the centered derivatives of orders $1$ and $2$ are:
+    $$
+      x'(t_n)\simeq\frac{x_{n+1}-x_{n-1}}{2h}\qquad x''(t_n)\simeq\frac{x_{n+1}-2x_n+x_{n-1}}{h^2}
+    $$
+    with error terms $\norm{x^{(3)}}_\infty\frac{h^2}{6}$ and $\norm{x^{(4)}}_\infty \frac{h^2}{12}$, respectively, where $x_n:=x(t_n)$. We then solve the resulting iterative system of equations
+    $$
+      \begin{cases}
+        \displaystyle\frac{x_{n+1}-2x_n+x_{n-1}}{h^2} \!+\! \lambda_n \frac{x_{n+1}-x_{n-1}}{2h}\!+\!\mu_n x_n\!=\!f(t_n, x_n) \\
+        x_0=\alpha                                                                                                             \\
+        x_N=\beta
+      \end{cases}
+    $$
+    which can be concise in a matrix form:
+    \begin{multline*}
+      % \vf{Au}:=\\
+      \begin{pmatrix}
+        -2+M   & 1+ L   & 0      & \cdots & 0      \\
+        1-L    & -2+M   & 1+L    & \cdots & 0      \\
+        0      & 1-L    & -2+M   & \cdots & \vdots \\
+        \vdots & \ddots & \ddots & \ddots & 0      \\
+        0      & \cdots & 0      & 1-L    & -2+M   \\
+      \end{pmatrix}\cdot\\\cdot\begin{pmatrix}
+        x_1 \\ x_2 \\ x_3 \\ \vdots \\ x_{N-1}
+      \end{pmatrix}=
+      \begin{pmatrix}
+        h^2f(t_1, x_1)-\alpha\left(1-L\right) \\ h^2f(t_2, x_2)  \\ \vdots\\ h^2f(t_{N-2}, x_{N-2}) \\ h^2f(t_{N-1}, x_{N-1})-\beta\left(1+L\right)
+      \end{pmatrix}
+    \end{multline*}
+    where $L:=\frac{\lambda_n h}{2}$, $M:=\mu_n h^2$, $\lambda_n:=\lambda(t_n)$ and $\mu_n:=\mu(t_n)$.
+  \end{definition}
+  % \begin{theorem}
+  %   Consider the BVP:
+  %   \begin{equation*}
+  %     \begin{cases}
+  %       x'' +\mu(t) x=f(t, x) \\
+  %       x(a)=\alpha           \\
+  %       x(b)=\beta
+  %     \end{cases}
+  %   \end{equation*}
+  %   Let $\vf{u} :=(x_1, \ldots, x_{N-1})$ be the solution of the finite difference method when considering a partition of $[a,b]$ with $N$ intervals. Then, for all $n=0,\ldots,N$:
+  %   $$
+  %     \abs{x(t_n)-x_n}\leq\frac{Mh^2}{24}(t_n-a)(b-t_n)
+  %   $$
+
+  % \end{theorem}
+  % \begin{proof}
+
+  % \end{proof}
   \subsection{Numerical linear algebra}
-  \subsubsection{Singular values}
-  \begin{lemma}
+  \subsubsection{Singular value decomposition}
+  \begin{lemma}\label{NC:lemma_eigenvalues}
     Let $\vf{A}\in\mathcal{M}_{m\times n}(\RR)$. Then, all the eigenvalues of $\transpose{\vf{A}}\vf{A}$ are non-negative.
   \end{lemma}
   \begin{proof}
@@ -476,17 +654,17 @@
     $$
   \end{proof}
   \begin{definition}[Singular value]
-    Let $m\geq n$ and $\vf{A}\in\mathcal{M}_{m\times n}(\RR)$. The \emph{singular values} of $\vf{A}$ are the square roots of the eigenvalues of $\transpose{\vf{A}}\vf{A}$.
+    Let $m\geq n$ and $\vf{A}\in\mathcal{M}_{m\times n}(\RR)$. The \emph{singular values} of $\vf{A}$ are the square roots of the eigenvalues of $\transpose{\vf{A}}\vf{A}$, which are real and non-negative by \ref{NC:lemma_eigenvalues}.
   \end{definition}
   \begin{theorem}[Singular value decomposition]\label{NC:svd}
     Let $m\geq n$ and $\vf{A}\in\mathcal{M}_{m\times n}(\RR)$. Then there exist orthogonal matrices $\vf{V}\in\mathcal{O}_{n}(\RR)$, $\vf{U}\in\mathcal{M}_{m\times n}(\RR)$ and a diagonal matrix $\vf{\Sigma}\in\mathcal{M}_{n}(\RR)$ such that:
     $$
       \vf{A} = \vf{U}\vf{\Sigma}\transpose{\vf{V}}
     $$
-    where $\vf{\Sigma}=\diag(\sigma_1, \ldots, \sigma_n)$ and $\sigma_1\geq\sigma_2\geq\cdots\geq\sigma_n\geq0$ are the singular values of $\vf{A}$. This decomposition is called \emph{singular value decomposition} (\emph{SVD}) of $\vf{A}$.The columns of $\vf{U}$ are called \emph{left singular vectors}, while the columns of $\vf{V}$ are called \emph{right singular vectors}. Writing $\vf{U}= [\vf{u}_1, \ldots, \vf{u}_n]$ and $\vf{V}= [\vf{v}_1, \ldots, \vf{v}_n]$, we have another expression for the singular value decomposition:
-    $$
+    where $\vf{\Sigma}=\diag(\sigma_1, \ldots, \sigma_n)$ and $\sigma_1\geq\sigma_2\geq\cdots\geq\sigma_n\geq0$ are the singular values of $\vf{A}$. A decomposition of this form is called \emph{singular value decomposition} (\emph{SVD}) of $\vf{A}$. The columns of $\vf{U}$ are called \emph{left singular vectors}, while the columns of $\vf{V}$ are called \emph{right singular vectors}. Writing $\vf{U}= (\vf{u}_1, \ldots, \vf{u}_n)$ and $\vf{V}= (\vf{v}_1, \ldots, \vf{v}_n)$, we have another expression for the singular value decomposition:
+    \begin{equation}\label{NC:eq_svd}
       \vf{A} = \sum_{i=1}^n \sigma_i \vf{u}_i\transpose{\vf{v}_i}
-    $$
+    \end{equation}
   \end{theorem}
   \begin{proof}
     For simplicity we assume $\sigma_n>0$ and $m\geq n$. From linear algebra (check \mcref{LA:symmetric-diagonalizable}) we know that since $\transpose{\vf{A}}\vf{A}$ is symmetric, it admits a decomposition of the form $\transpose{\vf{A}}\vf{A}=\vf{V}\vf{\Lambda}\transpose{\vf{V}}$, where $\vf{\Lambda}$ is diagonal and $\vf{V}\in \mathcal{O}_n(\RR)$. Thus, we have that $\transpose{(\vf{AV})}(\vf{AV})=\vf\Lambda=:\vf\Sigma^2$ is diagonal and so $\vf{U}:=\vf{AV}\vf\Sigma^{-1}$ is orthonormal.
@@ -494,34 +672,132 @@
   \begin{remark}
     From here one, we will assume that the singular values are ordered in decreasing order. Thus, $\sigma_1$ will always be the largest singular value and $\sigma_n$ the smallest.
   \end{remark}
+  \begin{remark}
+    Note that the SVD is not unique, even though having the same ordering of the singular values. For example, we can replace $\vf{u}_i$ and $\vf{v}_i$ by $-\vf{u}_i$ and $-\vf{v}_i$ in \mcref{NC:eq_svd}. The singular values, on the other hand, are unique.
+  \end{remark}
   \begin{corollary}\label{NC:svd-cor}
     Let $m\geq n$, $\vf{A}\in\mathcal{M}_{m\times n}(\RR)$ and consider a SVD $\vf{A}=\vf{U}\vf{\Sigma}\transpose{\vf{V}}$. Then:
     \begin{enumerate}
       \item The columns of $V$ are the eigenvectors of $\transpose{\vf{A}}\vf{A}$.
       \item The columns of $U$ are the eigenvectors of $\vf{A}\transpose{\vf{A}}$.
-      \item $\sigma_i=\sqrt{\lambda_i}$, $\forall\lambda_i\in\sigma(\transpose{\vf{A}}\vf{A})$.
       \item If $\vf{A}$ is symmetric, then $\sigma_i=\abs{\lambda_i}$, $\forall\lambda_i\in\sigma(\vf{A})$.
     \end{enumerate}
   \end{corollary}
-  \begin{sproof}
-    They follow from the proof of \mnameref{NC:svd}.
-  \end{sproof}
-  \begin{proposition}
-    Let $m\geq n$ and $\vf{A}\in\mathcal{M}_{m\times n}(\RR)$. Then, $\norm{A}_2 = \sigma_1$ and $\norm{A^{-1}}_2=\frac{1}{\sigma_n}$.
+  \begin{proof}
+    The third property is easy, and the first one follows from the proof of \mnameref{NC:svd}. For the second one, not that from the identity $\vf{AV}=\vf{U\Sigma}$ we have $\vf{A}\vf{v}_i=\sigma_i\vf{u}_i$, for $i=1,\ldots,n$. Similarly, from $\transpose{\vf{A}}\vf{U}=\vf{V\Sigma}$ we have $\transpose{\vf{A}}\vf{u}_i=\sigma_i\vf{v}_i$, for $i=1,\ldots,n$. Thus:
+    $$
+      \vf{A}\transpose{\vf{A}}\vf{u}_i=\sigma_i\vf{A}\vf{v}_i={\sigma_i}^2\vf{u}_i
+    $$
+  \end{proof}
+  \begin{proposition}\label{NC:norm_svd}
+    Let $m\geq n$ and $\vf{A}\in\mathcal{M}_{m\times n}(\RR)$. Then, $\norm{\vf{A}}_2 = \sigma_1$ and $\norm{\vf{A}^{-1}}_2=\frac{1}{\sigma_n}$.
   \end{proposition}
   \begin{proof}
-    Let $\vf{A}=\vf{U}\vf{\Sigma}\transpose{\vf{V}}$ be a SVD of $\vf{A}$ and $\vf{x}\in\RR^n$ be such that $\norm{x}_2=1$. We know that if $\vf{y}=\transpose{\vf{V}}\vf{x}$, then $\norm{\vf{y}}_2=1$. Thus:
+    Let $\vf{A}=\vf{U}\vf{\Sigma}\transpose{\vf{V}}$ be a SVD of $\vf{A}$ and $\vf{x}\in\RR^n$ be such that $\norm{\vf{x}}_2=1$. We know that if $\vf{y}=\transpose{\vf{V}}\vf{x}$, then $\norm{\vf{y}}_2=1$. Thus:
     \begin{multline*}
       {\norm{\vf{Ax}}_2}^2={\norm{\vf{U}\vf{\Sigma}\transpose{\vf{V}}\vf{x}}_2}^2={\norm{\vf{\Sigma}\transpose{\vf{V}}\vf{x}}_2}^2={\norm{\vf\Sigma \vf{y}}_2}^2 =\\= \sum_{i=1}^n {\sigma_i}^2 {y_i}^2 \leq {\sigma_1}^2{\norm{\vf{y}}_2}^2 = {\sigma_1}^2
     \end{multline*}
     And this value is reachable by taking $\vf{x}=\vf{v}_1$. The second part is analogous.
   \end{proof}
+  \begin{remark}
+    Note that similarly to \mcref{NC:eq_svd} we can write $\vf{A}^{-1}= \sum_{i=1}^n \frac{1}{\sigma_i} \vf{v}_i\transpose{\vf{u}_i}$, and therefore if we want to solve the system $\vf{Ax}=\vf{b}$, we can write:
+    $$
+      \vf{x} = \sum_{i=1}^n \frac{\transpose{\vf{u}_i}\vf{b}}{\sigma_i}\vf{v}_i
+    $$
+  \end{remark}
+  \begin{theorem}
+    Let $\vf{A}\in\GL_n(\RR)$ and $\vf{x}, \vf{b}\in\RR^n$ be such that $\vf{Ax}=\vf{b}$. Then, the error $\Delta \vf{x}$ in the equation $\vf{A}(\vf{x}+\Delta\vf{x})=\vf{b} + \Delta\vf{b}$, $\Delta \vf{b}\in\RR^n$, can be controlled by:
+    $$
+      \frac{1}{\kappa(\vf{A})}\frac{\norm{\Delta\vf{b}}}{\norm{\vf{b}}} \leq \frac{\norm{\Delta\vf{x}}}{\norm{\vf{x}}} \leq \kappa(\vf{A})\frac{\norm{\Delta\vf{b}}}{\norm{\vf{b}}}
+    $$
+    where $\kappa(\vf{A})=\norm{\vf{A}}\norm{\vf{A}^{-1}}$ is the condition number of $\vf{A}$.
+  \end{theorem}
+  \begin{proof}
+    The second inequality is a consequence of \mcref{NM:cond_num_ineq}. For the first one, note that from $\vf{x}=\vf{A}^{-1}\vf{b}$ and $\vf{A}\Delta\vf{x}=\Delta\vf{b}$ we have:
+    $$
+      \norm{\vf{x}}\leq \norm{\vf{A}^{-1}}\norm{\vf{b}} \qquad \norm{\Delta\vf{b}}\leq \norm{\vf{A}}\norm{\Delta\vf{x}}
+    $$
+    Hence, $\norm{\Delta\vf{b}}\norm{\vf{x}}\leq \norm{\vf{A}}\norm{\vf{A}^{-1}}\norm{\Delta\vf{x}}\norm{\vf{b}}$.
+  \end{proof}
+  \begin{proposition}
+    Let $\vf{A},\vf{C}\in\mathcal{M}_n(\RR)$ and let $\vf{R}:=\vf{I}_n-\vf{AC}$. If $\norm{\vf{R}}<1$, then $\vf{A}$ and $\vf{C}$ are non-singular and:
+    $$
+      \vf{A}^{-1} = \frac{\norm{\vf{C}}}{1-\norm{\vf{R}}}\qquad \frac{\norm{\vf{R}}}{\norm{\vf{A}}}\leq \norm{\vf{C}-\vf{A}^{-1}}\leq \frac{\norm{\vf{C}}\norm{\vf{R}}}{1-\norm{\vf{R}}}
+    $$
+  \end{proposition}
+  \begin{proof}
+    If $\norm{\vf{R}}<1$, then $\rho(\vf{R})<1$, and so $\vf{I}_n-\vf{R}$ is invertible and so are $\vf{A}$ and $\vf{C}$ (taking the determinant). Moreover, $\norm{\vf{A}^{-1}}\leq \norm{\vf{C}}\norm{{(\vf{I}_n+\vf{R})}^{-1}}$ from which the first inequality follows. For the second one, note that:
+    \begin{equation*}
+      \norm{\vf{R}}\leq \norm{\vf{A}}\norm{\vf{C}-\vf{A}^{-1}}
+    \end{equation*}
+    ANd using the previous one, we get the last one: $\norm{\vf{C}-\vf{A}^{-1}}=\norm{\vf{A}^{-1}\vf{R}}\leq \norm{\vf{A}^{-1}}\norm{\vf{R}}$.
+  \end{proof}
+  \subsubsection{Truncated singular value decomposition}
+  \begin{remark}
+    In practice however, doing a full SVD is not always possible, since it requires a lot of memory and time. A \emph{truncated} version of it is often used, where we only keep the $k$ largest singular values and their associated singular vectors.
+  \end{remark}
+  \begin{definition}
+    Let $\vf{A}\in\mathcal{M}_{m\times n}(\RR)$. The \emph{truncated singular value decomposition} (\emph{TSVD}) of $\vf{A}$ is an inexact decomposition of $\vf{A}$ of the form:
+    $$
+      \vf{\tilde{A}}=\vf{U}_k\vf{\Sigma}_k\transpose{\vf{V}}_k
+    $$
+    where $\vf{\Sigma}=\diag(\sigma_1, \ldots, \sigma_k)$, $\vf{U}_k\in \mathcal{M}_{m\times k}(\RR)$ is created selecting the $k$ left singular vectors of $\vf{A}$ associated with $\sigma_1,\ldots, \sigma_k$, and $\vf{V}_k\in \mathcal{M}_{n\times k}(\RR)$ is created selecting the $k$ right singular vectors of $\vf{A}$ associated with $\sigma_1,\ldots, \sigma_k$.
+  \end{definition}
+  \begin{remark}
+    In this case the general solution of $\vf{Ax}\simeq\vf{A_kx}=\vf{b}$ is given by:
+    $$
+      \vf{x} = \sum_{i=1}^k \frac{\transpose{\vf{u}_i}\vf{b}}{\sigma_i}\vf{v}_i + \sum_{i=k+1}^n\xi_i\vf{v}_i
+    $$
+    with $\xi_i\in\RR$ arbitrary.
+  \end{remark}
+  \begin{proposition}
+    Let $\vf{A}\in\mathcal{M}_{m\times n}(\RR)$ and $\vf{b}\in \RR^m$. Suppose that
+    $$
+      \vf{x}_\lambda=\argmin_{\vf{x}\in\RR^n}{\norm{\vf{Ax}-\vf{b}}_2}^2+\lambda{\norm{\vf{x}}_2}^2
+    $$
+    where $\lambda>0$ is a regularization parameter. Then:
+    $$
+      \vf{x}_\lambda=\sum_{i=1}^{n}\frac{{\sigma_i}^2}{{\sigma_i}^2+\lambda^2} \frac{\transpose{\vf{u}_i}\vf{b}}{\sigma_i}\vf{v}_i
+    $$
+  \end{proposition}
+  \begin{proof}
+    First note that we can express $\vf{x}_\lambda$ as:
+    $$
+      \vf{x}_\lambda = \argmin_{\vf{x}\in\RR^n}{\norm{\begin{pmatrix}
+            \vf{A} \\
+            \lambda\vf{I}_n
+          \end{pmatrix} \vf{x}-\begin{pmatrix}
+            \vf{b} \\
+            \vf{0}
+          \end{pmatrix}}_2}^2
+    $$
+    Suppose a SVD of $\vf{A}$ is $\vf{A}= \vf{U}\vf{\Sigma}\transpose{\vf{V}}$. Then, from \mnameref{LM:least-squares} we know that this solution is given by:
+    \begin{align*}
+      \vf{x}_\lambda & ={\left(\transpose{\begin{pmatrix}
+                                              \vf{A} \\
+                                              \lambda\vf{I}_n
+                                            \end{pmatrix}}\begin{pmatrix}
+                                                          \vf{A} \\
+                                                          \lambda\vf{I}_n
+                                                        \end{pmatrix}\right)}^{-1}\transpose{\begin{pmatrix}
+                                                                                                 \vf{A} \\
+                                                                                                 \lambda\vf{I}_n
+                                                                                               \end{pmatrix}}\begin{pmatrix}
+                                                                                                             \vf{b} \\
+                                                                                                             \vf{0}
+                                                                                                           \end{pmatrix}                                      \\
+                     & = {\left( \transpose{\vf{A}}\vf{A}+\lambda^2\vf{I}_n\right)}^{-1}\transpose{\vf{A}}\vf{b}                                               \\
+                     & ={\left( \vf{V}{\vf\Sigma}^2\transpose{\vf{V}}+\lambda^2\vf{V}\transpose{\vf{V}}\right)}^{-1} \vf{V}{\vf\Sigma}\transpose{\vf{U}}\vf{b} \\
+                     & =\vf{V}{\left({\vf\Sigma}^2+\lambda^2\vf{I}_n\right)}^{-1} \vf{\Sigma}\transpose{\vf{U}}\vf{b}                                          \\
+                     & =\sum_{i=1}^{n}\frac{{\sigma_i}^2}{{\sigma_i}^2+\lambda^2} \frac{\transpose{\vf{u}_i}\vf{b}}{\sigma_i}\vf{v}_i
+    \end{align*}
+  \end{proof}
   \subsubsection{QR decomposition}
   \begin{lemma}\label{NC:eigenvalues_orto}
-    Let $\vf{Q}\in\mathcal{O}_n(\RR)$. Then, $\forall\lambda\in\sigma(\vf{Q})$, $\abs{\lambda}=1$. Moreover $\sigma_i = 1$, $i=1, \ldots, n$.
+    Let $\vf{Q}\in\mathcal{O}_n(\RR)$. Then, $\forall\lambda\in\sigma(\vf{Q})$, $\abs{\lambda}=1$. Moreover, $\sigma_i = 1$, $i=1, \ldots, n$.
   \end{lemma}
   \begin{proof}
-    Let $\vf{v}$ be an unitary eigenvector of $\vf{Q}$ associated to $\lambda$. Then:
+    Let $\vf{v}$ be a unitary eigenvector of $\vf{Q}$ associated to $\lambda$. Then:
     $$\lambda^2 = \dotp{\lambda \vf{v}}{\lambda \vf{v}} = \dotp{\vf{Q}\vf{v}}{\vf{Q}\vf{v}} = \dotp{\vf{v}}{\transpose{\vf{Q}}\vf{Q}\vf{v}} = \dotp{\vf{v}}{\vf{v}} = 1$$
     To see that all the singular values are 1, note that if $\lambda\in\sigma(\vf{Q})$ with eigenvector $\vf{v}$, then $\lambda^{-1}\in \sigma(\transpose{\vf{Q}})$ with eigenvector $\vf{v}$. Thus, $\forall\lambda\in\sigma(\vf{Q})$ with associated eigenvector $\vf{v}$, we have:
     $$
@@ -536,15 +812,74 @@
     \end{enumerate}
   \end{lemma}
   \begin{proof}
-    Note that $\vf{Q} \transpose{\vf{Q}}=\vf{I}_n$. Taking determinants, we obtain the first equality. The second equality, follows from \mcref{NC:eigenvalues_orto,NC:svd-cor}.
+    Note that $\vf{Q} \transpose{\vf{Q}}=\vf{I}_n$. Taking determinants, we obtain the first equality. The second equality, follows from the preservation of the norm by orthogonal matrices: $\norm{\vf{Q}\vf{v}}_2 = \norm{\vf{v}}_2$, $\forall\vf{v}\in\RR^n$.
   \end{proof}
   \begin{definition}[QR descompostion]
-    Let $\vf{A}\in\mathcal{M}_{m\times n}(\RR)$ be a matrix. A \emph{QR decomposition} of $\vf{A}$ is an expression $\vf{A}=\vf{Q}\vf{R}$, where $\vf{Q}\in\mathcal{O}_n(\RR),\vf{R}\in\mathcal{M}_n(\RR)$ are such that $\vf{Q}$ is orthogonal and $\vf{R}$ is upper triangular.
+    Let $\vf{A}\in\mathcal{M}_{n}(\RR)$ be a matrix. A \emph{QR decomposition} of $\vf{A}$ is an expression $\vf{A}=\vf{Q}\vf{R}$, where $\vf{Q}\in\mathcal{O}_n(\RR)$ and $\vf{R}\in\mathcal{M}_{n}(\RR)$ is upper triangular.
   \end{definition}
+  \begin{proposition}
+    Let $\vf{A}\in\mathcal{M}_{m\times n}(\RR)$ be a full-rank matrix with $m\geq n$. Then, there exist matrices $\vf{Q}\in\mathcal{M}_{m\times n}(\RR)$ and $\vf{R}\in\mathcal{M}_{n}(\RR)$ such that $\vf{Q}$ is orthogonal, $\vf{R}$ is upper triangular and $\vf{A}=\vf{Q}\vf{R}$.
+  \end{proposition}
+  \begin{proof}
+    We use the \mnameref{LA:Gram-Schmidt}. Assume $\vf{A}=(\vf{a}_1,\ldots,\vf{a}_n)$. We define $\vf{q}_1=\frac{\vf{a}_1}{\norm{\vf{a}_1}_2}$ and $\vf{q}_j=\frac{\vf{a}_j-\sum_{k=1}^{j-1}\dotp{\vf{a}_j}{\vf{q}_k}\vf{q}_k}{\norm{\vf{a}_j-\sum_{k=1}^{j-1}\dotp{\vf{a}_j}{\vf{q}_k}\vf{q}_k}_2}$ for $j=2,\ldots,n$. Then, $\vf{Q}=(\vf{q}_1,\ldots,\vf{q}_n)$ is orthonormal and $\vf{R}:=\transpose{\vf{Q}}\vf{A}$ is upper triangular because if $\vf{R}=(r_{ij})$, then $r_{ij}:=\dotp{\vf{q}_i}{\vf{a}_j}$ and from the above expression of $\vf{q}_j$, we have:
+    $$
+      \vf{a}_j=\sum_{k=1}^{j-1} r_{kj}\vf{q}_k + r_j \vf{q}_j
+    $$
+    for $j=1,\ldots,n$, with $r_j:=\norm{\vf{a}_j-\sum_{k=1}^{j-1}\dotp{\vf{a}_j}{\vf{q}_k}\vf{q}_k}_2$.
+  \end{proof}
+  \begin{remark}
+    In the literature, this latter decomposition is sometimes called \emph{thin QR decomposition} to distinguish it from the \emph{full QR decomposition} where $\vf{Q}$ and $\vf{R}$ are square matrices. In the thin QR decomposition, we can write:
+    $$
+      \vf{A}=\vf{Q}\vf{R}=\begin{pmatrix}
+        \vf{Q}_1 & \vf{Q}_2
+      \end{pmatrix}\begin{pmatrix}
+        \vf{R}_1 \\
+        \vf{0}
+      \end{pmatrix}=\vf{Q}_1\vf{R}_1
+    $$
+    with $\vf{Q}_1\in\mathcal{M}_{m\times n}(\RR)$, $\vf{Q}_2\in\mathcal{M}_{m\times (m-n)}(\RR)$ and $\vf{R}_1\in\mathcal{M}_{n}(\RR)$. Note that both $\vf{Q}_1$ and $\vf{Q}_2$ have orthogonal columns, and $\vf{R}_1$ is upper triangular.
+  \end{remark}
   \begin{lemma}
     Let $\vf{A}\in\GL_n(\RR)$, $\vf{b}\in\RR^n$ and $\vf{A}\vf{x}=\vf{b}$ be a system of linear equations. Suppose $\vf{A}=\vf{Q}\vf{R}$ for some orthogonal matrix $\vf{Q}$ and some upper triangular matrix $\vf{R}$, both of size $n$. Then, solving the system $\vf{A}\vf{x}=\vf{b}$ is equivalent to solving the triangular system $\vf{R}\vf{x}=\transpose{\vf{Q}}\vf{b}$.
   \end{lemma}
-  %%% It's missing the theorem of convergence of the Newton method
-  %%% It's missing the minimization of functions
+  \begin{proposition}
+    Let $\vf{A}\in\mathcal{M}_{m\times n}(\RR)$ be a full-rank matrix with $m>n$. The least-squares problem
+    $$\vf{x}^*=\argmin_{\vf{x}\in\RR^n}\norm{\vf{A}\vf{x}-\vf{b}}_2$$ has a solution $\vf{x}^*$ given by:
+    $$
+      \vf{x}^* = \vf{R}^{-1}\transpose{\vf{Q}}\vf{b}
+    $$
+  \end{proposition}
+  \begin{proof}
+    Let $\vf{A}=(\vf{Q}, \vf{Q}_\perp)\begin{pmatrix}
+        \vf{R} \\
+        \vf{0}
+      \end{pmatrix}= \vf{Q}\vf{R}$ be the full QR decomposition of $\vf{A}$. Then:
+    $$
+      {\norm{\vf{A}\vf{x}\!-\!\vf{b}}_2}^{\!2}\!=\!{\norm{\begin{pmatrix}
+          \vf{Q} \\
+          \vf{Q}_\perp
+        \end{pmatrix}\!(\vf{Ax}\!-\!\vf{b})}_2}^{\!2}\!\!=\!{\norm{\begin{pmatrix}
+          \vf{R} \\
+          \vf{0}
+        \end{pmatrix}\!\vf{x}\!-\!\begin{pmatrix}
+          \transpose{\vf{Q}}\vf{b} \\
+          \vf{Q}_\perp\vf{x}
+        \end{pmatrix}}_2}^{\!2}
+    $$
+    And so, by \mnameref{LM:least-squares} we have:
+    $$
+      \vf{x}^*={\left(\begin{pmatrix}
+          \vf{R} & \vf{0}
+        \end{pmatrix}\begin{pmatrix}
+          \vf{R} \\
+          \vf{0}
+        \end{pmatrix}\right)}^{-1}\begin{pmatrix}
+        \vf{R} & \vf{0}
+      \end{pmatrix}\begin{pmatrix}
+        \transpose{\vf{Q}}\vf{b} \\
+        \vf{Q}_\perp\vf{b}
+      \end{pmatrix}=\vf{R}^{-1}\transpose{\vf{Q}}\vf{b}
+    $$
+  \end{proof}
 \end{multicols}
 \end{document}

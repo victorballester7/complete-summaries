@@ -501,57 +501,100 @@
   \end{definition}
   \subsubsection{Matrix norms}
   \begin{definition}
-    A \emph{matrix norm} on the vector space $\mathcal{M}_n(\RR)$ is a function $\|\cdot\|:\mathcal{M}_n(\RR)\rightarrow\RR$ satisfying all properties of a norm\footnote{See \mcref{FSV:norm}.} and that: $$\|\vf{A}\vf{B}\|\leq\|\vf{A}\|\|\vf{B}\|,\quad\forall \vf{A}\vf{B}\in\mathcal{M}_n(\RR)$$
+    A \emph{matrix norm} on the vector space $\mathcal{M}_n(\RR)$ is a function $\norm{\cdot}:\mathcal{M}_n(\RR)\rightarrow\RR$ satisfying all properties of a norm\footnote{See \mcref{FSV:norm}.} and that: $$\|\vf{A}\vf{B}\|\leq\norm{\vf{A}}\|\vf{B}\|\quad\forall \vf{A}\vf{B}\in\mathcal{M}_n(\RR)$$
+    This property is called \emph{sub-multiplicativity}.
+  \end{definition}
+  \begin{remark}
+    Some other definitions in the literature exclude this property for a matrix norm.
+  \end{remark}
+  \begin{definition}
+    Let $\norm{\cdot}_\alpha$ be a vector norm. We say a matrix norm $\norm{\cdot}_\beta$ is \emph{compatible with} $\norm{\cdot}_\alpha$ if $$\|\vf{A}\vf{v}\|_\alpha\leq\norm{\vf{A}}_\beta\norm{\vf{v}}_\alpha\quad\forall\vf{A}\in\mathcal{M}_n(\RR)\text{ and }\forall\vf{v}\in\RR^n$$
   \end{definition}
   \begin{definition}
-    Let $\|\cdot\|_\alpha$ be a vector norm. We say a matrix norm $\|\cdot\|_\beta$ is \emph{compatible with} $\|\cdot\|_\alpha$ if $$\|\vf{A}\vf{v}\|_\alpha\leq\|\vf{A}\|_\beta\|\vf{v}\|_\alpha\quad\forall\vf{A}\in\mathcal{M}_n(\RR)\text{ and }\forall\vf{v}\in\RR^n$$
-  \end{definition}
-  \begin{definition}
-    Let $\|\cdot\|$ be a vector norm and $\vf{A}\in\mathcal{M}_n(\RR)$. We define a \emph{subordinated matrix norm} $\|\cdot\|$ as:
+    Let $\norm{\cdot}$ be a vector norm and $\vf{A}\in\mathcal{M}_n(\RR)$. We define a \emph{subordinated matrix norm} $\norm{\cdot}$ as:
     \begin{align*}
-      \|\vf{A}\| & =\max\{\|\vf{A}\vf{v}\|:\vf{v}\in\RR^n\text{ such that }\|\vf{v}\|=1\}                              \\
-                 & =\sup\left\{\frac{\|\vf{A}\vf{v}\|}{\|\vf{v}\|}:\vf{v}\in\RR^n\text{ such that }\vf{v}\ne 0\right\}
+      \norm{\vf{A}} & =\max\{\|\vf{A}\vf{v}\|:\vf{v}\in\RR^n\text{ such that }\norm{\vf{v}}=1\}                              \\
+                    & =\sup\left\{\frac{\|\vf{A}\vf{v}\|}{\norm{\vf{v}}}:\vf{v}\in\RR^n\text{ such that }\vf{v}\ne 0\right\}
     \end{align*}
   \end{definition}
   \begin{lemma}
     All subordinated matrix norms are compatible.
   \end{lemma}
+  \begin{proof}
+    Let $\norm{\cdot}_\alpha$, $\norm{\cdot}_\beta$ be vector and matrix norms respectively, $\vf{A}\in \mathcal{M}_n(\RR)$ and $\vf{v}\in\RR^n\setminus\{\vf{0}\}$. Then, from the definition of subordinated matrix we have $\frac{\norm{\vf{Av}}_\alpha}{\norm{\vf{v}}_\alpha}\leq\norm{\vf{A}}_\beta$. For $\vf{v}=0$ the inequality clearly holds.
+  \end{proof}
   \begin{lemma}
-    For all subordinated matrix norm $\|\cdot\|$, we have $\|\vf{I}\|=1$.
+    For all subordinated matrix norm $\norm{\cdot}$, we have $\norm{\vf{I}}=1$.
   \end{lemma}
+  \begin{proof}
+    $\displaystyle\vf{I}=\max_{\substack{\vf{v}\in\RR^n\\\norm{v}=1}}\norm{\vf{Iv}}=\max_{\substack{\vf{v}\in\RR^n\\\norm{v}=1}}\norm{\vf{v}}=1$
+  \end{proof}
   \begin{definition}
     Let $\vf{A}\in\mathcal{M}_n(\CC)$ be a matrix. We define the \emph{spectrum} $\sigma(\vf{A})$ of $\vf{A}$ as: $$\sigma(\vf{A}):=\{\lambda\in\CC:\vf{A}-\lambda\id\text{ is not invertible}\}$$
   \end{definition}
   \begin{proposition}
     Let $\vf{A}\in\mathcal{M}_n(\CC)$ be a matrix. Then: $$\sigma(\vf{A})=\{\lambda\in\CC:\lambda\text{ is an eigenvalue of }\vf{A}\}$$
   \end{proposition}
+  \begin{proof}
+    Let $\vf{B}:=\vf{A}-\lambda\id$. If $\vf{B}$ is not invertible, then there exist a non-trivial combination of its columns $\vf{b}_1,\ldots,\vf{b}_n$ that is equal to the zero vector:
+    $$
+      c_1\vf{b}_1+\cdots+c_n\vf{b}_n=\vf{0}
+    $$
+    Now consider $\vf{v}=c_1\vf{e}_1+\cdots+c_n\vf{e}_n$, where $\vf{e}_i$ is the $i$-th vector of the canonical basis of $\RR^n$. Then, $\vf{v}$ is an eigenvector of $\vf{A}$ with eigenvalue $\lambda$.
+  \end{proof}
   \begin{definition}
-    Let $\vf{A}\in\mathcal{M}_n(\CC)$ be a matrix. We define the \emph{spectral radius} $\rho(\vf{A})$ of $\vf{A}$ as: $$\rho(\vf{A}):=\max\{|\lambda|\in\CC:\lambda\in\sigma(\vf{A})\}$$
+    Let $\vf{A}\in\mathcal{M}_n(\CC)$ be a matrix. We define the \emph{spectral radius} $\rho(\vf{A})$ of $\vf{A}$ as: $$\rho(\vf{A}):=\max\{\abs{\lambda}\in\CC:\lambda\in\sigma(\vf{A})\}$$
   \end{definition}
   \begin{proposition}
     Let $\vf{v}=(v_1,\ldots,v_n)\in\RR^n$ and $\vf{A}=(a_{ij})\in\mathcal{M}_n(\RR)$. Given the vector norms:
     \begin{gather*}
-      \|\vf{v}\|_1=\sum_{i=1}^n|v_i|\\
-      \|\vf{v}\|_2=\sqrt{\sum_{i=1}^nv_i^2}\\
-      \|\vf{v}\|_\infty=\max\{|v_i|:i=1,\ldots,n\}
+      \norm{\vf{v}}_1=\sum_{i=1}^n\abs{v_i}\\
+      \norm{\vf{v}}_2=\sqrt{\sum_{i=1}^n{v_i}^2}\\
+      \norm{\vf{v}}_\infty=\max\{\abs{v_i}:i=1,\ldots,n\}
     \end{gather*}
     their subordinated matrix norms are respectively:
     \begin{gather*}
-      \|\vf{A}\|_1=\max\left\{\sum_{i=1}^n|a_{ij}|:j=1,\ldots,n\right\}\\
-      \|\vf{A}\|_2=\sqrt{\rho(\transpose{\vf{A}}\vf{A})}\\
-      \|\vf{A}\|_\infty=\max\left\{\sum_{j=1}^n|a_{ij}|:i=1,\ldots,n\right\}
+      \norm{\vf{A}}_1=\max\left\{\sum_{i=1}^n\abs{a_{ij}}:j=1,\ldots,n\right\}\\
+      \norm{\vf{A}}_2=\sqrt{\rho(\transpose{\vf{A}}\vf{A})}\\
+      \norm{\vf{A}}_\infty=\max\left\{\sum_{j=1}^n\abs{a_{ij}}:i=1,\ldots,n\right\}
     \end{gather*}
   \end{proposition}
+  \begin{proof}
+    Let's start with the $\norm{\cdot}_1$ and $\norm{\cdot}_\infty$ norms. Let $\displaystyle A_1:=\max_{1\leq j\leq n} \sum_{i=1}^n\abs{a_{ij}}$ and $\displaystyle A_\infty:=\max_{1\leq i\leq n} \sum_{j=1}^n\abs{a_{ij}}$ and suppose they are attained at $j=j_0$ and $i=i_0$. Then, for all $\vf{v}=(v_j),\vf{u}=(u_j)\in\RR^n$ such that $\norm{\vf{v}}_1=\norm{\vf{u}}_\infty=1$ we have:
+    \begin{align*}
+      \begin{split}
+        \norm{\vf{Av}}_1      & =\sum_{i=1}^n\abs{\sum_{j=1}^n a_{ij}v_j}\leq\sum_{j=1}^n\abs{v_j}\sum_{i=1}^n\abs{a_{ij}}\leq\\
+        &\hspace*{4.5cm}\leq \sum_{j=1}^n\abs{v_j}A_1 = A_1
+      \end{split} \\
+      \begin{split}
+        \norm{\vf{Au}}_\infty & =\max_{1\leq i\leq n}\abs{\sum_{j=1}^n a_{ij}u_j}\leq\max_{1\leq i\leq n}\sum_{j=1}^n\abs{a_{ij}}\abs{u_j}\leq\\
+        &\hspace*{4cm}\leq \max_{1\leq i\leq n}\sum_{j=1}^n\abs{a_{ij}}= A_\infty
+      \end{split}
+    \end{align*}
+    And taking $\vf{v}=\vf{e}_{j_0}$ and $\vf{u}=(\sign{a_{i_01}}, \ldots, \sign{a_{i_0n}})$ we have that $\norm{\vf{A}v}_1=A_1$ and $\norm{\vf{A}u}_\infty=A_\infty$. So $\norm{\vf{A}}_1=A_1$ and $\norm{\vf{A}}_\infty=A_\infty$. Now, let's do the $\norm{\cdot}_2$ norm. Observe that $\transpose{\vf{A}}\vf{A}$ is symmetric, and therefore it diagonalizes in an orthonormal basis of eigenvectors $\vf{v}_1, \ldots, \vf{v}_n$ with eigenvalues $\lambda_1, \ldots, \lambda_n$. Note that for each of these eigenvectors we have:
+    $$
+      {\norm{\vf{A}\vf{v}_i}_2}^2=\transpose{\vf{v}_i}\transpose{\vf{A}}\vf{A}\vf{v}_i=\lambda_i\transpose{\vf{v}_i}\vf{v}_i=\lambda_i
+    $$
+    So, $\norm{\vf{A}v_i}_2=\sqrt{\rho(\transpose{\vf{A}}\vf{A})}$ for some $i$. Now take $\vf{v}=\sum_{i=1}^n\alpha_i\vf{v}_i$ normalized to 1 (i.e. $\sum_{i=1}^n\abs{\alpha_i}^2=1$). Then, using the orthogonality of the eigenvectors:
+    $$
+      {\norm{\vf{Av}}_2}^2=\transpose{\vf{v}}\transpose{\vf{A}}\vf{A}\vf{v}=\sum_{i=1}^n\abs{\alpha_i}^2\transpose{\vf{v}_i}\transpose{\vf{A}}\vf{A}\vf{v}_i\leq \rho(\transpose{\vf{A}}\vf{A})
+    $$
+  \end{proof}
   \begin{proposition}
-    Consider the function: $$\function{\|\cdot\|}{\mathcal{M}_n(\RR)}{\RR}{(a_{ij})}{\sum_{i,j=1}^n|a_{ij}|}$$ Then, $\|\cdot\|$ is a matrix norm but it isn't the subordinated matrix norm of any vector norm.
+    Consider the function: $$\function{\norm{\cdot}}{\mathcal{M}_n(\RR)}{\RR}{(a_{ij})}{\sum_{i,j=1}^n\abs{a_{ij}}}$$ Then, $\norm{\cdot}$ is a matrix norm, but it isn't the subordinated matrix norm of any vector norm.
   \end{proposition}
+  \begin{proof}
+    Clearly it is a matrix norm in the sense of \mcref{FSV:norm}, but it doesn't satisfy the sub-multiplicative (consider $\vf{A}=\vf{B}=\begin{pmatrix}
+        1 & 0 \\ 1 & 1
+      \end{pmatrix}$) and so it cannot be the subordinated matrix norm of any vector norm.
+  \end{proof}
   \begin{proposition}[Properties of matrix norms]
     \hfill
     \begin{enumerate}
       \item Matrix norms are continuous functions.
-      \item Given two matrix norms $\|\cdot\|_\alpha$ and $\|\cdot\|_\beta$, there exist $\ell, L\in\RR_{>0}$ such that: $$\ell \|\vf{A}\|_\beta\leq\|\vf{A}\|_\alpha\leq L\|\vf{A}\|_\beta\quad\forall\vf{A}\in\mathcal{M}_n(\RR)$$
-      \item For all subordinated matrix norm $\|\cdot\|$ and for all $\vf{A}\in\mathcal{M}_n(\RR)$: $$\rho(\vf{A})\leq\|\vf{A}\|$$
-      \item Given a matrix $\vf{A}\in\mathcal{M}_n(\RR)$ and $\varepsilon>0$, there exist a matrix norm $\|\cdot\|_{\vf{A},\varepsilon}$ such that: $$\rho(\vf{A})\leq\|\vf{A}\|_{\vf{A},\varepsilon}\leq\rho(\vf{A})+\varepsilon$$
+      \item Given two matrix norms $\norm{\cdot}_\alpha$ and $\norm{\cdot}_\beta$, there exist $\ell, L\in\RR_{>0}$ such that: $$\ell \norm{\vf{A}}_\beta\leq\norm{\vf{A}}_\alpha\leq L\norm{\vf{A}}_\beta\quad\forall\vf{A}\in\mathcal{M}_n(\RR)$$
+      \item For all subordinated matrix norm $\norm{\cdot}$ and for all $\vf{A}\in\mathcal{M}_n(\RR)$: $$\rho(\vf{A})\leq\norm{\vf{A}}$$
+      \item Given a matrix $\vf{A}\in\mathcal{M}_n(\RR)$ and $\varepsilon>0$, there exist a matrix norm $\norm{\cdot}_{\vf{A},\varepsilon}$ such that: $$\rho(\vf{A})\leq\norm{\vf{A}}_{\vf{A},\varepsilon}\leq\rho(\vf{A})+\varepsilon$$
     \end{enumerate}
   \end{proposition}
   \begin{definition}
@@ -561,14 +604,14 @@
     Let $\vf{A}\in\mathcal{M}_n(\RR)$. The following statements are equivalent:
     \begin{enumerate}
       \item $\vf{A}$ is convergent.
-      \item $\displaystyle\lim_{k\to\infty}\|\vf{A}^k\|=\vf{0}$ for some matrix norm $\|\cdot\|$.
+      \item $\displaystyle\lim_{k\to\infty}\|\vf{A}^k\|=\vf{0}$ for some matrix norm $\norm{\cdot}$.
       \item $\rho(\vf{A})<1$.
     \end{enumerate}
   \end{theorem}
   \begin{corollary}
-    Let $\vf{A}\in\mathcal{M}_n(\RR)$. If there is a matrix norm $\|\cdot\|$ satisfying $\|\vf{A}\|<1$, then $\vf{A}$ converges.
+    Let $\vf{A}\in\mathcal{M}_n(\RR)$. If there is a matrix norm $\norm{\cdot}$ satisfying $\norm{\vf{A}}<1$, then $\vf{A}$ converges.
   \end{corollary}
-  \begin{theorem}
+  \begin{theorem}\label{NM:A-I_sum}
     Let $\vf{A}\in\mathcal{M}_n(\RR)$.
     \begin{enumerate}
       \item The series $\sum_{k=0}^\infty \vf{A}^k$ converges if and only if $\vf{A}$ converge.
@@ -576,23 +619,45 @@
     \end{enumerate}
   \end{theorem}
   \begin{corollary}
-    Let $\vf{A}\in\mathcal{M}_n(\RR)$. If there is a subordinated matrix norm $\|\cdot\|$ satisfying $\|\vf{A}\|<1$, then $\vf{I}_n-\vf{A}$ is non-singular and moreover: $$\frac{1}{1+\|\vf{A}\|}\leq\|(\vf{I}_n-\vf{A})^{-1}\|\leq\frac{1}{1-\|\vf{A}\|}$$
+    Let $\vf{A}\in\mathcal{M}_n(\RR)$. If there is a subordinated matrix norm $\norm{\cdot}$ satisfying $\norm{\vf{A}}<1$, then $\vf{I}_n-\vf{A}$ is non-singular and moreover: $$\frac{1}{1+\norm{\vf{A}}}\leq\|(\vf{I}_n-\vf{A})^{-1}\|\leq\frac{1}{1-\norm{\vf{A}}}$$
   \end{corollary}
   \subsubsection{Matrix condition number}
   \begin{definition}
-    Let $\vf{A}\in\GL_n(\RR)$. We define the \emph{condition number} $\kappa(\vf{A})$ of $\vf{A}$ as: $$\kappa(\vf{A})=\|\vf{A}\|\|\vf{A}^{-1}\|$$
+    Let $\vf{A}\in\GL_n(\RR)$. We define the \emph{condition number} $\kappa(\vf{A})$ of $\vf{A}$ as: $$\kappa(\vf{A})=\norm{\vf{A}}\|\vf{A}^{-1}\|$$
   \end{definition}
-  \begin{theorem}
-    Let $\vf{A}\in\GL_n(\RR)$, $\vf{b}\in\RR^n$, $\vf{A}\vf{x}=\vf{b}$ be a system of linear equations and $\|\cdot\|$ be a subordinated matrix norm. Suppose we know $\vf{A}$ and $\vf{b}$ with absolute errors $\Delta\vf{A}$ and $\Delta\vf{b}$, respectively. Therefore, we actually have to solve the system: $$(\vf{A}+\Delta\vf{A})(\vf{x}+\Delta \vf{x})=(\vf{b}+\Delta\vf{b})$$ If $\|\Delta\vf{A}\|<\frac{1}{\|\vf{A}^{-1}\|}$, then: $$\frac{\|\Delta \vf{x}\|}{\|\vf{x}\|}\leq\frac{\kappa(\vf{A})}{1-\norm{\vf{A}^{-1}}\norm{\Delta\vf{A}}}\left(\frac{\norm{\Delta\vf{b}}}{\norm{\vf{b}}}+\frac{\norm{\Delta\vf{A}}}{\norm{\vf{A}}}\right)$$
+  \begin{theorem}\label{NM:cond_num_ineq}
+    Let $\vf{A}\in\GL_n(\RR)$, $\vf{b}\in\RR^n$, $\vf{A}\vf{x}=\vf{b}$ be a system of linear equations and $\norm{\cdot}$ be a subordinated matrix norm. Suppose we know $\vf{A}$ and $\vf{b}$ with absolute errors $\Delta\vf{A}$ and $\Delta\vf{b}$, respectively. Therefore, we actually have to solve the system:
+    \begin{equation}\label{NM:Abx_errors}
+      (\vf{A}+\Delta\vf{A})(\vf{x}+\Delta \vf{x})=(\vf{b}+\Delta\vf{b})
+    \end{equation}
+    If $\norm{\Delta\vf{A}}<\frac{1}{\norm{\vf{A}^{-1}}}$, then: $$\frac{\norm{\Delta \vf{x}}}{\norm{\vf{x}}}\leq\frac{\kappa(\vf{A})}{1-\norm{\vf{A}^{-1}}\norm{\Delta\vf{A}}}\left(\frac{\norm{\Delta\vf{b}}}{\norm{\vf{b}}}+\frac{\norm{\Delta\vf{A}}}{\norm{\vf{A}}}\right)$$
   \end{theorem}
+  \begin{proof}
+    Since $\norm{\vf{A}^{-1}\Delta\vf{A}}\leq \norm{\vf{A}^{-1}}\norm{\Delta\vf{A}}<1$, we have that $\vf{I}_n+\vf{A}^{-1}\Delta\vf{A}$ is non-singular and moreover: $$\norm{(\vf{I}_n+\vf{A}^{-1}\Delta\vf{A})^{-1}}\leq\frac{1}{1-\norm{\vf{A}^{-1}}\norm{\Delta\vf{A}}}$$
+    Furthermore, from \mcref{NM:Abx_errors} we have:
+    $$
+      \Delta\vf{x}\vf{A}(I+\vf{A}^{-1}\vf{\Delta A})=\Delta\vf{b}-\Delta\vf{A}\vf{x}
+    $$
+    Therefore:
+    \begin{align*}
+      \frac{\norm{\Delta \vf{x}}}{\norm{\vf{x}}} & \leq\frac{\norm{\Delta\vf{b}-\Delta\vf{A}\vf{x}}\norm{(\vf{I}_n+\vf{A}^{-1}\Delta\vf{A})^{-1}}\norm{\vf{A}^{-1}}}{\norm{\vf{x}}}                                                \\
+                                                 & \leq\left(\frac{\norm{\Delta\vf{b}}}{\norm{\vf{x}}}+\norm{\Delta\vf{A}}\right) \frac{\norm{\vf{A}^{-1}}}{1-\norm{\vf{A}^{-1}}\norm{\Delta\vf{A}}}                               \\
+                                                 & \leq\frac{\kappa(\vf{A})}{1-\norm{\vf{A}^{-1}}\norm{\Delta\vf{A}}}\left(\frac{\norm{\Delta\vf{b}}}{\norm{\vf{A}}\norm{\vf{x}}}+\frac{\norm{\Delta\vf{A}}}{\norm{\vf{A}}}\right) \\
+                                                 & \leq\frac{\kappa(\vf{A})}{1-\norm{\vf{A}^{-1}}\norm{\Delta\vf{A}}}\left(\frac{\norm{\Delta\vf{b}}}{\norm{\vf{b}}}+\frac{\norm{\Delta\vf{A}}}{\norm{\vf{A}}}\right)
+    \end{align*}
+    because $\vf{b}\leq \norm{\vf{A}}\norm{\vf{x}}$.
+  \end{proof}
   \begin{theorem}
-    Let $\vf{A}\in\GL_n(\RR)$ and $\|\cdot\|$ be a subordinated matrix norm. Then:
+    Let $\vf{A}\in\GL_n(\RR)$ and $\norm{\cdot}$ be a subordinated matrix norm. Then:
     \begin{enumerate}
       \item $\kappa(\vf{A})\geq\rho(\vf{A})\rho(\vf{A}^{-1})$.
       \item If $\vf{b},\vf{z}\in\RR^n$ are such that $\vf{A}\vf{z}=\vf{b}$, then: $$\norm{\vf{A}^{-1}}\geq\frac{\norm{\vf{z}}}{\norm{\vf{b}}}$$
       \item If $\vf{B}\in\mathcal{M}_n(\RR)$ is a singular matrix, then: $$\kappa(\vf{A})\geq\frac{\norm{\vf{A}}}{\norm{\vf{A}-\vf{B}}}$$
     \end{enumerate}
   \end{theorem}
+  \begin{proof}
+    The first two properties are easy. For the third one, if $\vf{P}\in\mathcal{M}_n(\RR)$ is such that $\norm{\vf{P}}<\frac{1}{\norm{\vf{A}^{-1}}}$, then $\vf{A}+\vf{P}=\vf{A}(\vf{I}_n+\vf{A}^{-1}\vf{P})$ is non-singular. Equivalently, if $\vf{B}:=\vf{A}+\vf{P}$ is singular, then we must have $\norm{\vf{P}}=\norm{\vf{B}-\vf{A}}\geq\frac{1}{\norm{\vf{A}^{-1}}}$.
+  \end{proof}
   \subsubsection{Iterative methods}
   \begin{definition}
     Suppose we want to solve the system $\vf{A}\vf{x}=\vf{b}$, where $\vf{A}\in\mathcal{M}_n(\RR)$ and $\vf{b}\in\RR^n$. We choose a matrix $\vf{N}\in\GL_n(\RR)$ and define $\vf{P}:=\vf{N}-\vf{A}$. Then: $$\vf{A}\vf{x}=\vf{b}\iff \vf{x}=\vf{N}^{-1}\vf{P}\vf{x}+\vf{N}^{-1}\vf{b}=:\vf{M}\vf{x}+\vf{N}^{-1}\vf{b}$$ The matrix $\vf{M}$ is called the \emph{iteration matrix}. This defines a fixed-point iteration in the following way:
@@ -620,8 +685,8 @@
     \end{align*}
   \end{proposition}
   \begin{definition}
-    Let $\vf{A}=(a_{ij})\in\mathcal{M}_n(\RR)$. We say $A$ is \emph{strictly diagonally dominant by rows} if $$|a_{ii}|>\sum_{\substack{j=1\\j\ne i}}^n|a_{ij}|$$
-    We say $A$ is \emph{strictly diagonally dominant by columns} if $$|a_{jj}|>\sum_{\substack{i=1\\i\ne j}}^n|a_{ij}|$$
+    Let $\vf{A}=(a_{ij})\in\mathcal{M}_n(\RR)$. We say $A$ is \emph{strictly diagonally dominant by rows} if $$|a_{ii}|>\sum_{\substack{j=1\\j\ne i}}^n\abs{a_{ij}}$$
+    We say $A$ is \emph{strictly diagonally dominant by columns} if $$|a_{jj}|>\sum_{\substack{i=1\\i\ne j}}^n\abs{a_{ij}}$$
   \end{definition}
   \begin{definition}[Jacobi method]
     Let $\vf{A}=(a_{ij})\in\mathcal{M}_n(\RR)$ be such that $\prod_{i=1}^na_{ii}\ne 0$, $\vf{b}\in\RR^n$ and $\vf{A}\vf{x}=\vf{b}$ be a system of equations. \emph{Jacobi method} consists in defining a matrix $\vf{N}$ (and consequently matrices $\vf{P}$ and $\vf{M}$ as defined above) in the following way:
@@ -718,7 +783,7 @@
     Let $\vf{A}\in\mathcal{M}_n(\RR)$. For simplicity, suppose $\vf{A}$ is diagonalizable with eigenvalues $\lambda_1,\ldots,\lambda_n$ and eigenvectors $\vf{v}_1,\ldots,\vf{v}_n$. Suppose $|\lambda_1|>|\lambda_2|\geq\cdots\geq|\lambda_n|$. The \emph{power method} consists in finding an approximation of the dominant eigenvalue $\lambda_1$ starting from an initial approximation $\vf{x}^{(0)}$ of $\vf{v}_1$. We define: $$\vf{x}^{(k+1)}=\vf{A}\vf{x}^{(k)}\qquad k\geq 0$$ Suppose $\vf{x}^{(0)}=\sum_{i=1}^n\alpha_i\vf{v}_i$. If we denote by $\vf{v}_{i,m}$ the $m$-th component of the vector $\vf{v}_i$ and choose $\ell$ such that $\vf{v}_{1,\ell}\ne0$. Then: $$\lim_{k\to\infty}\frac{\vf{x}^{(k)}}{\lambda_1^k}=\vf{v}_1\qquad\lim_{k\to\infty}\frac{\vf{x}_\ell^{(k+1)}}{\vf{x}_\ell^{(k)}}=\lambda_1$$ provided that $\alpha_1\ne0$. More precisely we have: $$\frac{\vf{x}_\ell^{(k+1)}}{\vf{x}_\ell^{(k)}}=\lambda_1+\O{\left|\frac{\lambda_2}{\lambda_1}\right|^k}$$
   \end{proposition}
   \begin{proposition}[Normalized power method]
-    Let $\vf{A}\in\mathcal{M}_n(\RR)$ and $\|\cdot\|$ be a vector norm\footnote{For power method it is recommended to use $\|\cdot\|_\infty$.}. For simplicity suppose $\vf{A}$ is diagonalizable with eigenvalues $\lambda_1,\ldots,\lambda_n$ and eigenvectors $\vf{v}_1,\ldots,\vf{v}_n$. Suppose $|\lambda_1|>|\lambda_2|\geq\cdots\geq|\lambda_n|$. The \emph{normalized power method} consists in defining $$\vf{y}^{(k)}=\frac{\vf{x}^{(k)}}{\|\vf{x}^{(k)}\|}\quad\vf{x}^{(k+1)}=\vf{A}\vf{y}^{(k)}\quad\text{for }k\geq 0$$ Suppose $\vf{x}^{(0)}=\sum_{i=1}^n\alpha_i\vf{v}_i$ such that $\alpha_1\ne0$. If we choose $\ell$ such that $\vf{v}_{1,\ell}\ne0$. Then: $$\lim_{k\to\infty}\vf{x}^{(k)}=\vf{v}_1\qquad\lim_{k\to\infty}\frac{\vf{x}_\ell^{(k+1)}}{\vf{y}_\ell^{(k)}}=\lambda_1$$ More precisely we have: $$\frac{\vf{x}_\ell^{(k+1)}}{\vf{y}_\ell^{(k)}}=\lambda_1+\O{\left|\frac{\lambda_2}{\lambda_1}\right|^k}$$
+    Let $\vf{A}\in\mathcal{M}_n(\RR)$ and $\norm{\cdot}$ be a vector norm\footnote{For power method it is recommended to use $\norm{\cdot}_\infty$.}. For simplicity suppose $\vf{A}$ is diagonalizable with eigenvalues $\lambda_1,\ldots,\lambda_n$ and eigenvectors $\vf{v}_1,\ldots,\vf{v}_n$. Suppose $|\lambda_1|>|\lambda_2|\geq\cdots\geq|\lambda_n|$. The \emph{normalized power method} consists in defining $$\vf{y}^{(k)}=\frac{\vf{x}^{(k)}}{\|\vf{x}^{(k)}\|}\quad\vf{x}^{(k+1)}=\vf{A}\vf{y}^{(k)}\quad\text{for }k\geq 0$$ Suppose $\vf{x}^{(0)}=\sum_{i=1}^n\alpha_i\vf{v}_i$ such that $\alpha_1\ne0$. If we choose $\ell$ such that $\vf{v}_{1,\ell}\ne0$. Then: $$\lim_{k\to\infty}\vf{x}^{(k)}=\vf{v}_1\qquad\lim_{k\to\infty}\frac{\vf{x}_\ell^{(k+1)}}{\vf{y}_\ell^{(k)}}=\lambda_1$$ More precisely we have: $$\frac{\vf{x}_\ell^{(k+1)}}{\vf{y}_\ell^{(k)}}=\lambda_1+\O{\left|\frac{\lambda_2}{\lambda_1}\right|^k}$$
   \end{proposition}
   \begin{proposition}[Rayleigh quotient]
     Let $\vf{A}\in\mathcal{M}_n(\RR)$. Suppose we have a power method $\vf{x}^{(k+1)}=\vf{A}\vf{x}^{(k)}$ to approximate the dominant eigenvalue $\lambda_1$ of $\vf{A}$. Then \emph{Rayleigh quotient} approximates $\lambda_1$ as follows: $$\lim_{k\to\infty}\frac{\left(\vf{x}^{(k+1)}\right)^\mathrm{T}\cdot \vf{x}^{(k)}}{\left(\vf{x}^{(k)}\right)^\mathrm{T}\cdot\vf{x}^{(k)}}=\lambda_1$$
