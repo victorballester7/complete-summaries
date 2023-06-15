@@ -442,11 +442,10 @@
     Then, $\exists r>0$ such that $\forall \vf{x}_0\in B(\vf{x}^*,r)$, the Newton method sequence is well-defined and converges quadratically (at least) to $\vf{x}^*$.
   \end{theorem}
   \begin{proof}
-    Let $r:=\min\left(R,\frac{1}{2ML}\right)$. We first prove that if $\vf{y}\in B(\vf{x}^*,r)$, then $\vf{DF}(\vf{y})$ is invertible. It's clear that for any matrix $\vf{A}$, we have $\rho(\vf{A})\leq\norm{\vf{A}}$. Moreover, from \mcref{NM:A-I_sum}, if $\rho(\vf{A})<1$, then $\vf{I}+\vf{A}$ is invertible and $\norm{{(\vf{I}+\vf{A})}^{-1}}\leq\frac{1}{1-\norm{\vf{A}}}$. With that in mind, if $\vf{A}:={\vf{DF}}^{-1}(\vf{x}^*)\vf{DF}(\vf{y}) -\vf{I}_d$, then:
-    \begin{multline*}
-      \rho(\vf{A})\leq\norm{\vf{A}}\leq\norm{{\vf{DF}}^{-1}(\vf{x}^*)}\norm{\vf{DF}(\vf{y})-\vf{DF}(\vf{x}^*)}\leq \\
-      \leq MLr\leq\frac{1}{2}
-    \end{multline*}
+    Let $r:=\min\left(R,\frac{1}{2ML}\right)$. We prove first that if $\vf{y}\in B(\vf{x}^*,r)$, then $\vf{DF}(\vf{y})$ is invertible. Recall that from \mcref{NM:A-I_sum}, if $\norm{\vf{A}}<1$, then $\vf{I}+\vf{A}$ is invertible and $\norm{{(\vf{I}+\vf{A})}^{-1}}\leq\frac{1}{1-\norm{\vf{A}}}$. With that in mind, if $\vf{A}:={\vf{DF}}^{-1}(\vf{x}^*)\vf{DF}(\vf{y}) -\vf{I}_d$, then:
+    \begin{equation*}
+      \norm{\vf{A}}\leq\norm{{\vf{DF}}^{-1}(\vf{x}^*)}\norm{\vf{DF}(\vf{y})-\vf{DF}(\vf{x}^*)}\leq MLr\leq\frac{1}{2}
+    \end{equation*}
     Hence, $\vf{A}+\vf{I}_d={\vf{DF}}^{-1}(\vf{x}^*)\vf{DF}(\vf{y})$ is invertible and therefore so is $\vf{DF}(\vf{y})$. Furthermore:
     \begin{equation}\label{NC:insideNew}
       \norm{{\vf{DF}}^{-1}(\vf{y})} \leq \frac{\norm{{\vf{DF}}^{-1}(\vf{x}^*)}}{1 - \norm{\vf{A}}}\leq  2M
@@ -611,9 +610,9 @@
       % \vf{Au}:=\\
       \begin{pmatrix}
         -2+M   & 1+ L   & 0      & \cdots & 0      \\
-        1-L    & -2+M   & 1+L    & \cdots & 0      \\
-        0      & 1-L    & -2+M   & \cdots & \vdots \\
-        \vdots & \ddots & \ddots & \ddots & 0      \\
+        1-L    & -2+M   & 1+L    & \ddots & \vdots \\
+        0      & 1-L    & -2+M   & \ddots & 0      \\
+        \vdots & \ddots & \ddots & \ddots & 1+L    \\
         0      & \cdots & 0      & 1-L    & -2+M   \\
       \end{pmatrix}\cdot\\\cdot\begin{pmatrix}
         x_1 \\ x_2 \\ x_3 \\ \vdots \\ x_{N-1}
@@ -684,7 +683,7 @@
     \end{enumerate}
   \end{corollary}
   \begin{proof}
-    The third property is easy, and the first one follows from the proof of \mnameref{NC:svd}. For the second one, not that from the identity $\vf{AV}=\vf{U\Sigma}$ we have $\vf{A}\vf{v}_i=\sigma_i\vf{u}_i$, for $i=1,\ldots,n$. Similarly, from $\transpose{\vf{A}}\vf{U}=\vf{V\Sigma}$ we have $\transpose{\vf{A}}\vf{u}_i=\sigma_i\vf{v}_i$, for $i=1,\ldots,n$. Thus:
+    The third property is easy, and the first and second one are similar, so we only prove the second one. Note that from the identity $\vf{AV}=\vf{U\Sigma}$ we have $\vf{A}\vf{v}_i=\sigma_i\vf{u}_i$, for $i=1,\ldots,n$. Similarly, from $\transpose{\vf{A}}\vf{U}=\vf{V\Sigma}$ we have $\transpose{\vf{A}}\vf{u}_i=\sigma_i\vf{v}_i$, for $i=1,\ldots,n$. Thus:
     $$
       \vf{A}\transpose{\vf{A}}\vf{u}_i=\sigma_i\vf{A}\vf{v}_i={\sigma_i}^2\vf{u}_i
     $$
