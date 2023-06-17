@@ -1,7 +1,7 @@
 \documentclass{standalone}
 \usepackage{../../../../preamble_formulas}
 
-\def\a{2}
+\def\a{1}
 \def\lamb{0.8}
 % \a * \lamb must be > 1
 \def\n{4}
@@ -13,15 +13,18 @@
 \begin{tikzpicture}
   \begin{axis}[
       axis lines=middle,
-      xmin=-3, xmax=3,
-      ymin=-0.02, ymax=1.2,
-      xtick=\empty, ytick={1},
-      extra x ticks = {-\a,-1/\lamb,1/\lamb,\a},
-      extra x tick labels={$-\abs{a}$,$-\frac{1}{\abs{\lambda}}$,$\frac{1}{\abs{\lambda}}$,$\abs{a}$},
+      xmin=-1, xmax=1,
+      ymin=-0.4, ymax=1.5,
+      xtick=\empty, ytick=\empty,
+      axis equal image,
+      % extra x ticks = {-\a,-1/\lamb,1/\lamb,\a},
+      % extra x tick labels={$-\abs{a}$,$-\frac{1}{\abs{\lambda}}$,$\frac{1}{\abs{\lambda}}$,$\abs{a}$},
       ylabel={$t$},
       xlabel={$x$},
-      legend style={at={(0.5,0)},anchor=north},
-      legend cell align={left},
+      x label style={at={(axis description cs:0.95,0.2)},anchor=north},
+      y label style={at={(axis description cs:0.5,0.95)},anchor=east},
+      % legend style={at={(0.5,0)},anchor=north},
+      % legend cell align={left},
       %axis on top,
     ]
     \def\xmax{\pgfkeysvalueof{/pgfplots/xmax}}
@@ -51,16 +54,6 @@
       }
 
     \foreach \i in{1,...,\n}{
-        \pgfplotsforeachungrouped \j in{0,...,2*(\n-\i+1)-2}{
-            \edef\temp{\noexpand
-              % \draw[-stealth,color_blue1] ({-1/\lamb+\i*\h+(\j+1)*\h},{\i*\k}) -- ({-1/\lamb+\i*\h+\j*\h},{(\i+1)*\k});
-              % \draw[-stealth,color_blue1] ({-1/\lamb+\i*\h+(\j-1)*\h},{\i*\k}) -- ({-1/\lamb+\i*\h+\j*\h},{(\i+1)*\k});
-              \draw[-stealth,color_blue1] ({-1/\lamb+(\i-1)*\h+\j*\h+\eps},{(\i-1)*\k+\eps}) -- ({-1/\lamb+(\i-1)*\h+(\j+1)*\h-\eps},{((\i-1)+1)*\k-\eps});
-            }
-            \temp
-          }
-      }
-    \foreach \i in{1,...,\n}{
         \pgfplotsforeachungrouped \j in{2,...,2*(\n-\i+1)}{
             \edef\temp{\noexpand
               % \draw[-stealth,color_blue1] ({-1/\lamb+\i*\h+(\j+1)*\h},{\i*\k}) -- ({-1/\lamb+\i*\h+\j*\h},{(\i+1)*\k});
@@ -70,8 +63,12 @@
             \temp
           }
       }
-    \addplot[thick,samples=100,smooth,red,domain=-\a:0]{x/\a+1};
-    \addplot[thick,samples=100,smooth,red,domain=0:\a]{-x/\a+1};
+    \addplot[thick,samples=10,red,domain=-1:1]{2*x+1+0.4};
+    \addplot[thick,samples=10,red,domain=-1:1]{2*x+0.15+0.4};
+
+    \node[anchor=north,text width=1cm,align=center] at (-0.57,0){$u\ne 0$ $v\ne 0$};
+    \node[anchor=north,text width=1cm,align=center] at (0.5,0){$u = 0$ $v= 0$};
+    \node[anchor=north,text width=1cm,align=center] at (0.18,1.5){$u\ne 0$ $v= 0$};
     % \addplot[thin,samples=100,smooth,color_blue1,domain=-1/\lamb:0]{x*\lamb+1};
     % \addplot[thin,samples=100,smooth,color_blue1,domain=0:1/\lamb]{-x*\lamb+1};
   \end{axis}

@@ -142,7 +142,7 @@
   \begin{definition}
     The family of \emph{$s$-stage Runge-Kutta methods} (or \emph{RK methods}) is defined by $$\vf\phi(t,\vf{x},\vf{f},h)=\vf{x}+h\sum_{i=1}^sb_i\vf{k}_i$$
     where the stages $\vf{k}_i\in\RR^d$ are the solutions to the coupled system of (generally nonlinear) equations
-    $$\vf{k}_i=\vf{f}(t+c_ih,\vf{x}+h\sum_{j=1}^{s}a_{ij}\vf{k}_j)\quad i=1,\ldots,s$$
+    $$\vf{k}_i=\vf{f}\left(t+c_ih,\vf{x}+h\sum_{j=1}^{s}a_{ij}\vf{k}_j\right)\quad i=1,\ldots,s$$
     where $c_i:=\sum_{j=1}^{s}a_{ij}$ for $i=1,\ldots,s$. Denoting $\vf{c}=(c_i)$, $\vf{b}=(b_i)$ and $\vf{A}=(a_{ij})$ we can construct the \emph{Butcher tableau}
     \begin{center}
       \renewcommand{\arraystretch}{1.25}
@@ -493,9 +493,9 @@
     where $\Delta\vf{F}_n=\vf{F}_{n+1}-\vf{F}_n$.
   \end{definition}
   \begin{remark}
-    Another alternativer for the computation of the Jacobian matrix would be to use the finite difference method for each column of the matrix:
+    Another alternative for the computation of the Jacobian matrix would be to use the finite difference method for each column of the matrix:
     $$
-      \vf{DF}_{j}(\vf{x}_n)\simeq\frac{\vf{F}(\vf{x}_n+h\vf{e}_j)-\vf{F}(\vf{x}_n)}{h}
+      \vf{D}_j\vf{F}(\vf{x}_n)\simeq\frac{\vf{F}(\vf{x}_n+h\vf{e}_j)-\vf{F}(\vf{x}_n)}{h}
     $$
   \end{remark}
   \subsubsection{Optimization}
@@ -563,7 +563,7 @@
     $$
   \end{definition}
   \begin{remark}
-    Given several initial guesses, we can use interpolation these nodes, find the root of the interpolating polynomial and use it as the new guess. Alternatively, one can use the Newton's method or a quasi-Newton method for finding a root of $\vf{F}$.
+    Given several initial guesses, we can use interpolation with these nodes, find the root of the interpolating polynomial and use it as the new guess. Alternatively, one can use the Newton's method or a quasi-Newton method for finding a root of $\vf{F}$.
   \end{remark}
   \subsubsection{Multiple shooting method}
   \begin{definition}[Multiple shooting method]
@@ -853,18 +853,19 @@
         \vf{R} \\
         \vf{0}
       \end{pmatrix}= \vf{Q}\vf{R}$ be the full QR decomposition of $\vf{A}$. Then:
-    $$
-      {\norm{\vf{A}\vf{x}\!-\!\vf{b}}_2}^{\!2}\!=\!{\norm{\begin{pmatrix}
-          \vf{Q} \\
-          \vf{Q}_\perp
-        \end{pmatrix}\!(\vf{Ax}\!-\!\vf{b})}_2}^{\!2}\!\!=\!{\norm{\begin{pmatrix}
-          \vf{R} \\
-          \vf{0}
-        \end{pmatrix}\!\vf{x}\!-\!\begin{pmatrix}
-          \transpose{\vf{Q}}\vf{b} \\
-          \vf{Q}_\perp\vf{x}
-        \end{pmatrix}}_2}^{\!2}
-    $$
+    \begin{align*}
+      {\norm{\vf{A}\vf{x}-\vf{b}}_2}^{2} & ={\norm{\begin{pmatrix}
+                                                       \transpose{\vf{Q}} \\
+                                                       \transpose{\vf{Q}_\perp}
+                                                     \end{pmatrix}(\vf{Ax}-\vf{b})}_2}^{2}                           \\
+                                         & ={\norm{\begin{pmatrix}
+                                                       \vf{R} \\
+                                                       \vf{0}
+                                                     \end{pmatrix}\vf{x}-\begin{pmatrix}
+                                                                           \transpose{\vf{Q}}\vf{b} \\
+                                                                           \transpose{\vf{Q}_\perp}\vf{b}
+                                                                         \end{pmatrix}}_2}^{2}
+    \end{align*}
     And so, by \mnameref{LM:least-squares} we have:
     $$
       \vf{x}^*={\left(\begin{pmatrix}
@@ -876,7 +877,7 @@
         \vf{R} & \vf{0}
       \end{pmatrix}\begin{pmatrix}
         \transpose{\vf{Q}}\vf{b} \\
-        \vf{Q}_\perp\vf{b}
+        \transpose{\vf{Q}_\perp}\vf{b}
       \end{pmatrix}=\vf{R}^{-1}\transpose{\vf{Q}}\vf{b}
     $$
   \end{proof}
