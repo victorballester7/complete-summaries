@@ -48,20 +48,12 @@ Summary of each subject in Mathematics and Physics degree at UAB (Universitat Au
     - All
   - Arithmetic
     - All
-  - Commutative algebra
-    - All
   - Dynamical systems
     - Proofs
-  - Harmonic analysis
-    - All
   - Linear models
     - Proofs
     - More organization!!!
     - Add interpretation of the correlation
-  - Numerical calculus
-    - All
-  - Numeric integration of PDEs
-    - All
   - PDEs
     - Initial proofs
     - Entropy condition
@@ -77,7 +69,5 @@ Summary of each subject in Mathematics and Physics degree at UAB (Universitat Au
     - General theorems on linear maps
     - Hilbert
     - Lp is Banach
-  - Stochastic processes - All
-    - All
 
 Feel free to help us with this summaries!

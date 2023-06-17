@@ -67,7 +67,7 @@
     $$\Exp\left(\sum_{n=1}^NZ_n\right)=\mu\Exp(N)$$
   \end{theorem}
   \begin{proof}
-    Note that $\Exp\left(\sum_{n=1}^NZ_n\right)=\Exp\left(\sum_{n=1}^\infty Z_n\indi{N\geq n}\right)$ and it is integrable because:
+    Note that $\Exp\left(\sum_{n=1}^NZ_n\right)=\Exp\left(\sum_{n=1}^\infty Z_n\indi{N\geq n}\right)$, and it is integrable because:
     \begin{multline*}
       \Exp\left(\sum_{n=1}^\infty \abs{Z_n\indi{N\geq n}}\right) =\sum_{n=1}^\infty \Exp(\abs{Z_n})\Exp(\indi{N\geq n}) \leq              \\
       \leq A\sum_{n=1}^\infty \Prob(N\geq n) =A\Exp(N)<\infty
@@ -122,7 +122,7 @@
     $$
       g_{X}^{(k)}(s_n)=\Exp(X(X-1)\cdots (X-k+1){(s_n)}^{X-k})
     $$
-    for all $n\in\NN$. Moreover note that $X(X-1)\cdots (X-k+1){(s_n)}^{X-k}\nearrow X(X-1)\cdots (X-k+1)$. Now use the \mnameref{P:monotone}.
+    for all $n\in\NN$. Moreover, note that $X(X-1)\cdots (X-k+1){(s_n)}^{X-k}\nearrow X(X-1)\cdots (X-k+1)$. Now use the \mnameref{P:monotone}.
   \end{sproof}
   \begin{center}
     \def\arraystretch{1.3}
@@ -149,11 +149,11 @@
     Let $T\subseteq \RR^n$ be a set, $(E,\mathcal{E})$ be a measurable space and $(\Omega,\mathcal{A},\Prob)$ be a probability space. A \emph{stochastic process} on $(\Omega,\mathcal{A},\Prob)$ with \emph{parameter set} $T$ and \emph{state space} $(E,\mathcal{E})$ is a family of random variables ${\{X_t\}}_{t\in T}$ from $(\Omega,\mathcal{A})$ to $(E,\mathcal{E})$. That is, $X_t:\Omega\to E$ satisfies ${X_t}^{-1}(B)\in\mathcal{A}$ for all $B\in\mathcal{E}$ and all $t\in T$.
   \end{definition}
   \begin{remark}
-    In general we wil consider stochastic processes with parameter sets $T=\NN,\NN\cup\{0\},\ZZ,\RR,\RR_{\geq 0}$ and state spaces $(\NN\cup\{0\},\mathcal{P}(\NN \cup \{0\}))$ or $(\RR,\mathcal{B}(\RR))$.
+    In general, we wil consider stochastic processes with parameter sets $T=\NN,\NN\cup\{0\},\ZZ,\RR,\RR_{\geq 0}$ and state spaces $(\NN\cup\{0\},\mathcal{P}(\NN \cup \{0\}))$ or $(\RR,\mathcal{B}(\RR))$.
   \end{remark}
   \subsubsection{Galton-Watson process}
   \begin{model}\label{SP:galtonwatsonModel}
-    Let $(X_n)$, $n\in\NN\cup\{0\}$ be a sequence of discrete random vairables representing the number of new individuals of a certain population at the $n$-th generation. Suppose they are defined as $$X_{n+1}=\sum_{k=1}^{X_n}Z_{n+1}^{(k)}$$ and $X_0=1$. Here $Z_{n+1}^{(k)}$ has support $\NN\cup\{0\}$ $\forall n,k$ and represent the number of descendants (to the next generation) of the $k$-th individual of the $n$-th generation. Suppose that $Z_{n+1}^{(k)}\sim Z$ are \iid and independent from $(X_n)$. We would like to study the probability $\rho$ of extinction of this population: $$\rho=\Prob(\{X_n=0:\text{for some $n\in\NN$}\})=\Prob\left(\bigcup_{n=1}^\infty\{X_n=0\}\right)$$
+    Let $(X_n)$, $n\in\NN\cup\{0\}$ be a sequence of discrete random vairables representing the number of new individuals of a certain population at the $n$-th generation. Suppose they are defined as $$X_{n+1}=\sum_{k=1}^{X_n}Z_{n+1}^{(k)}$$ and $X_0=1$. Here $Z_{n+1}^{(k)}$ has support $\NN\cup\{0\}$ $\forall n,k$ and represent the number of descendants (to the next generation) of the $k$-th individual of the $n$-th generation. Suppose that $Z_{n+1}^{(k)}\sim Z$ are \iid and independent of $(X_n)$. We would like to study the probability $\rho$ of extinction of this population: $$\rho=\Prob(\{X_n=0:\text{for some $n\in\NN$}\})=\Prob\left(\bigcup_{n=1}^\infty\{X_n=0\}\right)$$
   \end{model}
   \begin{lemma}\label{SP:lemmaGaltonWatson}
     Let $(Z_n)$ be a sequence of \iid random variables distributed as $Z$ with support $\NN\cup\{0\}$, and $N$ be a random variable also with support $\NN\cup\{0\}$ and independent to $(Z_n)$. Let $X=\sum_{k=1}^NZ_k$. Then, $\forall s\in[-1,1]$ we have: $$g_X(s)=g_N(g_Z(s))$$
@@ -201,12 +201,12 @@
   \begin{proof}
     First suppose $\Prob(Z=0)+\Prob(Z=1)=1$. Thus, $Z\almoste{\leq}1$ and so $\Exp(Z)\leq 1$. Moreover, $g_Z(s)=\Prob(Z=0)+s\Prob(Z=1)$, which is a line with slope $\Prob(Z=1)<1$. Hence, it has a unique fixed point, which is $s=1$.
 
-    Now assume $\Prob(Z=0)+\Prob(Z=1)<1$. Then, $\exists k\geq 2$ with $\Prob(Z=k)>0$. Hence, ${g_Z}'(s)>0$ and ${g_Z}''(s)>0$ $\forall s\in (0,1)$. Now consider $f(s)=g(s)-s$. Note that $f$ is strictly convex in $(0,1)$ and $f(0)=g(0)=\Prob(Z=0)>0$. Finally note that $$\lim_{t\to 1^-} f'(s)=\lim_{t\to 1^-}g(s)-1=\Exp(Z)-1$$
-    and so $\displaystyle\lim_{t\to 1^-} f'(s)$ is negative in the first case and positive in the second case. This imply that $f$ has no zeros on $(0,1)$ in the first case and exactly 1 zero in $(0,1)$ in the second case.
+    Now assume $\Prob(Z=0)+\Prob(Z=1)<1$. Then, $\exists k\geq 2$ with $\Prob(Z=k)>0$. Hence, ${g_Z}'(s)>0$ and ${g_Z}''(s)>0$ $\forall s\in (0,1)$. Now consider $f(s)=g(s)-s$. Note that $f$ is strictly convex in $(0,1)$ and $f(0)=g(0)=\Prob(Z=0)>0$. Finally, note that $$\lim_{t\to 1^-} f'(s)=\lim_{t\to 1^-}g(s)-1=\Exp(Z)-1$$
+    and so $\displaystyle\lim_{t\to 1^-} f'(s)$ is negative in the first case and positive in the second case. This implies that $f$ has no zeros on $(0,1)$ in the first case and exactly 1 zero in $(0,1)$ in the second case.
 
     It's missing to see that in the second case the probability of extinction $\rho$ is given by the fixed point in $(0,1)$, rather than 1. We have that:
     $$\rho=\lim_{n\to\infty}g_{X_n}(0)=\lim_{n\to\infty}{g_Z}^n(0)$$
-    Since ${g_Z}'>0$, we have that ${g_Z}$ is increasing and so it is ${g_Z}^n$ $\forall n\in\NN$. Moreover if ${g_Z}(x_0)=x_0$, we have that ${g_Z}^n(x_0)=x_0$ $\forall n\in\NN$. Therefore $$0<{g_Z}(0)<{g_Z}^2(0)<\cdots<{g_Z}^n(0)<\cdots <x_0<\cdots <1$$
+    Since ${g_Z}'>0$, we have that ${g_Z}$ is increasing and so it is ${g_Z}^n$ $\forall n\in\NN$. Moreover, if ${g_Z}(x_0)=x_0$, we have that ${g_Z}^n(x_0)=x_0$ $\forall n\in\NN$. Therefore, $$0<{g_Z}(0)<{g_Z}^2(0)<\cdots<{g_Z}^n(0)<\cdots <x_0<\cdots <1$$
     And so the limit has to be $x_0$ (note that the limit does exist because $({g_Z}^n(0))$ is an increasing bounded sequence).
   \end{proof}
   \subsubsection{Gambler's ruin}
@@ -307,7 +307,7 @@
     \end{align*}
   \end{proof}
   \begin{definition}[Random walk]
-    A \emph{random walk} is a sequence $(\vf{S}_n)$ with $\vf{S}_0=\vf{X}_0$ and $\vf{S}_n=\sum_{k=0}^{n}\vf{X}_k$, where $(\vf{X}_k)_{k\geq 1}$ is a sequence of \iid random vectors and $\vf{X}_0$ is a random vector independent from $(\vf{X}_k)$.
+    A \emph{random walk} is a sequence $(\vf{S}_n)$ with $\vf{S}_0=\vf{X}_0$ and $\vf{S}_n=\sum_{k=0}^{n}\vf{X}_k$, where $(\vf{X}_k)_{k\geq 1}$ is a sequence of \iid random vectors and $\vf{X}_0$ is a random vector independent of $(\vf{X}_k)$.
   \end{definition}
   \begin{definition}
     A \emph{simple random walk} is a random walk in which in one step we can only pass from one state to its neighbours. That is, if the random walk is in $\ZZ$, $X_k$ are random variables such that:
@@ -432,7 +432,7 @@
     Let $(X_n)$ be a time-homogeneous Markov chain and $i,j\in I$. Then: $$i\leftrightarrow j\implies d(i)=d(j)$$
   \end{proposition}
   \begin{proof}
-    Suppose $i\ne j$. We will see that if $p_{jj}^{(n)}>0$, then $d(i)\mid n$. Since $i\leftrightarrow j$, then $\exists r,s\in I$ such that $p_{ij}^{(r)}>0$ and $p_{ji}^{(s)}>0$. So as in \mcref{SP:corolariChapKolmo}, we have $p_{ii}^{(r+s)}>0$. Thus, $d(i)\mid r+s$. Moreover if $p_{jj}^{(n)}>0$, then:
+    Suppose $i\ne j$. We will see that if $p_{jj}^{(n)}>0$, then $d(i)\mid n$. Since $i\leftrightarrow j$, then $\exists r,s\in I$ such that $p_{ij}^{(r)}>0$ and $p_{ji}^{(s)}>0$. So as in \mcref{SP:corolariChapKolmo}, we have $p_{ii}^{(r+s)}>0$. Thus, $d(i)\mid r+s$. Moreover, if $p_{jj}^{(n)}>0$, then:
     $$p_{ii}^{(r+n+s)}\geq p_{ij}^{(r)}p_{jj}^{(n)}p_{ji}^{(s)}>0$$
     So $d(i)\mid r+n+s$. Thus, $d(i)\mid n$ and so $d(j)\geq d(i)$ because $d(j)$ is the greatest common divisor of all such $n$. Repeating the argument exchanging $i$ and $j$ we get $d(j)= d(i)$.
   \end{proof}
@@ -449,7 +449,7 @@
     $$C_\alpha:=\{j\in I:\exists n\in\NN\cup\{0\}\text{ with }p_{ij}^{(n d+\alpha)}>0\}$$
     Clearly $C_0\cup\cdots\cup C_{d-1}=I$. Let's see that $C_\alpha\cap C_\beta=\varnothing$ if $\alpha\ne\beta$. Suppose $k\in C_\alpha\cap C_\beta$. Note that since the chain is irreducible, $\exists m\in\NN\cup\{0\}$ such that $p_{ki}^{(m)}>0$. And so, as in \mcref{SP:corolariChapKolmo} we have $p_{kk}^{(n d+\alpha+m)}>0$ because $k\in C_\alpha$. Thus, $d\mid \alpha+m$. The same argument with $\beta$ implies $d\mid \beta+m$. So $d\mid \beta -\alpha$ and $\beta=\alpha$ because $\alpha,\beta\in\{0,\cdots,d-1\}$.
 
-    Finally if $j\in C_\alpha$ is such that $p_{jk}>0$ for $k\in I$, then as in \mcref{SP:corolariChapKolmo} we have $p_{ik}^{(n d+\alpha +1)}>0$. So, if $\alpha+1\leq d-1$, then $k\in C_{\alpha+1}$. Otherwise $k\in C_0=C_{[\alpha+1]_d}$.
+    Finally, if $j\in C_\alpha$ is such that $p_{jk}>0$ for $k\in I$, then as in \mcref{SP:corolariChapKolmo} we have $p_{ik}^{(n d+\alpha +1)}>0$. So, if $\alpha+1\leq d-1$, then $k\in C_{\alpha+1}$. Otherwise, $k\in C_0=C_{[\alpha+1]_d}$.
   \end{proof}
   \subsubsection{Stopping time and strong Markov property}
   \begin{proposition}\label{SP:MarkovImproved}
@@ -462,7 +462,7 @@
     for all $n\geq 0$.
   \end{proposition}
   \begin{proof}
-    By \mcref{SP:lema2Markov} it suffices to prove the statement for $B=\{i_0\}\times\cdots\times\{i_{n-1}\}$. Moreover since $A$ is countable we can suppose $A=\{j_1\}\times\cdots\times\{j_k\}$. We will prove it by induction on $k$ the homogeneous equality (the other one is even easier). The case $k=1$ is by definition. Now suppose $k\geq 2$. Then, denoting $C:=\{X_0=i_0,\ldots,X_{n-1}=i_{n-1},X_n=i\}$ we have:
+    By \mcref{SP:lema2Markov} it suffices to prove the statement for $B=\{i_0\}\times\cdots\times\{i_{n-1}\}$. Moreover, since $A$ is countable we can suppose $A=\{j_1\}\times\cdots\times\{j_k\}$. We will prove it by induction on $k$ the homogeneous equality (the other one is even easier). The case $k=1$ is by definition. Now suppose $k\geq 2$. Then, denoting $C:=\{X_0=i_0,\ldots,X_{n-1}=i_{n-1},X_n=i\}$ we have:
     \begin{multline*}
       \Prob(X_{n+1}=j_1,\ldots,X_{n+k+1}=j_{k+1}\mid C) \\
       =\Prob(X_{n+k+1}=j_{k+1}\mid C,X_{n+1}=j_1,\ldots,X_{n+k}=j_k)\cdot\\
@@ -477,7 +477,7 @@
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and let $I$ be a finite or countable set. For each $i\in I$, let $\mathcal{F}_i$ be a sub $\sigma$-algebra of $\mathcal{A}$, that is a subset of $\mathcal{A}$ which also $\sigma$-algebra. We say that $(\mathcal{F}_i)_{i\in I}$ is \emph{filtration} if for all $i\in I$ we have $\mathcal{F}_i\subseteq\mathcal{F}_{i+1}$. The tuple $(\Omega,\mathcal{A},(\mathcal{F}_i)_{i\in I},\Prob)$ is called a \emph{filtration space}.
   \end{definition}
   \begin{definition}
-    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $\vf{X}$ be a random vector. the \emph{$\sigma$-algebra generated by $\vf{X}$} is:
+    Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $\vf{X}$ be a random vector. The \emph{$\sigma$-algebra generated by $\vf{X}$} is:
     $$\sigma(\vf{X}):=\{\vf{X}^{-1}(B):B\in\mathcal{B}(\RR^n)\}$$
   \end{definition}
   \begin{proposition}
@@ -549,9 +549,9 @@
     for all $n\geq 0$.
   \end{corollary}
   \subsubsection{Recurrence and transience}
-  From now on we will omit saying that a stopping time $\tau$ is defined in a filtration space $(\Omega,\mathcal{F},(\mathcal{F}_n)_{n\geq 0},\Prob)$. Moreover given a Markov chain $(X_n)$, we will denote by $\Prob_i(A):=\Prob(A\mid X_0=i)$ and $\Exp_i(A):=\Exp(A\mid X_0=i)$, for any event $A$.
+  From now on we will omit saying that a stopping time $\tau$ is defined in a filtration space $(\Omega,\mathcal{F},(\mathcal{F}_n)_{n\geq 0},\Prob)$. Moreover, given a Markov chain $(X_n)$, we will denote by $\Prob_i(A):=\Prob(A\mid X_0=i)$ and $\Exp_i(A):=\Exp(A\mid X_0=i)$, for any event $A$.
   \begin{definition}
-    Let $(X_n)$ be a time-homogeneous Markov chain, $i,j\in I$ and consider the stopping time $\tau_j$ of \mcref{SP:tau_i}. We define $f_{ij}:=\Prob_i(\tau_j<\infty)$. We say that $i$ is \emph{transient} if $f_{ii}<1$ and \emph{recurrent} if $f_{ii}=1$. Finally we define $N_i$ as:
+    Let $(X_n)$ be a time-homogeneous Markov chain, $i,j\in I$ and consider the stopping time $\tau_j$ of \mcref{SP:tau_i}. We define $f_{ij}:=\Prob_i(\tau_j<\infty)$. We say that $i$ is \emph{transient} if $f_{ii}<1$ and \emph{recurrent} if $f_{ii}=1$. Finally, we define $N_i$ as:
     $$
       N_i:=\abs{\{n\in\NN:X_n=i\}}=\sum_{n=1}^{\infty}\indi{\{X_n=i\}}
     $$
@@ -564,7 +564,7 @@
     $$
       \tau_i^k:= \inf\{n>\tau_i^{k-1}:X_n=i\}
     $$
-    with the convention that $\tau_i^1=\tau_i$ and $\tau_i^0=0$. Moreover we define the time difference $T_i^k:=\tau_i^k-\tau_i^{k-1}$.
+    with the convention that $\tau_i^1=\tau_i$ and $\tau_i^0=0$. Moreover, we define the time difference $T_i^k:=\tau_i^k-\tau_i^{k-1}$.
   \end{definition}
   \begin{lemma}
     Let $(X_n)$ be a time-homogeneous Markov chain. Then, $\tau_i^k$ is a stopping time $\forall k\in\NN$ and moreover $T_i^k$ are \iid random variables distributed as $\tau_i$.
@@ -699,7 +699,7 @@
               p_{jj}^{(n+r+s)} \geq p_{ji}^{(s)}p_{ii}^{(n)}p_{ij}^{(r)}=:C p_{ii}^{(n)}
             $$
             And so, $\sum p_{ii}^{(n)}=\infty\implies \sum p_{jj}^{(n)} = \infty$ by \mcref{SP:thmRecA}.
-      \item Similarly as before, since $i\to j$, $\exists r\geq 1$ such that $p_{ij}^{(r)}>0$. Thus, $p_{ii}^{(n+r)}\geq p_{ij}^{(r)}p_{jj}^{(n)}$. So, $\sum p_{jj}^{(n)}=\infty\implies \sum p_{ii}^{(n)} = \infty$.
+      \item Similarly, as before, since $i\to j$, $\exists r\geq 1$ such that $p_{ij}^{(r)}>0$. Thus, $p_{ii}^{(n+r)}\geq p_{ij}^{(r)}p_{jj}^{(n)}$. So, $\sum p_{jj}^{(n)}=\infty\implies \sum p_{ii}^{(n)} = \infty$.
       \item It follows from \mcref{SP:thmRecA} and \mcref{SP:lemaPrerec}.
     \end{enumerate}
   \end{proof}
@@ -714,7 +714,7 @@
     \begin{equation*}
       p_{ii}^{(2n)}=\binom{2n}{n}p^nq^n
     \end{equation*}
-    because we choose $n$ steps to the right from a total of $2n$ and the rest must be steps to the left. Finally using \mcref{MA:stirling} one can check that:
+    because we choose $n$ steps to the right from a total of $2n$ and the rest must be steps to the left. Finally, using \mcref{MA:stirling} one can check that:
     \begin{equation}\label{SP:stirling_polya1}
       p_{ii}^{(2n)}\sim \frac{1}{\sqrt{n}}{(4pq)}^n
     \end{equation}
@@ -803,7 +803,7 @@
     \end{enumerate}
   \end{proposition}
   \begin{proof}
-    By \mcref{SP:thmRec,SP:period_classes} we have that $j$ is recurrent and aperiodic. Thus, by \mnameref{SP:ergotic2}, the limits $\displaystyle \lim_{n\to\infty}p_{ij}^{(n)}$ and $\displaystyle \lim_{n\to\infty}p_{ji}^{(n)}$ exist. Moreover since $i\leftrightarrow j$ $\exists r,s\in\NN$ such that $p_{ij}^{(r)}, p_{ji}^{(s)}>0$. By \mcref{SP:corolariChapKolmo} we have that $p_{jj}^{(n+r+s)}\geq C p_{ii}^{(n)}$. If $i$ is positive recurrent then:
+    By \mcref{SP:thmRec,SP:period_classes} we have that $j$ is recurrent and aperiodic. Thus, by \mnameref{SP:ergotic2}, the limits $\displaystyle \lim_{n\to\infty}p_{ij}^{(n)}$ and $\displaystyle \lim_{n\to\infty}p_{ji}^{(n)}$ exist. Moreover, since $i\leftrightarrow j$ $\exists r,s\in\NN$ such that $p_{ij}^{(r)}, p_{ji}^{(s)}>0$. By \mcref{SP:corolariChapKolmo} we have that $p_{jj}^{(n+r+s)}\geq C p_{ii}^{(n)}$. If $i$ is positive recurrent then:
     $$
       \lim_{n\to\infty}p_{jj}^{(n+r+s)}\geq C\lim_{n\to\infty}p_{ii}^{(n)}>0
     $$
@@ -816,7 +816,7 @@
     $$
   \end{theorem}
   \begin{proof}
-    $(Y_n)=(X_{nd})$ is a time-homogeneous Markov chain and $i\in I$ is recurrent and aperiodic. Thus by \mnameref{SP:ergotic2} we have that $\displaystyle\lim_{n\to\infty}p_{ii}^{(nd)}=\frac{1}{\Exp_i(\tau_i^Y)}$. But:
+    $(Y_n)=(X_{nd})$ is a time-homogeneous Markov chain and $i\in I$ is recurrent and aperiodic. Thus, by \mnameref{SP:ergotic2} we have that $\displaystyle\lim_{n\to\infty}p_{ii}^{(nd)}=\frac{1}{\Exp_i(\tau_i^Y)}$. But:
     $$
       \tau_i^Y=\inf\{ n\geq 1: Y_n=i\}=\frac{1}{d}\inf\{n\geq 1: X_{n}=i\}=\frac{\tau_i}{d}
     $$
@@ -849,7 +849,7 @@
     $$
   \end{definition}
   \begin{remark}
-    In general we cannot guarantee neither existence nor uniqueness of a stationary distributions.
+    In general we cannot guarantee neither existence nor uniqueness of stationary distributions.
   \end{remark}
   \begin{lemma}
     Let $(X_n)$ be a time-homogeneous Markov chain, $\vf\nu$ be a stationary distribution and suppose $\vf\pi_0=\vf\nu$. Then, $\vf\pi_n=\vf\nu$ $\forall n\in\NN$.
@@ -860,7 +860,7 @@
     $
   \end{proof}
   \begin{theorem}
-    Let $(X_n)$ be a time-homogeneous irreducible and aperiodic Markov chain. Then, $(X_n)$ is positive recurrent if and only if it admits a stationary distribution. Moreover this distribution is unique and it is given by $\nu_i=\frac{1}{\mu_i}$.
+    Let $(X_n)$ be a time-homogeneous irreducible and aperiodic Markov chain. Then, $(X_n)$ is positive recurrent if and only if it admits a stationary distribution. Moreover, this distribution is unique, and it is given by $\nu_i=\frac{1}{\mu_i}$.
   \end{theorem}
   \begin{proof}
     We will only proof the case when $I$ is finite. By \mcref{SP:coroClassificationStates} we only need to prove the impication to the right. Since $\displaystyle\lim_{n\to\infty}p_{ij}^{(n)}=\frac{1}{\mu_j}$ $\forall i,j\in I$ we have that $\vf\nu={(1/\mu_i)}_{i\in I}\geq 0$ satisfies:
@@ -916,7 +916,7 @@
     $$
       p_j(t)=\sum_{i\in I}p_i(0)\Prob(X_t=j\mid X_0=i)=\sum_{i\in I}p_i(0)p_{ij}(t)
     $$
-    The formula is a consequences of the \mnameref{P:compound}.
+    The formula is a consequence of the \mnameref{P:compound}.
   \end{sproof}
   \subsubsection{Poisson process}
   \begin{definition}
@@ -967,7 +967,7 @@
     $$
       \bigcap_{0\leq s < t}\{N_s\leq N_t\}= \bigcap_{\substack{0\leq s < t\\s,t\in\QQ}}\{N_s\leq N_t\}
     $$
-    because the trajectories are càd. Finally since $\Prob(N_s\leq N_t)=\Prob(N_t-N_s\geq 0)=1$, the intersection has probability $1$. Now, let:
+    because the trajectories are càd. Finally, since $\Prob(N_s\leq N_t)=\Prob(N_t-N_s\geq 0)=1$, the intersection has probability $1$. Now, let:
     \begin{align*}
       A     & :=\{\omega\in\Omega:N(\omega)\text{ has jumps of size }\geq 2\}                   \\
       A_R   & :=\{\omega\in\Omega:N(\omega)\text{ has jumps of size }\geq 2\text{ in $[0,R]$}\} \\
@@ -1098,7 +1098,7 @@
     \begin{multline*}
       p_{ij}(t+h)-p_{ij}(t)=\sum_{\substack{k\in I\\k\ne i}}p_{ik}(h)p_{kj}(t)+p_{ii}(h)p_{ij}(t)-p_{ij}(t)=\\=\sum_{\substack{k\in I\\k\ne i}}(q_{ik}h+\o{h})p_{kj}(t)+(1+q_{ii} h+\o{h})p_{ij}(t)-p_{ij}(t)=\\=\sum_{k\in I}q_{ik}h p_{kj}(t)+\o{h}
     \end{multline*}
-    Dividing by $h$ and taking limits we get the result with the right derivative. Now take $t>0$ and $h<0$. Then in a similar way:
+    Dividing by $h$ and taking limits we get the result with the right derivative. Now take $t>0$ and $h<0$. Then, similarly:
     $$
       p_{ij}(t)-p_{ij}(t+h)=-\sum_{k\in I}q_{ik}h p_{kj}(t+h)+\o{h}
     $$
@@ -1223,7 +1223,7 @@
   \subsection{Brownian motion}
   \subsubsection{Gaussian processes}
   \begin{proposition}\label{SP:gaussian_vector}
-    Let $\vf{x}\in \RR^n$ be a random vector. Then, $\vf{x}$ is a \emph{gaussian vector}, that is it distributes as a $n$-dimensional normal, if and only if there exists $k\in\NN$, $\vf{A}\in\mathcal{M}_{n\times k}(\RR)$, $\vf{z}\in\RR^k$ with \iid components distributed as $N(0,1)$, and $\vf\mu\in\RR^n$ such that: $$\vf{x}=\vf{A}\vf{z}+\vf\mu$$
+    Let $\vf{x}\in \RR^n$ be a random vector. Then, $\vf{x}$ is a \emph{gaussian vector}, that is it distributes as an $n$-dimensional normal, if and only if there exists $k\in\NN$, $\vf{A}\in\mathcal{M}_{n\times k}(\RR)$, $\vf{z}\in\RR^k$ with \iid components distributed as $N(0,1)$, and $\vf\mu\in\RR^n$ such that: $$\vf{x}=\vf{A}\vf{z}+\vf\mu$$
   \end{proposition}
   \begin{definition}
     A stochastic process ${(X_t)}_{t\geq 0}$ is called a \emph{gaussian process} if for all $t_1,\ldots,t_n\geq 0$ the random vector $(X_{t_1},\ldots,X_{t_n})$ is gaussian.
@@ -1278,7 +1278,7 @@
         0      & \cdots  & 0      & t_n- t_{n-1}
       \end{pmatrix}
     $$
-    for all $0<t_1<\cdots<t_n$. One the one hand, if $t_i<t_j$, then $t_{i-1}<t_i\leq t_{j-1}<t_j$ and:
+    for all $0<t_1<\cdots<t_n$. On the one hand, if $t_i<t_j$, then $t_{i-1}<t_i\leq t_{j-1}<t_j$ and:
     \begin{multline*}
       \Exp((B_{t_i}-B_{t_{i-1}})(B_{t_j}-B_{t_{j-1}}))=\Exp(B_{t_i}B_{t_j})-\Exp(B_{t_i}B_{t_{j-1}})-\\-\Exp(B_{t_{i-1}}B_{t_j})+\Exp(B_{t_{i-1}}B_{t_{j-1}})=t_i-t_{i}-t_{j-1}+t_{i-1}=0
     \end{multline*}
@@ -1380,7 +1380,7 @@
     \begin{multline*}
       \Prob(A_M)\geq \Prob \left(\frac{\abs{B_{t+1/n}(\omega)-B_t(\omega)}}{1/n}\geq M\right) = \\ = \Prob\left(\abs{Z}\geq \frac{M}{\sqrt{n}}\right)=2 \left(1-\Phi\left(\frac{M}{\sqrt{n}}\right)\right)\overset{n\to\infty}{\longrightarrow} 1
     \end{multline*}
-    where $Z\sim N(0,1)$ and $\Phi$ is the cumulative distribution function of the standard normal distribution. 
+    where $Z\sim N(0,1)$ and $\Phi$ is the cumulative distribution function of the standard normal distribution.
   \end{proof}
   \begin{theorem}[Paley-Wiener-Zygmund theorem]
     The Brownian trajectories are almost surely nowhere differentiable.
@@ -1438,7 +1438,7 @@
     \end{multline*}
   \end{proof}
   \begin{corollary}
-    The Brownian trajectories have infinite zeros almost surely and they tend to infinity.
+    The Brownian trajectories have infinite zeros almost surely, and they tend to infinity.
   \end{corollary}
   \begin{proof}
     Let $A=\{\omega\in\Omega:B_{\cdot}(\omega)\text{ has finite zeros}\}\subseteq \bigcup_{n=1}^\infty\{\omega\in\Omega:B_{\cdot}(\omega)\text{ doesn't vanish in $[n,\infty)$}\}$. Let's see that all the events $A_n:=\{B_{\cdot}\text{ doesn't vanish in $[n,\infty)$}\}$ in the union have probability 0.
@@ -1462,10 +1462,10 @@
     \end{multline*}
   \end{proof}
   \begin{proposition}
-    Let $B$ be a standard Brownian motion and $a\in\RR^*$. Then, $\Exp(\tau_a)=\infty$. 
+    Let $B$ be a standard Brownian motion and $a\in\RR^*$. Then, $\Exp(\tau_a)=\infty$.
   \end{proposition}
-\begin{proof}
-  Using the symmetry of the Brownian motion, we have:
+  \begin{proof}
+    Using the symmetry of the Brownian motion, we have:
     $$
       F_{\tau_a}(t)=\Prob(\tau_a\leq t) =2\Prob(B_t<-a) =\frac{2}{\sqrt{2\pi}}\int_{-\infty}^{-\frac{a}{\sqrt{t}}} e^{-\frac{x^2}{2}}\dd{x}
     $$
@@ -1474,61 +1474,61 @@
       \Exp(\tau_a)=\frac{a}{\sqrt{2\pi}}\int_{0}^{\infty} \frac{e^{-\frac{a^2}{2t}}}{\sqrt{t}}\dd{t}=\infty
     $$
     because it diverges at $\infty$.
-\end{proof}
-\begin{definition}
-  An $n$-dimensional Brownian motion is a $d$-dimensional stochastic process $\vf{B}=(B^1,\dots,B^d)$ such that $\forall i\in\{1,\dots,d\}$, $B^i$ is a standard Brownian motion, and it is independent of the other components.
-\end{definition}
-\begin{theorem}
-  Let $\vf{B}$ be a $d$-dimensional Brownian motion. Then:
-  \begin{enumerate}
-    \item If $d=2$, then $B$ is recurrent, that is $\forall \vf{x}\in\RR^2$ and $\forall \delta>0$ $\exists (\tau_n)$ such that $\Prob(\tau_n)$
-    \item If $d\geq 3$, then $B$ is transient, that is $\forall T>0$
-  \end{enumerate}
-\end{theorem}
-\begin{theorem}[Law of the iterated logarithm]
-  Let $B$ be a standard Brownian motion. Then:
-  $$
-    \limsup_{t\to\infty}\frac{B_t}{\sqrt{2t\log\log t}}\almoste{=}\liminf_{t\to\infty}\frac{B_t}{\sqrt{2t\log\log t}}\almoste{=}1
-  $$
-\end{theorem}
-\begin{corollary}
-  Let $B$ be a standard Brownian motion. Then:
-  $$
-    \limsup_{h\to 0} \frac{B_h}{\sqrt{2h\log\log\frac{1}{h}}}\almoste{=}\liminf_{h\to 0} \frac{B_h}{\sqrt{2h\log\log\frac{1}{h}}}\almoste{=}1
-  $$
-\end{corollary}
-\begin{sproof}
-  Recall that $xB_{1/x}$ is a standard Brownian motion.
-\end{sproof}
-\begin{proposition}
-  Let $S_n=\sum_{i=1}^n X_i$ be a simple random walk with $\Prob(X_i=1)=\Prob(X_i=-1)=\frac{1}{2}$ and $B=(B_t)$ be a standard Brownian motion. We define the following sequence of stochastic processes:
-  $$
-    {Y_t^n}:=\frac{1}{\sqrt{n}}\left[S_{\floor{nt}}+(nt-\floor{nt})X_{\floor{nt}+1}\right]
-  $$ 
-  Then, $Y_t^n\overset{\mathrm{d}}{\longrightarrow} B_t$.
-\end{proposition}
-\begin{definition}[Finite-dimensional distributions]
-  Let $(\Omega, \mathcal{A}, \Prob)$ be a probability space and $X: I\times\Omega\rightarrow (E,\mathcal{E})$ be a stochastic process. The \emph{finite-dimensional distributions} of $X$ are the probability measures $\Prob_{t_1,\dots,t_n}$ defined on $(E^n,\mathcal{E}^n)$ by:
-  $$
-    \Prob_{t_1,\dots,t_n}(B):=\Prob((X_{t_1},\dots,X_{t_n})\in B)
-  $$
-  for all $B\in\mathcal{E}^n$.
-\end{definition}
-\begin{lemma}
-  Let $(\Omega, \mathcal{A}, \Prob)$ be a probability space and $X: I\times\Omega\rightarrow (E,\mathcal{E})$ be a stochastic process. Then, the finite-dimensional distributions satisfy the following \emph{consistency condition}:
-  \begin{enumerate}
-    \item For all $n\in\NN$, $t_1,\dots,t_n\in I$, $B_1,\dots,B_n\in\mathcal{E}$ and $\sigma\in\S_n$, we have: 
+  \end{proof}
+  \begin{definition}
+    An $n$-dimensional Brownian motion is a $d$-dimensional stochastic process $\vf{B}=(B^1,\dots,B^d)$ such that $\forall i\in\{1,\dots,d\}$, $B^i$ is a standard Brownian motion, and it is independent of the other components.
+  \end{definition}
+  \begin{theorem}
+    Let $\vf{B}$ be a $d$-dimensional Brownian motion. Then:
+    \begin{enumerate}
+      \item If $d=2$, then $B$ is recurrent, that is $\forall \vf{x}\in\RR^2$ and $\forall \delta>0$ $\exists (\tau_n)$ such that $\Prob(\tau_n)$
+      \item If $d\geq 3$, then $B$ is transient, that is $\forall T>0$
+    \end{enumerate}
+  \end{theorem}
+  \begin{theorem}[Law of the iterated logarithm]
+    Let $B$ be a standard Brownian motion. Then:
     $$
-      \Prob_{t_1,\dots,t_n}(B_1\times\dots\times B_n)=\Prob_{t_{\sigma(1)},\dots,t_{\sigma(n)}}(B_{\sigma(1)}\times\dots\times B_{\sigma(n)})
+      \limsup_{t\to\infty}\frac{B_t}{\sqrt{2t\log\log t}}\almoste{=}\liminf_{t\to\infty}\frac{B_t}{\sqrt{2t\log\log t}}\almoste{=}1
     $$
-    \item  For all $n\in\NN$, $t_1,\dots,t_n\in I$ and $B_1,\dots,B_{n-1}\in\mathcal{E}$, we have: 
+  \end{theorem}
+  \begin{corollary}
+    Let $B$ be a standard Brownian motion. Then:
     $$
-      \Prob_{t_1,\dots,t_n}(B_1\times\dots\times B_{n-1}\times E)=\Prob_{t_1,\dots,t_{n-1}}(B_1\times\dots\times B_{n-1})
+      \limsup_{h\to 0} \frac{B_h}{\sqrt{2h\log\log\frac{1}{h}}}\almoste{=}\liminf_{h\to 0} \frac{B_h}{\sqrt{2h\log\log\frac{1}{h}}}\almoste{=}1
     $$
-  \end{enumerate}
-\end{lemma}
-\begin{theorem}[Kolmogorov extension theorem]
-  Let $I$ be a set and $\{\Prob_{t_1,\dots,t_n}:n\in\NN,t_1,\ldots,t_n\in I\}$ be a family of probabilities defined on $\mathcal{B}(\RR^n)$ satisfying the consistency conditions. Then, there exists a probability space $(\Omega, \mathcal{A}, \Prob)$ and a stochastic process $X: I\times\Omega\rightarrow (\RR,\mathcal{B}(\RR))$ such that $\Prob_{t_1,\dots,t_n}$ is the finite-dimensional distribution of $X$ for all $n\in\NN$ and $t_1,\dots,t_n\in I$. 
-\end{theorem}
+  \end{corollary}
+  \begin{sproof}
+    Recall that $xB_{1/x}$ is a standard Brownian motion.
+  \end{sproof}
+  \begin{proposition}
+    Let $S_n=\sum_{i=1}^n X_i$ be a simple random walk with $\Prob(X_i=1)=\Prob(X_i=-1)=\frac{1}{2}$ and $B=(B_t)$ be a standard Brownian motion. We define the following sequence of stochastic processes:
+    $$
+      {Y_t^n}:=\frac{1}{\sqrt{n}}\left[S_{\floor{nt}}+(nt-\floor{nt})X_{\floor{nt}+1}\right]
+    $$
+    Then, $Y_t^n\overset{\mathrm{d}}{\longrightarrow} B_t$.
+  \end{proposition}
+  \begin{definition}[Finite-dimensional distributions]
+    Let $(\Omega, \mathcal{A}, \Prob)$ be a probability space and $X: I\times\Omega\rightarrow (E,\mathcal{E})$ be a stochastic process. The \emph{finite-dimensional distributions} of $X$ are the probability measures $\Prob_{t_1,\dots,t_n}$ defined on $(E^n,\mathcal{E}^n)$ by:
+    $$
+      \Prob_{t_1,\dots,t_n}(B):=\Prob((X_{t_1},\dots,X_{t_n})\in B)
+    $$
+    for all $B\in\mathcal{E}^n$.
+  \end{definition}
+  \begin{lemma}
+    Let $(\Omega, \mathcal{A}, \Prob)$ be a probability space and $X: I\times\Omega\rightarrow (E,\mathcal{E})$ be a stochastic process. Then, the finite-dimensional distributions satisfy the following \emph{consistency condition}:
+    \begin{enumerate}
+      \item For all $n\in\NN$, $t_1,\dots,t_n\in I$, $B_1,\dots,B_n\in\mathcal{E}$ and $\sigma\in\S_n$, we have:
+            $$
+              \Prob_{t_1,\dots,t_n}(B_1\times\dots\times B_n)=\Prob_{t_{\sigma(1)},\dots,t_{\sigma(n)}}(B_{\sigma(1)}\times\dots\times B_{\sigma(n)})
+            $$
+      \item  For all $n\in\NN$, $t_1,\dots,t_n\in I$ and $B_1,\dots,B_{n-1}\in\mathcal{E}$, we have:
+            $$
+              \Prob_{t_1,\dots,t_n}(B_1\times\dots\times B_{n-1}\times E)=\Prob_{t_1,\dots,t_{n-1}}(B_1\times\dots\times B_{n-1})
+            $$
+    \end{enumerate}
+  \end{lemma}
+  \begin{theorem}[Kolmogorov extension theorem]
+    Let $I$ be a set and $\{\Prob_{t_1,\dots,t_n}:n\in\NN,t_1,\ldots,t_n\in I\}$ be a family of probabilities defined on $\mathcal{B}(\RR^n)$ satisfying the consistency conditions. Then, there exists a probability space $(\Omega, \mathcal{A}, \Prob)$ and a stochastic process $X: I\times\Omega\rightarrow (\RR,\mathcal{B}(\RR))$ such that $\Prob_{t_1,\dots,t_n}$ is the finite-dimensional distribution of $X$ for all $n\in\NN$ and $t_1,\dots,t_n\in I$.
+  \end{theorem}
 \end{multicols}
 \end{document}
