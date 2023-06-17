@@ -12,11 +12,11 @@
     for certain matrices $\vf{A},\vf{B},\vf{C}, \vf{D}\in \mathcal{M}_q(\RR)$. The system is called \emph{hyperbolic} if $\vf{A}^{-1}\vf{B}$ is diagonalizable.
   \end{definition}
   \begin{definition}
-    Let $n\in\NN$, $m\in\ZZ$, $h,k>0$ and $\vf{u}:\RR^2\rightarrow\RR^q$ be a function. We define $\vf{u}_m^n:=\vf{u}(t_n,x_m)$, where $(t_n, x_m):=(nk,x_0+mh)$, $x_0\in\RR$. We denoted by $\vf{v}_m^n$ an approximation to $\vf{u}_m^n$. The set of points $G:=\{(t_n,x_m):n\in\NN,\ m\in\ZZ\}$ is called a \emph{grid}.
+    Let $n\in\NN$, $m\in\ZZ$, $h,k>0$ and $\vf{u}:\RR^2\rightarrow\RR^q$ be a function. We define $\vf{u}_m^n:=\vf{u}(t_n,x_m)$, where $(t_n, x_m):=(nk,x_0+mh)$, $x_0\in\RR$. We denote by $\vf{v}_m^n$ an approximation to $\vf{u}_m^n$. The set of points $G:=\{(t_n,x_m):n\in\NN,\ m\in\ZZ\}$ is called a \emph{grid}.
   \end{definition}
   \begin{definition}
     Let $G$ be a grid. A \emph{finite difference scheme} is a function $$\function{\vf{v}}{G}{\RR}{(t_n,x_m)}{\vf{v}_m^n}$$
-    that aims to approximate $\vf{u}_m^n$, where $\vf{u}:\RR^2\rightarrow\RR^q$ is a function. Here $\vf{v}_m^n$ is a function of $\vf{v}_m^{n-j}$, $m\in\ZZ$, $j=0,\ldots,J-1$. The number $J$ is called \emph{number of steps}. If $J=1$, we say that the scheme is a \emph{one-step} scheme. Otherwise we say that the scheme is \emph{multi-step}.
+    that aims to approximate $\vf{u}_m^n$, where $\vf{u}:\RR^2\rightarrow\RR^q$ is a function. Here $\vf{v}_m^n$ is a function of $\vf{v}_m^{n-j}$, $m\in\ZZ$, $j=0,\ldots,J-1$. The number $J$ is called the \emph{number of steps}. If $J=1$, we say that the scheme is a \emph{one-step} scheme. Otherwise, we say that the scheme is \emph{multistep}.
   \end{definition}
   \begin{proposition}
     Consider the one dimensional homogeneous traffic equation of constant coefficients
@@ -26,11 +26,11 @@
     where $a\in\RR$ and $f$ is a function.
     The following are satisfied:
     \begin{enumerate}
-      \item \emph{Forward-time forward-space}:
+      \item \emph{Forward-time forward-space} (\emph{FTFS}):
             $$\frac{u_m^{n+1}-u_m^n}{k}+a\frac{u_{m+1}^n-u_m^n}{h}+\O{k}+\O{h}=f_m^n$$
-      \item \emph{Forward-time backward-space}:
+      \item \emph{Forward-time backward-space} (\emph{FTBS}):
             $$\frac{u_m^{n+1}-u_m^n}{k}+a\frac{u_{m}^n-u_{m-1}^n}{h}+\O{k}+\O{h}=f_m^n$$
-      \item \emph{Forward-time central-space}:
+      \item \emph{Forward-time central-space} (\emph{FTCS}):
             $$\frac{u_m^{n+1}-u_m^n}{k}+a\frac{u_{m+1}^n-u_{m-1}^n}{2h}+\O{k}+\O{h^2}=f_m^n$$
       \item \emph{Leapfrog scheme}:
             \begin{multline*}
@@ -73,23 +73,32 @@
   \end{definition}
   \begin{definition}
     Let $P$ be a partial differential operator and $\vf{f}$ be a function. Given the pde $P\vf{u}=\vf{f}$ and a finite difference scheme $P_{k,h}\vf{v}=R_{k,h}\vf{f}$ with $R_{k,h}\vf{1}=\vf{1}$, we say that the scheme is \emph{consistent} with the pde if for any smooth function $\vf\phi(t,x)$ we have: $$\lim_{k,h\to 0}R_{k,h}P\vf\phi-P_{k,h}\vf\phi=\vf{0}$$
-    where the convergence is pointwise at each point $(t,x)$ in the domain of solutions. We say that the consistency is of order $(p,q)$ in time and space or order $r$ in $k=\lambda(h)$ if: $$\lim_{k,h\to 0}R_{k,h}P\vf\phi-P_{k,h}\vf\phi=\O{k^p}+\O{h^q}=\O{h^r}$$  The consistency is a \emph{conditional consistency} if the limit is for $(k,h)\in \Lambda$, for some stability region $\Lambda$.
+    where the convergence is pointwise at each point $(t,x)$ in the domain of solutions. We say that the consistency is of order $(p,q)$ in time and space if: $$\lim_{k,h\to 0}R_{k,h}P\vf\phi-P_{k,h}\vf\phi=\O{k^p}+\O{h^q}$$  The consistency is a \emph{conditional consistency} if the limit is for $(k,h)\in \Lambda$, for some stability region $\Lambda$. In that case, it makes sense to say that the consistency is of order $r$ in $k=\lambda(h)$ if:
+    $$\lim_{h\to 0}R_{\lambda(h),h}P\vf\phi-P_{\lambda(h),h}\vf\phi=\O{h^r}$$
   \end{definition}
   \begin{lemma}
     The Lax-Friedrichs scheme is consistent if and only if $\displaystyle\lim_{h,k\to 0}\frac{h^2}{k}=0$.
   \end{lemma}
+  \begin{remark}
+    The consistency is not enough to guarantee convergence. For example, consider the pde $u_t+au_x=0$, with $a>0$. The forward-time forward-space scheme is consistent with the pde, but it is not convergent if we take the initial condition $u_0(x)=\indi{x<0}$ on the domain $[-1,1]$. Indeed, looking at \mcref{NIPDE:upwind} we see that from some instant of time, the solution will be $0$ everywhere, which cannot be possible. In that case we should use the forward-time backward-space scheme, which is convergent. The usage of this latter method in these cases is called the \emph{upwind condition}.
+  \end{remark}
+  \begin{figure}[H]
+    \centering
+    \includestandalone[mode=image|tex, width=0.8\linewidth]{Images/upwind}
+    \caption{Infringement of the upwind condition. The arrows inward a bullet come from the points from which it depends.}
+    \label{NIPDE:upwind}
+  \end{figure}
   \subsubsection{Stability}
   \begin{definition}
-    Let $P_{k,h}\vf{v}=0$ be a finite difference scheme with $J$ steps and $\Lambda$ be a stability region. We say that it is \emph{stable} is given $T>0$, there exists $C_T>0$ such that for any grid with $(k,h)\in \Lambda$ and for any initial values $\vf{v}_m^j$, $m\in\ZZ$, $j=0,\ldots,J-1$ we have $$\sum_{m\in\ZZ}\norm{\vf{v}_m^n}^2\leq C_T\sum_{j=0}^{J-1}\sum_{m\in\ZZ}\norm{\vf{v}_m^j}^2$$ for all $n\in\NN$ such that $0\leq nk\leq T$.
+    Let $P_{k,h}\vf{v}=0$ be a finite difference scheme with $J$ steps, that is we need the last $J$ values of $v_{\cdot}^n$ to compute the next one, and $\Lambda$ be a stability region. We say that it is \emph{stable} is given $T>0$, there exists $C_T>0$ such that for any grid with $(k,h)\in \Lambda$ and for any initial values $\vf{v}_m^j$, $m\in\ZZ$, $j=0,\ldots,J-1$ we have $$\sum_{m\in\ZZ}\norm{\vf{v}_m^n}^2\leq C_T\sum_{j=0}^{J-1}\sum_{m\in\ZZ}\norm{\vf{v}_m^j}^2$$ for all $n\in\NN$ such that $0\leq nk\leq T$.
   \end{definition}
   \begin{lemma}
-    If finite difference scheme of the form of $$\vf{v}_m^{n+1}=\alpha \vf{v}_m^n+\beta \vf{v}_{m+1}^n$$ satisfies $\abs{\alpha}+\abs{\beta}\leq 1$, then it is stable.
+    If a finite difference scheme of the form of $$\vf{v}_m^{n+1}=\alpha \vf{v}_m^n+\beta \vf{v}_{m+1}^n$$ satisfies $\abs{\alpha}+\abs{\beta}\leq 1$, then it is stable.
   \end{lemma}
   \begin{sproof}
     \begin{align*}
       \sum_{m\in\ZZ}\norm{\vf{v}_m^{n+1}}^2 & \leq \sum_{m\in\ZZ}\left(\abs{\alpha}^2\norm{\vf{v}_m^n}^2+2\abs{\alpha}\abs{\beta}\norm{\vf{v}_m^n}\cdot\right. \\
-                                            & \hspace{2.5cm}\cdot\norm{\vf{v}_{m+1}^n}+\left.\abs{\beta}^2\norm{\vf{v}_{m+1}^n}^2\right)
-      \\
+                                            & \hspace{2.5cm}\cdot\norm{\vf{v}_{m+1}^n}+\left.\abs{\beta}^2\norm{\vf{v}_{m+1}^n}^2\right)                       \\
                                             & \leq \sum_{m\in\ZZ}\left(\abs{\alpha}^2\norm{\vf{v}_m^n}^2+\abs{\alpha}\abs{\beta}(\norm{\vf{v}_m^n}^2 \right.+  \\
                                             & \hspace{2cm}\left.+\norm{\vf{v}_{m+1}^n}^2)+\abs{\beta}^2\norm{\vf{v}_{m+1}^n}^2\right)                          \\
                                             & = \sum_{m\in\ZZ}\left(\abs{\alpha}^2+2\abs{\alpha}\abs{\beta}+\abs{\beta}^2\right)\norm{\vf{v}_{m}^n}^2          \\
@@ -104,18 +113,38 @@
     Suppose $\abs{a_i\lambda}>1$ for some eigenvalue $a_i$ and let $\vf{u}_0(x)=\vf{c}\indi{\{\abs{x}> \frac{1}{\abs{\lambda}}\}}$ with $\vf{c}=(c_1,\ldots,c_q)$ and $c_i\ne 0$. As shown in figure \mcref{NIPDE:courant-friedrichs-lewy_fig} the numerical solution at $\vf{u}(1,0)$ will have the $i$-th component always equal to 0, whereas in general the exact solution won't be.
     \begin{figure}[H]
       \centering
-      \includestandalone[mode=image|tex,width=\linewidth]{Images/courant-friedrichs-lewy}
+      \includestandalone[mode=image|tex, width=\linewidth]{Images/courant-friedrichs-lewy}
       \caption{Finite difference scheme (blue) versus the characteristic lines (in red). The arrows inward a bullet come from the points from which it depends.}
       \label{NIPDE:courant-friedrichs-lewy_fig}
     \end{figure}
   \end{proof}
+  \begin{remark}
+    The idea behind this is that one cannot obtain convergence of the scheme if the numerical domain does not include the analytic domain.
+  \end{remark}
   % \begin{theorem}
   %   There are no explicit, unconditionally stable, consistent finite difference schemes for hyperbolic systems of partial differential equations.
   % \end{theorem}
+  \subsubsection{Semidiscrete Fourier transform}
+  \begin{definition}[Semidiscrete Fourier transform]
+    The \emph{semidiscrete Fourier transform} of a function $v\in \ell^2 (h\ZZ)$, i.e. defined in a mesh of step-size $h>0$, is the function $\widehat{v}\in L^2\left(\left[-\frac{\pi}{h},\frac{\pi}{h}\right]\right)$ defined as the Fourier series: $$\widehat{v}(\xi)=\sum_{m\in\ZZ}v_m\exp{-\ii m h \xi}$$
+    where $$v_m=\frac{h}{2\pi}\int_{-\pi/h}^{\pi/h} \widehat{v}(\xi)\exp{\ii mh \xi}\dd{\xi}$$
+    This latter formula is called \emph{inverse semidiscrete Fourier transform}.
+  \end{definition}
+  \begin{proposition}[Semidiscrete Parseval identity]\label{NIPDE:parseval}
+    Let $h>0$ and $\widehat{v}\in L^2\left(\left[-\frac{\pi}{h},\frac{\pi}{h}\right]\right)$ be the semidiscrete Fourier transform of $v\in \ell^2 (h\ZZ)$. Then $$\sum_{m\in\ZZ}\abs{v_m}^2=\frac{h}{2\pi}\int_{-\pi/h}^{\pi/h} \abs{\widehat{v}(\xi)}^2\dd{\xi}$$
+  \end{proposition}
+  \begin{proof}
+    \begin{align*}
+      \frac{h}{2\pi}\int_{-\pi/h}^{\pi/h} \abs{\widehat{v}(\xi)}^2\dd{\xi} & =\frac{h}{2\pi}\int_{-\pi/h}^{\pi/h} \sum_{m,n\in\ZZ}v_m\overline{v_n}\exp{-\ii (m -n)h \xi}\dd{\xi} \\
+                                                                           & =\frac{h}{2\pi}\int_{-\pi/h}^{\pi/h} \sum_{m\in\ZZ}\abs{v_m}^2\dd{\xi}                               \\
+                                                                           & =\sum_{m\in\ZZ}\abs{v_m}^2
+    \end{align*}
+    where in the second step we exchanged the integral and the sum in basis of the Cauchy-Schwarz inequality for sequences and the fact that $v\in \ell^2 (h\ZZ)$.
+  \end{proof}
   \subsubsection{Von Neumann stability analysis}
   \begin{definition}
-    Let $P_{k,h}{v}={f}$ be a finite difference scheme. For each $n\in\NN$, let ${\hat{v}}^n\in L^2\left(\left[-\frac{\pi}{h},\frac{\pi}{h}\right]\right)$ be the function defined as the Fourier series: $${\hat{v}}^n(\xi)=\sum_{m\in\ZZ}{v}_{m}^n\exp{-\ii m h \xi}$$ Hence $\displaystyle {v}_m^n=\frac{h}{2\pi}\int_{-\pi/h}^{\pi/h} {\hat{v}}^n(\xi)\exp{\ii mh \xi}\dd{\xi}$. We denote by ${v}^n:=({v}_m^n)\in\ell^2(\ZZ)$ and ${\norm{v^n}_h}^2:=h{\norm{v^n}_{2}}^2$. We define the \emph{amplification factor} as the $2\pi$-periodic function in $\theta$, $g(\theta, k, h)$ that satisfies:
-    $${\hat{v}}^{n+1}(\xi)=g(\xi h,k,h){\hat{v}}^n(\xi)$$
+    Let $P_{k,h}{v}={f}$ be a finite difference scheme. For each $n\in\NN$, let ${\widehat{v}}^n\in L^2\left(\left[-\frac{\pi}{h},\frac{\pi}{h}\right]\right)$ be the function defined as the Fourier series: $${\widehat{v}}^n(\xi)=\sum_{m\in\ZZ}{v}_{m}^n\exp{-\ii m h \xi}$$ Hence $\displaystyle {v}_m^n=\frac{h}{2\pi}\int_{-\pi/h}^{\pi/h} {\widehat{v}}^n(\xi)\exp{\ii mh \xi}\dd{\xi}$. We denote by ${v}^n:=({v}_m^n)\in\ell^2(\ZZ)$ and ${\norm{v^n}_h}^2:=h{\norm{v^n}_{2}}^2$. We define the \emph{amplification factor} as the $2\pi$-periodic function in $\theta$, $g(\theta, k, h)$ that satisfies:
+    $${\widehat{v}}^{n+1}(\xi)=g(\xi h,k,h){\widehat{v}}^n(\xi)$$
   \end{definition}
   \begin{theorem}
     Let $P_{k,h}{v}={f}$ be a one-step finite difference scheme with constant coefficients whose amplification factor $g(\theta,k,h)$ is continuous on $\RR\times\Lambda$, where $(k,h)\in\Lambda$ is a stability region. Then:
@@ -126,30 +155,29 @@
   \end{theorem}
   \begin{proof}
     \begin{enumerate}
-      \item We have that $${\hat{v}}^{n}(\xi)={(g(\xi h,k,h))}^n{\hat{v}}^0(\xi)$$ Therefore applying twice the \mcref{MA:parseval}:
+      \item We have that $${\widehat{v}}^{n}(\xi)={(g(\xi h,k,h))}^n{\widehat{v}}^0(\xi)$$ Therefore applying twice the \mnameref{NIPDE:parseval}:
             \begin{align*}
-              {\norm{{v}^n}_h}^2 & =h\sum_{m\in\ZZ}\abs{{v}_m^n}^2                                                     \\
-                                 & =\frac{1}{2\pi}\int_{-\pi/h}^{\pi/h} \abs{\hat{v}^n(\xi)}^2\dd{\xi}                 \\
-                                 & \leq{(1+Kk)}^{2n}\frac{1}{2\pi}\int_{-\pi/h}^{\pi/h} \abs{\hat{v}^0(\xi)}^2\dd{\xi} \\
-                                 & ={(1+Kk)}^{2n} {\norm{{v}^0}_h}^2
+              \sum_{m\in\ZZ}\abs{{v}_m^n}^2 & =\frac{h}{2\pi}\int_{-\pi/h}^{\pi/h} \abs{\widehat{v}^n(\xi)}^2\dd{\xi}                 \\
+                                            & \leq{(1+Kk)}^{2n}\frac{h}{2\pi}\int_{-\pi/h}^{\pi/h} \abs{\widehat{v}^0(\xi)}^2\dd{\xi} \\
+                                            & ={(1+Kk)}^{2n} \sum_{m\in\ZZ}\abs{{v}_m^0}^2
             \end{align*}
             And note that $\forall T>0$ with $nk\leq T$ we have that:
             \begin{multline*}
               {(1+Kk)}^{2n}\leq{(1+Kk)}^{2\frac{T}{k}}={\left({(1+Kk)}^\frac{1}{Kk}\right)}^{2 K T}\leq\\\leq \exp{2K T}=:C_T
             \end{multline*}
             because $\sup_{x>0}{(1+x)}^{1/x}=\exp{}$.
-      \item Let $T\geq 2$, $K>0$, and $\theta_0,h,k$ be the ones of the hypothesis with $\varepsilon=\min(1,\frac{1}{K})$. Hence, $k\leq 1$ and $Kk\leq 1$. By the continuity of $g$, $\exists \theta_1,\theta_2\in\RR$ such that $\abs{g(\theta, k,h)}>1+Kk$ $\forall\theta\in[\theta_1,\theta_2]$. Let $\hat{v}^0(\xi):=\sqrt{\frac{2\pi}{h(\theta_2-\theta_1)}}\indi{\left[\frac{\theta_1}{h},\frac{\theta_2}{h}\right]}$ and denote $v^0:=(v_m^0)\in\ell^2(\ZZ)$ its inverse transform. An easy check shows that $\norm{v^0}_h=1$. Now take $n:=\lfloor T/k \rfloor$. Thus:
+      \item Let $T\geq 2$, $K>0$, and $\theta_0,h,k$ be the ones of the hypothesis with $\varepsilon=\min(1,\frac{1}{K})$. Hence, $k\leq 1$ and $Kk\leq 1$. By the continuity of $g$, $\exists \theta_1,\theta_2\in\RR$ such that $\abs{g(\theta, k,h)}>1+Kk$ $\forall\theta\in[\theta_1,\theta_2]$. Let $\widehat{v}^0(\xi):=\sqrt{\frac{h}{2\pi(\theta_2-\theta_1)}}\indi{\left[\frac{\theta_1}{h},\frac{\theta_2}{h}\right]}$ and denote $v^0:=(v_m^0)\in\ell^2(\ZZ)$ its inverse transform. An easy check shows that $\norm{v^0}=1$. Now take $n:=\lfloor T/k \rfloor$. Thus:
             \begin{align*}
-              {\norm{v^n}_h}^2 & =\frac{1}{2\pi}\int_{-\pi/h}^{\pi/h} \abs{\hat{v}^n(\xi)}^2\dd{\xi}                        \\
-                               & =\frac{1}{2\pi}\int_{-\pi/h}^{\pi/h} \abs{g(h\xi, k,h)}^{2n}\abs{\hat{v}^0(\xi)}^2\dd{\xi} \\
-                               & >{(1+Kk)}^{2n}                                                                             \\
-                               & >{(1+Kk)}^{\frac{2}{k}}                                                                    \\
-                               & ={\left({(1+Kk)}^{\frac{1}{Kk}}\right)}^{2K}                                               \\
-                               & \geq 2^{2K}                                                                                \\
-                               & =2^{2K}{\norm{v^0}_h}^2
+              {\norm{v^n}_2}^2 & =\frac{h}{2\pi}\int_{-\pi/h}^{\pi/h} \abs{\widehat{v}^n(\xi)}^2\dd{\xi}                        \\
+                               & =\frac{h}{2\pi}\int_{-\pi/h}^{\pi/h} \abs{g(h\xi, k,h)}^{2n}\abs{\widehat{v}^0(\xi)}^2\dd{\xi} \\
+                               & >{(1+Kk)}^{2n}                                                                                 \\
+                               & \geq {(1+Kk)}^{\frac{2}{k}}                                                                    \\
+                               & ={\left({(1+Kk)}^{\frac{1}{Kk}}\right)}^{2K}                                                   \\
+                               & \geq 2^{2K}                                                                                    \\
+                               & =2^{2K}{\norm{v^0}_2}^2
             \end{align*}
-            where the penultimate step is because $\inf_{x\in[0,1]}{(1+x)}^{1/x}=2$.
-            Hence the scheme is unstable.
+            where in the forth inequality we used that $n\geq T/k-1=\frac{T-k}{k}\geq 1$ and in the penultimate step is because $\inf_{x\in[0,1]}{(1+x)}^{1/x}=2$.
+            Hence, the scheme is unstable.
     \end{enumerate}
   \end{proof}
   \begin{corollary}
@@ -159,6 +187,25 @@
       \item If $\exists\theta_0\in\RR$ and $\delta>0$ such that $\abs{g(\theta_0,k,h)}>1+\delta$ $\forall(k,h)\in\Lambda$, then the scheme is unstable.
     \end{enumerate}
   \end{corollary}
+  \begin{lemma}
+    Let $P_{k,h}{v}={f}$ be a one-step finite difference scheme with constant coefficients. Impose that $v_m^n= {g(\theta,k,h)}^n\exp{\ii m\theta}$ for certain function $g(\cdot,k,h)$. Then, $g$ is the amplification factor of the scheme.
+  \end{lemma}
+  \begin{proof}Let $\xi:=\theta/h$. Then:
+    \begin{align*}
+      \widehat{v}^{n+1}(\xi) & =\sum_{m\in\ZZ} v_m^{n+1}\exp{-\ii mh\xi}                              \\
+                             & =\sum_{m\in\ZZ} {g(\theta,k,h)}^{n+1}\exp{\ii m\theta}\exp{-\ii mh\xi} \\
+                             & =g(\theta,k,h)\widehat{v}^n(\xi)
+    \end{align*}
+  \end{proof}
+  \begin{proposition}
+    Consider the pde of \mcref{NIPDE:traffic}. Then:
+    \begin{itemize}
+      \item The FTFS scheme is stable if and only if $a\lambda\in [-1,0]$.
+      \item The FTBS scheme is stable if and only if $a\lambda\in [0,1]$.
+      \item The FTCS scheme is always unstable.
+      \item The Lax-Friedrichs scheme is stable if and only if $\abs{a\lambda}\leq 1$.
+    \end{itemize}
+  \end{proposition}
   \begin{proposition}[Lax-Wendroff]
     Consider the traffic equation of \mcref{NIPDE:traffic}.
     The \emph{Lax-Wendroff scheme} is:
@@ -174,10 +221,24 @@
     \end{align*}
   \end{sproof}
   \begin{proposition}
-    The Lax-Wendroff scheme is a one-step method that has order of consistency 2.
+    The Lax-Wendroff scheme is a one-step method that has order of consistency 2, and it is stable if and only if $\abs{a\lambda} \leq 1$.
   \end{proposition}
   \begin{sproof}
-    Show that $P_{k,h}\phi-R_{k,h}P\phi=\O{h^2}+\O{k^2}$ using a Taylor expansion and is stable if $a\lambda\leq 1$.
+    Show that $P_{k,h}\phi-R_{k,h}P\phi=\O{h^2}+\O{k^2}$ using a Taylor expansion and is stable if $a\lambda\leq 1$. For the stability, assume $v_m^n=g^n\exp{\ii m\theta}$. We need to study the homogeneous part.
+    \begin{align*}
+      0 & =\frac{g-1}{k}+\frac{a}{2h}\left(e^{\ii\theta}-e^{-\ii\theta}\right)-\frac{a^2k}{2h^2}\left(e^{\ii\theta}-2+e^{-\ii\theta}\right) \\
+      g & = 1-a\lambda\ii\sin\theta+a^2\lambda^2(\cos\theta-1)                                                                              \\
+      g & = 1-2a\lambda\ii\sin\frac{\theta}{2}\cos\frac{\theta}{2} -2a^2\lambda^2{\left(\sin\frac{\theta}{2}\right)}^2
+    \end{align*}
+    Hence:
+    \begin{align*}
+      \begin{split}
+        \abs{g}^2&=1-4a^2\lambda^2 {\left(\sin\frac{\theta}{2} \right)}^2+4a^4\lambda^4{\left(\sin\frac{\theta}{2}\right)}^4+\\
+        &\hspace{3.5cm}+4a^2\lambda^2{\left(\sin\frac{\theta}{2}\cos\frac{\theta}{2}\right)}^2
+      \end{split} \\
+       & =1+4a^2\lambda^2(1-a^2\lambda^2){\left(\sin\frac{\theta}{2}\right)}^4
+    \end{align*}
+    If $\abs{a\lambda}\leq 1$, then $\abs{g}^2 \leq 1$ because $x^2(1-x^2)\leq 1/4$ for $x\in[-1,1]$. If $\abs{a\lambda}>1$, then by taking $\theta=\pi$ we have $\abs{g}^2>1$.
   \end{sproof}
   \begin{proposition}[Crank-Nicolson]
     Consider the traffic equation of \mcref{NIPDE:traffic}.
@@ -193,10 +254,14 @@
   \begin{sproof}
     An easy check shows that:
     $$P_{k,h}\phi-R_{k,h}P\phi=\O{{(k+h)}^2}+\O{\frac{k^3}{h}}$$
-    For the stability...
+    For the stability, substitute $v_m^n=g^n\exp{\ii m\theta}$ in the scheme. Simplifying we get:
+    $$
+      g=\frac{1+\frac{a\lambda\ii}{2}\sin\theta}{1-\frac{a\lambda\ii}{2}\sin\theta}
+    $$
+    which has always modulus 1.
   \end{sproof}
   \begin{definition}
-    Given scheme $P_{k,h}{v}={f}$, usually we cannot use the recurrence to compute the last term of the (finite) grid, with $n\in\{0,\ldots,N\}$ and $m\in\{0,\ldots,M\}$, $v_M^{n}$ for each $n\in\NN$. Thus the \emph{numerical boundary condition} is used in this cases. A numerical solution of order $p$ is a extrapolation of order $\O{h^p}$ of the last term of the grid in terms of the orther ones. Each $u(t,x-\ell h)$ can be expressed as: $$u(t,x-\ell h)=\sum_{k=1}^{p-1}\frac{{(-1)}^k \ell^kh^k}{k!}u^{(k)}+\O{h^p}$$
+    Given scheme $P_{k,h}{v}={f}$, usually we cannot use the recurrence to compute the last term of the (finite) grid, with $n\in\{0,\ldots,N\}$ and $m\in\{0,\ldots,M\}$, $v_M^{n}$ for each $n\in\NN$. Thus, the \emph{numerical boundary condition} is used in these cases. A numerical boundary condition of order $p$ is a extrapolation of order $\O{h^p}$ of the last term of the grid in terms of the orther ones. Each $u(t,x-\ell h)$ can be expressed as: $$u(t,x-\ell h)=\sum_{k=1}^{p-1}\frac{{(-1)}^k \ell^kh^k}{k!}u^{(k)}+\O{h^p}$$
     If we want to get a linear approximation of the form
     $$u(t,x)=\sum_{k=1}^{p}\lambda_ku(x-kh)$$
     we need to solve the following linear system:
@@ -233,7 +298,7 @@
     \begin{equation}\label{NIPDE:eqLax}
       \begin{cases}
         u_t=L(u)                                                                                                                    \\
-        u(0,\vf{x})=u_0(\vf{x}) & \!\text{if }\vf{x}\in\Omega \subseteq\RR^n                                                        \\
+        u(0,\vf{x})=u_0(\vf{x}) & \!\text{if }\vf{x}\in\Omega \subseteq\RR^d                                                        \\
         u(t,\vf{x})=g(t,\vf{x}) & \!\text{if }(t,\vf{x})\in[0,\infty)\times\partial\Omega_1\subseteq [0,\infty)\times\partial\Omega
       \end{cases}
     \end{equation}
@@ -241,16 +306,17 @@
     \begin{equation}\label{NIPDE:eqpreLax}
       \vf{B}_1\vf{v}^{n+1}=\vf{B}_0\vf{v}^n+\vf{f}^n
     \end{equation}
-    where $\vf{B}_0$ and $\vf{B}_1$ are matrices and $\vf{f}^n$ is a vector. Then, the scheme is stable with stability region $\Lambda\subseteq \RR_{\geq 0}\times\RR$ if and only if $\forall T>0$ $\exists C_T>0$ such that $\forall (k,h)\in\Lambda$ and $\forall \ell\in\NN$ with $0\leq \ell k\leq T$ we have $\norm{{\left({\vf{B}_1}^{-1}\vf{B}_0\right)}^\ell}\leq C_T$.
+    where $\vf{B}_0$ and $\vf{B}_1$ are matrices and $\vf{f}^n$ is a vector. Then, the scheme is stable with stability region $\Lambda\subseteq \RR_{\geq 0}\times{\RR_{\geq 0}}^d$ if and only if $\forall T>0$ $\exists C_T>0$ such that $\forall (k,h)\in\Lambda$ and $\forall \ell\in\NN$ with $0\leq \ell k\leq T$ we have $\norm{{\left({\vf{B}_1}^{-1}\vf{B}_0\right)}^\ell}\leq C_T$.
   \end{proposition}
   \begin{proof}
+    An easy check show that if $\vf{v}^0$ and $\vf{w}^0$ are such that satisfy the recurrence of \mcref{NIPDE:eqpreLax}, then ${\vf{v}^\ell -\vf{w}^\ell}=\vf{A}(\vf{v}^0-\vf{w}^0)$, where $\vf{A}:= {\left({\vf{B}_1}^{-1}\vf{B}_0\right)}^\ell$.
     \begin{itemizeiff}
-      We will prove by contradiction. Suppose that $\exists T>0$ such that $\forall C_T>0$ exist $(k,h)\in \Lambda$ and $\ell \in \NN$ with $0\leq \ell k\leq T$ such that $\norm{{\left({\vf{B}_1}^{-1}\vf{B}_0\right)}^\ell}> C_T$. Let $\vf{A}:= {\left({\vf{B}_1}^{-1}\vf{B}_0\right)}^\ell$. Then, taking $\vf{x^*}$ such that $\norm{\vf{x^*}}=1$ and $\norm{A}=\norm{\vf{A}\vf{x^*}}$ we have that for any $\vf{v}^0$, defining $\vf{w}^0:=\vf{v}^0+\vf{x^*}$ we have that:
+      We will prove by contradiction. Suppose that $\exists T>0$ such that $\forall C_T>0$ exist $(k,h)\in \Lambda$ and $\ell \in \NN$ with $0\leq \ell k\leq T$ such that $\norm{{\left({\vf{B}_1}^{-1}\vf{B}_0\right)}^\ell}> C_T$. Then, taking $\vf{x^*}$ such that $\norm{\vf{x^*}}=1$ and $\norm{\vf{A}}=\norm{\vf{A}\vf{x^*}}$ we have that for any $\vf{v}^0$, defining $\vf{w}^0:=\vf{v}^0+\vf{x^*}$ we have that:
       \begin{multline*}
-        \norm{\vf{v}^\ell -\vf{w}^\ell}= \norm{\vf{A} \vf{x^*}}=\norm{A}>C_T\norm{\vf{v}^0-\vf{w}^0}
+        \norm{\vf{v}^\ell -\vf{w}^\ell}= \norm{\vf{A} \vf{x^*}}=\norm{\vf{A}}>C_T\norm{\vf{v}^0-\vf{w}^0}
       \end{multline*}
-      where the first equality follows from expanding recursively the norm $\norm{\vf{v}^\ell -\vf{w}^\ell}$. Hence the scheme is not stable.
-      \item An easy check show that if $\vf{v}^0$ and $\vf{w}^0$ are such that satisfy the recurrence of \mcref{NIPDE:eqpreLax}, then ${\vf{v}^\ell -\vf{w}^\ell}=\vf{A}(\vf{v}^0-\vf{w}^0)$. So if
+      where the first equality follows from expanding recursively the norm $\norm{\vf{v}^\ell -\vf{w}^\ell}$ and using the scheme \mcref{NIPDE:eqpreLax}. Hence, the scheme is not stable.
+      \item Note that if
       $$
         \norm{\vf{v}^\ell -\vf{w}^\ell}\leq C_T\norm{\vf{v}^0-\vf{w}^0}
       $$
@@ -264,7 +330,7 @@
     $$
     Suppose that:
     \begin{enumerate}
-      \item $\norm{\vf{T}^n}=\O{k^p+\norm{\vf{h}}^q}$ independent of $n$ and $\forall (k,h)\in\Lambda$ and all $(t,x)\in[0,T]\times\Omega$.
+      \item $\norm{\vf{T}^n}=\O{k^p+\norm{\vf{h}}^q}$ independent of $n$ and $\forall (k,h)\in\Lambda$ and all $(t,x)\in[0,T]\times\Omega$ (consistency condition)
       \item $\forall (k,h)\in\Lambda$, $\vf{B}_1$ is invertible and $\norm{{\vf{B}_1}^{-1}}\leq C_1k$ for certain $C_1>0$ independent of $(k,h)$.
       \item The scheme is stable.
       \item $\vf{v}^0$ is such that $\norm{\vf{v}^0-\vf{u}^0}=\O{k^p+\norm{\vf{h}}^q}$ uniformly for $(k,h)\in\Lambda$ and $(t,x)\in[0,T]\times\Omega$.
@@ -288,19 +354,37 @@
       \norm{\vf{v}^n-\vf{u}^n}\leq C_T \O{k^p+\norm{\vf{h}}^q}+\sum_{\ell=0}^{n-1}C_T C_1k\O{k^p+\norm{\vf{h}}^q}
     $$
     where we have used \mcref{NIPDE:preLax} for noting that $\forall\ell=0,\ldots,n-1$ $\norm{\vf{A}^{n-1-\ell}}\leq C_T$.
-    Finally observe that $kn\leq T$ and the uniformity of the $\O{k^p+\norm{\vf{h}}^q}$ allows us to conclude the proof.
+    Finally, observe that $kn\leq T$ and the uniformity of the $\O{k^p+\norm{\vf{h}}^q}$ allows us to conclude the proof.
   \end{proof}
   \begin{remark}
     It can also be shown that the consistency and convergence imply stability.
   \end{remark}
   \begin{theorem}
-    Consider a scheme of $J$ steps for a 1st-order-in-time linear pde of constant coefficients whose amplification factor is $g$. Let $\Phi(\theta, g)$ be the \emph{amplification polynomial}, that is the polynomial that satisfies $g$ of degree $J-1$. Then, the scheme is stable if and only if for any root $g_j(\theta)$ of $\Phi$ we have $\abs{g_j(\theta)}\leq 1$ and if $\exists \theta_0$ and $k$ such that $\abs{g_k(\theta_0)}=1$ then this root is simple.
+    Consider a scheme of $J$ steps for a 1st-order-in-time linear pde of constant coefficients whose amplification factor is $g$. Let $\Phi(\theta, g)$ be the \emph{amplification polynomial}, that is the polynomial that satisfies $g$ of degree $J-1$. Then, the scheme is stable if and only if:
+    \begin{itemize}
+      \item for any root $g_j(\theta)$ of $\Phi$ we have $\abs{g_j(\theta)}\leq 1$-
+      \item if $\exists \theta_0$ and $k$ such that $\abs{g_k(\theta_0)}=1$, then this root is simple.
+    \end{itemize}
   \end{theorem}
+  \begin{proposition}
+    The Leapfrog scheme for the one-dimensional wave equation of \mcref{NIPDE:traffic} is stable if and only if $\abs{a\lambda}< 1$.
+  \end{proposition}
+  \begin{proof}
+    An easy check (substituting $v_n^m=g^n \exp{\ii m\theta}$ into the scheme) shows that the amplification polynomial is:
+    $$
+      \Phi(\theta,g)=g^2+g(2a\lambda\ii\sin\theta)-1
+    $$
+    The roots are:
+    $$
+      g_{\pm} = -a\lambda\ii\sin\theta\pm\sqrt{1-a^2\lambda^2{(\sin\theta)}^2}
+    $$
+    If $\abs{a\lambda}<1$, then $\abs{g_{\pm}}^2=1$ and the two roots are simple $\forall \theta\in\RR$. If $\abs{a\lambda}>1$ and $\theta=\frac{\pi}{2}$, then either $\abs{g_+}>1$ or $\abs{g_-}>1$ and the scheme is unstable. Finally, if $\abs{a\lambda}=1$ and $\theta=\frac{\pi}{2}$, then the scheme is unstable because there is a double root.
+  \end{proof}
   \subsubsection{Second order pdes}
   \begin{definition}
     Consider a second order pde of the form:
     \begin{equation}
-      A u_tt+2Bu_{tx} +Cu_{xx}+Du_t+Eu_x+F u=G
+      A u_{tt}+2Bu_{tx} +Cu_{xx}+Du_t+Eu_x+F u=G
     \end{equation}
     where $A,B,C,D,E,F,G:\RR^2\rightarrow\RR$ are smooth functions. The ivp defined in a curve $\gamma(s)=(t,x)=(f(s),g(s))$ is given by the extra conditions:
     $$
@@ -310,11 +394,11 @@
         u_x(f(s),g(s))=\psi(s)
       \end{cases}
     $$
-    which are tied to the \emph{compatibility condition} $h'=\phi f'+\psi g'$ that follows from the chain rule. The characteristic curves are the curves from which we cannot find the highest order derivatives of $u$ from the initial conditions and the pde. Differentiating $u_t(s)$ and $u_x(s)$ we get the system of equations for $u_tt$, $u_{tx}$ and $u_{xx}$:
+    which are tied to the \emph{compatibility condition} $h'=\phi f'+\psi g'$ that follows from the chain rule. The characteristic curves are the curves from which we cannot find the highest order derivatives of $u$ from the initial conditions and the pde. Differentiating $u_t(s)$ and $u_x(s)$ we get the system of equations for $u_{tt}$, $u_{tx}$ and $u_{xx}$:
     \begin{equation*}
       \begin{cases}
-        A u_tt+2Bu_{tx} +Cu_{xx}=G-D\phi-E\psi -Fh \\
-        f'u_{tt}+g'u_{tx}=\phi'                    \\
+        A u_{tt}+2Bu_{tx} +Cu_{xx}=G-D\phi-E\psi -Fh \\
+        f'u_{tt}+g'u_{tx}=\phi'                      \\
         f'u_{tx}+g'u_{xx}=\psi'
       \end{cases}
     \end{equation*}
@@ -328,7 +412,11 @@
     Consider a finite difference scheme with $J$ steps for a 2n order homogeneous pde and $\Lambda$ be a stability region. We say that it is \emph{stable} is given $T>0$, there exists $C_T>0$ such that for any grid with $(k,h)\in \Lambda$ and for any initial values $\vf{v}_m^j$, $m\in\ZZ$, $j=0,\ldots,J-1$ we have $$\sum_{m\in\ZZ}\norm{\vf{v}_m^n}^2\leq (1+n^2)C_T\sum_{j=0}^{J-1}\sum_{m\in\ZZ}\norm{\vf{v}_m^j}^2$$ for all $n\in\NN$ such that $0\leq nk\leq T$.
   \end{definition}
   \begin{theorem}
-    Consider a finite difference scheme with $J$ steps for a 2n order homogeneous pde whose amplification factor is $g$ and $\Phi(\theta, g)$ is the amplification polynomial. Then, the scheme is stable if and only if for any root $g_j(\theta)$ of $\Phi$ we have $\abs{g_j(\theta)}\leq 1$ and if $\exists \theta_0$ and $k$ such that $\abs{g_k(\theta_0)}=1$ then this root is at most double.
+    Consider a finite difference scheme with $J$ steps for a 2n order homogeneous pde whose amplification factor is $g$ and $\Phi(\theta, g)$ is the amplification polynomial. Then, the scheme is stable if and only if:
+    \begin{itemize}
+      \item for any root $g_j(\theta)$ of $\Phi$ we have $\abs{g_j(\theta)}\leq 1$.
+      \item if $\exists \theta_0$ and $k$ such that $\abs{g_k(\theta_0)}=1$ then this root is at most double.
+    \end{itemize}
   \end{theorem}
   \subsubsection{Parabolic equations}
   \begin{proposition}
@@ -370,10 +458,10 @@
     $$
       {(\laplacian_h v)}_{\ell,m}:=\frac{v_{\ell+1,m}+v_{\ell-1,m}+v_{\ell,m+1}+v_{\ell,m-1}-4v_{\ell,m}}{h^2}
     $$
-    Note that $\laplacian_hv=f$.
+    % Note that $\laplacian_hv=f$.
   \end{definition}
   \begin{theorem}[Discrete maximum principle]\label{NIPDE:maximumPrinc}
-    Consider the Poisson equation $u_{xx}+u_{yy}=f$, $v$ be a scheme of \mcref{NIPDE:poisson_eq} and suppose that $\laplacian_hv\geq 0$ on a region $\Omega$. Then:
+    Consider the Poisson equation $u_{xx}+u_{yy}=f$, let $v=(v_{\ell,m})$ be the scheme of \mcref{NIPDE:poisson_eq} and suppose that $\laplacian_hv\geq 0$ on a region $\Omega$. Then:
     $$\max_{\overline{\Omega}} v=\max_{\Fr{\Omega}} v$$
   \end{theorem}
   \begin{sproof}
@@ -384,26 +472,26 @@
     Now note that if there is a maximum in the interior of the region, its four neighbours must be equal to it.
   \end{sproof}
   \begin{corollary}[Discrete minimum principle]\label{NIPDE:minimumPrinc}
-    Consider the Poisson equation $u_{xx}+u_{yy}=f$, $v$ be a scheme of \mcref{NIPDE:poisson_eq} and suppose that $\laplacian_hv\leq 0$ on a region $\Omega$. Then:
+    Consider the Poisson equation $u_{xx}+u_{yy}=f$, let $v=(v_{\ell,m})$ be the scheme of \mcref{NIPDE:poisson_eq} and suppose that $\laplacian_hv\leq 0$ on a region $\Omega$. Then:
     $$\min_{\overline{\Omega}} v=\min_{\Fr{\Omega}} v$$
   \end{corollary}
   \begin{proof}
     Apply \mnameref{NIPDE:maximumPrinc} to $-v$.
   \end{proof}
   \begin{theorem}\label{NIPDE:pois_bound_V}
-    Consider the Poisson equation $u_{xx}+u_{yy}=f$, $v$ be a scheme of \mcref{NIPDE:poisson_eq} defined on $\Omega={[0,1]}^2$. If $v=0$ on $\Fr{\Omega}$ then:
+    Consider the Poisson equation $u_{xx}+u_{yy}=f$, let $v=(v_{\ell,m})$ be the scheme of \mcref{NIPDE:poisson_eq} defined on $\Omega={[0,1]}^2$. If $v=0$ on $\Fr{\Omega}$ then:
     $$
       \norm{v}_\infty\leq \frac{1}{8}\norm{\laplacian_h v}_\infty
     $$
   \end{theorem}
   \begin{proof}
-    From $\laplacian_h v_{\ell,m}=f_{\ell,m}$ in the internal nodes of the grid, we have that $\abs{\laplacian_h v}\leq \norm{f}_\infty$. Now consider the non-negative function $w_{\ell,m}$ defined as:
+    From ${(\laplacian_h v)}_{\ell,m}=f_{\ell,m}$ in the internal nodes of the grid, we have that $\abs{\laplacian_h v}\leq \norm{f}_\infty$. Now consider the non-negative function $w_{\ell,m}$ defined as:
     $$
       w_{\ell,m}:= \frac{1}{4}\left[{\left(x_\ell-1/2\right)}^2+{\left(y_m-1/2\right)}^2\right]
     $$
-    An easy check shows that $\laplacian_h w_{\ell,m}=1$ and $\norm{w}_{L^\infty(\Fr{\Omega})}=\frac{1}{8}$. So on the one hand, $\laplacian_h(v-\norm{f}_\infty w)\leq 0$ and by the \mnameref{NIPDE:minimumPrinc}:
+    An easy check shows that ${(\laplacian_h w)}_{\ell,m}=1$ and $\norm{w}_{L^\infty(\Fr{\Omega})}=\frac{1}{8}$. So on the one hand, $\laplacian_h(v-\norm{f}_\infty w)\leq 0$ and by the \mnameref{NIPDE:minimumPrinc}:
     $$
-      -\norm{f}_\infty\norm{w}_{L^\infty(\Fr{\Omega})}\leq v_{\ell,m}-\norm{f} w_{\ell,m}\leq v_{\ell,m}
+      -\norm{f}_\infty\norm{w}_{L^\infty(\Fr{\Omega})}\leq v_{\ell,m}-\norm{f}_\infty w_{\ell,m}
     $$
     And on the other hand, $\laplacian_h(v+\norm{f}_\infty w)\geq 0$ and by the \mnameref{NIPDE:maximumPrinc}:
     $$
