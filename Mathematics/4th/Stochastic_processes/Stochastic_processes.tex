@@ -145,12 +145,16 @@
     \captionof{table}{Probability-generating functions of common distributions.}
   \end{center}
   \subsection{Discrete-time Markov chains}
+  \subsubsection{Stochastic processes}
   \begin{definition}[Stochastic process]
     Let $T\subseteq \RR^n$ be a set, $(E,\mathcal{E})$ be a measurable space and $(\Omega,\mathcal{A},\Prob)$ be a probability space. A \emph{stochastic process} on $(\Omega,\mathcal{A},\Prob)$ with \emph{parameter set} $T$ and \emph{state space} $(E,\mathcal{E})$ is a family of random variables ${\{X_t\}}_{t\in T}$ from $(\Omega,\mathcal{A})$ to $(E,\mathcal{E})$. That is, $X_t:\Omega\to E$ satisfies ${X_t}^{-1}(B)\in\mathcal{A}$ for all $B\in\mathcal{E}$ and all $t\in T$.
   \end{definition}
   \begin{remark}
     In general, we wil consider stochastic processes with parameter sets $T=\NN,\NN\cup\{0\},\ZZ,\RR,\RR_{\geq 0}$ and state spaces $(\NN\cup\{0\},\mathcal{P}(\NN \cup \{0\}))$ or $(\RR,\mathcal{B}(\RR))$.
   \end{remark}
+  \begin{definition}
+    Let ${(X_t)}_{t\in T}$, ${(Y_t)}_{t\in T}$ be two stochastic processes defined on the same probability space $(\Omega,\mathcal{A},\Prob)$. We say that ${(X_t)}_{t\in T}$ and ${(Y_t)}_{t\in T}$ are \emph{independent} if $\forall n,k\in\NN$ and all $t_1,\ldots,t_n,s_1,\ldots,s_k\in T$ we have that the random vectors $(X_{t_1},\ldots,X_{t_n})$ and $(Y_{s_1},\ldots,Y_{s_k})$ are independent.
+  \end{definition}
   \subsubsection{Galton-Watson process}
   \begin{model}\label{SP:galtonwatsonModel}
     Let $(X_n)$, $n\in\NN\cup\{0\}$ be a sequence of discrete random vairables representing the number of new individuals of a certain population at the $n$-th generation. Suppose they are defined as $$X_{n+1}=\sum_{k=1}^{X_n}Z_{n+1}^{(k)}$$ and $X_0=1$. Here $Z_{n+1}^{(k)}$ has support $\NN\cup\{0\}$ $\forall n,k$ and represent the number of descendants (to the next generation) of the $k$-th individual of the $n$-th generation. Suppose that $Z_{n+1}^{(k)}\sim Z$ are \iid and independent of $(X_n)$. We would like to study the probability $\rho$ of extinction of this population: $$\rho=\Prob(\{X_n=0:\text{for some $n\in\NN$}\})=\Prob\left(\bigcup_{n=1}^\infty\{X_n=0\}\right)$$
@@ -567,8 +571,31 @@
     with the convention that $\tau_i^1=\tau_i$ and $\tau_i^0=0$. Moreover, we define the time difference $T_i^k:=\tau_i^k-\tau_i^{k-1}$.
   \end{definition}
   \begin{lemma}
-    Let $(X_n)$ be a time-homogeneous Markov chain. Then, $\tau_i^k$ is a stopping time $\forall k\in\NN$ and moreover $T_i^k$ are \iid random variables distributed as $\tau_i$.
+    Let $(X_n)$ be a time-homogeneous Markov chain. Then, $\tau_i^k$ is a stopping time $\forall k\in\NN$ and moreover $T_i^k$ are \iid random variables distributed as $\tau_i$ with respect to the probability $\Prob_i$.
   \end{lemma}
+  \begin{proof}
+    We need to check that $\forall m_1,\ldots,m_k\in\NN$:
+    $$
+      \Prob_i(T_i^1=m_1,\ldots,T_i^k=m_k)=\Prob_i(\tau_i=m_1)\cdots\Prob_i(\tau_i=m_k)
+    $$
+    We expand the left-hand side using the \mnameref{P:compound}. Now we examine each term of the product, which have the form:
+    $$
+      p_{\ell}:=\Prob_i(T_i^\ell=m_\ell\mid T_i^1=m_1,\ldots,T_i^{\ell-1}=m_{\ell-1})
+    $$
+    We have that:
+    \begin{equation*}
+      p_\ell=\Prob_i(\tau_i^{\ell}-\tau_i^{\ell-1}=m_\ell\mid A)
+    \end{equation*}
+    where $A=\{X_0=i,X_1\ne i, \ldots, X_{m_1-1}\ne i,X_{m_1}=i, X_{m_1+1}\ne i,\ldots, X_{m_1+\cdots+m_{\ell-1}}=i\}$. So, by the \mnameref{SP:substitutionPrinciple} we have:
+    \begin{align*}
+      \begin{split}
+        p_\ell&=\Prob_i(X_{m_1+\cdots+m_\ell}=i,X_{m_1+\cdots+m_\ell-1}\ne i,\ldots,\\
+        &\hspace{4cm}X_{m_1+\cdots+m_{\ell-1}+1}\ne i\mid A)
+      \end{split} \\
+       & =\Prob_i(X_{m_\ell}=i,X_{m_\ell-1}\ne i,\ldots,X_{1}\mid X_{0}=i)          \\
+       & =\Prob(\tau_i=m_\ell)
+    \end{align*}
+  \end{proof}
   \begin{proposition}\label{SP:recurrence}
     Let $(X_n)$ be a time-homogeneous Markov chain and $i\in I$. Then:
     $$
@@ -632,7 +659,7 @@
         & =\sum_{m=1}^n \Prob_i(X_n=j\mid X_m=j,X_{m-1}\ne j,\ldots, X_1\ne j)\cdot \\
         &\hspace{7cm}\cdot f_{ij}^{(m)}
       \end{split} \\
-                   & =\sum_{m=1}^n \Prob_i(X_{n-m}=j)f_{ij}^{(m)}                 \\
+                   & =\sum_{m=1}^n \Prob_j(X_{n-m}=j)f_{ij}^{(m)}                 \\
                    & =\sum_{m=1}^nf_{ij}^{(m)}p_{jj}^{(n-m)}
     \end{align*}
   \end{proof}
@@ -739,9 +766,10 @@
   \begin{sproof}
     We will proof only the implication to the left, in order to keep the proof short. Note that we have:
     $$
+      % p_{ii}^{(2n)}=\sum_{m=0}^{n}\binom{2n}{2m}\binom{2m}{m}\binom{2n-2m}{n-m}\frac{1}{4^{2n}}=\frac{1}{4^{2n}}\binom{2n}{n}\sum_{m=0}^n \binom{n}{m}^2
       p_{ii}^{(2n)}=\sum_{m=0}^{n}\frac{(2n)!}{{(m!)}^2{(n-m)!}^2}\frac{1}{4^{2n}}=\frac{1}{4^{2n}}\binom{2n}{n}\sum_{m=0}^n \binom{n}{m}^2
     $$
-    In the formula $m$ denotes the number of steps rightwards, $n-m$, the number of steps upwards, $n-m$ the number of steps leftwards, and $m$, the number of steps downwards. Now using \mcref{SP:2n-n_convinatoria,SP:stirling_polya1} we have:
+    In the formula $m$ denotes the number of steps rightwards and leftwards, and $n-m$, the number of steps upwards and downwards. Now using \mcref{SP:2n-n_convinatoria,SP:stirling_polya1} we have:
     $$
       p_{ii}^{(2n)}=\frac{1}{4^{2n}}\binom{2n}{n}^2\sim \frac{1}{n}
     $$
@@ -750,7 +778,7 @@
     The simple random walk on $\ZZ^3$ is always transient.
   \end{theorem}
   \begin{corollary}
-    Let $(X_n)$ be a time-homogeneous Markov chain and $i,j\in I$. Then, if $j$ is recurrent $\Exp_i(N_i)<\infty$.
+    Let $(X_n)$ be a time-homogeneous Markov chain and $i,j\in I$. Then, if $j$ is transient, we have $\Exp_i(N_j)<\infty$.
   \end{corollary}
   \begin{proof}
     $$
@@ -765,19 +793,19 @@
   \begin{theorem}[Ergotic theorem]
     Let $(X_n)$ be a time-homogeneous Markov chain and $i\in I$ be positively recurrent. Then:
     $$
-      \lim_{n\to\infty}\frac{1}{n}\sum_{n=1}^\infty p_{ii}^{(n)}=\frac{1}{\mu_i}
+      \lim_{n\to\infty}\frac{1}{n}\sum_{m=1}^n p_{ii}^{(m)}=\frac{1}{\mu_i}
     $$
   \end{theorem}
   \begin{proof}
-    Note that $T_i^k$ has finite expectation and so by the \mcref{P:stronglawKolmo} we have:
-    $$\frac{1}{k}\sum_{j=1}^{k}T_i^j=\frac{\tau_i^k}{k}\almoste{\longrightarrow}\mu_i$$
-    Let $N_i^n=\sum_{j=1}^n\indi{X_j=i}\leq n$, which counts the number of visits of the state $i$ in the first $n$ steps. Note that if $N_i^n=k\leq n$, $\tau_i^k\leq n<\tau_i^{k+1}$ and so:
+    By hypothesis $T_i^k$ has finite expectation and so by the \mcref{P:stronglawKolmo} we have:
+    $$\frac{1}{k}\sum_{m=1}^{k}T_i^m=\frac{\tau_i^k}{k}\almoste{\longrightarrow}\mu_i$$
+    Let $N_i^n=\sum_{m=1}^n\indi{\{X_m=i\}}\leq n$, which counts the number of visits of the state $i$ in the first $n$ steps. Note that if $N_i^n=k\leq n$, $\tau_i^k\leq n<\tau_i^{k+1}$ and so:
     $$
       \frac{k}{k+1}\frac{k+1}{\tau_i^{k+1}}<\frac{N_i^n}{n}=\frac{k}{n}\leq \frac{k}{\tau_i^k}
     $$
     Hence, taking the limit $k\to\infty$ we have: $$\displaystyle\lim_{n\to\infty}\frac{N_i^n}{n}=\lim_{k\to\infty}\frac{k}{\tau_i^k}\almoste{\longrightarrow}\frac{1}{\mu_i}$$ Moreover note that $\frac{N_i^n}{n}\leq 1$. Thus, by the \mcref{P:dominated} we have that:
     $$
-      \Exp_i\left(\frac{N_i^n}{n}\right)=\frac{\sum_{j=1}^n \Prob_i(X_j=i)}{n}=\frac{\sum_{j=1}^n p_{ii}^{(j)}}{n}\almoste{\longrightarrow}\frac{1}{\mu_i}
+      \Exp_i\left(\frac{N_i^n}{n}\right)=\frac{\sum_{m=1}^n \Prob_i(X_m=i)}{n}=\frac{\sum_{m=1}^n p_{ii}^{(m)}}{n}\almoste{\longrightarrow}\frac{1}{\mu_i}
     $$
   \end{proof}
   \begin{corollary}
@@ -789,11 +817,12 @@
   \begin{sproof}
     Recall \mcref{MA:cesaro}.
   \end{sproof}
-  \begin{theorem}[Erogotic theorem]\label{SP:ergotic2}
+  \begin{theorem}[Ergotic theorem]\label{SP:ergotic2}
     Let $(X_n)$ be a time-homogeneous Markov chain and $i\in I$ be recurrent and aperiodic. Then, the limit $\displaystyle\lim_{n\to\infty}p_{ii}^{(n)}$ exists and:
     $$
-      \lim_{n\to\infty}\frac{1}{n}\sum_{n=1}^\infty p_{ii}^{(n)}=\frac{1}{\mu_i}
+      \lim_{n\to\infty}p_{ii}^{(n)}=\lim_{n\to\infty}\frac{1}{n}\sum_{n=1}^\infty p_{ii}^{(n)}=\frac{1}{\mu_i}
     $$
+    In particular, if $i$ is positive recurrent, then $\displaystyle\lim_{n\to\infty}p_{ii}^{(n)}>0$ and if $i$ is null recurrent, then $\displaystyle\lim_{n\to\infty}p_{ii}^{(n)}=0$.
   \end{theorem}
   \begin{proposition}
     Let $(X_n)$ be a time-homogeneous Markov chain, $i\in I$ be recurrent and aperiodic and $j\in I$ be such that $i\leftrightarrow j$. Then:
@@ -803,7 +832,7 @@
     \end{enumerate}
   \end{proposition}
   \begin{proof}
-    By \mcref{SP:thmRec,SP:period_classes} we have that $j$ is recurrent and aperiodic. Thus, by \mnameref{SP:ergotic2}, the limits $\displaystyle \lim_{n\to\infty}p_{ij}^{(n)}$ and $\displaystyle \lim_{n\to\infty}p_{ji}^{(n)}$ exist. Moreover, since $i\leftrightarrow j$ $\exists r,s\in\NN$ such that $p_{ij}^{(r)}, p_{ji}^{(s)}>0$. By \mcref{SP:corolariChapKolmo} we have that $p_{jj}^{(n+r+s)}\geq C p_{ii}^{(n)}$. If $i$ is positive recurrent then:
+    By \mcref{SP:thmRec,SP:period_classes} we have that $j$ is recurrent and aperiodic. Thus, by \mnameref{SP:ergotic2}, the limits $\displaystyle \lim_{n\to\infty}p_{ii}^{(n)}$ and $\displaystyle \lim_{n\to\infty}p_{jj}^{(n)}$ exist. Moreover, since $i\leftrightarrow j$ $\exists r,s\in\NN$ such that $p_{ij}^{(r)}, p_{ji}^{(s)}>0$. By \mcref{SP:corolariChapKolmo} we have that $p_{jj}^{(n+r+s)}\geq C p_{ii}^{(n)}$. If $i$ is positive recurrent then:
     $$
       \lim_{n\to\infty}p_{jj}^{(n+r+s)}\geq C\lim_{n\to\infty}p_{ii}^{(n)}>0
     $$
@@ -812,17 +841,17 @@
   \begin{theorem}
     Let $(X_n)$ be a time-homogeneous Markov chain and $i\in I$ be recurrent and periodic of period $d$. Then:
     $$
-      \lim_{n\to\infty} p_{ii}^{(n)}=\frac{d}{\mu_i}
+      \lim_{n\to\infty} p_{ii}^{(nd)}=\frac{d}{\mu_i}
     $$
   \end{theorem}
   \begin{proof}
-    $(Y_n)=(X_{nd})$ is a time-homogeneous Markov chain and $i\in I$ is recurrent and aperiodic. Thus, by \mnameref{SP:ergotic2} we have that $\displaystyle\lim_{n\to\infty}p_{ii}^{(nd)}=\frac{1}{\Exp_i(\tau_i^Y)}$. But:
+    $(Y_n):=(X_{nd})$ is a time-homogeneous Markov chain and $i\in I$ is recurrent and aperiodic. Thus, by \mnameref{SP:ergotic2} we have that $\displaystyle\lim_{n\to\infty}p_{ii}^{(nd)}=\frac{1}{\Exp_i(\tau_i^Y)}$. But:
     $$
       \tau_i^Y=\inf\{ n\geq 1: Y_n=i\}=\frac{1}{d}\inf\{n\geq 1: X_{n}=i\}=\frac{\tau_i}{d}
     $$
   \end{proof}
   \begin{theorem}
-    Let $(X_n)$ be a time-homogeneous irreducible and aperiodic Markov chain. Then we have exactly one of the following results:
+    Let $(X_n)$ be a time-homogeneous irreducible and aperiodic Markov chain. Then, we have exactly one of the following results:
     \begin{enumerate}
       \item All the states are transient and $\forall i,j\in I$: $$\lim_{n\to\infty} p_{ij}^{(n)}=\lim_{n\to\infty} \pi_j^{(n)}=0$$ Moreover $\sum_{n=1}^\infty p_{ij}^{(n)}<\infty$.
       \item All the states are null recurrent and $\forall i,j\in I$: $$\lim_{n\to\infty} p_{ij}^{(n)}=\lim_{n\to\infty} \pi_j^{(n)}=0$$ Moreover $\sum_{n=1}^\infty p_{ij}^{(n)}=\infty$.
@@ -832,12 +861,12 @@
   \begin{proof}
     It can be seen that $\displaystyle\lim_{n\to\infty}p_{ij}^{(n)}=\lim_{n\to\infty} p_{jj}^{(n)}$ $\forall i, j\in I$. We will prove that $\displaystyle\lim_{n\to\infty}p_{ij}^{(n)}=\lim_{n\to\infty} \pi_j^{(n)}$ $\forall i, j\in I$. We have that:
     \begin{multline*}
-      \lim_{n\to\infty}\pi_j^{(n)}=\lim_{n\to\infty}\Prob(X_n=j)=\lim_{n\to\infty}\sum_{i\in I}p_{ij}^{(n)}\pi_i=\\=\sum_{i\in I}\lim_{n\to\infty}p_{ij}^{(n)}\pi_i=\sum_{i\in I}\frac{\pi_i}{\mu_i}=\mu_i
+      \lim_{n\to\infty}\pi_j^{(n)}=\lim_{n\to\infty}\Prob(X_n=j)=\lim_{n\to\infty}\sum_{i\in I}p_{ij}^{(n)}\pi_i=\\=\sum_{i\in I}\lim_{n\to\infty}p_{ij}^{(n)}\pi_i=\sum_{i\in I}\frac{\pi_i}{\mu_j}=\frac{1}{\mu_j}
     \end{multline*}
     where we have used the dominated convergence theorem for series.
   \end{proof}
   \begin{corollary}\label{SP:coroClassificationStates}
-    Let $(X_n)$ be a time-homogeneous irreducible and aperiodic Markov chain such that $I$ is finite. Then all the states are positive recurrent.
+    Let $(X_n)$ be a time-homogeneous irreducible and aperiodic Markov chain such that $I$ is finite. Then, all the states are positive recurrent.
   \end{corollary}
   \begin{sproof}
     Note that we must have $\sum_{j\in I}\pi_j^{(n)}=1$ $\forall n\in\NN$.
@@ -849,7 +878,7 @@
     $$
   \end{definition}
   \begin{remark}
-    In general we cannot guarantee neither existence nor uniqueness of stationary distributions.
+    In general, we cannot guarantee the existence or uniqueness of stationary distributions.
   \end{remark}
   \begin{lemma}
     Let $(X_n)$ be a time-homogeneous Markov chain, $\vf\nu$ be a stationary distribution and suppose $\vf\pi_0=\vf\nu$. Then, $\vf\pi_n=\vf\nu$ $\forall n\in\NN$.
@@ -868,7 +897,7 @@
       \sum_{j\in I}\nu_j        & =\sum_{j\in I}\lim_{n\to\infty}p_{ij}^{(n)}=\lim_{n\to\infty}\sum_{j\in I}p_{ij}^{(n)}=1 \\
       \sum_{i\in I}\nu_i p_{ij} & =\sum_{i\in I}\lim_{n\to\infty}p_{ki}^{(n)}p_{ij}=\lim_{n\to\infty}p_{kj}^{(n+1)}=\nu_j
     \end{align*}
-    where we have used \mnameref{SP:ChapKolmo}. Hence, $\vf\nu$ is a stationary distribution. Now, for the uniqueness, suppose $\vf\nu$ is an arbitrary stationary distribution. Then, $\nu_j=\sum_{i\in I}\nu_i p_{ij}^{(n)}$ $\forall n\in\NN$. Thus, taking $n\to\infty$ we get that $\nu_i = \frac{1}{\mu_i}$ $\forall i\in I$.
+    where we have used \mnameref{SP:ChapKolmo}. Hence, $\vf\nu$ is a stationary distribution. Now, for the uniqueness, suppose $\vf\nu$ is an arbitrary stationary distribution. Then, $\nu_j=\sum_{i\in I}\nu_i p_{ij}^{(n)}$ $\forall n\in\NN$. Thus, taking $n\to\infty$ we get that $\nu_j = \frac{1}{\mu_j}$ $\forall j\in I$.
   \end{proof}
   \subsection{Continuous-time Markov chains}
   \subsubsection{Introduction}
@@ -906,18 +935,11 @@
   \begin{proposition}
     Let ${(X_t)}_{t\geq 0}$ be a CTHMC. Then, for all $0\leq t_1 < \cdots < t_n$ and all $i_1,\ldots,i_{n}\in I$ we have that:
     \begin{multline*}
-      \Prob(X_{t_n}=i_n\mid X_{t_{n-1}}=i_{n-1},\ldots,X_{t_1}=i_1)=\\
+      \Prob(X_{t_n}=i_n,X_{t_{n-1}}=i_{n-1},\ldots,X_{t_1}=i_1)=\\
       =p_{i_1}(t_1)p_{i_1i_2}(t_2-t_1)\cdots p_{i_{n-1}i_n}(t_n-t_{n-1})
     \end{multline*}
     where $p_{i}(t):= \Prob(X_t=i)$.
   \end{proposition}
-  \begin{sproof}
-    First note that:
-    $$
-      p_j(t)=\sum_{i\in I}p_i(0)\Prob(X_t=j\mid X_0=i)=\sum_{i\in I}p_i(0)p_{ij}(t)
-    $$
-    The formula is a consequence of the \mnameref{P:compound}.
-  \end{sproof}
   \subsubsection{Poisson process}
   \begin{definition}
     Let $\lambda>0$. A stochastic process ${(N_t)}_{t\geq 0}$ is called a \emph{Poisson process} with parameter $\lambda$ if:
@@ -937,10 +959,10 @@
   \end{proposition}
   \begin{proof}
     \begin{align*}
-      \Prob(X_{t_{n+1}} & =  j\mid X_{t_n}=i, X_{t_{n-1}}=i_{n-1}\ldots,X_{t_1}=i_1)                 \\
-                        & =\Prob(X_{t_{n+1}}-X_{t_n}=j-i\mid X_{t_n}-X_{t_{n-1}}=i-                  \\
-                        & \hspace{0.45cm}-i_{n-1},\ldots,\ldots,X_{t_2}-X_{t_1}=i_2-i_1,X_{t_1}=i_1) \\
-                        & =\Prob(X_{t_{n+1}}-X_{t_n}=j-i)                                            \\
+      \Prob(X_{t_{n+1}} & =  j\mid X_{t_n}=i, X_{t_{n-1}}=i_{n-1}\ldots,X_{t_1}=i_1)       \\
+                        & =\Prob(X_{t_{n+1}}-X_{t_n}=j-i\mid X_{t_n}-X_{t_{n-1}}=i-        \\
+                        & \hspace{1cm}-i_{n-1},\ldots,X_{t_2}-X_{t_1}=i_2-i_1,X_{t_1}=i_1) \\
+                        & =\Prob(X_{t_{n+1}}-X_{t_n}=j-i)                                  \\
                         & =\Prob(X_{t_{n+1}}=j\mid X_{t_n}=i)
     \end{align*}
   \end{proof}
@@ -950,14 +972,28 @@
       p_{ij}(t)=\Prob(N_t=j\mid N_0=i)=\frac{(\lambda t)^j}{j!}e^{-\lambda t}
     $$
   \end{corollary}
+  \begin{proposition}
+    Let ${(N_t^1)}_{t\geq 0}$ and ${(N_t^2)}_{t\geq 0}$ be two independent Poisson processes with parameters $\lambda_1$ and $\lambda_2$ respectively. Then, ${(N_t^1+N_t^2)}_{t\geq 0}$ is a Poisson process with parameter $\lambda_1+\lambda_2$.
+  \end{proposition}
+  \begin{proof}
+    Let $N_t:=(N_t^1+N_t^2)$. We only check the independent increment, the other properties are easier. We need to check that for all $0\leq t_1< \cdots < t_n$ and all $n\in\NN$ the random variables $X_{t_1}:=N_{t_1},X_{t_2}:= N_{t_2}-N_{t_1},\ldots,X_{t_n}:=N_{t_n}-N_{t_{n-1}}$ are independent. We have that
+    $$
+      X_{t_\ell}=N_{t_\ell}^1-N_{t_{\ell-1}}^1+N_{t_\ell}^2-N_{t_{\ell-1}}^2=:Y_\ell^1+Y_\ell^2
+    $$
+    By hypothesis the variables $Y_\ell^1$ and $Y_\ell^2$ are independent. Moreover, since $N_t^i$ are Poisson processes, we have that $\{(Y_k^i)\}_{k=1,\ldots,n}$ pairwise independent, for $i=1,2$. Now using the characterization of independence with the characteristic function, we have:
+    \begin{align*}
+      \varphi_{X_{t_1},\ldots,X_{t_n}}(u_1,\ldots,u_n) & =\Exp\left(\exp{\ii\sum_{j=1}^nu_j X_j}\right)                                       \\
+                                                       & =\Exp\left(\exp{\ii\sum_{j=1}^nu_jY_j^1}\exp{\ii\sum_{j=1}^nu_jY_j^2}\right)         \\
+                                                       & =\prod_{j=1}^n\Exp\left(\exp{\ii u_jY_j^1}\right)\Exp\left(\exp{\ii u_jY_j^2}\right) \\
+                                                       & = \prod_{j=1}^n\varphi_{X_j}(u_j)
+    \end{align*}
+  \end{proof}
   \begin{lemma}
     Let ${(N_t)}_{t\geq 0}$ be a Poisson process with parameter $\lambda$. Then: $$\Prob(N_h\geq 2)=\o{h}$$
   \end{lemma}
   \begin{proof}
-    \begin{multline*}
-      \Prob(N_h\geq 2)=1-\Prob(N_h=0)-\Prob(N_h=1)=\\
-      =1-e^{-\lambda h}-\lambda h e^{-\lambda h}=\o{h}
-    \end{multline*}
+    $\displaystyle
+      \Prob(N_h\geq 2)=1-e^{-\lambda h}-\lambda h e^{-\lambda h}=\o{h}$
   \end{proof}
   \begin{proposition}
     Let ${(N_t)}_{t\geq 0}$ be a Poisson process with parameter $\lambda$. Then, the trajectories are almost surely non-decreasing and have jumps of size at most $1$.
@@ -969,15 +1005,16 @@
     $$
     because the trajectories are càd. Finally, since $\Prob(N_s\leq N_t)=\Prob(N_t-N_s\geq 0)=1$, the intersection has probability $1$. Now, let:
     \begin{align*}
-      A     & :=\{\omega\in\Omega:N(\omega)\text{ has jumps of size }\geq 2\}                   \\
-      A_R   & :=\{\omega\in\Omega:N(\omega)\text{ has jumps of size }\geq 2\text{ in $[0,R]$}\} \\
+      A     & :=\{\omega\in\Omega:N(\omega)\text{ has jumps of size}\geq 2\}                   \\
+      A_R   & :=\{\omega\in\Omega:N(\omega)\text{ has jumps of size}\geq 2\text{ in $[0,R]$}\} \\
       B_R^n & :=\{\exists k\in\{1,\ldots,n\}: N_{\frac{kR}{n}}-N_{\frac{(k-1)R}{n}}\geq 2\}
     \end{align*}
-    Note that $A=\bigcup_{R=1}^\infty A_R$ and $A_R\subseteq B_R^n$ $\forall n\geq 1$ because the trajectories are càd. Thus:
+    Note that $A=\bigcup_{R=1}^\infty A_R$ and $A_R\subseteq B_R^n$ $\forall n\geq 1$ because the trajectories are càd. Thus, $\forall R>0$:
     \begin{multline*}
       \Prob(A_R)\leq \Prob(B_R^n)=\Prob\left(\bigcup_{k=1}^n\left\{N_{\frac{kR}{n}}-N_{\frac{(k-1)R}{n}}\geq 2\right\}\right)\leq\\
       \leq\sum_{k=1}^n\Prob\left(N_{\frac{kR}{n}}-N_{\frac{(k-1)R}{n}}\geq 2\right)=n\Prob(N_{\frac{R}{n}}\geq 2)=\\=n\o{\frac{R}{n}}\overset{n\to\infty}{\longrightarrow}0
     \end{multline*}
+    Hence, $\Prob(A)=0$.
   \end{proof}
   \begin{definition}
     Let ${(N_t)}_{t\geq 0}$ be a Poisson process with parameter $\lambda$. We define the \emph{holding times} as:
@@ -997,9 +1034,10 @@
     \begin{multline*}
       \Prob(T_k=\infty)=\Prob(\forall t\in\RR: N_t\leq k-1)\leq \Prob(N_1=0,\\N_2-N_1 =0,\ldots,N_n-N_{n-1}=0)=\exp{-\lambda n} \overset{n\to\infty}{\longrightarrow}0
     \end{multline*}
+    because the inequality is true for all $n\in\NN$.
   \end{proof}
   \begin{theorem}
-    Let ${(N_t)}_{t\geq 0}$ be a Poisson process with parameter $\lambda$. Then, the inter-arrival times $(S_k)$ are \iid variables distributed as $\Exp(\lambda)$.
+    Let ${(N_t)}_{t\geq 0}$ be a Poisson process with parameter $\lambda$. Then, the inter-arrival times $(S_k)$ are \iid random variables distributed as $\text{Exp}(\lambda)$.
   \end{theorem}
   \begin{proof}
     Let $\vf{T}:=(T_1,\ldots,T_n)$. Recall that:
@@ -1018,20 +1056,20 @@
     $$
       \function{\vf{g}}{\{0<t_1<\cdots<t_n\}}{{(0,\infty)}^n}{(t_1,\ldots,t_n)}{(t_1,t_2-t_1,\ldots,t_n-t_{n-1})}
     $$
-    which is a diffeomorphism such that $\det \vf{Dg}(\vf{t})=1$. The density of $\vf{S}:=\vf{g}(\vf{T})$ is thus:
+    which is a diffeomorphism such that $\det \vf{Dg}(\vf{t})=1$. The density of $\vf{S}:=\vf{g}(\vf{T})$ is thus
     $$
       f_{\vf{S}}(\vf{s})=f_{\vf{T}}(\vf{g}^{-1}(\vf{s}))\indi{{(0,\infty)}^n}(\vf{s})=\prod_{k= 1}^n \lambda \exp{-\lambda s_k}\indi{(0,\infty)}(s_k)
     $$
-    by \mcref{P:transRV}. And this last expression is the joint pdf of $n$ \iid $\Exp(\lambda)$ variables.
+    by \mcref{P:transRV}. And this last expression is the joint pdf of $n$ \iid $\text{Exp}(\lambda)$ variables.
   \end{proof}
   \begin{theorem}
-    Let ${(S_k)}$ be a sequence of \iid random variables distributed as $\Exp(\lambda)$. Consider the sequence $(T_n)$ defined as $T_0:=0$ and $T_n=\sum_{k=1}^{n}S_k$. Let $N_t:=\sup\{n\geq 1:T_n\leq t\}$. Then, ${(N_t)}_{t\geq 0}$ is a Poisson process with parameter $\lambda$. In this case, we can also express $N_t$ as:
+    Let ${(S_k)}$ be a sequence of \iid random variables distributed as $\text{Exp}(\lambda)$. Consider the sequence $(T_n)$ defined as $T_0:=0$ and $T_n=\sum_{k=1}^{n}S_k$. Let $N_t:=\sup\{n\geq 1:T_n\leq t\}$. Then, ${(N_t)}_{t\geq 0}$ is a Poisson process with parameter $\lambda$. In this case, we can also express $N_t$ as:
     $$
       N_t=\sum_{n=1}^\infty n \indi{\{T_n\leq t<T_{n+1}\}}
     $$
   \end{theorem}
   \begin{sproof}
-    We'll see only that $N_t\sim \text{Pois}(\lambda t)$. Let $k\in\NN\cup \{0\}$. Then, $\Prob(N_t=k)=\Prob(T_k\leq t<T_{k+1})$. Since $T_k=\sum_{i=1}^k S_i$, we have that $T_{k}$ and $S_{k+1}$ are independent. Hence, $f_{T_k,S_{k+1}}(x,y)=f_{T_k}(x)f_{S_{k+1}}(y)$ and since $S_{k+1}\sim \Exp(\lambda)$ and $T_k\sim \Gamma(k,\lambda)$, we have that:
+    We'll see only that $N_t\sim \text{Pois}(\lambda t)$. Let $k\in\NN\cup \{0\}$. Then, $\Prob(N_t=k)=\Prob(T_k\leq t<T_{k+1})$. Since $T_k=\sum_{i=1}^k S_i$, we have that $T_{k}$ and $S_{k+1}$ are independent. Hence, $f_{T_k,S_{k+1}}(x,y)=f_{T_k}(x)f_{S_{k+1}}(y)$ and since $S_{k+1}\sim \text{Exp}(\lambda)$ and $T_k\sim \Gamma(k,\lambda)$ (because is a sum of exponentials), we have that:
     $$
       f_{T_k,S_{k+1}}(x,y)=\frac{\lambda^k}{\Gamma(k)}t^{k-1}\exp{-\lambda x}\lambda \exp{-\lambda y}=\frac{\lambda^{k+1}t^{k-1}}{(k-1)!}\exp{-\lambda (x+y)}
     $$
@@ -1044,7 +1082,7 @@
   \subsubsection{Kolmogorov's differential equations}
   From here on, we'll assume that the transition marices $\vf{P}(t)$ satisfy that $\displaystyle\lim_{h\to 0} \vf{P} (h)=\vf{I}$. That is, we have right continuity at $0$. This is equivalent to say that $\displaystyle\lim_{h\to 0} p_{ij}(h)=\delta_{ij}$.
   \begin{lemma}
-    Let $X$ be a CTHMC with transition matrix $\vf{P}(t)$. Then, $(p_{ij}(t))$ are continuous functions for all $i,j\in I$.
+    Let ${(X_t)}_{t\geq 0}$ be a CTHMC with transition matrix $\vf{P}(t)$. Then, $(p_{ij}(t))$ are continuous functions for all $i,j\in I$.
   \end{lemma}
   \begin{proof}
     The result follows from the inequality:
@@ -1075,10 +1113,10 @@
         q_i:= \displaystyle\lim_{h\to 0} \frac{1-p_{ii}(h)}{h}\in[0,\infty] & \text{if } i=j
       \end{cases}
     $$
-    Note that if the limits are finite we have $q_{ij} = -{p_{ij}}'(0)$ and $q_i = -{p_{ii}}'(0)$.
+    Note that if the limits are finite we have $q_{ij} = {p_{ij}}'(0)$ and $q_i = -{p_{ii}}'(0)$.
   \end{theorem}
   \begin{definition}
-    Let $X$ be a CTHMC with transition matrix $\vf{P}(t)$. Then, the \emph{infinitesimal generator} of $X$ is the matrix $\vf{Q}$ defined as $\vf{Q}:={\left(q_{ij}\right)}_{i,j\in I}$, where $q_{ii}:=-q_i$. We define the \emph{infinitesimal transition scheme} as:
+    Let ${(X_t)}_{t\geq 0}$ be a CTHMC with transition matrix $\vf{P}(t)$. Then, the \emph{infinitesimal generator} of ${(X_t)}_{t\geq 0}$ is the matrix $\vf{Q}$ defined as $\vf{Q}:={\left(q_{ij}\right)}_{i,j\in I}$, where $q_{ii}:=-q_i$. We define the \emph{infinitesimal transition scheme} as:
     $$
       \begin{cases}
         p_{ii}(h) = 1-q_ih+\o{h}  & \text{if } i=j     \\
@@ -1087,7 +1125,7 @@
     $$
   \end{definition}
   \begin{theorem}
-    Let $X$ be a CTHMC with infinitesimal generator $\vf{Q}$ and assume that $I$ is finite. Then, $\vf{P}'=\vf{Q}\vf{P}$ and $\vf{P}'=\vf{P}\vf{Q}$. The first equation is called the \emph{Kolmogorov's backward equation} and the second one the \emph{Kolmogorov's forward equation}.
+    Let ${(X_t)}_{t\geq 0}$ be a CTHMC with infinitesimal generator $\vf{Q}$ and assume that $I$ is finite. Then, $\vf{P}'=\vf{Q}\vf{P}$ and $\vf{P}'=\vf{P}\vf{Q}$. The first equation is called the \emph{Kolmogorov's backward equation} and the second one the \emph{Kolmogorov's forward equation}.
   \end{theorem}
   \begin{proof}
     Note that since $I$ is finite, $q_i<\infty$ $\forall i\in I$. Indeed:
@@ -1105,10 +1143,10 @@
     Using the continuity of the $p_{ij}$'s we get the result with the left derivative. The other equation follows analogously by exchanging the roles of $h$ and $t$ in the Chapman-Kolmogorov equations.
   \end{proof}
   \begin{theorem}
-    Let $X$ be a CTHMC with infinitesimal generator $\vf{Q}$. Assume that $q_i<\infty$ and $q_i=\sum_{\substack{k\in I\\k\ne i}}q_{ik}$ for all $i\in I$. Then, $\vf{P}'=\vf{Q}\vf{P}$.
+    Let ${(X_t)}_{t\geq 0}$ be a CTHMC with infinitesimal generator $\vf{Q}$. Assume that $q_i<\infty$ and $q_i=\sum_{\substack{k\in I\\k\ne i}}q_{ik}$ for all $i\in I$. Then, $\vf{P}'=\vf{Q}\vf{P}$.
   \end{theorem}
   \begin{theorem}
-    Let $X$ be a CTHMC with infinitesimal generator $\vf{Q}$. Assume that $q_i<\infty$ and $q_i=\sum_{\substack{k\in I\\k\ne i}}q_{ik}$ for all $i\in I$ and that $\sum_{k\in I}p_{ik}(t)q_k<\infty$ for all $i\in I$ and $t\geq 0$. Then, $\vf{P}'=\vf{Q}\vf{P}$.
+    Let ${(X_t)}_{t\geq 0}$ be a CTHMC with infinitesimal generator $\vf{Q}$. Assume that $q_i<\infty$ and $q_i=\sum_{\substack{k\in I\\k\ne i}}q_{ik}$ for all $i\in I$ and that $\sum_{k\in I}p_{ik}(t)q_k<\infty$ for all $i\in I$ and $t\geq 0$. Then, $\vf{P}'=\vf{P}\vf{Q}$.
   \end{theorem}
   \begin{remark}
     Note that in this latter theorem if $\sup_{k\in I}q_k<\infty$, then $\sum_{k\in I}p_{ik}(t)q_k<\infty$ for all $i\in I$ and $t\geq 0$.
@@ -1124,17 +1162,17 @@
     Let ${(X_t)}_{t\geq 0}$ be a CTHMC and a regular jump process. Then, $\forall i\in I$, $q_i<\infty$ and $q_i=\sum_{\substack{k\in I\\k\ne i}}q_{ik}$.
   \end{theorem}
   \begin{definition}
-    Let ${(X_t)}_{t\geq 0}$ be a CTHMC. Then, ${(X_t)}_{t\geq 0}$ is said to be \emph{stable} if $\forall i\in I$, $q_i<\infty$ and \emph{conservative} if $\forall i\in I$, $q_i=\sum_{\substack{k\in I\\k\ne i}}q_{ik}$.
+    Let ${(X_t)}_{t\geq 0}$ be a CTHMC. Then, ${(X_t)}_{t\geq 0}$ is said to be \emph{stable} if $\forall i\in I$, $q_i<\infty$, and is said to be \emph{conservative} if $\forall i\in I$, $q_i=\sum_{\substack{k\in I\\k\ne i}}q_{ik}$.
   \end{definition}
   \begin{theorem}
     Let ${(X_t)}_{t\geq 0}$ be a CTHMC and a regular jump process. Then, the two Kolmogorov odes are satisfied.
   \end{theorem}
   \subsubsection{Limit and stationary distributions}
   \begin{definition}
-    Let $X$ be a CTHMC. We say that $\vf{\overline{p}}$ is a \emph{stationary distribution} for $X_t$ if $\overline{p}_i\geq 0$ $\forall i\in I$, $\sum_{i\in I}\overline{p}_i =1$ and $\vf{\overline{p}}\vf{P}(t)=\vf{\overline{p}}$ $\forall t\geq 0$.
+    Let ${(X_t)}_{t\geq 0}$ be a CTHMC. We say that $\vf{\overline{p}}$ is a \emph{stationary distribution} for ${(X_t)}_{t\geq 0}$ if $\overline{p}_i\geq 0$ $\forall i\in I$, $\sum_{i\in I}\overline{p}_i =1$ and $\vf{\overline{p}}\vf{P}(t)=\vf{\overline{p}}$ $\forall t\geq 0$.
   \end{definition}
   \begin{lemma}
-    Let $X$ be a CTHMC. Then:
+    Let ${(X_t)}_{t\geq 0}$ be a CTHMC and a regular jump process. Then:
     $$
       {p_j}'(t)=\sum_{k\in I} q_{kj}p_k(t)
     $$
@@ -1148,7 +1186,7 @@
     $$
       p_j(t) = \Prob(X_t=j) = \sum_{i\in I} p_i(0)p_{ij}(t)
     $$
-    A result allows us to differentiate term by term and rearrange the following series:
+    A result allows us to differentiate term by term and rearrange the following series (because ${(X_t)}_{t\geq 0}$ is a regular jump process):
     \begin{multline*}
       {p_j}'(t) = \sum_{i\in I} p_i(0){p_{ij}}'(t) = \sum_{i\in I} p_i(0)\sum_{k\in I}p_{ik}(t)q_{kj}  = \\= \sum_{k\in I}q_{kj}\sum_{i\in I}p_i(0)p_{ik}(t)=\sum_{k\in I}q_{kj}p_k(t)
     \end{multline*}
@@ -1162,12 +1200,12 @@
     where the last inequality is due to the fact that $\displaystyle\lim_{h\to 0}p_{ii}(h)=1$.
   \end{remark}
   \begin{definition}
-    Let $X$ be a CTHMC. We say that the chain is \emph{irreducible} if $\forall i,j\in I$, $\exists t_1,t_2>0$ such that $p_{ij}(t_1)>0$ and $p_{ji}(t_2)>0$.
+    Let ${(X_t)}_{t\geq 0}$ be a CTHMC. We say that the chain is \emph{irreducible} if $\forall i,j\in I$, $\exists t_1,t_2>0$ such that $p_{ij}(t_1)>0$ and $p_{ji}(t_2)>0$.
   \end{definition}
   \begin{theorem}\label{SP:limit_distribution}
     Let $X$ be an irreducible CTHMC and a regular jump process. Then, we have exactly one of the following:
     \begin{enumerate}
-      \item The balance equation has a unique solution $\vf{\overline{p}}$ and in that case $\displaystyle \lim_{t\to\infty}p_{ij}(t)=\overline{p}_j$ $\forall i,j\in I$. In that case, $\vf{\overline{p}}$ is called a \emph{limit distribution}.
+      \item The balance equation has a unique solution $\vf{\overline{p}}$ (which must be the stationary distribution) and $\displaystyle \lim_{t\to\infty}p_{ij}(t)=\overline{p}_j$ $\forall i,j\in I$. In that case, $\vf{\overline{p}}$ is called a \emph{limit distribution}.
       \item The balance equation has no solution and in that case $\displaystyle \lim_{t\to\infty}p_{ij}(t)=0$ $\forall i,j\in I$.
     \end{enumerate}
   \end{theorem}
@@ -1176,7 +1214,7 @@
   \end{remark}
   \subsubsection{Birth and death processes}
   \begin{definition}
-    Let $I=\NN\cup\{0\}$. The following infinitesimal transition scheme describe the \emph{birth and death processes}:
+    Let $I=\NN\cup\{0\}$. A \emph{birth and death process} is a CTHMC and a regular jump process with the following infinitesimal transition scheme:
     $$
       \begin{cases}
         p_{i,i+1}(h)=\lambda_i h+\o{h}       & i\geq 0          \\
@@ -1186,7 +1224,7 @@
         p_{ij} = \o{h}                       & \text{otherwise}
       \end{cases}
     $$
-    This model describes a population of individuals, each of whom having $\lambda_i h + \o{h}$ probability of giving birth to a new individual in the time interval $[t,t+h)$ and $\mu_i h + \o{h}$ probability of dying in the same time interval. The probability of having more than one birth or death in that interval is $\o{h}$. In this case infinitesimal generator is:
+    This model describes a population of individuals, each of whom having $\lambda_i h + \o{h}$ probability of giving birth to a new individual in the time interval $[t,t+h)$ and $\mu_i h + \o{h}$ probability of dying in the same time interval. The probability of having more than one birth or death in that interval is $\o{h}$. In this case the infinitesimal generator is:
     $$
       \vf{Q}=\begin{pmatrix}
         -\lambda_0 & \lambda_0          & 0                  & 0         & \cdots \\
@@ -1218,8 +1256,19 @@
       (\lambda_j+\mu_j) \frac{\lambda_0\cdots\lambda_{j-1}}{\mu_1\cdots\mu_j}\overline{p}_0 & = \lambda_{j-1}\frac{\lambda_0\cdots\lambda_{j-2}}{\mu_1\cdots\mu_{j-1}}\overline{p}_0+\mu_{j+1}\overline{p}_{j+1} \\
       \frac{\lambda_0\cdots\lambda_{j-1}\lambda_j}{\mu_1\cdots\mu_j}\overline{p}_0          & = \mu_{j+1}\overline{p}_{j+1}
     \end{align*}
-    The first argument is determined from the condition $1=\sum_{i\in I} \overline{p}_i=\overline{p}_0+\overline{p}_0\sum_{i\in I}\frac{\lambda_0\lambda_1\cdots\lambda_{i-1}}{\mu_1\mu_2\cdots\mu_i}$. Now if we see that for $\lambda_i>0$ and $\mu_i>0$ $\forall i\in I$ the chain is irreducible, then the theorem will be proved by \mcref{SP:limit_distribution}.
+    The first argument is determined from the condition $1=\sum_{i\in I} \overline{p}_i=\overline{p}_0+\overline{p}_0\sum_{i\in I}\frac{\lambda_0\lambda_1\cdots\lambda_{i-1}}{\mu_1\mu_2\cdots\mu_i}$. Now if we see that for $\lambda_i>0$ and $\mu_i>0$ $\forall i\in I$ the chain is irreducible, then the theorem will be proved by \mcref{SP:limit_distribution}. But this is clear because, for example if $i <j$ we have:
+    \begin{align*}
+      p_{ij}((j-i)h) & \geq p_{i,i+1}(h)p_{i+1,i+2}(h)\cdots p_{j-1,j}(h)              \\
+                     & =\lambda_i\lambda_{i+1}\cdots\lambda_{j-1}h^{j-i}+\o{h^{j-i}}>0
+    \end{align*}
+    if $\lambda_i>0$ $\forall i\in I$ and for some $h$ small enough. The case $i>j$ is analogous.
   \end{proof}
+  \begin{theorem}[Reuter criterion]
+    Consider an infinitesimal generator for a birth and death process. Then,  there is a CTHMC of regular jumps with this infinitesimal generator if and only if:
+    $$
+      \sum_{n=1}^\infty \left[\frac{1}{\lambda_n}+\frac{\mu_n}{\lambda_n\lambda_{n-1}}+ \cdots+ \frac{\mu_n\cdots \mu_1}{\lambda_n\cdots\lambda_0}\right]=\infty
+    $$
+  \end{theorem}
   \subsection{Brownian motion}
   \subsubsection{Gaussian processes}
   \begin{proposition}\label{SP:gaussian_vector}
@@ -1232,7 +1281,7 @@
     Let ${(X_t)}_{t\geq 0}$ be a gaussian process.
     Then, the \emph{mean function} is defined as:
     $$
-      \function{\mu}{[0,\infty)}{\RR}{t}{\Exp{X_t}=:\mu_t}
+      \function{\mu}{[0,\infty)}{\RR}{t}{\Exp(X_t)=:\mu_t}
     $$
     and the \emph{covariance function} is defined as:
     $$
@@ -1241,7 +1290,7 @@
   \end{definition}
   \subsubsection{Brownian motion}
   \begin{definition}
-    A stochastic process ${(B_t)}_{t\geq 0}$ is called a \emph{Brownian motion} with parameter $\lambda$ if:
+    A stochastic process ${(B_t)}_{t\geq 0}$ is called a \emph{Brownian motion} (or a \emph{Wiener process}) with parameter $\lambda$ if:
     \begin{enumerate}
       \item $B_0=0$.
       \item $B_t$ has independent increments.
@@ -1254,9 +1303,15 @@
     Let $B:={(B_t)}_{t\geq 0}$ be a standard Brownian motion. Then, $B$ is a gaussian process with mean function $\mu_t=0$ and covariance function $C(s,t)=\min(s,t)$.
   \end{proposition}
   \begin{proof}
-    Let $0< t_1<\cdots<t_n$. We can write the vector $\vf{b}:=(B_{t_1},\ldots,B_{t_n})$ as:
+    Let $0< t_1<\cdots<t_n$. We can write the vector $\vf{b}:=\transpose{(B_{t_1},\ldots,B_{t_n})}$ as:
     $$
-      \vf{b}=\vf{A}\begin{pmatrix}
+      \vf{b}=\begin{pmatrix}
+        1      & 0      & \cdots & 0      \\
+        1      & \ddots & \ddots & \vdots \\
+        \vdots & \ddots & 1      & 0      \\
+        1      & \cdots & 1      & 1
+      \end{pmatrix}
+      \begin{pmatrix}
         B_{t_1}           \\
         B_{t_2} - B_{t_1} \\
         \vdots            \\
@@ -1280,7 +1335,7 @@
     $$
     for all $0<t_1<\cdots<t_n$. On the one hand, if $t_i<t_j$, then $t_{i-1}<t_i\leq t_{j-1}<t_j$ and:
     \begin{multline*}
-      \Exp((B_{t_i}-B_{t_{i-1}})(B_{t_j}-B_{t_{j-1}}))=\Exp(B_{t_i}B_{t_j})-\Exp(B_{t_i}B_{t_{j-1}})-\\-\Exp(B_{t_{i-1}}B_{t_j})+\Exp(B_{t_{i-1}}B_{t_{j-1}})=t_i-t_{i}-t_{j-1}+t_{i-1}=0
+      \Exp((B_{t_i}-B_{t_{i-1}})(B_{t_j}-B_{t_{j-1}}))=\Exp(B_{t_i}B_{t_j})-\Exp(B_{t_i}B_{t_{j-1}})-\\-\Exp(B_{t_{i-1}}B_{t_j})+\Exp(B_{t_{i-1}}B_{t_{j-1}})=t_i-t_{i}-t_{i-1}+t_{i-1}=0
     \end{multline*}
     On the other hand:
     \begin{multline*}
@@ -1302,7 +1357,7 @@
     \end{enumerate}
   \end{proposition}
   \begin{definition}
-    Let ${(X_t)}_{t\in T}$ and ${(Y_t)}_{t\in T}$ be two stochastic processes. We say that $X$ and $Y$ are \emph{stochastically equivalent} if $\forall t\in T$ we have: $$\Prob(X_t=Y_t)=1$$ In that case we also say that ${(X_t)}_{t\in T}$ is a \emph{version} of ${(Y_t)}_{t\in T}$ (or viceversa). We say that $X$ and $Y$ are \emph{indistinguishable} if: $$
+    Let ${(X_t)}_{t\in T}$ and ${(Y_t)}_{t\in T}$ be two stochastic processes. We say that ${(X_t)}_{t\in T}$ and ${(Y_t)}_{t\in T}$ are \emph{stochastically equivalent} if $\forall t\in T$ we have: $$\Prob(X_t=Y_t)=1$$ In that case we also say that ${(X_t)}_{t\in T}$ is a \emph{version} of ${(Y_t)}_{t\in T}$ (or viceversa). We say that ${(X_t)}_{t\in T}$ and ${(Y_t)}_{t\in T}$ are \emph{indistinguishable} if: $$
       \Prob(X_t=Y_t\ \forall t\in T)=1
     $$
   \end{definition}
@@ -1330,20 +1385,26 @@
   \begin{corollary}
     Let $B$ be a standard Brownian motion and $\overline{B}$ be a version of $B$. Then, $\overline{B}$ is also a standard Brownian motion.
   \end{corollary}
-  \begin{theorem}[Kolmogorov's continuity theorem]
+  \begin{theorem}[Kolmogorov's continuity theorem]\label{SP:kolmogorov_continuity}
     Let ${(X_t)}_{t\geq 0}$ be a stochastic process such that $\exists \alpha,\beta, C>0$ such that:
     $$
       \Exp(\abs{X_t-X_s}^\alpha)\leq C\abs{t-s}^{1+\beta}
     $$
     for all $t,s\geq 0$. Then, there exists a version of ${(X_t)}_{t\geq 0}$ with continuous trajectories.
   \end{theorem}
-  \begin{lemma}
+  \begin{lemma}\label{SP:post_kolmo}
     Let $X\sim N(0,\sigma^2)$. Then, $\Exp(\abs{X}^n)=C_n\sigma^n$ where:
     $$
       C_n=\Exp(\abs{Z}^n)=\Gamma\left(\frac{n+1}{2}\right)\frac{2^{n/2}}{\sqrt{\pi}}
     $$
     and $Z\sim N(0,1)$.
   \end{lemma}
+  \begin{corollary}
+    Let $B:={(B_t)}_{t\geq 0}$ be a standard Brownian motion. Then, there exists a version of $B$ with continuous trajectories.
+  \end{corollary}
+  \begin{proof}
+    We use \cref{SP:kolmogorov_continuity,SP:post_kolmo} with $\alpha=3$ and $\beta=1/2$.
+  \end{proof}
   \begin{proposition}
     Let $B:= {(B_t)}_{t\geq 0}$ be a standard Brownian motion. Then, for any interval $[a,b]\subset \RR$:
     $$
@@ -1365,11 +1426,11 @@
     $$
   \end{proof}
   \begin{proposition}
-    Let $B$ be a standard Brownian motion. Then, $\forall t\geq 0$ the set
+    Let $B:= {(B_t)}_{t\geq 0}$ be a standard Brownian motion. Then, $\forall t\geq 0$ the set
     $$
       A:=\left\{\omega\in\Omega:\limsup_{h\to 0}\frac{\abs{B_{t+h}(\omega)-B_t(\omega)}}{h}=+\infty\right\}
     $$
-    which could not be in the $\sigma$-algebra, contains an event of probability $1$.
+    which may not belong in the $\sigma$-algebra, contains an event of probability $1$.
   \end{proposition}
   \begin{proof}
     Note that $A\supseteq \{\omega\in\Omega:\sup_{n\in\NN}\frac{\abs{B_{t+1/n}(\omega)-B_t(\omega)}}{1/n}=+\infty\}=\bigcap_{M\geq 1} A_{M}$ where:
@@ -1380,10 +1441,17 @@
     \begin{multline*}
       \Prob(A_M)\geq \Prob \left(\frac{\abs{B_{t+1/n}(\omega)-B_t(\omega)}}{1/n}\geq M\right) = \\ = \Prob\left(\abs{Z}\geq \frac{M}{\sqrt{n}}\right)=2 \left(1-\Phi\left(\frac{M}{\sqrt{n}}\right)\right)\overset{n\to\infty}{\longrightarrow} 1
     \end{multline*}
-    where $Z\sim N(0,1)$ and $\Phi$ is the cumulative distribution function of the standard normal distribution.
+    where the first inequality holds $\forall n\in\NN$, $Z\sim N(0,1)$ and $\Phi$ is the cumulative distribution function of the standard normal distribution.
   \end{proof}
   \begin{theorem}[Paley-Wiener-Zygmund theorem]
-    The Brownian trajectories are almost surely nowhere differentiable.
+    The Brownian trajectories are almost surely nowhere differentiable. Namely, the set
+    \begin{multline*}
+      \left\{
+      \omega\in\Omega:\forall t\geq 0, \limsup_{h\to 0^+}\frac{{B_{t+h}(\omega)-B_t(\omega)}}{h}=+\infty\text{ or }\right.\\
+      \left.\liminf_{h\to 0^+}\frac{{B_{t+h}(\omega)-B_t(\omega)}}{h}=-\infty
+      \right\}
+    \end{multline*}
+    contains an event of probability $1$. And the same occurs for the left limit $h\to 0^-$ (in this case we need to exclude $t=0$).
   \end{theorem}
   \begin{figure}[H]
     \centering
@@ -1412,7 +1480,7 @@
     $$
   \end{lemma}
   \begin{corollary}
-    Let $B$ be a standard Brownian motion and $a>0$. Then, $\Prob(\tau_a<\infty)=1$.
+    Let $B$ be a standard Brownian motion and $a\in\RR^*$. Then, $\Prob(\tau_a<\infty)=1$.
   \end{corollary}
   \begin{proof}
     Assume $a>0$, the other case is similar. Then:
@@ -1441,7 +1509,7 @@
     The Brownian trajectories have infinite zeros almost surely, and they tend to infinity.
   \end{corollary}
   \begin{proof}
-    Let $A=\{\omega\in\Omega:B_{\cdot}(\omega)\text{ has finite zeros}\}\subseteq \bigcup_{n=1}^\infty\{\omega\in\Omega:B_{\cdot}(\omega)\text{ doesn't vanish in $[n,\infty)$}\}$. Let's see that all the events $A_n:=\{B_{\cdot}\text{ doesn't vanish in $[n,\infty)$}\}$ in the union have probability 0.
+    Let $B:=\{B_t:t\geq 0\}$ be a standard Brownian motion and let $A=\{\omega\in\Omega:B_{\cdot}(\omega)\text{ has finite zeros}\}\subseteq \bigcup_{n=1}^\infty\{\omega\in\Omega:B_{\cdot}(\omega)\text{ doesn't vanish in $[n,\infty)$}\}$. Let's see that all the events $A_n:=\{B_{\cdot}\text{ doesn't vanish in $[n,\infty)$}\}$ in the union have probability 0.
     \begin{multline*}
       \Prob(A_n)=\Prob(B_{\cdot}>0\text{ in $[n,\infty)$})+\Prob(B_{\cdot}<0\text{ in $[n,\infty)$})\leq\\\leq \Prob\left(\inf_{t\geq n}B_t\ne-\infty\right)+\Prob\left(\sup_{t\geq n}B_t\ne+\infty\right)=0
     \end{multline*}
@@ -1476,13 +1544,13 @@
     because it diverges at $\infty$.
   \end{proof}
   \begin{definition}
-    An $n$-dimensional Brownian motion is a $d$-dimensional stochastic process $\vf{B}=(B^1,\dots,B^d)$ such that $\forall i\in\{1,\dots,d\}$, $B^i$ is a standard Brownian motion, and it is independent of the other components.
+    A \emph{$d$-dimensional standard Brownian motion} is a $d$-dimensional stochastic process $\vf{B}=(B^1,\dots,B^d)$ such that $\forall i\in\{1,\dots,d\}$, $B^i$ is a standard Brownian motion, and it is independent of the other components.
   \end{definition}
   \begin{theorem}
     Let $\vf{B}$ be a $d$-dimensional Brownian motion. Then:
     \begin{enumerate}
-      \item If $d=2$, then $B$ is recurrent, that is $\forall \vf{x}\in\RR^2$ and $\forall \delta>0$ $\exists (\tau_n)$ such that $\Prob(\tau_n)$
-      \item If $d\geq 3$, then $B$ is transient, that is $\forall T>0$
+      \item If $d=2$, then $B$ is recurrent, that is $\forall \vf{x}\in\RR^2$ and $\forall \delta>0$ $\exists (\tau_n)\in\RR$, with $\displaystyle\lim_{n\to\infty} \tau_n=+\infty$, such that: $$\Prob(B_{\tau_n}\in B_\delta(\vf{x})\ \forall n\in\NN)=1$$ Here $B_\delta(\vf{x})$ denotes the open ball of radius $\delta$ centered at $\vf{x}$.
+      \item If $d\geq 3$, then $B$ is transient, that is $\forall M>0$, $\exists T>0$ such that: $$\Prob(B_t\in B_M(\vf{0})\ \forall t\geq T)=0$$
     \end{enumerate}
   \end{theorem}
   \begin{theorem}[Law of the iterated logarithm]
@@ -1507,6 +1575,7 @@
     $$
     Then, $Y_t^n\overset{\mathrm{d}}{\longrightarrow} B_t$.
   \end{proposition}
+  \subsubsection{Existence of Brownian motion}
   \begin{definition}[Finite-dimensional distributions]
     Let $(\Omega, \mathcal{A}, \Prob)$ be a probability space and $X: I\times\Omega\rightarrow (E,\mathcal{E})$ be a stochastic process. The \emph{finite-dimensional distributions} of $X$ are the probability measures $\Prob_{t_1,\dots,t_n}$ defined on $(E^n,\mathcal{E}^n)$ by:
     $$
@@ -1518,13 +1587,13 @@
     Let $(\Omega, \mathcal{A}, \Prob)$ be a probability space and $X: I\times\Omega\rightarrow (E,\mathcal{E})$ be a stochastic process. Then, the finite-dimensional distributions satisfy the following \emph{consistency condition}:
     \begin{enumerate}
       \item For all $n\in\NN$, $t_1,\dots,t_n\in I$, $B_1,\dots,B_n\in\mathcal{E}$ and $\sigma\in\S_n$, we have:
-            $$
-              \Prob_{t_1,\dots,t_n}(B_1\times\dots\times B_n)=\Prob_{t_{\sigma(1)},\dots,t_{\sigma(n)}}(B_{\sigma(1)}\times\dots\times B_{\sigma(n)})
-            $$
+            \begin{multline*}
+              \Prob_{t_1,\dots,t_n}(B_1\times\dots\times B_n)=\\=\Prob_{t_{\sigma(1)},\dots,t_{\sigma(n)}}(B_{\sigma(1)}\times\dots\times B_{\sigma(n)})
+            \end{multline*}
       \item  For all $n\in\NN$, $t_1,\dots,t_n\in I$ and $B_1,\dots,B_{n-1}\in\mathcal{E}$, we have:
-            $$
-              \Prob_{t_1,\dots,t_n}(B_1\times\dots\times B_{n-1}\times E)=\Prob_{t_1,\dots,t_{n-1}}(B_1\times\dots\times B_{n-1})
-            $$
+            \begin{multline*}
+              \Prob_{t_1,\dots,t_n}(B_1\times\dots\times B_{n-1}\times E)=\\=\Prob_{t_1,\dots,t_{n-1}}(B_1\times\dots\times B_{n-1})
+            \end{multline*}
     \end{enumerate}
   \end{lemma}
   \begin{theorem}[Kolmogorov extension theorem]

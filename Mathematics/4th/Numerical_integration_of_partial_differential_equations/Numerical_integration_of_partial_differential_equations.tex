@@ -32,6 +32,8 @@
             $$\frac{u_m^{n+1}-u_m^n}{k}+a\frac{u_{m}^n-u_{m-1}^n}{h}+\O{k}+\O{h}=f_m^n$$
       \item \emph{Forward-time central-space} (\emph{FTCS}):
             $$\frac{u_m^{n+1}-u_m^n}{k}+a\frac{u_{m+1}^n-u_{m-1}^n}{2h}+\O{k}+\O{h^2}=f_m^n$$
+      \item \emph{Backward-time central-space} (\emph{BTCS}):
+            $$\frac{u_m^{n+1}-u_m^n}{k}+a\frac{u_{m+1}^{n+1}-u_{m-1}^{n+1}}{2h}+\O{k}+\O{h^2}=f_m^n$$
       \item \emph{Leapfrog scheme}:
             \begin{multline*}
               \frac{u_m^{n+1}-u_m^{n-1}}{2k}+a\frac{u_{m+1}^n-u_{m-1}^n}{2h}+\\+\O{k^2}+\O{h^2}=f_m^n
@@ -54,6 +56,10 @@
             $$\displaystyle v_m^{n+1}=(1-\lambda a)v_m^n+\lambda av_{m-1}^n+kf_m^n$$
       \item Forward-time central-space
             $$\displaystyle v_m^{n+1}=v_m^n-\frac{\lambda a}{2}v_{m+1}^n+\frac{\lambda a}{2}v_{m-1}^n+kf_m^n$$
+      \item Backward-time central-space
+            $$
+              \displaystyle v_m^{n+1}=v_m^n-\frac{\lambda a}{2}v_{m+1}^{n+1}+\frac{\lambda a}{2}v_{m-1}^{n+1}+kf_m^n
+            $$
       \item Leapfrog scheme: $$v_m^{n+1}=v_m^{n-1}-\lambda av_{m+1}^n+\lambda av_{m-1}^n+kf_m^n$$
       \item Lax-Friedrichs scheme: $$v_m^{n+1}=\frac{1}{2}\left((1-\lambda a)v_{m+1}^n+(1+\lambda a)v_{m-1}^n\right)+kf_m^n$$
     \end{enumerate}
@@ -105,16 +111,16 @@
                                             & ={(\abs{\alpha}+\abs{\beta})}^2 \sum_{m\in\ZZ}\norm{\vf{v}_{m}^n}^2                                              \\
                                             & \leq{(\abs{\alpha}+\abs{\beta})}^{2(n+1)} \sum_{m\in\ZZ}\norm{\vf{v}_{m}^0}^2
     \end{align*}
-  \end{sproof}
+  \end{sproof}aa
   \begin{theorem}[Courant-Friedrichs-Lewy condition]
     Consider the traffic equation $$\vf{u}_t+\vf{A}\vf{u}_x=0$$ with $\vf{A}\in\mathcal{M}_q(\RR)$ and a finite difference scheme of the form $$\vf{v}_m^{n+1}=\alpha \vf{v}_{m-1}^n+\beta \vf{v}_m^n+\gamma \vf{v}_{m+1}^n$$ with $k/h=\lambda=\const$ Then, if the scheme is convergent, we have $\abs{a_i\lambda}\leq 1$ $\forall a_i\in\sigma(\vf{A})$.
   \end{theorem}
   \begin{proof}
-    Suppose $\abs{a_i\lambda}>1$ for some eigenvalue $a_i$ and let $\vf{u}_0(x)=\vf{c}\indi{\{\abs{x}> \frac{1}{\abs{\lambda}}\}}$ with $\vf{c}=(c_1,\ldots,c_q)$ and $c_i\ne 0$. As shown in figure \mcref{NIPDE:courant-friedrichs-lewy_fig} the numerical solution at $\vf{u}(1,0)$ will have the $i$-th component always equal to 0, whereas in general the exact solution won't be.
+    It suffices to study only the case $q=1$. Suppose $\abs{a\lambda}>1$ for some eigenvalue $a$ of $\vf{A}$ and let $\vf{u}_0(x)=\vf{c}\indi{\{\abs{x}> \frac{1}{\abs{\lambda}}\}}$ with $\vf{c}=(c_1,\ldots,c_q)$ and $c_i\ne 0$. As shown in figure \mcref{NIPDE:courant-friedrichs-lewy_fig}, by the form of the scheme, the numerical solution at $(t,x)=(1,0)$, $v_0^n$, will only depend on $v_m^0$ with $\abs{m}\leq n$. But taking $n$ such that $kn=1$, we have that $\abs{m}h\leq nk/\lambda\leq 1/\lambda$. So $v_0^n$ will depend on $x$ for $\abs{x}\leq \frac{1}{\lambda}<\abs{a}$. Thus, in general we will have the numerical solution equal to 0, whereas the exact solution will not be.
     \begin{figure}[H]
       \centering
       \includestandalone[mode=image|tex, width=\linewidth]{Images/courant-friedrichs-lewy}
-      \caption{Finite difference scheme (blue) versus the characteristic lines (in red). The arrows inward a bullet come from the points from which it depends.}
+      \caption{Finite difference scheme (blue) versus the characteristic lines (red). The arrows inward a bullet come from the points from which it depends.}
       \label{NIPDE:courant-friedrichs-lewy_fig}
     \end{figure}
   \end{proof}
@@ -198,11 +204,12 @@
     \end{align*}
   \end{proof}
   \begin{proposition}
-    Consider the pde of \mcref{NIPDE:traffic}. Then:
+    Consider the pde of \mcref{NIPDE:traffic} with $\lambda =k/h=\const$ Then:
     \begin{itemize}
       \item The FTFS scheme is stable if and only if $a\lambda\in [-1,0]$.
       \item The FTBS scheme is stable if and only if $a\lambda\in [0,1]$.
       \item The FTCS scheme is always unstable.
+      \item The BTCS scheme is unconditionally stable.
       \item The Lax-Friedrichs scheme is stable if and only if $\abs{a\lambda}\leq 1$.
     \end{itemize}
   \end{proposition}
@@ -252,8 +259,38 @@
     The Crank-Nicolson scheme is a one-step method that has order of consistency 2, and it is unconditionally stable.
   \end{proposition}
   \begin{sproof}
-    An easy check shows that:
-    $$P_{k,h}\phi-R_{k,h}P\phi=\O{{(k+h)}^2}+\O{\frac{k^3}{h}}$$
+    Let $P=\pdv{}{t}+a\pdv{}{x}$. Let's start with the consistency. Using $\phi=\phi(t,x)=v_m^n$ we can simplify the first term as:
+    $$
+      \frac{\phi(t+k,x)-\phi}{k}=\phi_t+\frac{k}{2}\phi_{tt}+\O{k^2}
+    $$
+    For the second term note that:
+    \begin{align*}
+      \begin{split}
+        \phi(t+k,x+h)  & =\phi(t+k,x)+ h\phi_x(t+k,x)+\\&\hspace{2cm}+\frac{h^2}{2}\phi_{xx}(t+k,x)+\O{h^3}
+      \end{split}  \\
+      \begin{split}
+        -\phi(t+k,x-h) & =-\phi(t+k,x)+ h\phi_x(t+k,x)-\\&\hspace{2cm}-\frac{h^2}{2}\phi_{xx}(t+k,x)+\O{h^3}
+      \end{split} \\
+      \phi(t,x+h)  & =\phi + h\phi_x+\frac{h^2}{2}\phi_{xx}+\O{h^3}                                       \\
+      -\phi(t,x-h) & =-\phi + h\phi_x-\frac{h^2}{2}\phi_{xx}+\O{h^3}
+    \end{align*}
+    Summing these equations and multiplying by $\frac{a}{4h}$ we get:
+    $$
+      \frac{a}{2}[\phi_x+\phi_x(t+k,x)]+\O{h^2}\!=\!a\phi_x+\frac{a}{2}k\phi_{xt}+\O{h^2}+\O{k^2}
+    $$
+    Thus:
+    $$
+      P_{k,h}\phi=\phi_t+a\phi_x+\frac{k}{2}\phi_{tt}+\frac{a}{2}k\phi_{xt}+\O{k^2}+\O{h^2}
+    $$
+    On the other hand:
+    \begin{align*}
+      R_{k,h}P\phi & =\frac{\phi_t(t+k,x)+a\phi_x(t+k,x)+\phi_t+a\phi_x}{2}              \\
+                   & =\phi_t+a\phi_x+\frac{1}{2}k\phi_{tt}+\frac{a}{2}k\phi_{xt}+\O{k^2}
+    \end{align*}
+    Finally:
+    $$
+      P_{k,h}\phi-R_{k,h}P\phi=\O{k^2}+\O{h^2}
+    $$
     For the stability, substitute $v_m^n=g^n\exp{\ii m\theta}$ in the scheme. Simplifying we get:
     $$
       g=\frac{1+\frac{a\lambda\ii}{2}\sin\theta}{1-\frac{a\lambda\ii}{2}\sin\theta}
