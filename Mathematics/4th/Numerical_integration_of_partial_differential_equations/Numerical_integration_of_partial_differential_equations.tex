@@ -33,7 +33,7 @@
       \item \emph{Forward-time central-space} (\emph{FTCS}):
             $$\frac{u_m^{n+1}-u_m^n}{k}+a\frac{u_{m+1}^n-u_{m-1}^n}{2h}+\O{k}+\O{h^2}=f_m^n$$
       \item \emph{Backward-time central-space} (\emph{BTCS}):
-            $$\frac{u_m^{n+1}-u_m^n}{k}+a\frac{u_{m+1}^{n+1}-u_{m-1}^{n+1}}{2h}+\O{k}+\O{h^2}=f_m^n$$
+            $$\frac{u_m^{n+1}-u_m^n}{k}+a\frac{u_{m+1}^{n+1}-u_{m-1}^{n+1}}{2h}+\O{k}+\O{h^2}=f_m^{n+1}$$
       \item \emph{Leapfrog scheme}:
             \begin{multline*}
               \frac{u_m^{n+1}-u_m^{n-1}}{2k}+a\frac{u_{m+1}^n-u_{m-1}^n}{2h}+\\+\O{k^2}+\O{h^2}=f_m^n
@@ -86,7 +86,7 @@
     The Lax-Friedrichs scheme is consistent if and only if $\displaystyle\lim_{h,k\to 0}\frac{h^2}{k}=0$.
   \end{lemma}
   \begin{remark}
-    The consistency is not enough to guarantee convergence. For example, consider the pde $u_t+au_x=0$, with $a>0$. The forward-time forward-space scheme is consistent with the pde, but it is not convergent if we take the initial condition $u_0(x)=\indi{x<0}$ on the domain $[-1,1]$. Indeed, looking at \mcref{NIPDE:upwind} we see that from some instant of time, the solution will be $0$ everywhere, which cannot be possible. In that case we should use the forward-time backward-space scheme, which is convergent. The usage of this latter method in these cases is called the \emph{upwind condition}.
+    The consistency is not enough to guarantee convergence. For example, consider the pde $u_t+au_x=0$, with $a>0$. The forward-time forward-space scheme is consistent with the pde, but it is not convergent if we take the initial condition $u_0(x)=\indi{\{x<0\}}$ on the domain $[-1,1]$. Indeed, looking at \mcref{NIPDE:upwind} we see that from some instant of time, the solution will be $0$ everywhere, which cannot be possible. In that case we should use the forward-time backward-space scheme, which is convergent. The usage of this latter method in these cases is called the \emph{upwind condition}.
   \end{remark}
   \begin{figure}[H]
     \centering
@@ -96,7 +96,7 @@
   \end{figure}
   \subsubsection{Stability}
   \begin{definition}
-    Let $P_{k,h}\vf{v}=0$ be a finite difference scheme with $J$ steps, that is we need the last $J$ values of $v_{\cdot}^n$ to compute the next one, and $\Lambda$ be a stability region. We say that it is \emph{stable} is given $T>0$, there exists $C_T>0$ such that for any grid with $(k,h)\in \Lambda$ and for any initial values $\vf{v}_m^j$, $m\in\ZZ$, $j=0,\ldots,J-1$ we have $$\sum_{m\in\ZZ}\norm{\vf{v}_m^n}^2\leq C_T\sum_{j=0}^{J-1}\sum_{m\in\ZZ}\norm{\vf{v}_m^j}^2$$ for all $n\in\NN$ such that $0\leq nk\leq T$.
+    Let $P_{k,h}\vf{v}=0$ be a finite difference scheme with $J$ steps, that is, a scheme in which we need the last $J$ values of $v^n$ to compute the next one, and $\Lambda$ be a stability region. We say that it is \emph{stable} if given $T>0$, there exists $C_T>0$ such that for any grid with $(k,h)\in \Lambda$ and for any initial values $\vf{v}_m^j$, $m\in\ZZ$, $j=0,\ldots,J-1$ we have $$\sum_{m\in\ZZ}\norm{\vf{v}_m^n}^2\leq C_T\sum_{j=0}^{J-1}\sum_{m\in\ZZ}\norm{\vf{v}_m^j}^2$$ for all $n\in\NN$ such that $0\leq nk\leq T$.
   \end{definition}
   \begin{lemma}
     If a finite difference scheme of the form of $$\vf{v}_m^{n+1}=\alpha \vf{v}_m^n+\beta \vf{v}_{m+1}^n$$ satisfies $\abs{\alpha}+\abs{\beta}\leq 1$, then it is stable.
@@ -196,7 +196,7 @@
   \begin{lemma}
     Let $P_{k,h}{v}={f}$ be a one-step finite difference scheme with constant coefficients. Impose that $v_m^n= {g(\theta,k,h)}^n\exp{\ii m\theta}$ for certain function $g(\cdot,k,h)$. Then, $g$ is the amplification factor of the scheme.
   \end{lemma}
-  \begin{proof}Let $\xi:=\theta/h$. Then:
+  \begin{proof}We have:
     \begin{align*}
       \widehat{v}^{n+1}(\xi) & =\sum_{m\in\ZZ} v_m^{n+1}\exp{-\ii mh\xi}                              \\
                              & =\sum_{m\in\ZZ} {g(\theta,k,h)}^{n+1}\exp{\ii m\theta}\exp{-\ii mh\xi} \\
@@ -298,7 +298,7 @@
     which has always modulus 1.
   \end{sproof}
   \begin{definition}
-    Given scheme $P_{k,h}{v}={f}$, usually we cannot use the recurrence to compute the last term of the (finite) grid, with $n\in\{0,\ldots,N\}$ and $m\in\{0,\ldots,M\}$, $v_M^{n}$ for each $n\in\NN$. Thus, the \emph{numerical boundary condition} is used in these cases. A numerical boundary condition of order $p$ is an extrapolation of order $\O{h^p}$ of the last term of the grid in terms of the orther ones. Each $u(t,x-\ell h)$ can be expressed as: $$u(t,x-\ell h)=\sum_{k=1}^{p-1}\frac{{(-1)}^k \ell^kh^k}{k!}u^{(k)}+\O{h^p}$$
+    Given scheme $P_{k,h}{v}={f}$, usually we cannot use the recurrence to compute the last term of the (finite) grid, with $n\in\{0,\ldots,N\}$ and $m\in\{0,\ldots,M\}$, $v_M^{n}$ for each $n\in\NN$. Thus, the \emph{numerical boundary condition} is used in these cases. A numerical boundary condition of order $p$ is an extrapolation of order $\O{h^p}$ of the last term of the grid in terms of the orther ones. Each $u(t,x-\ell h)$ can be expressed as: $$u(t,x-\ell h)=\sum_{k=0}^{p-1}\frac{{(-1)}^k \ell^kh^k}{k!}u^{(k)}+\O{h^p}$$
     If we want to get a linear approximation of the form
     $$u(t,x)=\sum_{k=1}^{p}\lambda_ku(x-kh)$$
     we need to solve the following linear system:
@@ -592,9 +592,11 @@
   \end{lemma}
   \begin{proof}
     Note that $\grad u\cdot\grad v=\div(v\grad u) - v\laplacian u$. Thus, using the \mnameref{DG:divergenceRn} we have:
-    $$
-      \int_\Omega \grad{u}\cdot\grad{v}-fv\dd{\vf{x}}=\int_\Omega v(-\laplacian u-f)\dd{\vf{x}}+\int_{\Fr{\Omega}}v\grad{u}\cdot\vf{n}\dd{\vf{s}}=0
-    $$
+    \begin{align*}
+      0 & =\int_\Omega \grad{u}\cdot\grad{v}-fv\dd{\vf{x}}                                             \\
+        & =\int_\Omega v(-\laplacian u-f)\dd{\vf{x}}+\int_{\Fr{\Omega}}v\grad{u}\cdot\vf{n}\dd{\vf{s}} \\
+        & =\int_\Omega v(-\laplacian u-f)\dd{\vf{x}}
+    \end{align*}
     because $v=0$ on $\Fr{\Omega}$. Now using the \mnameref{PDE:fundamentallemma}, we conclude that we must have $-\laplacian u=f$ in $\Omega$.
   \end{proof}
   \begin{definition}[Galerkin approximation]
@@ -668,14 +670,14 @@
     $$
       a_{ij}=\sum_{m=1}^N\int_{K_m} \grad{\phi_i}\cdot\grad{\phi_j}\dd{\vf{x}}
     $$
-    Note, however, that many of these integrals will be zero as if $P_i\notin K_m$, then $\varphi_i=0$ on the nodes of $K_m$, and therefore $\varphi_i=0$ and $\grad{\varphi_i}=0$ on $K_m$. Thus, we only need to compute the integrals for $K_m$ such that $P_i, P_j\in K_m$. For these (a priori) non-zero integrals, we use a reference $n$-simplex to compute them. In the following proposition we expose the case $n=2$.
+    Note, however, that many of these integrals will be zero. Indeed, if $\{P_i\}_{i=1,\ldots,M}$ are the nodes of the mesh and $P_i\notin K_m$ for some $i$, then $\varphi_i=0$ on the nodes of $K_m$, and therefore $\varphi_i=0$ and $\grad{\varphi_i}=0$ on $K_m$. Thus, we only need to compute the integrals for $K_m$ such that $P_i, P_j\in K_m$. For these (a priori) non-zero integrals, we use a reference $n$-simplex to compute them.
   \end{remark}
   \begin{proposition}
     Let $S$ be an $n$-simplex with vertices at $Q_0=\vf{0}$, $Q_i=\vf{e}_i$ (thought as a point), $i=1,\ldots,n$, where $\vf{e}_i$ is the $i$-th vector of the canonical basis of $\RR^n$. Consider the FEM method for the \mcref{NIPDE:Dirichlet}. Then:
-    \begin{align*}
-      \int_{K_m}\grad\varphi_{K_m,\ell}\cdot \grad\varphi_{K_m,k}\dd{\vf{x}} & =\frac{d_m}{n!}{\grad\psi_\ell}{\left(\transpose{\vf{D\sigma}_m}\vf{D\sigma}_m\right)}^{-1}\transpose{\grad\psi_k}
-    \end{align*}
-    where $\sigma_m$ is the affine transformation that carries the reference simplex $S$ onto $K_m$, $d_m=\abs{\det\vf{D\sigma}_m}$, $\phi_{K_m,\ell}$ denote that basis function such that evaluates to 1 at the $\ell$-th vertex of $K_m$ (with an ordering fixed), $\ell =0,\ldots,n$, and:
+    \begin{equation*}
+      \int_{K_m}\!\!\grad\varphi_{K_m,\ell}\cdot \grad\varphi_{K_m,k}\dd{\vf{x}} =\frac{d_m}{n!}{\grad\psi_\ell}{\left(\transpose{\vf{D\sigma}_m}\vf{D\sigma}_m\right)}^{\!-1}\transpose{\grad\psi_k}
+    \end{equation*}
+    where $\vf\sigma_m$ is the affine transformation that carries the reference simplex $S$ onto $K_m$, $d_m=\abs{\det\vf{D\sigma}_m}$, $\phi_{K_m,\ell}$ denote that basis function such that evaluates to 1 at the $\ell$-th vertex of $K_m$ (with an ordering fixed), $\ell =0,\ldots,n$, and:
     $$
       \psi_k(\vf{x})=\begin{cases}
         1-\sum_{i=1}^n x_i & k=0          \\
@@ -684,13 +686,13 @@
     $$
   \end{proposition}
   \begin{proof}
-    Note $\psi_k(Q_k)=\delta_{ij}$ and so by the unicity of the interpolation we have $\varphi_{K_m,\ell}\circ \sigma_m=\psi_\ell$, $\ell=0,\ldots,n$. Thus, by the chain rule, $\grad\psi_\ell=\transpose{\vf{D\sigma}_m}\grad\varphi_{K_m,\ell}$, and so:
+    Note $\psi_k(Q_k)=\delta_{ij}$ and so by the unicity of the interpolation we have $\varphi_{K_m,\ell}\circ \sigma_m=\psi_\ell$, $\ell=0,\ldots,n$. Thus, by the chain rule, $\grad\psi_\ell=\grad\varphi_{K_m,\ell}{\vf{D\sigma}_m}$, and so:
     \begin{align*}
-      \int_{K_m} & \grad\varphi_{K_m,\ell}\cdot \grad\varphi_{K_m,k}\dd{\vf{y}}  =\int_S\grad\varphi_{K_m,\ell}\cdot \transpose{\grad\varphi_{K_m,k}}d_m\dd{\vf{x}} \\
-                 & =\int_S\grad\psi_\ell{\left(\vf{D\sigma}_m\right)}^{-1}\transpose{{\left(\vf{D\sigma}_m\right)}^{-1}}\transpose{\grad\psi_k}d\dd{\vf{x}}         \\
+      \int_{K_m} & \!\grad\varphi_{K_m,\ell}\cdot \grad\varphi_{K_m,k}\dd{\vf{y}}  =\int_S\grad\varphi_{K_m,\ell}\cdot \transpose{\left(\grad\varphi_{K_m,k}\right)}d_m\dd{\vf{x}} \\
+                 & =\int_S\grad\psi_\ell{\left(\vf{D\sigma}_m\right)}^{-1}\transpose{\left[{\left(\vf{D\sigma}_m\right)}^{-1}\right]}\transpose{\grad\psi_k}d_m\dd{\vf{x}}         \\
                  & =\frac{d_m}{n!}\grad\psi_\ell{\left(\transpose{\vf{D\sigma}_m}\vf{D\sigma}_m\right)}^{-1}\transpose{\grad\psi_k}
     \end{align*}
-    where we used that the volume of the $n$-simplex $S$ is $1/n!$ and all inside the integral is constant.
+    where we used that the volume of the $n$-simplex $S$ is $1/n!$ and all the terms inside the integral is constant.
   \end{proof}
   \begin{remark}
     With the same idea, the integrals $b_i$ can be computed as:
