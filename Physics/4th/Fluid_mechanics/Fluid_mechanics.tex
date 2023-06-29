@@ -1,0 +1,90 @@
+\documentclass[../../../main_physics.tex]{subfiles}
+
+\begin{document}
+\renewcommand{\col}{\phy}
+\begin{multicols}{2}[\section{Fluid mechanics}]
+  \subsection{Equations of motion}
+  \subsubsection{Euler's equations}
+  In this section we will describe the motion of a fluid with a set of equation that result from the conservation of mass, momentum and energy. From what follows, let $D\subseteq \RR^3$ be a region filled with a fluid. For each time $t$ and $\vf{x}\in D$ we assume that the fluid has a well-defined mass density $\rho(t,\vf{x})$\footnote{The assumption that $\rho$ exists is a continuum assumption. Clearly, it does not hold if the molecular structure of matter is taken into account. For most macroscopic phenomena occurring in nature, it is believed that this assumption is extremely accurate.}. Finally, we denoted by $\vf{u}(t,\vf{x})$ the velocity of the fluid at time $t$ and position $\vf{x}$. For the moment, we will also assume that $\rho$ and $\vf{u}$ are smooth functions.
+  \begin{proposition}[Conservation of mass]
+    Let $W\subseteq D$ be a fixed subregion of $D$. Then:
+    $$
+      \dv{}{t}\int_W\rho\dd{V}=-\int_{\Fr{W}}\rho\vf{u}\cdot\dd{\vf{S}}
+    $$
+    Or equivalently:
+    \begin{equation}\label{FLM:continuityequation}
+      \dv{\rho}{t}+\div(\rho\vf{u})=0
+    \end{equation}
+    This latter equation is called the \emph{continuity equation}.
+  \end{proposition}
+  \begin{proof}
+    The variation of mass in $W$ is given by:
+    $$
+      \dv{m_W}{t}=\dv{}{t} \int_W\rho\dd{V}
+    $$
+    But on the other hand, the flow of mass through the boundary of $W$ is given by:
+    $$
+      \dv{m_W}{t}=-\int_{\Fr{W}}\rho\vf{u}\cdot\dd{\vf{S}}
+    $$
+    where the minus sign accounts for the fact the inward flow should be positive (increases the mass) and the outward flow should be negative (decreases the mass). From here the result follows. The differential form is a consequence of \mnameref{PDE:fundamentallemma}.
+  \end{proof}
+  \begin{lemma}
+    Let $\vf{x}(t)$ be the path followed by a fluid particle. Then its acceleration is given by:
+    $$
+      \dv{\vf{u}}{t}=\pdv{\vf{u}}{t}+(\vf{u}\cdot\grad)\vf{u}=:\matdv{\vf{u}}{t}
+    $$
+    where $\vf{u}\cdot \grad=u\pdv{}{x}+v\pdv{}{y}+w\pdv{}{z}$ if $\vf{u}=(u,v,w)$. Here the operator $$\matdv{}{t}:= \pdv{}{t}+(\vf{u}\cdot\grad)$$ is called the \textit{material derivative}.
+  \end{lemma}
+  \begin{sproof}
+    Compute the time derivative of $\vf{u}(t,\vf{x}(t))$ using the Chain rule.
+  \end{sproof}
+  For any continuum, forces acting on a piece of material are of two types. First, there are forces of stress, whereby the piece of material is acted on by forces across its surface by the rest of the continuum. Second, there are external, or body, forces such as gravity or a magnetic field, which exert a force per unit volume on the continuum.
+  \begin{definition}[Ideal fluid]
+    An \emph{ideal fluid} has the following property: for any motion of the fluid there is a function $p(t,\vf{x})$ called the \emph{pressure} such that if $S$ is a surface in the fluid with a chosen unit normal $\vf{n}$, the force of stress exerted across the surface $S$ per unit area at $\vf{x}\in S$ at time $t$ is $p(t,\vf{x})\vf{n}$. Thus, the total force of stress exerted inside a region $W\subseteq D$ is given by:
+    $$
+      \vf{A}_{\partial W}:=\text{Force on $W$}=-\int_{\Fr{W}}p\vf{n}\dd{S}
+    $$
+    where the minus sign is because $\vf{n}$ points outwards.
+  \end{definition}
+  \begin{proposition}[Conservation of momentum]
+    The balace of momentum for an ideal fluid is given by:
+    $$
+      \rho\matdv{\vf{u}}{t}=-\grad p+\rho\vf{f}
+    $$
+    where $\vf{f}$ is the external force per unit of mass.
+  \end{proposition}
+  \begin{proof}
+    Let $\vf{e}$ be any fixed vector in space. By \mnameref{FSV:divergencethm} we have:
+    $$
+      \vf{e}\cdot\vf{A}_{\partial W}=-\!\!\!\int_{\Fr{W}}p\vf{n}\cdot\vf{e}\dd{S}=-\!\int_W\div(p\vf{e})\dd{V}=-\!\int_W\grad p\cdot\vf{e}\dd{V}
+    $$
+    Hence:
+    $$
+      \vf{A}_{\partial W}=-\int_W\grad p\dd{V}
+    $$
+    On the other hand, the total external body acting on $W$ is given by:
+    $$
+      \vf{F}=\int_W\rho\vf{f}\dd{V}
+    $$
+    Thus, using the \mnameref{PDE:fundamentallemma} the result follows, as $\rho\matdv{\vf{u}}{t}$ accounts for the variation of momentum per unit of volume.
+  \end{proof}
+  \begin{corollary}
+    The integral form of the conservation of momentum is given by:
+    $$
+      \dv{}{t}\int_W\rho\vf{u}\dd{V}=-\int_{\Fr{W}}(p\vf{n}+\rho\vf{u}(\vf{u}\cdot\vf{n}))\dd{S}+\int_W\rho\vf{f}\dd{V}
+    $$
+  \end{corollary}
+  \begin{proof}
+    From \mcref{FLM:continuityequation} and the material derivative we have:
+    $$
+      \pdv{}{t}(\rho\vf{u})=-\div(\rho\vf{u})\vf{u}-\rho(\vf{u}\cdot \grad )\vf{u}-\grad p+\rho\vf{f}
+    $$
+    Let $\vf{e}\in\RR^3$ be a fixed vector. Then:
+    \begin{align*}
+      \vf{e}\!\cdot\! \pdv{}{t}(\rho\vf{u}) & =-\vf{e}\!\cdot\!\div(\rho\vf{u})\vf{u}-\vf{e}\!\cdot\!\rho(\vf{u}\!\cdot\! \grad) \vf{u}-\vf{e}\!\cdot\!\grad p+\vf{e}\!\cdot\!\rho\vf{f} \\
+                                            & =-\div(p\vf{e}+\rho \vf{u}(\vf{u}\cdot\vf{e}))+\rho\vf{e}\cdot\vf{f}
+    \end{align*}
+    Integrating over $W$ and using the \mnameref{FSV:divergencethm;PDE:fundamentallema} we obtain the result.
+  \end{proof}
+\end{multicols}
+\end{document}
