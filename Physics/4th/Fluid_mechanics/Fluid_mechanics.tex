@@ -5,8 +5,8 @@
 \begin{multicols}{2}[\section{Fluid mechanics}]
   \subsection{Equations of motion}
   \subsubsection{Euler's equations}
-  In this section we will describe the motion of a fluid with a set of equation that result from the conservation of mass, momentum and energy. From what follows, let $D\subseteq \RR^3$ be a region filled with a fluid. For each time $t$ and $\vf{x}\in D$ we assume that the fluid has a well-defined mass density $\rho(t,\vf{x})$\footnote{The assumption that $\rho$ exists is a continuum assumption. Clearly, it does not hold if the molecular structure of matter is taken into account. For most macroscopic phenomena occurring in nature, it is believed that this assumption is extremely accurate.}. Finally, we denoted by $\vf{u}(t,\vf{x})$ the velocity of the fluid at time $t$ and position $\vf{x}$. For the moment, we will also assume that $\rho$ and $\vf{u}$ are smooth functions.
-  \begin{proposition}[Conservation of mass]
+  In this section we will describe the motion of a fluid with a set of equation that result from the conservation of mass, momentum and energy. From what follows, let $D\subseteq \RR^3$ be a region filled with a fluid. For each time $t$ and $\vf{x}\in D$ we assume that the fluid has a well-defined mass density $\rho(\vf{x},t)$\footnote{The assumption that $\rho$ exists is a continuum assumption. Clearly, it does not hold if the molecular structure of matter is taken into account. For most macroscopic phenomena occurring in nature, it is believed that this assumption is extremely accurate.}. Finally, we denoted by $\vf{u}(\vf{x},t)$ the velocity of the fluid at time $t$ and position $\vf{x}$. For the moment, we will also assume that $\rho$ and $\vf{u}$ are smooth functions.
+  \begin{proposition}[Conservation of mass]\label{FLM:conservationofmass}
     Let $W\subseteq D$ be a fixed subregion of $D$. Then:
     $$
       \dv{}{t}\int_W\rho\dd{V}=-\int_{\Fr{W}}\rho\vf{u}\cdot\dd{\vf{S}}
@@ -40,7 +40,7 @@
   \end{sproof}
   For any continuum, forces acting on a piece of material are of two types. First, there are forces of stress, whereby the piece of material is acted on by forces across its surface by the rest of the continuum. Second, there are external, or body, forces such as gravity or a magnetic field, which exert a force per unit volume on the continuum.
   \begin{definition}[Ideal fluid]
-    An \emph{ideal fluid} has the following property: for any motion of the fluid there is a function $p(t,\vf{x})$ called the \emph{pressure} such that if $S$ is a surface in the fluid with a chosen unit normal $\vf{n}$, the force of stress exerted across the surface $S$ per unit area at $\vf{x}\in S$ at time $t$ is $p(t,\vf{x})\vf{n}$. Thus, the total force of stress exerted inside a region $W\subseteq D$ is given by:
+    An \emph{ideal fluid} has the following property: for any motion of the fluid there is a function $p(\vf{x},t)$ called the \emph{pressure} such that if $S$ is a surface in the fluid with a chosen unit normal $\vf{n}$, the force of stress exerted across the surface $S$ per unit area at $\vf{x}\in S$ at time $t$ is $p(\vf{x},t)\vf{n}$. Thus, the total force of stress exerted inside a region $W\subseteq D$ is given by:
     $$
       \vf{A}_{\partial W}:=\text{Force on $W$}=-\int_{\Fr{W}}p\vf{n}\dd{S}
     $$
@@ -86,5 +86,243 @@
     \end{align*}
     Integrating over $W$ and using the \mnameref{FSV:divergencethm;PDE:fundamentallema} we obtain the result.
   \end{proof}
+  \begin{definition}
+    Let $\vf{x}\in D$. We denote by $\vf\varphi(\vf{x},t)$ the position of the fluid particle $\vf{x}$ at time $t$ and fixed $t\in \RR$, $\vf\varphi_t:\vf{x}\to\vf\varphi(\vf{x},t)$. If $W\subseteq D$, we denote $W_t:=\vf\varphi_t(W)$ the volume $W$ moving with the fluid.
+  \end{definition}
+  \begin{lemma}\label{FLM:lemmaJacobian}
+    Let $J(\vf{x},t)$ be the Jacobian determinant of $\vf\varphi_t$. Then:
+    $$
+      \pdv{}{t} J(\vf{x},t)=J(\vf{x},t)(\div\vf{u})(\vf\varphi(\vf{x},t),t)
+    $$
+  \end{lemma}
+  \begin{proof}
+    We have that $J=\det\vf{D\varphi} = \det(\pdv{\phi_1}{\vf{x}},\pdv{\phi_2}{\vf{x}},\pdv{\phi_3}{\vf{x}})$, where $\vf\varphi = (\phi_1,\phi_2,\phi_3)$ and $\pdv{\phi_i}{\vf{x}} := \transpose{\left(
+        \pdv{\phi_i}{x}, \pdv{\phi_i}{y}, \pdv{\phi_i}{z}
+        \right)}$. Hence, from the multilineary property of the determinant we have:
+    \begin{multline}\label{FLM:Jacobian}
+      \pdv{}{t}J=\det(\pdv{}{t}\pdv{\phi_1}{\vf{x}},\pdv{\phi_2}{\vf{x}},\pdv{\phi_3}{\vf{x}})+\det(\pdv{\phi_1}{\vf{x}},\pdv{}{t}\pdv{\phi_2}{\vf{x}},\pdv{\phi_3}{\vf{x}})\\+\det(\pdv{\phi_1}{\vf{x}},\pdv{\phi_2}{\vf{x}},\pdv{}{t}\pdv{\phi_3}{\vf{x}})
+    \end{multline}
+    Now if $\vf{u}=(u_1,u_2,u_3)$, then:
+    \begin{align*}
+      \pdv{}{t}\pdv{\phi_i}{\vf{x}} & =\pdv{}{\vf{x}}u_i(\vf\varphi(\vf{x},t),t)                                                                         \\
+                                    & =\pdv{u_i}{\phi_1}\pdv{\phi_1}{\vf{x}}+\pdv{u_i}{\phi_2}\pdv{\phi_2}{\vf{x}}+\pdv{u_i}{\phi_3}\pdv{\phi_3}{\vf{x}} \\
+    \end{align*}
+    because $\pdv{\phi_i}{t} = u_i(\vf\varphi(\vf{x},t),t)$.
+    Introducing this into \mcref{FLM:Jacobian} we obtain:
+    $$
+      \pdv{}{t}J=J\left(\pdv{u_1}{\phi_1}+\pdv{u_2}{\phi_2}+\pdv{u_3}{\phi_3}\right)=J(\div\vf{u})(\vf\varphi(\vf{x},t),t)
+    $$
+  \end{proof}
+  \begin{corollary}
+    We have:
+    $$
+      \dv{}{t}\int_{W_t}\rho\vf{u}\dd{V}=\int_{W_t}\rho\matdv{\vf{u}}{t}\dd{V}
+    $$
+  \end{corollary}
+  \begin{proof}
+    Using the \mnameref{FSV:changeofvariable,FLM:lemmaJacobian} we have that:
+    \begin{align*}
+      \begin{split}
+        \dv{}{t}\int_{W_t}\rho\vf{u}\dd{V}&=\int_W\left[
+          \matdv{}{t}(\rho\vf{u})(\vf\varphi(\vf{x},t),t)+(\rho\vf{u})\cdot\right.\\
+          &\hspace{2cm}\cdot(\div\vf{u})(\vf\varphi(\vf{x},t),t)
+          \bigg]J(\vf{x},t)\dd{V}
+      \end{split}     \\
+       & = \int_{W_t}\matdv{}{t}(\rho\vf{u})+(\rho\div\vf{u}) \vf{u}\dd{V} \\
+       & = \int_{W_t}\rho\matdv{\vf{u}}{t}\dd{V}
+    \end{align*}
+    where the last equality follows from the \mcref{FLM:conservationofmass}:
+    $$
+      \matdv{\rho}{t}+\rho\div\vf{u}=\pdv{\rho}{t}+\div(\rho\vf{u})=0
+    $$
+  \end{proof}
+  \begin{corollary}[Transport theorem]\label{FLM:trasport}
+    For any smooth enough function $f(\vf{x},t)$ we have:
+    \begin{align*}
+      \dv{}{t}\int_{W_t}\rho f\dd{V} & =\int_{W_t}\rho\matdv{f}{t}\dd{V}                     \\
+      \dv{}{t}\int_{W_t} f\dd{V}     & =\int_{W_t}\left[\dv{f}{t}+\div(f\vf{u})\right]\dd{V} \\
+    \end{align*}
+  \end{corollary}
+  \begin{definition}
+    A flow is called \emph{incompressible} if for any fluid subregion $W\subseteq D$ we have:
+    $$
+      \vol(W_t)=\vol(W)=\const
+    $$
+    Otherwise, the flow is called \emph{compressible}.
+  \end{definition}
+  \begin{proposition}\label{FLM:incompressible_eq}
+    Consider the flow $\vf\varphi$ and its Jacobian $J$. Then, the following are equivalent:
+    \begin{enumerate}
+      \item The flow is incompressible.
+      \item $\div\vf{u}=0$.
+      \item $J=1$.
+    \end{enumerate}
+  \end{proposition}
+  \begin{proof}
+    Note that:
+    $$
+      \dv{}{t}\int_{W_t}\dd{V}=\dv{}{t}\int_WJ\dd{V}=\int_{W_t}\div\vf{u}\dd{V}
+    $$
+    Hence, if $\div \vf{u}=0$ then the flow is incompressible. Now, if the flow is incompressible we have that:
+    $$
+      0=\dv{}{t}\int_{W_t}\dd{V}=\int_W\dv{J}{t}\dd{V}
+    $$
+    which is implies that $J=\const$ by \mnameref{PDE:fundamentallema}. Since $J(\vf{x},0)=1$ we have that $J=1$. Finally, from \mcref{FLM:lemmaJacobian} we have that if $J=1$ then $\div\vf{u}=0$.
+  \end{proof}
+  \begin{definition}
+    A fluid is called \emph{homogeneous} if $\rho=\rho(t)$, that is, if $\rho$ is constant in space.
+  \end{definition}
+  \begin{proposition}
+    A fluid is incompressible if and only if $\matdv{\rho}{t}=0$. In particular, if the fluid is homogeneous, then it is incompressible if and only if $\rho=\const$ (i.e.\ it is also constant in time).
+  \end{proposition}
+  \begin{proof}
+    We can write \mcref{FLM:continuityequation} as:
+    $$
+      \matdv{\rho}{t}+\rho\div\vf{u}=0
+    $$
+    And the result follows from \mcref{FLM:incompressible_eq}.
+  \end{proof}
+  \begin{proposition}
+    Let $J$ be the Jacobian of the flow $\vf\varphi$. Then:
+    $$
+      \rho(\vf\varphi(\vf{x},t),t)J(\vf{x},t)=\rho(\vf{x},0)
+    $$
+  \end{proposition}
+  \begin{sproof}
+    From \mnameref{FLM:trasport} with $f=1$ we have:
+    $$
+      \int_{W_0}\rho(\vf{x},0)\dd{V}=\int_{W_t}\rho\dd{V}=\dv{}{t}\int_{W_0}\rho J\dd{V}
+    $$
+    Since, $W_0$ is arbitrary, the result follows from \mnameref{PDE:fundamentallema}.
+  \end{sproof}
+  \begin{remark}
+    As a corollary, a fluid that is homogeneous at $t = 0$ but is compressible, will generally not remain homogeneous. However, the fluid will remain homogeneous if it is incompressible.
+  \end{remark}
+  \begin{definition}
+    The \emph{kinetic energy} of a moving portion $W_t$ of a fluid is defined as:
+    $$
+      E_\mathrm{kinetic}= \frac{1}{2}\int_{W_t}\rho\norm{\vf{u}}^2\dd{V}
+    $$
+    where the norm is the Euclidean norm.
+  \end{definition}
+  \begin{lemma}\label{FLM:lemmaEkinetic}
+    The rate of change of kinetic energy is given by:
+    $$
+      \dv{E_\mathrm{kinetic}}{t}=\int_{W_t}\rho\vf{u}\cdot\matdv{\vf{u}}{t}\dd{V}
+    $$
+  \end{lemma}
+  \begin{proof}
+    From \mnameref{FLM:trasport} we have that:
+    $$
+      \dv{E_\mathrm{kinetic}}{t}= \frac{1}{2}\int_{W_t}\rho\matdv{\norm{\vf{u}}^2}{t}\dd{V}
+    $$
+    Now use the linearity of the material derivative and the dot product.
+  \end{proof}
+  \begin{theorem}
+    Consider an incompressible fluid such that the rate of change of kinetic energy in a portion of fluid equals the rate at which the pressure and body forces do work:
+    $$
+      \dv{E_\mathrm{kinetic}}{t}=-\int_{\partial W_t}p\vf{u}\cdot\dd{\vf{S}}+\int_{W_t}\rho\vf{u}\cdot\vf{f}\dd{V}
+    $$
+    Then, the Euler equations that completely describe the motion of the fluid are:
+    $$
+      \begin{cases}
+        \displaystyle\rho \matdv{\vf{u}}{t}= -\grad p + \rho\vf{f} \\
+        \displaystyle\matdv{\rho}{t}=0                             \\
+        \displaystyle\div\vf{u}=0
+      \end{cases}
+    $$
+    with the boundary conditions $\vf{u}\cdot\vf{n} = 0$ on $\partial D$.
+  \end{theorem}
+  \begin{proof}
+    From \mnameref{FLM:lemmaEkinetic} and using the \mnameref{FSV:divergencethm} we have:
+    \begin{align*}
+      \int_{W_t}\rho\vf{u}\cdot\matdv{\vf{u}}{t}\dd{V} & =-\int_{W_t}\left[\div(p\vf{u})-\rho \vf{u}\cdot\vf{f}\right]\dd{V}   \\
+                                                       & = -\int_{W_t}\left[\vf{u}\cdot\grad p - \rho \vf{u}\cdot\vf{f}\right]
+    \end{align*}
+    because $\div\vf{u}=0$. This equation is a consequence of balance of momentum.
+  \end{proof}
+  \begin{remark}
+    This argument, in addition, shows that if we assume $E = E_\mathrm{kinetic}$, then the fluid must be incompressible.
+  \end{remark}
+  \begin{definition}
+    A compressible flow is called \emph{isentropic} if there exists a function $w$, called the \emph{enthalpy}, such that:
+    $$
+      \grad w=\frac{1}{\rho}\grad p
+    $$
+  \end{definition}
+  \begin{remark}
+    From this part we will need some basic concepts of thermodynamics, that we review here. Recall that:
+    \begin{gather*}
+      p=\text{pressure} \ \ \rho=\text{density} \ \ T=\text{temperature} \ \ s=\text{entropy} \\
+      w=\text{enthalpy} \ \ \epsilon=\text{internal energy per unit mass}
+    \end{gather*}
+    These quantities are related by the First Law of Thermodynamics:
+    \begin{equation}\label{FLM:firstlawthermo}
+      \dd{w}=T\dd{s}+\frac{1}{\rho}\dd{p}
+    \end{equation}
+    which using that $\epsilon=w-p/\rho$ can be written as:
+    $$
+      \dd{\epsilon}=T\dd{s}+\frac{p}{\rho^2}\dd{\rho}
+    $$
+  \end{remark}
+  \begin{remark}
+    Note that if the pressure is a function of $\rho$ only, then the flow is isentropic by defining $w=\int \frac{p'(\rho)}{\rho} \dd{\rho}$ which is the integrated version of \mcref{FLM:firstlawthermo}.
+  \end{remark}
+  \begin{theorem}
+    For isentropic flows, the integral form of the energy balace reads as follows: The rate of change of energy in a portion of fluid equals the rate at which work is done on it.
+    \begin{align*}
+      \dv{E_\mathrm{total}}{t} & =\dv{}{t}\int_{W_t}\left[\frac{1}{2} \rho\norm{\vf{u}}^2+\rho \epsilon\right]\dd{V} \\
+                               & =\int_{W_t}\rho\vf{u}\cdot \vf{f} \dd{V}-\int_{\partial W_t}p\vf{u}\cdot\dd{\vf{S}}
+    \end{align*}
+    And the Euler equations are:
+    $$
+      \begin{cases}
+        \displaystyle\matdv{\vf{u}}{t}= -\grad w + \vf{f} \\
+        \displaystyle\dv{\rho}{t}+\div(\rho\vf{u})=0
+      \end{cases}
+    $$
+    and the boundary conditions are $\vf{u}\cdot\vf{n}=0$ on $\partial D$.
+  \end{theorem}
+  \begin{remark}
+    Gases can often be treated as isentropic fluid with $p=A\rho^\gamma$ where $A$ and $\gamma\geq 1$ are constants. Here:
+    $$
+      w = \frac{\gamma A \rho^{\gamma-1}}{\gamma-1}\quad \epsilon = \frac{A\rho^{\gamma-1}}{\gamma-1}
+    $$
+  \end{remark}
+  \begin{definition}
+    Given a fluid with velocity field $\vf{u}(\vf{x}, t)$, a \emph{streamline} is a curve $\vf{x}(s)$ such that $\vf{u}(\vf{x}(s), t)=\dv{\vf{x}}{s}$ with $t$ fixed.
+  \end{definition}
+  \begin{definition}
+    We define the trajectory as the curve $\vf{x}(t)$ such that $\vf{u}(\vf{x}(t), t)=\dv{\vf{x}}{t}$.
+  \end{definition}
+  \begin{remark}
+    If $\vf{u}$ is independent of $t$, then the streamlines and trajectories coincide. In this case, the fluid is said to be \emph{stationary} or \emph{steady}.
+  \end{remark}
+  \begin{theorem}[Bernoulli's theorem]
+    In a stationary isentropic flow with a present conservative force $\vf{f}=-\grad\psi$, the quantity
+    $$
+      \frac{1}{2}\norm{\vf{u}}^2+w+\psi
+    $$
+    is constant along streamlines. The same holds for homogeneous incompressible flow with $w$ replaced by $p/\rho$.
+  \end{theorem}
+  \begin{proof}
+    An easy check shows that:
+    $$
+      \frac{1}{2}\grad(\norm{\vf{u}}^2)=(\vf{u}\cdot\grad)\vf{u}+\vf{u}\times(\rotp\vf{u})
+    $$
+    Because the flow is steady, the equations of motion give $(\vf{u}\cdot\grad)\vf{u}=-\grad w+\vf{f}$. Thus:
+    $$
+      \grad\left(\frac{1}{2}\norm{\vf{u}}^2+w+\psi\right)=\vf{u}\times (\rotp\vf{u})
+    $$
+    Let $\vf{x}(s)$ be a streamline. Then:
+    \begin{equation*}
+      \dv{}{s}\left[\left(\frac{1}{2}\norm{\vf{u}}^2+w+\psi\right)(\vf{x}(s),t)\right]\! =\! [\vf{u}\times (\rotp\vf{u})]\cdot\vf{x}'(s)=0
+    \end{equation*}
+    because $\vf{x}'(s)=\vf{u}$ is orthogonal to $\vf{u}\times (\rotp\vf{u})$.
+  \end{proof}
+  \subsubsection{Rotation and vorticity}
+  \begin{definition}
+    Let $\vf{u}=(u,v,w)$ be the velocity field of a fluid. The \emph{vorticity} is the vector field $\vf{\omega}:=\rotp\vf{u}$.
+  \end{definition}
 \end{multicols}
 \end{document}
