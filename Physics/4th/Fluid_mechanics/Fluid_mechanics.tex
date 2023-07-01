@@ -278,7 +278,7 @@
     $$
       \begin{cases}
         \displaystyle\matdv{\vf{u}}{t}= -\grad w + \vf{f} \\
-        \displaystyle\dv{\rho}{t}+\div(\rho\vf{u})=0
+        \displaystyle\pdv{\rho}{t}+\div(\rho\vf{u})=0
       \end{cases}
     $$
     and the boundary conditions are $\vf{u}\cdot\vf{n}=0$ on $\partial D$.
@@ -322,7 +322,158 @@
   \end{proof}
   \subsubsection{Rotation and vorticity}
   \begin{definition}
-    Let $\vf{u}=(u,v,w)$ be the velocity field of a fluid. The \emph{vorticity} is the vector field $\vf{\omega}:=\rotp\vf{u}$.
+    Let $\vf{u}=(u,v,w)$ be the velocity field of a fluid. The \emph{vorticity} is the vector field $\vf{\xi}:=\rotp\vf{u}$.
   \end{definition}
+  \begin{proposition}
+    Let $\vf{x}\in \RR^3$ and let $\vf{u}(\vf{x})$ be a smooth vector field. Then, in a small neighbourhood of $\vf{x}$, $\vf{u}$ is the sum of a translation, a deformation and a rotation (with rotation vector $\omega/2$):
+    \begin{equation}\label{FLM:decomposition}
+      \vf{u}(\vf{y})=\vf{u}(\vf{x})+\vf{D}(\vf{x})\cdot \vf{h}+\frac{1}{2} \vf{\xi}(\vf{x})\times \vf{h} +\O{\norm{\vf{h}}^2}
+    \end{equation}
+    where $\vf{y}=\vf{x}+\vf{h}$. The matrix $\vf{D}$ is symmetric and is called the \emph{deformation tensor}.
+  \end{proposition}
+  \begin{proof}
+    From \mnameref{FSV:taylor} we have:
+    $$
+      \vf{u}(\vf{y})=\vf{u}(\vf{x})+\vf{Du}(\vf{x})\cdot \vf{h}+\O{\norm{\vf{h}}^2}
+    $$
+    Now let:
+    $$
+      \vf{D}=\frac{1}{2}\left[\vf{Du}(\vf{x})+\transpose{\vf{Du}(\vf{x})}\right]\quad \vf{S}=\frac{1}{2}\left[\vf{Du}(\vf{x})-\transpose{\vf{Du}(\vf{x})}\right]
+    $$
+    Thus, $\vf{Du} = \vf{D}+\vf{S}$ and $\vf{S}\cdot\vf{h} = \frac{1}{2} \vf{\xi}(\vf{x})\times \vf{h}$.
+  \end{proof}
+  \begin{remark}
+    The physical intuition behind $\vf{D}$ is the following. Because $\vf{D}$ is symmetric, for each $\vf{x}$ fixed, there is an orthonormal basis $\mathcal{B}$ such that:
+    $$
+      \vf{D}_{\mathcal{B}}=\begin{pmatrix}
+        d_1 & 0   & 0   \\
+        0   & d_2 & 0   \\
+        0   & 0   & d_3
+      \end{pmatrix}
+    $$
+    Now if we ignore all the terms in \eqref{FLM:decomposition} except $\vf{D}(x)\cdot \vf{h}$, we see that:
+    $$
+      \dv{\vf{h}}{t}=\vf{D}(\vf{x})\cdot \vf{h}
+    $$
+    which is equivalent to three linear differential equations of the form:
+    $$
+      \dv{\tilde{h}_i}{t}=d_i \tilde{h}_i
+    $$
+    Hence, the vector field $\vf{D}(\vf{x})\cdot \vf{h}$ is thus merely expanding or contracting along each of the axis of $\mathcal{B}$. Finally, the rotation term $\frac{1}{2} \vf{\xi}(\vf{x})\times \vf{h}$ induces a flow
+    $$
+      \dv{\vf{h}}{t}=\frac{1}{2} \vf{\xi}(\vf{x})\times \vf{h}
+    $$
+    whose solution is a well-known rotation $\vf{h}(t)=\vf{R}(t,\vf{\xi}(\vf{x}))\vf{h}(0)$, where $\vf{R}(t,\vf{\xi}(\vf{x}))$ is the matrix that represents a rotation through an angle $t$ about the axis $\vf{\xi}(\vf{x})$.
+  \end{remark}
+  \begin{lemma}\label{FLM:trasportCurves}
+    Let $\vf{u}$ be the velocity field of a flow and $C$ be a closed curve with $C_t:=\vf\varphi_t(C)$ the curve transported by the flow. Then:
+    $$
+      \dv{}{t}\int_{C_t}\vf{u} \cdot \dd\vf{s}=\int_{C_t}\matdv{\vf{u}}{t}\cdot \dd\vf{s}
+    $$
+  \end{lemma}
+  \begin{proof}
+    Assume $\vf{x}(s)$, $0\leq s\leq 1$ is a parametrization of $C$. Then, $\vf\varphi(\vf{x}(s),t)$, $0\leq s\leq 1$ is a parametrization of $C_t$. Thus, using the \mnameref{FLM:trasport} we have:
+    \begin{align*}
+      \dv{}{t}\int_{C_t}\vf{u} \cdot \dd\vf{s} & =\dv{}{t}\int_0^1\vf{u}(\vf\varphi(\vf{x}(s),t))\cdot \pdv{}{s}\vf\varphi(\vf{x}(s),t)\dd s \\
+      \begin{split}
+        & =\int_0^1\matdv{\vf{u}}{t}(\vf\varphi(\vf{x}(s),t))\cdot \pdv{}{s}\vf\varphi(\vf{x}(s),t)\dd s +\\
+        &\hspace{1cm}+ \int_0^1\vf{u}(\vf\varphi(\vf{x}(s),t))\cdot \pdv{}{t}\dv{}{s}\vf\varphi(\vf{x}(s),t)\dd s
+      \end{split}
+    \end{align*}
+    The first term is the desired result. For the second term $I_2$, note that $\dv{}{t}\vf\varphi=\vf{u}$ and therefore:
+    $$
+      I_2=\frac{1}{2}\int_0^1\pdv{}{s}(\vf{u}\cdot\vf{u})(\vf\varphi(\vf{x}(s),t),t)\dd s=0
+    $$
+    because $C_t$ is closed.
+  \end{proof}
+  \begin{theorem}[Kelvin's circulation theorem]\label{FLM:kelvin}
+    Consider a isentropic fluid without external forces and $C$ be a closed curve with $C_t:=\vf\varphi_t(C)$ the curve transported by the flow. Then:
+    $$
+      \dv{}{t}\int_{C_t}\vf{u} \cdot \dd\vf{s}=0
+    $$
+  \end{theorem}
+  \begin{proof}
+    Using the Euler equations we know that $\matdv{\vf{u}}{t}=-\grad w$. Thus, from \mcref{FLM:trasportCurves} we have:
+    $$
+      \dv{}{t}\int_{C_t}\vf{u} \cdot \dd\vf{s}=-\int_{C_t}\grad w\cdot \dd\vf{s}=0
+    $$
+    because $C_t$ is closed.
+  \end{proof}
+  \begin{definition}
+    A \emph{vortex line} is a curve $\ell$ such that it is tangent to the vorticity vector field $\vf{\xi}$ at each point. A \emph{vortex sheet} is a surface $\Sigma$ such that it is tangent to the vorticity vector field $\vf{\xi}$ at each point.
+  \end{definition}
+  \begin{proposition}
+    If a surface (or a curve) move with the flow of an isentropic fluid, and it is a vortex sheet (or a vortex line) at time $t=0$, then it is a vortex sheet (or a vortex line) at any time $t$.
+  \end{proposition}
+  \begin{sproof}
+    Use \mnameref{FLM:kelvin,FSV:stokes}.
+  \end{sproof}
+  \begin{proposition}\label{FLM:isentropicVorticity}
+    For an isentropic fluid (in the absence of external forces) with vorticity $\vf{\xi}$ and \emph{vorticity per unit of mass} $\vf\omega:=\frac{\vf{\xi}}{\rho}$, the following holds:
+    \begin{align*}
+      \matdv{\vf\omega}{t}-(\vf\omega\cdot\grad)\vf{u} & =\vf{0}                                              \\
+      \vf\omega(\vf\varphi(\vf{x},t), t)               & =\vf{D}\vf\varphi_t(\vf{x})\cdot \vf\omega(\vf{x},0)
+    \end{align*}
+  \end{proposition}
+  \begin{definition}
+    A \emph{vortex tube} is a two-dimensional surface $S$ formed by all vortex lines passing through a given closed curve $C$.
+  \end{definition}
+  \begin{theorem}[Helmholtz's theorem]
+    Consider an isentropic fluid. Then:
+    \begin{enumerate}
+      \item If $C_1$, $C_2$ are two closed curves encircling the same vortex tube, then:
+            $$
+              \int_{C_1}\vf{u}\cdot \dd\vf{s}=\int_{C_2}\vf{u}\cdot \dd\vf{s}
+            $$
+            This value is called \emph{strength of the vortex tube}.
+      \item The strength of a vortex tube is constant in time as the tube moves with the fluid.
+    \end{enumerate}
+  \end{theorem}
+  \begin{proof}
+    POSAR FIGURA. Let $C_1$, $C_2$ be the oriented curves of \mcref{fig:helmholtz} and $V$ be the volume enclosed within the tube between the two sections delimited by them. Using that $S$ is a vortex sheet and \mnameref{FSV:divergencethm,FSV:stokes} we have:
+    \begin{equation*}
+      0 = \int_V \div\vf{\xi}\dd{V} = \int_{S_1\sqcup S_2\sqcup S} \vf{\xi}\cdot\dd\vf{A} = \int_{C_1}\vf{\xi}\cdot\dd\vf{s} - \int_{C_2}\vf{\xi}\cdot\dd\vf{s} \\
+    \end{equation*}
+    The second part follows from \mnameref{FLM:kelvin}.
+  \end{proof}
+  \begin{proposition}
+    Consider a two-dimensional homogeneous incompressible fluid in a simply connected domain $D\subseteq \RR^2$. Then, the vorticity vector field $\vf{\xi}=(0,0,\xi)$ satisfies the following boundary problem:
+    $$
+      \begin{cases}
+        \displaystyle \matdv{\xi}{t}=0    \\
+        \displaystyle \laplacian\psi=-\xi \\
+        \displaystyle \vf{u} = (\partial_y\psi, -\partial_x\psi)
+      \end{cases}
+    $$
+    with $\psi=0$ on $\Fr{D}$. The function $\psi$ is called \emph{stream function}. These equations completely determine the flow. The first equation is called \emph{vorticity equation}.
+  \end{proposition}
+  \begin{proof}
+    From incompressibility, if $\vf{u}=(u,v)$ we have that $\partial_x u=-\partial_y v$. Thus, from vector calculus, we know that there exists a unique function (except for an additive constant) $\psi$ such that $\vf{u}=(\partial_y\psi, -\partial_x\psi)$. Moreover, an easy check shows that $\psi$ is contant along streamlines. Thus, we can adjust the constant so that $\psi=0$ on $\Fr{D}$. Now, since the scalar vortex function is $\xi=\partial_x v-\partial_y u$, we have that $\laplacian \psi=-\xi$. To prove the first equation, adapt \mcref{FLM:isentropicVorticity}.
+  \end{proof}
+  \begin{remark}
+    Note that in the previous proposition we also have the following:
+    $$
+      (\vf{u}\cdot \grad)\xi=u \partial_x\xi + v\partial_y\xi =\partial_y\psi \partial_x\xi -\partial_x\psi\partial_y\xi =\det \vf{D}(\xi,\psi)
+    $$
+    Thus, the flow is stationary if and only if $\xi$ and $\psi$ are functionally dependent.
+  \end{remark}
+  \begin{theorem}
+    Consider a three-dimensional homogeneous incompressible fluid in a convex domain $D\subseteq \RR^3$. Then, the vorticity vector field $\vf{\xi}$ satisfies the following boundary problem:
+    $$
+      \begin{cases}
+        \displaystyle \matdv{\vf{\xi}}{t} - (\vf{\xi}\cdot\grad)\vf{u}=\vf{0} \\
+        \displaystyle \laplacian\vf{A} = -\vf{\xi}                            \\
+        \displaystyle \div\vf{A}=0                                            \\
+        \displaystyle \vf{u}=\rotp\vf{A}
+      \end{cases}
+    $$
+  \end{theorem}
+  \begin{remark}
+    The convexity is used to ensure that given $\div \vf{u}=0$, there exists a vector field $\vf{A}$ such that $\vf{u}=\rotp\vf{A}$ and $\div\vf{A}=0$.
+  \end{remark}
+  \begin{remark}
+    One of the troubles with the 3-dimensional case is that given $\vf\xi$, the vector field $A$ is not uniquely determined (we cannot impose boundary condition such as $\vf{A} = 0$ on $\Fr{D}$ because $\vf{A}$ need not be constant on $\Fr{D}$ as was the case with $\psi$).
+  \end{remark}
+  \subsubsection{Navier-Stokes equations}
 \end{multicols}
 \end{document}
