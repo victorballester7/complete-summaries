@@ -481,7 +481,7 @@
   \end{proposition}
   \begin{important}
     \begin{theorem}[Dominated convergence theorem]\label{RFA:dominated}
-      Let $E\subseteq\RR^n$ be a measurable set, $f$ be a measurable function over $E$ such that $\exists (f_m)\geq 0$ with $f_m\almoste{\rightarrow} f$ and $\abs{f_m(x)}\almoste\leq g(x)$ on $E$ with $g\in \mathcal{L}^1(E)$ $\forall m\in\NN$. Then, $f, f_m\in \mathcal{L}^1(E)$ $\forall m\in\NN$ and: $$\int_Ef(x)\dd{x}=\lim_{m\to\infty}\int_Ef_m(x)\dd{x}$$
+      Let $E\subseteq\RR^n$ be a measurable set, $f$ be a measurable function over $E$ such that $\exists (f_m)$ measurable with $f_m\almoste{\rightarrow} f$ and $\abs{f_m(x)}\almoste\leq g(x)$ on $E$ with $g\in \mathcal{L}^1(E)$ $\forall m\in\NN$. Then, $f, f_m\in \mathcal{L}^1(E)$ $\forall m\in\NN$ and: $$\int_Ef(x)\dd{x}=\lim_{m\to\infty}\int_Ef_m(x)\dd{x}$$
     \end{theorem}
   \end{important}
   \begin{proposition}
@@ -843,6 +843,20 @@
     $$\int_E\abs{f(x)g(x)}\dd{x}\leq\int_E\left(\frac{\abs{f(x)}^p}{p}+\frac{\abs{g(x)}^q}{q}\right)\dd{x}=\frac{1}{p}+\frac{1}{q}=1$$
     The equality follows from the equality in \mnameref{RFA:young}.
   \end{proof}
+  \begin{corollary}[Hölder's inequality]
+    Let $E\subseteq\RR^n$ be a measurable set, $1\leq p,q, r\leq \infty$ be such that $\frac{1}{p}+\frac{1}{q}=\frac{1}{r}$ and ${f}\in L^p(E)$, ${g}\in L^q(E)$. Then, $fg\in L^r(E)$ and:
+    $$\norm{{fg}}_r\leq\norm{{f}}_p\norm{{g}}_q$$
+  \end{corollary}
+  \begin{sproof}
+    Use \mnameref{RFA:holder} with $F:=\abs{f}^r\in L^{\frac{p}{r}}(E)$ and $G:=\abs{g}^r\in L^{\frac{q}{r}}(E)$, noting that $p/r$ and $q/r$ are Hölder conjugates.
+  \end{sproof}
+  \begin{corollary}[Interpolation inequality]
+    Let $E\subseteq\RR^n$ be a measurable set, $1\leq p_1\leq p_2\leq \infty$ and $f\in L^{p_1}(E)\cap L^{p_2}(E)$. Then, $\forall p\in[p_1,p_2]$ we have $f\in L^p(E)$ and:
+    $$
+      \norm{f}_p\leq {\norm{f}_{p_1}}^\alpha{\norm{f}_{p_2}}^{1-\alpha}
+    $$
+    with $\alpha\in[0,1]$ such that $\frac{1}{p}=\frac{\alpha}{p_1}+\frac{1-\alpha}{p_2}$.
+  \end{corollary}
   \begin{proposition}\label{RFA:lpnorm}
     Let $E\subseteq\RR^n$ be a measurable set and $1\leq p<\infty$. The set $L^p(E)$ is a normed vector space with the norm: $$\norm{{f}}_p:={\left(\int_E\abs{{f}}^p\right)}^{1/p}\qquad\forall{f}\in L^p(E)$$
     And the set $L^\infty(E)$ is also a normed vector space with the norm: $$\norm{{f}}_\infty=\inf \{M:\abs{{f}(x)}\almoste{\leq} M, x\in E\}\qquad\forall{f}\in L^\infty(E)$$

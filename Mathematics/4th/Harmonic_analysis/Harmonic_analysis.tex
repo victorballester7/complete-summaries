@@ -449,6 +449,19 @@
   \begin{proof}
     The first property follows from its definition. For the second one, if $\displaystyle f(x)\overset{L^2}{=}\lim_{n\to\infty}f_n(x)$, by \mnameref{HA:plancherel} we have $\norm{f_n}_2=\norm{\widehat{f}}_2$. Now use the continuity of the norm. For the other properties, take the function given in the proof of \mcref{HA:preDefFTinL2} and use the \mnameref{RFA:monotone}.
   \end{proof}
+  \begin{proposition}[Jensen's inequality]
+    Let $J:\RR\to\RR$ be a convex function, $f$ be a measurable function, and $\mu:\Omega\to\RR$ be measurable with $\int_\Omega\dd{\mu}=1$. Then:
+    $$
+      \int_\Omega J(f)\dd{\mu}\geq J\left(\int_\Omega f\dd{\mu}\right)
+    $$
+  \end{proposition}
+  \begin{sproof}
+    We assume differentiability on $J$ for simplicity. Since $J$ is convex we have that $\forall a,b\in\RR$:
+    $$J(b)\geq J(a)+J'(a)(b-a)$$
+    Taking $a=\int_\Omega f\dd{\mu}$ and $b=f(x)$, we have:
+    $$J(f(x))\geq J\left(\int_\Omega f\dd{\mu}\right)+J'\left(\int_\Omega f\dd{\mu}\right)\!\!\left(f(x)-\int_\Omega f\dd{\mu}\right)$$
+    Multiplying by $\dd{\mu}$ and integrating, yields the result.
+  \end{sproof}
   \begin{lemma}[Generalized Hölder's inequality]\label{HA:holderGeneralized}
     Let $E\subseteq\RR^n$ be a measurable set, $1\leq p_1,\ldots,p_n\leq \infty$ be such that $\sum_{i=1}^n\frac{1}{p_i}=1$ and ${f_i}\in L^{p_i}(E)$. Then:
     $$\norm{\prod_{i=1}^{n}f_i}_1\leq\prod_{i=1}^{n}\norm{{f_i}}_{p_i}$$

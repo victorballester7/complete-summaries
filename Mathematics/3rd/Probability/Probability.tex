@@ -125,10 +125,10 @@
   \begin{proposition}
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space such that $\Omega$ is finite and all its elements are equiprobable. Let $A\in\mathcal{A}$ be an event. Then: $$\Prob(A)=\frac{|A|}{|\Omega|}$$
   \end{proposition}
-  \begin{theorem}[Continuity from below]
+  \begin{theorem}[Continuity from below]\label{P:continuity_below}
     Let\\ $(\Omega,\mathcal{A},\Prob)$ be a probability space and $(A_n)\subset\mathcal{A}$ be an increasing sequence of events, that is: $$A_1\subseteq A_2\subseteq\cdots\subseteq A_n\subseteq\cdots$$ Let $A:=\bigcup_{n=1}^\infty A_n$. Then: $$\Prob(A)=\lim_{n\to\infty}\Prob(A_n)$$
   \end{theorem}
-  \begin{corollary}[Continuity from above]
+  \begin{corollary}[Continuity from above]\label{P:continuity_above}
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $(A_n)\subset\mathcal{A}$ be a decreasing sequence of events, that is: $$A_1\supseteq A_2\supseteq\cdots\supseteq A_n\supseteq\cdots$$ Let $A:=\bigcap_{n=1}^\infty A_n$. Then: $$\Prob(A)=\lim_{n\to\infty}\Prob(A_n)$$
   \end{corollary}
   \begin{proposition}[Countable subadditivity]
@@ -1035,10 +1035,27 @@
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $(A_n)\subset\mathcal{A}$ be a sequence of events such that: $$\sum_{n=1}^\infty\Prob(A_n)<\infty$$
     Then, $\displaystyle\Prob\left(\limsup_{n\to\infty} A_n\right)=0$.
   \end{lemma}
+  \begin{proof}
+    Let $B_n:=\bigcup_{k\geq n}A_k$ and note that $B_{n+1}\subseteq B_n$. Thus, using the definition of $\limsup$ and \mnameref{P:continuity_above} we have that
+    $$
+      \Prob\left(\limsup_{n\to\infty} A_n\right)=\lim_{n\to\infty}\Prob(B_n)\leq \lim_{n\to\infty}\sum_{k\geq n}\Prob(A_n)=0
+    $$
+    because it is the tail of a convergent sequence.
+  \end{proof}
   \begin{lemma}[Second Borel-Cantelli lemma]
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space and $(A_n)\subset\mathcal{A}$ be a sequence of independent events such that: $$\sum_{n=1}^\infty\Prob(A_n)=\infty$$
     Then, $\displaystyle\Prob\left(\limsup_{n\to\infty} A_n\right)=1$.
   \end{lemma}
+  \begin{proof}
+    We will prove that $\displaystyle\Prob\left({\left[\limsup_{n\to\infty} A_n\right]}^c\right)=0$. From \mnameref{P:continuity_below}, if $B_n:= \bigcap_{k\geq n}{A_k}^c$ we have:
+    $$
+      \Prob\left({\left[\limsup_{n\to\infty} A_n\right]}^c\right)=\lim_{n\to\infty}\Prob(B_n)
+    $$
+    Now, $\forall N\geq n$ we have $\Prob(B_n)\leq \Prob\left(\bigcap_{k=n}^N{A_n}^c\right)$. Using the independence and the inequality $1+x\leq \exp{x}$, we get:
+    $$
+      \Prob(B_n)\leq \prod_{k=n}^N(1-\Prob(A_n))\leq \exp{-\sum_{k=n}^{N}}\overset{N\to\infty}{\longrightarrow}0
+    $$
+  \end{proof}
   \subsubsection{Convergence in mean}
   \begin{definition}
     Let $(\Omega,\mathcal{A},\Prob)$ be a probability space, $p\geq 1$, $(X_n)$ be a sequence of random variables such that $\Exp({|X_n|}^p)<\infty$ and $X$ be a random variable such that $\Exp({|X|}^p)<\infty$. We say that $(X_n)$ \emph{converges in the $p$-th mean} to $X$, and we denote it by $X_n\overset{L^p}{\longrightarrow} X$, if  $$\lim_{n\to\infty}\Exp({|X_n-X|}^p)=0$$
