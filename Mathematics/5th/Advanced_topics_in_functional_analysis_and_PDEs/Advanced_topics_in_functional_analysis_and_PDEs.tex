@@ -1,0 +1,55 @@
+\documentclass[../../../main_math.tex]{subfiles}
+
+\begin{document}
+\changecolor{ATFAPDE}
+\begin{multicols}{2}[\section{Advanced topics in functional analysis and PDEs}]
+  \subsection{Sobolev spaces}
+  \begin{definition}[Sobolev spaces]
+    Let $\Omega\subseteq \RR^d$ be an open set, $m\in\NN$ and $1\leq p\leq \infty$. We define the \emph{Sobolev spaces} $W^{m,p}$ as:
+    $$
+      W^{m,p}(\Omega)\!:=\!\{f\in L^p(\Omega): \forall\alpha\in\NN^d, \abs{\alpha}\leq m, \partial^\alpha f\in L^p(\Omega)\}
+    $$
+    Moreover we define the associate norm $\norm{\cdot}_{W^{m,p}(\Omega)}$ as:
+    $$
+      \norm{f}_{W^{m,p}(\Omega)}:={\left(\sum_{\abs{\alpha}\leq m}{\norm{\partial^\alpha f}_p}^p\right)}^{1/p}
+    $$
+    If $p=2$, we denote $H^m(\Omega):=W^{m,2}(\Omega)$.
+  \end{definition}
+  \begin{theorem}
+    Let $\Omega\subseteq \RR^d$ be an open set. Then, for all $m\in\NN$ and all $1\leq p\leq \infty$, $(W^{m,p}(\Omega),\norm{\cdot}_{W^{m,p}(\Omega)}$ is Banach. Moreover, if $p<\infty$, it is separable and if $1<p<\infty$, it is reflexive. Finally, $H^m(\Omega)$ is a separable Hilbert space.
+  \end{theorem}
+  \begin{definition}
+    Let $\Omega\subseteq \RR^d$ be an open set, $m\in\NN$ and $1\leq p\leq \infty$. We define the space $W_0^{m,p}(\Omega):=\overline{\mathcal{C}_0^\infty(\Omega)}$, where the closure is taken with the norm of $W^{m,p}(\Omega)$. Similarly, we set $H_0^m(\Omega):=W_0^{m,2}(\Omega)$.
+  \end{definition}
+  \begin{remark}
+    Note that $W_0^{m,p}(\Omega)$ is also Banach (with the same norm as $W^{m,p}(\Omega)$) because it is a closed subspace of a Banach space.
+  \end{remark}
+  \begin{theorem}
+    For $1\leq p < \infty$ we have that $W_0^{m,p}(\RR^d)=W^{m,p}(\RR^d)$. In particular, $\mathcal{C}^\infty(\RR^d)\cap W^{m,p}(\RR^d)$ and $\mathcal{C}_0^{\infty}(\RR^d)$ are dense in $W^{m,p}(\RR^d)$ for $1\leq p<\infty$.
+  \end{theorem}
+  \begin{theorem}[Poincaré's inequality]\label{ATFAPDE:poincare_ineq}
+    Let $\Omega$ be a bounded open set in $\RR^d$ and let $1\leq p<\infty$. Then, there is a constant $C=C(\Omega,p)$ so that $\forall u\in W_0^{m,p}(\Omega)$ we have:
+    $$
+      \norm{u}_p\leq C\norm{\grad u}_p
+    $$
+  \end{theorem}
+  \begin{remark}
+    \mnameref{ATFAPDE:poincare_ineq} is also valid when $\Omega$ is unbounded in one direction.
+  \end{remark}
+  \begin{corollary}
+    If $\Omega$ is bounded, then the constant function $f(x)=C$ with $C\ne 0$ is not in $W_0^{1,p}$. Thus, we cannot approximate constant functions by $\mathcal{C}_0^\infty(\Omega)$ functions, with the $W^{1,p}(\Omega)$ norm.
+  \end{corollary}
+  \begin{definition}
+    Let $\Omega$ be a bounded set. We define the average of $u$ in $\Omega$ as:
+    $$
+      \fint_\Omega u:=\frac{1}{\abs{\Omega}}\int_\Omega u
+    $$
+  \end{definition}
+  \begin{theorem}[Poincaré-Wirtinger's inequality]
+    Let $\Omega\subseteq \RR^d$ be a bounded connected open set with $\mathcal{C}^1$ boundary, and let $1\leq p<\infty$. Then, there is a constant $C=C(\Omega,p)$ so that $\forall u\in W^{1,p}(\Omega)$ we have:
+    $$
+      \norm{u-\fint_\Omega u}_p\leq C\norm{\grad u}_p
+    $$
+  \end{theorem}
+\end{multicols}
+\end{document}
