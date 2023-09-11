@@ -3,6 +3,57 @@
 \begin{document}
 \changecolor{ATFAPDE}
 \begin{multicols}{2}[\section{Advanced topics in functional analysis and PDEs}]
+  \subsection{\texorpdfstring{$L^p$}{Lp} spaces}
+  \subsubsection{Topologies of \texorpdfstring{$L^p$}{Lp} spaces}
+  \begin{definition}
+    Let $E$ be a Banach space and ${(x_n)}_{n\in\NN}\in E$. We say that ${(x_n)}_{n\in\NN}$ \emph{converges weakly} to $x\in E$ if $\forall f\in E^*$ we have:
+    $$
+      \lim_{n\to\infty}{f(x_n)}=f(x)
+    $$
+    We denote this by $x_n\rightharpoonup x$.
+  \end{definition}
+  \begin{definition}
+    Let $E$ be a Banach space and ${(x_n)}_{n\in\NN}\in E$. We say that ${(x_n)}_{n\in\NN}$ \emph{converges strongly} to $x\in E$ if $\forall f\in E^*$ we have:
+    $$
+      \lim_{n\to\infty}{\norm{x_n-x}}=0
+    $$
+    We denote this by $x_n\to x$.
+  \end{definition}
+  \begin{definition}
+    Let $E$ be a Banach space and ${(x_n)}_{n\in\NN}\in E$. Assume $E=F^*$, where $F$ is a Banach space. Then, we say that ${(x_n)}_{n\in\NN}$ \emph{converges weakly-*} to $x\in E$ if $\forall f\in F$ we have:
+    $$
+      \lim_{n\to\infty}{x_n(f)}=x(f)
+    $$
+    We denote this by $x_n\overset{*}\rightharpoonup x$.
+  \end{definition}
+  \begin{theorem}
+    Let $E$ be a Banach space and ${(x_n)}_{n\in\NN}\in E$. Then:
+    \begin{enumerate}
+      \item If $x_n\to x$, then $x_n\rightharpoonup x$.
+      \item If $E$ is reflexive then weak convergence is equivalent to weak-* convergence.
+      \item If $x_n\to x$, $x_n\rightharpoonup x$ or $x_n\overset{*}\rightharpoonup x$, then $(x_n)$ is bounded.
+      \item Let ${(L_n)}_{n\in\NN}\in E^*$. If $x_n\to x$ in $E$ and $L_n\overset{*}\rightharpoonup L$ in $E^*$, then $L_n(x_n)\to L(x)$ in $\CC$.
+    \end{enumerate}
+  \end{theorem}
+  \begin{theorem}[Banach-Alaoglu theorem]
+    Let $\Omega\subseteq \RR^d$ be a set and $1<p<\infty$. If $(f_n)$ is a bounded sequence in $L^p(\Omega)$, then there is a subsequence $(f_{n_k})$ and $f\in L^p(\Omega)$ so that $f_{n_k}\rightharpoonup f$ in $L^p(\Omega)$. If $p=\infty$, then there is a subsequence $(f_{n_k})$ and $f\in L^\infty(\Omega)$ so that $f_{n_k}\overset{*}\rightharpoonup f$ in $L^\infty(\Omega)$.
+  \end{theorem}
+  \subsubsection{Lower-semicontinuous functions and convexity}
+  \begin{definition}
+    Let $E$ be a Banach space, $(x_n)\in E$ and $f:E\to\RR$. We say that $f$ is \emph{strongly lower-semicontinuous} if:
+    $$
+      x_n\to x\implies f(x)\leq \liminf_{n\to\infty}{f(x_n)}
+    $$
+  \end{definition}
+  \begin{remark}
+    Analogously, we can define \emph{weakly lower-semicontinuity} and \emph{weak-* lower-semicontinuity} by replacing $x_n\to x$ by $x_n\rightharpoonup x$ and $x_n\overset{*}\rightharpoonup x$ respectively.
+  \end{remark}
+  \begin{theorem}
+    Let $E$ be a Banach space and $f:E\to\RR$ be convex. Then, $f$ is strongly lower-semicontinuous if and only if $f$ is weakly lower-semicontinuous. In particular, the map ${\norm{\cdot}}_E$ is weakly lower-semicontinuous.
+  \end{theorem}
+  \begin{theorem}
+    Let $\Omega\subseteq \RR^d$ be a set and $1<p<\infty$. Then if $f_n\rightharpoonup f$ in $L^p(\Omega)$, then: $$\norm{f}_p\leq \liminf_{n\to\infty}{\norm{f_n}_p}$$ In addition, if $\displaystyle\norm{f}_p=\lim_{n\to\infty}{\norm{f_n}_p}$, then $f_n\to f$ in $L^p(\Omega)$.
+  \end{theorem}
   \subsection{Sobolev spaces}
   \begin{definition}[Sobolev spaces]
     Let $\Omega\subseteq \RR^d$ be an open set, $m\in\NN$ and $1\leq p\leq \infty$. We define the \emph{Sobolev spaces} $W^{m,p}$ as:

@@ -1172,7 +1172,10 @@
     \end{enumerate}
   \end{definition}
   \begin{definition}
-    Let $E$ be a normed vector space. The Banach space $E^*:=\mathcal{L}(E,\KK)$ is called \emph{dual space} of $E$.
+    Let $E$ be a normed vector space. The Banach space $E^*:=\mathcal{L}(E,\KK)$ is called \emph{dual space} of $E$. The \emph{bidual space} of $E$ is $E^{**}:=(E^*)^*$.
+  \end{definition}
+  \begin{definition}
+    Let $E$ be a normed vector space. We say that $E$ is \emph{reflexive} if $E=E^{**}$.
   \end{definition}
   \subsubsection{Compact operators}
   \begin{definition}
@@ -1265,7 +1268,7 @@
     \end{enumerate}
   \end{definition}
   \begin{theorem}[Hahn-Banach theorem]
-    Let $E$ be a real vector space, $F\subseteq E$ be a subspace, $p:E\rightarrow\RR$ be a convex functional and $u\in F^*$. If $u(z)\leq p(z)$ $\forall z\in F$, then $\exists v\in E^*$ such that $v(z)=u(z)$ $\forall z\in F$ and $v(x)\leq p(x)$ $\forall x\in E$ ($v$ is called a \emph{prolongation} of $u$).
+    Let $E$ be a real vector space, $F\subseteq E$ be a subspace, $p:E\rightarrow\RR$ be a convex functional and $u\in F^*$. If $u(z)\leq p(z)$ $\forall z\in F$, then $\exists v\in E^*$ such that $v(z)=u(z)$ $\forall z\in F$ and $v(x)\leq p(x)$ $\forall x\in E$ ($v$ is called an \emph{extension} of $u$).
   \end{theorem}
   \begin{definition}[Seminorm]
     Let $E$ be a vector space over $\KK$. A \emph{seminorm} $p:E\rightarrow[0,\infty)$ is a functional that satisfies:
@@ -1278,12 +1281,12 @@
     Let $E$ be a vector space over $\KK$. A norm defined on $E$ is a seminorm.
   \end{lemma}
   \begin{theorem}[Hahn-Banach theorem]
-    Let $E$ be a vector space over $\KK=\RR,\CC$, $F\subseteq E$ be a subspace, $p:E\rightarrow\RR$ be a seminorm and $u\in F^*$. If $\abs{u(z)}\leq p(z)$ $\forall z\in F$, then $\exists v\in E^*$ such that $v(z)=u(z)$ $\forall z\in F$ and $\abs{v(x)}\leq p(x)$ $\forall x\in E$. That is, $v$ prolongates $u$.
+    Let $E$ be a vector space over $\KK=\RR,\CC$, $F\subseteq E$ be a subspace, $p:E\rightarrow\RR$ be a seminorm and $u\in F^*$. If $\abs{u(z)}\leq p(z)$ $\forall z\in F$, then $\exists v\in E^*$ such that $v(z)=u(z)$ $\forall z\in F$ and $\abs{v(x)}\leq p(x)$ $\forall x\in E$. That is, $v$ extends $u$.
   \end{theorem}
   \begin{theorem}[Hahn-Banach theorem]
     Let $E\ne\{0\}$ be a normed vector space.
     \begin{enumerate}
-      \item If $F\subseteq E$ is a subspace and $u\in F^*$, then $\exists v\in E^*$ such that prolongates $u$ and $\norm{v}=\norm{u}$.
+      \item If $F\subseteq E$ is a subspace and $u\in F^*$, then $\exists v\in E^*$ such that extends $u$ and $\norm{v}=\norm{u}$.
       \item For all $a\in E$, $\exists v\in E^*$ such that $v(a)=\norm{a}$ and $\norm{v}=1$.
       \item If $F\subseteq E$ is a closed subspace and $a\in E\setminus F$, then $\exists v\in E^*$ such that $v(a)=1$ and $v(F)=\{0\}$.
     \end{enumerate}
@@ -1306,6 +1309,15 @@
   \begin{proposition}
     Let $E$, $F$ be normed vector spaces. The function $$\function{}{\mathcal{L}(E,F)}{\mathcal{L}(F^*,E^*)}{T}{T^*}$$ is linear, bijective and isometric. That is, $\norm{T}=\norm{T^*}$.
   \end{proposition}
+  \begin{theorem}
+    Let $\Omega\subseteq \RR^n$ be a measurable set, $1\leq p\leq \infty$ and $q$ be the Hölder conjugate of $p$. Then:
+    \begin{itemize}
+      \item If $1<p<\infty$, then ${(L^p(\Omega))}^*=L^q(\Omega)$.
+      \item If $p=1$, then ${(L^1(\Omega))}^*=L^\infty(\Omega)$.
+      \item If $p=\infty$, then ${(L^\infty(\Omega))}^*\supsetneq L^1(\Omega)$.
+    \end{itemize}
+    In particular, for $1<p<\infty$, $L^p(\Omega)$ is reflexive, while $L^1(\Omega)$ and $L^\infty(\Omega)$ are not.
+  \end{theorem}
   \subsubsection{Spectrum and eigenvalues}
   \begin{proposition}
     Let $E$ be a Banach space and $T\in\mathcal{L}(E)$. Then, $\forall \alpha\in\KK$, $\im(T-\alpha\id)$ and $\ker(T-\alpha\id)$ are invariant over $T$. Moreover, if $\alpha\ne 0$, the function $$\function{S}{\ker(T-\alpha\id)}{\ker(T-\alpha\id)}{x}{\alpha x}$$ is an isomorphism.
@@ -1372,7 +1384,7 @@
       \item The limit $Tx:=\displaystyle\lim_{n\to\infty}T_nx$ exists $\forall x\in D\subseteq E$, where $D$ is a dense set in $E$.
       \item The sequence $(T_nx)$ is bounded $\forall x\in E$.
     \end{itemize}
-    Then, $T$ can be prolongated into a bounded operator such that: $$\norm{T}\leq \liminf_{n\to\infty}\norm{T_n}$$
+    Then, $T$ can be extended into a bounded operator such that: $$\norm{T}\leq \liminf_{n\to\infty}\norm{T_n}$$
   \end{corollary}
   \subsection{Hilbert spaces}
   \subsubsection{Inner products}

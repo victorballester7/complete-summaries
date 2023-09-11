@@ -1,6 +1,6 @@
 # Mathematics and Physics summaries
 
-Summary of each subject in Mathematics and Physics degree at UAB (Universitat Autònoma de Barcelona).
+Summary of each subject in Mathematics and Physics degree at UAB (Universitat Autònoma de Barcelona) at Paris Dauphine - PSL University.
 
 ### TODO
 

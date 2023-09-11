@@ -221,5 +221,57 @@
       \Exp(f(X)\mid Y)=\int_\RR{f(x)\dd{\mathcal{L}^{X\mid Y}(Y,x)}}
     $$
   \end{theorem}
+  \subsection{Martingales}
+  \begin{definition}
+    Let $(\Omega,\mathcal{F},\Prob)$ be a probability space. A \emph{filtration} is a sequence of sub-$\sigma$-algebras ${(F_n)}_{n\in\NN}$ such that $\forall n\in\NN$, $F_n\subseteq F_{n+1}$. The tuple $(\Omega,\mathcal{F},\Prob,{(F_n)}_{n\in\NN})$ is called a \emph{filtered probability space}.
+  \end{definition}
+  \begin{definition}
+    Let $(\Omega,\mathcal{F},\Prob,{(F_n)}_{n\in\NN})$ be a filtered probability space. A stochastic process ${(X_n)}_{n\in\NN}$ is \emph{adapted} to ${(F_n)}_{n\in\NN}$ if $\forall n\in\NN$, $X_n$ is $F_n$-measurable.
+  \end{definition}
+  \begin{definition}
+    Let $(\Omega,\mathcal{F},\Prob,{(F_n)}_{n\in\NN})$ be a filtered probability space and ${(M_n)}_{n\in\NN}$ be an adapted stochastic process. We say that ${(M_n)}_{n\in\NN}$ is a \emph{martingale} if $\forall n\in\NN$, $\Exp(\abs{M_n})<\infty$ and $\Exp(M_{n+1}\mid F_n)=M_n$.
+  \end{definition}
+  \begin{remark}
+    A \emph{submartingale} and \emph{supermartingale} are defined similarly, but with $\Exp(M_{n+1}\mid F_n)\geq M_n$ and $\Exp(M_{n+1}\mid F_n)\leq M_n$ respectively.
+  \end{remark}
+  \begin{definition}
+    Let $(\Omega,\mathcal{F},\Prob,{(F_n)}_{n\in\NN})$ be a filtered probability space. A \emph{stopping time} is a random variable $\tau:\Omega\to \NN\cup\{\infty\}$ such that $\forall n\in\NN$, $\{\tau\leq n\}\in F_n$.
+  \end{definition}
+  \begin{definition}
+    Let $(\Omega,\mathcal{F},\Prob,{(F_n)}_{n\in\NN})$ be a filtered probability space, $\tau$ be a stopping time and $M:={(M_n)}_{n\in\NN}$ be a process. We define the \emph{stopped process} $M^\tau:={(M_{\tau\wedge n})}_{n\in\NN}$.
+  \end{definition}
+  \begin{proposition}
+    Let $(\Omega,\mathcal{F},\Prob,{(F_n)}_{n\in\NN})$ be a filtered probability space, $\tau$ be a stopping time and $M:={(M_n)}_{n\in\NN}$ be a martingale. Then, $M^\tau:={(M_{\tau\wedge n})}_{n\in\NN}$ is a martingale.
+  \end{proposition}
+  \begin{corollary}
+    Let $(\Omega,\mathcal{F},\Prob,{(F_n)}_{n\in\NN})$ be a filtered probability space, $\tau$ be a bounded stopping time and $M:={(M_n)}_{n\in\NN}$ be a martingale. Then, $\Exp(M_\tau)=\Exp(M_0)$.
+  \end{corollary}
+  \begin{definition}
+    Let $(\Omega,\mathcal{F},\Prob,{(F_n)}_{n\in\NN})$ be a filtered probability space, $\tau$ be a stopping time. We define:
+    $$
+      \mathcal{F}_\tau:=\{A\in\mathcal{F}:\forall n\in\NN, A\cap \{\tau=n\}\in F_n\}
+    $$
+  \end{definition}
+  \begin{remark}
+    It can be seen that in the above definition, $\mathcal{F}_\tau$ is a $\sigma$-algebra.
+  \end{remark}
+  \begin{proposition}
+    Let $(\Omega,\mathcal{F},\Prob,{(F_n)}_{n\in\NN})$ be a filtered probability space, $\rho\leq\tau$ be two bounded stopping times, and $M$ be a martingale. Then, $\Exp(M_\tau\mid \mathcal{F}_\rho)=M_\rho$.
+  \end{proposition}
+  \begin{theorem}
+    Let $(\Omega,\mathcal{F},\Prob)$ be a probability space and ${(M_n)}_{n\in\NN}$ be a martingale such that $\sup_{n\in\NN}{\Exp(\abs{M_n})}<\infty$. Then, there exists a random variable $M_\infty$ such that $M_n\overset{\text{a.s.}}{\to} M_\infty$.
+  \end{theorem}
+  \begin{definition}
+    Let $(\Omega,\mathcal{F},\Prob)$ be a probability space. A family of random variables ${(X_t)}_{t\in I}$ is said to be \emph{uniformly integrable} if:
+    $$
+      \lim_{a\to\infty}{\sup_{t\in I}{\Exp(\abs{X_t}\indi{\abs{X_t}>a})}}=0
+    $$
+  \end{definition}
+  \begin{proposition}
+    Let $(\Omega,\mathcal{F},\Prob)$ be a probability space and ${(X_n)}_{n\in\NN}$ be a family of uniformly integrable random variables such that $X_n\overset{\text{a.s.}}{\to} X$. Then, $X$ is integrable and $\Exp(X_n)\to \Exp(X)$.
+  \end{proposition}
+  \begin{theorem}
+    Let $(\Omega,\mathcal{F},\Prob)$ be a probability space and ${(M_n)}_{n\in\NN}$ be a martingale bounded in $L^p$, $1<p<\infty$. Then, there exists a random variable $M_\infty$ such that $M_n\overset{L^p}{\to} M_\infty$ and $M_n\overset{\text{a.s.}}{\to} M_\infty$.
+  \end{theorem}
 \end{multicols}
 \end{document}
