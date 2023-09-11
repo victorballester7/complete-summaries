@@ -3,7 +3,7 @@
 \begin{document}
 \changecolor{AP}
 \begin{multicols}{2}[\section{Advanced probability}]
-  These summaries aims to review the basic notions of probability theory in a more abstract setting. We will not prove any result here as most of them are from previous courses.
+  These summaries aims to review the basic notions of probability theory in a more abstract setting. We will not prove any result here as most of them are from previous courses. Furthermore, we will skip some elementary definitions already defined in other summaries.
   \subsection{Basics of measure theory and integration}
   \begin{definition}[$\sigma$-algebra]
     Let $E$ be a set. A \emph{$\sigma$-algebra} $\mathcal{E}$ on $E$ is a collection of subsets of $E$ such that:
@@ -160,5 +160,66 @@
       \Prob(X\geq t)\leq \frac{\Exp(h(X))}{h(t)}
     $$
   \end{proposition}
+  \subsection{Conditional expectation}
+  \begin{proposition}
+    Let $(\Omega,\mathcal{F},\Prob)$ be a probability space and $\mathcal{G}\subseteq \mathcal{F}$ be a $\sigma$-algebra. Then, for any integrable random variable $X$, there exists a unique (up to a.s.) random variable $Y$ such that:
+    \begin{enumerate}
+      \item $Y$ is $\mathcal{G}$-measurable.
+      \item For any $Z$ $\mathcal{G}$-measurable such that $XZ$ is integrable, we have that $\Exp(XZ)=\Exp(YZ)$.
+    \end{enumerate}
+    We denote $Y=\Exp(X\mid \mathcal{G})$ and call it the \emph{conditional expectation of $X$ given $\mathcal{G}$}.
+  \end{proposition}
+  \begin{remark}
+    If the variable $X$ is not integrable but it is non-negative, then the above holds for any $Z$ non-negative as well.
+  \end{remark}
+  \begin{remark}
+    The conditional expectation, when restricted to $X\in L^2(\Omega,\mathcal{F},\Prob)$, is the orthogonal projection of $X$ onto $L^2(\Omega,\mathcal{G},\Prob)$.
+  \end{remark}
+  \begin{proposition}
+    Let $(\Omega,\mathcal{F},\Prob)$ be a probability space, $\mathcal{G}\subseteq \mathcal{F}$ be a $\sigma$-algebra and $X$, $Y$ be random variables. Then, assuming that all the expectations below are well-defined, we have:
+    \begin{enumerate}
+      \item If $Y$, $Z$ are $\mathcal{G}$-measurable random variables, then $\Exp(XY+Z\mid \mathcal{G})=Y\Exp(X\mid \mathcal{G})+Z$.
+      \item If $X\overset{\text{a.s.}}{\leq} Y$, then $\Exp(X\mid \mathcal{G})\overset{\text{a.s.}}{\leq} \Exp(Y\mid \mathcal{G})$.
+      \item $\Exp(\Exp(X\mid \mathcal{G}))=\Exp(X)$.
+      \item $\Exp(\abs{\Exp(X\mid \mathcal{G})})\leq \Exp(\abs{X})$.
+      \item \emph{Tower property}: if $\mathcal{H}\subseteq \mathcal{G}\subseteq \mathcal{F}$ are $\sigma$-algebras, then $\Exp(\Exp(X\mid \mathcal{G})\mid \mathcal{H})=\Exp(X\mid \mathcal{H})$.
+      \item If $X$ is independent of $\mathcal{G}$, then $\Exp(X\mid \mathcal{G})=\Exp(X)$.
+      \item If $X$ is independent of $\mathcal{G}$ and $Y$ is $\mathcal{G}$-measurable, then for any measurable function $f$, we have that $\Exp(f(X,Y)\mid \mathcal{G})=g(Y)$, where $g(y)=\Exp(f(X,y))$. This is often written as:
+            $$
+              \Exp(f(X,Y)\mid \mathcal{G})=\Exp(f(X,y))|_{y=Y}
+            $$
+    \end{enumerate}
+  \end{proposition}
+  \begin{definition}
+    Let $(\Omega,\mathcal{F},\Prob)$ be a probability space and $X$, $Y$ be random variables. We define the \emph{conditional expectation of $X$ given $Y$} as:
+    $$
+      \Exp(X\mid Y):=\Exp(X\mid \sigma(Y))
+    $$
+  \end{definition}
+  \begin{remark}
+    It can be seen that this definition coincides with the one given by:
+    $$
+      \Exp(X\mid Y)=\sum_{y\in \supp(Y)} \Exp(X\mid Y=y)\indi{Y=y}
+    $$
+  \end{remark}
+  \begin{proposition}
+    Let $(\Omega,\mathcal{F},\Prob)$ be a probability space and $X$, $Y$ be random variables. Assume that $(X,Y)$ has a law which admits a density $f=f(x,y)$ (which for simplicity we may think it with respect to $\dd{x}\dd{y}$). Then, for any function $h$ such that $\Exp(h(X))$ makes sense:
+    $$
+      \Exp(h(X)\mid Y)\overset{\text{a.s}}{=}\frac{\int_\RR{h(x)f(x,Y)\dd{x}}}{\int_\RR{f(x,Y)\dd{x}}}
+    $$
+  \end{proposition}
+  \begin{definition}
+    A \emph{probability kernel} on $(\RR, \mathcal{B}(\RR))$ is a function $K:\RR\times \mathcal{B}(\RR)\to [0,1]$ such that:
+    \begin{enumerate}
+      \item $\forall y\in \RR$, $K(y,\cdot)$ is a probability measure on $(\RR,\mathcal{B}(\RR))$.
+      \item $\forall A\in \mathcal{B}(\RR)$, $K(\cdot,A)$ is measurable.
+    \end{enumerate}
+  \end{definition}
+  \begin{theorem}
+    Let $(\Omega,\mathcal{F},\Prob)$ be a probability space and $X$, $Y$ be random variables. Then, there exists a probability kernel $\mathcal{L}^{X\mid Y}$, called the \emph{conditional law of $X$ given $Y$}, such that for any bounded measurable function $f$ we have:
+    $$
+      \Exp(f(X)\mid Y)=\int_\RR{f(x)\dd{\mathcal{L}^{X\mid Y}(Y,x)}}
+    $$
+  \end{theorem}
 \end{multicols}
 \end{document}
