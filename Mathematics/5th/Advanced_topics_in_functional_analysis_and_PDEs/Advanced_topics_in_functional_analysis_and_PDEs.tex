@@ -35,6 +35,22 @@
       \item Let ${(L_n)}_{n\in\NN}\in E^*$. If $x_n\to x$ in $E$ and $L_n\overset{*}\rightharpoonup L$ in $E^*$, then $L_n(x_n)\to L(x)$ in $\CC$.
     \end{enumerate}
   \end{theorem}
+  \begin{proof}
+    We only prove the first and last points.
+    \begin{enumerate}
+      \item Let $L\in E^*$. Then, $\norm{L}< \infty$ and:
+            $$
+              \abs{L(x_n)-L(x)}\leq \norm{L}\norm{x_n-x}\to 0
+            $$
+            \setcounter{enumi}{3}
+      \item Let $(L_n)\in E^*$ converge to $L\in E^*$ weakly-* and let $x_n\to x$ in $E$. Then:
+            \begin{align*}
+              \abs{L_n(x_n)-L(x)} & \leq \abs{(L_n-L)(x_n)}+\abs{L(x_n)-L(x)}         \\
+                                  & \leq \norm{L_n-L}\norm{x_n}+\norm{L}\norm{x_n -x}
+            \end{align*}
+            And the result follows.
+    \end{enumerate}
+  \end{proof}
   \begin{theorem}[Banach-Alaoglu theorem]
     Let $\Omega\subseteq \RR^d$ be a set and $1<p<\infty$. If $(f_n)$ is a bounded sequence in $L^p(\Omega)$, then there is a subsequence $(f_{n_k})$ and $f\in L^p(\Omega)$ so that $f_{n_k}\rightharpoonup f$ in $L^p(\Omega)$. If $p=\infty$, then there is a subsequence $(f_{n_k})$ and $f\in L^\infty(\Omega)$ so that $f_{n_k}\overset{*}\rightharpoonup f$ in $L^\infty(\Omega)$.
   \end{theorem}
@@ -48,12 +64,31 @@
   \begin{remark}
     Analogously, we can define \emph{weakly lower-semicontinuity} and \emph{weak-* lower-semicontinuity} by replacing $x_n\to x$ by $x_n\rightharpoonup x$ and $x_n\overset{*}\rightharpoonup x$ respectively.
   \end{remark}
-  \begin{theorem}
+  \begin{theorem}\label{ATFAPDE:lower_semicontinuity_thm}
     Let $E$ be a Banach space and $f:E\to\RR$ be convex. Then, $f$ is strongly lower-semicontinuous if and only if $f$ is weakly lower-semicontinuous. In particular, the map ${\norm{\cdot}}_E$ is weakly lower-semicontinuous.
   \end{theorem}
+  \begin{proof}
+    We only prove one implication, and also we admit that if $f$ is convex and strongly lower-semicontinuous, then there is a continuous linear operator $L_x$ (called \emph{support plane}) so that $\forall y\in E$ we have:
+    $$
+      f(y)\geq f(x)+L_x(y-x)
+    $$
+    In particular, if $(x_n)\rightharpoonup x$, then:
+    $$
+      f(x_n)\geq f(x)+L_x(x_n-x)\implies \liminf_{n\to\infty}{f(x_n)}\geq f(x)
+    $$
+  \end{proof}
   \begin{theorem}
-    Let $\Omega\subseteq \RR^d$ be a set and $1<p<\infty$. Then if $f_n\rightharpoonup f$ in $L^p(\Omega)$, then: $$\norm{f}_p\leq \liminf_{n\to\infty}{\norm{f_n}_p}$$ In addition, if $\displaystyle\norm{f}_p=\lim_{n\to\infty}{\norm{f_n}_p}$, then $f_n\to f$ in $L^p(\Omega)$.
+    Let $\Omega\subseteq \RR^d$ be a set and $1<p<\infty$. Then, if $f_n\rightharpoonup f$ in $L^p(\Omega)$, then: $$\norm{f}_p\leq \liminf_{n\to\infty}{\norm{f_n}_p}$$ In addition, if $\displaystyle\norm{f}_p=\lim_{n\to\infty}{\norm{f_n}_p}$, then $f_n\to f$ in $L^p(\Omega)$.
   \end{theorem}
+  \begin{proof}
+    The first point is \mcref{ATFAPDE:lower_semicontinuity_thm} in the case $E = L^p(\Omega)$. We only prove the second point for $p=2$. If $\displaystyle\norm{f}_2=\lim_{n\to\infty}{\norm{f_n}_2}$, then:
+    \begin{align*}
+      {\norm{f_n-f}_2}^2 & =\norm{f_n}_2^2+\norm{f}_2^2-2\Re\int_\Omega f_n\overline{f}    \\
+                         & \to {\norm{f}_2}^2+{\norm{f}_2}^2-2\Re\int_\Omega f\overline{f} \\
+                         & =0
+    \end{align*}
+    where the convergence of the integral is due to the weakly convergence of $f_n$ to $f$.
+  \end{proof}
   \subsection{Sobolev spaces}
   \begin{definition}[Sobolev spaces]
     Let $\Omega\subseteq \RR^d$ be an open set, $m\in\NN$ and $1\leq p\leq \infty$. We define the \emph{Sobolev spaces} $W^{m,p}$ as:
@@ -67,23 +102,65 @@
     If $p=2$, we denote $H^m(\Omega):=W^{m,2}(\Omega)$.
   \end{definition}
   \begin{theorem}
-    Let $\Omega\subseteq \RR^d$ be an open set. Then, for all $m\in\NN$ and all $1\leq p\leq \infty$, $(W^{m,p}(\Omega),\norm{\cdot}_{W^{m,p}(\Omega)}$ is Banach. Moreover, if $p<\infty$, it is separable and if $1<p<\infty$, it is reflexive. Finally, $H^m(\Omega)$ is a separable Hilbert space.
+    Let $\Omega\subseteq \RR^d$ be an open set. Then, for all $m\in\NN$ and all $1\leq p\leq \infty$, $(W^{m,p}(\Omega),\norm{\cdot}_{W^{m,p}(\Omega)})$ is Banach. Moreover, if $p<\infty$, it is separable and if $1<p<\infty$, it is reflexive. Finally, $H^m(\Omega)$ is a separable Hilbert space.
   \end{theorem}
+  \begin{proof}
+    Let $(f_j)$ be a Cauchy sequence in $W^{m,p}(\Omega)$. Then, $(f_j)$ is Cauchy in $L^p(\Omega)$, and for all $\abs{\alpha}\leq m$, $(\partial^\alpha f_j)$ is Cauchy in $L^p(\Omega)$. Since $L^p(\Omega)$ is complete, there are $f\in L^p(\Omega)$ and $f_\alpha\in L^p(\Omega)$, so that:
+    $$
+      f_j\overset{L^p}\longrightarrow f\qquad\partial^\alpha f_j\overset{L^p}\longrightarrow f_\alpha
+    $$
+    It remains to prove that $f_\alpha=\partial^\alpha f$. Since we have convergence in $L^p$, we also have convergence in the distributional sense, that is $f_j\overset{\mathcal{D}^*}\to f$. In particular, we must have $\partial^\alpha f_j\overset{\mathcal{D}^*}\to \partial^\alpha f$. By uniqueness of the limit in $\mathcal{D}^*(\Omega)$, we indeed have $f_\alpha=\partial^\alpha f$. This proves that $W^{m,p}(\Omega)$ is complete. Now, the map
+    $$
+      \function{}{W^{m,p}(\Omega)}{(L^p(\Omega))^N}{f}{(\partial^\alpha f)_{\abs{\alpha}\leq m}}
+    $$
+    with $N:=\abs{\{\alpha\in\NN^d:\abs{\alpha}\leq m\}}$ is an isometry. So $W^{m,p}(\Omega)$ can be identified with a closed vector space of $(L^p(\Omega))^N$. In particular, $W^{m,p}(\Omega)$ is separable for $p<\infty$, and it is reflexive for $1<p<\infty$.
+  \end{proof}
   \begin{definition}
     Let $\Omega\subseteq \RR^d$ be an open set, $m\in\NN$ and $1\leq p\leq \infty$. We define the space $W_0^{m,p}(\Omega):=\overline{\mathcal{C}_0^\infty(\Omega)}$, where the closure is taken with the norm of $W^{m,p}(\Omega)$. Similarly, we set $H_0^m(\Omega):=W_0^{m,2}(\Omega)$.
   \end{definition}
   \begin{remark}
-    Note that $W_0^{m,p}(\Omega)$ is also Banach (with the same norm as $W^{m,p}(\Omega)$) because it is a closed subspace of a Banach space.
+    Note that $W_0^{m,p}(\Omega)$ is also Banach (with the same norm as $W^{m,p}(\Omega)$) because it is a closed subspace in a Banach space.
   \end{remark}
+  \begin{lemma}\label{ATFAPDE:smooth_convolution}
+    Let $1\leq p\leq \infty$ and $(\phi_\varepsilon)$ be an approximation of identity. For all $f\in L^p(\RR^d)$, we set $f_\varepsilon:= f*\phi_\varepsilon$. Then:
+    \begin{itemize}
+      \item $f_\varepsilon$ is smooth.
+      \item $f_\varepsilon\in L^p(\RR^d)$ with $\norm{f_\varepsilon}_p\leq \norm{f}_p$.
+      \item If $p<\infty$, then $\norm{f_\varepsilon-f}_p\overset{\varepsilon\to 0}\longrightarrow 0$.
+    \end{itemize}
+  \end{lemma}
   \begin{theorem}
     For $1\leq p < \infty$ we have that $W_0^{m,p}(\RR^d)=W^{m,p}(\RR^d)$. In particular, $\mathcal{C}^\infty(\RR^d)\cap W^{m,p}(\RR^d)$ and $\mathcal{C}_0^{\infty}(\RR^d)$ are dense in $W^{m,p}(\RR^d)$ for $1\leq p<\infty$.
   \end{theorem}
+  \begin{proof}
+    Let us first prove that $\mathcal{C}^\infty(\RR^d)$ is dense in $W^{m,p}(\RR^d)$. Let $f\in W^{m,p}(\RR^d)$ and set $f_\varepsilon:=f*j_\varepsilon$ for an approximation of identity $j_\varepsilon$. By \mcref{ATFAPDE:smooth_convolution}, the functions $f_\varepsilon$ are smooth. For all $\abs{\alpha}\leq m$, the function $\partial^\alpha f$ is in $L^p(\RR^d)$, and we have $\partial^\alpha(f_\varepsilon)=(\partial^\alpha f)*j_\varepsilon$. By \mcref{HA:kernelConvLp}, we deduce that $\forall\abs{\alpha}\leq m$:
+    $$
+      \norm{\partial^\alpha f*j_\varepsilon-\partial^\alpha f}_p\to 0
+    $$
+    This already proves that $\mathcal{C}^\infty(\RR^d)\cap W^{m,p}(\RR^d)$ is dense in $W^{m,p}(\RR^d)$.
+    For the second part, we take $f\in \mathcal{C}^\infty(\RR^d)\cap W^{m,p}(\RR^d)$ and set $f_n:=\chi(x/n)f$, where $\chi$ is a smooth cut-off function satisfying $\chi(x)=1$ for $\abs{x}\leq 1$. Then, $f_n\in \mathcal{C}_0^\infty(\RR^d)$. By \mnameref{RFA:dominated}, we have $\norm{f_n-f}_p\to 0$. Moreover, we have:
+    \begin{align*}
+      \norm{\grad f_n-\grad f}_p & =\norm{\grad\chi f+\grad f[\chi(x/n)-1]}_p                           \\
+                                 & \leq \norm{\grad\chi}_\infty\norm{f}_p+\norm{\grad f[\chi(x/n)-1]}_p
+    \end{align*}
+    and the last term goes to 0 again by \mnameref{RFA:dominated}. So $\norm{\grad f_n-\grad f}_p\to 0$. We go on with all derivatives, which proves that $\norm{\partial^\alpha f_n-\partial^\alpha f}_p\to 0$ for all $\abs{\alpha}\leq m$. This shows that $f_n\to f$ in $W^{m,p}(\RR^d)$.
+  \end{proof}
   \begin{theorem}[Poincaré's inequality]\label{ATFAPDE:poincare_ineq}
     Let $\Omega$ be a bounded open set in $\RR^d$ and let $1\leq p<\infty$. Then, there is a constant $C=C(\Omega,p)$ so that $\forall u\in W_0^{m,p}(\Omega)$ we have:
     $$
       \norm{u}_p\leq C\norm{\grad u}_p
     $$
   \end{theorem}
+  % \begin{proof}
+  %   Let $L:= \diam(\Omega)$. By density of $\mathcal{C}_0^\infty(\Omega)$ in $W_0^{1,p}(\Omega)$, it is enough to prove the result for $u\in \mathcal{C}_0^\infty(\Omega)$. Let $x\in \Omega$ and consider a point $a\in \partial\Omega$, so that $a_1=x_1$ (same first coordinate). On the segment $[a,x]$, we have the point-wise bound:
+  %   $$
+  %     \abs{u(x)}=\abs{u(x)-u(a)}\leq \int_a^x{\abs{\partial_{x_1}u}(s,x_2,\ldots,x_d)ds}\leq \int_a^x{\abs{\grad u}(s,x_2,\ldots,x_d)ds}
+  %   $$
+  %   where we used Hölder's inequality in the last line. We take the $p$ power and integrate. This gives, using Fubini, and the fact that the $dx_1$ integration can be performed on a segment of size $L$:
+  %   $$
+  %     \abs{u}^p\leq L\int_{\Omega}{\abs{\grad u}^p}
+  %   $$
+  % \end{proof}
   \begin{remark}
     \mnameref{ATFAPDE:poincare_ineq} is also valid when $\Omega$ is unbounded in one direction.
   \end{remark}
