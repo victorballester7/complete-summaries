@@ -90,6 +90,7 @@
     where the convergence of the integral is due to the weakly convergence of $f_n$ to $f$.
   \end{proof}
   \subsection{Sobolev spaces}
+  \subsubsection{Basic definitions}
   \begin{definition}[Sobolev spaces]
     Let $\Omega\subseteq \RR^d$ be an open set, $m\in\NN$ and $1\leq p\leq \infty$. We define the \emph{Sobolev spaces} $W^{m,p}$ as:
     $$
@@ -179,5 +180,165 @@
       \norm{u-\fint_\Omega u}_p\leq C\norm{\grad u}_p
     $$
   \end{theorem}
+  \subsubsection{Sobolev embeddings}
+  \begin{definition}
+    Let $E$, $F$ be Banach. We say that $F$ is \emph{embedded} in $E$ if $F\subseteq E$ and the inclusion map $i:F\hookrightarrow  E$ is continuous. We say that $F$ is \emph{compactly embedded} in $E$ if $F\subseteq E$ and the inclusion map $i:F\hookrightarrow  E$ is compact.
+  \end{definition}
+  \begin{theorem}[Gagliardo, Nirengerg and Sobolev's inequality]
+    For all $1\leq p\leq\frac{d}{m}$, there is a constant $C=C(p,m,d)$ so that $\forall u\in \mathcal{C}_0^\infty(\RR^d)$ we have:
+    $$
+      \norm{u}_{q}\leq C\sum_{\abs{\alpha}= m}{\norm{\partial^\alpha u}_p}$$
+    where $\displaystyle\frac{1}{q}=\frac{1}{p}-\frac{m}{d}$.
+  \end{theorem}
+  \begin{proof}
+    By induction, it suffices to prove the result only for $m=1$. We will prove only the case $d=2$. We start with $p=1$. Let $u\in \mathcal{C}_0^\infty(\RR^2)$. We have:
+    \begin{multline*}
+      \abs{u(x_1,x_2)}\leq \int_{-\infty}^{x_1}\abs{\partial_{x_1}u(s,x_2)}\dd{s}\leq\\\leq\int_{\RR}\abs{\partial_{x_1}u(s,x_2)}\dd{s}=:v_1(x_2)
+    \end{multline*}
+    Similarly, $\abs{u(x_1,x_2)}\leq v_2(x_1)$. So:
+    \begin{multline*}
+      {\norm{u}_2}^2\leq \int_{\RR^2} \abs{v_1(x_2)}\abs{v_2(x_1)}\dd{x_1}\dd{x_2}=\norm{v_1}_1 \norm{v_2}_1=\\=\norm{\partial_{x_1}u}_1\norm{\partial_{x_2}u}_1\leq {\norm{\grad u}_1}^2
+    \end{multline*}
+    For the case $1\leq p<2$, we apply the result to the function $u_t:=\abs{u}^{t-1}u$. This function satisfies $\abs{\grad u_t}=t\abs{u}^{t-1}\abs{\grad u}$ and so:
+    \begin{multline*}
+      {\norm{u}_{2t}}^t=\norm{u_t}_2\leq \norm{u_t}_1=t\norm{\abs{u}^{t-1}\grad u}\leq \\\leq t\norm{\abs{u}^{t-1}}_{p'}\norm{\grad u}_p=t{\norm{u}_{(t-1)p'}}^{t-1} \norm{\grad u}
+    \end{multline*}
+    where $p'$ is the Hölder conjugate of $p$. Now, we choose $t$ so that $2t=(t-1)p'$, that is, $t=\frac{p}{2-p}$ and so:
+    $$
+      \norm{u}_{\frac{2p}{2-p}}\leq \frac{p}{2-p}\norm{\grad u}_p
+    $$
+  \end{proof}
+  \begin{definition}[Hölder continuity]
+    Let $k\in\NN$ and $0\leq\theta\leq 1$. We say that a map $u:\Omega\to\CC$ is \emph{$\mathcal{C}^{k,\theta}$-Hölder continuous} if there is $C\geq 0$ such that $\forall\abs{\alpha}=k$ and all $x,y\in\Omega$ we have:
+    $$
+      \abs{\partial^\alpha u(x)-\partial^\alpha u(y)}\leq C\abs{x-y}^\theta
+    $$
+    The set of such functions is denoted by $\mathcal{C}^{k,\theta}(\Omega)$.
+  \end{definition}
+  \begin{remark}
+    Note that $\mathcal{C}^{k,0}(\Omega)=\mathcal{C}^k(\Omega)$ and that $\mathcal{C}^{0,1}(\Omega)$ is the set of Lipschitz continuous functions.
+  \end{remark}
+  \begin{remark}
+    Note that $\mathcal{C}^{k,\theta}(\Omega)$ together with the norm
+    $$
+      \norm{u}_{\mathcal{C}^{k,\theta}(\Omega)}:=\sup_{x\ne y}\sup_{\abs{\alpha}=k}\frac{\abs{\partial^\alpha u(x)-\partial^\alpha u(y)}}{\abs{x-y}^\theta}
+    $$
+    is a Banach space.
+  \end{remark}
+  \begin{theorem}[Morrey's embedding]\label{ATFAPDE:morrey_embedding}
+    Let $m\geq 1$ and $p>\frac{d}{m}$. Then, $W^{m,p}(\RR^d)\subset L^\infty(\RR^d)$. In addition, let:
+    $$
+      k:=\left\lfloor m-\frac{d}{p}\right\rfloor\qquad\theta:=m-\frac{d}{p}-k\in [0,1)
+    $$
+    If $\theta\ne 0$, then $W^{m,p}(\RR^d)\subset \mathcal{C}^{k,\theta}(\RR^d)$.
+  \end{theorem}
+  \begin{theorem}
+    For all $1\leq p\leq \infty$, $W^{1,p}(\RR)\hookrightarrow L^\infty(\RR)\cap \mathcal{C}^{0}(\RR)$.
+  \end{theorem}
+  \begin{proof}
+    The proof for $p>1$ comes from \mnameref{ATFAPDE:morrey_embedding}. For $p=1$ we have that $\forall u\in \mathcal{C}_0^\infty(\RR)$ we have:
+    $\abs{u(x)}\leq \int_{-\infty}^x{\abs{u'}}\leq \norm{u'}_1$. So $\norm{u}_\infty\leq \norm{u'}_1$. By density, this proves that $\forall u\in W^{1,1}(\RR)$ we have $u\in L^\infty(\RR)$. Now, let $(u_n)\in \mathcal{C}_0^\infty(\RR)$ be such that $u_n\to u$ in $W^{1,1}(\RR)$. Then, $u_n\to u$ in $L^\infty(\RR)$ and so $u$ is continuous because it is the uniform limit of continuous functions.
+  \end{proof}
+  \subsubsection{Extension operators}
+  \begin{definition}
+    Let $\Omega\subseteq \RR^d$ be an open set. An \emph{extension} of $u\in W\in W^{m,p}(\Omega)$ is a function $\tilde{u}\in W^{m,p}(\RR^d)$ so that $\tilde{u}\almoste{=}u$ in $\Omega$. An \emph{extension operator} is a bounded linear operator $E:W^{m,p}(\Omega)\to W^{m,p}(\RR^d)$ so that $Eu$ is an extension of $u$ $\forall u\in W^{m,p}(\Omega)$.
+  \end{definition}
+  \begin{remark}
+    From now on, we will denote $\RR_{\pm}^d:=\RR^{d-1}\times\RR_{\pm}$ and $\RR_0^d:=\RR^{d-1}\times\{0\}$.
+  \end{remark}
+  \begin{theorem}
+    For all $m\in\NN$ and all $1\leq p<\infty$, $\mathcal{C}^\infty(\overline{\RR_+^d})$ is dense in $W^{m,p}(\RR_+^d)$.
+  \end{theorem}
+  \begin{proof}
+    Let $$
+      \tau_h(u)(x_1,\ldots, x_d):=u(x_1,\ldots, x_{d-1},x_d+h)
+    $$
+    be the translation operator and set $u_\varepsilon:=\tau_{\varepsilon}(u)*\phi_\varepsilon$, where $\varepsilon>0$ and $\phi_\varepsilon$ is an approximation of identity. Then, $u_\varepsilon\in \mathcal{C}^\infty(\overline{\RR_+^d})$ by the properties of the convolution. Moreover:
+    \begin{multline*}
+      \norm{\partial^\alpha u_\varepsilon-\partial^\alpha u}_p \leq \norm{\partial^\alpha u_\varepsilon-\partial^\alpha (\tau_{\varepsilon}u)}_p+\norm{\partial^\alpha (\tau_{\varepsilon}u)-\partial^\alpha u}_p                         \\
+      \leq \norm{(\partial^\alpha \tau_\varepsilon u)*\phi_\varepsilon-\partial^\alpha (\tau_{\varepsilon}u)}_p+\norm{\tau_{\varepsilon}(\partial^\alpha u)-\partial^\alpha u}_p
+    \end{multline*}
+    The first term goes to zero by the properties of smoothing sequences, and the second goes to zero since translations are continuous in $L^p$ (check \mcref{HA:translated}).
+  \end{proof}
+  \begin{remark}
+    The same proof shows that $\mathcal{C}^\infty(\overline{\Omega})$ is dense in $W^{m,p}(\Omega)$, if $\Omega$ is bounded with $\Fr{\Omega}$ of class $\mathcal{C}^1$. This time, one needs to locally translate u along the normal direction.
+  \end{remark}
+  \begin{theorem}
+    For all $m\in\NN$ and all $1\leq p<\infty$, there is an extension operator $E:W^{m,p}(\RR_+^d)\to W^{m,p}(\RR^d)$.
+  \end{theorem}
+  \begin{proof}
+    We only do the proof for $d=1$ and $m=1$ to highlight the main ideas. Let $u\in W^{1,p}(\RR_+)$. We define the \emph{first order reflection}:
+    $$
+      \bar{u}:=\begin{cases}
+        u(x)             & \text{if }x\geq 0 \\
+        -3u(-x)+4u(-x/2) & \text{if }x<0
+      \end{cases}
+    $$
+    By density, it is enough to prove the result for $u\in \mathcal{C}^1(\RR_+)$. An easy check shows that $\bar{u}\in \mathcal{C}^1(\RR)$. Moreover, we have:
+    \begin{align*}
+      {\norm{\bar{u}}_{W^{1,p}(\RR)}}^p & =\int_{\RR}{\abs{\bar{u}}^p}+{\abs{\bar{u}'}^p}             \\
+      \begin{split}
+        &=\!\int_{\RR_+}\!{\abs{u}^p}\!+\!\!{\abs{u'}^p}\!+\!\int_{\RR_-}\![{\abs{-3u(-x)+4u(-x/2)}^p}+\\
+        &\hspace{2.75cm}+{\abs{3u'(-x)-2u'(-x/2)}^p}]
+      \end{split} \\
+                                        & \leq C{\norm{u}_{W^{1,p}(\RR_+)}}^p
+    \end{align*}
+    for some constant $C>0$. Thus, $E$ is a bounded extension operator.
+  \end{proof}
+  \begin{remark}
+    The reader can check that the same construction works on $\RR^d$, by setting
+    $$
+      \bar{u}(x_1,\ldots,x_d):=
+      \begin{cases}
+        u(x_1,\ldots,x_d)              & \text{if }x_d\geq 0 \\
+        \begin{split}
+          -3u(x_1,\ldots,x_{d-1}-x_d)+\\
+          +4u(x_1,\ldots,x_{d-1}-x_d/2)
+        \end{split} & \text{if }x_d<0
+      \end{cases}
+    $$
+    The proof for higher derivatives $m \geq 1$ needs to add more terms in order to make the junction smooth enough.
+  \end{remark}
+  \begin{definition}
+    We say that a domain $\Omega\subseteq \RR^d$ has boundary of class $\mathcal{C}^k$ if $\forall x\in \Fr{\Omega}$ there is a neighborhood $\varepsilon,\delta>0$ and a $\mathcal{C}^k$-diffeomorphism $\phi:B(x,\varepsilon)\to B(0,\delta)$ so that $\phi(x)=0$ and $\phi(B(x,\varepsilon)\cap \Omega)=B(0,\delta)\cap \RR_+^d$. Note that in particular this implies that $\phi(\Fr{\Omega}\cap B(x,\varepsilon))=B(0,\delta)\cap \RR_0^d$.
+  \end{definition}
+  \begin{theorem}
+    Let $\Omega\subseteq \RR^d$ be a bounded domain with $\mathcal{C}^k$ boundary. Then, $\forall m\leq k$ and all $1\leq p<\infty$, there is an extension operator $E:W^{m,p}(\Omega)\to W^{m,p}(\RR^d)$.
+  \end{theorem}
+  \begin{theorem}
+    Let $\Omega\subseteq \RR^d$ be a bounded domain with $\mathcal{C}^k$ boundary. Then, $\forall m\leq k$, if $1\leq p<\frac{d}{m}$,
+    % now add the conclusions of the gagliardo theorem
+    there is an embedding $W^{m,p}(\Omega)\hookrightarrow L^q(\Omega)$, where $\displaystyle\frac{1}{q}=\frac{1}{p}-\frac{m}{d}$. If $p>\frac{d}{m}$, then $W^{m,p}(\Omega)\hookrightarrow \mathcal{C}^{k-m,\theta}(\Omega)$, where $\theta=m-\frac{d}{p}-\ell$ and $\ell:=\left\lfloor m-\frac{d}{p}\right\rfloor$.
+  \end{theorem}
+  \begin{theorem}[Reillich-Kondrachov's compactness theorem]
+    Let $\Omega\subseteq \RR^d$ be a bounded domain with $\mathcal{C}^k$ boundary. Then, $\forall m\leq k$ we have:
+    \begin{itemize}
+      \item If $1\leq p<\frac{d}{m}$, $\forall r\in [p,q)$, where $\displaystyle\frac{1}{q}=\frac{1}{p}-\frac{m}{d}$, the embedding $W^{m,p}(\Omega)\hookrightarrow L^r(\Omega)$ is compact.
+      \item If $p\geq \frac{d}{m}$, then $\forall r\in [p,\infty)$, the embedding $W^{m,p}(\Omega)\hookrightarrow L^r(\Omega)$ is compact.
+      \item If $p>\frac{d}{m}$, then the embedding $W^{m,p}(\Omega)\hookrightarrow \mathcal{C}^{0}(\overline{\Omega})$ is compact.
+    \end{itemize}
+  \end{theorem}
+  \subsubsection{Trace operators}
+  \begin{theorem}
+    Let $1\leq p<\infty$ and $u\in W^{1,p}(\RR_+^d)$. Then, the function $u|_{\RR_0^d}:\RR^{d-1}\to\CC$ belongs to $L^p(\RR^{d-1})$.
+  \end{theorem}
+  \begin{definition}
+    We define the \emph{trace operator} as the map:
+    \begin{align*}
+      \function{T}{W^{1,p}(\RR_+^d)}{L^p(\RR^{d-1})}{u}{u|_{\RR_0^d}}
+    \end{align*}
+  \end{definition}
+  \begin{theorem}
+    Let $1\leq p<\infty$ and $u\in W^{1,p}(\RR_+^d)$. Then, $Tu=0$ if and only if $u\in W_0^{1,p}(\RR_+^d)$.
+  \end{theorem}
+  \begin{lemma}
+    Let $\Omega\subseteq \RR^d$ be an open set and $u\in W^{1,p}(\Omega)$ with $1\leq p\leq \infty$. Then, $\norm{\grad \abs{u}}\almoste{\leq}\norm{\grad u}$.
+  \end{lemma}
+  \begin{proof}
+    $$
+      \norm{2\abs{u}\grad\abs{u}}=\norm{\grad \abs{u}^2}=2\norm{\Re(\overline{u}\grad u)}\leq 2\norm{\grad u}\abs{u}
+    $$
+    On the set $\{u\ne 0\}$, we can divide by $2\abs{u}$, which gives the result. The proof on the set $\{u=0\}$ is much difficult.
+  \end{proof}
 \end{multicols}
 \end{document}
