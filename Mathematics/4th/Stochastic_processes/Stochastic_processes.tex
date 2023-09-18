@@ -157,7 +157,7 @@
   \end{definition}
   \subsubsection{Galton-Watson process}
   \begin{model}\label{SP:galtonwatsonModel}
-    Let $(X_n)$, $n\in\NN\cup\{0\}$ be a sequence of discrete random vairables representing the number of new individuals of a certain population at the $n$-th generation. Suppose they are defined as $$X_{n+1}=\sum_{k=1}^{X_n}Z_{n+1}^{(k)}$$ and $X_0=1$. Here $Z_{n+1}^{(k)}$ has support $\NN\cup\{0\}$ $\forall n,k$ and represent the number of descendants (to the next generation) of the $k$-th individual of the $n$-th generation. Suppose that $Z_{n+1}^{(k)}\sim Z$ are \iid and independent of $(X_n)$. We would like to study the probability $\rho$ of extinction of this population: $$\rho=\Prob(\{X_n=0:\text{for some $n\in\NN$}\})=\Prob\left(\bigcup_{n=1}^\infty\{X_n=0\}\right)$$
+    Let $(X_n)$, $n\in\NN\cup\{0\}$ be a sequence of discrete random variables representing the number of new individuals of a certain population at the $n$-th generation. Suppose they are defined as $$X_{n+1}=\sum_{k=1}^{X_n}Z_{n+1}^{(k)}$$ and $X_0=1$. Here $Z_{n+1}^{(k)}$ has support $\NN\cup\{0\}$ $\forall n,k$ and represent the number of descendants (to the next generation) of the $k$-th individual of the $n$-th generation. Suppose that $Z_{n+1}^{(k)}\sim Z$ are \iid and independent of $(X_n)$. We would like to study the probability $\rho$ of extinction of this population: $$\rho=\Prob(\{X_n=0:\text{for some $n\in\NN$}\})=\Prob\left(\bigcup_{n=1}^\infty\{X_n=0\}\right)$$
   \end{model}
   \begin{lemma}\label{SP:lemmaGaltonWatson}
     Let $(Z_n)$ be a sequence of \iid random variables distributed as $Z$ with support $\NN\cup\{0\}$, and $N$ be a random variable also with support $\NN\cup\{0\}$ and independent to $(Z_n)$. Let $X=\sum_{k=1}^NZ_k$. Then, $\forall s\in[-1,1]$ we have: $$g_X(s)=g_N(g_Z(s))$$
@@ -1271,14 +1271,14 @@
   \end{theorem}
   \subsection{Brownian motion}
   \subsubsection{Gaussian processes}
-  \begin{proposition}\label{SP:gaussian_vector}
-    Let $\vf{x}\in \RR^n$ be a random vector. Then, $\vf{x}$ is a \emph{gaussian vector}, that is it distributes as an $n$-dimensional normal, if and only if there exists $k\in\NN$, $\vf{A}\in\mathcal{M}_{n\times k}(\RR)$, $\vf{z}\in\RR^k$ with \iid components distributed as $N(0,1)$, and $\vf\mu\in\RR^n$ such that: $$\vf{x}=\vf{A}\vf{z}+\vf\mu$$
+  \begin{proposition}\label{SP:Gaussian_vector}
+    Let $\vf{x}\in \RR^n$ be a random vector. Then, $\vf{x}$ is a \emph{Gaussian vector}, that is it distributes as an $n$-dimensional normal, if and only if there exists $k\in\NN$, $\vf{A}\in\mathcal{M}_{n\times k}(\RR)$, $\vf{z}\in\RR^k$ with \iid components distributed as $N(0,1)$, and $\vf\mu\in\RR^n$ such that: $$\vf{x}=\vf{A}\vf{z}+\vf\mu$$
   \end{proposition}
   \begin{definition}
-    A stochastic process ${(X_t)}_{t\geq 0}$ is called a \emph{gaussian process} if for all $t_1,\ldots,t_n\geq 0$ the random vector $(X_{t_1},\ldots,X_{t_n})$ is gaussian.
+    A stochastic process ${(X_t)}_{t\geq 0}$ is called a \emph{Gaussian process} if for all $t_1,\ldots,t_n\geq 0$ the random vector $(X_{t_1},\ldots,X_{t_n})$ is Gaussian.
   \end{definition}
   \begin{definition}
-    Let ${(X_t)}_{t\geq 0}$ be a gaussian process.
+    Let ${(X_t)}_{t\geq 0}$ be a Gaussian process.
     Then, the \emph{mean function} is defined as:
     $$
       \function{\mu}{[0,\infty)}{\RR}{t}{\Exp(X_t)=:\mu_t}
@@ -1300,7 +1300,7 @@
     The Brownian motion is said to be \emph{standard} if $\sigma=1$.
   \end{definition}
   \begin{proposition}
-    Let $B:={(B_t)}_{t\geq 0}$ be a standard Brownian motion. Then, $B$ is a gaussian process with mean function $\mu_t=0$ and covariance function $C(s,t)=\min(s,t)$.
+    Let $B:={(B_t)}_{t\geq 0}$ be a standard Brownian motion. Then, $B$ is a Gaussian process with mean function $\mu_t=0$ and covariance function $C(s,t)=\min(s,t)$.
   \end{proposition}
   \begin{proof}
     Let $0< t_1<\cdots<t_n$. We can write the vector $\vf{b}:=\transpose{(B_{t_1},\ldots,B_{t_n})}$ as:
@@ -1318,13 +1318,13 @@
         B_{t_n} - B_{t_{n-1}}
       \end{pmatrix}
     $$
-    And so $\vf{b}$ is gaussian because is a linear combination of gaussian. Now in the general, let $s_1, \ldots, s_n\geq 0$. We can write any vector $(B_{s_1}, \ldots, B_{s_n})$ as a linear transformation of the vector $(B_{t_1}, \ldots, B_{t_n})$ with $0< t_1<\cdots<t_n$. On the other hand, it is clear that $\mu_t=\Exp(B_t)=\Exp(B_t-B_0)=0$ and if $s\leq t$: $$\Exp(B_sB_t)=\Exp(B_s(B_t-B_s))+\Exp(B_s^2)=\mu_s\mu_{t-s}+s=s$$
+    And so $\vf{b}$ is Gaussian because is a linear combination of Gaussian. Now in the general, let $s_1, \ldots, s_n\geq 0$. We can write any vector $(B_{s_1}, \ldots, B_{s_n})$ as a linear transformation of the vector $(B_{t_1}, \ldots, B_{t_n})$ with $0< t_1<\cdots<t_n$. On the other hand, it is clear that $\mu_t=\Exp(B_t)=\Exp(B_t-B_0)=0$ and if $s\leq t$: $$\Exp(B_sB_t)=\Exp(B_s(B_t-B_s))+\Exp(B_s^2)=\mu_s\mu_{t-s}+s=s$$
   \end{proof}
   \begin{proposition}
-    Let $B:={(B_t)}_{t\geq 0}$ be a gaussian process with $B_0=0$, mean function $\mu_t=0$ and covariance function $C(s,t)=\min(s,t)$. Then, $B$ is a standard Brownian motion.
+    Let $B:={(B_t)}_{t\geq 0}$ be a Gaussian process with $B_0=0$, mean function $\mu_t=0$ and covariance function $C(s,t)=\min(s,t)$. Then, $B$ is a standard Brownian motion.
   \end{proposition}
   \begin{proof}
-    Since gaussian uncorrelated variables are independent, it suffices to show that the covariance matrix of $(B_{t_1}, B_{t_2}-B_{t_1}, \ldots, B_{t_n}-B_{t_{n-1}})$ is:
+    Since Gaussian uncorrelated variables are independent, it suffices to show that the covariance matrix of $(B_{t_1}, B_{t_2}-B_{t_1}, \ldots, B_{t_n}-B_{t_{n-1}})$ is:
     $$
       \begin{pmatrix}
         t_1    & 0       & \cdots & 0            \\

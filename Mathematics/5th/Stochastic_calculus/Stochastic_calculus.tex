@@ -3,6 +3,87 @@
 \begin{document}
 \changecolor{SC}
 \begin{multicols}{2}[\section{Stochastic calculus}]
-
+  Along the document we assume that we work in a probability space $(\Omega,\mathcal{F},\Prob)$ and that all the random variables are defined on this space.
+  \subsection{Preliminaries}
+  \subsubsection{Stochastic processes}
+  \begin{proposition}
+    A stochastic process $X={(X_t)}_{t\in \TT}$ is Gaussian if and only if $\forall n\in\NN$, $\forall t_1,\ldots,t_n\in\TT$, $\forall \lambda_1,\ldots,\lambda_n\in\RR$,
+    $$
+      Z:=\lambda_1 X_{t_1}+\cdots+\lambda_n X_{t_n}
+    $$
+    is a Gaussian random variable. In particular, we have:
+    $$
+      \Exp(\exp{\ii Z})=\exp{\ii \Exp(Z)-\frac{1}{2}\Var(Z)}
+    $$
+  \end{proposition}
+  \begin{remark}
+    A stochastic process $X={(X_t)}_{t\in \TT}$ can also be viewed as a single random variable taking values in $\RR^{\TT}$, equipped with the product $\sigma$-algebra $\displaystyle \bigotimes_{t\in\TT}\mathcal{B}(\RR)$.
+  \end{remark}
+  \begin{proposition}
+    Let $m:\TT\to\RR$ be a measurable function and $\gamma:\TT^2\to\RR$ be a symmetric positive-definite function. Then, there exists a Gaussian process ${(X_t)}_{t\in \TT}$ such that $\Exp(X_t)=m(t)$ and $\cov(X_s,X_t)=\gamma(s,t)$.
+  \end{proposition}
+  \begin{definition}
+    Let ${(X_t)}_{t\in \TT}$, ${(Y_s)}_{s\in \SS}$ be two stochastic processes. We say that they are \emph{jointly Gaussian} if the concatenated process $({(X_t)}_{t\in \TT},{(Y_s)}_{s\in \SS})$ is Gaussian.
+  \end{definition}
+  \begin{lemma}\label{lemma:indep_joint_gauss}
+    Two jointly Gaussian stochastic processes ${(X_t)}_{t\in \TT}$, ${(Y_s)}_{s\in \SS}$ are independent if and only if $\forall t\in\TT$, $\forall s\in\SS$, $\cov(X_t,Y_s)=0$.
+  \end{lemma}
+  \begin{proposition}
+    Two stochastic processes ${(X_t)}_{t\in \TT}$, ${(Y_s)}_{s\in \SS}$ are independent if and only if $\forall n\in\NN$, $\forall t_1,\ldots,t_n\in\TT$, $\forall s_1,\ldots,s_n\in\SS$ and $\forall f,g:\RR^n\to\RR$ bounded and measurable functions, we have:
+    \begin{multline*}
+      \Exp(f(X_{t_1},\ldots,X_{t_n})g(Y_{s_1},\ldots,Y_{s_n}))=\\=
+      \Exp(f(X_{t_1},\ldots,X_{t_n}))\Exp(g(Y_{s_1},\ldots,Y_{s_n}))
+    \end{multline*}
+  \end{proposition}
+  \subsubsection{Brownian motion}
+  \begin{theorem}[Strong law of large numbers for Brownian motion]
+    Let ${(B_t)}_{t\geq 0}$ be a Brownian motion. Then:
+    $$
+      \frac{B_t}{t}\underset{t\to\infty}{\overset{\text{a.s.}}{\longrightarrow}}0
+    $$
+  \end{theorem}
+  \begin{proof}
+    We already now that the process $s\to sB_{1/s} \indi{s>0}$ is a Brownian motion. In particular, we must have continuity at $0=B_0$.
+  \end{proof}
+  \begin{theorem}[Markov property for Brownian motion]
+    Let $B={(B_t)}_{t\geq 0}$ be a Brownian motion and $a\geq 0$ fixed. Then, the Brownian motion ${(B_{t+a}-B_a)}_{t\geq 0}$ is independent of ${(B_s)}_{s\in [0,a]}$.
+  \end{theorem}
+  \begin{proof}
+    The processes ${(B_s)}_{s\in[0,a]}$ and ${(B_{t+a}-B_a)}_{t\geq 0}$ are jointly Gaussian, because their coordinates are linear combinations of coordinates of the same Gaussian process $B$. Thus, by \mcref{lemma:indep_joint_gauss} it reduces to compute the following correlation:
+    $$
+      \cov(B_s,B_{t+a}-B_a)=s\wedge(t+a)-s\wedge a=0
+    $$
+  \end{proof}
+  \begin{remark}
+    Recall that $s\wedge t:=\min(s,t)$ and $s\vee t:=\max(s,t)$.
+  \end{remark}
+  \subsubsection{Martingales}
+  From now on, we will assume that we work in a filtered probability space $(\Omega,\mathcal{F},\Prob,{(\mathcal{F}_t)}_{t\geq 0})$.
+  \begin{proposition}
+    Let ${(B_t)}_{t\geq 0}$ be a Brownian motion. Then, the following processes are martingales ${(M_t)}_{t\geq 0}$ with respect to the filtration induced by ${(B_t)}_{t\geq 0}$:
+    \begin{itemize}
+      \item $M_t=B_t$
+      \item $M_t=B_t^2-t$
+      \item $M_t=\exp{\theta B_t-\frac{1}{2}\theta^2t}$, for any fixed $\theta\in\RR$.
+    \end{itemize}
+  \end{proposition}
+  \begin{proposition}
+    Let $A\subseteq \RR$ be a closed set and $X={(X_t)}_{t\geq 0}$ be an adapted continuous process. Then, the \emph{hitting time} of $A$ by $X$, defined as:
+    $$
+      T_A:=\inf\{t\geq 0:X_t\in A\}
+    $$
+    is a stopping time.
+  \end{proposition}
+  \begin{proof}
+    Using the continuity of $X$ and the fact that $A$ is closed, one can easily check that:
+    $$
+      \{T_A \leq t\}=\bigcap_{k\in\NN}\bigcup_{s\in[0,t]\cap\QQ}\left\{d(X_s,A)\leq\frac{1}{k}\right\}
+    $$
+    Now, $\left\{d(X_s,A)\leq\frac{1}{k}\right\}\in \mathcal{F}_s\subseteq \mathcal{F}_t$ because $X$ is adapted and $z\mapsto d(z,A)$ is measurable.
+    Thus, $\{T_A \leq t\}\in \mathcal{F}_t$ because it is a countable union and intersection of events in $\mathcal{F}_t$.
+  \end{proof}
+  \begin{theorem}[Doob's optional sampling theorem]
+    Let ${(M_t)}_{t\geq 0}$ be a continuous martingale and $T$ be a stopping time. Then, the \emph{stopped process} $M^T:={(M_{t\wedge T})}_{t\geq 0}$ is a continuous martingale. In particular, $\forall t\geq 0$, $\Exp(M_{t\wedge T})=\Exp(M_0)$. If $M^T$ is uniformly integrable and $T\overset{\text{a.s.}}{\leq}\infty$, then taking $t\to\infty$ we have $\Exp(M_T)=\Exp(M_0)$.
+  \end{theorem}
 \end{multicols}
 \end{document}
