@@ -3,6 +3,60 @@
 \begin{document}
 \changecolor{LTLD}
 \begin{multicols}{2}[\section{Limit theorem and large deviations}]
-
+  \subsection{Large deviations}
+  \subsubsection{Large deviations for \iid random variables}
+  \begin{definition}
+    Let $\alpha(\dd{x})$ be a probability distribution on $\RR$. Let $M(\lambda)=\int\exp{\lambda x}\alpha(\dd{x})$ be the moment generating function of $\alpha$. We define $Z(\lambda):= \log M(\lambda)$. Assume that $\exists \lambda^*$ such that $M(\lambda)<\infty$ if $\abs{\lambda}<\lambda^*$.
+  \end{definition}
+  \begin{remark}
+    Note that by REF JENSEN, $Z(\lambda)\geq \lambda m>-\infty$ for all $\lambda\in\RR$.
+  \end{remark}
+  \begin{definition}
+    We define $\mathcal{D}_Z:=\{\lambda\in\RR\mid Z(\lambda)<\infty\}$.
+  \end{definition}
+  \begin{remark}
+    Note that under our hypothesis, we have $0\in \Int \mathcal{D}_Z$.
+  \end{remark}
+  \begin{lemma}
+    We have:
+    \begin{enumerate}
+      \item $Z$ is convex.
+      \item $Z\in\mathcal{C}^1(\Int\mathcal{D}_Z)$ and
+            $$
+              Z'(\lambda)=\int x\exp{\lambda x-Z(\lambda)}\alpha(\dd{x})
+            $$
+    \end{enumerate}
+  \end{lemma}
+  \begin{proof}
+    \begin{enumerate}
+      \item Let $t\in[0,1]$. By \mnameref{RFA:holder} we have:
+            $$
+              M(t\lambda_1+(1-t)\lambda_2)\leq M(t\lambda_1)^tM((1-t)\lambda_2)^{1-t}
+            $$
+            Taking the logarithm we get the result.
+      \item
+    \end{enumerate}
+  \end{proof}
+  \begin{corollary}
+    We have $Z\in\mathcal{C}^\infty(\Int\mathcal{D}_Z)$ and moreover:
+    $$
+      Z''(\lambda)=\int x^2\exp{\lambda x-Z(\lambda)}\alpha(\dd{x})-{\left(\int x\exp{\lambda x-Z(\lambda)}\alpha(\dd{x})\right)}^2>0
+    $$
+  \end{corollary}
+  \begin{proof}
+    Note that $\alpha_\lambda(\dd{x}):=\exp{\lambda x-Z(\lambda)}\alpha(\dd{x})$ is a probability distribution on $\RR$. Thus, using the same technique as in the proof of the previous lemma, we get that $Z\in\mathcal{C}^\infty(\Int\mathcal{D}_Z)$ and the $Z''>0$ because it is a variance.
+  \end{proof}
+  \begin{remark}
+    Note that $Z''>0$ implies that $Z$ is strictly convex.
+  \end{remark}
+  \begin{definition}
+    We define the \emph{rate function} as the \emph{Legendre-Fenchel transform} of $Z$:
+    $$
+      I(x):=\sup_{\lambda\in\RR}(\lambda x-Z(\lambda))
+    $$
+  \end{definition}
+  \begin{remark}
+    Note that $I$ is convex (as it is the supremum of linear functions), $I(x)\geq 0$ for all $x\in\RR$ because $Z(0) = 0$, and $I(m)=0$.
+  \end{remark}
 \end{multicols}
 \end{document}
