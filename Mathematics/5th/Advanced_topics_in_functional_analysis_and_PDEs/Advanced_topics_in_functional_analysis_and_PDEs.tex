@@ -247,13 +247,13 @@
     From now on, we will denote $\RR_{\pm}^d:=\RR^{d-1}\times\RR_{\pm}$ and $\RR_0^d:=\RR^{d-1}\times\{0\}$.
   \end{remark}
   \begin{theorem}
-    For all $m\in\NN$ and all $1\leq p<\infty$, $\mathcal{C}^\infty(\overline{\RR_+^d})$ is dense in $W^{m,p}(\RR_+^d)$.
+    For all $m\in\NN$ and all $1\leq p<\infty$, $\mathcal{C}^\infty(\overline{\RR_{\geq 0}^d})$ is dense in $W^{m,p}(\RR_{\geq 0}^d)$.
   \end{theorem}
   \begin{proof}
     Let $$
       \tau_h(u)(x_1,\ldots, x_d):=u(x_1,\ldots, x_{d-1},x_d+h)
     $$
-    be the translation operator and set $u_\varepsilon:=\tau_{\varepsilon}(u)*\phi_\varepsilon$, where $\varepsilon>0$ and $\phi_\varepsilon$ is an approximation of identity. Then, $u_\varepsilon\in \mathcal{C}^\infty(\overline{\RR_+^d})$ by the properties of the convolution. Moreover:
+    be the translation operator and set $u_\varepsilon:=\tau_{\varepsilon}(u)*\phi_\varepsilon$, where $\varepsilon>0$ and $\phi_\varepsilon$ is an approximation of identity. Then, $u_\varepsilon\in \mathcal{C}^\infty(\overline{\RR_{\geq 0}^d})$ by the properties of the convolution. Moreover:
     \begin{multline*}
       \norm{\partial^\alpha u_\varepsilon-\partial^\alpha u}_p \leq \norm{\partial^\alpha u_\varepsilon-\partial^\alpha (\tau_{\varepsilon}u)}_p+\norm{\partial^\alpha (\tau_{\varepsilon}u)-\partial^\alpha u}_p                         \\
       \leq \norm{(\partial^\alpha \tau_\varepsilon u)*\phi_\varepsilon-\partial^\alpha (\tau_{\varepsilon}u)}_p+\norm{\tau_{\varepsilon}(\partial^\alpha u)-\partial^\alpha u}_p
@@ -264,24 +264,24 @@
     The same proof shows that $\mathcal{C}^\infty(\overline{\Omega})$ is dense in $W^{m,p}(\Omega)$, if $\Omega$ is bounded with $\Fr{\Omega}$ of class $\mathcal{C}^1$. This time, one needs to locally translate u along the normal direction.
   \end{remark}
   \begin{theorem}
-    For all $m\in\NN$ and all $1\leq p<\infty$, there is an extension operator $E:W^{m,p}(\RR_+^d)\to W^{m,p}(\RR^d)$.
+    For all $m\in\NN$ and all $1\leq p<\infty$, there is an extension operator $E:W^{m,p}(\RR_{\geq 0}^d)\to W^{m,p}(\RR^d)$.
   \end{theorem}
   \begin{proof}
-    We only do the proof for $d=1$ and $m=1$ to highlight the main ideas. Let $u\in W^{1,p}(\RR_+)$. We define the \emph{first order reflection}:
+    We only do the proof for $d=1$ and $m=1$ to highlight the main ideas. Let $u\in W^{1,p}(\RR_{\geq 0})$. We define the \emph{first order reflection}:
     $$
       \bar{u}:=\begin{cases}
         u(x)             & \text{if }x\geq 0 \\
         -3u(-x)+4u(-x/2) & \text{if }x<0
       \end{cases}
     $$
-    By density, it is enough to prove the result for $u\in \mathcal{C}^1(\RR_+)$. An easy check shows that $\bar{u}\in \mathcal{C}^1(\RR)$. Moreover, we have:
+    By density, it is enough to prove the result for $u\in \mathcal{C}^1(\RR_{\geq 0})$. An easy check shows that $\bar{u}\in \mathcal{C}^1(\RR)$. Moreover, we have:
     \begin{align*}
-      {\norm{\bar{u}}_{W^{1,p}(\RR)}}^p & =\int_{\RR}{\abs{\bar{u}}^p}+{\abs{\bar{u}'}^p}             \\
+      {\norm{\bar{u}}_{W^{1,p}(\RR)}}^p & =\int_{\RR}{\abs{\bar{u}}^p}+{\abs{\bar{u}'}^p}                                                 \\
       \begin{split}
-        &=\!\int_{\RR_+}\!{\abs{u}^p}\!+\!\!{\abs{u'}^p}\!+\!\int_{\RR_-}\![{\abs{-3u(-x)+4u(-x/2)}^p}+\\
+        &=\!\int_{\RR_{\geq 0}}\!{\abs{u}^p}\!+\!\!{\abs{u'}^p}\!+\!\int_{\RR_{\leq 0}}\![{\abs{-3u(-x)+4u(-x/2)}^p}+\\
         &\hspace{2.75cm}+{\abs{3u'(-x)-2u'(-x/2)}^p}]
       \end{split} \\
-                                        & \leq C{\norm{u}_{W^{1,p}(\RR_+)}}^p
+                                        & \leq C{\norm{u}_{W^{1,p}(\RR_{\geq 0})}}^p
     \end{align*}
     for some constant $C>0$. Thus, $E$ is a bounded extension operator.
   \end{proof}
@@ -300,7 +300,7 @@
     The proof for higher derivatives $m \geq 1$ needs to add more terms in order to make the junction smooth enough.
   \end{remark}
   \begin{definition}
-    We say that a domain $\Omega\subseteq \RR^d$ has boundary of class $\mathcal{C}^k$ if $\forall x\in \Fr{\Omega}$ there is a neighborhood $\varepsilon,\delta>0$ and a $\mathcal{C}^k$-diffeomorphism $\phi:B(x,\varepsilon)\to B(0,\delta)$ so that $\phi(x)=0$ and $\phi(B(x,\varepsilon)\cap \Omega)=B(0,\delta)\cap \RR_+^d$. Note that in particular this implies that $\phi(\Fr{\Omega}\cap B(x,\varepsilon))=B(0,\delta)\cap \RR_0^d$.
+    We say that a domain $\Omega\subseteq \RR^d$ has boundary of class $\mathcal{C}^k$ if $\forall x\in \Fr{\Omega}$ there is a neighborhood $\varepsilon,\delta>0$ and a $\mathcal{C}^k$-diffeomorphism $\phi:B(x,\varepsilon)\to B(0,\delta)$ so that $\phi(x)=0$ and $\phi(B(x,\varepsilon)\cap \Omega)=B(0,\delta)\cap \RR_{\geq 0}^d$. Note that in particular this implies that $\phi(\Fr{\Omega}\cap B(x,\varepsilon))=B(0,\delta)\cap \RR_0^d$.
   \end{definition}
   \begin{theorem}
     Let $\Omega\subseteq \RR^d$ be a bounded domain with $\mathcal{C}^k$ boundary. Then, $\forall m\leq k$ and all $1\leq p<\infty$, there is an extension operator $E:W^{m,p}(\Omega)\to W^{m,p}(\RR^d)$.
@@ -320,16 +320,16 @@
   \end{theorem}
   \subsubsection{Trace operators}
   \begin{theorem}
-    Let $1\leq p<\infty$ and $u\in W^{1,p}(\RR_+^d)$. Then, the function $u|_{\RR_0^d}:\RR^{d-1}\to\CC$ belongs to $L^p(\RR^{d-1})$.
+    Let $1\leq p<\infty$ and $u\in W^{1,p}(\RR_{\geq 0}^d)$. Then, the function $u|_{\RR_0^d}:\RR^{d-1}\to\CC$ belongs to $L^p(\RR^{d-1})$.
   \end{theorem}
   \begin{definition}
     We define the \emph{trace operator} as the map:
     \begin{align*}
-      \function{T}{W^{1,p}(\RR_+^d)}{L^p(\RR^{d-1})}{u}{u|_{\RR_0^d}}
+      \function{T}{W^{1,p}(\RR_{\geq 0}^d)}{L^p(\RR^{d-1})}{u}{u|_{\RR_0^d}}
     \end{align*}
   \end{definition}
   \begin{theorem}
-    Let $1\leq p<\infty$ and $u\in W^{1,p}(\RR_+^d)$. Then, $Tu=0$ if and only if $u\in W_0^{1,p}(\RR_+^d)$.
+    Let $1\leq p<\infty$ and $u\in W^{1,p}(\RR_{\geq 0}^d)$. Then, $Tu=0$ if and only if $u\in W_0^{1,p}(\RR_{\geq 0}^d)$.
   \end{theorem}
   \begin{lemma}
     Let $\Omega\subseteq \RR^d$ be an open set and $u\in W^{1,p}(\Omega)$ with $1\leq p\leq \infty$. Then, $\norm{\grad \abs{u}}\almoste{\leq}\norm{\grad u}$.

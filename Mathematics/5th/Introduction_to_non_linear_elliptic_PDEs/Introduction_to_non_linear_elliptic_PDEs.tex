@@ -3,6 +3,49 @@
 \begin{document}
 \changecolor{INLEPDE}
 \begin{multicols}{2}[\section{Introduction to non linear elliptic PDEs}]
-
+  \subsection{Introduction}
+  \begin{definition}
+    Let $a_{ij}$, $b_j$, $c$, $f$ be known functions on $\Omega\subseteq \RR^d$. Usually we will denote $\vf{A}=(a_{ij})$ and $\vf{b}=(b_j)$ A \emph{linear second-order PDE} is an equation of the form:
+    \begin{equation*}
+      -\sum_{i,j=1}^da_{ij}(x){\partial_{ij}}^2u(x)+\sum_{j=1}^db_j(x)\partial_ju(x)+c(x)u(x)=f(x)
+    \end{equation*}
+    where $u:\Omega\to \RR$ is the unknown function. This form is called \emph{non-divergence form}. If we write the equation in the form:
+    \begin{multline*}
+      -\sum_{i=1}^d\pdv{}{x_i}\left(\sum_{j=1}^da_{ij}(x)\partial_ju(x)\right)+\sum_{j=1}^db_j(x)\partial_ju(x)+\\+c(x)u(x)=f(x)
+    \end{multline*}
+    then we say that the equation is in \emph{divergence form}. Together with the PDE we usually impose boundary conditions on $\partial\Omega$. The \emph{Dirichlet boundary condition} is:
+    $$
+      u|_{\partial\Omega}=g
+    $$
+    and it is called \emph{homogeneous} if $g=0$. The \emph{Neumann boundary condition} is:
+    $$
+      \langle \vf{n},\vf{A} \nabla u\rangle|_{\partial\Omega}=g
+    $$
+    where we have assumed that the boundary of $\Omega$ is smooth enough to define the normal vector $\vf{n}$. The condition is called \emph{homogeneous} if $g=0$. Note that if $\vf{A}=\vf{I}_d$, then the Neumann boundary condition is just $\partial_{\vf{n}} u=g$.
+  \end{definition}
+  \begin{definition}
+    Let $a_{ij},b_j,c$ be known functions on $\Omega\subseteq \RR^d$. We say that the operator $$L=-\sum_{i,j=1}^da_{ij}{\partial_{ij}}^2 + \sum_{j=1}^d b_j\partial_j+c$$ is \emph{uniformly elliptic} if there exists $\theta>0$ such that for all $x\in \Omega$ and all $p\in \RR^d$ we have:
+    \begin{equation}
+      Q_x(p)=\sum_{i,j=1}^da_{ij}(x)p_ip_j\geq \theta \sum_{i=1}^{d} {p_i}^2
+    \end{equation}
+  \end{definition}
+  \begin{remark}
+    Geometrically speaking, this implies that the sets
+    $$
+      \xi_{x,h}=\{ p\in \RR^d: Q_x(p)=h\}
+    $$
+    are ellipsoids.
+  \end{remark}
+  \subsection{Hilbert space methods for divergence form linear PDEs}
+  In this section, we will assume that $\Omega\subset\RR^d$ is an open, bounded subset, $a_{ij}=a_{ji}$ and $a_{ij},b_j,c\in L^\infty(\Omega)$.
+  \subsubsection{Fredholm alternative}
+  \begin{theorem}[Abstract Fredholm alternative]
+    Let $H$ be Hilbert and $K:H\to H$ be a compact linear operator. Then:
+    \begin{enumerate}
+      \item $\ker(\id-K)$ and $\ker(\id-K^*)$ are both finite dimensional and they have the same dimension.
+      \item $\im(\id-K)={(\ker(\id-K^*))}^\perp$. In particular, $\im(\id-K)$ is closed.
+      \item Either $\ker(\id-K)\ne\{0\}$ or $\id -K$ is and isomorphism.
+    \end{enumerate}
+  \end{theorem}
 \end{multicols}
 \end{document}

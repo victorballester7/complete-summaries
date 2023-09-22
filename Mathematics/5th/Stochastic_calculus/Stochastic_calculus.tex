@@ -25,7 +25,7 @@
   \begin{definition}
     Let ${(X_t)}_{t\in \TT}$, ${(Y_s)}_{s\in \SS}$ be two stochastic processes. We say that they are \emph{jointly Gaussian} if the concatenated process $({(X_t)}_{t\in \TT},{(Y_s)}_{s\in \SS})$ is Gaussian.
   \end{definition}
-  \begin{lemma}\label{lemma:indep_joint_gauss}
+  \begin{lemma}\label{SC:indep_joint_gauss}
     Two jointly Gaussian stochastic processes ${(X_t)}_{t\in \TT}$, ${(Y_s)}_{s\in \SS}$ are independent if and only if $\forall t\in\TT$, $\forall s\in\SS$, $\cov(X_t,Y_s)=0$.
   \end{lemma}
   \begin{proposition}
@@ -49,7 +49,7 @@
     Let $B={(B_t)}_{t\geq 0}$ be a Brownian motion and $a\geq 0$ fixed. Then, the Brownian motion ${(B_{t+a}-B_a)}_{t\geq 0}$ is independent of ${(B_s)}_{s\in [0,a]}$.
   \end{theorem}
   \begin{proof}
-    The processes ${(B_s)}_{s\in[0,a]}$ and ${(B_{t+a}-B_a)}_{t\geq 0}$ are jointly Gaussian, because their coordinates are linear combinations of coordinates of the same Gaussian process $B$. Thus, by \mcref{lemma:indep_joint_gauss} it reduces to compute the following correlation:
+    The processes ${(B_s)}_{s\in[0,a]}$ and ${(B_{t+a}-B_a)}_{t\geq 0}$ are jointly Gaussian, because their coordinates are linear combinations of coordinates of the same Gaussian process $B$. Thus, by \mcref{SC:indep_joint_gauss} it reduces to compute the following correlation:
     $$
       \cov(B_s,B_{t+a}-B_a)=s\wedge(t+a)-s\wedge a=0
     $$
@@ -62,6 +62,14 @@
     Let ${(X_t)}_{t\geq 0}$ be a stochastic process. We define the \emph{natural filtration} of $X$ as $\mathcal{F}^X:={(\mathcal{F}_t^X)}_{t\geq 0}$, where $\mathcal{F}_t^X:=\sigma(X_s:s\leq t)$.
   \end{definition}
   From now on, we will assume that we work in a filtered probability space $(\Omega,\mathcal{F},\Prob,{(\mathcal{F}_t)}_{t\geq 0})$.
+  \begin{definition}[Martingale]
+    A stochastic process ${(X_t)}_{t\geq 0}$ is a \emph{martingale} if:
+    \begin{enumerate}
+      \item it is \emph{adapted}, i.e.\ $X_t$ is $\mathcal{F}_t$-measurable for all $t\geq 0$.
+      \item $\Exp(\abs{X_t})<\infty$ for all $t\geq 0$.
+      \item $\Exp(X_t\mid \mathcal{F}_s)=X_s$ for all $0\leq s\leq t$.
+    \end{enumerate}
+  \end{definition}
   \begin{proposition}
     Let $B={(B_t)}_{t\geq 0}$ be a Brownian motion. Then, the following processes are martingales ${(M_t)}_{t\geq 0}$ with respect to the natural filtration induced by $B$:
     \begin{itemize}
@@ -88,5 +96,153 @@
   \begin{theorem}[Doob's optional sampling theorem]
     Let ${(M_t)}_{t\geq 0}$ be a continuous martingale and $T$ be a stopping time. Then, the \emph{stopped process} $M^T:={(M_{t\wedge T})}_{t\geq 0}$ is a continuous martingale. In particular, $\forall t\geq 0$, $\Exp(M_{t\wedge T})=\Exp(M_0)$. If $M^T$ is uniformly integrable and $T\overset{\text{a.s.}}{\leq}\infty$, then taking $t\to\infty$ we have $\Exp(M_T)=\Exp(M_0)$.
   \end{theorem}
+  \begin{lemma}[Orthogonality of martingales]\label{SC:orthogonality_martingales}
+    Let ${(M_t)}_{t\geq 0}$ be a continuous martingale and let $0\leq s\leq t$. Then:
+    $$
+      \Exp({(M_t-M_s)}^2\mid \mathcal{F}_s)=\Exp({M_t}^2-{M_s}^2\mid \mathcal{F}_s)
+    $$
+  \end{lemma}
+  \begin{proof}
+    We have that:
+    \begin{multline*}
+      \Exp({(M_t-M_s)}^2\mid \mathcal{F}_s) =\Exp({M_t}^2-2M_tM_s+{M_s}^2\mid \mathcal{F}_s) =\\=\Exp({M_t}^2+{M_s}^2\!\mid \!\mathcal{F}_s)-2M_s\Exp(M_t\!\mid\! \mathcal{F}_s) =\Exp({M_t}^2-{M_s}^2\!\mid\! \mathcal{F}_s)
+    \end{multline*}
+  \end{proof}
+  \subsubsection{Quadratic variation}
+  \begin{definition}
+    Let $f:\RR_{\geq 0}\to\RR$ be a function. We define the \emph{absoulte variation} of $f$ on the interval $[s,t]$ as:
+    $$
+      V(f,s,t):=\sup_{{(t_k)}_{0\leq k\leq n}\in \mathrm{P}([s,t])}\sum_{k=1}^{n}\abs{f(t_{k+1})-f(t_k)}
+    $$
+    where $\mathrm{P}([s,t])$ is the set of all partitions of $[s,t]$. A function has \emph{finite variation} if $V(f,s,t)<\infty$ for all $0\leq s\leq t$.
+  \end{definition}
+  \begin{lemma}\label{SC:properties_variation}
+    Let $f,g:\RR_{\geq 0}\to\RR$ be a function and $0\leq s\leq t$. Then:
+    \begin{itemize}
+      \item $V(f,s,t)=V(f,s,u)+V(f,u,t)$, for all $s\leq u\leq t$.
+      \item If $f\in C^1$, then $V(f,s,t)=\int_s^t\abs{f'(u)}\dd{u}$.
+      \item If $f$ is monotone, then $V(f,s,t)=\abs{f(t)-f(s)}$.
+      \item $\displaystyle V(f+g,s,t)\leq V(f,s,t)+V(g,s,t)$.
+      \item Finite variation functions form a vector space.
+    \end{itemize}
+  \end{lemma}
+  \begin{proposition}\label{SC:difference_of_increasing}
+    Let $f:\RR_{\geq 0}\to\RR$. Then, $f$ has finite variation if and only if it can be written as the difference of two non-decreasing functions.
+  \end{proposition}
+  \begin{sproof}
+    \mcref{SC:properties_variation} gives us the implication to the left. For the other one, note that the functions $f_1(t):=V(f,0,t)$ and $f_2(t):=V(f,0,t)-f(t)$ are non-decreasing.
+  \end{sproof}
+  \begin{theorem}[Quadratic variation]
+    Let $M={(M_t)}_{t\geq 0}$ be a continuous square-integrable martingale. Then, for each $t\geq 0$ the limit
+    $$
+      {\langle M\rangle}_t:=\lim_{n\to\infty}\sum_{k=1}^{n}\abs{M_{t_k^n}-M_{t_{k-1}^n}}^2
+    $$
+    exists in $L^1$ and does not depend on the partition ${(t_k^n)}_{0\leq k\leq n}\in \mathrm{P}([0,t])$ chosen as long as the \emph{mesh} $\Delta_n:= \max_{1\leq k\leq n}(t_k^n-t_{k-1}^n)$ goes to $0$ as $n\to\infty$. Moreover, $\langle M\rangle=({\langle M\rangle}_t)_{t\geq 0}$ has the following properties:
+    \begin{enumerate}
+      \item\label{SC:quad_var1} ${\langle M\rangle}_0=0$
+      \item\label{SC:quad_var2} $\langle M\rangle$ is non-decreasing.
+      \item\label{SC:quad_var3} The function $t\mapsto {\langle M\rangle}_t$ is continuous.
+      \item\label{SC:quad_var4} ${({M_t}^2-{\langle M\rangle}_t)}_{t\geq 0}$ is a martingale.
+    \end{enumerate}
+  \end{theorem}
+  \begin{proof}
+    We omit the proof of the existence and continuity. We will only prove the last property. Let $0\leq s\leq t$ and ${(t_k^n)}_{0\leq k\leq n}\in \mathrm{P}([s,t])$ be such that $\Delta_n\to 0$. Then:
+    \begin{align*}
+      \Exp({M_t}^2-{M_s}^2\mid \mathcal{F}_s) & =\sum_{k=1}^n \Exp({M_{t_k^n}}^2-{M_{t_{k-1}^n}}^2\mid \mathcal{F}_s)          \\
+                                              & =\sum_{k=1}^n \Exp\left({(M_{t_k}^n-M_{t_{k-1}}^n)}^2\mid \mathcal{F}_s\right) \\
+    \end{align*}
+    by the \mnameref{SC:orthogonality_martingales}. Now since we have convergence of $\sum_{k=1}^{n}{(M_{t_k}^n-M_{t_{k-1}}^n)}^2$ to ${\langle M\rangle}_t-{\langle M\rangle}_s$ in $L^1$, we get the result:
+    $$
+      \Exp({M_t}^2-{M_s}^2\mid \mathcal{F}_s)=\Exp({\langle M\rangle}_t-{\langle M\rangle}_s\mid \mathcal{F}_s)
+    $$
+  \end{proof}
+  \begin{proposition}
+    Let $B$ be a Brownian motion. Then:
+    $$
+      \Prob(\forall s,t\geq 0, V(B,s,t)=\infty)=1
+    $$
+    But, ${\langle B\rangle}_t=t$ for all $t\geq 0$.
+  \end{proposition}
+  \begin{proof}
+    Let $B={(B_t)}_{t\geq 0}$. Then:
+    $$
+      V(B,s,t)\!\geq\! \sum_{k=1}^{n}\abs{B_{s+k\frac{t-s}{n}}-B_{s+(k-1)\frac{t-s}{n}}}\!=\!\sqrt{\frac{t-s}{n}}\sum_{k=1}^{n}\abs{\xi_k}
+    $$
+    where $\xi_k$ are \iid $N(0,1)$. By the \mnameref{P:weaklaw} we get the result. The second part is similar, but we get convergence instead.
+  \end{proof}
+  \begin{proposition}\label{SC:prop_variation_fg}
+    If a function $f$ has finite variation and $g$ is continuous, then:
+    $$
+      \sum_{k=1}^n(f(t_k)-f(t_{k-1}))(g(t_k)-g(t_{k-1}))\overset{n\to\infty}{\longrightarrow}0
+    $$
+  \end{proposition}
+  \begin{proof}
+    Note that:
+    \begin{multline*}
+      \abs{\sum_{k=1}^n(f(t_k)-f(t_{k-1}))(g(t_k)-g(t_{k-1}))}\leq\\\leq V(f,0,t)\max_{\substack{0\leq u\leq v\leq t\\\abs{u-v}\leq \Delta_n}}\abs{g(u)-g(v)}
+    \end{multline*}
+    which goes to zero by uniform continuity of $g$ at $[0,t]$.
+  \end{proof}
+  \begin{corollary}\label{SC:corollary_finite_variation}
+    Let $M={(M_t)}_{t\geq 0}$ be a continuous square-integrable martingale with finite variation a.s. Fix $t\geq 0$. By \mcref{SC:prop_variation_fg} we have that ${\langle M\rangle}_t=0$
+    Then:
+    $$
+      \Prob(\forall t\geq 0,\ M_t=M_0)=1
+    $$
+  \end{corollary}
+  \begin{proof}
+    By \mnameref{SC:orthogonality_martingales}, we have:
+    $$
+      \Exp({(M_t-M_0)}^2)=\Exp({M_t}^2) - \Exp({M_0}^2) = \Exp({\langle M\rangle}_t)=0
+    $$
+    where the penultimate equality follows from the fact that ${M_t}^2-{\langle M\rangle}_t$ is a martingale and so it has constant expectation. This shows that $\Prob (\forall t\geq 0,\ M_t=M_0)=1$. Now we can use the fact that $M$ is continuous to conclude using $t\in\QQ$.
+  \end{proof}
+  \begin{proposition}
+    The quadratic variation is the unique process that satisfies \mcref{SC:quad_var1,SC:quad_var2,SC:quad_var3,SC:quad_var4}.
+  \end{proposition}
+  \begin{proof}
+    Let $A$ be another process satisfying such properties. Then, ${M}^2-{\langle M\rangle}$ and ${M}^2-A$ are both martingales. Thus, $A-{\langle M\rangle}$ is also a martingale. But it is also continuous and has finite variation (by \mcref{SC:difference_of_increasing}). So by \mcref{SC:corollary_finite_variation}, $A={\langle M\rangle}$.
+  \end{proof}
+  \subsubsection{Local martingales}
+  \begin{definition}
+    A stochastic process ${(M_t)}_{t\geq 0}$ is a \emph{local martingale} if there exists a sequence of stopping times ${(T_n)}_{n\in\NN}$ (called \emph{localizing sequence}) such that:
+    \begin{enumerate}
+      \item $T_n\nearrow \infty$ a.s.
+      \item $M^{T_n}:={(M_{t\wedge T_n})}_{t\geq 0}$ is a martingale for all $n\in\NN$.
+    \end{enumerate}
+  \end{definition}
+  \begin{remark}
+    If $M$ is a martingale, then $M$ is a local martingale by taking $T_n=+\infty$ for all $n\in\NN$.
+  \end{remark}
+  \begin{remark}
+    Any local martingale is adapted because it is the pointwise limit of $M^{T_n}$, which are adapted by definition.
+  \end{remark}
+  \begin{proposition}
+    Let $M={(M_t)}_{t\geq 0}$ be a continuous local martingale. Then, if $\forall t\geq 0$ we have
+    $$
+      \Exp\left(\sup_{0\leq s\leq t}\abs{M_s}\right)<\infty
+    $$
+    then $M$ is a martingale.
+  \end{proposition}
+  \begin{proof}
+    We've argued that local martingales are automatically adapted. Moreover:
+    $$
+      \Exp(\abs{M_t})\leq \Exp\left(\sup_{0\leq s\leq t}\abs{M_s}\right)<\infty
+    $$
+    Finally, fix $0\leq s\leq t$. For all $n\in\NN$ we have:
+    $$
+      \Exp(M_{t\wedge T_n}\mid \mathcal{F}_s)=M_{s\wedge T_n}
+    $$
+    And using the \mnameref{P:dominated} with $M_{t\wedge T_n}\leq \sup_{0\leq s\leq t}\abs{M_s}$ we conclude the result.
+  \end{proof}
+
+  \begin{theorem}[Levy's characterization of Brownian motion]
+    Let $M={(M_t)}_{t\geq 0}$ be a  stochastic process. Then, the following are equivalent:
+    \begin{enumerate}
+      \item $M$ is a continuous local square-integrable martingale with $M_0=0$ and ${\langle M\rangle}_t=t$.
+      \item $M$ is a ${(\mathcal{F}_t)}_{t\geq 0}$-Brownian motion.
+    \end{enumerate}
+  \end{theorem}
+
 \end{multicols}
 \end{document}
