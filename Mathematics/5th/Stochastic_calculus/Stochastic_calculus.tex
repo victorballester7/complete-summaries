@@ -36,6 +36,22 @@
     \end{multline*}
   \end{proposition}
   \subsubsection{Brownian motion}
+  \begin{definition}
+    A \emph{Brownian motion} is a stochastic process ${(B_t)}_{t\geq 0}$ such that:
+    \begin{enumerate}
+      \item $B$ is Gaussian with $\Exp(B_t)=0$ and $\cov(B_s,B_t)=s\wedge t$.
+      \item $B$ has continuous paths.
+    \end{enumerate}
+  \end{definition}
+  \begin{proposition}
+    Let $B$ be a Brownian motion. Then:
+    \begin{enumerate}
+      \item $B_0=0$ a.s.
+      \item $B$ has independent increments.
+      \item $B$ has stationary increments.
+    \end{enumerate}
+    Conversely, any stochastic process with these properties has the law of a Brownian motion.
+  \end{proposition}
   \begin{theorem}[Strong law of large numbers for Brownian motion]
     Let ${(B_t)}_{t\geq 0}$ be a Brownian motion. Then:
     $$
@@ -93,7 +109,7 @@
     Now, $\left\{d(X_s,A)\leq\frac{1}{k}\right\}\in \mathcal{F}_s\subseteq \mathcal{F}_t$ because $X$ is adapted and $z\mapsto d(z,A)$ is measurable.
     Thus, $\{T_A \leq t\}\in \mathcal{F}_t$ because it is a countable union and intersection of events in $\mathcal{F}_t$.
   \end{proof}
-  \begin{theorem}[Doob's optional sampling theorem]
+  \begin{theorem}[Doob's optional sampling theorem]\label{SC:doob_sampling}
     Let ${(M_t)}_{t\geq 0}$ be a continuous martingale and $T$ be a stopping time. Then, the \emph{stopped process} $M^T:={(M_{t\wedge T})}_{t\geq 0}$ is a continuous martingale. In particular, $\forall t\geq 0$, $\Exp(M_{t\wedge T})=\Exp(M_0)$. If $M^T$ is uniformly integrable and $T\overset{\text{a.s.}}{\leq}\infty$, then taking $t\to\infty$ we have $\Exp(M_T)=\Exp(M_0)$.
   \end{theorem}
   \begin{lemma}[Orthogonality of martingales]\label{SC:orthogonality_martingales}
@@ -205,7 +221,7 @@
   \end{proof}
   \subsubsection{Local martingales}
   \begin{definition}
-    A stochastic process ${(M_t)}_{t\geq 0}$ is a \emph{local martingale} if there exists a sequence of stopping times ${(T_n)}_{n\in\NN}$ (called \emph{localizing sequence}) such that:
+    A stochastic process ${(M_t)}_{t\geq 0}$ is a \emph{continuous local martingale} if there exists a sequence of stopping times ${(T_n)}_{n\in\NN}$ (called \emph{localizing sequence}) such that:
     \begin{enumerate}
       \item $T_n\nearrow \infty$ a.s.
       \item $M^{T_n}:={(M_{t\wedge T_n})}_{t\geq 0}$ is a martingale for all $n\in\NN$.
@@ -235,14 +251,49 @@
     $$
     And using the \mnameref{P:dominated} with $M_{t\wedge T_n}\leq \sup_{0\leq s\leq t}\abs{M_s}$ we conclude the result.
   \end{proof}
-
+  \begin{remark}
+    Note that if $M$ is a continuous local martingale with $M_0=0$, then we can always take $T_n=\inf\{t\geq 0:\abs{M_t}\geq n\}$ as a localizing sequence.
+  \end{remark}
+  \begin{theorem}[Doob's optional sampling theorem for local martingales]
+    Let $M={(M_t)}_{t\geq 0}$ be a continuous local martingale and $T$ be a stopping time. Then, the stopped process $M^T:={(M_{t\wedge T})}_{t\geq 0}$ is a continuous local martingale.
+  \end{theorem}
+  \begin{proof}
+    Let ${(T_n)}_{n\in\NN}$ be a localizing sequence for $M$. Since $M^{T_n}$ is a continuous martingale, by \mnameref{SC:doob_sampling} we have that $M^{T_n\wedge T}$ is a continuous martingale. Thus, $M^T$ is a local martingale with localizing sequence ${(T_n)}_{n\in\NN}$.
+  \end{proof}
+  \begin{proposition}
+    Continuous local martingales form a vector space.
+  \end{proposition}
+  \begin{proof}
+    Let $M$, $\tilde{M}$ be continuous local martingales with localizing sequences ${(T_n)}_{n\in\NN}$ and ${(\tilde{T}_n)}_{n\in\NN}$ respectively and $\lambda,\tilde{\lambda}\in\RR$. Then, ${(T_n\wedge \tilde{T}_n)}_{n\in\NN}$ is a localizing sequence for both $M$ and $\tilde{M}$ and so $\lambda M^{T_n\wedge \tilde{T}_n}+\tilde{\lambda}\tilde{M}^{T_n\wedge \tilde{T}_n}$ is a martingale.
+  \end{proof}
+  \begin{proposition}
+    If $M$ is a continuous local martingale which has finite variation a.s., then:
+    $$
+      \Prob(\forall t\geq 0,\ M_t=M_0)=1
+    $$
+  \end{proposition}
+  \begin{proof}
+    Let ${(T_n)}_{n\in\NN}$ be a localizing sequence for $M$. Then, $M^{T_n}$ is a martingale and $V(M^{T_n},0,t)=V(M,0,t\wedge T_n)<\infty$. Thus, by \mcref{SC:corollary_finite_variation} we have that $M^{T_n}_t=M^{T_n}_0$ $\forall t\geq 0$ and $n\in\NN$. Taking $n\to\infty$ we get the result.
+  \end{proof}
+  \begin{proposition}
+    Let $M$ be a continuous local martingale. Then, the limit
+    $$
+      {\langle M\rangle}_t:=\lim_{n\to\infty}\sum_{k=1}^{n}\abs{M_{t_k^n}-M_{t_{k-1}^n}}^2
+    $$
+    exists in probability for any $t\geq 0$ and does not depend on the partition ${(t_k^n)}_{0\leq k\leq n}\in \mathrm{P}([0,t])$ chosen as long as $\Delta_n\to 0$. Moreover, $\langle M\rangle=({\langle M\rangle}_t)_{t\geq 0}$ is the unique process (up to modification) such that:
+    \begin{enumerate}
+      \item ${\langle M\rangle}_0=0$
+      \item $t\mapsto {\langle M\rangle}_t$ is a.s.\ continuous.
+      \item $\langle M\rangle$ is a.s.\ non-decreasing.
+      \item ${({M_t}^2-{\langle M\rangle}_t)}_{t\geq 0}$ is a continuous local martingale.
+    \end{enumerate}
+  \end{proposition}
   \begin{theorem}[Levy's characterization of Brownian motion]
-    Let $M={(M_t)}_{t\geq 0}$ be a  stochastic process. Then, the following are equivalent:
+    Let $M={(M_t)}_{t\geq 0}$ be a stochastic process. Then, the following are equivalent:
     \begin{enumerate}
       \item $M$ is a continuous local square-integrable martingale with $M_0=0$ and ${\langle M\rangle}_t=t$.
       \item $M$ is a ${(\mathcal{F}_t)}_{t\geq 0}$-Brownian motion.
     \end{enumerate}
   \end{theorem}
-
 \end{multicols}
 \end{document}
