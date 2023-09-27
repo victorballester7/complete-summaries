@@ -4,7 +4,7 @@
 \changecolor{ADS}
 \begin{multicols}{2}[\section{Advanced dynamical sytems}]
   \subsection{Introduction}
-  \subsubsection{Rotations in \texorpdfstring{$\S^1$}{S1}}
+  \subsubsection{Maps in \texorpdfstring{$\S^1$}{S1}}
   \begin{proposition}
     Let $\alpha=\frac{p}{q}\in\QQ$ and let $R_\alpha:\S^1\to \S^1$ be the rotation of angle $\alpha$. Then, all the points of $\S^1$ are periodic for $R_\alpha$ with period $q$.
   \end{proposition}
@@ -16,6 +16,64 @@
   \end{proposition}
   \begin{proof}
     Let $\varepsilon>0$, $x,y\in \S^1$. Discretize $\S^1$ in intervals of length at most $\frac{1}{\varepsilon}$. Then, $\exists m,n\in \NN$ with $m< n\leq \frac{1}{\varepsilon}+1$ such that ${R_\alpha}^m x$ and ${R_\alpha}^nx$ are in the same interval. Thus, $\abs{{R_\alpha}^{n-m}x-x}<\varepsilon$. Now, concatenating ${R_\alpha}^{n-m}x$ repeatedly, we will eventually have $\abs{{R_\alpha}^{k(n-m)}x - y}<\varepsilon$ for some $k\in \NN$.
+  \end{proof}
+  \begin{corollary}
+    Let $\alpha\in\RR\setminus\QQ$ and $A\subset \S^1$ be a non-empty closed invariant set for $R_\alpha$. Then, $A=\S^1$.
+  \end{corollary}
+  \begin{proof}
+    Let $x\in \S^1$ and $y\in A$. Then, $\forall k\in\NN$ $\exists n_k\in\NN$ such that $R_\alpha^{n_k}y\in(x-\frac{1}{k},x+\frac{1}{k})$. Thus, $R_\alpha^{n_k}y\to x$ and $x\in A$ because $A$ is closed and $R_\alpha^{n_k}y\in A$ $\forall k\in\NN$.
+  \end{proof}
+  \begin{definition}
+    Consider the set $$\Sigma_m
+      := \{(x_1,x_2,\ldots):x_i\in\{0,1,\ldots,m-1\}\}$$
+    We define the \emph{shift map} as:
+    $$
+      \function{\sigma_m}{\Sigma_m}{\Sigma_m}{(x_1,x_2,\ldots)}{(x_2,x_3,\ldots)}
+    $$
+  \end{definition}
+  \begin{remark}
+    Note that some elements in $[0,1]$ have two different representations in base-$m$ identified as elements of $\Sigma_m$. So we can think of $\Sigma_m$ a the quotient space $\quot{\Sigma_m}{\sim}$ where $(x_1,x_2,\ldots)\sim (y_1,y_2,\ldots)$ if and only if $\sum_{i=1}^\infty \frac{x_i}{m^i}=\sum_{i=1}^\infty \frac{y_i}{m^i}$.
+  \end{remark}
+  \begin{proposition}
+    Let $m\in\NN$. Consider the \emph{expansion map}
+    $$
+      \function{E_m}{\S^1}{\S^1}{x}{mx}
+    $$
+    Then, if $\phi:\Sigma_m\to \S^1$ is the map $\phi(x_1,x_2,\ldots)=\sum_{i=1}^\infty \frac{x_i}{m^i}$, we have that $E_m\circ \phi=\phi\circ \sigma_m$. In particular, $\phi$ is a bijection, and thus it is a conjugacy between $E_m$ and $\sigma_m$.
+  \end{proposition}
+  \begin{proof}
+    Let $x=(x_1,x_2,\ldots)\in \Sigma_m$. Then, $\phi\circ \sigma_m(x)=\sum_{i=1}^\infty \frac{x_{i+1}}{m^i}$. Moreover:
+    \begin{multline*}
+      E_m\circ \phi(x)=E\left(\sum_{i=1}^\infty \frac{x_i}{m^i}\right)=\sum_{i=1}^\infty \frac{x_i}{m^{i-1}}=\\=x_i+\sum_{i=1}\frac{x_{i+1}}{m^i}\equiv\sum_{i=1}\frac{x_{i+1}}{m^i}
+    \end{multline*}
+  \end{proof}
+  \begin{remark}
+    Note that $E$ preserves the Lebesgue measure \textit{backwards}: $\abs{{E_m}^{-1}(A)}=\abs{A}$ for all $A\subseteq \S^1$, but $\abs{E_m(A)}\ne \abs{A}$ in general.
+  \end{remark}
+  \begin{definition}
+    We define the following distance in $\Sigma_m$. For all $x,x'\in\Sigma_m$:
+    $$
+      d(x,x'):=\frac{1}{2^\ell}\quad\text{with }\ell:=\min\{i:x_i\ne x_i'\}
+    $$
+  \end{definition}
+  \begin{proposition}
+    Periodic points of $E_m$ are dense in $\S^1$.
+  \end{proposition}
+  \begin{proof}
+    By conjugacy it suffices to show that periodic points of $\sigma_m$ are dense in $\Sigma_m$. Let $x\in \Sigma_m$ and $\varepsilon>0$. Then, $\varepsilon>\frac{1}{2^\ell}$ for some $\ell$. And so the orbit of
+    $$
+      y=(x_1,\ldots,x_\ell,x_1,\ldots,x_\ell,x_1,\ldots,x_\ell,\ldots)
+    $$
+    is periodic and $d(x,y)<\varepsilon$. So periodic points of $\sigma_m$ are dense in $\Sigma_m$.
+  \end{proof}
+  \begin{proposition}
+    Le $x\in \S^1$. Then, the positive orbit of $x$ for $E_m$ is dense in $\S^1$.
+  \end{proposition}
+  \begin{proof}
+    By conjugacy, we only prove it for $\sigma_m$. But this is clear by taking:
+    $$
+      x=(0,1,\ldots,m-1,10,\ldots,1(m-1),20,\ldots,2(m-1),\ldots)
+    $$
   \end{proof}
 \end{multicols}
 \end{document}

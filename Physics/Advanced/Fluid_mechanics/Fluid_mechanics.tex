@@ -525,7 +525,7 @@
     Follow the proof of \mnameref{FLM:conservationofmomentum} adapted to the stress tensor.
   \end{sproof}
   \begin{remark}
-    This equation together with the continuity equation and energy equation completely describe the flow if a compressible viscous fluid. In the case of an incompressible homogeneous fluid with $\rho=\rho_0=\const$,  the
+    This equation together with the continuity equation and energy equation completely describe the flow in a compressible viscous fluid. In the case of an incompressible homogeneous fluid with $\rho=\rho_0=\const$,  the
     complete set of equations becomes the \emph{Navier-Stokes equations for incompressible flow}:
     $$
       \begin{cases}
@@ -566,6 +566,45 @@
     Two flows with the same geometry and the same Reynolds number are said to be \emph{similar}. More precisely, let $\vf{u}_1$ and $\vf{u}_2$ be two flows on regions $D_1$
     and $D_2$ that are related by a scale factor $\lambda$ so that $L_1 = \lambda L_2$. Let choices
     of $U_1$ and $U_2$ be made for each flow, and let the viscosities be $\nu_1$ and $\nu_2$, respectively. If $\mathrm{Re}_1=\mathrm{Re}_2$, then the dimensionless velocity fields $\vf{u}_1$ and $\vf{u}_2$ satisfy exactly the same equation on the same region.
+  \end{definition}
+  \begin{remark}
+    This idea of the similarity of flows is used in the design of experimental models. For example, suppose we are contemplating a new design for an aircraft wing, and we wish to know the behavior of a fluid flow around it. Rather than build the wing itself, it may be faster and more economical to perform the initial tests on a scaled-down version. We design our model so that it has the same geometry as the full-scale wing, and we choose values for the undisturbed velocity, coefficient of viscosity, and so on, such that the Reynolds number for the flow in our experiment matches that of the actual flow. We can then expect the results of our experiment to be relevant to the actual flow over the full-scale wing.
+  \end{remark}
+  \begin{theorem}[Helmholtz-Hodge decomposition theorem]
+    Let $D\subset\RR^3$ be a region with smooth boundary and $\vf{w}$ be a vector field on $D$. Then, there exists a unique decomposition:
+    $$
+      \vf{w}=\vf{u}+\grad p
+    $$
+    where $\vf{u}$ has zero divergences and it's parallel to $\Fr{D}$, i.e.\ $\vf{u}\cdot\vf{n}=0$ on $\Fr{D}$.
+  \end{theorem}
+  \begin{proof}
+    We use the fact that the following problem has existence and uniqueness of solutions up to the addition of a constant to $p$:
+    $$
+      \begin{cases}
+        \displaystyle\laplacian p =\div \vf{w}           & \text{in $D$}      \\
+        \displaystyle \pdv{p}{\vf{n}}=\vf{w}\cdot \vf{n} & \text{on $\Fr{D}$}
+      \end{cases}
+    $$
+    Now let $\vf{u}:=\vf{w}-\grad p$, where $p$ is the solution of the above problem. Then, $\div \vf{u}=0$ and $\vf{u}\cdot\vf{n}=0$. To prove uniqueness, first note that if $\vf{w}=\vf{u}+\grad p$, then:
+    $$
+      \int_D\vf{u}\cdot \grad p=0
+    $$
+    which follows automatically from the \mnameref{FSV:divergencethm}, the hypothesis on $\vf{u}$ and the relation:
+    $$
+      \div(\vf{u}p)=\vf{u}\cdot\grad p+p\div\vf{u}
+    $$
+    Now, if moreover we have $\vf{w}=\vf{u}'+\grad p'$, then $\vf{0}= \vf{u}-\vf{u}' + \grad(p-p')$ and therefore taking the inner product with $\vf{u}-\vf{u}'$ and integrating we get:
+    \begin{multline*}
+      0=\int_D\norm{\vf{u}-\vf{u}'}^2+\int_D(\vf{u}-\vf{u}')\cdot\grad(p-p')= \\
+      =\int_D\norm{\vf{u}-\vf{u}'}^2
+    \end{multline*}
+    Hence, $\vf{u}=\vf{u}'$ and therefore $\grad p=\grad p'$, which implies that $p-p'=\const$
+  \end{proof}
+  \begin{definition}
+    Let $D\subset\RR^3$ be a region with smooth boundary. Given a vector field $\vf{w}=\vf{u}+\grad p$ on $D$, we can define the orthogonal projector operator $\vf{P}$ as:
+    $$
+      \vf{P}(\vf{w}):=\vf{u}
+    $$
   \end{definition}
 \end{multicols}
 \end{document}

@@ -124,6 +124,30 @@
       \Exp({(M_t-M_s)}^2\mid \mathcal{F}_s) =\Exp({M_t}^2-2M_tM_s+{M_s}^2\mid \mathcal{F}_s) =\\=\Exp({M_t}^2+{M_s}^2\!\mid \!\mathcal{F}_s)-2M_s\Exp(M_t\!\mid\! \mathcal{F}_s) =\Exp({M_t}^2-{M_s}^2\!\mid\! \mathcal{F}_s)
     \end{multline*}
   \end{proof}
+  \begin{theorem}[Doob's maximal inequality]\label{SC:doob_maximal}
+    If $M$ is a continuous square-integrable martingale, then $\forall a,t\geq 0$ we have:
+    $$
+      \Prob\left(\sup_{0\leq s\leq t}\abs{M_s}\geq a\right)\leq \frac{\Exp({M_t}^2)}{a^2}
+    $$
+  \end{theorem}
+  \begin{proposition}\label{SC:limit_of_martingales}
+    Let $(M^n)$ be a sequence of continuous square-integrable martingales and suppose that for each $t\geq 0$, the limit $\displaystyle M_t:=\overset{L^2}{=}\lim_{n\to\infty}M_t^n$ exists. Then, $M={(M_t)}_{t\geq 0}$ is a continuous square-integrable martingale.
+  \end{proposition}
+  \begin{proof}
+    By \mnameref{SC:doob_maximal} applied to $M^n-M^m$ we have that for fixed $t\geq 0$ and $k\in\NN$:
+    $$
+      \Prob\left(\sup_{0\leq s\leq t}\abs{M_s^n-M_s^m}\geq \frac{1}{kmn }\right)\leq k^2\Exp({(M_t^n-M_t^m)}^2)\leq \frac{1}{k^2}
+    $$
+    where in the last inequality we have used that ${(M^n)}$ converges in $L^2$ and so we have chosen $n,m$ large enough so that the inequality holds. Thus, there is an increasing sequence $(n_k)$ such that:
+    $$
+      \Prob\left(\sup_{0\leq s\leq t}\abs{M_s^{n_{k+1}}-M_s^{n_k}}\geq \frac{1}{k}\right)\leq \frac{1}{k^2}
+    $$
+    By \mnameref{P:borel-cantelli1}, we deduce that
+    $$
+      \sum_{k=1}^{\infty}\sup_{0\leq s\leq t}\abs{M_s^{n_{k+1}}-M_s^{n_k}}<\infty
+    $$
+    which ensures that $(M^{n_k})$ is continuous in the space of continuous functions equipped with the topology of uniform convergence on every compact set. But the limit is necessarily a version of $M$, because for each $t\geq 0$ we have $M_t^n\to M_t$ in $L^2$.
+  \end{proof}
   \subsubsection{Quadratic variation}
   \begin{definition}
     Let $f:\RR_{\geq 0}\to\RR$ be a function. We define the \emph{absoulte variation} of $f$ on the interval $[s,t]$ as:
@@ -295,5 +319,119 @@
       \item $M$ is a ${(\mathcal{F}_t)}_{t\geq 0}$-Brownian motion.
     \end{enumerate}
   \end{theorem}
+  \subsection{Stochastic integration}
+  \subsubsection{Wiener isometry}
+  \begin{definition}
+    Let $H$, $H'$ be Hilbert. A map $I:H\to H'$ is called \emph{isometry} if it is linear and $\forall x\in H$ we have:
+    $$
+      \norm{I(x)}_{H'}=\norm{x}_H
+    $$
+    We speak of \emph{partial isometry} when $I$ is only defined on a subspace of $H$.
+  \end{definition}
+  \begin{theorem}
+    Let $H$, $H'$ be Hilbert, $V\subseteq H$ be a dense subspace and $I:V\to H'$ be a partial isometry. Then, there exists a unique continuous isometry extension of $I$ to $H$.
+  \end{theorem}
+  \begin{proof}
+    Let $x\in H\setminus V$. Then, $\exists(x_n)\in V$ such that $x_n\to x$. Clearly, any continuous extension must satisfy $I(x):=\lim_{n\to\infty}I(x_n)$, so we take it as a definition. Note that, first, the limit exists because $(I(x_n))$ is Cauchy and moreover this definition does not depend on the sequence $(x_n)$. From this definition, the extension is automatically linear and norm-preserving (because of the continuity).
+  \end{proof}
+  \begin{definition}
+    Let ${(B_t)}_{t\geq 0}$ be a Brownian motion and $f\in\mathcal{S}(\RR_{\geq 0})$ be a simple function such that $f=\sum_{k=1}^na_k\indi{(t_{k-1},t_k]}$ with $0=t_0\leq t_1\leq \cdots\leq t_n$. We define the \emph{Wiener integral} of $f$ as:
+    $$
+      I(f):=\sum_{k=1}^na_k(B_{t_k}-B_{t_{k-1}})
+    $$
+  \end{definition}
+  \begin{remark}
+    Recall that simple functions are dense in $L^p$ (\mcref{RFA:continuousdenseLp}).
+  \end{remark}
+  \begin{theorem}
+    Let ${(B_t)}_{t\geq 0}$ be a Brownian motion on $(\Omega, \mathcal{F}, \Prob)$. Then, there exists a unique linear and continuous map $I:L^2(\RR_{\geq 0})\to L^2((\Omega, \mathcal{F}, \Prob))$ such that for all $0\leq s\leq t$:
+    $$
+      I(\indi{(s,t]})=B_t-B_s
+    $$
+    Moreover, $I$ is an isometry. The map $I$ is called \emph{Wiener isometry} (or \emph{Wiener integral}) and denoted by $I(f)=\int_0^\infty f(u)\dd{B_u}$.
+  \end{theorem}
+  \begin{remark}
+    Recall that the limit of Gaussian variables is Gaussian.
+  \end{remark}
+  \begin{proposition}
+    Let ${(B_t)}_{t\geq 0}$ be a Brownian motion. Then, the following are satisfied:
+    \begin{itemize}
+      \item For any $f\in L^2(\RR_{\geq 0})$ we have:
+            $$
+              \int_0^\infty f(u)\dd{B_u}\overset{L^2}{=}\lim_{n\to\infty}\sum_{k=1}^{n^2}a_{n,k}(f)(B_{\frac{k+1}{n}}-B_{\frac{k}{n}})
+            $$
+            where $a_{n,k}(f):=n\int_{\frac{k}{n}}^{\frac{k+1}{n}}f(u)\dd{u}$ is an approximation of $f$ in the interval $[\frac{k}{n},\frac{k+1}{n}]$.
+      \item The Wiener integral is a Gaussian variable with zero mean and variance $\int_0^\infty{f(u)}^2\dd{u}$.
+      \item For any $f,g\in L^2(\RR_{\geq 0})$ we have:
+            $$
+              \cov\left(\int_0^\infty f(u)\dd{B_u},\int_0^\infty g(u)\dd{B_u}\right)=\int_0^\infty f(u)g(u)\dd{u}
+            $$
+    \end{itemize}
+  \end{proposition}
+  \subsubsection{The Wiener integral as a process}
+  \begin{definition}
+    Let $f\in L_{\text{loc}}^2(\RR_{\geq 0})$ and $0\leq s\leq t$. We define the \emph{Wiener integral} of $f$ as:
+    $$
+      \int_s^t f(u)\dd{B_u}:=\int_0^\infty f(u)\indi{(s,t]}(u)\dd{B_u}
+    $$
+  \end{definition}
+  \begin{lemma}[Chasles relation]
+    Let $f\in L_{\text{loc}}^2(\RR_{\geq 0})$ and $0\leq r\leq s\leq t$. Then:
+    $$
+      \int_r^t f(u)\dd{B_u}=\int_r^s f(u)\dd{B_u}+\int_s^t f(u)\dd{B_u}
+    $$
+  \end{lemma}
+  \begin{proposition}
+    Let ${(B_t)}_{t\geq 0}$ be a Brownian motion and $f\in L_{\text{loc}}^2(\RR_{\geq 0})$. Then, the associate process $M^f={(M_t^f)}_{t\geq 0}$ defined as:
+    $$
+      M_t^f:=\int_0^t f(u)\dd{B_u}
+    $$
+    is a centered Gaussian process with covariance function:
+    $$
+      \cov(M_s^f,M_t^f)=\int_0^{s\wedge t}{f(u)}^2\dd{u}
+    $$
+  \end{proposition}
+  \begin{proof}
+    We'll only proof that $M^f$ is Gaussian (the computation of the mean and covariance functions is easy). Let $n\in\NN$, $(t_1,\ldots,t_n)\in\RR^n$ and $(\lambda_1,\ldots,\lambda_n)\in\RR^n$. Then:
+    $$
+      \sum_{k=1}^n\lambda_k M_{t_k}^f=\int_0^\infty g(u)\dd{B_u}
+    $$
+    with $g(u)=\sum_{k=1}^n\lambda_k f(u)\indi{(0,t_k]}(u)\in L^2(\RR_{\geq 0})$, and the right-hand side is Gaussian because it is a Wiener integral.
+  \end{proof}
+  \begin{theorem}
+    Let $f\in L_{\text{loc}}^2(\RR_{\geq 0})$. Then, $M^f$ is a continuous square-integrable martingale with:
+    $$
+      {\langle M^f\rangle}_t=\int_0^t{f(u)}^2\dd{u}
+    $$
+  \end{theorem}
+  \begin{proof}
+    The integrability and square-integrability is clear because $M^f$ is Gaussian. Note that $t\mapsto M_t^f$ is continuous when $f=\indi{(0,a]}$, because the Brownian motion is continuous. Now using \mcref{SC:limit_of_martingales} we get the result true for any $f\in L_{\text{loc}}^2(\RR_{\geq 0})$. Now let's prove that $M^f$ is a martingale. We have:
+    \begin{align*}
+      M_t^f & =\lim_{n\to\infty}\sum_{k=1}^{n^2}a_{n,k}(f\indi{(0,t]})(B_{\frac{k+1}{n}}-B_{\frac{k}{n}})                 \\
+            & =\lim_{n\to\infty}\sum_{k=1}^{n^2}a_{n,k}(f\indi{(0,t]})(B_{\frac{k+1}{n}\wedge t}-B_{\frac{k}{n}}\wedge t)
+    \end{align*}
+    and the last expression is $\mathcal{F}_t$-measurable. Finally, if $0\leq s\leq t$ we have that since $M_t^f-M_s^f$ is independent of $\mathcal{F}_s$:
+    $$
+      \Exp(M_t^f-M_s^f\mid \mathcal{F}_s)=\Exp(M_t^f-M_s^f)=0
+    $$
+    Moreover, $({(M_t^f)}^2)_{t\geq 0}$ is clearly adapted and:
+    \begin{multline*}
+      \Exp\left({(M_t^f)}^2-{(M_s^f)}^2\mid \mathcal{F}_s\right)=\Exp\left({(M_t^f-M_s^f)}^2\mid\mathcal{F_s}\right)=\\=\Exp\left({(M_t^f-M_s^f)}^2\right)=\norm{I(f\indi{(s,t]})}_{L^2(\Omega)}^2=\\=\norm{f\indi{(s,t]}}_{L^2(\RR_{\geq 0})}^2=\int_s^t {f(u)}^2\dd{u}
+    \end{multline*}
+    where the first equality is due to \mnameref{SC:orthogonality_martingales} and the we used the isometry property of $I$. This implies that ${{(M_t^f)}^2}_{t\geq 0}-\int_0^t{f(u)}^2\dd{u}$ is a martingale and by the uniqueness of the quadratic variation we get the result.
+  \end{proof}
+  \begin{proposition}
+    Let ${(B_t)}_{t\geq 0}$ be a Brownian motion. For any $f\in L_{\text{loc}}^2(\RR_{\geq 0})$, the process $Z^f={(Z_t^f)}_{t\geq 0}$ defined as:
+    $$
+      Z_t^f:=\exp{\int_0^t f(u)\dd{B_u}-\frac{1}{2}\int_0^t{f(u)}^2\dd{u}}
+    $$
+    is a continuous square-integrable martingale.
+  \end{proposition}
+  \begin{proof}
+    The integrability and adaptedness poses no problem. Now fix $0\leq s\leq t$. We previously saw that $\int_s^t f(u)\dd{B_u}$ is independent of $\mathcal{F}_s$ and so:
+    $$
+      \Exp\left(Z_t^f\mid \mathcal{F}_s\right)=Z_s^f\Exp\left(\exp{\int_s^t f(u)\dd{B_u}-\frac{1}{2}\int_s^t{f(u)}^2\dd{u}}\right)=Z_s^f
+    $$
+  \end{proof}
 \end{multicols}
 \end{document}
