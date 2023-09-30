@@ -46,7 +46,6 @@
   \end{proposition}
   \subsection{Hilbert space methods for divergence form linear PDEs}
   In this section, we will assume that $\Omega\subset\RR^d$ is an open, bounded subset, $a_{ij}=a_{ji}$ and $a_{ij},b_j,c\in L^\infty(\Omega)$.
-  \subsubsection{Fredholm alternative}
   \begin{theorem}[Abstract Fredholm alternative]
     Let $H$ be Hilbert and $K:H\to H$ be a compact linear operator. Then:
     \begin{enumerate}
@@ -54,6 +53,72 @@
       \item $\im(\id-K)={(\ker(\id-K^*))}^\perp$. In particular, $\im(\id-K)$ is closed.
       \item Either $\ker(\id-K)\ne\{0\}$ or $\id -K$ is and isomorphism.
     \end{enumerate}
+  \end{theorem}
+  \begin{definition}
+    Consider the problem
+    $$
+      \mathcal{D}_f:=\begin{cases}
+        Lu=f & \text{in }\Omega         \\
+        u=0  & \text{on }\partial\Omega
+      \end{cases}
+    $$
+    where $L=-\laplacian+\vf{b}\cdot \grad$. Its \emph{weak formulation} is:
+    \begin{equation*}
+      \langle \grad u,\grad v\rangle+\langle \vf{b}\cdot \grad u,v\rangle=\langle f,v\rangle\quad \forall v\in H_0^1(\Omega)
+    \end{equation*}
+    We define the \emph{formal adjoint} of $L$ as:
+    $$
+      L^*v=-\laplacian v-\div(\vf{b}v)
+    $$
+  \end{definition}
+  \begin{proposition}
+    The \emph{homogeneous adjoint problem}
+    $$
+      \mathcal{D}_0^*:=\begin{cases}
+        L^*v=0 & \text{in }\Omega         \\
+        v=0    & \text{on }\partial\Omega
+      \end{cases}
+    $$
+    whose weak formulation is
+    \begin{equation*}
+      \langle \grad v,\grad w\rangle+\langle \vf{b}\cdot \grad v,w\rangle=0\quad \forall w\in H_0^1(\Omega)
+    \end{equation*}
+    has a finite dimensional solution space $W_0$, as well as the space $V_0$ of solutions of $\mathcal{D}_0$, and $\dim W_0=\dim V_0$. Moreover, if $f\in L^2(\Omega)$, $\mathcal{D}_f$ is solvable if and only if $\langle f,v\rangle=0$ for all $v\in W_0$.
+  \end{proposition}
+  \begin{definition}
+    We define the following problem:
+    $$
+      \mathcal{N}_f:=\begin{cases}
+        -\laplacian u=f   & \text{in }\Omega         \\
+        \pdv{u}{\vf{n}}=0 & \text{on }\partial\Omega
+      \end{cases}
+    $$
+    and $\mathcal{N}_f^*=\mathcal{N}_f$. The weak formulation of the problem is:
+    \begin{equation*}
+      \langle \grad u,\grad v\rangle=\langle f,v\rangle\quad \forall v\in H^1(\Omega)
+    \end{equation*}
+  \end{definition}
+  \begin{proposition}
+    $\mathcal{N}_f$ has at least one solution if and only if for any weak solution $v$ of $\mathcal{N}_0$ we have $\langle f,v\rangle=0$.
+  \end{proposition}
+  \subsection{Spectrum of compact operators}
+  In this section $\KK$ will denote either $\RR$ or $\CC$.
+  \begin{definition}
+    Let $H$ be a $\KK$-Hilbert space and $K:H\to H$ be a compact operator. We define the \emph{resolvent set} of $K$ as:
+    $$
+      \rho(K)=\{\lambda\in \KK: \lambda-K \text{ is invertible}\}
+    $$
+    and the \emph{spectrum} of $K$ as:
+    $$
+      \sigma(K)=\KK\setminus \rho(K)
+    $$
+  \end{definition}
+  \begin{theorem}
+    Let $H$ be a Hilbert space and $K:H\to H$ be a compact operator. Then, $0\in \sigma(K)$ and $\sigma(K)$ is closed and at most countable. Moreover, if $\lambda\in \sigma(K)\setminus\{0\}$, then $\lambda$ is an eigenvalue of $K$ and:
+    $$
+      \dim\left(\bigcup_{p\geq 1}\ker{(\lambda\id-K)}^p\right)<\infty
+    $$
+    If $\sigma(K)\cap\RR^*$ is infinite, then it is of the form $\{\lambda_n\}_{n\in \NN}$ with $\lambda_n\to 0$.
   \end{theorem}
 \end{multicols}
 \end{document}

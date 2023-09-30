@@ -432,6 +432,131 @@
     $$
       \Exp\left(Z_t^f\mid \mathcal{F}_s\right)=Z_s^f\Exp\left(\exp{\int_s^t f(u)\dd{B_u}-\frac{1}{2}\int_s^t{f(u)}^2\dd{u}}\right)=Z_s^f
     $$
+    because $\int_s^t f(u)\dd{B_u}\sim N(0,\int_s^t{f(u)}^2\dd{u})$.
   \end{proof}
+  \subsubsection{Progressive processes}
+  \begin{definition}
+    Let $(\Omega,\mathcal{F},\Prob,{(\mathcal{F}_t)}_{t\geq 0})$ be a filtered probability space and $\phi={(\phi_t)}_{t\geq 0}$ a stochastic process. We say that $\phi$ is \emph{progressive} if for fixed $t\geq 0$ the function
+    $$
+      \function{}{([0,t]\times \Omega,\mathcal{B}([0,t])\otimes \mathcal{F}_t)}{(\RR,\mathcal{B}(\RR))}{(u,\omega)}{\phi_u(\omega)}
+    $$
+    is measurable.
+  \end{definition}
+  \begin{lemma}
+    Let $\phi={(\phi_t)}_{t\geq 0}$ be a stochastic process and
+    $$
+      \mathcal{P}:=\cap_{t\geq 0}\{ A\subset \RR_{\geq 0}\times\Omega:A\cap([0,t]\times\Omega)\in \mathcal{B}([0,t])\otimes \mathcal{F}_t\}
+    $$
+    Then, $\phi$ is progressive if and only if the map $(t,\omega)\mapsto\phi_t(\omega)$ is $\mathcal{P}$-measurable.
+  \end{lemma}
+  \begin{proposition}
+    The following stochastic processes ${(\phi_t)}_{t\geq 0}$ are progressive:
+    \begin{itemize}
+      \item A deterministic process $\phi_t(\omega)=f(t)$, $f:\RR_{\geq 0}\to\RR$.
+      \item $\phi_t(\omega)=X(\omega)\indi{(a,b]}(t)$ where $0\leq a<b$ and $X$ be $\mathcal{F}_a$-measurable.
+      \item $\phi_t(\omega)=X(\omega)\indi{[0,T(\omega)]}(t)$ where $T$ is a stopping time.
+      \item $\phi_t(\omega)=F(\phi_t^1(\omega),\ldots,\phi_t^n(\omega))$ where $F:\RR^n\to\RR$ is measurable and ${(\phi_t^i)}_{1\leq i\leq n}$ are progressive.
+      \item A pointwise limit of progressive processes.
+      \item A continuous adapted process.
+    \end{itemize}
+  \end{proposition}
+  \subsubsection{Itô isometry}
+  \begin{definition}
+    We define the set $\MM^2(\RR_{\geq 0})$ as the set of all progressive processes $\phi={(\phi_t)}_{t\geq 0}$ such that:
+    $$
+      \Exp\left(\int_0^\infty{\phi_u}^2\dd{u}\right)<\infty
+    $$
+  \end{definition}
+  \begin{remark}
+    Note that $\MM^2(\RR_{\geq 0})=L^2(\RR_{\geq 0}\times\Omega,\mathcal{P},\dd{t}\otimes\Prob)$ is Hilbert with the scalar product:
+    $$
+      \langle \phi,\psi\rangle_{\MM^2}:=\Exp\left(\int_0^\infty\phi_u\psi_u\dd{u}\right)
+    $$
+  \end{remark}
+  \begin{theorem}[Itô integral]
+    Let ${(B_t)}_{t\geq 0}$ be a Brownian motion. Then, there exists a unique linear and continuous map $I:\MM^2(\RR_{\geq 0})\to L^2((\Omega,\mathcal{F},\Prob))$ such that $I(\phi)=X(B_t-B_s)$ whenever $\phi_u(\omega)=X(\omega)\indi{(s,t]}(u)$ for some $0\leq s\leq t$ and $X\in L^2(\Omega,\mathcal{F}_s,\Prob)$. Moreover, $I$ is an isometry, i.e.:
+    $$
+      \Exp\left(\int_0^\infty{\phi_u}{\psi_u} \dd{u}\right)=\Exp\left(I(\phi)I(\psi)\right)
+    $$
+    We call $I$ the \emph{Itô isometry} (or \emph{Itô integral}) and we denote it by $I(\phi)=\int_0^\infty\phi_u\dd{B_u}$.
+  \end{theorem}
+  \begin{proposition}
+    Let ${(\phi_u)}, {(\psi_u)}\in \MM^2(\RR_{\geq 0})$. Then, the following are satisfied:
+    \begin{itemize}
+      \item $\displaystyle
+              \int_0^\infty \phi_u\dd{B_u}\overset{L^2}{=}\lim_{n\to\infty}\sum_{k=1}^{n^2}\left(n\int_{\frac{k}{n}}^{\frac{k+1}{n}}\phi_u\dd{u}\right)(B_{\frac{k+1}{n}}-B_{\frac{k}{n}})
+            $
+      \item If $\phi_u(\omega)=f(t)$, $f\in L^2(\RR_{\geq 0})$, then we recover the Wiener integral.
+      \item $\displaystyle
+              \Exp\left(\int_0^\infty \phi_u\dd{B_u}\right)=0$
+      \item $\displaystyle\cov\left(\int_0^\infty \phi_u\dd{B_u},\int_0^\infty \psi_u\dd{B_u}\right)=\Exp\left(\int_0^\infty \phi_u\psi_u\dd{u}\right)$
+    \end{itemize}
+  \end{proposition}
+  \subsubsection{The Itô integral as a process}
+  \begin{definition}
+    Let ${(\phi_u)}$ be a progressive process and $0\leq s\leq t$. We define:
+    $$
+      \int_s^t \phi_u\dd{B_u}:=\int_0^\infty \phi_u\indi{(s,t]}(u)\dd{B_u}
+    $$
+    The set of such processes such that $\forall t\geq 0$, $\Exp\left(\int_0^t{\phi_u}^2\dd{u}\right)<\infty$ is denoted by $\MM^2$. The set of such processes such that $\forall t\geq 0$, $\int_0^t{\phi_u}^2\dd{u}<\infty$ is denoted by $\MM^2_{\text{loc}}$.
+  \end{definition}
+  \begin{remark}
+    Note that $\MM^2(\RR_{\geq 0})\subsetneq \MM^2\subsetneq \MM^2_{\text{loc}}$.
+  \end{remark}
+  \begin{theorem}
+    Let $(\phi_u)\in\MM^2$. Then, the associate process $M^\phi={(M_t^\phi)}_{t\geq 0}$ defined as:
+    $$
+      M_t^\phi:=\int_0^t \phi_u\dd{B_u}
+    $$
+    is a continuous square-integrable martingale with:
+    $$
+      {\langle M^\phi\rangle}_t=\int_0^t{\phi_u}^2\dd{u}
+    $$
+  \end{theorem}
+  \begin{remark}
+    Note that the by \mnameref{RFA:polarization} we have that:
+    $$
+      {\langle M^\phi,M^\psi\rangle}_t=\int_0^t \phi_u\psi_u\dd{u}
+    $$
+  \end{remark}
+  \subsubsection{Generalized Itô integral}
+  \begin{proposition}
+    Let $(\phi_u)\in \MM^2_{\text{loc}}$. Consider the stopping time
+    $$
+      T_n:=\inf\{t\geq 0:\int_0^t{\phi_u}^2\dd{u}\geq n\}
+    $$
+    and the truncated progressive process $\phi^n_t(\omega):=\phi_t(\omega)\indi{[0,T_n(\omega)]}(t)$. Then, $\phi^n\in\MM^2(\RR_{\geq 0})$.
+  \end{proposition}
+  \begin{definition}
+    Let $(\phi_u)\in \MM^2_{\text{loc}}$. We define the \emph{generalized Itô integral} of $\phi$ as:
+    $$
+      \int_0^\infty \phi_u\dd{B_u}:=\lim_{n\to\infty}\int_0^\infty \phi_u \indi{[0,T_n]}(u)\dd{B_u}
+    $$
+    which is well-defined.
+  \end{definition}
+  \begin{theorem}
+    Let $(\phi_u)\in \MM^2_{\text{loc}}$. Then, the associate process $M^\phi={(M_t^\phi)}_{t\geq 0}$ defined as:
+    $$
+      M_t^\phi:=\int_0^t \phi_u\dd{B_u}
+    $$
+    is a continuous local martingale with:
+    $$
+      {\langle M^\phi\rangle}_t=\int_0^t{\phi_u}^2\dd{u}
+    $$
+  \end{theorem}
+  \begin{theorem}[Stochastic dominated convergence theorem]
+    Let $t\geq 0$ and $(\phi_u^n)\in \MM^2_{\text{loc}}$ be a sequence of progressive processes such that $\phi_u^n\overset{\Prob}{\underset{n\to\infty}{\longrightarrow}} \phi_u$ for all a.e.\ $u\in[0,t]$. Suppose that $\forall u\in [0,t]$ and $\forall n\in\NN$ we have $\abs{\phi_u^n}\almoste{\leq} \Psi_u$, with $\Psi\in\MM^2_{\text{loc}}$. Then:
+    $$
+      \int_0^t \phi_u^n\dd{B_u}\overset{\Prob}{\underset{n\to\infty}{\longrightarrow}} \int_0^t \phi_u\dd{B_u}
+    $$
+  \end{theorem}
+  \begin{corollary}
+    If $(\phi_u)$ is a continuous and adapted process, then $\forall t\geq 0$ and any subdivision $(t_k^n)\in \mathrm{P}([0,t])$ such that $\Delta_n\to 0$ we have:
+    $$
+      \sum_{k=0}^{n-1}\phi_{t_{k+1}^n}(B_{t_{k+1}^n}-B_{t_k^n})\overset{\Prob}{\underset{n\to\infty}{\longrightarrow}} \int_0^t \phi_u\dd{B_u}
+    $$
+  \end{corollary}
+  \subsection{Stochastic differentiation}
+  \subsubsection{Itô processes}
 \end{multicols}
 \end{document}
