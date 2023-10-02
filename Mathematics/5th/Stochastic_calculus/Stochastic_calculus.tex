@@ -544,7 +544,7 @@
       {\langle M^\phi\rangle}_t=\int_0^t{\phi_u}^2\dd{u}
     $$
   \end{theorem}
-  \begin{theorem}[Stochastic dominated convergence theorem]
+  \begin{theorem}[Stochastic dominated convergence theorem]\label{SC:stochastic_dominated}
     Let $t\geq 0$ and $(\phi_u^n)\in \MM^2_{\text{loc}}$ be a sequence of progressive processes such that $\phi_u^n\overset{\Prob}{\underset{n\to\infty}{\longrightarrow}} \phi_u$ for all a.e.\ $u\in[0,t]$. Suppose that $\forall u\in [0,t]$ and $\forall n\in\NN$ we have $\abs{\phi_u^n}\almoste{\leq} \Psi_u$, with $\Psi\in\MM^2_{\text{loc}}$. Then:
     $$
       \int_0^t \phi_u^n\dd{B_u}\overset{\Prob}{\underset{n\to\infty}{\longrightarrow}} \int_0^t \phi_u\dd{B_u}
@@ -558,5 +558,121 @@
   \end{corollary}
   \subsection{Stochastic differentiation}
   \subsubsection{Itô processes}
+  \begin{proposition}
+    Let $\psi={(\psi_t)}_{t\geq 0}$ be a stochastic process such that $\forall t\geq 0$ we have
+    $$
+      \int_0^t \abs{\psi_u}\dd{u}<\infty
+    $$
+    In this case we say that $\psi\in \MM^1_{\text{loc}}$. Then, the process $$
+      t\mapsto \int_0^t \psi_u\dd{B_u}
+    $$
+    is an adapted continuous process.
+  \end{proposition}
+  \begin{definition}
+    An \emph{Itô process} is a stochastic process ${(X_t)}_{t\geq 0}$ of the form:
+    \begin{equation}\label{SC:ito_process}
+      X_t=X_0+\int_0^t \phi_u\dd{B_u}+\int_0^t \psi_u\dd{u}
+    \end{equation}
+    with $\phi\in\MM^2_{\text{loc}}$ and $\psi\in\MM^1_{\text{loc}}$. The two integrals are called \emph{martingale term} and \emph{drift term} respectively. Instead of \mcref{SC:ito_process} we usually write:
+    $$
+      \dd{X_t}=\phi_t\dd{B_t}+\psi_t\dd{t}
+    $$
+    This expression is called \emph{stochastic differential}.
+  \end{definition}
+  \begin{remark}
+    Itô processes form a vector space. That is, if $X$ and $Y$ are Itô processes and $\lambda,\mu\in\RR$, then $Z=\lambda X+\mu Y$ is an Itô process and:
+    $$
+      \dd{Z_t}=\lambda\dd{X_t}+\mu\dd{Y_t}
+    $$
+    Moreover they are always continuous adapted processes.
+  \end{remark}
+  \begin{proposition}
+    Let $X={(X_t)}_{t\geq 0}$ be an Itô process such that $\forall t\geq 0$ we have:
+    $$
+      \dd{X_t}=\phi_t\dd{B_t}+\psi_t\dd{t}=\tilde{\phi}_t\dd{B_t}+\tilde{\psi}_t\dd{t}
+    $$
+    for some $\phi,\tilde{\phi}\in\MM^2_{\text{loc}}$ and $\psi,\tilde{\psi}\in\MM^1_{\text{loc}}$. Then, $\phi$, $\tilde{\phi}$ are indistinguishable and so are $\psi$, $\tilde{\psi}$.
+  \end{proposition}
+  \begin{proof}
+    By assumption, we have that a.e.\ $\forall t\geq 0$:
+    $$
+      \int_0^t{( \phi_u-\tilde{\phi}_u)}\dd{B_u}=\int_0^t{(\psi_u-\tilde{\psi}_u)}\dd{u}
+    $$
+    But since the right-hand side of the equation is a local martingale and the left-hand side has finite variation, we have that both sides must be 0 a.e.\ in $t$. Moreover, by the uniqueness of the quadratic variation we have that:
+    $$
+      \int_0^t{(\phi_u-\tilde{\phi}_u)}^2\dd{u}=0
+    $$
+    Letting $t\to \infty$ we get that $\phi$, $\tilde{\phi}$ are indistinguishable. Finally, from the Lebesgue integral, we have that $\psi$, $\tilde{\psi}$ are indistinguishable.
+  \end{proof}
+  \begin{definition}
+    Let $X={(X_t)}_{t\geq 0}$ be an Itô process such that $\dd{X_t}=\phi_t\dd{B_t}+\psi_t\dd{t}$, and $Y={(Y_t)}_{t\geq 0}$ be a continuous adapted process. Then, $Y\phi\in \MM^2_{\text{loc}}$ and $Y\psi\in \MM^1_{\text{loc}}$ and we define:
+    $$
+      \int_0^tY_u \dd{X_u}:=\int_0^t Y_u\phi_u\dd{B_u}+\int_0^t Y_u\psi_u\dd{u}
+    $$
+  \end{definition}
+  \begin{remark}
+    Note that using \mnameref{RFA:dominated;SC:stochastic_dominated} we also have:
+    $$
+      \int_0^tY_u \dd{X_u}\overset{\Prob}{=}\lim_{n\to\infty} \sum_{k=0}^{n-1}Y_{t_k^n}(X_{t_{k+1}^n}-X_{t_k^n})
+    $$
+    along any subdivision ${(t_k^n)}_{0\leq k\leq n}\in \mathrm{P}([0,t])$ such that $\Delta_n\to 0$.
+  \end{remark}
+  \subsubsection{Quadratic variation of Itô processes}
+  \begin{lemma}\label{SC:ito_quadratic_variation}
+    Let $X={(X_t)}_{t\geq 0}$, $\tilde{X}=({\tilde{X}_t})_{t\geq 0}$ be two Itô processes with differentials:
+    $$
+      \dd{X_t}=\phi_t\dd{B_t}+\psi_t\dd{t}\qquad \dd{\tilde{X}_t}=\tilde{\phi}_t\dd{B_t}+\tilde{\psi}_t\dd{t}
+    $$
+    Then, for any ${(t_k^n)}_{0\leq k\leq n}\in \mathrm{P}([0,t])$ such that $\Delta_n\to 0$ we have:
+    \begin{multline*}
+      \sum_{k=0}^{n-1}{(X_{t_{k+1}^n}-X_{t_k^n})}{(\tilde{X}_{t_{k+1}^n}-\tilde{X}_{t_k^n})}\overset{\Prob}{\underset{n\to\infty}{\longrightarrow}} \int_0^t{\phi_u}{\tilde{\phi}_u}\dd{u}=:\\=:{\langle X,\tilde{X}\rangle}_t
+    \end{multline*}
+    In particular:
+    $$
+      {\langle X\rangle}_t:= {\langle X,X\rangle}_t=\int_0^t{\phi_u}^2\dd{u}
+    $$
+    and we call it the \emph{quadratic variation} of $X$.
+  \end{lemma}
+  \begin{proof}
+    We saw it for $X=\tilde{X}$, and the general formula follows from \mnameref{RFA:polarization}. Now, if $\psi =0$, $X$ is a continuous local martingale with quadratic variation $t\mapsto \int_0^t{\phi_u}^2\dd{u}$. Now if $\phi=0$, we know it because $t\mapsto \int_0^t \psi_u\dd{u}$ has finite variation, and therefore, null quadratic variation. Finally in the general case we have:
+    \begin{multline*}
+      \sum_{k=0}^{n-1}{(X_{t_{k+1}^n}-X_{t_k^n})}^2=\sum_{k=0}^{n-1}{\left(\int_{t_k^n}^{t_{k+1}^n}\phi_u\dd{B_u}\right)}^2+\\+\sum_{k=0}^{n-1}{\left(\int_{t_k^n}^{t_{k+1}^n}\psi_u\dd{B_u}\right)}^2+2\sum_{k=0}^{n-1}\int_{t_k^n}^{t_{k+1}^n}\phi_u\dd{B_u}\int_{t_k^n}^{t_{k+1}^n}\psi_u\dd{u}
+    \end{multline*}
+    The first part tends to $\int_0^t{\phi_u}^2\dd{u}$, the second part tends to 0 and for the last part use \mcref{SC:prop_variation_fg}.
+  \end{proof}
+  \begin{theorem}[Stochastic integration by parts]
+    Let $X={(X_t)}_{t\geq 0}$ and $Y={(Y_t)}_{t\geq 0}$ be two Itô processes. Then, ${(X_tY_t)}_{t\geq 0}$ is an Itô process and:
+    $$
+      \dd{(X_tY_t)}=X_t\dd{Y_t}+Y_t\dd{X_t}+\dd{{\langle X,Y\rangle}_t}
+    $$
+    The last term $\dd{{\langle X,Y\rangle}_t}$ is called \emph{Itô term}.
+  \end{theorem}
+  \begin{proof}
+    Let ${(t_k^n)}_{0\leq k\leq n}\in \mathrm{P}([0,t])$ such that $\Delta_n\to 0$. Then:
+    \begin{multline*}
+      X_tY_t-X_0Y_0=\sum_{k=0}^{n-1}(X_{t_{k+1}^n}Y_{t_{k+1}^n}-X_{t_k^n}Y_{t_k^n})=\\=\sum_{k=0}^{n-1}(X_{t_{k+1}^n}-X_{t_k^n})Y_{t_{k+1}^n}+\sum_{k=0}^{n-1}X_{t_k^n}(Y_{t_{k+1}^n}-Y_{t_k^n})+\\+\sum_{k=0}^{n-1}(X_{t_{k+1}^n}-X_{t_k^n})(Y_{t_{k+1}^n}-Y_{t_k^n})
+    \end{multline*}
+    Letting $n\to\infty$ and using \mcref{SC:ito_quadratic_variation} and a previous remark we get the result.
+  \end{proof}
+  \begin{corollary}
+    Let $X={(X_t)}_{t\geq 0}$ be an Itô process. Then, ${(X_t^2)}_{t\geq 0}$ is an Itô process and:
+    $$
+      \dd{X_t^2}=2X_t\dd{X_t}+\dd{{\langle X\rangle}_t}
+    $$
+  \end{corollary}
+  \subsubsection{Itô's formula}
+  \begin{theorem}[Itô's formula]
+    Let $X={(X_t)}_{t\geq 0}$ be an Itô process and $f\in C^2(\RR)$. Then, ${(f(X_t))}_{t\geq 0}$ is an Itô process and:
+    $$
+      \dd{f(X_t)}=f'(X_t)\dd{X_t}+\frac{1}{2}f''(X_t)\dd{{\langle X\rangle}_t}
+    $$
+  \end{theorem}
+  \begin{theorem}
+    Let $X^1,\ldots,X^d$ be Itô processes and $f\in C^2(\RR^d)$. Then, ${(f(X^1_t,\ldots,X^d_t))}_{t\geq 0}$ is an Itô process and:
+    $$
+      \dd{f(\vf{X})} =\sum_{i=1}^d\pdv{f}{x_i}(\vf{X})\dd{X^i_t}+\frac{1}{2}\sum_{i,j=1}^d\frac{\partial^2 f}{\partial x_i\partial x_j}(\vf{X})\dd{{\langle X^i,X^j\rangle}_t}
+    $$
+    where $\vf{X}:=(X^1,\ldots,X^d)$.
+  \end{theorem}
 \end{multicols}
 \end{document}
