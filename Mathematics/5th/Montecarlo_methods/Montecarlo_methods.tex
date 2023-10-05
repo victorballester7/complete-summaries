@@ -1,0 +1,125 @@
+\documentclass[../../../main_math.tex]{subfiles}
+
+\begin{document}
+\changecolor{MM}
+\begin{multicols}{2}[\section{Montecarlo methods}]
+  The goal of Montecarlo methods is to compute $\Exp(X)$, where $X$ is a random variable. In dimension 1, deterministic methods are more efficient but in higher dimensions ($d\geq 4$), Montecarlo methods are more competitive.
+  \subsection{Foundations}
+  As always, we consider a probability space $(\Omega,\mathcal{F},\mathbb{P})$ and a random variable $Y\in L^1$.
+  \subsubsection{Principle}
+  \begin{definition}
+    The main idea will be to approximate $\Exp(Y)$ by $\frac{1}{n}\sum_{i=1}^n Y_i:=\overline{Y}_n$, where $Y_i$ are \iid random variables with same law as $Y$. The variable $\overline{Y}_n$ is called the \emph{Montecarlo estimator} of $\Exp(Y)$.
+  \end{definition}
+  \begin{lemma}
+    The Montecarlo estimator is consistent, i.e.\ $\overline{Y}_n\overset{\text{a.s.}}{\longrightarrow}\Exp(Y)$, and unbiased, i.e.\ $\Exp(\overline{Y}_n)=\Exp(Y)$.
+  \end{lemma}
+  \begin{proof}
+    Use the \mnameref{P:stronglawKolmo}.
+  \end{proof}
+  \begin{lemma}
+    Assume $Y\in L^2$ and let $\overline{Y}_n$ be the Montecarlo estimator of $\Exp(Y)$. Then:
+    $$
+      \norm{\overline{Y}_n-\Exp(Y)}_{2}=\sqrt{\frac{\Var(Y)}{n}}
+    $$
+  \end{lemma}
+  \begin{proof}
+    \begin{multline*}
+      \norm{\overline{Y}_n-\Exp(Y)}_{2}=\sqrt{\Exp\left(\left(\overline{Y}_n-\Exp(Y)\right)^2\right)}=\\=\sqrt{\Var(\overline{Y}_n)}=\sqrt{\frac{\Var(Y)}{n}}
+    \end{multline*}
+  \end{proof}
+  \begin{lemma}
+    Let $Y\in L^2$ and $\overline{Y}_n$ be the Montecarlo estimator of $\Exp(Y)$. Then:
+    $$
+      \sqrt{n}(\overline{Y}_n - \Exp(Y))\overset{\text{d}}{\longrightarrow}N(0,\Var(Y))
+    $$
+  \end{lemma}
+  \begin{proof}
+    Use \mnameref{P:central_limit_thm}.
+  \end{proof}
+  \begin{remark}
+    In practice, we do not know $\Var(Y)$, so we use an estimator of it, such as ${\overline{\sigma}_n}^2=\frac{1}{n-1}\sum_{i=1}^n {(Y_i-\overline{Y}_n)}^2$, which is a consistent unbiased estimator of $\Var(Y)$. Thus:
+    $$
+      \frac{\sqrt{n}}{\overline{\sigma}_n}(\overline{Y}_n - \Exp(Y))\overset{\text{d}}{\longrightarrow}N(0,1)
+    $$
+    by \mnameref{P:slutsky}.
+  \end{remark}
+  \begin{lemma}
+    Let $Y\in L^2$ and $\overline{Y}_n$ be the Montecarlo estimator of $\Exp(Y)$. Then, a confidence interval for $\Exp(Y)$ of level $1-\alpha$ is:
+    $$
+      \text{CI}_\alpha:=\left(\overline{Y}_n-z_{1-\alpha/2}\frac{\overline{\sigma}_n}{\sqrt{n}},\overline{Y}_n+z_{1-\alpha/2}\frac{\overline{\sigma}_n}{\sqrt{n}}\right)
+    $$
+    where $z_{\alpha/2}$ is the quantile of order $\alpha/2$ of the standard normal distribution.
+  \end{lemma}
+  \subsubsection{Random number generator}
+  In this chapter we will assume that we already now how to simulate sequences of \iid random variables with uniform distribution on $[0,1]$.
+  \begin{remark}
+    In summary, the computer generates a sequence ${(x_i)}_{0\leq i\leq m}$, with $m$ as large as possible, in the following way: $x_{i+1}=f(x_i)$ and then sets $u_i=\frac{x_i}{m}$. The value $x_0$ is called the \emph{seed} of the sequence and $f$ is chosen with periodicity as high as possible. In the early days of computers, $f(x)=ax+b\mod{m}$, which had periodicity $m\sim 2^{31}-1$. Nowadays, \emph{Mersenne Twister algorithm} is used, which has periodicity $m\sim 2^{19937}-1$.
+  \end{remark}
+  \subsubsection{Simulation of random variables}
+  \begin{lemma}
+    Let $U, {(U_i)}_{0\leq i\leq d}\sim U([0,1])$. Then:
+    \begin{itemize}
+      \item If $a,b\in\RR$ with $a<b$, then $a+(b-a)U\sim U([a,b])$.
+      \item If $p\in (0,1)$, then $\indi{U\leq p}\sim\text{Ber}(p)$.
+      \item If $p\in (0,1)$, then $\sum_{i=1}^d \indi{U_i\leq p}\sim\text{B}(d,p)$.
+      \item If $(x_n),(p_n)\in\RR$ be such that $\sum_{n\geq 0} p_n=1$, then $\sum_{n\geq 0} x_n\indi{\sum_{k=0}^{n-1} p_k\leq U\leq\sum_{k=0}^n p_k}\sim U\left((x_n)\right)$.
+      \item If $\prod_{i=1}^d (a_i,b_i)\in \RR^d$ with $a_i<b_i$, then $(a_i+(b_i-a_i)U_i)_{1\leq i\leq d}\sim U\left(\prod_{i=1}^d (a_i,b_i)\right)$.
+    \end{itemize}
+  \end{lemma}
+  \begin{proposition}
+    Let $X$ be a random variable with cdf $F$ and $U\sim U([0,1])$. Then,
+    $$
+      F^{-1}(u)=\inf\{ x\in\RR : F(x)\geq u\}
+    $$
+    satisfies $F^{-1}(U)\sim X$.
+  \end{proposition}
+  \begin{proposition}
+    Let $U\sim U([0,1])$, $X$ be a random variable with cdf $F$ and $a,b\in\RR$ with $a<b$ be such that $\Prob(a< X\leq b)>0$. Then:
+    $$
+      F^{-1}\left(F(a)+(F(b)-F(a))U\right)\sim \mathcal{L}(X\mid a< X\leq b)
+    $$
+  \end{proposition}
+  \begin{proposition}[Acceptance-rejection method]
+    Let ${(X_i)}_{i\geq 1}$ be \iid $\RR^d$-valued random variables, $D\in \mathcal{B}(\RR^d)$ be such that $\Prob(X_1\in D)>0$ and set:
+    $$
+      \nu := \inf\{ i\geq 1 : X_i\in D\}
+    $$
+    Then, $X_\nu\sim \mathcal{L}(X_1\mid X_1\in D)$.
+  \end{proposition}
+  \begin{remark}
+    The principle of the acceptance-rejection method is to simulate conditional distributions by rejecting samples that do not satisfy a prescribed condition.
+  \end{remark}
+  \begin{proposition}
+    Let $f$ be a pdf of some random variable, ${(X_i)}_{i\geq 1}$ be \iid with pdf $g$ and ${(U_i)}_{i\geq 1}$ be \iid $U([0,1])$ independent of ${(X_i)}_{i\geq 1}$. Assume that $\exists c\geq 1$ such that $f(x)\almoste{\leq} cg(x)$ and set:
+    $$
+      \nu := \inf\{ i\geq 1 : cg(X_i)U_i\leq f(X_i)\}
+    $$
+    Then, $X_\nu$ admits $f$ as pdf.
+  \end{proposition}
+  \begin{proposition}
+    Let $f$ be a pdf of some random variable and $a_1,a_2\in\RR$ with $a_2>0$ be such that
+    $$
+      D:=\{ (u,v)\in\RR_{>0}\times \RR:0<u^2<f\left(a_1+a_2\frac{v}{u}\right)\}
+    $$
+    is bounded. If $(U,V)\sim U(D)$, then $a_1+a_2\frac{V}{U}$ admits $f$ as pdf.
+  \end{proposition}
+  \subsubsection{Gaussian distribution}
+  \begin{proposition}[Box-Muller method]
+    Let $U$, $V$ be \iid $U([0,1])$ and set:
+    $$
+      X:=\sqrt{-2\log(U)}\cos(2\pi V)\quad Y:=\sqrt{-2\log(U)}\sin(2\pi V)
+    $$
+    Then, $X$, $Y$ are \iid $N(0,1)$.
+  \end{proposition}
+  \begin{proposition}[Polar method]
+    Let $U$, $V$ be \iid $U(\DD)$, where $\DD\subset \RR^2$ is the open unit disk. Let $R^2=U^2+V^2$ and set:
+    $$
+      X:=U\sqrt{\frac{-2\log(R^2)}{R^2}}\quad Y:=V\sqrt{\frac{-2\log(R^2)}{R^2}}
+    $$
+    Then, $X$, $Y$ are \iid $N(0,1)$.
+  \end{proposition}
+  \begin{proposition}
+    Let $\vf{X}\in N_d(0,\vf{I}_d)$, $\vf\mu\in\RR^d$ and $\vf{A}\in\mathcal{M}_d(\RR)$. Then, $\vf\mu+\vf{AX}\sim N_d(\vf\mu,\transpose{\vf{AA}})$.
+  \end{proposition}
+\end{multicols}
+\end{document}

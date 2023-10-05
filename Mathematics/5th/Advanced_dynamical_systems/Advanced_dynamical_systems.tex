@@ -75,5 +75,77 @@
       x=(0,1,\ldots,m-1,10,\ldots,1(m-1),20,\ldots,2(m-1),\ldots)
     $$
   \end{proof}
+  \subsubsection{A hyperbolic automorphism of \texorpdfstring{$T^2$}{T2}}
+  \begin{proposition}
+    Consider $\vf{A}=\begin{pmatrix}
+        2 & 1 \\
+        1 & 1
+      \end{pmatrix}\in \GL_2(\RR)$. Then, $\vf{A}(\ZZ^2)=\ZZ^2$ and this induces an automorphism $\vf{\tilde{A}}$ of $T^2=\quot{\RR^2}{\ZZ^2}$.
+  \end{proposition}
+  \begin{definition}
+    We define the set of periodic points of $\vf{\tilde{A}}$ as $\Per\vf{\tilde{A}}$.
+  \end{definition}
+  \begin{lemma}
+    $\Per\vf{\tilde{A}}=\quot{\QQ^2}{\ZZ^2}$. Thus, $\Per\vf{\tilde{A}}$ is dense in $T^2$.
+  \end{lemma}
+  \begin{proof}
+    Let $\vf{x}\in \Per\vf{\tilde{A}}$. Then, $\exists k\in\NN$ and $\vf{n}\in\ZZ^2$ such that $\vf{A}^k\vf{x}=\vf{x}+\vf{n}$. One can easily check that $\sigma(\vf{\tilde{A}})=\left\{\frac{3}{2}\pm \frac{\sqrt{5}}{2}\right\}=:\{\lambda_{\pm}\}$ with $\lambda_-<1<\lambda_+$. Thus,
+    $$
+      \det(\vf{A}^k-\vf{I})=({\lambda_+}^k-1)({\lambda_-}^k-1)\ne 0
+    $$
+    and so the equation $\vf{A}^k\vf{x}=\vf{x}+\vf{n}$ has a unique (rational) solution.
+  \end{proof}
+  \begin{remark}
+    The \emph{hyperbolicity} comes from the fact that there is one eigenvector with eigenvalue greater than $1$ and another with eigenvalue less than $1$.
+  \end{remark}
+  \begin{theorem}
+    The iterates of $\vf{\tilde{A}}$ smear every domain $F\subseteq T^2$ uniformly over $T^2$, that is, for every domain $G\subseteq T^2$, we have that the following limit exists:
+    $$
+      \abs{(\vf{\tilde{A}}^{-n} F)\cap G}\overset{n\to\infty}{\longrightarrow} \abs{F}\abs{G}
+    $$
+    This property of $\vf{\tilde{A}}$ is called \emph{mixing}.
+  \end{theorem}
+  \begin{proof}
+    We can prove a more general property in terms of functions in the torus (and then apply it to $f=\indi{F}$ and $g=\indi{G}$):
+    $$
+      \lim_{n\to\infty}\int_{T^2} f(\vf{\tilde{A}}^n \vf{x}) g(\vf{x})\dd{\vf{x}}=\int_{T^2} f(\vf{x})\dd{\vf{x}}\int_{T^2} g(\vf{x})\dd{\vf{x}}
+    $$
+    We will prove this for the orthonormal basis of Fourier series $\{\exp{2\pi i \vf{p}\cdot \vf{x}}\}_{\vf{p}\in\ZZ^2}$. Note that:
+    $$
+      \int_{T^2} \exp{2\pi i (\transpose{(\vf{\tilde{A}}^n)}\vf{p})\cdot \vf{x}}\dd{\vf{x}}=\begin{cases}
+        1 & \text{if }\vf{p}=\vf{0}    \\
+        0 & \text{if }\vf{p}\ne \vf{0}
+      \end{cases}
+    $$
+    Therefore, since $\transpose{(\vf{\tilde{A}}^n)}\vf{p}$ takes infinitely many values for $\vf{p}\ne \vf{0}$, we have that if $g=\exp{2\pi i \vf{q} \cdot \vf{x}}$ then:
+    $$
+      \lim_{n\to\infty}\int_{T^2} \exp{2\pi i(\transpose{(\vf{\tilde{A}}^n)}\vf{p}+\vf{q})\cdot \vf{x}}\dd{\vf{x}}=0
+    $$
+    So for any $\vf{p}, \vf{q}\in\ZZ^2$ we have the equality. Then, we use that any function nice enough can be approximated with its Fourier series.
+  \end{proof}
+  \begin{theorem}
+    On the torus $T^2$ there exist two direction fields invariant with respect to the automorphism $\vf{\tilde{A}}$. The integral curves of each of these directions fields are everywhere dense on the torus. The automorphism $\vf{\tilde{A}}$ converts the integral curves of each field into integral curves of the same field, expanding by $\lambda_+$ for the first field and contracting by $\lambda_-$ for the second.
+  \end{theorem}
+  \begin{proof}
+    Let $\vf{e}_+$ and $\vf{e}_-$ be the eigenvectors of $\vf{A}$ with eigenvalues $\lambda_+$ and $\lambda_-$ respectively. Let $\vf{x}\in T^2$ and
+    $$
+      \function{\vf\gamma_+}{\RR}{T^2}{t}{\vf{x}+t \vf{e}_+}\quad
+      \function{\vf\gamma_-}{\RR}{T^2}{t}{\vf{x}+t \vf{e}_-}
+    $$
+    be the expanding and contracting curves and let $\vf{\xi}_{\vf{x}}=\im(\vf\gamma_+)$, $\vf{\eta}_{\vf{x}}=\im(\vf\gamma_-)$.
+  \end{proof}
+  \begin{definition}
+    Let $\vf{A},\vf{B}:T^2\rightarrow T^2$ be $\mathcal{C}^1$ functions. We say that $B$ is \emph{$\mathcal{C}^0$-close} to $\vf{A}$ if for all $\varepsilon>0$:
+    $$
+      \sup_{\vf{x}\in T^2}\norm{\vf{A}(\vf{x})-\vf{B}(\vf{x})}<\varepsilon
+    $$
+    We say that $\vf{B}$ is \emph{$\mathcal{C}^1$-close} to $\vf{A}$ if for all $\varepsilon>0$, $\vf{B}$ is $\mathcal{C}^0$-close to $\vf{A}$ and:
+    $$
+      \sup_{\vf{x}\in T^2}\norm{\vf{D}\vf{A}(\vf{x})-\vf{D}\vf{B}(\vf{x})}<\varepsilon
+    $$
+  \end{definition}
+  \begin{theorem}[Structal stability]
+    Let $\vf{B}$ be a diffeomorphism on $T^2$ $\mathcal{C}^1$-close to $\vf{\tilde{A}}$. Then, $\vf{B}$ is conjugate to $\vf{\tilde{A}}$.
+  \end{theorem}
 \end{multicols}
 \end{document}
