@@ -667,6 +667,26 @@
       \dd{f(X_t)}=f'(X_t)\dd{X_t}+\frac{1}{2}f''(X_t)\dd{{\langle X\rangle}_t}
     $$
   \end{theorem}
+  \begin{proof}
+    Let $t\geq 0$ and ${(t_k^n)}_{0\leq k\leq n}\in \mathrm{P}([0,t])$ such that $\Delta_n\to 0$. Then, using the Taylor expansion of $f$ we have:
+    \begin{align*}
+      f(X_t)-f(X_0) & =\sum_{k=0}^{n-1}f(X_{t_{k+1}^n})-f(X_{t_k^n})=                                    \\&=\sum_{k=0}^{n-1}f'(X_{t_k^n})(X_{t_{k+1}^n}-X_{t_k^n})+\\
+                    & \qquad\quad+\frac{1}{2}\sum_{k=0}^{n-1}f''(X_{u_k^n}){(X_{t_{k+1}^n}-X_{t_k^n})}^2
+    \end{align*}
+    with $u_k^n\in [t_k^n,t_{k+1}^n]$. By a previous remark we have that:
+    $$
+      \sum_{k=0}^{n-1}f'(X_{t_k^n})(X_{t_{k+1}^n}-X_{t_k^n})\overset{\Prob}{\longrightarrow} \int_0^t f'(X_u)\dd{X_u}
+    $$
+    Now, by \mcref{SC:ito_quadratic_variation} we have that:
+    $$
+      \sum_{k=0}^{n-1}Y_{t_k^n}{(X_{t_{k+1}^n}-X_{t_k^n})}^2 \overset{\Prob}{\longrightarrow} \int_0^t Y_u\dd{{\langle X\rangle}_u}
+    $$
+    in the elementary case where $Y_u=\indi{(0,s]}(u)$, $s\geq 0$. By linearity, this immediately extends to the case where $Y$ is a random step function. By density, it further extends to the case where $Y$ is any continuous and adapted process. In particular, we may take
+    $Y_u=f''(X_u)$, and the formula holds by uniform continuity:
+    $$
+      \max_{0\leq k\leq n}\abs{f''(X_{t_k^n})-f''(X_{u_k^n})}\almoste{\longrightarrow} 0
+    $$
+  \end{proof}
   \begin{theorem}
     Let $X^1,\ldots,X^d$ be Itô processes and $f\in C^2(\RR^d)$. Then, ${(f(X^1_t,\ldots,X^d_t))}_{t\geq 0}$ is an Itô process and:
     $$
@@ -674,5 +694,6 @@
     $$
     where $\vf{X}:=(X^1,\ldots,X^d)$.
   \end{theorem}
+  \subsubsection{Exponential martingales}
 \end{multicols}
 \end{document}

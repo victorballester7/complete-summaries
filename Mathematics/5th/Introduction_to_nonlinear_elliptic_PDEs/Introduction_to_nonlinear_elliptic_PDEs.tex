@@ -101,7 +101,7 @@
   \begin{proposition}
     $\mathcal{N}_f$ has at least one solution if and only if for any weak solution $v$ of $\mathcal{N}_0$ we have $\langle f,v\rangle=0$.
   \end{proposition}
-  \subsection{Spectrum of compact operators}
+  \subsubsection{Spectrum of compact operators}
   In this section $\KK$ will denote either $\RR$ or $\CC$.
   \begin{definition}
     Let $H$ be a $\KK$-Hilbert space and $K:H\to H$ be a compact operator. We define the \emph{resolvent set} of $K$ as:
@@ -120,5 +120,108 @@
     $$
     If $\sigma(K)\cap\RR^*$ is infinite, then it is of the form $\{\lambda_n\}_{n\in \NN}$ with $\lambda_n\to 0$.
   \end{theorem}
+  \begin{lemma}
+    Let $H$ be a Hilbert space and $K:H\to H$ be a continuous self-adjoint operator. Then:
+    $$
+      \norm{K}=\sup_{\norm{x}=1}\langle x,Kx\rangle
+    $$
+  \end{lemma}
+  \begin{lemma}
+    Let $H\ne\{ 0\}$ be Hilbert and $K:H\to H$ be a compact and self-adjoint operator. Then:
+    $$
+      \sup_{\norm{x}=1}\langle x,Kx\rangle=\lambda
+    $$
+    where $\lambda$ is the largest eigenvalue of $K$.
+  \end{lemma}
+  \subsubsection{Regularity theorems for weak solutions of divergence-form elliptic PDEs}
+  \begin{theorem}[Inner regularity]
+    Assume, in addition to the usual assumptions, that $a_{ij}\in \mathcal{C}^1(\Omega)$. Let $f\in L^2(\Omega)$ and $u$ be a weak solution of $Lu=f$. Then, $u\in H^2_{\text{loc}}(\Omega)$ and for any compact $\omega\subset\subset \Omega$, meaning that $\overline{\omega}\subset\Omega$ compact, we have $u\in H^2(\omega)$ and:
+    $$
+      \norm{u}_{H^2(\omega)}\leq C\left(\norm{f}_{L^2(\Omega)}+\norm{u}_{L^2(\Omega)}\right)
+    $$
+  \end{theorem}
+  \begin{corollary}
+    Assume that $a_{ij}\in\mathcal{C}^m(\Omega)$ for some $m\geq 2$, and $b_j,c\in \mathcal{C}^{m-1}(\Omega)$. Let $f\in H^{m-1}(\Omega)$ and $u\in H^1_{\text{loc}}(\Omega)\cap L^2(\Omega)$ be a weak solution of $Lu=f$. Then, $u\in H^{m+1}_{\text{loc}}(\Omega)$ and for any $\omega\subset\subset \Omega$ we have $u\in H^{m+2}(\omega)$ and:
+    $$
+      \norm{u}_{H^{m+2}(\omega)}\leq C\left(\norm{f}_{H^{m-1}(\Omega)}+\norm{u}_{L^2(\Omega)}\right)
+    $$
+  \end{corollary}
+  \begin{theorem}[Regularity up to the boundary]
+    Assume that $\Fr{\Omega}$ is $\mathcal{C}^2$ and that $a_{ij}\in \mathcal{C}^1(\overline{\Omega})$, $b_j,c\in L^\infty(\Omega)$. Let $f\in L^2(\Omega)$ and $u\in H^1_0(\Omega)$ be a weak solution of $\mathcal{D}_f$. Then, $u\in H^2(\Omega)$ and:
+    $$
+      \norm{u}_{H^2(\Omega)}\leq C\left(\norm{f}_{L^2(\Omega)}+\norm{u}_{L^2(\Omega)}\right)
+    $$
+  \end{theorem}
+  \begin{corollary}
+    Assume that $\Fr{\Omega}$ is $\mathcal{C}^{m+1}$, $m\geq 2$, and that $a_{ij}\in \mathcal{C}^m(\overline{\Omega})$, $b_j,c\in \mathcal{C}^{m-1}(\overline{\Omega})$. Let $f\in H^{m-1}(\Omega)$ and $u\in H^1_0(\Omega)$ be a weak solution of $\mathcal{D}_f$. Then, $u\in H^{m+2}(\Omega)$ and:
+    $$
+      \norm{u}_{H^{m+2}(\Omega)}\leq C\left(\norm{f}_{H^{m-1}(\Omega)}+\norm{u}_{L^2(\Omega)}\right)
+    $$
+  \end{corollary}
+  \begin{corollary}
+    Assume that $\Fr{\Omega}$ is $\mathcal{C}^\infty$ and that $a_{ij},b_j,c,f\in \mathcal{C}^\infty(\overline{\Omega})$. Let $u\in H^1_0(\Omega)$ be a weak solution of $\mathcal{D}_f$. Then, $u\in \mathcal{C}^\infty(\Omega)$ and $\forall m\geq 1$:
+    $$
+      \norm{u}_{H^{m+1}(\Omega)}\leq C\left(\norm{f}_{H^{m-1}(\Omega)}+\norm{u}_{L^2(\Omega)}\right)
+    $$
+  \end{corollary}
+  \subsubsection{Weak maximum principle for weak solutions of divergence-form elliptic PDEs}
+  \begin{lemma}
+    Let $\Omega\subseteq\RR^d$ open and $u\in H^1(\Omega)$. Then:
+    $$
+      u^{+}:=\begin{cases}
+        u & \text{if }u\geq 0 \\
+        0 & \text{if }u<0
+      \end{cases}\qquad
+      u^{-}:=\begin{cases}
+        -u & \text{if }u\leq 0 \\
+        0  & \text{if }u>0
+      \end{cases}
+    $$
+    are also in $H^1(\Omega)$ and:
+    $$
+      \grad(u^+)\almoste{=}\begin{cases}
+        \grad u & \text{if }u>0     \\
+        0       & \text{if }u\leq 0
+      \end{cases}\quad
+      \grad(u^-)\almoste{=}\begin{cases}
+        -\grad u & \text{if }u<0     \\
+        0        & \text{if }u\geq 0
+      \end{cases}
+    $$
+  \end{lemma}
+  \begin{corollary}
+    Let $\Omega\subseteq\RR^d$ open and $u\in H^1(\Omega)$. Then, $\abs{u}\in H^1(\Omega)$ and $\grad{\abs{u}}=\sign\grad{u}$.
+  \end{corollary}
+  \begin{lemma}
+    Let $(u_n)\in H^1(\Omega)$ be such that $u_n\overset{H^1(\Omega)}{\longrightarrow} u$. Then, $u_n^\pm\overset{H^1(\Omega)}{\longrightarrow} u^\pm$.
+  \end{lemma}
+  \begin{corollary}
+    Let $u\in H^1(\Omega)$. Then, $\Tr_{\partial\Omega}(u^\pm)={(\Tr_{\partial\Omega}u)}^\pm$.
+  \end{corollary}
+  \begin{lemma}
+    Let $\Omega\subseteq\RR^d$ open with $\mathcal{C}^1$ boundary, $u\in H^1(\Omega)$ and $\Tr_{\partial\Omega}u\almoste{\leq}0$. Then, $u^+\in H^1_0(\Omega)$.
+  \end{lemma}
+  \begin{theorem}[Weak maximum principle]
+    Let $\Omega\subseteq\RR^d$ open and bounded with $\mathcal{C}^1$ boundary, $a_{ij}=a_{ji},c\in L^\infty(\Omega)$, $c\almoste{\geq}0$, $L=-\sum_{i,j=1}^d\partial_i(a_{ij}\partial_j)+c$ be elliptic and $f\in L^2(\Omega)$ with $f\almoste{\leq} 0$. Let $u\in H^1(\Omega)$ be such that:
+    \begin{itemize}
+      \item $\displaystyle \int_\Omega\left[\sum_{i,j=1}^da_{ij}\partial_iu\partial_jv+cuv\right]=\int_\Omega fv$ $\forall v\in H^1_0(\Omega)$
+      \item $\Tr_{\partial\Omega}u\almoste{\leq}0$
+    \end{itemize}
+    Then, $u\almoste{\leq}0$.
+  \end{theorem}
+  \begin{theorem}[Weak maximum principle]
+    Let $\Omega\subseteq\RR^d$ open and bounded with $\mathcal{C}^1$ boundary, $a_{ij}=a_{ji},b_j,c\in L^\infty(\Omega)$, $L=-\sum_{i,j=1}^d\partial_i(a_{ij}\partial_j)+\sum_{j=1}^db_j\partial_j+c$ be elliptic and $f\in L^2(\Omega)$ with $f\almoste{\leq} 0$. Let $u\in H^1(\Omega)$ be such that:
+    \begin{itemize}
+      \item $\displaystyle \int_\Omega\left[\sum_{i,j=1}^da_{ij}\partial_iu\partial_jv+cuv\right]=\int_\Omega fv$ $\forall v\in H^1_0(\Omega)$
+      \item $\Tr_{\partial\Omega}u\almoste{\leq}0$
+    \end{itemize}
+    Then, $u\almoste{\leq}0$.
+  \end{theorem}
+  \begin{corollary}
+    For each $f\in L^2(\Omega)$, the problem $\mathcal{D}_f$ has a unique weak solution $u_f$. Moreover, if $\Fr{\Omega}\in\mathcal{C}^1$, then $u_f\in H^2(\Omega)$ and $f\mapsto u_f$ is a bounded linear operator from $L^2(\Omega)$ to $H^2(\Omega)$. If $\Fr{\Omega}\in\mathcal{C}^{m+1}$, $b_j\in\mathcal{C}^{m-1}$ and $f\in H^{m-1}(\Omega)$, then $u_f\in H^{m+1}(Omega)$ and $f\mapsto u_f$ is a bounded linear operator from $H^{m-1}(\Omega)$ to $H^{m+1}(\Omega)$.
+  \end{corollary}
+  \begin{definition}
+    If the weak solution $u_f$ of the problem $\mathcal{D}_f$ is in $H^1_0(\Omega)\cap W^{2,p}(\Omega)$ for some $p\in [1,\infty)$, then we say that $u_f$ is called a \emph{strong solution} of $\mathcal{D}_f$. If $u_f\in \mathcal{C}^2(\Omega)\cap H^1_0(\Omega)$, then we say that $u_f$ is a \emph{classical solution} of $\mathcal{D}_f$.
+  \end{definition}
 \end{multicols}
 \end{document}
