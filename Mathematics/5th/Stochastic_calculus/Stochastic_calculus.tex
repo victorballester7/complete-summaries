@@ -604,6 +604,13 @@
     $$
     Letting $t\to \infty$ we get that $\phi$, $\tilde{\phi}$ are indistinguishable. Finally, from the Lebesgue integral, we have that $\psi$, $\tilde{\psi}$ are indistinguishable.
   \end{proof}
+  \begin{proposition}\label{SC:ito_process_martingale}
+    Let $X={(X_t)}_{t\geq 0}$ be an Itô process such that $\dd{X_t}=\phi_t\dd{B_t}+\psi_t\dd{t}$. Then:
+    \begin{itemize}
+      \item $X$ is a local martingale if and only if $X_0\in L^1$ and $\psi=0$.
+      \item $X$ is a square-integrable martingale if and only if $X_0\in L^2$, $\phi\in\MM^2$ and $\psi=0$.
+    \end{itemize}
+  \end{proposition}
   \begin{definition}
     Let $X={(X_t)}_{t\geq 0}$ be an Itô process such that $\dd{X_t}=\phi_t\dd{B_t}+\psi_t\dd{t}$, and $Y={(Y_t)}_{t\geq 0}$ be a continuous adapted process. Then, $Y\phi\in \MM^2_{\text{loc}}$ and $Y\psi\in \MM^1_{\text{loc}}$ and we define:
     $$
@@ -695,5 +702,32 @@
     where $\vf{X}:=(X^1,\ldots,X^d)$.
   \end{theorem}
   \subsubsection{Exponential martingales}
+  \begin{lemma}[Doléans-Dade exponential]
+    For any $\phi\in\MM^2_{\text{loc}}$, the process $Z^\phi={(Z_t^\phi)}_{t\geq 0}$ defined as
+    $$
+      Z_t^\phi:=\exp{\int_0^t \phi_u\dd{B_u}-\frac{1}{2}\int_0^t{\phi_u}^2\dd{u}}
+    $$
+    is a continuous local martingale.
+  \end{lemma}
+  \begin{proof}
+    Applying Itô's formula to $f(x)=\exp{x}$ and $X_t=\int_0^t \phi_u\dd{B_u}-\frac{1}{2}\int_0^t{\phi_u}^2\dd{u}$ we get:
+    \begin{equation*}
+      \dd{Z^\phi_t} = \exp{X_t}\left( \phi_t\dd{B_t}-\frac{1}{2}{\phi_t}^2\dd{t}\right)+\frac{1}{2}\exp{X_t}{\phi_t}^2\dd{t}= \exp{X_t}\phi_t\dd{B_t}
+    \end{equation*}
+    Since, $Z^\phi_0=1$, we obtain that $\forall t \geq 0$:
+    \begin{equation*}
+      Z^\phi_t=1+\int_0^t Z^\phi_u\phi_u\dd{B_u}
+    \end{equation*}
+    and the result follows from \mcref{SC:ito_process_martingale}.
+  \end{proof}
+  \begin{lemma}
+    If $M$ is a non-negative local martingale, then $M$ is a super-martingale. Moreover, for $T\in \RR_{\geq 0}$, ${(M_t)}_{t\in[0,T]}$ is a martingale if and only if $\Exp(M_T)\geq \Exp(M_0)$.
+  \end{lemma}
+  \begin{theorem}[Novikov's condition]
+    For ${(Z^\phi_s)}_{s\in[0,t]}$ to be a martingale, it suffices that:
+    $$
+      \Exp\left(\exp{\frac{1}{2}\int_0^t{\phi_u}^2\dd{u}}\right)<\infty
+    $$
+  \end{theorem}
 \end{multicols}
 \end{document}
