@@ -85,6 +85,7 @@
       \item $\Exp(\abs{X_t})<\infty$ for all $t\geq 0$.
       \item $\Exp(X_t\mid \mathcal{F}_s)=X_s$ for all $0\leq s\leq t$.
     \end{enumerate}
+    The process is called a \emph{sub-martingale} if the last condition is replaced by $\Exp(X_t\mid \mathcal{F}_s)\geq X_s$ for all $0\leq s\leq t$ and a \emph{super-martingale} if $\Exp(X_t\mid \mathcal{F}_s)\leq X_s$ for all $0\leq s\leq t$.
   \end{definition}
   \begin{proposition}
     Let $B={(B_t)}_{t\geq 0}$ be a Brownian motion. Then, the following processes are martingales ${(M_t)}_{t\geq 0}$ with respect to the natural filtration induced by $B$:
@@ -720,13 +721,106 @@
     \end{equation*}
     and the result follows from \mcref{SC:ito_process_martingale}.
   \end{proof}
-  \begin{lemma}
+  \begin{lemma}\label{SC:preNovikov}
     If $M$ is a non-negative local martingale, then $M$ is a super-martingale. Moreover, for $T\in \RR_{\geq 0}$, ${(M_t)}_{t\in[0,T]}$ is a martingale if and only if $\Exp(M_T)\geq \Exp(M_0)$.
   \end{lemma}
+  \begin{proof}
+    Since $M$ is a local martingale with localizing sequence $(T_n)$, then $\forall t\geq 0$ we have that $\Exp(M_{t\wedge T_n}\mid \mathcal{F}_s )= M_{s\wedge T_n}$ and so:
+    $$
+      \begin{cases}
+        M_{s\wedge T_n} \overset{\text{a.s.}}{\underset{n\to\infty}{\longrightarrow}} M_s \\
+        M_{t \wedge T_n} \overset{\text{a.s.}}{\underset{n\to\infty}{\longrightarrow}} M_t
+      \end{cases}
+    $$
+    Now, by \mnameref{P:fatou} we have:
+    $$
+      \Exp(M_t\mid \mathcal{F}_s)\leq \liminf_{n\to\infty}\Exp(M_{t\wedge T_n}\mid \mathcal{F}_s)=\liminf_{n\to\infty}M_{s\wedge T_n}\!=M_s
+    $$
+    which shows that $M$ is a super-martingale. Now, fix $T\geq 0$, and suppose that $\Exp(M_T)\geq \Exp(M_0)$. This forces the non-increasing map $t\mapsto \Exp(M_t)$ to be constant on $[0,T]$. In particular, for any $0\leq s\leq t\leq T$, the non-negative variable $M_s-\Exp(M_t\mid \mathcal{F}_s)$ has zero mean, hence is null a.s.
+  \end{proof}
   \begin{theorem}[Novikov's condition]
-    For ${(Z^\phi_s)}_{s\in[0,t]}$ to be a martingale, it suffices that:
+    Let $t\geq 0$ be fixed and assume that:
     $$
       \Exp\left(\exp{\frac{1}{2}\int_0^t{\phi_u}^2\dd{u}}\right)<\infty
+    $$
+    Then, ${(Z^\phi_s)}_{s\in[0,t]}$ is a martingale.
+  \end{theorem}
+  \begin{proof}
+    Fix $0<\varepsilon<1$. We have that for all $s\in[0,t]$:
+    $$
+      {\left( Z_s^{(1-\varepsilon)\phi}\right)}^{\frac{1}{1-\varepsilon^2}}={\left( Z_s^\phi\right)}^{\frac{1}{1+\varepsilon}}{\left(\exp{\frac{1}{2}\int_0^s \phi_u^2\dd{u}}\right)}^{\frac{\varepsilon}{1+\varepsilon}}
+    $$
+    Now, choosing $s=t\wedge T_n$, where $T_n$ is a localizing sequence for $Z^{(1-\varepsilon)\phi}$, taking expectation and using \mnameref{RFA:holder} we get:
+    \begin{align*}
+      \Exp\left[
+        {\left( Z_{t\wedge T_n}^{(1-\varepsilon)\phi}\right)}^{\frac{1}{1-\varepsilon^2}}
+      \right] & \leq \Exp{\left[
+          { Z_{t\wedge T_n}^\phi}\right]}^{\frac{1}{1+\varepsilon}}\Exp{\left[
+      {\exp{\frac{1}{2}\int_0^{t\wedge T_n} \phi_u^2\dd{u}}}\right]}^{\frac{\varepsilon}{1+\varepsilon}} \\
+              & \leq \Exp{\left[
+          {\exp{\frac{1}{2}\int_0^{t} \phi_u^2\dd{u}}}\right]}^{\frac{\varepsilon}{1+\varepsilon}}
+    \end{align*}
+    because $\Exp{\left[
+          { Z_{t\wedge T_n}^\phi}\right]}=1$.  This implies that ${(Z_{t\wedge T_n}^{(1-\varepsilon)\phi})}$ is bounded in $L^p$ for $p=\frac{1}{\varepsilon^2}>1$. Thus:
+    $$
+      \Exp(Z_{t}^{(1-\varepsilon)\phi})=\lim_{n\to\infty}\Exp(Z_{t\wedge T_n}^{(1-\varepsilon)\phi})=1
+    $$
+    In particular, $\Exp\left[{\left( Z_{t}^{(1-\varepsilon)\phi}\right)}^{p}\right]\geq 1$ and so:
+    $$
+      1\leq \Exp{\left[
+          { Z_{t}^\phi}\right]}^{\frac{1}{1+\varepsilon}}\Exp{\left[
+          {\exp{\frac{1}{2}\int_0^{t} \phi_u^2\dd{u}}}\right]}^{\frac{\varepsilon}{1+\varepsilon}}
+    $$
+    Taking $\varepsilon\to 0$, yields $\Exp(Z_t^\phi)\geq 1$, which suffices to conclude by \mcref{SC:preNovikov}.
+  \end{proof}
+  \subsubsection{Girsanov's theorem}
+  \begin{theorem}[Giranov's theorem]
+    Let $\phi\in\MM^2_{\text{loc}}$ and suppose its associated exponential local martingale ${(Z_t^\phi)}_{t\geq 0}$ is a martingale. Then, the formula
+    $$
+      \QQ(A):=\Exp(Z_t^\phi\indi{A})\qquad\forall A\in \mathcal{F}_t
+    $$
+    defines a probability measure on $(\Omega, \mathcal{F}_t)$, under which the process $X={(X_s)}_{s\in[0,t]}$ defined as
+    $$
+      X_s:=B_s-\int_0^s \phi_u\dd{u}
+    $$
+    is a ${(\mathcal{F}_s)}_{s\in[0,t]}$-Brownian motion.
+  \end{theorem}
+  \begin{remark}
+    Note that, by linearity we have that for ant $\mathcal{F}_t$-measurable non-negative random variable $Y$:
+    $$
+      \Exp_\QQ(Y)=\Exp(YZ_t^\phi)\qquad
+      \Exp(Y)=\Exp_\QQ\left(\frac{Y}{Z_t^\phi}\right)
+    $$
+    where $\Exp_\QQ$ denotes the expectation with respect to $\QQ$.  This is useful for transferring computations between $\Prob$ and $\QQ$.
+  \end{remark}
+  \subsection{Stochastic differential equations}
+  \subsubsection{Introduction}
+  \begin{definition}
+    Let $X={(X_t)}_{t\geq 0}$ be a stochastic process and $b:\RR_{\geq 0}\times\RR\to \RR$ and $\sigma:\RR_{\geq 0}\times \RR$ be deterministic functions called \emph{drift} and \emph{diffusion}, respectively. A \emph{stochastic differential equation} (\emph{SDE}) is an equation of the form:
+    $$
+      \dd{X_t}=b(t,X_t)\dd{t}+\sigma(t,X_t)\dd{B_t}
+    $$
+  \end{definition}
+  \begin{definition}
+    Consider the following SDE:
+    $$
+      \dd{X_t}=b(t,X_t)\dd{t}+\sigma(t,X_t)\dd{B_t}
+    $$
+    We say that a progressive process $X={(X_t)}_{t\geq 0}$ defined on $(\Omega, \mathcal{F}, {(\mathcal{F}_t)}_{t\geq 0}, \Prob)$ is a \emph{solution of the SDE} if ${(b(t,X_t))}_{t\geq 0}\in\MM^1_{\text{loc}}$ and ${(\sigma(t,X_t))}_{t\geq 0}\in\MM^2_{\text{loc}}$ and $\forall t\geq 0$:
+    $$
+      X_t=X_0+\int_0^t b(s,X_s)\dd{s}+\int_0^t \sigma(s,X_s)\dd{B_s}
+    $$
+  \end{definition}
+  \subsubsection{Existence and uniqueness of solutions}
+  \begin{theorem}[Existence and uniqueness]
+    Let $b:\RR_{\geq 0}\times\RR\to \RR$ be a measurable function satisfying:
+    \begin{itemize}
+      \item Uniform spatial Lipschitz continuity: $\exists C>0$ such that $\forall t\geq 0$ and $\forall x,y\in\RR$ we have: $$\abs{b(t,x)-b(t,y)}\leq C\abs{x-y}$$
+      \item Local integrability in time: $\forall t \geq 0$ we have: $$\int_0^t \abs{b(s,0)}\dd{s}<\infty$$
+    \end{itemize}
+    Then, for each $z\in\RR$, there exists a unique measurable function $x={(x_t)}_{t\geq 0}$ such that $\forall t\geq 0$:
+    $$
+      x_t=z+\int_0^t b(s,x_s)\dd{s}
     $$
   \end{theorem}
 \end{multicols}
