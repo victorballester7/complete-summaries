@@ -797,31 +797,74 @@
   \subsubsection{Introduction}
   \begin{definition}
     Let $X={(X_t)}_{t\geq 0}$ be a stochastic process and $b:\RR_{\geq 0}\times\RR\to \RR$ and $\sigma:\RR_{\geq 0}\times \RR$ be deterministic functions called \emph{drift} and \emph{diffusion}, respectively. A \emph{stochastic differential equation} (\emph{SDE}) is an equation of the form:
-    $$
+    \begin{equation}\label{SC:SDE_eq}
       \dd{X_t}=b(t,X_t)\dd{t}+\sigma(t,X_t)\dd{B_t}
-    $$
+    \end{equation}
   \end{definition}
   \begin{definition}
-    Consider the following SDE:
-    $$
-      \dd{X_t}=b(t,X_t)\dd{t}+\sigma(t,X_t)\dd{B_t}
-    $$
-    We say that a progressive process $X={(X_t)}_{t\geq 0}$ defined on $(\Omega, \mathcal{F}, {(\mathcal{F}_t)}_{t\geq 0}, \Prob)$ is a \emph{solution of the SDE} if ${(b(t,X_t))}_{t\geq 0}\in\MM^1_{\text{loc}}$ and ${(\sigma(t,X_t))}_{t\geq 0}\in\MM^2_{\text{loc}}$ and $\forall t\geq 0$:
+    Consider the SDE of \mcref{SC:SDE_eq}. We say that a progressive process $X={(X_t)}_{t\geq 0}$ defined on $(\Omega, \mathcal{F}, {(\mathcal{F}_t)}_{t\geq 0}, \Prob)$ is a \emph{solution of the SDE} if ${(b(t,X_t))}_{t\geq 0}\in\MM^1_{\text{loc}}$ and ${(\sigma(t,X_t))}_{t\geq 0}\in\MM^2_{\text{loc}}$ and $\forall t\geq 0$:
     $$
       X_t=X_0+\int_0^t b(s,X_s)\dd{s}+\int_0^t \sigma(s,X_s)\dd{B_s}
     $$
   \end{definition}
   \subsubsection{Existence and uniqueness of solutions}
-  \begin{theorem}[Existence and uniqueness]
-    Let $b:\RR_{\geq 0}\times\RR\to \RR$ be a measurable function satisfying:
-    \begin{itemize}
-      \item Uniform spatial Lipschitz continuity: $\exists C>0$ such that $\forall t\geq 0$ and $\forall x,y\in\RR$ we have: $$\abs{b(t,x)-b(t,y)}\leq C\abs{x-y}$$
-      \item Local integrability in time: $\forall t \geq 0$ we have: $$\int_0^t \abs{b(s,0)}\dd{s}<\infty$$
-    \end{itemize}
-    Then, for each $z\in\RR$, there exists a unique measurable function $x={(x_t)}_{t\geq 0}$ such that $\forall t\geq 0$:
+  \begin{lemma}[Gronwall's lemma]
+    Let ${(x_t)}_{t\in[0,T]}$ be a non-negative function in $L^1([0,T])$ satisfying that $\forall t\in[0,T]$:
     $$
-      x_t=z+\int_0^t b(s,x_s)\dd{s}
+      x_t\leq \alpha+\beta\int_0^t x_s\dd{s}
+    $$
+    for some constants $\alpha,\beta\geq 0$. Then, $x_t\leq \alpha\exp{\beta t}$ for all $t\in[0,T]$.
+  \end{lemma}
+  \begin{theorem}[Existence and uniqueness of solutions of SDEs]\label{SC:existence_uniqueness_SDE}
+    Let $b,\sigma:\RR_{\geq 0}\times\RR\to \RR$ be a measurable function satisfying:
+    \begin{itemize}
+      \item Uniform spatial Lipschitz continuity: $\exists C>0$ such that $\forall t\geq 0$ and $\forall x,y\in\RR$ we have:
+            \begin{align*}
+              \abs{b(t,x)-b(t,y)}           & \leq C\abs{x-y} \\
+              \abs{\sigma(t,x)-\sigma(t,y)} & \leq C\abs{x-y}
+            \end{align*}
+      \item Local square-integrability in time: $\forall t \geq 0$ we have: $$\int_0^t \abs{b(s,0)}^2\dd{s}<\infty
+              \qquad \int_0^t \abs{\sigma(s,0)}^2\dd{s}<\infty
+            $$
+    \end{itemize}
+    Then, for each initial condition $\zeta\in L^(\Omega,\mathcal{F}_0,\Prob)$, there exists a unique (up to indistinguishability) solution $X={(X_t)}_{t\geq 0}$ to the SDE of \mcref{SC:SDE_eq} with $X_0=\zeta$. Moreover, $X\in \MM^2$.
+  \end{theorem}
+  \begin{remark}
+    In the proof of the above theorem, which we omit here, it can be shown that
+    \begin{equation}\label{SC:expression_x_psi}
+      X_t=\Psi_t\left(\zeta,{(B_s)}_{s\in[0,t]}\right)
+    \end{equation}
+    for some measurable function $\Psi_t:\RR\times C([0,t],\RR)\to \RR$.
+  \end{remark}
+  \begin{remark}
+    The following SDE was proposed by Paul Langevin in 1908 to describe the random motion of a small particle in a fluid, due to collisions with the surrounding molecules:
+    $$
+      \dd{X_t}=-b X_t\dd{t}+\sigma\dd{B_t}
+    $$
+    with $b,\sigma>0$. \mnameref{SC:existence_uniqueness_SDE} implies that the solution is unique and that given $\zeta \in L^2(\Omega,\mathcal{F}_0,\Prob)$, the solution is given by:
+    $$
+      X_t= \zeta \exp{-bt}+\sigma\int_0^t \exp{-b(t-s)}\dd{B_s}
+    $$
+    Note that the long-term behavior of $X_t$ has law of $N(0,\frac{\sigma^2}{2b})$, independently of the initial condition $\zeta$.
+  \end{remark}
+  \subsubsection{Markov property for diffusions}
+  \begin{definition}
+    Let $b.\sigma:\RR\to\RR$ be two Lipschitz functions and consider the following \emph{homogeneous SDE}:
+    \begin{equation}\label{SC:homogeneous_SDE}
+      \begin{cases}
+        \dd{X_t}=b(X_t)\dd{t}+\sigma(X_t)\dd{B_t} \\
+        X_0=\zeta\in L^2(\Omega,\mathcal{F}_0,\Prob)
+      \end{cases}
+    \end{equation}
+    These kinds of problems are called \emph{diffusions}.
+  \end{definition}
+  \begin{theorem}[Invariance under time shift]
+    Let $X={(X_t)}_{t\geq 0}$ be a solution to the SDE of \mcref{SC:homogeneous_SDE} and assume we write $X_t$ as in \mcref{SC:expression_x_psi}. Then, for any $s,t\geq 0$ we have:
+    $$
+      X_{t+s}=\Psi_{t}(X_s,{(B_{u+s}-B_s)}_{u\in[0,t]})
     $$
   \end{theorem}
+  \subsubsection{Generator of a diffusion}
+  \subsubsection{Connection with PDEs}
 \end{multicols}
 \end{document}
