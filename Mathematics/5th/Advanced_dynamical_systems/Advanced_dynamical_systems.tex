@@ -147,6 +147,43 @@
   \begin{theorem}[Structal stability]
     Let $\vf{B}$ be a diffeomorphism on $T^2$ $\mathcal{C}^1$-close to $\vf{\tilde{A}}$. Then, $\vf{B}$ is $\mathcal{C}^0$-conjugate to $\vf{\tilde{A}}$.
   \end{theorem}
+  \begin{proof}
+    We need to find a $\mathcal{C}^0$-conjugacy $\vf{H}$ between $\vf{B}$ and $\vf{\tilde{A}}$. Since, $\vf{B}$ is $\mathcal{C}^1$-close to $\vf{\tilde{A}}$, we may expect that both $\vf{H}$ and $\vf{B}$ are small perturbations of the identity and $\vf{\tilde{A}}$ respectively. So set $\vf{H}=\vf{I}+\vf{h}$ and $\vf{B}=\vf{\tilde{A}}+\vf{b}$. Then, we want to find $\vf{h}$ and $\vf{b}$ such that:
+    $$
+      \vf{H}\circ \vf{\tilde{A}}=\vf{B}\circ \vf{H}\iff
+      \vf{h}(\vf{\tilde{A}x})-\vf{\tilde{A}} \vf{h}(\vf{x})=\vf{b}(\vf{x}+\vf{h}(\vf{x}))
+    $$
+    This equation is called \emph{conjugacy equation}. Consider the operators
+    \begin{gather*}
+      \function{\vf{S}_{\vf{\tilde{A}}}}{\mathcal{C}^0(T^2,\RR^2)}{\mathcal{C}^0(T^2,\RR^2)}{\vf{h}}{\vf{h}(\vf{\tilde{A}}(\vf{x}))}\\
+      \function{\vf{L}_{\vf{\tilde{A}}}}{\mathcal{C}^0(T^2,\RR^2)}{\mathcal{C}^0(T^2,\RR^2)}{\vf{h}}{\vf{S}_{\vf{\tilde{A}}}\vf{h}-\vf{\tilde{A}}\vf{h}}
+    \end{gather*}
+    Observe that:
+    $$
+      \sup_{\vf{x}\in T^2}\norm{\vf{S}_{\vf{\tilde{A}}}\vf{h}(\vf{x})}=\sup_{\vf{x}\in T^2}\norm{\vf{S}_{\vf{\tilde{A}}}\vf{h}(\vf{\tilde{A}}^{-1}\vf{x})}= \sup_{\vf{x}\in T^2}\norm{\vf{h}(\vf{x})}
+    $$
+    Hence, $\norm{\vf{S}_{\vf{\tilde{A}}}}=1$ and similarly $\norm{\vf{S}_{\vf{\tilde{A}}}^{-1}}=1$, where $\vf{S}_{\vf{\tilde{A}}}^{-1}:\vf{h}\mapsto \vf{h}(\vf{\tilde{A}}^{-1}(\vf{x}))$. We'll now prove that $\vf{L}_{\vf{\tilde{A}}}$ is invertible. Note that $\RR^2=\langle \vf{e}_+\rangle \oplus \langle \vf{e}_-\rangle$ because $\vf{\tilde{A}}$ is invertible. Thus:
+    $$
+      \vf{L}_{\vf{\tilde{A}}}\vf{h}=\vf{c}\iff \begin{cases}
+        \vf{L}_{\vf{\tilde{A}}}\vf{h}_+=\vf{S}_{\vf{\tilde{A}}}\vf{h}_+-\lambda_+\vf{h}_+=\vf{c}_+ \\
+        \vf{L}_{\vf{\tilde{A}}}\vf{h}_-=\vf{S}_{\vf{\tilde{A}}}\vf{h}_--\lambda_-\vf{h}_-=\vf{c}_-
+      \end{cases}
+    $$
+    where $\vf{h}=\vf{h}_++\vf{h}_-$, $\vf{c}=\vf{c}_++\vf{c}_-$ and $\vf{h}_\pm,\vf{c}_\pm\in \langle \vf{e}_\pm\rangle$. Now, note that $\norm{\frac{\vf{S}_{\vf{\tilde{A}}}}{\lambda_+}}<1$ and so
+    $$
+      (\vf{S}_{\vf{\tilde{A}}}-\lambda_+\vf{I})=\lambda_+\left(\frac{\vf{S}_{\vf{\tilde{A}}}}{\lambda_+}-\vf{I}\right)
+    $$
+    is invertible. Similarly, we have $\norm{\vf{S}_{\vf{\tilde{A}}}^{-1}\lambda_-}<1$ and so
+    $$
+      (\vf{S}_{\vf{\tilde{A}}}^{-1}-\lambda_-\vf{I})=\vf{S}_{\vf{\tilde{A}}}^{-1}\left(\vf{I}-\lambda_-\vf{S}_{\vf{\tilde{A}}}^{-1}\right)
+    $$
+    is invertible because it is a product of invertible operators. Thus, $\vf{L}_{\vf{\tilde{A}}}$ is invertible. Now, we return to our initial problem. Find $\vf{h}$ such that $\vf{h}= {\vf{L}_{\vf{\tilde{A}}}}^{-1}(\vf{b}(\vf{x}+\vf{h}(\vf{x})))=:\vf\Psi(\vf{h})$, which is a fixed-point problem. Note that $\vf\Psi$ is a contraction. Indeed:
+    \begin{align*}
+      \norm{\vf\Psi(\vf{h})-\vf\Psi(\vf{h}')} & \leq \norm{{\vf{L}_{\vf{\tilde{A}}}}^{-1}}\!\norm{\vf{b}(\vf{x}+\vf{h}(\vf{x}))\!-\!\vf{b}(\vf{x}+\vf{h}'(\vf{x}))} \\
+                                              & \leq \norm{{\vf{L}_{\vf{\tilde{A}}}}^{-1}}\norm{\vf{Db}}\norm{\vf{h}-\vf{h}'}
+    \end{align*}
+    which is arbitrarily small ($\norm{\vf{Db}}$ is arbitrarily small) because $\vf{B}$ is $\mathcal{C}^1$-close to $\vf{\tilde{A}}$. Thus, $\vf{h}$ exists and it's unique.
+  \end{proof}
   \begin{definition}
     A dynamical system $f : X\rightarrow X$ has \emph{sensitive dependence on initial conditions} on $X$ if $\exists\varepsilon >0$ such that for each $x\in X$ and any neighborhood $N_x$ of $x$, exists $y \in N_x$ and $n \geq  0$ such that $d(f^n(x),f^n(y)) > \varepsilon$.
   \end{definition}
@@ -157,7 +194,7 @@
     $$
   \end{definition}
   \begin{remark}
-    The Lyapunov exponent measures the exponential growth rate of tangent vectors along orbits.
+    The Lyapunov exponent measures the exponential growth rate of tangent vectors along orbits. It can rarely be computed explicitly, but if we can show that $\chi(x,\vf{v})>0$ for some $\vf{v}$, then we know that the system is \emph{chaotic}.
   \end{remark}
 \end{multicols}
 \end{document}
