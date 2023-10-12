@@ -109,8 +109,15 @@
     $$
       X:=\sqrt{-2\log(U)}\cos(2\pi V)\quad Y:=\sqrt{-2\log(U)}\sin(2\pi V)
     $$
-    Then, $X$, $Y$ are \iid $N(0,1)$.
+    Then, $X$ and $Y$ are \iid $N(0,1)$.
   \end{proposition}
+  \begin{proof}
+    Let $\varphi:\RR^2\to\RR$ be bounded and measurable. Then:
+    \begin{multline*}
+      \Exp(\varphi(X,Y))=\\=\!\!\!\int_{{(0,1)}^2}\!\!\!\!\varphi\left( \sqrt{-2\log u} \cos(2\pi v), \sqrt{-2\log u} \sin(2\pi v)\right)\dd{u}\dd{v}=\\=\int_{\RR^2}\varphi(x,y) \frac{1}{2\pi}\exp{-\frac{x^2+y^2}{2}}\dd{x}\dd{y}
+    \end{multline*}
+    by the change of variable formula. Thus, $X$ and $Y$ are \iid $N(0,1)$.
+  \end{proof}
   \begin{proposition}[Polar method]
     Let $U$, $V$ be \iid $U(\DD)$, where $\DD\subset \RR^2$ is the open unit disk. Let $R^2=U^2+V^2$ and set:
     $$
@@ -119,7 +126,158 @@
     Then, $X$, $Y$ are \iid $N(0,1)$.
   \end{proposition}
   \begin{proposition}
-    Let $\vf{X}\in N_d(0,\vf{I}_d)$, $\vf\mu\in\RR^d$ and $\vf{A}\in\mathcal{M}_d(\RR)$. Then, $\vf\mu+\vf{AX}\sim N_d(\vf\mu,\transpose{\vf{AA}})$.
+    Let $\vf{X}\in N_d(0,\vf{I}_d)$, $\vf\mu\in\RR^d$ and $\vf{A}\in\mathcal{M}_d(\RR)$. Then, $\vf\mu+\vf{AX}\sim N_d(\vf\mu,\vf{A}\transpose{\vf{A}})$.
   \end{proposition}
+  \begin{remark}
+    To simulate $\vf{Y}\sim N_d(\vf\mu,\vf\Sigma)$, we proceed as follows:
+    \begin{enumerate}
+      \item Find $\vf{A}\in\mathcal{M}_d(\RR)$ such that $\vf\Sigma=\vf{A}\transpose{\vf{A}}$ (e.g.\ by Cholesky decomposition).
+      \item Simulate $\vf{X}\sim N_d(0,\vf{I}_d)$.
+      \item Set $\vf{Y}=\vf\mu+\vf{AX}$.
+    \end{enumerate}
+  \end{remark}
+  \subsection{Variance reduction techniques}
+  \subsubsection{Antithetic control}
+  \begin{definition}
+    Let $Y=g(X)$ be a random variable with $X\sim N(0,\sigma^2)$. The \emph{antithetic method} consists in using the estimator:
+    $$
+      \overline{Y}_n^{\text{A}}:=\frac{1}{n} \sum_{i=1}^n \frac{g(X_i)+g(-X_i)}{2}
+    $$
+    where ${(X_i)}_{1\leq i\leq n}$ are \iid $N(0,\sigma^2)$.
+  \end{definition}
+  \begin{lemma}
+    The antithetic estimator $\overline{Y}_n^{\text{A}}$ is an unbiased and consistent estimator of $\Exp(Y)$. Furthermore:
+    $$
+      \sqrt{n}\left(\overline{Y}_n^{\text{A}}-\Exp(Y)\right)\overset{\text{d}}{\longrightarrow}N\left(0,\Var\left(\frac{g(X)+g(-X)}{2}\right)\right)
+    $$
+  \end{lemma}
+  \begin{remark}
+    In terms of computational cost, $\overline{Y}_n^{\text{A}}$ is more expensive than $\overline{Y}_n$ but cheaper than $\overline{Y}_{2n}$.
+  \end{remark}
+  \begin{proposition}
+    We have that $\Var(\overline{Y}_n^{\text{A}})\leq \Var(\overline{Y}_n)$. Moreover, if
+    $$
+      \cov(g(X),g(-X))\leq 0
+    $$
+    then $\Var(\overline{Y}_n^{\text{A}})\leq \Var(\overline{Y}_{2n})$.
+  \end{proposition}
+  \begin{proof}
+    \begin{align*}
+      \Var(\overline{Y}_n^{\text{A}}) & =\frac{1}{2n}\left(\Var(g(X))+\cov(g(X),g(-X))\right) \\
+                                      & \leq \Var(\overline{Y}_n)
+    \end{align*}
+    And clearly if $\cov(g(X),g(-X))\leq 0$, then $\Var(\overline{Y}_n^{\text{A}})\leq \Var(\overline{Y}_{2n})$.
+  \end{proof}
+  \begin{proposition}
+    If $g$ is monotone, then:
+    $$
+      \cov(g(X),g(-X))\leq 0
+    $$
+  \end{proposition}
+  \begin{proof}
+    Let $X_1$, $X_2$ be \iid copies of $X$. Then, since $g$ is monotone:
+    $$
+      (g(X_1)-g(X_2))(g(-X_1)-g(-X_2))\leq 0
+    $$
+    Now taking expectations:
+    \begin{multline*}
+      0\geq\Exp((g(X_1)-g(X_2))(g(-X_1)-g(-X_2)))=\\=2 \cov(g(X),g(-X))
+    \end{multline*}
+  \end{proof}
+  \subsubsection{Control variate}
+  \begin{definition}
+    The principle of the \emph{control variate} is to find a real-valued random variable $X$ such that $\Exp(X)$ is known, and a constant $b\in\RR$ such that:
+    $$
+      \Var(Y+b(X-\Exp(X)))\ll \Var(Y)
+    $$
+    This suggests the following estimator:
+    $$
+      \overline{Y}_n(b):=\frac{1}{n}\sum_{i=1}^n [Y_i+b(X_i-\Exp(X))]
+    $$
+    where ${(Y_i)}_{1\leq i\leq n}$ are \iid copies of $Y$ and ${(X_i)}_{1\leq i\leq n}$ are \iid copies of $X$.
+  \end{definition}
+  \begin{lemma}
+    The control variate estimator $\overline{Y}_n(b)$ is unbiased and consistent. Furthermore:
+    $$
+      \sqrt{n}\left(\overline{Y}_n(b)-\Exp(Y)\right)\overset{\text{d}}{\longrightarrow}N\left(0,\Var(Y(b))\right)
+    $$
+    where $Y(b):=Y+b(X-\Exp(X))$.
+  \end{lemma}
+  \begin{remark}
+    If $b=0$, the control variate estimator $\overline{Y}_n(b)$ coincides with the classical estimator $\overline{Y}_n$. Otherwise, the computational cost of $\overline{Y}_n(b)$ is higher than $\overline{Y}_n$, but it does not depend on the choice of $b\neq 0$.
+  \end{remark}
+  \begin{proposition}
+    The minimum of $\Var(Y(b))$ is attained for $$\hat{b}= \frac{\cov(Y,X)}{\Var(X)}$$ and in that case, $\Var(Y(\hat{b}))=\Var(Y)(1-{\rho_{XY}}^2)$, where $\rho_{XY}$ is the correlation between $X$ and $Y$.
+  \end{proposition}
+  \begin{remark}
+    Usually, $\hat{b}$ is unknown, but we can use an estimator of it, such as:
+    $$
+      \hat{b}_n:=\frac{\sum_{i=1}^n (Y_i-\overline{Y}_n)(X_i-\overline{X}_n)}{\sum_{i=1}^n {(X_i-\overline{X}_n)}^2}
+    $$
+  \end{remark}
+  \begin{definition}
+    Let $\vf{X}$ be a random vector such that $\Exp(\vf{X})$ is known, and $\vf{b}\in \RR^d$. We define the \emph{multiple control variate estimator} as:
+    $$
+      \overline{Y}_n(\vf{b}):=\frac{1}{n}\sum_{i=1}^n [Y_i+\transpose{\vf{b}}(\vf{X}_i-\Exp(\vf{X}))]
+    $$
+    where ${(Y_i)}_{1\leq i\leq n}$ are \iid copies of $Y$ and ${(\vf{X}_i)}_{1\leq i\leq n}$ are \iid copies of $\vf{X}$.
+    We also define $Y(\vf{b}):= Y+\transpose{\vf{b}}(\vf{X}-\Exp(\vf{X}))$.
+  \end{definition}
+  \begin{lemma}
+    The multiple control variate estimator $\overline{Y}_n(\vf{b})$ is unbiased and consistent. Furthermore:
+    $$
+      \sqrt{n}\left(\overline{Y}_n(\vf{b})-\Exp(Y)\right)\overset{\text{d}}{\longrightarrow}N\left(0,\Var(Y(\vf{b}))\right)
+    $$
+  \end{lemma}
+  \begin{proposition}
+    The minimum of $\Var(Y(\vf{b}))$ is attained for $$\hat{\vf{b}}=
+      -\Var(\vf{X})^{-1}\cov(\vf{X},Y)
+    $$
+    and in that case, $\Var(Y(\hat{\vf{b}}))=\Var(Y)(1-R^2)$, where:
+    $$
+      R^2:=\frac{\transpose{\cov(\vf{X},Y)}\Var(\vf{X})^{-1}\cov(\vf{X},Y)}{\Var(Y)}
+    $$
+  \end{proposition}
+  \subsubsection{Importance sampling}
+  \begin{definition}
+    Let $(\Omega, \mathcal{F}, \Prob)$ be a probability space. We say that a probability measure $\QQ$ is \emph{equivalent} to $\Prob$ if:
+    $$
+      \{A\in \mathcal{F} : \Prob(A)=0\}=\{A\in \mathcal{F} : \QQ(A)=0\}
+    $$
+  \end{definition}
+  \begin{lemma}
+    Let $\QQ$ be a probability measure equivalent to $\Prob$. Then, there exists a random variable $L>0$ such that $\forall A\in \mathcal{F}$, we have $\QQ(A)=\Exp_\Prob(L\indi{A})$. Furthermore, for all $X$ bounded:
+    $$
+      \Exp_\QQ(X)=\Exp_\Prob(L X)\qquad \Exp_\Prob(X)=\Exp_\QQ\left(\frac{X}{L}\right)
+    $$
+    Conversely, if we have a random variable $L>0$ such that $\Exp_\Prob(L)=1$, then
+    $$
+      \function{\QQ}{\mathcal{F}}{[0,1]}{A}{\Exp_\Prob(L\indi{A})}
+    $$
+    is a probability measure equivalent to $\Prob$.
+  \end{lemma}
+  \begin{remark}
+    The principle of the importance sampling method is to change the probability measure in order to give more weight to important outcomes.
+  \end{remark}
+  \begin{definition}
+    Let $(\QQ,L)$ be such that it defines a probability measure equivalent to $\Prob$. The \emph{importance sampling estimator} is defined as:
+    $$
+      \overline{Y}_n^{\QQ}:=\frac{1}{n}\sum_{i=1}^n {L_i}^{-1}Y_i
+    $$
+    where $(L_i,Y_i)$ are \iid copies of $(L,Y)$ (under $\QQ$).
+  \end{definition}
+  \begin{lemma}
+    The importance sampling estimator $\overline{Y}_n^{\QQ}$ is unbiased and consistent. Furthermore:
+    $$
+      \sqrt{n}\left(\overline{Y}_n^{\QQ}-\Exp_\Prob(Y)\right)\overset{\text{d}}{\longrightarrow}N\left(0,\Var_{\QQ}(L^{-1}Y)\right)
+    $$
+  \end{lemma}
+  \begin{remark}
+    In terms of computational cost, the importance sampling estimator $\overline{Y}_n^{\QQ}$ is more expensive than the classical estimator $\overline{Y}_n$. In terms of precision, the best estimator is the one with the smallest variance so we have to compare $\Var(Y)$ and $\Var_{\QQ}(L^{-1}Y)$. It holds:
+    $$
+      \Var_{\QQ}(L^{-1}Y)=\Exp_\Prob\left(L^{-1}Y^2\right)-{\Exp_\Prob(Y)}^2
+    $$
+    This quantity can be larger or smaller than $\Var(Y )$ depending on the choice of $L$ and thus the success of importance sampling relies on the choice of an effective change of probability measure.
+  \end{remark}
 \end{multicols}
 \end{document}
