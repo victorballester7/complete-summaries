@@ -669,7 +669,7 @@
     $$
   \end{corollary}
   \subsubsection{Itô's formula}
-  \begin{theorem}[Itô's formula]
+  \begin{theorem}[Itô's formula]\label{SC:ito_formula}
     Let $X={(X_t)}_{t\geq 0}$ be an Itô process and $f\in C^2(\RR)$. Then, ${(f(X_t))}_{t\geq 0}$ is an Itô process and:
     $$
       \dd{f(X_t)}=f'(X_t)\dd{X_t}+\frac{1}{2}f''(X_t)\dd{{\langle X\rangle}_t}
@@ -836,17 +836,54 @@
     \end{equation}
     for some measurable function $\Psi_t:\RR\times C([0,t],\RR)\to \RR$.
   \end{remark}
-  \begin{remark}
-    The following SDE was proposed by Paul Langevin in 1908 to describe the random motion of a small particle in a fluid, due to collisions with the surrounding molecules:
+  \subsubsection{Practical examples}
+  \begin{proposition}[Langevin equation]
+    Consider the following SDE:
     $$
       \dd{X_t}=-b X_t\dd{t}+\sigma\dd{B_t}
-    $$
-    with $b,\sigma>0$. \mnameref{SC:existence_uniqueness_SDE} implies that the solution is unique and that given $\zeta \in L^2(\Omega,\mathcal{F}_0,\Prob)$, the solution is given by:
+    $$ with $b,\sigma>0$ and $X_0=\zeta\in L^2(\Omega,\mathcal{F}_0,\Prob)$. Then, the solution is given by:
     $$
       X_t= \zeta \exp{-bt}+\sigma\int_0^t \exp{-b(t-s)}\dd{B_s}
     $$
-    Note that the long-term behavior of $X_t$ has law of $N(0,\frac{\sigma^2}{2b})$, independently of the initial condition $\zeta$.
+  \end{proposition}
+  \begin{remark}
+    This SDE was proposed by Paul Langevin in 1908 to describe the random motion of a small particle in a fluid, due to collisions with the surrounding molecules. Note that the long-term behavior of $X_t$ has law of $N(0,\frac{\sigma^2}{2b})$ (because the second term has law $N(0,\frac{\sigma^2}{2b}(1-\exp{-2bt}))$), independently of the initial condition $\zeta$.
   \end{remark}
+  \begin{proposition}[Geometric Brownian motion]
+    Consider the following SDE:
+    $$
+      \dd{X_t}=X_t(b \dd{t}+\sigma\dd{B_t})
+    $$
+    with $X_0=\zeta\in L^2(\Omega,\mathcal{F}_0,\Prob)$. Then, the solution is given by:
+    $$
+      X_t=\zeta\exp{\left(b-\frac{\sigma^2}{2}\right) t+\sigma B_t}
+    $$
+  \end{proposition}
+  \begin{proof}
+    This equation has a unique solution and it's natural to expect it is of the form $X_t=\zeta \exp{Y_t}$, where $Y_t$ is an Itô process. Identifying $\dd{Y_t}=\psi_t\dd{t}+\phi_t\dd{B_t}$ and using the \mnameref{SC:ito_formula} we get:
+    \begin{align*}
+      \dd{(\zeta \exp{Y_t})} & =\zeta \exp{Y_t}\left(\dd{Y_t}+\frac{1}{2}\dd{{\langle Y\rangle}_t}\right)         \\
+                             & =\zeta \exp{Y_t}\left(\psi_t\dd{t}+\phi_t\dd{B_t}+\frac{1}{2}\phi_t^2\dd{t}\right)
+    \end{align*}
+    and so $\phi_t=\sigma$ and $\psi_t=b-\frac{\sigma^2}{2}$.
+  \end{proof}
+  \begin{proposition}[Black-Scholes process]
+    Consider the following SDE:
+    $$
+      \dd{X_t}=X_t(b_t \dd{t}+\sigma_t\dd{B_t})
+    $$
+    with $X_0=\zeta\in L^2(\Omega,\mathcal{F}_0,\Prob)$ and ${(b_t)}_{t\geq 0}$, ${(b_t)}_{t\geq 0}$ deterministic measurable bounded functions. Then, the solution is given by:
+    $$
+      X_t=\zeta\exp{\int_0^t \left(b_s-\frac{\sigma_s^2}{2}\right)\dd{s}+\int_0^t \sigma_s\dd{B_s}}
+    $$
+  \end{proposition}
+  \begin{proof}
+    This equation has a unique solution and as in the previous example, we expect $X_t=\zeta \exp{Y_t}$, where $Y_t$ is an Itô process. Identifying $\dd{Y_t}=\psi_t\dd{t}+\phi_t\dd{B_t}$ and using the \mnameref{SC:ito_formula} we get:
+    \begin{equation*}
+      \dd{(\zeta \exp{Y_t})} =\zeta \exp{Y_t}\left(\psi_t\dd{t}+\phi_t\dd{B_t}+\frac{1}{2}\phi_t^2\dd{t}\right)
+    \end{equation*}
+    and so $\phi_t=\sigma_t$ and $\psi_t=b_t-\frac{\sigma_t^2}{2}$.
+  \end{proof}
   \subsubsection{Markov property for diffusions}
   \begin{definition}
     Let $b.\sigma:\RR\to\RR$ be two Lipschitz functions and consider the following \emph{homogeneous SDE}:
@@ -864,6 +901,30 @@
       X_{t+s}=\Psi_{t}(X_s,{(B_{u+s}-B_s)}_{u\in[0,t]})
     $$
   \end{theorem}
+  \begin{definition}
+    Let $f\in L^\infty(\RR)$ and $t\geq 0$. We define the function $P_tf$ as:
+    $$
+      \function{P_tf}{\RR}{\RR}{x}{\Exp(f(X_t^x))}
+    $$
+    where $X_t^x$ is the solution to the SDE of \mcref{SC:homogeneous_SDE} with $X_0=x$.
+  \end{definition}
+  \begin{corollary}
+    For any $s,t\geq 0$ and any $f\in L^\infty(\RR)$ we have:
+    $$
+      \Exp(f(X_{t+s}))=(P_tf)(X_s)
+    $$
+  \end{corollary}
+  \begin{proposition}
+    The family ${(P_t)}_{t\geq 0}$ has the following properties:
+    \begin{enumerate}
+      \item $P_t$ is a bounded linear operator from $L^\infty(\RR)$ to itself for each $t\geq 0$.
+      \item $P_0=\id$ and $P_{t+s}=P_t\circ P_s$ for all $s,t\geq 0$.
+      \item If $f$ is continuous, then so is $t\mapsto P_tf(x)$ for each fixed $x\in\RR$.
+      \item If $f$ is monotone, then so is $P_tf$ for each $t\geq 0$.
+      \item If $f$ is Lipschitz, then so is $P_tf$ for each $t\geq 0$.
+      \item If $\sigma, b,f\in\mathcal{C}_\text{b}^k(\RR)$ for some $k\geq 1$, then so is $P_tf$ for each $t\geq 0$.
+    \end{enumerate}
+  \end{proposition}
   \subsubsection{Generator of a diffusion}
   \subsubsection{Connection with PDEs}
 \end{multicols}
