@@ -3,7 +3,7 @@
 \begin{document}
 \changecolor{ADS}
 \begin{multicols}{2}[\section{Advanced dynamical sytems}]
-  \subsection{Introduction}
+  \subsection{Discrete maps}
   \subsubsection{Maps in \texorpdfstring{$\S^1$}{S1}}
   \begin{proposition}
     Let $\alpha=\frac{p}{q}\in\QQ$ and let $R_\alpha:\S^1\to \S^1$ be the rotation of angle $\alpha$. Then, all the points of $\S^1$ are periodic for $R_\alpha$ with period $q$.
@@ -196,5 +196,30 @@
   \begin{remark}
     The Lyapunov exponent measures the exponential growth rate of tangent vectors along orbits. It can rarely be computed explicitly, but if we can show that $\chi(x,\vf{v})>0$ for some $\vf{v}$, then we know that the system is \emph{chaotic}.
   \end{remark}
+  \subsection{Hamiltonian systems}
+  \subsubsection{Introduction}
+  \begin{definition}
+    Let $U\subseteq \RR^n\times \RR^n$ be open and $H:U\rightarrow \RR$ be a $\mathcal{C}^1$ function. We define the \emph{Hamiltonian vector field} associated to $H$ as:
+    \begin{equation}\label{ADS:ham_system}
+      \begin{cases}
+        \displaystyle\dot{\vf{x}}=\pdv{H}{\vf{p}}\vspace{0.1cm} \\
+        \displaystyle\dot{\vf{p}}=-\pdv{H}{\vf{x}}
+      \end{cases}
+    \end{equation}
+  \end{definition}
+  \begin{remark}
+    Recall that $H$ is a first integral of the system \mcref{ADS:ham_system}.
+  \end{remark}
+  \begin{lemma}
+    Let $H:U\rightarrow \RR$ be a $\mathcal{C}^1$ function, $W\subseteq U$. Then, the volume of $W$ under the field of \mcref{ADS:ham_system} is preserved.
+  \end{lemma}
+  \begin{proof}
+    Let $W_t:=\vf{\phi}_t(W)$, where $\phi_t$ is the flow of \mcref{ADS:ham_system}. Then:
+    \begin{multline*}
+      \dv{}{t}\vol(W_t)=\dv{}{t}\int_{\phi_t(W)}\dd{\vf{x}}=\int_W\dv{}{t}\det \vf{D\phi}_t=\\
+      =\int_W\trace\left(\dv{}{t}\vf{D\phi}_t\right)=\int_W\div \vf{X}_H
+    \end{multline*}
+    where $\vf{X}_H$ is the vector field of \mcref{ADS:ham_system}, and  we used that the derivative of the determinant map is the trace. But an easy computation shows that $\div \vf{X}_H=0$.
+  \end{proof}
 \end{multicols}
 \end{document}

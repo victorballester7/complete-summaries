@@ -1,0 +1,218 @@
+\documentclass[../../../main_math.tex]{subfiles}
+
+\begin{document}
+\changecolor{CO}
+\begin{multicols}{2}[\section{Continuous optimization}]
+  \subsection{First order descent methods}
+  In this section we are interested in finding $\min_{x\in H} f(x)$, where $H$ is a Hilbert space and $f:H\rightarrow \mathbb{R}$ is a differentiable function.
+  \subsubsection{Gradient descent}
+  \begin{definition}[Gradient descent algorithm]
+    We define the \emph{gradient descent algorithm} as:
+    \begin{equation*}
+      \vf{x}_{k+1}=\vf{x}_k-\tau \grad f(\vf{x}_k)=:T_\tau(\vf{x}_k)
+    \end{equation*}
+    with $\tau>0$.
+  \end{definition}
+  \begin{definition}
+    One can choose $\tau$ in different ways:
+    \begin{itemize}
+      \item Optimal step: $\tau_k=\argmin_{\tau>0} f(\vf{x}_k-\tau \grad f(\vf{x}_k))$
+      \item \emph{Armijo-type rule}: find $i\geq 0$ such that:
+            $$
+              f(\vf{x}_k-\tau\rho^i \grad f(\vf{x}_k))\leq f(\vf{x}_k)-c \tau \rho^i \norm{\grad f(\vf{x}_k)}^2
+            $$
+            with $c,\rho\in (0,1)$ fixed.
+      \item Gradient with fixed step $\tau>0$
+            \begin{itemize}
+              \item We choose $\vf{x}_{k+1}$ as the minimizer of a quadratic approximation of $f$:
+                    \begin{multline*}
+                      \vf{x}_{k+1}=\argmin_{x\in H} \bigg\{ f(\vf{x}_k)+\langle \grad f(\vf{x}_k),x-\vf{x}_k\rangle+\\+\left.\frac{1}{2\tau}\norm{x-\vf{x}_k}^2 \right\}
+                    \end{multline*}
+              \item \emph{Frank-Wolfe-type method}:
+                    $$
+                      \vf{x}_{k+1}=\argmin_{x\in H_k} \{ f(\vf{x}_k)+\langle \grad f(\vf{x}_k),x-\vf{x}_k\rangle \}
+                    $$
+                    with $H_k$ appropriately chosen.
+            \end{itemize}
+    \end{itemize}
+  \end{definition}
+  \begin{proposition}
+    Let $f\in\mathcal{C}^1$ bounded from below with $\grad f$ $L$-Lipschitz continuous. Then, $\displaystyle\lim_{k\rightarrow\infty} \grad f(\vf{x}_k)=0$, provided that $0<\tau<\frac{2}{L}$.
+  \end{proposition}
+  \begin{proposition}
+    If $f$ is convex, for any $\vf{x},\vf{y}\in H$ we have:
+    $$
+      f(\vf{y})\geq f(\vf{x})+\langle \grad f(\vf{x}),\vf{y}-\vf{x}\rangle
+    $$
+  \end{proposition}
+  \begin{definition}
+    Let $A:H\to H$ be an operator. We say that $A$ is \emph{$L$-co-coercive} if $\forall x,y\in H$:
+    $$
+      \langle Ax-Ay,x-y\rangle\geq L \norm{x-y}^2
+    $$
+  \end{definition}
+  \begin{definition}
+    Let $A:H\to H$ be an operator. We say that $A$ is \emph{firmly non-expansive} if $\forall x,y\in H$:
+    $$
+      \norm{Ax-Ay}^2+\norm{(I-A)x-(I-A)y}^2\leq \norm{x-y}^2
+    $$
+  \end{definition}
+  \begin{lemma}
+    Let $A:H\to H$ be an operator. Then, $A$ is firmly non-expansive if and only if $A$ is $1$-co-coercive.
+  \end{lemma}
+  \begin{theorem}[Baillon-Haddad]
+    If $f$ is convex and $\grad f$ is $L$-Lipschitz continuous, then for any $\vf{x},\vf{y}\in H$ we have:
+    $$
+      \langle \grad f(\vf{x})-\grad f(\vf{y}),\vf{x}-\vf{y}\rangle\geq \frac{1}{L} \norm{\grad f(\vf{x})-\grad f(\vf{y})}^2
+    $$
+    That is, $\grad f$ is $L^{-1}$-co-coercive.
+  \end{theorem}
+  \begin{lemma}
+    If $f$ is convex with $L$-Lipschitz continuous gradient, then the mapping $T_\tau=I-\tau \grad f$ is a 1-Lipschitz when $0\leq \tau\leq \frac{2}{L}$.
+  \end{lemma}
+  \begin{proposition}
+    Let $\vf{x}_*$ be a minimizer of $f$. We have that:
+    $$
+      \frac{f(\vf{x}_k)-f(\vf{x}_*)}{\norm{\vf{x}_k-\vf{x}_*}}\leq \norm{\grad f(\vf{x}_k)}
+    $$
+    Moreover if $\Delta_k:=f(\vf{x}_k)-f(\vf{x}_*)$, we have:
+    $$
+      \Delta_{k+1}\leq \Delta_k-\frac{\kappa}{\norm{\vf{x}_0-\vf{x}_*}} {\Delta_k}^2
+    $$
+    with $\kappa=\tau\left( 1-\frac{\tau L}{2} \right)$.
+  \end{proposition}
+  \begin{lemma}
+    Let $(a_k)\geq 0$ be a sequence such that $a_{k+1}\leq a_k-c^{-1}{a_k}^2$ for some $c>0$. Then, $\forall k\geq 0$, $a_k\leq \frac{c}{k+1}$.
+  \end{lemma}
+  \begin{theorem}
+    The gradient descent with fixed step satisfies:
+    $$
+      \Delta_k\leq \frac{\norm{\vf{x}_0-\vf{x}_*}^2}{\kappa (k+1)}
+    $$
+    for $\kappa=\tau\left( 1-\frac{\tau L}{2} \right)$.
+  \end{theorem}
+  \begin{remark}
+    $\kappa$ is maximal for $\tau=\frac{1}{L}$, which gives:
+    $$
+      \Delta_k\leq \frac{2L\norm{\vf{x}_0-\vf{x}_*}^2}{(k+1)^2}
+    $$
+  \end{remark}
+  \begin{definition}
+    We say that $f$ is \emph{strongly convex} (or \emph{$\gamma$-convex}) if $\vf{D}^2f\geq \gamma \vf{I}$ with $\gamma>0$\footnote{This means that all the eigenvalues of $\vf{D}^2f$ are greater or equal than $\gamma$.}.
+  \end{definition}
+  \begin{proposition}
+    Let $f$ be strongly convex and $\vf{x}_*$ be a minimizer of $f$. Then:
+    $$
+      \norm{\vf{x}_k-\vf{x}_*}\leq q^k \norm{\vf{x}_0-\vf{x}_*}
+    $$
+    with $q=\frac{1-\gamma/L}{1+\gamma/L}$, and $\gamma/L<1$ can be thought as the inverse condition number of the problem.
+  \end{proposition}
+  \begin{theorem}
+    For any $n\geq 2$ and any $\vf{x}_0\in\RR^n$, $L>0$ and $k<n$, there exists a convex $\mathcal{C}^1$ function $f$ with $L$-Lipschitz continuous gradient such that for any first-order method we have:
+    $$
+      f(\vf{x}_k)-f(\vf{x}_*)\geq \frac{L\norm{\vf{x}_0-\vf{x}_*}^2}{8{(k+1)}^2}
+    $$
+    where $\vf{x}_*$ is a minimizer of $f$.
+  \end{theorem}
+  \begin{theorem}
+    For any $\vf{x}_0\in\RR^\infty\simeq \ell_2(\NN)$ and $\gamma,L>0$, there exists a $\gamma$-strongly convex $\mathcal{C}^1$ function $f$ with $L$-Lipschitz continuous gradient such that for any first-order method we have:
+    \begin{align*}
+      f(\vf{x}_k)-f(\vf{x}_*)  & \geq \frac{\gamma}{2}q^{2k}\norm{\vf{x}_0-\vf{x}_*}^2 \\
+      \norm{\vf{x}_k-\vf{x}_*} & \geq q^k \norm{\vf{x}_0-\vf{x}_*}
+    \end{align*}
+    where $\vf{x}_*$ is a minimizer of $f$ and $q=\frac{\sqrt{Q}-1}{\sqrt{Q}+1}$ with $Q=\frac{L}{\gamma}\geq 1$ is the condition number of the problem.
+  \end{theorem}
+  \subsubsection{Higher order methods}
+  \begin{definition}[Newton method]
+    We define the \emph{Newton method} as:
+    \begin{multline*}
+      \vf{x}_{k+1}=\argmin_{\vf{x}\in H} \bigg\{ f(\vf{x}_k)+\langle \grad f(\vf{x}_k),\vf{x}-\vf{x}_k\rangle+\\
+      +\left.\frac{1}{2}\langle \vf{D}^2f(\vf{x}_k)(\vf{x}-\vf{x}_k),\vf{x}-\vf{x}_k\rangle \right\}
+    \end{multline*}
+  \end{definition}
+  \begin{theorem}
+    Let $f\in\mathcal{C}^2$ and $\vf{x}_*$ be a minimizer of $f$. Suppose $\vf{D}^2f$ is $M$-Lipschitz, $\vf{D}^2f\geq \gamma$, $q:=\frac{M}{2\gamma^2}\norm{\grad f({x}_0)}$ and assume ${x}_0$ is close enough to ${x}_*$ so that $q<1$. Then:
+    $$
+      \norm{\vf{x}_k-\vf{x}_*}\leq \frac{2\gamma}{M}q^{2^k}
+    $$
+  \end{theorem}
+  \begin{definition}
+    A \emph{multistep method} has the general form:
+    $$
+      \vf{x}_{k+1}=\vf{x}_k-\alpha \grad f(\vf{x}_k)+\beta(\vf{x}_k-\vf{x}_{k-1})
+    $$
+  \end{definition}
+  \begin{theorem}[Heavy ball method]
+    Let $\vf{x}_*$ be a local minimizer of $f$ such that $\gamma \vf{I}\leq \vf{D}^2f(\vf{x}_*)\leq L\vf{I}$ and choose $\alpha$, $\beta$ with $0\leq \beta <1$ and $0<\alpha<\frac{2(1+\beta)}{L}$. There exists $q<1$ such that if $q<\tilde{q}<1$ and if $\vf{x}_0$, $\vf{x}_1$ are close enough to $\vf{x}_*$, we have:
+    $$
+      \norm{\vf{x}_k-\vf{x}_*}\leq c(\tilde{q}){\tilde{q}}^k
+    $$
+    Moreover, this is almost optimal: if $$
+      \alpha=\frac{4}{{(\sqrt{L}+\sqrt{\gamma})}^2}\qquad \beta={\left( \frac{\sqrt{L}-\sqrt{\gamma}}{\sqrt{L}+\sqrt{\gamma}} \right)}^2
+    $$
+    then:
+    $$
+      q=\frac{\sqrt{L}-\sqrt{\gamma}}{\sqrt{L}+\sqrt{\gamma}}=\frac{\sqrt{Q}-1}{\sqrt{Q}+1}
+    $$
+  \end{theorem}
+  \begin{lemma}
+    Let $\vf{A}\in\mathcal{M}_n(\RR)$ with $\rho(\vf{A})\leq \rho$. Then, $\forall \tilde{\rho}>\rho$, there exists a norm $\norm{\cdot}_*$ in $\CC^n$ such that $\norm{\vf{A}}_*\leq \tilde{\rho}$.
+  \end{lemma}
+  \begin{definition}[Conjugate gradient]
+    We define the \emph{conjugate gradient method} as:
+    \begin{equation*}
+      \vf{x}_{k+1}=\vf{x}_k-\alpha_k \grad f(\vf{x}_k)+\beta_k(\vf{x}_k-\vf{x}_{k-1})
+    \end{equation*}
+    where $\alpha_k$ and $\beta_k$ are the minimizers of:
+    $$
+      \alpha_k,\beta_k=\argmin_{\alpha,\beta\in\RR} f(\vf{x}_k-\alpha \grad f(\vf{x}_k)+\beta(\vf{x}_k-\vf{x}_{k-1}))
+    $$
+  \end{definition}
+  \begin{lemma}
+    The gradients $\vf{p}_k:=\grad f(\vf{x}_k)$ are pairwise orthogonal.
+  \end{lemma}
+  \begin{corollary}
+    For a quadratic function, the conjugate gradient is the \textit{best} first order method.
+  \end{corollary}
+  \begin{corollary}
+    A solution of the conjugate gradient method is found in $k=\rank \vf{A}$ iterations.
+  \end{corollary}
+  \begin{definition}[Nesterov's accelerated gradient method]
+    Let $\vf{x}_0=\vf{x}_{-1}$ be given. We define the \emph{Nesterov's method} as:
+    $$
+      \begin{cases}
+        \vf{y}_k=\vf{x}_k+\frac{t_k-1}{t_{k+1}}(\vf{x}_k-\vf{x}_{k-1}) \\
+        \vf{x}_{k+1}=\vf{y}_k-\tau \grad f(\vf{y}_k)
+      \end{cases}
+    $$
+    where $\tau=L^{-1}$ and for instance $t_k=1+\frac{k}{2}$. Moreover, we have:
+    $$
+      f(\vf{x}_k)-f(\vf{x}_*)\leq \frac{2L\norm{\vf{x}_0-\vf{x}_*}^2}{(k+1)^2}
+    $$
+  \end{definition}
+  \subsubsection{Non-smooth problems}
+  \begin{definition}
+    We define the \emph{subgradient descent method} as;
+    $$
+      \vf{x}_{k+1}=\vf{x}_k-h_k\frac{\grad f(\vf{x}_k)}{\norm{\grad f(\vf{x}_k)}}
+    $$
+    where $h_k>0$ is a step size.
+  \end{definition}
+  \begin{proposition}
+    If $f$ is $M$-Lipschitz, then the subgradient descent method satisfies:
+    $$
+      \min_{0\leq i\leq k} \{ \norm{\vf{x}_i-\vf{x}_*} \}\leq M\frac{\norm{\vf{x}_0-\vf{x}_*} + \sum_{i=0}^k h_i}{2\sum_{i=0}^k h_i}
+    $$
+    and choosing $h_i=\frac{C}{\sqrt{k+1}}$ for $k$ iterations, we have:
+    $$
+      \min_{0\leq i\leq k} \{ \norm{\vf{x}_i-\vf{x}_*} \}\leq \frac{2M\norm{\vf{x}_0-\vf{x}_*}}{C\sqrt{k+1}}
+    $$
+  \end{proposition}
+  \begin{definition}
+    We define the \emph{implicit descent} as:
+    $$
+      \vf{x}_{k+1}=\vf{x}_k-\tau \grad f(\vf{x}_{k+1})
+    $$
+  \end{definition}
+\end{multicols}
+\end{document}
