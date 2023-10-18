@@ -5,10 +5,122 @@
 \begin{multicols}{2}[\section{Numerical methods for PDEs}]
   \subsection{Finite element method}
   \subsubsection{Variational formulation of elliptic PDEs}
-
+  \begin{definition}
+    Consider a elliptic pde of the form:
+    \begin{equation}\label{NMPDE:elliptic_pde}
+      -\sum_{i,j=1}^n\partial_j(a_{ij}\partial_i u)+\sum_{i=1}^n b_i\partial_i u+cu=f
+    \end{equation}
+    in a bounded open subset $\Omega\subset\mathbb{R}^n$ with $a_{ij}$, $b_i$, $c$ and $f$ sufficiently regular functions. The variational formulation of this problem is:
+    \begin{multline*}
+      \sum_{i,j=1}^n{\langle a_{ij}\partial_i u,\partial_j v\rangle}_{L^2(\Omega)}+\sum_{i=1}^n{\langle b_i\partial_i u,v\rangle}_{L^2(\Omega)}+{\langle cu,v\rangle}_{L^2(\Omega)}=\\={\langle f,v\rangle}_{L^2(\Omega)}+\sum_{i,j=1}^n{\langle a_{ij}\partial_i u\nu_j,v\rangle}_{L^2(\Fr{\Omega})}
+    \end{multline*}
+    where $v$ is a test function (sufficiently regular) and $\vf{\nu}$ is the outward unit normal vector on $\Fr\Omega\in\mathcal{C}^1$. The functions in the last inner product on $\Fr\Omega$ are meant to be in the sense of traces. From now on, the left hand side of the variational formulation will be denoted by $a(u,v)$ and $\ell(v):={\langle f,v\rangle}_{L^2(\Omega)}$.
+  \end{definition}
+  \begin{remark}
+    This formulation makes sense for $a_{ij},b_i,c\in L^\infty(\Omega)$ and $f\in L^2(\Omega)$. We will look for a solution $u\in V$, where $V$ is a suitable space of functions, such that the variational formulation holds for all $v\in V$.
+  \end{remark}
+  \begin{definition}[Dirichlet boundary conditions]
+    Consider \mcref{NMPDE:elliptic_pde} with Dirichlet boundary conditions $u=g$ on $\Fr\Omega$. If $g=0$, the boundary term disappears and we can choose $V=H^1_0(\Omega)$. If $g\neq 0$, and both $g$ and $\Fr\Omega$ are smooth (i.e.\ $g\in H^1(\Omega)$), by \mcref{ATFAPDE:trace_thm} we can find $u_g\in H^1(\Omega)$ such that $\Tr(u_g)=g$. Then, we set $\tilde{u}:=u-u_g\in H^1_0(\Omega)$ and satisfies:
+    $$
+      a(\tilde{u},v)=\ell(v)-a(u_g,v)\quad\forall v\in H^1_0(\Omega)
+    $$
+  \end{definition}
+  \begin{definition}[Neumann boundary conditions]
+    Consider \mcref{NMPDE:elliptic_pde} with Neumann boundary conditions $\sum_{i,j=1}^n a_{ij}\partial_i u\nu_j=g$ on $\Fr\Omega$, for $g\in L^2(\Fr\Omega)$. In this case, we take $V=H^1(\Omega)$ and look for a solution $u\in V$ such that:
+    $$
+      a(u,v)=\ell(v)+{\langle g,v\rangle}_{L^2(\Fr\Omega)}\quad\forall v\in V
+    $$
+  \end{definition}
+  \begin{definition}[Robin boundary conditions]
+    Consider \mcref{NMPDE:elliptic_pde} with Robin boundary conditions $\gamma u+\sum_{i,j=1}^n a_{ij}\partial_i u\nu_j=g$ on $\Fr\Omega$, for $g\in L^2(\Fr\Omega)$ and $\gamma\in L^\infty(\Fr\Omega)$. In this case, we take $V=H^1(\Omega)$ and look for a solution $u\in V$ such that:
+    $$
+      a(u,v)+{\langle \gamma u,v\rangle}_{L^2(\Fr\Omega)}=\ell(v)+{\langle g,v\rangle}_{L^2(\Fr\Omega)}\quad\forall v\in V
+    $$
+  \end{definition}
+  \begin{remark}
+    Recall that for these problems to have a unique solution, we need to impose the coercivity and continuity in \mnameref{RFA:laxmilgram}.
+  \end{remark}
+  \begin{proposition}
+    Consider the homogeneous Dirichlet problem from \mcref{NMPDE:elliptic_pde} and set $\beta=\alpha^{-1}\sum_{i=1}^n{\norm{b_i}_{L^\infty(\Omega)}}^2$, where $\alpha$ is the ellipticity constant of the pde. Then, the homogeneous Dirichlet problem has a unique solution $u$ in $H_0^1(\Omega)$ if $\forall x\in\Omega$ we have $c-\frac{\beta}{2}\geq 0$. In this case, $\exists C>0$ such that:
+    $$
+      \norm{u}_{H^1(\Omega)}\leq C\norm{f}_{L^2(\Omega)}
+    $$
+    Consequently, the non-homogeneous Dirichlet problem for $g\in H^1(\Fr\Omega)$ has a unique solution $u$ in $H^1(\Omega)$ such that:
+    $$
+      \norm{u}_{H^1(\Omega)}\leq \tilde{C}(\norm{f}_{L^2(\Omega)}+\norm{g}_{H^1(\Fr\Omega)})
+    $$
+  \end{proposition}
+  \begin{proposition}
+    Consider the Neumann problem from \mcref{NMPDE:elliptic_pde} for $g\in L^2(\Fr\Omega)$ and set $\beta=\alpha^{-1}\sum_{i=1}^n{\norm{b_i}_{L^\infty(\Omega)}}^2$, where $\alpha$ is the ellipticity constant of the pde. Then, the Neumann problem has a unique solution $u$ in $H^1(\Omega)$ if $\forall x\in\Omega$ we have $c-\frac{\beta}{2}\geq\delta> 0$. In this case, $\exists C>0$ such that:
+    $$
+      \norm{u}_{H^1(\Omega)}\leq C(\norm{f}_{L^2(\Omega)}+\norm{g}_{L^2(\Fr\Omega)})
+    $$
+  \end{proposition}
+  \begin{proposition}
+    Consider the Robin problem from \mcref{NMPDE:elliptic_pde} for $g\in L^2(\Fr\Omega)$ and $\gamma\in L^\infty(\Fr\Omega)$ and set $\beta=\alpha^{-1}\sum_{i=1}^n{\norm{b_i}_{L^\infty(\Omega)}}^2$, where $\alpha$ is the ellipticity constant of the pde. Then, the Robin problem has a unique solution $u$ in $H^1(\Omega)$ if $\forall x\in\Omega$ we have $c-\frac{\beta}{2}\geq\delta\geq 0$ and $\gamma\geq \eta\geq 0$ with either $\delta>0$ or $\eta>0$. In this case, $\exists C>0$ such that:
+    $$
+      \norm{u}_{H^1(\Omega)}\leq C(\norm{f}_{L^2(\Omega)}+\norm{g}_{L^2(\Fr\Omega)})
+    $$
+  \end{proposition}
   \subsubsection{Galerkin method}
+  \begin{definition}
+    The \emph{conforming Galerkin method} consists in looking for a solution $u_h\in V_h\subset V$ such that:
+    $$
+      a_h(u_h,v_h)=\ell_h(v_h)\quad\forall v_h\in V_h
+    $$
+    where $V_h$ is a closed finite-dimensional subspace of $V$ and $a_h$ and $\ell_h$ are the approximations of $a$ and $\ell$ in $V_h$.
+  \end{definition}
+  \begin{remark}
+    Here $h$ is meant to be a discretization parameter.
+  \end{remark}
+  \begin{theorem}[Céa's lemma]
+    Let $u\in V$ be the solution of the variational formulation of \mcref{NMPDE:elliptic_pde} and $u_h\in V_h$ be the solution of the Galerkin method. Then, $\exists C>0$ such that:
+    $$
+      \norm{u-u_h}_V\leq C\inf_{v_h\in V_h}\norm{u-v_h}_V
+    $$
 
+  \end{theorem}
   \subsubsection{Finite element spaces}
-
+  \begin{remark}
+    Finite element methods are a special case of Galerkin methods in which the finite-dimensional subspace $V_h$ consists of piecewise polynomial functions over a mesh.
+  \end{remark}
+  \begin{definition}
+    A \emph{finite element} is a triplet $(K,\mathcal{P},\mathcal{N})$ where:
+    \begin{itemize}
+      \item $K\subseteq\RR^n$ is a simply connected bounded open set with piecewise smooth boundary (the \textit{geometric} element).
+      \item $\mathcal{P}$ is a finite-dimensional space of functions defined on $K$, whose elements are called \emph{basis functions}.
+      \item $\mathcal{N}=\{N_1,\dots,N_d\}$ is a basis of $\mathcal{P}^*$.
+    \end{itemize}
+  \end{definition}
+  \begin{lemma}
+    Let $\mathcal{P}$ be $d$-dimensional vector space and let $\{N_1,\dots,N_d\}\subset \mathcal{P}^*$. The following statements are equivalent:
+    \begin{enumerate}
+      \item $\{N_1,\dots,N_d\}$ is a basis of $\mathcal{P}^*$.
+      \item For all $v\in \mathcal{P}$ such that $N_i(v)=0$ for all $i=1,\dots,d$, then $v=0$.
+    \end{enumerate}
+  \end{lemma}
+  \begin{remark}
+    To construct a finite element, we usually proceed as follows:
+    \begin{enumerate}
+      \item We choose a geometric element $K$.
+      \item We choose a polynomial space $\mathcal{P}$ up to a given degree $k$.
+      \item We choose the degrees of freedom $\mathcal{N}=\{N_1,\dots,N_d\}$, where $d=\dim \mathcal{P}$, such that the corresponding interpolation problem is well-posed.
+      \item We compute the dual basis of $\mathcal{N}$, which gives a basis of $\mathcal{P}$.
+    \end{enumerate}
+  \end{remark}
+  \begin{definition}
+    Let $(K,\mathcal{P},\mathcal{N})$ be a finite element and $\{\psi_1,\ldots,\psi_d\}$ be the corresponding basis of $\mathcal{P}$. For a given function $v$ such that $N_i(v)$ is defined $\forall i\in\{1,\ldots,d\}$, we define the \emph{local interpolant} of $v$ as:
+    $$
+      I_Kv:=\sum_{i=1}^d N_i(v)\psi_i
+    $$
+  \end{definition}
+  \begin{lemma}
+    Let $(K,\mathcal{P},\mathcal{N})$ be a finite element and $I_K$ be the local interpolant operator associated to it. Then, the following properties hold:
+    \begin{enumerate}
+      \item $I_K$ is linear.
+      \item $N_i(I_Kv)=N_i(v)$ $\forall i\in\{1,\ldots,d\}$.
+      \item $I_Kv=v$ $\forall v\in \mathcal{P}$, i.e.\ $I_K$ is a projection.
+    \end{enumerate}
+  \end{lemma}
 \end{multicols}
 \end{document}
