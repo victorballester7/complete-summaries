@@ -284,5 +284,40 @@
     $$
     This quantity can be larger or smaller than $\Var(Y )$ depending on the choice of $L$ and thus the success of importance sampling relies on the choice of an effective change of probability measure.
   \end{remark}
+  \subsection{Simulation of diffusion processes}
+  The aim of this section is to develop methods to simulate solutions to SDEs of the form:
+  \begin{equation}\label{MM:SDE}
+    \begin{cases}
+      \dd{\vf{X}_t}=\vf{b}(\vf{X}_t)\dd{t}+\vf{\sigma}(\vf{X}_t)\dd{\vf{B}_t}
+      \vf{X}_0=\vf{x}_0
+    \end{cases}
+  \end{equation}
+  where $\vf{b}:\RR^d\to\RR^d$ and $\vf{\sigma}:\RR^d\to\mathcal{M}_{d\times d}(\RR)$ are Lipschitz continuous.
+  \subsubsection{Exact simulation}
+  \begin{proposition}
+    To simulate a sample $(\vf{B}_{t_1},\dots,\vf{B}_{t_n})$ of a $d$-dimensional Brownian motions, we can use the following algorithm:
+    \begin{enumerate}
+      \item Generate $(\vf{Z}_1,\dots,\vf{Z}_n)$ \iid $N_d(0,\vf{I}_d)$.
+      \item Set $\vf{B}_{t_0}:=0$ and for all $0\leq i\leq n-1$, set:
+            $$
+              \vf{B}_{t_{i+1}}=\vf{B}_{t_i}+\sqrt{t_{i+1}-t_i}\vf{Z}_{i+1}
+            $$
+    \end{enumerate}
+  \end{proposition}
+  \subsubsection{Euler scheme}
+  \begin{definition}
+    Consider the SDE of \mcref{MM:SDE} and let $h$ be a discretization step. The Euler method consists in:
+    \begin{align*}
+      \vf{X}_{t+h} & =\vf{X}_t+\int_t^{t+h}\vf{b}(\vf{X}_s)\dd{s}+\int_t^{t+h}\vf{\sigma}(\vf{X}_s)\dd{\vf{B}_s} \\
+                   & \approx \vf{X}_t+h\vf{b}(\vf{X}_t)+\vf{\sigma}(\vf{X}_t)(\vf{B}_{t+h}-\vf{B}_t)
+    \end{align*}
+    More generally, if we want to obtain the solution at $(t_1,\dots,t_n)$, we can use the following algorithm. Set $\vf{\tilde{X}}_0:=\vf{x}_0$ and for all $0\leq i\leq n-1$, set:
+    $$
+      \vf{\tilde{X}}_{t_{i+1}}=\vf{\tilde{X}}_{t_i}+(t_{i+1}-t_i)\vf{b}(\vf{\tilde{X}}_{t_i})+\vf{\sigma}(\vf{\tilde{X}}_{t_i})(\vf{B}_{t_{i+1}}-\vf{B}_{t_i})
+    $$
+  \end{definition}
+  \begin{remark}
+    Note that Euler scheme reduces to generating independent increments $\vf{B}_{t_{i+1}}-\vf{B}_{t_i}\sim \sqrt{t_{i+1}-t_i}N_d(0,\vf{I}_d)$.
+  \end{remark}
 \end{multicols}
 \end{document}
