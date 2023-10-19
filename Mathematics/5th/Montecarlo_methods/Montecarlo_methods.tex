@@ -190,6 +190,7 @@
     $$
       \Var(Y+b(X-\Exp(X)))\ll \Var(Y)
     $$
+    We define $Y(b):=Y+b(X-\Exp(X))$.
     This suggests the following estimator:
     $$
       \overline{Y}_n(b):=\frac{1}{n}\sum_{i=1}^n [Y_i+b(X_i-\Exp(X))]
@@ -207,13 +208,17 @@
     If $b=0$, the control variate estimator $\overline{Y}_n(b)$ coincides with the classical estimator $\overline{Y}_n$. Otherwise, the computational cost of $\overline{Y}_n(b)$ is higher than $\overline{Y}_n$, but it does not depend on the choice of $b\neq 0$.
   \end{remark}
   \begin{proposition}
-    The minimum of $\Var(Y(b))$ is attained for $$\hat{b}= \frac{\cov(Y,X)}{\Var(X)}$$ and in that case, $\Var(Y(\hat{b}))=\Var(Y)(1-{\rho_{XY}}^2)$, where $\rho_{XY}$ is the correlation between $X$ and $Y$.
+    The minimum of $\Var(Y(b))$ is attained for $$\hat{b}= -\frac{\cov(Y,X)}{\Var(X)}$$ and in that case, $\Var(Y(\hat{b}))=\Var(Y)(1-{\rho_{XY}}^2)$, where $\rho_{XY}$ is the correlation between $X$ and $Y$.
   \end{proposition}
   \begin{remark}
     Usually, $\hat{b}$ is unknown, but we can use an estimator of it, such as:
     $$
-      \hat{b}_n:=\frac{\sum_{i=1}^n (Y_i-\overline{Y}_n)(X_i-\overline{X}_n)}{\sum_{i=1}^n {(X_i-\overline{X}_n)}^2}
+      \hat{b}_n:=-\frac{\sum_{i=1}^n (Y_i-\overline{Y}_n)(X_i-\overline{X}_n)}{\sum_{i=1}^n {(X_i-\overline{X}_n)}^2}
     $$
+    but if we know $\Exp(X)$ and $\Var(X)$ explicitly, we can use them in the formula of $\hat{b}_n$.
+  \end{remark}
+  \begin{remark}
+    The result of above tell us that we should pick $X$ strongly correlated to $Y$ but simple enough to know explicitly $\Exp(X)$.
   \end{remark}
   \begin{definition}
     Let $\vf{X}$ be a random vector such that $\Exp(\vf{X})$ is known, and $\vf{b}\in \RR^d$. We define the \emph{multiple control variate estimator} as:

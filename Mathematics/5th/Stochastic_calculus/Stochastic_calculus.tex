@@ -926,6 +926,72 @@
     \end{enumerate}
   \end{proposition}
   \subsubsection{Generator of a diffusion}
+  \begin{definition}[Generator]
+    The \emph{generator} of the semigroup ${(P_t)}_{t\geq 0}$ is the linear operator $L$ defined by:
+    $$
+      (Lf)(x):=\lim_{t\to 0}\frac{P_tf(x)-f(x)}{t}
+    $$
+    for all $f\in L^\infty(\RR)$ and $x\in\RR$ such that the limit exists. Those functions form a vector space denoted by $\text{Dom}(L)$.
+  \end{definition}
+  \begin{theorem}
+    Let $f\in \mathcal{C}_\text{b}^2(\RR)$. Then:
+    \begin{enumerate}
+      \item $Lf$ is well-defined and it is given $\forall x\in\RR$ by:
+            $$
+              Lf(x)=\frac{1}{2}\sigma^2(x)f''(x)+b(x)f'(x)
+            $$
+      \item For all $t\geq 0$, we have $P_tf\in \text{Dom}(L)$ and it satisfies the \emph{Kolmogorov's equation}:
+            $$
+              \dv{}{t}P_tf=P_t(Lf)=L(P_tf)
+            $$
+      \item The process ${(M_t)}_{t\geq 0}$ defined as
+            $$
+              M_t:=f(X_t)-f(X_0)-\int_0^t Lf(X_s)\dd{s}
+            $$
+            is a continuous square-integrable martingale.
+    \end{enumerate}
+  \end{theorem}
   \subsubsection{Connection with PDEs}
+  For this section recall the diffusion equation:
+  \begin{equation}\label{SC:sde_pde}
+    \begin{cases}
+      \dd{X_t^x}=b(X_t^x)\dd{t}+\sigma(X_t^x)\dd{B_t} \\
+      X_0^x=x
+    \end{cases}
+  \end{equation}
+  where $b,\sigma:\RR\to\RR$ are Lipschitz functions. Now, fix $f\in L^\infty(\RR)$ and consider the pde:
+  \begin{equation}\label{SC:pde_sde}
+    \begin{cases}
+      \pdv{v}{t}(t,x)=b(x)\pdv{v}{x}(t,x)+\frac{1}{2}\sigma^2(x)\pdv[2]{v}{x}(t,x) \\
+      v(0,x)=f(x)
+    \end{cases}
+  \end{equation}
+  where $v\in \mathcal{C}^{1,2}([0,\infty)\times\RR)$.
+  \begin{theorem}\hfill
+    \begin{enumerate}
+      \item If $v$ is a bounded solution to the pde of \mcref{SC:pde_sde}, then we must have $\forall (t,x)\in [0,\infty)\times\RR$:
+            \begin{equation}\label{SC:sol_v}
+              v(t,x)=\Exp(f(X_t^x))
+            \end{equation}
+      \item If $b,\sigma, f\in \mathcal{C}_\text{b}^2(\RR)$, then conversely, the function $v$ defined in \mcref{SC:sol_v} is a bounded solution of \mcref{SC:pde_sde}.
+    \end{enumerate}
+  \end{theorem}
+  \begin{remark}
+    The interest of this connection between SDEs and PDEs is two-fold: on the one hand, one can use tools from PDE theory to understand the distribution of $X_t^x$. Conversely, the probabilistic representation of \mcref{SC:sol_v} offers a practical way to numerically solve the PDE of \mcref{SC:pde_sde}, by simulation.
+  \end{remark}
+  \begin{theorem}[Feynman-Kac's formula]
+    Let $v\in \mathcal{C}^{1,2}([0,\infty)\times\RR)$ be a bounded solution to the pde
+    $$
+      \begin{cases}
+        \pdv{v}{t}(t,x)=-h(x)v(t,x)+b(x) \pdv{v}{x}(t,x)+\frac{1}{2}\sigma^2(x)\pdv[2]{v}{x}(t,x) \\
+        v(0,x)=f(x)
+      \end{cases}
+    $$
+    where $f,h:\RR\to\RR$ are measurable, with $h$ non-negative. Then, we have the representation
+    $$
+      v(t,x)=\Exp\left(f(X_t^x)\exp{-\int_0^t h(X_s^x)\dd{s}}\right)
+    $$
+    for all $(t,x)\in [0,\infty)\times\RR$.
+  \end{theorem}
 \end{multicols}
 \end{document}
