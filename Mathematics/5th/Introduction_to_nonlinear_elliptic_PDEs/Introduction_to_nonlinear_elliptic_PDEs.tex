@@ -230,10 +230,15 @@
     $$
     If in addition the weak solution of $\mathcal{D}_0$ is $u=0$, then $L:W^{m+1,p}(\Omega)\cap W_0^{1,p}(\Omega)\to W^{m-1,p}(\Omega)$ is an isomorphism, where $W_0^{1,p}(\Omega)$ is the closure of $C_0^\infty(\Omega)$ in $W^{1,p}(\Omega)$.
   \end{theorem}
-  \subsection{Regularity in \texorpdfstring{$\mathcal{C}^{k,\alpha}$}{Ckalpha} for divergence-form elliptic PDEs}
-  In this section we will not use the usual Hölder norm
+  \subsection{Regularity in \texorpdfstring{$\mathcal{C}^{k,\alpha}$}{Ckalpha} for non-divergence form elliptic PDEs}
+
+  In this section we will still always work in $\Omega\subset\RR^d$ open and bounded and the elliptic operator $L$ (with ellipticity constant $\theta$) will be in its non-divergence form:
   $$
-    \norm{u}_{\mathcal{C}^{k,\alpha}(\overline\Omega)}=\sup_{\substack{x\ne y\\ \abs{\beta}=k}}\frac{\abs{\partial^\beta u(x)-\partial^\beta u(y)}}{\abs{x-y}^\alpha}
+    L=-\sum_{i,j=1}^d a_{ij}\partial_{ij}^2+\sum_{j=1}^d b_j\partial_j+c
+  $$
+  with $a_{ij}=a_{ji}$.  Moreover we will not use the usual Hölder norm
+  $$
+    \norm{u}_{\mathcal{C}^{k,\alpha}(\Omega)}=\sup_{\substack{x\ne y\\ \abs{\beta}=k}}\frac{\abs{\partial^\beta u(x)-\partial^\beta u(y)}}{\abs{x-y}^\alpha}
   $$
   but the following one:
   $$
@@ -244,5 +249,65 @@
     Recall that $(\mathcal{C}^{k,\alpha}(\overline\Omega),\norm{\cdot}_{\mathcal{C}^{k,\alpha}(\overline\Omega)})$ is a Banach space and that if $0<\alpha_1\leq\alpha_2<1$, then $
       \mathcal{C}^{k,\alpha_2}(\overline{\Omega})\subseteq \mathcal{C}^{k,\alpha_1}(\overline{\Omega})$
   \end{remark}
+
+  \subsubsection{Schauder estimates}
+  \begin{theorem}
+    Let $\Omega\subset \RR^d$ be open and bounded with $\Fr{\Omega}\in\mathcal{C}^{2,\alpha}$ for some $0<\alpha<1$. In the elliptic operator $L$ assume that $a_{ij},b_j,c\in\mathcal{C}^{0,\alpha}(\overline{\Omega})$. Then, $\exists c>0$ such that if $u\in\mathcal{C}^2(\Omega)\cap \mathcal{C}^0(\overline{\Omega})$ solves $Lu=f$, with $f\in\mathcal{C}^{0,\alpha}(\overline{\Omega})$, then $u\in \mathcal{C}^{2,\alpha}(\overline{\Omega})$ and:
+    $$
+      \norm{u}_{\mathcal{C}^{2,\alpha}(\overline{\Omega})}\leq C\left(\norm{f}_{\mathcal{C}^{0,\alpha}(\overline{\Omega})}+\norm{u}_{\mathcal{C}^{1,\alpha}(\overline{\Omega})}\right)
+    $$
+  \end{theorem}
+  \begin{corollary}
+    Let $\Omega\subset \RR^d$ be open and bounded with $\Fr{\Omega}\in\mathcal{C}^{k+2,\alpha}$ for some $0<\alpha<1$ and $k\geq 0$. In the elliptic operator $L$ assume that $a_{ij},b_j,c\in\mathcal{C}^{k,\alpha}(\overline{\Omega})$. Then, $\exists c>0$ such that if $u\in\mathcal{C}^{k+2}(\Omega)\cap \mathcal{C}^k(\overline{\Omega})$ solves $Lu=f$, with $f\in\mathcal{C}^{k,\alpha}(\overline{\Omega})$, then $u\in \mathcal{C}^{k+2,\alpha}(\overline{\Omega})$ and:
+    $$
+      \norm{u}_{\mathcal{C}^{k+2,\alpha}(\overline{\Omega})}\leq C\left(\norm{f}_{\mathcal{C}^{k,\alpha}(\overline{\Omega})}+\norm{u}_{\mathcal{C}^{k+1,\alpha}(\overline{\Omega})}\right)
+    $$
+  \end{corollary}
+  \subsubsection{Maximum and comparison principles}
+  \begin{theorem}[Weak maximum principle]
+    Let $u\in \mathcal{C}^2(\Omega)$ be such that $Lu\leq 0$. Then:
+    \begin{itemize}
+      \item If $c=0$, $\displaystyle \max_{\overline{\Omega}}u=\max_{\partial\Omega}u$.
+      \item If $c\geq 0$, $\displaystyle \max_{\overline{\Omega}}u^+\leq \max_{\partial\Omega}u^+$.
+    \end{itemize}
+  \end{theorem}
+  \begin{lemma}[Hopf's lemma]\label{INLEPDE:Hopf}
+    Let $u\in \mathcal{C}^2(\Omega)$ be such that $Lu\leq 0$ and suppose the region $\Omega$ is connected and that satisfies the \emph{interior ball condition}: for any $x\in \partial\Omega$ there exists $r>0$ and $y\in \Omega$ such that $B(y,r)\subset \Omega$ and $\overline{B(y,r)}\cap \Fr{\Omega}=\{x\}$. Suppose in addition that $c=0$ and $x_0\in\Fr\Omega$ be such that $u(x_0)=\max_{\overline{\Omega}}u$. Then, either $u$ is constant in $\Omega$ or
+    $$
+      \liminf_{t\to 0^+}\frac{u(x_0) - u(x_0+t\vf{n})}{t}>0
+    $$
+    for any vector $\vf{n}$ of the form $\vf{n}=\frac{x_0-y_0}{\norm{x_0-y_0}}$ with $B(y_0,r)\subset \Omega$ and $\overline{B(y_0,r)}\cap \Fr{\Omega}=\{x_0\}$.
+  \end{lemma}
+  \begin{remark}
+    In particular, if $\Fr\Omega\in\mathcal{C}^1$ and $u\in \mathcal{C}^1(\overline{\Omega})$, then \mnameref{INLEPDE:Hopf} implies that either $u$ is constant in $\Omega$ or $\partial_{\vf{n}}u(x_0)=\grad u(x_0)\cdot \vf{n}>0$.
+  \end{remark}
+  \begin{theorem}[Strong maximum principle]
+    Let $\Omega\subset\RR^d$ be open, bounded and connected, and $u\in \mathcal{C}^2(\Omega)$ be such that $Lu\leq 0$ with $c=0$. If $\exists x_0\in\Omega$ such that $u(x_0)\geq u(x)$ $\forall x\in\Omega$, then $u$ is constant in $\Omega$. Similarly, if $c\geq 0$ and $\exists x_0\in\Omega$ such that $u(x_0)\geq 0$ and $u(x_0)\geq u(x)$ $\forall x\in\Omega$, then $u$ is constant in $\Omega$.
+  \end{theorem}
+  \begin{theorem}
+    Suppose that $c\geq 0$ and $u\in \mathcal{C}^2(\Omega)$ is a solution to
+    $$
+      \begin{cases}
+        Lu=f                  & \text{in }\Omega         \\
+        u|_{\partial\Omega}=h & \text{on }\partial\Omega
+      \end{cases}
+    $$
+    with $f\in \mathcal{C}^0(\overline{\Omega})$ and $h\in \mathcal{C}^0(\partial\Omega)$. Then, $\forall x\in\overline{\Omega}$:
+    $$
+      u(x)\leq \max_{\partial\Omega}h^++C\max_{\overline{\Omega}}f^+
+    $$
+    with $C$ independent of $u$, $f$ and $h$.
+  \end{theorem}
+  \subsubsection{Continuation method}
+  \begin{theorem}[Continuation method]
+    Let $\Omega\subset\RR^d$ be open and bounded with $\Fr{\Omega}\in\mathcal{C}^{2,\alpha}$ for some $0<\alpha<1$. Consider the problem:
+    $$
+      \begin{cases}
+        Lu=f                  & \text{in }\Omega         \\
+        u|_{\partial\Omega}=h & \text{on }\partial\Omega
+      \end{cases}
+    $$
+    with $f,a_{ij},b_j,c\in\mathcal{C}^{0,\alpha}( \overline{\Omega})$ and $h\in\mathcal{C}^{0,\alpha}(\partial\Omega)$. Then, there exists a solution to this problem in $\mathcal{C}^{2,\alpha}(\overline{\Omega})$.
+  \end{theorem}
 \end{multicols}
 \end{document}
