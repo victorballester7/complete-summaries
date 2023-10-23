@@ -122,5 +122,116 @@
       \item $I_Kv=v$ $\forall v\in \mathcal{P}$, i.e.\ $I_K$ is a projection.
     \end{enumerate}
   \end{lemma}
+  \begin{definition}
+    A \emph{subdivision} of a bounded open set $\Omega\subset \RR^n$ is a collection $\mathcal{T}$ of open sets $K_i$ such that:
+    \begin{enumerate}
+      \item $K_i\cap K_j=\varnothing$ $\forall i\neq j$.
+      \item $\overline{\Omega}= \bigcup_{K\in\mathcal{T}}\overline{K}$.
+    \end{enumerate}
+  \end{definition}
+  \begin{definition}
+    Let $\mathcal{T}$ be a subdivision of $\Omega$ such that for each $K\in\mathcal{T}$ there exists a finite element $(K,\mathcal{P},\mathcal{N})$ with local interpolant $I_K$. Let $m$ be the order of the highest partial derivative appearing in any of the degrees of freedom of $\mathcal{N}$. We define the \emph{global interpolant} $I_\mathcal{T}v$ of $\mathcal{T}$, for $v\in \mathcal{C}^m(\overline{\Omega})$, as:
+    $$
+      I_\mathcal{T}v|_K:=I_Kv\quad \forall K\in\mathcal{T}
+    $$
+  \end{definition}
+  \begin{definition}
+    A \emph{triangulation} of a bounded open set $\Omega\subset \RR^2$ is a subdivision $\mathcal{T}$ of $\Omega$ such that:
+    \begin{enumerate}
+      \item Each $K\in\mathcal{T}$ is a triangle.
+      \item The intersection of two triangles is either empty or a common vertex or a common edge.
+    \end{enumerate}
+  \end{definition}
+  \begin{definition}
+    Let $(\widehat{K}, \widehat{\mathcal{P}}, \widehat{\mathcal{N}})$, $(K,\mathcal{P},\mathcal{N})$ be finite elements and $T:\RR^n\to\RR^n$ be an affine transformation. We say that these finite elements are \emph{affinely equivalent} by $T$ if:
+    \begin{enumerate}
+      \item $K=T(\widehat{K})$.
+      \item $\mathcal{P}=\{\widehat{p}\circ T^{-1}:\widehat{p}\in\widehat{\mathcal{P}}\}$.
+      \item $\mathcal{N}=\{N_i\}$, where $N_i(p)=\widehat{N}_i(p\circ T)$ $\forall p\in\mathcal{P}$.
+    \end{enumerate}
+  \end{definition}
+  \begin{lemma}
+    Let $(\widehat{K}, \widehat{\mathcal{P}}, \widehat{\mathcal{N}})$, $(K,\mathcal{P},\mathcal{N})$ be two affine equivalent finite elements by the affine transformation $\vf{T}_K$. Then:
+    $$
+      I_{\widehat{K}}(v\circ \vf{T}_K)=I_Kv\circ T
+    $$
+  \end{lemma}
+  \subsubsection{Polygonal interpolation in Sobolev spaces}
+  \begin{lemma}[Bramble-Hilbert lemma]
+    Let $F:W^{k,p}(\Omega)\to\RR$ be such that:
+    \begin{enumerate}
+      \item $\abs{F(v)}\leq c_1\abs{v}_{W^{k,p}(\Omega)}$ $\forall v\in W^{k,p}(\Omega)$, where $$
+              \abs{v}_{W^{k,p}(\Omega)}:=
+              \begin{cases}
+                {\left({\sum_{\abs{\alpha}= k}\norm{\partial^\alpha v}_{L^p(\Omega)}}\right)}^{1/p} & \text{if }p<\infty \\
+                \max_{\abs{\alpha}= k}\norm{\partial^\alpha v}_{L^\infty(\Omega)}                   & \text{if }p=\infty
+              \end{cases}
+            $$
+      \item $\abs{F(u+v)}\leq c_2(\abs{F(u)}+\abs{F(v)})$ $\forall u,v\in W^{k,p}(\Omega)$.
+      \item $\abs{F(q)}=0$ $\forall q\in\mathcal{P}_{k-1}(\Omega)$, where $\mathcal{P}_{\ell}(\Omega)$ is the space of polynomials of degree less than $\ell$.
+    \end{enumerate}
+    Then, $\exists C>0$ such that $\forall v\in W^{k,p}(\Omega)$:
+    $$
+      \abs{F(v)}\leq C\abs{v}_{W^{k,p}(\Omega)}
+    $$
+  \end{lemma}
+  \begin{theorem}
+    Let $(K,\mathcal{P},\mathcal{N})$ be a finite element such that $\mathcal{P}_{k-1}\subseteq \mathcal{P}$ for some $k\in\NN$ and all $N\in\mathcal{N}$ be bounded in $W^{k,p}(K)$ for some $p\in[1,\infty]$. Then, $\exists C>0$ such that $\forall v\in W^{k,p}(K)$:
+    $$
+      \abs{v-I_Kv}_{W^{\ell,p}(K)}\leq C\abs{v}_{W^{k,p}(K)} \quad\forall \ell\in\{0,\ldots,k\}
+    $$
+  \end{theorem}
+  \begin{remark}
+    Let $(K,\mathcal{P},\mathcal{N})$ be a finite element and $(\widehat{K}, \widehat{\mathcal{P}}, \widehat{\mathcal{N}})$ be the reference element. From now on, if they are affine equivalent by $\vf{T}_K:\widehat{K}\to K$, we will assume that $\vf{T}_K\widehat{x}=\vf{A}_K \widehat{x}+\vf{b}_K$, with $\vf{A}_K$ invertible.
+  \end{remark}
+  \begin{lemma}
+    Let $k\in \NN$ and $p\in[1,\infty]$. Then, $\exists C>0$ such that $\forall K\subset\Omega$ and $\forall v\in W^{k,p}(\widehat{K})$:
+    \begin{align*}
+      \abs{v}_{W^{k,p}(\widehat{K})} & \leq C\norm{\vf{A}_K}^k\abs{\det \vf{A}_K}^{-1/p}\abs{v}_{W^{k,p}(K)}                 \\
+      \abs{v}_{W^{k,p}(K)}           & \leq C\norm{{\vf{A}_K}^{-1}}^k\abs{\det \vf{A}_K}^{1/p}\abs{v}_{W^{k,p}(\widehat{K})}
+    \end{align*}
+  \end{lemma}
+  \begin{definition}
+    Let $(K,\mathcal{P},\mathcal{N})$ be a finite element. We define the \emph{diameter} of $K$ as:
+    $$
+      h_K:=\max_{x,y\in K}\norm{x-y}
+    $$
+    We define the \emph{insphere diameter} of $K$ as:
+    $$
+      \rho_K:=2\max\{\rho>0:B(x,\rho)\subset K\text{ for some }x\in K\}
+    $$
+    We define the \emph{condition number} of $K$ as $\sigma_K:=\frac{h_K}{\rho_K}$.
+  \end{definition}
+  \begin{lemma}
+    Let $(K,\mathcal{P},\mathcal{N})$, $(\widehat{K}, \widehat{\mathcal{P}}, \widehat{\mathcal{N}})$ be affine equivalent finite elements by $\vf{T}_K:\widehat{K}\to K$. Then, $\abs{\det \vf{A}_K}=\frac{\vol(K)}{\vol(\widehat{K})}$, $\norm{\vf{A}_K}\leq \frac{h_K}{\rho_{\widehat{K}}}$ and $\norm{{\vf{A}_K}^{-1}}\leq \frac{h_{\widehat{K}}}{\rho_K}$.
+  \end{lemma}
+  \begin{theorem}[Local interpolation error]
+    Let $(\widehat{K}, \widehat{\mathcal{P}}, \widehat{\mathcal{N}})$ be a finite element with $\mathcal{P}_{k-1}\subseteq \mathcal{P}$ for some $k\in\NN$ and all $N\in\mathcal{N}$ be bounded in $W^{k,p}(\widehat{K})$ for some $p\in[1,\infty]$. Then, for all finite element $(K,\mathcal{P},\mathcal{N})$ affine equivalent to $(\widehat{K}, \widehat{\mathcal{P}}, \widehat{\mathcal{N}})$ by $\vf{T}_K:\widehat{K}\to K$, $\exists C>0$ (independent of $K$) such that $\forall v\in W^{k,p}(K)$:
+    $$
+      \abs{v-I_Kv}_{W^{\ell,p}(K)}\leq C{h_K}^k{\sigma_K}^{\ell}\abs{v}_{W^{k,p}(K)} \quad\forall \ell\in\{0,\ldots,k\}
+    $$
+  \end{theorem}
+  \begin{definition}
+    A subdivision $\mathcal{T}$ of $\Omega\in \RR^n$ is called \emph{regular} if $\exists C>0$ such that $\forall K\in\mathcal{T}$ we have $\sigma_K\leq C$.
+  \end{definition}
+  \begin{theorem}[Global interpolation error]
+    Let $\mathcal{T}$ be a regular subdivision of $\Omega\in \RR^n$ and $(\widehat{K}, \widehat{\mathcal{P}}, \widehat{\mathcal{N}})$ be a reference finite element with $\mathcal{P}_{k-1}\subseteq \mathcal{P}$ for some $k\in\NN$ and all $N\in\mathcal{N}$ be bounded in $W^{k,p}(\widehat{K})$ for some $p\in[1,\infty]$. Let $h:= \max_{K\in\mathcal{T}}h_K$. Then, $\exists C>0$ (independent of $h$) such that $\forall v\in W^{k,p}(\Omega)$:
+    \begin{multline*}
+      \abs{v-I_\mathcal{T}v}_{W^{\ell,p}(\Omega)}+\sum_{\ell=1}^k\left(h^\ell\sum_{K\in\mathcal{T}} \abs{v-I_Kv}_{W^{\ell,p}(K)}^p\right)^{1/p}\leq \\\leq C h^k\abs{v}_{W^{k,p}(\Omega)}
+    \end{multline*}
+    if $p<\infty$ and:
+    \begin{multline*}
+      \abs{v-I_\mathcal{T}v}_{W^{\ell,\infty}(\Omega)}+\sum_{\ell=1}^kh^\ell \max_{K\in\mathcal{T}}\abs{v-I_Kv}_{W^{\ell,\infty}(K)}\leq\\\leq C h^k\abs{v}_{W^{k,\infty}(\Omega)}
+    \end{multline*}
+    if $p=\infty$.
+  \end{theorem}
+  \subsubsection{Error estimates for finite element approximation}
+  \begin{theorem}
+    Let $\Omega\subset\RR^n$ be open and bounded, $u\in H^1(\Omega)$ be the solution of the boundary value problem and $\mathcal{T}$ be a regular triangulation of $\Omega$ with reference element $(\widehat{K}, \widehat{\mathcal{P}}, \widehat{\mathcal{N}})$ such that $\mathcal{P}_{k-1}\subseteq \mathcal{P}$ for some $k\in\NN$. Let $u_h\in V_h$ be the solution of the Galerkin method. Then, if $u\in H^m$, with $\frac{n}{2}< m<k$, then $\exists C>0$ (independent of $h$ and $u$) such that:
+    $$
+      \norm{u-u_h}_{H^1(\Omega)}\leq C h^{m-1}\norm{u}_{H^m(\Omega)}
+    $$
+  \end{theorem}
+  \subsection{Spectral methods}
 \end{multicols}
 \end{document}
