@@ -306,7 +306,7 @@
   \end{proposition}
   \subsubsection{Euler scheme}
   \begin{definition}
-    Consider the SDE of \mcref{MM:SDE} and let $h$ be a discretization step. The Euler method consists in:
+    Consider the SDE of \mcref{MM:SDE} and let $h$ be a discretization step. The \emph{Euler method} consists in:
     \begin{align*}
       \vf{X}_{t+h} & =\vf{X}_t+\int_t^{t+h}\vf{b}(\vf{X}_s)\dd{s}+\int_t^{t+h}\vf{\sigma}(\vf{X}_s)\dd{\vf{B}_s} \\
                    & \approx \vf{X}_t+h\vf{b}(\vf{X}_t)+\vf{\sigma}(\vf{X}_t)(\vf{B}_{t+h}-\vf{B}_t)
@@ -319,5 +319,14 @@
   \begin{remark}
     Note that Euler scheme reduces to generating independent increments $\vf{B}_{t_{i+1}}-\vf{B}_{t_i}\sim \sqrt{t_{i+1}-t_i}N_d(0,\vf{I}_d)$.
   \end{remark}
+  \begin{remark}
+    Trying to build an implicit Euler scheme for SDEs is much more complicated than for ODEs, as we need to ensure that the process is still adapted.
+  \end{remark}
+  \begin{theorem}
+    Let $\vf{X}$ be the solution to \mcref{MM:SDE} and $\vf{\tilde{X}}$ be the solution to the Euler scheme. Then, for $p\geq 1$:
+    $$
+      \Exp\left(\sup_{0\leq t\leq T}\norm{\vf{X}_t-\vf{\tilde{X}}_t}_p\right)\leq C_p h
+    $$
+  \end{theorem}
 \end{multicols}
 \end{document}

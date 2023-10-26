@@ -8,7 +8,7 @@
   \subsection{Finite difference schemes}
   \subsubsection{Introduction}
   \begin{definition}
-    A linear system of $n$ first order of pdes for $\vf{u}(t,x)$ is a system of the form: $$\vf{A}(t,x)\vf{u}_t+\vf{B}(t,x)\vf{u}_x=\vf{C}(t,x)\vf{u}+\vf{D}(t,x)$$
+    A linear system of $n$ first order of PDEs for $\vf{u}(t,x)$ is a system of the form: $$\vf{A}(t,x)\vf{u}_t+\vf{B}(t,x)\vf{u}_x=\vf{C}(t,x)\vf{u}+\vf{D}(t,x)$$
     for certain matrices $\vf{A},\vf{B},\vf{C}, \vf{D}\in \mathcal{M}_q(\RR)$. The system is called \emph{hyperbolic} if $\vf{A}^{-1}\vf{B}$ is diagonalizable.
   \end{definition}
   \begin{definition}
@@ -70,7 +70,7 @@
   \end{definition}
   \begin{definition}
     Let $(G_j)$ be a sequence of grids such that the time and space steps $k_j,h_j>0$ of each one satisfy $\displaystyle \lim_{j\to\infty}k_j=\lim_{j\to\infty}h_j=0$.
-    We say that a finite difference scheme $v$ approximating a pde with initial condition $u_0(x)$ is \emph{unconditionally convergent} if for any solution $u(x,t)$ to the pde we have:
+    We say that a finite difference scheme $v$ approximating a PDE with initial condition $u_0(x)$ is \emph{unconditionally convergent} if for any solution $u(x,t)$ to the PDE we have:
     \begin{itemize}
       \item For all $x\in\domain u_0$ and all increasing sequence $(m_j)\in\NN$ such that $(\cdot,x_{m_j})\in G_j$ and $\displaystyle\lim_{j\to\infty} x_{m_j}=x$, we have $\displaystyle\lim_{j\to\infty} v_{m_j}^0=u_0(x)$.
       \item For all $(t,x)\in\domain u$ and all increasing sequences $(m_j),(n_j)\in\NN$ such that $(t_{n_j},x_{m_j})\in G_j$ and $\displaystyle\lim_{j\to\infty} x_{m_j}=x$, $\displaystyle\lim_{j\to\infty} t_{n_j}=t$, we have $\displaystyle\lim_{j\to\infty} v_{m_j}^{n_j}=u(t,x)$.
@@ -78,7 +78,7 @@
     The scheme is \emph{conditionally convergent} if $\forall j\in\NN$, $(k_j,h_j)\in\Lambda$, for some stability region $\Lambda$.
   \end{definition}
   \begin{definition}
-    Let $P$ be a partial differential operator and $\vf{f}$ be a function. Given the pde $P\vf{u}=\vf{f}$ and a finite difference scheme $P_{k,h}\vf{v}=R_{k,h}\vf{f}$ with $R_{k,h}\vf{1}=\vf{1}$, we say that the scheme is \emph{consistent} with the pde if for any smooth function $\vf\phi(t,x)$ we have: $$\lim_{k,h\to 0}R_{k,h}P\vf\phi-P_{k,h}\vf\phi=\vf{0}$$
+    Let $P$ be a partial differential operator and $\vf{f}$ be a function. Given the PDE $P\vf{u}=\vf{f}$ and a finite difference scheme $P_{k,h}\vf{v}=R_{k,h}\vf{f}$ with $R_{k,h}\vf{1}=\vf{1}$, we say that the scheme is \emph{consistent} with the PDE if for any smooth function $\vf\phi(t,x)$ we have: $$\lim_{k,h\to 0}R_{k,h}P\vf\phi-P_{k,h}\vf\phi=\vf{0}$$
     where the convergence is pointwise at each point $(t,x)$ in the domain of solutions. We say that the consistency is of order $(p,q)$ in time and space if: $$\lim_{k,h\to 0}R_{k,h}P\vf\phi-P_{k,h}\vf\phi=\O{k^p}+\O{h^q}$$  The consistency is a \emph{conditional consistency} if the limit is for $(k,h)\in \Lambda$, for some stability region $\Lambda$. In that case, it makes sense to say that the consistency is of order $r$ in $k=\lambda(h)$ if:
     $$\lim_{h\to 0}R_{\lambda(h),h}P\vf\phi-P_{\lambda(h),h}\vf\phi=\O{h^r}$$
   \end{definition}
@@ -86,7 +86,7 @@
     The Lax-Friedrichs scheme is consistent if and only if $\displaystyle\lim_{h,k\to 0}\frac{h^2}{k}=0$.
   \end{lemma}
   \begin{remark}
-    The consistency is not enough to guarantee convergence. For example, consider the pde $u_t+au_x=0$, with $a>0$. The forward-time forward-space scheme is consistent with the pde, but it is not convergent if we take the initial condition $u_0(x)=\indi{\{x<0\}}$ on the domain $[-1,1]$. Indeed, looking at \mcref{NIPDE:upwind} we see that from some instant of time, the solution will be $0$ everywhere, which cannot be possible. In that case we should use the forward-time backward-space scheme, which is convergent. The usage of this latter method in these cases is called the \emph{upwind condition}.
+    The consistency is not enough to guarantee convergence. For example, consider the PDE $u_t+au_x=0$, with $a>0$. The forward-time forward-space scheme is consistent with the PDE, but it is not convergent if we take the initial condition $u_0(x)=\indi{\{x<0\}}$ on the domain $[-1,1]$. Indeed, looking at \mcref{NIPDE:upwind} we see that from some instant of time, the solution will be $0$ everywhere, which cannot be possible. In that case we should use the forward-time backward-space scheme, which is convergent. The usage of this latter method in these cases is called the \emph{upwind condition}.
   \end{remark}
   \begin{figure}[H]
     \centering
@@ -204,7 +204,7 @@
     \end{align*}
   \end{proof}
   \begin{proposition}
-    Consider the pde of \mcref{NIPDE:traffic} with $\lambda =k/h=\const$ Then:
+    Consider the PDE of \mcref{NIPDE:traffic} with $\lambda =k/h=\const$ Then:
     \begin{itemize}
       \item The FTFS scheme is stable if and only if $a\lambda\in [-1,0]$.
       \item The FTBS scheme is stable if and only if $a\lambda\in [0,1]$.
@@ -397,7 +397,7 @@
     It can also be shown that the consistency and convergence imply stability.
   \end{remark}
   \begin{theorem}
-    Consider a scheme of $J$ steps for a 1st-order-in-time linear pde of constant coefficients whose amplification factor is $g$. Let $\Phi(\theta, g)$ be the \emph{amplification polynomial}, that is the polynomial that satisfies $g$ of degree $J-1$. Then, the scheme is stable if and only if:
+    Consider a scheme of $J$ steps for a 1st-order-in-time linear PDE of constant coefficients whose amplification factor is $g$. Let $\Phi(\theta, g)$ be the \emph{amplification polynomial}, that is the polynomial that satisfies $g$ of degree $J-1$. Then, the scheme is stable if and only if:
     \begin{itemize}
       \item for any root $g_j(\theta)$ of $\Phi$ we have $\abs{g_j(\theta)}\leq 1$-
       \item if $\exists \theta_0$ and $k$ such that $\abs{g_k(\theta_0)}=1$, then this root is simple.
@@ -417,9 +417,9 @@
     $$
     If $\abs{a\lambda}<1$, then $\abs{g_{\pm}}^2=1$ and the two roots are simple $\forall \theta\in\RR$. If $\abs{a\lambda}>1$ and $\theta=\frac{\pi}{2}$, then either $\abs{g_+}>1$ or $\abs{g_-}>1$ and the scheme is unstable. Finally, if $\abs{a\lambda}=1$ and $\theta=\frac{\pi}{2}$, then the scheme is unstable because there is a double root.
   \end{proof}
-  \subsubsection{Second order pdes}
+  \subsubsection{Second order PDEs}
   \begin{definition}
-    Consider a second order pde of the form:
+    Consider a second order PDE of the form:
     \begin{equation}
       A u_{tt}+2Bu_{tx} +Cu_{xx}+Du_t+Eu_x+F u=G
     \end{equation}
@@ -431,7 +431,7 @@
         u_x(f(s),g(s))=\psi(s)
       \end{cases}
     $$
-    which are tied to the \emph{compatibility condition} $h'=\phi f'+\psi g'$ that follows from the chain rule. The characteristic curves are the curves from which we cannot find the highest order derivatives of $u$ from the initial conditions and the pde. Differentiating $u_t(s)$ and $u_x(s)$ we get the system of equations for $u_{tt}$, $u_{tx}$ and $u_{xx}$:
+    which are tied to the \emph{compatibility condition} $h'=\phi f'+\psi g'$ that follows from the chain rule. The characteristic curves are the curves from which we cannot find the highest order derivatives of $u$ from the initial conditions and the PDE. Differentiating $u_t(s)$ and $u_x(s)$ we get the system of equations for $u_{tt}$, $u_{tx}$ and $u_{xx}$:
     \begin{equation*}
       \begin{cases}
         A u_{tt}+2Bu_{tx} +Cu_{xx}=G-D\phi-E\psi -Fh \\
@@ -443,13 +443,13 @@
     $$
       A{\left(\dv{x}{t}\right)}^2-2B\dv{x}{t}+C=0
     $$
-    The pde is called \emph{elliptic} if $AC-B^2>0$, \emph{hyperbolic} if $AC-B^2<0$ and \emph{parabolic} if $AC-B^2=0$.
+    The PDE is called \emph{elliptic} if $AC-B^2>0$, \emph{hyperbolic} if $AC-B^2<0$ and \emph{parabolic} if $AC-B^2=0$.
   \end{definition}
   \begin{definition}
-    Consider a finite difference scheme with $J$ steps for a 2n order homogeneous pde and $\Lambda$ be a stability region. We say that it is \emph{stable} is given $T>0$, there exists $C_T>0$ such that for any grid with $(k,h)\in \Lambda$ and for any initial values $\vf{v}_m^j$, $m\in\ZZ$, $j=0,\ldots,J-1$ we have $$\sum_{m\in\ZZ}\norm{\vf{v}_m^n}^2\leq (1+n^2)C_T\sum_{j=0}^{J-1}\sum_{m\in\ZZ}\norm{\vf{v}_m^j}^2$$ for all $n\in\NN$ such that $0\leq nk\leq T$.
+    Consider a finite difference scheme with $J$ steps for a 2n order homogeneous PDE and $\Lambda$ be a stability region. We say that it is \emph{stable} is given $T>0$, there exists $C_T>0$ such that for any grid with $(k,h)\in \Lambda$ and for any initial values $\vf{v}_m^j$, $m\in\ZZ$, $j=0,\ldots,J-1$ we have $$\sum_{m\in\ZZ}\norm{\vf{v}_m^n}^2\leq (1+n^2)C_T\sum_{j=0}^{J-1}\sum_{m\in\ZZ}\norm{\vf{v}_m^j}^2$$ for all $n\in\NN$ such that $0\leq nk\leq T$.
   \end{definition}
   \begin{theorem}
-    Consider a finite difference scheme with $J$ steps for a 2n order homogeneous pde whose amplification factor is $g$ and $\Phi(\theta, g)$ is the amplification polynomial. Then, the scheme is stable if and only if:
+    Consider a finite difference scheme with $J$ steps for a 2n order homogeneous PDE whose amplification factor is $g$ and $\Phi(\theta, g)$ is the amplification polynomial. Then, the scheme is stable if and only if:
     \begin{itemize}
       \item for any root $g_j(\theta)$ of $\Phi$ we have $\abs{g_j(\theta)}\leq 1$.
       \item if $\exists \theta_0$ and $k$ such that $\abs{g_k(\theta_0)}=1$ then this root is at most double.
@@ -479,7 +479,7 @@
   \end{proposition}
   \subsubsection{Elliptic equations}
   \begin{definition}
-    Let $Pu=f$ be an elliptic pde on $\Omega$. We define the following boundary conditions on $\Fr{\Omega}$:
+    Let $Pu=f$ be an elliptic PDE on $\Omega$. We define the following boundary conditions on $\Fr{\Omega}$:
     \begin{enumerate}
       \item \emph{Dirichlet}: $u=f$
       \item \emph{Neumann}: $\pdv{u}{n}=g$
