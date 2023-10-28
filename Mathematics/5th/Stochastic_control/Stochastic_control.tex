@@ -113,7 +113,7 @@
         \vf{X}_{t_0}=\vf{x}_0
       \end{cases}
     \end{equation}
-    where $\vf{b}:\RR_{\geq 0}\times\RR^d\times A\to\RR^d$, $\vf{\sigma}:\RR_{\geq 0}\times\RR^d\times A\to\RR^{d\times m}$ are continuous, $A$ is a compact metric space and $\alpha_t\in \text{ct}_t:=\{\rho:[0,t]\times\Omega\to A:\rho\text{ is progressively measurable}\}$ is a \emph{control parameter}.
+    where $\vf{b}:\RR_{\geq 0}\times\RR^d\times A\to\RR^d$, $\vf{\sigma}:\RR_{\geq 0}\times\RR^d\times A\to\RR^{d\times m}$ are continuous, $A$ is a compact metric space and $\alpha_t\in \text{ct}_t:=\{\rho:[t,T]\times\Omega\to A:\rho\text{ is progressively measurable}\}$ is a \emph{control parameter}.
   \end{definition}
   From here on we will assume that both $\vf{b}$ and $\vf{\sigma}$ are uniformly Lipschitz-continuous in the second variable.
   \begin{theorem}
@@ -128,14 +128,14 @@
   \begin{definition}[Finite horizon problem]
     Let $T>0$, $g:\RR^d\to\RR$ be continuous and bounded and $\ell:[0,T]\times\RR^d\times A\to\RR$ be continuous and bounded. We define the following problem:
     $$
-      \inf_{\alpha\in \text{ct}_{t_0}}\Exp\left(\int_{t_0}^T \ell(r,\vf{X}_r^{t_0,\vf{x}_0,\alpha},\alpha_r)\dd{r}+g(\vf{X}_T^{t_0,\vf{x}_0,\alpha})\right)
+      \inf_{\alpha\in \text{ct}_{t_0}}\Exp\left(\int_{t_0}^T \ell(s,\vf{X}_s^{t_0,\vf{x}_0,\alpha},\alpha_s)\dd{s}+g(\vf{X}_T^{t_0,\vf{x}_0,\alpha})\right)
     $$
     The first term in the expectation is called \emph{running cost} and the second one \emph{terminal cost}.
   \end{definition}
   \begin{definition}[Infinte horizon problem]
-    Let $g:\RR^d\to\RR$ be continuous and bounded and $\ell:[0,\infty)\times\RR^d\times A\to\RR$ be continuous and bounded. We define the following problem:
+    Let $\ell:[0,\infty)\times\RR^d\times A\to\RR$ be continuous and bounded and $r>0$. We define the following problem:
     $$
-      \inf_{\alpha\in \text{ct}_{t_0}}\Exp\left(\int_{t_0}^\infty \exp{-\tau r}\ell(r,\vf{X}_r^{t_0,\vf{x}_0,\alpha},\alpha_r)\dd{r}\right)
+      \inf_{\alpha\in \text{ct}_{t_0}}\Exp\left(\int_{t_0}^\infty \exp{-r s}\ell(s,\vf{X}_s^{t_0,\vf{x}_0,\alpha},\alpha_s)\dd{s}\right)
     $$
   \end{definition}
 \end{multicols}
