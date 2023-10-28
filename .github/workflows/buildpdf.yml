@@ -22,315 +22,231 @@ jobs:
         uses: xu-cheng/latex-action@v2
         with:
           root_file: main_math.tex
-      # go to .yml file in data/complete-summaries.yml and copy all the files for using the same sintax
-
-      - name: Compile LaTex files
-        # access complete-summaries.yml file
-        run: |
-          cat ../../data/complete-summaries.yml
-          for area in $(cat ../../data/complete-summaries.yml | shyaml keys areas); do
-            echo "Area: $area"
-            for year in $(cat ../../data/complete-summaries.yml | shyaml keys areas.$area.years); do
-              echo "Year: $year"
-              for subject in $(cat ../../data/complete-summaries.yml | shyaml keys areas.$area.years.$year.subjects); do
-                echo "Subject: $subject"
-                subject=$(echo $subject | sed 's/ /_/g')
-                - name: Compile - $subject
-                  uses: xu-cheng/latex-action@v2
-                  with:
-                    root_file: $subject.tex
-                    working_directory: $area/$year/$subject/
-              done
-            done
-          done
-      # the file is the following
-      #     areas:
-      # - Mathematics:
-      #   name: Mathematics
-      #   years:
-      #     - 1st:
-      #       name: 1st year
-      #       subjects:
-      #         - Fundamentals of mathematics
-      #         - Linear algebra
-      #         - Real-valued functions
-      #     - 2nd:
-      #       name: 2nd year
-      #       subjects:
-      #         - Algebraic structures
-      #         - Discrete mathematics
-      #         - Functions of several variables
-      #         - Linear geometry
-      #         - Mathematical analysis
-      #         - Numerical methods
-      #     - 3rd:
-      #       name: 3rd year
-      #       subjects:
-      #         - Complex analysis
-      #         - Differential equations
-      #         - Differential geometry
-      #         - Galois theory
-      #         - Probability
-      #         - Statistics
-      #         - Topology
-      #     - 4th:
-      #       name: 4th year
-      #       subjects:
-      #         - Algebraic topology
-      #         - Dynamical systems
-      #         - Harmonic analysis
-      #         - Linear models
-      #         - Numerical calculus
-      #         - Numerical integration of partial differential equations
-      #         - Partial differential equations
-      #         - Real and functional analysis
-      #         - Stochastic processes
-      #     - 5th:
-      #       name: 5th year
-      #       subjects:
-      #         - Advanced dynamic systems
-      #         - Advanced probability
-      #         - Advanced topics in functional analysis and PDEs
-      #         - Continuous optimization
-      #         - Introduction to nonlinear elliptic PDEs
-      #         - Montecarlo methods
-      #         - Numerical methods for PDEs
-      #         - Stochastic calculus
-      #         - Stochastic control
-      # - Physics:
-      #   name: Topics in physics
-      #   years:
-      #     - Basic:
-      #       name: Basic level
-      #       subjects:
-      #         - Electricity and magnetism
-      #         - Mechanics and special relativity
-      #         - Structure of matter and thermodynamics
-      #     - Advanced:
-      #       name: Advanced level
-      #       subjects:
-      #         - Fluid mechanics
-
-      # # MATHEMATICS 1
-      # - name: Compile - FM
-      #   uses: xu-cheng/latex-action@v2
-      #   with:
-      #     root_file: Fundamentals_of_mathematics.tex
-      #     working_directory: Mathematics/1st/Fundamentals_of_mathematics/
-      # - name: Compile - LA
-      #   uses: xu-cheng/latex-action@v2
-      #   with:
-      #     root_file: Linear_algebra.tex
-      #     working_directory: Mathematics/1st/Linear_algebra/
-      # - name: Compile - RVF
-      #   uses: xu-cheng/latex-action@v2
-      #   with:
-      #     root_file: Real-valued_functions.tex
-      #     working_directory: Mathematics/1st/Real-valued_functions/
-      # # MATHEMATICS 2
-      # - name: Compile - AS
-      #   uses: xu-cheng/latex-action@v2
-      #   with:
-      #     root_file: Algebraic_structures.tex
-      #     working_directory: Mathematics/2nd/Algebraic_structures/
-      # - name: Compile - DM
-      #   uses: xu-cheng/latex-action@v2
-      #   with:
-      #     root_file: Discrete_mathematics.tex
-      #     working_directory: Mathematics/2nd/Discrete_mathematics/
-      # - name: Compile - FSV
-      #   uses: xu-cheng/latex-action@v2
-      #   with:
-      #     root_file: Functions_of_several_variables.tex
-      #     working_directory: Mathematics/2nd/Functions_of_several_variables/
-      # - name: Compile - LG
-      #   uses: xu-cheng/latex-action@v2
-      #   with:
-      #     root_file: Linear_geometry.tex
-      #     working_directory: Mathematics/2nd/Linear_geometry/
-      # - name: Compile - MA
-      #   uses: xu-cheng/latex-action@v2
-      #   with:
-      #     root_file: Mathematical_analysis.tex
-      #     working_directory: Mathematics/2nd/Mathematical_analysis/
-      # - name: Compile - NM
-      #   uses: xu-cheng/latex-action@v2
-      #   with:
-      #     root_file: Numerical_methods.tex
-      #     working_directory: Mathematics/2nd/Numerical_methods/
-      # # MATHEMATICS 3
+      # MATHEMATICS 1
+      - name: Compile - FM
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: Fundamentals_of_mathematics.tex
+          working_directory: Mathematics/1st/Fundamentals_of_mathematics/
+      - name: Compile - LA
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: Linear_algebra.tex
+          working_directory: Mathematics/1st/Linear_algebra/
+      - name: Compile - RVF
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: Real-valued_functions.tex
+          working_directory: Mathematics/1st/Real-valued_functions/
+      # MATHEMATICS 2
+      - name: Compile - AS
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: Algebraic_structures.tex
+          working_directory: Mathematics/2nd/Algebraic_structures/
+      - name: Compile - DM
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: Discrete_mathematics.tex
+          working_directory: Mathematics/2nd/Discrete_mathematics/
+      - name: Compile - FSV
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: Functions_of_several_variables.tex
+          working_directory: Mathematics/2nd/Functions_of_several_variables/
+      - name: Compile - LG
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: Linear_geometry.tex
+          working_directory: Mathematics/2nd/Linear_geometry/
+      - name: Compile - MA
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: Mathematical_analysis.tex
+          working_directory: Mathematics/2nd/Mathematical_analysis/
+      - name: Compile - NM
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: Numerical_methods.tex
+          working_directory: Mathematics/2nd/Numerical_methods/
+      # MATHEMATICS 3
+      - name: Compile - CA
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: Complex_analysis.tex
+          working_directory: Mathematics/3rd/Complex_analysis/
+      - name: Compile - DE
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: Differential_equations.tex
+          working_directory: Mathematics/3rd/Differential_equations/
+      - name: Compile - DG
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: Differential_geometry.tex
+          working_directory: Mathematics/3rd/Differential_geometry/
+      - name: Compile - GT
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: Galois_theory.tex
+          working_directory: Mathematics/3rd/Galois_theory/
+      - name: Compile - PRO
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: Probability.tex
+          working_directory: Mathematics/3rd/Probability/
+      - name: Compile - S
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: Statistics.tex
+          working_directory: Mathematics/3rd/Statistics/
+      - name: Compile - TOP
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: Topology.tex
+          working_directory: Mathematics/3rd/Topology/
+      # MATHEMATICS 4
+      - name: Compile - AT
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: Algebraic_topology.tex
+          working_directory: Mathematics/4th/Algebraic_topology/
+      - name: Compile - A
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: Arithmetic.tex
+          working_directory: Mathematics/4th/Arithmetic/
       # - name: Compile - CA
       #   uses: xu-cheng/latex-action@v2
       #   with:
-      #     root_file: Complex_analysis.tex
-      #     working_directory: Mathematics/3rd/Complex_analysis/
-      # - name: Compile - DE
+      #     root_file: Commutative_algebra.tex
+      #     working_directory: Mathematics/4th/Commutative_algebra/
+      - name: Compile - DS
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: Dynamical_systems.tex
+          working_directory: Mathematics/4th/Dynamical_systems/
+      - name: Compile - HA
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: Harmonic_analysis.tex
+          working_directory: Mathematics/4th/Harmonic_analysis/
+      - name: Compile - LM
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: Linear_models.tex
+          working_directory: Mathematics/4th/Linear_models/
+      - name: Compile - NC
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: Numerical_calculus.tex
+          working_directory: Mathematics/4th/Numerical_calculus/
+      - name: Compile - NIPDE
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: Numerical_integration_of_partial_differential_equations.tex
+          working_directory: Mathematics/4th/Numerical_integration_of_partial_differential_equations/
+      - name: Compile - PDE
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: Partial_differential_equations.tex
+          working_directory: Mathematics/4th/Partial_differential_equations/
+      - name: Compile - RFA
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: Real_and_functional_analysis.tex
+          working_directory: Mathematics/4th/Real_and_functional_analysis/
+      - name: Compile - ST
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: Stochastic_processes.tex
+          working_directory: Mathematics/4th/Stochastic_processes/
+      # MATHEMATICS 5
+      - name: Compile - ADS
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: Advanced_dynamical_systems.tex
+          working_directory: Mathematics/5th/Advanced_dynamical_systems/
+      - name: Compile - AP
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: Advanced_probability.tex
+          working_directory: Mathematics/5th/Advanced_probability/
+      - name: Compile - ATFAPDE
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: Advanced_topics_in_functional_analysis_and_PDEs.tex
+          working_directory: Mathematics/5th/Advanced_topics_in_functional_analysis_and_PDEs/
+      - name: Compile - CO
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: Continuous_optimization.tex
+          working_directory: Mathematics/5th/Continuous_optimization/
+      # - name: Compile - IEPDE
       #   uses: xu-cheng/latex-action@v2
       #   with:
-      #     root_file: Differential_equations.tex
-      #     working_directory: Mathematics/3rd/Differential_equations/
-      # - name: Compile - DG
-      #   uses: xu-cheng/latex-action@v2
-      #   with:
-      #     root_file: Differential_geometry.tex
-      #     working_directory: Mathematics/3rd/Differential_geometry/
-      # - name: Compile - GT
-      #   uses: xu-cheng/latex-action@v2
-      #   with:
-      #     root_file: Galois_theory.tex
-      #     working_directory: Mathematics/3rd/Galois_theory/
-      # - name: Compile - PRO
-      #   uses: xu-cheng/latex-action@v2
-      #   with:
-      #     root_file: Probability.tex
-      #     working_directory: Mathematics/3rd/Probability/
-      # - name: Compile - S
-      #   uses: xu-cheng/latex-action@v2
-      #   with:
-      #     root_file: Statistics.tex
-      #     working_directory: Mathematics/3rd/Statistics/
-      # - name: Compile - TOP
-      #   uses: xu-cheng/latex-action@v2
-      #   with:
-      #     root_file: Topology.tex
-      #     working_directory: Mathematics/3rd/Topology/
-      # # MATHEMATICS 4
-      # - name: Compile - AT
-      #   uses: xu-cheng/latex-action@v2
-      #   with:
-      #     root_file: Algebraic_topology.tex
-      #     working_directory: Mathematics/4th/Algebraic_topology/
-      # - name: Compile - A
-      #   uses: xu-cheng/latex-action@v2
-      #   with:
-      #     root_file: Arithmetic.tex
-      #     working_directory: Mathematics/4th/Arithmetic/
-      # # - name: Compile - CA
-      # #   uses: xu-cheng/latex-action@v2
-      # #   with:
-      # #     root_file: Commutative_algebra.tex
-      # #     working_directory: Mathematics/4th/Commutative_algebra/
-      # - name: Compile - DS
-      #   uses: xu-cheng/latex-action@v2
-      #   with:
-      #     root_file: Dynamical_systems.tex
-      #     working_directory: Mathematics/4th/Dynamical_systems/
-      # - name: Compile - HA
-      #   uses: xu-cheng/latex-action@v2
-      #   with:
-      #     root_file: Harmonic_analysis.tex
-      #     working_directory: Mathematics/4th/Harmonic_analysis/
-      # - name: Compile - LM
-      #   uses: xu-cheng/latex-action@v2
-      #   with:
-      #     root_file: Linear_models.tex
-      #     working_directory: Mathematics/4th/Linear_models/
-      # - name: Compile - NC
-      #   uses: xu-cheng/latex-action@v2
-      #   with:
-      #     root_file: Numerical_calculus.tex
-      #     working_directory: Mathematics/4th/Numerical_calculus/
-      # - name: Compile - NIPDE
-      #   uses: xu-cheng/latex-action@v2
-      #   with:
-      #     root_file: Numerical_integration_of_partial_differential_equations.tex
-      #     working_directory: Mathematics/4th/Numerical_integration_of_partial_differential_equations/
-      # - name: Compile - PDE
-      #   uses: xu-cheng/latex-action@v2
-      #   with:
-      #     root_file: Partial_differential_equations.tex
-      #     working_directory: Mathematics/4th/Partial_differential_equations/
-      # - name: Compile - RFA
-      #   uses: xu-cheng/latex-action@v2
-      #   with:
-      #     root_file: Real_and_functional_analysis.tex
-      #     working_directory: Mathematics/4th/Real_and_functional_analysis/
-      # - name: Compile - ST
-      #   uses: xu-cheng/latex-action@v2
-      #   with:
-      #     root_file: Stochastic_processes.tex
-      #     working_directory: Mathematics/4th/Stochastic_processes/
-      # # MATHEMATICS 5
-      # - name: Compile - ADS
-      #   uses: xu-cheng/latex-action@v2
-      #   with:
-      #     root_file: Advanced_dynamical_systems.tex
-      #     working_directory: Mathematics/5th/Advanced_dynamical_systems/
-      # - name: Compile - AP
-      #   uses: xu-cheng/latex-action@v2
-      #   with:
-      #     root_file: Advanced_probability.tex
-      #     working_directory: Mathematics/5th/Advanced_probability/
-      # - name: Compile - ATFAPDE
-      #   uses: xu-cheng/latex-action@v2
-      #   with:
-      #     root_file: Advanced_topics_in_functional_analysis_and_PDEs.tex
-      #     working_directory: Mathematics/5th/Advanced_topics_in_functional_analysis_and_PDEs/
-      # - name: Compile - CO
-      #   uses: xu-cheng/latex-action@v2
-      #   with:
-      #     root_file: Continuous_optimization.tex
-      #     working_directory: Mathematics/5th/Continuous_optimization/
-      # # - name: Compile - IEPDE
-      # #   uses: xu-cheng/latex-action@v2
-      # #   with:
-      # #     root_file: Introduction_to_evolution_PDEs.tex
-      # #     working_directory: Mathematics/5th/Introduction_to_evolution_PDEs/
-      # - name: Compile - INEPDE
-      #   uses: xu-cheng/latex-action@v2
-      #   with:
-      #     root_file: Introduction_to_nonlinear_elliptic_PDEs.tex
-      #     working_directory: Mathematics/5th/Introduction_to_nonlinear_elliptic_PDEs/
-      # - name: Compile - MM
-      #   uses: xu-cheng/latex-action@v2
-      #   with:
-      #     root_file: Montecarlo_methods.tex
-      #     working_directory: Mathematics/5th/Montecarlo_methods/
-      # - name: Compile - MM
-      #   uses: xu-cheng/latex-action@v2
-      #   with:
-      #     root_file: Numerical_methods_for_PDEs.tex
-      #     working_directory: Mathematics/5th/Numerical_methods_for_PDEs/
-      # - name: Compile - SC
-      #   uses: xu-cheng/latex-action@v2
-      #   with:
-      #     root_file: Stochastic_calculus.tex
-      #     working_directory: Mathematics/5th/Stochastic_calculus/
-      # ##########
-      # ##########
-      # - name: Compile - main_math
-      #   uses: xu-cheng/latex-action@v2
-      #   with:
-      #     root_file: main_physics.tex
-      # # PHYSICS BASIC
-      # - name: Compile - EiM
-      #   uses: xu-cheng/latex-action@v2
-      #   with:
-      #     root_file: Electricity_and_magnetism.tex
-      #     working_directory: Physics/Basic/Electricity_and_magnetism/
-      # - name: Compile - MiR
-      #   uses: xu-cheng/latex-action@v2
-      #   with:
-      #     root_file: Mechanics_and_special_relativity.tex
-      #     working_directory: Physics/Basic/Mechanics_and_special_relativity/
-      # # PHYSICS 2
-      # - name: Compile - SMT
-      #   uses: xu-cheng/latex-action@v2
-      #   with:
-      #     root_file: Structure_of_matter_and_thermodynamics.tex
-      #     working_directory: Physics/Basic/Structure_of_matter_and_thermodynamics/
-      # # PHYSICS 3
-      # - name: Compile - QF
-      #   uses: xu-cheng/latex-action@v2
-      #   with:
-      #     root_file: Quantum_physics.tex
-      #     working_directory: Physics/Advanced/Quantum_physics/
-      # # PHYSICS 4
-      # - name: Compile - QF
-      #   uses: xu-cheng/latex-action@v2
-      #   with:
-      #     root_file: Fluid_mechanics.tex
-      #     working_directory: Physics/Advanced/Fluid_mechanics/
+      #     root_file: Introduction_to_evolution_PDEs.tex
+      #     working_directory: Mathematics/5th/Introduction_to_evolution_PDEs/
+      - name: Compile - INEPDE
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: Introduction_to_nonlinear_elliptic_PDEs.tex
+          working_directory: Mathematics/5th/Introduction_to_nonlinear_elliptic_PDEs/
+      - name: Compile - MM
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: Montecarlo_methods.tex
+          working_directory: Mathematics/5th/Montecarlo_methods/
+      - name: Compile - MM
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: Numerical_methods_for_PDEs.tex
+          working_directory: Mathematics/5th/Numerical_methods_for_PDEs/
+      - name: Compile - SC
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: Stochastic_calculus.tex
+          working_directory: Mathematics/5th/Stochastic_calculus/
+      - name: Compile - SCO
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: Stochastic_control.tex
+          working_directory: Mathematics/5th/Stochastic_control/
+      ##########
+      ##########
+      - name: Compile - main_math
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: main_physics.tex
+      # PHYSICS BASIC
+      - name: Compile - EiM
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: Electricity_and_magnetism.tex
+          working_directory: Physics/Basic/Electricity_and_magnetism/
+      - name: Compile - MiR
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: Mechanics_and_special_relativity.tex
+          working_directory: Physics/Basic/Mechanics_and_special_relativity/
+      # PHYSICS 2
+      - name: Compile - SMT
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: Structure_of_matter_and_thermodynamics.tex
+          working_directory: Physics/Basic/Structure_of_matter_and_thermodynamics/
+      # PHYSICS 3
+      - name: Compile - QF
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: Quantum_physics.tex
+          working_directory: Physics/Advanced/Quantum_physics/
+      # PHYSICS 4
+      - name: Compile - QF
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: Fluid_mechanics.tex
+          working_directory: Physics/Advanced/Fluid_mechanics/
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -347,52 +263,46 @@ jobs:
         with:
           release-url: ${{ steps.create_release.outputs.upload_url }}
           pattern: "**/*.pdf"
+          # files: |
+          #   main_math.pdf
+          #   Mathematics/1st/Fundamentals_of_mathematics/Fundamentals_of_mathematics.pdf
+          #   Mathematics/1st/Linear_algebra/Linear_algebra.pdf
+          #   Mathematics/1st/Real-valued_functions/Real-valued_functions.pdf
+          #   Mathematics/2nd/Algebraic_structures/Algebraic_structures.pdf
+          #   Mathematics/2nd/Discrete_mathematics/Discrete_mathematics.pdf
+          #   Mathematics/2nd/Functions_of_several_variables/Functions_of_several_variables.pdf
+          #   Mathematics/2nd/Linear_geometry/Linear_geometry.pdf
+          #   Mathematics/2nd/Mathematical_analysis/Mathematical_analysis.pdf
+          #   Mathematics/2nd/Numerical_methods/Numerical_methods.pdf
+          #   Mathematics/3rd/Complex_analysis/Complex_analysis.pdf
+          #   Mathematics/3rd/Differential_equations/Differential_equations.pdf
+          #   Mathematics/3rd/Differential_geometry/Differential_geometry.pdf
+          #   Mathematics/3rd/Galois_theory/Galois_theory.pdf
+          #   Mathematics/3rd/Probability/Probability.pdf
+          #   Mathematics/3rd/Statistics/Statistics.pdf
+          #   Mathematics/3rd/Topology/Topology.pdf
+          #   Mathematics/4th/Algebraic_topology/Algebraic_topology.pdf
+          #   Mathematics/4th/Arithmetic/Arithmetic.pdf
+          #   Mathematics/4th/Dynamical_systems/Dynamical_systems.pdf
+          #   Mathematics/4th/Harmonic_analysis/Harmonic_analysis.pdf
+          #   Mathematics/4th/Linear_models/Linear_models.pdf
+          #   Mathematics/4th/Numerical_calculus/Numerical_calculus.pdf
+          #   Mathematics/4th/Numerical_integration_of_partial_differential_equations/Numerical_integration_of_partial_differential_equations.pdf
+          #   Mathematics/4th/Partial_differential_equations/Partial_differential_equations.pdf
+          #   Mathematics/4th/Real_and_functional_analysis/Real_and_functional_analysis.pdf
+          #   Mathematics/4th/Stochastic_processes/Stochastic_processes.pdf
+          #   Mathematics/5th/Advanced_dynamical_systems/Advanced_dynamical_systems.pdf
+          #   Mathematics/5th/Advanced_probability/Advanced_probability.pdf
+          #   Mathematics/5th/Advanced_topics_in_functional_analysis_and_PDEs/Advanced_topics_in_functional_analysis_and_PDEs.pdf
+          #   Mathematics/5th/Continuous_optimization/Continuous_optimization.pdf
+          #   Mathematics/5th/Introduction_to_nonlinear_elliptic_PDEs/Introduction_to_nonlinear_elliptic_PDEs.pdf
+          #   Mathematics/5th/Montecarlo_methods/Montecarlo_methods.pdf
+          #   Mathematics/5th/Numerical_methods_for_PDEs/Numerical_methods_for_PDEs.pdf
+          #   Mathematics/5th/Stochastic_calculus/Stochastic_calculus.pdf
+          #   main_physics.pdf
+          #   Physics/Basic/Electricity_and_magnetism/Electricity_and_magnetism.pdf
+          #   Physics/Basic/Mechanics_and_special_relativity/Mechanics_and_special_relativity.pdf
+          #   Physics/Basic/Structure_of_matter_and_thermodynamics/Structure_of_matter_and_thermodynamics.pdf
+          #   Physics/Advanced/Quantum_physics/Quantum_physics.pdf
+          #   Physics/Advanced/Fluid_mechanics/Fluid_mechanics.pdf
           github-token: ${{ secrets.GITHUB_TOKEN }}
-
-      # - name: Upload asset to release
-      #   uses: csexton/release-asset-action@v2
-      #   with:
-      #     release-url: ${{ steps.create_release.outputs.upload_url }}
-      #     files: |
-      #       main_math.pdf
-      #       Mathematics/1st/Fundamentals_of_mathematics/Fundamentals_of_mathematics.pdf
-      #       Mathematics/1st/Linear_algebra/Linear_algebra.pdf
-      #       Mathematics/1st/Real-valued_functions/Real-valued_functions.pdf
-      #       Mathematics/2nd/Algebraic_structures/Algebraic_structures.pdf
-      #       Mathematics/2nd/Discrete_mathematics/Discrete_mathematics.pdf
-      #       Mathematics/2nd/Functions_of_several_variables/Functions_of_several_variables.pdf
-      #       Mathematics/2nd/Linear_geometry/Linear_geometry.pdf
-      #       Mathematics/2nd/Mathematical_analysis/Mathematical_analysis.pdf
-      #       Mathematics/2nd/Numerical_methods/Numerical_methods.pdf
-      #       Mathematics/3rd/Complex_analysis/Complex_analysis.pdf
-      #       Mathematics/3rd/Differential_equations/Differential_equations.pdf
-      #       Mathematics/3rd/Differential_geometry/Differential_geometry.pdf
-      #       Mathematics/3rd/Galois_theory/Galois_theory.pdf
-      #       Mathematics/3rd/Probability/Probability.pdf
-      #       Mathematics/3rd/Statistics/Statistics.pdf
-      #       Mathematics/3rd/Topology/Topology.pdf
-      #       Mathematics/4th/Algebraic_topology/Algebraic_topology.pdf
-      #       Mathematics/4th/Arithmetic/Arithmetic.pdf
-      #       Mathematics/4th/Dynamical_systems/Dynamical_systems.pdf
-      #       Mathematics/4th/Harmonic_analysis/Harmonic_analysis.pdf
-      #       Mathematics/4th/Linear_models/Linear_models.pdf
-      #       Mathematics/4th/Numerical_calculus/Numerical_calculus.pdf
-      #       Mathematics/4th/Numerical_integration_of_partial_differential_equations/Numerical_integration_of_partial_differential_equations.pdf
-      #       Mathematics/4th/Partial_differential_equations/Partial_differential_equations.pdf
-      #       Mathematics/4th/Real_and_functional_analysis/Real_and_functional_analysis.pdf
-      #       Mathematics/4th/Stochastic_processes/Stochastic_processes.pdf
-      #       Mathematics/5th/Advanced_dynamical_systems/Advanced_dynamical_systems.pdf
-      #       Mathematics/5th/Advanced_probability/Advanced_probability.pdf
-      #       Mathematics/5th/Advanced_topics_in_functional_analysis_and_PDEs/Advanced_topics_in_functional_analysis_and_PDEs.pdf
-      #       Mathematics/5th/Continuous_optimization/Continuous_optimization.pdf
-      #       Mathematics/5th/Introduction_to_nonlinear_elliptic_PDEs/Introduction_to_nonlinear_elliptic_PDEs.pdf
-      #       Mathematics/5th/Montecarlo_methods/Montecarlo_methods.pdf
-      #       Mathematics/5th/Numerical_methods_for_PDEs/Numerical_methods_for_PDEs.pdf
-      #       Mathematics/5th/Stochastic_calculus/Stochastic_calculus.pdf
-      #       main_physics.pdf
-      #       Physics/Basic/Electricity_and_magnetism/Electricity_and_magnetism.pdf
-      #       Physics/Basic/Mechanics_and_special_relativity/Mechanics_and_special_relativity.pdf
-      #       Physics/Basic/Structure_of_matter_and_thermodynamics/Structure_of_matter_and_thermodynamics.pdf
-      #       Physics/Advanced/Quantum_physics/Quantum_physics.pdf
-      #       Physics/Advanced/Fluid_mechanics/Fluid_mechanics.pdf
-      #     github-token: ${{ secrets.GITHUB_TOKEN }}
