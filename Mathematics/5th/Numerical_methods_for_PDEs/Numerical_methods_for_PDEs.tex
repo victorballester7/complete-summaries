@@ -233,5 +233,37 @@
     $$
   \end{theorem}
   \subsection{Spectral methods}
+  \begin{definition}\label{NMPDE:spectral_method}
+    The idea of \emph{spectral methods} is to approximate the solution $u$ of a boundary value problem by an expression in terms of the so-called \emph{trial functions}:
+    $$
+      u(x)\approx \sum_{i=1}^N \tilde{u}_i\phi_i(x)
+    $$
+    We will impose the following requirements on the trial functions:
+    \begin{enumerate}
+      \item The approximation should converge rapidly as $N\to\infty$.
+      \item The computation of the coefficients $\tilde{u}_i$ and the reconstruction of $u$ should be efficient.
+      \item Given the coefficients of some function $u$, it should be easy to determine the coefficients of the derivative of $u$.
+    \end{enumerate}
+  \end{definition}
+  \begin{remark}
+    When using spectral methods, it is generally assumed that the solution of the problem of interest is very smooth, and thus, the trial functions are \emph{globally smooth}, i.e.\ algebraic or trigonometric polynomials.
+  \end{remark}
+  \begin{definition}
+    The choice of the test functions distinguishes between three types of spectral methods:
+    \begin{enumerate}
+      \item \emph{Galerkin methods}: the test functions are the same as the trial functions. These test functions usually satisfy some or all the boundary conditions. The PDE is enforced by requiring that the residual is orthogonal to the test functions.
+      \item \emph{Collocation methods}: the test functions are Dirac delta distributions centered at the so-called \emph{collocation points}. This approach requires the PDE to be satisfied exactly at the collocation points. A supplementary set of equations may be imposed to satisfy the boundary conditions.
+      \item \emph{$\tau$ methods}: these are similar to the Galerkin methods in the way the PDE is enforced, but the test functions don't need to satisfy the boundary conditions.
+    \end{enumerate}
+  \end{definition}
+  \begin{remark}
+    From what follows, we will focus collocation methods.
+  \end{remark}
+  \subsubsection{Periodic problem}
+  When considering a problem with periodic boundary conditions, we can use trigonometric polynomials as trial functions and Fourier analysis
+  \begin{remark}
+    It can be seen that the Fourier basis functions $\{ \exp{\ii k x}:k\in\ZZ\}$ and it's coefficients satisfy the requirements of \mcref{NMPDE:spectral_method}, using the FFT for the computation of the coefficients.
+  \end{remark}
+
 \end{multicols}
 \end{document}
