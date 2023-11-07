@@ -287,7 +287,7 @@
   \begin{proof}
     Note that ${f_{\alpha,\varepsilon}}'>0\iff \varepsilon<\frac{1}{2\pi}$. Thus, $f_{\alpha,\varepsilon}$ is strictly increasing, and therefore it is a homeomorphism.
   \end{proof}
-  \subsubsection{Rotation number}
+  \subsubsection{Rotation number}\label{ADS:rotation_number_section}
   \begin{remark}
     Recall that $f=\id+\varphi$ with $\varphi$ 1-periodic. And thus:
     $$
@@ -318,11 +318,11 @@
     Let $(u_n)\in\RR$ be a subadditive sequence. Then, $\displaystyle\lim_{n\to\infty}\frac{u_n}{n}$ exists and it is equal to $\inf_{n\in\NN}\frac{u_n}{n}$. Analogously, if $(u_n)$ is superadditive, then $\displaystyle\lim_{n\to\infty}\frac{u_n}{n}$ exists and it is equal to $\sup_{n\in\NN}\frac{u_n}{n}$.
   \end{lemma}
   \begin{proof}
-    Assume $(u_n)$ is positive and subadditive and fix $p\in\NN$. Let $n\geq p$ be such that $n=kp+r$ with $r<p$. Then:
+    Assume $(u_n)$ is positive and subadditive and fix $p\in\NN$. Let $n\geq p$ be such that $n=k_np+r_n$ with $r<p$. Then:
     $$
-      \frac{u_n}{n}\leq \frac{u_{kp}+u_r}{kp+r}\leq \frac{u_{kp}}{kp}+\frac{u_r}{n}\leq \frac{u_p}{p}+\frac{u_r}{n}
+      \frac{u_n}{n}\leq \frac{u_{k_np}+u_{r_n}}{n}\leq \frac{k_nu_p}{n}+\frac{u_{r_n}}{n}=\frac{u_p}{p+\frac{r_n}{k_n}}+\frac{u_{r_n}}{n}
     $$
-    where in the first and third inequality we used that $(u_n)$ is subadditive. Now to show that the limit exists and that the value is the one of above, take first $\limsup$ in $n$ and then $\inf$ in $p$:
+    where in the first and second inequalities we used that $(u_n)$ is subadditive. Now to show that the limit exists and that the value is the one of above, take first $\limsup$ in $n$ and then $\inf$ in $p$:
     $$
       \limsup_{n\to\infty}\frac{u_n}{n}\leq \inf_{p\in\NN}\frac{u_p}{p}\leq \liminf_{p\to\infty}\frac{u_p}{p}
     $$
@@ -337,5 +337,98 @@
     $$
     So we have the result, and in fact the convergence is uniform by domination.
   \end{proof}
+  \begin{proposition}
+    The following properties are satisfied:
+    \begin{enumerate}
+      \item $\rho(R_\alpha)=\alpha$ $\forall\alpha\in\RR$.
+      \item $\rho(f^n)=n\rho(f)$ $\forall f\in D^0(\TT^1)$, $n\in\NN$.
+      \item $f\leq g\implies \rho(f)\leq \rho(g)$ $\forall f,g\in D^0(\TT^1)$.
+      \item $\rho(f+k)=:\rho(R_k\circ f)=\rho(f) + k$ $\forall f\in D^0(\TT^1)$, $k\in\ZZ$.
+    \end{enumerate}
+  \end{proposition}
+  \begin{definition}
+    Let $F\in \Homeo(\TT^1)$ with lift $f$. We define the \emph{rotation number} of $F$ as $\rho(F):=[\rho(f)]\in \TT^1$.
+  \end{definition}
+  \begin{definition}
+    Let $F,G\in\Homeo(\TT^1)$. We say that $G$ is \emph{semi-conjugate} to $F$ if there exists a continuous surjective map $H:\TT^1\to \TT^1$ such that $H\circ F=G\circ H$. We say that $G$ is \emph{conjugate} to $F$ if $H$ is a homeomorphism.
+  \end{definition}
+  \begin{lemma}
+    Let $F,G\in\Homeo(\TT^1)$ be such that $G$ is semi-conjugate to $F$. Then, if $G$ has a periodic point, then $F$ has a periodic point.
+  \end{lemma}
+  \begin{theorem}
+    Let $F,G\in\Homeo(\TT^1)$ be conjugate by $H\in \Homeo(\TT^1)$. Then, $\rho(F)=\rho(G)$.
+  \end{theorem}
+  \begin{proof}
+    Let $h$ and $f$ be lifts of $H$ and $F$ respectively. Then, an easy check shows that $g:=h\circ f\circ h^{-1}$ is a lift of $G$. It suffices to prove that $\rho(g)=\rho(f)$. Note that, by induction we have $h\circ f^n=g^n\circ h$ for all $n\in\NN$. Now write $h=\id + \varphi$ with $\varphi\in \mathcal{C}(\TT^1)$. Then:
+    \begin{equation*}
+      \frac{f^n(x)-x+\varphi(f^n(x))}{n}= \frac{g^n(h(x))-h(x)}{n}+\frac{h(x)-x}{n}
+    \end{equation*}
+    Taking limits, we have that $\rho(f)=\rho(g)$, as $\varphi$ is bounded.
+  \end{proof}
+  \subsubsection{Rotation number and invariant measure}
+  \begin{definition}
+    We say that $\mu:\mathcal{C}(\TT^1)\to\RR$ is a \emph{measure on $\mathcal{C}(\TT^1)$} if:
+    \begin{enumerate}
+      \item $\mu$ is linear.
+      \item $\mu$ is continuous.
+      \item $\mu(\varphi)\geq 0$, whenever $\varphi\geq 0$.
+    \end{enumerate}
+    We say that $\mu$ is a \emph{probability measure} if $\mu(1)=1$. We denote by $\mathcal{M}(\TT^1)$ the set of all probability measures on $\mathcal{C}(\TT^1)$.
+  \end{definition}
+  \begin{remark}
+    Usually we will denote $\mu(\varphi)$ by $\int_{\TT^1}\varphi\dd{\mu}$ or $\int_{\TT^1}\varphi(x)\dd{\mu(x)}$.
+  \end{remark}
+  \begin{remark}
+    Note that we then have $\mu(\varphi)>0$ whenever $\varphi>0$, because $\varphi$ attains its minimum at some point $x_0$ (by the compactness of $\TT^1$). Similarly, $\mu(\varphi)\leq 0$ whenever $\varphi\leq 0$, and $\mu(\varphi)<0$ whenever $\varphi<0$.
+  \end{remark}
+  \begin{remark}
+    Examples of such measures are the Dirac measures
+    $$\delta_x(\varphi)=\varphi(x)\qquad x\in \TT^1$$
+    or the Lebesgue measure:
+    $$\text{Leb}(\varphi):=\int_{0}^1\varphi(x)\dd{x}$$
+  \end{remark}
+  \begin{definition}
+    Let $F\in \Homeo(\TT^1)$ and $\mu\in \mathcal{M}(\TT^1)$. We define the \emph{pushforward measure} as $F_*\mu(\varphi):=\mu(\varphi\circ F)$.
+  \end{definition}
+  \begin{definition}
+    We say that a measure $\mu\in\mathcal{M}(\TT^1)$ is \emph{invariant} by $F\in\Homeo(\TT^1)$ (or \emph{$F$-invariant}) if $F_*\mu=\mu$. We will denote by $\mathcal{M}_F(\TT^1)$ the set of $F$-invariant probability measures.
+  \end{definition}
+  \begin{proposition}
+    Let $F\in \Homeo(\TT^1)$, $x\in\TT^1$ and $n\in\NN$.
+    \begin{itemize}
+      \item Note that $\text{Leb}$ is invariant under $R_\alpha$ $\forall \alpha\in\RR$.
+      \item $\delta_x$ is $F$-invariant $\iff F(x)=x$
+      \item $\displaystyle\frac{\delta_x+\cdots+\delta_{F^{n-1}(x)}}{n}$ is $F$-invariant $\iff F^n(x)=x$
+    \end{itemize}
+  \end{proposition}
+  \begin{theorem}
+    Let $F\in\Homeo(\TT^1)$. Then, $\mathcal{M}_F(\TT^1)\ne\varnothing$.
+  \end{theorem}
+  \begin{proposition}
+    Let $F\in\Homeo(\TT^1)$ and $f=\id+\varphi$ be a lift of $F$, with $\varphi\in\mathcal{C}(\TT^1)$. Then, $\forall\mu\in\mathcal{M}_F(\TT^1)$, $\rho(f)=\mu(\varphi)$. Moreover:
+    \begin{enumerate}
+      \item $\norm{f^n-\id -n\rho(f)}_{\mathcal{C}(\TT^1)}<1$
+      \item $\forall n\in\NN$, $\exists x_n\in\RR$ such that $f^n(x_n)-x_n=n\rho(f)$.
+    \end{enumerate}
+  \end{proposition}
+  \begin{proof}
+    Let $\psi_n:= f^n-\id -n\mu(\varphi)$. We have that:
+    \begin{multline*}
+      \mu(\psi_n)=\sum_{i=0}^{n-1}\mu(\varphi\circ f^i)-n\varphi(n)=\sum_{i=0}^{n-1}\mu(\varphi\circ F^i)-n\varphi(n)=0
+    \end{multline*}
+    where we have used the first remark in the previous section. Now we must have that $\psi_n$ change their sign in $[0,1]$ because otherwise that would contradict $\mu(\psi_n)=0$. So $\exists x_n\in[0,1]$ such that $\psi_n(x_n)=0$. So:
+    $$
+      f^n(x_n)-x_n=n\mu(\varphi)
+    $$
+    Dividing by $n$ and taking limits, we have that $\rho(f)=\mu(\varphi)$. This also shows the second point. To prove the first one, note that $\min\psi_n\leq 0$ and so by \mcref{ADS:lema1} we have $\max\psi_n <1$. Moreover, $\min\psi_n =-\max(-\psi_n) >-1$ (using the same argument as before) and so $\norm{\psi_n}_{\mathcal{C}(\TT^1)}<1$.
+  \end{proof}
+  \begin{proposition}
+    Let $f\in D^0(\TT^1)$, $p\in\ZZ$ and $q\in\NN$. Then:
+    \begin{align*}
+      \rho(f)=\frac{p}{q} & \iff \exists x\in\RR\text{ such that }f^q(x)=x+p \\
+      \rho(f)>\frac{p}{q} & \iff \forall x\in\RR\text{ we have }f^q(x)>x+p   \\
+      \rho(f)<\frac{p}{q} & \iff \forall x\in\RR\text{ we have }f^q(x)<x+p
+    \end{align*}
+  \end{proposition}
 \end{multicols}
 \end{document}
