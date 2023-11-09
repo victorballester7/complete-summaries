@@ -311,9 +311,9 @@
       \vf{X}_{t+h} & =\vf{X}_t+\int_t^{t+h}\vf{b}(\vf{X}_s)\dd{s}+\int_t^{t+h}\vf{\sigma}(\vf{X}_s)\dd{\vf{B}_s} \\
                    & \approx \vf{X}_t+h\vf{b}(\vf{X}_t)+\vf{\sigma}(\vf{X}_t)(\vf{B}_{t+h}-\vf{B}_t)
     \end{align*}
-    More generally, if we want to obtain the solution at $(t_1,\dots,t_n)$, we can use the following algorithm. Set $\vf{\tilde{X}}_0:=\vf{x}_0$ and for all $0\leq i\leq m-1$, set:
+    More generally, if we want to obtain the solution at $(t_1,\dots,t_n)$, we can use the following algorithm. Set $\vf{\tilde{X}}^m_0:=\vf{x}_0$ and for all $0\leq i\leq m-1$, set:
     $$
-      \vf{\tilde{X}}_{t_{i+1}}=\vf{\tilde{X}}_{t_i}+(t_{i+1}-t_i)\vf{b}(\vf{\tilde{X}}_{t_i})+\vf{\sigma}(\vf{\tilde{X}}_{t_i})(\vf{B}_{t_{i+1}}-\vf{B}_{t_i})
+      \vf{\tilde{X}}^m_{t_{i+1}}=\vf{\tilde{X}}^m_{t_i}+(t_{i+1}-t_i)\vf{b}(\vf{\tilde{X}}^m_{t_i})+\vf{\sigma}(\vf{\tilde{X}}^m_{t_i})(\vf{B}_{t_{i+1}}-\vf{B}_{t_i})
     $$
   \end{definition}
   \begin{remark}
@@ -330,21 +330,21 @@
     where $\phi_s:=\max\{ t_i: t_i< s\}$.
   \end{definition}
   \begin{lemma}
-    Let $X$ be the solution to \mcref{MM:SDE} with $d=1$ and $\tilde{X}$ be the solution to the Euler scheme. Then, for $p\geq 1$:
+    Let $X$ be the solution to \mcref{MM:SDE} with $d=1$ and $\tilde{X}^m$ be the solution to the Euler scheme. Then, for $p\geq 1$:
     $$
-      \sup_{n\in\NN}\Exp\left( \sup_{0\leq t\leq T}\abs{\tilde{X}_t}^p\right)<\infty
+      \sup_{n\in\NN}\Exp\left( \sup_{0\leq t\leq T}\abs{\tilde{X}^m_t}^p\right)<\infty
     $$
   \end{lemma}
   \begin{lemma}
-    Let $X$ be the solution to \mcref{MM:SDE} with $d=1$ and $\tilde{X}$ be the solution to the Euler scheme. Then, for $p\geq 1$:
+    Let $X$ be the solution to \mcref{MM:SDE} with $d=1$ and $\tilde{X}^m$ be the solution to the Euler scheme. Then, for $p\geq 1$:
     $$
-      \max_{i=0,\ldots,m-1}{\Exp\left(\sup_{t_i\leq t\leq t_{i+1}}\abs{X_t-\tilde{X}_{\phi_t}}^p\right)}^\frac{1}{p}\leq \frac{C}{\sqrt{m}}
+      \max_{i=0,\ldots,m-1}{\Exp\left(\sup_{t_i\leq t\leq t_{i+1}}\abs{X_t-\tilde{X}^m_{\phi_t}}^p\right)}^\frac{1}{p}\leq \frac{C}{\sqrt{m}}
     $$
   \end{lemma}
   \begin{theorem}[Strong error of the Euler scheme]
-    Let $X$ be the solution to \mcref{MM:SDE} with $d=1$ and $\tilde{X}$ be the solution to the Euler scheme. Then, for $p\geq 1$:
+    Let $X$ be the solution to \mcref{MM:SDE} with $d=1$ and $\tilde{X}^m$ be the solution to the Euler scheme. Then, for $p\geq 1$:
     $$
-      {\Exp\left(\sup_{0\leq t\leq T}\abs{X_t-\tilde{X}_t}^p\right)}^{1/p}\leq \frac{C}{\sqrt{m}}
+      {\Exp\left(\sup_{0\leq t\leq T}\abs{X_t-\tilde{X}^m_t}^p\right)}^{1/p}\leq \frac{C}{\sqrt{m}}
     $$
   \end{theorem}
   \begin{theorem}[Weak error of the Euler scheme]
@@ -358,33 +358,75 @@
     \end{itemize}
     Then:
     $$
-      \abs{\Exp(g(\tilde{X}_T))- \Exp(g(X_T))}\leq \frac{C}{m}
+      \abs{\Exp(g(\tilde{X}^m_T))- \Exp(g(X_T))}\leq \frac{C}{m}
     $$
     where $T$ is the final time of the simulation.
   \end{theorem}
   \begin{remark}
     We can write the error taking in the Montecarlo estimation using the Euler scheme as:
     \begin{multline*}
-      \frac{1}{n}\sum_{i=1}^n g(\tilde{X}_T^{(i)})-\Exp(g(X_T))=\\=\frac{1}{n}\sum_{i=1}^n g(\tilde{X}_T^{(i)})-\Exp(g(\tilde{X}_T))+\Exp(g(\tilde{X}_T))-\Exp(g(X_T))
+      \frac{1}{n}\sum_{i=1}^n g(\tilde{X}^{m,(i)}_T)-\Exp(g(X_T))=\\=\frac{1}{n}\sum_{i=1}^n g(\tilde{X}^{m,(i)}_T)-\Exp(g(\tilde{X}^m_T))+\Exp(g(\tilde{X}^m_T))-\Exp(g(X_T))
     \end{multline*}
-    where $\tilde{X}_T^{(i)}$ are \iid copies of $\tilde{X}_T$. This error consists in two terms:
+    where $\tilde{X}^{m,(i)}_T$ are \iid copies of $\tilde{X}^m_T$. This error consists in two terms:
     \begin{itemize}
-      \item The statistical error: $$\frac{1}{n}\sum_{i=1}^n g(\tilde{X}_T^{(i)})-\Exp(g(\tilde{X}_T))\sim \frac{1}{\sqrt{n}}$$
-      \item The discretization error:$$\Exp(g(\tilde{X}_T))-\Exp(g(X_T))\sim \frac{1}{m}$$
+      \item The statistical error: $$\frac{1}{n}\sum_{i=1}^n g(\tilde{X}^{m,(i)}_T)-\Exp(g(\tilde{X}^m_T))\sim \frac{1}{\sqrt{n}}$$
+      \item The discretization error:$$\Exp(g(\tilde{X}^m_T))-\Exp(g(X_T))\sim \frac{1}{m}$$
     \end{itemize}
     This suggests choosing $m\sim \sqrt{n}$. However, confidence intervals are of little interest in this setting as the amplitude of the bias is similar to the length of the confidence interval. Thus, we have no control on the error a posteriori. We conclude that it is best to be in between the setting $\sqrt{n}\ll m$ to have meaningful confidence intervals and $\sqrt{n}\sim m$ for efficiency, say $n^{\frac{1}{2}+\delta}\sim m$ for $\delta>0$ small.
   \end{remark}
   \begin{corollary}[Romberg Extrapolation]
     The \emph{Romberg Extrapolation} consists in the following result:
     $$
-      \Exp\left(2g(\tilde{X}_T)-g(\tilde{X}_T)\right)-\Exp(g(X_T))= \frac{C}{m^2}+\o{\frac{1}{m^2}}
+      \Exp\left(2g(\tilde{X}^m_T)-g(\tilde{X}^m_T)\right)-\Exp(g(X_T))= \frac{C}{m^2}+\o{\frac{1}{m^2}}
     $$
     This suggests using the estimator for $\Exp(g(X_T))$:
     $$
-      \frac{1}{n}\sum_{i=1}^n\left(2 g(\tilde{X}_T^{(i)})-g(\tilde{X}_T^{(i)})\right)
+      \frac{1}{n}\sum_{i=1}^n\left(2 g(\tilde{X}^{m,(i)}_T)-g(\tilde{X}^{m,(i)}_T)\right)
     $$
-    where $\tilde{X}_T^{(i)}$ are \iid copies of $\tilde{X}_T$.
+    where $\tilde{X}^{m,(i)}_T$ are \iid copies of $\tilde{X}^m_T$.
   \end{corollary}
   \subsection{Brownian bridge approach}
+  \subsubsection{Brownian bridge}
+  \begin{proposition}
+    Let $X_t=x+\mu t+\sigma B_t$ with $\mu\in \RR$, $\sigma\ne 0$ and ${(B_t)}_{t\geq 0}$ be a Brownian motion. Then, given $(X_u,X_v)=(y,z)$, the process ${(X_t)}_{u\leq t\leq v}$ is a continuous Gaussian process, independent of ${(X_t)}_{t\leq u}$ and ${(X_t)}_{t\geq v}$, such that for all $u\leq t\leq s \leq v$:
+    \begin{align*}
+      \Exp(X_t\mid X_u=y, X_v=z)     & =y+\frac{t-u}{v-u}(z-y)         \\
+      \cov(X_t,X_s\mid X_u=y, X_v=z) & =\frac{(t-u)(v-s)}{v-u}\sigma^2
+    \end{align*}
+  \end{proposition}
+  \begin{corollary}
+    Let $X_t=x+\mu t+\sigma B_t$ with $\mu\in \RR$, $\sigma\ne 0$ and ${(B_t)}_{t\geq 0}$ be a Brownian motion. Then, the distribution of the process ${(X_t)}_{u\leq t\leq v}$ given ${(X_t)}_{t\leq u}$ and ${(X_t)}_{t\geq v}$ is the same as the distribution of
+    $$
+      {(y+\sigma B_{t-u})}_{u\leq t\leq v}\quad\text{given } B_{v-u}=\frac{z-y}{\sigma}
+    $$
+  \end{corollary}
+  \subsubsection{Exit times}
+  In this section we are interested in approximate the quantity:
+  $$
+    \Exp\left(\indi{\tau>T}g(X_T) \right)
+  $$
+  where $\tau:=\inf\{ t\geq 0 : X_t\notin D\}$ and $D\subset \RR^d$ is an open connected set.
+  \begin{remark}
+    Due to \mcref{SC:feynman_kac}, we have that $\Exp\left(\indi{\tau>T}g(X_T) \right)$ is precisely the solution to the PDE:
+    $$
+      \begin{cases}
+        \partial_t u+\vf{b}\cdot \grad u+\frac{1}{2}\trace(\vf{\sigma}\transpose{\vf{\sigma}}\laplacian u)=0 & \text{ in} [0,T)\times D \\
+        u(T,\cdot)=g                                                                                         & \text{ in}x\in D
+      \end{cases}
+    $$
+  \end{remark}
+  \begin{proposition}
+    Assume that:
+    \begin{itemize}
+      \item $\vf{b},\vf\sigma\in\mathcal{C}^3$ with bounded derivatives and $\vf\sigma$ uniformly elliptic.
+      \item $D$ is a half-space or $\Fr{D}$ is bounded of class $\mathcal{C}^3$.
+      \item $g$ is measurable with polynomial growth and vanishes at a neighbourhood of $\Fr{D}$.
+    \end{itemize}
+    Then:
+    $$
+      \Exp\left(\indi{\tau>T}g(X_T) \right)-\Exp(\indi{\tilde\tau^m>T} g(\tilde{X}^m_T))=\O{\frac{1}{\sqrt{m}}}
+    $$
+    where $\tilde\tau^m:=\min\{ t_i: \tilde{X}^m_{t_i}\notin D\}$ and $\tilde{X}^m$ is the Euler scheme.
+  \end{proposition}
 \end{multicols}
 \end{document}
