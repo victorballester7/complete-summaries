@@ -182,7 +182,7 @@
       \grad(u^+)\almoste{=}\begin{cases}
         \grad u & \text{if }u>0     \\
         0       & \text{if }u\leq 0
-      \end{cases}\quad
+      \end{cases}\;\;
       \grad(u^-)\almoste{=}\begin{cases}
         -\grad u & \text{if }u<0     \\
         0        & \text{if }u\geq 0
@@ -256,6 +256,10 @@
     $$
       \norm{u}_{\mathcal{C}^{2,\alpha}(\overline{\Omega})}\leq C\left(\norm{f}_{\mathcal{C}^{0,\alpha}(\overline{\Omega})}+\norm{u}_{\mathcal{C}^{1,\alpha}(\overline{\Omega})}\right)
     $$
+    Moreover we have:
+    $$
+      \norm{u}_{\mathcal{C}^{2,\alpha}(\overline{\Omega})}\leq \tilde{C}\left(\norm{f}_{\mathcal{C}^{0,\alpha}(\overline{\Omega})}+\norm{u}_{\mathcal{C}^{0}(\overline{\Omega})}\right)
+    $$
   \end{theorem}
   \begin{corollary}
     Let $\Omega\subset \RR^d$ be open and bounded with $\Fr{\Omega}\in\mathcal{C}^{k+2,\alpha}$ for some $0<\alpha<1$ and $k\geq 0$. In the elliptic operator $L$ assume that $a_{ij},b_j,c\in\mathcal{C}^{k,\alpha}(\overline{\Omega})$. Then, $\exists c>0$ such that if $u\in\mathcal{C}^{k+2}(\Omega)\cap \mathcal{C}^k(\overline{\Omega})$ solves $Lu=f$, with $f\in\mathcal{C}^{k,\alpha}(\overline{\Omega})$, then $u\in \mathcal{C}^{k+2,\alpha}(\overline{\Omega})$ and:
@@ -308,6 +312,34 @@
       \end{cases}
     $$
     with $f,a_{ij},b_j,c\in\mathcal{C}^{0,\alpha}( \overline{\Omega})$ and $h\in\mathcal{C}^{0,\alpha}(\partial\Omega)$. Then, there exists a solution to this problem in $\mathcal{C}^{2,\alpha}(\overline{\Omega})$.
+  \end{theorem}
+  \subsection{Existence theorems for nonlinear elliptic PDEs by fixed point methods}
+  In this section we will mostly consider almost linear elliptic PDEs of the form:
+  \begin{equation}\label{INLEPDE:AlmostLinear}
+    \begin{cases}
+      Lu=f(x,u) \\
+      u|_{\partial\Omega}=0
+    \end{cases}
+  \end{equation}
+  with $L$ either $-\sum_{i,j=1}^d\partial_i(a_{ij}\partial_j)+\sum_{j=1}^db_j\partial_j$ or $-\sum_{i,j=1}^d a_{ij} \partial_{ij}^2+\sum_{j=1}^db_j\partial_j$, and $f:\Omega\times \RR\to \RR$.
+  \subsubsection{Method of subsoltions and supersolutions}
+  \begin{theorem}
+    Suppose that an operator $L$ is uniformly elliptic on an open bounded set $\Omega\subset\RR^d$ with $\Fr{\Omega}\in \mathcal{C}^2$, with $c=0$ and either in divergence form (with $a_{ij}\in\mathcal{C}^1$) or non-divergence form (with $a_{ij},b_j\in\mathcal{C}^{0,\alpha}$). Suppose that $f\in\mathcal{C}^1(\overline{\Omega}\times \RR)$ and assume that the problem of \mcref{INLEPDE:AlmostLinear} has a bounded subsolution $\underline{u}$ and a bounded supersolution $\overline{u}$ such that $\underline{u}\leq \overline{u}$. Then, there exists a solution $u$ to \mcref{INLEPDE:AlmostLinear} such that $\underline{u}\leq u\leq \overline{u}$, which is in $H_0^1(\Omega)\cap H_0^2(\Omega)$ if $L$ is in divergence form and in $\mathcal{C}^{2,\alpha}(\overline{\Omega})$ if $L$ is in non-divergence form.
+  \end{theorem}
+  \subsubsection{Topological fixed point theorems}
+  \begin{theorem}[Brower fixed point]
+    Let $C\subset \RR^n$ be a closed convex bounded set and $f:C\to C$ be a continuous function. Then, $f$ has at least a fixed point.
+  \end{theorem}
+  \begin{theorem}[Schauder fixed point]
+    Let $C$ be a convex set in a Banach space $(E,\norm{\cdot})$ and $f:C\to C$ be a continuous function. Assume one of the following two assumptions:
+    \begin{itemize}
+      \item $C$ is compact for $\norm{\cdot}$.
+      \item $C$ is closed and bounded and $f$ is compact.
+    \end{itemize}
+    Then, $f$ has at least a fixed point.
+  \end{theorem}
+  \begin{theorem}[Schaefer fixed point]
+    Let $(E, \norm{\cdot})$ be Banach and $f:E\to E$ be a continuous and compact. Suppose that $\exists M>0$ such that $\forall (\lambda,u)\in [0,1]\times E$ with $u=\lambda f(u)$ we have $\norm{u}<M$. Then, $f$ has at least a fixed point, that lies in $\overline{B(0,M)}$.
   \end{theorem}
 \end{multicols}
 \end{document}
