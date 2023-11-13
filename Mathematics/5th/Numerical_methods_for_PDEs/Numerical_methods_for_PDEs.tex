@@ -289,20 +289,30 @@
   \end{remark}
   \subsubsection{Non-periodic problems}
   \begin{remark}
-    Recall that using trigonometric polynomials as trial functions for problems with non-periodic boundary conditions can lead to the Gibbs phenomenon. To prevent that from happening, we will usually use algebraic polynomials as trial functions. But in that case, we need to choose the collocation points carefully, to prevent the so-called \emph{Runge phenomenon} (see \mcref{NM:fig_runge}).
+    Recall that using trigonometric polynomials as trial functions for problems with non-periodic boundary conditions can lead to the Gibbs phenomenon. To prevent that from happening, we will use algebraic polynomials as trial functions. But in that case, we need to choose the collocation points carefully, to prevent the so-called Runge phenomenon (see \mcref{NM:fig_runge}).
 
-    In this section we will only consider one case of polynomial trial functions, the so-called \emph{Chebyshev polynomials} (see \mcref{NM:chebyshev_poly}).
+    In this section we will only consider one case of polynomial trial functions, the so-called Chebyshev polynomials (see \mcref{NM:chebyshev_poly}).
   \end{remark}
   \begin{definition}
-    Given a real-valued function $u$ defined in $[-1,1]$ and $N\in\NN$, we define the \emph{interpolant} of $u$ choosing set of orthogonal polynomials $\{ p_k\}_{k\in\NN\cup\{0\}}$ with weight function $\omega(x)$ as:
+    Given a real-valued function $u$ defined in $[-1,1]$ and $N\in\NN$, we define the \emph{interpolant} of $u$ with orthogonal polynomials $\{p_k\}_{k\in\NN\cup\{0\}}$ and weight function $\omega(x)$ as:
     $$
       I_Nu(x)=\sum_{k=0}^N \tilde{u}_k p_k(x)
     $$
-    where $\tilde{u}_k=\frac{1}{\gamma_k}\sum_{j=0}^N u(x_j)p_k(x_j)\omega_j$, $\gamma_k=\sum_{j=0}^N p_k(x_j)^2\omega_j$, $x_j$ are the chosen nodes and $\omega_j$ are the weights corresponding to the Gau\ss-Lobatto formula:
+    where $\displaystyle \tilde{u}_k=\frac{1}{\gamma_k}\sum_{j=0}^N u(x_j)p_k(x_j)\omega_j$, $\displaystyle\gamma_k=\sum_{j=0}^N p_k(x_j)^2\omega_j$, $x_j$ are the chosen nodes and $\omega_j$ are the weights corresponding to the Gau\ss-Lobatto formula:
     $$
-      \sum_{j=0}^N\abs{x_j}^2 \omega_j=
+      \sum_{j=0}^N{x_j}^k\omega_j=\int_{-1}^1{x}^k\omega(x)\dd{x}
     $$
   \end{definition}
+  \begin{remark}
+    Recall that from Gau\ss\ quadrature, we have
+    $$
+      \sum_{j=0}^N u(x_j) v(x_j) \omega_j = \int_{-1}^1 u(x) v(x) \omega(x) \dd{x}
+    $$
+    for all $uv\in \mathcal{P}_{2N-1}$ (space of polynomials of degree less than $2N-1$).
+  \end{remark}
+  \begin{remark}
+    Recall that the Chebyshev polynomials are those defined by being the family of orthogonal polynomials with respect to the weight function $\omega(x)=\frac{1}{\sqrt{1-x^2}}$ in $[-1,1]$.
+  \end{remark}
   \begin{lemma}
     Chebyshev polynomials satisfy the following properties:
     \begin{enumerate}
@@ -311,5 +321,21 @@
       \item $2T_k(x)=\frac{1}{k+1}{(T_{k+1})}'(x)-\frac{1}{k-1}{(T_{k-1})}'(x)$ $\forall k\in\NN$, and ${(T_0)}'(x)=0$ and ${(T_1)}'(x)=1$.
     \end{enumerate}
   \end{lemma}
+  \begin{proposition}
+    For Chebyshev polynomials, we have $\omega_j=\frac{\pi}{N\bar{c_j}}$ with $\bar{c_j}=2-\indi{0<j<N}$ and $x_j=\cos{\frac{j\pi}{N}}$. Moreover, the Chebyshev transform is given by:
+    $$
+      \tilde{u}_k=\frac{2}{\pi\bar{c_k}}\sum_{j=0}^N \frac{u(x_j)}{\bar{c_j}}\cos{\frac{jk\pi}{N}}
+    $$
+  \end{proposition}
+  \begin{remark}
+    From this last expression, we can see that the Chebyshev transform is equivalent to the discrete cosine transform (DCT), and so it can be computed efficiently using the FFT.
+  \end{remark}
+  \begin{remark}
+    To differentiate a function $u=\sum_{k\in\NN}\widehat{u}_kT_k$ using the Chebyshev transform, we first compute the Chebyshev transform of $u$, then we differentiate the coefficients using the formula
+    $$
+      c_k\widehat{u'}_k=\widehat{u'}_{k+1}+2(k+1) \widehat{u}_{k+1}
+    $$
+    in a backward sweep (since $\widehat{u'}_k=0$ for $k\geq N$) and finally we compute the inverse Chebyshev transform of the result.
+  \end{remark}
 \end{multicols}
 \end{document}
