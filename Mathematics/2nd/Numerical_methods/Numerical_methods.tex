@@ -317,6 +317,7 @@
       \centering
       \includestandalone[mode=image|tex,width=0.95\linewidth]{Images/runge}
       \captionof{figure}{Runge's phenomenon. In this case $f(x)=\frac{1}{1+25x^2}$. $p_5(x)$ is the 5th-order Lagrange interpolating polynomial with equally-spaced interpolating points; $p_9(x)$, the 9th-order Lagrange interpolating polynomial with equally-spaced interpolating points, and $p_{13}(x)$, the 13th-order Lagrange interpolating polynomial with equally-spaced interpolating points.}
+      \label{NM:fig_runge}
     \end{minipage}
   \end{center}
   \begin{definition}[Spline]
@@ -438,7 +439,7 @@
     \end{gather*}
     with $\alpha_n=\frac{\langle\phi_n,x\phi_n\rangle}{\langle\phi_n,\phi_n\rangle}$ $\forall n\in\NN\cup\{0\}$ and $\beta_n=\frac{\langle\phi_n,\phi_n\rangle}{\langle\phi_{n-1},\phi_{n-1}\rangle}$ $\forall n\in\NN$.
   \end{theorem}
-  \begin{definition}[Chebyshev polynomials]
+  \begin{definition}[Chebyshev polynomials]\label{NM:chebyshev_poly}
     \emph{Chebyshev polynomials} $T_n$ are the orthogonal polynomials defined on $[-1,1]$ with the weight $\omega(x)=\frac{1}{\sqrt{1-x^2}}$. These can be defined recursively as:
     \begin{gather*}
       T_0(x)=1\quad T_1(x)=x\\T_{n+1}(x)=2xT_n(x)-T_{n-1}(x)
@@ -563,12 +564,12 @@
     Let's start with the $\norm{\cdot}_1$ and $\norm{\cdot}_\infty$ norms. Let $\displaystyle A_1:=\max_{1\leq j\leq n} \sum_{i=1}^n\abs{a_{ij}}$ and $\displaystyle A_\infty:=\max_{1\leq i\leq n} \sum_{j=1}^n\abs{a_{ij}}$ and suppose they are attained at $j=j_0$ and $i=i_0$. Then, for all $\vf{v}=(v_j),\vf{u}=(u_j)\in\RR^n$ such that $\norm{\vf{v}}_1=\norm{\vf{u}}_\infty=1$ we have:
     \begin{align*}
       \begin{split}
-        \norm{\vf{Av}}_1      & =\sum_{i=1}^n\abs{\sum_{j=1}^n a_{ij}v_j}\leq\sum_{j=1}^n\abs{v_j}\sum_{i=1}^n\abs{a_{ij}}\leq\\
-        &\hspace*{4.5cm}\leq \sum_{j=1}^n\abs{v_j}A_1 = A_1
+        \norm{\vf{Av}}_1 & =\sum_{i=1}^n\abs{\sum_{j=1}^n a_{ij}v_j}\leq\sum_{j=1}^n\abs{v_j}\sum_{i=1}^n\abs{a_{ij}}\leq \\
+                         & \hspace*{4.5cm}\leq \sum_{j=1}^n\abs{v_j}A_1 = A_1
       \end{split} \\
       \begin{split}
-        \norm{\vf{Au}}_\infty & =\max_{1\leq i\leq n}\abs{\sum_{j=1}^n a_{ij}u_j}\leq\max_{1\leq i\leq n}\sum_{j=1}^n\abs{a_{ij}}\abs{u_j}\leq\\
-        &\hspace*{4cm}\leq \max_{1\leq i\leq n}\sum_{j=1}^n\abs{a_{ij}}= A_\infty
+        \norm{\vf{Au}}_\infty & =\max_{1\leq i\leq n}\abs{\sum_{j=1}^n a_{ij}u_j}\leq\max_{1\leq i\leq n}\sum_{j=1}^n\abs{a_{ij}}\abs{u_j}\leq \\
+                              & \hspace*{4cm}\leq \max_{1\leq i\leq n}\sum_{j=1}^n\abs{a_{ij}}= A_\infty
       \end{split}
     \end{align*}
     And taking $\vf{v}=\vf{e}_{j_0}$ and $\vf{u}=(\sign{a_{i_01}}, \ldots, \sign{a_{i_0n}})$ we have that $\norm{\vf{Av}}_1=A_1$ and $\norm{\vf{Au}}_\infty=A_\infty$. So $\norm{\vf{A}}_1=A_1$ and $\norm{\vf{A}}_\infty=A_\infty$. Now, let's do the $\norm{\cdot}_2$ norm. Observe that $\transpose{\vf{A}}\vf{A}$ is symmetric, and therefore it diagonalizes in an orthonormal basis of eigenvectors $\vf{v}_1, \ldots, \vf{v}_n$ with eigenvalues $\lambda_1, \ldots, \lambda_n$. Note that for each of these eigenvectors we have:

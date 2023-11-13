@@ -260,10 +260,56 @@
     From what follows, we will focus collocation methods.
   \end{remark}
   \subsubsection{Periodic problem}
-  When considering a problem with periodic boundary conditions, we can use trigonometric polynomials as trial functions and Fourier analysis
+  When considering a problem with periodic boundary conditions, we can use trigonometric polynomials as trial functions.
   \begin{remark}
     It can be seen that the Fourier basis functions $\{ \exp{\ii k x}:k\in\ZZ\}$ and it's coefficients satisfy the requirements of \mcref{NMPDE:spectral_method}, using the FFT for the computation of the coefficients.
   \end{remark}
+  \begin{definition}
+    Given a complex-valued periodic functon $u$ defined in $[0,2\pi]$ and $N\in\NN$, we define the \emph{interpolant} of $u$ as:
+    $$
+      I_Nu(x):=\sum_{k=-N+1}^N \tilde{u}_k\exp{\ii k x}
+    $$
+    where $\tilde{u}_k=\sum_{j=0}^{2N-1}u(x_j)\exp{-\ii k x_j}$ are the discrete Fourier coefficients and $x_j=\frac{2\pi j}{2N}$.
+  \end{definition}
+  \begin{proposition}
+    Let $P_Nu=\frac{1}{2\pi}\sum_{k=-N+1}^N \widehat{u}_k\exp{\ii k x}$ be the truncated Fourier series of $u$. Then, we have:
+    $$
+      \norm{u-I_Nu}^2=\norm{u-P_Nu}^2+\norm{R_Nu}^2
+    $$
+    with:
+    $$
+      R_Nu(x)= \frac{1}{2\pi}\sum_{k=-N+1}^N \sum_{m\in\ZZ^*} \widehat{u}_{k+2mN}\exp{\ii k x}
+    $$
+    because $$
+      \tilde{u}_k=\frac{2N}{2\pi}\sum_{m\in\ZZ} \widehat{u}_{k+2mN}
+    $$
+  \end{proposition}
+  \begin{remark}
+    Note that ${(P_Nu)}'=P_Nu'$, but ${(I_Nu)}'\neq I_Nu'$. What we do in generall is to pass to the Fourier space, differentiate and then come back to the physical space.
+  \end{remark}
+  \subsubsection{Non-periodic problems}
+  \begin{remark}
+    Recall that using trigonometric polynomials as trial functions for problems with non-periodic boundary conditions can lead to the Gibbs phenomenon. To prevent that from happening, we will usually use algebraic polynomials as trial functions. But in that case, we need to choose the collocation points carefully, to prevent the so-called \emph{Runge phenomenon} (see \mcref{NM:fig_runge}).
 
+    In this section we will only consider one case of polynomial trial functions, the so-called \emph{Chebyshev polynomials} (see \mcref{NM:chebyshev_poly}).
+  \end{remark}
+  \begin{definition}
+    Given a real-valued function $u$ defined in $[-1,1]$ and $N\in\NN$, we define the \emph{interpolant} of $u$ choosing set of orthogonal polynomials $\{ p_k\}_{k\in\NN\cup\{0\}}$ with weight function $\omega(x)$ as:
+    $$
+      I_Nu(x)=\sum_{k=0}^N \tilde{u}_k p_k(x)
+    $$
+    where $\tilde{u}_k=\frac{1}{\gamma_k}\sum_{j=0}^N u(x_j)p_k(x_j)\omega_j$, $\gamma_k=\sum_{j=0}^N p_k(x_j)^2\omega_j$, $x_j$ are the chosen nodes and $\omega_j$ are the weights corresponding to the Gau\ss-Lobatto formula:
+    $$
+      \sum_{j=0}^N\abs{x_j}^2 \omega_j=
+    $$
+  \end{definition}
+  \begin{lemma}
+    Chebyshev polynomials satisfy the following properties:
+    \begin{enumerate}
+      \item $T_{k+1}(x)=2xT_k(x)-T_{k-1}(x)$ $\forall k\in\NN$, and $T_0(x)=1$ and $T_1(x)=x$.
+      \item $\displaystyle\int_{-1}^1{(T_k(x))}^2\frac{1}{\sqrt{1-x^2}}=\frac{\pi}{2}c_k$, where $c_k=2 - \indi{k>0}$.
+      \item $2T_k(x)=\frac{1}{k+1}{(T_{k+1})}'(x)-\frac{1}{k-1}{(T_{k-1})}'(x)$ $\forall k\in\NN$, and ${(T_0)}'(x)=0$ and ${(T_1)}'(x)=1$.
+    \end{enumerate}
+  \end{lemma}
 \end{multicols}
 \end{document}

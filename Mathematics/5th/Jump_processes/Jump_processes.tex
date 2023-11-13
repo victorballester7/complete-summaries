@@ -1,0 +1,120 @@
+\documentclass[../../../main_math.tex]{subfiles}
+
+\begin{document}
+\changecolor{JP}
+\begin{multicols}{2}[\section{Jump processes}]
+  \subsection{Poisson processes}
+  \subsubsection{Poisson processes}
+  \begin{definition}
+    Let ${(T_n)}_{n\in\NN}$ be an increasing sequence of random variable on $(0,\infty)$. The \emph{counting process} $N={(N_t)}_{t\geq 0}$ associated to it is defined by:
+    $$
+      N_t=\sum_{n=1}^{\infty}\indi{\{T_n\leq t\}}
+    $$
+  \end{definition}
+  \begin{remark}
+    We usually extend the definition of ${(T_n)}_{n\in\NN}$ to $T_0=0$ and denoted $\Delta T_n:=T_n-T_{n-1}$ the \emph{inter-arrival times}.
+  \end{remark}
+  \begin{definition}
+    If the increments ${(\Delta T_n)}_{n\in\NN}$ are \iid with law $\text{Exp}(\lambda)$, then $N$ is called a \emph{Poisson process} with intensity $\lambda$.
+  \end{definition}
+  \begin{proposition}
+    Let $N$ be a Poisson process with intensity $\lambda$. Then:
+    \begin{enumerate}
+      \item $N$ has càdlàg trajectories.
+      \item $N$ has independent increments.
+      \item $N$ has stationary increments.
+    \end{enumerate}
+  \end{proposition}
+  \begin{theorem}
+    Let $N={(N_t)}_{t\geq 0}$ be a Poisson process with intensity $\lambda$. Then:
+    \begin{enumerate}
+      \item The process $\displaystyle\frac{N_t}{t}\overset{\text{a.s.}}{\underset{t\to\infty}{\longrightarrow}}\lambda$.
+      \item The process $\displaystyle \sqrt{\frac{t}{\lambda}}\left(\frac{N_t}{t}-\lambda\right)\overset{\text{d}}{\underset{t\to\infty}{\longrightarrow}}\mathcal{N}(0,1)$.
+    \end{enumerate}
+  \end{theorem}
+  \subsubsection{Compound Poisson processes}
+  \begin{definition}
+    Let $N={(N_t)}_{t\geq 0}$ be a Poisson process with intensity $\lambda$ and ${(T_n)}_{n\in\NN}$ be its associated sequence of jump times. Let $\nu\in\mathcal{M}_1(\RR^d)$ (the space of probability measures on $\RR^d$) and ${(Z_n)}_{n\in\NN}$ be a sequence of \iid random variables with law $\nu$ independent from $N$. The \emph{compound Poisson process} $X={(X_t)}_{t\geq 0}$ with intensity $\lambda$ and jump distribution $\nu$ is defined by:
+    $$
+      X_t=\sum_{n=1}^{N_t}Z_n=\sum_{n=1}^{\infty}Z_n\indi{\{T_n\leq t\}}
+    $$
+    We will denote the law of $X$ by $\CPP(\lambda,\nu)$.
+  \end{definition}
+  \begin{proposition}
+    A compound Poisson process has càdlàg trajectories, independent increments and stationary increments.
+  \end{proposition}
+  \subsection{Integration with respect to random Poisson measures}
+  \subsubsection{Random measures}
+  \begin{definition}
+    Let $E:=\RR_{\geq 0}\times \RR^d$ be equipped with the Borel $\sigma$-algebra $\mathcal{B}(E)$. Let $\mathcal{M}(E)$ be the set of non-negative $\sigma$-measures on $E$. We equip $\mathcal{M}(E)$ with the smallest $\sigma$-algebra such that makes all the mappings $\varphi_A:\mu\mapsto\mu(A)$ measurable for all $A\in\mathcal{B}(E)$.
+  \end{definition}
+  \begin{definition}[Random measure]
+    A \emph{random measure} is a $\mathcal{M}(E)$-valued random variable (with respect to the $\sigma$-algebra of $\mathcal{M}(E)$).
+  \end{definition}
+  \begin{proposition}
+    $\mathcal{N}:\Omega\to\mathcal{M}(E)$ is a random measure if and only if for all $A\in\mathcal{B}(E)$, $\varphi_A\circ \mathcal{N}=:N(A)$ is a real-valued non-negative random variable.
+  \end{proposition}
+  \begin{proposition}
+    Let ${(\mathcal{N}_n)}_{n\in\NN}$ be a sequence of random measures. They are independent if and only if for all $m\in\NN$ and all $A_1,\ldots,A_m\in\mathcal{B}(E)$, the random variables $N_1(A_1),\ldots,N_m(A_m)$ are independent.
+  \end{proposition}
+  \subsubsection{Random Poisson measures}
+  \begin{definition}
+    Let $\mu\in\mathcal{M}(E)$. A random measure $\mathcal{N}$ is called a \emph{Poisson random measure} with \emph{intensity measure} $\mu$ and denoted $\RPM(\mu)$ if:
+    \begin{enumerate}
+      \item For all $A\in\mathcal{B}(E)$, $N(A)\sim\text{Pois}(\mu(A))$.
+      \item For all $k\in\NN$ and all Borel sets $A_1,\ldots,A_k\in\mathcal{B}(E)$, the random variables $N(A_1),\ldots,N(A_k)$ are independent.
+    \end{enumerate}
+  \end{definition}
+  \begin{proposition}[Superposition property]
+    Let ${(\mathcal{N}_n)}$ be a sequence of independent $\RPM$s with intensity measures ${(\mu_n)}$. If $\mu:=\sum_{n=1}^{\infty}\mu_n$ is $\sigma$-finite, then $\mathcal{N}:=\sum_{n=1}^{\infty}\mathcal{N}_n$ is a $\RPM(\mu)$.
+  \end{proposition}
+  \begin{proposition}[Thinning property]
+    Let $(E_n)$ be a countable partition of $E$ and $\mathcal{N}$ be a $\RPM(\mu)$. For all $n\in\NN$, we define the restricted measure $\mathcal{N}_n:=\mathcal{N}(\cdot\cap E_n)$. Then, the random measures ${(\mathcal{N}_n)}$ are independent $\RPM(\mu_n)$ where $\mu_n:=\mu(\cdot\cap E_n)$.
+  \end{proposition}
+  \subsubsection{Integration}
+  \begin{definition}
+    Let $\mathcal{N}$ be a random measure on $E$. For all $\omega\in\Omega$, we define $\int_E f\dd{\mathcal{N}_\omega}$ (or $\int_E f\mathcal{N}_\omega(\dd{x})$) as the integral of $f:E\to\RR$ with respect to the measure $\mathcal{N}_\omega$. This gives a random variable $\int_E f\dd{\mathcal{N}}$.
+  \end{definition}
+  \begin{remark}
+    One can check that indeed $\int_E f\dd{\mathcal{N}}$ is a random variable.
+  \end{remark}
+  \begin{proposition}
+    Let $\mathcal{N}$ be a $\RPM(\mu)$. Then:
+    \begin{enumerate}
+      \item If $f\in L^1(E,\mu)$, then $\int_E f\dd{\mathcal{N}}$ is integrable and: $$\Exp{\int_E f\dd{\mathcal{N}}}=\int_E f\dd{\mu}$$
+      \item If $f\in L^2(E,\mu)$, then $\int_E f\dd{\mathcal{N}}$ is square-integrable and: $$\Exp{\left(\int_E f\dd{\mathcal{N}}\right)^2}=\int_E f^2\dd{\mu}$$
+      \item If $f:E\to \RR_{\geq 0}$ is measurable, then: $$
+              \Exp\left(\exp{-\int_E f\dd{\mathcal{N}}}\right)=\exp{-\int_E (1-\exp{-f})\dd{\mu}}
+            $$
+      \item If $f\in L^1(E,\mu)$, then:
+            $$
+              \Exp\left(\exp{\ii \int_E f\dd{\mathcal{N}}}\right)=\exp{\int_E (e^{\ii f}-1)\dd{\mu}}
+            $$
+    \end{enumerate}
+  \end{proposition}
+  \begin{proposition}
+    Let $f:E\to\RR_{\geq 0}$ be measurable. Then:
+    \begin{enumerate}
+      \item $\displaystyle \int f\dd{\mathcal{N}}\overset{a.s.}{<}\infty$
+      \item $\displaystyle \int (1\wedge f)\dd{\mu} <\infty$
+      \item $\displaystyle \int (1-\exp{-f}) \dd{\mu}<\infty$
+    \end{enumerate}
+  \end{proposition}
+  \subsubsection{Compensated Poisson measures}
+  \begin{definition}
+    Let $\mu \in\mathcal{M}(E)$. Since $\mu$ is $\sigma$-finite, there exists ${(E_n)}_{n\geq 1}$ a countable partition of $E$ such that $\mu(E_n)<\infty$ for all $n\in\NN$. Let $f:E\to\RR$ be a measurable function such that $f\in L^1(E_n,\mu)$ for all $n\in\NN$. We define:
+    \begin{align*}
+      \int_{E_n}f\dd{(\mathcal{N}-\mu)} & := \int_{E_n}f\dd{\mathcal{N}}-\int_{E_n}f\dd{\mu} \\
+      I_n                               & :=\sum_{k=1}^{n}\int_{E_k} f\dd{(\mathcal{N}-\mu)}
+    \end{align*}
+  \end{definition}
+  \begin{proposition}
+    Suppose $\int (\abs{f}\wedge f^2)\dd{\mu}<\infty$. The random sequence ${(I_n)}_{n\in\NN}$ converges a.s.\ in $L^2$ to a limit which does not depend on the choice of the partition. We denote this limit as $\int_E f\dd{\tilde{\mathcal{N}}}$ and $\tilde{\mathcal{N}}$ is called the \emph{compensated Poisson measure} of $\mathcal{N}$.
+  \end{proposition}
+  \subsection{Infinitely divisibility}
+  \subsection{Lévy processes}
+  \subsection{Stochastic integration}
+  \subsection{SDEs}
+  \subsection{Exponential martingales}
+\end{multicols}
+\end{document}
