@@ -23,11 +23,18 @@
     $$
     where we have assumed that the boundary of $\Omega$ is smooth enough to define the normal vector $\vf{n}$. The condition is called \emph{homogeneous} if $g=0$. Note that if $\vf{A}=\vf{I}_d$, then the Neumann boundary condition is just $\partial_{\vf{n}} u=g$.
   \end{definition}
+  \begin{remark}
+    If the coefficients $a_{ij}\in\mathcal{C}^1$, then we convert the equation from non-divergence form to divergence form and viceversa.
+  \end{remark}
   \begin{definition}
-    Let $a_{ij},b_j,c$ be known functions on $\Omega\subseteq \RR^d$. We say that the operator $$L=-\sum_{i,j=1}^da_{ij}\partial_{ij}^2 + \sum_{j=1}^d b_j\partial_j+c$$ is \emph{uniformly elliptic} if there exists $\theta>0$ such that for all $x\in \Omega$ and all $p\in \RR^d$ we have:
-    \begin{equation}
-      Q_x(\vf{p})=\sum_{i,j=1}^da_{ij}(\vf{x})p_ip_j\geq \theta \sum_{i=1}^{d} {p_i}^2
+    Let $a_{ij},b_j,c$ be known functions on $\Omega\subseteq \RR^d$. We say that the operator
+    \begin{equation}\label{INEPDE:operator}
+      L=-\sum_{i,j=1}^da_{ij}\partial_{ij}^2 + \sum_{j=1}^d b_j\partial_j+c
     \end{equation}
+    is \emph{uniformly elliptic} if there exists $\theta>0$ such that for all $x\in \Omega$ and all $\vf{p}\in \RR^d$ we have:
+    \begin{equation*}
+      Q_x(\vf{p}):=\transpose{\vf{p}}\vf{A}(\vf{x})\vf{p}=\!\sum_{i,j=1}^da_{ij}(\vf{x})p_ip_j\geq \theta \sum_{i=1}^{d} {p_i}^2=\theta \norm{\vf{p}}^2
+    \end{equation*}
   \end{definition}
   \begin{remark}
     Geometrically speaking, this implies that the sets
@@ -36,6 +43,23 @@
     $$
     are ellipsoids.
   \end{remark}
+  \begin{definition}
+    Consider the problem
+    $$
+      \mathcal{D}_f:=\begin{cases}
+        Lu=f & \text{in }\Omega         \\
+        u=0  & \text{on }\partial\Omega
+      \end{cases}
+    $$
+    where $L$ is as in \mcref{INEPDE:operator}. The \emph{weak formulation} (or \emph{variational formulation}) of the problem is:
+    \begin{equation*}
+      {\langle \grad u,\grad v\rangle}_2+{\langle \vf{b}\cdot \grad u,v\rangle}_2 + {\langle cu,v\rangle}_2={\langle f,v\rangle}_2\quad \forall v\in H_0^1(\Omega)
+    \end{equation*}
+    A solution of such problem is called a \emph{weak solution} of $\mathcal{D}_f$.
+  \end{definition}
+  \begin{definition}
+    If the weak solution $u_f$ of the problem $\mathcal{D}_f$ is in $H^1_0(\Omega)\cap W^{2,p}(\Omega)$ for some $p\in [1,\infty)$, then $u_f$ is called a \emph{strong solution} of $\mathcal{D}_f$. If $u_f\in \mathcal{C}^2(\Omega)\cap H^1_0(\Omega)$, then we say that $u_f$ is a \emph{classical solution} of $\mathcal{D}_f$.
+  \end{definition}
   \begin{proposition}
     Let $H$ be Hilbert and $K:H\to H$ be a continuous linear operator. Then, the following are equivalent:
     \begin{enumerate}
@@ -46,30 +70,155 @@
   \end{proposition}
   \subsection{Hilbert space methods for divergence form linear PDEs}
   In this section, we will assume that $\Omega\subset\RR^d$ is an open, bounded subset, $a_{ij}=a_{ji}$ and $a_{ij},b_j,c\in L^\infty(\Omega)$.
-  \begin{theorem}[Abstract Fredholm alternative]
-    Let $H$ be Hilbert and $K:H\to H$ be a compact linear operator. Then:
-    \begin{enumerate}
-      \item $\ker(\id-K)$ and $\ker(\id-K^*)$ are both finite dimensional and they have the same dimension.
-      \item $\im(\id-K)={(\ker(\id-K^*))}^\perp$. In particular, $\im(\id-K)$ is closed.
-      \item Either $\ker(\id-K)\ne\{0\}$ or $\id -K$ is and isomorphism.
-    \end{enumerate}
-  \end{theorem}
-  \begin{definition}
-    Consider the problem
+  \subsubsection{Lax-Milgram theorem}
+  \begin{remark}
+    Instead of the usual norm for $H_0^1(\Omega)$, here we will use the following one:
     $$
-      \mathcal{D}_f:=\begin{cases}
+      \norm{u}_{H_0^1(\Omega)}^2=\norm{\grad u}_{L^2(\Omega)}^2
+    $$
+  \end{remark}
+  \begin{definition}
+    Let $H$ be a Hilbert space and $a:H\times H\rightarrow\RR$ be a bilinear map. We say that $a$ is \emph{continuous} if $\exists C>0$ such that $\forall u,v\in H$ we have: $$\abs{a(u,v)}\leq C\norm{u}\norm{v}$$
+  \end{definition}
+  \begin{definition}
+    Let $H$ be a Hilbert space and $a:H\times H\rightarrow\RR$ be a bilinear map. We say that $a$ is \emph{coercive} if $\exists\alpha>0$ such that $\forall u\in H$ we have: $$a(u,u)\geq\alpha\norm{u}^2$$
+  \end{definition}
+  \begin{definition}
+    Let $H$ be a Hilbert space and $a:H\times H\rightarrow\CC$ be a bilinear map. We say that $a$ is \emph{symmetric} if $\forall u,v\in H$ we have: $$a(u,v)=\overline{a(v,u)}$$
+  \end{definition}
+  \begin{theorem}[Lax-Milgram theorem]\label{INEPDE:laxmilgram}
+    Let $H$ be a Hilbert space and $a:H\times H\rightarrow\RR$ be a continuous and coercive bilinear map. Then, $\forall f\in H^*$ $\exists! u_f\in H$ such that: $$a(u_f,v)=f(v)\quad \forall v\in H$$
+    In addition, if ${H}$ is a real Hilbert space and $a$ is symmetric, then $u$ is the unique minimizer of:
+    $$\min_{v\in H}\left\{\frac{1}{2}a(v,v)-f(v)\right\}$$
+  \end{theorem}
+  \begin{proposition}
+    Consider the problem:
+    $$
+      \begin{cases}
+        L u=f & \text{in }\Omega         \\
+        u=0   & \text{on }\partial\Omega
+      \end{cases}
+    $$
+    with $L=-\sum_{i,j=1}^d\partial_i(a_{ij}\partial_j)$ and $f\in L^2(\Omega)$. Then, the problem has a unique weak solution $u\in H_0^1(\Omega)$ and
+    $$
+      \norm{u}_{H_0^1(\Omega)}\leq C\norm{f}_{L^2(\Omega)}
+    $$
+  \end{proposition}
+  \begin{proof}
+    Consider the bilinear form $$
+      a(u,v):=\int_\Omega\sum_{i,j=1}^da_{ij}\partial_iu\partial_jv
+    $$
+    We check the hypotheses of \mnameref{INEPDE:laxmilgram}:
+    \begin{enumerate}
+      \item $a$ is continuous:
+            \begin{align*}
+              \abs{a(u,v)} & \leq \sum_{i,j=1}^d\norm{a_{ij}}_{\infty}\norm{\grad u}_{2}\norm{\grad v}_{2} \\
+                           & \leq C\norm{u}_{H_0^1(\Omega)}\norm{v}_{H_0^1(\Omega)}
+            \end{align*}
+      \item $a$ is coercive:
+            \begin{align*}
+              a(u,u) & =\int_\Omega\sum_{i,j=1}^da_{ij}\partial_iu\partial_ju   \\
+                     & \geq \theta \int_\Omega\sum_{i=1}^d{\abs{\partial_iu}}^2 \\
+                     & =\theta {\norm{u}_{H_0^1(\Omega)}}^2
+            \end{align*}
+            by the uniform ellipticity of $L$ and the \mnameref{ATFAPDE:poincare_ineq}.
+    \end{enumerate}
+    Moreover, since $ a(u,u)={\langle f,u\rangle}_2$ we have that:
+    \begin{align*}
+      \theta {\norm{u}_{H_0^1(\Omega)}}^2\leq {\langle f,u\rangle}_2\leq \norm{f}_2\norm{u}_{2}\leq C \norm{f}_2\norm{u}_{H_0^1(\Omega)}
+    \end{align*}
+    again by the \mnameref{ATFAPDE:poincare_ineq}.
+  \end{proof}
+  \subsubsection{Abstract Fredholm alternative}
+  \begin{remark}
+    One can check that if we try to apply \mnameref{INEPDE:laxmilgram} to the problem:
+    $$
+      \begin{cases}
         Lu=f & \text{in }\Omega         \\
         u=0  & \text{on }\partial\Omega
       \end{cases}
     $$
-    where $L=-\laplacian+\vf{b}\cdot \grad$. Its \emph{weak formulation} is:
-    \begin{equation*}
-      \langle \grad u,\grad v\rangle+\langle \vf{b}\cdot \grad u,v\rangle=\langle f,v\rangle\quad \forall v\in H_0^1(\Omega)
-    \end{equation*}
-    We define the \emph{formal adjoint} of $L$ as:
+    with $L=-\sum_{i,j=1}^d\partial_i(a_{ij}\partial_j)+\sum_{j=1}^db_j\partial_j$, it fails due to the coercivity condition.
+  \end{remark}
+  \begin{proposition}
+    Consider the problem:
     $$
-      L^*v=-\laplacian v-\div(\vf{b}v)
+      \begin{cases}
+        L_\mu u=f & \text{in }\Omega         \\
+        u=0       & \text{on }\partial\Omega
+      \end{cases}
     $$
+    with $L_\mu=-\sum_{i,j=1}^d\partial_i(a_{ij}\partial_j)+\sum_{j=1}^db_j\partial_j+\mu c$. Then, if $\mu>0$ is large enough, the problem has a unique weak solution in $H_0^1(\Omega)$
+  \end{proposition}
+  \begin{sproof}
+    Taking the natural bilinear map $a$, the coercivity condition becomes:
+    $$
+      a_\mu(u,u)\geq \theta \norm{u}_{H_0^1(\Omega)}^2-C\norm{u}_{H_0^1(\Omega)}\norm{u}_2 + \mu \norm{u}_2^2
+    $$
+    which is for $\mu$ large enough it is bigger than $\delta \norm{u}_{H_0^1(\Omega)}^2$ for some $\delta>0$.
+  \end{sproof}
+  \begin{lemma}\label{INEPDE:lemma1_fredholm}
+    Let $H$ be Hilbert and $K:H\to H$ be a compact linear operator. Then, $\dim \ker(\id-K)<\infty$.
+  \end{lemma}
+  \begin{proof}
+    We first prove that $\dim\ker(\id-K)<\infty$. If $\dim\ker(\id-K)=\infty$, then $\exists (u_n)\in \ker(\id-K)$ orthonormal, and thus bounded. In particular, $u_n=Ku_n$ and since $K$ is compact, we have that $(Ku_n)$ has a convergent subsequence. But:
+    \begin{align*}
+      0 & =\lim_{k\to\infty}\norm{Ku_{n_k}-Ku_{n_{k+1}}}^2        \\
+        & =\lim_{k\to\infty}\norm{u_{n_k}-u_{n_{k+1}}}^2          \\
+        & =\lim_{k\to\infty}\norm{u_{n_k}}^2+\norm{u_{n_{k+1}}}^2 \\
+        & =2
+    \end{align*}
+    by \mnameref{RFA:pythagorean}.
+  \end{proof}
+  \begin{lemma}\label{INEPDE:lemma2_fredholm}
+    Let $H$ be Hilbert and $K:H\to H$ be a compact linear operator. Then, $\exists c>0$ such that $\forall u\in {\ker(\id-K)}^{\perp}$ we have $\norm{u-Ku}\geq c\norm{u}$.
+  \end{lemma}
+  \begin{proof}
+    We proceed by contradiction. Suppose we have a sequence $(u_n)\in {\ker(\id-K)}^{\perp}$ with $\norm{u_n}=1$ such that $\norm{u_n-Ku_n}\to 0$. Since $(u_n)$ is bounded, we have that $(u_n)$ has a weakly convergent subsequence $(u_{n_k})$ to $u\in H$. Since $K$ is compact, we have that $Ku_{n_k}\to Ku$, and thus by continuity of the norm, $u=Ku$. Thus $u\in \ker(\id-K)$ and $u\in {\ker(\id-K)}^{\perp}$, which implies $u=0$, a contraction with $\norm{u}=1$.
+  \end{proof}
+  \begin{lemma}\label{INEPDE:lemma3_fredholm}
+    Let $H$ be Hilbert and $K:H\to H$ be a compact linear operator. Then, $\im(\id-K)$ is closed.
+  \end{lemma}
+  \begin{proof}
+    Let $(v_n)\in \im(\id-K)$ be such that $v_n\to v\in H$. Then, $\exists (u_n)\in H$ such that $v_n=(\id-K)u_n$. Thanks to \mnameref{RFA:projection}, we can write $u_n=u_n^{\text{ker}}+ u_n^{\text{ker}^\perp}$, where $u_n^{\text{ker}}\in \ker(\id-K)$ and $u_n^{\text{ker}^\perp}\in {\ker(\id-K)}^{\perp}$. Thus, $v_n=(\id-K)u_n^{\text{ker}^\perp}$ and by \mcref{INEPDE:lemma2_fredholm}, we have:
+    $$
+      \norm{v_n-v_m}\geq c\norm{u_n^{\text{ker}^\perp}-u_m^{\text{ker}^\perp}}
+    $$
+    Since $(v_n)$ is Cauchy, so it is $(u_n^{\text{ker}^\perp})$, and thus $(u_n^{\text{ker}^\perp})$ converges to some $u\in {\ker(\id-K)}^{\perp}$. Thus, $v=(\id-K)u\in \im(\id-K)$.
+  \end{proof}
+  % \begin{lemma}
+  %   Let $H$ be Hilbert and $K:H\to H$ be a compact linear operator. Then, $\ker(\id-K)=\{0\}\iff \ker(\id-K^*)=\{0\}$.
+  % \end{lemma}
+  % \begin{proof}
+  %   The argument is symmetric since $K^{**}=K$ and $K$ is compact $\iff K^*$ is compact. So suppose $\ker(\id-K)=\{0\}$. Then, $\id -K$ is injective.
+  % \end{proof}
+  \begin{theorem}[Abstract Fredholm alternative]
+    Let $H$ be Hilbert and $K:H\to H$ be a compact linear operator. Then:
+    \begin{enumerate}
+      \item $\ker(\id-K)$ and $\ker(\id-K^*)$ are both finite dimensional, and they have the same dimension.
+      \item $\im(\id-K)={\ker(\id-K^*)}^\perp$. In particular, $\im(\id-K)$ is closed.
+      \item Either $\ker(\id-K)\ne\{0\}$ or $\id -K$ is an isomorphism.
+    \end{enumerate}
+  \end{theorem}
+  \begin{proof}
+    We organize the proof in several steps:
+    \begin{enumerate}
+      \setcounter{enumi}{1}
+      \item From \mcref{RFA:adjoint_im_ker} we have that $\overline{\im A}={\ker A^*}^\perp$ for any general operator $A$ between Hilbert spaces. Thus, $\im(\id-K)={\ker(\id-K^*)}^\perp\iff \im(\id-K)$ is closed, which reduces to \mcref{INEPDE:lemma3_fredholm}.
+      \item We first show that $\ker(\id-K)=\{0\}\iff \ker(\id-K^*)=\{0\}$. The argument is symmetric since $K^{**}=K$ and the fact that $K$ is compact $\iff K^*$ is compact. So suppose $\ker(\id-K)=\{0\}$. Then, $\id -K$ is injective. Assume $\ker(\id-K^*)\ne\{0\}$. Then, $\im (\id-K)=\ker(\id-K)^\perp\ne H$ and so $\im({(\id-K)}^2)\subsetneq \im(\id-K)$. Indeed, if we had equality, then for any $u\in H$, we would have ${(\id-K)u}\in \im({(\id-K)}^2)$, and thus $\exists v\in H$ such that ${(\id-K)u}={(\id-K)}^2v$, which implies $u={(\id-K)}v$ because $\ker (\id-K)=\{0\}$. Recursively, we have an infinite sequence $\im({(\id-K)}^{n+1})\subsetneq \im({(\id-K)}^n)$, which implies that $\forall n$ $\exists u_n\in \im({(\id-K)}^n)\cap\im({(\id-K)}^{n+1})^\perp$ with $\norm{u_n}=1$. Thus, $\langle u_n,u_m\rangle=\delta_{n,m}$. But $u_n-Ku_n\in \im({(\id-K)}^{n+1})$ so, $u_n-Ku_n\perp u_n$. This implies, by \mnameref{RFA:pythagorean}, that $\norm{Ku_n}=\norm{u_n-Ku_n}+\norm{u_n}\geq 1$, which is a contradiction with the compactness of $K$ because any orthonormal sequence always converges weakly to zero (and so $Ku_n\to 0$). So either $\ker(\id-K)\ne\{0\}$ or $\id-K$ is bijective.
+
+            To finish this point, we need to prove that if $\ker(\id-K)$, then ${(\id-K)}^{-1}$ is a bounded linear operator. But this is a consequence of \mcref{INEPDE:lemma2_fredholm}: if $u\in H$, then $u\in \ker {(\id-K)}^\perp$ and thus $\norm{(\id-K)u}\geq c\norm{u}$, which implies that $\norm{v}\geq c \norm{{(\id-K)}^{-1}v}$ taking $v=(\id-K)u$.
+            \setcounter{enumi}{0}
+      \item Assume without loss of generality that $\dim\ker(\id-K)<\dim \ker(\id-K^*)$. Then, there exists a linear injective map $A:\ker(\id-K)\to \ker(\id-K^*)=\im(\id-K)^\perp$. Let $\tilde{K}$ be the operator defined by $\tilde{K}u=Ku+Au^{\text{ker}}$, where $u^{\text{ker}}$ is the projection of $u$ onto $\ker(\id-K)$. Then, $\tilde{K}$ is compact (because $K$ is compact and so is $A$, because it has finite range). Moreover, if $u\in \ker(\id-\tilde{K})$, then $(\id-K)u+Au^{\text{ker}}=0$, which since $(\id-K)u\in \im(\id-K)$ and $Au^{\text{ker}}\in \im(\id-K)^\perp$ implies that both terms are zero. So $u=u^{\text{ker}}\in \ker(\id-K)$ and since $A$ is injective, $u=u^{\text{ker}}=0$. Thus, $\ker(\id-\tilde{K})=\{0\}$ and by the previous point, $\id-\tilde{K}$ is an isomorphism from $H$ to itself. So, for every $w\in \ker(\id-K^*)$, $\exists u\in H$ such that $w=(\id-\tilde{K})u$. Projecting both side onto $\ker(\id-K^*)=\im(\id-K)^\perp$, we have $w=-Au^{\text{ker}}$, which implies that $A$ is onto, and so $\dim\ker(\id-K)=\dim\ker(\id-K^*)$. \mcref{INEPDE:lemma1_fredholm} finishes the proof.
+    \end{enumerate}
+  \end{proof}
+  \begin{definition}
+    Consider the operator $L$ as in \mcref{INEPDE:operator}. We define the \emph{formal adjoint} of $L$ as:
+    \begin{align*}
+      L^*v & :=-\sum_{i,j=1}^d\partial_i(a_{ij}\partial_jv)-\sum_{j=1}^d\partial_j(b_jv)+c v                                    \\
+           & =\sum_{i,j=1}^d\partial_i(a_{ij}\partial_jv)-\sum_{j=1}^db_j\partial_jv+ \left(c-\sum_{j=1}^d\partial_jb_j\right)v
+    \end{align*}
+    It satisfies $\langle Lu,v\rangle=\langle u,L^*v\rangle$ for all $u,v\in H_0^1(\Omega)$.
   \end{definition}
   \begin{proposition}
     The \emph{homogeneous adjoint problem}
@@ -81,9 +230,12 @@
     $$
     whose weak formulation is
     \begin{equation*}
-      \langle \grad v,\grad w\rangle+\langle \vf{b}\cdot \grad v,w\rangle=0\quad \forall w\in H_0^1(\Omega)
+      {\langle \grad v,\grad w\rangle}_2+{\langle \vf{b}\cdot \grad v,w\rangle}_2=0\quad \forall w\in H_0^1(\Omega)
     \end{equation*}
     has a finite dimensional solution space $W_0$, as well as the space $V_0$ of solutions of $\mathcal{D}_0$, and $\dim W_0=\dim V_0$. Moreover, if $f\in L^2(\Omega)$, $\mathcal{D}_f$ is solvable if and only if $\langle f,v\rangle=0$ for all $v\in W_0$.
+  \end{proposition}
+  \begin{proposition}
+
   \end{proposition}
   \begin{definition}
     We define the following problem:
@@ -114,18 +266,33 @@
     $$
   \end{definition}
   \begin{theorem}
-    Let $H$ be a Hilbert space and $K:H\to H$ be a compact operator. Then, $0\in \sigma(K)$ and $\sigma(K)$ is closed and at most countable. Moreover, if $\lambda\in \sigma(K)\setminus\{0\}$, then $\lambda$ is an eigenvalue of $K$ and:
+    Let $H$ be an infinite-dimensional Hilbert space and $K:H\to H$ be a compact operator. Then, $0\in \sigma(K)$ and $\sigma(K)$ is closed and at most countable. Moreover, if $\lambda\in \sigma(K)\setminus\{0\}$, then $\lambda$ is an eigenvalue of $K$ and:
     $$
       \dim\left(\bigcup_{p\geq 1}\ker{(\lambda\id-K)}^p\right)<\infty
     $$
     If $\sigma(K)\cap\RR^*$ is infinite, then it is of the form $\{\lambda_n\}_{n\in \NN}$ with $\lambda_n\to 0$.
   \end{theorem}
+  \begin{proof}
+    \begin{enumerate}
+      \item Assume $0\notin \sigma(K)$. Then, $K$ is bijective and so $\id = K\circ K^{-1}$ is compact, as it is the composition of a compact operator and a bounded operator. But this is a contradiction with \mcref{INEPDE:lemma1_fredholm}.
+    \end{enumerate}
+  \end{proof}
   \begin{lemma}
-    Let $H$ be a Hilbert space and $K:H\to H$ be a continuous self-adjoint operator. Then:
+    Let $H$ be a Hilbert space and $T:H\to H$ be a continuous self-adjoint operator. Then:
     $$
-      \norm{K}=\sup_{\norm{x}=1}\langle x,Kx\rangle
+      \norm{T}=\sup_{\norm{x}=1}\abs{\langle x,Tx\rangle}
     $$
   \end{lemma}
+  \begin{proof}
+    Clearly $\alpha:=\sup_{\norm{x}=1}\abs{\langle x,Tx\rangle}\leq \norm{T}$. For the converse, it suffices to show that $\abs{\langle Tx,y\rangle}\leq \alpha$ for all $\norm{x}=\norm{y}=1$. We have:
+    $$
+      \langle Tx,y\rangle = \frac{1}{4}\left(\langle T(x+y),x+y\rangle-\langle T(x-y),x-y\rangle\right)
+    $$
+    And then, by \mnameref{RFA:parallelogram}:
+    $$
+      \abs{\langle Tx,y\rangle}\leq \frac{\alpha}{4}\left(\norm{x+y}^2+\norm{x-y}^2\right)= \alpha
+    $$
+  \end{proof}
   \begin{lemma}
     Let $H\ne\{ 0\}$ be Hilbert and $K:H\to H$ be a compact and self-adjoint operator. Then:
     $$
@@ -135,15 +302,21 @@
   \end{lemma}
   \subsubsection{Regularity theorems for weak solutions of divergence-form elliptic PDEs}
   \begin{theorem}[Inner regularity]
-    Assume, in addition to the usual assumptions, that $a_{ij}\in \mathcal{C}^1(\Omega)$. Let $f\in L^2(\Omega)$ and $u$ be a weak solution of $Lu=f$. Then, $u\in H^2_{\text{loc}}(\Omega)$ and for any compact $\omega\subset\subset \Omega$, meaning that $\overline{\omega}\subset\Omega$ compact, we have $u\in H^2(\omega)$ and:
+    Assume, in addition to the usual assumptions, that $a_{ij}\in \mathcal{C}^1(\Omega)$. Let $f\in L^2(\Omega)$ and $u\in H^1(\Omega)$ be a weak solution of $Lu=f$. Then, $u\in H^2_{\text{loc}}(\Omega)$ and for any compact embedding $\omega\subset\subset \Omega$, meaning that $\overline{\omega}\subset\Omega$ compact, we have $u\in H^2(\omega)$ and:
     $$
       \norm{u}_{H^2(\omega)}\leq C\left(\norm{f}_{L^2(\Omega)}+\norm{u}_{L^2(\Omega)}\right)
     $$
   \end{theorem}
   \begin{corollary}
-    Assume that $a_{ij}\in\mathcal{C}^m(\Omega)$ for some $m\geq 2$, and $b_j,c\in \mathcal{C}^{m-1}(\Omega)$. Let $f\in H^{m-1}(\Omega)$ and $u\in H^1_{\text{loc}}(\Omega)\cap L^2(\Omega)$ be a weak solution of $Lu=f$. Then, $u\in H^{m+1}_{\text{loc}}(\Omega)$ and for any $\omega\subset\subset \Omega$ we have $u\in H^{m+2}(\omega)$ and:
+    Assume that $a_{ij}\in\mathcal{C}^{m+1}(\Omega)$ for some $m\in\NN$, and $b_j,c\in \mathcal{C}^{m}(\Omega)$. Let $f\in H^{m}(\Omega)$ and $u\in H^1$ be a weak solution of $Lu=f$. Then, $u\in H^{m+2}_{\text{loc}}(\Omega)$ and for any $\omega\subset\subset \Omega$ we have $u\in H^{m+2}(\omega)$ and:
     $$
-      \norm{u}_{H^{m+2}(\omega)}\leq C\left(\norm{f}_{H^{m-1}(\Omega)}+\norm{u}_{L^2(\Omega)}\right)
+      \norm{u}_{H^{m+2}(\omega)}\leq C\left(\norm{f}_{H^{m}(\Omega)}+\norm{u}_{L^2(\Omega)}\right)
+    $$
+  \end{corollary}
+  \begin{corollary}
+    Assume $a_{ij},b_j,c,f\in\mathcal{C}^\infty(\Omega)$. Let $u\in H^1(\Omega)$ be a weak solution of $Lu=f$. Then, $u\in \mathcal{C}^\infty(\Omega)$ and $\forall m\in \NN$:
+    $$
+      \norm{u}_{H^{m}(\Omega)}\leq C\left(\norm{f}_{H^{m}(\Omega)}+\norm{u}_{L^2(\Omega)}\right)
     $$
   \end{corollary}
   \begin{theorem}[Regularity up to the boundary]
@@ -153,15 +326,15 @@
     $$
   \end{theorem}
   \begin{corollary}
-    Assume that $\Fr{\Omega}$ is $\mathcal{C}^{m+1}$, $m\geq 2$, and that $a_{ij}\in \mathcal{C}^m(\overline{\Omega})$, $b_j,c\in \mathcal{C}^{m-1}(\overline{\Omega})$. Let $f\in H^{m-1}(\Omega)$ and $u\in H^1_0(\Omega)$ be a weak solution of $\mathcal{D}_f$. Then, $u\in H^{m+2}(\Omega)$ and:
+    Assume that $\Fr{\Omega}$ is $\mathcal{C}^{m}$, $m\in\NN$, and that $a_{ij}\in \mathcal{C}^{m+1}(\overline{\Omega})$, $b_j,c\in \mathcal{C}^{m}(\overline{\Omega})$. Let $f\in H^{m}(\Omega)$ and $u\in H^1_0(\Omega)$ be a weak solution of $\mathcal{D}_f$. Then, $u\in H^{m+2}(\Omega)$ and:
     $$
-      \norm{u}_{H^{m+2}(\Omega)}\leq C\left(\norm{f}_{H^{m-1}(\Omega)}+\norm{u}_{L^2(\Omega)}\right)
+      \norm{u}_{H^{m+2}(\Omega)}\leq C\left(\norm{f}_{H^{m}(\Omega)}+\norm{u}_{L^2(\Omega)}\right)
     $$
   \end{corollary}
   \begin{corollary}
-    Assume that $\Fr{\Omega}$ is $\mathcal{C}^\infty$ and that $a_{ij},b_j,c,f\in \mathcal{C}^\infty(\overline{\Omega})$. Let $u\in H^1_0(\Omega)$ be a weak solution of $\mathcal{D}_f$. Then, $u\in \mathcal{C}^\infty(\Omega)$ and $\forall m\geq 1$:
+    Assume that $\Fr{\Omega}$ is $\mathcal{C}^\infty$ and that $a_{ij},b_j,c,f\in \mathcal{C}^\infty(\overline{\Omega})$. Let $u\in H^1_0(\Omega)$ be a weak solution of $\mathcal{D}_f$. Then, $u\in \mathcal{C}^\infty(\Omega)$ and $\forall m\in \NN$:
     $$
-      \norm{u}_{H^{m+1}(\Omega)}\leq C\left(\norm{f}_{H^{m-1}(\Omega)}+\norm{u}_{L^2(\Omega)}\right)
+      \norm{u}_{H^{m}(\Omega)}\leq C\left(\norm{f}_{H^{m}(\Omega)}+\norm{u}_{L^2(\Omega)}\right)
     $$
   \end{corollary}
   \subsubsection{Weak maximum principle for weak solutions of divergence-form elliptic PDEs}
@@ -220,9 +393,6 @@
   \begin{corollary}
     For each $f\in L^2(\Omega)$, the problem $\mathcal{D}_f$ has a unique weak solution $u_f$. Moreover, if $\Fr{\Omega}\in\mathcal{C}^1$, then $u_f\in H^2(\Omega)$ and $f\mapsto u_f$ is a bounded linear operator from $L^2(\Omega)$ to $H^2(\Omega)$. If $\Fr{\Omega}\in\mathcal{C}^{m+1}$, $b_j\in\mathcal{C}^{m-1}$ and $f\in H^{m-1}(\Omega)$, then $u_f\in H^{m+1}(Omega)$ and $f\mapsto u_f$ is a bounded linear operator from $H^{m-1}(\Omega)$ to $H^{m+1}(\Omega)$.
   \end{corollary}
-  \begin{definition}
-    If the weak solution $u_f$ of the problem $\mathcal{D}_f$ is in $H^1_0(\Omega)\cap W^{2,p}(\Omega)$ for some $p\in [1,\infty)$, then we say that $u_f$ is called a \emph{strong solution} of $\mathcal{D}_f$. If $u_f\in \mathcal{C}^2(\Omega)\cap H^1_0(\Omega)$, then we say that $u_f$ is a \emph{classical solution} of $\mathcal{D}_f$.
-  \end{definition}
   \begin{theorem}
     Let $1<p<\infty$ and $\Omega\subset\RR^d$ be open and bounded with $\mathcal{C}^{m+1}$ boundary, $m\geq 1$. Let $a_{ij}\in \mathcal{C}^m(\overline{\Omega})$, $b_j,c\in \mathcal{C}^{m-1}(\overline{\Omega})$ and $Lu=-\sum_{i,j=1}^d \partial_i(a_{ij}\partial_j u)+\sum_{j=1}^d b_j\partial_j u+cu$ be an elliptic operator. Then, for any $f\in W^{m-1,p}(\Omega)$, if $u\in H^1_0(\Omega)$ is a weak solution of $\mathcal{D}_f$, then $u\in W^{m+1,p}(\Omega)$ and:
     $$
