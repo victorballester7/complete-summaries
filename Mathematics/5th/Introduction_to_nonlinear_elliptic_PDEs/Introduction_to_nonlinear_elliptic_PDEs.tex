@@ -335,7 +335,7 @@
     $$
   \end{corollary}
   \subsubsection{Weak maximum principle for weak solutions of divergence-form elliptic PDEs}
-  \begin{lemma}
+  \begin{lemma}\label{INEPDE:lemma1_weak_max}
     Let $\Omega\subseteq\RR^d$ open and $u\in H^1(\Omega)$. Then:
     $$
       u^{+}:=\begin{cases}
@@ -379,16 +379,26 @@
     \end{itemize}
     Then, $u\almoste{\leq}0$.
   \end{theorem}
+  \begin{proof}
+    Take $v=u^+\in H^1_0(\Omega)$ by \mcref{INEPDE:lemma1_weak_max}. Then, we have:
+    $$
+      0\leq \theta {\norm{\grad u^+}_{L^2}}^2\leq\!\! \int_{\{u>0\}}\!\!\sum_{i,j=1}^d a_{ij}\partial_iu\partial_ju+cu^2=\!\!\int_{\{u>0\}} \!\!fu\leq 0
+    $$
+    where in the second inequality we used the ellipticity of $L$. Thus, we must have $\grad u^+=0$ a.e. in $\Omega$, which implies $u^+=0$ a.e. in $\Omega$, because $u^+|_{\Fr{\Omega}}=0$.
+  \end{proof}
   \begin{theorem}[Weak maximum principle]
-    Let $\Omega\subseteq\RR^d$ open and bounded with $\mathcal{C}^1$ boundary, $a_{ij}=a_{ji},b_j,c\in L^\infty(\Omega)$, $L=-\sum_{i,j=1}^d\partial_i(a_{ij}\partial_j)+\sum_{j=1}^db_j\partial_j+c$ be elliptic and $f\in L^2(\Omega)$ with $f\almoste{\leq} 0$. Let $u\in H^1(\Omega)$ be such that:
+    Let $\Omega\subseteq\RR^d$ open and bounded with $\mathcal{C}^1$ boundary, $a_{ij}=a_{ji},b_j,c\in L^\infty(\Omega)$, $c \almoste{\geq}0$, $L=-\sum_{i,j=1}^d\partial_i(a_{ij}\partial_j)+\sum_{j=1}^db_j\partial_j+c$ be elliptic and $f\in L^2(\Omega)$ with $f\almoste{\leq} 0$. Let $u\in H^1(\Omega)$ be such that:
     \begin{itemize}
-      \item $\displaystyle \int_\Omega\left[\sum_{i,j=1}^da_{ij}\partial_iu\partial_jv+cuv\right]=\int_\Omega fv$ $\forall v\in H^1_0(\Omega)$
+      \item $\displaystyle \int_\Omega\left[\sum_{i,j=1}^da_{ij}\partial_iu\partial_jv+ \sum_{j=1}^db_jv\partial_ju+cuv\right]=\int_\Omega fv$ $\forall v\in H^1_0(\Omega)$
       \item $\Tr_{\partial\Omega}u\almoste{\leq}0$
     \end{itemize}
     Then, $u\almoste{\leq}0$.
   \end{theorem}
+  \begin{proof}
+    TODO
+  \end{proof}
   \begin{corollary}
-    For each $f\in L^2(\Omega)$, the problem $\mathcal{D}_f$ has a unique weak solution $u_f$. Moreover, if $\Fr{\Omega}\in\mathcal{C}^1$, then $u_f\in H^2(\Omega)$ and $f\mapsto u_f$ is a bounded linear operator from $L^2(\Omega)$ to $H^2(\Omega)$. If $\Fr{\Omega}\in\mathcal{C}^{m+1}$, $b_j\in\mathcal{C}^{m-1}$ and $f\in H^{m-1}(\Omega)$, then $u_f\in H^{m+1}(Omega)$ and $f\mapsto u_f$ is a bounded linear operator from $H^{m-1}(\Omega)$ to $H^{m+1}(\Omega)$.
+    For each $f\in L^2(\Omega)$, the problem $\mathcal{D}_f$ has a unique weak solution $u_f$. Moreover, if $\Fr{\Omega}\in\mathcal{C}^1$, then $u_f\in H^2(\Omega)$ and $f\mapsto u_f$ is a bounded linear operator from $L^2(\Omega)$ to $H^2(\Omega)$. If $\Fr{\Omega}\in\mathcal{C}^{m+1}$, $b_j\in\mathcal{C}^{m-1}$ and $f\in H^{m-1}(\Omega)$, then $u_f\in H^{m+1}(\Omega)$ and $f\mapsto u_f$ is a bounded linear operator from $H^{m-1}(\Omega)$ to $H^{m+1}(\Omega)$.
   \end{corollary}
   \begin{theorem}
     Let $1<p<\infty$ and $\Omega\subset\RR^d$ be open and bounded with $\mathcal{C}^{m+1}$ boundary, $m\geq 1$. Let $a_{ij}\in \mathcal{C}^m(\overline{\Omega})$, $b_j,c\in \mathcal{C}^{m-1}(\overline{\Omega})$ and $Lu=-\sum_{i,j=1}^d \partial_i(a_{ij}\partial_j u)+\sum_{j=1}^d b_j\partial_j u+cu$ be an elliptic operator. Then, for any $f\in W^{m-1,p}(\Omega)$, if $u\in H^1_0(\Omega)$ is a weak solution of $\mathcal{D}_f$, then $u\in W^{m+1,p}(\Omega)$ and:
