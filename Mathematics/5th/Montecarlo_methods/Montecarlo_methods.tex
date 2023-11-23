@@ -459,5 +459,75 @@
     $$
   \end{lemma}
   \subsection{Computation of sensitivities}
+  In this chapter we aim to construct Montecarlo methods in order to compute sensitivities of the price of an option. From the PDE point of view, we aim to compute the derivatives of the solution ${(\vf{X}_t^{\vf{x}})}_{t\geq 0}$ of the SDE:
+  $$
+    \begin{cases}
+      \dd{\vf{X}_t}=\vf{b}(\vf{X}_t)\dd{t}+\vf{\sigma}(\vf{X}_t)\dd{\vf{B}_t} \\
+      \vf{X}_0=\vf{x}
+    \end{cases}
+  $$
+  \subsubsection{Finite difference method}
+  Here we will focus on the case $d=1$.
+  \begin{definition}
+    Let $u(0,x):=\Exp(g(X_T^x))$ and $\tilde{u}^n(0,x):=\frac{1}{n}\sum_{i=1}^n g(\tilde{X}_T^{x,(i)})$ where $\tilde{X}_T^{x,(i)}$ are \iid copies of $\tilde{X}_T^x$. We define the \emph{finite difference estimator} as:
+    \begin{align*}
+      \partial_xu(0,x) & \approx \frac{u(0,x+\varepsilon) - u(0,x-\varepsilon)}{2\varepsilon}                     \\
+                       & \approx \frac{\tilde{u}^n(0,x+\varepsilon) - \tilde{u}^n(0,x-\varepsilon)}{2\varepsilon}
+    \end{align*}
+  \end{definition}
+  \begin{proposition}
+    If $g$ is smooth enough, then:
+    $$
+      \Var\left( \frac{\tilde{u}^n(0,x+\varepsilon) - \tilde{u}^n(0,x-\varepsilon)}{2\varepsilon}\right)\approx \frac{1}{n}\Var(g'(X_T^x))
+    $$
+  \end{proposition}
+  \begin{remark}
+    When $g$ is irregular, the optimal choice of $\varepsilon$ is not clear, as the bias increases with $\varepsilon$ and the variance increases as $\varepsilon$ decreases.
+  \end{remark}
+  \subsubsection{Black-Scholes model}
+  \begin{proposition}
+    Recall the one-dimensional \emph{Black-Scholes model}:
+    $$
+      \dd{X}_t=r X_t\dd{t}+\sigma X_t\dd{B}_t
+    $$
+    Then: $$
+      \partial_x \Exp(g(X_T^x))=\frac{1}{\sigma x T}\Exp(g(X_T^x)B_T)
+    $$
+  \end{proposition}
+  \subsubsection{Pathwise differentiation}
+  \begin{theorem}
+    If $\vf{b},\vf\sigma\in \mathcal{C}^2$ with bounded derivatives, then the flow ${\vf{x}}\mapsto \vf{X}_t^{\vf{x}}$ is $\mathcal{C}^1$ a.s.\ and the \emph{tangent process} $\vf{DX}^{\vf{x}}$ satisfies:
+    $$
+      \vf{DX}^{\vf{x}}_t=\vf{I}_d+\!\int_0^t\! \vf{Db}(\vf{X}_s^{\vf{x}})\vf{DX}_s^{\vf{x}}\dd{s}+\sum_{j=1}^{d}\int_0^t\! \vf{D\sigma}_j(\vf{X}_s^{\vf{x}})\vf{DX}_s^{\vf{x}}\dd{\vf{B}_s^j}
+    $$
+    where $\vf{D\sigma}_j$ is the $j$-th column of $\vf{D\sigma}$.
+  \end{theorem}
+  \begin{remark}
+    In one dimension, we have:
+    $$
+      \partial_xX_t^x=1+\int_0^t b'(X_s^x)\grad X_s^x\dd{s}+\int_0^t \sigma'(X_s^x)\grad X_s^x\dd{B}_s
+    $$
+    which yields:
+    $$
+      \partial_xX_t^x\!=\!\expp{\int_0^t\!\left[b'(X_s^x)-\frac{1}{2}{\sigma'(X_s^x)}^2\right]\dd{s} \!+\!\! \int_0^t \sigma'(X_s^x)\dd{B}_s\!}
+    $$
+  \end{remark}
+  \begin{proposition}
+    If $\vf{b},\vf\sigma\in \mathcal{C}^2$ and $g\in\mathcal{C}^1$ with bounded derivatives, then:
+    $$
+      \grad \Exp(g(\vf{X}_T^{\vf{x}}))=\Exp\left(\grad g(\vf{X}_T^{\vf{x}})\grad \vf{X}_T^{\vf{x}}\right)
+    $$
+  \end{proposition}
+  \begin{remark}
+    In practice, to find the derivative of $\vf{X}_T^{\vf{x}}$ we proceed as in the deterministic case, i.e.\ solving the coupled variational equations.
+  \end{remark}
+  \subsubsection{Malliavin differentiation}
+  \begin{proposition}
+    If $\vf{b},\vf\sigma\in \mathcal{C}^2$ with bounded derivatives, $\vf\sigma$ is uniformly elliptic and $g$ is measurable with polynomial growth, then:
+    $$
+      \grad \Exp(g(\vf{X}_T^{\vf{x}}))=\Exp\left[g(\vf{X}_T^{\vf{x}})\frac{1}{T}\transpose{\left(\int_0^T\transpose{(\vf\sigma^{-1}(X_t^{\vf{x}})\vf{DX}_t^{\vf{x}})}\!\dd{\vf{B}_t}\!\right)\!\!}\right]
+    $$
+  \end{proposition}
+  \subsection{American options}
 \end{multicols}
 \end{document}

@@ -495,7 +495,7 @@
     $$
   \end{remark}
   \begin{definition}
-    Let $F\in \Homeo(\TT^1)$ and $X\subseteq \TT^1$ be closed and invariant. We say that $X$ is \emph{minimal} if $\forall x\in X$, $\overline{\mathcal{O}(x)}=X$. If $X=\TT^1$, we say that $F$ is \emph{minimal}.
+    Let $F\in \Homeo(\TT^1)$ and $X\subseteq \TT^1$ be nonempty closed invariant set. We say that $X$ is \emph{minimal} if $\forall x\in X$, $\overline{\mathcal{O}(x)}=X$. If $X=\TT^1$, we say that $F$ is \emph{minimal}.
   \end{definition}
   \begin{proposition}
     Let $F\in \Homeo(\TT^1)$ and $X\subseteq \TT^1$ be a closed and invariant. Then, $X$ is minimal $\iff$ $\forall Y\subseteq X$ closed, invariant and non-empty, $Y=X$.
@@ -511,6 +511,67 @@
     First we assume $q=1$ and $p=0$. Let $f\in \mathcal{D}^0(\TT^1)$ be a lift of $F$. By \mcref{ADS:characterisation_rot_number}, we have that $\exists x\in \RR$ with $f(x)=x$. So $\Fix(f)\ne \varnothing$, and it is closed and invariant by translations. Now we write $\RR\setminus\Fix(f)$ as union of open intervals. Let $(a,b)$ be one connected component. Inside it, we must have either $f(x)>x$ or $f(x)<x$. In the first case we have that $(f^n(x))$ is strictly increasing $\forall x\in (a,b)$ and so $\omega(x)=\{b\}$ and $\alpha(x)=\{a\}$ $\forall x\in(a,b)$. The second case is exactly the opposite.
 
     Now we do the general case. Assume $\rho(f)=\frac{p}{q}$. Then, again by \mcref{ADS:characterisation_rot_number}, we have that $\exists x\in \RR$ with $f^q(x)=x+p$. Assume we have $x'\in\RR$ and $p',q'\in\ZZ$ with $q'\geq 1$ such that $f^{q'}(x')=x'+p'$. By \mcref{ADS:characterisation_rot_number}, we have that $\frac{p}{q}=\frac{p'}{q'}$ and so $\exists k\in\NN$ such that $q'=kq$ and $p'=kp'$ because $\frac{p}{q}$ is irreducible. Now let $g=f^q-p$. Then, an easy calculation shows that $g^k(x')=x'$. But $\rho(g)=0$ and in the previous case we have seen that the periodic points are only fixed points, so $k=1$. For the second part, we proceed as in the previous case with the function $g=f^q-p$.
+  \end{proof}
+  \subsubsection{Irrational rotation number}
+  \begin{definition}
+    Given $\mu\in \mathcal{M}(\TT^1)$ and $U\subseteq \TT^1$ open, we define the \emph{measure of $U$} as:
+    $$
+      \mu(U):=\sup\{\mu(\varphi):\varphi\in\mathcal{C}(\TT^1),\varphi\leq \indi{U}\}
+    $$
+    Let $A\subset \mathcal{B}(\TT^1)$ be a Borel measurable set. We define the \emph{measure of $A$} as:
+    $$
+      \mu(A):=\inf\{\mu(U):A\subseteq U, U\text{ open}\}
+    $$
+  \end{definition}
+  \begin{remark}
+    With this definition we have the usual properties of measure defined on subsets of $\TT^1$. In particular, $\text{Leb}([a,b])=b-a$ and $\delta_x(A)=\indi{x\in A}$ $\forall x\in \TT^1$ and $A\subseteq \TT^1$.
+  \end{remark}
+  \begin{definition}
+    Let $\mu\in \mathcal{M}(\TT^1)$. We define the \emph{support of $\mu$} as:
+    $$
+      \supp\mu:=\{x\in\TT^1:\forall U\subseteq \TT^1\text{ open with } x\in U,\mu(U)>0\}
+    $$
+  \end{definition}
+  \begin{remark}
+    Note that $\supp\mu $ is a closed set.
+  \end{remark}
+  \begin{remark}
+    $\supp\text{Leb}=\TT^1$ and $\supp\delta_{x}=\{x\}$.
+  \end{remark}
+  \begin{proposition}
+    Let $\mu\in \mathcal{M}(\TT^1)$ and $F\in\Homeo(\TT^1)$. $\mu$ is invariant by $F$ if and only if $\forall A\subseteq \TT^1$ Borel set, $\mu(A)=\mu(F^{-1}(A))$.
+  \end{proposition}
+  \begin{lemma}
+    Let $\mu\in \mathcal{M}(\TT^1)$. We have a lift to a measure $\mu$ on $\RR$ invariant by integer translations: $\mu(A+k)=\mu(A)$ $\forall k\in\ZZ$ and $A\subseteq \mathcal{B}(\RR)$.
+  \end{lemma}
+  \begin{definition}
+    Let $\mu\in\mathcal{M}(\TT^1)$. We define $h_\mu:[0,1]\to [0,1]$ as the function with $h_\mu(0)=0$ and $h_\mu(x)=\mu([0,x))$ for $0<x\leq 1$. This definition extends to a non-decreasing function $h_\mu:\RR\to\RR$ such that $h_\mu(x+k)=h_\mu(x)+k$ $\forall k\in\ZZ$
+  \end{definition}
+  \begin{lemma}
+    Let $\mu\in\mathcal{M}(\TT^1)$. We say that $\mu$ has atoms if $\exists x\in\TT^1$ such that $\mu(\{x\})>0$
+  \end{lemma}
+  \begin{lemma}\label{ADS:lemma_atom}
+    Let $\mu\in\mathcal{M}(\TT^1)$. $h_\mu$ is continuous if and only if $\forall x\in\RR$, $\mu(\{x\})=0$, that is $\mu$ has no atoms.
+  \end{lemma}
+  \begin{definition}
+    A subset $C\subseteq \RR$ is a \emph{Cantor set} if it is closed, it has no isolated points and it has empty interior.
+  \end{definition}
+  \begin{theorem}
+    Let $F\in\Homeo(\TT^1)$ with $\rho(F)\notin\quot{\QQ}{\ZZ}$. Then, there exists a surjective continuous map $H:\TT^1\to \TT^1$ such that $H\circ F=R_{\rho(F)}\circ H$. Moreover, we have exactly one of the following two properties:
+    \begin{enumerate}
+      \item $F$ is conjugated to $R_{\rho(F)}$ and in that case $F$ is minimal.
+      \item $\exists X\subsetneq \TT^1$ minimal which is a Cantor set and $X=\Omega(F)$.
+    \end{enumerate}
+  \end{theorem}
+  \begin{proof}
+    Let $\mu\in\mathcal{M}_F(\TT^1)$ and consider $h_\mu:\RR\to\RR$ as defined above. Now assume $x\in \TT^1$ is such that $\mu(\{x\})=c>0$, then by invariance $\mu(A_n)=c>0$, where $A_n:=\{F^n(x)\}$. Note that since $\mu\leq 1$, $(A_n)$ cannot be disjoint. So $\exists n,m\in\NN$ with $n<m$ such that $F^n(x)=F^m(x)$. But then $F^{m-n}(x)=x$ and so $x$ is periodic, which is not possible since $\rho(F)\in\quot{\QQ}{\ZZ}$ by \mcref{ADS:characterisation_rot_number}. Thus, $\mu$ has no atoms and so $h_\mu$ is continuous by \mcref{ADS:lemma_atom}. Now, define $H:\TT^1\to \TT^1$ as the projection of $h_\mu$ to $\TT^1$, which is continuous and surjective. Let $f\in\mathcal{D}^0(\TT^1)$ be a lift of $F$. Then:
+    $$
+      h(f(x))-h(f(0))=\mu([f(0),f(x)))=\mu([0,x))=h(x)
+    $$
+    where we have used the invariance of $\mu$. Thus, $h\circ f=R_{h(f(0))}\circ h$ and necessarily we need $h(f(0))=\rho(R_{h(f(0))})=\rho(f)$, by the invariance of the rotation number by semi-conjugacy. This gives $H\circ F=R_{\rho(F)}\circ H$. Now, we can express the dichotomy as follows: either $\supp\mu=\TT^1$ or $\supp\mu=:X\subsetneq \TT^1$. The first case is equivalent to $h$ being strictly increasing and so $h$ is a homeomorphism. Then, $H$ conjugates $F$ and $R_{\rho(F)}$ and so $F$ is minimal because $R_{\rho(F)}$ is minimal. In the second case, we have that $X$ is a nonempty closed invariant set that has no isolated points because $\mu$ has no atoms. To show that $X$ is minimal, let $\TT^1=X\sqcup U$ with $U$ open, and so it can be written as a countable union of open intervals. Let $D\subseteq X$ be the set containing the endpoints of those intervals and let $$
+      Y=\{y\in\TT^1:H^{-1}(\{y\})\text{ is a closed interval}\}
+    $$
+    $Y$ is countable. Now take $M\subseteq X$ be nonempty, closed and invariant. We want to prove that $M=X$. Then, $H(M)\subseteq \TT^1$ is nonempty, closed and invariant by $R_{\rho(F)}$. But $R_{\rho(F)}$ is minimal, so $H(M)=\TT^1$.
   \end{proof}
 \end{multicols}
 \end{document}
