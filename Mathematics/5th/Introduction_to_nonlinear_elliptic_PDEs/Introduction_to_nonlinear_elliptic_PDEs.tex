@@ -518,5 +518,35 @@
   \begin{theorem}[Schaefer fixed point]
     Let $(E, \norm{\cdot})$ be Banach and $f:E\to E$ be a continuous and compact. Suppose that $\exists M>0$ such that $\forall (\lambda,u)\in [0,1]\times E$ with $u=\lambda f(u)$ we have $\norm{u}<M$. Then, $f$ has at least a fixed point, that lies in $\overline{B(0,M)}$.
   \end{theorem}
+  \subsection{Variational methods for nonlinear elliptic PDEs}
+  In this section we will solve a PDE $Lu=f(x,u,\grad u)$ by minimizing a certain functional under some constraints.
+  \subsection{Linear case}
+  \begin{proposition}
+    Consider the problem:
+    $$
+      \begin{cases}
+        Lu:=-\sum_{i,j=1}^d \partial_i(a_{ij}\partial_j u)+cu=f \\
+        u|_{\partial\Omega}=0
+      \end{cases}
+    $$
+    with $L$ elliptic, $a_{ij},c\in L^\infty(\Omega)$ with $a_{ij}= a_{ji}$, $c\geq 0$, and $f\in L^2(\Omega)$. Then, the problem has a unique weak solution $u\in H_0^1(\Omega)$, and it minimizes the functional:
+    $$
+      I(u)=\frac{1}{2}\int_\Omega\sum_{i,j=1}^d a_{ij}\partial_iu\partial_ju+cu^2-\int_\Omega fu
+    $$
+  \end{proposition}
+
+  \begin{lemma}\label{INEPDE:optimization}
+    Let $X$ be a Banach space and $\Phi:X\to \RR$ be continuous and convex, then it is weakly sequentially lower semicontinuous, that is, if $u_n\rightharpoonup u$ in $X$, then $\Phi(u)\leq \liminf_{n\to\infty}\Phi(u_n)$.
+  \end{lemma}
+  \begin{theorem}
+    Let $(X,\norm{\cdot})$ be a reflexive Banach space and $\Phi:X\to \RR$ be continuous, convex and such that $\displaystyle \lim_{\norm{u}\to\infty}\Phi(u)=+\infty$. Then, $\Phi$ has a minimizer. This minimizer is unique if $\Phi$ is strictly convex.
+  \end{theorem}
+  \begin{proof}
+    Let $\{u_n\}_{n\in\NN}\subset X$ be a minimizing sequence. Then, $\sup_{n\in\NN}\Phi(u_n)<\infty$, so by the coercivity property of $\Phi$ we have that $\{u_n\}_{n\in\NN}$ is bounded, and so $\{u_n\}_{n\in\NN}$ has a weakly convergent subsequence $\{u_{n_k}\}_{k\in\NN}$ with limit $u\in X$. By \mcref{INEPDE:optimization} we have:
+    $$
+      \Phi(u)\leq \lim_{k\to\infty}\Phi(u_{n_k})=\inf_{u\in X}\Phi(u)
+    $$
+    But $\Phi(u)\geq \inf_{u\in X}\Phi(u)$, so $u$ is a minimizer.
+  \end{proof}
 \end{multicols}
 \end{document}
