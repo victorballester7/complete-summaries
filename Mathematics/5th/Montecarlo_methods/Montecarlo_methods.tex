@@ -529,5 +529,187 @@
     $$
   \end{proposition}
   \subsection{American options}
+  \begin{definition}
+    In a frictionless market, the \emph{price of an American option} is given by:
+    $$
+      v(0,x)=\sup_{\tau\in\mathcal{T}_{0,T}}\Exp\left(\exp{-r\tau}g(X_\tau)\right)
+    $$
+    where $r$ is the \emph{risk-free interest rate}, $\mathcal{T}_{0,T}$ is the set of stopping times with values in $[0,T]$ and:
+    $$
+      \dd{X_t}=r X_t\dd{t}+\sigma (X_t)\dd{B}_t\quad X_0=x
+    $$
+  \end{definition}
+  In this section we will introduce efficient algorithms to approximate the price of an American option.
+  \subsubsection{Discretization}
+  \begin{definition}
+    Fix a time grid ${(t_i)}_{0\leq i\leq m}$ with $t_0=0$ and $t_m=T$. The \emph{discretization method} consists in replacing:
+    \begin{enumerate}
+      \item $\mathcal{T}_{0,T}$ by $\tilde{\mathcal{T}}_{0,T}^m$, the set of stopping times with values in ${(t_i)}_{0\leq i\leq m}$.
+      \item $X$ by $\tilde{X}^m$, the Euler scheme.
+    \end{enumerate}
+  \end{definition}
+  \begin{proposition}
+    We can compute the price of an American option using the discretization method by the following recursive formula:
+    $$
+      \begin{cases}
+        \tilde{v}^m(t_m,\tilde{X}^m_{t_m})=g(\tilde{X}^m_{t_m}) \\
+        \begin{aligned}
+          \tilde{v}^m & (t_i,\tilde{X}^m_{t_i})=                                                                                                                       \\
+                      & =\max\left\{ g(\tilde{X}^m_{t_i}),\exp{-\frac{rT}{m}}\Exp\left(\tilde{v}^m(t_{i+1},\tilde{X}^m_{t_{i+1}})\mid \tilde{X}^m_{t_i}\right)\right\}
+        \end{aligned}
+      \end{cases}
+    $$
+  \end{proposition}
+  \begin{proposition}
+    If $g$ is Lipschitz continuous, then:
+    $$
+      \abs{v(0,x)-\tilde{v}^m(0,x)}\leq \frac{C}{\sqrt{m}}
+    $$
+  \end{proposition}
+  \begin{remark}
+    In the sequel, we assume that $r = 0$ and we write $X$ instead of $\tilde{X}^m$ for the sake of simplicity.
+  \end{remark}
+  \subsubsection{Naive approach}
+  \begin{definition}
+    The \emph{naive approach} consists in proceeding as follows:
+    \begin{enumerate}
+      \item Generate ${(X_{t_1}^j)}_{1\leq j\leq n}$ \iid copies of $X_{t_1}$ given $X_0=x$ and approximate:
+            $$
+              \tilde{v}^m(0,x)\approx\max \left\{ g(x),\frac{1}{n}\sum_{j=1}^n \tilde{v}^m(t_1,X_{t_1}^j)\right\}
+            $$
+      \item For each $1\leq j\leq n$, generate ${(X_{t_2}^{j,k})}_{1\leq k\leq n}$ \iid copies of $X_{t_2}$ given $X_{t_1}=X_{t_1}^j$ and approximate:
+            $$
+              \tilde{v}^m(t_1,X_{t_1}^j)\approx\max \left\{ g(X_{t_1}^j),\frac{1}{n}\sum_{k=1}^n \tilde{v}^m(t_2,X_{t_2}^{j,k})\right\}
+            $$
+      \item For each ${(j_1,\ldots,j_{m-1})}\in{\{1,\ldots,n\}}^{m-1}$, generate ${(X_{t_m}^{j_1,\ldots,j_{m-1},k})}_{1\leq k\leq n}$ \iid copies of $X_{t_m}$ given $X_{t_{m-1}}=X_{t_{m-1}}^{j_1,\ldots,j_{m-1}}$ and approximate:
+            \begin{multline*}
+              \tilde{v}^m(t_{m-1},X_{t_{m-1}}^{j_1,\ldots,j_{m-1}})\approx\\\approx\max\! \left\{\! g(X_{t_{m-1}}^{j_1,\ldots,j_{m-1}}),\frac{1}{n}\sum_{k=1}^n\! \tilde{v}^m(t_m,X_{t_m}^{j_1,\ldots,j_{m-1},k})\!\right\}
+            \end{multline*}
+    \end{enumerate}
+    \begin{remark}
+      This method provides a consistent estimator. However, it requires to generate $\sum_{i=1}^mn^i\sim n^m$ random variables. So the computational cost of the method increases exponentially with the number of exercise dates and becomes prohibitive for applications to the pricing of American options.
+    \end{remark}
+  \end{definition}
+  \subsubsection{Regression methods}
+  \begin{definition}[Tsitsiklis-Van Roy method]
+    The \emph{Tsitsiklis-Van Roy method} consists in approximate the conditional expectation by a projection on a finite dimensional subspace of $L^2$. Namely, it holds:
+    \begin{multline*}
+      \Exp\left(\tilde{v}^m(t_{i+1},X_{t_{i+1}})\mid X_{t_i}\right)=\\=\argmin_{Y\in L^2(X_{t_i})}\Exp\left(\left(\tilde{v}^m(t_{i+1},X_{t_{i+1}})-Y\right)^2\right)
+    \end{multline*}
+    Here $L^2(X_{t_i})$ is the collection of square-integrable $\sigma(X_{t_i})$-measurable random variables. Then, we choose a family of basis functions $\vf\varphi=(\varphi_1,\ldots,\varphi_\ell)$ and approximate:
+    $$
+      \Exp\left(\tilde{v}^m(t_{i+1},X_{t_{i+1}})\mid X_{t_i}\right)\approx \sum_{j=1}^\ell \alpha_j^i\varphi_j(X_{t_i})
+    $$
+    where:
+    $$
+      \vf\alpha^i=\argmin_{\vf\alpha\in\RR^\ell}\Exp\left[\left(\tilde{v}^m(t_{i+1},X_{t_{i+1}})-\sum_{j=1}^\ell \alpha_j\varphi_j(X_{t_i})\right)^2\right]
+    $$
+    One can check that $$
+      \vf\alpha^i={\Exp(\vf\varphi(X_{t_i})\transpose{\vf\varphi(X_{t_i})})}^{-1}\Exp(\vf\varphi(X_{t_i})\tilde{v}^m(t_{i+1},X_{t_{i+1}}))
+    $$
+    provided that $\Exp(\vf\varphi(X_{t_i})\transpose{\vf\varphi(X_{t_i})})$ is non-degenerate.
+  \end{definition}
+  \begin{proposition}
+    An implementation of the Tsitsiklis-Van Roy method is as follows:
+    \begin{enumerate}
+      \item Generate ${(X_{t_1}^j,\ldots,X_{t_m}^j)}_{1\leq j\leq n}$ \iid copies of $(X_{t_1},\ldots,X_{t_m})$.
+      \item Set $V_m^j=g(X_{t_m}^j)$ for all $1\leq j\leq n$.
+      \item Recursively for $i=m-1,\ldots,1$, compute:
+            $$
+              \vf{\tilde{\alpha}}^i=\argmin_{\vf\alpha\in\RR^n}\frac{1}{n}\sum_{j=1}^n\left(V_{i+1}^j-\sum_{k=1}^\ell\alpha_k\varphi_k(X_{t_i}^j)\right)^2
+            $$
+            and set:
+            $$
+              V_i^j=\max\left\{ g(X_{t_i}^j),\sum_{k=1}^\ell\tilde{\alpha}_k^i\varphi_k(X_{t_i}^j)\right\}
+            $$
+      \item Set:
+            $$V_0=\max\left\{ g(x),\frac{1}{n}\sum_{j=1}^n V_1^j\right\}$$
+    \end{enumerate}
+  \end{proposition}
+  \begin{theorem}
+    If $$
+      \Exp(\tilde{v}^m(t_{i+1},X_{t_{i+1}})\mid X_{t_i})=\sum_{j=1}^\ell \alpha_j^i\varphi_j(X_{t_i})
+    $$
+    then the Tsitsiklis-Van Roy estimator $V_0$ is consistent, i.e. $V_0\overset{\Prob}{\longrightarrow}v(0,x)$ as $n\to\infty$.
+  \end{theorem}
+  \begin{definition}[Longstaff-Schwartz method]
+    The \emph{Longstaff-Schwartz method} consists in approximate the optimal stopping time instead of the value function itself. Recall that:
+    $$
+      \tilde{v}^m(0,x)=\sup_{\tau\in\tilde{\mathcal{T}}_{0,T}^m}\Exp\left(g(X_\tau)\right)=\Exp(g(X_{\tau^*}))
+    $$
+    where $$
+      \tau^*=\inf\{t_i: g(X_{t_i})\geq \Exp(\tilde{v}^m(t_{i+1},X_{t_{i+1}})\mid X_{t_i})\}
+    $$
+  \end{definition}
+  \begin{proposition}
+    The implementation of the Longstaff-Schwartz method is as follows:
+    \begin{enumerate}
+      \item Generate ${(X_{t_1}^j,\ldots,X_{t_m}^j)}_{1\leq j\leq n}$ \iid copies of $(X_{t_1},\ldots,X_{t_m})$.
+      \item Define the stopping rule $\tilde{\tau}_m=t_m$ and apply it to the trajectories simulated just before, i.e.\ set $V_m^j=g(X_{\tilde{\tau}_m}^j)=g(X_{t_m}^j)$ for all $1\leq j\leq n$.
+      \item Recursively for $i=m-1,\ldots,1$, compute:
+            $$
+              \vf{\tilde\alpha}^i=\argmin_{\vf\alpha\in\RR^n}\frac{1}{n}\sum_{j=1}^n\left(V_{i+1}^j-\sum_{k=1}^\ell\alpha_k\varphi_k(X_{t_i}^j)\right)^2
+            $$
+            Then, define for any sample path $(X_{t_1},\ldots,X_{t_m})$, the stopping rule:
+            $$
+              \tilde{\tau}_i=\begin{cases}
+                t_i                & \text{ if } g(X_{t_i})\geq \sum_{k=1}^\ell\tilde{\alpha}_k^i\varphi_k(X_{t_i}) \\
+                \tilde{\tau}_{i+1} & \text{ otherwise}
+              \end{cases}
+            $$
+            and apply it to the trajectories simulated just before, i.e.\ set for $1\leq j\leq n$:
+            $$
+              V_i^j=\begin{cases}
+                g(X_{t_i}^j) & \text{ if } g(X_{t_i}^j)\geq \sum_{k=1}^\ell\tilde{\alpha}_k^i\varphi_k(X_{t_i}^j) \\
+                V_{i+1}^j    & \text{ otherwise}
+              \end{cases}
+            $$
+      \item Define the stopping rule
+            $$
+              \tilde{\tau}_0=\begin{cases}
+                0              & \text{ if } g(x)\geq \frac{1}{n}\sum_{j=1}^n V_1^j \\
+                \tilde{\tau}_1 & \text{ otherwise}
+              \end{cases}
+            $$
+            and apply it to the trajectories simulated just before, i.e.\ set:
+            $$
+              V_0=\frac{1}{n} \sum_{j=1}^ng(X_{\tilde{\tau}_0}^j)=\max\left\{ g(x),\frac{1}{n}\sum_{j=1}^n V_1^j\right\}
+            $$
+    \end{enumerate}
+  \end{proposition}
+  \begin{theorem}
+    If $$
+      \Exp(\tilde{v}^m(t_{i+1},X_{t_{i+1}})\mid X_{t_i})=\sum_{j=1}^\ell \alpha_j^i\varphi_j(X_{t_i})
+    $$
+    then the Longstaff-Schwartz estimator $V_0$ is consistent, i.e. $V_0\overset{\Prob}{\longrightarrow}v(0,x)$ as $n\to\infty$. Otherwise, the limit corresponds to the value of the option under a sub-optimal stopping rule and so it underestimates the
+    true price.
+  \end{theorem}
+  \begin{remark}
+    However, when $n$ is finite, $\tilde{\tau}_0$ is not a stopping time since it uses information about the future. Thus, we should add a fifth step to the algorithm:
+    \begin{enumerate}
+      \setcounter{enumi}{4}
+      \item Generate ${(X_{t_1}^{n+j},\ldots,X_{t_m}^{n+j})}_{1\leq j\leq \tilde{n}}$ \iid copies of $(X_{t_1},\ldots,X_{t_m})$ and apply the stopping rule $\tilde{\tau}_0$ to these new trajectories, i.e. set:
+            $$
+              \underline{V}_0=\frac{1}{\tilde{n}} \sum_{j=1}^{\tilde{n}}g(X_{\tilde{\tau}_0}^{n+j})
+            $$
+    \end{enumerate}
+  \end{remark}
+  \begin{lemma}[Rogers's lemma]
+    We have:
+    $$
+      v(0,x)=\inf_{M\in\mathcal{M}_{0,T}}\Exp\left(\sup_{t\in[0,T]}g(X_t)-M_t\right)
+    $$
+    where $\mathcal{M}_{0,T}$ is the set of continuous martingales on $[0,T]$.
+  \end{lemma}
+  \begin{remark}
+    Roughly speaking, we can construct a nearly optimal martingale $\tilde{M}$ of the problem above and simulate \iid copies of $(X,\tilde{M})$ to compute the Monte Carlo estimator:
+    $$
+      \overline{V}_0=\frac{1}{\tilde{n}} \sum_{j=1}^{\tilde{n}}\sup_{t\in[0,T]}g(X_t^{j})-\tilde{M}_t^{j}
+    $$
+    This provides a confidence interval for the true price given by:
+    \begin{multline*}
+      \Bigg[\overline{V}_0-z_{1-\frac{\alpha}{2}}\sqrt{\frac{\Var(g(X_{\tilde{\tau}_0}))}{\tilde{n}}},\\\overline{V}_0+z_{1-\frac{\alpha}{2}}\sqrt{\frac{\Var\left(\sup_{t\in[0,T]}\{g(X_t)-\tilde{M}_t\}\right)}{\tilde{n}}}\Bigg]
+    \end{multline*}
+  \end{remark}
 \end{multicols}
 \end{document}
