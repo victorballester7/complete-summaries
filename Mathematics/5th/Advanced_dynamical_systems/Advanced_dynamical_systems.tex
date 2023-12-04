@@ -220,7 +220,7 @@
     \end{multline*}
     where $\vf{X}_H$ is the vector field of \mcref{ADS:ham_system}, and  we used that the derivative of the determinant map is the trace. But an easy computation shows that $\div \vf{X}_H=0$.
   \end{proof}
-  \subsection{Circle dynamics}
+  \subsection{Dynamics on the circle}
   \subsubsection{Generalities}
   \begin{definition}
     Let $x,x'\in\RR$. We say that $x\sim x'$ if and only if $x-x'\in\ZZ$. We define the \emph{circle} as $\TT^1:=\quot{\RR}{\sim}$. We define the following distance in $\TT^1$:
@@ -230,7 +230,7 @@
   \end{definition}
   \begin{proposition}[Existence of a lift]\hfill
     \begin{enumerate}
-      \item For any continuous map $F:\TT^1\to \TT^1$ there exists a \emph{lift} $f$, i.e.\ a continuous map $f:\RR\to \RR$ such that $F\circ \pi=\pi\circ f$, where $\pi:\RR\to \TT^1$ is the canonical projection.
+      \item For any continuous map $F:\TT^1\to \TT^1$ there exists a \emph{lift} $f$, i.e.\ a continuous map $f:\RR\to \RR$ such that $F\circ \pi=\pi\circ f$, where $\pi:\RR\to\TT^1$ is the canonical projection.
       \item If $g$ is another lift of $F$, then $g-f=k\in\ZZ$.
     \end{enumerate}
   \end{proposition}
@@ -255,7 +255,7 @@
   \begin{definition}
     We define the set:
     \begin{multline*}
-      \mathcal{D}^0(\TT^1):\{f:\RR\to\RR:f\text{ increasing and}\\
+      \mathcal{D}^0(\TT^1):=\{f:\RR\to\RR:f\text{ increasing and}\\
       \text{ homeomorphism}, f(x+1)=f(x)+1\}
     \end{multline*}
     Note that we have the projection:
@@ -264,15 +264,16 @@
     $$
     We can define a distance in $\mathcal{D}^0(\TT^1)$ as:
     $$
-      d(f,g)=\max\{ \sup_{x\in\RR}\abs{f(x)-g(x)},\sup_{x\in\RR}\abs{f^{-1}(x)-g^{-1}(x)}\}
+      d(f,g)=\max\left\{ \sup_{x\in\RR}\abs{f(x)-g(x)},\sup_{x\in\RR}\abs{f^{-1}(x)-g^{-1}(x)}\right\}
     $$
   \end{definition}
   \begin{lemma}
-    $\mathcal{D}^0(\TT^1)$ is a complete metric space. Moreover:
-    \begin{enumerate}
-      \item $f\to f^{-1}$ is continuous, $f\in \mathcal{D}^0(\TT^1)$.
-      \item $(f,g)\to f\circ g$ is continuous, $(f,g)\in \mathcal{D}^0(\TT^1)\times \mathcal{D}^0(\TT^1)$.
-    \end{enumerate}
+    $\mathcal{D}^0(\TT^1)$ is a complete metric space. Moreover, the functions:
+    $$
+      \function{}{\mathcal{D}^0(\TT^1)}{\mathcal{D}^0(\TT^1)}{f}{f^{-1}}\quad
+      \function{}{\mathcal{D}^0(\TT^1)\times \mathcal{D}^0(\TT^1)}{\mathcal{D}^0(\TT^1)}{(f,g)}{f\circ g}
+    $$
+    are continuous.
     Thus, $\mathcal{D}^0(\TT^1)$ is a topological group with the composition.
   \end{lemma}
   \begin{definition}
@@ -285,16 +286,22 @@
     If $0\leq \varepsilon<\frac{1}{2\pi}$, then $f_{\alpha,\varepsilon}\in \mathcal{D}^0(\TT^1)$.
   \end{lemma}
   \begin{proof}
-    Note that ${f_{\alpha,\varepsilon}}'>0\iff \varepsilon<\frac{1}{2\pi}$. Thus, $f_{\alpha,\varepsilon}$ is strictly increasing, and therefore it is a homeomorphism.
+    Note that ${f_{\alpha,\varepsilon}}'>0\iff \varepsilon<\frac{1}{2\pi}$. Thus, $f_{\alpha,\varepsilon}$ is strictly increasing, and therefore it is a homeomorphism. Moreover, $f_{\alpha,\varepsilon}(x+1)=f_{\alpha,\varepsilon}(x)+1$.
   \end{proof}
   \subsubsection{Rotation number}\label{ADS:rotation_number_section}
-  \begin{remark}
+  \begin{lemma}
     Recall that $f=\id+\varphi$ with $\varphi$ 1-periodic. And thus:
     $$
       f^n=\id + \sum_{i=0}^{n-1} \varphi\circ f^i=: \id + \varphi_n
     $$
     with $\varphi_n$ 1-periodic.
-  \end{remark}
+  \end{lemma}
+  \begin{proof}
+    Use induction on $i$ to prove that all the terms of the sum $\varphi\circ f^i$ are 1-periodic. The case $i=0$ is clear. Now, for the inductive step:
+    \begin{multline*}
+      \varphi\circ f^{i+1}(x+1)=\varphi\left(x+1+\sum_{k=0}^{i}\varphi\circ f^k(x+1)\right)=\\=\varphi\left( x+\sum_{k=0}^{i}\varphi\circ f^k(x)\right)=\varphi\circ f^{i+1}(x)
+    \end{multline*}
+  \end{proof}
   \begin{lemma}\label{ADS:lema1}
     Let $f\in \mathcal{D}^0(\TT^1)$ be such that $f=\id +\varphi$, with $\varphi$ 1-periodic. Let $m:=\min_{x\in\RR}\varphi$ and $M:=\max_{x\in\RR}\varphi$. Then, we have $m\leq M< m+1$.
   \end{lemma}
