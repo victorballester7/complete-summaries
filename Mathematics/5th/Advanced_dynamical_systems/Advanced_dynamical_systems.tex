@@ -255,8 +255,7 @@
   \begin{definition}
     We define the set:
     \begin{multline*}
-      \mathcal{D}^0(\TT^1):=\{f:\RR\to\RR:f\text{ increasing and}\\
-      \text{ homeomorphism}, f(x+1)=f(x)+1\}
+      \mathcal{D}^0(\TT^1):=\{f\in \Homeo(\RR):f\text{ increasing and}\\ f(x+1)=f(x)+1\}
     \end{multline*}
     Note that we have the projection:
     $$
@@ -289,7 +288,7 @@
     Note that ${f_{\alpha,\varepsilon}}'>0\iff \varepsilon<\frac{1}{2\pi}$. Thus, $f_{\alpha,\varepsilon}$ is strictly increasing, and therefore it is a homeomorphism. Moreover, $f_{\alpha,\varepsilon}(x+1)=f_{\alpha,\varepsilon}(x)+1$.
   \end{proof}
   \subsubsection{Rotation number}\label{ADS:rotation_number_section}
-  \begin{lemma}
+  \begin{lemma}\label{ADS:lema_sum}
     Recall that $f=\id+\varphi$ with $\varphi$ 1-periodic. And thus:
     $$
       f^n=\id + \sum_{i=0}^{n-1} \varphi\circ f^i=: \id + \varphi_n
@@ -322,10 +321,10 @@
     Now take the supremum in $x$. The other inequality is analogous.
   \end{proof}
   \begin{lemma}\label{ADS:lema3}
-    Let $(u_n)\in\RR$ be a subadditive sequence. Then, $\displaystyle\lim_{n\to\infty}\frac{u_n}{n}$ exists and it is equal to $\inf_{n\in\NN}\frac{u_n}{n}$. Analogously, if $(u_n)$ is superadditive, then $\displaystyle\lim_{n\to\infty}\frac{u_n}{n}$ exists and it is equal to $\sup_{n\in\NN}\frac{u_n}{n}$.
+    Let $(u_n)\in\RR$ be a subadditive sequence. Then, $\displaystyle\lim_{n\to\infty}\frac{u_n}{n}$ exists, and it is equal to $\displaystyle\inf_{n\in\NN}\frac{u_n}{n}$. Analogously, if $(u_n)$ is superadditive, then $\displaystyle\lim_{n\to\infty}\frac{u_n}{n}$ exists, and it is equal to $\displaystyle\sup_{n\in\NN}\frac{u_n}{n}$.
   \end{lemma}
   \begin{proof}
-    Assume $(u_n)$ is positive and subadditive and fix $p\in\NN$. Let $n\geq p$ be such that $n=k_np+r_n$ with $r<p$. Then:
+    Assume $(u_n)$ is subadditive and fix $p\in\NN$. Let $n\geq p$ be such that $n=k_np+r_n$ with $r<p$. Then:
     $$
       \frac{u_n}{n}\leq \frac{u_{k_np}+u_{r_n}}{n}\leq \frac{k_nu_p}{n}+\frac{u_{r_n}}{n}=\frac{u_p}{p+\frac{r_n}{k_n}}+\frac{u_{r_n}}{n}
     $$
@@ -350,9 +349,16 @@
       \item $\rho(R_\alpha)=\alpha$ $\forall\alpha\in\RR$.
       \item $\rho(f^n)=n\rho(f)$ $\forall f\in \mathcal{D}^0(\TT^1)$, $n\in\NN$.
       \item $f\leq g\implies \rho(f)\leq \rho(g)$ $\forall f,g\in \mathcal{D}^0(\TT^1)$.
-      \item $\rho(f+k)=:\rho(R_k\circ f)=\rho(f) + k$ $\forall f\in \mathcal{D}^0(\TT^1)$, $k\in\ZZ$.
+      \item $\rho(f+k)=\rho(f) + k$ $\forall f\in \mathcal{D}^0(\TT^1)$, $k\in\ZZ$.
+      \item If $f,g\in \mathcal{D}^0(\TT^1)$ commute, then $\rho(f\circ g)=\rho(f)+\rho(g)$.
     \end{enumerate}
   \end{proposition}
+  \begin{sproof}
+    For the penultimate one, note that $f_k(x):=f(x+k)=f(x)+k$, since $f\in \mathcal{D}^0(\TT^1)$. Thus:
+    $$
+      {f_k}^n(x)=f(f(\cdots f(f(x+k)+k)+\cdots )+k)=f^n(x)+nk
+    $$
+  \end{sproof}
   \begin{definition}
     Let $F\in \Homeoplus(\TT^1)$ with lift $f$. We define the \emph{rotation number} of $F$ as $\rho(F):=[\rho(f)]\in \TT^1$.
   \end{definition}
@@ -360,8 +366,17 @@
     Let $F,G\in\Homeoplus(\TT^1)$. We say that $G$ is \emph{semi-conjugate} to $F$ if there exists a continuous surjective map $H:\TT^1\to \TT^1$ such that $H\circ F=G\circ H$. We say that $G$ is \emph{conjugate} to $F$ if $H$ is a homeomorphism.
   \end{definition}
   \begin{lemma}
-    Let $F,G\in\Homeoplus(\TT^1)$ be such that $G$ is semi-conjugate to $F$. Then, if $G$ has a periodic point, then $F$ has a periodic point.
+    Let $F,G\in\Homeoplus(\TT^1)$ be such that $G$ is semi-conjugate to $F$. Then, if $F$ has a periodic point, then $G$ has a periodic point.
   \end{lemma}
+  \begin{proof}
+    Let $p\in \TT^1$ be a periodic point of $F$ with period $n$. Then, $H(p)$ is a periodic point of $G$ with period $n$. Indeed:
+    $$
+      G^n(H(p))=H(F^n(p))=H(p)
+    $$
+  \end{proof}
+  \begin{remark}
+    The converse is not true.
+  \end{remark}
   \begin{theorem}
     Let $F,G\in\Homeoplus(\TT^1)$ be conjugate by $H\in \Homeoplus(\TT^1)$. Then, $\rho(F)=\rho(G)$.
   \end{theorem}
@@ -395,43 +410,46 @@
     $$\text{Leb}(\varphi):=\int_{0}^1\varphi(x)\dd{x}$$
   \end{remark}
   \begin{definition}
-    Let $F\in \Homeoplus(\TT^1)$ and $\mu\in \mathcal{M}(\TT^1)$. We define the \emph{pushforward measure} as $F_*\mu(\varphi):=\mu(\varphi\circ F)$.
+    Let $F\in \Homeoplus(\TT^1)$ and $\mu\in \mathcal{M}(\TT^1)$. We define the \emph{push-forward measure} of $F$ as $F_*\mu(\varphi):=\mu(\varphi\circ F)$.
   \end{definition}
   \begin{definition}
     We say that a measure $\mu\in\mathcal{M}(\TT^1)$ is \emph{invariant} by $F\in\Homeoplus(\TT^1)$ (or \emph{$F$-invariant}) if $F_*\mu=\mu$. We will denote by $\mathcal{M}_F(\TT^1)$ the set of $F$-invariant probability measures.
   \end{definition}
   \begin{proposition}
     Let $F\in \Homeoplus(\TT^1)$, $x\in\TT^1$ and $n\in\NN$.
-    \begin{itemize}
-      \item Note that $\text{Leb}$ is invariant under $R_\alpha$ $\forall \alpha\in\RR$.
+    \begin{enumerate}
+      \item $\text{Leb}$ is invariant under $R_\alpha$ $\forall \alpha\in\RR$.
       \item $\delta_x$ is $F$-invariant $\iff F(x)=x$
       \item $\displaystyle\frac{\delta_x+\cdots+\delta_{F^{n-1}(x)}}{n}$ is $F$-invariant $\iff F^n(x)=x$
-    \end{itemize}
+    \end{enumerate}
   \end{proposition}
+  \begin{proof}
+    We prove the difficult implication in the second item. That is, suppose $\delta_x$ is $F$-invariant. We then have that $\varphi(F(x))=\varphi(x)$ $\forall \varphi\in \mathcal{C}(\TT^1)$. Now if $F(x)\ne x$ for some $x\in \TT^1$, then we may assume $x < F(x)$ and consider a continuous function on $\TT^1$ that equals one in a neighborhood of $F(x)$ not containing $x$ and zero otherwise.
+  \end{proof}
   \begin{theorem}
     Let $F\in\Homeoplus(\TT^1)$. Then, $\mathcal{M}_F(\TT^1)\ne\varnothing$.
   \end{theorem}
   \begin{proposition}
     Let $F\in\Homeoplus(\TT^1)$ and $f=\id+\varphi$ be a lift of $F$, with $\varphi\in\mathcal{C}(\TT^1)$. Then, $\forall\mu\in\mathcal{M}_F(\TT^1)$, $\rho(f)=\mu(\varphi)$. Moreover:
     \begin{enumerate}
-      \item $\norm{f^n-\id -n\rho(f)}_{\mathcal{C}(\TT^1)}<1$
+      \item $\norm{f^n-\id -n\rho(f)}_{\mathcal{C}(\RR)}<1$ for all $n\in\NN$.
       \item $\forall n\in\NN$, $\exists x_n\in\RR$ such that $f^n(x_n)-x_n=n\rho(f)$.
     \end{enumerate}
   \end{proposition}
   \begin{proof}
-    Let $\psi_n:= f^n-\id -n\mu(\varphi)$. We have that:
+    Let $\psi_n:= f^n-\id -n\mu(\varphi)$ with $\mu\in\mathcal{M}_F(\TT^1)$. We have that:
     \begin{multline*}
       \mu(\psi_n)=\sum_{i=0}^{n-1}\mu(\varphi\circ f^i)-n\varphi(n)=\sum_{i=0}^{n-1}\mu(\varphi\circ F^i)-n\varphi(n)=0
     \end{multline*}
-    where we have used the first remark in the previous section. Now we must have that $\psi_n$ change their sign in $[0,1]$ because otherwise that would contradict $\mu(\psi_n)=0$. So $\exists x_n\in[0,1]$ such that $\psi_n(x_n)=0$. So:
+    where we have used \mcref{ADS:lema_sum}. Now we must have that $\psi_n$ change their sign in $[0,1]$ because otherwise that would contradict $\mu(\psi_n)=0$. So $\exists x_n\in[0,1]$ such that $\psi_n(x_n)=0$. So:
     $$
       f^n(x_n)-x_n=n\mu(\varphi)
     $$
-    Dividing by $n$ and taking limits, we have that $\rho(f)=\mu(\varphi)$. This also shows the second point. To prove the first one, note that $\min\psi_n\leq 0$ and so by \mcref{ADS:lema1} we have $\max\psi_n <1$. Moreover, $\min\psi_n =-\max(-\psi_n) >-1$ (using the same argument as before) and so $\norm{\psi_n}_{\mathcal{C}(\TT^1)}<1$.
+    Dividing by $n$ and taking limits, we have that $\rho(f)=\mu(\varphi)$. This also shows the second point. To prove the first one, note that $\min\psi_n\leq 0$ and so by \mcref{ADS:lema1} we have $\max\psi_n <1$. Moreover, $\min\psi_n =-\max(-\psi_n) >-1$ (using the same argument as before) and so $\norm{\psi_n}_{\mathcal{C}(\RR)}<1$ for all $n\in\NN$.
   \end{proof}
   \subsubsection{Rational rotation number}
   \begin{proposition}\label{ADS:characterisation_rot_number}
-    Let $f\in \mathcal{D}^0(\TT^1)$, $p\in\ZZ$ and $q\in\NN$. Then:
+    Let $f\in \mathcal{D}^0(\TT^1)$, $p\in\ZZ$ and $q\in\NN$ be such that the fraction $\frac{p}{q}$ is irreducible. Then:
     \begin{align*}
       \rho(f)=\frac{p}{q} & \iff \exists x\in\RR\text{ such that }f^q(x)=x+p \\
       \rho(f)>\frac{p}{q} & \iff \forall x\in\RR\text{ we have }f^q(x)>x+p   \\
@@ -484,7 +502,7 @@
     Let $F\in \Homeoplus(\TT^1)$. Then, $R^\pm(F)$ are invariant non-closed sets.
   \end{proposition}
   \begin{definition}
-    Let $F\in \Homeoplus(\TT^1)$ and $x\in \TT^1$. We say that $x$ is a \emph{wandering point} if there exists a neighborhood $U$ of $x$ such that $\forall n\geq 1$ we have $F^n(U)\cap U=\varnothing$. The orbit $U$ is called a \emph{wandering domain}. We define the set:
+    Let $F\in \Homeoplus(\TT^1)$ and $x\in \TT^1$. We say that $x$ is a \emph{wandering point} if there exists a neighborhood $U$ of $x$ such that $\forall n\geq 1$ we have $F^n(U)\cap U=\varnothing$. The neighborhood $U$ is called a \emph{wandering domain}. We define the set:
     $$
       \Omega(F):=\{ x\in\TT^1: x\text{ is not wandering}\}
     $$
@@ -495,18 +513,28 @@
   \begin{proposition}
     Let $F\in \Homeoplus(\TT^1)$. Then, $\Omega(F)$ is an invariant closed set.
   \end{proposition}
-  \begin{remark}
-    Note that:
+  \begin{lemma}
+    Let $F \in \Homeoplus(\TT^1)$. Then:
     $$
       \Fix(F)\subseteq \Per(F)\subseteq R^\pm(F)\subseteq \Omega(F)\subseteq \TT^1
     $$
-  \end{remark}
+  \end{lemma}
+  \begin{proof}
+    All the inclusions are clear except for maybe $R^\pm(F)\subseteq \Omega(F)$. Let $x\in R^\pm(F)$. Then, $\exists (n_k)\in\NN$ with $n_k \nearrow \infty$ such that $F^{n_k}(x)\to x$. Now, let $U$ be a neighborhood of $x$. Then, $x\in U$ and thus $F^{n_1}(U)\cap U\ne\varnothing$. So $x\in \Omega(F)$.
+  \end{proof}
   \begin{definition}
-    Let $F\in \Homeoplus(\TT^1)$ and $X\subseteq \TT^1$ be nonempty closed invariant set. We say that $X$ is \emph{minimal} if $\forall x\in X$, $\overline{\mathcal{O}(x)}=X$. If $X=\TT^1$, we say that $F$ is \emph{minimal}.
+    Let $F\in \Homeoplus(\TT^1)$ and $X\subseteq \TT^1$ be a non-empty closed invariant set. We say that $X$ is \emph{minimal} if $\forall x\in X$, $\overline{\mathcal{O}(x)}=X$. If $X=\TT^1$, we say that $F$ is \emph{minimal}.
   \end{definition}
   \begin{proposition}
     Let $F\in \Homeoplus(\TT^1)$ and $X\subseteq \TT^1$ be a closed and invariant. Then, $X$ is minimal $\iff$ $\forall Y\subseteq X$ closed, invariant and non-empty, $Y=X$.
   \end{proposition}
+  \begin{proof}
+    \begin{itemizeiff}
+      For some $y\in Y\subseteq X$ closed, invariant and non-empty, we have:
+      $$Y\subseteq X = \overline{\mathcal{O}(y)}\subseteq \overline{\mathcal{O}(Y)}\subseteq \overline{Y}=Y$$
+      \item Let $x\in X$. Since $\overline{\mathcal{O}(x)}\subseteq X$ is closed, invariant and non-empty, we have that $\overline{\mathcal{O}(x)}=X$.
+    \end{itemizeiff}
+  \end{proof}
   \begin{theorem}
     Let $F\in \Homeoplus(\TT^1)$ with $\rho(F)=\frac{p}{q}\in \quot{\QQ}{\ZZ}$. Then:
     \begin{enumerate}
@@ -515,7 +543,7 @@
     \end{enumerate}
   \end{theorem}
   \begin{proof}
-    First we assume $q=1$ and $p=0$. Let $f\in \mathcal{D}^0(\TT^1)$ be a lift of $F$. By \mcref{ADS:characterisation_rot_number}, we have that $\exists x\in \RR$ with $f(x)=x$. So $\Fix(f)\ne \varnothing$, and it is closed and invariant by translations. Now we write $\RR\setminus\Fix(f)$ as union of open intervals. Let $(a,b)$ be one connected component. Inside it, we must have either $f(x)>x$ or $f(x)<x$. In the first case we have that $(f^n(x))$ is strictly increasing $\forall x\in (a,b)$ and so $\omega(x)=\{b\}$ and $\alpha(x)=\{a\}$ $\forall x\in(a,b)$. The second case is exactly the opposite.
+    First we assume $q=1$ and $p=0$. Let $f\in \mathcal{D}^0(\TT^1)$ be a lift of $F$. By \mcref{ADS:characterisation_rot_number}, we have that $\exists x\in \RR$ with $f(x)=x$. So $\Fix(f)\ne \varnothing$, and it is closed and invariant by translations. Now we write $\RR\setminus\Fix(f)$ as union of open intervals. Let $(a,b)$ be one of such connected components. Inside it, we must have either $f(x)>x$ or $f(x)<x$. In the first case we have that $(f^n(x))$ is strictly increasing $\forall x\in (a,b)$ and so $\omega(x)=\{b\}\in\Fix(f)$ and $\alpha(x)=\{a\}\in\Fix(f)$ $\forall x\in(a,b)$. The second case is exactly the opposite.
 
     Now we do the general case. Assume $\rho(f)=\frac{p}{q}$. Then, again by \mcref{ADS:characterisation_rot_number}, we have that $\exists x\in \RR$ with $f^q(x)=x+p$. Assume we have $x'\in\RR$ and $p',q'\in\ZZ$ with $q'\geq 1$ such that $f^{q'}(x')=x'+p'$. By \mcref{ADS:characterisation_rot_number}, we have that $\frac{p}{q}=\frac{p'}{q'}$ and so $\exists k\in\NN$ such that $q'=kq$ and $p'=kp'$ because $\frac{p}{q}$ is irreducible. Now let $g=f^q-p$. Then, an easy calculation shows that $g^k(x')=x'$. But $\rho(g)=0$ and in the previous case we have seen that the periodic points are only fixed points, so $k=1$. For the second part, we proceed as in the previous case with the function $g=f^q-p$.
   \end{proof}
@@ -618,7 +646,7 @@
     where the second equality is due to the invariance of $\mu$. Hence, $H_*\mu$ is invariant by $R_\rho$, and so $H_*\mu=\text{Leb}$. That, is $\mu(H^{-1}(A))=\text{Leb}(A)$. Recall again the set $Y$ of \mcref{ADS:eq1} and $\TT^1=X\sqcup U$, with $H^{-1}(Y)=\overline{U}$. Since $Y$ is countable, $0=\text{Leb}(Y)=\mu(H^{-1}(Y))$. Now since $H|_X$ is a homeomorphism (??is it true??), we have that $\mu(B)=\text{Leb}(H(B))$, and so $\mu$ is uniquely determined.
   \end{proof}
   \begin{proposition}
-    Let $F:\TT^1\to\TT^1$ be a homeomorphism. Then, $F$ is uniquely ergodic if and only if $\forall \varphi\in\mathcal{C}(\TT^1)$, $\exists c_\varphi\in\RR$ such that $\frac{1}{n}\sum_{i=0}^n\varphi\circ F^i$ converge uniformly to $c$.
+    Let $F:\TT^1\to\TT^1$ be a homeomorphism. Then, $F$ is uniquely ergodic if and only if $\forall \varphi\in\mathcal{C}(\TT^1)$, $\exists c_\varphi\in\RR$ such that $\frac{1}{n}\sum_{i=0}^n\varphi\circ F^i$ converge uniformly to $c_\varphi$.
   \end{proposition}
   \begin{proof}
     Assume first that $\mathcal{M}_F=\{\mu\}$ and argue by contradiction. That, is $\exists \varepsilon>0$, $(n_k)\in\NN$ with $n_k\nearrow +\infty$ and $(x_k)\in\TT^1$ such that $\forall k\geq 0$:
