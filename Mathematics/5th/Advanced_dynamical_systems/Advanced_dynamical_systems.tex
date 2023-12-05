@@ -631,7 +631,7 @@
     $$
     where the equality is due to the invariance of $\mu$. So, we also have $\int_{\TT^1}P_n(x)\dd{\mu}=a_0$. Now consider the Féjer trigonometric polynomial that converge uniformly to $\varphi$ and use the \mnameref{RFA:domianted}.
   \end{proof}
-  \begin{proposition}
+  \begin{proposition}\label{ADS:uniquely_ergodic}
     Let $F\in\Homeoplus(\TT^1)$ with $\rho(F)\notin\quot{\QQ}{\ZZ}$. Then, $F$ is uniquely ergodic.
   \end{proposition}
   \begin{proof}
@@ -645,7 +645,7 @@
     \end{multline*}
     where the second equality is due to the invariance of $\mu$. Hence, $H_*\mu$ is invariant by $R_\rho$, and so $H_*\mu=\text{Leb}$. That, is $\mu(H^{-1}(A))=\text{Leb}(A)$. Recall again the set $Y$ of \mcref{ADS:eq1} and $\TT^1=X\sqcup U$, with $H^{-1}(Y)=\overline{U}$. Since $Y$ is countable, $0=\text{Leb}(Y)=\mu(H^{-1}(Y))$. Now since $H|_X$ is a homeomorphism (??is it true??), we have that $\mu(B)=\text{Leb}(H(B))$, and so $\mu$ is uniquely determined.
   \end{proof}
-  \begin{proposition}
+  \begin{proposition}\label{ADS:birkov_sum_converge}
     Let $F:\TT^1\to\TT^1$ be a homeomorphism. Then, $F$ is uniquely ergodic if and only if $\forall \varphi\in\mathcal{C}(\TT^1)$, $\exists c_\varphi\in\RR$ such that $\frac{1}{n}\sum_{i=0}^n\varphi\circ F^i$ converge uniformly to $c_\varphi$.
   \end{proposition}
   \begin{proof}
@@ -669,7 +669,7 @@
   \begin{definition}
     For $k\in\NN\cup\{0\}$ we define the set $\mathcal{D}^k(\TT^1)$ as:
     \begin{multline*}
-      \mathcal{D}^k(\TT^1):=\{f:\RR\to\RR \text{ $\mathcal{C}^k$-diffeomorphism such that}\\f(x+1)=f(x)+1\}
+      \mathcal{D}^k(\TT^1):=\{f:\RR\to\RR \text{ increasing $\mathcal{C}^k$-diffeomorphism}\\\text{such that }f(x+1)=f(x)+1\}
     \end{multline*}
     Note that $f\in \mathcal{D}^k(\TT^1)$ if and only if $f=\id +\varphi$, with $\varphi\in\mathcal{C}^k(\TT^1)$.
     We also define the set $\Diffplus^k(\TT^1)$ as:
@@ -680,5 +680,102 @@
   \begin{proposition}
     Let $F\in\Diffplus^1(\TT^1)$ with $\rho(F)\notin\quot{\QQ}{\ZZ}$, $\mu$ be the unique invariant probability measure of $F$ and $f\in\mathcal{D}^1(\TT^1)$ be a lift of $F$. Then, $\displaystyle \lim_{n\to \infty}\frac{1}{n}\log Df^n(x)=\int_{\TT^1}\log(Df)\dd{\mu}=0$.
   \end{proposition}
+  \begin{proof}
+    An easy induction shows that $\forall n\in\NN$ we have:
+    $$
+      \log Df^n=\sum_{i=0}^{n-1}\log(Df\circ f^i)
+    $$
+    So:
+    $$
+      \frac{1}{n}\log Df^n=\frac{1}{n}\sum_{i=0}^{n-1}\log(Df\circ f^i)=\frac{1}{n}\sum_{i=0}^{n-1}\log(Df\circ F^i)
+    $$
+    where in the last equality we have used the fact that $Df=1+D\varphi\in \mathcal{C}(\TT^1)$. By \mcref{ADS:uniquely_ergodic
+      ,ADS:birkov_sum_converge}, we have that $\frac{1}{n}\sum_{i=0}^{n-1}\log(Df\circ F^i)$ converges uniformly to $c:=\int_{\TT^1}\log(Df)\dd{\mu}$. Moreover, since $Df^n=1+D\varphi_n\in \mathcal{C}(\TT^1)$, we have that $\int_{\TT^1}Df^n\dd{x} =1$. Now assume without loss of generality that $c>0$. Then, for $n$ large enough we must have $Df^n(x)\sim e^{nc}$ and so:
+    $$
+      1=\int_{\TT^1}Df^n\dd{x}\sim \int_{\TT^1}e^{nc}\dd{x}\overset{n\to\infty}{\longrightarrow} +\infty
+    $$
+    If $c<0$, we have a similar contradiction. Thus, $c=0$.
+  \end{proof}
+  \begin{definition}
+    Let $\varphi\in\mathcal{C}(\TT^1)$. We say that $\varphi$ has \emph{bounded variation} if $\exists C\geq 0$ such that for all $0=x_0<x_1<\dots<x_n=1$ we have:
+    $$
+      \sum_{i=1}^n\abs{\varphi(x_i)-\varphi(x_{i-1})}\leq C
+    $$
+    The constant $C$ is usually denoted as $\Var(\varphi)$.
+  \end{definition}
+  \begin{lemma}\label{ADS:lema_alpha_i}
+    Let $\alpha\notin\QQ$ and $\frac{p}{q}\in \QQ$ with $\abs{\alpha-\frac{p}{q}}<\frac{1}{q^2}$. Set $\alpha_i:=\{i\alpha\}$ for $1\leq i\leq q$, where $\{x\}$ denotes the fractional part of $x$. Then, each $\alpha_i$ belongs to a different interval of the form $\left(\frac{k_i}{q},\frac{k_i+1}{q}\right)$ with $k_i\in\{0,\ldots,q-1\}$.
+  \end{lemma}
+  \begin{proof}
+    Assume without loss of generality that $0<\alpha-\frac{p}{q}<\frac{1}{q^2}$. Then, for $1\leq i\leq q$ we have:
+    \begin{equation}\label{ADS:ineq_alpha_i}
+      0\leq i\alpha -\frac{ip}{q}<\frac{i}{q^2}\leq \frac{1}{q}
+    \end{equation}
+    We claim that the numbers $\{i \frac{p}{q}\}$ are all distinct for $1\leq i\leq q$. Indeed, if $\exists i,j$ with $i\frac{p}{q} -j\frac{p}{q}=k\in\ZZ^*$, then $\frac{p}{q}=\frac{k}{i-j}$, which is not possible because $\frac{p}{q}$ is irreducible and $i-j \leq q-1$. So we can write $\{i \frac{p}{q}\}=k_i\frac{p}{q}$ for some $k_i\in\{0,\ldots,q-1\}$. Finally, \mcref{ADS:ineq_alpha_i} implies that $\alpha_i\in \left(\frac{k_i}{q},\frac{k_i+1}{q}\right)$.
+  \end{proof}
+  \begin{proposition}[Denjoy-Koksma inequality]\label{ADS:denjoy_koksma}
+    Let $F\in\Homeoplus(\TT^1)$ with $\rho(F)=\alpha\notin \quot{\QQ}{\ZZ}$, $\mu\in\mathcal{M}_F(\TT^1)$ and $\frac{p}{q}\in \QQ$ with $\abs{\alpha-\frac{p}{q}}<\frac{1}{q^2}$. For any $\psi\in \mathcal{C}(\TT^1)$ with $\Var(\psi)<\infty$ we have $\forall x \in \TT^1$:
+    $$
+      \abs{\sum_{i=0}^{q-1}\psi(F^i(x))-q\int_{\TT^1}\psi\dd{\mu}}\leq\Var(\psi)
+    $$
+  \end{proposition}
+  \begin{proof}
+    We'll prove that $\forall x\in \TT^1$:
+    $$
+      \abs{\sum_{i=1}^q \psi(F^i(x))-q\int_{\TT^1}\psi\dd{\mu}}\leq \Var(\psi)
+    $$
+    Let $x\in \TT^1$ and choose $x=y_0,y_1,\ldots,y_{q-1}\in \TT^1$ such that $H(y_i)=\frac{i}{q}+H(x)$, where $H:\TT^1\to \TT^1$ is the semi-conjugacy between $F$ and $R_\alpha$ given by \mcref{ADS:theorem_irrational_rotation_number}. By \mcref{ADS:lema_alpha_i}, we have that $\exists! k_i\in\{0,\ldots,q-1\}$ such that $H(x)+i\alpha\in\left( H(x)+ \frac{k_i}{q},H(x)+\frac{k_i+1}{q}\right)$. This implies that $F^i(x)\in [y_{k_i},y_{k_i+1}]=:I_i$. Now, we have:
+    \begin{multline*}
+      \abs{\sum_{i=1}^q \psi(F^i(x))-q\int_{\TT^1}\psi\dd{\mu}}=\abs{\sum_{i=1}^q\!\! \left(\psi(F^i(x))-q\!\int_{I_i}\! \psi\dd{\mu}\!\right)}\\=\abs{\sum_{i=1}^q q\left(\int_{I_i}\psi(F^i(x))-\psi \dd{\mu}\right)}\leq\\\leq q \sum_{i=1}^q \sup_{t\in I_i}\abs{\psi(F^i(x))-\psi(t)}\mu(I_i)=\\=\sum_{i=1}^q \abs{\psi(F^i(x))-\psi(t_i)}\leq \sum_{i=1}^q \Var(\psi|_{I_i})= \Var(\psi)
+    \end{multline*}
+    where in the first equality we have used that:
+    $$
+      \int_{I_i}\psi(F^i(x))\dd{\mu}=\psi(F^i(x))\mu(I_i)=\psi(F^i(x))\frac{1}{q}
+    $$
+    because $H_*\mu = \text{Leb}$ and the invariance of $\mu$ (?), and at the end the supremum is reached at some point $t_i\in I_i$ because the intervals are closed.
+  \end{proof}
+  \begin{lemma}\label{ADS:lema_pnqn}
+    Let $\alpha\notin\QQ$. Then, $\forall n\in\NN$, $\exists \frac{p_n}{q_n}\in\QQ$ such that:
+    \begin{enumerate}
+      \item $\displaystyle\abs{\alpha-\frac{p_n}{q_n}}<\frac{1}{{q_n}^2}$
+      \item $q_n\overset{n\to\infty}{\longrightarrow}+\infty$
+    \end{enumerate}
+  \end{lemma}
+  \begin{proof}
+    For $Q\geq 1$, by the Pigeon-hole principle, there exist two elements among $0,\{\alpha\},\ldots,\{Q \alpha\}$ such that they are in one of the intervals among $[0,\frac{1}{Q}], [\frac{1}{Q},\frac{2}{Q}],\ldots,[\frac{Q-1}{Q},1]$. That is, $\exists q_1,q_2\in\QQ_{\geq 0}$ and $p\in\ZZ$ such that $\abs{q\alpha -p}\leq \frac{1}{Q}$ with $q:=q_2-q_1$. Now apply this to $Q_n=n\geq 1$: $\exists \frac{p_n}{q_n}\in \QQ$ with $1\leq q_n\leq n$ such that:
+    $$
+      \abs{q_n\alpha-p_n}<\frac{1}{n}\leq \frac{1}{q_n}
+    $$
+    To prove that $q_n\overset{n\to\infty}{\longrightarrow}+\infty$, we argue by contradiction. Assume that $\exists M\in\NN$ such that $q_n\leq M$ for all $n\in\NN$. Then, $\exists n_0\in\NN$ such that $\forall n\geq n_0$ we have $q_n=q_{n_0}$. But then by the irrationality of $\alpha$ we have that $\exists c>0$ such that:
+    $$
+      c\leq \abs{q_n\alpha-p_n}\leq \frac{1}{n} \overset{n\to\infty}{\longrightarrow} 0
+    $$
+    which is a contradiction.
+  \end{proof}
+  \begin{lemma}\label{ADS:lema_var_log}
+    Let $f\in \mathcal{D}^1(\TT^1)$. $Df$ has bounded variation if and only if $\log Df$ has bounded variation.
+  \end{lemma}
+  \begin{theorem}[Denjoy theorem]
+    Let $F\in \Diffplus^1(\TT^1)$ with $\rho(F)\notin\quot{\QQ}{\ZZ}$ and $f\in\mathcal{D}^1(\TT^1)$ be a lift of $F$ whose derivative $Df$ has bounded variation. Then, $F$ is topologically conjugated to $R_{\rho(F)}$.
+  \end{theorem}
+  \begin{proof}
+    By \mcref{ADS:theorem_irrational_rotation_number} it suffices to show that $F$ has no wandering intervals. We argue by contraction. Assume that $J\subseteq \TT^1$ is a wandering interval, i.e.\ $\forall n\in\ZZ^*$, $F^n(J)\cap J=\varnothing$. This implies that $F^n(J) \cap F^m(J)=\varnothing$ if $n\ne m$ ans since $\sum_{n\in\ZZ}\text{Leb}(F^n(J))\leq 1$, we must have $\text{Leb}(F^n(J))\overset{n\to\infty}{\longrightarrow}0$. By assumption, $\Var(Df)<\infty$, so by \mcref{ADS:lema_var_log}, we have $\Var(\log Df) < \infty$.
+    By \mcref{ADS:lema_pnqn}, $\exists \frac{p_n}{q_n}\in\QQ$ such that $\abs{\alpha-\frac{p_n}{q_n}}\leq \frac{1}{{q_n}^2}$ and $q_n\overset{n\to\infty}{\longrightarrow}+\infty$. Now use \mnameref{ADS:denjoy_koksma} applied to $\psi=\log Df$ and the sequence $\frac{p_n}{q_n}$:
+    \begin{multline*}
+      \abs{\sum_{i=0}^{q_n-1}\log Df(F^i(x))-q\int_{\TT^1}\log Df\dd{\mu}}=\\=\abs{\sum_{i=0}^{q_n-1}\log Df(F^i(x))}\leq\Var(\log Df)=:V
+    \end{multline*}
+    But $$
+      \sum_{i=0}^{q_n-1}\log Df(F^i(x))=\sum_{i=0}^{q_n-1}\log Df(f^i(x))=\log Df^{q_n}(x)
+    $$
+    Thus, $-V\leq \log Df^{q_n}\leq V$, and so $\exp{-V}\leq Df^{q_n}\leq \exp{V}$. Hence, using the mean value theorem $\forall x,y\in\RR$ we have:
+    $$
+      \exp{-V}\abs{x-y}\leq \abs{f^{q_n}(x)-f^{q_n}(y)}\leq\exp{V}\abs{x-y}
+    $$
+    Applying this to the extremities of $J$, we have:
+    $$
+      \exp{-V}\text{Leb}(J)\leq \text{Leb}(F^{q_n}(J))\leq \exp{V}\text{Leb}(J)
+    $$
+    Since $q_n\overset{n\to\infty}{\longrightarrow}+\infty$, this contradicts $\text{Leb}(F^n(J))\overset{n\to\infty}{\longrightarrow}0$.
+  \end{proof}
 \end{multicols}
 \end{document}
