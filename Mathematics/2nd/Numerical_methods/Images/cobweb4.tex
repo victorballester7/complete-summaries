@@ -1,5 +1,5 @@
 \documentclass{standalone}
-\usepackage{../../../../preamble_formulas}
+\usepackage{../../../../preamble_tikz}
 
 \begin{document}
 \pgfkeys{/pgf/declare function={f(\x)=3.75*\x*(1-\x);}} % Here you can declare multivariable functions to like this:
@@ -11,24 +11,24 @@
 % speech(\t) = 1 + source(\t)*filter(\t);
 % }
 \begin{tikzpicture}
-    \begin{axis}[xmin=0,xmax=1.2,ymin=0,ymax=1.2,
-            axis equal image]
-        \addplot [thin,samples=200,smooth,blue] {f(x)};
-        \addplot [thin,samples=200,smooth,black] {x};
-        \pgfplotsextra{
-            \def\x{0.125}
-            \def\y{0}
-            \draw [very thin,red] (axis cs:\x,\y) \foreach \i in {0,...,50}{
-                    \pgfextra{
-                        \pgfkeys{/pgf/fpu=true, /pgf/fpu/output format=fixed}
-                        \pgfmathparse{f(\x)}\xdef\y{\pgfmathresult}
-                    }
-                    -- (axis cs:\x,\y)
-                    \pgfextra{\xdef\x{\y}}
-                    -- (axis cs:{\x},{\y})
-                };}
-        \draw [thin,color_green2,dashed] (axis cs:0.733,0) -- node[left,pos=0.05]{$\alpha$} (axis cs:0.733,0.733);
-        \legend{$g(x)$}
-    \end{axis}
+  \begin{axis}[xmin=0,xmax=1.2,ymin=0,ymax=1.2,
+      axis equal image]
+    \addplot [thin,samples=200,smooth,blue] {f(x)};
+    \addplot [thin,samples=200,smooth,black] {x};
+    \pgfplotsextra{
+      \def\x{0.125}
+      \def\y{0}
+      \draw [very thin,red] (axis cs:\x,\y) \foreach \i in {0,...,50}{
+          \pgfextra{
+            \pgfkeys{/pgf/fpu=true, /pgf/fpu/output format=fixed}
+            \pgfmathparse{f(\x)}\xdef\y{\pgfmathresult}
+          }
+          -- (axis cs:\x,\y)
+          \pgfextra{\xdef\x{\y}}
+          -- (axis cs:{\x},{\y})
+        };}
+    \draw [thin,color_green2,dashed] (axis cs:0.733,0) -- node[left,pos=0.05]{$\alpha$} (axis cs:0.733,0.733);
+    \legend{$g(x)$}
+  \end{axis}
 \end{tikzpicture}
 \end{document}

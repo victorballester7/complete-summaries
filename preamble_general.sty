@@ -1,0 +1,253 @@
+\usepackage{amsthm, amsmath, mathtools, amssymb, physics} % for math and physics commands and symbols.
+\usepackage[intlimits]{esint} % for more options on integrals.
+\usepackage{standalone} % for compiling individually .tex images.
+\usepackage[hypcap=false]{caption} % basically for using the command \captionof{}, which is useful in some environments, others than \begin{figure}.
+\usepackage{subcaption} % for subfigures, when many captions come into play.
+\usepackage{multicol} % organize the whole document in multiple columns.
+\usepackage[USenglish]{babel} % for improving use of English and mainly the use of hyphenation.
+\usepackage[version=4]{mhchem} % used for chemistry and nuclear physics.
+\usepackage{multirow} % multirow in a table, for example.
+\usepackage{array, makecell} % for additional options in tables and tabular.
+\usepackage{hyperref} % link automatically references.
+% \usepackage{hycolor} % implements options of colors for hyperref (it ables the user to use colors from xcolor package)
+\usepackage[capitalise,nameinlink]{cleveref} % for clever references. That is, for example, for automatically write "Definition 2.13" instead of only "2.13".
+\usepackage{graphicx} % for options like \definecolor{}{}{}, \textcolor{}{},...
+\usepackage[usenames,x11names]{xcolor} % to customize RGB colors.
+\usepackage{colortbl} % for colors in tables.
+\usepackage{tcolorbox} % for coloring boxes.
+\setlength{\parindent}{0pt} % Indentation disabled.
+
+\usepackage{float} % to allow using argument [H] in figure environtment 
+
+\setlength\multlinegap{0pt} % disable the margins on \begin{multline} command.
+\allowdisplaybreaks % allows to break an align environment in two pages.
+
+%% colors - subjects %%
+\newcommand{\col}{red}%            % DEFAULT
+\newcommand{\ana}{DeepSkyBlue2}%   % analysis
+\newcommand{\alg}{Green3}%         % algebra
+\newcommand{\geo}{Purple2}%        % geometry and topology
+\newcommand{\apl}{Red2}%           % applied mathematics
+\newcommand{\pro}{Orange2}%        % probability and statistics
+\newcommand{\phy}{SlateBlue2}%     % physics
+
+\ExplSyntaxOn
+\NewExpandableDocumentCommand{\refcol}{m}{
+  \str_case_e:nnF {\FirstWord{#1}}{
+    {FM}{\alg}    % fundamentals of mathematics 
+      {LA}{\alg}    % linear algebra
+      {RVF}{\ana}   % real valued functions
+      {AS}{\alg}    % algebraic structures
+      {DM}{\alg}    % discrete mathematics
+      {FSV}{\ana}   % functions of several variables
+      {LG}{\geo}    % linear geometry
+      {MA}{\ana}    % mathematical analysis
+      {NM}{\apl}    % numerical methods
+      {CA}{\ana}    % complex analysis
+      {DE}{\apl}    % differential equations
+      {DG}{\geo}    % differential geometry
+      {GT}{\alg}    % Galois theory
+      {P}{\pro}     % probability
+      {S}{\pro}     % statistics
+      {TOP}{\geo}   % topology
+      {AT}{\geo}    % algebraic topology
+      {A}{\alg}     % arithmetic
+      {CAL}{\alg}   % commutative algebra
+      {DS}{\apl}    % dynamical systems
+      {HA}{\ana}    % harmonic analysis
+      {LM}{\pro}    % linear models
+      {NC}{\apl}    % numeric calculus
+      {NIPDE}{\apl} % numeric integration of pde
+      {PDE}{\apl}   % partial differential equations
+      {RFA}{\ana}   % real and functional analysis
+      {SP}{\pro}    % stochastic processes
+      {ADS}{\apl}   % advanced dynamical systems
+      {AP}{\pro}    % advanced probability
+      {ATFAPDE}{\ana} % advanced topics in functional analysis and pdes
+      {IEPDE}{\ana} % introduction to evolution pdes
+      {INLEPDE}{\ana} % introduction to non linear elliptic pdes
+      {LTLD}{\pro} % limit theorems and large deviations
+      {SC}{\pro}    % stochastic calculus
+      {INLP}{\phy}  % Instabilities and nonlinear phenomena
+      {MM}{\pro}    % Montecarlo methods
+      {CO}{\apl}    % Continuous optimization
+      {NMPDE}{\apl} % Numerical methods for pdes
+      {SCO}{\pro}   % Stochastic control
+      {JP}{\pro}    % Jump processes
+  }{\col}%
+}
+\ExplSyntaxOff
+%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand\FirstWord[1]{\@removedots#1:\@nil}%
+\newcommand\@removedots{}%
+\def\@removedots#1:#2\@nil{#1}%
+
+\newcommand\changecolor[1]{
+  \renewcommand{\col}{\refcol{#1}}
+  \hypersetup{linkcolor = \col}
+}
+
+%% for references (hyperref)
+\hypersetup{
+  colorlinks = true,
+  linkcolor = Blue4, % color of internal links (sections, pages, etc.) 
+  filecolor = cyan, % color for URLs which open local files
+  citecolor = green, %	color for bibliographical citations in text.     
+  urlcolor = cyan, % color of URL links (mail, web) 
+}
+%%%%%%%%%%%%%%%%%%%%
+
+%% Color box for important theorems
+\def\sep{1mm}
+\newtcolorbox{important}{colback=\col!5, colframe=\col, left=\sep, right=\sep, top=\sep, bottom=\sep}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%% Enumeration - commands %%%%%%%
+\usepackage{enumitem} % for the command [leftmargin=1.15cm] in customized-label enumerations
+\renewcommand{\labelenumi}{\arabic{enumi}.}
+\renewcommand{\theenumi}{\thetheorem-\arabic{enumi}}
+
+\renewcommand{\labelenumii}{\roman{enumii})}
+\renewcommand{\theenumii}{\theenumi.\roman{enumii})}
+
+\renewcommand{\labelenumiii}{\alph{enumiii})}
+\renewcommand{\theenumiii}{\theenumii.\alph{enumiii})}
+
+
+% for doing things like:
+% 1. ..............
+% 2. ..............
+% 3, 4. ...........
+% 5. ..............
+\newcommand{\doubleitem}{%
+  \begingroup
+  \stepcounter{enumi}%
+  \edef\tmp{\arabic{enumi}, }%
+  \stepcounter{enumi}
+  \edef\tmp{\endgroup\noexpand\item[\tmp\labelenumi]}%
+  \tmp}
+
+%% for proving two-way implications
+% Usage:
+% \begin{itemizeiff}
+% First implication ...
+% \item Second implication ...
+% \end{itemizeiff}
+\newlist{itemizeiff}{enumerate}{2}
+\setlist[itemizeiff]{
+  first=\item[{$\implies\!\!$)}],
+  label={$\impliedby\!\!$)},
+  leftmargin=1.2cm,
+}
+
+\newcommand*\ifftoright{\item[$\implies$:]}
+\newcommand*\ifftoleft{\item[$\ \impliedby$:]}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%% Theorems, definitions,... environments %%%%%
+\newtheoremstyle{math_theorems}
+{\topsep}   % ABOVESPACE
+{\topsep}   % BELOWSPACE
+{}          % BODYFONT
+{0pt}       % INDENT (empty value is the same as 0pt)
+{\bfseries} % HEADFONT
+{.}         % HEADPUNCT
+{5pt plus 1pt minus 1pt} % HEADSPACE
+{\color{\col}\thmname{#1}\thmnumber{\@ifnotempty{#1}{ }\@upn{#2}}%
+  \thmnote{{ \bfseries\color{black}(#3)\index{#3}}}}          % CUSTOM-HEAD-SPEC
+
+\theoremstyle{math_theorems}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{axiom}[theorem]{Axiom}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{law}[theorem]{Law}
+\newtheorem{principle}[theorem]{Principle}
+\newtheorem{model}[theorem]{Model}
+
+\newtheoremstyle{math_remarks}
+{\topsep}   % ABOVESPACE
+{\topsep}   % BELOWSPACE
+{}          % BODYFONT
+{0pt}       % INDENT (empty value is the same as 0pt)
+{\itshape} % HEADFONT
+{.}         % HEADPUNCT
+{5pt plus 1pt minus 1pt} % HEADSPACE
+{\color{\col}\thmname{#1}\thmnote{{ \color{black}(#3)}}}          % CUSTOM-HEAD-SPEC
+
+\theoremstyle{math_remarks}
+\newtheorem{remark}{Remark}
+
+% \renewcommand*{\qed}{{\color{\col}\qed}}
+% \renewcommand{\qedsymbol}{\textcolor{\col}{\qed}}
+\newcommand*{\QED}[1][$\square$]{%
+  \color{\col}
+  \leavevmode\unskip\penalty9999 \hbox{}\nobreak\hfill
+  \quad\hbox{#1}%
+}
+
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{
+  \par%
+  \pushQED{\QED}%
+  \normalfont%
+  \topsep5\p@\@plus\p@\@minus\p@\relax%
+  \trivlist%
+  \item\relax%
+  {%
+    \color{\col}%
+    \itshape#1\@addpunct{.}}\hspace\labelsep\ignorespaces%
+}{%
+  % \color{\col!30}
+  \popQED\endtrivlist\@endpefalse%
+}
+\makeatother
+
+\newcommand\explanationname{Sketch of the proof} % could be made language-dependent
+\newenvironment{sproof}%
+{\renewcommand\proofname\explanationname%
+  \begin{proof}}%
+    {\end{proof}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%% Extra references %%%%%%%
+\makeatletter
+\if@cref@capitalise % if we pass the option 'capitalise' on cleveref package
+  % \crefname{theorem}{\bfseries\color{\col} Theorem}{\bfseries\color{\col} Theorems}
+  % \crefname{lemma}{\bfseries\color{\col} Lemma}{\bfseries\color{\col} Lemmas}
+  % \crefname{proposition}{\bfseries\color{\col} Proposition}{\bfseries\color{\col} Propositions}
+  % \crefname{corollary}{\bfseries\color{\col} Corollary}{\bfseries\color{\col} Corollary}
+  % \crefname{axiom}{\bfseries\color{\col} Axiom}{\bfseries\color{\col} Axioms}
+  % \crefname{definition}{\bfseries\color{\col} Definition}{\bfseries\color{\col} Definitions}
+  % \crefname{law}{\bfseries\color{\col} Law}{\bfseries\color{\col} Laws}
+  % \crefname{principle}{\bfseries\color{\col} Principle}{\bfseries\color{\col} Principles}
+  % \crefname{enumi}{\textcolor{\col}{Item}}{\textcolor{\col}{Items}}
+  % \else
+  % \crefname{theorem}{\bfseries\color{\col} theorem}{\bfseries\color{\col} theorems}
+  % \crefname{lemma}{\bfseries\color{\col} lemma}{\bfseries\color{\col} lemmas}
+  % \crefname{proposition}{\bfseries\color{\col} proposition}{\bfseries\color{\col} propositions}
+  % \crefname{corollary}{\bfseries\color{\col} corollary}{\bfseries\color{\col} corollary}
+  % \crefname{axiom}{\bfseries\color{\col} axiom}{\bfseries\color{\col} axioms}
+  % \crefname{definition}{\bfseries\color{\col} definition}{\bfseries\color{\col} definitions}
+  % \crefname{law}{\bfseries\color{\col} law}{\bfseries\color{\col} laws}
+  % \crefname{principle}{\bfseries\color{\col} principle}{\bfseries\color{\col} principles}
+  % \crefname{enumi}{\textcolor{\col}{item}}{\textcolor{\col}{items}}
+  \crefname{axiom}{Axiom}{Axioms}
+\else
+  \crefname{axiom}{axiom}{axioms}
+\fi
+\makeatother
+
+\newcommand{\mref}[1]{\hypersetup{linkcolor = \refcol{#1}}\ref{#1}\hypersetup{linkcolor = \col}}         % custom ref
+\newcommand{\mcref}[1]{\hypersetup{linkcolor = \refcol{#1}}\cref{#1}\hypersetup{linkcolor = \col}}       % custom cref
+% \newcommand{\mnameref}[1]{\hypersetup{linkcolor = \refcol{#1}}\nameref{#1}\hypersetup{linkcolor = \col}} % custom nameref
+\newcommand{\mnameref}[1]{\hypersetup{linkcolor = \refcol{#1}}\hyperref[{#1}]{\ref{#1} \nameref{#1}}\hypersetup{linkcolor = \col}} % custom nameref
+% \newcommand{\mfullref}[1]{\hypersetup{linkcolor = \refcol{#1}}\hyperref[{#1}]{\ref{#1} \nameref{#1}}\hypersetup{linkcolor = \col}}
+% \newcommand{\fullref}[1]{\hypersetup{linkcolor = \refcol{#1}}\hyperref[{#1}]{\autoref{#1} \nameref{#1}}\hypersetup{linkcolor = \col}}
+% \crefformat{enumerate}{#2\textcolor{\col}{Item} #1#3}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
