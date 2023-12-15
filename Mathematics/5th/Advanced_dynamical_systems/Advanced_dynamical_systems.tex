@@ -12,7 +12,7 @@
     We identify the elements of $\TT^1$ as $\quot{\RR}{\ZZ}$. Let $x\in \TT^1$. Then, ${R_\alpha}^q x=x+\alpha q=x+p=x$. And $q$ is the smallest integer such that ${R_\alpha}^q x=x$ because we assume that $p$ and $q$ are coprime.
   \end{proof}
   \begin{proposition}
-    Let $\alpha\in\RR\setminus\QQ$ and let $R_\alpha:\TT^1\to \TT^1$ be the rotation of angle $\alpha$. Then, all the points of $\TT^1$ are dense in $\TT^1$.
+    Let $\alpha\in\RR\setminus\QQ$ and let $R_\alpha:\TT^1\to \TT^1$ be the rotation of angle $\alpha$. Then, all the orbits of $R_\alpha$ are dense in $\TT^1$.
   \end{proposition}
   \begin{proof}
     Let $\varepsilon>0$, $x,y\in \TT^1$. Discretize $\TT^1$ in intervals of length at most $\frac{1}{\varepsilon}$. Then, $\exists m,n\in \NN$ with $m< n\leq \frac{1}{\varepsilon}+1$ such that ${R_\alpha}^m x$ and ${R_\alpha}^nx$ are in the same interval. Thus, $\abs{{R_\alpha}^{n-m}x-x}<\varepsilon$. Now, concatenating ${R_\alpha}^{n-m}x$ repeatedly, we will eventually have $\abs{{R_\alpha}^{k(n-m)}x - y}<\varepsilon$ for some $k\in \NN$.
@@ -21,7 +21,7 @@
     Let $\alpha\in\RR\setminus\QQ$ and $A\subset \TT^1$ be a non-empty closed invariant set for $R_\alpha$. Then, $A=\TT^1$.
   \end{corollary}
   \begin{proof}
-    Let $x\in \TT^1$ and $y\in A$. Then, $\forall k\in\NN$ $\exists n_k\in\NN$ such that $R_\alpha^{n_k}y\in(x-\frac{1}{k},x+\frac{1}{k})$. Thus, $R_\alpha^{n_k}y\to x$ and $x\in A$ because $A$ is closed and $R_\alpha^{n_k}y\in A$ $\forall k\in\NN$.
+    Let $x\in \TT^1$ and $y\in A$. Then, $\forall k\in\NN$ $\exists n_k\in\NN$ such that $R_\alpha^{n_k}y\in(x-\frac{1}{k},x+\frac{1}{k})$. Thus, $R_\alpha^{n_k}y\overset{k\to\infty}{\longrightarrow}x$ and $x\in A$ because $A$ is closed and $R_\alpha^{n_k}y\in A$ $\forall k\in\NN$ because $A$ is invariant.
   \end{proof}
   \begin{definition}
     Consider the set $$\Sigma_m
@@ -32,7 +32,7 @@
     $$
   \end{definition}
   \begin{remark}
-    Note that some elements in $[0,1]$ have two different representations in base-$m$ identified as elements of $\Sigma_m$. So we can think of $\Sigma_m$ a the quotient space $\quot{\Sigma_m}{\sim}$ where $(x_1,x_2,\ldots)\sim (y_1,y_2,\ldots)$ if and only if $\sum_{i=1}^\infty \frac{x_i}{m^i}=\sum_{i=1}^\infty \frac{y_i}{m^i}$.
+    Note that some elements in $[0,1]$ have two different representations in base-$m$ identified as elements of $\Sigma_m$. So we can think of $\Sigma_m$ as the quotient space $\quot{\Sigma_m}{\sim}$, where $(x_1,x_2,\ldots)\sim (y_1,y_2,\ldots)$ if and only if $\sum_{i=1}^\infty \frac{x_i}{m^i}=\sum_{i=1}^\infty \frac{y_i}{m^i}$.
   \end{remark}
   \begin{proposition}
     Let $m\in\NN$. Consider the \emph{expansion map}
@@ -43,9 +43,9 @@
   \end{proposition}
   \begin{proof}
     Let $x=(x_1,x_2,\ldots)\in \Sigma_m$. Then, $\phi\circ \sigma_m(x)=\sum_{i=1}^\infty \frac{x_{i+1}}{m^i}$. Moreover:
-    \begin{multline*}
-      E_m\circ \phi(x)=E\left(\sum_{i=1}^\infty \frac{x_i}{m^i}\right)=\sum_{i=1}^\infty \frac{x_i}{m^{i-1}}=\\=x_i+\sum_{i=1}\frac{x_{i+1}}{m^i}\equiv\sum_{i=1}\frac{x_{i+1}}{m^i}
-    \end{multline*}
+    \begin{equation*}
+      E_m\circ \phi(x)=m\sum_{i=1}^\infty \frac{x_i}{m^i}=x_i+\sum_{i=1}\frac{x_{i+1}}{m^i}\equiv\sum_{i=1}\frac{x_{i+1}}{m^i}
+    \end{equation*}
   \end{proof}
   \begin{remark}
     Note that $E$ preserves the Lebesgue measure \textit{backwards}: $\abs{{E_m}^{-1}(A)}=\abs{A}$ for all $A\subseteq \TT^1$, but $\abs{E_m(A)}\ne \abs{A}$ in general.
@@ -67,39 +67,39 @@
     is periodic and $d(x,y)<\varepsilon$. So periodic points of $\sigma_m$ are dense in $\Sigma_m$.
   \end{proof}
   \begin{proposition}
-    Le $x\in \TT^1$. Then, the positive orbit of $x$ for $E_m$ is dense in $\TT^1$.
+    There exists $x\in \TT^1$ such that its orbit under $E_m$ is dense in $\TT^1$.
   \end{proposition}
   \begin{proof}
-    By conjugacy, we only prove it for $\sigma_m$. But this is clear by taking:
-    $$
-      x=(0,1,\ldots,m-1,10,\ldots,1(m-1),20,\ldots,2(m-1),\ldots)
-    $$
+    By conjugacy, we only prove it for $\sigma_m$. But this is clear by taking he sequence of \textit{all sequences}:
+    \begin{multline*}
+      x=(0,1,\ldots,m-1,0,0,1,0,0,1,1,1,0,2,2,0,1,2,2,1,\\2,2,\ldots,(m-1), (m-1),0,0,0,\ldots)
+    \end{multline*}
   \end{proof}
-  \subsubsection{A hyperbolic automorphism of \texorpdfstring{$T^2$}{T2}}
+  \subsubsection{A hyperbolic automorphism of \texorpdfstring{$\TT^2$}{T2}}
   \begin{proposition}
     Consider $\vf{A}=\begin{pmatrix}
         2 & 1 \\
         1 & 1
-      \end{pmatrix}\in \GL_2(\RR)$. Then, $\vf{A}(\ZZ^2)=\ZZ^2$ and this induces an automorphism $\vf{\tilde{A}}$ of $T^2=\quot{\RR^2}{\ZZ^2}$.
+      \end{pmatrix}\in \GL_2(\RR)$. Then, $\vf{A}(\ZZ^2)=\ZZ^2$ and this induces an automorphism $\vf{\tilde{A}}$ of $\TT^2=\quot{\RR^2}{\ZZ^2}$.
   \end{proposition}
   \begin{definition}
     We define the set of periodic points of $\vf{\tilde{A}}$ as $\Per\vf{\tilde{A}}$.
   \end{definition}
   \begin{lemma}
-    $\Per\vf{\tilde{A}}=\quot{\QQ^2}{\ZZ^2}$. Thus, $\Per\vf{\tilde{A}}$ is dense in $T^2$.
+    $\Per\vf{\tilde{A}}=\quot{\QQ^2}{\ZZ^2}$. Thus, $\Per\vf{\tilde{A}}$ is dense in $\TT^2$.
   \end{lemma}
   \begin{proof}
     Let $\vf{x}\in \Per\vf{\tilde{A}}$. Then, $\exists k\in\NN$ and $\vf{n}\in\ZZ^2$ such that $\vf{A}^k\vf{x}=\vf{x}+\vf{n}$. One can easily check that $\sigma(\vf{\tilde{A}})=\left\{\frac{3}{2}\pm \frac{\sqrt{5}}{2}\right\}=:\{\lambda_{\pm}\}$ with $\lambda_-<1<\lambda_+$. Thus,
     $$
       \det(\vf{A}^k-\vf{I})=({\lambda_+}^k-1)({\lambda_-}^k-1)\ne 0
     $$
-    and so the equation $\vf{A}^k\vf{x}=\vf{x}+\vf{n}$ has a unique (rational) solution. Now let $(\frac{p_1}{q_1},\frac{p_2}{q_2})\in \quot{\QQ^2}{\ZZ^2}$ and $N\geq 1$ left to be chosen. We define the set $Q_N:=\frac{\ZZ^2}{N} \mod{\ZZ^2}$, which is a subset finite set of $T^2$. But observe that $Q_N$ is invariant under $\vf{\tilde{A}}$, and thus, all of its points are periodic. For the above rational numbers, just choose $N=q_1q_2$.
+    and so the equation $\vf{A}^k\vf{x}=\vf{x}+\vf{n}$ has a unique (rational) solution. Now let $(\frac{p_1}{q_1},\frac{p_2}{q_2})\in \quot{\QQ^2}{\ZZ^2}$ and $N\geq 1$ left to be chosen. We define the set $Q_N:=\frac{\ZZ^2}{N} \mod{\ZZ^2}$, which is a subset finite set of $\TT^2$. Observe that $Q_N$ is invariant under $\vf{\tilde{A}}$, and thus, all of its points are periodic because the set is finite. For the above rational numbers, just choose $N=q_1q_2$.
   \end{proof}
   \begin{remark}
     The \emph{hyperbolicity} comes from the fact that there is one eigenvector with eigenvalue greater than $1$ and another with eigenvalue less than $1$, both eigenvalues being positive.
   \end{remark}
   \begin{theorem}
-    The iterates of $\vf{\tilde{A}}$ smear every domain $F\subseteq T^2$ uniformly over $T^2$, that is, for every domain $G\subseteq T^2$, we have that the following limit exists:
+    The iterates of $\vf{\tilde{A}}$ smear every domain $F\subseteq \TT^2$ uniformly over $\TT^2$, that is, for every domain $G\subseteq \TT^2$, we have that the following limit exists:
     $$
       \abs{(\vf{\tilde{A}}^{-n} F)\cap G}\overset{n\to\infty}{\longrightarrow} \abs{F}\abs{G}
     $$
@@ -108,44 +108,48 @@
   \begin{proof}
     We can prove a more general property in terms of functions in the torus (and then apply it to $f=\indi{F}$ and $g=\indi{G}$):
     $$
-      \lim_{n\to\infty}\int_{T^2} f(\vf{\tilde{A}}^n \vf{x}) g(\vf{x})\dd{\vf{x}}=\int_{T^2} f(\vf{x})\dd{\vf{x}}\int_{T^2} g(\vf{x})\dd{\vf{x}}
+      \lim_{n\to\infty}\int_{\TT^2} f(\vf{\tilde{A}}^n \vf{x}) g(\vf{x})\dd{\vf{x}}=\int_{\TT^2} f(\vf{x})\dd{\vf{x}}\int_{\TT^2} g(\vf{x})\dd{\vf{x}}
     $$
     We will prove this for the orthonormal basis of Fourier series $\{\exp{2\pi i \vf{p}\cdot \vf{x}}\}_{\vf{p}\in\ZZ^2}$. Note that:
     $$
-      \int_{T^2} \exp{2\pi i (\transpose{(\vf{\tilde{A}}^n)}\vf{p})\cdot \vf{x}}\dd{\vf{x}}=\begin{cases}
+      \int_{\TT^2} \exp{2\pi i (\transpose{(\vf{\tilde{A}}^n)}\vf{p})\cdot \vf{x}}\dd{\vf{x}}=\begin{cases}
         1 & \text{if }\vf{p}=\vf{0}    \\
         0 & \text{if }\vf{p}\ne \vf{0}
       \end{cases}
     $$
-    Therefore, since $\transpose{(\vf{\tilde{A}}^n)}\vf{p}$ takes infinitely many values for $\vf{p}\ne \vf{0}$, we have that if $g=\exp{2\pi i \vf{q} \cdot \vf{x}}$ then:
+    Now for large $n$, the norm of the vector $\transpose{(\vf{\tilde{A}}^n)}\vf{p}$ is large for $\vf{p}\ne \vf{0}$ as we have:
     $$
-      \lim_{n\to\infty}\int_{T^2} \exp{2\pi i(\transpose{(\vf{\tilde{A}}^n)}\vf{p}+\vf{q})\cdot \vf{x}}\dd{\vf{x}}=0
+      \vf{\tilde{A}}^n\vf{p} \simeq \lambda_+^n \langle \vf{p}, \vf{e}_+\rangle \vf{e}_+
+    $$
+    And so its transpose will eventually be different from $-\vf{q}$. Therefore, we have that if $g=\exp{2\pi i \vf{q} \cdot \vf{x}}$ then:
+    $$
+      \lim_{n\to\infty}\int_{\TT^2} \exp{2\pi i(\transpose{(\vf{\tilde{A}}^n)}\vf{p}+\vf{q})\cdot \vf{x}}\dd{\vf{x}}=0
     $$
     So for any $\vf{p}, \vf{q}\in\ZZ^2$ we have the equality. Then, we use that any function nice enough can be approximated with its Fourier series.
   \end{proof}
   \begin{theorem}
-    On the torus $T^2$ there exist two direction fields invariant with respect to the automorphism $\vf{\tilde{A}}$. The integral curves of each of these directions fields are everywhere dense on the torus. The automorphism $\vf{\tilde{A}}$ converts the integral curves of each field into integral curves of the same field, expanding by $\lambda_+$ for the first field and contracting by $\lambda_-$ for the second.
+    On the torus $\TT^2$ there exist two direction fields invariant with respect to the automorphism $\vf{\tilde{A}}$. The integral curves of each of these directions fields are everywhere dense on the torus. The automorphism $\vf{\tilde{A}}$ converts the integral curves of each field into integral curves of the same field, expanding by $\lambda_+$ for the first field and contracting by $\lambda_-$ for the second.
   \end{theorem}
   \begin{proof}
-    Let $\vf{e}_+$ and $\vf{e}_-$ be the eigenvectors of $\vf{A}$ with eigenvalues $\lambda_+$ and $\lambda_-$ respectively. Let $\vf{x}\in T^2$ and
+    Let $\vf{e}_+$ and $\vf{e}_-$ be the eigenvectors of $\vf{A}$ with eigenvalues $\lambda_+$ and $\lambda_-$ respectively. Let $\vf{x}\in \TT^2$ and
     $$
-      \function{\vf\gamma_+}{\RR}{T^2}{t}{\vf{x}+t \vf{e}_+}\quad
-      \function{\vf\gamma_-}{\RR}{T^2}{t}{\vf{x}+t \vf{e}_-}
+      \function{\vf\gamma_+}{\RR}{\TT^2}{t}{\vf{x}+t \vf{e}_+}\quad
+      \function{\vf\gamma_-}{\RR}{\TT^2}{t}{\vf{x}+t \vf{e}_-}
     $$
-    be the expanding and contracting curves and let $\vf{\xi}_{\vf{x}}=\im(\vf\gamma_+)$, $\vf{\eta}_{\vf{x}}=\im(\vf\gamma_-)$.
+    be the expanding and contracting curves and let $\vf{\xi}_{\vf{x}}=\im(\vf\gamma_+)$, $\vf{\eta}_{\vf{x}}=\im(\vf\gamma_-)$ be the corresponding direction fields. The density of the curves is a consequence of the density of orbits in rotation maps in the circle with irrational angle.
   \end{proof}
   \begin{definition}
-    Let $\vf{A},\vf{B}:T^2\rightarrow T^2$ be $\mathcal{C}^1$ functions. We say that $B$ is \emph{$\mathcal{C}^0$-close} to $\vf{A}$ if for all $\varepsilon>0$:
+    Let $\vf{A},\vf{B}:\TT^2\rightarrow \TT^2$ be $\mathcal{C}^1$ functions. We say that $B$ is \emph{$\mathcal{C}^0$-close} to $\vf{A}$ if for all $\varepsilon>0$:
     $$
-      \sup_{\vf{x}\in T^2}\norm{\vf{A}(\vf{x})-\vf{B}(\vf{x})}<\varepsilon
+      \sup_{\vf{x}\in \TT^2}\norm{\vf{A}(\vf{x})-\vf{B}(\vf{x})}<\varepsilon
     $$
-    We say that $\vf{B}$ is \emph{$\mathcal{C}^1$-close} to $\vf{A}$ if for all $\varepsilon>0$, $\vf{B}$ is $\mathcal{C}^0$-close to $\vf{A}$ and:
+    We say that $\vf{B}$ is \emph{$\mathcal{C}^1$-close} to $\vf{A}$ if $\vf{B}$ is $\mathcal{C}^0$-close to $\vf{A}$ and for all $\varepsilon>0$:
     $$
-      \sup_{\vf{x}\in T^2}\norm{\vf{D}\vf{A}(\vf{x})-\vf{D}\vf{B}(\vf{x})}<\varepsilon
+      \sup_{\vf{x}\in \TT^2}\norm{\vf{D}\vf{A}(\vf{x})-\vf{D}\vf{B}(\vf{x})}<\varepsilon
     $$
   \end{definition}
   \begin{theorem}[Structal stability]
-    Let $\vf{B}$ be a diffeomorphism on $T^2$ $\mathcal{C}^1$-close to $\vf{\tilde{A}}$. Then, $\vf{B}$ is $\mathcal{C}^0$-conjugate to $\vf{\tilde{A}}$.
+    Let $\vf{B}$ be a diffeomorphism on $\TT^2$ $\mathcal{C}^1$-close to $\vf{\tilde{A}}$. Then, $\vf{B}$ is $\mathcal{C}^0$-conjugate to $\vf{\tilde{A}}$.
   \end{theorem}
   \begin{proof}
     We need to find a $\mathcal{C}^0$-conjugacy $\vf{H}$ between $\vf{B}$ and $\vf{\tilde{A}}$. Since, $\vf{B}$ is $\mathcal{C}^1$-close to $\vf{\tilde{A}}$, we may expect that both $\vf{H}$ and $\vf{B}$ are small perturbations of the identity and $\vf{\tilde{A}}$ respectively. So set $\vf{H}=\vf{I}+\vf{h}$ and $\vf{B}=\vf{\tilde{A}}+\vf{b}$. Then, we want to find $\vf{h}$ and $\vf{b}$ such that:
@@ -155,12 +159,12 @@
     $$
     This equation is called \emph{conjugacy equation}. Consider the operators
     \begin{gather*}
-      \function{\vf{S}_{\vf{\tilde{A}}}}{\mathcal{C}^0(T^2,\RR^2)}{\mathcal{C}^0(T^2,\RR^2)}{\vf{h}}{\vf{h}(\vf{\tilde{A}}(\vf{x}))}\\
-      \function{\vf{L}_{\vf{\tilde{A}}}}{\mathcal{C}^0(T^2,\RR^2)}{\mathcal{C}^0(T^2,\RR^2)}{\vf{h}}{\vf{S}_{\vf{\tilde{A}}}\vf{h}-\vf{\tilde{A}}\vf{h}}
+      \function{\vf{S}_{\vf{\tilde{A}}}}{\mathcal{C}^0(\TT^2,\RR^2)}{\mathcal{C}^0(\TT^2,\RR^2)}{\vf{h}}{\vf{h}(\vf{\tilde{A}}(\vf{x}))}\\
+      \function{\vf{L}_{\vf{\tilde{A}}}}{\mathcal{C}^0(\TT^2,\RR^2)}{\mathcal{C}^0(\TT^2,\RR^2)}{\vf{h}}{\vf{S}_{\vf{\tilde{A}}}\vf{h}-\vf{\tilde{A}}\vf{h}}
     \end{gather*}
     Observe that:
     $$
-      \sup_{\vf{x}\in T^2}\norm{\vf{S}_{\vf{\tilde{A}}}\vf{h}(\vf{x})}=\sup_{\vf{x}\in T^2}\norm{\vf{S}_{\vf{\tilde{A}}}\vf{h}(\vf{\tilde{A}}^{-1}\vf{x})}= \sup_{\vf{x}\in T^2}\norm{\vf{h}(\vf{x})}
+      \sup_{\vf{x}\in \TT^2}\norm{\vf{S}_{\vf{\tilde{A}}}\vf{h}(\vf{x})}=\sup_{\vf{x}\in \TT^2}\norm{\vf{S}_{\vf{\tilde{A}}}\vf{h}(\vf{\tilde{A}}^{-1}\vf{x})}= \sup_{\vf{x}\in \TT^2}\norm{\vf{h}(\vf{x})}
     $$
     Hence, $\norm{\vf{S}_{\vf{\tilde{A}}}}=1$ and similarly $\norm{\vf{S}_{\vf{\tilde{A}}}^{-1}}=1$, where $\vf{S}_{\vf{\tilde{A}}}^{-1}:\vf{h}\mapsto \vf{h}(\vf{\tilde{A}}^{-1}(\vf{x}))$. We'll now prove that $\vf{L}_{\vf{\tilde{A}}}$ is invertible. Note that $\RR^2=\langle \vf{e}_+\rangle \oplus \langle \vf{e}_-\rangle$ because $\vf{\tilde{A}}$ is invertible. Thus:
     $$
