@@ -727,17 +727,21 @@
     \end{equation}
     $$
     $$
-    where $\nu_k=\frac{1}{n_k}\sum_{i=0}^{n_k-1}F_*^i\delta_{x_k}$. Note that $\nu_k\in\mathcal{M}(\TT^1)$ and since $\mathcal{M}(\TT^1)$ is compact, after extracting a subsequence, $(\nu_k)$ converges to $\nu\in\mathcal{M}(\TT^1)$. Now, $\nu$ is invariant. Indeed:
+    where $\nu_k=\frac{1}{n_k}\sum_{i=0}^{n_k-1}{(F^i)}_*\delta_{x_k}$. Note that $\nu_k\in\mathcal{M}(\TT^1)$ and since $\mathcal{M}(\TT^1)$ is compact with the weak$^*$-topology\footnote{$\mathcal{M}(\TT^1)$ is closed in $E=(\mathcal{C}(\TT^1))^*$ and it's contained in the unit ball of $E$, which is compact for the weak$^*$-topology. Thus, $\mathcal{M}(\TT^1)$ is compact.}, after extracting a subsequence, $(\nu_k)$ converges weakly to $\nu\in\mathcal{M}(\TT^1)$. Now, $\nu$ is invariant. Indeed:
     $$
-      F_*\nu_k-\nu_k=\frac{1}{n_k}(F_*^{n_k}\delta_{x_k}-\delta_{x_k})\overset{k\to\infty}{\longrightarrow} 0
+      \norm{F_*\nu_k-\nu_k}=\norm{\frac{1}{n_k}({(F^{n_k})}_*\delta_{x_k}-\delta_{x_k})}\leq \frac{
+        2\norm{\varphi}}{n_k}\overset{k\to\infty}{\longrightarrow} 0
     $$
-    because $\forall \varphi\in\mathcal{C}(\TT^1)$, $(F_*^{n_k}\delta_{x_k}-\delta_{x_k})(\varphi)$ is bounded by $2\norm{\varphi}$. So $\nu =\mu$, but this is a contradiction with \mcref{ADS:nuk_mu}. Now we prove the converse. Let $\mu\in\mathcal{M}_F(\TT^1)$. Then:
+    So $\nu =\mu$, but this is a contradiction with \mcref{ADS:nuk_mu}. Now we prove the converse. Let $\mu\in\mathcal{M}_F(\TT^1)$. Then:
     \begin{multline*}
       c_\varphi =\int_{\TT^1}c_\varphi\dd{\mu} =\int_{\TT^1}\lim_{n\to\infty}\frac{1}{n}\sum_{i=0}^{n-1}\varphi\circ F^i\dd{\mu} =\\
       =\lim_{n\to\infty}\frac{1}{n}\sum_{i=0}^{n-1}\int_{\TT^1}\varphi\circ F^i\dd{\mu}=\lim_{n\to\infty}\frac{1}{n}\sum_{i=0}^{n-1}\int_{\TT^1}\varphi\dd{\mu} =\int_{\TT^1}\varphi\dd{\mu}
     \end{multline*}
     where the third equality is due to the uniform convergence and the penultimate equality is due to the invariance of $\mu$. This implies that $\mu$ is uniquely determined.
   \end{proof}
+  \begin{remark}
+    The unique ergodicity property is preserved under conjugation.
+  \end{remark}
   \begin{definition}
     For $k\in\NN\cup\{0\}$ we define the set $\mathcal{D}^k(\TT^1)$ as:
     \begin{multline*}
@@ -761,8 +765,7 @@
     $$
       \frac{1}{n}\log Df^n=\frac{1}{n}\sum_{i=0}^{n-1}\log(Df\circ f^i)=\frac{1}{n}\sum_{i=0}^{n-1}\log(Df\circ F^i)
     $$
-    where in the last equality we have used the fact that $Df=1+D\varphi\in \mathcal{C}(\TT^1)$. By \mcref{ADS:uniquely_ergodic
-      ,ADS:birkov_sum_converge}, we have that $\frac{1}{n}\sum_{i=0}^{n-1}\log(Df\circ F^i)$ converges uniformly to $c:=\int_{\TT^1}\log(Df)\dd{\mu}$. Moreover, since $Df^n=1+D\varphi_n\in \mathcal{C}(\TT^1)$, we have that $\int_{\TT^1}Df^n\dd{x} =1$. Now assume without loss of generality that $c>0$. Then, for $n$ large enough we must have $Df^n(x)\sim e^{nc}$ and so:
+    where in the last equality we have used the fact that $Df=1+D\varphi\in \mathcal{C}(\TT^1)$. By \mcref{ADS:uniquely_ergodic,ADS:birkov_sum_converge}, we have that $\frac{1}{n}\sum_{i=0}^{n-1}\log(Df\circ F^i)$ converges uniformly to $c:=\int_{\TT^1}\log(Df)\dd{\mu}$. Moreover, since $Df^n=1+D\varphi_n\in \mathcal{C}(\TT^1)$, we have that $\int_{\TT^1}Df^n\dd{x} =1+\int_{\TT^1}D\varphi_n\dd{x}=1$. Now assume without loss of generality that $c>0$. Then, for $n$ large enough we must have $Df^n(x)\sim e^{nc}$ and so:
     $$
       1=\int_{\TT^1}Df^n\dd{x}\sim \int_{\TT^1}e^{nc}\dd{x}\overset{n\to\infty}{\longrightarrow} +\infty
     $$
@@ -775,6 +778,27 @@
     $$
     The constant $C$ is usually denoted as $\Var(\varphi)$.
   \end{definition}
+  \begin{remark}
+    If $\varphi\in\mathcal{C}^1(\TT^1)$, then $\Var(\varphi)=\norm{D\varphi}_{\mathcal{C}^0}$.
+  \end{remark}
+  \begin{lemma}\label{ADS:lema_pnqn}
+    Let $\alpha\notin\QQ$. Then, $\forall n\in\NN$, $\exists \frac{p_n}{q_n}\in\QQ$ such that:
+    \begin{enumerate}
+      \item $\displaystyle\abs{\alpha-\frac{p_n}{q_n}}<\frac{1}{{q_n}^2}$
+      \item $q_n\overset{n\to\infty}{\longrightarrow}+\infty$
+    \end{enumerate}
+  \end{lemma}
+  \begin{proof}
+    Let $Q\in\NN$. By the Pigeon-hole principle, there exist two elements among $0,\{\alpha\},\ldots,\{Q \alpha\}$ (here $\{\cdot\}$ denotes the fractional part) such that they are in one of the intervals among $\left[0,\frac{1}{Q}\right], \left[\frac{1}{Q},\frac{2}{Q}\right],\ldots,\left[\frac{Q-1}{Q},1\right]$. That is, $\exists q_1,q_2\in\QQ_{\geq 0}$ and $p\in\ZZ$ such that $\abs{q\alpha -p}\leq \frac{1}{Q}$ with $q:=q_2-q_1\leq Q$. Now apply this to $Q_n=n\geq 1$: $\exists \frac{p_n}{q_n}\in \QQ$ with $1\leq q_n\leq n$ such that:
+    $$
+      \abs{q_n\alpha-p_n}<\frac{1}{n}\leq \frac{1}{q_n}
+    $$
+    To prove that $q_n\overset{n\to\infty}{\longrightarrow}+\infty$, we argue by contradiction. Assume that $\exists M\in\NN$ such that $q_n\leq M$ for all $n\in\NN$. Then, $\exists n_0\in\NN$ such that $\forall n\geq n_0$ we have $q_n=q_{n_0}$. But then by the irrationality of $\alpha$ we have that $\exists c>0$ such that:
+    $$
+      c\leq \abs{q_n\alpha-p_n}\leq \frac{1}{n} \overset{n\to\infty}{\longrightarrow} 0
+    $$
+    which is a contradiction.
+  \end{proof}
   \begin{lemma}\label{ADS:lema_alpha_i}
     Let $\alpha\notin\QQ$ and $\frac{p}{q}\in \QQ$ with $\abs{\alpha-\frac{p}{q}}<\frac{1}{q^2}$. Set $\alpha_i:=\{i\alpha\}$ for $1\leq i\leq q$, where $\{x\}$ denotes the fractional part of $x$. Then, each $\alpha_i$ belongs to a different interval of the form $\left(\frac{k_i}{q},\frac{k_i+1}{q}\right)$ with $k_i\in\{0,\ldots,q-1\}$.
   \end{lemma}
@@ -786,9 +810,9 @@
     We claim that the numbers $\{i \frac{p}{q}\}$ are all distinct for $1\leq i\leq q$. Indeed, if $\exists i,j$ with $i\frac{p}{q} -j\frac{p}{q}=k\in\ZZ^*$, then $\frac{p}{q}=\frac{k}{i-j}$, which is not possible because $\frac{p}{q}$ is irreducible and $i-j \leq q-1$. So we can write $\{i \frac{p}{q}\}=k_i\frac{p}{q}$ for some $k_i\in\{0,\ldots,q-1\}$. Finally, \mcref{ADS:ineq_alpha_i} implies that $\alpha_i\in \left(\frac{k_i}{q},\frac{k_i+1}{q}\right)$.
   \end{proof}
   \begin{proposition}[Denjoy-Koksma inequality]\label{ADS:denjoy_koksma}
-    Let $F\in\Homeoplus(\TT^1)$ with $\rho(F)=\alpha\notin \quot{\QQ}{\ZZ}$, $\mu\in\mathcal{M}_F(\TT^1)$ and $\frac{p}{q}\in \QQ$ with $\abs{\alpha-\frac{p}{q}}<\frac{1}{q^2}$. For any $\psi\in \mathcal{C}(\TT^1)$ with $\Var(\psi)<\infty$ we have $\forall x \in \TT^1$:
+    Let $F\in\Homeoplus(\TT^1)$ with $\alpha:=\rho(F)\notin \quot{\QQ}{\ZZ}$, $\mu\in\mathcal{M}_F(\TT^1)$ and $\frac{p}{q}\in \QQ$ with $\abs{\alpha-\frac{p}{q}}<\frac{1}{q^2}$. Then, $\forall\psi\in \mathcal{C}(\TT^1)$ with $\Var(\psi)<\infty$ we have:
     $$
-      \abs{\sum_{i=0}^{q-1}\psi(F^i(x))-q\int_{\TT^1}\psi\dd{\mu}}\leq\Var(\psi)
+      \abs{\sum_{i=0}^{q-1}\psi(F^i(x))-q\int_{\TT^1}\psi\dd{\mu}}\leq\Var(\psi) \qquad \forall x\in \TT^1
     $$
   \end{proposition}
   \begin{proof}
@@ -805,24 +829,6 @@
       \int_{I_i}\psi(F^i(x))\dd{\mu}=\psi(F^i(x))\mu(I_i)=\psi(F^i(x))\frac{1}{q}
     $$
     because $H_*\mu = \text{Leb}$ and the invariance of $\mu$ (?), and at the end the supremum is reached at some point $t_i\in I_i$ because the intervals are closed.
-  \end{proof}
-  \begin{lemma}\label{ADS:lema_pnqn}
-    Let $\alpha\notin\QQ$. Then, $\forall n\in\NN$, $\exists \frac{p_n}{q_n}\in\QQ$ such that:
-    \begin{enumerate}
-      \item $\displaystyle\abs{\alpha-\frac{p_n}{q_n}}<\frac{1}{{q_n}^2}$
-      \item $q_n\overset{n\to\infty}{\longrightarrow}+\infty$
-    \end{enumerate}
-  \end{lemma}
-  \begin{proof}
-    For $Q\geq 1$, by the Pigeon-hole principle, there exist two elements among $0,\{\alpha\},\ldots,\{Q \alpha\}$ such that they are in one of the intervals among $[0,\frac{1}{Q}], [\frac{1}{Q},\frac{2}{Q}],\ldots,[\frac{Q-1}{Q},1]$. That is, $\exists q_1,q_2\in\QQ_{\geq 0}$ and $p\in\ZZ$ such that $\abs{q\alpha -p}\leq \frac{1}{Q}$ with $q:=q_2-q_1$. Now apply this to $Q_n=n\geq 1$: $\exists \frac{p_n}{q_n}\in \QQ$ with $1\leq q_n\leq n$ such that:
-    $$
-      \abs{q_n\alpha-p_n}<\frac{1}{n}\leq \frac{1}{q_n}
-    $$
-    To prove that $q_n\overset{n\to\infty}{\longrightarrow}+\infty$, we argue by contradiction. Assume that $\exists M\in\NN$ such that $q_n\leq M$ for all $n\in\NN$. Then, $\exists n_0\in\NN$ such that $\forall n\geq n_0$ we have $q_n=q_{n_0}$. But then by the irrationality of $\alpha$ we have that $\exists c>0$ such that:
-    $$
-      c\leq \abs{q_n\alpha-p_n}\leq \frac{1}{n} \overset{n\to\infty}{\longrightarrow} 0
-    $$
-    which is a contradiction.
   \end{proof}
   \begin{lemma}\label{ADS:lema_var_log}
     Let $f\in \mathcal{D}^1(\TT^1)$. $Df$ has bounded variation if and only if $\log Df$ has bounded variation.
