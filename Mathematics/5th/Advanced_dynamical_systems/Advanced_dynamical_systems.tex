@@ -820,15 +820,19 @@
     $$
       \abs{\sum_{i=1}^q \psi(F^i(x))-q\int_{\TT^1}\psi\dd{\mu}}\leq \Var(\psi)
     $$
-    Let $x\in \TT^1$ and choose $x=y_0,y_1,\ldots,y_{q-1}\in \TT^1$ such that $H(y_i)=\frac{i}{q}+H(x)$, where $H:\TT^1\to \TT^1$ is the semi-conjugacy between $F$ and $R_\alpha$ given by \mcref{ADS:theorem_irrational_rotation_number}. By \mcref{ADS:lema_alpha_i}, we have that $\exists! k_i\in\{0,\ldots,q-1\}$ such that $H(x)+i\alpha\in\left( H(x)+ \frac{k_i}{q},H(x)+\frac{k_i+1}{q}\right)$. This implies that $F^i(x)\in [y_{k_i},y_{k_i+1}]=:I_i$. Now, we have:
+    which is equivalent by replacing $x$ by $F^{-1}(x)$.
+    Let $x\in \TT^1$ and choose $y_1,\ldots,y_{q-1}\in \TT^1$ circularly ordered with $y_0:=x$ and such that $H(y_i)=\frac{i}{q}+H(x)$, where $H:\TT^1\to \TT^1$ is the semi-conjugacy between $F$ and $R_\alpha$ given by \mcref{ADS:theorem_irrational_rotation_number}. By \mcref{ADS:lema_alpha_i}, we have that $\exists! k_i\in\{0,\ldots,q-1\}$ such that $H(x)+i\alpha\in\left( H(x)+ \frac{k_i}{q},H(x)+\frac{k_i+1}{q}\right)$. This implies that $F^i(x)\in [y_{k_i},y_{k_i+1}]=:I_i$ because $H(x) + i\alpha={R_\alpha}^i\circ H(x) = H\circ F^i(x)$ and $H$ is increasing (thought in $[0,1]$). Now, we have:
     \begin{multline*}
-      \abs{\sum_{i=1}^q \psi(F^i(x))-q\int_{\TT^1}\psi\dd{\mu}}=\abs{\sum_{i=1}^q\!\! \left(\psi(F^i(x))-q\!\int_{I_i}\! \psi\dd{\mu}\!\right)}\\=\abs{\sum_{i=1}^q q\left(\int_{I_i}\psi(F^i(x))-\psi \dd{\mu}\right)}\leq\\\leq q \sum_{i=1}^q \sup_{t\in I_i}\abs{\psi(F^i(x))-\psi(t)}\mu(I_i)=\\=\sum_{i=1}^q \abs{\psi(F^i(x))-\psi(t_i)}\leq \sum_{i=1}^q \Var(\psi|_{I_i})= \Var(\psi)
+      \abs{\sum_{i=1}^q \psi(F^i(x))-q\int_{\TT^1}\psi\dd{\mu}}=\abs{\sum_{i=1}^q\!\! \left(\psi(F^i(x))-q\!\int_{I_i}\! \psi\dd{\mu}\!\right)}\\
+      =\abs{\sum_{i=1}^q q\left(\int_{I_i}\psi(F^i(x))-\psi (t)\dd{\mu(t)}\right)}\leq\\
+      \leq q \sum_{i=1}^q \sup_{t\in I_i}\abs{\psi(F^i(x))-\psi(t)}\mu(I_i)=\\
+      =\sum_{i=1}^q \abs{\psi(F^i(x))-\psi(t_i)}\leq \sum_{i=1}^q \Var(\psi|_{I_i})= \Var(\psi)
     \end{multline*}
     where in the first equality we have used that:
-    $$
-      \int_{I_i}\psi(F^i(x))\dd{\mu}=\psi(F^i(x))\mu(I_i)=\psi(F^i(x))\frac{1}{q}
-    $$
-    because $H_*\mu = \text{Leb}$ and the invariance of $\mu$ (?), and at the end the supremum is reached at some point $t_i\in I_i$ because the intervals are closed.
+    \begin{multline*}
+      \mu(I_i)=\mu(F^{-1}(I_i))=\mu(F^{-1}(H^{-1}(J_i)))=\\=\mu(H^{-1}({R_\alpha}^{-1}(J_i)))=\mu(H^{-1}(J_i))=\text{Leb}(J_i)=\frac{1}{q}
+    \end{multline*}
+    where $J_i=[H(y_{k_i}),H(y_{{k_i}+1})]$. Here we used first the invariance of $\mu$, then the semi-conjugacy property of $H$, the fact that $H_*\mu$ is invariant under $R_\alpha$ and lastly $H_*\mu = \text{Leb}$. The value $t_i\in I_i$ above is because the supremum is reached at some point, as the intervals are closed.
   \end{proof}
   \begin{lemma}\label{ADS:lema_var_log}
     Let $f\in \mathcal{D}^1(\TT^1)$. $Df$ has bounded variation if and only if $\log Df$ has bounded variation.
@@ -837,7 +841,7 @@
     Let $F\in \Diffplus^1(\TT^1)$ with $\rho(F)\notin\quot{\QQ}{\ZZ}$ and $f\in\mathcal{D}^1(\TT^1)$ be a lift of $F$ whose derivative $Df$ has bounded variation. Then, $F$ is topologically conjugated to $R_{\rho(F)}$.
   \end{theorem}
   \begin{proof}
-    By \mcref{ADS:theorem_irrational_rotation_number} it suffices to show that $F$ has no wandering intervals. We argue by contraction. Assume that $J\subseteq \TT^1$ is a wandering interval, i.e.\ $\forall n\in\ZZ^*$, $F^n(J)\cap J=\varnothing$. This implies that $F^n(J) \cap F^m(J)=\varnothing$ if $n\ne m$ ans since $\sum_{n\in\ZZ}\text{Leb}(F^n(J))\leq 1$, we must have $\text{Leb}(F^n(J))\overset{n\to\infty}{\longrightarrow}0$. By assumption, $\Var(Df)<\infty$, so by \mcref{ADS:lema_var_log}, we have $\Var(\log Df) < \infty$.
+    By \mcref{ADS:theorem_irrational_rotation_number} it suffices to show that $F$ has no wandering intervals. We argue by contraction. Assume that $J\subseteq \TT^1$ is a wandering interval, i.e.\ $\forall n\in\ZZ^*$, $F^n(J)\cap J=\varnothing$. This implies that $F^n(J) \cap F^m(J)=\varnothing$ if $n\ne m$ and since $\sum_{n\in\ZZ}\text{Leb}(F^n(J))\leq 1$, we must have $\text{Leb}(F^n(J))\overset{n\to\infty}{\longrightarrow}0$. By assumption, $\Var(Df)<\infty$, so by \mcref{ADS:lema_var_log}, we have $\Var(\log Df) < \infty$.
     By \mcref{ADS:lema_pnqn}, $\exists \frac{p_n}{q_n}\in\QQ$ such that $\abs{\alpha-\frac{p_n}{q_n}}\leq \frac{1}{{q_n}^2}$ and $q_n\overset{n\to\infty}{\longrightarrow}+\infty$. Now use \mnameref{ADS:denjoy_koksma} applied to $\psi=\log Df$ and the sequence $\frac{p_n}{q_n}$:
     \begin{multline*}
       \abs{\sum_{i=0}^{q_n-1}\log Df(F^i(x))-q\int_{\TT^1}\log Df\dd{\mu}}=\\=\abs{\sum_{i=0}^{q_n-1}\log Df(F^i(x))}\leq\Var(\log Df)=:V
@@ -853,7 +857,7 @@
     $$
       \exp{-V}\text{Leb}(J)\leq \text{Leb}(F^{q_n}(J))\leq \exp{V}\text{Leb}(J)
     $$
-    Since $q_n\overset{n\to\infty}{\longrightarrow}+\infty$, this contradicts $\text{Leb}(F^n(J))\overset{n\to\infty}{\longrightarrow}0$.
+    Since $q_n\overset{n\to\infty}{\longrightarrow}+\infty$, this contradicts the fact that $\text{Leb}(F^n(J))\overset{n\to\infty}{\longrightarrow}0$.
   \end{proof}
 \end{multicols}
 \end{document}
