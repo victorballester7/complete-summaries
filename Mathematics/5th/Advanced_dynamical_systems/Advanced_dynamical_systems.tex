@@ -93,7 +93,18 @@
     $$
       \det(\vf{A}^k-\vf{I})=({\lambda_+}^k-1)({\lambda_-}^k-1)\ne 0
     $$
-    and so the equation $\vf{A}^k\vf{x}=\vf{x}+\vf{n}$ has a unique (rational) solution. Now let $(\frac{p_1}{q_1},\frac{p_2}{q_2})\in \quot{\QQ^2}{\ZZ^2}$ and $N\geq 1$ left to be chosen. We define the set $Q_N:=\frac{\ZZ^2}{N} \mod{\ZZ^2}$, which is a subset finite set of $\TT^2$. Observe that $Q_N$ is invariant under $\vf{\tilde{A}}$, and thus, all of its points are periodic because the set is finite. For the above rational numbers, just choose $N=q_1q_2$.
+    and so the equation $\vf{A}^k\vf{x}=\vf{x}+\vf{n}$ has a unique solution. Now suppose the solution is $\vf{x}=(\alpha,\beta)\notin\quot{\QQ^2}{\ZZ^2}$. We have a system of the form:
+    $$
+      \begin{cases}
+        a\alpha + b\beta = n_1 \\
+        c\alpha + d\beta = n_2
+      \end{cases}
+    $$
+    An easy check shows that we must necessarily have both $\alpha,\beta\notin\quot{\QQ}{\ZZ}$. Since $\vf{A}^k-\vf{I}$ is invertible, we may assume that $b\ne d$ (otherwise it's $a\ne c$). So, we can write $\beta=\frac{n_1-n_2}{b-d}-\frac{a-c}{b-d}\alpha$. So:
+    $$
+      n_1=a\alpha + b\beta=b\frac{n_1-n_2}{b-d}-\alpha\frac{ad-bc}{b-d}\implies \alpha\in \quot{\QQ}{\ZZ}
+    $$
+    because $ad-bc\ne 0$. Now let $(\frac{p_1}{q_1},\frac{p_2}{q_2})\in \quot{\QQ^2}{\ZZ^2}$ and $N\geq 1$ left to be chosen. We define the set $Q_N:=\frac{\ZZ^2}{N} \mod{\ZZ^2}$, which is a subset finite set of $\TT^2$. Observe that $Q_N$ is invariant under $\vf{\tilde{A}}$, and thus, all of its points are periodic because the set is finite. For the above rational numbers, just choose $N=q_1q_2$.
   \end{proof}
   \begin{remark}
     The \emph{hyperbolicity} comes from the fact that there is one eigenvector with eigenvalue greater than $1$ and another with eigenvalue less than $1$, both eigenvalues being positive.
@@ -254,7 +265,7 @@
   \begin{definition}
     We say that a homeomorphism $F$ \emph{preserves orientation} if and only if $f$ is strictly increasing. We define the set of $\Homeoplus(\TT^1)$ as the set of homeomorphisms of $\TT^1$ that preserve orientation.
   \end{definition}
-  \begin{proposition}
+  \begin{proposition}\label{ADS:prop_lift}
     Let $F\in\Homeoplus(\TT^1)$. Then, $F$ admits a lift $f$ such that $f(x)=x+\varphi(x)$, where $\varphi:\RR\to\RR$ is a 1-periodic function.
   \end{proposition}
   \begin{proof}
@@ -415,6 +426,9 @@
     \end{equation*}
     Taking limits, we have that $\rho(f)=\rho(g)$, as $\varphi$ is bounded.
   \end{proof}
+  \begin{remark}
+    Note that the proof also works even if $\exists h=\id+\varphi\in \mathcal{C}(\TT^1)$ such that $h\circ f=g\circ h$ (i.e.\ $H$ is only a semi-conjugacy).
+  \end{remark}
   \subsubsection{Rotation number and invariant measure}
   \begin{definition}
     We say that $\mu:\mathcal{C}(\TT^1)\to\RR$ is a \emph{measure on $\mathcal{C}(\TT^1)$} if:
@@ -675,7 +689,7 @@
     $$
       h(f(x))-h(f(0))=\mu([f(0),f(x)))=\mu([0,x))=h(x)
     $$
-    where we have used the invariance of $\mu$. Thus, $h\circ f=R_{h(f(0))}\circ h$ and necessarily we need $h(f(0))=\rho(R_{h(f(0))})=\rho(f)$. This gives $H\circ F=R_{\rho(F)}\circ H$. Now, we can express the dichotomy as follows: either $\supp\mu=\TT^1$ or $\supp\mu=:X\subsetneq \TT^1$. The first case is equivalent to $h$ being strictly increasing and so $h$ is a homeomorphism. Then, $H$ conjugates $F$ and $R_{\rho(F)}$ and so $F$ is minimal because $R_{\rho(F)}$ is minimal. In the second case, we have that $X$ is a nonempty closed invariant set that has no isolated points because $\mu$ has no atoms. To show that $X$ is minimal, let $\TT^1=X\sqcup U$ with $U$ open, and so it can be written as a countable union of open intervals. Let $D\subseteq X$ be the set containing the endpoints of those intervals and let
+    where we have used the invariance of $\mu$. Thus, $h\circ f=R_{h(f(0))}\circ h$ and necessarily we need $h(f(0))=\rho(R_{h(f(0))})=\rho(f)$ because of the invariance of the rotation number under semi-conjugacy\footnote{Recall that since $h$ is a lift, then $h(x+1)$ is also a lift and so $h(x+1)-h(x)=k\in\ZZ$ and this constant has to be 1 because $h(1)=1$. By \mcref{ADS:prop_lift} we have an expression of $h=\id+\varphi$, and that gives us the invariance of the rotation number.}. This gives $H\circ F=R_{\rho(F)}\circ H$. Now, we can express the dichotomy as follows: either $\supp\mu=\TT^1$ or $\supp\mu=:X\subsetneq \TT^1$. The first case is equivalent to $h$ being strictly increasing and so $h$ is a homeomorphism. Then, $H$ conjugates $F$ and $R_{\rho(F)}$ and so $F$ is minimal because $R_{\rho(F)}$ is minimal. In the second case, we have that $X$ is a nonempty closed invariant set that has no isolated points because $\mu$ has no atoms. To show that $X$ is minimal, let $\TT^1=X\sqcup U$ with $U$ open, and so it can be written as a countable union of open intervals. Let $D\subseteq X$ be the set containing the endpoints of those intervals and let
     \begin{equation}\label{ADS:eq1}
       Y:=\{y\in\TT^1:H^{-1}(\{y\})\text{ is a closed interval}\}
     \end{equation}
@@ -701,7 +715,7 @@
     $$
       \int_{\TT^1}\exp{2\pi\ii kx}\dd{\mu}=\exp{2\pi\ii k\alpha}\int_{\TT^1}\exp{2\pi\ii kx}\dd{\mu}\implies \int_{\TT^1}\exp{2\pi\ii kx}\dd{\mu}=0
     $$
-    where the equality is due to the invariance of $\mu$. So, we also have $\int_{\TT^1}P_n(x)\dd{\mu}=a_0$. Now consider the Féjer means, which converge uniformly to $\varphi$ (recall \mnameref{MA:fejerthm}) and use the \mcref{MA:uniformintegral}.
+    where the equality is due to the invariance of $\mu$. So, we also have $\int_{\TT^1}P_n(x)\dd{\mu}=a_0$. Now consider the Féjer means, which converge uniformly to $\varphi$ (recall \mnameref{MA:fejerthm}) and use \mcref{MA:uniformintegral}.
   \end{proof}
   \begin{proposition}\label{ADS:uniquely_ergodic}
     Let $F\in\Homeoplus(\TT^1)$ with $\rho(F)\notin\quot{\QQ}{\ZZ}$. Then, $F$ is uniquely ergodic.
@@ -718,7 +732,7 @@
     where the second equality is due to the invariance of $\mu$. Hence, $H_*\mu$ is invariant by $R_{\rho(F)}$, and so $H_*\mu=\text{Leb}$. That, is $\mu(H^{-1}(A))=\text{Leb}(A)$. Recall again the set $Y$ of \mcref{ADS:eq1} and $\TT^1=X\sqcup U$, with $H^{-1}(Y)=\overline{U}$. Since $Y$ is countable, $0=\text{Leb}(Y)=\mu(H^{-1}(Y))$. Now since $H|_{X\setminus D}:X\setminus D\to \TT^1\setminus Y$ is a homeomorphism, we have that $\mu(B)=\text{Leb}(H(B))$, and so $\mu$ is uniquely determined.
   \end{proof}
   \begin{proposition}\label{ADS:birkov_sum_converge}
-    Let $F\in \Homeo(\TT^1)$. Then, $F$ is uniquely ergodic if and only if $\forall \varphi\in\mathcal{C}(\TT^1)$, $\exists c_\varphi\in\RR$ such that $\frac{1}{n}\sum_{i=0}^{n-1}\varphi\circ F^i$ converge uniformly to $c_\varphi$. In that case, $c_\varphi=\mu(\varphi)$, where $\mathcal{M}_F(\TT^1)=\{\mu\}$.
+    Let $F\in \Homeo(\TT^1)$. Then, $F$ is uniquely ergodic if and only if $\forall \varphi\in\mathcal{C}(\TT^1)$ $\exists c_\varphi\in\RR$ such that $\frac{1}{n}\sum_{i=0}^{n-1}\varphi\circ F^i$ converge uniformly to $c_\varphi$. In that case, $c_\varphi=\mu(\varphi)$, where $\mathcal{M}_F(\TT^1)=\{\mu\}$.
   \end{proposition}
   \begin{proof}
     Assume first that $\mathcal{M}_F(\TT^1)=\{\mu\}$ and argue by contradiction. That, is $\exists \varepsilon>0$, $(n_k)\in\NN$ with $n_k\nearrow +\infty$ and $(x_k)\in\TT^1$ such that $\forall k\geq 0$:
@@ -779,7 +793,7 @@
     The constant $C$ is usually denoted as $\Var(\varphi)$.
   \end{definition}
   \begin{remark}
-    If $\varphi\in\mathcal{C}^1(\TT^1)$, then $\Var(\varphi)=\norm{D\varphi}_{\mathcal{C}^0}$.
+    If $\varphi\in\text{Lip}(\TT^1)$, then $\Var(\varphi)=L$, where $L$ is the Lipschitz constant of $\varphi$.
   \end{remark}
   \begin{lemma}\label{ADS:lema_pnqn}
     Let $\alpha\notin\QQ$. Then, $\forall n\in\NN$, $\exists \frac{p_n}{q_n}\in\QQ$ such that:
@@ -837,6 +851,13 @@
   \begin{lemma}\label{ADS:lema_var_log}
     Let $f\in \mathcal{D}^1(\TT^1)$. $Df$ has bounded variation if and only if $\log Df$ has bounded variation.
   \end{lemma}
+  \begin{proof}
+    Note that since $Df>0$ (because $f$ is an increasing homeomorphism) it attains a maximum $M>0$ and a minimum $m>0$ in $[0,1]$. Thus, for any $0=x_0<x_1<\cdots<x_n=1$ we have:
+    \begin{multline*}
+      \sum_{i=1}^{n}\frac{1}{M}\abs{Df(x_{i})-Df(x_{i-1})}\leq \\\leq\sum_{i=1}^{n}\abs{\log Df(x_{i})-\log Df(x_{i-1})}\leq \\\leq \sum_{i=1}^{n}\frac{1}{m}\abs{Df(x_{i})-Df(x_{i-1})}
+    \end{multline*}
+    where we have used the \mnameref{RVF:meanvaluetheorem}. Hence, $\Var(Df)<\infty\iff \Var(\log Df)<\infty$.
+  \end{proof}
   \begin{theorem}[Denjoy theorem]
     Let $F\in \Diffplus^1(\TT^1)$ with $\rho(F)\notin\quot{\QQ}{\ZZ}$ and $f\in\mathcal{D}^1(\TT^1)$ be a lift of $F$ whose derivative $Df$ has bounded variation. Then, $F$ is topologically conjugated to $R_{\rho(F)}$.
   \end{theorem}
