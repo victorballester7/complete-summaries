@@ -140,15 +140,15 @@
     $$
     with $L=-\sum_{i,j=1}^d\partial_i(a_{ij}\partial_j)+\sum_{j=1}^db_j\partial_j$, it fails due to the coercivity condition.
   \end{remark}
-  \begin{proposition}
+  \begin{proposition}\label{INEPDE:Lmu}
     Consider the problem:
     $$
-      \begin{cases}
+      \mathcal{D}_{\mu,f}:=\begin{cases}
         L_\mu u=f & \text{in }\Omega         \\
         u=0       & \text{on }\partial\Omega
       \end{cases}
     $$
-    with $L_\mu=-\sum_{i,j=1}^d\partial_i(a_{ij}\partial_j)+\sum_{j=1}^db_j\partial_j+\mu c$. Then, if $\mu>0$ is large enough, the problem has a unique weak solution in $H_0^1(\Omega)$
+    with $L_\mu=-\sum_{i,j=1}^d\partial_i(a_{ij}\partial_j)+\sum_{j=1}^db_j\partial_j+\mu$. Then, if $\mu>0$ is large enough, the problem has a unique weak solution in $H_0^1(\Omega)$
   \end{proposition}
   \begin{sproof}
     Taking the natural bilinear map $a$, the coercivity condition becomes:
@@ -192,7 +192,7 @@
   % \begin{proof}
   %   The argument is symmetric since $K^{**}=K$ and $K$ is compact $\iff K^*$ is compact. So suppose $\ker(\id-K)=\{0\}$. Then, $\id -K$ is injective.
   % \end{proof}
-  \begin{theorem}[Abstract Fredholm alternative]
+  \begin{theorem}[Abstract Fredholm alternative]\label{INEPDE:fredholm}
     Let $H$ be Hilbert and $K:H\to H$ be a compact linear operator. Then:
     \begin{enumerate}
       \item $\ker(\id-K)$ and $\ker(\id-K^*)$ are both finite dimensional, and they have the same dimension.
@@ -201,22 +201,21 @@
     \end{enumerate}
   \end{theorem}
   \begin{proof}
-    We organize the proof in several steps:
     \begin{enumerate}
       \setcounter{enumi}{1}
       \item From \mcref{RFA:adjoint_im_ker} we have that $\overline{\im A}={\ker A^*}^\perp$ for any general operator $A$ between Hilbert spaces. Thus, $\im(\id-K)={\ker(\id-K^*)}^\perp\iff \im(\id-K)$ is closed, which reduces to \mcref{INEPDE:lemma3_fredholm}.
-      \item We first show that $\ker(\id-K)=\{0\}\iff \ker(\id-K^*)=\{0\}$. The argument is symmetric since $K^{**}=K$ and the fact that $K$ is compact $\iff K^*$ is compact. So suppose $\ker(\id-K)=\{0\}$. Then, $\id -K$ is injective. Assume $\ker(\id-K^*)\ne\{0\}$. Then, $\im (\id-K)=\ker(\id-K)^\perp\ne H$ and so $\im({(\id-K)}^2)\subsetneq \im(\id-K)$. Indeed, if we had equality, then for any $u\in H$, we would have ${(\id-K)u}\in \im({(\id-K)}^2)$, and thus $\exists v\in H$ such that ${(\id-K)u}={(\id-K)}^2v$, which implies $u={(\id-K)}v$ because $\ker (\id-K)=\{0\}$. Recursively, we have an infinite sequence $\im({(\id-K)}^{n+1})\subsetneq \im({(\id-K)}^n)$, which implies that $\forall n$ $\exists u_n\in \im({(\id-K)}^n)\cap\im({(\id-K)}^{n+1})^\perp$ with $\norm{u_n}=1$. Thus, $\langle u_n,u_m\rangle=\delta_{n,m}$. But $u_n-Ku_n\in \im({(\id-K)}^{n+1})$ so, $u_n-Ku_n\perp u_n$. This implies, by \mnameref{RFA:pythagorean}, that $\norm{Ku_n}=\norm{u_n-Ku_n}+\norm{u_n}\geq 1$, which is a contradiction with the compactness of $K$ because any orthonormal sequence always converges weakly to zero (and so $Ku_n\to 0$). So either $\ker(\id-K)\ne\{0\}$ or $\id-K$ is bijective.
+      \item We first show that $\ker(\id-K)=\{0\}\iff \ker(\id-K^*)=\{0\}$. The argument is symmetric because $K^{**}=K$ and the fact that $K$ is compact $\iff K^*$ is compact. So suppose $\ker(\id-K)=\{0\}$. Then, $\id -K$ is injective. Assume $\ker(\id-K^*)\ne\{0\}$. Then, $\im (\id-K)=\ker(\id-K^*)^\perp\ne H$ and so $\im({(\id-K)}^2)\subsetneq \im(\id-K)$. Indeed, if we had equality, then for any $u\in H$, we would have ${(\id-K)u}\in \im({(\id-K)}^2)$, and thus $\exists v\in H$ such that ${(\id-K)u}={(\id-K)}^2v$, which implies $u={(\id-K)}v$ because $\ker (\id-K)=\{0\}$. Now, recursively, we have an infinite sequence $\im({(\id-K)}^{n+1})\subsetneq \im({(\id-K)}^n)$, which implies that $\forall n$ $\exists u_n\in \im({(\id-K)}^n)\cap\im({(\id-K)}^{n+1})^\perp$ with $\norm{u_n}=1$. Thus, $\langle u_n,u_m\rangle=\delta_{n,m}$. But $u_n-Ku_n\in \im({(\id-K)}^{n+1})$ so, $u_n-Ku_n\perp u_n$. This implies, by \mnameref{RFA:pythagorean}, that $\norm{Ku_n}^2=\norm{u_n-Ku_n}^2+\norm{u_n}^2\geq 1$, which is a contradiction with the compactness of $K$ because any orthonormal sequence always converges weakly to zero (and so $Ku_n\to 0$). So either $\ker(\id-K)\ne\{0\}$ or $\id-K$ is bijective.
 
-            To finish this point, we need to prove that if $\ker(\id-K)$, then ${(\id-K)}^{-1}$ is a bounded linear operator. But this is a consequence of \mcref{INEPDE:lemma2_fredholm}: if $u\in H$, then $u\in \ker {(\id-K)}^\perp$ and thus $\norm{(\id-K)u}\geq c\norm{u}$, which implies that $\norm{v}\geq c \norm{{(\id-K)}^{-1}v}$ taking $v=(\id-K)u$.
+            To finish this point, we need to prove that if $\ker(\id-K)=\{0\}$, then ${(\id-K)}^{-1}$ is a bounded linear operator. But this is a consequence of \mcref{INEPDE:lemma2_fredholm}: if $u\in H$, then $u\in \ker {(\id-K)}^\perp$ and thus $\norm{(\id-K)u}\geq c\norm{u}$, which implies that $\norm{v}\geq c \norm{{(\id-K)}^{-1}v}$ taking $v=(\id-K)u$.
             \setcounter{enumi}{0}
-      \item Assume without loss of generality that $\dim\ker(\id-K)<\dim \ker(\id-K^*)$. Then, there exists a linear injective map $A:\ker(\id-K)\to \ker(\id-K^*)=\im(\id-K)^\perp$. Let $\tilde{K}$ be the operator defined by $\tilde{K}u=Ku+Au^{\text{ker}}$, where $u^{\text{ker}}$ is the projection of $u$ onto $\ker(\id-K)$. Then, $\tilde{K}$ is compact (because $K$ is compact and so is $A$, because it has finite range). Moreover, if $u\in \ker(\id-\tilde{K})$, then $(\id-K)u+Au^{\text{ker}}=0$, which since $(\id-K)u\in \im(\id-K)$ and $Au^{\text{ker}}\in \im(\id-K)^\perp$ implies that both terms are zero. So $u=u^{\text{ker}}\in \ker(\id-K)$ and since $A$ is injective, $u=u^{\text{ker}}=0$. Thus, $\ker(\id-\tilde{K})=\{0\}$ and by the previous point, $\id-\tilde{K}$ is an isomorphism from $H$ to itself. So, for every $w\in \ker(\id-K^*)$, $\exists u\in H$ such that $w=(\id-\tilde{K})u$. Projecting both side onto $\ker(\id-K^*)=\im(\id-K)^\perp$, we have $w=-Au^{\text{ker}}$, which implies that $A$ is onto, and so $\dim\ker(\id-K)=\dim\ker(\id-K^*)$. \mcref{INEPDE:lemma1_fredholm} finishes the proof.
+      \item Assume without loss of generality that $\dim\ker(\id-K)<\dim \ker(\id-K^*)$. Then, there exists a linear injective map $A:\ker(\id-K)\to \ker(\id-K^*)=\im(\id-K)^\perp$. Let $\tilde{K}$ be the operator defined by $\tilde{K}u=Ku+Au^{\text{ker}}$, where $u^{\text{ker}}$ is the projection of $u$ onto $\ker(\id-K)$. Then, $\tilde{K}$ is compact (because $K$ is compact and so is $A$, because it has finite range). Moreover, if $u\in \ker(\id-\tilde{K})$, then $(\id-K)u-Au^{\text{ker}}=0$, which since $(\id-K)u\in \im(\id-K)$ and $Au^{\text{ker}}\in \im(\id-K)^\perp$ implies that both terms are zero. So $u=u^{\text{ker}}\in \ker(\id-K)$ and since $A$ is injective, $u=u^{\text{ker}}=0$. Thus, $\ker(\id-\tilde{K})=\{0\}$ and by the previous point, $\id-\tilde{K}$ is an isomorphism from $H$ to itself. So, for every $w\in \ker(\id-K^*)$, $\exists u\in H$ such that $w=(\id-\tilde{K})u$. Projecting both sides onto $\ker(\id-K^*)=\im(\id-K)^\perp$, we have $w=-Au^{\text{ker}}$, which implies that $A$ is onto, and so $\dim\ker(\id-K)=\dim\ker(\id-K^*)$. \mcref{INEPDE:lemma1_fredholm} finishes the proof.
     \end{enumerate}
   \end{proof}
   \begin{definition}
     Consider the operator $L$ as in \mcref{INEPDE:operator}. We define the \emph{formal adjoint} of $L$ as:
     \begin{align*}
-      L^*v & :=-\sum_{i,j=1}^d\partial_i(a_{ij}\partial_jv)-\sum_{j=1}^d\partial_j(b_jv)+c v                                    \\
-           & =\sum_{i,j=1}^d\partial_i(a_{ij}\partial_jv)-\sum_{j=1}^db_j\partial_jv+ \left(c-\sum_{j=1}^d\partial_jb_j\right)v
+      L^*v := & -\sum_{i,j=1}^d\partial_i(a_{ij}\partial_jv)-\sum_{j=1}^d\partial_j(b_jv)+c v                                      \\
+      =       & -\sum_{i,j=1}^d\partial_i(a_{ij}\partial_jv)-\sum_{j=1}^db_j\partial_jv+ \left(c-\sum_{j=1}^d\partial_jb_j\right)v
     \end{align*}
     It satisfies $\langle Lu,v\rangle=\langle u,L^*v\rangle$ for all $u,v\in H_0^1(\Omega)$.
   \end{definition}
@@ -234,6 +233,17 @@
     \end{equation*}
     has a finite dimensional solution space $W_0$, as well as the space $V_0$ of solutions of $\mathcal{D}_0$, and $\dim W_0=\dim V_0$. Moreover, if $f\in L^2(\Omega)$, $\mathcal{D}_f$ is solvable if and only if $\langle f,v\rangle=0$ for all $v\in W_0$.
   \end{proposition}
+  \begin{proof}
+    We saw in \mcref{INEPDE:Lmu} that for $\mu\geq \mu_0>0$, $L_\mu$ is an isomorphism. Now we want to solve $L_0u=f$. Consider the change of variables $u={L_{\mu_0}}^{-1}w$, with $w=L_{\mu_0}u\in H^{-1}(\Omega)$. Thus, the equation becomes:
+    $$
+      f= (L_{\mu_0}-\mu_0){L_{\mu_0}}^{-1}w=w-\mu_0 {L_{\mu_0}}^{-1}w=(\id-K)w
+    $$
+    with $K=\mu_0 {L_{\mu_0}}^{-1}$. We claim that $K:L^2(\Omega)\to L^2(\Omega)$ is compact. Note that $K=\iota_{H_0^1\hookrightarrow L^2}\circ {L_{\mu_0}}^{-1}\circ \iota_{L^2\hookrightarrow H^{-1}}$, so since ${L_{\mu_0}}^{-1}$ and $\iota_{L^2\hookrightarrow H^{-1}}$ are bounded and we have a compact embedding $H_0^1\hookrightarrow L^2$, we have that $K$ is compact. Finally, one can check that:
+    $$
+      \id-K^*={(\id-K)}^*={\left(L_0{L_{\mu_0}}^{-1}\right)}^*={({L_{\mu_0}}^*)}^{-1}{L_0}^{*}
+    $$
+    By \mcref{INEPDE:fredholm}, we have that $(\id-K)w=f$ has a solution if and only if $(\id-K^*)h=0\implies \langle f,h\rangle_{L^2} =0$ for all $h\in L^2$. But ${L_{\mu_0}}^*$ is an isomorphism, so $(\id-K^*)h=0\iff {L_0}^*h=0$.
+  \end{proof}
   \begin{proposition}
 
   \end{proposition}
