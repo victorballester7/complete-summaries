@@ -1,7 +1,7 @@
 \documentclass[../../../main_math.tex]{subfiles}
 
 \begin{document}
-\changecolor{INLEPDE}
+\changecolor{INEPDE}
 \begin{multicols}{2}[\section{Introduction to nonlinear elliptic PDEs}]
   \subsection{Introduction}
   \begin{definition}
@@ -13,13 +13,13 @@
     \begin{multline*}
       -\sum_{i=1}^d\pdv{}{x_i}\left(\sum_{j=1}^da_{ij}(\vf{x})\partial_ju(\vf{x})\right)+\sum_{j=1}^db_j(\vf{x})\partial_ju(\vf{x})+\\+c(\vf{x})u(\vf{x})=f(\vf{x})
     \end{multline*}
-    then we say that the equation is in \emph{divergence form}. Together with the PDE we usually impose boundary conditions on $\partial\Omega$. The \emph{Dirichlet boundary condition} is:
+    then we say that the equation is in \emph{divergence form}. Together with the PDE we usually impose boundary conditions on $\Fr{\Omega}$. The \emph{Dirichlet boundary condition} is:
     $$
-      u|_{\partial\Omega}=g
+      u|_{\Fr{\Omega}}=g
     $$
     and it is called \emph{homogeneous} if $g=0$. The \emph{Neumann boundary condition} is:
     $$
-      \langle \vf{n},\vf{A} \grad u\rangle|_{\partial\Omega}=g
+      \langle \vf{n},\vf{A} \grad u\rangle|_{\Fr{\Omega}}=g
     $$
     where we have assumed that the boundary of $\Omega$ is smooth enough to define the normal vector $\vf{n}$. The condition is called \emph{homogeneous} if $g=0$. Note that if $\vf{A}=\vf{I}_d$, then the Neumann boundary condition is just $\partial_{\vf{n}} u=g$.
   \end{definition}
@@ -47,8 +47,8 @@
     Consider the problem
     $$
       \mathcal{D}_f:=\begin{cases}
-        Lu=f & \text{in }\Omega         \\
-        u=0  & \text{on }\partial\Omega
+        Lu=f & \text{in }\Omega      \\
+        u=0  & \text{on }\Fr{\Omega}
       \end{cases}
     $$
     where $L$ is as in \mcref{INEPDE:operator}. The \emph{weak formulation} (or \emph{variational formulation}) of the problem is:
@@ -95,8 +95,8 @@
     Consider the problem:
     $$
       \begin{cases}
-        L u=f & \text{in }\Omega         \\
-        u=0   & \text{on }\partial\Omega
+        L u=f & \text{in }\Omega      \\
+        u=0   & \text{on }\Fr{\Omega}
       \end{cases}
     $$
     with $L=-\sum_{i,j=1}^d\partial_i(a_{ij}\partial_j)$ and $f\in L^2(\Omega)$. Then, the problem has a unique weak solution $u\in H_0^1(\Omega)$ and
@@ -134,8 +134,8 @@
     One can check that if we try to apply \mnameref{INEPDE:laxmilgram} to the problem:
     $$
       \begin{cases}
-        Lu=f & \text{in }\Omega         \\
-        u=0  & \text{on }\partial\Omega
+        Lu=f & \text{in }\Omega      \\
+        u=0  & \text{on }\Fr{\Omega}
       \end{cases}
     $$
     with $L=-\sum_{i,j=1}^d\partial_i(a_{ij}\partial_j)+\sum_{j=1}^db_j\partial_j$, it fails due to the coercivity condition.
@@ -144,8 +144,8 @@
     Consider the problem:
     $$
       \mathcal{D}_{\mu,f}:=\begin{cases}
-        L_\mu u=f & \text{in }\Omega         \\
-        u=0       & \text{on }\partial\Omega
+        L_\mu u=f & \text{in }\Omega      \\
+        u=0       & \text{on }\Fr{\Omega}
       \end{cases}
     $$
     with $L_\mu=-\sum_{i,j=1}^d\partial_i(a_{ij}\partial_j)+\sum_{j=1}^db_j\partial_j+\mu$. Then, if $\mu>0$ is large enough, the problem has a unique weak solution in $H_0^1(\Omega)$
@@ -223,8 +223,8 @@
     The \emph{homogeneous adjoint problem}
     $$
       \mathcal{D}_0^*:=\begin{cases}
-        L^*v=0 & \text{in }\Omega         \\
-        v=0    & \text{on }\partial\Omega
+        L^*v=0 & \text{in }\Omega      \\
+        v=0    & \text{on }\Fr{\Omega}
       \end{cases}
     $$
     whose weak formulation is
@@ -244,15 +244,12 @@
     $$
     By \mcref{INEPDE:fredholm}, we have that $(\id-K)w=f$ has a solution if and only if $(\id-K^*)h=0\implies \langle f,h\rangle_{L^2} =0$ for all $h\in L^2$. But ${L_{\mu_0}}^*$ is an isomorphism, so $(\id-K^*)h=0\iff {L_0}^*h=0$.
   \end{proof}
-  \begin{proposition}
-
-  \end{proposition}
   \begin{definition}
     We define the following problem:
     $$
       \mathcal{N}_f:=\begin{cases}
-        -\laplacian u=f   & \text{in }\Omega         \\
-        \pdv{u}{\vf{n}}=0 & \text{on }\partial\Omega
+        -\laplacian u=f   & \text{in }\Omega      \\
+        \pdv{u}{\vf{n}}=0 & \text{on }\Fr{\Omega}
       \end{cases}
     $$
     and $\mathcal{N}_f^*=\mathcal{N}_f$. The weak formulation of the problem is:
@@ -266,7 +263,7 @@
   \subsubsection{Spectrum of compact operators}
   In this section $\KK$ will denote either $\RR$ or $\CC$.
   \begin{definition}
-    Let $H$ be a $\KK$-Hilbert space and $K:H\to H$ be a compact operator. We define the \emph{resolvent set} of $K$ as:
+    Let $H$ be a $\KK$-Hilbert space and $K:H\to H$ be a bounded operator. We define the \emph{resolvent set} of $K$ as:
     $$
       \rho(K)=\{\lambda\in \KK: \lambda\id-K \text{ is invertible}\}
     $$
@@ -275,16 +272,31 @@
       \sigma(K)=\KK\setminus \rho(K)
     $$
   \end{definition}
+  \begin{proposition}
+    Let $H$ be a $\KK$-Hilbert space and $T:H\to H$ be a bounded operator. Then, $\sigma(T)$ is closed.
+  \end{proposition}
+  \begin{proof}
+    Note that $\rho(K)$ is open because if $\lambda\in \rho(T)$, then $\exists\varepsilon\in\RR$ such that $\abs{\varepsilon} < \norm{{(\lambda\id-K)}^{-1}}$. And so $(\lambda+\varepsilon)\id-K$ is invertible. Thus, $\sigma(K)$ is closed.
+  \end{proof}
   \begin{theorem}
-    Let $H$ be an infinite-dimensional Hilbert space and $K:H\to H$ be a compact operator. Then, $0\in \sigma(K)$ and $\sigma(K)$ is closed and at most countable. Moreover, if $\lambda\in \sigma(K)\setminus\{0\}$, then $\lambda$ is an eigenvalue of $K$ and:
-    $$
-      \dim\left(\bigcup_{p\geq 1}\ker{(\lambda\id-K)}^p\right)<\infty
-    $$
-    If $\sigma(K)\cap\RR^*$ is infinite, then it is of the form $\{\lambda_n\}_{n\in \NN}$ with $\lambda_n\to 0$.
+    Let $H$ be an infinite-dimensional separable Hilbert space and $K:H\to H$ be a compact operator. Then:
+    \begin{enumerate}
+      \item $0\in \sigma(K)$.
+            \item\label{INEPDE:item2_spectrum} If $\lambda\in \sigma(K)\setminus\{0\}$, then $\lambda$ is an eigenvalue of $K$.
+      \item $\sigma(K)$ is closed and at most countable.
+      \item If $\sigma(K)\cap\RR$ is infinite, then $\sigma(K)\setminus\{0\}$ is of the form $\{\lambda_n\}_{n\in \NN}$ with $\lambda_n\to 0$.
+      \item If $\lambda\in \sigma(K)\setminus\{0\}$, then:
+            $$
+              \dim\left(\bigcup_{p\geq 1}\ker{(\lambda\id-K)}^p\right)<\infty
+            $$
+    \end{enumerate}
   \end{theorem}
   \begin{proof}
     \begin{enumerate}
-      \item Assume $0\notin \sigma(K)$. Then, $K$ is bijective and so $\id = K\circ K^{-1}$ is compact, as it is the composition of a compact operator and a bounded operator. But this is a contradiction with \mcref{INEPDE:lemma1_fredholm}.
+      \item Assume $0\notin \sigma(K)$. Then, $K$ is bijective and so $\id = K\circ K^{-1}$ is compact, as it is the composition of a compact operator and a bounded operator. But this is a contradiction with \mnameref{RFA:riesz_ball} because the image of any bounded set under a compact operator is relatively compact (or \emph{precompact}).
+      \item If $\ker(\lambda\id-K)=\{0\}$, then by \mnameref{INEPDE:fredholm}, $\lambda\id-K$ is an isomorphism, and thus $\lambda\in \rho(K)$.
+            \setcounter{enumi}{3}
+            % \item If $(\lambda_n)\in \sigma(K)\setminus\{0\}$ is an infinite sequence, then by \mcref{INEPDE:item2_spectrum} we have that $\exists (u_n)\in H$ with $\norm{u_n}=1$ such that $Ku_n=\lambda_nu_n$.
     \end{enumerate}
   \end{proof}
   \begin{lemma}
@@ -294,7 +306,7 @@
     $$
   \end{lemma}
   \begin{proof}
-    Clearly $\alpha:=\sup_{\norm{x}=1}\abs{\langle x,Tx\rangle}\leq \norm{T}$. For the converse, it suffices to show that $\abs{\langle Tx,y\rangle}\leq \alpha$ for all $\norm{x}=\norm{y}=1$. We have:
+    Clearly $\displaystyle\alpha:=\sup_{\norm{x}=1}\abs{\langle x,Tx\rangle}\leq \norm{T}$. For the converse, it suffices to show that $\abs{\langle Tx,y\rangle}\leq \alpha$ for all $\norm{x}=\norm{y}=1$. We have:
     $$
       \langle Tx,y\rangle = \frac{1}{4}\left(\langle T(x+y),x+y\rangle-\langle T(x-y),x-y\rangle\right)
     $$
@@ -310,6 +322,13 @@
     $$
     where $\lambda$ is the largest eigenvalue of $K$.
   \end{lemma}
+  \begin{proof}
+    Let $(x_n)$ be a maximizing sequence with $\norm{x_n}=1$. After extraction, we can assume that $x_n\rightharpoonup x_*$ and so $Kx_n\to Kx_*$. Thus, $\langle x_n,Kx_n\rangle\to \langle x_*,Kx_*\rangle$. So $x_*$ is a maximizer. Now, take $h\perp x_*$ and $\norm{h}=1$. Then, $x_t:=\frac{x_*+th}{\sqrt{1+t^2}}$ satisfies $\norm{x_t}=1$ and:
+    $$
+      \langle x_t,Kx_t\rangle=\langle x_*,Kx_*\rangle+2t\langle h,Kx_*\rangle+\o{t}\leq \langle x_*,Kx_*\rangle
+    $$
+    because of the maximality. So we must have $\langle h,Kx_*\rangle=0$, which implies $Kx_*\in {{({\langle x_*\rangle}^\perp)}^\perp}=\langle x_*\rangle$. Thus, $Kx_*=\lambda x_*$.
+  \end{proof}
   \subsubsection{Regularity theorems for weak solutions of divergence-form elliptic PDEs}
   \begin{theorem}[Inner regularity]
     Assume, in addition to the usual assumptions, that $a_{ij}\in \mathcal{C}^1(\Omega)$. Let $f\in L^2(\Omega)$ and $u\in H^1(\Omega)$ be a weak solution of $Lu=f$. Then, $u\in H^2_{\text{loc}}(\Omega)$ and for any compact embedding $\omega\subset\subset \Omega$, meaning that $\overline{\omega}\subset\Omega$ compact, we have $u\in H^2(\omega)$ and:
@@ -376,40 +395,75 @@
     Let $(u_n)\in H^1(\Omega)$ be such that $u_n\overset{H^1(\Omega)}{\longrightarrow} u$. Then, ${u_n}^\pm\overset{H^1(\Omega)}{\longrightarrow} u^\pm$.
   \end{lemma}
   \begin{corollary}
-    Let $u\in H^1(\Omega)$. Then, $\Tr_{\partial\Omega}(u^\pm)={(\Tr_{\partial\Omega}u)}^\pm$.
+    Let $u\in H^1(\Omega)$. Then, $\Tr_{\Fr{\Omega}}(u^\pm)={(\Tr_{\Fr{\Omega}}u)}^\pm$.
   \end{corollary}
-  \begin{lemma}
-    Let $\Omega\subseteq\RR^d$ open with $\mathcal{C}^1$ boundary, $u\in H^1(\Omega)$ and $\Tr_{\partial\Omega}u\almoste{\leq}0$. Then, $u^+\in H^1_0(\Omega)$.
+  \begin{lemma}\label{INEPDE:lemma3_weak_max}
+    Let $\Omega\subseteq\RR^d$ open with $\mathcal{C}^1$ boundary, $u\in H^1(\Omega)$ and $\Tr_{\Fr{\Omega}}u\almoste{\leq}0$. Then, $u^+\in H^1_0(\Omega)$.
   \end{lemma}
   \begin{theorem}[Weak maximum principle]
     Let $\Omega\subseteq\RR^d$ open and bounded with $\mathcal{C}^1$ boundary, $a_{ij}=a_{ji},c\in L^\infty(\Omega)$, $c\almoste{\geq}0$, $L=-\sum_{i,j=1}^d\partial_i(a_{ij}\partial_j)+c$ be elliptic and $f\in L^2(\Omega)$ with $f\almoste{\leq} 0$. Let $u\in H^1(\Omega)$ be such that:
     \begin{itemize}
       \item $\displaystyle \int_\Omega\left[\sum_{i,j=1}^da_{ij}\partial_iu\partial_jv+cuv\right]=\int_\Omega fv$ $\forall v\in H^1_0(\Omega)$
-      \item $\Tr_{\partial\Omega}u\almoste{\leq}0$
+      \item $\Tr_{\Fr{\Omega}}u\almoste{\leq}0$
     \end{itemize}
     Then, $u\almoste{\leq}0$.
   \end{theorem}
   \begin{proof}
-    Take $v=u^+\in H^1_0(\Omega)$ by \mcref{INEPDE:lemma1_weak_max}. Then, we have:
+    Take $v=u^+\in H^1_0(\Omega)$ by \mcref{INEPDE:lemma3_weak_max}. Then, we have:
     $$
       0\leq \theta {\norm{\grad u^+}_{L^2}}^2\leq\!\! \int_{\{u>0\}}\!\!\sum_{i,j=1}^d a_{ij}\partial_iu\partial_ju+cu^2=\!\!\int_{\{u>0\}} \!\!fu\leq 0
     $$
     where in the second inequality we used the ellipticity of $L$. Thus, we must have $\grad u^+=0$ a.e. in $\Omega$, which implies $u^+=0$ a.e. in $\Omega$, because $u^+|_{\Fr{\Omega}}=0$.
   \end{proof}
-  \begin{theorem}[Weak maximum principle]
+  \begin{theorem}[Weak maximum principle]\label{INEPDE:weak_max_principle}
     Let $\Omega\subseteq\RR^d$ open and bounded with $\mathcal{C}^1$ boundary, $a_{ij}=a_{ji},b_j,c\in L^\infty(\Omega)$, $c \almoste{\geq}0$, $L=-\sum_{i,j=1}^d\partial_i(a_{ij}\partial_j)+\sum_{j=1}^db_j\partial_j+c$ be elliptic and $f\in L^2(\Omega)$ with $f\almoste{\leq} 0$. Let $u\in H^1(\Omega)$ be such that:
     \begin{itemize}
       \item $\displaystyle \int_\Omega\left[\sum_{i,j=1}^da_{ij}\partial_iu\partial_jv+ \sum_{j=1}^db_jv\partial_ju+cuv\right]=\int_\Omega fv$ $\forall v\in H^1_0(\Omega)$
-      \item $\Tr_{\partial\Omega}u\almoste{\leq}0$
+      \item $\Tr_{\Fr{\Omega}}u\almoste{\leq}0$
     \end{itemize}
     Then, $u\almoste{\leq}0$.
   \end{theorem}
   \begin{proof}
-    TODO
+    Let $m\geq 0$ and $v_m={(u-m)}^+$. Proceeding as in the previous proof, we have:
+    \begin{align*}
+      0 & \leq \theta \norm{\grad v_m}_{L^2}^2-\norm{\vf{b}}_\infty\norm{\grad v_m}_{L^2}\norm{v_m}_{L^2}        \\
+        & \leq \int_{\{u>m\}}\sum_{i,j=1}^d a_{ij}\partial_iu\partial_jv_m+\sum_{j=1}^db_j\partial_ju v_m+cu v_m \\
+        & =\int_{\{u>m\}}fv_m\leq 0
+    \end{align*}
+    Thus, $\norm{\grad v_m}_{L^2}\leq C \norm{v_m}_{L^2}$, with $C$ independent of $m$. Note that since $\Omega$ is bounded, $\displaystyle\lim_{m\to\infty}\abs{\{u>m\}}=0$ by\mnameref{RFA:dominated}, and so $\displaystyle\lim_{m\to\infty}\supp v_m=0$ as well since $\supp v_m\subseteq \{u>m\}$. We now continue the proof for $d\geq 3$. By \mnameref{ATFAPDE:gagliardo_nirengerg_sobolev} we have a continuous embedding $H_0^1(\Omega)\hookrightarrow L^{2^*}$ with $\frac{1}{2^*}=\frac{1}{2}-\frac{1}{d}$. So, $\norm{v_m}_{L^{2^*}}\leq \delta \norm{\grad v_m}_{L^2}$. Thus:
+    \begin{multline*}
+      \norm{\grad v_m}_{L^2}\leq C \norm{v_m}_{L^2}\leq C{\abs{\supp v_m}}^{1-\frac{2}{2^*}}\norm{v_m}_{L^{2^*}}\leq \\
+      \leq C\delta {\abs{\supp v_m}}^{1-\frac{2}{2^*}}\norm{\grad v_m}_{L^2}\leq \frac{1}{2} \norm{\grad v_m}_{L^2}
+    \end{multline*}
+    where in the second inequality we used \mnameref{RFA:holder} and the last one is valid for $m\geq m_0$ large enough. Thus, $\norm{\grad v_m}_{L^2}=0$ for $m\geq m_0$, which implies $u\almoste{\leq}m_0$. This means that $\abs{\{u>m_0\}}=0$ and that $\forall \varepsilon >0$, $\abs{\{u\geq m_0-\varepsilon\}}>0$. Suppose now that $m_0>0$ and let $S_\varepsilon=\abs{\{u> m_0-\varepsilon\}}$. Again by \mnameref{RFA:dominated}, $\displaystyle\lim_{\varepsilon\to 0}S_\varepsilon=0$. But then, proceeding as in the previous step:
+    $$
+      \norm{\grad v_{m_0-\varepsilon}}\leq C \delta {S_\varepsilon}^{1-\frac{2}{2^*}}\norm{\grad v_{m_0-\varepsilon}}\leq \frac{1}{2}\norm{\grad v_{m_0-\varepsilon}}
+    $$
+    by choosing $\varepsilon$ small enough. Thus, $\norm{\grad v_{m_0-\varepsilon}}=0$ and so $u\almoste{\leq}m_0-\varepsilon$, which is a contradiction. Thus, $m_0= 0$ (because $m_0\geq 0$ from the beginning) and so $u\almoste{\leq}0$.
+  \end{proof}
+  \begin{theorem}[Weak minimum principle]\label{INEPDE:weak_min_principle}
+    Let $\Omega\subseteq\RR^d$ open and bounded with $\mathcal{C}^1$ boundary, $a_{ij}=a_{ji},b_j,c\in L^\infty(\Omega)$, $c \almoste{\geq}0$, $L=-\sum_{i,j=1}^d\partial_i(a_{ij}\partial_j)+\sum_{j=1}^db_j\partial_j+c$ be elliptic and $f\in L^2(\Omega)$ with $f\almoste{\geq} 0$. Let $u\in H^1(\Omega)$ be such that:
+    \begin{itemize}
+      \item $\displaystyle \int_\Omega\left[\sum_{i,j=1}^da_{ij}\partial_iu\partial_jv+ \sum_{j=1}^db_jv\partial_ju+cuv\right]=\int_\Omega fv$ $\forall v\in H^1_0(\Omega)$
+      \item $\Tr_{\Fr{\Omega}}u\almoste{\geq}0$
+    \end{itemize}
+    Then, $u\almoste{\geq}0$.
+  \end{theorem}
+  \begin{sproof}
+    Apply \mnameref{INEPDE:weak_max_principle} to $u\mapsto -u$ with $f\mapsto -f$.
+  \end{sproof}
+  \begin{corollary}\label{INEPDE:corollary_max_min}
+    If $u$ is a weak solution of $\mathcal{D}_0$ with $c\geq 0$, then $u\almoste{=}0$.
+  \end{corollary}
+  \begin{proof}
+    If $u$ is a weak solution of $\mathcal{D}_0$, then $u$ is a super- (that is, $Lu\geq 0$) and sub-solution (that is $Lu\leq 0$) of $\mathcal{D}_0$. Thus, using \mnameref{INEPDE:weak_max_principle} and \mnameref{INEPDE:weak_min_principle} we conclude that $u\almoste{=}0$.
   \end{proof}
   \begin{corollary}
-    For each $f\in L^2(\Omega)$, the problem $\mathcal{D}_f$ has a unique weak solution $u_f$. Moreover, if $\Fr{\Omega}\in\mathcal{C}^1$, then $u_f\in H^2(\Omega)$ and $f\mapsto u_f$ is a bounded linear operator from $L^2(\Omega)$ to $H^2(\Omega)$. If $\Fr{\Omega}\in\mathcal{C}^{m+1}$, $b_j\in\mathcal{C}^{m-1}$ and $f\in H^{m-1}(\Omega)$, then $u_f\in H^{m+1}(\Omega)$ and $f\mapsto u_f$ is a bounded linear operator from $H^{m-1}(\Omega)$ to $H^{m+1}(\Omega)$.
+    For each $f\in L^2(\Omega)$, the problem $\mathcal{D}_f$ has a unique weak solution $u_f$. Moreover, if $\Fr{\Omega}\in\mathcal{C}^1$, then $u_f\in H^2(\Omega)\cap H_0^1(\Omega)$ and $f\mapsto u_f$ is a bounded linear operator from $L^2(\Omega)$ to $H^2(\Omega)\cap H_0^1(\Omega)$. If $\Fr{\Omega}\in\mathcal{C}^{m+1}$, $b_j\in\mathcal{C}^{m-1}$ and $f\in H^{m-1}(\Omega)$, then $u_f\in H^{m+1}(\Omega)\cap H_0^1(\Omega)$ and $f\mapsto u_f$ is a bounded linear operator from $H^{m-1}(\Omega)$ to $H^{m+1}(\Omega)\cap H_0^1(\Omega)$.
   \end{corollary}
+  \begin{sproof}
+    \mnameref{INEPDE:fredholm} applied to this problem tells us that either there is a nonzero weak solution to $\mathcal{D}_0$ or $\mathcal{D}_f$ is solvable for all $f\in L^2(\Omega)$. But the first case is impossible by \mcref{INEPDE:corollary_max_min}.
+  \end{sproof}
   \begin{theorem}
     Let $1<p<\infty$ and $\Omega\subset\RR^d$ be open and bounded with $\mathcal{C}^{m+1}$ boundary, $m\geq 1$. Let $a_{ij}\in \mathcal{C}^m(\overline{\Omega})$, $b_j,c\in \mathcal{C}^{m-1}(\overline{\Omega})$ and $Lu=-\sum_{i,j=1}^d \partial_i(a_{ij}\partial_j u)+\sum_{j=1}^d b_j\partial_j u+cu$ be an elliptic operator. Then, for any $f\in W^{m-1,p}(\Omega)$, if $u\in H^1_0(\Omega)$ is a weak solution of $\mathcal{D}_f$, then $u\in W^{m+1,p}(\Omega)$ and:
     $$
@@ -438,8 +492,8 @@
   \end{remark}
 
   \subsubsection{Schauder estimates}
-  \begin{theorem}
-    Let $\Omega\subset \RR^d$ be open and bounded with $\Fr{\Omega}\in\mathcal{C}^{2,\alpha}$ for some $0<\alpha<1$. In the elliptic operator $L$ assume that $a_{ij},b_j,c\in\mathcal{C}^{0,\alpha}(\overline{\Omega})$. Then, $\exists c>0$ such that if $u\in\mathcal{C}^2(\Omega)\cap \mathcal{C}^0(\overline{\Omega})$ solves $Lu=f$, with $f\in\mathcal{C}^{0,\alpha}(\overline{\Omega})$, then $u\in \mathcal{C}^{2,\alpha}(\overline{\Omega})$ and:
+  \begin{theorem}[Schauder estimates]\label{INEPDE:schauder_estimates}
+    Let $\Omega\subset \RR^d$ be open and bounded with $\Fr{\Omega}\in\mathcal{C}^{2,\alpha}$ for some $0<\alpha<1$. In the elliptic operator $L$ assume that $a_{ij},b_j,c\in\mathcal{C}^{0,\alpha}(\overline{\Omega})$. Then, $\exists C>0$ such that if $u\in\mathcal{C}^2(\Omega)\cap \mathcal{C}^0(\overline{\Omega})$ solves $Lu=f$, with $f\in\mathcal{C}^{0,\alpha}(\overline{\Omega})$, then $u\in \mathcal{C}^{2,\alpha}(\overline{\Omega})$ and:
     $$
       \norm{u}_{\mathcal{C}^{2,\alpha}(\overline{\Omega})}\leq C\left(\norm{f}_{\mathcal{C}^{0,\alpha}(\overline{\Omega})}+\norm{u}_{\mathcal{C}^{1,\alpha}(\overline{\Omega})}\right)
     $$
@@ -455,69 +509,182 @@
     $$
   \end{corollary}
   \subsubsection{Maximum and comparison principles}
-  \begin{theorem}[Weak maximum principle]
+  \begin{lemma}\label{INEPDE:lemma_matrices_max_principle}
+    If $\vf{A},\vf{B}\in \mathcal{M}_d(\RR)$ are symmetric and $\vf{A}, \vf{B}\geq 0$, then $\tr(\vf{A}\vf{B})\geq 0$.
+  \end{lemma}
+  \begin{theorem}[Weak maximum principle]\label{INEPDE:weak_max_principle_nondiv}
     Let $u\in \mathcal{C}^2(\Omega)$ be such that $Lu\leq 0$. Then:
     \begin{itemize}
-      \item If $c=0$, $\displaystyle \max_{\overline{\Omega}}u=\max_{\partial\Omega}u$.
-      \item If $c\geq 0$, $\displaystyle \max_{\overline{\Omega}}u^+\leq \max_{\partial\Omega}u^+$.
+      \item If $c=0$, then $\displaystyle \max_{\overline{\Omega}}u=\max_{\Fr{\Omega}}u$.
+      \item If $c\geq 0$, then $\displaystyle \max_{\overline{\Omega}}u\leq \max_{\Fr{\Omega}}u^+$.
     \end{itemize}
   \end{theorem}
-  \begin{lemma}[Hopf's lemma]\label{INLEPDE:Hopf}
-    Let $u\in \mathcal{C}^2(\Omega)$ be such that $Lu\leq 0$ and suppose the region $\Omega$ is connected and that satisfies the \emph{interior ball condition}: for any $x\in \partial\Omega$ there exists $r>0$ and $y\in \Omega$ such that $B(y,r)\subset \Omega$ and $\overline{B(y,r)}\cap \Fr{\Omega}=\{x\}$. Suppose in addition that $c=0$ and $x_0\in\Fr\Omega$ be such that $u(x_0)=\max_{\overline{\Omega}}u$. Then, either $u$ is constant in $\Omega$ or
+  \begin{proof}
+    Assume first that $Lu<0$ and $c=0$. Suppose $\exists x_0\in \Omega$ such that $u(x_0)=\max_{\overline{\Omega}}u$. Then, $\grad u(x_0)=0$ and $\vf{H}u(x_0)\leq0$, that is, $\sum_{i,j=1}^d\frac{\partial^2u}{\partial x_i\partial x_j}(x_0)p_ip_j\leq 0$ $\forall \vf{p}\in\RR^d$. On the other hand:
+    \begin{align*}
+      \trace(\vf{A}(x_0)\vf{H}u(x_0)) & = \sum_{i,j=1}^d a_{ij}(x_0)\frac{\partial^2u}{\partial x_i\partial x_j}(x_0) \\
+                                      & =-Lu(x_0)>0
+    \end{align*}
+    The ellipticity of $L$ implies that $\vf{A}>0$, but this is a contradiction with \mcref{INEPDE:lemma_matrices_max_principle} because $\vf{H}u(x_0)\leq 0$. If we now have $c\geq 0$, assume that $\displaystyle \max_{\overline{\Omega}}u^+> \max_{\Fr{\Omega}}u^+$. Then, $\exists x_0\in \Omega$ such that $u(x_0)>0$ and $u(x_0)=\max_{\overline{\Omega}}u^+$. Similarly, we have:
+    \begin{align*}
+      \trace(\vf{A}(x_0)\vf{H}u(x_0)) & = \sum_{i,j=1}^d a_{ij}(x_0)\frac{\partial^2u}{\partial x_i\partial x_j}(x_0) \\
+                                      & =-Lu(x_0) + c(x_0)u(x_0)\geq 0
+    \end{align*}
+    which again leads to a contraction. Now assume $Lu\leq 0$. Take $u_\varepsilon=u+\varepsilon \exp{\lambda x_1}$, with $\varepsilon>0$ and $\lambda>0$ yet to be chosen. An easy computation shows that:
+    \begin{align*}
+      Lu_\varepsilon & \leq \exp{\lambda x_1}[-\lambda^2a_11+b_1\lambda+c]                    \\
+                     & \leq \exp{\lambda x_1}[-\lambda^2a_11+\norm{\vf{b}}_\infty\lambda+c]<0
+    \end{align*}
+    for $\lambda$ large enough. We do here the case $c=0$ (the other is analogous). From what we have previously seen, $\exists y_\varepsilon\in\Fr{\Omega}$ such that $u(x)\leq u_\varepsilon(x)\leq u_\varepsilon(y_\varepsilon)$. And so we can find a sequence $y_{\varepsilon_n}$ that converges to some $y_0\in\Fr{\Omega}$ (because $\Fr{\Omega}$ is compact) as $\varepsilon_n\to 0$, which implies $u(x)\leq u(y_0)$.
+  \end{proof}
+  \begin{theorem}[Weak minimum principle]
+    Let $u\in \mathcal{C}^2(\Omega)$ be such that $Lu\geq 0$. Then:
+    \begin{itemize}
+      \item If $c=0$, then $\displaystyle \min_{\overline{\Omega}}u=\min_{\Fr{\Omega}}u$.
+      \item If $c\geq 0$, then $\displaystyle \min_{\overline{\Omega}} u \geq -\max_{\Fr{\Omega}}u^-$.
+    \end{itemize}
+  \end{theorem}
+  \begin{sproof}
+    Apply \mnameref{INEPDE:weak_max_principle_nondiv} to $-u$ using that ${(-u)}^+=u^-$.
+  \end{sproof}
+  \begin{remark}
+    Nothing can be said if $c<0$. For example, consider $-u''-u=0$, which has $u(x)=\sin(x)$ as a solution, and take $\Omega=(0,\pi)$.
+  \end{remark}
+  \begin{lemma}[Hopf's lemma]\label{INEPDE:Hopf}
+    Let $u\in \mathcal{C}^2(\Omega)$ be such that $Lu\leq 0$ and suppose the region $\Omega$ is connected and that satisfies the \emph{interior ball condition}: for any $x\in \Fr{\Omega}$ there exists $r>0$ and $y\in \Omega$ such that $B(y,r)\subset \Omega$ and $\overline{B(y,r)}\cap \Fr{\Omega}=\{x\}$. Suppose in addition that $c=0$ and $x_0\in\Fr\Omega$ is such that $\displaystyle u(x_0)=\max_{\overline{\Omega}}u$. Then, either $u$ is constant in $\Omega$ or
     $$
       \liminf_{t\to 0^+}\frac{u(x_0) - u(x_0+t\vf{n})}{t}>0
     $$
     for any vector $\vf{n}$ of the form $\vf{n}=\frac{x_0-y_0}{\norm{x_0-y_0}}$ with $B(y_0,r)\subset \Omega$ and $\overline{B(y_0,r)}\cap \Fr{\Omega}=\{x_0\}$.
   \end{lemma}
   \begin{remark}
-    In particular, if $\Fr\Omega\in\mathcal{C}^1$ and $u\in \mathcal{C}^1(\overline{\Omega})$, then \mnameref{INLEPDE:Hopf} implies that either $u$ is constant in $\Omega$ or $\partial_{\vf{n}}u(x_0)=\grad u(x_0)\cdot \vf{n}>0$.
+    In particular, if $\Fr\Omega\in\mathcal{C}^1$ and $u\in \mathcal{C}^1(\overline{\Omega})$, then \mnameref{INEPDE:Hopf} implies that either $u$ is constant in $\Omega$ or $\partial_{\vf{n}}u(x_0)=\grad u(x_0)\cdot \vf{n}>0$.
   \end{remark}
-  \begin{theorem}[Strong maximum principle]
-    Let $\Omega\subset\RR^d$ be open, bounded and connected, and $u\in \mathcal{C}^2(\Omega)$ be such that $Lu\leq 0$ with $c=0$. If $\exists x_0\in\Omega$ such that $u(x_0)\geq u(x)$ $\forall x\in\Omega$, then $u$ is constant in $\Omega$. Similarly, if $c\geq 0$ and $\exists x_0\in\Omega$ such that $u(x_0)\geq 0$ and $u(x_0)\geq u(x)$ $\forall x\in\Omega$, then $u$ is constant in $\Omega$.
+  \begin{theorem}[Strong maximum principle]\label{INEPDE:strong_max_principle}
+    Let $\Omega\subset\RR^d$ be open, bounded and connected, and $u\in \mathcal{C}^2(\Omega)$ be such that $Lu\leq 0$. Then:
+    \begin{enumerate}
+      \item If $c=0$ and $\exists x_0\in\Omega$ such that $u(x_0)\geq u(x)$ $\forall x\in\Omega$, then $u=\const$ in $\Omega$.
+      \item If $c\geq 0$ and $\exists x_0\in\Omega$ such that $u(x_0)\geq 0$ and $u(x_0)\geq u(x)$ $\forall x\in\Omega$, then $u=\const$ in $\Omega$.
+    \end{enumerate}
   \end{theorem}
-  \begin{theorem}
-    Suppose that $c\geq 0$ and $u\in \mathcal{C}^2(\Omega)$ is a solution to
+  \begin{proof}
+    Assume $c=0$, the other case is similar. Let $\displaystyle M=\max_{\overline{\Omega}}u$, $C:= \{u=M\}$ and $V:=\{u<M\}$. Take $y\in V$ satisfying $d(y,C)<d(y,\Fr{\Omega})$ and let $B$ be the largest ball with center at $y$ whose interior lies in $V$. Then, there exists $x_0\in C$ with $x_0\in \Fr{B}$. Clearly $V$ satisfies the interior ball condition at $x_0$, whence \mnameref{INEPDE:Hopf} implies that $\partial_{\vf{n}}u(x_0)>0$. But $\partial_{\vf{n}}u(x_0)=0$ because $x_0\in C$, which is a contradiction. Thus, $V=\varnothing$ and so $u=\const$ in $\Omega$.
+  \end{proof}
+  \begin{theorem}[Strong minimum principle]\label{INEPDE:strong_min_principle}
+    Let $\Omega\subset\RR^d$ be open, bounded and connected, and $u\in \mathcal{C}^2(\Omega)$ be such that $Lu\geq 0$. Then:
+    \begin{enumerate}
+      \item If $c=0$ and $\exists x_0\in\Omega$ such that $u(x_0)\leq u(x)$ $\forall x\in\Omega$, then $u=\const$ in $\Omega$.
+      \item If $c\geq 0$ and $\exists x_0\in\Omega$ such that $u(x_0)\leq 0$ and $u(x_0)\leq u(x)$ $\forall x\in\Omega$, then $u=\const$ in $\Omega$.
+    \end{enumerate}
+  \end{theorem}
+  \begin{sproof}
+    Apply \mnameref{INEPDE:strong_max_principle} to $-u$.
+  \end{sproof}
+  \begin{theorem}[A priori estimate]\label{INEPDE:apriori}
+    Suppose that $c\geq 0$ and $u\in \mathcal{C}^2(\Omega)$ is a solution of
     $$
       \begin{cases}
-        Lu=f                  & \text{in }\Omega         \\
-        u|_{\partial\Omega}=h & \text{on }\partial\Omega
+        Lu=f               & \text{in }\Omega      \\
+        u|_{\Fr{\Omega}}=h & \text{on }\Fr{\Omega}
       \end{cases}
     $$
-    with $f\in \mathcal{C}^0(\overline{\Omega})$ and $h\in \mathcal{C}^0(\partial\Omega)$. Then, $\forall x\in\overline{\Omega}$:
+    with $f\in \mathcal{C}^0(\overline{\Omega})$ and $h\in \mathcal{C}^0(\Fr{\Omega})$. Then, $\forall x\in\overline{\Omega}$:
     $$
-      u(x)\leq \max_{\partial\Omega}h^++C\max_{\overline{\Omega}}f^+
+      u(x)\leq \max_{\Fr{\Omega}}h^++C\max_{\overline{\Omega}}f^+
     $$
-    with $C$ independent of $u$, $f$ and $h$.
+    with $C$ independent of $u$, $f$ and $h$. Moreover, we have:
+    $$
+      \abs{u}\leq \max_{\Fr{\Omega}}\abs{h}+C\max_{\overline{\Omega}}\abs{f}
+    $$
   \end{theorem}
+  \begin{proof}
+    Let $$w(x)=\displaystyle \max_{\Fr{\Omega}}h^++\max_{\overline{\Omega}}f^+(\cosh(\lambda r)-\cosh(\lambda x_1))$$
+    with $r=\max\{\abs{x_1}:x\in\overline{\Omega}\}$. An easy check shows that for $\lambda=\lambda_0>0$ large enough we have:
+    $$
+      \begin{cases}
+        Lw \geq \displaystyle\max_{\overline{\Omega}}f^+ \\
+        \displaystyle\max_{\Fr{\Omega}}h^+\leq w \leq \displaystyle\max_{\Fr{\Omega}}h^++\max_{\overline{\Omega}}f^+ \cosh(\lambda_0 r)
+      \end{cases}
+    $$
+    Let $v=u-w$. Then, $Lv\leq 0$ and $v|_{\Fr{\Omega}}\leq 0$. Thus, \mnameref{INEPDE:weak_max_principle_nondiv} implies that $v\leq 0$ in $\Omega$, that is, $u\leq w$ in $\Omega$.
+  \end{proof}
   \subsubsection{Continuation method}
   \begin{theorem}[Continuation method]
     Let $\Omega\subset\RR^d$ be open and bounded with $\Fr{\Omega}\in\mathcal{C}^{2,\alpha}$ for some $0<\alpha<1$. Consider the problem:
     $$
       \begin{cases}
-        Lu=f                  & \text{in }\Omega         \\
-        u|_{\partial\Omega}=h & \text{on }\partial\Omega
+        Lu=f               & \text{in }\Omega      \\
+        u|_{\Fr{\Omega}}=0 & \text{on }\Fr{\Omega}
       \end{cases}
     $$
-    with $f,a_{ij},b_j,c\in\mathcal{C}^{0,\alpha}( \overline{\Omega})$ and $h\in\mathcal{C}^{0,\alpha}(\partial\Omega)$. Then, there exists a solution to this problem in $\mathcal{C}^{2,\alpha}(\overline{\Omega})$.
+    with $f,a_{ij},b_j,c\in\mathcal{C}^{0,\alpha}( \overline{\Omega})$ and $h\in\mathcal{C}^{0,\alpha}(\Fr{\Omega})$. Then, there exists a solution to this problem in $\mathcal{C}^{2,\alpha}(\overline{\Omega})$.
   \end{theorem}
+  \begin{proof}
+    Let $t\in [0,1]$ and consider the problem:
+    $$ \mathcal{D}_t:= \begin{cases}
+        L_tu=f              & \text{in }\Omega      \\
+        u|_{\Fr{\Omega}}=ht & \text{on }\Fr{\Omega}
+      \end{cases}$$
+    with $L_t=tL-(1-t)\laplacian$. We know that $\mathcal{D}_0$ has a unique weak solution $u_0\in H_0^1(\Omega)$. The idea of the Continuation method is that if $\mathcal{D}_t$ is solvable for all $f$, then for $h>0$ small enough, $\mathcal{D}_{t+h}$ is solvable for all $f$ too. We will do it for $h=0$. Rewrite $\mathcal{D}_{t+h}$ as:
+    $$
+      \begin{cases}
+        L_{t}u=f-h(L+\laplacian)u & \text{in }\Omega      \\
+        u|_{\Fr{\Omega}}=0        & \text{on }\Fr{\Omega}
+      \end{cases}
+    $$
+    We need to solve the fixed point problem $u=\phi(u)$, with
+    $$
+      \function{\phi}{\mathcal{C}^{2,\alpha}}{\mathcal{C}^{2,\alpha}}{u}{\phi(u)={L_t}^{-1}f - h{L_t}^{-1}(L+\laplacian)u}
+    $$
+    From \mnameref{INEPDE:schauder_estimates} and \mnameref{INEPDE:apriori} we deduce that $\norm{u}_{\mathcal{C}^{2,\alpha}(\overline{\Omega})}\leq C\norm{f}_{\mathcal{C}^{0,\alpha}(\overline{\Omega})}$. So $\forall \varphi\in \mathcal{C}^{0,\alpha}(\overline{\Omega})$ we have $\norm{{L_t}^{-1}\varphi}_{\mathcal{C}^{2,\alpha}(\overline{\Omega})}\leq C\norm{\varphi}_{\mathcal{C}^{0,\alpha}(\overline{\Omega})}$ (it can be seen that the constant does not depend on $t$). We will show that $\phi$ is a contraction for $h$ small enough. Let $u,v\in \mathcal{C}^{2,\alpha}(\overline{\Omega})$. Then:
+    \begin{align*}
+      \norm{\phi(u)-\phi(v)}_{\mathcal{C}^{2,\alpha}(\overline{\Omega})} & \leq Ch\norm{(L+\laplacian)(u-v)}_{\mathcal{C}^{0,\alpha}(\overline{\Omega})} \\
+                                                                         & \leq \tilde{C}h\norm{u-v}_{\mathcal{C}^{2,\alpha}(\overline{\Omega})}
+    \end{align*}
+    So take $h\leq \frac{1}{2\tilde{C}}$. Repeating this argument a finite number of times ($\tilde{C}$ does not depend on $t$) we conclude that $\mathcal{D}_1$ is solvable.
+  \end{proof}
   \subsection{Existence theorems for nonlinear elliptic PDEs by fixed point methods}
   In this section we will mostly consider almost linear elliptic PDEs of the form:
-  \begin{equation}\label{INLEPDE:AlmostLinear}
+  \begin{equation}\label{INEPDE:AlmostLinear}
     \begin{cases}
       Lu=f(x,u) \\
-      u|_{\partial\Omega}=0
+      u|_{\Fr{\Omega}}=0
     \end{cases}
   \end{equation}
   with $L$ either $-\sum_{i,j=1}^d\partial_i(a_{ij}\partial_j)+\sum_{j=1}^db_j\partial_j$ or $-\sum_{i,j=1}^d a_{ij} \partial_{ij}^2+\sum_{j=1}^db_j\partial_j$, and $f:\Omega\times \RR\to \RR$.
   \subsubsection{Method of subsoltions and supersolutions}
   \begin{theorem}
-    Suppose that an operator $L$ is uniformly elliptic on an open bounded set $\Omega\subset\RR^d$ with $\Fr{\Omega}\in \mathcal{C}^2$, with $c=0$ and either in divergence form (with $a_{ij}\in\mathcal{C}^1$) or non-divergence form (with $a_{ij},b_j\in\mathcal{C}^{0,\alpha}$). Suppose that $f\in\mathcal{C}^1(\overline{\Omega}\times \RR)$ and assume that the problem of \mcref{INLEPDE:AlmostLinear} has a bounded subsolution $\underline{u}$ and a bounded supersolution $\overline{u}$ such that $\underline{u}\leq \overline{u}$. Then, there exists a solution $u$ to \mcref{INLEPDE:AlmostLinear} such that $\underline{u}\leq u\leq \overline{u}$, which is in $H_0^1(\Omega)\cap H_0^2(\Omega)$ if $L$ is in divergence form and in $\mathcal{C}^{2,\alpha}(\overline{\Omega})$ if $L$ is in non-divergence form.
+    Suppose that an operator $L$ is uniformly elliptic on an open bounded set $\Omega\subset\RR^d$ with $\Fr{\Omega}\in \mathcal{C}^2$, with $c=0$ and either in divergence form (with $a_{ij}\in\mathcal{C}^1$) or non-divergence form (with $a_{ij},b_j\in\mathcal{C}^{0,\alpha}$). Suppose that $f\in\mathcal{C}^1(\overline{\Omega}\times \RR)$ and assume that the problem of \mcref{INEPDE:AlmostLinear} has a bounded subsolution $\underline{u}$ and a bounded supersolution $\overline{u}$ such that $\underline{u}\leq \overline{u}$. Then, there exists a solution $u$ to \mcref{INEPDE:AlmostLinear} such that $\underline{u}\leq u\leq \overline{u}$, which is in $H_0^1(\Omega)\cap H_0^2(\Omega)$ if $L$ is in divergence form and in $\mathcal{C}^{2,\alpha}(\overline{\Omega})$ if $L$ is in non-divergence form.
   \end{theorem}
+  \begin{proof}
+    Let $M:=\max\{\norm{\underline{u}}_\infty,\norm{\overline{u}}_\infty\}$ and modify $f$ outside the set $\overline{\Omega}\times [-M,M]$ so that the modified function $\tilde{f}$ is globally Lipschitz in $u$ and $\displaystyle\sup_{\overline{\Omega}\times \RR}\abs{\frac{\tilde{f}}{u}}\leq \sup_{\overline{\Omega}\times [-M-2,M+2]}\abs{\frac{f}{u}}+1=:k$. Then, the function $g(x,t)=\tilde{f}(x,t)+kt$ is non-decreasing in $t$, and we can rewrite the problem as:
+    $$
+      \begin{cases}
+        (L+k)u=g(x,u)      & \text{in }\Omega      \\
+        u|_{\Fr{\Omega}}=0 & \text{on }\Fr{\Omega}
+      \end{cases}
+    $$
+    Now we construct a sequence of functions $\{u_n\}_{n\in\NN}$ as follows. Let $u_0=\underline{u}$ and $\forall n\in\NN\cup\{0\}$, $u_{n+1}$ be the solution of:
+    $$
+      \begin{cases}
+        (L+k)u=g(x,u_n)    & \text{in }\Omega      \\
+        u|_{\Fr{\Omega}}=0 & \text{on }\Fr{\Omega}
+      \end{cases}
+    $$
+    Take $w=u_{n}-u_{n+1}$. By induction, using the monotonicity of $g$ we have that $w$ solves:
+    $$
+      \begin{cases}
+        (L+k)w\leq 0           & \text{in }\Omega      \\
+        w|_{\Fr{\Omega}}\leq 0 & \text{on }\Fr{\Omega}
+      \end{cases}
+    $$
+    So by the \mnameref{INEPDE:weak_max_principle_nondiv} we have that $w\leq 0$ in $\Omega$. Similarly, taking $v=u_{n+1}-\overline{u}$ we have that $v$ solves the same problem, so $v\leq 0$ in $\Omega$. Summarizing, one can check we have $\underline{u}\leq u_n\leq u_{n+1}\leq \overline{u}$ for all $n\in\NN$. So $\displaystyle\exists u(x):=\lim_{n\to\infty}u_n(x)$, which is a solution to the problem. It suffices to see that $u_n\overset{\mathcal{C}^{0,\alpha}}{\longrightarrow} u$ because then we'd have $g(x,u_n) \overset{\mathcal{C}^{0,\alpha}}{\longrightarrow} g(x,u)$ and so $u_{n+1}= (L+k)^{-1}g(x,u_n) \overset{\mathcal{C}^{2,\alpha}}{\longrightarrow} (L+k)^{-1}g(x,u)=u$. But this is clear because $u_n\overset{W^{1,p}}{\longrightarrow} u$ (because of the compact embedding $W^{2,p}\subset W^{1,p}$) for all $p<\infty$, and we have an embedding $W^{1,p}(\Omega)\subset \mathcal{C}^{0,\alpha}(\overline{\Omega})$ for $p>d$ and for some particular $\alpha$ (see \mnameref{ATFAPDE:morrey_embedding}).
+  \end{proof}
   \subsubsection{Topological fixed point theorems}
   \begin{theorem}[Brower fixed point]
     Let $C\subset \RR^n$ be a closed convex bounded set and $f:C\to C$ be a continuous function. Then, $f$ has at least a fixed point.
   \end{theorem}
-  \begin{theorem}[Schauder fixed point]
+  \begin{theorem}[Schauder fixed point]\label{INEPDE:schauder_fixed_point}
     Let $C$ be a convex set in a Banach space $(E,\norm{\cdot})$ and $f:C\to C$ be a continuous function. Assume one of the following two assumptions:
     \begin{itemize}
       \item $C$ is compact for $\norm{\cdot}$.
@@ -525,26 +692,57 @@
     \end{itemize}
     Then, $f$ has at least a fixed point.
   \end{theorem}
-  \begin{theorem}[Schaefer fixed point]
+  \begin{proof}
+    We will prove it in a Hilbert space $(E,\norm{\cdot})$. Assume the first assumption. Let $\varepsilon>0$. Then, by compactness $\exists N_\varepsilon\in\NN$ and $x_1^\varepsilon,\dots,x_{N_\varepsilon}^\varepsilon\in C$ such that $C\subset \bigcup_{i=1}^{N_\varepsilon}B(x_i^\varepsilon,\varepsilon)$. Let $V_\varepsilon=\langle x_1^\varepsilon,\dots,x_{N_\varepsilon}^\varepsilon\rangle$ be the linear span of these vectors and $C_\varepsilon:=V_\varepsilon\cap C$. Then, $\forall x\in C$ $d(x,C_\varepsilon)< \varepsilon$ because $d(x,x_j^\varepsilon)<\varepsilon$ for some $j$ and $x_j^\varepsilon\in C_\varepsilon$. Let $p_\varepsilon:E\to C_\varepsilon$ be the nonlinear projection on the closed convex bounded set $C_\varepsilon$. For all $x\in C$ we have $\norm{x-p_\varepsilon(x)}\leq d(x,C_\varepsilon)<\varepsilon$. Now define $f_\varepsilon:C_\varepsilon\to C_\varepsilon$ by $f_\varepsilon(x)=p_\varepsilon(f(x))$. Then, $f_\varepsilon$ is continuous and by the \mnameref{INEPDE:Brower} we have that $f_\varepsilon$ has a fixed point $x_\varepsilon\in C_\varepsilon$. Thus:
+    $$
+      \norm{f(x_\varepsilon)-x_\varepsilon}=\norm{f(x_\varepsilon)-p_\varepsilon(f(x_\varepsilon))}<\varepsilon
+    $$
+    By compactness, there is a sequence $\varepsilon_n\to 0$ and $x\in C$ such that $\norm{x_{\varepsilon_n}-x}\to 0$. By the continuity of $f$, $x$ is a fixed point of $f$.
+
+    Now assume the second hypothesis. Let $K=\overline{\Conv(f(C))}$ be the closure of the \emph{convex hull} of $f(C)$, that is the smallest convex set containing $f(C)$. Then, $K$ is compact and convex. Moreover, $K\subseteq C$ since $f(C)\subseteq C$, $C$ is convex and closed. Furthermore, $f(K)\subseteq f(C)\subseteq K$. So $f$ restricts to a continuous function $f|_K:K\to K$. By the first assumption, $f|_K$ has a fixed point $x\in K\subseteq C$.
+  \end{proof}
+  \begin{theorem}[Schaefer fixed point]\label{INEPDE:schaefer_fixed_point}
     Let $(E, \norm{\cdot})$ be Banach and $f:E\to E$ be a continuous and compact. Suppose that $\exists M>0$ such that $\forall (\lambda,u)\in [0,1]\times E$ with $u=\lambda f(u)$ we have $\norm{u}<M$. Then, $f$ has at least a fixed point, that lies in $\overline{B(0,M)}$.
   \end{theorem}
-  \subsection{Variational methods for nonlinear elliptic PDEs}
-  In this section we will solve a PDE $Lu=f(x,u,\grad u)$ by minimizing a certain functional under some constraints.
-  \subsection{Linear case}
-  \begin{proposition}
-    Consider the problem:
+  \begin{proof}
+    Take $C=\overline{B(0,M)}$. For $x\in C$, let:
     $$
-      \begin{cases}
-        Lu:=-\sum_{i,j=1}^d \partial_i(a_{ij}\partial_j u)+cu=f \\
-        u|_{\partial\Omega}=0
+      \tilde{f}(x):=\begin{cases}
+        f(x)                      & \text{if }x\in C        \\
+        M\frac{f(x)}{\norm{f(x)}} & \text{if }\norm{f(x)}>M
       \end{cases}
     $$
+    An easy check shows that $f:C\to C$ is continuous and compact. So, by \mnameref{INEPDE:schauder_fixed_point} $\exists x_*\in C$ such that $x_*=\tilde{f}(x_*)$. If $\norm{x_*}=\norm{f(x_*)}> M$, then:
+    $$
+      \norm{x_*}=M\frac{\norm{f(x_*)}}{\norm{f(x_*)}}=M
+    $$
+    which is absurd. So $f(x_*)=x_*$.
+  \end{proof}
+  \subsection{Variational methods for nonlinear elliptic PDEs}
+  In this section we will solve a PDE $Lu=f(x,u,\grad u)$ by minimizing a certain functional under some constraints.
+  \subsubsection{Linear case}
+  \begin{proposition}[Without constraints]
+    Consider the problem:
+    \begin{equation}\label{INEPDE:var_linear_problem}
+      \begin{cases}
+        Lu:=-\sum_{i,j=1}^d \partial_i(a_{ij}\partial_j u)+cu=f \\
+        u|_{\Fr{\Omega}}=0
+      \end{cases}
+    \end{equation}
     with $L$ elliptic, $a_{ij},c\in L^\infty(\Omega)$ with $a_{ij}= a_{ji}$, $c\geq 0$, and $f\in L^2(\Omega)$. Then, the problem has a unique weak solution $u\in H_0^1(\Omega)$, and it minimizes the functional:
     $$
-      I(u)=\frac{1}{2}\int_\Omega\sum_{i,j=1}^d a_{ij}\partial_iu\partial_ju+cu^2-\int_\Omega fu
+      I(u)=\frac{1}{2}\beta(u,u)-\int_\Omega fu
     $$
+    where $\displaystyle\beta(u,v)=\sum_{i,j=1}^d\int_\Omega a_{ij}\partial_i u\partial_j v + \int_\Omega cuv$.
   \end{proposition}
-
+  \begin{proof}
+    By \mnameref{RFA:riesz_rep} (using the scalar product $\beta$) we have that this problem has a unique weak solution $u_f\in H_0^1(\Omega)$. Moreover, it minimizes the functional $I$. Indeed, expanding $I((u-u_f)+u_f)$ we have:
+    \begin{multline*}
+      I(u)-I(u_f)=\beta(u_f,u-u_f)-\int f(u-u_f)+\\
+      +\frac{1}{2}\beta(u-u_f,u-u_f)= \frac{1}{2} \beta(u-u_f,u-u_f)>0
+    \end{multline*}
+    if $u\ne u_f$.
+  \end{proof}
   \begin{lemma}\label{INEPDE:optimization}
     Let $X$ be a Banach space and $\Phi:X\to \RR$ be continuous and convex, then it is weakly sequentially lower semicontinuous, that is, if $u_n\rightharpoonup u$ in $X$, then $\displaystyle\Phi(u)\leq \liminf_{n\to\infty}\Phi(u_n)$.
   \end{lemma}
@@ -552,11 +750,62 @@
     Let $(X,\norm{\cdot})$ be a reflexive Banach space and $\Phi:X\to \RR$ be continuous, convex and such that $\displaystyle \lim_{\norm{u}\to\infty}\Phi(u)=+\infty$. Then, $\Phi$ has a minimizer. This minimizer is unique if $\Phi$ is strictly convex.
   \end{theorem}
   \begin{proof}
-    Let $\{u_n\}_{n\in\NN}\subset X$ be a minimizing sequence. Then, $\sup_{n\in\NN}\Phi(u_n)<\infty$, so by the coercivity property of $\Phi$ we have that $\{u_n\}_{n\in\NN}$ is bounded, and so $\{u_n\}_{n\in\NN}$ has a weakly convergent subsequence $\{u_{n_k}\}_{k\in\NN}$ with limit $u\in X$. By \mcref{INEPDE:optimization} we have:
+    Let $\{u_n\}_{n\in\NN}\subset X$ be a minimizing sequence. Then, $\displaystyle\sup_{n\in\NN}\Phi(u_n)<\infty$, so by the coercivity property of $\Phi$ we have that $\{u_n\}_{n\in\NN}$ is bounded, and so $\{u_n\}_{n\in\NN}$ has a weakly convergent subsequence $\{u_{n_k}\}_{k\in\NN}$ with limit $u\in X$. By \mcref{INEPDE:optimization} we have:
     $$
       \Phi(u)\leq \lim_{k\to\infty}\Phi(u_{n_k})=\inf_{u\in X}\Phi(u)
     $$
-    But $\Phi(u)\geq \inf_{u\in X}\Phi(u)$, so $u$ is a minimizer.
+    But $\displaystyle\Phi(u)\geq \inf_{u\in X}\Phi(u)$, so $u$ is a minimizer.
   \end{proof}
+  \begin{theorem}[With constraints]
+    Consider the problem \mcref{INEPDE:var_linear_problem}. We know that $L$ is invertible with inverse $L^{-1}:L^2(\Omega)\to H_0^1(\Omega)$. But $H_0^1(\Omega)$ is compactly embedded into $L^2(\Omega)$, so:
+    $$
+      \function{K}{L^2(\Omega)}{L^2(\Omega)}{f}{L^{-1}f}
+    $$
+    is compact. Thus, a Hilbert basis $(u_n)$ of $K$ with $Ku_n=\mu_n u_n$, $\mu_n>0$ with $\mu_n\to 0$ as $n\to\infty$ exists (we may assume $\mu_n\searrow 0$). Thus, $Lu_n=\lambda_nu_n$ with $\lambda_n=\frac{1}{\mu_n}\nearrow+\infty$. Then:
+    $$
+      \lambda_1=\min_{\substack{u\in H_0^1(\Omega) \\ \norm{u}_{L^2(\Omega)}=1}}\beta(u,u)=\min_{u\in H_0^1(\Omega)\setminus\{0\}}\frac{\beta(u,u)}{\norm{u}_{L^2(\Omega)}^2}
+    $$
+    And:
+    \begin{align*}
+      \lambda_n & =\min_{\substack{u\in H_0^1(\Omega)                   \\u\in\langle u_1,\dots,u_{n-1}\rangle^{\perp_{L^2}}\\ \norm{u}_{L^2(\Omega)}=1}}\beta(u,u)\\
+                & = \min_{\substack{u\in H_0^1(\Omega)\setminus\{0\}    \\ u\in\langle u_1,\dots,u_{n-1}\rangle^{\perp_{L^2}}}}\frac{\beta(u,u)}{\norm{u}_{L^2(\Omega)}^2}\\
+                & =\min_{\substack{V\text{ subspace of }H_0^1(\Omega)   \\ \dim(V)=n}}\max_{\substack{u\in V\setminus\{0\} \\ \norm{u}_{L^2(\Omega)}=1}}\beta(u,u)\\
+                & = \max_{\substack{W\text{ subspace of } H_0^1(\Omega) \\ \codim(W)=n-1}}\min_{\substack{u\in W\setminus\{0\} \\ \norm{u}_{L^2(\Omega)}=1}}\beta(u,u)
+    \end{align*}
+  \end{theorem}
+  \begin{proof}
+    TODO
+  \end{proof}
+  \subsubsection{Nonlinear case}
+  \begin{definition}
+    We say that $f:\Omega\times \RR\to\RR$ is \emph{Carathéodory} if $f$ is measurable in $x$ and continuous in $t$.
+  \end{definition}
+  \begin{theorem}
+    Let $f:\Omega\times \RR\to\RR$ be Carathéodory satisfying the growth condition $\abs{f(x,t)}\leq C(1+\abs{t}^\theta)$ $\forall (x,t)\in \Omega\times \RR$ with $\theta\geq 1$. Then, for any $\theta\leq p<\infty$, the \emph{superposition operator}
+    $$
+      \function{\Phi_f}{L^p(\Omega)}{L^{p/\theta}(\Omega)}{u}{f(\cdot,u(\cdot))}
+    $$
+    is continuous.
+  \end{theorem}
+  \begin{proof}
+    Let $(u_n),u\in L^p(\Omega)$ be such $u_n\overset{L^p}{\longrightarrow} u$. We will prove that $v_n:=f(\cdot,u_n(\cdot))$ is precompact in $L^{p/\theta}(\Omega)$ (that is, any subsequence $v_{n_k}$ has a convergent subsequence) and has only one limit point, which is $v:=f(\cdot,u(\cdot))$. Take a subsequence $(v_{n_k})$ of $(v_n)$. We know that $u_{n_k}\overset{L^p}{\longrightarrow} u$. We know that in this case there exists a subsequence $u_{n_{k_j}}\almoste{\to }u$ and $\abs{u_{n_{k_j}}}\leq h$ with $h\in L^p$. Then, by the continuity of $f$, $v_{n_{k_j}}\almoste{\to} v$ and by the growth condition, $v_{n_{k_j}}\leq C(1+\abs{h(x)}^\theta)\in L^{p/\theta}$. So, by \mnameref{RFA:dominated}, $v_{n_{k_j}}\overset{L^{p/\theta}}{\longrightarrow} v$.
+  \end{proof}
+  \begin{proposition}
+    Let $f:\Omega\times \RR\to\RR$ be Carathéodory satisfying the growth condition $\abs{f(x,t)}\leq C(1+\abs{t}^\theta)$ $\forall (x,t)\in \Omega\times \RR$ with $1\leq \theta\leq 2^*$, $\frac{1}{2^*}=\frac{1}{2}-\frac{1}{d}$, (if $d\geq 3$) or $1\leq \theta<\infty$ (if $d=2$). Then, the superposition operator
+    $$
+      \function{\Phi_f}{H^1(\Omega)}{L^{p/\theta}(\Omega)}{u}{f(\cdot,u(\cdot))}
+    $$
+    is continuous for all $\theta \leq p\leq 2^*$ (if $d\geq 3$) and $\theta\leq p<\infty$ (if $d=2$). Moreover, $\Phi_f$ is compact if $\theta<p<2^*$ (if $d\geq 3$) or $\theta<p<\infty$ (if $d=2$).
+  \end{proposition}
+  \begin{proposition}
+    Let $f:\Omega\times \RR\to\RR$ be Carathéodory satisfying the growth condition $\abs{f(x,t)}\leq C(1+\abs{t}^\theta)$ $\forall (x,t)\in \Omega\times \RR$ with $1\leq \theta\leq \frac{d+2}{d-2}$ (if $d\geq 3$) or $1\leq \theta<\infty$ (if $d=2$). Let $F(x,t):=\int_0^tf(x,s)\dd{s}$ and consider the functional
+    $$
+      \function{\Psi}{H^1(\Omega)}{\RR}{u}{\displaystyle\int_\Omega F(x,u(x))\dd{x}}
+    $$
+    Then, $\Psi$ is well-defined on $H^1$, it is of class $\mathcal{C}^1$ and its differential is given by:
+    $$
+      \dd{\Psi}(u)h=\int_\Omega f(x,u(x))h(x)\dd{x}
+    $$
+  \end{proposition}
 \end{multicols}
 \end{document}
