@@ -776,11 +776,11 @@
   \begin{proof}
     TODO
   \end{proof}
-  \subsubsection{Nonlinear case}
+  \subsubsection{Nonlinear case without constraints}
   \begin{definition}
     We say that $f:\Omega\times \RR\to\RR$ is \emph{Carathéodory} if $f$ is measurable in $x$ and continuous in $t$.
   \end{definition}
-  \begin{theorem}
+  \begin{theorem}[Superposition operator]
     Let $f:\Omega\times \RR\to\RR$ be Carathéodory satisfying the growth condition $\abs{f(x,t)}\leq C(1+\abs{t}^\theta)$ $\forall (x,t)\in \Omega\times \RR$ with $\theta\geq 1$. Then, for any $\theta\leq p<\infty$, the \emph{superposition operator}
     $$
       \function{\Phi_f}{L^p(\Omega)}{L^{p/\theta}(\Omega)}{u}{f(\cdot,u(\cdot))}
@@ -790,22 +790,288 @@
   \begin{proof}
     Let $(u_n),u\in L^p(\Omega)$ be such $u_n\overset{L^p}{\longrightarrow} u$. We will prove that $v_n:=f(\cdot,u_n(\cdot))$ is precompact in $L^{p/\theta}(\Omega)$ (that is, any subsequence $v_{n_k}$ has a convergent subsequence) and has only one limit point, which is $v:=f(\cdot,u(\cdot))$. Take a subsequence $(v_{n_k})$ of $(v_n)$. We know that $u_{n_k}\overset{L^p}{\longrightarrow} u$. We know that in this case there exists a subsequence $u_{n_{k_j}}\almoste{\to }u$ and $\abs{u_{n_{k_j}}}\leq h$ with $h\in L^p$. Then, by the continuity of $f$, $v_{n_{k_j}}\almoste{\to} v$ and by the growth condition, $v_{n_{k_j}}\leq C(1+\abs{h(x)}^\theta)\in L^{p/\theta}$. So, by \mnameref{RFA:dominated}, $v_{n_{k_j}}\overset{L^{p/\theta}}{\longrightarrow} v$.
   \end{proof}
-  \begin{proposition}
-    Let $f:\Omega\times \RR\to\RR$ be Carathéodory satisfying the growth condition $\abs{f(x,t)}\leq C(1+\abs{t}^\theta)$ $\forall (x,t)\in \Omega\times \RR$ with $1\leq \theta\leq 2^*$, $\frac{1}{2^*}=\frac{1}{2}-\frac{1}{d}$, (if $d\geq 3$) or $1\leq \theta<\infty$ (if $d=2$). Then, the superposition operator
+  \begin{proposition}\label{INEPDE:minimization_prop1}
+    Let $f:\Omega\times \RR\to\RR$ be Carathéodory satisfying the growth condition $\abs{f(x,t)}\leq C(1+\abs{t}^\theta)$ $\forall (x,t)\in \Omega\times \RR$ with $1\leq \theta\leq 2^*$, $\frac{1}{2^*}=\frac{1}{2}-\frac{1}{d}$, (if $d\geq 3$) and $1\leq \theta<\infty$ (if $d=2$). Then, the superposition operator
     $$
       \function{\Phi_f}{H^1(\Omega)}{L^{p/\theta}(\Omega)}{u}{f(\cdot,u(\cdot))}
     $$
     is continuous for all $\theta \leq p\leq 2^*$ (if $d\geq 3$) and $\theta\leq p<\infty$ (if $d=2$). Moreover, $\Phi_f$ is compact if $\theta<p<2^*$ (if $d\geq 3$) or $\theta<p<\infty$ (if $d=2$).
   \end{proposition}
-  \begin{proposition}
-    Let $f:\Omega\times \RR\to\RR$ be Carathéodory satisfying the growth condition $\abs{f(x,t)}\leq C(1+\abs{t}^\theta)$ $\forall (x,t)\in \Omega\times \RR$ with $1\leq \theta\leq \frac{d+2}{d-2}$ (if $d\geq 3$) or $1\leq \theta<\infty$ (if $d=2$). Let $F(x,t):=\int_0^tf(x,s)\dd{s}$ and consider the functional
+  \begin{definition}
+    Let $X,Y$ be normed spaces and $T:X\to Y$. We say that $T$ is \emph{Fréchet differentiable} at $u\in X$ if $\exists L\in \mathcal{L}(X,Y)$ such that:
+    $$
+      \lim_{\substack{h\to 0\\h\in X\setminus\{0\}}}\frac{\norm{T(u+h)-T(u)-Lh}}{\norm{h}}=0
+    $$
+    In this case, we say that $L$ is the \emph{Fréchet derivative} of $T$ at $u$. We denote it by $\dd{T(u)}$.
+  \end{definition}
+  \begin{definition}
+    Let $X,Y$ be normed spaces and $T:X\to Y$. We say that $T$ is \emph{Gâteaux differentiable} at $u\in X$ if $\exists L\in \mathcal{L}(X,Y)$ such that $\forall h\in X$:
+    $$
+      \lim_{\substack{t\to 0\\t\ne 0}}\frac{T(u+th)-T(u)}{t}=Lh
+    $$
+    In this case, we say that $L$ is the \emph{Gâteaux derivative} of $T$ at $u$. We denote it by $D{T}(u)$.
+  \end{definition}
+  \begin{lemma}
+    Let $X,Y$ be normed spaces and $T:X\to Y$. Then, if the Fréchet and Gâteaux derivatives of $T$ at $u$ exist, they are unique. Moreover we have:
+    \begin{itemize}
+      \item If $T$ is Fŕechet differentiable at $u$, then it is Gâteaux differentiable at $u$ and both differentials coincide.
+      \item If $T$ is Fréchet differentiable at $u$, $T$ is continuous at $u$.
+      \item If $T$ is Gâteaux differentiable at $u\in U$ and the map
+            $$
+              \function{}{U}{\mathcal{L}(X,Y)}{u}{DT(u)}
+            $$
+            is continuous, then $T$ is Fréchet differentiable at $u$ and $\dd{T(u)}=DT(u)$.
+    \end{itemize}
+  \end{lemma}
+  \begin{proposition}\label{INEPDE:minimization_prop2}
+    Let $f:\Omega\times \RR\to\RR$ be Carathéodory satisfying the growth condition $\abs{f(x,t)}\leq C(1+\abs{t}^\theta)$ $\forall (x,t)\in \Omega\times \RR$ with $1\leq \theta\leq \frac{d+2}{d-2}$ (if $d\geq 3$) and $1\leq \theta<\infty$ (if $d=2$). Let $F(x,t):=\int_0^tf(x,s)\dd{s}$ and consider the functional
     $$
       \function{\Psi}{H^1(\Omega)}{\RR}{u}{\displaystyle\int_\Omega F(x,u(x))\dd{x}}
     $$
     Then, $\Psi$ is well-defined on $H^1$, it is of class $\mathcal{C}^1$ and its differential is given by:
     $$
-      \dd{\Psi}(u)h=\int_\Omega f(x,u(x))h(x)\dd{x}
+      \dd{\Psi(u)}h=\int_\Omega f(x,u(x))h(x)\dd{x}
     $$
   \end{proposition}
+  \begin{proof}
+    We will assume $d\geq 3$, the case $d=2$ is similar. We have that $\abs{F(x,t)}\leq \tilde{C}(1+\abs{t}^{\theta+1})$. Note that $2\leq \theta+1\leq 2^*$, so taking $p=\theta+1$ in \mcref{INEPDE:minimization_prop1} we have that
+    $$
+      \function{\Phi_F}{H^1(\Omega)}{L^{1}(\Omega)}{u}{\int_0^{u}f(x,s)\dd{s}}
+    $$
+    is continuous. Thus, $\Psi$ is well-defined and continuous. Let $h\in H^1(\Omega)$, $t\in (-1,1)$ and consider $g(t)=\Psi(u+th)$. We have:
+    \begin{align*}
+      \abs{\pdv{}{t}F(x,u+th)} & =\abs{f(x,u+th)h(x)}                                      \\
+                               & \leq C\left(1+{(\abs{u}+\abs{h})}^\theta\right)\abs{h}=:H
+    \end{align*}
+    By \mcref{INEPDE:minimization_prop1}, we know that ${(\abs{u}+\abs{h})}^\theta\in L^{2^*/\theta}$ and $\abs{h}\in L^{2^*}$, so by \mnameref{RFA:holder} (since $\frac{1}{2^*}+\frac{\theta}{2^*}=\frac{\theta+1}{2^*}\leq 1$) we have that $H\in L^1(\Omega)$. Thus, by \mcref{RFA:diffUnderIntegralSign} we have that $g$ is differentiable and:
+    $$
+      g'(0)=\int_\Omega f(x,u(x))h(x)\dd{x}
+    $$
+    So $\exists D\Psi(u)$ and $$
+      D\Psi(u)h=\int_\Omega f(x,u(x))h(x)\dd{x}={\langle \Phi_f(u), h\rangle}_{L^{p'}\times L^p}
+    $$
+    where $\frac{1}{p}+\frac{1}{p'}=1$ and $2\leq p\leq 2^*$. To prove that $\Psi\in\mathcal{C}^1$, it suffices to show that $D\Psi(u)\in \mathcal{C}(H^1,L^{p'})$. We have $f(x,t)\leq C(1+\abs{t}^\theta)$, so $\Phi_f:H^1\to L^{p/\theta}$ is continuous for $\frac{d+2}{d-2}\leq p\leq 2^*$. If $p'\leq p/\theta$, since $\Omega$ is bounded, $L^{p/\theta}\hookrightarrow L^{p'}$ is continuous by \mnameref{RFA:holder}. An easy check shows that if we take $p=2^*$, and $p'$ such that $\frac{1}{p}+\frac{1}{p'}=1$, these inequality hold.
+  \end{proof}
+  \begin{theorem}[Without constraints]
+    Let $f:\Omega\times \RR\to\RR$ be Carathéodory satisfying
+    \begin{itemize}
+      \item $\abs{f(x,t)}\leq C(1+\abs{t}^\theta)$ $\forall (x,t)\in \Omega\times \RR$ with $1\leq \theta\leq \frac{d+2}{d-2}$ (if $d\geq 3$) and $1\leq \theta<\infty$ (if $d=2$).
+      \item $f(x,t)\sign(t)\leq C'$ $\forall (x,t)\in \Omega\times \RR$.
+    \end{itemize}
+    Let $F(x,t):=\int_0^tf(x,s)\dd{s}$ and for $u\in H_0^1(\Omega)$ consider the functional:
+    $$
+      I(u)=\frac{1}{2}\int_\Omega \abs{\grad u}^2-\int_\Omega F(x,u)\dd{x}
+    $$
+    Then, $I\in\mathcal{C}^1(H_0^1,\RR)$, it is bounded from below and there is $\underline{u}\in H_0^1(\Omega)$ such that $\displaystyle I(\underline{u})=\min_{u\in H_0^1(\Omega)}I(u)$. Moreover, $\underline{u}$ is a weak solution to the problem:
+    \begin{equation}
+      \label{INEPDE:eq_problem_min}
+      \begin{cases}
+        -\laplacian u=f(x,u) & \text{in }\Omega      \\
+        u|_{\Fr{\Omega}}=0   & \text{on }\Fr{\Omega}
+      \end{cases}
+    \end{equation}
+  \end{theorem}
+  \begin{proof}
+    We saw in \mcref{INEPDE:minimization_prop2} that the map $u\mapsto \int_\Omega F(x,u(x))\dd{x}$ is of class $\mathcal{C}^1$ and its differential is given by $h\mapsto \int_\Omega f(x,u(x))h(x)\dd{x}$. Moreover:
+    $$
+      \int_\Omega\abs{\grad(u+h)}^2-\int_\Omega\abs{\grad u}^2=2\int_\Omega \grad u\cdot \grad h+\o{\norm{h}_{H_0^1}}
+    $$
+    Since, $u\mapsto \int_\Omega \grad u\cdot \grad h$ is linear and continuous, we have that $I$ is of class $\mathcal{C}^1$ and its differential is given by:
+    $$
+      \dd{I(u)}h=\int_\Omega \grad u\cdot \grad h-\int_\Omega f(x,u(x))h(x)\dd{x}
+    $$
+    Integrating the hypothesis on $f$, we deduce that:
+    \begin{itemize}
+      \item $\abs{F(x,t)}\leq \tilde{C} (1+\abs{t}^{\theta+1})$ $\forall (x,t)\in \Omega\times \RR$ with $1\leq \theta\leq 2^*$ (if $d\geq 3$) and $1\leq \theta<\infty$ (if $d=2$).
+      \item $F(x,t)\leq C'\abs{t}$ $\forall (x,t)\in \Omega\times \RR$.
+    \end{itemize}
+    Thus:
+    \begin{multline*}
+      I(u)\geq \frac{1}{2}{\norm{\grad u}_{L^2}}^2-C'\int \abs{u}\geq \frac{1}{2}{\norm{\grad u}_{L^2}}^2-C''{\norm{u}_{L^2}}\geq \\\geq \frac{1}{2} {\norm{\grad u}_{L^2}}^2-\bar{C}{\norm{\grad u}_{L^2}}
+      =-\frac{\bar{C}^2}{2}+\frac{1}{2}{\left(\norm{\grad u}_{L^2}-\bar{C}\right)}^2
+    \end{multline*}
+    where we used \mnameref{ATFAPDE:poincare_ineq} in the third inequality. So $\displaystyle \inf_{u\in H_0^1(\Omega)}I(u)\geq -\frac{\bar{C}^2}{2}>-\infty$. Thus, $I$ is bounded from below. Moreover, $I$ is \emph{coercive} in the sense that $\displaystyle \lim_{\norm{u}_{H_0^1}\to\infty}I(u)=+\infty$.
+
+    Now take a minimizing sequence $(u_n)$ for $I$. Then, $\displaystyle \sup_{n\in\NN}I(u_n)<\infty$ and by the coercivity property we have $\displaystyle \sup_{n\in\NN}\norm{u_n}_{H_0^1}<\infty$. After extraction, we have $u_n\overset{H_0^1}{\rightharpoonup} \underline{u}$ for some $\underline{u}\in H_0^1(\Omega)$ and using \mcref{INEPDE:minimization_prop1} we have a compact embedding $H_0^1(\Omega)\hookrightarrow L^p(\Omega)$ for any $1\leq p< 2^*$, so $u_n\overset{L^p}{\to} \underline{u}$. Using the growth property and taking $p=\theta+1<2^*$ we conclude that $F(\cdot,u_n(\cdot))\overset{L^{p/\theta}}{\to} F(\cdot,\underline{u}(\cdot))$. So, $\int_\Omega F(x,u_n(x))\dd{x}\to \int_\Omega F(x,\underline{u}(x))\dd{x}$. On the other hand, since $u_n\overset{H_0^1}{\rightharpoonup} \underline{u}$, we have that $\displaystyle \norm{u}_{H_0^1}\leq \liminf_{n\to\infty}\norm{u_n}_{H_0^1}$. Thus, if $\displaystyle m:=\min_{u\in H_0^1(\Omega)}I(u)$, we have:
+    \begin{itemize}
+      \item $\displaystyle I(\underline{u})\leq \liminf_{n\to\infty}I(u_n)=m$.
+      \item $I(\underline{u})\geq m$ because $\underline{u}\in H_0^1(\Omega)$.
+    \end{itemize}
+    So $\underline{u}$ is a minimizer for $I$. Moreover, this implies that $\int_\Omega \abs{\grad u_n}^2\to \int_\Omega \abs{\grad \underline{u}}^2$, so $u_n\overset{H_0^1}{\to} \underline{u}$. Since, $\underline{u}$ is a minimizer for $I$, we have that the map $t\mapsto I(\underline{u}+th)$ has a minimum at $t=0$. Thus, $\forall h\in H_0^1(\Omega)$:
+    $$
+      \dd{I(\underline{u})}h=\int_\Omega \grad \underline{u}\cdot \grad h-\int_\Omega f(x,\underline{u}(x))h(x)\dd{x}=0
+    $$
+    So $\underline{u}$ is a weak solution to the problem of \mcref{INEPDE:eq_problem_min}.
+  \end{proof}
+  \begin{theorem}[Bootstrap]
+    Let $f:\Omega\times \RR\to\RR$ be Carathéodory satisfying the growth condition $\abs{f(x,t)}\leq C(1+\abs{t}^\theta)$ $\forall (x,t)\in \Omega\times \RR$ with $\theta\geq 1$. Then, for any $\theta\leq p<\infty$. Assume $\Fr{\Omega}\in \mathcal{C}^2$ and $1\leq p<\infty$. We have an isomorphism $-\laplacian:W^{2,p}(\Omega)\cap W^{1,p}\to L^p(\Omega)$, meaning that for each $g\in L^p(\Omega)$ there exists a unique strong solution $\underline{u}$ of
+    $$
+      \begin{cases}
+        -\laplacian u=g    & \text{in }\Omega      \\
+        u|_{\Fr{\Omega}}=0 & \text{on }\Fr{\Omega}
+      \end{cases}
+    $$
+    in $W^{2,p}$. Then, $\underline{u}\in\mathcal{C}^{0,\alpha}(\overline{\Omega})$ for $0<\alpha<1$ and $\displaystyle \underline{u}\in \bigcap_{1\leq p<\infty}W^{2,p}(\Omega)$.
+  \end{theorem}
+  \begin{proof}
+    Define $g(x)=\Phi_f(\underline{u})(x)=f(x,\underline{u}(x))$. We have that $\underline{u}\in H_0^1(\Omega)$ (because it is a weak solution), so by \mcref{INEPDE:INEPDE:minimization_prop1} $\underline{u}\in L^{2^*}$. Thus, $g\in L^{p_1}$ with $p_1=\frac{2^*}{\theta}$. So $\underline{u}\in W^{2,p_1}$ and thus $\underline{u}\in L^{q_1}$ with $\frac{1}{q_1}=\frac{1}{p_1}-\frac{2}{d}$ (critical Sobolev embedding). Hence, we get $g\in L^{p_2}$ with $p_2=\frac{q_1}{\theta}$. We can repeat this process as long as $p_n<\frac{d}{2}$. We study the sequence $a_n=\frac{1}{p_n}$. In the process we have that if $a_n>\frac{2}{d}$, then:
+    $$
+      a_{n+1}=\theta a_n-\frac{2}{d}\theta
+    $$
+    with $a_1=\frac{\theta}{2}-\frac{\theta}{d}$.
+    The fixed point is $r:=\frac{2\theta}{d(\theta-1)}$. So:
+    $$
+      a_n=r+\theta^n(a_1-r)
+    $$
+    But an easy check shows that $a_1-r<0$, so $a_n\to -\infty$, which is a contradiction since $a_n> \frac{2}{d}$. Thus, the process stops after a finite number of times, and thus, we get $\underline{u}\in\mathcal{C}^{0,\alpha}(\overline{\Omega})$ for $0<\alpha<1$ and $\displaystyle \underline{u}\in \bigcap_{1\leq p<\infty}W^{2,p}(\Omega)$.
+  \end{proof}
+  \subsubsection{Nonlinear case with constraints}
+  \begin{theorem}[Lagrange multipliers]
+    Let $E$ be a normed space and $I,J\in \mathcal{C}^1(E,\RR)$. Assume that:
+    \begin{itemize}
+      \item For some $\mu\in\RR$ and all $u\in E$ we have that if $J(u)=\mu$, then $\dd{J(u)}\ne0$.
+      \item $\exists \underline{u}\in E$ such that $J(\underline{u})=\mu$ and $I(\underline{u})=\displaystyle \min_{\substack{u\in E \\ J(u)=\mu}}I(u)$.
+    \end{itemize}
+    Then, $\exists \lambda\in\RR$, called \emph{Lagrange multiplier}, such that $\dd{I(\underline{u})}=\lambda \dd{J(\underline{u})}$.
+  \end{theorem}
+  \begin{theorem}[Lagrange multipliers in several variables]
+    Let $E$ be a normed space and $I,J_1,\dots,J_m\in \mathcal{C}^1(E,\RR)$. Assume that:
+    \begin{itemize}
+      \item For some $\mu_1,\dots,\mu_m\in\RR$ and all $u\in E$ we have that if $J_i(u)=\mu_i$ for all $i=1,\dots,m$, then $\dd{J_1(u)}, \ldots, \dd{J_m(u)}$ are linearly independent in $E^*$.
+      \item $\exists \underline{u}\in E$ such that $J_i(\underline{u})=\mu_i$ for all $i=1,\dots,m$ and $I(\underline{u})=\displaystyle \min_{\substack{u\in E \\ J_i(u)=\mu_i\  \forall i}}I(u)$.
+    \end{itemize}
+    Then, $\exists \lambda_1,\dots,\lambda_m\in\RR$, called \emph{Lagrange multipliers}, such that: $$\dd{I(\underline{u})}=\lambda_1 \dd{J_1(\underline{u})}+\dots+\lambda_m \dd{J_m(\underline{u})}$$
+  \end{theorem}
+  \begin{proposition}[Aplication]\label{INEPDE:lagrange_apl}
+    Let $f:\Omega\times \RR\to\RR$ be defined by $f(x,t)=\abs{u}^{\theta}\sign(u)$ and define the following functionals in $E=H_0^1(\Omega)$:
+    $$
+      I(u)=\frac{1}{2}\int_\Omega \abs{\grad u}^2\qquad J(u)=\int_\Omega F(x,u)\dd{x}
+    $$
+    Then, $\tilde{u}=\underline{u}/t$ is a weak solution to the problem:
+    \begin{equation}\label{INEPDE:problem_lagrange_apl}
+      \begin{cases}
+        -\laplacian u=f(x,u) & \text{in }\Omega      \\
+        u|_{\Fr{\Omega}}=0   & \text{on }\Fr{\Omega}
+      \end{cases}
+    \end{equation}
+    where $\underline{u}$ is the minimizer of the problem
+    $\displaystyle
+      \min_{\substack{u\in H_0^1(\Omega) \\ J(u)=1}}I(u)
+    $.
+  \end{proposition}
+  \begin{proof}
+    We will solve first a much simpler problem:
+    \begin{equation}\label{INEPDE:aux_problem_lagrange}
+      \begin{cases}
+        -\laplacian u=\lambda f(x,u) & \text{in }\Omega      \\
+        u|_{\Fr{\Omega}}=0           & \text{on }\Fr{\Omega}
+      \end{cases}
+    \end{equation}
+    with $\lambda>0$. Denote by $m$ the minimizer of $I$ under $J(u)=1$. Since $F(x,t)=\frac{\abs{t}^{\theta+1}}{\theta+1}$, under $J(u)=1$, we have that ${\norm{u}_{L^{\theta+1}}}^{\theta+1}=\theta+1$. Now, since $\theta+1\leq 2^*$, we have a continuous embedding $H_0^1(\Omega)\hookrightarrow L^{\theta+1}(\Omega)$, so $\frac{1}{2}{\norm{\grad u}_{L^2}}^2\geq C {\norm{u}_{L^{\theta+1}}}^2\geq K>0$. Thus, $m\geq k>0$. Now, take a minimizing sequence $(u_n)$ for $I$. Since $u_n$ is bounded in $H_0^1$, after extraction we have $u_n\overset{H_0^1}{\rightharpoonup} \underline{u}$ for some $\underline{u}\in H_0^1(\Omega)$. Moreover, $u_n\overset{L^{\theta+1}}{\to} \underline{u}$ by compact embedding. Thus, $1=J(u_n)\to J(\underline{u})$. So $J(\underline{u})=1$ and since $m=\displaystyle\liminf_{n\to\infty}I(u_n)\geq I(\underline{u})$ and $I(\underline{u})\geq m$, we have that $\underline{u}$ is a minimizer for $I$ under $J(u)=1$. Now, we know that $I,J$ are of class $\mathcal{C}^1$ on $H_0^1(\Omega)$ and
+    $$
+      \dd{J(u)}h = \int_\Omega \abs{u}^{\theta-1}uh
+    $$
+    If $J(u)=1$, then $\dd{J(u)}u=\theta+1\ne 0$. So there is a Lagrange multiplier $\lambda\in\RR$ such that $\dd{I(u)}=\lambda \dd{J(u)}$, that is:
+    $$
+      \int_\Omega \grad \underline{u}\cdot \grad h=\lambda \int_\Omega \abs{\underline{u}}^{\theta-1}\underline{u}h
+    $$
+    Whence $\underline{u}$ is a weak solution of \mcref{INEPDE:aux_problem_lagrange}. Note that taking $h=\underline{u}$ we deduce that $\lambda>0$.
+
+    Now take $t=\lambda^{-\frac{1}{\theta-1}}>0$ and $\tilde{u}=t^{-1}\underline{u}$. Then:
+    $$
+      -\laplacian(\tilde{u}t)=\lambda t^{\theta-1}\abs{\tilde{u}}^{\theta-1}\tilde{u}t\iff -\laplacian \tilde{u}= \abs{\tilde{u}}^{\theta-1}\tilde{u}=f(x,\tilde{u})
+    $$
+    So $\tilde{u}$ is a weak solution in $H_0^1(\Omega)$ of \mcref{INEPDE:problem_lagrange_apl} and $\tilde{u}\ne 0$ because $\frac{1}{\theta+1}\int_\Omega \abs{\tilde{u}}^{\theta+1}=\lambda^{\frac{\theta+1}{\theta-1}}>0$.
+  \end{proof}
+  \begin{remark}
+    In general, it suffices to have $f:\Omega\times \RR\to\RR$ Carathéodory with:
+    \begin{itemize}
+      \item $\abs{f(x,t)}\leq C(1+\abs{t}^\theta)$ $\forall (x,t)\in \Omega\times \RR$ with $1\leq \theta\leq \frac{d+2}{d-2}$ (if $d\geq 3$) and $1\leq \theta<\infty$ (if $d=2$).
+      \item $f(x,t)t\geq C'\min_{\alpha,\beta>0}\{\abs{t}^\alpha,\abs{t}^\beta\}$ $\forall (x,t)\in \Omega\times \RR$, $2\leq \alpha\leq \theta+1$.
+    \end{itemize}
+  \end{remark}
+  \begin{remark}
+    If $J$ is not homogeneous we cannot proceed as in the proof. But in this case we use the \emph{Nehari manifold method}.
+  \end{remark}
+  \begin{proposition}[Nehari manifold method]
+    Let $f$ be as in \mnameref{INEPDE:lagrange_apl} with the additional assumptions that:
+    \begin{itemize}
+      \item $t\mapsto f(\cdot,t)$ is $\mathcal{C}^1$ with a growth condition $\abs{\pdv{f}{t}}\leq C(1+\abs{t}^{\theta-1})$.
+      \item $f(x,t)t< \partial_tf(x,t)t^2$ $\forall (x,t)\in \Omega\times \RR^*$.
+    \end{itemize}
+    Let $\mathcal{N}:=\{u\in H_0^1(\Omega)\setminus\{0\}:J(u)=0\}$, where:
+    \begin{align*}
+      I(u) & =\frac{1}{2}\int_\Omega \abs{\grad u}^2-\int_\Omega F(x,u)\dd{x}           \\
+      J(u) & =\frac{1}{2} \dd{I(u)}u = \int_\Omega \abs{\grad u}^2 -\int_\Omega f(x,u)u
+    \end{align*}
+    Then, if $\underline{u}\in\mathcal{N}$ is a minimizer of $I$ under $J(u)=0$, then $\dd{I(\underline{u})}=0$ and so $\underline{u}$ is a weak solution to \mcref{INEPDE:problem_lagrange_apl}.
+  \end{proposition}
+  \begin{proof}
+    We have that:
+    $$
+      \dd{J(u)}h=2\int_\Omega \grad u\cdot \grad h-\int_\Omega [\partial_uf(x,u)u +f(x,u)]h
+    $$
+    Thus, if $u\in \mathcal{N}$, we have:
+    $$
+      \dd{J(u)}u=\int_\Omega[f(x,u)u -\partial_uf(x,u)u^2] <0
+    $$
+    because $J(u)=0$ and at the end we used one of the extra hypothesis on $f$. Now assume $\underline{u}\in\mathcal{N}$ and $I(\underline{u})=\displaystyle \min_{\substack{u\in H_0^1(\Omega) \\ J(u)=0}}I(u)$. Then, $\exists \lambda\in\RR$ such that $\dd{I(\underline{u})}=\lambda \dd{J(\underline{u})}$. Thus:
+    $$
+      \int_\Omega [\grad \underline{u}\cdot \grad h-f(x,\underline{u})h]=\lambda \int_\Omega [\partial_uf(x,\underline{u})\underline{u}+f(x,\underline{u})-f(x,\underline{u})]h
+    $$
+    Moreover, $\int_\Omega \abs{\grad \underline{u}}^2=\int_\Omega f(x,\underline{u}) \underline{u}$. So taking $h=\underline{u}$ we get:
+    $$
+      0=\lambda \int_\Omega [f\underline{u}-\partial_uf\underline{u}^2]
+    $$
+    which implies $\lambda=0$ because of the extra hypothesis on $f$.
+  \end{proof}
+  \subsubsection{Mountain pass method}
+  Our goal in this section is again find a nonzero weak solution in $H_0^1(\Omega)$ to \mcref{INEPDE:problem_lagrange_apl}.
+  \begin{definition}
+    Let $E$ be a Banach space and $I\in\mathcal{C}^1(E,\RR)$. We say that $I$ satisfies the \emph{Palais-Smale condition at level $c$} if every sequence $(u_n)$ in $E$, such that $I(u_n)\to c$ and $\dd{I(u_n)}\to 0$ in $E^*$, has a convergent subsequence (that is, is precompact).
+  \end{definition}
+  \begin{theorem}[Ambrosetti-Rabinowitz theorem]
+    Let $E$ be a Banach space and $I\in\mathcal{C}^1(E,\RR)$. Assume that $\exists a\ne b\in E$ such that
+    $$
+      c:=\inf_{\gamma\in \Gamma}\max_{t\in [0,1]}I(\gamma(t))>\max\{I(a),I(b)\}
+    $$
+    with $$
+      \Gamma:=\{\gamma\in \mathcal{C}([0,1],E):\gamma(0)=a,\gamma(1)=b\}
+    $$
+    Then, there is a sequence $(u_n)$ in $E$ such that $I(u_n)\to c$ and $\dd{I(u_n)}\to 0$ in $E^*$. Such a sequence is called a \emph{Palais-Smale sequence}.
+  \end{theorem}
+  \begin{proof}
+    TODO
+  \end{proof}
+  \begin{corollary}[Mountain pass theorem]
+    Let $E$ be a Banach space and $I\in\mathcal{C}^1(E,\RR)$ satisfying the Palais-Smale condition at level $c\in\RR$. Assume that $\exists a\ne b\in E$ such that
+    $$
+      c:=\inf_{\gamma\in \Gamma}\max_{t\in [0,1]}I(\gamma(t))>\max\{I(a),I(b)\}
+    $$
+    with $$
+      \Gamma:=\{\gamma\in \mathcal{C}([0,1],E):\gamma(0)=a,\gamma(1)=b\}
+    $$
+    Then, $\exists u_*\in E$ such that $I(u_*)=c$ and $\dd{I(u_*)}=0$.
+  \end{corollary}
+  \begin{proposition}
+    Let $f:\Omega\times \RR\to\RR$ be Carathéodory satisfying:
+    \begin{itemize}
+      \item $f(x,t)t\geq p F(x,t)$ $\forall (x,t)\in \Omega\times \RR$ (\emph{superquadradicity condition}).
+      \item $f(x,t)t\leq \overline{C}\abs{t}^{p_1}$ for $\abs{t}\geq 1$.
+      \item $f(x,t)t\geq \underline{C} \abs{t}^{p_2}$ for $\abs{t}\leq 1$.
+    \end{itemize}
+    with $2<p,p_1,p_2<2^*$ and $F(x,t)=\int_0^tf(x,s)\dd{s}$. Consider the functional:
+    $$
+      I(u)=\frac{1}{2}\int_\Omega \abs{\grad u}^2-\int_\Omega F(x,u)\dd{x}
+    $$
+    Then, ???????????
+  \end{proposition}
+  \begin{proof}
+    From the superquadradicity condition, for $t>0$, the function $\abs{t}^{-p}F(x,t)$ is nondecreasing (the derivative is nonnegative). So, for $0\leq t\leq 1$ we have $F(x,t)\leq \abs{t}^p F(x,1)$. Similarly, for $-1\leq t\leq 0$ we have $F(x,t)\leq \abs{t}^p F(x,-1)$. Using the upper estimate we get, for $\abs{t}\geq 1$, $\abs{F(x,t)}\leq \overline{\overline{C}} \abs{t}^{p_1}$ and so
+    $\abs{F(x,t)}\leq C'(\abs{t}^p+\abs{t}^{p_1})$ $\forall t$ (the positivity of $F(x,1)$ and $F(x,-1)$ follows from the third hypothesis on $f$). So:
+    $$
+      \int_\Omega \abs{F(x,u)}\leq C'\left(\norm{u}_{
+    $$
+  \end{proof}
 \end{multicols}
 \end{document}
