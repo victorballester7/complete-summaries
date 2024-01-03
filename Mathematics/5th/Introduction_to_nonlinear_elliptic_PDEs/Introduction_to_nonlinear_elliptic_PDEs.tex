@@ -763,18 +763,27 @@
     $$
     is compact. Thus, a Hilbert basis $(u_n)$ of $K$ with $Ku_n=\mu_n u_n$, $\mu_n>0$ with $\mu_n\to 0$ as $n\to\infty$ exists (we may assume $\mu_n\searrow 0$). Thus, $Lu_n=\lambda_nu_n$ with $\lambda_n=\frac{1}{\mu_n}\nearrow+\infty$. Then:
     $$
-      \lambda_1=\min_{\substack{u\in H_0^1(\Omega) \\ \norm{u}_{L^2(\Omega)}=1}}\beta(u,u)=\min_{u\in H_0^1(\Omega)\setminus\{0\}}\frac{\beta(u,u)}{\norm{u}_{L^2(\Omega)}^2}
+      \lambda_1=\!\!\min_{\substack{u\in H_0^1(\Omega) \\ \norm{u}_{L^2(\Omega)}=1}}\!\!{\langle Lu,u\rangle}_{H^{-1}\times H_0^1}=\!\!\min_{u\in H_0^1(\Omega)\setminus\{0\}}\!\!\frac{{\langle Lu,u\rangle}_{H^{-1}\times H_0^1}}{\norm{u}_{L^2(\Omega)}^2}
     $$
     And:
     \begin{align*}
-      \lambda_n & =\min_{\substack{u\in H_0^1(\Omega)                   \\u\in\langle u_1,\dots,u_{n-1}\rangle^{\perp_{L^2}}\\ \norm{u}_{L^2(\Omega)}=1}}\beta(u,u)\\
-                & = \min_{\substack{u\in H_0^1(\Omega)\setminus\{0\}    \\ u\in\langle u_1,\dots,u_{n-1}\rangle^{\perp_{L^2}}}}\frac{\beta(u,u)}{\norm{u}_{L^2(\Omega)}^2}\\
-                & =\min_{\substack{V\text{ subspace of }H_0^1(\Omega)   \\ \dim(V)=n}}\max_{\substack{u\in V\setminus\{0\} \\ \norm{u}_{L^2(\Omega)}=1}}\beta(u,u)\\
-                & = \max_{\substack{W\text{ subspace of } H_0^1(\Omega) \\ \codim(W)=n-1}}\min_{\substack{u\in W\setminus\{0\} \\ \norm{u}_{L^2(\Omega)}=1}}\beta(u,u)
+      \lambda_k & =\min_{\substack{u\in H_0^1(\Omega)                   \\u\in\langle u_1,\dots,u_{k-1}\rangle^{\perp_{L^2}}\\ \norm{u}_{L^2(\Omega)}=1}}{\langle Lu,u\rangle}_{H^{-1}\times H_0^1}\\
+                & = \min_{\substack{u\in H_0^1(\Omega)\setminus\{0\}    \\ u\in\langle u_1,\dots,u_{k-1}\rangle^{\perp_{L^2}}}}\frac{{\langle Lu,u\rangle}_{H^{-1}\times H_0^1}}{\norm{u}_{L^2(\Omega)}^2}\\
+                & =\min_{\substack{V\text{ subspace of }H_0^1(\Omega)   \\ \dim(V)=k}}\max_{\substack{u\in V\setminus\{0\} \\ \norm{u}_{L^2(\Omega)}=1}}{\langle Lu,u\rangle}_{H^{-1}\times H_0^1}\\
+                & = \max_{\substack{W\text{ subspace of } H_0^1(\Omega) \\ \codim(W)=k-1}}\min_{\substack{u\in W\setminus\{0\} \\ \norm{u}_{L^2(\Omega)}=1}}{\langle Lu,u\rangle}_{H^{-1}\times H_0^1}
     \end{align*}
   \end{theorem}
   \begin{proof}
-    TODO
+    We only prove some of them.
+    Recall that $H_0^1=\overline{\bigoplus_{n\in\NN} \langle u_n\rangle}^{{}_{H_0^1}}$ and $L^2=\overline{\bigoplus_{n\in\NN} \langle u_n\rangle}^{{}_{L^2}}$. Take $u\in H_0^1(\Omega)\setminus\{0\}$ and write $u=\sum_{n\in\NN}\alpha_n u_n$, which converges in both $L^2$ and $H_0^1$. We have:
+    $$
+      {\langle Lu,u\rangle}_{H^{-1}\times H_0^1}= \sum_{n\in\NN}\lambda_n{\alpha_n}^2\geq \lambda_1\sum_{n\in\NN}{\alpha_n}^2=\lambda_1\norm{u}_{L^2(\Omega)}^2
+    $$
+    So the first equality holds since the lower bound is attained by $u=u_1$. Now take $u\perp_{L^2}\langle u_1,\dots,u_{k-1}\rangle$. Then, $\alpha_1=\dots=\alpha_{k-1}=0$ and so:
+    $$
+      {\langle Lu,u\rangle}_{H^{-1}\times H_0^1}= \sum_{n\geq n}\lambda_n{\alpha_n}^2\geq \lambda_n\sum_{n\geq n}{\alpha_n}^2=\lambda_n\norm{u}_{L^2(\Omega)}^2
+    $$
+    So the third equality holds since the lower bound is attained by $u=u_k$.
   \end{proof}
   \subsubsection{Nonlinear case without constraints}
   \begin{definition}
@@ -987,7 +996,7 @@
     In general, it suffices to have $f:\Omega\times \RR\to\RR$ Carathéodory with:
     \begin{itemize}
       \item $\abs{f(x,t)}\leq C(1+\abs{t}^\theta)$ $\forall (x,t)\in \Omega\times \RR$ with $1\leq \theta\leq \frac{d+2}{d-2}$ (if $d\geq 3$) and $1\leq \theta<\infty$ (if $d=2$).
-      \item $f(x,t)t\geq C'\min_{\alpha,\beta>0}\{\abs{t}^\alpha,\abs{t}^\beta\}$ $\forall (x,t)\in \Omega\times \RR$, $2\leq \alpha\leq \theta+1$.
+      \item $\displaystyle f(x,t)t\geq C'\min_{2\leq \alpha,\beta\leq \theta+1}\{\abs{t}^\alpha,\abs{t}^\beta\}$ $\forall (x,t)\in \Omega\times \RR$.
     \end{itemize}
   \end{remark}
   \begin{remark}
@@ -1044,14 +1053,14 @@
     TODO
   \end{proof}
   \begin{corollary}[Mountain pass theorem]
-    Let $E$ be a Banach space and $I\in\mathcal{C}^1(E,\RR)$ satisfying the Palais-Smale condition at level $c\in\RR$. Assume that $\exists a\ne b\in E$ such that
+    Let $E$ be a Banach space and $I\in\mathcal{C}^1(E,\RR)$. Assume that $\exists a\ne b\in E$ such that
     $$
       c:=\inf_{\gamma\in \Gamma}\max_{t\in [0,1]}I(\gamma(t))>\max\{I(a),I(b)\}
     $$
     with $$
       \Gamma:=\{\gamma\in \mathcal{C}([0,1],E):\gamma(0)=a,\gamma(1)=b\}
     $$
-    Then, $\exists u_*\in E$ such that $I(u_*)=c$ and $\dd{I(u_*)}=0$.
+    If, moreover, $I$ satisfies the Palais-Smale condition at level $c$, then $\exists u_*\in E$ such that $I(u_*)=c$ and $\dd{I(u_*)}=0$.
   \end{corollary}
   \begin{proposition}
     Let $f:\Omega\times \RR\to\RR$ be Carathéodory satisfying:
@@ -1067,11 +1076,11 @@
     Then, ???????????
   \end{proposition}
   \begin{proof}
-    From the superquadradicity condition, for $t>0$, the function $\abs{t}^{-p}F(x,t)$ is nondecreasing (the derivative is nonnegative). So, for $0\leq t\leq 1$ we have $F(x,t)\leq \abs{t}^p F(x,1)$. Similarly, for $-1\leq t\leq 0$ we have $F(x,t)\leq \abs{t}^p F(x,-1)$. Using the upper estimate we get, for $\abs{t}\geq 1$, $\abs{F(x,t)}\leq \overline{\overline{C}} \abs{t}^{p_1}$ and so
-    $\abs{F(x,t)}\leq C'(\abs{t}^p+\abs{t}^{p_1})$ $\forall t$ (the positivity of $F(x,1)$ and $F(x,-1)$ follows from the third hypothesis on $f$). So:
-    % $$
-    %   \int_\Omega \abs{F(x,u)}\leq C'\left(\norm{u}_{
-    % $$
+    First of all, note that the thrid hypothesis on $f$ implies that $F(x,t)\geq 0$ $\forall (x,t)\in \Omega\times \RR$. From the superquadradicity condition, for $t>0$, the function $\abs{t}^{-p}F(x,t)$ is nondecreasing (the derivative is nonnegative). So, for $0\leq t\leq 1$ we have $F(x,t)\leq \abs{t}^p F(x,1)$. Similarly, for $-1\leq t\leq 0$ the function is nonincreasing and so we have $F(x,t)\leq \abs{t}^p F(x,-1)$. Using the upper estimate we get, for $\abs{t}\geq 1$, $\abs{F(x,t)}\leq \overline{\overline{C}} \abs{t}^{p_1}$ and so
+    $\abs{F(x,t)}\leq C'(\abs{t}^p+\abs{t}^{p_1})$ $\forall t$. So:
+    $$
+      \int_\Omega \abs{F(x,u)}\leq C'\left(\norm{u}_{L^{p}}^p+\norm{u}_{L^{p_1}}^{p_1}\right)\leq C''\left(\norm{\grad u}_{L^2}^p+\norm{\grad u}_{L^2}^{p_1}\right)
+    $$
   \end{proof}
 \end{multicols}
 \end{document}
