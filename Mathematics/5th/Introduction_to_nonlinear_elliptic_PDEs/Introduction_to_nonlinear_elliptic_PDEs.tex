@@ -1049,10 +1049,7 @@
     $$
     Then, there is a sequence $(u_n)$ in $E$ such that $I(u_n)\to c$ and $\dd{I(u_n)}\to 0$ in $E^*$. Such a sequence is called a \emph{Palais-Smale sequence}.
   \end{theorem}
-  \begin{proof}
-    TODO
-  \end{proof}
-  \begin{corollary}[Mountain pass theorem]
+  \begin{corollary}[Mountain pass theorem]\label{INEPDE:mountain_pass}
     Let $E$ be a Banach space and $I\in\mathcal{C}^1(E,\RR)$. Assume that $\exists a\ne b\in E$ such that
     $$
       c:=\inf_{\gamma\in \Gamma}\max_{t\in [0,1]}I(\gamma(t))>\max\{I(a),I(b)\}
@@ -1073,14 +1070,63 @@
     $$
       I(u)=\frac{1}{2}\int_\Omega \abs{\grad u}^2-\int_\Omega F(x,u)\dd{x}
     $$
-    Then, ???????????
+    Then, $\exists \underline{u}\in H_0^1(\Omega)$ such that $I(\underline{u})=\displaystyle \min_{u\in H_0^1(\Omega)}I(u)$ and $\underline{u}$ is a weak solution to \mcref{INEPDE:problem_lagrange_apl}.
   \end{proposition}
   \begin{proof}
-    First of all, note that the thrid hypothesis on $f$ implies that $F(x,t)\geq 0$ $\forall (x,t)\in \Omega\times \RR$. From the superquadradicity condition, for $t>0$, the function $\abs{t}^{-p}F(x,t)$ is nondecreasing (the derivative is nonnegative). So, for $0\leq t\leq 1$ we have $F(x,t)\leq \abs{t}^p F(x,1)$. Similarly, for $-1\leq t\leq 0$ the function is nonincreasing and so we have $F(x,t)\leq \abs{t}^p F(x,-1)$. Using the upper estimate we get, for $\abs{t}\geq 1$, $\abs{F(x,t)}\leq \overline{\overline{C}} \abs{t}^{p_1}$ and so
+    First of all, note that the thrid hypothesis on $f$ implies that $F(x,t)\geq 0$ for $\abs{t}\leq 1$. From the superquadradicity condition, for $t>0$, the function $\abs{t}^{-p}F(x,t)$ is nondecreasing (the derivative is nonnegative). So, for $0\leq t\leq 1$ we have $F(x,t)\leq \abs{t}^p F(x,1)$. Similarly, for $-1\leq t\leq 0$ the function is nonincreasing and so we have $F(x,t)\leq \abs{t}^p F(x,-1)$. Using the upper estimate we get, for $\abs{t}\geq 1$, $\abs{F(x,t)}\leq \overline{\overline{C}} \abs{t}^{p_1}$ and so
     $\abs{F(x,t)}\leq C'(\abs{t}^p+\abs{t}^{p_1})$ $\forall t$. So:
+    \begin{align*}
+      \int_\Omega \abs{F(x,u)} & \leq C'\left(\norm{u}_{L^{p}}^p+\norm{u}_{L^{p_1}}^{p_1}\right)        \\
+                               & \leq C''\left(\norm{\grad u}_{L^2}^p+\norm{\grad u}_{L^2}^{p_1}\right)
+    \end{align*}
+    by \mnameref{ATFAPDE:poincare_ineq} and ?????. And thus:
+    \begin{align}
+      I(u) & \geq \norm{\grad u}_{L^2}^2\left(\frac{1}{2}-C''\left[\norm{\grad u}_{L^2}^{p-2}+\norm{\grad u}_{L^2}^{p_1-2}\right]\right)\nonumber \\
+           & \label{INEPDE:I_mountain}\geq \frac{1}{4}\norm{u}_{H_0^1}^2
+    \end{align}
+    for $\norm{u}_{H_0^1}\leq r$ with $r>0$ small enough. Now, take $u_1\in H_0^1(\Omega)\setminus\{0\}$ and $\lambda>0$ to be chosen later. From the previous reasoning, we have $F(x,t)\geq F(x,1)\abs{t}^{p}$ for $t\geq 1$ and $F(x,t)\geq F(x,-1)\abs{t}^{p}$ for $t\leq -1$. So, $F(x,t)\geq K\abs{t}^{p}$ for some $K>0$ and all $\abs{t} \geq 1$. Now, since $u_1\ne 0$ $\exists \varepsilon>0$ such that $\int_\Omega \abs{u_1}^p\indi{\{\abs{u_1}\geq \varepsilon\}}>0$. So for $\lambda\geq \frac{1}{\varepsilon}$ we have:
+    \begin{multline*}
+      I(\lambda u_1) \leq \frac{\lambda^2}{2}\norm{\grad u_1}_{L^2}^2-K\lambda^p\int_\Omega \abs{u_1}^p\indi{\{\abs{u_1}\geq \varepsilon\}}=\\=A\lambda^2-B\lambda^p\overset{\lambda\to\infty}{\longrightarrow} -\infty
+    \end{multline*}
+    So we may choose $\lambda=\lambda_1>0$ such that $I(\lambda_1 u_1)\leq 0$ and given the previous $r>0$ we choose $u_1$ with $\norm{\lambda_1 u_1}_{H_0^1}>r$. Now let
     $$
-      \int_\Omega \abs{F(x,u)}\leq C'\left(\norm{u}_{L^{p}}^p+\norm{u}_{L^{p_1}}^{p_1}\right)\leq C''\left(\norm{\grad u}_{L^2}^p+\norm{\grad u}_{L^2}^{p_1}\right)
+      \Gamma:=\{\gamma\in \mathcal{C}([0,1],H_0^1(\Omega)):\gamma(0)=0,\gamma(1)=\lambda_1 u_1\}
     $$
+    and define $c:=\displaystyle \inf_{\gamma\in \Gamma}\max_{t\in [0,1]}I(\gamma(t))$. Take $\gamma\in \Gamma$. Since $\norm{\gamma(0)}_{H_0^1}=0$ and $\norm{\gamma(1)}_{H_0^1}> r$, $\exists t_0\in (0,1)$ such that $\norm{\gamma(t_0)}_{H_0^1}=r$. So by \eqref{INEPDE:I_mountain} we have:
+    $$
+      c =\displaystyle \inf_{\gamma\in \Gamma}\max_{t\in [0,1]}I(\gamma(t))\geq \frac{r^2}{4}>0=\max\{I(0),I(\lambda_1 u_1)\}
+    $$
+    In order to use \mnameref{INEPDE:mountain_pass} it's missing to check that $I$ satisfies the Palais-Smale condition at level $c$. Let $(u_n)$ be a Palais-Smale sequence at level $c$. We then have:
+    $$
+      \begin{cases}
+        I(u_n)\to c \\
+        \dd{I(u_n)}\overset{H^{-1}}{\longrightarrow} 0
+      \end{cases}$$
+    The second equation implies that $\dd{I(u_n)}u_n\to 0$ and thus:
+    $$
+      \begin{cases}
+        \displaystyle\frac{1}{2}\int_\Omega \abs{\grad u_n}^2-\int_\Omega F(x,u_n)\dd{x}=c+\o{1} \\
+        \displaystyle\int_\Omega \abs{\grad u_n}^2-\int_\Omega f(x,u_n)u_n\dd{x}=\o{\norm{u_n}_{H_0^1}}
+      \end{cases}
+    $$
+    From here subtracting the second equation (multiplied by $p$) to the first one, we have:
+    \begin{multline*}
+      \left(1-\frac{p}{2}\right)\int_\Omega \abs{\grad u_n}^2\dd{x}+\int_\Omega \left[pF(x,u_n)-f(x,u_n)u_n\right]\dd{x}=\\
+      =-pc+\o{1} + \o{\norm{u_n}_{H_0^1}}
+    \end{multline*}
+    By hypothesis the second term is negative, so:
+    $$
+      \left(\frac{1}{2}- \frac{1}{p}\right)\int_\Omega \abs{\grad u_n}^2\dd{x}\leq c + \o{1} + \o{\norm{u_n}_{H_0^1}}
+    $$
+    So $\exists K>0$ such that $\norm{u_n}_{H_0^1}\leq K$ $\forall n\in\NN$. So after extracting a subsequence we have $u_n\overset{H_0^1}{\rightharpoonup} u$ for some $u\in H_0^1(\Omega)$ and by compact embedding $u_n\overset{L^p}{\longrightarrow} u$ for all $1\leq p<2^*$. But $f$ is Carathéodory with growth condition $\abs{f(x,t)}\leq C(1+\abs{t}^{\theta})$ with $1\leq \theta =p_1-1<\frac{d+2}{d-2}$. So $f(x,u_n)\overset{L^q}{\longrightarrow} f(x,u)$ for all $1\leq q<\frac{2^*}{\theta}$. Now, by duality, the continuous embedding $H_0^1\hookrightarrow L^{2^*}$ gives $L^{\hat{q}} \hookrightarrow H^{-1}$ with $\frac{1}{\hat{q}}+\frac{1}{2^*}=1$. An easy computation shows that:
+    $$
+      \hat{q}=\frac{2d}{d-2}\implies \theta\hat{q}<2^*\implies \hat{q}<\frac{2^*}{\theta}
+    $$
+    So $f(x,u_n)u_n\overset{H^{-1}}{\longrightarrow} f(x,u)u$. Now since
+    $$
+      \dd{I(u_n)}h={\langle -\laplacian u_n-f(x,u_n),h\rangle}_{H^{-1},H_0^1}
+    $$
+    we have $-\laplacian u_n=f(x,u_n)+r_n$ with $r_n=\dd{I(u_n)}\overset{H^{-1}}{\longrightarrow} 0$. Thus, $-\laplacian u_n\overset{H^{-1}}{\longrightarrow} f(x,u)$ (and so $u_n\overset{H_0^1}{\longrightarrow} {(-\laplacian)}^{-1}f(x,u)$) and since $u_n\overset{H_0^1}{\rightharpoonup} u$ implies $-\laplacian u_n\overset{H^{-1}}{\rightharpoonup} -\laplacian u$, we have $-\laplacian u=f(x,u)$. This implies that in fact $u_n\overset{H_0^1}{\longrightarrow}$ and so $I(u)=\displaystyle \lim_{n\to\infty}I(u_n)=c$.
   \end{proof}
 \end{multicols}
 \end{document}
