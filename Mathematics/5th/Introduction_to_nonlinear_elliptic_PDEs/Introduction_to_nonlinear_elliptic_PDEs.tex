@@ -121,13 +121,13 @@
                      & \geq \theta \int_\Omega\sum_{i=1}^d{\abs{\partial_iu}}^2 \\
                      & =\theta {\norm{u}_{H_0^1(\Omega)}}^2
             \end{align*}
-            by the uniform ellipticity of $L$ and the \mnameref{ATFAPDE:poincare_ineq}.
+            by the uniform ellipticity of $L$.
     \end{enumerate}
     Moreover, since $ a(u,u)={\langle f,u\rangle}_2$ we have that:
     \begin{align*}
       \theta {\norm{u}_{H_0^1(\Omega)}}^2\leq {\langle f,u\rangle}_2\leq \norm{f}_2\norm{u}_{2}\leq C \norm{f}_2\norm{u}_{H_0^1(\Omega)}
     \end{align*}
-    again by the \mnameref{ATFAPDE:poincare_ineq}.
+    by the \mnameref{ATFAPDE:poincare_ineq}.
   \end{proof}
   \subsubsection{Abstract Fredholm alternative}
   \begin{remark}
@@ -155,7 +155,7 @@
     $$
       a_\mu(u,u)\geq \theta \norm{u}_{H_0^1(\Omega)}^2-C\norm{u}_{H_0^1(\Omega)}\norm{u}_2 + \mu \norm{u}_2^2
     $$
-    which is for $\mu$ large enough it is bigger than $\delta \norm{u}_{H_0^1(\Omega)}^2$ for some $\delta>0$.
+    which for $\mu$ large enough it is bigger than $\delta \norm{u}_{H_0^1(\Omega)}^2$ for some $\delta>0$.
   \end{sproof}
   \begin{lemma}\label{INEPDE:lemma1_fredholm}
     Let $H$ be Hilbert and $K:H\to H$ be a compact linear operator. Then, $\dim \ker(\id-K)<\infty$.
@@ -203,7 +203,7 @@
   \begin{proof}
     \begin{enumerate}
       \setcounter{enumi}{1}
-      \item From \mcref{RFA:adjoint_im_ker} we have that $\overline{\im A}={\ker A^*}^\perp$ for any general operator $A$ between Hilbert spaces. Thus, $\im(\id-K)={\ker(\id-K^*)}^\perp\iff \im(\id-K)$ is closed, which reduces to \mcref{INEPDE:lemma3_fredholm}.
+      \item From \mcref{RFA:adjoint_im_ker} we have that $\overline{\im A}={(\ker A^*)}^\perp$ for any general operator $A$ between Hilbert spaces. Thus, $\im(\id-K)={\ker(\id-K^*)}^\perp\iff \im(\id-K)$ is closed, which reduces to \mcref{INEPDE:lemma3_fredholm}.
       \item We first show that $\ker(\id-K)=\{0\}\iff \ker(\id-K^*)=\{0\}$. The argument is symmetric because $K^{**}=K$ and the fact that $K$ is compact $\iff K^*$ is compact. So suppose $\ker(\id-K)=\{0\}$. Then, $\id -K$ is injective. Assume $\ker(\id-K^*)\ne\{0\}$. Then, $\im (\id-K)=\ker(\id-K^*)^\perp\ne H$ and so $\im({(\id-K)}^2)\subsetneq \im(\id-K)$. Indeed, if we had equality, then for any $u\in H$, we would have ${(\id-K)u}\in \im({(\id-K)}^2)$, and thus $\exists v\in H$ such that ${(\id-K)u}={(\id-K)}^2v$, which implies $u={(\id-K)}v$ because $\ker (\id-K)=\{0\}$. Now, recursively, we have an infinite sequence $\im({(\id-K)}^{n+1})\subsetneq \im({(\id-K)}^n)$, which implies that $\forall n$ $\exists u_n\in \im({(\id-K)}^n)\cap\im({(\id-K)}^{n+1})^\perp$ with $\norm{u_n}=1$. Thus, $\langle u_n,u_m\rangle=\delta_{n,m}$. But $u_n-Ku_n\in \im({(\id-K)}^{n+1})$ so, $u_n-Ku_n\perp u_n$. This implies, by \mnameref{RFA:pythagorean}, that $\norm{Ku_n}^2=\norm{u_n-Ku_n}^2+\norm{u_n}^2\geq 1$, which is a contradiction with the compactness of $K$ because any orthonormal sequence always converges weakly to zero (and so $Ku_n\to 0$). So either $\ker(\id-K)\ne\{0\}$ or $\id-K$ is bijective.
 
             To finish this point, we need to prove that if $\ker(\id-K)=\{0\}$, then ${(\id-K)}^{-1}$ is a bounded linear operator. But this is a consequence of \mcref{INEPDE:lemma2_fredholm}: if $u\in H$, then $u\in \ker {(\id-K)}^\perp$ and thus $\norm{(\id-K)u}\geq c\norm{u}$, which implies that $\norm{v}\geq c \norm{{(\id-K)}^{-1}v}$ taking $v=(\id-K)u$.
@@ -219,7 +219,7 @@
     \end{align*}
     It satisfies $\langle Lu,v\rangle=\langle u,L^*v\rangle$ for all $u,v\in H_0^1(\Omega)$.
   \end{definition}
-  \begin{proposition}
+  \begin{proposition}\label{INEPDE:adjoint_im_ker}
     The \emph{homogeneous adjoint problem}
     $$
       \mathcal{D}_0^*:=\begin{cases}
@@ -238,7 +238,7 @@
     $$
       f= (L_{\mu_0}-\mu_0){L_{\mu_0}}^{-1}w=w-\mu_0 {L_{\mu_0}}^{-1}w=(\id-K)w
     $$
-    with $K=\mu_0 {L_{\mu_0}}^{-1}$. We claim that $K:L^2(\Omega)\to L^2(\Omega)$ is compact. Note that $K=\iota_{H_0^1\hookrightarrow L^2}\circ {L_{\mu_0}}^{-1}\circ \iota_{L^2\hookrightarrow H^{-1}}$, so since ${L_{\mu_0}}^{-1}$ and $\iota_{L^2\hookrightarrow H^{-1}}$ are bounded, and we have a compact embedding $H_0^1\hookrightarrow L^2$, we have that $K$ is compact. Finally, one can check that:
+    with $K=\mu_0 {L_{\mu_0}}^{-1}$. We claim that $K:L^2(\Omega)\to L^2(\Omega)$ is compact. Note that $K=\mu_0\iota_{H_0^1\hookrightarrow L^2}\circ {L_{\mu_0}}^{-1}\circ \iota_{L^2\hookrightarrow H^{-1}}$, so since ${L_{\mu_0}}^{-1}$ and $\iota_{L^2\hookrightarrow H^{-1}}$ are bounded, and we have a compact embedding $H_0^1\hookrightarrow L^2$, we have that $K$ is compact. Finally, one can check that:
     $$
       \id-K^*={(\id-K)}^*={\left(L_0{L_{\mu_0}}^{-1}\right)}^*={({L_{\mu_0}}^*)}^{-1}{L_0}^{*}
     $$
@@ -426,20 +426,20 @@
   \begin{proof}
     Let $m\geq 0$ and $v_m={(u-m)}^+$. Proceeding as in the previous proof, we have:
     \begin{align*}
-      0 & \leq \theta \norm{\grad v_m}_{L^2}^2-\norm{\vf{b}}_\infty\norm{\grad v_m}_{L^2}\norm{v_m}_{L^2}        \\
+      0 & \leq \theta \norm{\grad v_m}_{L^2}^2-d\norm{\vf{b}}_\infty\norm{\grad v_m}_{L^2}\norm{v_m}_{L^2}       \\
         & \leq \int_{\{u>m\}}\sum_{i,j=1}^d a_{ij}\partial_iu\partial_jv_m+\sum_{j=1}^db_j\partial_ju v_m+cu v_m \\
         & =\int_{\{u>m\}}fv_m\leq 0
     \end{align*}
-    Thus, $\norm{\grad v_m}_{L^2}\leq C \norm{v_m}_{L^2}$, with $C$ independent of $m$. Note that since $\Omega$ is bounded, $\displaystyle\lim_{m\to\infty}\abs{\{u>m\}}=0$ by\mnameref{RFA:dominated}, and so $\displaystyle\lim_{m\to\infty}\supp v_m=0$ as well since $\supp v_m\subseteq \{u>m\}$. We now continue the proof for $d\geq 3$. By \mnameref{ATFAPDE:gagliardo_nirengerg_sobolev} we have a continuous embedding $H_0^1(\Omega)\hookrightarrow L^{2^*}$ with $\frac{1}{2^*}=\frac{1}{2}-\frac{1}{d}$. So, $\norm{v_m}_{L^{2^*}}\leq \delta \norm{\grad v_m}_{L^2}$. Thus:
+    Thus, $\norm{\grad v_m}_{L^2}\leq C \norm{v_m}_{L^2}$, with $C$ independent of $m$. Note that since $\Omega$ is bounded, $\displaystyle\lim_{m\to\infty}\abs{\{u>m\}}=0$ by \mnameref{RFA:dominated}, and so $\displaystyle\lim_{m\to\infty}\supp v_m=0$ as well since $\supp v_m\subseteq \{u>m\}$. We now continue the proof for $d\geq 3$. By \mnameref{ATFAPDE:gagliardo_nirengerg_sobolev} we have a continuous embedding $H_0^1(\Omega)\hookrightarrow L^{2^*}$ with $\frac{1}{2^*}=\frac{1}{2}-\frac{1}{d}$. So, $\norm{v_m}_{L^{2^*}}\leq \delta \norm{\grad v_m}_{L^2}$. Thus:
     \begin{multline*}
       \norm{\grad v_m}_{L^2}\leq C \norm{v_m}_{L^2}\leq C{\abs{\supp v_m}}^{1-\frac{2}{2^*}}\norm{v_m}_{L^{2^*}}\leq \\
       \leq C\delta {\abs{\supp v_m}}^{1-\frac{2}{2^*}}\norm{\grad v_m}_{L^2}\leq \frac{1}{2} \norm{\grad v_m}_{L^2}
     \end{multline*}
     where in the second inequality we used \mnameref{RFA:holder} and the last one is valid for $m\geq m_0$ large enough. Thus, $\norm{\grad v_m}_{L^2}=0$ for $m\geq m_0$, which implies $u\almoste{\leq}m_0$. This means that $\abs{\{u>m_0\}}=0$ and that $\forall \varepsilon >0$, $\abs{\{u\geq m_0-\varepsilon\}}>0$. Suppose now that $m_0>0$ and let $S_\varepsilon=\abs{\{u> m_0-\varepsilon\}}$. Again by \mnameref{RFA:dominated}, $\displaystyle\lim_{\varepsilon\to 0}S_\varepsilon=0$. But then, proceeding as in the previous step:
     $$
-      \norm{\grad v_{m_0-\varepsilon}}\leq C \delta {S_\varepsilon}^{1-\frac{2}{2^*}}\norm{\grad v_{m_0-\varepsilon}}\leq \frac{1}{2}\norm{\grad v_{m_0-\varepsilon}}
+      \norm{\grad v_{m_0-\varepsilon}}_{L^2}\leq C \delta {S_\varepsilon}^{1-\frac{2}{2^*}}\norm{\grad v_{m_0-\varepsilon}}_{L^2}\leq \frac{1}{2}\norm{\grad v_{m_0-\varepsilon}}_{L^2}
     $$
-    by choosing $\varepsilon$ small enough. Thus, $\norm{\grad v_{m_0-\varepsilon}}=0$ and so $u\almoste{\leq}m_0-\varepsilon$, which is a contradiction. Thus, $m_0= 0$ (because $m_0\geq 0$ from the beginning) and so $u\almoste{\leq}0$.
+    by choosing $\varepsilon$ small enough. Thus, $\norm{\grad v_{m_0-\varepsilon}}_{L^2}=0$ and so $u\almoste{\leq}m_0-\varepsilon$, which is a contradiction. Thus, $m_0= 0$ (because $m_0\geq 0$ from the beginning) and so $u\almoste{\leq}0$.
   \end{proof}
   \begin{theorem}[Weak minimum principle]\label{INEPDE:weak_min_principle}
     Let $\Omega\subseteq\RR^d$ open and bounded with $\mathcal{C}^1$ boundary, $a_{ij}=a_{ji},b_j,c\in L^\infty(\Omega)$, $c \almoste{\geq}0$, $L=-\sum_{i,j=1}^d\partial_i(a_{ij}\partial_j)+\sum_{j=1}^db_j\partial_j+c$ be elliptic and $f\in L^2(\Omega)$ with $f\almoste{\geq} 0$. Let $u\in H^1(\Omega)$ be such that:
@@ -462,7 +462,7 @@
     For each $f\in L^2(\Omega)$, the problem $\mathcal{D}_f$ has a unique weak solution $u_f$. Moreover, if $\Fr{\Omega}\in\mathcal{C}^1$, then $u_f\in H^2(\Omega)\cap H_0^1(\Omega)$ and $f\mapsto u_f$ is a bounded linear operator from $L^2(\Omega)$ to $H^2(\Omega)\cap H_0^1(\Omega)$. If $\Fr{\Omega}\in\mathcal{C}^{m+1}$, $b_j\in\mathcal{C}^{m-1}$ and $f\in H^{m-1}(\Omega)$, then $u_f\in H^{m+1}(\Omega)\cap H_0^1(\Omega)$ and $f\mapsto u_f$ is a bounded linear operator from $H^{m-1}(\Omega)$ to $H^{m+1}(\Omega)\cap H_0^1(\Omega)$.
   \end{corollary}
   \begin{sproof}
-    \mnameref{INEPDE:fredholm} applied to this problem tells us that either there is a nonzero weak solution to $\mathcal{D}_0$ or $\mathcal{D}_f$ is solvable for all $f\in L^2(\Omega)$. But the first case is impossible by \mcref{INEPDE:corollary_max_min}.
+    \mnameref{INEPDE:fredholm} applied to this problem (check \mcref{INEPDE:adjoint_im_ker}) tells us that either there is a nonzero weak solution to $\mathcal{D}_0$ or $\mathcal{D}_f$ is solvable for all $f\in L^2(\Omega)$. But the first case is impossible by \mcref{INEPDE:corollary_max_min}.
   \end{sproof}
   \begin{theorem}
     Let $1<p<\infty$ and $\Omega\subset\RR^d$ be open and bounded with $\mathcal{C}^{m+1}$ boundary, $m\geq 1$. Let $a_{ij}\in \mathcal{C}^m(\overline{\Omega})$, $b_j,c\in \mathcal{C}^{m-1}(\overline{\Omega})$ and $Lu=-\sum_{i,j=1}^d \partial_i(a_{ij}\partial_j u)+\sum_{j=1}^d b_j\partial_j u+cu$ be an elliptic operator. Then, for any $f\in W^{m-1,p}(\Omega)$, if $u\in H^1_0(\Omega)$ is a weak solution of $\mathcal{D}_f$, then $u\in W^{m+1,p}(\Omega)$ and:
@@ -551,7 +551,7 @@
     Nothing can be said if $c<0$. For example, consider $-u''-u=0$, which has $u(x)=\sin(x)$ as a solution, and take $\Omega=(0,\pi)$.
   \end{remark}
   \begin{lemma}[Hopf's lemma]\label{INEPDE:Hopf}
-    Let $u\in \mathcal{C}^2(\Omega)$ be such that $Lu\leq 0$ and suppose the region $\Omega$ is connected and that satisfies the \emph{interior ball condition}: for any $x\in \Fr{\Omega}$ there exists $r>0$ and $y\in \Omega$ such that $B(y,r)\subset \Omega$ and $\overline{B(y,r)}\cap \Fr{\Omega}=\{x\}$. Suppose in addition that $c=0$ and $x_0\in\Fr\Omega$ is such that $\displaystyle u(x_0)=\max_{\overline{\Omega}}u$. Then, either $u$ is constant in $\Omega$ or
+    Let $u\in \mathcal{C}^2(\Omega)$ be such that $Lu\leq 0$ and suppose that the region $\Omega$ is connected and that satisfies the \emph{interior ball condition}: for any $x\in \Fr{\Omega}$ there exists $r>0$ and $y\in \Omega$ such that $B(y,r)\subset \Omega$ and $\overline{B(y,r)}\cap \Fr{\Omega}=\{x\}$. Suppose in addition that $c=0$ and $x_0\in\Fr\Omega$ is such that $\displaystyle u(x_0)=\max_{\overline{\Omega}}u$. Then, either $u$ is constant in $\Omega$ or
     $$
       \liminf_{t\to 0^+}\frac{u(x_0) - u(x_0+t\vf{n})}{t}>0
     $$
@@ -614,34 +614,35 @@
     $$
       \begin{cases}
         Lu=f               & \text{in }\Omega      \\
-        u|_{\Fr{\Omega}}=0 & \text{on }\Fr{\Omega}
+        u|_{\Fr{\Omega}}=h & \text{on }\Fr{\Omega}
       \end{cases}
     $$
     with $f,a_{ij},b_j,c\in\mathcal{C}^{0,\alpha}( \overline{\Omega})$ and $h\in\mathcal{C}^{0,\alpha}(\Fr{\Omega})$. Then, there exists a solution to this problem in $\mathcal{C}^{2,\alpha}(\overline{\Omega})$.
   \end{theorem}
   \begin{proof}
+    We will do it for $h=0$.
     Let $t\in [0,1]$ and consider the problem:
     $$ \mathcal{D}_t:= \begin{cases}
-        L_tu=f              & \text{in }\Omega      \\
-        u|_{\Fr{\Omega}}=ht & \text{on }\Fr{\Omega}
+        L_tu=f             & \text{in }\Omega      \\
+        u|_{\Fr{\Omega}}=0 & \text{on }\Fr{\Omega}
       \end{cases}$$
-    with $L_t=tL-(1-t)\laplacian$. We know that $\mathcal{D}_0$ has a unique weak solution $u_0\in H_0^1(\Omega)$. The idea of the Continuation method is that if $\mathcal{D}_t$ is solvable for all $f$, then for $h>0$ small enough, $\mathcal{D}_{t+h}$ is solvable for all $f$ too. We will do it for $h=0$. Rewrite $\mathcal{D}_{t+h}$ as:
+    with $L_t=tL-(1-t)\laplacian$. We know that $\mathcal{D}_0$ has a unique weak solution $u_0\in H_0^1(\Omega)$. The idea of the continuation method is that if $\mathcal{D}_t$ is solvable for all $f$, then for $k>0$ small enough, $\mathcal{D}_{t+k}$ is solvable for all $f$ too. Rewrite $\mathcal{D}_{t+k}$ as:
     $$
       \begin{cases}
-        L_{t}u=f-h(L+\laplacian)u & \text{in }\Omega      \\
+        L_{t}u=f-k(L+\laplacian)u & \text{in }\Omega      \\
         u|_{\Fr{\Omega}}=0        & \text{on }\Fr{\Omega}
       \end{cases}
     $$
     We need to solve the fixed point problem $u=\phi(u)$, with
     $$
-      \function{\phi}{\mathcal{C}^{2,\alpha}}{\mathcal{C}^{2,\alpha}}{u}{\phi(u)={L_t}^{-1}f - h{L_t}^{-1}(L+\laplacian)u}
+      \function{\phi}{\mathcal{C}^{2,\alpha}}{\mathcal{C}^{2,\alpha}}{u}{\phi(u)={L_t}^{-1}f - k{L_t}^{-1}(L+\laplacian)u}
     $$
-    From \mnameref{INEPDE:schauder_estimates} and \mnameref{INEPDE:apriori} we deduce that $\norm{u}_{\mathcal{C}^{2,\alpha}(\overline{\Omega})}\leq C\norm{f}_{\mathcal{C}^{0,\alpha}(\overline{\Omega})}$. So $\forall \varphi\in \mathcal{C}^{0,\alpha}(\overline{\Omega})$ we have $\norm{{L_t}^{-1}\varphi}_{\mathcal{C}^{2,\alpha}(\overline{\Omega})}\leq C\norm{\varphi}_{\mathcal{C}^{0,\alpha}(\overline{\Omega})}$ (it can be seen that the constant does not depend on $t$). We will show that $\phi$ is a contraction for $h$ small enough. Let $u,v\in \mathcal{C}^{2,\alpha}(\overline{\Omega})$. Then:
+    From \mnameref{INEPDE:schauder_estimates} and \mnameref{INEPDE:apriori} we deduce that $\norm{u}_{\mathcal{C}^{2,\alpha}(\overline{\Omega})}\leq C\norm{f}_{\mathcal{C}^{0,\alpha}(\overline{\Omega})}$. So $\forall \varphi\in \mathcal{C}^{0,\alpha}(\overline{\Omega})$ we have $\norm{{L_t}^{-1}\varphi}_{\mathcal{C}^{2,\alpha}(\overline{\Omega})}\leq C\norm{\varphi}_{\mathcal{C}^{0,\alpha}(\overline{\Omega})}$ (it can be seen that the constant does not depend on $t$). We will show that $\phi$ is a contraction for $k$ small enough. Let $u,v\in \mathcal{C}^{2,\alpha}(\overline{\Omega})$. Then:
     \begin{align*}
-      \norm{\phi(u)-\phi(v)}_{\mathcal{C}^{2,\alpha}(\overline{\Omega})} & \leq Ch\norm{(L+\laplacian)(u-v)}_{\mathcal{C}^{0,\alpha}(\overline{\Omega})} \\
-                                                                         & \leq \tilde{C}h\norm{u-v}_{\mathcal{C}^{2,\alpha}(\overline{\Omega})}
+      \norm{\phi(u)-\phi(v)}_{\mathcal{C}^{2,\alpha}(\overline{\Omega})} & \leq Ck\norm{(L+\laplacian)(u-v)}_{\mathcal{C}^{0,\alpha}(\overline{\Omega})} \\
+                                                                         & \leq \tilde{C}k\norm{u-v}_{\mathcal{C}^{2,\alpha}(\overline{\Omega})}
     \end{align*}
-    So take $h\leq \frac{1}{2\tilde{C}}$. Repeating this argument a finite number of times ($\tilde{C}$ does not depend on $t$) we conclude that $\mathcal{D}_1$ is solvable.
+    So take $k\leq \frac{1}{2\tilde{C}}$. Repeating this argument a finite number of times ($\tilde{C}$ does not depend on $t$) we conclude that $\mathcal{D}_1$ is solvable.
   \end{proof}
   \subsection{Existence theorems for nonlinear elliptic PDEs by fixed point methods}
   In this section we will mostly consider almost linear elliptic PDEs of the form:
