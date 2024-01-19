@@ -400,11 +400,9 @@
   \begin{sproof}
     The first property is clear. Regarding the second one, just note that: $$\mathcal{S}(f\indi{E})\subseteq \mathcal{S}(g\indi{E})\implies \sup_{s\in\mathcal{S}(f\indi{E})}\int s\leq \sup_{s\in\mathcal{S}(g\indi{E})}\int s$$
   \end{sproof}
-  \begin{important}
-    \begin{theorem}[Monotone convergence theorem]\label{RFA:monotone}
-      Let $E\subseteq\RR^n$ be a measurable set, $f\geq 0$ be a non-negative measurable function such that $\exists (f_m)\geq 0$ with $f_m$ measurable $\forall m\in\NN$ and $f_m\nearrow f$. Then: $$\int_Ef(x)\dd{x}=\lim_{m\to\infty}\int_Ef_m(x)\dd{x}$$
-    \end{theorem}
-  \end{important}
+  \begin{theorem}[Monotone convergence theorem]\label{RFA:monotone}
+    Let $E\subseteq\RR^n$ be a measurable set, $f\geq 0$ be a non-negative measurable function such that $\exists (f_m)\geq 0$ with $f_m$ measurable $\forall m\in\NN$ and $f_m\nearrow f$. Then: $$\int_Ef(x)\dd{x}=\lim_{m\to\infty}\int_Ef_m(x)\dd{x}$$
+  \end{theorem}
   \begin{proof}
     The inequality $\int_Ef_m(x)\dd{x}\leq \int_Ef(x)\dd{x}$ is obvious. We need to prove the other one. To do so it suffices to show that $\forall \varepsilon>0$ and $\forall s\in\mathcal{S}(f\indi{E})$ we have $(1-\varepsilon)\int_E s\leq {\displaystyle\lim_{m\to\infty}}\int_Ef_m(x)\dd{x}$.
     Let $E_m:=\{f_m\geq (1-\varepsilon)s\}$. Note that $E_m\nearrow E$ and moreover:
@@ -479,11 +477,9 @@
       \item If $h\in\RR^n$, $f\in \mathcal{L}^1(E)$, then: $$\int_{E-h}f(x+h)\dd{x}=\int_{-E}f(-x)\dd{x}=\int_{E}f(x)\dd{x}$$
     \end{enumerate}
   \end{proposition}
-  \begin{important}
-    \begin{theorem}[Dominated convergence theorem]\label{RFA:dominated}
-      Let $E\subseteq\RR^n$ be a measurable set, $f$ be a measurable function over $E$ such that $\exists (f_m)$ measurable with $f_m\almoste{\rightarrow} f$ and $\abs{f_m(x)}\almoste\leq g(x)$ on $E$ with $g\in \mathcal{L}^1(E)$ $\forall m\in\NN$. Then, $f, f_m\in \mathcal{L}^1(E)$ $\forall m\in\NN$ and: $$\int_Ef(x)\dd{x}=\lim_{m\to\infty}\int_Ef_m(x)\dd{x}$$
-    \end{theorem}
-  \end{important}
+  \begin{theorem}[Dominated convergence theorem]\label{RFA:dominated}
+    Let $E\subseteq\RR^n$ be a measurable set, $f$ be a measurable function over $E$ such that $\exists (f_m)$ measurable with $f_m\almoste{\rightarrow} f$ and $\abs{f_m(x)}\almoste\leq g(x)$ on $E$ with $g\in \mathcal{L}^1(E)$ $\forall m\in\NN$. Then, $f, f_m\in \mathcal{L}^1(E)$ $\forall m\in\NN$ and: $$\int_Ef(x)\dd{x}=\lim_{m\to\infty}\int_Ef_m(x)\dd{x}$$
+  \end{theorem}
   \begin{proposition}
     Let $E\subseteq\RR^n$ be a measurable set, $f,g\in \mathcal{L}^1(E)$ and $\lambda\in\RR$. Then:
     \begin{enumerate}
@@ -615,35 +611,31 @@
   \begin{corollary}
     Let $f:\RR^{p+q}\rightarrow\RR$ be a measurable function. Then, $f$ is integrable if and only if: $$\int_{\RR^q}\dd{y}\int_{\RR^p}\abs{f(x,y)}\dd{x}<\infty$$
   \end{corollary}
-  \begin{important}
-    \begin{theorem}[Fubini's theorem]\label{RFA:fubini}
-      Let $f\in \mathcal{L}^1(\RR^{p+q})$. Then:
-      \begin{enumerate}
-        \item $f(\cdot,y)\overset{\text{a.e.}}{\in} \mathcal{L}^1(\RR^p)$ and $f(x,\cdot)\overset{\text{a.e.}}{\in}\mathcal{L}^1(\RR^q)$, $x\in\RR^p$, $y\in\RR^q$.
-        \item Let $N_p$ and $N_q$ be the respective null sets where the above functions aren't integrable. Then the functions
-              \begin{align*}
-                \Phi(y) & =\begin{cases}
-                             \int_{\RR^p}f(x,y)\dd{x} & \text{if } y\in\RR^q\setminus N_q \\
-                             0                        & \text{if } y\in N_q
-                           \end{cases} \\ \Psi(x)&=\begin{cases}
-                  \int_{\RR^q}f(x,y)\dd{y} & \text{if } x\in\RR^p\setminus N_p \\
-                  0                        & \text{if } x\in N_p
-                \end{cases}
-              \end{align*}
-              are integrable on $\RR^q$ and $\RR^p$, respectively.
-        \item \hfill $$\int_{\RR^q}\Phi(y)\dd{y}=\int_{\RR^{p+q}}f(x,y)\dd{(x,y)}=\int_{\RR^p}\Psi(x)\dd{x}$$
-      \end{enumerate}
-    \end{theorem}
-  \end{important}
+  \begin{theorem}[Fubini's theorem]\label{RFA:fubini}
+    Let $f\in \mathcal{L}^1(\RR^{p+q})$. Then:
+    \begin{enumerate}
+      \item $f(\cdot,y)\overset{\text{a.e.}}{\in} \mathcal{L}^1(\RR^p)$ and $f(x,\cdot)\overset{\text{a.e.}}{\in}\mathcal{L}^1(\RR^q)$, $x\in\RR^p$, $y\in\RR^q$.
+      \item Let $N_p$ and $N_q$ be the respective null sets where the above functions aren't integrable. Then the functions
+            \begin{align*}
+              \Phi(y) & =\begin{cases}
+                           \int_{\RR^p}f(x,y)\dd{x} & \text{if } y\in\RR^q\setminus N_q \\
+                           0                        & \text{if } y\in N_q
+                         \end{cases} \\ \Psi(x)&=\begin{cases}
+                \int_{\RR^q}f(x,y)\dd{y} & \text{if } x\in\RR^p\setminus N_p \\
+                0                        & \text{if } x\in N_p
+              \end{cases}
+            \end{align*}
+            are integrable on $\RR^q$ and $\RR^p$, respectively.
+      \item \hfill $$\int_{\RR^q}\Phi(y)\dd{y}=\int_{\RR^{p+q}}f(x,y)\dd{(x,y)}=\int_{\RR^p}\Psi(x)\dd{x}$$
+    \end{enumerate}
+  \end{theorem}
   \subsubsection{Change of variables}
   \begin{definition}
     Let $U,V\subseteq\RR^n$ be open sets. A \emph{change of variables} is a diffeomorphism $\vf\varphi:U\rightarrow V$ of class $\mathcal{C}^1$.
   \end{definition}
-  \begin{important}
-    \begin{theorem}[Change of variables]
-      Let $U,V\subseteq\RR^n$ be open sets and $\vf\varphi:U\rightarrow V$ be a change of variables. If $f:\RR^n\rightarrow[0,\infty]$ is measurable or integrable on $V$, then so is $(f\circ\vf\varphi)\abs{J\vf\varphi}$ and: $$\int_{V} f(x)\dd{x}=\int_Uf(\vf\varphi(t))\abs{J\vf\varphi(t)}\dd{t}$$
-    \end{theorem}
-  \end{important}
+  \begin{theorem}[Change of variables]
+    Let $U,V\subseteq\RR^n$ be open sets and $\vf\varphi:U\rightarrow V$ be a change of variables. If $f:\RR^n\rightarrow[0,\infty]$ is measurable or integrable on $V$, then so is $(f\circ\vf\varphi)\abs{J\vf\varphi}$ and: $$\int_{V} f(x)\dd{x}=\int_Uf(\vf\varphi(t))\abs{J\vf\varphi(t)}\dd{t}$$
+  \end{theorem}
   \subsection{Banach spaces}
   \subsubsection{Normed vector spaces}
   \begin{definition}
@@ -953,11 +945,9 @@
   \begin{proof}
     By \mcref{RFA:lemmaalphabeta}, $\forall y\in K$ $\exists h_y\in\mathcal{C}(A)$ such that $h_y(y)=f(y)$ and $h_y(x)=f(x)$. By continuity there is a neighbourhood $N_y$ of $y$ such that $h_y<f+\varepsilon$. Now note that $K\subset\bigcup_{y\in K}N_y$ and the compactness implies that $K\subset\bigcup_{i=1}^mN_{y_i}$ for certain $y_i\in K$, $i=1,\ldots,m$. Finally, take $g_x:=\inf\{h_{y_i}:i=1,\ldots,m\}\in\overline{A}$.
   \end{proof}
-  \begin{important}
-    \begin{theorem}[Stone-Weierstra\ss\ theorem]
-      Let $K\subseteq \KK^n$ be a compact set and $A\subseteq \mathcal{C}(K)$ be a separating self-conjugate subalgebra that vanishes nowhere. Then, $A$ is dense in $\mathcal{C}(K)$.
-    \end{theorem}
-  \end{important}
+  \begin{theorem}[Stone-Weierstra\ss\ theorem]
+    Let $K\subseteq \KK^n$ be a compact set and $A\subseteq \mathcal{C}(K)$ be a separating self-conjugate subalgebra that vanishes nowhere. Then, $A$ is dense in $\mathcal{C}(K)$.
+  \end{theorem}
   \begin{proof}
     We distinguish between $\KK=\RR$ and $\KK=\CC$.
     \begin{itemize}[leftmargin=1.3cm]
@@ -981,11 +971,9 @@
   % \begin{lemma}
   %   Let $(X,d)$ be a metric space and $F\subseteq X$. $F$ is relatively compact on $X$ if and only if any bounded sequence $(x_n)\in F$ has a partial convergent subsequence.
   % \end{lemma}
-  \begin{important}
-    \begin{theorem}[Arzelà-Ascoli theorem]\label{RFA:arzela}
-      Let $(X,d)$ be a metric space, $K\subset X$ be a compact set and $F\subset \mathcal{C}(K)$ be a subset. Then, $F$ is relatively compact in $\mathcal{C}(K)$ if and only if $F$ is pointwise equicontinuous and pointwise bounded.
-    \end{theorem}
-  \end{important}
+  \begin{theorem}[Arzelà-Ascoli theorem]\label{RFA:arzela}
+    Let $(X,d)$ be a metric space, $K\subset X$ be a compact set and $F\subset \mathcal{C}(K)$ be a subset. Then, $F$ is relatively compact in $\mathcal{C}(K)$ if and only if $F$ is pointwise equicontinuous and pointwise bounded.
+  \end{theorem}
   % \begin{proof}
 
   % \end{proof}
@@ -1502,15 +1490,13 @@
     $$\norm{y_n-y_m}^2\leq 2\norm{y_n-x}^2+2\norm{y_m-x}^2 - 4\delta^2\to 0$$
     Hence $(y_n)$ is Cauchy and so its limit $y\in C$ satisfies $\delta=d(x,y)$ by the continuity of the norm.
   \end{sproof}
-  \begin{important}
-    \begin{theorem}[Projection theorem]\label{RFA:projection}
-      Let $(H,\dotp{\cdot}{\cdot})$ be a Hilbert space and $F\subseteq H$ be a closed subspace. Then:
-      \begin{enumerate}
-        \item\label{RFA:projA} $H=F\oplus F^\perp$ and $\forall x\in H$, we can write $x=P_Fx+P_{F^\perp}x$.
-        \item If $x\in H$ and $y\in F$, then $y=P_Fx\iff x-y\in F^\perp$.
-      \end{enumerate}
-    \end{theorem}
-  \end{important}
+  \begin{theorem}[Projection theorem]\label{RFA:projection}
+    Let $(H,\dotp{\cdot}{\cdot})$ be a Hilbert space and $F\subseteq H$ be a closed subspace. Then:
+    \begin{enumerate}
+      \item\label{RFA:projA} $H=F\oplus F^\perp$ and $\forall x\in H$, we can write $x=P_Fx+P_{F^\perp}x$.
+      \item If $x\in H$ and $y\in F$, then $y=P_Fx\iff x-y\in F^\perp$.
+    \end{enumerate}
+  \end{theorem}
   \begin{proof}
     \begin{enumerate}
       \item The equality $F\cap F^\perp=\{0\}$ follows from noting that $\dotp{u}{u}=0$ $\forall u\in F\cap F^\perp$. Now let $x\in H$ and $y=P_Fx$. We need to show that $z:=x-y\in F^\perp$. Let $u\in F$. Then, $\exists\lambda\in\KK$ such that $\norm{\lambda}= 1$ and $\lambda\dotp{u}{z}=\abs{\dotp{u}{z}}$. Now consider $f(t)=\norm{z-vt}^2$, where $v=\lambda u\in F$. Note that $f$ has a minimum at the origin because:
@@ -1695,11 +1681,9 @@
   \begin{lemma}
     Let $H$ be a Hilbert space and $T\in\mathcal{L}(H)$ be compact and self-adjoint. Consider the sequence $(v_n)$ of orthonormal eigenvectors associated with the eigenvalues $(\alpha_n)$ of $T$. Then: $$H=\langle v_1,v_2,\ldots\rangle\oplus \ker(T)$$ and $\langle v_1,v_2,\ldots\rangle={\ker(T)}^\perp$.
   \end{lemma}
-  \begin{important}
-    \begin{theorem}[Hilbert-Schmidt spectral representation theorem] \label{RFA:representationtheorem}
-      Let $H$ be a Hilbert space and $T\in\mathcal{L}(H)$ be compact and self-adjoint. Consider the sequence $(v_n)$ of orthonormal eigenvectors associated with the eigenvalues $(\alpha_n)$ of $T$. Then: $$Tx=\sum_{n=1}^\infty\alpha_n\dotp{x}{v_n}v_n$$ assuming that $\alpha_n=0$ eventually if the sequence $(\alpha_n)$ is finite.
-    \end{theorem}
-  \end{important}
+  \begin{theorem}[Hilbert-Schmidt spectral representation theorem] \label{RFA:representationtheorem}
+    Let $H$ be a Hilbert space and $T\in\mathcal{L}(H)$ be compact and self-adjoint. Consider the sequence $(v_n)$ of orthonormal eigenvectors associated with the eigenvalues $(\alpha_n)$ of $T$. Then: $$Tx=\sum_{n=1}^\infty\alpha_n\dotp{x}{v_n}v_n$$ assuming that $\alpha_n=0$ eventually if the sequence $(\alpha_n)$ is finite.
+  \end{theorem}
   \begin{theorem}[Fredholm alternative]
     Let $H$ be a Hilbert space, $T\in\mathcal{L}(H)$ be compact and self-adjoint and $\alpha\in\KK^*$. Consider the sequence $(v_n)$ of orthonormal eigenvectors associated with the eigenvalues $(\alpha_n)$ of $T$. Then:
     \begin{enumerate}
