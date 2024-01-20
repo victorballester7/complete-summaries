@@ -532,8 +532,8 @@
     \end{align*}
     which again leads to a contraction. Now assume $Lu\leq 0$. Take $u_\varepsilon=u+\varepsilon \exp{\lambda x_1}$, with $\varepsilon>0$ and $\lambda>0$ yet to be chosen. An easy computation shows that:
     \begin{align*}
-      Lu_\varepsilon & \leq \exp{\lambda x_1}[-\lambda^2a_11+b_1\lambda+c]                    \\
-                     & \leq \exp{\lambda x_1}[-\lambda^2a_11+\norm{\vf{b}}_\infty\lambda+c]<0
+      Lu_\varepsilon & \leq \exp{\lambda x_1}[-\lambda^2a_{11}+b_1\lambda+c]                    \\
+                     & \leq \exp{\lambda x_1}[-\lambda^2a_{11}+\norm{\vf{b}}_\infty\lambda+c]<0
     \end{align*}
     for $\lambda$ large enough. We do here the case $c=0$ (the other is analogous). From what we have previously seen, $\exists y_\varepsilon\in\Fr{\Omega}$ such that $u(x)\leq u_\varepsilon(x)\leq u_\varepsilon(y_\varepsilon)$. And so we can find a sequence $y_{\varepsilon_n}$ that converges to some $y_0\in\Fr{\Omega}$ (because $\Fr{\Omega}$ is compact) as $\varepsilon_n\to 0$, which implies $u(x)\leq u(y_0)$.
   \end{proof}
@@ -679,10 +679,10 @@
         w|_{\Fr{\Omega}}\leq 0 & \text{on }\Fr{\Omega}
       \end{cases}
     $$
-    So by the \mnameref{INEPDE:weak_max_principle_nondiv} we have that $w\leq 0$ in $\Omega$. Similarly, taking $v=u_{n+1}-\overline{u}$ we have that $v$ solves the same problem, so $v\leq 0$ in $\Omega$. Summarizing, one can check we have $\underline{u}\leq u_n\leq u_{n+1}\leq \overline{u}$ for all $n\in\NN$. So $\displaystyle\exists u(x):=\lim_{n\to\infty}u_n(x)$, which is a solution to the problem. It suffices to see that $u_n\overset{\mathcal{C}^{0,\alpha}}{\longrightarrow} u$ because then we'd have $g(x,u_n) \overset{\mathcal{C}^{0,\alpha}}{\longrightarrow} g(x,u)$ and so $u_{n+1}= (L+k)^{-1}g(x,u_n) \overset{\mathcal{C}^{2,\alpha}}{\longrightarrow} (L+k)^{-1}g(x,u)=u$. But this is clear because $u_n\overset{W^{1,p}}{\longrightarrow} u$ (because of the compact embedding $W^{2,p}\subset W^{1,p}$) for all $p<\infty$, and we have an embedding $W^{1,p}(\Omega)\subset \mathcal{C}^{0,\alpha}(\overline{\Omega})$ for $p>d$ and for some particular $\alpha$ (see \mnameref{ATFAPDE:morrey_embedding}).
+    So by the \mnameref{INEPDE:weak_max_principle_nondiv} we have that $w\leq 0$ in $\Omega$. Similarly, taking $v=u_{n+1}-\overline{u}$ we have that $v$ solves the same problem, so $v\leq 0$ in $\Omega$. Summarizing, one can check we have $\underline{u}\leq u_n\leq u_{n+1}\leq \overline{u}$ for all $n\in\NN$. So $\displaystyle\exists u(x):=\lim_{n\to\infty}u_n(x)$, which is a solution to the problem. It suffices to see that $u_n\overset{\mathcal{C}^{0,\alpha}}{\longrightarrow} u$ because then we'd have $g(x,u_n) \overset{\mathcal{C}^{0,\alpha}}{\longrightarrow} g(x,u)$ and so $u_{n+1}= (L+k)^{-1}g(x,u_n) \overset{\mathcal{C}^{2,\alpha}}{\longrightarrow} (L+k)^{-1}g(x,u)=u$. But this is clear because $u_n\overset{W^{1,p}}{\longrightarrow} u$ (because of the compact embedding $W^{2,p}\subset W^{1,p}$) for all $p<\infty$, and we have an embedding $W^{1,p}(\Omega)\subset \mathcal{C}^{0,\theta}(\overline{\Omega})$ for $p>d$ and for some particular $\theta=1-\frac{d}{p}$ (see \mnameref{ATFAPDE:morrey_embedding}). Now given $\theta=\alpha$ choose $p$ according that relation.
   \end{proof}
   \subsubsection{Topological fixed point theorems}
-  \begin{theorem}[Brower fixed point]
+  \begin{theorem}[Brower fixed point]\label{INEPDE:Brower}
     Let $C\subset \RR^n$ be a closed convex bounded set and $f:C\to C$ be a continuous function. Then, $f$ has at least a fixed point.
   \end{theorem}
   \begin{theorem}[Schauder fixed point]\label{INEPDE:schauder_fixed_point}
@@ -694,7 +694,7 @@
     Then, $f$ has at least a fixed point.
   \end{theorem}
   \begin{proof}
-    We will prove it in a Hilbert space $(E,\norm{\cdot})$. Assume the first assumption. Let $\varepsilon>0$. Then, by compactness $\exists N_\varepsilon\in\NN$ and $x_1^\varepsilon,\dots,x_{N_\varepsilon}^\varepsilon\in C$ such that $C\subset \bigcup_{i=1}^{N_\varepsilon}B(x_i^\varepsilon,\varepsilon)$. Let $V_\varepsilon=\langle x_1^\varepsilon,\dots,x_{N_\varepsilon}^\varepsilon\rangle$ be the linear span of these vectors and $C_\varepsilon:=V_\varepsilon\cap C$. Then, $\forall x\in C$ $d(x,C_\varepsilon)< \varepsilon$ because $d(x,x_j^\varepsilon)<\varepsilon$ for some $j$ and $x_j^\varepsilon\in C_\varepsilon$. Let $p_\varepsilon:E\to C_\varepsilon$ be the nonlinear projection on the closed convex bounded set $C_\varepsilon$. For all $x\in C$ we have $\norm{x-p_\varepsilon(x)}\leq d(x,C_\varepsilon)<\varepsilon$. Now define $f_\varepsilon:C_\varepsilon\to C_\varepsilon$ by $f_\varepsilon(x)=p_\varepsilon(f(x))$. Then, $f_\varepsilon$ is continuous and by the \mnameref{INEPDE:Brower} we have that $f_\varepsilon$ has a fixed point $x_\varepsilon\in C_\varepsilon$. Thus:
+    We will prove it in a Hilbert space $(E,\norm{\cdot})$. Assume the first assumption. Let $\varepsilon>0$. Then, by compactness $\exists N_\varepsilon\in\NN$ and $x_1^\varepsilon,\dots,x_{N_\varepsilon}^\varepsilon\in C$ such that $C\subset \bigcup_{i=1}^{N_\varepsilon}B(x_i^\varepsilon,\varepsilon)$. Let $V_\varepsilon=\langle x_1^\varepsilon,\dots,x_{N_\varepsilon}^\varepsilon\rangle$ be the linear span of these vectors and $C_\varepsilon:=V_\varepsilon\cap C$. Then, $\forall x\in C$ $d(x,C_\varepsilon)< \varepsilon$ because $d(x,x_j^\varepsilon)<\varepsilon$ for some $j$ and $x_j^\varepsilon\in C_\varepsilon$. Let $p_\varepsilon:E\to C_\varepsilon$ be the nonlinear projection on the closed convex bounded set $C_\varepsilon$. For all $x\in C$ we have $\norm{x-p_\varepsilon(x)}\leq d(x,C_\varepsilon)<\varepsilon$. Now define $f_\varepsilon:C_\varepsilon\to C_\varepsilon$ by $f_\varepsilon(x)=p_\varepsilon(f(x))$. Then, $f_\varepsilon$ is continuous and by \mnameref{INEPDE:Brower} we have that $f_\varepsilon$ has a fixed point $x_\varepsilon\in C_\varepsilon$. Thus:
     $$
       \norm{f(x_\varepsilon)-x_\varepsilon}=\norm{f(x_\varepsilon)-p_\varepsilon(f(x_\varepsilon))}<\varepsilon
     $$
@@ -703,7 +703,7 @@
     Now assume the second hypothesis. Let $K=\overline{\Conv(f(C))}$ be the closure of the \emph{convex hull} of $f(C)$, that is the smallest convex set containing $f(C)$. Then, $K$ is compact and convex. Moreover, $K\subseteq C$ since $f(C)\subseteq C$, $C$ is convex and closed. Furthermore, $f(K)\subseteq f(C)\subseteq K$. So $f$ restricts to a continuous function $f|_K:K\to K$. By the first assumption, $f|_K$ has a fixed point $x\in K\subseteq C$.
   \end{proof}
   \begin{theorem}[Schaefer fixed point]\label{INEPDE:schaefer_fixed_point}
-    Let $(E, \norm{\cdot})$ be Banach and $f:E\to E$ be a continuous and compact. Suppose that $\exists M>0$ such that $\forall (\lambda,u)\in [0,1]\times E$ with $u=\lambda f(u)$ we have $\norm{u}<M$. Then, $f$ has at least a fixed point, that lies in $\overline{B(0,M)}$.
+    Let $(E, \norm{\cdot})$ be Banach and $f:E\to E$ be continuous and compact. Suppose that $\exists M>0$ such that $\forall (\lambda,u)\in [0,1]\times E$ with $u=\lambda f(u)$ we have $\norm{u}<M$. Then, $f$ has at least a fixed point, that lies in $\overline{B(0,M)}$.
   \end{theorem}
   \begin{proof}
     Take $C=\overline{B(0,M)}$. For $x\in C$, let:
@@ -737,7 +737,7 @@
     where $\displaystyle\beta(u,v)=\sum_{i,j=1}^d\int_\Omega a_{ij}\partial_i u\partial_j v + \int_\Omega cuv$.
   \end{proposition}
   \begin{proof}
-    By \mnameref{RFA:riesz_rep} (using the scalar product $\beta$) we have that this problem has a unique weak solution $u_f\in H_0^1(\Omega)$. Moreover, it minimizes the functional $I$. Indeed, expanding $I((u-u_f)+u_f)$ we have:
+    By \mnameref{RFA:riesz_rep} (using the scalar product $\beta$, which is positive definite because $c\geq 0$) we have that this problem has a unique weak solution $u_f\in H_0^1(\Omega)$. Moreover, it minimizes the functional $I$. Indeed, we have:
     \begin{multline*}
       I(u)-I(u_f)=\beta(u_f,u-u_f)-\int f(u-u_f)+\\
       +\frac{1}{2}\beta(u-u_f,u-u_f)= \frac{1}{2} \beta(u-u_f,u-u_f)>0
@@ -758,7 +758,7 @@
     But $\displaystyle\Phi(u)\geq \inf_{u\in X}\Phi(u)$, so $u$ is a minimizer.
   \end{proof}
   \begin{theorem}[With constraints]
-    Consider the problem \mcref{INEPDE:var_linear_problem}. We know that $L$ is invertible with inverse $L^{-1}:L^2(\Omega)\to H_0^1(\Omega)$. But $H_0^1(\Omega)$ is compactly embedded into $L^2(\Omega)$, so:
+    Consider the problem of \mcref{INEPDE:var_linear_problem}. We know that $L$ is invertible with inverse $L^{-1}:L^2(\Omega)\to H_0^1(\Omega)$. But $H_0^1(\Omega)$ is compactly embedded into $L^2(\Omega)$ (see \mnameref{ATFAPDE:reillich_kondrachov_compactness}), so:
     $$
       \function{K}{L^2(\Omega)}{L^2(\Omega)}{f}{L^{-1}f}
     $$
@@ -860,7 +860,7 @@
     So $\exists D\Psi(u)$ and $$
       D\Psi(u)h=\int_\Omega f(x,u(x))h(x)\dd{x}={\langle \Phi_f(u), h\rangle}_{L^{p'}\times L^p}
     $$
-    where $\frac{1}{p}+\frac{1}{p'}=1$ and $2\leq p\leq 2^*$. To prove that $\Psi\in\mathcal{C}^1$, it suffices to show that $D\Psi(u)\in \mathcal{C}(H^1,L^{p'})$. We have $f(x,t)\leq C(1+\abs{t}^\theta)$, so $\Phi_f:H^1\to L^{p/\theta}$ is continuous for $\frac{d+2}{d-2}\leq p\leq 2^*$. If $p'\leq p/\theta$, since $\Omega$ is bounded, $L^{p/\theta}\hookrightarrow L^{p'}$ is continuous by \mnameref{RFA:holder}. An easy check shows that if we take $p=2^*$, and $p'$ such that $\frac{1}{p}+\frac{1}{p'}=1$, these inequality hold.
+    where $\frac{1}{p}+\frac{1}{p'}=1$ and $2\leq p\leq 2^*$. To prove that $\Psi\in\mathcal{C}^1$, it suffices to show that $\Phi_f\in \mathcal{C}(H^1,L^{p'})$. We have $f(x,t)\leq C(1+\abs{t}^\theta)$, so $\Phi_f:H^1\to L^{p/\theta}$ is continuous for $\frac{d+2}{d-2}\leq p\leq 2^*$. If $p'\leq p/\theta$, since $\Omega$ is bounded, $L^{p/\theta}\hookrightarrow L^{p'}$ is continuous by \mnameref{RFA:holder}. An easy check shows that if we take $p=2^*$, and $p'$ such that $\frac{1}{p}+\frac{1}{p'}=1$, these inequality hold.
   \end{proof}
   \begin{theorem}[Without constraints]
     Let $f:\Omega\times \RR\to\RR$ be Carathéodory satisfying
@@ -902,7 +902,7 @@
     \end{multline*}
     where we used \mnameref{ATFAPDE:poincare_ineq} in the third inequality. So $\displaystyle \inf_{u\in H_0^1(\Omega)}I(u)\geq -\frac{\bar{C}^2}{2}>-\infty$. Thus, $I$ is bounded from below. Moreover, $I$ is \emph{coercive} in the sense that $\displaystyle \lim_{\norm{u}_{H_0^1}\to\infty}I(u)=+\infty$.
 
-    Now take a minimizing sequence $(u_n)$ for $I$. Then, $\displaystyle \sup_{n\in\NN}I(u_n)<\infty$ and by the coercivity property we have $\displaystyle \sup_{n\in\NN}\norm{u_n}_{H_0^1}<\infty$. After extraction, we have $u_n\overset{H_0^1}{\rightharpoonup} \underline{u}$ for some $\underline{u}\in H_0^1(\Omega)$ and using \mcref{INEPDE:minimization_prop1} we have a compact embedding $H_0^1(\Omega)\hookrightarrow L^p(\Omega)$ for any $1\leq p< 2^*$, so $u_n\overset{L^p}{\to} \underline{u}$. Using the growth property and taking $p=\theta+1<2^*$ we conclude that $F(\cdot,u_n(\cdot))\overset{L^{p/\theta}}{\to} F(\cdot,\underline{u}(\cdot))$. So, $\int_\Omega F(x,u_n(x))\dd{x}\to \int_\Omega F(x,\underline{u}(x))\dd{x}$. On the other hand, since $u_n\overset{H_0^1}{\rightharpoonup} \underline{u}$, we have that $\displaystyle \norm{u}_{H_0^1}\leq \liminf_{n\to\infty}\norm{u_n}_{H_0^1}$. Thus, if $\displaystyle m:=\min_{u\in H_0^1(\Omega)}I(u)$, we have:
+    Now take a minimizing sequence $(u_n)$ for $I$. Then, $\displaystyle \sup_{n\in\NN}I(u_n)<\infty$ and by the coercivity property we have $\displaystyle \sup_{n\in\NN}\norm{u_n}_{H_0^1}<\infty$. After extraction, we have $u_n\overset{H_0^1}{\rightharpoonup} \underline{u}$ for some $\underline{u}\in H_0^1(\Omega)$ and using \mcref{INEPDE:minimization_prop1} we have a compact embedding $H_0^1(\Omega)\hookrightarrow L^p(\Omega)$ for any $1< p< 2^*$, so $u_n\overset{L^p}{\to} \underline{u}$. Using the growth property and taking $p=\theta+1<2^*$ we conclude that $F(\cdot,u_n(\cdot))\overset{L^{p/\theta}}{\to} F(\cdot,\underline{u}(\cdot))$. So, $\int_\Omega F(x,u_n(x))\dd{x}\to \int_\Omega F(x,\underline{u}(x))\dd{x}$. On the other hand, since $u_n\overset{H_0^1}{\rightharpoonup} \underline{u}$, we have that $\displaystyle \norm{\underline{u}}_{H_0^1}\leq \liminf_{n\to\infty}\norm{u_n}_{H_0^1}$. Thus, if $\displaystyle m:=\min_{u\in H_0^1(\Omega)}I(u)$, we have:
     \begin{itemize}
       \item $\displaystyle I(\underline{u})\leq \liminf_{n\to\infty}I(u_n)=m$.
       \item $I(\underline{u})\geq m$ because $\underline{u}\in H_0^1(\Omega)$.
@@ -914,7 +914,7 @@
     So $\underline{u}$ is a weak solution to the problem of \mcref{INEPDE:eq_problem_min}.
   \end{proof}
   \begin{theorem}[Bootstrap]
-    Let $f:\Omega\times \RR\to\RR$ be Carathéodory satisfying the growth condition $\abs{f(x,t)}\leq C(1+\abs{t}^\theta)$ $\forall (x,t)\in \Omega\times \RR$ with $\theta\geq 1$. Then, for any $\theta\leq p<\infty$. Assume $\Fr{\Omega}\in \mathcal{C}^2$ and $1\leq p<\infty$. We have an isomorphism $-\laplacian:W^{2,p}(\Omega)\cap W^{1,p}\to L^p(\Omega)$, meaning that for each $g\in L^p(\Omega)$ there exists a unique strong solution $\underline{u}$ of
+    Let $f:\Omega\times \RR\to\RR$ be Carathéodory satisfying the growth condition $\abs{f(x,t)}\leq C(1+\abs{t}^\theta)$ $\forall (x,t)\in \Omega\times \RR$ with $\theta\geq 1$. Assume $\Fr{\Omega}\in \mathcal{C}^2$ and $1\leq p<\infty$. We have an isomorphism $-\laplacian:W^{2,p}(\Omega)\cap W^{1,p}\to L^p(\Omega)$, meaning that for each $g\in L^p(\Omega)$ there exists a unique strong solution $\underline{u}$ of
     $$
       \begin{cases}
         -\laplacian u=g    & \text{in }\Omega      \\
@@ -924,7 +924,7 @@
     in $W^{2,p}$. Then, $\underline{u}\in\mathcal{C}^{0,\alpha}(\overline{\Omega})$ for $0<\alpha<1$ and $\displaystyle \underline{u}\in \bigcap_{1\leq p<\infty}W^{2,p}(\Omega)$.
   \end{theorem}
   \begin{proof}
-    Define $g(x)=\Phi_f(\underline{u})(x)=f(x,\underline{u}(x))$. We have that $\underline{u}\in H_0^1(\Omega)$ (because it is a weak solution), so by \mcref{INEPDE:INEPDE:minimization_prop1} $\underline{u}\in L^{2^*}$. Thus, $g\in L^{p_1}$ with $p_1=\frac{2^*}{\theta}$. So $\underline{u}\in W^{2,p_1}$ and thus $\underline{u}\in L^{q_1}$ with $\frac{1}{q_1}=\frac{1}{p_1}-\frac{2}{d}$ (critical Sobolev embedding). Hence, we get $g\in L^{p_2}$ with $p_2=\frac{q_1}{\theta}$. We can repeat this process as long as $p_n<\frac{d}{2}$. We study the sequence $a_n=\frac{1}{p_n}$. In the process we have that if $a_n>\frac{2}{d}$, then:
+    Define $g(x)=\Phi_f(\underline{u})(x)=f(x,\underline{u}(x))$. We have that $\underline{u}\in H_0^1(\Omega)$ (because it is a weak solution), so by \mcref{INEPDE:minimization_prop1} $\underline{u}\in L^{2^*}$. Thus, $g\in L^{p_1}$ with $p_1=\frac{2^*}{\theta}$. So $\underline{u}\in W^{2,p_1}$ and thus $\underline{u}\in L^{q_1}$ with $\frac{1}{q_1}=\frac{1}{p_1}-\frac{2}{d}$ (critical Sobolev embedding). Hence, we get $g\in L^{p_2}$ with $p_2=\frac{q_1}{\theta}$. We can repeat this process as long as $p_n<\frac{d}{2}$. We study the sequence $a_n=\frac{1}{p_n}$. In the process we have that if $a_n>\frac{2}{d}$, then:
     $$
       a_{n+1}=\theta a_n-\frac{2}{d}\theta
     $$
@@ -953,11 +953,12 @@
     Then, $\exists \lambda_1,\dots,\lambda_m\in\RR$, called \emph{Lagrange multipliers}, such that: $$\dd{I(\underline{u})}=\lambda_1 \dd{J_1(\underline{u})}+\dots+\lambda_m \dd{J_m(\underline{u})}$$
   \end{theorem}
   \begin{proposition}[Aplication]\label{INEPDE:lagrange_apl}
-    Let $f:\Omega\times \RR\to\RR$ be defined by $f(x,t)=\abs{u}^{\theta}\sign(u)$ and define the following functionals in $E=H_0^1(\Omega)$:
+    Let $f:\Omega\times \RR\to\RR$ be a Carathéodory function defined by $f(x,t)=\abs{t}^{\theta}\sign(t)$, with $1\leq \theta\leq \frac{d+2}{d-2}$
+    and define the following functionals in $E=H_0^1(\Omega)$:
     $$
       I(u)=\frac{1}{2}\int_\Omega \abs{\grad u}^2\qquad J(u)=\int_\Omega F(x,u)\dd{x}
     $$
-    Then, $\tilde{u}=\underline{u}/t$ is a weak solution to the problem:
+    with $F(x,t)=\int_0^t f(x,s)\dd{s}$. Then, $\tilde{u}=\underline{u}/t$ is a weak solution to the problem:
     \begin{equation}\label{INEPDE:problem_lagrange_apl}
       \begin{cases}
         -\laplacian u=f(x,u) & \text{in }\Omega      \\
@@ -977,7 +978,7 @@
         u|_{\Fr{\Omega}}=0           & \text{on }\Fr{\Omega}
       \end{cases}
     \end{equation}
-    with $\lambda>0$. Denote by $m$ the minimizer of $I$ under $J(u)=1$. Since $F(x,t)=\frac{\abs{t}^{\theta+1}}{\theta+1}$, under $J(u)=1$, we have that ${\norm{u}_{L^{\theta+1}}}^{\theta+1}=\theta+1$. Now, since $\theta+1\leq 2^*$, we have a continuous embedding $H_0^1(\Omega)\hookrightarrow L^{\theta+1}(\Omega)$, so $\frac{1}{2}{\norm{\grad u}_{L^2}}^2\geq C {\norm{u}_{L^{\theta+1}}}^2\geq K>0$. Thus, $m\geq k>0$. Now, take a minimizing sequence $(u_n)$ for $I$. Since $u_n$ is bounded in $H_0^1$, after extraction we have $u_n\overset{H_0^1}{\rightharpoonup} \underline{u}$ for some $\underline{u}\in H_0^1(\Omega)$. Moreover, $u_n\overset{L^{\theta+1}}{\to} \underline{u}$ by compact embedding. Thus, $1=J(u_n)\to J(\underline{u})$. So $J(\underline{u})=1$ and since $m=\displaystyle\liminf_{n\to\infty}I(u_n)\geq I(\underline{u})$ and $I(\underline{u})\geq m$, we have that $\underline{u}$ is a minimizer for $I$ under $J(u)=1$. Now, we know that $I,J$ are of class $\mathcal{C}^1$ on $H_0^1(\Omega)$ and
+    with $\lambda>0$. Denote by $m$ the minimizer of $I$ under $J(u)=1$. Since $F(x,t)=\frac{\abs{t}^{\theta+1}}{\theta+1}$, under $J(u)=1$ we have that ${\norm{u}_{L^{\theta+1}}}^{\theta+1}=\theta+1$. Now, since $\theta+1\leq 2^*$, we have a continuous embedding $H_0^1(\Omega)\hookrightarrow L^{\theta+1}(\Omega)$, so $\frac{1}{2}{\norm{\grad u}_{L^2}}^2\geq C {\norm{u}_{L^{\theta+1}}}^2\geq K>0$. Thus, $m\geq K>0$. Now, take a minimizing sequence $(u_n)$ for $I$. Since $u_n$ is bounded in $H_0^1$, after extraction we have $u_n\overset{H_0^1}{\rightharpoonup} \underline{u}$ for some $\underline{u}\in H_0^1(\Omega)$. Moreover, $u_n\overset{L^{\theta+1}}{\to} \underline{u}$ by compact embedding. Thus, $1=J(u_n)\to J(\underline{u})$. So $J(\underline{u})=1$ and since $m=\displaystyle\liminf_{n\to\infty}I(u_n)\geq I(\underline{u})$ and $I(\underline{u})\geq m$, we have that $\underline{u}$ is a minimizer for $I$ under $J(u)=1$. Now, we know that $I,J$ are of class $\mathcal{C}^1$ on $H_0^1(\Omega)$ and
     $$
       \dd{J(u)}h = \int_\Omega \abs{u}^{\theta-1}uh
     $$
@@ -1011,8 +1012,8 @@
     \end{itemize}
     Let $\mathcal{N}:=\{u\in H_0^1(\Omega)\setminus\{0\}:J(u)=0\}$, where:
     \begin{align*}
-      I(u) & =\frac{1}{2}\int_\Omega \abs{\grad u}^2-\int_\Omega F(x,u)\dd{x}           \\
-      J(u) & =\frac{1}{2} \dd{I(u)}u = \int_\Omega \abs{\grad u}^2 -\int_\Omega f(x,u)u
+      I(u) & =\frac{1}{2}\int_\Omega \abs{\grad u}^2-\int_\Omega F(x,u)\dd{x} \\
+      J(u) & =\dd{I(u)}u = \int_\Omega \abs{\grad u}^2 -\int_\Omega f(x,u)u
     \end{align*}
     Then, if $\underline{u}\in\mathcal{N}$ is a minimizer of $I$ under $J(u)=0$, then $\dd{I(\underline{u})}=0$ and so $\underline{u}$ is a weak solution to \mcref{INEPDE:problem_lagrange_apl}.
   \end{proposition}
@@ -1074,26 +1075,26 @@
     Then, $\exists \underline{u}\in H_0^1(\Omega)$ such that $I(\underline{u})=\displaystyle \min_{u\in H_0^1(\Omega)}I(u)$ and $\underline{u}$ is a weak solution to \mcref{INEPDE:problem_lagrange_apl}.
   \end{proposition}
   \begin{proof}
-    First of all, note that the thrid hypothesis on $f$ implies that $F(x,t)\geq 0$ for $\abs{t}\leq 1$. From the superquadradicity condition, for $t>0$, the function $\abs{t}^{-p}F(x,t)$ is nondecreasing (the derivative is nonnegative). So, for $0\leq t\leq 1$ we have $F(x,t)\leq \abs{t}^p F(x,1)$. Similarly, for $-1\leq t\leq 0$ the function is nonincreasing and so we have $F(x,t)\leq \abs{t}^p F(x,-1)$. Using the upper estimate we get, for $\abs{t}\geq 1$, $\abs{F(x,t)}\leq \overline{\overline{C}} \abs{t}^{p_1}$ and so
+    First of all, note that the thrid hypothesis on $f$ implies that $F(x,t)\geq 0$ for $\abs{t}\leq 1$. From the superquadradicity condition, for $t>0$, the function $\abs{t}^{-p}F(x,t)$ is nondecreasing (the derivative is nonnegative). So, for $0\leq t\leq 1$ we have $F(x,t)\leq \abs{t}^p F(x,1)$. Similarly, for $-1\leq t\leq 0$ the function is nonincreasing and so we have $F(x,t)\leq \abs{t}^p F(x,-1)$. Using the upper estimate we get, for $\abs{t}\geq 1$, ${F(x,t)}\leq \overline{\overline{C}} \abs{t}^{p_1}$ and so
     $\abs{F(x,t)}\leq C'(\abs{t}^p+\abs{t}^{p_1})$ $\forall t$. So:
     \begin{align*}
-      \int_\Omega \abs{F(x,u)} & \leq C'\left(\norm{u}_{L^{p}}^p+\norm{u}_{L^{p_1}}^{p_1}\right)        \\
-                               & \leq C''\left(\norm{\grad u}_{L^2}^p+\norm{\grad u}_{L^2}^{p_1}\right)
+      \int_\Omega {F(x,u)} & \leq C'\left(\norm{u}_{L^{p}}^p+\norm{u}_{L^{p_1}}^{p_1}\right)        \\
+                           & \leq C''\left(\norm{\grad u}_{L^2}^p+\norm{\grad u}_{L^2}^{p_1}\right)
     \end{align*}
     by \mnameref{ATFAPDE:poincare_ineq} and ?????. And thus:
     \begin{align}
       I(u) & \geq \norm{\grad u}_{L^2}^2\left(\frac{1}{2}-C''\left[\norm{\grad u}_{L^2}^{p-2}+\norm{\grad u}_{L^2}^{p_1-2}\right]\right)\nonumber \\
            & \label{INEPDE:I_mountain}\geq \frac{1}{4}\norm{u}_{H_0^1}^2
     \end{align}
-    for $\norm{u}_{H_0^1}\leq r$ with $r>0$ small enough. Now, take $u_1\in H_0^1(\Omega)\setminus\{0\}$ and $\lambda>0$ to be chosen later. From the previous reasoning, we have $F(x,t)\geq F(x,1)\abs{t}^{p}$ for $t\geq 1$ and $F(x,t)\geq F(x,-1)\abs{t}^{p}$ for $t\leq -1$. So, $F(x,t)\geq K\abs{t}^{p}$ for some $K>0$ and all $\abs{t} \geq 1$. Now, since $u_1\ne 0$ $\exists \varepsilon>0$ such that $\int_\Omega \abs{u_1}^p\indi{\{\abs{u_1}\geq \varepsilon\}}>0$. So for $\lambda\geq \frac{1}{\varepsilon}$ we have:
+    for $\norm{u}_{H_0^1}\leq r$ with $r>0$ small enough. Now, take $u_1\in H_0^1(\Omega)\setminus\{0\}$ and $\lambda>0$ to be chosen later. From the previous reasoning, we have $F(x,t)\geq F(x,1)\abs{t}^{p}$ for $t\geq 1$ and $F(x,t)\geq F(x,-1)\abs{t}^{p}$ for $t\leq -1$. So, $F(x,t)\geq K\abs{t}^{p}\geq0$ for some $K>0$ and all $\abs{t} \geq 1$. Now, since $u_1\ne 0$ $\exists \varepsilon>0$ such that $\int_\Omega \abs{u_1}^p\indi{\{\abs{u_1}\geq \varepsilon\}}>0$. So for $\lambda\geq \frac{1}{\varepsilon}$ we have:
     \begin{multline*}
-      I(\lambda u_1) \leq \frac{\lambda^2}{2}\norm{\grad u_1}_{L^2}^2-K\lambda^p\int_\Omega \abs{u_1}^p\indi{\{\abs{u_1}\geq \varepsilon\}}=\\=A\lambda^2-B\lambda^p\overset{\lambda\to\infty}{\longrightarrow} -\infty
+      I(\lambda u_1) \leq \frac{\lambda^2}{2}\norm{\grad u_1}_{L^2}^2-\int_\Omega F(x,\lambda u_1)\indi{\{\abs{u_1}\geq \varepsilon\}}\leq\\\leq \frac{\lambda^2}{2}\norm{\grad u_1}_{L^2}^2-K\lambda^p\int_\Omega \abs{u_1}^p\indi{\{\abs{u_1}\geq \varepsilon\}}=\\=A\lambda^2-B\lambda^p\overset{\lambda\to\infty}{\longrightarrow} -\infty
     \end{multline*}
-    So we may choose $\lambda=\lambda_1>0$ such that $I(\lambda_1 u_1)\leq 0$ and given the previous $r>0$ we choose $u_1$ with $\norm{\lambda_1 u_1}_{H_0^1}>r$. Now let
+    where the first inequality follows from the fact that $F(x,t)\geq 0$ for $\abs{t}\leq 1$. So we may choose $\lambda=\lambda_1>0$ such that $I(\lambda_1 u_1)\leq 0$ and given the previous $r>0$ we choose $u_1$ with $\norm{\lambda_1 u_1}_{H_0^1}>r$. Now let
     $$
       \Gamma:=\{\gamma\in \mathcal{C}([0,1],H_0^1(\Omega)):\gamma(0)=0,\gamma(1)=\lambda_1 u_1\}
     $$
-    and define $c:=\displaystyle \inf_{\gamma\in \Gamma}\max_{t\in [0,1]}I(\gamma(t))$. Take $\gamma\in \Gamma$. Since $\norm{\gamma(0)}_{H_0^1}=0$ and $\norm{\gamma(1)}_{H_0^1}> r$, $\exists t_0\in (0,1)$ such that $\norm{\gamma(t_0)}_{H_0^1}=r$. So by \eqref{INEPDE:I_mountain} we have:
+    and define $c:=\displaystyle \inf_{\gamma\in \Gamma}\max_{t\in [0,1]}I(\gamma(t))$. Take $\gamma\in \Gamma$. Since $\norm{\gamma(0)}_{H_0^1}=0$ and $\norm{\gamma(1)}_{H_0^1}> r$, $\exists t_0\in (0,1)$ such that $\norm{\gamma(t_0)}_{H_0^1}=r$. So by \mcref{INEPDE:I_mountain} we have:
     $$
       c =\displaystyle \inf_{\gamma\in \Gamma}\max_{t\in [0,1]}I(\gamma(t))\geq \frac{r^2}{4}>0=\max\{I(0),I(\lambda_1 u_1)\}
     $$
@@ -1110,7 +1111,7 @@
         \displaystyle\int_\Omega \abs{\grad u_n}^2-\int_\Omega f(x,u_n)u_n\dd{x}=\o{\norm{u_n}_{H_0^1}}
       \end{cases}
     $$
-    From here subtracting the second equation (multiplied by $p$) to the first one, we have:
+    From here subtracting the first equation (multiplied by $p$) to the second one, we have:
     \begin{multline*}
       \left(1-\frac{p}{2}\right)\int_\Omega \abs{\grad u_n}^2\dd{x}+\int_\Omega \left[pF(x,u_n)-f(x,u_n)u_n\right]\dd{x}=\\
       =-pc+\o{1} + \o{\norm{u_n}_{H_0^1}}
@@ -1123,11 +1124,11 @@
     $$
       \hat{q}=\frac{2d}{d-2}\implies \theta\hat{q}<2^*\implies \hat{q}<\frac{2^*}{\theta}
     $$
-    So $f(x,u_n)u_n\overset{H^{-1}}{\longrightarrow} f(x,u)u$. Now since
+    So $f(x,u_n)\overset{H^{-1}}{\longrightarrow} f(x,u)$. Now since
     $$
-      \dd{I(u_n)}h={\langle -\laplacian u_n-f(x,u_n),h\rangle}_{H^{-1},H_0^1}
+      \dd{I(u_n)}h={\langle -\laplacian u_n-f(x,u_n),h\rangle}_{H^{-1}\times H_0^1}
     $$
-    we have $-\laplacian u_n=f(x,u_n)+r_n$ with $r_n=\dd{I(u_n)}\overset{H^{-1}}{\longrightarrow} 0$. Thus, $-\laplacian u_n\overset{H^{-1}}{\longrightarrow} f(x,u)$ (and so $u_n\overset{H_0^1}{\longrightarrow} {(-\laplacian)}^{-1}f(x,u)$) and since $u_n\overset{H_0^1}{\rightharpoonup} u$ implies $-\laplacian u_n\overset{H^{-1}}{\rightharpoonup} -\laplacian u$, we have $-\laplacian u=f(x,u)$. This implies that in fact $u_n\overset{H_0^1}{\longrightarrow}$ and so $I(u)=\displaystyle \lim_{n\to\infty}I(u_n)=c$.
+    we have $-\laplacian u_n=f(x,u_n)+r_n$ with $r_n=\dd{I(u_n)}\overset{H^{-1}}{\longrightarrow} 0$. Thus, $-\laplacian u_n\overset{H^{-1}}{\longrightarrow} f(x,u)$ (and so $u_n\overset{H_0^1}{\longrightarrow} {(-\laplacian)}^{-1}f(x,u)$) and since $u_n\overset{H_0^1}{\rightharpoonup} u$ implies $-\laplacian u_n\overset{H^{-1}}{\rightharpoonup} -\laplacian u$, we have $-\laplacian u=f(x,u)$. This implies that in fact $u_n\overset{H_0^1}{\longrightarrow}u$ and so $I(u)=\displaystyle \lim_{n\to\infty}I(u_n)=c$.
   \end{proof}
 \end{multicols}
 \end{document}
