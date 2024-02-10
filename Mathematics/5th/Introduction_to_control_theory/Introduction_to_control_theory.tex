@@ -1,0 +1,113 @@
+\documentclass[../../../main_math.tex]{subfiles}
+
+\begin{document}
+\changecolor{ICT}
+\begin{multicols}{2}[\section{Introduction to control theory}]
+  \subsection{Control theory in ODEs}
+  \subsubsection{Stability}
+  \begin{definition}
+    A function $\alpha: \RR_{\geq 0} \to \RR_{\geq 0}$ is said to be of \emph{class $\mathcal{K}$} if it is continuous, strictly increasing and $\alpha(0) = 0$. If, moreover, $\displaystyle \lim_{s \to \infty} \alpha(s) = \infty$, then $\alpha$ is said to be of \emph{class $\mathcal{K}^\infty$}.
+  \end{definition}
+  \begin{definition}
+    A function $\beta: \RR_{\geq 0} \times \RR_{\geq 0} \to \RR_{\geq 0}$ is said to be of \emph{class $\mathcal{KL}$} if, for each fixed $t \geq 0$, the function $\beta(\cdot, t)$ is of class $\mathcal{K}$ and, for each fixed $s \geq 0$, the function $\beta(s, \cdot)$ is decreasing and $\displaystyle \lim_{t \to \infty} \beta(s, t) = 0$.
+  \end{definition}
+  \begin{remark}
+    An example of a function class $\mathcal{K}$ not in $\mathcal{K}^\infty$ is for example $\alpha(s)=\arctan(s)$. Examples of functions of class $\mathcal{KL}$ are for instance $\beta(s, t) = s\exp{-t}$ or $\beta(s, t) = \arctan(s/(t+1))$.
+  \end{remark}
+  \begin{definition}
+    Let $E\subseteq \RR^n$ be a neighbourhood of the origin and $V: E \to \RR_{\geq 0}$ be a function. We say that $V$ is \emph{positive definite} on $E$ if $\{V=0\} = \{0\}$. We say that $V$ is \emph{negative definite} on $E$ if $-V$ is positive definite on $E$.
+  \end{definition}
+  \begin{lemma}
+    Let $E\subseteq \RR^n$ be a neighbourhood of the origin and $V: E \to \RR_{\geq 0}$ be positive definite on $E$. Then, for any compact set $K \subseteq E$ with $0\in \Int K$, there exists $\alpha \in \mathcal{K}$ such that $\alpha(\norm{\vf{x}}) \leq V(\vf{x})$ for all $\vf{x} \in K$.
+  \end{lemma}
+  \begin{remark}
+    If $V$ is continuous, then it is uniformly continuous on compact sets, and so we have:
+    $$
+      \abs{V(\vf{x}) - V(\vf{y})} \leq \omega(\norm{\vf{x}-\vf{y}})
+    $$
+    where $\omega$ is a modulus of continuity of $V$. Then, we can find $\alpha_1 \in \mathcal{K}$ such that $\alpha_1\geq \omega$ and so we have an upper bound for $V(x)\leq \alpha_1(\norm{\vf{x}})$.
+  \end{remark}
+  \begin{definition}
+    Let $E\subseteq \RR^n$ be a neighbourhood of the origin. We defined the \emph{penalized norm} on $E$ as the function:
+    $$
+      \function{\omega_E}{E}{\RR_{\geq 0}}{\vf{x}}{\norm{\vf{x}}\left(1+\frac{1}{d(\vf{x}, \Fr{E})}\right)}
+    $$
+  \end{definition}
+  From now on, we will consider that the system
+  \begin{equation}\label{ICT:ode}
+    \begin{cases}
+      \dot{\vf{x}} = \vf{f}(\vf{x}) \\
+      \vf{x}(0) = \vf{x}_0
+    \end{cases}
+  \end{equation}
+  has an equilibrium point at the origin. We will denote by $\vf{X}(\vf{x}_0, t)$ a solution of the system with initial condition $\vf{X}(\vf{x}_0, 0) = \vf{x}_0\in \mathcal{O}\subseteq \RR^n$.
+  \begin{definition}
+    The equilibrium $\vf{X}(0, t)=0$ of \mcref{ICT:ode} is said to be:
+    \begin{itemize}
+      \item \emph{stable} if $\exists\mu>0$ and $\alpha\in\mathcal{K}$ such that $\forall\norm{\vf{x}_0}<\mu$ any solution $\vf{X}(\vf{x}_0, \cdot)$ exists for all $t\geq 0$ and satisfies:
+            $$
+              \norm{\vf{X}(\vf{x}_0, t)}\leq \alpha(\norm{\vf{x}_0})\quad\forall t\geq 0
+            $$
+      \item \emph{attractive} if $\exists\mu>0$ such that $\forall\norm{\vf{x}_0}<\mu$ any solution $\vf{X}(\vf{x}_0, \cdot)$ exists for all $t\geq 0$ and satisfies:
+            $$
+              \lim_{t\to\infty}\norm{\vf{X}(\vf{x}_0, t)}=0
+            $$
+      \item \emph{asymptotically stable} if $\exists \mu>0$ and $\beta\in \mathcal{KL}$ such that $\forall\norm{\vf{x}_0}<\mu$ any solution $\vf{X}(\vf{x}_0, \cdot)$ exists for all $t\geq 0$ and satisfies:
+            $$
+              \norm{\vf{X}(\vf{x}_0, t)}\leq \beta(\norm{\vf{x}_0}, t)\quad\forall t\geq 0
+            $$
+      \item \emph{exponentially stable} if $\exists k,\lambda,\mu>0$ such that $\forall\norm{\vf{x}_0}<\mu$ any solution $\vf{X}(\vf{x}_0, \cdot)$ exists for all $t\geq 0$ and satisfies:
+            $$
+              \norm{\vf{X}(\vf{x}_0, t)}\leq k\norm{\vf{x}_0} \exp{-\lambda t}\quad\forall t\geq 0
+            $$
+    \end{itemize}
+    Moreover, in the last two cases, if $\mu$ can be picked as large as we want, then the equilibrium is said to be \emph{globally stable}.
+  \end{definition}
+  \begin{remark}
+    Note that exponential stability implies asymptotic stability, which implies stability, which implies attractivity. Moreover, it can be seen that asymptotically stability is equivalent to stability and attractivity.
+  \end{remark}
+  \begin{remark}
+    An equivalent definition for stability is the following: $\forall \varepsilon>0$ $\exists \delta>0$ such that if $\norm{\vf{x}_0}<\delta$ then $\norm{\vf{X}(\vf{x}_0, t)}<\varepsilon$ for all $t\geq 0$.
+  \end{remark}
+  \begin{definition}
+    The equilibrium $\vf{X}(0, t)=0$ of \mcref{ICT:ode} is said to be unstable if $\exists \varepsilon>0$ such that $\forall \delta>0$ $\exists \vf{x_0}\in B(\vf{0},\delta)$ and a solution $\vf{X}(\vf{x}_0, \cdot)$ such that $\norm{\vf{X}(\vf{x}_0, t^*)}\geq \varepsilon$ for some $t^*\geq 0$.
+  \end{definition}
+  \begin{remark}
+    A solution may be unstable and attractive at the same time. For example, the system
+    $$
+      \begin{cases}
+        \dot{x} = x^2(y-x) + y^5 \\
+        \dot{y} = y^2(y-2x)
+      \end{cases}
+    $$
+    exhibits the behaviour shown in \mcref{ICT:unstable_attractor}.
+    \begin{figure}[H]
+      \centering
+      \includestandalone[mode=image|tex,width=0.5\linewidth]{Images/unstable_attractor}
+      \caption{Unstable attractor}
+      \label{ICT:unstable_attractor}
+    \end{figure}
+  \end{remark}
+  \begin{definition}
+    We define the \emph{basin of attraction} of the origin as the set $\mathcal{A}$ of all initial conditions $\vf{x}_0$ such that the solution $\vf{X}(\vf{x}_0, \cdot)$ exists for all $t\geq 0$ and satisfies $\displaystyle\lim_{t\to\infty}\vf{X}(\vf{x}_0, t)=0$.
+  \end{definition}
+  \begin{theorem}
+    If the origin is asymptotically stable, then its basin of attraction is an open set included in $\mathcal{O}$. Besides, $\exists \beta_\mathcal{A}\in \mathcal{KL}$ such that $\forall \vf{x}_0\in\mathcal{A}$, any solution $\vf{X}(\vf{x}_0, \cdot)$ exists for all $t\geq 0$ and satisfies $\omega_{\mathcal{A}}(\norm{\vf{X}(\vf{x}_0, t)})\leq \beta_\mathcal{A}(\norm{\vf{x}_0}, t)$ for all $t\geq 0$.
+  \end{theorem}
+  \subsubsection{Sufficient conditions for stability}
+  \begin{theorem}
+    Assume that $\vf{f}\in\mathcal{C}^1$. Then:
+    \begin{enumerate}
+      \item The zero solution is exponentially stable if and only if the zero solution of the system $\dot{\vf{y}}=\vf{Df}(\vf{0}) \vf{y}$ is exponentially stable.
+      \item If $\vf{Df}(\vf{0})$ has an eigenvalue with positive real part, then the origin is unstable.
+    \end{enumerate}
+  \end{theorem}
+  \begin{remark}
+    In linear dynamics exponentially stability is equivalent to global exponentially stability, which in turn is equivalent to global asymptotic stability which is equivalent to asymptotic stability.
+  \end{remark}
+  \begin{corollary}
+    If $\vf{f}\in\mathcal{C}^1$ and $\vf{Df}(\vf{0})$ has all its eigenvalues with negative real part, then the origin is asymptotically stable.
+  \end{corollary}
+  \subsection{Control theory in PDEs}
+\end{multicols}
+\end{document}
