@@ -94,7 +94,6 @@
   \begin{theorem}
     If the origin is asymptotically stable, then its basin of attraction is an open set included in $\mathcal{O}$. Besides, $\exists \beta_\mathcal{A}\in \mathcal{KL}$ such that $\forall \vf{x}_0\in\mathcal{A}$, any solution $\vf{X}(\vf{x}_0, \cdot)$ exists for all $t\geq 0$ and satisfies $\omega_{\mathcal{A}}(\norm{\vf{X}(\vf{x}_0, t)})\leq \beta_\mathcal{A}(\norm{\vf{x}_0}, t)$ for all $t\geq 0$.
   \end{theorem}
-  \subsubsection{Sufficient conditions for stability}
   \begin{theorem}
     Assume that $\vf{f}\in\mathcal{C}^1$. Then:
     \begin{enumerate}
@@ -108,6 +107,72 @@
   \begin{corollary}
     If $\vf{f}\in\mathcal{C}^1$ and $\vf{Df}(\vf{0})$ has all its eigenvalues with negative real part, then the origin is asymptotically stable.
   \end{corollary}
+  \begin{theorem}
+    Let $V:\mathcal{O}\to \RR_{\geq 0}$ be a locally Lipschitz function which is positive definite on $\mathcal{O}$. Then, if
+    $$
+      D_f^+V(\vf{x}) = \limsup_{t\to 0^+}\frac{V(\vf{x} + \vf{f}(\vf{x})t) - V(\vf{x})}{t}
+    $$
+    is non-positive for all $\vf{x}\in \mathcal{O}$, then the origin is stable. The function $V$ is called a \emph{Lyapunov function}.
+  \end{theorem}
+  \begin{proof}
+    Since $\mathcal{O}$ is a neighbourhood of the origin $\exists R>0$ such that $\overline{B(0,R)}\subseteq \mathcal{O}$. Then, since $V$ is continuous and positive definite, $\exists \alpha_1,\alpha_2\in\mathcal{K}$ such that $\alpha_1(\norm{\vf{x}})\leq V(\vf{x})\leq \alpha_2(\norm{\vf{x}})$ for all $\vf{x}\in B(0,R)$. Let $\mu:={\alpha_2}^{-1}(\alpha_1(R/2))$. Then, any solution with initial conditions $\norm{\vf{x}_0}<\mu$ belongs to $\overline{B(0,R)}$ at least for $t\in[0, T)$. Now if we consider $v(t) := V(\vf{X}(\vf{x}_0, t))$, then we have $\dot{v}(t) = D_f^+V(\vf{X}(\vf{x}_0, t))\leq 0$ for all $t\geq 0$. Thus, $\forall t \in [0, T)$ we have:
+    \begin{multline*}
+      \alpha_1(\norm{\vf{X}(\vf{x}_0, t)})\leq V(\vf{X}(\vf{x}_0, t))=v(t) \leq v(0)=\\ = V(\vf{x}_0) \leq \alpha_2(\norm{\vf{x}_0})
+    \end{multline*}
+    And so $\norm{\vf{X}(\vf{x}_0, t)}\leq \alpha_2^{-1}(\alpha_1(\norm{\vf{x}_0}))\leq R/2$ for all $t\in[0, T)$. This mean that in fact $T=\infty$ and so the origin is stable.
+  \end{proof}
+  \begin{theorem}
+    Let $V:\mathcal{O}\to \RR_{\geq 0}$ be a locally Lipschitz function which is positive definite on $\mathcal{O}$. Then, if
+    $$
+      D_f^+V(\vf{x})\leq -w(\vf{x}), \quad \forall \vf{x}\in \mathcal{O}
+    $$
+    with $w:\mathcal{O}\to \RR_{\geq 0}$ continuous and positive definite, then the origin is globally asymptotically stable.
+  \end{theorem}
+  \begin{theorem}[Lasaalle's invariance principle]
+    Let $K$ be a compact set contained in $\mathcal{O}$ and let $V:\mathcal{O}\to \RR_{\geq 0}$ be a locally Lipschitz function which is positive definite on $\mathcal{O}$ and such that $D_f^+V(\vf{x})\leq -w(\vf{x})$ for all $\vf{x}\in K$ with $w:\mathcal{O}\to \RR_{\geq 0}$ continuous (not necessarily positive definite). Then, for any solution $\vf{X}(\vf{x}_0, \cdot)$ with $\vf{x}_0\in K$ and defined on $K$ for all $t\geq 0$, $\exists v^*\in\RR_{\geq 0}$ such that $\vf{X}(\vf{x}_0, t)$ converges to the largest positively invariant set contained in:
+    $$
+      \{\vf{y}\in K: V(\vf{y})=v^*\text{ and }w(\vf{y})=0\}
+    $$
+  \end{theorem}
+  \begin{theorem}[Chetaev's theorem]
+    Let $V:\mathcal{O}\to \RR_{\geq 0}$ be a locally Lipschitz function such that:
+    \begin{itemize}
+      \item $0\in \Fr{G}$, with $G:=\{\vf{x}\in \mathcal{O}: V(\vf{x})=0\}$.
+      \item There exists a neighbourhood $U$ (called Chetaev surface) of the origin such that $D_f^+V(\vf{x})>0$ for all $\vf{x}\in U\cap G$
+    \end{itemize}
+    Then, the origin is unstable.
+  \end{theorem}
+  \begin{theorem}
+    If the origin is asymptotically stable, then $\forall\varepsilon>0$ $\{f(\vf{x}): \norm{\vf{x}}\leq \varepsilon\}$ is a neighbourhood of the origin.
+  \end{theorem}
+  \begin{theorem}
+    If the origin is locally asymptotically stable with basin of attraction $\mathcal{A}$, then $\exists \lambda>0$ and $v:\mathcal{A}\to \RR_{\geq 0}$ $\mathcal{C}^\infty$, positive definite and proper (that is, $\displaystyle \lim_{d(\vf{x}, \Fr{\mathcal{A}})\to 0}v(\vf{x})=\infty$) such that:
+    $$
+      D_f^+v(\vf{x})\leq -\lambda v(\vf{x})\quad\forall \vf{x}\in \mathcal{A}
+    $$
+  \end{theorem}
+  \subsubsection{Control design and stabilization of equilibrium points}
+  \begin{definition}
+    The system $\dot{\vf{x}} = \vf{f}(\vf{x}, \vf{u})$ is said to be \emph{controllable} in time $T>0$ if $\forall \vf{x}_0, \vf{x}_T\in \mathcal{O}$ $\exists \vf{u}: [0, T]\to \RR^p$ such that the solution $\vf{X}(\vf{x}_0,\cdot, \vf{u})$ of the system with initial condition $\vf{X}(\vf{x}_0, 0,\vf{u}) = \vf{x}_0$ satisfies $\vf{X}(\vf{x}_0, T,\vf{u}) = \vf{x}_T$.
+  \end{definition}
+  \begin{definition}
+    The origin is said to be \emph{asymptotically stabilizable} if there exists $q\in \NN$, a neighbourhood $\mathcal{V}\subseteq \RR^q$ of the origin and $\vf\varphi:\RR\times\RR^n\times\mathcal{V}\to \RR^q$, $\vf\psi:\RR\times\RR^n\times\mathcal{V}\to \RR^p$ both continuous, such that the origin is an asymptotically stable solution of the system:
+    $$
+      \begin{cases}
+        \dot{\vf{x}} = \vf{f}(\vf{x}, \vf{u})         \\
+        \dot{\vf{u}} = \vf\varphi(t, \vf{x}, \vf\chi) \\
+        \vf{\vf\chi} = \vf\psi(t, \vf{x}, \vf\chi)
+      \end{cases}
+    $$
+  \end{definition}
+  \begin{theorem}[Kalmann's theorem]
+    Consider the linear system $\dot{\vf{x}} = \vf{Ax} + \vf{Bu}$ with $\vf{A}\in \RR^{n\times n}$ and $\vf{B}\in \RR^{n\times p}$. Then, the origin is asymptotically stabilizable if and only if
+    $$
+      \rank\vf{C}:=\rank\begin{pmatrix} \vf{B} & \vf{AB} & \cdots & \vf{A}^{n-1}\vf{B} \end{pmatrix} = n
+    $$
+    The matrix $\vf{C}$ is called the \emph{controllability matrix}.
+  \end{theorem}
+
   \subsection{Control theory in PDEs}
 \end{multicols}
 \end{document}
