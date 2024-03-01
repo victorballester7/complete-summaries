@@ -157,22 +157,78 @@
   \end{definition}
   \begin{definition}
     The origin is said to be \emph{asymptotically stabilizable} if there exists $q\in \NN$, a neighbourhood $\mathcal{V}\subseteq \RR^q$ of the origin and $\vf\varphi:\RR\times\RR^n\times\mathcal{V}\to \RR^q$, $\vf\psi:\RR\times\RR^n\times\mathcal{V}\to \RR^p$ both continuous, such that the origin is an asymptotically stable solution of the system:
-    $$
+    \begin{equation}\label{ICT:augmented_system}
       \begin{cases}
         \dot{\vf{x}} = \vf{f}(\vf{x}, \vf{u})         \\
         \dot{\vf{u}} = \vf\varphi(t, \vf{x}, \vf\chi) \\
         \dot{\vf{\vf\chi}} = \vf\psi(t, \vf{x}, \vf\chi)
       \end{cases}
-    $$
+    \end{equation}
   \end{definition}
   \begin{theorem}[Kalmann's theorem]
-    Consider the linear system $\dot{\vf{x}} = \vf{Ax} + \vf{Bu}$ with $\vf{A}\in \RR^{n\times n}$ and $\vf{B}\in \RR^{n\times p}$. Then, the origin is asymptotically stabilizable if and only if
+    Consider the linear system $\dot{\vf{x}} = \vf{Ax} + \vf{Bu}$ with $\vf{A}\in \RR^{n\times n}$ and $\vf{B}\in \RR^{n\times p}$. Then, the system is controllable (or the pair $(\vf{A},\vf{B})$ is controllable) if and only if
     $$
       \rank\vf{C}:=\rank\begin{pmatrix} \vf{B} & \vf{AB} & \cdots & \vf{A}^{n-1}\vf{B} \end{pmatrix} = n
     $$
     The matrix $\vf{C}$ is called the \emph{controllability matrix}.
   \end{theorem}
-
+  \begin{theorem}
+    Let $\vf{A} \in \RR^{n\times n}$ and $\vf{B}\in \RR^{n\times p}$. Then, the pair $(\vf{A}, \vf{B})$ is controllable if and only if $\forall \lambda_1,\ldots,\lambda_n\in \CC$ $\exists \vf{K}\in \RR^{p\times n}$ such that: $$\sigma(\vf{A}+\vf{BK})=\{\lambda_1,\ldots,\lambda_n\}$$
+  \end{theorem}
+  \begin{remark}
+    In practice we pick $\lambda_1,\ldots,\lambda_n\in \{\Re z<0\}$, and then we look for $\vf{K}$ such that $\sigma(\vf{A}+\vf{BK})\subseteq \{\lambda_1,\ldots,\lambda_n\}$ (for example by using the characteristic polynomial). Note that if $p>1$, the solution may not be unique.
+  \end{remark}
+  \begin{theorem}
+    Suppose that there exists $q\in \NN$, $\vf\psi:\RR^n\times \RR^q \to \RR^p$ and $\vf\varphi:\RR^n\times \RR^q \to \RR^q$ continuous such that $\vf\psi(\vf{0}, \vf{0}) = \vf{0}$ and $\vf\varphi(\vf{0}, \vf{0}) = \vf{0}$. Assume, moreover, that the system
+    \begin{equation*}
+      \begin{cases}
+        \dot{\vf{x}} = \vf{f}(\vf{x}, \vf\psi(\vf{x}, \vf\chi)) \\
+        \dot{\vf\chi} = \vf\varphi(\vf{x}, \vf\psi(\vf{x}, \vf\chi))
+      \end{cases}
+    \end{equation*}
+    admits $\vf{0}$ as an asymptotically stable equilibrium. Then, $\forall \varepsilon>0$, $\{f(\vf{x}, \vf{u}): \norm{\vf{x}}+\norm{\vf{u}}\leq \varepsilon\}$ is a neighbourhood of the origin.
+  \end{theorem}
+  \begin{definition}
+    Assume that $V$ is a $\mathcal{C}^1$ Lyapunov function for the system $\dot{\vf{x}} = \vf{f}(\vf{x}, \vf{u})$. We say that $V$ is a \emph{strictly control Lyapunov function} (\emph{SCLF}) if $\forall\vf{x}\ne 0$ $\exists \vf{u}\in \RR^p$ such that $\pdv{V}{\vf{x}}\vf{f}(\vf{x}, \vf{u})<0$. $V$ is a \emph{SCLF continuously at the origin} if $\forall\varepsilon>0$ $\exists \delta>0$ such that $\forall \vf{x}\in B(\vf{0},\delta)\setminus\{0\}$ $\exists \vf{u}\in B(\vf{0},\varepsilon)$ such that $\pdv{V}{\vf{x}}\vf{f}(\vf{x}, \vf{u})<0$.
+  \end{definition}
+  \begin{theorem}
+    If $V$ is a SCLF continuously at the origin, then for any $T>0$, there exists a continuous static $T$-periodic feedback control law asymptotically stabilizing the origin. In addition, if the system is input-affine, that is
+    \begin{equation}\label{ICT:inputaffine}
+      \dot{\vf{x}} = \vf{a}(\vf{x}) + \vf{b}(\vf{x})\vf{u}
+    \end{equation}
+    there exists a continuous static feedback control law asymptotically stabilizing the origin.
+  \end{theorem}
+  \begin{theorem}
+    Let $V$ be a SCLF for an input-affine system (\mcref{ICT:inputaffine}) Then, a stabilizing control law is given by:
+    $$
+      \vf\psi=\begin{cases}
+        \vf{0}                                                                                                          & \text{if } L_bV(\vf{x})=0 \\
+        -\frac{L_aV(\vf{x})+\sqrt{(L_aV(\vf{x}))^2+\abs{L_bV(\vf{x})}^4}}{\abs{L_bV(\vf{x})}^2}\transpose{L_bV(\vf{x})} & \text{otherwise}
+      \end{cases}
+    $$
+    where $L_aV(\vf{x}):=\pdv{V}{\vf{x}}\vf{a}(\vf{x})$ and $L_bV(\vf{x}):=\pdv{V}{\vf{x}}\vf{b}(\vf{x})$.
+  \end{theorem}
+  \subsubsection{Backstepping}
+  Consider a system of the form:
+  \begin{equation}\label{ICT:backstepping}
+    \begin{cases}
+      \dot{\vf{x}} = \vf{f}(\vf{x}, \vf{y}) \\
+      \dot{\vf{y}} = \vf{u}
+    \end{cases}
+  \end{equation}
+  We would like to construct a SCLF for this system, that is, to find $V$ such that $\forall (\vf{x}, \vf{y})\ne (\vf{0}, \vf{0})$ $\exists \vf{u}$ such that $$
+    \pdv{V}{\vf{x}}\vf{f}(\vf{x}, \vf{y}) + \pdv{V}{\vf{y}}\vf{u}<0
+  $$
+  We define $\vf\eta$ such that
+  $$
+    \begin{cases}
+      \pdv{V}{\vf{y}}(\vf{x}, \vf{\eta}(x)) = \vf{0} \\
+      \vf\eta(\vf{0}) = \vf{0}
+    \end{cases}
+  $$
+  \begin{lemma}
+    If $V$ is a $\mathcal{C}^2$ function and $\vf\eta$ is a $1/2$-Hölder continuous function, then $W(\vf{x}):=V(\vf{x}, \vf{\eta}(\vf{x}))$ is a SCLF for the system of \mcref{ICT:backstepping}.
+  \end{lemma}
   \subsection{Control theory in PDEs}
 \end{multicols}
 \end{document}
