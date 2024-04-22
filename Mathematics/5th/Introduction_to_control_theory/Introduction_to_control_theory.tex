@@ -17,7 +17,7 @@
   \begin{definition}
     Let $E\subseteq \RR^n$ be a neighbourhood of the origin and $V: E \to \RR_{\geq 0}$ be a function. We say that $V$ is \emph{positive definite} on $E$ if $\{V=0\} = \{0\}$. We say that $V$ is \emph{negative definite} on $E$ if $-V$ is positive definite on $E$.
   \end{definition}
-  \begin{lemma}
+  \begin{lemma}\label{ICT:lemmaK}
     Let $E\subseteq \RR^n$ be a neighbourhood of the origin and $V: E \to \RR_{\geq 0}$ be positive definite on $E$. Then, for any compact set $K \subseteq E$ with $0\in \Int K$, there exists $\alpha \in \mathcal{K}$ such that $\alpha(\norm{\vf{x}}) \leq V(\vf{x})$ for all $\vf{x} \in K$.
   \end{lemma}
   \begin{remark}
@@ -25,7 +25,7 @@
     $$
       \abs{V(\vf{x}) - V(\vf{y})} \leq \omega(\norm{\vf{x}-\vf{y}})
     $$
-    where $\omega$ is a modulus of continuity of $V$. Then, we can find $\alpha_1 \in \mathcal{K}$ such that $\alpha_1\geq \omega$ and so we have an upper bound for $V(x)\leq \alpha_1(\norm{\vf{x}})$.
+    where $\omega$ is a modulus of continuity of $V$. Then, we can find $\alpha_1 \in \mathcal{K}^\infty$ such that $\alpha_1\geq \omega$ and so we have an upper bound for $V(x)\leq \alpha_1(\norm{\vf{x}})$.
   \end{remark}
   \begin{definition}
     Let $E\subseteq \RR^n$ be a neighbourhood of the origin. We defined the \emph{penalized norm} on $E$ as the function:
@@ -64,7 +64,7 @@
     Moreover, in the last two cases, if $\mu$ can be picked as large as we want, then the equilibrium is said to be \emph{globally stable}.
   \end{definition}
   \begin{remark}
-    Note that exponential stability implies asymptotic stability, which implies stability, which implies attractivity. Moreover, it can be seen that asymptotically stability is equivalent to stability and attractivity.
+    Note that exponential stability implies asymptotic stability, which implies stability and attractivity. Moreover, it can be seen that asymptotically stability is equivalent to stability and attractivity.
   \end{remark}
   \begin{remark}
     An equivalent definition for stability is the following: $\forall \varepsilon>0$ $\exists \delta>0$ such that if $\norm{\vf{x}_0}<\delta$ then $\norm{\vf{X}(\vf{x}_0, t)}<\varepsilon$ for all $t\geq 0$.
@@ -92,7 +92,7 @@
     We define the \emph{basin of attraction} of the origin as the set $\mathcal{A}$ of all initial conditions $\vf{x}_0$ such that the solution $\vf{X}(\vf{x}_0, \cdot)$ exists for all $t\geq 0$ and satisfies $\displaystyle\lim_{t\to\infty}\vf{X}(\vf{x}_0, t)=0$.
   \end{definition}
   \begin{theorem}
-    If the origin is asymptotically stable, then its basin of attraction is an open set included in $\mathcal{O}$. Besides, $\exists \beta_\mathcal{A}\in \mathcal{KL}$ such that $\forall \vf{x}_0\in\mathcal{A}$, any solution $\vf{X}(\vf{x}_0, \cdot)$ exists for all $t\geq 0$ and satisfies $\omega_{\mathcal{A}}(\norm{\vf{X}(\vf{x}_0, t)})\leq \beta_\mathcal{A}(\norm{\vf{x}_0}, t)$ for all $t\geq 0$.
+    If the origin is asymptotically stable, then its basin of attraction is an open set included in $\mathcal{O}$. Besides, $\exists \beta_\mathcal{A}\in \mathcal{KL}$ such that $\forall \vf{x}_0\in\mathcal{A}$, any solution $\vf{X}(\vf{x}_0, \cdot)$ exists for all $t\geq 0$ and satisfies $\omega_{\mathcal{A}}(\norm{\vf{X}(\vf{x}_0, t)})\leq \beta_\mathcal{A}(\norm{\vf{x}_0}, t)$ for all $t\geq 0$, where $\omega_{\mathcal{A}}$ is the penalized norm of $\mathcal{A}$.
   \end{theorem}
   \begin{theorem}
     Assume that $\vf{f}\in\mathcal{C}^1$. Then:
@@ -101,6 +101,23 @@
       \item If $\vf{Df}(\vf{0})$ has an eigenvalue with positive real part, then the origin is unstable.
     \end{enumerate}
   \end{theorem}
+  \begin{proof}
+    \begin{enumerate}
+      \item We only do the $\impliedby)$ part. So assume the origin is exponentially stable for the system $\dot{\vf{y}}=\vf{Df}(\vf{0}) \vf{y}$. Then, $\exists k,\lambda>0$ such that $\norm{\vf{y}(0,t)}\leq k\norm{\vf{y}_0}\exp{-\lambda t}$ for all $t\geq 0$, which implies $\exp{\vf{Df}(\vf{0})t}\leq k\exp{-\lambda t}$ for all $t\geq 0$. Now consider $\dot{\vf{x}}=\vf{f}(\vf{x})=\vf{Df}(\vf{0})\vf{x}+\Delta\vf{f}(\vf{x})$, with $\Delta\vf{f}(\vf{x}):=\vf{f}(\vf{x})-\vf{Df}(\vf{0})\vf{x}$. As $f\in\mathcal{C}^1$, $\exists R>0$ such that $\frac{\norm{\Delta\vf{f}(\vf{x})}}{\norm{\vf{x}}}\leq \frac{\lambda}{2 k}$ for all $\norm{\vf{x}}\leq R$. Defining $\mu:= \frac{R}{2k}$, then if $\norm{\vf{x}_0}\leq \mu$ we must have that the solution $\vf{X}(\vf{x}_0, \cdot)$ belongs to $B(\vf{0},R)$ at least on $[0,T)$ for certain $T>0$. Thus, $\forall t\in [0,T)$ we have $\frac{\norm{\Delta \vf{f}(\vf{X}(\vf{x}_0, t))}}{\norm{\vf{X}(\vf{x}_0, t)}}\leq \frac{\lambda}{2k}$, and so using the variations of constants formula:
+            $$
+              \vf{X}(\vf{x}_0,t)=\exp{\vf{Df}(\vf{0})t}\vf{x}_0+\int_0^t\exp{\vf{Df}(\vf{0})(t-s)}\Delta\vf{f}(\vf{X}(\vf{x}_0,s))\dd s
+            $$
+            Thus:
+            $$
+              \norm{\vf{X}(\vf{x}_0,t)}\leq k \exp{-\lambda t}\norm{\vf{x}_0}+\frac{\lambda}{2}\int_0^t\exp{-\lambda(t-s)}\norm{\vf{X}(\vf{x}_0,s)}\dd s
+            $$
+            And so:
+            $$
+              \exp{\lambda t}\norm{\vf{X}(\vf{x}_0,t)}\leq k \norm{\vf{x}_0}+\frac{\lambda}{2}\int_0^t\exp{\lambda s}\norm{\vf{X}(\vf{x}_0,s)}\dd s
+            $$
+            Finally, by \mnameref{SC:gronwall} we have $\exp{\lambda t}\norm{\vf{X}(\vf{x}_0,t)}\leq k \exp{\frac{\lambda}{2} t}\norm{\vf{x}_0}$, and so the origin is exponentially stable.
+    \end{enumerate}
+  \end{proof}
   \begin{remark}
     In linear dynamics exponentially stability is equivalent to global exponentially stability, which in turn is equivalent to global asymptotic stability which is equivalent to asymptotic stability.
   \end{remark}
@@ -110,16 +127,16 @@
   \begin{theorem}
     Let $V:\mathcal{O}\to \RR_{\geq 0}$ be a locally Lipschitz function which is positive definite on $\mathcal{O}$. Then, if
     $$
-      D_f^+V(\vf{x}) = \limsup_{t\to 0^+}\frac{V(\vf{x} + \vf{f}(\vf{x})t) - V(\vf{x})}{t}
+      D_f^+V(\vf{x}) = \limsup_{t\to 0^+}\frac{V(\vf{x} + t\vf{f}(\vf{x})) - V(\vf{x})}{t}
     $$
     is non-positive for all $\vf{x}\in \mathcal{O}$, then the origin is stable. The function $V$ is called a \emph{Lyapunov function}.
   \end{theorem}
   \begin{proof}
-    Since $\mathcal{O}$ is a neighbourhood of the origin $\exists R>0$ such that $\overline{B(0,R)}\subseteq \mathcal{O}$. Then, since $V$ is continuous and positive definite, $\exists \alpha_1,\alpha_2\in\mathcal{K}$ such that $\alpha_1(\norm{\vf{x}})\leq V(\vf{x})\leq \alpha_2(\norm{\vf{x}})$ for all $\vf{x}\in B(0,R)$. Let $\mu:={\alpha_2}^{-1}(\alpha_1(R/2))$. Then, any solution with initial conditions $\norm{\vf{x}_0}<\mu$ belongs to $\overline{B(0,R)}$ at least for $t\in[0, T)$. Now if we consider $v(t) := V(\vf{X}(\vf{x}_0, t))$, then we have $\dot{v}(t) = D_f^+V(\vf{X}(\vf{x}_0, t))\leq 0$ for all $t\geq 0$. Thus, $\forall t \in [0, T)$ we have:
+    Since $\mathcal{O}$ is a neighbourhood of the origin $\exists R>0$ such that $\overline{B(0,R)}\subseteq \mathcal{O}$. Then, since $V$ is continuous and positive definite, $\exists \alpha_1,\alpha_2\in\mathcal{K}^\infty$ such that $\alpha_1(\norm{\vf{x}})\leq V(\vf{x})\leq \alpha_2(\norm{\vf{x}})$ for all $\vf{x}\in B(0,R)$ (by \cref{ICT:lemmaK}). Let $\mu:={\alpha_2}^{-1}(\alpha_1(R/2))$. Then, any solution with initial conditions $\norm{\vf{x}_0}<\mu$ belongs to $\overline{B(0,R)}$ at least for $t\in[0, T)$. Now if we consider $v(t) := V(\vf{X}(\vf{x}_0, t))$, then we have $\dot{v}(t) = D_f^+V(\vf{X}(\vf{x}_0, t))\leq 0$ for all $t\geq 0$. Thus, $\forall t \in [0, T)$ we have:
     \begin{multline*}
       \alpha_1(\norm{\vf{X}(\vf{x}_0, t)})\leq V(\vf{X}(\vf{x}_0, t))=v(t) \leq v(0)=\\ = V(\vf{x}_0) \leq \alpha_2(\norm{\vf{x}_0})
     \end{multline*}
-    And so $\norm{\vf{X}(\vf{x}_0, t)}\leq \alpha_2^{-1}(\alpha_1(\norm{\vf{x}_0}))\leq R/2$ for all $t\in[0, T)$. This mean that in fact $T=\infty$ and so the origin is stable.
+    And so $\norm{\vf{X}(\vf{x}_0, t)}\leq \alpha_1^{-1}(\alpha_2(\norm{\vf{x}_0}))\leq R/2$ for all $t\in[0, T)$. This mean that in fact $T=\infty$ and so the origin is stable with the function $\alpha:=\alpha_1^{-1}\circ\alpha_2$.
   \end{proof}
   \begin{theorem}
     Let $V:\mathcal{O}\to \RR_{\geq 0}$ be a locally Lipschitz function which is positive definite on $\mathcal{O}$. Then, if
@@ -128,12 +145,25 @@
     $$
     with $w:\mathcal{O}\to \RR_{\geq 0}$ continuous and positive definite, then the origin is globally asymptotically stable.
   \end{theorem}
+  \begin{proof}
+    As in the previous proof, we define $\mu:=\alpha_2^{-1}(\alpha_1(R/2))$ and we get $\dot{v}(t)\leq -w(\vf{X}(\vf{x}_0, t))$. Since $w$ is continuous and positive definite, $\exists \alpha_3\in\mathcal{K}^\infty$ such that $\alpha_3(\norm{\vf{x}})\leq w(\vf{x})$ for all $\vf{x}\in \overline{B(0,R)}$. Thus, $\dot{v}(t) \leq -\alpha_3(\norm{\vf{X}(\vf{x}_0, t)})\leq -\alpha_3(\alpha_2^{-1}(V(\vf{X}(x_0, t))))$. Now, in this case, one can proove that $\exists \beta \in \mathcal{KL}$ such that $v(t)\leq \beta(v(0), t)$ for all $t\geq 0$. But:
+    \begin{multline*}
+      \alpha_1(\norm{\vf{X}(\vf{x}_0, t)})\leq V(\vf{X}(\vf{x}_0, t))=v(t) \leq \beta(v(0), t)=\\ = \beta(V(\vf{x}_0), t)\leq \beta(\alpha_2(\norm{\vf{x}_0}), t)
+    \end{multline*}
+    And thus, $\norm{\vf{X}(\vf{x}_0, t)}\leq \alpha_1^{-1}(\beta(\alpha_2(\norm{\vf{x}_0}), t))$ for all $t\geq 0$, which implies that the origin is globally asymptotically stable since the latter function is of class $\mathcal{KL}$.
+  \end{proof}
   \begin{theorem}[Lasaalle's invariance principle]
     Let $K$ be a compact set contained in $\mathcal{O}$ and let $V:\mathcal{O}\to \RR_{\geq 0}$ be a locally Lipschitz function which is positive definite on $\mathcal{O}$ and such that $D_f^+V(\vf{x})\leq -w(\vf{x})$ for all $\vf{x}\in K$ with $w:\mathcal{O}\to \RR_{\geq 0}$ continuous (not necessarily positive definite). Then, for any solution $\vf{X}(\vf{x}_0, \cdot)$ with $\vf{x}_0\in K$ and defined on $K$ for all $t\geq 0$, $\exists v^*\in\RR_{\geq 0}$ such that $\vf{X}(\vf{x}_0, t)$ converges to the largest positively invariant set contained in:
     $$
       \{\vf{y}\in K: V(\vf{y})=v^*\text{ and }w(\vf{y})=0\}
     $$
   \end{theorem}
+  \begin{remark}
+    If the function $V$ is such that $$
+      k_1\norm{\vf{x}}^n \leq V(\vf{x}) \leq k_2\norm{\vf{x}}^m
+    $$
+    and $w$ such that $w(\norm{\vf{x}})\geq k_3\norm{\vf{x}}^m$, for some $k_1,k_2,k_3>0$ and $m,n\in\NN$, then the origin is globally exponentially stable.
+  \end{remark}
   \begin{theorem}[Chetaev's theorem]
     Let $V:\mathcal{O}\to \RR_{\geq 0}$ be a locally Lipschitz function such that:
     \begin{itemize}
@@ -164,6 +194,7 @@
         \dot{\vf{\vf\chi}} = \vf\psi(t, \vf{x}, \vf\chi)
       \end{cases}
     \end{equation}
+    If $q=0$, then the feedback control law is called \emph{static}, whereas if $q>0$ it is called \emph{dynamic}. Moreover if both $\vf\varphi$ and $\vf\psi$ are independent of $t$, then the control law is called \emph{stationary} and if $\vf\psi$ and $\vf\chi$ are independent of $\vf{x}$, it is called \emph{open-loop control}.
   \end{definition}
   \begin{theorem}[Kalmann's theorem]
     Consider the linear system $\dot{\vf{x}} = \vf{Ax} + \vf{Bu}$ with $\vf{A}\in \RR^{n\times n}$ and $\vf{B}\in \RR^{n\times p}$. Then, the system is controllable (or the pair $(\vf{A},\vf{B})$ is controllable) if and only if
@@ -176,7 +207,7 @@
     Let $\vf{A} \in \RR^{n\times n}$ and $\vf{B}\in \RR^{n\times p}$. Then, the pair $(\vf{A}, \vf{B})$ is controllable if and only if $\forall \lambda_1,\ldots,\lambda_n\in \CC$ $\exists \vf{K}\in \RR^{p\times n}$ such that: $$\sigma(\vf{A}+\vf{BK})=\{\lambda_1,\ldots,\lambda_n\}$$
   \end{theorem}
   \begin{remark}
-    In practice we pick $\lambda_1,\ldots,\lambda_n\in \{\Re z<0\}$, and then we look for $\vf{K}$ such that $\sigma(\vf{A}+\vf{BK})\subseteq \{\lambda_1,\ldots,\lambda_n\}$ (for example by using the characteristic polynomial). Note that if $p>1$, the solution may not be unique.
+    In practice we pick $\lambda_1,\ldots,\lambda_n\in \{\Re z<0\}$, and then we look for $\vf{K}$ such that $\sigma(\vf{A}+\vf{BK})= \{\lambda_1,\ldots,\lambda_n\}$ (for example by using the characteristic polynomial). Note that if $p>1$, the solution may not be unique.
   \end{remark}
   \begin{theorem}
     Suppose that there exists $q\in \NN$, $\vf\psi:\RR^n\times \RR^q \to \RR^p$ and $\vf\varphi:\RR^n\times \RR^q \to \RR^q$ continuous such that $\vf\psi(\vf{0}, \vf{0}) = \vf{0}$ and $\vf\varphi(\vf{0}, \vf{0}) = \vf{0}$. Assume, moreover, that the system
@@ -227,8 +258,418 @@
     \end{cases}
   $$
   \begin{lemma}
-    If $V$ is a $\mathcal{C}^2$ function and $\vf\eta$ is a $1/2$-Hölder continuous function, then $W(\vf{x}):=V(\vf{x}, \vf{\eta}(\vf{x}))$ is a SCLF for the system of \mcref{ICT:backstepping}.
+    If $V$ is a $\mathcal{C}^2$ function and $\vf\eta$ is a $1/2$-Hölder continuous function, then $W(\vf{x}):=V(\vf{x}, \vf{\eta}(\vf{x}))$ is a SCLF for the system $\dot{\vf{x}} = \vf{f}(\vf{x}, \vf{v})$.
   \end{lemma}
+
+  Finally we consider $$
+    V(\vf{x}, \vf{y}) = V(\vf{x}, \vf{\eta}(\vf{x})) +\int_{\vf{\eta}(\vf{x})}^{\vf{y}}\vf\varphi(\vf{x}, \vf{s})\dd s
+  $$
+  with $\vf\varphi$ such that $\vf\varphi(\vf{x}, \vf{y}) = \vf{0}\iff \vf{y} = \vf{\eta}(\vf{x})$. Then, this $V$ is a SCLF for the system of \mcref{ICT:backstepping}.
+  \begin{remark}
+    Usually we take $\vf\varphi(\vf{x}, \vf{y}) = \vf{y}-\vf{\eta}(\vf{x})$ and consider
+    $$
+      V(\vf{x}, \vf{y}) = W(\vf{x}) + \frac{1}{2}\left(\vf{y}-\vf{\eta}(\vf{x})\right)^2
+    $$
+  \end{remark}
   \subsection{Control theory in PDEs}
+  From what follows $\vf{x}$ will denote the state variable whose values are in a Hilbert space $\mathcal{X}$, and $\vf{u}$ will denote the control variable whose values are in a Hilbert space $\mathcal{U}$.
+  \subsubsection{Classical problems}
+  \begin{definition}[Exact controllability]
+    Let $T>0$. The \emph{exact controllability} of a system is said to be achieved if, for any initial condition $\vf{x}_0$ and any final condition $\vf{x}_T$, there exists a control $\vf{u}:[0,T]\to \mathcal{U}$ such that the solution $\vf{X}(\vf{x}_0, \cdot, \vf{u})$ of the system with initial condition $\vf{X}(\vf{x}_0, 0, \vf{u}) = \vf{x}_0$ satisfies $\vf{X}(\vf{x}_0, T, \vf{u}) = \vf{x}_T$.
+  \end{definition}
+  \begin{definition}[Approximate controllability]
+    Let $T>0$, $\varepsilon>0$. The \emph{approximate controllability} of a system is said to be achieved if, for any initial condition $\vf{x}_0$ and any final condition $\vf{x}_T$, there exists a control $\vf{u}:[0,T]\to \mathcal{U}$ such that the solution $\vf{X}(\vf{x}_0, \cdot, \vf{u})$ of the system satisfies $\norm{\vf{X}(\vf{x}_0, T, \vf{u}) - \vf{x}_T}<\varepsilon$.
+  \end{definition}
+  \begin{definition}[Null controllability]
+    Let $T>0$. The \emph{null controllability} of a system is said to be achieved if, for any initial condition $\vf{x}_0$, there exists a control $\vf{u}:[0,T]\to \mathcal{U}$ such that the solution $\vf{X}(\vf{x}_0, \cdot, \vf{u})$ of the system satisfies $\vf{X}(\vf{x}_0, T, \vf{u}) = \vf{0}$.
+  \end{definition}
+  \begin{lemma}
+    Consider a linear reversible system $\dot{\vf{x}} = \vf{A}\vf{x} + \vf{B}\vf{u}$ with $\vf{A}\in \RR^{n\times n}$ and $\vf{B}\in \RR^{n\times p}$. Then, the system is exactly controllable if and only if it is null controllable.
+  \end{lemma}
+  \begin{proof}
+    The implication to the right is clear. Now assume it is null controllable. Let $T>0$ and $x_0,x_T\in \RR^n$. Since the system is reversible we can first solve for $\overline{\vf{x}}$
+    $$
+      \begin{cases}
+        \dot{\overline{\vf{x}}} = \vf{A}\overline{\vf{x}} \\
+        \overline{\vf{x}}(T) = \vf{x}_T
+      \end{cases}
+    $$
+    Now we solve the null controllability problem with initial state $\vf{x}_0-\overline{\vf{x}}(0)$. Thus, we find $\vf{u}$ such that $\vf{x}$ satisfies
+    $$
+      \begin{cases}
+        \dot{\vf{x}} = \vf{A}\vf{x} + \vf{B}\vf{u} \\
+        \vf{x}(0) = \vf{x}_0-\overline{\vf{x}}(0)
+      \end{cases}
+    $$
+    and so $\vf{x}(T) = 0$. Now consider $\widehat{\vf{x}}:= \overline{\vf{x}} + \vf{x}$. Then, $\widehat{\vf{x}}$ satisfies
+    $$
+      \begin{cases}
+        \dot{\widehat{\vf{x}}} = \vf{A}\widehat{\vf{x}} + \vf{B}\vf{u} \\
+        \widehat{\vf{x}}(0) = \vf{x}_0                                 \\
+        \widehat{\vf{x}}(T) = \vf{x}_T
+      \end{cases}
+    $$
+  \end{proof}
+  \begin{definition}[Feedback stabilization]
+    Given $\dot{\vf{x}}=\vf{Ax}+\vf{Bu}$, the \emph{feedback stabilization process} consists in finding an operator $K:\mathcal{X}\to\mathcal{U}$ such that $\dot{\vf{x}}=\vf{Ax}+\vf{B}\vf{K}\vf{x}$ has a stable (or asymptotically stable) equilibrium at the origin?
+  \end{definition}
+  \begin{definition}[Optimal control]
+    Let $J$ be a cost function, $J=J(\vf{x}, \vf{u},\vf{x}(T))$. The \emph{optimal control problem} consists in finding $\vf{u}: [0,T]\to \mathcal{U}$ such that $J$ is minimized, where $\vf{x}$ satisfies $\dot{\vf{x}} = \vf{Ax} + \vf{Bu}$ with $\vf{x}(0) = \vf{x}_0$.
+  \end{definition}
+  \subsubsection{Interior control for the heat equation}
+  Let $\Omega\subseteq \RR^n$ be a bounded regular domain (i.e.\ connected) and $\omega\subseteq \Omega$ be a non-empty open subset. We consider the control system:
+  \begin{equation}\label{ICT:heat_equation_control}
+    \begin{cases}
+      \partial_t v - \laplacian v = \indi{\omega}u & \text{in } [0,T] \times \Omega      \\
+      v = 0                                        & \text{in } [0,T] \times \Fr{\Omega} \\
+      v = v_0                                      & \text{in } \Omega
+    \end{cases}
+  \end{equation}
+  \begin{theorem}[Strong solutions]
+    Let $f\in L^2((0,T);\Omega)$ and $v_0\in H_0^1(\Omega)$. Then, the Cauchy problem
+    \begin{equation}\label{ICT:heat_equation_cauchy}
+      \begin{cases}
+        \partial_t v - \laplacian v = f & \text{in } [0,T] \times \Omega      \\
+        v = 0                           & \text{in } [0,T] \times \Fr{\Omega} \\
+        v = v_0                         & \text{in } \Omega
+      \end{cases}
+    \end{equation}
+    has a unique solution $$v\in \mathcal{C}^0([0,T]; H_0^1(\Omega))\cap L^2((0,T); H^2(\Omega)\cap H_0^1(\Omega))$$
+  \end{theorem}
+  \begin{proof}
+    We start from uniqueness. Let $(e_i)_{i\in\NN}$ be a Hilbert basis of $L^2(\Omega)$ from the eigenvectors of the Laplacian operator:
+    $$
+      \begin{cases}
+        -\laplacian e_i = \lambda_i e_i & \text{in } \Omega      \\
+        e_i = 0                         & \text{in } \Fr{\Omega}
+      \end{cases}
+    $$
+    and $\varphi\in \mathcal{D}((0,T)\times \Omega)$ be a test function. Then, we have
+    $$
+      -\int_0^T\int_\Omega v \partial_t \varphi + \int_0^T\int_\Omega \nabla v \nabla \varphi = \int_0^T\int_\Omega f\varphi
+    $$
+    In particular for $\varphi = \rho(t)\psi_{n,i}(x)$ with $\rho\in D(0,T)$ and $\psi_{n,i}\overset{H^1}{\to} e_i$ (here we use the fact that $H_0^1=\overline{\mathcal{D}(\Omega)}^{{}_{H^1}}$). Thus, we arrive at:
+    $$
+      -\int_0^T\int_\Omega v \rho' e_i + \int_0^T\int_\Omega \rho\nabla v \nabla e_i = \int_0^T\int_\Omega f \rho e_i
+    $$
+    Decomposing $v=\sum_{i\in\NN} v_i e_i$ and $f=\sum_{i\in\NN} f_i e_i$, we get:
+    $$
+      -\int_0^T v_i \rho' + \lambda_i\int_0^T \rho v_i = \int_0^T f_i \rho
+    $$
+    which in the sense of $D^*(0,T)$ gives $v_i'+\lambda_i v_i = f_i$, which has solution:
+    $$
+      v_i(t)=\exp{-\lambda_i t}v_i(0)+\int_0^t\exp{-\lambda_i(t-s)}f_i(s)\dd s
+    $$
+    So we have uniqueness and a formula:
+    \begin{align}\label{ICT:heat_equation_solution}
+      v(t,x) & =\sum_{i\in\NN}\exp{-\lambda_i t}v_i(0)e_i(x)+\sum_{i\in\NN}\int_0^t\exp{-\lambda_i(t-s)} f_i(s)e_i(x)\dd s \\
+             & =:v_a(t,x)+v_b(t,x)\nonumber
+    \end{align}
+    For the existence, it suffices to check that the solution in \mcref{ICT:heat_equation_solution} belongs to the desired space. We first check that $v\in \mathcal{C}^0([0,T]; H_0^1(\Omega))$. We have:
+    \begin{multline*}
+      \norm{v_a}^2_{L^\infty(0,T; H_0^1(\Omega))} = \sup_{t\in[0,T]}\norm{v^a(t,\cdot)}_{H_0^1(\Omega)}^2 =\\=\sup_{t\in[0,T]}\int_\Omega\sum_{i\in\NN}\exp{-2\lambda_i t}\abs{v_i(0)}^2\norm{\grad e_i}^2=\\= \sup_{t\in[0,T]}\sum_{i\in\NN}\lambda_i\exp{-2\lambda_i t}\abs{v_i(0)}^2 \leq \sum_{i\in\NN}\lambda_i\abs{v_i(0)}^2 =\\= \norm{v_0}^2_{H_0^1(\Omega)}
+    \end{multline*}
+    On the other hand:
+    \begin{multline*}
+      \norm{v_b(t,\cdot)}^2_{H_0^1(\Omega)} = \sum_{i\in\NN}\lambda_i\left(\int_0^t\exp{-\lambda_i(t-s)}f_i(s)\dd s\right)^2=\\= \sum_{i\in\NN}\left( \int_0^t\exp{-\lambda_i(t-s)}f_i(s)\sqrt{\lambda_i}\dd s\right)^2 \leq \sum_{i\in\NN}\norm{f_i}_{L^2(0,T)}^2 = \\=\norm{f}^2_{L^2((0,T);L^2(\Omega))}
+    \end{multline*}
+    where we have used the fact that the penultimate term can be written as a convolution and then we use \mnameref{HA:youngConvolution} $\norm{f*g}_{L^r} \leq \norm{f}_{L^p}\norm{g}_{L^q}$ with $1/p+1/q=1+1/r$, in the case $p=q=2$ and $r=\infty$. Finally, we prove $v\in L^2((0,T); H^2(\Omega))$. Indeed:
+    \begin{multline*}
+      \norm{v_a(t,\cdot)}^2_{L^2(0,T;H^2)}=\int_0^T\sum_{i\in\NN}\lambda_i^2\exp{-2\lambda_i t}\abs{v_i(0)}^2\dd t=\\= \sum_{i\in\NN}\lambda_i\abs{v_i(0)}^2\int_0^T\lambda_i \exp{-2\lambda_i t}\dd t \leq C \norm{v_0}^2_{H_0^1(\Omega)}
+    \end{multline*}
+    because the latter term in the penultimate equality is bounded. Moreover:
+    \begin{multline*}
+      \norm{v_b(t,\cdot)}^2_{H_0^1} =\int_0^T\sum_{i\in\NN}\lambda_i^2 \left(\int_0^t\exp{-\lambda_i(t-s)}f_i(s)\dd s\right)^2\dd t=\\= \int_0^T \sum_{i\in\NN}\left(\int_0^t\exp{-\lambda_i(t-s)}f_i(s)\lambda_i\dd s\right)^2\dd t\leq\\\leq \int_0^T\sum_{i\in\NN}\norm{f_i}^2_{L^2(0,T)}\dd t \leq T \norm{f}^2_{L^2((0,T);L^2(\Omega))}
+    \end{multline*}
+    again by \mnameref{HA:youngConvolution}.
+  \end{proof}
+  \begin{theorem}[Weak solutions]
+    Let $f\in L^2((0,T);H^{-1}(\Omega))$ and $v_0\in L^2(\Omega)$. Then, the Cauchy problem of \mcref{ICT:heat_equation_cauchy} has a unique solution $$v\in \mathcal{C}^0((0,T); L^2(\Omega))\cap L^2((0,T); H_0^1(\Omega))$$
+  \end{theorem}
+  We consider now the dual problem of \mcref{ICT:heat_equation_control}:
+  \begin{equation}\label{ICT:heat_equation_control_dual}
+    \begin{cases}
+      -\partial_t\theta - \laplacian\theta = 0 & \text{in } [0,T]\times \Omega      \\
+      \theta = 0                               & \text{in } [0,T]\times \Fr{\Omega} \\
+      \theta(T) = \theta_T                     & \text{in } \Omega
+    \end{cases}
+  \end{equation}
+  \begin{proposition}\label{ICT:duality}
+    Let $u\in L^2((0,T)\times \Omega)$, $v_0\in L^2(\Omega)$ and $v$ the corresponding solution of \mcref{ICT:heat_equation_control}. Then, the solution $\theta$ of \mcref{ICT:heat_equation_control_dual} with $\theta_T\in L^2(\Omega)$ satisfies:
+    $$
+      \langle \theta, v\rangle_{L^2(\Omega)}\bigg|_0^T = \int_0^T\int_\Omega \indi{\omega}u \theta
+    $$
+  \end{proposition}
+  \begin{proof}
+    We can sppose that all functions are smooth (otherwise we replace them by a linear combination of $e_i$ and pass to the limit using the fact that $(v_0,f)\mapsto v$ is continuous from $L^2(\Omega)\times L^2((0,T)\times \Omega)\to \mathcal{C}^0([0,T]; L^2(\Omega))\cap L^2((0,T); L^2(\Omega))$). Now, multiplying \mcref{ICT:heat_equation_control} by $\theta$ and integrating we get:
+    \begin{multline*}
+      \int_0^T\int_\Omega \indi{\omega}u\theta = \int_0^T\int_\Omega \partial_t v\theta + \int_0^T\int_\Omega \nabla v \nabla \theta=\\=\int_\Omega v\theta\bigg|_0^T-\int_0^T\int_\Omega \partial_t \theta v + \int_0^T\int_\Omega \nabla v \nabla \theta = \int_\Omega v\theta\bigg|_0^T
+    \end{multline*}
+  \end{proof}
+  \begin{definition}
+    We will say that the dual problem \mcref{ICT:heat_equation_control_dual} satisfies the \emph{finite-time observability inequality} if $\exists C>0$ such that $\forall \theta_T\in L^2(\Omega)$ the solution $\theta$ satisfies:
+    $$
+      \norm{\theta(0)}_{L^2(\Omega)}^2\leq C\int_0^T\int_\omega \theta^2
+    $$
+  \end{definition}
+  \begin{proposition}
+    If the dual problem \mcref{ICT:heat_equation_control_dual} is finite-time observable, then the control problem \mcref{ICT:heat_equation_control} is null controllable.
+  \end{proposition}
+  \begin{proof}
+    Note that the null controllability condition is equivalent to $\forall \theta_T\in L^2(\Omega)$ we have (by \mnameref{ICT:duality}):
+    $$
+      -\langle \theta(0),v_0\rangle_{L^2(\Omega)} = \int_0^T\int_\omega u \theta
+    $$
+    Now let's define:
+    $$
+      A:=\overline{\{\indi{\omega}\theta:\theta \text{ solution of \mcref{ICT:heat_equation_control_dual} for some }\theta_T\in L^2(\Omega)\}}^{{}_{L^2((0,T)\times \omega)}}
+    $$
+    We equip $A$ with the norm $\norm{\cdot}_{L^2((0,T)\times \omega)}$. Now consider:
+    $$
+      \function{\Phi}{L^2(\Omega)}{L^2((0,T)\times \omega)}{\theta_T}{\indi{\omega}\theta}
+    $$
+    Note that $\overline{\Phi}=A$. Now, to any $\phi\in\im(\Phi)$ we could a priori associate several $\theta_T$, but all of them would generate the same $\theta_0$ due to the observability condition. So we may consider the map:
+    $$
+      \function{}{\im(\Phi)}{L^2(\Omega)}{\indi{\omega}\theta}{\theta(0)}
+    $$
+    which is continuous by the observability condition. Now, extending the map to $A$ by uniform continuity, we get that
+    $$
+      \function{\ell}{A}{\RR}{\indi{\omega}\theta}{-\langle \theta(0),v_0\rangle_{L^2(\Omega)}}
+    $$
+    is a continuous linear form (by composition). We conclude now with \mnameref{INEPDE:laxmilgram} since $A$ is a Hilbert space.
+  \end{proof}
+  \begin{proposition}[1D observability inequality]
+    Let $\Omega=(0,1)$, $\omega=(a,b)$ and $T>0$. Then, $\exists C>0$ such that $\forall \theta_T\in L^2(0,1)$ we have:
+    $$
+      \norm{\theta(0)}_{L^2(0,1)}\leq C\norm{\theta}_{L^2((0,T)\times \omega)}
+    $$
+  \end{proposition}
+  \begin{proof}
+    Let $w(t,x):=\theta(T-t,x)$ so that $w$ satisfies:
+    \begin{equation}\label{ICT:heat_equation_control_dual_1D}
+      \begin{cases}
+        \partial_t w - \partial_{xx} w = 0 & \text{in } [0,T]\times (0,1) \\
+        w(t,0) = w(t,1) = 0                &                              \\
+        w(0,x) = w_0(x)                    & \text{in } (0,1)
+      \end{cases}
+    \end{equation}
+    We want to prove that $$
+      \norm{w(T)}_{L^2(0,1)}\leq C\norm{w}_{L^2((0,T)\times (a,b))}
+    $$
+    From \mcref{ICT:lemma1Dobservability} between $t_1$ and $t_0$ we have:
+    $$
+      \norm{w(t_0)}_{L^\infty(0,1)}\leq C\exp{\frac{D}{t_1-t_0}}\norm{w(t_1)}_{L^\infty(0,1)}^{1-\delta}\norm{w(t_0)}_{L^\infty(a,b)}^\delta
+    $$
+    We repeat that in the interval $(t_2,t_1)$ and we get:
+    \begin{multline*}
+      \norm{w(t_0)}_{L^\infty(0,1)}\leq C^{2-\delta}\exp{\frac{D}{t_1-t_0}+\frac{D(1-\delta)}{t_2-t_1}}\norm{w(t_2)}_{L^\infty(0,1)}^{(1-\delta)^2}\cdot\\\cdot\norm{w(t_1)}_{L^\infty(0,1)}^{(1-\delta)\delta}\norm{w(t_0)}_{L^\infty(a,b)}^{\delta}
+    \end{multline*}
+    Repeating the argument we get each time an extra power $1-\delta$ in $\exp{D/(t_{n+1}-t_n)}$. So we would like to have for example $t_{n+1}-t_n=\alpha \left(1-\frac{\delta}{2}\right)^n$ $\sum_{n\in\NN} \left(1-\frac{\delta}{2}\right)^n = \frac{2}{\delta}$ so we let $t_0=T$ and $t_{n+1}=t_n-\frac{\delta}{2}T\left(1-\frac{\delta}{2}\right)^n$. We conclude arguing by induction and passing to the limit:
+    $$
+      \norm{w(0)}_{L^\infty (0,1)}\leq C\norm{w}_{L^\infty((0,T)\times (a,b))}
+    $$
+    Now to prove the $L^2$ inequality, for the left hand side we have $\norm{w(0)}_{L^2(0,1)}\leq \norm{w(0)}_{L^\infty(0,1)}$ and for the right hand side we use \mnameref{ICT:interiorregularity}.
+  \end{proof}
+  \begin{lemma}\label{ICT:lemma1Dobservability}
+    Using the hypotheses and notation of the previous proposition, we have that $\exists C,D>0$ and $\delta>0$ such that $\forall w_0$ we have:
+    $$
+      \norm{w(T)}_{L^\infty(0,1)}\leq C\exp{D/T}\norm{w_0}_{L^\infty(0,1)}^{1-\delta}\norm{w(T)}_{L^\infty(a,b)}^\delta
+    $$
+  \end{lemma}
+  \begin{lemma}[Interior regulariy]\label{ICT:interiorregularity}
+    Let $w$ be a solution of the heat equation ($w\in \mathcal{C}^0([0,T]; H_0^1(\Omega))\cap L^2((0,T); H^2(\Omega)\cap H_0^1(\Omega))$). Then:
+    $$
+      \norm{w}_{L^\infty([T/2,T]\times [a,b])}\leq C\norm{w}_{L^2([T/4,T] \times [c,d])}
+    $$
+    with $c<a<b<d$.
+  \end{lemma}
+  \begin{proof}
+    Let $w$ be a solution. We introduce a \textit{cut-off} function $\varphi_1\in\mathcal{C}^\infty$ with $\varphi_1=0$ outside $[T/4,T]\times [c,d]$ and $\varphi_1=1$ in $[T/3,T]\times [\mu,\nu]$, with $c<\mu<a$ and $b<\nu<d$. We look at $w_1:=w\varphi_1$. We have:
+    $$
+      \begin{cases}
+        \partial_t w_1 - \partial_{xx}w_1=w\partial_t\varphi_1-2\partial_x w\partial_x\varphi_1-w\partial_{xx}\varphi_1 \\
+        w_1|_{t=0} = 0                                                                                                  \\
+        w_1|_{[0,T]\times\Fr{\Omega}}=0
+      \end{cases}
+    $$
+    Let's study the right hand side. We have:
+    \begin{itemize}
+      \item $\norm{w\partial_t\varphi_1}_{L^2}\leq C \norm{w}_{L^2}\implies \norm{w\partial_t\varphi_1}_{L^2,H^{-1}}\leq C \norm{w}_{L^2}$
+      \item $\norm{w\partial_{xx}\varphi_1}_{L^2}\leq C \norm{w}_{L^2} \implies \norm{w\partial_{xx}\varphi_1}_{L^2,H^{-1}}\leq C \norm{w}_{L^2}$
+      \item $\norm{\partial_x w\partial_x\varphi_1}_{L^2,H^{-1}}\leq C \norm{w}_{L^2}$
+    \end{itemize}
+    By the theorem of existence of weak solutions we get $\norm{w_1}_{L^2,H_0^1}\leq C\norm{w}_{L^2}$. Now we introduce a second \textit{cut-off} function $\varphi_2$ with $\varphi_2=0$ outside $[T/3,T]\times [\mu,\nu]$ and $\varphi_2=1$ in $[T/2,T]\times [a,b]$. We define $w_2:=w_1\varphi_2$. We have similar calculations to the previous ones but with $w\in L^2([0,T); H^1(\mu,\nu))$ and so:
+    \begin{itemize}
+      \item $\norm{w\partial_t\varphi_2}_{L^2}\leq C \norm{w}_{L^2}$
+      \item $\norm{w\partial_{xx}\varphi_2}_{L^2}\leq C \norm{w}_{L^2}$
+      \item $\norm{\partial_x w\partial_x\varphi_2}_{L^2}\leq C \norm{w}_{L^2}$
+    \end{itemize}
+    Using the theorem of existence of weak solutions we get:
+    $$
+      \norm{w_2}_{L^\infty;H^1}\leq C\norm{w}_{L^2([T/3,T]; H^1(\mu,\nu))}\leq C\norm{w}_{L^2([T/4,T]; H^1(c,d))}
+    $$
+    where the last inequality follows from the first step.
+  \end{proof}
+  \subsubsection{Boundary control for the wave equation}
+  In this section $\Omega\subseteq \RR^n$ is a bounded regular domain and $\Sigma\subseteq \Fr{\Omega}$ is a non-empty open subset. We are interested in studying the control system:
+  \begin{equation}\label{ICT:wave_equation_control}
+    \begin{cases}
+      \partial_{tt} v - \laplacian v = 0  & \text{in } [0,T]\times \Omega      \\
+      v = \indi{\Sigma}u                  & \text{in } [0,T]\times \Fr{\Omega} \\
+      (v,\partial_t v)|_{t=0} = (v_0,v_1) & \text{in } \Omega
+    \end{cases}
+  \end{equation}
+  \begin{theorem}[Weak solutions]
+    We consider the problem
+    \begin{equation}\label{ICT:wave_equation_cauchy}
+      \begin{cases}
+        \partial_{tt} v - \laplacian v = f  & \text{in } [0,T]\times \Omega      \\
+        v = 0                               & \text{in } [0,T]\times \Fr{\Omega} \\
+        (v,\partial_t v)|_{t=0} = (v_0,v_1) & \text{in } \Omega
+      \end{cases}
+    \end{equation}
+    with $(v_0,v_1)\in H_0^1(\Omega)\times L^2(\Omega)$ and $f\in L^1((0,T); L^2(\Omega))$. Then, the problem has a unique solution $v\in \mathcal{C}^0([0,T]; H_0^1(\Omega))\cap \mathcal{C}^1([0,T]; L^2(\Omega))$ with:
+    \begin{multline*}
+      \norm{v}_{L^\infty([0,T]; H_0^1(\Omega))}+\norm{\partial_t v}_{L^\infty([0,T]; L^2(\Omega))}\leq \\\leq C\left(\norm{v_0}_{H_0^1}+\norm{v_1}_{L^2}+ \norm{f}_{L^2((0,T); L^2(\Omega))}\right)
+    \end{multline*}
+  \end{theorem}
+  \begin{theorem}[Strong solutions]
+    Consider the problem \mcref{ICT:wave_equation_cauchy} with $v_0\in H^2(\Omega)\cap H_0^1(\Omega)$, $v_1\in H_0^1(\Omega)$ and $f\in L^1((0,T); H^1(\Omega))$. Then, the problem has a unique solution $v\in \mathcal{C}^0([0,T]; H^2(\Omega)\cap H_0^1(\Omega))\cap \mathcal{C}^1([0,T]; H_0^1(\Omega))$ with:
+    \begin{multline*}
+      \norm{v}_{L^\infty([0,T]; H^2(\Omega)\cap H_0^1(\Omega))}+\norm{\partial_t v}_{L^\infty([0,T]; H^1(\Omega))}\leq \\\leq C\left(\norm{v_0}_{H^2\cap H_0^1}+\norm{v_1}_{H_0^1}+ \norm{f}_{L^1((0,T); H^1(\Omega))}\right)
+    \end{multline*}
+  \end{theorem}
+  \begin{proof}
+    We proceed as for the heat equation. Consider the Hilbert basis $(e_i)_{i\in\NN}$ of $L^2(\Omega)$ from the eigenvectors of the Laplacian operator of eigenvalues $\lambda_i$. Let $v_0=\sum_{i\in\NN} a_i(t) e_i$, $v_1=\sum_{i\in\NN}b_i(t)e_i$ and $f=\sum_{i\in\NN} f_i e_i$. We look for a solution of the form $v(t,x)=\sum_{i\in\NN} y_i(t)e_i$. Taking test functions $\varphi(t)\psi(x)$ and letting $\psi\to e_i$ we get (in the sense of distributions in time):
+    $$
+      \begin{cases}
+        y_i''+\lambda_i y_i = f_i \\
+        y_i(0)=a_i, y_i'(0)=b_i
+      \end{cases}
+    $$
+    So the solution must be of the form $v(t,x)=\sum_{i\in\NN} y_i(t)e_i$ with:
+    $$
+      y_i(t)\!=\!a_i \cos{\!\sqrt{\lambda_i}t}+b_i\frac{\sin(\sqrt{\lambda_i}t)}{\sqrt{\lambda_i}}+\!\int_0^t\!\frac{\sin(\sqrt{\lambda_i}(t\!-\!s))}{\sqrt{\lambda_i}}f_i(s)\dd s
+    $$
+    This gives uniqueness and existence if the sums are finite. To check that the solution belongs to the desired space we proceed as in the heat equation case.
+  \end{proof}
+  \begin{theorem}[Hidden regularity]\label{ICT:hiddenregularity}
+    For a regular solution, we have for some $C>0$:
+    $$
+      \int_0^T\!\!\int_{\Fr{\Omega}}\! \abs{\partial_{\vf{n}}v}^2\! \leq\! C(1+T)\left[\norm{v_0}_{H_0^1}^2\!+\!\norm{v_1}_{L^2}^2\!+\!\norm{f}_{L^1(0,T;L^2(\Omega))}^2\right]
+    $$
+  \end{theorem}
+  \begin{proof}
+    Suppose $v$ regular. We will use a multiplier method. Let $q:\overline{\Omega}\to \RR^n$ be a smooth vector field. We multiply the equation by $(\vf{q}\cdot \grad) v$ and integrate (we denote $Q:=[0,T]\times \Omega$ and $\Sigma_T:=[0,T]\times \Fr{\Omega}$). On the one hand:
+    \begin{multline*}
+      \iint_Q \partial_{tt} v (\vf{q}\cdot \grad) v = \int_\Omega\partial_tv (\vf{q}\cdot \grad) v\bigg|_0^T - \iint_Q \partial_t v (\vf{q}\cdot \grad) \partial_t v =\\=  \int_\Omega\partial_tv (\vf{q}\cdot \grad) v\bigg|_0^T - \iint_Q (\vf{q}\cdot \grad) \frac{(\partial_t v)^2}{2} =\\= \int_\Omega\partial_tv (\vf{q}\cdot \grad) v\bigg|_0^T + \iint_Q \frac{(\partial_t v)^2}{2} \div \vf{q}
+    \end{multline*}
+    where in the last equality we have used intergation by parts and the \mnameref{FSV:divergencethm}. On the other hand:
+    \begin{multline*}
+      \iint_Q \laplacian v (\vf{q}\cdot \grad) v = \int_{\Sigma_T}\partial_{\vf{n}}v(\vf{q}\cdot \grad) v - \iint_Q \grad v \cdot \grad ((\vf{q}\cdot \grad) v)
+    \end{multline*}
+    Notice that since $v=0$ on $\Sigma_T$ the tangential derivatives of $v$ are zero, and so on $\Sigma_T$ we have $(\vf{q}\cdot \grad) v = (\vf{q}\cdot \vf{n})\partial_{\vf{n}}v$.
+    The second term can be written as:
+    \begin{multline*}
+      \iint_Q \grad v \cdot \grad ((\vf{q}\cdot \grad) v) = \iint_Q\partial_kv\partial_k (q_i\partial_iv)=\\=\iint_Q\partial_kv\partial_kq_i \partial_iv + \iint_Q\partial_kvq_i\partial_{ki}v=\\= \iint_Q\partial_kv\partial_kq_i \partial_iv + \iint_Qq_i\partial_i\left(\frac{(\partial_kv)^2}{2}\right)=\\=
+      \iint_Q\partial_kv\partial_kq_i \partial_iv + \iint_Q(\vf{q}\cdot \grad)\frac{\norm{\grad v}^2}{2}=\\= \iint_Q\partial_kv\partial_kq_i \partial_iv - \iint_Q\frac{\norm{\grad v}^2}{2}\div \vf{q}+\iint_{\Sigma_T}\frac{\norm{\grad v}^2}{2} \vf{q} \cdot \vf{n}
+    \end{multline*}
+    Finally grouping all terms we get:
+    \begin{multline*}
+      \frac{1}{2}\iint_{\Sigma_T} (\vf{q} \cdot \vf{n})(\partial_{\vf{n}}v)^2=\iint_Q\partial_kv\partial_kq_i \partial_iv -\frac{1}{2} \iint_Q \norm{\grad v}^2\div \vf{q} +\\+ \int_\Omega\partial_tv (\vf{q}\cdot \grad) v\bigg|_0^T + \iint_Q \frac{(\partial_t v)^2}{2} \div \vf{q} -\iint_Q f (\vf{q}\cdot \grad) v\lesssim\\ \lesssim a^2+a^2+ab+b+ac
+    \end{multline*}
+    with $a:=\norm{v}_{L^\infty([0,T]; H_0^1(\Omega))}$, $b:=\norm{\partial_t v}_{L^\infty([0,T]; L^2(\Omega))}$ and $c:=\norm{f}_{L^1((0,T); L^2(\Omega))}$. Here we used that $\norm{\grad v}=\abs{\partial_{\vf{n}}v}$, because $v=0$ on $\Sigma_T$.
+    We conclude choosing $\vf{q}$ a regular extension of the unit normal vector field to $\Omega$.
+  \end{proof}
+  Now, we want to define weak solutions of \mcref{ICT:wave_equation_control}. To do so, we take as test functions solutions of:
+  \begin{equation}\label{ICT:wave_equation_control_dual}
+    \begin{cases}
+      \partial_{tt} \theta - \laplacian \theta = f & \text{in } [0,T]\times \Omega      \\
+      \theta = 0                                   & \text{in } [0,T]\times \Fr{\Omega} \\
+      (\theta,\partial_t \theta)|_{t=T} = (0,0)    & \text{in } \Omega
+    \end{cases}
+  \end{equation}
+  \begin{definition}[Transposition solution]
+    Let $(v_0,v_1,u)\in L^2(\Omega)\times H^{-1}(\Omega)\times L^2(\Sigma_T)$. We call \emph{transposition solution} of \mcref{ICT:wave_equation_control} a function $v\in \mathcal{C}^0([0,T]; L^2(\Omega))\cap \mathcal{C}^1([0,T]; H^{-1}(\Omega))$ such that for any $f\in L^1((0,T); L^2(\Omega))$ we have:
+    \begin{equation}\label{ICT:transposition_solution}
+      \iint_Q vf = -\int_\Omega \partial_t\theta(0) v(0) +\int_\Omega \theta(0) v_1-\int_{\Sigma_T} u \partial_{\vf{n}} \theta
+    \end{equation}
+    where $\theta$ is the solution of \mcref{ICT:wave_equation_control_dual} associated to $f$.
+  \end{definition}
+  \begin{remark}
+    Any regular solution is a transposition solution.
+  \end{remark}
+  \begin{theorem}
+    For any $(v_0,v_1,u)\in L^2(\Omega)\times H^{-1}(\Omega)\times L^2(\Sigma_T)$, there exists a unique transposition solution of \mcref{ICT:wave_equation_control}.
+  \end{theorem}
+  \begin{proof}
+    We would like to prove that the right hand side of \mcref{ICT:transposition_solution} is a continuous linear form on $L^1((0,T); L^2(\Omega))$. If so then $\exists! v\in [L^1((0,T); L^2(\Omega))]^*=L^\infty([0,T]; L^2(\Omega))$ such the equation is true $\forall f\in L^1((0,T); L^2(\Omega))$. We have that
+    $$
+      \function{}{L^1((0,T); L^2(\Omega))}{\mathcal{C}^0([0,T]; H_0^1(\Omega))\cap \mathcal{C}^1([0,T]; L^2(\Omega))}{f}{\theta}
+    $$
+    is continuous, and so is $f\mapsto \int_\Omega \partial_t\theta(0) v(0)=\langle \partial_t\theta(0),v_0\rangle_{L^2\times L^2}$, because $\partial_t\theta(0)\in L^2(\Omega)$ and $v(0)\in L^2(\Omega)$. Similarly, since $f\to \theta(0)\in H_0^1(\Omega)$ is continuous, then so is $f\mapsto \int_\Omega \theta(0) v_1=\langle \theta(0),v_1\rangle_{H_0^1\times H^{-1}}$. Finally, by \mnameref{ICT:hiddenregularity} we have that $f\mapsto \partial_{\vf{n}}\theta|_{\Sigma_T}\in L^2$ is continuous, and so is $f\mapsto \int_{\Sigma_T} u \partial_{\vf{n}} \theta=\langle u,\partial_{\vf{n}}\theta\rangle_{L^2\times L^2}$.
+  \end{proof}
+  \begin{proposition}
+    Consider a transposition solution $v$ of \mcref{ICT:wave_equation_control}, with $v_0\in L^2(\Omega)$, $v_1\in H^{-1}(\Omega)$ and $u\in L^2((0,T)\times \Sigma)$. Let $\theta$ be a solution of
+    \begin{equation}\label{ICT:wave_equation_control_dual2}
+      \begin{cases}
+        \partial_{tt} \theta - \laplacian \theta =0                 & \text{in } [0,T]\times \Omega      \\
+        \theta = 0                                                  & \text{in } [0,T]\times \Fr{\Omega} \\
+        (\theta,\partial_t \theta)|_{t=T} = (\theta_T^0,\theta_T^1) & \text{in } \Omega
+      \end{cases}
+    \end{equation}
+    Then:
+    $$
+      \left[\langle \partial_tv,\theta\rangle_{H^{-1}\times H_0^1}-\langle v,\partial_t\theta\rangle_{L^2\times L^2}\right]\bigg|_0^T = \int_0^T\int_\Sigma u\partial_{\vf{n}}\theta
+    $$
+  \end{proposition}
+  \begin{proof}
+    It is sufficient to prove it for regular solutions and then pass to the limit using:
+    \begin{align*}
+      \norm{\theta}_{L^\infty, H_0^1} + \norm{\partial_t\theta}_{L^\infty, L^2}   & \lesssim \norm{\theta_T^0}_{H_0^1} + \norm{\theta_T^1}_{L^2}                                             \\
+      \norm{v}_{L^\infty, L^2}\!\!+\!\!\norm{\partial_t v}_{L^\infty, H^{-1}}\!\! & \lesssim \!\norm{v_0}_{L^2} \!\!+\!\! \norm{v_1}_{H^{-1}}\!\!+\!\!\norm{u}_{L^2((0,T)\times \Sigma)}\!\!
+    \end{align*}
+    Now, multiplying the equation of $v$ by $\theta$ and integrating we get:
+    \begin{multline*}
+      0 = \int_0^T\int_\Omega (\partial_{tt}v -\laplacian v)\theta= \int_\Omega \partial_t v\theta\bigg|_0^T - \int_0^T\int_\Omega \partial_t v\partial_t\theta +\\+ \int_0^T\int_\Omega \nabla v \nabla \theta= \int_\Omega \partial_t v\theta\bigg|_0^T - \int_\Omega v \partial_t\theta\bigg|_0^T + \int_0^T\int_\Omega v \partial_{tt} \theta -\\- \int_0^T\int_\Omega v \laplacian \theta + \int_0^T\int_{\Fr{\Omega}} v\partial_{\vf{n}}\theta
+    \end{multline*}
+  \end{proof}
+  \begin{remark}
+    Exact controllability is equivalent to exact controllability starting from $(0,0)$ (due to superposition principle).
+  \end{remark}
+  \begin{definition}[Observability inequality]
+    We say that \mcref{ICT:wave_equation_control_dual2} is \emph{exactly observable} in time $T$ from $\Sigma$ if $\exists C>0$ such that for any solution $\theta$ of \mcref{ICT:wave_equation_control_dual2} we have:
+    $$
+      \norm{\theta(0)}_{H_0^1}+\norm{\partial_t\theta(0)}_{L^2}\leq C\norm{\partial_{\vf{n}}\theta}_{L^2(\Sigma_T)}
+    $$
+  \end{definition}
+  \begin{remark}
+    Note the difference with the final-time observability for the dual heat equation:
+    $$
+      \norm{\theta(0)}_{L^2}\leq C\norm{\theta}_{L^2((0,T)\times \omega)}
+    $$
+  \end{remark}
+  \begin{proposition}
+    If the dual problem \mcref{ICT:wave_equation_control_dual2} is exactly observable in time $T$ from $\Sigma$, then the control problem \mcref{ICT:wave_equation_control} is exactly controllable in time $T$ from $\Sigma$.
+  \end{proposition}
+  \begin{proof}
+    Suppose \mcref{ICT:wave_equation_control_dual2} is exactly observable. We make the choice to find $u$ of the form $u=\partial_{\vf{n}}\tilde{\theta}$ for some $\tilde{\theta}$ solution of \mcref{ICT:wave_equation_control_dual2} (in order to put the problem in the standard Riesz's form). Consider now $E:= H_0^1(\Omega)\times L^2(\Omega)$ equipped with the norm $\norm{(\theta_0,\theta_1)}_E:=\norm{\partial_{\vf{n}}\theta_0}_{L^2(\Sigma_T)}$, where $\theta$ is the solution of \mcref{ICT:wave_equation_control_dual2}. This is an equivalent norm to the standard one:
+    \begin{align*}
+      \norm{(\theta_0,\theta_1)}_E & \gtrsim \norm{\theta_0}_{H_0^1}+\norm{\theta_1}_{L^2} \text{(by observability inequality)}         \\
+      \norm{(\theta_0,\theta_1)}_E & \lesssim \norm{\theta_0}_{H_0^1}+\norm{\theta_1}_{L^2} \text{(by \mnameref{ICT:hiddenregularity})}
+    \end{align*}
+    $E$ is Hilber with this norm. Now, given $(\hat{v}_0,\hat{v}_1)\in E$, the left hand side is a continuous linear form on $(\theta(T),\partial_t\theta(T))\in E$. So $\exists (\overline{\theta}_0,\overline{\theta}_1)\in E$ such that with $\overline{\theta}$ the corresponding solution of \mcref{ICT:wave_equation_control_dual2} one has: $\forall (\theta(T),\partial_t\theta(T))\in E$ with the corresponding solution $\theta$ we have:
+    $$
+      \langle \hat{v}_1,\theta(T)\rangle_{H^{-1}\times H_0^1}-\langle \hat{v}_0,\partial_t\theta(T)\rangle_{L^2\times L^2}=\int_{\Sigma_T}\partial_{\vf{n}}\overline{\theta}\partial_{\vf{n}}\theta
+    $$
+    So we take $u:=\partial_{\vf{n}}\overline{\theta}$.
+  \end{proof}
+  \begin{theorem}[Bardos, Lebeau, Rauch]
+    The system is exactly controllable (or the dual observable) if and only if any ray of geometrical optics in $\Omega$ (at speed $1$) intersects $\Sigma$ between times $0$ and $T$.
+  \end{theorem}
+  \begin{remark}
+    If $\Sigma=\Fr{\Omega}$, then the system is controllable of $T>\diam(\Omega)$.
+  \end{remark}
+  \subsubsection{Abstract systems}
 \end{multicols}
 \end{document}
