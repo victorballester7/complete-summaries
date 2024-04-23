@@ -670,6 +670,220 @@
   \begin{remark}
     If $\Sigma=\Fr{\Omega}$, then the system is controllable of $T>\diam(\Omega)$.
   \end{remark}
-  \subsubsection{Abstract systems}
+  \subsection{Abstract systems}
+  \subsubsection{Basic definitions}
+  \begin{definition}
+    Let $X$, $Y$ be Banach. A \emph{bounded operator} is a couple $(D(A), A)$ where $D(A)\subseteq X$ is a subspace and $A:D(A)\to Y$ is a continuous linear operator. An \emph{unbounded operator} is a couple $(D(A), A)$ where $D(A)\subseteq X$ is a subspace and $A:D(A)\to Y$ is a linear operator.
+  \end{definition}
+  \begin{remark}
+    Usually we will omit specifying the domain $D(A)$.
+  \end{remark}
+  \begin{remark}
+    Note that bounded operators are also unbounded operators.
+  \end{remark}
+  \begin{definition}
+    Let $A$ be an unbounded operator between Banach spaces $X$ and $Y$. $A$ is \emph{densely defined} if $\overline{D(A)}=X$. $A$ is \emph{closed} if $\graph(A)=\{(x,y)\in D(A)\times Y:y=Ax\}$ is closed.
+  \end{definition}
+  Form now on we will assume $X$, $Y$ are Hilbert.
+  \begin{definition}
+    Let $(D(A),A)$ be a densely unbounded operator. We define the \emph{adjoint operator} $(D(A^*),A^*)$ by:
+    \begin{multline*}
+      D(A^*)=\{y\in Y^*:\exists c>0\text{ with}\\
+      \abs{\langle y,Ax\rangle_{Y^*\times Y}}\leq c \norm{x}_X\ \forall x\in D(A)\}
+    \end{multline*}
+    and $\forall y\in D(A^*)$ $\forall x\in D(A)$, $A^*y$ is given in order to satisfy:
+    $$
+      \langle A^*y,x\rangle_{X^*\times X}=\langle y,Ax\rangle_{Y^*\times Y}
+    $$
+  \end{definition}
+  \subsubsection{Semigroups}
+  From now on we will assume $X=Y$.
+  \begin{definition}
+    A one-parameter family of unbounded operators $(T(t))_{t\geq 0}$ is a \emph{semigroup of operators} if:
+    \begin{itemize}
+      \item $T(0)=\id$
+      \item $T(t+s)=T(t)\circ T(s)$ $\forall t,s\geq 0$
+    \end{itemize}
+  \end{definition}
+  \begin{definition}
+    A semigroup of operators $(T(t))_{t\geq 0}$ is called
+    \begin{itemize}
+      \item \emph{uniformly continuous} if $\norm{T(t)-\id} \underset{t\to 0^+}{\longrightarrow} 0$.
+      \item \emph{strongly continuous} if $\forall x\in X$ $\norm{T(t)x-x}\underset{t\to 0^+}{\longrightarrow} 0$.
+    \end{itemize}
+  \end{definition}
+  \begin{definition}
+    Let $(T(t))_{t\geq 0}$ be a semigroup of operators. We call \emph{infinitessimal generator} of $(T(t))_{t\geq 0}$ the unbounded operator $(D(A),A)$ where
+    $$
+      D(A)=\{ x\in X:\exists \lim_{t\to 0^+}\frac{T(t)x-x}{t}\}
+    $$
+    and $\forall x\in D(A)$ we define:
+    $$
+      Ax:=\lim_{t\to 0^+}\frac{T(t)x-x}{t}
+    $$
+  \end{definition}
+  \begin{proposition}
+    Let $(T(t))_{t\geq 0}$ be a strongly continuous semigroup of operators. Then:
+    \begin{enumerate}
+      \item $\forall x\in X$, $t\mapsto T(t)x$ is continuous.
+      \item $\forall x\in X$ and all $t\geq 0$:
+            $$
+              \int_0^t T(s)x\dd s\in D(A)\text{ and } T(t)x-x=A\left( \int_0^t T(s)x\dd s\right)
+            $$
+      \item $\forall x\in D(A)$, $\dv{}{t}T(t)x=AT(t)x=T(t)Ax$.
+      \item $\forall x\in D(A)$ and all $t,s\geq 0$:
+            $$
+              T(t)x-T(s)x=\int_s^tA T(r)x\dd r=\int_s^t T(r)Ax\dd r
+            $$
+      \item $\exists c,C>0$ such that $\norm{T(t)}\leq C\exp{ct}$.
+    \end{enumerate}
+  \end{proposition}
+  \begin{theorem}\hfill
+    \begin{enumerate}
+      \item If $A$ is the infinitesimal generator of a strongly continuous semigroup, then it is closed and densely defined.
+      \item If $(T(t))_{t\geq 0}$, $(S(t))_{t\geq 0}$ are two strongly continuous semigroups with the same infinitesimal generator, then $T(t)=S(t)$ $\forall t\geq 0$.
+      \item $\forall x_0\in D(A)$, there exists a unique solution $x\in \mathcal{C}^0([0,+\infty),D(A))\cap \mathcal{C}^1([0,+\infty),X)$ of $\dv{}{t}x(t)=Ax(t)$ with $x(0)=x_0$, and it is given by: $$x(t)=T(t)x_0$$
+            Moreover, $\forall f\in \mathcal{C}^1([0,T],X)$, there exists a unique solution $x\in \mathcal{C}^0([0,T],D(A))\cap \mathcal{C}^1([0,T],X)$ of $\dv{}{t}x(t)=Ax(t)+f(t)$ with $x(0)=x_0$, and it is given by: $$
+              x(t)=T(t)x_0+\int_0^t T(t-s)f(s)\dd s
+            $$
+            This last formula is called the \emph{variation of constants formula} or \emph{Duhamel's formula}.
+    \end{enumerate}
+  \end{theorem}
+  \begin{remark}
+    Duhamel's formula is still valid if $x_0\in X$ and $f\in L^1((0,T),X)$. In this case, the resulting solution $x(t)$ is called \emph{mild solution}. Any mild solution is a limit of classical solutions.
+  \end{remark}
+  \begin{theorem}
+    Suppose $X$ is reflexive. Then, if $(T(t))_{t\geq 0}$ is a strongly continuous semigroup with infinitesimal generator $A$, then $A^*$ is the infinitesimal generator of the dual semigroup $(T(t)^*)_{t\geq 0}$.
+  \end{theorem}
+  \begin{remark}
+    We will denote by $T(t)^*$ also by $T^*(t)$.
+  \end{remark}
+  \begin{definition}
+    A semigroup $(T(t))_{t\geq 0}$ is called \emph{contraction} if $\norm{T(t)}\leq 1$ $\forall t\geq 0$.
+  \end{definition}
+  \begin{definition}
+    Let $(D(A),A)$ be an unbounded operator. The \emph{resolvency set} of $A$ is the set $\rho(A):=\{ \lambda\in \CC:\lambda I-A\text{ is bijective}\}$. Given $\lambda\in\rho(A)$, the \emph{resolvent operator} is the operator $R_\lambda(A):=(\lambda I-A)^{-1}$.
+  \end{definition}
+  \begin{theorem}[Hille-Yosida]
+    Let $(D(A),A)$ be an operator closed and densely defined. Then, it is the infinitesimal generator of a contraction semigroup if and only if:
+    $$
+      (0,\infty)\subseteq \rho(A)\text{ and }\forall \lambda>0, \norm{R_\lambda(A)}\leq \frac{1}{\lambda}
+    $$
+  \end{theorem}
+  \begin{corollary}
+    $(D(A),A)$ is the infinitesimal generator of a semigroup $(T(t))_{t\geq 0}$ such that $\norm{T(t)}\leq \exp{ct}$ $\forall t\geq 0$ if and only if:
+    $$
+      (c,\infty)\subseteq \rho(A)\text{ and }\forall \lambda>c, \norm{R_\lambda(A)}\leq \frac{1}{\lambda-c}
+    $$
+  \end{corollary}
+  \begin{definition}
+    An operator $(D(A),A)$ is called \emph{dissipative} if $\forall x\in D(A)$, $\langle Ax,x\rangle\leq 0$.
+  \end{definition}
+  \begin{theorem}[Lümmer-Phillips]
+    Let $(D(A),A)$ be an operator closed and densely defined. Then:
+    \begin{enumerate}
+      \item If $A$ is dissipative and $\exists \lambda_0>0$ such that $\im(\lambda_0 I-A)=R$, then $\forall \lambda>0$, $\im(\lambda I-A)=R$ and $A$ generates a semigroup of contractions.
+      \item If $A$ generates a semigroup of contractions, then $\im(\lambda I-A)=X$ $\forall \lambda>0$.
+    \end{enumerate}
+  \end{theorem}
+  \begin{corollary}
+    Let $(D(A),A)$ be an operator closed and densely defined. If $A$ and $A^*$ are both dissipative, then $A$ generates a semigroup of contractions.
+  \end{corollary}
+  \subsubsection{Applications to control theory}
+  In this section we consider the control system:
+  \begin{equation}\label{ICT:control_system}
+    \begin{cases}
+      \dot{x}(t)=Ax(t)+Bu(t) & \text{in } [0,T] \\
+      x(0)=x_0
+    \end{cases}
+  \end{equation}
+  where $A$ is the infinitesimal generator of a strongly continuous semigroup $(S(t))_{t\geq 0}$ and $B$ is a bounded operator, with:
+  $$
+    S(t):L^2(\Omega)\to L^2(\Omega)\qquad B:L^2(\omega)\to L^2(\Omega)
+  $$
+  We will first consider the interior control in a region $\omega\subseteq \Omega$. We will denote by $F_T$ the operator:
+  $$
+    \function{F_T}{L^2(0,T;L^2(\omega))}{L^2(\Omega)}{u}{\int_0^T S(T-s)Bu(s)\dd s}
+  $$
+  \begin{remark}
+    Note that exact controllability at time $T$ is equivalent to the surjectivity of $F_T$; approximate controllability at time $T$ is equivalent to $\im F_T$ being dense in $L^2(\Omega)$, and null controllability at time $T$ is equivalent to $\im F_T\supseteq \im S(T)$.
+  \end{remark}
+  \begin{theorem}\label{ICT:controltheorem}
+    Let $S:H_1\to H$ and $T:H_2\to H$ be bounded linear operators between Hilbert spaces. Then, $\im(S)\subseteq \im(T)$ if and only if $\exists c>0$ such that $\forall x\in H$, $\norm{S^*x}_{H_1}\leq c\norm{T^*x}_{H_2}$.
+  \end{theorem}
+  \begin{proof}
+    \begin{itemizeiff}
+      If $\im(S)\subseteq \im(T)$, then $\forall x\in H_1$ $\exists! y\in \ker(T)^\perp$ such that $Sx=Ty$.
+      \begin{itemize}
+        \item \textit{Existence}: for $x\in H_1$, we find $y\in H_2$ such that $Sx=Ty$ and we define $z:=\pi_{\ker(T)^\perp}y$, where $\pi_{\ker(T)^\perp}$ is the orthogonal projection on $\ker(T)^\perp$. Then, $z-y\in (\ker(T)^\perp)^\perp=\ker(T)$, and so $T(z-y)=0$, and thus $Tz=Ty=Sx$.
+        \item \textit{Uniqueness}: if $Sx=Ty_1=Ty_2$, then $T(y_1-y_2)=0$, and so $y_1-y_2\in \ker(T)$, but also $y_1,y_2\in \ker(T)^\perp$ (by hypothesis). Thus, $y_1=y_2$.
+      \end{itemize}
+      We define $G:H_1\to \ker(T)^\perp\subset H_2$ such that to $x\in H_1$ we associate the unique $y\in \ker(T)^\perp$ such that $Sx=Ty$. We have that $G$ is linear. To see that it is continuous we used the \mnameref{RFA:closedgraph}. We need to prove that if $x_n\overset{H_1}{\longrightarrow} x$ and $Gx_n\overset{H_2}{\longrightarrow} y$, then $Gx=y$. We have that $G(x_n)\in \ker(T)^\perp$ $\forall n$ and $\ker(T)^\perp$ is closed, so $y\in \ker(T)^\perp$. We have that $T(G(x_n))=Sx_n$ $\forall n$. Taking the limit and using the continuity of $S$ and $T$ we get $Ty=Sx$, which by uniqueness implies $y=Gx$. So $S=TG$, and thus $S^*=G^*T^*$, with $G^*$ continuous. Thus, $\forall x\in H$:
+      $$
+        \norm{S^*x}_{H_1}=\norm{G^*T^*x}_{H_1}\leq \norm{G^*}_{\mathcal{L}(H_2,H_1)}\norm{T^*x}_{H_2}
+      $$
+      \item We will prove that there exists an operator $D:H_2\to H_1$ such that $S^*=DT^*$. If $y\in\im(T^*)$, let $x\in H$ be such that $y=T^*x$, and then we define $Dy:=S^*x$. This definition is independent of the choice of $x$ because if $x_1,x_2\in H$ are such that $y=T^*x_1=T^*x_2$, then $T^*(x_1-x_2)=0$, and so (by hypotheses) $S^*(x_1-x_2)=0$, and thus $S^*x_1=S^*x_2$. So $D:\im(T^*)\to H_1$ is well-defined, it is linear and continuous:
+      $$
+        \norm{Dy}_{H_1}=\norm{S^*x}_{H_1}\leq c\norm{T^*x}_{H_2}=c\norm{y}_{H_2}
+      $$
+      So $D$ can be uniquely extended as a continuous linear map on $\overline{\im(T^*)}$. We decide to set $D|_{\im(T^*)^\perp}= 0$ and we get a continuous linear map $D:H_2\to H_1$ such that $S^*=DT^*$. Taking adjoints we get $S=TD^*$, so $\im(S)\subseteq \im(T)$.
+    \end{itemizeiff}
+  \end{proof}
+  \begin{theorem}
+    Let $A:H_1\to H_2$ be a bounded linear operator between Hilbert spaces. Then:
+    \begin{enumerate}
+      \item $\im(A)$ is dense $\iff$ $\ker(A^*)=\{0\}$.
+      \item $\im(A)=H_2\iff \exists c>0$ such that $\forall x\in H_2$, $\norm{x}_{H_2}\leq c\norm{A^*x}_{H_1}$.
+    \end{enumerate}
+  \end{theorem}
+  \begin{proof}\hfill
+    \begin{enumerate}
+      \item Recall that $\im(A)^{\perp}=\ker(A^*)$:
+            \begin{align*}
+              \overline{\im(A)}=H_2 & \iff (\im(A)^{\perp})^\perp=H_2 \\
+                                    & \iff\im(A)^{\perp}=\{0\}        \\
+                                    & \iff \ker(A^*)=\{0\}
+            \end{align*}
+      \item Use \cref{ICT:controltheorem} with $H_1=H$ and $S=\id_H$.
+    \end{enumerate}
+  \end{proof}
+  \begin{proposition}
+    The adjoint of $F_T$ is given by:
+    $$
+      \function{F_T^*}{L^2(\Omega)}{L^2(0,T;L^2(\omega))}{y_T}{s\mapsto B^*S^*(T-s)y_T}
+    $$
+  \end{proposition}
+  \begin{proof}
+    Let $y_T\in L^2(\Omega)$ and $u\in L^2(0,T;L^2(\omega))$. Then:
+    \begin{align*}
+      \langle F_T^*y_T,u\rangle_{L^2(0,T;L^2(\omega))} & = \int_0^T\langle B^*S^*(T-s)y_T,u(s)\rangle_{L^2(\omega)} \dd s \\
+                                                       & = \int_0^T\langle S^*(T-s)y_T,Bu(s)\rangle_{L^2(\Omega)} \dd s   \\
+                                                       & = \int_0^T\langle y_T,S(T-s)Bu(s)\rangle_{L^2(\Omega)} \dd s     \\
+                                                       & = \langle y_T, \int_0^T S(T-s)Bu(s)\dd s\rangle_{L^2(\Omega)}    \\
+                                                       & = \langle y_T, F_Tu\rangle_{L^2(\Omega)}
+    \end{align*}
+  \end{proof}
+  \begin{theorem}
+    Consider the control system \mcref{ICT:control_system} and its dual system:
+    \begin{equation}\label{ICT:dual_control_system}
+      \begin{cases}
+        -\dot{x}(t)=A^*x(t) & \text{in } [0,T] \\
+        x(T)=y_T
+      \end{cases}
+    \end{equation}
+    Then:
+    \begin{enumerate}
+      \item The system \mcref{ICT:control_system} is exactly controllable at time $T$ if and only if the system \mcref{ICT:dual_control_system} is final time observable by means of $B^*$, that is, if $\exists c>0$ such that for all solution $y$ of \mcref{ICT:dual_control_system} we have:
+            $$
+              \norm{y_T}_{H}\leq c\norm{B^*x}_{L^2(0,T;L^2(\omega))}
+            $$
+      \item The system \mcref{ICT:control_system} is approximately controllable at time $T$ if and only if the system \mcref{ICT:dual_control_system} satifies the unique continuation property, that is, if $x$ solution of \mcref{ICT:ICT:dual_control_system} satisfies $B^*x(t)=0$ $\forall t\in [0,T]$ then $y_T=0$, i.e.\ $x=0$.
+      \item The system \mcref{ICT:control_system} is null controllable at time $T$ if and only if the system \mcref{ICT:dual_control_system} is initial time observable: $\exists c>0$ such that for all solution $x$ of \mcref{ICT:dual_control_system} we have:
+            $$
+              \norm{x(0)}_{H}\leq c\norm{B^*x}_{L^2(0,T;L^2(\omega))}
+            $$
+    \end{enumerate}
+  \end{theorem}
+  \subsection{Backstepping for boundary control in PDEs}
 \end{multicols}
 \end{document}
