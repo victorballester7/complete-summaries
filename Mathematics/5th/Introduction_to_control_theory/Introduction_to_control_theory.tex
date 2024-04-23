@@ -885,5 +885,69 @@
     \end{enumerate}
   \end{theorem}
   \subsection{Backstepping for boundary control in PDEs}
+  \emph{Backstepping} consists in transforming a system into another one, called \emph{target system}, which has the desired stability properties. In order to study, we will be considering the following reaction-diffusion equation:
+  \begin{equation}\label{ICT:reaction_diffusion}
+    \begin{cases}
+      \partial_t x=x_{zz}+\lambda x & \text{in } (0,T)\times (0,1) \\
+      x(t,0)=0                      & \text{in } (0,T)             \\
+      x(t,1)=u(t)                   & \text{in } (0,T)
+    \end{cases}
+  \end{equation}
+  and we assume that $\lambda>0$ is large enough such that the system is unstable (the eigenvalues are of the form $\lambda-n^2\pi^2$ with $n\in\NN$).
+
+  The first step is to choose a target system such that the origin is exponentially (or asymptotically) stable. We will consider the following target system:
+  \begin{equation}\label{ICT:target_system}
+    \begin{cases}
+      \partial_t w=w_{zz} & \text{in } (0,T)\times (0,1) \\
+      w(t,0)=0            & \text{in } (0,T)             \\
+      w(t,1)=0            & \text{in } (0,T)
+    \end{cases}
+  \end{equation}
+  \begin{proposition}
+    The system \mcref{ICT:target_system} is exponentially stable for the $L^2$ norm.
+  \end{proposition}
+  \begin{proof}
+    We need to find a Lyapunov functional $V$ such that $\dot{V}\leq -\alpha V$ for some $\alpha>0$. We take $V(t)=\int_0^1 w(t,z)^2\dd z$. Then:
+    \begin{multline*}
+      \dot{V} = 2\int_0^1 w(t,z)w_t(t,z)\dd z=2\int_0^1 w(t,z)w_{zz}(t,z)\dd z \\
+      = -2\int_0^1 w_z(t,z)^2\dd z\leq  -\alpha V
+    \end{multline*}
+    for some $\alpha >0$, due to \mnameref{ATFAPDE:poincare_ineq}.
+  \end{proof}
+  Next step is to find a backstepping transformation $w=T(x)$ and the invertible operator $T^{-1}$. We will consider the following transformation:
+  \begin{equation}\label{ICT:backstepping_transformation}
+    w(z,t)=x(z,t)-\int_0^z K(z,y) x(y,t)\dd y
+  \end{equation}
+  where $K$ is a kernel yet to be determined.
+  \begin{proposition}
+    Let $f:[a,b]\to\CC$ be continuous and $K:[a,b]^2\to \CC$ be a bounded function. Then, the integral equation:
+    $$
+      f(t) = \varphi(t)-\int_a^b K(t,s)\varphi(s) \dd s,\qquad t\in [a,b]
+    $$
+    admits a unique solution $\varphi\in \mathcal{C}([a,b])$. Furthermore, there exists $\ell :[a,b]^2\to \CC$ bounded such that:
+    $$
+      \varphi(t)=f(t)-\int_a^t \ell(t,s)f(s)\dd s, \qquad t\in [a,b]
+    $$
+  \end{proposition}
+  Thus, our transformation is in \mcref{ICT:backstepping_transformation} is invertible.
+
+  Finally, we need to define our control law. Imposing $w_z(1,t)=0$ in \mcref{ICT:backstepping_transformation} we get:
+  \begin{gather*}
+    0=w_z(1,t)=x_z(1,t)-K(1,1)x(1,t)-\int_0^1 K_z(1,y)x(y,t)\dd y\\
+    u(t)=K(1,1)x(1,t)+\int_0^1 K_z(1,y)x(y,t)\dd y
+  \end{gather*}
+  So, we are left to find if a suitable $K$ exists. Recall that the condition $w(1,t)=0$ is automatically satisfied. We need to make use of the PDE of $w$. Using \mcref{ICT:backstepping_transformation} to compute $w_t$ and $w_{zz}$, and equating both equations it suffices to find $K$ such that:
+  $$
+    \begin{cases}
+      -2\dv{}{z}K(z,z)=\lambda\implies K(z,z)=-\frac{\lambda}{2}z \\
+      K_{zz}=K_{yy}+\lambda K                                     \\
+      K(z,0)=0
+    \end{cases}
+  $$
+  which has a unique solution given by:
+  $$
+    K(z,y)=-\lambda y\frac{I_1(\sqrt{\lambda(z^2-y^2)})}{\sqrt{\lambda(z^2-y^2)}}
+  $$
+  where $I_1$ is the modified Bessel function of the first kind of order $1$.
 \end{multicols}
 \end{document}
